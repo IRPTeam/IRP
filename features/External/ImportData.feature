@@ -1359,11 +1359,11 @@ Scenario: Create catalog IntegrationSettings objects
 
 	And I check or create catalog "IntegrationSettings" objects:
 		| 'Ref'                                                                         | 'DeletionMark' | 'Description'     | 'ExternalDataProc'                                                         | 'IntegrationType'                       | 'ExternalDataProcSettings' | 'UniqueID'                          |
-		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185b' | 'False'           | 'Bank UA'         | 'e1cib/data/Catalog.ExternalDataProc?ref=86f6d69b4676df1211ea172d24e6cd78' | 'Enum.IntegrationType.CurrencyRates'    | 'ValueStorage'             | 'BankUA'                            |
-		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185a' | 'False'           | 'Forex Buying'    | 'e1cib/data/Catalog.ExternalDataProc?ref=86f6d69b4676df1211ea172d0ccf48fb' | 'Enum.IntegrationType.CurrencyRates'    | 'ValueStorage'             | 'ForexBuying'                       |
-		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c1859' | 'False'           | 'Forex Seling'    | 'e1cib/data/Catalog.ExternalDataProc?ref=86f6d69b4676df1211ea172d0ccf48fb' | 'Enum.IntegrationType.CurrencyRates'    | 'ValueStorage'             | 'ForexSeling'                       |
-		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf13dc8cb47e4' | 'False'           | 'PICTURE STORAGE' | ''                                                                         | 'Enum.IntegrationType.LocalFileStorage' | 'ValueStorage'             | '_484fdf00900e4621ba12d253fb387ecd' |
-		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf13dc8cb47e5' | 'False'           | 'PREWIEV STORAGE' | ''                                                                         | 'Enum.IntegrationType.LocalFileStorage' | 'ValueStorage'             | '_7e55dd8ebe374e6cbee01b3436a2a8f5' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185b' | 'False'        | 'Bank UA'         | 'e1cib/data/Catalog.ExternalDataProc?ref=86f6d69b4676df1211ea172d24e6cd78' | 'Enum.IntegrationType.CurrencyRates'    | 'ValueStorage'             | 'BankUA'                            |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185a' | 'False'        | 'Forex Buying'    | 'e1cib/data/Catalog.ExternalDataProc?ref=86f6d69b4676df1211ea172d0ccf48fb' | 'Enum.IntegrationType.CurrencyRates'    | 'ValueStorage'             | 'ForexBuying'                       |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c1859' | 'False'        | 'Forex Seling'    | 'e1cib/data/Catalog.ExternalDataProc?ref=86f6d69b4676df1211ea172d0ccf48fb' | 'Enum.IntegrationType.CurrencyRates'    | 'ValueStorage'             | 'ForexSeling'                       |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf13dc8cb47e4' | 'False'        | 'PICTURE STORAGE' | ''                                                                         | 'Enum.IntegrationType.LocalFileStorage' | 'ValueStorage'             | '_484fdf00900e4621ba12d253fb387ecd' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf13dc8cb47e5' | 'False'        | 'PREWIEV STORAGE' | ''                                                                         | 'Enum.IntegrationType.LocalFileStorage' | 'ValueStorage'             | '_7e55dd8ebe374e6cbee01b3436a2a8f5' |
 
 	And I refill object tabular section "ConnectionSetting":
 		| 'Ref'                                                                         | 'Key'              | 'Value'                                                                 |
@@ -1387,6 +1387,34 @@ Scenario: Create catalog IntegrationSettings objects
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c1859' | 'SecureConnection' | 'True'                                                                   |
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf13dc8cb47e4' | 'AddressPath'      | '#workingDir#/Picture/Source' 							               |
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf13dc8cb47e5' | 'AddressPath'      | '#workingDir#/Picture/Prewiev'                                          |
+
+	And I refill object tabular section "ConnectionSettingTest":
+		| 'Ref'                                                                         | 'Key'              | 'Value'                                                |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185b' | 'QueryType'        | 'GET'                                                  |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185b' | 'ResourceAddress'  | '/DB/hs/mock/NBUStatService/v1/statdirectory/exchange' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185b' | 'Ip'               | 'localhost'                                            |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185b' | 'Port'             | 80                                                     |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185b' | 'TimeOut'          | 60                                                     |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185b' | 'User'             | 'CI'                                                   |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185b' | 'Password'         | 'CI'                                                   |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185b' | 'SecureConnection' | 'False'                                                |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185a' | 'QueryType'        | 'GET'                                                  |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185a' | 'ResourceAddress'  | '/DB/hs/mock/service/evds/'                            |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185a' | 'Ip'               | 'localhost'                                            |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185a' | 'Port'             | 80                                                     |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185a' | 'TimeOut'          | 60                                                     |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185a' | 'SecureConnection' | 'False'                                                |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185a' | 'User'             | 'CI'                                                   |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c185a' | 'Password'         | 'CI'                                                   |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c1859' | 'QueryType'        | 'GET'                                                  |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c1859' | 'ResourceAddress'  | '/DB/hs/mock/service/evds/'                            |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c1859' | 'Ip'               | 'localhost'                                            |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c1859' | 'Port'             | 80                                                     |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c1859' | 'TimeOut'          | 60                                                     |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c1859' | 'SecureConnection' | 'False'                                                |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c1859' | 'User'             | 'CI'                                                   |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf113ba6c1859' | 'Password'         | 'CI'                                                   |
+
 
 Scenario: Create catalog IntegrationSettings objects (db connection)
 

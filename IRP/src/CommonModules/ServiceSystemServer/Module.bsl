@@ -237,6 +237,18 @@ Function GetProgramTitle() Export
 	EndIf;
 EndFunction
 
+// This instance is Production
+// 
+// Returns:
+//  Boolean - is Production
+Function isProduction() Export
+	
+	Return 
+		Not SessionParameters.ConnectionSettings.IsEmpty() 
+			And SessionParameters.ConnectionSettings.isProduction;
+
+EndFunction
+
 #Region ExternalFunctions
 
 // Run external functions.

@@ -11,7 +11,10 @@ To upload currency rates to the base
 
 
 Variables:
-import "Variables.feature"
+Path = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path"), "#workingDir#")}"
+Tag = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Tag")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Tag"), "#Tag#")}"
+webPort = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("webPort")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("webPort"), "#webPort#")}"
+isProdMode = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("isProdMode")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("isProdMode"), "#isProdMode#")}"
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
@@ -33,6 +36,19 @@ Scenario: _020000 preparation (Loadinfo)
 		When Create catalog Companies objects (partners company)
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog IntegrationSettings objects
+	* Mocks settings
+		If "$isProdMode$" variable is equal to "false" Then
+			When import mocks for currency rate
+			Given I open hyperlink "e1cib/list/Catalog.DataBaseStatus"
+			And I go to line in "List" table
+				| 'is Product server' |
+				| 'Yes'               |	
+			And I select current line in "List" table
+			And I remove checkbox "is Product server"
+			And I click "Save and close" button
+			And "List" table contains lines
+				| 'is Product server' |
+				| 'No'                |						
 		* Add Plugin ExternalBankUa
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			And I click the button named "FormCreate"
@@ -164,7 +180,7 @@ Scenario: _020001 check load currency rate from tcmb.gov.tr
 		And I set "Download" checkbox in "Currencies" table
 		And I finish line editing in "Currencies" table
 		And in the table "Currencies" I click "Download" button
-		And Delay 40
+		And Delay 20
 		And I close all client application windows
 	* Upload currency rate Forex Selling (from tcmb.gov.tr)
 		Given I open hyperlink "e1cib/list/Catalog.Currencies"
@@ -184,7 +200,7 @@ Scenario: _020001 check load currency rate from tcmb.gov.tr
 		And I set "Download" checkbox in "Currencies" table
 		And I finish line editing in "Currencies" table
 		And in the table "Currencies" I click "Download" button
-		And Delay 40
+		And Delay 20
 		And I close all client application windows
 	* Check currency downloads
 		Given I open hyperlink "e1cib/list/InformationRegister.CurrencyRates"
@@ -196,44 +212,47 @@ Scenario: _020001 check load currency rate from tcmb.gov.tr
 			| 'TRY'            | 'EUR'           | 'Forex Buying'  | '1'            | '*'     |
 		And I close all client application windows
 
-// Scenario: _020002 check load currency rate from bank.gov.ua
-// 	* Upload currency rate Bank UA (from bank.gov.ua)
-// 		Given I open hyperlink "e1cib/list/Catalog.Currencies"
-// 		And I click "Integrations" button
-// 		And I go to line in "IntegrationTable" table
-// 			| Integration settings |
-// 			| Bank UA         |
-// 		And I click "Ok" button
-// 		And I click Select button of "Period" field
-// 		And I click "Clear period" button
-// 		And I input begin of the current month date in "DateBegin" field
-// 		And I input current date in "DateEnd" field
-// 		And I click "Select" button
-// 		And I go to line in "Currencies" table
-// 			| 'Code' |
-// 			| 'USD'  |
-// 		And I set "Download" checkbox in "Currencies" table
-// 		And I finish line editing in "Currencies" table
-// 		And I go to line in "Currencies" table
-// 			| 'Code' |
-// 			| 'EUR'  |
-// 		And I set "Download" checkbox in "Currencies" table
-// 		And I finish line editing in "Currencies" table
-// 		And I go to line in "Currencies" table
-// 			| 'Code' |
-// 			| 'TRY'  |
-// 		And I set "Download" checkbox in "Currencies" table
-// 		And I finish line editing in "Currencies" table
-// 		And in the table "Currencies" I click "Download" button
-// 		And Delay 40
-// 		And I close all client application windows
-// 	* Check currency downloads
-// 		Given I open hyperlink "e1cib/list/InformationRegister.CurrencyRates"
-// 		And "List" table contains lines
-// 			| 'Currency from'  | 'Currency to'   | 'Source'        | 'Multiplicity' | 'Rate'  |
-// 			| 'UAH'            | 'USD'           | 'Bank UA'       | '1'            | '*'     |
-// 			| 'UAH'            | 'EUR'           | 'Bank UA'       | '1'            | '*'     |
-// 			| 'UAH'            | 'TRY'           | 'Bank UA'       | '1'            | '*'     |
+Scenario: _020002 check load currency rate from bank.gov.ua
+	* Preparation
+		If "$isProdMode$" variable is equal to "True" Then
+			Then I stop script execution "Skipped"
+	* Upload currency rate Bank UA (from bank.gov.ua)
+		Given I open hyperlink "e1cib/list/Catalog.Currencies"
+		And I click "Integrations" button
+		And I go to line in "IntegrationTable" table
+			| Integration settings |
+			| Bank UA         |
+		And I click "Ok" button
+		And I click Select button of "Period" field
+		And I click "Clear period" button
+		And I input begin of the current month date in "DateBegin" field
+		And I input current date in "DateEnd" field
+		And I click "Select" button
+		And I go to line in "Currencies" table
+			| 'Code' |
+			| 'USD'  |
+		And I set "Download" checkbox in "Currencies" table
+		And I finish line editing in "Currencies" table
+		And I go to line in "Currencies" table
+			| 'Code' |
+			| 'EUR'  |
+		And I set "Download" checkbox in "Currencies" table
+		And I finish line editing in "Currencies" table
+		And I go to line in "Currencies" table
+			| 'Code' |
+			| 'TRY'  |
+		And I set "Download" checkbox in "Currencies" table
+		And I finish line editing in "Currencies" table
+		And in the table "Currencies" I click "Download" button
+		And Delay 20
+		And I close all client application windows
+	* Check currency downloads
+		Given I open hyperlink "e1cib/list/InformationRegister.CurrencyRates"
+		And "List" table contains lines
+			| 'Currency from'  | 'Currency to'   | 'Source'        | 'Multiplicity' | 'Rate'  |
+			| 'UAH'            | 'USD'           | 'Bank UA'       | '1'            | '*'     |
+			| 'UAH'            | 'EUR'           | 'Bank UA'       | '1'            | '*'     |
+			| 'UAH'            | 'TRY'           | 'Bank UA'       | '1'            | '*'     |
 
 Scenario: _020003 delete integration settings
 	* Delete integration settings

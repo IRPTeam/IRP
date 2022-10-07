@@ -5062,7 +5062,7 @@ Procedure StepChangeCommissionPercentByAmount(Parameters, Chain) Export
 	Chain.ChangeCommissionPercentByAmount.Enable = True;
 	Chain.ChangeCommissionPercentByAmount.Setter = "SetPaymentListCommissionPercent";
 	For Each Row In GetRows(Parameters, "PaymentList") Do
-		Options     = ModelClientServer_V2.CalculateCommisionPercentByAmountOptions();
+		Options     = ModelClientServer_V2.CalculateCommissionPercentByAmountOptions();
 		Options.Commission = GetPaymentListCommission(Parameters, Row.Key);
 		Options.TotalAmount = GetPaymentListTotalAmount(Parameters, Row.Key);
 		Options.DisableNextSteps = True;

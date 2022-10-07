@@ -235,7 +235,7 @@ Function GetChain()
 	Chain.Insert("ChangePercentByAmount" , GetChainLink("CalculatePercentByAmountExecute"));
 	
 	Chain.Insert("PaymentListCalculateCommission"  , GetChainLink("CalculatePaymentListCommissionExecute"));
-	Chain.Insert("ChangeCommissionPercentByAmount" , GetChainLink("CalculateCommisionPercentByAmountExecute"));
+	Chain.Insert("ChangeCommissionPercentByAmount" , GetChainLink("CalculateCommissionPercentByAmountExecute"));
 	
 	Chain.Insert("ChangeLandedCostBySalesDocument" , GetChainLink("ChangeLandedCostBySalesDocumentExecute"));
 	
@@ -2682,11 +2682,11 @@ EndFunction
 
 #Region CALCULATE_PERCENT_COMMISSION_BY_AMOUNT
 
-Function CalculateCommisionPercentByAmountOptions() Export
+Function CalculateCommissionPercentByAmountOptions() Export
 	Return GetChainLinkOptions("TotalAmount, Commission");
 EndFunction
 
-Function CalculateCommisionPercentByAmountExecute(Options) Export
+Function CalculateCommissionPercentByAmountExecute(Options) Export
 	Return 100 * Options.Commission / Options.TotalAmount;
 EndFunction
 

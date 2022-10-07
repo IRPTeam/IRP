@@ -386,7 +386,7 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 		FormParameters.Insert("Company"    , Object.Company);
 		FormParameters.Insert("Branch"     , Object.Branch);
 		FormParameters.Insert("POSAccount" , CurrentData.POSAccount);
-		OpenForm("Document.CashStatement.Form.ChoiceWIthBalancesForm", FormParameters, Item, , , , , FormWindowOpeningMode.LockOwnerWindow);
+		OpenForm("Document.CashStatement.Form.ChoiceWithBalancesForm", FormParameters, Item, , , , , FormWindowOpeningMode.LockOwnerWindow);
 	EndIf;
 EndProcedure
 

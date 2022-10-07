@@ -90,6 +90,7 @@ Function GetDependentDocument(DocRef) Export
 	|SELECT
 	|	tmpProduction.Ref,
 	|	tmpProduction.Date
+	|INTO tmpAllDocuments
 	|FROM
 	|	tmpProduction AS tmpProduction
 	|

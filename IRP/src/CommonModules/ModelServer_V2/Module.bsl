@@ -103,26 +103,8 @@ Function GetLandedCostCurrencyByCompany(Company) Export
 	EndIf;
 EndFunction
 
-Function GetBillOfMaterialsByItemKey(Item, ItemKey) Export
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	BillOfMaterials.Ref
-	|FROM
-	|	Catalog.BillOfMaterials AS BillOfMaterials
-	|WHERE
-	|	BillOfMaterials.Item = &Item
-	|	AND BillOfMaterials.ItemKey = &ItemKey
-	|	AND NOT BillOfMaterials.DeletionMark";
-	Query.SetParameter("Item", Item);
-	Query.SetParameter("ItemKey", ItemKey);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	If QuerySelection.Next() Then
-		Return QuerySelection.Ref;
-	Else
-		Return Undefined;
-	EndIf;
+Function GetBillOfMaterialsByItemKey(ItemKey) Export
+	Return Catalogs.BillOfMaterials.GetBillOfMaterialsByItemKey(ItemKey);
 EndFunction
 
 Function GetExpenseTypeByBillOfMaterials(BillOfMaterials, ItemKey) Export

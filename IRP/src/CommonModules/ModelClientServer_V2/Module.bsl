@@ -250,11 +250,12 @@ Function GetChain()
 	Chain.Insert("ChangeProfitLossCenterByBillOfMaterials"      , GetChainLink("ChangeProfitLossCenterByBillOfMaterialsExecute"));
 	Chain.Insert("ChangeExpenseTypeByBillOfMaterials"           , GetChainLink("ChangeExpenseTypeByBillOfMaterialsExecute"));
 	
-	//Chain.Insert("ChangeBillOfMaterialsByItemKey" , GetChainLink("ChangeBillOfMaterialsByItemKeyExecute"));
+	Chain.Insert("ChangeBillOfMaterialsByItemKey" , GetChainLink("ChangeBillOfMaterialsByItemKeyExecute"));
 	
 	Chain.Insert("ChangePlanningPeriodByDateAndBusinessUnit" , GetChainLink("ChangePlanningPeriodByDateAndBusinessUnitExecute"));
 	Chain.Insert("ChangeProductionPlanningByPlanningPeriod"  , GetChainLink("ChangeProductionPlanningByPlanningPeriodExecute"));
 	
+	Chain.Insert("BillOfMaterialsListCalculations"  , GetChainLink("BillOfMaterialsListCalculationsExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -1202,34 +1203,32 @@ EndFunction
 #Region CHANGE_PRODUCTION_PLANNING_BY_PLANNING_PERIOD
 
 Function ChangeProductionPlanningByPlanningPeriodOptions() Export
-	Return GetChainLinkOptions("Company, BusinessUnit, PlaningPeriod, CurrentProductionPlanning");
+	Return GetChainLinkOptions("Company, BusinessUnit, PlanningPeriod, CurrentProductionPlanning");
 EndFunction
 
 Function ChangeProductionPlanningByPlanningPeriodExecute(Options) Export
-	ProductionPlanning = ModelServer_V2.GetDocumentProductionPlanning(Options.Company, Options.BusinessUnit, Options.PlanningPeriod);
-	If ValueIsFilled(ProductionPlanning) Then
-		Return ProductionPlanning;
+	If ValueIsFilled(Options.CurrentProductionPlanning) Then
+		Return Options.CurrentProductionPlanning;
 	EndIf;
-	Return Options.CurrentProductionPlanning;
+	Return ModelServer_V2.GetDocumentProductionPlanning(Options.Company, Options.BusinessUnit, Options.PlanningPeriod);
 EndFunction
 
 #EndRegion
 
-//#Region CHANGE_BILL_OF_MATERIALS_BY_ITEM_KEY		
-//
-//Function ChangeBillOfMaterialsByItemKeyOptions() Export
-//	Return GetChainLinkOptions("Item, ItemKey, BillOfMaterials");
-//EndFunction
-//
-//Function ChangeBillOfMaterialsByItemKeyExecute(Options) Export
-//	If ValueIsFilled(Options.BillOfMaterials) Then
-//		Return Options.BillOfMaterials;
-//	EndIf;
-//	
-//	Return ModelServer_V2.GetBillOfMaterialsByItemKey(Options.Item, Options.ItemKey);
-//EndFunction
-//
-//#EndRegion
+#Region CHANGE_BILL_OF_MATERIALS_BY_ITEM_KEY		
+
+Function ChangeBillOfMaterialsByItemKeyOptions() Export
+	Return GetChainLinkOptions("ItemKey, CurrentBillOfMaterials");
+EndFunction
+
+Function ChangeBillOfMaterialsByItemKeyExecute(Options) Export
+	If ValueIsFilled(Options.CurrentBillOfMaterials) Then
+		Return Options.CurrentBillOfMaterials;
+	EndIf;
+	Return ModelServer_V2.GetBillOfMaterialsByItemKey(Options.ItemKey);
+EndFunction
+
+#EndRegion
 
 #Region CALCULATE_DIFFERENCE
 
@@ -1668,6 +1667,65 @@ Function ChangeTaxRateExecute(Options) Export
 		
 	Return Result;
 EndFunction
+
+#EndRegion
+
+#Region BILL_OF_MATERIALS_CALCULATIONS
+
+Function BillOfMaterialsListCalculationsOptions() Export
+	Return GetChainLinkOptions("BillOfMaterialsList, BillOfMaterialsListColumns,
+		|Company, BillOfMaterials, PlanningPeriod, ItemKey, Unit, Quantity");
+EndFunction
+
+Function BillOfMaterialsListCalculationsExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("BillOfMaterialsList", New Array());
+	
+	Parameters = New Structure();
+	Parameters.Insert("Key"             , Options.Key);
+	Parameters.Insert("Company"         , Options.Company);
+	Parameters.Insert("BillOfMaterials" , Options.BillOfMaterials);
+	Parameters.Insert("PlanningPeriod"  , Options.PlanningPeriod);
+	Parameters.Insert("ItemKey"         , Options.ItemKey);
+	Parameters.Insert("Unit"            , Options.Unit);
+	Parameters.Insert("Quantity"        , Options.Quantity);
+	
+	StoreCache = New Array();
+	For Each Row In Options.BillOfMaterialsList Do
+		Cache = New Structure("ReleaseStore, MaterialStore, SemiproductStore,
+			|Key, ItemKey, InputID, OutputID, UniqueID");
+		FillPropertyValues(Cache, Row);
+		StoreCache.Add(Cache);
+	EndDo;
+	
+	BillOfMaterialRows = ManufacturingServer.FillBillOfMaterialsTable(Parameters);
+	For Each Row In BillOfMaterialRows Do
+		NewRow = New Structure(Options.BillOfMaterialsListColumns);
+		FillPropertyValues(NewRow, Row);
+		Result.BillOfMaterialsList.Add(NewRow);
+		RestoreStoresFromCache(StoreCache, Row, NewRow);
+	EndDo;
+EndFunction
+
+Procedure RestoreStoresFromCache(StoreCache, Row, NewRow)
+	For Each Cache In StoreCache Do
+		If Cache.Key = Row.Key 
+			And Cache.ItemKey = Row.ItemKey 
+			And Cache.InputID = Row.InputID 
+			And Cache.OutputID = Row.OutputID 
+			And Cache.UniqueID = Row.UniqueID Then
+				If ValueIsFilled(Cache.ReleaseStore) Then
+					NewRow.ReleaseStore = Cache.ReleaseStore;
+				EndIf;
+				If ValueIsFilled(Cache.MaterialStore) Then
+					NewRow.MaterialStore = Cache.MaterialStore;
+				EndIf;
+				If ValueIsFilled(Cache.SemiproductStore) Then
+					NewRow.SemiproductStore = Cache.SemiproductStore;
+				EndIf;
+		EndIf;
+	EndDo;
+EndProcedure
 
 #EndRegion
 

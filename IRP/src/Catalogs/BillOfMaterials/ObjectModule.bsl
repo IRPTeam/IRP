@@ -18,6 +18,15 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	ThisObject.Type =Enums.BillOfMaterialsTypes.Product;
+	ThisObject.Type = Enums.BillOfMaterialsTypes.Product;
 	ThisObject.Active = True;
+EndProcedure
+
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	If ThisObject.Type = Enums.BillOfMaterialsTypes.Product Then		
+		IndexOfArray = CheckedAttributes.Find("Content.ExpenseType");
+		If IndexOfArray <> Undefined Then
+			CheckedAttributes.Delete(IndexOfArray);
+		EndIf;
+	EndIf;
 EndProcedure

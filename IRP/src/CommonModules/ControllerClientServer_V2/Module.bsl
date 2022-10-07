@@ -212,6 +212,8 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	ArrayOfTableNames.Add("TaxList");
 	ArrayOfTableNames.Add("SpecialOffers");
 	ArrayOfTableNames.Add("SerialLotNumbers");
+	ArrayOfTableNames.Add("SerialLotNumbers");
+	ArrayOfTableNames.Add("BillOfMaterialsList");
 	
 	// MetadataName
 	// Tables.TableName.Columns
@@ -222,16 +224,21 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 												   Parameters.TaxesCache,
 												   Parameters.LoadData);
 	
-	IsItemList    = Upper("ItemList")    = Upper(ServerParameters.TableName);
-	IsPaymentList = Upper("PaymentList") = Upper(ServerParameters.TableName);
+	IsItemList        = Upper("ItemList")    = Upper(ServerParameters.TableName);
+	IsPaymentList     = Upper("PaymentList") = Upper(ServerParameters.TableName);
+	IsProductionsList = Upper("Productions") = Upper(ServerParameters.TableName);
 		
 	Parameters.Insert("ObjectMetadataInfo"     , ServerData.ObjectMetadataInfo);
+	
 	Parameters.Insert("TaxListIsExists"        , 
 		ServerData.ObjectMetadataInfo.Tables.Property("TaxList") And (IsItemList Or IsPaymentList));
 	Parameters.Insert("SpecialOffersIsExists"  , 
 		ServerData.ObjectMetadataInfo.Tables.Property("SpecialOffers") And IsItemList);
 	Parameters.Insert("SerialLotNumbersExists" , 
 		ServerData.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") And IsItemList);	
+	Parameters.Insert("BillOfMaterialsListExists" , 
+		ServerData.ObjectMetadataInfo.Tables.Property("BillOfMaterialsList") And IsProductionsList);	
+	
 	Parameters.Insert("ArrayOfTaxInfo"         , ServerData.ArrayOfTaxInfo);
 	
 	Parameters.LoadData.CountRows                 = ServerData.LoadData.CountRows;
@@ -273,7 +280,6 @@ Function WrapRows(Parameters, Rows) Export
 		ArrayOfRowsTaxList = New Array();
 		TaxRates = New Structure();
 		
-		
 		If Parameters.TaxListIsExists Then
 			// TaxList
 			For Each TaxRow In Parameters.Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
@@ -313,24 +319,33 @@ Function WrapRows(Parameters, Rows) Export
 				FillPropertyValues(NewRowSpecialOffer, SpecialOfferRow);
 				ArrayOfRowsSpecialOffers.Add(NewRowSpecialOffer);
 			EndDo;
-		EndIf;
+		EndIf; // SpecialOffers
 		
 		// SpecialOffersCache
 		ArrayOfRowsSpecialOffersCache = New Array();
-		If Parameters.FormIsExists 
-			And CommonFunctionsClientServer.ObjectHasProperty(Parameters.Form, "SpecialOffersCache") Then
+		If Parameters.FormIsExists And CommonFunctionsClientServer.ObjectHasProperty(Parameters.Form, "SpecialOffersCache") Then
 			For Each SpecialOfferRow In Parameters.Form.SpecialOffersCache.FindRows(New Structure("Key", Row.Key)) Do
 				NewRowSpecialOffer = New Structure("Key, Offer, Amount, Quantity");
 				FillPropertyValues(NewRowSpecialOffer, SpecialOfferRow);
 				ArrayOfRowsSpecialOffersCache.Add(NewRowSpecialOffer);
 			EndDo;
-		EndIf;
+		EndIf; // SpecialOffersCache
+		
+		ArrayOfRowsBillOfMaterialsList = New Array();
+		If Parameters.BillOfMaterialsListExists Then
+			For Each RowBillOfMaterials In Parameters.Object.BillOfMaterialsList.FindRows(New Structure("Key", Row.Key)) Do
+				NewRowBillOfMaterials = New Structure(Parameters.ObjectMetadataInfo.Tables.BillOfMaterialsList.Columns);
+				FillPropertyValues(NewRowBillOfMaterials, RowBillOfMaterials);
+				ArrayOfRowsBillOfMaterialsList.Add(NewRowBillOfMaterials);
+			EndDo;
+		EndIf; // BillOfMaterialsListExists
 		
 		NewRow.Insert("TaxIsAlreadyCalculated" , Parameters.IsBasedOn And ArrayOfRowsTaxList.Count());
 		NewRow.Insert("TaxRates"               , TaxRates);
 		NewRow.Insert("TaxList"                , ArrayOfRowsTaxList);
 		NewRow.Insert("SpecialOffers"          , ArrayOfRowsSpecialOffers);
 		NewRow.Insert("SpecialOffersCache"     , ArrayOfRowsSpecialOffersCache);
+		NewRow.Insert("BillOfMaterialsList"    , ArrayOfRowsBillOfMaterialsList);
 	EndDo;
 	Return ArrayOfRows;
 EndFunction	
@@ -503,6 +518,11 @@ Function GetAllBindings(Parameters)
 	BindingMap.Insert("Materials.Unit"     , BindMaterialsUnit(Parameters));
 	BindingMap.Insert("Materials.Quantity" , BindMaterialsQuantity(Parameters));
 	
+	BindingMap.Insert("Productions.Item"     , BindProductionsItem(Parameters));
+	BindingMap.Insert("Productions.ItemKey"  , BindProductionsItemKey(Parameters));
+	BindingMap.Insert("Productions.Unit"     , BindProductionsUnit(Parameters));
+	BindingMap.Insert("Productions.Quantity" , BindProductionsQuantity(Parameters));
+	
 	Return BindingMap;
 EndFunction
 
@@ -519,6 +539,8 @@ Function GetAllBindingsByDefault(Parameters)
 	Binding.Insert("PaymentList."          , BindDefaultPaymentListTaxRate(Parameters));
 	
 	Binding.Insert("Materials.Quantity"    , BindDefaultMaterialsQuantity(Parameters));
+	
+	Binding.Insert("Productions.Quantity"  , BindDefaultProductionsQuantity(Parameters));
 	
 	Return Binding;
 EndFunction
@@ -3406,9 +3428,9 @@ Procedure SetPlanningPeriod(Parameters, Results) Export
 EndProcedure
 
 // PlanningPeriod.Get
-//Function GetPlanningPeriod(Parameters)
-//	Return GetPropertyObject(Parameters, BindPlanningPeriod(Parameters).DataPath);
-//EndFunction
+Function GetPlanningPeriod(Parameters)
+	Return GetPropertyObject(Parameters, BindPlanningPeriod(Parameters).DataPath);
+EndFunction
 
 // PlanningPeriod.Bind
 Function BindPlanningPeriod(Parameters)
@@ -5547,6 +5569,265 @@ Procedure StepChequeBondsChangeApArPostingDetailByAgreement(Parameters, Chain) E
 EndProcedure
 
 #EndRegion
+
+#EndRegion
+
+#Region PRODUCTIONS
+
+#Region PRODUCTIONS_ITEM
+
+// Productions.Item.OnChange
+Procedure ProductionsItemOnChange(Parameters) Export
+	Binding = BindProductionsItem(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Productions.Item.Set
+Procedure SetProductionsItem(Parameters, Results) Export
+	Binding = BindProductionsItem(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Productions.Item.Get
+Function GetProductionsItem(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindProductionsItem(Parameters).DataPath, _Key);
+EndFunction
+
+// Productions.Item.Bind
+Function BindProductionsItem(Parameters)
+	DataPath = "Productions.Item";
+	Binding = New Structure();
+	Binding.Insert("ProductionPlanning"           , "StepProductionsChangeItemKeyByItem");
+	Binding.Insert("ProductionPlanningCorrection" , "StepProductionsChangeItemKeyByItem");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PRODUCTIONS_ITEMKEY
+
+// Productions.ItemKey.OnChange
+Procedure ProductionsItemKeyOnChange(Parameters) Export
+	Binding = BindProductionsItemKey(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Productions.ItemKey.Set
+Procedure SetProductionsItemKey(Parameters, Results) Export
+	Binding = BindProductionsItemKey(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Productions.ItemKey.Get
+Function GetProductionsItemKey(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindProductionsItemKey(Parameters).DataPath, _Key);
+EndFunction
+
+// Productions.ItemKey.Bind
+Function BindProductionsItemKey(Parameters)
+	DataPath = "Productions.ItemKey";
+	Binding = New Structure();
+	Binding.Insert("ProductionPlanning"           , "StepProductionsChangeUnitByItemKey,
+	                                                |StepProductionsChangeBillOfMaterialsByItemKey");
+	Binding.Insert("ProductionPlanningCorrection" , "StepProductionsChangeUnitByItemKey");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Productions.ItemKey.ChangeItemKeyByItem.Step
+Procedure StepProductionsChangeItemKeyByItem(Parameters, Chain) Export
+	Chain.ChangeItemKeyByItem.Enable = True;
+	Chain.ChangeItemKeyByItem.Setter = "SetProductionsItemKey";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeItemKeyByItemOptions();
+		Options.Item    = GetProductionsItem(Parameters, Row.Key);
+		Options.ItemKey = GetProductionsItemKey(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepProductionsChangeItemKeyByItem";
+		Chain.ChangeItemKeyByItem.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTIONS_UNIT
+
+// Productions.Unit.OnChange
+Procedure ProductionsUnitOnChange(Parameters) Export
+	Binding = BindProductionsUnit(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Productions.Unit.Set
+Procedure SetProductionsUnit(Parameters, Results) Export
+	Binding = BindProductionsUnit(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Productions.Unit.Get
+Function GetProductionsUnit(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindProductionsUnit(Parameters).DataPath, _Key);
+EndFunction
+
+// Productions.Unit.Bind
+Function BindProductionsUnit(Parameters)
+	DataPath = "Productions.Unit";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Productions.Unit.ChangeUnitByItemKey.Step
+Procedure StepProductionsChangeUnitByItemKey(Parameters, Chain) Export
+	Chain.ChangeUnitByItemKey.Enable = True;
+	Chain.ChangeUnitByItemKey.Setter = "SetProductionsUnit";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeUnitByItemKeyOptions();
+		Options.ItemKey = GetProductionsItemKey(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepProductionsChangeUnitByItemKey";
+		Chain.ChangeUnitByItemKey.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTIONS_QUANTITY
+
+// Productions.Quantity.OnChange
+Procedure ProductionsQuantityOnChange(Parameters) Export
+	Binding = BindProductionsQuantity(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Productions.Quantity.Set
+Procedure SetProductionsQuantity(Parameters, Results) Export
+	Binding = BindProductionsQuantity(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Productions.Quantity.Get
+Function GetProductionsQuantity(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindProductionsQuantity(Parameters).DataPath, _Key);
+EndFunction
+
+// Productions.Quantity.Default.Bind
+Function BindDefaultProductionsQuantity(Parameters)
+	DataPath = "Productions.Quantity";
+	Binding = New Structure();
+	Binding.Insert("ProductionPlanning"           , "StepProductionsDefaultQuantityInList");
+	Binding.Insert("ProductionPlanningCorrection" , "StepProductionsDefaultQuantityInList");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Productions.Quantity.Bind
+Function BindProductionsQuantity(Parameters)
+	DataPath = "Productions.Quantity";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Productions.Quantity.DefaultQuantityInList.Step
+Procedure StepProductionsDefaultQuantityInList(Parameters, Chain) Export
+	Chain.DefaultQuantityInList.Enable = True;
+	Chain.DefaultQuantityInList.Setter = "SetProductionsQuantity";
+	Options = ModelClientServer_V2.DefaultQuantityInListOptions();
+	NewRow = Parameters.RowFilledByUserSettings;
+	Options.CurrentQuantity = GetProductionsQuantity(Parameters, NewRow.Key);
+	Options.Key = NewRow.Key;
+	Chain.DefaultQuantityInList.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTIONS_BILL_OF_MATERIALS
+
+// Productions.BillOfMaterials.Set
+Procedure SetProductionsBillOfMaterials(Parameters, Results) Export
+	Binding = BindProductionsBillOfMaterials(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Productions.BillOfMaterials.Get
+Function GetProductionsBillOfMaterials(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindProductionsBillOfMaterials(Parameters).DataPath, _Key);
+EndFunction
+
+// Productions.BillOfMaterials.Bind
+Function BindProductionsBillOfMaterials(Parameters)
+	DataPath = "Productions.BillOfMaterials";
+	Binding = New Structure();
+	Binding.Insert("ProductionPlanning", "StepBillOfMaterialsListCalculations");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Productions.BillOfMaterials.ChangeBillOfMaterialsByItemKey.Step
+Procedure StepProductionsChangeBillOfMaterialsByItemKey(Parameters, Chain) Export
+	Chain.ChangeBillOfMaterialsByItemKey.Enable = True;
+	Chain.ChangeBillOfMaterialsByItemKey.Setter = "SetProductionsBillOfMaterials";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeBillOfMaterialsByItemKeyOptions();
+		Options.ItemKey = GetProductionsItemKey(Parameters, Row.Key);
+		Options.CurrentBillOfMaterials = GetProductionsBillOfMaterials(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepProductionsChangeBillOfMaterialsByItemKey";
+		Chain.ChangeBillOfMaterialsByItemKey.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region BILL_OF_MATERIALS_LIST
+
+// BillOfMaterialsList.Set
+Procedure SetBillOfMaterialsList(Parameters, Results) Export
+	For Each Result In Results Do
+		If Result.Value.BillOfMaterialsList.Count() Then
+			If Not Parameters.Cache.Property("BillOfMaterialsList") Then
+				Parameters.Cache.Insert("BillOfMaterialsList", New Array());
+			EndIf;
+			
+			// remove from cache old rows
+			Count = Parameters.Cache.BillOfMaterialsList.Count();
+			For i = 1 To Count Do
+				Index = Count - i;
+				ArrayItem = Parameters.Cache.BillOfMaterialsList[Index];
+				If ArrayItem.Key = Result.Options.Key Then
+					Parameters.Cache.BillOfMaterialsList.Delete(Index);
+				EndIf;
+			EndDo;
+			
+			// add new rows
+			For Each Row In Result.Value.BillOfMaterialsList Do
+				Parameters.Cache.BillOfMaterialsList.Add(Row);
+			EndDo;
+		EndIf;
+	EndDo;
+EndProcedure
+
+// Step.BillOfMaterialsList.Calculations
+Procedure StepBillOfMaterialsListCalculations(Parameters, Chain) Export
+	Chain.BillOfMaterialsListCalculations.Enable = True;
+	Chain.BillOfMaterialsListCalculations.Setter = "SetBillOfMaterialsList";
+	
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.BillOfMaterialsListCalculationsOptions();
+		
+		Options.Company          = GetCompany(Parameters); 
+		Options.BillOfMaterials  = GetProductionsBillOfMaterials(Parameters, Row.Key);
+		Options.PlanningPeriod   = GetPlanningPeriod(Parameters);
+		Options.ItemKey          = GetProductionsItemKey(Parameters, Row.Key);
+		Options.Unit             = GetProductionsUnit(Parameters, Row.Key);
+		Options.Quantity         = GetProductionsQuantity(Parameters, Row.Key);
+		
+		Options.BillOfMaterialsList = Row.BillOfMaterialsList;
+		Options.BillOfMaterialsListColumns = Parameters.ObjectMetadataInfo.Tables.BillOfMaterialsList.Columns;
+				
+		Options.Key = Row.Key;
+		Options.StepName = "StepBillOfMaterialsListCalculations";
+		Chain.BillOfMaterialsListCalculations.Options.Add(Options);
+	EndDo;
+EndProcedure
 
 #EndRegion
 
@@ -8840,8 +9121,9 @@ Procedure _CommitChainChanges(Cache, Source)
 		PropertyValue = Property.Value;
 		If Upper(PropertyName) = Upper("TaxList") 
 			Or Upper(PropertyName) = Upper("SerialLotNumbers") 
-			Or Upper(PropertyName) = Upper("SpecialOffers") Then
-			// tabular part Taxex and Serial lot numbers moved transferred completely
+			Or Upper(PropertyName) = Upper("SpecialOffers")
+			Or Upper(PropertyName) = Upper("BillOfMaterialsList") Then
+			// tabular part transferred completely
 			ArrayOfKeys = New Array();
 			For Each Row In PropertyValue Do
 				If ArrayOfKeys.Find(Row.Key) = Undefined Then

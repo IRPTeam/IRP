@@ -255,10 +255,10 @@
       <objectType typeId="c834755a-f95f-42c2-a534-d61146637805" valueTypeId="b53da5eb-a632-49e4-886f-c1edc710e88f"/>
       <rowType typeId="ea0cda2c-a779-4c09-be6a-a9aed238a025" valueTypeId="3f85277e-f493-48cd-8dba-564eaf412901"/>
     </producedTypes>
-    <name>BillOfMaterials</name>
+    <name>BillOfMaterialsList</name>
     <synonym>
       <key>en</key>
-      <value>Bill of materials</value>
+      <value>Bill of materials list</value>
     </synonym>
     <attributes uuid="97593893-02f4-46f8-80b7-580abb0d868b">
       <name>Key</name>

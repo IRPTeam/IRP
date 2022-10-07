@@ -555,7 +555,6 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_068_2", NStr(
 		"en = 'Line No. [%1] [%2 %3] Serial lot number [%4] %5 remaining: %6 %9. Required: %7 %9. Lacking: %8 %9.'", Lang));
 
-
 	// %1 - some extention name
 	Strings.Insert("Error_071", NStr("en = 'Plugin ""%1"" is not connected.'", Lang));
 	

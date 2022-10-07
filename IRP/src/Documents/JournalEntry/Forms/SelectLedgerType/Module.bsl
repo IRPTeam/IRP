@@ -47,5 +47,3 @@ EndProcedure
 Procedure JournalEntrysBeforeDeleteRow(Item, Cancel)
 	Cancel = True;
 EndProcedure
-
-

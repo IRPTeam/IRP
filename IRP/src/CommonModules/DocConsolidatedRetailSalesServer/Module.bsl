@@ -159,5 +159,3 @@ Function UseConsolidatedRetilaSales(Branch, SalesReturnData = Undefined) Export
 EndFunction
 
 #EndRegion
-
-

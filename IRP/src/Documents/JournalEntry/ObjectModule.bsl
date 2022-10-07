@@ -174,5 +174,3 @@ Procedure FillRegisterRecords()
 		NewRowTotals.AmountCr = TotalAmountCr;
 	EndDo;
 EndProcedure
-
-

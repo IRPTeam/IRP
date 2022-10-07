@@ -517,14 +517,3 @@ Procedure ShowHiddenTables(Command)
 EndProcedure
 
 #EndRegion
-
-
-
-
-
-
-
-
-
-
-

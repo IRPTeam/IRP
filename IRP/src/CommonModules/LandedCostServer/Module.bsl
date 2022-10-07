@@ -2026,7 +2026,6 @@ Function GetPriceForEmptyAmountFromBatchBalance(ItemKey, Period)
 	EndIf;
 EndFunction
 
-
 Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewReceivedBatches, CalculationSettings)
 	For Each Row In Rows Do
 		If Row.Direction = Enums.BatchDirection.Receipt And Not Row.IsOpeningBalance Then
@@ -2092,7 +2091,6 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 		Rows.Delete(Row);
 	EndDo;
 EndProcedure
-
 
 Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpense, TableOfNewReceivedBatches)
 	For Each Row_Receipt In DataForReceipt Do
@@ -2176,7 +2174,6 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 		Rows.Delete(Row);
 	EndDo;
 EndProcedure
-
 
 Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpense, TableOfNewReceivedBatches)
 	For Each Row_Receipt In DataForReceipt Do
@@ -2403,7 +2400,6 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, ItemKey)
 	Table_SalesBatches = Query.Execute().Unload();
 	Return Table_SalesBatches;
 EndFunction
-
 
 #Region Constructors
 

@@ -269,7 +269,6 @@ Procedure ItemListItemOnChange(Item)
 
 	ThisObject.Items.ItemList.Refresh();
 
-
 	UnitInfo = GetItemInfo.ItemUnitInfo(CurrentData.ItemKey);
 	CurrentData.Unit = UnitInfo.Unit;
 

@@ -46,7 +46,6 @@ Procedure OnOpen(Cancel)
 
 EndProcedure
 
-
 #EndRegion
 
 #Region FormCommandsEventHandlers

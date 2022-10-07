@@ -1003,7 +1003,6 @@ Function GetFormItemNames()
 	Return ItemNames;
 EndFunction	
 
-
 Procedure ShowRowKey(Form) Export
 	ItemNames = GetFormItemNames();
 	ArrayOfItemNames = StrSplit(ItemNames, ",");

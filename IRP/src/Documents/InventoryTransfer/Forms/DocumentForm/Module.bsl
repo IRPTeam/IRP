@@ -89,7 +89,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region STORE_TRANSIT
 
 &AtClient

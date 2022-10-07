@@ -254,5 +254,4 @@ Function ExpenseTypeDiffCompany() Export
 	Return "";
 EndFunction
 
-
 #EndRegion

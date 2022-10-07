@@ -87,7 +87,6 @@ Procedure ItemListAfterDeleteRow(Item)
 	DocItemStockAdjustmentClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
-
 #Region ITEM_LIST_COLUMNS
 
 #Region _ITEM

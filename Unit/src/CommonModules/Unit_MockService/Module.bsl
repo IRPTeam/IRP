@@ -1060,5 +1060,4 @@ Function TransformationText(Val SomeText, RequestVariables)
 	
 EndFunction
 
-
 #EndRegion

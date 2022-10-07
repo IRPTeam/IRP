@@ -74,7 +74,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Return Tables;
 EndFunction
 
-
 Function NeedPosting(StatusInfo, SettingName, PostingType)
 	// SettingName:
 	// ChequeBondBalance

@@ -81,4 +81,3 @@ Function GetDefaultChoiceRef(Parameters) Export
 	EndIf;
 EndFunction
 
-

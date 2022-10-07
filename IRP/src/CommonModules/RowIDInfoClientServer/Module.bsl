@@ -219,4 +219,3 @@ Procedure FillVisibleFields(BasisesTree, VisibleFields) Export
 	EndDo;
 EndProcedure
 
-

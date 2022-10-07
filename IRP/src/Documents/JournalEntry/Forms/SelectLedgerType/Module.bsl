@@ -49,4 +49,3 @@ Procedure JournalEntrysBeforeDeleteRow(Item, Cancel)
 EndProcedure
 
 
-

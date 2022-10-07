@@ -762,7 +762,6 @@ Procedure CreateCashIn(Command)
 	OpenForm("Document.CashReceipt.ObjectForm", New Structure("FillingValues", FillingData), , New UUID());	
 EndProcedure
 
-
 &AtClient
 Procedure UpdateCashIn(Command)
 	FillCashInList();

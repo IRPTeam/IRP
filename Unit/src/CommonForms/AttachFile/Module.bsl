@@ -25,7 +25,6 @@ Procedure IRPTE_OnCreateAtServerAfter(Cancel, StandardProcessing)
     Элемент.Вид = ВидПоляФормы.ПолеВвода;
     Элемент.ПутьКДанным = "dragFile";
 
-
 EndProcedure
 
 &AtServer

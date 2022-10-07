@@ -286,7 +286,7 @@ Procedure FillDataTable(DataTable, AddDataProc)
 EndProcedure
 
 Procedure SetDrawingPicture(Drawing, QuerySelection)
-	BarcodeParameters = BarcodeServer.GetBarcodeDrawparameters();
+	BarcodeParameters = BarcodeServer.GetBarcodeDrawParameters();
 	If Drawing.Name = "BarcodePicture" Then
 		If ValueIsFilled(QuerySelection.Barcode) Then
 			BarcodeParameters.Width = Round(Drawing.Width / 0.1);

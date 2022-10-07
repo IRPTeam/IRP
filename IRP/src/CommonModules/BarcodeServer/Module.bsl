@@ -243,7 +243,7 @@ EndFunction
 // Get barcode picture.
 // 
 // Parameters:
-//  BarcodeParameters - See GetBarcodeDrawparameters
+//  BarcodeParameters - See GetBarcodeDrawParameters
 // 
 // Returns:
 //  Picture - Get barcode picture
@@ -256,7 +256,7 @@ EndFunction
 // Get QRPicture.
 // 
 // Parameters:
-//  BarcodeParameters - See GetBarcodeDrawparameters
+//  BarcodeParameters - See GetBarcodeDrawParameters
 // 
 // Returns:
 //  Picture - Get QRPicture
@@ -266,17 +266,17 @@ Function GetQRPicture(BarcodeParameters) Export
 
 EndFunction
 
-// Get barcode drawparameters.
+// Get barcode draw parameters.
 // 
 // Returns:
-//  Structure - Get barcode drawparameters:
+//  Structure - Get barcode draw parameters:
 // * Width - Number -
 // * Height - Number -
 // * Barcode - String -
 // * CodeType - String -
 // * ShowText - Boolean -
 // * SizeOfFont - Number -
-Function GetBarcodeDrawparameters() Export
+Function GetBarcodeDrawParameters() Export
 	BarcodeParameters = New Structure;
 	BarcodeParameters.Insert("Width", 0);
 	BarcodeParameters.Insert("Height", 0);

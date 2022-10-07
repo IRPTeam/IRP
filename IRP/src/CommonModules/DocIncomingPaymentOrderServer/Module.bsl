@@ -6,6 +6,7 @@ EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	MoneyDocumentsServer.OnReadAtServer(Object, Form, CurrentObject);
+	LockDataModificationPrivileged.LockFormIfObjectIsLocked(Form, CurrentObject);
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export

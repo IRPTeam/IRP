@@ -26,6 +26,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	Form.Taxes_CreateFormControls();
 	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
+	LockDataModificationPrivileged.LockFormIfObjectIsLocked(Form, CurrentObject);
 EndProcedure
 
 #EndRegion

@@ -61,7 +61,10 @@ Procedure SessionParametersSetting(RequiredParameters) Export
 	EndIf;
 	If RequiredParameters.Find("RunBackgroundJobInDebugMode") <> Undefined Then
 		SessionParameters.RunBackgroundJobInDebugMode = False;
-	EndIf
+	EndIf;
+	If RequiredParameters.Find("IgnoreLockModificationData") <> Undefined Then
+		SessionParameters.IgnoreLockModificationData = False;
+	EndIf;
 EndProcedure
 
 Function GetSessionParameter(ParameterName) Export

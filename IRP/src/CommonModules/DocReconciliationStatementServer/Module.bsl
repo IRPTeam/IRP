@@ -20,6 +20,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	EndIf;
 	SetVisibility(CurrentObject, Form);
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	LockDataModificationPrivileged.LockFormIfObjectIsLocked(Form, CurrentObject);
 EndProcedure
 
 Procedure SetVisibility(Object, Form) Export

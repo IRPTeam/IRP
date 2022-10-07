@@ -10,6 +10,7 @@ Procedure OnWrite(Cancel)
 	EndIf;
 
 	LockDataModificationPrivileged.SaveRuleSettings(ThisObject);
+	RefreshReusableValues();
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -17,6 +18,11 @@ Procedure BeforeDelete(Cancel)
 		Return;
 	EndIf;
 EndProcedure
+
+Procedure OnCopy(CopiedObject)
+	isInitDCS = False;
+EndProcedure
+
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If DisableRule Then
 		Return;
@@ -28,7 +34,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			Cancel = True;
 		EndIf;
 	EndIf;
-	If SetOneRuleForAllObjects Then
+	If SetOneRuleForAllObjects And Not AdvancedMode Then
 		If IsBlankString(Attribute) Then
 			CommonFunctionsClientServer.ShowUsersMessage(
 				StrTemplate(R().Error_010, ThisObject.Metadata().Attributes.Attribute.Synonym), "Object.Attribute");
@@ -45,7 +51,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 				StrTemplate(R().Error_010, ThisObject.Metadata().Attributes.Value.Synonym), "Object.Value");
 			Cancel = True;
 		EndIf;
-	Else
+	ElsIf Not AdvancedMode Then
 		For Index = 0 To RuleList.Count() - 1 Do
 			If IsBlankString(RuleList[Index].Attribute) Then
 				CommonFunctionsClientServer.ShowUsersMessage(
@@ -69,4 +75,13 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			EndIf;
 		EndDo;
 	EndIf;
+	For Index = 0 To RuleList.Count() - 1 Do
+		If IsBlankString(RuleList[Index].Type) Then
+			CommonFunctionsClientServer.ShowUsersMessage(
+				StrTemplate(R().Error_010,
+				ThisObject.Metadata().TabularSections.RuleList.Attributes.Attribute.Synonym), "Object.RuleList["
+				+ Format(Index, "NG=") + "].Type");
+			Cancel = True;
+		EndIf;
+	EndDo;
 EndProcedure

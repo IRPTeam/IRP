@@ -608,7 +608,7 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 	// affect to amounts
 	IsPriceChecked = False;
 	IsTaxRateChecked = False;
-	IsPriceTypeCheked = False;
+	IsPriceTypeChecked = False;
 	
 	ArrayOfDataPaths = New Array();
 	
@@ -626,7 +626,7 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 		If Not Answer.Property("UpdatePriceTypes") Then
 			RemoveFromCache(DataPaths, Parameters);
 		Else
-			IsPriceTypeCheked = True;
+			IsPriceTypeChecked = True;
 		EndIf;
 	EndIf;
 	
@@ -663,7 +663,7 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 	EndIf;
 	
 	// not affect amounts
-	If Not (IsPriceTypeCheked Or IsPriceChecked Or IsTaxRateChecked) Then
+	If Not (IsPriceTypeChecked Or IsPriceChecked Or IsTaxRateChecked) Then
 		DataPaths = "ItemList.NetAmount, ItemList.TaxAmount, ItemList.TotalAmount";
 		ArrayOfDataPaths.Add(DataPaths);
 		RemoveFromCache(DataPaths, Parameters, False);

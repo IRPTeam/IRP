@@ -219,7 +219,7 @@ Procedure AllocationRowsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Para
 		SelectedRow = New Structure();
 		
 		SelectedRow.Insert("BasisRowID", Row.BasisRowID);
-		SelectedRow.Insert("RowID"     ,Row.RowID);
+		SelectedRow.Insert("RowID"     , Row.RowID);
 		SelectedRow.Insert("Document"  , Row.Document);
 		SelectedRow.Insert("Store"     , Row.Store);
 		SelectedRow.Insert("ItemKey"   , Row.ItemKey);

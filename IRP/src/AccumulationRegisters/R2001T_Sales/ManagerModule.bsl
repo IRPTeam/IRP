@@ -122,7 +122,7 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	|	SUM(R2001T_SalesTurnovers.QuantityTurnover) AS QuantityBalance
 	|INTO SalesBalance
 	|FROM
-	|	AccumulationRegister.R2001T_Sales.Turnovers(,,, (Invoice, ItemKey, CurrencyMovementType) IN
+	|	AccumulationRegister.R2001T_Sales.Turnovers(, , , (Invoice, ItemKey, CurrencyMovementType) IN
 	|		(SELECT
 	|			Sales.Invoice,
 	|			Sales.ItemKey,

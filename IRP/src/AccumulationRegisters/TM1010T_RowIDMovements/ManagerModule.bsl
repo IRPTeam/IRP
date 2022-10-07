@@ -121,7 +121,7 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	|	SUM(TM1010T_RowIDMovementsTurnovers.QuantityTurnover) AS QuantityBalance
 	|INTO RowIDInfoBalance
 	|FROM
-	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(,,, (RowRef, RowID, Step, Basis, BasisKey) IN
+	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, , , (RowRef, RowID, Step, Basis, BasisKey) IN
 	|		(SELECT
 	|			RowIDInfo.RowRef,
 	|			RowIDInfo.RowID,

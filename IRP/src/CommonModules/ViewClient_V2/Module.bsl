@@ -374,7 +374,7 @@ Procedure __tmp_SalesPurchaseInvoice_OnChainComplete(Parameters)
 		Notify = New NotifyDescription("QuestionsOnUserChangeContinue", ThisObject, NotifyParameters);
 		OpenForm("CommonForm.UpdateItemListInfo",
 			New Structure("QuestionsParameters", QuestionsParameters), 
-			Parameters.Form, , , ,Notify ,FormWindowOpeningMode.LockOwnerWindow);
+			Parameters.Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 	Else
 		CommitChanges(Parameters);
 	EndIf;
@@ -776,7 +776,7 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow,
 			ArrayOfExcludeProperties.Add("SerialLotNumberIsFilling");
 		EndIf;
 		
-		FillPropertyValues(NewRow, OriginRows[0], ,StrConcat(ArrayOfExcludeProperties, ","));
+		FillPropertyValues(NewRow, OriginRows[0], , StrConcat(ArrayOfExcludeProperties, ","));
 		
 		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
 		Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
@@ -821,7 +821,7 @@ Function AddOrCopyRowSimpleTable(Object, Form, TableName, Cancel, Clone, OriginR
 			ArrayOfExcludeProperties.Add("Key");
 		EndIf;
 		
-		FillPropertyValues(NewRow, OriginRows[0], ,StrConcat(ArrayOfExcludeProperties, ","));
+		FillPropertyValues(NewRow, OriginRows[0], , StrConcat(ArrayOfExcludeProperties, ","));
 		
 		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
 		Parameters = GetSimpleParameters(Object, Form, TableName, Rows);

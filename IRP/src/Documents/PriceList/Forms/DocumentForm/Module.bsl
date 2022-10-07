@@ -120,7 +120,7 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 		If Not ValueIsFilled(Row.Unit) Then
 			Cancel = True;
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_010, "Unit"), 
-					"ItemList[" + Format(RowIndex,"NZ=0; NG=0;") + "].Unit", ThisObject);
+					"ItemList[" + Format(RowIndex, "NZ=0; NG=0;") + "].Unit", ThisObject);
 		EndIf;
 		RowIndex = RowIndex + 1;
 	EndDo;

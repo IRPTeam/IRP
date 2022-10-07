@@ -24,7 +24,7 @@ EndProcedure
 
 &AtClient
 Procedure CreateDocuments(Command)
-	OpenForm("Document.JournalEntry.Form.CreateDocuments",, ThisObject,,,,, FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("Document.JournalEntry.Form.CreateDocuments", , ThisObject, , , , , FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 #EndRegion

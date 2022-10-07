@@ -349,7 +349,7 @@ Procedure FillPropertyFormByDefault(Form, DataPaths, Parameters) Export
 	For Each DataPath In ArrayOfDataPath Do
 		DataPath = TrimAll(DataPath);
 		Default = Defaults.Get(DataPath);
-		If Default<> Undefined Then
+		If Default <> Undefined Then
 			ForceCommitChanges = False;
 			ModelClientServer_V2.EntryPoint(Default.StepsEnabler, Parameters);
 		ElsIf ValueIsFilled(Form[DataPath]) Then
@@ -657,7 +657,7 @@ Procedure AddNewRow(TableName, Parameters, ViewNotify = Undefined) Export
 			DataPath = Segments[0] + ".";
 		EndIf;
 		Default = Defaults.Get(DataPath);
-		If Default<> Undefined Then
+		If Default <> Undefined Then
 			ModelClientServer_V2.EntryPoint(Default.StepsEnabler, Parameters);
 			
 		// if column is filled  and has its own handler .OnChage call it
@@ -2522,7 +2522,7 @@ EndProcedure
 // DeliveryDate.Set
 Procedure SetDeliveryDate(Parameters, Results) Export
 	Binding = BindDeliveryDate(Parameters);
-	SetterForm(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetDeliveryDateNotify", ,True);
+	SetterForm(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetDeliveryDateNotify", , True);
 EndProcedure
 
 // DeliveryDate.Get
@@ -2635,7 +2635,7 @@ EndProcedure
 // Store.Set
 Procedure SetStore(Parameters, Results) Export
 	Binding = BindStore(Parameters);
-	SetterForm(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetStoreNotify", ,True);
+	SetterForm(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetStoreNotify", , True);
 EndProcedure
 
 // Store.Get
@@ -4540,7 +4540,7 @@ Procedure SetPaymentListTaxRate(Parameters, Results) Export
 			TaxRateResult = New Array();
 			TaxRateResult.Add(New Structure("Value, Options", TaxRate.Value, Result.Options));
 			SetterObject(Binding.StepsEnabler, Binding.DataPath + TaxRate.Key,
-				Parameters, TaxRateResult, , , ,ReadOnlyFromCache);
+				Parameters, TaxRateResult, , , , ReadOnlyFromCache);
 		EndDo;
 	EndDo;
 EndProcedure
@@ -4827,7 +4827,7 @@ Procedure StepPaymentListCalculations(Parameters, Chain, WhoIsChanged);
 			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
 		EndIf;
 		
-		If StrSplit(Parameters.ObjectMetadataInfo.Tables.PaymentList.Columns,",").Find("DontCalculateRow") <> Undefined Then
+		If StrSplit(Parameters.ObjectMetadataInfo.Tables.PaymentList.Columns, ",").Find("DontCalculateRow") <> Undefined Then
 			Options.AmountOptions.DontCalculateRow = GetPaymentListDontCalculateRow(Parameters, Row.Key);
 		Else
 			Options.AmountOptions.DontCalculateRow = False;
@@ -5753,7 +5753,7 @@ EndFunction
 // Materials.QuantityInBaseUnit.Set
 Procedure SetMaterialsQuantityInBaseUnit(Parameters, Results) Export
 	Binding = BindMaterialsQuantityInBaseUnit(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results, ,"QuantityInBaseUnit");
+	SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results, , "QuantityInBaseUnit");
 EndProcedure
 
 Function GetMaterialsQuantityInBaseUnit(Parameters, _Key)
@@ -5793,7 +5793,7 @@ EndProcedure
 // Materials.QuantityInBaseUnitBOM.Set
 Procedure SetMaterialsQuantityInBaseUnitBOM(Parameters, Results) Export
 	Binding = BindMaterialsQuantityInBaseUnitBOM(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results, ,"QuantityInBaseUnit");
+	SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results, , "QuantityInBaseUnit");
 EndProcedure
 
 Function GetMaterialsQuantityInBaseUnitBOM(Parameters, _Key)
@@ -7613,7 +7613,7 @@ Procedure SetItemListTaxRate(Parameters, Results) Export
 			TaxRateResult = New Array();
 			TaxRateResult.Add(New Structure("Value, Options", TaxRate.Value, Result.Options));
 			SetterObject(Binding.StepsEnabler, Binding.DataPath + TaxRate.Key,
-				Parameters, TaxRateResult, , , ,ReadOnlyFromCache);
+				Parameters, TaxRateResult, , , , ReadOnlyFromCache);
 		EndDo;
 	EndDo;
 EndProcedure
@@ -7885,7 +7885,7 @@ Procedure SetItemListCalculations(Parameters, Results) Export
 	SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, ViewNotify, "TaxAmount"    , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.OffersAmount", Parameters, Results, ViewNotify, "OffersAmount" , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.Price"       , Parameters, Results, ViewNotify, "Price"        , NotifyAnyway);
-	SetterObject(Binding.StepsEnabler, "ItemList.TotalAmount" , Parameters, Results, ViewNotify, "TotalAmount" ,NotifyAnyway);
+	SetterObject(Binding.StepsEnabler, "ItemList.TotalAmount" , Parameters, Results, ViewNotify, "TotalAmount" , NotifyAnyway);
 	SetTaxList(Parameters, Results);
 	SetSpecialOffers(Parameters, Results);
 EndProcedure
@@ -9169,7 +9169,7 @@ Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters)
 	MetadataBinding = New Map();
 	For Each KeyValue In Binding Do
 		MetadataName = KeyValue.Key;
-		MetadataBinding.Insert(MetadataName + "." +DataPath, Binding[MetadataName]);
+		MetadataBinding.Insert(MetadataName + "." + DataPath, Binding[MetadataName]);
 	EndDo;
 	FullDataPath = StrTemplate("%1.%2", Parameters.ObjectMetadataInfo.MetadataName, DataPath);
 	StepsEnabler = MetadataBinding.Get(FullDataPath);
@@ -9257,7 +9257,7 @@ Procedure SetReadOnlyProperties(Object, FillingData) Export
 			HeaderProperties.Add(Property);
 		EndIf;
 	EndDo;
-	ReadOnlyProperties = StrConcat(HeaderProperties, ",") +","+StrConcat(TabularProperties, ",");
+	ReadOnlyProperties = StrConcat(HeaderProperties, ",") + "," + StrConcat(TabularProperties, ",");
 	Object.AdditionalProperties.Insert("ReadOnlyProperties", ReadOnlyProperties);
 	Object.AdditionalProperties.Insert("IsBasedOn", True);
 EndProcedure

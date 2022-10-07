@@ -7,7 +7,7 @@ Procedure ReadStructureAtServer()
 	TreeData.GetItems().Clear();
 	ObjXDTO = ObjectXDTO(Obj, Object.TypeName, Object.URI, TreeData.GetItems().Add());	
 
-	XML = CommonFunctionsServer.SerializeXMLUseXDTOFactory(ObjXDTO,,,,Object.WSName);
+	XML = CommonFunctionsServer.SerializeXMLUseXDTOFactory(ObjXDTO, , , , Object.WSName);
 
 	XSLT = GetCommonTemplate("TR_ESF_XMLPrettyPrint").GetText();
 	
@@ -75,13 +75,13 @@ Function ObjectXDTO(ObjectStructure, TypeName, URI, TreeData)
 							NewRow = NewRowArray.GetItems().Add();
 							NewRow.Name = Str.Key;
 							NewRow.CanBeEmpty =  XDTOTypeRow.Properties.Get(Str.Key).LowerBound = 0;
-							DataXDTOrow[Str.Key].Add(ObjectXDTO(Str.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI,NewRow));
+							DataXDTOrow[Str.Key].Add(ObjectXDTO(Str.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, NewRow));
 						ElsIf TypeOf(Str.Value) = Type("Structure") Then
 							
 							NewRow = NewRowArray.GetItems().Add();
 							NewRow.Name = Str.Key;
 							NewRow.CanBeEmpty =  XDTOTypeRow.Properties.Get(Str.Key).LowerBound = 0;
-							DataXDTOrow[Str.Key] = ObjectXDTO(Str.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI,NewRow);
+							DataXDTOrow[Str.Key] = ObjectXDTO(Str.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, NewRow);
 						Else 
 							NewRow = NewRowArray.GetItems().Add();
 							NewRow.Name = Str.Key;
@@ -107,9 +107,9 @@ Function ObjectXDTO(ObjectStructure, TypeName, URI, TreeData)
 				EndIf; 
 				If TypeOf(DataXDTO[ObjectDataKeyValue.Key]) =  Type("XDTOList") Then
 										
-					DataXDTO[ObjectDataKeyValue.Key].Add(ObjectXDTO(ObjectDataKeyValue.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI,NewRow));
+					DataXDTO[ObjectDataKeyValue.Key].Add(ObjectXDTO(ObjectDataKeyValue.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, NewRow));
 				ElsIf TypeOf(ObjectDataKeyValue.Value) = Type("Structure") Then
-					DataXDTO[ObjectDataKeyValue.Key] = ObjectXDTO(ObjectDataKeyValue.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI,NewRow);
+					DataXDTO[ObjectDataKeyValue.Key] = ObjectXDTO(ObjectDataKeyValue.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, NewRow);
 				Else 
 					SetObject(DataXDTO, XDTOTypeStructure, ObjectDataKeyValue.Key, ObjectDataKeyValue.Value, NewRow);
 				EndIf;
@@ -141,14 +141,14 @@ Procedure SetObject(XDTO, Type, Property, Val Value = Undefined, NewRow)
 		If ContentType.Name = "normalizedString" OR ContentType.Name = "string" Then
 			 Value = "";
 		ElsIf ContentType.Name = "dateTime" OR ContentType.Name = "date" OR ContentType.Name = "time" Then	
-			 Value = Date(1,1,1,0,0,0);
+			 Value = Date(1, 1, 1, 0, 0, 0);
 		ElsIf ContentType.Name = "boolean" Then	
 			 Value = False;
 		ElsIf ContentType.Name = "NumericType" OR ContentType.Name = "decimal" Then	
 			 Value = 0;
 		ElsIf ContentType.Name = "base64Binary" Then	
 			Body = New MemoryStream();
-			DataWriter = New DataWriter(Body,TextEncoding.UTF8);
+			DataWriter = New DataWriter(Body, TextEncoding.UTF8);
 			DataWriter.WriteLine("");
 			DataWriter.Close();
 			BD = Body.CloseAndGetBinaryData();

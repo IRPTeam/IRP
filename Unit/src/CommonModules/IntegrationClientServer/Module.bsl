@@ -72,8 +72,8 @@ Function Unit_GetServiceExchangeDataTemplate() Export
 	ServiceExchangeData.Insert("Headers", New Map);
 	ServiceExchangeData.Insert("RequestBody", Undefined);
 	ServiceExchangeData.Insert("ServerResponse", Undefined);
-	ServiceExchangeData.Insert("StartTime", Date(1,1,1));
-	ServiceExchangeData.Insert("EndTime", Date(1,1,1));
+	ServiceExchangeData.Insert("StartTime", Date(1, 1, 1));
+	ServiceExchangeData.Insert("EndTime", Date(1, 1, 1));
 	Return ServiceExchangeData;
 EndFunction
 

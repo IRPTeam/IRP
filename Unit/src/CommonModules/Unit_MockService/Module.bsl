@@ -225,7 +225,7 @@ Function getValueOfBodyVariableByPath(PathToValue, DataForValue, AllCommands = U
 	 		TempFile = TempFilesDir() + String(New UUID);
 	 		If ArrayOfSegments.Count() > 1 Then
 				FileName = ArrayOfSegments[1];
-				NextPath = Mid(NextPath, StrLen(FileName)+2);
+				NextPath = Mid(NextPath, StrLen(FileName) + 2);
 		 		ZIP.ExtractAll(TempFile, ZIPRestoreFilePathsMode.DontRestore);
 		 		NewBinaryData = New BinaryData(TempFile + "/" + FileName); // String, BinaryData
 		 		DeleteFiles(TempFile);
@@ -859,10 +859,10 @@ Function getValueOfBodyVariable(RequestStructure, PathToValue, MockValue, Reques
 	NewData = Undefined;
 	
 	If StrStartsWith(PathToValue, "[text]") Then
-		NewPath = Mid(PathToValue,8);
+		NewPath = Mid(PathToValue, 8);
 		NewData = RequestStructure.BodyString;
 	ElsIf StrStartsWith(PathToValue, "[file]") Then
-		NewPath = Mid(PathToValue,8);
+		NewPath = Mid(PathToValue, 8);
 		NewData = RequestStructure.BodyBinary;
 	Else
 		Return "";

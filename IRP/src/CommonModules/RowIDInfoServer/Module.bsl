@@ -1632,7 +1632,7 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 					ItemOfDifferenceFields.Insert("DataPath"    , Difference.DataPath);
 					ItemOfDifferenceFields.Insert("LineNumber"  , RowItemList.LineNumber);
 					ItemOfDifferenceFields.Insert("ValueBefore" , Difference.ValueBefore);
-					ItemOfDifferenceFields.Insert("ValueAfter"  ,Difference.ValueAfter);
+					ItemOfDifferenceFields.Insert("ValueAfter"  , Difference.ValueAfter);
 					ArrayOfDifferenceFields.Add(ItemOfDifferenceFields);
 				EndDo;
 			EndIf;
@@ -9098,7 +9098,7 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 			If NeedRefillColumns Then
 				For Each RefillColumn In ArrayOfRefillColumns Do
 					If Row.Property(RefillColumn) And Row_ItemList.Property(RefillColumn) Then
-						Row[RefillColumn] = Row_ItemList[RefillColumn];// ???
+						Row[RefillColumn] = Row_ItemList[RefillColumn]; // ???
 						PropertyName = TrimAll(RefillColumn);
 						PutToUpdatedProperties(PropertyName, "ItemList", Row, UpdatedProperties);
 						IsLinked = True;
@@ -10208,7 +10208,7 @@ Procedure UnlockLinkedRows(Object, Form) Export
 EndProcedure
 
 Procedure LockInternalLinkedRows(Object, Form)
-	RowIDInfoTable = Object.RowIDInfo.Unload(,"Key, RowID, Basis, BasisKey, RowRef");
+	RowIDInfoTable = Object.RowIDInfo.Unload(, "Key, RowID, Basis, BasisKey, RowRef");
 	RowIDInfoTable.GroupBy("Key, RowID, Basis, BasisKey, RowRef");
 	
 	ArrayForDelete = New Array();
@@ -10237,7 +10237,7 @@ Procedure LockInternalLinkedRows(Object, Form)
 EndProcedure
 
 Procedure LockExternalLinkedRows(Object, Form)
-	RowIDInfoTable = Object.RowIDInfo.Unload(,"Key, RowID");
+	RowIDInfoTable = Object.RowIDInfo.Unload(, "Key, RowID");
 	RowIDInfoTable.GroupBy("Key, RowID");
 	For Each Row In Object.ItemList Do
 		If Not RowIDInfoTable.FindRows(New Structure("Key", Row.Key)).Count() Then

@@ -80,8 +80,8 @@ Procedure RunAtServer()
 			EndDo;
 		EndIf;
 		
-	EndDo;// MainRow
-	Doc.FixedTop=2;
+	EndDo; // MainRow
+	Doc.FixedTop = 2;
 EndProcedure
 
 &AtServer

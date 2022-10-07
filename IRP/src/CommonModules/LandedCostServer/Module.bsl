@@ -307,7 +307,7 @@ Procedure ReleaseBatchReallocateDocuments(BatchReallocateRef) Export
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
-		DocRef= QuerySelection.Ref; // DocumentRef.BatchReallocateIncoming, DocumentRef.BatchReallocateOutgoing 
+		DocRef = QuerySelection.Ref; // DocumentRef.BatchReallocateIncoming, DocumentRef.BatchReallocateOutgoing 
 		DocObject = DocRef.GetObject();
 		DocObject.ItemList.Clear();
 		DocObject.BatchReallocate = Undefined;
@@ -2417,8 +2417,8 @@ Function GetCalculationSettings() Export
 	Structure = New Structure;
 	Structure.Insert("CalculationMovementCostRef", Documents.CalculationMovementCosts.EmptyRef());
 	Structure.Insert("CalculationMode", Enums.CalculationMode.EmptyRef());
-	Structure.Insert("BeginPeriod", Date(1,1,1));
-	Structure.Insert("EndPeriod", Date(1,1,1));
+	Structure.Insert("BeginPeriod", Date(1, 1, 1));
+	Structure.Insert("EndPeriod", Date(1, 1, 1));
 	Structure.Insert("Company", Catalogs.Companies.EmptyRef());
 	Structure.Insert("RaiseOnCalculationError", False);
 	Return Structure;

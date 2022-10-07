@@ -1108,7 +1108,7 @@ Procedure OpenLinkedDocuments(Object, Form, TableName, DocumentColumnName, Quant
 	FormParameters.Insert("Tree", Tree);
 	
 	Notify = New NotifyDescription("LinkedDocumentsEnd", ThisObject, AdditionalParameters);
-	OpenForm("CommonForm.LinkedDocuments", FormParameters, Form, ,,,Notify, FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("CommonForm.LinkedDocuments", FormParameters, Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 Procedure LinkedDocumentsEnd(Result, AdditionalParameters) Export

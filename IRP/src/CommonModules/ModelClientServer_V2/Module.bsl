@@ -548,7 +548,7 @@ EndFunction
 Function ChangePlanningTransactionBasisByCurrencyExecute(Options) Export
 	If ValueIsFilled(Options.PlanningTransactionBasis) 
 			And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") 
-			And ServiceSystemServer.GetObjectAttribute(Options.PlanningTransactionBasis,"SendCurrency") 
+			And ServiceSystemServer.GetObjectAttribute(Options.PlanningTransactionBasis, "SendCurrency") 
 			<> Options.Currency Then
 				Return Undefined;
 	EndIf;

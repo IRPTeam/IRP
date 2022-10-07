@@ -2265,7 +2265,7 @@ Procedure UseGoodsReceiptOnChange(Object, Form, TableNames) Export
 	EndDo;
 EndProcedure
 
-Procedure OnSetUseGoodsReceiptNotify_IsProgrammAsTrue(Parameters) Export
+Procedure OnSetUseGoodsReceiptNotify_IsProgramAsTrue(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer" Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_023, "Object.UseGoodsReceipt");
 	EndIf;

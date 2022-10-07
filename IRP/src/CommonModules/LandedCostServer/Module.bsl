@@ -211,7 +211,7 @@ Procedure BatchReallocate(LocksStorage, BatchReallocateRef, EndPeriod)
 		PositiveStockBalance = GetPositiveStockBalance(NegativeStockBalanceSelection.Company, ReallocatePeriod, LackItemList);
 
 		ResultItemList = EmptyResultItemList.CopyColumns(); // See GetEmptyResultItemList
-		IsQuantityEnought = True;
+		IsQuantityEnough = True;
 		For Each LackRow In LackItemList Do
 
 			LackQuantity = LackRow.Quantity; // Number
@@ -235,12 +235,12 @@ Procedure BatchReallocate(LocksStorage, BatchReallocateRef, EndPeriod)
 			EndDo;
 
 			If LackQuantity <> 0 Then
-				IsQuantityEnought = False;
+				IsQuantityEnough = False;
 				Break;
 			EndIf;
 		EndDo;
 
-		If Not IsQuantityEnought Then
+		If Not IsQuantityEnough Then
 			Continue;
 		EndIf;
 

@@ -19,7 +19,7 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 		Return;
 	EndIf;
 	
-	CommonFormActionsServer.CutLastSymblosIfCameFromExcel(Parameters);
+	CommonFormActionsServer.CutLastSymbolsIfCameFromExcel(Parameters);
 
 	StandardProcessing = False;
 

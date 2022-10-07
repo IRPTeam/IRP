@@ -112,10 +112,10 @@ Function PrepareObjectXDTO(ObjectStructure, TypeName, URI, WSName) Export
 			EndIf;
 			
 			For Each Row In ObjectData.Value Do
-				DataXDTOrow = CommonFunctionsServer.XDTOFactoryObject(WSName).Create(XDTOTypeRow);
+				DataXDTORow = CommonFunctionsServer.XDTOFactoryObject(WSName).Create(XDTOTypeRow);
 				For Each Str In Row Do
 					If Str.Key = "__content" OR TypeOf(Str.Value) = Type("Map") Then
-						SetObject(DataXDTOrow, XDTOTypeRow, Str.Key, Str.Value, WSName);
+						SetObject(DataXDTORow, XDTOTypeRow, Str.Key, Str.Value, WSName);
 					EndIf;
 					If Str.Value = Undefined OR TypeOf(Str.Value) = Type("Map") Then
 						Continue;
@@ -142,26 +142,26 @@ Function PrepareObjectXDTO(ObjectStructure, TypeName, URI, WSName) Export
 					Else
 						XDTOTypeStructure = XDTOTypeRow.Properties.Get(StrKey).Type;
 						
-						If TypeOf(DataXDTOrow[StrKey]) =  Type("XDTOList") Then
+						If TypeOf(DataXDTORow[StrKey]) =  Type("XDTOList") Then
 							If TypeOf(Str.Value) = Type("Array") Then
 								For Each StrArray In Str.Value Do
-									DataXDTOrow[StrKey].Add(PrepareObjectXDTO(StrArray, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName));
+									DataXDTORow[StrKey].Add(PrepareObjectXDTO(StrArray, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName));
 								EndDo;	
 							Else
-								DataXDTOrow[StrKey].Add(PrepareObjectXDTO(Str.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName));
+								DataXDTORow[StrKey].Add(PrepareObjectXDTO(Str.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName));
 							EndIf;
 						ElsIf TypeOf(Str.Value) = Type("Structure") Then
-							DataXDTOrow[StrKey] = PrepareObjectXDTO(Str.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName);
+							DataXDTORow[StrKey] = PrepareObjectXDTO(Str.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName);
 						Else 
-							SetObject(DataXDTOrow, XDTOTypeStructure, StrKey, Str.Value, WSName);
+							SetObject(DataXDTORow, XDTOTypeStructure, StrKey, Str.Value, WSName);
 						EndIf;
 					EndIf;
 				EndDo;
 				If Not TypeOf(XDTOTypeRow) = Type("XDTOValueType") Then
 					If DataXDTO[ObjectData.Key] = Undefined Then
-						DataXDTO[ObjectData.Key] = DataXDTOrow;
+						DataXDTO[ObjectData.Key] = DataXDTORow;
 					Else
-						DataXDTO[ObjectData.Key].Add(DataXDTOrow);
+						DataXDTO[ObjectData.Key].Add(DataXDTORow);
 					EndIf;
 				EndIf;
 			EndDo; 

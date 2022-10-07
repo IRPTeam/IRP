@@ -78,7 +78,7 @@ Function GetCacheBeforeChange(Cache, DataPath, Rows = Undefined)
 	Segments = StrSplit(DataPath, ".");
 	If Segments.Count() = 2 Then
 		If Rows = Undefined Then
-			Raise StrTemplate("Error read data from cache by data path [%1] rows is Udefined", DataPath);
+			Raise StrTemplate("Error read data from cache by data path [%1] rows is Undefined", DataPath);
 		EndIf;
 		TableName  = Segments[0];
 		ColumnName = Segments[1];

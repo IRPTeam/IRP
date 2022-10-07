@@ -148,9 +148,9 @@ Function UseConsolidatedRetailSales(Branch, SalesReturnData = Undefined) Export
 	EndIf;
 	
 	IsSameDay = False;
-	SalesReturDate = ?(ValueIsFilled(SalesReturnData.Date), SalesReturnData.Date, CommonFunctionsServer.GetCurrentSessionDate());
+	SalesReturnDate = ?(ValueIsFilled(SalesReturnData.Date), SalesReturnData.Date, CommonFunctionsServer.GetCurrentSessionDate());
 	For Each SalesDocument In SalesReturnData.ArrayOfSalesDocuments Do
-		If BegOfDay(SalesDocument.Date) = BegOfDay(SalesReturDate) Then
+		If BegOfDay(SalesDocument.Date) = BegOfDay(SalesReturnDate) Then
 			IsSameDay = True;
 			Break;
 		EndIf;

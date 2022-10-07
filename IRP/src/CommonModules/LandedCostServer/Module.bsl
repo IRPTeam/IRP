@@ -120,12 +120,12 @@ EndFunction
 
 #EndRegion
 
-// Posting batch wice balance.
+// Posting batch wise balance.
 // 
 // Parameters:
 //  CalculationSettings - See GetCalculationSettings
 //  AddInfo - Undefined - Add info
-Procedure Posting_BatchWiceBalance(CalculationSettings, AddInfo = Undefined) Export
+Procedure Posting_BatchWiseBalance(CalculationSettings, AddInfo = Undefined) Export
 	LocksStorage = New Array();
 	If Not TransactionActive() Then
 		BeginTransaction(DataLockControlMode.Managed);

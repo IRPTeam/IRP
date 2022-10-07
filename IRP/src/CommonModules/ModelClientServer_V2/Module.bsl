@@ -1088,7 +1088,7 @@ Function ChangeConsolidatedRetailSalesByWorkstationForReturnExecute(Options) Exp
 	SalesReturnData = New Structure();
 	SalesReturnData.Insert("Date", Options.Date);
 	SalesReturnData.Insert("ArrayOfSalesDocuments", Options.SalesDocuments);
-	UseConsolidatedSales = DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Options.Branch, SalesReturnData);
+	UseConsolidatedSales = DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Options.Branch, SalesReturnData);
 	If Not UseConsolidatedSales Then
 		Return Undefined;
 	EndIf;

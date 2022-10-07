@@ -107,7 +107,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 	EndDo;
 	
-	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(ThisObject.Branch) Then
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(ThisObject.Branch) Then
 		SalesDocumentDates = New ValueTable();
 		SalesDocumentDates.Columns.Add("SalesDate");
 		
@@ -125,7 +125,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;	
 		
 		SalesReturnData = DocumentsClientServer.GetSalesReturnData(ThisObject);
-		If Not Cancel And DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(ThisObject.Branch, SalesReturnData) Then
+		If Not Cancel And DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(ThisObject.Branch, SalesReturnData) Then
 		
 			If Not ValueIsFilled(ThisObject.ConsolidatedRetailSales) And Not Cancel Then
 				Cancel = True;

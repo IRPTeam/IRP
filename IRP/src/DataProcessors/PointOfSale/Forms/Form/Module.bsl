@@ -29,7 +29,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 
 	EndIf;
 	
-	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Object.Branch) Then
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
 		FillCashInList();
 	EndIf;
 		
@@ -56,7 +56,7 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Object.Branch) Then
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
 		SessionIsOpened = ValueIsFilled(Object.ConsolidatedRetailSales);
 		Form.Items.OpenSession.Enabled = Not SessionIsOpened;
 		Form.Items.CloseSession.Enabled = SessionIsOpened;
@@ -562,7 +562,7 @@ Procedure NewTransaction()
 	Cancel = False;
 	DocRetailSalesReceiptClient.OnOpen(Object, ThisObject, Cancel);
 	
-	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Object.Branch) Then
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
 		DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
 	EndIf;
 	
@@ -579,7 +579,7 @@ Procedure NewTransactionAtServer()
 	Cancel = False;
 	DocRetailSalesReceiptServer.OnCreateAtServer(Object, ThisObject, Cancel, True);
 	
-	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Object.Branch) Then
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
 		Object.ConsolidatedRetailSales = DocConsolidatedRetailSalesServer.GetDocument(Object.Company, Object.Branch, ThisObject.Workstation);
 	EndIf;
 	
@@ -648,7 +648,7 @@ EndProcedure
 
 &AtClient
 Procedure EnabledPaymentButton()
-	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Object.Branch) Then
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
 		Items.qPayment.Enabled = Object.ItemList.Count() And ValueIsFilled(Object.ConsolidatedRetailSales);	
 	Else
 		Items.qPayment.Enabled = Object.ItemList.Count();

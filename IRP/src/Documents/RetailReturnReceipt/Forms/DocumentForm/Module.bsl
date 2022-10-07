@@ -92,7 +92,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 	
 	SalesReturnData = DocumentsClientServer.GetSalesReturnData(Object);
-	UseConsolidatedRetailSales = DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Object.Branch, SalesReturnData);
+	UseConsolidatedRetailSales = DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch, SalesReturnData);
 	
 	Form.Items.ConsolidatedRetailSales.ReadOnly = Not UseConsolidatedRetailSales;
 	

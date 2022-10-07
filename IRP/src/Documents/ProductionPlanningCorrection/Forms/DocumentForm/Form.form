@@ -2419,7 +2419,7 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Object.BillOfMaterials</segments>
+          <segments>Object.BillOfMaterialsList</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
         <items xsi:type="form:FormField">
@@ -2432,10 +2432,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.LineNumber</segments>
+              <segments>Object.BillOfMaterialsList.LineNumber</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.НомерСтроки</segments>
+              <segments>Object.BillOfMaterialsList.НомерСтроки</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -2487,10 +2487,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.Key</segments>
+              <segments>Object.BillOfMaterialsList.Key</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.Key</segments>
+              <segments>Object.BillOfMaterialsList.Key</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -2542,10 +2542,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.BusinessUnit</segments>
+              <segments>Object.BillOfMaterialsList.BusinessUnit</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.BusinessUnit</segments>
+              <segments>Object.BillOfMaterialsList.BusinessUnit</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -2597,10 +2597,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.ReleaseStore</segments>
+              <segments>Object.BillOfMaterialsList.ReleaseStore</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.ReleaseStore</segments>
+              <segments>Object.BillOfMaterialsList.ReleaseStore</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -2652,10 +2652,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.MaterialStore</segments>
+              <segments>Object.BillOfMaterialsList.MaterialStore</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.MaterialStore</segments>
+              <segments>Object.BillOfMaterialsList.MaterialStore</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -2707,10 +2707,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.SemiproductStore</segments>
+              <segments>Object.BillOfMaterialsList.SemiproductStore</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.SemiproductStore</segments>
+              <segments>Object.BillOfMaterialsList.SemiproductStore</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -2762,10 +2762,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.ItemKey</segments>
+              <segments>Object.BillOfMaterialsList.ItemKey</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.ItemKey</segments>
+              <segments>Object.BillOfMaterialsList.ItemKey</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -2817,10 +2817,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.IsProduct</segments>
+              <segments>Object.BillOfMaterialsList.IsProduct</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.IsProduct</segments>
+              <segments>Object.BillOfMaterialsList.IsProduct</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -2865,10 +2865,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.IsSemiproduct</segments>
+              <segments>Object.BillOfMaterialsList.IsSemiproduct</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.IsSemiproduct</segments>
+              <segments>Object.BillOfMaterialsList.IsSemiproduct</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -2913,10 +2913,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.IsMaterial</segments>
+              <segments>Object.BillOfMaterialsList.IsMaterial</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.IsMaterial</segments>
+              <segments>Object.BillOfMaterialsList.IsMaterial</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -2961,10 +2961,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.IsService</segments>
+              <segments>Object.BillOfMaterialsList.IsService</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.IsService</segments>
+              <segments>Object.BillOfMaterialsList.IsService</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -3009,10 +3009,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.InputID</segments>
+              <segments>Object.BillOfMaterialsList.InputID</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.InputID</segments>
+              <segments>Object.BillOfMaterialsList.InputID</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -3060,10 +3060,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.OutputID</segments>
+              <segments>Object.BillOfMaterialsList.OutputID</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.OutputID</segments>
+              <segments>Object.BillOfMaterialsList.OutputID</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -3111,10 +3111,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.UniqueID</segments>
+              <segments>Object.BillOfMaterialsList.UniqueID</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.UniqueID</segments>
+              <segments>Object.BillOfMaterialsList.UniqueID</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -3166,10 +3166,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.PlanningPeriod</segments>
+              <segments>Object.BillOfMaterialsList.PlanningPeriod</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.PlanningPeriod</segments>
+              <segments>Object.BillOfMaterialsList.PlanningPeriod</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -3221,10 +3221,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.BillOfMaterials</segments>
+              <segments>Object.BillOfMaterialsList.BillOfMaterials</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.BillOfMaterials</segments>
+              <segments>Object.BillOfMaterialsList.BillOfMaterials</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -3276,10 +3276,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.Unit</segments>
+              <segments>Object.BillOfMaterialsList.Unit</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.Unit</segments>
+              <segments>Object.BillOfMaterialsList.Unit</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -3331,10 +3331,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.BasisUnit</segments>
+              <segments>Object.BillOfMaterialsList.BasisUnit</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.BasisUnit</segments>
+              <segments>Object.BillOfMaterialsList.BasisUnit</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -3386,10 +3386,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.Quantity</segments>
+              <segments>Object.BillOfMaterialsList.Quantity</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.Quantity</segments>
+              <segments>Object.BillOfMaterialsList.Quantity</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -3440,7 +3440,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.BillOfMaterials.PlannedQuantity</segments>
+            <segments>Object.BillOfMaterialsList.PlannedQuantity</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsPlannedQuantityExtendedTooltip</name>
@@ -3491,10 +3491,10 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.BasisQuantity</segments>
+              <segments>Object.BillOfMaterialsList.BasisQuantity</segments>
             </paths>
             <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterials.BasisQuantity</segments>
+              <segments>Object.BillOfMaterialsList.BasisQuantity</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
@@ -3545,7 +3545,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.BillOfMaterials.PlannedBasisQuantity</segments>
+            <segments>Object.BillOfMaterialsList.PlannedBasisQuantity</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsPlannedBasisQuantityExtendedTooltip</name>

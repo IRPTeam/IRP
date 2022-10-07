@@ -3436,6 +3436,7 @@ EndFunction
 Function BindPlanningPeriod(Parameters)
 	DataPath = "PlanningPeriod";
 	Binding = New Structure();
+	Binding.Insert("ProductionPlanning", "StepBillOfMaterialsListCalculations");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -3476,7 +3477,8 @@ EndFunction
 Function BindBusinessUnit(Parameters)
 	DataPath = "BusinessUnit";
 	Binding = New Structure();
-	Binding.Insert("ProductionPlanning", "StepChangePlanningPeriodByDateAndBusinessUnit");
+	Binding.Insert("ProductionPlanning", "StepChangePlanningPeriodByDateAndBusinessUnit,
+	                                     |StepBillOfMaterialsListCalculations");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5672,6 +5674,7 @@ EndFunction
 Function BindProductionsUnit(Parameters)
 	DataPath = "Productions.Unit";
 	Binding = New Structure();
+	Binding.Insert("ProductionPlanning", "StepBillOfMaterialsListCalculations");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5722,6 +5725,7 @@ EndFunction
 Function BindProductionsQuantity(Parameters)
 	DataPath = "Productions.Quantity";
 	Binding = New Structure();
+	Binding.Insert("ProductionPlanning", "StepBillOfMaterialsListCalculations");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 

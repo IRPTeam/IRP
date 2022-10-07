@@ -1681,14 +1681,14 @@ Function BillOfMaterialsListCalculationsExecute(Options) Export
 	Result = New Structure();
 	Result.Insert("BillOfMaterialsList", New Array());
 	
-	Parameters = New Structure();
-	Parameters.Insert("Key"             , Options.Key);
-	Parameters.Insert("Company"         , Options.Company);
-	Parameters.Insert("BillOfMaterials" , Options.BillOfMaterials);
-	Parameters.Insert("PlanningPeriod"  , Options.PlanningPeriod);
-	Parameters.Insert("ItemKey"         , Options.ItemKey);
-	Parameters.Insert("Unit"            , Options.Unit);
-	Parameters.Insert("Quantity"        , Options.Quantity);
+	CalculationParameters = New Structure();
+	CalculationParameters.Insert("Key"             , Options.Key);
+	CalculationParameters.Insert("Company"         , Options.Company);
+	CalculationParameters.Insert("BillOfMaterials" , Options.BillOfMaterials);
+	CalculationParameters.Insert("PlanningPeriod"  , Options.PlanningPeriod);
+	CalculationParameters.Insert("ItemKey"         , Options.ItemKey);
+	CalculationParameters.Insert("Unit"            , Options.Unit);
+	CalculationParameters.Insert("Quantity"        , Options.Quantity);
 	
 	StoreCache = New Array();
 	For Each Row In Options.BillOfMaterialsList Do
@@ -1698,13 +1698,14 @@ Function BillOfMaterialsListCalculationsExecute(Options) Export
 		StoreCache.Add(Cache);
 	EndDo;
 	
-	BillOfMaterialRows = ManufacturingServer.FillBillOfMaterialsTable(Parameters);
+	BillOfMaterialRows = ManufacturingServer.FillBillOfMaterialsTable(CalculationParameters);
 	For Each Row In BillOfMaterialRows Do
 		NewRow = New Structure(Options.BillOfMaterialsListColumns);
 		FillPropertyValues(NewRow, Row);
 		Result.BillOfMaterialsList.Add(NewRow);
 		RestoreStoresFromCache(StoreCache, Row, NewRow);
 	EndDo;
+	Return Result;
 EndFunction
 
 Procedure RestoreStoresFromCache(StoreCache, Row, NewRow)

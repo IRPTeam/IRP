@@ -19,7 +19,7 @@ EndProcedure
 
 &AtClient
 Procedure ExpandTree() Export
-	MF_FormsClient.ExpandTree(Items.ProductionTree, ThisObject.ProductionTree.GetItems());
+	RowIDInfoClient.ExpandTree(Items.ProductionTree, ThisObject.ProductionTree.GetItems());
 EndProcedure
 
 &AtClient
@@ -144,6 +144,6 @@ EndProcedure
 
 &AtClient
 Procedure ShowRowKey(Command)
-	MF_FormsClient.ShowRowKey(ThisObject);
+	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
 	

@@ -1,7 +1,7 @@
 
 Function GetEditStoresParameters(CurrentData, Object) Export
 	Result = New Array();
-	BillOfMaterialRows = Object.BillOfMaterials.FindRows(New Structure("Key", CurrentData.Key));
+	BillOfMaterialRows = Object.BillOfMaterialsList.FindRows(New Structure("Key", CurrentData.Key));
 	For Each Row In BillOfMaterialRows Do
 		NewRow = New Structure();
 		NewRow.Insert("ItemKey"          , Row.ItemKey);
@@ -34,7 +34,7 @@ Procedure EditStoresContinue(Result, Parameters) Export
 		Filter.Insert("OutputID" , ResultRow.OutputID);
 		Filter.Insert("UniqueID" , ResultRow.UniqueID);
 		Filter.Insert("ItemKey"  , ResultRow.ItemKey);
-		BillOfMaterialRows = Parameters.Object.BillOfMaterials.FindRows(Filter);
+		BillOfMaterialRows = Parameters.Object.BillOfMaterialsList.FindRows(Filter);
 		For Each Row In BillOfMaterialRows Do
 			Row.MaterialStore    = ResultRow.MaterialStore;
 			Row.ReleaseStore     = ResultRow.ReleaseStore;

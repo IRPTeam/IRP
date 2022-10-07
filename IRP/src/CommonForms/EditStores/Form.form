@@ -1462,7 +1462,8 @@
       </title>
       <id>9</id>
       <valueType>
-        <types>UUID</types>
+        <types>String</types>
+        <stringQualifiers/>
       </valueType>
       <view>
         <common>true</common>
@@ -1479,7 +1480,8 @@
       </title>
       <id>10</id>
       <valueType>
-        <types>UUID</types>
+        <types>String</types>
+        <stringQualifiers/>
       </valueType>
       <view>
         <common>true</common>

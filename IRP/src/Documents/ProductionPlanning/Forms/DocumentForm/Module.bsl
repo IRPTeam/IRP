@@ -75,7 +75,6 @@ EndProcedure
 &AtClient
 Procedure DateOnChange(Item)
 	DocProductionPlanningClient.DateOnChange(Object, ThisObject, Item);
-	//MF_FormsClient.ChangePlanningPeriodWithQuestion(Object);
 EndProcedure
 
 #EndRegion
@@ -104,9 +103,6 @@ EndProcedure
 &AtClient
 Procedure BusinessUnitOnChange(Item)
 	DocProductionPlanningClient.BusinessUnitOnChange(Object, ThisObject, Item);
-	
-//	MF_FormsClient.ChangePlanningPeriodWithQuestion(Object);
-//	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -116,8 +112,6 @@ EndProcedure
 &AtClient
 Procedure PlanningPeriodOnChange(Item)
 	DocProductionPlanningClient.PlanningPeriodOnChange(Object, ThisObject, Item);
-	
-	//MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -151,23 +145,16 @@ EndProcedure
 &AtClient
 Procedure ProductionsItemOnChange(Item)
 	DocProductionPlanningClient.ProductionsItemOnChange(Object, ThisObject, Item);
-
-//	MF_FormsClient.ItemOnChange(Object, ThisObject, Item, "Productions");
-//	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
 EndProcedure
 
 &AtClient
 Procedure ProductionsItemStartChoice(Item, ChoiceData, StandardProcessing)
 	DocProductionPlanningClient.ProductionsItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-
-//	MF_FormsClient.ItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure ProductionsItemEditTextChange(Item, Text, StandardProcessing)
 	DocProductionPlanningClient.ProductionsItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-
-//	MF_FormsClient.ItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -177,9 +164,6 @@ EndProcedure
 &AtClient
 Procedure ProductionsItemKeyOnChange(Item)
 	DocProductionPlanningClient.ProductionsItemKeyOnChange(Object, ThisObject, Item);
-
-//	MF_FormsClient.ItemKeyOnChange(Object, ThisObject, Item, "Productions");
-//	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -189,8 +173,6 @@ EndProcedure
 &AtClient
 Procedure ProductionsBillOfMaterialsOnChange(Item)
 	DocProductionPlanningClient.ProductionsBillOfMaterialsOnChange(Object, ThisObject, Item);
-
-//	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -200,8 +182,6 @@ EndProcedure
 &AtClient
 Procedure ProductionsUnitOnChange(Item)
 	DocProductionPlanningClient.ProductionsUnitOnChange(Object, ThisObject, Item);
-
-//	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -211,8 +191,6 @@ EndProcedure
 &AtClient
 Procedure ProductionsQuantityOnChange(Item)
 	DocProductionPlanningClient.ProductionsQuantityOnChange(Object, ThisObject, Item);
-
-//	MF_FormsClient.FillBillOfMaterialTable(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -308,9 +286,3 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-
-
-
-
-
-

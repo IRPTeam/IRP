@@ -694,7 +694,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_115", NStr("en = 'Error while test connection'", Lang) + Chars.LF);
 	Strings.Insert("Error_116", NStr("en = 'Cannot unpost, document is closed by [ %1 ]'", Lang) + Chars.LF);
 	Strings.Insert("Error_117", NStr("en = 'Sales return when sales by different dates not support'", Lang) + Chars.LF);
-	Strings.Insert("Error_118", NStr("en = 'Cannot set deletion makr, document is closed by [ %1 ]'", Lang) + Chars.LF);
+	Strings.Insert("Error_118", NStr("en = 'Cannot set deletion mark, document is closed by [ %1 ]'", Lang) + Chars.LF);
 	Strings.Insert("Error_119", NStr("en = 'Error Eval code'", Lang) + Chars.LF);
 #EndRegion
 

@@ -700,12 +700,6 @@
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
-            <choiceParameterLinks>
-              <name>Filter.BusinessUnit</name>
-              <datapath xsi:type="form:DataPath">
-                <segments>Object.BusinessUnit</segments>
-              </datapath>
-            </choiceParameterLinks>
           </extInfo>
         </items>
         <items xsi:type="form:FormGroup">

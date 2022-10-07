@@ -226,6 +226,17 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.BusinessUnit</name>
+      <changeMode>DontChange</changeMode>
+      <field>Document.Production.Attribute.BusinessUnit</field>
+    </choiceParameterLinks>
+    <choiceParameters>
+      <name>Filter.Type</name>
+      <value xsi:type="core:ReferenceValue">
+        <value>Enum.PlanningPeriodTypes.EnumValue.Manufacturing</value>
+      </value>
+    </choiceParameters>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>

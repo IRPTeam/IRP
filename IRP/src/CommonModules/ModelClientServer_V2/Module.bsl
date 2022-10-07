@@ -1188,15 +1188,13 @@ EndFunction
 #Region CHANGE_PLANNING_PERIOD_BY_DATE_AND_BUSINESS_UNIT
 
 Function ChangePlanningPeriodByDateAndBusinessUnitOptions() Export
-	Return GetChainLinkOptions("Date, BusinessUnit, CurrentPlaningPeriod");
+	Return GetChainLinkOptions("Date, BusinessUnit");
 EndFunction
 
 Function ChangePlanningPeriodByDateAndBusinessUnitExecute(Options) Export
-	PlanningPeriod = ModelServer_V2.GetPlanningPeriod(Options.Date, Options.BusinessUnit);
-	If ValueIsFilled(PlanningPeriod) Then
-		Return PlanningPeriod;
-	EndIf;
-	Return Options.CurrentPlanningPeriod;
+	_Date = ?(ValueIsFilled(Options.Date), Options.Date, CurrentDate());
+	PlanningPeriod = ModelServer_V2.GetPlanningPeriod(_Date, Options.BusinessUnit);
+	Return PlanningPeriod;
 EndFunction
 
 #EndRegion

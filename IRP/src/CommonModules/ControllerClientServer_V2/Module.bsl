@@ -337,9 +337,6 @@ EndFunction
 
 #EndRegion
 
-// #optimization 2
-//#IF Client THEN
-
 Procedure FillPropertyFormByDefault(Form, DataPaths, Parameters) Export
 	ArrayOfDataPath = StrSplit(DataPaths, ",");
 	
@@ -366,9 +363,6 @@ Procedure FillPropertyFormByDefault(Form, DataPaths, Parameters) Export
 	EndIf;
 EndProcedure
 
-// #optimization 2
-//#ENDIF
-
 #Region API
 
 // attributes that available through API
@@ -392,6 +386,7 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	SettersMap.Insert("StoreSender"     , "SetStoreSender");
 	SettersMap.Insert("StoreReceiver"   , "SetStoreReceiver");
 	SettersMap.Insert("Workstation"     , "SetWorkstation");
+	SettersMap.Insert("BusinessUnit"    , "SetBusinessUnit");
 	
 	// PaymentList
 	SettersMap.Insert("PaymentList.Partner" , "SetPaymentListPartner");
@@ -3410,7 +3405,7 @@ Procedure SetPlanningPeriod(Parameters, Results) Export
 	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPlanningPeriodNotify");
 EndProcedure
 
-//// PlanningPeriod.Get
+// PlanningPeriod.Get
 //Function GetPlanningPeriod(Parameters)
 //	Return GetPropertyObject(Parameters, BindPlanningPeriod(Parameters).DataPath);
 //EndFunction
@@ -9141,11 +9136,13 @@ Function IsChangedProperty(Parameters, DataPath, _Key = Undefined) Export
 		If _Key = Undefined Then
 			Result.IsChanged = True;
 			Result.NewValue  = Changes[0].NewValue;
+			Result.OldValue  = Changes[0].OldValue;
 		Else
 			For Each Row In Changes Do
 				If Row.Key = _Key Then
 					Result.IsChanged = True;
 					Result.NewValue  = Row.NewValue;
+					Result.OldValue  = Row.OldValue;
 				EndIf;
 			EndDo;
 		EndIf;

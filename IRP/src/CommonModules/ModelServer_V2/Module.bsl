@@ -155,7 +155,7 @@ Function GetPlanningPeriod(Date, BusinessUnit) Export
 	|	Catalog.PlanningPeriods.BusinessUnits AS TableBusinessUnits
 	|		INNER JOIN Catalog.PlanningPeriods AS Table
 	|		ON Table.Ref = TableBusinessUnits.Ref
-	|		AND &Date BETWEEN Table.StartDate AND Table.EndDate
+	|		AND &Date BETWEEN Table.BeginDate AND Table.EndDate
 	|		AND NOT Table.DeletionMark
 	|		AND TableBusinessUnits.BusinessUnit = &BusinessUnit";
 	Query.SetParameter("Date", Date);

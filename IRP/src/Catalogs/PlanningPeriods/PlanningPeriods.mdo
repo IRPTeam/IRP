@@ -50,7 +50,7 @@
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
   <codeLength>12</codeLength>
-  <descriptionLength>25</descriptionLength>
+  <descriptionLength>50</descriptionLength>
   <codeAllowedLength>Variable</codeAllowedLength>
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>
@@ -60,6 +60,7 @@
   <defaultObjectForm>Catalog.PlanningPeriods.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.PlanningPeriods.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.PlanningPeriods.Form.ChoiceForm</defaultChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="91cc0df3-c756-4573-8f0c-4f9f844fb721">
     <name>BeginDate</name>
     <synonym>
@@ -92,6 +93,22 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="c10de959-bc44-4981-aed6-5a7f6ee7d405">
+    <name>Type</name>
+    <synonym>
+      <key>en</key>
+      <value>Type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.PlanningPeriodTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>

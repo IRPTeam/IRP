@@ -467,11 +467,13 @@ Procedure __tmp_ProductionPlanning_OnChainComplete(Parameters)
 	If (Parameters.EventCaller = "BusinessUnitOnUserChange"
 		Or Parameters.EventCaller = "DateOnUserChange") Then
 		
-		If IsChangedProperty(Parameters, "PlanningPeriod").IsChanged Then	
+		ChangedPropertyInfo = IsChangedProperty(Parameters, "PlanningPeriod");
+		
+		If ChangedPropertyInfo.IsChanged And ValueIsFilled(ChangedPropertyInfo.OldValue) Then	
 			
 			NotifyParameters = New Structure("Parameters", Parameters);
 			ShowQueryBox(New NotifyDescription("__tmp_ProductionPlanning_BusinessUnitOrDateOnUserChangeContinue", ThisObject, NotifyParameters), 
-					R().QuestionToUser_015, QuestionDialogMode.YesNo);
+					R().QuestionToUser_024, QuestionDialogMode.YesNo);
 		Else
 			__tmp_ProductionPlanning_CommitChanges(Parameters);
 		EndIf;		

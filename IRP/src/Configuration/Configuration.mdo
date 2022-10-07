@@ -837,6 +837,7 @@
   <enums>Enum.ProductionPlanningTypes</enums>
   <enums>Enum.ProductionTypes</enums>
   <enums>Enum.MaterialTypes</enums>
+  <enums>Enum.PlanningPeriodTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

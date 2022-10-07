@@ -2,20 +2,19 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
-		If Parameters.Property("FillingValues") And
-			Parameters.FillingValues.Property("BusinessUnit")And
-			ValueIsFilled(Parameters.FillingValues.BusinessUnit) Then
-			Object.BusinessUnits.Add().BusinessUnit = Parameters.FillingValues.BusinessUnit;
-			Items.ProductionPlanningExists.Visible = False;
-		EndIf;
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
-
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtClient
@@ -40,12 +39,17 @@ Procedure OnReadAtServer(CurrentObject)
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
-		ThisObject.ReadOnly = True;
 		ThisObject.ProductionPlanningExists = QuerySelection.Ref;
-		Items.ProductionPlanningExists.Visible =  True;
-	Else
-		Items.ProductionPlanningExists.Visible = False;
 	EndIf;
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure TypeOnChange(Item)
+	If Object.Type = PredefinedValue("Enum.PlanningPeriodTypes.Financial") Then
+		Object.BusinessUnits.Clear();
+	EndIf;	
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -53,6 +57,20 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form)
+	IsFilled_ProductionPlanningExists = ValueIsFilled(Form.ProductionPlanningExists);
+	
+	Form.ReadOnly = IsFilled_ProductionPlanningExists;
+	Form.Items.ProductionPlanningExists.Visible = IsFilled_ProductionPlanningExists;
+	Form.Items.BusinessUnits.Visible = Object.Type = PredefinedValue("Enum.PlanningPeriodTypes.Manufacturing");
 EndProcedure
 
 &AtClient

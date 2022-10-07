@@ -18,7 +18,7 @@
 //  * CLV_1 - String - All
 //  * Default_001 - String - pcs
 //  * Default_002 - String - Customer standard term
-//  * Default_003 - String - Vendor stabdard term
+//  * Default_003 - String - Vendor standard term
 //  * Default_004 - String - Customer price type
 //  * Default_005 - String - Vendor price type
 //  * Default_006 - String - Partner term currency type
@@ -896,7 +896,7 @@ Function Strings(Lang) Export
 #Region Defaults
 	Strings.Insert("Default_001", NStr("en = 'pcs'", Lang));
 	Strings.Insert("Default_002", NStr("en = 'Customer standard term'", Lang));
-	Strings.Insert("Default_003", NStr("en = 'Vendor stabdard term'", Lang));
+	Strings.Insert("Default_003", NStr("en = 'Vendor standard term'", Lang));
 	Strings.Insert("Default_004", NStr("en = 'Customer price type'", Lang));
 	Strings.Insert("Default_005", NStr("en = 'Vendor price type'", Lang));
 	Strings.Insert("Default_006", NStr("en = 'Partner term currency type'", Lang));

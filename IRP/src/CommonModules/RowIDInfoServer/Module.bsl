@@ -169,7 +169,7 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 		Return;
 	EndIf;
 	
-	ItemList_InDocument = GetRowIDwithLineNumbers(Source);	
+	ItemList_InDocument = GetRowIDWithLineNumbers(Source);	
 	Records_InDocument = GetRecordsInDocument(Source).TM1010B_RowIDMovements;
 	Records_Exists = AccumulationRegisters.TM1010B_RowIDMovements.GetExistsRecords(Source.Ref);
 	
@@ -222,7 +222,7 @@ Procedure UndoPosting_RowIDUndoPosting(Source, Cancel) Export
 	
 	Records_Exists = AccumulationRegisters.TM1010B_RowIDMovements.GetExistsRecords(Source.Ref);
 	Records_InDocument  = GetRecordsInDocument(Source).TM1010B_RowIDMovements;
-	ItemList_InDocument = GetRowIDwithLineNumbers(Source);
+	ItemList_InDocument = GetRowIDWithLineNumbers(Source);
 	
 	Unposting = True;
 	Source.RegisterRecords.TM1010B_RowIDMovements.Clear();
@@ -561,7 +561,7 @@ Function GetItemListInDocument_RRR(Source)
 	Return QueryTable;
 EndFunction	
 
-Function GetRowIDwithLineNumbers(Source)
+Function GetRowIDWithLineNumbers(Source)
 	Query = New Query();
 	Query.Text = 
 	"SELECT

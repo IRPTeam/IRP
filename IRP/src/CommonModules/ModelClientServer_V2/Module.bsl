@@ -254,6 +254,7 @@ Function GetChain()
 	
 	Chain.Insert("ChangePlanningPeriodByDateAndBusinessUnit" , GetChainLink("ChangePlanningPeriodByDateAndBusinessUnitExecute"));
 	Chain.Insert("ChangeProductionPlanningByPlanningPeriod"  , GetChainLink("ChangeProductionPlanningByPlanningPeriodExecute"));
+	Chain.Insert("ChangeCurrentQuantityInProductions"        , GetChainLink("ChangeCurrentQuantityInProductionsExecute"));
 	
 	Chain.Insert("BillOfMaterialsListCalculations"  , GetChainLink("BillOfMaterialsListCalculationsExecute"));
 	
@@ -1226,6 +1227,32 @@ Function ChangeBillOfMaterialsByItemKeyExecute(Options) Export
 		Return Options.CurrentBillOfMaterials;
 	EndIf;
 	Return ModelServer_V2.GetBillOfMaterialsByItemKey(Options.ItemKey);
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_CURRENT_QUANTITY_IN_PRODUCTIONS
+
+Function ChangeCurrentQuantityInProductionsOptions() Export
+	Return GetChainLinkOptions("Company, ProductionPlanning, PlanningPeriod, BillOfMaterials, ItemKey, Unit");
+EndFunction
+
+Function ChangeCurrentQuantityInProductionsExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("Unit", Options.Unit);
+	Result.Insert("CurrentQuantity", 0);
+	
+	CurrentQuantityInfo = ModelServer_V2.GetCurrentQuantity(Options.Company,
+											 Options.ProductionPlanning, 
+											 Options.PlanningPeriod, 
+											 Options.BillOfMaterials,
+											 Options.ItemKey);
+											 
+	If ValueIsFilled(CurrentQuantityInfo.BasisQuantity) Then
+		Result.Unit = CurrentQuantityInfo.BasisUnit;
+	EndIf;
+	Result.CurrentQuantity = CurrentQuantityInfo.BasisQuantity;
+	Return Result;	
 EndFunction
 
 #EndRegion

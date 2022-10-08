@@ -1989,6 +1989,7 @@ Function BindDate(Parameters)
 		|StepChangeTaxRate_WithoutAgreement");
 		
 	Binding.Insert("ProductionPlanning", "StepChangePlanningPeriodByDateAndBusinessUnit");
+	Binding.Insert("ProductionPlanningCorrection", "StepChangePlanningPeriodByDateAndBusinessUnit");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -2132,6 +2133,10 @@ Function BindCompany(Parameters)
 	
 	Binding.Insert("StockAdjustmentAsWriteOff",
 		"StepChangeLandedCostCurrencyByCompany");
+	
+	Binding.Insert("ProductionPlanningCorrection",
+		"StepChangeProductionPlanningByPlanningPeriod,
+		|StepChangeCurrentQuantityInProductions");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -3412,6 +3417,46 @@ EndFunction
 
 #EndRegion
 
+#Region PRODUCTION_PLANNING
+
+// ProductionPlanning.Set
+Procedure SetProductionPlanning(Parameters, Results) Export
+	Binding = BindProductionPlanning(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ProductionPlanning.Get
+Function GetProductionPlanning(Parameters)
+	Return GetPropertyObject(Parameters, BindProductionPlanning(Parameters).DataPath);
+EndFunction
+
+// ProductionPlanning.Bind
+Function BindProductionPlanning(Parameters)
+	DataPath = "ProductionPlanning";
+	Binding = New Structure();
+	
+	Binding.Insert("ProductionPlanningCorrection",
+		"StepChangeCurrentQuantityInProductions");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ProductionPlanning.ChangeProductionPlanningByPlanningPeriod.Step
+Procedure StepChangeProductionPlanningByPlanningPeriod(Parameters, Chain) Export
+	Chain.ChangeProductionPlanningByPlanningPeriod.Enable = True;
+	Chain.ChangeProductionPlanningByPlanningPeriod.Setter = "SetProductionPlanning";
+	Options = ModelClientServer_V2.ChangeProductionPlanningByPlanningPeriodOptions();
+	Options.Company        = GetCompany(Parameters);
+	Options.BusinessUnit   = GetBusinessUnit(Parameters);
+	Options.PlanningPeriod = GetPlanningPeriod(Parameters);
+	Options.CurrentProductionPlanning = GetProductionPlanning(Parameters);
+	Options.DontExecuteIfExecutedBefore = True;
+	Options.StepName = "StepChangeProductionPlanningByPlanningPeriod";
+	Chain.ChangeProductionPlanningByPlanningPeriod.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
 #Region PLANNING_PERIOD
 
 // PlanningPeriod.OnChange
@@ -3436,7 +3481,14 @@ EndFunction
 Function BindPlanningPeriod(Parameters)
 	DataPath = "PlanningPeriod";
 	Binding = New Structure();
-	Binding.Insert("ProductionPlanning", "StepBillOfMaterialsListCalculations");
+	
+	Binding.Insert("ProductionPlanning",
+		"StepBillOfMaterialsListCalculations");
+	
+	Binding.Insert("ProductionPlanningCorrection",
+		"StepChangeProductionPlanningByPlanningPeriod,
+		|StepChangeCurrentQuantityInProductions");
+		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -3477,8 +3529,14 @@ EndFunction
 Function BindBusinessUnit(Parameters)
 	DataPath = "BusinessUnit";
 	Binding = New Structure();
-	Binding.Insert("ProductionPlanning", "StepChangePlanningPeriodByDateAndBusinessUnit,
-	                                     |StepBillOfMaterialsListCalculations");
+	Binding.Insert("ProductionPlanning", 
+		"StepChangePlanningPeriodByDateAndBusinessUnit,
+		|StepBillOfMaterialsListCalculations");
+	                                     
+	Binding.Insert("ProductionPlanningCorrection", 
+		"StepChangePlanningPeriodByDateAndBusinessUnit,
+		|StepChangeProductionPlanningByPlanningPeriod");
+		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5629,9 +5687,16 @@ EndFunction
 Function BindProductionsItemKey(Parameters)
 	DataPath = "Productions.ItemKey";
 	Binding = New Structure();
-	Binding.Insert("ProductionPlanning"           , "StepProductionsChangeUnitByItemKey,
-	                                                |StepProductionsChangeBillOfMaterialsByItemKey");
-	Binding.Insert("ProductionPlanningCorrection" , "StepProductionsChangeUnitByItemKey");
+	
+	Binding.Insert("ProductionPlanning", 
+		"StepProductionsChangeUnitByItemKey,
+		|StepProductionsChangeBillOfMaterialsByItemKey");
+		
+	Binding.Insert("ProductionPlanningCorrection",
+		"StepProductionsChangeUnitByItemKey,
+		|StepProductionsChangeBillOfMaterialsByItemKey,
+		|StepChangeCurrentQuantityInProductions");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5674,7 +5739,13 @@ EndFunction
 Function BindProductionsUnit(Parameters)
 	DataPath = "Productions.Unit";
 	Binding = New Structure();
-	Binding.Insert("ProductionPlanning", "StepBillOfMaterialsListCalculations");
+	
+	Binding.Insert("ProductionPlanning",
+		"StepBillOfMaterialsListCalculations");
+	
+	Binding.Insert("ProductionPlanningCorrection",
+		"StepChangeCurrentQuantityInProductions");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5725,7 +5796,13 @@ EndFunction
 Function BindProductionsQuantity(Parameters)
 	DataPath = "Productions.Quantity";
 	Binding = New Structure();
-	Binding.Insert("ProductionPlanning", "StepBillOfMaterialsListCalculations");
+	
+	Binding.Insert("ProductionPlanning",
+		"StepBillOfMaterialsListCalculations");
+	
+	Binding.Insert("ProductionPlanningCorrection",
+		"StepChangeCurrentQuantityInProductions");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5744,6 +5821,12 @@ EndProcedure
 
 #Region PRODUCTIONS_BILL_OF_MATERIALS
 
+// Productions.BillOfMaterials.OnChange
+Procedure ProductionsBillOfMaterialsOnChange(Parameters) Export
+	Binding = BindProductionsBillOfMaterials(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
 // Productions.BillOfMaterials.Set
 Procedure SetProductionsBillOfMaterials(Parameters, Results) Export
 	Binding = BindProductionsBillOfMaterials(Parameters);
@@ -5759,7 +5842,13 @@ EndFunction
 Function BindProductionsBillOfMaterials(Parameters)
 	DataPath = "Productions.BillOfMaterials";
 	Binding = New Structure();
-	Binding.Insert("ProductionPlanning", "StepBillOfMaterialsListCalculations");
+	
+	Binding.Insert("ProductionPlanning",
+		"StepBillOfMaterialsListCalculations");
+	
+	Binding.Insert("ProductionPlanningCorrection",
+		"StepChangeCurrentQuantityInProductions");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5774,6 +5863,48 @@ Procedure StepProductionsChangeBillOfMaterialsByItemKey(Parameters, Chain) Expor
 		Options.Key = Row.Key;
 		Options.StepName = "StepProductionsChangeBillOfMaterialsByItemKey";
 		Chain.ChangeBillOfMaterialsByItemKey.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTIONS_CURRENT_QUANTITY
+
+// Productions.CurrentQuantity.MultiSet
+Procedure MultiSetProductionsCurrentQuantity(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Unit"            , BindProductionsUnit(Parameters));
+	ResourceToBinding.Insert("CurrentQuantity" , BindProductionsCurrentQuantity(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+// Productions.BillOfMaterials.Bind
+Function BindProductionsCurrentQuantity(Parameters)
+	DataPath = "Productions.CurrentQuantity";
+	Binding = New Structure();
+	
+//	Binding.Insert("ProductionPlanning",
+//		"StepBillOfMaterialsListCalculations");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Productions.CurrentQuantity.ChangeCurrentQuantityInProductions.Step
+Procedure StepChangeCurrentQuantityInProductions(Parameters, Chain) Export
+	Chain.ChangeCurrentQuantityInProductions.Enable = True;
+	Chain.ChangeCurrentQuantityInProductions.Setter = "MultiSetProductionsCurrentQuantity";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeCurrentQuantityInProductionsOptions();
+		Options.Company             = GetCompany(Parameters);
+		Options.ProductionPlanning  = GetProductionPlanning(Parameters);
+		Options.PlanningPeriod      = GetPlanningPeriod(Parameters);
+		Options.BillOfMaterials     = GetProductionsBillOfMaterials(Parameters, Row.Key);
+		Options.ItemKey             = GetProductionsItemKey(Parameters, Row.Key);
+		Options.Unit                = GetProductionsUnit(Parameters, Row.Key);
+		Options.DontExecuteIfExecutedBefore = True;
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangeCurrentQuantityInProductions";
+		Chain.ChangeCurrentQuantityInProductions.Options.Add(Options);
 	EndDo;
 EndProcedure
 

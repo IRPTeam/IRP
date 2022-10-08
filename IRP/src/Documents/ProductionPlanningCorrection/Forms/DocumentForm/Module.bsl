@@ -82,92 +82,164 @@ EndProcedure
 
 #EndRegion
 
+#Region _DATE
 
 &AtClient
-Procedure DescriptionClick(Item, StandardProcessing)
-	DocumentsClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
-EndProcedure
-
-#Region Productions
-
-&AtClient
-Procedure ProductionsOnChange(Item)
-	MF_FormsClient.FillRowIDInTable(Object, ThisObject, "Productions");
-EndProcedure
-
-&AtClient
-Procedure ProductionsAfterDeleteRow(Item)
-	MF_FormsClient.ClearDependedTables(Object, ThisObject, "Productions", "BillOfMaterials");
-EndProcedure
-
-&AtClient
-Procedure ProductionsItemStartChoice(Item, ChoiceData, StandardProcessing)
-	MF_FormsClient.ItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ProductionsItemEditTextChange(Item, Text, StandardProcessing)
-	MF_FormsClient.ItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ProductionsItemOnChange(Item)
-	MF_FormsClient.ItemOnChange(Object, ThisObject, Item, "Productions");
-	UpdateCurrentQuantityByRow();
-EndProcedure
-
-&AtClient
-Procedure ProductionsUnitOnChange(Item)
-	UpdateCurrentQuantityByRow();
-EndProcedure
-
-&AtClient
-Procedure ProductionsQuantityOnChange(Item)
-	UpdateCurrentQuantityByRow();
-EndProcedure
-
-&AtClient
-Procedure ProductionsItemKeyOnChange(Item)
-	MF_FormsClient.ItemKeyOnChange(Object, ThisObject, Item, "Productions");
-	UpdateCurrentQuantityByRow();
-EndProcedure
-
-&AtClient
-Procedure ProductionsBillOfMaterialsOnChange(Item)
-	UpdateCurrentQuantityByRow();
-EndProcedure
-
-&AtClient
-Procedure ProductionsBillOfMaterialsStartChoice(Item, ChoiceData, StandardProcessing)
-	StandardProcessing = False;
-	CurrentData = Items.Productions.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	Filters = New Array();
-	Filters.Add(DocumentsClientServer.CreateFilterItem("Item"    , CurrentData.Item, DataCompositionComparisonType.Equal));
-	Filters.Add(DocumentsClientServer.CreateFilterItem("ItemKey" , CurrentData.ItemKey, DataCompositionComparisonType.Equal));
-	
-	MF_FormsClient.BillOfMaterialsStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, Filters);
-EndProcedure
-
-&AtClient
-Procedure ProductionsBillOfMaterialsEditTextChange(Item, Text, StandardProcessing)
-	StandardProcessing = False;
-	CurrentData = Items.Productions.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	Filters = New Array();
-	Filters.Add(DocumentsClientServer.CreateFilterItem("Item"    , CurrentData.Item, DataCompositionComparisonType.Equal));
-	Filters.Add(DocumentsClientServer.CreateFilterItem("ItemKey" , CurrentData.ItemKey, DataCompositionComparisonType.Equal));
-	
-	MF_FormsClient.BillOfMaterialsEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, Filters);
+Procedure DateOnChange(Item)
+	DocProductionPlanningCorrectionClient.DateOnChange(Object, ThisObject, Item);
+	//UpdateCurrentQuantityByTable();
 EndProcedure
 
 #EndRegion
 
-#Region GroupTitleDecorations
+#Region COMPANY
+
+&AtClient
+Procedure CompanyOnChange(Item)
+	DocProductionPlanningCorrectionClient.CompanyOnChange(Object, ThisObject, Item);
+	//UpdateCurrentQuantityByTable();
+EndProcedure
+
+&AtClient
+Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
+	DocProductionPlanningCorrectionClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
+	DocProductionPlanningCorrectionClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region BUSINESS_UNIT
+
+&AtClient
+Procedure BusinessUnitOnChange(Item)
+	DocProductionPlanningCorrectionClient.BusinessUnitOnChange(Object, ThisObject, Item);
+	//UpdateCurrentQuantityByTable();
+EndProcedure
+
+#EndRegion
+
+#Region PLANNING_PERIOD
+
+&AtClient
+Procedure PlanningPeriodOnChange(Item)
+	DocProductionPlanningCorrectionClient.PlanningPeriodOnChange(Object, ThisObject, Item);
+	//UpdateCurrentQuantityByTable();
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTIONS
+
+&AtClient
+Procedure ProductionsSelection(Item, RowSelected, Field, StandardProcessing)
+	DocProductionPlanningCorrectionClient.ProductionsSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ProductionsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocProductionPlanningCorrectionClient.ProductionsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure ProductionsBeforeDeleteRow(Item, Cancel)
+	DocProductionPlanningCorrectionClient.ProductionsBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+EndProcedure
+
+&AtClient
+Procedure ProductionsAfterDeleteRow(Item)
+	DocProductionPlanningCorrectionClient.ProductionsAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+#Region PRODUCTIONS_COLUMNS
+
+#Region _ITEM
+
+&AtClient
+Procedure ProductionsItemOnChange(Item)
+	DocProductionPlanningCorrectionClient.ProductionsItemOnChange(Object, ThisObject, Item);
+//	UpdateCurrentQuantityByRow();
+EndProcedure
+
+&AtClient
+Procedure ProductionsItemStartChoice(Item, ChoiceData, StandardProcessing)
+	DocProductionPlanningCorrectionClient.ProductionsItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ProductionsItemEditTextChange(Item, Text, StandardProcessing)
+	DocProductionPlanningCorrectionClient.ProductionsItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY
+
+&AtClient
+Procedure ProductionsItemKeyOnChange(Item)
+	DocProductionPlanningCorrectionClient.ProductionsItemKeyOnChange(Object, ThisObject, Item);
+//	UpdateCurrentQuantityByRow();
+EndProcedure
+
+#EndRegion
+
+#Region BILL_OF_MATERIALS
+
+&AtClient
+Procedure ProductionsBillOfMaterialsOnChange(Item)
+	DocProductionPlanningCorrectionClient.ProductionsBillOfMaterialsOnChange(Object, ThisObject, Item);
+//	UpdateCurrentQuantityByRow();
+EndProcedure
+
+#EndRegion
+
+#Region UNIT
+
+&AtClient
+Procedure ProductionsUnitOnChange(Item)
+	DocProductionPlanningCorrectionClient.ProductionsUnitOnChange(Object, ThisObject, Item);
+//	UpdateCurrentQuantityByRow();
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY
+
+&AtClient
+Procedure ProductionsQuantityOnChange(Item)
+	DocProductionPlanningCorrectionClient.ProductionsQuantityOnChange(Object, ThisObject, Item);
+//	UpdateCurrentQuantityByRow();
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region SERVICE
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocProductionPlanningCorrectionClient);
+	Str.Insert("Server", DocProductionPlanningCorrectionServer);
+	Return Str;
+EndFunction
+
+#Region DESCRIPTION
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TITLE_DECORATIONS
 
 &AtClient
 Procedure GroupTitleCollapsedClick(Item)
@@ -181,29 +253,70 @@ EndProcedure
 
 #EndRegion
 
+#Region ADD_ATTRIBUTES
+
 &AtClient
-Procedure CompanyOnChange(Item)
-	MF_FormsClient.SetDocumentProductionPlanning(Object);
-	UpdateCurrentQuantityByTable();
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControl()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion
+
+#Region EXTERNAL_COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+#EndRegion
+
+#Region COMMANDS
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
 
 &AtClient
-Procedure BusinessUnitOnChange(Item)
-	MF_FormsClient.ChangePlanningPeriodWithQuestion(Object);
-	UpdateCurrentQuantityByTable();
+Procedure EditStores(Command)
+	CurrentData = Items.Productions.CurrentData;
+	If CurrentData = Undefined Then 
+		Return;
+	EndIf;
+	FormParameters = ManufacturingClient.GetEditStoresParameters(CurrentData, Object);
+	FormParameters.Insert("ReadOnlyStores", ValueIsFilled(CurrentData.CurrentQuantity) Or ThisObject.ReadOnly);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditStoresContinue", ManufacturingClient, NotifyParameters);
+	OpenForm("CommonForm.EditStores", FormParameters, ThisObject, , , , Notify , FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtClient
-Procedure PlanningPeriodOnChange(Item)
-	MF_FormsClient.SetDocumentProductionPlanning(Object);
-	UpdateCurrentQuantityByTable();
+Procedure StatusHistoryClick(Item)
+	ObjectStatusesClient.OpenHistoryByStatus(Object.Ref, ThisObject);
 EndProcedure
 
 &AtClient
-Procedure DateOnChange(Item)
-	MF_FormsClient.ChangePlanningPeriodWithQuestion(Object);
+Procedure UpdateCurrentQuantity(Command)
 	UpdateCurrentQuantityByTable();
 EndProcedure
+
+#EndRegion
+
+#EndRegion
 
 &AtServer
 Procedure SetCurrentQuantityError(IsError)
@@ -234,7 +347,7 @@ Procedure UpdateCurrentQuantityByRow()
 		CurrentData.Unit = CurrentQuantityInfo.BasisUnit;
 	EndIf;
 	CurrentData.CurrentQuantity = CurrentQuantityInfo.BasisQuantity;
-	MF_FormsClient.FillBillOfMaterialTableCorrection(Object, ThisObject, CurrentData);
+//	MF_FormsClient.FillBillOfMaterialTableCorrection(Object, ThisObject, CurrentData);
 EndProcedure
 
 &AtServer
@@ -249,16 +362,10 @@ Procedure UpdateCurrentQuantityByTable()
 			Row.Unit = CurrentQuantityInfo.BasisUnit;
 		EndIf;
 		Row.CurrentQuantity = CurrentQuantityInfo.BasisQuantity;
-		MF_FormsClientServer.FillBillOfMaterialTableCorrection(Object, Row);
+//		MF_FormsClientServer.FillBillOfMaterialTableCorrection(Object, Row);
 	EndDo;
 	SetCurrentQuantityError(False);
 EndProcedure
-
-&AtClient
-Procedure ShowRowKey(Command)
-	MF_FormsClient.ShowRowKey(ThisObject);
-EndProcedure
-
 
 &AtServer
 Function IsCurrentQuantityActual()
@@ -281,50 +388,18 @@ EndFunction
 
 &AtServerNoContext
 Function GetCurrentQuantity(Company, ProductionPlanning, PlanningPeriod, BillOfMaterials, ItemKey)
-	Return Documents.MF_ProductionPlanningCorrection.GetCurrentQuantity(Company,
-																		ProductionPlanning,
-																		PlanningPeriod,  
-	                                                                    BillOfMaterials,
-	                                                                    ItemKey);
+	Return Documents.ProductionPlanningCorrection.GetCurrentQuantity(Company,
+																	 ProductionPlanning,
+																	 PlanningPeriod,  
+	                                                                 BillOfMaterials,
+	                                                                 ItemKey);
 EndFunction
 
-&AtClient
-Procedure StatusHistoryClick(Item)
-	MF_ObjectStatusesClient.OpenHistoryByStatus(Object.Ref, ThisObject);
-EndProcedure
 
-&AtClient
-Procedure UpdateCurrentQuantity(Command)
-	UpdateCurrentQuantityByTable();
-EndProcedure
 
-&AtClient
-Procedure ProductionsSelection(Item, RowSelected, Field, StandardProcessing)
-	If Not ThisObject.ReadOnly Then
-		Return;
-	EndIf;
-	CurrentData = Items.Productions.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	MF_FormsClient.OpenObjectForm(Field, "ProductionsItem", CurrentData.Item, StandardProcessing);
-	MF_FormsClient.OpenObjectForm(Field, "ProductionsItemKey", CurrentData.ItemKey, StandardProcessing);
-	MF_FormsClient.OpenObjectForm(Field, "ProductionsUnit", CurrentData.Unit, StandardProcessing);
-	MF_FormsClient.OpenObjectForm(Field, "ProductionsBillOfMaterials", CurrentData.BillOfMaterials, StandardProcessing);
-EndProcedure
 
-&AtClient
-Procedure EditStores(Command)
-		CurrentData = Items.Productions.CurrentData;
-	If CurrentData = Undefined Then 
-		Return;
-	EndIf;
-	FormParameters = MF_FormsClient.GetEditStoresParameters(CurrentData, Object);
-	FormParameters.Insert("ReadOnlyStores", ValueIsFilled(CurrentData.CurrentQuantity) Or ThisObject.ReadOnly);
-	NotifyParameters = New Structure();
-	NotifyParameters.Insert("Object", Object);
-	NotifyParameters.Insert("Form"  , ThisObject);
-	Notify = New NotifyDescription("EditStoresContinue", MF_FormsClient, NotifyParameters);
-	OpenForm("CommonForm.MF_EditStores", FormParameters, ThisObject, , , , Notify , FormWindowOpeningMode.LockOwnerWindow);
-EndProcedure
+
+
+
+
 

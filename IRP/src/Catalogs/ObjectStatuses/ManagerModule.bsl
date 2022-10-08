@@ -84,7 +84,7 @@ Function GetChoiceDataTable_ByUser(Parameters)
 	|		AND ObjectStatuses.Parent = &Parent
 	|		AND CASE
 	|			WHEN &Filter_SearchString
-	|				THEN ObjectStatuses.Description LIKE ""%"" + &SearchString + ""%""
+	|				THEN ObjectStatuses.Description_en LIKE ""%"" + &SearchString + ""%""
 	|			ELSE TRUE
 	|		END
 	|		AND ObjectStatusesUsers.User = &User";

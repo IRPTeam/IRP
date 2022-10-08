@@ -265,7 +265,8 @@ Procedure OnChainComplete(Parameters) Export
 		Return;
 	EndIf;
 	
-	If Parameters.ObjectMetadataInfo.MetadataName = "ProductionPlanning" Then
+	If Parameters.ObjectMetadataInfo.MetadataName = "ProductionPlanning"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ProductionPlanningCorrection" Then
 		__tmp_ProductionPlanning_OnChainComplete(Parameters);
 		Return;
 	EndIf;

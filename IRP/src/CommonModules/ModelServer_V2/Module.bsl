@@ -175,3 +175,11 @@ Function GetDocumentProductionPlanning(Company, BusinessUnit, PlanningPeriod) Ex
 	Return Documents.ProductionPlanning.EmptyRef();
 EndFunction
 	
+Function GetCurrentQuantity(Company, ProductionPlanning, PlanningPeriod, BillOfMaterials, ItemKey) Export
+	Return Documents.ProductionPlanningCorrection.GetCurrentQuantity(Company,
+																		ProductionPlanning,
+																		PlanningPeriod,  
+	                                                                    BillOfMaterials,
+	                                                                    ItemKey);
+EndFunction
+	

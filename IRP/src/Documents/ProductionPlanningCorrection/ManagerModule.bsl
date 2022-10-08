@@ -537,34 +537,25 @@ Function GetCurrentQuantity(Company, ProductionPlanning, PlanningPeriod, BillOfM
 	|	MAX(ISNULL(Planned.QuantityTurnover, 0) + ISNULL(Correction.QuantityTurnover, 0)) AS Quantity
 	|INTO Planned
 	|FROM
-	|	AccumulationRegister.MF_ProductionPlanning.Turnovers(
-	|			,
-	|			,
-	|			,
-	|			PlanningPeriod = &PlanningPeriod
-	|				AND PlanningType = VALUE(Enum.MF_ProductionPlanningTypes.Planned)
-	|				AND Company = &Company
-	|				AND PlanningDocument = &ProductionPlanning
-	|				AND ItemKey = &ItemKey
-	|				AND BillOfMaterials = &BillOfMaterials) AS Planned
-	|		FULL JOIN AccumulationRegister.MF_ProductionPlanning.Turnovers(
-	|				,
-	|				,
-	|				,
-	|				PlanningPeriod = &PlanningPeriod
-	|					AND PlanningType = VALUE(Enum.MF_ProductionPlanningTypes.PlanAdjustment)
-	|					AND Company = &Company
-	|					AND PlanningDocument = &ProductionPlanning
-	|					AND ItemKey = &ItemKey
-	|					AND BillOfMaterials = &BillOfMaterials) AS Correction
+	|	AccumulationRegister.R7030T_ProductionPlanning.Turnovers(,,, PlanningPeriod = &PlanningPeriod
+	|	AND PlanningType = VALUE(Enum.ProductionPlanningTypes.Planned)
+	|	AND Company = &Company
+	|	AND PlanningDocument = &ProductionPlanning
+	|	AND ItemKey = &ItemKey
+	|	AND BillOfMaterials = &BillOfMaterials) AS Planned
+	|		FULL JOIN AccumulationRegister.R7030T_ProductionPlanning.Turnovers(,,, PlanningPeriod = &PlanningPeriod
+	|		AND PlanningType = VALUE(Enum.ProductionPlanningTypes.PlanAdjustment)
+	|		AND Company = &Company
+	|		AND PlanningDocument = &ProductionPlanning
+	|		AND ItemKey = &ItemKey
+	|		AND BillOfMaterials = &BillOfMaterials) AS Correction
 	|		ON Planned.Company = Correction.Company
-	|			AND Planned.BusinessUnit = Correction.BusinessUnit
-	|			AND Planned.PlanningDocument = Correction.PlanningDocument
-	|			AND Planned.ItemKey = Correction.ItemKey
-	|			AND Planned.PlanningPeriod = Correction.PlanningPeriod
-	|			AND Planned.ProductionType = Correction.ProductionType
-	|			AND Planned.BillOfMaterials = Correction.BillOfMaterials
-	|
+	|		AND Planned.BusinessUnit = Correction.BusinessUnit
+	|		AND Planned.PlanningDocument = Correction.PlanningDocument
+	|		AND Planned.ItemKey = Correction.ItemKey
+	|		AND Planned.PlanningPeriod = Correction.PlanningPeriod
+	|		AND Planned.ProductionType = Correction.ProductionType
+	|		AND Planned.BillOfMaterials = Correction.BillOfMaterials
 	|GROUP BY
 	|	ISNULL(Planned.Company, Correction.Company),
 	|	ISNULL(Planned.BusinessUnit, Correction.BusinessUnit),
@@ -583,23 +574,23 @@ Function GetCurrentQuantity(Company, ProductionPlanning, PlanningPeriod, BillOfM
 	|	Planned.ItemKey AS ItemKey,
 	|	Planned.PlanningPeriod AS PlanningPeriod,
 	|	Planned.Quantity AS BasisQuantity,
-	|	MF_BillOfMaterials.BasisUnit AS BasisUnit,
-	|	MF_BillOfMaterials.BillOfMaterials AS BillOfMaterials,
-	|	MF_BillOfMaterials.BasisQuantity AS TotalQuantity,
-	|	MF_BillOfMaterials.OutputID AS OutputID,
-	|	MF_BillOfMaterials.UniqueID AS UniqueID
+	|	T7010S_BillOfMaterials.BasisUnit AS BasisUnit,
+	|	T7010S_BillOfMaterials.BillOfMaterials AS BillOfMaterials,
+	|	T7010S_BillOfMaterials.BasisQuantity AS TotalQuantity,
+	|	T7010S_BillOfMaterials.OutputID AS OutputID,
+	|	T7010S_BillOfMaterials.UniqueID AS UniqueID
 	|INTO Production
 	|FROM
 	|	Planned AS Planned
-	|		INNER JOIN InformationRegister.MF_BillOfMaterials.SliceLast AS MF_BillOfMaterials
-	|		ON (MF_BillOfMaterials.Company = Planned.Company)
-	|			AND (MF_BillOfMaterials.BusinessUnit = Planned.BusinessUnit)
-	|			AND (MF_BillOfMaterials.ItemKey = Planned.ItemKey)
-	|			AND (MF_BillOfMaterials.IsProduct = TRUE)
-	|			AND (MF_BillOfMaterials.PlanningPeriod = Planned.PlanningPeriod)
-	|			AND (MF_BillOfMaterials.BillOfMaterials = &BillOfMaterials)
-	|			AND (MF_BillOfMaterials.BillOfMaterials = Planned.BillOfMaterials)
-	|			AND (MF_BillOfMaterials.PlanningDocument = Planned.PlanningDocument)
+	|		INNER JOIN InformationRegister.T7010S_BillOfMaterials.SliceLast AS T7010S_BillOfMaterials
+	|		ON (T7010S_BillOfMaterials.Company = Planned.Company)
+	|		AND (T7010S_BillOfMaterials.BusinessUnit = Planned.BusinessUnit)
+	|		AND (T7010S_BillOfMaterials.ItemKey = Planned.ItemKey)
+	|		AND (T7010S_BillOfMaterials.IsProduct = TRUE)
+	|		AND (T7010S_BillOfMaterials.PlanningPeriod = Planned.PlanningPeriod)
+	|		AND (T7010S_BillOfMaterials.BillOfMaterials = &BillOfMaterials)
+	|		AND (T7010S_BillOfMaterials.BillOfMaterials = Planned.BillOfMaterials)
+	|		AND (T7010S_BillOfMaterials.PlanningDocument = Planned.PlanningDocument)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////

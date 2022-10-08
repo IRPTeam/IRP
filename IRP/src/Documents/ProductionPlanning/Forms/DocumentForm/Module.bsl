@@ -204,8 +204,8 @@ EndProcedure
 &AtClient
 Function GetProcessingModule() Export
 	Str = New Structure;
-	Str.Insert("Client", DocWorkOrderClient);
-	Str.Insert("Server", DocWorkOrderServer);
+	Str.Insert("Client", DocProductionPlanningClient);
+	Str.Insert("Server", DocProductionPlanningServer);
 	Return Str;
 EndFunction
 

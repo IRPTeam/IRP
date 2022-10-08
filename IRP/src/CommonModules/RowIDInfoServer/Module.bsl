@@ -8,7 +8,7 @@ Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 	BeginTransaction();
 	Is = Is(Source);
 	If Is.SO Then
-		FillRowID_SO(Source, Cancel); // #1487
+		FillRowID_SO(Source, Cancel);
 	ElsIf Is.SI Then
 		FillRowID_SI(Source, Cancel);
 	ElsIf Is.SC Then
@@ -45,7 +45,6 @@ Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 		FillRowID_RRR(Source, Cancel);
 	ElsIf Is.PRR Then
 		FillRowID_PRR(Source, Cancel);
-	// #1487
 	ElsIf Is.WO Then
 		FillRowID_WO(Source, Cancel);
 	ElsIf Is.WS Then
@@ -1240,7 +1239,6 @@ Procedure FillRowID_PRR(Source, Cancel)
 	EndDo;
 EndProcedure
 
-// #1487
 Procedure FillRowID_WO(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
@@ -1293,8 +1291,6 @@ Function GetNextStep_SO(Source, RowItemList, Row)
 		NextStep = Catalogs.MovementRules.PO_PI;
 	Else
 		If RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service Then
-			// #1487
-			//NextStep = Catalogs.MovementRules.SI;
 			NextStep = Catalogs.MovementRules.SI_WO_WS;
 		Else
 			NextStep = Catalogs.MovementRules.SI_SC;
@@ -1436,7 +1432,6 @@ Function GetNextStep_PRR(Source, RowItemList, Row)
 	Return Undefined;
 EndFunction
 
-// #1487
 Function GetNextStep_WO(Source, RowItemList, Row)
 	NextStep = Catalogs.MovementRules.SI_WS;
 	Return NextStep;
@@ -1580,7 +1575,6 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		RowRefObject.StoreReceiver = Source.StoreReceiver;
 	EndIf;
 	
-	// #1487
 	If Is.SO Or Is.SI Or Is.SRO Or Is.SR Or Is.RSR Or Is.RRR Or Is.WO Then
 		RowRefObject.PartnerSales         = Source.Partner;
 		RowRefObject.LegalNameSales       = Source.LegalName;
@@ -1609,7 +1603,7 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 			RowRefObject.PartnerSales   = Source.Partner;
 			RowRefObject.LegalNameSales = Source.LegalName;
 		EndIf;
-	// #1487
+
 	ElsIf Is.WS Then
 		RowRefObject.PartnerSales    = Source.Partner;
 		RowRefObject.LegalNameSales  = Source.LegalName;
@@ -1788,7 +1782,6 @@ Function ExtractData(BasisesTable, DataReceiver, AddInfo = Undefined) Export
 			FillTablesFrom_SRO(Tables, DataReceiver, Row);
 		ElsIf Is.RSR Then
 			FillTablesFrom_RSR(Tables, DataReceiver, Row);
-		// #1487
 		ElsIf Is.WO Then
 			FillTablesFrom_WO(Tables, DataReceiver, Row);
 		ElsIf Is.WS Then
@@ -1822,7 +1815,6 @@ Function CreateTablesForExtractData(EmptyTable)
 	Tables.Insert("FromSR", EmptyTable.Copy());
 	Tables.Insert("FromSRO", EmptyTable.Copy());
 	Tables.Insert("FromRSR", EmptyTable.Copy());
-	// #1487
 	Tables.Insert("FromWO", EmptyTable.Copy());
 	Tables.Insert("FromWS", EmptyTable.Copy());
 	Tables.Insert("FromWS_ThenFromWO", EmptyTable.Copy());
@@ -1919,12 +1911,10 @@ Function ExtractDataByTables(Tables, DataReceiver, AddInfo = Undefined)
 		ExtractedData.Add(ExtractData_FromRSR(Tables.FromRSR, DataReceiver, AddInfo));
 	EndIf;
 
-	// #1487
 	If Tables.FromWO.Count() Then
 		ExtractedData.Add(ExtractData_FromWO(Tables.FromWO, DataReceiver, AddInfo));
 	EndIf;
 	
-	// WS
 	If Tables.FromWS.Count() Then
 		ExtractedData.Add(ExtractData_FromWS(Tables.FromWS, DataReceiver, AddInfo));
 	EndIf;
@@ -3942,7 +3932,6 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Return Tables;
 EndFunction
 
-// #1487
 Function ExtractData_FromWO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text + 
@@ -4060,9 +4049,6 @@ Function ExtractData_FromWO(BasisesTable, DataReceiver, AddInfo = Undefined)
 
 	Return Tables;
 EndFunction
-
-//---------------------------------------------------------------------------------------------
-// #1487
 
 Function ExtractData_FromWS(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
@@ -4569,7 +4555,6 @@ EndFunction
 Function ReduceExtractedDataInfo_SO(Tables, DataReceiver)
 	ReduceInfo = New Structure("Reduce, Tables", False, New Structure());
 	
-	// #1487
 	Is = Is(DataReceiver);
 	// only when procurecement method Pyrchase
 	If Is.PO Or Is.PI Then
@@ -4588,7 +4573,7 @@ EndFunction
 Function GetBasises(Ref, FilterValues) Export
 	Is = Is(Ref);
 	If Is.SI Then
-		Return GetBasisesFor_SI(FilterValues); // #1487
+		Return GetBasisesFor_SI(FilterValues);
 	ElsIf Is.SC Then
 		Return GetBasisesFor_SC(FilterValues);
 	ElsIf Is.PO Then
@@ -4617,7 +4602,6 @@ Function GetBasises(Ref, FilterValues) Export
 		Return GetBasisesFor_RRR(FilterValues);
 	ElsIf Is.PRR Then
 		Return GetBasisesFor_PRR(FilterValues);
-	// #1487
 	ElsIf Is.WO Then
 		Return GetBasisesFor_WO(FilterValues);
 	ElsIf Is.WS Then
@@ -4631,7 +4615,6 @@ Function GetBasisesFor_SI(FilterValues)
 	StepArray = New Array();
 	StepArray.Add(Catalogs.MovementRules.SI);
 	StepArray.Add(Catalogs.MovementRules.SI_SC);
-	// #1487
 	StepArray.Add(Catalogs.MovementRules.SI_WO_WS);
 	StepArray.Add(Catalogs.MovementRules.SI_WS);
 
@@ -4642,7 +4625,6 @@ Function GetBasisesFor_SI(FilterValues)
 	FilterSets.GR_ForSI_ForSC = True;
 	FilterSets.PI_ForSI_ForSC = True;
 	
-	// #1487
 	FilterSets.WO_ForSI = True;
 	FilterSets.WS_ForSI = True;
 	
@@ -4815,7 +4797,6 @@ Function GetBasisesFor_PRR(FilterValues)
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
 
-// #1487
 Function GetBasisesFor_WO(FilterValues)
 	StepArray = New Array();
 	StepArray.Add(Catalogs.MovementRules.SI_WO_WS);
@@ -4882,7 +4863,6 @@ Function GetAvailableFilterSets()
 
 	Result.Insert("RSR_ForRRR", False);
 
-	// #1487
 	Result.Insert("SO_ForWO", False);
 	Result.Insert("SO_ForWS", False);
 	Result.Insert("WO_ForWS", False);
@@ -4915,7 +4895,6 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 		QueryArray.Add(GetDataByFilterSet_SO_ForPRR());
 	EndIf;
 
-	// #1487
 	If FilterSets.SO_ForWO Then
 		ApplyFilterSet_SO_ForWO(Query);
 		QueryArray.Add(GetDataByFilterSet_SO_ForWO());
@@ -4931,7 +4910,6 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 		QueryArray.Add(GetDataByFilterSet_SI_ForSC());
 	EndIf;
 	
-	//#1487
 	If FilterSets.SI_ForWS Then
 		ApplyFilterSet_SI_ForWS(Query);
 		QueryArray.Add(GetDataByFilterSet_SI_ForWS());
@@ -5042,7 +5020,6 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 		QueryArray.Add(GetDataByFilterSet_RSR_ForRRR());
 	EndIf;
 	
-	// #1487
 	If FilterSets.WO_ForWS Then
 		ApplyFilterSet_WO_ForWS(Query);
 		QueryArray.Add(GetDataByFilterSet_WO_ForWS());
@@ -5091,7 +5068,6 @@ Function GetFieldsToLock_ExternalLink(DocAliase, ExternalDocAliase)
 		Return GetFieldsToLock_ExternalLink_SRO(ExternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.RSR Then
 		Return GetFieldsToLock_ExternalLink_RSR(ExternalDocAliase, Aliases);
-	// #1487
 	ElsIf DocAliase = Aliases.WO Then
 		Return GetFieldsToLock_ExternalLink_WO(ExternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.WS Then
@@ -5134,7 +5110,6 @@ Function GetFieldsToLock_InternalLink(DocAliase, InternalDocAliase)
 		Return GetFieldsToLock_InternalLink_RRR(InternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.PRR Then
 		Return GetFieldsToLock_InternalLink_PRR(InternalDocAliase, Aliases);
-	// #1487
 	ElsIf DocAliase = Aliases.WO Then
 		Return GetFieldsToLock_InternalLink_WO(InternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.WS Then
@@ -5198,7 +5173,6 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 							  |ItemKey           , ItemList.ItemKey,
 							  |Store             , ItemList.Store";
 	
-	// #1487
 	ElsIf ExternalDocAliase = Aliases.WO Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status,
 			|ItemListSetProcurementMethods";
@@ -5456,7 +5430,6 @@ Procedure ApplyFilterSet_SO_ForPO_ForPI(Query)
 	Query.Execute();
 EndProcedure
 
-// #1487
 Procedure ApplyFilterSet_SO_ForWO(Query)
 	Query.Text =
 	"SELECT
@@ -5686,7 +5659,6 @@ Function GetDataByFilterSet_SO_ForPO_ForPI()
 		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
 EndFunction
 
-// #1487
 Function GetDataByFilterSet_SO_ForWO()
 	Return "SELECT 
 		   |	Doc.ItemKey,
@@ -8313,7 +8285,6 @@ EndFunction
 
 #EndRegion
 
-// #1487
 #Region Document_WO
 
 Function GetFieldsToLock_InternalLink_WO(InternalDocAliase, Aliases)
@@ -8776,7 +8747,6 @@ Function AddLinkedDocumentRows(Object, FillingValues) Export
 				Continue;
 			EndIf;
 			For Each Row In FillingValue[TableName] Do
-				// #1487
 				If CommonFunctionsClientServer.ObjectHasProperty(Row, "KeyOwner") 
 					And Row.KeyOwner = Row_ItemList.Key Then
 					
@@ -8809,7 +8779,6 @@ Function AddLinkedDocumentRows(Object, FillingValues) Export
 					EndDo;
 				EndIf;
 				
-				// #1487
 				If Upper(TableName) = Upper("Materials") Then
 					For Each KeyValue In Row Do
 						PropertyName = TrimAll(KeyValue.Key);
@@ -9170,7 +9139,6 @@ Function GetSeparatorColumns(DocReceiverMetadata) Export
 		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer, UsePartnerTransactions, Workstation";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PlannedReceiptReservation Then
 		Return "Company, Branch, Requester";
-	// #1487
 	ElsIf DocReceiverMetadata = Metadata.Documents.WorkOrder Then
 		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, LegalName, Currency";
 	ElsIf DocReceiverMetadata = Metadata.Documents.WorkSheet Then
@@ -9240,7 +9208,6 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 		tmpTable_GoodsReceipts         = GetEmptyTable_GoodsReceipts();
 		tmpTable_WorkSheets            = GetEmptyTable_WorkSheets();
 		tmpTable_RowIDInfo             = GetEmptyTable_RowIDInfo();
-		// #1487
 		tmpTable_Materials             = GetEmptyTable_Materials();
 		
 		For Each TableFilter In TablesFilters Do
@@ -9262,7 +9229,6 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 						FillPropertyValues(tmpTable_GoodsReceipts.Add(), Row_DepTable);
 					ElsIf Upper(TableName_Refreshable) = Upper("RowIDInfo") Then
 						FillPropertyValues(tmpTable_RowIDInfo.Add(), Row_DepTable);
-					// #1487
 					ElsIf Upper(TableName_Refreshable) = Upper("Materials") Then
 						FillPropertyValues(tmpTable_Materials.Add(), Row_DepTable);
 					ElsIf Upper(TableName_Refreshable) = Upper("WorkSheets") Then
@@ -9284,7 +9250,6 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 			FillingValues.GoodsReceipts.Add(ValueTableRowToStructure(Tables.GoodsReceipts.Columns, Row_DepTable));
 		EndDo;
 		
-		// #1487
 		tmpTable_WorkSheets.GroupBy((GetColumnNames_WorkSheets() + ", " + GetColumnNamesSum_WorkSheets()));
 		For Each Row_DepTable In tmpTable_WorkSheets Do
 			FillingValues.WorkSheets.Add(ValueTableRowToStructure(Tables.WorkSheets.Columns, Row_DepTable));
@@ -9295,7 +9260,6 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 			FillingValues.RowIDInfo.Add(ValueTableRowToStructure(Tables.RowIDInfo.Columns, Row_DepTable));
 		EndDo;
 		
-		// #1487
 		tmpTable_Materials.GroupBy((GetColumnNames_Materials() + ", " + GetColumnNamesSum_Materials()));
 		For Each Row_DepTable In tmpTable_Materials Do
 			MaterialsRow = ValueTableRowToStructure(Tables.Materials.Columns, Row_DepTable);
@@ -9338,12 +9302,9 @@ Function JoinAllExtractedData(ArrayOfData)
 	Tables.Insert("SpecialOffers"         , GetEmptyTable_SpecialOffers());
 	Tables.Insert("ShipmentConfirmations" , GetEmptyTable_ShipmentConfirmations());
 	Tables.Insert("GoodsReceipts"         , GetEmptyTable_GoodsReceipts());
-	// #1487
 	Tables.Insert("WorkSheets"            , GetEmptyTable_WorkSheets());
-	
 	Tables.Insert("SerialLotNumbers"      , GetEmptyTable_SerialLotNumbers());
 	Tables.Insert("Payments"              , GetEmptyTable_Payments());
-	// #1487
 	Tables.Insert("Materials"             , GetEmptyTable_Materials());
 	
 	For Each Data In ArrayOfData Do
@@ -9363,12 +9324,9 @@ Function GetTableNames_Refreshable()
 	NamesArray.Add("SpecialOffers");
 	NamesArray.Add("ShipmentConfirmations");
 	NamesArray.Add("GoodsReceipts");
-	// #1487
 	NamesArray.Add("WorkSheets");
-	
 	NamesArray.Add("SerialLotNumbers");
 	NamesArray.Add("Payments");
-	// #1487
 	NamesArray.Add("Materials");
 	Return NamesArray;
 EndFunction
@@ -9377,7 +9335,6 @@ Function GetTableNames_LinkedDocuments()
 	NamesArray = New Array();
 	NamesArray.Add("ShipmentConfirmations");
 	NamesArray.Add("GoodsReceipts");
-	// #1487
 	NamesArray.Add("WorkSheets");
 	Return NamesArray;
 EndFunction
@@ -9401,7 +9358,6 @@ Function GetAttributeNames_LinkedDocuments()
 	NamesArray.Add("SalesReturn");
 	NamesArray.Add("SalesReturnOrder");
 	NamesArray.Add("RetailSalesReceipt");
-	// #1487
 	NamesArray.Add("WorkOrder");
 	Return NamesArray;
 EndFunction
@@ -9485,7 +9441,6 @@ Function GetColumnNames_ItemList()
 		   |LegalNameContract,
 		   |SalesPerson,
 		   |Workstation,
-		   // #1487
 		   |WorkOrder,
 		   |WorkSheet,
 		   |BillOfMaterials,
@@ -9630,7 +9585,6 @@ EndFunction
 
 #EndRegion
 
-// #1487
 #Region EmptyTables_Materials
 
 Function GetColumnNames_Materials()
@@ -9929,7 +9883,6 @@ Function DocAliases()
 	Result.Insert("PhysicalInventory"         , "PhysicalInventory");
 	Result.Insert("StockAdjustmentAsSurplus"  , "StockAdjustmentAsSurplus");
 	Result.Insert("StockAdjustmentAsWriteOff" , "StockAdjustmentAsWriteOff");
-	// #1487
 	Result.Insert("WO", "WorkOrder");
 	Result.Insert("WS", "WorkSheet");
 	
@@ -10002,11 +9955,9 @@ Function Is(Source)
 	Result.Insert("POC",
 		TypeOf = Type("DocumentObject.PurchaseOrderClosing")
 		Or TypeOf = Type("DocumentRef.PurchaseOrderClosing"));
-	// #1487
 	Result.Insert("WO",
 		TypeOf = Type("DocumentObject.WorkOrder")
 		Or TypeOf = Type("DocumentRef.WorkOrder"));	
-		
 	Result.Insert("WS",
 		TypeOf = Type("DocumentObject.WorkSheet")
 		Or TypeOf = Type("DocumentRef.WorkSheet"));	
@@ -10511,7 +10462,6 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.PO);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.SI);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.SC);
-		// #1487
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.WO);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.WS);
 	EndIf;
@@ -10520,7 +10470,6 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.SR);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.SRO);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.SC);
-		// #1487
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.WS);		
 	EndIf;
 	
@@ -10585,7 +10534,6 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSR, DocAliases.RRR);
 	EndIf;
 	
-	// #1487
 	If Is.WO Then
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.WO, DocAliases.WS);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.WO, DocAliases.SI);
@@ -10614,8 +10562,6 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 	If Is.SI Then
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.SO);
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.SC);
-		// #1487
-		//FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.WO);
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.WS);
 	EndIf;
 	
@@ -10689,7 +10635,6 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PRR, DocAliases.SO);
 	EndIf;
 	
-	// #1487
 	If Is.WO Then
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.WO, DocAliases.SO);
 	EndIf;

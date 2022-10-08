@@ -7,14 +7,23 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;
 EndProcedure
 
+Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
+EndProcedure
+
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	If ValueIsFilled(ThisObject.ProductionPlanning)
-		And ThisObject.Date < ThisObject.ProductionPlanning.Date Then
-			Cancel = True;
-			MessageText = StrTemplate(R().MF_Error_004, 
-			ThisObject.Date, 
-			ThisObject.ProductionPlanning.Date);
-			CommonFunctionsClientServer.ShowUsersMessage(MessageText, "Object.Date", "Object");
+	If ValueIsFilled(ThisObject.ProductionPlanning) And ThisObject.Date < ThisObject.ProductionPlanning.Date Then
+		Cancel = True;
+		MessageText = StrTemplate(R().MF_Error_004, ThisObject.Date, ThisObject.ProductionPlanning.Date);
+		CommonFunctionsClientServer.ShowUsersMessage(MessageText, "Object.Date", "Object");
 	EndIf;
 	
 	If Cancel = True Then
@@ -24,18 +33,18 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	Query = New Query();
 	Query.Text = 
 	"SELECT TOP 1
-	|	MF_ProductionPlanningCorrection.Ref,
-	|	MF_ProductionPlanningCorrection.Date
+	|	ProductionPlanningCorrection.Ref,
+	|	ProductionPlanningCorrection.Date
 	|FROM
-	|	Document.MF_ProductionPlanningCorrection AS MF_ProductionPlanningCorrection
+	|	Document.ProductionPlanningCorrection AS ProductionPlanningCorrection
 	|WHERE
-	|	MF_ProductionPlanningCorrection.ProductionPlanning = &ProductionPlanning
-	|	AND NOT MF_ProductionPlanningCorrection.DeletionMark
-	|	AND MF_ProductionPlanningCorrection.Posted
-	|	AND MF_ProductionPlanningCorrection.Ref <> &Ref
-	|	AND MF_ProductionPlanningCorrection.Date > &Date
+	|	ProductionPlanningCorrection.ProductionPlanning = &ProductionPlanning
+	|	AND NOT ProductionPlanningCorrection.DeletionMark
+	|	AND ProductionPlanningCorrection.Posted
+	|	AND ProductionPlanningCorrection.Ref <> &Ref
+	|	AND ProductionPlanningCorrection.Date > &Date
 	|ORDER BY
-	|	MF_ProductionPlanningCorrection.Date DESC";
+	|	ProductionPlanningCorrection.Date DESC";
 	Query.SetParameter("ProductionPlanning" , ThisObject.ProductionPlanning);
 	Query.SetParameter("Ref", ThisObject.Ref);
 	Query.SetParameter("Date", ThisObject.Date);
@@ -43,9 +52,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
 		Cancel = True;
-		MessageText = StrTemplate(R().MF_Error_005, 
-		ThisObject.Date,   
-		QuerySelection.Date);
+		MessageText = StrTemplate(R().MF_Error_005, ThisObject.Date,   QuerySelection.Date);
 		CommonFunctionsClientServer.ShowUsersMessage(MessageText, "Object.Date", "Object");
 	EndIf;
 EndProcedure
@@ -59,10 +66,12 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	ThisObject.Status = MF_ObjectStatusesServer.GetDefaultStatus(ThisObject.Ref);
+	//ThisObject.Status = ObjectStatusesServer.GetDefaultStatus(ThisObject.Ref);
 	
 	If TypeOf(FillingData) = Type("Structure") Then
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "MF_ProductionPlanning" Then
+		If FillingData.Property("BasedOn") And FillingData.BasedOn = "ProductionPlanning" Then
+			ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+			
 			ThisObject.ProductionPlanning = FillingData.ProductionPlanning;
 			ThisObject.PlanningPeriod     = FillingData.PlanningPeriod;
 			ThisObject.Company            = FillingData.Company;
@@ -78,29 +87,17 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 				NewRow.Quantity        = Row.CurrentQuantity;
 				NewRow.BillOfMaterials = Row.BillOfMaterials;
 				
-				Parameters = New Structure("Key, Company, BillOfMaterials, PlanningPeriod, ItemKey, Unit, Quantity, CurrentQuantity");
-				FillPropertyValues(Parameters, NewRow);
-				Parameters.PlanningPeriod = FillingData.PlanningPeriod;
-				Parameters.Company        = FillingData.Company;
-				BillOfMaterialRows = MF_BillOfMaterialsCalculationsServer.FillBillOfMaterialsTableCorrection(Parameters);
-				For Each RowBOM In BillOfMaterialRows Do
-					NewRowBOM = ThisObject.BillOfMaterials.Add();
-					FillPropertyValues(NewRowBOM, RowBOM);
-				EndDo;
+				//Parameters = New Structure("Key, Company, BillOfMaterials, PlanningPeriod, ItemKey, Unit, Quantity, CurrentQuantity");
+				//FillPropertyValues(Parameters, NewRow);
+				//Parameters.PlanningPeriod = FillingData.PlanningPeriod;
+				//Parameters.Company        = FillingData.Company;
+				//BillOfMaterialRows = MF_BillOfMaterialsCalculationsServer.FillBillOfMaterialsTableCorrection(Parameters);
+				//For Each RowBOM In BillOfMaterialRows Do
+				//	NewRowBOM = ThisObject.BillOfMaterials.Add();
+				//	FillPropertyValues(NewRowBOM, RowBOM);
+				//EndDo;
 				
 			EndDo;
 		EndIf;
-	EndIf;
-EndProcedure
-
-Procedure OnWrite(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;	
-EndProcedure
-
-Procedure BeforeDelete(Cancel)
-	If DataExchange.Load Then
-		Return;
 	EndIf;
 EndProcedure

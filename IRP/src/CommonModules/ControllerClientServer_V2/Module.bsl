@@ -442,6 +442,9 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	SettersMap.Insert("Materials.Quantity"           , "SetMaterialsQuantity");
 	SettersMap.Insert("Materials.QuantityBOM"        , "SetMaterialsQuantityBOM");
 	
+	// Manufacturing calculations
+	SettersMap.Insert("Command.UpdateCurrentQuantity", "StepChangeCurrentQuantityInProductions");
+	
 	Return SettersMap.Get(DataPath);
 EndFunction
 

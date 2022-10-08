@@ -83,7 +83,13 @@ Procedure SetVisibilityAvailability(Object, Form)
 	If ValueIsFilled(Object.ApprovedDate) Or IsNewObject Then
 		UpdateCurrentQuantityVisible = False;
 	Else
-		UpdateCurrentQuantityVisible = Not IsCurrentQuantityActual(Object);
+		Rows = New Array();
+		For Each Row In Object.Productions Do
+			NewRow = New Structure("ItemKey, BillOfMaterials, CurrentQuantity");
+			FillPropertyValues(NewRow, Row);
+			Rows.Add(NewRow);
+		EndDo;
+		UpdateCurrentQuantityVisible = Not IsCurrentQuantityActual(Object.Company, Object.ProductionPlanning, Object.PlanningPeriod, Rows);
 	EndIf;	
 	
 	Form.Items.PictureCurrentQuantittyError.Visible = UpdateCurrentQuantityVisible;
@@ -91,27 +97,10 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.UpdateCurrentQuantity.Visible        = UpdateCurrentQuantityVisible;
 EndProcedure
 
-//&AtServer
-//Procedure SetCurrentQuantityError(IsError)
-//	If ValueIsFilled(Object.ApprovedDate) Then
-//		Items.PictureCurrentQuantittyError.Visible = False;
-//		Items.LabelCurrentQuantityError.Visible = False;
-//		Items.UpdateCurrentQuantity.Visible = False;
-//	Else		
-//		Items.PictureCurrentQuantittyError.Visible = IsError;
-//		Items.LabelCurrentQuantityError.Visible = IsError;
-//		Items.UpdateCurrentQuantity.Visible = IsError;
-//	EndIf;
-//EndProcedure
-
 &AtServerNoContext
-Function IsCurrentQuantityActual(Object)
-	For Each Row In Object.Productions Do
-		CurrentQuantityInfo = GetCurrentQuantity(Object.Company,
-												 Object.ProductionPlanning,
-												 Object.PlanningPeriod, 
-												 Row.BillOfMaterials,
-												 Row.ItemKey);
+Function IsCurrentQuantityActual(Company, ProductionPlanning, PlanningPeriod, Rows)
+	For Each Row In Rows Do
+		CurrentQuantityInfo = GetCurrentQuantity(Company, ProductionPlanning, PlanningPeriod, Row.BillOfMaterials, Row.ItemKey);
 
 		CurrentQunatity = ?(ValueIsFilled(Row.CurrentQuantity), Row.CurrentQuantity, 0);
 		ActualQuantity  = ?(ValueIsFilled(CurrentQuantityInfo.BasisQuantity), CurrentQuantityInfo.BasisQuantity, 0);
@@ -125,13 +114,8 @@ EndFunction
 
 &AtServerNoContext
 Function GetCurrentQuantity(Company, ProductionPlanning, PlanningPeriod, BillOfMaterials, ItemKey)
-	Return Documents.ProductionPlanningCorrection.GetCurrentQuantity(Company,
-																	 ProductionPlanning,
-																	 PlanningPeriod,  
-	                                                                 BillOfMaterials,
-	                                                                 ItemKey);
+	Return Documents.ProductionPlanningCorrection.GetCurrentQuantity(Company, ProductionPlanning, PlanningPeriod, BillOfMaterials, ItemKey);
 EndFunction
-
 
 #EndRegion
 
@@ -355,7 +339,7 @@ EndProcedure
 
 &AtClient
 Procedure UpdateCurrentQuantity(Command)
-	//UpdateCurrentQuantityByTable();
+	DocProductionPlanningCorrectionClient.UpdateCurrentQuantity(Object, ThisObject);
 EndProcedure
 
 #EndRegion

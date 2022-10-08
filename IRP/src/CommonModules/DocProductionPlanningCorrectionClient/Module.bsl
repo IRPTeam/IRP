@@ -62,6 +62,24 @@ EndProcedure
 
 #EndRegion
 
+#Region UPDATE_CURRENT_QUANTITY
+
+Procedure UpdateCurrentQuantity(Object, Form) Export
+	FormParameters = ControllerClientServer_V2.GetFormParameters(Form);
+	
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
+	ServerParameters.TableName = "Productions";
+	//ServerParameters.IsBasedOn = True;
+	//ServerParameters.ReadOnlyProperties = StrConcat(ArrayOfFillingColumns, ",");
+	//ServerParameters.Rows = ArrayOfFillingRows;
+		
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
+	Property = New Structure("DataPath", "Command.UpdateCurrentQuantity");
+	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+EndProcedure
+	
+#EndRegion
+
 #Region PRODUCTIONS
 
 Procedure ProductionsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export

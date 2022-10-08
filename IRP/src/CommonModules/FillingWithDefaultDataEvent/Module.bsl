@@ -30,6 +30,7 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 		ArrayOfAllMainTables.Add("ItemList");
 		ArrayOfAllMainTables.Add("PaymentList");
 		ArrayOfAllMainTables.Add("Transactions");
+		ArrayOfAllMainTables.Add("Productions");
 		
 		ArrayOfMainTables = New Array();
 		For Each TableName In ArrayOfAllMainTables Do
@@ -41,7 +42,6 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 			ArrayOfMainTables.Add("");
 		EndIf;
 		
-		// #1487
 		ArrayOfAllSubordinateTables = New Array();
 		ArrayOfAllSubordinateTables.Add("Materials");
 		

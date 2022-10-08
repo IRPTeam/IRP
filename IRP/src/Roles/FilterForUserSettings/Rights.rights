@@ -1490,4 +1490,32 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.ProductionPlanningClosing.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ProductionPlanningClosing.Attribute.BusinessUnit</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ProductionPlanningCorrection.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ProductionPlanningCorrection.Attribute.BusinessUnit</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

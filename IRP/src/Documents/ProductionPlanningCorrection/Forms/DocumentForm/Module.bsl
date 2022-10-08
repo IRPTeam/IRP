@@ -6,15 +6,13 @@ Procedure OnReadAtServer(CurrentObject)
 	ThisObject.ProductionPlanningClosing = DocProductionPlanningClosingServer.GetProductionPlanningColosing(CurrentObject.ProductionPlanning);
 	ThisObject.ProductionPlanningCorrectionExists = DocProductionPlanningCorrectionServer.GetProductionPlanningCorrectionExists(CurrentObject.Ref);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
-	//SetCurrentQuantityError(Not IsCurrentQuantityActual());
 EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocProductionPlanningCorrectionServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
-		SetVisibilityAvailability(Object, ThisObject);
-		//SetCurrentQuantityError(False);		
+		SetVisibilityAvailability(Object, ThisObject);		
 	EndIf;
 EndProcedure
 
@@ -27,21 +25,11 @@ EndProcedure
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	DocProductionPlanningCorrectionServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
-	//SetCurrentQuantityError(Not IsCurrentQuantityActual());
 EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
 	DocProductionPlanningCorrectionClient.OnOpen(Object, ThisObject, Cancel);
-	
-//	If Not ValueIsFilled(Object.Ref) 
-//		And Not ValueIsFilled(Object.PlanningPeriod) Then
-//		NewPlanningPeriod = MF_FormsServer.GetPlanningPeriod(Object.Date, Object.BusinessUnit);
-//		If NewPlanningPeriod <> Object.PlanningPeriod Then
-//			Object.PlanningPeriod = NewPlanningPeriod;
-//			MF_FormsClient.SetDocumentProductionPlanning(Object);
-//		EndIf;
-//	EndIf;
 EndProcedure
 
 &AtClient

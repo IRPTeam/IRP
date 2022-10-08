@@ -4,20 +4,20 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	InfoReg = Metadata.InformationRegisters;
 	AccReg  = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("MF_BillOfMaterials"      , PostingServer.CreateTable(InfoReg.MF_BillOfMaterials));
-	Tables.Insert("MF_ProductionPlanning"   , PostingServer.CreateTable(AccReg.MF_ProductionPlanning));
-	Tables.Insert("MF_MaterialPlanning"     , PostingServer.CreateTable(AccReg.MF_MaterialPlanning));
-	Tables.Insert("MF_DetailingSupplies"    , PostingServer.CreateTable(AccReg.MF_DetailingSupplies));
+	Tables.Insert("BillOfMaterials"      , PostingServer.CreateTable(InfoReg.T7010S_BillOfMaterials));
+	Tables.Insert("ProductionPlanning"   , PostingServer.CreateTable(AccReg.R7030T_ProductionPlanning));
+	Tables.Insert("MaterialPlanning"     , PostingServer.CreateTable(AccReg.R7020T_MaterialPlanning));
+	Tables.Insert("DetailingSupplies"    , PostingServer.CreateTable(AccReg.R7010T_DetailingSupplies));
 	
-	MF_ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status, CurrentUniversalDate());
-	StatusInfo = MF_ObjectStatusesServer.GetLastStatusInfo(Ref);
+	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status, CurrentUniversalDate());
+	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	Parameters.Insert("StatusInfo", StatusInfo);
 	If Not StatusInfo.Posting Then
 		Return Tables;
 	EndIf;
 	
 	BillOfMaterialsTable = GetBillOfMaterials(Ref, GetQueryTex_BillOfMaterialsPlanned());
-	MaterialPlanningEmptyTable    = Tables.MF_MaterialPlanning.CopyColumns();
+	MaterialPlanningEmptyTable    = Tables.MaterialPlanning.CopyColumns();
 	
 	MaterialPlanningTable    = GetMaterialPlanning(BillOfMaterialsTable, MaterialPlanningEmptyTable);
 	ProductionPlanningTable  = GetProductionPlanning(BillOfMaterialsTable);
@@ -72,10 +72,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	&BillOfMaterialsTable AS BillOfMaterialsTable";
 	Query.Execute();
 	
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion	
 	
 	Return Tables;
 EndFunction
@@ -152,13 +150,13 @@ Function GetProductionPlanning(BillOfMaterialsTable)
 	|	tmp.BusinessUnit,
 	|	tmp.PlanningPeriod,
 	|	tmp.BillOfMaterials,
-	|	VALUE(Enum.MF_ProductionPlanningTypes.PlanAdjustment) AS PlanningType,
+	|	VALUE(Enum.ProductionPlanningTypes.PlanAdjustment) AS PlanningType,
 	|	tmp.Company,
 	|	tmp.Store,
 	|	tmp.ItemKey,
 	|	tmp.Quantity,
-	|	CASE WHEN tmp.IsProduct = TRUE THEN VALUE(Enum.MF_ProductionTypes.Product)
-	|		 WHEN tmp.IsSemiproduct = TRUE THEN VALUE(Enum.MF_ProductionTypes.Semiproduct)
+	|	CASE WHEN tmp.IsProduct = TRUE THEN VALUE(Enum.ProductionTypes.Product)
+	|		 WHEN tmp.IsSemiproduct = TRUE THEN VALUE(Enum.ProductionTypes.Semiproduct)
 	|	END AS ProductionType,
 	|	tmp.ProductionPlanningBasis AS PlanningDocument,
 	|	tmp.ProductionPlanningBasis AS Order
@@ -208,7 +206,7 @@ Function GetMaterialPlanning(BillOfMaterialsTable, MaterialPlanningTable)
 	|	tmp.PlanningPeriod,
 	|	tmp.PlanningDocument,
 	|	tmp.BillOfMaterials,
-	|	VALUE(Enum.MF_ProductionPlanningTypes.PlanAdjustment) AS PlanningType,
+	|	VALUE(Enum.ProductionPlanningTypes.PlanAdjustment) AS PlanningType,
 	|	tmp.Company,
 	|	tmp.Store,
 	|	tmp.IsSemiproduct,
@@ -296,7 +294,7 @@ Function GetQueryTex_BillOfMaterialsPlanned()
 		|	DocBillOfMaterials.BasisUnit AS BasisUnit,
 		|	DocBillOfMaterials.PlannedBasisQuantity AS BasisQuantity
 		|FROM
-		|	Document.MF_ProductionPlanningCorrection.BillOfMaterials AS DocBillOfMaterials
+		|	Document.ProductionPlanningCorrection.BillOfMaterialsList AS DocBillOfMaterials
 		|WHERE
 		|	DocBillOfMaterials.Ref = &Ref
 		|	AND DocBillOfMaterials.PlannedQuantity <> 0";
@@ -339,7 +337,7 @@ Function GetQueryText_BillOfMaterialsContent()
 		|	DocBillOfMaterials.BasisUnit AS BasisUnit,
 		|	DocBillOfMaterials.BasisQuantity AS BasisQuantity
 		|FROM
-		|	Document.MF_ProductionPlanningCorrection.BillOfMaterials AS DocBillOfMaterials
+		|	Document.ProductionPlanningCorrection.BillOfMaterialsList AS DocBillOfMaterials
 		|WHERE
 		|	DocBillOfMaterials.Ref = &Ref
 		|	AND DocBillOfMaterials.PlannedQuantity <> 0";
@@ -362,23 +360,17 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-#Region NewRegistersPosting
 	If Parameters.StatusInfo.Posting Then
 		Tables = Parameters.DocumentDataTables;	
 		QueryArray = GetQueryTextsMasterTables();
 		PostingServer.SetRegisters(Tables, Ref);
 		PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 	EndIf;
-#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
-
-#Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-#EndRegion	
-	
 	Return PostingDataTables;
 EndFunction
 
@@ -392,10 +384,8 @@ EndProcedure
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	Tables = PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
 	Return Tables;
 EndFunction
 
@@ -417,21 +407,10 @@ EndProcedure
 #Region CheckAfterWrite
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
-	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
-	AccReg = AccumulationRegisters;
-		
-	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.MF_ProductionPlanning.Productions");
-	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-	                                                                PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters),
-	                                                                PostingServer.GetQueryTableByName("R4035B_IncomingStocks_Exists", Parameters),
-	                                                                AccumulationRecordType.Receipt, Unposting, AddInfo) Then
-		Cancel = True;
-	EndIf;
+	Return;
 EndProcedure
 
 #EndRegion
-
-#Region NewRegistersPosting
 
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
@@ -449,79 +428,53 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
-	QueryArray.Add(R4035B_IncomingStocks_Exists());
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
-	QueryArray.Add(R4035B_IncomingStocks());
-	QueryArray.Add(MF_BillOfMaterials());
-	QueryArray.Add(MF_ProductionPlanning());
-	QueryArray.Add(MF_MaterialPlanning());
-	QueryArray.Add(MF_DetailingSupplies());
+	QueryArray.Add(T7010S_BillOfMaterials());
+	QueryArray.Add(R7030T_ProductionPlanning());
+	QueryArray.Add(R7020T_MaterialPlanning());
+	QueryArray.Add(R7010T_DetailingSupplies());
 	Return QueryArray;	
 EndFunction	
 
-Function R4035B_IncomingStocks()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	*
-		|INTO R4035B_IncomingStocks
-		|FROM
-		|	IncomingStocks AS IncomingStocks
-		|WHERE
-		|	IncomingStocks.ItemKey.MF_UseIncomingStockReservation";
-EndFunction
-
-Function R4035B_IncomingStocks_Exists()
-	Return
-		"SELECT *
-		|	INTO R4035B_IncomingStocks_Exists
-		|FROM
-		|	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
-		|WHERE
-		|	R4035B_IncomingStocks.Recorder = &Ref";
-EndFunction
-
-Function MF_BillOfMaterials()
+Function T7010S_BillOfMaterials()
 	Return
 		"SELECT * 
-		|INTO MF_BillOfMaterials
+		|INTO T7010S_BillOfMaterials
 		|FROM BillOfMaterialsTable AS BillOfMaterialsTable
 		|WHERE
 		|	TRUE";
 EndFunction
 
-Function MF_ProductionPlanning()
+Function R7030T_ProductionPlanning()
 	Return
 		"SELECT * 
-		|INTO MF_ProductionPlanning
+		|INTO R7030T_ProductionPlanning
 		|FROM ProductionPlanningTable AS ProductionPlanningTable
 		|WHERE
 		|	TRUE";
 EndFunction
 
-Function MF_MaterialPlanning()
+Function R7020T_MaterialPlanning()
 	Return
 		"SELECT * 
-		|INTO MF_MaterialPlanning
+		|INTO R7020T_MaterialPlanning
 		|FROM MaterialPlanningTable AS MaterialPlanningTable
 		|WHERE
 		|	TRUE";
 EndFunction
 
-Function MF_DetailingSupplies()
+Function R7010T_DetailingSupplies()
 	Return
 		"SELECT * 
-		|INTO MF_DetailingSupplies
+		|INTO R7010T_DetailingSupplies
 		|FROM DetailingSuppliesTable AS DetailingSuppliesTable
 		|WHERE
 		|	TRUE";
 EndFunction
-
-#EndRegion
 
 Function GetCurrentQuantity(Company, ProductionPlanning, PlanningPeriod, BillOfMaterials, ItemKey) Export
 	Query = New Query();

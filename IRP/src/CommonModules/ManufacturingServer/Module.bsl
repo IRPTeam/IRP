@@ -114,6 +114,363 @@ Function FillBillOfMaterialsTable(Parameters) Export
 	Return ArrayOfResult;
 EndFunction
 
+Function FillBillOfMaterialsTableCorrection(Parameters) Export
+	Query = New Query();
+	Query.Text = 
+		"SELECT
+		|	&Key AS Key,
+		|	&Company AS Company,
+		|	(&BillOfMaterials).BusinessUnit AS BusinessUnit,
+		|	&PlanningPeriod AS PlanningPeriod,
+		|	&ItemKey AS ItemKey,
+		|	&Quantity AS Quantity,
+		|	&CurrentQuantity AS CurrentQuantity,
+		|	&BillOfMaterials AS BillOfMaterials,
+		|	0 AS BasisQuantity,
+		|	0 AS CurrentBasisQuantity,
+		|	0 AS PlannedQuantity,
+		|	0 AS PlannedBasisQuantity,
+		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
+		|	&Unit AS Unit,
+		|	VALUE(Catalog.Stores.EmptyRef) AS ReleaseStore,
+		|	VALUE(Catalog.Stores.EmptyRef) AS MaterialStore,
+		|	VALUE(Catalog.Stores.EmptyRef) AS SemiproductStore,
+		|	FALSE AS IsProduct,
+		|	FALSE AS IsSemiproduct,
+		|	FALSE AS IsMaterial,
+		|	FALSE AS IsService";
+		
+	RequiredParameters = "Key, Company, BillOfMaterials, PlanningPeriod, ItemKey, Unit";
+	ArrayOfRequiredParameters = StrSplit(RequiredParameters, ",");
+	AllParametersIsFilled = True;
+	For Each RequiredParameter In ArrayOfRequiredParameters Do
+		If Not ValueIsFilled(Parameters[TrimAll(RequiredParameter)]) Then
+			AllParametersIsFilled = False;
+			Break;
+		EndIf;
+	EndDo;
+	
+	If Not AllParametersIsFilled Then
+		Return New Array();
+	EndIf;
+	QueryParameters = "Key, Company, BillOfMaterials, PlanningPeriod, ItemKey, Unit, Quantity, CurrentQuantity";
+	ArrayOfQueryParameters = StrSplit(QueryParameters, ",");
+	For Each QueryParameter In ArrayOfQueryParameters Do
+		Query.SetParameter(TrimAll(QueryParameter), Parameters[TrimAll(QueryParameter)]);
+	EndDo;
+
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	QueryTable.Columns.Add("UniqueID" , New TypeDescription("String"));
+	QueryTable.Columns.Add("InputID"  , New TypeDescription("String"));
+	QueryTable.Columns.Add("OutputID" , New TypeDescription("String"));
+
+	RegDimensions = Metadata.InformationRegisters.T7010S_BillOfMaterials.Dimensions;
+	RegResourses  = Metadata.InformationRegisters.T7010S_BillOfMaterials.Resources;
+	TableForStores = New ValueTable();
+	TableForStores.Columns.Add("Key"              , New TypeDescription("String"));
+	TableForStores.Columns.Add("Company"          , RegDimensions.Company.Type);
+	TableForStores.Columns.Add("BillOfMaterials"  , RegResourses.BillOfMaterials.Type);
+	TableForStores.Columns.Add("PlanningPeriod"   , RegDimensions.PlanningPeriod.Type);
+	TableForStores.Columns.Add("BusinessUnit"     , RegDimensions.BusinessUnit.Type);
+	TableForStores.Columns.Add("ItemKey"          , RegDimensions.ItemKey.Type);
+	TableForStores.Columns.Add("UniqueID"         , RegDimensions.UniqueID.Type);
+	TableForStores.Columns.Add("InputID"          , RegDimensions.InputID.Type);
+	TableForStores.Columns.Add("OutputID"         , RegDimensions.OutputID.Type);
+	TableForStores.Columns.Add("NeedReleaseStore" , New TypeDescription("Boolean"));
+	TableForStores.Columns.Add("NeedSemiproductStore" , New TypeDescription("Boolean"));
+	TableForStores.Columns.Add("NeedMaterialStore" , New TypeDescription("Boolean"));
+	
+	ExpandedTable = QueryTable.CopyColumns();
+	For Each Row In QueryTable Do
+		ItemKey_UUID         = Row.ItemKey.UUID();
+		BillOfMaterials_UUID = Row.BillOfMaterials.UUID();
+		
+		Parameters = New Structure();
+		Parameters.Insert("Company"        , Row.Company);
+		Parameters.Insert("Key"            , Row.Key);
+		Parameters.Insert("PlanningPeriod" , Row.PlanningPeriod);
+		Parameters.Insert("UniqueID", "" + ItemKey_UUID + "-" + BillOfMaterials_UUID);
+		
+		QuantityConvertation = Catalogs.Units.ConvertQuantityToQuantityInBaseUnit(Row.ItemKey, Row.Unit, Row.Quantity);
+		Row.BasisUnit      = QuantityConvertation.BasisUnit;
+		Row.BasisQuantity  = QuantityConvertation.QuantityInBaseUnit;
+		
+		CurrentQuantityConvertation = Catalogs.Units.ConvertQuantityToQuantityInBaseUnit(Row.ItemKey, Row.Unit, Row.CurrentQuantity);
+		Row.CurrentBasisQuantity = CurrentQuantityConvertation.QuantityInBaseUnit;
+		
+		Row.PlannedBasisQuantity = Row.BasisQuantity - CurrentQuantityConvertation.QuantityInBaseUnit;
+		Row.PlannedQuantity      = Row.Quantity - Row.CurrentQuantity;
+		
+		Row.IsProduct = True;
+		
+		Row.BusinessUnit  = Row.BusinessUnit;
+		Row.OutputID  = GetMD5(String(BillOfMaterials_UUID));		
+		Row.UniqueID  = Parameters.UniqueID;
+		
+		NewRowForStores = TableForStores.Add();
+		NewRowForStores.Key              = Row.Key;
+		NewRowForStores.Company          = Row.Company;
+		NewRowForStores.BillOfMaterials  = Row.BillOfMaterials;
+		NewRowForStores.PlanningPeriod   = Row.PlanningPeriod;
+		NewRowForStores.BusinessUnit     = Row.BusinessUnit;
+		NewRowForStores.ItemKey          = Row.ItemKey;
+		NewRowForStores.UniqueID         = Parameters.UniqueID;
+		NewRowForStores.InputID          = Row.InputID;
+		NewRowForStores.OutputID         = Row.OutputID;
+		NewRowForStores.NeedReleaseStore = True;
+		
+		ExpandRecursiveCorrection(TableForStores, ExpandedTable, Row.OutputID, Row.BillOfMaterials, 
+					Row.BasisQuantity, Row.CurrentBasisQuantity, Row.BusinessUnit, Parameters);
+	EndDo;
+	
+	
+	For Each Row In ExpandedTable Do
+		FillPropertyValues(QueryTable.Add(), Row);
+	EndDo;
+
+	StoresFromRegBillOfMaterials(QueryTable, TableForStores);
+	
+	ArrayOfColumns = New Array();
+	For Each Column In QueryTable.Columns Do
+		ArrayOfColumns.Add(TrimAll(Column.Name));
+	EndDo;
+	Columns = StrConcat(ArrayOfColumns, ",");
+	ArrayOfResult = New Array();
+	For Each Row In QueryTable Do
+		NewRow = New Structure(Columns);
+		FillPropertyValues(NewRow, Row);
+		ArrayOfResult.Add(NewRow);
+	EndDo;
+	
+	Return ArrayOfResult;
+EndFunction
+
+Procedure StoresFromRegBillOfMaterials(TableBillOfMaterials, TableForStores)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	tmp.Key AS Key,
+	|	tmp.Company AS Company,
+	|	tmp.BillOfMaterials AS BillOfMaterials,
+	|	tmp.PlanningPeriod AS PlanningPeriod,
+	|	tmp.BusinessUnit AS BusinessUnit,
+	|	tmp.ItemKey AS ItemKey,
+	|	tmp.UniqueID AS UniqueID,
+	|	tmp.InputID AS InputID,
+	|	tmp.OutputID AS OutputID,
+	|	tmp.NeedReleaseStore AS NeedReleaseStore,
+	|	tmp.NeedSemiproductStore AS NeedSemiproductStore,
+	|	tmp.NeedMaterialStore AS NeedMaterialStore
+	|INTO tmp
+	|FROM
+	|	&TableForStores AS tmp
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp.Key AS Key,
+	|	tmp.BillOfMaterials AS BillOfMaterials,
+	|	tmp.PlanningPeriod AS PlanningPeriod,
+	|	tmp.BusinessUnit AS BusinessUnit,
+	|	tmp.ItemKey AS ItemKey,
+	|	tmp.UniqueID AS UniqueID,
+	|	tmp.InputID AS InputID,
+	|	tmp.OutputID AS OutputID,
+	|	tmp.NeedReleaseStore AS NeedReleaseStore,
+	|	tmp.NeedSemiproductStore AS NeedSemiproductStore,
+	|	tmp.NeedMaterialStore AS NeedMaterialStore,
+	|	CASE
+	|		WHEN BOM.IsMaterial
+	|			THEN BOM.WriteoffStore
+	|		ELSE VALUE(Catalog.Stores.EmptyRef)
+	|	END AS MaterialStore,
+	|	CASE
+	|		WHEN BOM.IsProduct
+	|				OR BOM.IsSemiproduct
+	|			THEN BOM.SurplusStore
+	|		ELSE VALUE(Catalog.Stores.EmptyRef)
+	|	END AS ReleaseStore,
+	|	CASE
+	|		WHEN BOM.IsSemiproduct
+	|			THEN BOM.WriteoffStore
+	|		ELSE VALUE(Catalog.Stores.EmptyRef)
+	|	END AS SemiproductStore
+	|FROM
+	|	tmp AS tmp
+	|		LEFT JOIN InformationRegister.T7010S_BillOfMaterials.SliceLast(
+	|				,
+	|				(Company, BusinessUnit, PlanningPeriod, InputID, OutputID, UniqueID, ItemKey) IN
+	|					(SELECT
+	|						tmp.Company,
+	|						tmp.BusinessUnit,
+	|						tmp.PlanningPeriod,
+	|						tmp.InputID,
+	|						tmp.OutputID,
+	|						tmp.UniqueID,
+	|						tmp.ItemKey
+	|					FROM
+	|						tmp AS tmp)) AS BOM
+	|		ON (BOM.Company = tmp.Company)
+	|			AND (BOM.BusinessUnit = tmp.BusinessUnit)
+	|			AND (BOM.PlanningPeriod = tmp.PlanningPeriod)
+	|			AND (BOM.InputID = tmp.InputID)
+	|			AND (BOM.OutputID = tmp.OutputID)
+	|			AND (BOM.UniqueID = tmp.UniqueID)
+	|			AND (BOM.ItemKey = tmp.ItemKey)
+	|			AND (BOM.BillOfMaterials = tmp.BillOfMaterials)";
+	Query.SetParameter("TableForStores" , TableForStores);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	For Each Row In TableBillOfMaterials Do
+		Filter = New Structure();
+		Filter.Insert("Key"             , Row.Key);
+		Filter.Insert("BillOfMaterials" , 
+		?(ValueIsFilled(Row.BillOfMaterials), Row.BillOfMaterials, Catalogs.BillOfMaterials.EmptyRef()));
+		Filter.Insert("PlanningPeriod"  , Row.PlanningPeriod);
+		Filter.Insert("BusinessUnit"    , Row.BusinessUnit);
+		Filter.Insert("ItemKey"         , Row.ItemKey);
+		Filter.Insert("UniqueID"        , Row.UniqueID);
+		Filter.Insert("InputID"         , Row.InputID);
+		Filter.Insert("OutputID"        , Row.OutputID);
+		
+		RowsWithStores = QueryTable.FindRows(Filter);
+		
+		If RowsWithStores.Count() Then
+			Stores = RowsWithStores[0];
+		Else
+			Raise "RowsWithStores.Count() = 0";
+		EndIf;
+		
+		If Stores.NeedReleaseStore Then	
+			If ValueIsFilled(Stores.ReleaseStore) Then
+				Row.ReleaseStore = Stores.ReleaseStore;
+			Else
+				Row.ReleaseStore = Stores.BusinessUnit.MF_ReleaseStore;
+			EndIf;
+		EndIf;
+		
+		If Stores.NeedSemiproductStore Then	
+			If ValueIsFilled(Stores.SemiproductStore) Then
+				Row.SemiproductStore = Stores.SemiproductStore;
+			Else
+				Row.SemiproductStore = Stores.BusinessUnit.MF_SemiproductStore;
+			EndIf;
+		EndIf;
+		
+		If Stores.NeedMaterialStore Then				
+			If ValueIsFilled(Stores.MaterialStore) Then
+				Row.MaterialStore = Stores.MaterialStore;
+			Else
+				Row.MaterialStore = Stores.BusinessUnit.MF_MaterialStore;
+			EndIf;			
+		EndIf;
+	EndDo;
+EndProcedure
+
+Procedure ExpandRecursiveCorrection(TableForStores, ExpandedTable, InputID, BillOfMaterials, 
+										InputBasisQuantity, CurrentInputBasisQuantity, BusinessUnit, Parameters)
+	BillOfMaterialsInfo = GetInfoBillOfMaterials(BillOfMaterials);
+	UnitFactor = InputBasisQuantity / BillOfMaterialsInfo.BasisQuantity;
+	CurrentUnitFactor = CurrentInputBasisQuantity / BillOfMaterialsInfo.BasisQuantity;
+	For Each Row In BillOfMaterialsInfo.Materials Do
+		If  ValueIsFilled(Row.BillOfMaterials) Then
+			// Semiproduct
+			NewRow = ExpandedTable.Add();
+			FillPropertyValues(NewRow, Parameters);
+			NewRow.ItemKey         = Row.ItemKey;
+			NewRow.IsSemiproduct   = True;
+			NewRow.BillOfMaterials = Row.BillOfMaterials;
+			NewRow.InputID         = InputID;
+			NewRow.OutputID        = GetMD5(InputID + String(Row.BillOfMaterials.UUID()));
+			
+			NewRow.Unit            = Row.Unit;
+			NewRow.Quantity        = Row.Quantity * UnitFactor;
+			NewRow.CurrentQuantity = Row.Quantity * CurrentUnitFactor;
+			NewRow.BasisUnit       = Row.BasisUnit;
+			NewRow.BasisQuantity   = Row.BasisQuantity * UnitFactor;
+			NewRow.CurrentBasisQuantity = Row.BasisQuantity * CurrentUnitFactor;
+			
+			NewRow.PlannedBasisQuantity = NewRow.BasisQuantity - NewRow.CurrentBasisQuantity;
+			NewRow.PlannedQuantity      = NewRow.Quantity - NewRow.CurrentQuantity;
+			
+			NewRow.UniqueID        = Parameters.UniqueID;
+			NewRow.Key             = Parameters.Key;
+			NewRow.BusinessUnit    = Row.BillOfMaterials.BusinessUnit;
+					
+			NewRowForStores = TableForStores.Add();
+			NewRowForStores.Key              = Parameters.Key;
+			NewRowForStores.Company          = Parameters.Company;
+			NewRowForStores.BillOfMaterials  = Row.BillOfMaterials;
+			NewRowForStores.PlanningPeriod   = Parameters.PlanningPeriod;
+			NewRowForStores.BusinessUnit     = NewRow.BusinessUnit;
+			NewRowForStores.ItemKey          = Row.ItemKey;
+			NewRowForStores.UniqueID         = Parameters.UniqueID;
+			NewRowForStores.InputID          = NewRow.InputID;
+			NewRowForStores.OutputID         = NewRow.OutputID;
+			NewRowForStores.NeedReleaseStore = True;
+			NewRowForStores.NeedSemiproductStore = True;
+			
+			ExpandRecursiveCorrection(TableForStores, ExpandedTable, NewRow.OutputID, NewRow.BillOfMaterials, 
+								NewRow.BasisQuantity, NewRow.CurrentBasisQUantity, NewRow.BusinessUnit, Parameters);
+		ElsIf Row.IsService Then
+			// Service
+			NewRow = ExpandedTable.Add();
+			FillPropertyValues(NewRow, Parameters);
+			NewRow.ItemKey       = Row.ItemKey;
+			NewRow.IsService     = True;
+			NewRow.InputID       = InputID;
+			NewRow.Unit          = Row.Unit;
+			NewRow.Quantity      = Row.Quantity * UnitFactor;
+			NewRow.CurrentQuantity = Row.Quantity * CurrentUnitFactor;
+			NewRow.BasisUnit     = Row.BasisUnit;
+			NewRow.BasisQuantity = Row.BasisQuantity * UnitFactor;
+			NewRow.CurrentBasisQuantity = Row.BasisQuantity * CurrentUnitFactor;
+			NewRow.UniqueID      = Parameters.UniqueID;
+			NewRow.Key           = Parameters.Key;
+			NewRow.BusinessUnit  = BusinessUnit;
+			
+			// Planned quantity
+			NewRow.PlannedBasisQuantity = NewRow.BasisQuantity - NewRow.CurrentBasisQuantity;
+			NewRow.PlannedQuantity      = NewRow.Quantity - NewRow.CurrentQuantity;
+		Else
+			// Material
+			NewRow = ExpandedTable.Add();
+			FillPropertyValues(NewRow, Parameters);
+			NewRow.ItemKey       = Row.ItemKey;
+			NewRow.IsMaterial    = True;
+			NewRow.InputID       = InputID;
+			NewRow.Unit          = Row.Unit;
+			NewRow.Quantity      = Row.Quantity * UnitFactor;
+			NewRow.CurrentQuantity = Row.Quantity * CurrentUnitFactor;
+			NewRow.BasisUnit     = Row.BasisUnit;
+			NewRow.BasisQuantity = Row.BasisQuantity * UnitFactor;
+			NewRow.CurrentBasisQuantity = Row.BasisQuantity * CurrentUnitFactor;
+			NewRow.UniqueID      = Parameters.UniqueID;
+			NewRow.Key           = Parameters.Key;
+			NewRow.BusinessUnit  = BusinessUnit;
+			
+			NewRow.PlannedBasisQuantity = NewRow.BasisQuantity - NewRow.CurrentBasisQuantity;
+			NewRow.PlannedQuantity      = NewRow.Quantity - NewRow.CurrentQuantity;
+			
+			NewRowForStores = TableForStores.Add();
+			NewRowForStores.Key              = Parameters.Key;
+			NewRowForStores.Company          = Parameters.Company;
+			NewRowForStores.BillOfMaterials  = Row.BillOfMaterials;
+			NewRowForStores.PlanningPeriod   = Parameters.PlanningPeriod;
+			NewRowForStores.BusinessUnit     = NewRow.BusinessUnit;
+			NewRowForStores.ItemKey          = Row.ItemKey;
+			NewRowForStores.UniqueID         = Parameters.UniqueID;
+			NewRowForStores.InputID          = NewRow.InputID;
+			NewRowForStores.OutputID         = NewRow.OutputID;
+			NewRowForStores.NeedMaterialStore = True;
+
+		EndIf;
+	EndDo;
+EndProcedure
+
 Function GetMD5(StringValue)
 	DataHashing = New DataHashing(HashFunction.MD5);
 	DataHashing.Append(StringValue);

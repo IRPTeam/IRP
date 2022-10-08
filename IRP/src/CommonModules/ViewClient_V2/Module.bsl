@@ -1377,6 +1377,17 @@ EndProcedure
 
 #EndRegion
 
+#Region PRODUCTIONS_CURRENT_QUANTITY
+
+// Productions.CurrentQuantity
+Procedure OnSetProductionsCurrentQuantityNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "ProductionPlanningCorrection" Then
+		Parameters.Form.FormSetVisibilityAvailability();
+	EndIf;
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #Region _ITEM_LIST_

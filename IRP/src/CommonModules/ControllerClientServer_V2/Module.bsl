@@ -3487,7 +3487,8 @@ Function BindPlanningPeriod(Parameters)
 	
 	Binding.Insert("ProductionPlanningCorrection",
 		"StepChangeProductionPlanningByPlanningPeriod,
-		|StepChangeCurrentQuantityInProductions");
+		|StepChangeCurrentQuantityInProductions,
+		|StepBillOfMaterialsListCalculationsCorrection");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -3535,7 +3536,8 @@ Function BindBusinessUnit(Parameters)
 	                                     
 	Binding.Insert("ProductionPlanningCorrection", 
 		"StepChangePlanningPeriodByDateAndBusinessUnit,
-		|StepChangeProductionPlanningByPlanningPeriod");
+		|StepChangeProductionPlanningByPlanningPeriod,
+		|StepBillOfMaterialsListCalculationsCorrection");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -5744,7 +5746,7 @@ Function BindProductionsUnit(Parameters)
 		"StepBillOfMaterialsListCalculations");
 	
 	Binding.Insert("ProductionPlanningCorrection",
-		"StepChangeCurrentQuantityInProductions");
+		"StepBillOfMaterialsListCalculationsCorrection");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -5801,7 +5803,8 @@ Function BindProductionsQuantity(Parameters)
 		"StepBillOfMaterialsListCalculations");
 	
 	Binding.Insert("ProductionPlanningCorrection",
-		"StepChangeCurrentQuantityInProductions");
+		"StepChangeCurrentQuantityInProductions,
+		|StepBillOfMaterialsListCalculationsCorrection");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -5847,7 +5850,8 @@ Function BindProductionsBillOfMaterials(Parameters)
 		"StepBillOfMaterialsListCalculations");
 	
 	Binding.Insert("ProductionPlanningCorrection",
-		"StepChangeCurrentQuantityInProductions");
+		"StepChangeCurrentQuantityInProductions,
+		|StepBillOfMaterialsListCalculationsCorrection");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -5875,16 +5879,21 @@ Procedure MultiSetProductionsCurrentQuantity(Parameters, Results) Export
 	ResourceToBinding = New Map();
 	ResourceToBinding.Insert("Unit"            , BindProductionsUnit(Parameters));
 	ResourceToBinding.Insert("CurrentQuantity" , BindProductionsCurrentQuantity(Parameters));
-	MultiSetterObject(Parameters, Results, ResourceToBinding);
+	MultiSetterObject(Parameters, Results, ResourceToBinding, "OnSetProductionsCurrentQuantityNotify");
 EndProcedure
 
-// Productions.BillOfMaterials.Bind
+// Productions.CurrentQuantity.Get
+Function GetProductionsCurrentQuantity(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindProductionsCurrentQuantity(Parameters).DataPath, _Key);
+EndFunction
+
+// Productions.CurrentQuantity.Bind
 Function BindProductionsCurrentQuantity(Parameters)
 	DataPath = "Productions.CurrentQuantity";
 	Binding = New Structure();
 	
-//	Binding.Insert("ProductionPlanning",
-//		"StepBillOfMaterialsListCalculations");
+	Binding.Insert("ProductionPlanningCorrection",
+		"StepBillOfMaterialsListCalculationsCorrection");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -5893,6 +5902,7 @@ EndFunction
 Procedure StepChangeCurrentQuantityInProductions(Parameters, Chain) Export
 	Chain.ChangeCurrentQuantityInProductions.Enable = True;
 	Chain.ChangeCurrentQuantityInProductions.Setter = "MultiSetProductionsCurrentQuantity";
+	Chain.ChangeCurrentQuantityInProductions.IsLazyStep = True;
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.ChangeCurrentQuantityInProductionsOptions();
 		Options.Company             = GetCompany(Parameters);
@@ -5901,7 +5911,6 @@ Procedure StepChangeCurrentQuantityInProductions(Parameters, Chain) Export
 		Options.BillOfMaterials     = GetProductionsBillOfMaterials(Parameters, Row.Key);
 		Options.ItemKey             = GetProductionsItemKey(Parameters, Row.Key);
 		Options.Unit                = GetProductionsUnit(Parameters, Row.Key);
-		Options.DontExecuteIfExecutedBefore = True;
 		Options.Key = Row.Key;
 		Options.StepName = "StepChangeCurrentQuantityInProductions";
 		Chain.ChangeCurrentQuantityInProductions.Options.Add(Options);
@@ -5944,6 +5953,7 @@ EndProcedure
 Procedure StepBillOfMaterialsListCalculations(Parameters, Chain) Export
 	Chain.BillOfMaterialsListCalculations.Enable = True;
 	Chain.BillOfMaterialsListCalculations.Setter = "SetBillOfMaterialsList";
+	Chain.BillOfMaterialsListCalculations.IsLazyStep = True;
 	
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.BillOfMaterialsListCalculationsOptions();
@@ -5957,10 +5967,34 @@ Procedure StepBillOfMaterialsListCalculations(Parameters, Chain) Export
 		
 		Options.BillOfMaterialsList = Row.BillOfMaterialsList;
 		Options.BillOfMaterialsListColumns = Parameters.ObjectMetadataInfo.Tables.BillOfMaterialsList.Columns;
-				
 		Options.Key = Row.Key;
 		Options.StepName = "StepBillOfMaterialsListCalculations";
 		Chain.BillOfMaterialsListCalculations.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+// Step.BillOfMaterialsList.CalculationsCorrection
+Procedure StepBillOfMaterialsListCalculationsCorrection(Parameters, Chain) Export
+	Chain.BillOfMaterialsListCalculationsCorrection.Enable = True;
+	Chain.BillOfMaterialsListCalculationsCorrection.Setter = "SetBillOfMaterialsList";
+	Chain.BillOfMaterialsListCalculationsCorrection.IsLazyStep = True;
+	
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.BillOfMaterialsListCalculationsCorrectionOptions();
+		
+		Options.Company          = GetCompany(Parameters); 
+		Options.BillOfMaterials  = GetProductionsBillOfMaterials(Parameters, Row.Key);
+		Options.PlanningPeriod   = GetPlanningPeriod(Parameters);
+		Options.ItemKey          = GetProductionsItemKey(Parameters, Row.Key);
+		Options.Unit             = GetProductionsUnit(Parameters, Row.Key);
+		Options.Quantity         = GetProductionsQuantity(Parameters, Row.Key);
+		Options.CurrentQuantity  = GetProductionsCurrentQuantity(Parameters, Row.Key);
+		
+		Options.BillOfMaterialsList = Row.BillOfMaterialsList;
+		Options.BillOfMaterialsListColumns = Parameters.ObjectMetadataInfo.Tables.BillOfMaterialsList.Columns;		
+		Options.Key = Row.Key;
+		Options.StepName = "StepBillOfMaterialsListCalculationsCorrection";
+		Chain.BillOfMaterialsListCalculationsCorrection.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -9243,6 +9277,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetBusinessUnitNotify"               Then ViewClient_V2.OnSetBusinessUnitNotify(Parameters);
 	ElsIf ViewNotify = "ProductionsOnAddRowFormNotify"         Then ViewClient_V2.ProductionsOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "ProductionsOnCopyRowFormNotify"        Then ViewClient_V2.ProductionsOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "OnSetProductionsCurrentQuantityNotify" Then ViewClient_V2.OnSetProductionsCurrentQuantityNotify(Parameters);
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);
 	EndIf;
@@ -9348,7 +9383,7 @@ Procedure SetterForm(StepNames, DataPath, Parameters, Results,
 	Setter("Form", StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache);
 EndProcedure
 
-Procedure MultiSetterObject(Parameters, Results, ResourceToBinding)
+Procedure MultiSetterObject(Parameters, Results, ResourceToBinding, ViewNotify = Undefined)
 	For Each KeyValue In ResourceToBinding Do
 		Resource = KeyValue.Key;
 		Binding = KeyValue.Value;
@@ -9359,9 +9394,9 @@ Procedure MultiSetterObject(Parameters, Results, ResourceToBinding)
 				_Results.Add(New Structure("Value, Options", Result.Value[Resource], New Structure("Key")));
 				Break;
 			EndDo;
-			SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, _Results);
+			SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, _Results, ViewNotify);
 		ElsIf Segments.Count() = 2 Then // it is column of table
-			SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results, , Resource);
+			SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results, ViewNotify, Resource);
 		Else
 			Raise StrTemplate("Wrong data path [%1]", Binding.DataPath);
 		EndIf;

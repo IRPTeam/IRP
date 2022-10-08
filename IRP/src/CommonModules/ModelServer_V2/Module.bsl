@@ -1,6 +1,6 @@
 
-Procedure ServerEntryPoint(StepsEnablerName, Parameters) Export
-	ModelClientServer_V2.ServerEntryPoint(StepsEnablerName, Parameters);
+Procedure ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps) Export
+	ModelClientServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
 EndProcedure
 
 Function ExtractDataAgreementApArPostingDetailImp(Agreement) Export

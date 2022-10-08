@@ -6,7 +6,7 @@ Procedure OnReadAtServer(CurrentObject)
 	ThisObject.ProductionPlanningClosing = DocProductionPlanningClosingServer.GetProductionPlanningColosing(CurrentObject.ProductionPlanning);
 	ThisObject.ProductionPlanningCorrectionExists = DocProductionPlanningCorrectionServer.GetProductionPlanningCorrectionExists(CurrentObject.Ref);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
-	SetCurrentQuantityError(Not IsCurrentQuantityActual());
+	//SetCurrentQuantityError(Not IsCurrentQuantityActual());
 EndProcedure
 
 &AtServer
@@ -14,7 +14,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocProductionPlanningCorrectionServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
-		SetCurrentQuantityError(False);		
+		//SetCurrentQuantityError(False);		
 	EndIf;
 EndProcedure
 
@@ -27,7 +27,7 @@ EndProcedure
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	DocProductionPlanningCorrectionServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
-	SetCurrentQuantityError(Not IsCurrentQuantityActual());
+	//SetCurrentQuantityError(Not IsCurrentQuantityActual());
 EndProcedure
 
 &AtClient
@@ -74,11 +74,64 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form)
 	IsFilled_ProductionPlanningClosing = ValueIsFilled(Form.ProductionPlanningClosing);
 	IsFilled_ProductionPlanningCorrectionExists = ValueIsFilled(Form.ProductionPlanningCorrectionExists);
+	IsNewObject = Not ValueIsFilled(Object.Ref);
 	
 	Form.ReadOnly = IsFilled_ProductionPlanningClosing Or IsFilled_ProductionPlanningCorrectionExists;
 	Form.Items.ProductionPlanningCorrectionExists.Visible = IsFilled_ProductionPlanningCorrectionExists;
 	Form.Items.GroupHead.Visible = IsFilled_ProductionPlanningClosing;
+	
+	If ValueIsFilled(Object.ApprovedDate) Or IsNewObject Then
+		UpdateCurrentQuantityVisible = False;
+	Else
+		UpdateCurrentQuantityVisible = Not IsCurrentQuantityActual(Object);
+	EndIf;	
+	
+	Form.Items.PictureCurrentQuantittyError.Visible = UpdateCurrentQuantityVisible;
+	Form.Items.LabelCurrentQuantityError.Visible    = UpdateCurrentQuantityVisible;
+	Form.Items.UpdateCurrentQuantity.Visible        = UpdateCurrentQuantityVisible;
 EndProcedure
+
+//&AtServer
+//Procedure SetCurrentQuantityError(IsError)
+//	If ValueIsFilled(Object.ApprovedDate) Then
+//		Items.PictureCurrentQuantittyError.Visible = False;
+//		Items.LabelCurrentQuantityError.Visible = False;
+//		Items.UpdateCurrentQuantity.Visible = False;
+//	Else		
+//		Items.PictureCurrentQuantittyError.Visible = IsError;
+//		Items.LabelCurrentQuantityError.Visible = IsError;
+//		Items.UpdateCurrentQuantity.Visible = IsError;
+//	EndIf;
+//EndProcedure
+
+&AtServerNoContext
+Function IsCurrentQuantityActual(Object)
+	For Each Row In Object.Productions Do
+		CurrentQuantityInfo = GetCurrentQuantity(Object.Company,
+												 Object.ProductionPlanning,
+												 Object.PlanningPeriod, 
+												 Row.BillOfMaterials,
+												 Row.ItemKey);
+
+		CurrentQunatity = ?(ValueIsFilled(Row.CurrentQuantity), Row.CurrentQuantity, 0);
+		ActualQuantity  = ?(ValueIsFilled(CurrentQuantityInfo.BasisQuantity), CurrentQuantityInfo.BasisQuantity, 0);
+				
+		If CurrentQunatity <> ActualQuantity Then
+			Return False;
+		EndIf;	
+	EndDo;
+	Return True;
+EndFunction
+
+&AtServerNoContext
+Function GetCurrentQuantity(Company, ProductionPlanning, PlanningPeriod, BillOfMaterials, ItemKey)
+	Return Documents.ProductionPlanningCorrection.GetCurrentQuantity(Company,
+																	 ProductionPlanning,
+																	 PlanningPeriod,  
+	                                                                 BillOfMaterials,
+	                                                                 ItemKey);
+EndFunction
+
 
 #EndRegion
 
@@ -87,7 +140,6 @@ EndProcedure
 &AtClient
 Procedure DateOnChange(Item)
 	DocProductionPlanningCorrectionClient.DateOnChange(Object, ThisObject, Item);
-	//UpdateCurrentQuantityByTable();
 EndProcedure
 
 #EndRegion
@@ -97,7 +149,6 @@ EndProcedure
 &AtClient
 Procedure CompanyOnChange(Item)
 	DocProductionPlanningCorrectionClient.CompanyOnChange(Object, ThisObject, Item);
-	//UpdateCurrentQuantityByTable();
 EndProcedure
 
 &AtClient
@@ -117,7 +168,6 @@ EndProcedure
 &AtClient
 Procedure BusinessUnitOnChange(Item)
 	DocProductionPlanningCorrectionClient.BusinessUnitOnChange(Object, ThisObject, Item);
-	//UpdateCurrentQuantityByTable();
 EndProcedure
 
 #EndRegion
@@ -127,7 +177,6 @@ EndProcedure
 &AtClient
 Procedure PlanningPeriodOnChange(Item)
 	DocProductionPlanningCorrectionClient.PlanningPeriodOnChange(Object, ThisObject, Item);
-	//UpdateCurrentQuantityByTable();
 EndProcedure
 
 #EndRegion
@@ -161,7 +210,6 @@ EndProcedure
 &AtClient
 Procedure ProductionsItemOnChange(Item)
 	DocProductionPlanningCorrectionClient.ProductionsItemOnChange(Object, ThisObject, Item);
-//	UpdateCurrentQuantityByRow();
 EndProcedure
 
 &AtClient
@@ -181,7 +229,6 @@ EndProcedure
 &AtClient
 Procedure ProductionsItemKeyOnChange(Item)
 	DocProductionPlanningCorrectionClient.ProductionsItemKeyOnChange(Object, ThisObject, Item);
-//	UpdateCurrentQuantityByRow();
 EndProcedure
 
 #EndRegion
@@ -191,7 +238,6 @@ EndProcedure
 &AtClient
 Procedure ProductionsBillOfMaterialsOnChange(Item)
 	DocProductionPlanningCorrectionClient.ProductionsBillOfMaterialsOnChange(Object, ThisObject, Item);
-//	UpdateCurrentQuantityByRow();
 EndProcedure
 
 #EndRegion
@@ -201,7 +247,6 @@ EndProcedure
 &AtClient
 Procedure ProductionsUnitOnChange(Item)
 	DocProductionPlanningCorrectionClient.ProductionsUnitOnChange(Object, ThisObject, Item);
-//	UpdateCurrentQuantityByRow();
 EndProcedure
 
 #EndRegion
@@ -211,7 +256,6 @@ EndProcedure
 &AtClient
 Procedure ProductionsQuantityOnChange(Item)
 	DocProductionPlanningCorrectionClient.ProductionsQuantityOnChange(Object, ThisObject, Item);
-//	UpdateCurrentQuantityByRow();
 EndProcedure
 
 #EndRegion
@@ -311,90 +355,12 @@ EndProcedure
 
 &AtClient
 Procedure UpdateCurrentQuantity(Command)
-	UpdateCurrentQuantityByTable();
+	//UpdateCurrentQuantityByTable();
 EndProcedure
 
 #EndRegion
 
 #EndRegion
-
-&AtServer
-Procedure SetCurrentQuantityError(IsError)
-	If ValueIsFilled(Object.ApprovedDate) Then
-		Items.PictureCurrentQuantittyError.Visible = False;
-		Items.LabelCurrentQuantityError.Visible = False;
-		Items.UpdateCurrentQuantity.Visible = False;
-	Else		
-		Items.PictureCurrentQuantittyError.Visible = IsError;
-		Items.LabelCurrentQuantityError.Visible = IsError;
-		Items.UpdateCurrentQuantity.Visible = IsError;
-	EndIf;
-EndProcedure
-
-&AtClient
-Procedure UpdateCurrentQuantityByRow()
-	CurrentData = Items.Productions.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	
-	CurrentQuantityInfo = GetCurrentQuantity(Object.Company,
-											 Object.ProductionPlanning, 
-											 Object.PlanningPeriod, 
-											 CurrentData.BillOfMaterials,
-											 CurrentData.ItemKey);
-	If ValueIsFilled(CurrentQuantityInfo.BasisQuantity) Then
-		CurrentData.Unit = CurrentQuantityInfo.BasisUnit;
-	EndIf;
-	CurrentData.CurrentQuantity = CurrentQuantityInfo.BasisQuantity;
-//	MF_FormsClient.FillBillOfMaterialTableCorrection(Object, ThisObject, CurrentData);
-EndProcedure
-
-&AtServer
-Procedure UpdateCurrentQuantityByTable()
-	For Each Row In Object.Productions Do
-		CurrentQuantityInfo = GetCurrentQuantity(Object.Company,
-												 Object.ProductionPlanning, 
-												 Object.PlanningPeriod,
-												 Row.BillOfMaterials,
-												 Row.ItemKey);
-		If ValueIsFilled(CurrentQuantityInfo.BasisQuantity) Then
-			Row.Unit = CurrentQuantityInfo.BasisUnit;
-		EndIf;
-		Row.CurrentQuantity = CurrentQuantityInfo.BasisQuantity;
-//		MF_FormsClientServer.FillBillOfMaterialTableCorrection(Object, Row);
-	EndDo;
-	SetCurrentQuantityError(False);
-EndProcedure
-
-&AtServer
-Function IsCurrentQuantityActual()
-	For Each Row In Object.Productions Do
-		CurrentQuantityInfo = GetCurrentQuantity(Object.Company,
-												 Object.ProductionPlanning,
-												 Object.PlanningPeriod, 
-												 Row.BillOfMaterials,
-												 Row.ItemKey);
-
-		CurrentQunatity = ?(ValueIsFilled(Row.CurrentQuantity), Row.CurrentQuantity, 0);
-		ActualQuantity  = ?(ValueIsFilled(CurrentQuantityInfo.BasisQuantity), CurrentQuantityInfo.BasisQuantity, 0);
-				
-		If CurrentQunatity <> ActualQuantity Then
-			Return False;
-		EndIf;	
-	EndDo;
-	Return True;
-EndFunction
-
-&AtServerNoContext
-Function GetCurrentQuantity(Company, ProductionPlanning, PlanningPeriod, BillOfMaterials, ItemKey)
-	Return Documents.ProductionPlanningCorrection.GetCurrentQuantity(Company,
-																	 ProductionPlanning,
-																	 PlanningPeriod,  
-	                                                                 BillOfMaterials,
-	                                                                 ItemKey);
-EndFunction
-
 
 
 

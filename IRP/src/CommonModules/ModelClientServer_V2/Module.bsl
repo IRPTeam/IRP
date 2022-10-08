@@ -1,19 +1,18 @@
 
 #Region ENTRY_POINTS
 
-Procedure EntryPoint(StepNames, Parameters) Export
+Procedure EntryPoint(StepNames, Parameters, ExecuteLazySteps = False) Export
 	InitEntryPoint(StepNames, Parameters);
 	Parameters.ModelEnvironment.StepNamesCounter.Add(StepNames);
 
-// #optimization 1	
 If ValueIsFilled(StepNames) And StepNames <> "BindVoid" Then 
 
 #IF Client THEN
 	Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
 	TransferFormToStructure(Transfer, Parameters);
 #ENDIF
-
-	ModelServer_V2.ServerEntryPoint(StepNames, Parameters);
+	
+	ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
 	
 #IF Client THEN
 	TransferStructureToForm(Transfer, Parameters);
@@ -22,22 +21,26 @@ If ValueIsFilled(StepNames) And StepNames <> "BindVoid" Then
 EndIf;
 
 	// if cache was initialized from this EntryPoint then ChainComplete
-	If Parameters.ModelEnvironment.FirstStepNames = StepNames Then
-		// web-client-bug-fix
-		ControllerClientServer_V2.OnChainComplete(Parameters);
-		//Execute StrTemplate("%1.OnChainComplete(Parameters);", Parameters.ControllerModuleName);
-		DestroyEntryPoint(Parameters);
+	If Parameters.ModelEnvironment.FirstStepNames = StepNames Or ExecuteLazySteps Then
+		If Parameters.ModelEnvironment.ArrayOfLazySteps.Count() Then
+			LazyStepNames = StrConcat(Parameters.ModelEnvironment.ArrayOfLazySteps, ",");
+			Parameters.ModelEnvironment.ArrayOfLazySteps.Clear();
+			EntryPoint(LazyStepNames, Parameters, True);
+		Else	
+			ControllerClientServer_V2.OnChainComplete(Parameters);
+			DestroyEntryPoint(Parameters);
+		EndIf;
 	EndIf;
 EndProcedure
 
-Procedure ServerEntryPoint(StepNames, Parameters) Export
+Procedure ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps) Export
 	Chain = GetChain();
 	For Each ArrayItem In StrSplit(StepNames, ",") Do
 		Execute StrTemplate("%1.%2(Parameters, Chain);", 
 			Parameters.ControllerModuleName, 
 			StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
 	EndDo;
-	ExecuteChain(Parameters, Chain);
+	ExecuteChain(Parameters, Chain, ExecuteLazySteps);
 EndProcedure
 
 Procedure TransferFormToStructure(Transfer, Parameters) Export
@@ -66,6 +69,7 @@ Function GetChainLink(ExecutorName)
 	ChainLink.Insert("Options", New Array());
 	ChainLink.Insert("Setter" , Undefined);
 	ChainLink.Insert("ExecutorName", ExecutorName);
+	ChainLink.Insert("IsLazyStep"  , False);
 	Return ChainLink; 
 EndFunction
 
@@ -91,16 +95,28 @@ Function GetChainLinkResult(Options, Value)
 	Return Result;
 EndFunction
 
-Procedure ExecuteChain(Parameters, Chain)
+Procedure ExecuteChain(Parameters, Chain, ExecuteLazySteps)
 	For Each ChainLink in Chain Do
 		Name = ChainLink.Key;
 		If Chain[Name].Enable Then
+				
+			
 			Results = New Array();
-			For Each Options In Chain[Name].Options Do
+			For Each Options In Chain[Name].Options Do	
 				If Options.DontExecuteIfExecutedBefore 
 					And Not Parameters.ModelEnvironment.AlreadyExecutedSteps.Get(Name + ":" + Options.Key) = Undefined Then
 						Continue;
 				EndIf;
+				
+				If Not ExecuteLazySteps And Chain[Name].IsLazyStep Then
+					StepName = "Step" + Name;
+					If Parameters.ModelEnvironment.ArrayOfLazySteps.Find(StepName) = Undefined Then
+						Parameters.ModelEnvironment.ArrayOfLazySteps.Add(StepName);
+					EndIf;
+					AddToAlreadyExecutedSteps(Parameters, Options, Name);
+					Continue; // is lazy step, dont execute, maybe later
+				EndIf;
+			
 				Result = Undefined;
 				ExecutorName = Chain[Name].ExecutorName;
 				// procedure with prefix XX_ placed in extension
@@ -110,11 +126,16 @@ Procedure ExecuteChain(Parameters, Chain)
 					Execute StrTemplate("Result = %1(Options)", ExecutorName);
 				EndIf;
 				Results.Add(GetChainLinkResult(Options, Result));
-				Parameters.ModelEnvironment.AlreadyExecutedSteps.Insert(Name + ":" + Options.Key, New Structure("Name, Key", Name, Options.Key));
+				AddToAlreadyExecutedSteps(Parameters, Options, Name);
 			EndDo;
+			// set result to property
 			Execute StrTemplate("%1.%2(Parameters, Results);", Parameters.ControllerModuleName, Chain[Name].Setter);
 		EndIf;
 	EndDo;
+EndProcedure
+
+Procedure AddToAlreadyExecutedSteps(Parameters, Options, Name)
+	Parameters.ModelEnvironment.AlreadyExecutedSteps.Insert(Name + ":" + Options.Key, New Structure("Name, Key", Name, Options.Key));
 EndProcedure
 
 // used in extensions
@@ -256,7 +277,8 @@ Function GetChain()
 	Chain.Insert("ChangeProductionPlanningByPlanningPeriod"  , GetChainLink("ChangeProductionPlanningByPlanningPeriodExecute"));
 	Chain.Insert("ChangeCurrentQuantityInProductions"        , GetChainLink("ChangeCurrentQuantityInProductionsExecute"));
 	
-	Chain.Insert("BillOfMaterialsListCalculations"  , GetChainLink("BillOfMaterialsListCalculationsExecute"));
+	Chain.Insert("BillOfMaterialsListCalculations"           , GetChainLink("BillOfMaterialsListCalculationsExecute"));
+	Chain.Insert("BillOfMaterialsListCalculationsCorrection" , GetChainLink("BillOfMaterialsListCalculationsCorrectionExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -1735,6 +1757,43 @@ Function BillOfMaterialsListCalculationsExecute(Options) Export
 	Return Result;
 EndFunction
 
+Function BillOfMaterialsListCalculationsCorrectionOptions() Export
+	Return GetChainLinkOptions("BillOfMaterialsList, BillOfMaterialsListColumns,
+		|Company, BillOfMaterials, PlanningPeriod, ItemKey, Unit, Quantity, CurrentQuantity");
+EndFunction
+
+Function BillOfMaterialsListCalculationsCorrectionExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("BillOfMaterialsList", New Array());
+	
+	CalculationParameters = New Structure();
+	CalculationParameters.Insert("Key"             , Options.Key);
+	CalculationParameters.Insert("Company"         , Options.Company);
+	CalculationParameters.Insert("BillOfMaterials" , Options.BillOfMaterials);
+	CalculationParameters.Insert("PlanningPeriod"  , Options.PlanningPeriod);
+	CalculationParameters.Insert("ItemKey"         , Options.ItemKey);
+	CalculationParameters.Insert("Unit"            , Options.Unit);
+	CalculationParameters.Insert("Quantity"        , Options.Quantity);
+	CalculationParameters.Insert("CurrentQuantity" , Options.CurrentQuantity);
+	
+	StoreCache = New Array();
+	For Each Row In Options.BillOfMaterialsList Do
+		Cache = New Structure("ReleaseStore, MaterialStore, SemiproductStore,
+			|Key, ItemKey, InputID, OutputID, UniqueID");
+		FillPropertyValues(Cache, Row);
+		StoreCache.Add(Cache);
+	EndDo;
+	
+	BillOfMaterialRows = ManufacturingServer.FillBillOfMaterialsTableCorrection(CalculationParameters);
+	For Each Row In BillOfMaterialRows Do
+		NewRow = New Structure(Options.BillOfMaterialsListColumns);
+		FillPropertyValues(NewRow, Row);
+		Result.BillOfMaterialsList.Add(NewRow);
+		RestoreStoresFromCache(StoreCache, Row, NewRow);
+	EndDo;
+	Return Result;
+EndFunction
+
 Procedure RestoreStoresFromCache(StoreCache, Row, NewRow)
 	For Each Cache In StoreCache Do
 		If Cache.Key = Row.Key 
@@ -2818,6 +2877,7 @@ Procedure InitEntryPoint(StepNames, Parameters)
 		Environment.Insert("FirstStepNames"  		, StepNames);
 		Environment.Insert("StepNamesCounter"		, New Array());
 		Environment.Insert("AlreadyExecutedSteps"   , New Map());
+		Environment.Insert("ArrayOfLazySteps"       , New Array());
 		Parameters.Insert("ModelEnvironment"		, Environment)
 	EndIf;
 EndProcedure

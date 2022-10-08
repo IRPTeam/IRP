@@ -215,7 +215,7 @@
       <fillChecking>ShowError</fillChecking>
       <choiceParameterLinks>
         <name>Filter.Item</name>
-        <field>Catalog.BillOfMaterials.Attribute.Item</field>
+        <field>Catalog.BillOfMaterials.TabularSection.Content.Attribute.Item</field>
       </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>

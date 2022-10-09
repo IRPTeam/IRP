@@ -276,6 +276,24 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
+      <choiceParameterLinks>
+        <name>Filter.Item</name>
+        <field>Document.ProductionPlanningCorrection.TabularSection.Productions.Attribute.Item</field>
+      </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.ItemKey</name>
+        <field>Document.ProductionPlanningCorrection.TabularSection.Productions.Attribute.ItemKey</field>
+      </choiceParameterLinks>
+      <choiceParameters>
+        <name>Filter.Active</name>
+        <value xsi:type="core:BooleanValue"/>
+      </choiceParameters>
+      <choiceParameters>
+        <name>Filter.Type</name>
+        <value xsi:type="core:ReferenceValue">
+          <value>Enum.BillOfMaterialsTypes.EnumValue.Product</value>
+        </value>
+      </choiceParameters>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

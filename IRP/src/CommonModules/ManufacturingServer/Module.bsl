@@ -247,6 +247,119 @@ Function FillBillOfMaterialsTableCorrection(Parameters) Export
 	Return ArrayOfResult;
 EndFunction
 
+Procedure FillMaterialsTable(Object) Export
+	Parameters = New Structure();
+	
+	For Each Row In Object.Materials Do
+		Row.ItemBOM     = Undefined;
+		Row.ItemKeyBOM  = Undefined;
+		Row.UnitBOM     = Undefined;
+		Row.QuantityBOM = Undefined;
+	EndDo;
+
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	BillOfMaterialsContent.ItemKey.Item AS ItemBOM,
+	|	BillOfMaterialsContent.ItemKey AS ItemKeyBOM,
+	|	BillOfMaterialsContent.Unit AS UnitBOM,
+	|	BillOfMaterialsContent.Quantity AS QuantityBOM
+	|FROM
+	|	Catalog.BillOfMaterials.Content AS BillOfMaterialsContent
+	|WHERE
+	|	BillOfMaterialsContent.Ref = &Ref";
+	//Query.SetParameter("Ref", Object.BillOfMaterials);
+	Query.SetParameter("Ref", Parameters.BillOfMaterials);
+	QueryResult = Query.Execute();
+	
+	//BillOfMaterials_UUID = String(Object.BillOfMaterials.UUID());
+	BillOfMaterials_UUID = String(Parameters.BillOfMaterials.UUID());
+	QueryTable = QueryResult.Unload();
+	For Each Row In QueryTable Do
+		RowUniqueID = String(Row.ItemKeyBOM.UUID()) + "-" + BillOfMaterials_UUID;
+		RowsMaterials = Object.Materials.FindRows(New Structure("ItemKey", Row.ItemKeyBOM));
+		RowMaterials = Undefined;
+		If RowsMaterials.Count() Then
+			RowMaterials = RowsMaterials[0];
+			FillPropertyValues(RowMaterials, Row);
+			RowMaterials.UniqueID = RowUniqueID;
+		Else
+			RowMaterials = Object.Materials.Add();
+			FillPropertyValues(RowMaterials, Row);
+			RowMaterials.UniqueID = RowUniqueID;
+			RowMaterials.Item     = Row.ItemBOM;
+			RowMaterials.ItemKey  = Row.ItemKeyBOM;
+			RowMaterials.Unit     = Row.UnitBOM;
+			RowMaterials.Quantity = Row.QuantityBOM;
+		EndIf;
+	EndDo;
+
+	CalculateMaterialsQuantity(Object);
+EndProcedure
+
+Procedure CalculateMaterialsQuantity(Object) Export
+	// Bill of materials (basis quantity)
+	Quantity_BillOfMaterials = GetBasisQuantity(Object.BillOfMaterials.ItemKey, Object.BillOfMaterials.Unit, Object.BillOfMaterials.Quantity);
+	
+	If Quantity_BillOfMaterials = 0 Then
+		Return;
+	EndIf;
+		
+	Quantity_Produce = GetBasisQuantity(Object.ItemKey, Object.Unit, Object.Quantity); 
+	
+	For Each Row In Object.BillOfMaterials.Content Do
+		q1 = (GetBasisQuantity(Row.ItemKey, Row.Unit, Row.Quantity) / Quantity_BillOfMaterials) * Quantity_Produce;
+		
+		ArrayOfRows = Object.Materials.FindRows(New Structure("ItemKey", Row.ItemKey));
+		For Each ItemOfRow In ArrayOfRows Do
+			q2 = GetBasisQuantity(ItemOfRow.ItemKeyBOM, ItemOfRow.UnitBOM, 1);
+			
+			If q2 = 0 Then
+				ItemOfRow.QuantityBOM = 0;
+				If Not ItemOfRow.IsManualChanged Then
+					ItemOfRow.Quantity = ItemOfRow.QuantityBOM;
+				EndIf;
+				Continue;
+			EndIf;
+			ItemOfRow.QuantityBOM = q1 / q2;
+			If Not ItemOfRow.IsManualChanged Then
+				ItemOfRow.Quantity = ItemOfRow.QuantityBOM;
+			EndIf;
+		EndDo; 	
+	EndDo;
+EndProcedure
+
+Function GetBasisQuantity(ItemKey, Unit, Quantity)
+	If  Not ValueIsFilled(ItemKey)
+		Or Not ValueIsFilled(Unit)
+		Or Not ValueIsFilled(Quantity) Then
+		Return 0;
+	EndIf;
+	
+	Table = New ValueTable();
+	Table.Columns.Add("Item");
+	Table.Columns.Add("ItemUnit");
+	Table.Columns.Add("ItemKey");
+	Table.Columns.Add("ItemKeyUnit");
+	Table.Columns.Add("Unit");
+	Table.Columns.Add("BasisUnit");
+	Table.Columns.Add("Quantity");
+	Table.Columns.Add("BasisQuantity");
+	
+	NewRow = Table.Add();
+	NewRow.Item          = ItemKey.Item;
+	NewRow.ItemUnit      = ItemKey.Item.Unit;
+	NewRow.ItemKey       = ItemKey;
+	NewRow.ItemKeyUnit   = ItemKey.Unit;
+	NewRow.Unit          = Unit;
+	NewRow.BasisUnit     = Catalogs.Units.EmptyRef();
+	NewRow.Quantity      = Quantity;
+	NewRow.BasisQuantity = 0;
+	
+	PostingServer.CalculateQuantityByUnit(Table);
+	Return Table[0].BasisQuantity;	
+EndFunction
+
 Procedure StoresFromRegBillOfMaterials(TableBillOfMaterials, TableForStores)
 	Query = New Query();
 	Query.Text = 

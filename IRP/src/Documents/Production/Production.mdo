@@ -149,7 +149,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:NumberValue">
-      <value>0</value>
+      <value>1</value>
     </fillValue>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -166,6 +166,26 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <choiceParameterLinks>
+      <name>Filter.Item</name>
+      <field>Document.Production.Attribute.Item</field>
+    </choiceParameterLinks>
+    <choiceParameterLinks>
+      <name>Filter.ItemKey</name>
+      <field>Document.Production.Attribute.ItemKey</field>
+    </choiceParameterLinks>
+    <choiceParameters>
+      <name>Filter.Active</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
+      </value>
+    </choiceParameters>
+    <choiceParameters>
+      <name>Filter.Type</name>
+      <value xsi:type="core:ReferenceValue">
+        <value>Enum.BillOfMaterialsTypes.EnumValue.Product</value>
+      </value>
+    </choiceParameters>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -287,6 +307,20 @@
       <key>en</key>
       <value>Materials</value>
     </synonym>
+    <attributes uuid="48a038c4-20a3-4e37-aa71-3e9c19067d9a">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="33c7bd76-06a2-4280-beb8-df238c50aaaa">
       <name>Item</name>
       <synonym>

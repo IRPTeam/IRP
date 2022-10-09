@@ -1215,6 +1215,10 @@ Procedure MaterialsLoad(Object, Form, Address, KeyOwner = Undefined, GroupColumn
 	ControllerClientServer_V2.MaterialsLoad(Parameters);
 EndProcedure
 
+Procedure MaterialsAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "Materials");
+EndProcedure
+
 #EndRegion
 
 #Region MATERIALS_COLUMNS
@@ -1270,6 +1274,23 @@ Procedure MaterialsCostWriteOffOnChange(Object, Form, CurrentData = Undefined) E
 	Rows = GetRowsByCurrentData(Form, "Materials", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "Materials", Rows);
 	ControllerClientServer_V2.MaterialsCostWriteOffOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_MATERIAL_TYPE
+
+// Materials.MaterialType
+Procedure MaterialsMaterialTypeOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Materials", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Materials", Rows);
+	ControllerClientServer_V2.MaterialsMaterialTypeOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetMaterialsMaterialTypeNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "Production" Then
+		Parameters.Form.FormSetVisibilityAvailability();
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -2386,6 +2407,21 @@ EndProcedure
 
 #EndRegion
 
+#Region STORE_PRODUCTION
+
+Procedure StoreProductionOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.StoreProductionOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetStoreProductionNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
 #Region USE_SHIPMENT_CONFIRMATION
 
 Procedure UseShipmentConfirmationOnChange(Object, Form, TableNames) Export
@@ -2827,6 +2863,39 @@ EndProcedure
 
 Procedure OnSetItemKeyBundleNotify(Parameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region _ITEM
+
+Procedure ItemOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.ItemOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY
+
+Procedure ItemKeyOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.ItemKeyOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region BILL_OF_MATERIALS
+
+Procedure BillOfMaterialsOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.BillOfMaterialsOnChange(Parameters);
+	EndDo;
 EndProcedure
 
 #EndRegion

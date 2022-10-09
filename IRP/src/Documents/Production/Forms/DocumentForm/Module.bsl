@@ -12,7 +12,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocProductionServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
-		SetCurrentQuantityError(False);		
+//		SetCurrentQuantityError(False);		
 	EndIf;
 EndProcedure
 
@@ -84,6 +84,342 @@ EndProcedure
 
 #EndRegion
 
+#Region _DATE
+
+&AtClient
+Procedure DateOnChange(Item)
+	DocProductionClient.DateOnChange(Object, ThisObject, Item);
+	
+//	MF_FormsClient.ChangePlanningPeriodWithQuestion(Object);
+EndProcedure
+
+#EndRegion
+
+#Region COMPANY
+
+&AtClient
+Procedure CompanyOnChange(Item)
+	DocProductionClient.CompanyOnChange(Object, ThisObject, Item);
+	
+//	MF_FormsClient.SetDocumentProductionPlanning(Object);
+EndProcedure
+
+&AtClient
+Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
+	DocProductionClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
+	DocProductionClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region BUSINESS_UNIT
+
+&AtClient
+Procedure BusinessUnitOnChange(Item)
+	DocProductionClient.BusinessUnitOnChange(Object, ThisObject, Item);
+	
+//	MF_FormsClient.ChangePlanningPeriodWithQuestion(Object);
+EndProcedure
+
+#EndRegion
+
+#Region PLANNING_PERIOD
+
+&AtClient
+Procedure PlanningPeriodOnChange(Item)
+	DocProductionClient.PlanningPeriodOnChange(Object, ThisObject, Item);
+	
+//	MF_FormsClient.SetDocumentProductionPlanning(Object);
+EndProcedure
+
+#EndRegion
+
+#Region _ITEM
+
+&AtClient
+Procedure ItemOnChange(Item)
+	DocProductionClient.ItemOnChange(Object, ThisObject, Item);
+	
+//	MF_FormsClientServer.ItemOnChange_Object(Object);
+//	Object.BillOfMaterials = MF_FormsServer.GetBillOfMaterialsByItemKey(Object.ItemKey);
+//	BillOfMaterialsOnChangeAtServer();
+EndProcedure
+
+&AtClient
+Procedure ItemStartChoice(Item, ChoiceData, StandardProcessing)
+	DocProductionClient.ItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	
+//	MF_FormsClient.ItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemEditTextChange(Item, Text, StandardProcessing)
+	DocProductionClient.ItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	
+//	MF_FormsClient.ItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY
+
+&AtClient
+Procedure ItemKeyOnChange(Item)
+	DocProductionClient.ItemKeyOnChange(Object, ThisObject, Item);
+	
+//	MF_FormsClientServer.ItemKeyOnChange_Object(Object);
+//	Object.BillOfMaterials = MF_FormsServer.GetBillOfMaterialsByItemKey(Object.ItemKey);
+//	BillOfMaterialsOnChangeAtServer();
+EndProcedure
+
+#EndRegion
+
+#Region STORE_PRODUCTION
+
+&AtClient
+Procedure StoreProductionOnChange(Item)
+	DocProductionClient.StoreProductionOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY
+
+//---
+&AtClient
+Procedure QuantityOnChange(Item)
+	DocProductionClient.QuantityOnChange(Object, ThisObject, Item);
+	
+//	QuantityOnChangeAtServer();
+EndProcedure
+
+//&AtServer
+//Procedure QuantityOnChangeAtServer()
+//	MF_DocProductionServer.CalculateMaterialsQuantity(Object);
+//EndProcedure
+
+#EndRegion
+
+#Region UNIT
+
+//---
+&AtClient
+Procedure UnitOnChange(Item)
+	DocProductionClient.UnitOnChange(Object, ThisObject, Item);
+	
+//	QuantityOnChangeAtServer();
+EndProcedure
+
+#EndRegion
+
+#Region BILL_OF_MATERIALS
+
+//---
+&AtClient
+Procedure BillOfMaterialsOnChange(Item)
+	DocProductionClient.BillOfMaterialsOnChange(Object, ThisObject, Item);
+	
+//	BillOfMaterialsOnChangeAtServer();
+EndProcedure
+
+//&AtServer
+//Procedure BillOfMaterialsOnChangeAtServer()	
+//	MF_DocProductionServer.BillOfMaterialsOnChangeAtServer(Object);
+//EndProcedure
+
+#EndRegion
+
+#Region MATERIALS
+
+&AtClient
+Procedure MaterialsSelection(Item, RowSelected, Field, StandardProcessing)
+	DocProductionClient.MaterialsSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure MaterialsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocProductionClient.MaterialsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure MaterialsBeforeDeleteRow(Item, Cancel)
+	DocProductionClient.MaterialsBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+	
+//	CurrentData = Items.Materials.CurrentData;
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//	Cancel = Not CanDeleteMaterialRow(CurrentData.UniqueID);
+EndProcedure
+
+&AtClient
+Procedure MaterialsAfterDeleteRow(Item)
+	DocProductionClient.MaterialsAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+#Region MATERIALS_COLUMNS
+
+#Region MATERIALS_ITEM
+
+&AtClient
+Procedure MaterialsItemOnChange(Item)
+	DocProductionClient.MaterialsItemOnChange(Object, ThisObject, Item);
+	
+//	MF_FormsClient.ItemOnChange(Object, ThisObject, Item, "Materials");
+EndProcedure
+
+&AtClient
+Procedure MaterialsItemStartChoice(Item, ChoiceData, StandardProcessing)
+	DocProductionClient.MaterialsItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	
+//	MF_FormsClient.ItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure MaterialsItemEditTextChange(Item, Text, StandardProcessing)
+	DocProductionClient.MaterialsItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	
+//	MF_FormsClient.ItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_ITEM_KEY
+
+&AtClient
+Procedure MaterialsItemKeyOnChange(Item)
+	DocProductionClient.MaterialsItemKeyOnChange(Object, ThisObject, Item);
+	
+//	MF_FormsClient.ItemKeyOnChange(Object, ThisObject, Item, "Materials");
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_UNIT
+
+&AtClient
+Procedure MaterialsUnitOnChange(Item)
+	DocProductionClient.MaterialsUnitOnChange(Object, ThisObject, Item);
+	
+//	MF_DocProductionServer.CalculateMaterialsQuantity(Object);
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_QUANTITY
+
+&AtClient
+Procedure MaterialsQuantityOnChange(Item)
+	DocProductionClient.MaterialsQuantityOnChange(Object, ThisObject, Item);
+	
+//	CurrentData = Items.Materials.CurrentData;
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//	CurrentData.IsManualChanged = CurrentData.Quantity <> CurrentData.QuantityBOM;
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_MATERIALS_TYPE
+
+&AtClient
+Procedure MaterialsMaterialTypeOnChange(Item)
+	DocProductionClient.MaterialsMaterialTypeOnChange(Object, ThisObject, Item);
+	
+//	SetFormRules(Object, Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region SERVICE
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocProductionClient);
+	Str.Insert("Server", DocProductionServer);
+	Return Str;
+EndFunction
+
+#Region DESCRIPTION
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TITLE_DECORATIONS
+
+&AtClient
+Procedure GroupTitleCollapsedClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
+EndProcedure
+
+&AtClient
+Procedure GroupTitleUncollapsedClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
+EndProcedure
+
+#EndRegion
+
+#Region ADD_ATTRIBUTES
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControl()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion
+
+#Region EXTERNAL_COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+#EndRegion
+
+#Region COMMANDS
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure UpdateByBillOfMaterials(Command)
+	DocProductionClient.UpdateByBillOfMaterials(Object, ThisObject);
+	
+//	BillOfMaterialsOnChangeAtServer();
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
 //&AtServer
 //Function GetReadOnly()
 //	Return ValueIsFilled(ThisObject.ProductionPlanningClosing);
@@ -106,221 +442,16 @@ EndProcedure
 //	EndDo;
 //EndProcedure
 
-&AtClient
-Procedure MaterialsMaterialTypeOnChange(Item)
-	SetFormRules(Object, Object, ThisObject);
-EndProcedure
+//#Region Production
 
-&AtClient
-Procedure DescriptionClick(Item, StandardProcessing)
-	DocumentsClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
-EndProcedure
-
-#Region Production
-
-&AtClient
-Procedure ItemStartChoice(Item, ChoiceData, StandardProcessing)
-	MF_FormsClient.ItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemEditTextChange(Item, Text, StandardProcessing)
-	MF_FormsClient.ItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemOnChange(Item)
-	MF_FormsClientServer.ItemOnChange_Object(Object);
-	Object.BillOfMaterials = MF_FormsServer.GetBillOfMaterialsByItemKey(Object.ItemKey);
-	BillOfMaterialsOnChangeAtServer();
-EndProcedure
-
-&AtClient
-Procedure ItemKeyOnChange(Item)
-	MF_FormsClientServer.ItemKeyOnChange_Object(Object);
-	Object.BillOfMaterials = MF_FormsServer.GetBillOfMaterialsByItemKey(Object.ItemKey);
-	BillOfMaterialsOnChangeAtServer();
-EndProcedure
-
-&AtClient
-Procedure BillOfMaterialsStartChoice(Item, ChoiceData, StandardProcessing)
-	Filters = New Array();
-	Filters.Add(DocumentsClientServer.CreateFilterItem("Item"    , Object.Item, DataCompositionComparisonType.Equal));
-	Filters.Add(DocumentsClientServer.CreateFilterItem("ItemKey" , Object.ItemKey, DataCompositionComparisonType.Equal));
-	
-	MF_FormsClient.BillOfMaterialsStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, Filters);
-EndProcedure
-
-&AtClient
-Procedure BillOfMaterialsEditTextChange(Item, Text, StandardProcessing)
-	Filters = New Array();
-	Filters.Add(DocumentsClientServer.CreateFilterItem("Item"    , Object.Item, DataCompositionComparisonType.Equal));
-	Filters.Add(DocumentsClientServer.CreateFilterItem("ItemKey" , Object.ItemKey, DataCompositionComparisonType.Equal));
-	
-	MF_FormsClient.BillOfMaterialsEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, Filters);
-EndProcedure
-
-&AtClient
-Procedure BillOfMaterialsOnChange(Item)
-	BillOfMaterialsOnChangeAtServer();
-EndProcedure
-
-&AtClient
-Procedure MaterialsBeforeDeleteRow(Item, Cancel)
-	CurrentData = Items.Materials.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	Cancel = Not CanDeleteMaterialRow(CurrentData.UniqueID);
-EndProcedure
-
-&AtServer
-Function CanDeleteMaterialRow(RowUniqueIDForDelete)
-	BillOfMaterials_UUID = String(Object.BillOfMaterials.UUID());
-	For Each Row In Object.BillOfMaterials.Content Do
-		RowUniqueID = String(Row.ItemKey.UUID()) + "-" + BillOfMaterials_UUID;
-		If Upper(RowUniqueID) = Upper(RowUniqueIDForDelete) Then
-			Return False;
-		EndIf;
-	EndDo;
-	Return True;
-EndFunction	
-
-&AtClient
-Procedure UnitOnChange(Item)
-	QuantityOnChangeAtServer();
-EndProcedure
-
-&AtClient
-Procedure QuantityOnChange(Item)
-	QuantityOnChangeAtServer();
-EndProcedure
-
-#EndRegion
-
-#Region Materials
-
-&AtClient
-Procedure MaterialsItemStartChoice(Item, ChoiceData, StandardProcessing)
-	MF_FormsClient.ItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure MaterialsItemEditTextChange(Item, Text, StandardProcessing)
-	MF_FormsClient.ItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure MaterialsItemOnChange(Item)
-	MF_FormsClient.ItemOnChange(Object, ThisObject, Item, "Materials");
-EndProcedure
-
-&AtClient
-Procedure MaterialsItemKeyOnChange(Item)
-	MF_FormsClient.ItemKeyOnChange(Object, ThisObject, Item, "Materials");
-EndProcedure
-
-&AtClient
-Procedure MaterialsUnitOnChange(Item)
-	MF_DocProductionServer.CalculateMaterialsQuantity(Object);
-EndProcedure
-
-&AtClient
-Procedure MaterialsQuantityOnChange(Item)
-	CurrentData = Items.Materials.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	CurrentData.IsManualChanged = CurrentData.Quantity <> CurrentData.QuantityBOM;
-EndProcedure
-
-
-#EndRegion
-
-&AtClient
-Procedure StagesDoneOnChange(Item)
-	CurrentData = Items.Stages.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	If CurrentData.Done Then
-		For Index = 0 To Object.Stages.Count() - 1 Do
-			Row = Object.Stages[Index];
-			If Row.LineNumber >= CurrentData.LineNumber Then
-				Break;
-			Else
-				Row.Done = True;
-			EndIf;
-		EndDo;
-	Else
-		For Index = 0 To Object.Stages.Count() - 1 Do
-			Row = Object.Stages[Object.Stages.Count() - 1 - Index];
-			If Row.LineNumber <= CurrentData.LineNumber Then
-				Break;
-			Else
-				Row.Done = False;
-			EndIf;
-		EndDo;
-	EndIf;
-EndProcedure
-
-#Region GroupTitleDecorations
-
-&AtClient
-Procedure GroupTitleCollapsedClick(Item)
-	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
-EndProcedure
-
-&AtClient
-Procedure GroupTitleUncollapsedClick(Item)
-	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
-EndProcedure
-
-#EndRegion
-
-&AtClient
-Procedure UpdateByBillOfMaterials(Command)
-	BillOfMaterialsOnChangeAtServer();
-EndProcedure
-
-&AtServer
-Procedure QuantityOnChangeAtServer()
-	MF_DocProductionServer.CalculateMaterialsQuantity(Object);
-EndProcedure
-
-
-&AtServer
-Procedure BillOfMaterialsOnChangeAtServer()
-	MF_DocProductionServer.BillOfMaterialsOnChangeAtServer(Object);
-EndProcedure
-
-&AtClient
-Procedure CompanyOnChange(Item)
-	MF_FormsClient.SetDocumentProductionPlanning(Object);
-EndProcedure
-
-&AtClient
-Procedure BusinessUnitOnChange(Item)
-	MF_FormsClient.ChangePlanningPeriodWithQuestion(Object);
-EndProcedure
-
-&AtClient
-Procedure StoreProductionOnChange(Item)
-	MF_FormsClient.SetDocumentProductionPlanning(Object);
-EndProcedure
-
-&AtClient
-Procedure StoreMaterialOnChange(Item)
-	MF_FormsClient.SetDocumentProductionPlanning(Object);
-EndProcedure
-
-&AtClient
-Procedure PlanningPeriodOnChange(Item)
-	MF_FormsClient.SetDocumentProductionPlanning(Object);
-EndProcedure
-
-&AtClient
-Procedure DateOnChange(Item)
-	MF_FormsClient.ChangePlanningPeriodWithQuestion(Object);
-EndProcedure
-
+//&AtServer
+//Function CanDeleteMaterialRow(RowUniqueIDForDelete)
+//	BillOfMaterials_UUID = String(Object.BillOfMaterials.UUID());
+//	For Each Row In Object.BillOfMaterials.Content Do
+//		RowUniqueID = String(Row.ItemKey.UUID()) + "-" + BillOfMaterials_UUID;
+//		If Upper(RowUniqueID) = Upper(RowUniqueIDForDelete) Then
+//			Return False;
+//		EndIf;
+//	EndDo;
+//	Return True;
+//EndFunction	

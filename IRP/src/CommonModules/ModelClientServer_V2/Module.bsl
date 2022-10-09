@@ -266,6 +266,7 @@ Function GetChain()
 	Chain.Insert("ChangeConsolidatedRetailSalesByWorkstationForReturn" , GetChainLink("ChangeConsolidatedRetailSalesByWorkstationForReturnExecute"));
 	
 	Chain.Insert("ChangeIsManualChangedByItemKey"               , GetChainLink("ChangeIsManualChangedByItemKeyExecute"));
+	Chain.Insert("ChangeIsManualChangedByQuantity"              , GetChainLink("ChangeIsManualChangedByQuantityExecute"));
 	Chain.Insert("ChangeUniqueIDByItemKeyBOMAndBillOfMaterials" , GetChainLink("ChangeUniqueIDByItemKeyBOMAndBillOfMaterialsExecute"));
 	Chain.Insert("ChangeStoreByCostWriteOff"                    , GetChainLink("ChangeStoreByCostWriteOffExecute"));
 	Chain.Insert("ChangeProfitLossCenterByBillOfMaterials"      , GetChainLink("ChangeProfitLossCenterByBillOfMaterialsExecute"));
@@ -1137,6 +1138,19 @@ Function ChangeIsManualChangedByItemKeyExecute(Options) Export
 	EndIf;
 	
 	Return Options.ItemKey <> Options.ItemKeyBOM Or Options.QuantityInBaseUnit <> Options.QuantityInBaseUnitBOM; 
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_IS_MANUAL_CHANGED_BY_QUANTITY
+
+Function ChangeIsManualChangedByQuantityOptions() Export
+	Return GetChainLinkOptions("Quantity, QuantityBOM");
+EndFunction
+
+Function ChangeIsManualChangedByQuantityExecute(Options) Export	
+	Return ?(ValueIsFilled(Options.Quantity), Options.Quantity, 0)
+	 <> ?(ValueIsFilled(Options.QuantityBOM), Options.QuantityBOM, 0);
 EndFunction
 
 #EndRegion

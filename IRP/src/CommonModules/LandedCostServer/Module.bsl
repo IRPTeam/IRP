@@ -25,6 +25,7 @@ Function GetArrayOfCompositeDocument()
 	ArrayOfTypes = New Array();
 	ArrayOfTypes.Add(Type("DocumentRef.Bundling"));
 	ArrayOfTypes.Add(Type("DocumentRef.ItemStockAdjustment"));
+	ArrayOfTypes.Add(Type("DocumentRef.Production"));
 	Return ArrayOfTypes;
 EndFunction
 
@@ -68,6 +69,7 @@ Function GetArrayOfMultiDirectionDocument()
 	ArrayOfTypes.Add(Type("DocumentRef.Bundling"));
 	ArrayOfTypes.Add(Type("DocumentRef.Unbundling"));
 	ArrayOfTypes.Add(Type("DocumentRef.ItemStockAdjustment"));
+	ArrayOfTypes.Add(Type("DocumentRef.Production"));
 	Return ArrayOfTypes;
 EndFunction
 
@@ -105,6 +107,7 @@ Function GetArrayOfBatchDocumentTypes()
 	ArrayOfTypes.Add(Type("DocumentRef.BatchReallocateIncoming"));
 	ArrayOfTypes.Add(Type("DocumentRef.BatchReallocateOutgoing"));
 	ArrayOfTypes.Add(Type("DocumentRef.WorkSheet"));
+	ArrayOfTypes.Add(Type("DocumentRef.Production"));
 	Return ArrayOfTypes;
 EndFunction
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:HTTPService xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0162f0cb-551d-46a8-a84b-c1f4860529c9">
+  <name>MockService</name>
+  <synonym>
+    <key>en</key>
+    <value>Mock service</value>
+  </synonym>
+  <rootURL>mock</rootURL>
+  <reuseSessions>AutoUse</reuseSessions>
+  <sessionMaxAge>20</sessionMaxAge>
+  <urlTemplates uuid="2edec761-3fa5-485d-aff4-1eb78d1c9cef">
+    <name>Main</name>
+    <synonym>
+      <key>en</key>
+      <value>Main</value>
+    </synonym>
+    <template>/*</template>
+    <methods uuid="3dc7bce4-7fde-4cc6-8b86-d107f905c809">
+      <name>AnyMethod</name>
+      <synonym>
+        <key>en</key>
+        <value>Any method</value>
+      </synonym>
+      <httpMethod>Any</httpMethod>
+      <handler>MainAnyMethod</handler>
+    </methods>
+  </urlTemplates>
+</mdclass:HTTPService>

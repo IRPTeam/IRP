@@ -91,7 +91,7 @@ Procedure UpdateSerialLotNumbersPresentation(Object) Export
 			SerialCount = SerialCount + RowSerialLotNumber.Quantity;
 		EndDo;
 		If RowItemList.UseSerialLotNumber Then
-			RowItemList.SerialLotNumberIsFilling = RowItemList.Quantity = SerialCount;
+			RowItemList.SerialLotNumberIsFilling = SerialCount > 0;
 		EndIf;
 	EndDo;
 EndProcedure

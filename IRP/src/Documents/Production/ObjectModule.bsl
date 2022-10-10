@@ -62,6 +62,7 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 			BillOfMaterials_UUID = String(ThisObject.BillOfMaterials.UUID());
 			For Each Row In FillingData.Materials Do
 				NewRow = ThisObject.Materials.Add();
+				NewRow.Key          = String(New UUID());
 				NewRow.Item         = Row.Item;
 				NewRow.ItemKey      = Row.ItemKey;
 				NewRow.Unit         = Row.Unit;
@@ -77,7 +78,6 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 				
 				RowUniqueID = String(Row.ItemKey.UUID()) + "-" + BillOfMaterials_UUID;
 				NewRow.UniqueID = RowUniqueID;
-				
 			EndDo;
 		EndIf;
 	EndIf;

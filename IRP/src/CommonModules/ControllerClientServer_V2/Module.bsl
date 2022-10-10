@@ -206,12 +206,13 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 		Parameters.ReadOnlyPropertiesMap.Insert(Upper(TrimAll(Property)), True);
 	EndDo;
 	
+	Parameters.Insert("IsFullRefill_Materials", False);
+	
 	Parameters.Insert("TableName", ServerParameters.TableName);
 	ArrayOfTableNames = New Array();
 	ArrayOfTableNames.Add(ServerParameters.TableName);
 	ArrayOfTableNames.Add("TaxList");
 	ArrayOfTableNames.Add("SpecialOffers");
-	ArrayOfTableNames.Add("SerialLotNumbers");
 	ArrayOfTableNames.Add("SerialLotNumbers");
 	ArrayOfTableNames.Add("BillOfMaterialsList");
 	
@@ -443,8 +444,8 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	SettersMap.Insert("Materials.QuantityBOM"        , "SetMaterialsQuantityBOM");
 	
 	// Manufacturing calculations
-	SettersMap.Insert("Command.UpdateCurrentQuantity"  , "StepChangeCurrentQuantityInProductions");
-	SettersMap.Insert("Command.UpdateByBillOfMaterials", "StepMaterialsCalculations");
+	SettersMap.Insert("Command_UpdateCurrentQuantity"  , "StepChangeCurrentQuantityInProductions");
+	SettersMap.Insert("Command_UpdateByBillOfMaterials", "StepMaterialsCalculations");
 	
 	Return SettersMap.Get(DataPath);
 EndFunction
@@ -458,7 +459,7 @@ Procedure API_SetProperty(Parameters, Property, Value, IsBuilder = False) Export
 				For Each _SetterNameOrStepsEnabler In StrSplit(SetterNameOrStepsEnabler, ",") Do
 					_SetterNameOrStepsEnabler = TrimAll(_SetterNameOrStepsEnabler);
 
-					If StrStartsWith(_SetterNameOrStepsEnabler, "Step") Then // steps enabler
+					If StrStartsWith(_SetterNameOrStepsEnabler, "Step") Then // step
 						// ItemList.TotalAmount does not have setter
 						If Upper(Property.DataPath) = Upper("ItemList.TotalAmount") Then
 							If Value <> Undefined Then
@@ -477,8 +478,15 @@ Procedure API_SetProperty(Parameters, Property, Value, IsBuilder = False) Export
 				EndDo;
 			EndDo;
 		Else
-			Results = ResultArray(Undefined, Value);
-			ExecuteSetterByName(Parameters, Results, SetterNameOrStepsEnabler);
+			For Each _SetterNameOrStepsEnabler In StrSplit(SetterNameOrStepsEnabler, ",") Do
+				_SetterNameOrStepsEnabler = TrimAll(_SetterNameOrStepsEnabler);
+				If StrStartsWith(_SetterNameOrStepsEnabler, "Step") Then // step
+					ModelClientServer_V2.EntryPoint(_SetterNameOrStepsEnabler, Parameters);
+				Else // setter
+					Results = ResultArray(Undefined, Value);
+					ExecuteSetterByName(Parameters, Results, SetterNameOrStepsEnabler);
+				EndIf;
+			EndDo;
 		EndIf;
 	Else
 		If IsColumn Then
@@ -720,8 +728,10 @@ Procedure DeleteRows(TableName, Parameters, ViewNotify = Undefined) Export
 	For Each SubordinateTableName In Parameters.ObjectMetadataInfo.SubordinateTables Do
 		ArrayForDelete = New Array();
 		For Each Row In Parameters.Object[SubordinateTableName] Do
-			If Not Parameters.Object[TableName].FindRows(New Structure("Key", Row.KeyOwner)).Count() Then
-				ArrayForDelete.Add(Row);
+			If CommonFunctionsClientServer.ObjectHasProperty(Row, "KeyOwner") Then
+				If Not Parameters.Object[TableName].FindRows(New Structure("Key", Row.KeyOwner)).Count() Then
+					ArrayForDelete.Add(Row);
+				EndIf;
 			EndIf;
 		EndDo;
 		For Each ItemForDelete In ArrayForDelete Do
@@ -6427,8 +6437,8 @@ Function BindDefaultMaterialsQuantity(Parameters)
 	Binding.Insert("WorkSheet", 
 		"StepMaterialsDefaultQuantityInList");
 	
-	Binding.Insert("Production", 
-		"StepMaterialsDefaultQuantityInList");
+//	Binding.Insert("Production", 
+//		"StepMaterialsDefaultQuantityInList");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -6906,6 +6916,7 @@ Procedure StepMaterialsCalculations(Parameters, Chain) Export
 	Options.Quantity         = GetQuantity(Parameters);
 	Options.StepName = "StepMaterialsCalculations";
 	Chain.MaterialsCalculations.Options.Add(Options);
+	Parameters.IsFullRefill_Materials = True;
 EndProcedure
 
 // Step.Materials.RecalculateQuantity
@@ -6930,6 +6941,7 @@ Procedure StepMaterialsRecalculateQuantity(Parameters, Chain) Export
 	Options.Quantity         = GetQuantity(Parameters);
 	Options.StepName = "StepMaterialsRecalculateQuantity";
 	Chain.MaterialsRecalculateQuantity.Options.Add(Options);
+	Parameters.IsFullRefill_Materials = True;
 EndProcedure
 
 #EndRegion
@@ -9510,7 +9522,7 @@ EndProcedure
 
 Procedure CommitChainChanges(Parameters) Export
 		
-	_CommitChainChanges(Parameters.Cache, Parameters.Object);
+	_CommitChainChanges(Parameters);
 	
 	If Parameters.FormIsExists Then
 		UniqueFormModificators = New Array();
@@ -9529,7 +9541,7 @@ Procedure CommitChainChanges(Parameters) Export
 			Execute StrTemplate("%1.%2(Parameters);", ViewModuleName, FormModificator);
 		EndDo;
 		
-		_CommitChainChanges(Parameters.CacheForm, Parameters.Form);
+		_CommitChainChanges(Parameters);
 	
 	#IF Client THEN
 		UniqueViewNotify = New Array();
@@ -9623,16 +9635,30 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 EndProcedure	
 #ENDIF
 
+Function IsFullTransferTabularSection(Parameters, PropertyName)
+	_PropertyName = Upper(PropertyName);
+	If _PropertyName = Upper("TaxList") 
+		Or _PropertyName = Upper("SerialLotNumbers") 
+		Or _PropertyName = Upper("SpecialOffers")
+		Or _PropertyName = Upper("BillOfMaterialsList") Then
+		Return True;
+	ElsIf _PropertyName = Upper("Materials") Then
+		If Parameters.IsFullRefill_Materials = True Then
+			Return True;
+		Else
+			Return False;
+		EndIf;
+	EndIf;
+	Return False;
+EndFunction
+
 // move changes from Cache to Object form CacheForm to Form
-Procedure _CommitChainChanges(Cache, Source)
-	For Each Property In Cache Do
+Procedure _CommitChainChanges(Parameters)
+	For Each Property In Parameters.Cache Do
 		PropertyName  = Property.Key;
 		PropertyValue = Property.Value;
-		If Upper(PropertyName) = Upper("TaxList") 
-			Or Upper(PropertyName) = Upper("SerialLotNumbers") 
-			Or Upper(PropertyName) = Upper("SpecialOffers")
-			Or Upper(PropertyName) = Upper("BillOfMaterialsList")
-			Or Upper(PropertyName) = Upper("Materials") Then
+		
+		If IsFullTransferTabularSection(Parameters, PropertyName) Then
 			// tabular part transferred completely
 			ArrayOfKeys = New Array();
 			For Each Row In PropertyValue Do
@@ -9642,13 +9668,13 @@ Procedure _CommitChainChanges(Cache, Source)
 			EndDo;
 			
 			For Each ItemOfKeys In ArrayOfKeys Do
-				For Each Row In Source[PropertyName].FindRows(New Structure("Key", ItemOfKeys)) Do
-					Source[PropertyName].Delete(Row);
+				For Each Row In Parameters.Object[PropertyName].FindRows(New Structure("Key", ItemOfKeys)) Do
+					Parameters.Object[PropertyName].Delete(Row);
 				EndDo;
 			EndDo;
 			
 			For Each Row In PropertyValue Do
-				FillPropertyValues(Source[PropertyName].Add(), Row);
+				FillPropertyValues(Parameters.Object[PropertyName].Add(), Row);
 			EndDo;
 		
 		ElsIf TypeOf(PropertyValue) = Type("Array") Then // it is tabular part
@@ -9656,17 +9682,17 @@ Procedure _CommitChainChanges(Cache, Source)
 			// tabular parts ItemList and PaymentList moved by rows, key in rows is unique
 			If IsRowWithKey Then
 				For Each Row In PropertyValue Do
-					FillPropertyValues(Source[PropertyName].FindRows(New Structure("Key", Row.Key))[0], Row);
+					FillPropertyValues(Parameters.Object[PropertyName].FindRows(New Structure("Key", Row.Key))[0], Row);
 				EndDo;
 			Else
 				// if tabular parts not contain key then transfered completely, for example PaymentTerms
-				Source[PropertyName].Clear();
+				Parameters.Object[PropertyName].Clear();
 				For Each Row In PropertyValue Do
-					FillPropertyValues(Source[PropertyName].Add(), Row);
+					FillPropertyValues(Parameters.Object[PropertyName].Add(), Row);
 				EndDo;
 			EndIf;
 		Else
-			Source[PropertyName] = PropertyValue; // it is property of object
+			Parameters.Object[PropertyName] = PropertyValue; // it is property of object
 		EndIf;
 	EndDo;
 EndProcedure
@@ -9846,7 +9872,7 @@ Function GetProperty(Cache, Source, DataPath, Key, ReadOnlyFromCache)
 			EndIf;
 			ArrayRowsByKey = Source[TableName].FindRows(New Structure("Key", Key));
 			If ArrayRowsByKey.Count() <> 1 Then
-				Raise StrTemplate("Found not 1 row by key [%1]", Key);
+				Raise StrTemplate("Found [%1] row by key [%2]", ArrayRowsByKey.Count(), Key);
 			EndIf;
 			RowByKey = ArrayRowsByKey[0];
 		EndIf;

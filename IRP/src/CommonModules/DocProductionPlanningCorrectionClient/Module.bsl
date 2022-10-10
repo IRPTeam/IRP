@@ -69,7 +69,7 @@ Procedure UpdateCurrentQuantity(Object, Form) Export
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
 	ServerParameters.TableName = "Productions";		
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
-	Property = New Structure("DataPath", "Command.UpdateCurrentQuantity");
+	Property = New Structure("DataPath", "Command_UpdateCurrentQuantity");
 	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
 EndProcedure
 	

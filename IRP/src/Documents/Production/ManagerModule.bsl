@@ -68,7 +68,7 @@ EndFunction
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = Parameters.DocumentDataTables;	
 	
-	IncomingStocksServer.ClosureIncomingStocks(Parameters);
+	//IncomingStocksServer.ClosureIncomingStocks(Parameters);
 	
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref, True);
@@ -100,7 +100,7 @@ EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	QueryArray = GetQueryTextsMasterTables();
-	IncomingStocksServer.ClosureIncomingStocks_Unposting(Parameters);
+//	IncomingStocksServer.ClosureIncomingStocks_Unposting(Parameters);
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -166,20 +166,20 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)	
 	StrParams = New Structure();	
 	
-	MainProduction = Ref;//GetMainProduction(Ref);
-	MainProductionIsFinished   = False;
-	IsMainProduction           = False;
-	MainProductionFinishedDate = Date(1,1,1);
+	//MainProduction = Ref;//GetMainProduction(Ref);
+	MainProductionIsFinished   = True;
+	IsMainProduction           = True;
+	MainProductionFinishedDate = Ref.Date;//Date(1,1,1);
 	
-	If ValueIsFilled(MainProduction) Then
-		MainProductionIsFinished = (MainProduction.Finished And MainProduction.Posted);
-		IsMainProduction = (MainProduction = Ref);
-		If MainProduction.Stages.Count() Then
-			MainProductionFinishedDate = MainProduction.Stages[MainProduction.Stages.Count()-1].Date;
-		Else
-			MainProductionFinishedDate = MainProduction.Date;
-		EndIf;
-	EndIf;
+//	If ValueIsFilled(MainProduction) Then
+//		MainProductionIsFinished = (MainProduction.Finished And MainProduction.Posted);
+//		IsMainProduction = (MainProduction = Ref);
+//		If MainProduction.Stages.Count() Then
+//			MainProductionFinishedDate = MainProduction.Stages[MainProduction.Stages.Count()-1].Date;
+//		Else
+//			MainProductionFinishedDate = MainProduction.Date;
+//		EndIf;
+//	EndIf;
 	
 	StrParams.Insert("MainProductionIsFinished"   , MainProductionIsFinished);
 	StrParams.Insert("IsMainProduction"           , IsMainProduction);
@@ -445,7 +445,7 @@ Function R4011B_FreeStocks()
 	|	Materials AS Materials
 	|WHERE
 	|	NOT Materials.IsService
-	|	AND Materials.IsProcurement_Produce
+//	|	AND Materials.IsProcurement_Produce
 	|	AND Materials.MainProductionIsFinished
 	|	AND NOT Materials.ItemKey.Ref IS NULL
 	|;
@@ -537,20 +537,20 @@ Function R4011B_FreeStocks()
 	|FROM
 	|	tmpDetailingSupplies AS tmpDetailingSupplies
 	|WHERE
-	|	tmpDetailingSupplies.Quantity <> 0
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	VALUE(AccumulationRecordType.Expense),
-	|	FreeStocks.Period,
-	|	FreeStocks.Store,
-	|	FreeStocks.ItemKey,
-	|	FreeStocks.Quantity
-	|FROM
-	|	FreeStocks AS FreeStocks
-	|WHERE
-	|	TRUE";
+	|	tmpDetailingSupplies.Quantity <> 0";
+//	|
+//	|UNION ALL
+//	|
+//	|SELECT
+//	|	VALUE(AccumulationRecordType.Expense),
+//	|	FreeStocks.Period,
+//	|	FreeStocks.Store,
+//	|	FreeStocks.ItemKey,
+//	|	FreeStocks.Quantity
+//	|FROM
+//	|	FreeStocks AS FreeStocks
+//	|WHERE
+//	|	TRUE";
 EndFunction
 
 //Function R4035B_IncomingStocks()

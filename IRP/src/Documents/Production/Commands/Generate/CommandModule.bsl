@@ -92,7 +92,7 @@ Function GetChoiceProductionParameters(ProductionPlanningRef)
 	Parameters.Insert("PlanningPeriod"       , ProductionPlanningRef.PlanningPeriod);
 	Parameters.Insert("ProductionPlanning"   , ProductionPlanningRef);
 	Parameters.Insert("ArrayOfBusinessUnits" , New Array());
-	For Each Row In ProductionPlanningRef.BillOfMaterials Do
+	For Each Row In ProductionPlanningRef.BillOfMaterialsList Do
 		If Parameters.ArrayOfBusinessUnits.Find(Row.BusinessUnit) = Undefined Then
 			Parameters.ArrayOfBusinessUnits.Add(Row.BusinessUnit);
 		EndIf;

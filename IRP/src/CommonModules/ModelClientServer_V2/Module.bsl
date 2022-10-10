@@ -1151,8 +1151,11 @@ Function ChangeIsManualChangedByQuantityOptions() Export
 EndFunction
 
 Function ChangeIsManualChangedByQuantityExecute(Options) Export	
-	Return ?(ValueIsFilled(Options.Quantity), Options.Quantity, 0)
-	 <> ?(ValueIsFilled(Options.QuantityBOM), Options.QuantityBOM, 0);
+	If Options.Quantity = Options.QuantityBOM Then
+		Return False;
+	Else
+		Return True;
+	EndIf;
 EndFunction
 
 #EndRegion

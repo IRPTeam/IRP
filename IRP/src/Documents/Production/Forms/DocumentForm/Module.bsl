@@ -69,6 +69,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 	_Service     = PredefinedValue("Enum.MaterialTypes.Service");
 	
 	For Each Row In Object.Materials Do
+		If Not CommonFunctionsClientServer.ObjectHasProperty(Row, "Picture") Then
+			Continue;
+		EndIf;
 		If Row.MaterialType = _Semiproduct Then
 			Row.Picture = 2;
 		ElsIf Row.MaterialType = _Material Then

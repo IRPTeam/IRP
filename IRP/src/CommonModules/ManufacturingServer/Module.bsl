@@ -268,16 +268,13 @@ Procedure FillMaterialsTable(Parameters) Export
 	|	Catalog.BillOfMaterials.Content AS BillOfMaterialsContent
 	|WHERE
 	|	BillOfMaterialsContent.Ref = &Ref";
-	//Query.SetParameter("Ref", Object.BillOfMaterials);
 	Query.SetParameter("Ref", Parameters.BillOfMaterials);
 	QueryResult = Query.Execute();
 	
-	//BillOfMaterials_UUID = String(Object.BillOfMaterials.UUID());
 	BillOfMaterials_UUID = String(Parameters.BillOfMaterials.UUID());
 	QueryTable = QueryResult.Unload();
 	For Each Row In QueryTable Do
 		RowUniqueID = String(Row.ItemKeyBOM.UUID()) + "-" + BillOfMaterials_UUID;
-//		RowsMaterials = Object.Materials.FindRows(New Structure("ItemKey", Row.ItemKeyBOM));
 		RowsMaterials = New Array();
 		For Each ArrayItem In Parameters.Materials Do
 			If ArrayItem.ItemKey = Row.ItemKeyBOM Then
@@ -289,11 +286,12 @@ Procedure FillMaterialsTable(Parameters) Export
 		If RowsMaterials.Count() Then
 			RowMaterials = RowsMaterials[0];
 			FillPropertyValues(RowMaterials, Row);
+			//RowMaterials.Key      = String(New UUID());
 			RowMaterials.UniqueID = RowUniqueID;
 		Else
-//			RowMaterials = Object.Materials.Add();
 			RowMaterials = New Structure(Parameters.MaterialsColumns);
 			FillPropertyValues(RowMaterials, Row);
+			RowMaterials.Key      = String(New UUID());
 			RowMaterials.UniqueID = RowUniqueID;
 			RowMaterials.Item     = Row.ItemBOM;
 			RowMaterials.ItemKey  = Row.ItemKeyBOM;
@@ -304,6 +302,12 @@ Procedure FillMaterialsTable(Parameters) Export
 	EndDo;
 
 	CalculateMaterialsQuantity(Parameters);
+	
+	For Each Row In Parameters.Materials Do
+		If Not ValueIsFilled(Row.ItemKeyBOM) Then
+			Row.UniqueID = "";
+		EndIf;
+	EndDo;
 EndProcedure
 
 Procedure CalculateMaterialsQuantity(Parameters) Export
@@ -320,8 +324,6 @@ Procedure CalculateMaterialsQuantity(Parameters) Export
 	
 	For Each Row In Parameters.BillOfMaterials.Content Do
 		q1 = (GetBasisQuantity(Row.ItemKey, Row.Unit, Row.Quantity) / Quantity_BillOfMaterials) * Quantity_Produce;
-		
-//		ArrayOfRows = Object.Materials.FindRows(New Structure("ItemKey", Row.ItemKey));
 		
 		ArrayOfRows = New Array();
 		For Each ArrayItem In Parameters.Materials Do
@@ -341,7 +343,7 @@ Procedure CalculateMaterialsQuantity(Parameters) Export
 				Continue;
 			EndIf;
 			ItemOfRow.QuantityBOM = q1 / q2;
-			If Not ItemOfRow.IsManualChanged Then
+			If Not ItemOfRow.IsManualChanged = True Then
 				ItemOfRow.Quantity = ItemOfRow.QuantityBOM;
 			EndIf;
 		EndDo; 	

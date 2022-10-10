@@ -70,6 +70,7 @@
     <types>CatalogObject.UserGroups</types>
     <types>CatalogObject.Users</types>
     <types>CatalogObject.Workstations</types>
+    <types>CatalogObject.LedgerTypeVariants</types>
   </source>
   <event>BeforeWrite</event>
   <handler>CommonModule.LockDataModificationPrivileged.BeforeWrite_CatalogsLockDataModification</handler>

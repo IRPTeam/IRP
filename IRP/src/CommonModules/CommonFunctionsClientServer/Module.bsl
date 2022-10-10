@@ -143,3 +143,33 @@ Function GetSliceLastDateByRefAndDate(Ref, Date) Export
 	EndIf;
 EndFunction
 
+// Get size presentation.
+// 
+// Parameters:
+//  Size - Number - Size in byte
+// 
+// Returns:
+//  String - Size presentation
+Function GetSizePresentation(Size) Export
+	
+	Kilobyte = Pow(2, 10);
+	Megabyte = Pow(2, 20); 
+	Gigabyte = Pow(2, 30);
+	Terabyte = Pow(2, 40);
+	
+	FormatByte = "NZ=; NG=;";
+	FormatMore = "NFD=1; NZ=; NG=;";
+	
+	If Size < Kilobyte Then
+		Return Format(Size, FormatByte) + " B";
+	ElsIf Size < Megabyte Then 
+		Return Format(Size / Kilobyte, FormatMore) + " kB";
+	ElsIf Size < Gigabyte Then 
+		Return Format(Size / Megabyte, FormatMore) + " MB";
+	ElsIf Size < Terabyte Then 
+		Return Format(Size / Gigabyte, FormatMore) + " GB";
+	Else 
+		Return Format(Size / Terabyte, FormatMore) + " TB";
+	EndIf;
+	
+EndFunction

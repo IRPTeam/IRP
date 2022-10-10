@@ -53,7 +53,7 @@ Function GetAdditionalSettings(IntegrationSettings) Export
 		|	IntegrationInfo.IntegrationSettings = &IntegrationSettings
 		|	AND IntegrationInfo.isProduct = &isProduct";
 	
-	Query.SetParameter("isProduct", SessionParameters.ConnectionSettings.isProduction);
+	Query.SetParameter("isProduct", ServiceSystemServer.isProduction());
 	Query.SetParameter("IntegrationSettings", IntegrationSettings);
 	QueryResult = Query.Execute().Unload();
 	

@@ -72,9 +72,14 @@ Procedure TestConnectionCall()
 	ElsIf ExtensionCall_TestConnectionCall() = Undefined Then
 		ConnectionSetting = IntegrationServer.ConnectionSettingTemplate();
 
-		For Each Str In Object.ConnectionSetting Do
+		SettingsSource = Object.ConnectionSetting;
+		If Not ServiceSystemServer.isProduction() Then
+			SettingsSource = Object.ConnectionSettingTest;
+		EndIf; 		  
+		For Each Str In SettingsSource Do
 			FillPropertyValues(ConnectionSetting, New Structure(Str.Key, Str.Value));
 		EndDo;
+		
 		ConnectionSetting.QueryType = "GET";
 		ConnectionSetting.IntegrationSettingsRef = Object.Ref;
 		ResourceParameters = New Structure();

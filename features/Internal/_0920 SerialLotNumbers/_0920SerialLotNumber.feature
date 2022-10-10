@@ -3852,6 +3852,45 @@ Scenario: _092081 switch on scan emulator in the Create serial lot numbers data 
 		Then the form attribute named "ScanEmulator" became equal to "Yes"		
 		And I close all client application windows
 
+Scenario: _092083 check serial lot numbers in the POS
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+		And I expand current line in "ItemsPickup" table
+	* Add items with serial lot numbers
+		And I go to line in "ItemsPickup" table
+			| 'Item'           |
+			| 'Dress, XS/Blue' |
+		And I select current line in "ItemsPickup" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I activate field named "Owner" in "List" table
+		And I go to line in "List" table
+			| 'Code' | 'Reference' | 'Serial number' |
+			| '11'   | '0512'      | '0512'          |
+		And I activate "Serial number" field in "List" table
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I activate field named "Owner" in "List" table
+		And I go to line in "List" table
+			| 'Code' | 'Reference' | 'Serial number' |
+			| '12'   | '0514'      | '0514'          |
+		And I activate "Serial number" field in "List" table
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+	* Checks
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Serials'    | 'Quantity' |
+			| 'Dress' | 'XS/Blue'  | '0512; 0514' | '2,000'    |
+		And I close all client application windows
+							
 
 Scenario: _092090 uncheck checkbox Use serial lot number in the Item type
 	Given I open hyperlink "e1cib/list/Catalog.ItemTypes"

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8c2f2b37-3e2c-4211-a583-be3b18558d1e">
+  <name>Unit_IntegrationExchanges</name>
+  <synonym>
+    <key>en</key>
+    <value>Integration exchanges</value>
+  </synonym>
+  <includeHelpInContents>true</includeHelpInContents>
+  <includeInCommandInterface>true</includeInCommandInterface>
+  <content>CommonForm.Unit_DataContentAnalyzer</content>
+  <content>Catalog.Unit_ServiceExchangeHistory</content>
+  <content>Catalog.Unit_MockServiceData</content>
+  <parentSubsystem>Subsystem.Unit_UnitTest</parentSubsystem>
+</mdclass:Subsystem>

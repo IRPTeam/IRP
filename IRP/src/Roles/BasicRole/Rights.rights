@@ -677,4 +677,11 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>SessionParameter.IgnoreLockModificationData</name>
+		<right>
+			<name>Get</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

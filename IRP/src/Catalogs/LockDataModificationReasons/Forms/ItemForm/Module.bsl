@@ -1,7 +1,13 @@
+
+// @strict-types
+
 #Region FormEvents
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	
+	SetOnlyReadModeByResponsibleUser();
+	
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
@@ -20,8 +26,15 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			FillAttributeListHead(Items.Attribute.ChoiceList);
 		EndIf;
 	EndIf;
+
 EndProcedure
 
+// Notification processing.
+// 
+// Parameters:
+//  EventName - String - Event name
+//  Parameter - Arbitrary - Parameter
+//  Source - Arbitrary - Source
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
@@ -31,9 +44,29 @@ EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	If CurrentObject.AdvancedMode Then
+		CurrentObject.DCS = New ValueStorage(SettingsComposer.Settings);
+		CurrentObject.PreviewText = String(SettingsComposer.Settings.Filter);
+	Else
+		CurrentObject.DCS = Undefined;
+		CurrentObject.PreviewText = "";
+	EndIf; 
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	If CurrentObject.AdvancedMode Then
+		Settings = CurrentObject.DCS.Get(); // DataCompositionSettings
+		UpdateQueryFromServer(Settings);
+	EndIf;
+EndProcedure
+
+// Description opening.
+// 
+// Parameters:
+//  Item - FormField - Item
+//  StandardProcessing - Boolean - Standard processing
 &AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export
 	LocalizationClient.DescriptionOpening(Object, ThisObject, Item, StandardProcessing);
@@ -43,10 +76,12 @@ EndProcedure
 Procedure ForAllUsersOnChange(Item)
 	SetVisible();
 EndProcedure
+
 &AtClient
 Procedure OnOpen(Cancel)
 	SetVisible();
 EndProcedure
+
 &AtClient
 Procedure SetOneRuleForAllObjectsOnChange(Item)
 	SetVisible();
@@ -57,6 +92,23 @@ Procedure ValueStartChoice(Item, ChoiceData, StandardProcessing)
 	If Object.RuleList.Count() Then
 		FillValueTypeHead(Object.RuleList[0].Type);
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure SetCurrentUser(Command)
+	SetCurrentUserAtServer();
+EndProcedure
+
+&AtClient
+Procedure AdvancedModeOnChange(Item)
+	Object.SetOneRuleForAllObjects = True;
+	SetVisible();
+	UpdateQueryFromClient();
+EndProcedure
+
+&AtClient
+Procedure RuleListOnChange(Item)
+	UpdateQueryFromClient();
 EndProcedure
 
 #EndRegion
@@ -71,12 +123,165 @@ Procedure SetVisible()
 	Items.RuleListComparisonType.Visible = Not Object.SetOneRuleForAllObjects;
 	Items.RuleListValue.Visible = Not Object.SetOneRuleForAllObjects;
 	Items.RuleListSetValueAsCode.Visible = Not Object.SetOneRuleForAllObjects;
-	Items.GroupRuleSettings.Visible = Object.SetOneRuleForAllObjects;
+	Items.GroupRuleSettings.Visible = Object.SetOneRuleForAllObjects And Not Object.AdvancedMode;
+	Items.GroupAdvancedRules.Visible = Object.AdvancedMode;
+	Items.SetOneRuleForAllObjects.Visible = Not Object.AdvancedMode;
 EndProcedure
+
+&AtClient
+Procedure BeforeWrite(Cancel, WriteParameters)
+	UpdateQueryFromClient();
+EndProcedure
+
+&AtClient
+Procedure PagesMainOnCurrentPageChange(Item, CurrentPage)
+	If CurrentPage = Items.GroupFilterQuery Then
+		UpdateQueryFromClient();
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure SetCurrentUserAtServer()
+	CurrentUser = SessionParameters.CurrentUser;
+	If CurrentUser.IsEmpty() Then
+		Return;
+	EndIf;
+	Search = Object.ResponsibleUsers.FindRows(New Structure("User", CurrentUser));
+	If Search.Count() > 0 Then
+		Return;
+	EndIf;
+	
+	NewUser = Object.ResponsibleUsers.Add();
+	NewUser.User = CurrentUser;
+EndProcedure
+
+&AtServer
+Procedure SetOnlyReadModeByResponsibleUser()
+	If Not ReadOnly Then
+		If Object.ResponsibleUsers.Count() = 0 Then
+			Return;
+		EndIf;
+		
+		Search = Object.ResponsibleUsers.FindRows(New Structure("User", SessionParameters.CurrentUser));
+		If Search.Count() > 0 Then
+			Return;
+		EndIf;
+		
+		ThisObject.ReadOnly = True; 
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure UpdateQueryFromServer(Settings = Undefined)
+	UpdateQuery(ThisObject, ?(Settings = Undefined, SettingsComposer.GetSettings(), Settings), FillAttributeListHead());
+EndProcedure
+
+&AtServerNoContext
+Procedure UpdateQuery(Form, Settings, ValueListAvailableField)
+
+	If ValueListAvailableField.Count() = 0 Then
+		Return;
+	EndIf;
+	
+	DCSTemplate = Catalogs.LockDataModificationReasons.GetTemplate("DCS");
+	
+	DataSources = DCSTemplate.DataSources.Add();
+	DataSources.DataSourceType = "Local";
+	DataSources.Name = "DataSource";
+	
+	AvailableField = New Array;
+	For Each Row In ValueListAvailableField Do
+		AvailableField.Add("DS." + StrSplit(String(Row), ".")[StrSplit(String(Row), ".").UBound()]);
+	EndDo;
+	AvailableFields = StrConcat(AvailableField, ", " + Chars.LF);
+	For Each Row In Form.Object.RuleList Do
+		If Row.DisableRule Or IsBlankString(Row.Type) Then
+			Continue;
+		EndIf;
+		
+		If Not DCSTemplate.DataSets.Find(Row.Type) = Undefined Then
+			Continue;
+		EndIf;
+		
+		Query = 
+		"SELECT " + AvailableFields + "
+		|FROM
+		|    " + Row.Type + " AS DS";
+		DataSet = DCSTemplate.DataSets.Add(Type("DataCompositionSchemaDataSetQuery"));
+		DataSet.Query = Query;
+		DataSet.Name = Row.Type;
+		DataSet.DataSource = DataSources.Name;
+	EndDo;
+	
+	SettingsComposer = New DataCompositionSettingsComposer();
+
+	Address = PutToTempStorage(DCSTemplate);
+	SettingsComposer.Initialize(New DataCompositionAvailableSettingsSource(Address));
+	SettingsComposer.LoadSettings(DCSTemplate.DefaultSettings);
+	If Form.Object.isInitDCS Then
+		SettingsComposer.LoadSettings(Settings);
+	EndIf;
+
+	SettingsComposer.Settings.Selection.Items.Clear();
+
+	For Each Field In SettingsComposer.Settings.Selection.SelectionAvailableFields.Items Do
+		
+		If Field.Field = New DataCompositionField("SystemFields") Then
+			Continue;
+		EndIf;
+		
+		Selection = SettingsComposer.Settings.Selection.Items.Add(Type("DataCompositionSelectedField"));
+		Selection.Use = True;
+		Selection.Field = Field.Field;
+	EndDo;
+	
+	Composer = New DataCompositionTemplateComposer();
+	Try
+		Template = Composer.Execute(DCSTemplate, SettingsComposer.GetSettings(), , , Type("DataCompositionValueCollectionTemplateGenerator"));
+
+		QueryText = Template.DataSets[0].Query;
+		
+		QuerySchema = New QuerySchema();
+		QuerySchema.SetQueryText(QueryText);
+		FilterText = New Array;
+		For Each Row In QuerySchema.QueryBatch[0].Operators[0].Filter Do
+			FilterText.Add(Row);
+		EndDo;
+		
+		QueryFilter = "CASE WHEN " + StrConcat(FilterText, Chars.LF + " AND ") + " THEN &REF_ ELSE UNDEFINED END";
+		If StrCompare(Form.Object.QueryFilter, QueryFilter) Then
+			Form.Object.QueryFilter = QueryFilter;
+			Form.Modified = True;
+		EndIf;
+		Form.Items.GroupAdvancedRules.Picture = PictureLib.AppearanceCheckBox;
+	Except	
+		CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.BriefErrorDescription(ErrorInfo()));
+		Form.Items.GroupAdvancedRules.Picture = PictureLib.AppearanceCross;
+	EndTry;
+	Form.SettingsComposer = SettingsComposer;
+	If Not Form.Object.isInitDCS Then
+		Form.Object.isInitDCS = True;
+		Form.Modified = True;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure UpdateQueryFromClient()
+	If Object.AdvancedMode Then
+		UpdateQueryFromServer();
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 #Region AddAttributes
 
+// Add attribute start choice.
+// 
+// Parameters:
+//  Item - FormField - Item
+//  ChoiceData - ChoiceParameter - Choice data
+//  StandardProcessing - Boolean - Standard processing
 &AtClient
 Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
 	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
@@ -111,13 +316,17 @@ EndFunction
 
 &AtClient
 Procedure RuleListAttributeStartChoice(Item, ChoiceData, StandardProcessing)
-	ValueList = New ValueList();
-	FillAttributeList(ValueList, Items.RuleList.CurrentData.Type);
+	ValueList = FillAttributeList(Items.RuleList.CurrentData.Type);
 	Items.RuleListAttribute.ChoiceList.Clear();
 	For Each Row In ValueList Do
 		Items.RuleListAttribute.ChoiceList.Add(Row.Value, Row.Presentation, , Row.Picture);
 	EndDo;
 EndProcedure
+
+&AtServer
+Function FillAttributeList(Type)
+	Return LockDataModificationReuse.FillAttributeList(Type).ChoiceData;
+EndFunction
 
 &AtClient
 Procedure AttributeStartChoice(Item, ChoiceData, StandardProcessing)
@@ -131,81 +340,59 @@ EndProcedure
 
 &AtClient
 Procedure RuleListValueStartChoice(Item, ChoiceData, StandardProcessing)
-	RowStructure = New Structure("SetValueAsCode, Attribute, Type");
+	RowStructure = New Structure("SetValueAsCode, Attribute, Type", True, "", "");
 	FillPropertyValues(RowStructure, Items.RuleList.CurrentData);
 	FillValueType(RowStructure);
 EndProcedure
 
 &AtServer
-Procedure FillAttributeListHead(ChoiceData)
+Function FillAttributeListHead(ChoiceData = Undefined)
 
 	VT = New ValueTable();
 	VT.Columns.Add("Attribute", New TypeDescription("String"));
 	VT.Columns.Add("Count", New TypeDescription("Number"));
 	ValueList = New ValueList();
+	Skip = 0;
 	For Each Row In Object.RuleList Do
-		ValueList = New ValueList();
-		FillAttributeList(ValueList, Row.Type);
+		If IsBlankString(Row.Type) Then
+			Skip = Skip + 1;
+			Continue;
+		EndIf;
+		
+		ValueList = FillAttributeList(Row.Type);
 		For Each VLRow In ValueList Do
 			VTRow = VT.Add();
 			VTRow.Attribute = VLRow.Value;
 			VTRow.Count = 1;
 		EndDo;
 	EndDo;
-
+	// Group all added fields
 	VT.GroupBy("Attribute", "Count");
-	For Each AttributeName In VT.FindRows(New Structure("Count", Object.RuleList.Count())) Do
+	Array = New Array;
+	// get only fields, where Count the same as Count rows at RuleList. Other way - its not common attributes
+	For Each AttributeName In VT.FindRows(New Structure("Count", Object.RuleList.Count() - Skip)) Do
+		//@skip-check property-return-type
+		//@skip-check statement-type-change
 		Row = ValueList.FindByValue(AttributeName.Attribute);
-		ChoiceData.Add(Row.Value, Row.Presentation, , Row.Picture);
-	EndDo;
-EndProcedure
-
-&AtServer
-Procedure FillAttributeList(ChoiceData, DataType)
-	MetadataType = Enums.MetadataTypes[StrSplit(DataType, ".")[0]];
-	MetaItem = Metadata.FindByFullName(DataType);
-	If MetadataInfo.hasAttributes(MetadataType) Then
-		AddChild(MetaItem, ChoiceData, "Attributes");
-	EndIf;
-	If MetadataInfo.hasDimensions(MetadataType) Then
-		AddChild(MetaItem, ChoiceData, "Dimensions");
-	EndIf;
-	If MetadataInfo.hasStandardAttributes(MetadataType) Then
-		AddChild(MetaItem, ChoiceData, "StandardAttributes");
-	EndIf;
-	If MetadataInfo.hasRecalculations(MetadataType) Then
-		AddChild(MetaItem, ChoiceData, "Recalculations");
-	EndIf;
-	If MetadataInfo.hasAccountingFlags(MetadataType) Then
-		AddChild(MetaItem, ChoiceData, "AccountingFlags");
-	EndIf;
-
-	For Each CmAttribute In Metadata.CommonAttributes Do
-		If Not CmAttribute.Content.Find(Metadata.FindByFullName(DataType)) = Undefined And CmAttribute.Content.Find(
-			Metadata.FindByFullName(DataType)).Use = Metadata.ObjectProperties.CommonAttributeUse.Use Then
-			ChoiceData.Add("CommonAttribute." + CmAttribute.Name, ?(IsBlankString(CmAttribute.Synonym),
-				CmAttribute.Name, CmAttribute.Synonym), , PictureLib.CommonAttributes);
+		If ChoiceData = Undefined Then
+			Array.Add(Row.Value);
+		Else
+			ChoiceData.Add(Row.Value, Row.Presentation, , Row.Picture);
 		EndIf;
 	EndDo;
-EndProcedure
-&AtServer
-Procedure AddChild(MetaItem, AttributeChoiceList, DataType)
+	Return Array;
+EndFunction
 
-	If MetaItem = Undefined Then
-		Return;
-	EndIf;
-	
-	If Not MetaItem[DataType].Count() Then
-		Return;
-	EndIf;
 
-	For Each AddChild In MetaItem[DataType] Do
-		AttributeChoiceList.Add(DataType + "." + AddChild.Name, ?(IsBlankString(AddChild.Synonym), AddChild.Name,
-			AddChild.Synonym), , PictureLib[DataType]);
-	EndDo;
-
-EndProcedure
-
+// Fill value type.
+// 
+// Parameters:
+//  RowStructure - Structure - Row structure:
+// * SetValueAsCode - Boolean -
+// * Attribute - String -
+// * Type - String -
+//@skip-check statement-type-change
+//@skip-check property-return-type
 &AtServer
 Procedure FillValueType(RowStructure)
 
@@ -224,6 +411,12 @@ Procedure FillValueType(RowStructure)
 
 EndProcedure
 
+// Fill value type head.
+// 
+// Parameters:
+//  Type - String - Type
+//@skip-check statement-type-change
+//@skip-check property-return-type
 &AtServer
 Procedure FillValueTypeHead(Type)
 

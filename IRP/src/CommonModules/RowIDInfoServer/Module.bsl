@@ -5,6 +5,10 @@ Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 		Return;
 	EndIf;
 
+	If Cancel Then
+		Return;
+	EndIf;
+
 	BeginTransaction();
 	Is = Is(Source);
 	If Is.SO Then

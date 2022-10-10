@@ -2,12 +2,18 @@ Function GetIntegrationSettings(IntegrationSettingName, AddInfo = Undefined) Exp
 
 	If TypeOf(IntegrationSettingName) = Type("String") Then
 		IntegrationSettingsRef = UniqueID.UniqueIDByName(Metadata.Catalogs.IntegrationSettings, IntegrationSettingName);
-	Else
+	ElsIf TypeOf(IntegrationSettingName) = Type("CatalogRef.IntegrationSettings") Then
 		IntegrationSettingsRef = IntegrationSettingName;
+	Else
+		Raise R().Error_004; 
 	EndIf;
 
 	CustomizedSetting = New Structure();
-	For Each Str In IntegrationSettingsRef.ConnectionSetting Do
+	SettingsSource = IntegrationSettingsRef.ConnectionSetting;
+	If Not ServiceSystemServer.isProduction() Then
+		SettingsSource = IntegrationSettingsRef.ConnectionSettingTest;
+	EndIf; 		  
+	For Each Str In SettingsSource Do
 		If ValueIsFilled(Str.Value) Then
 			CustomizedSetting.Insert(Str.Key, Str.Value);
 		EndIf;

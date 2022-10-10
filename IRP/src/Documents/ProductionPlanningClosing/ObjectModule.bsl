@@ -2,23 +2,34 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
 	EndIf;	
-	
+EndProcedure
+
+Procedure OnWrite(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;	
+EndProcedure
+
+Procedure BeforeDelete(Cancel)
+	If DataExchange.Load Then
+		Return;
+	EndIf;
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	Query = New Query();
 	Query.Text = 
 	"SELECT TOP 1
-	|	MF_ProductionPlanningClosing.Ref
+	|	ProductionPlanningClosing.Ref
 	|FROM
-	|	Document.MF_ProductionPlanningClosing AS MF_ProductionPlanningClosing
+	|	Document.ProductionPlanningClosing AS ProductionPlanningClosing
 	|WHERE
-	|	MF_ProductionPlanningClosing.Company = &Company
-	|	AND MF_ProductionPlanningClosing.BusinessUnit = &BusinessUnit
-	|	AND MF_ProductionPlanningClosing.ProductionPlanning.PlanningPeriod = &PlanningPeriod
-	|	AND MF_ProductionPlanningClosing.Ref <> &Ref
-	|	AND NOT MF_ProductionPlanningClosing.DeletionMark
-	|	AND MF_ProductionPlanningClosing.Posted";
+	|	ProductionPlanningClosing.Company = &Company
+	|	AND ProductionPlanningClosing.BusinessUnit = &BusinessUnit
+	|	AND ProductionPlanningClosing.ProductionPlanning.PlanningPeriod = &PlanningPeriod
+	|	AND ProductionPlanningClosing.Ref <> &Ref
+	|	AND NOT ProductionPlanningClosing.DeletionMark
+	|	AND ProductionPlanningClosing.Posted";
 	Query.SetParameter("Company"       , ThisObject.Company);
 	Query.SetParameter("BusinessUnit"  , ThisObject.BusinessUnit);
 	Query.SetParameter("PlanningPeriod", ThisObject.ProductionPlanning.PlanningPeriod);
@@ -45,7 +56,8 @@ EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") Then
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "MF_ProductionPlanning" Then
+		If FillingData.Property("BasedOn") And FillingData.BasedOn = "ProductionPlanning" Then
+			ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
 			ThisObject.ProductionPlanning = FillingData.ProductionPlanning;
 			ThisObject.Company            = FillingData.Company;
 			ThisObject.BusinessUnit       = FillingData.BusinessUnit;
@@ -53,14 +65,3 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	EndIf;
 EndProcedure
 
-Procedure OnWrite(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;	
-EndProcedure
-
-Procedure BeforeDelete(Cancel)
-	If DataExchange.Load Then
-		Return;
-	EndIf;
-EndProcedure

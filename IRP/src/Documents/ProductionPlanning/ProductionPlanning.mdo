@@ -10,11 +10,35 @@
   <name>ProductionPlanning</name>
   <synonym>
     <key>en</key>
-    <value>(CORE) Production planning</value>
+    <value>Production planning</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <inputByString>Document.ProductionPlanning.StandardAttribute.Number</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_ProductionPlanning</value>
+    </typesFilterValue>
+    <characteristicValues>Document.ProductionPlanning.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Document.ProductionPlanning.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Document.ProductionPlanning.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Document.ProductionPlanning.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_ProductionPlanning</value>
+    </typesFilterValue>
+    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  </characteristics>
   <createOnInput>DontUse</createOnInput>
   <fullTextSearch>Use</fullTextSearch>
   <numberLength>12</numberLength>

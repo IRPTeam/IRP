@@ -7,7 +7,6 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.InternalSupplyRequest</content>
   <content>Catalog.PlanningPeriods</content>
   <content>Document.ProductionPlanning</content>
   <content>Document.ProductionPlanningCorrection</content>

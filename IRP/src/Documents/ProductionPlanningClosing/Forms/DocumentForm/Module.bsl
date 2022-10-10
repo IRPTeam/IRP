@@ -46,7 +46,6 @@ Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
-
 &AtClient
 Procedure AfterWrite(WriteParameters)
 	DocProductionPlanningClosingClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
@@ -64,27 +63,63 @@ EndProcedure
 
 #EndRegion
 
-//&AtClientAtServerNoContext
-//Procedure SetFormRules(Object, CurrentObject, Form)
-//	MF_FormsClientServer.DocumentSetFormRules(Object, CurrentObject, Form);
-//EndProcedure
-
-&AtClient
-Procedure DescriptionClick(Item, StandardProcessing)
-	DocumentsClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
-EndProcedure
+#Region _DATE
 
 &AtClient
 Procedure DateOnChange(Item)
-	Return;
+	DocProductionPlanningClosingClient.DateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region COMPANY
+
+&AtClient
+Procedure CompanyOnChange(Item)
+	DocProductionPlanningClosingClient.CompanyOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure BusinessUnitOnChange(Item)
-	Return;
+Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
+	DocProductionPlanningClosingClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
-#Region GroupTitleDecorations
+&AtClient
+Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
+	DocProductionPlanningClosingClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region BUSINESS_UNIT
+
+&AtClient
+Procedure BusinessUnitOnChange(Item)
+	DocProductionPlanningClosingClient.BusinessUnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region SERVICE
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocProductionPlanningClosingClient);
+	Str.Insert("Server", DocProductionPlanningClosingServer);
+	Return Str;
+EndFunction
+
+#Region DESCRIPTION
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TITLE_DECORATIONS
 
 &AtClient
 Procedure GroupTitleCollapsedClick(Item)
@@ -95,5 +130,36 @@ EndProcedure
 Procedure GroupTitleUncollapsedClick(Item)
 	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
 EndProcedure
+
+#EndRegion
+
+#Region ADD_ATTRIBUTES
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControl()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion
+
+#Region EXTERNAL_COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+#EndRegion
 
 #EndRegion

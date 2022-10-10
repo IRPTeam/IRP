@@ -91,8 +91,6 @@ EndProcedure
 &AtClient
 Procedure DateOnChange(Item)
 	DocProductionClient.DateOnChange(Object, ThisObject, Item);
-	
-//	MF_FormsClient.ChangePlanningPeriodWithQuestion(Object);
 EndProcedure
 
 #EndRegion
@@ -102,8 +100,6 @@ EndProcedure
 &AtClient
 Procedure CompanyOnChange(Item)
 	DocProductionClient.CompanyOnChange(Object, ThisObject, Item);
-	
-//	MF_FormsClient.SetDocumentProductionPlanning(Object);
 EndProcedure
 
 &AtClient
@@ -123,8 +119,6 @@ EndProcedure
 &AtClient
 Procedure BusinessUnitOnChange(Item)
 	DocProductionClient.BusinessUnitOnChange(Object, ThisObject, Item);
-	
-//	MF_FormsClient.ChangePlanningPeriodWithQuestion(Object);
 EndProcedure
 
 #EndRegion
@@ -134,8 +128,6 @@ EndProcedure
 &AtClient
 Procedure PlanningPeriodOnChange(Item)
 	DocProductionClient.PlanningPeriodOnChange(Object, ThisObject, Item);
-	
-//	MF_FormsClient.SetDocumentProductionPlanning(Object);
 EndProcedure
 
 #EndRegion
@@ -145,10 +137,6 @@ EndProcedure
 &AtClient
 Procedure ItemOnChange(Item)
 	DocProductionClient.ItemOnChange(Object, ThisObject, Item);
-	
-//	MF_FormsClientServer.ItemOnChange_Object(Object);
-//	Object.BillOfMaterials = MF_FormsServer.GetBillOfMaterialsByItemKey(Object.ItemKey);
-//	BillOfMaterialsOnChangeAtServer();
 EndProcedure
 
 &AtClient
@@ -168,10 +156,6 @@ EndProcedure
 &AtClient
 Procedure ItemKeyOnChange(Item)
 	DocProductionClient.ItemKeyOnChange(Object, ThisObject, Item);
-	
-//	MF_FormsClientServer.ItemKeyOnChange_Object(Object);
-//	Object.BillOfMaterials = MF_FormsServer.GetBillOfMaterialsByItemKey(Object.ItemKey);
-//	BillOfMaterialsOnChangeAtServer();
 EndProcedure
 
 #EndRegion
@@ -187,47 +171,28 @@ EndProcedure
 
 #Region QUANTITY
 
-//---
 &AtClient
 Procedure QuantityOnChange(Item)
 	DocProductionClient.QuantityOnChange(Object, ThisObject, Item);
-	
-//	QuantityOnChangeAtServer();
 EndProcedure
-
-//&AtServer
-//Procedure QuantityOnChangeAtServer()
-//	MF_DocProductionServer.CalculateMaterialsQuantity(Object);
-//EndProcedure
 
 #EndRegion
 
 #Region UNIT
 
-//---
 &AtClient
 Procedure UnitOnChange(Item)
 	DocProductionClient.UnitOnChange(Object, ThisObject, Item);
-	
-//	QuantityOnChangeAtServer();
 EndProcedure
 
 #EndRegion
 
 #Region BILL_OF_MATERIALS
 
-//---
 &AtClient
 Procedure BillOfMaterialsOnChange(Item)
 	DocProductionClient.BillOfMaterialsOnChange(Object, ThisObject, Item);
-	
-//	BillOfMaterialsOnChangeAtServer();
 EndProcedure
-
-//&AtServer
-//Procedure BillOfMaterialsOnChangeAtServer()	
-//	MF_DocProductionServer.BillOfMaterialsOnChangeAtServer(Object);
-//EndProcedure
 
 #EndRegion
 
@@ -246,12 +211,6 @@ EndProcedure
 &AtClient
 Procedure MaterialsBeforeDeleteRow(Item, Cancel)
 	DocProductionClient.MaterialsBeforeDeleteRow(Object, ThisObject, Item, Cancel);
-	
-//	CurrentData = Items.Materials.CurrentData;
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	Cancel = Not CanDeleteMaterialRow(CurrentData.UniqueID);
 EndProcedure
 
 &AtClient
@@ -266,22 +225,16 @@ EndProcedure
 &AtClient
 Procedure MaterialsItemOnChange(Item)
 	DocProductionClient.MaterialsItemOnChange(Object, ThisObject, Item);
-	
-//	MF_FormsClient.ItemOnChange(Object, ThisObject, Item, "Materials");
 EndProcedure
 
 &AtClient
 Procedure MaterialsItemStartChoice(Item, ChoiceData, StandardProcessing)
 	DocProductionClient.MaterialsItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-	
-//	MF_FormsClient.ItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure MaterialsItemEditTextChange(Item, Text, StandardProcessing)
 	DocProductionClient.MaterialsItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-	
-//	MF_FormsClient.ItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -291,8 +244,6 @@ EndProcedure
 &AtClient
 Procedure MaterialsItemKeyOnChange(Item)
 	DocProductionClient.MaterialsItemKeyOnChange(Object, ThisObject, Item);
-	
-//	MF_FormsClient.ItemKeyOnChange(Object, ThisObject, Item, "Materials");
 EndProcedure
 
 #EndRegion
@@ -302,8 +253,6 @@ EndProcedure
 &AtClient
 Procedure MaterialsUnitOnChange(Item)
 	DocProductionClient.MaterialsUnitOnChange(Object, ThisObject, Item);
-	
-//	MF_DocProductionServer.CalculateMaterialsQuantity(Object);
 EndProcedure
 
 #EndRegion
@@ -313,12 +262,6 @@ EndProcedure
 &AtClient
 Procedure MaterialsQuantityOnChange(Item)
 	DocProductionClient.MaterialsQuantityOnChange(Object, ThisObject, Item);
-	
-//	CurrentData = Items.Materials.CurrentData;
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	CurrentData.IsManualChanged = CurrentData.Quantity <> CurrentData.QuantityBOM;
 EndProcedure
 
 #EndRegion
@@ -328,8 +271,6 @@ EndProcedure
 &AtClient
 Procedure MaterialsMaterialTypeOnChange(Item)
 	DocProductionClient.MaterialsMaterialTypeOnChange(Object, ThisObject, Item);
-	
-//	SetFormRules(Object, Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -410,46 +351,8 @@ EndProcedure
 &AtClient
 Procedure UpdateByBillOfMaterials(Command)
 	DocProductionClient.UpdateByBillOfMaterials(Object, ThisObject);
-	
-//	BillOfMaterialsOnChangeAtServer();
 EndProcedure
 
 #EndRegion
 
 #EndRegion
-
-//&AtServer
-//Function GetReadOnly()
-//	Return ValueIsFilled(ThisObject.ProductionPlanningClosing);
-//EndFunction
-
-//&AtClientAtServerNoContext
-//Procedure SetFormRules(Object, CurrentObject, Form)
-//	MF_FormsClientServer.DocumentSetFormRules(Object, CurrentObject, Form);
-//	Form.Items.GroupHead.Visible = ValueIsFilled(Form.ProductionPlanningClosing);
-//	For Each Row In Object.Materials Do
-//		If Row.MaterialType = PredefinedValue("Enum.MF_MaterialTypes.Semiproduct") Then
-//			Row.Picture = 2;
-//		ElsIf Row.MaterialType = PredefinedValue("Enum.MF_MaterialTypes.Material") Then
-//			Row.Picture = 3;
-//		ElsIf Row.MaterialType = PredefinedValue("Enum.MF_MaterialTypes.Service") Then
-//			Row.Picture = 1;
-//		Else
-//			Row.Picture = -1;
-//		EndIf;
-//	EndDo;
-//EndProcedure
-
-//#Region Production
-
-//&AtServer
-//Function CanDeleteMaterialRow(RowUniqueIDForDelete)
-//	BillOfMaterials_UUID = String(Object.BillOfMaterials.UUID());
-//	For Each Row In Object.BillOfMaterials.Content Do
-//		RowUniqueID = String(Row.ItemKey.UUID()) + "-" + BillOfMaterials_UUID;
-//		If Upper(RowUniqueID) = Upper(RowUniqueIDForDelete) Then
-//			Return False;
-//		EndIf;
-//	EndDo;
-//	Return True;
-//EndFunction	

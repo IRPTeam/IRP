@@ -7,59 +7,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Return New Structure();
 EndFunction
 
-//Function GetMainProduction(Ref)
-//	Query = New Query();
-//	Query.Text = 
-//	"SELECT
-//	|	MF_Procurements.InputID,
-//	|	MF_Procurements.OutputID
-//	|FROM
-//	|	InformationRegister.MF_Procurements AS MF_Procurements
-//	|WHERE
-//	|	MF_Procurements.Document = &Ref";
-//	Query.SetParameter("Ref", Ref);
-//	QueryResult = Query.Execute();
-//	If QueryResult.IsEmpty() Then
-//		Return Ref;
-//	EndIf;
-//	QuerySelection = QueryResult.Select();
-//	MainProductionRef = Documents.MF_Production.EmptyRef();
-//	While QuerySelection.Next() Do
-//		If Not ValueIsFilled(QuerySelection.InputID) Then
-//			Return Ref;
-//		EndIf;
-//		GetMainProductionRecursive(MainProductionRef, QuerySelection.InputID);
-//	EndDo;
-//	Return MainProductionRef;
-//EndFunction
-
-//Procedure GetMainProductionRecursive(MainProductionRef, InputID)
-//	If ValueIsFilled(MainProductionRef) Then
-//		Return;
-//	EndIf;
-//	Query = New Query();
-//	Query.Text = 
-//	"SELECT
-//	|	MF_Procurements.Document,
-//	|	MF_Procurements.InputID,
-//	|	MF_Procurements.OutputID
-//	|FROM
-//	|	InformationRegister.MF_Procurements AS MF_Procurements
-//	|WHERE
-//	|	MF_Procurements.OutputID = &InputID";
-//	Query.SetParameter("InputID", InputID);
-//	QueryResult = Query.Execute();
-//	QuerySelection = QueryResult.Select();
-//	While QuerySelection.Next() Do
-//		If ValueIsFilled(QuerySelection.InputID) Then
-//			GetMainProductionRecursive(MainProductionRef, 
-//				QuerySelection.InputID);
-//		Else
-//			MainProductionRef = QuerySelection.Document;
-//		EndIf;
-//	EndDo;
-//EndProcedure
-
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	DataMapWithLockFields = New Map();
 	Return DataMapWithLockFields;
@@ -67,8 +14,6 @@ EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = Parameters.DocumentDataTables;	
-	
-	//IncomingStocksServer.ClosureIncomingStocks(Parameters);
 	
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref, True);
@@ -100,7 +45,6 @@ EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	QueryArray = GetQueryTextsMasterTables();
-//	IncomingStocksServer.ClosureIncomingStocks_Unposting(Parameters);
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -166,21 +110,10 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)	
 	StrParams = New Structure();	
 	
-	//MainProduction = Ref;//GetMainProduction(Ref);
 	MainProductionIsFinished   = True;
 	IsMainProduction           = True;
-	MainProductionFinishedDate = Ref.Date;//Date(1,1,1);
-	
-//	If ValueIsFilled(MainProduction) Then
-//		MainProductionIsFinished = (MainProduction.Finished And MainProduction.Posted);
-//		IsMainProduction = (MainProduction = Ref);
-//		If MainProduction.Stages.Count() Then
-//			MainProductionFinishedDate = MainProduction.Stages[MainProduction.Stages.Count()-1].Date;
-//		Else
-//			MainProductionFinishedDate = MainProduction.Date;
-//		EndIf;
-//	EndIf;
-	
+	MainProductionFinishedDate = Ref.Date;
+		
 	StrParams.Insert("MainProductionIsFinished"   , MainProductionIsFinished);
 	StrParams.Insert("IsMainProduction"           , IsMainProduction);
 	StrParams.Insert("MainProductionFinishedDate" , MainProductionFinishedDate);
@@ -204,10 +137,8 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(Materials());
 	QueryArray.Add(Header());
-//	QueryArray.Add(IncomingStocksReal());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
-//	QueryArray.Add(R4035B_IncomingStocks_Exists());	
 	Return QueryArray;
 EndFunction
 
@@ -215,9 +146,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4010B_ActualStocks());
-//	QueryArray.Add(R4035B_IncomingStocks());
-//	QueryArray.Add(R4036B_IncomingStocksRequested());
-//	QueryArray.Add(R4012B_StockReservation());
 	QueryArray.Add(R7030T_ProductionPlanning());
 	QueryArray.Add(R7020T_MaterialPlanning());
 	QueryArray.Add(R7010T_DetailingSupplies());
@@ -235,7 +163,6 @@ Function Materials()
 	|	ProductionMaterials.Ref.Company AS Company,
 	|	ProductionMaterials.Ref.BillOfMaterials AS BillOfMaterials,
 	|	ProductionMaterials.Ref.ProductionPlanning AS ProductionPlanning,
-//	|	ProductionMaterials.Ref.Company.MF_ManufacturingPriceType AS PriceType,
 	|	ProductionMaterials.Ref.BusinessUnit AS BusinessUnit,
 	|	ProductionMaterials.WriteoffStore AS Store,
 	|	ProductionMaterials.Ref.StoreProduction AS StoreProduction,
@@ -246,9 +173,6 @@ Function Materials()
 	|	ProductionMaterials.Quantity AS Quantity,
 	|	ProductionMaterials.QuantityBOM AS QuantityBOM,
 	|	ProductionMaterials.ItemKey.Item.ItemType.Type = VALUE(enum.ItemTypes.Service) AS IsService,
-//	|	ProductionMaterials.Procurement = VALUE(Enum.MF_ProcurementTypes.FromStore) AS IsProcurement_FromStore,
-//	|	ProductionMaterials.Procurement = VALUE(Enum.MF_ProcurementTypes.SupplyRequest) AS IsProcurement_SupplyRequest,
-//	|	ProductionMaterials.Procurement = VALUE(Enum.MF_ProcurementTypes.Produce) AS IsProcurement_Produce,
 	|	&MainProductionIsFinished AS MainProductionIsFinished,
 	|	&IsMainProduction AS IsMainProduction,
 	|	&MainProductionFinishedDate AS MainProductionFinishedDate
@@ -267,7 +191,6 @@ Function Header()
 	|	Production.Company,
 	|	Production.BusinessUnit,
 	|	Production.BillOfMaterials,
-//	|	Production.Company.MF_ManufacturingPriceType AS PriceType,
 	|	Production.ProductionPlanning.PlanningPeriod AS PlanningPeriod,
 	|	Production.StoreProduction,
 	|	Production.ItemKey,
@@ -284,27 +207,6 @@ Function Header()
 	|WHERE
 	|	Production.Ref = &Ref";	
 EndFunction
-
-//Function IncomingStocksReal()
-//	Return 
-//	"SELECT
-//	|	Header.MainProductionFinishedDate AS Period,
-//	|	Header.StoreProduction AS Store,
-//	|	Header.ItemKey AS ItemKey,
-//	|	Header.ProductionPlanning AS Order,
-//	|	SUM(Header.Quantity) AS Quantity
-//	|INTO IncomingStocksReal
-//	|FROM
-//	|	Header AS Header
-//	|WHERE
-//	|	NOT Header.IsService
-//	|	AND Header.MainProductionIsFinished
-//	|GROUP BY
-//	|	Header.ItemKey,
-//	|	Header.MainProductionFinishedDate,
-//	|	Header.ProductionPlanning,
-//	|	Header.StoreProduction";
-//EndFunction
 
 Function R7030T_ProductionPlanning()
 	Return
@@ -445,7 +347,6 @@ Function R4011B_FreeStocks()
 	|	Materials AS Materials
 	|WHERE
 	|	NOT Materials.IsService
-//	|	AND Materials.IsProcurement_Produce
 	|	AND Materials.MainProductionIsFinished
 	|	AND NOT Materials.ItemKey.Ref IS NULL
 	|;
@@ -538,70 +439,7 @@ Function R4011B_FreeStocks()
 	|	tmpDetailingSupplies AS tmpDetailingSupplies
 	|WHERE
 	|	tmpDetailingSupplies.Quantity <> 0";
-//	|
-//	|UNION ALL
-//	|
-//	|SELECT
-//	|	VALUE(AccumulationRecordType.Expense),
-//	|	FreeStocks.Period,
-//	|	FreeStocks.Store,
-//	|	FreeStocks.ItemKey,
-//	|	FreeStocks.Quantity
-//	|FROM
-//	|	FreeStocks AS FreeStocks
-//	|WHERE
-//	|	TRUE";
 EndFunction
-
-//Function R4035B_IncomingStocks()
-//	Return
-//		"SELECT
-//		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-//		|	*
-//		|INTO R4035B_IncomingStocks
-//		|FROM
-//		|	IncomingStocks AS IncomingStocks
-//		|WHERE
-//		|	TRUE";
-//EndFunction
-
-//Function R4035B_IncomingStocks_Exists()
-//	Return
-//		"SELECT *
-//		|	INTO R4035B_IncomingStocks_Exists
-//		|FROM
-//		|	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
-//		|WHERE
-//		|	R4035B_IncomingStocks.Recorder = &Ref";
-//EndFunction
-
-//Function R4036B_IncomingStocksRequested()
-//	Return 
-//		"SELECT
-//		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-//		|	*
-//		|INTO R4036B_IncomingStocksRequested
-//		|FROM
-//		|	IncomingStocksRequested AS IncomingStocksRequested
-//		|WHERE
-//		|	TRUE";
-//EndFunction
-
-//Function R4012B_StockReservation()
-//	Return 
-//		"SELECT
-//		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-//		|	IncomingStocksRequested.Period,
-//		|	IncomingStocksRequested.IncomingStore AS Store,
-//		|	IncomingStocksRequested.ItemKey,
-//		|	IncomingStocksRequested.Order AS Order,
-//		|	IncomingStocksRequested.Quantity
-//		|INTO R4012B_StockReservation
-//		|FROM
-//		|	IncomingStocksRequested
-//		|WHERE
-//		|	TRUE";
-//EndFunction
 
 Function R7040T_ManualMaterialsCorretionInProduction()
 	Return

@@ -103,13 +103,12 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
-	QueryArray.Add(MF_ProductionPlanning());
-	QueryArray.Add(MF_MaterialPlanning());
-	QueryArray.Add(R4035B_IncomingStocks());
+	QueryArray.Add(R7030T_ProductionPlanning());
+	QueryArray.Add(R7020T_MaterialPlanning());
 	Return QueryArray;	
 EndFunction	
 
-Function MF_ProductionPlanning()
+Function R7030T_ProductionPlanning()
 	Return
 		"SELECT
 		|	&Period AS Period,
@@ -117,27 +116,22 @@ Function MF_ProductionPlanning()
 		|	ProductionPlanning.BusinessUnit AS BusinessUnit,
 		|	ProductionPlanning.Store AS Store,
 		|	ProductionPlanning.ItemKey AS ItemKey,
-		|	VALUE(enum.MF_ProductionPlanningTypes.Closing) AS PlanningType,
+		|	VALUE(Enum.ProductionPlanningTypes.Closing) AS PlanningType,
 		|	ProductionPlanning.PlanningPeriod AS PlanningPeriod,
 		|	ProductionPlanning.ProductionType AS ProductionType,
 		|	ProductionPlanning.BillOfMaterials AS BillOfMaterials,
 		|	ProductionPlanning.PlanningDocument AS PlanningDocument,
 		|	-SUM(CASE
-		|			WHEN ProductionPlanning.PlanningType = VALUE(enum.MF_ProductionPlanningTypes.Produced)
-		|				THEN -ProductionPlanning.QuantityTurnover
-		|			ELSE ProductionPlanning.QuantityTurnover
-		|		END) AS Quantity
-		|INTO MF_ProductionPlanning
+		|		WHEN ProductionPlanning.PlanningType = VALUE(Enum.ProductionPlanningTypes.Produced)
+		|			THEN -ProductionPlanning.QuantityTurnover
+		|		ELSE ProductionPlanning.QuantityTurnover
+		|	END) AS Quantity
+		|INTO R7030T_ProductionPlanning
 		|FROM
-		|	AccumulationRegister.MF_ProductionPlanning.Turnovers(
-		|			,
-		|			,
-		|			,
-		|			Company = &Company
-		|				AND PlanningDocument = &ProductionPlanning
-		|				AND PlanningPeriod = &PlanningPeriod
-		|				AND PlanningType <> VALUE(enum.MF_ProductionPlanningTypes.Closing)) AS ProductionPlanning
-		|
+		|	AccumulationRegister.R7030T_ProductionPlanning.Turnovers(,,, Company = &Company
+		|	AND PlanningDocument = &ProductionPlanning
+		|	AND PlanningPeriod = &PlanningPeriod
+		|	AND PlanningType <> VALUE(Enum.ProductionPlanningTypes.Closing)) AS ProductionPlanning
 		|GROUP BY
 		|	ProductionPlanning.Company,
 		|	ProductionPlanning.BusinessUnit,
@@ -146,10 +140,11 @@ Function MF_ProductionPlanning()
 		|	ProductionPlanning.PlanningPeriod,
 		|	ProductionPlanning.PlanningDocument,
 		|	ProductionPlanning.ProductionType,
-		|	ProductionPlanning.BillOfMaterials";
+		|	ProductionPlanning.BillOfMaterials,
+		|	VALUE(Enum.ProductionPlanningTypes.Closing)";
 EndFunction
 
-Function MF_MaterialPlanning()
+Function R7020T_MaterialPlanning()
 	Return
 		"SELECT
 		|	&Period AS Period,
@@ -158,26 +153,21 @@ Function MF_MaterialPlanning()
 		|	MaterialPlanning.Store AS Store,
 		|	MaterialPlanning.Production AS Production,
 		|	MaterialPlanning.ItemKey AS ItemKey,
-		|	VALUE(enum.MF_ProductionPlanningTypes.Closing) AS PlanningType,
+		|	VALUE(Enum.ProductionPlanningTypes.Closing) AS PlanningType,
 		|	MaterialPlanning.PlanningPeriod AS PlanningPeriod,
 		|	MaterialPlanning.BillOfMaterials AS BillOfMaterials,
 		|	MaterialPlanning.PlanningDocument AS PlanningDocument,
 		|	-SUM(CASE
-		|			WHEN MaterialPlanning.PlanningType = VALUE(enum.MF_ProductionPlanningTypes.Produced)
-		|				THEN -MaterialPlanning.QuantityTurnover
-		|			ELSE MaterialPlanning.QuantityTurnover
-		|		END) AS Quantity
-		|INTO MF_MaterialPlanning
+		|		WHEN MaterialPlanning.PlanningType = VALUE(Enum.ProductionPlanningTypes.Produced)
+		|			THEN -MaterialPlanning.QuantityTurnover
+		|		ELSE MaterialPlanning.QuantityTurnover
+		|	END) AS Quantity
+		|INTO R7020T_MaterialPlanning
 		|FROM
-		|	AccumulationRegister.MF_MaterialPlanning.Turnovers(
-		|			,
-		|			,
-		|			,
-		|			Company = &Company
-		|				AND PlanningDocument = &ProductionPlanning
-		|				AND PlanningPeriod = &PlanningPeriod
-		|				AND PlanningType <> VALUE(enum.MF_ProductionPlanningTypes.Closing)) AS MaterialPlanning
-		|
+		|	AccumulationRegister.R7020T_MaterialPlanning.Turnovers(,,, Company = &Company
+		|	AND PlanningDocument = &ProductionPlanning
+		|	AND PlanningPeriod = &PlanningPeriod
+		|	AND PlanningType <> VALUE(Enum.ProductionPlanningTypes.Closing)) AS MaterialPlanning
 		|GROUP BY
 		|	MaterialPlanning.Company,
 		|	MaterialPlanning.BusinessUnit,
@@ -186,21 +176,8 @@ Function MF_MaterialPlanning()
 		|	MaterialPlanning.PlanningDocument,
 		|	MaterialPlanning.ItemKey,
 		|	MaterialPlanning.PlanningPeriod,
-		|	MaterialPlanning.BillOfMaterials"
-EndFunction
-
-Function R4035B_IncomingStocks()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	&Period AS Period,
-		|	IncomingStocks.Store AS Store,
-		|	IncomingStocks.ItemKey AS ItemKey,
-		|	IncomingStocks.Order AS Order,
-		|	IncomingStocks.QuantityBalance AS Quantity
-		|INTO R4035B_IncomingStocks
-		|FROM
-		|	AccumulationRegister.R4035B_IncomingStocks.Balance(&BalancePeriod, Order = &ProductionPlanning) AS IncomingStocks"
+		|	MaterialPlanning.BillOfMaterials,
+		|	VALUE(Enum.ProductionPlanningTypes.Closing)"
 EndFunction
 
 #EndRegion

@@ -1518,4 +1518,18 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.Production.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.Production.Attribute.BusinessUnit</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

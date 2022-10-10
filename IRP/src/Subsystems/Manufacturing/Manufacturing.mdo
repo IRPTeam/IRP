@@ -3,7 +3,7 @@
   <name>Manufacturing</name>
   <synonym>
     <key>en</key>
-    <value>(CORE) Manufacturing</value>
+    <value>Manufacturing</value>
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>

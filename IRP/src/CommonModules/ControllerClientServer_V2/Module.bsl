@@ -6437,8 +6437,8 @@ Function BindDefaultMaterialsQuantity(Parameters)
 	Binding.Insert("WorkSheet", 
 		"StepMaterialsDefaultQuantityInList");
 	
-//	Binding.Insert("Production", 
-//		"StepMaterialsDefaultQuantityInList");
+	Binding.Insert("Production", 
+		"StepMaterialsDefaultQuantityInList");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -6874,17 +6874,9 @@ Procedure SetMaterials(Parameters, Results) Export
 		If Result.Value.Materials.Count() Then
 			If Not Parameters.Cache.Property("Materials") Then
 				Parameters.Cache.Insert("Materials", New Array());
+			Else
+				Parameters.Cache.Materials.Clear();
 			EndIf;
-			
-			// remove from cache old rows
-			Count = Parameters.Cache.Materials.Count();
-			For i = 1 To Count Do
-				Index = Count - i;
-				ArrayItem = Parameters.Cache.Materials[Index];
-				If ArrayItem.Key = Result.Options.Key Then
-					Parameters.Cache.Materials.Delete(Index);
-				EndIf;
-			EndDo;
 			
 			// add new rows
 			For Each Row In Result.Value.Materials Do

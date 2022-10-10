@@ -20,16 +20,16 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	Query = New Query();
 	Query.Text = 
 	"SELECT TOP 1
-	|	MF_ProductionPlanning.Ref
+	|	ProductionPlanning.Ref
 	|FROM
-	|	Document.MF_ProductionPlanning AS MF_ProductionPlanning
+	|	Document.ProductionPlanning AS ProductionPlanning
 	|WHERE
-	|	MF_ProductionPlanning.Company = &Company
-	|	AND MF_ProductionPlanning.BusinessUnit = &BusinessUnit
-	|	AND MF_ProductionPlanning.PlanningPeriod = &PlanningPeriod
-	|	AND MF_ProductionPlanning.Ref <> &Ref
-	|	AND NOT MF_ProductionPlanning.DeletionMark
-	|	AND MF_ProductionPlanning.Posted";
+	|	ProductionPlanning.Company = &Company
+	|	AND ProductionPlanning.BusinessUnit = &BusinessUnit
+	|	AND ProductionPlanning.PlanningPeriod = &PlanningPeriod
+	|	AND ProductionPlanning.Ref <> &Ref
+	|	AND NOT ProductionPlanning.DeletionMark
+	|	AND ProductionPlanning.Posted";
 	Query.SetParameter("Company"       , ThisObject.Company);
 	Query.SetParameter("BusinessUnit"  , ThisObject.BusinessUnit);
 	Query.SetParameter("PlanningPeriod", ThisObject.PlanningPeriod);

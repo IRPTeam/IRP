@@ -9514,7 +9514,7 @@ EndProcedure
 
 Procedure CommitChainChanges(Parameters) Export
 		
-	_CommitChainChanges(Parameters);
+	_CommitChainChanges(Parameters.Cache, Parameters.Object, Parameters);
 	
 	If Parameters.FormIsExists Then
 		UniqueFormModificators = New Array();
@@ -9532,8 +9532,7 @@ Procedure CommitChainChanges(Parameters) Export
 			#ENDIF
 			Execute StrTemplate("%1.%2(Parameters);", ViewModuleName, FormModificator);
 		EndDo;
-		
-		_CommitChainChanges(Parameters);
+		_CommitChainChanges(Parameters.CacheForm, Parameters.Form, Parameters);
 	
 	#IF Client THEN
 		UniqueViewNotify = New Array();
@@ -9543,10 +9542,7 @@ Procedure CommitChainChanges(Parameters) Export
 			EndIf;
 		EndDo;
 		For Each ViewNotify In UniqueViewNotify Do
-			
-			// web-client-bug-fix
 			ExecuteViewNotify(Parameters, ViewNotify);
-			//Execute StrTemplate("%1.%2(Parameters);", Parameters.ViewClientModuleName, ViewNotify);
 		EndDo;
 	#ENDIF
 	EndIf;
@@ -9645,8 +9641,8 @@ Function IsFullTransferTabularSection(Parameters, PropertyName)
 EndFunction
 
 // move changes from Cache to Object form CacheForm to Form
-Procedure _CommitChainChanges(Parameters)
-	For Each Property In Parameters.Cache Do
+Procedure _CommitChainChanges(Cache, Source, Parameters)
+	For Each Property In Cache Do
 		PropertyName  = Property.Key;
 		PropertyValue = Property.Value;
 		
@@ -9660,13 +9656,13 @@ Procedure _CommitChainChanges(Parameters)
 			EndDo;
 			
 			For Each ItemOfKeys In ArrayOfKeys Do
-				For Each Row In Parameters.Object[PropertyName].FindRows(New Structure("Key", ItemOfKeys)) Do
-					Parameters.Object[PropertyName].Delete(Row);
+				For Each Row In Source[PropertyName].FindRows(New Structure("Key", ItemOfKeys)) Do
+					Source[PropertyName].Delete(Row);
 				EndDo;
 			EndDo;
 			
 			For Each Row In PropertyValue Do
-				FillPropertyValues(Parameters.Object[PropertyName].Add(), Row);
+				FillPropertyValues(Source[PropertyName].Add(), Row);
 			EndDo;
 		
 		ElsIf TypeOf(PropertyValue) = Type("Array") Then // it is tabular part
@@ -9674,17 +9670,17 @@ Procedure _CommitChainChanges(Parameters)
 			// tabular parts ItemList and PaymentList moved by rows, key in rows is unique
 			If IsRowWithKey Then
 				For Each Row In PropertyValue Do
-					FillPropertyValues(Parameters.Object[PropertyName].FindRows(New Structure("Key", Row.Key))[0], Row);
+					FillPropertyValues(Source[PropertyName].FindRows(New Structure("Key", Row.Key))[0], Row);
 				EndDo;
 			Else
 				// if tabular parts not contain key then transfered completely, for example PaymentTerms
-				Parameters.Object[PropertyName].Clear();
+				Source[PropertyName].Clear();
 				For Each Row In PropertyValue Do
-					FillPropertyValues(Parameters.Object[PropertyName].Add(), Row);
+					FillPropertyValues(Source[PropertyName].Add(), Row);
 				EndDo;
 			EndIf;
 		Else
-			Parameters.Object[PropertyName] = PropertyValue; // it is property of object
+			Source[PropertyName] = PropertyValue; // it is property of object
 		EndIf;
 	EndDo;
 EndProcedure

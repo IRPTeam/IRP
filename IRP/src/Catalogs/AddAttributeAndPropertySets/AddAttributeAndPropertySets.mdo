@@ -776,6 +776,13 @@
         <value>109</value>
       </code>
     </items>
+    <items id="26962bc2-6f3b-43df-af7c-402628465b97">
+      <name>Catalog_FillingTemplates</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>110</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

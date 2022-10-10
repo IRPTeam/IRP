@@ -639,6 +639,7 @@
   <catalogs>Catalog.BankTerms</catalogs>
   <catalogs>Catalog.Batches</catalogs>
   <catalogs>Catalog.BatchKeys</catalogs>
+  <catalogs>Catalog.BillOfMaterials</catalogs>
   <catalogs>Catalog.BusinessUnits</catalogs>
   <catalogs>Catalog.CancelReturnReasons</catalogs>
   <catalogs>Catalog.CashAccounts</catalogs>
@@ -660,6 +661,7 @@
   <catalogs>Catalog.Files</catalogs>
   <catalogs>Catalog.FileStoragesInfo</catalogs>
   <catalogs>Catalog.FileStorageVolumes</catalogs>
+  <catalogs>Catalog.FillingTemplates</catalogs>
   <catalogs>Catalog.Hardware</catalogs>
   <catalogs>Catalog.IDInfoAddresses</catalogs>
   <catalogs>Catalog.IDInfoSets</catalogs>
@@ -704,7 +706,6 @@
   <catalogs>Catalog.UserGroups</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
-  <catalogs>Catalog.BillOfMaterials</catalogs>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalRevenueAllocation</documents>
   <documents>Document.BankPayment</documents>

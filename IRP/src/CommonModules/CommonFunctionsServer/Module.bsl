@@ -558,11 +558,18 @@ Function RecalculateExpression(Params) Export
 		If Params.SafeMode Then
 			SetSafeMode(True);
 		EndIf;
-		If Params.Eval Then
+		If Params.Type = Enums.ExternalFunctionType.Eval Then
 			// @skip-check server-execution-safe-mode
 			Result = Eval(Params.Expression);
-		Else			
+		ElsIf Params.Type = Enums.ExternalFunctionType.Execute Then
 			Result = ExecuteCode(Params.Expression, Params, ResultInfo);
+		ElsIf Params.Type = Enums.ExternalFunctionType.RegExp Then
+			Params.RegExpResult = RegExpFindMatch(Params.RegExpString, Params.RegExp);
+			If Not IsBlankString(Params.Expression) Then
+				Result = ExecuteCode(Params.Expression, Params, ResultInfo);
+			EndIf;
+		Else
+			Raise "Wrong External function type.";
 		EndIf;
 		ResultInfo.Result = Result;
 	Except
@@ -612,7 +619,6 @@ Procedure DeleteScheduledJob(ExternalFunction) Export
 	EndDo;
 EndProcedure
 
-
 // Get recalculate expression params.
 // 
 // Parameters:
@@ -620,29 +626,37 @@ EndProcedure
 // 
 // Returns:
 //  Structure - Get recalculate expression params:
-// * Eval - Boolean -
+// * RegExpString - String -
+// * RegExp - String -
+// * RegExpResult - Array -
 // * Expression - String -
 // * Result - Undefined -
 // * SafeMode - Boolean -
-// * RegExpResult - Array -
 // * Job - CatalogRef.ExternalFunctions -
+// * Type - EnumRef.ExternalFunctionType -
 // * AddInfo - Structure -
 Function GetRecalculateExpressionParams(ExternalFunction = Undefined) Export
 	
 	Structure = New Structure;
-	Structure.Insert("Eval", True);
+	Structure.Insert("RegExpString", "");
+	Structure.Insert("RegExp", "");
+	Structure.Insert("RegExpResult", New Array);
+
 	Structure.Insert("Expression", "");
 	Structure.Insert("Result", Undefined);
+
 	Structure.Insert("SafeMode", True);
-	Structure.Insert("RegExpResult", New Array);
 	Structure.Insert("Job", Catalogs.ExternalFunctions.EmptyRef());
+
 	Structure.Insert("AddInfo", New Structure);
+	Structure.Insert("Type", Enums.ExternalFunctionType.Eval);
 	
 	If Not ExternalFunction = Undefined Then
-		Structure.Eval = ExternalFunction.ExternalFunctionType = Enums.ExternalFunctionType.Eval;
 		Structure.SafeMode = ExternalFunction.SafeModeIsOn;
 		Structure.Expression = ExternalFunction.ExternalCode;
 		Structure.Job = ExternalFunction.Ref;
+		Structure.Type = ExternalFunction.ExternalFunctionType;
+		Structure.RegExp = ExternalFunction.RegExp;
 	EndIf;
 	
 	Return Structure;

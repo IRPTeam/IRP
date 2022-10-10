@@ -21,21 +21,21 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|	MAX(ISNULL(Planned.QuantityTurnover, 0) + ISNULL(Correction.QuantityTurnover, 0)) AS Quantity
 	|INTO Planned
 	|FROM
-	|	AccumulationRegister.MF_ProductionPlanning.Turnovers(
+	|	AccumulationRegister.R7030T_ProductionPlanning.Turnovers(
 	|			,
 	|			,
 	|			,
 	|			PlanningPeriod = &PlanningPeriod
-	|				AND PlanningType = VALUE(Enum.MF_ProductionPlanningTypes.Planned)
+	|				AND PlanningType = VALUE(Enum.ProductionPlanningTypes.Planned)
 	|				AND Company = &Company
 	|				AND BusinessUnit IN (&BusinessUnits)
 	|				AND PlanningDocument = &PlanningDocument) AS Planned
-	|		FULL JOIN AccumulationRegister.MF_ProductionPlanning.Turnovers(
+	|		FULL JOIN AccumulationRegister.R7030T_ProductionPlanning.Turnovers(
 	|				,
 	|				,
 	|				,
 	|				PlanningPeriod = &PlanningPeriod
-	|					AND PlanningType = VALUE(Enum.MF_ProductionPlanningTypes.PlanAdjustment)
+	|					AND PlanningType = VALUE(Enum.ProductionPlanningTypes.PlanAdjustment)
 	|					AND Company = &Company
 	|					AND BusinessUnit IN (&BusinessUnits)
 	|					AND PlanningDocument = &PlanningDocument) AS Correction
@@ -68,12 +68,12 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|	Produced.QuantityTurnover AS Quantity
 	|INTO Produced
 	|FROM
-	|	AccumulationRegister.MF_ProductionPlanning.Turnovers(
+	|	AccumulationRegister.R7030T_ProductionPlanning.Turnovers(
 	|			,
 	|			,
 	|			,
 	|			PlanningPeriod = &PlanningPeriod
-	|				AND PlanningType = VALUE(Enum.MF_ProductionPlanningTypes.Produced)
+	|				AND PlanningType = VALUE(Enum.ProductionPlanningTypes.Produced)
 	|				AND Company = &Company
 	|				AND BusinessUnit IN (&BusinessUnits)
 	|				AND PlanningDocument = &PlanningDocument) AS Produced
@@ -105,60 +105,60 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|SELECT
 	|	PlannedProduced.Company AS Company,
 	|	PlannedProduced.BusinessUnit AS BusinessUnit,
-	|	MF_BillOfMaterials.SurplusStore AS StoreProduction,
+	|	T7010S_BillOfMaterials.SurplusStore AS StoreProduction,
 	|	PlannedProduced.Item AS Item,
 	|	PlannedProduced.ItemKey AS ItemKey,
 	|	PlannedProduced.PlanningPeriod AS PlanningPeriod,
 	|	PlannedProduced.BasisQuantity AS BasisQuantity,
-	|	MF_BillOfMaterials.BasisUnit AS BasisUnit,
-	|	MF_BillOfMaterials.BillOfMaterials AS BillOfMaterials,
-	|	MF_BillOfMaterials.BasisQuantity AS TotalQuantity,
-	|	MF_BillOfMaterials.OutputID AS OutputID,
-	|	MF_BillOfMaterials.UniqueID AS UniqueID
+	|	T7010S_BillOfMaterials.BasisUnit AS BasisUnit,
+	|	T7010S_BillOfMaterials.BillOfMaterials AS BillOfMaterials,
+	|	T7010S_BillOfMaterials.BasisQuantity AS TotalQuantity,
+	|	T7010S_BillOfMaterials.OutputID AS OutputID,
+	|	T7010S_BillOfMaterials.UniqueID AS UniqueID
 	|INTO Production
 	|FROM
 	|	PlannedProduced AS PlannedProduced
-	|		INNER JOIN InformationRegister.MF_BillOfMaterials.SliceLast AS MF_BillOfMaterials
-	|		ON (MF_BillOfMaterials.Company = PlannedProduced.Company)
-	|			AND (MF_BillOfMaterials.BusinessUnit = PlannedProduced.BusinessUnit)
-	|			AND (MF_BillOfMaterials.ItemKey = PlannedProduced.ItemKey)
-	|			AND (MF_BillOfMaterials.IsProduct = TRUE)
-	|			AND (MF_BillOfMaterials.PlanningPeriod = PlannedProduced.PlanningPeriod)
-	|			AND (MF_BillOfMaterials.BillOfMaterials = PlannedProduced.BillOfMaterials)
-	|			AND (MF_BillOfMaterials.PlanningDocument = PlannedProduced.PlanningDocument)
+	|		INNER JOIN InformationRegister.T7010S_BillOfMaterials.SliceLast AS T7010S_BillOfMaterials
+	|		ON (T7010S_BillOfMaterials.Company = PlannedProduced.Company)
+	|			AND (T7010S_BillOfMaterials.BusinessUnit = PlannedProduced.BusinessUnit)
+	|			AND (T7010S_BillOfMaterials.ItemKey = PlannedProduced.ItemKey)
+	|			AND (T7010S_BillOfMaterials.IsProduct = TRUE)
+	|			AND (T7010S_BillOfMaterials.PlanningPeriod = PlannedProduced.PlanningPeriod)
+	|			AND (T7010S_BillOfMaterials.BillOfMaterials = PlannedProduced.BillOfMaterials)
+	|			AND (T7010S_BillOfMaterials.PlanningDocument = PlannedProduced.PlanningDocument)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	PlannedProduced.Company AS Company,
 	|	PlannedProduced.BusinessUnit AS BusinessUnit,
-	|	MF_BillOfMaterials.SurplusStore AS StoreProduction,
+	|	T7010S_BillOfMaterials.SurplusStore AS StoreProduction,
 	|	PlannedProduced.Item AS Item,
 	|	PlannedProduced.ItemKey AS ItemKey,
 	|	PlannedProduced.PlanningPeriod AS PlanningPeriod,
 	|	PlannedProduced.BasisQuantity AS BasisQuantity,
-	|	MF_BillOfMaterials.BasisUnit AS BasisUnit,
-	|	MF_BillOfMaterials.BillOfMaterials AS BillOfMaterials,
-	|	MF_BillOfMaterials.BasisQuantity AS TotalQuantity,
-	|	MF_BillOfMaterials.OutputID AS OutputID,
-	|	MF_BillOfMaterials.UniqueID AS UniqueID
+	|	T7010S_BillOfMaterials.BasisUnit AS BasisUnit,
+	|	T7010S_BillOfMaterials.BillOfMaterials AS BillOfMaterials,
+	|	T7010S_BillOfMaterials.BasisQuantity AS TotalQuantity,
+	|	T7010S_BillOfMaterials.OutputID AS OutputID,
+	|	T7010S_BillOfMaterials.UniqueID AS UniqueID
 	|INTO Semiproduction
 	|FROM
 	|	PlannedProduced AS PlannedProduced
-	|		INNER JOIN InformationRegister.MF_BillOfMaterials.SliceLast AS MF_BillOfMaterials
-	|		ON (MF_BillOfMaterials.Company = PlannedProduced.Company)
-	|			AND (MF_BillOfMaterials.BusinessUnit = PlannedProduced.BusinessUnit)
-	|			AND (MF_BillOfMaterials.ItemKey = PlannedProduced.ItemKey)
-	|			AND (MF_BillOfMaterials.IsSemiproduct = TRUE)
-	|			AND (MF_BillOfMaterials.PlanningPeriod = PlannedProduced.PlanningPeriod)
-	|			AND (MF_BillOfMaterials.BillOfMaterials = PlannedProduced.BillOfMaterials)
-	|			AND (MF_BillOfMaterials.PlanningDocument = PlannedProduced.PlanningDocument)
+	|		INNER JOIN InformationRegister.T7010S_BillOfMaterials.SliceLast AS T7010S_BillOfMaterials
+	|		ON (T7010S_BillOfMaterials.Company = PlannedProduced.Company)
+	|			AND (T7010S_BillOfMaterials.BusinessUnit = PlannedProduced.BusinessUnit)
+	|			AND (T7010S_BillOfMaterials.ItemKey = PlannedProduced.ItemKey)
+	|			AND (T7010S_BillOfMaterials.IsSemiproduct = TRUE)
+	|			AND (T7010S_BillOfMaterials.PlanningPeriod = PlannedProduced.PlanningPeriod)
+	|			AND (T7010S_BillOfMaterials.BillOfMaterials = PlannedProduced.BillOfMaterials)
+	|			AND (T7010S_BillOfMaterials.PlanningDocument = PlannedProduced.PlanningDocument)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	0 AS ItemPicture,
-	|	VALUE(Enum.MF_ProductionTypes.Product) AS ProductionType,
+	|	VALUE(Enum.ProductionTypes.Product) AS ProductionType,
 	|	Production.Company AS Company,
 	|	Production.BusinessUnit AS BusinessUnit,
 	|	Production.StoreProduction AS StoreProduction,
@@ -180,7 +180,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|
 	|SELECT
 	|	2,
-	|	VALUE(Enum.MF_ProductionTypes.Semiproduct),
+	|	VALUE(Enum.ProductionTypes.Semiproduct),
 	|	Semiproduction.Company,
 	|	Semiproduction.BusinessUnit,
 	|	Semiproduction.StoreProduction,
@@ -225,7 +225,7 @@ EndProcedure
 &AtClient
 Procedure Ok(Command)
 	Result = New Structure();
-	Result.Insert("Company"           , ThisObject.Company);
+	Result.Insert("Company"            , ThisObject.Company);
 	Result.Insert("PlanningPeriod"     , ThisObject.PlanningPeriod);
 	Result.Insert("ProductionPlanning" , ThisObject.ProductionPlanning);
 	ProductSelected = False;

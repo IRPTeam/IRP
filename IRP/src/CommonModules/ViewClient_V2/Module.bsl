@@ -2898,6 +2898,12 @@ Procedure BillOfMaterialsOnChange(Object, Form, TableNames) Export
 	EndDo;
 EndProcedure
 
+Procedure OnSetBillOfMaterialsNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "Production" Then
+		Parameters.Form.FormSetVisibilityAvailability();
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 #Region PLANNING_PERIOD

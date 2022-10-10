@@ -1362,7 +1362,7 @@
     </title>
     <id>7</id>
     <valueType>
-      <types>DocumentObject.Production</types>
+      <types>DocumentRef.ProductionPlanning</types>
     </valueType>
     <view>
       <common>true</common>

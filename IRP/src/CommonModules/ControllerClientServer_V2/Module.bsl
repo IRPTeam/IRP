@@ -443,7 +443,8 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	SettersMap.Insert("Materials.QuantityBOM"        , "SetMaterialsQuantityBOM");
 	
 	// Manufacturing calculations
-	SettersMap.Insert("Command.UpdateCurrentQuantity", "StepChangeCurrentQuantityInProductions");
+	SettersMap.Insert("Command.UpdateCurrentQuantity"  , "StepChangeCurrentQuantityInProductions");
+	SettersMap.Insert("Command.UpdateByBillOfMaterials", "StepMaterialsCalculations");
 	
 	Return SettersMap.Get(DataPath);
 EndFunction
@@ -3306,8 +3307,16 @@ EndFunction
 Function BindQuantity(Parameters)
 	DataPath = "Quantity";
 	Binding = New Structure();
-	Binding.Insert("Bundling"   , "StepCovertQuantityToQuantityInBaseUnit_ItemBundle");
-	Binding.Insert("Unbundling" , "StepCovertQuantityToQuantityInBaseUnit_ItemKeyBundle");
+	
+	Binding.Insert("Bundling",
+		"StepCovertQuantityToQuantityInBaseUnit_ItemBundle");
+	
+	Binding.Insert("Unbundling",
+		"StepCovertQuantityToQuantityInBaseUnit_ItemKeyBundle");
+	
+	Binding.Insert("Production",
+		"StepMaterialsRecalculateQuantity");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -3381,8 +3390,15 @@ EndFunction
 Function BindUnit(Parameters)
 	DataPath = "Unit";
 	Binding = New Structure();
-	Binding.Insert("Bundling"   , "StepCovertQuantityToQuantityInBaseUnit_ItemBundle");
-	Binding.Insert("Unbundling" , "StepCovertQuantityToQuantityInBaseUnit_ItemKeyBundle");
+	
+	Binding.Insert("Bundling", 
+		"StepCovertQuantityToQuantityInBaseUnit_ItemBundle");
+	
+	Binding.Insert("Unbundling",
+		"StepCovertQuantityToQuantityInBaseUnit_ItemKeyBundle");
+	
+	Binding.Insert("Production",
+		"StepMaterialsRecalculateQuantity");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -3539,6 +3555,7 @@ EndProcedure
 
 // BillOfMaterials.OnChange
 Procedure BillOfMaterialsOnChange(Parameters) Export
+	AddViewNotify("OnSetBillOfMaterialsNotify", Parameters);
 	Binding = BindBillOfMaterials(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -3546,7 +3563,7 @@ EndProcedure
 // BillOfMaterials.Set
 Procedure SetBillOfMaterials(Parameters, Results) Export
 	Binding = BindBillOfMaterials(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetBillOfMaterialsNotify");
 EndProcedure
 
 // BillOfMaterials.Get
@@ -3558,6 +3575,10 @@ EndFunction
 Function BindBillOfMaterials(Parameters)
 	DataPath = "BillOfMaterials";
 	Binding = New Structure();
+	
+	Binding.Insert("Production",
+		"StepMaterialsCalculations");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -6416,8 +6437,16 @@ EndFunction
 Function BindMaterialsQuantity(Parameters)
 	DataPath = "Materials.Quantity";
 	Binding = New Structure();
-	Binding.Insert("WorkOrder", "StepMaterialsCalculateQuantityInBaseUnit");
-	Binding.Insert("WorkSheet", "StepMaterialsCalculateQuantityInBaseUnit");
+	
+	Binding.Insert("WorkOrder",
+		"StepMaterialsCalculateQuantityInBaseUnit");
+	
+	Binding.Insert("WorkSheet",
+		"StepMaterialsCalculateQuantityInBaseUnit");
+		
+	Binding.Insert("Production",
+		"StepMaterialsChangeIsManualChangedByQuantity");
+			
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -6823,6 +6852,84 @@ Procedure StepMaterialsLoadTable(Parameters, Chain) Export
 	Options = ModelClientServer_V2.LoadTableOptions();
 	Options.TableAddress = Parameters.LoadData.Address;
 	Chain.LoadTable.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_CALCULATIONS
+
+// Materials.Set
+Procedure SetMaterials(Parameters, Results) Export
+	For Each Result In Results Do
+		If Result.Value.Materials.Count() Then
+			If Not Parameters.Cache.Property("Materials") Then
+				Parameters.Cache.Insert("Materials", New Array());
+			EndIf;
+			
+			// remove from cache old rows
+			Count = Parameters.Cache.Materials.Count();
+			For i = 1 To Count Do
+				Index = Count - i;
+				ArrayItem = Parameters.Cache.Materials[Index];
+				If ArrayItem.Key = Result.Options.Key Then
+					Parameters.Cache.Materials.Delete(Index);
+				EndIf;
+			EndDo;
+			
+			// add new rows
+			For Each Row In Result.Value.Materials Do
+				Parameters.Cache.Materials.Add(Row);
+			EndDo;
+		EndIf;
+	EndDo;
+EndProcedure
+
+// Step.Materials.Calculations
+Procedure StepMaterialsCalculations(Parameters, Chain) Export
+	Chain.MaterialsCalculations.Enable = True;
+	Chain.MaterialsCalculations.Setter = "SetMaterials";
+	Chain.MaterialsCalculations.IsLazyStep = True;
+	
+	ArrayOfMaterialsRows = New Array();
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		NewRow = New Structure(Parameters.ObjectMetadataInfo.Tables.Materials.Columns);
+		FillPropertyValues(NewRow, Row);
+		ArrayOfMaterialsRows.Add(NewRow);
+	EndDo;	
+		
+	Options = ModelClientServer_V2.MaterialsCalculationsOptions();
+	Options.Materials = ArrayOfMaterialsRows;
+	Options.BillOfMaterials  = GetBillOfMaterials(Parameters);
+	Options.MaterialsColumns = Parameters.ObjectMetadataInfo.Tables.Materials.Columns;
+	Options.ItemKey          = GetItemKey(Parameters);
+	Options.Unit             = GetUnit(Parameters);
+	Options.Quantity         = GetQuantity(Parameters);
+	Options.StepName = "StepMaterialsCalculations";
+	Chain.MaterialsCalculations.Options.Add(Options);
+EndProcedure
+
+// Step.Materials.RecalculateQuantity
+Procedure StepMaterialsRecalculateQuantity(Parameters, Chain) Export
+	Chain.MaterialsRecalculateQuantity.Enable = True;
+	Chain.MaterialsRecalculateQuantity.Setter = "SetMaterials";
+	Chain.MaterialsRecalculateQuantity.IsLazyStep = True;
+	
+	ArrayOfMaterialsRows = New Array();
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		NewRow = New Structure(Parameters.ObjectMetadataInfo.Tables.Materials.Columns);
+		FillPropertyValues(NewRow, Row);
+		ArrayOfMaterialsRows.Add(NewRow);
+	EndDo;	
+		
+	Options = ModelClientServer_V2.MaterialsCalculationsOptions();
+	Options.Materials = ArrayOfMaterialsRows;
+	Options.BillOfMaterials  = GetBillOfMaterials(Parameters);
+	Options.MaterialsColumns = Parameters.ObjectMetadataInfo.Tables.Materials.Columns;
+	Options.ItemKey          = GetItemKey(Parameters);
+	Options.Unit             = GetUnit(Parameters);
+	Options.Quantity         = GetQuantity(Parameters);
+	Options.StepName = "StepMaterialsRecalculateQuantity";
+	Chain.MaterialsRecalculateQuantity.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -9509,6 +9616,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "ProductionsOnCopyRowFormNotify"        Then ViewClient_V2.ProductionsOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "OnSetProductionsCurrentQuantityNotify" Then ViewClient_V2.OnSetProductionsCurrentQuantityNotify(Parameters);
 	ElsIf ViewNotify = "OnSetMaterialsMaterialTypeNotify"      Then ViewClient_V2.OnSetMaterialsMaterialTypeNotify(Parameters);
+	ElsIf ViewNotify = "OnSetBillOfMaterialsNotify"            Then ViewClient_V2.OnSetBillOfMaterialsNotify(Parameters);
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);
 	EndIf;
@@ -9523,7 +9631,8 @@ Procedure _CommitChainChanges(Cache, Source)
 		If Upper(PropertyName) = Upper("TaxList") 
 			Or Upper(PropertyName) = Upper("SerialLotNumbers") 
 			Or Upper(PropertyName) = Upper("SpecialOffers")
-			Or Upper(PropertyName) = Upper("BillOfMaterialsList") Then
+			Or Upper(PropertyName) = Upper("BillOfMaterialsList")
+			Or Upper(PropertyName) = Upper("Materials") Then
 			// tabular part transferred completely
 			ArrayOfKeys = New Array();
 			For Each Row In PropertyValue Do

@@ -7,34 +7,6 @@
 	<dataSet xsi:type="DataSetQuery">
 		<name>DataSet1</name>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>RequestProcurementQuantity</dataPath>
-			<field>RequestProcurementQuantity</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Request procurement quantity</v8:content>
-				</v8:item>
-			</title>
-			<valueType>
-				<v8:Type>xs:decimal</v8:Type>
-				<v8:NumberQualifiers>
-					<v8:Digits>12</v8:Digits>
-					<v8:FractionDigits>3</v8:FractionDigits>
-					<v8:AllowedSign>Any</v8:AllowedSign>
-				</v8:NumberQualifiers>
-			</valueType>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MinimumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MaximumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
 			<dataPath>Store</dataPath>
 			<field>Store</field>
 			<role>
@@ -49,92 +21,40 @@
 			</role>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>ReservedProduceQuantity</dataPath>
-			<field>ReservedProduceQuantity</field>
+			<dataPath>FreeQuantity</dataPath>
+			<field>FreeQuantity</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Reserved produce quantity</v8:content>
+					<v8:content>Free quantity</v8:content>
 				</v8:item>
 			</title>
-			<valueType>
-				<v8:Type>xs:decimal</v8:Type>
-				<v8:NumberQualifiers>
-					<v8:Digits>12</v8:Digits>
-					<v8:FractionDigits>3</v8:FractionDigits>
-					<v8:AllowedSign>Any</v8:AllowedSign>
-				</v8:NumberQualifiers>
-			</valueType>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MinimumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MaximumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-			</appearance>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>CorrectedDemandQuantity</dataPath>
-			<field>CorrectedDemandQuantity</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Corrected demand quantity</v8:content>
-				</v8:item>
-			</title>
-			<valueType>
-				<v8:Type>xs:decimal</v8:Type>
-				<v8:NumberQualifiers>
-					<v8:Digits>12</v8:Digits>
-					<v8:FractionDigits>3</v8:FractionDigits>
-					<v8:AllowedSign>Any</v8:AllowedSign>
-				</v8:NumberQualifiers>
-			</valueType>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MinimumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MaximumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-			</appearance>
+			<dataPath>Order</dataPath>
+			<field>Order</field>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>WrittenOffProduceQuantity</dataPath>
-			<field>WrittenOffProduceQuantity</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Written off produce quantity</v8:content>
-				</v8:item>
-			</title>
-			<valueType>
-				<v8:Type>xs:decimal</v8:Type>
-				<v8:NumberQualifiers>
-					<v8:Digits>12</v8:Digits>
-					<v8:FractionDigits>3</v8:FractionDigits>
-					<v8:AllowedSign>Any</v8:AllowedSign>
-				</v8:NumberQualifiers>
-			</valueType>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MinimumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MaximumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-			</appearance>
+			<dataPath>SerialLotNumber</dataPath>
+			<field>SerialLotNumber</field>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Company</dataPath>
 			<field>Company</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>BusinessUnit</dataPath>
+			<field>BusinessUnit</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>PlanningPeriod</dataPath>
+			<field>PlanningPeriod</field>
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
@@ -148,50 +68,16 @@
 					<v8:content>Entry demand quantity</v8:content>
 				</v8:item>
 			</title>
-			<valueType>
-				<v8:Type>xs:decimal</v8:Type>
-				<v8:NumberQualifiers>
-					<v8:Digits>12</v8:Digits>
-					<v8:FractionDigits>3</v8:FractionDigits>
-					<v8:AllowedSign>Any</v8:AllowedSign>
-				</v8:NumberQualifiers>
-			</valueType>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MinimumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MaximumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-			</appearance>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>PlanningPeriod</dataPath>
-			<field>PlanningPeriod</field>
-			<role>
-				<dcscom:dimension>true</dcscom:dimension>
-			</role>
-			<inputParameters>
-				<dcscor:item>
-					<dcscor:parameter>ChoiceParameterLinks</dcscor:parameter>
-					<dcscor:value xsi:type="dcscor:ChoiceParameterLinks">
-						<dcscor:item>
-							<dcscor:choiceParameter>Filter.BusinessUnit</dcscor:choiceParameter>
-							<dcscor:value>BusinessUnit</dcscor:value>
-							<dcscor:mode xmlns:d8p1="http://v8.1c.ru/8.1/data/enterprise" xsi:type="d8p1:LinkedValueChangeMode">Clear</dcscor:mode>
-						</dcscor:item>
-					</dcscor:value>
-				</dcscor:item>
-			</inputParameters>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>BusinessUnit</dataPath>
-			<field>BusinessUnit</field>
-			<role>
-				<dcscom:dimension>true</dcscom:dimension>
-			</role>
+			<dataPath>CorrectedDemandQuantity</dataPath>
+			<field>CorrectedDemandQuantity</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Corrected demand quantity</v8:content>
+				</v8:item>
+			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>FinalDemandQuantity</dataPath>
@@ -200,212 +86,6 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Final demand quantity</v8:content>
-				</v8:item>
-			</title>
-			<valueType>
-				<v8:Type>xs:decimal</v8:Type>
-				<v8:NumberQualifiers>
-					<v8:Digits>12</v8:Digits>
-					<v8:FractionDigits>3</v8:FractionDigits>
-					<v8:AllowedSign>Any</v8:AllowedSign>
-				</v8:NumberQualifiers>
-			</valueType>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MinimumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MaximumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>ConfirmedTransferQuantity</dataPath>
-			<field>ConfirmedTransferQuantity</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Confirmed transfer quantity</v8:content>
-				</v8:item>
-			</title>
-			<valueType>
-				<v8:Type>xs:decimal</v8:Type>
-				<v8:NumberQualifiers>
-					<v8:Digits>12</v8:Digits>
-					<v8:FractionDigits>3</v8:FractionDigits>
-					<v8:AllowedSign>Any</v8:AllowedSign>
-				</v8:NumberQualifiers>
-			</valueType>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MinimumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MaximumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>OrderPurchaseQuantity</dataPath>
-			<field>OrderPurchaseQuantity</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Order purchase quantity</v8:content>
-				</v8:item>
-			</title>
-			<valueType>
-				<v8:Type>xs:decimal</v8:Type>
-				<v8:NumberQualifiers>
-					<v8:Digits>12</v8:Digits>
-					<v8:FractionDigits>3</v8:FractionDigits>
-					<v8:AllowedSign>Any</v8:AllowedSign>
-				</v8:NumberQualifiers>
-			</valueType>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MinimumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MaximumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>OrderTransferQuantity</dataPath>
-			<field>OrderTransferQuantity</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Order transfer quantity</v8:content>
-				</v8:item>
-			</title>
-			<valueType>
-				<v8:Type>xs:decimal</v8:Type>
-				<v8:NumberQualifiers>
-					<v8:Digits>12</v8:Digits>
-					<v8:FractionDigits>3</v8:FractionDigits>
-					<v8:AllowedSign>Any</v8:AllowedSign>
-				</v8:NumberQualifiers>
-			</valueType>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MinimumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MaximumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>ConfirmedPurchaseQuantity</dataPath>
-			<field>ConfirmedPurchaseQuantity</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Confirmed purchase quantity</v8:content>
-				</v8:item>
-			</title>
-			<valueType>
-				<v8:Type>xs:decimal</v8:Type>
-				<v8:NumberQualifiers>
-					<v8:Digits>12</v8:Digits>
-					<v8:FractionDigits>3</v8:FractionDigits>
-					<v8:AllowedSign>Any</v8:AllowedSign>
-				</v8:NumberQualifiers>
-			</valueType>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MinimumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MaximumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>NeededProduceQuantity</dataPath>
-			<field>NeededProduceQuantity</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Needed produce quantity</v8:content>
-				</v8:item>
-			</title>
-			<valueType>
-				<v8:Type>xs:decimal</v8:Type>
-				<v8:NumberQualifiers>
-					<v8:Digits>12</v8:Digits>
-					<v8:FractionDigits>3</v8:FractionDigits>
-					<v8:AllowedSign>Any</v8:AllowedSign>
-				</v8:NumberQualifiers>
-			</valueType>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MinimumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MaximumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>ProducedProduceQuantity</dataPath>
-			<field>ProducedProduceQuantity</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Produced produce quantity</v8:content>
-				</v8:item>
-			</title>
-			<valueType>
-				<v8:Type>xs:decimal</v8:Type>
-				<v8:NumberQualifiers>
-					<v8:Digits>12</v8:Digits>
-					<v8:FractionDigits>3</v8:FractionDigits>
-					<v8:AllowedSign>Any</v8:AllowedSign>
-				</v8:NumberQualifiers>
-			</valueType>
-			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MinimumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:parameter>MaximumWidth</dcscor:parameter>
-					<dcscor:value xsi:type="xs:decimal">12</dcscor:value>
-				</dcscor:item>
-			</appearance>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>NeededProcurementQuantity</dataPath>
-			<field>NeededProcurementQuantity</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Needed procurement quantity</v8:content>
-				</v8:item>
-			</title>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>FreeQuantity</dataPath>
-			<field>FreeQuantity</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Free quantity</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -420,16 +100,6 @@
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>LackProcurementQuantity</dataPath>
-			<field>LackProcurementQuantity</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Lack procurement quantity</v8:content>
-				</v8:item>
-			</title>
-		</field>
-		<field xsi:type="DataSetFieldField">
 			<dataPath>ReservedQuantity</dataPath>
 			<field>ReservedQuantity</field>
 			<title xsi:type="v8:LocalStringType">
@@ -440,8 +110,114 @@
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>Order</dataPath>
-			<field>Order</field>
+			<dataPath>NeededProduceQuantity</dataPath>
+			<field>NeededProduceQuantity</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Needed produce quantity</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ProducedProduceQuantity</dataPath>
+			<field>ProducedProduceQuantity</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Produced produce quantity</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ReservedProduceQuantity</dataPath>
+			<field>ReservedProduceQuantity</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Reserved produce quantity</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>WrittenOffProduceQuantity</dataPath>
+			<field>WrittenOffProduceQuantity</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Written off produce quantity</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>NeededProcurementQuantity</dataPath>
+			<field>NeededProcurementQuantity</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Needed procurement quantity</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>RequestProcurementQuantity</dataPath>
+			<field>RequestProcurementQuantity</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Request procurement quantity</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>LackProcurementQuantity</dataPath>
+			<field>LackProcurementQuantity</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Lack procurement quantity</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OrderTransferQuantity</dataPath>
+			<field>OrderTransferQuantity</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Order transfer quantity</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ConfirmedTransferQuantity</dataPath>
+			<field>ConfirmedTransferQuantity</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Confirmed transfer quantity</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>OrderPurchaseQuantity</dataPath>
+			<field>OrderPurchaseQuantity</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Order purchase quantity</v8:content>
+				</v8:item>
+			</title>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ConfirmedPurchaseQuantity</dataPath>
+			<field>ConfirmedPurchaseQuantity</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Confirmed purchase quantity</v8:content>
+				</v8:item>
+			</title>
 		</field>
 		<dataSource>DataSource1</dataSource>
 		<query>SELECT
@@ -507,7 +283,7 @@
 	DetailingSuppliesTurnovers.OrderPurchaseQuantityTurnover AS OrderPurchaseQuantity,
 	DetailingSuppliesTurnovers.ConfirmedPurchaseQuantityTurnover AS ConfirmedPurchaseQuantity
 FROM
-	AccumulationRegister.MF_DetailingSupplies.Turnovers AS DetailingSuppliesTurnovers
+	AccumulationRegister.R7010T_DetailingSupplies.Turnovers AS DetailingSuppliesTurnovers
 		LEFT JOIN AccumulationRegister.R4010B_ActualStocks.Balance AS StockBalanceBalance
 		ON DetailingSuppliesTurnovers.Store = StockBalanceBalance.Store
 		AND DetailingSuppliesTurnovers.ItemKey = StockBalanceBalance.ItemKey

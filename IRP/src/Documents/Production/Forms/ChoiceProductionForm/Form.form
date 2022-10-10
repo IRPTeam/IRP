@@ -1090,7 +1090,7 @@
     </title>
     <id>11</id>
     <valueType>
-      <types>DocumentObject.ProductionPlanning</types>
+      <types>DocumentRef.ProductionPlanning</types>
     </valueType>
     <view>
       <common>true</common>

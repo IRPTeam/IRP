@@ -45,48 +45,8 @@
 			</role>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>Production</dataPath>
-			<field>Production</field>
-			<useRestriction>
-				<condition>true</condition>
-			</useRestriction>
-			<attributeUseRestriction>
-				<condition>true</condition>
-			</attributeUseRestriction>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>Store</dataPath>
-			<field>Store</field>
-			<title xsi:type="v8:LocalStringType">
-				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Store</v8:content>
-				</v8:item>
-			</title>
-		</field>
-		<field xsi:type="DataSetFieldField">
 			<dataPath>ProductionType</dataPath>
 			<field>ProductionType</field>
-			<useRestriction>
-				<condition>true</condition>
-			</useRestriction>
-			<attributeUseRestriction>
-				<condition>true</condition>
-			</attributeUseRestriction>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>PlanningType</dataPath>
-			<field>PlanningType</field>
-			<useRestriction>
-				<condition>true</condition>
-			</useRestriction>
-			<attributeUseRestriction>
-				<condition>true</condition>
-			</attributeUseRestriction>
-		</field>
-		<field xsi:type="DataSetFieldField">
-			<dataPath>ItemKey</dataPath>
-			<field>ItemKey</field>
 			<useRestriction>
 				<condition>true</condition>
 			</useRestriction>
@@ -280,9 +240,26 @@
 		<field xsi:type="DataSetFieldField">
 			<dataPath>ProductItem</dataPath>
 			<field>ProductItem</field>
-			<role>
-				<dcscom:ignoreNullValues>true</dcscom:ignoreNullValues>
-			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>PlanningDocument</dataPath>
+			<field>PlanningDocument</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Store</dataPath>
+			<field>Store</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ItemKey</dataPath>
+			<field>ItemKey</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>PlanningType</dataPath>
+			<field>PlanningType</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Production</dataPath>
+			<field>Production</field>
 		</field>
 		<dataSource>DataSource1</dataSource>
 		<query>SELECT
@@ -297,12 +274,11 @@
 	MaterialPlannedTurnovers.QuantityTurnover AS Q_Planned_Material
 INTO Planned
 FROM
-	AccumulationRegister.MF_ProductionPlanning.Turnovers(,,,
-		PlanningType = VALUE(Enum.MF_ProductionPlanningTypes.Planned)
-	//AND ProductionType = &amp;ProductionType
+	AccumulationRegister.R7030T_ProductionPlanning.Turnovers(,,,
+		PlanningType = VALUE(Enum.ProductionPlanningTypes.Planned)
 	AND BusinessUnit = &amp;BusinessUnit) AS ProductionPlannedTurnovers
-		LEFT JOIN AccumulationRegister.MF_MaterialPlanning.Turnovers(,,,
-			PlanningType = VALUE(Enum.MF_ProductionPlanningTypes.Planned)
+		LEFT JOIN AccumulationRegister.R7020T_MaterialPlanning.Turnovers(,,,
+			PlanningType = VALUE(Enum.ProductionPlanningTypes.Planned)
 		AND BusinessUnit = &amp;BusinessUnit) AS MaterialPlannedTurnovers
 		ON ProductionPlannedTurnovers.Company = MaterialPlannedTurnovers.Company
 		AND ProductionPlannedTurnovers.BusinessUnit = MaterialPlannedTurnovers.BusinessUnit
@@ -310,7 +286,6 @@ FROM
 		AND ProductionPlannedTurnovers.PlanningPeriod = MaterialPlannedTurnovers.PlanningPeriod
 		AND ProductionPlannedTurnovers.BillOfMaterials = MaterialPlannedTurnovers.BillOfMaterials
 ;
-
 
 ////////////////////////////////////////////////////////////////////////////////
 SELECT
@@ -325,12 +300,11 @@ SELECT
 	MaterialCorrectedTurnovers.QuantityTurnover AS Q_Corrected_Material
 INTO Corrected
 FROM
-	AccumulationRegister.MF_ProductionPlanning.Turnovers(,,,
-		PlanningType = VALUE(Enum.MF_ProductionPlanningTypes.PlanAdjustment)
-	//AND ProductionType = &amp;ProductionType
+	AccumulationRegister.R7030T_ProductionPlanning.Turnovers(,,,
+		PlanningType = VALUE(Enum.ProductionPlanningTypes.PlanAdjustment)
 	AND BusinessUnit = &amp;BusinessUnit) AS ProductionCorrectedTurnovers
-		LEFT JOIN AccumulationRegister.MF_MaterialPlanning.Turnovers(,,,
-			PlanningType = VALUE(Enum.MF_ProductionPlanningTypes.PlanAdjustment)
+		LEFT JOIN AccumulationRegister.R7020T_MaterialPlanning.Turnovers(,,,
+			PlanningType = VALUE(Enum.ProductionPlanningTypes.PlanAdjustment)
 		AND BusinessUnit = &amp;BusinessUnit) AS MaterialCorrectedTurnovers
 		ON ProductionCorrectedTurnovers.Company = MaterialCorrectedTurnovers.Company
 		AND ProductionCorrectedTurnovers.BusinessUnit = MaterialCorrectedTurnovers.BusinessUnit
@@ -338,7 +312,6 @@ FROM
 		AND ProductionCorrectedTurnovers.PlanningPeriod = MaterialCorrectedTurnovers.PlanningPeriod
 		AND ProductionCorrectedTurnovers.BillOfMaterials = MaterialCorrectedTurnovers.BillOfMaterials
 ;
-
 
 ////////////////////////////////////////////////////////////////////////////////
 SELECT
@@ -353,12 +326,11 @@ SELECT
 	MaterialProducedTurnovers.QuantityTurnover AS Q_Produced_Material
 INTO Produced
 FROM
-	AccumulationRegister.MF_ProductionPlanning.Turnovers(,,,
-		PlanningType = VALUE(Enum.MF_ProductionPlanningTypes.Produced)
-//	AND ProductionType = &amp;ProductionType
+	AccumulationRegister.R7030T_ProductionPlanning.Turnovers(,,,
+		PlanningType = VALUE(Enum.ProductionPlanningTypes.Produced)
 	AND BusinessUnit = &amp;BusinessUnit) AS ProductionProducedTurnovers
-		LEFT JOIN AccumulationRegister.MF_MaterialPlanning.Turnovers(,,,
-			PlanningType = VALUE(Enum.MF_ProductionPlanningTypes.Produced)
+		LEFT JOIN AccumulationRegister.R7020T_MaterialPlanning.Turnovers(,,,
+			PlanningType = VALUE(Enum.ProductionPlanningTypes.Produced)
 		AND BusinessUnit = &amp;BusinessUnit) AS MaterialProducedTurnovers
 		ON ProductionProducedTurnovers.Company = MaterialProducedTurnovers.Company
 		AND ProductionProducedTurnovers.BusinessUnit = MaterialProducedTurnovers.BusinessUnit
@@ -366,7 +338,6 @@ FROM
 		AND ProductionProducedTurnovers.PlanningPeriod = MaterialProducedTurnovers.PlanningPeriod
 		AND ProductionProducedTurnovers.BillOfMaterials = MaterialProducedTurnovers.BillOfMaterials
 ;
-
 
 ////////////////////////////////////////////////////////////////////////////////
 SELECT
@@ -393,7 +364,8 @@ GROUP BY
 	Planned.PlanningPeriod,
 	Planned.Product,
 	Planned.ProductionType,
-	Planned.BillOfMaterials
+	Planned.BillOfMaterials,
+	Planned.Product.Item
 
 UNION ALL
 
@@ -422,7 +394,9 @@ GROUP BY
 	Planned.Product,
 	Planned.ProductionType,
 	Planned.Material,
-	Planned.BillOfMaterials
+	Planned.BillOfMaterials,
+	Planned.Product.Item,
+	Planned.Material.Item
 
 UNION ALL
 
@@ -450,7 +424,8 @@ GROUP BY
 	Corrected.PlanningPeriod,
 	Corrected.Product,
 	Corrected.ProductionType,
-	Corrected.BillOfMaterials
+	Corrected.BillOfMaterials,
+	Corrected.Product.Item
 
 UNION ALL
 
@@ -479,7 +454,9 @@ GROUP BY
 	Corrected.Product,
 	Corrected.ProductionType,
 	Corrected.Material,
-	Corrected.BillOfMaterials
+	Corrected.BillOfMaterials,
+	Corrected.Product.Item,
+	Corrected.Material.Item
 
 UNION ALL
 
@@ -507,7 +484,8 @@ GROUP BY
 	Produced.PlanningPeriod,
 	Produced.Product,
 	Produced.ProductionType,
-	Produced.BillOfMaterials
+	Produced.BillOfMaterials,
+	Produced.Product.Item
 
 UNION ALL
 
@@ -536,7 +514,9 @@ GROUP BY
 	Produced.Product,
 	Produced.ProductionType,
 	Produced.Material,
-	Produced.BillOfMaterials</query>
+	Produced.BillOfMaterials,
+	Produced.Product.Item,
+	Produced.Material.Item</query>
 	</dataSet>
 	<calculatedField>
 		<dataPath>Q_Planned</dataPath>

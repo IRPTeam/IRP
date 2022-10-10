@@ -280,6 +280,8 @@ Function GetChain()
 	
 	Chain.Insert("BillOfMaterialsListCalculations"           , GetChainLink("BillOfMaterialsListCalculationsExecute"));
 	Chain.Insert("BillOfMaterialsListCalculationsCorrection" , GetChainLink("BillOfMaterialsListCalculationsCorrectionExecute"));
+	Chain.Insert("MaterialsCalculations"                     , GetChainLink("MaterialsCalculationsExecute"));
+	Chain.Insert("MaterialsRecalculateQuantity"              , GetChainLink("MaterialsRecalculateQuantityExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -1827,6 +1829,54 @@ Procedure RestoreStoresFromCache(StoreCache, Row, NewRow)
 		EndIf;
 	EndDo;
 EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_CALCULATIONS
+
+Function MaterialsCalculationsOptions() Export
+	Return GetChainLinkOptions("Materials, BillOfMaterials, MaterialsColumns,
+		|ItemKey, Unit, Quantity");
+EndFunction
+
+Function MaterialsCalculationsExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("Materials", Options.Materials);
+	
+	CalculationParameters = New Structure();
+	CalculationParameters.Insert("Materials"        , Options.Materials);
+	CalculationParameters.Insert("BillOfMaterials"  , Options.BillOfMaterials);
+	CalculationParameters.Insert("MaterialsColumns" , Options.MaterialsColumns);
+	CalculationParameters.Insert("ItemKey"          , Options.ItemKey);
+	CalculationParameters.Insert("Unit"             , Options.Unit);
+	CalculationParameters.Insert("Quantity"         , Options.Quantity);
+	
+	ManufacturingServer.FillMaterialsTable(CalculationParameters);
+	
+	Return Result;
+EndFunction
+
+Function MaterialsRecalculateQuantityOptions() Export
+	Return GetChainLinkOptions("Materials, BillOfMaterials, MaterialsColumns,
+		|ItemKey, Unit, Quantity");
+EndFunction
+
+Function MaterialsRecalculateQuantityExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("Materials", Options.Materials);
+	
+	CalculationParameters = New Structure();
+	CalculationParameters.Insert("Materials"        , Options.Materials);
+	CalculationParameters.Insert("BillOfMaterials"  , Options.BillOfMaterials);
+	CalculationParameters.Insert("MaterialsColumns" , Options.MaterialsColumns);
+	CalculationParameters.Insert("ItemKey"          , Options.ItemKey);
+	CalculationParameters.Insert("Unit"             , Options.Unit);
+	CalculationParameters.Insert("Quantity"         , Options.Quantity);
+	
+	ManufacturingServer.CalculateMaterialsQuantity(CalculationParameters);
+	
+	Return Result;
+EndFunction
 
 #EndRegion
 

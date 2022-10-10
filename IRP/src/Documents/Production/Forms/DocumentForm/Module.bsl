@@ -11,8 +11,7 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocProductionServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
-		SetVisibilityAvailability(Object, ThisObject);
-//		SetCurrentQuantityError(False);		
+		SetVisibilityAvailability(Object, ThisObject);	
 	EndIf;
 EndProcedure
 
@@ -152,15 +151,11 @@ EndProcedure
 &AtClient
 Procedure ItemStartChoice(Item, ChoiceData, StandardProcessing)
 	DocProductionClient.ItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-	
-//	MF_FormsClient.ItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure ItemEditTextChange(Item, Text, StandardProcessing)
 	DocProductionClient.ItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-	
-//	MF_FormsClient.ItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion

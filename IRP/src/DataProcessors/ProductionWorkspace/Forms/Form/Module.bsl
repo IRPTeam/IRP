@@ -34,44 +34,45 @@ Procedure PlanningRefreshRequestProcessingAtServer()
 	
 	Query = New Query;
 	Query.Text =
-		"SELECT
-		|	MF_ProductionPlanningTurnovers.Company AS Company,
-		|	MF_ProductionPlanningTurnovers.BusinessUnit AS BusinessUnit,
-		|	MF_ProductionPlanningTurnovers.PlanningPeriod AS PlanningPeriod,
-		|	SUM(CASE
-		|		WHEN MF_ProductionPlanningTurnovers.PlanningType = VALUE(Enum.MF_ProductionPlanningTypes.Produced)
-		|			THEN -MF_ProductionPlanningTurnovers.QuantityTurnover
-		|		ELSE MF_ProductionPlanningTurnovers.QuantityTurnover
-		|	END) AS QuantityTurnover
-		|INTO BalanceTable
-		|FROM
-		|	AccumulationRegister.MF_ProductionPlanning.Turnovers(,,, ItemKey = &ItemKey) AS MF_ProductionPlanningTurnovers
-		|GROUP BY
-		|	MF_ProductionPlanningTurnovers.Company,
-		|	MF_ProductionPlanningTurnovers.PlanningPeriod,
-		|	MF_ProductionPlanningTurnovers.BusinessUnit
-		|HAVING
-		|	(SUM(CASE
-		|		WHEN MF_ProductionPlanningTurnovers.PlanningType = VALUE(Enum.MF_ProductionPlanningTypes.Produced)
-		|			THEN -MF_ProductionPlanningTurnovers.QuantityTurnover
-		|		ELSE MF_ProductionPlanningTurnovers.QuantityTurnover
-		|	END) > 0
-		|	OR MF_ProductionPlanningTurnovers.PlanningPeriod.StartDate < &CurrentDate
-		|	AND MF_ProductionPlanningTurnovers.PlanningPeriod.EndDate > &CurrentDate)
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	BalanceTable.PlanningPeriod AS PlanningPeriod,
-		|	BalanceTable.QuantityTurnover AS LeftToProduce,
-		|	MF_ProductionPlanning.Ref AS ProductionPlanning
-		|FROM
-		|	BalanceTable AS BalanceTable
-		|		LEFT JOIN Document.MF_ProductionPlanning AS MF_ProductionPlanning
-		|		ON (BalanceTable.Company = MF_ProductionPlanning.Company)
-		|		AND (BalanceTable.BusinessUnit = MF_ProductionPlanning.BusinessUnit)
-		|		AND (BalanceTable.PlanningPeriod = MF_ProductionPlanning.PlanningPeriod)
-		|		AND (MF_ProductionPlanning.Posted)";
+	"SELECT
+	|	R7030T_ProductionPlanningTurnovers.Company AS Company,
+	|	R7030T_ProductionPlanningTurnovers.BusinessUnit AS BusinessUnit,
+	|	R7030T_ProductionPlanningTurnovers.PlanningPeriod AS PlanningPeriod,
+	|	SUM(CASE
+	|		WHEN R7030T_ProductionPlanningTurnovers.PlanningType = VALUE(Enum.ProductionPlanningTypes.Produced)
+	|			THEN -R7030T_ProductionPlanningTurnovers.QuantityTurnover
+	|		ELSE R7030T_ProductionPlanningTurnovers.QuantityTurnover
+	|	END) AS QuantityTurnover
+	|INTO BalanceTable
+	|FROM
+	|	AccumulationRegister.R7030T_ProductionPlanning.Turnovers(,,, ItemKey = &ItemKey) AS
+	|		R7030T_ProductionPlanningTurnovers
+	|GROUP BY
+	|	R7030T_ProductionPlanningTurnovers.Company,
+	|	R7030T_ProductionPlanningTurnovers.PlanningPeriod,
+	|	R7030T_ProductionPlanningTurnovers.BusinessUnit
+	|HAVING
+	|	(SUM(CASE
+	|		WHEN R7030T_ProductionPlanningTurnovers.PlanningType = VALUE(Enum.ProductionPlanningTypes.Produced)
+	|			THEN -R7030T_ProductionPlanningTurnovers.QuantityTurnover
+	|		ELSE R7030T_ProductionPlanningTurnovers.QuantityTurnover
+	|	END) > 0
+	|	OR R7030T_ProductionPlanningTurnovers.PlanningPeriod.BeginDate < &CurrentDate
+	|	AND R7030T_ProductionPlanningTurnovers.PlanningPeriod.EndDate > &CurrentDate)
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	BalanceTable.PlanningPeriod AS PlanningPeriod,
+	|	BalanceTable.QuantityTurnover AS LeftToProduce,
+	|	DocProductionPlanning.Ref AS ProductionPlanning
+	|FROM
+	|	BalanceTable AS BalanceTable
+	|		LEFT JOIN Document.ProductionPlanning AS DocProductionPlanning
+	|		ON (BalanceTable.Company = DocProductionPlanning.Company)
+	|		AND (BalanceTable.BusinessUnit = DocProductionPlanning.BusinessUnit)
+	|		AND (BalanceTable.PlanningPeriod = DocProductionPlanning.PlanningPeriod)
+	|		AND (DocProductionPlanning.Posted)";
 	
 	Query.SetParameter("CurrentDate", CurrentSessionDate());
 	Query.SetParameter("ItemKey", ItemKey);

@@ -66,13 +66,8 @@ EndProcedure
 
 Procedure UpdateCurrentQuantity(Object, Form) Export
 	FormParameters = ControllerClientServer_V2.GetFormParameters(Form);
-	
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
-	ServerParameters.TableName = "Productions";
-	//ServerParameters.IsBasedOn = True;
-	//ServerParameters.ReadOnlyProperties = StrConcat(ArrayOfFillingColumns, ",");
-	//ServerParameters.Rows = ArrayOfFillingRows;
-		
+	ServerParameters.TableName = "Productions";		
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
 	Property = New Structure("DataPath", "Command.UpdateCurrentQuantity");
 	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);

@@ -247,10 +247,10 @@ Function FillBillOfMaterialsTableCorrection(Parameters) Export
 	Return ArrayOfResult;
 EndFunction
 
-Procedure FillMaterialsTable(Object) Export
-	Parameters = New Structure();
+Procedure FillMaterialsTable(Parameters) Export
 	
-	For Each Row In Object.Materials Do
+	//For Each Row In Object.Materials Do
+	For Each Row In Parameters.Materials Do
 		Row.ItemBOM     = Undefined;
 		Row.ItemKeyBOM  = Undefined;
 		Row.UnitBOM     = Undefined;
@@ -277,40 +277,59 @@ Procedure FillMaterialsTable(Object) Export
 	QueryTable = QueryResult.Unload();
 	For Each Row In QueryTable Do
 		RowUniqueID = String(Row.ItemKeyBOM.UUID()) + "-" + BillOfMaterials_UUID;
-		RowsMaterials = Object.Materials.FindRows(New Structure("ItemKey", Row.ItemKeyBOM));
+//		RowsMaterials = Object.Materials.FindRows(New Structure("ItemKey", Row.ItemKeyBOM));
+		RowsMaterials = New Array();
+		For Each ArrayItem In Parameters.Materials Do
+			If ArrayItem.ItemKey = Row.ItemKeyBOM Then
+				RowsMaterials.Add(ArrayItem);
+			EndIf;
+		EndDo;
+		
 		RowMaterials = Undefined;
 		If RowsMaterials.Count() Then
 			RowMaterials = RowsMaterials[0];
 			FillPropertyValues(RowMaterials, Row);
 			RowMaterials.UniqueID = RowUniqueID;
 		Else
-			RowMaterials = Object.Materials.Add();
+//			RowMaterials = Object.Materials.Add();
+			RowMaterials = New Structure(Parameters.MaterialsColumns);
 			FillPropertyValues(RowMaterials, Row);
 			RowMaterials.UniqueID = RowUniqueID;
 			RowMaterials.Item     = Row.ItemBOM;
 			RowMaterials.ItemKey  = Row.ItemKeyBOM;
 			RowMaterials.Unit     = Row.UnitBOM;
 			RowMaterials.Quantity = Row.QuantityBOM;
+			Parameters.Materials.Add(RowMaterials);
 		EndIf;
 	EndDo;
 
-	CalculateMaterialsQuantity(Object);
+	CalculateMaterialsQuantity(Parameters);
 EndProcedure
 
-Procedure CalculateMaterialsQuantity(Object) Export
+Procedure CalculateMaterialsQuantity(Parameters) Export
 	// Bill of materials (basis quantity)
-	Quantity_BillOfMaterials = GetBasisQuantity(Object.BillOfMaterials.ItemKey, Object.BillOfMaterials.Unit, Object.BillOfMaterials.Quantity);
+	Quantity_BillOfMaterials = GetBasisQuantity(Parameters.BillOfMaterials.ItemKey, 
+	                                            Parameters.BillOfMaterials.Unit, 
+	                                            Parameters.BillOfMaterials.Quantity);
 	
 	If Quantity_BillOfMaterials = 0 Then
 		Return;
 	EndIf;
 		
-	Quantity_Produce = GetBasisQuantity(Object.ItemKey, Object.Unit, Object.Quantity); 
+	Quantity_Produce = GetBasisQuantity(Parameters.ItemKey, Parameters.Unit, Parameters.Quantity); 
 	
-	For Each Row In Object.BillOfMaterials.Content Do
+	For Each Row In Parameters.BillOfMaterials.Content Do
 		q1 = (GetBasisQuantity(Row.ItemKey, Row.Unit, Row.Quantity) / Quantity_BillOfMaterials) * Quantity_Produce;
 		
-		ArrayOfRows = Object.Materials.FindRows(New Structure("ItemKey", Row.ItemKey));
+//		ArrayOfRows = Object.Materials.FindRows(New Structure("ItemKey", Row.ItemKey));
+		
+		ArrayOfRows = New Array();
+		For Each ArrayItem In Parameters.Materials Do
+			If ArrayItem.ItemKey = Row.ItemKey Then
+				ArrayOfRows.Add(ArrayItem);
+			EndIf;
+		EndDo;
+		
 		For Each ItemOfRow In ArrayOfRows Do
 			q2 = GetBasisQuantity(ItemOfRow.ItemKeyBOM, ItemOfRow.UnitBOM, 1);
 			

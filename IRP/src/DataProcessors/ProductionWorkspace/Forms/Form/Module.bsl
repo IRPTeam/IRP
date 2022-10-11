@@ -42,6 +42,7 @@ Procedure PlanningRefreshRequestProcessingAtServer()
 	|	R7030T_ProductionPlanningTurnovers.Company AS Company,
 	|	R7030T_ProductionPlanningTurnovers.BusinessUnit AS BusinessUnit,
 	|	R7030T_ProductionPlanningTurnovers.PlanningPeriod AS PlanningPeriod,
+	|	R7030T_ProductionPlanningTurnovers.PlanningDocument AS ProductionPlanning,
 	|	SUM(CASE
 	|		WHEN R7030T_ProductionPlanningTurnovers.PlanningType = VALUE(Enum.ProductionPlanningTypes.Produced)
 	|			THEN -R7030T_ProductionPlanningTurnovers.QuantityTurnover
@@ -54,7 +55,8 @@ Procedure PlanningRefreshRequestProcessingAtServer()
 	|GROUP BY
 	|	R7030T_ProductionPlanningTurnovers.Company,
 	|	R7030T_ProductionPlanningTurnovers.PlanningPeriod,
-	|	R7030T_ProductionPlanningTurnovers.BusinessUnit
+	|	R7030T_ProductionPlanningTurnovers.BusinessUnit,
+	|	R7030T_ProductionPlanningTurnovers.PlanningDocument,
 	|HAVING
 	|	(SUM(CASE
 	|		WHEN R7030T_ProductionPlanningTurnovers.PlanningType = VALUE(Enum.ProductionPlanningTypes.Produced)
@@ -69,14 +71,16 @@ Procedure PlanningRefreshRequestProcessingAtServer()
 	|SELECT
 	|	BalanceTable.PlanningPeriod AS PlanningPeriod,
 	|	BalanceTable.QuantityTurnover AS LeftToProduce,
-	|	DocProductionPlanning.Ref AS ProductionPlanning
+	|	BalanceTable.ProductionPlanning AS ProductionPlanning
+//	|	DocProductionPlanning.Ref AS ProductionPlanning
 	|FROM
-	|	BalanceTable AS BalanceTable
-	|		LEFT JOIN Document.ProductionPlanning AS DocProductionPlanning
-	|		ON (BalanceTable.Company = DocProductionPlanning.Company)
-	|		AND (BalanceTable.BusinessUnit = DocProductionPlanning.BusinessUnit)
-	|		AND (BalanceTable.PlanningPeriod = DocProductionPlanning.PlanningPeriod)
-	|		AND (DocProductionPlanning.Posted)";
+	|	BalanceTable AS BalanceTable";
+	
+//	|		LEFT JOIN Document.ProductionPlanning AS DocProductionPlanning
+//	|		ON (BalanceTable.Company = DocProductionPlanning.Company)
+//	|		AND (BalanceTable.BusinessUnit = DocProductionPlanning.BusinessUnit)
+//	|		AND (BalanceTable.PlanningPeriod = DocProductionPlanning.PlanningPeriod)
+//	|		AND (DocProductionPlanning.Posted)";
 	
 	Query.SetParameter("CurrentDate", CurrentSessionDate());
 	Query.SetParameter("ItemKey", ItemKey);
@@ -123,10 +127,11 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	EndIf;
 
 	NotifyParameters = New Structure();
-	NotifyParameters.Insert("Form", ThisObject);
-	NotifyParameters.Insert("Object", ThisObject);
+	NotifyParameters.Insert("Form"   , ThisObject);
+	NotifyParameters.Insert("Object" , ThisObject);
 
-	For Each Row In AdditionalParameters.FoundedItems Do
+	//For Each Row In AdditionalParameters.FoundedItems Do
+	For Each Row In Result.FoundedItems Do
 		Item = Row.Item;
 		ItemKey = Row.ItemKey;
 		Unit = Row.Unit;
@@ -198,7 +203,7 @@ Procedure CreateDocuments(Val ProductionPlanning, CreateProduction, CreateInvent
 		NewProduction.ProductionType = Enums.MF_ProductionTypes.Product;
 		NewProduction.Finished = True;
 		NewProduction.Author = SessionParameters.CurrentUser;
-		MF_DocProductionServer.BillOfMaterialsOnChangeAtServer(NewProduction);
+//		MF_DocProductionServer.BillOfMaterialsOnChangeAtServer(NewProduction);
 		NewProduction.Write(DocumentWriteMode.Posting);
 	EndIf;
 

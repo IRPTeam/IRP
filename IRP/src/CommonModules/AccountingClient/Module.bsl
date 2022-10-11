@@ -8,9 +8,9 @@ Procedure OpenFormEditAccounting(Object, Form, CurrentData, TableName) Export
 	OpenForm("CommonForm.EditAccounting", FormParameters, Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
-Procedure OpenFormSelectLedgerType(FormOwner, BasisRef, ArrayOfJournalEntrys) Export
+Procedure OpenFormSelectLedgerType(FormOwner, BasisRef, ArrayOfJournalEntries) Export
 	FormParameters = New Structure();
-	FormParameters.Insert("ArrayOfJournalEntrys", ArrayOfJournalEntrys);
+	FormParameters.Insert("ArrayOfJournalEntries", ArrayOfJournalEntries);
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("FormOwner" , FormOwner);
 	NotifyParameters.Insert("BasisRef"  , BasisRef);

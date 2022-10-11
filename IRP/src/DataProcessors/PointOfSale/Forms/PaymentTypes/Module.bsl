@@ -87,8 +87,8 @@ Procedure CreateFormElement(ButtonsArray)
 		
 		If Index > 1 Then
 			For Index = PayButtonsIntoGroup.Count() To MaxButtonPerPage Do
-				LableName = StrTemplate("PayButton_%1_%2", GroupIndex, Index);
-				DrawLabel(LableName, NewPageItem);
+				LabelName = StrTemplate("PayButton_%1_%2", GroupIndex, Index);
+				DrawLabel(LabelName, NewPageItem);
 			EndDo;
 		EndIf;
 		
@@ -96,8 +96,8 @@ Procedure CreateFormElement(ButtonsArray)
 	EndDo;
 	
 	For Index = GroupIndex + 1 To MaxButtonPerPage - 1 Do
-		LableName = StrTemplate("Page_%1", Index);
-		DrawLabel(LableName, Items.PaymentGroup);
+		LabelName = StrTemplate("Page_%1", Index);
+		DrawLabel(LabelName, Items.PaymentGroup);
 	EndDo;
 	
 	If GroupIndex = 1 Then
@@ -129,14 +129,14 @@ Procedure DrawButton(PaymentTypeGroup, ButtonName, Description, Page, Action)
 EndProcedure
 
 &AtServer
-Procedure DrawLabel(LableName, Page)
+Procedure DrawLabel(LabelName, Page)
 	NewAttributeArray = New Array;
-	NewAttributeArray.Add(New FormAttribute(LableName, New TypeDescription("String")));
+	NewAttributeArray.Add(New FormAttribute(LabelName, New TypeDescription("String")));
 	ChangeAttributes(NewAttributeArray);
 
-	NewDecoration = Items.Add(LableName, Type("FormField"), Page);
+	NewDecoration = Items.Add(LabelName, Type("FormField"), Page);
 	NewDecoration.Type = FormFieldType.PictureField;
-	NewDecoration.DataPath = LableName;
+	NewDecoration.DataPath = LabelName;
 	NewDecoration.TitleLocation = FormItemTitleLocation.None;
 	NewDecoration.Height = 2;
 	NewDecoration.VerticalStretch = False;

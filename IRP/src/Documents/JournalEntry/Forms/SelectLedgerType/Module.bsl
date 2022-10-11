@@ -11,16 +11,16 @@ EndProcedure
 
 &AtClient
 Procedure Ok(Command)
-	CloseAnrReturnResult();
+	CloseAndReturnResult();
 EndProcedure
 
 &AtClient
 Procedure JournalEntrysSelection(Item, RowSelected, Field, StandardProcessing)
-	CloseAnrReturnResult();
+	CloseAndReturnResult();
 EndProcedure
 
 &AtClient
-Procedure CloseAnrReturnResult()
+Procedure CloseAndReturnResult()
 	CurrentData = Items.JournalEntrys.CurrentData;
 	If CurrentData = Undefined Then
 		Close(Undefined);

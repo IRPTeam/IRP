@@ -433,20 +433,20 @@ EndProcedure
 
 &AtClient
 Procedure UpdateAllocatedStatus()
-	For Each Rowlv1 In ThisObject.CostRows.GetItems() Do
-		For Each Rowlv2 In Rowlv1.GetItems() Do
+	For Each RowLevel1 In ThisObject.CostRows.GetItems() Do
+		For Each RowLevel2 In RowLevel1.GetItems() Do
 			
 			AmountByRows = 0;
 			For Each RowAlloclv1 In ThisObject.AllocationRows.GetItems() Do
 				For Each RowAlloclv2 In RowAlloclv1.GetItems() Do
-					If Rowlv2.RowID = RowAlloclv2.BasisRowID Then
+					If RowLevel2.RowID = RowAlloclv2.BasisRowID Then
 						AmountByRows = AmountByRows + RowAlloclv2.Amount;
 					EndIf;
 				EndDo;	
 			EndDo;
 			
-			If AmountByRows = Rowlv2.Amount Then
-				Rowlv2.Icon = 2;
+			If AmountByRows = RowLevel2.Amount Then
+				RowLevel2.Icon = 2;
 			EndIf;
 			
 		EndDo;

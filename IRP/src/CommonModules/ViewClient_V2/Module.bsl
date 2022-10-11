@@ -854,7 +854,6 @@ Procedure OnOpen(Object, Form, TableNames) Export
 	For Each TableName In StrSplit(TableNames, ",") Do
 		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
 		// #optimization 2 
-//		ControllerClientServer_V2.FillPropertyFormByDefault(Form, "Store, DeliveryDate", Parameters);
 		ControllerClientServer_V2.FormOnOpen(Parameters);
 	EndDo;
 EndProcedure
@@ -1440,7 +1439,6 @@ EndProcedure
 
 Procedure OnSetItemListCancelNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
-//		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then

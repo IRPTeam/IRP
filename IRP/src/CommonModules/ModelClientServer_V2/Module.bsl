@@ -25,7 +25,6 @@ EndIf;
 	If Parameters.ModelEnvironment.FirstStepNames = StepNames Then
 		// web-client-bug-fix
 		ControllerClientServer_V2.OnChainComplete(Parameters);
-		//Execute StrTemplate("%1.OnChainComplete(Parameters);", Parameters.ControllerModuleName);
 		DestroyEntryPoint(Parameters);
 	EndIf;
 EndProcedure
@@ -249,8 +248,6 @@ Function GetChain()
 	Chain.Insert("ChangeStoreByCostWriteOff"                    , GetChainLink("ChangeStoreByCostWriteOffExecute"));
 	Chain.Insert("ChangeProfitLossCenterByBillOfMaterials"      , GetChainLink("ChangeProfitLossCenterByBillOfMaterialsExecute"));
 	Chain.Insert("ChangeExpenseTypeByBillOfMaterials"           , GetChainLink("ChangeExpenseTypeByBillOfMaterialsExecute"));
-	
-	//Chain.Insert("ChangeBillOfMaterialsByItemKey" , GetChainLink("ChangeBillOfMaterialsByItemKeyExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -1181,22 +1178,6 @@ EndFunction
 
 #EndRegion
 
-//#Region CHANGE_BILL_OF_MATERIALS_BY_ITEM_KEY		
-//
-//Function ChangeBillOfMaterialsByItemKeyOptions() Export
-//	Return GetChainLinkOptions("Item, ItemKey, BillOfMaterials");
-//EndFunction
-//
-//Function ChangeBillOfMaterialsByItemKeyExecute(Options) Export
-//	If ValueIsFilled(Options.BillOfMaterials) Then
-//		Return Options.BillOfMaterials;
-//	EndIf;
-//	
-//	Return ModelServer_V2.GetBillOfMaterialsByItemKey(Options.Item, Options.ItemKey);
-//EndFunction
-//
-//#EndRegion
-
 #Region CALCULATE_DIFFERENCE
 
 Function CalculateDifferenceCountOptions() Export
@@ -1814,7 +1795,7 @@ Function CalculationsExecute(Options) Export
 				Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
 			EndIf;
 		EndIf;
-	Else // PriceIncludeTax = Undefined
+	Else // PriceIncludeTax is Undefined
 		If Options.CalculateTaxAmountReverse.Enable And IsCalculatedRow Then
 			CalculateTaxAmount(Options, Options.TaxOptions, Result, True, False);
 		EndIf;

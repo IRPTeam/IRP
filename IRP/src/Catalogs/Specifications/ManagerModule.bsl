@@ -23,7 +23,6 @@ Function GetChoiceDataTable(Parameters) Export
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
 	QueryBuilder = New QueryBuilder(QueryBuilderText);
 	QueryBuilder.FillSettings();
-	//CommonFormActionsServer.SetCustomSearchFilter(QueryBuilder, Parameters);
 	
 	Query = QueryBuilder.GetQuery();
 

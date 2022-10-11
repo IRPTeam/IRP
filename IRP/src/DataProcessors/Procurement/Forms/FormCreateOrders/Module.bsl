@@ -127,11 +127,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|		AND TableOfPurchase.Price = ResultsTableOfPurchase.Price
 	|		AND TableOfPurchase.DateOfRelevance = ResultsTableOfPurchase.DateOfRelevance
 	|		AND TableOfPurchase.Agreement = ResultsTableOfPurchase.Agreement
-	//|		AND TableOfPurchase.DeliveryDate = ResultsTableOfPurchase.DeliveryDate
-
-	//|		AND TableOfPurchase.Store = ResultsTableOfPurchase.Store
-
-	//|		AND TableOfPurchase.Unit = ResultsTableOfPurchase.Unit
 	|";
 	Query.SetParameter("Store", ThisObject.Store);
 	Query.SetParameter("TableOfBalance", ThisObject.TableOfBalance.Unload());

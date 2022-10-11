@@ -63,31 +63,6 @@ Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing)
 	
 	CommonFormActions.AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, ArrayOfFilters);
 
-// for delete
-//	StandardProcessing = False;
-//	DefaultStartChoiceParameters = New Structure("Company", Object.Company);
-//	StartChoiceParameters = CatCashAccountsClient.GetDefaultStartChoiceParameters(DefaultStartChoiceParameters);
-	
-	
-//	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-//		CashAccountType, , DataCompositionComparisonType.Equal));
-//	StartChoiceParameters.FillingData.Insert("Type", CashAccountType);
-//	
-//	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, Form.UUID, , Form.URL);
-	
-//	OpeningSettings = DocumentsClient.GetOpenSettingsStructure();
-//	OpeningSettings.FormName = "Catalog.CashAccounts.Form.ChoiceForm";
-//	OpeningSettings.FormParameters = New Structure();
-//	OpeningSettings.ArrayOfFilters = New Array();
-//	OpeningSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", False, DataCompositionComparisonType.Equal));
-//	OpeningSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Company", Object.Company, DataCompositionComparisonType.Equal));
-//	OpeningSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", CashAccountType, DataCompositionComparisonType.Equal));
-//	OpeningSettings.FillingData = New Structure("Type", CashAccountType);
-//	
-//	DocumentsClient.SetCurrentRow(Object, Form, Item, OpeningSettings.FormParameters, "Ref");
-//	DocumentsClient.OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpeningSettings);
-	
-	//DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Export

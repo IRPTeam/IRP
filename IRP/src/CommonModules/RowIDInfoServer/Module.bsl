@@ -1297,8 +1297,6 @@ Function GetNextStep_SO(Source, RowItemList, Row)
 		NextStep = Catalogs.MovementRules.PO_PI;
 	Else
 		If RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service Then
-			// #1487
-			//NextStep = Catalogs.MovementRules.SI;
 			NextStep = Catalogs.MovementRules.SI_WO_WS;
 		Else
 			NextStep = Catalogs.MovementRules.SI_SC;
@@ -1939,10 +1937,6 @@ Function ExtractDataByTables(Tables, DataReceiver, AddInfo = Undefined)
 	
 	If Tables.FromWS_ThenFromSO.Count() Then
 		ExtractedData.Add(ExtractData_FromWS_ThenFromSO(Tables.FromWS_ThenFromSO, DataReceiver, AddInfo));
-	EndIf;
-	
-	If Tables.FromWS_ThenFromWO_ThenFromSO.Count() Then
-//		ExtractedData.Add(ExtractData_FromWS_ThenFromWO_ThenFromSO(Tables.FromWS_ThenFromWO_ThenFromSO, DataReceiver, AddInfo));
 	EndIf;
 	
 	Return ExtractedData;
@@ -4112,26 +4106,12 @@ Function ExtractData_FromWS(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		ON BasisesTable.Basis = ItemList.Ref
 	|		AND BasisesTable.BasisKey = ItemList.Key";
 	
-//	|;
-//	|////////////////////////////////////////////////////////////////////////////////
-//	|SELECT DISTINCT
-//	|	UNDEFINED AS Ref,
-//	|	BasisesTable.Key,
-//	|	SerialLotNumbers.SerialLotNumber,
-//	|	SerialLotNumbers.Quantity
-//	|FROM
-//	|	Document.ShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
-//	|		INNER JOIN BasisesTable AS BasisesTable
-//	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-//	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
-
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
 	TableRowIDInfo             = QueryResults[1].Unload();
 	TableItemList              = QueryResults[2].Unload();
 	TableWorkSheets            = QueryResults[3].Unload();
-//	TableSerialLotNumbers      = QueryResults[4].Unload();
 	
 	For Each RowItemList In TableItemList Do
 		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit, RowItemList.QuantityInBaseUnit);
@@ -4141,7 +4121,6 @@ Function ExtractData_FromWS(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Tables.Insert("ItemList"   , TableItemList);
 	Tables.Insert("RowIDInfo"  , TableRowIDInfo);
 	Tables.Insert("WorkSheets" , TableWorkSheets);
-//	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
 	
 	AddTables(Tables);
 
@@ -4186,20 +4165,6 @@ Function ExtractData_FromWS_ThenFromWO(BasisesTable, DataReceiver, AddInfo = Und
 	|		ON BasisesTable.Basis = ItemList.Ref
 	|		AND BasisesTable.BasisKey = ItemList.Key";
 	
-//	|;
-//	|
-//	|////////////////////////////////////////////////////////////////////////////////
-//	|SELECT DISTINCT
-//	|	UNDEFINED AS Ref,
-//	|	BasisesTable.Key,
-//	|	SerialLotNumbers.SerialLotNumber,
-//	|	SerialLotNumbers.Quantity
-//	|FROM
-//	|	Document.ShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
-//	|		INNER JOIN BasisesTable AS BasisesTable
-//	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-//	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
-
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
@@ -4207,7 +4172,6 @@ Function ExtractData_FromWS_ThenFromWO(BasisesTable, DataReceiver, AddInfo = Und
 
 	TableRowIDInfo   = QueryResults[1].Unload();
 	TableWorkSheets  = QueryResults[3].Unload();
-//	TableSerialLotNumbers      = QueryResults[4].Unload();
 	
 	Tables = New Structure();
 	Tables.Insert("ItemList"      , TablesWO.ItemList);
@@ -4215,7 +4179,6 @@ Function ExtractData_FromWS_ThenFromWO(BasisesTable, DataReceiver, AddInfo = Und
 	Tables.Insert("TaxList"       , TablesWO.TaxList);
 	Tables.Insert("SpecialOffers" , TablesWO.SpecialOffers);
 	Tables.Insert("WorkSheets"    , TableWorkSheets);
-//	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
 
 	AddTables(Tables);
 
@@ -4268,7 +4231,6 @@ Function ExtractData_FromWS_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Und
 
 	TableRowIDInfo   = QueryResults[1].Unload();
 	TableWorkSheets  = QueryResults[3].Unload();
-//	TableSerialLotNumbers      = QueryResults[4].Unload();
 	
 	Tables = New Structure();
 	Tables.Insert("ItemList"      , TablesSO.ItemList);
@@ -4276,87 +4238,11 @@ Function ExtractData_FromWS_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Und
 	Tables.Insert("TaxList"       , TablesSO.TaxList);
 	Tables.Insert("SpecialOffers" , TablesSO.SpecialOffers);
 	Tables.Insert("WorkSheets"    , TableWorkSheets);
-//	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
 
 	AddTables(Tables);
 
 	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey", AddInfo);
 EndFunction
-
-//Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
-//	Query = New Query(GetQueryText_BasisesTable());
-//	Query.Text = Query.Text + 
-//	"SELECT DISTINCT ALLOWED
-//	|	BasisesTable.Key,
-//	|	RowIDInfo.BasisKey AS BasisKey,
-//	|	BasisesTable.RowID,
-//	|	BasisesTable.CurrentStep,
-//	|	BasisesTable.RowRef,
-//	|	BasisesTable.RowRef.Basis AS ParentBasis,
-//	|	BasisesTable.ParentBasis AS Basis,
-//	|	BasisesTable.Unit,
-//	|	BasisesTable.BasisUnit,
-//	|	BasisesTable.QuantityInBaseUnit
-//	|FROM
-//	|	BasisesTable AS BasisesTable
-//	|		LEFT JOIN Document.ShipmentConfirmation.RowIDInfo AS RowIDInfo
-//	|		ON BasisesTable.Basis = RowIDInfo.Ref
-//	|		AND BasisesTable.BasisKey = RowIDInfo.Key
-//	|;
-//	|
-//	|////////////////////////////////////////////////////////////////////////////////
-//	|SELECT DISTINCT
-//	|	UNDEFINED AS Ref,
-//	|	ItemList.Store AS Store,
-//	|	ItemList.ItemKey.Item AS Item,
-//	|	ItemList.ItemKey AS ItemKey,
-//	|	BasisesTable.Unit AS Unit,
-//	|	BasisesTable.Key,
-//	|	BasisesTable.BasisKey,
-//	|	BasisesTable.Basis AS ShipmentConfirmation,
-//	|	BasisesTable.QuantityInBaseUnit AS Quantity,
-//	|	BasisesTable.QuantityInBaseUnit AS QuantityInShipmentConfirmation
-//	|FROM
-//	|	BasisesTable AS BasisesTable
-//	|		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
-//	|		ON BasisesTable.Basis = ItemList.Ref
-//	|		AND BasisesTable.BasisKey = ItemList.Key
-//	|;
-//	|
-//	|////////////////////////////////////////////////////////////////////////////////
-//	|SELECT DISTINCT
-//	|	UNDEFINED AS Ref,
-//	|	BasisesTable.Key,
-//	|	SerialLotNumbers.SerialLotNumber,
-//	|	SerialLotNumbers.Quantity
-//	|FROM
-//	|	Document.ShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
-//	|		INNER JOIN BasisesTable AS BasisesTable
-//	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-//	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
-//
-//	Query.SetParameter("BasisesTable", BasisesTable);
-//	QueryResults = Query.ExecuteBatch();
-//
-//	TablesPIGRSO = ExtractData_FromPIGR_ThenFromSO(QueryResults[2].Unload(), DataReceiver);
-//	TablesPIGRSO.ItemList.FillValues(True, "UseShipmentConfirmation");
-//
-//	TableRowIDInfo             = QueryResults[1].Unload();
-//	TableShipmentConfirmations = QueryResults[3].Unload();
-//	TableSerialLotNumbers      = QueryResults[4].Unload();
-//	
-//	Tables = New Structure();
-//	Tables.Insert("ItemList", TablesPIGRSO.ItemList);
-//	Tables.Insert("RowIDInfo", TableRowIDInfo);
-//	Tables.Insert("TaxList", TablesPIGRSO.TaxList);
-//	Tables.Insert("SpecialOffers", TablesPIGRSO.SpecialOffers);
-//	Tables.Insert("ShipmentConfirmations", TableShipmentConfirmations);
-//	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
-//	
-//	AddTables(Tables);
-//
-//	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey", AddInfo);
-//EndFunction
 
 #EndRegion
 
@@ -10145,12 +10031,11 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	|		AND RowIDInfoFull.ItemKey = BasisesTable.ItemKey
 	|		AND CASE
 	|			WHEN &Filter_Store then
-	//
-	|			case when RowIDInfoFull.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Product)
-	|           then RowIDInfoFull.Store = BasisesTable.Store
-	|			else true end
-	|
-	//|				THEN RowIDInfoFull.Store = BasisesTable.Store
+	|				case 
+	|					when RowIDInfoFull.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Product) then 
+	|						RowIDInfoFull.Store = BasisesTable.Store
+	|					else true 
+	|				end
 	|			ELSE TRUE
 	|		END
 	|WHERE
@@ -10618,8 +10503,6 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 	If Is.SI Then
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.SO);
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.SC);
-		// #1487
-		//FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.WO);
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.WS);
 	EndIf;
 	

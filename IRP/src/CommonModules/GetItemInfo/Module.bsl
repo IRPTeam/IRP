@@ -139,7 +139,6 @@ Procedure FillTableOfResults(QuerySelection, Table, TableOfResults)
 			If ValueIsFilled(ToUnit) Then
 				UnitValue = TempMap.Get(Row.Unit); // Map
 				If UnitValue = Undefined Then
-					//UnitFactor = Catalogs.Units.GetUnitFactor(Row.Unit, ToUnit);
 					UnitFactor = Catalogs.Units.GetUnitFactor(ToUnit, Row.Unit);
 					Tmp = New Map();
 					Tmp.Insert(ToUnit, UnitFactor);

@@ -414,10 +414,6 @@ Procedure OffsetAdvancesToTransactions(Parameters, Records_AdvancesKey, Records_
 	NeedWriteAdvances = False;
 	RepeatThisAdvance = False;
 	While QuerySelection.Next() Do
-//		If QuerySelection.AdvanceAmount < 0 Then
-//			Raise StrTemplate("Advance < 0 ADV_KEY[%1]", QuerySelection.AdvanceKey);
-//		EndIf;
-		
 		DistributeAdvanceToTransaction(Parameters, PointInTime, Document, QuerySelection.AdvanceKey, QuerySelection.AdvanceAmount,
 			Records_TransactionsKey, Records_AdvancesKey, Records_OffsetOfAdvances, 
 			Records_OffsetAging, NeedWriteAdvances, RepeatThisAdvance);

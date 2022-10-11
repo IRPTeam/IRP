@@ -1080,10 +1080,6 @@ Procedure OpenLinkedDocuments(Object, Form, TableName, DocumentColumnName, Quant
 
 		ArrayOfDocuments = Object[TableName].FindRows(New Structure("Key", Row.Key));
 
-		//If ArrayOfDocuments.Count() = 1 And ArrayOfDocuments[0].Quantity <> Row.QuantityInBaseUnit Then
-		//	ArrayOfDocuments[0].Quantity = Row.QuantityInBaseUnit;
-		//EndIf;
-
 		For Each ItemOfArray In ArrayOfDocuments Do
 			NewRow1 = New Structure();
 			

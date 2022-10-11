@@ -44,13 +44,6 @@ Procedure EditAccounting(Result, AdditionalParameters) Export
 	Object.AccountingRowAnalytics.Clear();
 	Object.AccountingExtDimensions.Clear();
 	
-//	ArrayOfDeletedRows = New Array();
-//	For Each Row In Result.AccountingAnalytics Do
-//		If ArrayOfDeletedRows.Find(Row.Key) = Undefined Then
-//			DeleteAccountingRows(Object, Row.Key);
-//		EndIf;
-//	EndDo;
-	
 	For Each Row In Result.AccountingAnalytics Do
 		NewRow = Object.AccountingRowAnalytics.Add();
 		NewRow.Key = Row.Key;
@@ -79,30 +72,6 @@ Procedure SelectLedgerType(Result, AdditionalParameters) Export
 		Result.JournalEntryRef, 
 		Result.LedgerTypeRef);
 EndProcedure
-
-//Procedure DeleteAccountingRows(Object, KeyForDelete)
-//	// AccountingRowAnalytics
-//	ArrayForDelete = New Array();
-//	For Each Row In Object.AccountingRowAnalytics Do
-//		If Row.Key = KeyForDelete Then
-//			ArrayForDelete.Add(Row);
-//		EndIf;
-//	EndDo;
-//	For Each ItemForDelete In ArrayForDelete Do
-//		Object.AccountingRowAnalytics.Delete(ItemForDelete);
-//	EndDo;
-//	
-//	// AccountingExtDimensions
-//	ArrayForDelete.Clear();
-//	For Each Row In Object.AccountingExtDimensions Do
-//		If Row.Key = KeyForDelete Then
-//			ArrayForDelete.Add(Row);
-//		EndIf;
-//	EndDo;
-//	For Each ItemForDelete In ArrayForDelete Do
-//		Object.AccountingExtDimensions.Delete(ItemForDelete);
-//	EndDo;
-//EndProcedure
 
 Procedure AddExtDimensionRow(Object, AnalyticRow, AnalyticType, ExtDimType, ExtDim)
 	If Not ValueIsFilled(ExtDim) Then

@@ -6443,32 +6443,12 @@ Procedure SetItemListBillOfMaterials(Parameters, Results) Export
 	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
 EndProcedure
 
-//// ItemList.BillOfMaterials.Get
-//Function GetItemListBillOfMaterials(Parameters, _Key)
-//	Return GetPropertyObject(Parameters, BindItemListBillOfMaterials(Parameters).DataPath, _Key);
-//EndFunction
-
 // ItemList.BillOfMaterials.Bind
 Function BindItemListBillOfMaterials(Parameters)
 	DataPath = "ItemList.BillOfMaterials";
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
-
-//// ItemList.BillOfMaterials.ChangeBillOfMaterialsByItemKey.Step
-//Procedure StepItemListChangeBillOfMaterialsByItemKey(Parameters, Chain) Export
-//	Chain.ChangeBillOfMaterialsByItemKey.Enable = True;
-//	Chain.ChangeBillOfMaterialsByItemKey.Setter = "SetItemListBillOfMaterials";
-//	For Each Row In GetRows(Parameters, Parameters.TableName) Do
-//		Options = ModelClientServer_V2.ChangeBillOfMaterialsByItemKeyOptions();
-//		Options.Item            = GetItemListItem(Parameters, Row.Key);
-//		Options.ItemKey         = GetItemListItemKey(Parameters, Row.Key);
-//		Options.BillOfMaterials = GetItemListBillOfMaterials(Parameters, Row.Key);
-//		Options.Key = Row.Key;
-//		Options.StepName = "StepItemListChangeBillOfMaterialsByItemKey";
-//		Chain.ChangeBillOfMaterialsByItemKey.Options.Add(Options);
-//	EndDo;
-//EndProcedure
 
 #EndRegion
 
@@ -8222,11 +8202,6 @@ Procedure SetPaymentsAccount(Parameters, Results) Export
 	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
 EndProcedure
 
-// Payments.Account.Get
-//Function GetPaymentsAccount(Parameters, _Key)
-//	Return GetPropertyObject(Parameters, BindPaymentsAccount(Parameters).DataPath, _Key);
-//EndFunction
-
 // Payments.Account.Bind
 Function BindPaymentsAccount(Parameters)
 	DataPath = "Payments.Account";
@@ -8645,7 +8620,6 @@ Procedure OnChainComplete(Parameters) Export
 		// on client need ask user, do not transfer from cache to object
 		// web-client-buf-fix
 		 ViewClient_V2.OnChainComplete(Parameters);
-		//Execute StrTemplate("%1.OnChainComplete(Parameters);", Parameters.ViewClientModuleName);
 	#ENDIF
 	
 	#IF Server THEN
@@ -8688,7 +8662,6 @@ Procedure CommitChainChanges(Parameters) Export
 			
 			// web-client-bug-fix
 			ExecuteViewNotify(Parameters, ViewNotify);
-			//Execute StrTemplate("%1.%2(Parameters);", Parameters.ViewClientModuleName, ViewNotify);
 		EndDo;
 	#ENDIF
 	EndIf;

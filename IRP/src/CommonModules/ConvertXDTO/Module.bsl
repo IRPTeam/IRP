@@ -265,7 +265,7 @@ Function ObjectXDTOStructure(TypeName, URI, Val ArrayList, WSName = Undefined) E
 			If Property.Type.Name = "string" Then
 				XDTOStructure.Insert(Property.Name, Property.Name);
 			ElsIf Property.Type.Name = "boolean" Then
-				XDTOStructure.Insert(Property.Name, true);
+				XDTOStructure.Insert(Property.Name, True);
 			ElsIf Property.Type.Name = "integer" Then
 				XDTOStructure.Insert(Property.Name, 1);
 			ElsIf Property.Type.Name = "decimal" Then

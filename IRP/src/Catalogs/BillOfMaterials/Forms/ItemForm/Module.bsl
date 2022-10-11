@@ -269,7 +269,7 @@ Procedure CreateProductionTreeAtServer(RowOwner, BillOfMaterialsRef, IsTopLevel 
 		Else
 			If Row.Item.ItemType.Type = Enums.ItemTypes.Service Then
 				NewRow2.Insert("ItemPicture", 1);
-			ELse
+			Else
 				NewRow2.Insert("ItemPicture", 3);
 			EndIf;
 		EndIf;

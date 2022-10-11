@@ -63,7 +63,7 @@ Procedure RunAtServer()
 		ADV_TRN_Table = GetFromADV_ToTRN(ArrayOf_FromADV);
 		If ADV_TRN_Table.Count() Then
 			Doc.Put(Template.GetArea("ADV_TRN_Header"));
-			For Each Row_ADV_TRN in ADV_TRN_Table Do
+			For Each Row_ADV_TRN In ADV_TRN_Table Do
 				Area_ADV_TRN_Row = Template.GetArea("ADV_TRN_Row");
 				Area_ADV_TRN_Row.Parameters.Fill(Row_ADV_TRN);
 				Doc.Put(Area_ADV_TRN_Row);
@@ -73,7 +73,7 @@ Procedure RunAtServer()
 		TRN_ADV_Table = GetFromTRN_ToADV(ArrayOf_FromTRN);
 		If TRN_ADV_Table.Count() Then
 			Doc.Put(Template.GetArea("TRN_ADV_Header"));
-			For Each Row_TRN_ADV in TRN_ADV_Table Do
+			For Each Row_TRN_ADV In TRN_ADV_Table Do
 				Area_TRN_ADV_Row = Template.GetArea("TRN_ADV_Row");
 				Area_TRN_ADV_Row.Parameters.Fill(Row_TRN_ADV);
 				Doc.Put(Area_TRN_ADV_Row);
@@ -536,13 +536,13 @@ Function GetMainTable()
 			ar = QueryTable.FindRows(New Structure("Company, Branch, Currency, Partner, LegalName",
 			Row.Company, Row.Branch, Row.Currency, Row.Partner, Row.LegalName));
 			found = False;
-			For Each i in ar Do
+			For Each i In ar Do
 				If ValueIsFilled(i.Agreement) Then
 					found = True;
-					break;
+					Break;
 				EndIf;
 			EndDo;
-			if found Then
+			If found Then
 				ArrayForDelete.Add(Row);
 			EndIf;
 		EndIf;

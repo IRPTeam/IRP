@@ -7740,7 +7740,7 @@ EndProcedure
 // ItemList.OffersAmount.Get
 Function GetItemListOffersAmount(Parameters, _Key)
 	Return GetPropertyObject(Parameters, "ItemList.OffersAmount" , _Key);
-ENdFunction
+EndFunction
 
 // ItemList.OffersAmount.Bind
 Function BindItemListOffersAmount(Parameters)
@@ -7769,7 +7769,7 @@ EndProcedure
 // ItemList.NetAmount.Get
 Function GetItemListNetAmount(Parameters, _Key)
 	Return GetPropertyObject(Parameters, "ItemList.NetAmount" , _Key);
-ENdFunction
+EndFunction
 
 // ItemList.NetAmount.Bind
 Function BindItemListNetAmount(Parameters)
@@ -9149,7 +9149,7 @@ Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters)
 	StepsEnabler = ?(StepsEnabler = Undefined, DefaulStepsEnabler, StepsEnabler);
 	If Not ValueIsFilled(StepsEnabler) Then
 		Raise StrTemplate("Steps enabler is not defined [%1]", DataPath);
-	Endif;
+	EndIf;
 	
 	Result.FullDataPath = FullDataPath;
 	Result.StepsEnabler = StepsEnabler;

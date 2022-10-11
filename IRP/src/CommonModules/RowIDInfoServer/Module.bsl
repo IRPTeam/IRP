@@ -10034,7 +10034,7 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	|				case 
 	|					when RowIDInfoFull.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Product) then 
 	|						RowIDInfoFull.Store = BasisesTable.Store
-	|					else true 
+	|					else True 
 	|				end
 	|			ELSE TRUE
 	|		END

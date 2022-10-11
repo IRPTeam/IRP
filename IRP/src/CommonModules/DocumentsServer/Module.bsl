@@ -496,7 +496,7 @@ Function GetStoreInfo(Store, ItemKey) Export
 	Result.Insert("IsService", True);
 	If ValueIsFilled(ItemKey) Then
 		Result.IsService = (ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service);
-	ENdIf;
+	EndIf;
 	Result.Insert("UseGoodsReceipt", Store.UseGoodsReceipt);
 	Result.Insert("UseShipmentConfirmation", Store.UseShipmentConfirmation);
 	Return Result;

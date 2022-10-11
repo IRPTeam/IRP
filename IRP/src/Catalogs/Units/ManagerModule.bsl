@@ -29,7 +29,7 @@ Function GetChoiceDataTable(Parameters)
 	Query = QueryBuilder.GetQuery();
 
 	Query.SetParameter("SearchString", Parameters.SearchString);
-	For Each Filter in Parameters.Filter Do
+	For Each Filter In Parameters.Filter Do
 		Query.SetParameter(Filter.Key, Filter.Value);
 	EndDo;
 	

@@ -166,7 +166,7 @@ Procedure ItemListQuantityOnChange(Item)
 	DocBundlingClient.ItemListQuantityOnChange(Object, ThisObject);
 EndProcedure
 
-#Endregion
+#EndRegion
 
 #Region UNIT
 

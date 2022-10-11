@@ -91,7 +91,7 @@ Function GetChainLinkResult(Options, Value)
 EndFunction
 
 Procedure ExecuteChain(Parameters, Chain)
-	For Each ChainLink in Chain Do
+	For Each ChainLink In Chain Do
 		Name = ChainLink.Key;
 		If Chain[Name].Enable Then
 			Results = New Array();

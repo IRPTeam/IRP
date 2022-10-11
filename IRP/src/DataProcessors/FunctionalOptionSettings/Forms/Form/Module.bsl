@@ -9,7 +9,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			NewRow.OptionPresentation = FunctionalOption.Synonym;
 			NewRow.Use = Constants[FunctionalOption.Name].Get();
 		EndIf;
-	EndDO;
+	EndDo;
 EndProcedure
 
 &AtClient

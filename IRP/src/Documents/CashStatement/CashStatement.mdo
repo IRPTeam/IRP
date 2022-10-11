@@ -284,10 +284,10 @@
     <usePurposes>MobileDevice</usePurposes>
   </forms>
   <forms uuid="88bb196c-f2e9-4a64-9bb7-3424da5f7c76">
-    <name>ChoiceWithBalancesForm</name>
+    <name>ChoiceFormWithBalances</name>
     <synonym>
       <key>en</key>
-      <value>Choice with balances form</value>
+      <value>Choice with balances form </value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

@@ -14,6 +14,12 @@
       "BeginTransactionBeforeTryCatch": false,
       "NestedFunctionInParameters": false,
       "DeprecatedCurrentDate": false,
+      "ServerSideExportFormMethod": false,
+      "IfElseIfEndsWithElse": false,
+      "MissingParameterDescription": false,
+      "MissingReturnedValueDescription": {
+        "allowShortDescriptionReturnValues": true
+      },
       "MultilingualStringHasAllDeclaredLanguages": {
         "declaredLanguages": "en"
       },

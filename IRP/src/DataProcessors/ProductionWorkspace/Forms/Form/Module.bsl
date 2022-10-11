@@ -7,8 +7,12 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	AddInfo = New Structure("ClientModule", ThisObject);
-	DocumentsClient.SearchByBarcode(Barcode, ThisObject, ThisObject, ThisObject, , AddInfo);
+//	AddInfo = New Structure("ClientModule", ThisObject);
+//	DocumentsClient.SearchByBarcode(Barcode, ThisObject, ThisObject, ThisObject, , AddInfo);
+	If Not ValueIsFilled(Barcode) Then
+		Return;
+	EndIf;
+	DocumentsClient.SearchByBarcode(Barcode, ThisObject, ThisObject, ThisObject);
 EndProcedure
 
 &AtClient
@@ -106,9 +110,15 @@ EndProcedure
 &AtClient
 Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 
-	If Not AdditionalParameters.FoundedItems.Count()
-		And AdditionalParameters.Barcodes.Count() Then
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, AdditionalParameters.Barcodes[0]));
+//	If Not AdditionalParameters.FoundedItems.Count()
+//		And AdditionalParameters.Barcodes.Count() Then
+//		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, AdditionalParameters.Barcodes[0]));
+//		Return;
+//	EndIf;
+
+	If Not Result.FoundedItems.Count()
+		And Result.Barcodes.Count() Then
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, Result.Barcodes[0]));
 		Return;
 	EndIf;
 

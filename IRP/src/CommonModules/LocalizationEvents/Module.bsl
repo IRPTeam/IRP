@@ -19,7 +19,7 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 		Return;
 	EndIf;
 	
-	CommonFormActionsServer.CutLastSymblosIfCameFromExcel(Parameters);
+	CommonFormActionsServer.CutLastSymbolsIfCameFromExcel(Parameters);
 
 	StandardProcessing = False;
 
@@ -60,7 +60,7 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	SearchStringNumber = CommonFunctionsClientServer.GetSearchStringNumber(Parameters.SearchString);
 
 	Query = QueryBuilder.GetQuery();
-	For Each Filter in Parameters.Filter Do
+	For Each Filter In Parameters.Filter Do
 		If Upper(Filter.Key) = Upper("CustomSearchFilter") Then
 			Continue;
 		EndIf;

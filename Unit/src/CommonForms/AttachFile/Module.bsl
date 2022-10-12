@@ -25,7 +25,6 @@ Procedure IRPTE_OnCreateAtServerAfter(Cancel, StandardProcessing)
     Элемент.Вид = ВидПоляФормы.ПолеВвода;
     Элемент.ПутьКДанным = "dragFile";
 
-
 EndProcedure
 
 &AtServer
@@ -49,7 +48,7 @@ EndProcedure
 &НаКлиенте
 Async Процедура dragFileBtn()  
                                                
-	Files = Await PutFilesToServerAsync(,,ThisObject["dragFile"]);
+	Files = Await PutFilesToServerAsync(, , ThisObject["dragFile"]);
 	StandardProcessing = True;
 	DragParameters = New Structure("Value", Files[0].FileRef);
 	Item = Items.Upload;

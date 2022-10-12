@@ -683,8 +683,6 @@ Function T3010S_RowIDInfo()
 EndFunction
 
 Function T2015S_TransactionsInfo()
-	// IsDue  = Receipt 
-	// IsPaid = Expense
 	Return 
 	"SELECT
 	|	ItemList.Period AS Date,

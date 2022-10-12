@@ -229,7 +229,7 @@ Procedure SetColumnTitle(CurrentData)
 		ColumnTitle = " ";
 		If ValueIsFilled(CurrentData["ExtDimensionTypeDr" + i]) Then
 			ColumnTitle = String(CurrentData["ExtDimensionTypeDr" + i]);
-		ENdIf;
+		EndIf;
 		ThisObject.Items["AccountingAnalyticsExtDimensionDr" + i].Title = ColumnTitle;
 	EndDo;
 	
@@ -237,7 +237,7 @@ Procedure SetColumnTitle(CurrentData)
 		ColumnTitle = " ";
 		If ValueIsFilled(CurrentData["ExtDimensionTypeCr" + i]) Then
 			ColumnTitle = String(CurrentData["ExtDimensionTypeCr" + i]);
-		ENdIf;
+		EndIf;
 		ThisObject.Items["AccountingAnalyticsExtDimensionCr" + i].Title = ColumnTitle;
 	EndDo;
 EndProcedure

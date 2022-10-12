@@ -25,7 +25,6 @@ EndIf;
 	If Parameters.ModelEnvironment.FirstStepNames = StepNames Then
 		// web-client-bug-fix
 		ControllerClientServer_V2.OnChainComplete(Parameters);
-		//Execute StrTemplate("%1.OnChainComplete(Parameters);", Parameters.ControllerModuleName);
 		DestroyEntryPoint(Parameters);
 	EndIf;
 EndProcedure
@@ -92,7 +91,7 @@ Function GetChainLinkResult(Options, Value)
 EndFunction
 
 Procedure ExecuteChain(Parameters, Chain)
-	For Each ChainLink in Chain Do
+	For Each ChainLink In Chain Do
 		Name = ChainLink.Key;
 		If Chain[Name].Enable Then
 			Results = New Array();
@@ -235,7 +234,7 @@ Function GetChain()
 	Chain.Insert("ChangePercentByAmount" , GetChainLink("CalculatePercentByAmountExecute"));
 	
 	Chain.Insert("PaymentListCalculateCommission"  , GetChainLink("CalculatePaymentListCommissionExecute"));
-	Chain.Insert("ChangeCommissionPercentByAmount" , GetChainLink("CalculateCommisionPercentByAmountExecute"));
+	Chain.Insert("ChangeCommissionPercentByAmount" , GetChainLink("CalculateCommissionPercentByAmountExecute"));
 	
 	Chain.Insert("ChangeLandedCostBySalesDocument" , GetChainLink("ChangeLandedCostBySalesDocumentExecute"));
 	
@@ -249,8 +248,6 @@ Function GetChain()
 	Chain.Insert("ChangeStoreByCostWriteOff"                    , GetChainLink("ChangeStoreByCostWriteOffExecute"));
 	Chain.Insert("ChangeProfitLossCenterByBillOfMaterials"      , GetChainLink("ChangeProfitLossCenterByBillOfMaterialsExecute"));
 	Chain.Insert("ChangeExpenseTypeByBillOfMaterials"           , GetChainLink("ChangeExpenseTypeByBillOfMaterialsExecute"));
-	
-	//Chain.Insert("ChangeBillOfMaterialsByItemKey" , GetChainLink("ChangeBillOfMaterialsByItemKeyExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -548,7 +545,7 @@ EndFunction
 Function ChangePlanningTransactionBasisByCurrencyExecute(Options) Export
 	If ValueIsFilled(Options.PlanningTransactionBasis) 
 			And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") 
-			And ServiceSystemServer.GetObjectAttribute(Options.PlanningTransactionBasis,"SendCurrency") 
+			And ServiceSystemServer.GetObjectAttribute(Options.PlanningTransactionBasis, "SendCurrency") 
 			<> Options.Currency Then
 				Return Undefined;
 	EndIf;
@@ -1088,7 +1085,7 @@ Function ChangeConsolidatedRetailSalesByWorkstationForReturnExecute(Options) Exp
 	SalesReturnData = New Structure();
 	SalesReturnData.Insert("Date", Options.Date);
 	SalesReturnData.Insert("ArrayOfSalesDocuments", Options.SalesDocuments);
-	UseConsolidatedSales = DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Options.Branch, SalesReturnData);
+	UseConsolidatedSales = DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Options.Branch, SalesReturnData);
 	If Not UseConsolidatedSales Then
 		Return Undefined;
 	EndIf;
@@ -1180,23 +1177,6 @@ Function ChangeExpenseTypeByBillOfMaterialsExecute(Options) Export
 EndFunction
 
 #EndRegion
-
-
-//#Region CHANGE_BILL_OF_MATERIALS_BY_ITEM_KEY		
-//
-//Function ChangeBillOfMaterialsByItemKeyOptions() Export
-//	Return GetChainLinkOptions("Item, ItemKey, BillOfMaterials");
-//EndFunction
-//
-//Function ChangeBillOfMaterialsByItemKeyExecute(Options) Export
-//	If ValueIsFilled(Options.BillOfMaterials) Then
-//		Return Options.BillOfMaterials;
-//	EndIf;
-//	
-//	Return ModelServer_V2.GetBillOfMaterialsByItemKey(Options.Item, Options.ItemKey);
-//EndFunction
-//
-//#EndRegion
 
 #Region CALCULATE_DIFFERENCE
 
@@ -1815,7 +1795,7 @@ Function CalculationsExecute(Options) Export
 				Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
 			EndIf;
 		EndIf;
-	Else // PriceIncludeTax = Undefined
+	Else // PriceIncludeTax is Undefined
 		If Options.CalculateTaxAmountReverse.Enable And IsCalculatedRow Then
 			CalculateTaxAmount(Options, Options.TaxOptions, Result, True, False);
 		EndIf;
@@ -2683,11 +2663,11 @@ EndFunction
 
 #Region CALCULATE_PERCENT_COMMISSION_BY_AMOUNT
 
-Function CalculateCommisionPercentByAmountOptions() Export
+Function CalculateCommissionPercentByAmountOptions() Export
 	Return GetChainLinkOptions("TotalAmount, Commission");
 EndFunction
 
-Function CalculateCommisionPercentByAmountExecute(Options) Export
+Function CalculateCommissionPercentByAmountExecute(Options) Export
 	Return 100 * Options.Commission / Options.TotalAmount;
 EndFunction
 

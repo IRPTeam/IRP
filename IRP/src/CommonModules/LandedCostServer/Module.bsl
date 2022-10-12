@@ -120,12 +120,12 @@ EndFunction
 
 #EndRegion
 
-// Posting batch wice balance.
+// Posting batch wise balance.
 // 
 // Parameters:
 //  CalculationSettings - See GetCalculationSettings
 //  AddInfo - Undefined - Add info
-Procedure Posting_BatchWiceBalance(CalculationSettings, AddInfo = Undefined) Export
+Procedure Posting_BatchWiseBalance(CalculationSettings, AddInfo = Undefined) Export
 	LocksStorage = New Array();
 	If Not TransactionActive() Then
 		BeginTransaction(DataLockControlMode.Managed);
@@ -211,7 +211,7 @@ Procedure BatchReallocate(LocksStorage, BatchReallocateRef, EndPeriod)
 		PositiveStockBalance = GetPositiveStockBalance(NegativeStockBalanceSelection.Company, ReallocatePeriod, LackItemList);
 
 		ResultItemList = EmptyResultItemList.CopyColumns(); // See GetEmptyResultItemList
-		IsQuantityEnought = True;
+		IsQuantityEnough = True;
 		For Each LackRow In LackItemList Do
 
 			LackQuantity = LackRow.Quantity; // Number
@@ -235,12 +235,12 @@ Procedure BatchReallocate(LocksStorage, BatchReallocateRef, EndPeriod)
 			EndDo;
 
 			If LackQuantity <> 0 Then
-				IsQuantityEnought = False;
+				IsQuantityEnough = False;
 				Break;
 			EndIf;
 		EndDo;
 
-		If Not IsQuantityEnought Then
+		If Not IsQuantityEnough Then
 			Continue;
 		EndIf;
 
@@ -307,7 +307,7 @@ Procedure ReleaseBatchReallocateDocuments(BatchReallocateRef) Export
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
-		DocRef= QuerySelection.Ref; // DocumentRef.BatchReallocateIncoming, DocumentRef.BatchReallocateOutgoing 
+		DocRef = QuerySelection.Ref; // DocumentRef.BatchReallocateIncoming, DocumentRef.BatchReallocateOutgoing 
 		DocObject = DocRef.GetObject();
 		DocObject.ItemList.Clear();
 		DocObject.BatchReallocate = Undefined;
@@ -2026,7 +2026,6 @@ Function GetPriceForEmptyAmountFromBatchBalance(ItemKey, Period)
 	EndIf;
 EndFunction
 
-
 Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewReceivedBatches, CalculationSettings)
 	For Each Row In Rows Do
 		If Row.Direction = Enums.BatchDirection.Receipt And Not Row.IsOpeningBalance Then
@@ -2092,7 +2091,6 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 		Rows.Delete(Row);
 	EndDo;
 EndProcedure
-
 
 Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpense, TableOfNewReceivedBatches)
 	For Each Row_Receipt In DataForReceipt Do
@@ -2176,7 +2174,6 @@ Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpens
 		Rows.Delete(Row);
 	EndDo;
 EndProcedure
-
 
 Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpense, TableOfNewReceivedBatches)
 	For Each Row_Receipt In DataForReceipt Do
@@ -2404,7 +2401,6 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, ItemKey)
 	Return Table_SalesBatches;
 EndFunction
 
-
 #Region Constructors
 
 // Get calculation settings.
@@ -2421,8 +2417,8 @@ Function GetCalculationSettings() Export
 	Structure = New Structure;
 	Structure.Insert("CalculationMovementCostRef", Documents.CalculationMovementCosts.EmptyRef());
 	Structure.Insert("CalculationMode", Enums.CalculationMode.EmptyRef());
-	Structure.Insert("BeginPeriod", Date(1,1,1));
-	Structure.Insert("EndPeriod", Date(1,1,1));
+	Structure.Insert("BeginPeriod", Date(1, 1, 1));
+	Structure.Insert("EndPeriod", Date(1, 1, 1));
 	Structure.Insert("Company", Catalogs.Companies.EmptyRef());
 	Structure.Insert("RaiseOnCalculationError", False);
 	Return Structure;

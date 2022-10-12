@@ -9,17 +9,17 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			NewRow.OptionPresentation = FunctionalOption.Synonym;
 			NewRow.Use = Constants[FunctionalOption.Name].Get();
 		EndIf;
-	EndDO;
+	EndDo;
 EndProcedure
 
 &AtClient
 Procedure Save(Command)
-	SeveAtServer();
+	SaveAtServer();
 	RefreshInterface();
 EndProcedure
 
 &AtServer
-Procedure SeveAtServer()
+Procedure SaveAtServer()
 	For Each FunctionalOption In ThisObject.FunctionalOptions Do
 		Constants[FunctionalOption.OptionName].Set(FunctionalOption.Use);
 	EndDo;

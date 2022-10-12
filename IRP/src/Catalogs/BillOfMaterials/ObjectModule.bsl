@@ -18,6 +18,6 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	ThisObject.Type =Enums.BillOfMaterialsTypes.Product;
+	ThisObject.Type = Enums.BillOfMaterialsTypes.Product;
 	ThisObject.Active = True;
 EndProcedure

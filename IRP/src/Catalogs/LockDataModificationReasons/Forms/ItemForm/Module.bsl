@@ -383,7 +383,6 @@ Function FillAttributeListHead(ChoiceData = Undefined)
 	Return Array;
 EndFunction
 
-
 // Fill value type.
 // 
 // Parameters:

@@ -6,7 +6,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	StatusInfo = New Structure("Status, Posting", Ref.Status, ObjectStatusesServer.PutStatusPostingToStructure(Ref.Status));
 	
-	//TempTablesManager = New TempTablesManager();
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.SetParameter("Ref", Ref);
@@ -73,7 +72,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Return Tables;
 EndFunction
-
 
 Function NeedPosting(StatusInfo, SettingName, PostingType)
 	// SettingName:

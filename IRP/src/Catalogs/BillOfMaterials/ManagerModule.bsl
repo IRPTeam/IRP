@@ -18,9 +18,4 @@ Function GetBillOfMaterialsByItemKey(ItemKey) Export
 	EndIf;
 	Return Catalogs.BillOfMaterials.EmptyRef();
 	
-//	If ValueIsFilled(ItemKey.MF_DefaultBillOfMaterials) Then
-//		Return ItemKey.MF_DefaultBillOfMaterials;
-//	Else
-//		Return Catalogs.ItemKeys.EmptyRef();
-//	EndIf;
 EndFunction

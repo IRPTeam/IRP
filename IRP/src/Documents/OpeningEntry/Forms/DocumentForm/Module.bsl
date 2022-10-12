@@ -158,7 +158,7 @@ EndProcedure
 
 &AtClient
 Procedure InventoryItemEditTextChange(Item, Text, StandardProcessing)
-	DocOpeningEntryClient.InventiryItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	DocOpeningEntryClient.InventoryItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion

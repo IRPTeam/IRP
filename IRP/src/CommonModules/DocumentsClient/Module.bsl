@@ -1003,7 +1003,6 @@ Function GetFormItemNames()
 	Return ItemNames;
 EndFunction	
 
-
 Procedure ShowRowKey(Form) Export
 	ItemNames = GetFormItemNames();
 	ArrayOfItemNames = StrSplit(ItemNames, ",");
@@ -1081,10 +1080,6 @@ Procedure OpenLinkedDocuments(Object, Form, TableName, DocumentColumnName, Quant
 
 		ArrayOfDocuments = Object[TableName].FindRows(New Structure("Key", Row.Key));
 
-		//If ArrayOfDocuments.Count() = 1 And ArrayOfDocuments[0].Quantity <> Row.QuantityInBaseUnit Then
-		//	ArrayOfDocuments[0].Quantity = Row.QuantityInBaseUnit;
-		//EndIf;
-
 		For Each ItemOfArray In ArrayOfDocuments Do
 			NewRow1 = New Structure();
 			
@@ -1109,7 +1104,7 @@ Procedure OpenLinkedDocuments(Object, Form, TableName, DocumentColumnName, Quant
 	FormParameters.Insert("Tree", Tree);
 	
 	Notify = New NotifyDescription("LinkedDocumentsEnd", ThisObject, AdditionalParameters);
-	OpenForm("CommonForm.LinkedDocuments", FormParameters, Form, ,,,Notify, FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("CommonForm.LinkedDocuments", FormParameters, Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 Procedure LinkedDocumentsEnd(Result, AdditionalParameters) Export

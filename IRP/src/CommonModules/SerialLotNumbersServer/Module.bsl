@@ -139,7 +139,6 @@ Function isSerialLotNumberNameMatchRegExp(Value, Owner) Export
 	
 EndFunction
 
-
 // Get serial lot numbers reg exp rules.
 // 
 // Parameters:

@@ -12,7 +12,7 @@ Async Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	EndIf;
 	
 	For Each ExtFunction In CommandParameter Do
-		ServiceSystemServer.ContinueOrPauseShedulerJob(ExtFunction, False);
+		ServiceSystemServer.ContinueOrPauseSchedulerJob(ExtFunction, False);
 	EndDo;
 	
 	CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_005);

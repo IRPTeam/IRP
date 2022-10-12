@@ -12,7 +12,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 		Period = EndOfDay(CurrentSessionDate());
 		If ValueIsFilled(Ref) Then
 			If Ref.Posted Then
-				Period = New Boundary(Ref.PointInTime(), BoundaryType.Excluding);
+				Period = New Boundary(Ref.PointInTime(), BoundaryType.Including);
 			Else
 				Period = EndOfDay(Ref.Date);
 			EndIf;

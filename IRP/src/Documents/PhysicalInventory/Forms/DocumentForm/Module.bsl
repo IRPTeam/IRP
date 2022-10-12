@@ -171,7 +171,6 @@ Procedure SerialLotNumbersSerialLotNumberCreating(Item, StandardProcessing)
 	OpenForm("Catalog.SerialLotNumbers.ObjectForm", FormParameters, ThisObject);
 EndProcedure
 
-
 #EndRegion
 
 #Region ITEM_KEY

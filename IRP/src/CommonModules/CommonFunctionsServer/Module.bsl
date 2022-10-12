@@ -612,7 +612,6 @@ Procedure DeleteScheduledJob(ExternalFunction) Export
 	EndDo;
 EndProcedure
 
-
 // Get recalculate expression params.
 // 
 // Parameters:

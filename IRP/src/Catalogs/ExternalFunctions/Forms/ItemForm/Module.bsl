@@ -202,7 +202,7 @@ Procedure SetVisible()
 		Items.PageResult.Visible = True;
 		Items.PageRegExp.Visible = False;
 	EndIf;
-	Items.PageSheduler.Visible = Object.isSchedulerSet;
+	Items.PageScheduler.Visible = Object.isSchedulerSet;
 EndProcedure
 
 &AtClient

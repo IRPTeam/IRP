@@ -466,7 +466,7 @@ Scenario: _900020 create Purchase return based on PI
 	* Check creation
 		Then the form attribute named "Partner" became equal to "Vendor and customer"
 		Then the form attribute named "LegalName" became equal to "Vendor and customer"
-		Then the form attribute named "Agreement" became equal to "Vendor stabdard term"
+		Then the form attribute named "Agreement" became equal to "Vendor standard term"
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "Store" became equal to "My Store"
 		And "ItemList" table became equal
@@ -523,7 +523,7 @@ Scenario: _900021 create Purchase return
 	* Check filling
 		Then the form attribute named "Partner" became equal to "Vendor and customer"
 		Then the form attribute named "LegalName" became equal to "Vendor and customer"
-		Then the form attribute named "Agreement" became equal to "Vendor stabdard term"
+		Then the form attribute named "Agreement" became equal to "Vendor standard term"
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "Store" became equal to "My Store"
 		And "ItemList" table became equal

@@ -61,7 +61,7 @@ EndProcedure
 
 Function GetDocument(Company, Branch, Workstation) Export
 	
-	If Not UseConsolidatedRetilaSales(Branch) Then
+	If Not UseConsolidatedRetailSales(Branch) Then
 		Return Undefined;
 	EndIf;
 	
@@ -134,7 +134,7 @@ Function IsClosedRetailDocument(DocRef) Export
 			And DocRef.ConsolidatedRetailSales.Posted;
 EndFunction
 
-Function UseConsolidatedRetilaSales(Branch, SalesReturnData = Undefined) Export
+Function UseConsolidatedRetailSales(Branch, SalesReturnData = Undefined) Export
 	Result = FOServer.IsUseConsolidatedRetailSales() 
 		And ValueIsFilled(Branch)
 		And Branch.UseConsolidatedRetailSales;
@@ -148,9 +148,9 @@ Function UseConsolidatedRetilaSales(Branch, SalesReturnData = Undefined) Export
 	EndIf;
 	
 	IsSameDay = False;
-	SalesReturDate = ?(ValueIsFilled(SalesReturnData.Date), SalesReturnData.Date, CommonFunctionsServer.GetCurrentSessionDate());
+	SalesReturnDate = ?(ValueIsFilled(SalesReturnData.Date), SalesReturnData.Date, CommonFunctionsServer.GetCurrentSessionDate());
 	For Each SalesDocument In SalesReturnData.ArrayOfSalesDocuments Do
-		If BegOfDay(SalesDocument.Date) = BegOfDay(SalesReturDate) Then
+		If BegOfDay(SalesDocument.Date) = BegOfDay(SalesReturnDate) Then
 			IsSameDay = True;
 			Break;
 		EndIf;
@@ -159,6 +159,3 @@ Function UseConsolidatedRetilaSales(Branch, SalesReturnData = Undefined) Export
 EndFunction
 
 #EndRegion
-
-
-

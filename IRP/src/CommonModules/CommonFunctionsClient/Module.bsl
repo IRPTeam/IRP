@@ -28,5 +28,4 @@ Async Function RegExpFindMatch(String, Facet) Export
 
 EndFunction
 
-
 #EndRegion

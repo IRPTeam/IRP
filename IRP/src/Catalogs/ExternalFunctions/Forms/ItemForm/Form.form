@@ -1857,7 +1857,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormGroup">
-      <name>PageSheduler</name>
+      <name>PageScheduler</name>
       <id>143</id>
       <items xsi:type="form:FormGroup">
         <name>GroupTopScheduler</name>
@@ -2078,7 +2078,7 @@
         <value>Scheduler</value>
       </title>
       <extendedTooltip>
-        <name>PageShedulerExtendedTooltip</name>
+        <name>PageSchedulerExtendedTooltip</name>
         <id>144</id>
         <visible>true</visible>
         <enabled>true</enabled>

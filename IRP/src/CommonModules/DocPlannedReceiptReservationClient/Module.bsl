@@ -91,11 +91,6 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
 		CurrentRow.ItemKey = Undefined;
 	EndIf;
 
-	// #depreacted
-//	CalculationSettings = New Structure();
-//	CalculationSettings.Insert("UpdateUnit");
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
-
 	UnitInfo = GetItemInfo.ItemUnitInfo(CurrentRow.ItemKey);
 	CurrentRow.Unit = UnitInfo.Unit;
 EndProcedure

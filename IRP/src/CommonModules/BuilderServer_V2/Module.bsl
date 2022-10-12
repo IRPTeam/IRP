@@ -1,7 +1,5 @@
 
 Function CreateDocument(DocMetadata) Export
-	//DocMetadata = Metadata.Documents.ShipmentConfirmation;
-	//DocMetadata.TabularSections.ItemList.Attributes.
 	DocObject = Documents[DocMetadata.Name].CreateDocument();
 	DocObject.Fill(Undefined);
 	Wrapper = New Structure("Object", New Structure());

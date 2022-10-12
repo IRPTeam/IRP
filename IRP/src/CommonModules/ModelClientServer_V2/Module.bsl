@@ -100,7 +100,6 @@ Procedure ExecuteChain(Parameters, Chain, ExecuteLazySteps)
 		Name = ChainLink.Key;
 		If Chain[Name].Enable Then
 				
-			
 			Results = New Array();
 			For Each Options In Chain[Name].Options Do	
 				If Options.DontExecuteIfExecutedBefore 
@@ -256,7 +255,7 @@ Function GetChain()
 	Chain.Insert("ChangePercentByAmount" , GetChainLink("CalculatePercentByAmountExecute"));
 	
 	Chain.Insert("PaymentListCalculateCommission"  , GetChainLink("CalculatePaymentListCommissionExecute"));
-	Chain.Insert("ChangeCommissionPercentByAmount" , GetChainLink("CalculateCommisionPercentByAmountExecute"));
+	Chain.Insert("ChangeCommissionPercentByAmount" , GetChainLink("CalculateCommissionPercentByAmountExecute"));
 	
 	Chain.Insert("ChangeLandedCostBySalesDocument" , GetChainLink("ChangeLandedCostBySalesDocumentExecute"));
 	
@@ -579,7 +578,7 @@ EndFunction
 Function ChangePlanningTransactionBasisByCurrencyExecute(Options) Export
 	If ValueIsFilled(Options.PlanningTransactionBasis) 
 			And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") 
-			And ServiceSystemServer.GetObjectAttribute(Options.PlanningTransactionBasis,"SendCurrency") 
+			And ServiceSystemServer.GetObjectAttribute(Options.PlanningTransactionBasis, "SendCurrency") 
 			<> Options.Currency Then
 				Return Undefined;
 	EndIf;
@@ -1119,7 +1118,7 @@ Function ChangeConsolidatedRetailSalesByWorkstationForReturnExecute(Options) Exp
 	SalesReturnData = New Structure();
 	SalesReturnData.Insert("Date", Options.Date);
 	SalesReturnData.Insert("ArrayOfSalesDocuments", Options.SalesDocuments);
-	UseConsolidatedSales = DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Options.Branch, SalesReturnData);
+	UseConsolidatedSales = DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Options.Branch, SalesReturnData);
 	If Not UseConsolidatedSales Then
 		Return Undefined;
 	EndIf;
@@ -2060,7 +2059,7 @@ Function CalculationsExecute(Options) Export
 				Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
 			EndIf;
 		EndIf;
-	Else // PriceIncludeTax = Undefined
+	Else // PriceIncludeTax is Undefined
 		If Options.CalculateTaxAmountReverse.Enable And IsCalculatedRow Then
 			CalculateTaxAmount(Options, Options.TaxOptions, Result, True, False);
 		EndIf;
@@ -2928,11 +2927,11 @@ EndFunction
 
 #Region CALCULATE_PERCENT_COMMISSION_BY_AMOUNT
 
-Function CalculateCommisionPercentByAmountOptions() Export
+Function CalculateCommissionPercentByAmountOptions() Export
 	Return GetChainLinkOptions("TotalAmount, Commission");
 EndFunction
 
-Function CalculateCommisionPercentByAmountExecute(Options) Export
+Function CalculateCommissionPercentByAmountExecute(Options) Export
 	Return 100 * Options.Commission / Options.TotalAmount;
 EndFunction
 

@@ -1,8 +1,8 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	For Each Row In Parameters.ArrayOfJournalEntrys Do
-		NewRow = ThisObject.JournalEntrys.Add();
+	For Each Row In Parameters.ArrayOfJournalEntries Do
+		NewRow = ThisObject.JournalEntries.Add();
 		NewRow.JournalEntry = Row.JournalEntry;
 		NewRow.LedgerType   = Row.LedgerType;
 		NewRow.Icon = Not ValueIsFilled(Row.JournalEntry);
@@ -11,17 +11,17 @@ EndProcedure
 
 &AtClient
 Procedure Ok(Command)
-	CloseAnrReturnResult();
+	CloseAndReturnResult();
 EndProcedure
 
 &AtClient
-Procedure JournalEntrysSelection(Item, RowSelected, Field, StandardProcessing)
-	CloseAnrReturnResult();
+Procedure JournalEntriesSelection(Item, RowSelected, Field, StandardProcessing)
+	CloseAndReturnResult();
 EndProcedure
 
 &AtClient
-Procedure CloseAnrReturnResult()
-	CurrentData = Items.JournalEntrys.CurrentData;
+Procedure CloseAndReturnResult()
+	CurrentData = Items.JournalEntries.CurrentData;
 	If CurrentData = Undefined Then
 		Close(Undefined);
 		Return;
@@ -39,14 +39,11 @@ Procedure Cancel(Command)
 EndProcedure
 
 &AtClient
-Procedure JournalEntrysBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+Procedure JournalEntriesBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	Cancel = True;
 EndProcedure
 
 &AtClient
-Procedure JournalEntrysBeforeDeleteRow(Item, Cancel)
+Procedure JournalEntriesBeforeDeleteRow(Item, Cancel)
 	Cancel = True;
 EndProcedure
-
-
-

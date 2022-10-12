@@ -168,7 +168,7 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 		Return;
 	EndIf;
 	
-	ItemList_InDocument = GetRowIDwithLineNumbers(Source);	
+	ItemList_InDocument = GetRowIDWithLineNumbers(Source);	
 	Records_InDocument = GetRecordsInDocument(Source).TM1010B_RowIDMovements;
 	Records_Exists = AccumulationRegisters.TM1010B_RowIDMovements.GetExistsRecords(Source.Ref);
 	
@@ -221,7 +221,7 @@ Procedure UndoPosting_RowIDUndoPosting(Source, Cancel) Export
 	
 	Records_Exists = AccumulationRegisters.TM1010B_RowIDMovements.GetExistsRecords(Source.Ref);
 	Records_InDocument  = GetRecordsInDocument(Source).TM1010B_RowIDMovements;
-	ItemList_InDocument = GetRowIDwithLineNumbers(Source);
+	ItemList_InDocument = GetRowIDWithLineNumbers(Source);
 	
 	Unposting = True;
 	Source.RegisterRecords.TM1010B_RowIDMovements.Clear();
@@ -560,7 +560,7 @@ Function GetItemListInDocument_RRR(Source)
 	Return QueryTable;
 EndFunction	
 
-Function GetRowIDwithLineNumbers(Source)
+Function GetRowIDWithLineNumbers(Source)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -1626,7 +1626,7 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 					ItemOfDifferenceFields.Insert("DataPath"    , Difference.DataPath);
 					ItemOfDifferenceFields.Insert("LineNumber"  , RowItemList.LineNumber);
 					ItemOfDifferenceFields.Insert("ValueBefore" , Difference.ValueBefore);
-					ItemOfDifferenceFields.Insert("ValueAfter"  ,Difference.ValueAfter);
+					ItemOfDifferenceFields.Insert("ValueAfter"  , Difference.ValueAfter);
 					ArrayOfDifferenceFields.Add(ItemOfDifferenceFields);
 				EndDo;
 			EndIf;
@@ -1929,10 +1929,6 @@ Function ExtractDataByTables(Tables, DataReceiver, AddInfo = Undefined)
 	
 	If Tables.FromWS_ThenFromSO.Count() Then
 		ExtractedData.Add(ExtractData_FromWS_ThenFromSO(Tables.FromWS_ThenFromSO, DataReceiver, AddInfo));
-	EndIf;
-	
-	If Tables.FromWS_ThenFromWO_ThenFromSO.Count() Then
-//		ExtractedData.Add(ExtractData_FromWS_ThenFromWO_ThenFromSO(Tables.FromWS_ThenFromWO_ThenFromSO, DataReceiver, AddInfo));
 	EndIf;
 	
 	Return ExtractedData;
@@ -4098,26 +4094,12 @@ Function ExtractData_FromWS(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		ON BasisesTable.Basis = ItemList.Ref
 	|		AND BasisesTable.BasisKey = ItemList.Key";
 	
-//	|;
-//	|////////////////////////////////////////////////////////////////////////////////
-//	|SELECT DISTINCT
-//	|	UNDEFINED AS Ref,
-//	|	BasisesTable.Key,
-//	|	SerialLotNumbers.SerialLotNumber,
-//	|	SerialLotNumbers.Quantity
-//	|FROM
-//	|	Document.ShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
-//	|		INNER JOIN BasisesTable AS BasisesTable
-//	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-//	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
-
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
 	TableRowIDInfo             = QueryResults[1].Unload();
 	TableItemList              = QueryResults[2].Unload();
 	TableWorkSheets            = QueryResults[3].Unload();
-//	TableSerialLotNumbers      = QueryResults[4].Unload();
 	
 	For Each RowItemList In TableItemList Do
 		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit, RowItemList.QuantityInBaseUnit);
@@ -4127,7 +4109,6 @@ Function ExtractData_FromWS(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Tables.Insert("ItemList"   , TableItemList);
 	Tables.Insert("RowIDInfo"  , TableRowIDInfo);
 	Tables.Insert("WorkSheets" , TableWorkSheets);
-//	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
 	
 	AddTables(Tables);
 
@@ -4172,20 +4153,6 @@ Function ExtractData_FromWS_ThenFromWO(BasisesTable, DataReceiver, AddInfo = Und
 	|		ON BasisesTable.Basis = ItemList.Ref
 	|		AND BasisesTable.BasisKey = ItemList.Key";
 	
-//	|;
-//	|
-//	|////////////////////////////////////////////////////////////////////////////////
-//	|SELECT DISTINCT
-//	|	UNDEFINED AS Ref,
-//	|	BasisesTable.Key,
-//	|	SerialLotNumbers.SerialLotNumber,
-//	|	SerialLotNumbers.Quantity
-//	|FROM
-//	|	Document.ShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
-//	|		INNER JOIN BasisesTable AS BasisesTable
-//	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-//	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
-
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
@@ -4193,7 +4160,6 @@ Function ExtractData_FromWS_ThenFromWO(BasisesTable, DataReceiver, AddInfo = Und
 
 	TableRowIDInfo   = QueryResults[1].Unload();
 	TableWorkSheets  = QueryResults[3].Unload();
-//	TableSerialLotNumbers      = QueryResults[4].Unload();
 	
 	Tables = New Structure();
 	Tables.Insert("ItemList"      , TablesWO.ItemList);
@@ -4201,7 +4167,6 @@ Function ExtractData_FromWS_ThenFromWO(BasisesTable, DataReceiver, AddInfo = Und
 	Tables.Insert("TaxList"       , TablesWO.TaxList);
 	Tables.Insert("SpecialOffers" , TablesWO.SpecialOffers);
 	Tables.Insert("WorkSheets"    , TableWorkSheets);
-//	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
 
 	AddTables(Tables);
 
@@ -4254,7 +4219,6 @@ Function ExtractData_FromWS_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Und
 
 	TableRowIDInfo   = QueryResults[1].Unload();
 	TableWorkSheets  = QueryResults[3].Unload();
-//	TableSerialLotNumbers      = QueryResults[4].Unload();
 	
 	Tables = New Structure();
 	Tables.Insert("ItemList"      , TablesSO.ItemList);
@@ -4262,87 +4226,11 @@ Function ExtractData_FromWS_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Und
 	Tables.Insert("TaxList"       , TablesSO.TaxList);
 	Tables.Insert("SpecialOffers" , TablesSO.SpecialOffers);
 	Tables.Insert("WorkSheets"    , TableWorkSheets);
-//	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
 
 	AddTables(Tables);
 
 	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey", AddInfo);
 EndFunction
-
-//Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
-//	Query = New Query(GetQueryText_BasisesTable());
-//	Query.Text = Query.Text + 
-//	"SELECT DISTINCT ALLOWED
-//	|	BasisesTable.Key,
-//	|	RowIDInfo.BasisKey AS BasisKey,
-//	|	BasisesTable.RowID,
-//	|	BasisesTable.CurrentStep,
-//	|	BasisesTable.RowRef,
-//	|	BasisesTable.RowRef.Basis AS ParentBasis,
-//	|	BasisesTable.ParentBasis AS Basis,
-//	|	BasisesTable.Unit,
-//	|	BasisesTable.BasisUnit,
-//	|	BasisesTable.QuantityInBaseUnit
-//	|FROM
-//	|	BasisesTable AS BasisesTable
-//	|		LEFT JOIN Document.ShipmentConfirmation.RowIDInfo AS RowIDInfo
-//	|		ON BasisesTable.Basis = RowIDInfo.Ref
-//	|		AND BasisesTable.BasisKey = RowIDInfo.Key
-//	|;
-//	|
-//	|////////////////////////////////////////////////////////////////////////////////
-//	|SELECT DISTINCT
-//	|	UNDEFINED AS Ref,
-//	|	ItemList.Store AS Store,
-//	|	ItemList.ItemKey.Item AS Item,
-//	|	ItemList.ItemKey AS ItemKey,
-//	|	BasisesTable.Unit AS Unit,
-//	|	BasisesTable.Key,
-//	|	BasisesTable.BasisKey,
-//	|	BasisesTable.Basis AS ShipmentConfirmation,
-//	|	BasisesTable.QuantityInBaseUnit AS Quantity,
-//	|	BasisesTable.QuantityInBaseUnit AS QuantityInShipmentConfirmation
-//	|FROM
-//	|	BasisesTable AS BasisesTable
-//	|		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
-//	|		ON BasisesTable.Basis = ItemList.Ref
-//	|		AND BasisesTable.BasisKey = ItemList.Key
-//	|;
-//	|
-//	|////////////////////////////////////////////////////////////////////////////////
-//	|SELECT DISTINCT
-//	|	UNDEFINED AS Ref,
-//	|	BasisesTable.Key,
-//	|	SerialLotNumbers.SerialLotNumber,
-//	|	SerialLotNumbers.Quantity
-//	|FROM
-//	|	Document.ShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
-//	|		INNER JOIN BasisesTable AS BasisesTable
-//	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-//	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
-//
-//	Query.SetParameter("BasisesTable", BasisesTable);
-//	QueryResults = Query.ExecuteBatch();
-//
-//	TablesPIGRSO = ExtractData_FromPIGR_ThenFromSO(QueryResults[2].Unload(), DataReceiver);
-//	TablesPIGRSO.ItemList.FillValues(True, "UseShipmentConfirmation");
-//
-//	TableRowIDInfo             = QueryResults[1].Unload();
-//	TableShipmentConfirmations = QueryResults[3].Unload();
-//	TableSerialLotNumbers      = QueryResults[4].Unload();
-//	
-//	Tables = New Structure();
-//	Tables.Insert("ItemList", TablesPIGRSO.ItemList);
-//	Tables.Insert("RowIDInfo", TableRowIDInfo);
-//	Tables.Insert("TaxList", TablesPIGRSO.TaxList);
-//	Tables.Insert("SpecialOffers", TablesPIGRSO.SpecialOffers);
-//	Tables.Insert("ShipmentConfirmations", TableShipmentConfirmations);
-//	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
-//	
-//	AddTables(Tables);
-//
-//	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey", AddInfo);
-//EndFunction
 
 #EndRegion
 
@@ -9067,7 +8955,7 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys, Up
 			If NeedRefillColumns Then
 				For Each RefillColumn In ArrayOfRefillColumns Do
 					If Row.Property(RefillColumn) And Row_ItemList.Property(RefillColumn) Then
-						Row[RefillColumn] = Row_ItemList[RefillColumn];// ???
+						Row[RefillColumn] = Row_ItemList[RefillColumn]; // ???
 						PropertyName = TrimAll(RefillColumn);
 						PutToUpdatedProperties(PropertyName, "ItemList", Row, UpdatedProperties);
 						IsLinked = True;
@@ -10096,12 +9984,11 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	|		AND RowIDInfoFull.ItemKey = BasisesTable.ItemKey
 	|		AND CASE
 	|			WHEN &Filter_Store then
-	//
-	|			case when RowIDInfoFull.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Product)
-	|           then RowIDInfoFull.Store = BasisesTable.Store
-	|			else true end
-	|
-	//|				THEN RowIDInfoFull.Store = BasisesTable.Store
+	|				case 
+	|					when RowIDInfoFull.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Product) then 
+	|						RowIDInfoFull.Store = BasisesTable.Store
+	|					else True 
+	|				end
 	|			ELSE TRUE
 	|		END
 	|WHERE
@@ -10159,7 +10046,7 @@ Procedure UnlockLinkedRows(Object, Form) Export
 EndProcedure
 
 Procedure LockInternalLinkedRows(Object, Form)
-	RowIDInfoTable = Object.RowIDInfo.Unload(,"Key, RowID, Basis, BasisKey, RowRef");
+	RowIDInfoTable = Object.RowIDInfo.Unload(, "Key, RowID, Basis, BasisKey, RowRef");
 	RowIDInfoTable.GroupBy("Key, RowID, Basis, BasisKey, RowRef");
 	
 	ArrayForDelete = New Array();
@@ -10188,7 +10075,7 @@ Procedure LockInternalLinkedRows(Object, Form)
 EndProcedure
 
 Procedure LockExternalLinkedRows(Object, Form)
-	RowIDInfoTable = Object.RowIDInfo.Unload(,"Key, RowID");
+	RowIDInfoTable = Object.RowIDInfo.Unload(, "Key, RowID");
 	RowIDInfoTable.GroupBy("Key, RowID");
 	For Each Row In Object.ItemList Do
 		If Not RowIDInfoTable.FindRows(New Structure("Key", Row.Key)).Count() Then

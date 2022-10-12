@@ -78,7 +78,7 @@ Function GetCacheBeforeChange(Cache, DataPath, Rows = Undefined)
 	Segments = StrSplit(DataPath, ".");
 	If Segments.Count() = 2 Then
 		If Rows = Undefined Then
-			Raise StrTemplate("Error read data from cache by data path [%1] rows is Udefined", DataPath);
+			Raise StrTemplate("Error read data from cache by data path [%1] rows is Undefined", DataPath);
 		EndIf;
 		TableName  = Segments[0];
 		ColumnName = Segments[1];
@@ -383,7 +383,7 @@ Procedure __tmp_SalesPurchaseInvoice_OnChainComplete(Parameters)
 		Notify = New NotifyDescription("QuestionsOnUserChangeContinue", ThisObject, NotifyParameters);
 		OpenForm("CommonForm.UpdateItemListInfo",
 			New Structure("QuestionsParameters", QuestionsParameters), 
-			Parameters.Form, , , ,Notify ,FormWindowOpeningMode.LockOwnerWindow);
+			Parameters.Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 	Else
 		CommitChanges(Parameters);
 	EndIf;
@@ -657,7 +657,7 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 	// affect to amounts
 	IsPriceChecked = False;
 	IsTaxRateChecked = False;
-	IsPriceTypeCheked = False;
+	IsPriceTypeChecked = False;
 	
 	ArrayOfDataPaths = New Array();
 	
@@ -675,7 +675,7 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 		If Not Answer.Property("UpdatePriceTypes") Then
 			RemoveFromCache(DataPaths, Parameters);
 		Else
-			IsPriceTypeCheked = True;
+			IsPriceTypeChecked = True;
 		EndIf;
 	EndIf;
 	
@@ -712,7 +712,7 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 	EndIf;
 	
 	// not affect amounts
-	If Not (IsPriceTypeCheked Or IsPriceChecked Or IsTaxRateChecked) Then
+	If Not (IsPriceTypeChecked Or IsPriceChecked Or IsTaxRateChecked) Then
 		DataPaths = "ItemList.NetAmount, ItemList.TaxAmount, ItemList.TotalAmount";
 		ArrayOfDataPaths.Add(DataPaths);
 		RemoveFromCache(DataPaths, Parameters, False);
@@ -825,7 +825,7 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow,
 			ArrayOfExcludeProperties.Add("SerialLotNumberIsFilling");
 		EndIf;
 		
-		FillPropertyValues(NewRow, OriginRows[0], ,StrConcat(ArrayOfExcludeProperties, ","));
+		FillPropertyValues(NewRow, OriginRows[0], , StrConcat(ArrayOfExcludeProperties, ","));
 		
 		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
 		Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
@@ -870,7 +870,7 @@ Function AddOrCopyRowSimpleTable(Object, Form, TableName, Cancel, Clone, OriginR
 			ArrayOfExcludeProperties.Add("Key");
 		EndIf;
 		
-		FillPropertyValues(NewRow, OriginRows[0], ,StrConcat(ArrayOfExcludeProperties, ","));
+		FillPropertyValues(NewRow, OriginRows[0], , StrConcat(ArrayOfExcludeProperties, ","));
 		
 		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
 		Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
@@ -1602,7 +1602,6 @@ EndProcedure
 
 Procedure OnSetItemListCancelNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
-//		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
@@ -2442,7 +2441,7 @@ Procedure UseGoodsReceiptOnChange(Object, Form, TableNames) Export
 	EndDo;
 EndProcedure
 
-Procedure OnSetUseGoodsReceiptNotify_IsProgrammAsTrue(Parameters) Export
+Procedure OnSetUseGoodsReceiptNotify_IsProgramAsTrue(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer" Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_023, "Object.UseGoodsReceipt");
 	EndIf;

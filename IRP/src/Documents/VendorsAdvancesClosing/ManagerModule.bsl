@@ -918,8 +918,8 @@ Function FindRowKeyByAdvanceKey(AdvanceKey, Document)
 	Query.SetParameter("LegalName" , AdvanceKey.LegalName);
 	Query.SetParameter("Partner"   , AdvanceKey.Partner);
 	Query.SetParameter("Document"  , Document);
-	Query.SetParameter("Order"     , ?(ValueIsFilled(AdvanceKey.Order)
-		,AdvanceKey.Order, Documents.PurchaseOrder.EmptyRef()));
+	Query.SetParameter("Order"     , ?(ValueIsFilled(AdvanceKey.Order),
+		AdvanceKey.Order, Documents.PurchaseOrder.EmptyRef()));
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
@@ -960,8 +960,8 @@ Function FindRowKeyByTransactionKey(TransactionKey, Document)
 	Query.SetParameter("Agreement"        , TransactionKey.Agreement);
 	Query.SetParameter("TransactionBasis" , TransactionKey.TransactionBasis);
 	Query.SetParameter("Document"         , Document);
-	Query.SetParameter("Order"            , ?(ValueIsFilled(TransactionKey.Order)
-		,TransactionKey.Order, Documents.PurchaseOrder.EmptyRef()));
+	Query.SetParameter("Order"            , ?(ValueIsFilled(TransactionKey.Order),
+		TransactionKey.Order, Documents.PurchaseOrder.EmptyRef()));
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
@@ -1190,7 +1190,7 @@ Function ReleaseAdvanceByOrder(Parameters, Records_AdvancesKey, Records_OffsetOf
 		New_AdvKeys_Minus = Records_AdvancesKey.Add();
 		New_AdvKeys_Minus.RecordType = AccumulationRecordType.Receipt;
 		New_AdvKeys_Minus.Period     = Date;
-		New_AdvKeys_Minus.AdvanceKey = AdvanceKey;//key with order
+		New_AdvKeys_Minus.AdvanceKey = AdvanceKey; //key with order
 		New_AdvKeys_Minus.Amount     = - QuerySelection.AdvanceAmount;
 		
 		// Plus by advance without order
@@ -1198,7 +1198,7 @@ Function ReleaseAdvanceByOrder(Parameters, Records_AdvancesKey, Records_OffsetOf
 		New_AdvKeys_Minus.RecordType = AccumulationRecordType.Receipt;
 		New_AdvKeys_Minus.Period     = Date;
 		AdvanceKey_WithoutOrder      = AdvanceKeyWithoutOrder;
-		New_AdvKeys_Minus.AdvanceKey = AdvanceKey_WithoutOrder;//key without order
+		New_AdvKeys_Minus.AdvanceKey = AdvanceKey_WithoutOrder; //key without order
 		New_AdvKeys_Minus.Amount     = QuerySelection.AdvanceAmount;
 		
 		// OffsetOfAdvances - minus with order (record type expense)

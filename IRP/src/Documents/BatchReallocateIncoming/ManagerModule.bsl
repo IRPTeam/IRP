@@ -162,6 +162,3 @@ Function T6020S_BatchKeysInfo()
 	|	ItemList.Period,
 	|	VALUE(Enum.BatchDirection.Receipt)";
 EndFunction
-
-
-

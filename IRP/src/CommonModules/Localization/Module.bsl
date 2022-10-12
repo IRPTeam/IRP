@@ -18,7 +18,7 @@
 //  * CLV_1 - String - All
 //  * Default_001 - String - pcs
 //  * Default_002 - String - Customer standard term
-//  * Default_003 - String - Vendor stabdard term
+//  * Default_003 - String - Vendor standard term
 //  * Default_004 - String - Customer price type
 //  * Default_005 - String - Vendor price type
 //  * Default_006 - String - Partner term currency type
@@ -555,8 +555,6 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_068_2", NStr(
 		"en = 'Line No. [%1] [%2 %3] Serial lot number [%4] %5 remaining: %6 %9. Required: %7 %9. Lacking: %8 %9.'", Lang));
 
-
-
 	// %1 - some extention name
 	Strings.Insert("Error_071", NStr("en = 'Plugin ""%1"" is not connected.'", Lang));
 	
@@ -696,7 +694,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_115", NStr("en = 'Error while test connection'", Lang) + Chars.LF);
 	Strings.Insert("Error_116", NStr("en = 'Cannot unpost, document is closed by [ %1 ]'", Lang) + Chars.LF);
 	Strings.Insert("Error_117", NStr("en = 'Sales return when sales by different dates not support'", Lang) + Chars.LF);
-	Strings.Insert("Error_118", NStr("en = 'Cannot set deletion makr, document is closed by [ %1 ]'", Lang) + Chars.LF);
+	Strings.Insert("Error_118", NStr("en = 'Cannot set deletion mark, document is closed by [ %1 ]'", Lang) + Chars.LF);
 	Strings.Insert("Error_119", NStr("en = 'Error Eval code'", Lang) + Chars.LF);
 	
 	// manufacturing errors
@@ -912,7 +910,7 @@ Function Strings(Lang) Export
 #Region Defaults
 	Strings.Insert("Default_001", NStr("en = 'pcs'", Lang));
 	Strings.Insert("Default_002", NStr("en = 'Customer standard term'", Lang));
-	Strings.Insert("Default_003", NStr("en = 'Vendor stabdard term'", Lang));
+	Strings.Insert("Default_003", NStr("en = 'Vendor standard term'", Lang));
 	Strings.Insert("Default_004", NStr("en = 'Customer price type'", Lang));
 	Strings.Insert("Default_005", NStr("en = 'Vendor price type'", Lang));
 	Strings.Insert("Default_006", NStr("en = 'Partner term currency type'", Lang));

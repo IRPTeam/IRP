@@ -415,12 +415,12 @@ Procedure AddExternalFunctionsToJobQueue(ExternalFunction) Export
 	Job.Write();
 EndProcedure
 
-// Stop sheduler job.
+// Stop scheduler job.
 // 
 // Parameters:
 //  ExternalFunction - CatalogRef.ExternalFunctions - Job ID
 // 
-Procedure StopShedulerJob(ExternalFunction) Export
+Procedure StopSchedulerJob(ExternalFunction) Export
 	
 	Query = New Query;
 	Query.Text =
@@ -455,12 +455,12 @@ Procedure StopShedulerJob(ExternalFunction) Export
 	EndIf;
 EndProcedure
 
-// Continue sheduler job.
+// Continue scheduler job.
 // 
 // Parameters:
 //  ExternalFunction - CatalogRef.ExternalFunctions - Job ID
 //  Pause - Boolean - Pause
-Procedure ContinueOrPauseShedulerJob(ExternalFunction, Pause = True) Export
+Procedure ContinueOrPauseSchedulerJob(ExternalFunction, Pause = True) Export
 	Query = New Query;
 	Query.Text =
 		"SELECT

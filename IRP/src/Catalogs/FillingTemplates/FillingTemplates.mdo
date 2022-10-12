@@ -57,6 +57,43 @@
   <defaultObjectForm>Catalog.FillingTemplates.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.FillingTemplates.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.FillingTemplates.Form.ChoiceForm</defaultChoiceForm>
+  <attributes uuid="0047464a-0d92-401b-9d51-eb535fd17f97">
+    <name>TemplateRegExp</name>
+    <synonym>
+      <key>en</key>
+      <value>Template RegExp</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="4a8310ae-3f02-427b-8792-df0ffc3e48a2">
+    <name>Priority</name>
+    <synonym>
+      <key>en</key>
+      <value>Priority</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>5</precision>
+        <nonNegative>true</nonNegative>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="1a21b715-4920-4a16-83c5-7da5b6f613cf">
     <producedTypes>
       <objectType typeId="ed775f47-cc0a-45e5-934b-975652ce626a" valueTypeId="a5eae818-7e3d-42dd-9e0a-3847c34d1fc1"/>

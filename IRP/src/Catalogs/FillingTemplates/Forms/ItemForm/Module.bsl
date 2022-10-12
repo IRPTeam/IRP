@@ -5,6 +5,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
+	TemplateActions.SettingsComposer.Settings.Filter.Items[0].RightValue = Object.Ref;
 EndProcedure
 
 // Notification processing.
@@ -23,6 +24,12 @@ EndProcedure
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	AddAttributesCreateFormControl();
+	TemplateActions.SettingsComposer.Settings.Filter.Items[0].RightValue = Object.Ref;
+EndProcedure
+
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	Notify("UpdatedFillingTemplate", New Structure("Ref", Object.Ref));
 EndProcedure
 
 // Description opening.

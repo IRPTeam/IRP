@@ -16,4 +16,5 @@
   <content>DataProcessor.AnalyseXDTO</content>
   <content>CommonModule.ConvertXDTO</content>
   <content>Catalog.FillingTemplates</content>
+  <content>DataProcessor.CreateRegExp</content>
 </mdclass:Subsystem>

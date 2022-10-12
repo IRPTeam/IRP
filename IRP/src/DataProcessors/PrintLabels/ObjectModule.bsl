@@ -21,6 +21,9 @@ Procedure FillAtServer(Object, Form) Export
 				 |	ItemKeys.Item AS Item,
 				 |	ItemKeys.Ref AS ItemKey,
 				 |	ItemKeys.Unit AS Unit,
+				 |	ItemKeys.Unit AS ItemKeyUnit,
+				 |	ItemKeys.Item.Unit AS ItemUnit,
+				 |	NOT ItemKeys.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
 				 |	Barcodes_TT.Barcode AS Barcode
 				 |FROM
 				 |	Catalog.ItemKeys AS ItemKeys
@@ -34,10 +37,10 @@ Procedure FillAtServer(Object, Form) Export
 
 	QueryUnload = QueryExecution.Unload();
 
-	ItemPriceTable = QueryUnload.Copy( , "ItemKey, Unit");
+	ItemPriceTable = QueryUnload.Copy( , "ItemKey, Unit, ItemKeyUnit, ItemUnit, hasSpecification");
 	ItemPriceTable.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
 	ItemPriceTable.FillValues(Form.PriceType, "PriceType");
-
+	
 	ItemsInfo = GetItemInfo.ItemPriceInfoByTable(ItemPriceTable, CurrentDate());
 
 	PriceQuery = New Query();

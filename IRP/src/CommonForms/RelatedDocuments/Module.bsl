@@ -366,7 +366,7 @@ Procedure OutputChildrenDocuments(TreeRow)
 		|SELECT") + "
 		|Ref, Presentation, Posted, DeletionMark, 
 		|" 
-		+ ?(GetFromCache(KeyValue.Key,"Attributes")["DocumentAmount"], "DocumentAmount", 0) + " AS Amount				
+		+ ?(GetFromCache(KeyValue.Key, "Attributes")["DocumentAmount"], "DocumentAmount", 0) + " AS Amount				
 		|FROM Document." + KeyValue.Key + "
 		|WHERE Ref In (&" + KeyValue.Key + ")";
 

@@ -194,7 +194,6 @@ Procedure FillResultsTree(SelectedRow)
 	RowIDInfoPrivileged.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(),
 		ThisObject.ResultsTree.GetItems());
 
-
 	ThisObject.LinkedRowID = "";
 	ThisObject.ShippingReceipt = False;
 

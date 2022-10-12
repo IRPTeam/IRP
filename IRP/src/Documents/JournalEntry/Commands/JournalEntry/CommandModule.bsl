@@ -3,15 +3,15 @@
 Procedure CommandProcessing(DocumentRef, CommandExecuteParameters)
 	JournalEntryInfo = GetJournalEntryInfo(DocumentRef);
 	
-	If JournalEntryInfo.ArrayOfJournalEntrys.Count() = 1 Then
+	If JournalEntryInfo.ArrayOfJournalEntries.Count() = 1 Then
 		AccountingClient.OpenFormJournalEntry(CommandExecuteParameters.Source, 
 			DocumentRef,
-			JournalEntryInfo.ArrayOfJournalEntrys[0].JournalEntry, 			
-			JournalEntryInfo.ArrayOfJournalEntrys[0].LedgerType);
-	ElsIf JournalEntryInfo.ArrayOfJournalEntrys.Count() > 1 Then
+			JournalEntryInfo.ArrayOfJournalEntries[0].JournalEntry, 			
+			JournalEntryInfo.ArrayOfJournalEntries[0].LedgerType);
+	ElsIf JournalEntryInfo.ArrayOfJournalEntries.Count() > 1 Then
 		AccountingClient.OpenFormSelectLedgerType(CommandExecuteParameters.Source, 
 			DocumentRef, 
-			JournalEntryInfo.ArrayOfJournalEntrys);
+			JournalEntryInfo.ArrayOfJournalEntries);
 	Else
 		Message(StrTemplate(R().Error_112, JournalEntryInfo.Company), MessageStatus.Information);
 	EndIf;
@@ -53,14 +53,14 @@ Function GetJournalEntryInfo(DocumentRef)
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	
-	ArrayOfJournalEntrys = New Array();
+	ArrayOfJournalEntries = New Array();
 	While QuerySelection.Next() Do
 		NewRow = New Structure("JournalEntry, LedgerType", 
 			QuerySelection.Ref, QuerySelection.LedgerType);
-		ArrayOfJournalEntrys.Add(NewRow);
+		ArrayOfJournalEntries.Add(NewRow);
 	EndDo;
 	Result = New Structure();
-	Result.Insert("ArrayOfJournalEntrys", ArrayOfJournalEntrys);
+	Result.Insert("ArrayOfJournalEntries", ArrayOfJournalEntries);
 	Result.Insert("Company", DocumentRef.Company);
 	Return Result;
 EndFunction

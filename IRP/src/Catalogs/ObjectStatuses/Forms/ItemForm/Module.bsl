@@ -67,8 +67,8 @@ EndProcedure
 &AtClient
 Function GetArrayOfFilters()
 	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Parent"   , Object.Parent,DataCompositionComparisonType.Equal));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref"      , Object.Ref,DataCompositionComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Parent"   , Object.Parent, DataCompositionComparisonType.Equal));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref"      , Object.Ref, DataCompositionComparisonType.NotEqual));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsFolder" , False, DataCompositionComparisonType.Equal));
 	Return ArrayOfFilters;
 EndFunction

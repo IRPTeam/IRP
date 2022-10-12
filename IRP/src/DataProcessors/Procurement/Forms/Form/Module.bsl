@@ -483,13 +483,6 @@ Function CreateDocumentsAtServer()
 	CreatedDocuments.Insert("PurchaseOrders", New Array());
 
 	TransferDataTable = GetEmptyDataTable_InventoryTransferOrder();
-//	TransferDataTable = New ValueTable();
-//	TransferDataTable.Columns.Add("StoreSender");
-//	TransferDataTable.Columns.Add("InternalSupplyRequest");
-//	TransferDataTable.Columns.Add("PurchaseOrder");
-//	TransferDataTable.Columns.Add("RowKey", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
-//	TransferDataTable.Columns.Add("ItemKey");
-//	TransferDataTable.Columns.Add("Quantity");
 
 	For Each Row In ThisObject.ResultsItemList Do
 		DataTable = CollectDataFor_InventoryTransferOrder(Row.ItemKey);
@@ -503,18 +496,6 @@ Function CreateDocumentsAtServer()
 	EndIf;
 
 	PurchaseDataTable = GetEmptyDataTable_PurchaseOrder();
-//	PurchaseDataTable = New ValueTable();
-//	PurchaseDataTable.Columns.Add("Partner");
-//	PurchaseDataTable.Columns.Add("Agreement");
-//	PurchaseDataTable.Columns.Add("PriceType");
-//	PurchaseDataTable.Columns.Add("Price");
-//	PurchaseDataTable.Columns.Add("DeliveryDate");
-//	PurchaseDataTable.Columns.Add("InternalSupplyRequest");
-//	PurchaseDataTable.Columns.Add("RowKey", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
-//	PurchaseDataTable.Columns.Add("ItemKey");
-//	PurchaseDataTable.Columns.Add("Store");
-//	PurchaseDataTable.Columns.Add("Unit");
-//	PurchaseDataTable.Columns.Add("Quantity");
 
 	For Each Row In ThisObject.ResultsItemList Do
 		DataTable = CollectDataFor_PurchaseOrder(Row.ItemKey);

@@ -130,7 +130,6 @@ Procedure SerialLotNumberCreating(Item, StandardProcessing)
 	OpenForm("Catalog.SerialLotNumbers.ObjectForm", FormParameters, ThisObject);
 EndProcedure
 
-
 #EndRegion
 
 &AtClient

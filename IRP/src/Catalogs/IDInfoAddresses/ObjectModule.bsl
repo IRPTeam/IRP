@@ -4,7 +4,7 @@ Procedure BeforeWrite(Cancel)
 	EndIf;
 	
 	ArrayOfDescriptions = New Array();
-	FullDescr_en(ThisObject.Ref, ArrayOfDescriptions);
+	FullDescription_en(ThisObject.Ref, ArrayOfDescriptions);
 	ArrayOfDescriptionsReverse = New Array();
 	Count = ArrayOfDescriptions.Count() - 1;
 	For i = 0 To Count Do
@@ -13,10 +13,10 @@ Procedure BeforeWrite(Cancel)
 	ThisObject.FullDescription = StrConcat(ArrayOfDescriptionsReverse, ", ");
 EndProcedure
 
-Procedure FullDescr_en(_Ref, ArrayOfDescriptions)
+Procedure FullDescription_en(_Ref, ArrayOfDescriptions)
 	ArrayOfDescriptions.Add(_Ref.Description_en);
 	If ValueIsFilled(_Ref.Parent) Then
-		FullDescr_en(_Ref.Parent, ArrayOfDescriptions);
+		FullDescription_en(_Ref.Parent, ArrayOfDescriptions);
 	EndIf;
 EndProcedure
 

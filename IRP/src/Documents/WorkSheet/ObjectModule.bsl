@@ -38,7 +38,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_WS(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
-		ItemListTable = ThisObject.ItemList.Unload(,"Key, LineNumber, ItemKey");
+		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, ItemKey");
 		ItemListTable.Columns.Add("Store", New TypeDescription("CatalogRef.Stores"));
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;	
@@ -60,5 +60,4 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);
 	EndIf;
 EndProcedure
-
 

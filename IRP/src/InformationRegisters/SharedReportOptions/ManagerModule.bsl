@@ -35,16 +35,16 @@ Procedure SetUsersToReportOption(Val ReportOption, Val UsersArray) Export
 
 	TempValueTable = New ValueTable();
 	TempValueTable.Columns.Add("Ref", New TypeDescription("CatalogRef.Users"));
-	CurrentShaReducers = GetUsersByReportOption(ReportOption);
+	CurrentShareReducers = GetUsersByReportOption(ReportOption);
 
 	TempValueTable.Clear();
-	For Each Item In CurrentShaReducers Do
+	For Each Item In CurrentShareReducers Do
 		TempValueTableRow = TempValueTable.Add();
 		TempValueTableRow.Ref = Item;
 	EndDo;
 	TempValueTable.Sort("Ref");
-	CurrentShaReducersSorted = TempValueTable.UnloadColumn("Ref");
-	CurrentShaReducersSortedVal = ValueToStringInternal(CurrentShaReducersSorted);
+	CurrentShareReducersSorted = TempValueTable.UnloadColumn("Ref");
+	CurrentShareReducersSortedVal = ValueToStringInternal(CurrentShareReducersSorted);
 
 	TempValueTable.Clear();
 	For Each Item In UsersArray Do
@@ -55,7 +55,7 @@ Procedure SetUsersToReportOption(Val ReportOption, Val UsersArray) Export
 	UsersSorted = TempValueTable.UnloadColumn("Ref");
 	UsersSortedVal = ValueToStringInternal(UsersSorted);
 
-	If CurrentShaReducersSortedVal = UsersSortedVal Then
+	If CurrentShareReducersSortedVal = UsersSortedVal Then
 		Return;
 	EndIf;
 

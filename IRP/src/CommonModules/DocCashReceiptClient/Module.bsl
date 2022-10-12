@@ -310,7 +310,7 @@ Procedure PaymentListTransactionBasisStartChoice(Object, Form, Item, ChoiceData,
 
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(
-		DocumentsClientServer.CreateFilterItem("Posted", True,DataCompositionComparisonType.Equal));
+		DocumentsClientServer.CreateFilterItem("Posted", True, DataCompositionComparisonType.Equal));
 	
 	// CashAccount
 	If ValueIsFilled(Object.CashAccount) Then
@@ -379,7 +379,7 @@ Procedure PaymentListMoneyTransferStartChoice(Object, Form, Item, ChoiceData, St
 
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(
-		DocumentsClientServer.CreateFilterItem("Posted", True,DataCompositionComparisonType.Equal));
+		DocumentsClientServer.CreateFilterItem("Posted", True, DataCompositionComparisonType.Equal));
 	
 	// CashAccount
 	If ValueIsFilled(Object.CashAccount) Then

@@ -158,7 +158,7 @@ Procedure CreateDocumentGoodsReceipt(Command)
 		Return;
 	EndIf;
 	
-	ColumNames = "
+	ColumnNames = "
 	|Basis,
 	|BasisKey,
 	|BasisUnit,
@@ -173,7 +173,7 @@ Procedure CreateDocumentGoodsReceipt(Command)
 	|RowRef,
 	|Store,
 	|Unit";
-	StructureRow = New Structure(ColumNames);
+	StructureRow = New Structure(ColumnNames);
 	FillPropertyValues(StructureRow, CurrentData);
 	
 	CreateDocuments(StructureRow, True, False);

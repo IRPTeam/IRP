@@ -62,7 +62,6 @@ Procedure RetailSalesReceiptsSelection(Item, RowSelected, Field, StandardProcess
 	OpenForm("Document.RetailSalesReceipt.ObjectForm", New Structure("Key", CurrentData.Ref));
 EndProcedure
 
-
 #EndRegion
 
 #Region _DATE

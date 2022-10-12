@@ -35,7 +35,7 @@ Procedure Create_Batches(CalculationSettings) Export
 	|	case
 	|		when &FilterByCompany
 	|			then T6010S_BatchesInfo.Company = &Company
-	|		else true
+	|		else True
 	|	end
 	|	AND T6010S_BatchesInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
 	|

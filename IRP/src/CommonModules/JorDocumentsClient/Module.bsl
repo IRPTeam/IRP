@@ -42,6 +42,24 @@ Procedure BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters) 
 		CreditNoteTableName);
 	FormParameters = New Structure("CustomFilter", FilterStructure);
 
+	EnteredItems = New Array;
+	For Each PaymentListItem in Object.PaymentList Do
+		If Not PaymentListItem = CurrentData Then
+			StructureEnteredItem = JorDocumentsClientServer.GetStructureEnteredItem();
+			StructureEnteredItem.Ref = PaymentListItem.BasisDocument;
+			StructureEnteredItem.Company = Object.Company;
+			StructureEnteredItem.Partner = PaymentListItem.Partner;
+			StructureEnteredItem.Agreement = PaymentListItem.Agreement;
+			StructureEnteredItem.Currency = Object.Currency;
+			StructureEnteredItem.Amount = PaymentListItem.TotalAmount;
+			If FilterStructure.QueryParameters.Property("LegalName") Then
+				StructureEnteredItem.LegalName = FilterStructure.QueryParameters.LegalName;
+			EndIf;
+			EnteredItems.Add(StructureEnteredItem);
+		EndIf;
+	EndDo;
+	FormParameters.Insert("EnteredItems", EnteredItems);
+
 	OpenForm("DocumentJournal." + Parameters.TableName + ".Form.ChoiceForm", FormParameters, Item, Form.UUID, , Form.URL,
 		Parameters.Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure

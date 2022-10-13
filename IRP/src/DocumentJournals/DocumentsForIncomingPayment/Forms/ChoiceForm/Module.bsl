@@ -28,3 +28,8 @@ Function GetSelectedData()
 	SelectedData.Insert("Amount", CurrentData.DocumentAmount);
 	Return SelectedData;
 EndFunction
+
+&AtServerNoContext
+Procedure ListOnGetDataAtServer(ItemName, Settings, Rows)
+	JorDocumentsServer.ListOnGetDataAtServer(ItemName, Settings, Rows);
+EndProcedure

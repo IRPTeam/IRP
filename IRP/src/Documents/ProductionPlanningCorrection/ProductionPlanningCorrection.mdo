@@ -310,7 +310,9 @@
       </choiceParameterLinks>
       <choiceParameters>
         <name>Filter.Active</name>
-        <value xsi:type="core:BooleanValue"/>
+        <value xsi:type="core:BooleanValue">
+          <value>true</value>
+        </value>
       </choiceParameters>
       <choiceParameters>
         <name>Filter.Type</name>

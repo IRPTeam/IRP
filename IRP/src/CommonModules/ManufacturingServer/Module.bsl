@@ -580,7 +580,7 @@ Procedure StoresFromRegBillOfMaterials(TableBillOfMaterials, TableForStores)
 			If ValueIsFilled(Stores.ReleaseStore) Then
 				Row.ReleaseStore = Stores.ReleaseStore;
 			Else
-				Row.ReleaseStore = Stores.BusinessUnit.MF_ReleaseStore;
+				Row.ReleaseStore = Stores.BusinessUnit.ReleaseStore;
 			EndIf;
 		EndIf;
 		
@@ -588,7 +588,7 @@ Procedure StoresFromRegBillOfMaterials(TableBillOfMaterials, TableForStores)
 			If ValueIsFilled(Stores.SemiproductStore) Then
 				Row.SemiproductStore = Stores.SemiproductStore;
 			Else
-				Row.SemiproductStore = Stores.BusinessUnit.MF_SemiproductStore;
+				Row.SemiproductStore = Stores.BusinessUnit.SemiproductStore;
 			EndIf;
 		EndIf;
 		
@@ -596,7 +596,7 @@ Procedure StoresFromRegBillOfMaterials(TableBillOfMaterials, TableForStores)
 			If ValueIsFilled(Stores.MaterialStore) Then
 				Row.MaterialStore = Stores.MaterialStore;
 			Else
-				Row.MaterialStore = Stores.BusinessUnit.MF_MaterialStore;
+				Row.MaterialStore = Stores.BusinessUnit.MaterialStore;
 			EndIf;			
 		EndIf;
 	EndDo;

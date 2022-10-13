@@ -70,6 +70,7 @@ Function GetChainLink(ExecutorName)
 	ChainLink.Insert("Setter" , Undefined);
 	ChainLink.Insert("ExecutorName", ExecutorName);
 	ChainLink.Insert("IsLazyStep"  , False);
+	ChainLink.Insert("LazyStepName", "");
 	Return ChainLink; 
 EndFunction
 
@@ -108,7 +109,7 @@ Procedure ExecuteChain(Parameters, Chain, ExecuteLazySteps)
 				EndIf;
 				
 				If Not ExecuteLazySteps And Chain[Name].IsLazyStep Then
-					StepName = "Step" + Name;
+					StepName = Chain[Name].LazyStepName;
 					If Parameters.ModelEnvironment.ArrayOfLazySteps.Find(StepName) = Undefined Then
 						Parameters.ModelEnvironment.ArrayOfLazySteps.Add(StepName);
 					EndIf;
@@ -128,7 +129,9 @@ Procedure ExecuteChain(Parameters, Chain, ExecuteLazySteps)
 				AddToAlreadyExecutedSteps(Parameters, Options, Name);
 			EndDo;
 			// set result to property
-			Execute StrTemplate("%1.%2(Parameters, Results);", Parameters.ControllerModuleName, Chain[Name].Setter);
+			If Not Chain[Name].IsLazyStep Or (Chain[Name].IsLazyStep And ExecuteLazySteps) Then
+				Execute StrTemplate("%1.%2(Parameters, Results);", Parameters.ControllerModuleName, Chain[Name].Setter);
+			EndIf;
 		EndIf;
 	EndDo;
 EndProcedure
@@ -1838,7 +1841,7 @@ EndProcedure
 
 Function MaterialsCalculationsOptions() Export
 	Return GetChainLinkOptions("Materials, BillOfMaterials, MaterialsColumns,
-		|ItemKey, Unit, Quantity");
+		|ItemKey, Unit, Quantity, KeyOwner");
 EndFunction
 
 Function MaterialsCalculationsExecute(Options) Export
@@ -1852,9 +1855,10 @@ Function MaterialsCalculationsExecute(Options) Export
 	CalculationParameters.Insert("ItemKey"          , Options.ItemKey);
 	CalculationParameters.Insert("Unit"             , Options.Unit);
 	CalculationParameters.Insert("Quantity"         , Options.Quantity);
+	CalculationParameters.Insert("KeyOwner"         , Options.KeyOwner);
 	
 	ManufacturingServer.FillMaterialsTable(CalculationParameters);
-	
+		
 	Return Result;
 EndFunction
 

@@ -249,7 +249,6 @@ EndFunction
 
 Procedure FillMaterialsTable(Parameters) Export
 	
-	//For Each Row In Object.Materials Do
 	For Each Row In Parameters.Materials Do
 		Row.ItemBOM     = Undefined;
 		Row.ItemKeyBOM  = Undefined;
@@ -258,9 +257,15 @@ Procedure FillMaterialsTable(Parameters) Export
 	EndDo;
 
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT
-	|	BillOfMaterialsContent.ItemKey.Item AS ItemBOM,
+	|	BillOfMaterialsContent.Ref AS BillOfMaterials,
+	|	BillOfMaterialsContent.Ref.BusinessUnit.MaterialStore AS Store,
+	|	VALUE(Enum.MaterialsCostWriteOff.IncludeToWorkCost) AS CostWriteOff,
+	|	VALUE(Enum.ProcurementMethods.Stock) AS ProcurementMethod,
+	|	BillOfMaterialsContent.Ref.BusinessUnit AS ProfitLossCenter,
+	|	BillOfMaterialsContent.ExpenseType AS ExpenseType,
+	|	BillOfMaterialsContent.Item AS ItemBOM,
 	|	BillOfMaterialsContent.ItemKey AS ItemKeyBOM,
 	|	BillOfMaterialsContent.Unit AS UnitBOM,
 	|	BillOfMaterialsContent.Quantity AS QuantityBOM
@@ -268,6 +273,7 @@ Procedure FillMaterialsTable(Parameters) Export
 	|	Catalog.BillOfMaterials.Content AS BillOfMaterialsContent
 	|WHERE
 	|	BillOfMaterialsContent.Ref = &Ref";
+			
 	Query.SetParameter("Ref", Parameters.BillOfMaterials);
 	QueryResult = Query.Execute();
 	
@@ -286,7 +292,6 @@ Procedure FillMaterialsTable(Parameters) Export
 		If RowsMaterials.Count() Then
 			RowMaterials = RowsMaterials[0];
 			FillPropertyValues(RowMaterials, Row);
-			//RowMaterials.Key      = String(New UUID());
 			RowMaterials.UniqueID = RowUniqueID;
 		Else
 			RowMaterials = New Structure(Parameters.MaterialsColumns);
@@ -306,6 +311,14 @@ Procedure FillMaterialsTable(Parameters) Export
 	For Each Row In Parameters.Materials Do
 		If Not ValueIsFilled(Row.ItemKeyBOM) Then
 			Row.UniqueID = "";
+		EndIf;
+		
+		If Row.Property("KeyOwner") Then
+			Row.KeyOwner = Parameters.KeyOwner;
+		EndIf;
+		
+		If Row.Property("IsVisible") Then
+			Row.IsVisible = True;
 		EndIf;
 	EndDo;
 EndProcedure
@@ -347,6 +360,26 @@ Procedure CalculateMaterialsQuantity(Parameters) Export
 				ItemOfRow.Quantity = ItemOfRow.QuantityBOM;
 			EndIf;
 		EndDo; 	
+	EndDo;
+	
+	For Each Row In Parameters.Materials Do
+		If Row.Property("QuantityInBaseUnit") Then
+			If Not ValueIsFilled(Row.ItemKey) Then
+				Row.QuantityInBaseUnit = 0;
+			Else
+				UnitFactor = GetItemInfo.GetUnitFactor(Row.ItemKey, Row.Unit);
+				Row.QuantityInBaseUnit = Row.Quantity * UnitFactor;
+			EndIf;
+		EndIf;
+		
+		If Row.Property("QuantityInBaseUnitBOM") Then
+			If Not ValueIsFilled(Row.ItemKeyBOM) Then
+				Row.QuantityInBaseUnitBOM = 0;
+			Else
+				UnitFactor = GetItemInfo.GetUnitFactor(Row.ItemKeyBOM, Row.UnitBOM);
+				Row.QuantityInBaseUnitBOM = Row.QuantityBOM * UnitFactor;
+			EndIf;
+		EndIf;
 	EndDo;
 EndProcedure
 

@@ -1184,37 +1184,6 @@ Procedure MaterialsOnCopyRowFormNotify(Parameters) Export
 	Parameters.Form.Modified = True;
 EndProcedure
 
-Procedure MaterialsLoad(Object, Form, Address, KeyOwner = Undefined, GroupColumns = "", SumColumns = "") Export
-	Parameters = GetLoadParameters(Object, Form, "Materials", Address, GroupColumns, SumColumns);
-	Parameters.LoadData.ExecuteAllViewNotify = True;
-	
-	If KeyOwner <> Undefined Then
-		ControllerClientServer_V2.DeleteRowsFromTableByKeyOwner(Parameters, "Materials", KeyOwner);
-	EndIf;
-	
-	NewRows = New Array();
-	For i = 1 To Parameters.LoadData.CountRows Do
-		NewRow = Object.Materials.Add();
-		NewRow.Key = String(New UUID());
-		
-		If KeyOwner <> Undefined Then
-			NewRow.KeyOwner = KeyOwner;
-		EndIf;
-		
-		NewRows.Add(NewRow);
-	EndDo;
-	
-	WrappedRows = ControllerClientServer_V2.WrapRows(Parameters, NewRows);
-	If Parameters.Property("Rows") Then
-		For Each Row In WrappedRows Do
-			Parameters.Rows.Add(Row);
-		EndDo;
-	Else
-		Parameters.Insert("Rows", WrappedRows);
-	EndIf;
-	ControllerClientServer_V2.MaterialsLoad(Parameters);
-EndProcedure
-
 Procedure MaterialsAfterDeleteRow(Object, Form) Export
 	DeleteRows(Object, Form, "Materials");
 EndProcedure
@@ -1569,6 +1538,16 @@ Procedure ItemListBillOfMaterialsOnChange(Object, Form, CurrentData = Undefined)
 	ControllerClientServer_V2.ItemListBillOfMaterialsOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetItemListBillOfMaterialsNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkSheet" Then
+		VisibleRows = Parameters.Object.Materials.FindRows(New Structure("IsVisible", True));
+		If VisibleRows.Count() Then
+			Parameters.Form.Items.Materials.CurrentRow = VisibleRows[0].GetID();
+		EndIf;
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 #Region ITEM_LIST_UNIT
@@ -1827,6 +1806,14 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn" Then
 		DocumentsClient.UpdateQuantityByTradeDocuments(Parameters.Object, "GoodsReceipts");
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkSheet" Then
+		VisibleRows = Parameters.Object.Materials.FindRows(New Structure("IsVisible", True));
+		If VisibleRows.Count() Then
+			Parameters.Form.Items.Materials.CurrentRow = VisibleRows[0].GetID();
+		EndIf;
 	EndIf;
 EndProcedure
 

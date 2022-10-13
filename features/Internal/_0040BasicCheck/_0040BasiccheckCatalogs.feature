@@ -1127,3 +1127,17 @@ Scenario: Open choise form "ChequeBonds"
 	If the warning is displayed then
 		Then I raise "Failed to open catalog choise form IChequeBonds" exception
 	And I close current window
+
+	Scenario: Open list form "ManufacturingStages" 
+
+	Given I open "ManufacturingStages" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form MF_ManufacturingStages" exception
+	And I close current window
+
+Scenario: Open object form "ManufacturingStages"
+
+	Given I open "ManufacturingStages" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form ManufacturingStages" exception
+	And I close current window

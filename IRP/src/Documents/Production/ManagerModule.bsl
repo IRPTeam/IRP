@@ -15,6 +15,8 @@ EndFunction
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = Parameters.DocumentDataTables;	
 	
+	IncomingStocksServer.ClosureIncomingStocks(Parameters);
+	
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref, True);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
@@ -45,6 +47,7 @@ EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	QueryArray = GetQueryTextsMasterTables();
+	IncomingStocksServer.ClosureIncomingStocks_Unposting(Parameters);
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -137,8 +140,10 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(Materials());
 	QueryArray.Add(Header());
+	QueryArray.Add(IncomingStocksReal());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
+	QueryArray.Add(R4035B_IncomingStocks_Exists());
 	Return QueryArray;
 EndFunction
 
@@ -146,6 +151,9 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4035B_IncomingStocks());
+	QueryArray.Add(R4036B_IncomingStocksRequested());
+	QueryArray.Add(R4012B_StockReservation());
 	QueryArray.Add(R7030T_ProductionPlanning());
 	QueryArray.Add(R7020T_MaterialPlanning());
 	QueryArray.Add(R7010T_DetailingSupplies());
@@ -206,6 +214,27 @@ Function Header()
 	|	Document.Production AS Production
 	|WHERE
 	|	Production.Ref = &Ref";	
+EndFunction
+
+Function IncomingStocksReal()
+	Return 
+	"SELECT
+	|	Header.MainProductionFinishedDate AS Period,
+	|	Header.StoreProduction AS Store,
+	|	Header.ItemKey AS ItemKey,
+	|	Header.ProductionPlanning AS Order,
+	|	SUM(Header.Quantity) AS Quantity
+	|INTO IncomingStocksReal
+	|FROM
+	|	Header AS Header
+	|WHERE
+	|	NOT Header.IsService
+	|	AND Header.MainProductionIsFinished
+	|GROUP BY
+	|	Header.ItemKey,
+	|	Header.MainProductionFinishedDate,
+	|	Header.ProductionPlanning,
+	|	Header.StoreProduction";
 EndFunction
 
 Function R7030T_ProductionPlanning()
@@ -426,6 +455,56 @@ Function R4011B_FreeStocks()
 	|	tmpDetailingSupplies AS tmpDetailingSupplies
 	|WHERE
 	|	tmpDetailingSupplies.Quantity <> 0";
+EndFunction
+
+Function R4035B_IncomingStocks()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	*
+		|INTO R4035B_IncomingStocks
+		|FROM
+		|	IncomingStocks AS IncomingStocks
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R4035B_IncomingStocks_Exists()
+	Return
+		"SELECT *
+		|	INTO R4035B_IncomingStocks_Exists
+		|FROM
+		|	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
+		|WHERE
+		|	R4035B_IncomingStocks.Recorder = &Ref";
+EndFunction
+
+Function R4036B_IncomingStocksRequested()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	*
+		|INTO R4036B_IncomingStocksRequested
+		|FROM
+		|	IncomingStocksRequested AS IncomingStocksRequested
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R4012B_StockReservation()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	IncomingStocksRequested.Period,
+		|	IncomingStocksRequested.IncomingStore AS Store,
+		|	IncomingStocksRequested.ItemKey,
+		|	IncomingStocksRequested.Order AS Order,
+		|	IncomingStocksRequested.Quantity
+		|INTO R4012B_StockReservation
+		|FROM
+		|	IncomingStocksRequested
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R7040T_ManualMaterialsCorretionInProduction()

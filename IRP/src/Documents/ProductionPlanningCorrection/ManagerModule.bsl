@@ -422,7 +422,16 @@ EndProcedure
 #Region CheckAfterWrite
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
-	Return;
+	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
+	AccReg = AccumulationRegisters;
+		
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.ProductionPlanning.Productions");
+	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
+	                                                                PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters),
+	                                                                PostingServer.GetQueryTableByName("R4035B_IncomingStocks_Exists", Parameters),
+	                                                                AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -443,17 +452,41 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
+	QueryArray.Add(R4035B_IncomingStocks_Exists());
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(R4035B_IncomingStocks());
 	QueryArray.Add(T7010S_BillOfMaterials());
 	QueryArray.Add(R7030T_ProductionPlanning());
 	QueryArray.Add(R7020T_MaterialPlanning());
 	QueryArray.Add(R7010T_DetailingSupplies());
 	Return QueryArray;	
 EndFunction	
+
+Function R4035B_IncomingStocks()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R4035B_IncomingStocks
+		|FROM
+		|	IncomingStocks AS IncomingStocks
+		|WHERE
+		|	IncomingStocks.ItemKey.UseIncomingStockReservation";
+EndFunction
+
+Function R4035B_IncomingStocks_Exists()
+	Return
+		"SELECT *
+		|	INTO R4035B_IncomingStocks_Exists
+		|FROM
+		|	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
+		|WHERE
+		|	R4035B_IncomingStocks.Recorder = &Ref";
+EndFunction
 
 Function T7010S_BillOfMaterials()
 	Return

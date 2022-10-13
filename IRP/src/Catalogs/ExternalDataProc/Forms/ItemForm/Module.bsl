@@ -51,7 +51,6 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	EndIf;
 EndProcedure
 
-
 &AtClient
 Procedure ExportExtDataProc(Command)
 	FileDialog = New FileDialog(FileDialogMode.ChooseDirectory);

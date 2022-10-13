@@ -51,7 +51,6 @@ Procedure OnReadAtServer(CurrentObject)
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
-
 &AtClient
 Procedure OnOpen(Cancel)
 	ThisIsNew = Parameters.Key.IsEmpty();

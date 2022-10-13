@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:Table">
-    <name>JournalEntrys</name>
+    <name>JournalEntries</name>
     <id>5</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -9,14 +9,14 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>JournalEntrys</segments>
+      <segments>JournalEntries</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
     <items xsi:type="form:FormGroup">
-      <name>JournalEntrysGroupIcon</name>
+      <name>JournalEntriesGroupIcon</name>
       <id>27</id>
       <items xsi:type="form:FormField">
-        <name>JournalEntrysIcon</name>
+        <name>JournalEntriesIcon</name>
         <id>18</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -24,11 +24,11 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>JournalEntrys.Icon</segments>
+          <segments>JournalEntries.Icon</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
-          <name>JournalEntrysIconExtendedTooltip</name>
+          <name>JournalEntriesIconExtendedTooltip</name>
           <id>20</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -43,7 +43,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>JournalEntrysIconContextMenu</name>
+          <name>JournalEntriesIconContextMenu</name>
           <id>19</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -69,7 +69,7 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>JournalEntrysLedgerType</name>
+        <name>JournalEntriesLedgerType</name>
         <id>24</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -77,10 +77,10 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>JournalEntrys.LedgerType</segments>
+          <segments>JournalEntries.LedgerType</segments>
         </dataPath>
         <extendedTooltip>
-          <name>JournalEntrysLedgerTypeExtendedTooltip</name>
+          <name>JournalEntriesLedgerTypeExtendedTooltip</name>
           <id>26</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -95,7 +95,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>JournalEntrysLedgerTypeContextMenu</name>
+          <name>JournalEntriesLedgerTypeContextMenu</name>
           <id>25</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -128,7 +128,7 @@
         <value>Journal entrys group icon</value>
       </title>
       <extendedTooltip>
-        <name>JournalEntrysGroupIconExtendedTooltip</name>
+        <name>JournalEntriesGroupIconExtendedTooltip</name>
         <id>28</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -149,7 +149,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>JournalEntrysJournalEntry</name>
+      <name>JournalEntriesJournalEntry</name>
       <id>21</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -157,10 +157,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>JournalEntrys.JournalEntry</segments>
+        <segments>JournalEntries.JournalEntry</segments>
       </dataPath>
       <extendedTooltip>
-        <name>JournalEntrysJournalEntryExtendedTooltip</name>
+        <name>JournalEntriesJournalEntryExtendedTooltip</name>
         <id>23</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -175,7 +175,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>JournalEntrysJournalEntryContextMenu</name>
+        <name>JournalEntriesJournalEntryContextMenu</name>
         <id>22</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -200,7 +200,7 @@
       </extInfo>
     </items>
     <autoCommandBar>
-      <name>JournalEntrysCommandBar</name>
+      <name>JournalEntriesCommandBar</name>
       <id>6</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -211,15 +211,15 @@
     </autoCommandBar>
     <handlers>
       <event>BeforeAddRow</event>
-      <name>JournalEntrysBeforeAddRow</name>
+      <name>JournalEntriesBeforeAddRow</name>
     </handlers>
     <handlers>
       <event>BeforeDeleteRow</event>
-      <name>JournalEntrysBeforeDeleteRow</name>
+      <name>JournalEntriesBeforeDeleteRow</name>
     </handlers>
     <handlers>
       <event>Selection</event>
-      <name>JournalEntrysSelection</name>
+      <name>JournalEntriesSelection</name>
     </handlers>
     <searchStringAddition>
       <visible>true</visible>
@@ -227,10 +227,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>JournalEntrysSearchString</name>
+      <name>JournalEntriesSearchString</name>
       <id>9</id>
       <extendedTooltip>
-        <name>JournalEntrysSearchStringExtendedTooltip</name>
+        <name>JournalEntriesSearchStringExtendedTooltip</name>
         <id>11</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -245,7 +245,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>JournalEntrysSearchStringContextMenu</name>
+        <name>JournalEntriesSearchStringContextMenu</name>
         <id>10</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -264,10 +264,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>JournalEntrysViewStatus</name>
+      <name>JournalEntriesViewStatus</name>
       <id>15</id>
       <extendedTooltip>
-        <name>JournalEntrysViewStatusExtendedTooltip</name>
+        <name>JournalEntriesViewStatusExtendedTooltip</name>
         <id>17</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -282,7 +282,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>JournalEntrysViewStatusContextMenu</name>
+        <name>JournalEntriesViewStatusContextMenu</name>
         <id>16</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -302,10 +302,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>JournalEntrysSearchControl</name>
+      <name>JournalEntriesSearchControl</name>
       <id>12</id>
       <extendedTooltip>
-        <name>JournalEntrysSearchControlExtendedTooltip</name>
+        <name>JournalEntriesSearchControlExtendedTooltip</name>
         <id>14</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -320,7 +320,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>JournalEntrysSearchControlContextMenu</name>
+        <name>JournalEntriesSearchControlContextMenu</name>
         <id>13</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -335,7 +335,7 @@
       </extInfo>
     </searchControlAddition>
     <extendedTooltip>
-      <name>JournalEntrysExtendedTooltip</name>
+      <name>JournalEntriesExtendedTooltip</name>
       <id>8</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -350,7 +350,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>JournalEntrysContextMenu</name>
+      <name>JournalEntriesContextMenu</name>
       <id>7</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -462,7 +462,7 @@
   <showTitle>true</showTitle>
   <showCloseButton>true</showCloseButton>
   <attributes>
-    <name>JournalEntrys</name>
+    <name>JournalEntries</name>
     <title>
       <key>en</key>
       <value>Journal entrys</value>
@@ -564,7 +564,7 @@
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <parameters>
-    <name>ArrayOfJournalEntrys</name>
+    <name>ArrayOfJournalEntries</name>
     <valueType/>
   </parameters>
   <commandInterface>

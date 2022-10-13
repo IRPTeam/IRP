@@ -83,7 +83,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		Cancel = True;
 	EndIf;
 	
-	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(ThisObject.Branch) 
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(ThisObject.Branch) 
 		And Not ValueIsFilled(ThisObject.ConsolidatedRetailSales) Then
 		Cancel = True;
 		FieldName = ThisObject.Metadata().Attributes.ConsolidatedRetailSales.Synonym;

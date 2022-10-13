@@ -32,10 +32,8 @@ EndProcedure
 
 &AtClient
 Procedure ResultSelection(Item, Area, StandardProcessing)
-//	If Area.Top <= HeadersRows Then
-		StandardProcessing = False;
-		Area.Protection = True;
-//	EndIf;
+	StandardProcessing = False;
+	Area.Protection = True;
 EndProcedure
 
 &AtClient

@@ -36,7 +36,7 @@ Procedure Create_BatchKeys(CalculationSettings) Export
 	|	case
 	|		when &FilterByCompany
 	|			then T6020S_BatchKeysInfo.Company = &Company
-	|		else true
+	|		else True
 	|	end
 	|	AND T6020S_BatchKeysInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
 	|GROUP BY

@@ -104,7 +104,6 @@ Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing,
 	DocumentsClient.OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpeningSettings);
 EndProcedure
 
-
 Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters) Export
 	Filters = New Array();
 	Filters.Add(DocumentsClient.CreateFilterItem("DeletionMark" , True            , ComparisonType.NotEqual));

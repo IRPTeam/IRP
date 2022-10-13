@@ -30,7 +30,6 @@ Function GetDSCTemplate(Val MetadataName, Rule) Export
 	Return Template
 EndFunction
 
-
 // Fill attribute list.
 // 
 // Parameters:

@@ -72,7 +72,6 @@ Procedure ManualInputBarcode(Barcode)
 	SearchByBarcode(Undefined, Barcode);
 EndProcedure
 
-
 &AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	Info = "";

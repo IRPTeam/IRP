@@ -336,19 +336,6 @@ Function R4011B_FreeStocks()
 	|	NOT Materials.IsService
 	|	AND NOT Materials.ItemKey.Ref IS NULL
 	|
-	|UNION ALL
-	|
-	|SELECT
-	|	Materials.MainProductionFinishedDate AS Period,
-	|	Materials.Store,
-	|	Materials.ItemKey,
-	|	Materials.Quantity
-	|FROM
-	|	Materials AS Materials
-	|WHERE
-	|	NOT Materials.IsService
-	|	AND Materials.MainProductionIsFinished
-	|	AND NOT Materials.ItemKey.Ref IS NULL
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////

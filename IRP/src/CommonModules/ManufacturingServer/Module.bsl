@@ -249,7 +249,6 @@ EndFunction
 
 Procedure FillMaterialsTable(Parameters) Export
 	
-	//For Each Row In Object.Materials Do
 	For Each Row In Parameters.Materials Do
 		Row.ItemBOM     = Undefined;
 		Row.ItemKeyBOM  = Undefined;
@@ -258,9 +257,15 @@ Procedure FillMaterialsTable(Parameters) Export
 	EndDo;
 
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT
-	|	BillOfMaterialsContent.ItemKey.Item AS ItemBOM,
+	|	BillOfMaterialsContent.Ref AS BillOfMaterials,
+	|	BillOfMaterialsContent.Ref.BusinessUnit.MaterialStore AS Store,
+	|	VALUE(Enum.MaterialsCostWriteOff.IncludeToWorkCost) AS CostWriteOff,
+	|	VALUE(Enum.ProcurementMethods.Stock) AS ProcurementMethod,
+	|	BillOfMaterialsContent.Ref.BusinessUnit AS ProfitLossCenter,
+	|	BillOfMaterialsContent.ExpenseType AS ExpenseType,
+	|	BillOfMaterialsContent.Item AS ItemBOM,
 	|	BillOfMaterialsContent.ItemKey AS ItemKeyBOM,
 	|	BillOfMaterialsContent.Unit AS UnitBOM,
 	|	BillOfMaterialsContent.Quantity AS QuantityBOM
@@ -268,6 +273,7 @@ Procedure FillMaterialsTable(Parameters) Export
 	|	Catalog.BillOfMaterials.Content AS BillOfMaterialsContent
 	|WHERE
 	|	BillOfMaterialsContent.Ref = &Ref";
+			
 	Query.SetParameter("Ref", Parameters.BillOfMaterials);
 	QueryResult = Query.Execute();
 	
@@ -286,7 +292,6 @@ Procedure FillMaterialsTable(Parameters) Export
 		If RowsMaterials.Count() Then
 			RowMaterials = RowsMaterials[0];
 			FillPropertyValues(RowMaterials, Row);
-			//RowMaterials.Key      = String(New UUID());
 			RowMaterials.UniqueID = RowUniqueID;
 		Else
 			RowMaterials = New Structure(Parameters.MaterialsColumns);
@@ -306,6 +311,14 @@ Procedure FillMaterialsTable(Parameters) Export
 	For Each Row In Parameters.Materials Do
 		If Not ValueIsFilled(Row.ItemKeyBOM) Then
 			Row.UniqueID = "";
+		EndIf;
+		
+		If Row.Property("KeyOwner") Then
+			Row.KeyOwner = Parameters.KeyOwner;
+		EndIf;
+		
+		If Row.Property("IsVisible") Then
+			Row.IsVisible = True;
 		EndIf;
 	EndDo;
 EndProcedure
@@ -348,7 +361,92 @@ Procedure CalculateMaterialsQuantity(Parameters) Export
 			EndIf;
 		EndDo; 	
 	EndDo;
+	
+	For Each Row In Parameters.Materials Do
+		If Row.Property("QuantityInBaseUnit") Then
+			If Not ValueIsFilled(Row.ItemKey) Then
+				Row.QuantityInBaseUnit = 0;
+			Else
+				UnitFactor = GetItemInfo.GetUnitFactor(Row.ItemKey, Row.Unit);
+				Row.QuantityInBaseUnit = Row.Quantity * UnitFactor;
+			EndIf;
+		EndIf;
+		
+		If Row.Property("QuantityInBaseUnitBOM") Then
+			If Not ValueIsFilled(Row.ItemKeyBOM) Then
+				Row.QuantityInBaseUnitBOM = 0;
+			Else
+				UnitFactor = GetItemInfo.GetUnitFactor(Row.ItemKeyBOM, Row.UnitBOM);
+				Row.QuantityInBaseUnitBOM = Row.QuantityBOM * UnitFactor;
+			EndIf;
+		EndIf;
+	EndDo;
 EndProcedure
+
+Function GetProductionFillingData(Parameters) Export
+	FillingData = New Structure();
+	FillingData.Insert("BasedOn"            , "ProductionPlanning");
+	FillingData.Insert("ProductionPlanning" , Parameters.ProductionPlanning);
+	FillingData.Insert("Company"            , Parameters.Company);
+	FillingData.Insert("BusinessUnit"       , Parameters.BusinessUnit);
+	FillingData.Insert("StoreProduction"    , Parameters.StoreProduction);
+	FillingData.Insert("Item"               , Parameters.ItemKey.Item);
+	FillingData.Insert("ItemKey"            , Parameters.ItemKey);
+	FillingData.Insert("Unit"               , Parameters.Unit);
+	FillingData.Insert("Quantity"           , Parameters.Quantity);
+	FillingData.Insert("BillOfMaterials"    , Parameters.BillOfMaterials);
+	FillingData.Insert("PlanningPeriod"     , Parameters.PlanningPeriod);
+	FillingData.Insert("ProductionType"     , Parameters.ProductionType);
+		
+	FillingData.Insert("Materials" , GetMaterials(Parameters));
+			
+	Return FillingData;	
+EndFunction	
+
+Function GetMaterials(Parameters)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	T7010S_BillOfMaterials.ItemKey.Item AS Item,
+	|	T7010S_BillOfMaterials.ItemKey,
+	|	T7010S_BillOfMaterials.BasisUnit AS Unit,
+	|	T7010S_BillOfMaterials.WriteoffStore,
+	|	CASE
+	|		WHEN T7010S_BillOfMaterials.IsSemiproduct
+	|			THEN VALUE(Enum.MaterialTypes.Semiproduct)
+	|		WHEN T7010S_BillOfMaterials.IsService
+	|			THEN VALUE(Enum.MaterialTypes.Service)
+	|		ELSE VALUE(Enum.MaterialTypes.Material)
+	|	END AS MaterialType,
+	|	CASE
+	|		WHEN &TotalQuantity = 0
+	|			THEN 0
+	|		ELSE T7010S_BillOfMaterials.BasisQuantity / &TotalQuantity * &Quantity
+	|	END AS Quantity
+	|FROM
+	|	InformationRegister.T7010S_BillOfMaterials.SliceLast(, Company = &Company
+	|	AND InputID = &OutputID
+	|	AND UniqueID = &UniqueID
+	|	AND PlanningPeriod = &PlanningPeriod) AS T7010S_BillOfMaterials";
+	
+	Query.SetParameter("Company"        , Parameters.Company);
+	Query.SetParameter("OutputID"       , Parameters.OutputID);
+	Query.SetParameter("UniqueID"       , Parameters.UniqueID);
+	Query.SetParameter("PlanningPeriod" , Parameters.PlanningPeriod);
+	Query.SetParameter("TotalQuantity"  , Parameters.TotalQuantity);
+	Query.SetParameter("Quantity"       , Parameters.Quantity);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	ArrayOfMaterials = New Array();
+	While QuerySelection.Next() Do
+		NewRow = New Structure("Item, ItemKey, Unit, Quantity, Procurement, MaterialType, WriteoffStore");
+		FillPropertyValues(NewRow, QuerySelection);
+		ArrayOfMaterials.Add(NewRow);
+	EndDo;
+	Return ArrayOfMaterials;
+EndFunction
 
 Function GetBasisQuantity(ItemKey, Unit, Quantity)
 	If  Not ValueIsFilled(ItemKey)
@@ -482,7 +580,7 @@ Procedure StoresFromRegBillOfMaterials(TableBillOfMaterials, TableForStores)
 			If ValueIsFilled(Stores.ReleaseStore) Then
 				Row.ReleaseStore = Stores.ReleaseStore;
 			Else
-				Row.ReleaseStore = Stores.BusinessUnit.MF_ReleaseStore;
+				Row.ReleaseStore = Stores.BusinessUnit.ReleaseStore;
 			EndIf;
 		EndIf;
 		
@@ -490,7 +588,7 @@ Procedure StoresFromRegBillOfMaterials(TableBillOfMaterials, TableForStores)
 			If ValueIsFilled(Stores.SemiproductStore) Then
 				Row.SemiproductStore = Stores.SemiproductStore;
 			Else
-				Row.SemiproductStore = Stores.BusinessUnit.MF_SemiproductStore;
+				Row.SemiproductStore = Stores.BusinessUnit.SemiproductStore;
 			EndIf;
 		EndIf;
 		
@@ -498,7 +596,7 @@ Procedure StoresFromRegBillOfMaterials(TableBillOfMaterials, TableForStores)
 			If ValueIsFilled(Stores.MaterialStore) Then
 				Row.MaterialStore = Stores.MaterialStore;
 			Else
-				Row.MaterialStore = Stores.BusinessUnit.MF_MaterialStore;
+				Row.MaterialStore = Stores.BusinessUnit.MaterialStore;
 			EndIf;			
 		EndIf;
 	EndDo;

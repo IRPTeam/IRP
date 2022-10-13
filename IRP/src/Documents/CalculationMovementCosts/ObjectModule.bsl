@@ -14,7 +14,7 @@ Procedure Posting(Cancel, PostingMode)
 	CalculationSettings.EndPeriod = ThisObject.EndDate;
 	CalculationSettings.RaiseOnCalculationError = ThisObject.RaiseOnCalculationError;
 	
-	LandedCostServer.Posting_BatchWiceBalance(CalculationSettings);
+	LandedCostServer.Posting_BatchWiseBalance(CalculationSettings);
 	For Each Records In ThisObject.RegisterRecords Do
 		Records.Read();
 	EndDo;

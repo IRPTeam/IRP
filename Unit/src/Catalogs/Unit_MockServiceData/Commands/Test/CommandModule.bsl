@@ -1,6 +1,5 @@
 // @strict-types
 
-
 #Region EventHandlers
 
 &AtClient

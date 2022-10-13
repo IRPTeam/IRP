@@ -188,7 +188,6 @@ Procedure SetReadOnlyPaymentTermsCanBePaid(Object, Form) Export
 	EndDo;
 EndProcedure
 
-
 Function FindRowInArrayOfStructures(ArrayOfStructures, KeyNames, 
                                     Value1 = Undefined, 
                                     Value2 = Undefined, 

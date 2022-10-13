@@ -1353,6 +1353,148 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>BusinessUnit</name>
+      <title>
+        <key>en</key>
+        <value>Business unit</value>
+      </title>
+      <id>10</id>
+      <valueType>
+        <types>CatalogRef.BusinessUnits</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Company</name>
+      <title>
+        <key>en</key>
+        <value>Company</value>
+      </title>
+      <id>11</id>
+      <valueType>
+        <types>CatalogRef.Companies</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>ProductionType</name>
+      <title>
+        <key>en</key>
+        <value>Production type</value>
+      </title>
+      <id>12</id>
+      <valueType>
+        <types>EnumRef.ProductionTypes</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>StoreProduction</name>
+      <title>
+        <key>en</key>
+        <value>Store production</value>
+      </title>
+      <id>13</id>
+      <valueType>
+        <types>CatalogRef.Stores</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>BillOfMaterials</name>
+      <title>
+        <key>en</key>
+        <value>Bill of materials</value>
+      </title>
+      <id>14</id>
+      <valueType>
+        <types>CatalogRef.BillOfMaterials</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>OutputID</name>
+      <title>
+        <key>en</key>
+        <value>Output ID</value>
+      </title>
+      <id>16</id>
+      <valueType>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>UniqueID</name>
+      <title>
+        <key>en</key>
+        <value>Unique ID</value>
+      </title>
+      <id>17</id>
+      <valueType>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>TotalQuantity</name>
+      <title>
+        <key>en</key>
+        <value>Total quantity</value>
+      </title>
+      <id>18</id>
+      <valueType>
+        <types>DefinedType.typeQuantity</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>DocProduction</name>
@@ -1362,7 +1504,7 @@
     </title>
     <id>7</id>
     <valueType>
-      <types>DocumentRef.ProductionPlanning</types>
+      <types>DocumentRef.Production</types>
     </valueType>
     <view>
       <common>true</common>

@@ -706,8 +706,8 @@
           <name>GroupPlanningPeriods</name>
           <id>104</id>
           <items xsi:type="form:FormField">
-            <name>PlanningPeriodStartDate</name>
-            <id>106</id>
+            <name>PlanningPeriodBeginDate</name>
+            <id>226</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -717,8 +717,8 @@
               <segments>Object.PlanningPeriod.BeginDate</segments>
             </dataPath>
             <extendedTooltip>
-              <name>PlanningPeriodStartDateExtendedTooltip</name>
-              <id>108</id>
+              <name>PlanningPeriodBeginDateExtendedTooltip</name>
+              <id>228</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -732,8 +732,8 @@
               </extInfo>
             </extendedTooltip>
             <contextMenu>
-              <name>PlanningPeriodStartDateContextMenu</name>
-              <id>107</id>
+              <name>PlanningPeriodBeginDateContextMenu</name>
+              <id>227</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -757,7 +757,7 @@
           </items>
           <items xsi:type="form:FormField">
             <name>PlanningPeriodEndDate</name>
-            <id>109</id>
+            <id>223</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -768,7 +768,7 @@
             </dataPath>
             <extendedTooltip>
               <name>PlanningPeriodEndDateExtendedTooltip</name>
-              <id>111</id>
+              <id>225</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -783,7 +783,7 @@
             </extendedTooltip>
             <contextMenu>
               <name>PlanningPeriodEndDateContextMenu</name>
-              <id>110</id>
+              <id>224</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>

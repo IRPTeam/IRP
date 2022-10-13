@@ -96,7 +96,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_RRR(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
-		ItemListTable = ThisObject.ItemList.Unload(,"Key, LineNumber, ItemKey, Store");
+		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, ItemKey, Store");
 		RowIDInfoPrivileged.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
 	
@@ -107,7 +107,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 	EndDo;
 	
-	If DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(ThisObject.Branch) Then
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(ThisObject.Branch) Then
 		SalesDocumentDates = New ValueTable();
 		SalesDocumentDates.Columns.Add("SalesDate");
 		
@@ -115,7 +115,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			If ValueIsFilled(Row.RetailSalesReceipt) Then
 				SalesDocumentDates.Add().SalesDate = Row.RetailSalesReceipt.Date;
 			Else
-				SalesDocumentDates.Add().SalesDate = Date(1,1,1);
+				SalesDocumentDates.Add().SalesDate = Date(1, 1, 1);
 			EndIf;
 		EndDo;
 		SalesDocumentDates.GroupBy("SalesDate");
@@ -125,7 +125,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;	
 		
 		SalesReturnData = DocumentsClientServer.GetSalesReturnData(ThisObject);
-		If Not Cancel And DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(ThisObject.Branch, SalesReturnData) Then
+		If Not Cancel And DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(ThisObject.Branch, SalesReturnData) Then
 		
 			If Not ValueIsFilled(ThisObject.ConsolidatedRetailSales) And Not Cancel Then
 				Cancel = True;

@@ -5,7 +5,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	EndIf;
 
 	StandardProcessing = False;
-	CommonFormActionsServer.CutLastSymblosIfCameFromExcel(Parameters);
+	CommonFormActionsServer.CutLastSymbolsIfCameFromExcel(Parameters);
 	QueryTable = GetChoiceDataTable(Parameters);
 	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);	
 EndProcedure
@@ -23,7 +23,6 @@ Function GetChoiceDataTable(Parameters) Export
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
 	QueryBuilder = New QueryBuilder(QueryBuilderText);
 	QueryBuilder.FillSettings();
-	//CommonFormActionsServer.SetCustomSearchFilter(QueryBuilder, Parameters);
 	
 	Query = QueryBuilder.GetQuery();
 

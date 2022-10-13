@@ -11,6 +11,24 @@ EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
+	Query = New Query();
+	Query.Text = 
+	"SELECT TOP 1
+	|	T7010S_BillOfMaterials.Recorder AS Ref
+	|FROM
+	|	InformationRegister.T7010S_BillOfMaterials AS T7010S_BillOfMaterials
+	|WHERE
+	|	T7010S_BillOfMaterials.BillOfMaterials = &BillOfMaterials
+	|
+	|ORDER BY
+	|	T7010S_BillOfMaterials.Period";
+	Query.SetParameter("BillOfMaterials" , Object.Ref);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		ThisObject.ProductionPlanningExists = QuerySelection.Ref;
+	EndIf;
+	
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -44,6 +62,10 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.BusinessUnitSemiproductStore.Visible = IsProduct;
 	Form.Items.ContentBillOfMaterials.Visible = IsProduct;
 	Form.Items.ContentExpenseType.Visible = IsWork;
+	
+	IsFilled_ProductionPlanningExists = ValueIsFilled(Form.ProductionPlanningExists);	
+	Form.ReadOnly = IsFilled_ProductionPlanningExists;	
+	Form.Items.ProductionPlanningExists.Visible =  IsFilled_ProductionPlanningExists;
 	
 	// Button set as default
 	If IsDefaultBillOfMaterials(Object.Ref, Object.ItemKey) Then

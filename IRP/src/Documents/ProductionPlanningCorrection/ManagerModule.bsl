@@ -13,6 +13,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	Parameters.Insert("StatusInfo", StatusInfo);
 	If Not StatusInfo.Posting Then
+		PutTablesToTempTablesManager(Parameters, Tables.BillOfMaterials, 
+                                                 Tables.DetailingSupplies,
+                                                 Tables.MaterialPlanning,
+                                                 Tables.ProductionPlanning);
+		
 		Return Tables;
 	EndIf;
 	
@@ -24,11 +29,25 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	DetailingSuppliesTable   = GetDetailingSupplies(MaterialPlanningTable);
 	BillOfMaterialsTable     = GetBillOfMaterials(Ref, GetQueryText_BillOfMaterialsContent());
 		
+	PutTablesToTempTablesManager(Parameters, BillOfMaterialsTable, 
+                                             DetailingSuppliesTable,
+                                             MaterialPlanningTable,
+                                             ProductionPlanningTable);
+		
+	QueryArray = GetQueryTextsSecondaryTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+	
+	Return Tables;
+EndFunction
+
+Procedure PutTablesToTempTablesManager(Parameters, BillOfMaterialsTable, 
+                                                   DetailingSuppliesTable,
+                                                   MaterialPlanningTable,
+                                                   ProductionPlanningTable)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.SetParameter("ProductionPlanningTable" , ProductionPlanningTable);
 	Query.SetParameter("DetailingSuppliesTable"  , DetailingSuppliesTable);
-	Query.SetParameter("ProductionPlanningTable" , ProductionPlanningTable);
 	Query.SetParameter("MaterialPlanningTable"   , MaterialPlanningTable);
 	Query.SetParameter("BillOfMaterialsTable"    , BillOfMaterialsTable);
 	
@@ -71,12 +90,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|FROM 
 	|	&BillOfMaterialsTable AS BillOfMaterialsTable";
 	Query.Execute();
-	
-	QueryArray = GetQueryTextsSecondaryTables();
-	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-	
-	Return Tables;
-EndFunction
+EndProcedure
+
 
 #Region CreatingTables
 

@@ -853,49 +853,12 @@ Scenario: _0154101 check filling in and refilling Sales order
 			And "List" table contains lines
 				| 'Number'                     | 'Σ'        |
 				| '$$NumberSalesOrder0154101$$'| '2 634,80' |
-		* Check manual price when quantity in base unit different from quantity
-			And I go to line in "List" table
-				| 'Number'                     |
-				| '$$NumberSalesOrder0154101$$'|
-			And I select current line in "List" table
-			And in the table "ItemList" I click "Add" button
-			And I activate "Item" field in "ItemList" table
-			And I click choice button of "Item" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'High shoes'  |
-			And I select current line in "List" table
-			And I activate "Item key" field in "ItemList" table
-			And I click choice button of "Item key" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Item'       | 'Item key' |
-				| 'High shoes' | '37/19SD'  |
-			And I select current line in "List" table
-			And I activate "Quantity" field in "ItemList" table
-			And I input "2,000" text in "Quantity" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-			And "ItemList" table contains lines
-				| 'Item key' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    | 'Price type'        | 'Item'       |
-				| '37/19SD'  | '2,000'    | 'pcs'  | '205,20'     | '540,00' | '18%' | '1 080,00'   | '1 285,20'     | 'Store 01' | 'Basic Price Types' | 'High shoes' |
-			And I go to line in "ItemList" table
-				| 'Item'       | 'Item key' |
-				| 'High shoes' | '37/19SD'  |	
-			And I select current line in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'            |
-				| 'High shoes box (8 pcs)' |
-			And I select current line in "List" table
-			And I finish line editing in "ItemList" table
-			And I activate "Price" field in "ItemList" table
-			And I select current line in "ItemList" table
-			And I input "500,00" text in "Price" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-			And "ItemList" table contains lines
-				| 'Item key' | 'Quantity' | 'Unit'                   | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    | 'Price type'              | 'Item'       |
-				| '37/19SD'  | '2,000'    | 'High shoes box (8 pcs)' | '190,00'     | '500,00' | '18%' | '1 000,00'   | '1 190,00'     | 'Store 01' | 'en description is empty' | 'High shoes' |
 			And I close all client application windows
 			
+
+											
+
+
 
 Scenario: _0154102 check filling in and refilling Sales invoice
 	And I close all client application windows
@@ -1204,45 +1167,7 @@ Scenario: _0154102 check filling in and refilling Sales invoice
 				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 770,00"
 				Then the form attribute named "ItemListTotalTaxAmount" became equal to "210,30"
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 980,30"
-		* Check manual price when quantity in base unit different from quantity
-			And in the table "ItemList" I click "Add" button
-			And I activate "Item" field in "ItemList" table
-			And I click choice button of "Item" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'High shoes'  |
-			And I select current line in "List" table
-			And I activate "Item key" field in "ItemList" table
-			And I click choice button of "Item key" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Item'       | 'Item key' |
-				| 'High shoes' | '37/19SD'  |
-			And I select current line in "List" table
-			And I activate "Quantity" field in "ItemList" table
-			And I input "2,000" text in "Quantity" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-			And "ItemList" table contains lines
-				| 'Item key' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    | 'Price type'        | 'Item'       |
-				| '37/19SD'  | '2,000'    | 'pcs'  | '205,20'     | '540,00' | '18%' | '1 080,00'   | '1 285,20'     | 'Store 01' | 'Basic Price Types' | 'High shoes' |
-			And I go to line in "ItemList" table
-				| 'Item'       | 'Item key' |
-				| 'High shoes' | '37/19SD'  |	
-			And I select current line in "ItemList" table
-			And I click choice button of "Unit" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description'            |
-				| 'High shoes box (8 pcs)' |
-			And I select current line in "List" table
-			And I finish line editing in "ItemList" table
-			And I activate "Price" field in "ItemList" table
-			And I select current line in "ItemList" table
-			And I input "500,00" text in "Price" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-			And "ItemList" table contains lines
-				| 'Item key' | 'Quantity' | 'Unit'                   | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    | 'Price type'              | 'Item'       |
-				| '37/19SD'  | '2,000'    | 'High shoes box (8 pcs)' | '190,00'     | '500,00' | '18%' | '1 000,00'   | '1 190,00'     | 'Store 01' | 'en description is empty' | 'High shoes' |
-			And I close all client application windows
-			
+				And I close all client application windows
 
 
 Scenario: _0154103 check Sales order when changing date

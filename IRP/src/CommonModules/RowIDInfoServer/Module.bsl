@@ -3194,10 +3194,6 @@ Function ExtractData_FromITO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Return Tables;
 EndFunction
 
-//Function ExtractData_FromIT_GetAdditionalQueryFields()
-//	Return "";
-//EndFunction
-
 Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text + 

@@ -835,7 +835,6 @@
   <enums>Enum.ConsolidatedRetailSalesStatuses</enums>
   <enums>Enum.JobStatus</enums>
   <enums>Enum.MaterialsCostWriteOff</enums>
-  <enums>Enum.BusinessUnitTypes</enums>
   <enums>Enum.BillOfMaterialsTypes</enums>
   <enums>Enum.ProductionPlanningTypes</enums>
   <enums>Enum.ProductionTypes</enums>

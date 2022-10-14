@@ -129,7 +129,29 @@ Scenario: _0156010 Store keeper workspace (create GR)
 			| 'Inventory transfer'                               | 'Item'  | 'Item key' | 'Store'    | 'Quantity' | 'Unit' | 'Receipt basis'                                    |
 			| 'Inventory transfer 202 dated 01.03.2021 10:05:10' | 'Dress' | 'S/Yellow' | 'Store 03' | '7,000'    | 'pcs'  | 'Inventory transfer 202 dated 01.03.2021 10:05:10' |
 		And I close all client application windows
-		
+
+Scenario: _0156011 check that button Create Goods receipt is enabled when quantity = 0
+	And I close all client application windows
+	Given I open hyperlink "e1cib/app/DataProcessor.StoreKeeperWorkspace"
+	* Check button
+		And I click "Create Goods receipt" button
+		Then there are lines in TestClient message log
+			|'Select any document'|
+	* Select item and check button
+		And I click Choice button of the field named "Item"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I click Choice button of the field named "ItemKey"
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XL/Green' |
+		And I select current line in "List" table
+		And I click "Create Goods receipt" button
+		Then there are lines in TestClient message log
+			|'Select any document'|
+							
 Scenario: _0156012 Store keeper workspace (try create GR without IT)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/app/DataProcessor.StoreKeeperWorkspace"

@@ -75,7 +75,7 @@ EndProcedure
 // * Amount - Number - Amount
 Function GetTableEnteredItems() Export
 	Resultat = New ValueTable();
-	Resultat.Columns.Add("Ref", New TypeDescription("DocumentRef"));
+	Resultat.Columns.Add("Ref", Documents.AllRefsType());
 	Resultat.Columns.Add("Company", New TypeDescription("CatalogRef.Companies"));
 	Resultat.Columns.Add("Partner", New TypeDescription("CatalogRef.Partners"));
 	Resultat.Columns.Add("LegalName", New TypeDescription("CatalogRef.Companies"));

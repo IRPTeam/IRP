@@ -415,15 +415,7 @@ Scenario: _9062 checking that Production (date) must be later than the Productio
 		And I select current line in "List" table
 		And I move to "Other" tab
 		And I input "29.04.2022 08:00:00" text in the field named "Date"
-		And I move to the next attribute
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-		And I click Select button of "Planning period" field
-		And I go to line in "List" table
-			| 'Description'                        |
-			| 'First month' |
-		And I select current line in "List" table		
+		And I move to the next attribute		
 		And I click "Post and close" button
 		Given Recent TestClient message contains "Document date [*] less than Planning date [*]" string by template
 		And I close all client application windows
@@ -588,6 +580,7 @@ Scenario: _9072 check sequence of creation and approval Production Planning Corr
 		| 'Description'  |
 		| 'Second month' |
 	And I select current line in "List" table
+	And I select "Approved" exact value from the drop-down list named "Status"
 	And I click "Save" button
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanningCorrection"
@@ -626,7 +619,6 @@ Scenario: _9072 check sequence of creation and approval Production Planning Corr
 		And I select current line in "List" table
 		Then the form attribute named "LabelCurrentQuantityError" became equal to "Current quantity not actual"
 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-		And I select "Approved" exact value from the drop-down list named "Status"
 		And I click "Post and close" button
 		When TestClient log message contains "Document date [*] less than last Planning correction date [*]" string by template
 		And I delete variable "$$DateCurrentDay9072$$"
@@ -634,7 +626,12 @@ Scenario: _9072 check sequence of creation and approval Production Planning Corr
 		And I input "$$DateCurrentDay9072$$" text in "Date" field
 		And I move to the next attribute
 		Then "1C:Enterprise" window is opened
-		And I click "No" button
+		And I click "Yes" button
+		And I click Select button of "Planning period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Second month'|
+		And I click "Select" button
 		And I click "Post and close" button	
 		Then user message window does not contain messages	
 		And I close all client application windows

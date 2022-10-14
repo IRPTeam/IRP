@@ -33,3 +33,8 @@ EndFunction
 Procedure ListOnGetDataAtServer(ItemName, Settings, Rows)
 	JorDocumentsServer.ListOnGetDataAtServer(ItemName, Settings, Rows);
 EndProcedure
+
+&AtClient
+Procedure AmountByDocumentDateOnChange(Item)
+	JorDocumentsClientServer.SetPeriodInDynamicList(List, AmountByDocumentDate);
+EndProcedure

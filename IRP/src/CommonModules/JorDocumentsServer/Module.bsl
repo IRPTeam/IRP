@@ -10,13 +10,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 		EndDo;
 		Ref = CustomFilter.QueryParameters.Ref;
 		Period = EndOfDay(CurrentSessionDate());
-		If ValueIsFilled(Ref) Then
-			If Ref.Posted Then
-				Period = New Boundary(Ref.PointInTime(), BoundaryType.Excluding);
-			Else
-				Period = EndOfDay(Ref.Date);
-			EndIf;
-		EndIf;
 		Form.List.Parameters.SetParameterValue("Period", Period);
 	EndIf;
 	
@@ -30,36 +23,37 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 	If Not Parameters.Property("EnteredItems", EnteredItems) Then
 		EnteredItems = New Array;
 	EndIf;
-	If Ref.Posted Then
-		
+	AdditionalParameters.Insert("EnteredItems", EnteredItems);
+	
+	If Parameters.Property("CustomFilter") Then
+		AdditionalParameters.Insert("Ref", Parameters.CustomFilter.QueryParameters.Ref);
+	EndIf;
+	If Parameters.Property("DocumentDate") Then
+		AdditionalParameters.Insert("DocumentDate", Parameters.DocumentDate);
 	EndIf;
 	
-	AdditionalParameters.Insert("EnteredItems", EnteredItems);
 	AdditionalProperties.Insert("AdditionalParameters", AdditionalParameters);
-	
 EndProcedure
 
 Procedure ListOnGetDataAtServer(ItemName, Settings, Rows) Export
-	FilterKey = "Ref, Company, Partner, LegalName, Agreement, Currency";
-	
-	EnteredItems = GetTableEnteredItems();
 	If Settings.AdditionalProperties.Property("AdditionalParameters") 
 			And Settings.AdditionalProperties.AdditionalParameters.Property("EnteredItems") Then
+		FilterKey = "Ref, Company, Partner, LegalName, Agreement, Currency";
+		EnteredItems = GetTableEnteredItems();
 		For Each EnteredItem in Settings.AdditionalProperties.AdditionalParameters.EnteredItems Do
 			FillPropertyValues(EnteredItems.Add(), EnteredItem);
 		EndDo;
-	EndIf;
-	EnteredItems.GroupBy(FilterKey, "Amount");
-	
-	Filter = New Structure(FilterKey);
-	For Each RowItem In Rows Do
-		FillPropertyValues(Filter, RowItem.Value.Data);
-		FindedEnteredItems = EnteredItems.FindRows(Filter);
-		For Each EnteredItem In FindedEnteredItems Do 
-			NewAmount = Max(RowItem.Value.Data.DocumentAmount - EnteredItem.Amount, 0);
-			RowItem.Value.Data.DocumentAmount = NewAmount; 
+		EnteredItems.GroupBy(FilterKey, "Amount");
+		Filter = New Structure(FilterKey);
+		For Each RowItem In Rows Do
+			FillPropertyValues(Filter, RowItem.Value.Data);
+			FindedEnteredItems = EnteredItems.FindRows(Filter);
+			For Each EnteredItem In FindedEnteredItems Do 
+				NewAmount = Max(RowItem.Value.Data.DocumentAmount - EnteredItem.Amount, 0);
+				RowItem.Value.Data.DocumentAmount = NewAmount; 
+			EndDo;
 		EndDo;
-	EndDo;
+	EndIf;
 EndProcedure
 
 // Get table of entered items.
@@ -73,7 +67,7 @@ EndProcedure
 // * Agreement - CatalogRef.Agreements - Agreement
 // * Currency - CatalogRef.Currencies - Currency
 // * Amount - Number - Amount
-Function GetTableEnteredItems() Export
+Function GetTableEnteredItems()
 	Resultat = New ValueTable();
 	Resultat.Columns.Add("Ref", Documents.AllRefsType());
 	Resultat.Columns.Add("Company", New TypeDescription("CatalogRef.Companies"));

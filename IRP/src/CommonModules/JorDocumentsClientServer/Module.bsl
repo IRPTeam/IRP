@@ -21,3 +21,20 @@ Function GetStructureEnteredItem() Export
 	Resultat.Insert("Amount", 0);
 	Return Resultat;
 EndFunction
+
+// Set period in dynamic list.
+// 
+// Parameters:
+//  List - DynamicList - list to set the date
+//  ByDocumentDate - Boolean - By document date (otherwise by current date)
+Procedure SetPeriodInDynamicList(List, ByDocumentDate) Export
+	NewPeriod = EndOfDay(CurrentDate());
+	If ByDocumentDate Then
+		AdditionalParameters = Undefined; // Structure
+		If List.SettingsComposer.Settings.AdditionalProperties.Property("AdditionalParameters", AdditionalParameters) Then
+			NewPeriod = CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(
+				AdditionalParameters.Ref, AdditionalParameters.DocumentDate);
+		EndIf;
+	EndIf;
+	List.Parameters.SetParameterValue("Period", NewPeriod);
+EndProcedure

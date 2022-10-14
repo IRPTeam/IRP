@@ -115,17 +115,17 @@ Scenario: Create catalog Agreements objects
 Scenario: Create catalog BusinessUnits objects
 
 	And I check or create catalog "BusinessUnits" objects:
-		| 'Ref'                                                                   | 'DeletionMark' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr'             |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'False'           | 'Front office'            | ''                 | ''               | 'Front office TR'            |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef024' | 'False'           | 'Accountants office'      | ''                 | ''               | 'Accountants office TR'      |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' | 'False'           | 'Distribution department' | ''                 | ''               | 'Distribution department TR' |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef026' | 'False'           | 'Logistics department'    | ''                 | ''               | 'Logistics department TR'    |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' | 'False'           | 'Shop 01'                 | ''                 | ''               | ''                           |
+		| 'Ref'                                                                   | 'DeletionMark' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr'             | 'Department' | 'Workshop' | 'Retail' |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'False'        | 'Front office'            | ''                 | ''               | 'Front office TR'            | 'True'       | 'False'    | 'False'  |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef024' | 'False'        | 'Accountants office'      | ''                 | ''               | 'Accountants office TR'      | 'True'       | 'False'    | 'False'  |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' | 'False'        | 'Distribution department' | ''                 | ''               | 'Distribution department TR' | 'True'       | 'False'    | 'False'  |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef026' | 'False'        | 'Logistics department'    | ''                 | ''               | 'Logistics department TR'    | 'True'       | 'False'    | 'False'  |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' | 'False'        | 'Shop 01'                 | ''                 | ''               | ''                           | 'True'       | 'False'    | 'True'   |
 
 Scenario: Create catalog BusinessUnits objects (Shop 02, use consolidated retail sales)
 	And I check or create catalog "BusinessUnits" objects:
-		| 'Ref'                                                                   | 'DeletionMark' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UseConsolidatedRetailSales' |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' | 'False'        | 'Shop 02'        | ''                 | ''               | 'Shop 02 Tr'     | 'True'                       |
+		| 'Ref'                                                                   | 'DeletionMark' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UseConsolidatedRetailSales' |'Department' | 'Workshop' | 'Retail' |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' | 'False'        | 'Shop 02'        | ''                 | ''               | 'Shop 02 Tr'     | 'True'                       | 'True'       | 'False'    | 'True'   |
 
 Scenario: Create catalog CashAccounts objects
 

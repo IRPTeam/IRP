@@ -67,6 +67,12 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.ReadOnly = IsFilled_ProductionPlanningExists;	
 	Form.Items.ProductionPlanningExists.Visible =  IsFilled_ProductionPlanningExists;
 	
+	If Object.Active Then
+		Form.Items.ChangeActive.Picture = PictureLib.CheckAll;
+	Else
+		Form.Items.ChangeActive.Picture = PictureLib.UncheckAll;
+	EndIf;
+	
 	// Button set as default
 	If IsDefaultBillOfMaterials(Object.Ref, Object.ItemKey) Then
 		Form.Items.FormSetAsDefault.Title = R().Form_037;
@@ -79,6 +85,17 @@ Procedure SetVisibilityAvailability(Object, Form)
 	ArrayOfProductTreeRows = New Array();
 	CreateProductionTreeAtServer(ArrayOfProductTreeRows, Object.Ref, True);
 	CreateProductionTree(Object, Form, Form.ProductionTree, ArrayOfProductTreeRows);
+EndProcedure
+
+&AtClient
+Procedure ChangeActive(Command)
+	Object.Active = Not Object.Active;
+	If ValueIsFilled(ThisObject.ProductionPlanningExists) Then
+		Write();
+	Else
+		SetVisibilityAvailability(Object, ThisObject);
+		ThisObject.Modified = True;
+	EndIf;
 EndProcedure
 
 &AtClient

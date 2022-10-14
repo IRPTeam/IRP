@@ -7,6 +7,14 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
+	ThisObject.Items.Type.ChoiceList.Clear();
+	If FOServer.IsUseManufacturing() Then
+		ThisObject.Items.Type.ChoiceList.Add(Enums.BillOfMaterialsTypes.Product);
+	EndIf;
+	
+	If FOServer.IsUseWorkOrders() Then
+		ThisObject.Items.Type.ChoiceList.Add(Enums.BillOfMaterialsTypes.Work);
+	EndIf;
 EndProcedure
 
 &AtServer

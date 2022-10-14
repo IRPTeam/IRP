@@ -134,9 +134,8 @@ Scenario: _0156011 check that button Create Goods receipt is enabled when quanti
 	And I close all client application windows
 	Given I open hyperlink "e1cib/app/DataProcessor.StoreKeeperWorkspace"
 	* Check button
-		And I click "Create Goods receipt" button
-		Then there are lines in TestClient message log
-			|'Select any document'|
+		When I Check the steps for Exception
+			|'And I click "Create Goods receipt" button'|
 	* Select item and check button
 		And I click Choice button of the field named "Item"
 		And I go to line in "List" table
@@ -148,6 +147,8 @@ Scenario: _0156011 check that button Create Goods receipt is enabled when quanti
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'XL/Green' |
 		And I select current line in "List" table
+		And I input "1,000" text in the field named "Quantity"
+		And I move to the next attribute	
 		And I click "Create Goods receipt" button
 		Then there are lines in TestClient message log
 			|'Select any document'|
@@ -162,6 +163,7 @@ Scenario: _0156012 Store keeper workspace (try create GR without IT)
 		And I input "5,000" text in the field named "Quantity"
 		And the editing text of form attribute named "Quantity" became equal to "5,000"
 		Then the form attribute named "Unit" became equal to "pcs"
+		And I move to the next attribute
 		Then the number of "GoodsInTransitIncoming" table lines is "равно" 0
 	* Try create GR
 		And I click "Create Goods receipt" button	

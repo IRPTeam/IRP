@@ -108,6 +108,15 @@ Scenario: _0202202 adding items to label printing processing
 			| 'Description'       |
 			| 'Basic Price Types' |
 		And I select current line in "List" table
+	* Check Fill button
+		And in the table "ItemList" I click "Fill" button
+		And "ItemList" table contains lines
+			| 'Print' | 'Barcode'    | 'Item'  | 'Price type' | 'Item key' | 'Unit' | 'Barcode type' | 'Quantity' | 'Price'  | 'Template' |
+			| 'No'    | '2202283713' | 'Dress' | ''           | 'S/Yellow' | ''     | ''             | '1'        | '550,00' | ''         |
+			| 'No'    | '2202283705' | 'Dress' | ''           | 'XS/Blue'  | ''     | ''             | '1'        | '520,00' | ''         |
+			| 'No'    | ''           | 'Dress' | ''           | 'M/White'  | ''     | ''             | '1'        | '520,00' | ''         |
+	* Delete items and check button ItemListAdd
+		And I delete all lines of "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
@@ -175,6 +184,20 @@ Scenario: _0202202 adding items to label printing processing
 			| 'Print' | 'Price type'        | 'Item'     | 'Quantity' | 'Price'  | 'Item key'  | 'Unit' | 'Barcode'    | 'Barcode type' | 'Template' |
 			| 'No'   | 'Basic Price Types' | 'Dress'    | '2'        |  '550,00' | 'S/Yellow'  | 'pcs'  | '2202283713' | 'Auto'         | 'Label 1'  |
 		And in the table "ItemList" I click "Check print for selected rows" button
+	* Check save and restore
+		And I click "Save settings" button
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Price'  | 'Price type'              | 'Print' | 'Quantity' | 'Template' | 'Unit' |
+			| 'Trousers' | '36/Yellow' | '400,00' | 'Basic Price without VAT' | 'Yes'   | '1'        | 'Label 1'  | 'pcs'  |
+		And I delete a line in "ItemList" table
+		And "ItemList" table became equal
+			| 'Print' | 'Barcode'    | 'Item'  | 'Price type'              | 'Item key' | 'Unit' | 'Barcode type' | 'Quantity' | 'Price'  | 'Template' |
+			| 'Yes'   | '2202283713' | 'Dress' | 'Basic Price without VAT' | 'S/Yellow' | 'pcs'  | 'Auto'         | '2'        | '466,10' | 'Label 1'  |		
+		And I click "Load settings" button
+		And "ItemList" table contains lines
+			| 'Print' | 'Barcode'    | 'Item'     | 'Price type'              | 'Item key'  | 'Unit' | 'Barcode type' | 'Quantity' | 'Price'  | 'Template' |
+			| 'Yes'   | '2202283713' | 'Dress'    | 'Basic Price without VAT' | 'S/Yellow'  | 'pcs'  | 'Auto'         | '2'        | '466,10' | 'Label 1'  |
+			| 'Yes'   | ''           | 'Trousers' | 'Basic Price without VAT' | '36/Yellow' | 'pcs'  | ''             | '1'        | '400,00' | 'Label 1'  |
 	* Print output check
 		And I click "Print" button
 		Then "" spreadsheet document is equal

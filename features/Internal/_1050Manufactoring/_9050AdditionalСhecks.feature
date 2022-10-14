@@ -105,7 +105,7 @@ Scenario: _9051 checking duplicate materials in one BillOfMaterials
 	And I input "2,000" text in the field named "ContentQuantity" of "Content" table
 	And I finish line editing in "Content" table
 	And I click "Save" button
-	Then I wait that in user messages the "Repetitive materials [Катанка Ст3сп 6,5, Стандартный]" substring will appear in 30 seconds
+	Then I wait that in user messages the "Repetitive materials [Катанка Ст3сп 6,5, Катанка Ст3сп 6,5]" substring will appear in 30 seconds
 	Then "Bill of materials (create) *" window is opened
 	And I close all client application windows
 	
@@ -334,7 +334,13 @@ Scenario: _9060 checking that the second Production planning correction must be 
 		And I save "CurrentDate()+480" in "$$$$Date1$$$$" variable
 		And I input "$$$$Date1$$$$" variable value in "Date" field
 		And I move to the next attribute
-		And I click "No" button
+		And I click "Yes" button
+		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+		And I click Select button of "Planning period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Third month' |
+		And I select current line in "List" table
 		And I click "Post and close" button
 		And I close all client application windows
 	* Create one more ProductionPlanningCorrection and check message
@@ -383,8 +389,12 @@ Scenario: _9060 checking that the second Production planning correction must be 
 		And I save "CurrentDate() + 260" in "$$$$Date2$$$$" variable
 		And I input "$$$$Date2$$$$" variable value in "Date" field
 		And I move to the next attribute
-		And I click "No" button
-		And I click the button named "FormWrite"
+		And I click "Yes" button
+		And I click Select button of "Planning period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Third month'     |
+		And I click "Select" button
 		And I delete "$$NumberProductionPlanningCorrection04$$" variable
 		And I delete "$$ProductionPlanningCorrection03$$" variable
 		And I save the value of "Number" field as "$$NumberProductionPlanningCorrection04$$"
@@ -471,6 +481,7 @@ Scenario: _9062 checking that Production (date) must be later than the Productio
 			And I close all client application windows
 
 Scenario: _9063 check the blocking of BillOfMaterials if a Production Planning document is created for it
+	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanning"
 	And "List" table contains lines
 		| 'Number'                                   |

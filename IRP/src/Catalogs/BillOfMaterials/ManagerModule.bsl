@@ -8,7 +8,8 @@ Function GetBillOfMaterialsByItemKey(ItemKey) Export
 		|	Catalog.BillOfMaterials AS Table
 		|WHERE
 		|	Table.ItemKey = &ItemKey
-		|	AND NOT Table.DeletionMark";
+		|	AND NOT Table.DeletionMark
+		|	AND Table.Active";
 	Query.SetParameter("ItemKey", ItemKey);
 	
 	Selection = Query.Execute().Select();

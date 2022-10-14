@@ -3194,25 +3194,25 @@ Function ExtractData_FromITO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Return Tables;
 EndFunction
 
-Function ExtractData_FromIT_GetAdditionalQueryFields()
-	Return "";
-EndFunction
+//Function ExtractData_FromIT_GetAdditionalQueryFields()
+//	Return "";
+//EndFunction
 
 Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text + 
 	"SELECT ALLOWED
-	|	%1
 	|	""InventoryTransfer"" AS BasedOn,
 	|	UNDEFINED AS Ref,
 	|	ItemList.Ref AS InventoryTransfer,
 	|	ItemList.InventoryTransferOrder AS InventoryTransferOrder,
+	|	ItemList.ProductionPlanning AS ProductionPlanning,
 	|	ItemList.Ref.Company AS Company,
 	|	ItemList.Ref.Branch AS Branch,
 	|	ItemList.Ref AS ShipmentBasis,
 	|	ItemList.Ref AS ReceiptBasis,
-	|	ItemList.Ref.%2 AS Store,
-	|	%3 AS TransactionType,
+	|	ItemList.Ref.%1 AS Store,
+	|	%2 AS TransactionType,
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.ItemKey AS ItemKey,
 	|	0 AS Quantity,
@@ -3249,7 +3249,7 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 		StoreName = "StoreReceiver";
 		TransactionType = "VALUE(Enum.GoodsReceiptTransactionTypes.InventoryTransfer)";
 	EndIf;
-	Query.Text = StrTemplate(Query.Text, ExtractData_FromIT_GetAdditionalQueryFields(), StoreName, TransactionType);
+	Query.Text = StrTemplate(Query.Text, StoreName, TransactionType);
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -9251,6 +9251,7 @@ Function GetAttributeNames_LinkedDocuments()
 	NamesArray.Add("SalesReturnOrder");
 	NamesArray.Add("RetailSalesReceipt");
 	NamesArray.Add("WorkOrder");
+	NamesArray.Add("ProductionPlanning");
 	Return NamesArray;
 EndFunction
 
@@ -9336,7 +9337,8 @@ Function GetColumnNames_ItemList()
 		   |WorkOrder,
 		   |WorkSheet,
 		   |BillOfMaterials,
-		   |UseWorkSheet";
+		   |UseWorkSheet,
+		   |ProductionPlanning";
 EndFunction
 
 Function GetEmptyTable_ItemList()

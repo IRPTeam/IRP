@@ -105,6 +105,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R7030T_ProductionPlanning());
 	QueryArray.Add(R7020T_MaterialPlanning());
+	QueryArray.Add(R4035B_IncomingStocks());
 	Return QueryArray;	
 EndFunction	
 
@@ -178,6 +179,20 @@ Function R7020T_MaterialPlanning()
 		|	MaterialPlanning.PlanningPeriod,
 		|	MaterialPlanning.BillOfMaterials,
 		|	VALUE(Enum.ProductionPlanningTypes.Closing)"
+EndFunction
+
+Function R4035B_IncomingStocks()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	&Period AS Period,
+		|	IncomingStocks.Store AS Store,
+		|	IncomingStocks.ItemKey AS ItemKey,
+		|	IncomingStocks.Order AS Order,
+		|	IncomingStocks.QuantityBalance AS Quantity
+		|INTO R4035B_IncomingStocks
+		|FROM
+		|	AccumulationRegister.R4035B_IncomingStocks.Balance(&BalancePeriod, Order = &ProductionPlanning) AS IncomingStocks"
 EndFunction
 
 #EndRegion

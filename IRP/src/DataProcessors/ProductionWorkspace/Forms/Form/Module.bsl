@@ -274,7 +274,6 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	NotifyParameters.Insert("Form"   , ThisObject);
 	NotifyParameters.Insert("Object" , ThisObject);
 
-	//For Each Row In AdditionalParameters.FoundedItems Do
 	For Each Row In Result.FoundedItems Do
 		Item = Row.Item;
 		ItemKey = Row.ItemKey;
@@ -351,8 +350,8 @@ Function GetParametersForDocInventoryTransfer(PlanningCurrentData)
 		CommonFunctionsServer.GetRefAttribute(PlanningCurrentData.ProductionPlanning, "BusinessUnit"));
 	
 	Result.Insert("ItemList", New Array());
-	Result.ItemList.Add(New Structure("Item, ItemKey, Unit, Quantity", 
-		ThisObject.Item, ThisObject.ItemKey, ThisObject.Unit, ThisObject.Quantity));
+	Result.ItemList.Add(New Structure("Item, ItemKey, Unit, Quantity, ProductionPlanning", 
+		ThisObject.Item, ThisObject.ItemKey, ThisObject.Unit, ThisObject.Quantity, PlanningCurrentData.ProductionPlanning));
 	
 	Return Result;
 EndFunction

@@ -51,6 +51,7 @@
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.R7020T_MaterialPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R7030T_ProductionPlanning</registerRecords>
+  <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

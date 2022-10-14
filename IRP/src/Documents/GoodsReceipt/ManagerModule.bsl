@@ -218,6 +218,7 @@ Function ItemList()
 		   |	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.InventoryTransfer) AS
 		   |		IsTransaction_InventoryTransfer,
 		   |	ItemList.Ref.Branch AS Branch,
+		   |	ItemList.ProductionPlanning AS ProductionPlanning,
 		   |	ItemList.Key
 		   |INTO ItemList
 		   |FROM

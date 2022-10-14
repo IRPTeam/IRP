@@ -228,9 +228,9 @@ EndProcedure
 
 &AtClient
 Procedure PriceTypeOnChange(Item)
-	For Each Row In Items.ItemList.SelectedRows Do
-		Items.ItemList.RowData(Row).PriceType = ThisObject.PriceType;
-	EndDo;
+	If Items.ItemList.SelectedRows.Count() Then
+		PriceTypeOnChangeAtServer();
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -305,3 +305,25 @@ Procedure ItemListItemOnChange(Item)
 EndProcedure
 
 #EndRegion
+
+&AtServer
+Procedure PriceTypeOnChangeAtServer()
+	SelectedRows = New Array;
+	For Each Row In Items.ItemList.SelectedRows Do
+		ItemRow = ItemList.FindByID(Row);
+		ItemRow.PriceType = ThisObject.PriceType;
+		SelectedRows.Add(ItemRow);
+	EndDo;
+	ItemPriceTable = ItemList.Unload(SelectedRows, "ItemKey, Unit, PriceType");
+	Filter = New Structure("ItemKey, Unit, PriceType");
+	QuerySelection = GetItemInfo.QueryByItemPriceInfo(ItemPriceTable, CurrentDate());
+    QuerySelection.Reset();
+	For Each Item In SelectedRows Do
+		FillPropertyValues(Filter, Item);
+		If QuerySelection.FindNext(Filter) Then
+			Item.Price = QuerySelection.Price;
+		Else
+			Item.Price = 0;
+		EndIf;
+	EndDo;
+EndProcedure

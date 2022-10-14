@@ -35,9 +35,7 @@ Procedure FillAtServer(Object, Form) Export
 		Return;
 	EndIf;
 
-	QueryUnload = QueryExecution.Unload();
-
-	ItemPriceTable = QueryUnload.Copy( , "ItemKey, Unit, ItemKeyUnit, ItemUnit, hasSpecification");
+	ItemPriceTable = QueryExecution.Unload();
 	ItemPriceTable.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
 	ItemPriceTable.FillValues(Form.PriceType, "PriceType");
 	
@@ -47,7 +45,8 @@ Procedure FillAtServer(Object, Form) Export
 	PriceQuery.Text = "SELECT
 					  |	ItemSource.Item,
 					  |	ItemSource.ItemKey,
-					  |	ItemSource.Unit,
+					  |	ItemSource.ItemUnit AS Unit,
+					  |	ItemSource.PriceType,
 					  |	ItemSource.Barcode
 					  |INTO ItemTable
 					  |FROM
@@ -68,6 +67,7 @@ Procedure FillAtServer(Object, Form) Export
 					  |	ItemTable.Item,
 					  |	ItemTable.ItemKey,
 					  |	ItemTable.Unit,
+					  |	ItemTable.PriceType,
 					  |	ItemTable.Barcode,
 					  |	1 AS Quantity,
 					  |	ItemTable.ItemKey.Unit AS ItemKeyUnit,
@@ -78,7 +78,7 @@ Procedure FillAtServer(Object, Form) Export
 					  |	ItemTable AS ItemTable
 					  |		LEFT JOIN PriceTable AS PriceTable
 					  |		ON ItemTable.ItemKey = PriceTable.ItemKey";
-	PriceQuery.SetParameter("ItemSource", QueryUnload);
+	PriceQuery.SetParameter("ItemSource", ItemPriceTable);
 	PriceQuery.SetParameter("PriceSource", ItemsInfo);
 	PriceQueryExecution = PriceQuery.Execute();
 	PriceQuerySelection = PriceQueryExecution.Select();

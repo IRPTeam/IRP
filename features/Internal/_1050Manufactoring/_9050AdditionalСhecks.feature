@@ -488,10 +488,139 @@ Scenario: _9063 check the blocking of BillOfMaterials if a Production Planning d
 		When I Check the steps for Exception
 			|"And in the table 'Content' I click the button named 'ContentAdd'"|				
 	And I close all client application windows
-		
+
+Scenario: _9064	try delete Bill of materials with Production planning document
+		And I close all client application windows
+	* Select BillOfMaterials
+		Given I open hyperlink "e1cib/list/Catalog.BillOfMaterials"
+		And I go to line in "List" table
+			| 'Description'                        |
+			| 'Стремянка CLASS PLUS 6 ступенчатая' |
+		And I select current line in "List" table
+		And the field named "ProductionPlanningExists" is filled
+	* Try mark for deletion
+		When I Check the steps for Exception
+			|"And I click "Mark for deletion / Unmark for deletion" button"|
+		And I close all client application windows
+
+
+Scenario: _9065 non active and default Bill of materials
+		And I close all client application windows
+	* Default Bill of materials
+		Given I open hyperlink "e1cib/list/Catalog.BillOfMaterials"
+		And I go to line in "List" table
+			| 'Description'                        |
+			| 'Стремянка CLASS PLUS 8 (основная)' |
+		And I select current line in "List" table
+		And I click "Set as default" button
+		And I close current window	
+	* Select BillOfMaterials with Production planning document
+		Given I open hyperlink "e1cib/list/Catalog.BillOfMaterials"
+		And I go to line in "List" table
+			| 'Description'                        |
+			| 'Стремянка CLASS PLUS 6 ступенчатая' |
+		And I select current line in "List" table
+		And I click the button named "ChangeActive"
+		And I close current window
+	* Select BillOfMaterials without Production planning document
+		Given I open hyperlink "e1cib/list/Catalog.BillOfMaterials"
+		And I go to line in "List" table
+			| 'Description'                        |
+			| 'Стремянка CLASS PLUS 8 (премиум)' |
+		And I select current line in "List" table
+		And I click the button named "ChangeActive"
+		And I click "Save and close" button
+	* Check
+		Given I open hyperlink "e1cib/list/Document.ProductionPlanning"
+		And I click "Create" button
+		And in the table "Productions" I click "Add" button
+		And I activate "Item" field in "Productions" table
+		And I select current line in "Productions" table
+		And I click choice button of "Item" attribute in "Productions" table
+		Then "Items" window is opened
+		And I go to line in "List" table
+			| 'Description'                        |
+			| 'Стремянка CLASS PLUS 6 ступенчатая' |
+		And I select current line in "List" table
+		And "Productions" table became equal
+			| 'Item'                               | 'Item key'                           | 'Unit' | 'Q'     | 'Bill of materials' |
+			| 'Стремянка CLASS PLUS 6 ступенчатая' | 'Стремянка CLASS PLUS 6 ступенчатая' | 'pcs'  | '1,000' | ''                  |
+		And in the table "Productions" I click "Add" button
+		And I activate "Item" field in "Productions" table
+		And I select current line in "Productions" table
+		And I click choice button of "Item" attribute in "Productions" table
+		Then "Items" window is opened
+		And I go to line in "List" table
+			| 'Description'                        |
+			| 'Стремянка CLASS PLUS 8' |
+		And I select current line in "List" table
+		And "Productions" table became equal
+			| 'Item'                               | 'Item key'                           | 'Unit' | 'Q'     | 'Bill of materials'                 |
+			| 'Стремянка CLASS PLUS 6 ступенчатая' | 'Стремянка CLASS PLUS 6 ступенчатая' | 'pcs'  | '1,000' | ''                                  |
+			| 'Стремянка CLASS PLUS 8'             | 'Стремянка CLASS PLUS 8'             | 'pcs'  | '1,000' | 'Стремянка CLASS PLUS 8 (основная)' |
+	* Try select non active Bill of materials
+		And I go to line in "Productions" table
+			| 'Item'                   |
+			| 'Стремянка CLASS PLUS 8' |
+		And I click choice button of "Bill of materials" attribute in "Productions" table
+		And "List" table became equal
+			| 'Description'                       | 'Item'                   | 'Item key'               |
+			| 'Стремянка CLASS PLUS 8 (основная)' | 'Стремянка CLASS PLUS 8' | 'Стремянка CLASS PLUS 8' |
+		And I close all client application windows
+	* Active Bill of materials
+		Given I open hyperlink "e1cib/list/Catalog.BillOfMaterials"
+		And I go to line in "List" table
+			| 'Description'                        |
+			| 'Стремянка CLASS PLUS 6 ступенчатая' |
+		And I select current line in "List" table
+		And I click the button named "ChangeActive"
+		And I close current window
+		Given I open hyperlink "e1cib/list/Catalog.BillOfMaterials"
+		And I go to line in "List" table
+			| 'Description'                        |
+			| 'Стремянка CLASS PLUS 8 (премиум)' |
+		And I select current line in "List" table
+		And I click the button named "ChangeActive"
+		And I click "Save and close" button
+	* Check
+		Given I open hyperlink "e1cib/list/Document.ProductionPlanning"
+		And I click "Create" button
+		And in the table "Productions" I click "Add" button
+		And I activate "Item" field in "Productions" table
+		And I select current line in "Productions" table
+		And I click choice button of "Item" attribute in "Productions" table
+		Then "Items" window is opened
+		And I go to line in "List" table
+			| 'Description'                        |
+			| 'Стремянка CLASS PLUS 6 ступенчатая' |
+		And I select current line in "List" table
+		And "Productions" table became equal
+			| 'Item'                               | 'Item key'                           | 'Unit' | 'Q'     | 'Bill of materials'                  |
+			| 'Стремянка CLASS PLUS 6 ступенчатая' | 'Стремянка CLASS PLUS 6 ступенчатая' | 'pcs'  | '1,000' | 'Стремянка CLASS PLUS 6 ступенчатая' |
+		And in the table "Productions" I click "Add" button
+		And I activate "Item" field in "Productions" table
+		And I select current line in "Productions" table
+		And I click choice button of "Item" attribute in "Productions" table
+		Then "Items" window is opened
+		And I go to line in "List" table
+			| 'Description'                        |
+			| 'Стремянка CLASS PLUS 8' |
+		And I select current line in "List" table
+		And "Productions" table became equal
+			| 'Item'                               | 'Item key'                           | 'Unit' | 'Q'     | 'Bill of materials'                  |
+			| 'Стремянка CLASS PLUS 6 ступенчатая' | 'Стремянка CLASS PLUS 6 ступенчатая' | 'pcs'  | '1,000' | 'Стремянка CLASS PLUS 6 ступенчатая' |
+			| 'Стремянка CLASS PLUS 8'             | 'Стремянка CLASS PLUS 8'             | 'pcs'  | '1,000' | 'Стремянка CLASS PLUS 8 (основная)'  |
+		And I click choice button of "Bill of materials" attribute in "Productions" table
+		And "List" table became equal
+			| 'Description'                       | 'Item'                   | 'Item key'               |
+			| 'Стремянка CLASS PLUS 8 (основная)' | 'Стремянка CLASS PLUS 8' | 'Стремянка CLASS PLUS 8' |
+			| 'Стремянка CLASS PLUS 8 (премиум)'  | 'Стремянка CLASS PLUS 8' | 'Стремянка CLASS PLUS 8' |
+		And I close all client application windows
 				
 
+
 Scenario: _9067 check the blocking of Production Planning document if an Production Planning Correction is created for it
+	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanning"
 	And I go to line in "List" table
 		| 'Number'                                   |

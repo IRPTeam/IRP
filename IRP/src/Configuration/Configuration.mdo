@@ -525,6 +525,8 @@
   <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
   <functionalOptions>FunctionalOption.UseConsolidatedRetailSales</functionalOptions>
   <functionalOptions>FunctionalOption.UseJobQueueForExternalFunctions</functionalOptions>
+  <functionalOptions>FunctionalOption.UseManufacturing</functionalOptions>
+  <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -612,6 +614,8 @@
   <constants>Constant.UseConsolidatedRetailSales</constants>
   <constants>Constant.MaximumServerDifficultLevel</constants>
   <constants>Constant.UseJobQueueForExternalFunctions</constants>
+  <constants>Constant.UseManufacturing</constants>
+  <constants>Constant.UseWorkOrders</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>

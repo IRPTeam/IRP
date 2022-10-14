@@ -18,7 +18,14 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	ThisObject.Type = Enums.BillOfMaterialsTypes.Product;
+	If FillingData = Undefined Then
+		If FOServer.IsUseManufacturing() Then
+			ThisObject.Type = Enums.BillOfMaterialsTypes.Product;
+		ElsIf FOServer.IsUseWorkOrders() Then
+			ThisObject.Type = Enums.BillOfMaterialsTypes.Work;
+		EndIf;
+	EndIf;
+	
 	ThisObject.Active = True;
 EndProcedure
 

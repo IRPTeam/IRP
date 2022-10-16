@@ -42,14 +42,20 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
-		If FillingData.BasedOn = "CashTransferOrder" 
-			Or FillingData.BasedOn = "OutgoingPaymentOrder"
-			Or FillingData.BasedOn = "PurchaseInvoice"
-			Or FillingData.BasedOn = "PurchaseOrder"
-			Or FillingData.BasedOn = "SalesReturn" Then
-				ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
-				Filling_BasedOn(FillingData);
+	If TypeOf(FillingData) = Type("Structure") Then
+		If FillingData.Property("BasedOn") Then
+			If FillingData.BasedOn = "CashTransferOrder" 
+				Or FillingData.BasedOn = "OutgoingPaymentOrder"
+				Or FillingData.BasedOn = "PurchaseInvoice"
+				Or FillingData.BasedOn = "PurchaseOrder"
+				Or FillingData.BasedOn = "SalesReturn" Then
+					ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+					Filling_BasedOn(FillingData);
+			EndIf;
+		ElsIf FillingData.Property("Context") Then
+			FillingDataStructure = BuilderAPI.GetWrapperFromContext(FillingData.Context).Object;
+			ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingDataStructure);
+			Filling_BasedOn(FillingDataStructure);
 		EndIf;
 	EndIf;
 EndProcedure
@@ -59,7 +65,7 @@ Procedure Filling_BasedOn(FillingData)
 	For Each Row In FillingData.PaymentList Do
 		NewRow = ThisObject.PaymentList.Add();
 		FillPropertyValues(NewRow, Row);
-			If Not ValueIsFilled(NewRow.Key) Then
+		If Not ValueIsFilled(NewRow.Key) Then
 			NewRow.Key = New UUID();
 		EndIf;
 	EndDo;

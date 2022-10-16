@@ -17,6 +17,48 @@
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Template action</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Template actions</value>
+  </listPresentation>
+  <attributes uuid="b710f50b-fac5-4ac8-a47a-f826589cb557">
+    <name>AttributeType</name>
+    <synonym>
+      <key>en</key>
+      <value>Attribute type</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="aec5d541-f036-4676-a08b-50b3f4754df0">
+    <name>Name</name>
+    <synonym>
+      <key>en</key>
+      <value>Name</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>100</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="aa99cc09-1883-49e4-bcbb-e7d404cebcde">
     <name>Path</name>
     <synonym>
@@ -84,24 +126,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="1389794d-6d99-4dbe-84e7-6d607199d3d6">
-    <name>Priority</name>
-    <synonym>
-      <key>en</key>
-      <value>Priority</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>10</precision>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </attributes>
   <dimensions uuid="051ffc83-7209-4058-82c5-2ca8b40d81ec">
     <name>FillingTemplate</name>
     <synonym>
@@ -122,38 +146,22 @@
     <master>true</master>
     <mainFilter>true</mainFilter>
   </dimensions>
-  <dimensions uuid="dec5d014-6aaf-4490-ae19-e25309b6bf2b">
-    <name>AttributeType</name>
+  <dimensions uuid="699e3dd1-f16d-41ea-8efe-4fd32eb3ab84">
+    <name>Priority</name>
     <synonym>
       <key>en</key>
-      <value>Attribute type</value>
+      <value>Priority</value>
     </synonym>
     <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>50</length>
-      </stringQualifiers>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+      </numberQualifiers>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
-  </dimensions>
-  <dimensions uuid="5a30043c-2f88-485b-9b8d-3d22d85de5a4">
-    <name>Name</name>
-    <synonym>
-      <key>en</key>
-      <value>Name</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>100</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
 </mdclass:InformationRegister>

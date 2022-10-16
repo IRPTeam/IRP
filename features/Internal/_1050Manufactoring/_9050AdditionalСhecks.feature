@@ -610,6 +610,9 @@ Scenario: _9065 non active and default Bill of materials
 			| 'Item'                               | 'Item key'                           | 'Unit' | 'Q'     | 'Bill of materials'                  |
 			| 'Стремянка CLASS PLUS 6 ступенчатая' | 'Стремянка CLASS PLUS 6 ступенчатая' | 'pcs'  | '1,000' | 'Стремянка CLASS PLUS 6 ступенчатая' |
 			| 'Стремянка CLASS PLUS 8'             | 'Стремянка CLASS PLUS 8'             | 'pcs'  | '1,000' | 'Стремянка CLASS PLUS 8 (основная)'  |
+		And I go to line in "Productions" table
+			| 'Item'                   |
+			| 'Стремянка CLASS PLUS 8' |
 		And I click choice button of "Bill of materials" attribute in "Productions" table
 		And "List" table became equal
 			| 'Description'                       | 'Item'                   | 'Item key'               |
@@ -694,76 +697,6 @@ Scenario: _9071 check the blocking Production Planning Correction if it is not t
 		When I Check the steps for Exception
 			|"And in the table "Productions" I click the button named "ProductionsAdd""|
 	And I close all client application windows
-
-Scenario: _9072 check sequence of creation and approval Production Planning Correction (the document which was created later is approved first)
-	And I close all client application windows
-	When Create document ProductionPlanningCorrection objects (check sequence)
-	Given I open hyperlink "e1cib/list/Document.ProductionPlanningCorrection"
-	And I go to line in "List" table
-		| 'Number'                                   |
-		| '5' |
-	And I select current line in "List" table
-	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-	And I click Select button of "Planning period" field
-	And I go to line in "List" table
-		| 'Description'  |
-		| 'Second month' |
-	And I select current line in "List" table
-	And I select "Approved" exact value from the drop-down list named "Status"
-	And I click "Save" button
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.ProductionPlanningCorrection"
-	And I go to line in "List" table
-		| 'Number'                                   |
-		| '6' |
-	And I select current line in "List" table
-	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-	And I click Select button of "Planning period" field
-	And I go to line in "List" table
-		| 'Description'  |
-		| 'Second month' |
-	And I select current line in "List" table
-	And I click "Save" button
-	And I close all client application windows
-	And I execute 1C:Enterprise script at server
-		| "Documents.ProductionPlanningCorrection.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |	
-		| "Documents.ProductionPlanningCorrection.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);" |
-	Given I open hyperlink "e1cib/list/Document.ProductionPlanningCorrection"
-	* Approve ProductionPlanningCorrection 6
-		Given I open hyperlink "e1cib/list/Document.ProductionPlanningCorrection"
-		And I go to line in "List" table
-			| 'Number'                                   |
-			| '6' |
-		And I select current line in "List" table
-		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-		And I select "Approved" exact value from the drop-down list named "Status"
-		And I click "Post and close" button
-		Then user message window does not contain messages
-		And I close all client application windows
-	* Check message in the ProductionPlanningCorrection 5
-		Given I open hyperlink "e1cib/list/Document.ProductionPlanningCorrection"
-		And I go to line in "List" table
-			| 'Number'                                   |
-			| '5' |
-		And I select current line in "List" table
-		Then the form attribute named "LabelCurrentQuantityError" became equal to "Current quantity not actual"
-		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-		And I click "Post and close" button
-		When TestClient log message contains "Document date [*] less than last Planning correction date [*]" string by template
-		And I delete variable "$$DateCurrentDay9072$$"
-		And I save "Format((EndOfDay(CurrentDate()) + 27648), \"DF=dd.MM.yyyy\")" in "$$DateCurrentDay9072$$" variable
-		And I input "$$DateCurrentDay9072$$" text in "Date" field
-		And I move to the next attribute
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I click Select button of "Planning period" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Second month'|
-		And I click "Select" button
-		And I click "Post and close" button	
-		Then user message window does not contain messages	
-		And I close all client application windows
 
 	
 

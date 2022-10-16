@@ -47,6 +47,7 @@ Scenario: _2000 preparation (landed cost)
 	When update ItemKeys
 	When Create information register CurrencyRates records
 	When Create catalog PriceTypes objects
+	When Create catalog Companies objects (own Second company)	
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -55,11 +56,43 @@ Scenario: _2000 preparation (landed cost)
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
-	When filling in Tax settings for company
+		When filling in Tax settings for company
+	* Landed cost currency movement type for company
+		Given I open hyperlink "e1cib/list/Catalog.Companies"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "Company" exact value from the drop-down list named "Type"
+		And I move to "Landed cost" tab
+		And I click Select button of "Currency movement type" field
+		And I go to line in "List" table
+			| 'Currency' | 'Deferred calculation' | 'Description'    | 'Reference'      | 'Source'       | 'Type'  |
+			| 'TRY'      | 'No'                   | 'Local currency' | 'Local currency' | 'Forex Seling' | 'Legal' |
+		And I select current line in "List" table
+		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
+		And I move to "Tax types" tab
+		And I set "Include to landed cost" checkbox in "CompanyTaxes" table
+		And I finish line editing in "CompanyTaxes" table	
+		And I click "Save and close" button
+		And I wait "Main Company (Company) *" window closing in 20 seconds
+		Then "Companies" window is opened
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+		And I select "Company" exact value from the drop-down list named "Type"
+		And I move to "Landed cost" tab
+		And I click Select button of "Currency movement type" field
+		And I go to line in "List" table
+			| 'Currency' | 'Deferred calculation' | 'Description'    | 'Reference'      | 'Source'       | 'Type'  |
+			| 'TRY'      | 'No'                   | 'Local currency' | 'Local currency' | 'Forex Seling' | 'Legal' |
+		And I select current line in "List" table
+		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
+		And I click "Save and close" button
 	When Create document SalesInvoice objects (MF)
 	When Create catalog MFBillOfMaterials objects
 	When Create catalog PlanningPeriods objects (MF)
-	When Create catalog Companies objects (own Second company)	
 	When Create catalog BillOfMaterials objects (semiproducts)
 	When Create document ProductionPlanning objects
 	When Create document ProductionPlanning objects (first period)
@@ -80,7 +113,6 @@ Scenario: _2000 preparation (landed cost)
 		| "Documents.Production.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
 		| "Documents.Production.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
-	And I execute 1C:Enterprise script at server
 		| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesInvoice.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
@@ -125,11 +157,11 @@ Scenario: _2013 check batch calculation (one semiproduct consists of another sem
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
-			| "Documents.MF_Production.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.Production.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
-			| "Documents.MF_Production.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.Production.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
-			| "Documents.MF_Production.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.Production.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Repost Calculation movement costs
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I go to line in "List" table
@@ -141,10 +173,13 @@ Scenario: _2013 check batch calculation (one semiproduct consists of another sem
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'    |
-			| 'Product' | 'Стандартный' |
+			| 'Product' | 'Product' |
 		And I select current line in "List" table
 		And I click "Run report" button
 		Given "Result" spreadsheet document is equal to "LandedCost2" by template
+
+
+
 		
 				
 		

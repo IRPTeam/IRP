@@ -2047,10 +2047,9 @@ Scenario: Create catalog PaymentSchedules objects
 Scenario: Create catalog PlanningPeriods objects
 
 	And I check or create catalog "PlanningPeriods" objects:
-		| 'Ref'                                                                     | 'DeletionMark' | 'Code'      | 'Description'             | 'BeginDate'           | 'EndDate'             |
-		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de002' | 'False'        | '000000002' | 'First'                   | '01.08.2021 00:00:00' | '10.08.2021 00:00:00' |
-		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de003' | 'False'        | '000000003' | 'Second'                  | '11.08.2021 00:00:00' | '20.08.2021 00:00:00' |
-
+		| 'Ref'                                                                     | 'DeletionMark' | 'Code' | 'Description'             | 'BeginDate'          | 'EndDate'            | 'Type'                               |
+		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de002' | 'False'        | 2      | 'First'                   | '01.08.2021 0:00:00' | '10.08.2021 0:00:00' | 'Enum.PlanningPeriodTypes.Financial' |
+		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de003' | 'False'        | 3      | 'Second'                  | '11.08.2021 0:00:00' | '20.08.2021 0:00:00' | 'Enum.PlanningPeriodTypes.Financial' |
 
 	
 Scenario: Create catalog Agreements objects (Customer)

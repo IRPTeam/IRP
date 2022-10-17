@@ -87,7 +87,7 @@
 				| 'Register  "R4035 Incoming stocks"' | ''            | ''                                      | ''          | ''           | ''                                   | ''                                                 |
 				| ''                                  | 'Record type' | 'Period'                                | 'Resources' | 'Dimensions' | ''                                   | ''                                                 |
 				| ''                                  | ''            | ''                                      | 'Quantity'  | 'Store'      | 'Item key'                           | 'Order'                                            |
-				| ''                                  | 'Expense'     | '$$DatePlannedReceiptReservation4001$$' | '45'        | 'Store 02'   | 'Стремянка CLASS PLUS 6 ступенчатая' | 'Production planning 12 dated 01.01.2021 16:47:36' |
+				| ''                                  | 'Expense'     | '$$DatePlannedReceiptReservation4001$$' | '45'        | 'Store 02'   | 'Стремянка номер 6 ступенчатая' | 'Production planning 12 dated 01.01.2021 16:47:36' |
 			* R4036 Incoming stock requested
 				And I select "R4036 Incoming stock requested" exact value from "Register" drop-down list
 				And I click "Generate report" button
@@ -97,8 +97,8 @@
 				| 'Register  "R4036 Incoming stock requested"' | ''            | ''                                      | ''          | ''               | ''                | ''                                   | ''                                                 | ''                                         |
 				| ''                                           | 'Record type' | 'Period'                                | 'Resources' | 'Dimensions'     | ''                | ''                                   | ''                                                 | ''                                         |
 				| ''                                           | ''            | ''                                      | 'Quantity'  | 'Incoming store' | 'Requester store' | 'Item key'                           | 'Order'                                            | 'Requester'                                |
-				| ''                                           | 'Receipt'     | '$$DatePlannedReceiptReservation4001$$' | '45'        | 'Store 01'       | 'Store 01'        | 'Стремянка CLASS PLUS 6 ступенчатая' | 'Production planning 12 dated 01.01.2021 16:47:36' | 'Sales order 12 dated 10.02.2021 17:38:12' |
-				| ''                                           | 'Receipt'     | '$$DatePlannedReceiptReservation4001$$' | '45'        | 'Store 02'       | 'Store 02'        | 'Стремянка CLASS PLUS 6 ступенчатая' | 'Production planning 12 dated 01.01.2021 16:47:36' | 'Sales order 12 dated 10.02.2021 17:38:12' |
+				| ''                                           | 'Receipt'     | '$$DatePlannedReceiptReservation4001$$' | '45'        | 'Store 01'       | 'Store 01'        | 'Стремянка номер 6 ступенчатая' | 'Production planning 12 dated 01.01.2021 16:47:36' | 'Sales order 12 dated 10.02.2021 17:38:12' |
+				| ''                                           | 'Receipt'     | '$$DatePlannedReceiptReservation4001$$' | '45'        | 'Store 02'       | 'Store 02'        | 'Стремянка номер 6 ступенчатая' | 'Production planning 12 dated 01.01.2021 16:47:36' | 'Sales order 12 dated 10.02.2021 17:38:12' |
 		And I close all client application windows
 		When Create document Production objects
 		* Check MF_Production movements
@@ -117,7 +117,7 @@
 					| 'Register  "R4012 Stock Reservation"' | ''            | ''                       | ''          | ''           | ''                                   | ''      |
 					| ''                                    | 'Record type' | 'Period'                 | 'Resources' | 'Dimensions' | ''                                   | ''      |
 					| ''                                    | ''            | ''                       | 'Quantity'  | 'Store'      | 'Item key'                           | 'Order' |
-					| ''                                    | 'Receipt'     | '$$DateProduction4001$$' | '40'        | 'Store 02'   | 'Стремянка CLASS PLUS 6 ступенчатая' | ''      |
+					| ''                                    | 'Receipt'     | '$$DateProduction4001$$' | '40'        | 'Store 02'   | 'Стремянка номер 6 ступенчатая' | ''      |
 			* R4036 Incoming stock requested
 				And I select "R4036 Incoming stock requested" exact value from "Register" drop-down list		
 				And I click "Generate report" button
@@ -127,7 +127,7 @@
 					| 'Register  "R4036 Incoming stock requested"' | ''            | ''                       | ''          | ''               | ''                | ''                                   | ''                                                 | ''                                         |
 					| ''                                           | 'Record type' | 'Period'                 | 'Resources' | 'Dimensions'     | ''                | ''                                   | ''                                                 | ''                                         |
 					| ''                                           | ''            | ''                       | 'Quantity'  | 'Incoming store' | 'Requester store' | 'Item key'                           | 'Order'                                            | 'Requester'                                |
-					| ''                                           | 'Expense'     | '$$DateProduction4001$$' | '40'        | 'Store 02'       | 'Store 02'        | 'Стремянка CLASS PLUS 6 ступенчатая' | 'Production planning 12 dated 01.01.2021 16:47:36' | 'Sales order 12 dated 10.02.2021 17:38:12' |
+					| ''                                           | 'Expense'     | '$$DateProduction4001$$' | '40'        | 'Store 02'       | 'Store 02'        | 'Стремянка номер 6 ступенчатая' | 'Production planning 12 dated 01.01.2021 16:47:36' | 'Sales order 12 dated 10.02.2021 17:38:12' |
 			And I close all client application windows
 		When Create document InventoryTransfer objects (MF)
 		And I execute 1C:Enterprise script at server
@@ -170,7 +170,7 @@
 					| 'Register  "R4036 Incoming stock requested"' | ''            | ''                         | ''          | ''               | ''                | ''                                   | ''                                                 | ''                                         |
 					| ''                                           | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'     | ''                | ''                                   | ''                                                 | ''                                         |
 					| ''                                           | ''            | ''                         | 'Quantity'  | 'Incoming store' | 'Requester store' | 'Item key'                           | 'Order'                                            | 'Requester'                                |
-					| ''                                           | 'Expense'     | '$$DateGoodsReceipt4001$$' | '40'        | 'Store 01'       | 'Store 01'        | 'Стремянка CLASS PLUS 6 ступенчатая' | 'Production planning 12 dated 01.01.2021 16:47:36' | 'Sales order 12 dated 10.02.2021 17:38:12' |
+					| ''                                           | 'Expense'     | '$$DateGoodsReceipt4001$$' | '40'        | 'Store 01'       | 'Store 01'        | 'Стремянка номер 6 ступенчатая' | 'Production planning 12 dated 01.01.2021 16:47:36' | 'Sales order 12 dated 10.02.2021 17:38:12' |
 			* R4011 Free stocks
 				And I select "R4011 Free stocks" exact value from "Register" drop-down list
 				And I click "Generate report" button
@@ -180,8 +180,8 @@
 					| 'Register  "R4011 Free stocks"'  | ''            | ''                         | ''          | ''           | ''                                   |
 					| ''                               | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions' | ''                                   |
 					| ''                               | ''            | ''                         | 'Quantity'  | 'Store'      | 'Item key'                           |
-					| ''                               | 'Receipt'     | '$$DateGoodsReceipt4001$$' | '40'        | 'Store 01'   | 'Стремянка CLASS PLUS 6 ступенчатая' |
-					| ''                               | 'Expense'     | '$$DateGoodsReceipt4001$$' | '40'        | 'Store 01'   | 'Стремянка CLASS PLUS 6 ступенчатая' |
+					| ''                               | 'Receipt'     | '$$DateGoodsReceipt4001$$' | '40'        | 'Store 01'   | 'Стремянка номер 6 ступенчатая' |
+					| ''                               | 'Expense'     | '$$DateGoodsReceipt4001$$' | '40'        | 'Store 01'   | 'Стремянка номер 6 ступенчатая' |
 			* R4012 Stock Reservation
 				And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
 				And I click "Generate report" button
@@ -191,7 +191,7 @@
 					| 'Register  "R4012 Stock Reservation"' | ''            | ''                         | ''          | ''           | ''                                   | ''                                         |
 					| ''                                    | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions' | ''                                   | ''                                         |
 					| ''                                    | ''            | ''                         | 'Quantity'  | 'Store'      | 'Item key'                           | 'Order'                                    |
-					| ''                                    | 'Receipt'     | '$$DateGoodsReceipt4001$$' | '40'        | 'Store 01'   | 'Стремянка CLASS PLUS 6 ступенчатая' | 'Sales order 12 dated 10.02.2021 17:38:12' |
+					| ''                                    | 'Receipt'     | '$$DateGoodsReceipt4001$$' | '40'        | 'Store 01'   | 'Стремянка номер 6 ступенчатая' | 'Sales order 12 dated 10.02.2021 17:38:12' |
 			And I close all client application windows
 			
 

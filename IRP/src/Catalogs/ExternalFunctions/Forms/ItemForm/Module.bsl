@@ -19,11 +19,29 @@ EndProcedure
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	JobScheduleInfo = CurrentObject.JobSchedule.Get();
+	
+	If CurrentObject.ExternalFunctionType = Enums.ExternalFunctionType.ReturnResultByRegExpMatch Then
+		For Each Row In CurrentObject.ResultMatches Do
+			NewRow = ResultMatches.Add();
+			NewRow.Result = Row.Result;
+			NewRow.RegExp.LoadValues(StrSplit(Row.RegExp, "|"));
+		EndDo;
+	EndIf;
+	
 EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	CurrentObject.JobSchedule = New ValueStorage(JobScheduleInfo);
+	
+	If CurrentObject.ExternalFunctionType = Enums.ExternalFunctionType.ReturnResultByRegExpMatch Then
+		CurrentObject.ResultMatches.Clear();
+		For Each Row In ResultMatches Do
+			NewRow = CurrentObject.ResultMatches.Add();
+			NewRow.RegExp = StrConcat(Row.RegExp.UnloadValues(), "|");
+			NewRow.Result = Row.Result;
+		EndDo;
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -188,6 +206,34 @@ EndProcedure
 
 #EndRegion
 
+#Region ResultMatch
+
+&AtClient
+Procedure ResultMatchesOnStartEdit(Item, NewRow, Clone)
+	Item.CurrentData.RegExp.ValueType = New TypeDescription("String");
+EndProcedure
+
+&AtClient
+Procedure CheckTestResult(Command)
+	CheckTestResultAtServer();
+EndProcedure
+
+&AtServer
+Procedure CheckTestResultAtServer()
+	//@skip-check invocation-parameter-type-intersect
+	Params = CommonFunctionsServer.GetRecalculateExpressionParams(Object);
+	Params.CaseString = TestCheckResultStringMatch;
+	
+	ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
+	CheckResultMatch = ResultInfo.Result;
+	
+	If ResultInfo.isError Then
+		CommonFunctionsClientServer.ShowUsersMessage(ResultInfo.Description);
+	EndIf;
+	
+EndProcedure
+#EndRegion
+
 #Region Service
 
 //@skip-check variable-value-type
@@ -197,10 +243,17 @@ Procedure SetVisible()
 		Items.PageCode.Visible = False;
 		Items.PageResult.Visible = False;
 		Items.PageRegExp.Visible = True;
+		Items.GroupResultByRegexp.Visible = False;
+	ElsIf Object.ExternalFunctionType = PredefinedValue("Enum.ExternalFunctionType.ReturnResultByRegExpMatch") Then
+		Items.PageCode.Visible = False;
+		Items.PageResult.Visible = False;
+		Items.PageRegExp.Visible = False;
+		Items.GroupResultByRegexp.Visible = True;
 	Else
 		Items.PageCode.Visible = True;
 		Items.PageResult.Visible = True;
 		Items.PageRegExp.Visible = False;
+		Items.GroupResultByRegexp.Visible = False;
 	EndIf;
 	Items.PageScheduler.Visible = Object.isSchedulerSet;
 EndProcedure

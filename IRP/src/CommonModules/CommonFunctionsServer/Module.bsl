@@ -568,6 +568,13 @@ Function RecalculateExpression(Params) Export
 			If Not IsBlankString(Params.Expression) Then
 				Result = ExecuteCode(Params.Expression, Params, ResultInfo);
 			EndIf;
+		ElsIf Params.Type = Enums.ExternalFunctionType.ReturnResultByRegExpMatch Then
+			For Each Row In Params.CaseParameters Do
+				If Regex(Params.CaseString, Row.Value) Then
+					Result = Row.Key;
+					Break;
+				EndIf;
+			EndDo;
 		Else
 			Raise "Wrong External function type.";
 		EndIf;
@@ -631,10 +638,14 @@ EndProcedure
 // * RegExpResult - Array -
 // * Expression - String -
 // * Result - Undefined -
+// * CaseString - String -
+// * CaseParameters - Map:
+// ** Key - Arbitrary - Resturned result
+// ** Value - String - RegExp string divided by | symbol
 // * SafeMode - Boolean -
 // * Job - CatalogRef.ExternalFunctions -
-// * Type - EnumRef.ExternalFunctionType -
 // * AddInfo - Structure -
+// * Type - EnumRef.ExternalFunctionType -
 Function GetRecalculateExpressionParams(ExternalFunction = Undefined) Export
 	
 	Structure = New Structure;
@@ -644,6 +655,9 @@ Function GetRecalculateExpressionParams(ExternalFunction = Undefined) Export
 
 	Structure.Insert("Expression", "");
 	Structure.Insert("Result", Undefined);
+
+	Structure.Insert("CaseString", "");
+	Structure.Insert("CaseParameters", New Map);
 
 	Structure.Insert("SafeMode", True);
 	Structure.Insert("Job", Catalogs.ExternalFunctions.EmptyRef());
@@ -657,6 +671,12 @@ Function GetRecalculateExpressionParams(ExternalFunction = Undefined) Export
 		Structure.Job = ExternalFunction.Ref;
 		Structure.Type = ExternalFunction.ExternalFunctionType;
 		Structure.RegExp = ExternalFunction.RegExp;
+		
+		MatchStr = New Map;
+		For Each Row In ExternalFunction.ResultMatches Do
+			MatchStr.Insert(Row.Result, Row.RegExp);
+		EndDo;
+		Structure.Insert("CaseParameters", MatchStr);
 	EndIf;
 	
 	Return Structure;

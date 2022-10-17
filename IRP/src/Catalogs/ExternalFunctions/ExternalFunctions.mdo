@@ -267,6 +267,62 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="4d026058-95be-49d9-8d5d-22535137d5d6">
+    <producedTypes>
+      <objectType typeId="ef9bb67e-9c97-4ab4-b9c8-01c9d7e2545b" valueTypeId="e3dd4e58-dbc4-4191-8cae-8fc119fc03aa"/>
+      <rowType typeId="b0188f0f-0211-41ff-82d6-5060f30c0c88" valueTypeId="92c7b0b0-f962-4291-9e65-cf16148e8ec2"/>
+    </producedTypes>
+    <name>ResultMatches</name>
+    <synonym>
+      <key>en</key>
+      <value>Result matches</value>
+    </synonym>
+    <attributes uuid="75ff7e46-711b-4925-a975-1d906464e50e">
+      <name>Result</name>
+      <synonym>
+        <key>en</key>
+        <value>Result</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <types>Date</types>
+        <types>Boolean</types>
+        <types>AnyRef</types>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>15</precision>
+          <scale>5</scale>
+        </numberQualifiers>
+        <stringQualifiers>
+          <length>512</length>
+        </stringQualifiers>
+        <dateQualifiers>
+          <dateFractions>Date</dateFractions>
+        </dateQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="8b140890-f63c-4a8f-9473-316e3f8be9ac">
+      <name>RegExp</name>
+      <synonym>
+        <key>en</key>
+        <value>Reg exp</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>512</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="56cbceda-ba36-442e-ab3d-68f25ba61af1">
     <name>ItemForm</name>
     <synonym>

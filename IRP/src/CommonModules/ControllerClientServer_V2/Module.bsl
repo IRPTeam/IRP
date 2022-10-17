@@ -3588,7 +3588,8 @@ Function BindBillOfMaterials(Parameters)
 	Binding = New Structure();
 	
 	Binding.Insert("Production",
-		"StepMaterialsCalculations");
+		"StepMaterialsCalculations,
+		|StepChangeCostMultiplierRatioByBillOfMaterials");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -3602,6 +3603,33 @@ Procedure StepChangeBillOfMaterialsByItemKey(Parameters, Chain) Export
 	Options.CurrentBillOfMaterials = GetBillOfMaterials(Parameters);
 	Options.StepName = "StepChangeBillOfMaterialsByItemKey";
 	Chain.ChangeBillOfMaterialsByItemKey.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region COST_MULTIPLIER_RATIO
+
+// CostMultiplierRatio.Set
+Procedure SetCostMultiplierRatio(Parameters, Results) Export
+	Binding = BindCostMultiplierRatio(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// CostMultiplierRatio.Bind
+Function BindCostMultiplierRatio(Parameters)
+	DataPath = "CostMultiplierRatio";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// CostMultiplierRatio.ChangeCostMultiplierRatioByBillOfMaterials.Step
+Procedure StepChangeCostMultiplierRatioByBillOfMaterials(Parameters, Chain) Export
+	Chain.ChangeCostMultiplierRatioByBillOfMaterials.Enable = True;
+	Chain.ChangeCostMultiplierRatioByBillOfMaterials.Setter = "SetCostMultiplierRatio";
+	Options = ModelClientServer_V2.ChangeCostMultiplierRatioByBillOfMaterialsOptions();
+	Options.BillOfMaterials = GetBillOfMaterials(Parameters);
+	Options.StepName = "StepChangeCostMultiplierRatioByBillOfMaterials";
+	Chain.ChangeCostMultiplierRatioByBillOfMaterials.Options.Add(Options);
 EndProcedure
 
 #EndRegion

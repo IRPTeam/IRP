@@ -275,6 +275,7 @@ Function GetChain()
 	Chain.Insert("ChangeExpenseTypeByBillOfMaterials"           , GetChainLink("ChangeExpenseTypeByBillOfMaterialsExecute"));
 	
 	Chain.Insert("ChangeBillOfMaterialsByItemKey" , GetChainLink("ChangeBillOfMaterialsByItemKeyExecute"));
+	Chain.Insert("ChangeCostMultiplierRatioByBillOfMaterials" , GetChainLink("ChangeCostMultiplierRatioByBillOfMaterialsExecute"));
 	
 	Chain.Insert("ChangePlanningPeriodByDateAndBusinessUnit" , GetChainLink("ChangePlanningPeriodByDateAndBusinessUnitExecute"));
 	Chain.Insert("ChangeProductionPlanningByPlanningPeriod"  , GetChainLink("ChangeProductionPlanningByPlanningPeriodExecute"));
@@ -1270,6 +1271,22 @@ Function ChangeBillOfMaterialsByItemKeyExecute(Options) Export
 		Return Options.CurrentBillOfMaterials;
 	EndIf;
 	Return ModelServer_V2.GetBillOfMaterialsByItemKey(Options.ItemKey);
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_COST_MULTIPLIERRATIO_BY_BILL_OF_MATERIALS		
+
+Function ChangeCostMultiplierRatioByBillOfMaterialsOptions() Export
+	Return GetChainLinkOptions("BillOfMaterials");
+EndFunction
+
+Function ChangeCostMultiplierRatioByBillOfMaterialsExecute(Options) Export
+	If Not ValueIsFilled(Options.BillOfMaterials) Then
+		Return 0;
+	EndIf;
+	
+	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "CostMultiplierRatio");
 EndFunction
 
 #EndRegion

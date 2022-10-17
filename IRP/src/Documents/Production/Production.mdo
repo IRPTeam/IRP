@@ -293,6 +293,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="149a81ae-7a01-4dca-91f6-2f51e85bd25e">
+    <name>CostMultiplierRatio</name>
+    <synonym>
+      <key>en</key>
+      <value>Cost multiplier ratio</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typePercent</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="57e36e1f-f225-489b-8685-a9656b958641">
     <name>DocumentForm</name>
     <synonym>

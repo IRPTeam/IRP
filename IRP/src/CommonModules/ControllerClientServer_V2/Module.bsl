@@ -6903,7 +6903,9 @@ Procedure SetMaterialsWithKeyOwner(Parameters, Results) Export
 			
 			// add new rows
 			For Each Row In Result.Value.Materials Do
-				Parameters.Cache.Materials.Add(Row);
+				If Row.KeyOwner = Result.Options.KeyOwner Then
+					Parameters.Cache.Materials.Add(Row);
+				EndIf;
 			EndDo;
 		EndIf;
 	EndDo;

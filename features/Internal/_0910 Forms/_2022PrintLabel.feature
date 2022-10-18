@@ -296,20 +296,96 @@ Scenario: _0202203 print layout creation with using external data processors
 		Then "" spreadsheet document is equal
 		| 'Dress'                 |
 		| ''                      |
-		| 'Цiна: 550 грн.'        |
+		| 'Price: 550 uah'        |
 		| ''                      |
 		| '550'                   |
 		| ''                      |
-		| 'Нова цiна: 522,5 грн.' |
+		| 'New price: 522,5 uah'  |
 	And I close all client application windows
 	
-
+Scenario: _0202204 check price type change in the label printing processing
+		And I close all client application windows
+	* Open the processing form
+		Given I open hyperlink "e1cib/app/DataProcessor.PrintLabels"
+	* Add items and selecting labels by lines
+		And I select "Auto" exact value from the drop-down list named "BarcodeType"
+		And I click Choice button of the field named "PriceType"
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Basic Price Types' |
+		And I select current line in "List" table	
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'S/Yellow' |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Template" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Template" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Label 1'     |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Template" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Template" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Label 2'     |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+	* Change price type
+		Then I select all lines of "ItemList" table
+		And I click Choice button of the field named "PriceType"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Basic Price without VAT' |
+		And I select current line in "List" table
+	* Check
+		And "ItemList" table contains lines
+			| 'Print' | 'Barcode'    | 'Item'     | 'Price type'              | 'Item key'  | 'Unit' | 'Barcode type' | 'Quantity' | 'Price'  | 'Template' |
+			| 'No'    | '2202283713' | 'Dress'    | 'Basic Price without VAT' | 'S/Yellow'  | 'pcs'  | 'Auto'         | '2'        | '466,10' | 'Label 1'  |
+			| 'No'    | ''           | 'Trousers' | 'Basic Price without VAT' | '36/Yellow' | 'pcs'  | ''             | '1'        | '338,98' | 'Label 2'  |
+	* Change price type for one line and check
+		And I go to line in "ItemList" table
+			| 'Item'  |
+			| 'Dress' |
+		And I click choice button of the attribute named "ItemListPriceType" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Basic Price Types' |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| 'Print' | 'Barcode'    | 'Item'     | 'Price type'              | 'Item key'  | 'Unit' | 'Barcode type' | 'Quantity' | 'Price'  | 'Template' |
+			| 'No'    | '2202283713' | 'Dress'    | 'Basic Price Types'       | 'S/Yellow'  | 'pcs'  | 'Auto'         | '2'        | '550,00' | 'Label 1'  |
+			| 'No'    | ''           | 'Trousers' | 'Basic Price without VAT' | '36/Yellow' | 'pcs'  | ''             | '1'        | '338,98' | 'Label 2'  |
+		And I close all client application windows
 		
-				
-		
-				
-
-
+	
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

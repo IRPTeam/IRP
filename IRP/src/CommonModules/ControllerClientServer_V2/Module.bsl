@@ -6944,8 +6944,8 @@ Procedure StepMaterialsCalculationsWithKeyOwner(Parameters, Chain) Export
 	Chain.MaterialsCalculations.IsLazyStep = True;
 	Chain.MaterialsCalculations.LazyStepName = "StepMaterialsCalculationsWithKeyOwner";
 	
-	ArrayOfMaterialsRows = New Array();
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		ArrayOfMaterialsRows = New Array();
 		MaterialsRows = Parameters.Object.Materials.FindRows(New Structure("KeyOwner", Row.Key));
 		For Each RowMaterials In MaterialsRows Do
 			NewRow = New Structure(Parameters.ObjectMetadataInfo.Tables.Materials.Columns);
@@ -7000,8 +7000,8 @@ Procedure StepMaterialsRecalculateQuantityWithKeyOwner(Parameters, Chain) Export
 	Chain.MaterialsRecalculateQuantity.IsLazyStep = True;
 	Chain.MaterialsRecalculateQuantity.LazyStepName = "StepMaterialsRecalculateQuantityWithKeyOwner";
 	
-	ArrayOfMaterialsRows = New Array();
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		ArrayOfMaterialsRows = New Array();
 		MaterialsRows = Parameters.Object.Materials.FindRows(New Structure("KeyOwner", Row.Key));
 		For Each RowMaterials In MaterialsRows Do
 			NewRow = New Structure(Parameters.ObjectMetadataInfo.Tables.Materials.Columns);

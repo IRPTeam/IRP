@@ -91,6 +91,7 @@ Scenario: _2000 preparation (landed cost)
 		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 		And I click "Save and close" button
 	When Create document SalesInvoice objects (MF)
+	When Create catalog ReportOptions objects
 	When Create catalog MFBillOfMaterials objects
 	When Create catalog PlanningPeriods objects (MF)
 	When Create catalog BillOfMaterials objects (semiproducts)
@@ -147,11 +148,15 @@ Scenario: _2010 create Calculation movement costs (batch realocate)
 
 Scenario: _2012 check batch calculation
 	Given I open hyperlink "e1cib/app/Report.BatchBalance"
+	And I click "Select option..." button
+	And I move to "Custom" tab
+	And I activate field named "OptionsListReportOption" in "OptionsList" table
+	And I select current line in "OptionsList" table
 	And I click "Run report" button
 	Given "Result" spreadsheet document is equal to "LandedCost" by template
 	And I close all client application windows
 	
-Scenario: _2013 check batch calculation (one semiproduct consists of another semiproduct)
+Scenario: _2013 check batch calculation (one semiproduct consists of another semiproduct, with cost ratio)
 	And I close all client application windows
 	* Preparation
 		And I execute 1C:Enterprise script at server
@@ -170,6 +175,10 @@ Scenario: _2013 check batch calculation (one semiproduct consists of another sem
 		And in the table "List" I click the button named "ListContextMenuPost"		
 	* Check batches calculation
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I move to "Standard" tab
+		And I select current line in "StandardOptions" table	
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'    | 'Item key'    |

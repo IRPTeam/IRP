@@ -112,13 +112,13 @@ Scenario: _0293002 create Work sheet based on Work order without SO (link, unlin
 			| '1' | 'Assembly'     | 'Assembly'     | 'Assembly'               | 'pcs'  | '1,000'    | ''            | 'Work order 30 dated 22.09.2022 10:59:11' |
 			| '2' | 'Installation' | 'Installation' | 'Furniture installation' | 'pcs'  | '1,000'    | ''            | 'Work order 30 dated 22.09.2022 10:59:11' |
 		
-		And "Materials" table became equal
-			| '#' | 'Cost write off'       | 'Item (BOM)' | 'Item key'   | 'Item key (BOM)' | 'Unit (BOM)' | 'Quantity (BOM)' | 'Store'    | 'Item'       | 'Unit' | 'Quantity' |
-			| '1' | 'Include to work cost' | 'Material 1' | 'Material 1' | 'Material 1'     | 'pcs'        | '2,000'          | 'Store 01' | 'Material 1' | 'pcs'  | '2,000'    |
-			| '2' | 'Include to work cost' | 'Material 2' | 'Material 2' | 'Material 2'     | 'pcs'        | '2,000'          | 'Store 01' | 'Material 2' | 'pcs'  | '2,000'    |
-			| '3' | 'Include to work cost' | 'Material 1' | 'Material 1' | 'Material 1'     | 'pcs'        | '2'              | 'Store 01' | 'Material 1' | 'pcs'  | '2'        |
-			| '4' | 'Include to work cost' | 'Material 2' | 'Material 2' | 'Material 2'     | 'pcs'        | '4'              | 'Store 01' | 'Material 2' | 'pcs'  | '4'        |
-			| '5' | 'Include to work cost' | 'Material 3' | 'Material 3' | 'Material 3'     | 'kg'         | '1,521'          | 'Store 01' | 'Material 3' | 'kg'   | '1,521'    |
+		And "Materials" table contains lines
+			| 'Cost write off'       | 'Item (BOM)' | 'Item key'   | 'Item key (BOM)' | 'Unit (BOM)' | 'Quantity (BOM)' | 'Store'    | 'Item'       | 'Unit' | 'Quantity' |
+			| 'Include to work cost' | 'Material 1' | 'Material 1' | 'Material 1'     | 'pcs'        | '2,000'          | 'Store 01' | 'Material 1' | 'pcs'  | '2,000'    |
+			| 'Include to work cost' | 'Material 2' | 'Material 2' | 'Material 2'     | 'pcs'        | '2,000'          | 'Store 01' | 'Material 2' | 'pcs'  | '2,000'    |
+			| 'Include to work cost' | 'Material 1' | 'Material 1' | 'Material 1'     | 'pcs'        | '2'              | 'Store 01' | 'Material 1' | 'pcs'  | '2'        |
+			| 'Include to work cost' | 'Material 2' | 'Material 2' | 'Material 2'     | 'pcs'        | '4'              | 'Store 01' | 'Material 2' | 'pcs'  | '4'        |
+			| 'Include to work cost' | 'Material 3' | 'Material 3' | 'Material 3'     | 'kg'         | '1,521'          | 'Store 01' | 'Material 3' | 'kg'   | '1,521'    |
 		Then the form attribute named "Branch" became equal to "Workshop 1"
 	* Unlink
 		And in the table "ItemList" I click "Link unlink basis documents" button

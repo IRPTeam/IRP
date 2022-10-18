@@ -2154,10 +2154,7 @@ Function CalculateNetAmountAsTotalAmountMinusTaxAmount_PriceNotIncludeTax(PriceO
 EndFunction
 
 Function _CalculateAmount(PriceOptions, Result)
-	If PriceOptions.PriceType <> Undefined And PriceOptions.QuantityInBaseUnit <> Undefined 
-		And PriceOptions.PriceType = PredefinedValue("Catalog.PriceTypes.ManualPriceType") Then
-		Return Result.Price * PriceOptions.QuantityInBaseUnit;
-	ElsIf PriceOptions.Quantity <> Undefined Then
+	If PriceOptions.Quantity <> Undefined Then
 		Return Result.Price * PriceOptions.Quantity;
 	EndIf;
 	Return Result.TotalAmount;

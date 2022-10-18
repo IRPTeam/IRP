@@ -375,6 +375,7 @@
   <commonModules>CommonModule.IntegrationServerPrivileged</commonModules>
   <commonModules>CommonModule.IntegrationServerReuse</commonModules>
   <commonModules>CommonModule.JorDocumentsClient</commonModules>
+  <commonModules>CommonModule.JorDocumentsClientServer</commonModules>
   <commonModules>CommonModule.JorDocumentsServer</commonModules>
   <commonModules>CommonModule.LandedCostServer</commonModules>
   <commonModules>CommonModule.Localization</commonModules>

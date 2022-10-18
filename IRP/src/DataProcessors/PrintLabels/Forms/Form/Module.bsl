@@ -314,14 +314,20 @@ Procedure PriceTypeOnChangeAtServer()
 		ItemRow.PriceType = ThisObject.PriceType;
 		SelectedRows.Add(ItemRow);
 	EndDo;
-	ItemPriceTable = ItemList.Unload(SelectedRows, "ItemKey, Unit, PriceType");
+	
+	TableItems = ItemList.Unload(SelectedRows, "ItemKey").UnloadColumn("ItemKey");
+	ItemsInfo = GetItemInfo.GetInfoByItemsKey(TableItems);
+	For Each ItemInfo In ItemsInfo Do
+		 ItemInfo.Insert("PriceType", ThisObject.PriceType);
+	EndDo;
+	ItemPriceTable = GetItemInfo.ItemPriceInfoByTable(ItemsInfo, CurrentDate());
+	
 	Filter = New Structure("ItemKey, Unit, PriceType");
-	QuerySelection = GetItemInfo.QueryByItemPriceInfo(ItemPriceTable, CurrentDate());
-    QuerySelection.Reset();
 	For Each Item In SelectedRows Do
 		FillPropertyValues(Filter, Item);
-		If QuerySelection.FindNext(Filter) Then
-			Item.Price = QuerySelection.Price;
+		FindRows = ItemPriceTable.FindRows(Filter);
+		If FindRows.Count() Then
+			Item.Price = FindRows[0].Price;
 		Else
 			Item.Price = 0;
 		EndIf;

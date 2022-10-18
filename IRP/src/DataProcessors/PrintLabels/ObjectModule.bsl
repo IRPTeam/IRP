@@ -4,88 +4,92 @@ Procedure FillAtServer(Object, Form) Export
 	ItemTable = Form.FormAttributeToValue("ItemList");
 
 	Query = New Query();
-	Query.Text = "SELECT
-				 |	Barcodes.ItemKey,
-				 |	MAX(Barcodes.Barcode) AS Barcode
-				 |INTO Barcodes_TT
-				 |FROM
-				 |	InformationRegister.Barcodes AS Barcodes
-				 |WHERE
-				 |	NOT Barcodes.ItemKey.Specification <> VALUE(Catalog.Specifications.EmptyRef)
-				 |GROUP BY
-				 |	Barcodes.ItemKey
-				 |;
-				 |
-				 |////////////////////////////////////////////////////////////////////////////////
-				 |SELECT
-				 |	ItemKeys.Item AS Item,
-				 |	ItemKeys.Ref AS ItemKey,
-				 |	ItemKeys.Unit AS Unit,
-				 |	ItemKeys.Unit AS ItemKeyUnit,
-				 |	ItemKeys.Item.Unit AS ItemUnit,
-				 |	NOT ItemKeys.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
-				 |	Barcodes_TT.Barcode AS Barcode
-				 |FROM
-				 |	Catalog.ItemKeys AS ItemKeys
-				 |		LEFT JOIN Barcodes_TT AS Barcodes_TT
-				 |		ON ItemKeys.Ref = Barcodes_TT.ItemKey";
-	QueryExecution = Query.Execute();
-
-	If QueryExecution.IsEmpty() Then
+	Query.Text = 
+	"SELECT
+	|	Barcodes.ItemKey,
+	|	MAX(Barcodes.Barcode) AS Barcode
+	|INTO Barcodes_TT
+	|FROM
+	|	InformationRegister.Barcodes AS Barcodes
+	|WHERE
+	|	NOT Barcodes.ItemKey.Specification <> VALUE(Catalog.Specifications.EmptyRef)
+	|GROUP BY
+	|	Barcodes.ItemKey
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemKeys.Item AS Item,
+	|	ItemKeys.Ref AS ItemKey,
+	|	ItemKeys.Unit AS Unit,
+	|	ItemKeys.Unit AS ItemKeyUnit,
+	|	ItemKeys.Item.Unit AS ItemUnit,
+	|	NOT ItemKeys.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
+	|	Barcodes_TT.Barcode AS Barcode,
+	|	&PriceType AS PriceType
+	|FROM
+	|	Catalog.ItemKeys AS ItemKeys
+	|		LEFT JOIN Barcodes_TT AS Barcodes_TT
+	|		ON ItemKeys.Ref = Barcodes_TT.ItemKey";
+	Query.SetParameter("PriceType", Form.PriceType);
+	ItemPriceTable = Query.Execute().Unload();
+	If Not ItemPriceTable.Count() Then
 		Return;
 	EndIf;
 
-	ItemPriceTable = QueryExecution.Unload();
-	ItemPriceTable.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
-	ItemPriceTable.FillValues(Form.PriceType, "PriceType");
-	
 	ItemsInfo = GetItemInfo.ItemPriceInfoByTable(ItemPriceTable, CurrentDate());
 
 	PriceQuery = New Query();
-	PriceQuery.Text = "SELECT
-					  |	ItemSource.Item,
-					  |	ItemSource.ItemKey,
-					  |	ItemSource.ItemUnit AS Unit,
-					  |	ItemSource.PriceType,
-					  |	ItemSource.Barcode
-					  |INTO ItemTable
-					  |FROM
-					  |	&ItemSource AS ItemSource
-					  |;
-					  |
-					  |////////////////////////////////////////////////////////////////////////////////
-					  |SELECT
-					  |	PriceSource.ItemKey,
-					  |	PriceSource.Price
-					  |INTO PriceTable
-					  |FROM
-					  |	&PriceSource AS PriceSource
-					  |;
-					  |
-					  |////////////////////////////////////////////////////////////////////////////////
-					  |SELECT
-					  |	ItemTable.Item,
-					  |	ItemTable.ItemKey,
-					  |	ItemTable.Unit,
-					  |	ItemTable.PriceType,
-					  |	ItemTable.Barcode,
-					  |	1 AS Quantity,
-					  |	ItemTable.ItemKey.Unit AS ItemKeyUnit,
-					  |	ItemTable.ItemKey.Unit AS ItemUnit,
-					  |	NOT ItemTable.ItemKey.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
-					  |	ISNULL(PriceTable.Price, 0) AS Price
-					  |FROM
-					  |	ItemTable AS ItemTable
-					  |		LEFT JOIN PriceTable AS PriceTable
-					  |		ON ItemTable.ItemKey = PriceTable.ItemKey";
+	PriceQuery.Text = 
+	"SELECT
+	|	ItemSource.Item,
+	|	ItemSource.ItemKey,
+	|	ItemSource.ItemUnit,
+	|	ItemSource.ItemKeyUnit,
+	|	ItemSource.PriceType,
+	|	ItemSource.Barcode
+	|INTO ItemTable
+	|FROM
+	|	&ItemSource AS ItemSource
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	PriceSource.ItemKey,
+	|	PriceSource.Price
+	|INTO PriceTable
+	|FROM
+	|	&PriceSource AS PriceSource
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemTable.Item,
+	|	ItemTable.ItemKey,
+	|	CASE
+	|		WHEN ItemTable.ItemKeyUnit = VALUE(Catalog.Units.EmptyRef)
+	|			THEN ItemTable.ItemUnit
+	|		ELSE ItemTable.ItemKeyUnit
+	|	END AS Unit,
+	|	ItemTable.PriceType,
+	|	ItemTable.Barcode,
+	|	1 AS Quantity,
+	|	ItemTable.ItemKeyUnit,
+	|	ItemTable.ItemUnit,
+	|	NOT ItemTable.ItemKey.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
+	|	ISNULL(PriceTable.Price, 0) AS Price
+	|FROM
+	|	ItemTable AS ItemTable
+	|		LEFT JOIN PriceTable AS PriceTable
+	|		ON ItemTable.ItemKey = PriceTable.ItemKey";
 	PriceQuery.SetParameter("ItemSource", ItemPriceTable);
 	PriceQuery.SetParameter("PriceSource", ItemsInfo);
-	PriceQueryExecution = PriceQuery.Execute();
-	PriceQuerySelection = PriceQueryExecution.Select();
-
+	
+	PriceQuerySelection = PriceQuery.Execute().Select();
 	While PriceQuerySelection.Next() Do
 		NewRow = ItemTable.Add();
 		FillPropertyValues(NewRow, PriceQuerySelection);
+		NewRow.BarcodeType = Form.BarcodeType;
 	EndDo;
 
 	Form.ValueToFormAttribute(ItemTable, "ItemList");

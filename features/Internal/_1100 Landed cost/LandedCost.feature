@@ -36,6 +36,7 @@ Scenario: _001 test data
 		When Create catalog IntegrationSettings objects (LC)
 		When Create catalog ItemKeys objects (LC)
 		When Create catalog ItemSegments objects (LC)
+		When Create catalog ReportOptions objects
 		When Create catalog SerialLotNumbers objects (LC)
 		When Create catalog ItemTypes objects (LC)
 		When Create catalog Units objects (LC)
@@ -384,6 +385,10 @@ Scenario: _003 creating Purchase invoice and checking close Batch wise over bala
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Checking close Batch wise over balance (High shoes, Store 02)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I activate field named "OptionsListReportOption" in "OptionsList" table
+		And I select current line in "OptionsList" table
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description' |

@@ -378,10 +378,7 @@ Function R5022T_Expenses()
 	|	WriteOffBatchesInfo.Currency,
 	|	WriteOffBatchesInfo.RowID AS Key,
 	|	WriteOffBatchesInfo.Recorder AS CalculationMovementCost,
-	// #1539
-	//|	WriteOffBatchesInfo.Amount AS Amount,
 	|	WriteOffBatchesInfo.Amount + WriteOffBatchesInfo.AmountCostRatio AS Amount,
-	//|	WriteOffBatchesInfo.Amount + WriteOffBatchesInfo.AmountTax AS AmountWithTaxes
 	|	WriteOffBatchesInfo.Amount + WriteOffBatchesInfo.AmountCostRatio + WriteOffBatchesInfo.AmountTax AS AmountWithTaxes
 	|INTO R5022T_Expenses
 	|FROM

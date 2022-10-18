@@ -45,7 +45,6 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|	R6010B_BatchWiseBalance.Recorder AS CalculationMovementCost,
 	|	R6010B_BatchWiseBalance.Amount AS Amount,
 	|	R6010B_BatchWiseBalance.AmountTax AS AmountTax,
-	// #1539
 	|	R6010B_BatchWiseBalance.AmountCostRatio AS AmountCostRatio,
 	|	R6010B_BatchWiseBalance.AmountCost AS AmountCost
 	|FROM
@@ -68,7 +67,6 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|	0,
 	|	0,
 	|	0,
-	// #1539
 	|	0
 	|FROM
 	|	AccumulationRegister.R6030T_BatchShortageOutgoing AS R6030T_BatchShortageOutgoing
@@ -90,7 +88,6 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|	0,
 	|	0,
 	|	0,
-	// #1539
 	|	0
 	|FROM
 	|	AccumulationRegister.R6040T_BatchShortageIncoming AS R6040T_BatchShortageIncoming
@@ -145,7 +142,6 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	R6010B_BatchWiseBalance.Quantity AS Quantity,
 	|	R6010B_BatchWiseBalance.Amount AS Amount,
 	|	R6010B_BatchWiseBalance.AmountTax AS AmountTax,
-	// #1539
 	|	R6010B_BatchWiseBalance.AmountCostRatio AS AmountCostRatio,
 	|	R6010B_BatchWiseBalance.AmountCost AS AmountCost,
 	|	R6010B_BatchWiseBalance.Batch AS Batch,
@@ -170,7 +166,6 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	0,
 	|	0,
 	|	0,
-	// #1539
 	|	0,
 	|	VALUE(Enum.BatchType.BatchShortageOutgoing),
 	|	R6030T_BatchShortageOutgoing.BatchKey,
@@ -193,7 +188,6 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	0,
 	|	0,
 	|	0,
-	// #1539
 	|	0,
 	|	VALUE(Enum.BatchType.BatchShortageIncoming),
 	|	R6040T_BatchShortageIncoming.BatchKey,
@@ -215,7 +209,6 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	BatchBalance.Quantity AS Quantity,
 	|	BatchBalance.Amount AS Amount,
 	|	BatchBalance.AmountTax AS AmountTax,
-	// #1539
 	|	BatchBalance.AmountCostRatio AS AmountCostRatio,
 	|	BatchBalance.AmountCost AS AmountCost,
 	|	BatchBalance.Batch AS Batch,

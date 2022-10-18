@@ -296,11 +296,11 @@ Scenario: _0202203 print layout creation with using external data processors
 		Then "" spreadsheet document is equal
 		| 'Dress'                 |
 		| ''                      |
-		| 'Ціна: 550 грн.'        |
+		| 'Цiна: 550 грн.'        |
 		| ''                      |
 		| '550'                   |
 		| ''                      |
-		| 'Нова ціна: 522,5 грн.' |
+		| 'Нова цiна: 522,5 грн.' |
 	And I close all client application windows
 	
 Scenario: _0202204 check price type change in the label printing processing

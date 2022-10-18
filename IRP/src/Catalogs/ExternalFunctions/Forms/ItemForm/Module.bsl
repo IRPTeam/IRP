@@ -95,11 +95,9 @@ Async Procedure FindMatches()
 	Array = New Array;
 	For Each TestRexExpString In Object.TestRexExpStrings Do
 		ResultArray = Await CommonFunctionsClient.RegExpFindMatch(TestRexExpString.Row, Object.RegExp); // Array of String
-		
 		If ResultArray.Count() = 0 Then
 			Continue;
 		EndIf;
-		
 		Array.Add(TestRexExpString.Row);
 		
 		For Index = 0 To ResultArray.UBound() Do
@@ -108,9 +106,7 @@ Async Procedure FindMatches()
 		Array.Add("");
 		If Not IsBlankString(Object.ExternalCode) Then
 			Array.Add("Result:");
-			
-			//@skip-check transfer-object-between-client-server
-			ResultInfo = RunRegExpExpressionAtServer(ResultArray);
+			ResultInfo = RunRegExpExpressionAtServer(TestRexExpString.Row); // Array of String
 			Array.Add("[Value]	> " + ResultInfo.Result);
 			Array.Add("[Type]	> " + String(TypeOf(ResultInfo.Result)));
 		EndIf;
@@ -121,23 +117,20 @@ EndProcedure
 // Run reg exp expression at server.
 // 
 // Parameters:
-//  ResultArray - Array of String - Result array
+//  TestString - String - Test string
 // 
 // Returns:
 //  See CommonFunctionsServer.RecalculateExpressionResult
 &AtServer
-Function RunRegExpExpressionAtServer(ResultArray)
+Function RunRegExpExpressionAtServer(TestString)
 	
 	//@skip-check invocation-parameter-type-intersect
 	Params = CommonFunctionsServer.GetRecalculateExpressionParams(Object);
-	Params.RegExpResult = ResultArray;
-	
+	Params.RegExpString = TestString; 
 	ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
-	
 	If ResultInfo.isError Then
 		CommonFunctionsClientServer.ShowUsersMessage(ResultInfo.Description);
 	EndIf;
-
 	Return ResultInfo;
 	
 EndFunction

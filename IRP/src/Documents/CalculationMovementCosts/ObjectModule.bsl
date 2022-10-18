@@ -5,14 +5,14 @@ Procedure Posting(Cancel, PostingMode)
 	AccumulationRegisters.R6020B_BatchBalance.BatchBalance_Clear(ThisObject.Ref, Cancel);
 	AccumulationRegisters.R6060T_CostOfGoodsSold.CostOfGoodsSold_Clear(ThisObject.Ref, Cancel);
 	AccumulationRegisters.R5022T_Expenses.Expenses_Clear(ThisObject.Ref, Cancel);
-	
-	CalculationSettings = LandedCostServer.GetCalculationSettings();
-	CalculationSettings.CalculationMovementCostRef = ThisObject.Ref;
-	CalculationSettings.Company = ThisObject.Company;
-	CalculationSettings.CalculationMode = ThisObject.CalculationMode;
-	CalculationSettings.BeginPeriod = ThisObject.BeginDate;
-	CalculationSettings.EndPeriod = ThisObject.EndDate;
-	CalculationSettings.RaiseOnCalculationError = ThisObject.RaiseOnCalculationError;
+		
+	CalculationSettings = New Structure();
+	CalculationSettings.Insert("CalculationMovementCostRef" , ThisObject.Ref);
+	CalculationSettings.Insert("Company"                    , ThisObject.Company);
+	CalculationSettings.Insert("CalculationMode"            , ThisObject.CalculationMode);
+	CalculationSettings.Insert("BeginPeriod"                , ThisObject.BeginDate);
+	CalculationSettings.Insert("EndPeriod"                  , ThisObject.EndDate);
+	CalculationSettings.Insert("RaiseOnCalculationError"    , ThisObject.RaiseOnCalculationError);
 	
 	LandedCostServer.Posting_BatchWiseBalance(CalculationSettings);
 	For Each Records In ThisObject.RegisterRecords Do

@@ -9063,7 +9063,7 @@ Scenario: _0154189 check filling in and refilling Work order
 			And "ItemList" table became equal
 				| 'Item'     | 'Price type'        | 'Item key' | 'Bill of materials' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Sales order' |
 				| 'Delivery' | 'Basic Price Types' | 'Delivery' | ''                  | 'pcs'  | 'No'                 | '16,78'      | '1,000'    | '110,00' | '18%' | ''              | '93,22'      | '110,00'       | ''            |
-				| 'Assembly' | 'Basic Price Types' | 'Assembly' | ''                  | 'pcs'  | 'No'                 | '36,61'      | '2,000'    | '120,00' | '18%' | ''              | '203,39'     | '240,00'       | ''            |			
+				| 'Assembly' | 'Basic Price Types' | 'Assembly' | 'Assembly'          | 'pcs'  | 'No'                 | '36,61'      | '2,000'    | '120,00' | '18%' | ''              | '203,39'     | '240,00'       | ''            |			
 	* Check the re-drawing of the form for taxes at company re-selection.
 			And I click Select button of "Company" field
 			And I go to line in "List" table
@@ -9084,7 +9084,7 @@ Scenario: _0154189 check filling in and refilling Work order
 			And "ItemList" table contains lines
 				| 'Item'     | 'Price type'        | 'Item key' | 'Bill of materials' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Sales order' |
 				| 'Delivery' | 'Basic Price Types' | 'Delivery' | ''                  | 'pcs'  | 'No'                 | '16,78'      | '1,000'    | '110,00' | '18%' | ''              | '93,22'      | '110,00'       | ''            |
-				| 'Assembly' | 'Basic Price Types' | 'Assembly' | ''                  | 'pcs'  | 'No'                 | '36,61'      | '2,000'    | '120,00' | '18%' | ''              | '203,39'     | '240,00'       | ''            |			
+				| 'Assembly' | 'Basic Price Types' | 'Assembly' | 'Assembly'          | 'pcs'  | 'No'                 | '36,61'      | '2,000'    | '120,00' | '18%' | ''              | '203,39'     | '240,00'       | ''            |			
 	* Check the line clearing in the tax tree when deleting a line from an order
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  |

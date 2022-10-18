@@ -39,19 +39,32 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	IsWorkshop = Object.Type = PredefinedValue("Enum.BusinessUnitTypes.Workshop");
-	IsRetail = Object.Type = PredefinedValue("Enum.BusinessUnitTypes.Retail");
-	Form.Items.UseConsolidatedRetailSales.Visible = FOServer.IsUseConsolidatedRetailSales() And IsRetail;
-	Form.Items.MaterialStore.Visible = IsWorkshop;
-	Form.Items.ReleaseStore.Visible = IsWorkshop;
-	Form.Items.SemiproductStore.Visible = IsWorkshop;
+	IsUseConsolidatedRetailSales = FOServer.IsUseConsolidatedRetailSales();
+	IsUseWorkOrders              = FOServer.IsUseWorkOrders();
+	IsUseManufacturing           = FOServer.IsUseManufacturing();
+	
+	Form.Items.UseConsolidatedRetailSales.Visible = IsUseConsolidatedRetailSales And Object.Retail;
+	
+	Form.Items.MaterialStore.Visible    = (IsUseWorkOrders Or IsUseManufacturing) And Object.Workshop;
+	Form.Items.ReleaseStore.Visible     = IsUseManufacturing And Object.Workshop;
+	Form.Items.SemiproductStore.Visible = IsUseManufacturing And Object.Workshop;
 EndProcedure
 
 #EndRegion
 
 &AtClient
-Procedure TypeOnChange(Item)
-	SetVisibilityAvailability(Object, ThisObject);	
+Procedure DepartmentOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure WorkshopOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure RetailOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient

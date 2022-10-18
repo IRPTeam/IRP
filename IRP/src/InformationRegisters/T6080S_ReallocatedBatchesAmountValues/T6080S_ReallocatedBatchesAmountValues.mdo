@@ -64,6 +64,21 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="021080c6-a3f7-488f-8f4b-a4f2a355a121">
+    <name>AmountCostRatio</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount cost ratio</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <dimensions uuid="5cd8efa9-c3a5-4d58-a217-89b3ce627e4f">
     <name>OutgoingDocument</name>
     <synonym>

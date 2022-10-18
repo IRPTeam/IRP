@@ -1,6 +1,6 @@
 
-Procedure ServerEntryPoint(StepsEnablerName, Parameters) Export
-	ModelClientServer_V2.ServerEntryPoint(StepsEnablerName, Parameters);
+Procedure ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps) Export
+	ModelClientServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
 EndProcedure
 
 Function ExtractDataAgreementApArPostingDetailImp(Agreement) Export
@@ -103,26 +103,8 @@ Function GetLandedCostCurrencyByCompany(Company) Export
 	EndIf;
 EndFunction
 
-Function GetBillOfMaterialsByItemKey(Item, ItemKey) Export
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	BillOfMaterials.Ref
-	|FROM
-	|	Catalog.BillOfMaterials AS BillOfMaterials
-	|WHERE
-	|	BillOfMaterials.Item = &Item
-	|	AND BillOfMaterials.ItemKey = &ItemKey
-	|	AND NOT BillOfMaterials.DeletionMark";
-	Query.SetParameter("Item", Item);
-	Query.SetParameter("ItemKey", ItemKey);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	If QuerySelection.Next() Then
-		Return QuerySelection.Ref;
-	Else
-		Return Undefined;
-	EndIf;
+Function GetBillOfMaterialsByItemKey(ItemKey) Export
+	Return Catalogs.BillOfMaterials.GetBillOfMaterialsByItemKey(ItemKey);
 EndFunction
 
 Function GetExpenseTypeByBillOfMaterials(BillOfMaterials, ItemKey) Export
@@ -145,3 +127,59 @@ Function GetExpenseTypeByBillOfMaterials(BillOfMaterials, ItemKey) Export
 		Return Undefined;
 	EndIf;	
 EndFunction
+
+Function GetPlanningPeriod(Date, BusinessUnit) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT TOP 2
+	|	Table.Ref AS Ref
+	|FROM
+	|	Catalog.PlanningPeriods.BusinessUnits AS TableBusinessUnits
+	|		INNER JOIN Catalog.PlanningPeriods AS Table
+	|		ON Table.Ref = TableBusinessUnits.Ref
+	|		AND &Date BETWEEN Table.BeginDate AND Table.EndDate
+	|		AND NOT Table.DeletionMark
+	|		AND TableBusinessUnits.BusinessUnit = &BusinessUnit";
+	Query.SetParameter("Date", Date);
+	Query.SetParameter("BusinessUnit", BusinessUnit);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Count() = 1 Then
+		QuerySelection.Next();
+		Return QuerySelection.Ref;
+	EndIf;
+	Return Catalogs.PlanningPeriods.EmptyRef();
+EndFunction
+
+Function GetDocumentProductionPlanning(Company, BusinessUnit, PlanningPeriod) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT TOP 2
+	|	ProductionPlanning.Ref
+	|FROM
+	|	Document.ProductionPlanning AS ProductionPlanning
+	|WHERE
+	|	ProductionPlanning.Company = &Company
+	|	AND ProductionPlanning.BusinessUnit = &BusinessUnit
+	|	AND ProductionPlanning.PlanningPeriod = &PlanningPeriod
+	|	AND ProductionPlanning.Posted";
+	Query.SetParameter("Company"         , Company);
+	Query.SetParameter("BusinessUnit"    , BusinessUnit);
+	Query.SetParameter("PlanningPeriod"  , PlanningPeriod);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Count() = 1 Then
+		QuerySelection.Next();
+		Return QuerySelection.Ref;
+	EndIf;
+	Return Documents.ProductionPlanning.EmptyRef();
+EndFunction
+	
+Function GetCurrentQuantity(Company, ProductionPlanning, PlanningPeriod, BillOfMaterials, ItemKey) Export
+	Return Documents.ProductionPlanningCorrection.GetCurrentQuantity(Company,
+																		ProductionPlanning,
+																		PlanningPeriod,  
+	                                                                    BillOfMaterials,
+	                                                                    ItemKey);
+EndFunction
+	

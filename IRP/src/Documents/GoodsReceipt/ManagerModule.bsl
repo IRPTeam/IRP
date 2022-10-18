@@ -218,6 +218,7 @@ Function ItemList()
 		   |	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.InventoryTransfer) AS
 		   |		IsTransaction_InventoryTransfer,
 		   |	ItemList.Ref.Branch AS Branch,
+		   |	ItemList.ProductionPlanning AS ProductionPlanning,
 		   |	ItemList.Key
 		   |INTO ItemList
 		   |FROM
@@ -234,7 +235,11 @@ Function IncomingStocksReal()
 		|	ItemList.Period,
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
-		|	ItemList.PurchaseOrder AS Order,
+		|	CASE
+		|		WHEN ItemList.ProductionPlanning.Ref IS NULL
+		|			THEN ItemList.PurchaseOrder
+		|		ELSE ItemList.ProductionPlanning
+		|	END AS Order,
 		|	SUM(ItemList.Quantity) AS Quantity
 		|INTO IncomingStocksReal
 		|FROM
@@ -244,7 +249,11 @@ Function IncomingStocksReal()
 		|GROUP BY
 		|	ItemList.ItemKey,
 		|	ItemList.Period,
-		|	ItemList.PurchaseOrder,
+		|	CASE
+		|		WHEN ItemList.ProductionPlanning.Ref IS NULL
+		|			THEN ItemList.PurchaseOrder
+		|		ELSE ItemList.ProductionPlanning
+		|	END,
 		|	ItemList.Store";
 EndFunction
 

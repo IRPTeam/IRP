@@ -225,6 +225,22 @@
     <metadata>Document.WorkSheet</metadata>
     <use>Use</use>
   </content>
+  <content>
+    <metadata>Document.ProductionPlanning</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.ProductionPlanningCorrection</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.ProductionPlanningClosing</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.Production</metadata>
+    <use>Use</use>
+  </content>
   <autoUse>DontUse</autoUse>
   <dataSeparation>DontUse</dataSeparation>
   <usersSeparation>DontUse</usersSeparation>

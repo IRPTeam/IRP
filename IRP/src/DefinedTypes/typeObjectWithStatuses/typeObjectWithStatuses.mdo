@@ -20,5 +20,6 @@
     <types>DocumentRef.ReconciliationStatement</types>
     <types>DocumentRef.PhysicalInventory</types>
     <types>DocumentRef.WorkOrder</types>
+    <types>DocumentRef.ProductionPlanningCorrection</types>
   </type>
 </mdclass:DefinedType>

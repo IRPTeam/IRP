@@ -115,17 +115,17 @@ Scenario: Create catalog Agreements objects
 Scenario: Create catalog BusinessUnits objects
 
 	And I check or create catalog "BusinessUnits" objects:
-		| 'Ref'                                                                   | 'DeletionMark' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr'             |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'False'           | 'Front office'            | ''                 | ''               | 'Front office TR'            |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef024' | 'False'           | 'Accountants office'      | ''                 | ''               | 'Accountants office TR'      |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' | 'False'           | 'Distribution department' | ''                 | ''               | 'Distribution department TR' |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef026' | 'False'           | 'Logistics department'    | ''                 | ''               | 'Logistics department TR'    |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' | 'False'           | 'Shop 01'                 | ''                 | ''               | ''                           |
+		| 'Ref'                                                                   | 'DeletionMark' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr'             | 'Department' | 'Workshop' | 'Retail' |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'False'        | 'Front office'            | ''                 | ''               | 'Front office TR'            | 'True'       | 'False'    | 'False'  |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef024' | 'False'        | 'Accountants office'      | ''                 | ''               | 'Accountants office TR'      | 'True'       | 'False'    | 'False'  |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' | 'False'        | 'Distribution department' | ''                 | ''               | 'Distribution department TR' | 'True'       | 'False'    | 'False'  |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef026' | 'False'        | 'Logistics department'    | ''                 | ''               | 'Logistics department TR'    | 'True'       | 'False'    | 'False'  |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' | 'False'        | 'Shop 01'                 | ''                 | ''               | ''                           | 'True'       | 'False'    | 'True'   |
 
 Scenario: Create catalog BusinessUnits objects (Shop 02, use consolidated retail sales)
 	And I check or create catalog "BusinessUnits" objects:
-		| 'Ref'                                                                   | 'DeletionMark' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UseConsolidatedRetailSales' |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' | 'False'        | 'Shop 02'        | ''                 | ''               | 'Shop 02 Tr'     | 'True'                       |
+		| 'Ref'                                                                   | 'DeletionMark' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UseConsolidatedRetailSales' |'Department' | 'Workshop' | 'Retail' |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' | 'False'        | 'Shop 02'        | ''                 | ''               | 'Shop 02 Tr'     | 'True'                       | 'True'       | 'False'    | 'True'   |
 
 Scenario: Create catalog CashAccounts objects
 
@@ -2047,10 +2047,9 @@ Scenario: Create catalog PaymentSchedules objects
 Scenario: Create catalog PlanningPeriods objects
 
 	And I check or create catalog "PlanningPeriods" objects:
-		| 'Ref'                                                                     | 'DeletionMark' | 'Code'      | 'Description'             | 'BeginDate'           | 'EndDate'             |
-		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de002' | 'False'        | '000000002' | 'First'                   | '01.08.2021 00:00:00' | '10.08.2021 00:00:00' |
-		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de003' | 'False'        | '000000003' | 'Second'                  | '11.08.2021 00:00:00' | '20.08.2021 00:00:00' |
-
+		| 'Ref'                                                                     | 'DeletionMark' | 'Code' | 'Description'             | 'BeginDate'          | 'EndDate'            | 'Type'                               |
+		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de002' | 'False'        | 2      | 'First'                   | '01.08.2021 0:00:00' | '10.08.2021 0:00:00' | 'Enum.PlanningPeriodTypes.Financial' |
+		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de003' | 'False'        | 3      | 'Second'                  | '11.08.2021 0:00:00' | '20.08.2021 0:00:00' | 'Enum.PlanningPeriodTypes.Financial' |
 
 	
 Scenario: Create catalog Agreements objects (Customer)

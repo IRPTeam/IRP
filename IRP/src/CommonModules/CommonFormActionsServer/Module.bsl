@@ -188,3 +188,7 @@ Function QueryTableToChoiceData(QueryTable) Export
 	
 	Return ChoiceData;
 EndFunction
+
+Function GetMetadataFullName(Ref) Export
+	Return Ref.Metadata().FullName();
+EndFunction

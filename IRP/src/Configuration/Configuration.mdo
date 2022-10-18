@@ -120,6 +120,7 @@
   <subsystems>Subsystem.Accounting</subsystems>
   <subsystems>Subsystem.AdminFunctions</subsystems>
   <subsystems>Subsystem.WorkOrders</subsystems>
+  <subsystems>Subsystem.Manufacturing</subsystems>
   <styles>Style.TestDataBase</styles>
   <commonPictures>CommonPicture.AccountingFlags</commonPictures>
   <commonPictures>CommonPicture.AddDataProc</commonPictures>
@@ -177,6 +178,7 @@
   <commonPictures>CommonPicture.Total</commonPictures>
   <commonPictures>CommonPicture.Unlock</commonPictures>
   <commonPictures>CommonPicture.Waiting</commonPictures>
+  <commonPictures>CommonPicture.Factory</commonPictures>
   <commonPictures>CommonPicture.Work</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
@@ -373,6 +375,7 @@
   <commonModules>CommonModule.IntegrationServerPrivileged</commonModules>
   <commonModules>CommonModule.IntegrationServerReuse</commonModules>
   <commonModules>CommonModule.JorDocumentsClient</commonModules>
+  <commonModules>CommonModule.JorDocumentsClientServer</commonModules>
   <commonModules>CommonModule.JorDocumentsServer</commonModules>
   <commonModules>CommonModule.LandedCostServer</commonModules>
   <commonModules>CommonModule.Localization</commonModules>
@@ -432,6 +435,16 @@
   <commonModules>CommonModule.DocWorkSheetServer</commonModules>
   <commonModules>CommonModule.DocWorkSheetClient</commonModules>
   <commonModules>CommonModule.UniversalPrintServer</commonModules>
+  <commonModules>CommonModule.DocProductionPlanningServer</commonModules>
+  <commonModules>CommonModule.DocProductionPlanningCorrectionServer</commonModules>
+  <commonModules>CommonModule.DocProductionPlanningClosingServer</commonModules>
+  <commonModules>CommonModule.DocProductionServer</commonModules>
+  <commonModules>CommonModule.DocProductionPlanningClient</commonModules>
+  <commonModules>CommonModule.DocProductionPlanningCorrectionClient</commonModules>
+  <commonModules>CommonModule.DocProductionPlanningClosingClient</commonModules>
+  <commonModules>CommonModule.DocProductionClient</commonModules>
+  <commonModules>CommonModule.ManufacturingClient</commonModules>
+  <commonModules>CommonModule.ManufacturingServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -513,6 +526,8 @@
   <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
   <functionalOptions>FunctionalOption.UseConsolidatedRetailSales</functionalOptions>
   <functionalOptions>FunctionalOption.UseJobQueueForExternalFunctions</functionalOptions>
+  <functionalOptions>FunctionalOption.UseManufacturing</functionalOptions>
+  <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -600,6 +615,8 @@
   <constants>Constant.UseConsolidatedRetailSales</constants>
   <constants>Constant.MaximumServerDifficultLevel</constants>
   <constants>Constant.UseJobQueueForExternalFunctions</constants>
+  <constants>Constant.UseManufacturing</constants>
+  <constants>Constant.UseWorkOrders</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>
@@ -629,6 +646,7 @@
   <commonForms>CommonForm.ShareToUsers</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.LinkedDocuments</commonForms>
+  <commonForms>CommonForm.EditStores</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>
@@ -763,6 +781,10 @@
   <documents>Document.WorkOrder</documents>
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
+  <documents>Document.ProductionPlanning</documents>
+  <documents>Document.ProductionPlanningCorrection</documents>
+  <documents>Document.ProductionPlanningClosing</documents>
+  <documents>Document.Production</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.AllDocuments</documentJournals>
@@ -819,8 +841,11 @@
   <enums>Enum.ConsolidatedRetailSalesStatuses</enums>
   <enums>Enum.JobStatus</enums>
   <enums>Enum.MaterialsCostWriteOff</enums>
-  <enums>Enum.BusinessUnitTypes</enums>
   <enums>Enum.BillOfMaterialsTypes</enums>
+  <enums>Enum.ProductionPlanningTypes</enums>
+  <enums>Enum.ProductionTypes</enums>
+  <enums>Enum.MaterialTypes</enums>
+  <enums>Enum.PlanningPeriodTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>
@@ -833,6 +858,8 @@
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.OffsetOfAdvances</reports>
   <reports>Report.PriceInfo</reports>
+  <reports>Report.DetailingSupplies</reports>
+  <reports>Report.ProductionPlanning</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
   <dataProcessors>DataProcessor.BuilderExample</dataProcessors>
@@ -848,6 +875,7 @@
   <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>
   <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
   <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
+  <dataProcessors>DataProcessor.ProductionWorkspace</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>
@@ -902,6 +930,7 @@
   <informationRegisters>InformationRegister.T6095S_WriteOffBatchesInfo</informationRegisters>
   <informationRegisters>InformationRegister.JobQueue</informationRegisters>
   <informationRegisters>InformationRegister.TemplateActions</informationRegisters>
+  <informationRegisters>InformationRegister.T7010S_BillOfMaterials</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -979,6 +1008,10 @@
   <accumulationRegisters>AccumulationRegister.TM1010T_RowIDMovements</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1020B_AdvancesKey</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R7010T_DetailingSupplies</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R7020T_MaterialPlanning</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R7030T_ProductionPlanning</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R7040T_ManualMaterialsCorretionInProduction</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>

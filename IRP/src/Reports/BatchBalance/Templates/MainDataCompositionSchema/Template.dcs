@@ -337,6 +337,76 @@
 				</dcscor:item>
 			</appearance>
 		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>AmountCostRatioOpeningBalance</dataPath>
+			<field>AmountCostRatioOpeningBalance</field>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>Group5</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>AmountCostRatioReceipt</dataPath>
+			<field>AmountCostRatioReceipt</field>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>AmountCostRatioExpense</dataPath>
+			<field>AmountCostRatioExpense</field>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>AmountCostRatioClosingBalance</dataPath>
+			<field>AmountCostRatioClosingBalance</field>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>Group5</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
 		<item xsi:type="DataSetQuery">
 			<name>BatchBalance</name>
 			<field xsi:type="DataSetFieldField">
@@ -517,6 +587,32 @@
 					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
 				</role>
 			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AmountCostRatioOpeningBalance</dataPath>
+				<field>AmountCostRatioOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AmountCostRatio</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AmountCostRatioReceipt</dataPath>
+				<field>AmountCostRatioReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AmountCostRatioExpense</dataPath>
+				<field>AmountCostRatioExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AmountCostRatioClosingBalance</dataPath>
+				<field>AmountCostRatioClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>AmountCostRatio</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
 	R6020B_BatchBalanceBalanceAndTurnovers.Company,
@@ -539,6 +635,10 @@
 	R6020B_BatchBalanceBalanceAndTurnovers.AmountTaxReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.AmountTaxExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.AmountTaxClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostRatioOpeningBalance AS AmountCostRatioOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostRatioReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostRatioExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostRatioClosingBalance,
 	CASE
 		WHEN R6020B_BatchBalanceBalanceAndTurnovers.Recorder = UNDEFINED
 			THEN NULL
@@ -755,6 +855,22 @@ WHERE
 		<dataPath>AmountTaxReceipt</dataPath>
 		<expression>Sum(AmountTaxReceipt)</expression>
 	</totalField>
+	<totalField>
+		<dataPath>AmountCostRatioClosingBalance</dataPath>
+		<expression>Sum(AmountCostRatioClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>AmountCostRatioExpense</dataPath>
+		<expression>Sum(AmountCostRatioExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>AmountCostRatioOpeningBalance</dataPath>
+		<expression>Sum(AmountCostRatioOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>AmountCostRatioReceipt</dataPath>
+		<expression>Sum(AmountCostRatioReceipt)</expression>
+	</totalField>
 	<parameter>
 		<name>BeginOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
@@ -858,6 +974,15 @@ WHERE
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>AmountCostRatioOpeningBalance</dcsset:field>
+						<dcsset:lwsTitle>
+							<v8:item>
+								<v8:lang>en</v8:lang>
+								<v8:content>Cost ratio</v8:content>
+							</v8:item>
+						</dcsset:lwsTitle>
+					</dcsset:item>
 					<dcsset:placement>Horizontally</dcsset:placement>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
@@ -900,6 +1025,15 @@ WHERE
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Cost</v8:content>
+							</v8:item>
+						</dcsset:lwsTitle>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>AmountCostRatioReceipt</dcsset:field>
+						<dcsset:lwsTitle>
+							<v8:item>
+								<v8:lang>en</v8:lang>
+								<v8:content>Cost ratio</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -948,6 +1082,15 @@ WHERE
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>AmountCostRatioExpense</dcsset:field>
+						<dcsset:lwsTitle>
+							<v8:item>
+								<v8:lang>en</v8:lang>
+								<v8:content>Cost ratio</v8:content>
+							</v8:item>
+						</dcsset:lwsTitle>
+					</dcsset:item>
 					<dcsset:placement>Horizontally</dcsset:placement>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
@@ -990,6 +1133,15 @@ WHERE
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Cost</v8:content>
+							</v8:item>
+						</dcsset:lwsTitle>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>AmountCostRatioClosingBalance</dcsset:field>
+						<dcsset:lwsTitle>
+							<v8:item>
+								<v8:lang>en</v8:lang>
+								<v8:content>Cost ratio</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>

@@ -88,6 +88,10 @@
       <types>DocumentRef.ConsolidatedRetailSales</types>
       <types>DocumentRef.WorkOrder</types>
       <types>DocumentRef.WorkSheet</types>
+      <types>DocumentRef.Production</types>
+      <types>DocumentRef.ProductionPlanning</types>
+      <types>DocumentRef.ProductionPlanningClosing</types>
+      <types>DocumentRef.ProductionPlanningCorrection</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

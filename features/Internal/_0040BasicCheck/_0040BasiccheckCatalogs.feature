@@ -1127,3 +1127,4 @@ Scenario: Open choise form "ChequeBonds"
 	If the warning is displayed then
 		Then I raise "Failed to open catalog choise form IChequeBonds" exception
 	And I close current window
+

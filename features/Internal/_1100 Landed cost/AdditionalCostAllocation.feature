@@ -123,6 +123,7 @@ Scenario: _041 test data
 		When Create document PurchaseOrder objects (LC)
 		When Create document PurchaseReturn objects (LC)
 		When Create document PurchaseReturnOrder objects (LC)
+		When Create catalog ReportOptions objects
 		When Create document SalesInvoice objects (Revenue cost allocation)
 		When Create document SalesInvoice objects (LC)
 		When Create document SalesReturn objects (LC)
@@ -264,6 +265,10 @@ Scenario: _0411 check preparation
 
 Scenario: _042 check additional cost allocation (documents, by quantity)
 	Given I open hyperlink "e1cib/app/Report.BatchBalance"
+	And I click "Select option..." button
+	And I move to "Custom" tab
+	And I activate field named "OptionsListReportOption" in "OptionsList" table
+	And I select current line in "OptionsList" table
 	And I click "Change option..." button
 	And I move to "Fields" tab
 	And I move to the tab named "FilterPage"
@@ -307,6 +312,9 @@ Scenario: _043 check additional cost allocation (documents, by amount)
 	And I click "Change option..." button
 	And I move to "Fields" tab
 	And I move to the tab named "FilterPage"
+	And I activate field named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
+	And I select current line in "SettingsComposerSettingsFilter" table
+	And I finish line editing in "SettingsComposerSettingsFilter" table
 	And I go to line in "SettingsComposerSettingsFilter" table
 		| 'Application'  | 'Comparison type' | 'Display mode' | 'Left value' | 'Use' |
 		| 'No hierarchy' | 'Filled'          | 'Disabled'     | 'Recorder'   | 'Yes' |
@@ -348,7 +356,7 @@ Scenario: _044 check additional cost allocation (documents, by weight)
 	And I move to the tab named "FilterPage"
 	And I go to line in "SettingsComposerSettingsFilter" table
 		| 'Application'  | 'Comparison type' | 'Display mode' | 'Left value' | 'Use' |
-		| 'No hierarchy' | 'Filled'          | 'Disabled'     | 'Recorder'   | 'Yes' |
+		| 'No hierarchy' | 'Filled'          | 'Disabled'     | 'Recorder'   | 'Yes' |	
 	And I activate "Comparison type" field in "SettingsComposerSettingsFilter" table
 	And I select current line in "SettingsComposerSettingsFilter" table
 	And I select "Equal to" exact value from "Comparison type" drop-down list in "SettingsComposerSettingsFilter" table
@@ -387,7 +395,7 @@ Scenario: _045 check additional cost allocation (rows, by amount)
 	And I move to the tab named "FilterPage"
 	And I go to line in "SettingsComposerSettingsFilter" table
 		| 'Application'  | 'Comparison type' | 'Display mode' | 'Left value' | 'Use' |
-		| 'No hierarchy' | 'Filled'          | 'Disabled'     | 'Recorder'   | 'Yes' |
+		| 'No hierarchy' | 'Filled'          | 'Disabled'     | 'Recorder'   | 'Yes' |	
 	And I activate "Comparison type" field in "SettingsComposerSettingsFilter" table
 	And I select current line in "SettingsComposerSettingsFilter" table
 	And I select "In list" exact value from "Comparison type" drop-down list in "SettingsComposerSettingsFilter" table

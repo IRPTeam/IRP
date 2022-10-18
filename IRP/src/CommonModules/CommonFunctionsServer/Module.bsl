@@ -570,7 +570,7 @@ Function RecalculateExpression(Params) Export
 			EndIf;
 		ElsIf Params.Type = Enums.ExternalFunctionType.ReturnResultByRegExpMatch Then
 			For Each Row In Params.CaseParameters Do
-				If Regex(Params.CaseString, Row.Value) Then
+				If Regex(Params.RegExpString, Row.Value) Then
 					Result = Row.Key;
 					Break;
 				EndIf;
@@ -638,7 +638,6 @@ EndProcedure
 // * RegExpResult - Array -
 // * Expression - String -
 // * Result - Undefined -
-// * CaseString - String -
 // * CaseParameters - Map:
 // ** Key - Arbitrary - Resturned result
 // ** Value - String - RegExp string divided by | symbol
@@ -656,7 +655,6 @@ Function GetRecalculateExpressionParams(ExternalFunction = Undefined) Export
 	Structure.Insert("Expression", "");
 	Structure.Insert("Result", Undefined);
 
-	Structure.Insert("CaseString", "");
 	Structure.Insert("CaseParameters", New Map);
 
 	Structure.Insert("SafeMode", True);

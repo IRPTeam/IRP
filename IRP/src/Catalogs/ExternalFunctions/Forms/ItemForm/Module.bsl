@@ -14,6 +14,11 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	HTMLRegExpTestRowsAnalyze = Catalogs.ExternalFunctions.GetTemplate("RegExpAnalyse").GetText();
+	
+	TypeList = FillTypes();
+	For Each Row In TypeList Do
+		Items.ResultType.ChoiceList.Add(Row.Value, Row.Presentation, , Row.Picture);
+	EndDo;
 EndProcedure
 
 &AtServer
@@ -28,6 +33,9 @@ Procedure OnReadAtServer(CurrentObject)
 		EndDo;
 	EndIf;
 	
+	If Not IsBlankString(CurrentObject.ResultType) Then
+		Items.ResultMatchesResult.TypeRestriction = New TypeDescription(CurrentObject.ResultType);
+	EndIf;	
 EndProcedure
 
 &AtServer
@@ -42,6 +50,7 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 			NewRow.Result = Row.Result;
 		EndDo;
 	EndIf;
+	
 EndProcedure
 
 #EndRegion
@@ -222,7 +231,7 @@ EndProcedure
 Procedure CheckTestResultAtServer()
 	//@skip-check invocation-parameter-type-intersect
 	Params = CommonFunctionsServer.GetRecalculateExpressionParams(Object);
-	Params.CaseString = TestCheckResultStringMatch;
+	Params.RegExpString = TestCheckResultStringMatch;
 	
 	ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
 	CheckResultMatch = ResultInfo.Result;
@@ -232,6 +241,12 @@ Procedure CheckTestResultAtServer()
 	EndIf;
 	
 EndProcedure
+
+&AtClient
+Procedure ResultTypeOnChange(Item)
+	Items.ResultMatchesResult.TypeRestriction = New TypeDescription(Object.ResultType);
+EndProcedure
+
 #EndRegion
 
 #Region Service
@@ -269,5 +284,25 @@ Procedure FillRegExpTestData()
 		Text.appendChild(li);
 	EndDo;
 EndProcedure
+
+&AtServer
+Function FillTypes()
+	ValueList = New ValueList();
+	ValueList.Add("String", "String", , PictureLib.Rename);
+	ValueList.Add("Number", "Number", , PictureLib.Calculator);
+	ValueList.Add("Date", "Date", , PictureLib.Calendar);
+	For Each Cat In Metadata.Catalogs Do
+		Parts = StrSplit(Cat.FullName(), ".");
+		ResultTypeRef = Parts[0] + "Ref." + Parts[1];
+		ValueList.Add(ResultTypeRef, Cat.Synonym, , PictureLib.Catalog);
+	EndDo;
+	For Each Doc In Metadata.Documents Do
+		Parts = StrSplit(Doc.FullName(), ".");
+		ResultTypeRef = Parts[0] + "Ref." + Parts[1];
+		ValueList.Add(ResultTypeRef, Doc.Synonym, , PictureLib.Document);
+	EndDo;
+	
+	Return ValueList;
+EndFunction
 
 #EndRegion

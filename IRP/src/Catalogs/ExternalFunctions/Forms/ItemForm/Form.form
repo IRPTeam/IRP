@@ -2105,26 +2105,143 @@
       <name>GroupResultByRegexp</name>
       <id>163</id>
       <items xsi:type="form:FormGroup">
-        <name>GroupResultTop</name>
-        <id>190</id>
-        <items xsi:type="form:FormField">
-          <name>TestCheckResultStringMatch</name>
-          <id>187</id>
+        <name>GroupTestCase</name>
+        <id>197</id>
+        <items xsi:type="form:FormGroup">
+          <name>GroupResultTop</name>
+          <id>190</id>
+          <items xsi:type="form:FormField">
+            <name>TestCheckResultStringMatch</name>
+            <id>187</id>
+            <title>
+              <key>en</key>
+              <value>Test string</value>
+            </title>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>TestCheckResultStringMatch</segments>
+            </dataPath>
+            <extendedTooltip>
+              <name>TestCheckResultStringMatchExtendedTooltip</name>
+              <id>189</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>TestCheckResultStringMatchContextMenu</name>
+              <id>188</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>InputField</type>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:InputFieldExtInfo">
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <wrap>true</wrap>
+              <chooseType>true</chooseType>
+              <typeDomainEnabled>true</typeDomainEnabled>
+              <textEdit>true</textEdit>
+            </extInfo>
+          </items>
+          <items xsi:type="form:Button">
+            <name>CheckTestResult</name>
+            <id>192</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>CheckTestResultExtendedTooltip</name>
+              <id>193</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualButton</type>
+            <commandName>Form.Command.CheckTestResult</commandName>
+            <representation>Auto</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
           <title>
             <key>en</key>
-            <value>Test string</value>
+            <value>Result top</value>
           </title>
+          <extendedTooltip>
+            <name>GroupResultTopExtendedTooltip</name>
+            <id>191</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <type>UsualGroup</type>
+          <extInfo xsi:type="form:UsualGroupExtInfo">
+            <group>HorizontalIfPossible</group>
+            <showLeftMargin>true</showLeftMargin>
+            <united>true</united>
+            <throughAlign>Auto</throughAlign>
+            <currentRowUse>Auto</currentRowUse>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>CheckResultMatch</name>
+          <id>184</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>TestCheckResultStringMatch</segments>
+            <segments>CheckResultMatch</segments>
           </dataPath>
           <extendedTooltip>
-            <name>TestCheckResultStringMatchExtendedTooltip</name>
-            <id>189</id>
+            <name>CheckResultMatchExtendedTooltip</name>
+            <id>186</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2138,8 +2255,8 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>TestCheckResultStringMatchContextMenu</name>
-            <id>188</id>
+            <name>CheckResultMatchContextMenu</name>
+            <id>185</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2161,37 +2278,6 @@
             <textEdit>true</textEdit>
           </extInfo>
         </items>
-        <items xsi:type="form:Button">
-          <name>CheckTestResult</name>
-          <id>192</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <extendedTooltip>
-            <name>CheckTestResultExtendedTooltip</name>
-            <id>193</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <type>UsualButton</type>
-          <commandName>Form.Command.CheckTestResult</commandName>
-          <representation>Auto</representation>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <placementArea>UserCmds</placementArea>
-          <representationInContextMenu>Auto</representationInContextMenu>
-        </items>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -2199,11 +2285,12 @@
         </userVisible>
         <title>
           <key>en</key>
-          <value>Result top</value>
+          <value>Test case</value>
         </title>
+        <horizontalStretch>true</horizontalStretch>
         <extendedTooltip>
-          <name>GroupResultTopExtendedTooltip</name>
-          <id>191</id>
+          <name>GroupTestCaseExtendedTooltip</name>
+          <id>198</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -2218,27 +2305,34 @@
         </extendedTooltip>
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
-          <group>HorizontalIfPossible</group>
+          <group>Vertical</group>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
+          <backColor xsi:type="core:ColorRef">
+            <color>Style.ReportGroup1BackColor</color>
+          </backColor>
           <throughAlign>Auto</throughAlign>
           <currentRowUse>Auto</currentRowUse>
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>CheckResultMatch</name>
-        <id>184</id>
+        <name>ResultType</name>
+        <id>194</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>CheckResultMatch</segments>
+          <segments>Object.ResultType</segments>
         </dataPath>
+        <handlers>
+          <event>OnChange</event>
+          <name>ResultTypeOnChange</name>
+        </handlers>
         <extendedTooltip>
-          <name>CheckResultMatchExtendedTooltip</name>
-          <id>186</id>
+          <name>ResultTypeExtendedTooltip</name>
+          <id>196</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -2252,8 +2346,8 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>CheckResultMatchContextMenu</name>
-          <id>185</id>
+          <name>ResultTypeContextMenu</name>
+          <id>195</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -2270,6 +2364,7 @@
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
           <wrap>true</wrap>
+          <listChoiceMode>true</listChoiceMode>
           <chooseType>true</chooseType>
           <typeDomainEnabled>true</typeDomainEnabled>
           <textEdit>true</textEdit>
@@ -2332,7 +2427,6 @@
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
-            <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
           </extInfo>

@@ -186,6 +186,24 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="74acdebf-b881-44d5-8282-3794cc659f28">
+    <name>ResultType</name>
+    <synonym>
+      <key>en</key>
+      <value>Result type</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>512</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="66461f2c-9435-4e41-9867-5f80eb10acc2">
     <producedTypes>
       <objectType typeId="3717ba06-3797-4225-8757-37970637f40a" valueTypeId="07793604-6f9e-406f-ae2d-104ead5b1d08"/>

@@ -1222,6 +1222,7 @@ EndFunction
 // TransactionType.Bind
 Function BindTransactionType(Parameters)
 	DataPath = "TransactionType";
+	
 	Binding = New Structure();
 	Binding.Insert("BankPayment",
 		"StepChangeTransitAccountByAccount,
@@ -1235,6 +1236,9 @@ Function BindTransactionType(Parameters)
 	Binding.Insert("CashReceipt" , 
 		"StepClearByTransactionTypeCashReceipt,
 		|StepChangeCashAccountByTransactionType");
+	
+	Binding.Insert("GoodsReceipt"         , "StepClearByTransactionTypeGoodsReceipt");
+	Binding.Insert("ShipmentConfirmation" , "StepClearByTransactionTypeShipmentConfirmation");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -1303,6 +1307,22 @@ Procedure MultiSetTransactionType_CashReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("AmountExchange"           , BindPaymentListAmountExchange(Parameters));
 	ResourceToBinding.Insert("CurrencyExchange"         , BindCurrencyExchange(Parameters));
 	ResourceToBinding.Insert("MoneyTransfer"            , BindPaymentListMoneyTransfer(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+// TransactionType.GoodsReceipt.MultiSet
+Procedure MultiSetTransactionType_GoodsReceipt(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Partner"                  , BindPartner(Parameters));
+	ResourceToBinding.Insert("LegalName"        		, BindLegalName(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+// TransactionType.ShipmentConfirmation.MultiSet
+Procedure MultiSetTransactionType_ShipmentConfirmation(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Partner"                  , BindPartner(Parameters));
+	ResourceToBinding.Insert("LegalName"        		, BindLegalName(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1399,6 +1419,30 @@ Procedure StepClearByTransactionTypeCashReceipt(Parameters, Chain) Export
 		Options.StepName = "StepClearByTransactionTypeCashReceipt";
 		Chain.ClearByTransactionTypeCashReceipt.Options.Add(Options);
 	EndDo;
+EndProcedure
+
+// TransactionType.ClearByTransactionTypeGoodsReceipt.Step
+Procedure StepClearByTransactionTypeGoodsReceipt(Parameters, Chain) Export
+	Chain.ClearByTransactionTypeGoodsReceipt.Enable = True;
+	Chain.ClearByTransactionTypeGoodsReceipt.Setter = "MultiSetTransactionType_GoodsReceipt";
+	Options = ModelClientServer_V2.ClearByTransactionTypeGoodsReceiptOptions();
+	Options.TransactionType = GetTransactionType(Parameters);
+	Options.Partner         = GetPartner(Parameters);
+	Options.LegalName       = GetLegalName(Parameters);
+	Options.StepName = "StepClearByTransactionTypeGoodsReceipt";
+	Chain.ClearByTransactionTypeGoodsReceipt.Options.Add(Options);
+EndProcedure
+
+// TransactionType.ClearByTransactionTypeShipmentConfirmation.Step
+Procedure StepClearByTransactionTypeShipmentConfirmation(Parameters, Chain) Export
+	Chain.ClearByTransactionTypeShipmentConfirmation.Enable = True;
+	Chain.ClearByTransactionTypeShipmentConfirmation.Setter = "MultiSetTransactionType_ShipmentConfirmation";
+	Options = ModelClientServer_V2.ClearByTransactionTypeShipmentConfirmationOptions();
+	Options.TransactionType = GetTransactionType(Parameters);
+	Options.Partner         = GetPartner(Parameters);
+	Options.LegalName       = GetLegalName(Parameters);
+	Options.StepName = "StepClearByTransactionTypeShipmentConfirmation";
+	Chain.ClearByTransactionTypeShipmentConfirmation.Options.Add(Options);
 EndProcedure
 
 #EndRegion

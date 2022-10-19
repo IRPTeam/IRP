@@ -140,10 +140,12 @@ Function GetChain()
 	Chain.Insert("GenerateNewReceiptUUID" , GetChainLink("GenerateNewUUIDExecute"));
 	
 	// Clears
-	Chain.Insert("ClearByTransactionTypeBankPayment", GetChainLink("ClearByTransactionTypeBankPaymentExecute"));
-	Chain.Insert("ClearByTransactionTypeBankReceipt", GetChainLink("ClearByTransactionTypeBankReceiptExecute"));
-	Chain.Insert("ClearByTransactionTypeCashPayment", GetChainLink("ClearByTransactionTypeCashPaymentExecute"));
-	Chain.Insert("ClearByTransactionTypeCashReceipt", GetChainLink("ClearByTransactionTypeCashReceiptExecute"));
+	Chain.Insert("ClearByTransactionTypeBankPayment"         , GetChainLink("ClearByTransactionTypeBankPaymentExecute"));
+	Chain.Insert("ClearByTransactionTypeBankReceipt"         , GetChainLink("ClearByTransactionTypeBankReceiptExecute"));
+	Chain.Insert("ClearByTransactionTypeCashPayment"         , GetChainLink("ClearByTransactionTypeCashPaymentExecute"));
+	Chain.Insert("ClearByTransactionTypeCashReceipt"         , GetChainLink("ClearByTransactionTypeCashReceiptExecute"));
+	Chain.Insert("ClearByTransactionTypeGoodsReceipt"        , GetChainLink("ClearByTransactionTypeGoodsReceiptExecute"));
+	Chain.Insert("ClearByTransactionTypeShipmentConfirmation", GetChainLink("ClearByTransactionTypeShipmentConfirmationExecute"));
 	
 	// Changes
 	Chain.Insert("ChangeManagerSegmentByPartner", GetChainLink("ChangeManagerSegmentByPartnerExecute"));
@@ -2562,6 +2564,98 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 		|Agreement,
 		|Payer,
 		|LegalNameContract";
+	EndIf;
+	
+	ArrayOfAttributes = New Array();
+	For Each ArrayItem In StrSplit(StrByType, ",") Do
+		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
+	EndDo;
+	
+	For Each KeyValue In Result Do
+		AttrName = TrimAll(KeyValue.Key);
+		If Not ValueIsFilled(AttrName) Then
+			Continue;
+		EndIf;
+		If ArrayOfAttributes.Find(AttrName) = Undefined Then
+			Result[AttrName] = Undefined;
+		EndIf;
+	EndDo;
+	Return Result;
+EndFunction
+
+// Goods receipt
+Function ClearByTransactionTypeGoodsReceiptOptions() Export
+	Return GetChainLinkOptions("TransactionType,
+		|Partner,
+		|LegalName");
+EndFunction
+
+Function ClearByTransactionTypeGoodsReceiptExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("Partner"                  , Options.Partner);
+	Result.Insert("LegalName"                , Options.LegalName);
+	
+	GoodsReceipt_InventoryTransfer  = PredefinedValue("Enum.GoodsReceiptTransactionTypes.InventoryTransfer");
+	GoodsReceipt_Purchase           = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase");
+	GoodsReceipt_ReturnFromCustomer = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer");
+	
+	// list of properties which not needed clear
+	If Options.TransactionType = GoodsReceipt_InventoryTransfer Then
+		StrByType = "";
+	ElsIf Options.TransactionType = GoodsReceipt_Purchase Then
+		StrByType = "
+		|Partner,
+		|LegalName";
+	ElsIf Options.TransactionType = GoodsReceipt_ReturnFromCustomer Then
+		StrByType = "
+		|Partner,
+		|LegalName"; 
+	EndIf;
+	
+	ArrayOfAttributes = New Array();
+	For Each ArrayItem In StrSplit(StrByType, ",") Do
+		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
+	EndDo;
+	
+	For Each KeyValue In Result Do
+		AttrName = TrimAll(KeyValue.Key);
+		If Not ValueIsFilled(AttrName) Then
+			Continue;
+		EndIf;
+		If ArrayOfAttributes.Find(AttrName) = Undefined Then
+			Result[AttrName] = Undefined;
+		EndIf;
+	EndDo;
+	Return Result;
+EndFunction
+
+// Shipment confirmation
+Function ClearByTransactionTypeShipmentConfirmationOptions() Export
+	Return GetChainLinkOptions("TransactionType,
+		|Partner,
+		|LegalName");
+EndFunction
+
+Function ClearByTransactionTypeShipmentConfirmationExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("Partner"                  , Options.Partner);
+	Result.Insert("LegalName"                , Options.LegalName);
+	
+	GoodsReceipt_InventoryTransfer = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.InventoryTransfer");
+	GoodsReceipt_Sales             = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Sales");
+	GoodsReceipt_ReturnToVendor    = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor");
+	
+	// list of properties which not needed clear
+	If Options.TransactionType = GoodsReceipt_InventoryTransfer Then
+		StrByType = "";
+	ElsIf Options.TransactionType = GoodsReceipt_Sales Then
+		StrByType = "
+		|Partner,
+		|LegalName";
+	ElsIf Options.TransactionType = GoodsReceipt_ReturnToVendor Then
+		StrByType = "
+		|Partner,
+		|LegalName"; 
 	EndIf;
 	
 	ArrayOfAttributes = New Array();

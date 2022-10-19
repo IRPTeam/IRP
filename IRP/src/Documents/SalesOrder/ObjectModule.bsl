@@ -62,11 +62,16 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
+	// #1533
 	If FillingData = Undefined Then
-		Return;
+		FillingData = New Structure();
+		FillingData.Insert("TransactionType", Enums.SalesTransactionType.Sales);
+		FillPropertyValues(ThisObject, FillingData);
+		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+	Else	
+		FillPropertyValues(ThisObject, FillingData);
+		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+		Number = Undefined;
+		Date = Undefined;
 	EndIf;
-
-	FillPropertyValues(ThisObject, FillingData);
-	Number = Undefined;
-	Date = Undefined;
 EndProcedure

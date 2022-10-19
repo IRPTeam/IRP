@@ -6,7 +6,8 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
-	FillTransactionTypeChoiceList(Form);
+	// #1533
+	//FillTransactionTypeChoiceList(Form);
 	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);	
 	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
 EndProcedure
@@ -62,11 +63,12 @@ EndProcedure
 
 #EndRegion
 
-Procedure FillTransactionTypeChoiceList(Form)
-	EnumValues   = Enums.ShipmentConfirmationTransactionTypes;
-	EnumMetadata = Metadata.Enums.ShipmentConfirmationTransactionTypes.EnumValues;
-	
-	Form.Items.TransactionType.ChoiceList.Add(EnumValues.Sales             , EnumMetadata.Sales.Synonym);
-	Form.Items.TransactionType.ChoiceList.Add(EnumValues.ReturnToVendor    , EnumMetadata.ReturnToVendor.Synonym);
-	Form.Items.TransactionType.ChoiceList.Add(EnumValues.InventoryTransfer , EnumMetadata.InventoryTransfer.Synonym);
-EndProcedure
+// #1533
+//Procedure FillTransactionTypeChoiceList(Form)
+//	EnumValues   = Enums.ShipmentConfirmationTransactionTypes;
+//	EnumMetadata = Metadata.Enums.ShipmentConfirmationTransactionTypes.EnumValues;
+//	
+//	Form.Items.TransactionType.ChoiceList.Add(EnumValues.Sales             , EnumMetadata.Sales.Synonym);
+//	Form.Items.TransactionType.ChoiceList.Add(EnumValues.ReturnToVendor    , EnumMetadata.ReturnToVendor.Synonym);
+//	Form.Items.TransactionType.ChoiceList.Add(EnumValues.InventoryTransfer , EnumMetadata.InventoryTransfer.Synonym);
+//EndProcedure

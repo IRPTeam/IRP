@@ -846,6 +846,10 @@
   <enums>Enum.TaxType</enums>
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
+  <enums>Enum.SalesTransactionType</enums>
+  <enums>Enum.PurchaseTransactionType</enums>
+  <enums>Enum.SalesReturnTransactionType</enums>
+  <enums>Enum.PurchaseReturnTransactionType</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

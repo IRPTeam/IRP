@@ -48,6 +48,14 @@ EndProcedure
 
 #EndRegion
 
+#Region COMPANY
+
+Procedure TransactionTypeOnChange(Object, Form, Item) Export
+	ViewClient_V2.TransactionTypeOnChange(Object, Form, "ItemList");
+EndProcedure
+
+#EndRegion
+
 #Region PARTNER
 
 Procedure PartnerOnChange(Object, Form, Item) Export

@@ -383,19 +383,13 @@ Scenario: _005046 create statuses for Cheque bond
 		And I select current line in "List" table
 		And in the table "NextPossibleStatuses" I click the button named "NextPossibleStatusesAdd"
 		And Delay 2
-		And I go to line in "List" table
-			| 'Description'               |
-			| '02. GiveToBankAsAssurance' |
-		And I select current line in "List" table
+		And I select "02. GiveToBankAsAssurance" exact value from "Status" drop-down list in "NextPossibleStatuses" table	
 		And I finish line editing in "NextPossibleStatuses" table
 		And in the table "NextPossibleStatuses" I click the button named "NextPossibleStatusesAdd"
-		And I select current line in "List" table
+		And I select "03. PaymentReceived" exact value from "Status" drop-down list in "NextPossibleStatuses" table
 		And I finish line editing in "NextPossibleStatuses" table
 		And in the table "NextPossibleStatuses" I click the button named "NextPossibleStatusesAdd"
-		And I go to line in "List" table
-			| 'Description'   |
-			| '04. Protested' |
-		And I select current line in "List" table
+		And I select "04. Protested" exact value from "Status" drop-down list in "NextPossibleStatuses" table
 		And I finish line editing in "NextPossibleStatuses" table
 		And I click "Save and close" button
 		And I wait "01. TakenFromPartner (Order status) *" window closing in 20 seconds
@@ -403,17 +397,11 @@ Scenario: _005046 create statuses for Cheque bond
 			| 'Description'               |
 			| '02. GiveToBankAsAssurance' |
 		And I select current line in "List" table
-		And in the table "NextPossibleStatuses" I click "Add" button
-		And I go to line in "List" table
-			| 'Description'         |
-			| '03. PaymentReceived' |
-		And I select current line in "List" table
+		And in the table "NextPossibleStatuses" I click the button named "NextPossibleStatusesAdd"
+		And I select "03. PaymentReceived" exact value from "Status" drop-down list in "NextPossibleStatuses" table
 		And I finish line editing in "NextPossibleStatuses" table
-		And in the table "NextPossibleStatuses" I click "Add" button
-		And I go to line in "List" table
-			| 'Description'   |
-			| '04. Protested' |
-		And I select current line in "List" table
+		And in the table "NextPossibleStatuses" I click the button named "NextPossibleStatusesAdd"
+		And I select "04. Protested" exact value from "Status" drop-down list in "NextPossibleStatuses" table
 		And I finish line editing in "NextPossibleStatuses" table
 		And I click "Save and close" button
 	* Setting the order of statuses for outgoing cheques
@@ -422,16 +410,9 @@ Scenario: _005046 create statuses for Cheque bond
 			| '01. GivenToPartner' |
 		And I select current line in "List" table
 		And in the table "NextPossibleStatuses" I click the button named "NextPossibleStatusesAdd"
-		And Delay 2
-		And I go to line in "List" table
-			| 'Description'               |
-			| '02. Payed' |
-		And I select current line in "List" table
+		And I select "02. Payed" exact value from "Status" drop-down list in "NextPossibleStatuses" table
 		And I finish line editing in "NextPossibleStatuses" table
-		And in the table "NextPossibleStatuses" I click "Add" button
-		And I go to line in "List" table
-			| 'Description'   |
-			| '03. Protested' |
-		And I select current line in "List" table
+		And in the table "NextPossibleStatuses" I click the button named "NextPossibleStatusesAdd"
+		And I select "03. Protested" exact value from "Status" drop-down list in "NextPossibleStatuses" table
 		And I finish line editing in "NextPossibleStatuses" table
 		And I click "Save and close" button

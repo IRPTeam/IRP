@@ -1008,7 +1008,6 @@ Function TransformationValue(SomeValue, RequestVariables)
 	 
 	IF StrLen(SomeValue) > 6 And StrStartsWith(SomeValue, "{{{") And StrEndsWith(SomeValue, "}}}") Then
 		Params = CommonFunctionsServer.GetRecalculateExpressionParams();
-		Params.Eval = True;
 		Params.SafeMode = True;
 		Params.Expression = Mid(SomeValue, 4, StrLen(SomeValue) - 6);
 		Params.AddInfo = RequestVariables;

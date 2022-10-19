@@ -58,11 +58,6 @@ Procedure ParentOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure NextPossibleStatusesStatusStartChoice(Item, ChoiceData, StandardProcessing)
-	ObjectStatusesClient.StatusStartChoice(Object, ThisObject, GetArrayOfFilters(), Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
 Procedure NextPossibleStatusesStatusEditTextChange(Item, Text, StandardProcessing)
 	ObjectStatusesClient.StatusEditTextChange(Object, ThisObject, GetArrayOfFilters(), New Structure(), Item, Text, StandardProcessing);
 EndProcedure

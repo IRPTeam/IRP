@@ -199,6 +199,24 @@ EndProcedure
 
 #EndRegion
 
+#Region PRICE
+
+&AtClient
+Procedure ItemListPriceOnChange(Item)
+	DocStockAdjustmentAsSurplusClient.ItemListPriceOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region AMOUNT
+
+&AtClient
+Procedure ItemListAmountOnChange(Item)
+	DocStockAdjustmentAsSurplusClient.ItemListAmountOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #EndRegion

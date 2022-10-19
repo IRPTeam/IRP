@@ -8165,6 +8165,7 @@ Function BindItemListPrice(Parameters)
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
 			|StepItemListCalculations_IsPriceChanged");
 	EndIf;
+	Binding.Insert("StockAdjustmentAsSurplus", "StepItemListSimpleCalculations_IsPriceChanged");	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -8185,6 +8186,58 @@ Procedure StepItemListChangePriceByPriceType(Parameters, Chain) Export
 		Options.StepName = "StepItemListChangePriceByPriceType";
 		Options.DontExecuteIfExecutedBefore = True;
 		Chain.ChangePriceByPriceType.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+// ItemList.SimpleCalculations.Set
+Procedure SetItemListSimpleCalculations(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Price"      , BindItemListPrice(Parameters));
+	ResourceToBinding.Insert("TotalAmount", BindItemListAmount(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+// ItemList.SimpleCalculations.[IsPriceChanged].Step
+Procedure StepItemListSimpleCalculations_IsPriceChanged(Parameters, Chain) Export
+	StepItemListSimpleCalculations(Parameters, Chain, "IsPriceChanged");
+EndProcedure
+
+// ItemList.SimpleCalculations.[IsTotalAmountChanged].Step
+Procedure StepItemListSimpleCalculations_IsTotalAmountChanged(Parameters, Chain) Export
+	StepItemListSimpleCalculations(Parameters, Chain, "IsTotalAmountChanged");
+EndProcedure
+
+// ItemList.SimpleCalculations.[IsQuantityChanged].Step
+Procedure StepItemListSimpleCalculations_IsQuantityChanged(Parameters, Chain) Export
+	StepItemListSimpleCalculations(Parameters, Chain, "IsQuantityChanged");
+EndProcedure
+
+Procedure StepItemListSimpleCalculations(Parameters, Chain, WhoIsChanged)
+	Chain.SimpleCalculations.Enable = True;
+	Chain.SimpleCalculations.Setter = "SetItemListSimpleCalculations";
+	
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		
+		Options     = ModelClientServer_V2.CalculationsOptions();
+		Options.Ref = Parameters.Object.Ref;
+		
+		If WhoIsChanged = "IsPriceChanged" Or WhoIsChanged = "IsQuantityChanged" Then
+			Options.CalculateTotalAmount.Enable = True;
+		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
+			Options.CalculatePriceByTotalAmount.Enable = True;
+		Else
+			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
+		EndIf;
+		
+		Options.PriceOptions.Price = GetItemListPrice(Parameters, Row.Key);
+		Options.PriceOptions.PriceType = PredefinedValue("Catalog.PriceTypes.ManualPriceType");
+		Options.PriceOptions.Quantity = GetItemListQuantity(Parameters, Row.Key);
+		
+		Options.AmountOptions.TotalAmount = GetItemListAmount(Parameters, Row.Key);
+		
+		Options.Key = Row.Key;
+		Options.StepName = "StepItemListSimpleCalculations";
+		Chain.SimpleCalculations.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -8249,6 +8302,8 @@ EndFunction
 Function BindItemListQuantity(Parameters)
 	DataPath = "ItemList.Quantity";
 	Binding = New Structure();	
+	Binding.Insert("StockAdjustmentAsSurplus",
+		"StepItemListSimpleCalculations_IsQuantityChanged");
 	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters);
 EndFunction
 
@@ -8912,6 +8967,32 @@ Function BindItemListTotalAmount(Parameters)
 	Binding.Insert("SalesReturn",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
 		|StepItemListCalculations_IsTotalAmountChanged");
+		
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_AMOUNT
+
+// ItemList.Amount.OnChange
+Procedure ItemListAmountOnChange(Parameters) Export
+	Binding = BindItemListAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.Amount.Get
+Function GetItemListAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListAmount(Parameters).DataPath , _Key);
+EndFunction
+
+// ItemList.Amount.Bind
+Function BindItemListAmount(Parameters)
+	DataPath = "ItemList.Amount";
+	
+	Binding = New Structure();
+	Binding.Insert("StockAdjustmentAsSurplus",
+		"StepItemListSimpleCalculations_IsTotalAmountChanged");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction

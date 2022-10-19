@@ -14,7 +14,7 @@
 // Returns:
 //  String - Initialize
 Function InitializeAtClient(DocName, InitialData = Undefined, FillingData = Undefined, DefaultTable = Undefined) Export
-	Wrapper = Initialize(DocName, InitialData);
+	Wrapper = Initialize(DocName, InitialData, FillingData, DefaultTable);
 	Context = ValueToStringInternal(Wrapper);
 	Return Context;
 EndFunction
@@ -43,7 +43,7 @@ EndFunction
 // 
 // Parameters:
 //  Context - String - Context
-//  Row - Array of Structure - Row
+//  Row - Structure, String, Number - Row or Row key or Row index
 //  ColumnName - String - Column name
 //  Value - Arbitrary - Value
 //  TableName - Undefined, String - Table name
@@ -75,6 +75,26 @@ Function WriteAtClient(Context, WriteMode = Undefined, PostingMode = Undefined) 
 	Wrapper = ValueFromStringInternal(Context); // See CreateWrapper
 	Result = Write(Wrapper, WriteMode, PostingMode);
 	Result.Context = ValueToStringInternal(Result.Context);
+	//@skip-check constructor-function-return-section
+	Return Result;
+EndFunction
+
+// Add row.
+// 
+// Parameters:
+//  Context - String -
+//  TableName - String - Table name
+// 
+// Returns:
+//  Structure:
+// 	 * Context - String -
+// 	 * RowKey - String -
+Function AddRowAtClient(Context, TableName = Undefined) Export
+	Wrapper = ValueFromStringInternal(Context); // See CreateWrapper
+	Row = AddRow(Wrapper, TableName, True);
+	Result = New Structure();
+	Result.Insert("Context", ValueToStringInternal(Wrapper));
+	Result.Insert("RowKey", Row);
 	//@skip-check constructor-function-return-section
 	Return Result;
 EndFunction
@@ -171,7 +191,7 @@ EndFunction
 // 
 // Parameters:
 //  Wrapper - See CreateWrapper
-//  Row - Array of Structure - Row
+//  Row - Structure, String, Number - Row or Row key or Row index
 //  ColumnName - String - Column name
 //  Value - Arbitrary - Value
 //  TableName - Undefined, String - Table name. If empty - get from wrapper as defaul table
@@ -184,15 +204,27 @@ Function SetRowProperty(Wrapper, Row, ColumnName, Value, TableName = Undefined) 
 	If TableName = Undefined Then
 		TableName = Wrapper.DefaultTable;
 	EndIf;
-	Property = Wrapper.Tables[TableName][ColumnName]; // Structure
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object); // Structure
-	//@skip-check property-return-type
-	ServerParameters.TableName = String(Property._TableName_);
+	ServerParameters.TableName = TableName;
+	
 	Rows = New Array();
-	Rows.Add(Row);
+	If TypeOf(Row) = Type("Number") Then
+		Rows.Add(Wrapper.Object[TableName][0]);
+	ElsIf TypeOf(Row) = Type("String") Then
+		Rows.Add(Wrapper.Object[TableName].FindRows(New Structure("Key", Row))[0]);
+	Else
+		Rows.Add(Row);
+	EndIf;
+	
 	ServerParameters.Rows = Rows;
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
-	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Value, True);
+	
+	isPropertyExists = Wrapper.Tables[TableName].Property(ColumnName); // Boolean
+	If isPropertyExists Then
+		Property = Wrapper.Tables[TableName][ColumnName]; // Structure
+		ControllerClientServer_V2.API_SetProperty(Parameters, Property, Value, True);
+	EndIf;
+	
 	Result = New Structure();
 	Result.Insert("Context", Wrapper);
 	Result.Insert("Cache", Parameters.Cache);
@@ -233,7 +265,8 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined) Export
 	Doc.Write(?(WriteMode = Undefined, DocumentWriteMode.Write, WriteMode),
 		?(PostingMode = Undefined , DocumentPostingMode.Regular , PostingMode));
 	Wrapper.Object.Ref = Doc.Ref;
-		Result = New Structure();
+	
+	Result = New Structure();
 	Result.Insert("Context", Wrapper);
 	Result.Insert("Ref", Doc.Ref);
 	//@skip-check constructor-function-return-section
@@ -245,10 +278,11 @@ EndFunction
 // Parameters:
 //  Wrapper - See CreateWrapper
 //  TableName - String - Table name
+//  ReturnRowKey - Boolean -
 // 
 // Returns:
 //  ValueTableRow
-Function AddRow(Wrapper, TableName = Undefined) Export
+Function AddRow(Wrapper, TableName = Undefined, ReturnRowKey = False) Export
 	If TableName = Undefined Then
 		TableName = Wrapper.DefaultTable;
 	EndIf;
@@ -262,7 +296,12 @@ Function AddRow(Wrapper, TableName = Undefined) Export
 	ServerParameters.Rows = Rows;
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
 	ControllerClientServer_V2.AddNewRow(TableName, Parameters);
-	Return WrapperTable.FindRows(New Structure("Key", NewRow.Key))[0];
+	NewRow = WrapperTable.FindRows(New Structure("Key", NewRow.Key))[0];
+	If ReturnRowKey Then
+		Return NewRow.Key;
+	Else
+		Return NewRow;
+	EndIf;
 EndFunction
 
 // Set row tax rate.
@@ -324,6 +363,22 @@ Function SetRowTaxRate(Wrapper, Row, Tax, TaxRate, TableName) Export
 	Result.Insert("Context", Wrapper);
 	Result.Insert("Cache", Parameters.Cache);
 	Return Result;
+EndFunction
+
+#EndRegion
+
+#Region Filling
+
+// Get wrapper from context.
+// 
+// Parameters:
+//  Context - String - Context
+// 
+// Returns:
+//  See CreateWrapper
+Function GetWrapperFromContext(Context) Export
+	Wrapper = ValueFromStringInternal(Context); // See CreateWrapper 
+	Return Wrapper;
 EndFunction
 
 #EndRegion

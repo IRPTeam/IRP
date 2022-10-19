@@ -41,7 +41,10 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Object.Parent = PredefinedValue("Catalog.ObjectStatuses.ChequeBondIncoming")
 	Or Object.Parent = PredefinedValue("Catalog.ObjectStatuses.ChequeBondOutgoing");
 	
+	IsProductionPlanningCorrection = Object.Parent = PredefinedValue("Catalog.ObjectStatuses.ProductionPlanningCorrection");
+	
 	Form.Items.GroupPosting.Visible = IsCheque;
+	Form.Items.GroupUsers.Visible = IsProductionPlanningCorrection;
 EndProcedure
 
 &AtClient

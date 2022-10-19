@@ -17,5 +17,7 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	ThisObject.Type = Enums.BusinessUnitTypes.Department;
+	If FillingData = Undefined Then
+		ThisObject.Department = True;
+	EndIf;
 EndProcedure

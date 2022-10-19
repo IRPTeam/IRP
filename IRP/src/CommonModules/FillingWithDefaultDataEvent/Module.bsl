@@ -30,6 +30,7 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 		ArrayOfAllMainTables.Add("ItemList");
 		ArrayOfAllMainTables.Add("PaymentList");
 		ArrayOfAllMainTables.Add("Transactions");
+		ArrayOfAllMainTables.Add("Productions");
 		
 		ArrayOfMainTables = New Array();
 		For Each TableName In ArrayOfAllMainTables Do
@@ -41,7 +42,6 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 			ArrayOfMainTables.Add("");
 		EndIf;
 		
-		// #1487
 		ArrayOfAllSubordinateTables = New Array();
 		ArrayOfAllSubordinateTables.Add("Materials");
 		
@@ -328,7 +328,11 @@ Function UsedNewFunctionality(Source)
 	Or TypeOf(Source) = Type("DocumentObject.ChequeBondTransaction")
 	Or TypeOf(Source) = Type("DocumentObject.ConsolidatedRetailSales")
 	Or TypeOf(Source) = Type("DocumentObject.WorkOrder")
-	Or TypeOf(Source) = Type("DocumentObject.WorkSheet");
+	Or TypeOf(Source) = Type("DocumentObject.WorkSheet")
+	Or TypeOf(Source) = Type("DocumentObject.ProductionPlanning")
+	Or TypeOf(Source) = Type("DocumentObject.ProductionPlanningCorrection")
+	Or TypeOf(Source) = Type("DocumentObject.ProductionPlanningClosing")
+	Or TypeOf(Source) = Type("DocumentObject.Production");
 	
 	Return IsUsedNewFunctionality;
 EndFunction

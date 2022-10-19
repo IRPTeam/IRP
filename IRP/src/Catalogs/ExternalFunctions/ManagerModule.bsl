@@ -15,7 +15,6 @@ Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
 	StandardProcessing = False;
 
 	Params = CommonFunctionsServer.GetRecalculateExpressionParams();
-	Params.Eval = Data.ExternalFunctionType = Enums.ExternalFunctionType.Eval;
 	Params.SafeMode = Data.SafeModeIsOn;
 	Params.Expression = Data.ExternalCode;
 	

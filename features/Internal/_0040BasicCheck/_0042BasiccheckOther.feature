@@ -786,3 +786,81 @@ Scenario: Open information register form "ChequeBondStatuses"
 	If the warning is displayed then
 		Then I raise "Failed to open information register form  ChequeBondStatuses" exception
 	And I close current window
+
+
+Scenario: Open object form "DetailingSupplies"
+
+	Given I open "DetailingSupplies" report default form
+	If the warning is displayed then
+		Then I raise "Failed to open report form DetailingSupplies" exception
+	And I close current window
+
+Scenario: Open object form "ProductionPlanning"
+
+	Given I open "ProductionPlanning" report default form
+	If the warning is displayed then
+		Then I raise "Failed to open report form ProductionPlanning" exception
+	And I close current window
+
+Scenario: Open object form "ProductionWorkspace"
+
+	Given I open "ProductionWorkspace" data processor default form
+	If the warning is displayed then
+		Then I raise "Failed to open ext data proc form ProductionWorkspace" exception
+	And I close current window
+
+Scenario: Open list form "R7010T_DetailingSupplies" 
+
+	Given I open "R7010T_DetailingSupplies" accumulation register list form
+	If the warning is displayed then
+		Then I raise "Failed to open register form R7010T_DetailingSupplies" exception
+	And I close current window
+
+Scenario: Open object form "R7010T_DetailingSupplies"
+
+	Given I open "R7010T_DetailingSupplies" accumulation register default form
+	If the warning is displayed then
+		Then I raise "Failed to open register form R7010T_DetailingSupplies" exception
+	And I close current window
+
+Scenario: Open list form "R7040T_ManualMaterialsCorretionInProduction" 
+
+	Given I open "R7040T_ManualMaterialsCorretionInProduction" accumulation register list form
+	If the warning is displayed then
+		Then I raise "Failed to open register form R7040T_ManualMaterialsCorretionInProduction" exception
+	And I close current window
+
+Scenario: Open object form "R7040T_ManualMaterialsCorretionInProduction"
+
+	Given I open "R7040T_ManualMaterialsCorretionInProduction" accumulation register default form
+	If the warning is displayed then
+		Then I raise "Failed to open register form R7040T_ManualMaterialsCorretionInProduction" exception
+	And I close current window
+
+	Scenario: Open list form "R7020T_MaterialPlanning" 
+
+	Given I open "R7020T_MaterialPlanning" accumulation register list form
+	If the warning is displayed then
+		Then I raise "Failed to open register form R7020T_MaterialPlanning" exception
+	And I close current window
+
+Scenario: Open object form "R7020T_MaterialPlanning"
+
+	Given I open "R7020T_MaterialPlanning" accumulation register default form
+	If the warning is displayed then
+		Then I raise "Failed to open register form R7020T_MaterialPlanning" exception
+	And I close current window
+
+Scenario: Open list form "R7030T_ProductionPlanning" 
+
+	Given I open "R7030T_ProductionPlanning" accumulation register list form
+	If the warning is displayed then
+		Then I raise "Failed to open register form R7030T_ProductionPlanning" exception
+	And I close current window
+
+Scenario: Open object form "R7030T_ProductionPlanning"
+
+	Given I open "R7030T_ProductionPlanning" accumulation register default form
+	If the warning is displayed then
+		Then I raise "Failed to open register form R7030T_ProductionPlanning" exception
+	And I close current window

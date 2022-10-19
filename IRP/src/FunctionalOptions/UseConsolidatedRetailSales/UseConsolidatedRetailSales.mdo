@@ -8,4 +8,6 @@
   <location>Constant.UseConsolidatedRetailSales</location>
   <privilegedGetMode>true</privilegedGetMode>
   <content>Document.ConsolidatedRetailSales</content>
+  <content>Catalog.BusinessUnits.Attribute.Retail</content>
+  <content>Catalog.BusinessUnits.Attribute.UseConsolidatedRetailSales</content>
 </mdclass:FunctionalOption>

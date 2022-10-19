@@ -1111,3 +1111,62 @@ Scenario: Open choise form "PurchaseOrder"
 	If the warning is displayed then
 		Then I raise "Failed to open document choise form PurchaseOrder" exception
 	And I close current window
+
+
+Scenario: Open list form "Production" 
+
+	Given I open "Production" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form Production" exception
+	And I close current window
+
+Scenario: Open object form "Production"
+
+	Given I open "Production" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form Production" exception
+	And I close current window
+
+Scenario: Open list form "ProductionPlanning" 
+
+	Given I open "ProductionPlanning" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ProductionPlanning" exception
+	And I close current window
+
+Scenario: Open object form "ProductionPlanning"
+
+	Given I open "ProductionPlanning" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ProductionPlanning" exception
+	And I close current window
+
+	
+Scenario: Open list form "ProductionPlanningClosing" 
+
+	Given I open "ProductionPlanningClosing" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ProductionPlanningClosing" exception
+	And I close current window
+
+Scenario: Open object form "ProductionPlanningClosing"
+
+	Given I open "ProductionPlanningClosing" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ProductionPlanningClosing" exception
+	And I close current window
+
+	
+Scenario: Open list form "ProductionPlanningCorrection" 
+
+	Given I open "ProductionPlanningCorrection" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ProductionPlanningCorrection" exception
+	And I close current window
+
+Scenario: Open object form "ProductionPlanningCorrection"
+
+	Given I open "ProductionPlanningCorrection" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ProductionPlanningCorrection" exception
+	And I close current window

@@ -108,6 +108,15 @@ Scenario: _0202202 adding items to label printing processing
 			| 'Description'       |
 			| 'Basic Price Types' |
 		And I select current line in "List" table
+	* Check Fill button
+		And in the table "ItemList" I click "Fill" button
+		And "ItemList" table contains lines
+			| 'Print' | 'Barcode'    | 'Item'  | 'Price type'        | 'Item key' | 'Unit' | 'Barcode type' | 'Quantity' | 'Price'  | 'Template' |
+			| 'No'    | '2202283713' | 'Dress' | 'Basic Price Types' | 'S/Yellow' | 'pcs'  | 'Auto'         | '1'        | '550,00' | ''         |
+			| 'No'    | '2202283705' | 'Dress' | 'Basic Price Types' | 'XS/Blue'  | 'pcs'  | 'Auto'         | '1'        | '520,00' | ''         |
+			| 'No'    | ''           | 'Dress' | 'Basic Price Types' | 'M/White'  | 'pcs'  | 'Auto'         | '1'        | '520,00' | ''         |
+	* Delete items and check button ItemListAdd
+		And I delete all lines of "ItemList" table
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
@@ -172,9 +181,23 @@ Scenario: _0202202 adding items to label printing processing
 			| 'Yes'   | 'Basic Price Types' | 'Dress'    | '2'        | '550,00' | 'S/Yellow'  | 'pcs'  | '2202283713' | 'Auto'         | 'Label 1'  |
 		And in the table "ItemList" I click "Uncheck print for selected rows" button
 		And "ItemList" table contains lines
-			| 'Print' | 'Price type'        | 'Item'     | 'Quantity' | 'Price'  | 'Item key'  | 'Unit' | 'Barcode'    | 'Barcode type' | 'Template' |
-			| 'No'   | 'Basic Price Types' | 'Dress'    | '2'        |  '550,00' | 'S/Yellow'  | 'pcs'  | '2202283713' | 'Auto'         | 'Label 1'  |
+			| 'Print' | 'Price type'        | 'Item'  | 'Quantity' | 'Price'  | 'Item key' | 'Unit' | 'Barcode'    | 'Barcode type' | 'Template' |
+			| 'No'    | 'Basic Price Types' | 'Dress' | '2'        | '550,00' | 'S/Yellow' | 'pcs'  | '2202283713' | 'Auto'         | 'Label 1'  |
 		And in the table "ItemList" I click "Check print for selected rows" button
+	* Check save and restore
+		And I click "Save settings" button
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Price'  | 'Price type'        | 'Print' | 'Quantity' | 'Template' | 'Unit' |
+			| 'Trousers' | '36/Yellow' | '400,00' | 'Basic Price Types' | 'Yes'   | '1'        | 'Label 1'  | 'pcs'  |
+		And I delete a line in "ItemList" table
+		And "ItemList" table became equal
+			| 'Print' | 'Barcode'    | 'Item'  | 'Price type'        | 'Item key' | 'Unit' | 'Barcode type' | 'Quantity' | 'Price'  | 'Template' |
+			| 'Yes'   | '2202283713' | 'Dress' | 'Basic Price Types' | 'S/Yellow' | 'pcs'  | 'Auto'         | '2'        | '550,00' | 'Label 1'  |
+		And I click "Load settings" button
+		And "ItemList" table contains lines
+			| 'Print' | 'Barcode'    | 'Item'     | 'Price type'        | 'Item key'  | 'Unit' | 'Barcode type' | 'Quantity' | 'Price'  | 'Template' |
+			| 'Yes'   | '2202283713' | 'Dress'    | 'Basic Price Types' | 'S/Yellow'  | 'pcs'  | 'Auto'         | '2'        | '550,00' | 'Label 1'  |
+			| 'Yes'   | ''           | 'Trousers' | 'Basic Price Types' | '36/Yellow' | 'pcs'  | ''             | '1'        | '400,00' | 'Label 1'  |
 	* Print output check
 		And I click "Print" button
 		Then "" spreadsheet document is equal
@@ -280,13 +303,89 @@ Scenario: _0202203 print layout creation with using external data processors
 		| 'Нова цiна: 522,5 грн.' |
 	And I close all client application windows
 	
-
+Scenario: _0202204 check price type change in the label printing processing
+		And I close all client application windows
+	* Open the processing form
+		Given I open hyperlink "e1cib/app/DataProcessor.PrintLabels"
+	* Add items and selecting labels by lines
+		And I select "Auto" exact value from the drop-down list named "BarcodeType"
+		And I click Choice button of the field named "PriceType"
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Basic Price Types' |
+		And I select current line in "List" table	
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'S/Yellow' |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Template" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Template" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Label 1'     |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "1" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Template" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Template" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Label 2'     |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+	* Change price type
+		Then I select all lines of "ItemList" table
+		And I click Choice button of the field named "PriceType"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Basic Price without VAT' |
+		And I select current line in "List" table
+	* Check
+		And "ItemList" table contains lines
+			| 'Print' | 'Barcode'    | 'Item'     | 'Price type'              | 'Item key'  | 'Unit' | 'Barcode type' | 'Quantity' | 'Price'  | 'Template' |
+			| 'No'    | '2202283713' | 'Dress'    | 'Basic Price without VAT' | 'S/Yellow'  | 'pcs'  | 'Auto'         | '2'        | '466,10' | 'Label 1'  |
+			| 'No'    | ''           | 'Trousers' | 'Basic Price without VAT' | '36/Yellow' | 'pcs'  | ''             | '1'        | '338,98' | 'Label 2'  |
+	* Change price type for one line and check
+		And I go to line in "ItemList" table
+			| 'Item'  |
+			| 'Dress' |
+		And I click choice button of the attribute named "ItemListPriceType" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Basic Price Types' |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| 'Print' | 'Barcode'    | 'Item'     | 'Price type'              | 'Item key'  | 'Unit' | 'Barcode type' | 'Quantity' | 'Price'  | 'Template' |
+			| 'No'    | '2202283713' | 'Dress'    | 'Basic Price Types'       | 'S/Yellow'  | 'pcs'  | 'Auto'         | '2'        | '550,00' | 'Label 1'  |
+			| 'No'    | ''           | 'Trousers' | 'Basic Price without VAT' | '36/Yellow' | 'pcs'  | ''             | '1'        | '338,98' | 'Label 2'  |
+		And I close all client application windows
 		
-				
-		
-				
-
-
+	
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

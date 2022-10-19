@@ -41,6 +41,14 @@ Function IsUseConsolidatedRetailSales() Export
 	Return GetFunctionalOption("UseConsolidatedRetailSales");
 EndFunction
 
+Function IsUseManufacturing() Export
+	Return GetFunctionalOption("UseManufacturing");
+EndFunction
+
+Function IsUseWorkOrders() Export
+	Return GetFunctionalOption("UseWorkOrders");
+EndFunction
+
 #EndRegion
 
 Procedure UpdateDefaults() Export

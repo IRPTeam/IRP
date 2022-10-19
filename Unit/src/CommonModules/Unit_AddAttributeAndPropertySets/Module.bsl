@@ -63,6 +63,7 @@ Function GetExclude_AddAttributes()
 	ArrayOfExcluded.Add("Catalog.ExternalFunctions");
 	ArrayOfExcluded.Add("Catalog.Unit_MockServiceData");
 	ArrayOfExcluded.Add("Catalog.Unit_ServiceExchangeHistory");
+	ArrayOfExcluded.Add("Catalog.FillingTemplates");
 
 	ArrayOfExcluded.Add("Document.AdditionalCostAllocation");
 	ArrayOfExcluded.Add("Document.AdditionalRevenueAllocation");
@@ -99,6 +100,7 @@ Function GetExclude_Properties()
 	ArrayOfExcluded.Add("Catalog.ExternalFunctions");
 	ArrayOfExcluded.Add("Catalog.Unit_MockServiceData");
 	ArrayOfExcluded.Add("Catalog.Unit_ServiceExchangeHistory");
+	ArrayOfExcluded.Add("Catalog.FillingTemplates");
 
 	ArrayOfExcluded.Add("Document.AdditionalCostAllocation");
 	ArrayOfExcluded.Add("Document.AdditionalRevenueAllocation");

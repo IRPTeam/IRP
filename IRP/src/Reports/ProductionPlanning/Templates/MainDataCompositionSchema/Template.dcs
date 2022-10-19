@@ -1,0 +1,837 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dataSource>
+		<name>DataSource1</name>
+		<dataSourceType>Local</dataSourceType>
+	</dataSource>
+	<dataSet xsi:type="DataSetQuery">
+		<name>DataSet1</name>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>PlanningPeriod</dataPath>
+			<field>PlanningPeriod</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Planning period</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+			<inputParameters>
+				<dcscor:item>
+					<dcscor:parameter>ChoiceParameterLinks</dcscor:parameter>
+					<dcscor:value xsi:type="dcscor:ChoiceParameterLinks">
+						<dcscor:item>
+							<dcscor:choiceParameter>Filter.BusinessUnit</dcscor:choiceParameter>
+							<dcscor:value>DataParameters.BusinessUnit</dcscor:value>
+							<dcscor:mode xmlns:d8p1="http://v8.1c.ru/8.1/data/enterprise" xsi:type="d8p1:LinkedValueChangeMode">Clear</dcscor:mode>
+						</dcscor:item>
+					</dcscor:value>
+				</dcscor:item>
+			</inputParameters>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Company</dataPath>
+			<field>Company</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Company</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ProductionType</dataPath>
+			<field>ProductionType</field>
+			<useRestriction>
+				<condition>true</condition>
+			</useRestriction>
+			<attributeUseRestriction>
+				<condition>true</condition>
+			</attributeUseRestriction>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Q_Produced_Material</dataPath>
+			<field>Q_Produced_Material</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Q produced material</v8:content>
+				</v8:item>
+			</title>
+			<useRestriction>
+				<field>true</field>
+				<condition>true</condition>
+				<group>true</group>
+				<order>true</order>
+			</useRestriction>
+			<valueType>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>12</v8:Digits>
+					<v8:FractionDigits>3</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</valueType>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Q_Planned_Material</dataPath>
+			<field>Q_Planned_Material</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Q planned material</v8:content>
+				</v8:item>
+			</title>
+			<useRestriction>
+				<field>true</field>
+				<condition>true</condition>
+				<group>true</group>
+				<order>true</order>
+			</useRestriction>
+			<valueType>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>12</v8:Digits>
+					<v8:FractionDigits>3</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</valueType>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Q_Corrected_Production</dataPath>
+			<field>Q_Corrected_Production</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Q corrected production</v8:content>
+				</v8:item>
+			</title>
+			<useRestriction>
+				<field>true</field>
+				<condition>true</condition>
+				<group>true</group>
+				<order>true</order>
+			</useRestriction>
+			<valueType>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>12</v8:Digits>
+					<v8:FractionDigits>3</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</valueType>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Q_Planned_Production</dataPath>
+			<field>Q_Planned_Production</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Q planned production</v8:content>
+				</v8:item>
+			</title>
+			<useRestriction>
+				<field>true</field>
+				<condition>true</condition>
+				<group>true</group>
+				<order>true</order>
+			</useRestriction>
+			<valueType>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>12</v8:Digits>
+					<v8:FractionDigits>3</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</valueType>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Q_Produced_Production</dataPath>
+			<field>Q_Produced_Production</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Q produced production</v8:content>
+				</v8:item>
+			</title>
+			<useRestriction>
+				<field>true</field>
+				<condition>true</condition>
+				<group>true</group>
+				<order>true</order>
+			</useRestriction>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Q_Corrected_Material</dataPath>
+			<field>Q_Corrected_Material</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Q corrected material</v8:content>
+				</v8:item>
+			</title>
+			<useRestriction>
+				<field>true</field>
+				<condition>true</condition>
+				<group>true</group>
+				<order>true</order>
+			</useRestriction>
+			<valueType>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>12</v8:Digits>
+					<v8:FractionDigits>3</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</valueType>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>BusinessUnit</dataPath>
+			<field>BusinessUnit</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>BillOfMaterials</dataPath>
+			<field>BillOfMaterials</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>MaterialItem</dataPath>
+			<field>MaterialItem</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Material item</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:ignoreNullValues>true</dcscom:ignoreNullValues>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>MaterialItemKey</dataPath>
+			<field>MaterialItemKey</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Material item key</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:ignoreNullValues>true</dcscom:ignoreNullValues>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ProductItemKey</dataPath>
+			<field>ProductItemKey</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Product item key</v8:content>
+				</v8:item>
+			</title>
+			<role>
+				<dcscom:ignoreNullValues>true</dcscom:ignoreNullValues>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ProductItem</dataPath>
+			<field>ProductItem</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>PlanningDocument</dataPath>
+			<field>PlanningDocument</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Store</dataPath>
+			<field>Store</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ItemKey</dataPath>
+			<field>ItemKey</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>PlanningType</dataPath>
+			<field>PlanningType</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Production</dataPath>
+			<field>Production</field>
+		</field>
+		<dataSource>DataSource1</dataSource>
+		<query>SELECT
+	ISNULL(ProductionPlannedTurnovers.Company, MaterialPlannedTurnovers.Company) AS Company,
+	ISNULL(ProductionPlannedTurnovers.BusinessUnit, MaterialPlannedTurnovers.BusinessUnit) AS BusinessUnit,
+	ISNULL(ProductionPlannedTurnovers.PlanningPeriod, MaterialPlannedTurnovers.PlanningPeriod) AS PlanningPeriod,
+	ProductionPlannedTurnovers.ItemKey AS Product,
+	ProductionPlannedTurnovers.ProductionType AS ProductionType,
+	MaterialPlannedTurnovers.ItemKey AS Material,
+	ISNULL(ProductionPlannedTurnovers.BillOfMaterials, MaterialPlannedTurnovers.BillOfMaterials) AS BillOfMaterials,
+	ProductionPlannedTurnovers.QuantityTurnover AS Q_Planned_Product,
+	MaterialPlannedTurnovers.QuantityTurnover AS Q_Planned_Material
+INTO Planned
+FROM
+	AccumulationRegister.R7030T_ProductionPlanning.Turnovers(,,,
+		PlanningType = VALUE(Enum.ProductionPlanningTypes.Planned)
+	AND BusinessUnit = &amp;BusinessUnit) AS ProductionPlannedTurnovers
+		LEFT JOIN AccumulationRegister.R7020T_MaterialPlanning.Turnovers(,,,
+			PlanningType = VALUE(Enum.ProductionPlanningTypes.Planned)
+		AND BusinessUnit = &amp;BusinessUnit) AS MaterialPlannedTurnovers
+		ON ProductionPlannedTurnovers.Company = MaterialPlannedTurnovers.Company
+		AND ProductionPlannedTurnovers.BusinessUnit = MaterialPlannedTurnovers.BusinessUnit
+		AND ProductionPlannedTurnovers.ItemKey = MaterialPlannedTurnovers.Production
+		AND ProductionPlannedTurnovers.PlanningPeriod = MaterialPlannedTurnovers.PlanningPeriod
+		AND ProductionPlannedTurnovers.BillOfMaterials = MaterialPlannedTurnovers.BillOfMaterials
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT
+	ISNULL(ProductionCorrectedTurnovers.Company, MaterialCorrectedTurnovers.Company) AS Company,
+	ISNULL(ProductionCorrectedTurnovers.BusinessUnit, MaterialCorrectedTurnovers.BusinessUnit) AS BusinessUnit,
+	ISNULL(ProductionCorrectedTurnovers.PlanningPeriod, MaterialCorrectedTurnovers.PlanningPeriod) AS PlanningPeriod,
+	ProductionCorrectedTurnovers.ItemKey AS Product,
+	ProductionCorrectedTurnovers.ProductionType AS ProductionType,
+	MaterialCorrectedTurnovers.ItemKey AS Material,
+	ISNULL(ProductionCorrectedTurnovers.BillOfMaterials, MaterialCorrectedTurnovers.BillOfMaterials) AS BillOfMaterials,
+	ProductionCorrectedTurnovers.QuantityTurnover AS Q_Corrected_Product,
+	MaterialCorrectedTurnovers.QuantityTurnover AS Q_Corrected_Material
+INTO Corrected
+FROM
+	AccumulationRegister.R7030T_ProductionPlanning.Turnovers(,,,
+		PlanningType = VALUE(Enum.ProductionPlanningTypes.PlanAdjustment)
+	AND BusinessUnit = &amp;BusinessUnit) AS ProductionCorrectedTurnovers
+		LEFT JOIN AccumulationRegister.R7020T_MaterialPlanning.Turnovers(,,,
+			PlanningType = VALUE(Enum.ProductionPlanningTypes.PlanAdjustment)
+		AND BusinessUnit = &amp;BusinessUnit) AS MaterialCorrectedTurnovers
+		ON ProductionCorrectedTurnovers.Company = MaterialCorrectedTurnovers.Company
+		AND ProductionCorrectedTurnovers.BusinessUnit = MaterialCorrectedTurnovers.BusinessUnit
+		AND ProductionCorrectedTurnovers.ItemKey = MaterialCorrectedTurnovers.Production
+		AND ProductionCorrectedTurnovers.PlanningPeriod = MaterialCorrectedTurnovers.PlanningPeriod
+		AND ProductionCorrectedTurnovers.BillOfMaterials = MaterialCorrectedTurnovers.BillOfMaterials
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT
+	ISNULL(ProductionProducedTurnovers.Company, MaterialProducedTurnovers.Company) AS Company,
+	ISNULL(ProductionProducedTurnovers.BusinessUnit, MaterialProducedTurnovers.BusinessUnit) AS BusinessUnit,
+	ISNULL(ProductionProducedTurnovers.PlanningPeriod, MaterialProducedTurnovers.PlanningPeriod) AS PlanningPeriod,
+	ProductionProducedTurnovers.ItemKey AS Product,
+	ProductionProducedTurnovers.ProductionType AS ProductionType,
+	MaterialProducedTurnovers.ItemKey AS Material,
+	ISNULL(ProductionProducedTurnovers.BillOfMaterials, MaterialProducedTurnovers.BillOfMaterials) AS BillOfMaterials,
+	ProductionProducedTurnovers.QuantityTurnover AS Q_Produced_Product,
+	MaterialProducedTurnovers.QuantityTurnover AS Q_Produced_Material
+INTO Produced
+FROM
+	AccumulationRegister.R7030T_ProductionPlanning.Turnovers(,,,
+		PlanningType = VALUE(Enum.ProductionPlanningTypes.Produced)
+	AND BusinessUnit = &amp;BusinessUnit) AS ProductionProducedTurnovers
+		LEFT JOIN AccumulationRegister.R7020T_MaterialPlanning.Turnovers(,,,
+			PlanningType = VALUE(Enum.ProductionPlanningTypes.Produced)
+		AND BusinessUnit = &amp;BusinessUnit) AS MaterialProducedTurnovers
+		ON ProductionProducedTurnovers.Company = MaterialProducedTurnovers.Company
+		AND ProductionProducedTurnovers.BusinessUnit = MaterialProducedTurnovers.BusinessUnit
+		AND ProductionProducedTurnovers.ItemKey = MaterialProducedTurnovers.Production
+		AND ProductionProducedTurnovers.PlanningPeriod = MaterialProducedTurnovers.PlanningPeriod
+		AND ProductionProducedTurnovers.BillOfMaterials = MaterialProducedTurnovers.BillOfMaterials
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT
+	Planned.Company AS Company,
+	Planned.BusinessUnit AS BusinessUnit,
+	Planned.PlanningPeriod AS PlanningPeriod,
+	Planned.Product AS ProductItemKey,
+	Planned.Product.Item AS ProductItem,
+	Planned.ProductionType AS ProductionType,
+	NULL AS MaterialItemKey,
+	NULL AS MaterialItem,
+	Planned.BillOfMaterials,
+	MAX(Planned.Q_Planned_Product) AS Q_Planned_Production,
+	0 AS Q_Planned_Material,
+	0 AS Q_Corrected_Production,
+	0 AS Q_Corrected_Material,
+	0 AS Q_Produced_Production,
+	0 AS Q_Produced_Material
+FROM
+	Planned AS Planned
+GROUP BY
+	Planned.Company,
+	Planned.BusinessUnit,
+	Planned.PlanningPeriod,
+	Planned.Product,
+	Planned.ProductionType,
+	Planned.BillOfMaterials,
+	Planned.Product.Item
+
+UNION ALL
+
+SELECT
+	Planned.Company,
+	Planned.BusinessUnit,
+	Planned.PlanningPeriod,
+	Planned.Product,
+	Planned.Product.Item,
+	Planned.ProductionType,
+	Planned.Material,
+	Planned.Material.Item,
+	Planned.BillOfMaterials,
+	0,
+	MAX(Planned.Q_Planned_Material),
+	0,
+	0,
+	0,
+	0
+FROM
+	Planned AS Planned
+GROUP BY
+	Planned.Company,
+	Planned.BusinessUnit,
+	Planned.PlanningPeriod,
+	Planned.Product,
+	Planned.ProductionType,
+	Planned.Material,
+	Planned.BillOfMaterials,
+	Planned.Product.Item,
+	Planned.Material.Item
+
+UNION ALL
+
+SELECT
+	Corrected.Company,
+	Corrected.BusinessUnit,
+	Corrected.PlanningPeriod,
+	Corrected.Product,
+	Corrected.Product.Item,
+	Corrected.ProductionType,
+	NULL,
+	NULL,
+	Corrected.BillOfMaterials,
+	0,
+	0,
+	MAX(Corrected.Q_Corrected_Product),
+	0,
+	0,
+	0
+FROM
+	Corrected AS Corrected
+GROUP BY
+	Corrected.Company,
+	Corrected.BusinessUnit,
+	Corrected.PlanningPeriod,
+	Corrected.Product,
+	Corrected.ProductionType,
+	Corrected.BillOfMaterials,
+	Corrected.Product.Item
+
+UNION ALL
+
+SELECT
+	Corrected.Company,
+	Corrected.BusinessUnit,
+	Corrected.PlanningPeriod,
+	Corrected.Product,
+	Corrected.Product.Item,
+	Corrected.ProductionType,
+	Corrected.Material,
+	Corrected.Material.Item,
+	Corrected.BillOfMaterials,
+	0,
+	0,
+	0,
+	MAX(Corrected.Q_Corrected_Material),
+	0,
+	0
+FROM
+	Corrected AS Corrected
+GROUP BY
+	Corrected.Company,
+	Corrected.BusinessUnit,
+	Corrected.PlanningPeriod,
+	Corrected.Product,
+	Corrected.ProductionType,
+	Corrected.Material,
+	Corrected.BillOfMaterials,
+	Corrected.Product.Item,
+	Corrected.Material.Item
+
+UNION ALL
+
+SELECT
+	Produced.Company,
+	Produced.BusinessUnit,
+	Produced.PlanningPeriod,
+	Produced.Product,
+	Produced.Product.Item,
+	Produced.ProductionType,
+	NULL,
+	NULL,
+	Produced.BillOfMaterials,
+	0,
+	0,
+	0,
+	0,
+	MAX(Produced.Q_Produced_Product),
+	0
+FROM
+	Produced AS Produced
+GROUP BY
+	Produced.Company,
+	Produced.BusinessUnit,
+	Produced.PlanningPeriod,
+	Produced.Product,
+	Produced.ProductionType,
+	Produced.BillOfMaterials,
+	Produced.Product.Item
+
+UNION ALL
+
+SELECT
+	Produced.Company,
+	Produced.BusinessUnit,
+	Produced.PlanningPeriod,
+	Produced.Product,
+	Produced.Product.Item,
+	Produced.ProductionType,
+	Produced.Material,
+	Produced.Material.Item,
+	Produced.BillOfMaterials,
+	0,
+	0,
+	0,
+	0,
+	0,
+	MAX(Produced.Q_Produced_Material)
+FROM
+	Produced AS Produced
+GROUP BY
+	Produced.Company,
+	Produced.BusinessUnit,
+	Produced.PlanningPeriod,
+	Produced.Product,
+	Produced.ProductionType,
+	Produced.Material,
+	Produced.BillOfMaterials,
+	Produced.Product.Item,
+	Produced.Material.Item</query>
+	</dataSet>
+	<calculatedField>
+		<dataPath>Q_Planned</dataPath>
+		<expression>case when MaterialItemKey is null 
+then SUM(Q_Planned_Production)
+else SUM(Q_Planned_Material)
+end</expression>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Q planned</v8:content>
+			</v8:item>
+		</title>
+	</calculatedField>
+	<calculatedField>
+		<dataPath>Q_Corrected</dataPath>
+		<expression>case when MaterialItemKey is null 
+then SUM(Q_Corrected_Production)
+else SUM(Q_Corrected_Material)
+end</expression>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Q corrected</v8:content>
+			</v8:item>
+		</title>
+	</calculatedField>
+	<calculatedField>
+		<dataPath>Q_Produced</dataPath>
+		<expression>case when MaterialItemKey is null 
+then SUM(Q_Produced_Production)
+else SUM(Q_Produced_Material)
+end</expression>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Q produced</v8:content>
+			</v8:item>
+		</title>
+	</calculatedField>
+	<calculatedField>
+		<dataPath>Q_NeedToProduce</dataPath>
+		<expression>case when MaterialItemKey is null 
+then SUM(Q_Planned_Production) + SUM(Q_Corrected_Production)
+else SUM(Q_Planned_Material) + SUM(Q_Corrected_Material)
+end</expression>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Q need to produce</v8:content>
+			</v8:item>
+		</title>
+		<appearance>
+			<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+				<dcscor:use>false</dcscor:use>
+				<dcscor:parameter>MinimumHeight</dcscor:parameter>
+				<dcscor:value xsi:type="xs:decimal">15</dcscor:value>
+			</dcscor:item>
+			<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+				<dcscor:use>false</dcscor:use>
+				<dcscor:parameter>MaximumHeight</dcscor:parameter>
+				<dcscor:value xsi:type="xs:decimal">15</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</calculatedField>
+	<calculatedField>
+		<dataPath>Q_Deviation</dataPath>
+		<expression>case when MaterialItemKey is null 
+then SUM(Q_Planned_Production) + SUM(Q_Corrected_Production) - SUM(Q_Produced_Production)
+else SUM(Q_Planned_Material) + SUM(Q_Corrected_Material) - SUM(Q_Produced_Material)
+end</expression>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Q deviation</v8:content>
+			</v8:item>
+		</title>
+	</calculatedField>
+	<totalField>
+		<dataPath>Q_Planned</dataPath>
+		<expression>Q_Planned</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Q_Corrected</dataPath>
+		<expression>Q_Corrected</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Q_Produced</dataPath>
+		<expression>Q_Produced</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Q_NeedToProduce</dataPath>
+		<expression>Q_NeedToProduce</expression>
+	</totalField>
+	<totalField>
+		<dataPath>Q_Deviation</dataPath>
+		<expression>Q_Deviation</expression>
+	</totalField>
+	<parameter>
+		<name>BeginOfPeriod</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Begin of period</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:nil="true"/>
+		<useRestriction>false</useRestriction>
+		<availableAsField>false</availableAsField>
+	</parameter>
+	<parameter>
+		<name>EndOfPeriod</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>End of period</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:nil="true"/>
+		<useRestriction>false</useRestriction>
+		<availableAsField>false</availableAsField>
+	</parameter>
+	<parameter>
+		<name>BusinessUnit</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Business unit</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type xmlns:d4p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d4p1:CatalogRef.BusinessUnits</v8:Type>
+		</valueType>
+		<value xsi:nil="true"/>
+		<useRestriction>false</useRestriction>
+		<denyIncompleteValues>true</denyIncompleteValues>
+		<use>Always</use>
+	</parameter>
+	<settingsVariant>
+		<dcsset:name>Default</dcsset:name>
+		<dcsset:presentation xsi:type="xs:string">Default</dcsset:presentation>
+		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
+			<dcsset:selection>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>Company</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>BusinessUnit</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>PlanningPeriod</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>ProductItemKey</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>MaterialItemKey</dcsset:field>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>Q_Planned</dcsset:field>
+					<dcsset:title>Planned</dcsset:title>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>Q_Corrected</dcsset:field>
+					<dcsset:title>Corrected</dcsset:title>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>Q_NeedToProduce</dcsset:field>
+					<dcsset:title>To produce</dcsset:title>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>Q_Produced</dcsset:field>
+					<dcsset:title>Produced</dcsset:title>
+				</dcsset:item>
+				<dcsset:item xsi:type="dcsset:SelectedItemField">
+					<dcsset:field>Q_Deviation</dcsset:field>
+					<dcsset:title>Deviation</dcsset:title>
+				</dcsset:item>
+			</dcsset:selection>
+			<dcsset:filter>
+				<dcsset:item xsi:type="dcsset:FilterItemComparison">
+					<dcsset:left xsi:type="dcscor:Field">PlanningPeriod</dcsset:left>
+					<dcsset:comparisonType>InList</dcsset:comparisonType>
+					<dcsset:right xsi:nil="true"/>
+					<dcsset:userSettingID>5f496f1d-c6cc-4927-8883-c0e01b7b9dee</dcsset:userSettingID>
+					<dcsset:userSettingPresentation xsi:type="xs:string">Planning periods</dcsset:userSettingPresentation>
+				</dcsset:item>
+			</dcsset:filter>
+			<dcsset:dataParameters>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:use>false</dcscor:use>
+					<dcscor:parameter>BusinessUnit</dcscor:parameter>
+					<dcscor:value xsi:nil="true"/>
+					<dcsset:userSettingID>45eb68ee-291a-4948-99bd-35a8f8ab650b</dcsset:userSettingID>
+					<dcsset:userSettingPresentation xsi:type="xs:string">Business unit</dcsset:userSettingPresentation>
+				</dcscor:item>
+			</dcsset:dataParameters>
+			<dcsset:conditionalAppearance>
+				<dcsset:item>
+					<dcsset:selection/>
+					<dcsset:filter/>
+					<dcsset:appearance>
+						<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+							<dcscor:parameter>MarkNegatives</dcscor:parameter>
+							<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+						</dcscor:item>
+					</dcsset:appearance>
+				</dcsset:item>
+			</dcsset:conditionalAppearance>
+			<dcsset:outputParameters>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>AppearanceTemplate</dcscor:parameter>
+					<dcscor:value xsi:type="xs:string">Sea</dcscor:value>
+				</dcscor:item>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>VerticalOverallPlacement</dcscor:parameter>
+					<dcscor:value xsi:type="dcscor:DataCompositionTotalPlacement">None</dcscor:value>
+				</dcscor:item>
+			</dcsset:outputParameters>
+			<dcsset:item xsi:type="dcsset:StructureItemTable">
+				<dcsset:column>
+					<dcsset:groupItems>
+						<dcsset:item xsi:type="dcsset:GroupItemField">
+							<dcsset:field>PlanningPeriod</dcsset:field>
+							<dcsset:groupType>Items</dcsset:groupType>
+							<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+							<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+							<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+						</dcsset:item>
+					</dcsset:groupItems>
+					<dcsset:order>
+						<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+					</dcsset:order>
+					<dcsset:selection>
+						<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+					</dcsset:selection>
+				</dcsset:column>
+				<dcsset:row>
+					<dcsset:groupItems>
+						<dcsset:item xsi:type="dcsset:GroupItemField">
+							<dcsset:field>ProductionType</dcsset:field>
+							<dcsset:groupType>Items</dcsset:groupType>
+							<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+							<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+							<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+						</dcsset:item>
+					</dcsset:groupItems>
+					<dcsset:order>
+						<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+					</dcsset:order>
+					<dcsset:selection>
+						<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+					</dcsset:selection>
+					<dcsset:item>
+						<dcsset:groupItems>
+							<dcsset:item xsi:type="dcsset:GroupItemField">
+								<dcsset:field>ProductItem</dcsset:field>
+								<dcsset:groupType>Items</dcsset:groupType>
+								<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+								<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+								<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+							</dcsset:item>
+							<dcsset:item xsi:type="dcsset:GroupItemField">
+								<dcsset:field>ProductItemKey</dcsset:field>
+								<dcsset:groupType>Items</dcsset:groupType>
+								<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+								<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+								<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+							</dcsset:item>
+						</dcsset:groupItems>
+						<dcsset:order>
+							<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+						</dcsset:order>
+						<dcsset:selection>
+							<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+						</dcsset:selection>
+						<dcsset:item>
+							<dcsset:groupItems>
+								<dcsset:item xsi:type="dcsset:GroupItemField">
+									<dcsset:field>MaterialItem</dcsset:field>
+									<dcsset:groupType>Items</dcsset:groupType>
+									<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+									<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+									<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+								</dcsset:item>
+								<dcsset:item xsi:type="dcsset:GroupItemField">
+									<dcsset:field>MaterialItemKey</dcsset:field>
+									<dcsset:groupType>Items</dcsset:groupType>
+									<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+									<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+									<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+								</dcsset:item>
+							</dcsset:groupItems>
+							<dcsset:order>
+								<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
+							</dcsset:order>
+							<dcsset:selection>
+								<dcsset:item xsi:type="dcsset:SelectedItemAuto"/>
+							</dcsset:selection>
+						</dcsset:item>
+					</dcsset:item>
+				</dcsset:row>
+			</dcsset:item>
+		</dcsset:settings>
+	</settingsVariant>
+</DataCompositionSchema>

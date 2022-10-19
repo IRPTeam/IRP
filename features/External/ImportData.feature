@@ -115,17 +115,17 @@ Scenario: Create catalog Agreements objects
 Scenario: Create catalog BusinessUnits objects
 
 	And I check or create catalog "BusinessUnits" objects:
-		| 'Ref'                                                                   | 'DeletionMark' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr'             |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'False'           | 'Front office'            | ''                 | ''               | 'Front office TR'            |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef024' | 'False'           | 'Accountants office'      | ''                 | ''               | 'Accountants office TR'      |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' | 'False'           | 'Distribution department' | ''                 | ''               | 'Distribution department TR' |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef026' | 'False'           | 'Logistics department'    | ''                 | ''               | 'Logistics department TR'    |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' | 'False'           | 'Shop 01'                 | ''                 | ''               | ''                           |
+		| 'Ref'                                                                   | 'DeletionMark' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr'             | 'Department' | 'Workshop' | 'Retail' |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'False'        | 'Front office'            | ''                 | ''               | 'Front office TR'            | 'True'       | 'False'    | 'False'  |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef024' | 'False'        | 'Accountants office'      | ''                 | ''               | 'Accountants office TR'      | 'True'       | 'False'    | 'False'  |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' | 'False'        | 'Distribution department' | ''                 | ''               | 'Distribution department TR' | 'True'       | 'False'    | 'False'  |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef026' | 'False'        | 'Logistics department'    | ''                 | ''               | 'Logistics department TR'    | 'True'       | 'False'    | 'False'  |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' | 'False'        | 'Shop 01'                 | ''                 | ''               | ''                           | 'True'       | 'False'    | 'True'   |
 
 Scenario: Create catalog BusinessUnits objects (Shop 02, use consolidated retail sales)
 	And I check or create catalog "BusinessUnits" objects:
-		| 'Ref'                                                                   | 'DeletionMark' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UseConsolidatedRetailSales' |
-		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' | 'False'        | 'Shop 02'        | ''                 | ''               | 'Shop 02 Tr'     | 'True'                       |
+		| 'Ref'                                                                   | 'DeletionMark' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UseConsolidatedRetailSales' |'Department' | 'Workshop' | 'Retail' |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' | 'False'        | 'Shop 02'        | ''                 | ''               | 'Shop 02 Tr'     | 'True'                       | 'True'       | 'False'    | 'True'   |
 
 Scenario: Create catalog CashAccounts objects
 
@@ -2047,10 +2047,9 @@ Scenario: Create catalog PaymentSchedules objects
 Scenario: Create catalog PlanningPeriods objects
 
 	And I check or create catalog "PlanningPeriods" objects:
-		| 'Ref'                                                                     | 'DeletionMark' | 'Code'      | 'Description'             | 'BeginDate'           | 'EndDate'             |
-		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de002' | 'False'        | '000000002' | 'First'                   | '01.08.2021 00:00:00' | '10.08.2021 00:00:00' |
-		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de003' | 'False'        | '000000003' | 'Second'                  | '11.08.2021 00:00:00' | '20.08.2021 00:00:00' |
-
+		| 'Ref'                                                                     | 'DeletionMark' | 'Code' | 'Description'             | 'BeginDate'          | 'EndDate'            | 'Type'                               |
+		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de002' | 'False'        | 2      | 'First'                   | '01.08.2021 0:00:00' | '10.08.2021 0:00:00' | 'Enum.PlanningPeriodTypes.Financial' |
+		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de003' | 'False'        | 3      | 'Second'                  | '11.08.2021 0:00:00' | '20.08.2021 0:00:00' | 'Enum.PlanningPeriodTypes.Financial' |
 
 	
 Scenario: Create catalog Agreements objects (Customer)
@@ -2248,7 +2247,7 @@ Scenario: Create catalog ExternalFunctions objects
 		| 'e1cib/data/Catalog.ExternalFunctions?ref=a2c3aafaa4d87ef711ed2953c4fe70fd' | 'False'        | ''       | 'False'    | 'Erorr when run' | 'Enum.ExternalFunctionType.Execute' | 'True'   | 'Raise "Check error";'                                                             | 'False'                | 'True'         | ''           | 'False'          | 'ValueStorage:AQGhAAAAAAAAAO+7v3siIyIsMjgxOTNlM2UtYzZhMy00ZDMwLWI0ZTctOWY4ZmYyM2IzOTMxLA0KezAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAsMTAsMCw3LDEsMiwzLDQsNSw2LDcsMCwwLDAsMSwxLDB9DQp9' | 1                |
 		| 'e1cib/data/Catalog.ExternalFunctions?ref=a2c3aafaa4d87ef711ed288f826a9c65' | 'False'        | ''       | 'False'    | 'Normal test'    | 'Enum.ExternalFunctionType.Execute' | 'True'   | 'Test = 1;\nResult = Test;'                                                        | 'False'                | 'True'         | ''           | 'False'          | 'ValueStorage:AQGgAAAAAAAAAO+7v3siIyIsMjgxOTNlM2UtYzZhMy00ZDMwLWI0ZTctOWY4ZmYyM2IzOTMxLA0KezAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAsNSwwLDcsMSwyLDMsNCw1LDYsNywwLDAsMCwxLDEsMH0NCn0=' | 1                |
 		| 'e1cib/data/Catalog.ExternalFunctions?ref=a2c3aafaa4d87ef711ed2a05cb4f0b16' | 'False'        | ''       | 'False'    | 'Pause 100'      | 'Enum.ExternalFunctionType.Execute' | 'True'   | 'CommonFunctionsServer.Pause(100);'                                                | 'False'                | 'True'         | ''           | 'False'          | 'ValueStorage:AQGgAAAAAAAAAO+7v3siIyIsMjgxOTNlM2UtYzZhMy00ZDMwLWI0ZTctOWY4ZmYyM2IzOTMxLA0KezAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAsNSwwLDcsMSwyLDMsNCw1LDYsNywwLDAsMCwxLDEsMH0NCn0=' | 1                |
-		| 'e1cib/data/Catalog.ExternalFunctions?ref=a2c3aafaa4d87ef711ed255c197a27fb' | 'False'        | ''       | 'False'    | 'RegExp'         | 'Enum.ExternalFunctionType.RegExp'  | 'False'  | 'Commission = Params.RegExpResult[1];\nResult = Number(Commission);'                 | 'False'                | 'True'         | 'KS:(.*?)TL' | 'False'          | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9'                                                                                                                                                                                                             |                  |
+		| 'e1cib/data/Catalog.ExternalFunctions?ref=a2c3aafaa4d87ef711ed255c197a27fb' | 'False'        | ''       | 'False'    | 'RegExp'         | 'Enum.ExternalFunctionType.RegExp'  | 'False'  | 'Commission = Params.RegExpResult[1];\nResult = Number(Commission);'                 | 'False'              | 'False'        | 'KS:(.*?)TL' | 'False'          | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9'                                                                                                                                                                                                             |                  |
 		| 'e1cib/data/Catalog.ExternalFunctions?ref=a2c3aafaa4d87ef711ed29f9702781aa' | 'False'        | ''       | 'False'    | 'User message'   | 'Enum.ExternalFunctionType.Execute' | 'True'   | 'CommonFunctionsClientServer.ShowUsersMessage("Some test");'                       | 'False'                | 'True'         | ''           | 'False'          | 'ValueStorage:AQGhAAAAAAAAAO+7v3siIyIsMjgxOTNlM2UtYzZhMy00ZDMwLWI0ZTctOWY4ZmYyM2IzOTMxLA0KezAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAwMDEwMTAxMDAwMDAwLDAsMTAsMCw3LDEsMiwzLDQsNSw2LDcsMCwwLDAsMSwxLDB9DQp9' | 1                |
 
 	And I refill object tabular section "TestRexExpStrings":

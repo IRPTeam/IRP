@@ -2589,7 +2589,9 @@ Procedure OnSetTransactionTypeNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "BankPayment"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "BankReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashPayment"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "CashReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);

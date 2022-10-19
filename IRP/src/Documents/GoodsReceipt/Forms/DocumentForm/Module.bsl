@@ -153,7 +153,7 @@ EndProcedure
 
 &AtClient
 Procedure TransactionTypeOnChange(Item)
-	SetVisibilityAvailability(Object, ThisObject);
+	DocGoodsReceiptClient.TransactionTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

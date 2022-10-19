@@ -1268,6 +1268,9 @@ Function BindTransactionType(Parameters)
 		"StepClearByTransactionTypeCashReceipt,
 		|StepChangeCashAccountByTransactionType");
 	
+	Binding.Insert("ShipmentConfirmation" , "StepChangePartnerByTransactionType");
+	Binding.Insert("GoodsReceipt"         , "StepChangePartnerByTransactionType");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -2303,6 +2306,17 @@ Procedure StepChangePartnerByRetailCustomer(Parameters, Chain) Export
 	Options.RetailCustomer = GetRetailCustomer(Parameters);
 	Options.StepName = "StepChangePartnerByRetailCustomer";
 	Chain.ChangePartnerByRetailCustomer.Options.Add(Options);
+EndProcedure
+
+// Partner.ChangePartnerByTransactionType.Step
+Procedure StepChangePartnerByTransactionType(Parameters, Chain) Export
+	Chain.ChangePartnerByTransactionType.Enable = True;
+	Chain.ChangePartnerByTransactionType.Setter = "SetPartner";
+	Options = ModelClientServer_V2.ChangePartnerByTransactionTypeOptions();
+	Options.TransactionType = GetTransactionType(Parameters);
+	Options.Partner         = GetPartner(Parameters);
+	Options.StepName = "StepChangePartnerByTransactionType";
+	Chain.ChangePartnerByTransactionType.Options.Add(Options);
 EndProcedure
 
 #EndRegion

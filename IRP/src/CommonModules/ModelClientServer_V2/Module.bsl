@@ -173,6 +173,7 @@ Function GetChain()
 	Chain.Insert("ChangeManagerSegmentByPartner", GetChainLink("ChangeManagerSegmentByPartnerExecute"));
 	Chain.Insert("ChangeLegalNameByPartner"     , GetChainLink("ChangeLegalNameByPartnerExecute"));
 	Chain.Insert("ChangePartnerByLegalName"     , GetChainLink("ChangePartnerByLegalNameExecute"));
+	Chain.Insert("ChangePartnerByTransactionType", GetChainLink("ChangePartnerByTransactionTypeExecute"));
 	Chain.Insert("ChangeAgreementByPartner"     , GetChainLink("ChangeAgreementByPartnerExecute"));
 	
 	Chain.Insert("ChangeCompanyByAgreement"           , GetChainLink("ChangeCompanyByAgreementExecute"));
@@ -664,6 +665,37 @@ Function ChangePartnerByLegalNameExecute(Options) Export
 	EndIf;
 	Return Options.Partner;
 EndFunction
+
+#EndRegion
+
+#Region CHANGE_PARTNER_BY_TRANSACTION_TYPE
+
+Function ChangePartnerByTransactionTypeOptions() Export
+	Return GetChainLinkOptions("Partner, TransactionType");
+EndFunction
+
+Function ChangePartnerByTransactionTypeExecute(Options) Export
+	If Not ValueIsFilled(Options.Partner) Then
+		Return Undefined;
+	EndIf;
+	
+	IsVendor = 
+	(Options.TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor")) 
+		Or  (Options.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase"));
+		
+	IsCustomer = 
+	(Options.TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Sales")) 
+		Or  (Options.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer"));
+	
+	If IsCustomer And CommonFunctionsServer.GetRefAttribute(Options.Partner, "Customer") Then
+		Return Options.Partner;
+	ElsIf IsVendor And CommonFunctionsServer.GetRefAttribute(Options.Partner, "Vendor") Then
+		Return Options.Partner;		
+	EndIf;
+	
+	Return Undefined;
+EndFunction
+
 
 #EndRegion
 

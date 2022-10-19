@@ -8230,7 +8230,6 @@ Procedure StepItemListSimpleCalculations(Parameters, Chain, WhoIsChanged)
 		EndIf;
 		
 		Options.PriceOptions.Price = GetItemListPrice(Parameters, Row.Key);
-		Options.PriceOptions.PriceType = PredefinedValue("Catalog.PriceTypes.ManualPriceType");
 		Options.PriceOptions.Quantity = GetItemListQuantity(Parameters, Row.Key);
 		
 		Options.AmountOptions.TotalAmount = GetItemListAmount(Parameters, Row.Key);

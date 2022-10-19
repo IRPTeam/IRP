@@ -360,19 +360,6 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
     </attributes>
-    <attributes uuid="d99a4909-d173-4bae-9f9d-3aaaf38dcd86">
-      <name>PriceType</name>
-      <synonym>
-        <key>en</key>
-        <value>Price type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.PriceTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <createOnInput>DontUse</createOnInput>
-    </attributes>
   </tabularSections>
   <tabularSections uuid="8e8dcfe0-7a85-49e9-8ee6-94aaf2d046c7">
     <producedTypes>

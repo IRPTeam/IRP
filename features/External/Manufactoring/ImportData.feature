@@ -358,6 +358,14 @@ Scenario: Create document ProductionPlanningCorrection objects (check sequence)
 		| 'e1cib/data/Document.ProductionPlanningCorrection?ref=b76fba77ffd4077e11ec15f0767fffff' | 'e1cib/data/Catalog.Items?ref=bb8d0050560061d611eb1f6d1022674e' | 'e1cib/data/Catalog.ItemKeys?ref=bb8d0050560061d611eb1f6d2b45dcf0' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 233               | 233        | 'e1cib/data/Catalog.BillOfMaterials?ref=b760b47469bcb0d711eb5ccac6358736' | '45258d79-9388-4b3d-b3a1-d6c6d66860cf' |
 
 
+Scenario: Create information register Barcodes records (MF)
+
+	And I check or create information register "Barcodes" records:
+		| 'Barcode'          | 'ItemKey'                                                          | 'SerialLotNumber' | 'Unit'                                                          | 'Presentation' |
+		| '5678900009900990' | 'e1cib/data/Catalog.ItemKeys?ref=bb8d0050560061d611eb22a2f431e8c6' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+
+
+
 Scenario: Create catalog PlanningPeriods objects (MF)
 
 	And I check or create for catalog "PlanningPeriods" objects with Data Exchange Load parameter set to true:

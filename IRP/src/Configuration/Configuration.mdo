@@ -433,6 +433,7 @@
   <commonModules>CommonModule.TaxesClient</commonModules>
   <commonModules>CommonModule.TaxesClientServer</commonModules>
   <commonModules>CommonModule.TaxesServer</commonModules>
+  <commonModules>CommonModule.TaxesServerReuse</commonModules>
   <commonModules>CommonModule.UndopostingServer</commonModules>
   <commonModules>CommonModule.UniqueID</commonModules>
   <commonModules>CommonModule.UniqueIDReuse</commonModules>

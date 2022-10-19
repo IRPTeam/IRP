@@ -776,32 +776,39 @@
         <value>109</value>
       </code>
     </items>
+    <items id="26962bc2-6f3b-43df-af7c-402628465b97">
+      <name>Catalog_FillingTemplates</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>110</value>
+      </code>
+    </items>
     <items id="3e2da181-9600-46cf-bbee-436a9bfc8345">
       <name>Document_ProductionPlanning</name>
       <description></description>
       <code xsi:type="core:NumberValue">
-        <value>110</value>
+        <value>111</value>
       </code>
     </items>
     <items id="1fc65f57-0227-4db6-b408-42d849ac6427">
       <name>Document_ProductionPlanningCorrection</name>
       <description></description>
       <code xsi:type="core:NumberValue">
-        <value>111</value>
+        <value>112</value>
       </code>
     </items>
     <items id="a3d38f33-43a9-44f7-bfe1-2a1587208daa">
       <name>Document_ProductionPlanningClosing</name>
       <description></description>
       <code xsi:type="core:NumberValue">
-        <value>112</value>
+        <value>113</value>
       </code>
     </items>
     <items id="ea4dddf8-4043-415d-9d09-59ae0560b377">
       <name>Document_Production</name>
       <description></description>
       <code xsi:type="core:NumberValue">
-        <value>113</value>
+        <value>114</value>
       </code>
     </items>
   </predefined>

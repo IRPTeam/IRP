@@ -68,7 +68,7 @@ Function UpdateUsersRole(Users)
 	Return Result;
 EndFunction
 
-Function UpdateUserRole(User, Result)
+Function UpdateUserRole(User, Result) Export
 	UserIB = Undefined;
 	If ValueIsFilled(User.InfobaseUserID) Then
 		UserIB = InfoBaseUsers.FindByUUID(User.InfobaseUserID);
@@ -204,3 +204,26 @@ Function GetAccessGroupsByUser(User = Undefined) Export
 	Users = Query.Execute().Unload().UnloadColumn("Ref");
 	Return Users
 EndFunction
+
+Function GetChangePasswordOnNextLogin(User = Undefined) Export
+	 
+	If User = Undefined Then
+		User = SessionParameters.CurrentUser;
+	EndIf;
+	
+	Return CommonFunctionsServer.GetRefAttribute(User, "ChangePasswordOnNextLogin");
+	 
+EndFunction
+
+Procedure DoneChangePasswordOnLogon(NewPassword, User = Undefined) Export
+	
+	If User = Undefined Then
+		User = SessionParameters.CurrentUser;
+	EndIf;
+	
+	UserObject = User.GetObject();
+	UserObject.ChangePasswordOnNextLogin = False;
+	UserObject.AdditionalProperties.Insert("Password", NewPassword);
+	UserObject.Write();
+	
+EndProcedure

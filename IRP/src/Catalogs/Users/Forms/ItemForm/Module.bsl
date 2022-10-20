@@ -41,12 +41,18 @@ Procedure OnReadAtServer(CurrentObject)
 	UpdateRolesInfo(CurrentObject);
 EndProcedure
 
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	UpdateRolesInfo(CurrentObject);
+EndProcedure
+
 #EndRegion
 
 #Region Privat
 
 &AtServer
 Procedure UpdateRolesInfo(CurrentObject)
+	RoleList.Clear();
 	User = Undefined;
 	If AccessRight("DataAdministration", Metadata) Then
 		If ValueIsFilled(CurrentObject.InfobaseUserID) Then

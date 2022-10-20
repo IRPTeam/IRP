@@ -18,6 +18,9 @@ Procedure OnWrite(Cancel)
 			If Not User = Undefined Then
 				User.Delete();
 			EndIf;
+		Else
+			Result = New Structure("Success, ArrayOfResults", True, New Array());
+			UsersEvent.UpdateUserRole(ThisObject.Ref, Result)
 		EndIf;
 	EndIf;
 	

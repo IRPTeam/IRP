@@ -146,7 +146,7 @@ EndProcedure
 
 &AtClient
 Procedure TransactionTypeOnChange(Item)
-	SetVisibilityAvailability(Object, ThisObject);
+	DocShipmentConfirmationClient.TransactionTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

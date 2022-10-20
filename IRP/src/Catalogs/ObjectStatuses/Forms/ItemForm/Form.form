@@ -390,10 +390,6 @@
               <event>EditTextChange</event>
               <name>NextPossibleStatusesStatusEditTextChange</name>
             </handlers>
-            <handlers>
-              <event>StartChoice</event>
-              <name>NextPossibleStatusesStatusStartChoice</name>
-            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
@@ -406,6 +402,7 @@
                 <segments>Object.Parent</segments>
               </datapath>
             </choiceParameterLinks>
+            <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
           </extInfo>
         </items>
         <autoCommandBar>

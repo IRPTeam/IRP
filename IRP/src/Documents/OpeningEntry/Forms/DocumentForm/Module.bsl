@@ -206,6 +206,33 @@ EndProcedure
 
 #EndRegion
 
+#Region INVENTORY_QUANTITY
+
+&AtClient
+Procedure InventoryQuantityOnChange(Item)
+	DocOpeningEntryClient.ItemListQuantityOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region INVENTORY_PRICE
+
+&AtClient
+Procedure InventoryPriceOnChange(Item)
+	DocOpeningEntryClient.ItemListPriceOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region INVENTORY_AMOUNT
+
+&AtClient
+Procedure InventoryAmountOnChange(Item)
+	DocOpeningEntryClient.ItemListAmountOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #EndRegion

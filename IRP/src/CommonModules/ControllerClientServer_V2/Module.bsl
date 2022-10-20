@@ -8097,6 +8097,10 @@ EndFunction
 // ItemList.Price.Bind
 Function BindItemListPrice(Parameters)
 	DataPath = "ItemList.Price";
+	If Parameters.ObjectMetadataInfo.MetadataName = "OpeningEntry" Then
+		DataPath = "Inventory.Price";
+	EndIf;
+	
 	Binding = New Structure();
 	If Parameters.StepEnableFlags.PriceChanged_AfterQuestionToUser Then
 		Binding.Insert("SalesOrder"           , "StepItemListCalculations_IsPriceChanged");
@@ -8166,6 +8170,8 @@ Function BindItemListPrice(Parameters)
 			|StepItemListCalculations_IsPriceChanged");
 	EndIf;
 	Binding.Insert("StockAdjustmentAsSurplus", "StepItemListSimpleCalculations_IsPriceChanged");	
+	Binding.Insert("OpeningEntry", "StepItemListSimpleCalculations_IsPriceChanged");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -8299,10 +8305,16 @@ EndFunction
 
 // ItemList.Quantity.Bind
 Function BindItemListQuantity(Parameters)
-	DataPath = "ItemList.Quantity";
+	DataPath = New Map;
+	DataPath.Insert("StockAdjustmentAsSurplus", "ItemList.Quantity");
+	DataPath.Insert("OpeningEntry", "Inventory.Quantity");
+	
 	Binding = New Structure();	
 	Binding.Insert("StockAdjustmentAsSurplus",
 		"StepItemListSimpleCalculations_IsQuantityChanged");
+	Binding.Insert("OpeningEntry",
+		"StepItemListSimpleCalculations_IsQuantityChanged");
+		
 	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters);
 EndFunction
 
@@ -8987,10 +8999,15 @@ EndFunction
 
 // ItemList.Amount.Bind
 Function BindItemListAmount(Parameters)
-	DataPath = "ItemList.Amount";
+	DataPath = New Map;
+	DataPath.Insert("StockAdjustmentAsSurplus", "ItemList.Amount");
+	DataPath.Insert("OpeningEntry", "Inventory.Amount");
+	
 	
 	Binding = New Structure();
 	Binding.Insert("StockAdjustmentAsSurplus",
+		"StepItemListSimpleCalculations_IsTotalAmountChanged");
+	Binding.Insert("OpeningEntry",
 		"StepItemListSimpleCalculations_IsTotalAmountChanged");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);

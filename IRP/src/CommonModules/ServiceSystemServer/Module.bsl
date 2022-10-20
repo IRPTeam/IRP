@@ -237,6 +237,18 @@ Function GetProgramTitle() Export
 	EndIf;
 EndFunction
 
+// This instance is Production
+// 
+// Returns:
+//  Boolean - is Production
+Function isProduction() Export
+	
+	Return 
+		Not SessionParameters.ConnectionSettings.IsEmpty() 
+			And SessionParameters.ConnectionSettings.isProduction;
+
+EndFunction
+
 #Region ExternalFunctions
 
 // Run external functions.
@@ -403,12 +415,12 @@ Procedure AddExternalFunctionsToJobQueue(ExternalFunction) Export
 	Job.Write();
 EndProcedure
 
-// Stop sheduler job.
+// Stop scheduler job.
 // 
 // Parameters:
 //  ExternalFunction - CatalogRef.ExternalFunctions - Job ID
 // 
-Procedure StopShedulerJob(ExternalFunction) Export
+Procedure StopSchedulerJob(ExternalFunction) Export
 	
 	Query = New Query;
 	Query.Text =
@@ -443,12 +455,12 @@ Procedure StopShedulerJob(ExternalFunction) Export
 	EndIf;
 EndProcedure
 
-// Continue sheduler job.
+// Continue scheduler job.
 // 
 // Parameters:
 //  ExternalFunction - CatalogRef.ExternalFunctions - Job ID
 //  Pause - Boolean - Pause
-Procedure ContinueOrPauseShedulerJob(ExternalFunction, Pause = True) Export
+Procedure ContinueOrPauseSchedulerJob(ExternalFunction, Pause = True) Export
 	Query = New Query;
 	Query.Text =
 		"SELECT

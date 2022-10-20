@@ -5,7 +5,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	EndIf;
 
 	StandardProcessing = False;
-	CommonFormActionsServer.CutLastSymblosIfCameFromExcel(Parameters);
+	CommonFormActionsServer.CutLastSymbolsIfCameFromExcel(Parameters);
 	QueryTable = GetChoiceDataTable(Parameters);
 	ChoiceData = CommonFormActionsServer.QueryTableToChoiceData(QueryTable);	
 EndProcedure

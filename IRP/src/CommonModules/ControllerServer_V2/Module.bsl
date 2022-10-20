@@ -29,7 +29,7 @@ Function GetServerData(Object, ArrayOfTableNames, FormTaxColumnsExists, TaxesCac
 		If ValueIsFilled(LoadParameters.GroupColumns) Then
 			GroupColumns = LoadParameters.GroupColumns;
 		Else
-			GroupColumns = "Item, ItemKey, Unit"; // all defined columns in GetItemInfo.GetTableofResults
+			GroupColumns = "Item, ItemKey, Unit"; // all defined columns in GetItemInfo.GetTableOfResults
 		EndIf;
 		
 		If Not SerialLotNumberExists And SourceTableCopy.Columns.Find("SerialLotNumber") <> Undefined Then

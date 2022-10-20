@@ -5,15 +5,18 @@
 // Parameters:
 // 	TableItemKeys - ValueTable:
 // 	* ItemKey - CatalogRef.ItemKeys
-// 	* PriceType - CatalogRef.PriceTypes
 // 	* Unit - CatalogRef.Units
+// 	* ItemKeyUnit - CatalogRef.Units
+// 	* ItemUnit - CatalogRef.Units
+// 	* hasSpecification - Boolean
+// 	* PriceType - CatalogRef.PriceTypes
 // 	Period - Date
 // 	AddInfo - Undefined - Description
 // Returns:
-// 	See GetTableofResults 
+// 	See GetTableOfResults 
 Function ItemPriceInfoByTable(TableItemKeys, Period, AddInfo = Undefined) Export
 
-	TableOfResults = GetTableofResults();
+	TableOfResults = GetTableOfResults();
 	TableWithSpecification = TableOfResults.CopyColumns();
 
 	TableWithOutSpecification = TableOfResults.CopyColumns();
@@ -96,7 +99,7 @@ EndFunction
 // * ItemUnit - CatalogRef.Units -
 // * Price - DefinedType.typePrice -
 // * hasSpecification - Boolean -
-Function GetTableofResults()
+Function GetTableOfResults()
 	TableOfResults = New ValueTable();
 	TableOfResults.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
 	TableOfResults.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
@@ -113,7 +116,7 @@ EndFunction
 // Parameters:
 //  QuerySelection - QueryResultSelection - Query selection
 //  Table - ValueTable - Table
-//  TableOfResults - See GetTableofResults
+//  TableOfResults - See GetTableOfResults
 Procedure FillTableOfResults(QuerySelection, Table, TableOfResults)
 	QuerySelection.Reset();
 	TempMap = New Map();
@@ -139,7 +142,6 @@ Procedure FillTableOfResults(QuerySelection, Table, TableOfResults)
 			If ValueIsFilled(ToUnit) Then
 				UnitValue = TempMap.Get(Row.Unit); // Map
 				If UnitValue = Undefined Then
-					//UnitFactor = Catalogs.Units.GetUnitFactor(Row.Unit, ToUnit);
 					UnitFactor = Catalogs.Units.GetUnitFactor(ToUnit, Row.Unit);
 					Tmp = New Map();
 					Tmp.Insert(ToUnit, UnitFactor);
@@ -625,6 +627,7 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	|			THEN ISNULL(t_PricesByProperties.Price, 0)
 	|		WHEN ISNULL(t_PricesByItems.Price, 0) <> 0
 	|			THEN ISNULL(t_PricesByItems.Price, 0)
+	|		ELSE 0
 	|	END AS Price
 	|FROM
 	|	t_ItemKeys AS ItemKeys

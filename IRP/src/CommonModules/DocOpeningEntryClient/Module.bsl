@@ -72,7 +72,7 @@ Procedure InventoryItemStartChoice(Object, Form, Item, ChoiceData, StandardProce
 	DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
-Procedure InventiryItemEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+Procedure InventoryItemEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type", 

@@ -168,4 +168,3 @@ Function GetBarcodesByItemKey(ItemKey) Export
 	Return BarcodeServer.GetBarcodesByItemKey(ItemKey);
 EndFunction
 
-

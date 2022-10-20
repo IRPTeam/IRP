@@ -1,19 +1,18 @@
 
 #Region ENTRY_POINTS
 
-Procedure EntryPoint(StepNames, Parameters) Export
+Procedure EntryPoint(StepNames, Parameters, ExecuteLazySteps = False) Export
 	InitEntryPoint(StepNames, Parameters);
 	Parameters.ModelEnvironment.StepNamesCounter.Add(StepNames);
 
-// #optimization 1	
 If ValueIsFilled(StepNames) And StepNames <> "BindVoid" Then 
 
 #IF Client THEN
 	Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
 	TransferFormToStructure(Transfer, Parameters);
 #ENDIF
-
-	ModelServer_V2.ServerEntryPoint(StepNames, Parameters);
+	
+	ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
 	
 #IF Client THEN
 	TransferStructureToForm(Transfer, Parameters);
@@ -22,22 +21,26 @@ If ValueIsFilled(StepNames) And StepNames <> "BindVoid" Then
 EndIf;
 
 	// if cache was initialized from this EntryPoint then ChainComplete
-	If Parameters.ModelEnvironment.FirstStepNames = StepNames Then
-		// web-client-bug-fix
-		ControllerClientServer_V2.OnChainComplete(Parameters);
-		//Execute StrTemplate("%1.OnChainComplete(Parameters);", Parameters.ControllerModuleName);
-		DestroyEntryPoint(Parameters);
+	If Parameters.ModelEnvironment.FirstStepNames = StepNames Or ExecuteLazySteps Then
+		If Parameters.ModelEnvironment.ArrayOfLazySteps.Count() Then
+			LazyStepNames = StrConcat(Parameters.ModelEnvironment.ArrayOfLazySteps, ",");
+			Parameters.ModelEnvironment.ArrayOfLazySteps.Clear();
+			EntryPoint(LazyStepNames, Parameters, True);
+		Else	
+			ControllerClientServer_V2.OnChainComplete(Parameters);
+			DestroyEntryPoint(Parameters);
+		EndIf;
 	EndIf;
 EndProcedure
 
-Procedure ServerEntryPoint(StepNames, Parameters) Export
+Procedure ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps) Export
 	Chain = GetChain();
 	For Each ArrayItem In StrSplit(StepNames, ",") Do
 		Execute StrTemplate("%1.%2(Parameters, Chain);", 
 			Parameters.ControllerModuleName, 
 			StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
 	EndDo;
-	ExecuteChain(Parameters, Chain);
+	ExecuteChain(Parameters, Chain, ExecuteLazySteps);
 EndProcedure
 
 Procedure TransferFormToStructure(Transfer, Parameters) Export
@@ -66,6 +69,8 @@ Function GetChainLink(ExecutorName)
 	ChainLink.Insert("Options", New Array());
 	ChainLink.Insert("Setter" , Undefined);
 	ChainLink.Insert("ExecutorName", ExecutorName);
+	ChainLink.Insert("IsLazyStep"  , False);
+	ChainLink.Insert("LazyStepName", "");
 	Return ChainLink; 
 EndFunction
 
@@ -91,16 +96,27 @@ Function GetChainLinkResult(Options, Value)
 	Return Result;
 EndFunction
 
-Procedure ExecuteChain(Parameters, Chain)
+Procedure ExecuteChain(Parameters, Chain, ExecuteLazySteps)
 	For Each ChainLink in Chain Do
 		Name = ChainLink.Key;
 		If Chain[Name].Enable Then
+				
 			Results = New Array();
-			For Each Options In Chain[Name].Options Do
+			For Each Options In Chain[Name].Options Do	
 				If Options.DontExecuteIfExecutedBefore 
 					And Not Parameters.ModelEnvironment.AlreadyExecutedSteps.Get(Name + ":" + Options.Key) = Undefined Then
 						Continue;
 				EndIf;
+				
+				If Not ExecuteLazySteps And Chain[Name].IsLazyStep Then
+					StepName = Chain[Name].LazyStepName;
+					If Parameters.ModelEnvironment.ArrayOfLazySteps.Find(StepName) = Undefined Then
+						Parameters.ModelEnvironment.ArrayOfLazySteps.Add(StepName);
+					EndIf;
+					AddToAlreadyExecutedSteps(Parameters, Options, Name);
+					Continue; // is lazy step, dont execute, maybe later
+				EndIf;
+			
 				Result = Undefined;
 				ExecutorName = Chain[Name].ExecutorName;
 				// procedure with prefix XX_ placed in extension
@@ -110,11 +126,18 @@ Procedure ExecuteChain(Parameters, Chain)
 					Execute StrTemplate("Result = %1(Options)", ExecutorName);
 				EndIf;
 				Results.Add(GetChainLinkResult(Options, Result));
-				Parameters.ModelEnvironment.AlreadyExecutedSteps.Insert(Name + ":" + Options.Key, New Structure("Name, Key", Name, Options.Key));
+				AddToAlreadyExecutedSteps(Parameters, Options, Name);
 			EndDo;
-			Execute StrTemplate("%1.%2(Parameters, Results);", Parameters.ControllerModuleName, Chain[Name].Setter);
+			// set result to property
+			If Not Chain[Name].IsLazyStep Or (Chain[Name].IsLazyStep And ExecuteLazySteps) Then
+				Execute StrTemplate("%1.%2(Parameters, Results);", Parameters.ControllerModuleName, Chain[Name].Setter);
+			EndIf;
 		EndIf;
 	EndDo;
+EndProcedure
+
+Procedure AddToAlreadyExecutedSteps(Parameters, Options, Name)
+	Parameters.ModelEnvironment.AlreadyExecutedSteps.Insert(Name + ":" + Options.Key, New Structure("Name, Key", Name, Options.Key));
 EndProcedure
 
 // used in extensions
@@ -150,6 +173,7 @@ Function GetChain()
 	Chain.Insert("ChangeManagerSegmentByPartner", GetChainLink("ChangeManagerSegmentByPartnerExecute"));
 	Chain.Insert("ChangeLegalNameByPartner"     , GetChainLink("ChangeLegalNameByPartnerExecute"));
 	Chain.Insert("ChangePartnerByLegalName"     , GetChainLink("ChangePartnerByLegalNameExecute"));
+	Chain.Insert("ChangePartnerByTransactionType", GetChainLink("ChangePartnerByTransactionTypeExecute"));
 	Chain.Insert("ChangeAgreementByPartner"     , GetChainLink("ChangeAgreementByPartnerExecute"));
 	
 	Chain.Insert("ChangeCompanyByAgreement"           , GetChainLink("ChangeCompanyByAgreementExecute"));
@@ -235,7 +259,7 @@ Function GetChain()
 	Chain.Insert("ChangePercentByAmount" , GetChainLink("CalculatePercentByAmountExecute"));
 	
 	Chain.Insert("PaymentListCalculateCommission"  , GetChainLink("CalculatePaymentListCommissionExecute"));
-	Chain.Insert("ChangeCommissionPercentByAmount" , GetChainLink("CalculateCommisionPercentByAmountExecute"));
+	Chain.Insert("ChangeCommissionPercentByAmount" , GetChainLink("CalculateCommissionPercentByAmountExecute"));
 	
 	Chain.Insert("ChangeLandedCostBySalesDocument" , GetChainLink("ChangeLandedCostBySalesDocumentExecute"));
 	
@@ -245,12 +269,23 @@ Function GetChain()
 	Chain.Insert("ChangeConsolidatedRetailSalesByWorkstationForReturn" , GetChainLink("ChangeConsolidatedRetailSalesByWorkstationForReturnExecute"));
 	
 	Chain.Insert("ChangeIsManualChangedByItemKey"               , GetChainLink("ChangeIsManualChangedByItemKeyExecute"));
+	Chain.Insert("ChangeIsManualChangedByQuantity"              , GetChainLink("ChangeIsManualChangedByQuantityExecute"));
 	Chain.Insert("ChangeUniqueIDByItemKeyBOMAndBillOfMaterials" , GetChainLink("ChangeUniqueIDByItemKeyBOMAndBillOfMaterialsExecute"));
 	Chain.Insert("ChangeStoreByCostWriteOff"                    , GetChainLink("ChangeStoreByCostWriteOffExecute"));
 	Chain.Insert("ChangeProfitLossCenterByBillOfMaterials"      , GetChainLink("ChangeProfitLossCenterByBillOfMaterialsExecute"));
 	Chain.Insert("ChangeExpenseTypeByBillOfMaterials"           , GetChainLink("ChangeExpenseTypeByBillOfMaterialsExecute"));
 	
-	//Chain.Insert("ChangeBillOfMaterialsByItemKey" , GetChainLink("ChangeBillOfMaterialsByItemKeyExecute"));
+	Chain.Insert("ChangeBillOfMaterialsByItemKey" , GetChainLink("ChangeBillOfMaterialsByItemKeyExecute"));
+	Chain.Insert("ChangeCostMultiplierRatioByBillOfMaterials" , GetChainLink("ChangeCostMultiplierRatioByBillOfMaterialsExecute"));
+	
+	Chain.Insert("ChangePlanningPeriodByDateAndBusinessUnit" , GetChainLink("ChangePlanningPeriodByDateAndBusinessUnitExecute"));
+	Chain.Insert("ChangeProductionPlanningByPlanningPeriod"  , GetChainLink("ChangeProductionPlanningByPlanningPeriodExecute"));
+	Chain.Insert("ChangeCurrentQuantityInProductions"        , GetChainLink("ChangeCurrentQuantityInProductionsExecute"));
+	
+	Chain.Insert("BillOfMaterialsListCalculations"           , GetChainLink("BillOfMaterialsListCalculationsExecute"));
+	Chain.Insert("BillOfMaterialsListCalculationsCorrection" , GetChainLink("BillOfMaterialsListCalculationsCorrectionExecute"));
+	Chain.Insert("MaterialsCalculations"                     , GetChainLink("MaterialsCalculationsExecute"));
+	Chain.Insert("MaterialsRecalculateQuantity"              , GetChainLink("MaterialsRecalculateQuantityExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -548,7 +583,7 @@ EndFunction
 Function ChangePlanningTransactionBasisByCurrencyExecute(Options) Export
 	If ValueIsFilled(Options.PlanningTransactionBasis) 
 			And TypeOf(Options.PlanningTransactionBasis) = Type("DocumentRef.CashTransferOrder") 
-			And ServiceSystemServer.GetObjectAttribute(Options.PlanningTransactionBasis,"SendCurrency") 
+			And ServiceSystemServer.GetObjectAttribute(Options.PlanningTransactionBasis, "SendCurrency") 
 			<> Options.Currency Then
 				Return Undefined;
 	EndIf;
@@ -630,6 +665,37 @@ Function ChangePartnerByLegalNameExecute(Options) Export
 	EndIf;
 	Return Options.Partner;
 EndFunction
+
+#EndRegion
+
+#Region CHANGE_PARTNER_BY_TRANSACTION_TYPE
+
+Function ChangePartnerByTransactionTypeOptions() Export
+	Return GetChainLinkOptions("Partner, TransactionType");
+EndFunction
+
+Function ChangePartnerByTransactionTypeExecute(Options) Export
+	If Not ValueIsFilled(Options.Partner) Then
+		Return Undefined;
+	EndIf;
+	
+	IsVendor = 
+	(Options.TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor")) 
+		Or  (Options.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase"));
+		
+	IsCustomer = 
+	(Options.TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Sales")) 
+		Or  (Options.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer"));
+	
+	If IsCustomer And CommonFunctionsServer.GetRefAttribute(Options.Partner, "Customer") Then
+		Return Options.Partner;
+	ElsIf IsVendor And CommonFunctionsServer.GetRefAttribute(Options.Partner, "Vendor") Then
+		Return Options.Partner;		
+	EndIf;
+	
+	Return Undefined;
+EndFunction
+
 
 #EndRegion
 
@@ -1088,7 +1154,7 @@ Function ChangeConsolidatedRetailSalesByWorkstationForReturnExecute(Options) Exp
 	SalesReturnData = New Structure();
 	SalesReturnData.Insert("Date", Options.Date);
 	SalesReturnData.Insert("ArrayOfSalesDocuments", Options.SalesDocuments);
-	UseConsolidatedSales = DocConsolidatedRetailSalesServer.UseConsolidatedRetilaSales(Options.Branch, SalesReturnData);
+	UseConsolidatedSales = DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Options.Branch, SalesReturnData);
 	If Not UseConsolidatedSales Then
 		Return Undefined;
 	EndIf;
@@ -1109,6 +1175,22 @@ Function ChangeIsManualChangedByItemKeyExecute(Options) Export
 	EndIf;
 	
 	Return Options.ItemKey <> Options.ItemKeyBOM Or Options.QuantityInBaseUnit <> Options.QuantityInBaseUnitBOM; 
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_IS_MANUAL_CHANGED_BY_QUANTITY
+
+Function ChangeIsManualChangedByQuantityOptions() Export
+	Return GetChainLinkOptions("Quantity, QuantityBOM");
+EndFunction
+
+Function ChangeIsManualChangedByQuantityExecute(Options) Export	
+	If Options.Quantity = Options.QuantityBOM Then
+		Return False;
+	Else
+		Return True;
+	EndIf;
 EndFunction
 
 #EndRegion
@@ -1181,22 +1263,91 @@ EndFunction
 
 #EndRegion
 
+#Region CHANGE_PLANNING_PERIOD_BY_DATE_AND_BUSINESS_UNIT
 
-//#Region CHANGE_BILL_OF_MATERIALS_BY_ITEM_KEY		
-//
-//Function ChangeBillOfMaterialsByItemKeyOptions() Export
-//	Return GetChainLinkOptions("Item, ItemKey, BillOfMaterials");
-//EndFunction
-//
-//Function ChangeBillOfMaterialsByItemKeyExecute(Options) Export
-//	If ValueIsFilled(Options.BillOfMaterials) Then
-//		Return Options.BillOfMaterials;
-//	EndIf;
-//	
-//	Return ModelServer_V2.GetBillOfMaterialsByItemKey(Options.Item, Options.ItemKey);
-//EndFunction
-//
-//#EndRegion
+Function ChangePlanningPeriodByDateAndBusinessUnitOptions() Export
+	Return GetChainLinkOptions("Date, BusinessUnit");
+EndFunction
+
+Function ChangePlanningPeriodByDateAndBusinessUnitExecute(Options) Export
+	_Date = ?(ValueIsFilled(Options.Date), Options.Date, CurrentDate());
+	PlanningPeriod = ModelServer_V2.GetPlanningPeriod(_Date, Options.BusinessUnit);
+	Return PlanningPeriod;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PRODUCTION_PLANNING_BY_PLANNING_PERIOD
+
+Function ChangeProductionPlanningByPlanningPeriodOptions() Export
+	Return GetChainLinkOptions("Company, BusinessUnit, PlanningPeriod, CurrentProductionPlanning");
+EndFunction
+
+Function ChangeProductionPlanningByPlanningPeriodExecute(Options) Export
+	If ValueIsFilled(Options.CurrentProductionPlanning) Then
+		Return Options.CurrentProductionPlanning;
+	EndIf;
+	Return ModelServer_V2.GetDocumentProductionPlanning(Options.Company, Options.BusinessUnit, Options.PlanningPeriod);
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_BILL_OF_MATERIALS_BY_ITEM_KEY		
+
+Function ChangeBillOfMaterialsByItemKeyOptions() Export
+	Return GetChainLinkOptions("ItemKey, CurrentBillOfMaterials");
+EndFunction
+
+Function ChangeBillOfMaterialsByItemKeyExecute(Options) Export
+	If ValueIsFilled(Options.CurrentBillOfMaterials) Then
+		Return Options.CurrentBillOfMaterials;
+	EndIf;
+	Return ModelServer_V2.GetBillOfMaterialsByItemKey(Options.ItemKey);
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_COST_MULTIPLIERRATIO_BY_BILL_OF_MATERIALS		
+
+Function ChangeCostMultiplierRatioByBillOfMaterialsOptions() Export
+	Return GetChainLinkOptions("BillOfMaterials");
+EndFunction
+
+Function ChangeCostMultiplierRatioByBillOfMaterialsExecute(Options) Export
+	If Not ValueIsFilled(Options.BillOfMaterials) Then
+		Return 0;
+	EndIf;
+	
+	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "CostMultiplierRatio");
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_CURRENT_QUANTITY_IN_PRODUCTIONS
+
+Function ChangeCurrentQuantityInProductionsOptions() Export
+	Return GetChainLinkOptions("Company, ProductionPlanning, PlanningPeriod, BillOfMaterials, ItemKey, Unit");
+EndFunction
+
+Function ChangeCurrentQuantityInProductionsExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("Unit", Options.Unit);
+	Result.Insert("CurrentQuantity", 0);
+	
+	CurrentQuantityInfo = ModelServer_V2.GetCurrentQuantity(Options.Company,
+											 Options.ProductionPlanning, 
+											 Options.PlanningPeriod, 
+											 Options.BillOfMaterials,
+											 Options.ItemKey);
+											 
+	If ValueIsFilled(CurrentQuantityInfo.BasisQuantity) Then
+		Result.Unit = CurrentQuantityInfo.BasisUnit;
+	EndIf;
+	Result.CurrentQuantity = CurrentQuantityInfo.BasisQuantity;
+	Return Result;	
+EndFunction
+
+#EndRegion
 
 #Region CALCULATE_DIFFERENCE
 
@@ -1638,6 +1789,152 @@ EndFunction
 
 #EndRegion
 
+#Region BILL_OF_MATERIALS_CALCULATIONS
+
+Function BillOfMaterialsListCalculationsOptions() Export
+	Return GetChainLinkOptions("BillOfMaterialsList, BillOfMaterialsListColumns,
+		|Company, BillOfMaterials, PlanningPeriod, ItemKey, Unit, Quantity");
+EndFunction
+
+Function BillOfMaterialsListCalculationsExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("BillOfMaterialsList", New Array());
+	
+	CalculationParameters = New Structure();
+	CalculationParameters.Insert("Key"             , Options.Key);
+	CalculationParameters.Insert("Company"         , Options.Company);
+	CalculationParameters.Insert("BillOfMaterials" , Options.BillOfMaterials);
+	CalculationParameters.Insert("PlanningPeriod"  , Options.PlanningPeriod);
+	CalculationParameters.Insert("ItemKey"         , Options.ItemKey);
+	CalculationParameters.Insert("Unit"            , Options.Unit);
+	CalculationParameters.Insert("Quantity"        , Options.Quantity);
+	
+	StoreCache = New Array();
+	For Each Row In Options.BillOfMaterialsList Do
+		Cache = New Structure("ReleaseStore, MaterialStore, SemiproductStore,
+			|Key, ItemKey, InputID, OutputID, UniqueID");
+		FillPropertyValues(Cache, Row);
+		StoreCache.Add(Cache);
+	EndDo;
+	
+	BillOfMaterialRows = ManufacturingServer.FillBillOfMaterialsTable(CalculationParameters);
+	For Each Row In BillOfMaterialRows Do
+		NewRow = New Structure(Options.BillOfMaterialsListColumns);
+		FillPropertyValues(NewRow, Row);
+		Result.BillOfMaterialsList.Add(NewRow);
+		RestoreStoresFromCache(StoreCache, Row, NewRow);
+	EndDo;
+	Return Result;
+EndFunction
+
+Function BillOfMaterialsListCalculationsCorrectionOptions() Export
+	Return GetChainLinkOptions("BillOfMaterialsList, BillOfMaterialsListColumns,
+		|Company, BillOfMaterials, PlanningPeriod, ItemKey, Unit, Quantity, CurrentQuantity");
+EndFunction
+
+Function BillOfMaterialsListCalculationsCorrectionExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("BillOfMaterialsList", New Array());
+	
+	CalculationParameters = New Structure();
+	CalculationParameters.Insert("Key"             , Options.Key);
+	CalculationParameters.Insert("Company"         , Options.Company);
+	CalculationParameters.Insert("BillOfMaterials" , Options.BillOfMaterials);
+	CalculationParameters.Insert("PlanningPeriod"  , Options.PlanningPeriod);
+	CalculationParameters.Insert("ItemKey"         , Options.ItemKey);
+	CalculationParameters.Insert("Unit"            , Options.Unit);
+	CalculationParameters.Insert("Quantity"        , Options.Quantity);
+	CalculationParameters.Insert("CurrentQuantity" , Options.CurrentQuantity);
+	
+	StoreCache = New Array();
+	For Each Row In Options.BillOfMaterialsList Do
+		Cache = New Structure("ReleaseStore, MaterialStore, SemiproductStore,
+			|Key, ItemKey, InputID, OutputID, UniqueID");
+		FillPropertyValues(Cache, Row);
+		StoreCache.Add(Cache);
+	EndDo;
+	
+	BillOfMaterialRows = ManufacturingServer.FillBillOfMaterialsTableCorrection(CalculationParameters);
+	For Each Row In BillOfMaterialRows Do
+		NewRow = New Structure(Options.BillOfMaterialsListColumns);
+		FillPropertyValues(NewRow, Row);
+		Result.BillOfMaterialsList.Add(NewRow);
+		RestoreStoresFromCache(StoreCache, Row, NewRow);
+	EndDo;
+	Return Result;
+EndFunction
+
+Procedure RestoreStoresFromCache(StoreCache, Row, NewRow)
+	For Each Cache In StoreCache Do
+		If Cache.Key = Row.Key 
+			And Cache.ItemKey = Row.ItemKey 
+			And Cache.InputID = Row.InputID 
+			And Cache.OutputID = Row.OutputID 
+			And Cache.UniqueID = Row.UniqueID Then
+				If ValueIsFilled(Cache.ReleaseStore) Then
+					NewRow.ReleaseStore = Cache.ReleaseStore;
+				EndIf;
+				If ValueIsFilled(Cache.MaterialStore) Then
+					NewRow.MaterialStore = Cache.MaterialStore;
+				EndIf;
+				If ValueIsFilled(Cache.SemiproductStore) Then
+					NewRow.SemiproductStore = Cache.SemiproductStore;
+				EndIf;
+		EndIf;
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region MATERIALS_CALCULATIONS
+
+Function MaterialsCalculationsOptions() Export
+	Return GetChainLinkOptions("Materials, BillOfMaterials, MaterialsColumns,
+		|ItemKey, Unit, Quantity, KeyOwner");
+EndFunction
+
+Function MaterialsCalculationsExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("Materials", Options.Materials);
+	
+	CalculationParameters = New Structure();
+	CalculationParameters.Insert("Materials"        , Options.Materials);
+	CalculationParameters.Insert("BillOfMaterials"  , Options.BillOfMaterials);
+	CalculationParameters.Insert("MaterialsColumns" , Options.MaterialsColumns);
+	CalculationParameters.Insert("ItemKey"          , Options.ItemKey);
+	CalculationParameters.Insert("Unit"             , Options.Unit);
+	CalculationParameters.Insert("Quantity"         , Options.Quantity);
+	CalculationParameters.Insert("KeyOwner"         , Options.KeyOwner);
+	
+	ManufacturingServer.FillMaterialsTable(CalculationParameters);
+		
+	Return Result;
+EndFunction
+
+Function MaterialsRecalculateQuantityOptions() Export
+	Return GetChainLinkOptions("Materials, BillOfMaterials, MaterialsColumns,
+		|ItemKey, Unit, Quantity");
+EndFunction
+
+Function MaterialsRecalculateQuantityExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("Materials", Options.Materials);
+	
+	CalculationParameters = New Structure();
+	CalculationParameters.Insert("Materials"        , Options.Materials);
+	CalculationParameters.Insert("BillOfMaterials"  , Options.BillOfMaterials);
+	CalculationParameters.Insert("MaterialsColumns" , Options.MaterialsColumns);
+	CalculationParameters.Insert("ItemKey"          , Options.ItemKey);
+	CalculationParameters.Insert("Unit"             , Options.Unit);
+	CalculationParameters.Insert("Quantity"         , Options.Quantity);
+	
+	ManufacturingServer.CalculateMaterialsQuantity(CalculationParameters);
+	
+	Return Result;
+EndFunction
+
+#EndRegion
+
 #Region CALCULATIONS
 
 Function CalculationsOptions() Export
@@ -1815,7 +2112,7 @@ Function CalculationsExecute(Options) Export
 				Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
 			EndIf;
 		EndIf;
-	Else // PriceIncludeTax = Undefined
+	Else // PriceIncludeTax is Undefined
 		If Options.CalculateTaxAmountReverse.Enable And IsCalculatedRow Then
 			CalculateTaxAmount(Options, Options.TaxOptions, Result, True, False);
 		EndIf;
@@ -1889,10 +2186,7 @@ Function CalculateNetAmountAsTotalAmountMinusTaxAmount_PriceNotIncludeTax(PriceO
 EndFunction
 
 Function _CalculateAmount(PriceOptions, Result)
-	If PriceOptions.PriceType <> Undefined And PriceOptions.QuantityInBaseUnit <> Undefined 
-		And PriceOptions.PriceType = PredefinedValue("Catalog.PriceTypes.ManualPriceType") Then
-		Return Result.Price * PriceOptions.QuantityInBaseUnit;
-	ElsIf PriceOptions.Quantity <> Undefined Then
+	If PriceOptions.Quantity <> Undefined Then
 		Return Result.Price * PriceOptions.Quantity;
 	EndIf;
 	Return Result.TotalAmount;
@@ -2683,11 +2977,11 @@ EndFunction
 
 #Region CALCULATE_PERCENT_COMMISSION_BY_AMOUNT
 
-Function CalculateCommisionPercentByAmountOptions() Export
+Function CalculateCommissionPercentByAmountOptions() Export
 	Return GetChainLinkOptions("TotalAmount, Commission");
 EndFunction
 
-Function CalculateCommisionPercentByAmountExecute(Options) Export
+Function CalculateCommissionPercentByAmountExecute(Options) Export
 	Return 100 * Options.Commission / Options.TotalAmount;
 EndFunction
 
@@ -2699,6 +2993,7 @@ Procedure InitEntryPoint(StepNames, Parameters)
 		Environment.Insert("FirstStepNames"  		, StepNames);
 		Environment.Insert("StepNamesCounter"		, New Array());
 		Environment.Insert("AlreadyExecutedSteps"   , New Map());
+		Environment.Insert("ArrayOfLazySteps"       , New Array());
 		Parameters.Insert("ModelEnvironment"		, Environment)
 	EndIf;
 EndProcedure

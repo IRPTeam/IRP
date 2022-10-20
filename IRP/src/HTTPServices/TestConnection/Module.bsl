@@ -1,7 +1,7 @@
 
 // @strict-types
 
-Function Connectiontest(Request)
+Function ConnectionTest(Request)
 	Response = New HTTPServiceResponse(200);
 	Response.SetBodyFromString("OK");
 	Return Response;

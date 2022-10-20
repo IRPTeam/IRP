@@ -398,7 +398,7 @@ Scenario: _0260147 try mark for deletion RSR if Consolidated retail sales is clo
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
 		Then there are lines in TestClient message log
-			|'Cannot set deletion makr, document is closed by [ $$ConsolidatedRetailSales$$ ]\n'|
+			|'Cannot set deletion mark, document is closed by [ $$ConsolidatedRetailSales$$ ]\n'|
 		And I close all client application windows
 			
 Scenario: _0260148 post RSR if Consolidated retail sales is closed
@@ -489,7 +489,7 @@ Scenario: _0260153 try mark for deletion RRR if Consolidated retail sales is clo
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
 		Then there are lines in TestClient message log
-			|'Cannot set deletion makr, document is closed by [ $$ConsolidatedRetailSales$$ ]\n'|
+			|'Cannot set deletion mark, document is closed by [ $$ConsolidatedRetailSales$$ ]\n'|
 		And I close all client application windows					
 				
 Scenario: _0260154 post RRR if Consolidated retail sales is closed

@@ -7,10 +7,36 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
+	ThisObject.Items.Type.ChoiceList.Clear();
+	If FOServer.IsUseManufacturing() Then
+		ThisObject.Items.Type.ChoiceList.Add(Enums.BillOfMaterialsTypes.Product);
+	EndIf;
+	
+	If FOServer.IsUseWorkOrders() Then
+		ThisObject.Items.Type.ChoiceList.Add(Enums.BillOfMaterialsTypes.Work);
+	EndIf;
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
+	Query = New Query();
+	Query.Text = 
+	"SELECT TOP 1
+	|	T7010S_BillOfMaterials.Recorder AS Ref
+	|FROM
+	|	InformationRegister.T7010S_BillOfMaterials AS T7010S_BillOfMaterials
+	|WHERE
+	|	T7010S_BillOfMaterials.BillOfMaterials = &BillOfMaterials
+	|
+	|ORDER BY
+	|	T7010S_BillOfMaterials.Period";
+	Query.SetParameter("BillOfMaterials" , Object.Ref);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		ThisObject.ProductionPlanningExists = QuerySelection.Ref;
+	EndIf;
+	
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -45,6 +71,16 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ContentBillOfMaterials.Visible = IsProduct;
 	Form.Items.ContentExpenseType.Visible = IsWork;
 	
+	IsFilled_ProductionPlanningExists = ValueIsFilled(Form.ProductionPlanningExists);	
+	Form.ReadOnly = IsFilled_ProductionPlanningExists;	
+	Form.Items.ProductionPlanningExists.Visible =  IsFilled_ProductionPlanningExists;
+	
+	If Object.Active Then
+		Form.Items.ChangeActive.Picture = PictureLib.CheckAll;
+	Else
+		Form.Items.ChangeActive.Picture = PictureLib.UncheckAll;
+	EndIf;
+	
 	// Button set as default
 	If IsDefaultBillOfMaterials(Object.Ref, Object.ItemKey) Then
 		Form.Items.FormSetAsDefault.Title = R().Form_037;
@@ -57,6 +93,17 @@ Procedure SetVisibilityAvailability(Object, Form)
 	ArrayOfProductTreeRows = New Array();
 	CreateProductionTreeAtServer(ArrayOfProductTreeRows, Object.Ref, True);
 	CreateProductionTree(Object, Form, Form.ProductionTree, ArrayOfProductTreeRows);
+EndProcedure
+
+&AtClient
+Procedure ChangeActive(Command)
+	Object.Active = Not Object.Active;
+	If ValueIsFilled(ThisObject.ProductionPlanningExists) Then
+		Write();
+	Else
+		SetVisibilityAvailability(Object, ThisObject);
+		ThisObject.Modified = True;
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -269,7 +316,7 @@ Procedure CreateProductionTreeAtServer(RowOwner, BillOfMaterialsRef, IsTopLevel 
 		Else
 			If Row.Item.ItemType.Type = Enums.ItemTypes.Service Then
 				NewRow2.Insert("ItemPicture", 1);
-			ELse
+			Else
 				NewRow2.Insert("ItemPicture", 3);
 			EndIf;
 		EndIf;

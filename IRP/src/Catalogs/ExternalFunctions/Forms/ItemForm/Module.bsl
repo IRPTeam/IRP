@@ -14,16 +14,43 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	HTMLRegExpTestRowsAnalyze = Catalogs.ExternalFunctions.GetTemplate("RegExpAnalyse").GetText();
+	
+	TypeList = FillTypes();
+	For Each Row In TypeList Do
+		Items.ResultType.ChoiceList.Add(Row.Value, Row.Presentation, , Row.Picture);
+	EndDo;
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	JobScheduleInfo = CurrentObject.JobSchedule.Get();
+	
+	If CurrentObject.ExternalFunctionType = Enums.ExternalFunctionType.ReturnResultByRegExpMatch Then
+		For Each Row In CurrentObject.ResultMatches Do
+			NewRow = ResultMatches.Add();
+			NewRow.Result = Row.Result;
+			NewRow.RegExp.LoadValues(StrSplit(Row.RegExp, "|"));
+		EndDo;
+	EndIf;
+	
+	If Not IsBlankString(CurrentObject.ResultType) Then
+		Items.ResultMatchesResult.TypeRestriction = New TypeDescription(CurrentObject.ResultType);
+	EndIf;	
 EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	CurrentObject.JobSchedule = New ValueStorage(JobScheduleInfo);
+	
+	If CurrentObject.ExternalFunctionType = Enums.ExternalFunctionType.ReturnResultByRegExpMatch Then
+		CurrentObject.ResultMatches.Clear();
+		For Each Row In ResultMatches Do
+			NewRow = CurrentObject.ResultMatches.Add();
+			NewRow.RegExp = StrConcat(Row.RegExp.UnloadValues(), "|");
+			NewRow.Result = Row.Result;
+		EndDo;
+	EndIf;
+	
 EndProcedure
 
 #EndRegion
@@ -68,11 +95,9 @@ Async Procedure FindMatches()
 	Array = New Array;
 	For Each TestRexExpString In Object.TestRexExpStrings Do
 		ResultArray = Await CommonFunctionsClient.RegExpFindMatch(TestRexExpString.Row, Object.RegExp); // Array of String
-		
 		If ResultArray.Count() = 0 Then
 			Continue;
 		EndIf;
-		
 		Array.Add(TestRexExpString.Row);
 		
 		For Index = 0 To ResultArray.UBound() Do
@@ -81,9 +106,7 @@ Async Procedure FindMatches()
 		Array.Add("");
 		If Not IsBlankString(Object.ExternalCode) Then
 			Array.Add("Result:");
-			
-			//@skip-check transfer-object-between-client-server
-			ResultInfo = RunRegExpExpressionAtServer(ResultArray);
+			ResultInfo = RunRegExpExpressionAtServer(TestRexExpString.Row); // Array of String
 			Array.Add("[Value]	> " + ResultInfo.Result);
 			Array.Add("[Type]	> " + String(TypeOf(ResultInfo.Result)));
 		EndIf;
@@ -94,23 +117,20 @@ EndProcedure
 // Run reg exp expression at server.
 // 
 // Parameters:
-//  ResultArray - Array of String - Result array
+//  TestString - String - Test string
 // 
 // Returns:
 //  See CommonFunctionsServer.RecalculateExpressionResult
 &AtServer
-Function RunRegExpExpressionAtServer(ResultArray)
+Function RunRegExpExpressionAtServer(TestString)
 	
 	//@skip-check invocation-parameter-type-intersect
 	Params = CommonFunctionsServer.GetRecalculateExpressionParams(Object);
-	Params.RegExpResult = ResultArray;
-	
+	Params.RegExpString = TestString; 
 	ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
-	
 	If ResultInfo.isError Then
 		CommonFunctionsClientServer.ShowUsersMessage(ResultInfo.Description);
 	EndIf;
-
 	Return ResultInfo;
 	
 EndFunction
@@ -188,6 +208,40 @@ EndProcedure
 
 #EndRegion
 
+#Region ResultMatch
+
+&AtClient
+Procedure ResultMatchesOnStartEdit(Item, NewRow, Clone)
+	Item.CurrentData.RegExp.ValueType = New TypeDescription("String");
+EndProcedure
+
+&AtClient
+Procedure CheckTestResult(Command)
+	CheckTestResultAtServer();
+EndProcedure
+
+&AtServer
+Procedure CheckTestResultAtServer()
+	//@skip-check invocation-parameter-type-intersect
+	Params = CommonFunctionsServer.GetRecalculateExpressionParams(Object);
+	Params.RegExpString = TestCheckResultStringMatch;
+	
+	ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
+	CheckResultMatch = ResultInfo.Result;
+	
+	If ResultInfo.isError Then
+		CommonFunctionsClientServer.ShowUsersMessage(ResultInfo.Description);
+	EndIf;
+	
+EndProcedure
+
+&AtClient
+Procedure ResultTypeOnChange(Item)
+	Items.ResultMatchesResult.TypeRestriction = New TypeDescription(Object.ResultType);
+EndProcedure
+
+#EndRegion
+
 #Region Service
 
 //@skip-check variable-value-type
@@ -197,12 +251,19 @@ Procedure SetVisible()
 		Items.PageCode.Visible = False;
 		Items.PageResult.Visible = False;
 		Items.PageRegExp.Visible = True;
+		Items.GroupResultByRegexp.Visible = False;
+	ElsIf Object.ExternalFunctionType = PredefinedValue("Enum.ExternalFunctionType.ReturnResultByRegExpMatch") Then
+		Items.PageCode.Visible = False;
+		Items.PageResult.Visible = False;
+		Items.PageRegExp.Visible = False;
+		Items.GroupResultByRegexp.Visible = True;
 	Else
 		Items.PageCode.Visible = True;
 		Items.PageResult.Visible = True;
 		Items.PageRegExp.Visible = False;
+		Items.GroupResultByRegexp.Visible = False;
 	EndIf;
-	Items.PageSheduler.Visible = Object.isSchedulerSet;
+	Items.PageScheduler.Visible = Object.isSchedulerSet;
 EndProcedure
 
 &AtClient
@@ -216,5 +277,25 @@ Procedure FillRegExpTestData()
 		Text.appendChild(li);
 	EndDo;
 EndProcedure
+
+&AtServer
+Function FillTypes()
+	ValueList = New ValueList();
+	ValueList.Add("String", "String", , PictureLib.Rename);
+	ValueList.Add("Number", "Number", , PictureLib.Calculator);
+	ValueList.Add("Date", "Date", , PictureLib.Calendar);
+	For Each Cat In Metadata.Catalogs Do
+		Parts = StrSplit(Cat.FullName(), ".");
+		ResultTypeRef = Parts[0] + "Ref." + Parts[1];
+		ValueList.Add(ResultTypeRef, Cat.Synonym, , PictureLib.Catalog);
+	EndDo;
+	For Each Doc In Metadata.Documents Do
+		Parts = StrSplit(Doc.FullName(), ".");
+		ResultTypeRef = Parts[0] + "Ref." + Parts[1];
+		ValueList.Add(ResultTypeRef, Doc.Synonym, , PictureLib.Document);
+	EndDo;
+	
+	Return ValueList;
+EndFunction
 
 #EndRegion

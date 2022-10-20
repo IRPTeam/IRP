@@ -171,7 +171,7 @@ Procedure BatchRelevance_Restore(Company, EndPeriod) Export
 	|	AND case
 	|		when &FilterByCompany
 	|			then R6010B_BatchWiseBalance.Batch.Company = &Company
-	|		else true
+	|		else True
 	|	end
 	|
 	|UNION ALL
@@ -189,7 +189,7 @@ Procedure BatchRelevance_Restore(Company, EndPeriod) Export
 	|	AND case
 	|		when &FilterByCompany
 	|			then R6030T_BatchShortageOutgoing.Company = &Company
-	|		else true
+	|		else True
 	|	end
 	|
 	|UNION ALL
@@ -207,7 +207,7 @@ Procedure BatchRelevance_Restore(Company, EndPeriod) Export
 	|	AND case
 	|		when &FilterByCompany
 	|			then R6040T_BatchShortageIncoming.Company = &Company
-	|		else true
+	|		else True
 	|	end
 	|;
 	|
@@ -360,7 +360,7 @@ Procedure BatchRelevance_Clear(Company, EndPeriod) Export
 	|	case
 	|		when &FilterByCompany
 	|			then T6030S_BatchRelevance.Company = &Company
-	|		else true
+	|		else True
 	|	end
 	|	AND T6030S_BatchRelevance.Date <= ENDOFPERIOD(&EndPeriod, DAY)";
 	Query.SetParameter("FilterByCompany", ValueIsFilled(Company));

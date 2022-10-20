@@ -21,7 +21,7 @@
         <key>en</key>
         <value>Test</value>
       </synonym>
-      <handler>Connectiontest</handler>
+      <handler>ConnectionTest</handler>
     </methods>
   </urlTemplates>
 </mdclass:HTTPService>

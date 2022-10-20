@@ -69,6 +69,19 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <resources uuid="f9102d56-0140-4400-b342-cc48d2a30367">
+    <name>AmountCostRatio</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount cost ratio</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
   <attributes uuid="8c8f1709-0dba-4082-93ce-434a813d07a5">
     <name>CalculationMovementCost</name>
     <synonym>

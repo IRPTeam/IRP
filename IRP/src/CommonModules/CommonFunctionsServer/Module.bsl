@@ -558,11 +558,25 @@ Function RecalculateExpression(Params) Export
 		If Params.SafeMode Then
 			SetSafeMode(True);
 		EndIf;
-		If Params.Eval Then
+		If Params.Type = Enums.ExternalFunctionType.Eval Then
 			// @skip-check server-execution-safe-mode
 			Result = Eval(Params.Expression);
-		Else			
+		ElsIf Params.Type = Enums.ExternalFunctionType.Execute Then
 			Result = ExecuteCode(Params.Expression, Params, ResultInfo);
+		ElsIf Params.Type = Enums.ExternalFunctionType.RegExp Then
+			Params.RegExpResult = RegExpFindMatch(Params.RegExpString, Params.RegExp);
+			If Not IsBlankString(Params.Expression) Then
+				Result = ExecuteCode(Params.Expression, Params, ResultInfo);
+			EndIf;
+		ElsIf Params.Type = Enums.ExternalFunctionType.ReturnResultByRegExpMatch Then
+			For Each Row In Params.CaseParameters Do
+				If Regex(Params.RegExpString, Row.Value) Then
+					Result = Row.Key;
+					Break;
+				EndIf;
+			EndDo;
+		Else
+			Raise "Wrong External function type.";
 		EndIf;
 		ResultInfo.Result = Result;
 	Except
@@ -612,7 +626,6 @@ Procedure DeleteScheduledJob(ExternalFunction) Export
 	EndDo;
 EndProcedure
 
-
 // Get recalculate expression params.
 // 
 // Parameters:
@@ -620,29 +633,48 @@ EndProcedure
 // 
 // Returns:
 //  Structure - Get recalculate expression params:
-// * Eval - Boolean -
+// * RegExpString - String -
+// * RegExp - String -
+// * RegExpResult - Array -
 // * Expression - String -
 // * Result - Undefined -
+// * CaseParameters - Map:
+// ** Key - Arbitrary - Resturned result
+// ** Value - String - RegExp string divided by | symbol
 // * SafeMode - Boolean -
-// * RegExpResult - Array -
 // * Job - CatalogRef.ExternalFunctions -
 // * AddInfo - Structure -
+// * Type - EnumRef.ExternalFunctionType -
 Function GetRecalculateExpressionParams(ExternalFunction = Undefined) Export
 	
 	Structure = New Structure;
-	Structure.Insert("Eval", True);
+	Structure.Insert("RegExpString", "");
+	Structure.Insert("RegExp", "");
+	Structure.Insert("RegExpResult", New Array);
+
 	Structure.Insert("Expression", "");
 	Structure.Insert("Result", Undefined);
+
+	Structure.Insert("CaseParameters", New Map);
+
 	Structure.Insert("SafeMode", True);
-	Structure.Insert("RegExpResult", New Array);
 	Structure.Insert("Job", Catalogs.ExternalFunctions.EmptyRef());
+
 	Structure.Insert("AddInfo", New Structure);
+	Structure.Insert("Type", Enums.ExternalFunctionType.Eval);
 	
 	If Not ExternalFunction = Undefined Then
-		Structure.Eval = ExternalFunction.ExternalFunctionType = Enums.ExternalFunctionType.Eval;
 		Structure.SafeMode = ExternalFunction.SafeModeIsOn;
 		Structure.Expression = ExternalFunction.ExternalCode;
 		Structure.Job = ExternalFunction.Ref;
+		Structure.Type = ExternalFunction.ExternalFunctionType;
+		Structure.RegExp = ExternalFunction.RegExp;
+		
+		MatchStr = New Map;
+		For Each Row In ExternalFunction.ResultMatches Do
+			MatchStr.Insert(Row.Result, Row.RegExp);
+		EndDo;
+		Structure.Insert("CaseParameters", MatchStr);
 	EndIf;
 	
 	Return Structure;
@@ -755,3 +787,103 @@ Procedure SetQueryBuilderFilters(QueryBuilder, QueryFilters)
 EndProcedure
 
 #EndRegion
+
+// Get attributes from ref. If there is no attribute, or there is no access, 
+// then the structure key will be Undefined, otherwise the required value.
+// 
+// Parameters:
+//  Ref - AnyRef - Ref to get properties
+//  Attributes - String, FixedStructure, Structure, FixedArray, Array of String - List of attributes
+//  OnlyAllowed - Boolean - Requesting the value of attributes, taking into account rights at the record level
+// 
+// Returns:
+//   Structure - response description:
+//   * Key - String - property name
+//   * Value - Arbitrary - property value
+Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
+	
+	Result = New Structure;
+	
+	AttributesStructure = New Structure;
+	If TypeOf(Attributes) = Type("String") Then
+		If IsBlankString(Attributes) Then
+			Return Result;
+		EndIf;
+		Attributes = StrReplace(Attributes, " ", "");
+		Attributes = StrReplace(Attributes, Chars.LF, "");
+		AttributeParts = StrSplit(Attributes, ",");
+		For Each AttributPart In AttributeParts Do
+			Alias = StrReplace(AttributPart, ".", "");
+			AttributesStructure.Insert(Alias, AttributPart);
+		EndDo; 
+	ElsIf TypeOf(Attributes) = Type("Array") Or TypeOf(Attributes) = Type("FixedArray") Then
+		For Each AttributPart In Attributes Do
+			Alias = StrReplace(AttributPart, ".", "");
+			AttributesStructure.Insert(Alias, AttributPart);
+		EndDo;
+	ElsIf TypeOf(Attributes) = Type("Structure") Or TypeOf(Attributes) = Type("FixedStructure") Then
+		AttributesStructure = Attributes;
+	Else
+		Raise R().Error_004;
+	EndIf;
+	
+	If AttributesStructure.Count() = 0 Then
+		Return Result;
+	EndIf;
+	
+	FullTableName = Ref.Metadata().FullName();
+	
+	QueryFields = New Array;
+	For Each ItemAttribute In AttributesStructure Do
+		
+		FieldName = ?(ValueIsFilled(ItemAttribute.Value), ItemAttribute.Value, ItemAttribute.Key); // String
+		FieldAlias = ItemAttribute.Key;
+		QueryFields.Add(FieldName + " AS " + FieldAlias);
+		
+		CurrentResult = Result;
+		FieldParts = StrSplit(FieldName, ".");
+		For Index = 0 To FieldParts.UBound() Do
+			If Not CurrentResult.Property(FieldParts[Index]) Then
+				CurrentResult.Insert(FieldParts[Index], Undefined);
+			EndIf;
+			If Index < FieldParts.UBound() Then
+				If CurrentResult[FieldParts[Index]] = Undefined Then
+					CurrentResult[FieldParts[Index]] = New Structure;
+				EndIf; 
+				CurrentResult = CurrentResult[FieldParts[Index]]; // Structure
+			EndIf;
+		EndDo;
+	EndDo;
+	
+	If Not ValueIsFilled(Ref) Or QueryFields.Count() = 0 Then
+		Return Result;
+	EndIf;
+	
+	Query = New Query;
+	Query.Parameters.Insert("Ref", Ref);
+	Query.Text = StrTemplate(
+		"SELECT %1
+			|	%2
+			|FROM %3 AS Table
+			|WHERE Table.Ref = &Ref", 
+		?(OnlyAllowed, "ALLOWED", ""), 
+		StrConcat(QueryFields, "," + Chars.CR + Chars.Tab),
+		FullTableName
+	);
+	
+	SelectionDetailRecords = Query.Execute().Select();
+	If SelectionDetailRecords.Next() Then
+		For Each ItemAttribute In AttributesStructure Do
+			CurrentResult = Result;
+			FieldName = ?(ValueIsFilled(ItemAttribute.Value), ItemAttribute.Value, ItemAttribute.Key); // String
+			FieldParts = StrSplit(FieldName, ".");
+			For Index = 0 To FieldParts.UBound() - 1 Do
+				CurrentResult = CurrentResult[FieldParts[Index]]; // Structure 
+			EndDo;
+			CurrentResult[FieldParts[FieldParts.UBound()]] = SelectionDetailRecords[ItemAttribute.Key];
+		EndDo;
+	EndIf;
+	
+	Return Result;
+	
+EndFunction

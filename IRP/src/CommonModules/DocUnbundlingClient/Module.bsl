@@ -7,7 +7,6 @@ EndProcedure
 
 #EndRegion
 
-
 #Region _DATE
 
 Procedure DateOnChange(Object, Form, Item) Export

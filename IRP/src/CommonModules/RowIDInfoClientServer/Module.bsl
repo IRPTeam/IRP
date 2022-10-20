@@ -187,7 +187,6 @@ Function GetLinkedDocumentsFilter_RRR(Object) Export
 	Return Filter;
 EndFunction
 
-// #1487
 Function GetLinkedDocumentsFilter_WO(Object) Export
 	Filter = New Structure();
 	Filter.Insert("Company"              , Object.Company);
@@ -218,5 +217,4 @@ Procedure FillVisibleFields(BasisesTree, VisibleFields) Export
 		EndDo;
 	EndDo;
 EndProcedure
-
 

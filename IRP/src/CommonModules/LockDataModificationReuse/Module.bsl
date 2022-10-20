@@ -30,17 +30,17 @@ Function GetDSCTemplate(Val MetadataName, Rule) Export
 	Return Template
 EndFunction
 
-
 // Fill attribute list.
 // 
 // Parameters:
 //  MetadataName - String - Metadata name
+//  Tables - String - Names for tables part divided by coma
 // 
 // Returns:
 //  Structure - Fill attribute list:
 // * FieldsArray - Array of String - All fields, which can be used at query
 // * ChoiceData - ValueList of String - List for all attributes with icons, path and synonym
-Function FillAttributeList(MetadataName) Export
+Function FillAttributeList(MetadataName, Tables = Undefined) Export
 	Result = New Structure;
 	Result.Insert("FieldsArray", New Array);
 	Result.Insert("ChoiceData", New ValueList);
@@ -75,6 +75,14 @@ Function FillAttributeList(MetadataName) Export
 			Result.FieldsArray.Add(CmAttribute.Name);
 		EndIf;
 	EndDo;
+	
+	If Not Tables = Undefined And MetadataInfo.hasTabularSections(MetadataType) Then
+		TablesName = StrSplit(Tables, ",");
+		For Each Table In TablesName Do
+			AddChildTab(MetaItem, Result, Table);
+		EndDo;
+	EndIf;
+	
 	Return Result;
 EndFunction
 
@@ -102,6 +110,15 @@ Procedure AddChild(MetaItem, Result, MetadataName)
 		Result.FieldsArray.Add(AddChild.Name);
 	EndDo;
 
+EndProcedure
+
+Procedure AddChildTab(MetaItem, Result, MetadataName)
+	MetaCollection = MetaItem.TabularSections[MetadataName]; // MetadataObjectTabularSection
+	For Each AddChildAttribute In MetaCollection.Attributes Do
+		Result.ChoiceData.Add("TabularSections." + MetadataName + "." + AddChildAttribute.Name, 
+			?(IsBlankString(AddChildAttribute.Synonym), AddChildAttribute.Name,	AddChildAttribute.Synonym), , PictureLib.FixTable);
+		Result.FieldsArray.Add(AddChildAttribute.Name);
+	EndDo;
 EndProcedure
 
 // Get virtual table.

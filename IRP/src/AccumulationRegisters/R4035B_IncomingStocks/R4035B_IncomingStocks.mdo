@@ -66,6 +66,7 @@
     <type>
       <types>DocumentRef.PurchaseOrder</types>
       <types>DocumentRef.InventoryTransferOrder</types>
+      <types>DocumentRef.ProductionPlanning</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

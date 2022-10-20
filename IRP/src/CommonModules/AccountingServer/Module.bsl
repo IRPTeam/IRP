@@ -987,20 +987,20 @@ Function GetAccountingData_RetailSalesReceipt_DR_R5022T_CR_R4050B(Parameters)
 		Result.CurrencyAmountDr = QuerySelection.Amount;
 		Result.CurrencyCr       = QuerySelection.Currency;
 		Result.CurrencyAmountCr = QuerySelection.Amount;
-	Endif;
+	EndIf;
 	
 	// Amount
 	QuerySelection = QueryResults[2].Select();
 	If QuerySelection.Next() Then
 		Result.Amount = QuerySelection.Amount;
-	Endif;
+	EndIf;
 	
 	// Quantity
 	QuerySelection = QueryResults[3].Select();
 	If QuerySelection.Next() Then
 		Result.QuantityCr = QuerySelection.Quantity;
 		Result.QuantityDr = QuerySelection.Quantity;
-	Endif;
+	EndIf;
 	
 	Return Result;	
 EndFunction
@@ -1025,7 +1025,7 @@ Function GetAccountingData(Parameters)
 	|	AND case
 	|		when &FilterByRowKey
 	|			then Amounts.RowKey = &RowKey
-	|		else true
+	|		else True
 	|	end
 	|GROUP BY
 	|	Amounts.Currency
@@ -1043,7 +1043,7 @@ Function GetAccountingData(Parameters)
 	|	AND case
 	|		when &FilterByRowKey
 	|			then Amounts.RowKey = &RowKey
-	|		else true
+	|		else True
 	|	end
 	|;
 	|
@@ -1057,7 +1057,7 @@ Function GetAccountingData(Parameters)
 	|	AND case
 	|		when &FilterByRowKey
 	|			then Quantities.RowKey = &RowKey
-	|		else true
+	|		else True
 	|	end";
 	
 	OperationsDefinition = GetOperationsDefinition();
@@ -1086,20 +1086,20 @@ Function GetAccountingData(Parameters)
 		Result.CurrencyAmountDr = QuerySelection.Amount;
 		Result.CurrencyCr       = QuerySelection.Currency;
 		Result.CurrencyAmountCr = QuerySelection.Amount;
-	Endif;
+	EndIf;
 	
 	// Amount
 	QuerySelection = QueryResults[1].Select();
 	If QuerySelection.Next() Then
 		Result.Amount = QuerySelection.Amount;
-	Endif;
+	EndIf;
 	
 	// Quantity
 	QuerySelection = QueryResults[2].Select();
 	If QuerySelection.Next() Then
 		Result.QuantityCr = QuerySelection.Quantity;
 		Result.QuantityDr = QuerySelection.Quantity;
-	Endif;
+	EndIf;
 	
 	Return Result;	
 EndFunction

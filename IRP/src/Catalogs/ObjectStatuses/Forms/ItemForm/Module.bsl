@@ -41,7 +41,10 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Object.Parent = PredefinedValue("Catalog.ObjectStatuses.ChequeBondIncoming")
 	Or Object.Parent = PredefinedValue("Catalog.ObjectStatuses.ChequeBondOutgoing");
 	
+	IsProductionPlanningCorrection = Object.Parent = PredefinedValue("Catalog.ObjectStatuses.ProductionPlanningCorrection");
+	
 	Form.Items.GroupPosting.Visible = IsCheque;
+	Form.Items.GroupUsers.Visible = IsProductionPlanningCorrection;
 EndProcedure
 
 &AtClient
@@ -55,11 +58,6 @@ Procedure ParentOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure NextPossibleStatusesStatusStartChoice(Item, ChoiceData, StandardProcessing)
-	ObjectStatusesClient.StatusStartChoice(Object, ThisObject, GetArrayOfFilters(), Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
 Procedure NextPossibleStatusesStatusEditTextChange(Item, Text, StandardProcessing)
 	ObjectStatusesClient.StatusEditTextChange(Object, ThisObject, GetArrayOfFilters(), New Structure(), Item, Text, StandardProcessing);
 EndProcedure
@@ -67,8 +65,8 @@ EndProcedure
 &AtClient
 Function GetArrayOfFilters()
 	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Parent"   , Object.Parent,DataCompositionComparisonType.Equal));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref"      , Object.Ref,DataCompositionComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Parent"   , Object.Parent, DataCompositionComparisonType.Equal));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref"      , Object.Ref, DataCompositionComparisonType.NotEqual));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsFolder" , False, DataCompositionComparisonType.Equal));
 	Return ArrayOfFilters;
 EndFunction

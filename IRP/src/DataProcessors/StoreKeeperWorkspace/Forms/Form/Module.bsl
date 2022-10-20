@@ -1,3 +1,9 @@
+
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	EnableButtons();
+EndProcedure
+
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "NewBarcode" And IsInputAvailable() Then
@@ -94,6 +100,8 @@ Procedure GoodsInTransitIncomingRefreshRequestProcessingAtServer()
 	ThisObject.GoodsInTransitIncoming.Load(BasisTableTotal);
 	
 	Items.PagesSettings.CurrentPage = Items.GroupGoodsReceipt;
+	
+	EnableButtons();
 EndProcedure
 
 &AtServer
@@ -158,7 +166,7 @@ Procedure CreateDocumentGoodsReceipt(Command)
 		Return;
 	EndIf;
 	
-	ColumNames = "
+	ColumnNames = "
 	|Basis,
 	|BasisKey,
 	|BasisUnit,
@@ -173,7 +181,7 @@ Procedure CreateDocumentGoodsReceipt(Command)
 	|RowRef,
 	|Store,
 	|Unit";
-	StructureRow = New Structure(ColumNames);
+	StructureRow = New Structure(ColumnNames);
 	FillPropertyValues(StructureRow, CurrentData);
 	
 	CreateDocuments(StructureRow, True, False);

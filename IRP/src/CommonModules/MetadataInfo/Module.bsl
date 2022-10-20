@@ -68,4 +68,19 @@ Function EnumNameByRef(RefData) Export
 	Return Metadata.Enums[RefNameType].EnumValues[ValueIndex].Name;
 EndFunction
 
+Function hasTabularSections(MetaName) Export
+	Array = New Array;
+	Array.Add(Enums.MetadataTypes.Catalog);
+    Array.Add(Enums.MetadataTypes.Document);
+    Array.Add(Enums.MetadataTypes.Task);
+    Array.Add(Enums.MetadataTypes.DataProcessor);
+    Array.Add(Enums.MetadataTypes.Report);
+    Array.Add(Enums.MetadataTypes.ChartOfCalculationTypes);
+    Array.Add(Enums.MetadataTypes.ChartOfCharacteristicTypes);
+    Array.Add(Enums.MetadataTypes.ExchangePlan);
+    Array.Add(Enums.MetadataTypes.ChartOfAccounts);
+    Array.Add(Enums.MetadataTypes.BusinessProcess);
+	Return NOT Array.Find(MetaName) = Undefined;
+EndFunction
+
 #EndRegion

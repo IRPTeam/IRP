@@ -232,9 +232,9 @@ Scenario: _029202 create work order	based on Sales order
 		And I click "Ok" button
 	* Check WO
 		And "ItemList" table became equal
-			| '#' | 'Item'         | 'Price type'        | 'Item key'     | 'Bill of materials' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Quantity' | 'Price'  | 'Offers amount' | 'Net amount' | 'Total amount' | 'Sales order'                               |
-			| '1' | 'Installation' | 'Basic Price Types' | 'Installation' | ''                  | 'pcs'  | 'No'                 | '14,49'      | '1,000'    | '100,00' | '5,00'          | '80,51'      | '95,00'        | 'Sales order 183 dated 22.09.2022 11:13:46' |
-			| '2' | 'Assembly'     | 'Basic Price Types' | 'Assembly'     | ''                  | 'pcs'  | 'No'                 | '14,49'      | '1,000'    | '100,00' | '5,00'          | '80,51'      | '95,00'        | 'Sales order 183 dated 22.09.2022 11:13:46' |		
+			| '#' | 'Item'         | 'Price type'        | 'Item key'     | 'Bill of materials'      | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Quantity' | 'Price'  | 'Offers amount' | 'Net amount' | 'Total amount' | 'Sales order'                               |
+			| '1' | 'Installation' | 'Basic Price Types' | 'Installation' | 'Furniture installation' | 'pcs'  | 'No'                 | '14,49'      | '1,000'    | '100,00' | '5,00'          | '80,51'      | '95,00'        | 'Sales order 183 dated 22.09.2022 11:13:46' |
+			| '2' | 'Assembly'     | 'Basic Price Types' | 'Assembly'     | 'Assembly'               | 'pcs'  | 'No'                 | '14,49'      | '1,000'    | '100,00' | '5,00'          | '80,51'      | '95,00'        | 'Sales order 183 dated 22.09.2022 11:13:46' |
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"

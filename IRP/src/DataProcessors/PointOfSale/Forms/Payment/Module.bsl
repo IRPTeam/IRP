@@ -164,7 +164,6 @@ EndProcedure
 
 #Region Private
 
-
 &AtClient
 Procedure OpenPaymentForm(PaymentTypesTable, PaymentType)
 

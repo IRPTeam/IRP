@@ -129,7 +129,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 				Row.Diff = Row.QuantityAtDocument - Row.CurrentQuantity;
 			EndIf;
 			NotifyOnClosing = New NotifyDescription("OnEditQuantityEnd", ThisObject);
-			OpenForm("DataProcessor.ScanBarcode.Form.RowForm", New Structure("FillingData" ,Row), ThisObject, , , , NotifyOnClosing);
+			OpenForm("DataProcessor.ScanBarcode.Form.RowForm", New Structure("FillingData", Row), ThisObject, , , , NotifyOnClosing);
 		Else
 			OnEditQuantityEnd(Row);
 		EndIf;

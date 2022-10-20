@@ -133,7 +133,7 @@ Function QuerySearchInputByString(Settings) Export
 	Return QueryText;
 EndFunction
 
-Procedure CutLastSymblosIfCameFromExcel(Parameters) Export
+Procedure CutLastSymbolsIfCameFromExcel(Parameters) Export
 	If StrEndsWith(Parameters.SearchString, "¶") Then 
 		Parameters.SearchString = Left(Parameters.SearchString, StrLen(Parameters.SearchString) - 1);
 	EndIf;
@@ -187,4 +187,8 @@ Function QueryTableToChoiceData(QueryTable) Export
 	EndDo;
 	
 	Return ChoiceData;
+EndFunction
+
+Function GetMetadataFullName(Ref) Export
+	Return Ref.Metadata().FullName();
 EndFunction

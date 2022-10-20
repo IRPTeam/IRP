@@ -60,7 +60,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_PR(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
-		ItemListTable = ThisObject.ItemList.Unload(,"Key, LineNumber, ItemKey, Store");
+		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, ItemKey, Store");
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
 

@@ -285,7 +285,7 @@
       <value>Transaction type</value>
     </synonym>
     <type>
-      <types>EnumRef.PurchaseReturnTransactionType</types>
+      <types>EnumRef.PurchaseReturnTransactionTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

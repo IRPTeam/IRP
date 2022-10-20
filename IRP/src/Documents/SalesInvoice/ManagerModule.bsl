@@ -259,8 +259,8 @@ Function ItemList()
 		|	SalesInvoiceItemList.PriceType,
 		|	SalesInvoiceItemList.SalesPerson,
 		|	// #1533
-		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionType.Sales) AS IsSales,
-		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionType.ShipmentToTradeAgent) AS ShipmentToTradeAgent
+		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
+		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS ShipmentToTradeAgent
 		|INTO ItemList
 		|FROM
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -843,7 +843,7 @@ Function R5011B_CustomersAging()
 		|WHERE
 		|	PaymentTerms.Ref = &Ref
 		// #1533
-		|	AND PaymentTerms.Ref.TransactionType = VALUE(Enum.SalesTransactionType.Sales)
+		|	AND PaymentTerms.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales)
 		|GROUP BY
 		|	PaymentTerms.Date,
 		|	PaymentTerms.Ref,
@@ -921,7 +921,7 @@ Function R2022B_CustomersPaymentPlanning()
 		|	SalesInvoicePaymentTerms.Ref = &Ref
 		|	AND SalesInvoicePaymentTerms.CalculationType = VALUE(Enum.CalculationTypes.PostShipmentCredit)
 		// #1533
-		|	AND SalesInvoicePaymentTerms.Ref.TransactionType = VALUE(Enum.SalesTransactionType.Sales)
+		|	AND SalesInvoicePaymentTerms.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales)
 		|GROUP BY
 		|	SalesInvoicePaymentTerms.Ref.Date,
 		|	SalesInvoicePaymentTerms.Ref.Company,

@@ -121,6 +121,7 @@ Procedure Post(Command)
 	PostAtServer();
 	GenerateTree();
 	ExpandDocumentsTree();
+	Notify("LockLinkedRows", Undefined, Undefined);
 EndProcedure
 
 &AtServer
@@ -140,6 +141,7 @@ Procedure Unpost(Command)
 	UnpostAtServer();
 	GenerateTree();
 	ExpandDocumentsTree();
+	Notify("LockLinkedRows", Undefined, Undefined);
 EndProcedure
 
 &AtServer
@@ -159,6 +161,7 @@ Procedure Delete(Command)
 	DeleteAtServer();
 	GenerateTree();
 	ExpandDocumentsTree();
+	Notify("LockLinkedRows", Undefined, Undefined);
 EndProcedure
 
 &AtServer

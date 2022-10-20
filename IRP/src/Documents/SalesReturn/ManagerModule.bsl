@@ -279,7 +279,8 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 		Cancel = True;
 	EndIf;
 	
-	If Not Cancel And Not AccReg.R2001T_Sales.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
+	If Not Cancel And Ref.TransactionType = Enums.SalesReturnTransactionTypes.ReturnFromCustomer 
+		And Not AccReg.R2001T_Sales.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
 		PostingServer.GetQueryTableByName("R2001T_Sales", Parameters),
 		PostingServer.GetQueryTableByName("Exists_R2001T_Sales", Parameters),
 		AccumulationRecordType.Expense, Unposting, AddInfo) Then

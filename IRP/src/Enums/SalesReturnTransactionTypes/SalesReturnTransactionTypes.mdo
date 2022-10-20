@@ -5,10 +5,10 @@
     <listType typeId="edde9bbc-1901-43c2-8c54-8b924847199d" valueTypeId="efdae67c-820b-41fa-bf5a-217c2c0459f3"/>
     <managerType typeId="72ecf3f4-1118-47fc-b0a8-8bb5cd75960f" valueTypeId="5241c036-d1ab-433f-a77c-09b75239c821"/>
   </producedTypes>
-  <name>SalesReturnTransactionType</name>
+  <name>SalesReturnTransactionTypes</name>
   <synonym>
     <key>en</key>
-    <value>Sales return transaction type</value>
+    <value>Sales return transaction types</value>
   </synonym>
   <quickChoice>true</quickChoice>
   <choiceMode>BothWays</choiceMode>

@@ -1322,12 +1322,15 @@ Function GetNextStep_SI(Source, RowItemList, Row)
 EndFunction
 
 Function GetNextStep_SC(Source, ItemList, Row)
+	// #1533
 	NextStep = Catalogs.MovementRules.EmptyRef();
-	If Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.Sales And Not ValueIsFilled(
-		ItemList.SalesInvoice) Then
+	If (Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.Sales
+			Or Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent)
+		And Not ValueIsFilled(ItemList.SalesInvoice) Then
 		NextStep = Catalogs.MovementRules.SI;
-	ElsIf Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor And Not ValueIsFilled(
-		ItemList.PurchaseReturn) Then
+	ElsIf (Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor
+			Or Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor)
+	 	And Not ValueIsFilled(ItemList.PurchaseReturn) Then
 		NextStep = Catalogs.MovementRules.PR;
 	EndIf;
 	Return NextStep;
@@ -1353,20 +1356,22 @@ Function GetNextStep_PI(Source, RowItemList, Row)
 EndFunction
 
 Function GetNextStep_GR(Source, ItemList, Row)
+	// #1533
 	NextStep = Catalogs.MovementRules.EmptyRef();
-	If Source.TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase And Not ValueIsFilled(
-		ItemList.PurchaseInvoice) Then
+	If (Source.TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase
+			Or Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReceiptFromConsignor) 
+		And Not ValueIsFilled(ItemList.PurchaseInvoice) Then
 		NextStep = Catalogs.MovementRules.PI;
-	ElsIf Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer And Not ValueIsFilled(
-		ItemList.SalesReturn) Then
+	ElsIf (Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer
+	 		Or Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent)
+		And Not ValueIsFilled(ItemList.SalesReturn) Then
 		NextStep = Catalogs.MovementRules.SR;
 	EndIf;
 	Return NextStep;
 EndFunction
 
 Function GetNextStep_ITO(Source, RowItemList, Row)
-	NextStep = Catalogs.MovementRules.IT;
-	Return NextStep;
+	Return Catalogs.MovementRules.IT;
 EndFunction
 
 Function GetNextStep_IT(Source, RowItemList, Row)
@@ -1398,8 +1403,7 @@ EndFunction
 
 Function GetNextStep_PR(Source, RowItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
-	If RowItemList.UseShipmentConfirmation And Not Source.ShipmentConfirmations.FindRows(New Structure("Key",
-		RowItemList.Key)).Count() Then
+	If RowItemList.UseShipmentConfirmation And Not Source.ShipmentConfirmations.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
 		NextStep = Catalogs.MovementRules.SC;
 	EndIf;
 	Return NextStep;
@@ -1565,17 +1569,17 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		//RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
 		RowRefObject.TransactionTypeSales = Source.TransactionType;
 		
-		If Source.TransactionType = Enums.SalesTransactionType.Sales Then
+		If Source.TransactionType = Enums.SalesTransactionTypes.Sales Then
 			
 			RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.Sales;
 			RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
-			RowRefObject.TransactionTypeSR = Enums.SalesReturnTransactionType.ReturnFromCustomer;
+			RowRefObject.TransactionTypeSR = Enums.SalesReturnTransactionTypes.ReturnFromCustomer;
 		
-		ElsIf Source.TransactionType = Enums.SalesTransactionType.ShipmentToTradeAgent Then
+		ElsIf Source.TransactionType = Enums.SalesTransactionTypes.ShipmentToTradeAgent Then
 			
 			RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent;
 			RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent;
-			RowRefObject.TransactionTypeSR = Enums.SalesReturnTransactionType.ReturnFromTradeAgent;
+			RowRefObject.TransactionTypeSR = Enums.SalesReturnTransactionTypes.ReturnFromTradeAgent;
 			
 		EndIf;
 		
@@ -1586,17 +1590,17 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		//RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.Purchase;
 		RowRefObject.TransactionTypePurchases = Source.TransactionType;
 		
-		If Source.TransactionType = Enums.PurchaseTransactionType.Purchase Then
+		If Source.TransactionType = Enums.PurchaseTransactionTypes.Purchase Then
 			
 			RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.Purchase;
 			RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor;
-			RowRefObject.TransactionTypePR = Enums.PurchaseReturnTransactionType.ReturnToVendor;
+			RowRefObject.TransactionTypePR = Enums.PurchaseReturnTransactionTypes.ReturnToVendor;
 			
-		ElsIf Source.TransactionType = Enums.PurchaseTransactionType.ReceiptFromConsignor Then
+		ElsIf Source.TransactionType = Enums.PurchaseTransactionTypes.ReceiptFromConsignor Then
 			
 			RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReceiptFromConsignor;
 			RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor;
-			RowRefObject.TransactionTypePR = Enums.PurchaseReturnTransactionType.ReturnToConsignor;
+			RowRefObject.TransactionTypePR = Enums.PurchaseReturnTransactionTypes.ReturnToConsignor;
 			
 		EndIf;
 		
@@ -1609,9 +1613,9 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		//RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor;
 		RowRefObject.TransactionTypePR = Source.TransactionType;
 		
-		If Source.TransactionType = Enums.PurchaseReturnTransactionType.ReturnToVendor Then
+		If Source.TransactionType = Enums.PurchaseReturnTransactionTypes.ReturnToVendor Then
 			RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor;
-		ElsIf Source.TransactionType = Enums.PurchaseReturnTransactionType.ReturnToConsignor Then
+		ElsIf Source.TransactionType = Enums.PurchaseReturnTransactionTypes.ReturnToConsignor Then
 			RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor;
 		EndIf;
 		
@@ -1620,16 +1624,16 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		//RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
 		RowRefObject.TransactionTypeSR = Source.TransactionType;
 		
-		If Source.TransactionType = Enums.SalesReturnTransactionType.ReturnFromCustomer Then
+		If Source.TransactionType = Enums.SalesReturnTransactionTypes.ReturnFromCustomer Then
 			RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
-		ElsIf Source.TransactionType = Enums.SalesReturnTransactionType.ReturnFromTradeAgent Then
+		ElsIf Source.TransactionType = Enums.SalesReturnTransactionTypes.ReturnFromTradeAgent Then
 			RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent;
 		EndIf;
 	
 	// #1533
 	ElsIf Is.WO Or Is.WS Then
 		
-		RowRefObject.TransactionTypeSales = Enums.SalesTransactionType.Sales;
+		RowRefObject.TransactionTypeSales = Enums.SalesTransactionTypes.Sales;
 		
 	ElsIf Is.ITO Or Is.IT Then
 		RowRefObject.StoreSender = Source.StoreSender;
@@ -2214,7 +2218,17 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseShipmentConfirmation,
 	|	ItemList.Store.UseGoodsReceipt
 	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseGoodsReceipt,
-	|	VALUE(Enum.ShipmentConfirmationTransactionTypes.Sales) AS TransactionType,
+	// #1533
+	//|	VALUE(Enum.ShipmentConfirmationTransactionTypes.Sales) AS TransactionType,
+	|	case 
+	|		when ItemList.Ref.TransactionType = value(Enum.SalesTransactionTypes.Sales)
+	|		then value(Enum.ShipmentConfirmationTransactionTypes.Sales)
+	|		when ItemList.Ref.TransactionType = value(Enum.SalesTransactionTypes.ShipmentToTradeAgent)
+	|		then value(Enum.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent)
+	|	end as TransactionType,
+	|
+	|	ItemList.Ref.TransactionType as TransactionTypeSales,
+	//---
 	|	0 AS Quantity,
 	|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
 	|	ISNULL(ItemList.Price, 0) AS Price,
@@ -2322,7 +2336,24 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseShipmentConfirmation,
 	|	ItemList.Store.UseGoodsReceipt
 	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseGoodsReceipt,
-	|	VALUE(Enum.ShipmentConfirmationTransactionTypes.Sales) AS TransactionType,
+	// #1533
+	//|	VALUE(Enum.ShipmentConfirmationTransactionTypes.Sales) AS TransactionType,
+	|	case 
+	|		when ItemList.Ref.TransactionType = value(Enum.SalesTransactionTypes.Sales)
+	|		then value(Enum.ShipmentConfirmationTransactionTypes.Sales)
+	|		when ItemList.Ref.TransactionType = value(Enum.SalesTransactionTypes.ShipmentToTradeAgent)
+	|		then value(Enum.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent)
+	|	end as TransactionType,
+	|
+	|	case 
+	|		when ItemList.Ref.TransactionType = value(Enum.SalesTransactionTypes.Sales)
+	|		then value(Enum.SalesReturnTransactionTypes.ReturnFromCustomer)
+	|		when ItemList.Ref.TransactionType = value(Enum.SalesTransactionTypes.ShipmentToTradeAgent)
+	|		then value(Enum.SalesReturnTransactionTypes.ReturnFromTradeAgent)
+	|	end as TransactionTypeSR,
+	|
+	|	ItemList.Ref.TransactionType as TransactionTypeSales,
+	//---
 	|	0 AS Quantity,
 	|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
 	|	ISNULL(ItemList.Price, 0) AS Price,
@@ -2427,6 +2458,19 @@ Function ExtractData_FromSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.ItemKey AS ItemKey,
 	|	TRUE AS UseShipmentConfirmation,
+	// #1533
+	|	case when ItemList.Ref.TransactionType = value(Enum.ShipmentConfirmationTransactionTypes.Sales)
+	|			then value(Enum.SalesTransactionTypes.Sales)
+	|		when ItemList.Ref.TransactionType = value(Enum.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent)
+	|			then value(Enum.SalesTransactionTypes.ShipmentToTradeAgent)
+	|	end as TransactionTypeSales,
+	|	
+	|	case when ItemList.Ref.TransactionType = value(Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor)
+	|			then value(Enum.PurchaseReturnTransactionTypes.ReturnToVendor)
+	|		when ItemList.Ref.TransactionType = value(Enum.ShipmentConfirmationTransactionTypes.ReturnToConsignor)
+	|			then value(Enum.PurchaseReturnTransactionTypes.ReturnToConsignor)
+	|	end as TransactionTypePR,
+	|
 	|	0 AS Quantity,
 	|	BasisesTable.Key,
 	|	BasisesTable.Unit AS Unit,
@@ -2480,15 +2524,14 @@ Function ExtractData_FromSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	TableSerialLotNumbers      = QueryResults[4].Unload();
 	
 	For Each RowItemList In TableItemList Do
-		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit,
-			RowItemList.QuantityInBaseUnit);
+		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit, RowItemList.QuantityInBaseUnit);
 	EndDo;
 
 	Tables = New Structure();
-	Tables.Insert("ItemList", TableItemList);
-	Tables.Insert("RowIDInfo", TableRowIDInfo);
-	Tables.Insert("ShipmentConfirmations", TableShipmentConfirmations);
-	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
+	Tables.Insert("ItemList"              , TableItemList);
+	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
+	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
+	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
 	
 	AddTables(Tables);
 
@@ -2782,7 +2825,18 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Detail AS Detail,
 	|	ItemList.Store.UseGoodsReceipt
 	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseGoodsReceipt,
-	|	VALUE(Enum.GoodsReceiptTransactionTypes.Purchase) AS TransactionType,
+	// #1533
+	//|	VALUE(Enum.GoodsReceiptTransactionTypes.Purchase) AS TransactionType,
+	|
+	|	case 
+	|		when ItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.Purchase)
+	|		then value(Enum.GoodsReceiptTransactionTypes.Purchase)
+	|		when ItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.ReceiptFromConsignor)
+	|		then value(Enum.GoodsReceiptTransactionTypes.ReceiptFromConsignor)
+	|	end as TransactionType,
+	|	
+	|	ItemList.Ref.TransactionType AS TransactionTypePurchases,
+	|
 	|	0 AS Quantity,
 	|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
 	|	ISNULL(ItemList.Price, 0) AS Price,
@@ -2889,7 +2943,25 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseShipmentConfirmation,
 	|	ItemList.Store.UseGoodsReceipt
 	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseGoodsReceipt,
-	|	VALUE(Enum.GoodsReceiptTransactionTypes.Purchase) AS TransactionType,
+	// #1533
+	//|	VALUE(Enum.GoodsReceiptTransactionTypes.Purchase) AS TransactionType,
+	|
+	|	case 
+	|		when ItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.Purchase)
+	|		then value(Enum.GoodsReceiptTransactionTypes.Purchase)
+	|		when ItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.ReceiptFromConsignor)
+	|		then value(Enum.GoodsReceiptTransactionTypes.ReceiptFromConsignor)
+	|	end as TransactionType,
+	|
+	|	case 
+	|		when ItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.Purchase)
+	|		then value(Enum.PurchaseReturnTransactionTypes.ReturnToVendor)
+	|		when ItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.ReceiptFromConsignor)
+	|		then value(Enum.PurchaseReturnTransactionTypes.ReturnToConsignor)
+	|	end as TransactionTypePR,
+	|
+	|	ItemList.Ref.TransactionType as TransactionTypePurchases,
+	|
 	|	0 AS Quantity,
 	|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
 	|	ISNULL(ItemList.Price, 0) AS Price,
@@ -2993,6 +3065,19 @@ Function ExtractData_FromGR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.ItemKey AS ItemKey,
 	|	TRUE AS UseGoodsReceipt,
+	// #1533
+	|	case when ItemList.Ref.TransactionType = value(Enum.GoodsReceiptTransactionTypes.Purchase)
+	|			then value(Enum.PurchaseTransactionTypes.Purchase)
+	|		when ItemList.Ref.TransactionType = value(Enum.GoodsReceiptTransactionTypes.ReceiptFromConsignor)
+	|			then value(Enum.PurchaseTransactionTypes.ReceiptFromConsignor)
+	|	end as TransactionTypePurchases,
+	|	
+	|	case when ItemList.Ref.TransactionType = value(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer)
+	|			then value(Enum.SalesReturnTransactionTypes.ReturnFromCustomer)
+	|		when ItemList.Ref.TransactionType = value(Enum.GoodsReceiptTransactionTypes.ReturnFromTradeAgent)
+	|			then value(Enum.SalesReturnTransactionTypes.ReturnFromTradeAgent)
+	|	end as TransactionTypeSR,
+	|
 	|	0 AS Quantity,
 	|	BasisesTable.Key,
 	|	BasisesTable.Unit AS Unit,
@@ -3474,7 +3559,15 @@ Function ExtractData_FromPR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.ReturnReason AS ReturnReason,
 	|	ItemList.Store.UseShipmentConfirmation
 	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseShipmentConfirmation,
-	|	VALUE(Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor) AS TransactionType,
+	// #1533
+	//|	VALUE(Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor) AS TransactionType,
+	|	case 
+	|		when ItemList.Ref.TransactionType = value(Enum.PurchaseReturnTransactionTypes.ReturnToVendor)
+	|			then value(Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor)
+	|		when ItemList.Ref.TransactionType = value(Enum.PurchaseReturnTransactionTypes.ReturnToConsignor)
+	|			then value(Enum.ShipmentConfirmationTransactionTypes.ReturnToConsignor)
+	|	end as TransactionType,
+	|
 	|	0 AS Quantity,
 	|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
 	|	ISNULL(ItemList.Price, 0) AS Price,
@@ -3573,6 +3666,9 @@ Function ExtractData_FromPRO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 	|	ItemList.ExpenseType AS ExpenseType,
 	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+	// #1533
+	|	ItemList.Ref.TransactionType AS TransactionTypePR,
+	//---
 	|	0 AS Quantity,
 	|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
 	|	ISNULL(ItemList.Price, 0) AS Price,
@@ -3675,7 +3771,15 @@ Function ExtractData_FromSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 	|	ItemList.Store.UseGoodsReceipt
 	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseGoodsReceipt,
-	|	VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer) AS TransactionType,
+	// #1533
+	//|	VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer) AS TransactionType,
+	|	case 
+	|		when ItemList.Ref.TransactionType = value(Enum.SalesReturnTransactionTypes.ReturnFromCustomer)
+	|			then value(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer)
+	|		when ItemList.Ref.TransactionType = value(Enum.SalesReturnTransactionTypes.ReturnFromTradeAgent)
+	|			then value(Enum.GoodsReceiptTransactionTypes.ReturnFromTradeAgent)
+	|	end as TransactionType,
+	|
 	|	0 AS Quantity,
 	|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
 	|	ISNULL(ItemList.Price, 0) AS Price,
@@ -3775,6 +3879,9 @@ Function ExtractData_FromSRO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 	|	ItemList.RevenueType AS RevenueType,
 	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+	// #1533
+	|	ItemList.Ref.TransactionType AS TransactionTypeSR,
+	//---
 	|	0 AS Quantity,
 	|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
 	|	ISNULL(ItemList.Price, 0) AS Price,
@@ -9241,15 +9348,23 @@ EndFunction
 
 #Region DataToFillingValues
 
-Function GetSeparatorColumns(DocReceiverMetadata) Export
+Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False) Export
 	If DocReceiverMetadata = Metadata.Documents.SalesInvoice Then
-		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName";
+		// #1533
+		//Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName";
+		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName" 
+				+ ?(NameAsAlias, ", TransactionTypeSales", ", TransactionType");
+				
 	ElsIf DocReceiverMetadata = Metadata.Documents.ShipmentConfirmation Then
 		Return "Company, Branch, Partner, LegalName, TransactionType";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseOrder Then
 		Return "Company, Branch";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseInvoice Then
-		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		// #1533
+		//Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax"
+				+ ?(NameAsAlias, ", TransactionTypePurchases", ", TransactionType");
+				
 	ElsIf DocReceiverMetadata = Metadata.Documents.GoodsReceipt Then
 		Return "Company, Branch, Partner, LegalName, TransactionType";
 	ElsIf DocReceiverMetadata = Metadata.Documents.InventoryTransfer Then
@@ -9261,13 +9376,29 @@ Function GetSeparatorColumns(DocReceiverMetadata) Export
 	ElsIf DocReceiverMetadata = Metadata.Documents.StockAdjustmentAsWriteOff Then
 		Return "Company, Branch, Store";
 	ElsIf DocReceiverMetadata = Metadata.Documents.SalesReturn Then
-		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		// #1533	
+		//Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax"
+				+ ?(NameAsAlias, ", TransactionTypeSR", ", TransactionType");
+	
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseReturn Then
-		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		// #1533
+		//Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax"
+				+ ?(NameAsAlias, ", TransactionTypePR", ", TransactionType");
+				
 	ElsIf DocReceiverMetadata = Metadata.Documents.SalesReturnOrder Then
-		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		// #1533
+		//Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax"
+				+ ?(NameAsAlias, ", TransactionTypeSR", ", TransactionType");
+	
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseReturnOrder Then
-		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		// #1533
+		//Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax"
+				+ ?(NameAsAlias, ", TransactionTypePR", ", TransactionType");
+				
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailReturnReceipt Then
 		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer, UsePartnerTransactions, Workstation";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PlannedReceiptReservation Then
@@ -9285,7 +9416,7 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 
 	TableNames_Refreshable = GetTableNames_Refreshable();
 
-	SeparatorColumns = GetSeparatorColumns(DocReceiverMetadata);
+	SeparatorColumns = GetSeparatorColumns(DocReceiverMetadata, True);
 
 	UniqueRows = Tables.ItemList.Copy();
 	UniqueRows.GroupBy(SeparatorColumns);
@@ -9422,10 +9553,24 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 		EndDo;
 		
 		FillingValues.Insert("BasedOn", True);
+		// #1533
+		ReplaceAliasToAttributeName(FillingValues, "TransactionTypeSales"     , "TransactionType");
+		ReplaceAliasToAttributeName(FillingValues, "TransactionTypeSR"        , "TransactionType");
+		ReplaceAliasToAttributeName(FillingValues, "TransactionTypePurchases" , "TransactionType");
+		ReplaceAliasToAttributeName(FillingValues, "TransactionTypePR"        , "TransactionType");
+		
 		ArrayOfFillingValues.Add(FillingValues);
 	EndDo;
 	Return ArrayOfFillingValues;
 EndFunction
+
+Procedure ReplaceAliasToAttributeName(FillingValues, Alias, AttributeName)
+	If FillingValues.Property(Alias) Then
+		PropertyValue = FillingValues[Alias];
+		FillingValues.Delete(Alias);
+		FillingValues.Insert(AttributeName, PropertyValue);
+	EndIf;
+EndProcedure
 
 Function JoinAllExtractedData(ArrayOfData)
 	Tables = New Structure();
@@ -9579,7 +9724,12 @@ Function GetColumnNames_ItemList()
 		   |WorkSheet,
 		   |BillOfMaterials,
 		   |UseWorkSheet,
-		   |ProductionPlanning";
+		   |ProductionPlanning,
+		   // #1533
+		   |TransactionTypeSales,
+		   |TransactionTypeSR,
+		   |TransactionTypePurchases,
+		   |TransactionTypePR";
 EndFunction
 
 Function GetEmptyTable_ItemList()

@@ -548,7 +548,7 @@
       <value>Transaction type (Sales)</value>
     </synonym>
     <type>
-      <types>EnumRef.SalesTransactionType</types>
+      <types>EnumRef.SalesTransactionTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -563,7 +563,7 @@
       <value>Transaction type (Purchases)</value>
     </synonym>
     <type>
-      <types>EnumRef.PurchaseTransactionType</types>
+      <types>EnumRef.PurchaseTransactionTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -578,7 +578,7 @@
       <value>Transaction type (SR)</value>
     </synonym>
     <type>
-      <types>EnumRef.SalesReturnTransactionType</types>
+      <types>EnumRef.SalesReturnTransactionTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -593,7 +593,7 @@
       <value>Transaction type (PR)</value>
     </synonym>
     <type>
-      <types>EnumRef.PurchaseReturnTransactionType</types>
+      <types>EnumRef.PurchaseReturnTransactionTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

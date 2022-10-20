@@ -34,7 +34,7 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	// #1533
 	If FillingData = Undefined Then
 		FillingData = New Structure();
-		FillingData.Insert("TransactionType", Enums.SalesTransactionType.Sales);
+		FillingData.Insert("TransactionType", Enums.SalesTransactionTypes.Sales);
 		FillPropertyValues(ThisObject, FillingData);
 		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
 	ElsIf TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then

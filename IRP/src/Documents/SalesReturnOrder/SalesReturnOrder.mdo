@@ -263,7 +263,7 @@
       <value>Transaction type</value>
     </synonym>
     <type>
-      <types>EnumRef.SalesReturnTransactionType</types>
+      <types>EnumRef.SalesReturnTransactionTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

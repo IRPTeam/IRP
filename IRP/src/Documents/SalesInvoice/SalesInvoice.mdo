@@ -291,7 +291,7 @@
       <value>Transaction type</value>
     </synonym>
     <type>
-      <types>EnumRef.SalesTransactionType</types>
+      <types>EnumRef.SalesTransactionTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

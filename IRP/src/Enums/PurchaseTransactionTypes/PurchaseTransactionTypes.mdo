@@ -5,10 +5,10 @@
     <listType typeId="32046600-90bf-4488-a3c3-7b552eb735a3" valueTypeId="158b2898-20b8-44d7-b4a6-1ccd9dda7697"/>
     <managerType typeId="4dcc23f0-4b03-4de8-911e-b57fbdc3ff0f" valueTypeId="ac19ba7d-e385-4404-bda1-9f4e7c03fb01"/>
   </producedTypes>
-  <name>PurchaseTransactionType</name>
+  <name>PurchaseTransactionTypes</name>
   <synonym>
     <key>en</key>
-    <value>Purchase transaction type</value>
+    <value>Purchase transaction types</value>
   </synonym>
   <quickChoice>true</quickChoice>
   <choiceMode>BothWays</choiceMode>

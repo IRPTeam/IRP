@@ -1015,7 +1015,7 @@ EndProcedure
 Procedure InventoryQuantityOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "Inventory", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "Inventory", Rows);
-	ControllerClientServer_V2.ItemListQuantityOnChange(Parameters);
+	ControllerClientServer_V2.InventoryQuantityOnChange(Parameters);
 EndProcedure
 
 #EndRegion
@@ -1026,7 +1026,7 @@ EndProcedure
 Procedure InventorytPriceOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "Inventory", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "Inventory", Rows);
-	ControllerClientServer_V2.ItemListPriceOnChange(Parameters);
+	ControllerClientServer_V2.InventoryPriceOnChange(Parameters);
 EndProcedure
 
 #EndRegion
@@ -1037,7 +1037,7 @@ EndProcedure
 Procedure InventoryAmountOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "Inventory", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "Inventory", Rows);
-	ControllerClientServer_V2.ItemListAmountOnChange(Parameters);
+	ControllerClientServer_V2.InventoryAmountOnChange(Parameters);
 EndProcedure
 
 #EndRegion

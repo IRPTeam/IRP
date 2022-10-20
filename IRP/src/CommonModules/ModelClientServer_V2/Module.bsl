@@ -2262,21 +2262,30 @@ Procedure CalculateTaxAmount(Options, TaxOptions, Result, IsReverse, IsManualPri
 	Result.TaxAmount = TaxAmount;
 EndProcedure
 
+Function SimpleCalculationsOptions() Export
+	Options = GetChainLinkOptions("Ref");
+	
+	Options.Insert("Amount", 0);
+	Options.Insert("Price", 0);
+	Options.Insert("Quantity", 0);
+	
+	Options.Insert("CalculateAmount", New Structure("Enable", False));
+	Options.Insert("CalculatePrice" , New Structure("Enable", False));
+	
+	Return Options;
+EndFunction
+
 Function SimpleCalculationsExecute(Options) Export
-
 	Result = New Structure();
-	Result.Insert("TotalAmount"  , Options.AmountOptions.TotalAmount);
-	Result.Insert("Price"        , Options.PriceOptions.Price);
-	Result.Insert("Quantity"     , Options.PriceOptions.Quantity);
-	
-	If Options.CalculatePriceByTotalAmount.Enable Then
-		Result.Price = ?(Result.Quantity = 0, 0, Result.TotalAmount / Result.Quantity);
+	Result.Insert("Amount"  , Options.Amount);
+	Result.Insert("Price"   , Options.Price);
+	Result.Insert("Quantity", Options.Quantity);
+	If Options.CalculatePrice.Enable Then
+		Result.Price = ?(Result.Quantity = 0, 0, Result.Amount / Result.Quantity);
 	EndIf;
-	
-	If Options.CalculateTotalAmount.Enable Then
-		Result.TotalAmount = Result.Price * Result.Quantity;
+	If Options.CalculateAmount.Enable Then
+		Result.Amount = Result.Price * Result.Quantity;
 	EndIf;
-
 	Return Result;
 EndFunction
 

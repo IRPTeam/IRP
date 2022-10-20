@@ -8097,9 +8097,6 @@ EndFunction
 // ItemList.Price.Bind
 Function BindItemListPrice(Parameters)
 	DataPath = "ItemList.Price";
-	If Parameters.ObjectMetadataInfo.MetadataName = "OpeningEntry" Then
-		DataPath = "Inventory.Price";
-	EndIf;
 	
 	Binding = New Structure();
 	If Parameters.StepEnableFlags.PriceChanged_AfterQuestionToUser Then
@@ -8168,9 +8165,9 @@ Function BindItemListPrice(Parameters)
 		Binding.Insert("SalesReturn",
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
 			|StepItemListCalculations_IsPriceChanged");
+		
+		Binding.Insert("StockAdjustmentAsSurplus", "StepItemListSimpleCalculations_IsPriceChanged");	
 	EndIf;
-	Binding.Insert("StockAdjustmentAsSurplus", "StepItemListSimpleCalculations_IsPriceChanged");	
-	Binding.Insert("OpeningEntry", "StepItemListSimpleCalculations_IsPriceChanged");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -8198,8 +8195,8 @@ EndProcedure
 // ItemList.SimpleCalculations.Set
 Procedure SetItemListSimpleCalculations(Parameters, Results) Export
 	ResourceToBinding = New Map();
-	ResourceToBinding.Insert("Price"      , BindItemListPrice(Parameters));
-	ResourceToBinding.Insert("TotalAmount", BindItemListAmount(Parameters));
+	ResourceToBinding.Insert("Price" , BindItemListPrice(Parameters));
+	ResourceToBinding.Insert("Amount", BindItemListAmount(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -8208,9 +8205,9 @@ Procedure StepItemListSimpleCalculations_IsPriceChanged(Parameters, Chain) Expor
 	StepItemListSimpleCalculations(Parameters, Chain, "IsPriceChanged");
 EndProcedure
 
-// ItemList.SimpleCalculations.[IsTotalAmountChanged].Step
-Procedure StepItemListSimpleCalculations_IsTotalAmountChanged(Parameters, Chain) Export
-	StepItemListSimpleCalculations(Parameters, Chain, "IsTotalAmountChanged");
+// ItemList.SimpleCalculations.[IsAmountChanged].Step
+Procedure StepItemListSimpleCalculations_IsAmountChanged(Parameters, Chain) Export
+	StepItemListSimpleCalculations(Parameters, Chain, "IsAmountChanged");
 EndProcedure
 
 // ItemList.SimpleCalculations.[IsQuantityChanged].Step
@@ -8223,24 +8220,22 @@ Procedure StepItemListSimpleCalculations(Parameters, Chain, WhoIsChanged)
 	Chain.SimpleCalculations.Setter = "SetItemListSimpleCalculations";
 	
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
-		
-		Options     = ModelClientServer_V2.CalculationsOptions();
+		Options     = ModelClientServer_V2.SimpleCalculationsOptions();
 		Options.Ref = Parameters.Object.Ref;
+		Options.Key = Row.Key;
+		Options.DontExecuteIfExecutedBefore = True;
 		
 		If WhoIsChanged = "IsPriceChanged" Or WhoIsChanged = "IsQuantityChanged" Then
-			Options.CalculateTotalAmount.Enable = True;
-		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
-			Options.CalculatePriceByTotalAmount.Enable = True;
+			Options.CalculateAmount.Enable = True;
+		ElsIf WhoIsChanged = "IsAmountChanged" Then
+			Options.CalculatePrice.Enable = True;
 		Else
 			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
 		EndIf;
 		
-		Options.PriceOptions.Price = GetItemListPrice(Parameters, Row.Key);
-		Options.PriceOptions.Quantity = GetItemListQuantity(Parameters, Row.Key);
-		
-		Options.AmountOptions.TotalAmount = GetItemListAmount(Parameters, Row.Key);
-		
-		Options.Key = Row.Key;
+		Options.Amount   = GetItemListAmount(Parameters, Row.Key);
+		Options.Price    = GetItemListPrice(Parameters, Row.Key);
+		Options.Quantity = GetItemListQuantity(Parameters, Row.Key);
 		Options.StepName = "StepItemListSimpleCalculations";
 		Chain.SimpleCalculations.Options.Add(Options);
 	EndDo;
@@ -8305,16 +8300,10 @@ EndFunction
 
 // ItemList.Quantity.Bind
 Function BindItemListQuantity(Parameters)
-	DataPath = New Map;
-	DataPath.Insert("StockAdjustmentAsSurplus", "ItemList.Quantity");
-	DataPath.Insert("OpeningEntry", "Inventory.Quantity");
-	
+	DataPath = "ItemList.Quantity";
 	Binding = New Structure();	
 	Binding.Insert("StockAdjustmentAsSurplus",
 		"StepItemListSimpleCalculations_IsQuantityChanged");
-	Binding.Insert("OpeningEntry",
-		"StepItemListSimpleCalculations_IsQuantityChanged");
-		
 	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters);
 EndFunction
 
@@ -8999,17 +8988,10 @@ EndFunction
 
 // ItemList.Amount.Bind
 Function BindItemListAmount(Parameters)
-	DataPath = New Map;
-	DataPath.Insert("StockAdjustmentAsSurplus", "ItemList.Amount");
-	DataPath.Insert("OpeningEntry", "Inventory.Amount");
-	
-	
+	DataPath = "ItemList.Amount";
 	Binding = New Structure();
 	Binding.Insert("StockAdjustmentAsSurplus",
-		"StepItemListSimpleCalculations_IsTotalAmountChanged");
-	Binding.Insert("OpeningEntry",
-		"StepItemListSimpleCalculations_IsTotalAmountChanged");
-		
+		"StepItemListSimpleCalculations_IsAmountChanged");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -9667,6 +9649,145 @@ Procedure StepInventoryChangeUseSerialLotNumberByItemKey(Parameters, Chain) Expo
 		Options.StepName = "StepInventoryChangeUseSerialLotNumberByItemKey";
 		Chain.ChangeUseSerialLotNumberByItemKey.Options.Add(Options);
 	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region INVENTORY_QUANTITY
+
+// Inventory.Quantity.OnChange
+Procedure InventoryQuantityOnChange(Parameters) Export
+	Binding = BindInventoryQuantity(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Inventory.Quantity.Set
+Procedure SetInventoryQuantity(Parameters, Results) Export
+	Binding = BindInventoryQuantity(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Inventory.Quantity.Get
+Function GetInventoryQuantity(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindInventoryQuantity(Parameters).DataPath, _Key);
+EndFunction
+
+// Inventory.Quantity.Bind
+Function BindInventoryQuantity(Parameters)
+	DataPath = "Inventory.Quantity";
+	Binding = New Structure();	
+	Binding.Insert("OpeningEntry", "StepInventoryCalculations_IsQuantityChanged");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region INVENTORY_PRICE
+
+// Inventory.Price.OnChange
+Procedure InventoryPriceOnChange(Parameters) Export
+	Binding = BindInventoryPrice(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Inventory.Price.Set
+Procedure SetInventoryPrice(Parameters, Results) Export
+	Binding = BindInventoryPrice(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Inventory.Price.Get
+Function GetInventoryPrice(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindInventoryPrice(Parameters).DataPath, _Key);
+EndFunction
+
+// Inventory.Price.Bind
+Function BindInventoryPrice(Parameters)
+	DataPath = "Inventory.Price";
+	Binding = New Structure();
+	Binding.Insert("OpeningEntry", "StepInventoryCalculations_IsPriceChanged");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region INVENTORY_AMOUNT
+
+// Inventory.Amount.OnChange
+Procedure InventoryAmountOnChange(Parameters) Export
+	Binding = BindInventoryAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Inventory.Amount.Set
+Procedure SetInventoryAmount(Parameters, Results) Export
+	Binding = BindInventoryAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Inventory.Amount.Get
+Function GetInventoryAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindInventoryAmount(Parameters).DataPath , _Key);
+EndFunction
+
+// Inventory.Amount.Bind
+Function BindInventoryAmount(Parameters)
+	DataPath = "Inventory.Amount";
+	Binding = New Structure();
+	Binding.Insert("OpeningEntry", "StepInventoryCalculations_IsAmountChanged");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region INVENTORY_CALCULATION
+
+// Inventory.SimpleCalculations.[IsQuantityChanged].Step
+Procedure StepInventoryCalculations_IsQuantityChanged(Parameters, Chain) Export
+	StepInventoryCalculations(Parameters, Chain, "IsQuantityChanged");
+EndProcedure
+
+// Inventory.SimpleCalculations.[IsPriceChanged].Step
+Procedure StepInventoryCalculations_IsPriceChanged(Parameters, Chain) Export
+	StepInventoryCalculations(Parameters, Chain, "IsPriceChanged");
+EndProcedure
+
+// Inventory.SimpleCalculations.[IsAmountChanged].Step
+Procedure StepInventoryCalculations_IsAmountChanged(Parameters, Chain) Export
+	StepInventoryCalculations(Parameters, Chain, "IsAmountChanged");
+EndProcedure
+
+// Inventory.Calculations.Set
+Procedure SetInventoryCalculations(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Price" , BindInventoryPrice(Parameters));
+	ResourceToBinding.Insert("Amount", BindInventoryAmount(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+Procedure StepInventoryCalculations(Parameters, Chain, WhoIsChanged)
+	Chain.SimpleCalculations.Enable = True;
+	Chain.SimpleCalculations.Setter = "SetInventoryCalculations";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options     = ModelClientServer_V2.SimpleCalculationsOptions();
+		Options.Ref = Parameters.Object.Ref;
+		Options.Key = Row.Key;
+		Options.DontExecuteIfExecutedBefore = True;
+		
+		If WhoIsChanged = "IsPriceChanged" Or WhoIsChanged = "IsQuantityChanged" Then
+			Options.CalculateAmount.Enable = True;
+		ElsIf WhoIsChanged = "IsAmountChanged" Then
+			Options.CalculatePrice.Enable = True;
+		Else
+			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
+		EndIf;
+		
+		Options.Amount   = GetInventoryAmount(Parameters, Row.Key);
+		Options.Price    = GetInventoryPrice(Parameters, Row.Key);
+		Options.Quantity = GetInventoryQuantity(Parameters, Row.Key);
+		Options.StepName = "StepInventoryCalculations";
+		Chain.SimpleCalculations.Options.Add(Options);
+	EndDo;
 EndProcedure
 
 #EndRegion

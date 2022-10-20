@@ -3,7 +3,11 @@ Procedure BeforeWrite(Cancel)
 		Return;
 	EndIf;
 
+	PreviousInfobaseUserID = InfobaseUserID;
 	AdminFunctionsPrivileged.CreateUser(ThisObject);
+	If PreviousInfobaseUserID <> InfobaseUserID Then
+		AdditionalProperties.Insert("isCreated", True);
+	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)
@@ -18,9 +22,10 @@ Procedure OnWrite(Cancel)
 			If Not User = Undefined Then
 				User.Delete();
 			EndIf;
-		Else
+		EndIf;
+		If Not Disable And AdditionalProperties.Property("isCreated") Then
 			Result = New Structure("Success, ArrayOfResults", True, New Array());
-			UsersEvent.UpdateUserRole(ThisObject.Ref, Result)
+			UsersEvent.UpdateUserRole(ThisObject.Ref, Result);
 		EndIf;
 	EndIf;
 	

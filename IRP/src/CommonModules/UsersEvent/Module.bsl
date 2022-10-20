@@ -82,8 +82,13 @@ Function UpdateUserRole(User, Result) Export
 	Else
 		Result.ArrayOfResults.Add(New Structure("Success, Message", True, StrTemplate(R().UsersEvent_002,
 			User.InfobaseUserID, User.Description)));
-		UserIB.Roles.Clear();
 		Roles = GetUserRoles(User);
+		If InfoBaseUsers.GetUsers().Count() = 1 And Not Roles.Count() Then
+			// this is the only user in the database, 
+			// it is not allowed to clear his roles
+			Return Result;
+		EndIf;
+		UserIB.Roles.Clear();
 		AddRoles(Roles, UserIB);
 		UserIB.Write();
 	EndIf;

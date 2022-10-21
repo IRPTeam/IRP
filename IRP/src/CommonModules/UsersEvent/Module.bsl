@@ -216,7 +216,13 @@ Function GetChangePasswordOnNextLogin(User = Undefined) Export
 		User = SessionParameters.CurrentUser;
 	EndIf;
 	
-	Return CommonFunctionsServer.GetRefAttribute(User, "ChangePasswordOnNextLogin");
+	SetPrivilegedMode(True);
+	
+	ChangePasswordOnNextLogin = CommonFunctionsServer.GetRefAttribute(User, "ChangePasswordOnNextLogin");
+	
+	SetPrivilegedMode(False);
+	
+	Return ChangePasswordOnNextLogin;
 	 
 EndFunction
 
@@ -226,9 +232,14 @@ Procedure DoneChangePasswordOnLogon(NewPassword, User = Undefined) Export
 		User = SessionParameters.CurrentUser;
 	EndIf;
 	
+	SetPrivilegedMode(True);
+	
 	UserObject = User.GetObject();
 	UserObject.ChangePasswordOnNextLogin = False;
 	UserObject.AdditionalProperties.Insert("Password", NewPassword);
+	UserObject.AdditionalProperties.Insert("isUpdated", True);
 	UserObject.Write();
+	
+	SetPrivilegedMode(False);
 	
 EndProcedure

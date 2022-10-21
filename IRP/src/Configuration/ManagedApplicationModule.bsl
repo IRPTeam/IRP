@@ -32,6 +32,8 @@ Procedure OnStart()
 
 	ClientApplication.SetCaption(ServiceSystemClient.GetProgramTitle());
 	
+	UsersEventClient.OpenChangePasswordForm();
+	
 	AttachIdleHandler("ConnectAllEquipments", 0.1, True);
 	
 EndProcedure

@@ -87,6 +87,7 @@ Scenario: 950510 check disable user
 		And I select current line in "List" table
 		Then the form attribute named "Disable" became equal to "Yes"
 		And I remove checkbox named "Disable"
+		And I click "Save" button
 		And I move to "Roles" tab
 		And "RoleList" table contains lines
 			| 'Value'           |

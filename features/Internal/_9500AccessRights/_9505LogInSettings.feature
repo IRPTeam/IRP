@@ -102,6 +102,33 @@ Scenario: 950510 check disable user
 		And I close TestClient session
 				
 
+Scenario: 950512 change password
+		And I connect launched Test client "Этот клиент"
+		And I close all client application windows	
+	* Set change passord for user
+		Given I open hyperlink 'e1cib/list/Catalog.Users'
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Arina Brown (Financier 3)' |
+		And I select current line in "List" table
+		And I set checkbox "Change password on next login"
+		And I click "Save and close" button		
+	* Check
+		And I connect "ABrown" TestClient using "ABrown" login and "" password
+		And I activate "Input password" window
+		And I input "12" text in the field named "Password"
+		And I input "12" text in "Confirm password" field
+		And I click "Ok" button
+		When in sections panel I select "Sales - A/R"
+		Then user message window does not contain messages
+		And I close TestClient session
+		And I connect "ABrown" TestClient using "ABrown" login and "12" password		
+		When in sections panel I select "Sales - A/R"
+		Then user message window does not contain messages
+		And I close TestClient session
+				
 
+
+	
 
 	

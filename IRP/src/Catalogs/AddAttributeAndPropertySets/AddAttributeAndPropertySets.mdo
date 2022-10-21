@@ -811,6 +811,20 @@
         <value>114</value>
       </code>
     </items>
+    <items id="07fb818d-dcb9-4c9b-8f13-ecebd1613e0d">
+      <name>Document_SalesReportFromTradeAgent</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>115</value>
+      </code>
+    </items>
+    <items id="0c85eb00-da37-4315-af99-eda328e45b65">
+      <name>Document_SalesReportToConsignor</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>116</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

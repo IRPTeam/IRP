@@ -266,8 +266,11 @@ Function ObjectXDTOStructure(TypeName, URI, Val ArrayList, WSName = Undefined) E
 				XDTOStructure.Insert(Property.Name, Property.Name);
 			ElsIf Property.Type.Name = "boolean" Then
 				XDTOStructure.Insert(Property.Name, True);
-			ElsIf Property.Type.Name = "integer" Then
-				XDTOStructure.Insert(Property.Name, 1);
+			ElsIf Property.Type.Name = "integer" 
+				Or Property.Type.Name = "int" 
+				Or Property.Type.Name = "double" 
+				Or Property.Type.Name = "long" Then
+					XDTOStructure.Insert(Property.Name, 1);
 			ElsIf Property.Type.Name = "decimal" Then
 				XDTOStructure.Insert(Property.Name, 1.1);
 			ElsIf Property.Type.Name = "date" Then
@@ -294,64 +297,12 @@ Function ObjectXDTOStructure(TypeName, URI, Val ArrayList, WSName = Undefined) E
 	Return XDTOStructure;
 	
 EndFunction
+
 #EndRegion
 
-#Region Create_Incoming_eInvoice
-// Create incoming e document.
-// 
-// Parameters:
-//  Settings - See TR_ESF_LoadIncomingDocuments.StateParams
-//  Invoice - See XDTOPackage.TR_ESF_oasis_Invoice2.Invoice
-// 
-// Returns:
-//  DocumentRef.TR_ESF_EInvoice - Create incoming e document
-Function CreateIncomingEDocument(Settings, Invoice) Export
-	
-	Doc = Documents.TR_ESF_EInvoice.CreateDocument();
-	Doc.Company = Settings.Company;
-	XML = CommonFunctionsServer.SerializeXMLUseXDTOFactory(Invoice, "GetInboxInvoicesResult");
-	Doc.XMLStorage = New ValueStorage(XML, New Deflation(9));
-	Doc.Direction = Enums.TR_ESF_eDocumentDirection.Incoming;
-	Doc.IntegrationSettings = Settings.Integrator;
-	Doc.UUID = Invoice.UUID.__content;
-	Doc.Date = CurrentDate();
-	Doc.UseManualXMLMode = True;
-	For Each Attr In Metadata.Documents.TR_ESF_EInvoice.Attributes Do
-		FillAttribute(Invoice, Doc, Attr.Name, Doc); 
-	EndDo;
-	
-	For Each Attr In Metadata.Documents.TR_ESF_EInvoice.TabularSections Do
-		Names = StrSplit(Attr.Name, "_");
-		If Names[0] = "I" Then
-			DataTag = Invoice[Names[1]];
-			If DataTag = Undefined Then
-				Continue;
-			EndIf;
-			
-			For Index = 2 To Names.UBound() Do
-				DataTag = DataTag[Names[Index]];
-			EndDo;
-			If DataTag = Undefined Then
-				Continue;
-			EndIf;
-			
-			For Each Row In DataTag Do
-				DocRow = Doc[Attr.Name].Add();
-				
-				For Each Column In Attr.Attributes Do
-					FillAttribute(Row, Doc, Column.Name, DocRow, Doc[Attr.Name].Count());
-				EndDo;
-			EndDo;
-		EndIf; 
-	EndDo;
-	
-	TR_ESF_eDocument.FillIncoming_eDocumentBeforeWrite(Doc);
-	Doc.Date = Date(1, 1, 1) + (Doc.I_IssueDate - Date(1, 1, 1)) + (Doc.I_IssueTime - Date(1, 1, 1));
-	Doc.Write(DocumentWriteMode.Posting);
-	Return Doc.Ref;
-EndFunction
+#Region FillObjectFromXDTO
 
-Procedure FillAttribute(XDTO, DocObject, Val AttrName, DocAttr, ID = 0)
+Procedure FillAttribute(XDTO, Object, Val AttrName, DocAttr, ID = 0) Export
 	 
 	Names = StrSplit(AttrName, "_");
 	
@@ -380,10 +331,10 @@ Procedure FillAttribute(XDTO, DocObject, Val AttrName, DocAttr, ID = 0)
 			EndDo;
 			
 			For Each Row In DataTag Do
-				DocRow = DocObject[NameSlaveTable].Add();
+				DocRow = Object[NameSlaveTable].Add();
 				DocRow.Key = ID;
-				For Each Column In Metadata.Documents.TR_ESF_EInvoice.TabularSections[NameSlaveTable].Attributes Do
-					FillAttribute(Row, DocObject, Column.Name, DocRow, ID);
+				For Each Column In Object.Metadata().TabularSections[NameSlaveTable].Attributes Do
+					FillAttribute(Row, Object, Column.Name, DocRow, ID);
 				EndDo;
 			EndDo;
 			
@@ -443,4 +394,6 @@ Function GetFirstElementInList(Tag, Attribute = "", isList = False)
 		EndIf;
 	EndIf;
 EndFunction
+
 #EndRegion
+

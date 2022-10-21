@@ -216,6 +216,7 @@
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLTextField</commonTemplates>
+  <commonTemplates>CommonTemplate.XMLPrettyPrint</commonTemplates>
   <filterCriteria>FilterCriterion.RelatedDocuments</filterCriteria>
   <commonModules>CommonModule.AccountingClient</commonModules>
   <commonModules>CommonModule.AccountingClientServer</commonModules>

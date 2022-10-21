@@ -51,6 +51,7 @@
 //  * Error_012 - String - Variable is not named according to the rules.
 //  * Error_013 - String - Value is not unique.
 //  * Error_014 - String - Password and password confirmation do not match.
+//  * Error_015 - String - Password cannot be empty.
 //  * Error_016 - String - There are no more items that you need to order from suppliers in the "Sales order" document.
 //  * Error_017 - String - First, create a "Goods receipt" document or clear the "Goods receipt before Purchase invoice" check box on the "Other" tab.
 //  * Error_018 - String - First, create a "Shipment confirmation" document or clear the "Shipment confirmation before Sales invoice" check box on the "Other" tab.
@@ -412,6 +413,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_012", NStr("en = 'Variable is not named according to the rules.'", Lang));
 	Strings.Insert("Error_013", NStr("en = 'Value is not unique.'", Lang));
 	Strings.Insert("Error_014", NStr("en = 'Password and password confirmation do not match.'", Lang));
+	Strings.Insert("Error_015", NStr("en = 'Password cannot be empty.'", Lang));
 
 	// %1 - Sales order
 	Strings.Insert("Error_016", NStr(

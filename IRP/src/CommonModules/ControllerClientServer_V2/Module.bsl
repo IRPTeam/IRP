@@ -8303,7 +8303,8 @@ Function BindItemListQuantity(Parameters)
 	DataPath = "ItemList.Quantity";
 	Binding = New Structure();	
 	Binding.Insert("StockAdjustmentAsSurplus",
-		"StepItemListSimpleCalculations_IsQuantityChanged");
+		"StepItemListSimpleCalculations_IsQuantityChanged,
+		|StepItemListCalculateQuantityInBaseUnit");
 	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters);
 EndFunction
 

@@ -247,6 +247,23 @@
     <fullTextSearch>Use</fullTextSearch>
     <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   </attributes>
+  <attributes uuid="a69eb47a-2be5-4637-b570-b0c6a50d9044">
+    <name>TransactionType</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.PurchaseTransactionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="6425f190-8a8c-44f2-9db4-9f43163fa4f0">
     <name>DocumentForm</name>
     <synonym>

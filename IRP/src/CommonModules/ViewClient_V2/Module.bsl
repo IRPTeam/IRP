@@ -2591,7 +2591,18 @@ Procedure OnSetTransactionTypeNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashPayment"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"	
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"      
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"       
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"  
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"         
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"           
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"    
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"          
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder" Then
+	
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);

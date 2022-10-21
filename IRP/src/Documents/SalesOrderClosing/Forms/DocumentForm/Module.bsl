@@ -1,3 +1,4 @@
+
 #Region FORM
 
 &AtServer
@@ -157,6 +158,15 @@ EndProcedure
 &AtClient
 Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
 	DocSalesOrderClosingClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TRANSACTION_TYPE
+
+&AtClient
+Procedure TransactionTypeOnChange(Item)
+	DocSalesOrderClosingClient.TransactionTypeOnChange(Object, ThisObject, Item);	
 EndProcedure
 
 #EndRegion

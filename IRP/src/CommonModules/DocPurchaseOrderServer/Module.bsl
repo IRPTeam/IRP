@@ -109,6 +109,8 @@ Function GetPurchaseOrderForClosing(PurchaseOrder, AddInfo = Undefined) Export
 	|	PurchaseOrder.Status AS Status,
 	|	PurchaseOrder.Author AS Author,
 	|	PurchaseOrder.Branch AS Branch,
+	// #1533
+	|	PurchaseOrder.TransactionType AS TransactionType,
 	|	PurchaseOrder.Description AS Description
 	|FROM
 	|	Document.PurchaseOrder AS PurchaseOrder
@@ -238,7 +240,9 @@ Function GetPurchaseOrderForClosing(PurchaseOrder, AddInfo = Undefined) Export
 								  |Status,
 								  |Author, 
 								  |Branch, 
-								  |Description");
+								  |Description
+								  // #1533
+								  |TransactionType");
 	
 	FillingValues.Insert("ItemList"      , New Array());
 	FillingValues.Insert("TaxList"       , New Array());

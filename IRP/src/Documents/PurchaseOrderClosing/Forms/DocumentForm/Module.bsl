@@ -137,6 +137,15 @@ EndProcedure
 
 #EndRegion
 
+#Region TRANSACTION_TYPE
+
+&AtClient
+Procedure TransactionTypeOnChange(Item)
+	DocPurchaseOrderClosingClient.TransactionTypeOnChange(Object, ThisObject, Item);	
+EndProcedure
+
+#EndRegion
+
 #Region PARTNER
 
 &AtClient

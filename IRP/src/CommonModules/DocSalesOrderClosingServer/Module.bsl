@@ -153,6 +153,9 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 	|	SalesOrder.UseItemsShipmentScheduling AS UseItemsShipmentScheduling,
 	|	SalesOrder.Author AS Author,
 	|	SalesOrder.Branch AS Branch,
+	// #1533
+	|	SalesOrder.TransactionType AS TransactionType,
+	|
 	|	SalesOrder.Description AS Description
 	|FROM
 	|	Document.SalesOrder AS SalesOrder
@@ -285,7 +288,9 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 								  |UseItemsShipmentScheduling, 
 								  |Author, 
 								  |Branch, 
-								  |Description");
+								  |Description,
+								  // #1533
+								  |TransactionType");
 	
 	FillingValues.Insert("ItemList"      , New Array());
 	FillingValues.Insert("TaxList"       , New Array());

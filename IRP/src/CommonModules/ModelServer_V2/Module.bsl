@@ -183,3 +183,46 @@ Function GetCurrentQuantity(Company, ProductionPlanning, PlanningPeriod, BillOfM
 	                                                                    ItemKey);
 EndFunction
 	
+Function GetPartnerTypeByTransactionType(TransactionType) Export
+	Map = New Map();
+	Map.Insert(Enums.PurchaseTransactionTypes.Purchase, "Vendor");
+	Map.Insert(Enums.PurchaseTransactionTypes.ReceiptFromConsignor, "Consignor");
+	
+	Map.Insert(Enums.SalesTransactionTypes.Sales, "Customer");
+	Map.Insert(Enums.SalesTransactionTypes.ShipmentToTradeAgent, "TradeAgent");
+	
+	Map.Insert(Enums.SalesReturnTransactionTypes.ReturnFromCustomer, "Customer");
+	Map.Insert(Enums.SalesReturnTransactionTypes.ReturnFromTradeAgent, "TradeAgent");
+
+	Map.Insert(Enums.PurchaseReturnTransactionTypes.ReturnToVendor, "Vendor");
+	Map.Insert(Enums.PurchaseReturnTransactionTypes.ReturnToConsignor, "Consignor");
+	
+	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.Sales, "Customer");
+	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor, "Vendor");
+	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent, "TradeAgent");
+	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor, "Consignor");
+	
+	Map.Insert(Enums.GoodsReceiptTransactionTypes.Purchase, "Vendor");
+	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer, "Customer");
+	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReceiptFromConsignor, "Consignor");
+	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent, "TradeAgent");
+	
+	Return Map.Get(TransactionType);
+EndFunction
+
+Function GetAgreementTypeByTransactionType(TransactionType) Export
+	PartnerType = GetPartnerTypeByTransactionType(TransactionType);
+	If PartnerType = "Customer" Then
+		Return Enums.AgreementTypes.Customer;
+	ElsIf PartnerType = "Vendor" Then
+		Return Enums.AgreementTypes.Vendor;
+	ElsIf PartnerType = "Consignor" Then
+		Return Enums.AgreementTypes.Consignor;
+	ElsIf PartnerType = "TradeAgent" Then
+		Return Enums.AgreementTypes.TradeAgent;
+	Else
+		Raise StrTemplate("Unknown AgreementType by TransactionType [%1]", TransactionType);
+	EndIf;
+EndFunction	
+	
+	

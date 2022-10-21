@@ -1268,8 +1268,18 @@ Function BindTransactionType(Parameters)
 		"StepClearByTransactionTypeCashReceipt,
 		|StepChangeCashAccountByTransactionType");
 	
-	Binding.Insert("ShipmentConfirmation" , "StepChangePartnerByTransactionType");
-	Binding.Insert("GoodsReceipt"         , "StepChangePartnerByTransactionType");
+	Binding.Insert("ShipmentConfirmation"  , "StepChangePartnerByTransactionType");
+	Binding.Insert("GoodsReceipt"          , "StepChangePartnerByTransactionType");
+	Binding.Insert("PurchaseInvoice"       , "StepChangePartnerByTransactionType");
+	Binding.Insert("PurchaseOrder"         , "StepChangePartnerByTransactionType");
+	Binding.Insert("PurchaseOrderClosing"  , "StepChangePartnerByTransactionType");
+	Binding.Insert("PurchaseReturn"        , "StepChangePartnerByTransactionType");
+	Binding.Insert("PurchaseReturnOrder"   , "StepChangePartnerByTransactionType");
+	Binding.Insert("SalesInvoice"          , "StepChangePartnerByTransactionType");
+	Binding.Insert("SalesOrder"            , "StepChangePartnerByTransactionType");
+	Binding.Insert("SalesOrderClosing"     , "StepChangePartnerByTransactionType");
+	Binding.Insert("SalesReturn"           , "StepChangePartnerByTransactionType");
+	Binding.Insert("SalesReturnOrder"      , "StepChangePartnerByTransactionType");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -1894,7 +1904,9 @@ Function BindDate(Parameters)
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeDeliveryDateByAgreement,
-		|StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
+		// #1533
+		//|StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
+		|StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepUpdatePaymentTerms");
@@ -1910,7 +1922,9 @@ Function BindDate(Parameters)
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeDeliveryDateByAgreement,
-		|StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
+		// #1533
+		//|StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
+		|StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 	
@@ -1918,6 +1932,8 @@ Function BindDate(Parameters)
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeDeliveryDateByAgreement,
+		// #1533
+		//|StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
 		|StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
@@ -1931,22 +1947,30 @@ Function BindDate(Parameters)
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("SalesReturnOrder",
-		"StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
+		// #1533
+		//"StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("SalesReturn",
-		"StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
+		// #1533
+		//"StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("PurchaseReturnOrder",
-		"StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		// #1533
+		//"StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("PurchaseReturn",
-		"StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		// #1533
+		//"StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
@@ -1960,7 +1984,9 @@ Function BindDate(Parameters)
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeDeliveryDateByAgreement,
-		|StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		// #1533
+		//|StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		|StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepUpdatePaymentTerms");
@@ -1969,7 +1995,9 @@ Function BindDate(Parameters)
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeDeliveryDateByAgreement,
-		|StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		// #1533
+		//|StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		|StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
@@ -1977,7 +2005,9 @@ Function BindDate(Parameters)
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeDeliveryDateByAgreement,
-		|StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		// #1533
+		//|StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		|StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepUpdatePaymentTerms");
@@ -2238,7 +2268,9 @@ Function BindPartner(Parameters)
 	Binding.Insert("GoodsReceipt"        , "StepChangeLegalNameByPartner");
 	
 	Binding.Insert("SalesOrder",
-		"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
+		// #1533
+		//"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner,
 		|StepChangeManagerSegmentByPartner");
 	
@@ -2249,12 +2281,16 @@ Function BindPartner(Parameters)
 	Binding.Insert("WorkSheet", "StepChangeLegalNameByPartner");
 	
 	Binding.Insert("SalesOrderClosing",
-		"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
+		// #1533
+		//"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner,
 		|StepChangeManagerSegmentByPartner");
 	
 	Binding.Insert("SalesInvoice",
-		"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
+		// #1533
+		//"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner,
 		|StepChangeManagerSegmentByPartner");
 
@@ -2264,15 +2300,20 @@ Function BindPartner(Parameters)
 		|StepChangeManagerSegmentByPartner");
 
 	Binding.Insert("PurchaseOrder",
-		"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		// #1533
+		//"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 	
 	Binding.Insert("PurchaseOrderClosing",
-		"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		// #1533
+		//"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 	
 	Binding.Insert("PurchaseInvoice",
-		"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		//"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 	
 	Binding.Insert("RetailReturnReceipt",
@@ -2280,19 +2321,27 @@ Function BindPartner(Parameters)
 		|StepChangeLegalNameByPartner");
 	
 	Binding.Insert("PurchaseReturnOrder",
-		"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		// #1533
+		//"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 	
 	Binding.Insert("PurchaseReturn",
-		"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		// #1533
+		//"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 	
 	Binding.Insert("SalesReturnOrder",
-		"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
+		// #1533
+		//"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 	
 	Binding.Insert("SalesReturn",
-		"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
+		// #1533
+		//"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
@@ -3203,16 +3252,21 @@ EndFunction
 
 // Agreement.ChangeAgreementByPartner.[AgreementTypeIsCustomer].Step
 Procedure StepChangeAgreementByPartner_AgreementTypeIsCustomer(Parameters, Chain) Export
-	StepChangeAgreementByPartner(Parameters, Chain, PredefinedValue("Enum.AgreementTypes.Customer"));
+	StepChangeAgreementByPartner(Parameters, Chain, PredefinedValue("Enum.AgreementTypes.Customer"), False);
 EndProcedure
 
 // Agreement.ChangeAgreementByPartner.[AgreementTypeIsVendor].Step
 Procedure StepChangeAgreementByPartner_AgreementTypeIsVendor(Parameters, Chain) Export
-	StepChangeAgreementByPartner(Parameters, Chain, PredefinedValue("Enum.AgreementTypes.Vendor"));
+	StepChangeAgreementByPartner(Parameters, Chain, PredefinedValue("Enum.AgreementTypes.Vendor"), False);
+EndProcedure
+
+// Agreement.ChangeAgreementByPartner.[AgreementTypeByTransactionType].Step
+Procedure StepChangeAgreementByPartner_AgreementTypeByTransactionType(Parameters, Chain) Export
+	StepChangeAgreementByPartner(Parameters, Chain, Undefined, True);
 EndProcedure
 
 // Agreement.ChangeAgreementByPartner.Step
-Procedure StepChangeAgreementByPartner(Parameters, Chain, AgreementType)
+Procedure StepChangeAgreementByPartner(Parameters, Chain, AgreementType, AgreementTypeByTransactionType)
 	Chain.ChangeAgreementByPartner.Enable = True;
 	Chain.ChangeAgreementByPartner.Setter = "SetAgreement";
 	Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
@@ -3220,6 +3274,9 @@ Procedure StepChangeAgreementByPartner(Parameters, Chain, AgreementType)
 	Options.Agreement     = GetAgreement(Parameters);
 	Options.CurrentDate   = GetDate(Parameters);
 	Options.AgreementType = AgreementType;
+	If AgreementTypeByTransactionType Then
+		Options.TransactionType = GetTransactionType(Parameters);
+	EndIf;
 	Options.StepName = "StepChangeAgreementByPartner";
 	Chain.ChangeAgreementByPartner.Options.Add(Options);
 EndProcedure

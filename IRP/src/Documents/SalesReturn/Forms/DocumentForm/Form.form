@@ -698,6 +698,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.TransactionType</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>TransactionTypeOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>TransactionTypeExtendedTooltip</name>
             <id>707</id>

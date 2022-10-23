@@ -135,8 +135,7 @@ Scenario: _005012 filling in the "Integration settings" catalog
 			| '8'  | 'Proxy'                  | ''                 |
 			| '9'  | 'TimeOut'                | '60'               |
 			| '10' | 'SecureConnection'       | 'Yes'              |
-			| '11' | 'UseOSAuthentication'    | 'No'               |
-			| '12' | 'Headers'                | 'Map'              |		
+			| '11' | 'UseOSAuthentication'    | 'No'               |		
 		Then the form attribute named "ExternalDataProc" became equal to ""
 		And I click "Save and close" button
 	* Create setting with integration type Other (without connection)

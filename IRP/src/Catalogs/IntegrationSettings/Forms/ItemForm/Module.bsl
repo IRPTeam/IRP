@@ -81,6 +81,8 @@ Procedure TestConnectionCall()
 		
 		ConnectionSetting.QueryType = "GET";
 		ConnectionSetting.IntegrationSettingsRef = Object.Ref;
+		ConnectionSetting.Insert("Headers", New Map);
+		
 		ResourceParameters = New Structure();
 		ResourceParameters.Insert("MetadataName", "TestConnection");
 		ServerResponse = IntegrationClientServer.SendRequest(ConnectionSetting, ResourceParameters);

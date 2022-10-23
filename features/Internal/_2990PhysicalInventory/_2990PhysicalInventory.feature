@@ -1497,7 +1497,7 @@ Scenario: _2990054 check item change in the Physical Inventory
 		And I close all client application windows
 		
 	
-Scenario: _2990054 check item change in the Physical count by location
+Scenario: _2990055 check item change in the Physical count by location
 	And I close all client application windows
 	* Create PhysicalCountByLocation
 		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
@@ -1568,7 +1568,95 @@ Scenario: _2990054 check item change in the Physical count by location
 			| 'Product 1 with SLN' | 'PZU'      | ''                  |
 		And I close all client application windows
 		
-					
+Scenario: _2990055 check filling price and sum in the Stock adjustment as surplus
+		And I close all client application windows
+	* Open document Stock adjustment as surplus
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"		
+		And I click the button named "FormCreate"
+	* Filling in company info
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company |
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description  |
+			| Store 01 |
+		And I select current line in "List" table
+	* Amount calculation
+		And in the table "ItemList" I click the button named "ItemListAdd"	
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| Item  | Item key |
+			| Dress | XS/Blue  |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "500,000" text in "Quantity" field of "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I input "10,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check amount calculation
+		And "ItemList" table became equal
+			| 'Amount'   | 'Item'  | 'Item key' | 'Quantity' | 'Price' | 'Amount tax' |
+			| '5 000,00' | 'Dress' | 'XS/Blue'  | '500,000'  | '10,00' | ''           |
+	* Price calculation	
+		And in the table "ItemList" I click the button named "ItemListAdd"	
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| Item  | Item key |
+			| Dress | S/Yellow |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "400,000" text in "Quantity" field of "ItemList" table
+		And I activate field named "ItemListAmount" in "ItemList" table
+		And I input "4 400,00" text in the field named "ItemListAmount" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check price calculation
+		And "ItemList" table contains lines
+			| 'Amount'   | 'Item'  | 'Item key' | 'Quantity' | 'Price' |
+			| '4 400,00' | 'Dress' | 'S/Yellow' | '400,000'  | '11,00' |
+	* Change quantity and check amount
+		And I go to line in "ItemList" table
+			| '#' | 'Amount'   | 'Item'  | 'Item key' | 'Price' | 'Quantity' |
+			| '1' | '5 000,00' | 'Dress' | 'XS/Blue'  | '10,00' | '500,000'  |
+		And I select current line in "ItemList" table
+		And I input "550,00" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Amount'   | 'Item'  | 'Item key' | 'Quantity' | 'Price' | 'Amount tax' |
+			| '5 500,00' | 'Dress' | 'XS/Blue'  | '550,000'  | '10,00' | ''           |
+	* Change amount and check price
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "ItemList" table
+		And I input "10 000,00" text in the field named "ItemListAmount" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Amount'    | 'Item'  | 'Item key' | 'Quantity' | 'Price' | 'Amount tax' |
+			| '10 000,00' | 'Dress' | 'XS/Blue'  | '550,000'  | '18,18' | ''           |
+	* Change price and check amount	
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "ItemList" table
+		And I input "22,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Amount'    | 'Item'  | 'Item key' | 'Quantity' | 'Price' | 'Amount tax' |
+			| '12 100,00' | 'Dress' | 'XS/Blue'  | '550,000'  | '22,00' | ''           |
+		And I close all client application windows					
 
 		
 				

@@ -1088,7 +1088,104 @@ Scenario: _400009 check the entry of the Vendors/Customers transactions by docum
 			|  '$$NumberOpeningEntry400009$$'    |
 		And I close all client application windows
 
+Scenario: _400010 check filling price and sum in the OpeningEntry
+		And I close all client application windows
+	* Open document form opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I click the button named "FormCreate"
+	* Filling in company info
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company |
+		And I select current line in "List" table
+	* Amount calculation
+		And I move to "Inventory" tab
+		And in the table "Inventory" I click the button named "InventoryAdd"
+		And I click choice button of "Item" attribute in "Inventory" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "Inventory" table
+		And I go to line in "List" table
+			| Item  | Item key |
+			| Dress | XS/Blue  |
+		And I select current line in "List" table
+		And I click choice button of "Store" attribute in "Inventory" table
+		And I go to line in "List" table
+			| Description |
+			| Store 01    |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "Inventory" table
+		And I input "500,000" text in "Quantity" field of "Inventory" table
+		And I activate "Price" field in "Inventory" table
+		And I input "10,00" text in "Price" field of "Inventory" table
+		And I finish line editing in "Inventory" table
+	* Check amount calculation
+		And "Inventory" table became equal
+			| 'Amount'   | 'Item'  | 'Item key' | 'Store'    | 'Quantity' | 'Price' | 'Amount tax' |
+			| '5 000,00' | 'Dress' | 'XS/Blue'  | 'Store 01' | '500,000'  | '10,00' | ''           |
+	* Price calculation	
+		And in the table "Inventory" I click the button named "InventoryAdd"
+		And I click choice button of "Item" attribute in "Inventory" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I click choice button of "Item key" attribute in "Inventory" table
+		And I go to line in "List" table
+			| Item  | Item key |
+			| Dress | S/Yellow |
+		And I select current line in "List" table
+		And I activate "Store" field in "Inventory" table
+		And I click choice button of "Store" attribute in "Inventory" table
+		And I go to line in "List" table
+			| Description |
+			| Store 02    |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "Inventory" table
+		And I input "400,000" text in "Quantity" field of "Inventory" table
+		And I activate field named "InventoryAmount" in "Inventory" table
+		And I input "4 400,00" text in the field named "InventoryAmount" of "Inventory" table
+		And I finish line editing in "Inventory" table
+	* Check price calculation
+		And "Inventory" table contains lines
+			| 'Amount'   | 'Item'  | 'Item key' | 'Store'    | 'Quantity' | 'Price' |
+			| '4 400,00' | 'Dress' | 'S/Yellow' | 'Store 02' | '400,000'  | '11,00' |
+	* Change quantity and check amount
+		And I go to line in "Inventory" table
+			| '#' | 'Amount'   | 'Item'  | 'Item key' | 'Price' | 'Quantity' | 'Store'    |
+			| '1' | '5 000,00' | 'Dress' | 'XS/Blue'  | '10,00' | '500,000'  | 'Store 01' |
+		And I select current line in "Inventory" table
+		And I input "550,00" text in "Quantity" field of "Inventory" table
+		And I finish line editing in "Inventory" table
+		And "Inventory" table contains lines
+			| 'Amount'   | 'Item'  | 'Item key' | 'Store'    | 'Quantity' | 'Price' | 'Amount tax' |
+			| '5 500,00' | 'Dress' | 'XS/Blue'  | 'Store 01' | '550,000'  | '10,00' | ''           |		
+	* Change amount and check price
+		And I go to line in "Inventory" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "Inventory" table
+		And I input "10 000,00" text in the field named "InventoryAmount" of "Inventory" table
+		And I finish line editing in "Inventory" table
+		And "Inventory" table contains lines
+			| 'Amount'    | 'Item'  | 'Item key' | 'Store'    | 'Quantity' | 'Price' | 'Amount tax' |
+			| '10 000,00' | 'Dress' | 'XS/Blue'  | 'Store 01' | '550,000'  | '18,18' | ''           |
+	* Change price and check amount	
+		And I go to line in "Inventory" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "Inventory" table
+		And I input "22,00" text in "Price" field of "Inventory" table
+		And I finish line editing in "Inventory" table
+		And "Inventory" table contains lines
+			| 'Amount'    | 'Item'  | 'Item key' | 'Store'    | 'Quantity' | 'Price' | 'Amount tax' |
+			| '12 100,00' | 'Dress' | 'XS/Blue'  | 'Store 01' | '550,000'  | '22,00' | ''           |	
+		And I close all client application windows
 		
+			
 	
 Scenario: _999999 close TestClient session
 	And I close TestClient session

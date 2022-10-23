@@ -65,8 +65,13 @@ Procedure SetVisibilityAllocations() Export
 		If CurrentData = Undefined Then
 			Return;
 		EndIf;
+		isRowSet = False;
 		For Each Row In Object.AllocationDocuments Do
 			Row.Visible = Row.Key = CurrentData.Key;
+			If Not isRowSet And Row.Visible Then
+				ThisObject.Items.AllocationDocuments.CurrentRow = Row.GetID();
+				isRowSet = True;
+			EndIf;
 		EndDo;
 	EndIf;
 EndProcedure

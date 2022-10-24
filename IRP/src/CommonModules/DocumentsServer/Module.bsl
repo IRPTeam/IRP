@@ -124,6 +124,10 @@ EndProcedure
 #Region PartnerData
 
 Function GetManagerSegmentByPartner(Partner) Export
+	If Not ValueIsFilled(Partner) Then
+		Return Undefined;
+	EndIf;
+	
 	Return Partner.ManagerSegment;
 EndFunction
 

@@ -7,9 +7,9 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 
-	If WriteMode = DocumentWriteMode.Posting Then
-		AccountingClientServer.UpdateAccountingTables(ThisObject, "ItemList");
-	EndIf;
+//	If WriteMode = DocumentWriteMode.Posting Then
+//		AccountingClientServer.UpdateAccountingTables(ThisObject, "ItemList");
+//	EndIf;
 
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 EndProcedure
@@ -94,10 +94,10 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 //		EndIf;
 //	EndDo;
 	
-	If Not Cancel = True Then
-		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_SalesReportToConsignor(ThisObject);
-		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
-		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, ItemKey, Store");
-		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
-	EndIf;
+//	If Not Cancel = True Then
+//		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_SalesReportToConsignor(ThisObject);
+//		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
+//		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, ItemKey, Store");
+//		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
+//	EndIf;
 EndProcedure

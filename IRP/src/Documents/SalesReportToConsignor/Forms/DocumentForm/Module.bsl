@@ -36,11 +36,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		AddAttributesCreateFormControl();
 	EndIf;
 	
-	If EventName = "LockLinkedRows" Then
-		If Source <> ThisObject Then
-			LockLinkedRows();
-		EndIf;
-	EndIf;
+//	If EventName = "LockLinkedRows" Then
+//		If Source <> ThisObject Then
+//			LockLinkedRows();
+//		EndIf;
+//	EndIf;
 	
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
@@ -73,7 +73,7 @@ EndProcedure
 
 &AtServer
 Function Taxes_CreateFormControls() Export
-	Return TaxesServer.CreateFormControls_ItemList(Object, ThisObject);
+	Return TaxesServer.CreateFormControls_ItemList(Object, ThisObject, Items.ItemListNetAmount);
 EndFunction
 
 &AtClient
@@ -83,8 +83,8 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
-	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
+//	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
+//	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure
@@ -223,7 +223,7 @@ EndProcedure
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocSalesReportToConsignorClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
-	LockLinkedRows();
+//	LockLinkedRows();
 EndProcedure
 
 #Region ITEM_LIST_COLUMNS
@@ -432,81 +432,81 @@ EndProcedure
 
 #EndRegion
 
-#Region LINKED_DOCUMENTS
-
-&AtClient
-Procedure LinkUnlinkBasisDocuments(Command)
-	FormParameters = New Structure();
-	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_PI(Object));
-	FormParameters.Insert("SelectedRowInfo", RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
-	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
-	NotifyParameters = New Structure();
-	NotifyParameters.Insert("Object", Object);
-	NotifyParameters.Insert("Form", ThisObject);
-	OpenForm("CommonForm.LinkUnlinkDocumentRows", FormParameters, , , , ,
-		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject, NotifyParameters),
-			FormWindowOpeningMode.LockOwnerWindow);
-EndProcedure
-
-&AtClient
-Procedure AddBasisDocuments(Command)
-	FormParameters = New Structure();
-	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_PI(Object));
-	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
-	NotifyParameters = New Structure();
-	NotifyParameters.Insert("Object", Object);
-	NotifyParameters.Insert("Form", ThisObject);
-	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
-		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject, NotifyParameters),
-			FormWindowOpeningMode.LockOwnerWindow);
-EndProcedure
-&AtClient
-Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Export
-	If Result = Undefined Then
-		Return;
-	EndIf;
-	ThisObject.Modified = True;
-	ExtractedData = AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
-	If ExtractedData <> Undefined Then
-		ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, ThisObject, "ItemList");
-	EndIf;
-EndProcedure
-
-&AtServer
-Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
-	ExtractedData = Undefined;
-	If Result.Operation = "LinkUnlinkDocumentRows" Then
-		LinkedResult = RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
-	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
-		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
-	EndIf;
-	ExtractedData = ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
-	LockLinkedRows();
-	Return ExtractedData;
-EndFunction
-
-&AtServer
-Procedure LockLinkedRows()
-	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
-	RowIDInfoServer.SetAppearance(Object, ThisObject);
-EndProcedure
-
-&AtServer
-Procedure UnlockLockLinkedRows()
-	RowIDInfoServer.UnlockLinkedRows(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure FromUnlockLinkedRows(Command)
-	Items.FormUnlockLinkedRows.Check = Not Items.FormUnlockLinkedRows.Check;
-	If Items.FormUnlockLinkedRows.Check Then
-		UnlockLockLinkedRows();
-	Else
-		LockLinkedRows();
-	EndIf;
-EndProcedure
-
-#EndRegion
+//#Region LINKED_DOCUMENTS
+//
+//&AtClient
+//Procedure LinkUnlinkBasisDocuments(Command)
+//	FormParameters = New Structure();
+//	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_PI(Object));
+//	FormParameters.Insert("SelectedRowInfo", RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
+//	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+//	NotifyParameters = New Structure();
+//	NotifyParameters.Insert("Object", Object);
+//	NotifyParameters.Insert("Form", ThisObject);
+//	OpenForm("CommonForm.LinkUnlinkDocumentRows", FormParameters, , , , ,
+//		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject, NotifyParameters),
+//			FormWindowOpeningMode.LockOwnerWindow);
+//EndProcedure
+//
+//&AtClient
+//Procedure AddBasisDocuments(Command)
+//	FormParameters = New Structure();
+//	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_PI(Object));
+//	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+//	NotifyParameters = New Structure();
+//	NotifyParameters.Insert("Object", Object);
+//	NotifyParameters.Insert("Form", ThisObject);
+//	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
+//		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject, NotifyParameters),
+//			FormWindowOpeningMode.LockOwnerWindow);
+//EndProcedure
+//&AtClient
+//Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Export
+//	If Result = Undefined Then
+//		Return;
+//	EndIf;
+//	ThisObject.Modified = True;
+//	ExtractedData = AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
+//	If ExtractedData <> Undefined Then
+//		ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, ThisObject, "ItemList");
+//	EndIf;
+//EndProcedure
+//
+//&AtServer
+//Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
+//	ExtractedData = Undefined;
+//	If Result.Operation = "LinkUnlinkDocumentRows" Then
+//		LinkedResult = RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
+//	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
+//		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+//	EndIf;
+//	ExtractedData = ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
+//	LockLinkedRows();
+//	Return ExtractedData;
+//EndFunction
+//
+//&AtServer
+//Procedure LockLinkedRows()
+//	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
+//	RowIDInfoServer.SetAppearance(Object, ThisObject);
+//EndProcedure
+//
+//&AtServer
+//Procedure UnlockLockLinkedRows()
+//	RowIDInfoServer.UnlockLinkedRows(Object, ThisObject);
+//EndProcedure
+//
+//&AtClient
+//Procedure FromUnlockLinkedRows(Command)
+//	Items.FormUnlockLinkedRows.Check = Not Items.FormUnlockLinkedRows.Check;
+//	If Items.FormUnlockLinkedRows.Check Then
+//		UnlockLockLinkedRows();
+//	Else
+//		LockLinkedRows();
+//	EndIf;
+//EndProcedure
+//
+//#EndRegion
 
 &AtClient
 Procedure EditCurrencies(Command)

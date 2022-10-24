@@ -1793,9 +1793,7 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder" 
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportFromTradeAgent" 
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportToConsignor" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder" Then
 		
 		RowIDInfoClient.UpdateQuantity(Parameters.Object, Parameters.Form);
 	EndIf;

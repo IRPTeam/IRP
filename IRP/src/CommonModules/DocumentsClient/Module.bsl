@@ -89,7 +89,7 @@ Procedure PartnerTextChange_TransactionTypeFilter(Object, Form, Item, Text, Stan
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	If ValueIsFilled(PartnerType) Then
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(TransactionType, True, ComparisonType.Equal));
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(PartnerType, True, ComparisonType.Equal));
 	EndIf;
 	AdditionalParameters = New Structure();
 	PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);

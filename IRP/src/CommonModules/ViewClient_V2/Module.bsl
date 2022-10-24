@@ -1793,7 +1793,9 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportFromTradeAgent" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportToConsignor" Then
 		
 		RowIDInfoClient.UpdateQuantity(Parameters.Object, Parameters.Form);
 	EndIf;
@@ -2660,7 +2662,9 @@ Procedure OnSetPartnerNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportFromTradeAgent"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportToConsignor" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	

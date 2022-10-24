@@ -1522,6 +1522,13 @@ Function BindCurrency(Parameters)
 	Binding.Insert("PurchaseInvoice",
 		"StepItemListChangePriceByPriceType");
 	
+	// #1533
+	Binding.Insert("SalesReportFromTradeAgent",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepItemListChangePriceByPriceType");
+	
 	Binding.Insert("SalesReturnOrder",
 		"StepItemListChangePriceByPriceType");
 
@@ -2011,7 +2018,22 @@ Function BindDate(Parameters)
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepUpdatePaymentTerms");
-
+	
+	// #1533
+	Binding.Insert("SalesReportFromTradeAgent",
+		"StepItemListChangePriceTypeByAgreement,
+		|StepItemListChangePriceByPriceType, 
+		|StepChangeAgreementByPartner_AgreementTypeIsTradeAgent, 
+		|StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_AgreementInHeader");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepItemListChangePriceTypeByAgreement,
+		|StepItemListChangePriceByPriceType,
+		|StepChangeAgreementByPartner_AgreementTypeIsConsignor, 
+		|StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_AgreementInHeader");
+		
 	Binding.Insert("BankPayment",
 		"StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_AgreementInList");
@@ -2114,6 +2136,15 @@ Function BindCompany(Parameters)
 		"StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey");
+	
+	// #1533
+	Binding.Insert("SalesReportFromTradeAgent",
+		"StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_AgreementInHeader");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_AgreementInHeader");
 	
 	Binding.Insert("SalesReturnOrder",
 		"StepRequireCallCreateTaxesFormControls,
@@ -2314,6 +2345,15 @@ Function BindPartner(Parameters)
 	Binding.Insert("PurchaseInvoice",
 		//"StepChangeAgreementByPartner_AgreementTypeIsVendor,
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
+		|StepChangeLegalNameByPartner");
+	
+	// #1533
+	Binding.Insert("SalesReportFromTradeAgent",
+		"StepChangeAgreementByPartner_AgreementTypeIsTradeAgent,
+		|StepChangeLegalNameByPartner");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepChangeAgreementByPartner_AgreementTypeIsConsignor,
 		|StepChangeLegalNameByPartner");
 	
 	Binding.Insert("RetailReturnReceipt",
@@ -3247,6 +3287,21 @@ Function BindAgreement(Parameters)
 		|StepChangePaymentTermsByAgreement,
 		|StepChangeTaxRate_AgreementInHeader");
 		
+	// #1533
+	Binding.Insert("SalesReportFromTradeAgent",
+		"StepChangeCompanyByAgreement,
+		|StepChangeCurrencyByAgreement,
+		|StepItemListChangePriceTypeByAgreement,
+		|StepChangePriceIncludeTaxByAgreement,
+		|StepChangeTaxRate_AgreementInHeader");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepChangeCompanyByAgreement,
+		|StepChangeCurrencyByAgreement,
+		|StepItemListChangePriceTypeByAgreement,
+		|StepChangePriceIncludeTaxByAgreement,
+		|StepChangeTaxRate_AgreementInHeader");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -3258,6 +3313,16 @@ EndProcedure
 // Agreement.ChangeAgreementByPartner.[AgreementTypeIsVendor].Step
 Procedure StepChangeAgreementByPartner_AgreementTypeIsVendor(Parameters, Chain) Export
 	StepChangeAgreementByPartner(Parameters, Chain, PredefinedValue("Enum.AgreementTypes.Vendor"), False);
+EndProcedure
+
+// Agreement.ChangeAgreementByPartner.[AgreementTypeIsConsignor].Step
+Procedure StepChangeAgreementByPartner_AgreementTypeIsConsignor(Parameters, Chain) Export
+	StepChangeAgreementByPartner(Parameters, Chain, PredefinedValue("Enum.AgreementTypes.Consignor"), False);
+EndProcedure
+
+// Agreement.ChangeAgreementByPartner.[AgreementTypeIsTradeAgent].Step
+Procedure StepChangeAgreementByPartner_AgreementTypeIsTradeAgent(Parameters, Chain) Export
+	StepChangeAgreementByPartner(Parameters, Chain, PredefinedValue("Enum.AgreementTypes.TradeAgent"), False);
 EndProcedure
 
 // Agreement.ChangeAgreementByPartner.[AgreementTypeByTransactionType].Step
@@ -7243,6 +7308,10 @@ Function BindItemListItem(Parameters)
 												 |StepItemListChangeItemKeyWriteOffByItem");
 	Binding.Insert("Bundling"                  , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("Unbundling"                , "StepItemListChangeItemKeyByItem");
+	// #1533
+	Binding.Insert("SalesReportFromTradeAgent" , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("SalesReportToConsignor"    , "StepItemListChangeItemKeyByItem");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -7415,6 +7484,23 @@ Function BindItemListItemKey(Parameters)
 		|StepChangeUseSerialLotNumberByItemKey,
 		|StepItemListChangeUnitByItemKey,
 		|StepItemListChangeExpenseTypeByItemKey,
+		|StepChangeIsServiceByItemKey");
+	
+	// #1533
+	Binding.Insert("SalesReportFromTradeAgent",
+		"StepItemListChangePriceTypeByAgreement,
+		|StepItemListChangePriceByPriceType,
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepChangeUseSerialLotNumberByItemKey,
+		|StepItemListChangeUnitByItemKey,
+		|StepChangeIsServiceByItemKey");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepItemListChangePriceTypeByAgreement,
+		|StepItemListChangePriceByPriceType,
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepChangeUseSerialLotNumberByItemKey,
+		|StepItemListChangeUnitByItemKey,
 		|StepChangeIsServiceByItemKey");
 	
 	Binding.Insert("SalesReturnOrder",
@@ -7731,6 +7817,15 @@ Function BindItemListUnit(Parameters)
 		|StepItemListChangePriceByPriceType");
 	
 	Binding.Insert("PurchaseInvoice", 
+		"StepItemListCalculateQuantityInBaseUnit,
+		|StepItemListChangePriceByPriceType");
+	
+	// #1533
+	Binding.Insert("SalesReportFromTradeAgent", 
+		"StepItemListCalculateQuantityInBaseUnit,
+		|StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("SalesReportToConsignor", 
 		"StepItemListCalculateQuantityInBaseUnit,
 		|StepItemListChangePriceByPriceType");
 	

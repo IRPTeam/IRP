@@ -221,9 +221,10 @@ Scenario: _010009 check filling legal name in the partner term (complex partner 
 		And In this window I click command interface button "Partner terms"
 		And I click "Create" button
 		And I click Select button of "Legal name" field
-		And "List" table became equal
+		And "List" table contains lines
 			| 'Description'     |
 			| 'Company Kalipso' |
+		Then the number of "List" table lines is "равно" "1"
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Company Kalipso' |

@@ -4126,6 +4126,9 @@ Function ExtractData_FromWO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.DontCalculateRow AS DontCalculateRow,
 	|	ItemList.Ref.Branch AS Branch,
 	|	ItemList.BillOfMaterials,
+	// #1533
+	|	VALUE(Enum.SalesTransactionTypes.Sales) AS TransactionTypeSales,
+	//--
 	|	0 AS Quantity,
 	|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
 	|	ISNULL(ItemList.Price, 0) AS Price,
@@ -4237,6 +4240,9 @@ Function ExtractData_FromWS(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.ItemKey AS ItemKey,
 	|	TRUE AS UseWorkSheet,
+	// #1533
+	|	VALUE(Enum.SalesTransactionTypes.Sales) AS TransactionTypeSales,
+	//-----
 	|	0 AS Quantity,
 	|	BasisesTable.Key,
 	|	BasisesTable.Unit AS Unit,

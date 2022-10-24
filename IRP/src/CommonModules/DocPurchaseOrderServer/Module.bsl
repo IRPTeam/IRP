@@ -240,7 +240,7 @@ Function GetPurchaseOrderForClosing(PurchaseOrder, AddInfo = Undefined) Export
 								  |Status,
 								  |Author, 
 								  |Branch, 
-								  |Description
+								  |Description,
 								  // #1533
 								  |TransactionType");
 	

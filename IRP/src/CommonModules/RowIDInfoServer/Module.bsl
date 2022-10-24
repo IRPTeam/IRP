@@ -2228,6 +2228,7 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	end as TransactionType,
 	|
 	|	ItemList.Ref.TransactionType as TransactionTypeSales,
+	|	VALUE(Enum.PurchaseTransactionTypes.Purchase) AS TransactionTypePurchases,
 	//---
 	|	0 AS Quantity,
 	|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
@@ -3434,6 +3435,9 @@ Function ExtractData_FromISR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.Store AS StoreReceiver,
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.ItemKey AS ItemKey,
+	// #1533
+	|	VALUE(Enum.PurchaseTransactionTypes.Purchase) AS TransactionTypePurchases,
+	//--
 	|	0 AS Quantity,
 	|	BasisesTable.Key,
 	|	BasisesTable.Unit AS Unit,
@@ -4620,9 +4624,14 @@ Function ReduceExtractedDataInfo_SO(Tables, DataReceiver)
 	Is = Is(DataReceiver);
 	// only when procurecement method Pyrchase
 	If Is.PO Or Is.PI Then
-		ReduceInfo.Reduce = True;
-		ReduceInfo.Tables.Insert("ItemList", "Key, BasedOn, Company, Store, UseGoodsReceipt, PurchaseBasis, SalesOrder, 
+//		ReduceInfo.Reduce = True;
+//		ReduceInfo.Tables.Insert("ItemList", "Key, BasedOn, Company, Store, UseGoodsReceipt, PurchaseBasis, SalesOrder, 
+//											 |Item, ItemKey, Unit, BasisUnit, Quantity, QuantityInBaseUnit");
+	
+		// #1533
+		ReduceInfo.Tables.Insert("ItemList", "Key, BasedOn, Company, TransactionTypePurchases, Store, UseGoodsReceipt, PurchaseBasis, SalesOrder, 
 											 |Item, ItemKey, Unit, BasisUnit, Quantity, QuantityInBaseUnit");
+	
 	EndIf;
 
 	Return ReduceExtractedDataInfo(Tables, ReduceInfo);
@@ -9358,7 +9367,11 @@ Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False) Export
 	ElsIf DocReceiverMetadata = Metadata.Documents.ShipmentConfirmation Then
 		Return "Company, Branch, Partner, LegalName, TransactionType";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseOrder Then
-		Return "Company, Branch";
+		// #1533
+		//Return "Company, Branch";
+		Return "Company, Branch"
+		       + ?(NameAsAlias, ", TransactionTypePurchases", ", TransactionType");
+
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseInvoice Then
 		// #1533
 		//Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";

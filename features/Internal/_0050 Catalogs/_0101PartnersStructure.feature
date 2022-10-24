@@ -180,3 +180,63 @@ Scenario: _010008 create of a partner structure (Partners), 1 main partner, unde
 			| 'Alians' |
 			| 'MIO' |
 		Then the number of "List" table lines is "равно" "3"
+
+Scenario: _010009 check filling legal name in the partner term (complex partner structure)
+		And I close all client application windows
+	* Create one more legal name for MIO
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'MIO'         |
+		And I select current line in "List" table
+		And In this window I click command interface button "Company"
+		And I click the button named "FormCreate"
+		And I input "MIO" text in "ENG" field
+		And I select "Company" exact value from the drop-down list named "Type"
+		And I click "Save and close" button
+		And I wait "Company (create) *" window closing in 5 seconds
+	* Check filling legal name in the partner term from partner
+		And In this window I click command interface button "Partner terms"
+		And I click "Create" button
+		And I click Select button of "Legal name" field
+		And "List" table became equal
+			| 'Description' |
+			| 'MIO'         |
+		And I go to line in "List" table
+			| 'Description' |
+			| 'MIO'         |
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "MIO"
+		And I close current window
+		And I click "No" button			
+	* Mark for deletion legal name and check filling legal name from main partner
+		And In this window I click command interface button "Company"		
+		And I go to line in "List" table
+			| 'Description' |
+			| 'MIO'         |
+		And in the table "List" I click "Mark for deletion / Unmark for deletion" button
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And In this window I click command interface button "Partner terms"
+		And I click "Create" button
+		And I click Select button of "Legal name" field
+		And "List" table became equal
+			| 'Description'     |
+			| 'Company Kalipso' |
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Company Kalipso' |
+		And I select current line in "List" table
+		Then the form attribute named "LegalName" became equal to "Company Kalipso"
+		And I close all client application windows
+		
+
+				
+		
+				
+				
+				
+		
+								
+				

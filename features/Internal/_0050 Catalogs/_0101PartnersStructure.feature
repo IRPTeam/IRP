@@ -224,7 +224,9 @@ Scenario: _010009 check filling legal name in the partner term (complex partner 
 		And "List" table contains lines
 			| 'Description'     |
 			| 'Company Kalipso' |
-		Then the number of "List" table lines is "равно" "1"
+		And "List" table does not contain lines
+			| 'Description' |
+			| 'MIO'         |
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Company Kalipso' |

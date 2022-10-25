@@ -85,6 +85,9 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
+	IsTransactionType_Purchase = Object.TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.Purchase");
+	Form.Items.GroupAging.Visible = IsTransactionType_Purchase;
+	
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
 

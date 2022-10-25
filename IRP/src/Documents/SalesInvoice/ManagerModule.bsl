@@ -258,9 +258,10 @@ Function ItemList()
 		|	SalesInvoiceItemList.Ref.LegalNameContract AS LegalNameContract,
 		|	SalesInvoiceItemList.PriceType,
 		|	SalesInvoiceItemList.SalesPerson,
-		|	// #1533
+		// #1533
 		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
 		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS ShipmentToTradeAgent
+		//------
 		|INTO ItemList
 		|FROM
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -347,7 +348,11 @@ Function Taxes()
 		|		ELSE SalesInvoiceTaxList.ManualAmount
 		|	END AS TaxAmount,
 		|	SalesInvoiceItemList.NetAmount AS TaxableAmount,
-		|	SalesInvoiceItemList.Ref.Branch AS Branch
+		|	SalesInvoiceItemList.Ref.Branch AS Branch,
+		// #1533
+		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
+		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS ShipmentToTradeAgent
+		//------
 		|INTO Taxes
 		|FROM
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -490,7 +495,10 @@ Function R2040B_TaxesIncoming()
 		|FROM
 		|	Taxes AS Taxes
 		|WHERE
-		|	TRUE";
+		// #1533
+		|	Taxes.IsSales";
+		//---
+		//|	TRUE";
 EndFunction
 
 #Region Stock
@@ -717,6 +725,9 @@ Function R4050B_StockInventory()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.IsService
+		// #1533
+		|	AND ItemList.IsSales
+		|
 		|GROUP BY
 		|	VALUE(AccumulationRecordType.Expense),
 		|	ItemList.Period,
@@ -842,8 +853,6 @@ Function R5011B_CustomersAging()
 		|	Document.SalesInvoice.PaymentTerms AS PaymentTerms
 		|WHERE
 		|	PaymentTerms.Ref = &Ref
-		// #1533
-		|	AND PaymentTerms.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales)
 		|GROUP BY
 		|	PaymentTerms.Date,
 		|	PaymentTerms.Ref,
@@ -920,8 +929,6 @@ Function R2022B_CustomersPaymentPlanning()
 		|WHERE
 		|	SalesInvoicePaymentTerms.Ref = &Ref
 		|	AND SalesInvoicePaymentTerms.CalculationType = VALUE(Enum.CalculationTypes.PostShipmentCredit)
-		// #1533
-		|	AND SalesInvoicePaymentTerms.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales)
 		|GROUP BY
 		|	SalesInvoicePaymentTerms.Ref.Date,
 		|	SalesInvoicePaymentTerms.Ref.Company,
@@ -1028,6 +1035,9 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList AS ItemList
 		|WHERE
 		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+		// #1533
+		|	AND ItemList.IsSales
+		|
 		|GROUP BY
 		|	ItemList.ItemKey,
 		|	ItemList.Store,

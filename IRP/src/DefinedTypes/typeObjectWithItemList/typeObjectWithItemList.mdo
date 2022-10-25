@@ -32,5 +32,7 @@
     <types>DocumentRef.GoodsReceipt</types>
     <types>DocumentRef.SalesInvoice</types>
     <types>DocumentRef.WorkOrder</types>
+    <types>DocumentRef.SalesReportFromTradeAgent</types>
+    <types>DocumentRef.SalesReportToConsignor</types>
   </type>
 </mdclass:DefinedType>

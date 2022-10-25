@@ -21,5 +21,7 @@
     <types>DocumentRef.SalesReturn</types>
     <types>DocumentRef.SalesInvoice</types>
     <types>DocumentRef.ChequeBondTransactionItem</types>
+    <types>DocumentRef.SalesReportFromTradeAgent</types>
+    <types>DocumentRef.SalesReportToConsignor</types>
   </type>
 </mdclass:DefinedType>

@@ -15,5 +15,7 @@
     <types>DocumentRef.SalesInvoice</types>
     <types>DocumentRef.CashExpense</types>
     <types>DocumentRef.WorkOrder</types>
+    <types>DocumentRef.SalesReportFromTradeAgent</types>
+    <types>DocumentRef.SalesReportToConsignor</types>
   </type>
 </mdclass:DefinedType>

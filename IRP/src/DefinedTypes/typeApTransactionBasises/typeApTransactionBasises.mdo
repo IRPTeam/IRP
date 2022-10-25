@@ -16,5 +16,6 @@
     <types>DocumentRef.PurchaseReturn</types>
     <types>DocumentRef.OpeningEntry</types>
     <types>DocumentRef.SalesReturn</types>
+    <types>DocumentRef.SalesReportToConsignor</types>
   </type>
 </mdclass:DefinedType>

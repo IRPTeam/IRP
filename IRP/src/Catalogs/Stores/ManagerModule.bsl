@@ -43,7 +43,8 @@ Function GetChoiceDataTable(Parameters)
 		Filter = Filter + 
 			?(FilterItem.Key = "Company",
 		"
-		|	AND (Table.Company = &Company OR Table.Company = VALUE(Catalog.Companies.EmptyRef))",
+		|	AND (" + Format(Not ValueIsFilled(FilterItem.Value), "BF=FALSE; BT=TRUE;") + 
+			" OR Table.Company = VALUE(Catalog.Companies.EmptyRef) OR Table.Company = &Company)",
 		"
 		|	AND Table."+FilterItem.Key+" = &"+FilterItem.Key);
 	EndDo;

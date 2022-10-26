@@ -23,3 +23,22 @@ EndProcedure
 Procedure UndoPosting(Cancel)
 	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
 EndProcedure
+
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	
+	If Not ThisObject.Company.IsEmpty() And Not ThisObject.Store.IsEmpty() Then
+		StoreCompany = CommonFunctionsServer.GetRefAttribute(ThisObject.Store, "Company");
+		If ValueIsFilled(StoreCompany) And Not StoreCompany = ThisObject.Company Then
+			Cancel = True;
+			MessageText = StrTemplate(
+				R().Error_Store_Company,
+				ThisObject.Store,
+				ThisObject.Company);
+			CommonFunctionsClientServer.ShowUsersMessage(
+				MessageText, 
+				"Object.Store", 
+				"Object");
+		EndIf;
+	EndIf;
+
+EndProcedure

@@ -316,6 +316,13 @@
         <chooseType>true</chooseType>
         <typeDomainEnabled>true</typeDomainEnabled>
         <textEdit>true</textEdit>
+        <choiceParameterLinks>
+          <name>Filter.Company</name>
+          <changeMode>DontChange</changeMode>
+          <datapath xsi:type="form:DataPath">
+            <segments>Company</segments>
+          </datapath>
+        </choiceParameterLinks>
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
@@ -369,6 +376,13 @@
         <chooseType>true</chooseType>
         <typeDomainEnabled>true</typeDomainEnabled>
         <textEdit>true</textEdit>
+        <choiceParameterLinks>
+          <name>Filter.Company</name>
+          <changeMode>DontChange</changeMode>
+          <datapath xsi:type="form:DataPath">
+            <segments>Company</segments>
+          </datapath>
+        </choiceParameterLinks>
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
@@ -619,6 +633,13 @@
         <chooseType>true</chooseType>
         <typeDomainEnabled>true</typeDomainEnabled>
         <textEdit>true</textEdit>
+        <choiceParameterLinks>
+          <name>Filter.Company</name>
+          <changeMode>DontChange</changeMode>
+          <datapath xsi:type="form:DataPath">
+            <segments>Company</segments>
+          </datapath>
+        </choiceParameterLinks>
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
@@ -673,6 +694,13 @@
         <chooseType>true</chooseType>
         <typeDomainEnabled>true</typeDomainEnabled>
         <textEdit>true</textEdit>
+        <choiceParameterLinks>
+          <name>Filter.Company</name>
+          <changeMode>DontChange</changeMode>
+          <datapath xsi:type="form:DataPath">
+            <segments>Company</segments>
+          </datapath>
+        </choiceParameterLinks>
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
@@ -1663,6 +1691,23 @@
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>Company</name>
+    <title>
+      <key>en</key>
+      <value>Company</value>
+    </title>
+    <id>21</id>
+    <valueType>
+      <types>CatalogRef.Companies</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>Ok</name>
     <title>
@@ -1717,6 +1762,12 @@
     </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
+  <parameters>
+    <name>Company</name>
+    <valueType>
+      <types>CatalogRef.Companies</types>
+    </valueType>
+  </parameters>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>

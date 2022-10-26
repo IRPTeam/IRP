@@ -821,6 +821,13 @@
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
+            <choiceParameterLinks>
+              <name>Filter.Company</name>
+              <changeMode>DontChange</changeMode>
+              <datapath xsi:type="form:DataPath">
+                <segments>Object.Company</segments>
+              </datapath>
+            </choiceParameterLinks>
           </extInfo>
         </items>
         <visible>true</visible>

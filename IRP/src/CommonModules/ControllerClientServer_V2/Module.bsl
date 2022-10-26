@@ -3829,6 +3829,9 @@ Procedure StepChangePaymentTermsByAgreement(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangePaymentTermsByAgreementOptions();
 	Options.Agreement = GetAgreement(Parameters);
 	Options.Date      = GetDate(Parameters);
+	If Options.Date = Date(1,1,1) Then
+		Options.Date = BegOfDay(CurrentDate());
+	EndIf;
 	Options.ArrayOfPaymentTerms = GetPaymentTerms(Parameters);
 	TotalAmount = 0;
 	For Each Row In Parameters.Object[Parameters.TableName] Do

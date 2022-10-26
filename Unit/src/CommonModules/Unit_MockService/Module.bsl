@@ -108,6 +108,58 @@ Function getMockDataByRequest(RequestStructure) Export
 	
 EndFunction
 
+// Get structure request by ref.
+// 
+// Parameters:
+//  RequestRef - CatalogRef.Unit_ServiceExchangeHistory - Request
+// 
+// Returns:
+//  See GetStructureRequest
+Function GetStructureRequestByRef(RequestRef) Export
+	
+	RequestStructure = Unit_MockService.GetStructureRequest();
+	
+	RequestStructure.Type = RequestRef.RequestType; 
+	RequestStructure.Address = RequestRef.ResourceAddress;
+	
+	RequestOptions = New Map;
+	ArrayOfSegments = StrSplit(RequestStructure.Address, "?");
+	If ArrayOfSegments.Count() > 1 Then
+		RequestStructure.Address = ArrayOfSegments[0];
+		OptionsSegments = ArrayOfSegments[1];
+		ArrayOfSegments = StrSplit(OptionsSegments, "&");
+		For Each OptionsSegment In ArrayOfSegments Do
+			KeyValueString = DecodeString(OptionsSegment, StringEncodingMethod.URLInURLEncoding);
+			EqualPosition = StrFind(KeyValueString, "=");
+			If EqualPosition = 0 Then
+				RequestOptions.Insert(KeyValueString, "");
+			Else
+				RequestOptions.Insert(
+					TrimAll(Mid(KeyValueString, 1, EqualPosition - 1)), 
+					TrimAll(Mid(KeyValueString, EqualPosition + 1)));
+			EndIf;
+		EndDo;
+	EndIf;
+	RequestStructure.Options = New FixedMap(RequestOptions);
+	
+	HeadersMap = RequestRef.Headers.Get();
+	If TypeOf(HeadersMap) = Type("Map") Then	
+		RequestStructure.Headers = New FixedMap(HeadersMap);
+	Else
+		RequestStructure.Headers = New FixedMap(New Map);
+	EndIf;
+	
+	BodyData = RequestRef.Body.Get(); // BinaryData
+	RequestStructure.BodyBinary = BodyData;
+	Try
+		RequestStructure.BodyString = GetStringFromBinaryData(BodyData);
+	Except
+		RequestStructure.BodyString = "";
+	EndTry;
+	
+	Return RequestStructure;
+EndFunction
+
 // Check request to mock data.
 // 
 // Parameters:
@@ -1019,6 +1071,20 @@ Function TransformationValue(SomeValue, RequestVariables)
 		EndIf; 
 	EndIf;
 	
+	IF StrLen(SomeValue) > 6 And StrStartsWith(SomeValue, "[[[") And StrEndsWith(SomeValue, "]]]") Then
+		Params = CommonFunctionsServer.GetRecalculateExpressionParams();
+		Params.SafeMode = True;
+		Params.Type = Enums.ExternalFunctionType.Execute;
+		Params.Expression = Mid(SomeValue, 4, StrLen(SomeValue) - 6);
+		Params.AddInfo = RequestVariables;
+		ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
+		If ResultInfo.isError Then
+			Return "";
+		Else
+			Return ResultInfo.Result;
+		EndIf; 
+	EndIf;
+	
 	Return SomeValue;
 	
 EndFunction
@@ -1031,7 +1097,7 @@ EndFunction
 // 
 // Returns:
 //  String - Transformation value
-Function TransformationText(Val SomeText, RequestVariables)
+Function TransformationText(Val SomeText, RequestVariables) Export
 	
 	If IsBlankString(SomeText) Then
 		Return "";
@@ -1047,6 +1113,15 @@ Function TransformationText(Val SomeText, RequestVariables)
 	EndDo;
 	
 	ArrayVarriables = GetArrayFromText(SomeText, "{{{", "}}}");
+	MapVarriables = New Map;
+	For Each ItemVariable In ArrayVarriables Do // String, String
+		MapVarriables.Insert(ItemVariable, TransformationValue(ItemVariable, RequestVariables));
+	EndDo;
+	For Each KeyValue In MapVarriables Do
+		SomeText = StrReplace(SomeText, KeyValue.Key, KeyValue.Value);
+	EndDo;
+	
+	ArrayVarriables = GetArrayFromText(SomeText, "[[[", "]]]");
 	MapVarriables = New Map;
 	For Each ItemVariable In ArrayVarriables Do // String, String
 		MapVarriables.Insert(ItemVariable, TransformationValue(ItemVariable, RequestVariables));

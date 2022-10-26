@@ -79,6 +79,7 @@
   <constants>Constant.SaasMode</constants>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.Unit_DataContentAnalyzer</commonForms>
+  <commonForms>CommonForm.Unit_MockExpressionConstructor</commonForms>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
   <catalogs>Catalog.BusinessUnits</catalogs>
   <catalogs>Catalog.Currencies</catalogs>

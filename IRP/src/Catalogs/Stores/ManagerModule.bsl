@@ -40,13 +40,13 @@ Function GetChoiceDataTable(Parameters)
 	
 	Filter = "";
 	For Each FilterItem In Parameters.Filter Do
-		Filter = Filter + 
-			?(FilterItem.Key = "Company",
+		Filter = Filter
+			+ ?(FilterItem.Key = "Company",
 		"
-		|	AND (" + Format(Not ValueIsFilled(FilterItem.Value), "BF=FALSE; BT=TRUE;") + 
-			" OR Table.Company = VALUE(Catalog.Companies.EmptyRef) OR Table.Company = &Company)",
+		|	AND (" + Format(Not ValueIsFilled(FilterItem.Value), "BF=FALSE; BT=TRUE;") 
+			+ " OR Table.Company = VALUE(Catalog.Companies.EmptyRef) OR Table.Company = &Company)",
 		"
-		|	AND Table."+FilterItem.Key+" = &"+FilterItem.Key);
+		|	AND Table." + FilterItem.Key + " = &" + FilterItem.Key);
 	EndDo;
 	
 	Settings = New Structure();

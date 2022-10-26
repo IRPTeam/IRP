@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4c135557-6d1a-42d2-9cb2-95108f005dab">
-  <name>Produce</name>
-  <synonym>
-    <key>en</key>
-    <value>Produce</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.BillOfMaterials</content>
-  <content>Document.Production</content>
-  <parentSubsystem>Subsystem.Manufacturing</parentSubsystem>
+ <name>Produce</name>
+ <synonym>
+  <key>en</key>
+  <value>Produce</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Производить</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Üret</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.BillOfMaterials</content>
+ <content>Document.Production</content>
+ <parentSubsystem>Subsystem.Manufacturing</parentSubsystem>
 </mdclass:Subsystem>

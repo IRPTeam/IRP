@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="de13950f-3870-4b56-926c-24ca06ae16ca">
-  <name>DocWorkOrderServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc work order server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocWorkOrderServer</name>
+ <synonym>
+  <key>en</key>
+  <value>Doc work order server</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ заказ наряд сервер</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak çalışma emri server</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

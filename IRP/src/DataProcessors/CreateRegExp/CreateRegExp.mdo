@@ -1,110 +1,182 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8ec1a0a5-b726-4561-965b-0f51d992c5c7">
+<mdclass:DataProcessor xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="8ec1a0a5-b726-4561-965b-0f51d992c5c7">
+ <producedTypes>
+  <objectType typeId="8f647ad5-3898-4225-b06c-db31be73d49c" valueTypeId="e77430d2-fe3c-49db-85a8-1707fdcd4068"/>
+  <managerType typeId="649b71b9-b4b5-40d7-882c-ef1e55da2255" valueTypeId="8decb860-2f0b-4e67-a27e-ee8bbc43535e"/>
+ </producedTypes>
+ <name>CreateRegExp</name>
+ <synonym>
+  <key>en</key>
+  <value>Create RegExp</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Создать RegExp</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>RegExp oluştur</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.CreateRegExp.Form.Form</defaultForm>
+ <tabularSections uuid="f1261008-dee1-45a6-aff1-a3dfd0911197">
   <producedTypes>
-    <objectType typeId="8f647ad5-3898-4225-b06c-db31be73d49c" valueTypeId="e77430d2-fe3c-49db-85a8-1707fdcd4068"/>
-    <managerType typeId="649b71b9-b4b5-40d7-882c-ef1e55da2255" valueTypeId="8decb860-2f0b-4e67-a27e-ee8bbc43535e"/>
+   <objectType typeId="587d0a5f-4ca6-469e-a7ff-2908e78a7795" valueTypeId="0de58656-4cea-4478-ae6d-b17126eecb09"/>
+   <rowType typeId="68ab4bc3-4298-49fb-b1d4-7ca9936771f5" valueTypeId="f7fa9dd8-0cc2-459d-864f-42d829995b11"/>
   </producedTypes>
-  <name>CreateRegExp</name>
+  <name>RowParts</name>
   <synonym>
-    <key>en</key>
-    <value>Create RegExp</value>
+   <key>en</key>
+   <value>Row parts</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.CreateRegExp.Form.Form</defaultForm>
-  <tabularSections uuid="f1261008-dee1-45a6-aff1-a3dfd0911197">
-    <producedTypes>
-      <objectType typeId="587d0a5f-4ca6-469e-a7ff-2908e78a7795" valueTypeId="0de58656-4cea-4478-ae6d-b17126eecb09"/>
-      <rowType typeId="68ab4bc3-4298-49fb-b1d4-7ca9936771f5" valueTypeId="f7fa9dd8-0cc2-459d-864f-42d829995b11"/>
-    </producedTypes>
-    <name>RowParts</name>
-    <synonym>
-      <key>en</key>
-      <value>Row parts</value>
-    </synonym>
-    <attributes uuid="c74d06bd-ee73-42ed-a9f7-d65288628973">
-      <name>ExpressionType</name>
-      <synonym>
-        <key>en</key>
-        <value>Expression type</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="f7920710-b0c0-4365-8f09-61c9fcd5cb83">
-      <name>ID</name>
-      <synonym>
-        <key>en</key>
-        <value>ID</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="ff89796b-f68b-42d9-9b7e-a1d5a343f1ba">
-      <name>RowPart</name>
-      <synonym>
-        <key>en</key>
-        <value>Row part</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="2a15a267-9d17-4be3-8d85-26089e44aa7b">
-      <name>RegExp</name>
-      <synonym>
-        <key>en</key>
-        <value>Reg exp</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="eccbda08-6a77-49bd-997e-122c89f32e3e">
-      <name>isWhitespace</name>
-      <synonym>
-        <key>en</key>
-        <value>Is whitespace</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="702adb42-ed27-47e9-b8be-c3a40107c7d3">
-      <name>ExternalFunction</name>
-      <synonym>
-        <key>en</key>
-        <value>External function</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ExternalFunctions</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-  </tabularSections>
-  <forms uuid="5e274039-734d-4653-8f72-75e59019cd44">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <synonym>
+   <key>ru</key>
+   <value>Части строки</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satır parçası</value>
+  </synonym>
+  <attributes uuid="c74d06bd-ee73-42ed-a9f7-d65288628973">
+   <name>ExpressionType</name>
+   <synonym>
+    <key>en</key>
+    <value>Expression type</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Вид представления</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer tipi</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="f7920710-b0c0-4365-8f09-61c9fcd5cb83">
+   <name>ID</name>
+   <synonym>
+    <key>en</key>
+    <value>ID</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>ID</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>ID</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="ff89796b-f68b-42d9-9b7e-a1d5a343f1ba">
+   <name>RowPart</name>
+   <synonym>
+    <key>en</key>
+    <value>Row part</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Часть строки</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Satır parçası</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="2a15a267-9d17-4be3-8d85-26089e44aa7b">
+   <name>RegExp</name>
+   <synonym>
+    <key>en</key>
+    <value>Reg exp</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Регулярные выражения</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>RegExp</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="eccbda08-6a77-49bd-997e-122c89f32e3e">
+   <name>isWhitespace</name>
+   <synonym>
+    <key>en</key>
+    <value>Is whitespace</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Это белый список</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Tüm karakterler</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="702adb42-ed27-47e9-b8be-c3a40107c7d3">
+   <name>ExternalFunction</name>
+   <synonym>
+    <key>en</key>
+    <value>External function</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Внешняя функция</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Dış fonksiyon</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ExternalFunctions</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+ </tabularSections>
+ <forms uuid="5e274039-734d-4653-8f72-75e59019cd44">
+  <name>Form</name>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

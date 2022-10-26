@@ -1,167 +1,255 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0a89e726-41ab-4715-8493-72b19cf2b7b5">
-  <producedTypes>
-    <selectionType typeId="28abb3b8-16cd-44e7-9c0a-69044540fffa" valueTypeId="35561c1c-2344-4890-a30c-3312cab378e2"/>
-    <listType typeId="b22bdbb4-a5ad-462e-ad09-8c9f4a503c33" valueTypeId="a3f0bdae-1fad-4173-ab8f-27d3396be4c1"/>
-    <managerType typeId="05730475-459a-4754-b025-1cdfedafb040" valueTypeId="a68f59d0-faa0-429e-b550-a52eaee05d8d"/>
-    <recordSetType typeId="cfc43a13-7b2a-4e69-bb6d-3f14c87da9c2" valueTypeId="52e65689-85b3-4647-8666-c3471005d226"/>
-    <recordKeyType typeId="1a08c5ae-87e7-4450-887e-35978a5b6fa9" valueTypeId="f4b9c5de-7155-48bb-961d-222f8b00e16c"/>
-    <recordType typeId="ff919b70-8c25-4f81-bce2-b58b9af84454" valueTypeId="962ef571-d4b3-43e9-aa3c-12243394184c"/>
-    <recordManagerType typeId="9cc20ca3-cce1-4ef5-a66f-6871e160716f" valueTypeId="fbe5a7f8-49e5-4eca-9f83-ca5a87d1069c"/>
-  </producedTypes>
-  <name>TemplateActions</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="0a89e726-41ab-4715-8493-72b19cf2b7b5">
+ <producedTypes>
+  <selectionType typeId="28abb3b8-16cd-44e7-9c0a-69044540fffa" valueTypeId="35561c1c-2344-4890-a30c-3312cab378e2"/>
+  <listType typeId="b22bdbb4-a5ad-462e-ad09-8c9f4a503c33" valueTypeId="a3f0bdae-1fad-4173-ab8f-27d3396be4c1"/>
+  <managerType typeId="05730475-459a-4754-b025-1cdfedafb040" valueTypeId="a68f59d0-faa0-429e-b550-a52eaee05d8d"/>
+  <recordSetType typeId="cfc43a13-7b2a-4e69-bb6d-3f14c87da9c2" valueTypeId="52e65689-85b3-4647-8666-c3471005d226"/>
+  <recordKeyType typeId="1a08c5ae-87e7-4450-887e-35978a5b6fa9" valueTypeId="f4b9c5de-7155-48bb-961d-222f8b00e16c"/>
+  <recordType typeId="ff919b70-8c25-4f81-bce2-b58b9af84454" valueTypeId="962ef571-d4b3-43e9-aa3c-12243394184c"/>
+  <recordManagerType typeId="9cc20ca3-cce1-4ef5-a66f-6871e160716f" valueTypeId="fbe5a7f8-49e5-4eca-9f83-ca5a87d1069c"/>
+ </producedTypes>
+ <name>TemplateActions</name>
+ <synonym>
+  <key>en</key>
+  <value>Template actions</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Действия шаблона</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Şablon işlemleri</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>Template action</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Действие шаблон</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Şablon işlemi</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Template actions</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Действия шаблона</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Şablon işlemleri</value>
+ </listPresentation>
+ <attributes uuid="b710f50b-fac5-4ac8-a47a-f826589cb557">
+  <name>AttributeType</name>
   <synonym>
-    <key>en</key>
-    <value>Template actions</value>
+   <key>en</key>
+   <value>Attribute type</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Template action</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Template actions</value>
-  </listPresentation>
-  <attributes uuid="b710f50b-fac5-4ac8-a47a-f826589cb557">
-    <name>AttributeType</name>
-    <synonym>
-      <key>en</key>
-      <value>Attribute type</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>50</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="aec5d541-f036-4676-a08b-50b3f4754df0">
-    <name>Name</name>
-    <synonym>
-      <key>en</key>
-      <value>Name</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>100</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="aa99cc09-1883-49e4-bcbb-e7d404cebcde">
-    <name>Path</name>
-    <synonym>
-      <key>en</key>
-      <value>Path</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>100</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="f2b6cab0-54d0-4896-8f0e-d737e41689bb">
-    <name>CheckRegExp</name>
-    <synonym>
-      <key>en</key>
-      <value>Check reg exp</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="55677483-9587-44fb-a7a2-903cbed41a94">
-    <name>Value</name>
-    <synonym>
-      <key>en</key>
-      <value>Value</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <types>String</types>
-      <types>Boolean</types>
-      <types>AnyRef</types>
-      <stringQualifiers>
-        <length>512</length>
-      </stringQualifiers>
-      <dateQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="08780f4b-b0ef-4b8c-8e7f-aa63fc7044f7">
-    <name>Action</name>
-    <synonym>
-      <key>en</key>
-      <value>Action</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ExternalFunctions</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <dimensions uuid="051ffc83-7209-4058-82c5-2ca8b40d81ec">
-    <name>FillingTemplate</name>
-    <synonym>
-      <key>en</key>
-      <value>Filling template</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.FillingTemplates</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <denyIncompleteValues>true</denyIncompleteValues>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="699e3dd1-f16d-41ea-8efe-4fd32eb3ab84">
-    <name>Priority</name>
-    <synonym>
-      <key>en</key>
-      <value>Priority</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>10</precision>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </dimensions>
+  <synonym>
+   <key>ru</key>
+   <value>Тип реквизита</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Alan tipi</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>50</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="aec5d541-f036-4676-a08b-50b3f4754df0">
+  <name>Name</name>
+  <synonym>
+   <key>en</key>
+   <value>Name</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Имя</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ad</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>100</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="aa99cc09-1883-49e4-bcbb-e7d404cebcde">
+  <name>Path</name>
+  <synonym>
+   <key>en</key>
+   <value>Path</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Путь</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Path</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>100</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="f2b6cab0-54d0-4896-8f0e-d737e41689bb">
+  <name>CheckRegExp</name>
+  <synonym>
+   <key>en</key>
+   <value>Check reg exp</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Проверить RegExp</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>RegExp kontrol</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="55677483-9587-44fb-a7a2-903cbed41a94">
+  <name>Value</name>
+  <synonym>
+   <key>en</key>
+   <value>Value</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Значение</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Değer</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <types>String</types>
+   <types>Boolean</types>
+   <types>AnyRef</types>
+   <stringQualifiers>
+    <length>512</length>
+   </stringQualifiers>
+   <dateQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="08780f4b-b0ef-4b8c-8e7f-aa63fc7044f7">
+  <name>Action</name>
+  <synonym>
+   <key>en</key>
+   <value>Action</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Действие</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İşlem</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExternalFunctions</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <dimensions uuid="051ffc83-7209-4058-82c5-2ca8b40d81ec">
+  <name>FillingTemplate</name>
+  <synonym>
+   <key>en</key>
+   <value>Filling template</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Заполнение шаблона</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şablon doldurma</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.FillingTemplates</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <denyIncompleteValues>true</denyIncompleteValues>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="699e3dd1-f16d-41ea-8efe-4fd32eb3ab84">
+  <name>Priority</name>
+  <synonym>
+   <key>en</key>
+   <value>Priority</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Приоритет</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Önem</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>10</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
 </mdclass:InformationRegister>

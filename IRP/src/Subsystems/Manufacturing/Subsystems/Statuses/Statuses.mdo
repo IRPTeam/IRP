@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7d86442f-b31e-4e55-9157-5eba96919803">
-  <name>Statuses</name>
-  <synonym>
-    <key>en</key>
-    <value>Statuses</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.ObjectStatuses</content>
-  <content>InformationRegister.ObjectStatuses</content>
-  <parentSubsystem>Subsystem.Manufacturing</parentSubsystem>
+ <name>Statuses</name>
+ <synonym>
+  <key>en</key>
+  <value>Statuses</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Статусы</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Statüler</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.ObjectStatuses</content>
+ <content>InformationRegister.ObjectStatuses</content>
+ <parentSubsystem>Subsystem.Manufacturing</parentSubsystem>
 </mdclass:Subsystem>

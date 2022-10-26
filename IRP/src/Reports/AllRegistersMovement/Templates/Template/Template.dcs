@@ -14,6 +14,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Company</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Организация</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Şirket</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -23,6 +31,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Miktar</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -34,6 +50,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Invoice</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Инвойс</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -43,6 +67,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Item key</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Характеристика</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Varyant</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -54,6 +86,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Currency movement type</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Вид мультивалютной аналитики</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Çoklu döviz hareket tipi</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -63,6 +103,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Deferred calculation</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Отложенный расчет</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ertelenen hesaplama</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -74,6 +122,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Line number</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Номер строки</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Satır numarası</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -83,6 +139,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Period</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Период</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dönem</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -94,6 +158,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Currency</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Валюта</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Döviz</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -103,6 +175,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Recorder</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Регистратор</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>İşlem evrakı</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -114,6 +194,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Amount</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Tutar</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -123,6 +211,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Offers amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма скидки</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Iskonto tutarı</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -134,6 +230,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Net amount</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма без налогов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Net tutar</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -144,12 +248,28 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Register name</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Наименование регистра</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Kayıt tablo tanımı</v8:content>
+				</v8:item>
 			</title>
 			<availableValue>
 				<value xsi:type="xs:string">R1001T_Purchases</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R1001T_Purchases</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1001 Закупки</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R1001T_Purchases</v8:content>
 					</v8:item>
 				</presentation>
@@ -161,6 +281,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R1002T_PurchaseReturns</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1002 Возвраты поступлений</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R1002T_PurchaseReturns</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -168,6 +296,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R1005T_PurchaseSpecialOffers</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1005 Специальные предложения поступлений</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R1005T_PurchaseSpecialOffers</v8:content>
 					</v8:item>
 				</presentation>
@@ -179,6 +315,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R1010T_PurchaseOrders</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1010 Заказы поставщикам</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R1010T_PurchaseOrders</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -186,6 +330,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R1011B_PurchaseOrdersReceipt</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1011 Прием товаров по заказам поставщикам</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R1011B_PurchaseOrdersReceipt</v8:content>
 					</v8:item>
 				</presentation>
@@ -197,6 +349,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R1012B_PurchaseOrdersInvoiceClosing</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1012 Закрытие поступлениями заказов поставщикам</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R1012B_PurchaseOrdersInvoiceClosing</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -204,6 +364,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R1014T_CanceledPurchaseOrders</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1014 Отменные заказы поставщикам</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R1014T_CanceledPurchaseOrders</v8:content>
 					</v8:item>
 				</presentation>
@@ -215,6 +383,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R1020B_AdvancesToVendors</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1020 Авансы выданные (поставщикам)</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R1020B_AdvancesToVendors</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -222,6 +398,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R1021B_VendorsTransactions</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1021 Взаиморасчеты с поставщиками</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R1021B_VendorsTransactions</v8:content>
 					</v8:item>
 				</presentation>
@@ -233,6 +417,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R1031B_ReceiptInvoicing</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1031 Контроль закрытия - Приход товаров/Поступления</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R1031B_ReceiptInvoicing</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -240,6 +432,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R1040B_TaxesOutgoing</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1040 Налоги к зачету</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R1040B_TaxesOutgoing</v8:content>
 					</v8:item>
 				</presentation>
@@ -251,6 +451,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R2001T_Sales</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2001 Продажи</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R2001T_Sales</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -258,6 +466,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R2002T_SalesReturns</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2002 Возвраты продаж</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R2002T_SalesReturns</v8:content>
 					</v8:item>
 				</presentation>
@@ -269,6 +485,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R2005T_SalesSpecialOffers</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2005 Специальные предложения продаж</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R2005T_SalesSpecialOffers</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -276,6 +500,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R2010T_SalesOrders</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2010 Заказы покупателей</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R2010T_SalesOrders</v8:content>
 					</v8:item>
 				</presentation>
@@ -287,6 +519,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R2011B_SalesOrdersShipment</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2011 Отгрузка товаров по заказам покупателей</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R2011B_SalesOrdersShipment</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -294,6 +534,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R2012B_SalesOrdersInvoiceClosing</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2012 Закрытие заказов реализациями товаров</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R2012B_SalesOrdersInvoiceClosing</v8:content>
 					</v8:item>
 				</presentation>
@@ -305,6 +553,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R2013T_SalesOrdersProcurement</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2013 Обособленное обеспечение заказов покупателей</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R2013T_SalesOrdersProcurement</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -312,6 +568,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R2014T_CanceledSalesOrders</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2014 Отмены заказов покупателей</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R2014T_CanceledSalesOrders</v8:content>
 					</v8:item>
 				</presentation>
@@ -323,6 +587,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R2020B_AdvancesFromCustomers</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2020 Авансы полученные (от покупателей)</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R2020B_AdvancesFromCustomers</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -330,6 +602,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R2021B_CustomersTransactions</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2021 Взаиморасчеты с покупателями</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R2021B_CustomersTransactions</v8:content>
 					</v8:item>
 				</presentation>
@@ -341,6 +621,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R2031B_ShipmentInvoicing</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2031 Закрытие отгрузок реализациями товаров</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R2031B_ShipmentInvoicing</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -348,6 +636,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R2040B_TaxesIncoming</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2040 Налоги к начислению</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R2040B_TaxesIncoming</v8:content>
 					</v8:item>
 				</presentation>
@@ -359,6 +655,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R3010B_CashOnHand</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R3010 Остатки денежных средств</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R3010B_CashOnHand</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -366,6 +670,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R3011T_CashMovements</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R3011 Движения денежных средств</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R3011T_CashMovements</v8:content>
 					</v8:item>
 				</presentation>
@@ -377,6 +689,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R3015B_CashAdvance</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R3015 Денежные средства у подотчетных лиц</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R3015B_CashAdvance</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -384,6 +704,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R3016B_ChequeAndBonds</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R3016 Чеки и долговые обязательства</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R3016B_ChequeAndBonds</v8:content>
 					</v8:item>
 				</presentation>
@@ -395,6 +723,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R3021B_CashInTransitIncoming</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R3021 Деньги в пути (к приходу)</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R3021B_CashInTransitIncoming</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -402,6 +738,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R3022B_CashInTransitOutgoing</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R3022 Деньги в пути (к расходу)</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R3022B_CashInTransitOutgoing</v8:content>
 					</v8:item>
 				</presentation>
@@ -413,6 +757,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R3033B_CashPlanningIncoming</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R3033 Планирование поступления денежных средств</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R3033B_CashPlanningIncoming</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -420,6 +772,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R3034B_CashPlanningOutgoing</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R3034 Планирование расхода денежных средств</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R3034B_CashPlanningOutgoing</v8:content>
 					</v8:item>
 				</presentation>
@@ -431,6 +791,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R4010B_ActualStocks</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4010 Остатки товара на складах</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R4010B_ActualStocks</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -438,6 +806,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4011B_FreeStocks</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4011 Свободные остатки</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4011B_FreeStocks</v8:content>
 					</v8:item>
 				</presentation>
@@ -449,6 +825,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R4012B_StockReservation</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4012 Товары в резерве на складах</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R4012B_StockReservation</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -456,6 +840,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4013B_StockReservationPlanning</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4031 Товары в пути (к приходу)</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4013B_StockReservationPlanning</v8:content>
 					</v8:item>
 				</presentation>
@@ -467,6 +859,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R4014B_SerialLotNumber</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4014 Серии номенклатуры</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R4014B_SerialLotNumber</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -474,6 +874,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4015T_InternalSupplyRequests</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4015 Заявки на обеспечение товара</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4015T_InternalSupplyRequests</v8:content>
 					</v8:item>
 				</presentation>
@@ -485,6 +893,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R4016B_InternalSupplyRequestOrdering</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4016 Заказы заявок на обеспечение товара</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R4016B_InternalSupplyRequestOrdering</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -492,6 +908,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4017B_InternalSupplyRequestProcurement</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4017 Приход товаров по заявкам на обеспечение</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4017B_InternalSupplyRequestProcurement</v8:content>
 					</v8:item>
 				</presentation>
@@ -503,6 +927,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R4020T_StockTransferOrders</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4020 Заказы на перемещение товара</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R4020T_StockTransferOrders</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -510,6 +942,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4021B_StockTransferOrdersReceipt</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4021 Приход по заказам на перемещение товаров</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4021B_StockTransferOrdersReceipt</v8:content>
 					</v8:item>
 				</presentation>
@@ -521,6 +961,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R4022B_StockTransferOrdersShipment</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4022 Отгрузка по заказам на перемещение товаров</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R4022B_StockTransferOrdersShipment</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -528,6 +976,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4031B_GoodsInTransitIncoming</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4031 Товары в пути (к приходу)</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4031B_GoodsInTransitIncoming</v8:content>
 					</v8:item>
 				</presentation>
@@ -539,6 +995,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R4032B_GoodsInTransitOutgoing</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4032 Товары в пути (к расходу)</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R4032B_GoodsInTransitOutgoing</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -546,6 +1010,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4033B_GoodsReceiptSchedule</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4033 Планирование прихода товара</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4033B_GoodsReceiptSchedule</v8:content>
 					</v8:item>
 				</presentation>
@@ -557,6 +1029,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R4034B_GoodsShipmentSchedule</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4034 Планирование расхода товара</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R4034B_GoodsShipmentSchedule</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -564,6 +1044,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4035B_IncomingStocks</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4035B Свободные остатки по товарам к приходу</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4035B_IncomingStocks</v8:content>
 					</v8:item>
 				</presentation>
@@ -575,6 +1063,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R4036B_IncomingStocksRequested</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4036 Заявки на планируемый приход товара</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R4036B_IncomingStocksRequested</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -582,6 +1078,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4050B_StockInventory</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4050 Товары организации</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4050B_StockInventory</v8:content>
 					</v8:item>
 				</presentation>
@@ -593,6 +1097,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R4051T_StockAdjustmentAsWriteOff</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4051T Списание товаров</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R4051T_StockAdjustmentAsWriteOff</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -600,6 +1112,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4052T_StockAdjustmentAsSurplus</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4052 Корректировки товаров организации (оприходование)</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4052T_StockAdjustmentAsSurplus</v8:content>
 					</v8:item>
 				</presentation>
@@ -611,6 +1131,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R5010B_ReconciliationStatement</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R5010 Взаиморасчеты по контрагентам</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R5010B_ReconciliationStatement</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -618,6 +1146,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R5011B_PartnersAging</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R5011 Контроль задолженности партнеров</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R5011B_PartnersAging</v8:content>
 					</v8:item>
 				</presentation>
@@ -629,6 +1165,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R5021T_Revenues</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R5021 Доходы</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R5021T_Revenues</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -638,6 +1182,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>R5022T_Expenses</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R5022 Расходы</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>R5022T_Expenses</v8:content>
+					</v8:item>
 				</presentation>
 			</availableValue>
 			<availableValue>
@@ -645,6 +1197,14 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R5041B_TaxesPayable</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R5041 Налоги к оплате</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R5041B_TaxesPayable</v8:content>
 					</v8:item>
 				</presentation>
@@ -658,6 +1218,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Row key</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Ключ строки</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Satır anahtarı</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -667,6 +1235,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Active</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Активный</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Aktif</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -678,6 +1254,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Return reason</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Причина возврата</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>İade sebebi</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -687,6 +1271,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Special offer</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Специальное предложение</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Kampanya</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -698,6 +1290,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Order</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Заказ</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Sipariş</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -707,6 +1307,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Cancel reason</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Причина отмены</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>İptal sebebi</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -718,6 +1326,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Legal name</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Контрагент</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura hesabı</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -727,6 +1343,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Partner</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Партнер</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Cari hesap</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -738,6 +1362,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Basis</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Документ основание</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Kaynak evrak</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -747,6 +1379,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Agreement</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Соглашение</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Sözleşme</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -758,6 +1398,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Tax amount</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма налогов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Vergi tutarı</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -767,6 +1415,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Tax movement type</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Вид поступления</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Vergiler hareket tipi</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -778,6 +1434,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Tax rate</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Налоговая ставка</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Vergi oranı</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -787,6 +1451,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Tax</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Налог</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Vergi</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -798,6 +1470,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Taxable amount</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма оборота</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>KDV Matrahı</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -807,6 +1487,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Sales amount</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма продаж</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Tutar</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -818,6 +1506,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Net offer amount</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма скидки без налогов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Net iskonto tutarı</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -827,6 +1523,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Procurement method</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Метод обеспечения</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Tedarik şekli</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -838,6 +1542,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Sales quantity</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>В реализации товаров</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Satış adedi</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -847,6 +1559,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Re ordered quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>В заказе поставщику</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Alım sipariş adedi</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -858,6 +1578,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Receipt quantity</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>В приходном ордере</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Tedarik adedi</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -867,6 +1595,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Ordered quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>В заказе покупателя</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Satış sipariş adedi</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -878,6 +1614,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Purchase quantity</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>В поступлении товаров</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Alım adedi</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -887,6 +1631,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Shipped quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>В расходном ордере</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Sevk adedi</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -898,6 +1650,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Account</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Касса/Банковский счет</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Kasa/Banka</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -907,6 +1667,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Cheque</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Банковский чек</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Çek/Senet</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -918,6 +1686,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Store</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Склад</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Depo</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -927,6 +1703,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Serial lot number</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Серия номенклатуры</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Seri lot numaraları</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -938,6 +1722,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Internal supply request</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Заявка на обеспечение товара</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>İç talep siparişi</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -947,6 +1739,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Store receiver</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Склад-получатель</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Giriş depo</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -958,6 +1758,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Store sender</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Склад-отправитель</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Gönderen depo</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -967,6 +1775,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Incoming store</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Склад получатель</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Gelen depo</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -978,6 +1794,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Requester store</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Склад заявитель</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Talep eden depo</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -987,6 +1811,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Requester</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Документ заявитель</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Talep eden</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -998,6 +1830,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Payment date</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Дата оплаты</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ödeme tarihi</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -1007,6 +1847,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Additional analytic</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Дополнительная аналитика</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Ek detaylar</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -1018,6 +1866,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Revenue type</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Статья доходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Gelir tipi</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -1027,6 +1883,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Vendors advances closing</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Закрытие авансов поставщиков</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Tedarikçi avans kapatma</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -1038,6 +1902,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Customers advances closing</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Закрытие авансов покупателей</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Müşteri avans kapatma</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -1047,6 +1919,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Aging closing</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Закрытие отсрочек оплат</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Yaşlandırma kapanışı</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -1058,6 +1938,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Expense type</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Статья расходов</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Gider tipi</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -1067,6 +1955,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Profit loss center</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Центр прибыли/убытков</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Kar/Zarar merkezi</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -1078,6 +1974,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Branch</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Структурное подразделение</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Şube</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -1087,6 +1991,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Legal name contract</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Договор контрагента</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura hesap kontratı</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -1098,6 +2010,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Record type</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Тип записи</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Kayıt tipi</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -1107,6 +2027,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Amount with taxes</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сумма с налогами</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Vergi dahil tutar</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -1123,6 +2051,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1206,6 +2142,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1330,6 +2274,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -1376,6 +2328,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1439,6 +2399,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1506,6 +2474,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1594,6 +2570,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -1644,6 +2628,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1744,6 +2736,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -1803,6 +2803,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -1857,6 +2865,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1929,6 +2945,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -1983,6 +3007,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2086,6 +3118,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2202,6 +3242,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -2232,6 +3280,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2283,6 +3339,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2371,6 +3435,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -2454,6 +3526,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -2504,6 +3584,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2579,6 +3667,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2662,6 +3758,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2750,6 +3854,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -2796,6 +3908,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2848,6 +3968,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -2894,6 +4022,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2981,6 +4117,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3073,6 +4217,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -3107,6 +4259,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3187,6 +4347,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -3230,6 +4398,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -3272,6 +4448,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3344,6 +4528,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -3390,6 +4582,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3442,6 +4642,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -3492,6 +4700,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3564,6 +4780,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -3598,6 +4822,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3657,6 +4889,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3725,6 +4965,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -3771,6 +5019,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3838,6 +5094,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3910,6 +5174,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -3953,6 +5225,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -3991,6 +5271,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -4067,6 +5355,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -4121,6 +5417,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -4177,6 +5481,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<dataSource>DataSource1</dataSource>
@@ -4195,6 +5507,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -4283,6 +5603,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -4366,6 +5694,14 @@
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
 					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
+					</v8:item>
 				</title>
 			</field>
 			<field xsi:type="DataSetFieldField">
@@ -4392,6 +5728,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -4479,6 +5823,14 @@
 					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>

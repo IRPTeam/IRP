@@ -327,12 +327,12 @@ Procedure OutputChildrenDocuments(TreeRow)
 
 	CurrentDocument = TreeRow.Ref;
 
-	Table = GetRelatedDocuments(CurrentDocument);
+	RefArray = CommonFunctionsServer.GetRelatedDocuments(CurrentDocument);
 
 	CacheByDocumentTypes = New Map();
 
-	For Each Row In Table Do
-		DocumentMetadata = Row.Ref.Metadata();
+	For Each RefItem In RefArray Do
+		DocumentMetadata = RefItem.Metadata();
 
 		If Not AccessRight("Read", DocumentMetadata) Then
 			Continue;
@@ -348,7 +348,7 @@ Procedure OutputChildrenDocuments(TreeRow)
 			DocumentTypeInfo = New Structure("Synonym, ArrayOfRefs", DocumentSynonym, New Array());
 			CacheByDocumentTypes.Insert(DocumentName, DocumentTypeInfo);
 		EndIf;
-		DocumentTypeInfo.ArrayOfRefs.Add(Row.Ref);
+		DocumentTypeInfo.ArrayOfRefs.Add(RefItem);
 
 	EndDo;
 
@@ -444,18 +444,6 @@ Function GetQueryForDocumentProperties(DocumentRef)
 
 	Query.SetParameter("Ref", DocumentRef);
 	Return Query;
-EndFunction
-
-&AtServer
-Function GetRelatedDocuments(DocumentRef)
-	Query = New Query();
-	Query.Text =
-	"SELECT
-	|	Ref
-	|FROM
-	|	FilterCriterion.RelatedDocuments(&DocumentRef)";
-	Query.SetParameter("DocumentRef", DocumentRef);
-	Return Query.Execute().Unload();
 EndFunction
 
 &AtServer

@@ -711,6 +711,8 @@ Function Strings(Lang) Export
 	Strings.Insert("MF_Error_009", NStr("en = 'Planning closing by [%1] [%2] [%3] alredy exists'", Lang));
 	Strings.Insert("MF_Error_010", NStr("en = 'Select any production planing'", Lang));
 	
+	Strings.Insert("Error_ChangeAttribute_RelatedDocs", NStr("en = 'Cannot change %1 if related documents exist'", Lang));
+	
 #EndRegion
 
 #Region LandedCost

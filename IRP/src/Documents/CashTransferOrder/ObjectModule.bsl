@@ -72,4 +72,28 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If DocCashTransferOrderServer.UseCashAdvanceHolder(ThisObject) Then
 		CheckedAttributes.Add("CashAdvanceHolder");
 	EndIf;
+	
+	If Not ThisObject.Ref.IsEmpty() Then
+		RefAttributes = CommonFunctionsServer.GetAttributesFromRef(ThisObject.Ref, "Receiver, Sender");
+		If Not ThisObject.Receiver = RefAttributes.Receiver Or Not ThisObject.Sender = RefAttributes.Sender Then
+			RefArray = CommonFunctionsServer.GetRelatedDocuments(ThisObject.Ref);
+			If RefArray.Count() Then
+				Cancel = True;
+				If Not ThisObject.Receiver = RefAttributes.Receiver Then
+					ErrorMesage = StrTemplate(R().Error_ChangeAttribute_RelatedDocs, "Receiver") + ":";
+					For Each RefItem In RefArray Do
+						ErrorMesage = ErrorMesage + Chars.CR + Chars.Tab + RefItem;  
+					EndDo; 
+					CommonFunctionsClientServer.ShowUsersMessage(ErrorMesage, "Receiver", ThisObject);
+				EndIf;
+				If Not ThisObject.Sender = RefAttributes.Sender Then
+					ErrorMesage = StrTemplate(R().Error_ChangeAttribute_RelatedDocs, "Sender") + ":";
+					For Each RefItem In RefArray Do
+						ErrorMesage = ErrorMesage + Chars.CR + Chars.Tab + RefItem;  
+					EndDo; 
+					CommonFunctionsClientServer.ShowUsersMessage(ErrorMesage, "Sender", ThisObject);
+				EndIf;
+			EndIf;
+		EndIf;
+	EndIf;
 EndProcedure

@@ -887,3 +887,21 @@ Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
 	Return Result;
 	
 EndFunction
+
+// Get related documents.
+// 
+// Parameters:
+//  DocumentRef - DocumentRef - Document ref
+// 
+// Returns:
+//  Array of DocumentRef - Get related documents
+Function GetRelatedDocuments(DocumentRef) Export
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	Ref
+	|FROM
+	|	FilterCriterion.RelatedDocuments(&DocumentRef)";
+	Query.SetParameter("DocumentRef", DocumentRef);
+	Return Query.Execute().Unload().UnloadColumn(0);
+EndFunction

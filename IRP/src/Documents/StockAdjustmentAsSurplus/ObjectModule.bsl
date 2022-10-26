@@ -52,4 +52,19 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		ItemListTable.FillValues(ThisObject.Store, "Store");
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
+
+	If Not ThisObject.Company.IsEmpty() And Not ThisObject.Store.IsEmpty() Then
+		StoreCompany = CommonFunctionsServer.GetRefAttribute(ThisObject.Store, "Company");
+		If ValueIsFilled(StoreCompany) And Not StoreCompany = ThisObject.Company Then
+			Cancel = True;
+			MessageText = StrTemplate(
+				R().Error_Store_Company,
+				ThisObject.Store,
+				ThisObject.Company);
+			CommonFunctionsClientServer.ShowUsersMessage(
+				MessageText, 
+				"Object.Store", 
+				"Object");
+		EndIf;
+	EndIf;
 EndProcedure

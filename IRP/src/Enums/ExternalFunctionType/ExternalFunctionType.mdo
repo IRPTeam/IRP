@@ -33,4 +33,11 @@
       <value>Execute</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="b3d16ef0-4733-4912-ab40-d7a4e85f54ed">
+    <name>ReturnResultByRegExpMatch</name>
+    <synonym>
+      <key>en</key>
+      <value>Return result by reg exp match</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

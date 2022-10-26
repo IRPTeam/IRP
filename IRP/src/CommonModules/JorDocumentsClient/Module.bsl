@@ -42,6 +42,26 @@ Procedure BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters) 
 		CreditNoteTableName);
 	FormParameters = New Structure("CustomFilter", FilterStructure);
 
+	EnteredItems = New Array;
+	For Each PaymentListItem in Object.PaymentList Do
+		If Not PaymentListItem = CurrentData Then
+			StructureEnteredItem = JorDocumentsClientServer.GetStructureEnteredItem();
+			StructureEnteredItem.Ref = PaymentListItem.BasisDocument;
+			StructureEnteredItem.Company = Object.Company;
+			StructureEnteredItem.Partner = PaymentListItem.Partner;
+			StructureEnteredItem.Agreement = PaymentListItem.Agreement;
+			StructureEnteredItem.Currency = Object.Currency;
+			StructureEnteredItem.Amount = PaymentListItem.TotalAmount;
+			If FilterStructure.QueryParameters.Property("LegalName") Then
+				StructureEnteredItem.LegalName = FilterStructure.QueryParameters.LegalName;
+			EndIf;
+			EnteredItems.Add(StructureEnteredItem);
+		EndIf;
+	EndDo;
+	FormParameters.Insert("EnteredItems", EnteredItems);
+	FormParameters.Insert("DocumentRef",  Parameters.Ref);
+	FormParameters.Insert("DocumentDate", Object.Date);
+
 	OpenForm("DocumentJournal." + Parameters.TableName + ".Form.ChoiceForm", FormParameters, Item, Form.UUID, , Form.URL,
 		Parameters.Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
@@ -51,6 +71,33 @@ Function CreateFilterByParameters(Ref, Parameters, TableName,
 			OpeningEntryTableName2, 
 			DebitNoteTableName, 
 			CreditNoteTableName)
+
+	QueryParameters = New Structure();
+	QueryParameters.Insert("Ref", Ref);
+	QueryParameters.Insert("IsReturnTransactionType", Parameters.IsReturnTransactionType);
+	QueryParameters.Insert("ShowAll", False);
+	
+	QueryText_Doc = GetDocQueryText(QueryParameters, Parameters, TableName, 
+			OpeningEntryTableName1, 
+			OpeningEntryTableName2, 
+			DebitNoteTableName, 
+			CreditNoteTableName);
+	QueryText_DocWithBalance = GetDocWithBalanceQueryText();
+	QueryText_AllDoc = GetAllDocQueryText();
+	QueryText = QueryText_Doc + "; " + QueryText_DocWithBalance + "; " + QueryText_AllDoc;  
+
+	FilterStructure = New Structure();
+	FilterStructure.Insert("QueryText", QueryText);
+	FilterStructure.Insert("QueryParameters", QueryParameters);
+	Return FilterStructure;
+EndFunction
+
+Function GetDocQueryText(QueryParameters, Parameters, TableName, 
+			OpeningEntryTableName1, 
+			OpeningEntryTableName2, 
+			DebitNoteTableName, 
+			CreditNoteTableName)
+
 	QueryText_TableName = 
 	"SELECT ALLOWED
 	|	Obj.Ref,
@@ -151,16 +198,10 @@ Function CreateFilterByParameters(Ref, Parameters, TableName,
 		|	CreditNote.Ref";
 	EndIf;
 
-	QueryParameters = New Structure();
-	QueryParameters.Insert("Ref", Ref);
-	QueryParameters.Insert("IsReturnTransactionType", Parameters.IsReturnTransactionType);
-
 	ArrayOfConditions = New Array();
 	ArrayOfConditionsOpeningEntry = New Array();
 	ArrayOfConditionsDebitNote = New Array();
 	ArrayOfConditionsCreditNote = New Array();
-
-	QueryParameters.Insert("ShowAll", False);
 
 	If Parameters.Property("Type") Then
 		QueryParameters.Insert("Type", Parameters.Type);
@@ -257,11 +298,18 @@ Function CreateFilterByParameters(Ref, Parameters, TableName,
 	If CreditNoteTableName <> Undefined Then
 		QueryText_CreditNote = StrTemplate(QueryText_CreditNote, CreditNoteTableName, ConditionsCreditNoteText);
 	EndIf;
+	
+	Return QueryText_TableName + 
+			QueryText_OpeningEntryTableName1 + 
+			QueryText_OpeningEntryTableName2 + 
+			QueryText_DebitNote	+ 
+			QueryText_CreditNote;
+			
+EndFunction
 
-	QueryText = QueryText_TableName + QueryText_OpeningEntryTableName1 + QueryText_OpeningEntryTableName2 + QueryText_DebitNote
-	+ QueryText_CreditNote +
-	"; 
-	|SELECT ALLOWED
+Function GetDocWithBalanceQueryText()
+	QueryText_DocWithBalance = 
+	"SELECT ALLOWED
 	|	CustomersTransactions.Basis AS Ref,
 	|	CustomersTransactions.Company AS Company,
 	|	CustomersTransactions.Partner AS Partner,
@@ -388,10 +436,131 @@ Function CreateFilterByParameters(Ref, Parameters, TableName,
 	|		FROM
 	|			Doc AS Doc)) AS SalesOrdersToBePaid
 	|WHERE
-	|	SalesOrdersToBePaid.AmountBalance > 0
-	|;
+	|	SalesOrdersToBePaid.AmountBalance > 0";
+	
+	QueryText_Postings =
+	"
+	|UNION ALL
 	|
-	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Postings.Ref,
+	|	Postings.Company,
+	|	Postings.Partner,
+	|	Postings.LegalName,
+	|	Postings.Agreement,
+	|	Postings.Currency,
+	|	SUM(Postings.Amount) AS Amount
+	|FROM
+	|	(SELECT
+	|		CustomersTransactions.Basis AS Ref,
+	|		CustomersTransactions.Company AS Company,
+	|		CustomersTransactions.Partner AS Partner,
+	|		CustomersTransactions.LegalName AS LegalName,
+	|		CustomersTransactions.Agreement AS Agreement,
+	|		CustomersTransactions.Currency AS Currency,
+	|		CASE
+	|			WHEN CustomersTransactions.RecordType = VALUE(AccumulationRecordType.Expense)
+	|				THEN 1
+	|			ELSE -1
+	|		END * CASE
+	|			WHEN &IsReturnTransactionType
+	|				THEN CASE
+	|					WHEN CustomersTransactions.Basis REFS Document.SalesReturn
+	|						THEN -CustomersTransactions.Amount
+	|					ELSE 0
+	|				END
+	|			ELSE CustomersTransactions.Amount
+	|		END AS Amount
+	|	FROM
+	|		AccumulationRegister.R2021B_CustomersTransactions AS CustomersTransactions
+	|	WHERE
+	|		CustomersTransactions.Recorder = &Ref
+	|		AND CustomersTransactions.Period < &Period
+	|		AND
+	|			CustomersTransactions.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|
+	|	UNION ALL
+	|
+	|	SELECT
+	|		VendorsTransactions.Basis,
+	|		VendorsTransactions.Company,
+	|		VendorsTransactions.Partner,
+	|		VendorsTransactions.LegalName,
+	|		VendorsTransactions.Agreement,
+	|		VendorsTransactions.Currency,
+	|		CASE
+	|			WHEN VendorsTransactions.RecordType = VALUE(AccumulationRecordType.Expense)
+	|				THEN 1
+	|			ELSE -1
+	|		END * CASE
+	|			WHEN &IsReturnTransactionType
+	|				THEN CASE
+	|					WHEN VendorsTransactions.Basis REFS Document.PurchaseReturn
+	|						THEN -VendorsTransactions.Amount
+	|					ELSE 0
+	|				END
+	|			ELSE VendorsTransactions.Amount
+	|		END
+	|	FROM
+	|		AccumulationRegister.R1021B_VendorsTransactions AS VendorsTransactions
+	|	WHERE
+	|		VendorsTransactions.Recorder = &Ref
+	|		AND VendorsTransactions.Period < &Period
+	|		AND
+	|			VendorsTransactions.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|
+	|	UNION ALL
+	|
+	|	SELECT
+	|		PurchaseOrdersToBePaid.Order,
+	|		PurchaseOrdersToBePaid.Company,
+	|		PurchaseOrdersToBePaid.Partner,
+	|		PurchaseOrdersToBePaid.LegalName,
+	|		PurchaseOrdersToBePaid.Order.Agreement,
+	|		PurchaseOrdersToBePaid.Currency,
+	|		CASE
+	|			WHEN PurchaseOrdersToBePaid.RecordType = VALUE(AccumulationRecordType.Expense)
+	|				THEN 1
+	|			ELSE -1
+	|		END * PurchaseOrdersToBePaid.Amount
+	|	FROM
+	|		AccumulationRegister.R3025B_PurchaseOrdersToBePaid AS PurchaseOrdersToBePaid
+	|	WHERE
+	|		PurchaseOrdersToBePaid.Recorder = &Ref
+	|		AND PurchaseOrdersToBePaid.Period < &Period
+	|
+	|	UNION ALL
+	|
+	|	SELECT
+	|		SalesOrdersToBePaid.Order,
+	|		SalesOrdersToBePaid.Company,
+	|		SalesOrdersToBePaid.Partner,
+	|		SalesOrdersToBePaid.LegalName,
+	|		SalesOrdersToBePaid.Order.Agreement,
+	|		SalesOrdersToBePaid.Currency,
+	|		CASE
+	|			WHEN SalesOrdersToBePaid.RecordType = VALUE(AccumulationRecordType.Expense)
+	|				THEN 1
+	|			ELSE -1
+	|		END * SalesOrdersToBePaid.Amount
+	|	FROM
+	|		AccumulationRegister.R3024B_SalesOrdersToBePaid AS SalesOrdersToBePaid
+	|	WHERE
+	|		SalesOrdersToBePaid.Recorder = &Ref
+	|		AND SalesOrdersToBePaid.Period < &Period) AS Postings
+	|GROUP BY
+	|	Postings.Ref,
+	|	Postings.Company,
+	|	Postings.Partner,
+	|	Postings.LegalName,
+	|	Postings.Agreement,
+	|	Postings.Currency";
+	Return QueryText_DocWithBalance + QueryText_Postings;
+EndFunction
+
+Function GetAllDocQueryText()
+	Return
+	"////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	DocWithBalance.Ref,
 	|	DocWithBalance.Company,
@@ -438,10 +607,4 @@ Function CreateFilterByParameters(Ref, Parameters, TableName,
 	|	AllDoc.LegalName,
 	|	AllDoc.Agreement,
 	|	AllDoc.Currency";
-
-	FilterStructure = New Structure();
-	FilterStructure.Insert("QueryText", QueryText);
-	FilterStructure.Insert("QueryParameters", QueryParameters);
-
-	Return FilterStructure;
 EndFunction

@@ -5,11 +5,13 @@ Procedure ReadStructureAtServer()
 	ArrayList = New Array;
 	Obj = ConvertXDTO.ObjectXDTOStructure(Object.TypeName, Object.URI, ArrayList, Object.WSName); 
 	TreeData.GetItems().Clear();
-	ObjXDTO = ObjectXDTO(Obj, Object.TypeName, Object.URI, TreeData.GetItems().Add());	
+	NewRow = TreeData.GetItems().Add();
+	NewRow.Name = Object.TypeName;
+	ObjXDTO = ObjectXDTO(Obj, Object.TypeName, Object.URI, NewRow);	
 
 	XML = CommonFunctionsServer.SerializeXMLUseXDTOFactory(ObjXDTO, , , , Object.WSName);
 
-	XSLT = GetCommonTemplate("TR_ESF_XMLPrettyPrint").GetText();
+	XSLT = GetCommonTemplate("XMLPrettyPrint").GetText();
 	
     HTML = CommonFunctionsServer.XSLTransformation(XML, XSLT);
 	
@@ -116,7 +118,11 @@ Function ObjectXDTO(ObjectStructure, TypeName, URI, TreeData)
 
 			EndDo;
 		
-		Else                                               // уже сам реквизит
+		Else
+			NewRow = TreeData.GetItems().Add();
+			NewRow.Name = ObjectData.Key;
+			NewRow.CanBeEmpty = XDTOType.Properties.Get(ObjectData.Key).LowerBound = 0;
+			NewRow.Value = ObjectData.Value;
 			SetObject(DataXDTO, XDTOType, ObjectData.Key, ObjectData.Value, TreeData);
 		EndIf; 
 		

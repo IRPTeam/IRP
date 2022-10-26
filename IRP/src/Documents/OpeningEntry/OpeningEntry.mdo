@@ -954,6 +954,11 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <changeMode>DontChange</changeMode>
+        <field>Document.OpeningEntry.Attribute.Company</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -986,6 +991,19 @@
       <createOnInput>Use</createOnInput>
       <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
       <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b37474a4-1f50-46a2-a20f-e0bf58f9d35f">
+      <name>Price</name>
+      <synonym>
+        <key>en</key>
+        <value>Price</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typePrice</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="7101aa1a-4752-49b2-a447-682c0bb26b07">
       <name>Amount</name>

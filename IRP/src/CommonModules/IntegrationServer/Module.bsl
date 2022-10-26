@@ -24,7 +24,7 @@ Function ConnectionSetting(IntegrationSettingName, AddInfo = Undefined) Export
 	
 	// Customize setting with according IntegrationSettings catalog
 	FillPropertyValues(ConnectionSetting, IntegrationSettings.CustomizedSetting);
-
+	ConnectionSetting.Insert("Headers", New Map);
 	ConnectionSetting.Insert("IntegrationSettingsRef", IntegrationSettings.Ref);
 	ConnectionSetting.Insert("IntegrationType", IntegrationSettings.IntegrationType);
 	ConnectionSetting.Insert("AddData", GetAdditionalSettings(IntegrationSettings.Ref));

@@ -90,6 +90,30 @@ EndProcedure
 
 #EndRegion
 
+#Region QUANTITY
+
+Procedure ItemListQuantityOnChange(Object, Form, CurrentData = Undefined) Export
+	ViewClient_V2.InventoryQuantityOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region PRICE
+
+Procedure ItemListPriceOnChange(Object, Form, CurrentData = Undefined) Export
+	ViewClient_V2.InventorytPriceOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region AMOUNT
+
+Procedure ItemListAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	ViewClient_V2.InventoryAmountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #EndRegion

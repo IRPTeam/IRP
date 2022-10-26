@@ -272,13 +272,6 @@ EndProcedure
 
 Procedure ItemListBillOfMaterialsOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.ItemListBillOfMaterialsOnChange(Object, Form, CurrentData);
-	
-	If CurrentData = Undefined Then
-		CurrentData = Form.Items.ItemList.CurrentData;
-	EndIf;
-	
-	MaterialsData = DocWorkSheetServer.GetMaterialsForWork(CurrentData.BillOfMaterials, Form.UUID);
-	ViewClient_V2.MaterialsLoad(Object, Form, MaterialsData.Address, CurrentData.Key, MaterialsData.GroupColumns, MaterialsData.SumColumns);
 EndProcedure
 
 #EndRegion

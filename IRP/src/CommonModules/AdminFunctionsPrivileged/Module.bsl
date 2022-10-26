@@ -1,7 +1,9 @@
 #Region Public
 
 Procedure CreateUser(UserObject) Export
-	If Not IsInRole(Metadata.Roles.FullAccess) And Not IsInRole(Metadata.Roles.CreateOrModifyUsers) Then
+	If Not IsInRole(Metadata.Roles.FullAccess) And 
+			Not IsInRole(Metadata.Roles.CreateOrModifyUsers) And
+			Not UserObject.AdditionalProperties.Property("isUpdated") Then
 		Raise R().Error_091;
 	EndIf;
 

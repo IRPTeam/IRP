@@ -122,6 +122,22 @@ EndProcedure
 
 #EndRegion
 
+#Region PRICE
+
+Procedure ItemListPriceOnChange(Object, Form, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListPriceOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region AMOUNT
+
+Procedure ItemListAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListAmountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #EndRegion

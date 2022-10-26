@@ -118,6 +118,7 @@ Scenario: _061 test data
 		When Create catalog RowIDs objects (LC)
 		And Delay 10
 		When Create document Bundling objects (LC)
+		When Create catalog ReportOptions objects
 		When Create document GoodsReceipt objects (LC)
 		When Create document PurchaseInvoice objects (for AdditionalCostAllocation) (LC)
 		When Create document InventoryTransfer objects (LC)
@@ -273,6 +274,10 @@ Scenario: _063 filling landed cost in the Item stock adjastment as surplus by pr
 		And I close all	client application windows
 	* Open report
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"	
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I activate field named "OptionsListReportOption" in "OptionsList" table
+		And I select current line in "OptionsList" table
 		And I set checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
@@ -310,7 +315,6 @@ Scenario: _064 filling landed cost in the Item stock adjastment as surplus from 
 		And I input "16.08.2021" text in the field named "DateBegin"
 		And I input "16.08.2021" text in the field named "DateEnd"
 		And I click the button named "Select"
-		Then "Batch balance" window is opened
 		And I click "Run report" button
 	* Check landed cost
 		And "Result" spreadsheet document contains "BathBalance_064_1" template lines by template
@@ -336,7 +340,6 @@ Scenario: _065 filling landed cost in the Item stock adjastment as surplus from 
 		And I input "19.08.2021" text in the field named "DateBegin"
 		And I input "19.08.2021" text in the field named "DateEnd"
 		And I click the button named "Select"
-		Then "Batch balance" window is opened
 		And I click "Run report" button
 	* Check landed cost
 		And "Result" spreadsheet document contains "BathBalance_065_1" template lines by template

@@ -51,6 +51,7 @@
 //  * Error_012 - String - Variable is not named according to the rules.
 //  * Error_013 - String - Value is not unique.
 //  * Error_014 - String - Password and password confirmation do not match.
+//  * Error_015 - String - Password cannot be empty.
 //  * Error_016 - String - There are no more items that you need to order from suppliers in the "Sales order" document.
 //  * Error_017 - String - First, create a "Goods receipt" document or clear the "Goods receipt before Purchase invoice" check box on the "Other" tab.
 //  * Error_018 - String - First, create a "Shipment confirmation" document or clear the "Shipment confirmation before Sales invoice" check box on the "Other" tab.
@@ -412,6 +413,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_012", NStr("en = 'Variable is not named according to the rules.'", Lang));
 	Strings.Insert("Error_013", NStr("en = 'Value is not unique.'", Lang));
 	Strings.Insert("Error_014", NStr("en = 'Password and password confirmation do not match.'", Lang));
+	Strings.Insert("Error_015", NStr("en = 'Password cannot be empty.'", Lang));
 
 	// %1 - Sales order
 	Strings.Insert("Error_016", NStr(
@@ -696,6 +698,23 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_117", NStr("en = 'Sales return when sales by different dates not support'", Lang) + Chars.LF);
 	Strings.Insert("Error_118", NStr("en = 'Cannot set deletion mark, document is closed by [ %1 ]'", Lang) + Chars.LF);
 	Strings.Insert("Error_119", NStr("en = 'Error Eval code'", Lang) + Chars.LF);
+	
+	// manufacturing errors
+	Strings.Insert("MF_Error_001", NStr("en = 'Repetitive materials [%1]'", Lang));
+	Strings.Insert("MF_Error_002", NStr("en = 'Looped semiproduct [%1]'", Lang));
+	Strings.Insert("MF_Error_003", NStr("en = 'Planning by [%1] [%2] [%3] alredy exists'", Lang));
+	Strings.Insert("MF_Error_004", NStr("en = 'Document date [%1] less than Planning date [%2]'", Lang));
+	Strings.Insert("MF_Error_005", NStr("en = 'Document date [%1] less than last Planning correction date [%2]'", Lang));
+	Strings.Insert("MF_Error_006", NStr("en = 'Start date [%1] greater than End date [%2]'", Lang));
+	Strings.Insert("MF_Error_007", NStr("en = 'Start date [%1] intersect Period [%2]'", Lang));
+	Strings.Insert("MF_Error_008", NStr("en = 'End date [%1] intersect Period [%2]'", Lang));
+	Strings.Insert("MF_Error_009", NStr("en = 'Planning closing by [%1] [%2] [%3] alredy exists'", Lang));
+	Strings.Insert("MF_Error_010", NStr("en = 'Select any production planing'", Lang));
+	
+	// Store does not match company
+	Strings.Insert("Error_Store_Company", NStr("en = 'Store [%1] does not match company [%2]'", Lang));
+	Strings.Insert("Error_Store_Company_Row", NStr("en = 'Store [%1] in row [%3] does not match company [%2]'", Lang));
+	
 #EndRegion
 
 #Region LandedCost
@@ -810,6 +829,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_021", NStr("en = 'Do you want to close this form? All changes will be lost.'", Lang));
 	Strings.Insert("QuestionToUser_022", NStr("en = 'Do you want to upload this files'", Lang) + ": " + Chars.LF + "%1");
 	Strings.Insert("QuestionToUser_023", NStr("en = 'Do you want to fill according to cash transfer order?'", Lang));
+	Strings.Insert("QuestionToUser_024", NStr("en = 'Change planning period?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser

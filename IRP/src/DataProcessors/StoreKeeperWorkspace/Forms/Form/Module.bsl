@@ -1,3 +1,9 @@
+
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	EnableButtons();
+EndProcedure
+
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "NewBarcode" And IsInputAvailable() Then
@@ -94,6 +100,8 @@ Procedure GoodsInTransitIncomingRefreshRequestProcessingAtServer()
 	ThisObject.GoodsInTransitIncoming.Load(BasisTableTotal);
 	
 	Items.PagesSettings.CurrentPage = Items.GroupGoodsReceipt;
+	
+	EnableButtons();
 EndProcedure
 
 &AtServer

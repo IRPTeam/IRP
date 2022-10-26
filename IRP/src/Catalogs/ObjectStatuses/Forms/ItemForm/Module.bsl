@@ -41,7 +41,10 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Object.Parent = PredefinedValue("Catalog.ObjectStatuses.ChequeBondIncoming")
 	Or Object.Parent = PredefinedValue("Catalog.ObjectStatuses.ChequeBondOutgoing");
 	
+	IsProductionPlanningCorrection = Object.Parent = PredefinedValue("Catalog.ObjectStatuses.ProductionPlanningCorrection");
+	
 	Form.Items.GroupPosting.Visible = IsCheque;
+	Form.Items.GroupUsers.Visible = IsProductionPlanningCorrection;
 EndProcedure
 
 &AtClient
@@ -52,11 +55,6 @@ EndProcedure
 &AtClient
 Procedure ParentOnChange(Item)
 	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure NextPossibleStatusesStatusStartChoice(Item, ChoiceData, StandardProcessing)
-	ObjectStatusesClient.StatusStartChoice(Object, ThisObject, GetArrayOfFilters(), Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient

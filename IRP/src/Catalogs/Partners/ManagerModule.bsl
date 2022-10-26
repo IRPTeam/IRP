@@ -65,6 +65,8 @@ Function GetCompaniesForPartner(Partner) Export
 	|	Catalog.Companies AS Table
 	|		INNER JOIN TempPartners AS TempPartners
 	|		ON Table.Partner = TempPartners.Partner
+	|WHERE
+	|	NOT Table.DeletionMark
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////

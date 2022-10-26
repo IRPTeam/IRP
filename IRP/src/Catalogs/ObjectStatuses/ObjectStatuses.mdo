@@ -255,6 +255,14 @@
       </code>
       <isFolder>true</isFolder>
     </items>
+    <items id="ac8cd136-f90f-430a-99b8-7b5e1b871a9f">
+      <name>ProductionPlanningCorrection</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>6</value>
+      </code>
+      <isFolder>true</isFolder>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <quickChoice>true</quickChoice>
@@ -375,6 +383,32 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="ddf7abee-5209-44e1-9030-f8e4deae655d">
+    <producedTypes>
+      <objectType typeId="fc6055f6-fc08-441e-82b4-ea9bba4cc3b3" valueTypeId="0df60cc0-86ab-49fc-81dc-eedf417a88bf"/>
+      <rowType typeId="934bcbe7-b761-4902-9c35-b37a94c26c82" valueTypeId="f7fc8cef-5c26-4834-bcad-d0aaef7a640b"/>
+    </producedTypes>
+    <name>Users</name>
+    <synonym>
+      <key>en</key>
+      <value>Users</value>
+    </synonym>
+    <attributes uuid="4761ed49-0134-4f45-84c0-284694101fe9">
+      <name>User</name>
+      <synonym>
+        <key>en</key>
+        <value>User</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Users</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

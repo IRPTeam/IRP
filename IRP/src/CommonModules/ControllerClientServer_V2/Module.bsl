@@ -206,12 +206,16 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 		Parameters.ReadOnlyPropertiesMap.Insert(Upper(TrimAll(Property)), True);
 	EndDo;
 	
+	Parameters.Insert("IsFullRefill_Materials", False);
+	
 	Parameters.Insert("TableName", ServerParameters.TableName);
 	ArrayOfTableNames = New Array();
 	ArrayOfTableNames.Add(ServerParameters.TableName);
 	ArrayOfTableNames.Add("TaxList");
 	ArrayOfTableNames.Add("SpecialOffers");
 	ArrayOfTableNames.Add("SerialLotNumbers");
+	ArrayOfTableNames.Add("BillOfMaterialsList");
+	ArrayOfTableNames.Add("Materials");
 	
 	// MetadataName
 	// Tables.TableName.Columns
@@ -222,16 +226,21 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 												   Parameters.TaxesCache,
 												   Parameters.LoadData);
 	
-	IsItemList    = Upper("ItemList")    = Upper(ServerParameters.TableName);
-	IsPaymentList = Upper("PaymentList") = Upper(ServerParameters.TableName);
+	IsItemList        = Upper("ItemList")    = Upper(ServerParameters.TableName);
+	IsPaymentList     = Upper("PaymentList") = Upper(ServerParameters.TableName);
+	IsProductionsList = Upper("Productions") = Upper(ServerParameters.TableName);
 		
 	Parameters.Insert("ObjectMetadataInfo"     , ServerData.ObjectMetadataInfo);
+	
 	Parameters.Insert("TaxListIsExists"        , 
 		ServerData.ObjectMetadataInfo.Tables.Property("TaxList") And (IsItemList Or IsPaymentList));
 	Parameters.Insert("SpecialOffersIsExists"  , 
 		ServerData.ObjectMetadataInfo.Tables.Property("SpecialOffers") And IsItemList);
 	Parameters.Insert("SerialLotNumbersExists" , 
 		ServerData.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") And IsItemList);	
+	Parameters.Insert("BillOfMaterialsListExists" , 
+		ServerData.ObjectMetadataInfo.Tables.Property("BillOfMaterialsList") And IsProductionsList);	
+	
 	Parameters.Insert("ArrayOfTaxInfo"         , ServerData.ArrayOfTaxInfo);
 	
 	Parameters.LoadData.CountRows                 = ServerData.LoadData.CountRows;
@@ -273,7 +282,6 @@ Function WrapRows(Parameters, Rows) Export
 		ArrayOfRowsTaxList = New Array();
 		TaxRates = New Structure();
 		
-		
 		If Parameters.TaxListIsExists Then
 			// TaxList
 			For Each TaxRow In Parameters.Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
@@ -313,32 +321,38 @@ Function WrapRows(Parameters, Rows) Export
 				FillPropertyValues(NewRowSpecialOffer, SpecialOfferRow);
 				ArrayOfRowsSpecialOffers.Add(NewRowSpecialOffer);
 			EndDo;
-		EndIf;
+		EndIf; // SpecialOffers
 		
 		// SpecialOffersCache
 		ArrayOfRowsSpecialOffersCache = New Array();
-		If Parameters.FormIsExists 
-			And CommonFunctionsClientServer.ObjectHasProperty(Parameters.Form, "SpecialOffersCache") Then
+		If Parameters.FormIsExists And CommonFunctionsClientServer.ObjectHasProperty(Parameters.Form, "SpecialOffersCache") Then
 			For Each SpecialOfferRow In Parameters.Form.SpecialOffersCache.FindRows(New Structure("Key", Row.Key)) Do
 				NewRowSpecialOffer = New Structure("Key, Offer, Amount, Quantity");
 				FillPropertyValues(NewRowSpecialOffer, SpecialOfferRow);
 				ArrayOfRowsSpecialOffersCache.Add(NewRowSpecialOffer);
 			EndDo;
-		EndIf;
+		EndIf; // SpecialOffersCache
+		
+		ArrayOfRowsBillOfMaterialsList = New Array();
+		If Parameters.BillOfMaterialsListExists Then
+			For Each RowBillOfMaterials In Parameters.Object.BillOfMaterialsList.FindRows(New Structure("Key", Row.Key)) Do
+				NewRowBillOfMaterials = New Structure(Parameters.ObjectMetadataInfo.Tables.BillOfMaterialsList.Columns);
+				FillPropertyValues(NewRowBillOfMaterials, RowBillOfMaterials);
+				ArrayOfRowsBillOfMaterialsList.Add(NewRowBillOfMaterials);
+			EndDo;
+		EndIf; // BillOfMaterialsListExists
 		
 		NewRow.Insert("TaxIsAlreadyCalculated" , Parameters.IsBasedOn And ArrayOfRowsTaxList.Count());
 		NewRow.Insert("TaxRates"               , TaxRates);
 		NewRow.Insert("TaxList"                , ArrayOfRowsTaxList);
 		NewRow.Insert("SpecialOffers"          , ArrayOfRowsSpecialOffers);
 		NewRow.Insert("SpecialOffersCache"     , ArrayOfRowsSpecialOffersCache);
+		NewRow.Insert("BillOfMaterialsList"    , ArrayOfRowsBillOfMaterialsList);
 	EndDo;
 	Return ArrayOfRows;
 EndFunction	
 
 #EndRegion
-
-// #optimization 2
-//#IF Client THEN
 
 Procedure FillPropertyFormByDefault(Form, DataPaths, Parameters) Export
 	ArrayOfDataPath = StrSplit(DataPaths, ",");
@@ -366,9 +380,6 @@ Procedure FillPropertyFormByDefault(Form, DataPaths, Parameters) Export
 	EndIf;
 EndProcedure
 
-// #optimization 2
-//#ENDIF
-
 #Region API
 
 // attributes that available through API
@@ -392,6 +403,7 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	SettersMap.Insert("StoreSender"     , "SetStoreSender");
 	SettersMap.Insert("StoreReceiver"   , "SetStoreReceiver");
 	SettersMap.Insert("Workstation"     , "SetWorkstation");
+	SettersMap.Insert("BusinessUnit"    , "SetBusinessUnit");
 	
 	// PaymentList
 	SettersMap.Insert("PaymentList.Partner" , "SetPaymentListPartner");
@@ -432,6 +444,10 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	SettersMap.Insert("Materials.Quantity"           , "SetMaterialsQuantity");
 	SettersMap.Insert("Materials.QuantityBOM"        , "SetMaterialsQuantityBOM");
 	
+	// Manufacturing calculations
+	SettersMap.Insert("Command_UpdateCurrentQuantity"  , "StepChangeCurrentQuantityInProductions");
+	SettersMap.Insert("Command_UpdateByBillOfMaterials", "StepMaterialsCalculations");
+	
 	Return SettersMap.Get(DataPath);
 EndFunction
 
@@ -444,7 +460,7 @@ Procedure API_SetProperty(Parameters, Property, Value, IsBuilder = False) Export
 				For Each _SetterNameOrStepsEnabler In StrSplit(SetterNameOrStepsEnabler, ",") Do
 					_SetterNameOrStepsEnabler = TrimAll(_SetterNameOrStepsEnabler);
 
-					If StrStartsWith(_SetterNameOrStepsEnabler, "Step") Then // steps enabler
+					If StrStartsWith(_SetterNameOrStepsEnabler, "Step") Then // step
 						// ItemList.TotalAmount does not have setter
 						If Upper(Property.DataPath) = Upper("ItemList.TotalAmount") Then
 							If Value <> Undefined Then
@@ -463,8 +479,15 @@ Procedure API_SetProperty(Parameters, Property, Value, IsBuilder = False) Export
 				EndDo;
 			EndDo;
 		Else
-			Results = ResultArray(Undefined, Value);
-			ExecuteSetterByName(Parameters, Results, SetterNameOrStepsEnabler);
+			For Each _SetterNameOrStepsEnabler In StrSplit(SetterNameOrStepsEnabler, ",") Do
+				_SetterNameOrStepsEnabler = TrimAll(_SetterNameOrStepsEnabler);
+				If StrStartsWith(_SetterNameOrStepsEnabler, "Step") Then // step
+					ModelClientServer_V2.EntryPoint(_SetterNameOrStepsEnabler, Parameters);
+				Else // setter
+					Results = ResultArray(Undefined, Value);
+					ExecuteSetterByName(Parameters, Results, SetterNameOrStepsEnabler);
+				EndIf;
+			EndDo;
 		EndIf;
 	Else
 		If IsColumn Then
@@ -508,6 +531,11 @@ Function GetAllBindings(Parameters)
 	BindingMap.Insert("Materials.Unit"     , BindMaterialsUnit(Parameters));
 	BindingMap.Insert("Materials.Quantity" , BindMaterialsQuantity(Parameters));
 	
+	BindingMap.Insert("Productions.Item"     , BindProductionsItem(Parameters));
+	BindingMap.Insert("Productions.ItemKey"  , BindProductionsItemKey(Parameters));
+	BindingMap.Insert("Productions.Unit"     , BindProductionsUnit(Parameters));
+	BindingMap.Insert("Productions.Quantity" , BindProductionsQuantity(Parameters));
+	
 	Return BindingMap;
 EndFunction
 
@@ -524,6 +552,8 @@ Function GetAllBindingsByDefault(Parameters)
 	Binding.Insert("PaymentList."          , BindDefaultPaymentListTaxRate(Parameters));
 	
 	Binding.Insert("Materials.Quantity"    , BindDefaultMaterialsQuantity(Parameters));
+	
+	Binding.Insert("Productions.Quantity"  , BindDefaultProductionsQuantity(Parameters));
 	
 	Return Binding;
 EndFunction
@@ -699,8 +729,10 @@ Procedure DeleteRows(TableName, Parameters, ViewNotify = Undefined) Export
 	For Each SubordinateTableName In Parameters.ObjectMetadataInfo.SubordinateTables Do
 		ArrayForDelete = New Array();
 		For Each Row In Parameters.Object[SubordinateTableName] Do
-			If Not Parameters.Object[TableName].FindRows(New Structure("Key", Row.KeyOwner)).Count() Then
-				ArrayForDelete.Add(Row);
+			If CommonFunctionsClientServer.ObjectHasProperty(Row, "KeyOwner") Then
+				If Not Parameters.Object[TableName].FindRows(New Structure("Key", Row.KeyOwner)).Count() Then
+					ArrayForDelete.Add(Row);
+				EndIf;
 			EndIf;
 		EndDo;
 		For Each ItemForDelete In ArrayForDelete Do
@@ -1235,6 +1267,9 @@ Function BindTransactionType(Parameters)
 	Binding.Insert("CashReceipt" , 
 		"StepClearByTransactionTypeCashReceipt,
 		|StepChangeCashAccountByTransactionType");
+	
+	Binding.Insert("ShipmentConfirmation" , "StepChangePartnerByTransactionType");
+	Binding.Insert("GoodsReceipt"         , "StepChangePartnerByTransactionType");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -1971,6 +2006,15 @@ Function BindDate(Parameters)
 		"StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_WithoutAgreement");
 		
+	Binding.Insert("ProductionPlanning", 
+		"StepChangePlanningPeriodByDateAndBusinessUnit");
+		
+	Binding.Insert("ProductionPlanningCorrection", 
+		"StepChangePlanningPeriodByDateAndBusinessUnit");
+
+	Binding.Insert("Production", 
+		"StepChangePlanningPeriodByDateAndBusinessUnit");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -2113,6 +2157,10 @@ Function BindCompany(Parameters)
 	
 	Binding.Insert("StockAdjustmentAsWriteOff",
 		"StepChangeLandedCostCurrencyByCompany");
+	
+	Binding.Insert("ProductionPlanningCorrection",
+		"StepChangeProductionPlanningByPlanningPeriod,
+		|StepChangeCurrentQuantityInProductions");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -2258,6 +2306,17 @@ Procedure StepChangePartnerByRetailCustomer(Parameters, Chain) Export
 	Options.RetailCustomer = GetRetailCustomer(Parameters);
 	Options.StepName = "StepChangePartnerByRetailCustomer";
 	Chain.ChangePartnerByRetailCustomer.Options.Add(Options);
+EndProcedure
+
+// Partner.ChangePartnerByTransactionType.Step
+Procedure StepChangePartnerByTransactionType(Parameters, Chain) Export
+	Chain.ChangePartnerByTransactionType.Enable = True;
+	Chain.ChangePartnerByTransactionType.Setter = "SetPartner";
+	Options = ModelClientServer_V2.ChangePartnerByTransactionTypeOptions();
+	Options.TransactionType = GetTransactionType(Parameters);
+	Options.Partner         = GetPartner(Parameters);
+	Options.StepName = "StepChangePartnerByTransactionType";
+	Chain.ChangePartnerByTransactionType.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -2874,6 +2933,29 @@ EndFunction
 
 #EndRegion
 
+#Region STORE_PRODUCTION
+
+// StoreProduction.OnChange
+Procedure StoreProductionOnChange(Parameters) Export
+	Binding = BindStoreProduction(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// StoreProduction.Set
+Procedure SetStoreProduction(Parameters, Results) Export
+	Binding = BindStoreProduction(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// StoreProduction.Bind
+Function BindStoreProduction(Parameters)
+	DataPath = "StoreProduction";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
 #Region USE_SHIPMENT_CONFIRMATION
 
 // UseShipmentConfirmation.OnChange
@@ -3250,8 +3332,16 @@ EndFunction
 Function BindQuantity(Parameters)
 	DataPath = "Quantity";
 	Binding = New Structure();
-	Binding.Insert("Bundling"   , "StepCovertQuantityToQuantityInBaseUnit_ItemBundle");
-	Binding.Insert("Unbundling" , "StepCovertQuantityToQuantityInBaseUnit_ItemKeyBundle");
+	
+	Binding.Insert("Bundling",
+		"StepCovertQuantityToQuantityInBaseUnit_ItemBundle");
+	
+	Binding.Insert("Unbundling",
+		"StepCovertQuantityToQuantityInBaseUnit_ItemKeyBundle");
+	
+	Binding.Insert("Production",
+		"StepMaterialsRecalculateQuantity");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -3325,11 +3415,28 @@ EndFunction
 Function BindUnit(Parameters)
 	DataPath = "Unit";
 	Binding = New Structure();
-	Binding.Insert("Bundling"   , "StepCovertQuantityToQuantityInBaseUnit_ItemBundle");
-	Binding.Insert("Unbundling" , "StepCovertQuantityToQuantityInBaseUnit_ItemKeyBundle");
+	
+	Binding.Insert("Bundling", 
+		"StepCovertQuantityToQuantityInBaseUnit_ItemBundle");
+	
+	Binding.Insert("Unbundling",
+		"StepCovertQuantityToQuantityInBaseUnit_ItemKeyBundle");
+	
+	Binding.Insert("Production",
+		"StepMaterialsRecalculateQuantity");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
+
+// Unit.ChangeUnitByItemKey.Step
+Procedure StepChangeUnitByItemKey(Parameters, Chain) Export
+	Chain.ChangeUnitByItemKey.Enable = True;
+	Chain.ChangeUnitByItemKey.Setter = "SetUnit";
+	Options = ModelClientServer_V2.ChangeUnitByItemKeyOptions();
+	Options.ItemKey = GetItemKey(Parameters);
+	Options.StepName = "StepChangeUnitByItemKey";
+	Chain.ChangeUnitByItemKey.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 
@@ -3393,6 +3500,287 @@ EndFunction
 
 #EndRegion
 
+#Region _ITEM
+
+// Item.OnChange
+Procedure ItemOnChange(Parameters) Export
+	Binding = BindItem(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Item.Set
+Procedure SetItem(Parameters, Results) Export
+	Binding = BindItem(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Item.Get
+Function GetItem(Parameters)
+	Return GetPropertyObject(Parameters, BindItem(Parameters).DataPath);
+EndFunction
+
+// Item.Bind
+Function BindItem(Parameters)
+	DataPath = "Item";
+	Binding = New Structure();
+	
+	Binding.Insert("Production", 
+		"StepChangeItemKeyByItem");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_KEY
+
+// ItemKey.OnChange
+Procedure ItemKeyOnChange(Parameters) Export
+	Binding = BindItemKey(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemKey.Set
+Procedure SetItemKey(Parameters, Results) Export
+	Binding = BindItemKey(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemKey.Get
+Function GetItemKey(Parameters)
+	Return GetPropertyObject(Parameters, BindItemKey(Parameters).DataPath);
+EndFunction
+
+// ItemKey.Bind
+Function BindItemKey(Parameters)
+	DataPath = "ItemKey";
+	Binding = New Structure();
+	
+	Binding.Insert("Production",
+		"StepChangeUnitByItemKey,
+		|StepChangeBillOfMaterialsByItemKey");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemKey.ChangeItemKeyByItem.Step
+Procedure StepChangeItemKeyByItem(Parameters, Chain) Export
+	Chain.ChangeItemKeyByItem.Enable = True;
+	Chain.ChangeItemKeyByItem.Setter = "SetItemKey";
+	Options = ModelClientServer_V2.ChangeItemKeyByItemOptions();
+	Options.Item    = GetItem(Parameters);
+	Options.ItemKey = GetItemKey(Parameters);
+	Options.StepName = "StepChangeItemKeyByItem";
+	Chain.ChangeItemKeyByItem.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region BILL_OF_MATERIALS
+
+// BillOfMaterials.OnChange
+Procedure BillOfMaterialsOnChange(Parameters) Export
+	AddViewNotify("OnSetBillOfMaterialsNotify", Parameters);
+	Binding = BindBillOfMaterials(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// BillOfMaterials.Set
+Procedure SetBillOfMaterials(Parameters, Results) Export
+	Binding = BindBillOfMaterials(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetBillOfMaterialsNotify");
+EndProcedure
+
+// BillOfMaterials.Get
+Function GetBillOfMaterials(Parameters)
+	Return GetPropertyObject(Parameters, BindBillOfMaterials(Parameters).DataPath);
+EndFunction
+
+// BillOfMaterials.Bind
+Function BindBillOfMaterials(Parameters)
+	DataPath = "BillOfMaterials";
+	Binding = New Structure();
+	
+	Binding.Insert("Production",
+		"StepMaterialsCalculations,
+		|StepChangeCostMultiplierRatioByBillOfMaterials");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// BillOfMaterials.ChangeBillOfMaterialsByItemKey.Step
+Procedure StepChangeBillOfMaterialsByItemKey(Parameters, Chain) Export
+	Chain.ChangeBillOfMaterialsByItemKey.Enable = True;
+	Chain.ChangeBillOfMaterialsByItemKey.Setter = "SetBillOfMaterials";
+	Options = ModelClientServer_V2.ChangeBillOfMaterialsByItemKeyOptions();
+	Options.ItemKey = GetItemKey(Parameters);
+	Options.CurrentBillOfMaterials = GetBillOfMaterials(Parameters);
+	Options.StepName = "StepChangeBillOfMaterialsByItemKey";
+	Chain.ChangeBillOfMaterialsByItemKey.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region COST_MULTIPLIER_RATIO
+
+// CostMultiplierRatio.Set
+Procedure SetCostMultiplierRatio(Parameters, Results) Export
+	Binding = BindCostMultiplierRatio(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// CostMultiplierRatio.Bind
+Function BindCostMultiplierRatio(Parameters)
+	DataPath = "CostMultiplierRatio";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// CostMultiplierRatio.ChangeCostMultiplierRatioByBillOfMaterials.Step
+Procedure StepChangeCostMultiplierRatioByBillOfMaterials(Parameters, Chain) Export
+	Chain.ChangeCostMultiplierRatioByBillOfMaterials.Enable = True;
+	Chain.ChangeCostMultiplierRatioByBillOfMaterials.Setter = "SetCostMultiplierRatio";
+	Options = ModelClientServer_V2.ChangeCostMultiplierRatioByBillOfMaterialsOptions();
+	Options.BillOfMaterials = GetBillOfMaterials(Parameters);
+	Options.StepName = "StepChangeCostMultiplierRatioByBillOfMaterials";
+	Chain.ChangeCostMultiplierRatioByBillOfMaterials.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTION_PLANNING
+
+// ProductionPlanning.Set
+Procedure SetProductionPlanning(Parameters, Results) Export
+	Binding = BindProductionPlanning(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ProductionPlanning.Get
+Function GetProductionPlanning(Parameters)
+	Return GetPropertyObject(Parameters, BindProductionPlanning(Parameters).DataPath);
+EndFunction
+
+// ProductionPlanning.Bind
+Function BindProductionPlanning(Parameters)
+	DataPath = "ProductionPlanning";
+	Binding = New Structure();
+	
+	Binding.Insert("ProductionPlanningCorrection",
+		"StepChangeCurrentQuantityInProductions");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ProductionPlanning.ChangeProductionPlanningByPlanningPeriod.Step
+Procedure StepChangeProductionPlanningByPlanningPeriod(Parameters, Chain) Export
+	Chain.ChangeProductionPlanningByPlanningPeriod.Enable = True;
+	Chain.ChangeProductionPlanningByPlanningPeriod.Setter = "SetProductionPlanning";
+	Options = ModelClientServer_V2.ChangeProductionPlanningByPlanningPeriodOptions();
+	Options.Company        = GetCompany(Parameters);
+	Options.BusinessUnit   = GetBusinessUnit(Parameters);
+	Options.PlanningPeriod = GetPlanningPeriod(Parameters);
+	Options.CurrentProductionPlanning = GetProductionPlanning(Parameters);
+	Options.DontExecuteIfExecutedBefore = True;
+	Options.StepName = "StepChangeProductionPlanningByPlanningPeriod";
+	Chain.ChangeProductionPlanningByPlanningPeriod.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region PLANNING_PERIOD
+
+// PlanningPeriod.OnChange
+Procedure PlanningPeriodOnChange(Parameters) Export
+	AddViewNotify("OnSetPlanningPeriodNotify", Parameters);
+	Binding = BindPlanningPeriod(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PlanningPeriod.Set
+Procedure SetPlanningPeriod(Parameters, Results) Export
+	Binding = BindPlanningPeriod(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPlanningPeriodNotify");
+EndProcedure
+
+// PlanningPeriod.Get
+Function GetPlanningPeriod(Parameters)
+	Return GetPropertyObject(Parameters, BindPlanningPeriod(Parameters).DataPath);
+EndFunction
+
+// PlanningPeriod.Bind
+Function BindPlanningPeriod(Parameters)
+	DataPath = "PlanningPeriod";
+	Binding = New Structure();
+	
+	Binding.Insert("ProductionPlanning",
+		"StepBillOfMaterialsListCalculations");
+	
+	Binding.Insert("ProductionPlanningCorrection",
+		"StepChangeProductionPlanningByPlanningPeriod,
+		|StepChangeCurrentQuantityInProductions,
+		|StepBillOfMaterialsListCalculationsCorrection");
+	
+	Binding.Insert("Production",
+		"StepChangeProductionPlanningByPlanningPeriod");
+		
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// PlanningPeriod.ChangePlanningPeriodByDateAndBusinessUnit.Step
+Procedure StepChangePlanningPeriodByDateAndBusinessUnit(Parameters, Chain) Export
+	Chain.ChangePlanningPeriodByDateAndBusinessUnit.Enable = True;
+	Chain.ChangePlanningPeriodByDateAndBusinessUnit.Setter = "SetPlanningPeriod";
+	Options = ModelClientServer_V2.ChangePlanningPeriodByDateAndBusinessUnitOptions();
+	Options.Date = GetDate(Parameters);
+	Options.BusinessUnit = GetBusinessUnit(Parameters);
+	Options.StepName = "StepChangePlanningPeriodByDateAndBusinessUnit";
+	Chain.ChangePlanningPeriodByDateAndBusinessUnit.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region BUSINESS_UNIT
+
+// BusinessUnit.OnChange
+Procedure BusinessUnitOnChange(Parameters) Export
+	AddViewNotify("OnSetBusinessUnitNotify", Parameters);
+	Binding = BindBusinessUnit(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// BusinessUnit.Set
+Procedure SetBusinessUnit(Parameters, Results) Export
+	Binding = BindBusinessUnit(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetBusinessUnitNotify");
+EndProcedure
+
+// BusinessUnit.Get
+Function GetBusinessUnit(Parameters)
+	Return GetPropertyObject(Parameters, BindBusinessUnit(Parameters).DataPath);
+EndFunction
+
+// BusinessUnit.Bind
+Function BindBusinessUnit(Parameters)
+	DataPath = "BusinessUnit";
+	Binding = New Structure();
+	Binding.Insert("ProductionPlanning", 
+		"StepChangePlanningPeriodByDateAndBusinessUnit,
+		|StepBillOfMaterialsListCalculations");
+	                                     
+	Binding.Insert("ProductionPlanningCorrection", 
+		"StepChangePlanningPeriodByDateAndBusinessUnit,
+		|StepChangeProductionPlanningByPlanningPeriod,
+		|StepBillOfMaterialsListCalculationsCorrection");
+
+	Binding.Insert("Production", 
+		"StepChangePlanningPeriodByDateAndBusinessUnit");
+		
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
 #Region PAYMENT_TERMS_LIST
 
 // PaymentTerms.Set
@@ -3441,6 +3829,9 @@ Procedure StepChangePaymentTermsByAgreement(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangePaymentTermsByAgreementOptions();
 	Options.Agreement = GetAgreement(Parameters);
 	Options.Date      = GetDate(Parameters);
+	If Options.Date = Date(1,1,1) Then
+		Options.Date = BegOfDay(CurrentDate());
+	EndIf;
 	Options.ArrayOfPaymentTerms = GetPaymentTerms(Parameters);
 	TotalAmount = 0;
 	For Each Row In Parameters.Object[Parameters.TableName] Do
@@ -5483,6 +5874,376 @@ EndProcedure
 
 #EndRegion
 
+#Region PRODUCTIONS
+
+#Region PRODUCTIONS_ITEM
+
+// Productions.Item.OnChange
+Procedure ProductionsItemOnChange(Parameters) Export
+	Binding = BindProductionsItem(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Productions.Item.Set
+Procedure SetProductionsItem(Parameters, Results) Export
+	Binding = BindProductionsItem(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Productions.Item.Get
+Function GetProductionsItem(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindProductionsItem(Parameters).DataPath, _Key);
+EndFunction
+
+// Productions.Item.Bind
+Function BindProductionsItem(Parameters)
+	DataPath = "Productions.Item";
+	Binding = New Structure();
+	Binding.Insert("ProductionPlanning"           , "StepProductionsChangeItemKeyByItem");
+	Binding.Insert("ProductionPlanningCorrection" , "StepProductionsChangeItemKeyByItem");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PRODUCTIONS_ITEMKEY
+
+// Productions.ItemKey.OnChange
+Procedure ProductionsItemKeyOnChange(Parameters) Export
+	Binding = BindProductionsItemKey(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Productions.ItemKey.Set
+Procedure SetProductionsItemKey(Parameters, Results) Export
+	Binding = BindProductionsItemKey(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Productions.ItemKey.Get
+Function GetProductionsItemKey(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindProductionsItemKey(Parameters).DataPath, _Key);
+EndFunction
+
+// Productions.ItemKey.Bind
+Function BindProductionsItemKey(Parameters)
+	DataPath = "Productions.ItemKey";
+	Binding = New Structure();
+	
+	Binding.Insert("ProductionPlanning", 
+		"StepProductionsChangeUnitByItemKey,
+		|StepProductionsChangeBillOfMaterialsByItemKey");
+		
+	Binding.Insert("ProductionPlanningCorrection",
+		"StepProductionsChangeUnitByItemKey,
+		|StepProductionsChangeBillOfMaterialsByItemKey,
+		|StepChangeCurrentQuantityInProductions");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Productions.ItemKey.ChangeItemKeyByItem.Step
+Procedure StepProductionsChangeItemKeyByItem(Parameters, Chain) Export
+	Chain.ChangeItemKeyByItem.Enable = True;
+	Chain.ChangeItemKeyByItem.Setter = "SetProductionsItemKey";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeItemKeyByItemOptions();
+		Options.Item    = GetProductionsItem(Parameters, Row.Key);
+		Options.ItemKey = GetProductionsItemKey(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepProductionsChangeItemKeyByItem";
+		Chain.ChangeItemKeyByItem.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTIONS_UNIT
+
+// Productions.Unit.OnChange
+Procedure ProductionsUnitOnChange(Parameters) Export
+	Binding = BindProductionsUnit(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Productions.Unit.Set
+Procedure SetProductionsUnit(Parameters, Results) Export
+	Binding = BindProductionsUnit(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Productions.Unit.Get
+Function GetProductionsUnit(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindProductionsUnit(Parameters).DataPath, _Key);
+EndFunction
+
+// Productions.Unit.Bind
+Function BindProductionsUnit(Parameters)
+	DataPath = "Productions.Unit";
+	Binding = New Structure();
+	
+	Binding.Insert("ProductionPlanning",
+		"StepBillOfMaterialsListCalculations");
+	
+	Binding.Insert("ProductionPlanningCorrection",
+		"StepBillOfMaterialsListCalculationsCorrection");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Productions.Unit.ChangeUnitByItemKey.Step
+Procedure StepProductionsChangeUnitByItemKey(Parameters, Chain) Export
+	Chain.ChangeUnitByItemKey.Enable = True;
+	Chain.ChangeUnitByItemKey.Setter = "SetProductionsUnit";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeUnitByItemKeyOptions();
+		Options.ItemKey = GetProductionsItemKey(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepProductionsChangeUnitByItemKey";
+		Chain.ChangeUnitByItemKey.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTIONS_QUANTITY
+
+// Productions.Quantity.OnChange
+Procedure ProductionsQuantityOnChange(Parameters) Export
+	Binding = BindProductionsQuantity(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Productions.Quantity.Set
+Procedure SetProductionsQuantity(Parameters, Results) Export
+	Binding = BindProductionsQuantity(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Productions.Quantity.Get
+Function GetProductionsQuantity(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindProductionsQuantity(Parameters).DataPath, _Key);
+EndFunction
+
+// Productions.Quantity.Default.Bind
+Function BindDefaultProductionsQuantity(Parameters)
+	DataPath = "Productions.Quantity";
+	Binding = New Structure();
+	Binding.Insert("ProductionPlanning"           , "StepProductionsDefaultQuantityInList");
+	Binding.Insert("ProductionPlanningCorrection" , "StepProductionsDefaultQuantityInList");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Productions.Quantity.Bind
+Function BindProductionsQuantity(Parameters)
+	DataPath = "Productions.Quantity";
+	Binding = New Structure();
+	
+	Binding.Insert("ProductionPlanning",
+		"StepBillOfMaterialsListCalculations");
+	
+	Binding.Insert("ProductionPlanningCorrection",
+		"StepChangeCurrentQuantityInProductions,
+		|StepBillOfMaterialsListCalculationsCorrection");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Productions.Quantity.DefaultQuantityInList.Step
+Procedure StepProductionsDefaultQuantityInList(Parameters, Chain) Export
+	Chain.DefaultQuantityInList.Enable = True;
+	Chain.DefaultQuantityInList.Setter = "SetProductionsQuantity";
+	Options = ModelClientServer_V2.DefaultQuantityInListOptions();
+	NewRow = Parameters.RowFilledByUserSettings;
+	Options.CurrentQuantity = GetProductionsQuantity(Parameters, NewRow.Key);
+	Options.Key = NewRow.Key;
+	Chain.DefaultQuantityInList.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTIONS_BILL_OF_MATERIALS
+
+// Productions.BillOfMaterials.OnChange
+Procedure ProductionsBillOfMaterialsOnChange(Parameters) Export
+	Binding = BindProductionsBillOfMaterials(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Productions.BillOfMaterials.Set
+Procedure SetProductionsBillOfMaterials(Parameters, Results) Export
+	Binding = BindProductionsBillOfMaterials(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Productions.BillOfMaterials.Get
+Function GetProductionsBillOfMaterials(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindProductionsBillOfMaterials(Parameters).DataPath, _Key);
+EndFunction
+
+// Productions.BillOfMaterials.Bind
+Function BindProductionsBillOfMaterials(Parameters)
+	DataPath = "Productions.BillOfMaterials";
+	Binding = New Structure();
+	
+	Binding.Insert("ProductionPlanning",
+		"StepBillOfMaterialsListCalculations");
+	
+	Binding.Insert("ProductionPlanningCorrection",
+		"StepChangeCurrentQuantityInProductions,
+		|StepBillOfMaterialsListCalculationsCorrection");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Productions.BillOfMaterials.ChangeBillOfMaterialsByItemKey.Step
+Procedure StepProductionsChangeBillOfMaterialsByItemKey(Parameters, Chain) Export
+	Chain.ChangeBillOfMaterialsByItemKey.Enable = True;
+	Chain.ChangeBillOfMaterialsByItemKey.Setter = "SetProductionsBillOfMaterials";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeBillOfMaterialsByItemKeyOptions();
+		Options.ItemKey = GetProductionsItemKey(Parameters, Row.Key);
+		Options.CurrentBillOfMaterials = GetProductionsBillOfMaterials(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepProductionsChangeBillOfMaterialsByItemKey";
+		Chain.ChangeBillOfMaterialsByItemKey.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTIONS_CURRENT_QUANTITY
+
+// Productions.CurrentQuantity.MultiSet
+Procedure MultiSetProductionsCurrentQuantity(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Unit"            , BindProductionsUnit(Parameters));
+	ResourceToBinding.Insert("CurrentQuantity" , BindProductionsCurrentQuantity(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding, "OnSetProductionsCurrentQuantityNotify");
+EndProcedure
+
+// Productions.CurrentQuantity.Get
+Function GetProductionsCurrentQuantity(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindProductionsCurrentQuantity(Parameters).DataPath, _Key);
+EndFunction
+
+// Productions.CurrentQuantity.Bind
+Function BindProductionsCurrentQuantity(Parameters)
+	DataPath = "Productions.CurrentQuantity";
+	Binding = New Structure();
+	
+	Binding.Insert("ProductionPlanningCorrection",
+		"StepBillOfMaterialsListCalculationsCorrection");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Productions.CurrentQuantity.ChangeCurrentQuantityInProductions.Step
+Procedure StepChangeCurrentQuantityInProductions(Parameters, Chain) Export
+	Chain.ChangeCurrentQuantityInProductions.Enable = True;
+	Chain.ChangeCurrentQuantityInProductions.Setter = "MultiSetProductionsCurrentQuantity";
+	Chain.ChangeCurrentQuantityInProductions.IsLazyStep = True;
+	Chain.ChangeCurrentQuantityInProductions.LazyStepName = "StepChangeCurrentQuantityInProductions";
+	
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeCurrentQuantityInProductionsOptions();
+		Options.Company             = GetCompany(Parameters);
+		Options.ProductionPlanning  = GetProductionPlanning(Parameters);
+		Options.PlanningPeriod      = GetPlanningPeriod(Parameters);
+		Options.BillOfMaterials     = GetProductionsBillOfMaterials(Parameters, Row.Key);
+		Options.ItemKey             = GetProductionsItemKey(Parameters, Row.Key);
+		Options.Unit                = GetProductionsUnit(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepChangeCurrentQuantityInProductions";
+		Chain.ChangeCurrentQuantityInProductions.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region BILL_OF_MATERIALS_LIST
+
+// BillOfMaterialsList.Set
+Procedure SetBillOfMaterialsList(Parameters, Results) Export
+	For Each Result In Results Do
+		If Result.Value.BillOfMaterialsList.Count() Then
+			If Not Parameters.Cache.Property("BillOfMaterialsList") Then
+				Parameters.Cache.Insert("BillOfMaterialsList", New Array());
+			EndIf;
+			
+			// remove from cache old rows
+			Count = Parameters.Cache.BillOfMaterialsList.Count();
+			For i = 1 To Count Do
+				Index = Count - i;
+				ArrayItem = Parameters.Cache.BillOfMaterialsList[Index];
+				If ArrayItem.Key = Result.Options.Key Then
+					Parameters.Cache.BillOfMaterialsList.Delete(Index);
+				EndIf;
+			EndDo;
+			
+			// add new rows
+			For Each Row In Result.Value.BillOfMaterialsList Do
+				Parameters.Cache.BillOfMaterialsList.Add(Row);
+			EndDo;
+		EndIf;
+	EndDo;
+EndProcedure
+
+// Step.BillOfMaterialsList.Calculations
+Procedure StepBillOfMaterialsListCalculations(Parameters, Chain) Export
+	Chain.BillOfMaterialsListCalculations.Enable = True;
+	Chain.BillOfMaterialsListCalculations.Setter = "SetBillOfMaterialsList";
+	Chain.BillOfMaterialsListCalculations.IsLazyStep = True;
+	Chain.BillOfMaterialsListCalculations.LazyStepName = "StepBillOfMaterialsListCalculations";
+	
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.BillOfMaterialsListCalculationsOptions();
+		
+		Options.Company          = GetCompany(Parameters); 
+		Options.BillOfMaterials  = GetProductionsBillOfMaterials(Parameters, Row.Key);
+		Options.PlanningPeriod   = GetPlanningPeriod(Parameters);
+		Options.ItemKey          = GetProductionsItemKey(Parameters, Row.Key);
+		Options.Unit             = GetProductionsUnit(Parameters, Row.Key);
+		Options.Quantity         = GetProductionsQuantity(Parameters, Row.Key);
+		
+		Options.BillOfMaterialsList = Row.BillOfMaterialsList;
+		Options.BillOfMaterialsListColumns = Parameters.ObjectMetadataInfo.Tables.BillOfMaterialsList.Columns;
+		Options.Key = Row.Key;
+		Options.StepName = "StepBillOfMaterialsListCalculations";
+		Chain.BillOfMaterialsListCalculations.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+// Step.BillOfMaterialsList.CalculationsCorrection
+Procedure StepBillOfMaterialsListCalculationsCorrection(Parameters, Chain) Export
+	Chain.BillOfMaterialsListCalculationsCorrection.Enable = True;
+	Chain.BillOfMaterialsListCalculationsCorrection.Setter = "SetBillOfMaterialsList";
+	Chain.BillOfMaterialsListCalculationsCorrection.IsLazyStep = True;
+	Chain.BillOfMaterialsListCalculationsCorrection.LazyStepName = "StepBillOfMaterialsListCalculationsCorrection";
+	
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.BillOfMaterialsListCalculationsCorrectionOptions();
+		
+		Options.Company          = GetCompany(Parameters); 
+		Options.BillOfMaterials  = GetProductionsBillOfMaterials(Parameters, Row.Key);
+		Options.PlanningPeriod   = GetPlanningPeriod(Parameters);
+		Options.ItemKey          = GetProductionsItemKey(Parameters, Row.Key);
+		Options.Unit             = GetProductionsUnit(Parameters, Row.Key);
+		Options.Quantity         = GetProductionsQuantity(Parameters, Row.Key);
+		Options.CurrentQuantity  = GetProductionsCurrentQuantity(Parameters, Row.Key);
+		
+		Options.BillOfMaterialsList = Row.BillOfMaterialsList;
+		Options.BillOfMaterialsListColumns = Parameters.ObjectMetadataInfo.Tables.BillOfMaterialsList.Columns;		
+		Options.Key = Row.Key;
+		Options.StepName = "StepBillOfMaterialsListCalculationsCorrection";
+		Chain.BillOfMaterialsListCalculationsCorrection.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 #Region MATERIALS
 
 #Region MATERIALS_BILL_OF_MATERIALS
@@ -5535,8 +6296,16 @@ EndFunction
 Function BindMaterialsItem(Parameters)
 	DataPath = "Materials.Item";
 	Binding = New Structure();
-	Binding.Insert("WorkOrder", "StepMaterialsChangeItemKeyByItem");
-	Binding.Insert("WorkSheet", "StepMaterialsChangeItemKeyByItem");
+	
+	Binding.Insert("WorkOrder",
+		"StepMaterialsChangeItemKeyByItem");
+	
+	Binding.Insert("WorkSheet",
+		"StepMaterialsChangeItemKeyByItem");
+		
+	Binding.Insert("Production",
+		"StepMaterialsChangeItemKeyByItem");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5565,11 +6334,15 @@ EndFunction
 Function BindMaterialsItemKey(Parameters)
 	DataPath = "Materials.ItemKey";
 	Binding = New Structure();
-	Binding.Insert("WorkOrder", "StepMaterialsChangeUnitByItemKey");
+	Binding.Insert("WorkOrder",
+		"StepMaterialsChangeUnitByItemKey");
 	
 	Binding.Insert("WorkSheet", 
 		"StepMaterialsChangeUnitByItemKey,
 		|StepMaterialsChangeIsManualChangedByItemKey");
+	
+	Binding.Insert("Production", 
+		"StepMaterialsChangeUnitByItemKey");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -5607,10 +6380,14 @@ EndFunction
 Function BindMaterialsItemKeyBOM(Parameters)
 	DataPath = "Materials.ItemKeyBOM";
 	Binding = New Structure();
-	Binding.Insert("WorkSheet", "StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials,
-								|StepMaterialsChangeExpenseTypeByBillOfMaterials");
 	
-	Binding.Insert("WorkOrder", "StepMaterialsChangeUniqueIDByItemKeyAndBillOfMaterials");
+	Binding.Insert("WorkOrder",
+		"StepMaterialsChangeUniqueIDByItemKeyAndBillOfMaterials");
+	
+	Binding.Insert("WorkSheet", 
+		"StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials,
+		|StepMaterialsChangeExpenseTypeByBillOfMaterials");
+		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5639,8 +6416,13 @@ EndFunction
 Function BindMaterialsUnit(Parameters)
 	DataPath = "Materials.Unit";
 	Binding = New Structure();
-	Binding.Insert("WorkOrder", "StepMaterialsCalculateQuantityInBaseUnit");
-	Binding.Insert("WorkSheet", "StepMaterialsCalculateQuantityInBaseUnit");
+	
+	Binding.Insert("WorkOrder", 
+		"StepMaterialsCalculateQuantityInBaseUnit");
+		
+	Binding.Insert("WorkSheet",
+		"StepMaterialsCalculateQuantityInBaseUnit");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5698,8 +6480,16 @@ EndFunction
 Function BindDefaultMaterialsQuantity(Parameters)
 	DataPath = "Materials.Quantity";
 	Binding = New Structure();
-	Binding.Insert("WorkOrder", "StepMaterialsDefaultQuantityInList");
-	Binding.Insert("WorkSheet", "StepMaterialsDefaultQuantityInList");
+	
+	Binding.Insert("WorkOrder", 
+		"StepMaterialsDefaultQuantityInList");
+	
+	Binding.Insert("WorkSheet", 
+		"StepMaterialsDefaultQuantityInList");
+	
+	Binding.Insert("Production", 
+		"StepMaterialsDefaultQuantityInList");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5707,8 +6497,16 @@ EndFunction
 Function BindMaterialsQuantity(Parameters)
 	DataPath = "Materials.Quantity";
 	Binding = New Structure();
-	Binding.Insert("WorkOrder", "StepMaterialsCalculateQuantityInBaseUnit");
-	Binding.Insert("WorkSheet", "StepMaterialsCalculateQuantityInBaseUnit");
+	
+	Binding.Insert("WorkOrder",
+		"StepMaterialsCalculateQuantityInBaseUnit");
+	
+	Binding.Insert("WorkSheet",
+		"StepMaterialsCalculateQuantityInBaseUnit");
+		
+	Binding.Insert("Production",
+		"StepMaterialsChangeIsManualChangedByQuantity");
+			
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -5772,7 +6570,7 @@ EndFunction
 Procedure StepMaterialsCalculateQuantityInBaseUnit(Parameters, Chain) Export
 	Chain.Calculations.Enable = True;
 	Chain.Calculations.Setter = "SetMaterialsQuantityInBaseUnit";
-	For Each Row In GetRows(Parameters, "Materials") Do
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options     = ModelClientServer_V2.CalculationsOptions();
 		Options.Ref = Parameters.Object.Ref;
 		Options.CalculateQuantityInBaseUnit.Enable   = True;
@@ -5811,7 +6609,7 @@ EndFunction
 Procedure StepMaterialsCalculateQuantityInBaseUnitBOM(Parameters, Chain) Export
 	Chain.Calculations.Enable = True;
 	Chain.Calculations.Setter = "SetMaterialsQuantityInBaseUnitBOM";
-	For Each Row In GetRows(Parameters, "Materials") Do
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options     = ModelClientServer_V2.CalculationsOptions();
 		Options.Ref = Parameters.Object.Ref;
 		Options.CalculateQuantityInBaseUnit.Enable   = True;
@@ -5846,7 +6644,7 @@ EndFunction
 Procedure StepMaterialsChangeIsManualChangedByItemKey(Parameters, Chain) Export
 	Chain.ChangeIsManualChangedByItemKey.Enable = True;
 	Chain.ChangeIsManualChangedByItemKey.Setter = "SetMaterialsIsManualChanged";
-	For Each Row In GetRows(Parameters, "Materials") Do
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options     = ModelClientServer_V2.ChangeIsManualChangedByItemKeyOptions();		
 		Options.ItemKeyBOM = GetMaterialsItemKeyBOM(Parameters, Row.Key);
 		Options.ItemKey    = GetMaterialsItemKey(Parameters, Row.Key);
@@ -5855,6 +6653,20 @@ Procedure StepMaterialsChangeIsManualChangedByItemKey(Parameters, Chain) Export
 		Options.Key = Row.Key;
 		Options.StepName = "StepMaterialsChangeIsManualChangedByItemKey";
 		Chain.ChangeIsManualChangedByItemKey.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+// Materials.IsManualChanged.ChangeIsManualChangedByQuantity.Step
+Procedure StepMaterialsChangeIsManualChangedByQuantity(Parameters, Chain) Export
+	Chain.ChangeIsManualChangedByQuantity.Enable = True;
+	Chain.ChangeIsManualChangedByQuantity.Setter = "SetMaterialsIsManualChanged";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options     = ModelClientServer_V2.ChangeIsManualChangedByQuantityOptions();		
+		Options.Quantity   = GetMaterialsQuantity(Parameters, Row.Key);
+		Options.QuantityBOM = GetMaterialsQuantityBOM(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepMaterialsChangeIsManualChangedByQuantity";
+		Chain.ChangeIsManualChangedByQuantity.Options.Add(Options);
 	EndDo;	
 EndProcedure
 
@@ -5879,7 +6691,7 @@ EndFunction
 Procedure StepMaterialsChangeUniqueIDByItemKeyBOMAndBillOfMaterials(Parameters, Chain) Export
 	Chain.ChangeUniqueIDByItemKeyBOMAndBillOfMaterials.Enable = True;
 	Chain.ChangeUniqueIDByItemKeyBOMAndBillOfMaterials.Setter = "SetMaterialsUniqueID";
-	For Each Row In GetRows(Parameters, "Materials") Do
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.ChangeUniqueIDByItemKeyBOMAndBillOfMaterialsOptions();		
 		Options.ItemKeyBOM      = GetMaterialsItemKeyBOM(Parameters, Row.Key);
 		Options.BillOfMaterials = GetMaterialsBillOfMaterials(Parameters, Row.Key);
@@ -5893,7 +6705,7 @@ EndProcedure
 Procedure StepMaterialsChangeUniqueIDByItemKeyAndBillOfMaterials(Parameters, Chain) Export
 	Chain.ChangeUniqueIDByItemKeyBOMAndBillOfMaterials.Enable = True;
 	Chain.ChangeUniqueIDByItemKeyBOMAndBillOfMaterials.Setter = "SetMaterialsUniqueID";
-	For Each Row In GetRows(Parameters, "Materials") Do
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.ChangeUniqueIDByItemKeyBOMAndBillOfMaterialsOptions();		
 		Options.ItemKeyBOM      = GetMaterialsItemKey(Parameters, Row.Key);
 		Options.BillOfMaterials = GetMaterialsBillOfMaterials(Parameters, Row.Key);
@@ -6044,39 +6856,250 @@ EndProcedure
 
 #EndRegion
 
-#Region LOAD_DATA
+#Region MATERIALS_MATERIAL_TYPE
 
-// Materials.Load
-Procedure MaterialsLoad(Parameters) Export
-	Binding = BindMaterialsLoad(Parameters);
+// Materials.MaterialType.OnChange
+Procedure MaterialsMaterialTypeOnChange(Parameters) Export
+	AddViewNotify("OnSetMaterialsMaterialTypeNotify", Parameters);
+	Binding = BindMaterialsMaterialType(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
 
-// Materials.Load.Set
-#If Server Then
-	
-Procedure ServerTableLoaderMaterials(Parameters, Results) Export
-	Binding = BindMaterialsLoad(Parameters);
-	LoaderTable(Binding.DataPath, Parameters, Results);
+// Materials.MaterialType.Set
+Procedure SetMaterialsMaterialType(Parameters, Results) Export
+	Binding = BindMaterialsMaterialType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetMaterialsMaterialTypeNotify");
 EndProcedure
 
-#EndIf
-
-// Materials.Load.Bind
-Function BindMaterialsLoad(Parameters)
-	DataPath = "Materials";
+// Materials.MaterialType.Bind
+Function BindMaterialsMaterialType(Parameters)
+	DataPath = "Materials.MaterialType";
 	Binding = New Structure();
-	Return BindSteps("StepMaterialsLoadTable", DataPath, Binding, Parameters);
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
-// Materials.LoadAtServer.Step
-Procedure StepMaterialsLoadTable(Parameters, Chain) Export
-	Chain.LoadTable.Enable = True;
-	Chain.LoadTable.Setter = "ServerTableLoaderMaterials";
-	Options = ModelClientServer_V2.LoadTableOptions();
-	Options.TableAddress = Parameters.LoadData.Address;
-	Chain.LoadTable.Options.Add(Options);
+#EndRegion
+
+#Region MATERIALS_CALCULATIONS
+
+// Materials.Set
+Procedure SetMaterials(Parameters, Results) Export
+	For Each Result In Results Do
+		If Result.Value.Materials.Count() Then
+			If Not Parameters.Cache.Property("Materials") Then
+				Parameters.Cache.Insert("Materials", New Array());
+			Else
+				Parameters.Cache.Materials.Clear();
+			EndIf;
+			
+			// add new rows
+			For Each Row In Result.Value.Materials Do
+				Parameters.Cache.Materials.Add(Row);
+			EndDo;
+		EndIf;
+	EndDo;
 EndProcedure
+
+// Materials.SetWithKeyOwner
+Procedure SetMaterialsWithKeyOwner(Parameters, Results) Export
+	For Each Result In Results Do
+		If Result.Value.Materials.Count() Then
+			If Not Parameters.Cache.Property("Materials") Then
+				Parameters.Cache.Insert("Materials", New Array());
+			EndIf;
+			
+			// remove from cache old rows
+			Count = Parameters.Cache.Materials.Count();
+			For i = 1 To Count Do
+				Index = Count - i;
+				ArrayItem = Parameters.Cache.Materials[Index];
+				If ArrayItem.KeyOwner = Result.Options.KeyOwner Then
+					Parameters.Cache.Materials.Delete(Index);
+				EndIf;
+			EndDo;
+			
+			// add new rows
+			For Each Row In Result.Value.Materials Do
+				If Row.KeyOwner = Result.Options.KeyOwner Then
+					Parameters.Cache.Materials.Add(Row);
+				EndIf;
+			EndDo;
+		EndIf;
+	EndDo;
+EndProcedure
+
+// Step.Materials.Calculations
+Procedure StepMaterialsCalculations(Parameters, Chain) Export
+	Chain.MaterialsCalculations.Enable = True;
+	Chain.MaterialsCalculations.Setter = "SetMaterials";
+	Chain.MaterialsCalculations.IsLazyStep = True;
+	Chain.MaterialsCalculations.LazyStepName = "StepMaterialsCalculations";
+	
+	ArrayOfMaterialsRows = New Array();
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		NewRow = New Structure(Parameters.ObjectMetadataInfo.Tables.Materials.Columns);
+		FillPropertyValues(NewRow, Row);
+		ArrayOfMaterialsRows.Add(NewRow);
+	EndDo;	
+		
+	Options = ModelClientServer_V2.MaterialsCalculationsOptions();
+	Options.Materials = ArrayOfMaterialsRows;
+	Options.BillOfMaterials  = GetBillOfMaterials(Parameters);
+	Options.MaterialsColumns = Parameters.ObjectMetadataInfo.Tables.Materials.Columns;
+	Options.ItemKey          = GetItemKey(Parameters);
+	Options.Unit             = GetUnit(Parameters);
+	Options.Quantity         = GetQuantity(Parameters);
+	Options.StepName = "StepMaterialsCalculations";
+	Chain.MaterialsCalculations.Options.Add(Options);
+	Parameters.IsFullRefill_Materials = True;
+EndProcedure
+
+// Step.Materials.CalculationsWithKeyOwner
+Procedure StepMaterialsCalculationsWithKeyOwner(Parameters, Chain) Export
+	Chain.MaterialsCalculations.Enable = True;
+	Chain.MaterialsCalculations.Setter = "SetMaterialsWithKeyOwner";
+	Chain.MaterialsCalculations.IsLazyStep = True;
+	Chain.MaterialsCalculations.LazyStepName = "StepMaterialsCalculationsWithKeyOwner";
+	
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		ArrayOfMaterialsRows = New Array();
+		MaterialsRows = Parameters.Object.Materials.FindRows(New Structure("KeyOwner", Row.Key));
+		For Each RowMaterials In MaterialsRows Do
+			NewRow = New Structure(Parameters.ObjectMetadataInfo.Tables.Materials.Columns);
+			FillPropertyValues(NewRow, RowMaterials);
+			ArrayOfMaterialsRows.Add(AddBOMColumnsToRow(NewRow));
+		EndDo;
+				
+		Options = ModelClientServer_V2.MaterialsCalculationsOptions();
+		Options.KeyOwner  = Row.Key;
+		Options.Materials = ArrayOfMaterialsRows;
+		Options.BillOfMaterials  = GetItemListBillOfMaterials(Parameters, Row.Key);
+		Options.MaterialsColumns = AddBOMColumnsToList(Parameters.ObjectMetadataInfo.Tables.Materials.Columns);
+		Options.ItemKey          = GetItemListItemKey(Parameters, Row.Key);
+		Options.Unit             = GetItemListUnit(Parameters, Row.Key);
+		Options.Quantity         = GetItemListQuantity(Parameters, Row.Key);
+		Options.StepName = "StepMaterialsCalculationsWithKeyOwner";
+		Chain.MaterialsCalculations.Options.Add(Options);
+	EndDo;
+	Parameters.IsFullRefill_Materials = True;
+EndProcedure
+
+// Step.Materials.RecalculateQuantity
+Procedure StepMaterialsRecalculateQuantity(Parameters, Chain) Export
+	Chain.MaterialsRecalculateQuantity.Enable = True;
+	Chain.MaterialsRecalculateQuantity.Setter = "SetMaterials";
+	Chain.MaterialsRecalculateQuantity.IsLazyStep = True;
+	Chain.MaterialsRecalculateQuantity.LazyStepName = "StepMaterialsRecalculateQuantity";
+	
+	ArrayOfMaterialsRows = New Array();
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		NewRow = New Structure(Parameters.ObjectMetadataInfo.Tables.Materials.Columns);
+		FillPropertyValues(NewRow, Row);
+		ArrayOfMaterialsRows.Add(NewRow);
+	EndDo;	
+		
+	Options = ModelClientServer_V2.MaterialsCalculationsOptions();
+	Options.Materials = ArrayOfMaterialsRows;
+	Options.BillOfMaterials  = GetBillOfMaterials(Parameters);
+	Options.MaterialsColumns = Parameters.ObjectMetadataInfo.Tables.Materials.Columns;
+	Options.ItemKey          = GetItemKey(Parameters);
+	Options.Unit             = GetUnit(Parameters);
+	Options.Quantity         = GetQuantity(Parameters);
+	Options.StepName = "StepMaterialsRecalculateQuantity";
+	Chain.MaterialsRecalculateQuantity.Options.Add(Options);
+	Parameters.IsFullRefill_Materials = True;
+EndProcedure
+
+// Step.Materials.RecalculateQuantityWithKeyOwner
+Procedure StepMaterialsRecalculateQuantityWithKeyOwner(Parameters, Chain) Export
+	Chain.MaterialsRecalculateQuantity.Enable = True;
+	Chain.MaterialsRecalculateQuantity.Setter = "SetMaterialsWithKeyOwner";
+	Chain.MaterialsRecalculateQuantity.IsLazyStep = True;
+	Chain.MaterialsRecalculateQuantity.LazyStepName = "StepMaterialsRecalculateQuantityWithKeyOwner";
+	
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		ArrayOfMaterialsRows = New Array();
+		MaterialsRows = Parameters.Object.Materials.FindRows(New Structure("KeyOwner", Row.Key));
+		For Each RowMaterials In MaterialsRows Do
+			NewRow = New Structure(Parameters.ObjectMetadataInfo.Tables.Materials.Columns);
+			FillPropertyValues(NewRow, RowMaterials);
+			ArrayOfMaterialsRows.Add(AddBOMColumnsToRow(NewRow));
+		EndDo;
+			
+		Options = ModelClientServer_V2.MaterialsCalculationsOptions();
+		Options.KeyOwner = Row.Key; 
+		Options.Materials = ArrayOfMaterialsRows;
+		Options.BillOfMaterials  = GetItemListBillOfMaterials(Parameters, Row.Key);
+		Options.MaterialsColumns = AddBOMColumnsToList(Parameters.ObjectMetadataInfo.Tables.Materials.Columns);
+		Options.ItemKey          = GetItemListItemKey(Parameters, Row.Key);
+		Options.Unit             = GetItemListUnit(Parameters, Row.Key);
+		Options.Quantity         = GetItemListQuantity(Parameters, Row.Key);
+		Options.StepName = "StepMaterialsRecalculateQuantity";
+		Chain.MaterialsRecalculateQuantity.Options.Add(Options);
+	EndDo;
+	Parameters.IsFullRefill_Materials = True;
+EndProcedure
+
+Function AddBOMColumnsToRow(Row)
+	If Not Row.Property("ItemBOM") Then
+		Row.Insert("ItemBOM", Row.Item);
+	EndIf;
+			
+	If Not Row.Property("ItemKeyBOM") Then
+		Row.Insert("ItemKeyBOM", Row.ItemKey);
+	EndIf;
+			
+	If Not Row.Property("UnitBOM") Then
+		Row.Insert("UnitBOM", Row.Unit);
+	EndIf;
+			
+	If Not Row.Property("QuantityBOM") Then
+		Row.Insert("QuantityBOM", Row.Quantity);
+	EndIf;
+			
+	If Not Row.Property("QuantityInBaseUnitBOM") Then
+		Row.Insert("QuantityInBaseUnitBOM", Row.QuantityInBaseUnit);
+	EndIf;
+	
+	If Not Row.Property("IsManualChanged") Then
+		Row.Insert("IsManualChanged", False);
+	EndIf;
+	
+	Return Row;
+EndFunction
+
+Function AddBOMColumnsToList(ExistsColumns)
+	ArrayOfExistsColumns = New Array();
+	For Each Column In StrSplit(ExistsColumns, ",") Do
+		ArrayOfExistsColumns.Add(TrimAll(Column));
+	EndDo;
+	
+	If ArrayOfExistsColumns.Find("ItemBOM") = Undefined Then
+		ArrayOfExistsColumns.Add("ItemBOM");
+	EndIf;
+	
+	If ArrayOfExistsColumns.Find("ItemKeyBOM") = Undefined Then
+		ArrayOfExistsColumns.Add("ItemKeyBOM");
+	EndIf;
+	
+	If ArrayOfExistsColumns.Find("UnitBOM") = Undefined Then
+		ArrayOfExistsColumns.Add("UnitBOM");
+	EndIf;
+	
+	If ArrayOfExistsColumns.Find("QuantityBOM") = Undefined Then
+		ArrayOfExistsColumns.Add("QuantityBOM");
+	EndIf;
+	
+	If ArrayOfExistsColumns.Find("QuantityInBaseUnitBOM") = Undefined Then
+		ArrayOfExistsColumns.Add("QuantityInBaseUnitBOM");
+	EndIf;
+
+	If ArrayOfExistsColumns.Find("IsManualChanged") = Undefined Then
+		ArrayOfExistsColumns.Add("IsManualChanged");
+	EndIf;
+
+	Return StrConcat(ArrayOfExistsColumns, ",");
+EndFunction
 
 #EndRegion
 
@@ -6251,11 +7274,13 @@ Function BindItemListItemKey(Parameters)
 		|StepItemListChangePriceByPriceType,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeUnitByItemKey,
-		|StepChangeIsServiceByItemKey");
+		|StepChangeIsServiceByItemKey,
+		|StepItemListChangeBillOfMaterialsByItemKey");
 	
 	Binding.Insert("WorkSheet", 
 		"StepItemListChangeUnitByItemKey, 
-		|StepChangeIsServiceByItemKey");
+		|StepChangeIsServiceByItemKey,
+		|StepItemListChangeBillOfMaterialsByItemKey");
 	
 	Binding.Insert("SalesOrderClosing",
 		"StepItemListChangePriceTypeByAgreement,
@@ -6433,6 +7458,7 @@ EndProcedure
 
 // ItemList.BillOfMaterials.OnChange
 Procedure ItemListBillOfMaterialsOnChange(Parameters) Export
+	AddViewNotify("OnSetItemListBillOfMaterialsNotify", Parameters);
 	Binding = BindItemListBillOfMaterials(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -6440,15 +7466,41 @@ EndProcedure
 // ItemList.BillOfMaterials.Set
 Procedure SetItemListBillOfMaterials(Parameters, Results) Export
 	Binding = BindItemListBillOfMaterials(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetItemListBillOfMaterialsNotify");
 EndProcedure
+
+// ItemList.BillOfMaterials.Get
+Function GetItemListBillOfMaterials(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListBillOfMaterials(Parameters).DataPath, _Key);
+EndFunction
 
 // ItemList.BillOfMaterials.Bind
 Function BindItemListBillOfMaterials(Parameters)
 	DataPath = "ItemList.BillOfMaterials";
 	Binding = New Structure();
+	
+	Binding.Insert("WorkOrder",
+		"StepMaterialsCalculationsWithKeyOwner");
+	
+	Binding.Insert("WorkSheet",
+		"StepMaterialsCalculationsWithKeyOwner");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
+
+// ItemList.BillOfMaterials.ChangeBillOfMaterialsByItemKey.Step
+Procedure StepItemListChangeBillOfMaterialsByItemKey(Parameters, Chain) Export
+	Chain.ChangeBillOfMaterialsByItemKey.Enable = True;
+	Chain.ChangeBillOfMaterialsByItemKey.Setter = "SetItemListBillOfMaterials";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeBillOfMaterialsByItemKeyOptions();
+		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
+		Options.CurrentBillOfMaterials = GetItemListBillOfMaterials(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepItemListChangeBillOfMaterialsByItemKey";
+		Chain.ChangeBillOfMaterialsByItemKey.Options.Add(Options);
+	EndDo;
+EndProcedure
 
 #EndRegion
 
@@ -7062,6 +8114,7 @@ EndFunction
 // ItemList.Price.Bind
 Function BindItemListPrice(Parameters)
 	DataPath = "ItemList.Price";
+	
 	Binding = New Structure();
 	If Parameters.StepEnableFlags.PriceChanged_AfterQuestionToUser Then
 		Binding.Insert("SalesOrder"           , "StepItemListCalculations_IsPriceChanged");
@@ -7129,7 +8182,10 @@ Function BindItemListPrice(Parameters)
 		Binding.Insert("SalesReturn",
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
 			|StepItemListCalculations_IsPriceChanged");
+		
+		Binding.Insert("StockAdjustmentAsSurplus", "StepItemListSimpleCalculations_IsPriceChanged");	
 	EndIf;
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -7150,6 +8206,55 @@ Procedure StepItemListChangePriceByPriceType(Parameters, Chain) Export
 		Options.StepName = "StepItemListChangePriceByPriceType";
 		Options.DontExecuteIfExecutedBefore = True;
 		Chain.ChangePriceByPriceType.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+// ItemList.SimpleCalculations.Set
+Procedure SetItemListSimpleCalculations(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Price" , BindItemListPrice(Parameters));
+	ResourceToBinding.Insert("Amount", BindItemListAmount(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+// ItemList.SimpleCalculations.[IsPriceChanged].Step
+Procedure StepItemListSimpleCalculations_IsPriceChanged(Parameters, Chain) Export
+	StepItemListSimpleCalculations(Parameters, Chain, "IsPriceChanged");
+EndProcedure
+
+// ItemList.SimpleCalculations.[IsAmountChanged].Step
+Procedure StepItemListSimpleCalculations_IsAmountChanged(Parameters, Chain) Export
+	StepItemListSimpleCalculations(Parameters, Chain, "IsAmountChanged");
+EndProcedure
+
+// ItemList.SimpleCalculations.[IsQuantityChanged].Step
+Procedure StepItemListSimpleCalculations_IsQuantityChanged(Parameters, Chain) Export
+	StepItemListSimpleCalculations(Parameters, Chain, "IsQuantityChanged");
+EndProcedure
+
+Procedure StepItemListSimpleCalculations(Parameters, Chain, WhoIsChanged)
+	Chain.SimpleCalculations.Enable = True;
+	Chain.SimpleCalculations.Setter = "SetItemListSimpleCalculations";
+	
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options     = ModelClientServer_V2.SimpleCalculationsOptions();
+		Options.Ref = Parameters.Object.Ref;
+		Options.Key = Row.Key;
+		Options.DontExecuteIfExecutedBefore = True;
+		
+		If WhoIsChanged = "IsPriceChanged" Or WhoIsChanged = "IsQuantityChanged" Then
+			Options.CalculateAmount.Enable = True;
+		ElsIf WhoIsChanged = "IsAmountChanged" Then
+			Options.CalculatePrice.Enable = True;
+		Else
+			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
+		EndIf;
+		
+		Options.Amount   = GetItemListAmount(Parameters, Row.Key);
+		Options.Price    = GetItemListPrice(Parameters, Row.Key);
+		Options.Quantity = GetItemListQuantity(Parameters, Row.Key);
+		Options.StepName = "StepItemListSimpleCalculations";
+		Chain.SimpleCalculations.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -7214,6 +8319,9 @@ EndFunction
 Function BindItemListQuantity(Parameters)
 	DataPath = "ItemList.Quantity";
 	Binding = New Structure();	
+	Binding.Insert("StockAdjustmentAsSurplus",
+		"StepItemListSimpleCalculations_IsQuantityChanged,
+		|StepItemListCalculateQuantityInBaseUnit");
 	Return BindSteps("StepItemListCalculateQuantityInBaseUnit", DataPath, Binding, Parameters);
 EndFunction
 
@@ -7247,19 +8355,48 @@ EndFunction
 Function BindItemListQuantityInBaseUnit(Parameters)
 	DataPath = "ItemList.QuantityInBaseUnit";
 	Binding = New Structure();
-	Binding.Insert("SalesOrder"           , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
-	Binding.Insert("WorkOrder"            , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
-	Binding.Insert("SalesOrderClosing"    , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
-	Binding.Insert("SalesInvoice"         , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
-	Binding.Insert("RetailSalesReceipt"   , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
-	Binding.Insert("PurchaseOrder"        , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
-	Binding.Insert("PurchaseOrderClosing" , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
-	Binding.Insert("PurchaseInvoice"      , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
-	Binding.Insert("RetailReturnReceipt"  , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
-	Binding.Insert("PurchaseReturnOrder"  , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
-	Binding.Insert("PurchaseReturn"       , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
-	Binding.Insert("SalesReturnOrder"     , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
-	Binding.Insert("SalesReturn"          , "StepItemListCalculations_IsQuantityInBaseUnitChanged");
+	Binding.Insert("SalesOrder",
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
+	
+	Binding.Insert("WorkOrder", 
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged,
+		|StepMaterialsRecalculateQuantityWithKeyOwner");
+	
+	Binding.Insert("WorkSheet", 
+		"StepMaterialsRecalculateQuantityWithKeyOwner");
+		
+	Binding.Insert("SalesOrderClosing",
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
+	
+	Binding.Insert("SalesInvoice",
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
+	
+	Binding.Insert("RetailSalesReceipt",
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
+	
+	Binding.Insert("PurchaseOrder",
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
+	
+	Binding.Insert("PurchaseOrderClosing",
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
+	
+	Binding.Insert("PurchaseInvoice",
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
+	
+	Binding.Insert("RetailReturnReceipt",
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
+	
+	Binding.Insert("PurchaseReturnOrder",
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
+	
+	Binding.Insert("PurchaseReturn",
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
+	
+	Binding.Insert("SalesReturnOrder",
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
+	
+	Binding.Insert("SalesReturn",
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -7849,6 +8986,30 @@ Function BindItemListTotalAmount(Parameters)
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
 		|StepItemListCalculations_IsTotalAmountChanged");
 		
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_AMOUNT
+
+// ItemList.Amount.OnChange
+Procedure ItemListAmountOnChange(Parameters) Export
+	Binding = BindItemListAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.Amount.Get
+Function GetItemListAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListAmount(Parameters).DataPath , _Key);
+EndFunction
+
+// ItemList.Amount.Bind
+Function BindItemListAmount(Parameters)
+	DataPath = "ItemList.Amount";
+	Binding = New Structure();
+	Binding.Insert("StockAdjustmentAsSurplus",
+		"StepItemListSimpleCalculations_IsAmountChanged");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -8510,6 +9671,145 @@ EndProcedure
 
 #EndRegion
 
+#Region INVENTORY_QUANTITY
+
+// Inventory.Quantity.OnChange
+Procedure InventoryQuantityOnChange(Parameters) Export
+	Binding = BindInventoryQuantity(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Inventory.Quantity.Set
+Procedure SetInventoryQuantity(Parameters, Results) Export
+	Binding = BindInventoryQuantity(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Inventory.Quantity.Get
+Function GetInventoryQuantity(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindInventoryQuantity(Parameters).DataPath, _Key);
+EndFunction
+
+// Inventory.Quantity.Bind
+Function BindInventoryQuantity(Parameters)
+	DataPath = "Inventory.Quantity";
+	Binding = New Structure();	
+	Binding.Insert("OpeningEntry", "StepInventoryCalculations_IsQuantityChanged");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region INVENTORY_PRICE
+
+// Inventory.Price.OnChange
+Procedure InventoryPriceOnChange(Parameters) Export
+	Binding = BindInventoryPrice(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Inventory.Price.Set
+Procedure SetInventoryPrice(Parameters, Results) Export
+	Binding = BindInventoryPrice(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Inventory.Price.Get
+Function GetInventoryPrice(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindInventoryPrice(Parameters).DataPath, _Key);
+EndFunction
+
+// Inventory.Price.Bind
+Function BindInventoryPrice(Parameters)
+	DataPath = "Inventory.Price";
+	Binding = New Structure();
+	Binding.Insert("OpeningEntry", "StepInventoryCalculations_IsPriceChanged");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region INVENTORY_AMOUNT
+
+// Inventory.Amount.OnChange
+Procedure InventoryAmountOnChange(Parameters) Export
+	Binding = BindInventoryAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Inventory.Amount.Set
+Procedure SetInventoryAmount(Parameters, Results) Export
+	Binding = BindInventoryAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Inventory.Amount.Get
+Function GetInventoryAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindInventoryAmount(Parameters).DataPath , _Key);
+EndFunction
+
+// Inventory.Amount.Bind
+Function BindInventoryAmount(Parameters)
+	DataPath = "Inventory.Amount";
+	Binding = New Structure();
+	Binding.Insert("OpeningEntry", "StepInventoryCalculations_IsAmountChanged");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region INVENTORY_CALCULATION
+
+// Inventory.SimpleCalculations.[IsQuantityChanged].Step
+Procedure StepInventoryCalculations_IsQuantityChanged(Parameters, Chain) Export
+	StepInventoryCalculations(Parameters, Chain, "IsQuantityChanged");
+EndProcedure
+
+// Inventory.SimpleCalculations.[IsPriceChanged].Step
+Procedure StepInventoryCalculations_IsPriceChanged(Parameters, Chain) Export
+	StepInventoryCalculations(Parameters, Chain, "IsPriceChanged");
+EndProcedure
+
+// Inventory.SimpleCalculations.[IsAmountChanged].Step
+Procedure StepInventoryCalculations_IsAmountChanged(Parameters, Chain) Export
+	StepInventoryCalculations(Parameters, Chain, "IsAmountChanged");
+EndProcedure
+
+// Inventory.Calculations.Set
+Procedure SetInventoryCalculations(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Price" , BindInventoryPrice(Parameters));
+	ResourceToBinding.Insert("Amount", BindInventoryAmount(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+Procedure StepInventoryCalculations(Parameters, Chain, WhoIsChanged)
+	Chain.SimpleCalculations.Enable = True;
+	Chain.SimpleCalculations.Setter = "SetInventoryCalculations";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options     = ModelClientServer_V2.SimpleCalculationsOptions();
+		Options.Ref = Parameters.Object.Ref;
+		Options.Key = Row.Key;
+		Options.DontExecuteIfExecutedBefore = True;
+		
+		If WhoIsChanged = "IsPriceChanged" Or WhoIsChanged = "IsQuantityChanged" Then
+			Options.CalculateAmount.Enable = True;
+		ElsIf WhoIsChanged = "IsAmountChanged" Then
+			Options.CalculatePrice.Enable = True;
+		Else
+			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
+		EndIf;
+		
+		Options.Amount   = GetInventoryAmount(Parameters, Row.Key);
+		Options.Price    = GetInventoryPrice(Parameters, Row.Key);
+		Options.Quantity = GetInventoryQuantity(Parameters, Row.Key);
+		Options.StepName = "StepInventoryCalculations";
+		Chain.SimpleCalculations.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #Region ACCOUNT_BALANCE
@@ -8630,7 +9930,7 @@ EndProcedure
 
 Procedure CommitChainChanges(Parameters) Export
 		
-	_CommitChainChanges(Parameters.Cache, Parameters.Object);
+	_CommitChainChanges(Parameters.Cache, Parameters.Object, Parameters);
 	
 	If Parameters.FormIsExists Then
 		UniqueFormModificators = New Array();
@@ -8648,8 +9948,7 @@ Procedure CommitChainChanges(Parameters) Export
 			#ENDIF
 			Execute StrTemplate("%1.%2(Parameters);", ViewModuleName, FormModificator);
 		EndDo;
-		
-		_CommitChainChanges(Parameters.CacheForm, Parameters.Form);
+		_CommitChainChanges(Parameters.CacheForm, Parameters.Form, Parameters);
 	
 	#IF Client THEN
 		UniqueViewNotify = New Array();
@@ -8659,8 +9958,6 @@ Procedure CommitChainChanges(Parameters) Export
 			EndIf;
 		EndDo;
 		For Each ViewNotify In UniqueViewNotify Do
-			
-			// web-client-bug-fix
 			ExecuteViewNotify(Parameters, ViewNotify);
 		EndDo;
 	#ENDIF
@@ -8729,21 +10026,45 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "MaterialsOnAddRowFormNotify"           Then ViewClient_V2.MaterialsOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "MaterialsOnCopyRowFormNotify"          Then ViewClient_V2.MaterialsOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "OnSetUseGoodsReceiptNotify_IsProgramAsTrue" Then ViewClient_V2.OnSetUseGoodsReceiptNotify_IsProgramAsTrue(Parameters);
+	ElsIf ViewNotify = "OnSetPlanningPeriodNotify"             Then ViewClient_V2.OnSetPlanningPeriodNotify(Parameters);
+	ElsIf ViewNotify = "OnSetBusinessUnitNotify"               Then ViewClient_V2.OnSetBusinessUnitNotify(Parameters);
+	ElsIf ViewNotify = "ProductionsOnAddRowFormNotify"         Then ViewClient_V2.ProductionsOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "ProductionsOnCopyRowFormNotify"        Then ViewClient_V2.ProductionsOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "OnSetProductionsCurrentQuantityNotify" Then ViewClient_V2.OnSetProductionsCurrentQuantityNotify(Parameters);
+	ElsIf ViewNotify = "OnSetMaterialsMaterialTypeNotify"      Then ViewClient_V2.OnSetMaterialsMaterialTypeNotify(Parameters);
+	ElsIf ViewNotify = "OnSetBillOfMaterialsNotify"            Then ViewClient_V2.OnSetBillOfMaterialsNotify(Parameters);
+	ElsIf ViewNotify = "OnSetItemListBillOfMaterialsNotify"    Then ViewClient_V2.OnSetItemListBillOfMaterialsNotify(Parameters);
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);
 	EndIf;
 EndProcedure	
 #ENDIF
 
+Function IsFullTransferTabularSection(Parameters, PropertyName)
+	_PropertyName = Upper(PropertyName);
+	If _PropertyName = Upper("TaxList") 
+		Or _PropertyName = Upper("SerialLotNumbers") 
+		Or _PropertyName = Upper("SpecialOffers")
+		Or _PropertyName = Upper("BillOfMaterialsList") Then
+		Return True;
+	ElsIf _PropertyName = Upper("Materials") Then
+		If Parameters.IsFullRefill_Materials = True Then
+			Return True;
+		Else
+			Return False;
+		EndIf;
+	EndIf;
+	Return False;
+EndFunction
+
 // move changes from Cache to Object form CacheForm to Form
-Procedure _CommitChainChanges(Cache, Source)
+Procedure _CommitChainChanges(Cache, Source, Parameters)
 	For Each Property In Cache Do
 		PropertyName  = Property.Key;
 		PropertyValue = Property.Value;
-		If Upper(PropertyName) = Upper("TaxList") 
-			Or Upper(PropertyName) = Upper("SerialLotNumbers") 
-			Or Upper(PropertyName) = Upper("SpecialOffers") Then
-			// tabular part Taxex and Serial lot numbers moved transferred completely
+		
+		If IsFullTransferTabularSection(Parameters, PropertyName) Then	
+			// tabular part transferred completely
 			ArrayOfKeys = New Array();
 			For Each Row In PropertyValue Do
 				If ArrayOfKeys.Find(Row.Key) = Undefined Then
@@ -8763,6 +10084,7 @@ Procedure _CommitChainChanges(Cache, Source)
 		
 		ElsIf TypeOf(PropertyValue) = Type("Array") Then // it is tabular part
 			IsRowWithKey = PropertyValue.Count() And PropertyValue[0].Property("Key");
+			
 			// tabular parts ItemList and PaymentList moved by rows, key in rows is unique
 			If IsRowWithKey Then
 				For Each Row In PropertyValue Do
@@ -8833,7 +10155,7 @@ Procedure SetterForm(StepNames, DataPath, Parameters, Results,
 	Setter("Form", StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache);
 EndProcedure
 
-Procedure MultiSetterObject(Parameters, Results, ResourceToBinding)
+Procedure MultiSetterObject(Parameters, Results, ResourceToBinding, ViewNotify = Undefined)
 	For Each KeyValue In ResourceToBinding Do
 		Resource = KeyValue.Key;
 		Binding = KeyValue.Value;
@@ -8844,9 +10166,9 @@ Procedure MultiSetterObject(Parameters, Results, ResourceToBinding)
 				_Results.Add(New Structure("Value, Options", Result.Value[Resource], New Structure("Key")));
 				Break;
 			EndDo;
-			SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, _Results);
+			SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, _Results, ViewNotify);
 		ElsIf Segments.Count() = 2 Then // it is column of table
-			SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results, , Resource);
+			SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results, ViewNotify, Resource);
 		Else
 			Raise StrTemplate("Wrong data path [%1]", Binding.DataPath);
 		EndIf;
@@ -8956,7 +10278,7 @@ Function GetProperty(Cache, Source, DataPath, Key, ReadOnlyFromCache)
 			EndIf;
 			ArrayRowsByKey = Source[TableName].FindRows(New Structure("Key", Key));
 			If ArrayRowsByKey.Count() <> 1 Then
-				Raise StrTemplate("Found not 1 row by key [%1]", Key);
+				Raise StrTemplate("Found [%1] row by key [%2]", ArrayRowsByKey.Count(), Key);
 			EndIf;
 			RowByKey = ArrayRowsByKey[0];
 		EndIf;
@@ -9038,11 +10360,13 @@ Function IsChangedProperty(Parameters, DataPath, _Key = Undefined) Export
 		If _Key = Undefined Then
 			Result.IsChanged = True;
 			Result.NewValue  = Changes[0].NewValue;
+			Result.OldValue  = Changes[0].OldValue;
 		Else
 			For Each Row In Changes Do
 				If Row.Key = _Key Then
 					Result.IsChanged = True;
 					Result.NewValue  = Row.NewValue;
+					Result.OldValue  = Row.OldValue;
 				EndIf;
 			EndDo;
 		EndIf;

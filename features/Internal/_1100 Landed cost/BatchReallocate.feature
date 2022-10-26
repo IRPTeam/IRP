@@ -25,6 +25,7 @@ Scenario: _0050 preparation
 	* Load data
 		When Create catalog AddAttributeAndPropertySets objects (LC)
 		When Create catalog CancelReturnReasons objects (LC)
+		When Create catalog ReportOptions objects
 		When Create catalog AddAttributeAndPropertyValues objects (LC)
 		When Create catalog IDInfoAddresses objects (LC)
 		When Create catalog BusinessUnits objects (LC)
@@ -150,6 +151,10 @@ Scenario: _0052 create Calculation movements cost (batch reallocate)
 		Then the number of "List" table lines is "равно" "1"
 	* Check batch balance calculation
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I activate field named "OptionsListReportOption" in "OptionsList" table
+		And I select current line in "OptionsList" table
 		And I click "Run report" button
 		Given "Result" spreadsheet document is equal to "BatchReallocate1"
 		And I close all client application windows

@@ -1425,6 +1425,11 @@ Scenario: set True value to the constant
 			| 'Use accounting' | 'Yes' |
 		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                 | 'Use' |
+			| 'Use commission trading' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window
 		

@@ -234,8 +234,6 @@
   <commonModules>CommonModule.BuilderAPI</commonModules>
   <commonModules>CommonModule.BuilderServer_V2</commonModules>
   <commonModules>CommonModule.CalculationServer</commonModules>
-  <commonModules>CommonModule.CatAgreementsClient</commonModules>
-  <commonModules>CommonModule.CatAgreementsClientServer</commonModules>
   <commonModules>CommonModule.CatAgreementsServer</commonModules>
   <commonModules>CommonModule.CatCashAccountsClient</commonModules>
   <commonModules>CommonModule.CatCashAccountsServer</commonModules>
@@ -447,6 +445,10 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
+  <commonModules>CommonModule.DocSalesReportFromTradeAgentClient</commonModules>
+  <commonModules>CommonModule.DocSalesReportToConsignorClient</commonModules>
+  <commonModules>CommonModule.DocSalesReportFromTradeAgentServer</commonModules>
+  <commonModules>CommonModule.DocSalesReportToConsignorServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -530,6 +532,7 @@
   <functionalOptions>FunctionalOption.UseStores</functionalOptions>
   <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
+  <functionalOptions>FunctionalOption.UseCommissionTrading</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -619,6 +622,7 @@
   <constants>Constant.UseStores</constants>
   <constants>Constant.UseUnitsAndDimensions</constants>
   <constants>Constant.UseWorkOrders</constants>
+  <constants>Constant.UseCommissionTrading</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>
@@ -787,6 +791,8 @@
   <documents>Document.WorkOrder</documents>
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
+  <documents>Document.SalesReportFromTradeAgent</documents>
+  <documents>Document.SalesReportToConsignor</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.AllDocuments</documentJournals>
@@ -848,6 +854,10 @@
   <enums>Enum.TaxType</enums>
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
+  <enums>Enum.SalesTransactionTypes</enums>
+  <enums>Enum.PurchaseTransactionTypes</enums>
+  <enums>Enum.SalesReturnTransactionTypes</enums>
+  <enums>Enum.PurchaseReturnTransactionTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

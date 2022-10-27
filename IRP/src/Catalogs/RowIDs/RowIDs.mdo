@@ -561,6 +561,66 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="9e103729-0a8f-4a5c-8766-2731ca65568c">
+    <name>TransactionTypeSales</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction type (Sales)</value>
+    </synonym>
+    <type>
+      <types>EnumRef.SalesTransactionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="926ac0ce-4db4-422c-b5cd-0b77fb7e3491">
+    <name>TransactionTypePurchases</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction type (Purchases)</value>
+    </synonym>
+    <type>
+      <types>EnumRef.PurchaseTransactionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="7334b305-86e4-44ee-ba44-7fe7b55f79ce">
+    <name>TransactionTypeSR</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction type (SR)</value>
+    </synonym>
+    <type>
+      <types>EnumRef.SalesReturnTransactionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="c4261fac-48e3-4516-88d4-b3e735c62b2f">
+    <name>TransactionTypePR</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction type (PR)</value>
+    </synonym>
+    <type>
+      <types>EnumRef.PurchaseReturnTransactionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="0c549ed8-e401-4e23-b7f2-953605c95f9e">
     <name>Unit</name>
     <synonym>

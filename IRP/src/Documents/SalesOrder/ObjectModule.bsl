@@ -118,10 +118,14 @@ EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If FillingData = Undefined Then
-		Return;
+		FillingData = New Structure();
+		FillingData.Insert("TransactionType", Enums.SalesTransactionTypes.Sales);
+		FillPropertyValues(ThisObject, FillingData);
+		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+	Else	
+		FillPropertyValues(ThisObject, FillingData);
+		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+		Number = Undefined;
+		Date = Undefined;
 	EndIf;
-
-	FillPropertyValues(ThisObject, FillingData);
-	Number = Undefined;
-	Date = Undefined;
 EndProcedure

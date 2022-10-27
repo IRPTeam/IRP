@@ -39,6 +39,7 @@
       <types>DocumentRef.BankReceipt</types>
       <types>DocumentRef.CashPayment</types>
       <types>DocumentRef.ChequeBondTransactionItem</types>
+      <types>DocumentRef.SalesReportToConsignor</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

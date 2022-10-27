@@ -20,4 +20,5 @@
   <subsystems>Sales</subsystems>
   <subsystems>SalesReturn</subsystems>
   <subsystems>SpecialOffers</subsystems>
+  <subsystems>CommissionTrading</subsystems>
 </mdclass:Subsystem>

@@ -199,6 +199,36 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="edb11836-096d-4bfd-b732-15817295493d">
+    <name>Consignor</name>
+    <synonym>
+      <key>en</key>
+      <value>Consignor</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="cc1e2a36-cf82-4a86-8ff0-722e4193cf0d">
+    <name>TradeAgent</name>
+    <synonym>
+      <key>en</key>
+      <value>Trade agent</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="f8cf4d21-0e13-49e9-bd80-0146820323e2">
     <name>ManagerSegment</name>
     <synonym>

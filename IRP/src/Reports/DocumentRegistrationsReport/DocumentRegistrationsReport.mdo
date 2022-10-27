@@ -92,6 +92,8 @@
       <types>DocumentRef.ProductionPlanning</types>
       <types>DocumentRef.ProductionPlanningClosing</types>
       <types>DocumentRef.ProductionPlanningCorrection</types>
+      <types>DocumentRef.SalesReportFromTradeAgent</types>
+      <types>DocumentRef.SalesReportToConsignor</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

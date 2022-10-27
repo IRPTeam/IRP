@@ -85,6 +85,9 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
+	IsTransactionType_Purchase = Object.TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.Purchase");
+	Form.Items.GroupAging.Visible = IsTransactionType_Purchase;
+	
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
 
@@ -148,6 +151,15 @@ EndProcedure
 &AtClient
 Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
 	DocPurchaseOrderClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TRANSACTION_TYPE
+
+&AtClient
+Procedure TransactionTypeOnChange(Item)
+	DocPurchaseOrderClient.TransactionTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

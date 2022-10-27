@@ -26,4 +26,18 @@
       <value>Vendor</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="614b37ec-88bc-4496-966a-7c4aad559e56">
+    <name>Consignor</name>
+    <synonym>
+      <key>en</key>
+      <value>Consignor</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="5a4ae7b2-20b2-4b04-acf9-c19f12688457">
+    <name>TradeAgent</name>
+    <synonym>
+      <key>en</key>
+      <value>Trade agent</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

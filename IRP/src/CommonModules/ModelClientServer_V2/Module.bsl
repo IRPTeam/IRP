@@ -680,18 +680,16 @@ Function ChangePartnerByTransactionTypeExecute(Options) Export
 		Return Undefined;
 	EndIf;
 	
-	IsVendor = 
-	(Options.TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor")) 
-		Or  (Options.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase"));
-		
-	IsCustomer = 
-	(Options.TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Sales")) 
-		Or  (Options.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer"));
+	PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
 	
-	If IsCustomer And CommonFunctionsServer.GetRefAttribute(Options.Partner, "Customer") Then
+	If PartnerType = "Vendor" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType) Then
 		Return Options.Partner;
-	ElsIf IsVendor And CommonFunctionsServer.GetRefAttribute(Options.Partner, "Vendor") Then
-		Return Options.Partner;		
+	ElsIf PartnerType = "Customer" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType) Then	 
+		Return Options.Partner;
+	ElsIf PartnerType = "Consignor" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType) Then
+		Return Options.Partner;
+	ElsIf PartnerType = "TradeAgent" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType) Then
+		Return Options.Partner;
 	EndIf;
 	
 	Return Undefined;
@@ -729,10 +727,13 @@ EndFunction
 #Region CHANGE_AGREEMENT_BY_PARTNER
 
 Function ChangeAgreementByPartnerOptions() Export
-	Return GetChainLinkOptions("Partner, Agreement, CurrentDate, AgreementType");
+	Return GetChainLinkOptions("Partner, Agreement, CurrentDate, AgreementType, TransactionType");
 EndFunction
 
 Function ChangeAgreementByPartnerExecute(Options) Export
+	If ValueIsFilled(Options.TransactionType) Then
+		Options.AgreementType = ModelServer_V2.GetAgreementTypeByTransactionType(Options.TransactionType);
+	EndIf;
 	Return DocumentsServer.GetAgreementByPartner(Options);
 EndFunction
 

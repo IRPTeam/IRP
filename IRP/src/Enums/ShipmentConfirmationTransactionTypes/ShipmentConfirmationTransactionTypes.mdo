@@ -33,4 +33,18 @@
       <value>Return to vendor</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="f38cf7e7-d7bb-4843-8d69-20efe1e1cfdc">
+    <name>ShipmentToTradeAgent</name>
+    <synonym>
+      <key>en</key>
+      <value>Shipment to trade agent</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="0c6a694b-d4cf-4422-9e69-07a66135c2d4">
+    <name>ReturnToConsignor</name>
+    <synonym>
+      <key>en</key>
+      <value>Return to consignor</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

@@ -1691,4 +1691,18 @@
 			<value>false</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.SalesReportFromTradeAgent</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.SalesReportToConsignor</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
 </Rights>

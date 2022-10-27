@@ -2,6 +2,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.RowKey = Parameters.RowKey;
+	ThisObject.Company = Parameters.Company;
 	ArrayOfProductTreeRows = New Array();
 	CreateProductionTreeAtServer(ArrayOfProductTreeRows, Parameters.BillOfMaterialRows, True);
 	DrawProductionTree(ThisObject.ProductionTree, ArrayOfProductTreeRows);

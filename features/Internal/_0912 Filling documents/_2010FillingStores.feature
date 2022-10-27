@@ -31,7 +31,8 @@ Scenario: _201000 preparation ( filling stores)
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
-		When Create catalog Stores objects
+		When Create catalog Companies objects (own Second company)
+		When Create catalog Stores objects (with companies)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Companies objects (partners company)
@@ -130,9 +131,9 @@ Scenario: _201001 check filling in Store field in the document Sales order
 		And I select current line in "List" table
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' | 'Quantity'     | 'Store'    |
-			| 'Dress' | 'XS/Blue'  | '2,000' | 'Store 01' |
-			| 'Shirt' | '36/Red'   | '1,000' | 'Store 01' |
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
+			| 'Dress' | 'XS/Blue'  | '2,000'    | 'Store 01' |
+			| 'Shirt' | '36/Red'   | '1,000'    | 'Store 01' |
 		And I close all client application windows
 
 Scenario: _201002 check filling in Store field in the document Sales invoice
@@ -541,6 +542,1980 @@ Scenario: _201006 check filling in Store field in the Goods receipt
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    |
 			| 'Trousers' | '2,000'    | '38/Yellow' | 'pcs'  | 'Store 03' |
 			And I close all client application windows
+
+Scenario: _201010 сheck filling of the bundle of store and company in the SO
+	And I close all client application windows
+	* Open SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click "Create" button
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click choice button of "Store" attribute in "ItemList" table
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+		And I close current window
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] in row [1] does not match company [Second Company]'|
+		And I close all client application windows
+		
+
+Scenario: _201011 сheck filling of the bundle of store and company in the SI
+	And I close all client application windows
+	* Open SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click "Create" button
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 08'    | 'Second Company'           |
+			| 'Store 05'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click choice button of "Store" attribute in "ItemList" table
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+		And I close current window
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] in row [1] does not match company [Second Company]'|
+		And I close all client application windows						
+				
+
+Scenario: _201012 сheck filling of the bundle of store and company in the PO
+	And I close all client application windows
+	* Open PO
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click "Create" button
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+			| 'Store 05'    | 'Second Company'           |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click choice button of "Store" attribute in "ItemList" table
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+		And I close current window
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] in row [1] does not match company [Second Company]'|
+		And I close all client application windows	
+				
+Scenario: _201013 сheck filling of the bundle of store and company in the PI
+	And I close all client application windows
+	* Open PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click "Create" button
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click choice button of "Store" attribute in "ItemList" table
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+		And I close current window
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] in row [1] does not match company [Second Company]'|
+		And I close all client application windows
+
+	
+Scenario: _201014 сheck filling of the bundle of store and company in the Bundling
+	And I close all client application windows
+	* Open document
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+		And I click "Create" button
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then in the TestClient message log contains lines by template:
+			|'Store [Store 07] does not match company [Second Company]'|
+		And I close all client application windows
+
+
+Scenario: _201015 сheck filling of the bundle of store and company in the Unbundling
+	And I close all client application windows
+	* Open document
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		And I click "Create" button
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then in the TestClient message log contains lines by template:
+			|'Store [Store 07] does not match company [Second Company]'|
+		And I close all client application windows
+
+Scenario: _201016 сheck filling of the bundle of store and company in the GR
+	And I close all client application windows
+	* Open GR
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click "Create" button
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 05'    | 'Second Company' |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'        |
+			| 'Store 05'    | 'Second Company' |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click choice button of "Store" attribute in "ItemList" table
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 06'    | 'Main Company' |
+		And I close current window
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] in row [1] does not match company [Second Company]'|
+		And I close all client application windows
+
+
+Scenario: _201017 сheck filling of the bundle of store and company in the SC
+	And I close all client application windows
+	* Open SC
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click "Create" button
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 05'    | 'Second Company' |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'        |
+			| 'Store 05'    | 'Second Company' |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click choice button of "Store" attribute in "ItemList" table
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 06'    | 'Main Company' |
+		And I close current window
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] in row [1] does not match company [Second Company]'|
+		And I close all client application windows
+
+Scenario: _201018 сheck filling of the bundle of store and company in the SRO
+	And I close all client application windows
+	* Open SRO
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I click "Create" button
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click choice button of "Store" attribute in "ItemList" table
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+		And I close current window
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] in row [1] does not match company [Second Company]'|
+		And I close all client application windows
+
+
+Scenario: _201019 сheck filling of the bundle of store and company in the SR
+	And I close all client application windows
+	* Open SR
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I click "Create" button
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click choice button of "Store" attribute in "ItemList" table
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+		And I close current window
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] in row [1] does not match company [Second Company]'|
+		And I close all client application windows
+
+
+Scenario: _201020 сheck filling of the bundle of store and company in the PRO
+	And I close all client application windows
+	* Open PRO
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And I click "Create" button
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+			| 'Store 05'    | 'Second Company'           |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click choice button of "Store" attribute in "ItemList" table
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+		And I close current window
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] in row [1] does not match company [Second Company]'|
+		And I close all client application windows
+
+
+Scenario: _201021 сheck filling of the bundle of store and company in the PR
+	And I close all client application windows
+	* Open PR
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I click "Create" button
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+			| 'Store 05'    | 'Second Company'           |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click choice button of "Store" attribute in "ItemList" table
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+		And I close current window
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] in row [1] does not match company [Second Company]'|
+		And I close all client application windows
+
+
+Scenario: _201022 сheck filling of the bundle of store and company in the ISR
+	And I close all client application windows
+	* Open ISR
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I click "Create" button
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+			| 'Store 05'    | 'Second Company'           |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] does not match company [Second Company]'|
+		And I close all client application windows
+
+
+Scenario: _201023 сheck filling of the bundle of store and company in the ITO
+	And I close all client application windows
+	* Open ITO
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And I click "Create" button
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores sender choise form
+		And I click Choice button of the field named "StoreSender"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+			| 'Store 05'    | 'Second Company'           |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Check stores receiver choise form
+		And I click Choice button of the field named "StoreReceiver"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+			| 'Store 05'    | 'Second Company'           |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 06'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "StoreSender"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] does not match company [Second Company]'|
+		And I close all client application windows
+
+
+Scenario: _201024 сheck filling of the bundle of store and company in the IT
+	And I close all client application windows
+	* Open IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I click "Create" button
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores sender choise form
+		And I click Choice button of the field named "StoreSender"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+			| 'Store 05'    | 'Second Company'           |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Check stores receiver choise form
+		And I click Choice button of the field named "StoreReceiver"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+			| 'Store 05'    | 'Second Company'           |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 06'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "StoreSender"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] does not match company [Second Company]'|
+		And I close all client application windows
+
+
+Scenario: _201025 сheck filling of the bundle of store and company in the Item stock adjustment
+	And I close all client application windows
+	* Open ISA
+		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+		And I click "Create" button
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+			| 'Store 05'    | 'Second Company'           |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key (surplus)" field in "ItemList" table
+		And I click choice button of "Item key (surplus)" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] does not match company [Second Company]'|
+		And I close all client application windows
+
+
+Scenario: _201026 сheck filling of the bundle of store and company in the Opening entry
+	And I close all client application windows
+	* Open OE
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I click "Create" button
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Select store
+		And I activate field named "InventoryLineNumber" in "Inventory" table
+		And in the table "Inventory" I click the button named "InventoryAdd"
+		And I activate "Item" field in "Inventory" table
+		And I select current line in "Inventory" table
+		And I click choice button of "Item" attribute in "Inventory" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "Inventory" table
+		And I click choice button of "Item key" attribute in "Inventory" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "Inventory" table
+		And I input "1,000" text in "Quantity" field of "Inventory" table
+		And I finish line editing in "Inventory" table
+		And I activate "Store" field in "Inventory" table
+		And I select current line in "Inventory" table
+		And I click choice button of "Store" attribute in "Inventory" table
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+			| 'Store 05'    | 'Second Company'           |
+		* Select store for Main Company
+			And I go to line in "List" table
+				| 'Company'      | 'Description' |
+				| 'Main Company' | 'Store 07'    |
+			And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] in row [1] does not match company [Second Company]'|
+		And I close all client application windows			
+
+
+Scenario: _201027 сheck filling of the bundle of store and company in the Planned receipt reservation
+	And I close all client application windows
+	* Open PRR
+		Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
+		And I click "Create" button
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Select button of "Store (incoming)" field
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+			| 'Store 05'    | 'Second Company'           |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Select button of "Store (incoming)" field
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] does not match company [Second Company]'|
+		And I close all client application windows
+
+
+
+Scenario: _201028 сheck filling of the bundle of store and company in the Production
+	And I close all client application windows
+	* Open Production
+		Given I open hyperlink "e1cib/list/Document.Production"
+		And I click "Create" button
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Select button of "Store production" field
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+			| 'Store 05'    | 'Second Company'           |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Select button of "Store production" field
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] does not match company [Second Company]'|
+		And I close all client application windows
+
+
+Scenario: _201029 сheck filling of the bundle of store and company in the RSR
+	And I close all client application windows
+	* Open RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click "Create" button
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click choice button of "Store" attribute in "ItemList" table
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+		And I close current window
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] in row [1] does not match company [Second Company]'|
+		And I close all client application windows
+
+
+Scenario: _201030 сheck filling of the bundle of store and company in the RRR
+	And I close all client application windows
+	* Open RRR
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I click "Create" button
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click choice button of "Store" attribute in "ItemList" table
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+		And I close current window
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] in row [1] does not match company [Second Company]'|
+		And I close all client application windows
+
+
+Scenario: _201031 сheck filling of the bundle of store and company in the Stock adjustment as surplus
+	And I close all client application windows
+	* Open document
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I click "Create" button
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+			| 'Store 05'    | 'Second Company'           |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] does not match company [Second Company]'|
+		And I close all client application windows
+
+
+Scenario: _201031 сheck filling of the bundle of store and company in the Stock adjustment as write off
+	And I close all client application windows
+	* Open document
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I click "Create" button
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+			| 'Store 05'    | 'Second Company'           |
+	* Select store for Main Company
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Change Company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+	* Check stores choise form
+		And I click Choice button of the field named "Store"
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 05'    | 'Second Company'           |
+			| 'Store 08'    | 'Second Company'           |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'      |
+			| 'Store 07'    | 'Main Company' |
+			| 'Store 06'    | 'Main Company' |
+	* Check message that store and company don't match
+		And I close current window
+		And I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] does not match company [Second Company]'|
+		And I close all client application windows
+
+
+Scenario: _201032 сheck filling of the bundle of store and company in the Work order
+	And I close all client application windows
+	* Open document
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		And I click "Create" button
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Add items and materials
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'    | 'Item key' |
+			| 'Service' | 'Rent'     |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And in the table "Materials" I click the button named "MaterialsAdd"
+		And I activate field named "MaterialsItem" in "Materials" table
+		And I click choice button of the attribute named "MaterialsItem" in "Materials" table
+		And I go to line in "List" table
+			| 'Description' | 'Reference' |
+			| 'Bag'         | 'Bag'       |
+		And I select current line in "List" table
+		And I activate "Store" field in "Materials" table
+		And I click choice button of "Store" attribute in "Materials" table
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+			| 'Store 05'    | 'Second Company'           |
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Chenge company	
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table	
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] in row [1] does not match company [Second Company]'|
+		And I close all client application windows
+
+
+Scenario: _201033 сheck filling of the bundle of store and company in the Work sheet
+	And I close all client application windows
+	* Open document
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		And I click "Create" button
+	* Select company
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  |
+			| '2'    | 'Main Company' |
+		And I select current line in "List" table
+	* Add items and materials
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'    | 'Item key' |
+			| 'Service' | 'Rent'     |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And in the table "Materials" I click the button named "MaterialsAdd"
+		And I activate field named "MaterialsItem" in "Materials" table
+		And I click choice button of the attribute named "MaterialsItem" in "Materials" table
+		And I go to line in "List" table
+			| 'Description' | 'Reference' |
+			| 'Bag'         | 'Bag'       |
+		And I select current line in "List" table
+		And I activate "Store" field in "Materials" table
+		And I click choice button of "Store" attribute in "Materials" table
+		And "List" table contains lines
+			| 'Description' | 'Company'                  |
+			| 'Store 01'    | 'Shared for all companies' |
+			| 'Store 02'    | 'Shared for all companies' |
+			| 'Store 03'    | 'Shared for all companies' |
+			| 'Store 04'    | 'Shared for all companies' |
+			| 'Store 07'    | 'Main Company'             |
+			| 'Store 06'    | 'Main Company'             |
+		And "List" table does not contain lines
+			| 'Description' | 'Company'        |
+			| 'Store 08'    | 'Second Company' |
+			| 'Store 05'    | 'Second Company'           |
+		And I go to line in "List" table
+			| 'Company'      | 'Description' |
+			| 'Main Company' | 'Store 07'    |
+		And I select current line in "List" table
+	* Chenge company	
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table	
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Store [Store 07] in row [1] does not match company [Second Company]'|
+		And I close all client application windows
+
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

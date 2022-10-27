@@ -163,6 +163,21 @@ Scenario: Create catalog Companies objects (own Second company)
 		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'OurCompany' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |
 		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'False'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1853' | ''            | ''                                                                 | 'Enum.CompanyLegalType.Company' | 'True' | 'Second Company'           | ''                 | ''               | 'Second Company TR'           |
 
+Scenario: Create catalog Stores objects (with companies)
+
+	And I check or create catalog "Stores" objects:
+		| 'Ref'                                                            | 'DeletionMark' | 'Code' | 'UseGoodsReceipt' | 'UseShipmentConfirmation' | 'Transit' | 'NegativeStockControl' | 'Company'                                                           | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Stores?refName=Default'                      | 'False'        | 1      | 'False'           | 'False'                   | 'False'   | 'False'                | ''                                                                  | ''               | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | 'False'        | 2      | 'False'           | 'False'                   | 'False'   | 'False'                | ''                                                                  | 'Store 01'       | ''                 | ''               | 'Store 01 TR'    |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c' | 'False'        | 3      | 'True'            | 'True'                    | 'False'   | 'False'                | ''                                                                  | 'Store 02'       | ''                 | ''               | 'Store 02 TR'    |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d' | 'False'        | 4      | 'True'            | 'True'                    | 'False'   | 'False'                | ''                                                                  | 'Store 03'       | ''                 | ''               | 'Store 03 TR'    |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00e' | 'False'        | 5      | 'False'           | 'False'                   | 'False'   | 'False'                | ''                                                                  | 'Store 04'       | ''                 | ''               | 'Store 04 TR'    |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc92' | 'False'        | 6      | 'True'            | 'False'                   | 'False'   | 'False'                | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'Store 07'       | ''                 | ''               | 'Store 07 TR'    |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf11c9f09fc93' | 'False'        | 7      | 'False'           | 'True'                    | 'False'   | 'False'                | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'Store 08'       | ''                 | ''               | 'Store 08 TR'    |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df444' | 'False'        | 8      | 'True'            | 'True'                    | 'False'   | 'False'                | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'Store 05'       | ''                 | ''               | 'Store 05 TR'    |
+		| 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df445' | 'False'        | 9      | 'False'           | 'False'                   | 'False'   | 'False'                | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'Store 06'       | ''                 | ''               | 'Store 06 TR'    |
+
+
 
 Scenario: Create catalog Companies objects (partners company)
 

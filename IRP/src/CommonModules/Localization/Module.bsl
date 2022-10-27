@@ -711,6 +711,10 @@ Function Strings(Lang) Export
 	Strings.Insert("MF_Error_009", NStr("en = 'Planning closing by [%1] [%2] [%3] alredy exists'", Lang));
 	Strings.Insert("MF_Error_010", NStr("en = 'Select any production planing'", Lang));
 	
+	// Store does not match company
+	Strings.Insert("Error_Store_Company", NStr("en = 'Store [%1] does not match company [%2]'", Lang));
+	Strings.Insert("Error_Store_Company_Row", NStr("en = 'Store [%1] in row [%3] does not match company [%2]'", Lang));
+	
 #EndRegion
 
 #Region LandedCost

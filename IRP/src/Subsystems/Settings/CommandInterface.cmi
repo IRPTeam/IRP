@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
+  <subsystemsOrder>
+    <subsystems>Subsystem.Settings.Subsystem.Users</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.Integrations</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.LockDataModification</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.AdminFunctions</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.AddAttributesAndProperties</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.AddDataProc</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.BaseSettings</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.Contacts</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.Equipment</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.OrdersSettings</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.Saas</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.Taxes</subsystems>
+    <subsystems>27fb6a05-6d90-44a3-a511-4ea1b3189f35</subsystems>
+  </subsystemsOrder>
+</cmi:CommandInterface>

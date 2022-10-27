@@ -5,14 +5,18 @@
       <command>Catalog.Agreements.StandardCommand.OpenList</command>
       <visible/>
     </visibilityFragments>
+    <visibilityFragments>
+      <command>Catalog.Items.StandardCommand.OpenList</command>
+      <visible>
+        <common>true</common>
+      </visible>
+    </visibilityFragments>
   </commandsVisibility>
   <commandsPlacement>
     <placementFragments>
       <group>NavigationPanelImportant</group>
-      <commands>CommonCommand.OpenPartnersCustomer</commands>
       <commands>Catalog.Agreements.StandardCommand.OpenList</commands>
       <commands>Catalog.Items.StandardCommand.OpenList</commands>
-      <commands>CommonCommand.OpenCustomerAgreements</commands>
     </placementFragments>
   </commandsPlacement>
   <commandsOrder>
@@ -23,11 +27,20 @@
       <commands>CommonCommand.OpenCustomerAgreements</commands>
       <commands>Catalog.Items.StandardCommand.OpenList</commands>
     </orderFragments>
+    <orderFragments>
+      <group>NavigationPanelOrdinary</group>
+      <commands>Catalog.LegalNameContracts.StandardCommand.OpenList</commands>
+      <commands>Catalog.PartnerItems.StandardCommand.OpenList</commands>
+      <commands>Catalog.PartnersBankAccounts.StandardCommand.OpenList</commands>
+      <commands>Document.CustomersAdvancesClosing.StandardCommand.OpenList</commands>
+    </orderFragments>
   </commandsOrder>
   <subsystemsOrder>
+    <subsystems>Subsystem.SalesAR.Subsystem.Pricing</subsystems>
+    <subsystems>Subsystem.SalesAR.Subsystem.WorkOrders</subsystems>
     <subsystems>Subsystem.SalesAR.Subsystem.Sales</subsystems>
     <subsystems>Subsystem.SalesAR.Subsystem.SalesReturn</subsystems>
-    <subsystems>Subsystem.SalesAR.Subsystem.Pricing</subsystems>
     <subsystems>Subsystem.SalesAR.Subsystem.SpecialOffers</subsystems>
+    <subsystems>7b50f64b-1349-4beb-a961-b061a0df5b04</subsystems>
   </subsystemsOrder>
 </cmi:CommandInterface>

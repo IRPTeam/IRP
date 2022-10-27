@@ -11,12 +11,11 @@
     <picture>CommonPicture.Finance</picture>
   </picture>
   <content>Catalog.CashAccounts</content>
-  <content>Document.VendorsAdvancesClosing</content>
-  <content>Document.CustomersAdvancesClosing</content>
   <subsystems>Bank</subsystems>
   <subsystems>Cash</subsystems>
+  <subsystems>Transfer</subsystems>
+  <subsystems>Retail</subsystems>
   <subsystems>CashTransactions</subsystems>
   <subsystems>SchedulingOfPaymentDeadlines</subsystems>
-  <subsystems>Taxes</subsystems>
   <subsystems>ChequeBond</subsystems>
 </mdclass:Subsystem>

@@ -16,7 +16,10 @@
   <content>CommonCommand.OpenCustomerAgreements</content>
   <content>Catalog.LegalNameContracts</content>
   <content>Catalog.PartnerItems</content>
+  <content>Catalog.PartnersBankAccounts</content>
+  <content>Document.CustomersAdvancesClosing</content>
   <subsystems>Pricing</subsystems>
+  <subsystems>WorkOrders</subsystems>
   <subsystems>Sales</subsystems>
   <subsystems>SalesReturn</subsystems>
   <subsystems>SpecialOffers</subsystems>

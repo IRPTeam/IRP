@@ -13,9 +13,10 @@
   <content>Report.DetailingSupplies</content>
   <content>Report.ProductionPlanning</content>
   <content>DataProcessor.ProductionWorkspace</content>
+  <content>Document.Production</content>
+  <content>Catalog.BillOfMaterials</content>
   <subsystems>Planning</subsystems>
   <subsystems>Produce</subsystems>
-  <subsystems>Statuses</subsystems>
   <subsystems>InventoryTransfer</subsystems>
   <subsystems>ManufacturingPurchase</subsystems>
 </mdclass:Subsystem>

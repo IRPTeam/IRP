@@ -7,11 +7,13 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.TaxRates</content>
   <content>InformationRegister.Taxes</content>
   <content>Catalog.Currencies</content>
   <content>Catalog.ExpenseAndRevenueTypes</content>
   <content>Catalog.CashAccounts</content>
   <content>Catalog.BusinessUnits</content>
+  <content>Catalog.PaymentTypes</content>
+  <content>Catalog.PlanningPeriods</content>
+  <content>Catalog.BankTerms</content>
   <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

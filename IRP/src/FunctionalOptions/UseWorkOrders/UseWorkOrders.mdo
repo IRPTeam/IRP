@@ -11,6 +11,6 @@
   <content>Document.WorkOrderClosing</content>
   <content>Catalog.BillOfMaterials</content>
   <content>Document.WorkOrder</content>
-  <content>Subsystem.WorkOrders</content>
+  <content>Subsystem.SalesAR.Subsystem.WorkOrders</content>
   <content>Catalog.BusinessUnits.Attribute.Workshop</content>
 </mdclass:FunctionalOption>

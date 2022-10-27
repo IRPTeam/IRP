@@ -14,14 +14,16 @@
   <content>Constant.DefaultPictureStorageVolume</content>
   <content>CommonForm.MainSettings</content>
   <content>DataProcessor.DataHistory</content>
-  <content>Catalog.DataBaseStatus</content>
-  <subsystems>AttributeAndProperty</subsystems>
+  <subsystems>Users</subsystems>
+  <subsystems>Integrations</subsystems>
+  <subsystems>AddAttributesAndProperties</subsystems>
   <subsystems>Contacts</subsystems>
   <subsystems>Equipment</subsystems>
-  <subsystems>Integrations</subsystems>
-  <subsystems>ItemsSettings</subsystems>
   <subsystems>OrdersSettings</subsystems>
-  <subsystems>Users</subsystems>
   <subsystems>LockDataModification</subsystems>
   <subsystems>BaseSettings</subsystems>
+  <subsystems>AddDataProc</subsystems>
+  <subsystems>Saas</subsystems>
+  <subsystems>AdminFunctions</subsystems>
+  <subsystems>Taxes</subsystems>
 </mdclass:Subsystem>

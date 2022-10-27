@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7b50f64b-1349-4beb-a961-b061a0df5b04">
+<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c109f339-842d-4835-95d9-307166224b49">
   <name>SpecialOffers</name>
   <synonym>
     <key>en</key>
@@ -7,8 +7,13 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.SpecialOfferTypes</content>
+  <picture xsi:type="core:PictureRef">
+    <picture>CommonPicture.SpecialOffer</picture>
+  </picture>
   <content>Catalog.SpecialOfferRules</content>
+  <content>Catalog.SpecialOfferTypes</content>
   <content>Catalog.SpecialOffers</content>
+  <content>Catalog.ExternalDataProc</content>
+  <content>CommonModule.OffersServer</content>
   <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
 </mdclass:Subsystem>

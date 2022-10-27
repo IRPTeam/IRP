@@ -15,7 +15,7 @@
   <subsystemsOrder>
     <subsystems>Subsystem.Treasury.Subsystem.Cash</subsystems>
     <subsystems>Subsystem.Treasury.Subsystem.Bank</subsystems>
-    <subsystems>Subsystem.Treasury.Subsystem.Taxes</subsystems>
+    <subsystems>Subsystem.Settings.Subsystem.Taxes</subsystems>
     <subsystems>Subsystem.Treasury.Subsystem.CashTransactions</subsystems>
     <subsystems>Subsystem.Treasury.Subsystem.ChequeBond</subsystems>
     <subsystems>Subsystem.Treasury.Subsystem.SchedulingOfPaymentDeadlines</subsystems>

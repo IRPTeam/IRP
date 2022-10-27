@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c56fd3c2-6ee4-4352-8e59-6636c835f4ae">
+  <producedTypes>
+    <selectionType typeId="c385d596-18b1-4e06-894c-136c3b4049b7" valueTypeId="35c255c5-2393-4b3e-a33b-2f81f65f0bfd"/>
+    <listType typeId="3c8b07e1-9f7b-41ff-87dc-ad2dcdd3f462" valueTypeId="e6f8b4c5-769e-4cc1-a0dd-0bc9396ec28a"/>
+    <managerType typeId="d17c0a9d-441c-46b0-b9cf-7d2aa225abab" valueTypeId="90232214-d719-4281-88b5-2884d2808071"/>
+    <recordSetType typeId="0f65483f-706c-4c2d-903c-d6a5ede0238d" valueTypeId="7feac51c-91d7-4946-b7d3-e8bd5ea28121"/>
+    <recordKeyType typeId="6bc989df-6345-417f-b4a4-172d9c4c3801" valueTypeId="25067e63-f70f-49fd-befc-c4e4ffc589f2"/>
+    <recordType typeId="52cbe4dd-84e3-4e3e-9ed3-ea29a338b670" valueTypeId="818c411c-7918-40a6-92f9-3d861a437f88"/>
+    <recordManagerType typeId="8d74c25a-aabb-41b2-aa7a-97d49356bdfb" valueTypeId="360b0c1e-132b-4eaa-b5c4-274f47b5594d"/>
+  </producedTypes>
+  <name>Unit_MockStates</name>
+  <synonym>
+    <key>en</key>
+    <value>Mock states</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="33b57c48-4172-4df0-92a7-7b1343ebcaed">
+    <name>Value</name>
+    <synonym>
+      <key>en</key>
+      <value>Value</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <dimensions uuid="75614dae-6b9d-4d3f-8b7e-4bb4ea7f2359">
+    <name>Mock</name>
+    <synonym>
+      <key>en</key>
+      <value>Mock</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Unit_MockServiceData</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="a88b3862-3cc7-4bbf-9439-fdae85d2a9d5">
+    <name>Key</name>
+    <synonym>
+      <key>en</key>
+      <value>Key</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>100</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+</mdclass:InformationRegister>

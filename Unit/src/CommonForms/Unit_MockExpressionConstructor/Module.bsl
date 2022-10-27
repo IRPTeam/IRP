@@ -7,6 +7,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Mock = Parameters.Mock;
 	Expression = Parameters.Expression;
 	CurrentVariableName = Parameters.VariableName;
+	
+	Expression = StrReplace(Expression, "¶", Chars.CR);
 	LoadVariables();
 EndProcedure
 

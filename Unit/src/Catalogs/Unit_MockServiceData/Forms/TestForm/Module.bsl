@@ -154,6 +154,7 @@ Procedure ClearPreviousData()
 	ThisObject.AnswerBodyString = "";
 	ThisObject.AnswerBodyPicture = "";
 	ThisObject.AnswerBodyMD5 = "";
+	ThisObject.SetAfterAnswer.Clear();
 EndProcedure
 
 &AtServer
@@ -170,7 +171,10 @@ Procedure RunTestMockDataAtServer()
 	
 	If CheckingResult.Successfully Then
 		LoadRequestVariables(RequestVariables);
-		Answer = Unit_MockService.ComposeAnswerToRequestStructure(RequestStructure, ThisObject.MockData, RequestVariables);
+		SetStructure = New Structure;
+		Answer = Unit_MockService.ComposeAnswerToRequestStructure(RequestStructure, 
+			ThisObject.MockData, RequestVariables, SetStructure);
+		LoadSetAfterAnswer(SetStructure);
 		LoadAnswer(Answer);
 	EndIf;
 		
@@ -272,7 +276,7 @@ EndFunction
 // Load request variables.
 // 
 // Parameters:
-//  RequestVariables - Array of KeyAndValue:
+//  RequestVariables - Structure of String:
 //	  * Key - String
 //	  * Value - String
 &AtServer
@@ -282,6 +286,23 @@ Procedure LoadRequestVariables(RequestVariables)
 		RecordVariables = ThisObject.Variables.Add();
 		RecordVariables.Key = KeyValue.Key;
 		RecordVariables.Value = KeyValue.Value; 
+	EndDo;
+
+EndProcedure
+
+// Load set after answer.
+// 
+// Parameters:
+//  SetStructure - Structure of String:
+//	  * Key - String
+//	  * Value - String
+&AtServer
+Procedure LoadSetAfterAnswer(SetStructure)
+	
+	For Each KeyValue In SetStructure Do
+		SetRecord = ThisObject.SetAfterAnswer.Add();
+		SetRecord.Key = KeyValue.Key;
+		SetRecord.Value = KeyValue.Value; 
 	EndDo;
 
 EndProcedure

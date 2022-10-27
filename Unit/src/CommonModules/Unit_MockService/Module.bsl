@@ -39,10 +39,12 @@ EndFunction
 //  RequestStructure - See Unit_MockService.GetStructureRequest 
 //  MockData - CatalogRef.Unit_MockServiceData -
 //  RequestVariables - Structure - Request variables
+//  SetAfterAnswer - Structure - settings after response
 // 
 // Returns:
 //  HTTPServiceResponse - Compose answer to request
-Function ComposeAnswerToRequestStructure(RequestStructure, MockData = Undefined, RequestVariables = Undefined) Export
+Function ComposeAnswerToRequestStructure(RequestStructure, 
+			MockData = Undefined, RequestVariables = Undefined, SetAfterAnswer = Undefined) Export
 	
 	If MockData = Undefined Then
 		MockDataInfo = getMockDataByRequest(RequestStructure);
@@ -52,6 +54,12 @@ Function ComposeAnswerToRequestStructure(RequestStructure, MockData = Undefined,
 	
 	If RequestVariables = Undefined Then
 		RequestVariables = getRequestVariables(RequestStructure, MockData, "");
+	EndIf;
+	
+	NeedExecuteSetAfterAnswer = False;
+	If SetAfterAnswer = Undefined Then
+		SetAfterAnswer = New Structure;
+		NeedExecuteSetAfterAnswer = True;
 	EndIf;
 	
 	If Not ValueIsFilled(MockData) Then
@@ -74,6 +82,13 @@ Function ComposeAnswerToRequestStructure(RequestStructure, MockData = Undefined,
 		Response.SetBodyFromString(TransformationText(BodyString, RequestVariables));
 	Else
 		Response.SetBodyFromBinaryData(BodyRowValue);
+	EndIf;
+	
+	ReadSetAfterAnswer(SetAfterAnswer, MockData, RequestVariables);
+	If NeedExecuteSetAfterAnswer Then
+		For Each KeyValue In SetAfterAnswer Do
+			InformationRegisters.Unit_MockStates.SetMockState(MockData, KeyValue.Key, KeyValue.Value);
+		EndDo;
 	EndIf;
 	
 	Return Response;
@@ -188,18 +203,17 @@ Function CheckRequestToMockData(RequestStructure, Selection, RequestVariables) E
 		Return Result;
 	EndIf;
 	
-	If Selection.isVariablesFilter Or Selection.isVariablesBodyFilter Then
+	If RequestVariables.Count() = 0 Then
 		RequestVariables = getRequestVariables(RequestStructure, MockDataRef, Result.Logs);
+	EndIf;
+	
+	If Selection.isVariablesFilter Or Selection.isVariablesBodyFilter Then
 		If Selection.isVariablesFilter And Not VariablesCheck(RequestVariables, MockDataRef, Result.Logs) Then
 			Return Result;
 		EndIf;
 		If Selection.isVariablesBodyFilter And Not VariablesBodyCheck(RequestVariables, MockDataRef, Result.Logs) Then
 			Return Result;
 		EndIf;
-	EndIf;
-	
-	If RequestVariables.Count() = 0 Then
-		RequestVariables = getRequestVariables(RequestStructure, MockDataRef, Result.Logs);
 	EndIf;
 	
 	AddLineToLogs(Result.Logs, R().Mock_Info_AllChecskPassedSuccessfully, True);
@@ -849,12 +863,27 @@ Function getRequestVariables(RequestStructure, MockData, Logs)
 	AddLineToLogs(Logs, R().Mock_Info_StartGettingVariables, True);
 	
 	Result = New Structure;
+	Result.Insert("_mock", MockData);
+	
+	For Each Element In MockData.Request_Headers Do
+		If Not IsBlankString(Element.VariableName) Then
+			AddLineToLogs(Logs, StrTemplate(R().Mock_Info_StartCalculationOf, Element.VariableName));
+			RequestValue = getValueOfBodyVariable(RequestStructure, "", Element.Value, Result);
+			Result.Insert(Element.VariableName, RequestValue);
+		EndIf;
+	EndDo;
+	
 	For Each Element In MockData.Request_Variables Do
 		RequestValue = RequestStructure.Options.Get(Element.VariableName);
 		If Not RequestValue = Undefined Then
 			Result.Insert(Element.VariableName, RequestValue);
 			AddLineToLogs(Logs, StrTemplate("%1 - %2", R().Mock_Info_FoundOut, Element.VariableName));
+		ElsIf Not IsBlankString(Element.Value) Then
+			AddLineToLogs(Logs, StrTemplate(R().Mock_Info_StartCalculationOf, Element.VariableName));
+			RequestValue = getValueOfBodyVariable(RequestStructure, "", Element.Value, Result);
+			Result.Insert(Element.VariableName, RequestValue);
 		Else
+			Result.Insert(Element.VariableName, "");
 			AddLineToLogs(Logs, StrTemplate("%1 - %2", R().Mock_Info_NotFound, Element.VariableName));
 		EndIf;
 	EndDo;
@@ -1061,7 +1090,7 @@ Function TransformationValue(SomeValue, RequestVariables)
 	IF StrLen(SomeValue) > 6 And StrStartsWith(SomeValue, "{{{") And StrEndsWith(SomeValue, "}}}") Then
 		Params = CommonFunctionsServer.GetRecalculateExpressionParams();
 		Params.SafeMode = True;
-		Params.Expression = Mid(SomeValue, 4, StrLen(SomeValue) - 6);
+		Params.Expression = GetExecuteExpression(SomeValue);
 		Params.AddInfo = RequestVariables;
 		ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
 		If ResultInfo.isError Then
@@ -1075,7 +1104,7 @@ Function TransformationValue(SomeValue, RequestVariables)
 		Params = CommonFunctionsServer.GetRecalculateExpressionParams();
 		Params.SafeMode = True;
 		Params.Type = Enums.ExternalFunctionType.Execute;
-		Params.Expression = Mid(SomeValue, 4, StrLen(SomeValue) - 6);
+		Params.Expression = GetExecuteExpression(SomeValue);
 		Params.AddInfo = RequestVariables;
 		ResultInfo = CommonFunctionsServer.RecalculateExpression(Params);
 		If ResultInfo.isError Then
@@ -1087,6 +1116,21 @@ Function TransformationValue(SomeValue, RequestVariables)
 	
 	Return SomeValue;
 	
+EndFunction
+
+// Get execute expression.
+// 
+// Parameters:
+//  Input - String - Input string
+// 
+// Returns:
+//  String - execute expression
+Function GetExecuteExpression(Input)
+	Result = Mid(Input, 4, StrLen(Input) - 6);
+	Result = StrReplace(Result, "¶", Chars.CR);
+	Result = StrReplace(Result, "$set(", "InformationRegisters.Unit_MockStates.SetMockState(Params.AddInfo._mock, ");
+	Result = StrReplace(Result, "$get(", "InformationRegisters.Unit_MockStates.GetMockState(Params.AddInfo._mock, ");
+	Return Result;
 EndFunction
 
 // Transformation text.
@@ -1133,5 +1177,17 @@ Function TransformationText(Val SomeText, RequestVariables) Export
 	Return SomeText;
 	
 EndFunction
+
+// Read set after answer.
+// 
+// Parameters:
+//  SetAfterAnswer - Structure - Setting after answer
+//  MockData - CatalogRef.Unit_MockServiceData - mock
+//  RequestVariables - Structure - Request variables
+Procedure ReadSetAfterAnswer(SetAfterAnswer, MockData, RequestVariables)
+	For Each SetItem In MockData.AfterAnswer_Set Do
+		SetAfterAnswer.Insert(SetItem.Key, TransformationText(SetItem.Value, RequestVariables));
+	EndDo;
+EndProcedure
 
 #EndRegion

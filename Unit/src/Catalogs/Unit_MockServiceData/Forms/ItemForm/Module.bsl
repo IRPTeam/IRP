@@ -127,6 +127,19 @@ EndProcedure
 
 #EndRegion
 
+#Region FormTableItemsEventHandlersAfterAnswer_Set
+
+&AtClient
+Procedure AfterAnswer_SetValueOpening(Item, StandardProcessing)
+	StandardProcessing = False;
+	CurrentRecord = Items.AfterAnswer_Set.CurrentData;
+	Expression = CurrentRecord.Value;
+	VariableName = CurrentRecord.Key;
+	OpenExpressionConstructor(Item, Expression, VariableName);
+EndProcedure
+
+#EndRegion
+
 #Region FormCommandsEventHandlers
 
 &AtClient

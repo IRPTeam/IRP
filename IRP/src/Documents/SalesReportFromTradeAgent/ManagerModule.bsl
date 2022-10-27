@@ -130,6 +130,7 @@ Function ItemList()
 		|	DocItemList.Ref.Company AS Company,
 		|	DocItemList.Ref AS Invoice,
 		|	DocItemList.ItemKey AS ItemKey,
+		|	DocItemList.Key AS RowKey,
 		|	DocItemList.Quantity AS UnitQuantity,
 		|	DocItemList.QuantityInBaseUnit AS Quantity,
 		|	DocItemList.TotalAmount AS Amount,
@@ -240,8 +241,6 @@ Function R4050B_StockInventory()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Company,
-		// #1533
-		//|	ItemList.Store,
 		|	ItemList.ItemKey,
 		|	SUM(ItemList.Quantity) AS Quantity
 		|INTO R4050B_StockInventory
@@ -254,8 +253,6 @@ Function R4050B_StockInventory()
 		|	VALUE(AccumulationRecordType.Expense),
 		|	ItemList.Period,
 		|	ItemList.Company,
-		// #1533
-		//|	ItemList.Store,
 		|	ItemList.ItemKey";
 EndFunction
 
@@ -401,8 +398,6 @@ Function T6020S_BatchKeysInfo()
 	Return
 		"SELECT
 		|	ItemList.ItemKey,
-		// #1533
-		//|	ItemList.Store,
 		|	ItemList.Company,
 		|	SUM(ItemList.Quantity) AS Quantity,
 		|	ItemList.Period,
@@ -412,13 +407,10 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList AS ItemList
 		|WHERE
 		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
-		// #1533
 		|	AND FALSE
 		|
 		|GROUP BY
 		|	ItemList.ItemKey,
-		// #1533
-		//|	ItemList.Store,
 		|	ItemList.Company,
 		|	ItemList.Period,
 		|	VALUE(Enum.BatchDirection.Expense)";

@@ -6,8 +6,6 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
-	// #1533
-	//FillTransactionTypeChoiceList(Form);
 	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);	
 	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
 EndProcedure
@@ -62,13 +60,3 @@ Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
 EndProcedure
 
 #EndRegion
-
-// #1533
-//Procedure FillTransactionTypeChoiceList(Form)
-//	EnumValues   = Enums.ShipmentConfirmationTransactionTypes;
-//	EnumMetadata = Metadata.Enums.ShipmentConfirmationTransactionTypes.EnumValues;
-//	
-//	Form.Items.TransactionType.ChoiceList.Add(EnumValues.Sales             , EnumMetadata.Sales.Synonym);
-//	Form.Items.TransactionType.ChoiceList.Add(EnumValues.ReturnToVendor    , EnumMetadata.ReturnToVendor.Synonym);
-//	Form.Items.TransactionType.ChoiceList.Add(EnumValues.InventoryTransfer , EnumMetadata.InventoryTransfer.Synonym);
-//EndProcedure

@@ -384,7 +384,6 @@ Function ItemList()
 		|		ELSE SalesOrderItemList.ReservationDate
 		|	END AS ReservationDate,
 		|	SalesOrderItemList.SalesPerson,
-		|	// #1533
 		|	SalesOrderItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
 		|	SalesOrderItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent
 		|INTO ItemList
@@ -525,7 +524,6 @@ Function R2022B_CustomersPaymentPlanning()
 		|	SalesOrderPaymentTerms.Ref = &Ref
 		|	AND SalesOrderPaymentTerms.CalculationType = VALUE(Enum.CalculationTypes.Prepaid)
 		|	AND &StatusInfoPosting
-		// #1533
 		|	AND SalesOrderPaymentTerms.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales)
 		|GROUP BY
 		|	SalesOrderPaymentTerms.Ref.Date,
@@ -602,7 +600,6 @@ Function R3024B_SalesOrdersToBePaid()
 		|	AND (PaymentTerms.CalculationType = VALUE(Enum.CalculationTypes.Prepaid)
 		|	AND PaymentTerms.CanBePaid)
 		|	AND &StatusInfoPosting
-		// #1533
 		|	AND PaymentTerms.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales)
 		|GROUP BY
 		|	PaymentTerms.Ref,

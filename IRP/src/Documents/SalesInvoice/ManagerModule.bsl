@@ -258,10 +258,8 @@ Function ItemList()
 		|	SalesInvoiceItemList.Ref.LegalNameContract AS LegalNameContract,
 		|	SalesInvoiceItemList.PriceType,
 		|	SalesInvoiceItemList.SalesPerson,
-		// #1533
 		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
 		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS ShipmentToTradeAgent
-		//------
 		|INTO ItemList
 		|FROM
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -349,10 +347,8 @@ Function Taxes()
 		|	END AS TaxAmount,
 		|	SalesInvoiceItemList.NetAmount AS TaxableAmount,
 		|	SalesInvoiceItemList.Ref.Branch AS Branch,
-		// #1533
 		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
 		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS ShipmentToTradeAgent
-		//------
 		|INTO Taxes
 		|FROM
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -391,7 +387,6 @@ Function R2001T_Sales()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		// #1533
 		|	ItemList.IsSales";
 EndFunction
 
@@ -495,10 +490,7 @@ Function R2040B_TaxesIncoming()
 		|FROM
 		|	Taxes AS Taxes
 		|WHERE
-		// #1533
 		|	Taxes.IsSales";
-		//---
-		//|	TRUE";
 EndFunction
 
 #Region Stock
@@ -725,7 +717,6 @@ Function R4050B_StockInventory()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.IsService
-		// #1533
 		|	AND ItemList.IsSales
 		|
 		|GROUP BY
@@ -798,7 +789,6 @@ Function R2021B_CustomersTransactions()
 		|INTO R2021B_CustomersTransactions
 		|FROM
 		|	ItemList AS ItemList
-		// #1533
 		|WHERE
 		|	ItemList.IsSales
 		|GROUP BY
@@ -898,7 +888,6 @@ Function R5010B_ReconciliationStatement()
 		|INTO R5010B_ReconciliationStatement
 		|FROM
 		|	ItemList AS ItemList
-		// #1533
 		|WHERE
 		|	ItemList.IsSales
 		|GROUP BY
@@ -950,7 +939,6 @@ Function R5021T_Revenues()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		// #1533
 		|	ItemLIst.IsSales";
 EndFunction
 
@@ -993,7 +981,6 @@ Function T2015S_TransactionsInfo()
 	|INTO T2015S_TransactionsInfo
 	|FROM
 	|	ItemList AS ItemList
-	// #1533
 	|WHERE
 	|	ItemList.IsSales
 	|GROUP BY
@@ -1035,7 +1022,6 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList AS ItemList
 		|WHERE
 		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
-		// #1533
 		|	AND ItemList.IsSales
 		|
 		|GROUP BY

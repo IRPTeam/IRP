@@ -9,19 +9,14 @@ Function GetLinkedDocumentsFilter_SI(Object) Export
 	Filter.Insert("CurrencySales"        , Object.Currency);
 	Filter.Insert("PriceIncludeTaxSales" , Object.PriceIncludeTax);
 	
-	// #1533
 	If Object.TransactionType = PredefinedValue("Enum.SalesTransactionTypes.Sales") Then
 		Filter.Insert("TransactionType", PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Sales"));
 	ElsIf Object.TransactionType = PredefinedValue("Enum.SalesTransactionTypes.ShipmentToTradeAgent") Then
 		Filter.Insert("TransactionType", PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent"));
 	EndIf;
-	//---
 	
-	Filter.Insert("ProcurementMethod"    , PredefinedValue("Enum.ProcurementMethods.Purchase"));
-	
-	// #1533
+	Filter.Insert("ProcurementMethod"    , PredefinedValue("Enum.ProcurementMethods.Purchase"));	
 	Filter.Insert("TransactionTypeSales" , Object.TransactionType);
-	//---
 	Filter.Insert("Ref"                  , Object.Ref);
 	Return Filter;
 EndFunction
@@ -49,9 +44,7 @@ Function GetLinkedDocumentsFilter_SRO(Object) Export
 	Filter.Insert("AgreementSales"       , Object.Agreement);
 	Filter.Insert("CurrencySales"        , Object.Currency);
 	Filter.Insert("PriceIncludeTaxSales" , Object.PriceIncludeTax);
-	// #1533
 	Filter.Insert("TransactionTypeSR"    , Object.TransactionType);
-	//---
 	Filter.Insert("Ref"                  , Object.Ref);
 	Return Filter;
 EndFunction
@@ -63,21 +56,16 @@ Function GetLinkedDocumentsFilter_SR(Object) Export
 	Filter.Insert("AgreementSales"       , Object.Agreement);
 	Filter.Insert("CurrencySales"        , Object.Currency);
 	Filter.Insert("PriceIncludeTaxSales" , Object.PriceIncludeTax);
-	// #1533
-	//Filter.Insert("TransactionType"      , PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer"));
+	
 	If Object.TransactionType = PredefinedValue("Enum.SalesReturnTransactionTypes.ReturnFromCustomer") Then
 		Filter.Insert("TransactionType" , PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer"));
 	ElsIf Object.TransactionType = PredefinedValue("Enum.SalesReturnTransactionTypes.ReturnFromTradeAgent") Then
 		Filter.Insert("TransactionType" , PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromTradeAgent"));
 	EndIf;
-	//---
-	Filter.Insert("Ref"                  , Object.Ref);
-	
+	Filter.Insert("Ref"           , Object.Ref);
 	Filter.Insert("CompanyReturn" , Object.Company);
 	Filter.Insert("BranchReturn"  , Object.Branch);
-	// #1533
 	Filter.Insert("TransactionTypeSR", Object.TransactionType);
-	//---
 	
 	VisibleFields = New Structure();
 	VisibleFields.Insert("Company");
@@ -104,19 +92,15 @@ Function GetLinkedDocumentsFilter_PI(Object) Export
 	Filter.Insert("AgreementPurchases"       , Object.Agreement);
 	Filter.Insert("CurrencyPurchases"        , Object.Currency);
 	Filter.Insert("PriceIncludeTaxPurchases" , Object.PriceIncludeTax);
-	// #1533
-	//Filter.Insert("TransactionType"          , PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase"));
+	
 	If Object.TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.Purchase") Then
 		Filter.Insert("TransactionType", PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase"));
 	ElsIf Object.TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.ReceiptFromConsignor") Then
 		Filter.Insert("TransactionType", PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReceiptFromConsignor"));
 	EndIf;
-	//---
 	
 	Filter.Insert("ProcurementMethod"        , PredefinedValue("Enum.ProcurementMethods.Purchase"));
-	// #1533
 	Filter.Insert("TransactionTypePurchases" , Object.TransactionType);
-	//---
 	Filter.Insert("Ref"                      , Object.Ref);
 	Return Filter;
 EndFunction
@@ -143,9 +127,7 @@ Function GetLinkedDocumentsFilter_PRO(Object) Export
 	Filter.Insert("AgreementPurchases"       , Object.Agreement);
 	Filter.Insert("CurrencyPurchases"        , Object.Currency);
 	Filter.Insert("PriceIncludeTaxPurchases" , Object.PriceIncludeTax);
-	// #1533
 	Filter.Insert("TransactionTypePR"        , Object.TransactionType);
-	//---
 	Filter.Insert("Ref"                      , Object.Ref);
 	Return Filter;
 EndFunction
@@ -159,16 +141,14 @@ Function GetLinkedDocumentsFilter_PR(Object) Export
 	Filter.Insert("AgreementPurchases"       , Object.Agreement);
 	Filter.Insert("CurrencyPurchases"        , Object.Currency);
 	Filter.Insert("PriceIncludeTaxPurchases" , Object.PriceIncludeTax);
-	// #1533
-	//Filter.Insert("TransactionType"          , PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor"));
+	
 	If Object.TransactionType = PredefinedValue("Enum.PurchaseReturnTransactionTypes.ReturnToVendor") Then
 		Filter.Insert("TransactionType" , PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor"));
 	ElsIf Object.TransactionType = PredefinedValue("Enum.PurchaseReturnTransactionTypes.ReturnToConsignor") Then
 		Filter.Insert("TransactionType" , PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.ReturnToConsignor"));
 	EndIf;
-	// #1533
+	
 	Filter.Insert("TransactionTypePR"        , Object.TransactionType);
-	//---
 	Filter.Insert("Ref"                      , Object.Ref);
 	Return Filter;
 EndFunction
@@ -244,9 +224,7 @@ Function GetLinkedDocumentsFilter_WO(Object) Export
 	Filter.Insert("AgreementSales"       , Object.Agreement);
 	Filter.Insert("CurrencySales"        , Object.Currency);
 	Filter.Insert("PriceIncludeTaxSales" , Object.PriceIncludeTax);
-	// #1533
 	Filter.Insert("TransactionTypeSales" , PredefinedValue("Enum.SalesTransactionTypes.Sales"));
-	//---
 	Filter.Insert("Ref"                  , Object.Ref);
 	Return Filter;
 EndFunction
@@ -257,9 +235,7 @@ Function GetLinkedDocumentsFilter_WS(Object) Export
 	Filter.Insert("Branch"               , Object.Branch);
 	Filter.Insert("PartnerSales"         , Object.Partner);
 	Filter.Insert("LegalNameSales"       , Object.LegalName);
-	// #1533
 	Filter.Insert("TransactionTypeSales" , PredefinedValue("Enum.SalesTransactionTypes.Sales"));
-	//--
 	Filter.Insert("Ref"                  , Object.Ref);
 	Return Filter;
 EndFunction

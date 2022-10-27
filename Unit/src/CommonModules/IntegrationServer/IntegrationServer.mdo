@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:CommonModule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="63ac12b7-21e0-4ca2-8c38-aaf8b1af7e96" extendedConfigurationObject="38bbd905-53b6-40af-b990-8520db45c489">
+<mdclass:CommonModule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="63ac12b7-21e0-4ca2-8c38-aaf8b1af7e96">
   <name>IntegrationServer</name>
   <objectBelonging>Adopted</objectBelonging>
   <extension xsi:type="mdclassExtension:CommonModuleExtension">
-    <extendedConfigurationObject>Checked</extendedConfigurationObject>
     <module>Extended</module>
     <global>Checked</global>
     <clientManagedApplication>Checked</clientManagedApplication>

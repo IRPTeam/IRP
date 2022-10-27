@@ -63,10 +63,14 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.CurrencyMovementSets.Document_SalesReturn</value>
     </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>-1</multipleValuesUseField>
     <characteristicValues>Document.RetailReturnReceipt.TabularSection.Currencies</characteristicValues>
     <objectField>Document.RetailReturnReceipt.TabularSection.Currencies.StandardAttribute.Ref</objectField>
     <typeField>Document.RetailReturnReceipt.TabularSection.Currencies.Attribute.MovementType</typeField>
     <valueField>Document.RetailReturnReceipt.TabularSection.Currencies.Attribute.Amount</valueField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
+    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <characteristics>
     <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
@@ -75,10 +79,14 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_RetailReturnReceipt</value>
     </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>-1</multipleValuesUseField>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
     <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
     <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
+    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <characteristics>
     <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -87,10 +95,14 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_RetailReturnReceipt</value>
     </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>-1</multipleValuesUseField>
     <characteristicValues>Document.RetailReturnReceipt.TabularSection.AddAttributes</characteristicValues>
     <objectField>Document.RetailReturnReceipt.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.RetailReturnReceipt.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.RetailReturnReceipt.TabularSection.AddAttributes.Attribute.Value</valueField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
+    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>

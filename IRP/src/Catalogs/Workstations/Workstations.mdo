@@ -23,10 +23,14 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Catalog_Workstations</value>
     </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>-1</multipleValuesUseField>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
     <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
     <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
+    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <characteristics>
     <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -35,10 +39,14 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Catalog_Workstations</value>
     </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>-1</multipleValuesUseField>
     <characteristicValues>Catalog.Workstations.TabularSection.AddAttributes</characteristicValues>
     <objectField>Catalog.Workstations.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.Workstations.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.Workstations.TabularSection.AddAttributes.Attribute.Value</valueField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
+    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>

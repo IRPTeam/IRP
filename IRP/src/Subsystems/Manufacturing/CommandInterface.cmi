@@ -33,6 +33,5 @@
     <subsystems>Subsystem.Manufacturing.Subsystem.ManufacturingPurchase</subsystems>
     <subsystems>Subsystem.Manufacturing.Subsystem.Planning</subsystems>
     <subsystems>Subsystem.Manufacturing.Subsystem.Produce</subsystems>
-    <subsystems>7d86442f-b31e-4e55-9157-5eba96919803</subsystems>
   </subsystemsOrder>
 </cmi:CommandInterface>

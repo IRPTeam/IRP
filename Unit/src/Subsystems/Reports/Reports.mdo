@@ -3,12 +3,5 @@
   <name>Reports</name>
   <objectBelonging>Adopted</objectBelonging>
   <extension xsi:type="mdclassExtension:SubsystemExtension"/>
-  <content>2e6c8c9b-fc3d-4167-81c2-e3eaf28bc41f</content>
-  <content>8e44cf27-7f83-442e-a58b-226dea223350</content>
-  <content>d699d493-1c2f-48b7-9ee1-887f1644562f</content>
-  <content>9e897ec6-35fa-4064-a08e-65cf4253925b</content>
-  <content>f164722d-4109-42d0-be20-002e5142cbfd</content>
-  <content>4b0e441e-0256-451a-9407-7412f72b77d2</content>
-  <content>bceb4b3b-d088-43b6-9f89-1d4efd78c474</content>
   <content>Report.REP_Barcodes</content>
 </mdclass:Subsystem>

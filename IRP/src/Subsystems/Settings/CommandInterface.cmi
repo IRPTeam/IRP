@@ -13,6 +13,5 @@
     <subsystems>Subsystem.Settings.Subsystem.OrdersSettings</subsystems>
     <subsystems>Subsystem.Settings.Subsystem.Saas</subsystems>
     <subsystems>Subsystem.Settings.Subsystem.Taxes</subsystems>
-    <subsystems>27fb6a05-6d90-44a3-a511-4ea1b3189f35</subsystems>
   </subsystemsOrder>
 </cmi:CommandInterface>

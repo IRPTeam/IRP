@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:CommonAttribute xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="1fd154b3-cbdc-4ec6-b9a9-ce600c69be6b" extendedConfigurationObject="36995b25-456d-4cfd-9003-dbb1a34e64b0">
+<mdclass:CommonAttribute xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="1fd154b3-cbdc-4ec6-b9a9-ce600c69be6b">
   <name>Height</name>
   <objectBelonging>Adopted</objectBelonging>
   <extension xsi:type="mdclassExtension:CommonAttributeExtension">
-    <extendedConfigurationObject>Checked</extendedConfigurationObject>
     <typeExtension>
       <types>
         <state>Checked</state>
@@ -16,7 +15,4 @@
       </numberQualifiers>
     </typeExtension>
   </extension>
-  <type/>
-  <autoUse>DontUse</autoUse>
-  <dataSeparation>DontUse</dataSeparation>
 </mdclass:CommonAttribute>

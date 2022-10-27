@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="f6357900-0005-4972-b7ba-5b2088514bfd" extendedConfigurationObject="167a38ce-a50e-4c07-bc08-058076f87110">
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="f6357900-0005-4972-b7ba-5b2088514bfd">
   <producedTypes>
     <objectType typeId="3ad35304-d05b-4682-97ce-012136c84622" valueTypeId="663a9444-f4db-4c43-9274-0dc117a89113"/>
     <refType typeId="8d96754a-22aa-457b-8d41-35d3b75592dc" valueTypeId="fd80259b-9966-4514-b2bd-8fd68e8cbc48"/>
@@ -9,7 +9,5 @@
   </producedTypes>
   <name>Units</name>
   <objectBelonging>Adopted</objectBelonging>
-  <extension xsi:type="mdclassExtension:CatalogExtension">
-    <extendedConfigurationObject>Checked</extendedConfigurationObject>
-  </extension>
+  <extension xsi:type="mdclassExtension:CatalogExtension"/>
 </mdclass:Catalog>

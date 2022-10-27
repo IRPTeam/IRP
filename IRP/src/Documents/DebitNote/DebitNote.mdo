@@ -22,10 +22,14 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_DebitNote</value>
     </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>-1</multipleValuesUseField>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
     <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
     <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
+    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <characteristics>
     <characteristicTypes>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements</characteristicTypes>
@@ -34,10 +38,14 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.CurrencyMovementSets.Document_DebitNote</value>
     </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>-1</multipleValuesUseField>
     <characteristicValues>Document.DebitNote.TabularSection.Currencies</characteristicValues>
     <objectField>Document.DebitNote.TabularSection.Currencies.StandardAttribute.Ref</objectField>
     <typeField>Document.DebitNote.TabularSection.Currencies.Attribute.MovementType</typeField>
     <valueField>Document.DebitNote.TabularSection.Currencies.Attribute.Amount</valueField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
+    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>

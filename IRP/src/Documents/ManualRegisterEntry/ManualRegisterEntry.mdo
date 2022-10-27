@@ -22,10 +22,14 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_ManualRegisterEntry</value>
     </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>-1</multipleValuesUseField>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
     <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
     <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
+    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <characteristics>
     <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -34,10 +38,14 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_ManualRegisterEntry</value>
     </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>-1</multipleValuesUseField>
     <characteristicValues>Document.ManualRegisterEntry.TabularSection.AddAttributes</characteristicValues>
     <objectField>Document.ManualRegisterEntry.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.ManualRegisterEntry.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.ManualRegisterEntry.TabularSection.AddAttributes.Attribute.Value</valueField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
+    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>

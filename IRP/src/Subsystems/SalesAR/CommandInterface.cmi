@@ -41,6 +41,5 @@
     <subsystems>Subsystem.SalesAR.Subsystem.Sales</subsystems>
     <subsystems>Subsystem.SalesAR.Subsystem.SalesReturn</subsystems>
     <subsystems>Subsystem.SalesAR.Subsystem.SpecialOffers</subsystems>
-    <subsystems>7b50f64b-1349-4beb-a961-b061a0df5b04</subsystems>
   </subsystemsOrder>
 </cmi:CommandInterface>

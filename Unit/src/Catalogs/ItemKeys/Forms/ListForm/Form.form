@@ -62,6 +62,9 @@
         <userVisible>
           <common>true</common>
         </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>List.Code</segments>
+        </dataPath>
         <extendedTooltip>
           <name>CodeExtendedTooltip</name>
           <id>31</id>
@@ -109,6 +112,9 @@
         <userVisible>
           <common>true</common>
         </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>List.Ref</segments>
+        </dataPath>
         <extendedTooltip>
           <name>RefExtendedTooltip</name>
           <id>40</id>
@@ -322,6 +328,9 @@
       <verticalStretch>true</verticalStretch>
       <enableStartDrag>true</enableStartDrag>
       <enableDrag>true</enableDrag>
+      <rowPictureDataPath xsi:type="form:DataPath">
+        <segments>List.IsSpecification</segments>
+      </rowPictureDataPath>
       <rowsPicture xsi:type="core:PictureRef">
         <picture>CommonPicture.IconCollection2</picture>
       </rowsPicture>
@@ -333,6 +342,7 @@
         </period>
         <topLevelParent xsi:type="core:UndefinedValue"/>
         <showRoot>true</showRoot>
+        <allowGettingCurrentRowURL>true</allowGettingCurrentRowURL>
         <userSettingsGroup>ListSettingsComposerUserSettings</userSettingsGroup>
       </extInfo>
     </items>

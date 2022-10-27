@@ -23,6 +23,9 @@
         <userVisible>
           <common>true</common>
         </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>FileList.CreationDate</segments>
+        </dataPath>
         <extendedTooltip>
           <name>FileListCreationDateExtendedTooltip</name>
           <id>25</id>
@@ -70,6 +73,9 @@
         <userVisible>
           <common>true</common>
         </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>FileList.File</segments>
+        </dataPath>
         <extendedTooltip>
           <name>FileListFileExtendedTooltip</name>
           <id>19</id>
@@ -117,6 +123,9 @@
         <userVisible>
           <common>true</common>
         </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>FileList.File.Extension</segments>
+        </dataPath>
         <extendedTooltip>
           <name>FileListFileExtensionExtendedTooltip</name>
           <id>31</id>
@@ -335,6 +344,7 @@
         </period>
         <topLevelParent xsi:type="core:UndefinedValue"/>
         <showRoot>true</showRoot>
+        <allowGettingCurrentRowURL>true</allowGettingCurrentRowURL>
       </extInfo>
     </items>
     <items xsi:type="form:FormGroup">

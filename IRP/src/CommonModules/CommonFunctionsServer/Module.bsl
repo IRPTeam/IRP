@@ -384,7 +384,7 @@ Function GetMD5(Object, ReturnAsGUID = True) Export
 	If TypeOf(Object) = Type("String") Then
 		DataToString = Object;
 	Else
-		DataToString = ValueToStringInternal(Object);
+		DataToString = SerializeXML(Object);
 	EndIf;
 
 	DataHashing = New DataHashing(HashFunction.MD5);

@@ -54,7 +54,7 @@ Function ObjectXDTO(ObjectStructure, TypeName, URI, TreeData)
 			NewRowArray.Array = TypeOf(ObjectData.Value) = Type("Array");			
 			NewRowArray.CanBeEmpty =  XDTOType.Properties.Get(ObjectData.Key).LowerBound = 0;
 			For Each Row In ObjectData.Value Do
-				If TypeOf(Row) = Type("String") Then
+				If Not TypeOf(Row) = Type("Array") Then
 					DataXDTORow = Row;
 				Else
 					DataXDTORow = CommonFunctionsServer.XDTOFactoryObject(Object.WSName).Create(XDTOTypeRow);

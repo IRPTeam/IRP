@@ -178,7 +178,7 @@
     <type>
       <types>Number</types>
       <numberQualifiers>
-        <precision>38</precision>
+        <precision>32</precision>
       </numberQualifiers>
     </type>
     <toolTip>

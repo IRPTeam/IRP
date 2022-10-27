@@ -247,7 +247,7 @@
         <types>Number</types>
         <types>AnyRef</types>
         <numberQualifiers>
-          <precision>38</precision>
+          <precision>32</precision>
           <scale>10</scale>
         </numberQualifiers>
         <stringQualifiers>

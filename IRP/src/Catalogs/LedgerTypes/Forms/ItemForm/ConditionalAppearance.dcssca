@@ -40,6 +40,7 @@
 				<comparisonType>NotFilled</comparisonType>
 				<right xsi:type="v8:StandardBeginningDate">
 					<v8:variant xsi:type="v8:StandardBeginningDateVariant">Custom</v8:variant>
+					<v8:date>0001-01-01T00:00:00</v8:date>
 				</right>
 			</item>
 		</filter>
@@ -62,6 +63,7 @@
 				<comparisonType>NotFilled</comparisonType>
 				<right xsi:type="v8:StandardBeginningDate">
 					<v8:variant xsi:type="v8:StandardBeginningDateVariant">Custom</v8:variant>
+					<v8:date>0001-01-01T00:00:00</v8:date>
 				</right>
 			</item>
 		</filter>

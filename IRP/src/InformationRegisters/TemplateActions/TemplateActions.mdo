@@ -41,6 +41,9 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
   </attributes>
   <attributes uuid="aec5d541-f036-4676-a08b-50b3f4754df0">
     <name>Name</name>
@@ -58,6 +61,9 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
   </attributes>
   <attributes uuid="aa99cc09-1883-49e4-bcbb-e7d404cebcde">
     <name>Path</name>
@@ -75,6 +81,9 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
   </attributes>
   <attributes uuid="f2b6cab0-54d0-4896-8f0e-d737e41689bb">
     <name>CheckRegExp</name>
@@ -90,6 +99,9 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
   </attributes>
   <attributes uuid="55677483-9587-44fb-a7a2-903cbed41a94">
     <name>Value</name>
@@ -98,9 +110,9 @@
       <value>Value</value>
     </synonym>
     <type>
-      <types>Date</types>
-      <types>String</types>
       <types>Boolean</types>
+      <types>String</types>
+      <types>Date</types>
       <types>AnyRef</types>
       <stringQualifiers>
         <length>512</length>
@@ -111,6 +123,9 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
   </attributes>
   <attributes uuid="08780f4b-b0ef-4b8c-8e7f-aa63fc7044f7">
     <name>Action</name>
@@ -125,6 +140,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
   <dimensions uuid="051ffc83-7209-4058-82c5-2ca8b40d81ec">
     <name>FillingTemplate</name>

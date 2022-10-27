@@ -54,18 +54,18 @@
   <defaultListForm>Document.StockAdjustmentAsSurplus.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.StockAdjustmentAsSurplus.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
+  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
   <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
+  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
   <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4052T_StockAdjustmentAsSurplus</registerRecords>
-  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
-  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
   <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
-  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
   <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
+  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

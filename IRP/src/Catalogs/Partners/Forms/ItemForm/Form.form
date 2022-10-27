@@ -676,12 +676,12 @@
     <name>NotificationProcessing</name>
   </handlers>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
@@ -763,9 +763,6 @@ WHERE
     <navigationPanel>
       <cmiFragmentRecord>
         <command>InformationRegister.PartnerSegments.StandardCommand.OpenByValue.Partner</command>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Object.Ref</segments>
-        </commandParameter>
         <group>FormNavigationPanelSeeAlso</group>
         <index>0</index>
         <userVisible>
@@ -777,20 +774,20 @@ WHERE
   </commandInterface>
   <extInfo xsi:type="form:CatalogFormExtInfo">
     <handlers>
-      <event>AfterWriteAtServer</event>
-      <name>AfterWriteAtServer</name>
-    </handlers>
-    <handlers>
-      <event>BeforeWriteAtServer</event>
-      <name>BeforeWriteAtServer</name>
-    </handlers>
-    <handlers>
       <event>AfterWrite</event>
       <name>AfterWrite</name>
     </handlers>
     <handlers>
+      <event>AfterWriteAtServer</event>
+      <name>AfterWriteAtServer</name>
+    </handlers>
+    <handlers>
       <event>OnReadAtServer</event>
       <name>OnReadAtServer</name>
+    </handlers>
+    <handlers>
+      <event>BeforeWriteAtServer</event>
+      <name>BeforeWriteAtServer</name>
     </handlers>
   </extInfo>
 </form:Form>

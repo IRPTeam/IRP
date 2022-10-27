@@ -8,10 +8,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Number</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Number</segments>
     </dataPath>
     <extendedTooltip>
       <name>NumberExtendedTooltip</name>
@@ -60,10 +58,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Date</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Date</segments>
     </dataPath>
     <extendedTooltip>
       <name>DateExtendedTooltip</name>
@@ -112,10 +108,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Company</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Company</segments>
     </dataPath>
     <extendedTooltip>
       <name>CompanyExtendedTooltip</name>
@@ -218,10 +212,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.BeginDate</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.BeginDate</segments>
     </dataPath>
     <extendedTooltip>
       <name>BeginDateExtendedTooltip</name>
@@ -270,10 +262,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.EndDate</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.EndDate</segments>
     </dataPath>
     <extendedTooltip>
       <name>EndDateExtendedTooltip</name>

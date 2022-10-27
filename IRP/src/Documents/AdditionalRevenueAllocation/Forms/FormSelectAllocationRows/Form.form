@@ -88,13 +88,8 @@
                 <userVisible>
                   <common>true</common>
                 </userVisible>
-                <dataPath xsi:type="form:MultiLanguageDataPath">
-                  <paths xsi:type="form:DataPath">
-                    <segments>List.Document</segments>
-                  </paths>
-                  <paths xsi:type="form:DataPath">
-                    <segments>List.Document</segments>
-                  </paths>
+                <dataPath xsi:type="form:DataPath">
+                  <segments>List.Document</segments>
                 </dataPath>
                 <extendedTooltip>
                   <name>ListDocumentExtendedTooltip</name>
@@ -243,6 +238,7 @@
                 </userVisible>
                 <autoFill>true</autoFill>
               </contextMenu>
+              <source>ListSearchString</source>
               <extInfo xsi:type="form:SearchStringAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
@@ -281,6 +277,7 @@
                 <autoFill>true</autoFill>
               </contextMenu>
               <type>ViewStatusAddition</type>
+              <source>ListViewStatus</source>
               <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
@@ -319,6 +316,7 @@
                 <autoFill>true</autoFill>
               </contextMenu>
               <type>SearchControlAddition</type>
+              <source>ListSearchControl</source>
               <extInfo xsi:type="form:SearchControlAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
@@ -622,13 +620,8 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <dataPath xsi:type="form:MultiLanguageDataPath">
-                <paths xsi:type="form:DataPath">
-                  <segments>DocumentRows.ItemKey</segments>
-                </paths>
-                <paths xsi:type="form:DataPath">
-                  <segments>DocumentRows.ItemKey</segments>
-                </paths>
+              <dataPath xsi:type="form:DataPath">
+                <segments>DocumentRows.ItemKey</segments>
               </dataPath>
               <extendedTooltip>
                 <name>DocumentRowsItemKeyExtendedTooltip</name>
@@ -678,13 +671,8 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <dataPath xsi:type="form:MultiLanguageDataPath">
-                <paths xsi:type="form:DataPath">
-                  <segments>DocumentRows.Store</segments>
-                </paths>
-                <paths xsi:type="form:DataPath">
-                  <segments>DocumentRows.Store</segments>
-                </paths>
+              <dataPath xsi:type="form:DataPath">
+                <segments>DocumentRows.Store</segments>
               </dataPath>
               <extendedTooltip>
                 <name>DocumentRowsStoreExtendedTooltip</name>
@@ -897,6 +885,7 @@
                 </userVisible>
                 <autoFill>true</autoFill>
               </contextMenu>
+              <source>DocumentRowsSearchString</source>
               <extInfo xsi:type="form:SearchStringAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
@@ -935,6 +924,7 @@
                 <autoFill>true</autoFill>
               </contextMenu>
               <type>ViewStatusAddition</type>
+              <source>DocumentRowsViewStatus</source>
               <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
@@ -973,6 +963,7 @@
                 <autoFill>true</autoFill>
               </contextMenu>
               <type>SearchControlAddition</type>
+              <source>DocumentRowsSearchControl</source>
               <extInfo xsi:type="form:SearchControlAdditionExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
               </extInfo>
@@ -1020,6 +1011,7 @@
             <horizontalStretch>true</horizontalStretch>
             <verticalStretch>true</verticalStretch>
             <fileDragMode>AsFileRef</fileDragMode>
+            <rowFilter xsi:type="core:UndefinedValue"/>
           </items>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1321,13 +1313,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>ResultTree.Store</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>ResultTree.Store</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>ResultTree.Store</segments>
           </dataPath>
           <extendedTooltip>
             <name>ResultTreeStoreExtendedTooltip</name>
@@ -1419,6 +1406,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>ResultTreeSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1457,6 +1445,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>ResultTreeViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1495,6 +1484,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>ResultTreeSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1707,12 +1697,12 @@
     <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>

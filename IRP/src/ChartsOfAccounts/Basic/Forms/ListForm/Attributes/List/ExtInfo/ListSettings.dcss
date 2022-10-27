@@ -2,7 +2,7 @@
 <Settings xmlns="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core">
 	<filter>
 		<viewMode>Normal</viewMode>
-		<userSettingID>d5817dc1-dd3a-494e-832e-00a0315b6f22</userSettingID>
+		<userSettingID>dfcece9d-5077-440b-b6b3-45a5cb4538eb</userSettingID>
 	</filter>
 	<order>
 		<item xsi:type="OrderItemField">
@@ -31,5 +31,5 @@
 		<userSettingID>a9d0afaf-1c80-4de0-b039-23db3ca8b908</userSettingID>
 	</conditionalAppearance>
 	<itemsViewMode>Normal</itemsViewMode>
-	<itemsUserSettingID>76b6e865-d115-4d5b-82e8-5768bfec3fd5</itemsUserSettingID>
+	<itemsUserSettingID>911b6018-f537-43e8-a417-da56b22f9aec</itemsUserSettingID>
 </Settings>

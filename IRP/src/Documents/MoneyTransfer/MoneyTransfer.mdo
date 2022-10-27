@@ -66,9 +66,9 @@
   <defaultListForm>Document.MoneyTransfer.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.MoneyTransfer.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.R3021B_CashInTransitIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
-  <registerRecords>AccumulationRegister.R3021B_CashInTransitIncoming</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

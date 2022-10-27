@@ -512,12 +512,12 @@
     <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
@@ -653,9 +653,7 @@
       <value>Params data</value>
     </title>
     <id>9</id>
-    <valueType>
-      <types>Arbitrary</types>
-    </valueType>
+    <valueType/>
     <view>
       <common>true</common>
     </view>
@@ -665,9 +663,7 @@
   </attributes>
   <parameters>
     <name>FillingData</name>
-    <valueType>
-      <types>Arbitrary</types>
-    </valueType>
+    <valueType/>
     <keyParameter>true</keyParameter>
   </parameters>
   <commandInterface>

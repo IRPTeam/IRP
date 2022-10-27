@@ -31,6 +31,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <resources uuid="c3543c3e-ec7a-439e-bd05-974b943f25d4">
     <name>AmountTax</name>
@@ -91,6 +92,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="76b8bed8-00da-439a-98a3-26f7ac883a32">
     <name>Branch</name>
@@ -104,6 +106,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="76512ac4-4495-4ad0-869f-f261c7234b01">
     <name>ProfitLossCenter</name>
@@ -117,6 +120,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="dda5c61b-0713-457e-963b-12ff50c27489">
     <name>ExpenseType</name>
@@ -130,6 +134,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="1bb8b91b-875d-4a0f-a2c6-8f4ab12a48ff">
     <name>ItemKey</name>
@@ -143,6 +148,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="a4f6bd77-e423-406b-9ef7-3d7c8f1fec0b">
     <name>Currency</name>
@@ -156,6 +162,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="2424baa3-5321-4413-b89d-6e24506348cc">
     <name>RowID</name>

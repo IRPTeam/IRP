@@ -762,16 +762,16 @@
       <horizontalAlign>Left</horizontalAlign>
     </autoCommandBar>
     <handlers>
+      <event>Selection</event>
+      <name>BasisesTreeSelection</name>
+    </handlers>
+    <handlers>
       <event>BeforeAddRow</event>
       <name>BasisesTreeBeforeAddRow</name>
     </handlers>
     <handlers>
       <event>BeforeDeleteRow</event>
       <name>BasisesTreeBeforeDeleteRow</name>
-    </handlers>
-    <handlers>
-      <event>Selection</event>
-      <name>BasisesTreeSelection</name>
     </handlers>
     <searchStringAddition>
       <visible>true</visible>
@@ -806,6 +806,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
+      <source>BasisesTreeSearchString</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -844,6 +845,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
+      <source>BasisesTreeViewStatus</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -882,6 +884,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
+      <source>BasisesTreeSearchControl</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -1636,6 +1639,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
+      <source>ResultsTableSearchString</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -1674,6 +1678,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
+      <source>ResultsTableViewStatus</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -1712,6 +1717,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
+      <source>ResultsTableSearchControl</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -1759,6 +1765,7 @@
     <horizontalStretch>true</horizontalStretch>
     <verticalStretch>true</verticalStretch>
     <fileDragMode>AsFileRef</fileDragMode>
+    <rowFilter xsi:type="core:UndefinedValue"/>
   </items>
   <autoCommandBar>
     <name>FormCommandBar</name>

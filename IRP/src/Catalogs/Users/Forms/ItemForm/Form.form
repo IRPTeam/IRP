@@ -986,6 +986,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>RoleListSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1024,6 +1025,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>RoleListViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1062,6 +1064,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>RoleListSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1359,16 +1362,16 @@
   </commandInterface>
   <extInfo xsi:type="form:CatalogFormExtInfo">
     <handlers>
+      <event>AfterWriteAtServer</event>
+      <name>AfterWriteAtServer</name>
+    </handlers>
+    <handlers>
       <event>OnReadAtServer</event>
       <name>OnReadAtServer</name>
     </handlers>
     <handlers>
       <event>BeforeWriteAtServer</event>
       <name>BeforeWriteAtServer</name>
-    </handlers>
-    <handlers>
-      <event>AfterWriteAtServer</event>
-      <name>AfterWriteAtServer</name>
     </handlers>
   </extInfo>
 </form:Form>

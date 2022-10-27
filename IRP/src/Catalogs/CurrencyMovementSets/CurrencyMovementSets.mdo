@@ -146,7 +146,6 @@
     </items>
     <items id="f5c4217a-f22a-44a2-a756-d0bb4eed10a8">
       <name>Document_WorkOrder</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>1</value>
       </code>

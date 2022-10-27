@@ -66,9 +66,12 @@
   <defaultListForm>Document.CashPayment.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.CashPayment.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
   <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
+  <registerRecords>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</registerRecords>
   <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
+  <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
   <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
@@ -77,9 +80,6 @@
   <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
   <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
-  <registerRecords>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</registerRecords>
-  <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
-  <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
@@ -673,8 +673,8 @@
     <commandParameterType>
       <types>DocumentRef.CashTransferOrder</types>
       <types>DocumentRef.PurchaseInvoice</types>
-      <types>DocumentRef.OutgoingPaymentOrder</types>
       <types>DocumentRef.PurchaseOrder</types>
+      <types>DocumentRef.OutgoingPaymentOrder</types>
       <types>DocumentRef.SalesReturn</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>

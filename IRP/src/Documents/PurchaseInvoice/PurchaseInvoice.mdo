@@ -66,14 +66,19 @@
   <defaultListForm>Document.PurchaseInvoice.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.PurchaseInvoice.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
+  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
   <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
+  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
   <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
   <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R1001T_Purchases</registerRecords>
   <registerRecords>AccumulationRegister.R1005T_PurchaseSpecialOffers</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
+  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
   <registerRecords>AccumulationRegister.R4017B_InternalSupplyRequestProcurement</registerRecords>
+  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
   <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
   <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
@@ -82,23 +87,18 @@
   <registerRecords>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</registerRecords>
   <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
+  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
   <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.R6070T_OtherPeriodsExpenses</registerRecords>
   <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
   <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
+  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <registerRecords>AccumulationRegister.R1022B_VendorsPaymentPlanning</registerRecords>
+  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
   <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
-  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
-  <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
-  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
-  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
-  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
-  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
-  <registerRecords>AccumulationRegister.R6070T_OtherPeriodsExpenses</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

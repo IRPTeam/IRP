@@ -34,10 +34,10 @@
   <defaultListForm>Document.VendorsAdvancesClosing.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.VendorsAdvancesClosing.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.TM1030B_TransactionsKey</registerRecords>
   <registerRecords>InformationRegister.T2013S_OffsetOfAging</registerRecords>
   <registerRecords>InformationRegister.T2010S_OffsetOfAdvances</registerRecords>
   <registerRecords>AccumulationRegister.TM1020B_AdvancesKey</registerRecords>
-  <registerRecords>AccumulationRegister.TM1030B_TransactionsKey</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="28dec7af-9c7e-4bf4-83da-966d9918dc52">

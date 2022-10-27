@@ -2449,16 +2449,16 @@
           <name>ItemListSelection</name>
         </handlers>
         <handlers>
-          <event>AfterDeleteRow</event>
-          <name>ItemListAfterDeleteRow</name>
-        </handlers>
-        <handlers>
           <event>BeforeAddRow</event>
           <name>ItemListBeforeAddRow</name>
         </handlers>
         <handlers>
           <event>BeforeDeleteRow</event>
           <name>ItemListBeforeDeleteRow</name>
+        </handlers>
+        <handlers>
+          <event>AfterDeleteRow</event>
+          <name>ItemListAfterDeleteRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -2493,6 +2493,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>ItemListSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2531,6 +2532,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>ItemListViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <horizontalLocation>Left</horizontalLocation>
@@ -2570,6 +2572,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>ItemListSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2984,6 +2987,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>SpecialOffersSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3022,6 +3026,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>SpecialOffersViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3060,6 +3065,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>SpecialOffersSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -4900,6 +4906,10 @@
   </commandInterface>
   <extInfo xsi:type="form:DocumentFormExtInfo">
     <handlers>
+      <event>AfterWrite</event>
+      <name>AfterWrite</name>
+    </handlers>
+    <handlers>
       <event>AfterWriteAtServer</event>
       <name>AfterWriteAtServer</name>
     </handlers>
@@ -4914,10 +4924,6 @@
     <handlers>
       <event>OnWriteAtServer</event>
       <name>OnWriteAtServer</name>
-    </handlers>
-    <handlers>
-      <event>AfterWrite</event>
-      <name>AfterWrite</name>
     </handlers>
     <repostOnWrite>true</repostOnWrite>
   </extInfo>

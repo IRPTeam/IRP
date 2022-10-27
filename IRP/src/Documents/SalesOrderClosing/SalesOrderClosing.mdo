@@ -70,17 +70,17 @@
   <registerRecords>AccumulationRegister.R2010T_SalesOrders</registerRecords>
   <registerRecords>AccumulationRegister.R2014T_CanceledSalesOrders</registerRecords>
   <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
+  <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
+  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
-  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
-  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
-  <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
-  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
-  <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
+  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
+  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+  <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
+  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

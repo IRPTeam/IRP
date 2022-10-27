@@ -56,10 +56,10 @@
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
+  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4052T_StockAdjustmentAsSurplus</registerRecords>
   <registerRecords>AccumulationRegister.R4051T_StockAdjustmentAsWriteOff</registerRecords>
-  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

@@ -4,6 +4,20 @@
 	<setForAttributesByDefault>false</setForAttributesByDefault>
 	<independentRightsOfChildObjects>true</independentRightsOfChildObjects>
 	<object>
+		<name>Document.WorkOrder.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.WorkSheet.TabularSection.Materials.Attribute.ProfitLossCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.BankReceipt.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -138,7 +152,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.WorkOrder.Attribute.Currency</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.RetailReturnReceipt.Attribute.LegalName</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.SalesReportToConsignor.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -184,6 +212,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ChequeBondTransaction</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.InternalSupplyRequest.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -192,6 +231,13 @@
 	</object>
 	<object>
 		<name>Document.SalesInvoice.Attribute.Agreement</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ChequeBondTransaction.Attribute.Currency</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -240,6 +286,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.WorkSheet.TabularSection.Materials</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.PurchaseInvoice.TabularSection.ItemList</name>
 		<right>
 			<name>View</name>
@@ -269,6 +322,17 @@
 	</object>
 	<object>
 		<name>Document.SalesReturn</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.SalesReportFromTradeAgent</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -374,6 +438,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ProductionPlanningCorrection.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.Unbundling.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -407,6 +478,17 @@
 	</object>
 	<object>
 		<name>Document.RetailReturnReceipt</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.WorkOrder</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -467,6 +549,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ChequeBondTransaction.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.PurchaseReturnOrder.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -482,6 +571,13 @@
 	</object>
 	<object>
 		<name>Catalog.CashAccounts.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.JournalEntry.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -563,6 +659,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.JournalEntry.Attribute.LedgerType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.BankPayment.TabularSection.PaymentList</name>
 		<right>
 			<name>View</name>
@@ -634,6 +737,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ProductionPlanning</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.RetailReturnReceipt.Attribute.Agreement</name>
 		<right>
 			<name>View</name>
@@ -669,6 +783,31 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.Production</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ProductionPlanningCorrection.Attribute.BusinessUnit</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ProductionPlanningClosing.Attribute.BusinessUnit</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList</name>
 		<right>
 			<name>View</name>
@@ -694,7 +833,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.SalesReportToConsignor</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.BankPayment.TabularSection.PaymentList.Attribute.ProfitLossCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.Production.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -754,6 +911,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.WorkSheet</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.IncomingPaymentOrder.Attribute.Currency</name>
 		<right>
 			<name>View</name>
@@ -766,6 +934,24 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ProductionPlanningClosing</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.SalesReportFromTradeAgent.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -851,6 +1037,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ProductionPlanningClosing.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.PurchaseOrder.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -869,6 +1062,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.WorkSheet.Attribute.Currency</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.StockAdjustmentAsWriteOff</name>
 		<right>
 			<name>Read</name>
@@ -881,6 +1081,13 @@
 	</object>
 	<object>
 		<name>Document.RetailSalesReceipt.Attribute.Partner</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.WorkSheet.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -934,6 +1141,13 @@
 	</object>
 	<object>
 		<name>Document.DebitNote.TabularSection.Transactions.Attribute.AdditionalAnalytic</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ProductionPlanning.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1061,6 +1275,24 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.WorkSheet.TabularSection.Materials.Attribute.ExpenseType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.JournalEntry</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.OutgoingPaymentOrder.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -1098,6 +1330,24 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ProductionPlanningCorrection</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.Production.Attribute.BusinessUnit</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1294,6 +1544,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ProductionPlanning.Attribute.BusinessUnit</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.CashStatement</name>
 		<right>
 			<name>Read</name>
@@ -1306,263 +1563,6 @@
 	</object>
 	<object>
 		<name>Document.IncomingPaymentOrder.Attribute.Account</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.JournalEntry</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.JournalEntry.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.JournalEntry.Attribute.LedgerType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ChequeBondTransaction</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ChequeBondTransaction.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ChequeBondTransaction.Attribute.Currency</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.WorkOrder</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.WorkOrder.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.WorkSheet</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.WorkSheet.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.WorkOrder.Attribute.Currency</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.WorkSheet.Attribute.Currency</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.WorkSheet.TabularSection.Materials.Attribute.ProfitLossCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.WorkSheet.TabularSection.Materials.Attribute.ExpenseType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.WorkSheet.TabularSection.Materials</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.Production</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ProductionPlanning</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ProductionPlanningClosing</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ProductionPlanningCorrection</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ProductionPlanning.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ProductionPlanning.Attribute.BusinessUnit</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ProductionPlanningClosing.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ProductionPlanningClosing.Attribute.BusinessUnit</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ProductionPlanningCorrection.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ProductionPlanningCorrection.Attribute.BusinessUnit</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.Production.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.Production.Attribute.BusinessUnit</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesReportToConsignor</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesReportFromTradeAgent</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesReportFromTradeAgent.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesReportToConsignor.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

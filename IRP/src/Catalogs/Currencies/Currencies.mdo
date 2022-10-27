@@ -131,7 +131,6 @@
   <predefined>
     <items id="e968334d-cf96-476f-81de-68be2b2e9703">
       <name>Default</name>
-      <description></description>
       <code xsi:type="core:StringValue">
         <value>USD</value>
       </code>

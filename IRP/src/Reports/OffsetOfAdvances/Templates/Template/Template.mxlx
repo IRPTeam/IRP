@@ -11,40 +11,51 @@
 		<languageInfo>
 			<id>tr</id>
 			<code>Turkish</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>ru</id>
 			<code>Russian</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>fr</id>
 			<code>French</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>de</id>
 			<code>German</code>
+			<description/>
 		</languageInfo>
 		<languageInfo>
 			<id>ha</id>
 			<code>HASH</code>
+			<description/>
 		</languageInfo>
 	</languageSettings>
 	<columns>
 		<size>17</size>
 		<columnsItem>
-			<index>8</index>
+			<index>0</index>
 			<column>
 				<formatIndex>1</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>7</index>
+			<index>1</index>
+			<column>
+				<formatIndex>1</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>2</index>
 			<column>
 				<formatIndex>2</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>5</index>
+			<index>3</index>
 			<column>
 				<formatIndex>2</formatIndex>
 			</column>
@@ -52,29 +63,23 @@
 		<columnsItem>
 			<index>4</index>
 			<column>
-				<formatIndex>3</formatIndex>
+				<formatIndex>2</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>3</index>
+			<index>5</index>
 			<column>
 				<formatIndex>3</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>2</index>
+			<index>7</index>
 			<column>
 				<formatIndex>3</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>0</index>
-			<column>
-				<formatIndex>4</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
-			<index>1</index>
+			<index>8</index>
 			<column>
 				<formatIndex>4</formatIndex>
 			</column>
@@ -84,78 +89,85 @@
 		<id>1e2d2c4b-ab33-473b-a592-9bbc32e4b9ca</id>
 		<size>16</size>
 		<columnsItem>
-			<index>5</index>
+			<index>0</index>
 			<column>
-				<formatIndex>4</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
-			<index>4</index>
-			<column>
-				<formatIndex>4</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
-			<index>3</index>
-			<column>
-				<formatIndex>4</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
-			<index>2</index>
-			<column>
-				<formatIndex>4</formatIndex>
+				<formatIndex>2</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
 			<index>1</index>
 			<column>
-				<formatIndex>3</formatIndex>
+				<formatIndex>2</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>0</index>
+			<index>2</index>
 			<column>
-				<formatIndex>3</formatIndex>
+				<formatIndex>1</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>11</index>
+			<index>3</index>
 			<column>
-				<formatIndex>4</formatIndex>
+				<formatIndex>1</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>10</index>
+			<index>4</index>
 			<column>
-				<formatIndex>4</formatIndex>
+				<formatIndex>1</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>9</index>
+			<index>5</index>
 			<column>
-				<formatIndex>4</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
-			<index>8</index>
-			<column>
-				<formatIndex>4</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
-			<index>7</index>
-			<column>
-				<formatIndex>3</formatIndex>
+				<formatIndex>1</formatIndex>
 			</column>
 		</columnsItem>
 		<columnsItem>
 			<index>6</index>
 			<column>
-				<formatIndex>3</formatIndex>
+				<formatIndex>2</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>7</index>
+			<column>
+				<formatIndex>2</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>8</index>
+			<column>
+				<formatIndex>1</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>9</index>
+			<column>
+				<formatIndex>1</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>10</index>
+			<column>
+				<formatIndex>1</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>11</index>
+			<column>
+				<formatIndex>1</formatIndex>
 			</column>
 		</columnsItem>
 	</columns>
+	<rowsItem>
+		<index>0</index>
+		<indexTo>1</indexTo>
+		<row>
+			<empty>true</empty>
+		</row>
+	</rowsItem>
 	<rowsItem>
 		<index>2</index>
 		<row>
@@ -693,6 +705,12 @@
 		</row>
 	</rowsItem>
 	<rowsItem>
+		<index>8</index>
+		<row>
+			<empty>true</empty>
+		</row>
+	</rowsItem>
+	<rowsItem>
 		<index>9</index>
 		<row>
 			<columnsID>1e2d2c4b-ab33-473b-a592-9bbc32e4b9ca</columnsID>
@@ -1179,12 +1197,12 @@
 	<vgRows>16</vgRows>
 	<merge>
 		<r>2</r>
-		<c>8</c>
+		<c>0</c>
 		<h>1</h>
 	</merge>
 	<merge>
 		<r>2</r>
-		<c>7</c>
+		<c>1</c>
 		<h>1</h>
 	</merge>
 	<merge>
@@ -1213,19 +1231,39 @@
 		<h>1</h>
 	</merge>
 	<merge>
+		<r>2</r>
+		<c>7</c>
+		<h>1</h>
+	</merge>
+	<merge>
+		<r>2</r>
+		<c>8</c>
+		<h>1</h>
+	</merge>
+	<merge>
+		<r>2</r>
+		<c>9</c>
+		<w>3</w>
+	</merge>
+	<merge>
+		<r>2</r>
+		<c>10</c>
+		<w>2</w>
+	</merge>
+	<merge>
+		<r>2</r>
+		<c>13</c>
+		<w>3</w>
+	</merge>
+	<merge>
 		<r>5</r>
 		<c>2</c>
 		<w>2</w>
 	</merge>
 	<merge>
-		<r>2</r>
-		<c>1</c>
-		<h>1</h>
-	</merge>
-	<merge>
-		<r>2</r>
-		<c>0</c>
-		<h>1</h>
+		<r>5</r>
+		<c>5</c>
+		<w>2</w>
 	</merge>
 	<merge>
 		<r>9</r>
@@ -1237,54 +1275,26 @@
 		<c>0</c>
 		<w>11</w>
 	</merge>
-	<merge>
-		<r>5</r>
-		<c>5</c>
-		<w>2</w>
-	</merge>
-	<merge>
-		<r>2</r>
-		<c>13</c>
-		<w>3</w>
-	</merge>
-	<merge>
-		<r>2</r>
-		<c>10</c>
-		<w>2</w>
-	</merge>
-	<merge>
-		<r>2</r>
-		<c>9</c>
-		<w>3</w>
-	</merge>
 	<namedItem xsi:type="NamedItemCells">
-		<name>Header</name>
+		<name>ADV_TRN_Header</name>
 		<area>
 			<type>Rows</type>
-			<beginRow>2</beginRow>
-			<endRow>3</endRow>
+			<beginRow>9</beginRow>
+			<endRow>10</endRow>
 			<beginColumn>-1</beginColumn>
 			<endColumn>-1</endColumn>
+			<columnsID>1e2d2c4b-ab33-473b-a592-9bbc32e4b9ca</columnsID>
 		</area>
 	</namedItem>
 	<namedItem xsi:type="NamedItemCells">
-		<name>Caption</name>
+		<name>ADV_TRN_Row</name>
 		<area>
 			<type>Rows</type>
-			<beginRow>4</beginRow>
-			<endRow>4</endRow>
+			<beginRow>11</beginRow>
+			<endRow>11</endRow>
 			<beginColumn>-1</beginColumn>
 			<endColumn>-1</endColumn>
-		</area>
-	</namedItem>
-	<namedItem xsi:type="NamedItemCells">
-		<name>Row</name>
-		<area>
-			<type>Rows</type>
-			<beginRow>5</beginRow>
-			<endRow>5</endRow>
-			<beginColumn>-1</beginColumn>
-			<endColumn>-1</endColumn>
+			<columnsID>1e2d2c4b-ab33-473b-a592-9bbc32e4b9ca</columnsID>
 		</area>
 	</namedItem>
 	<namedItem xsi:type="NamedItemCells">
@@ -1308,14 +1318,33 @@
 		</area>
 	</namedItem>
 	<namedItem xsi:type="NamedItemCells">
-		<name>ADV_TRN_Header</name>
+		<name>Caption</name>
 		<area>
 			<type>Rows</type>
-			<beginRow>9</beginRow>
-			<endRow>10</endRow>
+			<beginRow>4</beginRow>
+			<endRow>4</endRow>
 			<beginColumn>-1</beginColumn>
 			<endColumn>-1</endColumn>
-			<columnsID>1e2d2c4b-ab33-473b-a592-9bbc32e4b9ca</columnsID>
+		</area>
+	</namedItem>
+	<namedItem xsi:type="NamedItemCells">
+		<name>Header</name>
+		<area>
+			<type>Rows</type>
+			<beginRow>2</beginRow>
+			<endRow>3</endRow>
+			<beginColumn>-1</beginColumn>
+			<endColumn>-1</endColumn>
+		</area>
+	</namedItem>
+	<namedItem xsi:type="NamedItemCells">
+		<name>Row</name>
+		<area>
+			<type>Rows</type>
+			<beginRow>5</beginRow>
+			<endRow>5</endRow>
+			<beginColumn>-1</beginColumn>
+			<endColumn>-1</endColumn>
 		</area>
 	</namedItem>
 	<namedItem xsi:type="NamedItemCells">
@@ -1324,17 +1353,6 @@
 			<type>Rows</type>
 			<beginRow>13</beginRow>
 			<endRow>14</endRow>
-			<beginColumn>-1</beginColumn>
-			<endColumn>-1</endColumn>
-			<columnsID>1e2d2c4b-ab33-473b-a592-9bbc32e4b9ca</columnsID>
-		</area>
-	</namedItem>
-	<namedItem xsi:type="NamedItemCells">
-		<name>ADV_TRN_Row</name>
-		<area>
-			<type>Rows</type>
-			<beginRow>11</beginRow>
-			<endRow>11</endRow>
 			<beginColumn>-1</beginColumn>
 			<endColumn>-1</endColumn>
 			<columnsID>1e2d2c4b-ab33-473b-a592-9bbc32e4b9ca</columnsID>
@@ -1364,10 +1382,7 @@
 	<font faceName="Arial" height="8" bold="false" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 	<font faceName="Arial" height="8" bold="false" italic="true" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 	<format>
-		<width>40</width>
-	</format>
-	<format>
-		<width>160</width>
+		<width>80</width>
 		<widthWeightFactor>1</widthWeightFactor>
 	</format>
 	<format>
@@ -1375,8 +1390,11 @@
 		<widthWeightFactor>1</widthWeightFactor>
 	</format>
 	<format>
-		<width>80</width>
+		<width>160</width>
 		<widthWeightFactor>1</widthWeightFactor>
+	</format>
+	<format>
+		<width>40</width>
 	</format>
 	<format>
 		<font>0</font>
@@ -1684,5 +1702,4 @@
 			</v8:item>
 		</format>
 	</format>
-	<textDirection>LeftToRight</textDirection>
 </document>

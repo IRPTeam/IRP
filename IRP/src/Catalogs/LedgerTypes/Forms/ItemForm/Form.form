@@ -305,13 +305,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>OperationsTree.Picture</segments>
-          </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>OperationsTree.Picture</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>OperationsTree.Picture</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
@@ -363,13 +358,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>OperationsTree.Presentation</segments>
-          </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>OperationsTree.Presentation</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>OperationsTree.Presentation</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
@@ -450,13 +440,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>OperationsTree.Use</segments>
-        </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>OperationsTree.Use</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>OperationsTree.Use</segments>
       </dataPath>
       <extendedTooltip>
         <name>OperationsTreeUseExtendedTooltip</name>
@@ -498,13 +483,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>OperationsTree.Period</segments>
-        </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>OperationsTree.Period</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>OperationsTree.Period</segments>
       </dataPath>
       <handlers>
         <event>OnChange</event>
@@ -600,6 +580,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
+      <source>OperationsTreeSearchString</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -638,6 +619,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
+      <source>OperationsTreeViewStatus</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -676,6 +658,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
+      <source>OperationsTreeSearchControl</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -738,12 +721,12 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>NotificationProcessing</event>
     <name>NotificationProcessing</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <handlers>
     <event>FillCheckProcessingAtServer</event>
@@ -925,16 +908,16 @@
   </commandInterface>
   <extInfo xsi:type="form:CatalogFormExtInfo">
     <handlers>
-      <event>BeforeWriteAtServer</event>
-      <name>BeforeWriteAtServer</name>
+      <event>AfterWriteAtServer</event>
+      <name>AfterWriteAtServer</name>
     </handlers>
     <handlers>
       <event>OnReadAtServer</event>
       <name>OnReadAtServer</name>
     </handlers>
     <handlers>
-      <event>AfterWriteAtServer</event>
-      <name>AfterWriteAtServer</name>
+      <event>BeforeWriteAtServer</event>
+      <name>BeforeWriteAtServer</name>
     </handlers>
   </extInfo>
 </form:Form>

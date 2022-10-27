@@ -66,10 +66,14 @@
   <defaultListForm>Document.RetailSalesReceipt.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.RetailSalesReceipt.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
+  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
   <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
   <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
+  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
   <registerRecords>AccumulationRegister.R2050T_RetailSales</registerRecords>
   <registerRecords>AccumulationRegister.R3050T_PosCashBalances</registerRecords>
   <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
@@ -78,13 +82,9 @@
   <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
   <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
   <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
-  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
-  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
-  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
-  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

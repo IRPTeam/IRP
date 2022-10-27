@@ -2358,20 +2358,20 @@
           <autoFill>true</autoFill>
         </autoCommandBar>
         <handlers>
-          <event>AfterDeleteRow</event>
-          <name>ItemListAfterDeleteRow</name>
-        </handlers>
-        <handlers>
-          <event>BeforeDeleteRow</event>
-          <name>ItemListBeforeDeleteRow</name>
-        </handlers>
-        <handlers>
           <event>Selection</event>
           <name>ItemListSelection</name>
         </handlers>
         <handlers>
           <event>BeforeAddRow</event>
           <name>ItemListBeforeAddRow</name>
+        </handlers>
+        <handlers>
+          <event>BeforeDeleteRow</event>
+          <name>ItemListBeforeDeleteRow</name>
+        </handlers>
+        <handlers>
+          <event>AfterDeleteRow</event>
+          <name>ItemListAfterDeleteRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -2406,6 +2406,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>ItemListSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2444,6 +2445,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>ItemListViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <horizontalLocation>Left</horizontalLocation>
@@ -2483,6 +2485,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>ItemListSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2870,6 +2873,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>SerialLotNumbersTreeSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2908,6 +2912,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>SerialLotNumbersTreeViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <horizontalLocation>Left</horizontalLocation>
@@ -2947,6 +2952,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>SerialLotNumbersTreeSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3865,6 +3871,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>RowIDInfoSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3903,6 +3910,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>RowIDInfoViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3941,6 +3949,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>RowIDInfoSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -4844,6 +4853,10 @@
   </commandInterface>
   <extInfo xsi:type="form:DocumentFormExtInfo">
     <handlers>
+      <event>AfterWrite</event>
+      <name>AfterWrite</name>
+    </handlers>
+    <handlers>
       <event>AfterWriteAtServer</event>
       <name>AfterWriteAtServer</name>
     </handlers>
@@ -4858,10 +4871,6 @@
     <handlers>
       <event>OnWriteAtServer</event>
       <name>OnWriteAtServer</name>
-    </handlers>
-    <handlers>
-      <event>AfterWrite</event>
-      <name>AfterWrite</name>
     </handlers>
     <repostOnWrite>true</repostOnWrite>
   </extInfo>

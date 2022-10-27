@@ -349,12 +349,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartChoice</event>
-              <name>CompanyStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>CompanyEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>CompanyStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -459,10 +459,19 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <type>InputField</type>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
         </items>
         <items xsi:type="form:FormField">
           <name>StoreSemiproduct</name>
@@ -497,10 +506,19 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <type>InputField</type>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
         </items>
         <items xsi:type="form:FormField">
           <name>StoreMaterial</name>
@@ -535,10 +553,19 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <type>InputField</type>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
         </items>
         <items xsi:type="form:FormField">
           <name>Description</name>
@@ -1233,16 +1260,16 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
+  </handlers>
+  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
   </handlers>
   <handlers>
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
-    <event>NotificationProcessing</event>
-    <name>NotificationProcessing</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
@@ -1316,8 +1343,8 @@
     </title>
     <id>4</id>
     <valueType>
-      <types>DocumentRef.Production</types>
       <types>DocumentRef.InternalSupplyRequest</types>
+      <types>DocumentRef.Production</types>
       <types>DocumentObject.ProductionPlanningCorrection</types>
     </valueType>
     <view>
@@ -1334,6 +1361,10 @@
   </commandInterface>
   <extInfo xsi:type="form:DocumentFormExtInfo">
     <handlers>
+      <event>AfterWrite</event>
+      <name>AfterWrite</name>
+    </handlers>
+    <handlers>
       <event>AfterWriteAtServer</event>
       <name>AfterWriteAtServer</name>
     </handlers>
@@ -1348,10 +1379,6 @@
     <handlers>
       <event>OnWriteAtServer</event>
       <name>OnWriteAtServer</name>
-    </handlers>
-    <handlers>
-      <event>AfterWrite</event>
-      <name>AfterWrite</name>
     </handlers>
     <repostOnWrite>true</repostOnWrite>
   </extInfo>

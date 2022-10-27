@@ -145,7 +145,6 @@
 				<dcscom:balanceGroupName>Group</dcscom:balanceGroupName>
 				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
 			</role>
-			<valueType/>
 			<appearance>
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 					<dcscor:parameter>Format</dcscor:parameter>

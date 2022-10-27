@@ -182,6 +182,8 @@
       <type>
         <types>CatalogRef.Hardware</types>
       </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <createOnInput>Use</createOnInput>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

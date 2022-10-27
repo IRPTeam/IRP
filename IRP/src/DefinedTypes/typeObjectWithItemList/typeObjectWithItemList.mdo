@@ -9,6 +9,7 @@
     <value>Type object with item list</value>
   </synonym>
   <type>
+    <types>DocumentRef.SalesReportFromTradeAgent</types>
     <types>DocumentRef.SalesReturnOrder</types>
     <types>DocumentRef.PurchaseInvoice</types>
     <types>DocumentRef.PurchaseReturn</types>
@@ -18,6 +19,7 @@
     <types>DocumentRef.InternalSupplyRequest</types>
     <types>DocumentRef.Unbundling</types>
     <types>DocumentRef.PriceList</types>
+    <types>DocumentRef.WorkOrder</types>
     <types>DocumentRef.PurchaseOrder</types>
     <types>DocumentRef.OpeningEntry</types>
     <types>DocumentRef.SalesOrder</types>
@@ -25,14 +27,12 @@
     <types>DocumentRef.PhysicalCountByLocation</types>
     <types>DocumentRef.Bundling</types>
     <types>DocumentRef.PlannedReceiptReservation</types>
+    <types>DocumentRef.SalesReportToConsignor</types>
     <types>DocumentRef.InventoryTransferOrder</types>
     <types>DocumentRef.PurchaseOrderClosing</types>
     <types>DocumentRef.SalesOrderClosing</types>
     <types>DocumentRef.InventoryTransfer</types>
     <types>DocumentRef.GoodsReceipt</types>
     <types>DocumentRef.SalesInvoice</types>
-    <types>DocumentRef.WorkOrder</types>
-    <types>DocumentRef.SalesReportFromTradeAgent</types>
-    <types>DocumentRef.SalesReportToConsignor</types>
   </type>
 </mdclass:DefinedType>

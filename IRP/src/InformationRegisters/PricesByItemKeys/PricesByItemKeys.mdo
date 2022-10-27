@@ -50,6 +50,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <resources uuid="4a12c802-41ce-4c64-b7a7-0bc4bb6d686c">
     <name>InputPrice</name>
@@ -64,6 +65,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <dimensions uuid="6bbd6dcd-6a5a-4593-b399-c393aec5f46a">
     <name>PriceType</name>

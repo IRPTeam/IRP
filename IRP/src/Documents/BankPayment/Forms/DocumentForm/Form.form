@@ -1360,10 +1360,19 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <type>InputField</type>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
         </items>
         <items xsi:type="form:FormField">
           <name>PaymentListBasisDocument</name>
@@ -2093,16 +2102,16 @@
           <autoFill>true</autoFill>
         </autoCommandBar>
         <handlers>
+          <event>Selection</event>
+          <name>PaymentListSelection</name>
+        </handlers>
+        <handlers>
           <event>BeforeAddRow</event>
           <name>PaymentListBeforeAddRow</name>
         </handlers>
         <handlers>
           <event>AfterDeleteRow</event>
           <name>PaymentListAfterDeleteRow</name>
-        </handlers>
-        <handlers>
-          <event>Selection</event>
-          <name>PaymentListSelection</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -2137,6 +2146,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>PaymentListSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2175,6 +2185,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>PaymentListViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <horizontalLocation>Left</horizontalLocation>
@@ -2214,6 +2225,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>PaymentListSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>

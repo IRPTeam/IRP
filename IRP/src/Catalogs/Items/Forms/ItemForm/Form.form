@@ -1321,51 +1321,33 @@
     <navigationPanel>
       <cmiFragmentRecord>
         <command>Catalog.ItemKeys.Command.OpenItemKeysList</command>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Object.Ref</segments>
-        </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>0</index>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
         <command>InformationRegister.Barcodes.Command.ShowBarcodeList</command>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Object.Ref</segments>
-        </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>1</index>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
         <command>InformationRegister.PricesByItems.StandardCommand.OpenByValue.Item</command>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Object.Ref</segments>
-        </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>2</index>
         <userVisible/>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
-        <command>Catalog.PriceKeys.Command.OpenPriceKeysList</command>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Object.Ref</segments>
-        </commandParameter>
+        <command>0</command>
         <group>FormNavigationPanelGoTo</group>
         <index>3</index>
         <userVisible/>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
         <command>InformationRegister.TaxSettings.StandardCommand.OpenByValue.Item</command>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Object.Ref</segments>
-        </commandParameter>
         <group>FormNavigationPanelGoTo</group>
         <index>4</index>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
         <command>InformationRegister.BarcodeScanInfoCheck.StandardCommand.OpenByValue.Item</command>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Object.Ref</segments>
-        </commandParameter>
         <userVisible/>
       </cmiFragmentRecord>
     </navigationPanel>

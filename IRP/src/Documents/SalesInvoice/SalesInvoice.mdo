@@ -66,11 +66,15 @@
   <defaultListForm>Document.SalesInvoice.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.SalesInvoice.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
+  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
+  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
   <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
   <registerRecords>AccumulationRegister.R2022B_CustomersPaymentPlanning</registerRecords>
   <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
+  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
   <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
   <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
   <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
@@ -85,16 +89,12 @@
   <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
   <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
+  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R6080T_OtherPeriodsRevenues</registerRecords>
+  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
-  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
-  <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
-  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
-  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
-  <registerRecords>AccumulationRegister.R6080T_OtherPeriodsRevenues</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1522,8 +1522,8 @@
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
       <types>DocumentRef.ShipmentConfirmation</types>
-      <types>DocumentRef.SalesOrder</types>
       <types>DocumentRef.WorkOrder</types>
+      <types>DocumentRef.SalesOrder</types>
       <types>DocumentRef.WorkSheet</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>

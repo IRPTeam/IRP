@@ -9,6 +9,7 @@
     <value>Type AR transaction basises</value>
   </synonym>
   <type>
+    <types>DocumentRef.SalesReportFromTradeAgent</types>
     <types>DocumentRef.CashTransferOrder</types>
     <types>DocumentRef.DebitNote</types>
     <types>DocumentRef.CreditNote</types>
@@ -18,6 +19,5 @@
     <types>DocumentRef.SalesReturn</types>
     <types>DocumentRef.RetailSalesReceipt</types>
     <types>DocumentRef.SalesInvoice</types>
-    <types>DocumentRef.SalesReportFromTradeAgent</types>
   </type>
 </mdclass:DefinedType>

@@ -66,17 +66,17 @@
   <defaultListForm>Document.SalesReportFromTradeAgent.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.SalesReportFromTradeAgent.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
-  <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
-  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
-  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
-  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
-  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
   <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
   <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
+  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
+  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
+  <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
+  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
+  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
+  <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

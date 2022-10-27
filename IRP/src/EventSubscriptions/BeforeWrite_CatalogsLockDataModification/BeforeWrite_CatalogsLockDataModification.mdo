@@ -6,71 +6,71 @@
     <value>Before write catalogs lock data modification</value>
   </synonym>
   <source>
-    <types>CatalogObject</types>
-    <types>CatalogObject.AccessGroups</types>
-    <types>CatalogObject.AccessProfiles</types>
-    <types>CatalogObject.AccountingOperations</types>
-    <types>CatalogObject.AddAttributeAndPropertySets</types>
-    <types>CatalogObject.AddAttributeAndPropertyValues</types>
-    <types>CatalogObject.Agreements</types>
-    <types>CatalogObject.BankTerms</types>
-    <types>CatalogObject.Batches</types>
-    <types>CatalogObject.BusinessUnits</types>
     <types>CatalogObject.CancelReturnReasons</types>
-    <types>CatalogObject.CashAccounts</types>
-    <types>CatalogObject.CashStatementStatuses</types>
+    <types>CatalogObject.TaxAnalytics</types>
     <types>CatalogObject.ChequeBonds</types>
-    <types>CatalogObject.Companies</types>
-    <types>CatalogObject.Countries</types>
-    <types>CatalogObject.Currencies</types>
-    <types>CatalogObject.CurrencyMovementSets</types>
-    <types>CatalogObject.ExpenseAndRevenueTypes</types>
-    <types>CatalogObject.ExternalDataProc</types>
-    <types>CatalogObject.Extensions</types>
-    <types>CatalogObject.FileStorageVolumes</types>
-    <types>CatalogObject.FileStoragesInfo</types>
+    <types>CatalogObject.TaxRates</types>
+    <types>CatalogObject.Agreements</types>
     <types>CatalogObject.Files</types>
-    <types>CatalogObject.Hardware</types>
-    <types>CatalogObject.IDInfoAddresses</types>
-    <types>CatalogObject.IDInfoSets</types>
-    <types>CatalogObject.IntegrationSettings</types>
-    <types>CatalogObject.InterfaceGroups</types>
+    <types>CatalogObject.Batches</types>
+    <types>CatalogObject.PlanningPeriods</types>
+    <types>CatalogObject.MovementRules</types>
+    <types>CatalogObject.CashAccounts</types>
+    <types>CatalogObject.SpecialOfferTypes</types>
+    <types>CatalogObject.AccessProfiles</types>
+    <types>CatalogObject.SpecialOffers</types>
+    <types>CatalogObject.PartnerSegments</types>
+    <types>CatalogObject.CashStatementStatuses</types>
+    <types>CatalogObject.BankTerms</types>
+    <types>CatalogObject.LedgerTypeVariants</types>
     <types>CatalogObject.ItemKeys</types>
+    <types>CatalogObject.LedgerTypes</types>
+    <types>CatalogObject.BusinessUnits</types>
+    <types>CatalogObject.AddAttributeAndPropertySets</types>
+    <types>CatalogObject.ObjectStatuses</types>
+    <types>CatalogObject.SerialLotNumbers</types>
+    <types>CatalogObject.IntegrationSettings</types>
+    <types>CatalogObject.CurrencyMovementSets</types>
+    <types>CatalogObject.SpecialOfferRules</types>
+    <types>CatalogObject.IDInfoAddresses</types>
+    <types>CatalogObject.PartnerItems</types>
+    <types>CatalogObject.Currencies</types>
+    <types>CatalogObject.Units</types>
+    <types>CatalogObject.IDInfoSets</types>
+    <types>CatalogObject.Workstations</types>
+    <types>CatalogObject.ExpenseAndRevenueTypes</types>
+    <types>CatalogObject.Specifications</types>
+    <types>CatalogObject.LockDataModificationReasons</types>
+    <types>CatalogObject.Companies</types>
+    <types>CatalogObject.Users</types>
+    <types>CatalogObject.AccessGroups</types>
+    <types>CatalogObject.FileStoragesInfo</types>
+    <types>CatalogObject.Taxes</types>
+    <types>CatalogObject.PaymentTypes</types>
+    <types>CatalogObject.Stores</types>
+    <types>CatalogObject.PartnersBankAccounts</types>
     <types>CatalogObject.ItemSegments</types>
     <types>CatalogObject.ItemTypes</types>
-    <types>CatalogObject.Items</types>
-    <types>CatalogObject.LedgerTypes</types>
-    <types>CatalogObject.LegalNameContracts</types>
-    <types>CatalogObject.LockDataModificationReasons</types>
-    <types>CatalogObject.MovementRules</types>
-    <types>CatalogObject.ObjectStatuses</types>
-    <types>CatalogObject.PartnerItems</types>
-    <types>CatalogObject.PartnerSegments</types>
-    <types>CatalogObject.Partners</types>
-    <types>CatalogObject.PartnersBankAccounts</types>
+    <types>CatalogObject.FileStorageVolumes</types>
+    <types>CatalogObject.AddAttributeAndPropertyValues</types>
     <types>CatalogObject.PaymentSchedules</types>
+    <types>CatalogObject.ExternalDataProc</types>
+    <types>CatalogObject.Extensions</types>
+    <types>CatalogObject.Hardware</types>
     <types>CatalogObject.PaymentTerminals</types>
-    <types>CatalogObject.PaymentTypes</types>
-    <types>CatalogObject.PlanningPeriods</types>
-    <types>CatalogObject.PriceTypes</types>
-    <types>CatalogObject.PrintTemplates</types>
-    <types>CatalogObject.ReportOptions</types>
-    <types>CatalogObject.RetailCustomers</types>
-    <types>CatalogObject.SerialLotNumbers</types>
-    <types>CatalogObject.SpecialOfferRules</types>
-    <types>CatalogObject.SpecialOfferTypes</types>
-    <types>CatalogObject.SpecialOffers</types>
-    <types>CatalogObject.Specifications</types>
-    <types>CatalogObject.Stores</types>
-    <types>CatalogObject.TaxAnalytics</types>
-    <types>CatalogObject.TaxRates</types>
-    <types>CatalogObject.Taxes</types>
-    <types>CatalogObject.Units</types>
+    <types>CatalogObject.Countries</types>
+    <types>CatalogObject.AccountingOperations</types>
+    <types>CatalogObject.Items</types>
     <types>CatalogObject.UnitsOfMeasurement</types>
+    <types>CatalogObject.InterfaceGroups</types>
+    <types>CatalogObject.Partners</types>
+    <types>CatalogObject.RetailCustomers</types>
+    <types>CatalogObject.PrintTemplates</types>
+    <types>CatalogObject.LegalNameContracts</types>
+    <types>CatalogObject.PriceTypes</types>
+    <types>CatalogObject.ReportOptions</types>
     <types>CatalogObject.UserGroups</types>
-    <types>CatalogObject.Users</types>
-    <types>CatalogObject.Workstations</types>
-    <types>CatalogObject.LedgerTypeVariants</types>
+    <types>CatalogObject</types>
   </source>
   <event>BeforeWrite</event>
   <handler>CommonModule.LockDataModificationPrivileged.BeforeWrite_CatalogsLockDataModification</handler>

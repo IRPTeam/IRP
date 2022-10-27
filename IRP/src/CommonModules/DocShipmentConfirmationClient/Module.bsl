@@ -54,43 +54,10 @@ EndProcedure
 
 Procedure PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	DocumentsClient.PartnerStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, Object.TransactionType);
-	
-	// #1533
-//	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-//	OpenSettings.ArrayOfFilters = New Array();
-//	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
-//	OpenSettings.FormParameters = New Structure();
-//	
-//	FilterPartnerType = "";
-//	If Object.TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor") Then
-//		FilterPartnerType = "Vendor";
-//	ElsIf Object.TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Sales") Then
-//		FilterPartnerType = "Customer";
-//	EndIf;
-//	
-//	If Not IsBlankString(FilterPartnerType) Then
-//		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(FilterPartnerType, True, DataCompositionComparisonType.Equal));
-//		OpenSettings.FormParameters.Insert("Filter", New Structure(FilterPartnerType, True));
-//		OpenSettings.FillingData = New Structure(FilterPartnerType, True);
-//	EndIf;
-//	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 Procedure PartnerTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	DocumentsClient.PartnerTextChange_TransactionTypeFilter(Object, Form, Item, Text, StandardProcessing, Object.TransactionType);
-	
-	// #1533
-//	ArrayOfFilters = New Array();
-//	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-//	FilterPartnerType = "";
-//	If Object.TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor") Then
-//		FilterPartnerType = "Vendor";
-//	ElsIf Object.TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Sales") Then
-//		FilterPartnerType = "Customer";
-//	EndIf;
-//	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem(FilterPartnerType, True, ComparisonType.Equal));
-//	AdditionalParameters = New Structure();
-//	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
 EndProcedure
 
 #EndRegion

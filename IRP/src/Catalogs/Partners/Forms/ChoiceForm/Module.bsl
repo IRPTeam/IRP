@@ -16,7 +16,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			ThisObject.FilterEmployee = FilterItem.Value;
 			Items.FilterEmployee.Enabled = False;
 		EndIf;
-		// #1533
 		If FilterItem.Key = "Consignor" Then
 			ThisObject.FilterConsignor = FilterItem.Value;
 			Items.FilterConsignor.Enabled = False;
@@ -30,14 +29,12 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	SetBooleanListFilter(List.Filter.Items, "Customer"   , ThisObject.FilterCustomer);
 	SetBooleanListFilter(List.Filter.Items, "Vendor"     , ThisObject.FilterVendor);
 	SetBooleanListFilter(List.Filter.Items, "Employee"   , ThisObject.FilterEmployee);
-	// #1533
 	SetBooleanListFilter(List.Filter.Items, "Consignor"  , ThisObject.FilterConsignor);
 	SetBooleanListFilter(List.Filter.Items, "TradeAgent" , ThisObject.FilterTradeAgent);
 
 	Items.FilterCustomer.TitleTextColor   = ?(ThisObject.FilterCustomer   , New Color(), WebColors.LightGray);
 	Items.FilterVendor.TitleTextColor     = ?(ThisObject.FilterVendor     , New Color(), WebColors.LightGray);
 	Items.FilterEmployee.TitleTextColor   = ?(ThisObject.FilterEmployee   , New Color(), WebColors.LightGray);
-	// #1533
 	Items.FilterConsignor.TitleTextColor  = ?(ThisObject.FilterConsignor  , New Color(), WebColors.LightGray);
 	Items.FilterTradeAgent.TitleTextColor = ?(ThisObject.FilterTradeAgent , New Color(), WebColors.LightGray);
 	
@@ -67,14 +64,12 @@ Procedure FilterEmployeeOnChange(Item)
 	Item.TitleTextColor = ?(ThisObject.FilterEmployee, New Color(), WebColors.LightGray);
 EndProcedure
 
-// #1533
 &AtClient
 Procedure FilterConsignorOnChange(Item)
 	SetBooleanListFilter(List.Filter.Items, "Consignor", ThisObject.FilterConsignor);
 	Item.TitleTextColor = ?(ThisObject.FilterConsignor, New Color(), WebColors.LightGray);
 EndProcedure
 
-// #1533
 &AtClient
 Procedure FilterTradeAgentOnChange(Item)
 	SetBooleanListFilter(List.Filter.Items, "TradeAgent", ThisObject.FilterTradeAgent);

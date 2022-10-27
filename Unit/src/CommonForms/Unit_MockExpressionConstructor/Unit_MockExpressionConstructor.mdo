@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="351d2b74-8858-4e09-a88a-5fb81e5f08df">
+  <name>Unit_MockExpressionConstructor</name>
+  <synonym>
+    <key>en</key>
+    <value>Mock expression constructor</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+</mdclass:CommonForm>

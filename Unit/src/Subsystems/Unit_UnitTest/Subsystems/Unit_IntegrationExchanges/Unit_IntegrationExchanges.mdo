@@ -10,5 +10,6 @@
   <content>CommonForm.Unit_DataContentAnalyzer</content>
   <content>Catalog.Unit_ServiceExchangeHistory</content>
   <content>Catalog.Unit_MockServiceData</content>
+  <content>InformationRegister.Unit_MockStates</content>
   <parentSubsystem>Subsystem.Unit_UnitTest</parentSubsystem>
 </mdclass:Subsystem>

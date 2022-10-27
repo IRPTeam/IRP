@@ -35,6 +35,7 @@
 // * Mock_Info_StatusCodeNotMatch - String - Status code does not match!
 // * Mock_Info_HeaderNotMatch - String - Headers do not match!
 // * Mock_Info_BodyNotMatch - String - Body does not match!
+// * Mock_Error_NotFound_SetResult - String - Result value setting not found
 &Around("Strings")
 Function Unit_Strings(Lang) Export
 	Strings = ProceedWithCall(Lang); // Structure
@@ -66,5 +67,6 @@ Function Unit_Strings(Lang) Export
 	Strings.Insert("Mock_Info_StatusCodeNotMatch", NStr("en = 'Status code does not match!'", Lang));
 	Strings.Insert("Mock_Info_HeaderNotMatch", NStr("en = 'Headers do not match!'", Lang));
 	Strings.Insert("Mock_Info_BodyNotMatch", NStr("en = 'Body does not match!'", Lang));
+	Strings.Insert("Mock_Error_NotFound_SetResult", NStr("en = 'Result value setting not found'", Lang));
 	Return Strings;
 EndFunction

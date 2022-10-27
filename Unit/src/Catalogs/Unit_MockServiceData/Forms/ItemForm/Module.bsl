@@ -70,7 +70,7 @@ EndProcedure
 
 #EndRegion
 
-#Region FormTableItemsEventHandlers
+#Region FormTableItemsEventHandlersRequest_BodyVariables
 
 &AtClient
 Procedure Request_BodyVariablesPathToValueOpening(Item, StandardProcessing)
@@ -88,6 +88,54 @@ Procedure Request_BodyVariablesPathToValueOpening(Item, StandardProcessing)
 		Item
 	);
 
+EndProcedure
+
+&AtClient
+Procedure Request_BodyVariablesValueOpening(Item, StandardProcessing)
+	StandardProcessing = False;
+	CurrentRecord = Items.Request_BodyVariables.CurrentData;
+	Expression = CurrentRecord.Value;
+	VariableName = CurrentRecord.VariableName;
+	OpenExpressionConstructor(Item, Expression, VariableName);
+EndProcedure
+
+#EndRegion
+
+#Region FormTableItemsEventHandlersRequest_Headers
+
+&AtClient
+Procedure Request_HeadersValueOpening(Item, StandardProcessing)
+	StandardProcessing = False;
+	CurrentRecord = Items.Request_Headers.CurrentData;
+	Expression = CurrentRecord.Value;
+	VariableName = CurrentRecord.VariableName;
+	OpenExpressionConstructor(Item, Expression, VariableName);
+EndProcedure
+
+#EndRegion
+
+#Region FormTableItemsEventHandlersRequest_Variables
+
+&AtClient
+Procedure Request_VariablesValueOpening(Item, StandardProcessing)
+	StandardProcessing = False;
+	CurrentRecord = Items.Request_Variables.CurrentData;
+	Expression = CurrentRecord.Value;
+	VariableName = CurrentRecord.VariableName;
+	OpenExpressionConstructor(Item, Expression, VariableName);
+EndProcedure
+
+#EndRegion
+
+#Region FormTableItemsEventHandlersAfterAnswer_Set
+
+&AtClient
+Procedure AfterAnswer_SetValueOpening(Item, StandardProcessing)
+	StandardProcessing = False;
+	CurrentRecord = Items.AfterAnswer_Set.CurrentData;
+	Expression = CurrentRecord.Value;
+	VariableName = CurrentRecord.Key;
+	OpenExpressionConstructor(Item, Expression, VariableName);
 EndProcedure
 
 #EndRegion
@@ -277,6 +325,26 @@ Procedure ReloadTextBodyAtServer(isRequest)
 	EndIf;
 	
 	ThisObject.Modified = True;
+	
+EndProcedure
+
+// Open expression constructor.
+// 
+// Parameters:
+//  Item - FormField - Item
+//  Expression - String - Expression
+//  VariableName - String - Variable name
+&AtClient
+Procedure OpenExpressionConstructor(Item, Expression, VariableName)
+	
+	If ThisObject.Modified Then
+		ThisObject.Write();
+	EndIf;
+
+	OpenForm("CommonForm.Unit_MockExpressionConstructor", 
+		New Structure("Mock, Expression, VariableName", Object.Ref, Expression, VariableName), 
+		Item
+	);
 	
 EndProcedure
 

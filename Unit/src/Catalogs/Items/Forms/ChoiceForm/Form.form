@@ -59,9 +59,6 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Code</segments>
-      </dataPath>
       <extendedTooltip>
         <name>CodeExtendedTooltip</name>
         <id>27</id>
@@ -113,9 +110,6 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
-      </dataPath>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
         <id>21</id>
@@ -163,9 +157,6 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Ref</segments>
-      </dataPath>
       <extendedTooltip>
         <name>RefExtendedTooltip</name>
         <id>24</id>
@@ -249,6 +240,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
+      <source>ListSearchString</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -287,6 +279,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
+      <source>ListViewStatus</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
         <horizontalLocation>Left</horizontalLocation>
@@ -326,6 +319,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
+      <source>ListSearchControl</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -380,8 +374,6 @@
     <rowPictureDataPath xsi:type="form:DataPath">
       <segments>List.DefaultPicture</segments>
     </rowPictureDataPath>
-    <viewMode>All</viewMode>
-    <settingsNamedItemDetailedRepresentation>false</settingsNamedItemDetailedRepresentation>
     <extInfo xsi:type="form:DynamicListTableExtInfo">
       <autoRefreshPeriod>60</autoRefreshPeriod>
       <period>

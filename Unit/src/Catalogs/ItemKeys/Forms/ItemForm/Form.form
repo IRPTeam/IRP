@@ -580,9 +580,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Length</segments>
-          </dataPath>
           <extendedTooltip>
             <name>LengthExtendedTooltip</name>
             <id>108</id>
@@ -630,9 +627,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Width</segments>
-          </dataPath>
           <extendedTooltip>
             <name>WidthExtendedTooltip</name>
             <id>111</id>
@@ -680,9 +674,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Height</segments>
-          </dataPath>
           <extendedTooltip>
             <name>HeightExtendedTooltip</name>
             <id>114</id>
@@ -730,9 +721,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Volume</segments>
-          </dataPath>
           <extendedTooltip>
             <name>VolumeExtendedTooltip</name>
             <id>122</id>
@@ -824,9 +812,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Weight</segments>
-          </dataPath>
           <extendedTooltip>
             <name>WeightExtendedTooltip</name>
             <id>119</id>
@@ -1154,9 +1139,6 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.SpecificationAffectPricingMD5.Key</segments>
-            </dataPath>
             <extendedTooltip>
               <name>SpecificationAffectPricingMD5KeyExtendedTooltip</name>
               <id>74</id>
@@ -1285,6 +1267,7 @@
               </userVisible>
               <autoFill>true</autoFill>
             </contextMenu>
+            <source>SpecificationAffectPricingMD5SearchString</source>
             <extInfo xsi:type="form:SearchStringAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -1323,6 +1306,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>ViewStatusAddition</type>
+            <source>SpecificationAffectPricingMD5ViewStatus</source>
             <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
               <horizontalLocation>Left</horizontalLocation>
@@ -1362,6 +1346,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>SearchControlAddition</type>
+            <source>SpecificationAffectPricingMD5SearchControl</source>
             <extInfo xsi:type="form:SearchControlAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -1411,8 +1396,6 @@
           <horizontalStretch>true</horizontalStretch>
           <verticalStretch>true</verticalStretch>
           <fileDragMode>AsFileRef</fileDragMode>
-          <viewMode>All</viewMode>
-          <settingsNamedItemDetailedRepresentation>false</settingsNamedItemDetailedRepresentation>
           <rowFilter xsi:type="core:UndefinedValue"/>
         </items>
         <visible>true</visible>

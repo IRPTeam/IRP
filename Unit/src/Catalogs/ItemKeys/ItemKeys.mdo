@@ -22,6 +22,7 @@
         </types>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <attributes uuid="e24992d8-4e4b-48fb-9e33-1ecff27521fe" extendedConfigurationObject="2323578b-1174-4a2e-b3d0-feff654f2e78">
     <name>Unit</name>
@@ -35,6 +36,7 @@
         </types>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <attributes uuid="bed58c0a-067f-4c6d-a9b1-484e01981e58" extendedConfigurationObject="3a213690-c5d1-4428-9b0d-99c68a6cb6bc">
     <name>Specification</name>
@@ -48,6 +50,7 @@
         </types>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <attributes uuid="0b3eea57-92cf-4afb-a48a-9f29dd8414ea" extendedConfigurationObject="3e1b4183-7207-45cf-9d67-007b1c6783ae">
     <name>AffectPricingMD5</name>
@@ -64,6 +67,7 @@
         </stringQualifiers>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <attributes uuid="6bdf1e79-77a8-4713-9f71-1a618a8163dd" extendedConfigurationObject="b9aef949-8087-472c-b5ab-86c19c0acf32">
     <name>UniqueMD5</name>
@@ -80,6 +84,7 @@
         </stringQualifiers>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <attributes uuid="0335ab5b-d050-46e0-8d7b-232875676960" extendedConfigurationObject="398f7c96-84ca-49d9-acca-423dc050244d">
     <name>ItemKeyID</name>
@@ -96,6 +101,7 @@
         </stringQualifiers>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <tabularSections uuid="e308f718-cb1d-42a1-9be7-d3fe7b6113f7" extendedConfigurationObject="431757fb-84bd-47b6-b51c-fc00c761fb69">
     <producedTypes>
@@ -122,6 +128,7 @@
           </stringQualifiers>
         </typeExtension>
       </extension>
+      <type/>
     </attributes>
   </tabularSections>
   <forms uuid="3fc2847e-aa4b-4477-acfb-df076db489fd" extendedConfigurationObject="06ad9dde-fa31-4797-aeaf-ed2360c318c0">

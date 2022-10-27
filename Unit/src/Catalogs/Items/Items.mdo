@@ -22,6 +22,7 @@
         </types>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <attributes uuid="3be45037-ee1c-4e18-af04-6b9849623124" extendedConfigurationObject="0a2bf5ad-5f8a-4c70-99e3-7b47df1d3fdb">
     <name>Unit</name>
@@ -35,6 +36,7 @@
         </types>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <attributes uuid="7c02c364-48a6-4604-9fdd-d2d33044251c" extendedConfigurationObject="16945c33-3689-4d1f-b7b9-7cb0576f6485">
     <name>MainPricture</name>
@@ -48,6 +50,7 @@
         </types>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <attributes uuid="651cb065-89df-49a5-8608-12a787180423" extendedConfigurationObject="9ca05baa-27d1-4732-985d-058b166161e3">
     <name>Vendor</name>
@@ -61,6 +64,7 @@
         </types>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <attributes uuid="ac6a45d9-c3fe-4248-ab89-f1a5e3766773" extendedConfigurationObject="79e7b71f-5d08-4ccc-b361-2622cb79b228">
     <name>ItemID</name>
@@ -77,6 +81,7 @@
         </stringQualifiers>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <attributes uuid="ed0b00c6-4424-43f1-b95b-77dec93d7442" extendedConfigurationObject="dcf6bef2-6c2e-4e4f-bde7-daabb6b78827">
     <name>PackageUnit</name>
@@ -90,6 +95,7 @@
         </types>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
   <forms uuid="ad5f8d87-4851-4e38-bcf9-14ec004c5a5f" extendedConfigurationObject="c66d8de2-25be-4f7e-9861-2b2bc8ca43d8">
     <name>ItemForm</name>

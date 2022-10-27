@@ -729,8 +729,8 @@
     </synonym>
     <group>FormCommandBarImportant</group>
     <commandParameterType>
-      <types>CatalogRef.Unit_ServiceExchangeHistory</types>
       <types>CatalogRef.Unit_MockServiceData</types>
+      <types>CatalogRef.Unit_ServiceExchangeHistory</types>
     </commandParameterType>
     <representation>PictureAndText</representation>
     <picture xsi:type="core:PictureRef">

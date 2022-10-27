@@ -1682,6 +1682,7 @@
             <enableStartDrag>true</enableStartDrag>
             <enableDrag>true</enableDrag>
             <fileDragMode>AsFileRef</fileDragMode>
+            <rowFilter xsi:type="core:UndefinedValue"/>
           </items>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -2188,6 +2189,7 @@
             <enableStartDrag>true</enableStartDrag>
             <enableDrag>true</enableDrag>
             <fileDragMode>AsFileRef</fileDragMode>
+            <rowFilter xsi:type="core:UndefinedValue"/>
           </items>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -2644,6 +2646,7 @@
             <enableStartDrag>true</enableStartDrag>
             <enableDrag>true</enableDrag>
             <fileDragMode>AsFileRef</fileDragMode>
+            <rowFilter xsi:type="core:UndefinedValue"/>
           </items>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -3052,6 +3055,7 @@
             <enableStartDrag>true</enableStartDrag>
             <enableDrag>true</enableDrag>
             <fileDragMode>AsFileRef</fileDragMode>
+            <rowFilter xsi:type="core:UndefinedValue"/>
           </items>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -4259,6 +4263,7 @@
             <enableStartDrag>true</enableStartDrag>
             <enableDrag>true</enableDrag>
             <fileDragMode>AsFileRef</fileDragMode>
+            <rowFilter xsi:type="core:UndefinedValue"/>
           </items>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -4564,6 +4569,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>AfterAnswer_SetSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -4602,6 +4608,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>AfterAnswer_SetViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -4640,6 +4647,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>AfterAnswer_SetSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -4687,6 +4695,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -5151,12 +5160,12 @@
   </commandInterface>
   <extInfo xsi:type="form:CatalogFormExtInfo">
     <handlers>
-      <event>BeforeWriteAtServer</event>
-      <name>BeforeWriteAtServer</name>
-    </handlers>
-    <handlers>
       <event>OnReadAtServer</event>
       <name>OnReadAtServer</name>
+    </handlers>
+    <handlers>
+      <event>BeforeWriteAtServer</event>
+      <name>BeforeWriteAtServer</name>
     </handlers>
   </extInfo>
 </form:Form>

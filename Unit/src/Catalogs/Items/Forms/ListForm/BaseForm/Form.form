@@ -49,9 +49,6 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List</segments>
-      </dataPath>
       <defaultItem>true</defaultItem>
       <titleLocation>None</titleLocation>
       <items xsi:type="form:FormField">
@@ -66,9 +63,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>List.Code</segments>
-        </dataPath>
         <extendedTooltip>
           <name>CodeExtendedTooltip</name>
           <id>40</id>
@@ -120,9 +114,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>List.Description</segments>
-        </dataPath>
         <extendedTooltip>
           <name>DescriptionExtendedTooltip</name>
           <id>24</id>
@@ -174,9 +165,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>List.ItemType</segments>
-        </dataPath>
         <defaultItem>true</defaultItem>
         <extendedTooltip>
           <name>ItemTypeExtendedTooltip</name>
@@ -225,9 +213,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>List.Ref</segments>
-        </dataPath>
         <extendedTooltip>
           <name>RefExtendedTooltip</name>
           <id>27</id>
@@ -311,6 +296,7 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
+        <source>ListSearchString</source>
         <extInfo xsi:type="form:SearchStringAdditionExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
         </extInfo>
@@ -349,6 +335,7 @@
           <autoFill>true</autoFill>
         </contextMenu>
         <type>ViewStatusAddition</type>
+        <source>ListViewStatus</source>
         <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
           <horizontalLocation>Left</horizontalLocation>
@@ -388,6 +375,7 @@
           <autoFill>true</autoFill>
         </contextMenu>
         <type>SearchControlAddition</type>
+        <source>ListSearchControl</source>
         <extInfo xsi:type="form:SearchControlAdditionExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
         </extInfo>
@@ -438,9 +426,6 @@
       <verticalStretch>true</verticalStretch>
       <enableStartDrag>true</enableStartDrag>
       <enableDrag>true</enableDrag>
-      <rowPictureDataPath xsi:type="form:DataPath">
-        <segments>List.DefaultPicture</segments>
-      </rowPictureDataPath>
       <extInfo xsi:type="form:DynamicListTableExtInfo">
         <autoRefreshPeriod>60</autoRefreshPeriod>
         <period>
@@ -465,9 +450,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>PictureViewHTML</segments>
-          </dataPath>
           <titleLocation>None</titleLocation>
           <extendedTooltip>
             <name>PictureViewHTMLExtendedTooltip</name>
@@ -520,9 +502,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>AddAttributeViewHTML</segments>
-          </dataPath>
           <titleLocation>None</titleLocation>
           <extendedTooltip>
             <name>AddAttributeViewHTMLExtendedTooltip</name>
@@ -625,7 +604,7 @@
             </extInfo>
           </extendedTooltip>
           <type>UsualButton</type>
-          <commandName>Form.Command.ViewPictures</commandName>
+          <commandName>0</commandName>
           <representation>Auto</representation>
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
@@ -662,7 +641,7 @@
             </extInfo>
           </extendedTooltip>
           <type>UsualButton</type>
-          <commandName>Form.Command.ViewAdditionalAttribute</commandName>
+          <commandName>0</commandName>
           <representation>Auto</representation>
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
@@ -793,5 +772,4 @@
     <navigationPanel/>
     <commandBar/>
   </commandInterface>
-  <extInfo xsi:type="form:DynamicListFormExtInfo"/>
 </form:Form>

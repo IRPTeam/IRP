@@ -53,7 +53,6 @@ Function ConnectionSettingTemplate(IntegrationType = Undefined, AddInfo = Undefi
 		ConnectionSetting.Insert("TimeOut", 60);
 		ConnectionSetting.Insert("SecureConnection", Undefined);
 		ConnectionSetting.Insert("UseOSAuthentication", False);
-		ConnectionSetting.Insert("Headers", New Map());
 	EndIf;
 	Return ConnectionSetting;
 EndFunction

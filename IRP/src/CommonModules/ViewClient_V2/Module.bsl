@@ -1011,6 +1011,39 @@ EndProcedure
 
 #EndRegion
 
+#Region INVENTORY_QUANTITY
+
+// Inventory.Quantity
+Procedure InventoryQuantityOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Inventory", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Inventory", Rows);
+	ControllerClientServer_V2.InventoryQuantityOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region INVENTORY_PRICE
+
+// Inventory.Price
+Procedure InventorytPriceOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Inventory", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Inventory", Rows);
+	ControllerClientServer_V2.InventoryPriceOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region INVENTORY_AMOUNT
+
+// Inventory.Amount
+Procedure InventoryAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Inventory", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Inventory", Rows);
+	ControllerClientServer_V2.InventoryAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #Region ACCOUNT_BALANCE
@@ -1694,6 +1727,17 @@ Procedure ItemListTotalAmountOnChange(Object, Form, CurrentData = Undefined) Exp
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
 	ControllerClientServer_V2.ItemListTotalAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_AMOUNT
+
+// ItemList.Amount
+Procedure ItemListAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListAmountOnChange(Parameters);
 EndProcedure
 
 #EndRegion

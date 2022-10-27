@@ -381,7 +381,12 @@ EndFunction
 // Returns:
 //  String - Get MD5
 Function GetMD5(Object, ReturnAsGUID = True) Export
-	DataToString = ValueToStringInternal(Object);
+	If TypeOf(Object) = Type("String") Then
+		DataToString = Object;
+	Else
+		DataToString = ValueToStringInternal(Object);
+	EndIf;
+
 	DataHashing = New DataHashing(HashFunction.MD5);
 	DataHashing.Append(DataToString);
 	HashSumString = StrReplace(String(DataHashing.HashSum), " ", "");

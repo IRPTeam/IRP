@@ -199,7 +199,7 @@
     <titleLocation>None</titleLocation>
     <items xsi:type="form:FormField">
       <name>TemplateActionsPriority</name>
-      <id>124</id>
+      <id>148</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -210,7 +210,7 @@
       </dataPath>
       <extendedTooltip>
         <name>TemplateActionsPriorityExtendedTooltip</name>
-        <id>126</id>
+        <id>150</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -225,7 +225,7 @@
       </extendedTooltip>
       <contextMenu>
         <name>TemplateActionsPriorityContextMenu</name>
-        <id>125</id>
+        <id>149</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -249,7 +249,8 @@
     </items>
     <items xsi:type="form:FormField">
       <name>TemplateActionsAttributeType</name>
-      <id>112</id>
+      <id>133</id>
+      <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
@@ -259,7 +260,7 @@
       </dataPath>
       <extendedTooltip>
         <name>TemplateActionsAttributeTypeExtendedTooltip</name>
-        <id>114</id>
+        <id>135</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -274,7 +275,57 @@
       </extendedTooltip>
       <contextMenu>
         <name>TemplateActionsAttributeTypeContextMenu</name>
-        <id>113</id>
+        <id>134</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>TemplateActionsName</name>
+      <id>142</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>TemplateActions.Name</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>TemplateActionsNameExtendedTooltip</name>
+        <id>144</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>TemplateActionsNameContextMenu</name>
+        <id>143</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -298,7 +349,7 @@
     </items>
     <items xsi:type="form:FormField">
       <name>TemplateActionsPath</name>
-      <id>115</id>
+      <id>145</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -309,7 +360,7 @@
       </dataPath>
       <extendedTooltip>
         <name>TemplateActionsPathExtendedTooltip</name>
-        <id>117</id>
+        <id>147</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -324,7 +375,7 @@
       </extendedTooltip>
       <contextMenu>
         <name>TemplateActionsPathContextMenu</name>
-        <id>116</id>
+        <id>146</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -347,19 +398,19 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>TemplateActionsCheckRegExp</name>
-      <id>118</id>
+      <name>TemplateActionsValue</name>
+      <id>151</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>TemplateActions.CheckRegExp</segments>
+        <segments>TemplateActions.Value</segments>
       </dataPath>
       <extendedTooltip>
-        <name>TemplateActionsCheckRegExpExtendedTooltip</name>
-        <id>120</id>
+        <name>TemplateActionsValueExtendedTooltip</name>
+        <id>153</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -373,58 +424,8 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>TemplateActionsCheckRegExpContextMenu</name>
-        <id>119</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <wrap>true</wrap>
-        <chooseType>true</chooseType>
-        <typeDomainEnabled>true</typeDomainEnabled>
-        <textEdit>true</textEdit>
-      </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
-      <name>TemplateActionsAction</name>
-      <id>121</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>TemplateActions.Action</segments>
-      </dataPath>
-      <extendedTooltip>
-        <name>TemplateActionsActionExtendedTooltip</name>
-        <id>123</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>TemplateActionsActionContextMenu</name>
-        <id>122</id>
+        <name>TemplateActionsValueContextMenu</name>
+        <id>152</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>

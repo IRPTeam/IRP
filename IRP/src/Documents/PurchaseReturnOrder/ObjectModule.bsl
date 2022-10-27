@@ -66,4 +66,58 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
 
+	If ValueIsFilled(ThisObject.Company) Then
+		Query = New Query;
+		Query.Text =
+		"SELECT
+		|	ItemList.LineNumber AS LineNumber,
+		|	ItemList.Key AS Key,
+		|	CAST(ItemList.Store AS Catalog.Stores) AS Store
+		|into ttItemList
+		|FROM
+		|	&ItemList AS ItemList
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	RowIDInfo.Key AS Key,
+		|	RowIDInfo.Basis AS Basis
+		|into ttRowIDInfo
+		|FROM
+		|	&RowIDInfo AS RowIDInfo
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ItemList.LineNumber AS LineNumber,
+		|	ItemList.Store AS Store,
+		|	ItemList.Store.Company AS StoreCompany,
+		|	RowIDInfo.Basis AS Basis
+		|FROM
+		|	ttItemList AS ItemList
+		|		LEFT JOIN ttRowIDInfo AS RowIDInfo
+		|		ON ItemList.Key = RowIDInfo.Key
+		|
+		|ORDER BY
+		|	LineNumber";
+		Query.SetParameter("ItemList", ThisObject.ItemList.Unload());
+		Query.SetParameter("RowIDInfo", ThisObject.RowIDInfo.Unload());
+		QuerySelection = Query.Execute().Select();
+		While QuerySelection.Next() Do
+			If ValueIsFilled(QuerySelection.Basis) Then
+				Continue;
+			ElsIf ValueIsFilled(QuerySelection.StoreCompany) And Not QuerySelection.StoreCompany = ThisObject.Company Then
+				Cancel = True;
+				MessageText = StrTemplate(
+					R().Error_Store_Company_Row,
+					QuerySelection.Store,
+					ThisObject.Company, 
+					QuerySelection.LineNumber);
+				CommonFunctionsClientServer.ShowUsersMessage(
+					MessageText, 
+					"Object.ItemList[" + (QuerySelection.LineNumber - 1) + "].Store", 
+					"Object.ItemList");
+			EndIf;
+		EndDo;
+	EndIf;
 EndProcedure

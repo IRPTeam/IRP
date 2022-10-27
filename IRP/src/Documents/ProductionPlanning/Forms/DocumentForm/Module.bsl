@@ -276,6 +276,7 @@ Procedure EditStores(Command)
 	EndIf;
 	FormParameters = ManufacturingClient.GetEditStoresParameters(CurrentData, Object);
 	FormParameters.Insert("ReadOnlyStores", ThisObject.ReadOnly);
+	FormParameters.Insert("Company", Object.Company);
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);

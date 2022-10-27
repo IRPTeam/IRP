@@ -1492,6 +1492,60 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
+          <name>ItemListPrice</name>
+          <id>433</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.Price</segments>
+          </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListPriceOnChange</name>
+          </handlers>
+          <extendedTooltip>
+            <name>ItemListPriceExtendedTooltip</name>
+            <id>435</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListPriceContextMenu</name>
+            <id>434</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
           <name>ItemListAmount</name>
           <id>419</id>
           <visible>true</visible>
@@ -1502,6 +1556,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.ItemList.Amount</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListAmountOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ItemListAmountExtendedTooltip</name>
             <id>421</id>

@@ -238,6 +238,7 @@ Function GetChain()
 	Chain.Insert("ChangeTaxRate", GetChainLink("ChangeTaxRateExecute"));
 	Chain.Insert("ChangeTaxAmountAsManualAmount", GetChainLink("ChangeTaxAmountAsManualAmountExecute"));
 	Chain.Insert("Calculations" , GetChainLink("CalculationsExecute"));
+	Chain.Insert("SimpleCalculations" , GetChainLink("SimpleCalculationsExecute"));
 	Chain.Insert("UpdatePaymentTerms" , GetChainLink("UpdatePaymentTermsExecute"));
 	
 	Chain.Insert("ChangePartnerByRetailCustomer"   , GetChainLink("ChangePartnerByRetailCustomerExecute"));
@@ -2293,6 +2294,33 @@ Procedure CalculateTaxAmount(Options, TaxOptions, Result, IsReverse, IsManualPri
 
 	Result.TaxAmount = TaxAmount;
 EndProcedure
+
+Function SimpleCalculationsOptions() Export
+	Options = GetChainLinkOptions("Ref");
+	
+	Options.Insert("Amount", 0);
+	Options.Insert("Price", 0);
+	Options.Insert("Quantity", 0);
+	
+	Options.Insert("CalculateAmount", New Structure("Enable", False));
+	Options.Insert("CalculatePrice" , New Structure("Enable", False));
+	
+	Return Options;
+EndFunction
+
+Function SimpleCalculationsExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("Amount"  , Options.Amount);
+	Result.Insert("Price"   , Options.Price);
+	Result.Insert("Quantity", Options.Quantity);
+	If Options.CalculatePrice.Enable Then
+		Result.Price = ?(Result.Quantity = 0, 0, Result.Amount / Result.Quantity);
+	EndIf;
+	If Options.CalculateAmount.Enable Then
+		Result.Amount = Result.Price * Result.Quantity;
+	EndIf;
+	Return Result;
+EndFunction
 
 #EndRegion
 

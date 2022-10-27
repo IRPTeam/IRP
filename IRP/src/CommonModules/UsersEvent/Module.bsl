@@ -68,7 +68,7 @@ Function UpdateUsersRole(Users)
 	Return Result;
 EndFunction
 
-Function UpdateUserRole(User, Result)
+Function UpdateUserRole(User, Result) Export
 	UserIB = Undefined;
 	If ValueIsFilled(User.InfobaseUserID) Then
 		UserIB = InfoBaseUsers.FindByUUID(User.InfobaseUserID);
@@ -82,8 +82,13 @@ Function UpdateUserRole(User, Result)
 	Else
 		Result.ArrayOfResults.Add(New Structure("Success, Message", True, StrTemplate(R().UsersEvent_002,
 			User.InfobaseUserID, User.Description)));
-		UserIB.Roles.Clear();
 		Roles = GetUserRoles(User);
+		If InfoBaseUsers.GetUsers().Count() = 1 And Not Roles.Count() Then
+			// this is the only user in the database, 
+			// it is not allowed to clear his roles
+			Return Result;
+		EndIf;
+		UserIB.Roles.Clear();
 		AddRoles(Roles, UserIB);
 		UserIB.Write();
 	EndIf;
@@ -204,3 +209,37 @@ Function GetAccessGroupsByUser(User = Undefined) Export
 	Users = Query.Execute().Unload().UnloadColumn("Ref");
 	Return Users
 EndFunction
+
+Function GetChangePasswordOnNextLogin(User = Undefined) Export
+	 
+	If User = Undefined Then
+		User = SessionParameters.CurrentUser;
+	EndIf;
+	
+	SetPrivilegedMode(True);
+	
+	ChangePasswordOnNextLogin = CommonFunctionsServer.GetRefAttribute(User, "ChangePasswordOnNextLogin");
+	
+	SetPrivilegedMode(False);
+	
+	Return ChangePasswordOnNextLogin;
+	 
+EndFunction
+
+Procedure DoneChangePasswordOnLogon(NewPassword, User = Undefined) Export
+	
+	If User = Undefined Then
+		User = SessionParameters.CurrentUser;
+	EndIf;
+	
+	SetPrivilegedMode(True);
+	
+	UserObject = User.GetObject();
+	UserObject.ChangePasswordOnNextLogin = False;
+	UserObject.AdditionalProperties.Insert("Password", NewPassword);
+	UserObject.AdditionalProperties.Insert("isUpdated", True);
+	UserObject.Write();
+	
+	SetPrivilegedMode(False);
+	
+EndProcedure

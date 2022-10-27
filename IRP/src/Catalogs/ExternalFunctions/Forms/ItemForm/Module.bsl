@@ -294,6 +294,11 @@ Function FillTypes()
 		ResultTypeRef = Parts[0] + "Ref." + Parts[1];
 		ValueList.Add(ResultTypeRef, Doc.Synonym, , PictureLib.Document);
 	EndDo;
+	For Each Enum In Metadata.Enums Do
+		Parts = StrSplit(Enum.FullName(), ".");
+		ResultTypeRef = Parts[0] + "Ref." + Parts[1];
+		ValueList.Add(ResultTypeRef, Enum.Synonym, , PictureLib.Enum);
+	EndDo;
 	
 	Return ValueList;
 EndFunction

@@ -216,6 +216,7 @@
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLClock</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLTextField</commonTemplates>
+  <commonTemplates>CommonTemplate.XMLPrettyPrint</commonTemplates>
   <filterCriteria>FilterCriterion.RelatedDocuments</filterCriteria>
   <commonModules>CommonModule.AccountingClient</commonModules>
   <commonModules>CommonModule.AccountingClientServer</commonModules>
@@ -441,6 +442,7 @@
   <commonModules>CommonModule.UserSettingsServer</commonModules>
   <commonModules>CommonModule.UserSettingsServerReuse</commonModules>
   <commonModules>CommonModule.UsersEvent</commonModules>
+  <commonModules>CommonModule.UsersEventClient</commonModules>
   <commonModules>CommonModule.ViewClient_V2</commonModules>
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>

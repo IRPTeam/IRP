@@ -45,14 +45,6 @@ EndProcedure
 
 #EndRegion
 
-//#Region TRANSACTION_TYPE
-//
-//Procedure TransactionTypeOnChange(Object, Form, Item) Export
-//	ViewClient_V2.TransactionTypeOnChange(Object, Form, "ItemList");
-//EndProcedure
-//
-//#EndRegion
-
 #Region PARTNER
 
 Procedure PartnerOnChange(Object, Form, Item) Export
@@ -130,22 +122,6 @@ Procedure CurrencyOnChange(Object, Form, Item) Export
 EndProcedure
 
 #EndRegion
-
-//#Region STORE
-//
-//Procedure StoreOnChange(Object, Form, Item) Export
-//	ViewClient_V2.StoreOnChange(Object, Form, "ItemList");
-//EndProcedure
-//
-//#EndRegion
-//
-//#Region DELIVERY_DATE
-//
-//Procedure DeliveryDateOnChange(Object, Form, Item) Export
-//	ViewClient_V2.DeliveryDateOnChange(Object, Form, "ItemList");
-//EndProcedure
-//
-//#EndRegion
 
 #Region LEGAL_NAME_CONTRACT
 
@@ -269,22 +245,6 @@ EndProcedure
 
 #EndRegion
 
-//#Region STORE
-//
-//Procedure ItemListStoreOnChange(Object, Form, Item, CurrentData = Undefined) Export
-//	ViewClient_V2.ItemListStoreOnChange(Object, Form, CurrentData);
-//EndProcedure
-//
-//#EndRegion
-//
-//#Region DELIVERY_DATE
-//
-//Procedure ItemListDeliveryDateOnChange(Object, Form, Item) Export
-//	ViewClient_V2.ItemListDeliveryDateOnChange(Object, Form);
-//EndProcedure
-//
-//#EndRegion
-
 #Region TAX_RATE
 
 Procedure ItemListTaxValueOnChange(Object, Form, Item, CurrentData = Undefined) Export
@@ -293,30 +253,6 @@ EndProcedure
 
 #EndRegion
 
-//#Region EXPENSE_TYPE
-//
-//Procedure ItemListExpenseTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-//	DocumentsClient.ExpenseTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
-//EndProcedure
-//
-//Procedure ItemListExpenseTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-//	DocumentsClient.ExpenseTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
-//EndProcedure
-//
-//#EndRegion
-
 #EndRegion
 
 #EndRegion
-
-//#Region PAYMENT_TERMS
-//
-//Procedure PaymentTermsDateOnChange(Object, Form, Item, AddInfo = Undefined) Export
-//	DocumentsClient.CalculatePaymentTermDuePeriod(Object, Form, Item, AddInfo);
-//EndProcedure
-//
-//Procedure PaymentTermsOnChange(Object, Form, Item, AddInfo = Undefined) Export
-//	DocumentsClient.CalculatePaymentTermDateAndAmount(Object, Form, AddInfo);
-//EndProcedure
-//
-//#EndRegion

@@ -6,14 +6,12 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
-//	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	Form.Taxes_CreateFormControls();
-//	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -22,7 +20,6 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	Form.Taxes_CreateFormControls();
-//	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 	LockDataModificationPrivileged.LockFormIfObjectIsLocked(Form, CurrentObject);
 EndProcedure
 

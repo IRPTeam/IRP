@@ -131,7 +131,6 @@ EndProcedure
 
 #EndRegion
 
-//----
 #Region PRICE_INCLUDE_TAX
 
 Procedure PriceIncludeTaxOnChange(Object, Form, Item) Export
@@ -214,7 +213,6 @@ EndProcedure
 
 #EndRegion
 
-//---
 #Region PRICE
 
 Procedure ItemListPriceOnChange(Object, Form, Item, CurrentData = Undefined) Export

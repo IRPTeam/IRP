@@ -7,5 +7,4 @@ EndProcedure
 &AtClient
 Procedure ListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	CommonFormActions.DynamicListBeforeAddRow(ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter, "Catalog.Agreements.ObjectForm");
-//	CatAgreementsClient.ListBeforeAddRow(ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure

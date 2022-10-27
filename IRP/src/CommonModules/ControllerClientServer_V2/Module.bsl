@@ -9189,7 +9189,6 @@ Procedure SetItemListCalculations_Without_SpecialOffers(Parameters, Results) Exp
 	Binding = BindItemListCalculations(Parameters);
 	SetterObject(Undefined, "ItemList.NetAmount"   , Parameters, Results, ViewNotify, "NetAmount"    , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, ViewNotify, "TaxAmount"    , NotifyAnyway);
-//	SetterObject(Undefined, "ItemList.OffersAmount", Parameters, Results, ViewNotify, "OffersAmount" , NotifyAnyway);
 	SetterObject(Undefined, "ItemList.Price"       , Parameters, Results, ViewNotify, "Price"        , NotifyAnyway);
 	SetterObject(Binding.StepsEnabler, "ItemList.TotalAmount" , Parameters, Results, ViewNotify, "TotalAmount" , NotifyAnyway);
 	SetTaxList(Parameters, Results);
@@ -9395,8 +9394,6 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 			Options.CalculateNetAmount.Enable     = True;
 			Options.CalculateTotalAmount.Enable   = True;
 			Options.CalculateTaxAmount.Enable     = True;
-			//Options.CalculateSpecialOffers.Enable = True;
-			//Options.RecalculateSpecialOffers.Enable = True;
 		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
 		// when TotalAmount is changed taxes need recalculate reverse, will be changed NetAmount and Price
 			
@@ -9423,7 +9420,6 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 		Options.AmountOptions.DontCalculateRow = GetItemListDontCalculateRow(Parameters, Row.Key);
 		
 		Options.AmountOptions.NetAmount        = GetItemListNetAmount(Parameters, Row.Key);
-		//Options.AmountOptions.OffersAmount     = GetItemListOffersAmount(Parameters, Row.Key);
 		Options.AmountOptions.TaxAmount        = GetItemListTaxAmount(Parameters, Row.Key);
 		Options.AmountOptions.TotalAmount      = GetItemListTotalAmount(Parameters, Row.Key);
 		
@@ -9441,9 +9437,6 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 		Options.TaxOptions.TaxRates         = GetTaxRate(Parameters, Row);
 		Options.TaxOptions.TaxList          = Row.TaxList;
 		Options.TaxOptions.IsAlreadyCalculated = Row.TaxIsAlreadyCalculated;
-			
-		//Options.OffersOptions.SpecialOffers      = Row.SpecialOffers;
-		//Options.OffersOptions.SpecialOffersCache = Row.SpecialOffersCache;
 		
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListCalculations";

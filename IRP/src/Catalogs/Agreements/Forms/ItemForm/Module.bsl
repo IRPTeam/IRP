@@ -7,9 +7,16 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	CatAgreementsServer.OnCreateAtServer(Cancel, StandardProcessing, ThisObject, Parameters);
-//	If Parameters.Key.IsEmpty() Then
-//		CatAgreementsClientServer.SetVisible(Object, ThisObject);
-//	EndIf;
+	
+	Items.Type.ChoiceList.Clear();
+	Items.Type.ChoiceList.Add(Enums.AgreementTypes.Customer);
+	Items.Type.ChoiceList.Add(Enums.AgreementTypes.Vendor);
+	
+	If FOServer.IsUseCommissionTrading() Then
+		Items.Type.ChoiceList.Add(Enums.AgreementTypes.Consignor);
+		Items.Type.ChoiceList.Add(Enums.AgreementTypes.TradeAgent);
+	EndIf;
+	
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
@@ -17,7 +24,6 @@ EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
-//	CatAgreementsClientServer.SetVisible(Object, ThisObject);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
@@ -28,7 +34,6 @@ EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
-//	CatAgreementsClientServer.SetVisible(Object, ThisObject);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
@@ -83,7 +88,6 @@ EndProcedure
 
 &AtClient
 Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
-//	CatAgreementsClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
@@ -94,7 +98,6 @@ EndProcedure
 
 &AtClient
 Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
-//	CatAgreementsClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True, ComparisonType.Equal));
@@ -116,7 +119,6 @@ EndProcedure
 
 &AtClient
 Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
-//	CatAgreementsClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
@@ -135,7 +137,6 @@ EndProcedure
 
 &AtClient
 Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
-//	CatAgreementsClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", False, ComparisonType.Equal));
@@ -153,7 +154,6 @@ EndProcedure
 
 &AtClient
 Procedure PartnerSegmentStartChoice(Item, ChoiceData, StandardProcessing)
-//	CatAgreementsClient.PartnerSegmentStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
@@ -165,7 +165,6 @@ EndProcedure
 
 &AtClient
 Procedure PartnerSegmentEditTextChange(Item, Text, StandardProcessing)
-//	CatAgreementsClient.PartnerSegmentTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Managers", False, ComparisonType.Equal));
@@ -183,7 +182,6 @@ Procedure TypeOnChange(Item)
 		Object.CreditLimitAmount = 0;
 	EndIf;
 	SetVisibilityAvailability(Object, ThisObject);
-//	CatAgreementsClient.TypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -199,7 +197,6 @@ Procedure ApArPostingDetailOnChange(Item)
 		Object.PaymentTerm = Undefined;
 	EndIf;
 	SetVisibilityAvailability(Object, ThisObject);	
-//	CatAgreementsClient.ApArPostingDetailOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -215,7 +212,6 @@ Procedure KindOnChange(Item)
 		Object.PaymentTerm = Undefined;
 	EndIf;
 	SetVisibilityAvailability(Object, ThisObject);	
-//	CatAgreementsClient.KindOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -228,7 +224,6 @@ Procedure UseCreditLimitOnChange(Item)
 		Object.CreditLimitAmount = 0;
 	EndIf;
 	SetVisibilityAvailability(Object, ThisObject);	
-//	CatAgreementsClient.UseCreditLimitOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

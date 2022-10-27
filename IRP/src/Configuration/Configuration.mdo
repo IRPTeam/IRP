@@ -233,8 +233,8 @@
   <commonModules>CommonModule.BuilderAPI</commonModules>
   <commonModules>CommonModule.BuilderServer_V2</commonModules>
   <commonModules>CommonModule.CalculationServer</commonModules>
-  <commonModules>CommonModule.CatAgreementsClient</commonModules>
-  <commonModules>CommonModule.CatAgreementsClientServer</commonModules>
+  <commonModules>CommonModule.DELETE_CatAgreementsClient</commonModules>
+  <commonModules>CommonModule.DELETE_CatAgreementsClientServer</commonModules>
   <commonModules>CommonModule.CatAgreementsServer</commonModules>
   <commonModules>CommonModule.CatCashAccountsClient</commonModules>
   <commonModules>CommonModule.CatCashAccountsServer</commonModules>
@@ -532,6 +532,7 @@
   <functionalOptions>FunctionalOption.UseStores</functionalOptions>
   <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
+  <functionalOptions>FunctionalOption.UseCommissionTrading</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -621,6 +622,7 @@
   <constants>Constant.UseStores</constants>
   <constants>Constant.UseUnitsAndDimensions</constants>
   <constants>Constant.UseWorkOrders</constants>
+  <constants>Constant.UseCommissionTrading</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>

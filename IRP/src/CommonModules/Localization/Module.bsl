@@ -713,6 +713,10 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("Error_ChangeAttribute_RelatedDocs", NStr("en = 'Cannot change %1 if related documents exist'", Lang));
 	
+	// Store does not match company
+	Strings.Insert("Error_Store_Company", NStr("en = 'Store [%1] does not match company [%2]'", Lang));
+	Strings.Insert("Error_Store_Company_Row", NStr("en = 'Store [%1] in row [%3] does not match company [%2]'", Lang));
+	
 #EndRegion
 
 #Region LandedCost

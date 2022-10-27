@@ -27,6 +27,60 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		MessageText = StrTemplate(R().MF_Error_004, ThisObject.Date, ThisObject.ProductionPlanning.Date);
 		CommonFunctionsClientServer.ShowUsersMessage(MessageText, "Object.Date", "Object");
 	EndIf;
+	
+	If Not ThisObject.Company.IsEmpty() Then
+		If Not ThisObject.StoreProduction.IsEmpty() Then
+			StoreCompany = CommonFunctionsServer.GetRefAttribute(ThisObject.StoreProduction, "Company");
+			If ValueIsFilled(StoreCompany) And Not StoreCompany = ThisObject.Company Then
+				Cancel = True;
+				MessageText = StrTemplate(
+					R().Error_Store_Company,
+					ThisObject.StoreProduction,
+					ThisObject.Company);
+				CommonFunctionsClientServer.ShowUsersMessage(
+					MessageText, 
+					"Object.StoreProduction", 
+					"Object");
+			EndIf;
+		EndIf;
+		
+		Query = New Query;
+		Query.Text =
+		"SELECT
+		|	Materials.LineNumber AS LineNumber,
+		|	CAST(Materials.WriteoffStore AS Catalog.Stores) AS Store
+		|into ttMaterials
+		|FROM
+		|	&Materials AS Materials
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	Materials.LineNumber AS LineNumber,
+		|	Materials.Store AS Store,
+		|	Materials.Store.Company AS StoreCompany
+		|FROM
+		|	ttMaterials AS Materials
+		|
+		|ORDER BY
+		|	LineNumber";
+		Query.SetParameter("Materials", ThisObject.Materials.Unload());
+		QuerySelection = Query.Execute().Select();
+		While QuerySelection.Next() Do
+			If ValueIsFilled(QuerySelection.StoreCompany) And Not QuerySelection.StoreCompany = ThisObject.Company Then
+				Cancel = True;
+				MessageText = StrTemplate(
+					R().Error_Store_Company_Row,
+					QuerySelection.Store,
+					ThisObject.Company, 
+					QuerySelection.LineNumber);
+				CommonFunctionsClientServer.ShowUsersMessage(
+					MessageText, 
+					"Object.Materials[" + (QuerySelection.LineNumber - 1) + "].WriteoffStore", 
+					"Object.Materials");
+			EndIf;
+		EndDo;
+	EndIf;
 EndProcedure
 
 Procedure Posting(Cancel, PostingMode)

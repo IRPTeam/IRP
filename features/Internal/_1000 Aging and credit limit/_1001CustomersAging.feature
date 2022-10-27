@@ -855,7 +855,81 @@ Scenario: _1000055 check Aging sum when delete row from SI
 			And I close all client application windows
 			
 
+Scenario: _1000056 check aging  date in the SI (created based on SC)
+		And I close all client application windows
+	* Create SO
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.SalesOrder" 
+		And I click the button named "FormCreate" 
+		* Filling in customer information
+			And I click Select button of "Partner" field 
+			And I go to line in "List" table 
+					| 'Description' |
+					| 'Kalipso'     |
+			And I select current line in "List" table 
+			And I click Select button of "Partner term" field 
+			And I go to line in "List" table 
+					| 'Description'                      |
+					| 'Basic Partner terms, without VAT' |
+			And I select current line in "List" table 
+		* Select store
+			And I click Select button of "Store" field 
+			And I go to line in "List" table 
+					| 'Description' |
+					| 'Store 01'    |
+			And I select current line in "List" table 
+		* Filling in items table
+			And in the table "ItemList" I click the button named "ItemListAdd" 
+			And I click choice button of "Item" attribute in "ItemList" table 
+			And I go to line in "List" table 
+					| 'Description' |
+					| 'Dress'       |
+			And I select current line in "List" table 
+			And I activate "Item key" field in "ItemList" table 
+			And I click choice button of "Item key" attribute in "ItemList" table 
+			And I go to line in "List" table 
+					| 'Item key' |
+					| 'L/Green'  |
+			And I select current line in "List" table 
+			And I activate "Quantity" field in "ItemList" table 
+			And I input "1,000" text in "Quantity" field of "ItemList" table 
+			And I finish line editing in "ItemList" table 
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
+			And I go to line in "ItemList" table 
+					|'#'| 'Item' |
+					|'2'| 'Dress'       |
+			And I activate "Price" field in "ItemList" table
+			And I input "900,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I input "01.10.2022 00:00:00" text in the field named "Date"
+			And I move to the next attribute
+			Then "Update item list info" window is opened
+			And I change checkbox "Do you want to replace filled price types with price type Basic Price without VAT?"
+			And I change checkbox "Do you want to update filled prices?"
+			And I change checkbox "Do you want to update payment term?"
+			And I click "OK" button	
+			And I click "Post" button
+		* Create SC
+			And I click "Shipment confirmation" button
+			And I expand current line in "BasisesTree" table
+			And I click "Ok" button
+			And I click "Post" button
+		* Create SI
+			And I click "Sales invoice" button
+			Then "Add linked document rows" window is opened
+			And I expand current line in "BasisesTree" table
+			And I click "Ok" button
+			And I move to "Aging" tab
+			And "PaymentTerms" table became equal
+				| '#' | 'Date'                                                 | 'Amount'   | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
+				| '1' | '{Format(CurrentDate() + 14 * 24 * 60 * 60, "DLF=D")}' | '1 612,00' | 'Post-shipment credit' | '14'               | '100,00'                |
+			And I close all client application windows
+			
 						
+						
+		
+
 
 			
 						

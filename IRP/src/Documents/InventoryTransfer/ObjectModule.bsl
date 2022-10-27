@@ -62,4 +62,49 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		ItemListTable.Columns.Add("Store", New TypeDescription("CatalogRef.Stores"));
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
+	
+	If Not ThisObject.Company.IsEmpty() Then
+		If Not ThisObject.StoreReceiver.IsEmpty() Then
+			StoreCompany = CommonFunctionsServer.GetRefAttribute(ThisObject.StoreReceiver, "Company");
+			If ValueIsFilled(StoreCompany) And Not StoreCompany = ThisObject.Company Then
+				Cancel = True;
+				MessageText = StrTemplate(
+					R().Error_Store_Company,
+					ThisObject.StoreReceiver,
+					ThisObject.Company);
+				CommonFunctionsClientServer.ShowUsersMessage(
+					MessageText, 
+					"Object.StoreReceiver", 
+					"Object");
+			EndIf;
+		EndIf;
+		If Not ThisObject.StoreSender.IsEmpty() Then
+			StoreCompany = CommonFunctionsServer.GetRefAttribute(ThisObject.StoreSender, "Company");
+			If ValueIsFilled(StoreCompany) And Not StoreCompany = ThisObject.Company Then
+				Cancel = True;
+				MessageText = StrTemplate(
+					R().Error_Store_Company,
+					ThisObject.StoreSender,
+					ThisObject.Company);
+				CommonFunctionsClientServer.ShowUsersMessage(
+					MessageText, 
+					"Object.StoreSender", 
+					"Object");
+			EndIf;
+		EndIf;
+		If Not ThisObject.StoreTransit.IsEmpty() Then
+			StoreCompany = CommonFunctionsServer.GetRefAttribute(ThisObject.StoreTransit, "Company");
+			If ValueIsFilled(StoreCompany) And Not StoreCompany = ThisObject.Company Then
+				Cancel = True;
+				MessageText = StrTemplate(
+					R().Error_Store_Company,
+					ThisObject.StoreTransit,
+					ThisObject.Company);
+				CommonFunctionsClientServer.ShowUsersMessage(
+					MessageText, 
+					"Object.StoreTransit", 
+					"Object");
+			EndIf;
+		EndIf;
+	EndIf;
 EndProcedure

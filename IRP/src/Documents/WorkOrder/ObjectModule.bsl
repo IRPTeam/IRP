@@ -30,6 +30,61 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_022, ClosingOrder));
 		EndIf;
 	EndIf;
+
+	If ValueIsFilled(ThisObject.Company) Then
+		Query = New Query;
+		Query.Text =
+		"SELECT
+		|	Materials.LineNumber AS LineNumber,
+		|	Materials.Key AS Key,
+		|	CAST(Materials.Store AS Catalog.Stores) AS Store
+		|into ttMaterials
+		|FROM
+		|	&Materials AS Materials
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	RowIDInfo.Key AS Key,
+		|	RowIDInfo.Basis AS Basis
+		|into ttRowIDInfo
+		|FROM
+		|	&RowIDInfo AS RowIDInfo
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	Materials.LineNumber AS LineNumber,
+		|	Materials.Store AS Store,
+		|	Materials.Store.Company AS StoreCompany,
+		|	RowIDInfo.Basis AS Basis
+		|FROM
+		|	ttMaterials AS Materials
+		|		LEFT JOIN ttRowIDInfo AS RowIDInfo
+		|		ON Materials.Key = RowIDInfo.Key
+		|
+		|ORDER BY
+		|	LineNumber";
+		Query.SetParameter("Materials", ThisObject.Materials.Unload());
+		Query.SetParameter("RowIDInfo", ThisObject.RowIDInfo.Unload());
+		QuerySelection = Query.Execute().Select();
+		While QuerySelection.Next() Do
+			If ValueIsFilled(QuerySelection.Basis) Then
+				Continue;
+			ElsIf ValueIsFilled(QuerySelection.StoreCompany) And Not QuerySelection.StoreCompany = ThisObject.Company Then
+				Cancel = True;
+				MessageText = StrTemplate(
+					R().Error_Store_Company_Row,
+					QuerySelection.Store,
+					ThisObject.Company, 
+					QuerySelection.LineNumber);
+				CommonFunctionsClientServer.ShowUsersMessage(
+					MessageText, 
+					"Object.Materials[" + (QuerySelection.LineNumber - 1) + "].Store", 
+					"Object.Materials");
+			EndIf;
+		EndDo;
+	EndIf;
 EndProcedure
 
 Procedure Posting(Cancel, PostingMode)

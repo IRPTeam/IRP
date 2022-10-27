@@ -113,4 +113,42 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			(Row.LineNumber - 1), "NZ=0; NG=0;") + "].Amount", ThisObject);
 		EndIf;
 	EndDo;
+	
+	Query = New Query;
+	Query.Text =
+	"SELECT
+	|	Inventory.LineNumber AS LineNumber,
+	|	CAST(Inventory.Store AS Catalog.Stores) AS Store
+	|into ttInventory
+	|FROM
+	|	&Inventory AS Inventory
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Inventory.LineNumber AS LineNumber,
+	|	Inventory.Store AS Store,
+	|	Inventory.Store.Company AS StoreCompany
+	|FROM
+	|	ttInventory AS Inventory
+	|
+	|ORDER BY
+	|	LineNumber";
+	Query.SetParameter("Inventory", ThisObject.Inventory.Unload());
+	QuerySelection = Query.Execute().Select();
+	While QuerySelection.Next() Do
+		If ValueIsFilled(QuerySelection.StoreCompany) And Not QuerySelection.StoreCompany = ThisObject.Company Then
+			Cancel = True;
+			MessageText = StrTemplate(
+				R().Error_Store_Company_Row,
+				QuerySelection.Store,
+				ThisObject.Company, 
+				QuerySelection.LineNumber);
+			CommonFunctionsClientServer.ShowUsersMessage(
+				MessageText, 
+				"Object.Inventory[" + (QuerySelection.LineNumber - 1) + "].Store", 
+				"Object.Inventory");
+		EndIf;
+	EndDo;
+	
 EndProcedure

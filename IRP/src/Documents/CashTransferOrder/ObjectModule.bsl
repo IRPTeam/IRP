@@ -76,7 +76,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not ThisObject.Ref.IsEmpty() Then
 		RefAttributes = CommonFunctionsServer.GetAttributesFromRef(ThisObject.Ref, "Receiver, Sender");
 		If Not ThisObject.Receiver = RefAttributes.Receiver Or Not ThisObject.Sender = RefAttributes.Sender Then
-			RefArray = CommonFunctionsServer.GetRelatedDocuments(ThisObject.Ref);
+			RefArray = CommonFunctionsServer.GetRelatedDocuments(ThisObject.Ref, True);
 			If RefArray.Count() Then
 				Cancel = True;
 				If Not ThisObject.Receiver = RefAttributes.Receiver Then

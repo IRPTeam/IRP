@@ -896,17 +896,20 @@ EndFunction
 // Get related documents.
 // 
 // Parameters:
-//  DocumentRef - DocumentRef - Document ref
+//  DocumentRef - DocumentRef - ref to document
+//  WithoutDeleted - Boolean - without documents marked for deletion
 // 
 // Returns:
 //  Array of DocumentRef - Get related documents
-Function GetRelatedDocuments(DocumentRef) Export
+Function GetRelatedDocuments(DocumentRef, WithoutDeleted = False) Export
 	Query = New Query();
-	Query.Text =
-	"SELECT
-	|	Ref
-	|FROM
-	|	FilterCriterion.RelatedDocuments(&DocumentRef)";
 	Query.SetParameter("DocumentRef", DocumentRef);
+	Query.Text =
+	"SELECT Ref
+	|FROM FilterCriterion.RelatedDocuments(&DocumentRef)";
+	If WithoutDeleted Then
+		Query.Text = Query.Text + "
+		|WHERE NOT Ref.DeletionMark";
+	EndIf;
 	Return Query.Execute().Unload().UnloadColumn(0);
 EndFunction

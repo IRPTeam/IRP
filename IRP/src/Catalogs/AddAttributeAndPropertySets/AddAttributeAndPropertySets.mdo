@@ -617,196 +617,168 @@
     </items>
     <items id="4aca8b4d-4125-45cb-95b0-631893eca1f9">
       <name>Catalog_AccessGroups</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>87</value>
       </code>
     </items>
     <items id="65f462de-c715-41d2-9613-71f7e0dbd1b1">
       <name>Catalog_AccessProfiles</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>88</value>
       </code>
     </items>
     <items id="818c9274-5203-4f97-bb42-9298e0e20b95">
       <name>Catalog_AccountingOperations</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>89</value>
       </code>
     </items>
     <items id="a03821f6-8cf7-4563-8fb3-55be0c623738">
       <name>Catalog_CancelReturnReasons</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>90</value>
       </code>
     </items>
     <items id="c3e6edbe-4cbc-4832-9aed-db41440785f5">
       <name>Catalog_EquipmentDrivers</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>91</value>
       </code>
     </items>
     <items id="630a31db-0d69-4d46-a4b2-489a24840e6b">
       <name>Catalog_ExternalDataProc</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>92</value>
       </code>
     </items>
     <items id="950b8b37-ded6-4ec7-87c2-6a616efc8a86">
       <name>Catalog_FileStoragesInfo</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>93</value>
       </code>
     </items>
     <items id="bfb9f8aa-0217-42b5-992b-23887ad3a229">
       <name>Catalog_FileStorageVolumes</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>94</value>
       </code>
     </items>
     <items id="29d51ef9-7744-42cd-879e-6a59cb1f2be7">
       <name>Catalog_IntegrationSettings</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>95</value>
       </code>
     </items>
     <items id="1dc30367-f16a-47be-8151-e67a024c3a64">
       <name>Catalog_InterfaceGroups</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>96</value>
       </code>
     </items>
     <items id="0cfb5f4c-eccc-4bdf-8a69-57a34cd3b1e6">
       <name>Catalog_LegalNameContracts</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>97</value>
       </code>
     </items>
     <items id="403d4f74-02a8-4fb1-9f69-81eb09ecbece">
       <name>Catalog_ObjectStatuses</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>98</value>
       </code>
     </items>
     <items id="e1b4fee6-9a90-4fba-9efd-e5442399dc3d">
       <name>Catalog_PaymentSchedules</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>99</value>
       </code>
     </items>
     <items id="7e72dc23-c003-48f8-a087-da4986738af7">
       <name>Catalog_PlanningPeriods</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>100</value>
       </code>
     </items>
     <items id="d8b3ea99-a088-48f8-8db8-3fccd07fd310">
       <name>Catalog_TaxAnalytics</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>101</value>
       </code>
     </items>
     <items id="11f9a892-0c8d-47c7-afb8-f9e2097fc787">
       <name>Catalog_UnitsOfMeasurement</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>102</value>
       </code>
     </items>
     <items id="b962b9c7-5165-4427-8295-4235ee48dde8">
       <name>Catalog_LedgerTypeVariants</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>103</value>
       </code>
     </items>
     <items id="61224a38-366d-4269-935a-38df58ea3dcf">
       <name>Document_ChequeBondTransaction</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>104</value>
       </code>
     </items>
     <items id="81a39403-fce4-4432-b4e3-fc59ed05165a">
       <name>Document_ConsolidatedRetailSales</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>105</value>
       </code>
     </items>
     <items id="ab95d52d-6a3f-4049-b178-3e5b3c6f3100">
       <name>Document_WorkOrder</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>106</value>
       </code>
     </items>
     <items id="b06e06bb-d4fe-4dab-942b-1d830d92d03f">
       <name>Document_WorkOrderClosing</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>107</value>
       </code>
     </items>
     <items id="f8ba27d3-5892-4805-ac31-faa93fa57e4d">
       <name>Catalog_BillOfMaterials</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>108</value>
       </code>
     </items>
     <items id="69f7e034-c3a9-4bba-8075-9da8eda7d4c1">
       <name>Document_WorkSheet</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>109</value>
       </code>
     </items>
     <items id="26962bc2-6f3b-43df-af7c-402628465b97">
       <name>Catalog_FillingTemplates</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>110</value>
       </code>
     </items>
     <items id="3e2da181-9600-46cf-bbee-436a9bfc8345">
       <name>Document_ProductionPlanning</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>111</value>
       </code>
     </items>
     <items id="1fc65f57-0227-4db6-b408-42d849ac6427">
       <name>Document_ProductionPlanningCorrection</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>112</value>
       </code>
     </items>
     <items id="a3d38f33-43a9-44f7-bfe1-2a1587208daa">
       <name>Document_ProductionPlanningClosing</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>113</value>
       </code>
     </items>
     <items id="ea4dddf8-4043-415d-9d09-59ae0560b377">
       <name>Document_Production</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>114</value>
       </code>

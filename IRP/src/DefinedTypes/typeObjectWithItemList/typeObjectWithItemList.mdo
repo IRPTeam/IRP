@@ -18,6 +18,7 @@
     <types>DocumentRef.InternalSupplyRequest</types>
     <types>DocumentRef.Unbundling</types>
     <types>DocumentRef.PriceList</types>
+    <types>DocumentRef.WorkOrder</types>
     <types>DocumentRef.PurchaseOrder</types>
     <types>DocumentRef.OpeningEntry</types>
     <types>DocumentRef.SalesOrder</types>
@@ -31,6 +32,5 @@
     <types>DocumentRef.InventoryTransfer</types>
     <types>DocumentRef.GoodsReceipt</types>
     <types>DocumentRef.SalesInvoice</types>
-    <types>DocumentRef.WorkOrder</types>
   </type>
 </mdclass:DefinedType>

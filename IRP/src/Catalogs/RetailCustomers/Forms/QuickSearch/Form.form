@@ -93,7 +93,6 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
-      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>
@@ -295,7 +294,6 @@
     <excludedCommands>OutputList</excludedCommands>
     <excludedCommands>Refresh</excludedCommands>
     <excludedCommands>SaveDynamicListSettings</excludedCommands>
-    <excludedCommands>SearchHistory</excludedCommands>
     <excludedCommands>SetDeletionMark</excludedCommands>
     <excludedCommands>ShowMultipleSelection</excludedCommands>
     <items xsi:type="form:FormField">
@@ -396,6 +394,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
+      <source>ListSearchString</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -434,6 +433,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
+      <source>ListViewStatus</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
         <horizontalLocation>Left</horizontalLocation>
@@ -473,6 +473,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
+      <source>ListSearchControl</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -568,7 +569,6 @@
     <picture xsi:type="core:PictureRef">
       <picture>StdPicture.AppearanceCheckBox</picture>
     </picture>
-    <toolTipRepresentation>Auto</toolTipRepresentation>
     <representationInContextMenu>Auto</representationInContextMenu>
   </items>
   <commandBarLocation>Bottom</commandBarLocation>

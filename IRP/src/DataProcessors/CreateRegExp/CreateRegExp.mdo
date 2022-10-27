@@ -33,6 +33,9 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:StringValue">
+        <value></value>
+      </fillValue>
     </attributes>
     <attributes uuid="f7920710-b0c0-4365-8f09-61c9fcd5cb83">
       <name>ID</name>
@@ -46,6 +49,9 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:StringValue">
+        <value></value>
+      </fillValue>
     </attributes>
     <attributes uuid="ff89796b-f68b-42d9-9b7e-a1d5a343f1ba">
       <name>RowPart</name>
@@ -59,6 +65,9 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:StringValue">
+        <value></value>
+      </fillValue>
     </attributes>
     <attributes uuid="2a15a267-9d17-4be3-8d85-26089e44aa7b">
       <name>RegExp</name>
@@ -72,6 +81,9 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:StringValue">
+        <value></value>
+      </fillValue>
     </attributes>
     <attributes uuid="eccbda08-6a77-49bd-997e-122c89f32e3e">
       <name>isWhitespace</name>
@@ -84,6 +96,7 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="702adb42-ed27-47e9-b8be-c3a40107c7d3">
       <name>ExternalFunction</name>
@@ -96,6 +109,7 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
   </tabularSections>
   <forms uuid="5e274039-734d-4653-8f72-75e59019cd44">

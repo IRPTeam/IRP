@@ -26,6 +26,10 @@
     <use>DontUse</use>
   </content>
   <content>
+    <metadata>Document.MoneyTransfer</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.SalesOrder</metadata>
     <use>Use</use>
   </content>
@@ -38,6 +42,14 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.ChequeBondTransaction</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.AdditionalCostAllocation</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.SalesReturn</metadata>
     <use>Use</use>
   </content>
@@ -47,6 +59,10 @@
   </content>
   <content>
     <metadata>Document.RetailReturnReceipt</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.WorkOrder</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -74,6 +90,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.ConsolidatedRetailSales</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.SalesInvoice</metadata>
     <use>Use</use>
   </content>
@@ -86,6 +106,14 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.ProductionPlanning</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.Production</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.ReportOptions</metadata>
     <use>DontUse</use>
   </content>
@@ -94,11 +122,23 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.AdditionalRevenueAllocation</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.Unbundling</metadata>
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.WorkSheet</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.OpeningEntry</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.ProductionPlanningClosing</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -146,11 +186,19 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.JournalEntry</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.PurchaseInvoice</metadata>
     <use>Use</use>
   </content>
   <content>
     <metadata>Document.InventoryTransferOrder</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.ProductionPlanningCorrection</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -191,54 +239,6 @@
   </content>
   <content>
     <metadata>Document.CashStatement</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.AdditionalCostAllocation</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.AdditionalRevenueAllocation</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.JournalEntry</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.MoneyTransfer</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.ChequeBondTransaction</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.ConsolidatedRetailSales</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.WorkOrder</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.WorkSheet</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.ProductionPlanning</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.ProductionPlanningCorrection</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.ProductionPlanningClosing</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.Production</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

@@ -66,7 +66,6 @@
   <predefined>
     <items id="27240ec4-9a00-41da-aa57-a6c073f9c729">
       <name>Default</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>1</value>
       </code>

@@ -11,5 +11,11 @@
   <content>CommonCommand.EditConstants</content>
   <content>DataProcessor.SystemSettings</content>
   <content>DataProcessor.FunctionalOptionSettings</content>
+  <content>Catalog.CashStatementStatuses</content>
+  <content>Catalog.CurrencyMovementSets</content>
+  <content>Catalog.FileStoragesInfo</content>
+  <content>Catalog.FileStorageVolumes</content>
+  <content>Catalog.DataBaseStatus</content>
+  <content>Catalog.InterfaceGroups</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

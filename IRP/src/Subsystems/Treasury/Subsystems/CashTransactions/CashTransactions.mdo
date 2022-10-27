@@ -7,12 +7,12 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.CashTransferOrder</content>
   <content>Document.ReconciliationStatement</content>
   <content>Document.CashExpense</content>
   <content>Document.CashRevenue</content>
   <content>Document.CreditNote</content>
   <content>Document.DebitNote</content>
-  <content>Document.MoneyTransfer</content>
+  <content>Document.CustomersAdvancesClosing</content>
+  <content>Document.VendorsAdvancesClosing</content>
   <parentSubsystem>Subsystem.Treasury</parentSubsystem>
 </mdclass:Subsystem>

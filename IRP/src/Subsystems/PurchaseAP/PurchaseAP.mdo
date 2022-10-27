@@ -19,9 +19,9 @@
   <content>Catalog.Agreements</content>
   <content>CommonCommand.OpenVendorAgreements</content>
   <content>Catalog.PartnersBankAccounts</content>
-  <content>Document.PurchaseOrderClosing</content>
   <content>Catalog.LegalNameContracts</content>
   <content>Catalog.PartnerItems</content>
+  <content>Document.VendorsAdvancesClosing</content>
   <subsystems>Pricing</subsystems>
   <subsystems>Purchase</subsystems>
   <subsystems>PurchaseReturn</subsystems>

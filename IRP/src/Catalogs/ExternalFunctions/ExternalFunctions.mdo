@@ -48,6 +48,8 @@
     <type>
       <types>EnumRef.ExternalFunctionType</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:ReferenceValue">
@@ -239,13 +241,13 @@
         <value>Value</value>
       </synonym>
       <type>
-        <types>Date</types>
-        <types>String</types>
         <types>Boolean</types>
-        <types>AnyRef</types>
+        <types>String</types>
+        <types>Date</types>
         <types>Number</types>
+        <types>AnyRef</types>
         <numberQualifiers>
-          <precision>50</precision>
+          <precision>38</precision>
           <scale>10</scale>
         </numberQualifiers>
         <stringQualifiers>
@@ -302,11 +304,11 @@
         <value>Result</value>
       </synonym>
       <type>
+        <types>Boolean</types>
         <types>String</types>
         <types>Date</types>
-        <types>Boolean</types>
-        <types>AnyRef</types>
         <types>Number</types>
+        <types>AnyRef</types>
         <numberQualifiers>
           <precision>15</precision>
           <scale>5</scale>

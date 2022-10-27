@@ -9,8 +9,8 @@
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Catalog.AccessProfiles</content>
   <content>Catalog.AccessGroups</content>
-  <content>Catalog.Workstations</content>
   <content>Catalog.Users</content>
   <content>Catalog.UserGroups</content>
+  <content>Catalog.ReportOptions</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

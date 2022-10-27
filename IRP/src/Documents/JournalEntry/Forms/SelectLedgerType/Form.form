@@ -210,16 +210,16 @@
       <horizontalAlign>Left</horizontalAlign>
     </autoCommandBar>
     <handlers>
+      <event>Selection</event>
+      <name>JournalEntriesSelection</name>
+    </handlers>
+    <handlers>
       <event>BeforeAddRow</event>
       <name>JournalEntriesBeforeAddRow</name>
     </handlers>
     <handlers>
       <event>BeforeDeleteRow</event>
       <name>JournalEntriesBeforeDeleteRow</name>
-    </handlers>
-    <handlers>
-      <event>Selection</event>
-      <name>JournalEntriesSelection</name>
     </handlers>
     <searchStringAddition>
       <visible>true</visible>
@@ -254,6 +254,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
+      <source>JournalEntriesSearchString</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -292,6 +293,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
+      <source>JournalEntriesViewStatus</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -330,6 +332,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
+      <source>JournalEntriesSearchControl</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -377,6 +380,7 @@
     <horizontalStretch>true</horizontalStretch>
     <verticalStretch>true</verticalStretch>
     <fileDragMode>AsFileRef</fileDragMode>
+    <rowFilter xsi:type="core:UndefinedValue"/>
   </items>
   <autoCommandBar>
     <name>FormCommandBar</name>

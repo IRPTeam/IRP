@@ -337,6 +337,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>CashInListSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -375,6 +376,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>CashInListViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -413,6 +415,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>CashInListSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -460,6 +463,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1645,6 +1649,7 @@
                         </userVisible>
                         <autoFill>true</autoFill>
                       </contextMenu>
+                      <source>ItemListSearchString</source>
                       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
                         <autoMaxWidth>true</autoMaxWidth>
                       </extInfo>
@@ -1683,6 +1688,7 @@
                         <autoFill>true</autoFill>
                       </contextMenu>
                       <type>ViewStatusAddition</type>
+                      <source>ItemListViewStatus</source>
                       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
                         <autoMaxWidth>true</autoMaxWidth>
                         <horizontalLocation>Left</horizontalLocation>
@@ -1722,6 +1728,7 @@
                         <autoFill>true</autoFill>
                       </contextMenu>
                       <type>SearchControlAddition</type>
+                      <source>ItemListSearchControl</source>
                       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
                         <autoMaxWidth>true</autoMaxWidth>
                       </extInfo>
@@ -2147,6 +2154,7 @@
                         </userVisible>
                         <autoFill>true</autoFill>
                       </contextMenu>
+                      <source>SerialLotNumbersTreeSearchString</source>
                       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
                         <autoMaxWidth>true</autoMaxWidth>
                       </extInfo>
@@ -2185,6 +2193,7 @@
                         <autoFill>true</autoFill>
                       </contextMenu>
                       <type>ViewStatusAddition</type>
+                      <source>SerialLotNumbersTreeViewStatus</source>
                       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
                         <autoMaxWidth>true</autoMaxWidth>
                       </extInfo>
@@ -2223,6 +2232,7 @@
                         <autoFill>true</autoFill>
                       </contextMenu>
                       <type>SearchControlAddition</type>
+                      <source>SerialLotNumbersTreeSearchControl</source>
                       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
                         <autoMaxWidth>true</autoMaxWidth>
                       </extInfo>
@@ -3310,7 +3320,6 @@
                 <excludedCommands>Refresh</excludedCommands>
                 <excludedCommands>SaveDynamicListSettings</excludedCommands>
                 <excludedCommands>SearchEverywhere</excludedCommands>
-                <excludedCommands>SearchHistory</excludedCommands>
                 <excludedCommands>SetDeletionMark</excludedCommands>
                 <excludedCommands>ShowMultipleSelection</excludedCommands>
                 <items xsi:type="form:FormGroup">
@@ -3498,6 +3507,7 @@
                     </userVisible>
                     <autoFill>true</autoFill>
                   </contextMenu>
+                  <source>ItemsPickupSearchString</source>
                   <extInfo xsi:type="form:SearchStringAdditionExtInfo">
                     <autoMaxWidth>true</autoMaxWidth>
                     <horizontalStretch>true</horizontalStretch>
@@ -3543,6 +3553,7 @@
                     <autoFill>true</autoFill>
                   </contextMenu>
                   <type>ViewStatusAddition</type>
+                  <source>ItemsPickupViewStatus</source>
                   <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
                     <autoMaxWidth>true</autoMaxWidth>
                     <horizontalLocation>Left</horizontalLocation>
@@ -3582,6 +3593,7 @@
                     <autoFill>true</autoFill>
                   </contextMenu>
                   <type>SearchControlAddition</type>
+                  <source>ItemsPickupSearchControl</source>
                   <extInfo xsi:type="form:SearchControlAdditionExtInfo">
                     <autoMaxWidth>true</autoMaxWidth>
                   </extInfo>
@@ -3819,16 +3831,12 @@
                 <showInFooter>true</showInFooter>
                 <extInfo xsi:type="form:InputFieldExtInfo">
                   <handlers>
-                    <event>StartChoice</event>
-                    <name>AgreementStartChoice</name>
-                  </handlers>
-                  <handlers>
                     <event>EditTextChange</event>
                     <name>AgreementEditTextChange</name>
                   </handlers>
                   <handlers>
-                    <event>Click</event>
-                    <name>AgreementClick</name>
+                    <event>StartChoice</event>
+                    <name>AgreementStartChoice</name>
                   </handlers>
                   <autoMaxWidth>true</autoMaxWidth>
                   <autoMaxHeight>true</autoMaxHeight>

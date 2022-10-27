@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
+  <commandsVisibility>
+    <visibilityFragments>
+      <command>Catalog.Users.StandardCommand.OpenList</command>
+      <visible>
+        <common>true</common>
+      </visible>
+    </visibilityFragments>
+  </commandsVisibility>
+  <commandsPlacement>
+    <placementFragments>
+      <group>NavigationPanelImportant</group>
+      <commands>Catalog.Users.StandardCommand.OpenList</commands>
+    </placementFragments>
+  </commandsPlacement>
   <commandsOrder>
     <orderFragments>
-      <group>NavigationPanelOrdinary</group>
+      <group>NavigationPanelImportant</group>
       <commands>Catalog.Users.StandardCommand.OpenList</commands>
+    </orderFragments>
+    <orderFragments>
+      <group>NavigationPanelOrdinary</group>
+      <commands>Catalog.UserGroups.StandardCommand.OpenList</commands>
       <commands>Catalog.AccessGroups.StandardCommand.OpenList</commands>
       <commands>Catalog.AccessProfiles.StandardCommand.OpenList</commands>
-      <commands>Catalog.Workstations.StandardCommand.OpenList</commands>
+      <commands>Catalog.ReportOptions.StandardCommand.OpenList</commands>
     </orderFragments>
   </commandsOrder>
 </cmi:CommandInterface>

@@ -162,12 +162,12 @@
       <autoMaxHeight>true</autoMaxHeight>
       <extInfo xsi:type="form:PictureDecorationExtInfo">
         <handlers>
-          <event>Drag</event>
-          <name>ChangeExpressionType</name>
-        </handlers>
-        <handlers>
           <event>DragCheck</event>
           <name>ChangeExpressionTypeCheck</name>
+        </handlers>
+        <handlers>
+          <event>Drag</event>
+          <name>ChangeExpressionType</name>
         </handlers>
         <handlers>
           <event>Click</event>
@@ -231,12 +231,12 @@
       <autoMaxHeight>true</autoMaxHeight>
       <extInfo xsi:type="form:PictureDecorationExtInfo">
         <handlers>
-          <event>Drag</event>
-          <name>ChangeExpressionType</name>
-        </handlers>
-        <handlers>
           <event>DragCheck</event>
           <name>ChangeExpressionTypeCheck</name>
+        </handlers>
+        <handlers>
+          <event>Drag</event>
+          <name>ChangeExpressionType</name>
         </handlers>
         <nonselectedPictureText>
           <key>en</key>
@@ -296,12 +296,12 @@
       <autoMaxHeight>true</autoMaxHeight>
       <extInfo xsi:type="form:PictureDecorationExtInfo">
         <handlers>
-          <event>Drag</event>
-          <name>ChangeExpressionType</name>
-        </handlers>
-        <handlers>
           <event>DragCheck</event>
           <name>ChangeExpressionTypeCheck</name>
+        </handlers>
+        <handlers>
+          <event>Drag</event>
+          <name>ChangeExpressionType</name>
         </handlers>
         <nonselectedPictureText>
           <key>en</key>
@@ -361,12 +361,12 @@
       <autoMaxHeight>true</autoMaxHeight>
       <extInfo xsi:type="form:PictureDecorationExtInfo">
         <handlers>
-          <event>Drag</event>
-          <name>ChangeExpressionType</name>
-        </handlers>
-        <handlers>
           <event>DragCheck</event>
           <name>ChangeExpressionTypeCheck</name>
+        </handlers>
+        <handlers>
+          <event>Drag</event>
+          <name>ChangeExpressionType</name>
         </handlers>
         <nonselectedPictureText>
           <key>en</key>
@@ -790,6 +790,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>TestRowsSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -828,6 +829,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>TestRowsViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -866,6 +868,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>TestRowsSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -913,6 +916,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1303,6 +1307,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>RowPartsSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1341,6 +1346,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>RowPartsViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1379,6 +1385,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>RowPartsSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1426,6 +1433,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1531,12 +1539,12 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>

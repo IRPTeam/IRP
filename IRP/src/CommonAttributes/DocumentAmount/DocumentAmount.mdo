@@ -29,6 +29,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.WorkOrder</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.PurchaseReturn</metadata>
     <use>Use</use>
   </content>
@@ -82,10 +86,6 @@
   </content>
   <content>
     <metadata>Document.BankReceipt</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.WorkOrder</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

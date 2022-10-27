@@ -562,6 +562,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>GoodsInTransitIncomingSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -600,6 +601,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>GoodsInTransitIncomingViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -638,6 +640,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>GoodsInTransitIncomingSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -686,6 +689,7 @@
         <fileDragMode>AsFileRef</fileDragMode>
         <refreshRequest>PullFromTop</refreshRequest>
         <currentRowUse>SelectionPresentation</currentRowUse>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>

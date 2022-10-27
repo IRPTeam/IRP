@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
-  <commandsVisibility>
-    <visibilityFragments>
-      <command>0:5a2a8a1f-b29b-4352-9833-04e70902c2cb</command>
-      <visible/>
-    </visibilityFragments>
-  </commandsVisibility>
   <commandsOrder>
     <orderFragments>
       <group>NavigationPanelOrdinary</group>
       <commands>Document.SalesOrder.StandardCommand.OpenList</commands>
+      <commands>Document.SalesOrderClosing.StandardCommand.OpenList</commands>
       <commands>Document.SalesInvoice.StandardCommand.OpenList</commands>
       <commands>Document.ShipmentConfirmation.StandardCommand.OpenList</commands>
-      <commands>0:5a2a8a1f-b29b-4352-9833-04e70902c2cb</commands>
+      <commands>Document.PlannedReceiptReservation.StandardCommand.OpenList</commands>
     </orderFragments>
   </commandsOrder>
 </cmi:CommandInterface>

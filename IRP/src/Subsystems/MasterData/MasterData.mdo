@@ -13,12 +13,11 @@
   <content>DefinedType.typeIDInfoOwners</content>
   <content>CommonCommand.IDInfo</content>
   <content>CommonForm.EditIDInfo</content>
-  <content>Catalog.PrintTemplates</content>
-  <content>Catalog.PaymentTypes</content>
-  <content>Catalog.BankTerms</content>
-  <content>Document.PriceList</content>
   <subsystems>PurchaseAndSales</subsystems>
   <subsystems>Finance</subsystems>
   <subsystems>OpeningEntry</subsystems>
   <subsystems>Items</subsystems>
+  <subsystems>KeysCatalogs</subsystems>
+  <subsystems>Retail</subsystems>
+  <subsystems>Production</subsystems>
 </mdclass:Subsystem>

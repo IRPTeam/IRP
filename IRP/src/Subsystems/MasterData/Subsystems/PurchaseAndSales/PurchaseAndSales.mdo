@@ -18,5 +18,9 @@
   <content>Catalog.Stores</content>
   <content>CommonCommand.OpenCompanies</content>
   <content>Catalog.LegalNameContracts</content>
+  <content>Catalog.PartnersBankAccounts</content>
+  <content>Catalog.PaymentSchedules</content>
+  <content>Catalog.CancelReturnReasons</content>
+  <content>Document.PriceList</content>
   <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

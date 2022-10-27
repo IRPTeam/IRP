@@ -52,13 +52,13 @@
       <types>DocumentRef.BankReceipt</types>
       <types>DocumentRef.PurchaseReturn</types>
       <types>DocumentRef.BankPayment</types>
+      <types>DocumentRef.ChequeBondTransactionItem</types>
       <types>DocumentRef.CashReceipt</types>
       <types>DocumentRef.OpeningEntry</types>
       <types>DocumentRef.SalesReturn</types>
-      <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.PurchaseOrderClosing</types>
       <types>DocumentRef.SalesOrderClosing</types>
-      <types>DocumentRef.ChequeBondTransactionItem</types>
+      <types>DocumentRef.SalesInvoice</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -159,9 +159,9 @@
       <types>DocumentRef.DebitNote</types>
       <types>DocumentRef.CreditNote</types>
       <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.OpeningEntry</types>
       <types>DocumentRef.SalesReturn</types>
       <types>DocumentRef.SalesInvoice</types>
-      <types>DocumentRef.OpeningEntry</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

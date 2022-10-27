@@ -49,7 +49,6 @@
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">Object.Materials.Store</left>
 				<comparisonType>NotFilled</comparisonType>
-				<right xsi:nil="true"/>
 			</item>
 		</filter>
 		<appearance>

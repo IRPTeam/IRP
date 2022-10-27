@@ -40,7 +40,6 @@
       <picture xsi:type="core:PictureRef">
         <picture>StdPicture.Reread</picture>
       </picture>
-      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <items xsi:type="form:FormField">

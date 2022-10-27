@@ -252,12 +252,10 @@
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">Object.ItemList.RetailSalesReceipt</left>
 				<comparisonType>NotFilled</comparisonType>
-				<right xsi:nil="true"/>
 			</item>
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">Object.ItemList.LandedCost</left>
 				<comparisonType>NotFilled</comparisonType>
-				<right xsi:nil="true"/>
 			</item>
 		</filter>
 		<appearance>
@@ -277,7 +275,6 @@
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">Object.ItemList.RetailSalesReceipt</left>
 				<comparisonType>Filled</comparisonType>
-				<right xsi:nil="true"/>
 			</item>
 		</filter>
 		<appearance>
@@ -297,7 +294,6 @@
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">Object.ItemList.Store</left>
 				<comparisonType>NotFilled</comparisonType>
-				<right xsi:nil="true"/>
 			</item>
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">Object.ItemList.IsService</left>

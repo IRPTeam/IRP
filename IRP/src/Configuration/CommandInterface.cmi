@@ -6,11 +6,10 @@
     <subsystems>Subsystem.Retail</subsystems>
     <subsystems>Subsystem.Inventory</subsystems>
     <subsystems>Subsystem.Treasury</subsystems>
-    <subsystems>Subsystem.WorkOrders</subsystems>
+    <subsystems>Subsystem.Manufacturing</subsystems>
     <subsystems>Subsystem.MasterData</subsystems>
     <subsystems>Subsystem.Reports</subsystems>
-    <subsystems>Subsystem.Saas</subsystems>
     <subsystems>Subsystem.Settings</subsystems>
-    <subsystems>Subsystem.Accounting</subsystems>
+    <subsystems>Subsystem.Technical</subsystems>
   </subsystemsOrder>
 </cmi:CommandInterface>

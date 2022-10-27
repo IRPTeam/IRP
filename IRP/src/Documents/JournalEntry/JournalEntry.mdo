@@ -96,8 +96,8 @@
       <value>Basis</value>
     </synonym>
     <type>
-      <types>DocumentRef.BankPayment</types>
       <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.BankPayment</types>
       <types>DocumentRef.RetailSalesReceipt</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>

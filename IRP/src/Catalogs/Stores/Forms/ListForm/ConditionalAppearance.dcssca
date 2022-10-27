@@ -15,6 +15,10 @@
 		</filter>
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>TextColor</dcscor:parameter>
+				<dcscor:value xsi:type="v8ui:Color">#C0C0C0</dcscor:value>
+			</dcscor:item>
+			<dcscor:item xsi:type="SettingsParameterValue">
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
@@ -22,10 +26,6 @@
 						<v8:content>Shared for all companies</v8:content>
 					</v8:item>
 				</dcscor:value>
-			</dcscor:item>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>TextColor</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Color">#C0C0C0</dcscor:value>
 			</dcscor:item>
 		</appearance>
 	</item>

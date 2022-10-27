@@ -1285,16 +1285,16 @@
           <autoFill>true</autoFill>
         </autoCommandBar>
         <handlers>
+          <event>Selection</event>
+          <name>PaymentListSelection</name>
+        </handlers>
+        <handlers>
           <event>BeforeAddRow</event>
           <name>PaymentListBeforeAddRow</name>
         </handlers>
         <handlers>
           <event>AfterDeleteRow</event>
           <name>PaymentListAfterDeleteRow</name>
-        </handlers>
-        <handlers>
-          <event>Selection</event>
-          <name>PaymentListSelection</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -1329,6 +1329,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>PaymentListSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1367,6 +1368,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>PaymentListViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <horizontalLocation>Left</horizontalLocation>
@@ -1406,6 +1408,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>PaymentListSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2197,7 +2200,6 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
-      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
       <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
     </items>

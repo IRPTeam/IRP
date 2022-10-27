@@ -307,17 +307,17 @@
         </dataPath>
         <skipOnInput>true</skipOnInput>
         <titleLocation>None</titleLocation>
-        <excludedCommands>Copy</excludedCommands>
-        <excludedCommands>SelectAll</excludedCommands>
-        <excludedCommands>MoveUp</excludedCommands>
-        <excludedCommands>MoveDown</excludedCommands>
-        <excludedCommands>ShowRowRearrangement</excludedCommands>
-        <excludedCommands>EndEdit</excludedCommands>
-        <excludedCommands>ShowMultipleSelection</excludedCommands>
         <excludedCommands>Add</excludedCommands>
-        <excludedCommands>CopyToClipboard</excludedCommands>
-        <excludedCommands>SearchEverywhere</excludedCommands>
         <excludedCommands>Choose</excludedCommands>
+        <excludedCommands>Copy</excludedCommands>
+        <excludedCommands>CopyToClipboard</excludedCommands>
+        <excludedCommands>EndEdit</excludedCommands>
+        <excludedCommands>MoveDown</excludedCommands>
+        <excludedCommands>MoveUp</excludedCommands>
+        <excludedCommands>SearchEverywhere</excludedCommands>
+        <excludedCommands>SelectAll</excludedCommands>
+        <excludedCommands>ShowMultipleSelection</excludedCommands>
+        <excludedCommands>ShowRowRearrangement</excludedCommands>
         <items xsi:type="form:FormGroup">
           <name>ItemListGroupItem</name>
           <id>115</id>
@@ -683,12 +683,12 @@
           <name>ItemListSelection</name>
         </handlers>
         <handlers>
-          <event>OnStartEdit</event>
-          <name>ItemListOnStartEdit</name>
-        </handlers>
-        <handlers>
           <event>BeforeRowChange</event>
           <name>ItemListBeforeRowChange</name>
+        </handlers>
+        <handlers>
+          <event>OnStartEdit</event>
+          <name>ItemListOnStartEdit</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -723,6 +723,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>ItemListSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -761,6 +762,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>ItemListViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -799,6 +801,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>ItemListSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>

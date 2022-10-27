@@ -32,11 +32,11 @@
   <registerRecordsDeletion>AutoDelete</registerRecordsDeletion>
   <registerRecords>InformationRegister.T6040S_BundleAmountValues</registerRecords>
   <registerRecords>AccumulationRegister.R6010B_BatchWiseBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R6030T_BatchShortageOutgoing</registerRecords>
-  <registerRecords>AccumulationRegister.R6040T_BatchShortageIncoming</registerRecords>
-  <registerRecords>AccumulationRegister.R6050T_SalesBatches</registerRecords>
   <registerRecords>InformationRegister.T6080S_ReallocatedBatchesAmountValues</registerRecords>
   <registerRecords>InformationRegister.T6090S_CompositeBatchesAmountValues</registerRecords>
+  <registerRecords>AccumulationRegister.R6050T_SalesBatches</registerRecords>
+  <registerRecords>AccumulationRegister.R6030T_BatchShortageOutgoing</registerRecords>
+  <registerRecords>AccumulationRegister.R6040T_BatchShortageIncoming</registerRecords>
   <registerRecords>InformationRegister.T6095S_WriteOffBatchesInfo</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>

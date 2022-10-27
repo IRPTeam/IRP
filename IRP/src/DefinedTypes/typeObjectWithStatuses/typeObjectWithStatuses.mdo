@@ -12,14 +12,14 @@
     <types>DocumentRef.IncomingPaymentOrder</types>
     <types>DocumentRef.SalesReturnOrder</types>
     <types>DocumentRef.PurchaseReturnOrder</types>
+    <types>DocumentRef.WorkOrder</types>
     <types>DocumentRef.PurchaseOrder</types>
     <types>DocumentRef.OutgoingPaymentOrder</types>
     <types>DocumentRef.SalesOrder</types>
     <types>DocumentRef.PhysicalCountByLocation</types>
     <types>DocumentRef.InventoryTransferOrder</types>
+    <types>DocumentRef.ProductionPlanningCorrection</types>
     <types>DocumentRef.ReconciliationStatement</types>
     <types>DocumentRef.PhysicalInventory</types>
-    <types>DocumentRef.WorkOrder</types>
-    <types>DocumentRef.ProductionPlanningCorrection</types>
   </type>
 </mdclass:DefinedType>

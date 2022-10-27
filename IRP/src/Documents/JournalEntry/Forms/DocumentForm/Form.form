@@ -440,12 +440,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartChoice</event>
-              <name>CompanyStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>CompanyEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>CompanyStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -864,13 +864,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.Basic.Period</segments>
-              </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.Basic.Период</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.RegisterRecords.Basic.Period</segments>
             </dataPath>
             <extendedTooltip>
               <name>RegisterRecordsPeriodExtendedTooltip</name>
@@ -922,13 +917,8 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <dataPath xsi:type="form:MultiLanguageDataPath">
-                <paths xsi:type="form:DataPath">
-                  <segments>Object.RegisterRecords.Basic.LineNumber</segments>
-                </paths>
-                <paths xsi:type="form:DataPath">
-                  <segments>Object.Движения.Basic.НомерСтроки</segments>
-                </paths>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Object.RegisterRecords.Basic.LineNumber</segments>
               </dataPath>
               <extendedTooltip>
                 <name>RegisterRecordsLineNumberExtendedTooltip</name>
@@ -977,13 +967,8 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <dataPath xsi:type="form:MultiLanguageDataPath">
-                <paths xsi:type="form:DataPath">
-                  <segments>Object.RegisterRecords.Basic.Active</segments>
-                </paths>
-                <paths xsi:type="form:DataPath">
-                  <segments>Object.Движения.Basic.Активность</segments>
-                </paths>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Object.RegisterRecords.Basic.Active</segments>
               </dataPath>
               <extendedTooltip>
                 <name>RegisterRecordsActiveExtendedTooltip</name>
@@ -1223,13 +1208,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RegisterRecords.Basic.AccountDr</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Движения.Basic.СчетДт</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RegisterRecords.Basic.AccountDr</segments>
           </dataPath>
           <extendedTooltip>
             <name>RegisterRecordsAccountDrExtendedTooltip</name>
@@ -1285,13 +1265,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.Basic.ExtDimensionDr1</segments>
-              </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.Basic.СубконтоДт1</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.RegisterRecords.Basic.ExtDimensionDr1</segments>
             </dataPath>
             <extendedTooltip>
               <name>RegisterRecordsExtDimensionDr1ExtendedTooltip</name>
@@ -1340,13 +1315,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.Basic.ExtDimensionDr2</segments>
-              </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.Basic.СубконтоДт2</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.RegisterRecords.Basic.ExtDimensionDr2</segments>
             </dataPath>
             <titleLocation>None</titleLocation>
             <extendedTooltip>
@@ -1396,13 +1366,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.Basic.ExtDimensionDr3</segments>
-              </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.Basic.СубконтоДт3</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.RegisterRecords.Basic.ExtDimensionDr3</segments>
             </dataPath>
             <titleLocation>None</titleLocation>
             <extendedTooltip>
@@ -1489,13 +1454,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.Basic.CurrencyDr</segments>
-              </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.Basic.CurrencyДт</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.RegisterRecords.Basic.CurrencyDr</segments>
             </dataPath>
             <extendedTooltip>
               <name>RegisterRecordsCurrencyDrExtendedTooltip</name>
@@ -1548,13 +1508,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.Basic.CurrencyAmountDr</segments>
-              </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.Basic.CurrencyAmountДт</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.RegisterRecords.Basic.CurrencyAmountDr</segments>
             </dataPath>
             <extendedTooltip>
               <name>RegisterRecordsCurrencyAmountDrExtendedTooltip</name>
@@ -1607,13 +1562,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.Basic.QuantityDr</segments>
-              </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.Basic.QuantityДт</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.RegisterRecords.Basic.QuantityDr</segments>
             </dataPath>
             <extendedTooltip>
               <name>RegisterRecordsQuantityDrExtendedTooltip</name>
@@ -1692,13 +1642,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RegisterRecords.Basic.AccountCr</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Движения.Basic.СчетКт</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RegisterRecords.Basic.AccountCr</segments>
           </dataPath>
           <extendedTooltip>
             <name>RegisterRecordsAccountCrExtendedTooltip</name>
@@ -1754,13 +1699,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.Basic.ExtDimensionCr1</segments>
-              </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.Basic.СубконтоКт1</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.RegisterRecords.Basic.ExtDimensionCr1</segments>
             </dataPath>
             <extendedTooltip>
               <name>RegisterRecordsExtDimensionCr1ExtendedTooltip</name>
@@ -1809,13 +1749,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.Basic.ExtDimensionCr2</segments>
-              </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.Basic.СубконтоКт2</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.RegisterRecords.Basic.ExtDimensionCr2</segments>
             </dataPath>
             <titleLocation>None</titleLocation>
             <extendedTooltip>
@@ -1865,13 +1800,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.Basic.ExtDimensionCr3</segments>
-              </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.Basic.СубконтоКт3</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.RegisterRecords.Basic.ExtDimensionCr3</segments>
             </dataPath>
             <titleLocation>None</titleLocation>
             <extendedTooltip>
@@ -1958,13 +1888,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.Basic.CurrencyCr</segments>
-              </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.Basic.CurrencyКт</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.RegisterRecords.Basic.CurrencyCr</segments>
             </dataPath>
             <extendedTooltip>
               <name>RegisterRecordsCurrencyCrExtendedTooltip</name>
@@ -2017,13 +1942,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.Basic.CurrencyAmountCr</segments>
-              </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.Basic.CurrencyAmountКт</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.RegisterRecords.Basic.CurrencyAmountCr</segments>
             </dataPath>
             <extendedTooltip>
               <name>RegisterRecordsCurrencyAmountCrExtendedTooltip</name>
@@ -2076,13 +1996,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.RegisterRecords.Basic.QuantityCr</segments>
-              </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Движения.Basic.QuantityКт</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.RegisterRecords.Basic.QuantityCr</segments>
             </dataPath>
             <extendedTooltip>
               <name>RegisterRecordsQuantityCrExtendedTooltip</name>
@@ -2161,13 +2076,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RegisterRecords.Basic.Amount</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Движения.Basic.Amount</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RegisterRecords.Basic.Amount</segments>
           </dataPath>
           <extendedTooltip>
             <name>RegisterRecordsAmountExtendedTooltip</name>
@@ -2332,6 +2242,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>RegisterRecordsSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2370,6 +2281,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>RegisterRecordsViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2408,6 +2320,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>RegisterRecordsSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2455,6 +2368,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -2744,6 +2658,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>TotalsSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2782,6 +2697,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>TotalsViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2820,6 +2736,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>TotalsSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2868,6 +2785,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <items xsi:type="form:Table">
         <name>Errors</name>
@@ -3124,6 +3042,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>ErrorsSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3162,6 +3081,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>ErrorsViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3200,6 +3120,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>ErrorsSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3248,6 +3169,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -3558,16 +3480,16 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
   </handlers>
   <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
   </handlers>
   <handlers>
-    <event>NotificationProcessing</event>
-    <name>NotificationProcessing</name>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
@@ -3589,10 +3511,8 @@
     <edit>
       <common>true</common>
     </edit>
-    <notDefaultUseAlwaysAttributes xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.RegisterRecords</segments>
-      </paths>
+    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+      <segments>Object.RegisterRecords</segments>
     </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <savedData>true</savedData>
@@ -3662,12 +3582,12 @@
   </commandInterface>
   <extInfo xsi:type="form:DocumentFormExtInfo">
     <handlers>
-      <event>OnReadAtServer</event>
-      <name>OnReadAtServer</name>
-    </handlers>
-    <handlers>
       <event>AfterWriteAtServer</event>
       <name>AfterWriteAtServer</name>
+    </handlers>
+    <handlers>
+      <event>OnReadAtServer</event>
+      <name>OnReadAtServer</name>
     </handlers>
     <handlers>
       <event>BeforeWriteAtServer</event>

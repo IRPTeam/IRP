@@ -22,5 +22,6 @@
   <content>Catalog.PrintTemplates</content>
   <content>Document.ItemStockAdjustment</content>
   <content>Catalog.PartnerItems</content>
+  <content>Catalog.SerialLotNumbers</content>
   <parentSubsystem>Subsystem.Inventory</parentSubsystem>
 </mdclass:Subsystem>

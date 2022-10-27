@@ -16,10 +16,10 @@
     <types>DocumentRef.BankReceipt</types>
     <types>DocumentRef.PurchaseReturn</types>
     <types>DocumentRef.BankPayment</types>
+    <types>DocumentRef.ChequeBondTransactionItem</types>
     <types>DocumentRef.CashReceipt</types>
     <types>DocumentRef.OpeningEntry</types>
     <types>DocumentRef.SalesReturn</types>
     <types>DocumentRef.SalesInvoice</types>
-    <types>DocumentRef.ChequeBondTransactionItem</types>
   </type>
 </mdclass:DefinedType>

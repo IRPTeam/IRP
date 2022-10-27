@@ -6,8 +6,6 @@
     <value>Row IDInfo privileged</value>
   </synonym>
   <server>true</server>
-  <externalConnection>true</externalConnection>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
   <serverCall>true</serverCall>
   <privileged>true</privileged>
 </mdclass:CommonModule>

@@ -252,13 +252,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>CostRowsTree.Currency</segments>
-        </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>CostRowsTree.Currency</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>CostRowsTree.Currency</segments>
       </dataPath>
       <extendedTooltip>
         <name>CostRowsTreeCurrencyExtendedTooltip</name>
@@ -308,13 +303,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>CostRowsTree.Amount</segments>
-        </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>CostRowsTree.Amount</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>CostRowsTree.Amount</segments>
       </dataPath>
       <extendedTooltip>
         <name>CostRowsTreeAmountExtendedTooltip</name>
@@ -407,6 +397,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
+      <source>CostRowsTreeSearchString</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -445,6 +436,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
+      <source>CostRowsTreeViewStatus</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -483,6 +475,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
+      <source>CostRowsTreeSearchControl</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -634,12 +627,12 @@
     <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>

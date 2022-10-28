@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema">
   <items xsi:type="form:FormGroup">
     <name>GroupTitle</name>
     <id>13</id>
@@ -1782,73 +1782,113 @@
     </notDefaultUseAlwaysAttributes>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
-	RetailSalesReceipt.Ref,
-	RetailSalesReceipt.Number,
-	RetailSalesReceipt.Date,
-	RetailSalesReceipt.Company,
-	RetailSalesReceipt.Currency,
-	RetailSalesReceipt.Author,
-	RetailSalesReceipt.Branch,
-	RetailSalesReceipt.DocumentAmount,
-	CASE
-		WHEN RetailSalesReceipt.Posted
-			THEN 0
-		WHEN RetailSalesReceipt.DeletionMark
-			THEN 1
-		ELSE 2
-	END AS Icon
-INTO Doc
+    RetailSalesReceipt.Ref AS Document,
+    RetailSalesReceipt.Number,
+    RetailSalesReceipt.Date,
+    RetailSalesReceipt.Company,
+    RetailSalesReceipt.Currency,
+    RetailSalesReceipt.Author,
+    RetailSalesReceipt.Branch,
+    RetailSalesReceipt.DocumentAmount,
+    CASE
+        WHEN RetailSalesReceipt.Posted
+            THEN 0
+        WHEN RetailSalesReceipt.DeletionMark
+            THEN 1
+        ELSE 2
+    END AS Icon
 FROM
-	Document.RetailSalesReceipt AS RetailSalesReceipt
+    Document.RetailSalesReceipt AS RetailSalesReceipt
 WHERE
-	RetailSalesReceipt.ConsolidatedRetailSales = &amp;ConsolidatedRetailSales
-	AND NOT RetailSalesReceipt.ConsolidatedRetailSales.Ref IS NULL
+    RetailSalesReceipt.ConsolidatedRetailSales = &amp;ConsolidatedRetailSales
+    AND NOT RetailSalesReceipt.ConsolidatedRetailSales.Ref IS NULL
 
 UNION ALL
 
 SELECT
-	RetailReturnReceipt.Ref,
-	RetailReturnReceipt.Number,
-	RetailReturnReceipt.Date,
-	RetailReturnReceipt.Company,
-	RetailReturnReceipt.Currency,
-	RetailReturnReceipt.Author,
-	RetailReturnReceipt.Branch,
-	- RetailReturnReceipt.DocumentAmount,
-	CASE
-		WHEN RetailReturnReceipt.Posted
-			THEN 0
-		WHEN RetailReturnReceipt.DeletionMark
-			THEN 1
-		ELSE 2
-	END AS Icon
+    RetailReturnReceipt.Ref AS Document,
+    RetailReturnReceipt.Number,
+    RetailReturnReceipt.Date,
+    RetailReturnReceipt.Company,
+    RetailReturnReceipt.Currency,
+    RetailReturnReceipt.Author,
+    RetailReturnReceipt.Branch,
+    - RetailReturnReceipt.DocumentAmount,
+    CASE
+        WHEN RetailReturnReceipt.Posted
+            THEN 0
+        WHEN RetailReturnReceipt.DeletionMark
+            THEN 1
+        ELSE 2
+    END AS Icon
 FROM
-	Document.RetailReturnReceipt AS RetailReturnReceipt
+    Document.RetailReturnReceipt AS RetailReturnReceipt
 WHERE
-	RetailReturnReceipt.ConsolidatedRetailSales = &amp;ConsolidatedRetailSales
-	AND NOT RetailReturnReceipt.ConsolidatedRetailSales.Ref IS NULL
-;
-
-////////////////////////////////////////////////////////////////////////////////
-SELECT
-	Doc.Ref AS Document,
-	Doc.Number,
-	Doc.Date AS Date,
-	Doc.Company,
-	Doc.Currency,
-	Doc.Author,
-	Doc.Branch,
-	Doc.DocumentAmount,
-	Doc.Icon
-FROM
-	Doc AS Doc
-
-ORDER BY
-	Date</queryText>
+    RetailReturnReceipt.ConsolidatedRetailSales = &amp;ConsolidatedRetailSales
+    AND NOT RetailReturnReceipt.ConsolidatedRetailSales.Ref IS NULL</queryText>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Document</dataPath>
+        <field>Document</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Document</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Number</dataPath>
+        <field>Number</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Date</dataPath>
+        <field>Date</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Company</dataPath>
+        <field>Company</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Currency</dataPath>
+        <field>Currency</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Author</dataPath>
+        <field>Author</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Branch</dataPath>
+        <field>Branch</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>DocumentAmount</dataPath>
+        <field>DocumentAmount</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Icon</dataPath>
+        <field>Icon</field>
+      </fields>
+      <parameters>
+        <name>ConsolidatedRetailSales</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Consolidated retail sales</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>DocumentRef.ConsolidatedRetailSales</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
     </extInfo>
   </attributes>
   <formCommands>

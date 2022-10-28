@@ -842,7 +842,7 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 
 Scenario: _2990016 check Physical count by location (mobile form)
 	And I close all client application windows
-	And In the command interface I select "Mobile" "Mobile invent"
+	And In the command interface I select "Inventory" "Mobile invent"
 	* Select Location count from choise form
 		And I click Select button of "DocumentRef" field
 		And I go to the first line in "List" table
@@ -917,7 +917,7 @@ Scenario: _2990016 check Physical count by location (mobile form)
 
 Scenario: _2990016 filling Physical count by location (mobile form without scan emulator)
 	And I close all client application windows
-	And In the command interface I select "Mobile" "Mobile invent"
+	And In the command interface I select "Inventory" "Mobile invent"
 	* Select Location count 
 		And I click Select button of "DocumentRef" field
 		And I go to the first line in "List" table
@@ -1029,7 +1029,7 @@ Scenario: _2990018 check the document Location count fixation for the user
 		And I click "Save and close" button
 		And I wait "Location count * dated * *" window closing in 20 seconds
 	* Check fixation
-		And In the command interface I select "Mobile" "Mobile invent"
+		And In the command interface I select "Inventory" "Mobile invent"
 		And I click the button named "InputBarcode"
 		Then "Enter a barcode" window is opened
 		And I input "2" text in the field named "InputFld"
@@ -1039,7 +1039,7 @@ Scenario: _2990018 check the document Location count fixation for the user
 
 Scenario: _2990019 rescan a previously created document Physical count by location in the mobile form
 	And I close all client application windows
-	And In the command interface I select "Mobile" "Mobile invent"
+	And In the command interface I select "Inventory" "Mobile invent"
 	And I click the button named "InputBarcode"
 	Then "Enter a barcode" window is opened
 	And I input "1" text in the field named "InputFld"

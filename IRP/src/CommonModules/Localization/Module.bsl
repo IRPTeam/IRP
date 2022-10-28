@@ -711,7 +711,10 @@ Function Strings(Lang) Export
 	Strings.Insert("MF_Error_009", NStr("en = 'Planning closing by [%1] [%2] [%3] alredy exists'", Lang));
 	Strings.Insert("MF_Error_010", NStr("en = 'Select any production planing'", Lang));
 	
-	Strings.Insert("Error_ChangeAttribute_RelatedDocs", NStr("en = 'Cannot change %1 if related documents exist'", Lang));
+	// Errors matching attributes of basis and related documents
+	Strings.Insert("Error_ChangeAttribute_RelatedDocsExist", NStr("en = 'Cannot change %1 if related documents exist'", Lang));
+	Strings.Insert("Error_AttributeDontMatchValueFromBasisDoc", NStr("en = '%1 must be [%2] (according to %3)'", Lang));
+	Strings.Insert("Error_AttributeDontMatchValueFromBasisDoc_Row", NStr("en = '%1 must be [%2] (according to %3) in row [%4]'", Lang));
 	
 	// Store does not match company
 	Strings.Insert("Error_Store_Company", NStr("en = 'Store [%1] does not match company [%2]'", Lang));

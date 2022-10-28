@@ -132,7 +132,9 @@ Procedure PostAtServer()
 	EndIf;
 
 	DocumentObject = CurrentData.Ref.GetObject();
-	DocumentObject.Write(DocumentWriteMode.Posting);
+	If DocumentObject.CheckFilling() Then
+		DocumentObject.Write(DocumentWriteMode.Posting);
+	EndIf;
 EndProcedure
 
 &AtClient

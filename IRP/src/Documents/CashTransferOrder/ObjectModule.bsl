@@ -80,18 +80,20 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			If RefArray.Count() Then
 				Cancel = True;
 				If Not ThisObject.Receiver = RefAttributes.Receiver Then
-					ErrorMesage = StrTemplate(R().Error_ChangeAttribute_RelatedDocs, "Receiver") + ":";
+					WrongAttribute = "Receiver";
+					ErrorMesage = StrTemplate(R().Error_ChangeAttribute_RelatedDocsExist, WrongAttribute) + ":";
 					For Each RefItem In RefArray Do
 						ErrorMesage = ErrorMesage + Chars.CR + Chars.Tab + RefItem;  
 					EndDo; 
-					CommonFunctionsClientServer.ShowUsersMessage(ErrorMesage, "Receiver", ThisObject);
+					CommonFunctionsClientServer.ShowUsersMessage(ErrorMesage, WrongAttribute, ThisObject);
 				EndIf;
 				If Not ThisObject.Sender = RefAttributes.Sender Then
-					ErrorMesage = StrTemplate(R().Error_ChangeAttribute_RelatedDocs, "Sender") + ":";
+					WrongAttribute = "Sender";
+					ErrorMesage = StrTemplate(R().Error_ChangeAttribute_RelatedDocsExist, WrongAttribute) + ":";
 					For Each RefItem In RefArray Do
 						ErrorMesage = ErrorMesage + Chars.CR + Chars.Tab + RefItem;  
 					EndDo; 
-					CommonFunctionsClientServer.ShowUsersMessage(ErrorMesage, "Sender", ThisObject);
+					CommonFunctionsClientServer.ShowUsersMessage(ErrorMesage, WrongAttribute, ThisObject);
 				EndIf;
 			EndIf;
 		EndIf;

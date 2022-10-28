@@ -22,10 +22,14 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_ChequeBondTransaction</value>
     </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>-1</multipleValuesUseField>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
     <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
     <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
+    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <characteristics>
     <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -34,10 +38,14 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_ChequeBondTransaction</value>
     </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>-1</multipleValuesUseField>
     <characteristicValues>Document.ChequeBondTransaction.TabularSection.AddAttributes</characteristicValues>
     <objectField>Document.ChequeBondTransaction.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.ChequeBondTransaction.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.ChequeBondTransaction.TabularSection.AddAttributes.Attribute.Value</valueField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
+    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
@@ -246,14 +254,14 @@
         <value>Basis document</value>
       </synonym>
       <type>
-        <types>DocumentRef.SalesInvoice</types>
         <types>DocumentRef.CashTransferOrder</types>
-        <types>DocumentRef.CreditNote</types>
-        <types>DocumentRef.DebitNote</types>
-        <types>DocumentRef.OpeningEntry</types>
         <types>DocumentRef.PurchaseInvoice</types>
+        <types>DocumentRef.DebitNote</types>
+        <types>DocumentRef.CreditNote</types>
         <types>DocumentRef.PurchaseReturn</types>
+        <types>DocumentRef.OpeningEntry</types>
         <types>DocumentRef.SalesReturn</types>
+        <types>DocumentRef.SalesInvoice</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

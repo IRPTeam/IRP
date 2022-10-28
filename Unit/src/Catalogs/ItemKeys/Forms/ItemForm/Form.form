@@ -1285,6 +1285,7 @@
               </userVisible>
               <autoFill>true</autoFill>
             </contextMenu>
+            <source>SpecificationAffectPricingMD5SearchString</source>
             <extInfo xsi:type="form:SearchStringAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -1323,6 +1324,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>ViewStatusAddition</type>
+            <source>SpecificationAffectPricingMD5ViewStatus</source>
             <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
               <horizontalLocation>Left</horizontalLocation>
@@ -1362,6 +1364,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>SearchControlAddition</type>
+            <source>SpecificationAffectPricingMD5SearchControl</source>
             <extInfo xsi:type="form:SearchControlAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -1411,8 +1414,6 @@
           <horizontalStretch>true</horizontalStretch>
           <verticalStretch>true</verticalStretch>
           <fileDragMode>AsFileRef</fileDragMode>
-          <viewMode>All</viewMode>
-          <settingsNamedItemDetailedRepresentation>false</settingsNamedItemDetailedRepresentation>
           <rowFilter xsi:type="core:UndefinedValue"/>
         </items>
         <visible>true</visible>

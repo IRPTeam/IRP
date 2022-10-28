@@ -250,17 +250,37 @@ Function ObjectXDTOStructure(TypeName, URI, Val ArrayList, WSName = Undefined) E
 	For Each Property In XDTOType.Properties Do
 		   
 		If TypeOf(Property.Type) = Type("XDTOObjectType")
-			AND Property.Type.Properties.Count() // not simpe type			
-			AND ArrayList.Find(Property.Type) = Undefined Then // if type repeated - save type with GUID and add to map, set GUID
+			AND Property.Type.Properties.Count() Then // not simpe type			
 			
-			If Property.UpperBound < 0 Then
-				Array = New Array;
-				Array.Add(ObjectXDTOStructure(Property.Type.Name, Property.Type.NamespaceURI, ArrayList, WSName));
-				XDTOStructure.Insert(Property.Name, Array);
+			If ArrayList.Find(Property.Type) = Undefined Then // if type repeated - save type with GUID and add to map, set GUID
+			
+				If Property.UpperBound < 0 Then
+					Array = New Array;
+					Array.Add(ObjectXDTOStructure(Property.Type.Name, Property.Type.NamespaceURI, ArrayList, WSName));
+					XDTOStructure.Insert(Property.Name, Array);
+				Else
+					XDTOStructure.Insert(Property.Name, ObjectXDTOStructure(Property.Type.Name, Property.Type.NamespaceURI, ArrayList, WSName));
+				EndIf;
 			Else
-				XDTOStructure.Insert(Property.Name, ObjectXDTOStructure(Property.Type.Name, Property.Type.NamespaceURI, ArrayList, WSName));
+				CheckCountLvl = 0;
+				For Each Row In ArrayList Do
+					If Row = Property.Type Then
+						CheckCountLvl = CheckCountLvl + 1;
+					EndIf;
+				EndDo;
+				
+				If CheckCountLvl > 1 Then
+					Break;
+				Else
+					If Property.UpperBound < 0 Then
+						Array = New Array;
+						Array.Add(ObjectXDTOStructure(Property.Type.Name, Property.Type.NamespaceURI, ArrayList, WSName));
+						XDTOStructure.Insert(Property.Name, Array);
+					Else
+						XDTOStructure.Insert(Property.Name, ObjectXDTOStructure(Property.Type.Name, Property.Type.NamespaceURI, ArrayList, WSName));
+					EndIf;
+				EndIf;
 			EndIf;
-		
 		Else			
 			If Property.Type.Name = "string" Then
 				XDTOStructure.Insert(Property.Name, Property.Name);

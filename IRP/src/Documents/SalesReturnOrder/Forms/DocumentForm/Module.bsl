@@ -1,3 +1,4 @@
+
 #Region FORM
 
 &AtServer
@@ -122,6 +123,15 @@ EndProcedure
 &AtClient
 Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
 	DocSalesReturnOrderClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TRANSACTION_TYPE
+
+&AtClient
+Procedure TransactionTypeOnChange(Item)
+	DocSalesReturnOrderClient.TransactionTypeOnChange(Object, ThisObject, Item);	
 EndProcedure
 
 #EndRegion

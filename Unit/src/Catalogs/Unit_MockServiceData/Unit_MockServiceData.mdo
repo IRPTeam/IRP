@@ -655,6 +655,49 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="7c824db0-ae7c-4c4d-b10d-87035515994a">
+    <producedTypes>
+      <objectType typeId="a3e4fc9b-74f9-4c5b-a9aa-94ffa99c7bb2" valueTypeId="ec7bbef9-61a7-4e3c-b124-5c9786c4dd70"/>
+      <rowType typeId="5517aae9-80e1-490d-b7a1-45dce4688a4c" valueTypeId="1590432e-6153-4aa3-a71d-37a21cdcbdc2"/>
+    </producedTypes>
+    <name>AfterAnswer_Set</name>
+    <synonym>
+      <key>en</key>
+      <value>After answer set</value>
+    </synonym>
+    <attributes uuid="43f13b15-b8e1-4613-8175-b171e4d72b07">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ef8eb81c-a411-42bf-918d-3c7bf5095028">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="4bc35bc6-d2da-4798-9057-59524fdcf233">
     <name>ItemForm</name>
     <synonym>
@@ -686,8 +729,8 @@
     </synonym>
     <group>FormCommandBarImportant</group>
     <commandParameterType>
-      <types>CatalogRef.Unit_ServiceExchangeHistory</types>
       <types>CatalogRef.Unit_MockServiceData</types>
+      <types>CatalogRef.Unit_ServiceExchangeHistory</types>
     </commandParameterType>
     <representation>PictureAndText</representation>
     <picture xsi:type="core:PictureRef">

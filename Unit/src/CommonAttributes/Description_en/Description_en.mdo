@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:CommonAttribute xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="d2aa771e-e02a-4279-90d3-21254ec122a3" extendedConfigurationObject="d6568d06-c0ae-49d2-9f85-9f9c35b2a62f">
+<mdclass:CommonAttribute xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="d2aa771e-e02a-4279-90d3-21254ec122a3">
   <name>Description_en</name>
   <objectBelonging>Adopted</objectBelonging>
   <extension xsi:type="mdclassExtension:CommonAttributeExtension">
-    <extendedConfigurationObject>Checked</extendedConfigurationObject>
     <typeExtension>
       <types>
         <state>Checked</state>

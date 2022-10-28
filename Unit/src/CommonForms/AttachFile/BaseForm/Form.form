@@ -11,16 +11,7 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>FileList</segments>
-      </dataPath>
       <titleLocation>None</titleLocation>
-      <excludedCommands>ShowMultipleSelection</excludedCommands>
-      <excludedCommands>Copy</excludedCommands>
-      <excludedCommands>Create</excludedCommands>
-      <excludedCommands>SearchEverywhere</excludedCommands>
-      <excludedCommands>CopyToClipboard</excludedCommands>
-      <excludedCommands>FindByCurrentValue</excludedCommands>
       <items xsi:type="form:FormField">
         <name>FileListCreationDate</name>
         <id>23</id>
@@ -29,9 +20,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>FileList.CreationDate</segments>
-        </dataPath>
         <extendedTooltip>
           <name>FileListCreationDateExtendedTooltip</name>
           <id>25</id>
@@ -79,9 +67,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>FileList.File</segments>
-        </dataPath>
         <extendedTooltip>
           <name>FileListFileExtendedTooltip</name>
           <id>19</id>
@@ -129,9 +114,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>FileList.File.Extension</segments>
-        </dataPath>
         <extendedTooltip>
           <name>FileListFileExtensionExtendedTooltip</name>
           <id>31</id>
@@ -215,6 +197,7 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
+        <source>FileListSearchString</source>
         <extInfo xsi:type="form:SearchStringAdditionExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
         </extInfo>
@@ -253,6 +236,7 @@
           <autoFill>true</autoFill>
         </contextMenu>
         <type>ViewStatusAddition</type>
+        <source>FileListViewStatus</source>
         <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
         </extInfo>
@@ -291,6 +275,7 @@
           <autoFill>true</autoFill>
         </contextMenu>
         <type>SearchControlAddition</type>
+        <source>FileListSearchControl</source>
         <extInfo xsi:type="form:SearchControlAdditionExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
         </extInfo>
@@ -347,6 +332,7 @@
         </period>
         <topLevelParent xsi:type="core:UndefinedValue"/>
         <showRoot>true</showRoot>
+        <allowGettingCurrentRowURL>true</allowGettingCurrentRowURL>
       </extInfo>
     </items>
     <items xsi:type="form:FormGroup">
@@ -360,9 +346,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>DefaultFilesStorageVolume</segments>
-        </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
           <name>DefaultFilesStorageVolumeExtendedTooltip</name>
@@ -411,9 +394,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Upload</segments>
-        </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
           <name>UploadExtendedTooltip</name>
@@ -481,7 +461,7 @@
           </extInfo>
         </extendedTooltip>
         <type>UsualButton</type>
-        <commandName>Form.Command.DownloadFile</commandName>
+        <commandName>0</commandName>
         <representation>Auto</representation>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>

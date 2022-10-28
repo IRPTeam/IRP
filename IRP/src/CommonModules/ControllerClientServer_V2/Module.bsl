@@ -1268,8 +1268,18 @@ Function BindTransactionType(Parameters)
 		"StepClearByTransactionTypeCashReceipt,
 		|StepChangeCashAccountByTransactionType");
 	
-	Binding.Insert("ShipmentConfirmation" , "StepChangePartnerByTransactionType");
-	Binding.Insert("GoodsReceipt"         , "StepChangePartnerByTransactionType");
+	Binding.Insert("ShipmentConfirmation"  , "StepChangePartnerByTransactionType");
+	Binding.Insert("GoodsReceipt"          , "StepChangePartnerByTransactionType");
+	Binding.Insert("PurchaseInvoice"       , "StepChangePartnerByTransactionType");
+	Binding.Insert("PurchaseOrder"         , "StepChangePartnerByTransactionType");
+	Binding.Insert("PurchaseOrderClosing"  , "StepChangePartnerByTransactionType");
+	Binding.Insert("PurchaseReturn"        , "StepChangePartnerByTransactionType");
+	Binding.Insert("PurchaseReturnOrder"   , "StepChangePartnerByTransactionType");
+	Binding.Insert("SalesInvoice"          , "StepChangePartnerByTransactionType");
+	Binding.Insert("SalesOrder"            , "StepChangePartnerByTransactionType");
+	Binding.Insert("SalesOrderClosing"     , "StepChangePartnerByTransactionType");
+	Binding.Insert("SalesReturn"           , "StepChangePartnerByTransactionType");
+	Binding.Insert("SalesReturnOrder"      , "StepChangePartnerByTransactionType");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -1510,6 +1520,12 @@ Function BindCurrency(Parameters)
 		"StepItemListChangePriceByPriceType");
 	
 	Binding.Insert("PurchaseInvoice",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("SalesReportFromTradeAgent",
+		"StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("SalesReportToConsignor",
 		"StepItemListChangePriceByPriceType");
 	
 	Binding.Insert("SalesReturnOrder",
@@ -1894,7 +1910,7 @@ Function BindDate(Parameters)
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeDeliveryDateByAgreement,
-		|StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
+		|StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepUpdatePaymentTerms");
@@ -1910,7 +1926,7 @@ Function BindDate(Parameters)
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeDeliveryDateByAgreement,
-		|StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
+		|StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 	
@@ -1931,22 +1947,22 @@ Function BindDate(Parameters)
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("SalesReturnOrder",
-		"StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("SalesReturn",
-		"StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("PurchaseReturnOrder",
-		"StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("PurchaseReturn",
-		"StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
@@ -1960,7 +1976,7 @@ Function BindDate(Parameters)
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeDeliveryDateByAgreement,
-		|StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		|StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepUpdatePaymentTerms");
@@ -1969,7 +1985,7 @@ Function BindDate(Parameters)
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeDeliveryDateByAgreement,
-		|StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		|StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
@@ -1977,11 +1993,25 @@ Function BindDate(Parameters)
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeDeliveryDateByAgreement,
-		|StepChangeAgreementByPartner_AgreementTypeIsVendor, 
+		|StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepUpdatePaymentTerms");
-
+	
+	Binding.Insert("SalesReportFromTradeAgent",
+		"StepItemListChangePriceTypeByAgreement,
+		|StepItemListChangePriceByPriceType, 
+		|StepChangeAgreementByPartner_AgreementTypeIsTradeAgent, 
+		|StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_AgreementInHeader");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepItemListChangePriceTypeByAgreement,
+		|StepItemListChangePriceByPriceType,
+		|StepChangeAgreementByPartner_AgreementTypeIsConsignor, 
+		|StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_AgreementInHeader");
+		
 	Binding.Insert("BankPayment",
 		"StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_AgreementInList");
@@ -2084,6 +2114,14 @@ Function BindCompany(Parameters)
 		"StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey");
+	
+	Binding.Insert("SalesReportFromTradeAgent",
+		"StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_AgreementInHeader");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_AgreementInHeader");
 	
 	Binding.Insert("SalesReturnOrder",
 		"StepRequireCallCreateTaxesFormControls,
@@ -2238,7 +2276,7 @@ Function BindPartner(Parameters)
 	Binding.Insert("GoodsReceipt"        , "StepChangeLegalNameByPartner");
 	
 	Binding.Insert("SalesOrder",
-		"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner,
 		|StepChangeManagerSegmentByPartner");
 	
@@ -2249,12 +2287,12 @@ Function BindPartner(Parameters)
 	Binding.Insert("WorkSheet", "StepChangeLegalNameByPartner");
 	
 	Binding.Insert("SalesOrderClosing",
-		"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner,
 		|StepChangeManagerSegmentByPartner");
 	
 	Binding.Insert("SalesInvoice",
-		"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner,
 		|StepChangeManagerSegmentByPartner");
 
@@ -2264,15 +2302,23 @@ Function BindPartner(Parameters)
 		|StepChangeManagerSegmentByPartner");
 
 	Binding.Insert("PurchaseOrder",
-		"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 	
 	Binding.Insert("PurchaseOrderClosing",
-		"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 	
 	Binding.Insert("PurchaseInvoice",
-		"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
+		|StepChangeLegalNameByPartner");
+	
+	Binding.Insert("SalesReportFromTradeAgent",
+		"StepChangeAgreementByPartner_AgreementTypeIsTradeAgent,
+		|StepChangeLegalNameByPartner");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepChangeAgreementByPartner_AgreementTypeIsConsignor,
 		|StepChangeLegalNameByPartner");
 	
 	Binding.Insert("RetailReturnReceipt",
@@ -2280,19 +2326,19 @@ Function BindPartner(Parameters)
 		|StepChangeLegalNameByPartner");
 	
 	Binding.Insert("PurchaseReturnOrder",
-		"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 	
 	Binding.Insert("PurchaseReturn",
-		"StepChangeAgreementByPartner_AgreementTypeIsVendor,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 	
 	Binding.Insert("SalesReturnOrder",
-		"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 	
 	Binding.Insert("SalesReturn",
-		"StepChangeAgreementByPartner_AgreementTypeIsCustomer,
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
@@ -3198,21 +3244,50 @@ Function BindAgreement(Parameters)
 		|StepChangePaymentTermsByAgreement,
 		|StepChangeTaxRate_AgreementInHeader");
 		
+	Binding.Insert("SalesReportFromTradeAgent",
+		"StepChangeCompanyByAgreement,
+		|StepChangeCurrencyByAgreement,
+		|StepItemListChangePriceTypeByAgreement,
+		|StepChangePriceIncludeTaxByAgreement,
+		|StepChangeTaxRate_AgreementInHeader");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepChangeCompanyByAgreement,
+		|StepChangeCurrencyByAgreement,
+		|StepItemListChangePriceTypeByAgreement,
+		|StepChangePriceIncludeTaxByAgreement,
+		|StepChangeTaxRate_AgreementInHeader");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
 // Agreement.ChangeAgreementByPartner.[AgreementTypeIsCustomer].Step
 Procedure StepChangeAgreementByPartner_AgreementTypeIsCustomer(Parameters, Chain) Export
-	StepChangeAgreementByPartner(Parameters, Chain, PredefinedValue("Enum.AgreementTypes.Customer"));
+	StepChangeAgreementByPartner(Parameters, Chain, PredefinedValue("Enum.AgreementTypes.Customer"), False);
 EndProcedure
 
 // Agreement.ChangeAgreementByPartner.[AgreementTypeIsVendor].Step
 Procedure StepChangeAgreementByPartner_AgreementTypeIsVendor(Parameters, Chain) Export
-	StepChangeAgreementByPartner(Parameters, Chain, PredefinedValue("Enum.AgreementTypes.Vendor"));
+	StepChangeAgreementByPartner(Parameters, Chain, PredefinedValue("Enum.AgreementTypes.Vendor"), False);
+EndProcedure
+
+// Agreement.ChangeAgreementByPartner.[AgreementTypeIsConsignor].Step
+Procedure StepChangeAgreementByPartner_AgreementTypeIsConsignor(Parameters, Chain) Export
+	StepChangeAgreementByPartner(Parameters, Chain, PredefinedValue("Enum.AgreementTypes.Consignor"), False);
+EndProcedure
+
+// Agreement.ChangeAgreementByPartner.[AgreementTypeIsTradeAgent].Step
+Procedure StepChangeAgreementByPartner_AgreementTypeIsTradeAgent(Parameters, Chain) Export
+	StepChangeAgreementByPartner(Parameters, Chain, PredefinedValue("Enum.AgreementTypes.TradeAgent"), False);
+EndProcedure
+
+// Agreement.ChangeAgreementByPartner.[AgreementTypeByTransactionType].Step
+Procedure StepChangeAgreementByPartner_AgreementTypeByTransactionType(Parameters, Chain) Export
+	StepChangeAgreementByPartner(Parameters, Chain, Undefined, True);
 EndProcedure
 
 // Agreement.ChangeAgreementByPartner.Step
-Procedure StepChangeAgreementByPartner(Parameters, Chain, AgreementType)
+Procedure StepChangeAgreementByPartner(Parameters, Chain, AgreementType, AgreementTypeByTransactionType)
 	Chain.ChangeAgreementByPartner.Enable = True;
 	Chain.ChangeAgreementByPartner.Setter = "SetAgreement";
 	Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
@@ -3220,6 +3295,9 @@ Procedure StepChangeAgreementByPartner(Parameters, Chain, AgreementType)
 	Options.Agreement     = GetAgreement(Parameters);
 	Options.CurrentDate   = GetDate(Parameters);
 	Options.AgreementType = AgreementType;
+	If AgreementTypeByTransactionType Then
+		Options.TransactionType = GetTransactionType(Parameters);
+	EndIf;
 	Options.StepName = "StepChangeAgreementByPartner";
 	Chain.ChangeAgreementByPartner.Options.Add(Options);
 EndProcedure
@@ -3292,6 +3370,10 @@ EndFunction
 Function BindPriceIncludeTax(Parameters)
 	DataPath = "PriceIncludeTax";
 	Binding = New Structure();
+	
+	Binding.Insert("SalesReportFromTradeAgent", "StepItemListCalculations_IsPriceIncludeTaxChanged_Without_SpecialOffers");
+	Binding.Insert("SalesReportToConsignor"   , "StepItemListCalculations_IsPriceIncludeTaxChanged_Without_SpecialOffers");
+	
 	Return BindSteps("StepItemListCalculations_IsPriceIncludeTaxChanged", DataPath, Binding, Parameters);
 EndFunction
 
@@ -7189,6 +7271,10 @@ Function BindItemListItem(Parameters)
 												 |StepItemListChangeItemKeyWriteOffByItem");
 	Binding.Insert("Bundling"                  , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("Unbundling"                , "StepItemListChangeItemKeyByItem");
+	
+	Binding.Insert("SalesReportFromTradeAgent" , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("SalesReportToConsignor"    , "StepItemListChangeItemKeyByItem");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -7361,6 +7447,22 @@ Function BindItemListItemKey(Parameters)
 		|StepChangeUseSerialLotNumberByItemKey,
 		|StepItemListChangeUnitByItemKey,
 		|StepItemListChangeExpenseTypeByItemKey,
+		|StepChangeIsServiceByItemKey");
+	
+	Binding.Insert("SalesReportFromTradeAgent",
+		"StepItemListChangePriceTypeByAgreement,
+		|StepItemListChangePriceByPriceType,
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepChangeUseSerialLotNumberByItemKey,
+		|StepItemListChangeUnitByItemKey,
+		|StepChangeIsServiceByItemKey");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepItemListChangePriceTypeByAgreement,
+		|StepItemListChangePriceByPriceType,
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepChangeUseSerialLotNumberByItemKey,
+		|StepItemListChangeUnitByItemKey,
 		|StepChangeIsServiceByItemKey");
 	
 	Binding.Insert("SalesReturnOrder",
@@ -7677,6 +7779,14 @@ Function BindItemListUnit(Parameters)
 		|StepItemListChangePriceByPriceType");
 	
 	Binding.Insert("PurchaseInvoice", 
+		"StepItemListCalculateQuantityInBaseUnit,
+		|StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("SalesReportFromTradeAgent", 
+		"StepItemListCalculateQuantityInBaseUnit,
+		|StepItemListChangePriceByPriceType");
+	
+	Binding.Insert("SalesReportToConsignor", 
 		"StepItemListCalculateQuantityInBaseUnit,
 		|StepItemListChangePriceByPriceType");
 	
@@ -8130,6 +8240,9 @@ Function BindItemListPrice(Parameters)
 		Binding.Insert("PurchaseReturn"       , "StepItemListCalculations_IsPriceChanged");
 		Binding.Insert("SalesReturnOrder"     , "StepItemListCalculations_IsPriceChanged");
 		Binding.Insert("SalesReturn"          , "StepItemListCalculations_IsPriceChanged");	
+		
+		Binding.Insert("SalesReportFromTradeAgent" , "StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");	
+		Binding.Insert("SalesReportToConsignor"    , "StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");	
 	Else
 		Binding.Insert("SalesOrder",
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
@@ -8162,6 +8275,14 @@ Function BindItemListPrice(Parameters)
 		Binding.Insert("PurchaseInvoice",
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
 			|StepItemListCalculations_IsPriceChanged");
+	
+		Binding.Insert("SalesReportFromTradeAgent",
+			"StepItemListChangePriceTypeAsManual_IsUserChange,
+			|StepItemListCalculations_IsPriceChanged_Without_SpecialsOffers");
+	
+		Binding.Insert("SalesReportToConsignor",
+			"StepItemListChangePriceTypeAsManual_IsUserChange,
+			|StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");
 	
 		Binding.Insert("RetailReturnReceipt",
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
@@ -8283,6 +8404,10 @@ EndFunction
 Function BindItemListDontCalculateRow(Parameters)
 	DataPath = "ItemList.DontCalculateRow";
 	Binding = New Structure();
+	
+	Binding.Insert("SalesReportFromTradeAgent", "StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffers");
+	Binding.Insert("SalesReportToConsignor"   , "StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffers");
+	
 	Return BindSteps("StepItemListCalculations_IsDontCalculateRowChanged", DataPath, Binding, Parameters);
 EndFunction
 
@@ -8382,6 +8507,12 @@ Function BindItemListQuantityInBaseUnit(Parameters)
 	
 	Binding.Insert("PurchaseInvoice",
 		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
+	
+	Binding.Insert("SalesReportFromTradeAgent",
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged_Without_SpecialOffers");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged_Without_SpecialOffers");
 	
 	Binding.Insert("RetailReturnReceipt",
 		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
@@ -8739,6 +8870,10 @@ EndProcedure
 Function BindItemListTaxRate(Parameters)
 	DataPath = "ItemList.";
 	Binding = New Structure();
+	
+	Binding.Insert("SalesReportFromTradeAgent", "StepItemListCalculations_IsTaxRateChanged_Without_SpecialOffers");
+	Binding.Insert("SalesReportToConsignor"   , "StepItemListCalculations_IsTaxRateChanged_Without_SpecialOffers");
+	
 	Return BindSteps("StepItemListCalculations_IsTaxRateChanged", DataPath, Binding, Parameters);
 EndFunction
 
@@ -8797,6 +8932,14 @@ Function BindItemListTaxAmount(Parameters)
 	
 	Binding.Insert("PurchaseInvoice", 
 		"StepItemListCalculations_IsTaxAmountChanged,
+		|StepItemListChangeTaxAmountAsManualAmount");
+	
+	Binding.Insert("SalesReportFromTradeAgent", 
+		"StepItemListCalculations_IsTaxAmountChanged_Without_SpecialOffers,
+		|StepItemListChangeTaxAmountAsManualAmount");
+	
+	Binding.Insert("SalesReportToConsignor", 
+		"StepItemListCalculations_IsTaxAmountChanged_Without_SpecialOffers,
 		|StepItemListChangeTaxAmountAsManualAmount");
 	
 	Binding.Insert("RetailReturnReceipt", 
@@ -8966,6 +9109,14 @@ Function BindItemListTotalAmount(Parameters)
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
 		|StepItemListCalculations_IsTotalAmountChanged");
 	
+	Binding.Insert("SalesReportFromTradeAgent",
+		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
+		|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
+		|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers");
+	
 	Binding.Insert("RetailReturnReceipt",
 		"StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
 		|StepItemListCalculations_IsTotalAmountChanged");
@@ -9031,6 +9182,19 @@ Procedure SetItemListCalculations(Parameters, Results) Export
 	SetSpecialOffers(Parameters, Results);
 EndProcedure
 
+// ItemList.Calculations_Without_SpecialOffers.Set
+Procedure SetItemListCalculations_Without_SpecialOffers(Parameters, Results) Export
+	ViewNotify = "OnSetCalculationsNotify";
+	NotifyAnyway = True;
+	Binding = BindItemListCalculations(Parameters);
+	SetterObject(Undefined, "ItemList.NetAmount"   , Parameters, Results, ViewNotify, "NetAmount"    , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, ViewNotify, "TaxAmount"    , NotifyAnyway);
+	SetterObject(Undefined, "ItemList.Price"       , Parameters, Results, ViewNotify, "Price"        , NotifyAnyway);
+	SetterObject(Binding.StepsEnabler, "ItemList.TotalAmount" , Parameters, Results, ViewNotify, "TotalAmount" , NotifyAnyway);
+	SetTaxList(Parameters, Results);
+	SetSpecialOffers(Parameters, Results);
+EndProcedure
+
 // ItemList.Calculations.Bind
 Function BindItemListCalculations(Parameters)
 	DataPath = "";
@@ -9059,6 +9223,11 @@ Procedure StepItemListCalculations_IsPriceIncludeTaxChanged(Parameters, Chain) E
 	StepItemListCalculations(Parameters, Chain, "IsPriceIncludeTaxChanged");
 EndProcedure
 
+// ItemList.Calculations.[IsPriceIncludeTaxChanged_Without_SpecialOffers].Step
+Procedure StepItemListCalculations_IsPriceIncludeTaxChanged_Without_SpecialOffers(Parameters, Chain) Export
+	StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, "IsPriceIncludeTaxChanged");
+EndProcedure
+
 // ItemList.Calculations.[IsOffersChanged].Step
 Procedure StepItemListCalculations_IsOffersChanged(Parameters, Chain) Export
 	StepItemListCalculations(Parameters, Chain, "IsOffersChanged");
@@ -9069,9 +9238,19 @@ Procedure StepItemListCalculations_IsPriceChanged(Parameters, Chain) Export
 	StepItemListCalculations(Parameters, Chain, "IsPriceChanged");
 EndProcedure
 
+// ItemList.Calculations.[IsPriceChanged_Without_SpecialsOffers].Step
+Procedure StepItemListCalculations_IsPriceChanged_Without_SpecialsOffers(Parameters, Chain) Export
+	StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, "IsPriceChanged");
+EndProcedure
+
 // ItemList.Calculations.[IsTotalAmountChanged].Step
 Procedure StepItemListCalculations_IsTotalAmountChanged(Parameters, Chain) Export
 	StepItemListCalculations(Parameters, Chain, "IsTotalAmountChanged");
+EndProcedure
+
+// ItemList.Calculations.[IsTotalAmountChanged_Without_SpecialOffers].Step
+Procedure StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers(Parameters, Chain) Export
+	StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, "IsTotalAmountChanged");
 EndProcedure
 
 // ItemList.Calculations.[IsDontCalculateRowChanged].Step
@@ -9079,9 +9258,19 @@ Procedure StepItemListCalculations_IsDontCalculateRowChanged(Parameters, Chain) 
 	StepItemListCalculations(Parameters, Chain, "IsDontCalculateRowChanged");
 EndProcedure
 
+// ItemList.Calculations.[IsDontCalculateRowChanged_Without_SpecialOffers].Step
+Procedure StepItemListCalculations_IsDontCalculateRowChanged_Without_SpecialOffers(Parameters, Chain) Export
+	StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, "IsDontCalculateRowChanged");
+EndProcedure
+
 // ItemList.Calculations.[IsQuantityInBaseUnitChanged].Step
 Procedure StepItemListCalculations_IsQuantityInBaseUnitChanged(Parameters, Chain) Export
 	StepItemListCalculations(Parameters, Chain, "IsQuantityInBaseUnitChanged");
+EndProcedure
+
+// ItemList.Calculations.[IsQuantityInBaseUnitChanged_Without_SpecialOffers].Step
+Procedure StepItemListCalculations_IsQuantityInBaseUnitChanged_Without_SpecialOffers(Parameters, Chain) Export
+	StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, "IsQuantityInBaseUnitChanged");
 EndProcedure
 
 // ItemList.Calculations.[IsTaxRateChanged].Step
@@ -9089,9 +9278,19 @@ Procedure StepItemListCalculations_IsTaxRateChanged(Parameters, Chain) Export
 	StepItemListCalculations(Parameters, Chain, "IsTaxRateChanged");
 EndProcedure
 
+// ItemList.Calculations.[IsTaxRateChanged_Without_SpecialOffers].Step
+Procedure StepItemListCalculations_IsTaxRateChanged_Without_SpecialOffers(Parameters, Chain) Export
+	StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, "IsTaxRateChanged");
+EndProcedure
+
 // ItemList.Calculations.[IsTaxAmountChanged].Step
 Procedure StepItemListCalculations_IsTaxAmountChanged(Parameters, Chain) Export
 	StepItemListCalculations(Parameters, Chain, "IsTaxAmountChanged");
+EndProcedure
+
+// ItemList.Calculations.[IsTaxAmountChanged_Without_SpecialOffers].Step
+Procedure StepItemListCalculations_IsTaxAmountChanged_Without_SpecialOffers(Parameters, Chain) Export
+	StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, "IsTaxAmountChanged");
 EndProcedure
 
 // ItemList.Calculations.[IsTaxAmountUserFormChanged].Step
@@ -9165,9 +9364,79 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		Options.TaxOptions.TaxRates         = GetTaxRate(Parameters, Row);
 		Options.TaxOptions.TaxList          = Row.TaxList;
 		Options.TaxOptions.IsAlreadyCalculated = Row.TaxIsAlreadyCalculated;
-		
+			
 		Options.OffersOptions.SpecialOffers      = Row.SpecialOffers;
 		Options.OffersOptions.SpecialOffersCache = Row.SpecialOffersCache;
+		
+		Options.Key = Row.Key;
+		Options.StepName = "StepItemListCalculations";
+		Chain.Calculations.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoIsChanged)
+	Chain.Calculations.Enable = True;
+	Chain.Calculations.Setter = "SetItemListCalculations_Without_SpecialOffers";
+	
+	PriceIncludeTax = GetPriceIncludeTax(Parameters);
+	
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		
+		Options     = ModelClientServer_V2.CalculationsOptions();
+		Options.Ref = Parameters.Object.Ref;
+		
+		// need recalculate NetAmount, TotalAmount, TaxAmount, OffersAmount
+		If     WhoIsChanged = "IsPriceChanged"            Or WhoIsChanged = "IsPriceIncludeTaxChanged"
+			Or WhoIsChanged = "IsDontCalculateRowChanged" Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
+			Or WhoIsChanged = "IsTaxRateChanged"          //Or WhoIsChanged = "IsOffersChanged"
+			Or WhoIsChanged = "IsCopyRow"                 Or WhoIsChanged = "IsTaxAmountUserFormChanged"
+			Or WhoIsChanged = "RecalculationsOnCopy" Then
+			Options.CalculateNetAmount.Enable     = True;
+			Options.CalculateTotalAmount.Enable   = True;
+			Options.CalculateTaxAmount.Enable     = True;
+		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
+		// when TotalAmount is changed taxes need recalculate reverse, will be changed NetAmount and Price
+			
+			If PriceIncludeTax Then
+				Options.CalculateTaxAmount.Enable     = True;
+				Options.CalculateNetAmount.Enable     = True;
+			Else
+				Options.CalculateTaxAmountReverse.Enable   = True;
+				Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;
+			EndIf;
+			
+			Options.CalculatePriceByTotalAmount.Enable = True;
+		ElsIf WhoIsChanged = "IsTaxAmountChanged" Then
+		// enable use ManualAmount when calculating TaxAmount
+			Options.TaxOptions.UseManualAmount = True;
+			
+			Options.CalculateNetAmount.Enable   = True;
+			Options.CalculateTotalAmount.Enable = True;
+			Options.CalculateTaxAmount.Enable   = True;
+		Else
+			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
+		EndIf;
+		
+		Options.AmountOptions.DontCalculateRow = GetItemListDontCalculateRow(Parameters, Row.Key);
+		
+		Options.AmountOptions.NetAmount        = GetItemListNetAmount(Parameters, Row.Key);
+		Options.AmountOptions.TaxAmount        = GetItemListTaxAmount(Parameters, Row.Key);
+		Options.AmountOptions.TotalAmount      = GetItemListTotalAmount(Parameters, Row.Key);
+		
+		Options.PriceOptions.Price              = GetItemListPrice(Parameters, Row.Key);
+		If WhoIsChanged = "IsPriceChanged" And IsUserChange(Parameters) Then
+			Options.PriceOptions.PriceType = PredefinedValue("Catalog.PriceTypes.ManualPriceType");
+		Else
+			Options.PriceOptions.PriceType = GetItemListPriceType(Parameters, Row.Key);
+		EndIf;
+		Options.PriceOptions.Quantity           = GetItemListQuantity(Parameters, Row.Key);
+		Options.PriceOptions.QuantityInBaseUnit = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		
+		Options.TaxOptions.PriceIncludeTax  = PriceIncludeTax;
+		Options.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
+		Options.TaxOptions.TaxRates         = GetTaxRate(Parameters, Row);
+		Options.TaxOptions.TaxList          = Row.TaxList;
+		Options.TaxOptions.IsAlreadyCalculated = Row.TaxIsAlreadyCalculated;
 		
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListCalculations";

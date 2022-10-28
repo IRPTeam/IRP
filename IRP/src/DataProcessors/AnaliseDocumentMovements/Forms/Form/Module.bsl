@@ -33,7 +33,13 @@ Procedure FillMovementsAtServer()
 		EndDo;
 		TotalQueryArray.Add("SELECT NULL");
 		QuerySchema = New QuerySchema();
-		QuerySchema.SetQueryText(StrConcat(TotalQueryArray, Chars.LF + Chars.LF + ";" + Chars.LF + Chars.LF));
+		
+		Try
+			QuerySchema.SetQueryText(StrConcat(TotalQueryArray, Chars.LF + Chars.LF + ";" + Chars.LF + Chars.LF));
+		Except
+			Raise StrTemplate("Document [%1], Error: " + Chars.LF + "%2", Document.Name, ErrorDescription());
+		EndTry;
+		
 		For Each Batch In QuerySchema.QueryBatch Do
 			If TypeOf(Batch) = Type("QuerySchemaTableDropQuery") Then
 				Continue;

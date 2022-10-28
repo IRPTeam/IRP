@@ -156,6 +156,24 @@
                 <value>Enum.AgreementTypes.EnumValue.Vendor</value>
               </value>
             </choiceList>
+            <choiceList>
+              <presentation>
+                <key>en</key>
+                <value>Consignor</value>
+              </presentation>
+              <value xsi:type="core:ReferenceValue">
+                <value>Enum.AgreementTypes.EnumValue.Consignor</value>
+              </value>
+            </choiceList>
+            <choiceList>
+              <presentation>
+                <key>en</key>
+                <value>Trade agent</value>
+              </presentation>
+              <value xsi:type="core:ReferenceValue">
+                <value>Enum.AgreementTypes.EnumValue.TradeAgent</value>
+              </value>
+            </choiceList>
           </extInfo>
         </items>
         <items xsi:type="form:FormField">

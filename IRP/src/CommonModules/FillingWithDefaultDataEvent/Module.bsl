@@ -332,7 +332,9 @@ Function UsedNewFunctionality(Source)
 	Or TypeOf(Source) = Type("DocumentObject.ProductionPlanning")
 	Or TypeOf(Source) = Type("DocumentObject.ProductionPlanningCorrection")
 	Or TypeOf(Source) = Type("DocumentObject.ProductionPlanningClosing")
-	Or TypeOf(Source) = Type("DocumentObject.Production");
+	Or TypeOf(Source) = Type("DocumentObject.Production")
+	Or TypeOf(Source) = Type("DocumentObject.SalesReportFromTradeAgent")
+	Or TypeOf(Source) = Type("DocumentObject.SalesReportToConsignor");
 	
 	Return IsUsedNewFunctionality;
 EndFunction

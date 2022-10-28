@@ -25,11 +25,11 @@
   <defaultObjectForm>Document.BatchReallocateIncoming.Form.DocumentForm</defaultObjectForm>
   <defaultListForm>Document.BatchReallocateIncoming.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.BatchReallocateIncoming.Form.ChoiceForm</defaultChoiceForm>
-  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
   <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
   <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
+  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
+  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
+  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="cb94110f-4e19-47a9-96fd-97c003afdbd9">
@@ -54,19 +54,19 @@
       <value>Document</value>
     </synonym>
     <type>
-      <types>DocumentRef.InventoryTransfer</types>
-      <types>DocumentRef.ItemStockAdjustment</types>
-      <types>DocumentRef.OpeningEntry</types>
       <types>DocumentRef.PurchaseInvoice</types>
       <types>DocumentRef.PurchaseReturn</types>
-      <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.Unbundling</types>
+      <types>DocumentRef.OpeningEntry</types>
+      <types>DocumentRef.RetailReturnReceipt</types>
       <types>DocumentRef.SalesReturn</types>
       <types>DocumentRef.StockAdjustmentAsSurplus</types>
       <types>DocumentRef.StockAdjustmentAsWriteOff</types>
       <types>DocumentRef.Bundling</types>
-      <types>DocumentRef.Unbundling</types>
       <types>DocumentRef.RetailSalesReceipt</types>
-      <types>DocumentRef.RetailReturnReceipt</types>
+      <types>DocumentRef.ItemStockAdjustment</types>
+      <types>DocumentRef.InventoryTransfer</types>
+      <types>DocumentRef.SalesInvoice</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

@@ -25,7 +25,15 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.SalesReportFromTradeAgent</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.RetailReturnReceipt</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.WorkOrder</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -34,6 +42,10 @@
   </content>
   <content>
     <metadata>Document.SalesInvoice</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.SalesReportToConsignor</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -82,10 +94,6 @@
   </content>
   <content>
     <metadata>Document.BankReceipt</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.WorkOrder</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

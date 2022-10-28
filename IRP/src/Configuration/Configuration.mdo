@@ -5,7 +5,6 @@
     <key>en</key>
     <value>IRP</value>
   </synonym>
-  <comment> </comment>
   <containedObjects classId="9cd510cd-abfc-11d4-9434-004095e12fc7" objectId="e3520cbe-9782-4189-a67d-a0c8964a51a5"/>
   <containedObjects classId="9fcd25a0-4822-11d4-9414-008048da11f9" objectId="a697ecc7-e3f7-4c7b-a293-303c19a1ddf6"/>
   <containedObjects classId="e3687481-0a87-462c-a166-9f34594f9bba" objectId="1e1b2c21-6d3c-4cff-95e5-1775402940eb"/>
@@ -13,7 +12,6 @@
   <containedObjects classId="51f2d5d8-ea4d-4064-8892-82951750031e" objectId="a6cea7c6-a6a3-47f6-9424-59d2f6347dae"/>
   <containedObjects classId="e68182ea-4237-4383-967f-90c1e3370bc7" objectId="9b7d6465-4ba2-48d9-be1b-7d5bffceab4a"/>
   <containedObjects classId="fb282519-d103-4dd3-bc12-cb271d631dfc" objectId="087e34df-3957-4ed1-a442-5f02f2e51da0"/>
-  <configurationExtensionCompatibilityMode>8.3.18</configurationExtensionCompatibilityMode>
   <defaultRunMode>ManagedApplication</defaultRunMode>
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
@@ -50,7 +48,6 @@
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectAutonumerationMode>NotAutoFree</objectAutonumerationMode>
   <modalityUseMode>DontUse</modalityUseMode>
-  <compatibilityMode>8.3.18</compatibilityMode>
   <languages uuid="f1c59d1c-aafe-420b-96cd-c5f1608cf9c1">
     <name>English</name>
     <synonym>
@@ -99,28 +96,17 @@
     </synonym>
     <languageCode>ha</languageCode>
   </languages>
-  <subsystems>Subsystem.AddAttributesAndProperties</subsystems>
-  <subsystems>Subsystem.AddDataProc</subsystems>
-  <subsystems>Subsystem.Finance</subsystems>
-  <subsystems>Subsystem.Inventory</subsystems>
-  <subsystems>Subsystem.Localization</subsystems>
-  <subsystems>Subsystem.Marketing</subsystems>
-  <subsystems>Subsystem.MasterData</subsystems>
-  <subsystems>Subsystem.Mobile</subsystems>
   <subsystems>Subsystem.PurchaseAP</subsystems>
-  <subsystems>Subsystem.Reports</subsystems>
-  <subsystems>Subsystem.Saas</subsystems>
   <subsystems>Subsystem.SalesAR</subsystems>
-  <subsystems>Subsystem.Service</subsystems>
-  <subsystems>Subsystem.Settings</subsystems>
-  <subsystems>Subsystem.SpecialOffers</subsystems>
-  <subsystems>Subsystem.Treasury</subsystems>
-  <subsystems>Subsystem.UniqueID</subsystems>
   <subsystems>Subsystem.Retail</subsystems>
-  <subsystems>Subsystem.Accounting</subsystems>
-  <subsystems>Subsystem.AdminFunctions</subsystems>
-  <subsystems>Subsystem.WorkOrders</subsystems>
+  <subsystems>Subsystem.Inventory</subsystems>
+  <subsystems>Subsystem.Treasury</subsystems>
   <subsystems>Subsystem.Manufacturing</subsystems>
+  <subsystems>Subsystem.Accounting</subsystems>
+  <subsystems>Subsystem.MasterData</subsystems>
+  <subsystems>Subsystem.Reports</subsystems>
+  <subsystems>Subsystem.Settings</subsystems>
+  <subsystems>Subsystem.Technical</subsystems>
   <styles>Style.TestDataBase</styles>
   <commonPictures>CommonPicture.AccountingFlags</commonPictures>
   <commonPictures>CommonPicture.AddDataProc</commonPictures>
@@ -234,8 +220,6 @@
   <commonModules>CommonModule.BuilderAPI</commonModules>
   <commonModules>CommonModule.BuilderServer_V2</commonModules>
   <commonModules>CommonModule.CalculationServer</commonModules>
-  <commonModules>CommonModule.CatAgreementsClient</commonModules>
-  <commonModules>CommonModule.CatAgreementsClientServer</commonModules>
   <commonModules>CommonModule.CatAgreementsServer</commonModules>
   <commonModules>CommonModule.CatCashAccountsClient</commonModules>
   <commonModules>CommonModule.CatCashAccountsServer</commonModules>
@@ -447,6 +431,10 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
+  <commonModules>CommonModule.DocSalesReportFromTradeAgentClient</commonModules>
+  <commonModules>CommonModule.DocSalesReportToConsignorClient</commonModules>
+  <commonModules>CommonModule.DocSalesReportFromTradeAgentServer</commonModules>
+  <commonModules>CommonModule.DocSalesReportToConsignorServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -530,6 +518,7 @@
   <functionalOptions>FunctionalOption.UseStores</functionalOptions>
   <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
+  <functionalOptions>FunctionalOption.UseCommissionTrading</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -619,6 +608,7 @@
   <constants>Constant.UseStores</constants>
   <constants>Constant.UseUnitsAndDimensions</constants>
   <constants>Constant.UseWorkOrders</constants>
+  <constants>Constant.UseCommissionTrading</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>
@@ -787,6 +777,8 @@
   <documents>Document.WorkOrder</documents>
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
+  <documents>Document.SalesReportFromTradeAgent</documents>
+  <documents>Document.SalesReportToConsignor</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.AllDocuments</documentJournals>
@@ -848,6 +840,10 @@
   <enums>Enum.TaxType</enums>
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
+  <enums>Enum.SalesTransactionTypes</enums>
+  <enums>Enum.PurchaseTransactionTypes</enums>
+  <enums>Enum.SalesReturnTransactionTypes</enums>
+  <enums>Enum.PurchaseReturnTransactionTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

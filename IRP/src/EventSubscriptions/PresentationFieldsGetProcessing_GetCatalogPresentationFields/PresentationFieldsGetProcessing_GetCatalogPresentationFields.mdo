@@ -6,9 +6,9 @@
     <value>Presentation fields get processing get catalog presentation fields</value>
   </synonym>
   <source>
+    <types>ChartOfAccountsManager</types>
     <types>ChartOfCharacteristicTypesManager</types>
     <types>CatalogManager</types>
-    <types>ChartOfAccountsManager</types>
   </source>
   <event>PresentationFieldsGetProcessing</event>
   <handler>CommonModule.LocalizationEvents.GetCatalogPresentationFieldsPresentationFieldsGetProcessing</handler>

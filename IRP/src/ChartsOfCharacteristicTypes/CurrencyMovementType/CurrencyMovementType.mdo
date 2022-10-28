@@ -38,16 +38,12 @@
     </items>
     <items id="9acf2e0d-bf73-4948-ac4c-4923cb9bca8c">
       <name>Default_PartnerTerm</name>
-      <description></description>
-      <code></code>
       <type>
         <types>EnumRef.CurrencyType</types>
       </type>
     </items>
     <items id="1a4cb8fa-e9b6-4ccd-a1b0-17a793a111a5">
       <name>Default_Legal</name>
-      <description></description>
-      <code></code>
       <type>
         <types>EnumRef.CurrencyType</types>
       </type>

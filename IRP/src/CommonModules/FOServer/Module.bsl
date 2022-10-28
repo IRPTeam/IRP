@@ -49,6 +49,10 @@ Function IsUseWorkOrders() Export
 	Return GetFunctionalOption("UseWorkOrders");
 EndFunction
 
+Function IsUseCommissionTrading() Export
+	Return GetFunctionalOption("UseCommissionTrading");
+EndFunction
+
 #EndRegion
 
 Procedure UpdateDefaults() Export

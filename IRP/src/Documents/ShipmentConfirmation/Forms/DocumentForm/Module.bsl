@@ -68,7 +68,10 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
 
 	PartnerVisible = (Object.TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor") 
-		Or Object.TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Sales"));
+		Or Object.TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Sales")
+		Or Object.TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.ReturnToConsignor")
+		Or Object.TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent"));
+		
 	Form.Items.LegalName.Enabled = PartnerVisible And ValueIsFilled(Object.Partner);
 	Form.Items.Partner.Visible   = PartnerVisible;
 	Form.Items.LegalName.Visible = PartnerVisible;

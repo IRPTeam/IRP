@@ -33,4 +33,18 @@
       <value>Return from customer</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="82f356e4-55be-4b1b-a7c2-019851911a1d">
+    <name>ReceiptFromConsignor</name>
+    <synonym>
+      <key>en</key>
+      <value>Receipt from consignor</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="30bdec1c-11d9-477d-9ad8-2b6ecad7de2c">
+    <name>ReturnFromTradeAgent</name>
+    <synonym>
+      <key>en</key>
+      <value>Return from trade agent</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

@@ -13,5 +13,11 @@
   <content>Catalog.Units</content>
   <content>Catalog.Specifications</content>
   <content>Catalog.PartnerItems</content>
+  <content>DataProcessor.CreateSerialLotNumbers</content>
+  <content>DataProcessor.MobileDesktop</content>
+  <content>Catalog.ItemKeys</content>
+  <content>Catalog.PrintTemplates</content>
+  <content>Catalog.SerialLotNumbers</content>
+  <content>Catalog.UnitsOfMeasurement</content>
   <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

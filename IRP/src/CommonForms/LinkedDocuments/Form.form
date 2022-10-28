@@ -542,6 +542,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
+      <source>DocumentsTreeSearchString</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -580,6 +581,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
+      <source>DocumentsTreeViewStatus</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -618,6 +620,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
+      <source>DocumentsTreeSearchControl</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -770,12 +773,12 @@
     <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
@@ -845,8 +848,8 @@
       <id>118</id>
       <valueType>
         <types>DocumentRef.ShipmentConfirmation</types>
-        <types>DocumentRef.GoodsReceipt</types>
         <types>DocumentRef.WorkSheet</types>
+        <types>DocumentRef.GoodsReceipt</types>
       </valueType>
       <view>
         <common>true</common>

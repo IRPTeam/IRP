@@ -208,13 +208,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>AccountingAnalytics.AccountDebit</segments>
-        </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>AccountingAnalytics.AccountDebit</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>AccountingAnalytics.AccountDebit</segments>
       </dataPath>
       <handlers>
         <event>OnChange</event>
@@ -270,13 +265,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionDr1</segments>
-          </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionDr1</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>AccountingAnalytics.ExtDimensionDr1</segments>
         </dataPath>
         <extendedTooltip>
           <name>AccountingAnalyticsExtDimensionDr1ExtendedTooltip</name>
@@ -330,13 +320,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionDr2</segments>
-          </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionDr2</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>AccountingAnalytics.ExtDimensionDr2</segments>
         </dataPath>
         <extendedTooltip>
           <name>AccountingAnalyticsExtDimensionDr2ExtendedTooltip</name>
@@ -390,13 +375,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionDr3</segments>
-          </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionDr3</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>AccountingAnalytics.ExtDimensionDr3</segments>
         </dataPath>
         <extendedTooltip>
           <name>AccountingAnalyticsExtDimensionDr3ExtendedTooltip</name>
@@ -480,13 +460,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>AccountingAnalytics.AccountCredit</segments>
-        </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>AccountingAnalytics.AccountCredit</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>AccountingAnalytics.AccountCredit</segments>
       </dataPath>
       <handlers>
         <event>OnChange</event>
@@ -542,13 +517,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionCr1</segments>
-          </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionCr1</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>AccountingAnalytics.ExtDimensionCr1</segments>
         </dataPath>
         <extendedTooltip>
           <name>AccountingAnalyticsExtDimensionCr1ExtendedTooltip</name>
@@ -602,13 +572,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionCr2</segments>
-          </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionCr2</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>AccountingAnalytics.ExtDimensionCr2</segments>
         </dataPath>
         <extendedTooltip>
           <name>AccountingAnalyticsExtDimensionCr2ExtendedTooltip</name>
@@ -662,13 +627,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionCr3</segments>
-          </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionCr3</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>AccountingAnalytics.ExtDimensionCr3</segments>
         </dataPath>
         <extendedTooltip>
           <name>AccountingAnalyticsExtDimensionCr3ExtendedTooltip</name>
@@ -814,12 +774,12 @@
       <name>AccountingAnalyticsBeforeDeleteRow</name>
     </handlers>
     <handlers>
-      <event>OnChange</event>
-      <name>AccountingAnalyticsOnChange</name>
-    </handlers>
-    <handlers>
       <event>OnActivateRow</event>
       <name>AccountingAnalyticsOnActivateRow</name>
+    </handlers>
+    <handlers>
+      <event>OnChange</event>
+      <name>AccountingAnalyticsOnChange</name>
     </handlers>
     <searchStringAddition>
       <visible>true</visible>
@@ -854,6 +814,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
+      <source>AccountingAnalyticsSearchString</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -892,6 +853,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
+      <source>AccountingAnalyticsViewStatus</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -930,6 +892,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
+      <source>AccountingAnalyticsSearchControl</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -977,6 +940,7 @@
     <horizontalStretch>true</horizontalStretch>
     <verticalStretch>true</verticalStretch>
     <fileDragMode>AsFileRef</fileDragMode>
+    <rowFilter xsi:type="core:UndefinedValue"/>
   </items>
   <autoCommandBar>
     <name>FormCommandBar</name>
@@ -1080,12 +1044,12 @@
     <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>

@@ -30,9 +30,12 @@
     <type>
       <types>CatalogRef.Stores</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <createOnInput>DontUse</createOnInput>
     <denyIncompleteValues>true</denyIncompleteValues>
     <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
     <master>true</master>
     <mainFilter>true</mainFilter>

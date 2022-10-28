@@ -21,10 +21,14 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Catalog_PriceTypes</value>
     </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>-1</multipleValuesUseField>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
     <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
     <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
+    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <characteristics>
     <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -33,10 +37,14 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Catalog_PriceTypes</value>
     </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>-1</multipleValuesUseField>
     <characteristicValues>Catalog.PriceTypes.TabularSection.AddAttributes</characteristicValues>
     <objectField>Catalog.PriceTypes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.PriceTypes.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.PriceTypes.TabularSection.AddAttributes.Attribute.Value</valueField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
+    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
@@ -61,14 +69,12 @@
     </items>
     <items id="cb160eef-a2f2-4a6e-90ff-7fe4619a537d">
       <name>Default_Vendor</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>1</value>
       </code>
     </items>
     <items id="95c122bd-d750-4c1b-b66f-24926a4e9c3c">
       <name>Default_Customer</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>2</value>
       </code>

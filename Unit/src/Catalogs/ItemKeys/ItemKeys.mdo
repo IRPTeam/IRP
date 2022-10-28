@@ -10,11 +10,10 @@
   <name>ItemKeys</name>
   <objectBelonging>Adopted</objectBelonging>
   <extension xsi:type="mdclassExtension:CatalogExtension"/>
-  <attributes uuid="4a2309bd-ce78-43fc-9797-004b20132061" extendedConfigurationObject="159521d8-46cd-4ebc-b45f-957e87d54836">
+  <attributes uuid="4a2309bd-ce78-43fc-9797-004b20132061">
     <name>Item</name>
     <objectBelonging>Adopted</objectBelonging>
     <extension xsi:type="mdclassExtension:BasicFeatureExtension">
-      <extendedConfigurationObject>Checked</extendedConfigurationObject>
       <typeExtension>
         <types>
           <state>Checked</state>
@@ -23,11 +22,10 @@
       </typeExtension>
     </extension>
   </attributes>
-  <attributes uuid="e24992d8-4e4b-48fb-9e33-1ecff27521fe" extendedConfigurationObject="2323578b-1174-4a2e-b3d0-feff654f2e78">
+  <attributes uuid="e24992d8-4e4b-48fb-9e33-1ecff27521fe">
     <name>Unit</name>
     <objectBelonging>Adopted</objectBelonging>
     <extension xsi:type="mdclassExtension:BasicFeatureExtension">
-      <extendedConfigurationObject>Checked</extendedConfigurationObject>
       <typeExtension>
         <types>
           <state>Checked</state>
@@ -36,11 +34,10 @@
       </typeExtension>
     </extension>
   </attributes>
-  <attributes uuid="bed58c0a-067f-4c6d-a9b1-484e01981e58" extendedConfigurationObject="3a213690-c5d1-4428-9b0d-99c68a6cb6bc">
+  <attributes uuid="bed58c0a-067f-4c6d-a9b1-484e01981e58">
     <name>Specification</name>
     <objectBelonging>Adopted</objectBelonging>
     <extension xsi:type="mdclassExtension:BasicFeatureExtension">
-      <extendedConfigurationObject>Checked</extendedConfigurationObject>
       <typeExtension>
         <types>
           <state>Checked</state>
@@ -49,11 +46,10 @@
       </typeExtension>
     </extension>
   </attributes>
-  <attributes uuid="0b3eea57-92cf-4afb-a48a-9f29dd8414ea" extendedConfigurationObject="3e1b4183-7207-45cf-9d67-007b1c6783ae">
+  <attributes uuid="0b3eea57-92cf-4afb-a48a-9f29dd8414ea">
     <name>AffectPricingMD5</name>
     <objectBelonging>Adopted</objectBelonging>
     <extension xsi:type="mdclassExtension:BasicFeatureExtension">
-      <extendedConfigurationObject>Checked</extendedConfigurationObject>
       <typeExtension>
         <types>
           <state>Checked</state>
@@ -65,11 +61,10 @@
       </typeExtension>
     </extension>
   </attributes>
-  <attributes uuid="6bdf1e79-77a8-4713-9f71-1a618a8163dd" extendedConfigurationObject="b9aef949-8087-472c-b5ab-86c19c0acf32">
+  <attributes uuid="6bdf1e79-77a8-4713-9f71-1a618a8163dd">
     <name>UniqueMD5</name>
     <objectBelonging>Adopted</objectBelonging>
     <extension xsi:type="mdclassExtension:BasicFeatureExtension">
-      <extendedConfigurationObject>Checked</extendedConfigurationObject>
       <typeExtension>
         <types>
           <state>Checked</state>
@@ -81,11 +76,10 @@
       </typeExtension>
     </extension>
   </attributes>
-  <attributes uuid="0335ab5b-d050-46e0-8d7b-232875676960" extendedConfigurationObject="398f7c96-84ca-49d9-acca-423dc050244d">
+  <attributes uuid="0335ab5b-d050-46e0-8d7b-232875676960">
     <name>ItemKeyID</name>
     <objectBelonging>Adopted</objectBelonging>
     <extension xsi:type="mdclassExtension:BasicFeatureExtension">
-      <extendedConfigurationObject>Checked</extendedConfigurationObject>
       <typeExtension>
         <types>
           <state>Checked</state>
@@ -97,21 +91,18 @@
       </typeExtension>
     </extension>
   </attributes>
-  <tabularSections uuid="e308f718-cb1d-42a1-9be7-d3fe7b6113f7" extendedConfigurationObject="431757fb-84bd-47b6-b51c-fc00c761fb69">
+  <tabularSections uuid="e308f718-cb1d-42a1-9be7-d3fe7b6113f7">
     <producedTypes>
       <objectType typeId="88f7cc38-9756-4e01-b4e8-fbbfaca3c9f4" valueTypeId="ffc70e0d-9647-4df7-b693-932d7c520349"/>
       <rowType typeId="db0b005e-ee0f-4449-b4fb-1c0e7842194c" valueTypeId="b73c202b-7961-4ef0-8ddd-7dd3ebf59a83"/>
     </producedTypes>
     <name>SpecificationAffectPricingMD5</name>
     <objectBelonging>Adopted</objectBelonging>
-    <extension xsi:type="mdclassExtension:MdObjectExtension">
-      <extendedConfigurationObject>Checked</extendedConfigurationObject>
-    </extension>
-    <attributes uuid="99bff6ce-1ae7-4dde-b697-3907a61a7096" extendedConfigurationObject="e2c0802b-2619-481d-a8df-32546e9948af">
+    <extension xsi:type="mdclassExtension:MdObjectExtension"/>
+    <attributes uuid="99bff6ce-1ae7-4dde-b697-3907a61a7096">
       <name>AffectPricingMD5</name>
       <objectBelonging>Adopted</objectBelonging>
       <extension xsi:type="mdclassExtension:BasicFeatureExtension">
-        <extendedConfigurationObject>Checked</extendedConfigurationObject>
         <typeExtension>
           <types>
             <state>Checked</state>
@@ -124,19 +115,17 @@
       </extension>
     </attributes>
   </tabularSections>
-  <forms uuid="3fc2847e-aa4b-4477-acfb-df076db489fd" extendedConfigurationObject="06ad9dde-fa31-4797-aeaf-ed2360c318c0">
+  <forms uuid="3fc2847e-aa4b-4477-acfb-df076db489fd">
     <name>ItemForm</name>
     <objectBelonging>Adopted</objectBelonging>
     <extension xsi:type="mdclassExtension:BasicFormExtension">
-      <extendedConfigurationObject>Checked</extendedConfigurationObject>
       <form>Extended</form>
     </extension>
   </forms>
-  <forms uuid="b2ef4412-d1a7-4402-9416-7b87531d9b62" extendedConfigurationObject="2a048b3e-6f15-42c0-a7a1-98d976a19e04">
+  <forms uuid="b2ef4412-d1a7-4402-9416-7b87531d9b62">
     <name>ListForm</name>
     <objectBelonging>Adopted</objectBelonging>
     <extension xsi:type="mdclassExtension:BasicFormExtension">
-      <extendedConfigurationObject>Checked</extendedConfigurationObject>
       <form>Extended</form>
     </extension>
   </forms>

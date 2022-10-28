@@ -488,12 +488,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartChoice</event>
-              <name>CompanyStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>CompanyEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>CompanyStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -1486,16 +1486,16 @@
           <name>ProductionsSelection</name>
         </handlers>
         <handlers>
-          <event>AfterDeleteRow</event>
-          <name>ProductionsAfterDeleteRow</name>
-        </handlers>
-        <handlers>
           <event>BeforeAddRow</event>
           <name>ProductionsBeforeAddRow</name>
         </handlers>
         <handlers>
           <event>BeforeDeleteRow</event>
           <name>ProductionsBeforeDeleteRow</name>
+        </handlers>
+        <handlers>
+          <event>AfterDeleteRow</event>
+          <name>ProductionsAfterDeleteRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -1530,6 +1530,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>ProductionsSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1568,6 +1569,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>ProductionsViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1606,6 +1608,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>ProductionsSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1956,13 +1959,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.LineNumber</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.НомерСтроки</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BillOfMaterialsList.LineNumber</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsLineNumberExtendedTooltip</name>
@@ -2011,13 +2009,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.Key</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.Key</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BillOfMaterialsList.Key</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsKeyExtendedTooltip</name>
@@ -2216,13 +2209,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.BusinessUnit</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.BusinessUnit</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BillOfMaterialsList.BusinessUnit</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsBusinessUnitExtendedTooltip</name>
@@ -2271,13 +2259,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.ItemKey</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.ItemKey</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BillOfMaterialsList.ItemKey</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsItemKeyExtendedTooltip</name>
@@ -2326,13 +2309,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.IsProduct</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.IsProduct</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BillOfMaterialsList.IsProduct</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsIsProductExtendedTooltip</name>
@@ -2374,13 +2352,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.IsSemiproduct</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.IsSemiproduct</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BillOfMaterialsList.IsSemiproduct</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsIsSemiproductExtendedTooltip</name>
@@ -2422,13 +2395,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.IsMaterial</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.IsMaterial</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BillOfMaterialsList.IsMaterial</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsIsMaterialExtendedTooltip</name>
@@ -2470,13 +2438,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.IsService</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.IsService</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BillOfMaterialsList.IsService</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsIsServiceExtendedTooltip</name>
@@ -2518,13 +2481,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.InputID</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.InputID</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BillOfMaterialsList.InputID</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsInputIDExtendedTooltip</name>
@@ -2569,13 +2527,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.OutputID</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.OutputID</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BillOfMaterialsList.OutputID</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsOutputIDExtendedTooltip</name>
@@ -2620,13 +2573,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.UniqueID</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.UniqueID</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BillOfMaterialsList.UniqueID</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsUniqueIDExtendedTooltip</name>
@@ -2675,13 +2623,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.PlanningPeriod</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.PlanningPeriod</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BillOfMaterialsList.PlanningPeriod</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsPlanningPeriodExtendedTooltip</name>
@@ -2730,13 +2673,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.BillOfMaterials</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.BillOfMaterials</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BillOfMaterialsList.BillOfMaterials</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsBillOfMaterialsExtendedTooltip</name>
@@ -2785,13 +2723,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.Unit</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.Unit</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BillOfMaterialsList.Unit</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsUnitExtendedTooltip</name>
@@ -2840,13 +2773,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.Quantity</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.Quantity</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BillOfMaterialsList.Quantity</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsQuantityExtendedTooltip</name>
@@ -2895,13 +2823,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.BasisUnit</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.BasisUnit</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BillOfMaterialsList.BasisUnit</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsBasisUnitExtendedTooltip</name>
@@ -2950,13 +2873,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.BasisQuantity</segments>
-            </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.BillOfMaterialsList.BasisQuantity</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.BillOfMaterialsList.BasisQuantity</segments>
           </dataPath>
           <extendedTooltip>
             <name>BillOfMaterialsBasisQuantityExtendedTooltip</name>
@@ -3041,6 +2959,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
+          <source>BillOfMaterialsSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3079,6 +2998,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
+          <source>BillOfMaterialsViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3117,6 +3037,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
+          <source>BillOfMaterialsSearchControl</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3164,6 +3085,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <enabled>true</enabled>
       <userVisible>
@@ -3267,16 +3189,16 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
+  </handlers>
+  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
   </handlers>
   <handlers>
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
-    <event>NotificationProcessing</event>
-    <name>NotificationProcessing</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
@@ -3350,9 +3272,9 @@
     </title>
     <id>4</id>
     <valueType>
+      <types>DocumentRef.InternalSupplyRequest</types>
       <types>DocumentRef.Production</types>
       <types>DocumentRef.ProductionPlanningCorrection</types>
-      <types>DocumentRef.InternalSupplyRequest</types>
     </valueType>
     <view>
       <common>true</common>
@@ -3426,6 +3348,10 @@
   </commandInterface>
   <extInfo xsi:type="form:DocumentFormExtInfo">
     <handlers>
+      <event>AfterWrite</event>
+      <name>AfterWrite</name>
+    </handlers>
+    <handlers>
       <event>AfterWriteAtServer</event>
       <name>AfterWriteAtServer</name>
     </handlers>
@@ -3440,10 +3366,6 @@
     <handlers>
       <event>OnWriteAtServer</event>
       <name>OnWriteAtServer</name>
-    </handlers>
-    <handlers>
-      <event>AfterWrite</event>
-      <name>AfterWrite</name>
     </handlers>
     <repostOnWrite>true</repostOnWrite>
   </extInfo>

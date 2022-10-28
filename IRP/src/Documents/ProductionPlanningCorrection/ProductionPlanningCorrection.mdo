@@ -22,10 +22,14 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_ProductionPlanningCorrection</value>
     </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>-1</multipleValuesUseField>
     <characteristicValues>Document.ProductionPlanningCorrection.TabularSection.AddAttributes</characteristicValues>
     <objectField>Document.ProductionPlanningCorrection.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.ProductionPlanningCorrection.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.ProductionPlanningCorrection.TabularSection.AddAttributes.Attribute.Value</valueField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
+    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <characteristics>
     <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
@@ -34,10 +38,14 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_ProductionPlanningCorrection</value>
     </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>-1</multipleValuesUseField>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
     <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
     <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
+    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
   <fullTextSearch>Use</fullTextSearch>
@@ -52,8 +60,8 @@
   <registerRecords>InformationRegister.T7010S_BillOfMaterials</registerRecords>
   <registerRecords>AccumulationRegister.R7030T_ProductionPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R7020T_MaterialPlanning</registerRecords>
-  <registerRecords>AccumulationRegister.R7010T_DetailingSupplies</registerRecords>
   <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R7010T_DetailingSupplies</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="521b5a02-cf80-464a-9e57-ba02d3176069">

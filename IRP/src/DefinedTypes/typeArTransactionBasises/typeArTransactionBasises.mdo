@@ -9,6 +9,7 @@
     <value>Type AR transaction basises</value>
   </synonym>
   <type>
+    <types>DocumentRef.SalesReportFromTradeAgent</types>
     <types>DocumentRef.CashTransferOrder</types>
     <types>DocumentRef.DebitNote</types>
     <types>DocumentRef.CreditNote</types>

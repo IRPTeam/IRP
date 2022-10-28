@@ -22,10 +22,14 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_ProductionPlanningClosing</value>
     </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>-1</multipleValuesUseField>
     <characteristicValues>Document.ProductionPlanningClosing.TabularSection.AddAttributes</characteristicValues>
     <objectField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.Attribute.Value</valueField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
+    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <characteristics>
     <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
@@ -34,10 +38,14 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_ProductionPlanningClosing</value>
     </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>-1</multipleValuesUseField>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
     <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
     <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
+    <multipleValuesOrderField>-1</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
   <fullTextSearch>Use</fullTextSearch>
@@ -49,8 +57,8 @@
   <defaultListForm>Document.ProductionPlanningClosing.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.ProductionPlanningClosing.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.R7020T_MaterialPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R7030T_ProductionPlanning</registerRecords>
+  <registerRecords>AccumulationRegister.R7020T_MaterialPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>

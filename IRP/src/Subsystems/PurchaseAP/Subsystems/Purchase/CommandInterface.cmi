@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
+  <commandsVisibility>
+    <visibilityFragments>
+      <command>Document.InternalSupplyRequest.StandardCommand.OpenList</command>
+      <visible>
+        <common>true</common>
+      </visible>
+    </visibilityFragments>
+    <visibilityFragments>
+      <command>Document.Labeling.StandardCommand.OpenList</command>
+      <visible>
+        <common>true</common>
+      </visible>
+    </visibilityFragments>
+  </commandsVisibility>
+  <commandsPlacement>
+    <placementFragments>
+      <group>NavigationPanelSeeAlso</group>
+      <commands>Document.InternalSupplyRequest.StandardCommand.OpenList</commands>
+      <commands>Document.Labeling.StandardCommand.OpenList</commands>
+    </placementFragments>
+  </commandsPlacement>
   <commandsOrder>
     <orderFragments>
       <group>NavigationPanelOrdinary</group>
       <commands>Document.PurchaseOrder.StandardCommand.OpenList</commands>
+      <commands>Document.PurchaseOrderClosing.StandardCommand.OpenList</commands>
       <commands>Document.PurchaseInvoice.StandardCommand.OpenList</commands>
       <commands>Document.GoodsReceipt.StandardCommand.OpenList</commands>
+    </orderFragments>
+    <orderFragments>
+      <group>NavigationPanelSeeAlso</group>
       <commands>Document.InternalSupplyRequest.StandardCommand.OpenList</commands>
       <commands>Document.Labeling.StandardCommand.OpenList</commands>
     </orderFragments>

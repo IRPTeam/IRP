@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="87b6f810-7b11-4861-bb96-f1d8686d75e0" extendedConfigurationObject="a53d34a2-e6d9-4d3f-ab9e-ddfd3ff7af05">
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="87b6f810-7b11-4861-bb96-f1d8686d75e0">
   <producedTypes>
     <objectType typeId="28f90728-6adf-4012-9dc3-123985324836" valueTypeId="70231077-eed0-4b3a-b7d9-0579f1e79fe9"/>
     <refType typeId="06b06d63-8473-4ef6-a659-d5be63055890" valueTypeId="0d32d285-0679-40ec-a17d-f494670aecde"/>
@@ -9,7 +9,5 @@
   </producedTypes>
   <name>BusinessUnits</name>
   <objectBelonging>Adopted</objectBelonging>
-  <extension xsi:type="mdclassExtension:CatalogExtension">
-    <extendedConfigurationObject>Checked</extendedConfigurationObject>
-  </extension>
+  <extension xsi:type="mdclassExtension:CatalogExtension"/>
 </mdclass:Catalog>

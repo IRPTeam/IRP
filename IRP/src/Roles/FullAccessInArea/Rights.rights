@@ -266,7 +266,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Treasury.Subsystem.Taxes</name>
+		<name>Subsystem.Settings.Subsystem.Taxes</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -691,7 +691,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Marketing</name>
+		<name>Subsystem.Technical.Subsystem.Marketing</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1044,6 +1044,17 @@
 		</right>
 		<right>
 			<name>SwitchToDataHistoryVersion</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Report.D4012_StockReservation</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -1739,13 +1750,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Settings.Subsystem.ItemsSettings</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>CommonForm.PictureGalleryForm</name>
 		<right>
 			<name>View</name>
@@ -2356,6 +2360,65 @@
 		<name>CommonForm.LinkUnlinkDocumentRows</name>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.ExpenseRevenueTypeSettings</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>TotalsControl</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistoryOfMissingData</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>UpdateDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>UpdateDataHistoryOfMissingData</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>UpdateDataHistorySettings</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>UpdateDataHistoryVersionComment</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>EditDataHistoryVersionComment</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>SwitchToDataHistoryVersion</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -3197,7 +3260,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Mobile</name>
+		<name>Subsystem.Technical.Subsystem.Mobile</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -3575,7 +3638,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.AddAttributesAndProperties</name>
+		<name>Subsystem.Settings.Subsystem.AddAttributesAndProperties</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -6230,7 +6293,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.UniqueID</name>
+		<name>Subsystem.Technical.Subsystem.UniqueID</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -6336,13 +6399,6 @@
 		</right>
 		<right>
 			<name>SwitchToDataHistoryVersion</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Settings.Subsystem.AttributeAndProperty</name>
-		<right>
-			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -6718,13 +6774,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.SalesAR.Subsystem.SpecialOffers</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>InformationRegister.BarcodeScanInfoCheck</name>
 		<right>
 			<name>Read</name>
@@ -6780,13 +6829,6 @@
 		</right>
 		<right>
 			<name>SwitchToDataHistoryVersion</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Service</name>
-		<right>
-			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -8565,6 +8607,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Report.D4011_FreeStocks</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.LockDataModificationReasons</name>
 		<right>
 			<name>Read</name>
@@ -8663,6 +8716,17 @@
 		</right>
 		<right>
 			<name>TotalsControl</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Report.D4010_ActualStocks</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -9463,6 +9527,17 @@
 		</right>
 		<right>
 			<name>TotalsControl</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Report.D1001_Purchases</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -10457,13 +10532,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Service.Subsystem.Documents</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>ExchangePlan.ED_ExchangePlan</name>
 		<right>
 			<name>Read</name>
@@ -10543,7 +10611,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.SpecialOffers</name>
+		<name>Subsystem.SalesAR.Subsystem.SpecialOffers</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -10957,7 +11025,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Localization</name>
+		<name>Subsystem.Technical.Subsystem.Localization</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -10982,7 +11050,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.AddDataProc</name>
+		<name>Subsystem.Settings.Subsystem.AddDataProc</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -11064,13 +11132,6 @@
 		</right>
 		<right>
 			<name>SwitchToDataHistoryVersion</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Finance</name>
-		<right>
-			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -11659,7 +11720,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Saas</name>
+		<name>Subsystem.Settings.Subsystem.Saas</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -12879,13 +12940,6 @@
 		</right>
 		<right>
 			<name>Edit</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Service.Subsystem.Catalogs</name>
-		<right>
-			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -14549,109 +14603,6 @@
 		</right>
 		<right>
 			<name>SwitchToDataHistoryVersion</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Report.D1001_Purchases</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Report.D4010_ActualStocks</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Report.D4011_FreeStocks</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Report.D4012_StockReservation</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.ExpenseRevenueTypeSettings</name>
-		<right>
-			<name>UpdateDataHistoryVersionComment</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>ReadDataHistoryOfMissingData</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>UpdateDataHistoryOfMissingData</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>ReadDataHistory</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>EditDataHistoryVersionComment</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>UpdateDataHistory</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>SwitchToDataHistoryVersion</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>ViewDataHistory</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>UpdateDataHistorySettings</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
 			<value>true</value>
 		</right>
 	</object>

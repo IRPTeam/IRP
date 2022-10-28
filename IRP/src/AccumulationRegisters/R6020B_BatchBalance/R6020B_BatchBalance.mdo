@@ -143,8 +143,8 @@
       <value>Batch</value>
     </synonym>
     <type>
-      <types>CatalogRef.Batches</types>
       <types>EnumRef.BatchType</types>
+      <types>CatalogRef.Batches</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

@@ -51,7 +51,12 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
+	If FillingData = Undefined Then
+		FillingData = New Structure();
+		FillingData.Insert("TransactionType", Enums.SalesTransactionTypes.Sales);
+		FillPropertyValues(ThisObject, FillingData);
+		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+	ElsIf TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
 		If FillingData.BasedOn = "SalesOrder" Then 
 			ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
 			Filling_BasedOn(FillingData);

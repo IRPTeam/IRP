@@ -72,13 +72,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>ProductionTree.ItemPicture</segments>
-          </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>ProductionTree.ItemPicture</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>ProductionTree.ItemPicture</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
@@ -130,13 +125,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>ProductionTree.Item</segments>
-          </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>ProductionTree.Item</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>ProductionTree.Item</segments>
         </dataPath>
         <extendedTooltip>
           <name>ProductionTreeItemExtendedTooltip</name>
@@ -186,13 +176,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>ProductionTree.ItemKey</segments>
-          </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>ProductionTree.ItemKey</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>ProductionTree.ItemKey</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
@@ -393,13 +378,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.Unit</segments>
-        </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.Unit</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>ProductionTree.Unit</segments>
       </dataPath>
       <extendedTooltip>
         <name>ProductionTreeUnitExtendedTooltip</name>
@@ -449,13 +429,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.Quantity</segments>
-        </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.Quantity</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>ProductionTree.Quantity</segments>
       </dataPath>
       <extendedTooltip>
         <name>ProductionTreeQuantityExtendedTooltip</name>
@@ -588,13 +563,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.MaterialStore</segments>
-        </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.MaterialStore</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>ProductionTree.MaterialStore</segments>
       </dataPath>
       <extendedTooltip>
         <name>ProductionTreeMaterialStoreExtendedTooltip</name>
@@ -649,13 +619,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.ReleaseStore</segments>
-        </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.ReleaseStore</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>ProductionTree.ReleaseStore</segments>
       </dataPath>
       <extendedTooltip>
         <name>ProductionTreeReleaseStoreExtendedTooltip</name>
@@ -710,13 +675,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.InputID</segments>
-        </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.InputID</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>ProductionTree.InputID</segments>
       </dataPath>
       <extendedTooltip>
         <name>ProductionTreeInputIDExtendedTooltip</name>
@@ -760,13 +720,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.OutputID</segments>
-        </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.OutputID</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>ProductionTree.OutputID</segments>
       </dataPath>
       <extendedTooltip>
         <name>ProductionTreeOutputIDExtendedTooltip</name>
@@ -810,13 +765,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.UniqueID</segments>
-        </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.UniqueID</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>ProductionTree.UniqueID</segments>
       </dataPath>
       <extendedTooltip>
         <name>ProductionTreeUniqueIDExtendedTooltip</name>
@@ -864,13 +814,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.IsProduct</segments>
-        </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.IsProduct</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>ProductionTree.IsProduct</segments>
       </dataPath>
       <extendedTooltip>
         <name>ProductionTreeIsProductExtendedTooltip</name>
@@ -911,13 +856,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.IsSemiproduct</segments>
-        </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.IsSemiproduct</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>ProductionTree.IsSemiproduct</segments>
       </dataPath>
       <extendedTooltip>
         <name>ProductionTreeIsSemiproductExtendedTooltip</name>
@@ -958,13 +898,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.IsMaterial</segments>
-        </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.IsMaterial</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>ProductionTree.IsMaterial</segments>
       </dataPath>
       <extendedTooltip>
         <name>ProductionTreeIsMaterialExtendedTooltip</name>
@@ -1005,13 +940,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.IsService</segments>
-        </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>ProductionTree.IsService</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>ProductionTree.IsService</segments>
       </dataPath>
       <extendedTooltip>
         <name>ProductionTreeIsServiceExtendedTooltip</name>
@@ -1096,6 +1026,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
+      <source>ProductionTreeSearchString</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -1134,6 +1065,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
+      <source>ProductionTreeViewStatus</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -1172,6 +1104,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
+      <source>ProductionTreeSearchControl</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -1325,12 +1258,12 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>OnOpen</event>
     <name>OnOpen</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>

@@ -12,18 +12,13 @@
   </picture>
   <content>Catalog.Stores</content>
   <content>Document.ShipmentConfirmation</content>
-  <content>Document.GoodsReceipt</content>
-  <content>Document.PhysicalCountByLocation</content>
-  <content>Document.StockAdjustmentAsWriteOff</content>
-  <content>Document.StockAdjustmentAsSurplus</content>
-  <content>Document.PhysicalInventory</content>
   <content>DataProcessor.MobileInvent</content>
-  <content>Document.CalculationMovementCosts</content>
-  <content>Document.AdditionalCostAllocation</content>
   <content>Report.BatchBalance</content>
   <content>Report.BatchBalanceSimple</content>
-  <content>Document.AdditionalRevenueAllocation</content>
-  <subsystems>ComposedItems</subsystems>
+  <content>Document.GoodsReceipt</content>
   <subsystems>Items</subsystems>
   <subsystems>Transfers</subsystems>
+  <subsystems>CostCalculation</subsystems>
+  <subsystems>PhysicalCount</subsystems>
+  <subsystems>ComposedItems</subsystems>
 </mdclass:Subsystem>

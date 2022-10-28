@@ -613,13 +613,19 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 	Form.TaxesCache = CommonFunctionsServer.SerializeXMLUseXDTO(New Structure("ArrayOfTaxInfo", ArrayOfTaxInfo));
 EndProcedure
 
-Function CreateFormControls_ItemList(Object, Form, AddInfo = Undefined) Export
+Function CreateFormControls_ItemList(Object, Form, ColumnOffset = Undefined) Export
 	TaxesParameters = GetCreateFormControlsParameters();
 	TaxesParameters.Date                  = Object.Date;
 	TaxesParameters.Company               = Object.Company;
 	TaxesParameters.PathToTable           = "Object.ItemList";
 	TaxesParameters.ItemParent            = Form.Items.ItemList;
-	TaxesParameters.ColumnOffset          = Form.Items.ItemListOffersAmount;
+	
+	If ColumnOffset = Undefined Then
+		TaxesParameters.ColumnOffset = Form.Items.ItemListOffersAmount;
+	Else
+		TaxesParameters.ColumnOffset = ColumnOffset;
+	EndIf;
+	
 	TaxesParameters.ItemListName          = "ItemList";
 	TaxesParameters.TaxListName           = "TaxList";
 	TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";

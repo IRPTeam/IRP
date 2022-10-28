@@ -125,6 +125,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <indexing>Index</indexing>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="547743bc-a015-44e4-af9c-ef1efcaac4db">
     <name>BusinessUnit</name>

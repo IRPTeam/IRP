@@ -29,8 +29,8 @@
   <defaultListForm>Document.AdditionalRevenueAllocation.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.AdditionalRevenueAllocation.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.R6080T_OtherPeriodsRevenues</registerRecords>
   <registerRecords>InformationRegister.T6070S_BatchRevenueAllocationInfo</registerRecords>
+  <registerRecords>AccumulationRegister.R6080T_OtherPeriodsRevenues</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="e137a321-c206-4579-bcf6-9c87e1f0a86e">

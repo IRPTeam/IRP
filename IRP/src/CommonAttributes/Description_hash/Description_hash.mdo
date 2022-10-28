@@ -73,6 +73,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.FillingTemplates</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.BankTerms</metadata>
     <use>Use</use>
   </content>
@@ -85,7 +89,15 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.IDInfoSets</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.LedgerTypes</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -107,6 +119,10 @@
   <content>
     <metadata>Catalog.IntegrationSettings</metadata>
     <use>DontUse</use>
+  </content>
+  <content>
+    <metadata>Catalog.BillOfMaterials</metadata>
+    <use>Use</use>
   </content>
   <content>
     <metadata>Catalog.Taxes</metadata>
@@ -153,6 +169,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.AccountingOperations</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.LockDataModificationReasons</metadata>
     <use>Use</use>
   </content>
@@ -177,7 +197,15 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.LedgerTypeVariants</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.PartnerItems</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.IDInfoAddresses</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -201,6 +229,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>ChartOfAccounts.Basic</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.ObjectStatuses</metadata>
     <use>Use</use>
   </content>
@@ -214,38 +246,6 @@
   </content>
   <content>
     <metadata>ChartOfCharacteristicTypes.IDInfoTypes</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.LedgerTypes</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>ChartOfAccounts.Basic</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.AccountingOperations</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.IDInfoAddresses</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.LedgerTypeVariants</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.BillOfMaterials</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.FillingTemplates</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

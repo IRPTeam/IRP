@@ -71,6 +71,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.NumberDaysBeforeShipment.Visible = IsRegular;
 	Form.Items.Store.Visible                    = IsRegular;
 	
+	Form.Items.GroupCommisionTrading.Visible = IsTradeAgent;
+	
 	If IsConsignor Or IsTradeAgent Then
 		Form.Items.GroupCreditlimitAndAging.Visible = False;
 	Else
@@ -181,6 +183,11 @@ Procedure TypeOnChange(Item)
 		Object.UseCreditLimit = False;
 		Object.CreditLimitAmount = 0;
 	EndIf;
+	
+	If Object.Type <> PredefinedValue("Enum.AgreementTypes.TradeAgent") Then
+		Object.TradeAgentStore = Undefined;
+	EndIf;
+	
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 

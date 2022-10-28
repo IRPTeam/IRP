@@ -85,4 +85,11 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			CheckedAttributes.Delete(Index);
 		EndIf;
 	EndIf;
+	
+	If ThisObject.Type <> Enums.AgreementTypes.TradeAgent Then
+		Index = CheckedAttributes.Find("TradeAgentStore");
+		If Index <> Undefined Then
+			CheckedAttributes.Delete(Index);
+		EndIf;
+	EndIf;
 EndProcedure

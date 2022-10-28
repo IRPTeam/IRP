@@ -259,7 +259,8 @@ Function ItemList()
 		|	SalesInvoiceItemList.PriceType,
 		|	SalesInvoiceItemList.SalesPerson,
 		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
-		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS ShipmentToTradeAgent
+		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
+		|	SalesInvoiceItemList.Ref.Agreement.TradeAgentStore AS TradeAgentStore
 		|INTO ItemList
 		|FROM
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -348,7 +349,7 @@ Function Taxes()
 		|	SalesInvoiceItemList.NetAmount AS TaxableAmount,
 		|	SalesInvoiceItemList.Ref.Branch AS Branch,
 		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
-		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS ShipmentToTradeAgent
+		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent
 		|INTO Taxes
 		|FROM
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -717,13 +718,34 @@ Function R4050B_StockInventory()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.IsService
-		|	AND ItemList.IsSales
 		|
 		|GROUP BY
 		|	VALUE(AccumulationRecordType.Expense),
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Store,
+		|	ItemList.ItemKey
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.TradeAgentStore,
+		|	ItemList.ItemKey,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.IsShipmentToTradeAgent
+		|
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.TradeAgentStore,
 		|	ItemList.ItemKey";
 EndFunction
 
@@ -1022,14 +1044,35 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList AS ItemList
 		|WHERE
 		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
-		|	AND ItemList.IsSales
 		|
 		|GROUP BY
 		|	ItemList.ItemKey,
 		|	ItemList.Store,
 		|	ItemList.Company,
 		|	ItemList.Period,
-		|	VALUE(Enum.BatchDirection.Expense)";
+		|	VALUE(Enum.BatchDirection.Expense)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	ItemList.ItemKey,
+		|	ItemList.TradeAgentStore,
+		|	ItemList.Company,
+		|	SUM(ItemList.Quantity),
+		|	ItemList.Period,
+		|	VALUE(Enum.BatchDirection.Receipt)
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+		|	AND ItemList.IsShipmentToTradeAgent
+		|
+		|GROUP BY
+		|	ItemList.ItemKey,
+		|	ItemList.Store,
+		|	ItemList.Company,
+		|	ItemList.Period,
+		|	VALUE(Enum.BatchDirection.Receipt)";
 EndFunction
 
 #EndRegion

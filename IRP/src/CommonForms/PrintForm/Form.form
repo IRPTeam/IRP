@@ -1769,10 +1769,6 @@
           <horizontalAlign>Left</horizontalAlign>
         </autoCommandBar>
         <handlers>
-          <event>OnEditEnd</event>
-          <name>PrintFormConfigOnEditEnd</name>
-        </handlers>
-        <handlers>
           <event>Selection</event>
           <name>PrintFormConfigSelection</name>
         </handlers>

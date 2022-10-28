@@ -2478,14 +2478,6 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
-            <handlers>
-              <event>StartChoice</event>
-              <name>ResultMatchesRegExpStartChoice</name>
-            </handlers>
-            <handlers>
-              <event>TextEditEnd</event>
-              <name>ResultMatchesRegExpTextEditEnd</name>
-            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
@@ -2504,10 +2496,6 @@
           <horizontalAlign>Left</horizontalAlign>
           <autoFill>true</autoFill>
         </autoCommandBar>
-        <handlers>
-          <event>BeforeAddRow</event>
-          <name>ResultMatchesBeforeAddRow</name>
-        </handlers>
         <handlers>
           <event>OnStartEdit</event>
           <name>ResultMatchesOnStartEdit</name>

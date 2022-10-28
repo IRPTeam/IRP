@@ -686,10 +686,6 @@
           <event>BeforeRowChange</event>
           <name>ItemListBeforeRowChange</name>
         </handlers>
-        <handlers>
-          <event>OnStartEdit</event>
-          <name>ItemListOnStartEdit</name>
-        </handlers>
         <searchStringAddition>
           <visible>true</visible>
           <enabled>true</enabled>

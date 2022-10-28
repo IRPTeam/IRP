@@ -67,6 +67,8 @@ Scenario: 950000 preparation (role Full access only read)
 	When Create catalog CashStatementStatuses objects (Test)
 	When Create catalog Hardware objects  (Test)
 	When Create catalog Workstations objects  (Test)
+	When create items for work order
+	When Create catalog BillOfMaterials objects
 	When Create information register TaxSettings records
 	When Create information register Taxes records (VAT)
 	When Create information register TaxSettings (Sales tax)
@@ -108,6 +110,12 @@ Scenario: 950000 preparation (role Full access only read)
 	When Create document InventoryTransfer objects
 	When Create document InventoryTransferOrder objects
 	When Create document OpeningEntry objects
+	When Create document Production objects (Test)
+	When Create document ProductionPlanning objects (Test)
+	When Create document ProductionPlanningClosing objects (Test)
+	When Create document ProductionPlanningCorrection objects (Test)
+	When Create document WorkOrder objects (Test)
+	When Create document WorkSheet objects (Test)
 	When Create document OutgoingPaymentOrder objects
 	When Create document Bundling objects
 	When Create document PhysicalCountByLocation objects
@@ -227,7 +235,7 @@ Scenario: 950004 check role Full access only read (ExpenseAndRevenueTypes)
 Scenario: 950005 check role Full access only read (Tax rates)
 	And I close all client application windows
 	* Master data
-		And In the command interface I select "Master data" "Tax rates"		
+		And In the command interface I select "Settings" "Tax rates"		
 		And I go to line in "List" table
 			| 'Description' |
 			| '18%'     |
@@ -235,15 +243,6 @@ Scenario: 950005 check role Full access only read (Tax rates)
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
 		And I close all client application windows	
-	* Treasury	
-		And In the command interface I select "Treasury" "Tax rates"		
-		And I go to line in "List" table
-			| 'Description' |
-			| '18%'     |
-		And I select current line in "List" table
-		If the warning is displayed then 
-			Then I raise "Failed to open" exception
-		And I close all client application windows
 
 
 Scenario: 950006 check role Full access only read (Company taxes)
@@ -673,7 +672,7 @@ Scenario: 950032 check role Full access only read (Object statuses)
 Scenario: 950034 check role Full access only read (Tax rate settings)
 	And I close all client application windows
 	* Master data
-		And In the command interface I select "Treasury" "Tax rate settings"		
+		And In the command interface I select "Settings" "Tax rate settings"		
 		And I go to line in "List" table
 			| 'Tax' |
 			| 'VAT'     |
@@ -1019,7 +1018,7 @@ Scenario: 950076 check role Full access only read (Retail customers)
 
 Scenario: 950077 check role Full access only read (Cash statement statuses)
 		And I close all client application windows
-		And In the command interface I select "Retail" "Cash statement statuses"		
+		And In the command interface I select "Settings" "Cash statement statuses"		
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Test'     |
@@ -1090,7 +1089,68 @@ Scenario: 950035 check role Full access only read (Cheque bonds)
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
 		And I close all client application windows
+
+Scenario: 950083 check role Full access only read (Work order)
+		And I close all client application windows
+		And In the command interface I select "Sales - A/R" "Work order"	
+		And I select current line in "List" table
+		If the warning is displayed then 
+			Then I raise "Failed to open" exception
+		And I close all client application windows
+
+Scenario: 950084 check role Full access only read (Work sheet)
+		And I close all client application windows
+		And In the command interface I select "Sales - A/R" "Work sheet"	
+		And I select current line in "List" table
+		If the warning is displayed then 
+			Then I raise "Failed to open" exception
+		And I close all client application windows
 		
+
+Scenario: 950086 check role Full access only read (Production)
+		And I close all client application windows
+		And In the command interface I select "Manufacturing" "Production"	
+		And I select current line in "List" table
+		If the warning is displayed then 
+			Then I raise "Failed to open" exception
+		And I close all client application windows
+
+Scenario: 950087 check role Full access only read (Production planning)
+		And I close all client application windows
+		And In the command interface I select "Manufacturing" "Production planning"	
+		And I select current line in "List" table
+		If the warning is displayed then 
+			Then I raise "Failed to open" exception
+		And I close all client application windows
+
+Scenario: 950088 check role Full access only read (Production planning correction)
+		And I close all client application windows
+		And In the command interface I select "Manufacturing" "Production planning correction"	
+		And I select current line in "List" table
+		If the warning is displayed then 
+			Then I raise "Failed to open" exception
+		And I close all client application windows
+
+
+Scenario: 950091 check role Full access only read (Bill of materials)
+		And I close all client application windows
+		And In the command interface I select "Manufacturing" "Bill of materials"		
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Furniture installation'     |
+		And I select current line in "List" table
+		If the warning is displayed then 
+			Then I raise "Failed to open" exception
+		And I close all client application windows
+
+Scenario: 950089 check role Full access only read (Production planning closing)
+		And I close all client application windows
+		And In the command interface I select "Manufacturing" "Production planning closing"	
+		And I select current line in "List" table
+		If the warning is displayed then 
+			Then I raise "Failed to open" exception
+		And I close all client application windows
+
 Scenario: _999999 close TestClient session
 		And I close TestClient session
 		Then I connect launched Test client "Этот клиент"

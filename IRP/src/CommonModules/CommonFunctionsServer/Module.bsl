@@ -377,14 +377,19 @@ EndFunction
 // Parameters:
 //  Object - Arbitrary - Object
 //  ReturnAsGUID - Boolean
+//  UseXML - Boolean - Get string from XML
 // 
 // Returns:
 //  String - Get MD5
-Function GetMD5(Object, ReturnAsGUID = True) Export
+Function GetMD5(Object, ReturnAsGUID = True, UseXML = False) Export
 	If TypeOf(Object) = Type("String") Then
 		DataToString = Object;
 	Else
-		DataToString = SerializeXML(Object);
+		If UseXML Then
+			DataToString = SerializeXML(Object);
+		Else
+			DataToString = ValueToStringInternal(Object);
+		EndIf;
 	EndIf;
 
 	DataHashing = New DataHashing(HashFunction.MD5);

@@ -11,11 +11,9 @@ EndFunction
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure();
 	Parameters.IsReposting = False;
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Tables.Insert("VendorsTransactions", PostingServer.GetQueryTableByName("VendorsTransactions", Parameters));
-#EndRegion
 
 	Query = New Query();
 	Query.Text =
@@ -221,9 +219,7 @@ EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
-#Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-#EndRegion
 	Return PostingDataTables;
 EndFunction
 
@@ -297,8 +293,6 @@ EndProcedure
 
 #EndRegion
 
-#Region NewRegistersPosting
-
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure();
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
@@ -359,6 +353,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(R6070T_OtherPeriodsExpenses());
+	QueryArray.Add(R8012B_ConsignorInventory());
 	Return QueryArray;
 EndFunction
 
@@ -419,8 +414,7 @@ Function ItemList()
 		   |	PurchaseInvoiceItemList.UseGoodsReceipt AS UseGoodsReceipt,
 		   |	NOT PurchaseInvoiceItemList.PurchaseOrder = VALUE(Document.PurchaseOrder.EmptyRef) AS PurchaseOrderExists,
 		   |	NOT PurchaseInvoiceItemList.SalesOrder = VALUE(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
-		   |	NOT PurchaseInvoiceItemList.InternalSupplyRequest = VALUE(Document.InternalSupplyRequest.EmptyRef) AS
-		   |		InternalSupplyRequestExists,
+		   |	NOT PurchaseInvoiceItemList.InternalSupplyRequest = VALUE(Document.InternalSupplyRequest.EmptyRef) AS InternalSupplyRequestExists,
 		   |	NOT GoodsReceipts.Key IS NULL AS GoodsReceiptExists,
 		   |	PurchaseInvoiceItemList.ItemKey AS ItemKey,
 		   |	PurchaseInvoiceItemList.PurchaseOrder AS PurchaseOrder,
@@ -458,7 +452,9 @@ Function ItemList()
 		   |	PurchaseInvoiceItemList.Key,
 		   |	PurchaseInvoiceItemList.Ref.Branch AS Branch,
 		   |	PurchaseInvoiceItemList.Ref.LegalNameContract AS LegalNameContract,
-		   |	PurchaseInvoiceItemList.IsAdditionalItemCost
+		   |	PurchaseInvoiceItemList.IsAdditionalItemCost,
+		   |	PurchaseInvoiceItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.Purchase) AS IsPurchase,
+		   |	PurchaseInvoiceItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.ReceiptFromConsignor) AS IsReceiptFromConsignor
 		   |INTO ItemList
 		   |FROM
 		   |	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
@@ -494,7 +490,9 @@ Function ItemList()
 		   |		ELSE PurchaseInvoiceTaxList.ManualAmount
 		   |	END AS TaxAmount,
 		   |	PurchaseInvoiceItemList.NetAmount AS TaxableAmount,
-		   |	PurchaseInvoiceItemList.Ref.Branch AS Branch
+		   |	PurchaseInvoiceItemList.Ref.Branch AS Branch,
+		   |	PurchaseInvoiceItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.Purchase) AS IsPurchase,
+		   |	PurchaseInvoiceItemList.Ref.TransactionType = value(Enum.PurchaseTransactionTypes.ReceiptFromConsignor) AS IsReceiptFromConsignor
 		   |INTO Taxes
 		   |FROM
 		   |	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
@@ -574,12 +572,14 @@ Function IncomingStocksReal()
 EndFunction
 
 Function R1001T_Purchases()
-	Return "SELECT *
-		   |INTO R1001T_Purchases
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE TRUE";
-
+	Return 
+		"SELECT
+		|	*
+		|INTO R1001T_Purchases
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsPurchase";
 EndFunction
 
 Function R1005T_PurchaseSpecialOffers()
@@ -633,53 +633,56 @@ Function R1020B_AdvancesToVendors()
 EndFunction
 
 Function R1021B_VendorsTransactions()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument AS Basis,
-		   |	ItemList.PurchaseOrder AS Order,
-		   |	SUM(ItemList.Amount) AS Amount,
-		   |	UNDEFINED AS VendorsAdvancesClosing
-		   |INTO R1021B_VendorsTransactions
-		   |FROM
-		   |	ItemList AS ItemList
-		   |GROUP BY
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument,
-		   |	ItemList.PurchaseOrder,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Period,
-		   |	VALUE(AccumulationRecordType.Receipt)
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAdvances.Period,
-		   |	OffsetOfAdvances.Company,
-		   |	OffsetOfAdvances.Branch,
-		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.LegalName,
-		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.Agreement,
-		   |	OffsetOfAdvances.TransactionDocument,
-		   |	OffsetOfAdvances.TransactionOrder,
-		   |	OffsetOfAdvances.Amount,
-		   |	OffsetOfAdvances.Recorder
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument AS Basis,
+		|	ItemList.PurchaseOrder AS Order,
+		|	SUM(ItemList.Amount) AS Amount,
+		|	UNDEFINED AS VendorsAdvancesClosing
+		|INTO R1021B_VendorsTransactions
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsPurchase
+		|GROUP BY
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	ItemList.PurchaseOrder,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.Period,
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.Agreement,
+		|	OffsetOfAdvances.TransactionDocument,
+		|	OffsetOfAdvances.TransactionOrder,
+		|	OffsetOfAdvances.Amount,
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
 Function R5012B_VendorsAging()
@@ -770,14 +773,15 @@ Function R1031B_ReceiptInvoicing()
 EndFunction
 
 Function R1040B_TaxesOutgoing()
-	Return "SELECT 
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
-		   |INTO R1040B_TaxesOutgoing
-		   |FROM
-		   |	Taxes AS Taxes
-		   |WHERE TRUE";
-
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R1040B_TaxesOutgoing
+		|FROM
+		|	Taxes AS Taxes
+		|WHERE
+		|	Taxes.IsPurchase";
 EndFunction
 
 Function R2013T_SalesOrdersProcurement()
@@ -947,46 +951,51 @@ EndFunction
 
 Function R4050B_StockInventory()
 	Return 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-	|	ItemList.Period,
-	|	ItemList.Company,
-	|	ItemList.Store,
-	|	ItemList.ItemKey,
-	|	SUM(ItemList.Quantity) AS Quantity
-	|INTO R4050B_StockInventory
-	|FROM
-	|	ItemList AS ItemList
-	|WHERE
-	|	NOT ItemList.IsService
-	|GROUP BY
-	|	VALUE(AccumulationRecordType.Receipt),
-	|	ItemList.Period,
-	|	ItemList.Company,
-	|	ItemList.Store,
-	|	ItemList.ItemKey";
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO R4050B_StockInventory
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.IsPurchase
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey";
 EndFunction
 
 Function R5010B_ReconciliationStatement()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemList.Company AS Company,
-		   |	ItemList.Branch AS Branch,
-		   |	ItemList.LegalName AS LegalName,
-		   |	ItemList.LegalNameContract AS LegalNameContract,
-		   |	ItemList.Currency AS Currency,
-		   |	SUM(ItemList.Amount) AS Amount,
-		   |	ItemList.Period
-		   |INTO R5010B_ReconciliationStatement
-		   |FROM
-		   |	ItemList AS ItemList
-		   |GROUP BY
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.LegalName,
-		   |	ItemList.LegalNameContract,
-		   |	ItemList.Currency,
-		   |	ItemList.Period";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Company AS Company,
+		|	ItemList.Branch AS Branch,
+		|	ItemList.LegalName AS LegalName,
+		|	ItemList.LegalNameContract AS LegalNameContract,
+		|	ItemList.Currency AS Currency,
+		|	SUM(ItemList.Amount) AS Amount,
+		|	ItemList.Period
+		|INTO R5010B_ReconciliationStatement
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsPurchase
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
+		|	ItemList.Currency,
+		|	ItemList.Period,
+		|	VALUE(AccumulationRecordType.Expense)";
 EndFunction
 
 Function R4035B_IncomingStocks()
@@ -1059,16 +1068,18 @@ Function Exists_R4036B_IncomingStocksRequested()
 EndFunction
 
 Function R5022T_Expenses()
-	Return "SELECT
-		   |	*,
-		   |	ItemList.NetAmount AS Amount,
-		   |	ItemList.Amount AS AmountWithTaxes
-		   |INTO R5022T_Expenses
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.IsService
-		   |	AND NOT ItemList.IsAdditionalItemCost";
+	Return 
+		"SELECT
+		|	*,
+		|	ItemList.NetAmount AS Amount,
+		|	ItemList.Amount AS AmountWithTaxes
+		|INTO R5022T_Expenses
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsService
+		|	AND NOT ItemList.IsAdditionalItemCost
+		|	AND ItemList.IsPurchase";
 EndFunction
 
 Function T3010S_RowIDInfo()
@@ -1094,32 +1105,34 @@ EndFunction
 
 Function T2015S_TransactionsInfo()
 	Return 
-	"SELECT
-	|	ItemList.Period AS Date,
-	|	ItemList.Company,
-	|	ItemList.Branch,
-	|	ItemList.Currency,
-	|	ItemList.Partner,
-	|	ItemList.LegalName,
-	|	ItemList.Agreement,
-	|	ItemList.PurchaseOrder AS Order,
-	|	TRUE AS IsVendorTransaction,
-	|	ItemList.BasisDocument AS TransactionBasis,
-	|	SUM(ItemList.Amount) AS Amount,
-	|	TRUE AS IsDue
-	|INTO T2015S_TransactionsInfo
-	|FROM
-	|	ItemList AS ItemList
-	|GROUP BY
-	|	ItemList.Period,
-	|	ItemList.Company,
-	|	ItemList.Branch,
-	|	ItemList.Currency,
-	|	ItemList.Partner,
-	|	ItemList.LegalName,
-	|	ItemList.Agreement,
-	|	ItemList.PurchaseOrder,
-	|	ItemList.BasisDocument";
+		"SELECT
+		|	ItemList.Period AS Date,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.PurchaseOrder AS Order,
+		|	TRUE AS IsVendorTransaction,
+		|	ItemList.BasisDocument AS TransactionBasis,
+		|	SUM(ItemList.Amount) AS Amount,
+		|	TRUE AS IsDue
+		|INTO T2015S_TransactionsInfo
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsPurchase
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.PurchaseOrder,
+		|	ItemList.BasisDocument";
 EndFunction
 
 Function R6070T_OtherPeriodsExpenses()
@@ -1157,60 +1170,90 @@ Function T6020S_BatchKeysInfo()
 	|	TRUE";
 EndFunction
 
-#EndRegion
+Function R8012B_ConsignorInventory()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.ItemKey,
+		|	ItemList.Partner,
+		|	ItemList.Agreement,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO R8012B_ConsignorInventory
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.IsReceiptFromConsignor
+		|
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.ItemKey,
+		|	ItemList.Partner,
+		|	ItemList.Agreement";
+EndFunction
 
 #Region Accounting
 
 Function T1040T_AccountingAmounts()
 	Return
-	"SELECT
-	|	ItemList.Period,
-	|	ItemList.Key AS RowKey,
-	|	ItemList.Currency,
-	|	ItemList.NetAmount AS Amount,
-	|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B) AS Operation,
-	|	UNDEFINED AS AdvancesClosing
-	|INTO T1040T_AccountingAmounts
-	|FROM
-	|	ItemList AS ItemList
-	|
-	|UNION ALL
-	|
-	|select
-	|	ItemList.Period,
-	|	ItemList.Key AS RowKey,
-	|	ItemList.Currency,
-	|	ItemList.TaxAmount,
-	|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1040B_CR_R1021B),
-	|	undefined
-	|from
-	|	ItemList as ItemList
-	|
-	|union all
-	|
-	|SELECT
-	|	T2010S_OffsetOfAdvances.Period,
-	|	T2010S_OffsetOfAdvances.Key AS RowKey,
-	|	T2010S_OffsetOfAdvances.Currency,
-	|	T2010S_OffsetOfAdvances.Amount,
-	|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1040B_CR_R1021B),
-	|	T2010S_OffsetOfAdvances.Recorder
-	|FROM
-	|	InformationRegister.T2010S_OffsetOfAdvances AS T2010S_OffsetOfAdvances
-	|WHERE
-	|	T2010S_OffsetOfAdvances.Document = &Ref";
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Key AS RowKey,
+		|	ItemList.Currency,
+		|	ItemList.NetAmount AS Amount,
+		|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|INTO T1040T_AccountingAmounts
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsPurchase
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	ItemList.Period,
+		|	ItemList.Key AS RowKey,
+		|	ItemList.Currency,
+		|	ItemList.TaxAmount,
+		|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1040B_CR_R1021B),
+		|	UNDEFINED
+		|FROM
+		|	ItemList as ItemList
+		|WHERE
+		|	ItemList.IsPurchase
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	T2010S_OffsetOfAdvances.Period,
+		|	T2010S_OffsetOfAdvances.Key AS RowKey,
+		|	T2010S_OffsetOfAdvances.Currency,
+		|	T2010S_OffsetOfAdvances.Amount,
+		|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R1040B_CR_R1021B),
+		|	T2010S_OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS T2010S_OffsetOfAdvances
+		|WHERE
+		|	T2010S_OffsetOfAdvances.Document = &Ref";
 EndFunction
 
 Function T1050T_AccountingQuantities()
 	Return
-	"SELECT
-	|	ItemList.Period,
-	|	ItemList.Key AS RowKey,
-	|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B) AS Operation,
-	|	ItemList.Quantity
-	|INTO T1050T_AccountingQuantities
-	|FROM
-	|	ItemList AS ItemList";
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Key AS RowKey,
+		|	VALUE(Catalog.AccountingOperations.PurchaseInvoice_DR_R4050B_R5022T_CR_R1021B) AS Operation,
+		|	ItemList.Quantity
+		|INTO T1050T_AccountingQuantities
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsPurchase";
 EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export

@@ -305,7 +305,6 @@ Function R1031B_ReceiptInvoicing()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	NOT ItemList.PurchaseInvoiceExists
-		   |	AND ItemList.IsTransaction_Purchase
 		   |
 		   |UNION ALL
 		   |
@@ -321,8 +320,7 @@ Function R1031B_ReceiptInvoicing()
 		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
-		   |	ItemList.PurchaseInvoiceExists
-		   |	AND ItemList.IsTransaction_Purchase";
+		   |	ItemList.PurchaseInvoiceExists";
 EndFunction
 
 Function R2031B_ShipmentInvoicing()

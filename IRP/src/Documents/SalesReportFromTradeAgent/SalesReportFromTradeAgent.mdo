@@ -510,34 +510,6 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="440e061e-5a77-452d-804e-4682df36711f">
-      <name>SalesOrder</name>
-      <synonym>
-        <key>en</key>
-        <value>Sales order</value>
-      </synonym>
-      <type>
-        <types>DocumentRef.SalesOrder</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="893366f3-363b-44a3-b9ac-cec6716bb9ee">
-      <name>SalesInvoice</name>
-      <synonym>
-        <key>en</key>
-        <value>Sales invoice</value>
-      </synonym>
-      <type>
-        <types>DocumentRef.SalesInvoice</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
   </tabularSections>
   <tabularSections uuid="a4d57e31-b8ef-4e2b-b20f-1fc4f262ecd3">
     <producedTypes>

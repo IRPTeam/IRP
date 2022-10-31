@@ -113,12 +113,6 @@ EndFunction
 
 // stores attribute values before changing
 Procedure UpdateCacheBeforeChange(Object, Form)
-	
-	// not used if the form is not open
-	If Form = Undefined Then
-		Return;
-	EndIf;
-	
 	// Object properties to be cached
 	CacheObject = New Structure(GetObjectPropertyNamesBeforeChange());
 	FillPropertyValues(CacheObject, Object);

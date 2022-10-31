@@ -8278,7 +8278,7 @@ Function BindItemListPrice(Parameters)
 	
 		Binding.Insert("SalesReportFromTradeAgent",
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
-			|StepItemListCalculations_IsPriceChanged_Without_SpecialsOffers");
+			|StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");
 	
 		Binding.Insert("SalesReportToConsignor",
 			"StepItemListChangePriceTypeAsManual_IsUserChange,

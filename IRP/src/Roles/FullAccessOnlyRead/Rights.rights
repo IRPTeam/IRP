@@ -7137,4 +7137,26 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>AccumulationRegister.R8011B_TradeAgentSerialLotNumber</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R8010B_TradeAgentInventory</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

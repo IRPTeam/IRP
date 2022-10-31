@@ -81,14 +81,19 @@ Function IsNotMultiDirectionDocument(Document)
 	Return False;
 EndFunction
 
+Function IsShipmentToTradeAgent(Document)
+	If TypeOf(Document) = Type("DocumentRef.SalesInvoice")
+		And Document.TransactionType = Enums.SalesTransactionTypes.ShipmentToTradeAgent Then
+			Return True; // is shipment to trade agent
+	EndIf;
+	Return False; 
+EndFunction
+
 #EndRegion
 
 #Region BATCHES_DOCUMENTS
 
-// Get array of batch document types.
-// 
-// Returns:
-//  Array - Get array of batch document types
+// all documents who can movie batches
 Function GetArrayOfBatchDocumentTypes()
 	ArrayOfTypes = New Array();
 	ArrayOfTypes.Add(Type("DocumentRef.Bundling"));
@@ -108,6 +113,7 @@ Function GetArrayOfBatchDocumentTypes()
 	ArrayOfTypes.Add(Type("DocumentRef.BatchReallocateOutgoing"));
 	ArrayOfTypes.Add(Type("DocumentRef.WorkSheet"));
 	ArrayOfTypes.Add(Type("DocumentRef.Production"));
+	ArrayOfTypes.Add(Type("DocumentRef.SalesReportFromTradeAgent"));
 	Return ArrayOfTypes;
 EndFunction
 
@@ -1549,7 +1555,10 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			// simple receipt	
 			If IsNotMultiDirectionDocument(Document) // is not transfer, produce, bundling or unbundling
 				And Not ValueIsFilled(Row.SalesInvoice) // is not return by sales invoice
-				And TypeOf(Document) <> Type("DocumentRef.BatchReallocateIncoming") Then // is not receipt by btach reallocation
+				And TypeOf(Document) <> Type("DocumentRef.BatchReallocateIncoming") // is not receipt by btach reallocation
+				
+				// sales invoice with transaction type "shipment to trade agent" is multi direction document
+				And Not IsShipmentToTradeAgent(Document) Then
 				
 				If Row.Amount = 0 AND Row.Company.LandedCostFillEmptyAmount 
 					AND (TypeOf(Document) = Type("DocumentRef.StockAdjustmentAsSurplus")
@@ -1573,7 +1582,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 						Row.AmountBalance = Price * Row.Quantity;
 						
 						NewRow.Amount = Price * Row.Quantity;
-				EndIf;
+				EndIf; // fill empty amount
 				
 				FillPropertyValues(Tables.DataForReceipt.Add(), NewRow);
 				
@@ -1863,7 +1872,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 	TableOfNewReceivedBatches.Columns.Add("IsOpeningBalance");
 	TableOfNewReceivedBatches.Columns.Add("Direction");
 	
-	If IsTransferDocument(Document) Then
+	If IsTransferDocument(Document) Or IsShipmentToTradeAgent(Document) Then
 		CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewReceivedBatches, CalculationSettings);
 	ElsIf IsCompositeDocument(Document) Then
 		CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpense, TableOfNewReceivedBatches);

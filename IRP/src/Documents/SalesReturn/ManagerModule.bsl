@@ -346,6 +346,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R8010B_TradeAgentInventory());
+	QueryArray.Add(R8011B_TradeAgentSerialLotNumber());
 	Return QueryArray;
 EndFunction
 
@@ -427,7 +429,9 @@ Function ItemList()
 	|	ItemList.OffersAmount,
 	|	ItemList.PriceType,
 	|	ItemList.SalesPerson,
-	|	ItemList.Key
+	|	ItemList.Key,
+	|	ItemList.Ref.TransactionType = Value(Enum.SalesReturnTransactionTypes.ReturnFromTradeAgent) AS IsReturnFromTradeAgent,
+	|	ItemList.Ref.Company.TradeAgentStore AS TradeAgentStore
 	|INTO ItemList
 	|FROM
 	|	Document.SalesReturn.ItemList AS ItemList
@@ -452,94 +456,102 @@ Function GoodReceiptInfo()
 EndFunction
 
 Function OffersInfo()
-	Return "SELECT
-		   |	SalesReturnItemList.Ref.Date AS Period,
-		   |	SalesReturnItemList.Key AS RowKey,
-		   |	SalesReturnItemList.ItemKey,
-		   |	SalesReturnItemList.Ref.Company AS Company,
-		   |	SalesReturnItemList.Ref.Branch AS Branch,
-		   |	SalesReturnItemList.Ref.Currency,
-		   |	SalesReturnSpecialOffers.Offer AS SpecialOffer,
-		   |	SalesReturnItemList.SalesInvoice AS Invoice,
-		   |	-SalesReturnSpecialOffers.Amount AS OffersAmount,
-		   |	-SalesReturnItemList.TotalAmount AS SalesAmount,
-		   |	-SalesReturnItemList.NetAmount AS NetAmount
-		   |INTO OffersInfo
-		   |FROM
-		   |	Document.SalesReturn.ItemList AS SalesReturnItemList
-		   |		INNER JOIN Document.SalesReturn.SpecialOffers AS SalesReturnSpecialOffers
-		   |		ON SalesReturnItemList.Key = SalesReturnSpecialOffers.Key
-		   |		AND SalesReturnItemList.Ref = &Ref
-		   |		AND SalesReturnSpecialOffers.Ref = &Ref";
+	Return 
+		"SELECT
+		|	SalesReturnItemList.Ref.Date AS Period,
+		|	SalesReturnItemList.Key AS RowKey,
+		|	SalesReturnItemList.ItemKey,
+		|	SalesReturnItemList.Ref.Company AS Company,
+		|	SalesReturnItemList.Ref.Branch AS Branch,
+		|	SalesReturnItemList.Ref.Currency,
+		|	SalesReturnSpecialOffers.Offer AS SpecialOffer,
+		|	SalesReturnItemList.SalesInvoice AS Invoice,
+		|	-SalesReturnSpecialOffers.Amount AS OffersAmount,
+		|	-SalesReturnItemList.TotalAmount AS SalesAmount,
+		|	-SalesReturnItemList.NetAmount AS NetAmount
+		|INTO OffersInfo
+		|FROM
+		|	Document.SalesReturn.ItemList AS SalesReturnItemList
+		|		INNER JOIN Document.SalesReturn.SpecialOffers AS SalesReturnSpecialOffers
+		|		ON SalesReturnItemList.Key = SalesReturnSpecialOffers.Key
+		|		AND SalesReturnItemList.Ref = &Ref
+		|		AND SalesReturnSpecialOffers.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()
 	Return 
-	"SELECT
-	|	SerialLotNumbers.Ref.Date AS Period,
-	|	SerialLotNumbers.Ref.Company AS Company,
-	|	SerialLotNumbers.Ref.Branch AS Branch,
-	|	SerialLotNumbers.Key,
-	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
-	|	SerialLotNumbers.Quantity,
-	|	ItemList.ItemKey AS ItemKey
-	|INTO SerialLotNumbers
-	|FROM
-	|	Document.SalesReturn.SerialLotNumbers AS SerialLotNumbers
-	|		LEFT JOIN Document.SalesReturn.ItemList AS ItemList
-	|		ON SerialLotNumbers.Key = ItemList.Key
-	|		AND ItemList.Ref = &Ref
-	|WHERE
-	|	SerialLotNumbers.Ref = &Ref";
+		"SELECT
+		|	SerialLotNumbers.Ref.Date AS Period,
+		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Ref.Branch AS Branch,
+		|	SerialLotNumbers.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
+		|	SerialLotNumbers.Quantity,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Ref.Partner AS Partner,
+		|	ItemList.Ref.Agreement AS Agreement,
+		|	ItemList.Ref.TransactionType = Value(Enum.SalesReturnTransactionTypes.ReturnFromTradeAgent) AS IsReturnFromTradeAgent
+		|INTO SerialLotNumbers
+		|FROM
+		|	Document.SalesReturn.SerialLotNumbers AS SerialLotNumbers
+		|		LEFT JOIN Document.SalesReturn.ItemList AS ItemList
+		|		ON SerialLotNumbers.Key = ItemList.Key
+		|		AND ItemList.Ref = &Ref
+		|WHERE
+		|	SerialLotNumbers.Ref = &Ref";
 EndFunction
 
 Function Taxes()
-	Return "SELECT
-		   |	SalesReturnTaxList.Ref.Date AS Period,
-		   |	SalesReturnTaxList.Ref.Company AS Company,
-		   |	SalesReturnTaxList.Ref.Branch AS Branch,
-		   |	SalesReturnTaxList.Tax AS Tax,
-		   |	SalesReturnTaxList.TaxRate AS TaxRate,
-		   |	CASE
-		   |		WHEN SalesReturnTaxList.ManualAmount = 0
-		   |			THEN SalesReturnTaxList.Amount
-		   |		ELSE SalesReturnTaxList.ManualAmount
-		   |	END AS TaxAmount,
-		   |	SalesReturnItemList.NetAmount AS TaxableAmount
-		   |INTO Taxes
-		   |FROM
-		   |	Document.SalesReturn.ItemList AS SalesReturnItemList
-		   |		INNER JOIN Document.SalesReturn.TaxList AS SalesReturnTaxList
-		   |		ON SalesReturnItemList.Key = SalesReturnTaxList.Key
-		   |		AND SalesReturnItemList.Ref = &Ref
-		   |		AND SalesReturnTaxList.Ref = &Ref";
+	Return 
+		"SELECT
+		|	TaxList.Ref.Date AS Period,
+		|	TaxList.Ref.Company AS Company,
+		|	TaxList.Ref.Branch AS Branch,
+		|	TaxList.Tax AS Tax,
+		|	TaxList.TaxRate AS TaxRate,
+		|	CASE
+		|		WHEN TaxList.ManualAmount = 0
+		|			THEN TaxList.Amount
+		|		ELSE TaxList.ManualAmount
+		|	END AS TaxAmount,
+		|	ItemList.NetAmount AS TaxableAmount,
+		|	TaxList.Ref.TransactionType = Value(Enum.SalesReturnTransactionTypes.ReturnFromTradeAgent) AS IsReturnFromTradeAgent
+		|INTO Taxes
+		|FROM
+		|	Document.SalesReturn.ItemList AS ItemList
+		|		INNER JOIN Document.SalesReturn.TaxList AS TaxList
+		|		ON ItemList.Key = TaxList.Key
+		|		AND ItemList.Ref = &Ref
+		|		AND TaxList.Ref = &Ref";
 EndFunction
 
 Function R2001T_Sales()
-	Return "SELECT 
-		   |	- ItemList.Quantity AS Quantity,
-		   |	- ItemList.Amount AS Amount,
-		   |	- ItemList.NetAmount AS NetAmount,
-		   |	- ItemList.OffersAmount AS OffersAmount,
-		   |	ItemList.SalesInvoice AS Invoice,
-		   |	*
-		   |INTO R2001T_Sales
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE TRUE";
-
+	Return 
+		"SELECT
+		|	-ItemList.Quantity AS Quantity,
+		|	-ItemList.Amount AS Amount,
+		|	-ItemList.NetAmount AS NetAmount,
+		|	-ItemList.OffersAmount AS OffersAmount,
+		|	ItemList.SalesInvoice AS Invoice,
+		|	*
+		|INTO R2001T_Sales
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsReturnFromTradeAgent";
 EndFunction
 
 Function R2002T_SalesReturns()
-	Return "SELECT 
-		   |	ItemList.SalesInvoice AS Invoice,
-		   |	*
-		   |INTO R2002T_SalesReturns
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE TRUE";
-
+	Return 
+		"SELECT
+		|	ItemList.SalesInvoice AS Invoice,
+		|	*
+		|INTO R2002T_SalesReturns
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsReturnFromTradeAgent";
 EndFunction
 
 Function R2005T_SalesSpecialOffers()
@@ -566,55 +578,55 @@ Function R2012B_SalesOrdersInvoiceClosing()
 EndFunction
 
 Function R2021B_CustomersTransactions()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument AS Basis,
-		   |	UNDEFINED AS Key,
-		   |	UNDEFINED AS CustomersAdvancesClosing,
-		   |	-SUM(ItemList.Amount) AS Amount
-		   |INTO R2021B_CustomersTransactions
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE
-		   |GROUP BY
-		   |	ItemList.Agreement,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Period,
-		   |	ItemList.BasisDocument,
-		   |	VALUE(AccumulationRecordType.Receipt)
-		   |
-		   |UNION ALL
-		   |
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAdvances.Period,
-		   |	OffsetOfAdvances.Company,
-		   |	OffsetOfAdvances.Branch,
-		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.LegalName,
-		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.Agreement,
-		   |	OffsetOfAdvances.TransactionDocument,
-		   |	OffsetOfAdvances.Key,
-		   |	OffsetOfAdvances.Recorder,
-		   |	OffsetOfAdvances.Amount
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument AS Basis,
+		|	UNDEFINED AS Key,
+		|	UNDEFINED AS CustomersAdvancesClosing,
+		|	-SUM(ItemList.Amount) AS Amount
+		|INTO R2021B_CustomersTransactions
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsReturnFromTradeAgent
+		|GROUP BY
+		|	ItemList.Agreement,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.Period,
+		|	ItemList.BasisDocument,
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.Agreement,
+		|	OffsetOfAdvances.TransactionDocument,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Recorder,
+		|	OffsetOfAdvances.Amount
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
 Function R2020B_AdvancesFromCustomers()
@@ -693,72 +705,111 @@ Function R2031B_ShipmentInvoicing()
 EndFunction
 
 Function R2040B_TaxesIncoming()
-	Return "SELECT 
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	- Taxes.TaxableAmount,
-		   |	- Taxes.TaxAmount,
-		   |	*
-		   |INTO R2040B_TaxesIncoming
-		   |FROM
-		   |	Taxes AS Taxes
-		   |WHERE TRUE";
-
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	-Taxes.TaxableAmount,
+		|	-Taxes.TaxAmount,
+		|	*
+		|INTO R2040B_TaxesIncoming
+		|FROM
+		|	Taxes AS Taxes
+		|WHERE
+		|	NOT Taxes.IsReturnFromTradeAgent";
 EndFunction
 
 #Region Stock
 
 Function R4010B_ActualStocks()
 	Return 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-	|	ItemList.Period,
-	|	ItemList.Store,
-	|	ItemList.ItemKey,
-	|	CASE
-	|		WHEN SerialLotNumbers.StockBalanceDetail
-	|			THEN SerialLotNumbers.SerialLotNumber
-	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-	|	END AS SerialLotNumber,
-	|	SUM(CASE
-	|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
-	|			THEN ItemList.Quantity
-	|		ELSE SerialLotNumbers.Quantity
-	|	END) AS Quantity
-	|INTO R4010B_ActualStocks
-	|FROM
-	|	ItemList AS ItemList
-	|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
-	|		ON ItemList.Key = SerialLotNumbers.Key
-	|WHERE
-	|	NOT ItemList.IsService
-	|	AND NOT ItemList.UseGoodsReceipt
-	|	AND NOT ItemList.GoodsReceiptExists
-	|GROUP BY
-	|	VALUE(AccumulationRecordType.Receipt),
-	|	ItemList.Period,
-	|	ItemList.Store,
-	|	ItemList.ItemKey,
-	|	CASE
-	|		WHEN SerialLotNumbers.StockBalanceDetail
-	|			THEN SerialLotNumbers.SerialLotNumber
-	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-	|	END";
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	SUM(CASE
+		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+		|			THEN ItemList.Quantity
+		|		ELSE SerialLotNumbers.Quantity
+		|	END) AS Quantity
+		|INTO R4010B_ActualStocks
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		|		ON ItemList.Key = SerialLotNumbers.Key
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND NOT ItemList.UseGoodsReceipt
+		|	AND NOT ItemList.GoodsReceiptExists
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.TradeAgentStore,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	SUM(CASE
+		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+		|			THEN ItemList.Quantity
+		|		ELSE SerialLotNumbers.Quantity
+		|	END) AS Quantity
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		|		ON ItemList.Key = SerialLotNumbers.Key
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND NOT ItemList.UseGoodsReceipt
+		|	AND NOT ItemList.GoodsReceiptExists
+		|	AND ItemList.IsReturnFromTradeAgent
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	ItemList.TradeAgentStore";
 EndFunction
 
 Function R4011B_FreeStocks()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Quantity
-		   |INTO R4011B_FreeStocks
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND NOT ItemList.UseGoodsReceipt
-		   |	AND NOT ItemList.GoodsReceiptExists";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Quantity
+		|INTO R4011B_FreeStocks
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND NOT ItemList.UseGoodsReceipt
+		|	AND NOT ItemList.GoodsReceiptExists";
 EndFunction
 
 Function R4014B_SerialLotNumber()
@@ -793,62 +844,88 @@ EndFunction
 
 Function R4050B_StockInventory()
 	Return 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-	|	ItemList.Period,
-	|	ItemList.Company,
-	|	ItemLIst.Store,
-	|	ItemList.ItemKey,
-	|	SUM(ItemList.Quantity) AS Quantity
-	|INTO R4050B_StockInventory
-	|FROM
-	|	ItemList AS ItemList
-	|WHERE
-	|	NOT ItemList.IsService
-	|GROUP BY
-	|	VALUE(AccumulationRecordType.Receipt),
-	|	ItemList.Period,
-	|	ItemList.Company,
-	|	ItemLIst.Store,
-	|	ItemList.ItemKey";
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemLIst.Store,
+		|	ItemList.ItemKey,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO R4050B_StockInventory
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemLIst.Store,
+		|	ItemList.ItemKey
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemLIst.TradeAgentStore,
+		|	ItemList.ItemKey,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.IsReturnFromTradeAgent
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemLIst.TradeAgentStore,
+		|	ItemList.ItemKey";
 EndFunction
 
 #EndRegion
 
 Function R5010B_ReconciliationStatement()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.LegalName,
-		   |	ItemList.LegalNameContract,
-		   |	ItemList.Currency,
-		   |	- SUM(ItemList.Amount) AS Amount,
-		   |	ItemList.Period
-		   |INTO R5010B_ReconciliationStatement
-		   |FROM
-		   |	ItemList AS ItemList
-		   |GROUP BY
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.LegalName,
-		   |	ItemList.LegalNameContract,
-		   |	ItemList.Currency,
-		   |	ItemList.Period";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
+		|	ItemList.Currency,
+		|	-SUM(ItemList.Amount) AS Amount,
+		|	ItemList.Period
+		|INTO R5010B_ReconciliationStatement
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsReturnFromTradeAgent
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
+		|	ItemList.Currency,
+		|	ItemList.Period,
+		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 #EndRegion
 
 Function R5021T_Revenues()
-	Return "SELECT
-		   |	*,
-		   |	- ItemList.NetAmount AS Amount,
-		   |	- ItemList.Amount AS AmountWithTaxes
-		   |INTO R5021T_Revenues
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE";
+	Return 
+		"SELECT
+		|	*,
+		|	-ItemList.NetAmount AS Amount,
+		|	-ItemList.Amount AS AmountWithTaxes
+		|INTO R5021T_Revenues
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsReturnFromTradeAgent";
 EndFunction
 
 Function T3010S_RowIDInfo()
@@ -874,30 +951,32 @@ EndFunction
 
 Function T2015S_TransactionsInfo()
 	Return 
-	"SELECT
-	|	ItemList.Period AS Date,
-	|	ItemList.Company,
-	|	ItemList.Branch,
-	|	ItemList.Currency,
-	|	ItemList.Partner,
-	|	ItemList.LegalName,
-	|	ItemList.Agreement,
-	|	TRUE AS IsCustomerTransaction,
-	|	ItemList.BasisDocument AS TransactionBasis,
-	|	-SUM(ItemList.Amount) AS Amount,
-	|	TRUE AS IsDue
-	|INTO T2015S_TransactionsInfo
-	|FROM
-	|	ItemList AS ItemList
-	|GROUP BY
-	|	ItemList.Period,
-	|	ItemList.Company,
-	|	ItemList.Branch,
-	|	ItemList.Currency,
-	|	ItemList.Partner,
-	|	ItemList.LegalName,
-	|	ItemList.Agreement,
-	|	ItemList.BasisDocument";
+		"SELECT
+		|	ItemList.Period AS Date,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	TRUE AS IsCustomerTransaction,
+		|	ItemList.BasisDocument AS TransactionBasis,
+		|	-SUM(ItemList.Amount) AS Amount,
+		|	TRUE AS IsDue
+		|INTO T2015S_TransactionsInfo
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsReturnFromTradeAgent
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.Partner,
+		|	ItemList.LegalName,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument";
 EndFunction
 
 Function T6010S_BatchesInfo()
@@ -914,10 +993,89 @@ EndFunction
 Function T6020S_BatchKeysInfo()
 	Return
 	"SELECT
-	|	*
+	|	BatchKeysInfo.Period,
+	|	BatchKeysInfo.Company,
+	|	BatchKeysInfo.Currency,
+	|	BatchKeysInfo.CurrencyMovementType,
+	|	BatchKeysInfo.Direction,
+	|	BatchKeysInfo.SalesInvoice,
+	|	BatchKeysInfo.ItemKey,
+	|	BatchKeysInfo.Store,
+	|	BatchKeysInfo.Quantity,
+	|	BatchKeysInfo.Amount,
+	|	BatchKeysInfo.AmountTax
 	|INTO T6020S_BatchKeysInfo
 	|FROM
 	|	BatchKeysInfo
 	|WHERE
-	|	TRUE";
+	|	TRUE
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	UNDEFINED,
+	|	UNDEFINED,
+	|	VALUE(Enum.BatchDirection.Expense),
+	|	UNDEFINED,
+	|	ItemList.ItemKey,
+	|	ItemList.TradeAgentStore,
+	|	SUM(ItemList.Quantity),
+	|	0,
+	|	0
+	|FROM 
+	|	ItemList AS ItemList
+	|WHERE
+	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+	|	AND ItemList.IsReturnFromTradeAgent
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	VALUE(Enum.BatchDirection.Expense),
+	|	ItemList.ItemKey,
+	|	ItemList.TradeAgentStore";
+EndFunction
+
+Function R8010B_TradeAgentInventory()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.ItemKey,
+		|	ItemList.Partner,
+		|	ItemList.Agreement,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO R8010B_TradeAgentInventory
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.IsReturnFromTradeAgent
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.ItemKey,
+		|	ItemList.Partner,
+		|	ItemList.Agreement";
+EndFunction
+
+Function R8011B_TradeAgentSerialLotNumber()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	SerialLotNumbers.Period,
+		|	SerialLotNumbers.Company,
+		|	SerialLotNumbers.ItemKey,
+		|	SerialLotNumbers.Partner,
+		|	SerialLotNumbers.Agreement,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity
+		|INTO R8011B_TradeAgentSerialLotNumber
+		|FROM
+		|	SerialLotNumbers AS SerialLotNumbers
+		|WHERE
+		|	SerialLotNumbers.IsReturnFromTradeAgent";
 EndFunction

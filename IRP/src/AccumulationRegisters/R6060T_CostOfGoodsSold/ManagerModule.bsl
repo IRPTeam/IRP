@@ -40,6 +40,7 @@ Procedure CostOfGoodsSold_CollectRecords(DocObject) Export
 	|	CASE
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.SalesReportFromTradeAgent
 	|			THEN R6010B_BatchWiseBalance.Quantity
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
@@ -49,6 +50,7 @@ Procedure CostOfGoodsSold_CollectRecords(DocObject) Export
 	|	CASE
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.SalesReportFromTradeAgent
 	|			THEN R6010B_BatchWiseBalance.Amount
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
@@ -58,6 +60,7 @@ Procedure CostOfGoodsSold_CollectRecords(DocObject) Export
 	|	CASE
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.SalesReportFromTradeAgent
 	|			THEN R6010B_BatchWiseBalance.AmountTax
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
@@ -67,6 +70,7 @@ Procedure CostOfGoodsSold_CollectRecords(DocObject) Export
 	|	CASE
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.SalesReportFromTradeAgent
 	|			THEN R6010B_BatchWiseBalance.AmountCostRatio
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
@@ -76,6 +80,7 @@ Procedure CostOfGoodsSold_CollectRecords(DocObject) Export
 	|	CASE
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.SalesReportFromTradeAgent
 	|			THEN R6010B_BatchWiseBalance.AmountCost
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
@@ -138,10 +143,21 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
 	|WHERE
 	|	R6010B_BatchWiseBalance.Recorder = &Recorder
-	|	AND (R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
-	|	OR R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
+	|	AND (
+	|	
+	|	CASE WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice THEN
+	|		R6010B_BatchWiseBalance.Document.TransactionType = value(Enum.SalesTransactionTypes.Sales)
+	|	ELSE FALSE END
+	|	
+	|	OR 
+	|
+	|	CASE WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn THEN
+	|		R6010B_BatchWiseBalance.Document.TransactionType = value(Enum.SalesReturnTransactionTypes.ReturnFromCustomer)
+	|	ELSE FALSE END
+	|
 	|	OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
-	|	OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt)
+	|	OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
+	|	OR R6010B_BatchWiseBalance.Document REFS Document.SalesReportFromTradeAgent)
 	|GROUP BY
 	|	R6010B_BatchWiseBalance.Document
 	|;
@@ -154,6 +170,7 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|	CASE
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.SalesReportFromTradeAgent
 	|			THEN R6010B_BatchWiseBalance.Quantity
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
@@ -163,6 +180,7 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|	CASE
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.SalesReportFromTradeAgent
 	|			THEN R6010B_BatchWiseBalance.Amount
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
@@ -172,6 +190,7 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|	CASE
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.SalesReportFromTradeAgent
 	|			THEN R6010B_BatchWiseBalance.AmountTax
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
@@ -181,6 +200,7 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|	CASE
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.SalesReportFromTradeAgent
 	|			THEN R6010B_BatchWiseBalance.AmountCostRatio
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
@@ -190,6 +210,7 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|	CASE
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.SalesReportFromTradeAgent
 	|			THEN R6010B_BatchWiseBalance.AmountCost
 	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
 	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt

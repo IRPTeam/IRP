@@ -185,6 +185,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(R6080T_OtherPeriodsRevenues());
+	QueryArray.Add(R8010B_TradeAgentInventory());
+	QueryArray.Add(R8011B_TradeAgentSerialLotNumber());
 	Return QueryArray;
 EndFunction
 
@@ -361,23 +363,26 @@ EndFunction
 
 Function SerialLotNumbers()
 	Return 
-	"SELECT
-	|	SerialLotNumbers.Ref.Date AS Period,
-	|	SerialLotNumbers.Ref.Company AS Company,
-	|	SerialLotNumbers.Ref.Branch AS Branch,
-	|	SerialLotNumbers.Key,
-	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
-	|	SerialLotNumbers.Quantity,
-	|	ItemList.ItemKey AS ItemKey
-	|INTO SerialLotNumbers
-	|FROM
-	|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
-	|		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
-	|		ON SerialLotNumbers.Key = ItemList.Key
-	|		AND ItemList.Ref = &Ref
-	|WHERE
-	|	SerialLotNumbers.Ref = &Ref";
+		"SELECT
+		|	SerialLotNumbers.Ref.Date AS Period,
+		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Ref.Branch AS Branch,
+		|	SerialLotNumbers.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
+		|	SerialLotNumbers.Quantity,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Ref.Partner AS Partner,
+		|	ItemList.Ref.Agreement AS Agreement,
+		|	ItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent
+		|INTO SerialLotNumbers
+		|FROM
+		|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
+		|		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
+		|		ON SerialLotNumbers.Key = ItemList.Key
+		|		AND ItemList.Ref = &Ref
+		|WHERE
+		|	SerialLotNumbers.Ref = &Ref";
 EndFunction
 
 Function R2001T_Sales()
@@ -538,7 +543,7 @@ Function R4010B_ActualStocks()
 		|SELECT
 		|	VALUE(AccumulationRecordType.Receipt),
 		|	ItemList.Period,
-		|	ItemList.Store,
+		|	ItemList.TradeAgentStore,
 		|	ItemList.ItemKey,
 		|	CASE
 		|		WHEN SerialLotNumbers.StockBalanceDetail
@@ -562,7 +567,7 @@ Function R4010B_ActualStocks()
 		|GROUP BY
 		|	VALUE(AccumulationRecordType.Receipt),
 		|	ItemList.Period,
-		|	ItemList.Store,
+		|	ItemList.TradeAgentStore,
 		|	ItemList.ItemKey,
 		|	CASE
 		|		WHEN SerialLotNumbers.StockBalanceDetail
@@ -632,26 +637,6 @@ Function R4011B_FreeStocks()
 		|WHERE
 		|	ItemListGroup.Quantity > ISNULL(TmpStockReservation.Quantity, 0)
 		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	VALUE(AccumulationRecordType.Receipt),
-//		|	ItemList.Period,
-//		|	ItemList.TradeAgentStore,
-//		|	ItemList.ItemKey AS ItemKey,
-//		|	SUM(ItemList.Quantity) AS Quantity
-//		|FROM
-//		|	ItemList AS ItemList
-//		|Where
-//		|	NOT ItemList.IsService
-//		|	AND NOT ItemList.UseShipmentConfirmation
-//		|	AND NOT ItemList.ShipmentConfirmationExists
-//		|	AND ItemList.IsShipmentToTradeAgent
-//		|GROUP BY
-//		|	VALUE(AccumulationRecordType.Receipt),
-//		|	ItemList.Period,
-//		|	ItemList.TradeAgentStore,
-//		|	ItemList.ItemKey
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -1132,6 +1117,50 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Company,
 		|	ItemList.Period,
 		|	VALUE(Enum.BatchDirection.Receipt)";
+EndFunction
+
+Function R8010B_TradeAgentInventory()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.ItemKey,
+		|	ItemList.Partner,
+		|	ItemList.Agreement,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO R8010B_TradeAgentInventory
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.IsShipmentToTradeAgent
+		|
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.ItemKey,
+		|	ItemList.Partner,
+		|	ItemList.Agreement";
+EndFunction
+
+Function R8011B_TradeAgentSerialLotNumber()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	SerialLotNumbers.Period,
+		|	SerialLotNumbers.Company,
+		|	SerialLotNumbers.ItemKey,
+		|	SerialLotNumbers.Partner,
+		|	SerialLotNumbers.Agreement,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity
+		|INTO R8011B_TradeAgentSerialLotNumber
+		|FROM
+		|	SerialLotNumbers AS SerialLotNumbers
+		|WHERE
+		|	SerialLotNumbers.IsShipmentToTradeAgent";
 EndFunction
 
 #EndRegion

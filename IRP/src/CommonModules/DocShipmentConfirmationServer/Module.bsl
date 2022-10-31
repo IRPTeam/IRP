@@ -36,6 +36,7 @@ Procedure SetGroupItemsList(Object, Form)
 	AttributesArray.Add("Company");
 	AttributesArray.Add("Partner");
 	AttributesArray.Add("LegalName");
+	AttributesArray.Add("TransactionType");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Attr In AttributesArray Do
 		Form.GroupItems.Add(Attr, ?(ValueIsFilled(Form.Items[Attr].Title), Form.Items[Attr].Title,

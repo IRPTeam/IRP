@@ -105,6 +105,8 @@
       <types>DocumentRef.BatchReallocateIncoming</types>
       <types>DocumentRef.BatchReallocateOutgoing</types>
       <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.SalesReportFromTradeAgent</types>
+      <types>DocumentRef.SalesReportToConsignor</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

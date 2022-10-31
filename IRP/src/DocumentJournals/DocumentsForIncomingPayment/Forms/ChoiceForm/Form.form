@@ -761,9 +761,6 @@
     <enableStartDrag>true</enableStartDrag>
     <enableDrag>true</enableDrag>
     <fileDragMode>AsFileRef</fileDragMode>
-    <rowPictureDataPath xsi:type="form:DataPath">
-      <segments>List.DefaultPicture</segments>
-    </rowPictureDataPath>
     <extInfo xsi:type="form:DynamicListTableExtInfo">
       <handlers>
         <event>OnGetDataAtServer</event>

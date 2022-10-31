@@ -169,10 +169,6 @@
           <event>Drag</event>
           <name>ChangeExpressionType</name>
         </handlers>
-        <handlers>
-          <event>Click</event>
-          <name>TypeConstantClick</name>
-        </handlers>
         <nonselectedPictureText>
           <key>en</key>
           <value>Constant</value>

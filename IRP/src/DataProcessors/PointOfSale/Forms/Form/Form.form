@@ -841,73 +841,6 @@
                       <name>ItemListGroupItem</name>
                       <id>857</id>
                       <items xsi:type="form:FormField">
-                        <name>ItemListItem</name>
-                        <id>821</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <dataPath xsi:type="form:DataPath">
-                          <segments>Object.ItemList.Item</segments>
-                        </dataPath>
-                        <handlers>
-                          <event>OnChange</event>
-                          <name>ItemListItemOnChange</name>
-                        </handlers>
-                        <extendedTooltip>
-                          <name>ItemListItemExtendedTooltip</name>
-                          <id>823</id>
-                          <visible>true</visible>
-                          <enabled>true</enabled>
-                          <userVisible>
-                            <common>true</common>
-                          </userVisible>
-                          <type>Label</type>
-                          <autoMaxWidth>true</autoMaxWidth>
-                          <autoMaxHeight>true</autoMaxHeight>
-                          <extInfo xsi:type="form:LabelDecorationExtInfo">
-                            <horizontalAlign>Left</horizontalAlign>
-                          </extInfo>
-                        </extendedTooltip>
-                        <contextMenu>
-                          <name>ItemListItemContextMenu</name>
-                          <id>822</id>
-                          <visible>true</visible>
-                          <enabled>true</enabled>
-                          <userVisible>
-                            <common>true</common>
-                          </userVisible>
-                          <autoFill>true</autoFill>
-                        </contextMenu>
-                        <type>InputField</type>
-                        <readOnly>true</readOnly>
-                        <editMode>Enter</editMode>
-                        <headerHorizontalAlign>Left</headerHorizontalAlign>
-                        <showInFooter>true</showInFooter>
-                        <extInfo xsi:type="form:InputFieldExtInfo">
-                          <handlers>
-                            <event>EditTextChange</event>
-                            <name>ItemListItemEditTextChange</name>
-                          </handlers>
-                          <handlers>
-                            <event>StartChoice</event>
-                            <name>ItemListItemStartChoice</name>
-                          </handlers>
-                          <autoMaxWidth>true</autoMaxWidth>
-                          <autoMaxHeight>true</autoMaxHeight>
-                          <wrap>true</wrap>
-                          <multiLine>true</multiLine>
-                          <chooseType>true</chooseType>
-                          <typeDomainEnabled>true</typeDomainEnabled>
-                          <textEdit>true</textEdit>
-                          <font xsi:type="core:FontRef">
-                            <font>Style.LargeTextFont</font>
-                            <scale>100</scale>
-                          </font>
-                        </extInfo>
-                      </items>
-                      <items xsi:type="form:FormField">
                         <name>ItemListItemKey</name>
                         <id>782</id>
                         <visible>true</visible>
@@ -959,12 +892,6 @@
                           <chooseType>true</chooseType>
                           <typeDomainEnabled>true</typeDomainEnabled>
                           <textEdit>true</textEdit>
-                          <choiceParameterLinks>
-                            <name>Filter.Item</name>
-                            <datapath xsi:type="form:DataPath">
-                              <segments>Items.ItemList.CurrentData.Item</segments>
-                            </datapath>
-                          </choiceParameterLinks>
                           <font xsi:type="core:FontRef">
                             <font>Style.LargeTextFont</font>
                             <scale>100</scale>
@@ -4824,9 +4751,6 @@
     <edit>
       <common>true</common>
     </edit>
-    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-      <segments>Object.RegisterRecords</segments>
-    </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <additionalColumns>
       <tablePath xsi:type="form:DataPath">
@@ -4871,23 +4795,6 @@
       <tablePath xsi:type="form:DataPath">
         <segments>Object.ItemList</segments>
       </tablePath>
-      <columns>
-        <name>Item</name>
-        <title>
-          <key>en</key>
-          <value>Item</value>
-        </title>
-        <id>26</id>
-        <valueType>
-          <types>CatalogRef.Items</types>
-        </valueType>
-        <view>
-          <common>true</common>
-        </view>
-        <edit>
-          <common>true</common>
-        </edit>
-      </columns>
       <columns>
         <name>Info</name>
         <title>
@@ -4937,23 +4844,6 @@
           <common>true</common>
         </edit>
         <functionalOptions>FunctionalOption.UseSerialLotNumbers</functionalOptions>
-      </columns>
-      <columns>
-        <name>UseSerialLotNumber</name>
-        <title>
-          <key>en</key>
-          <value>Use serial lot number</value>
-        </title>
-        <id>41</id>
-        <valueType>
-          <types>Boolean</types>
-        </valueType>
-        <view>
-          <common>true</common>
-        </view>
-        <edit>
-          <common>true</common>
-        </edit>
       </columns>
       <columns>
         <name>SerialLotNumberIsFilling</name>

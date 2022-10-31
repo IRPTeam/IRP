@@ -9239,7 +9239,7 @@ Procedure StepItemListCalculations_IsPriceChanged(Parameters, Chain) Export
 EndProcedure
 
 // ItemList.Calculations.[IsPriceChanged_Without_SpecialsOffers].Step
-Procedure StepItemListCalculations_IsPriceChanged_Without_SpecialsOffers(Parameters, Chain) Export
+Procedure StepItemListCalculations_IsPriceChanged_Without_SpecialOffers(Parameters, Chain) Export
 	StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, "IsPriceChanged");
 EndProcedure
 

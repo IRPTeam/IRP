@@ -189,11 +189,15 @@ Function ItemList()
 		   |	ItemList.InventoryTransfer AS InventoryTransfer,
 		   |	NOT ItemList.InventoryTransfer.Ref IS NULL AS InventoryTransferExists,
 		   |	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.Sales) AS IsTransaction_Sales,
-		   |	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor) AS
-		   |		IsTransaction_ReturnToVendor,
-		   |	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.InventoryTransfer) AS
-		   |		IsTransaction_InventoryTransfer,
+		   |    ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent)  AS IsTransaction_ShipmentToTradeAgent,
+		   |
+		   |	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor) 
+		   |	OR ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.ReturnToConsignor) AS IsTransaction_ReturnToVendor,
+		   |
+		   |	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.InventoryTransfer) AS IsTransaction_InventoryTransfer,
+		   |
 		   |	ItemList.Ref.Branch AS Branch,
+		   |	ItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
 		   |	ItemList.Key
 		   |INTO ItemList
 		   |FROM
@@ -265,7 +269,7 @@ Function R2031B_ShipmentInvoicing()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	NOT ItemList.SalesInvoiceExists
-		   |	AND ItemList.IsTransaction_Sales
+		   |	AND (ItemList.IsTransaction_Sales OR ItemList.IsTransaction_ShipmentToTradeAgent)
 		   |
 		   |UNION ALL
 		   |
@@ -282,7 +286,7 @@ Function R2031B_ShipmentInvoicing()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.SalesInvoiceExists
-		   |	AND ItemList.IsTransaction_Sales";
+		   |	AND (ItemList.IsTransaction_Sales OR ItemList.IsTransaction_ShipmentToTradeAgent)";
 EndFunction
 
 Function R1031B_ReceiptInvoicing()
@@ -350,6 +354,40 @@ Function R4010B_ActualStocks()
 	|	VALUE(AccumulationRecordType.Expense),
 	|	ItemList.Period,
 	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	CASE
+	|		WHEN SerialLotNumbers.StockBalanceDetail
+	|			THEN SerialLotNumbers.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	ItemList.Period,
+	|	ItemList.TradeAgentStore,
+	|	ItemList.ItemKey,
+	|	CASE
+	|		WHEN SerialLotNumbers.StockBalanceDetail
+	|			THEN SerialLotNumbers.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END,
+	|	SUM(CASE
+	|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+	|			THEN ItemList.Quantity
+	|		ELSE SerialLotNumbers.Quantity
+	|	END)
+	|FROM
+	|	ItemList AS ItemList
+	|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+	|		ON ItemList.Key = SerialLotNumbers.Key
+	|WHERE
+	|	ItemList.IsTransaction_ShipmentToTradeAgent
+	|GROUP BY
+	|	VALUE(AccumulationRecordType.Receipt),
+	|	ItemList.Period,
+	|	ItemList.TradeAgentStore,
 	|	ItemList.ItemKey,
 	|	CASE
 	|		WHEN SerialLotNumbers.StockBalanceDetail
@@ -570,7 +608,7 @@ Function R4032B_GoodsInTransitOutgoing()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		   |CASE
-		   |	When ItemList.IsTransaction_Sales AND ItemList.SalesInvoiceExists Then
+		   |	When (ItemList.IsTransaction_Sales OR ItemList.IsTransaction_ShipmentToTradeAgent) AND ItemList.SalesInvoiceExists Then
 		   |		ItemList.SalesInvoice
 		   |	When ItemList.IsTransaction_InventoryTransfer AND ItemList.InventoryTransferExists Then
 		   |		ItemList.InventoryTransfer

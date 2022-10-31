@@ -137,6 +137,7 @@ Procedure SetVisible()
 	Items.GroupTaxes.Visible       = Object.OurCompany;
 	Items.GroupLedgerTypes.Visible = Object.OurCompany;
 	Items.GroupLandedCost.Visible  = Object.OurCompany;
+	Items.GroupComissionTrading.Visible  = Object.OurCompany;
 EndProcedure
 
 &AtClient

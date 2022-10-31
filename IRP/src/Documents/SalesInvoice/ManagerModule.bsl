@@ -260,7 +260,7 @@ Function ItemList()
 		|	SalesInvoiceItemList.SalesPerson,
 		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
 		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
-		|	SalesInvoiceItemList.Ref.Agreement.TradeAgentStore AS TradeAgentStore
+		|	SalesInvoiceItemList.Ref.Company.TradeAgentStore AS TradeAgentStore
 		|INTO ItemList
 		|FROM
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -531,7 +531,45 @@ Function R4010B_ActualStocks()
 		|		WHEN SerialLotNumbers.StockBalanceDetail
 		|			THEN SerialLotNumbers.SerialLotNumber
 		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		|	END";
+		|	END
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	SUM(CASE
+		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+		|			THEN ItemList.Quantity
+		|		ELSE SerialLotNumbers.Quantity
+		|	END) AS Quantity
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		|		ON ItemList.Key = SerialLotNumbers.Key
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND NOT ItemList.UseShipmentConfirmation
+		|	AND NOT ItemList.ShipmentConfirmationExists
+		|	AND ItemList.IsShipmentToTradeAgent
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 Function R4011B_FreeStocks()
@@ -593,6 +631,27 @@ Function R4011B_FreeStocks()
 		|		AND TmpStockReservation.Basis = ItemListGroup.SalesOrder
 		|WHERE
 		|	ItemListGroup.Quantity > ISNULL(TmpStockReservation.Quantity, 0)
+		|
+//		|UNION ALL
+//		|
+//		|SELECT
+//		|	VALUE(AccumulationRecordType.Receipt),
+//		|	ItemList.Period,
+//		|	ItemList.TradeAgentStore,
+//		|	ItemList.ItemKey AS ItemKey,
+//		|	SUM(ItemList.Quantity) AS Quantity
+//		|FROM
+//		|	ItemList AS ItemList
+//		|Where
+//		|	NOT ItemList.IsService
+//		|	AND NOT ItemList.UseShipmentConfirmation
+//		|	AND NOT ItemList.ShipmentConfirmationExists
+//		|	AND ItemList.IsShipmentToTradeAgent
+//		|GROUP BY
+//		|	VALUE(AccumulationRecordType.Receipt),
+//		|	ItemList.Period,
+//		|	ItemList.TradeAgentStore,
+//		|	ItemList.ItemKey
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -1069,7 +1128,7 @@ Function T6020S_BatchKeysInfo()
 		|
 		|GROUP BY
 		|	ItemList.ItemKey,
-		|	ItemList.Store,
+		|	ItemList.TradeAgentStore,
 		|	ItemList.Company,
 		|	ItemList.Period,
 		|	VALUE(Enum.BatchDirection.Receipt)";

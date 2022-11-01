@@ -148,8 +148,6 @@ Function ItemList()
 		|	DocItemList.Ref.Currency AS Currency,
 		|	DocItemList.Unit AS Unit,
 		|	DocItemList.Ref.Date AS Period,
-		|	DocItemList.SalesOrder AS SalesOrder,
-		|	NOT DocItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
 		|	DocItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		|	DocItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	DocItemList.RevenueType AS RevenueType,
@@ -326,7 +324,7 @@ Function R2021B_CustomersTransactions()
 		|	ItemList.Partner,
 		|	ItemList.Agreement,
 		|	ItemList.Basis,
-		|	ItemList.SalesOrder AS Order,
+		|	UNDEFINED AS Order,
 		|	SUM(ItemList.Amount) AS Amount,
 		|	UNDEFINED AS CustomersAdvancesClosing
 		|INTO R2021B_CustomersTransactions
@@ -337,7 +335,6 @@ Function R2021B_CustomersTransactions()
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.Basis,
-		|	ItemList.SalesOrder,
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.Currency,
@@ -416,7 +413,7 @@ Function T2015S_TransactionsInfo()
 	|	ItemList.Partner,
 	|	ItemList.LegalName,
 	|	ItemList.Agreement,
-	|	ItemList.SalesOrder AS Order,
+	|	UNDEFINED AS Order,
 	|	TRUE AS IsCustomerTransaction,
 	|	ItemList.Basis AS TransactionBasis,
 	|	SUM(ItemList.Amount) AS Amount,
@@ -434,7 +431,6 @@ Function T2015S_TransactionsInfo()
 	|	ItemList.Partner,
 	|	ItemList.LegalName,
 	|	ItemList.Agreement,
-	|	ItemList.SalesOrder,
 	|	ItemList.Basis";
 EndFunction
 

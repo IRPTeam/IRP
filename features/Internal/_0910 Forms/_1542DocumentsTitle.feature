@@ -18,6 +18,7 @@ Background:
 Scenario: _020200 preparation
 	When set True value to the constant
 	When set True value to the constant Use consolidated retail sales
+	When set True value to the constant Use commission trading
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -28,6 +29,7 @@ Scenario: _020200 preparation
 		When Create catalog BusinessUnits objects
 		When Create catalog Partners objects
 		When Create catalog Partners objects (Kalipso)
+		When Create catalog Partners objects (trade agent and consignor)
 		When Create catalog InterfaceGroups objects (Purchase and production,  Main information)
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -506,7 +508,25 @@ Scenario: _023125 check the display of the header of the collapsible group in Co
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
+Scenario: _023126 check the display of the header of the collapsible group in SalesReportFromTradeAgent
+	Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
+	When check the display of the header of the collapsible group in SalesReportFromTradeAgent
+	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Trade agent 1   Legal name: Trade agent 1" text
+	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
+	When I Check the steps for Exception
+        |'And I click Select button of  "Partner" field'|
+	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+	And I close all client application windows
 
+Scenario: _023127 check the display of the header of the collapsible group in SalesReportToConsignor
+	Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
+	When check the display of the header of the collapsible group in SalesReportToConsignor
+	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Partner: Consignor 1   Legal name: Consignor 1" text
+	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
+	When I Check the steps for Exception
+        |'And I click Select button of  "Partner" field'|
+	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+	And I close all client application windows
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

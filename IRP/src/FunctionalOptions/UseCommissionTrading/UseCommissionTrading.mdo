@@ -20,4 +20,5 @@
   <content>Document.PurchaseReturn.Attribute.TransactionType</content>
   <content>Catalog.Partners.Attribute.Consignor</content>
   <content>Catalog.Partners.Attribute.TradeAgent</content>
+  <content>Enum.InventoryOrigingTypes</content>
 </mdclass:FunctionalOption>

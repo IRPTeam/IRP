@@ -354,6 +354,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(R6070T_OtherPeriodsExpenses());
 	QueryArray.Add(R8012B_ConsignorInventory());
+	QueryArray.Add(R8013B_ConsignorBatchWiseBallance());
 	Return QueryArray;
 EndFunction
 
@@ -1194,6 +1195,29 @@ Function R8012B_ConsignorInventory()
 		|	ItemList.ItemKey,
 		|	ItemList.Partner,
 		|	ItemList.Agreement";
+EndFunction
+
+Function R8013B_ConsignorBatchWiseBallance()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Invoice AS Batch,
+		|	ItemList.ItemKey,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO R8013B_ConsignorBatchWiseBallance
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.IsReceiptFromConsignor
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Invoice,
+		|	ItemList.ItemKey";
 EndFunction
 
 #Region Accounting

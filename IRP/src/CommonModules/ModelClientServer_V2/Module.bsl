@@ -152,6 +152,7 @@ Function GetChain()
 	Chain.Insert("DefaultDeliveryDateInList" , GetChainLink("DefaultDeliveryDateInListExecute"));
 	Chain.Insert("DefaultQuantityInList"     , GetChainLink("DefaultQuantityInListExecute"));
 	Chain.Insert("DefaultCurrencyInList"     , GetChainLink("DefaultCurrencyInListExecute"));
+	Chain.Insert("DefaultInventoryOrigin"    , GetChainLink("DefaultInventoryOriginExecute"));
 	
 	// Empty.Header
 	Chain.Insert("EmptyStoreInHeader"     , GetChainLink("EmptyStoreInHeaderExecute"));
@@ -297,6 +298,20 @@ Function GetChain()
 	
 	Return Chain;
 EndFunction
+
+#EndRegion
+
+#Region INVENTORY_ORIGIN
+
+Function DefaultInventoryOriginOptions() Export
+	Return GetChainLinkOptions("CurrentInventoryOrigin");
+EndFUnction
+
+Function DefaultInventoryOriginExecute(Options) Export
+	InventoryOrigin = ?(ValueIsFilled(Options.CurrentInventoryOrigin), Options.CurrentInventoryOrigin, 
+		PredefinedValue("Enum.InventoryOrigingTypes.OwnStocks"));
+	Return InventoryOrigin;
+EndFunction	
 
 #EndRegion
 

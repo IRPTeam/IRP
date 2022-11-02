@@ -1094,6 +1094,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Branch else undefined end AS Branch,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Currency else undefined end AS Currency,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment then T6020S_BatchKeysInfo.RowID else undefined end AS ItemLinkID,
+	|	T6020S_BatchKeysInfo.BatchConsignor AS BatchConsignor,
 	|	T6020S_BatchKeysInfo.Store AS Store,
 	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey
 	|INTO BatchKeysRegister
@@ -1120,6 +1121,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Branch else undefined end,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Currency else undefined end,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment then T6020S_BatchKeysInfo.RowID else undefined end,
+	|	T6020S_BatchKeysInfo.BatchConsignor,
 	|	T6020S_BatchKeysInfo.Store,
 	|	T6020S_BatchKeysInfo.ItemKey
 	|;
@@ -1176,6 +1178,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Branch else undefined end AS Branch,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Currency else undefined end AS Currency,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment then T6020S_BatchKeysInfo.RowID else undefined end AS ItemLinkID,
+	|	T6020S_BatchKeysInfo.BatchConsignor AS BatchConsignor,
 	|	T6020S_BatchKeysInfo.Store AS Store,
 	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey
 	|INTO BatchKeysRegisterOutPeriod
@@ -1197,6 +1200,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Branch else undefined end,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.StockAdjustmentAsWriteOff OR T6020S_BatchKeysInfo.Recorder refs Document.WorkSheet then T6020S_BatchKeysInfo.Currency else undefined end,
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment then T6020S_BatchKeysInfo.RowID else undefined end,
+	|	T6020S_BatchKeysInfo.BatchConsignor,
 	|	T6020S_BatchKeysInfo.Store,
 	|	T6020S_BatchKeysInfo.ItemKey
 	|;
@@ -1220,6 +1224,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegister.Branch AS Branch,
 	|	BatchKeysRegister.Currency AS Currency,
 	|	BatchKeysRegister.ItemLinkID AS ItemLinkID,
+	|	BatchKeysRegister.BatchConsignor AS BatchConsignor,
 	|	BatchKeysRegister.Store AS Store,
 	|	BatchKeysRegister.ItemKey AS ItemKey
 	|INTO BatchKeysInfo
@@ -1246,6 +1251,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegisterOutPeriod.Branch,
 	|	BatchKeysRegisterOutPeriod.Currency,
 	|	BatchKeysRegisterOutPeriod.ItemLinkID,
+	|	BatchKeysRegisterOutPeriod.BatchConsignor,
 	|	BatchKeysRegisterOutPeriod.Store,
 	|	BatchKeysRegisterOutPeriod.ItemKey
 	|FROM
@@ -1271,6 +1277,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysInfo.RowID AS RowID,
 	|	BatchKeysInfo.Branch AS Branch,
 	|	BatchKeysInfo.Currency AS Currency,
+	|	BatchKeysInfo.BatchConsignor AS BatchConsignor,
 	|	BatchKeysInfo.ItemLinkID AS ItemLinkID
 	|INTO BatchKeys
 	|FROM
@@ -1293,6 +1300,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysInfo.RowID,
 	|	BatchKeysInfo.Branch,
 	|	BatchKeysInfo.Currency,
+	|	BatchKeysInfo.BatchConsignor,
 	|	BatchKeysInfo.ItemLinkID
 	|;
 	|
@@ -1341,6 +1349,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeys.RowID AS RowID,
 	|	BatchKeys.Branch AS Branch,
 	|	BatchKeys.Currency AS Currency,
+	|	BatchKeys.BatchConsignor AS BatchConsignor,
 	|	BatchKeys.ItemLinkID AS ItemLinkID
 	|INTO AllData
 	|FROM
@@ -1370,6 +1379,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	R6010B_BatchWiseBalance.AmountBalance,
 	|	R6010B_BatchWiseBalance.AmountTaxBalance,
 	|	R6010B_BatchWiseBalance.AmountCostRatioBalance,
+	|	UNDEFINED,
 	|	UNDEFINED,
 	|	UNDEFINED,
 	|	UNDEFINED,
@@ -1412,6 +1422,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllData.RowID AS RowID,
 	|	AllData.Branch AS Branch,
 	|	AllData.Currency AS Currency,
+	|	AllData.BatchConsignor AS BatchConsignor,
 	|	AllData.ItemLinkID AS ItemLinkID
 	|INTO AllDataGrouped
 	|FROM
@@ -1432,6 +1443,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllData.RowID,
 	|	AllData.Branch,
 	|	AllData.Currency,
+	|	AllData.BatchConsignor,
 	|	AllData.ItemLinkID
 	|;
 	|
@@ -1459,6 +1471,7 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	AllDataGrouped.RowID AS RowID,
 	|	AllDataGrouped.Branch AS Branch,
 	|	AllDataGrouped.Currency AS Currency,
+	|	AllDataGrouped.BatchConsignor AS BatchConsignor,
 	|	AllDataGrouped.ItemLinkID AS ItemLinkID,
 	|	FALSE AS Skip,
 	|	0 AS Priority
@@ -1723,6 +1736,16 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 
 			FilteredRows = Tree.Rows.FindRows(Filter, True);
 
+			IsSales_ConsignorStocks = False; 
+			IsSales_OwnStocks = False; 
+			If TypeOf(Row.Document) = Type("DocumentRef.SalesInvoice") Then
+				If ValueIsFilled(Row.BatchConsignor) Then
+					IsSales_ConsignorStocks = True;
+				Else
+					IsSales_OwnStocks = True;
+				EndIf;
+			EndIf;
+			
 			For Each Row_Batch In FilteredRows Do
 
 				If Row_Batch.Date > Row.Date Then
@@ -1744,7 +1767,24 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				If Not ValueIsFilled(Row_Batch.Batch) Then
 					Continue;
 				EndIf;
-
+				
+				// is sales own stocks, expense only purchased batches
+				If IsSales_OwnStocks Then
+					IsReceiptFromConsignor = TypeOf(Row_Batch.Batch.Document) = Type("DocumentRef.PurchaseInvoice") 
+						And Row_Batch.Batch.Document.TransactionType = Enums.PurchaseTransactionTypes.ReceiptFromConsignor;
+				
+					If IsReceiptFromConsignor Then
+						Continue;
+					EndIf;
+				EndIf;
+				
+				// is sales consignor stocks, expense only consignor batches
+				If IsSales_ConsignorStocks Then
+					If Row_Batch.Batch.Document <> Row.BatchConsignor Then
+						Continue;
+					EndIf;
+				EndIf;
+				
 				ExpenseQuantity = Min(NeedExpense, Row_Batch.QuantityBalance);
 
 				// expense amount 
@@ -1829,7 +1869,8 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					EndIf;		
 				EndIf;
 
-			EndDo;
+			EndDo; // FilteredRows
+			
 			If RestoreSortByDate Then
 				For Each Row_Documents In Tree.Rows Do
 					Row_Documents.Rows.Sort("Date");
@@ -1851,6 +1892,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				NewRow.Period   = Row.Date;
 				NewRow.Quantity = NeedExpense;
 			EndIf;
+			
 		EndIf;
 	EndDo;
 	

@@ -109,6 +109,8 @@
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
   <registerRecords>AccumulationRegister.R8010B_TradeAgentInventory</registerRecords>
   <registerRecords>AccumulationRegister.R8011B_TradeAgentSerialLotNumber</registerRecords>
+  <registerRecords>AccumulationRegister.R8012B_ConsignorInventory</registerRecords>
+  <registerRecords>AccumulationRegister.R8013B_ConsignorBatchWiseBallance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -742,6 +744,21 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a9c36daf-1b92-482a-93b3-8bc22ce3bf43">
+      <name>InventoryOrigin</name>
+      <synonym>
+        <key>en</key>
+        <value>Inventory origin</value>
+      </synonym>
+      <type>
+        <types>EnumRef.InventoryOrigingTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -1525,6 +1542,73 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="51e294d0-669c-4942-b322-b23c0d9dceca">
+    <producedTypes>
+      <objectType typeId="848e64ca-3af3-4894-a6ad-0dcacffe9efa" valueTypeId="cdc1ea6e-edb2-4660-b289-311221a65ad2"/>
+      <rowType typeId="fb45a984-9f1a-4420-a9b6-adf69fbc2e02" valueTypeId="2209e349-6320-4f5d-acee-e4b73f69f4fa"/>
+    </producedTypes>
+    <name>ConsignorBatches</name>
+    <synonym>
+      <key>en</key>
+      <value>Consignor batches</value>
+    </synonym>
+    <attributes uuid="9a808466-8470-47b8-9645-da44257d36ef">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7fd283b3-b1a2-4d57-8fff-aae91ef83d28">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ed00d65e-e847-449d-82ba-9c330f5426e4">
+      <name>Batch</name>
+      <synonym>
+        <key>en</key>
+        <value>Batch</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.PurchaseInvoice</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="0561e392-4175-4569-9b09-ddfb60e17a92">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
   <commands uuid="884ba46e-eebe-48ad-aaf4-2d1edd607970">

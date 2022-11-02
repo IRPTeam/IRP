@@ -544,9 +544,10 @@ Function GetAllBindingsByDefault(Parameters)
 	Binding.Insert("Store"        , BindDefaultStore(Parameters));
 	Binding.Insert("DeliveryDate" , BindDefaultDeliveryDate(Parameters));
 	
-	Binding.Insert("ItemList.Store"        , BindDefaultItemListStore(Parameters));
-	Binding.Insert("ItemList.DeliveryDate" , BindDefaultItemListDeliveryDate(Parameters));
-	Binding.Insert("ItemList.Quantity"     , BindDefaultItemListQuantity(Parameters));
+	Binding.Insert("ItemList.Store"          , BindDefaultItemListStore(Parameters));
+	Binding.Insert("ItemList.DeliveryDate"   , BindDefaultItemListDeliveryDate(Parameters));
+	Binding.Insert("ItemList.Quantity"       , BindDefaultItemListQuantity(Parameters));
+	Binding.Insert("ItemList.InventoryOrigin", BindDefaultItemListInventoryOrigin(Parameters));
 	
 	Binding.Insert("PaymentList.Currency"  , BindDefaultPaymentListCurrency(Parameters));
 	Binding.Insert("PaymentList."          , BindDefaultPaymentListTaxRate(Parameters));
@@ -8459,6 +8460,46 @@ Procedure StepItemListDefaultQuantityInList(Parameters, Chain) Export
 	Options.CurrentQuantity = GetItemListQuantity(Parameters, NewRow.Key);
 	Options.Key = NewRow.Key;
 	Chain.DefaultQuantityInList.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_INVENTORY_ORIGIN
+
+// ItemList.InventoryOrigin.Set
+Procedure SetItemListInventoryOrigin(Parameters, Results) Export
+	Binding = BindItemListInventoryOrigin(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.InventoryOrigin.Get
+Function GetItemListInventoryOrigin(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListInventoryOrigin(Parameters).DataPath, _Key);
+EndFunction
+
+// ItemList.InventoryOrigin.Default.Bind
+Function BindDefaultItemListInventoryOrigin(Parameters)
+	DataPath = "ItemList.InventoryOrigin";
+	Binding = New Structure();
+	Return BindSteps("StepItemListDefaultInventoryOrigin", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.InventoryOrigin.Bind
+Function BindItemListInventoryOrigin(Parameters)
+	DataPath = "ItemList.InventoryOrigin";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.Quantity.DefaultInventoryOrigin.Step
+Procedure StepItemListDefaultInventoryOrigin(Parameters, Chain) Export
+	Chain.DefaultInventoryOrigin.Enable = True;
+	Chain.DefaultInventoryOrigin.Setter = "SetItemListInventoryOrigin";
+	Options = ModelClientServer_V2.DefaultInventoryOriginOptions();
+	NewRow = Parameters.RowFilledByUserSettings;
+	Options.CurrentInventoryOrigin = GetItemListInventoryOrigin(Parameters, NewRow.Key);
+	Options.Key = NewRow.Key;
+	Chain.DefaultInventoryOrigin.Options.Add(Options);
 EndProcedure
 
 #EndRegion

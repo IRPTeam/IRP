@@ -187,6 +187,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R6080T_OtherPeriodsRevenues());
 	QueryArray.Add(R8010B_TradeAgentInventory());
 	QueryArray.Add(R8011B_TradeAgentSerialLotNumber());
+	QueryArray.Add(R8012B_ConsignorInventory());
+	QueryArray.Add(R8013B_ConsignorBatchWiseBallance());
 	Return QueryArray;
 EndFunction
 
@@ -262,7 +264,9 @@ Function ItemList()
 		|	SalesInvoiceItemList.SalesPerson,
 		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
 		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
-		|	SalesInvoiceItemList.Ref.Company.TradeAgentStore AS TradeAgentStore
+		|	SalesInvoiceItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
+		|	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.OwnStocks) AS IsOwnStocks,
+		|	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.ConsignorStocks) AS IsConsignorStocks
 		|INTO ItemList
 		|FROM
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -283,7 +287,20 @@ Function ItemList()
 		|FROM
 		|	Document.SalesInvoice.ShipmentConfirmations AS SalesInvoiceShipmentConfirmations
 		|WHERE
-		|	SalesInvoiceShipmentConfirmations.Ref = &Ref";
+		|	SalesInvoiceShipmentConfirmations.Ref = &Ref
+		|;
+		|
+		|///////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	SalesInvoiceConsignorBatchesInfo.Key,
+		|	SalesInvoiceConsignorBatchesInfo.ItemKey,
+		|	SalesInvoiceConsignorBatchesInfo.Batch,
+		|	SalesInvoiceConsignorBatchesInfo.Quantity
+		|INTO SalesInvoiceConsignorBatchesInfo
+		|FROM
+		|	Document.SalesInvoice.ConsignorBatches AS SalesInvoiceConsignorBatchesInfo
+		|WHERE
+		|	SalesInvoiceConsignorBatchesInfo.Ref = &Ref";
 EndFunction
 
 Function ItemListLandedCost()
@@ -351,7 +368,9 @@ Function Taxes()
 		|	SalesInvoiceItemList.NetAmount AS TaxableAmount,
 		|	SalesInvoiceItemList.Ref.Branch AS Branch,
 		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
-		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent
+		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
+		|	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.OwnStocks) AS IsOwnStocks,
+		|	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.ConsignorStocks) AS IsConsignorStocks
 		|INTO Taxes
 		|FROM
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -393,7 +412,8 @@ Function R2001T_Sales()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsSales";
+		|	ItemList.IsSales
+		|	AND ItemList.IsOwnStocks";
 EndFunction
 
 Function R2005T_SalesSpecialOffers()
@@ -496,7 +516,8 @@ Function R2040B_TaxesIncoming()
 		|FROM
 		|	Taxes AS Taxes
 		|WHERE
-		|	Taxes.IsSales";
+		|	Taxes.IsSales
+		|	AND Taxes.IsOwnStocks";
 EndFunction
 
 #Region Stock
@@ -762,6 +783,7 @@ Function R4050B_StockInventory()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.IsService
+		|	AND ItemList.IsOwnStocks
 		|
 		|GROUP BY
 		|	VALUE(AccumulationRecordType.Expense),
@@ -1005,7 +1027,8 @@ Function R5021T_Revenues()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemLIst.IsSales";
+		|	ItemLIst.IsSales
+		|	AND ItemList.IsOwnStocks";
 EndFunction
 
 Function T3010S_RowIDInfo()
@@ -1080,12 +1103,16 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.ItemKey,
 		|	ItemList.Store,
 		|	ItemList.Company,
-		|	SUM(ItemList.Quantity) AS Quantity,
+		|	SUM(case when ConsignorBatchesInfo.Quantity is null then ItemList.Quantity else ConsignorBatchesInfo.Quantity end) AS Quantity,
 		|	ItemList.Period,
-		|	VALUE(Enum.BatchDirection.Expense) AS Direction
+		|	VALUE(Enum.BatchDirection.Expense) AS Direction,
+		|	ConsignorBatchesInfo.Batch AS BatchConsignor
 		|INTO T6020S_BatchKeysInfo
 		|FROM
 		|	ItemList AS ItemList
+		|	LEFT JOIN SalesInvoiceConsignorBatchesInfo AS ConsignorBatchesInfo ON
+		|	ItemList.Key = ConsignorBatchesInfo.Key
+		|
 		|WHERE
 		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
 		|
@@ -1094,7 +1121,8 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Store,
 		|	ItemList.Company,
 		|	ItemList.Period,
-		|	VALUE(Enum.BatchDirection.Expense)
+		|	VALUE(Enum.BatchDirection.Expense),
+		|	ConsignorBatchesInfo.Batch
 		|
 		|UNION ALL
 		|
@@ -1104,7 +1132,8 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Company,
 		|	SUM(ItemList.Quantity),
 		|	ItemList.Period,
-		|	VALUE(Enum.BatchDirection.Receipt)
+		|	VALUE(Enum.BatchDirection.Receipt),
+		|	UNDEFINED
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
@@ -1161,6 +1190,42 @@ Function R8011B_TradeAgentSerialLotNumber()
 		|	SerialLotNumbers AS SerialLotNumbers
 		|WHERE
 		|	SerialLotNumbers.IsShipmentToTradeAgent";
+EndFunction
+
+Function R8012B_ConsignorInventory()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.ItemKey,
+		|	ItemList.Partner,
+		|	ItemList.Agreement,
+		|	ItemList.Quantity
+		|INTO R8012B_ConsignorInventory
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsSales
+		|	AND ItemList.IsConsignorStocks";		
+EndFunction
+
+Function R8013B_ConsignorBatchWiseBallance()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ConsignorBatchesInfo.Batch,
+		|	ConsignorBatchesInfo.ItemKey,
+		|	ConsignorBatchesInfo.Quantity
+		|INTO R8013B_ConsignorBatchWiseBallance
+		|FROM
+		|	ItemList AS ItemList
+		|		INNER JOIN SalesInvoiceConsignorBatchesInfo AS ConsignorBatchesInfo
+		|		ON ItemList.IsSales
+		|		AND ItemList.IsConsignorStocks
+		|		AND ItemList.Key = ConsignorBatchesInfo.Key";
 EndFunction
 
 #EndRegion

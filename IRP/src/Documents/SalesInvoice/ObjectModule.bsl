@@ -6,7 +6,11 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-
+	
+	If WriteMode = DocumentWriteMode.Posting Then
+		CommissionTradeServer.FillConsignorBatches(ThisObject);
+	EndIf;
+				
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 EndProcedure
 
@@ -154,6 +158,16 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 				CommonFunctionsClientServer.ShowUsersMessage(
 					MessageText, 
 					"Object.ItemList[" + (QuerySelection.LineNumber - 1) + "].Store", 
+					"Object.ItemList");
+			EndIf;
+		EndDo;
+	EndIf;
+	
+	If ThisObject.TransactionType = Enums.SalesTransactionTypes.ShipmentToTradeAgent Then
+		For Each Row In ThisObject.ItemList Do
+			If Row.InventoryOrigin = Enums.InventoryOrigingTypes.ConsignorStocks Then
+				CommonFunctionsClientServer.ShowUsersMessage(R().Error_121, 
+					"Object.ItemList[" + (QuerySelection.LineNumber - 1) + "].InventoryOrigin", 
 					"Object.ItemList");
 			EndIf;
 		EndDo;

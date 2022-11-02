@@ -437,6 +437,7 @@
   <commonModules>CommonModule.DocSalesReportToConsignorClient</commonModules>
   <commonModules>CommonModule.DocSalesReportFromTradeAgentServer</commonModules>
   <commonModules>CommonModule.DocSalesReportToConsignorServer</commonModules>
+  <commonModules>CommonModule.CommissionTradeServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -846,6 +847,7 @@
   <enums>Enum.PurchaseTransactionTypes</enums>
   <enums>Enum.SalesReturnTransactionTypes</enums>
   <enums>Enum.PurchaseReturnTransactionTypes</enums>
+  <enums>Enum.InventoryOrigingTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>
@@ -1015,6 +1017,7 @@
   <accumulationRegisters>AccumulationRegister.R8010B_TradeAgentInventory</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8011B_TradeAgentSerialLotNumber</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8012B_ConsignorInventory</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R8013B_ConsignorBatchWiseBallance</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

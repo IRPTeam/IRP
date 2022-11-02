@@ -633,10 +633,13 @@ Function T6020S_BatchKeysInfo()
 	|	ItemList.Company,
 	|	ItemList.StoreReceiver AS Store,
 	|	ItemList.ItemKey,
-	|	SUM(ItemList.Quantity) AS Quantity
+	|	ConsignorBatchesInfo.Batch AS BatchConsignor,
+	|	SUM(case when ConsignorBatchesInfo.Quantity is null then ItemList.Quantity else ConsignorBatchesInfo.Quantity end) AS Quantity
 	|INTO T6020S_BatchKeysInfo
 	|FROM
 	|	ItemList AS ItemList
+	|	LEFT JOIN ConsignorBatchesInfo AS ConsignorBatchesInfo ON
+	|	ItemList.Key = ConsignorBatchesInfo.Key
 	|WHERE
 	|	TRUE
 	|GROUP BY
@@ -644,7 +647,8 @@ Function T6020S_BatchKeysInfo()
 	|	VALUE(Enum.BatchDirection.Receipt),
 	|	ItemList.Company,
 	|	ItemList.StoreReceiver,
-	|	ItemList.ItemKey
+	|	ItemList.ItemKey,
+	|	ConsignorBatchesInfo.Batch
 	|
 	|UNION ALL
 	|
@@ -654,9 +658,12 @@ Function T6020S_BatchKeysInfo()
 	|	ItemList.Company,
 	|	ItemList.StoreSender,
 	|	ItemList.ItemKey,
-	|	SUM(ItemList.Quantity) AS Quantity
+	|	ConsignorBatchesInfo.Batch,
+	|	SUM(case when ConsignorBatchesInfo.Quantity is null then ItemList.Quantity else ConsignorBatchesInfo.Quantity end) AS Quantity
 	|FROM
 	|	ItemList AS ItemList
+	|	LEFT JOIN ConsignorBatchesInfo AS ConsignorBatchesInfo ON
+	|	ItemList.Key = ConsignorBatchesInfo.Key
 	|WHERE
 	|	TRUE
 	|GROUP BY
@@ -664,7 +671,8 @@ Function T6020S_BatchKeysInfo()
 	|	VALUE(Enum.BatchDirection.Expense),
 	|	ItemList.Company,
 	|	ItemList.StoreSender,
-	|	ItemList.ItemKey";
+	|	ItemList.ItemKey,
+	|	ConsignorBatchesInfo.Batch";
 EndFunction
 
 Function R8013B_ConsignorBatchWiseBallance()

@@ -962,7 +962,9 @@ Function InventoryBeforeAddRow(Object, Form, Cancel = False, Clone = False, Curr
 	NewRow = AddOrCopyRow(Object, Form, "Inventory", Cancel, Clone, CurrentData,
 		"InventoryOnAddRowFormNotify", "InventoryOnCopyRowFormNotify");
 	Form.Items.Inventory.CurrentRow = NewRow.GetID();
-	Form.Items.Inventory.ChangeRow();
+	If Form.Items.Inventory.CurrentRow <> Undefined Then
+		Form.Items.Inventory.ChangeRow();
+	EndIf;
 	Return NewRow;
 EndFunction
 
@@ -1052,7 +1054,9 @@ Function AccountBalanceBeforeAddRow(Object, Form, Cancel = False, Clone = False,
 	NewRow = AddOrCopyRow(Object, Form, "AccountBalance", Cancel, Clone, CurrentData,
 		"AccountBalanceOnAddRowFormNotify", "AccountBalanceOnCopyRowFormNotify");
 	Form.Items.AccountBalance.CurrentRow = NewRow.GetID();
-	Form.Items.AccountBalance.ChangeRow();
+	If Form.Items.AccountBalance.CurrentRow <> Undefined Then
+		Form.Items.AccountBalance.ChangeRow();
+	EndIf;
 	Return NewRow;
 EndFunction
 
@@ -1091,7 +1095,9 @@ Function ChequeBondsBeforeAddRow(Object, Form, Cancel = False, Clone = False, Cu
 	NewRow = AddOrCopyRow(Object, Form, "ChequeBonds", Cancel, Clone, CurrentData,
 		"ChequeBondsOnAddRowFormNotify", "ChequeBondsOnCopyRowFormNotify");
 	Form.Items.ChequeBonds.CurrentRow = NewRow.GetID();
-	Form.Items.ChequeBonds.ChangeRow();
+	If Form.Items.ChequeBonds.CurrentRow <> Undefined Then
+		Form.Items.ChequeBonds.ChangeRow();
+	EndIf;
 	Return NewRow;
 EndFunction
 
@@ -1118,7 +1124,9 @@ Function ChequeBondsAddFilledRow(Object, Form,  FillingValues) Export
 	NewRow = AddOrCopyRow(Object, Form, "ChequeBonds", Cancel, Clone, CurrentData,
 		"ChequeBondsOnAddRowFormNotify", "ChequeBondsOnCopyRowFormNotify", FillingValues);
 	Form.Items.ChequeBonds.CurrentRow = NewRow.GetID();
-	Form.Items.ChequeBonds.ChangeRow();
+	If Form.Items.ChequeBonds.CurrentRow <> Undefined Then
+		Form.Items.ChequeBonds.ChangeRow();
+	EndIf;
 	Return NewRow;
 EndFunction
 
@@ -1207,7 +1215,9 @@ Function MaterialsBeforeAddRow(Object, Form, Cancel = False, Clone = False, Curr
 	NewRow = AddOrCopyRow(Object, Form, "Materials", Cancel, Clone, CurrentData,
 		"MaterialsOnAddRowFormNotify", "MaterialsOnCopyRowFormNotify", Undefined, KeyOwner);
 	Form.Items.Materials.CurrentRow = NewRow.GetID();
-	Form.Items.Materials.ChangeRow();
+	If Form.Items.Materials.CurrentRow <> Undefined Then
+		Form.Items.Materials.ChangeRow();
+	EndIf;
 	Return NewRow;
 EndFunction
 
@@ -1307,7 +1317,9 @@ Function WorkersBeforeAddRow(Object, Form, Cancel = False, Clone = False, Curren
 	NewRow = AddOrCopyRow(Object, Form, "Workers", Cancel, Clone, CurrentData,
 		"WorkersOnAddRowFormNotify", "WorkersOnCopyRowFormNotify");
 	Form.Items.Workers.CurrentRow = NewRow.GetID();
-	Form.Items.Workers.ChangeRow();
+	If Form.Items.Workers.CurrentRow <> Undefined Then
+		Form.Items.Workers.ChangeRow();
+	EndIf;
 	Return NewRow;
 EndFunction
 
@@ -1327,7 +1339,9 @@ Function ProductionsBeforeAddRow(Object, Form, Cancel = False, Clone = False, Cu
 	NewRow = AddOrCopyRow(Object, Form, "Productions", Cancel, Clone, CurrentData,
 		"ProductionsOnAddRowFormNotify", "ProductionsOnCopyRowFormNotify");
 	Form.Items.Productions.CurrentRow = NewRow.GetID();
-	Form.Items.Productions.ChangeRow();
+	If Form.Items.Productions.CurrentRow <> Undefined Then
+		Form.Items.Productions.ChangeRow();
+	EndIf;
 	Return NewRow;
 EndFunction
 
@@ -1425,7 +1439,9 @@ Function ItemListBeforeAddRow(Object, Form, Cancel = False, Clone = False, Curre
 	NewRow = AddOrCopyRow(Object, Form, "ItemList", Cancel, Clone, CurrentData,
 		"ItemListOnAddRowFormNotify", "ItemListOnCopyRowFormNotify");
 	Form.Items.ItemList.CurrentRow = NewRow.GetID();
-	Form.Items.ItemList.ChangeRow();
+	If Form.Items.ItemList.CurrentRow <> Undefined Then
+		Form.Items.ItemList.ChangeRow();
+	EndIf;
 	Return NewRow;
 EndFunction
 
@@ -1464,7 +1480,9 @@ Function ItemListAddFilledRow(Object, Form,  FillingValues) Export
 	NewRow = AddOrCopyRow(Object, Form, "ItemList", Cancel, Clone, CurrentData,
 		"ItemListOnAddRowFormNotify", "ItemListOnCopyRowFormNotify", FillingValues);
 	Form.Items.ItemList.CurrentRow = NewRow.GetID();
-	Form.Items.ItemList.ChangeRow();
+	If Form.Items.ItemList.CurrentRow <> Undefined Then
+		Form.Items.ItemList.ChangeRow();
+	EndIf;
 	Return NewRow;
 EndFunction
 
@@ -1946,7 +1964,9 @@ Procedure PaymentListBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Und
 	NewRow = AddOrCopyRow(Object, Form, "PaymentList", Cancel, Clone, CurrentData,
 		"PaymentListOnAddRowFormNotify", "PaymentListOnCopyRowFormNotify");
 	Form.Items.PaymentList.CurrentRow = NewRow.GetID();
-	Form.Items.PaymentList.ChangeRow();
+	If Form.Items.PaymentList.CurrentRow <> Undefined Then
+		Form.Items.PaymentList.ChangeRow();
+	EndIf;
 EndProcedure
 
 Procedure PaymentListOnAddRowFormNotify(Parameters) Export
@@ -2129,7 +2149,9 @@ Procedure TransactionsBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Un
 	NewRow = AddOrCopyRow(Object, Form, "Transactions", Cancel, Clone, CurrentData,
 		"TransactionsOnAddRowFormNotify", "TransactionsOnCopyRowFormNotify");
 	Form.Items.Transactions.CurrentRow = NewRow.GetID();
-	Form.Items.Transactions.ChangeRow();
+	If Form.Items.Transactions.CurrentRow <> Undefined Then
+		Form.Items.Transactions.ChangeRow();
+	EndIf;
 EndProcedure
 
 Procedure TransactionsOnAddRowFormNotify(Parameters) Export
@@ -3008,7 +3030,9 @@ Procedure PaymentsBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefi
 	NewRow = AddOrCopyRowSimpleTable(Object, Form, "Payments", Cancel, Clone, CurrentData,
 		"PaymentsOnAddRowFormNotify", "PaymentsOnCopyRowFormNotify");
 	Form.Items.Payments.CurrentRow = NewRow.GetID();
-	Form.Items.Payments.ChangeRow();
+	If Form.Items.Payments.CurrentRow <> Undefined Then
+		Form.Items.Payments.ChangeRow();
+	EndIf;
 EndProcedure
 
 Procedure PaymentsOnAddRowFormNotify(Parameters) Export

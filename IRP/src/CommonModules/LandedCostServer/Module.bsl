@@ -1736,7 +1736,8 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			FIlter.Insert("Direction", Enums.BatchDirection.Receipt);
 
 			FilteredRows = Tree.Rows.FindRows(Filter, True);
-
+			
+			// sales - consignor/own stocks
 			IsSales_ConsignorStocks = False; 
 			IsSales_OwnStocks = False; 
 			If TypeOf(Row.Document) = Type("DocumentRef.SalesInvoice") Then
@@ -1744,6 +1745,17 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					IsSales_ConsignorStocks = True;
 				Else
 					IsSales_OwnStocks = True;
+				EndIf;
+			EndIf;
+			
+			// transfer - consignor/own stocks
+			IsTransfer_ConsignorStocks = False; 
+			IsTransfer_OwnStocks = False; 
+			If TypeOf(Row.Document) = Type("DocumentRef.InventoryTransfer") Then
+				If ValueIsFilled(Row.BatchConsignor) Then
+					IsTransfer_ConsignorStocks = True;
+				Else
+					IsTransfer_OwnStocks = True;
 				EndIf;
 			EndIf;
 			
@@ -1769,8 +1781,8 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					Continue;
 				EndIf;
 				
-				// is sales own stocks, expense only purchased batches
-				If IsSales_OwnStocks Then
+				// is sales/transfer own stocks, expense only purchased batches
+				If IsSales_OwnStocks Or IsTransfer_OwnStocks Then
 					IsReceiptFromConsignor = TypeOf(Row_Batch.Batch.Document) = Type("DocumentRef.PurchaseInvoice") 
 						And Row_Batch.Batch.Document.TransactionType = Enums.PurchaseTransactionTypes.ReceiptFromConsignor;
 				
@@ -1779,8 +1791,8 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					EndIf;
 				EndIf;
 				
-				// is sales consignor stocks, expense only consignor batches
-				If IsSales_ConsignorStocks Then
+				// is sales/transfer consignor stocks, expense only consignor batches
+				If IsSales_ConsignorStocks Or IsTransfer_ConsignorStocks Then
 					If Row_Batch.Batch.Document <> Row.BatchConsignor Then
 						Continue;
 					EndIf;
@@ -2122,42 +2134,55 @@ EndFunction
 Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewReceivedBatches, CalculationSettings)
 	For Each Row In Rows Do
 		If Row.Direction = Enums.BatchDirection.Receipt And Not Row.IsOpeningBalance Then
+			
 			NeedReceipt = Row.Quantity;
 			For Each Row_Expense In DataForExpense Do
-				If Row.BatchKey.ItemKey = Row_Expense.BatchKey.ItemKey Then
-					NeedReceipt = NeedReceipt - Row_Expense.Quantity;
-					NewRow = Tables.DataForReceipt.Add();
-					NewRow.Batch     = Row_Expense.Batch;
-					NewRow.BatchKey  = Row.BatchKey;
-					NewRow.Document  = Row.Document;
-					NewRow.Company   = Row.Company;
-					NewRow.Period    = Row.Date;
-					NewRow.Quantity  = Row_Expense.Quantity;
-					NewRow.Amount    = Row_Expense.Amount;
-					NewRow.AmountTax = Row_Expense.AmountTax;
-					NewRow.AmountCostRatio = Row_Expense.AmountCostRatio;
-
-					NewRowReceivedBatch = TableOfNewReceivedBatches.Add();
-					NewRowReceivedBatch.Batch            = Row_Expense.Batch;
-					NewRowReceivedBatch.BatchKey         = Row.BatchKey;
-					NewRowReceivedBatch.Document         = Row.Document;
-					NewRowReceivedBatch.Company          = Row.Company;
-					NewRowReceivedBatch.Date             = Row.Date;
-					NewRowReceivedBatch.Quantity         = Row_Expense.Quantity;
-					NewRowReceivedBatch.Amount           = Row_Expense.Amount;
-					NewRowReceivedBatch.AmountTax        = Row_Expense.AmountTax;
-					NewRowReceivedBatch.AmountCostRatio  = Row_Expense.AmountCostRatio;
-					NewRowReceivedBatch.QuantityBalance  = Row_Expense.Quantity;
-					NewRowReceivedBatch.AmountBalance    = Row_Expense.Amount;
-					NewRowReceivedBatch.AmountTaxBalance = Row_Expense.AmountTax;
-					NewRowReceivedBatch.AmountCostRatioBalance = Row_Expense.AmountCostRatio;
-					NewRowReceivedBatch.IsOpeningBalance = False;
-					NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
+				If NeedReceipt = 0 Then
+					Continue;
 				EndIf;
+				
+				If Row.BatchKey.ItemKey <> Row_Expense.BatchKey.ItemKey Then
+					Continue;
+				EndIf;
+				
+				If ValueIsFilled(Row.BatchConsignor) Then
+					If Row_Expense.Batch.Document <> Row.BatchConsignor Then
+						Continue;
+					EndIf;
+				EndIf;
+				
+				NeedReceipt = NeedReceipt - Row_Expense.Quantity;
+				NewRow = Tables.DataForReceipt.Add();
+				NewRow.Batch     = Row_Expense.Batch;
+				NewRow.BatchKey  = Row.BatchKey;
+				NewRow.Document  = Row.Document;
+				NewRow.Company   = Row.Company;
+				NewRow.Period    = Row.Date;
+				NewRow.Quantity  = Row_Expense.Quantity;
+				NewRow.Amount    = Row_Expense.Amount;
+				NewRow.AmountTax = Row_Expense.AmountTax;
+				NewRow.AmountCostRatio = Row_Expense.AmountCostRatio;
+
+				NewRowReceivedBatch = TableOfNewReceivedBatches.Add();
+				NewRowReceivedBatch.Batch            = Row_Expense.Batch;
+				NewRowReceivedBatch.BatchKey         = Row.BatchKey;
+				NewRowReceivedBatch.Document         = Row.Document;
+				NewRowReceivedBatch.Company          = Row.Company;
+				NewRowReceivedBatch.Date             = Row.Date;
+				NewRowReceivedBatch.Quantity         = Row_Expense.Quantity;
+				NewRowReceivedBatch.Amount           = Row_Expense.Amount;
+				NewRowReceivedBatch.AmountTax        = Row_Expense.AmountTax;
+				NewRowReceivedBatch.AmountCostRatio  = Row_Expense.AmountCostRatio;
+				NewRowReceivedBatch.QuantityBalance  = Row_Expense.Quantity;
+				NewRowReceivedBatch.AmountBalance    = Row_Expense.Amount;
+				NewRowReceivedBatch.AmountTaxBalance = Row_Expense.AmountTax;
+				NewRowReceivedBatch.AmountCostRatioBalance = Row_Expense.AmountCostRatio;
+				NewRowReceivedBatch.IsOpeningBalance = False;
+				NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
+				
 			EndDo;
 			If NeedReceipt <> 0 Then
-				//@skip-check property-return-type
-				//@skip-check invocation-parameter-type-intersect
+				// Can not receipt Batch key
 				Msg = StrTemplate(R().LC_Error_003, Row.BatchKey, NeedReceipt, Row.Document);
 				CommonFunctionsClientServer.ShowUsersMessage(Msg);
 				If CalculationSettings.RaiseOnCalculationError Then
@@ -2183,7 +2208,6 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 		EndIf;
 	EndDo;
 	For Each Row In ArrayForDelete Do
-		//@skip-check invocation-parameter-type-intersect
 		Rows.Delete(Row);
 	EndDo;
 EndProcedure

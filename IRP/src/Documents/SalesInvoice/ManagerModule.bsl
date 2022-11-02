@@ -292,15 +292,16 @@ Function ItemList()
 		|
 		|///////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	SalesInvoiceConsignorBatchesInfo.Key,
-		|	SalesInvoiceConsignorBatchesInfo.ItemKey,
-		|	SalesInvoiceConsignorBatchesInfo.Batch,
-		|	SalesInvoiceConsignorBatchesInfo.Quantity
-		|INTO SalesInvoiceConsignorBatchesInfo
+		|	ConsignorBatchesInfo.Key,
+		|	ConsignorBatchesInfo.ItemKey,
+		|	ConsignorBatchesInfo.Store,
+		|	ConsignorBatchesInfo.Batch,
+		|	ConsignorBatchesInfo.Quantity
+		|INTO ConsignorBatchesInfo
 		|FROM
-		|	Document.SalesInvoice.ConsignorBatches AS SalesInvoiceConsignorBatchesInfo
+		|	Document.SalesInvoice.ConsignorBatches AS ConsignorBatchesInfo
 		|WHERE
-		|	SalesInvoiceConsignorBatchesInfo.Ref = &Ref";
+		|	ConsignorBatchesInfo.Ref = &Ref";
 EndFunction
 
 Function ItemListLandedCost()
@@ -1110,7 +1111,7 @@ Function T6020S_BatchKeysInfo()
 		|INTO T6020S_BatchKeysInfo
 		|FROM
 		|	ItemList AS ItemList
-		|	LEFT JOIN SalesInvoiceConsignorBatchesInfo AS ConsignorBatchesInfo ON
+		|	LEFT JOIN ConsignorBatchesInfo AS ConsignorBatchesInfo ON
 		|	ItemList.Key = ConsignorBatchesInfo.Key
 		|
 		|WHERE
@@ -1218,11 +1219,12 @@ Function R8013B_ConsignorBatchWiseBallance()
 		|	ItemList.Company,
 		|	ConsignorBatchesInfo.Batch,
 		|	ConsignorBatchesInfo.ItemKey,
+		|	ConsignorBatchesInfo.Store,
 		|	ConsignorBatchesInfo.Quantity
 		|INTO R8013B_ConsignorBatchWiseBallance
 		|FROM
 		|	ItemList AS ItemList
-		|		INNER JOIN SalesInvoiceConsignorBatchesInfo AS ConsignorBatchesInfo
+		|		INNER JOIN ConsignorBatchesInfo AS ConsignorBatchesInfo
 		|		ON ItemList.IsSales
 		|		AND ItemList.IsConsignorStocks
 		|		AND ItemList.Key = ConsignorBatchesInfo.Key";

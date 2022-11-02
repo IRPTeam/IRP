@@ -110,6 +110,21 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="f95313df-0eb0-4d69-bf29-be0eab9712b9">
+    <name>IsSalesConsignorStocks</name>
+    <synonym>
+      <key>en</key>
+      <value>Is sales consignor stocks</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
     <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <dimensions uuid="ddb64408-94e1-4c99-bba0-f3650bdf9a29">

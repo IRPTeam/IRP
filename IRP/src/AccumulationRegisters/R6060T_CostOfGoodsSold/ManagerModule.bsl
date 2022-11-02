@@ -95,6 +95,7 @@ Procedure CostOfGoodsSold_CollectRecords(DocObject) Export
 	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
 	|WHERE
 	|	R6010B_BatchWiseBalance.Document = &Document
+	|	AND NOT R6010B_BatchWiseBalance.IsSalesConsignorStocks
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -224,6 +225,7 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
 	|		INNER JOIN AllDocumetsGrouped AS AllDocumetsGrouped
 	|		ON R6010B_BatchWiseBalance.Document = AllDocumetsGrouped.Document
+	|		AND NOT R6010B_BatchWiseBalance.IsSalesConsignorStocks
 	|;
 	|
 	////////////////////////////////////////////////////////////////////////////////

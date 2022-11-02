@@ -1,5 +1,5 @@
 	
-Procedure FillConsignorBatches(DocObject) Export
+Procedure FillConsignorBatches(DocObject, Store = Undefined) Export
 	
 	ArrayForDelete = New Array();
 	For Each Row In DocObject.ConsignorBatches Do
@@ -16,6 +16,7 @@ Procedure FillConsignorBatches(DocObject) Export
 	ItemListTable.Columns.Add("Key"      , Metadata.DefinedTypes.typeRowID.Type);
 	ItemListTable.Columns.Add("Company"  , New TypeDescription("CatalogRef.Companies"));
 	ItemListTable.Columns.Add("ItemKey"  , New TypeDescription("CatalogRef.ItemKeys"));
+	ItemListTable.Columns.Add("Store"    , New TypeDescription("CatalogRef.Stores"));
 	ItemListTable.Columns.Add("Quantity" , Metadata.DefinedTypes.typeQuantity.Type);
 	
 	ArrayForDelete = New Array();
@@ -30,7 +31,10 @@ Procedure FillConsignorBatches(DocObject) Export
 		
 		IsChanged_ItemKey = False;
 		IsChanged_Company = False;
+		IsChanged_Store   = False;
 		BatchQuantity = 0;
+		
+		_Store = ?(ValueIsFilled(Store), Store, Row.Store);
 		
 		BatchRows = DocObject.ConsignorBatches.FindRows(New Structure("Key", Row.Key));
 		For Each BatchRow In BatchRows Do
@@ -43,9 +47,13 @@ Procedure FillConsignorBatches(DocObject) Export
 			If BatchRow.Batch.Company <> DocObject.Company Then
 				IsChanged_Company = True;
 			EndIf;
+			
+			If BatchRow.Store <> _Store Then
+				IsChanged_Store = True;
+			EndIf;
 		EndDo;
 		
-		If BatchQuantity <> Row.QuantityInBaseUnit Or IsChanged_ItemKey Or IsChanged_Company Then
+		If BatchQuantity <> Row.QuantityInBaseUnit Or IsChanged_ItemKey Or IsChanged_Company Or IsChanged_Store Then
 			For Each BatchRow In BatchRows Do
 				ArrayForDelete.Add(BatchRow);
 			EndDo;
@@ -53,6 +61,7 @@ Procedure FillConsignorBatches(DocObject) Export
 			NewRow.Key      = Row.Key;
 			NewRow.Company  = DocObject.Company;
 			NewRow.ItemKey  = Row.ItemKey;
+			NewRow.Store    = _Store;
 			NewRow.Quantity = Row.Quantity;
 		EndIf;
 	EndDo;
@@ -69,6 +78,7 @@ Procedure FillConsignorBatches(DocObject) Export
 		ItemLock.DataSource = ItemListTable;
 		ItemLock.UseFromDataSource("Company", "Company");
 		ItemLock.UseFromDataSource("ItemKey", "ItemKey");
+		ItemLock.UseFromDataSource("Store"  , "Store");
 		DataLock.Lock();
 		LockStorage.Add(DataLock);
 		DocObject.AdditionalProperties.Insert("CommissionLockStorage", LockStorage);
@@ -86,6 +96,7 @@ Function GetConsignorBatches(ItemListTable, DocObject)
 	"SELECT
 	|	ItemListTable.Company,
 	|	ItemListTable.ItemKey,
+	|	ItemListTable.Store,
 	|	ItemListTable.Quantity
 	|INTO ItemListTable
 	|FROM
@@ -96,38 +107,44 @@ Function GetConsignorBatches(ItemListTable, DocObject)
 	|SELECT
 	|	ItemListTable.Company,
 	|	ItemListTable.ItemKey,
+	|	ItemListTable.Store,
 	|	SUM(ItemListTable.Quantity) AS Quantity
 	|INTO ItemListTableGrouped
 	|FROM
 	|	ItemListTable AS ItemListTable
 	|GROUP BY
 	|	ItemListTable.Company,
-	|	ItemListTable.ItemKey
+	|	ItemListTable.ItemKey,
+	|	ItemListTable.Store
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	ItemListTableGrouped.ItemKey AS ItemKey,
+	|	ItemListTableGrouped.Store AS Store,
 	|	Batches.Batch AS Batch,
 	|	ItemListTableGrouped.Quantity AS Quantity,
-	|	Batches.QuantityBalance AS QuantityBalance
+	|	ISNULL(Batches.QuantityBalance, 0) AS QuantityBalance
 	|FROM
 	|	ItemListTableGrouped AS ItemListTableGrouped
-	|		LEFT JOIN AccumulationRegister.R8013B_ConsignorBatchWiseBallance.Balance(&Boundary, (Company, ItemKey) IN
+	|		LEFT JOIN AccumulationRegister.R8013B_ConsignorBatchWiseBallance.Balance(&Boundary, (Company, ItemKey, Store) IN
 	|			(SELECT
 	|				ItemListTableGrouped.Company,
-	|				ItemListTableGrouped.ItemKey
+	|				ItemListTableGrouped.ItemKey,
+	|				ItemListTableGrouped.Store
 	|			FROM
 	|				ItemListTableGrouped AS ItemListTableGrouped)) AS Batches
 	|		ON ItemListTableGrouped.Company = Batches.Company
 	|		AND ItemListTableGrouped.ItemKey = Batches.ItemKey
+	|		AND ItemListTableGrouped.Store = Batches.Store
 	|
 	|ORDER BY
 	|	Batches.Batch.Date
 	|TOTALS
 	|	MAX(Quantity)
 	|BY
-	|	ItemKey";
+	|	ItemKey,
+	|	Store";
 	
 	Query.SetParameter("ItemListTable", ItemListTable);
 	If ValueIsFilled(DocObject.Ref) Then
@@ -142,43 +159,49 @@ Function GetConsignorBatches(ItemListTable, DocObject)
 	
 	ResultTable = New ValueTable();
 	ResultTable.Columns.Add("ItemKey");
+	ResultTable.Columns.Add("Store");
 	ResultTable.Columns.Add("Batch");
 	ResultTable.Columns.Add("Quantity");
 
 	HaveError = False;
 	For Each Row_ItemKey In BatchTree.Rows Do
-		NeedExpense = Row_ItemKey.Quantity;
+		For Each Row_Store In Row_ItemKey.Rows Do
+			
+			NeedExpense = Row_Store.Quantity;
 		
-		For Each Row_Batch In Row_ItemKey.Rows Do
-			If NeedExpense = 0 Or Row_Batch.QuantityBalance = 0 Then
-				Continue;
+			For Each Row_Batch In Row_Store.Rows Do
+				If NeedExpense = 0 Or Row_Batch.QuantityBalance = 0 Then
+					Continue;
+				EndIf;
+		
+				CanExpense = Min(NeedExpense, Row_Batch.QuantityBalance);
+			
+				NewRow = ResultTable.Add();
+				NewRow.ItemKey  = Row_ItemKey.ItemKey;
+				NewRow.Store    = Row_Store.Store;
+				NewRow.Batch    = Row_Batch.Batch;
+				NewRow.Quantity = CanExpense;
+			
+				Row_Batch.QuantityBalance = Row_Batch.QuantityBalance - CanExpense;
+				NeedExpense = NeedExpense - CanExpense;
+			EndDo;
+		
+			If NeedExpense <> 0 Then
+				Required  = Format(Row_Store.Quantity, "NFD=3;");
+				Remaining = Format(Row_Store.Quantity - NeedExpense, "NFD=3;");
+				Lack = Format(NeedExpense, "NFD=3;");
+			
+				Msg = StrTemplate(R().Error_120, Row_ItemKey.ItemKey, Row_Store.Store, Required, Remaining, Lack);
+				CommonFunctionsClientServer.ShowUsersMessage(Msg);
+				HaveError = True;			
 			EndIf;
-		
-			CanExpense = Min(NeedExpense, Row_Batch.QuantityBalance);
-			
-			NewRow = ResultTable.Add();
-			NewRow.ItemKey  = Row_ItemKey.ItemKey;
-			NewRow.Batch    = Row_Batch.Batch;
-			NewRow.Quantity = CanExpense;
-			
-			Row_Batch.QuantityBalance = Row_Batch.QuantityBalance - CanExpense;
-			NeedExpense = NeedExpense - CanExpense;
 		EndDo;
-		
-		If NeedExpense <> 0 Then
-			Required  = Format(Row_ItemKey.Quantity, "NFD=3;");
-			Remaining = Format(Row_ItemKey.Quantity - NeedExpense, "NFD=3;");
-			Lack = Format(NeedExpense, "NFD=3;");
-			
-			Msg = StrTemplate(R().Error_120, Row_ItemKey.ItemKey, Required, Remaining, Lack);
-			CommonFunctionsClientServer.ShowUsersMessage(Msg);
-			HaveError = True;			
-		EndIf;
 	EndDo;
 	
 	ConsignorBatchesTable = New ValueTable();
 	ConsignorBatchesTable.Columns.Add("Key");
 	ConsignorBatchesTable.Columns.Add("ItemKey");
+	ConsignorBatchesTable.Columns.Add("Store");
 	ConsignorBatchesTable.Columns.Add("Batch");
 	ConsignorBatchesTable.Columns.Add("Quantity");
 	
@@ -188,6 +211,10 @@ Function GetConsignorBatches(ItemListTable, DocObject)
 			NeedExpense = Row.Quantity;
 			For Each Row_Result In ResultTable Do
 				If Row.ItemKey <> Row_Result.ItemKey Then
+					Continue;
+				EndIf;
+				
+				If Row.Store <> Row_Result.Store Then
 					Continue;
 				EndIf;
 				
@@ -202,9 +229,11 @@ Function GetConsignorBatches(ItemListTable, DocObject)
 				NewRow = ConsignorBatchesTable.Add();
 				NewRow.Key      = Row.Key;
 				NewRow.ItemKey  = Row.ItemKey;
+				NewRow.Store    = Row.Store;
 				NewRow.Batch    = Row_Result.Batch;
 				NewRow.Quantity = CanExpense;
 			EndDo;
+			
 		EndDo;
 	EndIf;
 	Return ConsignorBatchesTable;

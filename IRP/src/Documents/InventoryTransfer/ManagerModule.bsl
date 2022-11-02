@@ -157,6 +157,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(ItemList());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(IncomingStocksReal());
+	QueryArray.Add(ConsignorBatches());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
@@ -177,6 +178,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R8013B_ConsignorBatchWiseBallance());
 	Return QueryArray;
 EndFunction
 
@@ -209,7 +211,9 @@ Function ItemList()
 		|	InventoryTransferItemList.Ref.UseShipmentConfirmation AS UseShipmentConfirmation,
 		|	InventoryTransferItemList.ProductionPlanning AS ProductionPlanning,
 		|	NOT InventoryTransferItemList.ProductionPlanning.Ref IS NULL AS UseProductionPlanning,
-		|	InventoryTransferItemList.Key AS Key
+		|	InventoryTransferItemList.Key AS Key,
+		|	InventoryTransferItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.OwnStocks) AS IsOwnStocks,
+		|	InventoryTransferItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.ConsignorStocks) AS IsConsignorStocks
 		|INTO ItemList
 		|FROM
 		|	Document.InventoryTransfer.ItemList AS InventoryTransferItemList
@@ -260,6 +264,21 @@ Function IncomingStocksReal()
 		|	ItemList.ProductionPlanning,
 		|	ItemList.StoreReceiver";
 EndFunction
+
+Function ConsignorBatches()
+	Return
+		"SELECT
+		|	ConsignorBatchesInfo.Key,
+		|	ConsignorBatchesInfo.ItemKey,
+		|	ConsignorBatchesInfo.Store,
+		|	ConsignorBatchesInfo.Batch,
+		|	ConsignorBatchesInfo.Quantity
+		|INTO ConsignorBatchesInfo
+		|FROM
+		|	Document.InventoryTransfer.ConsignorBatches AS ConsignorBatchesInfo
+		|WHERE
+		|	ConsignorBatchesInfo.Ref = &Ref";
+EndFunction	
 
 Function R4010B_ActualStocks()
 	Return 
@@ -541,48 +560,48 @@ EndFunction
 
 Function R4050B_StockInventory()
 	Return 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	ItemList.Period,
-	|	ItemList.Company,
-	|	ItemList.Branch,
-	|	ItemList.StoreSender AS Store,
-	|	ItemList.ItemKey,
-	|	SUM(ItemList.Quantity) AS Quantity
-	|INTO R4050B_StockInventory
-	|FROM
-	|	ItemList AS ItemList
-	|WHERE
-	|	TRUE
-	|GROUP BY
-	|	VALUE(AccumulationRecordType.Expense),
-	|	ItemList.Period,
-	|	ItemList.Company,
-	|	ItemList.Branch,
-	|	ItemList.StoreSender,
-	|	ItemList.ItemKey
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	VALUE(AccumulationRecordType.Receipt),
-	|	ItemList.Period,
-	|	ItemList.Company,
-	|	ItemList.Branch,
-	|	ItemList.StoreReceiver,
-	|	ItemList.ItemKey,
-	|	SUM(ItemList.Quantity) AS Quantity
-	|FROM
-	|	ItemList AS ItemList
-	|WHERE
-	|	TRUE
-	|GROUP BY
-	|	VALUE(AccumulationRecordType.Receipt),
-	|	ItemList.Period,
-	|	ItemList.Company,
-	|	ItemList.Branch,
-	|	ItemList.StoreReceiver,
-	|	ItemList.ItemKey";
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.StoreSender AS Store,
+		|	ItemList.ItemKey,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO R4050B_StockInventory
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsOwnStocks
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.StoreSender,
+		|	ItemList.ItemKey
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.StoreReceiver,
+		|	ItemList.ItemKey,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsOwnStocks
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.StoreReceiver,
+		|	ItemList.ItemKey";
 EndFunction
 
 Function T3010S_RowIDInfo()
@@ -646,4 +665,39 @@ Function T6020S_BatchKeysInfo()
 	|	ItemList.Company,
 	|	ItemList.StoreSender,
 	|	ItemList.ItemKey";
+EndFunction
+
+Function R8013B_ConsignorBatchWiseBallance()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ConsignorBatchesInfo.Batch,
+		|	ConsignorBatchesInfo.ItemKey,
+		|	ConsignorBatchesInfo.Store,
+		|	ConsignorBatchesInfo.Quantity
+		|INTO R8013B_ConsignorBatchWiseBallance
+		|FROM
+		|	ItemList AS ItemList
+		|		INNER JOIN ConsignorBatchesInfo AS ConsignorBatchesInfo
+		|		ON ItemList.IsConsignorStocks
+		|		AND ItemList.Key = ConsignorBatchesInfo.Key
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ConsignorBatchesInfo.Batch,
+		|	ConsignorBatchesInfo.ItemKey,
+		|	ItemList.StoreReceiver,
+		|	ConsignorBatchesInfo.Quantity
+		|
+		|FROM
+		|	ItemList AS ItemList
+		|		INNER JOIN ConsignorBatchesInfo AS ConsignorBatchesInfo
+		|		ON ItemList.IsConsignorStocks
+		|		AND ItemList.Key = ConsignorBatchesInfo.Key";
 EndFunction

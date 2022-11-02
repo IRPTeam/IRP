@@ -193,18 +193,18 @@ Procedure BatchReallocate(LocksStorage, BatchReallocateRef, EndPeriod)
 	// EmptyLackItemList
 	MetadataR4050B = Metadata.AccumulationRegisters.R4050B_StockInventory;
 	EmptyLackItemList = New ValueTable();
-	EmptyLackItemList.Columns.Add("Store", MetadataR4050B.Dimensions.Store.Type);
-	EmptyLackItemList.Columns.Add("ItemKey", MetadataR4050B.Dimensions.ItemKey.Type);
-	EmptyLackItemList.Columns.Add("Quantity", MetadataR4050B.Resources.Quantity.Type);
+	EmptyLackItemList.Columns.Add("Store"    , MetadataR4050B.Dimensions.Store.Type);
+	EmptyLackItemList.Columns.Add("ItemKey"  , MetadataR4050B.Dimensions.ItemKey.Type);
+	EmptyLackItemList.Columns.Add("Quantity" , MetadataR4050B.Resources.Quantity.Type);
 	
 	// EmptyResultItemList
 	MetadataR4050B = Metadata.AccumulationRegisters.R4050B_StockInventory;
 	EmptyResultItemList = New ValueTable();
-	EmptyResultItemList.Columns.Add("Store", MetadataR4050B.Dimensions.Store.Type);
-	EmptyResultItemList.Columns.Add("ItemKey", MetadataR4050B.Dimensions.ItemKey.Type);
-	EmptyResultItemList.Columns.Add("Quantity", MetadataR4050B.Resources.Quantity.Type);
-	EmptyResultItemList.Columns.Add("CompanySender", MetadataR4050B.Dimensions.Company.Type);
-	EmptyResultItemList.Columns.Add("CompanyReceiver", MetadataR4050B.Dimensions.Company.Type);
+	EmptyResultItemList.Columns.Add("Store"           , MetadataR4050B.Dimensions.Store.Type);
+	EmptyResultItemList.Columns.Add("ItemKey"         , MetadataR4050B.Dimensions.ItemKey.Type);
+	EmptyResultItemList.Columns.Add("Quantity"        , MetadataR4050B.Resources.Quantity.Type);
+	EmptyResultItemList.Columns.Add("CompanySender"   , MetadataR4050B.Dimensions.Company.Type);
+	EmptyResultItemList.Columns.Add("CompanyReceiver" , MetadataR4050B.Dimensions.Company.Type);
 	
 	ProcessedRecorders = New Array();
 	LackOfBatches = True;
@@ -959,7 +959,8 @@ Function GetBatchWiseBalance(CalculationSettings)
 	EmptyTable_BatchWiseBalance.Columns.Add("Quantity"  , RegMetadata.Resources.Quantity.Type);
 	EmptyTable_BatchWiseBalance.Columns.Add("Amount"    , RegMetadata.Resources.Amount.Type);
 	EmptyTable_BatchWiseBalance.Columns.Add("AmountTax" , RegMetadata.Resources.AmountTax.Type);
-	EmptyTable_BatchWiseBalance.Columns.Add("AmountCostRatio" , RegMetadata.Resources.AmountCostRatio.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("AmountCostRatio"        , RegMetadata.Resources.AmountCostRatio.Type);
+	EmptyTable_BatchWiseBalance.Columns.Add("IsSalesConsignorStocks" , RegMetadata.Attributes.IsSalesConsignorStocks.Type);
 	
 	Tables = New Structure();
 	Tables.Insert("DataForExpense"               , EmptyTable_BatchWiseBalance.CopyColumns());
@@ -1835,7 +1836,8 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					NewRow.Amount    = ExpenseAmount;
 					NewRow.AmountTax = ExpenseAmountTax;
 					NewRow.AmountCostRatio = ExpenseAmountCostRatio;
-	
+					NewRow.IsSalesConsignorStocks = IsSales_ConsignorStocks;
+					
 					NewRow_DataForExpense = DataForExpense.Add();
 					FillPropertyValues(NewRow_DataForExpense, NewRow);
 					NewRow_DataForExpense.ItemLinkID = Row.ItemLinkID;

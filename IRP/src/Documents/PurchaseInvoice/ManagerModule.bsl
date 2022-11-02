@@ -1204,6 +1204,7 @@ Function R8013B_ConsignorBatchWiseBallance()
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Invoice AS Batch,
+		|	ItemList.Store,
 		|	ItemList.ItemKey,
 		|	SUM(ItemList.Quantity) AS Quantity
 		|INTO R8013B_ConsignorBatchWiseBallance
@@ -1217,6 +1218,7 @@ Function R8013B_ConsignorBatchWiseBallance()
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Invoice,
+		|	ItemList.Store,
 		|	ItemList.ItemKey";
 EndFunction
 

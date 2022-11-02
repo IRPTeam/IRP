@@ -27,7 +27,7 @@ EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	DocumentsServer.FillCheckBankCashDocuments(ThisObject, CheckedAttributes);
-	DocumentsServer.CheckMatchingToBasisDocument(ThisObject, "Sender", Cancel);
+	DocumentsServer.CheckMatchingToBasisDocument(ThisObject, "CashAccount", "Sender", Cancel);
 EndProcedure
 
 Procedure Posting(Cancel, PostingMode)

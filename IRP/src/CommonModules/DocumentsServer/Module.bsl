@@ -125,10 +125,10 @@ EndProcedure
 //  Object - DocumentObject.BankPayment, DocumentObject.BankReceipt, DocumentObject.CashPayment, DocumentObject.CashReceipt - document for checking
 //  BasisAttribute - String - attribute for checking in basis document
 //  Cancel - Boolean - check failed
-Procedure CheckMatchingToBasisDocument(Object, BasisAttribute, Cancel) Export
+Procedure CheckMatchingToBasisDocument(Object, ObjectAttribute, BasisAttribute, Cancel) Export
 	
 	Query = New Query;
-	Query.SetParameter("Account", Object.Account);
+	Query.SetParameter("Account", Object[ObjectAttribute]);
 	Query.SetParameter("PaymentList", Object.PaymentList.Unload());
 	Query.Text = StrTemplate(
 	"SELECT
@@ -156,8 +156,8 @@ Procedure CheckMatchingToBasisDocument(Object, BasisAttribute, Cancel) Export
 		Cancel = True;
 		CommonFunctionsClientServer.ShowUsersMessage(
 				StrTemplate(R().Error_AttributeDontMatchValueFromBasisDoc_Row, 
-					"Account", SelectionRecords.Account, SelectionRecords.Basis, SelectionRecords.LineNumber), 
-				"Account", 
+					ObjectAttribute, SelectionRecords.Account, SelectionRecords.Basis, SelectionRecords.LineNumber), 
+				ObjectAttribute, 
 				Object);
 	EndDo;
 	

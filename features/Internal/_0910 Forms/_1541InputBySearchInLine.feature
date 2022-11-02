@@ -15,6 +15,7 @@ Background:
 	
 Scenario: _0154000 preparation
 	When set True value to the constant
+	When set True value to the constant Use commission trading
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -25,6 +26,7 @@ Scenario: _0154000 preparation
 		When Create catalog BusinessUnits objects
 		When Create catalog Partners objects
 		When Create catalog Partners objects (Kalipso)
+		When Create catalog Partners objects (trade agent and consignor)
 		When Create catalog InterfaceGroups objects (Purchase and production,  Main information)
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -519,6 +521,55 @@ Scenario: _015406405 check item and item key input by search in line in a docume
 		| 'Item'     |
 		| 'Jacket J22001'    |
 		And I close all client application windows
+
+Scenario: _015406406 check item and item key input by search in line in a document SalesReportFromTradeAgent (in english)
+	And I close all client application windows
+	* Open a creation form SalesReportFromTradeAgent
+		Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
+		And I click the button named "FormCreate"
+	* Item and item key input by search in line
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
+		| 'Item'     | 'Item key'  |
+		| 'Boots'    | '36/18SD' |
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I input "J22001" text in "Item" field of "ItemList" table	
+		And in "ItemList" table drop-down list "Item" is equal to:
+			|" (J22001) Jacket J22001 "|
+		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Jacket J22001'    |
+		And I close all client application windows
+
+Scenario: _015406407 check item and item key input by search in line in a document SalesReportToConsignor (in english)
+	And I close all client application windows
+	* Open a creation form SalesReportToConsignor
+		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
+		And I click the button named "FormCreate"
+	* Item and item key input by search in line
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
+		| 'Item'     | 'Item key'  |
+		| 'Boots'    | '36/18SD' |
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I input "J22001" text in "Item" field of "ItemList" table	
+		And in "ItemList" table drop-down list "Item" is equal to:
+			|" (J22001) Jacket J22001 "|
+		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Jacket J22001'    |
+		And I close all client application windows
+
 
 Scenario: _0154065 check item, item key and properties input by search in line in a document Price list (in english)
 	And I close all client application windows
@@ -1152,8 +1203,82 @@ Scenario: _0154089 check company, sender, receiver, send currency, receive curre
 		Then the form attribute named "ReceiveCurrency" became equal to "EUR"
 		And I close all client application windows
 
+Scenario: _0154090 check partner, legal name, Partner term and company input by search in line in a document SalesReportFromTradeAgent (in english)
+	And I close all client application windows
+	* Open a creation form SalesReportFromTradeAgent
+		Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
+		And I click the button named "FormCreate"
+	* Partner input by search in line
+		And I select from "Partner" drop-down list by "fer" string
+	* Legal name input by search in line
+		And I select from "Legal name" drop-down list by "com" string
+	* Partner term input by search in line
+		And I select from "Partner term" drop-down list by "TRY" string
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+	* Revenue type input by search in line
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'     |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I select "rev" from "Revenue type" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Revenue type' |
+			| 'Revenue'         |
+		And I select "sof" from "Revenue type" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Revenue type' |
+			| 'Software'         |
+	And I close all client application windows
 
 
+Scenario: _0154091 check partner, legal name, Partner term and company input by search in line in a document SalesReportToConsignor (in english)
+	And I close all client application windows
+	* Open a creation form SalesReportToConsignor
+		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
+		And I click the button named "FormCreate"
+	* Partner input by search in line
+		And I select from "Partner" drop-down list by "Consignor 1" string
+	* Legal name input by search in line
+		And I select from "Legal name" drop-down list by "Consignor 1" string
+	* Partner term input by search in line
+		And I select from "Partner term" drop-down list by "Consignor partner term 1" string
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Consignor 1"
+		Then the form attribute named "LegalName" became equal to "Consignor 1"
+		Then the form attribute named "Agreement" became equal to "Consignor partner term 1"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
+
+Scenario: _0154092 check partner, legal name, Partner term and company input by search in line in a document SalesReportFromTradeAgent (in english)
+	And I close all client application windows
+	* Open a creation form SalesReportFromTradeAgent
+		Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
+		And I click the button named "FormCreate"
+	* Partner input by search in line
+		And I select from "Partner" drop-down list by "Trade agent 1" string
+	* Legal name input by search in line
+		And I select from "Legal name" drop-down list by "Trade agent 1" string
+	* Partner term input by search in line
+		And I select from "Partner term" drop-down list by "Trade agent partner term 1" string
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Trade agent 1"
+		Then the form attribute named "LegalName" became equal to "Trade agent 1"
+		Then the form attribute named "Agreement" became equal to "Trade agent partner term 1"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
 
 Scenario: _0154100 check company, operation type, partner, legal name, Partner term, profit loss center, expence type input by search in line in a DebitNote (in english)
 	And I close all client application windows

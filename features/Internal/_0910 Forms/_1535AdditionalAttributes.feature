@@ -18,6 +18,7 @@ Background:
 Scenario: _0153500 preparation
 	When set True value to the constant
 	When set True value to the constant Use accounting
+	When set True value to the constant Use commission trading
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -5122,6 +5123,99 @@ Scenario: _015400664 check that additional attributes and properties are display
 			| 'Test 1'      |
 		And I select current line in "List" table
 		Then "Test" form attribute became equal to "Test 1"
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+Scenario: _015400665 check that additional attributes and properties are displayed on the form without reopening (document SalesReportFromTradeAgent)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Open a form to create Sales report from trade agent
+		Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
+	* Adding additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Document_SalesReportFromTradeAgent       |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I input "Sales report from trade agent" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Sales report from trade agent (create)"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Save" button
+		And I click "Add properties" button
+		And "Properties" table became equal
+			| 'Property' | 'Value' |
+			| 'Test'     | ''      |	
+	And I close all client application windows
+
+
+Scenario: _015400666 check that additional attributes and properties are displayed on the form without reopening (document SalesReportToConsignor)
+	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
+	* Open a form to create Sales report to consignor
+		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
+		And I click the button named "FormCreate"
+		And I move to "Other" tab
+		And field "Test" is not present on the form
+	* Adding additional Test attribute without closing the form
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name     |
+			| Document_SalesReportToConsignor       |
+		And I select current line in "List" table
+		And in the table "Attributes" I click the button named "AttributesAdd"
+		And I click choice button of "Attribute" attribute in "Attributes" table
+		And I go to line in "List" table
+			| Description |
+			| Test        |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I move to "Properties" tab
+		And in the table "Properties" I click the button named "PropertiesAdd"
+		And I click choice button of "Property" attribute in "Properties" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And I finish line editing in "Properties" table
+		And I input "Sales report to consignor" text in the field named "Description_en"
+		And I click "Save and close" button
+	* Check that the additional Test attribute has been displayed on the form
+		When I click command interface button "Sales report to consignor (create)"
+		And field "Test" is present on the form
+		And I click Select button of "Test" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test 1'      |
+		And I select current line in "List" table
+		Then "Test" form attribute became equal to "Test 1"
+		And I click "Save" button
 		And I click "Add properties" button
 		And "Properties" table became equal
 			| 'Property' | 'Value' |

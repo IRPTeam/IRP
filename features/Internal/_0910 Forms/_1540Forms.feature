@@ -14,6 +14,7 @@ Background:
 	
 Scenario: _0154000 preparation
 	When set True value to the constant
+	When set True value to the constant Use commission trading
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -318,7 +319,15 @@ Scenario: _0154035 search the item key selection list
 		Then the number of "List" table lines is "равно" 0
 		And I close all client application windows
 
+Scenario: _0154036 check autofilling item key in Sales report from trade agent only with one item key 
+	Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
+	And I click the button named "FormCreate"
+	When check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
 
+Scenario: _0154037 check autofilling item key in Sales report to consignor only with one item key 
+	Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
+	And I click the button named "FormCreate"
+	When check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
 
 
 

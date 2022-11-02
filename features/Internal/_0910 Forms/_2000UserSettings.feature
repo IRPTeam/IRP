@@ -21,6 +21,7 @@ Background:
 
 Scenario: _200000 preparation (user settings)
 	When set True value to the constant
+	When set True value to the constant Use commission trading
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -882,6 +883,62 @@ Scenario: _200001 customize the CI user settings
 			| 'Front office' |
 		And I select current line in "List" table
 		And I finish line editing in "MetadataTree" table
+	* Fill in custom settings for Sales report from trade agent
+		And I go to line in "MetadataTree" table
+			| 'Group name'                    |
+			| 'Sales report from trade agent' |
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name' | 'Use' |
+			| 'Company'    | 'No'  |
+		And I select current line in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'  | 'Use' |
+			| 'Branch'      | 'No'  |
+		And I activate "Group name" field in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Front office' |
+		And I select current line in "List" table
+	* Fill in custom settings for Sales report to consignor
+		And I go to line in "MetadataTree" table
+			| 'Group name'                |
+			| 'Sales report to consignor' |
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name' | 'Use' |
+			| 'Company'    | 'No'  |
+		And I select current line in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'  | 'Use' |
+			| 'Branch'      | 'No'  |
+		And I activate "Group name" field in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Front office' |
+		And I select current line in "List" table
 	And I click "Ok" button
 	* Open user settings
 		And I click "Settings" button
@@ -978,7 +1035,7 @@ Scenario: _200007 check filling in field from custom user settings in Work sheet
 		Then the form attribute named "Branch" became equal to "Front office"
 	And I close all client application windows
 
-Scenario:  _200008 check filling in field from custom user settings in Bundling
+Scenario: _200008 check filling in field from custom user settings in Bundling
 	Given I open hyperlink "e1cib/list/Document.Bundling"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
@@ -986,7 +1043,7 @@ Scenario:  _200008 check filling in field from custom user settings in Bundling
 	And I close all client application windows
 
 
-Scenario:  _200009 check filling in field from custom user settings in Cash payment
+Scenario: _200009 check filling in field from custom user settings in Cash payment
 	Given I open hyperlink "e1cib/list/Document.CashPayment"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
@@ -995,7 +1052,7 @@ Scenario:  _200009 check filling in field from custom user settings in Cash paym
 		Then the form attribute named "Currency" became equal to "EUR"
 	And I close all client application windows
 
-Scenario:  _200010 check filling in field from custom user settings in Cash receipt
+Scenario: _200010 check filling in field from custom user settings in Cash receipt
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
@@ -1004,7 +1061,7 @@ Scenario:  _200010 check filling in field from custom user settings in Cash rece
 		Then the form attribute named "Currency" became equal to "USD"
 	And I close all client application windows
 
-Scenario:  _200011 check filling in field from custom user settings in Cash transfer
+Scenario: _200011 check filling in field from custom user settings in Cash transfer
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
@@ -1015,21 +1072,21 @@ Scenario:  _200011 check filling in field from custom user settings in Cash tran
 
 
 
-Scenario:  _200013 check filling in field from custom user settings in Goods receipt
+Scenario: _200013 check filling in field from custom user settings in Goods receipt
 	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
 		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
-Scenario:  _200014 check filling in field from custom user settings in Incoming payment order
+Scenario: _200014 check filling in field from custom user settings in Incoming payment order
 	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
 		Then the form attribute named "Company" became equal to "Second Company"
 	And I close all client application windows
 
-Scenario:  _200015 check filling in field from custom user settings in Internal supply request
+Scenario: _200015 check filling in field from custom user settings in Internal supply request
 	Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
@@ -1038,7 +1095,7 @@ Scenario:  _200015 check filling in field from custom user settings in Internal 
 	And I close all client application windows
 
 
-Scenario:  _200016 check filling in field from custom user settings in Inventory transfer
+Scenario: _200016 check filling in field from custom user settings in Inventory transfer
 	Given I open hyperlink "e1cib/list/InformationRegister.UserSettings"
 	If "List" table does not contain lines Then
 			| "Metadata object"            | "Attribute name" |
@@ -1075,7 +1132,7 @@ Scenario:  _200016 check filling in field from custom user settings in Inventory
 		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
-Scenario:  _200017 check filling in field from custom user settings in Inventory transfer order
+Scenario: _200017 check filling in field from custom user settings in Inventory transfer order
 	Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
@@ -1084,7 +1141,7 @@ Scenario:  _200017 check filling in field from custom user settings in Inventory
 		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
-Scenario:  _200018 check filling in field from custom user settings in Outgoing payment order
+Scenario: _200018 check filling in field from custom user settings in Outgoing payment order
 	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
@@ -1093,7 +1150,7 @@ Scenario:  _200018 check filling in field from custom user settings in Outgoing 
 		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
 
-Scenario:  _200019 check filling in field from custom user settings in Purchase invoice
+Scenario: _200019 check filling in field from custom user settings in Purchase invoice
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
@@ -1101,7 +1158,7 @@ Scenario:  _200019 check filling in field from custom user settings in Purchase 
 		Then the form attribute named "Company" became equal to "Second Company"
 	And I close all client application windows
 
-Scenario:  _200020 check filling in field from custom user settings in Purchase order
+Scenario: _200020 check filling in field from custom user settings in Purchase order
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
@@ -1109,21 +1166,21 @@ Scenario:  _200020 check filling in field from custom user settings in Purchase 
 		Then the form attribute named "Company" became equal to "Second Company"
 	And I close all client application windows
 
-Scenario:  _200021 check filling in field from custom user settings in Purchase return
+Scenario: _200021 check filling in field from custom user settings in Purchase return
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
 		Then the form attribute named "Company" became equal to "Second Company"
 	And I close all client application windows
 
-Scenario:  _200022 check filling in field from custom user settings in Purchase return order
+Scenario: _200022 check filling in field from custom user settings in Purchase return order
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
 		Then the form attribute named "Company" became equal to "Second Company"
 	And I close all client application windows
 
-Scenario:  _200023 check filling in field from custom user settings in Sales invoice
+Scenario: _200023 check filling in field from custom user settings in Sales invoice
 	# the store is filled out of the agreement, if the agreement does not specify, then from user settings. So is the company.
 	Given I open hyperlink "e1cib/list/InformationRegister.UserSettings"
 	If "List" table does not contain lines Then
@@ -1160,7 +1217,7 @@ Scenario:  _200023 check filling in field from custom user settings in Sales inv
 		Then the form attribute named "Store" became equal to "Store 01"
 	And I close all client application windows
 
-Scenario:  _200024 check filling in field from custom user settings in Sales return
+Scenario: _200024 check filling in field from custom user settings in Sales return
 	Given I open hyperlink "e1cib/list/Document.SalesReturn"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
@@ -1169,7 +1226,7 @@ Scenario:  _200024 check filling in field from custom user settings in Sales ret
 
 
 
-Scenario:  _200026 check filling in field from custom user settings in Unbundling
+Scenario: _200026 check filling in field from custom user settings in Unbundling
 	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
@@ -1177,7 +1234,7 @@ Scenario:  _200026 check filling in field from custom user settings in Unbundlin
 		Then the form attribute named "Store" became equal to "Store 03"
 	And I close all client application windows
 
-Scenario:  _200027 check filling in field from custom user settings in Reconciliation statement
+Scenario: _200027 check filling in field from custom user settings in Reconciliation statement
 	Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
@@ -1185,7 +1242,7 @@ Scenario:  _200027 check filling in field from custom user settings in Reconcili
 	And I close all client application windows
 
 
-Scenario:  _200028 create a custom display setting for entering in a row objects marked for deletion
+Scenario: _200028 create a custom display setting for entering in a row objects marked for deletion
 	* Open Chart of characteristic types - Custom user settings
 		Given I open hyperlink "e1cib/list/ChartOfCharacteristicTypes.CustomUserSettings"
 	* Create custom user settings
@@ -1365,7 +1422,7 @@ Scenario: _200032 check the availability of editing custom settings from the use
 		Then "Edit user settings" window is opened
 	And I close all client application windows
 
-Scenario:  _200033 check filling in field from custom user settings in Retail return receipt
+Scenario: _200033 check filling in field from custom user settings in Retail return receipt
 	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
@@ -1377,7 +1434,7 @@ Scenario:  _200033 check filling in field from custom user settings in Retail re
 		Then the form attribute named "Branch" became equal to "Shop 01"
 	And I close all client application windows
 
-Scenario:  _200034 check filling in field from custom user settings in Cash statement
+Scenario: _200034 check filling in field from custom user settings in Cash statement
 	Given I open hyperlink "e1cib/list/Document.CashStatement"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
@@ -1386,21 +1443,37 @@ Scenario:  _200034 check filling in field from custom user settings in Cash stat
 		Then the form attribute named "CashAccount" became equal to "Cash desk №4"
 	And I close all client application windows	
 
-Scenario:  _200035 check filling in field from custom user settings in Planned receipt reservation
+Scenario: _200035 check filling in field from custom user settings in Planned receipt reservation
 	Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
 		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows	
 
-Scenario:  _200036 check filling in field from custom user settings in Sales order closing
+Scenario: _200036 check filling in field from custom user settings in Sales order closing
 	Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
 		Then the form attribute named "Branch" became equal to "Front office"
 	And I close all client application windows	
 
-	
+
+Scenario: _200037 check filling in field from custom user settings in Sales report from trade agent
+	Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
+
+Scenario: _200038 check filling in field from custom user settings in Sales report to consignor
+	Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "Company" became equal to "Main Company"
+	And I close all client application windows
+
 Scenario: _0154200 check user settings priority
 		When Create information register UserSettings records (for workstation)
 		When Create second Workstation			

@@ -431,6 +431,7 @@ Function ItemList()
 	|	ItemList.SalesPerson,
 	|	ItemList.Key,
 	|	ItemList.Ref.TransactionType = Value(Enum.SalesReturnTransactionTypes.ReturnFromTradeAgent) AS IsReturnFromTradeAgent,
+	|	ItemList.Ref.TransactionType = Value(Enum.SalesReturnTransactionTypes.ReturnFromCustomer) AS IsReturnFromCustomer,
 	|	ItemList.Ref.Company.TradeAgentStore AS TradeAgentStore
 	|INTO ItemList
 	|FROM
@@ -516,7 +517,8 @@ Function Taxes()
 		|		ELSE TaxList.ManualAmount
 		|	END AS TaxAmount,
 		|	ItemList.NetAmount AS TaxableAmount,
-		|	TaxList.Ref.TransactionType = Value(Enum.SalesReturnTransactionTypes.ReturnFromTradeAgent) AS IsReturnFromTradeAgent
+		|	TaxList.Ref.TransactionType = Value(Enum.SalesReturnTransactionTypes.ReturnFromTradeAgent) AS IsReturnFromTradeAgent,
+		|	TaxList.Ref.TransactionType = Value(Enum.SalesReturnTransactionTypes.ReturnFromCustomer) AS IsReturnFromCustomer
 		|INTO Taxes
 		|FROM
 		|	Document.SalesReturn.ItemList AS ItemList
@@ -539,7 +541,7 @@ Function R2001T_Sales()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	NOT ItemList.IsReturnFromTradeAgent";
+		|	ItemList.IsReturnFromCustomer";
 EndFunction
 
 Function R2002T_SalesReturns()
@@ -551,7 +553,7 @@ Function R2002T_SalesReturns()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	NOT ItemList.IsReturnFromTradeAgent";
+		|	ItemList.IsReturnFromCustomer";
 EndFunction
 
 Function R2005T_SalesSpecialOffers()
@@ -596,7 +598,7 @@ Function R2021B_CustomersTransactions()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	NOT ItemList.IsReturnFromTradeAgent
+		|	ItemList.IsReturnFromCustomer
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.Company,
@@ -715,7 +717,7 @@ Function R2040B_TaxesIncoming()
 		|FROM
 		|	Taxes AS Taxes
 		|WHERE
-		|	NOT Taxes.IsReturnFromTradeAgent";
+		|	Taxes.IsReturnFromCustomer";
 EndFunction
 
 #Region Stock
@@ -902,7 +904,7 @@ Function R5010B_ReconciliationStatement()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	NOT ItemList.IsReturnFromTradeAgent
+		|	ItemList.IsReturnFromCustomer
 		|GROUP BY
 		|	ItemList.Company,
 		|	ItemList.Branch,
@@ -925,7 +927,7 @@ Function R5021T_Revenues()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	NOT ItemList.IsReturnFromTradeAgent";
+		|	ItemList.IsReturnFromCustomer";
 EndFunction
 
 Function T3010S_RowIDInfo()
@@ -967,7 +969,7 @@ Function T2015S_TransactionsInfo()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	NOT ItemList.IsReturnFromTradeAgent
+		|	ItemList.IsReturnFromCustomer
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.Company,

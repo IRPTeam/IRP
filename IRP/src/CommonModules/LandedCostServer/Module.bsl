@@ -1759,6 +1759,17 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				EndIf;
 			EndIf;
 			
+			// purchase return - consignor/own stocks
+			IsPurchaseReturn_ConsignorStocks = False;
+			IsPurchaseReturn_OwnStocks = False;
+			If TypeOf(Row.Document) = Type("DocumentRef.PurchaseReturn") Then
+				If ValueIsFilled(Row.BatchConsignor) Then
+					IsPurchaseReturn_ConsignorStocks = True;
+				Else
+					IsPurchaseReturn_OwnStocks = True;
+				EndIf;
+			EndIf;
+			
 			For Each Row_Batch In FilteredRows Do
 
 				If Row_Batch.Date > Row.Date Then
@@ -1782,7 +1793,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				EndIf;
 				
 				// is sales/transfer own stocks, expense only purchased batches
-				If IsSales_OwnStocks Or IsTransfer_OwnStocks Then
+				If IsSales_OwnStocks Or IsTransfer_OwnStocks Or IsPurchaseReturn_OwnStocks Then
 					IsReceiptFromConsignor = TypeOf(Row_Batch.Batch.Document) = Type("DocumentRef.PurchaseInvoice") 
 						And Row_Batch.Batch.Document.TransactionType = Enums.PurchaseTransactionTypes.ReceiptFromConsignor;
 				
@@ -1792,7 +1803,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				EndIf;
 				
 				// is sales/transfer consignor stocks, expense only consignor batches
-				If IsSales_ConsignorStocks Or IsTransfer_ConsignorStocks Then
+				If IsSales_ConsignorStocks Or IsTransfer_ConsignorStocks Or IsPurchaseReturn_ConsignorStocks Then
 					If Row_Batch.Batch.Document <> Row.BatchConsignor Then
 						Continue;
 					EndIf;

@@ -228,7 +228,7 @@ Procedure PlanningRefreshRequestProcessingAtServer()
 	|WHERE
 	|	Semiproduction.BasisQuantity > 0";
 	
-	Query.SetParameter("CurrentDate", CurrentSessionDate());
+	Query.SetParameter("CurrentDate", BegOfDay(CurrentSessionDate()));
 	Query.SetParameter("ItemKey", ItemKey);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();

@@ -413,8 +413,7 @@ Function R2001T_Sales()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsSales
-		|	AND ItemList.IsOwnStocks";
+		|	ItemList.IsSales";
 EndFunction
 
 Function R2005T_SalesSpecialOffers()
@@ -517,8 +516,7 @@ Function R2040B_TaxesIncoming()
 		|FROM
 		|	Taxes AS Taxes
 		|WHERE
-		|	Taxes.IsSales
-		|	AND Taxes.IsOwnStocks";
+		|	Taxes.IsSales";
 EndFunction
 
 #Region Stock
@@ -1028,8 +1026,7 @@ Function R5021T_Revenues()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemLIst.IsSales
-		|	AND ItemList.IsOwnStocks";
+		|	ItemLIst.IsSales";
 EndFunction
 
 Function T3010S_RowIDInfo()

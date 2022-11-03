@@ -613,3 +613,122 @@ Procedure PutResultToConsignorBatches(ItemListTable, ResultTable, ConsignorBatch
 	EndDo;
 EndProcedure
 
+Function GetTableConsignorBatchWiseBalanceForSalesReturn(DocObject, ItemListTable) Export
+	LockStorage = New Array();
+	DataLock = New DataLock();
+	ItemLock = DataLock.Add("AccumulationRegister.R8013B_ConsignorBatchWiseBallance");
+	ItemLock.Mode = DataLockMode.Exclusive;
+	ItemLock.DataSource = ItemListTable;
+	ItemLock.UseFromDataSource("Company", "Company");
+	ItemLock.UseFromDataSource("ItemKey", "ItemKey");
+	DataLock.Lock();
+	LockStorage.Add(DataLock);
+	DocObject.AdditionalProperties.Insert("CommissionLockStorage", LockStorage);
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ItemList.Company,
+	|	ItemList.SalesDocument,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	ItemList.Quantity
+	|INTO ItemList
+	|FROM
+	|	&ItemList AS ItemList
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.Company,
+	|	ItemList.SalesDocument,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	SUM(ItemList.Quantity) AS Quantity
+	|INTO ItemListGrouped
+	|FROM
+	|	ItemList AS ItemList
+	|GROUP BY
+	|	ItemList.Company,
+	|	ItemList.SalesDocument,
+	|	ItemList.Store,
+	|	ItemList.ItemKey
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Batches.Company,
+	|	Batches.Recorder AS SalesDocument,
+	|	Batches.Batch,
+	|	Batches.ItemKey,
+	|	Batches.Quantity
+	|FROM
+	|	AccumulationRegister.R8013B_ConsignorBatchWiseBallance AS Batches
+	|WHERE
+	|	(Company, ItemKey, Recorder) IN
+	|		(SELECT
+	|			ItemList.Company,
+	|			ItemList.ItemKey,
+	|			ItemList.SalesDocument
+	|		FROM
+	|			ItemListGrouped AS ItemList)
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.Company,
+	|	ItemList.SalesDocument,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	ItemList.Quantity AS Quantity
+	|FROM
+	|	ItemListGrouped AS ItemList";
+	
+	Query.SetParameter("ItemList", ItemListTable);
+	
+	QueryResults = Query.ExecuteBatch();
+	RegisterBatches  = QueryResults[2].Unload();
+	DocumentItemList = QueryResults[3].Unload();
+	
+	AccReg = Metadata.AccumulationRegisters.R8013B_ConsignorBatchWiseBallance;
+	ConsignorBatches = New ValueTable();
+	ConsignorBatches.Columns.Add("Company"  , AccReg.Dimensions.Company.Type);
+	ConsignorBatches.Columns.Add("Batch"    , AccReg.Dimensions.Batch.Type);
+	ConsignorBatches.Columns.Add("Store"    , AccReg.Dimensions.Store.Type);
+	ConsignorBatches.Columns.Add("ItemKey"  , AccReg.Dimensions.ItemKey.Type);
+	ConsignorBatches.Columns.Add("Quantity" , AccReg.Resources.Quantity.Type);
+	ConsignorBatches.Columns.Add("SalesDocument" , AccReg.StandardAttributes.Recorder.Type);
+	
+	For Each Row_DocumentItemList In DocumentItemList Do
+		NeedReceipt = Row_DocumentItemList.Quantity;
+		
+		Filter = New Structure();
+		Filter.Insert("Company"       , Row_DocumentItemList.Company);
+		Filter.Insert("SalesDocument" , Row_DocumentItemList.SalesDocument);
+		Filter.Insert("ItemKey"       , Row_DocumentItemList.ItemKey);
+		
+		RegisterBatchesRows = RegisterBatches.FindRows(Filter);
+		For Each Row_RegisterBatches In RegisterBatchesRows Do
+			If NeedReceipt = 0 Or Row_RegisterBatches.Quantity = 0 Then
+				Continue;
+			EndIf;
+			CanReceipt = Min(NeedReceipt, Row_RegisterBatches.Quantity);
+			
+			NewRow = ConsignorBatches.Add();
+			NewRow.Company  = Row_RegisterBatches.Company;
+			NewRow.Batch    = Row_RegisterBatches.Batch;
+			NewRow.Store    = Row_DocumentItemList.Store;
+			NewRow.ItemKey  = Row_RegisterBatches.ItemKey;
+			NewRow.Quantity = CanReceipt;
+			NewRow.SalesDocument = Row_DocumentItemList.SalesDocument;
+			
+			NeedReceipt = NeedReceipt - CanReceipt;
+			Row_RegisterBatches.Quantity = Row_RegisterBatches.Quantity - CanReceipt;
+		EndDo;
+		
+	EndDo; 
+	Return ConsignorBatches;
+EndFunction
+
+
+

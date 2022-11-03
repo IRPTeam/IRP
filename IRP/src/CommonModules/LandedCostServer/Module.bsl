@@ -1612,6 +1612,20 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					If NeedReceipt = 0 Then
 						Break;
 					EndIf;
+					
+					// return consigner goods
+					If ValueIsFilled(Row.BatchConsignor) Then
+						If BatchBySales.Document <> Row.BatchConsignor Then
+							Continue;
+						EndIf;
+					Else // is not consigner goods
+						If TypeOf(BatchBySales.Document) = Type("DocumentRef.PurchaseInvoice") Then
+							If BatchBySales.Document.TransactionType = Enums.PurchaseTransactionTypes.ReceiptFromConsignor Then
+								Continue;
+							EndIf;
+						EndIf;
+					EndIf;
+					
 					ReceiptQuantity = Min(NeedReceipt, BatchBySales.Quantity); // how many can receipt (quantity)
 					// receipt amount
 					ReceiptAmount = 0;

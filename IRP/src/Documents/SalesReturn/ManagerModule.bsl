@@ -11,12 +11,32 @@ EndFunction
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure();
 	Parameters.IsReposting = False;
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
-
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.SalesInvoice AS SalesDocument,
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.Quantity AS Quantity
+	|FROM
+	|	Document.SalesReturn.ItemList AS ItemLIst
+	|WHERE
+	|	ItemList.Ref = &Ref
+	|	AND NOT ItemLIst.SalesInvoice.Ref IS NULL";
+	Query.SetParameter("Ref", Ref);
+	ItemListTable = Query.Execute().Unload();
+	ConsignorBatches = CommissionTradeServer.GetTableConsignorBatchWiseBalanceForSalesReturn(Parameters.Object, ItemListTable);
+	
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = "SELECT * INTO ConsignorBatches FROM &T1 AS T1";
+	Query.SetParameter("T1", ConsignorBatches);
+	Query.Execute();
+	
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -186,6 +206,64 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		"Quantity, Amount, AmountTax");	
 	EndIf;
 	
+	BatchKeysInfo_DataTableGrouped.Columns.Add("BatchConsignor", New TypeDescription("DocumentRef.PurchaseInvoice"));
+	BatchKeysInfo_DataTableGrouped.Columns.Add("__tmp_Quantity");
+	BatchKeysInfo_DataTableGrouped.Columns.Add("__tmp_Amount");
+	BatchKeysInfo_DataTableGrouped.Columns.Add("__tmp_AmountTax");
+	For Each Row In BatchKeysInfo_DataTableGrouped Do
+		Row.__tmp_Quantity  = Row.Quantity;
+		Row.__tmp_Amount    = Row.Amount;
+		Row.__tmp_AmountTax = Row.AmountTax;
+	EndDo;
+	
+	BatchKeysInfo_DataTableGrouped_Copy = BatchKeysInfo_DataTableGrouped.CopyColumns();
+	
+	For Each Row In BatchKeysInfo_DataTableGrouped Do
+		Filter = New Structure();
+		Filter.Insert("Company"       , Row.Company);	
+		Filter.Insert("Store"         , Row.Store);	
+		Filter.Insert("ItemKey"       , Row.ItemKey);	
+		Filter.Insert("SalesDocument" , Row.SalesInvoice);
+		
+		FilteredRows = ConsignorBatches.FindRows(Filter);
+		
+		If Not FilteredRows.Count() Then
+			FillPropertyValues(BatchKeysInfo_DataTableGrouped_Copy.Add(), Row);
+			Continue;
+		EndIf;
+		
+		NeedQuantity = Row.Quantity;
+		For Each BatchRow In FilteredRows Do
+			NewRow = BatchKeysInfo_DataTableGrouped_Copy.Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.Quantity = Min(NeedQuantity, BatchRow.Quantity);
+			NewRow.BatchConsignor = BatchRow.Batch;
+			
+			NeedQuantity = NeedQuantity - NewRow.Quantity;
+			BatchRow.Quantity = BatchRow.Quantity - NewRow.Quantity;
+		EndDo;
+		
+		If NeedQuantity <> 0 Then
+			NewRow = BatchKeysInfo_DataTableGrouped_Copy.Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.Quantity = NeedQuantity;
+		EndIf;
+	EndDo;
+	
+	For Each Row In BatchKeysInfo_DataTableGrouped_Copy Do
+		If Not ValueIsFilled(Row.__tmp_Quantity) Then
+			Row.tmp_Amount = 0;
+			Row.AmountTax  = 0;
+		Else
+			Row.Amount    = Row.__tmp_Amount / Row.__tmp_Quantity * Row.Quantity;
+			Row.AmountTax = Row.__tmp_AmountTax / Row.__tmp_Quantity * Row.Quantity;
+		EndIf;
+	EndDo;
+	
+	BatchKeysInfo_DataTableGrouped_Copy.Columns.Delete("__tmp_Quantity");
+	BatchKeysInfo_DataTableGrouped_Copy.Columns.Delete("__tmp_Amount");
+	BatchKeysInfo_DataTableGrouped_Copy.Columns.Delete("__tmp_AmountTax");
+		
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = 
@@ -203,7 +281,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|FROM
 	|	&T2 AS T2";
 	Query.SetParameter("T1", BatchesInfo);
-	Query.SetParameter("T2", BatchKeysInfo_DataTableGrouped);
+	Query.SetParameter("T2", BatchKeysInfo_DataTableGrouped_Copy);
 	Query.Execute();
 
 	Return Tables;
@@ -294,8 +372,6 @@ EndProcedure
 
 #EndRegion
 
-#Region NewRegistersPosting
-
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure();
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
@@ -307,6 +383,7 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
+	StrParams.Insert("Period", Ref.Date);
 	Return StrParams;
 EndFunction
 
@@ -348,6 +425,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(R8010B_TradeAgentInventory());
 	QueryArray.Add(R8011B_TradeAgentSerialLotNumber());
+	QueryArray.Add(R8013B_ConsignorBatchWiseBallance());
+	QueryArray.Add(R8012B_ConsignorInventory());
 	Return QueryArray;
 EndFunction
 
@@ -847,23 +926,61 @@ EndFunction
 Function R4050B_StockInventory()
 	Return 
 		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ConsignorBatches.Company,
+		|	ConsignorBatches.ItemKey,
+		|	ConsignorBatches.Store,
+		|	SUM(ConsignorBatches.Quantity) AS Quantity
+		|INTO ConsignorBatchesGrouped
+		|FROM
+		|	ConsignorBatches AS ConsignorBatches
+		|GROUP BY
+		|	ConsignorBatches.Company,
+		|	ConsignorBatches.ItemKey,
+		|	ConsignorBatches.Store
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemLIst.Store,
 		|	ItemList.ItemKey,
 		|	SUM(ItemList.Quantity) AS Quantity
-		|INTO R4050B_StockInventory
+		|INTO ItemListGrouped
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.IsService
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemLIst.Store,
+		|	ItemList.ItemKey
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemLIst.Store,
+		|	ItemList.ItemKey,
+		|	SUM(ItemList.Quantity - ISNULL(ConsignorBatches.Quantity, 0)) AS Quantity
+		|INTO R4050B_StockInventory
+		|FROM
+		|	ItemListGrouped AS ItemList
+		|		LEFT JOIN ConsignorBatchesGrouped AS ConsignorBatches
+		|		ON ItemList.Company = ConsignorBatches.Company
+		|		AND ItemList.ItemKey = ConsignorBatches.ItemKey
+		|		AND ItemList.Store = ConsignorBatches.Store
 		|GROUP BY
 		|	VALUE(AccumulationRecordType.Receipt),
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemLIst.Store,
 		|	ItemList.ItemKey
+		|HAVING
+		|	SUM(ItemList.Quantity - ISNULL(ConsignorBatches.Quantity, 0)) > 0
 		|
 		|UNION ALL
 		|
@@ -914,8 +1031,6 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Period,
 		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
-
-#EndRegion
 
 Function R5021T_Revenues()
 	Return 
@@ -1003,14 +1118,25 @@ Function T6020S_BatchKeysInfo()
 	|	BatchKeysInfo.SalesInvoice,
 	|	BatchKeysInfo.ItemKey,
 	|	BatchKeysInfo.Store,
-	|	BatchKeysInfo.Quantity,
-	|	BatchKeysInfo.Amount,
-	|	BatchKeysInfo.AmountTax
+	|	SUM(BatchKeysInfo.Quantity) AS Quantity,
+	|	SUM(BatchKeysInfo.Amount) AS Amount,
+	|	SUM(BatchKeysInfo.AmountTax) AS AmountTax,
+	|	BatchKeysInfo.BatchConsignor
 	|INTO T6020S_BatchKeysInfo
 	|FROM
 	|	BatchKeysInfo
 	|WHERE
 	|	TRUE
+	|GROUP BY
+	|	BatchKeysInfo.Period,
+	|	BatchKeysInfo.Company,
+	|	BatchKeysInfo.Currency,
+	|	BatchKeysInfo.CurrencyMovementType,
+	|	BatchKeysInfo.Direction,
+	|	BatchKeysInfo.SalesInvoice,
+	|	BatchKeysInfo.ItemKey,
+	|	BatchKeysInfo.Store,
+	|	BatchKeysInfo.BatchConsignor
 	|
 	|UNION ALL
 	|
@@ -1025,11 +1151,12 @@ Function T6020S_BatchKeysInfo()
 	|	ItemList.TradeAgentStore,
 	|	SUM(ItemList.Quantity),
 	|	0,
-	|	0
-	|FROM 
+	|	0,
+	|	UNDEFINED
+	|FROM
 	|	ItemList AS ItemList
 	|WHERE
-	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+	|	NOT ItemList.IsService
 	|	AND ItemList.IsReturnFromTradeAgent
 	|GROUP BY
 	|	ItemList.Period,
@@ -1081,3 +1208,52 @@ Function R8011B_TradeAgentSerialLotNumber()
 		|WHERE
 		|	SerialLotNumbers.IsReturnFromTradeAgent";
 EndFunction
+
+Function R8013B_ConsignorBatchWiseBallance()
+	Return
+		"SELECT
+		|	&Period AS Period,
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ConsignorBatches.Company,
+		|	ConsignorBatches.Batch,
+		|	ConsignorBatches.Store,
+		|	ConsignorBatches.ItemKey,
+		|	SUM(ConsignorBatches.Quantity) AS Quantity
+		|INTO R8013B_ConsignorBatchWiseBallance
+		|FROM
+		|	ConsignorBatches AS ConsignorBatches
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ConsignorBatches.Company,
+		|	ConsignorBatches.Batch,
+		|	ConsignorBatches.Store,
+		|	ConsignorBatches.ItemKey";
+EndFunction
+		
+Function R8012B_ConsignorInventory()
+	Return
+		"SELECT
+		|	&Period AS Period,
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ConsignorBatches.Company,
+		|	ConsignorBatches.ItemKey,
+		|	ConsignorBatches.Batch.Partner AS Partner,
+		|	ConsignorBatches.Batch.Agreement AS Agreement,
+		|	SUM(ConsignorBatches.Quantity) AS Quantity
+		|INTO R8012B_ConsignorInventory
+		|FROM
+		|	ConsignorBatches AS ConsignorBatches
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ConsignorBatches.Company,
+		|	ConsignorBatches.ItemKey,
+		|	ConsignorBatches.Batch.Partner,
+		|	ConsignorBatches.Batch.Agreement";		
+EndFunction
+		
+		
+		

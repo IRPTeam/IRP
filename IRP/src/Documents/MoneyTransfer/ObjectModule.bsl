@@ -59,6 +59,27 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 				CommonFunctionsClientServer.ShowUsersMessage(R().Error_074, "SendAmount", ThisObject);
 				CommonFunctionsClientServer.ShowUsersMessage(R().Error_074, "ReceiveAmount", ThisObject);
 	EndIf;
+	If Not Cancel And Not ThisObject.CashTransferOrder.IsEmpty() Then
+		Attributes = CommonFunctionsServer.GetAttributesFromRef(ThisObject.CashTransferOrder, "Receiver,Sender");
+		If ThisObject.Receiver <> Attributes.Receiver Then
+			Cancel = True;
+			WrongAttribute = "Receiver";
+			CommonFunctionsClientServer.ShowUsersMessage(
+				StrTemplate(R().Error_AttributeDontMatchValueFromBasisDoc, 
+					WrongAttribute, Attributes.Receiver, ThisObject.CashTransferOrder), 
+				WrongAttribute, 
+				ThisObject);
+		EndIf;
+		If ThisObject.Sender <> Attributes.Sender Then
+			Cancel = True;
+			WrongAttribute = "Sender";
+			CommonFunctionsClientServer.ShowUsersMessage(
+				StrTemplate(R().Error_AttributeDontMatchValueFromBasisDoc, 
+					WrongAttribute, Attributes.Sender, ThisObject.CashTransferOrder), 
+				WrongAttribute, 
+				ThisObject);
+		EndIf;
+	EndIf;
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)

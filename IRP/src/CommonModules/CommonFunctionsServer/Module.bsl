@@ -902,19 +902,19 @@ EndFunction
 // 
 // Parameters:
 //  DocumentRef - DocumentRef - ref to document
-//  WithoutDeleted - Boolean - without documents marked for deletion
+//  OnlyPosted - Boolean - search only posted documents
 // 
 // Returns:
 //  Array of DocumentRef - Get related documents
-Function GetRelatedDocuments(DocumentRef, WithoutDeleted = False) Export
+Function GetRelatedDocuments(DocumentRef, OnlyPosted = False) Export
 	Query = New Query();
 	Query.SetParameter("DocumentRef", DocumentRef);
 	Query.Text =
 	"SELECT Ref
 	|FROM FilterCriterion.RelatedDocuments(&DocumentRef)";
-	If WithoutDeleted Then
+	If OnlyPosted Then
 		Query.Text = Query.Text + "
-		|WHERE NOT Ref.DeletionMark";
+		|WHERE Ref.Posted";
 	EndIf;
 	Return Query.Execute().Unload().UnloadColumn(0);
 EndFunction

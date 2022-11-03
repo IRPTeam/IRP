@@ -6,8 +6,8 @@ Var Component Export;
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	HTMLDate = GetCommonTemplate("HTMLClock").GetText();
-	HTMLTextTemplate = GetCommonTemplate("HTMLTextField").GetText();
+	ThisObject.HTMLDate = GetCommonTemplate("HTMLClock").GetText();
+	ThisObject.HTMLTextTemplate = GetCommonTemplate("HTMLTextField").GetText();
 	Workstation = SessionParametersServer.GetSessionParameter("Workstation");
 	If Workstation.IsEmpty() Then
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_103, "Workstation"));
@@ -61,16 +61,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Form.Items.OpenSession.Enabled = Not SessionIsOpened;
 		Form.Items.CloseSession.Enabled = SessionIsOpened;
 		Form.Items.CancelSession.Enabled = SessionIsOpened;
-		
-		If Not SessionIsOpened Then
-			Form.Items.GroupMainPages.CurrentPage = Form.Items.GroupPage1;
-		Else
-			Form.Items.GroupMainPages.CurrentPage = Form.Items.GroupPage2;
-		EndIf;
-	Else
-		Form.Items.GroupMainPages.PagesRepresentation = FormPagesRepresentation.None;
-		Form.Items.GroupMainPages.CurrentPage = Form.Items.GroupPage2;
 	EndIf;
+	Form.Items.GroupMainPages.PagesRepresentation = FormPagesRepresentation.None;
+	Form.Items.GroupMainPages.CurrentPage = Form.Items.MainPage;
 EndProcedure
 
 #Region AGREEMENT
@@ -98,7 +91,8 @@ EndProcedure
 
 &AtClient
 Procedure OpenSession(Command)
-	Object.ConsolidatedRetailSales = DocConsolidatedRetailSalesServer.CreateDocument(Object.Company, Object.Branch, ThisObject.Workstation);
+	ChangeConsolidatedRetailSales(Object, ThisObject, 
+		DocConsolidatedRetailSalesServer.CreateDocument(Object.Company, Object.Branch, ThisObject.Workstation));
 	DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
 	
 	SetVisibilityAvailability(Object, ThisObject);
@@ -108,7 +102,7 @@ EndProcedure
 &AtClient
 Procedure CloseSession(Command)
 	DocConsolidatedRetailSalesServer.CloseDocument(Object.ConsolidatedRetailSales);
-	Object.ConsolidatedRetailSales = Undefined;
+	ChangeConsolidatedRetailSales(Object, ThisObject, Undefined);
 	
 	SetVisibilityAvailability(Object, ThisObject);
 	EnabledPaymentButton();
@@ -117,10 +111,10 @@ EndProcedure
 &AtClient
 Procedure CancelSession(Command)
 	DocConsolidatedRetailSalesServer.CancelDocument(Object.ConsolidatedRetailSales);
-	Object.ConsolidatedRetailSales = Undefined;
+	ChangeConsolidatedRetailSales(Object, ThisObject, Undefined);
 	
 	SetVisibilityAvailability(Object, ThisObject);
-	EnabledPaymentButton();		
+	EnabledPaymentButton();
 EndProcedure
 			
 #EndRegion
@@ -568,6 +562,7 @@ Procedure NewTransaction()
 	
 	EnabledPaymentButton();
 	SetVisibilityAvailability(Object, ThisObject);
+	ShowSessionStatus(Object, ThisObject);
 EndProcedure
 
 &AtServer
@@ -580,7 +575,12 @@ Procedure NewTransactionAtServer()
 	DocRetailSalesReceiptServer.OnCreateAtServer(Object, ThisObject, Cancel, True);
 	
 	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
-		Object.ConsolidatedRetailSales = DocConsolidatedRetailSalesServer.GetDocument(Object.Company, Object.Branch, ThisObject.Workstation);
+		If ThisObject.ConsolidatedRetailSales.IsEmpty() Then
+			ChangeConsolidatedRetailSales(Object, ThisObject, 
+				DocConsolidatedRetailSalesServer.GetDocument(Object.Company, Object.Branch, ThisObject.Workstation));
+		Else
+			Object.ConsolidatedRetailSales = ThisObject.ConsolidatedRetailSales;
+		EndIf;
 	EndIf;
 	
 	SalesPersonByDefault = Undefined;
@@ -705,6 +705,54 @@ Procedure ClearRetailCustomerAtServer()
 			Row.Item = Undefined;
 		EndIf;
 	EndDo;
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure ChangeConsolidatedRetailSales(Object, Form, NewDocument)
+	Form.ConsolidatedRetailSales = NewDocument;
+	Object.ConsolidatedRetailSales = NewDocument;
+	ShowSessionStatus(Object, Form);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure ShowSessionStatus(Object, Form)
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
+		Font = New Font("Tahoma", 12);
+		If Form.ConsolidatedRetailSales.IsEmpty() Then
+			Form.SessionStatus = New FormattedString("Session is closed", Font, WebColors.Red);
+		Else
+			SessionDate = CommonFunctionsServer.GetRefAttribute(Form.ConsolidatedRetailSales, "Date");
+			SessionDateText = "Session opened on " + Format(SessionDate, "DF='dd.MM.yyyy HH:mm';");
+			Form.SessionStatus = New FormattedString(SessionDateText, Font, WebColors.Green);
+		EndIf;
+		Form.Items.SessionStatus.Visible = True;
+	Else
+		Form.SessionStatus = "";
+		Form.Items.SessionStatus.Visible = False;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure SessionStatusClick(Item, StandardProcessing)
+	StandardProcessing = False;
+	QuestionText = ?(ThisObject.ConsolidatedRetailSales.IsEmpty(), 
+		"Do you want to open a new session?", 
+		"Do you want to close the session?");
+	Mode = QuestionDialogMode.OKCancel;
+	ShowQueryBox(New NotifyDescription("SessionStatusQuestion", ThisObject), QuestionText, Mode, 0);
+EndProcedure
+
+&AtClient
+Procedure SessionStatusQuestion(UserSelection, AddInfo) Export
+	If Not UserSelection = DialogReturnCode.OK Then
+		Return;
+	EndIf;
+	
+	If ThisObject.ConsolidatedRetailSales.IsEmpty() Then
+		OpenSession(Undefined);
+	Else
+		CloseSession(Undefined);
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -848,3 +896,4 @@ Procedure FillCashInList()
 		FillPropertyValues(ThisObject.CashInList.Add(), QuerySelection);
 	EndDo;
 EndProcedure
+

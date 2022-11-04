@@ -106,6 +106,17 @@ Scenario: _04022 preparation (Inventory transfer)
 			| "Documents.InventoryTransfer.FindByNumber(204).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransfer.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Load documents (comission trade)
+		When Create document PurchaseInvoice and PurchaseReturn objects (comission trade)
+		When Create document InventoryTransfer objects (comission trade)
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseReturn.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server	
+			| "Documents.InventoryTransfer.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I close all client application windows
+
 
 Scenario: _040221 check preparation
 	When check preparation
@@ -499,6 +510,100 @@ Scenario: _0402426 check Inventory transfer movements by the Register  "R4022 Sh
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "R4022 Shipment of stock transfer orders"'                     |	
+		And I close all client application windows
+
+Scenario: _0402431 check Inventory transfer movements by the Register  "R4010 Actual stocks" (transfer commission products)
+	* Select Inventory transfer
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '192' |
+	* Check movements by the Register  "R4010 Actual stocks"
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'                   | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'                  | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '4'         | 'Store 01'   | 'S/Yellow' | ''                  |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '4'         | 'Store 01'   | 'ODS'      | ''                  |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '4'         | 'Store 02'   | 'S/Yellow' | ''                  |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '4'         | 'Store 02'   | 'ODS'      | ''                  |		
+		And I close all client application windows
+
+Scenario: _0402432 check Inventory transfer movements by the Register  "R4011 Free stocks" (transfer commission products)
+	* Select Inventory transfer
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '192' |
+	* Check movements by the Register  "R4011 Free stocks"
+		And I click "Registrations report" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''            | ''                    | ''          | ''           | ''         |
+			| 'Document registrations records'                   | ''            | ''                    | ''          | ''           | ''         |
+			| 'Register  "R4011 Free stocks"'                    | ''            | ''                    | ''          | ''           | ''         |
+			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
+			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Store 01'   | 'S/Yellow' |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Store 01'   | 'S/Yellow' |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '4'         | 'Store 01'   | 'ODS'      |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Store 02'   | 'S/Yellow' |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Store 02'   | 'S/Yellow' |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '4'         | 'Store 02'   | 'ODS'      |		
+		And I close all client application windows
+
+Scenario: _0402433 check Inventory transfer movements by the Register  "R4050 Stock inventory" (transfer commission products)
+	* Select Inventory transfer
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '192' |
+	* Check movements by the Register  "R4050 Stock inventory"
+		And I click "Registrations report" button
+		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''            | ''                    | ''          | ''             | ''         | ''         |
+			| 'Document registrations records'                   | ''            | ''                    | ''          | ''             | ''         | ''         |
+			| 'Register  "R4050 Stock inventory"'                | ''            | ''                    | ''          | ''             | ''         | ''         |
+			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''         |
+			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Item key' |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Store 01' | 'S/Yellow' |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Store 02' | 'S/Yellow' |	
+		And I close all client application windows
+
+Scenario: _0402434 check Inventory transfer movements by the Register  "R8013 Consignor batch wise ballance" (transfer commission products)
+	* Select Inventory transfer
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '192' |
+	* Check movements by the Register  "R8013 Consignor batch wise ballance"
+		And I click "Registrations report" button
+		And I select "R8013 Consignor batch wise ballance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         |
+			| 'Document registrations records'                   | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         |
+			| 'Register  "R8013 Consignor batch wise ballance"'  | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         |
+			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                               | ''         | ''         |
+			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Company'      | 'Batch'                                          | 'Store'    | 'Item key' |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '1'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 01' | 'ODS'      |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 01' | 'S/Yellow' |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Purchase invoice 196 dated 03.11.2022 17:45:57' | 'Store 01' | 'ODS'      |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'ODS'      |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'S/Yellow' |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Purchase invoice 196 dated 03.11.2022 17:45:57' | 'Store 02' | 'ODS'      |	
 		And I close all client application windows
 
 Scenario: _0402439 Inventory transfer clear posting/mark for deletion

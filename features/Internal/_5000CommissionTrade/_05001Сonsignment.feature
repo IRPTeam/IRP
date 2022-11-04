@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Commission
+@CommissionTrade
 
 
 Feature: consignment
@@ -43,6 +43,7 @@ Scenario: _05002 preparation (consignment)
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
+		When Create catalog Stores (trade agent)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Companies objects (partners company)
 		When Create information register PartnerSegments records
@@ -73,7 +74,22 @@ Scenario: _05002 preparation (consignment)
 	* Post document
 		And I execute 1C:Enterprise script at server
  			| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);" |
-
+	* Setting for Company
+		Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c"
+		And I move to "Landed cost" tab
+		And I click Select button of "Currency movement type" field
+		And I go to line in "List" table
+			| 'Currency' | 'Description'    |
+			| 'TRY'      | 'Local currency' |
+		And I select current line in "List" table
+		And I move to "Comission trading" tab
+		And I click Select button of "Trade agent store" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Trade agent store' |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	And I close all client application windows
 
 Scenario: _050002 check preparation
 	When check preparation
@@ -383,8 +399,8 @@ Scenario: _050009 create Sales report from trade agent
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		Then "Item keys" window is opened
 		And I go to line in "List" table
-			| 'Code' | 'Item'               | 'Item key' |
-			| '39'   | 'Product 4 with SLN' | 'PZU'      |
+			| 'Item'               | 'Item key' |
+			| 'Product 4 with SLN' | 'UNIQ'     |
 		And I activate field named "ItemKey" in "List" table
 		And I select current line in "List" table
 		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table

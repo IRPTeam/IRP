@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Commission
+@CommissionTrade
 
 
 Feature: commission products sales
@@ -41,6 +41,7 @@ Scenario: _05502 preparation (commission products sales)
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
+		When Create catalog Stores (trade agent)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Companies objects (partners company)
 		When Create information register PartnerSegments records
@@ -67,6 +68,11 @@ Scenario: _05502 preparation (commission products sales)
 		When Create catalog Partners objects (Kalipso)
 	* Tax settings
 		When filling in Tax settings for company
+	* Setting for Company
+		When settings for Company (commission trade)
+	And I close all client application windows
+	
+						
 
 
 Scenario: _055002 check preparation
@@ -337,3 +343,376 @@ Scenario: _050006 creare PR (Return to consignor)
 			| '$$NumberPR1$$' |
 		And I close all client application windows
 
+Scenario: _050010 create SI (commission products sales)
+	And I close all client application windows
+	* Open SI form
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'DFC'         |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Agreement"
+		And I go to line in "List" table
+			| 'Description'      |
+			| 'Partner term DFC' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
+	* Add items
+		* First item
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate field named "ItemListItem" in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			Then "Items" window is opened
+			And I go to line in "List" table
+				| 'Description'        |
+				| 'Product 3 with SLN' |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'               | 'Item key' |
+				| 'Product 3 with SLN' | 'UNIQ'     |
+			And I select current line in "List" table
+			And I activate "Inventory origin" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table			
+			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+			And I activate field named "Owner" in "List" table
+			And I go to line in "List" table
+				| 'Owner' | 'Serial number'  |
+				| 'UNIQ'  | '09987897977889' |
+			And I select current line in "List" table
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button
+			And I select current line in "ItemList" table
+			And I activate "Price" field in "ItemList" table
+			And I input "120,00" text in "Price" field of "ItemList" table
+			And I activate "Use shipment confirmation" field in "ItemList" table
+			And I remove "Use shipment confirmation" checkbox in "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Second item
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate field named "ItemListItem" in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			Then "Items" window is opened
+			And I go to line in "List" table
+				| 'Description'        |
+				| 'Dress' |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'S/Yellow' |
+			And I select current line in "List" table
+			And I activate "Inventory origin" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "4,000" text in "Quantity" field of "ItemList" table		
+			And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table	
+			And I activate "Use shipment confirmation" field in "ItemList" table
+			And I remove "Use shipment confirmation" checkbox in "ItemList" table
+			And I finish line editing in "ItemList" table		
+	* Post SI and check consignor batches
+		And I click "Post" button
+		And I move to "Consignor batches" tab
+		And "ConsignorBatches" table became equal
+			| 'Store'    | 'Item key' | 'Batch'   | 'Quantity' |
+			| 'Store 02' | 'UNIQ'     | '$$PI3$$' | '2,000'    |
+			| 'Store 02' | 'S/Yellow' | '$$PI3$$' | '1,000'    |
+		And I delete "$$NumberSI10$$" variable
+		And I delete "$$SI10$$" variable
+		And I delete "$$DateSI10$$" variable
+		And I save the value of "Number" field as "$$NumberSI10$$"
+		And I save the window as "$$SI10$$"
+		And I save the value of the field named "Date" as "$$DateSI10$$"
+		And I click "Post and close" button
+	* Check creation
+		And "List" table contains lines
+			| 'Number'        |
+			| '$$NumberSI10$$' |
+		And I close all client application windows			
+
+Scenario: _050012 сheck the message when selling commission goods more than there is in the balance
+	And I close all client application windows
+	* Open SI form
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'DFC'         |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Agreement"
+		And I go to line in "List" table
+			| 'Description'      |
+			| 'Partner term DFC' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
+	* Add item
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Dress' |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'S/Yellow' |
+		And I select current line in "List" table
+		And I activate "Inventory origin" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table	
+		And I activate "Use shipment confirmation" field in "ItemList" table
+		And I remove "Use shipment confirmation" checkbox in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "50,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Post and check message
+		And I click "Post" button	
+		Then there are lines in TestClient message log
+			|'Consignor batch shortage Item key: S/Yellow Store: Store 02 Required:50,000 Remaining:10,000 Lack:40,000\n'|		
+	* Clear posting
+		And I click "Clear posting" button
+	And I close all client application windows
+	
+Scenario: _050014 create SR (return commission products that was sailed our customer)
+	And I close all client application windows
+	* Open SR form
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'DFC'         |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Agreement"
+		And I go to line in "List" table
+			| 'Description'      |
+			| 'Partner term DFC' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
+	* Select items
+		* First item
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate field named "ItemListItem" in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			Then "Items" window is opened
+			And I go to line in "List" table
+				| 'Description'        |
+				| 'Product 3 with SLN' |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'               | 'Item key' |
+				| 'Product 3 with SLN' | 'UNIQ'     |
+			And I select current line in "List" table		
+			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+			And I activate field named "Owner" in "List" table
+			And I go to line in "List" table
+				| 'Owner' | 'Serial number'  |
+				| 'UNIQ'  | '09987897977889' |
+			And I select current line in "List" table
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button
+			And I select current line in "ItemList" table
+			And I activate "Price" field in "ItemList" table
+			And I input "120,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Second item
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate field named "ItemListItem" in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'        |
+				| 'Dress' |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'S/Yellow' |
+			And I select current line in "List" table
+			And I select current line in "ItemList" table
+			And I input "2,000" text in "Quantity" field of "ItemList" table		
+			And I finish line editing in "ItemList" table
+	* Link
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		Then "Link / unlink document row" window is opened
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '466,10' | '4,000'    | 'Dress (S/Yellow)' | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation'          | 'Store'    | 'Unit' |
+			| '1' | '1,000'    | 'Product 3 with SLN (UNIQ)' | 'Store 02' | 'pcs'  |
+		And I expand a line in "BasisesTree" table
+			| 'Company'      | 'Row presentation'                          |
+			| 'Main Company' | 'Sales invoice 1 dated 03.11.2022 11:29:45' |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'          | 'Unit' |
+			| 'TRY'      | '120,00' | '2,000'    | 'Product 3 with SLN (UNIQ)' | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I click "Ok" button
+	* Temporarily
+		And I select current line in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' |
+			| 'Product 3 with SLN' | 'UNIQ'     |
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		Then "Select serial lot numbers" window is opened
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I select current line in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+	* Check filling
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Sales invoice' | 'Price'  | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales return order' | 'Return reason' | 'Revenue type' | 'VAT' | 'Offers amount' | 'Landed cost' | 'Sales person' |
+			| '1' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | '21,60'      | 'pcs'  | '09987897977889'     | '1,000'    | '$$SI10$$'      | '120,00' | '120,00'     | 'Yes'               | '141,60'       | ''                    | 'Store 02' | ''                   | ''              | ''             | '18%' | ''              | ''            | ''             |
+			| '2' | 'Dress'              | 'S/Yellow' | ''                   | 'No'                 | '167,80'     | 'pcs'  | ''                   | '2,000'    | '$$SI10$$'      | '466,10' | '932,20'     | 'Yes'               | '1 100,00'     | ''                    | 'Store 02' | ''                   | ''              | ''             | '18%' | ''              | ''            | ''             |
+	* Post	
+		And I click "Post" button
+		And I delete "$$NumberSR10$$" variable
+		And I delete "$$SR10$$" variable
+		And I delete "$$DateSR10$$" variable
+		And I save the value of "Number" field as "$$NumberSR10$$"
+		And I save the window as "$$SR10$$"
+		And I save the value of the field named "Date" as "$$DateSR10$$"
+		And I click "Post and close" button 
+	* Check creation
+		And "List" table contains lines
+			| 'Number'        |
+			| '$$NumberSR10$$' |
+		And I close all client application windows
+
+Scenario: _050015 create IT for (Consignor stocks)
+	And I close all client application windows
+	* Open IT form
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Select button of "Store sender" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Select button of "Store receiver" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'    |
+		And I select current line in "List" table
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Product 3 with SLN' |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'               | 'Item key' |
+			| 'Product 3 with SLN' | 'UNIQ'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I activate field named "Owner" in "List" table
+		And I go to line in "List" table
+			| 'Owner' | 'Reference'      | 'Serial number'  |
+			| 'UNIQ'  | '09987897977889' | '09987897977889' |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I activate "Inventory origin" field in "ItemList" table
+		And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Inventory origin" attribute in "ItemList" table
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'S/Yellow' |
+		And I select current line in "List" table
+		And I activate "Inventory origin" field in "ItemList" table
+		And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I move to "Other" tab
+		And I remove checkbox "Use shipment confirmation"
+		And I move to "Items" tab
+		And I click "Post" button
+		And I delete "$$NumberIT10$$" variable
+		And I delete "$$IT10$$" variable
+		And I delete "$$DateIT10$$" variable
+		And I save the value of "Number" field as "$$NumberIT10$$"
+		And I save the window as "$$IT10$$"
+		And I save the value of the field named "Date" as "$$DateIT10$$"
+		And I click "Post and close" button 
+	* Check creation
+		And "List" table contains lines
+			| 'Number'        |
+			| '$$NumberIT10$$' |
+		And I close all client application windows		
+						
+
+							

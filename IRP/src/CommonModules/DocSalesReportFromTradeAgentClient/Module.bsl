@@ -150,7 +150,7 @@ Procedure ItemListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFold
 EndProcedure
 
 Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel) Export
-	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel);
+	Return;
 EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export

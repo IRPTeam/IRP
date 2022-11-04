@@ -6,7 +6,6 @@ EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
-	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters);
 EndProcedure
 
 #EndRegion
@@ -150,7 +149,7 @@ Procedure ItemListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFold
 EndProcedure
 
 Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel) Export
-	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel);
+	Return;
 EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export

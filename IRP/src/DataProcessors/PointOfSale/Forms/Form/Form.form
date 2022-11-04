@@ -2177,18 +2177,114 @@
               <items xsi:type="form:FormGroup">
                 <name>SubmenuCommonCommands</name>
                 <id>1130</id>
-                <items xsi:type="form:Button">
-                  <name>OpenSession</name>
-                  <id>1076</id>
+                <items xsi:type="form:FormGroup">
+                  <name>GroupSessionComands</name>
+                  <id>1132</id>
+                  <items xsi:type="form:Button">
+                    <name>OpenSession</name>
+                    <id>1076</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <skipOnInput>true</skipOnInput>
+                    <extendedTooltip>
+                      <name>OpenSessionExtendedTooltip</name>
+                      <id>1077</id>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <type>Label</type>
+                      <autoMaxWidth>true</autoMaxWidth>
+                      <autoMaxHeight>true</autoMaxHeight>
+                      <extInfo xsi:type="form:LabelDecorationExtInfo">
+                        <horizontalAlign>Left</horizontalAlign>
+                      </extInfo>
+                    </extendedTooltip>
+                    <commandName>Form.Command.OpenSession</commandName>
+                    <representation>Auto</representation>
+                    <autoMaxWidth>true</autoMaxWidth>
+                    <autoMaxHeight>true</autoMaxHeight>
+                    <placementArea>UserCmds</placementArea>
+                    <representationInContextMenu>Auto</representationInContextMenu>
+                  </items>
+                  <items xsi:type="form:Button">
+                    <name>CloseSession</name>
+                    <id>1078</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <skipOnInput>true</skipOnInput>
+                    <extendedTooltip>
+                      <name>CloseSessionExtendedTooltip</name>
+                      <id>1079</id>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <type>Label</type>
+                      <autoMaxWidth>true</autoMaxWidth>
+                      <autoMaxHeight>true</autoMaxHeight>
+                      <extInfo xsi:type="form:LabelDecorationExtInfo">
+                        <horizontalAlign>Left</horizontalAlign>
+                      </extInfo>
+                    </extendedTooltip>
+                    <commandName>Form.Command.CloseSession</commandName>
+                    <representation>Auto</representation>
+                    <autoMaxWidth>true</autoMaxWidth>
+                    <autoMaxHeight>true</autoMaxHeight>
+                    <placementArea>UserCmds</placementArea>
+                    <representationInContextMenu>Auto</representationInContextMenu>
+                  </items>
+                  <items xsi:type="form:Button">
+                    <name>CancelSession</name>
+                    <id>1080</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <skipOnInput>true</skipOnInput>
+                    <extendedTooltip>
+                      <name>CancelSessionExtendedTooltip</name>
+                      <id>1081</id>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <type>Label</type>
+                      <autoMaxWidth>true</autoMaxWidth>
+                      <autoMaxHeight>true</autoMaxHeight>
+                      <extInfo xsi:type="form:LabelDecorationExtInfo">
+                        <horizontalAlign>Left</horizontalAlign>
+                      </extInfo>
+                    </extendedTooltip>
+                    <commandName>Form.Command.CancelSession</commandName>
+                    <representation>Auto</representation>
+                    <autoMaxWidth>true</autoMaxWidth>
+                    <autoMaxHeight>true</autoMaxHeight>
+                    <placementArea>UserCmds</placementArea>
+                    <representationInContextMenu>Auto</representationInContextMenu>
+                  </items>
                   <visible>true</visible>
                   <enabled>true</enabled>
                   <userVisible>
                     <common>true</common>
                   </userVisible>
-                  <skipOnInput>true</skipOnInput>
+                  <title>
+                    <key>en</key>
+                    <value>Group of session commands</value>
+                  </title>
                   <extendedTooltip>
-                    <name>OpenSessionExtendedTooltip</name>
-                    <id>1077</id>
+                    <name>GroupSessionComandsExtendedTooltip</name>
+                    <id>1133</id>
                     <visible>true</visible>
                     <enabled>true</enabled>
                     <userVisible>
@@ -2201,25 +2297,83 @@
                       <horizontalAlign>Left</horizontalAlign>
                     </extInfo>
                   </extendedTooltip>
-                  <commandName>Form.Command.OpenSession</commandName>
-                  <representation>Auto</representation>
-                  <autoMaxWidth>true</autoMaxWidth>
-                  <autoMaxHeight>true</autoMaxHeight>
-                  <placementArea>UserCmds</placementArea>
-                  <representationInContextMenu>Auto</representationInContextMenu>
+                  <extInfo xsi:type="form:ButtonGroupExtInfo"/>
                 </items>
-                <items xsi:type="form:Button">
-                  <name>CloseSession</name>
-                  <id>1078</id>
+                <items xsi:type="form:FormGroup">
+                  <name>GroupCashCommands</name>
+                  <id>1134</id>
+                  <items xsi:type="form:Button">
+                    <name>CashInListCreateCashIn</name>
+                    <id>1113</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <extendedTooltip>
+                      <name>CashInListCreateCashInExtendedTooltip</name>
+                      <id>1114</id>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <type>Label</type>
+                      <autoMaxWidth>true</autoMaxWidth>
+                      <autoMaxHeight>true</autoMaxHeight>
+                      <extInfo xsi:type="form:LabelDecorationExtInfo">
+                        <horizontalAlign>Left</horizontalAlign>
+                      </extInfo>
+                    </extendedTooltip>
+                    <commandName>Form.Command.CreateCashIn</commandName>
+                    <representation>Auto</representation>
+                    <autoMaxWidth>true</autoMaxWidth>
+                    <autoMaxHeight>true</autoMaxHeight>
+                    <placementArea>UserCmds</placementArea>
+                    <representationInContextMenu>Auto</representationInContextMenu>
+                  </items>
+                  <items xsi:type="form:Button">
+                    <name>CashInListCreateCashOut</name>
+                    <id>1117</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <extendedTooltip>
+                      <name>CashInListCreateCashOutExtendedTooltip</name>
+                      <id>1118</id>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <type>Label</type>
+                      <autoMaxWidth>true</autoMaxWidth>
+                      <autoMaxHeight>true</autoMaxHeight>
+                      <extInfo xsi:type="form:LabelDecorationExtInfo">
+                        <horizontalAlign>Left</horizontalAlign>
+                      </extInfo>
+                    </extendedTooltip>
+                    <commandName>Form.Command.CreateCashOut</commandName>
+                    <representation>Auto</representation>
+                    <autoMaxWidth>true</autoMaxWidth>
+                    <autoMaxHeight>true</autoMaxHeight>
+                    <placementArea>UserCmds</placementArea>
+                    <representationInContextMenu>Auto</representationInContextMenu>
+                  </items>
                   <visible>true</visible>
                   <enabled>true</enabled>
                   <userVisible>
                     <common>true</common>
                   </userVisible>
-                  <skipOnInput>true</skipOnInput>
+                  <title>
+                    <key>en</key>
+                    <value>Group of cash commands</value>
+                  </title>
                   <extendedTooltip>
-                    <name>CloseSessionExtendedTooltip</name>
-                    <id>1079</id>
+                    <name>GroupCashCommandsExtendedTooltip</name>
+                    <id>1135</id>
                     <visible>true</visible>
                     <enabled>true</enabled>
                     <userVisible>
@@ -2232,43 +2386,7 @@
                       <horizontalAlign>Left</horizontalAlign>
                     </extInfo>
                   </extendedTooltip>
-                  <commandName>Form.Command.CloseSession</commandName>
-                  <representation>Auto</representation>
-                  <autoMaxWidth>true</autoMaxWidth>
-                  <autoMaxHeight>true</autoMaxHeight>
-                  <placementArea>UserCmds</placementArea>
-                  <representationInContextMenu>Auto</representationInContextMenu>
-                </items>
-                <items xsi:type="form:Button">
-                  <name>CancelSession</name>
-                  <id>1080</id>
-                  <visible>true</visible>
-                  <enabled>true</enabled>
-                  <userVisible>
-                    <common>true</common>
-                  </userVisible>
-                  <skipOnInput>true</skipOnInput>
-                  <extendedTooltip>
-                    <name>CancelSessionExtendedTooltip</name>
-                    <id>1081</id>
-                    <visible>true</visible>
-                    <enabled>true</enabled>
-                    <userVisible>
-                      <common>true</common>
-                    </userVisible>
-                    <type>Label</type>
-                    <autoMaxWidth>true</autoMaxWidth>
-                    <autoMaxHeight>true</autoMaxHeight>
-                    <extInfo xsi:type="form:LabelDecorationExtInfo">
-                      <horizontalAlign>Left</horizontalAlign>
-                    </extInfo>
-                  </extendedTooltip>
-                  <commandName>Form.Command.CancelSession</commandName>
-                  <representation>Auto</representation>
-                  <autoMaxWidth>true</autoMaxWidth>
-                  <autoMaxHeight>true</autoMaxHeight>
-                  <placementArea>UserCmds</placementArea>
-                  <representationInContextMenu>Auto</representationInContextMenu>
+                  <extInfo xsi:type="form:ButtonGroupExtInfo"/>
                 </items>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -4282,6 +4400,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>InputField</type>
+          <readOnly>true</readOnly>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -4332,6 +4451,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>InputField</type>
+          <readOnly>true</readOnly>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -4382,6 +4502,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>InputField</type>
+          <readOnly>true</readOnly>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -4398,6 +4519,36 @@
         <autoCommandBar>
           <name>CashInListCommandBar</name>
           <id>1092</id>
+          <items xsi:type="form:Button">
+            <name>CashInListReturnToMain</name>
+            <id>1144</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>CashInListReturnToMainExtendedTooltip</name>
+              <id>1145</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <commandName>Form.Command.ReturnToMain</commandName>
+            <representation>Auto</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
           <items xsi:type="form:Button">
             <name>CashInListUpdateCashIn</name>
             <id>1115</id>
@@ -4421,7 +4572,7 @@
                 <horizontalAlign>Left</horizontalAlign>
               </extInfo>
             </extendedTooltip>
-            <commandName>Form.Command.UpdateCashIn</commandName>
+            <commandName>Form.Command.UpdateMoneyTransfers</commandName>
             <representation>Auto</representation>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -4429,16 +4580,16 @@
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
-            <name>CashInListCreateCashIn</name>
-            <id>1113</id>
+            <name>CashInListSortListAsc</name>
+            <id>1136</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>CashInListCreateCashInExtendedTooltip</name>
-              <id>1114</id>
+              <name>CashInListSortListAscExtendedTooltip</name>
+              <id>1137</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -4451,24 +4602,25 @@
                 <horizontalAlign>Left</horizontalAlign>
               </extInfo>
             </extendedTooltip>
-            <commandName>Form.Command.CreateCashIn</commandName>
+            <commandName>Form.Item.CashInList.StandardCommand.SortListAsc</commandName>
             <representation>Auto</representation>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
             <representationInContextMenu>Auto</representationInContextMenu>
+            <locationInCommandBar>InCommandBar</locationInCommandBar>
           </items>
           <items xsi:type="form:Button">
-            <name>CashInListCreateCashOut</name>
-            <id>1117</id>
+            <name>CashInListSortListDesc</name>
+            <id>1138</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>CashInListCreateCashOutExtendedTooltip</name>
-              <id>1118</id>
+              <name>CashInListSortListDescExtendedTooltip</name>
+              <id>1139</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -4481,12 +4633,75 @@
                 <horizontalAlign>Left</horizontalAlign>
               </extInfo>
             </extendedTooltip>
-            <commandName>Form.Command.CreateCashOut</commandName>
+            <commandName>Form.Item.CashInList.StandardCommand.SortListDesc</commandName>
             <representation>Auto</representation>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
             <representationInContextMenu>Auto</representationInContextMenu>
+            <locationInCommandBar>InCommandBar</locationInCommandBar>
+          </items>
+          <items xsi:type="form:Button">
+            <name>CashInListFind</name>
+            <id>1140</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>CashInListFindExtendedTooltip</name>
+              <id>1141</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <commandName>Form.Item.CashInList.StandardCommand.Find</commandName>
+            <representation>Picture</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+            <locationInCommandBar>InCommandBar</locationInCommandBar>
+          </items>
+          <items xsi:type="form:Button">
+            <name>CashInListCancelSearch</name>
+            <id>1142</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>CashInListCancelSearchExtendedTooltip</name>
+              <id>1143</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <commandName>Form.Item.CashInList.StandardCommand.CancelSearch</commandName>
+            <representation>Picture</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+            <locationInCommandBar>InCommandBar</locationInCommandBar>
           </items>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -4495,6 +4710,10 @@
           </userVisible>
           <horizontalAlign>Left</horizontalAlign>
         </autoCommandBar>
+        <handlers>
+          <event>Selection</event>
+          <name>CashInListSelection</name>
+        </handlers>
         <searchStringAddition>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -4636,7 +4855,6 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
-        <changeRowSet>true</changeRowSet>
         <changeRowOrder>true</changeRowOrder>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -4712,7 +4930,6 @@
     </extendedTooltip>
     <type>Pages</type>
     <extInfo xsi:type="form:PagesGroupExtInfo">
-      <pagesRepresentation>TabsOnTop</pagesRepresentation>
       <currentRowUse>Auto</currentRowUse>
     </extInfo>
   </items>
@@ -5980,6 +6197,9 @@ person</value>
     <use>
       <common>true</common>
     </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.AppearanceCircleEmpty</picture>
+    </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>OpenSession</name>
@@ -5998,6 +6218,9 @@ person</value>
     <use>
       <common>true</common>
     </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.AppearanceCircleGreen</picture>
+    </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>CloseSession</name>
@@ -6016,6 +6239,9 @@ person</value>
     <use>
       <common>true</common>
     </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.AppearanceCrossIcon</picture>
+    </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>CancelSession</name>
@@ -6034,6 +6260,9 @@ person</value>
     <use>
       <common>true</common>
     </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>CommonPicture.Finance</picture>
+    </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>CreateCashIn</name>
@@ -6042,20 +6271,24 @@ person</value>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>UpdateCashIn</name>
+    <name>UpdateMoneyTransfers</name>
     <title>
       <key>en</key>
-      <value>Update cash in</value>
+      <value>Update money transfers</value>
     </title>
     <id>27</id>
     <use>
       <common>true</common>
     </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.Refresh</picture>
+    </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>UpdateCashIn</name>
+        <name>UpdateMoneyTransfers</name>
       </handler>
     </action>
+    <representation>TextPicture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -6068,11 +6301,35 @@ person</value>
     <use>
       <common>true</common>
     </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>CommonPicture.CashOk</picture>
+    </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>CreateCashOut</name>
       </handler>
     </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>ReturnToMain</name>
+    <title>
+      <key>en</key>
+      <value>Return to Main</value>
+    </title>
+    <id>29</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.GoToBegin</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>ReturnToMain</name>
+      </handler>
+    </action>
+    <representation>TextPicture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

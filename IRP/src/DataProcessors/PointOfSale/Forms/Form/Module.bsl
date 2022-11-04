@@ -61,9 +61,10 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Form.Items.OpenSession.Enabled = Not SessionIsOpened;
 		Form.Items.CloseSession.Enabled = SessionIsOpened;
 		Form.Items.CancelSession.Enabled = SessionIsOpened;
+		Form.Items.GroupCommonCommands.Visible = True;
+	Else
+		Form.Items.GroupCommonCommands.Visible = False;
 	EndIf;
-	Form.Items.GroupMainPages.PagesRepresentation = FormPagesRepresentation.None;
-	Form.Items.GroupMainPages.CurrentPage = Form.Items.MainPage;
 EndProcedure
 
 #Region AGREEMENT
@@ -797,6 +798,16 @@ EndProcedure
 
 &AtClient
 Procedure CreateCashIn(Command)
+	Items.GroupMainPages.CurrentPage = Items.CashPage;
+EndProcedure
+
+&AtClient
+Procedure ReturnToMain(Command)
+	Items.GroupMainPages.CurrentPage = Items.MainPage;
+EndProcedure
+
+&AtClient
+Procedure CashInListSelection(Item, RowSelected, Field, StandardProcessing)
 	CurrentData = Items.CashInList.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
@@ -807,11 +818,21 @@ Procedure CreateCashIn(Command)
 	CashInData.Insert("Amount"        , CurrentData.Amount);
 	
 	FillingData = GetFillingDataMoneyTransferForCashReceipt(CashInData);
-	OpenForm("Document.CashReceipt.ObjectForm", New Structure("FillingValues", FillingData), , New UUID());	
+	OpenForm(
+		"Document.CashReceipt.ObjectForm", 
+		New Structure("FillingValues", FillingData), , 
+		New UUID(),,,
+		New NotifyDescription("CreateCashInFinish", ThisObject),
+		FormWindowOpeningMode.LockWholeInterface);	
 EndProcedure
 
 &AtClient
-Procedure UpdateCashIn(Command)
+Procedure CreateCashInFinish(Result, AddInfo) Export
+	FillCashInList();
+EndProcedure
+
+&AtClient
+Procedure UpdateMoneyTransfers(Command)
 	FillCashInList();
 EndProcedure
 

@@ -1298,32 +1298,12 @@
     <savedData>true</savedData>
   </attributes>
   <attributes>
-    <name>GroupItems</name>
-    <title>
-      <key>en</key>
-      <value>Group items</value>
-    </title>
-    <id>2</id>
-    <valueType>
-      <types>ValueList</types>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-    <extInfo xsi:type="form:ValueListExtInfo">
-      <itemValueType/>
-    </extInfo>
-  </attributes>
-  <attributes>
     <name>Description</name>
     <title>
       <key>en</key>
       <value>Description</value>
     </title>
-    <id>3</id>
+    <id>2</id>
     <valueType>
       <types>String</types>
       <stringQualifiers/>
@@ -1341,7 +1321,7 @@
       <key>en</key>
       <value>Dependent document</value>
     </title>
-    <id>4</id>
+    <id>3</id>
     <valueType>
       <types>DocumentRef.InternalSupplyRequest</types>
       <types>DocumentRef.Production</types>
@@ -1354,6 +1334,26 @@
       <common>true</common>
     </edit>
     <savedData>true</savedData>
+  </attributes>
+  <attributes>
+    <name>GroupItems</name>
+    <title>
+      <key>en</key>
+      <value>Group items</value>
+    </title>
+    <id>4</id>
+    <valueType>
+      <types>ValueList</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <extInfo xsi:type="form:ValueListExtInfo">
+      <itemValueType/>
+    </extInfo>
   </attributes>
   <commandInterface>
     <navigationPanel/>

@@ -119,6 +119,50 @@ Procedure FillCheckBankCashDocuments(Object, CheckedAttributes) Export
 	EndIf;
 EndProcedure
 
+// Check matching to basis document.
+// 
+// Parameters:
+//  Object - DocumentObject.BankPayment, DocumentObject.BankReceipt, DocumentObject.CashPayment, DocumentObject.CashReceipt - document for checking
+//  BasisAttribute - String - attribute for checking in basis document
+//  Cancel - Boolean - check failed
+Procedure CheckMatchingToBasisDocument(Object, ObjectAttribute, BasisAttribute, Cancel) Export
+	
+	Query = New Query;
+	Query.SetParameter("Account", Object[ObjectAttribute]);
+	Query.SetParameter("PaymentList", Object.PaymentList.Unload());
+	Query.Text = StrTemplate(
+	"SELECT
+	|	PaymentList.LineNumber,
+	|	PaymentList.PlaningTransactionBasis,
+	|	&Account as Account
+	|INTO tmpPaymentList
+	|FROM
+	|	&PaymentList AS PaymentList
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpPaymentList.LineNumber,
+	|	tmpPaymentList.PlaningTransactionBasis as Basis,
+	|	CashTransferOrder.%1 as Account
+	|FROM
+	|	tmpPaymentList AS tmpPaymentList
+	|		INNER JOIN Document.CashTransferOrder AS CashTransferOrder
+	|		ON tmpPaymentList.PlaningTransactionBasis = CashTransferOrder.Ref
+	|		AND NOT tmpPaymentList.Account = CashTransferOrder.%1", BasisAttribute);
+	
+	SelectionRecords = Query.Execute().Select();
+	While SelectionRecords.Next() Do
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(
+				StrTemplate(R().Error_AttributeDontMatchValueFromBasisDoc_Row, 
+					ObjectAttribute, SelectionRecords.Account, SelectionRecords.Basis, SelectionRecords.LineNumber), 
+				ObjectAttribute, 
+				Object);
+	EndDo;
+	
+EndProcedure	
+
 #EndRegion
 
 #Region PartnerData

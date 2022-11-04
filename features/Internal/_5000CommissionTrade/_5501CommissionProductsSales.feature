@@ -433,7 +433,7 @@ Scenario: _050010 create SI (commission products sales)
 		And "ConsignorBatches" table became equal
 			| 'Store'    | 'Item key' | 'Batch'   | 'Quantity' |
 			| 'Store 02' | 'UNIQ'     | '$$PI3$$' | '2,000'    |
-			| 'Store 02' | 'S/Yellow' | '$$PI3$$' | '1,000'    |
+			| 'Store 02' | 'S/Yellow' | '$$PI3$$' | '4,000'    |
 		And I delete "$$NumberSI10$$" variable
 		And I delete "$$SI10$$" variable
 		And I delete "$$DateSI10$$" variable
@@ -496,7 +496,7 @@ Scenario: _050012 сheck the message when selling commission goods more than the
 	* Post and check message
 		And I click "Post" button	
 		Then there are lines in TestClient message log
-			|'Consignor batch shortage Item key: S/Yellow Store: Store 02 Required:50,000 Remaining:10,000 Lack:40,000\n'|		
+			|'Consignor batch shortage Item key: S/Yellow Store: Store 02 Required:50,000 Remaining:7,000 Lack:43,000\n'|		
 	* Clear posting
 		And I click "Clear posting" button
 	And I close all client application windows
@@ -585,9 +585,6 @@ Scenario: _050014 create SR (return commission products that was sailed our cust
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation'          | 'Store'    | 'Unit' |
 			| '1' | '1,000'    | 'Product 3 with SLN (UNIQ)' | 'Store 02' | 'pcs'  |
-		And I expand a line in "BasisesTree" table
-			| 'Company'      | 'Row presentation'                          |
-			| 'Main Company' | 'Sales invoice 1 dated 03.11.2022 11:29:45' |
 		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'          | 'Unit' |

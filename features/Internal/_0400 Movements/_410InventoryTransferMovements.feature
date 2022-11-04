@@ -17,6 +17,7 @@ Background:
 
 Scenario: _04022 preparation (Inventory transfer)
 	When set True value to the constant
+	When set True value to the constant Use commission trading
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -111,6 +112,8 @@ Scenario: _04022 preparation (Inventory transfer)
 		When Create document InventoryTransfer objects (comission trade)
 		And I execute 1C:Enterprise script at server	
 			| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Posting);" |	
 		And I execute 1C:Enterprise script at server	
 			| "Documents.PurchaseReturn.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);" |	
 		And I execute 1C:Enterprise script at server	
@@ -529,10 +532,11 @@ Scenario: _0402431 check Inventory transfer movements by the Register  "R4010 Ac
 			| 'Register  "R4010 Actual stocks"'                  | ''            | ''                    | ''          | ''           | ''         | ''                  |
 			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
 			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '3'         | 'Store 01'   | 'ODS'      | ''                  |
 			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '4'         | 'Store 01'   | 'S/Yellow' | ''                  |
-			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '4'         | 'Store 01'   | 'ODS'      | ''                  |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '3'         | 'Store 02'   | 'ODS'      | ''                  |
 			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '4'         | 'Store 02'   | 'S/Yellow' | ''                  |
-			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '4'         | 'Store 02'   | 'ODS'      | ''                  |		
+						
 		And I close all client application windows
 
 Scenario: _0402432 check Inventory transfer movements by the Register  "R4011 Free stocks" (transfer commission products)
@@ -554,10 +558,10 @@ Scenario: _0402432 check Inventory transfer movements by the Register  "R4011 Fr
 			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
 			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Store 01'   | 'S/Yellow' |
 			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Store 01'   | 'S/Yellow' |
-			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '4'         | 'Store 01'   | 'ODS'      |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '3'         | 'Store 01'   | 'ODS'      |
 			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Store 02'   | 'S/Yellow' |
 			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Store 02'   | 'S/Yellow' |
-			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '4'         | 'Store 02'   | 'ODS'      |		
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '3'         | 'Store 02'   | 'ODS'      |		
 		And I close all client application windows
 
 Scenario: _0402433 check Inventory transfer movements by the Register  "R4050 Stock inventory" (transfer commission products)
@@ -601,7 +605,7 @@ Scenario: _0402434 check Inventory transfer movements by the Register  "R8013 Co
 			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '1'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 01' | 'ODS'      |
 			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 01' | 'S/Yellow' |
 			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Purchase invoice 196 dated 03.11.2022 17:45:57' | 'Store 01' | 'ODS'      |
-			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'ODS'      |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '1'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'ODS'      |
 			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'S/Yellow' |
 			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Purchase invoice 196 dated 03.11.2022 17:45:57' | 'Store 02' | 'ODS'      |	
 		And I close all client application windows

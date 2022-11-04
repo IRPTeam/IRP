@@ -897,3 +897,24 @@ Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
 	Return Result;
 	
 EndFunction
+
+// Get related documents.
+// 
+// Parameters:
+//  DocumentRef - DocumentRef - ref to document
+//  WithoutDeleted - Boolean - without documents marked for deletion
+// 
+// Returns:
+//  Array of DocumentRef - Get related documents
+Function GetRelatedDocuments(DocumentRef, WithoutDeleted = False) Export
+	Query = New Query();
+	Query.SetParameter("DocumentRef", DocumentRef);
+	Query.Text =
+	"SELECT Ref
+	|FROM FilterCriterion.RelatedDocuments(&DocumentRef)";
+	If WithoutDeleted Then
+		Query.Text = Query.Text + "
+		|WHERE NOT Ref.DeletionMark";
+	EndIf;
+	Return Query.Execute().Unload().UnloadColumn(0);
+EndFunction

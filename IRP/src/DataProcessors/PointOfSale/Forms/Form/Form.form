@@ -2057,67 +2057,6 @@
             <name>GroupDate</name>
             <id>1021</id>
             <items xsi:type="form:FormField">
-              <name>SessionStatus</name>
-              <id>1125</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <dataPath xsi:type="form:DataPath">
-                <segments>SessionStatus</segments>
-              </dataPath>
-              <titleLocation>None</titleLocation>
-              <extendedTooltip>
-                <name>SessionStatusExtendedTooltip</name>
-                <id>1127</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <contextMenu>
-                <name>SessionStatusContextMenu</name>
-                <id>1126</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <autoFill>true</autoFill>
-              </contextMenu>
-              <type>LabelField</type>
-              <editMode>Enter</editMode>
-              <showInHeader>true</showInHeader>
-              <headerHorizontalAlign>Left</headerHorizontalAlign>
-              <showInFooter>true</showInFooter>
-              <extInfo xsi:type="form:LabelFieldExtInfo">
-                <handlers>
-                  <event>OnClick</event>
-                  <name>HTMLSessionStatusOnClick</name>
-                </handlers>
-                <handlers>
-                  <event>Click</event>
-                  <name>SessionStatusClick</name>
-                </handlers>
-                <width>3</width>
-                <autoMaxWidth>true</autoMaxWidth>
-                <height>1</height>
-                <autoMaxHeight>true</autoMaxHeight>
-                <hyperlink>true</hyperlink>
-                <borderColor xsi:type="core:ColorRef">
-                  <color>Style.FieldBackColor</color>
-                </borderColor>
-              </extInfo>
-            </items>
-            <items xsi:type="form:FormField">
               <name>HTMLDate</name>
               <id>956</id>
               <visible>true</visible>
@@ -2431,6 +2370,7 @@
                 <value>Group of common commands</value>
               </title>
               <horizontalStretch>false</horizontalStretch>
+              <groupHorizontalAlign>Right</groupHorizontalAlign>
               <extendedTooltip>
                 <name>GroupCommonCommandsExtendedTooltip</name>
                 <id>1129</id>

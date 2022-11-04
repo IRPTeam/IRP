@@ -102,6 +102,26 @@ EndProcedure
 
 &AtClient
 Procedure CloseSession(Command)
+	FormParameters = New Structure();
+	FormParameters.Insert("Title", "Close session");
+	FormParameters.Insert("Currency", Object.Currency);
+	FormParameters.Insert("Store", ThisObject.Store);
+	FormParameters.Insert("Workstation", Object.Workstation);
+	FormParameters.Insert("ConsolidatedRetailSales", Object.ConsolidatedRetailSales);
+	
+	NotifyDescription = New NotifyDescription("CloseSessionFinish", ThisObject);
+	
+	OpenForm(
+		"DataProcessor.PointOfSale.Form.SessionClosing", 
+		FormParameters, ThisObject, UUID, , , NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+EndProcedure
+
+&AtClient
+Procedure CloseSessionFinish(Result, AddInfo) Export
+	If Not Result = DialogReturnCode.OK Then
+		Return;
+	EndIf;
+	
 	DocConsolidatedRetailSalesServer.CloseDocument(Object.ConsolidatedRetailSales);
 	ChangeConsolidatedRetailSales(Object, ThisObject, Undefined);
 	
@@ -111,6 +131,26 @@ EndProcedure
 
 &AtClient
 Procedure CancelSession(Command)
+	FormParameters = New Structure();
+	FormParameters.Insert("Title", "Cancel session");
+	FormParameters.Insert("Currency", Object.Currency);
+	FormParameters.Insert("Store", ThisObject.Store);
+	FormParameters.Insert("Workstation", Object.Workstation);
+	FormParameters.Insert("ConsolidatedRetailSales", Object.ConsolidatedRetailSales);
+	
+	NotifyDescription = New NotifyDescription("CancelSessionFinish", ThisObject);
+	
+	OpenForm(
+		"DataProcessor.PointOfSale.Form.SessionClosing", 
+		FormParameters, ThisObject, UUID, , , NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+EndProcedure
+
+&AtClient
+Procedure CancelSessionFinish(Result, AddInfo) Export
+	If Not Result = DialogReturnCode.OK Then
+		Return;
+	EndIf;
+	
 	DocConsolidatedRetailSalesServer.CancelDocument(Object.ConsolidatedRetailSales);
 	ChangeConsolidatedRetailSales(Object, ThisObject, Undefined);
 	
@@ -563,7 +603,6 @@ Procedure NewTransaction()
 	
 	EnabledPaymentButton();
 	SetVisibilityAvailability(Object, ThisObject);
-	ShowSessionStatus(Object, ThisObject);
 EndProcedure
 
 &AtServer
@@ -649,10 +688,24 @@ EndProcedure
 
 &AtClient
 Procedure EnabledPaymentButton()
+	Items.qPayment.Enabled = Object.ItemList.Count();
 	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
-		Items.qPayment.Enabled = Object.ItemList.Count() And ValueIsFilled(Object.ConsolidatedRetailSales);	
-	Else
-		Items.qPayment.Enabled = Object.ItemList.Count();
+		ColorGreen = New Color(0, 150, 70);
+		BackColorGreen = New Color(240, 255, 240);
+		ColorRed = New Color(255, 0, 0);
+		BackColorRed = New Color(255, 240, 240);
+		If ValueIsFilled(Object.ConsolidatedRetailSales) Then
+			Items.qPayment.Title = "Payment (+)";
+			Items.qPayment.TextColor = ColorGreen;
+			Items.qPayment.BorderColor = ColorGreen;
+			Items.qPayment.BackColor = BackColorGreen;
+		Else
+			Items.qPayment.Enabled = False;
+			Items.qPayment.Title = "Session is closed";
+			Items.qPayment.TextColor = ColorRed;
+			Items.qPayment.BorderColor = ColorRed;
+			Items.qPayment.BackColor = BackColorRed;
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -712,48 +765,6 @@ EndProcedure
 Procedure ChangeConsolidatedRetailSales(Object, Form, NewDocument)
 	Form.ConsolidatedRetailSales = NewDocument;
 	Object.ConsolidatedRetailSales = NewDocument;
-	ShowSessionStatus(Object, Form);
-EndProcedure
-
-&AtClientAtServerNoContext
-Procedure ShowSessionStatus(Object, Form)
-	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
-		Font = New Font("Tahoma", 12);
-		If Form.ConsolidatedRetailSales.IsEmpty() Then
-			Form.SessionStatus = New FormattedString("Session is closed", Font, WebColors.Red);
-		Else
-			SessionDate = CommonFunctionsServer.GetRefAttribute(Form.ConsolidatedRetailSales, "Date");
-			SessionDateText = "Session opened on " + Format(SessionDate, "DF='dd.MM.yyyy HH:mm';");
-			Form.SessionStatus = New FormattedString(SessionDateText, Font, WebColors.Green);
-		EndIf;
-		Form.Items.SessionStatus.Visible = True;
-	Else
-		Form.SessionStatus = "";
-		Form.Items.SessionStatus.Visible = False;
-	EndIf;
-EndProcedure
-
-&AtClient
-Procedure SessionStatusClick(Item, StandardProcessing)
-	StandardProcessing = False;
-	QuestionText = ?(ThisObject.ConsolidatedRetailSales.IsEmpty(), 
-		"Do you want to open a new session?", 
-		"Do you want to close the session?");
-	Mode = QuestionDialogMode.OKCancel;
-	ShowQueryBox(New NotifyDescription("SessionStatusQuestion", ThisObject), QuestionText, Mode, 0);
-EndProcedure
-
-&AtClient
-Procedure SessionStatusQuestion(UserSelection, AddInfo) Export
-	If Not UserSelection = DialogReturnCode.OK Then
-		Return;
-	EndIf;
-	
-	If ThisObject.ConsolidatedRetailSales.IsEmpty() Then
-		OpenSession(Undefined);
-	Else
-		CloseSession(Undefined);
-	EndIf;
 EndProcedure
 
 #EndRegion

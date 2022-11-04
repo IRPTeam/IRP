@@ -474,11 +474,13 @@ Scenario: Create catalog PaymentTypes objects
 
 
 
+Scenario: Create catalog Stores (trade agent)
 
+	// Catalog.Stores
 
-
-
-
+	And I check or create catalog "Stores" objects:
+		| 'Ref'                                                            | 'DeletionMark' | 'Code' | 'UseGoodsReceipt' | 'UseShipmentConfirmation' | 'Transit' | 'NegativeStockControl' | 'Company' | 'Description_en'    | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Stores?ref=b788b483d858e32911ed5a8bbe642061' | 'False'        | 10     | 'False'           | 'False'                   | 'False'   | 'False'                | ''        | 'Trade agent store' | ''                 | ''               | ''               |
 
 
 

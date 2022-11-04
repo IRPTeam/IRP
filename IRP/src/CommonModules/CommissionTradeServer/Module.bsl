@@ -1,30 +1,31 @@
 	
-Procedure FillConsignorBatches(DocObject, Store = Undefined) Export
+Function GetRegistrateConsignorBatches(DocObject, ItemListTable) Export
+	RegisterConsignorBatches = GetRegisterConsignorBatches(DocObject);
 	
 	ArrayForDelete = New Array();
-	For Each Row In DocObject.ConsignorBatches Do
-		If Not DocObject.ItemList.FindRows(New Structure("Key", Row.Key)).Count() Then
+	For Each Row In RegisterConsignorBatches Do
+		If Not ItemListTable.FindRows(New Structure("Key", Row.Key)).Count() Then
 			ArrayForDelete.Add(Row);
 		EndIf;
 	EndDo;
 	
 	For Each ItemForDelete In ArrayForDelete Do
-		DocObject.ConsignorBatches.Delete(ItemForDelete);
+		RegisterConsignorBatches.Delete(ItemForDelete);
 	EndDo;
 	
-	ItemListTable = New ValueTable();
-	ItemListTable.Columns.Add("Key"      , Metadata.DefinedTypes.typeRowID.Type);
-	ItemListTable.Columns.Add("Company"  , New TypeDescription("CatalogRef.Companies"));
-	ItemListTable.Columns.Add("ItemKey"  , New TypeDescription("CatalogRef.ItemKeys"));
-	ItemListTable.Columns.Add("Store"    , New TypeDescription("CatalogRef.Stores"));
-	ItemListTable.Columns.Add("Quantity" , Metadata.DefinedTypes.typeQuantity.Type);
+	ItemListFiltered = New ValueTable();
+	ItemListFiltered.Columns.Add("Key"      , Metadata.DefinedTypes.typeRowID.Type);
+	ItemListFiltered.Columns.Add("Company"  , New TypeDescription("CatalogRef.Companies"));
+	ItemListFiltered.Columns.Add("ItemKey"  , New TypeDescription("CatalogRef.ItemKeys"));
+	ItemListFiltered.Columns.Add("Store"    , New TypeDescription("CatalogRef.Stores"));
+	ItemListFiltered.Columns.Add("Quantity" , Metadata.DefinedTypes.typeQuantity.Type);
 	
 	ArrayForDelete = New Array();
-	For Each Row In DocObject.ItemList Do
+	For Each Row In ItemListTable Do
 		If Row.InventoryOrigin <> Enums.InventoryOrigingTypes.ConsignorStocks Then
-			BatchRows = DocObject.ConsignorBatches.FindRows(New Structure("Key", Row.Key));
+			BatchRows = RegisterConsignorBatches.FindRows(New Structure("Key", Row.Key));
 			For Each BatchRow In BatchRows Do
-				DocObject.ConsignorBatches.Delete(BatchRow);
+				RegisterConsignorBatches.Delete(BatchRow);
 			EndDo;
 			Continue;
 		EndIf;
@@ -34,9 +35,7 @@ Procedure FillConsignorBatches(DocObject, Store = Undefined) Export
 		IsChanged_Store   = False;
 		BatchQuantity = 0;
 		
-		_Store = ?(ValueIsFilled(Store), Store, Row.Store);
-		
-		BatchRows = DocObject.ConsignorBatches.FindRows(New Structure("Key", Row.Key));
+		BatchRows = RegisterConsignorBatches.FindRows(New Structure("Key", Row.Key));
 		For Each BatchRow In BatchRows Do
 			BatchQuantity = BatchQuantity + BatchRow.Quantity;
 			
@@ -44,101 +43,177 @@ Procedure FillConsignorBatches(DocObject, Store = Undefined) Export
 				IsChanged_ItemKey = True;
 			EndIf;
 			
-			If BatchRow.Batch.Company <> DocObject.Company Then
+			If BatchRow.Batch.Company <> Row.Company Then
 				IsChanged_Company = True;
 			EndIf;
 			
-			If BatchRow.Store <> _Store Then
+			If BatchRow.Store <> Row.Store Then
 				IsChanged_Store = True;
 			EndIf;
 		EndDo;
 		
-		If BatchQuantity <> Row.QuantityInBaseUnit Or IsChanged_ItemKey Or IsChanged_Company Or IsChanged_Store Then
+		If BatchQuantity <> Row.Quantity Or IsChanged_ItemKey Or IsChanged_Company Or IsChanged_Store Then
 			For Each BatchRow In BatchRows Do
 				ArrayForDelete.Add(BatchRow);
 			EndDo;
-			NewRow = ItemListTable.Add();
+			NewRow = ItemListFiltered.Add();
 			NewRow.Key      = Row.Key;
-			NewRow.Company  = DocObject.Company;
+			NewRow.Company  = Row.Company;
 			NewRow.ItemKey  = Row.ItemKey;
-			NewRow.Store    = _Store;
+			NewRow.Store    = Row.Store;
 			NewRow.Quantity = Row.Quantity;
 		EndIf;
 	EndDo;
 	
 	For Each ItemForDelete In ArrayForDelete Do
-		DocObject.ConsignorBatches.Delete(ItemForDelete);
+		RegisterConsignorBatches.Delete(ItemForDelete);
 	EndDo;
 	
-	LockStorage = New Array();
-	If ItemListTable.Count() Then
-		DataLock = New DataLock();
-		ItemLock = DataLock.Add("AccumulationRegister.R8013B_ConsignorBatchWiseBallance");
-		ItemLock.Mode = DataLockMode.Exclusive;
-		ItemLock.DataSource = ItemListTable;
-		ItemLock.UseFromDataSource("Company", "Company");
-		ItemLock.UseFromDataSource("ItemKey", "ItemKey");
-		ItemLock.UseFromDataSource("Store"  , "Store");
-		DataLock.Lock();
-		LockStorage.Add(DataLock);
-		DocObject.AdditionalProperties.Insert("CommissionLockStorage", LockStorage);
-		
-		ConsignorBatchesTable = GetConsignorBatches_Sales_Transfer(ItemListTable, DocObject);		
+	If ItemListFiltered.Count() Then
+		LockConsignorBatchWiseBalance(DocObject, ItemListFiltered);		
+		ConsignorBatchesTable = GetConsignorBatches_Sales_Transfer(ItemListFiltered, DocObject);	
+			
+		RecordSet = InformationRegisters.T8010S_ConsignorBatches.CreateRecordSet();
+		RecordSet.Filter.Document.Set(DocObject.Ref);
 		For Each Row In ConsignorBatchesTable Do
-			FillPropertyValues(DocObject.ConsignorBatches.Add(), Row);
+			Record = RecordSet.Add();
+			FillPropertyValues(Record, Row);
+			Record.Document = DocObject.Ref;
 		EndDo;
+		RecordSet.Write();
+		Return ConsignorBatchesTable;
+	Else
+		Return RegisterConsignorBatches;
 	EndIf;
-EndProcedure
+EndFunction
 
-Procedure FillConsignorBatches_ReturnToConsignor(DocObject) Export
-	
-	DocObject.ConsignorBatches.Clear();
-	
-	If DocObject.TransactionType <> Enums.PurchaseReturnTransactionTypes.ReturnToConsignor Then
-		Return;
+Function GetTableConsignorBatchWiseBalanceForPurchaseReturn(DocObject, ItemListTable) Export
+	If Not ItemListTable.Count() Then
+		Return GetEmptyConsignorBatchesTable();
 	EndIf;
 	
-	ItemListTable = New ValueTable();
-	ItemListTable.Columns.Add("Key"       , Metadata.DefinedTypes.typeRowID.Type);
-	ItemListTable.Columns.Add("Company"   , New TypeDescription("CatalogRef.Companies"));
-	ItemListTable.Columns.Add("Partner"   , New TypeDescription("CatalogRef.Partners"));
-	ItemListTable.Columns.Add("Agreement" , New TypeDescription("CatalogRef.Agreements"));
-	ItemListTable.Columns.Add("Batch"     , New TypeDescription("DocumentRef.PurchaseInvoice"));
-	ItemListTable.Columns.Add("ItemKey"   , New TypeDescription("CatalogRef.ItemKeys"));
-	ItemListTable.Columns.Add("Store"     , New TypeDescription("CatalogRef.Stores"));
-	ItemListTable.Columns.Add("Quantity"  , Metadata.DefinedTypes.typeQuantity.Type);
+	LockConsignorBatchWiseBalance(DocObject, ItemListTable);
 	
-	For Each Row In DocObject.ItemList Do
-		NewRow = ItemListTable.Add();
-		NewRow.Key        = Row.Key;
-		NewRow.Company    = DocObject.Company;
-		NewRow.Partner    = DocObject.Partner;
-		NewRow.Agreement  = DocObject.Agreement;
-		NewRow.Batch      = Row.PurchaseInvoice;
-		NewRow.ItemKey    = Row.ItemKey;
-		NewRow.Store      = Row.Store;
-		NewRow.Quantity = Row.Quantity;
-	EndDo;
-	
+	ConsignorBatchesTable = GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject);		
+	Return ConsignorBatchesTable;
+EndFunction
+
+Function GetTableConsignorBatchWiseBalanceForSalesReturn(DocObject, ItemListTable) Export
 	LockStorage = New Array();
-	If ItemListTable.Count() Then
-		DataLock = New DataLock();
-		ItemLock = DataLock.Add("AccumulationRegister.R8013B_ConsignorBatchWiseBallance");
-		ItemLock.Mode = DataLockMode.Exclusive;
-		ItemLock.DataSource = ItemListTable;
-		ItemLock.UseFromDataSource("Company", "Company");
-		ItemLock.UseFromDataSource("ItemKey", "ItemKey");
-		ItemLock.UseFromDataSource("Store"  , "Store");
-		DataLock.Lock();
-		LockStorage.Add(DataLock);
-		DocObject.AdditionalProperties.Insert("CommissionLockStorage", LockStorage);
+	DataLock = New DataLock();
+	ItemLock = DataLock.Add("AccumulationRegister.R8013B_ConsignorBatchWiseBalance");
+	ItemLock.Mode = DataLockMode.Exclusive;
+	ItemLock.DataSource = ItemListTable;
+	ItemLock.UseFromDataSource("Company", "Company");
+	ItemLock.UseFromDataSource("ItemKey", "ItemKey");
+	DataLock.Lock();
+	LockStorage.Add(DataLock);
+	DocObject.AdditionalProperties.Insert("CommissionLockStorage", LockStorage);
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ItemList.Company,
+	|	ItemList.SalesDocument,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	ItemList.Quantity
+	|INTO ItemList
+	|FROM
+	|	&ItemList AS ItemList
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.Company,
+	|	ItemList.SalesDocument,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	SUM(ItemList.Quantity) AS Quantity
+	|INTO ItemListGrouped
+	|FROM
+	|	ItemList AS ItemList
+	|GROUP BY
+	|	ItemList.Company,
+	|	ItemList.SalesDocument,
+	|	ItemList.Store,
+	|	ItemList.ItemKey
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Batches.Company,
+	|	Batches.Recorder AS SalesDocument,
+	|	Batches.Batch,
+	|	Batches.ItemKey,
+	|	Batches.Quantity
+	|FROM
+	|	AccumulationRegister.R8013B_ConsignorBatchWiseBalance AS Batches
+	|WHERE
+	|	(Company, ItemKey, Recorder) IN
+	|		(SELECT
+	|			ItemList.Company,
+	|			ItemList.ItemKey,
+	|			ItemList.SalesDocument
+	|		FROM
+	|			ItemListGrouped AS ItemList)
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.Company,
+	|	ItemList.SalesDocument,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	ItemList.Quantity AS Quantity
+	|FROM
+	|	ItemListGrouped AS ItemList";
+	
+	Query.SetParameter("ItemList", ItemListTable);
+	
+	QueryResults = Query.ExecuteBatch();
+	RegisterBatches  = QueryResults[2].Unload();
+	DocumentItemList = QueryResults[3].Unload();
+	
+	AccReg = Metadata.AccumulationRegisters.R8013B_ConsignorBatchWiseBalance;
+	ConsignorBatches = New ValueTable();
+	ConsignorBatches.Columns.Add("Company"  , AccReg.Dimensions.Company.Type);
+	ConsignorBatches.Columns.Add("Batch"    , AccReg.Dimensions.Batch.Type);
+	ConsignorBatches.Columns.Add("Store"    , AccReg.Dimensions.Store.Type);
+	ConsignorBatches.Columns.Add("ItemKey"  , AccReg.Dimensions.ItemKey.Type);
+	ConsignorBatches.Columns.Add("Quantity" , AccReg.Resources.Quantity.Type);
+	ConsignorBatches.Columns.Add("SalesDocument" , AccReg.StandardAttributes.Recorder.Type);
+	
+	For Each Row_DocumentItemList In DocumentItemList Do
+		NeedReceipt = Row_DocumentItemList.Quantity;
 		
-		ConsignorBatchesTable = GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject);		
-		For Each Row In ConsignorBatchesTable Do
-			FillPropertyValues(DocObject.ConsignorBatches.Add(), Row);
+		Filter = New Structure();
+		Filter.Insert("Company"       , Row_DocumentItemList.Company);
+		Filter.Insert("SalesDocument" , Row_DocumentItemList.SalesDocument);
+		Filter.Insert("ItemKey"       , Row_DocumentItemList.ItemKey);
+		
+		RegisterBatchesRows = RegisterBatches.FindRows(Filter);
+		For Each Row_RegisterBatches In RegisterBatchesRows Do
+			If NeedReceipt = 0 Or Row_RegisterBatches.Quantity = 0 Then
+				Continue;
+			EndIf;
+			CanReceipt = Min(NeedReceipt, Row_RegisterBatches.Quantity);
+			
+			NewRow = ConsignorBatches.Add();
+			NewRow.Company  = Row_RegisterBatches.Company;
+			NewRow.Batch    = Row_RegisterBatches.Batch;
+			NewRow.Store    = Row_DocumentItemList.Store;
+			NewRow.ItemKey  = Row_RegisterBatches.ItemKey;
+			NewRow.Quantity = CanReceipt;
+			NewRow.SalesDocument = Row_DocumentItemList.SalesDocument;
+			
+			NeedReceipt = NeedReceipt - CanReceipt;
+			Row_RegisterBatches.Quantity = Row_RegisterBatches.Quantity - CanReceipt;
 		EndDo;
-	EndIf;
-EndProcedure
+		
+	EndDo; 
+	Return ConsignorBatches;
+EndFunction
 
 Function GetConsignorBatches_Sales_Transfer(ItemListTable, DocObject)
 	Query = New Query();
@@ -177,7 +252,7 @@ Function GetConsignorBatches_Sales_Transfer(ItemListTable, DocObject)
 	|	ISNULL(Batches.QuantityBalance, 0) AS QuantityBalance
 	|FROM
 	|	ItemListTableGrouped AS ItemListTableGrouped
-	|		LEFT JOIN AccumulationRegister.R8013B_ConsignorBatchWiseBallance.Balance(&Boundary, (Company, ItemKey, Store) IN
+	|		LEFT JOIN AccumulationRegister.R8013B_ConsignorBatchWiseBalance.Balance(&Boundary, (Company, ItemKey, Store) IN
 	|			(SELECT
 	|				ItemListTableGrouped.Company,
 	|				ItemListTableGrouped.ItemKey,
@@ -197,94 +272,16 @@ Function GetConsignorBatches_Sales_Transfer(ItemListTable, DocObject)
 	|	Store";
 	
 	Query.SetParameter("ItemListTable", ItemListTable);
-	If ValueIsFilled(DocObject.Ref) Then
-		Query.SetParameter("Boundary", New Boundary(DocObject.Ref.PointInTime(), BoundaryType.Excluding));
-	Else
-		Query.SetParameter("Boundary", CurrentSessionDate());
-	EndIf;
+	Query.SetParameter("Boundary", New Boundary(DocObject.Ref.PointInTime(), BoundaryType.Excluding));
 	
 	QueryResult = Query.Execute();
 	BatchTree = QueryResult.Unload(QueryResultIteration.ByGroups);
 	
+	BatchResult = GetResultTable(BatchTree);	
+	ConsignorBatchesTable = GetEmptyConsignorBatchesTable();
 	
-	ResultTable = New ValueTable();
-	ResultTable.Columns.Add("ItemKey");
-	ResultTable.Columns.Add("Store");
-	ResultTable.Columns.Add("Batch");
-	ResultTable.Columns.Add("Quantity");
-
-	HaveError = False;
-	For Each Row_ItemKey In BatchTree.Rows Do
-		For Each Row_Store In Row_ItemKey.Rows Do
-			
-			NeedExpense = Row_Store.Quantity;
-		
-			For Each Row_Batch In Row_Store.Rows Do
-				If NeedExpense = 0 Or Row_Batch.QuantityBalance = 0 Then
-					Continue;
-				EndIf;
-		
-				CanExpense = Min(NeedExpense, Row_Batch.QuantityBalance);
-			
-				NewRow = ResultTable.Add();
-				NewRow.ItemKey  = Row_ItemKey.ItemKey;
-				NewRow.Store    = Row_Store.Store;
-				NewRow.Batch    = Row_Batch.Batch;
-				NewRow.Quantity = CanExpense;
-			
-				Row_Batch.QuantityBalance = Row_Batch.QuantityBalance - CanExpense;
-				NeedExpense = NeedExpense - CanExpense;
-			EndDo;
-		
-			If NeedExpense <> 0 Then
-				Required  = Format(Row_Store.Quantity, "NFD=3;");
-				Remaining = Format(Row_Store.Quantity - NeedExpense, "NFD=3;");
-				Lack = Format(NeedExpense, "NFD=3;");
-			
-				Msg = StrTemplate(R().Error_120, Row_ItemKey.ItemKey, Row_Store.Store, Required, Remaining, Lack);
-				CommonFunctionsClientServer.ShowUsersMessage(Msg);
-				HaveError = True;			
-			EndIf;
-		EndDo;
-	EndDo;
-	
-	ConsignorBatchesTable = New ValueTable();
-	ConsignorBatchesTable.Columns.Add("Key");
-	ConsignorBatchesTable.Columns.Add("ItemKey");
-	ConsignorBatchesTable.Columns.Add("Store");
-	ConsignorBatchesTable.Columns.Add("Batch");
-	ConsignorBatchesTable.Columns.Add("Quantity");
-	
-	If Not HaveError Then
-		For Each Row In ItemListTable Do
-			
-			NeedExpense = Row.Quantity;
-			For Each Row_Result In ResultTable Do
-				If Row.ItemKey <> Row_Result.ItemKey Then
-					Continue;
-				EndIf;
-				
-				If Row.Store <> Row_Result.Store Then
-					Continue;
-				EndIf;
-				
-				If NeedExpense = 0 Or Row_Result.Quantity = 0 Then
-					Continue;
-				EndIf;
-				
-				CanExpense = Min(NeedExpense, Row_Result.Quantity);
-				Row_Result.Quantity = Row_Result.Quantity - CanExpense;
-				NeedExpense = NeedExpense - CanExpense;
-				
-				NewRow = ConsignorBatchesTable.Add();
-				NewRow.Key      = Row.Key;
-				NewRow.ItemKey  = Row.ItemKey;
-				NewRow.Store    = Row.Store;
-				NewRow.Batch    = Row_Result.Batch;
-				NewRow.Quantity = CanExpense;
-			EndDo;
-			
-		EndDo;
+	If Not BatchResult.HaveError Then
+		PutResultToConsignorBatches(ItemListTable, BatchResult.ResultTable, ConsignorBatchesTable);
 	EndIf;
 	Return ConsignorBatchesTable;
 EndFunction
@@ -359,10 +356,10 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject)
 	|	Batches.Batch AS Batch,
 	|	SUM(ItemListTable_Batches.Quantity) AS Quantity,
 	|	SUM(ISNULL(Batches.QuantityBalance, 0)) AS QuantityBalance
-	|INTO ConsignorBatchWiseBallance_Batches
+	|INTO ConsignorBatchWiseBalance_Batches
 	|FROM
 	|	ItemListTable_Batches AS ItemListTable_Batches
-	|		LEFT JOIN AccumulationRegister.R8013B_ConsignorBatchWiseBallance.Balance(&Boundary, (Company, Batch.Partner,
+	|		LEFT JOIN AccumulationRegister.R8013B_ConsignorBatchWiseBalance.Balance(&Boundary, (Company, Batch.Partner,
 	|			Batch.Agreement, Batch, ItemKey, Store) IN
 	|			(SELECT
 	|				ItemListTable_Batches.Company,
@@ -398,10 +395,10 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject)
 	|	Batches.Batch AS Batch,
 	|	SUM(ItemListTable_Grouped.Quantity) AS Quantity,
 	|	SUM(ISNULL(Batches.QuantityBalance, 0)) AS QuantityBalance
-	|INTO ConsignorBatchWiseBallance_Grouped
+	|INTO ConsignorBatchWiseBalance_Grouped
 	|FROM
 	|	ItemListTable_Grouped AS ItemListTable_Grouped
-	|		LEFT JOIN AccumulationRegister.R8013B_ConsignorBatchWiseBallance.Balance(&Boundary, (Company, Batch.Partner,
+	|		LEFT JOIN AccumulationRegister.R8013B_ConsignorBatchWiseBalance.Balance(&Boundary, (Company, Batch.Partner,
 	|			Batch.Agreement, ItemKey, Store) IN
 	|			(SELECT
 	|				ItemListTable_Grouped.Company,
@@ -427,25 +424,25 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject)
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	ConsignorBatchWiseBallance_Grouped.Company,
-	|	ConsignorBatchWiseBallance_Grouped.Partner,
-	|	ConsignorBatchWiseBallance_Grouped.Agreement,
-	|	ConsignorBatchWiseBallance_Grouped.ItemKey,
-	|	ConsignorBatchWiseBallance_Grouped.Store,
-	|	ConsignorBatchWiseBallance_Grouped.Batch,
-	|	ConsignorBatchWiseBallance_Grouped.Quantity,
-	|	ConsignorBatchWiseBallance_Grouped.QuantityBalance - ISNULL(ConsignorBatchWiseBallance_Batches.Quantity, 0) AS
+	|	ConsignorBatchWiseBalance_Grouped.Company,
+	|	ConsignorBatchWiseBalance_Grouped.Partner,
+	|	ConsignorBatchWiseBalance_Grouped.Agreement,
+	|	ConsignorBatchWiseBalance_Grouped.ItemKey,
+	|	ConsignorBatchWiseBalance_Grouped.Store,
+	|	ConsignorBatchWiseBalance_Grouped.Batch,
+	|	ConsignorBatchWiseBalance_Grouped.Quantity,
+	|	ConsignorBatchWiseBalance_Grouped.QuantityBalance - ISNULL(ConsignorBatchWiseBalance_Batches.Quantity, 0) AS
 	|		QuantityBalance
-	|INTO ConsignorBatchWiseBallance
+	|INTO ConsignorBatchWiseBalance
 	|FROM
-	|	ConsignorBatchWiseBallance_Grouped
-	|		LEFT JOIN ConsignorBatchWiseBallance_Batches AS ConsignorBatchWiseBallance_Batches
-	|		ON ConsignorBatchWiseBallance_Grouped.Company = ConsignorBatchWiseBallance_Batches.Company
-	|		AND ConsignorBatchWiseBallance_Grouped.Partner = ConsignorBatchWiseBallance_Batches.Partner
-	|		AND ConsignorBatchWiseBallance_Grouped.Agreement = ConsignorBatchWiseBallance_Batches.Agreement
-	|		AND ConsignorBatchWiseBallance_Grouped.ItemKey = ConsignorBatchWiseBallance_Batches.ItemKey
-	|		AND ConsignorBatchWiseBallance_Grouped.Store = ConsignorBatchWiseBallance_Batches.Store
-	|		AND ConsignorBatchWiseBallance_Grouped.Batch = ConsignorBatchWiseBallance_Batches.Batch
+	|	ConsignorBatchWiseBalance_Grouped
+	|		LEFT JOIN ConsignorBatchWiseBalance_Batches AS ConsignorBatchWiseBalance_Batches
+	|		ON ConsignorBatchWiseBalance_Grouped.Company = ConsignorBatchWiseBalance_Batches.Company
+	|		AND ConsignorBatchWiseBalance_Grouped.Partner = ConsignorBatchWiseBalance_Batches.Partner
+	|		AND ConsignorBatchWiseBalance_Grouped.Agreement = ConsignorBatchWiseBalance_Batches.Agreement
+	|		AND ConsignorBatchWiseBalance_Grouped.ItemKey = ConsignorBatchWiseBalance_Batches.ItemKey
+	|		AND ConsignorBatchWiseBalance_Grouped.Store = ConsignorBatchWiseBalance_Batches.Store
+	|		AND ConsignorBatchWiseBalance_Grouped.Batch = ConsignorBatchWiseBalance_Batches.Batch
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -456,7 +453,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject)
 	|	Table.Quantity,
 	|	Table.QuantityBalance
 	|FROM
-	|	ConsignorBatchWiseBallance_Batches AS Table
+	|	ConsignorBatchWiseBalance_Batches AS Table
 	|
 	|ORDER BY
 	|	Table.Batch.Date
@@ -475,7 +472,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject)
 	|	Table.Quantity,
 	|	Table.QuantityBalance
 	|FROM
-	|	ConsignorBatchWiseBallance AS Table
+	|	ConsignorBatchWiseBalance AS Table
 	|
 	|ORDER BY
 	|	Table.Batch.Date
@@ -486,24 +483,15 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject)
 	|	Store";
 	
 	Query.SetParameter("ItemListTable", ItemListTable);
-	If ValueIsFilled(DocObject.Ref) Then
-		Query.SetParameter("Boundary", New Boundary(DocObject.Ref.PointInTime(), BoundaryType.Excluding));
-	Else
-		Query.SetParameter("Boundary", CurrentSessionDate());
-	EndIf;
+	Query.SetParameter("Boundary", New Boundary(DocObject.Ref.PointInTime(), BoundaryType.Excluding));
 	
 	QueryResults = Query.ExecuteBatch();
 	BatchTree = QueryResults[6].Unload(QueryResultIteration.ByGroups);
 	BatchResult_1 = GetResultTable(BatchTree);
 	BatchTree = QueryResults[7].Unload(QueryResultIteration.ByGroups);
 	BatchResult_2 = GetResultTable(BatchTree);
-		
-	ConsignorBatchesTable = New ValueTable();
-	ConsignorBatchesTable.Columns.Add("Key");
-	ConsignorBatchesTable.Columns.Add("ItemKey");
-	ConsignorBatchesTable.Columns.Add("Store");
-	ConsignorBatchesTable.Columns.Add("Batch");
-	ConsignorBatchesTable.Columns.Add("Quantity");
+	
+	ConsignorBatchesTable = GetEmptyConsignorBatchesTable();
 	
 	If Not BatchResult_1.HaveError And Not BatchResult_2.HaveError Then
 		
@@ -538,6 +526,20 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject)
 	EndIf;
 	Return ConsignorBatchesTable;
 EndFunction
+
+Procedure LockConsignorBatchWiseBalance(DocObject, ItemListTable)
+	LockStorage = New Array();
+	DataLock = New DataLock();
+	ItemLock = DataLock.Add("AccumulationRegister.R8013B_ConsignorBatchWiseBalance");
+	ItemLock.Mode = DataLockMode.Exclusive;
+	ItemLock.DataSource = ItemListTable;
+	ItemLock.UseFromDataSource("Company", "Company");
+	ItemLock.UseFromDataSource("ItemKey", "ItemKey");
+	ItemLock.UseFromDataSource("Store"  , "Store");
+	DataLock.Lock();
+	LockStorage.Add(DataLock);
+	DocObject.AdditionalProperties.Insert("CommissionLockStorage", LockStorage);	
+EndProcedure
 
 Function GetResultTable(BatchTree)
 	ResultTable = New ValueTable();
@@ -613,122 +615,35 @@ Procedure PutResultToConsignorBatches(ItemListTable, ResultTable, ConsignorBatch
 	EndDo;
 EndProcedure
 
-Function GetTableConsignorBatchWiseBalanceForSalesReturn(DocObject, ItemListTable) Export
-	LockStorage = New Array();
-	DataLock = New DataLock();
-	ItemLock = DataLock.Add("AccumulationRegister.R8013B_ConsignorBatchWiseBallance");
-	ItemLock.Mode = DataLockMode.Exclusive;
-	ItemLock.DataSource = ItemListTable;
-	ItemLock.UseFromDataSource("Company", "Company");
-	ItemLock.UseFromDataSource("ItemKey", "ItemKey");
-	DataLock.Lock();
-	LockStorage.Add(DataLock);
-	DocObject.AdditionalProperties.Insert("CommissionLockStorage", LockStorage);
-	
+Function GetEmptyConsignorBatchesTable()
+	ConsignorBatchesTable = New ValueTable();
+	ConsignorBatchesTable.Columns.Add("Key"      , Metadata.DefinedTypes.typeRowID.Type);
+	ConsignorBatchesTable.Columns.Add("ItemKey"  , New TypeDescription("CatalogRef.ItemKeys"));
+	ConsignorBatchesTable.Columns.Add("Store"    , New TypeDescription("CatalogRef.Stores"));
+	ConsignorBatchesTable.Columns.Add("Batch"    , New TypeDescription("DocumentRef.PurchaseInvoice"));
+	ConsignorBatchesTable.Columns.Add("Quantity" , Metadata.DefinedTypes.typeQuantity.Type);
+	Return ConsignorBatchesTable;
+EndFunction
+
+Function GetRegisterConsignorBatches(DocObject)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	ItemList.Company,
-	|	ItemList.SalesDocument,
-	|	ItemList.Store,
-	|	ItemList.ItemKey,
-	|	ItemList.Quantity
-	|INTO ItemList
+	|	T8010S_ConsignorBatches.Key,
+	|	T8010S_ConsignorBatches.ItemKey,
+	|	T8010S_ConsignorBatches.Store,
+	|	T8010S_ConsignorBatches.Batch,
+	|	T8010S_ConsignorBatches.Quantity
 	|FROM
-	|	&ItemList AS ItemList
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	ItemList.Company,
-	|	ItemList.SalesDocument,
-	|	ItemList.Store,
-	|	ItemList.ItemKey,
-	|	SUM(ItemList.Quantity) AS Quantity
-	|INTO ItemListGrouped
-	|FROM
-	|	ItemList AS ItemList
-	|GROUP BY
-	|	ItemList.Company,
-	|	ItemList.SalesDocument,
-	|	ItemList.Store,
-	|	ItemList.ItemKey
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	Batches.Company,
-	|	Batches.Recorder AS SalesDocument,
-	|	Batches.Batch,
-	|	Batches.ItemKey,
-	|	Batches.Quantity
-	|FROM
-	|	AccumulationRegister.R8013B_ConsignorBatchWiseBallance AS Batches
+	|	InformationRegister.T8010S_ConsignorBatches AS T8010S_ConsignorBatches
 	|WHERE
-	|	(Company, ItemKey, Recorder) IN
-	|		(SELECT
-	|			ItemList.Company,
-	|			ItemList.ItemKey,
-	|			ItemList.SalesDocument
-	|		FROM
-	|			ItemListGrouped AS ItemList)
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	ItemList.Company,
-	|	ItemList.SalesDocument,
-	|	ItemList.Store,
-	|	ItemList.ItemKey,
-	|	ItemList.Quantity AS Quantity
-	|FROM
-	|	ItemListGrouped AS ItemList";
+	|	T8010S_ConsignorBatches.Document = &Document";
+	Query.SetParameter("Document", DocObject.Ref);
 	
-	Query.SetParameter("ItemList", ItemListTable);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
 	
-	QueryResults = Query.ExecuteBatch();
-	RegisterBatches  = QueryResults[2].Unload();
-	DocumentItemList = QueryResults[3].Unload();
-	
-	AccReg = Metadata.AccumulationRegisters.R8013B_ConsignorBatchWiseBallance;
-	ConsignorBatches = New ValueTable();
-	ConsignorBatches.Columns.Add("Company"  , AccReg.Dimensions.Company.Type);
-	ConsignorBatches.Columns.Add("Batch"    , AccReg.Dimensions.Batch.Type);
-	ConsignorBatches.Columns.Add("Store"    , AccReg.Dimensions.Store.Type);
-	ConsignorBatches.Columns.Add("ItemKey"  , AccReg.Dimensions.ItemKey.Type);
-	ConsignorBatches.Columns.Add("Quantity" , AccReg.Resources.Quantity.Type);
-	ConsignorBatches.Columns.Add("SalesDocument" , AccReg.StandardAttributes.Recorder.Type);
-	
-	For Each Row_DocumentItemList In DocumentItemList Do
-		NeedReceipt = Row_DocumentItemList.Quantity;
-		
-		Filter = New Structure();
-		Filter.Insert("Company"       , Row_DocumentItemList.Company);
-		Filter.Insert("SalesDocument" , Row_DocumentItemList.SalesDocument);
-		Filter.Insert("ItemKey"       , Row_DocumentItemList.ItemKey);
-		
-		RegisterBatchesRows = RegisterBatches.FindRows(Filter);
-		For Each Row_RegisterBatches In RegisterBatchesRows Do
-			If NeedReceipt = 0 Or Row_RegisterBatches.Quantity = 0 Then
-				Continue;
-			EndIf;
-			CanReceipt = Min(NeedReceipt, Row_RegisterBatches.Quantity);
-			
-			NewRow = ConsignorBatches.Add();
-			NewRow.Company  = Row_RegisterBatches.Company;
-			NewRow.Batch    = Row_RegisterBatches.Batch;
-			NewRow.Store    = Row_DocumentItemList.Store;
-			NewRow.ItemKey  = Row_RegisterBatches.ItemKey;
-			NewRow.Quantity = CanReceipt;
-			NewRow.SalesDocument = Row_DocumentItemList.SalesDocument;
-			
-			NeedReceipt = NeedReceipt - CanReceipt;
-			Row_RegisterBatches.Quantity = Row_RegisterBatches.Quantity - CanReceipt;
-		EndDo;
-		
-	EndDo; 
-	Return ConsignorBatches;
+	Return QueryTable;
 EndFunction
 
-
-
+	

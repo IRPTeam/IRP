@@ -425,7 +425,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(R8010B_TradeAgentInventory());
 	QueryArray.Add(R8011B_TradeAgentSerialLotNumber());
-	QueryArray.Add(R8013B_ConsignorBatchWiseBallance());
+	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
 	QueryArray.Add(R8012B_ConsignorInventory());
 	Return QueryArray;
 EndFunction
@@ -1209,7 +1209,7 @@ Function R8011B_TradeAgentSerialLotNumber()
 		|	SerialLotNumbers.IsReturnFromTradeAgent";
 EndFunction
 
-Function R8013B_ConsignorBatchWiseBallance()
+Function R8013B_ConsignorBatchWiseBalance()
 	Return
 		"SELECT
 		|	&Period AS Period,
@@ -1219,7 +1219,7 @@ Function R8013B_ConsignorBatchWiseBallance()
 		|	ConsignorBatches.Store,
 		|	ConsignorBatches.ItemKey,
 		|	SUM(ConsignorBatches.Quantity) AS Quantity
-		|INTO R8013B_ConsignorBatchWiseBallance
+		|INTO R8013B_ConsignorBatchWiseBalance
 		|FROM
 		|	ConsignorBatches AS ConsignorBatches
 		|WHERE

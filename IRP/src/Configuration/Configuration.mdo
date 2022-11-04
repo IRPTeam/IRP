@@ -933,6 +933,7 @@
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.TemplateActions</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
+  <informationRegisters>InformationRegister.T8010S_ConsignorBatches</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -1017,7 +1018,7 @@
   <accumulationRegisters>AccumulationRegister.R8010B_TradeAgentInventory</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8011B_TradeAgentSerialLotNumber</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8012B_ConsignorInventory</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R8013B_ConsignorBatchWiseBallance</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

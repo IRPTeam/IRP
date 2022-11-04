@@ -10,14 +10,35 @@ EndFunction
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure();
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
 	Tables.Insert("CustomersTransactions", PostingServer.GetQueryTableByName("CustomersTransactions", Parameters));
-#EndRegion
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ItemList.Key AS Key,
+	|	ItemList.InventoryOrigin AS InventoryOrigin,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.Store AS Store,
+	|	ItemList.QuantityInBaseUnit AS Quantity
+	|FROM
+	|	Document.SalesInvoice.ItemList AS ItemList
+	|WHERE
+	|	ItemList.Ref = &Ref";
+	Query.SetParameter("Ref", Ref);
+	QueryResult = Query.Execute();
+	ItemListTable = QueryResult.Unload();
+	ConsignorBatches = CommissionTradeServer.GetRegistrateConsignorBatches(Parameters.Object, ItemListTable);
 
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = "SELECT * INTO ConsignorBatches FROM &T1 AS T1";
+	Query.SetParameter("T1", ConsignorBatches);
+	Query.Execute();
+	
 	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
 	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
 		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
@@ -188,7 +209,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R8010B_TradeAgentInventory());
 	QueryArray.Add(R8011B_TradeAgentSerialLotNumber());
 	QueryArray.Add(R8012B_ConsignorInventory());
-	QueryArray.Add(R8013B_ConsignorBatchWiseBallance());
+	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
 	Return QueryArray;
 EndFunction
 
@@ -287,21 +308,7 @@ Function ItemList()
 		|FROM
 		|	Document.SalesInvoice.ShipmentConfirmations AS SalesInvoiceShipmentConfirmations
 		|WHERE
-		|	SalesInvoiceShipmentConfirmations.Ref = &Ref
-		|;
-		|
-		|///////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	ConsignorBatchesInfo.Key,
-		|	ConsignorBatchesInfo.ItemKey,
-		|	ConsignorBatchesInfo.Store,
-		|	ConsignorBatchesInfo.Batch,
-		|	ConsignorBatchesInfo.Quantity
-		|INTO ConsignorBatchesInfo
-		|FROM
-		|	Document.SalesInvoice.ConsignorBatches AS ConsignorBatchesInfo
-		|WHERE
-		|	ConsignorBatchesInfo.Ref = &Ref";
+		|	SalesInvoiceShipmentConfirmations.Ref = &Ref";
 EndFunction
 
 Function ItemListLandedCost()
@@ -1101,15 +1108,15 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.ItemKey,
 		|	ItemList.Store,
 		|	ItemList.Company,
-		|	SUM(case when ConsignorBatchesInfo.Quantity is null then ItemList.Quantity else ConsignorBatchesInfo.Quantity end) AS Quantity,
+		|	SUM(case when ConsignorBatches.Quantity is null then ItemList.Quantity else ConsignorBatches.Quantity end) AS Quantity,
 		|	ItemList.Period,
 		|	VALUE(Enum.BatchDirection.Expense) AS Direction,
-		|	ConsignorBatchesInfo.Batch AS BatchConsignor
+		|	ConsignorBatches.Batch AS BatchConsignor
 		|INTO T6020S_BatchKeysInfo
 		|FROM
 		|	ItemList AS ItemList
-		|	LEFT JOIN ConsignorBatchesInfo AS ConsignorBatchesInfo ON
-		|	ItemList.Key = ConsignorBatchesInfo.Key
+		|	LEFT JOIN ConsignorBatches AS ConsignorBatches ON
+		|	ItemList.Key = ConsignorBatches.Key
 		|
 		|WHERE
 		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
@@ -1120,7 +1127,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Company,
 		|	ItemList.Period,
 		|	VALUE(Enum.BatchDirection.Expense),
-		|	ConsignorBatchesInfo.Batch
+		|	ConsignorBatches.Batch
 		|
 		|UNION ALL
 		|
@@ -1208,23 +1215,23 @@ Function R8012B_ConsignorInventory()
 		|	AND ItemList.IsConsignorStocks";		
 EndFunction
 
-Function R8013B_ConsignorBatchWiseBallance()
+Function R8013B_ConsignorBatchWiseBalance()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Company,
-		|	ConsignorBatchesInfo.Batch,
-		|	ConsignorBatchesInfo.ItemKey,
-		|	ConsignorBatchesInfo.Store,
-		|	ConsignorBatchesInfo.Quantity
-		|INTO R8013B_ConsignorBatchWiseBallance
+		|	ConsignorBatches.Batch,
+		|	ConsignorBatches.ItemKey,
+		|	ConsignorBatches.Store,
+		|	ConsignorBatches.Quantity
+		|INTO R8013B_ConsignorBatchWiseBalance
 		|FROM
 		|	ItemList AS ItemList
-		|		INNER JOIN ConsignorBatchesInfo AS ConsignorBatchesInfo
+		|		INNER JOIN ConsignorBatches AS ConsignorBatches
 		|		ON ItemList.IsSales
 		|		AND ItemList.IsConsignorStocks
-		|		AND ItemList.Key = ConsignorBatchesInfo.Key";
+		|		AND ItemList.Key = ConsignorBatches.Key";
 EndFunction
 
 #EndRegion

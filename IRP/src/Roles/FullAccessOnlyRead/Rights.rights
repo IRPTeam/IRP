@@ -7171,7 +7171,7 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.R8013B_ConsignorBatchWiseBallance</name>
+		<name>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

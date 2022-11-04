@@ -12,6 +12,30 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ItemList.Key AS Key,
+	|	ItemList.InventoryOrigin AS InventoryOrigin,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.Ref.StoreSender AS Store,
+	|	ItemList.QuantityInBaseUnit AS Quantity
+	|FROM
+	|	Document.InventoryTransfer.ItemList AS ItemList
+	|WHERE
+	|	ItemList.Ref = &Ref";
+	Query.SetParameter("Ref", Ref);
+	QueryResult = Query.Execute();
+	ItemListTable = QueryResult.Unload();
+	ConsignorBatches = CommissionTradeServer.GetRegistrateConsignorBatches(Parameters.Object, ItemListTable);
+
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = "SELECT * INTO ConsignorBatches FROM &T1 AS T1";
+	Query.SetParameter("T1", ConsignorBatches);
+	Query.Execute();
+	
 	Return New Structure();
 EndFunction
 
@@ -157,7 +181,6 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(ItemList());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(IncomingStocksReal());
-	QueryArray.Add(ConsignorBatches());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
@@ -178,7 +201,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
-	QueryArray.Add(R8013B_ConsignorBatchWiseBallance());
+	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
 	Return QueryArray;
 EndFunction
 
@@ -264,21 +287,6 @@ Function IncomingStocksReal()
 		|	ItemList.ProductionPlanning,
 		|	ItemList.StoreReceiver";
 EndFunction
-
-Function ConsignorBatches()
-	Return
-		"SELECT
-		|	ConsignorBatchesInfo.Key,
-		|	ConsignorBatchesInfo.ItemKey,
-		|	ConsignorBatchesInfo.Store,
-		|	ConsignorBatchesInfo.Batch,
-		|	ConsignorBatchesInfo.Quantity
-		|INTO ConsignorBatchesInfo
-		|FROM
-		|	Document.InventoryTransfer.ConsignorBatches AS ConsignorBatchesInfo
-		|WHERE
-		|	ConsignorBatchesInfo.Ref = &Ref";
-EndFunction	
 
 Function R4010B_ActualStocks()
 	Return 
@@ -633,13 +641,13 @@ Function T6020S_BatchKeysInfo()
 	|	ItemList.Company,
 	|	ItemList.StoreReceiver AS Store,
 	|	ItemList.ItemKey,
-	|	ConsignorBatchesInfo.Batch AS BatchConsignor,
-	|	SUM(case when ConsignorBatchesInfo.Quantity is null then ItemList.Quantity else ConsignorBatchesInfo.Quantity end) AS Quantity
+	|	ConsignorBatches.Batch AS BatchConsignor,
+	|	SUM(case when ConsignorBatches.Quantity is null then ItemList.Quantity else ConsignorBatches.Quantity end) AS Quantity
 	|INTO T6020S_BatchKeysInfo
 	|FROM
 	|	ItemList AS ItemList
-	|	LEFT JOIN ConsignorBatchesInfo AS ConsignorBatchesInfo ON
-	|	ItemList.Key = ConsignorBatchesInfo.Key
+	|	LEFT JOIN ConsignorBatches AS ConsignorBatches ON
+	|	ItemList.Key = ConsignorBatches.Key
 	|WHERE
 	|	TRUE
 	|GROUP BY
@@ -648,7 +656,7 @@ Function T6020S_BatchKeysInfo()
 	|	ItemList.Company,
 	|	ItemList.StoreReceiver,
 	|	ItemList.ItemKey,
-	|	ConsignorBatchesInfo.Batch
+	|	ConsignorBatches.Batch
 	|
 	|UNION ALL
 	|
@@ -658,12 +666,12 @@ Function T6020S_BatchKeysInfo()
 	|	ItemList.Company,
 	|	ItemList.StoreSender,
 	|	ItemList.ItemKey,
-	|	ConsignorBatchesInfo.Batch,
-	|	SUM(case when ConsignorBatchesInfo.Quantity is null then ItemList.Quantity else ConsignorBatchesInfo.Quantity end) AS Quantity
+	|	ConsignorBatches.Batch,
+	|	SUM(case when ConsignorBatches.Quantity is null then ItemList.Quantity else ConsignorBatches.Quantity end) AS Quantity
 	|FROM
 	|	ItemList AS ItemList
-	|	LEFT JOIN ConsignorBatchesInfo AS ConsignorBatchesInfo ON
-	|	ItemList.Key = ConsignorBatchesInfo.Key
+	|	LEFT JOIN ConsignorBatches AS ConsignorBatches ON
+	|	ItemList.Key = ConsignorBatches.Key
 	|WHERE
 	|	TRUE
 	|GROUP BY
@@ -672,25 +680,25 @@ Function T6020S_BatchKeysInfo()
 	|	ItemList.Company,
 	|	ItemList.StoreSender,
 	|	ItemList.ItemKey,
-	|	ConsignorBatchesInfo.Batch";
+	|	ConsignorBatches.Batch";
 EndFunction
 
-Function R8013B_ConsignorBatchWiseBallance()
+Function R8013B_ConsignorBatchWiseBalance()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Company,
-		|	ConsignorBatchesInfo.Batch,
-		|	ConsignorBatchesInfo.ItemKey,
-		|	ConsignorBatchesInfo.Store,
-		|	ConsignorBatchesInfo.Quantity
-		|INTO R8013B_ConsignorBatchWiseBallance
+		|	ConsignorBatches.Batch,
+		|	ConsignorBatches.ItemKey,
+		|	ConsignorBatches.Store,
+		|	ConsignorBatches.Quantity
+		|INTO R8013B_ConsignorBatchWiseBalance
 		|FROM
 		|	ItemList AS ItemList
-		|		INNER JOIN ConsignorBatchesInfo AS ConsignorBatchesInfo
+		|		INNER JOIN ConsignorBatches AS ConsignorBatches
 		|		ON ItemList.IsConsignorStocks
-		|		AND ItemList.Key = ConsignorBatchesInfo.Key
+		|		AND ItemList.Key = ConsignorBatches.Key
 		|
 		|UNION ALL
 		|
@@ -698,14 +706,14 @@ Function R8013B_ConsignorBatchWiseBallance()
 		|	VALUE(AccumulationRecordType.Receipt),
 		|	ItemList.Period,
 		|	ItemList.Company,
-		|	ConsignorBatchesInfo.Batch,
-		|	ConsignorBatchesInfo.ItemKey,
+		|	ConsignorBatches.Batch,
+		|	ConsignorBatches.ItemKey,
 		|	ItemList.StoreReceiver,
-		|	ConsignorBatchesInfo.Quantity
+		|	ConsignorBatches.Quantity
 		|
 		|FROM
 		|	ItemList AS ItemList
-		|		INNER JOIN ConsignorBatchesInfo AS ConsignorBatchesInfo
+		|		INNER JOIN ConsignorBatches AS ConsignorBatches
 		|		ON ItemList.IsConsignorStocks
-		|		AND ItemList.Key = ConsignorBatchesInfo.Key";
+		|		AND ItemList.Key = ConsignorBatches.Key";
 EndFunction

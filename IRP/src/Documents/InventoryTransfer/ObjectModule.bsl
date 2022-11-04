@@ -1,11 +1,7 @@
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
-	EndIf;
-	
-	If WriteMode = DocumentWriteMode.Posting Then
-		CommissionTradeServer.FillConsignorBatches(ThisObject, ThisObject.StoreSender);
-	EndIf;
+	EndIf;	
 EndProcedure
 
 Procedure OnWrite(Cancel)

@@ -7,9 +7,9 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 
-	If WriteMode = DocumentWriteMode.Posting Then
-		CommissionTradeServer.FillConsignorBatches_ReturnToConsignor(ThisObject);
-	EndIf;
+//	If WriteMode = DocumentWriteMode.Posting Then
+//		CommissionTradeServer.FillConsignorBatches_ReturnToConsignor(ThisObject);
+//	EndIf;
 	
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 EndProcedure

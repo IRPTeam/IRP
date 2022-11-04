@@ -145,7 +145,7 @@
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R8012B_ConsignorInventory</registerRecords>
-  <registerRecords>AccumulationRegister.R8013B_ConsignorBatchWiseBallance</registerRecords>
+  <registerRecords>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1348,87 +1348,6 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="93f520a6-e6af-4069-8d75-2b76fcdd516a">
-    <producedTypes>
-      <objectType typeId="bb57acab-4ee9-4bad-8cbe-d5ad90049c69" valueTypeId="60eeb258-58f6-40da-b849-12a3ab94139c"/>
-      <rowType typeId="97e9928a-4bf9-4746-b9a5-3058d06e3b52" valueTypeId="12c2d1e6-45a6-45b5-9008-cb63075585cf"/>
-    </producedTypes>
-    <name>ConsignorBatches</name>
-    <synonym>
-      <key>en</key>
-      <value>Consignor batches</value>
-    </synonym>
-    <attributes uuid="a595df49-7229-46b5-8716-97d56937c593">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="98f81d75-59f5-46ef-a50e-87fff6d2a59d">
-      <name>ItemKey</name>
-      <synonym>
-        <key>en</key>
-        <value>Item key</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ItemKeys</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="4dfde965-07a9-4927-9694-946f77193b92">
-      <name>Store</name>
-      <synonym>
-        <key>en</key>
-        <value>Store</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Stores</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="725df3e9-3b67-4f24-b409-0e2478844e66">
-      <name>Batch</name>
-      <synonym>
-        <key>en</key>
-        <value>Batch</value>
-      </synonym>
-      <type>
-        <types>DocumentRef.PurchaseInvoice</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="694dec2d-6bea-4406-870f-e8e55af068df">
-      <name>Quantity</name>
-      <synonym>
-        <key>en</key>
-        <value>Quantity</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
   <commands uuid="d53c1c62-7a81-4f9c-ab47-6e66a1567e9b">

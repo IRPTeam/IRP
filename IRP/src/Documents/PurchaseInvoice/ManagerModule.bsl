@@ -354,7 +354,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(R6070T_OtherPeriodsExpenses());
 	QueryArray.Add(R8012B_ConsignorInventory());
-	QueryArray.Add(R8013B_ConsignorBatchWiseBallance());
+	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
 	Return QueryArray;
 EndFunction
 
@@ -1197,7 +1197,7 @@ Function R8012B_ConsignorInventory()
 		|	ItemList.Agreement";
 EndFunction
 
-Function R8013B_ConsignorBatchWiseBallance()
+Function R8013B_ConsignorBatchWiseBalance()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt),
@@ -1207,7 +1207,7 @@ Function R8013B_ConsignorBatchWiseBallance()
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
 		|	SUM(ItemList.Quantity) AS Quantity
-		|INTO R8013B_ConsignorBatchWiseBallance
+		|INTO R8013B_ConsignorBatchWiseBalance
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE

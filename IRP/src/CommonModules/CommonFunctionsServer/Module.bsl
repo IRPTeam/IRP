@@ -412,18 +412,17 @@ EndFunction
 // Check HASH is changed.
 // 
 // Parameters:
-//  Object - ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName, CatalogObjectCatalogName, Structure - Fields:
-//   * HASH - String
+//  Object - ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName, CatalogObjectCatalogName -
 // 
 // Returns:
 //  Boolean - Object has difference
-Function CheckHASHisChanged(Object) Export
-	CurrentHASH = Object.HASH;
-	Object.HASH = "";
+Function CheckHASHisChanged(Object, AttrHashName = "HASH") Export
+	CurrentHASH = Object[AttrHashName]; // String
+	Object[AttrHashName] = "";
 	HASH = GetMD5(Object, True, True);
 	
 	If Not HASH = CurrentHASH Then
-		Object.HASH = HASH;
+		Object[AttrHashName] = HASH;
 		Return True;
 	Else
 		Return False

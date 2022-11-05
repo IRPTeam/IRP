@@ -427,6 +427,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R8011B_TradeAgentSerialLotNumber());
 	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
 	QueryArray.Add(R8012B_ConsignorInventory());
+	QueryArray.Add(R8014T_ConsignorSales());
 	Return QueryArray;
 EndFunction
 
@@ -1109,61 +1110,61 @@ EndFunction
 
 Function T6020S_BatchKeysInfo()
 	Return
-	"SELECT
-	|	BatchKeysInfo.Period,
-	|	BatchKeysInfo.Company,
-	|	BatchKeysInfo.Currency,
-	|	BatchKeysInfo.CurrencyMovementType,
-	|	BatchKeysInfo.Direction,
-	|	BatchKeysInfo.SalesInvoice,
-	|	BatchKeysInfo.ItemKey,
-	|	BatchKeysInfo.Store,
-	|	SUM(BatchKeysInfo.Quantity) AS Quantity,
-	|	SUM(BatchKeysInfo.Amount) AS Amount,
-	|	SUM(BatchKeysInfo.AmountTax) AS AmountTax,
-	|	BatchKeysInfo.BatchConsignor
-	|INTO T6020S_BatchKeysInfo
-	|FROM
-	|	BatchKeysInfo
-	|WHERE
-	|	TRUE
-	|GROUP BY
-	|	BatchKeysInfo.Period,
-	|	BatchKeysInfo.Company,
-	|	BatchKeysInfo.Currency,
-	|	BatchKeysInfo.CurrencyMovementType,
-	|	BatchKeysInfo.Direction,
-	|	BatchKeysInfo.SalesInvoice,
-	|	BatchKeysInfo.ItemKey,
-	|	BatchKeysInfo.Store,
-	|	BatchKeysInfo.BatchConsignor
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	ItemList.Period,
-	|	ItemList.Company,
-	|	UNDEFINED,
-	|	UNDEFINED,
-	|	VALUE(Enum.BatchDirection.Expense),
-	|	UNDEFINED,
-	|	ItemList.ItemKey,
-	|	ItemList.TradeAgentStore,
-	|	SUM(ItemList.Quantity),
-	|	0,
-	|	0,
-	|	UNDEFINED
-	|FROM
-	|	ItemList AS ItemList
-	|WHERE
-	|	NOT ItemList.IsService
-	|	AND ItemList.IsReturnFromTradeAgent
-	|GROUP BY
-	|	ItemList.Period,
-	|	ItemList.Company,
-	|	VALUE(Enum.BatchDirection.Expense),
-	|	ItemList.ItemKey,
-	|	ItemList.TradeAgentStore";
+		"SELECT
+		|	BatchKeysInfo.Period,
+		|	BatchKeysInfo.Company,
+		|	BatchKeysInfo.Currency,
+		|	BatchKeysInfo.CurrencyMovementType,
+		|	BatchKeysInfo.Direction,
+		|	BatchKeysInfo.SalesInvoice,
+		|	BatchKeysInfo.ItemKey,
+		|	BatchKeysInfo.Store,
+		|	SUM(BatchKeysInfo.Quantity) AS Quantity,
+		|	SUM(BatchKeysInfo.Amount) AS Amount,
+		|	SUM(BatchKeysInfo.AmountTax) AS AmountTax,
+		|	BatchKeysInfo.BatchConsignor
+		|INTO T6020S_BatchKeysInfo
+		|FROM
+		|	BatchKeysInfo
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	BatchKeysInfo.Period,
+		|	BatchKeysInfo.Company,
+		|	BatchKeysInfo.Currency,
+		|	BatchKeysInfo.CurrencyMovementType,
+		|	BatchKeysInfo.Direction,
+		|	BatchKeysInfo.SalesInvoice,
+		|	BatchKeysInfo.ItemKey,
+		|	BatchKeysInfo.Store,
+		|	BatchKeysInfo.BatchConsignor
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	UNDEFINED,
+		|	UNDEFINED,
+		|	VALUE(Enum.BatchDirection.Expense),
+		|	UNDEFINED,
+		|	ItemList.ItemKey,
+		|	ItemList.TradeAgentStore,
+		|	SUM(ItemList.Quantity),
+		|	0,
+		|	0,
+		|	UNDEFINED
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.IsReturnFromTradeAgent
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	VALUE(Enum.BatchDirection.Expense),
+		|	ItemList.ItemKey,
+		|	ItemList.TradeAgentStore";
 EndFunction
 
 Function R8010B_TradeAgentInventory()
@@ -1255,5 +1256,70 @@ Function R8012B_ConsignorInventory()
 		|	ConsignorBatches.Batch.Agreement";		
 EndFunction
 		
-		
-		
+Function R8014T_ConsignorSales()
+	Return
+		"SELECT
+		|	BatchKeysInfo.Period,
+		|	BatchKeysInfo.Company,
+		|	BatchKeysInfo.SalesInvoice,
+		|	BatchKeysInfo.ItemKey,
+		|	SUM(BatchKeysInfo.Quantity) AS Quantity,
+		|	BatchKeysInfo.BatchConsignor
+		|INTO ReturnedConsignorBatches
+		|FROM
+		|	BatchKeysInfo
+		|WHERE
+		|	NOT BatchKeysInfo.BatchConsignor.Ref IS NULL
+		|GROUP BY
+		|	BatchKeysInfo.Period,
+		|	BatchKeysInfo.Company,
+		|	BatchKeysInfo.SalesInvoice,
+		|	BatchKeysInfo.ItemKey,
+		|	BatchKeysInfo.BatchConsignor
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ConsignorSales.*
+		|INTO ConsignorSales
+		|FROM
+		|	AccumulationRegister.R8014T_ConsignorSales AS ConsignorSales
+		|WHERE
+		|	(Company, Recorder, PurchaseInvoice, ItemKey) IN
+		|		(SELECT
+		|			ReturnedConsignorBatches.Company,
+		|			ReturnedConsignorBatches.SalesInvoice,
+		|			ReturnedConsignorBatches.BatchConsignor,
+		|			ReturnedConsignorBatches.ItemKey
+		|		FROM
+		|			ReturnedConsignorBatches AS ReturnedConsignorBatches)
+		|	AND ConsignorSales.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ReturnedConsignorBatches.Period,
+		|	ConsignorSales.RowKey AS Key,
+		|	ConsignorSales.RowKey AS RowKey,
+		|	ConsignorSales.Currency,
+		|	-ReturnedConsignorBatches.Quantity AS Quantity,
+		|	-case
+		|		when ConsignorSales.Quantity = 0
+		|			then 0
+		|		else (ConsignorSales.NetAmount / ConsignorSales.Quantity) * ReturnedConsignorBatches.Quantity
+		|	end AS NetAmount,
+		|	-case
+		|		when ConsignorSales.Quantity = 0
+		|			then 0
+		|		else (ConsignorSales.Amount / ConsignorSales.Quantity) * ReturnedConsignorBatches.Quantity
+		|	end AS Amount,
+		|	ConsignorSales.*
+		|INTO R8014T_ConsignorSales
+		|FROM
+		|	ConsignorSales AS ConsignorSales
+		|		INNER JOIN ReturnedConsignorBatches AS ReturnedConsignorBatches
+		|		ON ReturnedConsignorBatches.Company = ConsignorSales.Company
+		|		AND ReturnedConsignorBatches.SalesInvoice = ConsignorSales.SalesInvoice
+		|		AND ReturnedConsignorBatches.ItemKey = ConsignorSales.ItemKey
+		|		AND ReturnedConsignorBatches.BatchConsignor = ConsignorSales.PurchaseInvoice";
+EndFunction	

@@ -113,6 +113,7 @@
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
   <registerRecords>AccumulationRegister.R8012B_ConsignorInventory</registerRecords>
   <registerRecords>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R8015T_ConsignorPrices</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

@@ -58,3 +58,45 @@ Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
 EndProcedure
 
 #EndRegion
+
+Function GetConsignorSales(Parameters) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ConsignorSales.ItemKey.Item AS Item,
+	|	ConsignorSales.ItemKey,
+	|	ConsignorSales.Unit,
+	|	ConsignorSales.PriceType,
+	|	ConsignorSales.ConsignorPrice,
+	|	ConsignorSales.Price,
+	|	ConsignorSales.QuantityTurnover AS Quantity,
+	|	ConsignorSales.NetAmountTurnover AS NetAmount,
+	|	ConsignorSales.AmountTurnover AS TotalAmount,
+	|	ConsignorSales.SalesInvoice,
+	|	ConsignorSales.PurchaseInvoice,
+	|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
+	|	0 AS SumColumn,
+	|	TRUE AS Use
+	|FROM
+	|	AccumulationRegister.R8014T_ConsignorSales.Turnovers(BEGINOFPERIOD(&StartDate, DAY), ENDOFPERIOD(&EndDate, DAY),,
+	|		Company = &Company
+	|	AND Partner = &Partner
+	|	AND Agreement = &Agreement
+	|	AND PriceIncludeTax = &PriceIncludeTax
+	|	AND CurrencyMovementType = &CurrencyMovementType) AS ConsignorSales
+	|WHERE
+	|	ConsignorSales.QuantityTurnover <> 0";
+	Query.SetParameter("StartDate"       , Parameters.StartDate);
+	Query.SetParameter("EndDate"         , Parameters.EndDate);
+	Query.SetParameter("Company"         , Parameters.Company);
+	Query.SetParameter("Partner"         , Parameters.Partner);
+	Query.SetParameter("Agreement"       , Parameters.Agreement);
+	Query.SetParameter("PriceIncludeTax" , Parameters.PriceIncludeTax);
+	Query.SetParameter("CurrencyMovementType" , Parameters.Agreement.CurrencyMovementType);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
+
+

@@ -57,21 +57,15 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-
-#Region NewRegisterPosting
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
-#Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-#EndRegion
-
 	Return PostingDataTables;
 EndFunction
 
@@ -93,10 +87,8 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-#Region NewRegisterPosting
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -210,6 +202,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R8011B_TradeAgentSerialLotNumber());
 	QueryArray.Add(R8012B_ConsignorInventory());
 	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
+	QueryArray.Add(R8014T_ConsignorSales());
 	Return QueryArray;
 EndFunction
 
@@ -262,6 +255,7 @@ Function ItemList()
 		|	SalesInvoiceItemList.Ref.Currency AS Currency,
 		|	SalesInvoiceItemList.Unit AS Unit,
 		|	SalesInvoiceItemList.Ref.Date AS Period,
+		|	SalesInvoiceItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
 		|	SalesInvoiceItemList.SalesOrder AS SalesOrder,
 		|	NOT SalesInvoiceItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
 		|	TableRowIDInfo.RowID AS RowKey,
@@ -282,6 +276,7 @@ Function ItemList()
 		|	SalesInvoiceItemList.Ref.Branch AS Branch,
 		|	SalesInvoiceItemList.Ref.LegalNameContract AS LegalNameContract,
 		|	SalesInvoiceItemList.PriceType,
+		|	SalesInvoiceItemList.Price,
 		|	SalesInvoiceItemList.SalesPerson,
 		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
 		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
@@ -1232,6 +1227,52 @@ Function R8013B_ConsignorBatchWiseBalance()
 		|		ON ItemList.IsSales
 		|		AND ItemList.IsConsignorStocks
 		|		AND ItemList.Key = ConsignorBatches.Key";
+EndFunction
+
+Function R8014T_ConsignorSales()
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Key AS RowKey,
+		|	ItemList.Company,
+		|	ConsignorBatches.Batch.Partner AS Partner,
+		|	ConsignorBatches.Batch.Agreement AS Agreement,
+		|	ItemList.Currency,
+		|	ItemList.Invoice AS SalesInvoice,
+		|	ConsignorBatches.Batch AS PurchaseInvoice,
+		|	ItemList.ItemKey,
+		|	ItemList.Unit,
+		|	ItemList.Price,
+		|	ItemList.PriceType,
+		|	ItemList.PriceIncludeTax,
+		|	ConsignorBatches.Quantity,
+		|	CASE WHEN ItemList.Quantity = 0 THEN 0 ELSE (ItemList.NetAmount / ItemList.Quantity) * ConsignorBatches.Quantity END AS NetAmount,
+		|	CASE WHEN ItemList.Quantity = 0 THEN 0 ELSE (ItemList.Amount / ItemList.Quantity) * ConsignorBatches.Quantity END AS Amount
+		|INTO ConsignorSales
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN ConsignorBatches AS ConsignorBatches
+		|		ON ItemList.Key = ConsignorBatches.Key
+		|WHERE
+		|	ItemList.IsSales
+		|	AND ItemList.IsConsignorStocks
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ConsignorSales.*,
+		|	ConsignorPrices.Price AS ConsignorPrice
+		|INTO R8014T_ConsignorSales
+		|FROM
+		|	ConsignorSales AS ConsignorSales
+		|		LEFT JOIN AccumulationRegister.R8015T_ConsignorPrices AS ConsignorPrices
+		|		ON ConsignorSales.Company = ConsignorPrices.Company
+		|		AND ConsignorSales.Partner = ConsignorPrices.Partner
+		|		AND ConsignorSales.Agreement = ConsignorPrices.Agreement
+		|		AND ConsignorSales.PurchaseInvoice = ConsignorPrices.PurchaseInvoice
+		|		AND ConsignorSales.ItemKey = ConsignorPrices.ItemKey
+		|		AND ConsignorSales.Currency = ConsignorPrices.Currency
+		|		AND ConsignorPrices.CurrencyMovementType = Value(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)";
 EndFunction
 
 #EndRegion

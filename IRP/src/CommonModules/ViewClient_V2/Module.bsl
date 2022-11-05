@@ -1486,8 +1486,8 @@ Function ItemListAddFilledRow(Object, Form,  FillingValues) Export
 	Return NewRow;
 EndFunction
 
-Procedure ItemListLoad(Object, Form, Address) Export
-	Parameters = GetLoadParameters(Object, Form, "ItemList", Address);
+Procedure ItemListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
+	Parameters = GetLoadParameters(Object, Form, "ItemList", Address, GroupColumn, SumColumn);
 	Parameters.LoadData.ExecuteAllViewNotify = True;
 	NewRows = New Array();
 	For i = 1 To Parameters.LoadData.CountRows Do

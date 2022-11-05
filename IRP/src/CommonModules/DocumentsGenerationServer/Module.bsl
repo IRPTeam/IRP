@@ -94,7 +94,7 @@ Procedure PutQueryFiltersToTempTables(TempTableManager, Filters)
 	Query.Execute();
 EndProcedure
 
-Function GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments, AddInfo = Undefined) Export
+Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, DocumentName) Export
 
 	Filters = GetQueryFilters(Metadata.AccumulationRegisters.R1021B_VendorsTransactions, ArrayOfBasisDocuments);
 
@@ -105,7 +105,7 @@ Function GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments, AddI
 	Query.TempTablesManager = TempTableManager;
 	Query.Text =
 	"SELECT
-	|	""PurchaseInvoice"" AS BasedOn,
+	|	&DocumentName AS BasedOn,
 	|	VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS TransactionType,
 	|	R1021B_VendorsTransactions.Company AS Company,
 	|	R1021B_VendorsTransactions.Branch AS Branch,
@@ -130,6 +130,8 @@ Function GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments, AddI
 	|		R1021B_VendorsTransactions
 	|WHERE
 	|	R1021B_VendorsTransactions.AmountBalance > 0";
+	
+	Query.SetParameter("DocumentName", DocumentName);
 	
 	// get default agreement by partner for standard agreement
 	QueryResult = Query.Execute();
@@ -168,7 +170,7 @@ Function GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments, AddI
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	""PurchaseInvoice"" AS BasedOn,
+	|	&DocumentName AS BasedOn,
 	|	VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS TransactionType,
 	|	R1021B_VendorsTransactions.Company,
 	|	R1021B_VendorsTransactions.Branch,
@@ -192,7 +194,7 @@ Function GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments, AddI
 	|UNION ALL
 	|
 	|SELECT
-	|	""PurchaseInvoice"",
+	|	&DocumentName,
 	|	VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor),
 	|	PartnerTransactionsBalance.Company,
 	|	PartnerTransactionsBalance.Branch,
@@ -235,6 +237,7 @@ Function GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments, AddI
 	|	QueryTable_StandardAgreements AS QueryTable_StandardAgreements";
 
 	Query.SetParameter("QueryTable_StandardAgreements", QueryTable_StandardAgreements);
+	Query.SetParameter("DocumentName", DocumentName);
 	QueryResult = Query.Execute();
 	Return QueryResult.Unload();
 EndFunction

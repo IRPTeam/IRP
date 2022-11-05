@@ -205,16 +205,16 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-
-#Region NewRegisterPosting
 	Tables = Parameters.DocumentDataTables;
 
 	IncomingStocksServer.ClosureIncomingStocks(Parameters);
 
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
+	
+	Tables.R8015T_ConsignorPrices.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -241,12 +241,9 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-#Region NewRegisterPosting
 	IncomingStocksServer.ClosureIncomingStocks_Unposting(Parameters);
-
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -355,6 +352,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R6070T_OtherPeriodsExpenses());
 	QueryArray.Add(R8012B_ConsignorInventory());
 	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
+	QueryArray.Add(R8015T_ConsignorPrices());
 	Return QueryArray;
 EndFunction
 
@@ -423,6 +421,7 @@ Function ItemList()
 		   |	PurchaseInvoiceItemList.InternalSupplyRequest,
 		   |	PurchaseInvoiceItemList.Ref AS Invoice,
 		   |	PurchaseInvoiceItemList.Quantity AS UnitQuantity,
+		   |	PurchaseInvoiceItemList.Price AS Price,
 		   |	PurchaseInvoiceItemList.QuantityInBaseUnit AS Quantity,
 		   |	PurchaseInvoiceItemList.TotalAmount AS Amount,
 		   |	PurchaseInvoiceItemList.Ref.Partner AS Partner,
@@ -1220,6 +1219,32 @@ Function R8013B_ConsignorBatchWiseBalance()
 		|	ItemList.Invoice,
 		|	ItemList.Store,
 		|	ItemList.ItemKey";
+EndFunction
+
+Function R8015T_ConsignorPrices()
+	Return
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Partner,
+		|	ItemList.Agreement,
+		|	ItemList.Invoice AS PurchaseInvoice,
+		|	ItemList.ItemKey,
+		|	ItemList.Currency,
+		|	AVG(ItemList.Price) AS Price
+		|INTO R8015T_ConsignorPrices
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsReceiptFromConsignor
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Partner,
+		|	ItemList.Agreement,
+		|	ItemList.Invoice,
+		|	ItemList.ItemKey,
+		|	ItemList.Currency";
 EndFunction
 
 #Region Accounting

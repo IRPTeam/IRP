@@ -182,10 +182,6 @@ Procedure TypeOnChange(Item)
 		Object.CreditLimitAmount = 0;
 	EndIf;
 	
-	If Object.Type <> PredefinedValue("Enum.AgreementTypes.TradeAgent") Then
-		Object.TradeAgentStore = Undefined;
-	EndIf;
-	
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 

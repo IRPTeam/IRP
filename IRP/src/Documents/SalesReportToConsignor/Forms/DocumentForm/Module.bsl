@@ -1,3 +1,4 @@
+
 #Region FORM
 
 &AtServer
@@ -437,5 +438,62 @@ EndProcedure
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
+
+&AtClient
+Procedure FillSales(Command)
+	If Not ChechFillingBeforFillSales() Then
+		Return;
+	EndIf;
+	
+	OpeningParameters = New Structure();
+	OpeningParameters.Insert("StartDate" , Object.StartDate);
+	OpeningParameters.Insert("EndDate"   , Object.EndDate);
+	OpeningParameters.Insert("Company"   , Object.Company);
+	OpeningParameters.Insert("Partner"   , Object.Partner);
+	OpeningParameters.Insert("Agreement" , Object.Agreement);
+	OpeningParameters.Insert("PriceIncludeTax", Object.PriceIncludeTax);
+	
+	OpenForm("Document.SalesReportToConsignor.Form.FillSales", OpeningParameters, ThisObject, , , , 
+		New NotifyDescription("FillSalesEnd", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure FillSalesEnd(Result, AdditionalParameters) Export
+	If Result <> Undefined Then
+		Object.SerialLotNumbers.Clear();
+		Object.TaxList.Clear();
+		Object.ItemList.Clear();
+		
+		Object.StartDate = Result.StartDate;
+		Object.EndDate   = Result.EndDate;
+		ViewClient_V2.ItemListLoad(Object, ThisObject, Result.Address, Result.GroupColumn, Result.SumColumn);
+	EndIf;
+EndProcedure
+
+&AtServer
+Function ChechFillingBeforFillSales()
+	IsOk = True;
+	DocAttributes = Metadata.Documents.SalesReportToConsignor.Attributes;
+	
+	If Not ValueIsFilled(Object.Company) Then
+		IsOk = False;
+		Msg = StrTemplate(R().Error_047, DocAttributes.Company.Synonym);
+		CommonFunctionsClientServer.ShowUsersMessage(Msg, "Object.Company", Object);
+	EndIf;
+	
+	If Not ValueIsFilled(Object.Partner) Then
+		IsOk = False;
+		Msg = StrTemplate(R().Error_047, DocAttributes.Partner.Synonym);
+		CommonFunctionsClientServer.ShowUsersMessage(Msg, "Object.Partner", Object);
+	EndIf;
+	
+	If Not ValueIsFilled(Object.Agreement) Then
+		IsOk = False;
+		Msg = StrTemplate(R().Error_047, DocAttributes.Agreement.Synonym);
+		CommonFunctionsClientServer.ShowUsersMessage(Msg, "Object.Agreement", Object);
+	EndIf;
+	
+	Return IsOk;
+EndFunction
 
 #EndRegion

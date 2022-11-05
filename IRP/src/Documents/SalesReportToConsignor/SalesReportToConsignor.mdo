@@ -78,6 +78,11 @@
   <defaultListForm>Document.SalesReportToConsignor.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.SalesReportToConsignor.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
+  <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
+  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
+  <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -194,6 +199,44 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="18501497-b3cf-4244-9b03-59dcaed572ad">
+    <name>StartDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Start date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="3366235d-3aef-4fda-af18-66adda5c65bd">
+    <name>EndDate</name>
+    <synonym>
+      <key>en</key>
+      <value>End date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="ce6a23c1-3085-4a2e-9f48-d2c55d03a430">
     <name>DocumentForm</name>
     <synonym>
@@ -217,6 +260,15 @@
     <synonym>
       <key>en</key>
       <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="f4b72047-aeed-452a-823b-99c04c1fa151">
+    <name>FillSales</name>
+    <synonym>
+      <key>en</key>
+      <value>Fill sales</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
@@ -305,9 +357,24 @@
       <type>
         <types>DefinedType.typeQuantity</types>
       </type>
+      <markNegatives>true</markNegatives>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="774b71f8-78c3-42a6-ace5-802ba8b347cb">
+      <name>ConsignorPrice</name>
+      <synonym>
+        <key>en</key>
+        <value>Consignor price</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typePrice</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="29a5070d-dd9e-4491-b112-d80e74254364">
       <name>Price</name>
@@ -346,6 +413,7 @@
       <type>
         <types>DefinedType.typeAmount</types>
       </type>
+      <markNegatives>true</markNegatives>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -360,6 +428,7 @@
       <type>
         <types>DefinedType.typeAmount</types>
       </type>
+      <markNegatives>true</markNegatives>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -374,6 +443,7 @@
       <type>
         <types>DefinedType.typeAmount</types>
       </type>
+      <markNegatives>true</markNegatives>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
@@ -434,19 +504,6 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="a9e65145-3d9a-453e-8aec-864a3c024fa4">
-      <name>PurchaseOrder</name>
-      <synonym>
-        <key>en</key>
-        <value>Purchase order</value>
-      </synonym>
-      <type>
-        <types>DocumentRef.PurchaseOrder</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
     <attributes uuid="c758f397-a1e2-400f-81cd-ee5366cc24b4">
       <name>PurchaseInvoice</name>
       <synonym>
@@ -455,6 +512,20 @@
       </synonym>
       <type>
         <types>DocumentRef.PurchaseInvoice</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4273c786-5f45-4aad-baa2-a8e603dc5512">
+      <name>SalesInvoice</name>
+      <synonym>
+        <key>en</key>
+        <value>Sales invoice</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.SalesInvoice</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

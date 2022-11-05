@@ -7667,12 +7667,13 @@ EndFunction
 // ItemList.SalesDocument.Bind
 Function BindItemListSalesDocument(Parameters)
 	DataPath = New Map();
-	DataPath.Insert("GoodsReceipt"         , "ItemList.SalesInvoice");
-	DataPath.Insert("SalesReturn"          , "ItemList.SalesInvoice");
-	DataPath.Insert("SalesReturnOrder"     , "ItemList.SalesInvoice");
-	DataPath.Insert("ShipmentConfirmation" , "ItemList.SalesInvoice");
-	DataPath.Insert("WorkSheet"            , "ItemList.SalesInvoice");
-	DataPath.Insert("RetailReturnReceipt"  , "ItemList.RetailSalesReceipt");
+	DataPath.Insert("GoodsReceipt"           , "ItemList.SalesInvoice");
+	DataPath.Insert("SalesReturn"            , "ItemList.SalesInvoice");
+	DataPath.Insert("SalesReturnOrder"       , "ItemList.SalesInvoice");
+	DataPath.Insert("ShipmentConfirmation"   , "ItemList.SalesInvoice");
+	DataPath.Insert("WorkSheet"              , "ItemList.SalesInvoice");
+	DataPath.Insert("RetailReturnReceipt"    , "ItemList.RetailSalesReceipt");
+	DataPath.Insert("SalesReportToConsignor" , "ItemList.SalesInvoice");
 	
 	Binding = New Structure();
 	Binding.Insert("SalesReturn"         , "StepChangeLandedCostBySalesDocument");

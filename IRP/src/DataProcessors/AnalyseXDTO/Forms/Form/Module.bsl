@@ -3,7 +3,8 @@
 Procedure ReadStructureAtServer()
 	
 	ArrayList = New Array;
-	Obj = ConvertXDTO.ObjectXDTOStructure(Object.TypeName, Object.URI, ArrayList, Object.WSName); 
+	XDTOType = CommonFunctionsServer.XDTOFactoryObject(Object.WSName).Type(Object.URI, Object.TypeName);
+	Obj = ConvertXDTO.ObjectXDTOStructure(XDTOType, ArrayList, Object.WSName, Not EmptyValues); 
 	TreeData.GetItems().Clear();
 	NewRow = TreeData.GetItems().Add();
 	NewRow.Name = Object.TypeName;
@@ -54,7 +55,7 @@ Function ObjectXDTO(ObjectStructure, TypeName, URI, TreeData)
 			NewRowArray.Array = TypeOf(ObjectData.Value) = Type("Array");			
 			NewRowArray.CanBeEmpty =  XDTOType.Properties.Get(ObjectData.Key).LowerBound = 0;
 			For Each Row In ObjectData.Value Do
-				If Not TypeOf(Row) = Type("Array") Then
+				If Not (TypeOf(Row) = Type("Array") OR TypeOf(Row) = Type("Structure")) Then
 					DataXDTORow = Row;
 				Else
 					DataXDTORow = CommonFunctionsServer.XDTOFactoryObject(Object.WSName).Create(XDTOTypeRow);

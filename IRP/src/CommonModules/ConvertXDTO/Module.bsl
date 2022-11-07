@@ -241,9 +241,9 @@ Procedure SetObject(XDTO, Type, Property, Val Value = Undefined, WSName = Undefi
 	EndIf;
 EndProcedure
 
-Function ObjectXDTOStructure(TypeName, URI, Val ArrayList, WSName = Undefined) Export
+Function ObjectXDTOStructure(XDTOType, Val ArrayList, WSName = Undefined, FillEmptyValues = True) Export
 	
-	XDTOType = CommonFunctionsServer.XDTOFactoryObject(WSName).Type(URI, TypeName);
+//	XDTOType = CommonFunctionsServer.XDTOFactoryObject(WSName).Type(URI, TypeName);
 	XDTOStructure = New Structure;
 	ArrayList.Add(XDTOType);
 	
@@ -256,10 +256,10 @@ Function ObjectXDTOStructure(TypeName, URI, Val ArrayList, WSName = Undefined) E
 			
 				If Property.UpperBound < 0 Then
 					Array = New Array;
-					Array.Add(ObjectXDTOStructure(Property.Type.Name, Property.Type.NamespaceURI, ArrayList, WSName));
+					Array.Add(ObjectXDTOStructure(Property.Type, ArrayList, WSName));
 					XDTOStructure.Insert(Property.Name, Array);
 				Else
-					XDTOStructure.Insert(Property.Name, ObjectXDTOStructure(Property.Type.Name, Property.Type.NamespaceURI, ArrayList, WSName));
+					XDTOStructure.Insert(Property.Name, ObjectXDTOStructure(Property.Type, ArrayList, WSName));
 				EndIf;
 			Else
 				CheckCountLvl = 0;
@@ -274,14 +274,14 @@ Function ObjectXDTOStructure(TypeName, URI, Val ArrayList, WSName = Undefined) E
 				Else
 					If Property.UpperBound < 0 Then
 						Array = New Array;
-						Array.Add(ObjectXDTOStructure(Property.Type.Name, Property.Type.NamespaceURI, ArrayList, WSName));
+						Array.Add(ObjectXDTOStructure(Property.Type, ArrayList, WSName));
 						XDTOStructure.Insert(Property.Name, Array);
 					Else
-						XDTOStructure.Insert(Property.Name, ObjectXDTOStructure(Property.Type.Name, Property.Type.NamespaceURI, ArrayList, WSName));
+						XDTOStructure.Insert(Property.Name, ObjectXDTOStructure(Property.Type, ArrayList, WSName));
 					EndIf;
 				EndIf;
 			EndIf;
-		Else			
+		ElsIf FillEmptyValues Then			
 			If Property.Type.Name = "string" Then
 				XDTOStructure.Insert(Property.Name, Property.Name);
 			ElsIf Property.Type.Name = "boolean" Then
@@ -301,6 +301,12 @@ Function ObjectXDTOStructure(TypeName, URI, Val ArrayList, WSName = Undefined) E
 				XDTOStructure.Insert(Property.Name, CurrentDate());
 			ElsIf Property.Type.Name = "anyType" Then
 				XDTOStructure.Insert(Property.Name, Property.Name);
+			Else
+				If Not Property.Type.Facets = Undefined And Not Property.Type.Facets.Enumerations = Undefined Then
+					XDTOStructure.Insert(Property.Name, Property.Type.Facets.Enumerations[0].Value);
+				Else
+					XDTOStructure.Insert(Property.Name, Property.Name);
+				EndIf;
 			EndIf;
 			
 			If Property.UpperBound < 0 Then
@@ -308,6 +314,8 @@ Function ObjectXDTOStructure(TypeName, URI, Val ArrayList, WSName = Undefined) E
 				Array.Add(XDTOStructure[Property.Name]);
 				XDTOStructure.Insert(Property.Name, Array);
 			EndIf;
+		Else
+			XDTOStructure.Insert(Property.Name);
 		EndIf
 		
 	EndDo;

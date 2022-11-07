@@ -693,22 +693,23 @@ EndProcedure
 Procedure EnabledPaymentButton()
 	Items.qPayment.Enabled = Object.ItemList.Count();
 	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
-		ColorGreen = New Color(0, 150, 70);
-		BackColorGreen = New Color(240, 255, 240);
-		ColorRed = New Color(255, 0, 0);
-		BackColorRed = New Color(255, 240, 240);
-		If ValueIsFilled(Object.ConsolidatedRetailSales) Then
-			Items.qPayment.Title = R().InfoMessage_Payment;
-			Items.qPayment.TextColor = ColorGreen;
-			Items.qPayment.BorderColor = ColorGreen;
-			Items.qPayment.BackColor = BackColorGreen;
-		Else
-			Items.qPayment.Enabled = False;
-			Items.qPayment.Title = R().InfoMessage_SessionIsClosed;
-			Items.qPayment.TextColor = ColorRed;
-			Items.qPayment.BorderColor = ColorRed;
-			Items.qPayment.BackColor = BackColorRed;
-		EndIf;
+		SetPaymentButtonOnServer();
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure SetPaymentButtonOnServer()
+	ColorGreen = StyleColors.AccentColor;
+	ColorRed = StyleColors.NegativeTextColor;
+	If ValueIsFilled(Object.ConsolidatedRetailSales) Then
+		Items.qPayment.Title = R().InfoMessage_Payment;
+		Items.qPayment.TextColor = ColorGreen;
+		Items.qPayment.BorderColor = ColorGreen;
+	Else
+		Items.qPayment.Enabled = False;
+		Items.qPayment.Title = R().InfoMessage_SessionIsClosed;
+		Items.qPayment.TextColor = ColorRed;
+		Items.qPayment.BorderColor = ColorRed;
 	EndIf;
 EndProcedure
 
@@ -835,7 +836,7 @@ Procedure CashInListSelection(Item, RowSelected, Field, StandardProcessing)
 	OpenForm(
 		"Document.CashReceipt.ObjectForm", 
 		New Structure("FillingValues", FillingData), , 
-		New UUID(),,,
+		New UUID(), , ,
 		New NotifyDescription("CreateCashInFinish", ThisObject),
 		FormWindowOpeningMode.LockWholeInterface);	
 EndProcedure
@@ -930,4 +931,3 @@ Procedure FillCashInList()
 		FillPropertyValues(ThisObject.CashInList.Add(), QuerySelection);
 	EndDo;
 EndProcedure
-

@@ -48,7 +48,7 @@ Function GetTotalAtPOS()
 	QuerySelection = Query.Execute().Select();
 	If QuerySelection.Next() Then
 		Return QuerySelection.AmountBalance;
-	EndIf;;
+	EndIf;
 	
 	Return 0;
 EndFunction

@@ -65,6 +65,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Else
 		Form.Items.GroupCommonCommands.Visible = False;
 	EndIf;
+	
+	Form.Items.GroupCashCommands.Visible = 
+		CommonFunctionsServer.GetRefAttribute(Form.Workstation, "UseCashInAndCashOut");
 EndProcedure
 
 #Region AGREEMENT

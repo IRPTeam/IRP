@@ -261,6 +261,8 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	If WrappedRows.Count() Then
 		Parameters.Insert("Rows", WrappedRows);
 	EndIf;
+	
+	//@skip-warning
 	Return Parameters;
 EndFunction
 
@@ -417,6 +419,7 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	SettersMap.Insert("ItemList.Unit"               , "SetItemListUnit");
 	SettersMap.Insert("ItemList.PriceType"          , "SetItemListPriceType");
 	SettersMap.Insert("ItemList.Price"              , "SetItemListPrice");
+	SettersMap.Insert("ItemList.ConsignorPrice"     , "SetItemListConsignorPrice");
 	SettersMap.Insert("ItemList.DontCalculateRow"   , "SetItemListDontCalculateRow");
 	SettersMap.Insert("ItemList.Quantity"           , "SetItemListQuantity");
 	SettersMap.Insert("ItemList.Store"              , "SetItemListStore");
@@ -502,6 +505,7 @@ Procedure API_SetProperty(Parameters, Property, Value, IsBuilder = False) Export
 EndProcedure
 
 Procedure ExecuteSetterByName(Parameters, Results, SetterName)
+	//@skip-warning
 	Execute StrTemplate("%1(Parameters, Results);", SetterName);
 EndProcedure
 
@@ -2248,6 +2252,53 @@ EndFunction
 
 #EndRegion
 
+#Region TRADE_AGENT_FEE_TYPE
+
+// TradeAgentFeeType.OnChange
+Procedure TradeAgentFeeTypeOnChange(Parameters) Export
+	RollbackPropertyToValueBeforeChange_Object(Parameters);
+	AddViewNotify("OnSetTradeAgentFeeTypeNotify", Parameters);
+	Binding = BindTradeAgentFeeType(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TradeAgentFeeType.Set
+Procedure SetTradeAgentFeeType(Parameters, Results) Export
+	Binding = BindTradeAgentFeeType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetTradeAgentFeeTypeNotify");
+EndProcedure
+
+// TradeAgentFeeType.Get
+Function GetTradeAgentFeeType(Parameters)
+	Return GetPropertyObject(Parameters, BindTradeAgentFeeType(Parameters).DataPath);
+EndFunction
+
+// TradeAgentFeeType.Bind
+Function BindTradeAgentFeeType(Parameters)
+	DataPath = "TradeAgentFeeType";
+	Binding = New Structure();
+	Binding.Insert("SalesReportFromTradeAgent", 
+		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
+		
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// TradeAgentFeeType.ChangeTradeAgentFeeTypeByAgreement.Step
+Procedure StepChangeTradeAgentFeeTypeByAgreement(Parameters, Chain) Export
+	Chain.ChangeTradeAgentFeeTypeByAgreement.Enable = True;
+	Chain.ChangeTradeAgentFeeTypeByAgreement.Setter = "SetTradeAgentFeeType";
+	Options = ModelClientServer_V2.ChangeTradeAgentFeeTypeByAgreementOptions();
+	Options.Agreement = GetAgreement(Parameters);
+	Options.CurrentFeeType = GetTradeAgentFeeType(Parameters);
+	Options.StepName = "StepChangeTradeAgentFeeTypeByAgreement";
+	Chain.ChangeTradeAgentFeeTypeByAgreement.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
 #Region PARTNER
 
 // Partner.OnChange
@@ -3250,14 +3301,18 @@ Function BindAgreement(Parameters)
 		|StepChangeCurrencyByAgreement,
 		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
-		|StepChangeTaxRate_AgreementInHeader");
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepItemListChangeTradeAgentFeePercentByAgreement,
+		|StepChangeTradeAgentFeeTypeByAgreement");
 	
 	Binding.Insert("SalesReportToConsignor",
 		"StepChangeCompanyByAgreement,
 		|StepChangeCurrencyByAgreement,
 		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
-		|StepChangeTaxRate_AgreementInHeader");
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepItemListChangeTradeAgentFeePercentByAgreement,
+		|StepChangeTradeAgentFeeTypeByAgreement");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -8204,6 +8259,154 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_CONSIGNOR_PRICE
+
+// ItemList.ConsignorPrice.OnChange
+Procedure ItemListConsignorPriceOnChange(Parameters) Export
+	Binding = BindItemListConsignorPrice(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.ConsignorPrice.Set
+Procedure SetItemListConsignorPrice(Parameters, Results) Export
+	Binding = BindItemListConsignorPrice(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.ConsignorPrice.Get
+Function GetItemListConsignorPrice(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListConsignorPrice(Parameters).DataPath, _Key);
+EndFunction
+
+// ItemList.ConsignorPrice.Bind
+Function BindItemListConsignorPrice(Parameters)
+	DataPath = "ItemList.ConsignorPrice";
+	Binding = New Structure();
+	Binding.Insert("SalesReportFromTradeAgent", 
+		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_TRADE_AGENT_FEE_PERCENT
+
+// ItemList.TradeAgentFeePercent.OnChange
+Procedure ItemListTradeAgentFeePercentOnChange(Parameters) Export
+	Binding = BindItemListTradeAgentFeePercent(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.TradeAgentFeePercent.Set
+Procedure SetItemListTradeAgentFeePercent(Parameters, Results) Export
+	Binding = BindItemListTradeAgentFeePercent(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.TradeAgentFeePercent.Get
+Function GetItemListTradeAgentFeePercent(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListTradeAgentFeePercent(Parameters).DataPath, _Key);
+EndFunction
+
+// ItemList.TradeAgentFeePercent.Bind
+Function BindItemListTradeAgentFeePercent(Parameters)
+	DataPath = "ItemList.TradeAgentFeePercent";
+	Binding = New Structure();
+	Binding.Insert("SalesReportFromTradeAgent", 
+		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.TradeAgentFeePercent.ChangeTradeAgentFeePercentByAgreement.Step
+Procedure StepItemListChangeTradeAgentFeePercentByAgreement(Parameters, Chain) Export
+	Chain.ChangeTradeAgentFeePercentByAgreement.Enable = True;
+	Chain.ChangeTradeAgentFeePercentByAgreement.Setter = "SetItemListTradeAgentFeePercent";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeTradeAgentFeePercentByAgreementOptions();
+		Options.Agreement      = GetAgreement(Parameters);
+		Options.FeeType        = GetTradeAgentFeeType(Parameters);
+		Options.CurrentPercent = GetItemListTradeAgentFeePercent(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepItemListChangeTradeAgentFeePercentByAgreement";
+		Options.DontExecuteIfExecutedBefore = True;
+		Chain.ChangeTradeAgentFeePercentByAgreement.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+// ItemList.TradeAgentFeePercent.ChangeTradeAgentFeePercentByAmount.Step
+Procedure StepItemListChangeTradeAgentFeePercentByAmount(Parameters, Chain) Export
+	Chain.ChangeTradeAgentFeePercentByAmount.Enable = True;
+	Chain.ChangeTradeAgentFeePercentByAmount.Setter = "SetItemListTradeAgentFeePercent";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeTradeAgentFeePercentByAmountOptions();
+		Options.FeeType     = GetTradeAgentFeeType(Parameters);
+		Options.FeeAmount   = GetItemListTradeAgentFeeAmount(Parameters, Row.Key);
+		Options.TotalAmount = GetItemListTotalAmount(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepItemListChangeTradeAgentFeePercentByAmount";
+		Options.DontExecuteIfExecutedBefore = True;
+		Chain.ChangeTradeAgentFeePercentByAmount.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_TRADE_AGENT_FEE_AMOUNT
+
+// ItemList.TradeAgentFeeAmount.OnChange
+Procedure ItemListTradeAgentFeeAmountOnChange(Parameters) Export
+	Binding = BindItemListTradeAgentFeeAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.TradeAgentFeeAmount.Set
+Procedure SetItemListTradeAgentFeeAmount(Parameters, Results) Export
+	Binding = BindItemListTradeAgentFeeAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.TradeAgentFeeAmount.Get
+Function GetItemListTradeAgentFeeAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListTradeAgentFeeAmount(Parameters).DataPath, _Key);
+EndFunction
+
+// ItemList.TradeAgentFeeAmount.Bind
+Function BindItemListTradeAgentFeeAmount(Parameters)
+	DataPath = "ItemList.TradeAgentFeeAmount";
+	Binding = New Structure();
+		
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.TradeAgentFeeAmount.ChangeTradeAgentFeeAmountByTradeAgentFeeType.Step
+Procedure StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType(Parameters, Chain) Export
+	Chain.ChangeTradeAgentFeeAmountByTradeAgentFeeType.Enable = True;
+	Chain.ChangeTradeAgentFeeAmountByTradeAgentFeeType.Setter = "SetItemListTradeAgentFeeAmount";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeTradeAgentFeeAmountByTradeAgentFeeTypeOptions();
+		Options.FeeType        = GetTradeAgentFeeType(Parameters);
+		Options.Price          = GetItemListPrice(Parameters, Row.Key);
+		Options.ConsignorPrice = GetItemListConsignorPrice(Parameters, Row.Key);
+		Options.Quantity       = GetItemListQuantity(Parameters, Row.Key);
+		Options.Percent        = GetItemListTradeAgentFeePercent(Parameters, Row.Key);
+		Options.TotalAmount    = GetItemListTotalAmount(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType";
+		Options.DontExecuteIfExecutedBefore = True;
+		Chain.ChangeTradeAgentFeeAmountByTradeAgentFeeType.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 #Region ITEM_LIST_PRICE
 
 // ItemList.Price.OnChange
@@ -8329,55 +8532,6 @@ Procedure StepItemListChangePriceByPriceType(Parameters, Chain) Export
 		Options.StepName = "StepItemListChangePriceByPriceType";
 		Options.DontExecuteIfExecutedBefore = True;
 		Chain.ChangePriceByPriceType.Options.Add(Options);
-	EndDo;
-EndProcedure
-
-// ItemList.SimpleCalculations.Set
-Procedure SetItemListSimpleCalculations(Parameters, Results) Export
-	ResourceToBinding = New Map();
-	ResourceToBinding.Insert("Price" , BindItemListPrice(Parameters));
-	ResourceToBinding.Insert("Amount", BindItemListAmount(Parameters));
-	MultiSetterObject(Parameters, Results, ResourceToBinding);
-EndProcedure
-
-// ItemList.SimpleCalculations.[IsPriceChanged].Step
-Procedure StepItemListSimpleCalculations_IsPriceChanged(Parameters, Chain) Export
-	StepItemListSimpleCalculations(Parameters, Chain, "IsPriceChanged");
-EndProcedure
-
-// ItemList.SimpleCalculations.[IsAmountChanged].Step
-Procedure StepItemListSimpleCalculations_IsAmountChanged(Parameters, Chain) Export
-	StepItemListSimpleCalculations(Parameters, Chain, "IsAmountChanged");
-EndProcedure
-
-// ItemList.SimpleCalculations.[IsQuantityChanged].Step
-Procedure StepItemListSimpleCalculations_IsQuantityChanged(Parameters, Chain) Export
-	StepItemListSimpleCalculations(Parameters, Chain, "IsQuantityChanged");
-EndProcedure
-
-Procedure StepItemListSimpleCalculations(Parameters, Chain, WhoIsChanged)
-	Chain.SimpleCalculations.Enable = True;
-	Chain.SimpleCalculations.Setter = "SetItemListSimpleCalculations";
-	
-	For Each Row In GetRows(Parameters, Parameters.TableName) Do
-		Options     = ModelClientServer_V2.SimpleCalculationsOptions();
-		Options.Ref = Parameters.Object.Ref;
-		Options.Key = Row.Key;
-		Options.DontExecuteIfExecutedBefore = True;
-		
-		If WhoIsChanged = "IsPriceChanged" Or WhoIsChanged = "IsQuantityChanged" Then
-			Options.CalculateAmount.Enable = True;
-		ElsIf WhoIsChanged = "IsAmountChanged" Then
-			Options.CalculatePrice.Enable = True;
-		Else
-			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
-		EndIf;
-		
-		Options.Amount   = GetItemListAmount(Parameters, Row.Key);
-		Options.Price    = GetItemListPrice(Parameters, Row.Key);
-		Options.Quantity = GetItemListQuantity(Parameters, Row.Key);
-		Options.StepName = "StepItemListSimpleCalculations";
-		Chain.SimpleCalculations.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -9241,10 +9395,24 @@ EndProcedure
 Function BindItemListCalculations(Parameters)
 	DataPath = "";
 	Binding = New Structure();
-	Binding.Insert("SalesOrder"      , "StepUpdatePaymentTerms");
-	Binding.Insert("SalesInvoice"    , "StepUpdatePaymentTerms");
-	Binding.Insert("PurchaseOrder"   , "StepUpdatePaymentTerms");
-	Binding.Insert("PurchaseInvoice" , "StepUpdatePaymentTerms");
+	Binding.Insert("SalesOrder",
+		"StepUpdatePaymentTerms");
+		
+	Binding.Insert("SalesInvoice",
+		"StepUpdatePaymentTerms");
+		
+	Binding.Insert("PurchaseOrder",
+		"StepUpdatePaymentTerms");
+		
+	Binding.Insert("PurchaseInvoice",
+		"StepUpdatePaymentTerms");
+	
+	Binding.Insert("SalesReportFromTradeAgent",
+		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -9483,6 +9651,59 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListCalculations";
 		Chain.Calculations.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_SIMPLE_CALCULATIONS
+
+// ItemList.SimpleCalculations.Set
+Procedure SetItemListSimpleCalculations(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Price" , BindItemListPrice(Parameters));
+	ResourceToBinding.Insert("Amount", BindItemListAmount(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+// ItemList.SimpleCalculations.[IsPriceChanged].Step
+Procedure StepItemListSimpleCalculations_IsPriceChanged(Parameters, Chain) Export
+	StepItemListSimpleCalculations(Parameters, Chain, "IsPriceChanged");
+EndProcedure
+
+// ItemList.SimpleCalculations.[IsAmountChanged].Step
+Procedure StepItemListSimpleCalculations_IsAmountChanged(Parameters, Chain) Export
+	StepItemListSimpleCalculations(Parameters, Chain, "IsAmountChanged");
+EndProcedure
+
+// ItemList.SimpleCalculations.[IsQuantityChanged].Step
+Procedure StepItemListSimpleCalculations_IsQuantityChanged(Parameters, Chain) Export
+	StepItemListSimpleCalculations(Parameters, Chain, "IsQuantityChanged");
+EndProcedure
+
+Procedure StepItemListSimpleCalculations(Parameters, Chain, WhoIsChanged)
+	Chain.SimpleCalculations.Enable = True;
+	Chain.SimpleCalculations.Setter = "SetItemListSimpleCalculations";
+	
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options     = ModelClientServer_V2.SimpleCalculationsOptions();
+		Options.Ref = Parameters.Object.Ref;
+		Options.Key = Row.Key;
+		Options.DontExecuteIfExecutedBefore = True;
+		
+		If WhoIsChanged = "IsPriceChanged" Or WhoIsChanged = "IsQuantityChanged" Then
+			Options.CalculateAmount.Enable = True;
+		ElsIf WhoIsChanged = "IsAmountChanged" Then
+			Options.CalculatePrice.Enable = True;
+		Else
+			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
+		EndIf;
+		
+		Options.Amount   = GetItemListAmount(Parameters, Row.Key);
+		Options.Price    = GetItemListPrice(Parameters, Row.Key);
+		Options.Quantity = GetItemListQuantity(Parameters, Row.Key);
+		Options.StepName = "StepItemListSimpleCalculations";
+		Chain.SimpleCalculations.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -10257,6 +10478,7 @@ Procedure CommitChainChanges(Parameters) Export
 			#ELSIF Server THEN
 				ViewModuleName = Parameters.ViewServerModuleName;
 			#ENDIF
+			//@skip-warning
 			Execute StrTemplate("%1.%2(Parameters);", ViewModuleName, FormModificator);
 		EndDo;
 		_CommitChainChanges(Parameters.CacheForm, Parameters.Form, Parameters);
@@ -10345,6 +10567,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetMaterialsMaterialTypeNotify"      Then ViewClient_V2.OnSetMaterialsMaterialTypeNotify(Parameters);
 	ElsIf ViewNotify = "OnSetBillOfMaterialsNotify"            Then ViewClient_V2.OnSetBillOfMaterialsNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListBillOfMaterialsNotify"    Then ViewClient_V2.OnSetItemListBillOfMaterialsNotify(Parameters);
+	ElsIf ViewNotify = "OnSetTradeAgentFeeTypeNotify"          Then ViewClient_V2.OnSetTradeAgentFeeTypeNotify(Parameters);
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);
 	EndIf;

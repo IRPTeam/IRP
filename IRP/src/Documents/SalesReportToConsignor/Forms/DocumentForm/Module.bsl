@@ -80,6 +80,8 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.ItemListTradeAgentFeePercent.Visible = 
+		Object.TradeAgentFeeType = PredefinedValue("Enum.TradeAgentFeeTypes.Percent");
 EndProcedure
 
 #EndRegion
@@ -108,6 +110,15 @@ EndProcedure
 &AtClient
 Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
 	DocSalesReportToConsignorClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TRADE_AGENT_FEE_TYPE
+
+&AtClient
+Procedure TradeAgentFeeTypeOnChange(Item)
+	DocSalesReportToConsignorClient.TradeAgentFeeTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -253,6 +264,33 @@ EndProcedure
 &AtClient
 Procedure ItemListPriceTypeOnChange(Item)
 	DocSalesReportToConsignorClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region CONSIGNOR_PRICE
+
+&AtClient
+Procedure ItemListConsignorPriceOnChange(Item)
+	DocSalesReportToConsignorClient.ItemListConsignorPriceOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region TRADE_AGENT_FEE_PERCENT
+
+&AtClient
+Procedure ItemListTradeAgentFeePercentOnChange(Item)
+	DocSalesReportToConsignorClient.ItemListTradeAgentFeePercentOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region TRADE_AGENT_FEE_AMOUNT
+
+&AtClient
+Procedure ItemListTradeAgentFeeAmountOnChange(Item)
+	DocSalesReportToConsignorClient.ItemListTradeAgentFeeAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

@@ -36,6 +36,7 @@ EndProcedure
 Procedure ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps) Export
 	Chain = GetChain();
 	For Each ArrayItem In StrSplit(StepNames, ",") Do
+		//@skip-warning
 		Execute StrTemplate("%1.%2(Parameters, Chain);", 
 			Parameters.ControllerModuleName, 
 			StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
@@ -123,6 +124,7 @@ Procedure ExecuteChain(Parameters, Chain, ExecuteLazySteps)
 				If Mid(ExecutorName, 3, 1) = "_" Then
 					ExecuteInExtension(Result, Options, ExecutorName);
 				Else
+					//@skip-warning
 					Execute StrTemplate("Result = %1(Options)", ExecutorName);
 				EndIf;
 				Results.Add(GetChainLinkResult(Options, Result));
@@ -130,6 +132,7 @@ Procedure ExecuteChain(Parameters, Chain, ExecuteLazySteps)
 			EndDo;
 			// set result to property
 			If Not Chain[Name].IsLazyStep Or (Chain[Name].IsLazyStep And ExecuteLazySteps) Then
+				//@skip-warning
 				Execute StrTemplate("%1.%2(Parameters, Results);", Parameters.ControllerModuleName, Chain[Name].Setter);
 			EndIf;
 		EndIf;
@@ -288,6 +291,11 @@ Function GetChain()
 	Chain.Insert("BillOfMaterialsListCalculationsCorrection" , GetChainLink("BillOfMaterialsListCalculationsCorrectionExecute"));
 	Chain.Insert("MaterialsCalculations"                     , GetChainLink("MaterialsCalculationsExecute"));
 	Chain.Insert("MaterialsRecalculateQuantity"              , GetChainLink("MaterialsRecalculateQuantityExecute"));
+	
+	Chain.Insert("ChangeTradeAgentFeeTypeByAgreement"           , GetChainLink("ChangeTradeAgentFeeTypeByAgreementExecute"));
+	Chain.Insert("ChangeTradeAgentFeePercentByAgreement"        , GetChainLink("ChangeTradeAgentFeePercentByAgreementExecute"));
+	Chain.Insert("ChangeTradeAgentFeePercentByAmount"           , GetChainLink("ChangeTradeAgentFeePercentByAmountExecute"));
+	Chain.Insert("ChangeTradeAgentFeeAmountByTradeAgentFeeType" , GetChainLink("ChangeTradeAgentFeeAmountByTradeAgentFeeTypeExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -1044,6 +1052,100 @@ Function ChangeDeliveryDateByAgreementExecute(Options) Export
 		Return AgreementInfo.DeliveryDate;
 	EndIf;
 	Return Options.CurrentDeliveryDate;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_TRADE_AGENT_FEE_TYPE_BY_AGREEMENT
+
+Function ChangeTradeAgentFeeTypeByAgreementOptions() Export
+	Return GetChainLinkOptions("Agreement, CurrentFeeType");
+EndFunction
+
+Function ChangeTradeAgentFeeTypeByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentFeeType;
+	EndIf;
+	
+	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
+		
+	If ValueIsFilled(AgreementInfo.TradeAgentFeeType)  Then
+		Return AgreementInfo.TradeAgentFeeType;
+	EndIf;
+	
+	Return Options.CurrentFeeType;
+EndFunction
+#EndRegion
+
+#Region CHANGE_TRADE_AGENT_FEE_PERCENT_BY_AGREEMENT
+
+Function ChangeTradeAgentFeePercentByAgreementOptions() Export
+	Return GetChainLinkOptions("Agreement, FeeType, CurrentPercent");
+EndFunction
+
+Function ChangeTradeAgentFeePercentByAgreementExecute(Options) Export
+	If Options.FeeType <> PredefinedValue("Enum.TradeAgentFeeTypes.Percent") Then
+		Return 0;
+	EndIf;
+	
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentPercent;
+	EndIf;
+	
+	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
+		
+	If ValueIsFilled(AgreementInfo.TradeAgentFeePercent)  Then
+		Return AgreementInfo.TradeAgentFeePercent;
+	EndIf;
+	
+	Return Options.CurrentPercent;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_TRADE_AGENT_FEE_PERCENT_BY_AMOUNT
+
+Function ChangeTradeAgentFeePercentByAmountOptions() Export
+	Return GetChainLinkOptions("FeeType, FeeAmount, TotalAmount");
+EndFunction
+
+Function ChangeTradeAgentFeePercentByAmountExecute(Options) Export
+	If Options.FeeType <> PredefinedValue("Enum.TradeAgentFeeTypes.Percent") Then
+		Return 0;
+	EndIf;
+	
+	_TotalAmount    = ?(ValueIsFilled(Options.TotalAmount)   , Options.TotalAmount   , 0);
+	_FeeAmount      = ?(ValueIsFilled(Options.FeeAmount)     , Options.FeeAmount     , 0);
+	
+	If (_TotalAmount / 100) <> 0 Then
+		Return _FeeAmount / (_TotalAmount / 100);
+	EndIf;
+	
+	Return 0;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_TRADE_AGENT_FEE_AMOUNT_BY_TRADE_AGENT_FEE_TYPE
+
+Function ChangeTradeAgentFeeAmountByTradeAgentFeeTypeOptions() Export
+	Return GetChainLinkOptions("Price, ConsignorPrice, Quantity, Percent, TotalAmount, FeeType");
+EndFunction
+
+Function ChangeTradeAgentFeeAmountByTradeAgentFeeTypeExecute(Options) Export
+	_Price          = ?(ValueIsFilled(Options.Price)         , Options.Price         , 0);
+	_ConsignorPrice = ?(ValueIsFilled(Options.ConsignorPrice), Options.ConsignorPrice, 0);
+	_Quantity       = ?(ValueIsFilled(Options.Quantity)      , Options.Quantity      , 0);
+	_TotalAmount    = ?(ValueIsFilled(Options.TotalAmount)   , Options.TotalAmount   , 0);
+	_Percent        = ?(ValueIsFilled(Options.Percent)       , Options.Percent       , 0);
+	
+	If Options.FeeType = PredefinedValue("Enum.TradeAgentFeeTypes.DifferencePriceConsignorPrice") Then
+		Return (_Price - _ConsignorPrice) * _Quantity;
+	ElsIf Options.FeeType = PredefinedValue("Enum.TradeAgentFeeTypes.Percent") Then
+		Return (_TotalAmount / 100) * _Percent;
+	Else
+		Return 0;
+	EndIf;
 EndFunction
 
 #EndRegion

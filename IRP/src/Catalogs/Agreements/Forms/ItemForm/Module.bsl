@@ -80,6 +80,10 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Form.Items.CurrencyMovementTypeCurrency.Visible = Object.UseCreditLimit And IsCustomer And Not IsStandard;
 		Form.Items.PaymentTerm.Visible = ApArByDocuments And (IsCustomer Or IsVendor) And Not IsStandard;
 	EndIf;
+	
+	Form.Items.TradeAgentFeeType.Visible = IsConsignor Or IsTradeAgent;
+	Form.Items.TradeAgentFeePercent.Visible = (IsConsignor Or IsTradeAgent)
+		And Object.TradeAgentFeeType = PredefinedValue("Enum.TradeAgentFeeTypes.Percent");
 EndProcedure
 
 #EndRegion
@@ -180,6 +184,19 @@ Procedure TypeOnChange(Item)
 	If Object.Type <> PredefinedValue("Enum.AgreementTypes.Customer") Then
 		Object.UseCreditLimit = False;
 		Object.CreditLimitAmount = 0;
+	EndIf;
+	
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region TRADE_AGENT_FEE_TYPE
+
+&AtClient
+Procedure TradeAgentFeeTypeOnChange(Item)
+	If Object.TradeAgentFeeType <> PredefinedValue("Enum.TradeAgentFeeTypes.Percent") Then
+		Object.TradeAgentFeePercent = 0;
 	EndIf;
 	
 	SetVisibilityAvailability(Object, ThisObject);

@@ -172,6 +172,7 @@ EndProcedure
 Function GetObjectPropertyNamesBeforeChange()
 	Return "Date,
 		|Company,
+		|TradeAgentFeeType,
 		|Store,
 		|Partner,
 		|Agreement,
@@ -1665,6 +1666,39 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_CONSIGNOR_PRICE
+
+// ItemList.ConsignorPrice
+Procedure ItemListConsignorPriceOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListConsignorPriceOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_TRADE_AGENT_FEE_PERCENT
+
+// ItemList.TradeAgentFeePercent
+Procedure ItemListTradeAgentFeePercentOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListTradeAgentFeePercentOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_TRADE_AGENT_FEE_AMOUNT
+
+// ItemList.TradeAgentFeeAmount
+Procedure ItemListTradeAgentFeeAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListTradeAgentFeeAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
 #Region ITEM_LIST_PRICE
 
 // ItemList.Price
@@ -2587,6 +2621,27 @@ EndProcedure
 
 Procedure OnSetCompanyNotify(Parameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region TRADE_AGENT_FEE_TYPE
+
+Procedure TradeAgentFeeTypeOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	FetchFromCacheBeforeChange_Object("TradeAgentFeeType", FormParameters);
+	FormParameters.EventCaller = "TradeAgentFeeTypeOnUserChange";
+
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.TradeAgentFeeTypeOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetTradeAgentFeeTypeNotify(Parameters) Export
+	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
 #EndRegion

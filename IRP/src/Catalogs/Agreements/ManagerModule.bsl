@@ -188,7 +188,9 @@ Function GetAgreementInfo(Agreement) Export
 	|	Table.CurrencyMovementType.Currency AS Currency,
 	|	Table.CurrencyMovementType.Source AS Source,
 	|	Table.CurrencyMovementType AS CurrencyMovementType,
-	|	Table.ApArPostingDetail
+	|	Table.ApArPostingDetail,
+	|	Table.TradeAgentFeeType,
+	|	Table.TradeAgentFeePercent
 	|FROM
 	|	Catalog.Agreements AS Table
 	|WHERE

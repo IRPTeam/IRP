@@ -848,6 +848,7 @@
   <enums>Enum.SalesReturnTransactionTypes</enums>
   <enums>Enum.PurchaseReturnTransactionTypes</enums>
   <enums>Enum.InventoryOrigingTypes</enums>
+  <enums>Enum.TradeAgentFeeTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

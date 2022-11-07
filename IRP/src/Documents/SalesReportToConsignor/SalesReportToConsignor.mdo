@@ -237,6 +237,22 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="b4f68fea-567b-4dd8-870a-683fb53ec527">
+    <name>TradeAgentFeeType</name>
+    <synonym>
+      <key>en</key>
+      <value>Trade agent fee type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.TradeAgentFeeTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="ce6a23c1-3085-4a2e-9f48-d2c55d03a430">
     <name>DocumentForm</name>
     <synonym>
@@ -526,6 +542,34 @@
       </synonym>
       <type>
         <types>DocumentRef.SalesInvoice</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9895b518-cf6a-437b-91ce-802c66ec86c0">
+      <name>TradeAgentFeePercent</name>
+      <synonym>
+        <key>en</key>
+        <value>Trade agent fee percent</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typePercent</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9549ab5c-ff84-4997-976d-7a5990ddc1f2">
+      <name>TradeAgentFeeAmount</name>
+      <synonym>
+        <key>en</key>
+        <value>Trade agent fee amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

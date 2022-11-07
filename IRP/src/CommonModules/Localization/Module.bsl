@@ -804,6 +804,12 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_031", NStr("en = 'Do you want to continue job?'", Lang));
 	Strings.Insert("InfoMessage_032", NStr("en = 'Do you want to pause job?'", Lang));
 	Strings.Insert("InfoMessage_033", NStr("en = 'Do you want to stop job?'", Lang));
+	
+	Strings.Insert("InfoMessage_Payment", NStr("en = 'Payment (+)'", Lang));
+	Strings.Insert("InfoMessage_SessionIsClosed", NStr("en = 'Session is closed'", Lang));
+	Strings.Insert("InfoMessage_CloseSession", NStr("en = 'Close session'", Lang));
+	Strings.Insert("InfoMessage_CancelSession", NStr("en = 'Cancel session'", Lang));
+	
 #EndRegion
 
 #Region QuestionToUser

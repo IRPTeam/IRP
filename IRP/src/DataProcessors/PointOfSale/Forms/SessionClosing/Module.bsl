@@ -37,12 +37,12 @@ Function GetTotalAtPOS()
 	|	AND Currency = &Currency
 	|	AND CurrencyMovementType = &CurrencyMovementType) AS R3010B_CashOnHandBalance";
 	
-	Query.SetParameter("Company", Company);
-	Query.SetParameter("Currency", Currency);
-	Query.SetParameter("Branch", Branch);
-	Query.SetParameter("Account", CashAccount);
+	Query.SetParameter("Company", ThisObject.Company);
+	Query.SetParameter("Currency", ThisObject.Currency);
+	Query.SetParameter("Branch", ThisObject.Branch);
+	Query.SetParameter("Account", ThisObject.CashAccount);
 	
-	LegalCurrencies = Catalogs.Companies.GetLegalCurrencies(Company);
+	LegalCurrencies = Catalogs.Companies.GetLegalCurrencies(ThisObject.Company);
 	If LegalCurrencies.Count() Then
 		Query.SetParameter("CurrencyMovementType", LegalCurrencies[0].CurrencyMovementType);
 	Else

@@ -103,7 +103,7 @@ EndProcedure
 &AtClient
 Procedure CloseSession(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Title", "Close session");
+	FormParameters.Insert("Title", R().InfoMessage_CloseSession);
 	FormParameters.Insert("Currency", Object.Currency);
 	FormParameters.Insert("Store", ThisObject.Store);
 	FormParameters.Insert("Workstation", Object.Workstation);
@@ -132,7 +132,7 @@ EndProcedure
 &AtClient
 Procedure CancelSession(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Title", "Cancel session");
+	FormParameters.Insert("Title", R().InfoMessage_CancelSession);
 	FormParameters.Insert("Currency", Object.Currency);
 	FormParameters.Insert("Store", ThisObject.Store);
 	FormParameters.Insert("Workstation", Object.Workstation);
@@ -695,13 +695,13 @@ Procedure EnabledPaymentButton()
 		ColorRed = New Color(255, 0, 0);
 		BackColorRed = New Color(255, 240, 240);
 		If ValueIsFilled(Object.ConsolidatedRetailSales) Then
-			Items.qPayment.Title = "Payment (+)";
+			Items.qPayment.Title = R().InfoMessage_Payment;
 			Items.qPayment.TextColor = ColorGreen;
 			Items.qPayment.BorderColor = ColorGreen;
 			Items.qPayment.BackColor = BackColorGreen;
 		Else
 			Items.qPayment.Enabled = False;
-			Items.qPayment.Title = "Session is closed";
+			Items.qPayment.Title = R().InfoMessage_SessionIsClosed;
 			Items.qPayment.TextColor = ColorRed;
 			Items.qPayment.BorderColor = ColorRed;
 			Items.qPayment.BackColor = BackColorRed;
@@ -848,12 +848,11 @@ Procedure UpdateMoneyTransfers(Command)
 EndProcedure
 
 &AtClient
-Async Procedure CreateCashOut(Command)
-	Result = Await InputNumberAsync(0, "CashOut amount", 10, 2);
-	If Result <> Undefined Then
-		FillingData = GetFillingDataMoneyTransfer(Result);
-		OpenForm("Document.MoneyTransfer.ObjectForm", New Structure("FillingValues", FillingData), , New UUID());
-	EndIf;
+Procedure CreateCashOut(Command)
+	OpenForm("DataProcessor.PointOfSale.Form.CashOut", 
+			New Structure("FillingData", GetFillingDataMoneyTransfer(0)), , 
+			UUID, , , , 
+			FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
 &AtServer

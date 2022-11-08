@@ -81,7 +81,12 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Form.Items.PaymentTerm.Visible = ApArByDocuments And (IsCustomer Or IsVendor) And Not IsStandard;
 	EndIf;
 	
-	Form.Items.TradeAgentFeeType.Visible = IsConsignor Or IsTradeAgent;
+	Form.Items.TradeAgentFeeType.Visible    = IsConsignor Or IsTradeAgent;
+	Form.Items.TradeAgentFeeItem.Visible    = IsConsignor Or IsTradeAgent;
+	Form.Items.TradeAgentFeeItemKey.Visible = IsConsignor Or IsTradeAgent;
+	Form.Items.TradeAgentFeeProfitLossCenter.Visible = IsConsignor Or IsTradeAgent;
+	Form.Items.TradeAgentFeeExpenseRevenueType.Visible = IsConsignor Or IsTradeAgent;
+	
 	Form.Items.TradeAgentFeePercent.Visible = (IsConsignor Or IsTradeAgent)
 		And Object.TradeAgentFeeType = PredefinedValue("Enum.TradeAgentFeeTypes.Percent");
 EndProcedure
@@ -154,6 +159,27 @@ EndProcedure
 
 #EndRegion
 
+#Region _ITEM
+
+&AtClient
+Procedure TradeAgentFeeItemStartChoice(Item, ChoiceData, StandardProcessing)
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type", PredefinedValue("Enum.ItemTypes.Service"),DataCompositionComparisonType.Equal));
+	DocumentsClient.ItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+&AtClient
+Procedure TradeAgentFeeItemEditTextChange(Item, Text, StandardProcessing)
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type", PredefinedValue("Enum.ItemTypes.Service"), ComparisonType.Equal));
+	DocumentsClient.ItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, ArrayOfFilters);
+EndProcedure
+
+#EndRegion
+
 #Region PARTNER_SEGMENT
 
 &AtClient
@@ -184,6 +210,16 @@ Procedure TypeOnChange(Item)
 	If Object.Type <> PredefinedValue("Enum.AgreementTypes.Customer") Then
 		Object.UseCreditLimit = False;
 		Object.CreditLimitAmount = 0;
+	EndIf;
+	
+	If Object.Type <> PredefinedValue("Enum.AgreementTypes.TradeAgent") 
+		Or Object.Type <> PredefinedValue("Enum.AgreementTypes.Consignor") Then
+		Object.TradeAgentFeeItem    = Undefined;
+		Object.TradeAgentFeeItemKey = Undefined;
+		Object.TradeAgentFeePercent = 0;
+		Object.TradeAgentFeeType    = Undefined;
+		Object.TradeAgentFeeProfitLossCenter  = Undefined;
+		Object.TradeAgentFeeExpenseRevenueType = Undefined;
 	EndIf;
 	
 	SetVisibilityAvailability(Object, ThisObject);

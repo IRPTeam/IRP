@@ -1557,6 +1557,7 @@
       <types>DocumentRef.WorkOrder</types>
       <types>DocumentRef.SalesOrder</types>
       <types>DocumentRef.WorkSheet</types>
+      <types>DocumentRef.SalesReportToConsignor</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

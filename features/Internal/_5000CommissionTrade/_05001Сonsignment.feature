@@ -75,20 +75,7 @@ Scenario: _05002 preparation (consignment)
 		And I execute 1C:Enterprise script at server
  			| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Setting for Company
-		Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c"
-		And I move to "Landed cost" tab
-		And I click Select button of "Currency movement type" field
-		And I go to line in "List" table
-			| 'Currency' | 'Description'    |
-			| 'TRY'      | 'Local currency' |
-		And I select current line in "List" table
-		And I move to "Comission trading" tab
-		And I click Select button of "Trade agent store" field
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Trade agent store' |
-		And I select current line in "List" table
-		And I click "Save and close" button
+		When settings for Company (commission trade)
 	And I close all client application windows
 
 Scenario: _050002 check preparation

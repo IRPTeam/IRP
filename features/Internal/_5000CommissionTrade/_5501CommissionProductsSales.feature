@@ -427,13 +427,8 @@ Scenario: _050010 create SI (commission products sales)
 			And I activate "Use shipment confirmation" field in "ItemList" table
 			And I remove "Use shipment confirmation" checkbox in "ItemList" table
 			And I finish line editing in "ItemList" table		
-	* Post SI and check consignor batches
+	* Post SI
 		And I click "Post" button
-		And I move to "Consignor batches" tab
-		And "ConsignorBatches" table became equal
-			| 'Store'    | 'Item key' | 'Batch'   | 'Quantity' |
-			| 'Store 02' | 'UNIQ'     | '$$PI3$$' | '2,000'    |
-			| 'Store 02' | 'S/Yellow' | '$$PI3$$' | '4,000'    |
 		And I delete "$$NumberSI10$$" variable
 		And I delete "$$SI10$$" variable
 		And I delete "$$DateSI10$$" variable

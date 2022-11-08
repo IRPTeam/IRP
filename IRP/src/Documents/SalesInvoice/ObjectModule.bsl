@@ -60,7 +60,6 @@ Procedure Filling_BasedOn(FillingData)
 	EndDo;
 EndProcedure
 
-
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If DocumentsServer.CheckItemListStores(ThisObject) Then
 		Cancel = True;

@@ -10,6 +10,7 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 			ArrayOfBasises.Add(Basis);
 		EndIf;	
 	EndDo;
+	
 	If ArrayOfBasises.Count() Then
 		FormParameters = New Structure();
 		FormParameters.Insert("Filter", New Structure("Basises, Ref", ArrayOfBasises, PredefinedValue("Document.SalesInvoice.EmptyRef")));

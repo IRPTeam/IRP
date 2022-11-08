@@ -1754,7 +1754,8 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			// sales - consignor/own stocks
 			IsSales_ConsignorStocks = False; 
 			IsSales_OwnStocks = False; 
-			If TypeOf(Row.Document) = Type("DocumentRef.SalesInvoice") Then
+			If TypeOf(Row.Document) = Type("DocumentRef.SalesInvoice") 
+				Or TypeOf(Row.Document) = Type("DocumentRef.RetailSalesReceipt") Then
 				If ValueIsFilled(Row.BatchConsignor) Then
 					IsSales_ConsignorStocks = True;
 				Else

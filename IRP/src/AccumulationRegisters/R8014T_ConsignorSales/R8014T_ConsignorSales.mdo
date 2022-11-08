@@ -154,6 +154,20 @@
     <fillChecking>ShowError</fillChecking>
     <useInTotals>true</useInTotals>
   </dimensions>
+  <dimensions uuid="807db871-dfb1-4c7c-b104-da4ccecd30c7">
+    <name>SerialLotNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Serial lot number</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.SerialLotNumbers</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
   <dimensions uuid="037e474a-bbc9-45ba-8859-951efed221f6">
     <name>Unit</name>
     <synonym>

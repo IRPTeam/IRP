@@ -74,7 +74,7 @@ Function GetConsignorSales(Parameters) Export
 	|	ConsignorSales.AmountTurnover AS TotalAmount,
 	|	ConsignorSales.SalesInvoice,
 	|	ConsignorSales.PurchaseInvoice,
-	|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
+	|	ConsignorSales.SerialLotNumber AS SerialLotNumber,
 	|	0 AS SumColumn,
 	|	TRUE AS Use,
 	|	CASE

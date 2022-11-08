@@ -25,15 +25,48 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	ItemList.ItemKey AS ItemKey,
 	|	ItemList.Store AS Store,
 	|	ItemList.QuantityInBaseUnit AS Quantity
+	|INTO tmpItemList
 	|FROM
 	|	Document.SalesInvoice.ItemList AS ItemList
 	|WHERE
-	|	ItemList.Ref = &Ref";
+	|	ItemList.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SerialLotNumbers.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.Quantity
+	|INTO tmpSerialLotNumbers
+	|FROM
+	|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
+	|WHERE
+	|	SerialLotNumbers.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpItemList.Key,
+	|	tmpItemList.InventoryOrigin,
+	|	tmpItemList.Company,
+	|	tmpItemList.ItemKey,
+	|	tmpItemList.Store,
+	|	CASE
+	|		WHEN tmpSerialLotNumbers.SerialLotNumber.Ref IS NULL
+	|			THEN tmpItemList.Quantity
+	|		ELSE tmpSerialLotNumbers.Quantity
+	|	END AS Quantity,
+	|	ISNULL(tmpSerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
+	|FROM
+	|	tmpItemList AS tmpItemList
+	|		LEFT JOIN tmpSerialLotNumbers AS tmpSerialLotNumbers
+	|		ON tmpItemList.Key = tmpSerialLotNumbers.Key";
 	Query.SetParameter("Ref", Ref);
 	QueryResult = Query.Execute();
 	ItemListTable = QueryResult.Unload();
 	ConsignorBatches = CommissionTradeServer.GetRegistrateConsignorBatches(Parameters.Object, ItemListTable);
-
+	
+	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = "SELECT * INTO ConsignorBatches FROM &T1 AS T1";
 	Query.SetParameter("T1", ConsignorBatches);
@@ -1199,12 +1232,15 @@ Function R8012B_ConsignorInventory()
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.ItemKey,
-		|	ItemList.Partner,
-		|	ItemList.Agreement,
-		|	ItemList.Quantity
+		|	ConsignorBatches.SerialLotNumber,
+		|	ConsignorBatches.Batch.Partner AS Partner,
+		|	ConsignorBatches.Batch.Agreement AS Agreement,
+		|	ConsignorBatches.Quantity
 		|INTO R8012B_ConsignorInventory
 		|FROM
 		|	ItemList AS ItemList
+		|	LEFT JOIN ConsignorBatches AS ConsignorBatches ON
+		|	ItemList.Key = ConsignorBatches.Key
 		|WHERE
 		|	ItemList.IsSales
 		|	AND ItemList.IsConsignorStocks";		
@@ -1218,6 +1254,7 @@ Function R8013B_ConsignorBatchWiseBalance()
 		|	ItemList.Company,
 		|	ConsignorBatches.Batch,
 		|	ConsignorBatches.ItemKey,
+		|	ConsignorBatches.SerialLotNumber,
 		|	ConsignorBatches.Store,
 		|	ConsignorBatches.Quantity
 		|INTO R8013B_ConsignorBatchWiseBalance
@@ -1241,6 +1278,7 @@ Function R8014T_ConsignorSales()
 		|	ItemList.Invoice AS SalesInvoice,
 		|	ConsignorBatches.Batch AS PurchaseInvoice,
 		|	ItemList.ItemKey,
+		|	ConsignorBatches.SerialLotNumber,
 		|	ItemList.Unit,
 		|	ItemList.Price,
 		|	ItemList.PriceType,
@@ -1271,6 +1309,7 @@ Function R8014T_ConsignorSales()
 		|		AND ConsignorSales.Agreement = ConsignorPrices.Agreement
 		|		AND ConsignorSales.PurchaseInvoice = ConsignorPrices.PurchaseInvoice
 		|		AND ConsignorSales.ItemKey = ConsignorPrices.ItemKey
+		|		AND ConsignorSales.SerialLotNumber = ConsignorPrices.SerialLotNumber
 		|		AND ConsignorSales.Currency = ConsignorPrices.Currency
 		|		AND ConsignorPrices.CurrencyMovementType = Value(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)";
 EndFunction

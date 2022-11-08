@@ -22,15 +22,48 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	ItemList.ItemKey AS ItemKey,
 	|	ItemList.Ref.StoreSender AS Store,
 	|	ItemList.QuantityInBaseUnit AS Quantity
+	|INTO tmpItemList
 	|FROM
 	|	Document.InventoryTransfer.ItemList AS ItemList
 	|WHERE
-	|	ItemList.Ref = &Ref";
+	|	ItemList.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SerialLotNumbers.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.Quantity
+	|INTO tmpSerialLotNumbers
+	|FROM
+	|	Document.InventoryTransfer.SerialLotNumbers AS SerialLotNumbers
+	|WHERE
+	|	SerialLotNumbers.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpItemList.Key,
+	|	tmpItemList.InventoryOrigin,
+	|	tmpItemList.Company,
+	|	tmpItemList.ItemKey,
+	|	tmpItemList.Store,
+	|	CASE
+	|		WHEN tmpSerialLotNumbers.SerialLotNumber.Ref IS NULL
+	|			THEN tmpItemList.Quantity
+	|		ELSE tmpSerialLotNumbers.Quantity
+	|	END AS Quantity,
+	|	ISNULL(tmpSerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
+	|FROM
+	|	tmpItemList AS tmpItemList
+	|		LEFT JOIN tmpSerialLotNumbers AS tmpSerialLotNumbers
+	|		ON tmpItemList.Key = tmpSerialLotNumbers.Key";
 	Query.SetParameter("Ref", Ref);
 	QueryResult = Query.Execute();
 	ItemListTable = QueryResult.Unload();
 	ConsignorBatches = CommissionTradeServer.GetRegistrateConsignorBatches(Parameters.Object, ItemListTable);
-
+	
+	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = "SELECT * INTO ConsignorBatches FROM &T1 AS T1";
 	Query.SetParameter("T1", ConsignorBatches);
@@ -691,6 +724,7 @@ Function R8013B_ConsignorBatchWiseBalance()
 		|	ItemList.Company,
 		|	ConsignorBatches.Batch,
 		|	ConsignorBatches.ItemKey,
+		|	ConsignorBatches.SerialLotNumber,
 		|	ConsignorBatches.Store,
 		|	ConsignorBatches.Quantity
 		|INTO R8013B_ConsignorBatchWiseBalance
@@ -708,6 +742,7 @@ Function R8013B_ConsignorBatchWiseBalance()
 		|	ItemList.Company,
 		|	ConsignorBatches.Batch,
 		|	ConsignorBatches.ItemKey,
+		|	ConsignorBatches.SerialLotNumber,
 		|	ItemList.StoreReceiver,
 		|	ConsignorBatches.Quantity
 		|

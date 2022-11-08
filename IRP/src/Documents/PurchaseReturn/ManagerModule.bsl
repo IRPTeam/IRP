@@ -24,11 +24,45 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	ItemList.Store AS Store,
 	|	ItemList.ItemKey AS ItemKey,
 	|	ItemList.Quantity AS Quantity
+	|INTO tmpItemList
 	|FROM
 	|	Document.PurchaseReturn.ItemList AS ItemLIst
 	|WHERE
 	|	ItemList.Ref = &Ref
-	|	AND ItemLIst.Ref.TransactionType = VALUE(Enum.PurchaseReturnTransactionTypes.ReturnToConsignor)";
+	|	AND ItemLIst.Ref.TransactionType = VALUE(Enum.PurchaseReturnTransactionTypes.ReturnToConsignor)
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SerialLotNumbers.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.Quantity
+	|INTO tmpSerialLotNumbers
+	|FROM
+	|	Document.PurchaseReturn.SerialLotNumbers AS SerialLotNumbers
+	|WHERE
+	|	SerialLotNumbers.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpItemList.Key,
+	|	tmpItemList.Company,
+	|	tmpItemList.Partner,
+	|	tmpItemList.Agreement,
+	|	tmpItemList.Batch,
+	|	tmpItemList.Store,
+	|	tmpItemList.ItemKey,
+	|	CASE
+	|		WHEN tmpSerialLotNumbers.SerialLotNumber.Ref IS NULL
+	|			THEN tmpItemList.Quantity
+	|		ELSE tmpSerialLotNumbers.Quantity
+	|	END AS Quantity,
+	|	ISNULL(tmpSerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
+	|FROM
+	|	tmpItemList AS tmpItemList
+	|		LEFT JOIN tmpSerialLotNumbers AS tmpSerialLotNumbers
+	|		ON tmpItemList.Key = tmpSerialLotNumbers.Key";
 	Query.SetParameter("Ref", Ref);
 	ItemListTable = Query.Execute().Unload();
 	ConsignorBatches = CommissionTradeServer.GetTableConsignorBatchWiseBalanceForPurchaseReturn(Parameters.Object, ItemListTable);
@@ -789,12 +823,15 @@ Function R8012B_ConsignorInventory()
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.ItemKey,
+		|	ConsignorBatches.SerialLotNumber,
 		|	ItemList.Partner,
 		|	ItemList.Agreement,
-		|	SUM(ItemList.Quantity) AS Quantity
+		|	SUM(ConsignorBatches.Quantity) AS Quantity
 		|INTO R8012B_ConsignorInventory
 		|FROM
 		|	ItemList AS ItemList
+		|	LEFT JOIN ConsignorBatches AS ConsignorBatches ON
+		|	ItemList.Key = ConsignorBatches.Key
 		|WHERE
 		|	NOT ItemList.IsService
 		|	AND ItemList.IsReturnToConsignor
@@ -803,6 +840,7 @@ Function R8012B_ConsignorInventory()
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.ItemKey,
+		|	ConsignorBatches.SerialLotNumber,
 		|	ItemList.Partner,
 		|	ItemList.Agreement";
 EndFunction
@@ -815,6 +853,7 @@ Function R8013B_ConsignorBatchWiseBalance()
 		|	ItemList.Company,
 		|	ConsignorBatches.Batch,
 		|	ConsignorBatches.ItemKey,
+		|	ConsignorBatches.SerialLotNumber,
 		|	ConsignorBatches.Store,
 		|	ConsignorBatches.Quantity
 		|INTO R8013B_ConsignorBatchWiseBalance

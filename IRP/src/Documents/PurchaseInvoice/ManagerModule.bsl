@@ -1179,21 +1179,28 @@ Function R8012B_ConsignorInventory()
 		|	ItemList.ItemKey,
 		|	ItemList.Partner,
 		|	ItemList.Agreement,
-		|	SUM(ItemList.Quantity) AS Quantity
+		|	SUM(case
+		|		when SerialLotNumbers.SerialLotNumber.Ref IS NULL
+		|			Then ItemList.Quantity
+		|		else SerialLotNumbers.Quantity
+		|	end) AS Quantity,
+		|	SerialLotNumbers.SerialLotNumber
 		|INTO R8012B_ConsignorInventory
 		|FROM
 		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		|		ON ItemList.Key = SerialLotNumbers.Key
 		|WHERE
 		|	NOT ItemList.IsService
 		|	AND ItemList.IsReceiptFromConsignor
-		|
 		|GROUP BY
 		|	VALUE(AccumulationRecordType.Receipt),
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.ItemKey,
 		|	ItemList.Partner,
-		|	ItemList.Agreement";
+		|	ItemList.Agreement,
+		|	SerialLotNumbers.SerialLotNumber";
 EndFunction
 
 Function R8013B_ConsignorBatchWiseBalance()
@@ -1205,10 +1212,17 @@ Function R8013B_ConsignorBatchWiseBalance()
 		|	ItemList.Invoice AS Batch,
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
-		|	SUM(ItemList.Quantity) AS Quantity
+		|	SUM(case
+		|		when SerialLotNumbers.SerialLotNumber.Ref IS NULL
+		|			Then ItemList.Quantity
+		|		ELSE SerialLotNumbers.Quantity
+		|	end) AS Quantity,
+		|	SerialLotNumbers.SerialLotNumber
 		|INTO R8013B_ConsignorBatchWiseBalance
 		|FROM
 		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		|		ON SerialLotNumbers.Key = ItemList.Key
 		|WHERE
 		|	NOT ItemList.IsService
 		|	AND ItemList.IsReceiptFromConsignor
@@ -1218,7 +1232,8 @@ Function R8013B_ConsignorBatchWiseBalance()
 		|	ItemList.Company,
 		|	ItemList.Invoice,
 		|	ItemList.Store,
-		|	ItemList.ItemKey";
+		|	ItemList.ItemKey,
+		|	SerialLotNumbers.SerialLotNumber";
 EndFunction
 
 Function R8015T_ConsignorPrices()
@@ -1231,10 +1246,13 @@ Function R8015T_ConsignorPrices()
 		|	ItemList.Invoice AS PurchaseInvoice,
 		|	ItemList.ItemKey,
 		|	ItemList.Currency,
-		|	AVG(ItemList.Price) AS Price
+		|	AVG(ItemList.Price) AS Price,
+		|	SerialLotNumbers.SerialLotNumber
 		|INTO R8015T_ConsignorPrices
 		|FROM
 		|	ItemList AS ItemList
+		|	LEFT JOIN SerialLotNumbers AS SerialLotNumbers ON
+		|	SerialLotNumbers.Key = ItemList.Key
 		|WHERE
 		|	ItemList.IsReceiptFromConsignor
 		|GROUP BY
@@ -1244,7 +1262,8 @@ Function R8015T_ConsignorPrices()
 		|	ItemList.Agreement,
 		|	ItemList.Invoice,
 		|	ItemList.ItemKey,
-		|	ItemList.Currency";
+		|	ItemList.Currency,
+		|	SerialLotNumbers.SerialLotNumber";
 EndFunction
 
 #Region Accounting

@@ -420,6 +420,7 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	SettersMap.Insert("ItemList.PriceType"          , "SetItemListPriceType");
 	SettersMap.Insert("ItemList.Price"              , "SetItemListPrice");
 	SettersMap.Insert("ItemList.ConsignorPrice"     , "SetItemListConsignorPrice");
+	SettersMap.Insert("ItemList.TradeAgentFeePercent", "SetItemListTradeAgentFeePercent");
 	SettersMap.Insert("ItemList.DontCalculateRow"   , "SetItemListDontCalculateRow");
 	SettersMap.Insert("ItemList.Quantity"           , "SetItemListQuantity");
 	SettersMap.Insert("ItemList.Store"              , "SetItemListStore");
@@ -2278,10 +2279,12 @@ Function BindTradeAgentFeeType(Parameters)
 	DataPath = "TradeAgentFeeType";
 	Binding = New Structure();
 	Binding.Insert("SalesReportFromTradeAgent", 
-		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
+		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType,
+		|StepItemListChangeTradeAgentFeePercentByAgreement");
 	
 	Binding.Insert("SalesReportToConsignor",
-		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
+		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType,
+		|StepItemListChangeTradeAgentFeePercentByAgreement");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction

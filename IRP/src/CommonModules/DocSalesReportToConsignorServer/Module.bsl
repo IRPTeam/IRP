@@ -76,7 +76,12 @@ Function GetConsignorSales(Parameters) Export
 	|	ConsignorSales.PurchaseInvoice,
 	|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
 	|	0 AS SumColumn,
-	|	TRUE AS Use
+	|	TRUE AS Use,
+	|	CASE
+	|		WHEN ConsignorSales.Agreement.TradeAgentFeeType = VALUE(Enum.TradeAgentFeeTypes.Percent)
+	|			then ConsignorSales.Agreement.TradeAgentFeePercent
+	|		ELSE 0
+	|	END AS TradeAgentFeePercent
 	|FROM
 	|	AccumulationRegister.R8014T_ConsignorSales.Turnovers(BEGINOFPERIOD(&StartDate, DAY), ENDOFPERIOD(&EndDate, DAY),,
 	|		Company = &Company

@@ -208,6 +208,22 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="5bf2d270-ce1c-4066-b993-4f30fe75a4e1">
+    <name>TradeAgentFeeType</name>
+    <synonym>
+      <key>en</key>
+      <value>Trade agent fee type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.TradeAgentFeeTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="2d248c08-a16f-49b2-b521-440bf48ad9b1">
     <name>DocumentForm</name>
     <synonym>
@@ -322,6 +338,20 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="3ca4e4d3-fbdf-4a73-92a9-2c706e2c2bde">
+      <name>ConsignorPrice</name>
+      <synonym>
+        <key>en</key>
+        <value>Consignor price</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typePrice</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="017cc8bf-1028-40fc-9bf1-4320d90548fa">
       <name>Price</name>
@@ -504,6 +534,34 @@
       </synonym>
       <type>
         <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9ca307f8-d5e1-4685-bf43-75ece251e05b">
+      <name>TradeAgentFeePercent</name>
+      <synonym>
+        <key>en</key>
+        <value>Trade agent fee percent</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typePercent</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b0af120f-4a51-404a-9c07-f513b540654d">
+      <name>TradeAgentFeeAmount</name>
+      <synonym>
+        <key>en</key>
+        <value>Trade agent fee amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

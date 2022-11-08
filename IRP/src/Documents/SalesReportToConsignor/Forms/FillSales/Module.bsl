@@ -36,7 +36,7 @@ EndProcedure
 Function PutSalesToTempStorage()
 	SalesTable = ThisObject.Sales.Unload().Copy(New Structure("Use", True));	
 	Address = PutToTempStorage(SalesTable, ThisObject.OwnerUUID);
-	GroupColumn = "Item, ItemKey, Unit, PriceType, ConsignorPrice, Price, Quantity, NetAmount, TotalAmount, SalesInvoice, PurchaseInvoice, SerialLotNumber";
+	GroupColumn = "Item, ItemKey, Unit, PriceType, ConsignorPrice, TradeAgentFeePercent, Price, Quantity, NetAmount, TotalAmount, SalesInvoice, PurchaseInvoice, SerialLotNumber";
 	SumColumn = "SumColumn";
 	Return New Structure("Address, GroupColumn, SumColumn", Address, GroupColumn, SumColumn);
 EndFunction

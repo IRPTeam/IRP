@@ -3302,18 +3302,18 @@ Function BindAgreement(Parameters)
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepChangeCompanyByAgreement,
 		|StepChangeCurrencyByAgreement,
-		|StepItemListChangePriceTypeByAgreement,
+		//|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
-		|StepChangeTaxRate_AgreementInHeader,
+		//|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeTradeAgentFeePercentByAgreement,
 		|StepChangeTradeAgentFeeTypeByAgreement");
 	
 	Binding.Insert("SalesReportToConsignor",
 		"StepChangeCompanyByAgreement,
 		|StepChangeCurrencyByAgreement,
-		|StepItemListChangePriceTypeByAgreement,
+		//|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
-		|StepChangeTaxRate_AgreementInHeader,
+		//|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeTradeAgentFeePercentByAgreement,
 		|StepChangeTradeAgentFeeTypeByAgreement");
 	

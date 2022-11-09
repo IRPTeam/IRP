@@ -66,6 +66,9 @@
         <userVisible>
           <common>true</common>
         </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>List.Code</segments>
+        </dataPath>
         <extendedTooltip>
           <name>CodeExtendedTooltip</name>
           <id>40</id>
@@ -117,6 +120,9 @@
         <userVisible>
           <common>true</common>
         </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>List.Description</segments>
+        </dataPath>
         <extendedTooltip>
           <name>DescriptionExtendedTooltip</name>
           <id>24</id>
@@ -168,6 +174,9 @@
         <userVisible>
           <common>true</common>
         </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>List.ItemType</segments>
+        </dataPath>
         <defaultItem>true</defaultItem>
         <extendedTooltip>
           <name>ItemTypeExtendedTooltip</name>
@@ -216,6 +225,9 @@
         <userVisible>
           <common>true</common>
         </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>List.Ref</segments>
+        </dataPath>
         <extendedTooltip>
           <name>RefExtendedTooltip</name>
           <id>27</id>

@@ -80,6 +80,8 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.ItemListTradeAgentFeePercent.Visible = 
+		Object.TradeAgentFeeType = PredefinedValue("Enum.TradeAgentFeeTypes.Percent");
 EndProcedure
 
 #EndRegion

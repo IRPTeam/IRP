@@ -3302,18 +3302,14 @@ Function BindAgreement(Parameters)
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepChangeCompanyByAgreement,
 		|StepChangeCurrencyByAgreement,
-		//|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
-		//|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeTradeAgentFeePercentByAgreement,
 		|StepChangeTradeAgentFeeTypeByAgreement");
 	
 	Binding.Insert("SalesReportToConsignor",
 		"StepChangeCompanyByAgreement,
 		|StepChangeCurrencyByAgreement,
-		//|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
-		//|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeTradeAgentFeePercentByAgreement,
 		|StepChangeTradeAgentFeeTypeByAgreement");
 	
@@ -11068,7 +11064,7 @@ Procedure SetReadOnlyProperties_RowID(Object, PropertiesHeader, PropertiesTables
 	Object.AdditionalProperties.Insert("IsBasedOn", True);
 EndProcedure
 
-Procedure SetReadOnlyProperties(Object, FillingData) Export
+Procedure SetReadOnlyProperties(Object, FillingData, ExcludedTabularSections = Undefined) Export
 	HeaderProperties = New Array();
 	TabularProperties = New Array();
 	For Each KeyValue In FillingData Do
@@ -11079,11 +11075,25 @@ Procedure SetReadOnlyProperties(Object, FillingData) Export
 		EndIf;
 					
 		If TypeOf(Value) = Type("Array") Then // is tabular section
+			IsExcludedTabularSection = False;
+			If ExcludedTabularSections <> Undefined Then
+				ArrayOfExcludedTabularSections = StrSplit(ExcludedTabularSections, ",");
+				For Each TabularSectionName in ArrayOfExcludedTabularSections Do
+					If StrStartsWith(TrimAll(Property), TrimAll(TabularSectionName)) Then
+						IsExcludedTabularSection = True;
+						Break;
+					EndIf;
+				EndDo;
+			EndIf;
+			
+			If IsExcludedTabularSection Then
+				Continue;
+			EndIf;
+			
 			If Value.Count() Then
 				For Each Column In Value[0] Do
-					If Object.Metadata().TabularSections[Property]
-						.Attributes.Find(Column.Key) <> Undefined Then
-							TabularProperties.Add(StrTemplate("%1.%2", Property, Column.Key));
+					If Object.Metadata().TabularSections[Property].Attributes.Find(Column.Key) <> Undefined Then
+						TabularProperties.Add(StrTemplate("%1.%2", Property, Column.Key));
 					EndIf;
 				EndDo;
 			EndIf;

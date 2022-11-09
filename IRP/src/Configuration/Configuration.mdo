@@ -438,6 +438,7 @@
   <commonModules>CommonModule.DocSalesReportFromTradeAgentServer</commonModules>
   <commonModules>CommonModule.DocSalesReportToConsignorServer</commonModules>
   <commonModules>CommonModule.CommissionTradeServer</commonModules>
+  <commonModules>CommonModule.CommissionTradePrivileged</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

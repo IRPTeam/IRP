@@ -37,13 +37,7 @@ Function GetTotalAtPOS()
 	Query.SetParameter("Currency", ThisObject.Currency);
 	Query.SetParameter("Branch", ThisObject.Branch);
 	Query.SetParameter("Account", ThisObject.Sender);
-	
-	LegalCurrencies = Catalogs.Companies.GetLegalCurrencies(ThisObject.Company);
-	If LegalCurrencies.Count() Then
-		Query.SetParameter("CurrencyMovementType", LegalCurrencies[0].CurrencyMovementType);
-	Else
-		Query.SetParameter("CurrencyMovementType", Undefined);
-	EndIf;
+	Query.SetParameter("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
 	
 	QuerySelection = Query.Execute().Select();
 	If QuerySelection.Next() Then

@@ -106,7 +106,6 @@ EndProcedure
 &AtClient
 Procedure CloseSession(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Title", R().InfoMessage_CloseSession);
 	FormParameters.Insert("Currency", Object.Currency);
 	FormParameters.Insert("Store", ThisObject.Store);
 	FormParameters.Insert("Workstation", Object.Workstation);
@@ -135,7 +134,6 @@ EndProcedure
 &AtClient
 Procedure CancelSession(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Title", R().InfoMessage_CancelSession);
 	FormParameters.Insert("Currency", Object.Currency);
 	FormParameters.Insert("Store", ThisObject.Store);
 	FormParameters.Insert("Workstation", Object.Workstation);

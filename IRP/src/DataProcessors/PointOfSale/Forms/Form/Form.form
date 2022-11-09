@@ -2184,7 +2184,6 @@
                   <items xsi:type="form:Button">
                     <name>CancelSession</name>
                     <id>1080</id>
-                    <visible>true</visible>
                     <enabled>true</enabled>
                     <userVisible>
                       <common>true</common>
@@ -6138,7 +6137,7 @@ person</value>
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.AppearanceCircleEmpty</picture>
+      <picture>StdPicture.AppearanceCircleGreen</picture>
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
@@ -6159,7 +6158,7 @@ person</value>
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.AppearanceCircleGreen</picture>
+      <picture>StdPicture.AppearanceCircleRed</picture>
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
@@ -6201,7 +6200,7 @@ person</value>
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">
-      <picture>CommonPicture.Finance</picture>
+      <picture>CommonPicture.Payment</picture>
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>

@@ -807,8 +807,8 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("InfoMessage_Payment", NStr("en = 'Payment (+)'", Lang));
 	Strings.Insert("InfoMessage_SessionIsClosed", NStr("en = 'Session is closed'", Lang));
-	Strings.Insert("InfoMessage_CloseSession", NStr("en = 'Close session'", Lang));
-	Strings.Insert("InfoMessage_CancelSession", NStr("en = 'Cancel session'", Lang));
+	Strings.Insert("InfoMessage_Sales", NStr("en = 'Sales'", Lang));
+	Strings.Insert("InfoMessage_Returns", NStr("en = 'Returns'", Lang));
 	
 #EndRegion
 

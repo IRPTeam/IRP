@@ -108,7 +108,7 @@ EndProcedure
 
 &AtServer
 Procedure FillByDefaultAtServer()
-	ConnectionSetting = IntegrationServer.ConnectionSettingTemplate(Object.IntegrationType);
+	ConnectionSetting = IntegrationServer.ConnectionSettingTemplate(Object.IntegrationType, Object);
 	For Each Str In ConnectionSetting Do
 		Filter = New Structure("Key", Str.Key);
 		Rows = Object.ConnectionSetting.FindRows(Filter);

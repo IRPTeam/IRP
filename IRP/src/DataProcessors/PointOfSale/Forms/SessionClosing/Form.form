@@ -3223,6 +3223,23 @@ WHERE
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>isReturn</name>
+      <title>
+        <key>en</key>
+        <value>Is return</value>
+      </title>
+      <id>36</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>CashConfirm</name>
@@ -3335,6 +3352,23 @@ WHERE
       <valueType>
         <types>String</types>
         <stringQualifiers/>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>isReturn</name>
+      <title>
+        <key>en</key>
+        <value>Is return</value>
+      </title>
+      <id>37</id>
+      <valueType>
+        <types>Boolean</types>
       </valueType>
       <view>
         <common>true</common>

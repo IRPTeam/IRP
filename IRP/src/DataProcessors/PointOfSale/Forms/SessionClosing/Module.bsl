@@ -98,7 +98,35 @@ EndProcedure
 	
 &AtClient
 Procedure CloseSession(Command)
-	Close(DialogReturnCode.OK);
+	ClosingData = New Structure;
+	
+	ClosingData.Insert("BalanceConfirm", ThisObject.BalanceConfirm);
+	ClosingData.Insert("CashConfirm", ThisObject.CashConfirm);
+	ClosingData.Insert("TerminalConfirm", ThisObject.TerminalConfirm);
+	ClosingData.Insert("BalanceEnd", ThisObject.BalanceEnd);
+	ClosingData.Insert("BalanceReal", ThisObject.BalanceReal);
+	
+	PaymentList = New Array();
+	For Each TableItem In ThisObject.CashTable Do
+		ItemStructure = New Structure;
+		ItemStructure.Insert("isReturn", TableItem.isReturn);
+		ItemStructure.Insert("PaymentType", TableItem.PaymentType);
+		ItemStructure.Insert("Amount", TableItem.AmountInBase);
+		ItemStructure.Insert("RealAmount", TableItem.AmountInRegister);
+		PaymentList.Add(ItemStructure);
+	EndDo; 
+	For Each TableItem In ThisObject.TerminalTable Do
+		ItemStructure = New Structure;
+		ItemStructure.Insert("isReturn", TableItem.isReturn);
+		ItemStructure.Insert("PaymentType", TableItem.PaymentType);
+		ItemStructure.Insert("PaymentTerminal", TableItem.PaymentTerminal);
+		ItemStructure.Insert("Amount", TableItem.AmountInBase);
+		ItemStructure.Insert("RealAmount", TableItem.AmountInTerminal);
+		PaymentList.Add(ItemStructure);
+	EndDo; 
+	ClosingData.Insert("PaymentList", PaymentList);
+	
+	Close(ClosingData);
 EndProcedure
 
 #EndRegion
@@ -184,7 +212,7 @@ Procedure ReadCashOperations()
 	Query.Text =
 	"SELECT
 	|	RetailSalesReceipt.Ref,
-	|	TRUE AS Sales
+	|	FALSE AS isReturn
 	|INTO tmpRefs
 	|FROM
 	|	Document.RetailSalesReceipt AS RetailSalesReceipt
@@ -195,7 +223,7 @@ Procedure ReadCashOperations()
 	|
 	|SELECT
 	|	RetailReturnReceipt.Ref,
-	|	FALSE AS Sales
+	|	TRUE AS isReturn
 	|FROM
 	|	Document.RetailReturnReceipt AS RetailReturnReceipt
 	|WHERE
@@ -214,12 +242,12 @@ Procedure ReadCashOperations()
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	tmpRefs.Sales AS Sales,
+	|	tmpRefs.isReturn AS isReturn,
 	|	R3050T_PosCashBalancesTurnovers.PaymentType AS PaymentType,
 	|	SUM(CASE
-	|		WHEN tmpRefs.Sales
-	|			THEN R3050T_PosCashBalancesTurnovers.AmountTurnover
-	|		ELSE -R3050T_PosCashBalancesTurnovers.AmountTurnover
+	|		WHEN tmpRefs.isReturn
+	|			THEN -R3050T_PosCashBalancesTurnovers.AmountTurnover
+	|		ELSE R3050T_PosCashBalancesTurnovers.AmountTurnover
 	|	END) AS Amount
 	|FROM
 	|	tmpRefs AS tmpRefs
@@ -232,11 +260,11 @@ Procedure ReadCashOperations()
 	|				tmpCashTypes)) AS R3050T_PosCashBalancesTurnovers
 	|		ON tmpRefs.Ref = R3050T_PosCashBalancesTurnovers.Recorder
 	|GROUP BY
-	|	tmpRefs.Sales,
+	|	tmpRefs.isReturn,
 	|	R3050T_PosCashBalancesTurnovers.PaymentType
 	|
 	|ORDER BY
-	|	Sales DESC,
+	|	isReturn,
 	|	PaymentType";
 	
 	Query.SetParameter("Company", ThisObject.Company);
@@ -246,7 +274,8 @@ Procedure ReadCashOperations()
 	QuerySelection = Query.Execute().Select();
 	While QuerySelection.Next() Do
 		Record = CashTable.Add();
-		Record.Operation = ?(QuerySelection.Sales, R().InfoMessage_Sales, R().InfoMessage_Returns);
+		Record.isReturn = QuerySelection.isReturn;
+		Record.Operation = ?(QuerySelection.isReturn, R().InfoMessage_Returns, R().InfoMessage_Sales);
 		Record.PaymentType = QuerySelection.PaymentType;
 		Record.AmountInBase = QuerySelection.Amount; 
 	EndDo;
@@ -274,7 +303,7 @@ Procedure ReadTerminalOperations()
 	Query.Text =
 	"SELECT
 	|	RetailSalesReceipt.Ref,
-	|	TRUE AS Sales
+	|	FALSE AS isReturn
 	|INTO tmpRefs
 	|FROM
 	|	Document.RetailSalesReceipt AS RetailSalesReceipt
@@ -285,7 +314,7 @@ Procedure ReadTerminalOperations()
 	|
 	|SELECT
 	|	RetailReturnReceipt.Ref,
-	|	FALSE AS Sales
+	|	TRUE AS isReturn
 	|FROM
 	|	Document.RetailReturnReceipt AS RetailReturnReceipt
 	|WHERE
@@ -304,13 +333,13 @@ Procedure ReadTerminalOperations()
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	tmpRefs.Sales AS Sales,
+	|	tmpRefs.isReturn AS isReturn,
 	|	R3050T_PosCashBalancesTurnovers.PaymentType AS PaymentType,
 	|	R3050T_PosCashBalancesTurnovers.PaymentTerminal AS PaymentTerminal,
 	|	SUM(CASE
-	|		WHEN tmpRefs.Sales
-	|			THEN R3050T_PosCashBalancesTurnovers.AmountTurnover
-	|		ELSE -R3050T_PosCashBalancesTurnovers.AmountTurnover
+	|		WHEN tmpRefs.isReturn
+	|			THEN -R3050T_PosCashBalancesTurnovers.AmountTurnover
+	|		ELSE R3050T_PosCashBalancesTurnovers.AmountTurnover
 	|	END) AS Amount
 	|FROM
 	|	tmpRefs AS tmpRefs
@@ -323,12 +352,12 @@ Procedure ReadTerminalOperations()
 	|				tmpCardTypes)) AS R3050T_PosCashBalancesTurnovers
 	|		ON tmpRefs.Ref = R3050T_PosCashBalancesTurnovers.Recorder
 	|GROUP BY
-	|	tmpRefs.Sales,
+	|	tmpRefs.isReturn,
 	|	R3050T_PosCashBalancesTurnovers.PaymentType,
 	|	R3050T_PosCashBalancesTurnovers.PaymentTerminal
 	|
 	|ORDER BY
-	|	Sales DESC,
+	|	isReturn,
 	|	PaymentTerminal,
 	|	PaymentType";
 	
@@ -339,7 +368,8 @@ Procedure ReadTerminalOperations()
 	QuerySelection = Query.Execute().Select();
 	While QuerySelection.Next() Do
 		Record = TerminalTable.Add();
-		Record.Operation = ?(QuerySelection.Sales, R().InfoMessage_Sales, R().InfoMessage_Returns);
+		Record.isReturn = QuerySelection.isReturn;
+		Record.Operation = ?(QuerySelection.isReturn, R().InfoMessage_Returns, R().InfoMessage_Sales);
 		Record.PaymentType = QuerySelection.PaymentType;
 		Record.PaymentTerminal = QuerySelection.PaymentType;
 		Record.AmountInBase = QuerySelection.Amount; 

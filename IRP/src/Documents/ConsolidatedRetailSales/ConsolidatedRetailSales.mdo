@@ -141,6 +141,81 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="be9081f3-cbf7-4141-a0c4-cd413ed77ac5">
+    <name>BalanceConfirm</name>
+    <synonym>
+      <key>en</key>
+      <value>User confirmed differences in balance</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="c9358769-9334-4dd3-9c3f-f6127e6098f4">
+    <name>CashConfirm</name>
+    <synonym>
+      <key>en</key>
+      <value>User confirmed differences at checkout</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="1fd507ed-b5ff-4ff2-b719-e9ea85dcc1f1">
+    <name>TerminalConfirm</name>
+    <synonym>
+      <key>en</key>
+      <value>The user confirmed the differences on the payment terminal</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="2307e035-2cab-4c5d-bf30-48afcdb76960">
+    <name>BalanceEnd</name>
+    <synonym>
+      <key>en</key>
+      <value>Balance at the end</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="92c413ef-7ddc-4067-9e2f-8781fd9d7db4">
+    <name>BalanceReal</name>
+    <synonym>
+      <key>en</key>
+      <value>Balance in Real</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="24b0c474-293a-4109-9bb3-07883a53de72">
     <name>DocumentForm</name>
     <synonym>
@@ -207,6 +282,87 @@
         <field>Document.ConsolidatedRetailSales.TabularSection.AddAttributes.Attribute.Property</field>
       </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="882aad71-1bce-4193-b8f8-35f7b4dd19e6">
+    <producedTypes>
+      <objectType typeId="1a2246ff-6ba8-4c12-af1c-f1de80a56700" valueTypeId="b07602b6-ee9a-477b-9f18-f5de39854678"/>
+      <rowType typeId="8275f76a-4d3a-4c9e-9dfb-bc26aafe8cf0" valueTypeId="433410e4-a2b7-49a8-b842-2b5f23248ef5"/>
+    </producedTypes>
+    <name>PaymentList</name>
+    <synonym>
+      <key>en</key>
+      <value>Payment list</value>
+    </synonym>
+    <attributes uuid="4da93c48-d9d0-45c0-bb36-6a40174a1f23">
+      <name>isReturn</name>
+      <synonym>
+        <key>en</key>
+        <value>Is return</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="044f1b58-b204-4056-bf8f-056d71e940ac">
+      <name>PaymentType</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.PaymentTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="796752f4-ed73-4101-9f79-e8b1595837b8">
+      <name>PaymentTerminal</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment terminal</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.PaymentTerminals</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9203a0f8-a06a-4c37-8bbe-030dba379143">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="cf9a2ac9-1381-4abb-9a33-3f4dd5e5979f">
+      <name>RealAmount</name>
+      <synonym>
+        <key>en</key>
+        <value>Real amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
 </mdclass:Document>

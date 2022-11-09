@@ -120,11 +120,11 @@ EndProcedure
 
 &AtClient
 Procedure CloseSessionFinish(Result, AddInfo) Export
-	If Not Result = DialogReturnCode.OK Then
+	If Result = Undefined Then
 		Return;
 	EndIf;
 	
-	DocConsolidatedRetailSalesServer.CloseDocument(Object.ConsolidatedRetailSales);
+	DocConsolidatedRetailSalesServer.CloseDocument(Object.ConsolidatedRetailSales, Result);
 	ChangeConsolidatedRetailSales(Object, ThisObject, Undefined);
 	
 	SetVisibilityAvailability(Object, ThisObject);

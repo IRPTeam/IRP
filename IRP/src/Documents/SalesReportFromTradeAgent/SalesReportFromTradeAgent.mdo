@@ -251,6 +251,15 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="06521f5f-ad67-404c-a352-74991d4ffb6e">
+    <name>CreateBySalesReport</name>
+    <synonym>
+      <key>en</key>
+      <value>Create by sales report</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <tabularSections uuid="5575b84a-1d88-47fd-9b40-a004cfeba985">
     <producedTypes>
       <objectType typeId="cf725f12-1f07-4d3f-a5bc-7c9f6a377af6" valueTypeId="fcfad52d-abbb-4c65-a651-8845d0b5ed93"/>

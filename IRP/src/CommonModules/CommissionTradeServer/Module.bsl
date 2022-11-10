@@ -728,7 +728,9 @@ Function __GetSalesReportToConsignorList() Export
 	|	SalesReportToConsignor.Number,
 	|	SalesReportToConsignor.StartDate,
 	|	SalesReportToConsignor.EndDate,
-	|	SalesReportToConsignor.Ref AS SalesReportRef
+	|	SalesReportToConsignor.Ref AS SalesReportRef,
+	|	PRESENTATION(SalesReportToConsignor.Ref.LegalName) AS LegalNamePresentation,
+	|	PRESENTATION(SalesReportToConsignor.Ref.Agreement) AS PartnerTermPresentation
 	|FROM
 	|	Document.SalesReportToConsignor AS SalesReportToConsignor
 	|WHERE

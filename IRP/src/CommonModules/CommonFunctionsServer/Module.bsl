@@ -114,8 +114,9 @@ EndFunction
 // Returns:
 //  String - Serialize JSONUse XDTO
 Function SerializeJSONUseXDTO(Value, AddInfo = Undefined) Export
+	Settings = New JSONWriterSettings(, Chars.Tab);
 	Writer = New JSONWriter();
-	Writer.SetString();
+	Writer.SetString(Settings);
 	XDTOSerializer.WriteJSON(Writer, Value, XMLTypeAssignment.Explicit);
 	Result = Writer.Close();
 	Return Result;
@@ -162,12 +163,13 @@ EndFunction
 // Returns:
 //  String - Serialize JSONUse XDTOFactory
 Function SerializeJSONUseXDTOFactory(Value, AddInfo = Undefined) Export
+	Settings = New JSONWriterSettings(, Chars.Tab);
 	Writer = New JSONWriter();
-	Writer.SetString();
+	Writer.SetString(Settings);
 	XDTOFactory.WriteJSON(Writer, Value);
 	ResultTmp = Writer.Close();
-	Object = DeserializeJSON(ResultTmp, True, AddInfo); // Map
-	Result = SerializeJSON(Object.Get("#value"), AddInfo);
+	LenValuePart = 14;
+	Result = Mid(ResultTmp, LenValuePart, StrLen(ResultTmp) - LenValuePart - 1);
 	Return Result;
 EndFunction
 
@@ -405,6 +407,26 @@ Function GetMD5(Object, ReturnAsGUID = True, UseXML = False) Export
 		HashSumStringUUID = HashSumString;
 	EndIf;
 	Return Upper(HashSumStringUUID);
+EndFunction
+
+// Check HASH is changed.
+// 
+// Parameters:
+//  Object - ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName, CatalogObjectCatalogName -
+// 
+// Returns:
+//  Boolean - Object has difference
+Function CheckHASHisChanged(Object, AttrHashName = "HASH") Export
+	CurrentHASH = Object[AttrHashName]; // String
+	Object[AttrHashName] = "";
+	HASH = GetMD5(Object, True, True);
+	
+	If Not HASH = CurrentHASH Then
+		Object[AttrHashName] = HASH;
+		Return True;
+	Else
+		Return False
+	EndIf;
 EndFunction
 
 // Pause.
@@ -896,4 +918,25 @@ Function GetAttributesFromRef(Ref, Attributes, OnlyAllowed = False) Export
 	
 	Return Result;
 	
+EndFunction
+
+// Get related documents.
+// 
+// Parameters:
+//  DocumentRef - DocumentRef - ref to document
+//  WithoutDeleted - Boolean - without documents marked for deletion
+// 
+// Returns:
+//  Array of DocumentRef - Get related documents
+Function GetRelatedDocuments(DocumentRef, WithoutDeleted = False) Export
+	Query = New Query();
+	Query.SetParameter("DocumentRef", DocumentRef);
+	Query.Text =
+	"SELECT Ref
+	|FROM FilterCriterion.RelatedDocuments(&DocumentRef)";
+	If WithoutDeleted Then
+		Query.Text = Query.Text + "
+		|WHERE NOT Ref.DeletionMark";
+	EndIf;
+	Return Query.Execute().Unload().UnloadColumn(0);
 EndFunction

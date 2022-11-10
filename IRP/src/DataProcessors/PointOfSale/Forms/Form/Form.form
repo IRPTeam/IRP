@@ -841,6 +841,71 @@
                       <name>ItemListGroupItem</name>
                       <id>857</id>
                       <items xsi:type="form:FormField">
+                        <name>ItemListItem</name>
+                        <id>1119</id>
+                        <visible>true</visible>
+                        <enabled>true</enabled>
+                        <userVisible>
+                          <common>true</common>
+                        </userVisible>
+                        <dataPath xsi:type="form:DataPath">
+                          <segments>Object.ItemList.Item</segments>
+                        </dataPath>
+                        <handlers>
+                          <event>OnChange</event>
+                          <name>ItemListItemOnChange</name>
+                        </handlers>
+                        <extendedTooltip>
+                          <name>ItemListItemExtendedTooltip</name>
+                          <id>1121</id>
+                          <visible>true</visible>
+                          <enabled>true</enabled>
+                          <userVisible>
+                            <common>true</common>
+                          </userVisible>
+                          <type>Label</type>
+                          <autoMaxWidth>true</autoMaxWidth>
+                          <autoMaxHeight>true</autoMaxHeight>
+                          <extInfo xsi:type="form:LabelDecorationExtInfo">
+                            <horizontalAlign>Left</horizontalAlign>
+                          </extInfo>
+                        </extendedTooltip>
+                        <contextMenu>
+                          <name>ItemListItemContextMenu</name>
+                          <id>1120</id>
+                          <visible>true</visible>
+                          <enabled>true</enabled>
+                          <userVisible>
+                            <common>true</common>
+                          </userVisible>
+                          <autoFill>true</autoFill>
+                        </contextMenu>
+                        <type>InputField</type>
+                        <readOnly>true</readOnly>
+                        <editMode>Enter</editMode>
+                        <headerHorizontalAlign>Left</headerHorizontalAlign>
+                        <showInFooter>true</showInFooter>
+                        <extInfo xsi:type="form:InputFieldExtInfo">
+                          <handlers>
+                            <event>StartChoice</event>
+                            <name>ItemListItemStartChoice</name>
+                          </handlers>
+                          <handlers>
+                            <event>TextEditEnd</event>
+                            <name>ItemListItemEditTextChange</name>
+                          </handlers>
+                          <autoMaxWidth>true</autoMaxWidth>
+                          <autoMaxHeight>true</autoMaxHeight>
+                          <wrap>true</wrap>
+                          <chooseType>true</chooseType>
+                          <typeDomainEnabled>true</typeDomainEnabled>
+                          <textEdit>true</textEdit>
+                          <font xsi:type="core:FontRef">
+                            <font>Style.LargeTextFont</font>
+                          </font>
+                        </extInfo>
+                      </items>
+                      <items xsi:type="form:FormField">
                         <name>ItemListItemKey</name>
                         <id>782</id>
                         <visible>true</visible>

@@ -212,8 +212,8 @@
   <commonModules>CommonModule.AccountingServerReuse</commonModules>
   <commonModules>CommonModule.AddAttributesAndPropertiesClient</commonModules>
   <commonModules>CommonModule.AddAttributesAndPropertiesServer</commonModules>
-  <commonModules>CommonModule.AddDataProcClient</commonModules>
   <commonModules>CommonModule.AddDataProcServer</commonModules>
+  <commonModules>CommonModule.AddDataProcClient</commonModules>
   <commonModules>CommonModule.AdminFunctionsPrivileged</commonModules>
   <commonModules>CommonModule.AdvancesRelevanceServer</commonModules>
   <commonModules>CommonModule.BarcodeClient</commonModules>

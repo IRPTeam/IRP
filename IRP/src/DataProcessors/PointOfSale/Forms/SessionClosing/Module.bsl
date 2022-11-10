@@ -63,7 +63,10 @@ Procedure SetCurrentPage()
 		Return;
 	EndIf;
 	
-	If Not BalanceEnd = BalanceReal And Not BalanceConfirm Then
+	If Not (BalanceEnd = BalanceReal And 
+				BalanceCashIn = BalanceRealIn And 
+				BalanceCashOut = BalanceRealOut) And 
+			Not BalanceConfirm Then
 		ChangePage(ThisObject.Items.BalancePage, ThisObject);
 		Return;
 	EndIf;
@@ -85,6 +88,11 @@ Procedure PreviousPage(Command)
 	
 EndProcedure
 
+&AtClient
+Procedure ToCurrent(Command)
+	SetCurrentPage();
+EndProcedure
+
 // Change page.
 // 
 // Parameters:
@@ -103,6 +111,11 @@ Procedure CloseSession(Command)
 	ClosingData.Insert("BalanceConfirm", ThisObject.BalanceConfirm);
 	ClosingData.Insert("CashConfirm", ThisObject.CashConfirm);
 	ClosingData.Insert("TerminalConfirm", ThisObject.TerminalConfirm);
+	
+	ClosingData.Insert("BalanceCashIn", ThisObject.BalanceCashIn);
+	ClosingData.Insert("BalanceRealIn", ThisObject.BalanceRealIn);
+	ClosingData.Insert("BalanceCashOut", ThisObject.BalanceCashOut);
+	ClosingData.Insert("BalanceRealOut", ThisObject.BalanceRealOut);
 	ClosingData.Insert("BalanceEnd", ThisObject.BalanceEnd);
 	ClosingData.Insert("BalanceReal", ThisObject.BalanceReal);
 	
@@ -428,6 +441,19 @@ EndProcedure
 
 &AtClient
 Procedure BalanceRealOnChange(Item)
+	ThisObject.BalanceRealBedin = ThisObject.BalanceReal + ThisObject.BalanceRealOut - ThisObject.BalanceRealIn; 
+	SetCurrentPage();
+EndProcedure
+
+&AtClient
+Procedure BalanceRealInOnChange(Item)
+	ThisObject.BalanceRealBedin = ThisObject.BalanceReal + ThisObject.BalanceRealOut - ThisObject.BalanceRealIn; 
+	SetCurrentPage();
+EndProcedure
+
+&AtClient
+Procedure BalanceRealOutOnChange(Item)
+	ThisObject.BalanceRealBedin = ThisObject.BalanceReal + ThisObject.BalanceRealOut - ThisObject.BalanceRealIn; 
 	SetCurrentPage();
 EndProcedure
 

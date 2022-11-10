@@ -216,6 +216,66 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="b3cc179c-96a1-473c-bc79-4486e483e0ee">
+    <name>BalanceCashIn</name>
+    <synonym>
+      <key>en</key>
+      <value>Cash In</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b2820d57-6ea7-413d-aa69-78e1e2b8ba39">
+    <name>BalanceRealIn</name>
+    <synonym>
+      <key>en</key>
+      <value>Real cash in</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="2fcfbde7-ebc8-488b-8b47-105dc8584e89">
+    <name>BalanceCashOut</name>
+    <synonym>
+      <key>en</key>
+      <value>Cash Out</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b1d65f99-0e4a-4eda-99cd-9afb515f362d">
+    <name>BalanceRealOut</name>
+    <synonym>
+      <key>en</key>
+      <value>Real cash out</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="24b0c474-293a-4109-9bb3-07883a53de72">
     <name>DocumentForm</name>
     <synonym>

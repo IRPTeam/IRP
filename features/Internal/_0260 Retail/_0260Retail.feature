@@ -596,7 +596,6 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			And the editing text of form attribute named "BalanceEnd" became equal to "4 000,00"
 			Then the form attribute named "CurrencyBalanceEnd" became equal to "TRY"
 			And the editing text of form attribute named "BalanceReal" became equal to "0,00"
-			Then the form attribute named "CurrencyBalanceReal" became equal to "TRY"
 			Then the form attribute named "Company" became equal to "Main Company"
 			Then the form attribute named "Branch" became equal to "Shop 02"
 			Then the form attribute named "Store" became equal to "Store 01"

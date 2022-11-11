@@ -333,7 +333,7 @@ Scenario: _050006 creare SR (Return from trade agent)
 			
 Scenario: _050009 create Sales report from trade agent
 		And I close all client application windows
-	* Open SR form
+	* Open SRFTA form
 		Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
 		And I click the button named "FormCreate"
 		And I click Choice button of the field named "Partner"
@@ -422,7 +422,279 @@ Scenario: _050009 create Sales report from trade agent
 			| '$$NumberSalesReportFromTradeAgent1$$' |
 		And I close all client application windows			
 					
-				
+			
+Scenario: _050019 check consignment fee calculation
+	And I close all client application windows
+	* Open SRFTA form
+		Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Code' | 'Description'   |
+			| '40'   | 'Trade agent 1' |
+		And I select current line in "List" table
+	* Check filling main info
+		Then the form attribute named "Partner" became equal to "Trade agent 1"
+		Then the form attribute named "LegalName" became equal to "Trade agent 1"
+		Then the form attribute named "Agreement" became equal to "Trade agent partner term 1"
+		Then the form attribute named "Company" became equal to "Main Company"
+	* Branch
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		Then "Business units" window is opened
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table
+	* Filling item info
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
+			| 'Description'        | 'Reference'          |
+			| 'Product 4 with SLN' | 'Product 4 with SLN' |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
+			| 'Item'               | 'Item key' |
+			| 'Product 4 with SLN' | 'UNIQ'     |
+		And I activate field named "ItemKey" in "List" table
+		And I select current line in "List" table
+		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		Then "Select serial lot numbers" window is opened
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		Then "Item serial/lot numbers" window is opened
+		And I activate field named "Owner" in "List" table
+		And I activate "Serial number" field in "List" table
+		And I select current line in "List" table
+		Then "Select serial lot numbers *" window is opened
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I select current line in "ItemList" table
+		And I input "210,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "ItemList" table
+		And I input "520,00" text in "Consignor price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' |
+			| 'Product 4 with SLN' | 'UNIQ'     |
+		And I select current line in "ItemList" table
+		And I input "220,00" text in "Consignor price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click Select button of "Partner term" field
+		Then "Partner terms" window is opened
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+	* Check filling concignment fee
+		And "ItemList" table became equal
+			| '#' | 'Revenue type' | 'Item'               | 'Price type'              | 'Consignor price' | 'Item key' | 'Profit loss center' | 'Serial lot numbers' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'Net amount' | 'Total amount' | 'Detail' | 'Additional analytic' |
+			| '1' | ''             | 'Dress'              | 'Basic Price Types'       | '520,00'          | 'XS/Blue'  | ''                   | ''                   | 'pcs'  | 'No'                 | '2,000'    | '10,00'                   | '104,00'                 | '520,00' | '1 040,00'   | '1 040,00'     | ''       | ''                    |
+			| '2' | ''             | 'Product 4 with SLN' | 'en description is empty' | '220,00'          | 'UNIQ'     | ''                   | '899007790088'       | 'pcs'  | 'No'                 | '2,000'    | '10,00'                   | '42,00'                  | '210,00' | '420,00'     | '420,00'       | ''       | ''                    |		
+	* Change price
+		And I activate "Price" field in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue' |
+		And I select current line in "ItemList" table
+		And I input "560,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table became equal
+			| 'Item'               | 'Consignor price' | 'Item key' | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  |
+			| 'Dress'              | '520,00'          | 'XS/Blue'  | '2,000'    | '10,00'                   | '112,00'                 | '560,00' |
+			| 'Product 4 with SLN' | '220,00'          | 'UNIQ'     | '2,000'    | '10,00'                   | '42,00'                  | '210,00' |
+	* Change quantity
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "ItemList" table
+		And I input "3,00" text in "Quantity" field of "ItemList" table	
+		And I finish line editing in "ItemList" table
+		And "ItemList" table became equal
+			| 'Item'               | 'Consignor price' | 'Item key' | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  |
+			| 'Dress'              | '520,00'          | 'XS/Blue'  | '3,000'    | '10,00'                   | '168,00'                 | '560,00' |
+			| 'Product 4 with SLN' | '220,00'          | 'UNIQ'     | '2,000'    | '10,00'                   | '42,00'                  | '210,00' |
+	* Change concignment fee percent
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "ItemList" table	
+		And I input "20,00" text in "Trade agent fee percent" field of "ItemList" table	
+		And I finish line editing in "ItemList" table
+		And "ItemList" table became equal
+			| 'Item'               | 'Consignor price' | 'Item key' | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  |
+			| 'Dress'              | '520,00'          | 'XS/Blue'  | '3,000'    | '20,00'                   | '336,00'                 | '560,00' |
+			| 'Product 4 with SLN' | '220,00'          | 'UNIQ'     | '2,000'    | '10,00'                   | '42,00'                  | '210,00' |
+	* Change concignment fee type
+		And I select "Difference price consignor price" exact value from "trade agent fee type" drop-down list
+		And "ItemList" table became equal
+			| 'Item'               | 'Item key' | 'Consignor price' | 'Quantity' | 'Trade agent fee amount' | 'Price'  |
+			| 'Dress'              | 'XS/Blue'  | '520,00'          | '3,000'    | '120,00'                 | '560,00' |
+			| 'Product 4 with SLN' | 'UNIQ'     | '220,00'          | '2,000'    | '-20,00'                 | '210,00' |
+		And I close all client application windows	
 
+
+Scenario: _050021 check Purchase invoice generate for concignor fee (based on SalesReportFromTradeAgent)
+	And I close all client application windows
+	* Create Sales report from trade agent
+		Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Code' | 'Description'   |
+			| '40'   | 'Trade agent 1' |
+		And I select current line in "List" table
+	* Check filling main info
+		Then the form attribute named "Partner" became equal to "Trade agent 1"
+		Then the form attribute named "LegalName" became equal to "Trade agent 1"
+		Then the form attribute named "Agreement" became equal to "Trade agent partner term 1"
+		Then the form attribute named "Company" became equal to "Main Company"
+	* Branch
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		Then "Business units" window is opened
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table
+	* Filling item info
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate field named "ItemListItem" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
+			| 'Description'        | 'Reference'          |
+			| 'Product 4 with SLN' | 'Product 4 with SLN' |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
+			| 'Item'               | 'Item key' |
+			| 'Product 4 with SLN' | 'UNIQ'     |
+		And I activate field named "ItemKey" in "List" table
+		And I select current line in "List" table
+		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		Then "Select serial lot numbers" window is opened
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		Then "Item serial/lot numbers" window is opened
+		And I activate field named "Owner" in "List" table
+		And I activate "Serial number" field in "List" table
+		And I select current line in "List" table
+		Then "Select serial lot numbers *" window is opened
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I select current line in "ItemList" table
+		And I input "210,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "ItemList" table
+		And I input "520,00" text in "Consignor price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' |
+			| 'Product 4 with SLN' | 'UNIQ'     |
+		And I select current line in "ItemList" table
+		And I input "220,00" text in "Consignor price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click Select button of "Partner term" field
+		Then "Partner terms" window is opened
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+	* Post document
+		And I click "Post" button
+		And I delete "$$NumberSalesReportFromTradeAgent2$$" variable
+		And I delete "$$SalesReportFromTradeAgent2$$" variable
+		And I delete "$$DateSalesReportFromTradeAgent2$$" variable
+		And I save the value of "Number" field as "$$NumberSalesReportFromTradeAgent2$$"
+		And I save the window as "$$SalesReportFromTradeAgent2$$"
+		And I save the value of the field named "Date" as "$$DateSalesReportFromTradeAgent2$$"
+	* Create PI
+		And Delay 3
+		And I click "Purchase invoice" button
+		Then the form attribute named "Partner" became equal to "Trade agent 1"
+		Then the form attribute named "LegalName" became equal to "Trade agent 1"
+		Then the form attribute named "Agreement" became equal to "Trade agent partner term 1"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "TransactionType" became equal to "Purchase"
+		Then the form attribute named "Store" became equal to "Store 02"
+		And "ItemList" table became equal
+			| '#' | 'Price type'        | 'Item' | 'Item key' | 'Profit loss center'      | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store' | 'Delivery date' | 'Quantity' | 'Is additional item cost' | 'Expense type' | 'Purchase order' | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '1' | 'Basic Price Types' | 'Fee'  | 'Fee'      | 'Distribution department' | 'No'                 | '22,27'      | 'pcs'  | ''                   | '146,00' | '18%' | ''              | '146,00'       | ''                    | ''                        | ''      | ''              | '1,000'    | 'No'                      | 'Revenue'      | ''               | ''       | ''            | '123,73'     | 'No'                |
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "123,73"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "22,27"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "146,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+	* Post PI 
+		And I click "Post" button 
+		Then user message window does not contain messages
+		And I delete "$$NumberPIFee1$$" variable
+		And I delete "$$PIFee1$$" variable
+		And I delete "$$DatePIFee1$$" variable
+		And I save the value of "Number" field as "$$NumberPIFee1$$"
+		And I save the window as "$$PIFee1$$"
+		And I save the value of the field named "Date" as "$$DatePIFee1$$"
+		And I click "Post and close" button 
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"			
+		And "List" table contains lines
+			| 'Number'           |
+			| '$$NumberPIFee1$$' |
+		And I close all client application windows			
+				
 
 

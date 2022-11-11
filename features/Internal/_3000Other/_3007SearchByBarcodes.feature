@@ -32,6 +32,7 @@ Scenario: _300700 preparation (add items to documents by barcode)
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
+		When Create catalog Partners objects (trade agent and consignor)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Companies objects (partners company)

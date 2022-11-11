@@ -1209,17 +1209,17 @@ Scenario: _0154090 check partner, legal name, Partner term and company input by 
 		Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
 		And I click the button named "FormCreate"
 	* Partner input by search in line
-		And I select from "Partner" drop-down list by "fer" string
+		And I select from "Partner" drop-down list by "Trade agent 1" string
 	* Legal name input by search in line
-		And I select from "Legal name" drop-down list by "com" string
+		And I select from "Legal name" drop-down list by "Trade agent 1" string
 	* Partner term input by search in line
-		And I select from "Partner term" drop-down list by "TRY" string
+		And I select from "Partner term" drop-down list by "1" string
 	* Company input by search in line
 		And I select from "Company" drop-down list by "main" string
 	* Check entered values
-		Then the form attribute named "Partner" became equal to "Ferron BP"
-		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
+		Then the form attribute named "Partner" became equal to "Trade agent 1"
+		Then the form attribute named "LegalName" became equal to "Trade agent 1"
+		Then the form attribute named "Agreement" became equal to "Trade agent partner term 1"
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Revenue type input by search in line
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -1811,7 +1811,7 @@ Scenario: _01540113 check item input by search in line by code in a document Sal
 		And I select from "Legal name" drop-down list by "2" string
 		Then the form attribute named "LegalName" became equal to "Second Company Ferron BP"
 	* Partner term
-		And I select from "Partner term" drop-down list by "9" string
+		And I select from "Partner term" drop-down list by "52" string
 		Then the form attribute named "Agreement" became equal to "Ferron, USD"
 	* Company
 		And I select from "Company" drop-down list by "3" string
@@ -1883,7 +1883,7 @@ Scenario: _01540114 check item input by search in line by code in a document Ban
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I click the button named "FormCreate"
 	* Company
-		And I select from "Company" drop-down list by "4" string
+		And I select from "Company" drop-down list by "45" string
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Account
 		And I select from "Account" drop-down list by "5" string
@@ -1895,12 +1895,12 @@ Scenario: _01540114 check item input by search in line by code in a document Ban
 			| 'Partner'   |
 			| 'Ferron BP' |
 	* Payee
-		And I select "5" from "Payee" drop-down list by string in "PaymentList" table
+		And I select "46" from "Payee" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Payee'             |
 			| 'Company Ferron BP' |
 	* Partner term
-		And I select "3" from "Partner term" drop-down list by string in "PaymentList" table
+		And I select "46" from "Partner term" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Partner term'                     |
 			| 'Basic Partner terms, without VAT' |
@@ -1939,7 +1939,7 @@ Scenario: _01540115 check item input by search in line by code in a document Pur
 		And I select from "Legal name" drop-down list by "2" string
 		Then the form attribute named "LegalName" became equal to "Second Company Ferron BP"
 	* Partner term
-		And I select from "Partner term" drop-down list by "6" string
+		And I select from "Partner term" drop-down list by "49" string
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"
 	* Company
 		And I select from "Company" drop-down list by "3" string

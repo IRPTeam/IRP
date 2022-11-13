@@ -1095,7 +1095,7 @@ Scenario: _050028 check Sales invoice generate for trade agent fee (based on Sal
 		Then user message window does not contain messages
 		And I delete "$$NumberSIFee1$$" variable
 		And I delete "$$SIFee1$$" variable
-		And I delete "$$DateSSIFee1$$" variable
+		And I delete "$$DateSIFee1$$" variable
 		And I save the value of "Number" field as "$$NumberSIFee1$$"
 		And I save the window as "$$SIFee1$$"
 		And I save the value of the field named "Date" as "$$DateSIFee1$$"

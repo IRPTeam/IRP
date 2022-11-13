@@ -140,15 +140,16 @@ Scenario: _040130 preparation (Sales invoice)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Posting);" |
+		And Delay 5
+		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(194).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(193).GetObject().Write(DocumentWriteMode.Posting);" |
-		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);" |
-		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Check query for sales invoice movements
 		Given I open hyperlink "e1cib/app/DataProcessor.AnaliseDocumentMovements"
 		And in the table "Info" I click "Fill movements" button
@@ -1376,34 +1377,35 @@ Scenario: _0401349 check Sales invoice movements by the Register  "R8012 Consign
 		And I select "R8012 Consignor inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 194 dated 04.11.2022 16:33:38' | ''            | ''                    | ''          | ''             | ''         | ''         | ''                         |
-			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''         | ''         | ''                         |
-			| 'Register  "R8012 Consignor inventory"'       | ''            | ''                    | ''          | ''             | ''         | ''         | ''                         |
-			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''         | ''                         |
-			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Partner'  | 'Agreement'                |
-			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Main Company' | 'S/Yellow' | 'Lomaniti' | 'Basic Partner terms, TRY' |
-			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '6'         | 'Main Company' | 'UNIQ'     | 'Lomaniti' | 'Basic Partner terms, TRY' |				
+			| 'Sales invoice 194 dated 04.11.2022 16:33:38' | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
+			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
+			| 'Register  "R8012 Consignor inventory"'       | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
+			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                  | ''            | ''                         |
+			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Serial lot number' | 'Partner'     | 'Agreement'                |
+			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Main Company' | 'S/Yellow' | ''                  | 'Consignor 1' | 'Consignor partner term 1' |
+			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Main Company' | 'UNIQ'     | '09987897977889'    | 'Consignor 1' | 'Consignor partner term 1' |
+			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '4'         | 'Main Company' | 'UNIQ'     | '09987897977889'    | 'Consignor 2' | 'Consignor 2 partner term' |		
 		And I close all client application windows
 
-Scenario: _0401349 check Sales invoice movements by the Register  "R8013 Consignor batch wise ballance" (consignor and own stocks)
+Scenario: _0401349 check Sales invoice movements by the Register  "R8013 Consignor batch wise balance" (consignor and own stocks)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
 		| 'Number' |
 		| '194'    |
-	* Check movements by the Register  "R8013 Consignor batch wise ballance"
+	* Check movements by the Register  "R8013 Consignor batch wise balance"
 		And I click "Registrations report" button
-		And I select "R8013 Consignor batch wise ballance" exact value from "Register" drop-down list
+		And I select "R8013 Consignor batch wise balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 194 dated 04.11.2022 16:33:38'     | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         |
-			| 'Document registrations records'                  | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         |
-			| 'Register  "R8013 Consignor batch wise ballance"' | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         |
-			| ''                                                | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                               | ''         | ''         |
-			| ''                                                | ''            | ''                    | 'Quantity'  | 'Company'      | 'Batch'                                          | 'Store'    | 'Item key' |
-			| ''                                                | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'S/Yellow' |
-			| ''                                                | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Main Company' | 'Purchase invoice 196 dated 03.11.2022 17:45:57' | 'Store 02' | 'UNIQ'     |
-			| ''                                                | 'Expense'     | '04.11.2022 16:33:38' | '4'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'UNIQ'     |		
+			| 'Sales invoice 194 dated 04.11.2022 16:33:38'    | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  |
+			| 'Register  "R8013 Consignor batch wise balance"' | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                               | ''         | ''         | ''                  |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Batch'                                          | 'Store'    | 'Item key' | 'Serial lot number' |
+			| ''                                               | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'S/Yellow' | ''                  |
+			| ''                                               | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'UNIQ'     | '09987897977889'    |
+			| ''                                               | 'Expense'     | '04.11.2022 16:33:38' | '4'         | 'Main Company' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'Store 02' | 'UNIQ'     | '09987897977889'    |
 		And I close all client application windows
 
 Scenario: _0401350 check Sales invoice movements by the Register  "T2015 Transactions info" (consignor and own stocks)
@@ -1444,8 +1446,8 @@ Scenario: _0401351 check Sales invoice movements by the Register  "T6020 Batch k
 			| ''                                            | '04.11.2022 16:33:38' | '1'         | ''       | ''           | ''                  | 'Main Company' | 'Store 02' | 'XS/Blue'  | 'Expense'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | ''                                               |
 			| ''                                            | '04.11.2022 16:33:38' | '1'         | ''       | ''           | ''                  | 'Main Company' | 'Store 02' | 'UNIQ'     | 'Expense'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | ''                                               |
 			| ''                                            | '04.11.2022 16:33:38' | '2'         | ''       | ''           | ''                  | 'Main Company' | 'Store 02' | 'S/Yellow' | 'Expense'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | 'Purchase invoice 195 dated 02.11.2022 16:31:38' |
-			| ''                                            | '04.11.2022 16:33:38' | '2'         | ''       | ''           | ''                  | 'Main Company' | 'Store 02' | 'UNIQ'     | 'Expense'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | 'Purchase invoice 196 dated 03.11.2022 17:45:57' |
-			| ''                                            | '04.11.2022 16:33:38' | '4'         | ''       | ''           | ''                  | 'Main Company' | 'Store 02' | 'UNIQ'     | 'Expense'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | 'Purchase invoice 195 dated 02.11.2022 16:31:38' |		
+			| ''                                            | '04.11.2022 16:33:38' | '2'         | ''       | ''           | ''                  | 'Main Company' | 'Store 02' | 'UNIQ'     | 'Expense'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | 'Purchase invoice 195 dated 02.11.2022 16:31:38' |
+			| ''                                            | '04.11.2022 16:33:38' | '4'         | ''       | ''           | ''                  | 'Main Company' | 'Store 02' | 'UNIQ'     | 'Expense'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | 'Purchase invoice 196 dated 03.11.2022 16:32:57' |		
 		And I close all client application windows
 		
 Scenario: _0401429 Sales invoice clear posting/mark for deletion

@@ -630,36 +630,36 @@ Scenario: _041623 check Purchase return movements by the Register  "R8012 Consig
 		And I select "R8012 Consignor inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 195 dated 02.11.2022 16:31:47' | ''            | ''                    | ''          | ''             | ''         | ''            | ''                         |
-			| 'Document registrations records'                | ''            | ''                    | ''          | ''             | ''         | ''            | ''                         |
-			| 'Register  "R8012 Consignor inventory"'         | ''            | ''                    | ''          | ''             | ''         | ''            | ''                         |
-			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''            | ''                         |
-			| ''                                              | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Partner'     | 'Agreement'                |
-			| ''                                              | 'Expense'     | '02.11.2022 16:31:47' | '1'         | 'Main Company' | 'ODS'      | 'Consignor 1' | 'Consignor partner term 1' |
-			| ''                                              | 'Expense'     | '02.11.2022 16:31:47' | '2'         | 'Main Company' | '38/18SD'  | 'Consignor 1' | 'Consignor partner term 1' |
-			| ''                                              | 'Expense'     | '02.11.2022 16:31:47' | '3'         | 'Main Company' | 'S/Yellow' | 'Consignor 1' | 'Consignor partner term 1' |	
+			| 'Purchase return 195 dated 02.11.2022 16:31:47' | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
+			| 'Register  "R8012 Consignor inventory"'         | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                  | ''            | ''                         |
+			| ''                                              | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Serial lot number' | 'Partner'     | 'Agreement'                |
+			| ''                                              | 'Expense'     | '02.11.2022 16:31:47' | '1'         | 'Main Company' | 'ODS'      | '899007790088'      | 'Consignor 1' | 'Consignor partner term 1' |
+			| ''                                              | 'Expense'     | '02.11.2022 16:31:47' | '2'         | 'Main Company' | '38/18SD'  | ''                  | 'Consignor 1' | 'Consignor partner term 1' |
+			| ''                                              | 'Expense'     | '02.11.2022 16:31:47' | '3'         | 'Main Company' | 'S/Yellow' | ''                  | 'Consignor 1' | 'Consignor partner term 1' |		
 	And I close all client application windows
 
-Scenario: _041624 check Purchase return movements by the Register  "R8013 Consignor batch wise ballance" (Return to consignor)
+Scenario: _041624 check Purchase return movements by the Register  "R8013 Consignor batch wise balance" (Return to consignor)
 	And I close all client application windows
 	* Select Purchase return
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I go to line in "List" table
 			| 'Number'  |
 			| '195' |
-	* Check movements by the Register  "R8013 Consignor batch wise ballance" 
+	* Check movements by the Register  "R8013 Consignor batch wise balance" 
 		And I click "Registrations report" button
-		And I select "R8013 Consignor batch wise ballance" exact value from "Register" drop-down list
+		And I select "R8013 Consignor batch wise balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 195 dated 02.11.2022 16:31:47'   | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         |
-			| 'Document registrations records'                  | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         |
-			| 'Register  "R8013 Consignor batch wise ballance"' | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         |
-			| ''                                                | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                               | ''         | ''         |
-			| ''                                                | ''            | ''                    | 'Quantity'  | 'Company'      | 'Batch'                                          | 'Store'    | 'Item key' |
-			| ''                                                | 'Expense'     | '02.11.2022 16:31:47' | '1'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'ODS'      |
-			| ''                                                | 'Expense'     | '02.11.2022 16:31:47' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | '38/18SD'  |
-			| ''                                                | 'Expense'     | '02.11.2022 16:31:47' | '3'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'S/Yellow' |			
+			| 'Purchase return 195 dated 02.11.2022 16:31:47'  | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  |
+			| 'Register  "R8013 Consignor batch wise balance"' | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                               | ''         | ''         | ''                  |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Batch'                                          | 'Store'    | 'Item key' | 'Serial lot number' |
+			| ''                                               | 'Expense'     | '02.11.2022 16:31:47' | '1'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'ODS'      | '899007790088'      |
+			| ''                                               | 'Expense'     | '02.11.2022 16:31:47' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | '38/18SD'  | ''                  |
+			| ''                                               | 'Expense'     | '02.11.2022 16:31:47' | '3'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'S/Yellow' | ''                  |		
 	And I close all client application windows
 
 Scenario: _041625 check there is no Purchase return movements by the Register  "R1001 Purchases" (Return to consignor)

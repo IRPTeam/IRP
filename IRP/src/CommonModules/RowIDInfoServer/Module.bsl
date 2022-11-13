@@ -2184,6 +2184,7 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.Currency AS Currency,
 	|	ItemList.Ref.Company AS Company,
 	|	ItemList.ItemKey AS ItemKey,
+	|	Value(Enum.InventoryOrigingTypes.OwnStocks) AS InventoryOrigin,
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.Store AS Store,
 	|	ItemList.PriceType AS PriceType,
@@ -9578,7 +9579,8 @@ Function GetColumnNames_ItemList()
 		   |TransactionTypeSales,
 		   |TransactionTypeSR,
 		   |TransactionTypePurchases,
-		   |TransactionTypePR";
+		   |TransactionTypePR,
+		   |InventoryOrigin";
 EndFunction
 
 Function GetEmptyTable_ItemList()

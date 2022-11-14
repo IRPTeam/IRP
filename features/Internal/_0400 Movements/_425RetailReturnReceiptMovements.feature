@@ -62,6 +62,13 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 		When Create catalog CashAccounts objects (POS)
 		When Create catalog CashAccounts objects
 		When update ItemKeys
+		When Create Document discount
+	* Add plugin for discount
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "DocumentDiscount" |
+			When add Plugin for document discount
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then

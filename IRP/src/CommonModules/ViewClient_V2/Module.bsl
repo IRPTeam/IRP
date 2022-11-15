@@ -1577,6 +1577,17 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_INVENTORY_ORIGIN
+
+// ItemList.InventiryOrigin
+Procedure ItemListInventoryOriginOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListInventoryOriginOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
 #Region ITEM_LIST_BILL_OF_MATERIALS
 
 // ItemList.BillOfMaterials

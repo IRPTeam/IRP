@@ -1,6 +1,101 @@
+
+Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumber, Table_ConsignorBatches) Export
+	tmpItemList = New ValueTable();
+	tmpItemList.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	tmpItemList.Columns.Add("InventoryOrigin" , New TypeDescription("EnumRef.InventoryOrigingTypes"));
+	tmpItemList.Columns.Add("Company"         , New TypeDescription("CatalogRef.Companies"));
+	tmpItemList.Columns.Add("ItemKey"         , New TypeDescription("CatalogRef.ItemKeys"));
+	tmpItemList.Columns.Add("Store"           , New TypeDescription("CatalogRef.Stores"));
+	tmpItemList.Columns.Add("Quantity"        , Metadata.DefinedTypes.typeQuantity.Type);
 	
-Function GetRegistrateConsignorBatches(DocObject, ItemListTable) Export
-	RegisterConsignorBatches = GetRegisterConsignorBatches(DocObject);
+	For Each Row In Table_ItemList Do
+		FillPropertyValues(tmpItemList.Add(), Row);
+	EndDo;
+	
+	tmpSerialLotNumbers = New ValueTable();
+	tmpSerialLotNumbers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	tmpSerialLotNumbers.Columns.Add("SerialLotNumber" , New TypeDescription("CatalogRef.SerialLotNumbers"));
+	tmpSerialLotNumbers.Columns.Add("Quantity"        , Metadata.DefinedTypes.typeQuantity.Type);
+	
+	For Each Row In Table_SerialLotNumber Do
+		FillPropertyValues(tmpSerialLotNumbers.Add(), Row);
+	EndDo;
+	
+	tmpConsignorBatches = New ValueTable();
+	tmpConsignorBatches.Columns.Add("Key"      , Metadata.DefinedTypes.typeRowID.Type);
+	tmpConsignorBatches.Columns.Add("ItemKey"  , New TypeDescription("CatalogRef.ItemKeys"));
+	tmpConsignorBatches.Columns.Add("SerialLotNumber", New TypeDescription("CatalogRef.SerialLotNumbers"));
+	tmpConsignorBatches.Columns.Add("Store"    , New TypeDescription("CatalogRef.Stores"));
+	tmpConsignorBatches.Columns.Add("Batch"    , New TypeDescription("DocumentRef.SalesInvoice"));
+	tmpConsignorBatches.Columns.Add("Quantity" , Metadata.DefinedTypes.typeQuantity.Type);
+	
+	For Each Row In Table_ConsignorBatches Do
+		FillPropertyValues(tmpConsignorBatches.Add(), Row);
+	EndDo;
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ItemList.Key AS Key,
+	|	ItemList.InventoryOrigin AS InventoryOrigin,
+	|	ItemList.Company AS Company,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.Store AS Store,
+	|	ItemList.Quantity AS Quantity
+	|INTO tmpItemList
+	|FROM
+	|	&tmpItemList AS ItemList
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SerialLotNumbers.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.Quantity
+	|INTO tmpSerialLotNumbers
+	|FROM
+	|	&tmpSerialLotNumbers AS SerialLotNumbers
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpItemList.Key,
+	|	tmpItemList.InventoryOrigin,
+	|	tmpItemList.Company,
+	|	tmpItemList.ItemKey,
+	|	tmpItemList.Store,
+	|	CASE
+	|		WHEN tmpSerialLotNumbers.SerialLotNumber.Ref IS NULL
+	|			THEN tmpItemList.Quantity
+	|		ELSE tmpSerialLotNumbers.Quantity
+	|	END AS Quantity,
+	|	ISNULL(tmpSerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
+	|FROM
+	|	tmpItemList AS tmpItemList
+	|		LEFT JOIN tmpSerialLotNumbers AS tmpSerialLotNumbers
+	|		ON tmpItemList.Key = tmpSerialLotNumbers.Key";
+	Query.SetParameter("tmpItemList", tmpItemList);
+	Query.SetParameter("tmpSerialLotNumbers", tmpSerialLotNumbers);
+	QueryResult = Query.Execute();
+	ItemListTable = QueryResult.Unload();
+	ConsignorBatches = GetRegistrateConsignorBatches(DocObject, ItemListTable);
+	
+	Table_ConsignorBatches = New Array();
+	For Each Row In ConsignorBatches Do
+		NewRow = New Structure("Key, ItemKey, SerialLotNumber, Store, Batch, Quantity");
+		FillPropertyValues(NewRow, Row);
+		Table_ConsignorBatches.Add(NewRow);
+	EndDo;
+	
+	Return Table_ConsignorBatches;
+EndFunction
+
+Function GetRegistrateConsignorBatches(DocObject, ItemListTable, ConsignorBatches = Undefined) Export
+	If ConsignorBatches = Undefined Then
+		RegisterConsignorBatches = GetRegisterConsignorBatches(DocObject);
+	Else
+		RegisterConsignorBatches = ConsignorBatches.Copy();
+	EndIf;
 	
 	ArrayForDelete = New Array();
 	For Each Row In RegisterConsignorBatches Do
@@ -299,7 +394,12 @@ Function GetConsignorBatches_Sales_Transfer(ItemListTable, DocObject)
 	|	Store";
 	
 	Query.SetParameter("ItemListTable", ItemListTable);
-	Query.SetParameter("Boundary", New Boundary(DocObject.Ref.PointInTime(), BoundaryType.Excluding));
+	
+	If ValueIsFilled(DocObject.Ref) Then
+		Query.SetParameter("Boundary", New Boundary(DocObject.Ref.PointInTime(), BoundaryType.Excluding));
+	Else
+		Query.SetParameter("Boundary", CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(DocObject.Ref, DocObject.Date));
+	EndIf;
 	
 	QueryResult = Query.Execute();
 	BatchTree = QueryResult.Unload(QueryResultIteration.ByGroups);
@@ -529,7 +629,12 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject)
 	|	Store";
 	
 	Query.SetParameter("ItemListTable", ItemListTable);
-	Query.SetParameter("Boundary", New Boundary(DocObject.Ref.PointInTime(), BoundaryType.Excluding));
+	
+	If ValueIsFilled(DocObject.Ref) Then
+		Query.SetParameter("Boundary", New Boundary(DocObject.Ref.PointInTime(), BoundaryType.Excluding));
+	Else
+		Query.SetParameter("Boundary", CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(DocObject.Ref, DocObject.Date));
+	EndIf;
 	
 	QueryResults = Query.ExecuteBatch();
 	BatchTree = QueryResults[6].Unload(QueryResultIteration.ByGroups);
@@ -574,6 +679,10 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject)
 EndFunction
 
 Procedure LockConsignorBatchWiseBalance(DocObject, ItemListTable)
+	If Not TransactionActive() Then
+		Return;
+	EndIf;
+	
 	LockStorage = New Array();
 	DataLock = New DataLock();
 	ItemLock = DataLock.Add("AccumulationRegister.R8013B_ConsignorBatchWiseBalance");
@@ -774,3 +883,31 @@ Function __GetFillingDataBySalesReportToConsignor(DocRef) Export
 	
 	Return FillingData;
 EndFunction	
+
+//Function GetInventoryOriginByPriority(DocObject, Company, ItemKey, Store) Export
+//	If Not FOServer.IsUseCommissionTrading() Then
+//		Return Enums.InventoryOrigingTypes.OwnStocks;
+//	EndIf;
+//	
+//	Query = New Query();
+//	Query.Text = 
+//	"SELECT ALLOWED
+//	|	R8013B_ConsignorBatchWiseBalanceBalance.QuantityBalance AS QuantityBalance
+//	|FROM
+//	|	AccumulationRegister.R8013B_ConsignorBatchWiseBalance.Balance(&Boundary, Company = &Company
+//	|	AND Store = &Store
+//	|	AND ItemKey = &ItemKey) AS R8013B_ConsignorBatchWiseBalanceBalance
+//	|;
+//	|
+//	|////////////////////////////////////////////////////////////////////////////////
+//	|SELECT
+//	|	R4010B_ActualStocksBalance.QuantityBalance
+//	|FROM
+//	|	AccumulationRegister.R4010B_ActualStocks.Balance(&Boundary, Store = &Store
+//	|	AND ItemKey = &ItemKey) AS R4010B_ActualStocksBalance";
+//	Query.SetParameter("Company", Company);
+//	Query.SetParameter("ItemKey", Company);
+//	Query.SetParameter("Store", Company);
+//	
+//EndFunction
+	

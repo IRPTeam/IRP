@@ -1545,6 +1545,101 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="c5ef3740-97c3-4ab0-9365-5b4db36feb55">
+    <producedTypes>
+      <objectType typeId="bbd30885-4a6e-4863-b603-f622ea740a36" valueTypeId="013e91ab-298f-4a7d-8117-12833895a22a"/>
+      <rowType typeId="4a76c7cb-5d3c-4a73-ab4a-fe4952666c26" valueTypeId="c721d8b2-5532-4a4c-a9e5-59f99af400a5"/>
+    </producedTypes>
+    <name>ConsignorBatches</name>
+    <synonym>
+      <key>en</key>
+      <value>Consignor batches</value>
+    </synonym>
+    <attributes uuid="d5ffab1e-e1ce-47a5-969c-8f62636eff2a">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ef4ac29c-a591-49ca-bdec-7e0fd1722c98">
+      <name>ItemKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Item key</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ItemKeys</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="33f5f7fb-4f8a-45d9-9789-afdb5064fc1e">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c11c31e4-a569-4731-b279-9001110cc661">
+      <name>Store</name>
+      <synonym>
+        <key>en</key>
+        <value>Store</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Stores</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="32fc95c3-b157-4c8e-bfd8-387891298fdf">
+      <name>Batch</name>
+      <synonym>
+        <key>en</key>
+        <value>Batch</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.PurchaseInvoice</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="38134e6d-bd49-475a-96e9-91a5509a4fe0">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <commands uuid="884ba46e-eebe-48ad-aaf4-2d1edd607970">
     <name>Generate</name>
     <synonym>

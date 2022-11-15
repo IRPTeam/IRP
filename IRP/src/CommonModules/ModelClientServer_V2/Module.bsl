@@ -297,6 +297,8 @@ Function GetChain()
 	Chain.Insert("ChangeTradeAgentFeePercentByAmount"           , GetChainLink("ChangeTradeAgentFeePercentByAmountExecute"));
 	Chain.Insert("ChangeTradeAgentFeeAmountByTradeAgentFeeType" , GetChainLink("ChangeTradeAgentFeeAmountByTradeAgentFeeTypeExecute"));
 	
+	Chain.Insert("ConsignorBatchesFillBatches"                  , GetChainLink("ConsignorBatchesFillBatchesExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -1819,7 +1821,7 @@ Function RequireCallCreateTaxesFormControlsExecute(Options) Export
 EndFunction
 
 Function ChangeTaxRateOptions() Export
-	Return GetChainLinkOptions("Date, Company, Agreement, ItemKey, TaxRates, ArrayOfTaxInfo, Ref, IsBasedOn, TaxList");
+	Return GetChainLinkOptions("Date, Company, Agreement, ItemKey, InventoryOrigin, ConsignorBatches, TaxRates, ArrayOfTaxInfo, Ref, IsBasedOn, TaxList");
 EndFunction
 
 Function ChangeTaxRateExecute(Options) Export
@@ -1870,9 +1872,29 @@ Function ChangeTaxRateExecute(Options) Export
 			Continue;
 		EndIf;
 		
+		
+		
 		// If tax is not taken into account by company, then clear tax rate TaxRate = Undefined
 		If RequiredTaxes.Find(ItemOfTaxInfo.Tax) = Undefined Then
 			Result.Insert(ItemOfTaxInfo.Name, Undefined);
+			Continue;
+		EndIf;
+		
+		// Tax rate from consignor batch
+		If ValueIsFilled(Options.InventoryOrigin) 
+			And Options.InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
+			
+			Parameters = New Structure();
+			Parameters = New Structure();
+			Parameters.Insert("Date"      , Options.Date);
+			Parameters.Insert("ConsignorBatches", Options.ConsignorBatches);
+			Parameters.Insert("Tax"       , ItemOfTaxInfo.Tax);
+			ArrayOfTaxRates = TaxesServer.GetTaxRatesForConsignorBatches(Parameters);
+			
+			If ArrayOfTaxRates.Count() Then
+				Result.Insert(ItemOfTaxInfo.Name, ArrayOfTaxRates[0].TaxRate);
+			EndIf;
+			
 			Continue;
 		EndIf;
 		
@@ -1904,6 +1926,22 @@ Function ChangeTaxRateExecute(Options) Export
 	EndDo;
 		
 	Return Result;
+EndFunction
+
+#EndRegion
+
+#Region CONSIGNOR_BATCHES
+
+Function ConsignorBatchesFillBatchesOptions() Export
+	Return GetChainLinkOptions("DocObject, Table_ItemList, Table_SerialLotNumbers, Table_ConsignorBatches");
+EndFunction
+
+Function ConsignorBatchesFillBatchesExecute(Options) Export
+	ConsignorBatches = CommissionTradeServer.GetConsignorBatchesTable(Options.DocObject, 
+		Options.Table_ItemList, 
+		Options.Table_SerialLotNumbers, 
+		Options.Table_ConsignorBatches);
+	Return New Structure("ConsignorBatches", ConsignorBatches);	
 EndFunction
 
 #EndRegion

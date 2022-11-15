@@ -121,6 +121,23 @@ EndFunction
 
 #EndIf
 
+// Send request.
+// 
+// Parameters:
+//  ConnectionSetting - See IntegrationServerReuse.ConnectionSettingTemplate
+//  ResourceParameters - Map - Resource parameters
+//  RequestParameters - Map - Request parameters
+//  RequestBody - String, BinaryData - Request body
+//  EndPoint - Undefined - End point
+//  AddInfo - Structure - Add info
+// 
+// Returns:
+//  Structure - Send request:
+// * Success - Boolean -
+// * Message - String -
+// * ResponseBody - String -
+// * StatusCode - Number -
+// * Headers - Map -
 Function SendRequest(Val ConnectionSetting, Val ResourceParameters = Undefined, Val RequestParameters = Undefined,
 	Val RequestBody = Undefined, Val EndPoint = Undefined, AddInfo = Undefined) Export
 
@@ -133,8 +150,8 @@ Function SendRequest(Val ConnectionSetting, Val ResourceParameters = Undefined, 
 
 #Else
 
-		Return SendRequestClientServer(ConnectionSetting, ResourceParameters, RequestParameters, RequestBody, EndPoint,
-			AddInfo);
+	Return SendRequestClientServer(ConnectionSetting, ResourceParameters, RequestParameters, RequestBody, EndPoint, AddInfo);
+	
 #EndIf
 
 EndFunction

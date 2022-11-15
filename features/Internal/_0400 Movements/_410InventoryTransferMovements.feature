@@ -585,29 +585,29 @@ Scenario: _0402433 check Inventory transfer movements by the Register  "R4050 St
 			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Store 02' | 'S/Yellow' |	
 		And I close all client application windows
 
-Scenario: _0402434 check Inventory transfer movements by the Register  "R8013 Consignor batch wise ballance" (transfer commission products)
+Scenario: _0402434 check Inventory transfer movements by the Register  "R8013 Consignor batch wise balance" (transfer commission products)
 	* Select Inventory transfer
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
 			| 'Number'  |
 			| '192' |
-	* Check movements by the Register  "R8013 Consignor batch wise ballance"
+	* Check movements by the Register  "R8013 Consignor batch wise balance"
 		And I click "Registrations report" button
-		And I select "R8013 Consignor batch wise ballance" exact value from "Register" drop-down list
+		And I select "R8013 Consignor batch wise balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         |
-			| 'Document registrations records'                   | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         |
-			| 'Register  "R8013 Consignor batch wise ballance"'  | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         |
-			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                               | ''         | ''         |
-			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Company'      | 'Batch'                                          | 'Store'    | 'Item key' |
-			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '1'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 01' | 'ODS'      |
-			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 01' | 'S/Yellow' |
-			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Purchase invoice 196 dated 03.11.2022 17:45:57' | 'Store 01' | 'ODS'      |
-			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '1'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'ODS'      |
-			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'S/Yellow' |
-			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Purchase invoice 196 dated 03.11.2022 17:45:57' | 'Store 02' | 'ODS'      |	
+			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  |
+			| 'Document registrations records'                   | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  |
+			| 'Register  "R8013 Consignor batch wise balance"'   | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  |
+			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                               | ''         | ''         | ''                  |
+			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Company'      | 'Batch'                                          | 'Store'    | 'Item key' | 'Serial lot number' |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '1'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 01' | 'ODS'      | '899007790088'      |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 01' | 'S/Yellow' | ''                  |
+			| ''                                                 | 'Receipt'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'Store 01' | 'ODS'      | '899007790088'      |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '1'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'ODS'      | '899007790088'      |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'S/Yellow' | ''                  |
+			| ''                                                 | 'Expense'     | '04.11.2022 17:58:35' | '2'         | 'Main Company' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'Store 02' | 'ODS'      | '899007790088'      |
 		And I close all client application windows
 
 Scenario: _0402439 Inventory transfer clear posting/mark for deletion

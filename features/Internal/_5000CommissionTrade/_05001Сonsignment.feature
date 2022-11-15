@@ -59,6 +59,7 @@ Scenario: _05002 preparation (consignment)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When update ItemKeys
+		When update ItemKeys
 		When Create catalog Partners objects
 		When Data preparation (comission stock)
 	* Add plugin for taxes calculation

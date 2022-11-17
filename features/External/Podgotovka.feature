@@ -1818,17 +1818,75 @@ Scenario: create Document discount2
 	And I wait "Special offer (create) *" window closing in 20 seconds
 
 Scenario: settings for Company (commission trade)
-	Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c"
-	And I move to "Landed cost" tab
-	And I click Select button of "Currency movement type" field
-	And I go to line in "List" table
-		| 'Currency' | 'Description'    |
-		| 'TRY'      | 'Local currency' |
-	And I select current line in "List" table
-	And I move to "Comission trading" tab
-	And I click Select button of "Trade agent store" field
-	And I go to line in "List" table
-		| 'Description'       |
-		| 'Trade agent store' |
-	And I select current line in "List" table
-	And I click "Save and close" button
+	* Main Company
+		Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c"
+		And I move to "Landed cost" tab
+		And I click Select button of "Currency movement type" field
+		And I go to line in "List" table
+			| 'Currency' | 'Description'    |
+			| 'TRY'      | 'Local currency' |
+		And I select current line in "List" table
+		And I move to "Comission trading" tab
+		And I click Select button of "Trade agent store" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Trade agent store' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'          |
+			| 'Main Company partner' |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	* Second Company
+		Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4"
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'          |
+			| 'Second Company partner' |
+		And I select current line in "List" table
+		And I move to "Landed cost" tab
+		And I click Select button of "Currency movement type" field
+		And I go to line in "List" table
+			| 'Currency' | 'Description'    |
+			| 'TRY'      | 'Local currency' |
+		And I select current line in "List" table
+		And I move to "Comission trading" tab
+		And I click Select button of "Trade agent store" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Trade agent store' |
+		And I select current line in "List" table
+		And I move to "Currencies" tab
+		And in the table "Currencies" I click the button named "CurrenciesAdd"
+		And I click choice button of "Movement type" attribute in "Currencies" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Local currency' |
+		And I select current line in "List" table
+		And I move to "Tax types" tab
+		And I finish line editing in "Currencies" table
+		And in the table "CompanyTaxes" I click the button named "CompanyTaxesAdd"
+		And I activate "Tax" field in "CompanyTaxes" table
+		And I click choice button of "Tax" attribute in "CompanyTaxes" table
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		And I activate "Period" field in "CompanyTaxes" table
+		And I input "01.01.2022" text in "Period" field of "CompanyTaxes" table
+		And I finish line editing in "CompanyTaxes" table
+		And I click "Save and close" button
+		Given I open hyperlink "e1cib/list/InformationRegister.TaxSettings"
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Tax"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'VAT'         |
+		And I select current line in "List" table
+		And I select "Without VAT" exact value from "Tax rate" drop-down list
+		And I click "Save and close" button
+

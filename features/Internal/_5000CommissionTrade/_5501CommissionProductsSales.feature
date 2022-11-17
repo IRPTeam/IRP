@@ -270,7 +270,7 @@ Scenario: _055003 create PI (Receipt from consignor)
 		And I click "Post" button
 		And I delete "$$NumberPI3$$" variable
 		And I delete "$$PI3$$" variable
-		And I delete "$$DatePI33$$" variable
+		And I delete "$$DatePI3$$" variable
 		And I save the value of "Number" field as "$$NumberPI3$$"
 		And I save the window as "$$PI3$$"
 		And I save the value of the field named "Date" as "$$DatePI3$$"

@@ -61,8 +61,26 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("Ref", Ref);
 	QueryResult = Query.Execute();
 	ItemListTable = QueryResult.Unload();
-	ConsignorBatches = CommissionTradeServer.GetRegistrateConsignorBatches(Parameters.Object, ItemListTable);
 	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ConsignorBatches.Key,
+	|	ConsignorBatches.ItemKey,
+	|	ConsignorBatches.SerialLotNumber,
+	|	ConsignorBatches.Store,
+	|	ConsignorBatches.Batch,
+	|	ConsignorBatches.Quantity
+	|FROM
+	|	Document.SalesInvoice.ConsignorBatches AS ConsignorBatches
+	|WHERE
+	|	ConsignorBatches.Ref = &Ref";
+	Query.SetParameter("Ref", Ref);
+	QueryResult = Query.Execute();
+	ConsignorBatches = QueryResult.Unload();
+		
+	ConsignorBatches = CommissionTradeServer.GetRegistrateConsignorBatches(Parameters.Object, ItemListTable, ConsignorBatches);
+		
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = "SELECT * INTO ConsignorBatches FROM &T1 AS T1";

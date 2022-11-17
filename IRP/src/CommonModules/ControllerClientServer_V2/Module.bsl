@@ -1,27 +1,13 @@
 
 #Region PARAMETERS
 
-// Get server parameters.
-// 
-// Parameters:
-//  Object - Structure - Object
-// 
-// Returns:
-//  Structure - Get server parameters:
-// * Object - Structure - 
-// * ControllerModuleName - String -
-// * TableName - String -
-// * Rows - Undefined, ValueTableRow -
-// * ReadOnlyProperties - String -
-// * IsBasedOn - Boolean -
-// * StepEnableFlags - Structure:
-// ** PriceChanged_AfterQuestionToUser - Boolean -
 Function GetServerParameters(Object) Export
 	Result = New Structure();
 	Result.Insert("Object", Object);
 	Result.Insert("ControllerModuleName", "ControllerClientServer_V2");
 	Result.Insert("TableName", "");
 	Result.Insert("Rows", Undefined);
+	Result.Insert("RowsConsignorStocks", New Array());
 	Result.Insert("ReadOnlyProperties", "");
 	Result.Insert("IsBasedOn", False);
 	
@@ -32,22 +18,6 @@ Function GetServerParameters(Object) Export
 	Return Result;
 EndFunction
 
-// Get form parameters.
-// 
-// Parameters:
-//  Form - Undefined, Form - Form
-// 
-// Returns:
-//  Structure - Get form parameters:
-// * Form - Undefined, Form -
-// * ViewClientModuleName - String -
-// * ViewServerModuleName - String -
-// * EventCaller - String -
-// * TaxesCache - String -
-// * PropertyBeforeChange - Structure -:
-// ** Object - Structure -
-// ** Form - Structure -
-// ** List - Structure -
 Function GetFormParameters(Form) Export
 	Result = New Structure();
 	Result.Insert("Form", Form);
@@ -76,16 +46,6 @@ Function GetFormParameters(Form) Export
 	Return Result;
 EndFunction
 
-// Get load parameters.
-// 
-// Parameters:
-//  Address - Undefined, String - Address
-// 
-// Returns:
-//  Structure - Get load parameters:
-// * Address - Undefined, String -
-// * GroupColumns - Undefined, String -
-// * SumColumns - Undefined, String -
 Function GetLoadParameters(Address, GroupColumns = "", SumColumns = "") Export
 	Result = New Structure();
 	Result.Insert("Address", Address);
@@ -94,68 +54,12 @@ Function GetLoadParameters(Address, GroupColumns = "", SumColumns = "") Export
 	Return Result;
 EndFunction
 
-// Get parameters.
-// 
-// Parameters:
-//  ServerParameters - See GetServerParameters
-//  FormParameters - See GetFormParameters
-//  LoadParameters - See GetLoadParameters
-// 
-// Returns:
-//  See CreateParameters
 Function GetParameters(ServerParameters, FormParameters = Undefined, LoadParameters = Undefined) Export
 	_FormParameters = ?(FormParameters = Undefined, GetFormParameters(Undefined), FormParameters);
 	_LoadParameters = ?(LoadParameters = Undefined, GetLoadParameters(Undefined), LoadParameters);
 	Return CreateParameters(ServerParameters, _FormParameters, _LoadParameters);
 EndFunction
 
-// Create parameters.
-// 
-// Parameters:
-//  ServerParameters - See GetServerParameters
-//  FormParameters - See GetFormParameters
-//  LoadParameters - See GetLoadParameters
-// 
-// Returns:
-//  Structure - Create parameters:
-// * Form - Undefined, Form -
-// * FormIsExists - Boolean -
-// * FormTaxColumnsExists - Boolean -
-// * FormModificators - Array -
-// * CacheForm - Structure -
-// * ViewNotify - Array -
-// * ViewClientModuleName - String -
-// * ViewServerModuleName - String -
-// * EventCaller - String -
-// * TaxesCache - String -
-// * ChangedData - Map -
-// * ExtractedData - Structure -
-// * LoadData - Structure -
-// * PropertyBeforeChange - Structure -:
-// ** Object - Structure -
-// ** Form - Structure -
-// ** List - Structure -
-// * FormParameters - Structure -:
-// ** IsCopy - Boolean -
-// * Object - DocumentObjectDocumentName -
-// * Cache - Structure -
-// * ControllerModuleName - String -
-// * StepEnableFlags - Structure -:
-// ** PriceChanged_AfterQuestionToUser - Boolean -
-// * IsBasedOn - Boolean -
-// * ReadOnlyProperties - String -
-// * ReadOnlyPropertiesMap - Map -
-// * ProcessedReadOnlyPropertiesMap - Map -
-// * TableName - String -
-// * ObjectMetadataInfo - Structure -:
-// ** MetadataName - String - 
-// ** Tables - Structure -
-// ** DependentTables - Array -
-// * TaxListIsExists - Boolean -
-// * SpecialOffersIsExists - Boolean -
-// * SerialLotNumbersExists - Boolean -
-// * ArrayOfTaxInfo - Array -
-// * Rows - Array of ValueTableRow -
 Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	Parameters = New Structure();
 	// parameters for Client 
@@ -256,24 +160,35 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 		EndIf;
 	EndIf;
 	
+	If ValueIsFilled(ServerParameters.TableName) 
+		And (Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
+			Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt") Then
+			
+		For Each Row In ServerParameters.Object[ServerParameters.TableName] Do
+			If Not Row.Property("InventoryOrigin") Then
+				Continue;
+			EndIf;
+			If Row.InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
+				ServerParameters.RowsConsignorStocks.Add(Row);
+			EndIf;
+		EndDo;
+			
+	EndIf;
+	
 	// the table row cannot be transferred to the server, so we put the data in an array of structures
 	WrappedRows = WrapRows(Parameters, ServerParameters.Rows);
 	If WrappedRows.Count() Then
 		Parameters.Insert("Rows", WrappedRows);
 	EndIf;
 	
-	//@skip-warning
+	WrappedRows = WrapRows(Parameters, ServerParameters.RowsConsignorStocks);
+	If WrappedRows.Count() Then
+		Parameters.Insert("RowsConsignorStocks", WrappedRows);
+	EndIf;
+		
 	Return Parameters;
 EndFunction
 
-// Wrap rows.
-// 
-// Parameters:
-//  Parameters - See CreateParameters
-//  Rows - Array of ValueTableRow - Rows
-// 
-// Returns:
-//  Array - Wrap rows
 Function WrapRows(Parameters, Rows) Export
 	ArrayOfRows = New Array();
 	For Each Row In Rows Do
@@ -1943,14 +1858,16 @@ Function BindDate(Parameters)
 		|StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
-		|StepUpdatePaymentTerms");
+		|StepUpdatePaymentTerms,
+		|StepConsignorBatchesFillBatches");
 
 	Binding.Insert("RetailSalesReceipt",
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
 		|StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_AgreementInHeader");
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepConsignorBatchesFillBatches");
 
 	Binding.Insert("SalesReturnOrder",
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
@@ -2105,7 +2022,8 @@ Function BindCompany(Parameters)
 		"StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey,
-		|StepChangeConsolidatedRetailSalesByWorkstation");
+		|StepChangeConsolidatedRetailSalesByWorkstation,
+		|StepConsignorBatchesFillBatches");
 
 	Binding.Insert("PurchaseOrder",
 		"StepRequireCallCreateTaxesFormControls,
@@ -4128,7 +4046,14 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 		EndDo;
 	EndIf;
 	
-	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+	TableRows = Undefined;
+	If UseInventoryOrigin Then
+		TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
+	Else
+		TableRows = GetRows(Parameters, Parameters.TableName);
+	EndIf;
+	
+	For Each Row In TableRows Do
 		// ChangeTaxRate
 		Options = ModelClientServer_V2.ChangeTaxRateOptions();
 		If AgreementInHeader Then
@@ -7306,6 +7231,9 @@ Function BindConsignorBatches(Parameters)
 	Binding.Insert("SalesInvoice",
 		"StepChangeTaxRate_AgreementInHeader_InventoryOrigin");
 	
+	Binding.Insert("RetailSalesReceipt",
+		"StepChangeTaxRate_AgreementInHeader_InventoryOrigin");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -7350,16 +7278,6 @@ Function GetOption_Table_SerialLotNumbers(Parameters)
 	EndDo;
 	Return Table;
 EndFunction
-
-//Function GetOption_Table_ConsignorBatches(Parameters)
-//	Table = New Array();
-//	For Each Row In Parameters.Object.ConsignorBatches Do
-//		NewRow = New Structure("Key, ItemKey, SerialLotNumber, Store, Batch, Quantity");
-//		FillPropertyValues(NewRow, Row);
-//		Table.Add(NewRow);
-//	EndDo;
-//	Return Table;
-//EndFunction
 
 #EndRegion
 
@@ -7589,7 +7507,8 @@ Function BindItemListItemKey(Parameters)
 		|StepChangeUseSerialLotNumberByItemKey,
 		|StepItemListChangeUnitByItemKey,
 		|StepItemListChangeRevenueTypeByItemKey,
-		|StepChangeIsServiceByItemKey");
+		|StepChangeIsServiceByItemKey,
+		|StepConsignorBatchesFillBatches");
 	
 	Binding.Insert("RetailReturnReceipt",
 		"StepItemListChangePriceTypeByAgreement,
@@ -8160,7 +8079,8 @@ Function BindItemListStore(Parameters)
 		|StepChangeStoreInHeaderByStoresInList");
 
 	Binding.Insert("RetailSalesReceipt",
-		"StepChangeStoreInHeaderByStoresInList");
+		"StepChangeStoreInHeaderByStoresInList,
+		|StepConsignorBatchesFillBatches");
 	
 	Binding.Insert("RetailReturnReceipt",
 		"StepChangeStoreInHeaderByStoresInList");
@@ -8771,8 +8691,13 @@ EndFunction
 Function BindItemListInventoryOrigin(Parameters)
 	DataPath = "ItemList.InventoryOrigin";
 	Binding = New Structure();
+	
 	Binding.Insert("SalesInvoice",
 		"StepConsignorBatchesFillBatches");
+		
+	Binding.Insert("RetailSalesReceipt",
+		"StepConsignorBatchesFillBatches");
+		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -8824,7 +8749,8 @@ Function BindItemListQuantityInBaseUnit(Parameters)
 		|StepConsignorBatchesFillBatches");
 	
 	Binding.Insert("RetailSalesReceipt",
-		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged,
+		|StepConsignorBatchesFillBatches");
 	
 	Binding.Insert("PurchaseOrder",
 		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
@@ -10829,6 +10755,13 @@ Function GetRows(Parameters, TableName)
 		Return Parameters.Rows;
 	EndIf;
 	Return Parameters.Object[TableName];
+EndFunction
+
+Function GetRowsConsignorStocks(Parameters, TableName)
+	If Parameters.Property("RowsConsignorStocks") Then
+		Return Parameters.RowsConsignorStocks;
+	EndIf;
+	Return New Array();
 EndFunction
 
 Procedure SetterForm(StepNames, DataPath, Parameters, Results, 

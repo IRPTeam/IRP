@@ -28,11 +28,7 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	tmpConsignorBatches.Columns.Add("Store"    , New TypeDescription("CatalogRef.Stores"));
 	tmpConsignorBatches.Columns.Add("Batch"    , New TypeDescription("DocumentRef.SalesInvoice"));
 	tmpConsignorBatches.Columns.Add("Quantity" , Metadata.DefinedTypes.typeQuantity.Type);
-	
-	For Each Row In Table_ConsignorBatches Do
-		FillPropertyValues(tmpConsignorBatches.Add(), Row);
-	EndDo;
-	
+		
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -78,7 +74,7 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	Query.SetParameter("tmpSerialLotNumbers", tmpSerialLotNumbers);
 	QueryResult = Query.Execute();
 	ItemListTable = QueryResult.Unload();
-	ConsignorBatches = GetRegistrateConsignorBatches(DocObject, ItemListTable);
+	ConsignorBatches = GetRegistrateConsignorBatches(DocObject, ItemListTable, tmpConsignorBatches);
 	
 	Table_ConsignorBatches = New Array();
 	For Each Row In ConsignorBatches Do
@@ -814,6 +810,9 @@ Function GetRegisterConsignorBatches(DocObject)
 EndFunction
 
 Procedure UpdateRegisterConsignorBatches(DocObject, ConsignorBatchesTable)
+	If Not ValueIsFilled(DocObject.Ref) Then
+		Return;
+	EndIf;
 	RecordSet = InformationRegisters.T8010S_ConsignorBatches.CreateRecordSet();
 	RecordSet.Filter.Document.Set(DocObject.Ref);
 	For Each Row In ConsignorBatchesTable Do

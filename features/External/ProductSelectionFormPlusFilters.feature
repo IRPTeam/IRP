@@ -1046,7 +1046,7 @@ Scenario: check the filter by vendors in the purchase documents
 	And I click Select button of "Partner" field
 	And I click "List" button
 	And I save number of "List" table lines as "QS"
-	Then "QS" variable is equal to 16
+	Then "QS" variable is equal to 18
 	And "List" table contains lines
 		| 'Description'      |
 		| 'Ferron BP'        |

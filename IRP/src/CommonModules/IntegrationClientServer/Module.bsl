@@ -62,8 +62,14 @@ Function SendRequestClientServer(ConnectionSetting, ResourceParameters, RequestP
 		OpenSSLSecureConnection = New OpenSSLSecureConnection();
 	EndIf;
 
-	HTTPConnection = New HTTPConnection(ConnectionSetting.Ip, Number(ConnectionSetting.Port), ConnectionSetting.User,
-		ConnectionSetting.Password, ConnectionSetting.Proxy, ConnectionSetting.TimeOut, OpenSSLSecureConnection,
+	HTTPConnection = New HTTPConnection(
+		ConnectionSetting.Ip,
+		Number(ConnectionSetting.Port),
+		ConnectionSetting.User,
+		ConnectionSetting.Password,
+		ConnectionSetting.Proxy,
+		ConnectionSetting.TimeOut,
+		OpenSSLSecureConnection,
 		ConnectionSetting.UseOSAuthentication);
 
 	If Not ValueIsFilled(ConnectionSetting.ResourceAddress) Then

@@ -41,7 +41,10 @@ Scenario: _05002 preparation (consignment)
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Currencies objects
+		When Create catalog Agreements objects (commision trade, own companies)
+		When Create information register TaxSettings records (Concignor 1)
 		When Create catalog Companies objects (Main company)
+		When Create catalog Companies objects (own Second company)
 		When Create catalog Stores objects
 		When Create catalog Stores (trade agent)
 		When Create catalog Partners objects (Ferron BP)

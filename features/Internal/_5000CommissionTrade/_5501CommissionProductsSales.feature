@@ -52,6 +52,7 @@ Scenario: _05502 preparation (commission products sales)
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
 		When Create information register TaxSettings records
+		When Create catalog Agreements objects (commision trade, own companies)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
@@ -270,7 +271,7 @@ Scenario: _055003 create PI (Receipt from consignor)
 		And I click "Post" button
 		And I delete "$$NumberPI3$$" variable
 		And I delete "$$PI3$$" variable
-		And I delete "$$DatePI33$$" variable
+		And I delete "$$DatePI3$$" variable
 		And I save the value of "Number" field as "$$NumberPI3$$"
 		And I save the window as "$$PI3$$"
 		And I save the value of the field named "Date" as "$$DatePI3$$"

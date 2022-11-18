@@ -52,6 +52,7 @@ Scenario: _05502 preparation (commission products sales)
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
 		When Create information register TaxSettings records
+		When Create catalog Agreements objects (commision trade, own companies)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records

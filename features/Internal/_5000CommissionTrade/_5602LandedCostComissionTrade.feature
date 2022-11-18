@@ -42,6 +42,7 @@ Scenario: _05602 preparation (landed cost commission trade)
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog Companies objects (own Second company)
 		When Create catalog Stores objects
 		When Create catalog Stores (trade agent)
 		When Create catalog Partners objects (Ferron BP)

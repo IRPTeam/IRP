@@ -1866,27 +1866,15 @@ Scenario: settings for Company (commission trade)
 		And I select current line in "List" table
 		And I move to "Tax types" tab
 		And I finish line editing in "Currencies" table
-		And in the table "CompanyTaxes" I click the button named "CompanyTaxesAdd"
-		And I activate "Tax" field in "CompanyTaxes" table
-		And I click choice button of "Tax" attribute in "CompanyTaxes" table
-		And I activate field named "Description" in "List" table
-		And I select current line in "List" table
-		And I activate "Period" field in "CompanyTaxes" table
-		And I input "01.01.2022" text in "Period" field of "CompanyTaxes" table
-		And I finish line editing in "CompanyTaxes" table
-		And I click "Save and close" button
-		Given I open hyperlink "e1cib/list/InformationRegister.TaxSettings"
-		And I click the button named "FormCreate"
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'    |
-			| 'Second Company' |
-		And I select current line in "List" table
-		And I click Choice button of the field named "Tax"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'VAT'         |
-		And I select current line in "List" table
-		And I select "Without VAT" exact value from "Tax rate" drop-down list
-		And I click "Save and close" button
+		If number of "CompanyTaxes" table lines is "равно" "0" Then
+			And in the table "CompanyTaxes" I click the button named "CompanyTaxesAdd"
+			And I activate "Tax" field in "CompanyTaxes" table
+			And I click choice button of "Tax" attribute in "CompanyTaxes" table
+			And I activate field named "Description" in "List" table
+			And I select current line in "List" table
+			And I activate "Period" field in "CompanyTaxes" table
+			And I input "01.01.2022" text in "Period" field of "CompanyTaxes" table
+			And I finish line editing in "CompanyTaxes" table
+			And I click "Save and close" button
+		
 

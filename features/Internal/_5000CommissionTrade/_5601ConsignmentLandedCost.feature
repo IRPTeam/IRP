@@ -46,6 +46,7 @@ Scenario: _05602 preparation (consignment landed cost)
 		When Create catalog Stores (trade agent)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Companies objects (partners company)
+		When Create catalog Companies objects (own Second company)
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects
@@ -124,7 +125,7 @@ Scenario: _056002 check preparation
 
 Scenario: _056003 check batch balance
 	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+	Given I open hyperlink "e1cib/app/Report.BatchBalance"
 	* Select period
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
 		And I input "29.10.2022" text in the field named "DateBegin"

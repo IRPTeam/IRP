@@ -68,7 +68,7 @@ EndFunction
 // 
 // Parameters:
 //  IntegrationType - EnumRef.IntegrationType - Integration type
-//  AddInfo - Structure - Add info
+//  Object - CatalogObject.IntegrationSettings - Add info
 // 
 // Returns:
 //  Structure - Connection setting template:

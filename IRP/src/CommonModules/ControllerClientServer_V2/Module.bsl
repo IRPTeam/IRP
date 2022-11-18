@@ -165,7 +165,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 			Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt") Then
 			
 		For Each Row In ServerParameters.Object[ServerParameters.TableName] Do
-			If Not Row.Property("InventoryOrigin") Then
+			If Not CommonFunctionsClientServer.ObjectHasProperty(Row, "InventoryOrigin") Then
 				Continue;
 			EndIf;
 			If Row.InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
@@ -4046,11 +4046,14 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 		EndDo;
 	EndIf;
 	
-	TableRows = Undefined;
+	TableRows =  GetRows(Parameters, Parameters.TableName);
 	If UseInventoryOrigin Then
-		TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
-	Else
-		TableRows = GetRows(Parameters, Parameters.TableName);
+		If TableRows.Count() 
+			And TableRows[0].Property("InventoryOrigin") 
+			And TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
+			
+			TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
+		EndIf;
 	EndIf;
 	
 	For Each Row In TableRows Do

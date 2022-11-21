@@ -1,5 +1,5 @@
 
-Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumber, Table_ConsignorBatches) Export
+Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumber, Table_ConsignorBatches, SilentMode = False) Export
 	tmpItemList = New ValueTable();
 	tmpItemList.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	tmpItemList.Columns.Add("InventoryOrigin" , New TypeDescription("EnumRef.InventoryOrigingTypes"));
@@ -74,7 +74,7 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	Query.SetParameter("tmpSerialLotNumbers", tmpSerialLotNumbers);
 	QueryResult = Query.Execute();
 	ItemListTable = QueryResult.Unload();
-	ConsignorBatches = GetRegistrateConsignorBatches(DocObject, ItemListTable, tmpConsignorBatches);
+	ConsignorBatches = GetRegistrateConsignorBatches(DocObject, ItemListTable, tmpConsignorBatches, SilentMode);
 	
 	Table_ConsignorBatches = New Array();
 	For Each Row In ConsignorBatches Do
@@ -86,7 +86,7 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	Return Table_ConsignorBatches;
 EndFunction
 
-Function GetRegistrateConsignorBatches(DocObject, ItemListTable, ConsignorBatches = Undefined) Export
+Function GetRegistrateConsignorBatches(DocObject, ItemListTable, ConsignorBatches = Undefined, SilentMode = False) Export
 	If ConsignorBatches = Undefined Then
 		RegisterConsignorBatches = GetRegisterConsignorBatches(DocObject);
 	Else
@@ -167,7 +167,7 @@ Function GetRegistrateConsignorBatches(DocObject, ItemListTable, ConsignorBatche
 	
 	If ItemListFiltered.Count() Then
 		LockConsignorBatchWiseBalance(DocObject, ItemListFiltered);		
-		ConsignorBatchesTable = GetConsignorBatches_Sales_Transfer(ItemListFiltered, DocObject);	
+		ConsignorBatchesTable = GetConsignorBatches_Sales_Transfer(ItemListFiltered, DocObject, SilentMode);	
 		
 		For Each Row In RegisterConsignorBatches Do
 			Filter = New Structure();
@@ -189,14 +189,14 @@ Function GetRegistrateConsignorBatches(DocObject, ItemListTable, ConsignorBatche
 	EndIf;
 EndFunction
 
-Function GetTableConsignorBatchWiseBalanceForPurchaseReturn(DocObject, ItemListTable) Export
+Function GetTableConsignorBatchWiseBalanceForPurchaseReturn(DocObject, ItemListTable, SilentMode = False) Export
 	If Not ItemListTable.Count() Then
 		Return GetEmptyConsignorBatchesTable();
 	EndIf;
 	
 	LockConsignorBatchWiseBalance(DocObject, ItemListTable);
 	
-	ConsignorBatchesTable = GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject);		
+	ConsignorBatchesTable = GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentMode);		
 	Return ConsignorBatchesTable;
 EndFunction
 
@@ -326,7 +326,7 @@ Function GetTableConsignorBatchWiseBalanceForSalesReturn(DocObject, ItemListTabl
 	Return ConsignorBatches;
 EndFunction
 
-Function GetConsignorBatches_Sales_Transfer(ItemListTable, DocObject)
+Function GetConsignorBatches_Sales_Transfer(ItemListTable, DocObject, SilentMode)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -400,7 +400,7 @@ Function GetConsignorBatches_Sales_Transfer(ItemListTable, DocObject)
 	QueryResult = Query.Execute();
 	BatchTree = QueryResult.Unload(QueryResultIteration.ByGroups);
 	
-	BatchResult = GetResultTable(BatchTree);	
+	BatchResult = GetResultTable(BatchTree, SilentMode);	
 	ConsignorBatchesTable = GetEmptyConsignorBatchesTable();
 	
 	If Not BatchResult.HaveError Then
@@ -409,7 +409,7 @@ Function GetConsignorBatches_Sales_Transfer(ItemListTable, DocObject)
 	Return ConsignorBatchesTable;
 EndFunction
 
-Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject)
+Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentMode)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -634,9 +634,9 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject)
 	
 	QueryResults = Query.ExecuteBatch();
 	BatchTree = QueryResults[6].Unload(QueryResultIteration.ByGroups);
-	BatchResult_1 = GetResultTable(BatchTree);
+	BatchResult_1 = GetResultTable(BatchTree, SilentMode);
 	BatchTree = QueryResults[7].Unload(QueryResultIteration.ByGroups);
-	BatchResult_2 = GetResultTable(BatchTree);
+	BatchResult_2 = GetResultTable(BatchTree, SilentMode);
 	
 	ConsignorBatchesTable = GetEmptyConsignorBatchesTable();
 	
@@ -692,7 +692,7 @@ Procedure LockConsignorBatchWiseBalance(DocObject, ItemListTable)
 	DocObject.AdditionalProperties.Insert("CommissionLockStorage", LockStorage);	
 EndProcedure
 
-Function GetResultTable(BatchTree)
+Function GetResultTable(BatchTree, SilentMode)
 	ResultTable = New ValueTable();
 	ResultTable.Columns.Add("ItemKey");
 	ResultTable.Columns.Add("SerialLotNumber");
@@ -726,12 +726,14 @@ Function GetResultTable(BatchTree)
 				EndDo; // Row_Store.Rows
 		
 				If NeedExpense <> 0 Then
-					Required  = Format(Row_Store.Quantity, "NFD=3;");
-					Remaining = Format(Row_Store.Quantity - NeedExpense, "NFD=3;");
-					Lack = Format(NeedExpense, "NFD=3;");
+					If Not SilentMode Then
+						Required  = Format(Row_Store.Quantity, "NFD=3;");
+						Remaining = Format(Row_Store.Quantity - NeedExpense, "NFD=3;");
+						Lack = Format(NeedExpense, "NFD=3;");
 			
-					Msg = StrTemplate(R().Error_120, Row_ItemKey.ItemKey, Row_Store.Store, Required, Remaining, Lack);
-					CommonFunctionsClientServer.ShowUsersMessage(Msg);
+						Msg = StrTemplate(R().Error_120, Row_ItemKey.ItemKey, Row_Store.Store, Required, Remaining, Lack);
+						CommonFunctionsClientServer.ShowUsersMessage(Msg);
+					EndIf;
 					HaveError = True;			
 				EndIf;
 			EndDo; // Row_SerialLotNumber.Rows
@@ -883,30 +885,151 @@ Function __GetFillingDataBySalesReportToConsignor(DocRef) Export
 	Return FillingData;
 EndFunction	
 
-//Function GetInventoryOriginByPriority(DocObject, Company, ItemKey, Store) Export
-//	If Not FOServer.IsUseCommissionTrading() Then
-//		Return Enums.InventoryOrigingTypes.OwnStocks;
-//	EndIf;
-//	
-//	Query = New Query();
-//	Query.Text = 
-//	"SELECT ALLOWED
-//	|	R8013B_ConsignorBatchWiseBalanceBalance.QuantityBalance AS QuantityBalance
-//	|FROM
-//	|	AccumulationRegister.R8013B_ConsignorBatchWiseBalance.Balance(&Boundary, Company = &Company
-//	|	AND Store = &Store
-//	|	AND ItemKey = &ItemKey) AS R8013B_ConsignorBatchWiseBalanceBalance
-//	|;
-//	|
-//	|////////////////////////////////////////////////////////////////////////////////
-//	|SELECT
-//	|	R4010B_ActualStocksBalance.QuantityBalance
-//	|FROM
-//	|	AccumulationRegister.R4010B_ActualStocks.Balance(&Boundary, Store = &Store
-//	|	AND ItemKey = &ItemKey) AS R4010B_ActualStocksBalance";
-//	Query.SetParameter("Company", Company);
-//	Query.SetParameter("ItemKey", Company);
-//	Query.SetParameter("Store", Company);
-//	
-//EndFunction
+Function GetExistingRows(Object, StoreInHeader, FilterStructure, FilterValues) Export
+	Result = New Structure();
+	Result.Insert("ArrayOfRowKeys", New Array());
+	Result.Insert("InventoryOrigin", Enums.InventoryOrigingTypes.OwnStocks);
+	
+	DocMetadata = Object.Ref.Metadata();
+	DocObject = FormDataToValue(Object, Type("DocumentObject." + DocMetadata.Name));
+	DocInfo = New Structure("DocMetadata, DocObject", DocMetadata, DocObject);
+	
+	Wrapper = BuilderAPI.Initialize(Object, , ,"ItemList", DocInfo);
+	
+	NewRow = BuilderAPI.AddRow(Wrapper, "ItemList");
+	BuilderAPI.SetRowProperty(Wrapper, NewRow, "Item"           , FilterValues.Item);
+	BuilderAPI.SetRowProperty(Wrapper, NewRow, "ItemKey"        , FilterValues.ItemKey);
+	BuilderAPI.SetRowProperty(Wrapper, NewRow, "Unit"           , FilterValues.Unit);
+	BuilderAPI.SetRowProperty(Wrapper, NewRow, "Quantity"       , FilterValues.Quantity);
+	BuilderAPI.SetRowProperty(Wrapper, NewRow, "InventoryOrigin", Enums.InventoryOrigingTypes.ConsignorStocks);
+	
+	ActualStocksBalance    = GetActualStocksBalance(Object, NewRow.Store, NewRow.ItemKey);
+	ConsignorStocksBalance = GetConsignorStocksBalance(Object, Object.Company, NewRow.Store, NewRow.ItemKey);
+	
+	Filter = New Structure("Store, ItemKey", NewRow.Store, NewRow.ItemKey);
+	ItemListRows = Object.ItemList.FindRows(Filter);
+	
+	QuantityInDocument = 0;
+	For Each Row In ItemListRows Do
+		QuantityInDocument = QuantityInDocument + Row.QuantityInBaseUnit;
+	EndDo;
+		
+	HowManyOwnStocks = ActualStocksBalance - ConsignorStocksBalance - QuantityInDocument; 
+	
+	IsOwnStocks = False;
+	IsConsignorStocks = False;
+	If HowManyOwnStocks - NewRow.QuantityInBaseUnit > 0 Then
+		// is own stocks
+		IsOwnStocks = True;
+	Else
+		ConsignorStockAvailableQuantity = 0;
+		For Each Row In Wrapper.Object.ConsignorBatches Do
+			If Row.Key <> NewRow.Key Then
+				Continue;
+			EndIf;
+			ConsignorStockAvailableQuantity = ConsignorStockAvailableQuantity + Row.Quantity;
+		EndDo;
+		If NewRow.QuantityInBaseUnit = ConsignorStockAvailableQuantity Then
+			// is consignor stocks
+			IsConsignorStocks = True;
+		Else
+			// is own stocks
+			IsOwnStocks = True;
+		EndIf;
+	EndIf;
+	
+	If IsOwnStocks Then
+		FillPropertyValues(FilterStructure, FilterValues);
+		FilterStructure.Insert("InventoryOrigin", Enums.InventoryOrigingTypes.OwnStocks);
+		ItemListRows = Object.ItemList.FindRows(FilterStructure);
+		For Each Row In ItemListRows Do
+			Result.ArrayOfRowKeys.Add(Row.Key);
+		EndDo;
+		Return Result;
+	EndIf;
+		
+	If IsConsignorStocks Then
+		FillPropertyValues(FilterStructure, FilterValues);
+		FilterStructure.Insert("InventoryOrigin", Enums.InventoryOrigingTypes.ConsignorStocks);
+		ItemListRows = Object.ItemList.FindRows(FilterStructure);
+		// check taxes
+		ArrayOfTaxes = New Array();
+		For Each TaxRow In Wrapper.Object.TaxList Do
+			If TaxRow.Key = NewRow.Key And ValueIsFilled(TaxRow.Tax) Then
+				ArrayOfTaxes.Add(New Structure("Tax, TaxRate", TaxRow.Tax, TaxRow.TaxRate));
+			EndIf;
+		EndDo;
+		
+		For Each Row In ItemListRows Do
+			TaxListRows = Object.TaxList.FindRows(New Structure("Key", Row.Key));
+			IsAllTaxesTheSame = False;
+			If ArrayOfTaxes.Count() = TaxListRows.Count() Then
+				IsTaxesTheSame = True;
+				For i = 0 To ArrayOfTaxes.Count() - 1 Do
+					If ArrayOfTaxes[i].Tax <> TaxListRows[i].Tax Or ArrayOfTaxes[i].TaxRate <> TaxListRows[i].TaxRate Then
+						IsTaxesTheSame = False;
+					EndIf;
+				EndDo;
+				If IsTaxesTheSame Then
+					IsAllTaxesTheSame = True;
+				EndIf;
+			EndIf;
+			If IsAllTaxesTheSame Then
+				Result.ArrayOfRowKeys.Add(Row.Key);
+			EndIf;
+		EndDo;
+		Result.InventoryOrigin = Enums.InventoryOrigingTypes.ConsignorStocks;
+		Return Result;
+	EndIf;
+	
+	Return Result;
+EndFunction
+
+Function GetActualStocksBalance(DocObject, Store, ItemKey)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	R4010B_ActualStocksBalance.QuantityBalance
+	|FROM
+	|	AccumulationRegister.R4010B_ActualStocks.Balance(&Boundary, Store = &Store
+	|	AND ItemKey = &ItemKey) AS R4010B_ActualStocksBalance";
+	If ValueIsFilled(DocObject.Ref) Then
+		Query.SetParameter("Boundary", New Boundary(DocObject.Ref.PointInTime(), BoundaryType.Excluding));
+	Else
+		Query.SetParameter("Boundary", CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(DocObject.Ref, DocObject.Date));
+	EndIf;
+	Query.SetParameter("Store"   , Store);
+	Query.SetParameter("ItemKey" , ItemKey);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		Return QuerySelection.QuantityBalance;
+	EndIf;
+	Return 0;
+EndFunction
+
+Function GetConsignorStocksBalance(DocObject, Company, Store, ItemKey)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	R8013B_ConsignorBatchWiseBalance.QuantityBalance
+	|FROM
+	|	AccumulationRegister.R8013B_ConsignorBatchWiseBalance.Balance(&Boundary, Store = &Store
+	|	AND ItemKey = &ItemKey
+	|	AND Company = &Company) AS R8013B_ConsignorBatchWiseBalance";
+	If ValueIsFilled(DocObject.Ref) Then
+		Query.SetParameter("Boundary", New Boundary(DocObject.Ref.PointInTime(), BoundaryType.Excluding));
+	Else
+		Query.SetParameter("Boundary", CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(DocObject.Ref, DocObject.Date));
+	EndIf;
+	Query.SetParameter("Company" , Company);
+	Query.SetParameter("Store"   , Store);
+	Query.SetParameter("ItemKey" , ItemKey);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		Return QuerySelection.QuantityBalance;
+	EndIf;
+	Return 0;
+EndFunction
 	

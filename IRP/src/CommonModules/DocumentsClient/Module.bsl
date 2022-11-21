@@ -441,8 +441,29 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			Continue;
 		EndIf;
 		
-		FillPropertyValues(FilterStructure, ResultElement);
-		ExistingRows = Object.ItemList.FindRows(FilterStructure);
+		InventoryOrigin = Undefined;
+		
+		If ObjectRefType = Type("DocumentRef.RetailSalesReceipt") Or ObjectRefType = Type("DocumentRef.SalesInvoice") Then
+			
+			ResultExistingRows = CommissionTradeServer.GetExistingRows(Object, Form.Store, FilterStructure, ResultElement);
+			
+			If ValueIsFilled(ResultExistingRows.InventoryOrigin) Then
+				InventoryOrigin = ResultExistingRows.InventoryOrigin;
+			EndIf;
+			
+			Object = Form.Object;
+			ExistingRows = New Array();
+			For Each Row In Object.ItemList Do
+				If ResultExistingRows.ArrayOfRowKeys.Find(Row.Key) <> Undefined Then
+					ExistingRows.Add(Row);
+				EndIf;
+			EndDo;
+			
+		Else
+			FillPropertyValues(FilterStructure, ResultElement);
+			ExistingRows = Object.ItemList.FindRows(FilterStructure);	
+		EndIf;
+		
 		If ExistingRows.Count() Then
 			Row = ExistingRows[0];
 			If ObjectRefType = Type("DocumentRef.PhysicalInventory")
@@ -464,6 +485,11 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			If ResultElement.Property("Price") Then
 				FillingValues.Insert("Price", ResultElement.Price);
 			EndIf;
+			
+			If ValueIsFilled(InventoryOrigin) Then
+				FillingValues.Insert("InventoryOrigin", InventoryOrigin);
+			EndIf;
+			
 			Row = ViewClient_V2.ItemListAddFilledRow(Object, Form, FillingValues);
 		EndIf;
 		

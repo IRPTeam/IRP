@@ -353,6 +353,7 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	If IsBuilder Then
 		SettersMap.Insert("ItemList.TaxAmount"          , "SetItemListTaxAmount");
 	EndIf;
+	SettersMap.Insert("ItemList.InventoryOrigin"        , "SetItemListInventoryOrigin");
 	
 	// Materials
 	SettersMap.Insert("Materials.BillOfMaterials"    , "SetMaterialsBillOfMaterials");
@@ -7252,7 +7253,8 @@ Procedure StepConsignorBatchesFillBatches(Parameters, Chain) Export
 	Options.Table_ItemList         = GetOption_Table_ItemList(Parameters);
 	Options.Table_SerialLotNumbers = GetOption_Table_SerialLotNumbers(Parameters);
 	Options.Table_ConsignorBatches = GetConsignorBatches(Parameters);
-		
+	Options.SilentMode = Not Parameters.FormIsExists;	
+	
 	Options.StepName = "StepConsignorBatchesFillBatches";
 	Chain.ConsignorBatchesFillBatches.Options.Add(Options);
 EndProcedure

@@ -76,7 +76,7 @@ Scenario: _04096 preparation (Purchase invoice)
 	When Create catalog CancelReturnReasons objects
 	When Create catalog CashAccounts objects
 	When Create catalog SerialLotNumbers objects
-	When settings for Company (commission trade)
+	When settings for Main Company (commission trade)
 	* Load Bank payment
 	When Create document BankPayment objects (check movements, advance)
 	And I execute 1C:Enterprise script at server

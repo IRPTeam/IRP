@@ -65,7 +65,7 @@ Scenario: _041600 preparation (Purchase return)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-		When settings for Company (commission trade)
+		When settings for Main Company (commission trade)
 	When Create Document discount
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"

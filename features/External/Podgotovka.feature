@@ -1817,6 +1817,29 @@ Scenario: create Document discount2
 	And I click "Save and close" button
 	And I wait "Special offer (create) *" window closing in 20 seconds
 
+Scenario: settings for Main Company (commission trade)
+	* Main Company
+		Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c"
+		And I move to "Landed cost" tab
+		And I click Select button of "Currency movement type" field
+		And I go to line in "List" table
+			| 'Currency' | 'Description'    |
+			| 'TRY'      | 'Local currency' |
+		And I select current line in "List" table
+		And I move to "Comission trading" tab
+		And I click Select button of "Trade agent store" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Trade agent store' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'          |
+			| 'Main Company partner' |
+		And I select current line in "List" table
+		And I click "Save and close" button
+
+
 Scenario: settings for Company (commission trade)
 	* Main Company
 		Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c"
@@ -1876,5 +1899,7 @@ Scenario: settings for Company (commission trade)
 			And I input "01.01.2022" text in "Period" field of "CompanyTaxes" table
 			And I finish line editing in "CompanyTaxes" table
 			And I click "Save and close" button
+		And I close all client application windows
+		
 		
 

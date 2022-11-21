@@ -1799,13 +1799,13 @@ Scenario: _01540113 check item input by search in line by code in a document Sal
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
 	* Partner
-		And I select from the drop-down list named "Partner" by "1" string
+		And I select from the drop-down list named "Partner" by "50" string
 		Then the form attribute named "Partner" became equal to "Ferron BP"
-		And I select from the drop-down list named "Partner" by " 1" string
+		And I select from the drop-down list named "Partner" by " 50" string
 		Then the form attribute named "Partner" became equal to "Ferron BP"
-		And I select from the drop-down list named "Partner" by "1." string
+		And I select from the drop-down list named "Partner" by "50." string
 		Then the form attribute named "Partner" became equal to "Ferron BP"
-		And I select from the drop-down list named "Partner" by "1.," string
+		And I select from the drop-down list named "Partner" by "50.," string
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 	* Legal name
 		And I select from "Legal name" drop-down list by "2" string
@@ -1871,7 +1871,7 @@ Scenario: _01540113 check item input by search in line by code in a document Sal
 			| 'Cancel reason' |
 			| 'rejects'       |
 	* Sales person
-		And I select "5" from "Sales person" drop-down list by string in "ItemList" table			
+		And I select "54" from "Sales person" drop-down list by string in "ItemList" table			
 		And "ItemList" table contains lines
 			| 'Sales person'    |
 			| 'Alexander Orlov' |
@@ -1890,7 +1890,7 @@ Scenario: _01540114 check item input by search in line by code in a document Ban
 		Then the form attribute named "Account" became equal to "Bank account, USD"
 	* Partner
 		And in the table "PaymentList" I click the button named "PaymentListAdd"		
-		And I select "1" from "Partner" drop-down list by string in "PaymentList" table
+		And I select "50" from "Partner" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Partner'   |
 			| 'Ferron BP' |
@@ -1927,13 +1927,13 @@ Scenario: _01540115 check item input by search in line by code in a document Pur
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 	* Partner
-		And I select from the drop-down list named "Partner" by "1" string
+		And I select from the drop-down list named "Partner" by "50" string
 		Then the form attribute named "Partner" became equal to "Ferron BP"
-		And I select from the drop-down list named "Partner" by " 1" string
+		And I select from the drop-down list named "Partner" by " 50" string
 		Then the form attribute named "Partner" became equal to "Ferron BP"
-		And I select from the drop-down list named "Partner" by "1." string
+		And I select from the drop-down list named "Partner" by "50." string
 		Then the form attribute named "Partner" became equal to "Ferron BP"
-		And I select from the drop-down list named "Partner" by "1.," string
+		And I select from the drop-down list named "Partner" by "50.," string
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 	* Legal name
 		And I select from "Legal name" drop-down list by "2" string

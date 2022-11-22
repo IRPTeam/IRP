@@ -853,8 +853,16 @@ EndProcedure
 Procedure CreateCashOut(Command)
 	OpenForm("DataProcessor.PointOfSale.Form.CashOut", 
 			New Structure("FillingData", GetFillingDataMoneyTransfer(0)), , 
-			UUID, , , , 
+			UUID, , , 
+			New NotifyDescription("CreateCashOutFinish", ThisObject), 
 			FormWindowOpeningMode.LockWholeInterface);
+EndProcedure
+
+&AtClient
+Procedure CreateCashOutFinish(Result, AddInfo) Export
+	If TypeOf(Result) = Type("String") Then
+		CommonFunctionsClientServer.ShowUsersMessage(Result);
+	EndIf;
 EndProcedure
 
 &AtServer

@@ -443,7 +443,10 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 		
 		InventoryOrigin = Undefined;
 		
-		If ObjectRefType = Type("DocumentRef.RetailSalesReceipt") Or ObjectRefType = Type("DocumentRef.SalesInvoice") Then
+		UseInventoryOrigin = (ObjectRefType = Type("DocumentRef.RetailSalesReceipt") 
+			Or ObjectRefType = Type("DocumentRef.SalesInvoice"));
+		
+		If UseInventoryOrigin Then
 			
 			ResultExistingRows = CommissionTradeServer.GetExistingRows(Object, Form.Store, FilterStructure, ResultElement);
 			
@@ -466,11 +469,31 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 		
 		If ExistingRows.Count() Then
 			Row = ExistingRows[0];
-			If ObjectRefType = Type("DocumentRef.PhysicalInventory")
-				Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
-				ViewClient_V2.SetItemListPhysCount(Object, Form, Row, Row.PhysCount + ResultElement.Quantity);
+			
+			If UseInventoryOrigin Then
+				If UseSerialLotNumbers Then
+					If ValueIsFilled(ResultElement.SerialLotNumber) Then
+						SerialLotNumbersArray = New Array();
+						SerialLotNumbers = New Structure("SerialLotNumber, Quantity");
+						SerialLotNumbers.SerialLotNumber = ResultElement.SerialLotNumber;
+						SerialLotNumbers.Quantity = 1;
+						SerialLotNumbersArray.Add(SerialLotNumbers);
+						SerialLotNumbersStructure = New Structure("RowKey, SerialLotNumbers", Row.Key, SerialLotNumbersArray);
+
+						SerialLotNumberClient.AddNewSerialLotNumbers(SerialLotNumbersStructure, AddInfo, True, AddInfo);
+					Else
+						ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);
+					EndIf;
+				Else
+					ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);	
+				EndIf;
 			Else
-				ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);
+				If ObjectRefType = Type("DocumentRef.PhysicalInventory")
+					Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
+					ViewClient_V2.SetItemListPhysCount(Object, Form, Row, Row.PhysCount + ResultElement.Quantity);
+				Else
+					ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);
+				EndIf;
 			EndIf;
 		Else
 			FillingValues = New Structure();
@@ -486,23 +509,39 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 				FillingValues.Insert("Price", ResultElement.Price);
 			EndIf;
 			
-			If ValueIsFilled(InventoryOrigin) Then
-				FillingValues.Insert("InventoryOrigin", InventoryOrigin);
+			Row = ViewClient_V2.ItemListAddFilledRow(Object, Form, FillingValues);
+			
+			If UseInventoryOrigin Then
+				If UseSerialLotNumbers And ValueIsFilled(ResultElement.SerialLotNumber) Then
+					SerialLotNumbersArray = New Array();
+					SerialLotNumbers = New Structure("SerialLotNumber, Quantity");
+					SerialLotNumbers.SerialLotNumber = ResultElement.SerialLotNumber;
+					SerialLotNumbers.Quantity = 1;
+					SerialLotNumbersArray.Add(SerialLotNumbers);
+					SerialLotNumbersStructure = New Structure("RowKey, SerialLotNumbers", Row.Key, SerialLotNumbersArray);
+
+					SerialLotNumberClient.AddNewSerialLotNumbers(SerialLotNumbersStructure, AddInfo, True, AddInfo);
+				EndIf;
 			EndIf;
 			
-			Row = ViewClient_V2.ItemListAddFilledRow(Object, Form, FillingValues);
+			If ValueIsFilled(InventoryOrigin) Then
+				ViewClient_V2.SetItemListInventoryOrigin(Object, Form, Row, InventoryOrigin);
+			EndIf;
+			
 		EndIf;
 		
 		If UseSerialLotNumbers Then
 			If ValueIsFilled(ResultElement.SerialLotNumber) Then
-				SerialLotNumbersArray = New Array();
-				SerialLotNumbers = New Structure("SerialLotNumber, Quantity");
-				SerialLotNumbers.SerialLotNumber = ResultElement.SerialLotNumber;
-				SerialLotNumbers.Quantity = 1;
-				SerialLotNumbersArray.Add(SerialLotNumbers);
-				SerialLotNumbersStructure = New Structure("RowKey, SerialLotNumbers", Row.Key, SerialLotNumbersArray);
+				If Not UseInventoryOrigin Then
+					SerialLotNumbersArray = New Array();
+					SerialLotNumbers = New Structure("SerialLotNumber, Quantity");
+					SerialLotNumbers.SerialLotNumber = ResultElement.SerialLotNumber;
+					SerialLotNumbers.Quantity = 1;
+					SerialLotNumbersArray.Add(SerialLotNumbers);
+					SerialLotNumbersStructure = New Structure("RowKey, SerialLotNumbers", Row.Key, SerialLotNumbersArray);
 
-				SerialLotNumberClient.AddNewSerialLotNumbers(SerialLotNumbersStructure, AddInfo, True, AddInfo);
+					SerialLotNumberClient.AddNewSerialLotNumbers(SerialLotNumbersStructure, AddInfo, True, AddInfo);
+				EndIf;
 			ElsIf ResultElement.UseSerialLotNumber Then
 				Form.ItemListSerialLotNumbersPresentationStartChoice(Object.ItemList, Undefined, True);
 			EndIf;
@@ -1110,7 +1149,8 @@ Function GetFormItemNames()
 				|ProductionTreeIsSemiproduct,
 				|ProductionTreeIsMaterial,
 				|ProductionTreeIsService,
-				|ProductionsKey";
+				|ProductionsKey,
+				|ConsignorBatches";
 	Return ItemNames;
 EndFunction	
 

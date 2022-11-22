@@ -1586,6 +1586,15 @@ Procedure ItemListInventoryOriginOnChange(Object, Form, CurrentData = Undefined)
 	ControllerClientServer_V2.ItemListInventoryOriginOnChange(Parameters);
 EndProcedure
 
+// ItemList.InventoryOrigin.Set
+Procedure SetItemListInventoryOrigin(Object, Form, Row, Value) Export
+	Row.InventoryOrigin = Value;
+	Rows = GetRowsByCurrentData(Form, "ItemList", Row);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	Parameters.Insert("IsProgramChange", True);
+	ControllerClientServer_V2.ItemListInventoryOriginOnChange(Parameters);
+EndProcedure
+
 #EndRegion
 
 #Region ITEM_LIST_BILL_OF_MATERIALS

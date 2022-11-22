@@ -165,6 +165,7 @@ Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
 	AllDepTables.Add("WorkSheets");
 	AllDepTables.Add("RowIDInfo");
 	AllDepTables.Add("BillOfMaterialsList");
+	AllDepTables.Add("ConsignorBatches");
 	
 	ArrayOfDepTables = New Array();
 	For Each TableName In AllDepTables Do

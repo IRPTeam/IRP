@@ -6003,7 +6003,6 @@
       <items xsi:type="form:Table">
         <name>ConsignorBatches</name>
         <id>1374</id>
-        <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>

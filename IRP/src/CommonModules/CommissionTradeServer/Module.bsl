@@ -406,6 +406,7 @@ Function GetConsignorBatches_Sales_Transfer(ItemListTable, DocObject, SilentMode
 	If Not BatchResult.HaveError Then
 		PutResultToConsignorBatches(ItemListTable, BatchResult.ResultTable, ConsignorBatchesTable);
 	EndIf;
+	ConsignorBatchesTable.GroupBy("Key, ItemKey, SerialLotNumber, Store, Batch","Quantity");
 	Return ConsignorBatchesTable;
 EndFunction
 
@@ -901,10 +902,22 @@ Function GetExistingRows(Object, StoreInHeader, FilterStructure, FilterValues) E
 	BuilderAPI.SetRowProperty(Wrapper, NewRow, "ItemKey"        , FilterValues.ItemKey);
 	BuilderAPI.SetRowProperty(Wrapper, NewRow, "Unit"           , FilterValues.Unit);
 	BuilderAPI.SetRowProperty(Wrapper, NewRow, "Quantity"       , FilterValues.Quantity);
+	
+	If ValueIsFilled(StoreInHeader) Then
+		BuilderAPI.SetRowProperty(Wrapper, NewRow, "Store", StoreInHeader);
+	EndIf;
+	
+	If ValueIsFilled(FilterValues.SerialLotNumber) Then
+		NewRow_SerialLotNumber = Wrapper.Object.SerialLotNumbers.Add();
+		NewRow_SerialLotNumber.Key = NewRow.Key;
+		NewRow_SerialLotNumber.SerialLotNumber = FilterValues.SerialLotNumber;
+		NewRow_SerialLotNumber.Quantity        = FilterValues.Quantity;
+	EndIf;
+	
 	BuilderAPI.SetRowProperty(Wrapper, NewRow, "InventoryOrigin", Enums.InventoryOrigingTypes.ConsignorStocks);
 	
-	ActualStocksBalance    = GetActualStocksBalance(Object, NewRow.Store, NewRow.ItemKey);
-	ConsignorStocksBalance = GetConsignorStocksBalance(Object, Object.Company, NewRow.Store, NewRow.ItemKey);
+	ActualStocksBalance    = GetActualStocksBalance(Object, NewRow.Store, NewRow.ItemKey, FilterValues.SerialLotNumber);
+	ConsignorStocksBalance = GetConsignorStocksBalance(Object, Object.Company, NewRow.Store, NewRow.ItemKey, FilterValues.SerialLotNumber);
 	
 	Filter = New Structure("Store, ItemKey", NewRow.Store, NewRow.ItemKey);
 	ItemListRows = Object.ItemList.FindRows(Filter);
@@ -985,14 +998,19 @@ Function GetExistingRows(Object, StoreInHeader, FilterStructure, FilterValues) E
 	Return Result;
 EndFunction
 
-Function GetActualStocksBalance(DocObject, Store, ItemKey)
+Function GetActualStocksBalance(DocObject, Store, ItemKey, SerialLotNumber)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
 	|	R4010B_ActualStocksBalance.QuantityBalance
 	|FROM
 	|	AccumulationRegister.R4010B_ActualStocks.Balance(&Boundary, Store = &Store
-	|	AND ItemKey = &ItemKey) AS R4010B_ActualStocksBalance";
+	|	AND ItemKey = &ItemKey
+	|	AND CASE
+	|		WHEN &StockBalanceDetail
+	|			THEN SerialLotNumber = &SerialLotNumber
+	|		ELSE TRUE
+	|	END) AS R4010B_ActualStocksBalance";
 	If ValueIsFilled(DocObject.Ref) Then
 		Query.SetParameter("Boundary", New Boundary(DocObject.Ref.PointInTime(), BoundaryType.Excluding));
 	Else
@@ -1000,6 +1018,13 @@ Function GetActualStocksBalance(DocObject, Store, ItemKey)
 	EndIf;
 	Query.SetParameter("Store"   , Store);
 	Query.SetParameter("ItemKey" , ItemKey);
+	Query.SetParameter("SerialLotNumber", SerialLotNumber);
+	If ValueIsFilled(SerialLotNumber) Then
+		Query.SetParameter("StockBalanceDetail" , SerialLotNumber.StockBalanceDetail);
+	Else
+		Query.SetParameter("StockBalanceDetail" , False);
+	EndIf;
+	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
@@ -1008,7 +1033,7 @@ Function GetActualStocksBalance(DocObject, Store, ItemKey)
 	Return 0;
 EndFunction
 
-Function GetConsignorStocksBalance(DocObject, Company, Store, ItemKey)
+Function GetConsignorStocksBalance(DocObject, Company, Store, ItemKey, SerialLotNumber)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -1016,7 +1041,8 @@ Function GetConsignorStocksBalance(DocObject, Company, Store, ItemKey)
 	|FROM
 	|	AccumulationRegister.R8013B_ConsignorBatchWiseBalance.Balance(&Boundary, Store = &Store
 	|	AND ItemKey = &ItemKey
-	|	AND Company = &Company) AS R8013B_ConsignorBatchWiseBalance";
+	|	AND Company = &Company
+	|	AND SerialLotNumber = &SerialLotNumber) AS R8013B_ConsignorBatchWiseBalance";
 	If ValueIsFilled(DocObject.Ref) Then
 		Query.SetParameter("Boundary", New Boundary(DocObject.Ref.PointInTime(), BoundaryType.Excluding));
 	Else
@@ -1025,6 +1051,12 @@ Function GetConsignorStocksBalance(DocObject, Company, Store, ItemKey)
 	Query.SetParameter("Company" , Company);
 	Query.SetParameter("Store"   , Store);
 	Query.SetParameter("ItemKey" , ItemKey);
+	If ValueIsFilled(SerialLotNumber) Then
+		Query.SetParameter("SerialLotNumber" , SerialLotNumber);
+	Else
+		Query.SetParameter("SerialLotNumber" , Catalogs.SerialLotNumbers.EmptyRef());
+	EndIf;
+		
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then

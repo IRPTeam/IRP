@@ -5987,7 +5987,6 @@
       <items xsi:type="form:Table">
         <name>ConsignorBatches</name>
         <id>1086</id>
-        <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>

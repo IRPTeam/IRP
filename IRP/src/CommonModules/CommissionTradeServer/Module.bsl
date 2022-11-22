@@ -918,7 +918,7 @@ Function GetExistingRows(Object, StoreInHeader, FilterStructure, FilterValues) E
 	
 	IsOwnStocks = False;
 	IsConsignorStocks = False;
-	If HowManyOwnStocks - NewRow.QuantityInBaseUnit > 0 Then
+	If HowManyOwnStocks - NewRow.QuantityInBaseUnit >= 0 Then
 		// is own stocks
 		IsOwnStocks = True;
 	Else

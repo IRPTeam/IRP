@@ -1803,6 +1803,7 @@ Scenario: _05834 сheck recognition of own and commission goods when scanning a 
 				| 'Number'          |
 				| '$$NumberRSR10$$' |
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"	
+		And I close all client application windows
 	* Open POS
 		And In the command interface I select "Retail" "Point of sale"
 		Then "Point of sales" window is opened

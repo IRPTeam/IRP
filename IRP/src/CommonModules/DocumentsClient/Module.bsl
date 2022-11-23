@@ -444,7 +444,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 		InventoryOrigin = Undefined;
 		
 		UseInventoryOrigin = (ObjectRefType = Type("DocumentRef.RetailSalesReceipt") 
-			Or ObjectRefType = Type("DocumentRef.SalesInvoice"));
+			Or ObjectRefType = Type("DocumentRef.SalesInvoice")) And FOServer.IsUseCommissionTrading();
 		
 		If UseInventoryOrigin Then
 			

@@ -49,12 +49,11 @@ EndFunction
 
 &AtClient
 Procedure CreateMoneyTransfer(Command)
-	CreateMoneyTransferAtServer();
-	Close();
+	Close(CreateMoneyTransferAtServer());
 EndProcedure
 
 &AtServer
-Procedure CreateMoneyTransferAtServer()
+Function CreateMoneyTransferAtServer()
 	
 	FillingData.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	FillingData.Receiver = ThisObject.Receiver;
@@ -69,9 +68,10 @@ Procedure CreateMoneyTransferAtServer()
 	
 	Try
 		NewDocument.Write(DocumentWriteMode.Posting);
-		Message(StrTemplate(R().InfoMessage_002, NewDocument.Ref));
 	Except
-		Message(ErrorDescription());
+		Return ErrorDescription();
 	EndTry;
 	
-EndProcedure
+	Return StrTemplate(R().InfoMessage_002, NewDocument.Ref);
+	
+EndFunction

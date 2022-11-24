@@ -320,6 +320,10 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		DocumentsClient.PickupItemsEnd(Result.FoundedItems, NotifyParameters);
 		EnabledPaymentButton();
 		
+		If Not SalesPersonByDefault.IsEmpty() Then
+			FillSalesPersonInItemList();
+		EndIf;
+		
 	Else
 		
 		DetailedInformation = "<span style=""color:red;"">" + StrTemplate(R().S_019, StrConcat(

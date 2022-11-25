@@ -110,17 +110,10 @@ Function CreateDocument(Company, Branch, Workstation) Export
 	Return Doc.Ref;
 EndFunction
 
-Procedure CloseDocument(DocRef, UserData = Undefined) Export
+Procedure CloseDocument(DocRef) Export
 	DocObject = DocRef.GetObject();
 	DocObject.ClosingDate = CommonFunctionsServer.GetCurrentSessionDate();
 	DocObject.Status = Enums.ConsolidatedRetailSalesStatuses.Close;
-	If Not UserData = Undefined Then
-		DocObject.PaymentList.Clear();
-		FillPropertyValues(DocObject, UserData, , "PaymentList");
-		For Each Item in UserData.PaymentList Do
-			FillPropertyValues(DocObject.PaymentList.Add(), Item);
-		EndDo;
-	EndIf;
 	DocObject.Write(DocumentWriteMode.Posting);
 EndProcedure
 

@@ -48,7 +48,7 @@ Procedure TestConnectionCall()
 		IntegrationServer.SaveFileToFileStorage(TestRow[0].Value, "Test.png", PictureLib.DataHistory.GetBinaryData());
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_005);
 	ElsIf Object.IntegrationType = PredefinedValue("Enum.IntegrationType.Email") Then
-		ConnectionSetting = GetConnectionSetting();
+		ConnectionSetting = IntegrationServer.ConnectionSettingTemplate(Object.IntegrationType);
 		For Each Str In Object.ConnectionSetting Do
 			FillPropertyValues(ConnectionSetting, New Structure(Str.Key, Str.Value));
 		EndDo;
@@ -69,7 +69,7 @@ Procedure TestConnectionCall()
 			CommonFunctionsClientServer.ShowUsersMessage(R().S_029);
 #EndIf
 	ElsIf ExtensionCall_TestConnectionCall() = Undefined Then
-		ConnectionSetting = GetConnectionSetting();
+		ConnectionSetting = IntegrationServer.ConnectionSettingTemplate();
 
 		SettingsSource = Object.ConnectionSetting;
 		If Not ServiceSystemServer.isProduction() Then
@@ -91,11 +91,6 @@ Procedure TestConnectionCall()
 	EndIf;
 EndProcedure
 
-&AtServer
-Function GetConnectionSetting()
-	Return IntegrationServer.ConnectionSettingTemplate(Object.IntegrationType, Object);
-EndFunction
-
 &AtClient
 Function ExtensionCall_TestConnectionCall()
 	Return Undefined;
@@ -113,7 +108,7 @@ EndProcedure
 
 &AtServer
 Procedure FillByDefaultAtServer()
-	ConnectionSetting = GetConnectionSetting();
+	ConnectionSetting = IntegrationServer.ConnectionSettingTemplate(Object.IntegrationType);
 	For Each Str In ConnectionSetting Do
 		Filter = New Structure("Key", Str.Key);
 		Rows = Object.ConnectionSetting.FindRows(Filter);

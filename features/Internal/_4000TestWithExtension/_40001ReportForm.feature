@@ -50,7 +50,7 @@ Scenario: _40001001 check preparation
 Scenario: _4000120 check reports option save
 	* Open test report	
 		And In the command interface I select "Reports" "Barcodes"
-		And I click "Generate" button
+		And I click "Run report" button
 	* Change report and check option save
 		And I click "Change option..." button
 		Then "Report \"Barcodes\" option \"Default\"" window is opened
@@ -63,7 +63,7 @@ Scenario: _4000120 check reports option save
 			| 'Item type'        |
 		And I select current line in "SettingsComposerSettingsSelectionSelectionAvailableFields" table
 		And I click "Finish editing" button
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains lines:
 			| 'Item, Item type'               | 'Barcode'       |
 			| 'Dress, Clothes'                | '2202283705'    |
@@ -100,7 +100,7 @@ Scenario: _4000120 check reports option save
 			| 'Unit'             |
 		And I select current line in "SettingsComposerSettingsSelectionSelectionAvailableFields" table
 		And I click "Finish editing" button
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains lines:
 			| 'Item, Item type, Unit'              | 'Barcode'       |
 			| 'Dress, Clothes, pcs'                | '2202283705'    |
@@ -135,7 +135,7 @@ Scenario: _4000120 check reports option save
 Scenario: _4000125 check switching between options and default settings
 	* Open test report	
 		And In the command interface I select "Reports" "Barcodes"
-		And I click "Generate" button
+		And I click "Run report" button
 	* Check switching between options
 		And I click "Select option..." button
 		Then "Load form" window is opened
@@ -144,7 +144,7 @@ Scenario: _4000125 check switching between options and default settings
 			| 'test1'         | 'No'     |
 		And I activate field named "OptionsListReportOption" in "OptionsList" table
 		And I select current line in "OptionsList" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains lines:
 			| 'Item, Item type'               | 'Barcode'       |
 			| 'Dress, Clothes'                | '2202283705'    |
@@ -171,7 +171,7 @@ Scenario: _4000125 check switching between options and default settings
 			| 'No'                | 'test2'         | 'No'     |
 		And I activate field named "OptionsListReportOption" in "OptionsList" table
 		And I select current line in "OptionsList" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains lines:
 			| 'Item, Item type, Unit'              | 'Barcode'       |
 			| 'Dress, Clothes, pcs'                | '2202283705'    |
@@ -198,7 +198,7 @@ Scenario: _4000125 check switching between options and default settings
 			| 'Report option' |
 			| 'Default'       |
 		And I select current line in "StandardOptions" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains lines:
 			| 'Item'                 | 'Barcode'       |
 			| 'Dress'                | '2202283705'    |
@@ -223,7 +223,7 @@ Scenario: _4000125 check switching between options and default settings
 Scenario: _4000128 check mark/unmark option for deletion
 	* Open test report	
 		And In the command interface I select "Reports" "Barcodes"
-		And I click "Generate" button
+		And I click "Run report" button
 	* Mark option for deletion
 		And I click "Select option..." button
 		And I move to "Custom" tab
@@ -266,7 +266,7 @@ Scenario: _4000128 check reports option share
 			| 'Report option' |
 			| 'test2'         |	
 		And I select current line in "OptionsList" table
-		And I click "Generate" button	
+		And I click "Run report" button	
 		And I click "Save option..." button
 		And I set checkbox "Share"		
 		And I go to line in "OptionsList" table
@@ -291,7 +291,7 @@ Scenario: _4000128 check reports option share
 			| 'CI'                        | 'test2'         |			
 		And I connect "TestAdmin" TestClient using "ABrown" login and "" password
 		And In the command interface I select "Reports" "Barcodes"
-		And I click "Generate" button
+		And I click "Run report" button
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I go to line in "OptionsList" table
@@ -300,7 +300,7 @@ Scenario: _4000128 check reports option share
 		And I activate field named "OptionsListReportOption" in "OptionsList" table
 		And I select current line in "OptionsList" table
 		Then "Barcodes (test2)" window is opened
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains lines:
 			| 'Item, Item type, Unit'              | 'Barcode'       |
 			| 'Dress, Clothes, pcs'                | '2202283705'    |

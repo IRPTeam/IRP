@@ -92,4 +92,18 @@
       <form>Extended</form>
     </extension>
   </forms>
+  <forms uuid="03803b32-1601-4bae-b82e-28ad71b3a9b3">
+    <name>ListForm</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:BasicFormExtension">
+      <form>Extended</form>
+    </extension>
+  </forms>
+  <forms uuid="934a1947-df34-4c43-af75-0cc71edee274">
+    <name>ChoiceForm</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:BasicFormExtension">
+      <form>Extended</form>
+    </extension>
+  </forms>
 </mdclass:Catalog>

@@ -412,7 +412,7 @@ EndFunction
 // Check HASH is changed.
 // 
 // Parameters:
-//  Object - ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName, CatalogObjectCatalogName, DocumentObjectDocumentName -
+//  Object - ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName, CatalogObjectCatalogName -
 // 
 // Returns:
 //  Boolean - Object has difference

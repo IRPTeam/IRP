@@ -88,9 +88,7 @@ Scenario: _0260100 preparation (retail)
 		And I go to line in "List" table
 			| 'Description'    |
 			| 'Workstation 01' |
-		And I click "Set current workstation" button
-		And I close TestClient session
-		Given I open new TestClient session or connect the existing one			
+		And I click "Set current workstation" button			
 	* Retail documents
 		When Create document RSR, RRR with ConsolidatedRetailSales
 		And I execute 1C:Enterprise script at server
@@ -120,53 +118,12 @@ Scenario: _0260105 open session
 	And I close all client application windows
 	And In the command interface I select "Retail" "Point of sale"
 	And I click "Open session" button
+	And I move to "Session" tab
 	* Check
-	When I Check the steps for Exception
-		|'And I click "Open session" button'|		
+		Then the field named "ConsolidatedRetailSales" is filled
+		And I delete "$$ConsolidatedRetailSales$$" variable
+		And I save the value of the field named "ConsolidatedRetailSales" as "$$ConsolidatedRetailSales$$"
 	And I close all client application windows
-
-
-
-Scenario: _0260106 create cash in
-	And I close all client application windows
-	* Open POS and open session		
-		And In the command interface I select "Retail" "Point of sale"
-	* Create cash in
-		And I click "Create cash in" button		
-		Then the number of "CashInList" table lines is "равно" 1
-		And I go to line in "CashInList" table
-			| 'Money transfer'      | 'Currency' | 'Amount'   |
-			| '$$MoneyTransfer11$$' | 'TRY'      | '1 000,00' |
-		And I select current line in "CashInList" table
-	* Check Cash receipt
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "CashAccount" became equal to "Pos cash account 1"
-		Then the form attribute named "TransactionType" became equal to "Cash in"
-		Then the form attribute named "Currency" became equal to "TRY"
-		And "PaymentList" table became equal
-			| '#' | 'Total amount' | 'Financial movement type' | 'Money transfer'      |
-			| '1' | '1 000,00'     | 'Movement type 1'         | '$$MoneyTransfer11$$' |
-		
-		Then the form attribute named "Branch" became equal to "Shop 02"
-		And the editing text of form attribute named "DocumentAmount" became equal to "1 000,00"
-		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
-	* Post Cash receipt
-		And I click "Post" button
-		And I delete "$$NumberCashReceipt1$$" variable
-		And I delete "$$CashReceipt1$$" variable
-		And I save the value of "Number" field as "$$NumberCashReceipt1$$"
-		And I save the window as "$$CashReceipt1$$"
-		And I click the button named "FormPostAndClose"
-	* Check creation
-		Given I open hyperlink "e1cib/list/Document.CashReceipt"		
-		And "List" table became equal
-			| 'Number'                 | 'Amount'   | 'Company'      | 'Cash account'       | 'Currency' | 'Transaction type' |
-			| '$$NumberCashReceipt1$$' | '1 000,00' | 'Main Company' | 'Pos cash account 1' | 'TRY'      | 'Cash in'          |
-		Then the number of "List" table lines is "равно" 1
-		When in opened panel I select "Point of sales"
-		And in the table "CashInList" I click "Update money transfers" button
-		Then the number of "CashInList" table lines is "равно" 0
-		And I close all client application windows
 
 Scenario: _0260107 create RSR and check Consolidated retail sales filling
 	* Check preparation
@@ -175,7 +132,7 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 		Except
 			Then I stop the execution of scripts for this feature
 		And I close all client application windows
-	* Open POS and create first RSR (card)
+	* Open POS and create RSR (card)
 		And In the command interface I select "Retail" "Point of sale"
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
@@ -198,90 +155,13 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 		Then "Payment types" window is opened
 		And I click the hyperlink named "Page_0"
 		And I click the button named "Enter"
-	* Create second RSR (card)
-		And I go to line in "ItemsPickup" table
-			| 'Item'           |
-			| 'Dress, XS/Blue' |
-		And I select current line in "ItemsPickup" table
-		And I input "4,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemsPickup" table
-			| 'Item'            |
-			| 'Dress, S/Yellow' |
-		And I select current line in "ItemsPickup" table
-		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click "Payment (+)" button
-		Then "Payment" window is opened
-		And I click "Card (*)" button
-		Then "Payment types" window is opened
-		And I click the hyperlink named "Page_0"
-		Then "Payment" window is opened
-		And I click the button named "Enter"
-	* Create third RSR (card)
-		And I go to line in "ItemsPickup" table
-			| 'Item'           |
-			| 'Dress, XS/Blue' |
-		And I select current line in "ItemsPickup" table
-		And I input "4,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemsPickup" table
-			| 'Item'            |
-			| 'Dress, S/Yellow' |
-		And I select current line in "ItemsPickup" table
-		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click "Payment (+)" button
-		Then "Payment" window is opened
-		And I click "Card (*)" button
-		Then "Payment types" window is opened
-		And I click the hyperlink named "Page_1"
-		Then "Payment" window is opened
-		And I click the button named "Enter"
-	* Create first RSR (cash)
-		And I go to line in "ItemsPickup" table
-			| 'Item'           |
-			| 'Dress, XS/Blue' |
-		And I select current line in "ItemsPickup" table
-		And I input "3,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemsPickup" table
-			| 'Item'            |
-			| 'Dress, S/Yellow' |
-		And I select current line in "ItemsPickup" table
-		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click "Payment (+)" button
-		And I click the button named "Enter"
-	* Create second RSR (cash)
-		And I go to line in "ItemsPickup" table
-			| 'Item'           |
-			| 'Dress, XS/Blue' |
-		And I select current line in "ItemsPickup" table
-		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemsPickup" table
-			| 'Item'            |
-			| 'Dress, S/Yellow' |
-		And I select current line in "ItemsPickup" table
-		And I input "8,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click "Payment (+)" button
-		And I click the button named "Enter"				
 	* Check filling field Consolidated retail sales and workstation in the RSR
-		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
-		And I go to line in "List" table
-			| 'Cash account'       |'Status'     |
-			| 'Pos cash account 1' |'Open'       |
-		And I select current line in "List" table	
-		And I delete "$$ConsolidatedRetailSales2$$" variable
-		And I save the window as "$$ConsolidatedRetailSales2$$" 	
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
 			| 'Σ'        |
 			| '1 590,00' |	
 		And I select current line in "List" table
-		Then the form attribute named "ConsolidatedRetailSales" became equal to "$$ConsolidatedRetailSales2$$"
+		Then the form attribute named "ConsolidatedRetailSales" became equal to "$$ConsolidatedRetailSales$$"
 		Then the form attribute named "Workstation" became equal to "Workstation 01"
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		And I delete "$$RetailSalesReceiptNew$$" variable
@@ -296,17 +176,9 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "CashAccount" became equal to "Pos cash account 1"
 		Then the form attribute named "Status" became equal to "Open"
-		And "Documents" table contains lines
+		And "Documents" table became equal
 			| 'Document'                  | 'Company'      | 'Amount' | 'Branch'  | 'Currency' | 'Author' |
 			| '$$RetailSalesReceiptNew$$' | 'Main Company' | '1 590'  | 'Shop 02' | 'TRY'      | 'CI'     |
-		And "Documents" table contains lines
-			| 'Document' | 'Company'      | 'Amount' | 'Branch'  | 'Currency' | 'Author' |
-			| '*'        | 'Main Company' | '1 590'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'        | 'Main Company' | '3 180'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'        | 'Main Company' | '3 180'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'        | 'Main Company' | '2 110'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'        | 'Main Company' | '5 440'  | 'Shop 02' | 'TRY'      | 'CI'     |
-		Then the number of "Documents" table lines is "равно" "5"	
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		Then the form attribute named "Author" became equal to "CI"
 		And I delete "$$OpeningDate$$" variable
@@ -316,7 +188,7 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 		
 Scenario: _0260111 create RRR day to day and check Consolidated retail sales filling							
 	And I close all client application windows
-	* Select RSR and create first RRR (card)
+	* Select RSR and create RRR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
 			| 'Σ'        |
@@ -334,7 +206,7 @@ Scenario: _0260111 create RRR day to day and check Consolidated retail sales fil
 		Then the form attribute named "LegalName" became equal to "Company Retail customer"
 		Then the form attribute named "Agreement" became equal to "Retail partner term"
 		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "ConsolidatedRetailSales" became equal to "$$ConsolidatedRetailSales2$$"
+		Then the form attribute named "ConsolidatedRetailSales" became equal to "$$ConsolidatedRetailSales$$"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
 			| '#' | 'Retail sales receipt'      | 'Item'  | 'Sales person' | 'Profit loss center' | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Return reason' | 'Revenue type' | 'Detail' | 'VAT' | 'Offers amount' | 'Landed cost' |
@@ -365,63 +237,13 @@ Scenario: _0260111 create RRR day to day and check Consolidated retail sales fil
 		Then the form attribute named "CashAccount" became equal to "Pos cash account 1"
 		Then the form attribute named "Status" became equal to "Open"
 		And "Documents" table became equal
-			| 'Document'                   | 'Company'      | 'Amount' | 'Branch'  | 'Currency' | 'Author' |
-			| '$$RetailSalesReceiptNew$$'  | 'Main Company' | '1 590'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'                          | 'Main Company' | '3 180'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'                          | 'Main Company' | '3 180'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'                          | 'Main Company' | '2 110'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'                          | 'Main Company' | '5 440'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '$$RetailReturnReceiptNew$$' | 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
+			| 'Document'                  | 'Company'      | 'Amount' | 'Branch'  | 'Currency' | 'Author' |
+			| '$$RetailSalesReceiptNew$$' | 'Main Company' | '1 590'  | 'Shop 02' | 'TRY'      | 'CI'     |
+			| '$$RetailReturnReceiptNew$$'| 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		Then the form attribute named "Author" became equal to "CI"
-		And I close all client application windows	
-	* Select RSR and create second RRR (cash)
-		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-		And I go to line in "List" table
-			| 'Σ'        |
-			| '5 440,00' |	
-		And I click "Sales return" button
-		Then "Add linked document rows" window is opened
-		And I go to line in "BasisesTree" table
-			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '550,00' | '8,000'    | 'Dress (S/Yellow)' | 'pcs'  | 'Yes' |
-		And I change "Use" checkbox in "BasisesTree" table
-		And I finish line editing in "BasisesTree" table
-		And I click "Ok" button
-		And I activate field named "ItemListQuantity" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I move to "Payments" tab
-		And I activate field named "PaymentsAmount" in "Payments" table
-		And I select current line in "Payments" table
-		And I input "520,00" text in the field named "PaymentsAmount" of "Payments" table
-		And I finish line editing in "Payments" table
-		And I click "Post and close" button
-	* Select RSR and create third RRR (cash)	
-		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-		And I go to line in "List" table
-			| 'Σ'        |
-			| '5 440,00' |	
-		And I click "Sales return" button
-		Then "Add linked document rows" window is opened
-		And I go to line in "BasisesTree" table
-			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '520,00' | '1,000'    | 'Dress (XS/Blue)' | 'pcs'  | 'Yes' |
-		And I change "Use" checkbox in "BasisesTree" table
-		And I finish line editing in "BasisesTree" table
-		And I click "Ok" button
-		And I activate field named "ItemListQuantity" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I move to "Payments" tab
-		And I activate field named "PaymentsAmount" in "Payments" table
-		And I select current line in "Payments" table
-		And I input "550,00" text in the field named "PaymentsAmount" of "Payments" table
-		And I finish line editing in "Payments" table
-		And I click "Post and close" button
-				
+		And I close all client application windows			
+		
 				
 
 Scenario: _0260115 create RRR prior periods and check Consolidated retail sales filling							
@@ -464,145 +286,24 @@ Scenario: _0260115 create RRR prior periods and check Consolidated retail sales 
 		Then the form attribute named "CashAccount" became equal to "Pos cash account 1"
 		Then the form attribute named "Status" became equal to "Open"
 		And "Documents" table became equal
-			| 'Document'                   | 'Company'      | 'Amount' | 'Branch'  | 'Currency' | 'Author' |
-			| '$$RetailSalesReceiptNew$$'  | 'Main Company' | '1 590'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'                          | 'Main Company' | '3 180'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'                          | 'Main Company' | '3 180'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'                          | 'Main Company' | '2 110'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'                          | 'Main Company' | '5 440'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '$$RetailReturnReceiptNew$$' | 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'                          | 'Main Company' | '-520'   | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'                          | 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
-		Then the number of "Documents" table lines is "equal" "8"
+			| 'Document'                  | 'Company'      | 'Amount' | 'Branch'  | 'Currency' | 'Author' |
+			| '$$RetailSalesReceiptNew$$' | 'Main Company' | '1 590'  | 'Shop 02' | 'TRY'      | 'CI'     |
+			| '$$RetailReturnReceiptNew$$'| 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
+		Then the number of "Documents" table lines is "equal" "2"
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		Then the form attribute named "Author" became equal to "CI"
 		And I close all client application windows
 				
-Scenario: _0260130 create cash out
-	And I close all client application windows
-	* Open POS		
-		And In the command interface I select "Retail" "Point of sale"	
-	* Create cash out
-		And I click "Create cash out" button
-	* Check filling money transfer
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "Branch" became equal to "Shop 02"
-		Then the form attribute named "Sender" became equal to "Pos cash account 1"
-		Then the form attribute named "SendFinancialMovementType" became equal to "Movement type 1"
-		Then the form attribute named "SenderCurrency" became equal to "TRY"
-		And the editing text of form attribute named "TotalAtPOS" became equal to "7 480,00"
-		Then the form attribute named "Receiver" became equal to "Cash desk №2"
-		Then the form attribute named "ReceiveFinancialMovementType" became equal to "Movement type 1"
-		Then the form attribute named "ReceiverCurrency" became equal to "TRY"
-		And the editing text of form attribute named "SendAmount" became equal to "7 480,00"
-		And I input "3 480,00" text in "Send amount" field
-		And I click "Create money transfer" button
-		Then in the TestClient message log contains lines by template:
-			|'Object Money transfer* created.'|		
-	* Check creation
-		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
-		And I go to line in "List" table
-			| 'Author' | 'Company'      | 'Receive amount' | 'Receive currency' | 'Receiver'     | 'Send amount' | 'Send currency' | 'Sender'             |
-			| 'CI'     | 'Main Company' | '3 480,00'       | 'TRY'              | 'Cash desk №2' | '3 480,00'    | 'TRY'           | 'Pos cash account 1' |
-		And I select current line in "List" table
-		And I delete "$$NumberMoneyTransfer3$$" variable
-		And I delete "$$MoneyTransfer3$$" variable
-		And I save the value of "Number" field as "$$NumberMoneyTransfer3$$"
-		And I save the window as "$$MoneyTransfer3$$"				
-	* Create Cash receipt
-		And I click "Cash receipt" button
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "CashAccount" became equal to "Cash desk №2"
-		Then the form attribute named "TransactionType" became equal to "Cash in"
-		Then the form attribute named "Currency" became equal to "TRY"
-		And "PaymentList" table became equal
-			| '#' | 'Total amount' | 'Financial movement type' | 'Money transfer'     |
-			| '1' | '3 480,00'     | 'Movement type 1'         | '$$MoneyTransfer3$$' |
-		Then the form attribute named "Branch" became equal to "Shop 02"
-		And the editing text of form attribute named "DocumentAmount" became equal to "3 480,00"
-		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
-		And I click "Post" button
-		And I delete "$$NumberCashReceipt2$$" variable
-		And I delete "$$CashReceipt2$$" variable
-		And I save the value of "Number" field as "$$NumberCashReceipt2$$"
-		And I save the window as "$$CashReceipt2$$"
-	* Check creation
-		Given I open hyperlink "e1cib/list/Document.CashReceipt"
-		And "List" table contains lines
-			| 'Number'                 | 'Amount'   | 'Company'      | 'Cash account' | 'Reference'        | 'Currency' | 'Transaction type' | 'Author' |
-			| '$$NumberCashReceipt2$$' | '3 480,00' | 'Main Company' | 'Cash desk №2' | '$$CashReceipt2$$' | 'TRY'      | 'Cash in'          | 'CI'     |
-		And I close all client application windows
-
-
-
+		
 							
 Scenario: _0260135 close session and check Consolidated retail sales filling	
 	And I close all client application windows
 	* Open POS		
 		And In the command interface I select "Retail" "Point of sale"
 	* Close session
+		And I move to "Session" tab
 		And I click "Close session" button
-		* Filling cash part
-			And "CashTable" table became equal
-				| 'Operation' | 'Payment type' | 'In Base'  | 'In Register' |
-				| 'Sales'     | 'Cash'         | '7 550,00' | ''            |
-				| 'Returns'   | 'Cash'         | '1 070,00' | ''            |
-			And I go to line in "CashTable" table
-				| 'Operation' | 'Payment type' | 'In Base'  | 'In Register' |
-				| 'Returns'   | 'Cash'         | '1 070,00' | ''            |
-			And I select current line in "CashTable" table
-			And I input "1 070,02" text in "In Register" field of "CashTable" table
-			And I finish line editing in "CashTable" table
-			And I go to line in "CashTable" table
-				| 'In Base'  | 'Operation' | 'Payment type' |
-				| '7 550,00' | 'Sales'     | 'Cash'         |
-			And I select current line in "CashTable" table
-			And I input "7 550,00" text in "In Register" field of "CashTable" table
-			And I finish line editing in "CashTable" table
-			And I go to line in "CashTable" table
-				| 'In Base'  | 'In Register' | 'Operation' | 'Payment type' |
-				| '1 070,00' | '1 070,02'    | 'Returns'   | 'Cash'         |
-			And I set checkbox named "CashConfirm"
-		* Filling card part		
-			Then "Terminals: Session closing" window is opened
-			And I go to line in "TerminalTable" table
-				| 'In Base'  | 'Operation' | 'Payment type' |
-				| '4 770,00' | 'Sales'     | 'Card 02'      |
-			And I activate "In Terminal" field in "TerminalTable" table
-			And I select current line in "TerminalTable" table
-			And I input "4 770,00" text in "In Terminal" field of "TerminalTable" table
-			And I finish line editing in "TerminalTable" table
-			And I go to line in "TerminalTable" table
-				| 'In Base'  | 'Operation' | 'Payment type' |
-				| '3 180,00' | 'Sales'     | 'Card 01'      |
-			And I select current line in "TerminalTable" table
-			And I input "3 180,00" text in "In Terminal" field of "TerminalTable" table
-			And I finish line editing in "TerminalTable" table
-			And I go to line in "TerminalTable" table
-				| 'In Base' | 'Operation' | 'Payment type' |
-				| '550,00'  | 'Returns'   | 'Card 02'      |
-			And I select current line in "TerminalTable" table
-			And I input "550,00" text in "In Terminal" field of "TerminalTable" table
-			And I finish line editing in "TerminalTable" table	
-		* Check balance
-			Then the form attribute named "Workstation" became equal to "Workstation 01"
-			Then the form attribute named "CashAccount" became equal to "Pos cash account 1"
-			And the editing text of form attribute named "BalanceBeginning" became equal to "1 040,00"
-			Then the form attribute named "CurrencyBalanceBeginning" became equal to "TRY"
-			And the editing text of form attribute named "BalanceIncoming" became equal to "8 550,00"
-			Then the form attribute named "CurrencyBalanceIncoming" became equal to "TRY"
-			And the editing text of form attribute named "BalanceOutcoming" became equal to "5 590,00"
-			Then the form attribute named "CurrencyBalanceOutcoming" became equal to "TRY"
-			And the editing text of form attribute named "BalanceEnd" became equal to "4 000,00"
-			Then the form attribute named "CurrencyBalanceEnd" became equal to "TRY"
-			And the editing text of form attribute named "BalanceReal" became equal to "0,00"
-			Then the form attribute named "Company" became equal to "Main Company"
-			Then the form attribute named "Branch" became equal to "Shop 02"
-			Then the form attribute named "Store" became equal to "Store 01"
-		* Filling real cash and close session
-			And I input "4 000,00" text in "Real cash" field
-			And I move to the next attribute
-			And I click "Close session" button						
+		And I close all client application windows
 	* Check filling Consolidated retail sales
 		Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
 		And I go to line in "List" table
@@ -613,26 +314,12 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 		Then the form attribute named "CashAccount" became equal to "Pos cash account 1"
 		Then the form attribute named "Status" became equal to "Close"
 		And "Documents" table became equal
-			| 'Document'                   | 'Company'      | 'Amount' | 'Branch'  | 'Currency' | 'Author' |
-			| '$$RetailSalesReceiptNew$$'  | 'Main Company' | '1 590'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'                          | 'Main Company' | '3 180'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'                          | 'Main Company' | '3 180'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'                          | 'Main Company' | '2 110'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'                          | 'Main Company' | '5 440'  | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '$$RetailReturnReceiptNew$$' | 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'                          | 'Main Company' | '-520'   | 'Shop 02' | 'TRY'      | 'CI'     |
-			| '*'                          | 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
-		Then the number of "Documents" table lines is "equal" "8"
+			| 'Document'                  | 'Company'      | 'Amount' | 'Branch'  | 'Currency' | 'Author' |
+			| '$$RetailSalesReceiptNew$$' | 'Main Company' | '1 590'  | 'Shop 02' | 'TRY'      | 'CI'     |
+			| '$$RetailReturnReceiptNew$$'| 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
+		Then the number of "Documents" table lines is "equal" "2"
 		Then the form attribute named "Branch" became equal to "Shop 02"
-		And the editing text of form attribute named "BalanceEnd" became equal to "4 000,00"
-		And the editing text of form attribute named "BalanceReal" became equal to "4 000,00"
-		And "PaymentList" table became equal
-			| '#' | 'Amount'   | 'Is return' | 'Payment type' | 'Payment terminal' | 'Real amount' |
-			| '1' | '7 550,00' | 'No'        | 'Cash'         | ''                 | '7 550,00'    |
-			| '2' | '1 070,00' | 'Yes'       | 'Cash'         | ''                 | '1 070,02'    |
-			| '3' | '3 180,00' | 'No'        | 'Card 01'      | ''                 | '3 180,00'    |
-			| '4' | '4 770,00' | 'No'        | 'Card 02'      | ''                 | '4 770,00'    |
-			| '5' | '550,00'   | 'Yes'       | 'Card 02'      | ''                 | '550,00'      |	
+		Then the form attribute named "Author" became equal to "CI"
 		And I close all client application windows		
 
 Scenario: _0260145 check block RSR form if Consolidated retail sales is closed
@@ -694,7 +381,7 @@ Scenario: _0260146 try unpost RSR if Consolidated retail sales is closed
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
 		Then there are lines in TestClient message log
-			|'Cannot unpost, document is closed by [ $$ConsolidatedRetailSales2$$ ]\n'|
+			|'Cannot unpost, document is closed by [ $$ConsolidatedRetailSales$$ ]\n'|
 		And I close all client application windows
 		
 Scenario: _0260147 try mark for deletion RSR if Consolidated retail sales is closed
@@ -711,7 +398,7 @@ Scenario: _0260147 try mark for deletion RSR if Consolidated retail sales is clo
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
 		Then there are lines in TestClient message log
-			|'Cannot set deletion mark, document is closed by [ $$ConsolidatedRetailSales2$$ ]\n'|
+			|'Cannot set deletion mark, document is closed by [ $$ConsolidatedRetailSales$$ ]\n'|
 		And I close all client application windows
 			
 Scenario: _0260148 post RSR if Consolidated retail sales is closed
@@ -731,8 +418,8 @@ Scenario: _0260150 check block RRR form if Consolidated retail sales is closed
 	* Select RRR
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I go to line in "List" table
-			| 'Amount' | 'Number' |
-			| '550,00' | '1'      |
+			| 'Amount' |
+			| '550,00' |	
 		And I select current line in "List" table 
 	* Check form
 		* Header	
@@ -785,7 +472,7 @@ Scenario: _0260152 try unpost RRR if Consolidated retail sales is closed
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
 		Then there are lines in TestClient message log
-			|'Cannot unpost, document is closed by [ $$ConsolidatedRetailSales2$$ ]\n'|
+			|'Cannot unpost, document is closed by [ $$ConsolidatedRetailSales$$ ]\n'|
 		And I close all client application windows
 		
 Scenario: _0260153 try mark for deletion RRR if Consolidated retail sales is closed
@@ -802,7 +489,7 @@ Scenario: _0260153 try mark for deletion RRR if Consolidated retail sales is clo
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
 		Then there are lines in TestClient message log
-			|'Cannot set deletion mark, document is closed by [ $$ConsolidatedRetailSales2$$ ]\n'|
+			|'Cannot set deletion mark, document is closed by [ $$ConsolidatedRetailSales$$ ]\n'|
 		And I close all client application windows					
 				
 Scenario: _0260154 post RRR if Consolidated retail sales is closed
@@ -883,8 +570,8 @@ Scenario: _0260162 check RRR changing if Consolidated retail sales is unpost
 		* Select RRR
 			Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 			And I go to line in "List" table
-				| 'Amount' | 'Number' |
-				| '550,00' | '1'      |
+				| 'Amount' |
+				| '550,00' |	
 			And I select current line in "List" table 
 		* Header	
 			And I click "Decoration group title collapsed picture" hyperlink		
@@ -973,8 +660,102 @@ Scenario: _0260169 check RRR deletion mark if Consolidated retail sales is unpos
 		And I close all client application windows	
 				
 
+Scenario: _0260180 create cash in
+	And I close all client application windows
+	* Open POS and open session		
+		And In the command interface I select "Retail" "Point of sale"
+		And I click "Open session" button
+		And I move to "Page1" tab
+	* Create cash in
+		Then the number of "CashInList" table lines is "равно" 1
+		And I go to line in "CashInList" table
+			| 'Money transfer'      | 'Currency' | 'Amount'   |
+			| '$$MoneyTransfer11$$' | 'TRY'      | '1 000,00' |
+		And in the table "CashInList" I click "Create cash in" button
+	* Check Cash receipt
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "CashAccount" became equal to "Pos cash account 1"
+		Then the form attribute named "TransactionType" became equal to "Cash in"
+		Then the form attribute named "Currency" became equal to "TRY"
+		And "PaymentList" table became equal
+			| '#' | 'Total amount' | 'Financial movement type' | 'Money transfer'      |
+			| '1' | '1 000,00'     | 'Movement type 1'         | '$$MoneyTransfer11$$' |
+		
+		Then the form attribute named "Branch" became equal to "Shop 02"
+		And the editing text of form attribute named "DocumentAmount" became equal to "1 000,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+	* Post Cash receipt
+		And I click "Post" button
+		And I delete "$$NumberCashReceipt1$$" variable
+		And I delete "$$CashReceipt1$$" variable
+		And I save the value of "Number" field as "$$NumberCashReceipt1$$"
+		And I save the window as "$$CashReceipt1$$"
+		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"		
+		And "List" table became equal
+			| 'Number'                 | 'Amount'   | 'Company'      | 'Cash account'       | 'Currency' | 'Transaction type' |
+			| '$$NumberCashReceipt1$$' | '1 000,00' | 'Main Company' | 'Pos cash account 1' | 'TRY'      | 'Cash in'          |
+		Then the number of "List" table lines is "равно" 1
+		When in opened panel I select "Point of sales"
+		And in the table "CashInList" I click "Update cash in" button
+		Then the number of "CashInList" table lines is "равно" 0
+		And I close all client application windows
+		
+		
 				
-
+Scenario: _0260181 create cash out
+	And I close all client application windows
+	* Open POS		
+		And In the command interface I select "Retail" "Point of sale"	
+	* Create cash out
+		And I move to "Page1" tab	
+		And I move to "Page1" tab
+		And in the table "CashInList" I click "Create cash out" button
+		Then "CashOut amount" window is opened
+		And I input "1 000,00" text in the field named "InputFld"
+		And I click the button named "OK"
+	* Check money transfer
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Sender" became equal to "Pos cash account 1"
+		Then the form attribute named "SendFinancialMovementType" became equal to "Movement type 1"
+		Then the form attribute named "SendCurrency" became equal to "TRY"
+		And the editing text of form attribute named "SendAmount" became equal to "1 000,00"
+		Then the form attribute named "Receiver" became equal to "Cash desk №2"
+		Then the form attribute named "ReceiveFinancialMovementType" became equal to "Movement type 1"
+		Then the form attribute named "ReceiveCurrency" became equal to "TRY"
+		And the editing text of form attribute named "ReceiveAmount" became equal to "1 000,00"
+		Then the form attribute named "Author" became equal to "CI"
+		Then the form attribute named "Branch" became equal to "Shop 02"
+	* Post money transfer
+		And I click "Post" button
+		And I delete "$$NumberMoneyTransfer3$$" variable
+		And I delete "$$MoneyTransfer3$$" variable
+		And I save the value of "Number" field as "$$NumberMoneyTransfer3$$"
+		And I save the window as "$$MoneyTransfer3$$"
+	* Create Cash receipt
+		And I click "Cash receipt" button
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "CashAccount" became equal to "Cash desk №2"
+		Then the form attribute named "TransactionType" became equal to "Cash in"
+		Then the form attribute named "Currency" became equal to "TRY"
+		And "PaymentList" table became equal
+			| '#' | 'Total amount' | 'Financial movement type' | 'Money transfer'     |
+			| '1' | '1 000,00'     | 'Movement type 1'         | '$$MoneyTransfer3$$' |
+		Then the form attribute named "Branch" became equal to "Shop 02"
+		And the editing text of form attribute named "DocumentAmount" became equal to "1 000,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		And I click "Post" button
+		And I delete "$$NumberCashReceipt2$$" variable
+		And I delete "$$CashReceipt2$$" variable
+		And I save the value of "Number" field as "$$NumberCashReceipt2$$"
+		And I save the window as "$$CashReceipt2$$"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And "List" table contains lines
+			| 'Number'                 | 'Amount'   | 'Company'      | 'Cash account' | 'Reference'        | 'Currency' | 'Transaction type' | 'Author' |
+			| '$$NumberCashReceipt2$$' | '1 000,00' | 'Main Company' | 'Cash desk №2' | '$$CashReceipt2$$' | 'TRY'      | 'Cash in'          | 'CI'     |
+		And I close all client application windows
 			
 			
 					

@@ -85,8 +85,8 @@ Scenario: _602701 check data history for catalog (Partners)
 		And I click "Save" button
 		And I click "Change history" button
 		And "Versions" table contains lines
-			| '№'      | 'Date' | 'Author'|
-			| '*'      | '*'    | '*'     |	
+			| 'Number' | 'Date' | 'Author'|
+			| '*'      | '*'    | '*'     |
 	And I close all client application windows
 	
 Scenario: _602702 check data history for document (Purchase order)	
@@ -109,12 +109,12 @@ Scenario: _602702 check data history for document (Purchase order)
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| 'Number' |'Date' |
-			| '116'    |'12.02.2021 12:44:59' |
+			| '116'   |'12.02.2021 12:44:59' |
 		And I select current line in "List" table
 		And I click "Post" button
 		And I click "Change history" button
 		And "Versions" table contains lines
-			| '№'      | 'Date' | 'Author'|
+			| 'Number' | 'Date' | 'Author'|
 			| '*'      | '*'    | '*'     |
 	And I close all client application windows
 		

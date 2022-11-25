@@ -6,8 +6,8 @@ Var Component Export;
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	ThisObject.HTMLDate = GetCommonTemplate("HTMLClock").GetText();
-	ThisObject.HTMLTextTemplate = GetCommonTemplate("HTMLTextField").GetText();
+	HTMLDate = GetCommonTemplate("HTMLClock").GetText();
+	HTMLTextTemplate = GetCommonTemplate("HTMLTextField").GetText();
 	Workstation = SessionParametersServer.GetSessionParameter("Workstation");
 	If Workstation.IsEmpty() Then
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_103, "Workstation"));
@@ -61,13 +61,16 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Form.Items.OpenSession.Enabled = Not SessionIsOpened;
 		Form.Items.CloseSession.Enabled = SessionIsOpened;
 		Form.Items.CancelSession.Enabled = SessionIsOpened;
-		Form.Items.GroupCommonCommands.Visible = True;
+		
+		If Not SessionIsOpened Then
+			Form.Items.GroupMainPages.CurrentPage = Form.Items.GroupPage1;
+		Else
+			Form.Items.GroupMainPages.CurrentPage = Form.Items.GroupPage2;
+		EndIf;
 	Else
-		Form.Items.GroupCommonCommands.Visible = False;
+		Form.Items.GroupMainPages.PagesRepresentation = FormPagesRepresentation.None;
+		Form.Items.GroupMainPages.CurrentPage = Form.Items.GroupPage2;
 	EndIf;
-	
-	Form.Items.GroupCashCommands.Visible = 
-		CommonFunctionsServer.GetRefAttribute(Form.Workstation, "UseCashInAndCashOut");
 EndProcedure
 
 #Region AGREEMENT
@@ -95,8 +98,7 @@ EndProcedure
 
 &AtClient
 Procedure OpenSession(Command)
-	ChangeConsolidatedRetailSales(Object, ThisObject, 
-		DocConsolidatedRetailSalesServer.CreateDocument(Object.Company, Object.Branch, ThisObject.Workstation));
+	Object.ConsolidatedRetailSales = DocConsolidatedRetailSalesServer.CreateDocument(Object.Company, Object.Branch, ThisObject.Workstation);
 	DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
 	
 	SetVisibilityAvailability(Object, ThisObject);
@@ -105,27 +107,8 @@ EndProcedure
 
 &AtClient
 Procedure CloseSession(Command)
-	FormParameters = New Structure();
-	FormParameters.Insert("Currency", Object.Currency);
-	FormParameters.Insert("Store", ThisObject.Store);
-	FormParameters.Insert("Workstation", Object.Workstation);
-	FormParameters.Insert("ConsolidatedRetailSales", Object.ConsolidatedRetailSales);
-	
-	NotifyDescription = New NotifyDescription("CloseSessionFinish", ThisObject);
-	
-	OpenForm(
-		"DataProcessor.PointOfSale.Form.SessionClosing", 
-		FormParameters, ThisObject, UUID, , , NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
-EndProcedure
-
-&AtClient
-Procedure CloseSessionFinish(Result, AddInfo) Export
-	If Result = Undefined Then
-		Return;
-	EndIf;
-	
-	DocConsolidatedRetailSalesServer.CloseDocument(Object.ConsolidatedRetailSales, Result);
-	ChangeConsolidatedRetailSales(Object, ThisObject, Undefined);
+	DocConsolidatedRetailSalesServer.CloseDocument(Object.ConsolidatedRetailSales);
+	Object.ConsolidatedRetailSales = Undefined;
 	
 	SetVisibilityAvailability(Object, ThisObject);
 	EnabledPaymentButton();
@@ -133,30 +116,11 @@ EndProcedure
 
 &AtClient
 Procedure CancelSession(Command)
-	FormParameters = New Structure();
-	FormParameters.Insert("Currency", Object.Currency);
-	FormParameters.Insert("Store", ThisObject.Store);
-	FormParameters.Insert("Workstation", Object.Workstation);
-	FormParameters.Insert("ConsolidatedRetailSales", Object.ConsolidatedRetailSales);
-	
-	NotifyDescription = New NotifyDescription("CancelSessionFinish", ThisObject);
-	
-	OpenForm(
-		"DataProcessor.PointOfSale.Form.SessionClosing", 
-		FormParameters, ThisObject, UUID, , , NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
-EndProcedure
-
-&AtClient
-Procedure CancelSessionFinish(Result, AddInfo) Export
-	If Not Result = DialogReturnCode.OK Then
-		Return;
-	EndIf;
-	
 	DocConsolidatedRetailSalesServer.CancelDocument(Object.ConsolidatedRetailSales);
-	ChangeConsolidatedRetailSales(Object, ThisObject, Undefined);
+	Object.ConsolidatedRetailSales = Undefined;
 	
 	SetVisibilityAvailability(Object, ThisObject);
-	EnabledPaymentButton();
+	EnabledPaymentButton();		
 EndProcedure
 			
 #EndRegion
@@ -319,10 +283,6 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		SetDetailedInfo("");
 		DocumentsClient.PickupItemsEnd(Result.FoundedItems, NotifyParameters);
 		EnabledPaymentButton();
-		
-		If Not SalesPersonByDefault.IsEmpty() Then
-			FillSalesPersonInItemList();
-		EndIf;
 		
 	Else
 		
@@ -620,12 +580,7 @@ Procedure NewTransactionAtServer()
 	DocRetailSalesReceiptServer.OnCreateAtServer(Object, ThisObject, Cancel, True);
 	
 	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
-		If ThisObject.ConsolidatedRetailSales.IsEmpty() Then
-			ChangeConsolidatedRetailSales(Object, ThisObject, 
-				DocConsolidatedRetailSalesServer.GetDocument(Object.Company, Object.Branch, ThisObject.Workstation));
-		Else
-			Object.ConsolidatedRetailSales = ThisObject.ConsolidatedRetailSales;
-		EndIf;
+		Object.ConsolidatedRetailSales = DocConsolidatedRetailSalesServer.GetDocument(Object.Company, Object.Branch, ThisObject.Workstation);
 	EndIf;
 	
 	SalesPersonByDefault = Undefined;
@@ -693,25 +648,10 @@ EndProcedure
 
 &AtClient
 Procedure EnabledPaymentButton()
-	Items.qPayment.Enabled = Object.ItemList.Count();
 	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
-		SetPaymentButtonOnServer();
-	EndIf;
-EndProcedure
-
-&AtServer
-Procedure SetPaymentButtonOnServer()
-	ColorGreen = StyleColors.AccentColor;
-	ColorRed = StyleColors.NegativeTextColor;
-	If ValueIsFilled(Object.ConsolidatedRetailSales) Then
-		Items.qPayment.Title = R().InfoMessage_Payment;
-		Items.qPayment.TextColor = ColorGreen;
-		Items.qPayment.BorderColor = ColorGreen;
+		Items.qPayment.Enabled = Object.ItemList.Count() And ValueIsFilled(Object.ConsolidatedRetailSales);	
 	Else
-		Items.qPayment.Enabled = False;
-		Items.qPayment.Title = R().InfoMessage_SessionIsClosed;
-		Items.qPayment.TextColor = ColorRed;
-		Items.qPayment.BorderColor = ColorRed;
+		Items.qPayment.Enabled = Object.ItemList.Count();
 	EndIf;
 EndProcedure
 
@@ -767,12 +707,6 @@ Procedure ClearRetailCustomerAtServer()
 	EndDo;
 EndProcedure
 
-&AtClientAtServerNoContext
-Procedure ChangeConsolidatedRetailSales(Object, Form, NewDocument)
-	Form.ConsolidatedRetailSales = NewDocument;
-	Object.ConsolidatedRetailSales = NewDocument;
-EndProcedure
-
 #EndRegion
 
 #Region Taxes
@@ -815,16 +749,6 @@ EndProcedure
 
 &AtClient
 Procedure CreateCashIn(Command)
-	Items.GroupMainPages.CurrentPage = Items.CashPage;
-EndProcedure
-
-&AtClient
-Procedure ReturnToMain(Command)
-	Items.GroupMainPages.CurrentPage = Items.MainPage;
-EndProcedure
-
-&AtClient
-Procedure CashInListSelection(Item, RowSelected, Field, StandardProcessing)
 	CurrentData = Items.CashInList.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
@@ -835,37 +759,20 @@ Procedure CashInListSelection(Item, RowSelected, Field, StandardProcessing)
 	CashInData.Insert("Amount"        , CurrentData.Amount);
 	
 	FillingData = GetFillingDataMoneyTransferForCashReceipt(CashInData);
-	OpenForm(
-		"Document.CashReceipt.ObjectForm", 
-		New Structure("FillingValues", FillingData), , 
-		New UUID(), , ,
-		New NotifyDescription("CreateCashInFinish", ThisObject),
-		FormWindowOpeningMode.LockWholeInterface);	
+	OpenForm("Document.CashReceipt.ObjectForm", New Structure("FillingValues", FillingData), , New UUID());	
 EndProcedure
 
 &AtClient
-Procedure CreateCashInFinish(Result, AddInfo) Export
+Procedure UpdateCashIn(Command)
 	FillCashInList();
 EndProcedure
 
 &AtClient
-Procedure UpdateMoneyTransfers(Command)
-	FillCashInList();
-EndProcedure
-
-&AtClient
-Procedure CreateCashOut(Command)
-	OpenForm("DataProcessor.PointOfSale.Form.CashOut", 
-			New Structure("FillingData", GetFillingDataMoneyTransfer(0)), , 
-			UUID, , , 
-			New NotifyDescription("CreateCashOutFinish", ThisObject), 
-			FormWindowOpeningMode.LockWholeInterface);
-EndProcedure
-
-&AtClient
-Procedure CreateCashOutFinish(Result, AddInfo) Export
-	If TypeOf(Result) = Type("String") Then
-		CommonFunctionsClientServer.ShowUsersMessage(Result);
+Async Procedure CreateCashOut(Command)
+	Result = Await InputNumberAsync(0, "CashOut amount", 10, 2);
+	If Result <> Undefined Then
+		FillingData = GetFillingDataMoneyTransfer(Result);
+		OpenForm("Document.MoneyTransfer.ObjectForm", New Structure("FillingValues", FillingData), , New UUID());
 	EndIf;
 EndProcedure
 

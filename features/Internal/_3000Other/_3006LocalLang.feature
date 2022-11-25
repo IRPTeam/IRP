@@ -156,7 +156,7 @@ Scenario: _300603 search by Description_en and Description_tr in the Items catal
 	Given I open hyperlink "e1cib/list/Catalog.Items"
 	And I click the button named "FormFind"
 	And I select "Description" exact value from "&Search in" drop-down list
-	And I input "rui" text in "&Search for" field
+	And I input "rui" text in "F&ind" field
 	And I click "&Find" button
 	And "List" table became equal
 		| 'Description' |
@@ -164,7 +164,7 @@ Scenario: _300603 search by Description_en and Description_tr in the Items catal
 	And I click the button named "FormCancelSearch"
 	And I click the button named "FormFind"
 	And I select "Description" exact value from "&Search in" drop-down list
-	And I input "tr" text in "&Search for" field
+	And I input "tr" text in "F&ind" field
 	And I click "&Find" button
 	And "List" table does not contain lines
 		| 'Description'             |

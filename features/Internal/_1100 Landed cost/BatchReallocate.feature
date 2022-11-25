@@ -155,7 +155,7 @@ Scenario: _0052 create Calculation movements cost (batch reallocate)
 		And I move to "Custom" tab
 		And I activate field named "OptionsListReportOption" in "OptionsList" table
 		And I select current line in "OptionsList" table
-		And I click "Generate" button
+		And I click "Run report" button
 		Given "Result" spreadsheet document is equal to "BatchReallocate1"
 		And I close all client application windows
 		

@@ -152,7 +152,7 @@ Scenario: _2012 check batch calculation
 	And I move to "Custom" tab
 	And I activate field named "OptionsListReportOption" in "OptionsList" table
 	And I select current line in "OptionsList" table
-	And I click "Generate" button
+	And I click "Run report" button
 	Given "Result" spreadsheet document is equal to "LandedCost" by template
 	And I close all client application windows
 	
@@ -184,7 +184,7 @@ Scenario: _2013 check batch calculation (one semiproduct consists of another sem
 			| 'Item'    | 'Item key'    |
 			| 'Product' | 'Product' |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		Given "Result" spreadsheet document is equal to "LandedCost2" by template
 
 

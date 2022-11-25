@@ -399,7 +399,7 @@ Scenario: _003 creating Purchase invoice and checking close Batch wise over bala
 			| 'Item'       | 'Item key' |
 			| 'High shoes' | '39/19SD'  |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_003_2" template lines by template
 		And I close all client application windows
 	And I close all client application windows
@@ -462,7 +462,7 @@ Scenario: _004 creating Sales invoice by last date and checking the mechanism fo
 			| 'Item'  | 'Item key' |
 			| 'Boots' | 'Boots/S-8'  |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_004_1" template lines by template
 	* Repeated posting document CalculationMovementCosts №1
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -482,7 +482,7 @@ Scenario: _004 creating Sales invoice by last date and checking the mechanism fo
 			| 'Item'  | 'Item key' |
 			| 'Boots' | 'Boots/S-8'  |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_004_2" template lines by template
 		And I close all client application windows
 
@@ -554,7 +554,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			| 'Item'  | 'Item key' |
 			| 'Boots' | 'Boots/S-8'  |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_005_1" template lines by template
 	* Repeated posting document CalculationMovementCosts №1
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -574,7 +574,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			| 'Item'  | 'Item key' |
 			| 'Boots' | 'Boots/S-8'  |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_005_2" template lines by template
 		And I close all client application windows
 	* Changing Store and Company on Second company
@@ -613,7 +613,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			| 'Item'  | 'Item key' |
 			| 'Boots' | 'Boots/S-8'  |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_005_3" template lines by template
 		And I close all client application windows
 	* Changing item key and changing Store and Company back 
@@ -659,7 +659,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '39/18SD'  |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_005_4" template lines by template
 		And I close all client application windows
 	* Clear posting and changing item key back
@@ -697,7 +697,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			| 'Item'  | 'Item key' |
 			| 'Boots' | 'Boots/S-8'  |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_005_5" template lines by template
 		And I close all client application windows
 	* Posting back
@@ -727,7 +727,7 @@ Scenario: _005 add Purchase invoice and checking the mechanism for aligning the 
 			| 'Description' |
 			| 'Store 02'    |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_005_2" template lines by template
 		And I close all client application windows
 
@@ -763,7 +763,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| 'Item'  | 'Item key' |
 			| 'Boots' | 'Boots/S-8'  |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_006_1" template lines by template
 	* Repeated posting document CalculationMovementCosts №1
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -783,7 +783,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| 'Item'  | 'Item key' |
 			| 'Boots' | 'Boots/S-8'  |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_006_2" template lines by template
 		And I close all client application windows
 	* Changing Date (19/08) in the Sales invoice 9100 from Store 02
@@ -832,7 +832,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| 'Item'  | 'Item key' |
 			| 'Boots' | 'Boots/S-8'  |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_006_3" template lines by template
 	* Changing Store and Company on Second company
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -874,7 +874,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| 'Item'  | 'Item key' |
 			| 'Boots' | 'Boots/S-8'  |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_006_4" template lines by template
 		And I close all client application windows
 	* Changing item key and changing Store and Company back
@@ -932,14 +932,14 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| 'Item'  | 'Item key' |
 			| 'Boots' | 'Boots/S-8'  |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_006_5" template lines by template
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
 		And I go to line in "List" table
 			| 'Item'  | 'Item key' |
 			| 'Boots' | '39/18SD'  |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_006_51" template lines by template
 		And I close all client application windows
 	* Clear posting and changing item key back
@@ -976,7 +976,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| 'Item'  | 'Item key' |
 			| 'Boots' | 'Boots/S-8'  |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_006_6" template lines by template
 		And I close all client application windows
 	* Posting back
@@ -1006,7 +1006,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 			| 'Description' |
 			| 'Store 02'    |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_006_7" template lines by template
 		And I close all client application windows
 
@@ -1020,7 +1020,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| 'Item'  | 'Item key' |
 			| 'Shirt' | '36/Red'   |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_007_1" template lines by template
 	* Changing Quantity in the Inventory transfer 1 dated 05.08.2021 12:00:00	
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
@@ -1060,7 +1060,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| 'Shirt' | '36/Red'  |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_007_2" template lines by template
 	* Changing Store Sender on Store 05 (no balance)
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
@@ -1098,7 +1098,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| 'Shirt' | '36/Red'   |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_007_3" template lines by template
 	* Changing Store Sender on Store 01 and changing date
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
@@ -1133,7 +1133,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| 'Shirt' | '36/Red'  |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_007_4" template lines by template
 	* Changing Store Receiver on Store 06 and company on Second company
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
@@ -1170,7 +1170,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| 'Shirt' | '36/Red'  |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_007_6" template lines by template
 	* Changing item key and changing Store Receiver and Company back
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
@@ -1219,7 +1219,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| 'Shirt' | '38/Black' |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_007_7" template lines by template
 	* Clear posting
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
@@ -1266,7 +1266,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| 'Shirt' | '36/Red'  |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_007_8" template lines by template
 	* Posting back
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
@@ -1287,7 +1287,7 @@ Scenario: _007 changing Inventory transfer and checking the mechanism for aligni
 			| 'Shirt' | '36/Red'  |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_007_5" template lines by template
 		And I close all client application windows
 
@@ -1344,7 +1344,7 @@ Scenario: _008 creating Sales return on a wholly sold batches and checking the m
 			| 'Description'     |
 			| 'Store 02' | 
 		And I select current line in "List" table		
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_008_1" template lines by template
 	* Changing date (Sales return 10 -18/08)
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
@@ -1378,7 +1378,7 @@ Scenario: _008 creating Sales return on a wholly sold batches and checking the m
 			| 'Description'     |
 			| 'Store 02' | 
 		And I select current line in "List" table	
-		And I click "Generate" button
+		And I click "Run report" button
 	* Clear posting Sales return №10 and checking the sequence of batches
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
@@ -1403,7 +1403,7 @@ Scenario: _008 creating Sales return on a wholly sold batches and checking the m
 			| 'Trousers' | '38/Yellow'  |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_008_3" template lines by template
 	* Posting Sales return №10 and checking the sequence of batches
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
@@ -1429,7 +1429,7 @@ Scenario: _008 creating Sales return on a wholly sold batches and checking the m
 			| 'Trousers' | '38/Yellow'  |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem2Use"
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_008_4" template lines by template
 	
 
@@ -1446,7 +1446,7 @@ Scenario: _009 creating Purchase return and checking the mechanism for aligning 
 			| 'Description' |
 			| 'Store 02'    |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_009_1" template lines by template
 	* Changing date (Purchase return 15 -18/08)
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
@@ -1480,7 +1480,7 @@ Scenario: _009 creating Purchase return and checking the mechanism for aligning 
 			| 'Description' |
 			| 'Store 02'    |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_009_2" template lines by template
 	* Clear posting Purchase return №15 and checking the sequence of batches
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
@@ -1510,7 +1510,7 @@ Scenario: _009 creating Purchase return and checking the mechanism for aligning 
 			| 'Description' |
 			| 'Store 02'    |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_009_3" template lines by template
 	* Posting Purchase return №15 and checking the sequence of batches
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
@@ -1540,7 +1540,7 @@ Scenario: _009 creating Purchase return and checking the mechanism for aligning 
 			| 'Description' |
 			| 'Store 02'    |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_009_4" template lines by template
 	
 
@@ -1582,7 +1582,7 @@ Scenario: _010 change Stock adjustment as surplus, Stock adjustment as write-off
 			| 'Description' |
 			| 'Store 03'    |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_010_2" template lines by template
 	* Changing company (Stock adjustment as surplus 2) 
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
@@ -1623,7 +1623,7 @@ Scenario: _010 change Stock adjustment as surplus, Stock adjustment as write-off
 			| 'Description' |
 			| 'Store 03'    |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_010_3" template lines by template
 	* Clear posting Opening entry 1 and checking the sequence of batches
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
@@ -1653,7 +1653,7 @@ Scenario: _010 change Stock adjustment as surplus, Stock adjustment as write-off
 			| 'Description' |
 			| 'Store 03'    |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_010_5" template lines by template
 	* Posting opening entry №1, Changing company (Stock adjustment as surplus 3)
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
@@ -1700,7 +1700,7 @@ Scenario: _010 change Stock adjustment as surplus, Stock adjustment as write-off
 			| 'Description' |
 			| 'Store 03'    |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_010_6" template lines by template
 		And I close all client application windows
 		
@@ -1784,7 +1784,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| 'Store 10'    |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem1Use"
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_011_1" template lines by template
 	* Creating UnBundle (Set)
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
@@ -1843,7 +1843,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| 'Store 10'    |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem1Use"
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_011_2" template lines by template
 	* Creating one more Bundle (Set)
 		Given I open hyperlink "e1cib/list/Document.Bundling"
@@ -1922,7 +1922,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| 'Store 10'    |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem1Use"
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_011_3" template lines by template
 	* Clear posting (Bundling 11, Unbundling 15)
 		Given I open hyperlink "e1cib/list/Document.Bundling"
@@ -1953,7 +1953,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| 'Store 10'    |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem1Use"
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_011_5" template lines by template
 	* Posting back (Bundling 11, Unbundling 15)
 		Given I open hyperlink "e1cib/list/Document.Bundling"
@@ -1984,7 +1984,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| 'Store 10'    |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem1Use"
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_011_4" template lines by template
 	* Creating Unbandling of purchased Bundle
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
@@ -2046,7 +2046,7 @@ Scenario: _011 change Bundling and UnBundling and checking the mechanism for ali
 			| 'Store 10'    |
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem1Use"
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_011_6" template lines by template
 	And I close all client application windows
 
@@ -2067,7 +2067,7 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 			| 'Item key' |
 			| '39/19SD'    |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_012_1" template lines by template
 	* Unpost First Retail sales receipt and check batches calculation
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -2092,7 +2092,7 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 			| 'Item key' |
 			| '39/19SD'    |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_012_2" template lines by template
 	* Change first sales receipt date and check batches calculation
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -2123,7 +2123,7 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 			| 'Item key' |
 			| '39/19SD'    |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_012_4" template lines by template
 	* Change quantity in the first Retail sales receipt and Retail return receipt and check batches calculation
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -2174,7 +2174,7 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 			| 'Item key' |
 			| '39/19SD'    |
 		And I select current line in "List" table
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_012_5" template lines by template
 		And I close all client application windows
 	* Check batches calculation for Retail return without base document
@@ -2266,7 +2266,7 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 				| 'Item key' |
 				| 'M/Brown'    |
 			And I select current line in "List" table
-			And I click "Generate" button
+			And I click "Run report" button
 			And "Result" spreadsheet document contains "BathBalance_012_7" template lines by template
 			And I close all client application windows
 		
@@ -2354,7 +2354,7 @@ Scenario: _027 check calculation movements cost for ItemStockAdjustment
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
 		And I remove checkbox named "SettingsComposerUserSettingsItem1Use"	
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_024_1" template lines by template
 		And I close all client application windows
 	* Clear posting 
@@ -2378,7 +2378,7 @@ Scenario: _027 check calculation movements cost for ItemStockAdjustment
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
 		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_024_2" template lines by template	
 	* Post ItemStockAdjustment back	
 		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
@@ -2401,7 +2401,7 @@ Scenario: _027 check calculation movements cost for ItemStockAdjustment
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
 		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_024_1" template lines by template
 		And I close all client application windows		
 							
@@ -2443,7 +2443,7 @@ Scenario: _028 check landed cost by materials
 		And I input "22.09.2022" text in the field named "DateBegin"
 		And I input "22.09.2022" text in the field named "DateEnd"
 		And I click the button named "Select"
-		And I click "Generate" button
+		And I click "Run report" button
 		And "Result" spreadsheet document contains "BathBalance_025_1" template lines by template
 		And I close all client application windows
 

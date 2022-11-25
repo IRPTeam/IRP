@@ -259,7 +259,7 @@ Scenario: _2070006 unpost SO with linked strings (several sessions)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PlannedReceiptReservation.FindByNumber(1055).GetObject().Write(DocumentWriteMode.Posting);" |	
 	* Try unpost SO
-		And I click "Cancel posting" button
+		And I click "Clear posting" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Then there are lines in TestClient message log

@@ -301,7 +301,7 @@ Scenario: _042 check additional cost allocation (documents, by quantity)
 	And I input "31.08.2021 00:00:00" text in the field named "SettingsComposerSettingsDataParametersDate" of "SettingsComposerSettingsDataParameters" table
 	And I finish line editing in "SettingsComposerSettingsDataParameters" table
 	And I click "Finish editing" button
-	And I click "Generate" button
+	And I click "Run report" button
 	And "Result" spreadsheet document contains "BathBalance_042_1" template lines by template
 	And I close all client application windows
 	
@@ -344,7 +344,7 @@ Scenario: _043 check additional cost allocation (documents, by amount)
 	And I input "31.08.2021 00:00:00" text in the field named "SettingsComposerSettingsDataParametersDate" of "SettingsComposerSettingsDataParameters" table
 	And I finish line editing in "SettingsComposerSettingsDataParameters" table
 	And I click "Finish editing" button
-	And I click "Generate" button
+	And I click "Run report" button
 	And "Result" spreadsheet document contains "BathBalance_043_1" template lines by template
 	And I close all client application windows
 
@@ -383,7 +383,7 @@ Scenario: _044 check additional cost allocation (documents, by weight)
 	And I input "31.08.2021 00:00:00" text in the field named "SettingsComposerSettingsDataParametersDate" of "SettingsComposerSettingsDataParameters" table
 	And I finish line editing in "SettingsComposerSettingsDataParameters" table
 	And I click "Finish editing" button
-	And I click "Generate" button
+	And I click "Run report" button
 	And "Result" spreadsheet document contains "BathBalance_044_1" template lines by template
 	And I close all client application windows	
 		
@@ -436,7 +436,7 @@ Scenario: _045 check additional cost allocation (rows, by amount)
 	And I input "31.08.2021 00:00:00" text in the field named "SettingsComposerSettingsDataParametersDate" of "SettingsComposerSettingsDataParameters" table
 	And I finish line editing in "SettingsComposerSettingsDataParameters" table
 	And I click "Finish editing" button
-	And I click "Generate" button
+	And I click "Run report" button
 	And "Result" spreadsheet document contains "BathBalance_045_1" template lines by template
 	And I close all client application windows	
 

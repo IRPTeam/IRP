@@ -329,8 +329,8 @@ Scenario:_800005 check remaining stock control in the Sales order
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011B_FreeStocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
 			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
-		* Cancel posting SO
-			And I click "Cancel posting" button
+		* Clear posting SO
+			And I click "Clear posting" button
 			Then user message window does not contain messages
 
 Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
@@ -459,8 +459,8 @@ Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberSalesInvoice1$$"
 			Then user message window does not contain messages
-		* Cancel posting SI
-			And I click "Cancel posting" button
+		* Clear posting SI
+			And I click "Clear posting" button
 			Then user message window does not contain messages
 		And I close all client application windows
 
@@ -579,8 +579,8 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
 		Then user message window does not contain messages
-	* Cancel posting SI
-		And I click "Cancel posting" button
+	* Clear posting SI
+		And I click "Clear posting" button
 		Then user message window does not contain messages
 		And I close all client application windows
 
@@ -739,8 +739,8 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberRetailSalesReceipt1$$"
 			Then user message window does not contain messages
-		* Cancel posting RSR
-			And I click "Cancel posting" button
+		* Clear posting RSR
+			And I click "Clear posting" button
 			Then user message window does not contain messages
 		And I close all client application windows
 
@@ -856,8 +856,8 @@ Scenario:_800012 check remaining stock control serial lot numbers in the Retail 
 		And I click "Ok" button	
 		And I click "Post" button
 		Then user message window does not contain messages
-	* Cancel posting RSR
-		And I click "Cancel posting" button
+	* Clear posting RSR
+		And I click "Clear posting" button
 		Then user message window does not contain messages
 		And I close all client application windows
 
@@ -993,8 +993,8 @@ Scenario:_800014 check remaining stock control in the Bundling
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberBundling1$$"
 			Then user message window does not contain messages
-		* Cancel posting Bundling
-			And I click "Cancel posting" button
+		* Clear posting Bundling
+			And I click "Clear posting" button
 			Then user message window does not contain messages
 		And I close all client application windows
 		
@@ -1156,8 +1156,8 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberStockAdjustmentAsWriteOff1$$"
 			Then user message window does not contain messages
-		* Cancel posting Stock adjustment as write off	
-			And I click "Cancel posting" button
+		* Clear posting Stock adjustment as write off	
+			And I click "Clear posting" button
 			Then user message window does not contain messages
 		And I close all client application windows
 
@@ -1267,8 +1267,8 @@ Scenario:_800018 check remaining stock control serial lot number in the Stock ad
 		And I click "Ok" button	
 		And I click "Post" button
 		Then user message window does not contain messages
-	* Cancel posting Stock adjustment as write off
-		And I click "Cancel posting" button
+	* Clear posting Stock adjustment as write off
+		And I click "Clear posting" button
 		Then user message window does not contain messages
 		And I close all client application windows	
 								
@@ -1371,8 +1371,8 @@ Scenario:_800020 check remaining stock control in the Purchase return
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberPurchaseReturn1$$"
 			Then user message window does not contain messages
-		* Cancel posting PR
-			And I click "Cancel posting" button
+		* Clear posting PR
+			And I click "Clear posting" button
 			Then user message window does not contain messages
 		And I close all client application windows										
 
@@ -1478,8 +1478,8 @@ Scenario:_800021 check remaining stock control in the Purchase return
 		And I click "Ok" button	
 		And I click "Post" button
 		Then user message window does not contain messages
-	* Cancel posting PR
-		And I click "Cancel posting" button
+	* Clear posting PR
+		And I click "Clear posting" button
 		Then user message window does not contain messages
 		And I close all client application windows
 
@@ -1592,8 +1592,8 @@ Scenario:_800022 check remaining stock control in the shipment confirmation
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation1$$"
 			Then user message window does not contain messages
-		* Cancel posting SC
-			And I click "Cancel posting" button
+		* Clear posting SC
+			And I click "Clear posting" button
 			Then user message window does not contain messages
 		And I close all client application windows
 
@@ -1692,8 +1692,8 @@ Scenario:_800023 check remaining stock control serial lot number in the shipment
 		And I click "Ok" button	
 		And I click "Post" button
 		Then user message window does not contain messages
-	* Cancel posting SC
-		And I click "Cancel posting" button
+	* Clear posting SC
+		And I click "Clear posting" button
 		Then user message window does not contain messages
 		And I close all client application windows
 
@@ -1782,7 +1782,7 @@ Scenario:_800032 check remaining stock control when unpost/change Unbundling
 			| 'Number' |
 			| '1'   |
 		And I select current line in "List" table
-		And I click "Cancel posting" button
+		And I click "Clear posting" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Then I wait that in user messages the "Line No. [3] [Dress M/Brown] R4011B_FreeStocks remaining: 20 . Required: 0 . Lacking: 20 ." substring will appear in 10 seconds
@@ -1923,7 +1923,7 @@ Scenario:_800040 check remaining stock control when unpost/change Stock adjustme
 			| 'Number' |
 			| '251'   |
 		And I select current line in "List" table
-		And I click "Cancel posting" button
+		And I click "Clear posting" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Then I wait that in user messages the "Line No. [1] [High shoes 39/19SD] R4011B_FreeStocks remaining: 10 . Required: 0 . Lacking: 10 ." substring will appear in 10 seconds
@@ -2664,9 +2664,9 @@ Scenario:_800056 check remaining stock control when unpost/change Goods receipt
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
 			| 'Number' |
-			| '251'    |
+			| '251'   |
 		And I select current line in "List" table
-		And I click "Cancel posting" button
+		And I click "Clear posting" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Then I wait that in user messages the "Line No. [1] [High shoes 39/19SD] R4011B_FreeStocks remaining: 10 . Required: 0 . Lacking: 10 ." substring will appear in 10 seconds

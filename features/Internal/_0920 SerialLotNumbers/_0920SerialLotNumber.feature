@@ -1651,7 +1651,7 @@ Scenario: _092008 check serial lot number in the Opening entry
 		And I close current window
 	* Clear post Opening entry and check movements
 		And I activate "$$OpeningEntry092008$$" window			
-		And I click "Clear posting" button
+		And I click "Cancel posting" button
 		And I click "Registrations report" button		
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document does not contain values

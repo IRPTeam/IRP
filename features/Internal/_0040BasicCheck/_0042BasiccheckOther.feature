@@ -752,7 +752,7 @@ Scenario: Open object form "All registers movement"
 	Given I open "AllRegistersMovement" report default form
 	If the warning is displayed then
 		Then I raise "Failed to open report form AllRegistersMovemen" exception
-	And I click "Run report" button		
+	And I click "Generate" button		
 	Then system warning window does not appear
 	And I close all client application windows
 	

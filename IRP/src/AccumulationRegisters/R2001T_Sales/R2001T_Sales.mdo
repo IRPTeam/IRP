@@ -136,6 +136,7 @@
       <types>DocumentRef.SalesReturn</types>
       <types>DocumentRef.RetailSalesReceipt</types>
       <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.RetailReturnReceipt</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

@@ -291,7 +291,7 @@ Scenario: _063 filling landed cost in the Item stock adjastment as surplus by pr
 		And I activate "Item key" field in "List" table
 		And I select current line in "List" table
 		And I remove checkbox named "SettingsComposerUserSettingsItem0Use"	
-		And I click "Run report" button
+		And I click "Generate" button
 	* Check landed cost
 		And "Result" spreadsheet document contains "BathBalance_063_1" template lines by template
 			
@@ -315,7 +315,7 @@ Scenario: _064 filling landed cost in the Item stock adjastment as surplus from 
 		And I input "16.08.2021" text in the field named "DateBegin"
 		And I input "16.08.2021" text in the field named "DateEnd"
 		And I click the button named "Select"
-		And I click "Run report" button
+		And I click "Generate" button
 	* Check landed cost
 		And "Result" spreadsheet document contains "BathBalance_064_1" template lines by template
 
@@ -340,7 +340,7 @@ Scenario: _065 filling landed cost in the Item stock adjastment as surplus from 
 		And I input "19.08.2021" text in the field named "DateBegin"
 		And I input "19.08.2021" text in the field named "DateEnd"
 		And I click the button named "Select"
-		And I click "Run report" button
+		And I click "Generate" button
 	* Check landed cost
 		And "Result" spreadsheet document contains "BathBalance_065_1" template lines by template
 	* Check one more item
@@ -354,7 +354,7 @@ Scenario: _065 filling landed cost in the Item stock adjastment as surplus from 
 		And I input "16.08.2021" text in the field named "DateBegin"
 		And I input "16.08.2021" text in the field named "DateEnd"
 		And I click the button named "Select"
-		And I click "Run report" button
+		And I click "Generate" button
 		And "Result" spreadsheet document contains "BathBalance_065_2" template lines by template
 
 		

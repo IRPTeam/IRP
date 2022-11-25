@@ -110,13 +110,24 @@ Scenario: _020110 load data in the SI
 		Given "Result" spreadsheet document is equal to "LoadDataWithPicture" by template
 	* Add barcode with serial lot number
 		And I click "Back" button
+		And Delay 5
+		And in "Template" spreadsheet document I move to "R5C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "23455677788976667"
+		And Delay 5
 		And in "Template" spreadsheet document I move to "R5C1" cell
 		And in "Template" spreadsheet document I double-click the current cell
 		And in "Template" spreadsheet document I input text "23455677788976667"
 	* Add wrong barcode
+		And Delay 5
 		And in "Template" spreadsheet document I move to "R6C1" cell
 		And in "Template" spreadsheet document I double-click the current cell
 		And in "Template" spreadsheet document I input text "234500000"
+		And Delay 5
+		And in "Template" spreadsheet document I move to "R6C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "234500000"
+		And Delay 5
 	* Add the same barcode
 		And in "Template" spreadsheet document I move to "R7C1" cell
 		And in "Template" spreadsheet document I double-click the current cell
@@ -135,14 +146,14 @@ Scenario: _020110 load data in the SI
 			| '234500000'         | ''         |
 			| '2202283705'        | '5'        |
 		Then the form attribute named "LoadType" became equal to "Barcode"
-		Then "Result" spreadsheet document is equal
+		Then "Result" spreadsheet document is equal by template
 			| 'Key' | 'Image'                                    | 'ItemType'                                    | 'Item'               | 'ItemKey'   | 'SerialLotNumber'         | 'Unit'       | 'hasSpecification' | 'UseSerialLotNumber'    | 'Quantity' | 'Barcode'           |
 			| 'Key' | ''                                         | 'Item types'                                  | 'Items'              | 'Item keys' | 'Item serial/lot numbers' | 'Item units' | 'Item types'       | 'Use serial lot number' | 'Quantity' | 'Barcode'           |
-			| '0'   | 'f82457a7c91f5d12beec5826930cb235blue.jpg' | 'Clothes'                                     | 'Dress'              | 'XS/Blue'   | ''                        | 'pcs'        | 'No'               | 'No'                    | '1,000'    | '2202283705'        |
-			| '1'   | ''                                         | 'With serial lot numbers (use stock control)' | 'Product 1 with SLN' | 'ODS'       | ''                        | 'pcs'        | 'No'               | 'Yes'                   | '2,000'    | '67789997777801'    |
-			| '2'   | ''                                         | 'With serial lot numbers (use stock control)' | 'Product 1 with SLN' | 'PZU'       | '8908899877'              | 'pcs'        | 'No'               | 'Yes'                   | '1,000'    | '23455677788976667' |
-			| '3'   | ''                                         | ''                                            | ''                   | ''          | ''                        | ''           | 'No'               | 'No'                    | '1,000'    | '234500000'         |
-			| '4'   | 'f82457a7c91f5d12beec5826930cb235blue.jpg' | 'Clothes'                                     | 'Dress'              | 'XS/Blue'   | ''                        | 'pcs'        | 'No'               | 'No'                    | '5,000'    | '2202283705'        |
+			| '0'   | 'f82457a7c91f5d12beec5826930cb235blue.jpg' | 'Clothes'                                     | 'Dress'              | 'XS/Blue'   | ''                        | 'pcs'        | '*'                | '*'                     | '1,000'    | '2202283705'        |
+			| '1'   | ''                                         | 'With serial lot numbers (use stock control)' | 'Product 1 with SLN' | 'ODS'       | ''                        | 'pcs'        | '*'                | '*'                     | '2,000'    | '67789997777801'    |
+			| '2'   | ''                                         | 'With serial lot numbers (use stock control)' | 'Product 1 with SLN' | 'PZU'       | '8908899877'              | 'pcs'        | '*'                | '*'                     | '1,000'    | '23455677788976667' |
+			| '3'   | ''                                         | ''                                            | ''                   | ''          | ''                        | ''           | '*'                | '*'                     | '1,000'    | '234500000'         |
+			| '4'   | 'f82457a7c91f5d12beec5826930cb235blue.jpg' | 'Clothes'                                     | 'Dress'              | 'XS/Blue'   | ''                        | 'pcs'        | '*'                | '*'                     | '5,000'    | '2202283705'        |
 		And "ErrorList" table became equal
 			| 'Row' | 'Column' | 'Error text'   |
 			| '4'   | '6'      | '[Not filled]' |
@@ -150,6 +161,11 @@ Scenario: _020110 load data in the SI
 			| '6'   | '5'      | '[Not filled]' |
 	* Fix barcode and check loading
 		And I click "Back" button
+		And Delay 5
+		And in "Template" spreadsheet document I move to "R6C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2202283713"
+		And Delay 5
 		And in "Template" spreadsheet document I move to "R6C1" cell
 		And in "Template" spreadsheet document I double-click the current cell
 		And in "Template" spreadsheet document I input text "2202283713"
@@ -202,6 +218,10 @@ Scenario: _020112 load data in the Physical inventory
 		Given "Result" spreadsheet document is equal to "LoadDataWithPicture" by template
 	* Add barcode with serial lot number
 		And I click "Back" button
+		And Delay 5
+		And in "Template" spreadsheet document I move to "R5C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "23455677788976667"
 		And in "Template" spreadsheet document I move to "R5C1" cell
 		And in "Template" spreadsheet document I double-click the current cell
 		And in "Template" spreadsheet document I input text "23455677788976667"
@@ -242,6 +262,10 @@ Scenario: _020112 load data in the Physical inventory
 			| '6'   | '5'      | '[Not filled]' |
 	* Fix barcode and check loading
 		And I click "Back" button
+		And Delay 5
+		And in "Template" spreadsheet document I move to "R6C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2202283713"
 		And in "Template" spreadsheet document I move to "R6C1" cell
 		And in "Template" spreadsheet document I double-click the current cell
 		And in "Template" spreadsheet document I input text "2202283713"

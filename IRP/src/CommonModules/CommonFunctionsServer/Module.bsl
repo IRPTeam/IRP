@@ -89,6 +89,25 @@ Function GetRefAttribute(Ref, Name) Export
 	Return Data;
 EndFunction
 
+// Prepare JSON for XDTOReader:
+//  Remove all empty arrays ex. []
+// 	Repalce {} with null
+// 	
+// Parameters:
+//  JSON - String - JSON
+// 
+// Returns:
+//  String
+Function PrepareJSONForXDTOReader(Val JSON) Export
+	Facet = "(\""[^""]*\""\s*:\s*\[\s*\]\s*,)|(,\s*\""[^""]*\""\s*:\s*\[\s*\]\s*[^,])|(\""[^""]*\""\s*:\s*\[\s*\])";
+	Array = RegExpFindMatch(JSON, Facet);
+	For Each Row In Array Do
+		JSON = StrReplace(JSON, Row, "");
+	EndDo;
+	JSON = StrReplace(JSON, "{}", "null");
+	Return JSON;
+EndFunction
+
 // Serialize JSON.
 // 
 // Parameters:

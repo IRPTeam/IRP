@@ -717,7 +717,7 @@ Scenario: _05806 sale of commission goods from the Main Company (Sales invoice)
 				| 'Dress' | 'M/Brown'  |
 			And I select current line in "List" table
 			And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table	
-			And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I input "6,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I activate field named "ItemListItem" in "ItemList" table
 			And I select current line in "ItemList" table
@@ -740,7 +740,7 @@ Scenario: _05806 sale of commission goods from the Main Company (Sales invoice)
 				| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| 'Consignor stocks' | 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | ''           | 'pcs'  | '8908899881'         | '1,000'    | '200,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
 				| 'Consignor stocks' | 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | ''           | 'pcs'  | '09987897977891'     | '6,000'    | '200,00' | 'Without VAT' | ''              | '1 200,00'   | '1 200,00'     | 'Store 01' |
-				| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | '152,54'     | 'pcs'  | ''                   | '2,000'    | '500,00' | '18%'         | ''              | '847,46'     | '1 000,00'     | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | '457,63'     | 'pcs'  | ''                   | '6,000'    | '500,00' | '18%'         | ''              | '2 542,37'   | '3 000,00'     | 'Store 01' |
 				| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
 		* Change inventory origin and check tax rate
 			And I go to line in "ItemList" table
@@ -753,7 +753,7 @@ Scenario: _05806 sale of commission goods from the Main Company (Sales invoice)
 				| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| 'Consignor stocks' | 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | ''           | 'pcs'  | '8908899881'         | '1,000'    | '200,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
 				| 'Consignor stocks' | 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | ''           | 'pcs'  | '09987897977891'     | '6,000'    | '200,00' | 'Without VAT' | ''              | '1 200,00'   | '1 200,00'     | 'Store 01' |
-				| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | '152,54'     | 'pcs'  | ''                   | '2,000'    | '500,00' | '18%'         | ''              | '847,46'     | '1 000,00'     | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | '457,63'     | 'pcs'  | ''                   | '6,000'    | '500,00' | '18%'         | ''              | '2 542,37'   | '3 000,00'     | 'Store 01' |
 				| 'Own stocks'       | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | '152,54'     | 'pcs'  | ''                   | '2,000'    | '500,00' | '18%'         | ''              | '847,46'     | '1 000,00'     | 'Store 01' |
 			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'VAT' |
@@ -765,7 +765,7 @@ Scenario: _05806 sale of commission goods from the Main Company (Sales invoice)
 				| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| 'Consignor stocks' | 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | ''           | 'pcs'  | '8908899881'         | '1,000'    | '200,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
 				| 'Consignor stocks' | 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | ''           | 'pcs'  | '09987897977891'     | '6,000'    | '200,00' | 'Without VAT' | ''              | '1 200,00'   | '1 200,00'     | 'Store 01' |
-				| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | '152,54'     | 'pcs'  | ''                   | '2,000'    | '500,00' | '18%'         | ''              | '847,46'     | '1 000,00'     | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | '457,63'     | 'pcs'  | ''                   | '6,000'    | '500,00' | '18%'         | ''              | '2 542,37'   | '3 000,00'     | 'Store 01' |
 				| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
 	* Post
 		And I click "Post" button
@@ -1309,7 +1309,7 @@ Scenario: _05825 sale of commission goods from the Main Company (Retail sales re
 				| 'Scarf' | 'XS/Red'  |
 			And I select current line in "List" table
 			And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table	
-			And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I input "100,000" text in the field named "ItemListPrice" of "ItemList" table
 			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I activate field named "ItemListItem" in "ItemList" table
@@ -1333,7 +1333,7 @@ Scenario: _05825 sale of commission goods from the Main Company (Retail sales re
 			And "ItemList" table became equal
 				| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| 'Consignor stocks' | 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | ''           | 'pcs'  | '8908899880'         | '1,000'    | '200,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
-				| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | '15,25'      | 'pcs'  | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | '76,27'      | 'pcs'  | ''                   | '5,000'    | '100,00' | '18%'         | ''              | '423,73'     | '500,00'       | 'Store 01' |
 				| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | ''           | 'pcs'  | ''                   | '2,000'    | '100,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
 		* Change inventory origin and check tax rate
 			And I go to line in "ItemList" table
@@ -1345,8 +1345,8 @@ Scenario: _05825 sale of commission goods from the Main Company (Retail sales re
 			And "ItemList" table became equal
 				| 'Price type'              | 'Item'               | 'Inventory origin' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' | 'Store'    |
 				| 'en description is empty' | 'Product 1 with SLN' | 'Consignor stocks' | 'PZU'      | '8908899880'         | 'pcs'  | ''           | '1,000'    | '200,00' | 'Without VAT' | '200,00'     | '200,00'       | 'Store 01' |
-				| 'en description is empty' | 'Scarf'              | 'Consignor stocks' | 'XS/Red'   | ''                   | 'pcs'  | '15,25'      | '1,000'    | '100,00' | '18%'         | '84,75'      | '100,00'       | 'Store 01' |
-				| 'en description is empty' | 'Scarf'              | 'Own stocks'       | 'XS/Red'   | ''                   | 'pcs'  | '30,51'      | '2,000'    | '100,00' | '18%'         | '169,49'     | '200,00'       | 'Store 01' |		
+				| 'en description is empty' | 'Scarf'              | 'Consignor stocks' | 'XS/Red'   | ''                   | 'pcs'  | '76,27'      | '5,000'    | '100,00' | '18%'         | '423,73'     | '500,00'       | 'Store 01' |
+				| 'en description is empty' | 'Scarf'              | 'Own stocks'       | 'XS/Red'   | ''                   | 'pcs'  | '30,51'      | '2,000'    | '100,00' | '18%'         | '169,49'     | '200,00'       | 'Store 01' |
 			And I go to line in "ItemList" table
 				| '#' | 'Item'  | 'Item key' | 'VAT' |
 				| '3' | 'Scarf' | 'XS/Red'   | '18%' |
@@ -1356,7 +1356,7 @@ Scenario: _05825 sale of commission goods from the Main Company (Retail sales re
 			And "ItemList" table became equal
 				| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| 'Consignor stocks' | 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | ''           | 'pcs'  | '8908899880'         | '1,000'    | '200,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
-				| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | '15,25'      | 'pcs'  | ''                   | '1,000'    | '100,00' | '18%'         | ''              | '84,75'      | '100,00'       | 'Store 01' |
+				| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | '76,27'      | 'pcs'  | ''                   | '5,000'    | '100,00' | '18%'         | ''              | '423,73'     | '500,00'       | 'Store 01' |
 				| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | ''           | 'pcs'  | ''                   | '2,000'    | '100,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
 	* Payment
 		And I move to "Payments" tab
@@ -1369,7 +1369,7 @@ Scenario: _05825 sale of commission goods from the Main Company (Retail sales re
 			| 'Cash'        |
 		And I select current line in "List" table
 		And I activate field named "PaymentsAmount" in "Payments" table
-		And I input "500,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I input "900,00" text in the field named "PaymentsAmount" of "Payments" table
 		And I finish line editing in "Payments" table
 				
 	* Post

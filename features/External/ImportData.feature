@@ -2159,7 +2159,7 @@ Scenario: Create catalog Workstations objects
 	And I check or create catalog "Workstations" objects:
 		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'Description'    | 'CashAccount'                                                          | 'PrintTemplate' | 'UserGroup' | 'UseCashInAndCashOut' | 'UniqueID'  |
 		| 'e1cib/data/Catalog.Workstations?ref=b762b13668d0905011eb97c8502ea899' | 'False'        | 1      | 'Workstation 01' | 'e1cib/data/Catalog.CashAccounts?ref=b784ae4f9cb08e5e11ed2447ef2a3755' | ''              | ''          | 'True'                | 'TeamAgent' |
-		| 'e1cib/data/Catalog.Workstations?ref=b788b483d858e32911ed5f4bd540b3fb' | 'False'        | 2      | 'Workstation 02' | 'e1cib/data/Catalog.CashAccounts?ref=b784ae4f9cb08e5e11ed2447ef2a3756' | ''              | ''          | 'False'               | 'TeamAgent' |
+		| 'e1cib/data/Catalog.Workstations?ref=b788b483d858e32911ed60ce59f44f81' | 'False'        | 2      | 'Workstation 02' | 'e1cib/data/Catalog.CashAccounts?ref=b784ae4f9cb08e5e11ed2447ef2a3756' | ''              | ''          | 'False'               | 'TeamAgent' |
 
 
 Scenario: Create POS cash account objects

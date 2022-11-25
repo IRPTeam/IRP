@@ -63,6 +63,9 @@ Function hasAccountingFlags(MetaName) Export
 EndFunction
 
 Function EnumNameByRef(RefData) Export
+	If RefData.isEmpty() Then
+		Return "";
+	EndIf;
 	RefNameType = RefData.Metadata().Name;
 	ValueIndex = Enums[RefNameType].IndexOf(RefData);
 	Return Metadata.Enums[RefNameType].EnumValues[ValueIndex].Name;

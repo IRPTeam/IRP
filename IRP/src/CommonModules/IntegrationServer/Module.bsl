@@ -20,7 +20,7 @@ Function ConnectionSetting(IntegrationSettingName, AddInfo = Undefined) Export
 		Return Result;
 	EndIf;
 
-	ConnectionSetting = ConnectionSettingTemplate(IntegrationSettings.IntegrationType, AddInfo);
+	ConnectionSetting = ConnectionSettingTemplate(IntegrationSettings.IntegrationType, IntegrationSettings.Ref);
 	
 	// Customize setting with according IntegrationSettings catalog
 	FillPropertyValues(ConnectionSetting, IntegrationSettings.CustomizedSetting);
@@ -68,7 +68,7 @@ EndFunction
 // 
 // Parameters:
 //  IntegrationType - EnumRef.IntegrationType - Integration type
-//  AddInfo - Structure - Add info
+//  Object - CatalogObject.IntegrationSettings - Add info
 // 
 // Returns:
 //  Structure - Connection setting template:
@@ -85,8 +85,8 @@ EndFunction
 // * UseOSAuthentication - Boolean -
 // * Headers - Map -
 // * AddData - Structure - Data from register IntegrationInfo
-Function ConnectionSettingTemplate(IntegrationType = Undefined, AddInfo = Undefined) Export
-	Return IntegrationServerReuse.ConnectionSettingTemplate(IntegrationType, AddInfo);
+Function ConnectionSettingTemplate(IntegrationType, Object = Undefined) Export
+	Return IntegrationServerReuse.ConnectionSettingTemplate(IntegrationType, Object);
 EndFunction
 
 Function InfoRegSettingsStructure() Export

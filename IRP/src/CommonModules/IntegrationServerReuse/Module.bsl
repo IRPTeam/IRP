@@ -25,7 +25,7 @@ Function GetIntegrationSettings(IntegrationSettingName, AddInfo = Undefined) Exp
 	Return Result;
 EndFunction
 
-Function ConnectionSettingTemplate(IntegrationType = Undefined, AddInfo = Undefined) Export
+Function ConnectionSettingTemplate(IntegrationType = Undefined, Object = Undefined) Export
 	ConnectionSetting = New Structure();
 	ConnectionSetting.Insert("IntegrationSettingsRef", Catalogs.IntegrationSettings.EmptyRef());
 	If IntegrationType = Enums.IntegrationType.LocalFileStorage Then
@@ -42,7 +42,7 @@ Function ConnectionSettingTemplate(IntegrationType = Undefined, AddInfo = Undefi
 		ConnectionSetting.Insert("SenderName", "IRP Team");
 		ConnectionSetting.Insert("FromAddress", "noreply@irpteam.com");
 		ConnectionSetting.Insert("DisplayName", "IRP NO REPLY");
-	ElsIf Not ExtensionCall_ConnectionSettingTemplate(IntegrationType, ConnectionSetting, AddInfo) Then
+	ElsIf Not ExtensionCall_ConnectionSettingTemplate(IntegrationType, ConnectionSetting, Object) Then
 		ConnectionSetting.Insert("QueryType", "POST");
 		ConnectionSetting.Insert("ResourceAddress", "");
 		ConnectionSetting.Insert("Ip", "localhost");
@@ -57,7 +57,7 @@ Function ConnectionSettingTemplate(IntegrationType = Undefined, AddInfo = Undefi
 	Return ConnectionSetting;
 EndFunction
 
-Function ExtensionCall_ConnectionSettingTemplate(IntegrationType, ConnectionSetting, AddInfo)
+Function ExtensionCall_ConnectionSettingTemplate(IntegrationType, ConnectionSetting, Object = Undefined)
 	Return False;
 EndFunction
 

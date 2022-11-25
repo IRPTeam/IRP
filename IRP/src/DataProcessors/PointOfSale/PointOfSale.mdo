@@ -110,4 +110,22 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="7d563f30-7545-4d8c-9bd2-d1e63038bde6">
+    <name>SessionClosing</name>
+    <synonym>
+      <key>en</key>
+      <value>Session closing</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="4885bd97-2e9d-4295-abe0-7776837890ae">
+    <name>CashOut</name>
+    <synonym>
+      <key>en</key>
+      <value>Cash out</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:DataProcessor>

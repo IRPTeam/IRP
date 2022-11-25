@@ -28,6 +28,7 @@ Scenario: _05802 preparation (commission own companies, different tax systems)
 		When Create catalog Items objects (serial lot numbers)
 		When Create catalog ItemKeys objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
+		When Create information register Barcodes records
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
@@ -62,9 +63,22 @@ Scenario: _05802 preparation (commission own companies, different tax systems)
 		When Create information register CurrencyRates records
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
+		When Create catalog RetailCustomers objects (check POS)
+		When Create catalog UserGroups objects
+		When Create catalog PaymentTypes objects
+		When Create catalog BankTerms objects (for Shop 02)	
+		When Create information register UserSettings records (Retail)
+		When Create catalog BusinessUnits objects (Shop 02, use consolidated retail sales)	
+		When Create catalog Workstations objects
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 01' |
+		And I click "Set current workstation" button		
 		When Create information register TaxSettings records (Concignor 1)
 		When update ItemKeys
 		When Create catalog Partners objects
+		When Data preparation (comission stock)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -83,6 +97,8 @@ Scenario: _05802 preparation (commission own companies, different tax systems)
 	* Post document
 		And I execute 1C:Enterprise script at server
  			| "Documents.PurchaseInvoice.FindByNumber(2200).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+ 			| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
  			| "Documents.PurchaseInvoice.FindByNumber(2201).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
@@ -1370,7 +1386,546 @@ Scenario: _05825 sale of commission goods from the Main Company (Retail sales re
 			| 'Number'        |
 			| '$$NumberRSR1$$' |
 		And I close all client application windows	
+
+Scenario: _05830 сheck recognition of own and commission goods when scanning a barcode in the SI
+	* Preparation
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"	
+		If "List" table contains lines Then
+			| 'Number'         |
+			| '$$NumberSI10$$' |
+			And I go to line in "List" table
+			| 'Number'         |
+			| '$$NumberSI10$$' |
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"
+	* Open SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Agreement"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01' |
+		And I select current line in "List" table
+	* Scan item (Dress M/Brown)
+		* Own stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"
+			And "ItemList" table became equal
+				| '#' | 'Inventory origin' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '1' | 'Own stocks'       | 'Basic Price Types' | 'Dress' | 'M/Brown'  | ''                   | 'No'                 | '152,54'     | 'pcs'  | ''                   | '2,000'    | '500,00' | '18%' | ''              | '847,46'     | '1 000,00'     | 'Store 01' |
+		* Consignor stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"	
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Store'    |
+				| 'Own stocks'       | 'Basic Price Types' | 'Dress' | 'M/Brown'  | ''                   | 'No'                 | '152,54'     | 'pcs'  | ''                   | '2,000'    | '500,00' | '18%'         | ''              | '847,46'     | '1 000,00'     | 'No'             | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types' | 'Dress' | 'M/Brown'  | ''                   | 'No'                 | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'No'             | 'Store 01' |
+		* Over stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"				
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress' | 'M/Brown'  | ''                   | 'No'                 | '228,81'     | 'pcs'  | ''                   | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress' | 'M/Brown'  | ''                   | 'No'                 | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
+	* Scan item (Dress S/Yellow)		
+		* Consignor stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283713" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283713" text in the field named "InputFld"
+			And I click the button named "OK"	
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress' | 'M/Brown'  | ''                   | 'No'                 | '228,81'     | 'pcs'  | ''                   | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress' | 'M/Brown'  | ''                   | 'No'                 | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress' | 'S/Yellow' | ''                   | 'No'                 | '167,80'     | 'pcs'  | ''                   | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | 'Store 01' |
+	* Scan item with serial lot number (with stock balance detail, own and consignor stock)
+		* Own stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Consignor stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Over stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'                             | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | ''                   | 'No'                 | '228,81'     | 'pcs'  | ''                                               | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | ''                   | 'No'                 | ''           | 'pcs'  | ''                                               | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'S/Yellow' | ''                   | 'No'                 | '167,80'     | 'pcs'  | ''                                               | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | 'Store 01' |
+				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977893; 09987897977893' | '3,000'    | ''       | '18%'         | ''              | ''           | ''             | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977893'                 | '2,000'    | ''       | '18%'         | ''              | ''           | ''             | 'Store 01' |
+	* Scan item with serial lot number (with stock balance detail, only consignor stock)
+		* Consignor stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977894" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977894" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Over stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977894" text in the field named "InputFld"
+			And I click the button named "OK"
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'                                             | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | ''                   | 'No'                 | '228,81'     | 'pcs'  | ''                                                               | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | ''                   | 'No'                 | ''           | 'pcs'  | ''                                                               | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'S/Yellow' | ''                   | 'No'                 | '167,80'     | 'pcs'  | ''                                                               | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | 'Store 01' |
+				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977893; 09987897977893; 09987897977894' | '4,000'    | ''       | '18%'         | ''              | ''           | ''             | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977893; 09987897977894; 09987897977894' | '4,000'    | ''       | '18%'         | ''              | ''           | ''             | 'Store 01' |	
+	* Scan item with serial lot number (with stock balance detail, only own stock)
+		* Own stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977895" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977895" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Over stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977895" text in the field named "InputFld"
+			And I click the button named "OK"
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'                                                                                             | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    |
+				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | ''                   | 'No'                 | '228,81'     | 'pcs'  | ''                                                                                                               | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | ''                    | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | ''                   | 'No'                 | ''           | 'pcs'  | ''                                                                                                               | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | ''                    | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'S/Yellow' | ''                   | 'No'                 | '167,80'     | 'pcs'  | ''                                                                                                               | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | ''                    | 'Store 01' |
+				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977893; 09987897977893; 09987897977894; 09987897977895; 09987897977895; 09987897977895' | '7,000'    | ''       | '18%'         | ''              | ''           | ''             | ''                    | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977893; 09987897977894; 09987897977894'                                                 | '4,000'    | ''       | '18%'         | ''              | ''           | ''             | ''                    | 'Store 01' |
+	* Post document
+		And I go to line in "ItemList" table
+			| '#' | 'Dont calculate row' | 'Inventory origin' | 'Is additional item revenue' | 'Item'               | 'Item key' |
+			| '4' | 'No'                 | 'Own stocks'       | 'No'                         | 'Product 3 with SLN' | 'UNIQ'     |
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "110,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| '#' | 'Inventory origin' | 'Item'               | 'Item key' |
+			| '5' | 'Consignor stocks' | 'Product 3 with SLN' | 'UNIQ'     |
+		And I select current line in "ItemList" table
+		And I input "110,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		And I delete "$$NumberSI10$$" variable
+		And I save the value of "Number" field as "$$NumberSI10$$"
+		And I click "Post and close" button
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"		
+		And I go to line in "List" table
+			| 'Number'         |
+			| '$$NumberSI10$$' |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'                                                                                             | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Own stocks'       | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | ''                   | 'No'                 | '228,81'     | 'pcs'  | ''                                                                                                               | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
+			| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | ''                   | 'No'                 | ''           | 'pcs'  | ''                                                                                                               | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
+			| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'S/Yellow' | ''                   | 'No'                 | '167,80'     | 'pcs'  | ''                                                                                                               | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | 'Store 01' |
+			| 'Own stocks'       | 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | '117,46'     | 'pcs'  | '09987897977893; 09987897977893; 09987897977893; 09987897977894; 09987897977895; 09987897977895; 09987897977895' | '7,000'    | '110,00' | '18%'         | ''              | '652,54'     | '770,00'       | 'Store 01' |
+			| 'Consignor stocks' | 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | '67,12'      | 'pcs'  | '09987897977893; 09987897977893; 09987897977894; 09987897977894'                                                 | '4,000'    | '110,00' | '18%'         | ''              | '372,88'     | '440,00'       | 'Store 01' |
+		And I close all client application windows
 		
+				
+Scenario: _05832 сheck recognition of own and commission goods when scanning a barcode in the RSR
+		And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"	
+		If "List" table contains lines Then
+			| 'Number'         |
+			| '$$NumberSI10$$' |
+			And I go to line in "List" table
+				| 'Number'         |
+				| '$$NumberSI10$$' |
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"
+	* Open RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Agreement"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01' |
+		And I select current line in "List" table
+	* Scan item (Dress M/Brown)
+		* Own stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"
+			And "ItemList" table became equal
+				| '#' | 'Inventory origin' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| '1' | 'Own stocks'       | 'Basic Price Types' | 'Dress' | 'M/Brown'  | 'Shop 02'            | 'No'                 | '152,54'     | 'pcs'  | ''                   | '2,000'    | '500,00' | '18%' | ''              | '847,46'     | '1 000,00'     | 'Store 01' |
+		* Consignor stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"	
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Own stocks'       | 'Basic Price Types' | 'Dress' | 'M/Brown'  | 'Shop 02'            | 'No'                 | '152,54'     | 'pcs'  | ''                   | '2,000'    | '500,00' | '18%'         | ''              | '847,46'     | '1 000,00'     | 'Store 01' |
+				| 'Consignor stocks' | 'Basic Price Types' | 'Dress' | 'M/Brown'  | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
+		* Over stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"				
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress' | 'M/Brown'  | 'Shop 02'            | 'No'                 | '228,81'     | 'pcs'  | ''                   | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress' | 'M/Brown'  | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
+	* Scan item (Dress S/Yellow)		
+		* Consignor stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283713" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283713" text in the field named "InputFld"
+			And I click the button named "OK"	
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress' | 'M/Brown'  | 'Shop 02'            | 'No'                 | '228,81'     | 'pcs'  | ''                   | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress' | 'M/Brown'  | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress' | 'S/Yellow' | 'Shop 02'            | 'No'                 | '167,80'     | 'pcs'  | ''                   | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | 'Store 01' |
+	* Scan item with serial lot number (with stock balance detail, own and consignor stock)
+		* Own stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Consignor stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Over stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'                             | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | 'Shop 02'            | 'No'                 | '228,81'     | 'pcs'  | ''                                               | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | ''                                               | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'S/Yellow' | 'Shop 02'            | 'No'                 | '167,80'     | 'pcs'  | ''                                               | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | 'Store 01' |
+				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977893; 09987897977893' | '3,000'    | ''       | '18%'         | ''              | ''           | ''             | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977893'                 | '2,000'    | ''       | '18%'         | ''              | ''           | ''             | 'Store 01' |
+	* Scan item with serial lot number (with stock balance detail, only consignor stock)
+		* Consignor stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977894" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977894" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Over stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977894" text in the field named "InputFld"
+			And I click the button named "OK"
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'                                             | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | 'Shop 02'            | 'No'                 | '228,81'     | 'pcs'  | ''                                                               | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | ''                                                               | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'S/Yellow' | 'Shop 02'            | 'No'                 | '167,80'     | 'pcs'  | ''                                                               | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | 'Store 01' |
+				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977893; 09987897977893; 09987897977894' | '4,000'    | ''       | '18%'         | ''              | ''           | ''             | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977893; 09987897977894; 09987897977894' | '4,000'    | ''       | '18%'         | ''              | ''           | ''             | 'Store 01' |
+	* Scan item with serial lot number (with stock balance detail, only own stock)
+		* Own stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977895" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977895" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Over stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977895" text in the field named "InputFld"
+			And I click the button named "OK"
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'                                                                                             | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    |
+				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | 'Shop 02'            | 'No'                 | '228,81'     | 'pcs'  | ''                                                                                                               | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | ''                    | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'M/Brown'  | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | ''                                                                                                               | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | ''                    | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Dress'              | 'S/Yellow' | 'Shop 02'            | 'No'                 | '167,80'     | 'pcs'  | ''                                                                                                               | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | ''                    | 'Store 01' |
+				| 'Own stocks'       | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977893; 09987897977893; 09987897977894; 09987897977895; 09987897977895; 09987897977895' | '7,000'    | ''       | '18%'         | ''              | ''           | ''             | ''                    | 'Store 01' |
+				| 'Consignor stocks' | ''             | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | '09987897977893; 09987897977893; 09987897977894; 09987897977894'                                                 | '4,000'    | ''       | '18%'         | ''              | ''           | ''             | ''                    | 'Store 01' |
+	* Post document
+		And I go to line in "ItemList" table
+			| '#' | 'Dont calculate row' | 'Inventory origin' | 'Item'               | 'Item key' |
+			| '4' | 'No'                 | 'Own stocks'       | 'Product 3 with SLN' | 'UNIQ'     |
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "110,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| '#' | 'Inventory origin' | 'Item'               | 'Item key' |
+			| '5' | 'Consignor stocks' | 'Product 3 with SLN' | 'UNIQ'     |
+		And I select current line in "ItemList" table
+		And I input "110,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to "Payments" tab
+		And in the table "Payments" I click the button named "PaymentsAdd"
+		And I activate "Payment type" field in "Payments" table
+		And I select current line in "Payments" table
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Cash'        |
+		And I select current line in "List" table
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I input "4 810,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table		
+		And I click "Post" button
+		And I delete "$$NumberRSR10$$" variable
+		And I save the value of "Number" field as "$$NumberRSR10$$"
+		And I click "Post and close" button
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"		
+		And I go to line in "List" table
+			| 'Number'         |
+			| '$$NumberRSR10$$' |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'                                                                                             | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Own stocks'       | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | 'Shop 02'            | 'No'                 | '228,81'     | 'pcs'  | ''                                                                                                               | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
+			| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | ''                                                                                                               | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
+			| 'Consignor stocks' | 'Basic Price Types'       | 'Dress'              | 'S/Yellow' | 'Shop 02'            | 'No'                 | '167,80'     | 'pcs'  | ''                                                                                                               | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | 'Store 01' |
+			| 'Own stocks'       | 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | 'Shop 02'            | 'No'                 | '117,46'     | 'pcs'  | '09987897977893; 09987897977893; 09987897977893; 09987897977894; 09987897977895; 09987897977895; 09987897977895' | '7,000'    | '110,00' | '18%'         | ''              | '652,54'     | '770,00'       | 'Store 01' |
+			| 'Consignor stocks' | 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | 'Shop 02'            | 'No'                 | '67,12'      | 'pcs'  | '09987897977893; 09987897977893; 09987897977894; 09987897977894'                                                 | '4,000'    | '110,00' | '18%'         | ''              | '372,88'     | '440,00'       | 'Store 01' |
+		And I close all client application windows
+				
+
+
+Scenario: _05834 сheck recognition of own and commission goods when scanning a barcode in the POS
+		And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
+		If "List" table contains lines Then
+			| 'Number'          |
+			| '$$NumberRSR10$$' |
+			And I go to line in "List" table
+				| 'Number'          |
+				| '$$NumberRSR10$$' |
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"	
+		And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+		Then "Point of sales" window is opened
+	* Scan item (Dress M/Brown)
+		* Own stock
+			And I click "Search by barcode (F7)" button
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"
+			And I click "Search by barcode (F7)" button
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Consignor stock
+			And I click "Search by barcode (F7)" button
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"
+			And I click "Search by barcode (F7)" button
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"	
+		* Over stock
+			And I click "Search by barcode (F7)" button
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"				
+	* Scan item (Dress S/Yellow)		
+		* Consignor stock
+			And I click "Search by barcode (F7)" button
+			And I input "2202283713" text in the field named "InputFld"
+			And I click the button named "OK"
+			And I click "Search by barcode (F7)" button
+			And I input "2202283713" text in the field named "InputFld"
+			And I click the button named "OK"	
+	* Scan item with serial lot number (with stock balance detail, own and consignor stock)
+		* Own stock
+			And I click "Search by barcode (F7)" button
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+			And I click "Search by barcode (F7)" button
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Consignor stock
+			And I click "Search by barcode (F7)" button
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+			And I click "Search by barcode (F7)" button
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Over stock
+			And I click "Search by barcode (F7)" button
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+	* Scan item with serial lot number (with stock balance detail, only consignor stock)
+		* Consignor stock
+			And I click "Search by barcode (F7)" button
+			And I input "09987897977894" text in the field named "InputFld"
+			And I click the button named "OK"
+			And I click "Search by barcode (F7)" button
+			And I input "09987897977894" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Over stock
+			And I click "Search by barcode (F7)" button
+			And I input "09987897977894" text in the field named "InputFld"
+			And I click the button named "OK"
+	* Scan item with serial lot number (with stock balance detail, only own stock)
+		* Own stock
+			And I click "Search by barcode (F7)" button
+			And I input "09987897977895" text in the field named "InputFld"
+			And I click the button named "OK"
+			And I click "Search by barcode (F7)" button
+			And I input "09987897977895" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Over stock
+			And I click "Search by barcode (F7)" button
+			And I input "09987897977895" text in the field named "InputFld"
+			And I click the button named "OK"
+	* Price
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' | 'Quantity' | 'Serials'                                                                                                        |
+			| 'Product 3 with SLN' | 'UNIQ'     | '7,000'    | '09987897977893; 09987897977893; 09987897977893; 09987897977894; 09987897977895; 09987897977895; 09987897977895' |
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' | 'Quantity' | 'Serials'                                                        |
+			| 'Product 3 with SLN' | 'UNIQ'     | '4,000'    | '09987897977893; 09987897977893; 09987897977894; 09987897977894' |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check filling
+		And "ItemList" table became equal
+			| 'Item'               | 'Sales person' | 'Item key' | 'Serials'                                                                                                        | 'Price'  | 'Quantity' | 'Offers' | 'Total'    |
+			| 'Dress'              | ''             | 'M/Brown'  | ''                                                                                                               | '500,00' | '3,000'    | ''       | '1 500,00' |
+			| 'Dress'              | ''             | 'M/Brown'  | ''                                                                                                               | '500,00' | '2,000'    | ''       | '1 000,00' |
+			| 'Dress'              | ''             | 'S/Yellow' | ''                                                                                                               | '550,00' | '2,000'    | ''       | '1 100,00' |
+			| 'Product 3 with SLN' | ''             | 'UNIQ'     | '09987897977893; 09987897977893; 09987897977893; 09987897977894; 09987897977895; 09987897977895; 09987897977895' | '200,00' | '7,000'    | ''       | '1 400,00' |
+			| 'Product 3 with SLN' | ''             | 'UNIQ'     | '09987897977893; 09987897977893; 09987897977894; 09987897977894'                                                 | '300,00' | '4,000'    | ''       | '1 200,00' |
+	* Payment
+		And I click "Payment (+)" button
+		Then "Payment" window is opened
+		And I click "Cash (/)" button
+		And I click the button named "Enter"
+	* Check filling Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
+		And I go to line in "List" table
+			| 'Σ'        |
+			| '6 200,00' |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| 'Price type'              | 'Item'               | 'Inventory origin' | 'Profit loss center' | 'Item key' | 'Dont calculate row' | 'Serial lot numbers'                                                                                             | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Basic Price Types'       | 'Dress'              | 'Own stocks'       | 'Shop 02'            | 'M/Brown'  | 'No'                 | ''                                                                                                               | 'pcs'  | '228,81'     | '3,000'    | '500,00' | '18%'         | ''              | '1 271,19'   | '1 500,00'     | 'Store 01' |
+			| 'Basic Price Types'       | 'Dress'              | 'Consignor stocks' | 'Shop 02'            | 'M/Brown'  | 'No'                 | ''                                                                                                               | 'pcs'  | ''           | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
+			| 'Basic Price Types'       | 'Dress'              | 'Consignor stocks' | 'Shop 02'            | 'S/Yellow' | 'No'                 | ''                                                                                                               | 'pcs'  | '167,80'     | '2,000'    | '550,00' | '18%'         | ''              | '932,20'     | '1 100,00'     | 'Store 01' |
+			| 'en description is empty' | 'Product 3 with SLN' | 'Own stocks'       | 'Shop 02'            | 'UNIQ'     | 'No'                 | '09987897977893; 09987897977893; 09987897977893; 09987897977894; 09987897977895; 09987897977895; 09987897977895' | 'pcs'  | '213,56'     | '7,000'    | '200,00' | '18%'         | ''              | '1 186,44'   | '1 400,00'     | 'Store 01' |
+			| 'en description is empty' | 'Product 3 with SLN' | 'Consignor stocks' | 'Shop 02'            | 'UNIQ'     | 'No'                 | '09987897977893; 09987897977893; 09987897977894; 09987897977894'                                                 | 'pcs'  | '183,05'     | '4,000'    | '300,00' | '18%'         | ''              | '1 016,95'   | '1 200,00'     | 'Store 01' |
+		And I close all client application windows
+		
+				
+				
+					
+				
+
+
+
 		
 				
 

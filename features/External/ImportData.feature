@@ -811,7 +811,10 @@ Scenario: Create information register Barcodes records (serial lot numbers)
 		| '8908899880'        | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72071' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae5e' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
 		| '8908899881'        | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72071' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae5f' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
 		| '09987897977891'    | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae60' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
-
+		| '09987897977893'    | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d164' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''               |
+		| '09987897977894'    | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d165' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''               |
+		| '09987897977895'    | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d166' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''               |
+		
 	
 Scenario: Create catalog Units objects
 
@@ -1651,6 +1654,8 @@ Scenario: Create information register Barcodes records
 		| '4820024700016'  | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c604' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '4820024700016'  |
 		| '978020137962'   | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c605' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '978020137962'   |
 		| '89089988989989' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c604' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf115bcc9c60b' | '89089988989989' |
+		| '2202283714'     | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf11df09c894a' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''               |
+		| '2202283715'     | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf128cde918bd' | ''                | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''               |
 
 
 
@@ -1792,15 +1797,19 @@ Scenario: Create catalog SerialLotNumbers objects
 Scenario: Create catalog SerialLotNumbers objects (serial lot numbers)
 
 	And I check or create for catalog "SerialLotNumbers" objects with Data Exchange Load parameter set to true:
-		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Description'    | 'SerialLotNumberOwner'                                             | 'Inactive' | 'StockBalanceDetail' |
-		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b780c87413d4c65f11ecd519fda72072' | 'False'        | 13     | '8908899877'     | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72071' | 'False'    | 'True'              |
-		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f8958535f' | 'False'        | 14     | '09987897977889' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'False'    | 'False'              |
-		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f89585360' | 'False'        | 15     | '09987897977890' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'False'    | 'False'              |
-		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f89585361' | 'False'        | 16     | '899007790088'   | 'e1cib/data/Catalog.Items?ref=b781cf3f5e36b25611ecd69f89585359'    | 'False'    | 'False'              |
-		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd8431212163a' | 'False'        | 17     | '8908899879'     | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72071' | 'False'    | 'True'               |
+		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Description'    | 'SerialLotNumberOwner'                                             | 'Inactive' | 'StockBalanceDetail' | 'EachSerialLotNumberIsUnique' |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b780c87413d4c65f11ecd519fda72072' | 'False'        | 13     | '8908899877'     | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72071' | 'False'    | 'True'               | 'False'                       |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f8958535f' | 'False'        | 14     | '09987897977889' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'False'    | 'False'              | 'False'                       |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f89585360' | 'False'        | 15     | '09987897977890' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'False'    | 'False'              | 'False'                       |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f89585361' | 'False'        | 16     | '899007790088'   | 'e1cib/data/Catalog.Items?ref=b781cf3f5e36b25611ecd69f89585359'    | 'False'    | 'False'              | 'False'                       |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd8431212163a' | 'False'        | 17     | '8908899879'     | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72071' | 'False'    | 'True'               | 'False'                       |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae5e' | 'False'        | 18     | '8908899880'     | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72071' | 'False'    | 'True'               | 'True'                        |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae5f' | 'False'        | 19     | '8908899881'     | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72071' | 'False'    | 'True'               | 'True'                        |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae60' | 'False'        | 20     | '09987897977891' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'False'    | 'True'               | 'False'                       |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d164' | 'False'        | 21     | '09987897977893' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'False'    | 'True'               | 'False'                       |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d165' | 'False'        | 22     | '09987897977894' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'False'    | 'True'               | 'False'                       |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d166' | 'False'        | 23     | '09987897977895' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'False'    | 'True'               | 'False'                       |
+
 
 
 

@@ -148,7 +148,9 @@ Function GetRegistrateConsignorBatches(DocObject, ItemListTable, ConsignorBatche
 			Or IsChanged_ItemKey Or IsChanged_Company Or IsChanged_Store Then
 				
 			For Each BatchRow In BatchRows Do
-				ArrayForDelete.Add(BatchRow);
+				If ArrayForDelete.Find(BatchRow) = Undefined Then
+					ArrayForDelete.Add(BatchRow);
+				EndIf;
 			EndDo;
 			
 			NewRow = ItemListFiltered.Add();

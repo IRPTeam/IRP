@@ -533,7 +533,7 @@ Scenario: _050012 сheck the message when selling commission goods more than the
 		Then there are lines in TestClient message log
 			|'Consignor batch shortage Item key: S/Yellow Store: Store 02 Required:50,000 Remaining:32,000 Lack:18,000\n'|				
 	* Clear posting
-		And I click "Clear posting" button
+		And I click "Cancel posting" button
 	And I close all client application windows
 	
 Scenario: _050014 create SR (return commission products that was sailed our customer)

@@ -131,7 +131,7 @@ Scenario: _056003 check batch balance
 		And I input "29.10.2022" text in the field named "DateBegin"
 		And I input "06.11.2022" text in the field named "DateEnd"
 		And I click the button named "Select"
-	And I click "Run report" button
+	And I click "Generate" button
 	And "Result" spreadsheet document contains "BathBalance_056_1" template lines by template
 	And I close all client application windows
 

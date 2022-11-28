@@ -45,6 +45,14 @@ EndProcedure
 
 #EndRegion
 
+#Region TRADE_AGENT_FEE_TYPE
+
+Procedure TradeAgentFeeTypeOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	ViewClient_V2.TradeAgentFeeTypeOnChange(Object, Form, "ItemList");
+EndProcedure
+
+#EndRegion
+
 #Region PARTNER
 
 Procedure PartnerOnChange(Object, Form, Item) Export
@@ -150,7 +158,7 @@ Procedure ItemListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFold
 EndProcedure
 
 Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel) Export
-	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel);
+	Return;
 EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
@@ -193,6 +201,30 @@ EndProcedure
 
 Procedure ItemListPriceTypeOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.ItemListPriceTypeOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region CONSIGNOR_PRICE
+
+Procedure ItemListConsignorPriceOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListConsignorPriceOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region TRADE_AGENT_FEE_PERCENT
+
+Procedure ItemListTradeAgentFeePercentOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListTradeAgentFeePercentOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region TRADE_AGENT_FEE_AMOUNT
+
+Procedure ItemListTradeAgentFeeAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListTradeAgentFeeAmountOnChange(Object, Form, CurrentData);
 EndProcedure
 
 #EndRegion

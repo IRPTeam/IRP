@@ -6,7 +6,6 @@ EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
-	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters);
 EndProcedure
 
 #EndRegion
@@ -41,6 +40,14 @@ Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing) Ex
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True, ComparisonType.Equal));
 	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
+EndProcedure
+
+#EndRegion
+
+#Region TRADE_AGENT_FEE_TYPE
+
+Procedure TradeAgentFeeTypeOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	ViewClient_V2.TradeAgentFeeTypeOnChange(Object, Form, "ItemList");
 EndProcedure
 
 #EndRegion
@@ -150,7 +157,7 @@ Procedure ItemListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFold
 EndProcedure
 
 Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel) Export
-	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel);
+	Return;
 EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
@@ -193,6 +200,30 @@ EndProcedure
 
 Procedure ItemListPriceTypeOnChange(Object, Form, Item, CurrentData = Undefined) Export
 	ViewClient_V2.ItemListPriceTypeOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region CONSIGNOR_PRICE
+
+Procedure ItemListConsignorPriceOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListConsignorPriceOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region TRADE_AGENT_FEE_PERCENT
+
+Procedure ItemListTradeAgentFeePercentOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListTradeAgentFeePercentOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region TRADE_AGENT_FEE_AMOUNT
+
+Procedure ItemListTradeAgentFeeAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListTradeAgentFeeAmountOnChange(Object, Form, CurrentData);
 EndProcedure
 
 #EndRegion

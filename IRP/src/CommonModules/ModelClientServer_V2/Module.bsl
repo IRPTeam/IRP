@@ -36,6 +36,7 @@ EndProcedure
 Procedure ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps) Export
 	Chain = GetChain();
 	For Each ArrayItem In StrSplit(StepNames, ",") Do
+		//@skip-warning
 		Execute StrTemplate("%1.%2(Parameters, Chain);", 
 			Parameters.ControllerModuleName, 
 			StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
@@ -123,6 +124,7 @@ Procedure ExecuteChain(Parameters, Chain, ExecuteLazySteps)
 				If Mid(ExecutorName, 3, 1) = "_" Then
 					ExecuteInExtension(Result, Options, ExecutorName);
 				Else
+					//@skip-warning
 					Execute StrTemplate("Result = %1(Options)", ExecutorName);
 				EndIf;
 				Results.Add(GetChainLinkResult(Options, Result));
@@ -130,6 +132,7 @@ Procedure ExecuteChain(Parameters, Chain, ExecuteLazySteps)
 			EndDo;
 			// set result to property
 			If Not Chain[Name].IsLazyStep Or (Chain[Name].IsLazyStep And ExecuteLazySteps) Then
+				//@skip-warning
 				Execute StrTemplate("%1.%2(Parameters, Results);", Parameters.ControllerModuleName, Chain[Name].Setter);
 			EndIf;
 		EndIf;
@@ -152,6 +155,7 @@ Function GetChain()
 	Chain.Insert("DefaultDeliveryDateInList" , GetChainLink("DefaultDeliveryDateInListExecute"));
 	Chain.Insert("DefaultQuantityInList"     , GetChainLink("DefaultQuantityInListExecute"));
 	Chain.Insert("DefaultCurrencyInList"     , GetChainLink("DefaultCurrencyInListExecute"));
+	Chain.Insert("DefaultInventoryOrigin"    , GetChainLink("DefaultInventoryOriginExecute"));
 	
 	// Empty.Header
 	Chain.Insert("EmptyStoreInHeader"     , GetChainLink("EmptyStoreInHeaderExecute"));
@@ -288,6 +292,13 @@ Function GetChain()
 	Chain.Insert("MaterialsCalculations"                     , GetChainLink("MaterialsCalculationsExecute"));
 	Chain.Insert("MaterialsRecalculateQuantity"              , GetChainLink("MaterialsRecalculateQuantityExecute"));
 	
+	Chain.Insert("ChangeTradeAgentFeeTypeByAgreement"           , GetChainLink("ChangeTradeAgentFeeTypeByAgreementExecute"));
+	Chain.Insert("ChangeTradeAgentFeePercentByAgreement"        , GetChainLink("ChangeTradeAgentFeePercentByAgreementExecute"));
+	Chain.Insert("ChangeTradeAgentFeePercentByAmount"           , GetChainLink("ChangeTradeAgentFeePercentByAmountExecute"));
+	Chain.Insert("ChangeTradeAgentFeeAmountByTradeAgentFeeType" , GetChainLink("ChangeTradeAgentFeeAmountByTradeAgentFeeTypeExecute"));
+	
+	Chain.Insert("ConsignorBatchesFillBatches"                  , GetChainLink("ConsignorBatchesFillBatchesExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -297,6 +308,20 @@ Function GetChain()
 	
 	Return Chain;
 EndFunction
+
+#EndRegion
+
+#Region INVENTORY_ORIGIN
+
+Function DefaultInventoryOriginOptions() Export
+	Return GetChainLinkOptions("CurrentInventoryOrigin");
+EndFUnction
+
+Function DefaultInventoryOriginExecute(Options) Export
+	InventoryOrigin = ?(ValueIsFilled(Options.CurrentInventoryOrigin), Options.CurrentInventoryOrigin, 
+		PredefinedValue("Enum.InventoryOrigingTypes.OwnStocks"));
+	Return InventoryOrigin;
+EndFunction	
 
 #EndRegion
 
@@ -1033,6 +1058,100 @@ EndFunction
 
 #EndRegion
 
+#Region CHANGE_TRADE_AGENT_FEE_TYPE_BY_AGREEMENT
+
+Function ChangeTradeAgentFeeTypeByAgreementOptions() Export
+	Return GetChainLinkOptions("Agreement, CurrentFeeType");
+EndFunction
+
+Function ChangeTradeAgentFeeTypeByAgreementExecute(Options) Export
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentFeeType;
+	EndIf;
+	
+	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
+		
+	If ValueIsFilled(AgreementInfo.TradeAgentFeeType)  Then
+		Return AgreementInfo.TradeAgentFeeType;
+	EndIf;
+	
+	Return Options.CurrentFeeType;
+EndFunction
+#EndRegion
+
+#Region CHANGE_TRADE_AGENT_FEE_PERCENT_BY_AGREEMENT
+
+Function ChangeTradeAgentFeePercentByAgreementOptions() Export
+	Return GetChainLinkOptions("Agreement, FeeType, CurrentPercent");
+EndFunction
+
+Function ChangeTradeAgentFeePercentByAgreementExecute(Options) Export
+	If Options.FeeType <> PredefinedValue("Enum.TradeAgentFeeTypes.Percent") Then
+		Return 0;
+	EndIf;
+	
+	If Not ValueIsFilled(Options.Agreement) Then
+		Return Options.CurrentPercent;
+	EndIf;
+	
+	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Options.Agreement);
+		
+	If ValueIsFilled(AgreementInfo.TradeAgentFeePercent)  Then
+		Return AgreementInfo.TradeAgentFeePercent;
+	EndIf;
+	
+	Return Options.CurrentPercent;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_TRADE_AGENT_FEE_PERCENT_BY_AMOUNT
+
+Function ChangeTradeAgentFeePercentByAmountOptions() Export
+	Return GetChainLinkOptions("FeeType, FeeAmount, TotalAmount");
+EndFunction
+
+Function ChangeTradeAgentFeePercentByAmountExecute(Options) Export
+	If Options.FeeType <> PredefinedValue("Enum.TradeAgentFeeTypes.Percent") Then
+		Return 0;
+	EndIf;
+	
+	_TotalAmount    = ?(ValueIsFilled(Options.TotalAmount)   , Options.TotalAmount   , 0);
+	_FeeAmount      = ?(ValueIsFilled(Options.FeeAmount)     , Options.FeeAmount     , 0);
+	
+	If (_TotalAmount / 100) <> 0 Then
+		Return _FeeAmount / (_TotalAmount / 100);
+	EndIf;
+	
+	Return 0;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_TRADE_AGENT_FEE_AMOUNT_BY_TRADE_AGENT_FEE_TYPE
+
+Function ChangeTradeAgentFeeAmountByTradeAgentFeeTypeOptions() Export
+	Return GetChainLinkOptions("Price, ConsignorPrice, Quantity, Percent, TotalAmount, FeeType");
+EndFunction
+
+Function ChangeTradeAgentFeeAmountByTradeAgentFeeTypeExecute(Options) Export
+	_Price          = ?(ValueIsFilled(Options.Price)         , Options.Price         , 0);
+	_ConsignorPrice = ?(ValueIsFilled(Options.ConsignorPrice), Options.ConsignorPrice, 0);
+	_Quantity       = ?(ValueIsFilled(Options.Quantity)      , Options.Quantity      , 0);
+	_TotalAmount    = ?(ValueIsFilled(Options.TotalAmount)   , Options.TotalAmount   , 0);
+	_Percent        = ?(ValueIsFilled(Options.Percent)       , Options.Percent       , 0);
+	
+	If Options.FeeType = PredefinedValue("Enum.TradeAgentFeeTypes.DifferencePriceConsignorPrice") Then
+		Return (_Price - _ConsignorPrice) * _Quantity;
+	ElsIf Options.FeeType = PredefinedValue("Enum.TradeAgentFeeTypes.Percent") Then
+		Return (_TotalAmount / 100) * _Percent;
+	Else
+		Return 0;
+	EndIf;
+EndFunction
+
+#EndRegion
+
 #Region CHANGE_EXPENSE_TYPE_BY_ITEMKEY
 
 Function ChangeExpenseTypeByItemKeyOptions() Export
@@ -1702,7 +1821,7 @@ Function RequireCallCreateTaxesFormControlsExecute(Options) Export
 EndFunction
 
 Function ChangeTaxRateOptions() Export
-	Return GetChainLinkOptions("Date, Company, Agreement, ItemKey, TaxRates, ArrayOfTaxInfo, Ref, IsBasedOn, TaxList");
+	Return GetChainLinkOptions("Date, Company, Agreement, ItemKey, InventoryOrigin, ConsignorBatches, TaxRates, ArrayOfTaxInfo, Ref, IsBasedOn, TaxList");
 EndFunction
 
 Function ChangeTaxRateExecute(Options) Export
@@ -1753,9 +1872,29 @@ Function ChangeTaxRateExecute(Options) Export
 			Continue;
 		EndIf;
 		
+		
+		
 		// If tax is not taken into account by company, then clear tax rate TaxRate = Undefined
 		If RequiredTaxes.Find(ItemOfTaxInfo.Tax) = Undefined Then
 			Result.Insert(ItemOfTaxInfo.Name, Undefined);
+			Continue;
+		EndIf;
+		
+		// Tax rate from consignor batch
+		If ValueIsFilled(Options.InventoryOrigin) 
+			And Options.InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
+			
+			Parameters = New Structure();
+			Parameters = New Structure();
+			Parameters.Insert("Date"      , Options.Date);
+			Parameters.Insert("ConsignorBatches", Options.ConsignorBatches);
+			Parameters.Insert("Tax"       , ItemOfTaxInfo.Tax);
+			ArrayOfTaxRates = TaxesServer.GetTaxRatesForConsignorBatches(Parameters);
+			
+			If ArrayOfTaxRates.Count() Then
+				Result.Insert(ItemOfTaxInfo.Name, ArrayOfTaxRates[0].TaxRate);
+			EndIf;
+			
 			Continue;
 		EndIf;
 		
@@ -1787,6 +1926,28 @@ Function ChangeTaxRateExecute(Options) Export
 	EndDo;
 		
 	Return Result;
+EndFunction
+
+#EndRegion
+
+#Region CONSIGNOR_BATCHES
+
+Function ConsignorBatchesFillBatchesOptions() Export
+	Return GetChainLinkOptions("DocObject, Table_ItemList, Table_SerialLotNumbers, Table_ConsignorBatches, SilentMode");
+EndFunction
+
+Function ConsignorBatchesFillBatchesExecute(Options) Export
+	SilentMode = False;
+	If Options.SilentMode = True Then
+		SilentMode = True;
+	EndIf;
+	
+	ConsignorBatches = CommissionTradeServer.GetConsignorBatchesTable(Options.DocObject, 
+		Options.Table_ItemList, 
+		Options.Table_SerialLotNumbers, 
+		Options.Table_ConsignorBatches, 
+		SilentMode);
+	Return New Structure("ConsignorBatches", ConsignorBatches);	
 EndFunction
 
 #EndRegion

@@ -1055,7 +1055,7 @@
         </items>
         <items xsi:type="form:FormField">
           <name>ItemListIsInternalLinked</name>
-          <id>837</id>
+          <id>992</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -1067,7 +1067,7 @@
           <titleLocation>None</titleLocation>
           <extendedTooltip>
             <name>ItemListIsInternalLinkedExtendedTooltip</name>
-            <id>839</id>
+            <id>994</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1082,7 +1082,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>ItemListIsInternalLinkedContextMenu</name>
-            <id>838</id>
+            <id>993</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>

@@ -427,6 +427,100 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="190d3ad9-2ce5-44fb-9b63-ce2ac07a9f3b">
+    <name>TradeAgentFeeType</name>
+    <synonym>
+      <key>en</key>
+      <value>Fee type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.TradeAgentFeeTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="15477b2a-254e-4937-802c-eac7f04b7ef4">
+    <name>TradeAgentFeePercent</name>
+    <synonym>
+      <key>en</key>
+      <value>Fee percent</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typePercent</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="8a80e833-a629-4b9d-9288-10251c22b8e3">
+    <name>TradeAgentFeeItem</name>
+    <synonym>
+      <key>en</key>
+      <value>Item</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Items</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="6fe8ff2d-b515-4289-b71e-f663af85ac6a">
+    <name>TradeAgentFeeItemKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.Item</name>
+      <field>Catalog.Agreements.Attribute.TradeAgentFeeItem</field>
+    </choiceParameterLinks>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="fda86239-0e6d-48c3-be26-f28bf6406a54">
+    <name>TradeAgentFeeProfitLossCenter</name>
+    <synonym>
+      <key>en</key>
+      <value>Profit / loss center</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="501df63d-afe6-4291-9fd2-3a10cb816606">
+    <name>TradeAgentFeeExpenseRevenueType</name>
+    <synonym>
+      <key>en</key>
+      <value>Expense / revenue type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ExpenseAndRevenueTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="69eb3895-7a1b-4bca-bb86-0c2b645bcef0">
     <producedTypes>
       <objectType typeId="74b01d8e-f8c5-4099-8431-c6019c94d81b" valueTypeId="8a953f0b-b885-45c1-a31a-f84bdaa24b85"/>

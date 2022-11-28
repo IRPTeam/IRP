@@ -422,7 +422,7 @@ Scenario: _0500012 check form for select basis document
 			And I click choice button of "Partner" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Code' | 'Description' |
-				| '1'    | 'Ferron BP'   |
+				| '50'    | 'Ferron BP'   |
 			And I select current line in "List" table
 			And I activate "Partner term" field in "PaymentList" table
 			And I click choice button of "Partner term" attribute in "PaymentList" table

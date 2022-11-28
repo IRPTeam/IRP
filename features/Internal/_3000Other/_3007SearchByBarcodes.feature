@@ -32,6 +32,7 @@ Scenario: _300700 preparation (add items to documents by barcode)
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
+		When Create catalog Partners objects (trade agent and consignor)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Companies objects (partners company)
@@ -132,8 +133,16 @@ Scenario: _300713 barcode check in Internal Supply Request
 	Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 	When check the barcode search in storage operations documents
 
+Scenario: _300714 barcode check in SalesReportFromTradeAgent + price and tax filling
+	Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
+	When check the barcode search in the sales report from trade agent + price and tax filling in
+
+Scenario: _300714 barcode check in sales report to consignor + price and tax filling
+	Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
+	When check the barcode search in the sales report to consignor + price and tax filling in
 
 Scenario: _300716 barcode check in Bundling
+	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Bundling"
 	When check the barcode search in the product bundling documents
 

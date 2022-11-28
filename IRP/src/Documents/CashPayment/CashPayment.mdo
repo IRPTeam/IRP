@@ -688,6 +688,7 @@
       <types>DocumentRef.PurchaseOrder</types>
       <types>DocumentRef.OutgoingPaymentOrder</types>
       <types>DocumentRef.SalesReturn</types>
+      <types>DocumentRef.SalesReportToConsignor</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

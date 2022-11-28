@@ -38,6 +38,9 @@ Procedure SetGroupItemsList(Object, Form)
 	AttributesArray.Add("LegalName");
 	AttributesArray.Add("Agreement");
 	AttributesArray.Add("LegalNameContract");
+	If FOServer.IsUseCommissionTrading() Then
+		AttributesArray.Add("TransactionType");
+	EndIf;
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Attr In AttributesArray Do
 		Form.GroupItems.Add(Attr, ?(ValueIsFilled(Form.Items[Attr].Title), Form.Items[Attr].Title,

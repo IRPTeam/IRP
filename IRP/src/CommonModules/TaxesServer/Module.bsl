@@ -303,6 +303,31 @@ Function GetTaxRatesForAgreement(Parameters, AddInfo = Undefined) Export
 	Return ArrayOfTaxes;
 EndFunction
 
+Function GetTaxRatesForConsignorBatches(Parameters) Export
+	ArrayOfCompany = New Array();
+	For Each Row In Parameters.ConsignorBatches Do
+		Company = Row.Batch.LegalName;
+		If ValueIsFilled(Company) And ArrayOfCompany.Find(Company) = Undefined Then
+			ArrayOfCompany.Add(Company);
+		EndIf;
+	EndDo;
+	
+	TotalArrayOfTaxes = New Array();
+	
+	For Each ItemOfCompany In ArrayOfCompany Do
+		QueryParameters = New Structure();
+		QueryParameters.Insert("Date", Parameters.Date);
+		QueryParameters.Insert("Tax", Parameters.Tax);
+		QueryParameters.Insert("Company", ItemOfCompany);
+		ArrayOfTaxes = GetTaxRatesForCompany(QueryParameters);
+		For Each ItemOfTaxes In ArrayOfTaxes Do
+			TotalArrayOfTaxes.Add(ItemOfTaxes);
+		EndDo;
+	EndDo;
+	
+	Return TotalArrayOfTaxes;
+EndFunction
+
 Function GetTaxRatesForCompany(Parameters, AddInfo = Undefined) Export
 	Query = New Query();
 	Query.Text =

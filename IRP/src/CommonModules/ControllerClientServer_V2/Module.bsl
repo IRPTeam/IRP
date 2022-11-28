@@ -1,27 +1,13 @@
 
 #Region PARAMETERS
 
-// Get server parameters.
-// 
-// Parameters:
-//  Object - Structure - Object
-// 
-// Returns:
-//  Structure - Get server parameters:
-// * Object - Structure - 
-// * ControllerModuleName - String -
-// * TableName - String -
-// * Rows - Undefined, ValueTableRow -
-// * ReadOnlyProperties - String -
-// * IsBasedOn - Boolean -
-// * StepEnableFlags - Structure:
-// ** PriceChanged_AfterQuestionToUser - Boolean -
 Function GetServerParameters(Object) Export
 	Result = New Structure();
 	Result.Insert("Object", Object);
 	Result.Insert("ControllerModuleName", "ControllerClientServer_V2");
 	Result.Insert("TableName", "");
 	Result.Insert("Rows", Undefined);
+	Result.Insert("RowsConsignorStocks", New Array());
 	Result.Insert("ReadOnlyProperties", "");
 	Result.Insert("IsBasedOn", False);
 	
@@ -32,22 +18,6 @@ Function GetServerParameters(Object) Export
 	Return Result;
 EndFunction
 
-// Get form parameters.
-// 
-// Parameters:
-//  Form - Undefined, Form - Form
-// 
-// Returns:
-//  Structure - Get form parameters:
-// * Form - Undefined, Form -
-// * ViewClientModuleName - String -
-// * ViewServerModuleName - String -
-// * EventCaller - String -
-// * TaxesCache - String -
-// * PropertyBeforeChange - Structure -:
-// ** Object - Structure -
-// ** Form - Structure -
-// ** List - Structure -
 Function GetFormParameters(Form) Export
 	Result = New Structure();
 	Result.Insert("Form", Form);
@@ -76,16 +46,6 @@ Function GetFormParameters(Form) Export
 	Return Result;
 EndFunction
 
-// Get load parameters.
-// 
-// Parameters:
-//  Address - Undefined, String - Address
-// 
-// Returns:
-//  Structure - Get load parameters:
-// * Address - Undefined, String -
-// * GroupColumns - Undefined, String -
-// * SumColumns - Undefined, String -
 Function GetLoadParameters(Address, GroupColumns = "", SumColumns = "") Export
 	Result = New Structure();
 	Result.Insert("Address", Address);
@@ -94,68 +54,12 @@ Function GetLoadParameters(Address, GroupColumns = "", SumColumns = "") Export
 	Return Result;
 EndFunction
 
-// Get parameters.
-// 
-// Parameters:
-//  ServerParameters - See GetServerParameters
-//  FormParameters - See GetFormParameters
-//  LoadParameters - See GetLoadParameters
-// 
-// Returns:
-//  See CreateParameters
 Function GetParameters(ServerParameters, FormParameters = Undefined, LoadParameters = Undefined) Export
 	_FormParameters = ?(FormParameters = Undefined, GetFormParameters(Undefined), FormParameters);
 	_LoadParameters = ?(LoadParameters = Undefined, GetLoadParameters(Undefined), LoadParameters);
 	Return CreateParameters(ServerParameters, _FormParameters, _LoadParameters);
 EndFunction
 
-// Create parameters.
-// 
-// Parameters:
-//  ServerParameters - See GetServerParameters
-//  FormParameters - See GetFormParameters
-//  LoadParameters - See GetLoadParameters
-// 
-// Returns:
-//  Structure - Create parameters:
-// * Form - Undefined, Form -
-// * FormIsExists - Boolean -
-// * FormTaxColumnsExists - Boolean -
-// * FormModificators - Array -
-// * CacheForm - Structure -
-// * ViewNotify - Array -
-// * ViewClientModuleName - String -
-// * ViewServerModuleName - String -
-// * EventCaller - String -
-// * TaxesCache - String -
-// * ChangedData - Map -
-// * ExtractedData - Structure -
-// * LoadData - Structure -
-// * PropertyBeforeChange - Structure -:
-// ** Object - Structure -
-// ** Form - Structure -
-// ** List - Structure -
-// * FormParameters - Structure -:
-// ** IsCopy - Boolean -
-// * Object - DocumentObjectDocumentName -
-// * Cache - Structure -
-// * ControllerModuleName - String -
-// * StepEnableFlags - Structure -:
-// ** PriceChanged_AfterQuestionToUser - Boolean -
-// * IsBasedOn - Boolean -
-// * ReadOnlyProperties - String -
-// * ReadOnlyPropertiesMap - Map -
-// * ProcessedReadOnlyPropertiesMap - Map -
-// * TableName - String -
-// * ObjectMetadataInfo - Structure -:
-// ** MetadataName - String - 
-// ** Tables - Structure -
-// ** DependentTables - Array -
-// * TaxListIsExists - Boolean -
-// * SpecialOffersIsExists - Boolean -
-// * SerialLotNumbersExists - Boolean -
-// * ArrayOfTaxInfo - Array -
-// * Rows - Array of ValueTableRow -
 Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	Parameters = New Structure();
 	// parameters for Client 
@@ -256,22 +160,35 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 		EndIf;
 	EndIf;
 	
+	If ValueIsFilled(ServerParameters.TableName) 
+		And (Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
+			Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt") Then
+			
+		For Each Row In ServerParameters.Object[ServerParameters.TableName] Do
+			If Not CommonFunctionsClientServer.ObjectHasProperty(Row, "InventoryOrigin") Then
+				Continue;
+			EndIf;
+			If Row.InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
+				ServerParameters.RowsConsignorStocks.Add(Row);
+			EndIf;
+		EndDo;
+			
+	EndIf;
+	
 	// the table row cannot be transferred to the server, so we put the data in an array of structures
 	WrappedRows = WrapRows(Parameters, ServerParameters.Rows);
 	If WrappedRows.Count() Then
 		Parameters.Insert("Rows", WrappedRows);
 	EndIf;
+	
+	WrappedRows = WrapRows(Parameters, ServerParameters.RowsConsignorStocks);
+	If WrappedRows.Count() Then
+		Parameters.Insert("RowsConsignorStocks", WrappedRows);
+	EndIf;
+		
 	Return Parameters;
 EndFunction
 
-// Wrap rows.
-// 
-// Parameters:
-//  Parameters - See CreateParameters
-//  Rows - Array of ValueTableRow - Rows
-// 
-// Returns:
-//  Array - Wrap rows
 Function WrapRows(Parameters, Rows) Export
 	ArrayOfRows = New Array();
 	For Each Row In Rows Do
@@ -417,6 +334,8 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	SettersMap.Insert("ItemList.Unit"               , "SetItemListUnit");
 	SettersMap.Insert("ItemList.PriceType"          , "SetItemListPriceType");
 	SettersMap.Insert("ItemList.Price"              , "SetItemListPrice");
+	SettersMap.Insert("ItemList.ConsignorPrice"     , "SetItemListConsignorPrice");
+	SettersMap.Insert("ItemList.TradeAgentFeePercent", "SetItemListTradeAgentFeePercent");
 	SettersMap.Insert("ItemList.DontCalculateRow"   , "SetItemListDontCalculateRow");
 	SettersMap.Insert("ItemList.Quantity"           , "SetItemListQuantity");
 	SettersMap.Insert("ItemList.Store"              , "SetItemListStore");
@@ -434,6 +353,7 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	If IsBuilder Then
 		SettersMap.Insert("ItemList.TaxAmount"          , "SetItemListTaxAmount");
 	EndIf;
+	SettersMap.Insert("ItemList.InventoryOrigin"        , "SetItemListInventoryOrigin");
 	
 	// Materials
 	SettersMap.Insert("Materials.BillOfMaterials"    , "SetMaterialsBillOfMaterials");
@@ -502,6 +422,7 @@ Procedure API_SetProperty(Parameters, Property, Value, IsBuilder = False) Export
 EndProcedure
 
 Procedure ExecuteSetterByName(Parameters, Results, SetterName)
+	//@skip-warning
 	Execute StrTemplate("%1(Parameters, Results);", SetterName);
 EndProcedure
 
@@ -544,9 +465,10 @@ Function GetAllBindingsByDefault(Parameters)
 	Binding.Insert("Store"        , BindDefaultStore(Parameters));
 	Binding.Insert("DeliveryDate" , BindDefaultDeliveryDate(Parameters));
 	
-	Binding.Insert("ItemList.Store"        , BindDefaultItemListStore(Parameters));
-	Binding.Insert("ItemList.DeliveryDate" , BindDefaultItemListDeliveryDate(Parameters));
-	Binding.Insert("ItemList.Quantity"     , BindDefaultItemListQuantity(Parameters));
+	Binding.Insert("ItemList.Store"          , BindDefaultItemListStore(Parameters));
+	Binding.Insert("ItemList.DeliveryDate"   , BindDefaultItemListDeliveryDate(Parameters));
+	Binding.Insert("ItemList.Quantity"       , BindDefaultItemListQuantity(Parameters));
+	Binding.Insert("ItemList.InventoryOrigin", BindDefaultItemListInventoryOrigin(Parameters));
 	
 	Binding.Insert("PaymentList.Currency"  , BindDefaultPaymentListCurrency(Parameters));
 	Binding.Insert("PaymentList."          , BindDefaultPaymentListTaxRate(Parameters));
@@ -1937,14 +1859,16 @@ Function BindDate(Parameters)
 		|StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
-		|StepUpdatePaymentTerms");
+		|StepUpdatePaymentTerms,
+		|StepConsignorBatchesFillBatches");
 
 	Binding.Insert("RetailSalesReceipt",
 		"StepItemListChangePriceTypeByAgreement,
 		|StepItemListChangePriceByPriceType,
 		|StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
 		|StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_AgreementInHeader");
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepConsignorBatchesFillBatches");
 
 	Binding.Insert("SalesReturnOrder",
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType, 
@@ -2092,13 +2016,15 @@ Function BindCompany(Parameters)
 	Binding.Insert("SalesInvoice",
 		"StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
-		|StepItemListChangeRevenueTypeByItemKey");
+		|StepItemListChangeRevenueTypeByItemKey,
+		|StepConsignorBatchesFillBatches");
 
 	Binding.Insert("RetailSalesReceipt",
 		"StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey,
-		|StepChangeConsolidatedRetailSalesByWorkstation");
+		|StepChangeConsolidatedRetailSalesByWorkstation,
+		|StepConsignorBatchesFillBatches");
 
 	Binding.Insert("PurchaseOrder",
 		"StepRequireCallCreateTaxesFormControls,
@@ -2244,6 +2170,55 @@ Function BindBranch(Parameters)
 	Binding.Insert("RetailReturnReceipt", "StepChangeConsolidatedRetailSalesByWorkstationForReturn");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
+
+#EndRegion
+
+#Region TRADE_AGENT_FEE_TYPE
+
+// TradeAgentFeeType.OnChange
+Procedure TradeAgentFeeTypeOnChange(Parameters) Export
+	RollbackPropertyToValueBeforeChange_Object(Parameters);
+	AddViewNotify("OnSetTradeAgentFeeTypeNotify", Parameters);
+	Binding = BindTradeAgentFeeType(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TradeAgentFeeType.Set
+Procedure SetTradeAgentFeeType(Parameters, Results) Export
+	Binding = BindTradeAgentFeeType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetTradeAgentFeeTypeNotify");
+EndProcedure
+
+// TradeAgentFeeType.Get
+Function GetTradeAgentFeeType(Parameters)
+	Return GetPropertyObject(Parameters, BindTradeAgentFeeType(Parameters).DataPath);
+EndFunction
+
+// TradeAgentFeeType.Bind
+Function BindTradeAgentFeeType(Parameters)
+	DataPath = "TradeAgentFeeType";
+	Binding = New Structure();
+	Binding.Insert("SalesReportFromTradeAgent", 
+		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType,
+		|StepItemListChangeTradeAgentFeePercentByAgreement");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType,
+		|StepItemListChangeTradeAgentFeePercentByAgreement");
+		
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// TradeAgentFeeType.ChangeTradeAgentFeeTypeByAgreement.Step
+Procedure StepChangeTradeAgentFeeTypeByAgreement(Parameters, Chain) Export
+	Chain.ChangeTradeAgentFeeTypeByAgreement.Enable = True;
+	Chain.ChangeTradeAgentFeeTypeByAgreement.Setter = "SetTradeAgentFeeType";
+	Options = ModelClientServer_V2.ChangeTradeAgentFeeTypeByAgreementOptions();
+	Options.Agreement = GetAgreement(Parameters);
+	Options.CurrentFeeType = GetTradeAgentFeeType(Parameters);
+	Options.StepName = "StepChangeTradeAgentFeeTypeByAgreement";
+	Chain.ChangeTradeAgentFeeTypeByAgreement.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 
@@ -3247,16 +3222,16 @@ Function BindAgreement(Parameters)
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepChangeCompanyByAgreement,
 		|StepChangeCurrencyByAgreement,
-		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
-		|StepChangeTaxRate_AgreementInHeader");
+		|StepItemListChangeTradeAgentFeePercentByAgreement,
+		|StepChangeTradeAgentFeeTypeByAgreement");
 	
 	Binding.Insert("SalesReportToConsignor",
 		"StepChangeCompanyByAgreement,
 		|StepChangeCurrencyByAgreement,
-		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
-		|StepChangeTaxRate_AgreementInHeader");
+		|StepItemListChangeTradeAgentFeePercentByAgreement,
+		|StepChangeTradeAgentFeeTypeByAgreement");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -4038,6 +4013,11 @@ Procedure StepChangeTaxRate_AgreementInHeader(Parameters, Chain) Export
 	StepChangeTaxRate(Parameters, Chain, True);
 EndProcedure
 
+// <List>.ChangeTaxRate.[AgreementInHeader_InventoryOrigin].Step
+Procedure StepChangeTaxRate_AgreementInHeader_InventoryOrigin(Parameters, Chain) Export
+	StepChangeTaxRate(Parameters, Chain, True, False, True);
+EndProcedure
+
 // <List>.ChangeTaxRate.[AgreementInList].Step
 Procedure StepChangeTaxRate_AgreementInList(Parameters, Chain) Export
 	StepChangeTaxRate(Parameters, Chain, , True);
@@ -4049,7 +4029,7 @@ Procedure StepChangeTaxRate_WithoutAgreement(Parameters, Chain) Export
 EndProcedure
 
 // <List>.ChangeTaxRate.Step
-Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, AgreementInList = False)
+Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, AgreementInList = False, UseInventoryOrigin = False)
 	
 	Options_Date      = GetDate(Parameters);
 	Options_Company   = GetCompany(Parameters);
@@ -4067,14 +4047,30 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 		EndDo;
 	EndIf;
 	
-	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+	TableRows =  GetRows(Parameters, Parameters.TableName);
+	If UseInventoryOrigin Then
+		If TableRows.Count() 
+			And TableRows[0].Property("InventoryOrigin") 
+			And TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
+			
+			TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
+		EndIf;
+	EndIf;
+	
+	For Each Row In TableRows Do
 		// ChangeTaxRate
 		Options = ModelClientServer_V2.ChangeTaxRateOptions();
 		If AgreementInHeader Then
 			Options.Agreement = GetAgreement(Parameters);
 		EndIf;
+		
 		If AgreementInList Then
 			Options.Agreement = GetPropertyObject(Parameters, Parameters.TableName + "." + "Agreement", Row.Key);
+		EndIf;
+		
+		If UseInventoryOrigin Then
+			Options.InventoryOrigin = GetItemListInventoryOrigin(Parameters, Row.Key);
+			Options.ConsignorBatches = GetConsignorBatches(Parameters, Row.Key);
 		EndIf;
 		
 		Options.Date           = Options_Date;
@@ -7187,6 +7183,109 @@ EndFunction
 
 #EndRegion
 
+#Region CONSIGNOR_BATCHES_LIST
+
+// ConsignorBatches.Set
+Procedure SetConsignorBatches(Parameters, Results) Export
+	IsChanged = False;	
+	For Each Result In Results Do
+		IsChanged = True;
+		
+		If Not Parameters.Cache.Property("ConsignorBatches") Then
+			Parameters.Cache.Insert("ConsignorBatches", New Array());
+		EndIf;
+		
+		// remove from cache all rows
+		Parameters.Cache.ConsignorBatches.Clear();
+		
+		// add new rows
+		For Each Row In Result.Value.ConsignorBatches Do
+			Parameters.Cache.ConsignorBatches.Add(Row);
+		EndDo;
+	EndDo;
+	
+	Binding = BindConsignorBatches(Parameters);
+	ExecuteNextSteps(Parameters, IsChanged, Binding.StepsEnabler, Binding.DataPath);
+EndProcedure
+
+Function GetConsignorBatches(Parameters, _Key = Undefined)
+	ConsignorBatches = Parameters.Object.ConsignorBatches;
+	If Parameters.Cache.Property("ConsignorBatches") Then
+		ConsignorBatches =  Parameters.Cache.ConsignorBatches;
+	EndIf;
+		
+	Table = New Array();
+	For Each Row In ConsignorBatches Do
+		If ValueIsFilled(_Key) And Row.Key <> _Key Then
+			Continue;
+		EndIf;
+		
+		NewRow = New Structure("Key, ItemKey, SerialLotNumber, Store, Batch, Quantity");
+		FillPropertyValues(NewRow, Row);
+		Table.Add(NewRow);
+	EndDo;
+	Return Table;
+EndFunction
+
+// ConsignorBatches.Bind
+Function BindConsignorBatches(Parameters)
+	DataPath = "ConsignorBatches";
+	Binding = New Structure();
+		
+	Binding.Insert("SalesInvoice",
+		"StepChangeTaxRate_AgreementInHeader_InventoryOrigin");
+	
+	Binding.Insert("RetailSalesReceipt",
+		"StepChangeTaxRate_AgreementInHeader_InventoryOrigin");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// Step.ConsignorBatches.FillBatches
+Procedure StepConsignorBatchesFillBatches(Parameters, Chain) Export
+	Chain.ConsignorBatchesFillBatches.Enable = True;
+	Chain.ConsignorBatchesFillBatches.Setter = "SetConsignorBatches";
+	Chain.ConsignorBatchesFillBatches.IsLazyStep = True;
+	Chain.ConsignorBatchesFillBatches.LazyStepName = "StepConsignorBatchesFillBatches";
+	
+	Options = ModelClientServer_V2.ConsignorBatchesFillBatchesOptions();
+	Options.DocObject = Parameters.Object;
+	Options.Table_ItemList         = GetOption_Table_ItemList(Parameters);
+	Options.Table_SerialLotNumbers = GetOption_Table_SerialLotNumbers(Parameters);
+	Options.Table_ConsignorBatches = GetConsignorBatches(Parameters);
+	Options.SilentMode = Not Parameters.FormIsExists;	
+	
+	Options.StepName = "StepConsignorBatchesFillBatches";
+	Chain.ConsignorBatchesFillBatches.Options.Add(Options);
+EndProcedure
+
+Function GetOption_Table_ItemList(Parameters)
+	Table = New Array();
+	For Each Row In Parameters.Object.ItemList Do
+		NewRow = New Structure("Key, InventoryOrigin, Company, ItemKey, Store, Quantity");
+		NewRow.Key = Row.Key;
+		NewRow.InventoryOrigin = GetItemListInventoryOrigin(Parameters, Row.Key);
+		NewRow.Company         = GetCompany(Parameters);
+		NewRow.ItemKey         = GetItemListItemKey(Parameters, Row.Key);
+		NewRow.Store           = GetItemListStore(Parameters, Row.Key);
+		NewRow.Quantity        = GetItemListQuantityInBaseUnit(Parameters, Row.Key);
+		Table.Add(NewRow);
+	EndDo;
+	Return Table;
+EndFunction
+
+Function GetOption_Table_SerialLotNumbers(Parameters)
+	Table = New Array();
+	For Each Row In Parameters.Object.SerialLotNumbers Do
+		NewRow = New Structure("Key, SerialLotNumber, Quantity");
+		FillPropertyValues(NewRow, Row);
+		Table.Add(NewRow);
+	EndDo;
+	Return Table;
+EndFunction
+
+#EndRegion
+
 #Region ITEM_LIST
 
 #Region ITEM_LIST_PARTNER_ITEM
@@ -7385,7 +7484,8 @@ Function BindItemListItemKey(Parameters)
 		|StepChangeUseSerialLotNumberByItemKey,
 		|StepItemListChangeUnitByItemKey,
 		|StepItemListChangeRevenueTypeByItemKey,
-		|StepChangeIsServiceByItemKey");
+		|StepChangeIsServiceByItemKey,
+		|StepConsignorBatchesFillBatches");
 
 	Binding.Insert("PurchaseReturnOrder",
 		"StepItemListChangePriceTypeByAgreement,
@@ -7412,7 +7512,8 @@ Function BindItemListItemKey(Parameters)
 		|StepChangeUseSerialLotNumberByItemKey,
 		|StepItemListChangeUnitByItemKey,
 		|StepItemListChangeRevenueTypeByItemKey,
-		|StepChangeIsServiceByItemKey");
+		|StepChangeIsServiceByItemKey,
+		|StepConsignorBatchesFillBatches");
 	
 	Binding.Insert("RetailReturnReceipt",
 		"StepItemListChangePriceTypeByAgreement,
@@ -7666,12 +7767,13 @@ EndFunction
 // ItemList.SalesDocument.Bind
 Function BindItemListSalesDocument(Parameters)
 	DataPath = New Map();
-	DataPath.Insert("GoodsReceipt"         , "ItemList.SalesInvoice");
-	DataPath.Insert("SalesReturn"          , "ItemList.SalesInvoice");
-	DataPath.Insert("SalesReturnOrder"     , "ItemList.SalesInvoice");
-	DataPath.Insert("ShipmentConfirmation" , "ItemList.SalesInvoice");
-	DataPath.Insert("WorkSheet"            , "ItemList.SalesInvoice");
-	DataPath.Insert("RetailReturnReceipt"  , "ItemList.RetailSalesReceipt");
+	DataPath.Insert("GoodsReceipt"           , "ItemList.SalesInvoice");
+	DataPath.Insert("SalesReturn"            , "ItemList.SalesInvoice");
+	DataPath.Insert("SalesReturnOrder"       , "ItemList.SalesInvoice");
+	DataPath.Insert("ShipmentConfirmation"   , "ItemList.SalesInvoice");
+	DataPath.Insert("WorkSheet"              , "ItemList.SalesInvoice");
+	DataPath.Insert("RetailReturnReceipt"    , "ItemList.RetailSalesReceipt");
+	DataPath.Insert("SalesReportToConsignor" , "ItemList.SalesInvoice");
 	
 	Binding = New Structure();
 	Binding.Insert("SalesReturn"         , "StepChangeLandedCostBySalesDocument");
@@ -7971,7 +8073,8 @@ Function BindItemListStore(Parameters)
 
 	Binding.Insert("SalesInvoice",
 		"StepItemListChangeUseShipmentConfirmationByStore,
-		|StepChangeStoreInHeaderByStoresInList");
+		|StepChangeStoreInHeaderByStoresInList,
+		|StepConsignorBatchesFillBatches");
 
 	Binding.Insert("PurchaseReturnOrder",
 		"StepChangeStoreInHeaderByStoresInList");
@@ -7981,7 +8084,8 @@ Function BindItemListStore(Parameters)
 		|StepChangeStoreInHeaderByStoresInList");
 
 	Binding.Insert("RetailSalesReceipt",
-		"StepChangeStoreInHeaderByStoresInList");
+		"StepChangeStoreInHeaderByStoresInList,
+		|StepConsignorBatchesFillBatches");
 	
 	Binding.Insert("RetailReturnReceipt",
 		"StepChangeStoreInHeaderByStoresInList");
@@ -8202,6 +8306,154 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_CONSIGNOR_PRICE
+
+// ItemList.ConsignorPrice.OnChange
+Procedure ItemListConsignorPriceOnChange(Parameters) Export
+	Binding = BindItemListConsignorPrice(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.ConsignorPrice.Set
+Procedure SetItemListConsignorPrice(Parameters, Results) Export
+	Binding = BindItemListConsignorPrice(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.ConsignorPrice.Get
+Function GetItemListConsignorPrice(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListConsignorPrice(Parameters).DataPath, _Key);
+EndFunction
+
+// ItemList.ConsignorPrice.Bind
+Function BindItemListConsignorPrice(Parameters)
+	DataPath = "ItemList.ConsignorPrice";
+	Binding = New Structure();
+	Binding.Insert("SalesReportFromTradeAgent", 
+		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_TRADE_AGENT_FEE_PERCENT
+
+// ItemList.TradeAgentFeePercent.OnChange
+Procedure ItemListTradeAgentFeePercentOnChange(Parameters) Export
+	Binding = BindItemListTradeAgentFeePercent(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.TradeAgentFeePercent.Set
+Procedure SetItemListTradeAgentFeePercent(Parameters, Results) Export
+	Binding = BindItemListTradeAgentFeePercent(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.TradeAgentFeePercent.Get
+Function GetItemListTradeAgentFeePercent(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListTradeAgentFeePercent(Parameters).DataPath, _Key);
+EndFunction
+
+// ItemList.TradeAgentFeePercent.Bind
+Function BindItemListTradeAgentFeePercent(Parameters)
+	DataPath = "ItemList.TradeAgentFeePercent";
+	Binding = New Structure();
+	Binding.Insert("SalesReportFromTradeAgent", 
+		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.TradeAgentFeePercent.ChangeTradeAgentFeePercentByAgreement.Step
+Procedure StepItemListChangeTradeAgentFeePercentByAgreement(Parameters, Chain) Export
+	Chain.ChangeTradeAgentFeePercentByAgreement.Enable = True;
+	Chain.ChangeTradeAgentFeePercentByAgreement.Setter = "SetItemListTradeAgentFeePercent";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeTradeAgentFeePercentByAgreementOptions();
+		Options.Agreement      = GetAgreement(Parameters);
+		Options.FeeType        = GetTradeAgentFeeType(Parameters);
+		Options.CurrentPercent = GetItemListTradeAgentFeePercent(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepItemListChangeTradeAgentFeePercentByAgreement";
+		Options.DontExecuteIfExecutedBefore = True;
+		Chain.ChangeTradeAgentFeePercentByAgreement.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+// ItemList.TradeAgentFeePercent.ChangeTradeAgentFeePercentByAmount.Step
+Procedure StepItemListChangeTradeAgentFeePercentByAmount(Parameters, Chain) Export
+	Chain.ChangeTradeAgentFeePercentByAmount.Enable = True;
+	Chain.ChangeTradeAgentFeePercentByAmount.Setter = "SetItemListTradeAgentFeePercent";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeTradeAgentFeePercentByAmountOptions();
+		Options.FeeType     = GetTradeAgentFeeType(Parameters);
+		Options.FeeAmount   = GetItemListTradeAgentFeeAmount(Parameters, Row.Key);
+		Options.TotalAmount = GetItemListTotalAmount(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepItemListChangeTradeAgentFeePercentByAmount";
+		Options.DontExecuteIfExecutedBefore = True;
+		Chain.ChangeTradeAgentFeePercentByAmount.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_TRADE_AGENT_FEE_AMOUNT
+
+// ItemList.TradeAgentFeeAmount.OnChange
+Procedure ItemListTradeAgentFeeAmountOnChange(Parameters) Export
+	Binding = BindItemListTradeAgentFeeAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.TradeAgentFeeAmount.Set
+Procedure SetItemListTradeAgentFeeAmount(Parameters, Results) Export
+	Binding = BindItemListTradeAgentFeeAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.TradeAgentFeeAmount.Get
+Function GetItemListTradeAgentFeeAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListTradeAgentFeeAmount(Parameters).DataPath, _Key);
+EndFunction
+
+// ItemList.TradeAgentFeeAmount.Bind
+Function BindItemListTradeAgentFeeAmount(Parameters)
+	DataPath = "ItemList.TradeAgentFeeAmount";
+	Binding = New Structure();
+		
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.TradeAgentFeeAmount.ChangeTradeAgentFeeAmountByTradeAgentFeeType.Step
+Procedure StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType(Parameters, Chain) Export
+	Chain.ChangeTradeAgentFeeAmountByTradeAgentFeeType.Enable = True;
+	Chain.ChangeTradeAgentFeeAmountByTradeAgentFeeType.Setter = "SetItemListTradeAgentFeeAmount";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeTradeAgentFeeAmountByTradeAgentFeeTypeOptions();
+		Options.FeeType        = GetTradeAgentFeeType(Parameters);
+		Options.Price          = GetItemListPrice(Parameters, Row.Key);
+		Options.ConsignorPrice = GetItemListConsignorPrice(Parameters, Row.Key);
+		Options.Quantity       = GetItemListQuantity(Parameters, Row.Key);
+		Options.Percent        = GetItemListTradeAgentFeePercent(Parameters, Row.Key);
+		Options.TotalAmount    = GetItemListTotalAmount(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType";
+		Options.DontExecuteIfExecutedBefore = True;
+		Chain.ChangeTradeAgentFeeAmountByTradeAgentFeeType.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 #Region ITEM_LIST_PRICE
 
 // ItemList.Price.OnChange
@@ -8278,7 +8530,7 @@ Function BindItemListPrice(Parameters)
 	
 		Binding.Insert("SalesReportFromTradeAgent",
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
-			|StepItemListCalculations_IsPriceChanged_Without_SpecialsOffers");
+			|StepItemListCalculations_IsPriceChanged_Without_SpecialOffers");
 	
 		Binding.Insert("SalesReportToConsignor",
 			"StepItemListChangePriceTypeAsManual_IsUserChange,
@@ -8327,55 +8579,6 @@ Procedure StepItemListChangePriceByPriceType(Parameters, Chain) Export
 		Options.StepName = "StepItemListChangePriceByPriceType";
 		Options.DontExecuteIfExecutedBefore = True;
 		Chain.ChangePriceByPriceType.Options.Add(Options);
-	EndDo;
-EndProcedure
-
-// ItemList.SimpleCalculations.Set
-Procedure SetItemListSimpleCalculations(Parameters, Results) Export
-	ResourceToBinding = New Map();
-	ResourceToBinding.Insert("Price" , BindItemListPrice(Parameters));
-	ResourceToBinding.Insert("Amount", BindItemListAmount(Parameters));
-	MultiSetterObject(Parameters, Results, ResourceToBinding);
-EndProcedure
-
-// ItemList.SimpleCalculations.[IsPriceChanged].Step
-Procedure StepItemListSimpleCalculations_IsPriceChanged(Parameters, Chain) Export
-	StepItemListSimpleCalculations(Parameters, Chain, "IsPriceChanged");
-EndProcedure
-
-// ItemList.SimpleCalculations.[IsAmountChanged].Step
-Procedure StepItemListSimpleCalculations_IsAmountChanged(Parameters, Chain) Export
-	StepItemListSimpleCalculations(Parameters, Chain, "IsAmountChanged");
-EndProcedure
-
-// ItemList.SimpleCalculations.[IsQuantityChanged].Step
-Procedure StepItemListSimpleCalculations_IsQuantityChanged(Parameters, Chain) Export
-	StepItemListSimpleCalculations(Parameters, Chain, "IsQuantityChanged");
-EndProcedure
-
-Procedure StepItemListSimpleCalculations(Parameters, Chain, WhoIsChanged)
-	Chain.SimpleCalculations.Enable = True;
-	Chain.SimpleCalculations.Setter = "SetItemListSimpleCalculations";
-	
-	For Each Row In GetRows(Parameters, Parameters.TableName) Do
-		Options     = ModelClientServer_V2.SimpleCalculationsOptions();
-		Options.Ref = Parameters.Object.Ref;
-		Options.Key = Row.Key;
-		Options.DontExecuteIfExecutedBefore = True;
-		
-		If WhoIsChanged = "IsPriceChanged" Or WhoIsChanged = "IsQuantityChanged" Then
-			Options.CalculateAmount.Enable = True;
-		ElsIf WhoIsChanged = "IsAmountChanged" Then
-			Options.CalculatePrice.Enable = True;
-		Else
-			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
-		EndIf;
-		
-		Options.Amount   = GetItemListAmount(Parameters, Row.Key);
-		Options.Price    = GetItemListPrice(Parameters, Row.Key);
-		Options.Quantity = GetItemListQuantity(Parameters, Row.Key);
-		Options.StepName = "StepItemListSimpleCalculations";
-		Chain.SimpleCalculations.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -8463,6 +8666,59 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_INVENTORY_ORIGIN
+
+// ItemList.InventoryOrigin.OnChange
+Procedure ItemListInventoryOriginOnChange(Parameters) Export
+	Binding = BindItemListInventoryOrigin(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.InventoryOrigin.Set
+Procedure SetItemListInventoryOrigin(Parameters, Results) Export
+	Binding = BindItemListInventoryOrigin(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.InventoryOrigin.Get
+Function GetItemListInventoryOrigin(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListInventoryOrigin(Parameters).DataPath, _Key);
+EndFunction
+
+// ItemList.InventoryOrigin.Default.Bind
+Function BindDefaultItemListInventoryOrigin(Parameters)
+	DataPath = "ItemList.InventoryOrigin";
+	Binding = New Structure();
+	Return BindSteps("StepItemListDefaultInventoryOrigin", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.InventoryOrigin.Bind
+Function BindItemListInventoryOrigin(Parameters)
+	DataPath = "ItemList.InventoryOrigin";
+	Binding = New Structure();
+	
+	Binding.Insert("SalesInvoice",
+		"StepConsignorBatchesFillBatches");
+		
+	Binding.Insert("RetailSalesReceipt",
+		"StepConsignorBatchesFillBatches");
+		
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.Quantity.DefaultInventoryOrigin.Step
+Procedure StepItemListDefaultInventoryOrigin(Parameters, Chain) Export
+	Chain.DefaultInventoryOrigin.Enable = True;
+	Chain.DefaultInventoryOrigin.Setter = "SetItemListInventoryOrigin";
+	Options = ModelClientServer_V2.DefaultInventoryOriginOptions();
+	NewRow = Parameters.RowFilledByUserSettings;
+	Options.CurrentInventoryOrigin = GetItemListInventoryOrigin(Parameters, NewRow.Key);
+	Options.Key = NewRow.Key;
+	Chain.DefaultInventoryOrigin.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
 #Region ITEM_LIST_QUANTITY_IN_BASE_UNIT
 
 // ItemList.QuantityInBaseUnit.Set
@@ -8494,10 +8750,12 @@ Function BindItemListQuantityInBaseUnit(Parameters)
 		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
 	
 	Binding.Insert("SalesInvoice",
-		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged,
+		|StepConsignorBatchesFillBatches");
 	
 	Binding.Insert("RetailSalesReceipt",
-		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
+		"StepItemListCalculations_IsQuantityInBaseUnitChanged,
+		|StepConsignorBatchesFillBatches");
 	
 	Binding.Insert("PurchaseOrder",
 		"StepItemListCalculations_IsQuantityInBaseUnitChanged");
@@ -9199,10 +9457,24 @@ EndProcedure
 Function BindItemListCalculations(Parameters)
 	DataPath = "";
 	Binding = New Structure();
-	Binding.Insert("SalesOrder"      , "StepUpdatePaymentTerms");
-	Binding.Insert("SalesInvoice"    , "StepUpdatePaymentTerms");
-	Binding.Insert("PurchaseOrder"   , "StepUpdatePaymentTerms");
-	Binding.Insert("PurchaseInvoice" , "StepUpdatePaymentTerms");
+	Binding.Insert("SalesOrder",
+		"StepUpdatePaymentTerms");
+		
+	Binding.Insert("SalesInvoice",
+		"StepUpdatePaymentTerms");
+		
+	Binding.Insert("PurchaseOrder",
+		"StepUpdatePaymentTerms");
+		
+	Binding.Insert("PurchaseInvoice",
+		"StepUpdatePaymentTerms");
+	
+	Binding.Insert("SalesReportFromTradeAgent",
+		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
+	
+	Binding.Insert("SalesReportToConsignor",
+		"StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -9239,7 +9511,7 @@ Procedure StepItemListCalculations_IsPriceChanged(Parameters, Chain) Export
 EndProcedure
 
 // ItemList.Calculations.[IsPriceChanged_Without_SpecialsOffers].Step
-Procedure StepItemListCalculations_IsPriceChanged_Without_SpecialsOffers(Parameters, Chain) Export
+Procedure StepItemListCalculations_IsPriceChanged_Without_SpecialOffers(Parameters, Chain) Export
 	StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, "IsPriceChanged");
 EndProcedure
 
@@ -9441,6 +9713,59 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListCalculations";
 		Chain.Calculations.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_SIMPLE_CALCULATIONS
+
+// ItemList.SimpleCalculations.Set
+Procedure SetItemListSimpleCalculations(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Price" , BindItemListPrice(Parameters));
+	ResourceToBinding.Insert("Amount", BindItemListAmount(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+// ItemList.SimpleCalculations.[IsPriceChanged].Step
+Procedure StepItemListSimpleCalculations_IsPriceChanged(Parameters, Chain) Export
+	StepItemListSimpleCalculations(Parameters, Chain, "IsPriceChanged");
+EndProcedure
+
+// ItemList.SimpleCalculations.[IsAmountChanged].Step
+Procedure StepItemListSimpleCalculations_IsAmountChanged(Parameters, Chain) Export
+	StepItemListSimpleCalculations(Parameters, Chain, "IsAmountChanged");
+EndProcedure
+
+// ItemList.SimpleCalculations.[IsQuantityChanged].Step
+Procedure StepItemListSimpleCalculations_IsQuantityChanged(Parameters, Chain) Export
+	StepItemListSimpleCalculations(Parameters, Chain, "IsQuantityChanged");
+EndProcedure
+
+Procedure StepItemListSimpleCalculations(Parameters, Chain, WhoIsChanged)
+	Chain.SimpleCalculations.Enable = True;
+	Chain.SimpleCalculations.Setter = "SetItemListSimpleCalculations";
+	
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options     = ModelClientServer_V2.SimpleCalculationsOptions();
+		Options.Ref = Parameters.Object.Ref;
+		Options.Key = Row.Key;
+		Options.DontExecuteIfExecutedBefore = True;
+		
+		If WhoIsChanged = "IsPriceChanged" Or WhoIsChanged = "IsQuantityChanged" Then
+			Options.CalculateAmount.Enable = True;
+		ElsIf WhoIsChanged = "IsAmountChanged" Then
+			Options.CalculatePrice.Enable = True;
+		Else
+			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
+		EndIf;
+		
+		Options.Amount   = GetItemListAmount(Parameters, Row.Key);
+		Options.Price    = GetItemListPrice(Parameters, Row.Key);
+		Options.Quantity = GetItemListQuantity(Parameters, Row.Key);
+		Options.StepName = "StepItemListSimpleCalculations";
+		Chain.SimpleCalculations.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -10215,6 +10540,7 @@ Procedure CommitChainChanges(Parameters) Export
 			#ELSIF Server THEN
 				ViewModuleName = Parameters.ViewServerModuleName;
 			#ENDIF
+			//@skip-warning
 			Execute StrTemplate("%1.%2(Parameters);", ViewModuleName, FormModificator);
 		EndDo;
 		_CommitChainChanges(Parameters.CacheForm, Parameters.Form, Parameters);
@@ -10303,6 +10629,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetMaterialsMaterialTypeNotify"      Then ViewClient_V2.OnSetMaterialsMaterialTypeNotify(Parameters);
 	ElsIf ViewNotify = "OnSetBillOfMaterialsNotify"            Then ViewClient_V2.OnSetBillOfMaterialsNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListBillOfMaterialsNotify"    Then ViewClient_V2.OnSetItemListBillOfMaterialsNotify(Parameters);
+	ElsIf ViewNotify = "OnSetTradeAgentFeeTypeNotify"          Then ViewClient_V2.OnSetTradeAgentFeeTypeNotify(Parameters);
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);
 	EndIf;
@@ -10322,6 +10649,14 @@ Function IsFullTransferTabularSection(Parameters, PropertyName)
 		Else
 			Return False;
 		EndIf;
+	EndIf;
+	Return False;
+EndFunction
+
+Function IsFullLoadTabularSection(Parameters, PropertyName)
+	_PropertyName = Upper(PropertyName);
+	If _PropertyName = Upper("ConsignorBatches") Then
+		Return True;
 	EndIf;
 	Return False;
 EndFunction
@@ -10351,6 +10686,14 @@ Procedure _CommitChainChanges(Cache, Source, Parameters)
 				FillPropertyValues(Source[PropertyName].Add(), Row);
 			EndDo;
 		
+		ElsIf IsFullLoadTabularSection(Parameters, PropertyName) Then
+		
+			Source[PropertyName].Clear();
+			
+			For Each Row In PropertyValue Do
+				FillPropertyValues(Source[PropertyName].Add(), Row);
+			EndDo;
+			
 		ElsIf TypeOf(PropertyValue) = Type("Array") Then // it is tabular part
 			IsRowWithKey = PropertyValue.Count() And PropertyValue[0].Property("Key");
 			
@@ -10419,6 +10762,13 @@ Function GetRows(Parameters, TableName)
 	Return Parameters.Object[TableName];
 EndFunction
 
+Function GetRowsConsignorStocks(Parameters, TableName)
+	If Parameters.Property("RowsConsignorStocks") Then
+		Return Parameters.RowsConsignorStocks;
+	EndIf;
+	Return New Array();
+EndFunction
+
 Procedure SetterForm(StepNames, DataPath, Parameters, Results, 
 	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False, ReadOnlyFromCache = False)
 	Setter("Form", StepNames, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache);
@@ -10473,15 +10823,19 @@ Procedure Setter(Source, StepNames, DataPath, Parameters, Results, ViewNotify, V
 		AddViewNotify(ViewNotify, Parameters);
 	EndIf;
 	If ValueIsFilled(StepNames) And Not DisableNextSteps Then
-		// property is changed and have next steps
-		// or property is ReadInly, call next steps
-		If IsChanged Then
+		ExecuteNextSteps(Parameters, IsChanged, StepNames, DataPath);
+	EndIf;
+EndProcedure
+
+Procedure ExecuteNextSteps(Parameters, IsChanged, StepNames, DataPath)
+	// property is changed and have next steps
+	// or property is ReadInly, call next steps
+	If IsChanged Then
+		ModelClientServer_V2.EntryPoint(StepNames, Parameters);
+	ElsIf Parameters.ReadOnlyPropertiesMap.Get(Upper(DataPath)) = True Then
+		If Parameters.ProcessedReadOnlyPropertiesMap.Get(Upper(DataPath)) = Undefined Then
+			Parameters.ProcessedReadOnlyPropertiesMap.Insert(Upper(DataPath), True);
 			ModelClientServer_V2.EntryPoint(StepNames, Parameters);
-		ElsIf Parameters.ReadOnlyPropertiesMap.Get(Upper(DataPath)) = True Then
-			If Parameters.ProcessedReadOnlyPropertiesMap.Get(Upper(DataPath)) = Undefined Then
-				Parameters.ProcessedReadOnlyPropertiesMap.Insert(Upper(DataPath), True);
-				ModelClientServer_V2.EntryPoint(StepNames, Parameters);
-			EndIf;
 		EndIf;
 	EndIf;
 EndProcedure
@@ -10800,7 +11154,7 @@ Procedure SetReadOnlyProperties_RowID(Object, PropertiesHeader, PropertiesTables
 	Object.AdditionalProperties.Insert("IsBasedOn", True);
 EndProcedure
 
-Procedure SetReadOnlyProperties(Object, FillingData) Export
+Procedure SetReadOnlyProperties(Object, FillingData, ExcludedTabularSections = Undefined) Export
 	HeaderProperties = New Array();
 	TabularProperties = New Array();
 	For Each KeyValue In FillingData Do
@@ -10811,11 +11165,25 @@ Procedure SetReadOnlyProperties(Object, FillingData) Export
 		EndIf;
 					
 		If TypeOf(Value) = Type("Array") Then // is tabular section
+			IsExcludedTabularSection = False;
+			If ExcludedTabularSections <> Undefined Then
+				ArrayOfExcludedTabularSections = StrSplit(ExcludedTabularSections, ",");
+				For Each TabularSectionName in ArrayOfExcludedTabularSections Do
+					If StrStartsWith(TrimAll(Property), TrimAll(TabularSectionName)) Then
+						IsExcludedTabularSection = True;
+						Break;
+					EndIf;
+				EndDo;
+			EndIf;
+			
+			If IsExcludedTabularSection Then
+				Continue;
+			EndIf;
+			
 			If Value.Count() Then
 				For Each Column In Value[0] Do
-					If Object.Metadata().TabularSections[Property]
-						.Attributes.Find(Column.Key) <> Undefined Then
-							TabularProperties.Add(StrTemplate("%1.%2", Property, Column.Key));
+					If Object.Metadata().TabularSections[Property].Attributes.Find(Column.Key) <> Undefined Then
+						TabularProperties.Add(StrTemplate("%1.%2", Property, Column.Key));
 					EndIf;
 				EndDo;
 			EndIf;

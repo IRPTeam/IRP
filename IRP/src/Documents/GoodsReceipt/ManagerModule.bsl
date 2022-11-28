@@ -213,10 +213,10 @@ Function ItemList()
 		   |	ItemList.SalesReturnOrder AS SalesReturnOrder,
 		   |	NOT ItemList.SalesReturnOrder = VALUE(Document.SalesReturnOrder.EmptyRef) AS SalesReturnOrderExists,
 		   |	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.Purchase) AS IsTransaction_Purchase,
-		   |	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer) AS
-		   |		IsTransaction_ReturnFromCustomer,
-		   |	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.InventoryTransfer) AS
-		   |		IsTransaction_InventoryTransfer,
+		   |	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer) AS IsTransaction_ReturnFromCustomer,
+		   |	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.InventoryTransfer) AS IsTransaction_InventoryTransfer,
+		   |	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromTradeAgent) AS IsTransaction_ReturnFromTradeAgent,
+		   |	ItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
 		   |	ItemList.Ref.Branch AS Branch,
 		   |	ItemList.ProductionPlanning AS ProductionPlanning,
 		   |	ItemList.Key
@@ -305,7 +305,6 @@ Function R1031B_ReceiptInvoicing()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	NOT ItemList.PurchaseInvoiceExists
-		   |	AND ItemList.IsTransaction_Purchase
 		   |
 		   |UNION ALL
 		   |
@@ -321,8 +320,7 @@ Function R1031B_ReceiptInvoicing()
 		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
-		   |	ItemList.PurchaseInvoiceExists
-		   |	AND ItemList.IsTransaction_Purchase";
+		   |	ItemList.PurchaseInvoiceExists";
 EndFunction
 
 Function R2031B_ShipmentInvoicing()
@@ -374,38 +372,72 @@ EndFunction
 
 Function R4010B_ActualStocks()
 	Return 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-	|	ItemList.Period,
-	|	ItemList.Store,
-	|	ItemList.ItemKey,
-	|	CASE
-	|		WHEN SerialLotNumbers.StockBalanceDetail
-	|			THEN SerialLotNumbers.SerialLotNumber
-	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-	|	END AS SerialLotNumber,
-	|	SUM(CASE
-	|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
-	|			THEN ItemList.Quantity
-	|		ELSE SerialLotNumbers.Quantity
-	|	END) AS Quantity
-	|INTO R4010B_ActualStocks
-	|FROM
-	|	ItemList AS ItemList
-	|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
-	|		ON ItemList.Key = SerialLotNumbers.Key
-	|WHERE
-	|	TRUE
-	|GROUP BY
-	|	VALUE(AccumulationRecordType.Receipt),
-	|	ItemList.Period,
-	|	ItemList.Store,
-	|	ItemList.ItemKey,
-	|	CASE
-	|		WHEN SerialLotNumbers.StockBalanceDetail
-	|			THEN SerialLotNumbers.SerialLotNumber
-	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-	|	END";
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	SUM(CASE
+		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+		|			THEN ItemList.Quantity
+		|		ELSE SerialLotNumbers.Quantity
+		|	END) AS Quantity
+		|INTO R4010B_ActualStocks
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		|		ON ItemList.Key = SerialLotNumbers.Key
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.TradeAgentStore,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	SUM(CASE
+		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+		|			THEN ItemList.Quantity
+		|		ELSE SerialLotNumbers.Quantity
+		|	END) AS Quantity
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		|		ON ItemList.Key = SerialLotNumbers.Key
+		|WHERE
+		|	ItemList.IsTransaction_ReturnFromTradeAgent
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.TradeAgentStore,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END";
 EndFunction
 
 Function R4011B_FreeStocks()

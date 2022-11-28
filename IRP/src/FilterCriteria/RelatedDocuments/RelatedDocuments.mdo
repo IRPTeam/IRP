@@ -102,10 +102,8 @@
   <content>Document.ProductionPlanningCorrection.Attribute.ProductionPlanning</content>
   <content>Document.ProductionPlanningClosing.Attribute.ProductionPlanning</content>
   <content>Document.Production.Attribute.ProductionPlanning</content>
-  <content>Document.SalesReportFromTradeAgent.TabularSection.ItemList.Attribute.SalesOrder</content>
-  <content>Document.SalesReportFromTradeAgent.TabularSection.ItemList.Attribute.SalesInvoice</content>
-  <content>Document.SalesReportToConsignor.TabularSection.ItemList.Attribute.PurchaseOrder</content>
   <content>Document.SalesReportToConsignor.TabularSection.ItemList.Attribute.PurchaseInvoice</content>
+  <content>Document.SalesReportToConsignor.TabularSection.ItemList.Attribute.SalesInvoice</content>
   <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
     <name>RelatedDocuments</name>
     <synonym>

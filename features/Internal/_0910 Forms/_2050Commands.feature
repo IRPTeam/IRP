@@ -18,6 +18,7 @@ Background:
 Scenario: _0205001 preparation (commands)
 	When set True value to the constant
 	When set True value to the constant Use accounting
+	When set True value to the constant Use commission trading
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -39,6 +40,7 @@ Scenario: _0205001 preparation (commands)
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
 		When Create catalog Partners objects
+		When Create catalog Partners objects (trade agent and consignor)
 		When Create catalog Companies objects (partners company)
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
@@ -4164,8 +4166,8 @@ Scenario: _0205022 add test command to the list of documents Cheque bond transac
 	* Check command save
 		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
 		And "List" table contains lines
-		| 'Configuration metadata'       | 'Plugins' |
-		| 'Cheque bond transaction'                | 'Test command'       |
+		| 'Configuration metadata'  | 'Plugins'      |
+		| 'Cheque bond transaction' | 'Test command' |
 	* Check the command from the document list ChequeBondTransaction
 		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		And I go to the last line in "List" table
@@ -4408,6 +4410,185 @@ Scenario: _010034 add test command to the list of documents Work sheet
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 		And I close all client application windows
 
+
+Scenario: _010035 add test command to the list of documents SalesReportFromTradeAgent
+	And I close all client application windows
+	* Open Command register
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And I click the button named "FormCreate"
+	* Filling test command data for Sales report from trade agent
+		* Create metadata for Sales report from trade agent and select it for the command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Sales report from trade agent'  |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			Then "Plugins" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "List form" exact value from "Form type" drop-down list
+	* Save command
+		And I click "Save and close" button
+	* Check command save
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And "List" table contains lines
+		| 'Configuration metadata'        | 'Plugins'      |
+		| 'Sales report from trade agent' | 'Test command' |
+	* Check the command from the document Sales report from trade agent
+		Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
+		And I go to the last line in "List" table
+		And I click "Test command" button
+		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+	* Check that the command is not displayed in the document
+		And I click "Create" button
+		When I Check the steps for Exception
+			|'And I click "Test command" button'|
+		And I close all client application windows
+	* Connect a command to a document form
+		* Open Command register
+			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+			And I click the button named "FormCreate"
+		* Filling in command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Sales report from trade agent'  |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "Object form" exact value from "Form type" drop-down list
+			And I click "Save and close" button
+	* Check that the command is displayed in the document
+		Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
+		And I click "Create" button
+		And I click "Test command" button
+		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+		And I close all client application windows
+	* Connect the command to the document selection form
+		* Open Command register
+			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+			And I click the button named "FormCreate"
+		* Filling in command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description'|
+				| 'Sales report from trade agent' |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "Choice form" exact value from "Form type" drop-down list
+			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.SalesReportFromTradeAgent.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+		And I close all client application windows
+
+
+Scenario: _010035 add test command to the list of documents SalesReportToConsignor
+	And I close all client application windows
+	* Open Command register
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And I click the button named "FormCreate"
+	* Filling test command data for Sales report to consignor
+		* Create metadata for Sales report to consignor and select it for the command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Sales report to consignor'  |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			Then "Plugins" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "List form" exact value from "Form type" drop-down list
+	* Save command
+		And I click "Save and close" button
+	* Check command save
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And "List" table contains lines
+		| 'Configuration metadata'    | 'Plugins'      |
+		| 'Sales report to consignor' | 'Test command' |
+	* Check the command from the document Sales report to consignor
+		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
+		And I go to the last line in "List" table
+		And I click "Test command" button
+		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+	* Check that the command is not displayed in the document
+		And I click "Create" button
+		When I Check the steps for Exception
+			|'And I click "Test command" button'|
+		And I close all client application windows
+	* Connect a command to a document form
+		* Open Command register
+			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+			And I click the button named "FormCreate"
+		* Filling in command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Sales report to consignor'  |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "Object form" exact value from "Form type" drop-down list
+			And I click "Save and close" button
+	* Check that the command is displayed in the document
+		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
+		And I click "Create" button
+		And I click "Test command" button
+		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+		And I close all client application windows
+	* Connect the command to the document selection form
+		* Open Command register
+			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+			And I click the button named "FormCreate"
+		* Filling in command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description'|
+				| 'Sales report to consignor' |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "Choice form" exact value from "Form type" drop-down list
+			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.SalesReportToConsignor.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+		And I close all client application windows
 
 
 # Scenario: _010020 check the operation of Quantity Compare plugin (comparison of the plan / fact in Goods receipt)

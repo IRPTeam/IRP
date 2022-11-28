@@ -1,7 +1,7 @@
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
-	EndIf;
+	EndIf;	
 EndProcedure
 
 Procedure OnWrite(Cancel)

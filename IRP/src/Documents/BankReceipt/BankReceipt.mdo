@@ -882,6 +882,7 @@
       <types>DocumentRef.PurchaseReturn</types>
       <types>DocumentRef.SalesOrder</types>
       <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.SalesReportFromTradeAgent</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

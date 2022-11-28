@@ -83,7 +83,16 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
+	* Load PI
+		When Create document PurchaseInvoice and PurchaseReturn objects (comission trade)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load RetailSalesReceipt
+		When Create document RetailSalesReceipt and RetailReturnReceipt (consignor)
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(1113).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document RetailSalesReceipt objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
@@ -305,6 +314,191 @@ Scenario:_042412 check Retail sales receipt movements by the Register  "R2005 Sa
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document does not contain values
 			| Register  "R2005 Sales special offers" |
+		And I close all client application windows
+
+Scenario: _042413 check Retail sales receipt movements by the Register  "R2001 Sales" (consignor and own stocks) 
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 113' |
+	* Check movements by the Register  "R2001 Sales"
+		And I click "Registrations report" button
+		And I select "R2001 Sales" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | ''                    | ''          | ''       | ''           | ''              | ''             | ''        | ''                             | ''         | ''                                                     | ''         | ''                                     | ''             |
+			| 'Document registrations records'                       | ''                    | ''          | ''       | ''           | ''              | ''             | ''        | ''                             | ''         | ''                                                     | ''         | ''                                     | ''             |
+			| 'Register  "R2001 Sales"'                              | ''                    | ''          | ''       | ''           | ''              | ''             | ''        | ''                             | ''         | ''                                                     | ''         | ''                                     | ''             |
+			| ''                                                     | 'Period'              | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''        | ''                             | ''         | ''                                                     | ''         | ''                                     | ''             |
+			| ''                                                     | ''                    | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'  | 'Multi currency movement type' | 'Currency' | 'Invoice'                                              | 'Item key' | 'Row key'                              | 'Sales person' |
+			| ''                                                     | '14.11.2022 13:29:44' | '1'         | '94,16'  | '79,8'       | ''              | 'Main Company' | 'Shop 01' | 'Reporting currency'           | 'USD'      | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'S/Yellow' | '8b0b91bc-33a7-4a41-a6f9-c2759ac4de23' | ''             |
+			| ''                                                     | '14.11.2022 13:29:44' | '1'         | '550'    | '466,1'      | ''              | 'Main Company' | 'Shop 01' | 'Local currency'               | 'TRY'      | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'S/Yellow' | '8b0b91bc-33a7-4a41-a6f9-c2759ac4de23' | ''             |
+			| ''                                                     | '14.11.2022 13:29:44' | '1'         | '550'    | '466,1'      | ''              | 'Main Company' | 'Shop 01' | 'TRY'                          | 'TRY'      | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'S/Yellow' | '8b0b91bc-33a7-4a41-a6f9-c2759ac4de23' | ''             |
+			| ''                                                     | '14.11.2022 13:29:44' | '1'         | '550'    | '466,1'      | ''              | 'Main Company' | 'Shop 01' | 'en description is empty'      | 'TRY'      | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'S/Yellow' | '8b0b91bc-33a7-4a41-a6f9-c2759ac4de23' | ''             |
+			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '188,32' | '159,59'     | ''              | 'Main Company' | 'Shop 01' | 'Reporting currency'           | 'USD'      | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'S/Yellow' | '6ebea8a7-366d-409c-84a7-19f5714085e9' | ''             |
+			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '1 100'  | '932,2'      | ''              | 'Main Company' | 'Shop 01' | 'Local currency'               | 'TRY'      | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'S/Yellow' | '6ebea8a7-366d-409c-84a7-19f5714085e9' | ''             |
+			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '1 100'  | '932,2'      | ''              | 'Main Company' | 'Shop 01' | 'TRY'                          | 'TRY'      | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'S/Yellow' | '6ebea8a7-366d-409c-84a7-19f5714085e9' | ''             |
+			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '1 100'  | '932,2'      | ''              | 'Main Company' | 'Shop 01' | 'en description is empty'      | 'TRY'      | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'S/Yellow' | '6ebea8a7-366d-409c-84a7-19f5714085e9' | ''             |
+			| ''                                                     | '14.11.2022 13:29:44' | '4'         | '273,92' | '273,92'     | ''              | 'Main Company' | 'Shop 01' | 'Reporting currency'           | 'USD'      | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'UNIQ'     | 'f3d688c7-7c7b-4432-9725-06721e496320' | ''             |
+			| ''                                                     | '14.11.2022 13:29:44' | '4'         | '1 600'  | '1 600'      | ''              | 'Main Company' | 'Shop 01' | 'Local currency'               | 'TRY'      | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'UNIQ'     | 'f3d688c7-7c7b-4432-9725-06721e496320' | ''             |
+			| ''                                                     | '14.11.2022 13:29:44' | '4'         | '1 600'  | '1 600'      | ''              | 'Main Company' | 'Shop 01' | 'TRY'                          | 'TRY'      | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'UNIQ'     | 'f3d688c7-7c7b-4432-9725-06721e496320' | ''             |
+			| ''                                                     | '14.11.2022 13:29:44' | '4'         | '1 600'  | '1 600'      | ''              | 'Main Company' | 'Shop 01' | 'en description is empty'      | 'TRY'      | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'UNIQ'     | 'f3d688c7-7c7b-4432-9725-06721e496320' | ''             |		
+		And I close all client application windows
+
+
+Scenario: _042415 check Retail sales receipt movements by the Register  "R2050 Retail sales" (consignor and own stocks) 
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 113' |
+	* Check movements by the Register  "R2050 Retail sales"
+		And I click "Registrations report" button
+		And I select "R2050 Retail sales" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | ''                    | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''             | ''                                                     | ''         | ''                  | ''                                     |
+			| 'Document registrations records'                       | ''                    | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''             | ''                                                     | ''         | ''                  | ''                                     |
+			| 'Register  "R2050 Retail sales"'                       | ''                    | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''             | ''                                                     | ''         | ''                  | ''                                     |
+			| ''                                                     | 'Period'              | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''        | ''         | ''             | ''                                                     | ''         | ''                  | ''                                     |
+			| ''                                                     | ''                    | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'  | 'Store'    | 'Sales person' | 'Retail sales receipt'                                 | 'Item key' | 'Serial lot number' | 'Row key'                              |
+			| ''                                                     | '14.11.2022 13:29:44' | '1'         | '550'    | '466,1'      | ''              | 'Main Company' | 'Shop 01' | 'Store 02' | ''             | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'S/Yellow' | ''                  | '8b0b91bc-33a7-4a41-a6f9-c2759ac4de23' |
+			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '1 100'  | '932,2'      | ''              | 'Main Company' | 'Shop 01' | 'Store 02' | ''             | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'S/Yellow' | ''                  | '6ebea8a7-366d-409c-84a7-19f5714085e9' |
+			| ''                                                     | '14.11.2022 13:29:44' | '4'         | '1 600'  | '1 600'      | ''              | 'Main Company' | 'Shop 01' | 'Store 02' | ''             | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'UNIQ'     | '09987897977890'    | 'f3d688c7-7c7b-4432-9725-06721e496320' |		
+		And I close all client application windows
+
+
+Scenario: _042418 check Retail sales receipt movements by the Register  "R4010 Actual stocks" (consignor and own stocks) 
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 113' |
+	* Check movements by the Register  "R4010 Actual stocks"
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'                       | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'                      | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '3'         | 'Store 02'   | 'S/Yellow' | ''                  |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '4'         | 'Store 02'   | 'UNIQ'     | ''                  |		
+		And I close all client application windows
+
+Scenario: _042419 check Retail sales receipt movements by the Register  "R4011 Free stocks" (consignor and own stocks) 
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 113' |
+	* Check movements by the Register  "R4011 Free stocks"
+		And I click "Registrations report" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | ''            | ''                    | ''          | ''           | ''         |
+			| 'Document registrations records'                       | ''            | ''                    | ''          | ''           | ''         |
+			| 'Register  "R4011 Free stocks"'                        | ''            | ''                    | ''          | ''           | ''         |
+			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
+			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '1'         | 'Store 02'   | 'S/Yellow' |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '2'         | 'Store 02'   | 'S/Yellow' |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '4'         | 'Store 02'   | 'UNIQ'     |		
+		And I close all client application windows
+
+Scenario: _042420 check Retail sales receipt movements by the Register  "R4014 Serial lot numbers" (consignor and own stocks) 
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 113' |
+	* Check movements by the Register  "R4014 Serial lot numbers"
+		And I click "Registrations report" button
+		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | ''            | ''                    | ''          | ''             | ''        | ''      | ''         | ''                  |
+			| 'Document registrations records'                       | ''            | ''                    | ''          | ''             | ''        | ''      | ''         | ''                  |
+			| 'Register  "R4014 Serial lot numbers"'                 | ''            | ''                    | ''          | ''             | ''        | ''      | ''         | ''                  |
+			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''      | ''         | ''                  |
+			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'  | 'Store' | 'Item key' | 'Serial lot number' |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '4'         | 'Main Company' | 'Shop 01' | ''      | 'UNIQ'     | '09987897977890'    |		
+		And I close all client application windows
+
+Scenario: _042421 check Retail sales receipt movements by the Register  "R8012 Consignor inventory" (consignor and own stocks) 
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 113' |
+	* Check movements by the Register  "R8012 Consignor inventory"
+		And I click "Registrations report" button
+		And I select "R8012 Consignor inventory" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
+			| 'Document registrations records'                       | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
+			| 'Register  "R8012 Consignor inventory"'                | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
+			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                  | ''            | ''                         |
+			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Serial lot number' | 'Partner'     | 'Agreement'                |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '2'         | 'Main Company' | 'S/Yellow' | ''                  | 'Consignor 1' | 'Consignor partner term 1' |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '2'         | 'Main Company' | 'UNIQ'     | '09987897977890'    | 'Consignor 1' | 'Consignor partner term 1' |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '2'         | 'Main Company' | 'UNIQ'     | '09987897977890'    | 'Consignor 2' | 'Consignor 2 partner term' |		
+		And I close all client application windows
+
+Scenario: _042422 check Retail sales receipt movements by the Register  "R8013 Consignor batch wise balance" (consignor and own stocks) 
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 113' |
+	* Check movements by the Register  "R8013 Consignor batch wise balance"
+		And I click "Registrations report" button
+		And I select "R8013 Consignor batch wise balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  |
+			| 'Document registrations records'                       | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  |
+			| 'Register  "R8013 Consignor batch wise balance"'       | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  |
+			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                               | ''         | ''         | ''                  |
+			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Company'      | 'Batch'                                          | 'Store'    | 'Item key' | 'Serial lot number' |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'S/Yellow' | ''                  |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'UNIQ'     | '09987897977890'    |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '2'         | 'Main Company' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'Store 02' | 'UNIQ'     | '09987897977890'    |				
+		And I close all client application windows
+
+Scenario: _042423 check Retail sales receipt movements by the Register  "R8014 Consignor sales" (consignor and own stocks) 
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 113' |
+	* Check movements by the Register  "R8014 Consignor sales"
+		And I click "Registrations report" button
+		And I select "R8014 Consignor sales" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | ''                    | ''          | ''           | ''       | ''                                     | ''             | ''            | ''                         | ''                                                     | ''                                               | ''         | ''                  | ''     | ''                        | ''                   | ''                             | ''         | ''                  | ''                | ''      |
+			| 'Document registrations records'                       | ''                    | ''          | ''           | ''       | ''                                     | ''             | ''            | ''                         | ''                                                     | ''                                               | ''         | ''                  | ''     | ''                        | ''                   | ''                             | ''         | ''                  | ''                | ''      |
+			| 'Register  "R8014 Consignor sales"'                    | ''                    | ''          | ''           | ''       | ''                                     | ''             | ''            | ''                         | ''                                                     | ''                                               | ''         | ''                  | ''     | ''                        | ''                   | ''                             | ''         | ''                  | ''                | ''      |
+			| ''                                                     | 'Period'              | 'Resources' | ''           | ''       | 'Dimensions'                           | ''             | ''            | ''                         | ''                                                     | ''                                               | ''         | ''                  | ''     | ''                        | ''                   | ''                             | ''         | ''                  | ''                | ''      |
+			| ''                                                     | ''                    | 'Quantity'  | 'Net amount' | 'Amount' | 'Row key'                              | 'Company'      | 'Partner'     | 'Partner term'             | 'Sales invoice'                                        | 'Purchase invoice'                               | 'Item key' | 'Serial lot number' | 'Unit' | 'Price type'              | 'Dont calculate row' | 'Multi currency movement type' | 'Currency' | 'Price include tax' | 'Consignor price' | 'Price' |
+			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '136,96'     | '136,96' | 'f3d688c7-7c7b-4432-9725-06721e496320' | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'UNIQ'     | '09987897977890'    | 'pcs'  | 'en description is empty' | 'No'                 | 'Reporting currency'           | 'USD'      | 'No'                | '17,12'           | '68,48' |
+			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '136,96'     | '136,96' | 'f3d688c7-7c7b-4432-9725-06721e496320' | 'Main Company' | 'Consignor 2' | 'Consignor 2 partner term' | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'UNIQ'     | '09987897977890'    | 'pcs'  | 'en description is empty' | 'No'                 | 'Reporting currency'           | 'USD'      | 'No'                | '17,12'           | '68,48' |
+			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '159,59'     | '188,32' | '6ebea8a7-366d-409c-84a7-19f5714085e9' | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'S/Yellow' | ''                  | 'pcs'  | 'Basic Price without VAT' | 'No'                 | 'Reporting currency'           | 'USD'      | 'No'                | '94,16'           | '79,8'  |
+			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '800'        | '800'    | 'f3d688c7-7c7b-4432-9725-06721e496320' | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'UNIQ'     | '09987897977890'    | 'pcs'  | 'en description is empty' | 'No'                 | 'Local currency'               | 'TRY'      | 'No'                | '100'             | '400'   |
+			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '800'        | '800'    | 'f3d688c7-7c7b-4432-9725-06721e496320' | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'UNIQ'     | '09987897977890'    | 'pcs'  | 'en description is empty' | 'No'                 | 'TRY'                          | 'TRY'      | 'No'                | '100'             | '400'   |
+			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '800'        | '800'    | 'f3d688c7-7c7b-4432-9725-06721e496320' | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'UNIQ'     | '09987897977890'    | 'pcs'  | 'en description is empty' | 'No'                 | 'en description is empty'      | 'TRY'      | 'No'                | '100'             | '400'   |
+			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '800'        | '800'    | 'f3d688c7-7c7b-4432-9725-06721e496320' | 'Main Company' | 'Consignor 2' | 'Consignor 2 partner term' | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'UNIQ'     | '09987897977890'    | 'pcs'  | 'en description is empty' | 'No'                 | 'Local currency'               | 'TRY'      | 'No'                | '100'             | '400'   |
+			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '800'        | '800'    | 'f3d688c7-7c7b-4432-9725-06721e496320' | 'Main Company' | 'Consignor 2' | 'Consignor 2 partner term' | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'UNIQ'     | '09987897977890'    | 'pcs'  | 'en description is empty' | 'No'                 | 'TRY'                          | 'TRY'      | 'No'                | '100'             | '400'   |
+			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '800'        | '800'    | 'f3d688c7-7c7b-4432-9725-06721e496320' | 'Main Company' | 'Consignor 2' | 'Consignor 2 partner term' | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'UNIQ'     | '09987897977890'    | 'pcs'  | 'en description is empty' | 'No'                 | 'en description is empty'      | 'TRY'      | 'No'                | '100'             | '400'   |
+			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '932,2'      | '1 100'  | '6ebea8a7-366d-409c-84a7-19f5714085e9' | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'S/Yellow' | ''                  | 'pcs'  | 'Basic Price without VAT' | 'No'                 | 'Local currency'               | 'TRY'      | 'No'                | '550'             | '466,1' |
+			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '932,2'      | '1 100'  | '6ebea8a7-366d-409c-84a7-19f5714085e9' | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'S/Yellow' | ''                  | 'pcs'  | 'Basic Price without VAT' | 'No'                 | 'TRY'                          | 'TRY'      | 'No'                | '550'             | '466,1' |
+			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '932,2'      | '1 100'  | '6ebea8a7-366d-409c-84a7-19f5714085e9' | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'S/Yellow' | ''                  | 'pcs'  | 'Basic Price without VAT' | 'No'                 | 'en description is empty'      | 'TRY'      | 'No'                | '550'             | '466,1' |		
 		And I close all client application windows
 
 Scenario: _042430 Retail sales receipt clear posting/mark for deletion

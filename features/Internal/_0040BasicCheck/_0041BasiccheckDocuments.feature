@@ -11,6 +11,7 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 	When set True value to the constant
 	When set True value to the constant Use consolidated retail sales
+	When set True value to the constant Use commission trading
 
 Scenario: preparation
 	* Add VA extension
@@ -821,6 +822,51 @@ Scenario: Open object form "WorkSheet"
 	Given I open "WorkSheet" document main form
 	If the warning is displayed then
 		Then I raise "Failed to open document form WorkSheet" exception
+	And I close current window
+
+Scenario: Open list form "SalesReportFromTradeAgent" 
+	And I close all client application windows
+	Given I open "SalesReportFromTradeAgent" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form SalesReportFromTradeAgent" exception
+	And I close current window
+
+Scenario: Open object form "SalesReportFromTradeAgent"
+	And I close all client application windows
+	Given I open "SalesReportFromTradeAgent" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form SalesReportFromTradeAgent" exception
+	And I close current window
+
+
+Scenario: Open list form "SalesReportToConsignor" 
+	And I close all client application windows
+	Given I open "SalesReportToConsignor" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form SalesReportToConsignor" exception
+	And I close current window
+
+Scenario: Open object form "SalesReportToConsignor"
+	And I close all client application windows
+	Given I open "SalesReportToConsignor" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form SalesReportToConsignor" exception
+	And I close current window
+
+Scenario: Open choise form "SalesReportToConsignor"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.SalesReportToConsignor.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form SalesReportToConsignor" exception
+	And I close current window
+
+Scenario: Open choise form "SalesReportFromTradeAgent"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.SalesReportFromTradeAgent.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form SalesReportFromTradeAgent" exception
 	And I close current window
 
 Scenario: Open choise form "WorkOrder"

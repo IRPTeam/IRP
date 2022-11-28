@@ -97,6 +97,27 @@ Scenario: _017011 check Description in the document Additional cost allocation
 	Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
 	When check Description
 
+Scenario: _017012 check Description in the document Sales report from trade agent
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
+	When check Description
+
+Scenario: _017013 check Description in the document Sales report to consignor
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
+	When check Description
+
+Scenario: _017014 check the filter for Company in the document Sales report from trade agent
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
+	When check the filter by my own company
+
+Scenario: _017015 check the filter for Company in the document Sales report to consignor
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
+	When check the filter by my own company
+
+
 Scenario: _018013 check the filter for Legal name in the document Purchase Invoice
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"

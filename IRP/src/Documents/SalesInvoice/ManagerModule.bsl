@@ -10,14 +10,86 @@ EndFunction
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure();
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
 	Tables.Insert("CustomersTransactions", PostingServer.GetQueryTableByName("CustomersTransactions", Parameters));
-#EndRegion
-
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ItemList.Key AS Key,
+	|	ItemList.InventoryOrigin AS InventoryOrigin,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.Store AS Store,
+	|	ItemList.QuantityInBaseUnit AS Quantity
+	|INTO tmpItemList
+	|FROM
+	|	Document.SalesInvoice.ItemList AS ItemList
+	|WHERE
+	|	ItemList.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SerialLotNumbers.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.Quantity
+	|INTO tmpSerialLotNumbers
+	|FROM
+	|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
+	|WHERE
+	|	SerialLotNumbers.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpItemList.Key,
+	|	tmpItemList.InventoryOrigin,
+	|	tmpItemList.Company,
+	|	tmpItemList.ItemKey,
+	|	tmpItemList.Store,
+	|	CASE
+	|		WHEN tmpSerialLotNumbers.SerialLotNumber.Ref IS NULL
+	|			THEN tmpItemList.Quantity
+	|		ELSE tmpSerialLotNumbers.Quantity
+	|	END AS Quantity,
+	|	ISNULL(tmpSerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
+	|FROM
+	|	tmpItemList AS tmpItemList
+	|		LEFT JOIN tmpSerialLotNumbers AS tmpSerialLotNumbers
+	|		ON tmpItemList.Key = tmpSerialLotNumbers.Key";
+	Query.SetParameter("Ref", Ref);
+	QueryResult = Query.Execute();
+	ItemListTable = QueryResult.Unload();
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ConsignorBatches.Key,
+	|	ConsignorBatches.ItemKey,
+	|	ConsignorBatches.SerialLotNumber,
+	|	ConsignorBatches.Store,
+	|	ConsignorBatches.Batch,
+	|	ConsignorBatches.Quantity
+	|FROM
+	|	Document.SalesInvoice.ConsignorBatches AS ConsignorBatches
+	|WHERE
+	|	ConsignorBatches.Ref = &Ref";
+	Query.SetParameter("Ref", Ref);
+	QueryResult = Query.Execute();
+	ConsignorBatches = QueryResult.Unload();
+		
+	ConsignorBatches = CommissionTradeServer.GetRegistrateConsignorBatches(Parameters.Object, ItemListTable, ConsignorBatches);
+	
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = "SELECT * INTO ConsignorBatches FROM &T1 AS T1";
+	Query.SetParameter("T1", ConsignorBatches);
+	Query.Execute();
+	
 	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
 	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
 		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
@@ -36,21 +108,15 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-
-#Region NewRegisterPosting
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
-#Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-#EndRegion
-
 	Return PostingDataTables;
 EndFunction
 
@@ -72,10 +138,8 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-#Region NewRegisterPosting
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -185,6 +249,11 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(R6080T_OtherPeriodsRevenues());
+	QueryArray.Add(R8010B_TradeAgentInventory());
+	QueryArray.Add(R8011B_TradeAgentSerialLotNumber());
+	QueryArray.Add(R8012B_ConsignorInventory());
+	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
+	QueryArray.Add(R8014T_ConsignorSales());
 	Return QueryArray;
 EndFunction
 
@@ -237,6 +306,7 @@ Function ItemList()
 		|	SalesInvoiceItemList.Ref.Currency AS Currency,
 		|	SalesInvoiceItemList.Unit AS Unit,
 		|	SalesInvoiceItemList.Ref.Date AS Period,
+		|	SalesInvoiceItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
 		|	SalesInvoiceItemList.SalesOrder AS SalesOrder,
 		|	NOT SalesInvoiceItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
 		|	TableRowIDInfo.RowID AS RowKey,
@@ -257,9 +327,13 @@ Function ItemList()
 		|	SalesInvoiceItemList.Ref.Branch AS Branch,
 		|	SalesInvoiceItemList.Ref.LegalNameContract AS LegalNameContract,
 		|	SalesInvoiceItemList.PriceType,
+		|	SalesInvoiceItemList.Price,
 		|	SalesInvoiceItemList.SalesPerson,
 		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
-		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS ShipmentToTradeAgent
+		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
+		|	SalesInvoiceItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
+		|	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.OwnStocks) AS IsOwnStocks,
+		|	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.ConsignorStocks) AS IsConsignorStocks
 		|INTO ItemList
 		|FROM
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -348,7 +422,9 @@ Function Taxes()
 		|	SalesInvoiceItemList.NetAmount AS TaxableAmount,
 		|	SalesInvoiceItemList.Ref.Branch AS Branch,
 		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
-		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS ShipmentToTradeAgent
+		|	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
+		|	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.OwnStocks) AS IsOwnStocks,
+		|	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.ConsignorStocks) AS IsConsignorStocks
 		|INTO Taxes
 		|FROM
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -360,23 +436,26 @@ EndFunction
 
 Function SerialLotNumbers()
 	Return 
-	"SELECT
-	|	SerialLotNumbers.Ref.Date AS Period,
-	|	SerialLotNumbers.Ref.Company AS Company,
-	|	SerialLotNumbers.Ref.Branch AS Branch,
-	|	SerialLotNumbers.Key,
-	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
-	|	SerialLotNumbers.Quantity,
-	|	ItemList.ItemKey AS ItemKey
-	|INTO SerialLotNumbers
-	|FROM
-	|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
-	|		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
-	|		ON SerialLotNumbers.Key = ItemList.Key
-	|		AND ItemList.Ref = &Ref
-	|WHERE
-	|	SerialLotNumbers.Ref = &Ref";
+		"SELECT
+		|	SerialLotNumbers.Ref.Date AS Period,
+		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Ref.Branch AS Branch,
+		|	SerialLotNumbers.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
+		|	SerialLotNumbers.Quantity,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Ref.Partner AS Partner,
+		|	ItemList.Ref.Agreement AS Agreement,
+		|	ItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent
+		|INTO SerialLotNumbers
+		|FROM
+		|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
+		|		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
+		|		ON SerialLotNumbers.Key = ItemList.Key
+		|		AND ItemList.Ref = &Ref
+		|WHERE
+		|	SerialLotNumbers.Ref = &Ref";
 EndFunction
 
 Function R2001T_Sales()
@@ -530,7 +609,45 @@ Function R4010B_ActualStocks()
 		|		WHEN SerialLotNumbers.StockBalanceDetail
 		|			THEN SerialLotNumbers.SerialLotNumber
 		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
-		|	END";
+		|	END
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.TradeAgentStore,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	SUM(CASE
+		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+		|			THEN ItemList.Quantity
+		|		ELSE SerialLotNumbers.Quantity
+		|	END) AS Quantity
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		|		ON ItemList.Key = SerialLotNumbers.Key
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND NOT ItemList.UseShipmentConfirmation
+		|	AND NOT ItemList.ShipmentConfirmationExists
+		|	AND ItemList.IsShipmentToTradeAgent
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.TradeAgentStore,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 Function R4011B_FreeStocks()
@@ -592,6 +709,7 @@ Function R4011B_FreeStocks()
 		|		AND TmpStockReservation.Basis = ItemListGroup.SalesOrder
 		|WHERE
 		|	ItemListGroup.Quantity > ISNULL(TmpStockReservation.Quantity, 0)
+		|
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -717,13 +835,35 @@ Function R4050B_StockInventory()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.IsService
-		|	AND ItemList.IsSales
+		|	AND ItemList.IsOwnStocks
 		|
 		|GROUP BY
 		|	VALUE(AccumulationRecordType.Expense),
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Store,
+		|	ItemList.ItemKey
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.TradeAgentStore,
+		|	ItemList.ItemKey,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.IsShipmentToTradeAgent
+		|
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.TradeAgentStore,
 		|	ItemList.ItemKey";
 EndFunction
 
@@ -1014,22 +1154,182 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.ItemKey,
 		|	ItemList.Store,
 		|	ItemList.Company,
-		|	SUM(ItemList.Quantity) AS Quantity,
+		|	SUM(case when ConsignorBatches.Quantity is null then ItemList.Quantity else ConsignorBatches.Quantity end) AS Quantity,
 		|	ItemList.Period,
-		|	VALUE(Enum.BatchDirection.Expense) AS Direction
+		|	VALUE(Enum.BatchDirection.Expense) AS Direction,
+		|	ConsignorBatches.Batch AS BatchConsignor
 		|INTO T6020S_BatchKeysInfo
 		|FROM
 		|	ItemList AS ItemList
+		|	LEFT JOIN ConsignorBatches AS ConsignorBatches ON
+		|	ItemList.Key = ConsignorBatches.Key
+		|
 		|WHERE
 		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
-		|	AND ItemList.IsSales
 		|
 		|GROUP BY
 		|	ItemList.ItemKey,
 		|	ItemList.Store,
 		|	ItemList.Company,
 		|	ItemList.Period,
-		|	VALUE(Enum.BatchDirection.Expense)";
+		|	VALUE(Enum.BatchDirection.Expense),
+		|	ConsignorBatches.Batch
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	ItemList.ItemKey,
+		|	ItemList.TradeAgentStore,
+		|	ItemList.Company,
+		|	SUM(ItemList.Quantity),
+		|	ItemList.Period,
+		|	VALUE(Enum.BatchDirection.Receipt),
+		|	UNDEFINED
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+		|	AND ItemList.IsShipmentToTradeAgent
+		|
+		|GROUP BY
+		|	ItemList.ItemKey,
+		|	ItemList.TradeAgentStore,
+		|	ItemList.Company,
+		|	ItemList.Period,
+		|	VALUE(Enum.BatchDirection.Receipt)";
+EndFunction
+
+Function R8010B_TradeAgentInventory()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.ItemKey,
+		|	ItemList.Partner,
+		|	ItemList.Agreement,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO R8010B_TradeAgentInventory
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.IsShipmentToTradeAgent
+		|
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.ItemKey,
+		|	ItemList.Partner,
+		|	ItemList.Agreement";
+EndFunction
+
+Function R8011B_TradeAgentSerialLotNumber()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	SerialLotNumbers.Period,
+		|	SerialLotNumbers.Company,
+		|	SerialLotNumbers.ItemKey,
+		|	SerialLotNumbers.Partner,
+		|	SerialLotNumbers.Agreement,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity
+		|INTO R8011B_TradeAgentSerialLotNumber
+		|FROM
+		|	SerialLotNumbers AS SerialLotNumbers
+		|WHERE
+		|	SerialLotNumbers.IsShipmentToTradeAgent";
+EndFunction
+
+Function R8012B_ConsignorInventory()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.ItemKey,
+		|	ConsignorBatches.SerialLotNumber,
+		|	ConsignorBatches.Batch.Partner AS Partner,
+		|	ConsignorBatches.Batch.Agreement AS Agreement,
+		|	ConsignorBatches.Quantity
+		|INTO R8012B_ConsignorInventory
+		|FROM
+		|	ItemList AS ItemList
+		|	LEFT JOIN ConsignorBatches AS ConsignorBatches ON
+		|	ItemList.Key = ConsignorBatches.Key
+		|WHERE
+		|	ItemList.IsSales
+		|	AND ItemList.IsConsignorStocks";		
+EndFunction
+
+Function R8013B_ConsignorBatchWiseBalance()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ConsignorBatches.Batch,
+		|	ConsignorBatches.ItemKey,
+		|	ConsignorBatches.SerialLotNumber,
+		|	ConsignorBatches.Store,
+		|	ConsignorBatches.Quantity
+		|INTO R8013B_ConsignorBatchWiseBalance
+		|FROM
+		|	ItemList AS ItemList
+		|		INNER JOIN ConsignorBatches AS ConsignorBatches
+		|		ON ItemList.IsSales
+		|		AND ItemList.IsConsignorStocks
+		|		AND ItemList.Key = ConsignorBatches.Key";
+EndFunction
+
+Function R8014T_ConsignorSales()
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Key AS RowKey,
+		|	ItemList.Company,
+		|	ConsignorBatches.Batch.Partner AS Partner,
+		|	ConsignorBatches.Batch.Agreement AS Agreement,
+		|	ItemList.Currency,
+		|	ItemList.Invoice AS SalesInvoice,
+		|	ConsignorBatches.Batch AS PurchaseInvoice,
+		|	ItemList.ItemKey,
+		|	ConsignorBatches.SerialLotNumber,
+		|	ItemList.Unit,
+		|	ItemList.Price,
+		|	ItemList.PriceType,
+		|	ItemList.PriceIncludeTax,
+		|	ConsignorBatches.Quantity,
+		|	CASE WHEN ItemList.Quantity = 0 THEN 0 ELSE (ItemList.NetAmount / ItemList.Quantity) * ConsignorBatches.Quantity END AS NetAmount,
+		|	CASE WHEN ItemList.Quantity = 0 THEN 0 ELSE (ItemList.Amount / ItemList.Quantity) * ConsignorBatches.Quantity END AS Amount
+		|INTO ConsignorSales
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN ConsignorBatches AS ConsignorBatches
+		|		ON ItemList.Key = ConsignorBatches.Key
+		|WHERE
+		|	ItemList.IsSales
+		|	AND ItemList.IsConsignorStocks
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ConsignorSales.*,
+		|	ConsignorPrices.Price AS ConsignorPrice
+		|INTO R8014T_ConsignorSales
+		|FROM
+		|	ConsignorSales AS ConsignorSales
+		|		LEFT JOIN AccumulationRegister.R8015T_ConsignorPrices AS ConsignorPrices
+		|		ON ConsignorSales.Company = ConsignorPrices.Company
+		|		AND ConsignorSales.Partner = ConsignorPrices.Partner
+		|		AND ConsignorSales.Agreement = ConsignorPrices.Agreement
+		|		AND ConsignorSales.PurchaseInvoice = ConsignorPrices.PurchaseInvoice
+		|		AND ConsignorSales.ItemKey = ConsignorPrices.ItemKey
+		|		AND ConsignorSales.SerialLotNumber = ConsignorPrices.SerialLotNumber
+		|		AND ConsignorSales.Currency = ConsignorPrices.Currency
+		|		AND ConsignorPrices.CurrencyMovementType = Value(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)";
 EndFunction
 
 #EndRegion

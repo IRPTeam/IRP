@@ -99,7 +99,8 @@ EndFunction
 // Returns:
 //  String
 Function PrepareJSONForXDTOReader(Val JSON) Export
-	Facet = "(\""[^""]*\""\s*:\s*\[\s*\]\s*,)";
+
+  Facet = "(\""[^""]*\""\s*:\s*\[\s*\]\s*,)";
 	Array = RegExpFindMatch(JSON, Facet);
 	For Each Row In Array Do
 		JSON = StrReplace(JSON, Row, "");
@@ -124,6 +125,7 @@ Function PrepareJSONForXDTOReader(Val JSON) Export
 			JSON = StrReplace(JSON, Row, "null");
 		EndIf;
 	EndDo;
+  
 	Return JSON;
 EndFunction
 

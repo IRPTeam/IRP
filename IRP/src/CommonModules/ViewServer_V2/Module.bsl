@@ -165,6 +165,7 @@ Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
 	AllDepTables.Add("WorkSheets");
 	AllDepTables.Add("RowIDInfo");
 	AllDepTables.Add("BillOfMaterialsList");
+	AllDepTables.Add("ConsignorBatches");
 	
 	ArrayOfDepTables = New Array();
 	For Each TableName In AllDepTables Do
@@ -207,6 +208,7 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	BarcodeIsPresent  = CommonFunctionsClientServer.ObjectHasProperty(Row, "Barcode");
 	DateIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "Date");
 	ChequeIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "Cheque");
+	InventoryOriginIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "InventoryOrigin");
 	
 	If FillingValues.Property("Item") And ItemIsPresent Then
 		ControllerClientServer_V2.SetItemListItem(Parameters, PrepareValue(FillingValues.Item, Row.Key));
@@ -247,7 +249,10 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	If FillingValues.Property("Cheque") And ChequeIsPresent Then
 		ControllerClientServer_V2.SetChequeBondsCheque(Parameters, PrepareValue(FillingValues.Cheque, Row.Key));
 	EndIf;
-		
+	
+	If FillingValues.Property("InventoryOrigin") And InventoryOriginIsPresent Then
+		ControllerClientServer_V2.SetItemListInventoryOrigin(Parameters, PrepareValue(FillingValues.InventoryOrigin, Row.Key));
+	EndIf;		
 EndProcedure
 
 Function PrepareValue(Value, Key)

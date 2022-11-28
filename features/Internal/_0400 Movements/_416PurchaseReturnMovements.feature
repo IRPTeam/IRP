@@ -11,6 +11,7 @@ import "Variables.feature"
 
 Scenario: _041600 preparation (Purchase return)
 	When set True value to the constant
+	When set True value to the constant Use commission trading
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -22,6 +23,8 @@ Scenario: _041600 preparation (Purchase return)
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
 		When Create catalog Items objects
+		When Create catalog Partners objects (trade agent and consignor)
+		When Create catalog Stores (trade agent)
 		When Create catalog PriceTypes objects
 		When Create catalog Specifications objects
 		When Create chart of characteristic types AddAttributeAndProperty objects
@@ -45,6 +48,13 @@ Scenario: _041600 preparation (Purchase return)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -55,6 +65,7 @@ Scenario: _041600 preparation (Purchase return)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
+		When settings for Main Company (commission trade)
 	When Create Document discount
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -123,6 +134,13 @@ Scenario: _041600 preparation (Purchase return)
 	When Create document PurchaseReturn objects (advance)
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseReturn.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I close all client application windows
+	* Load PI and PR comission trade 
+	When Create document PurchaseInvoice and PurchaseReturn objects (comission trade)
+	And I execute 1C:Enterprise script at server	
+		| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);" |	
+	And I execute 1C:Enterprise script at server	
+		| "Documents.PurchaseReturn.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);" |	
 	And I close all client application windows
 
 Scenario: _0416001 check preparation
@@ -578,6 +596,130 @@ Scenario: _041621 check Purchase return movements by the Register  "R1001 Purcha
 			| ''                                             | '12.02.2021 10:21:24' | '-1'        | '-190'      | '-190'       | ''              | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'Purchase return 11 dated 12.02.2021 10:21:24' | '36/Yellow' | 'febad533-cba1-43bc-afb1-80b0a6bdef77' | 'No'                   |
 			| ''                                             | '12.02.2021 10:21:24' | '-1'        | '-190'      | '-190'       | ''              | 'Main Company' | 'Front office' | 'USD'                          | 'USD'      | 'Purchase return 11 dated 12.02.2021 10:21:24' | '36/Yellow' | 'febad533-cba1-43bc-afb1-80b0a6bdef77' | 'No'                   |
 			| ''                                             | '12.02.2021 10:21:24' | '-1'        | '-190'      | '-190'       | ''              | 'Main Company' | 'Front office' | 'en description is empty'      | 'USD'      | 'Purchase return 11 dated 12.02.2021 10:21:24' | '36/Yellow' | 'febad533-cba1-43bc-afb1-80b0a6bdef77' | 'No'                   |				
+	And I close all client application windows
+
+Scenario: _041622 check Purchase return movements by the Register  "R4014 Serial lot numbers" (Return to consignor)
+	And I close all client application windows
+	* Select Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '195' |
+	* Check movements by the Register  "R4014 Serial lot numbers" 
+		And I click "Registrations report" button
+		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 195 dated 02.11.2022 16:31:47' | ''            | ''                    | ''          | ''             | ''                        | ''      | ''         | ''                  |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''             | ''                        | ''      | ''         | ''                  |
+			| 'Register  "R4014 Serial lot numbers"'          | ''            | ''                    | ''          | ''             | ''                        | ''      | ''         | ''                  |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''      | ''         | ''                  |
+			| ''                                              | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Store' | 'Item key' | 'Serial lot number' |
+			| ''                                              | 'Expense'     | '02.11.2022 16:31:47' | '1'         | 'Main Company' | 'Distribution department' | ''      | 'ODS'      | '899007790088'      |		
+	And I close all client application windows
+
+Scenario: _041623 check Purchase return movements by the Register  "R8012 Consignor inventory" (Return to consignor)
+	And I close all client application windows
+	* Select Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '195' |
+	* Check movements by the Register  "R8012 Consignor inventory" 
+		And I click "Registrations report" button
+		And I select "R8012 Consignor inventory" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 195 dated 02.11.2022 16:31:47' | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
+			| 'Register  "R8012 Consignor inventory"'         | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                  | ''            | ''                         |
+			| ''                                              | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Serial lot number' | 'Partner'     | 'Agreement'                |
+			| ''                                              | 'Expense'     | '02.11.2022 16:31:47' | '1'         | 'Main Company' | 'ODS'      | '899007790088'      | 'Consignor 1' | 'Consignor partner term 1' |
+			| ''                                              | 'Expense'     | '02.11.2022 16:31:47' | '2'         | 'Main Company' | '38/18SD'  | ''                  | 'Consignor 1' | 'Consignor partner term 1' |
+			| ''                                              | 'Expense'     | '02.11.2022 16:31:47' | '3'         | 'Main Company' | 'S/Yellow' | ''                  | 'Consignor 1' | 'Consignor partner term 1' |		
+	And I close all client application windows
+
+Scenario: _041624 check Purchase return movements by the Register  "R8013 Consignor batch wise balance" (Return to consignor)
+	And I close all client application windows
+	* Select Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '195' |
+	* Check movements by the Register  "R8013 Consignor batch wise balance" 
+		And I click "Registrations report" button
+		And I select "R8013 Consignor batch wise balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 195 dated 02.11.2022 16:31:47'  | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  |
+			| 'Register  "R8013 Consignor batch wise balance"' | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                               | ''         | ''         | ''                  |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Batch'                                          | 'Store'    | 'Item key' | 'Serial lot number' |
+			| ''                                               | 'Expense'     | '02.11.2022 16:31:47' | '1'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'ODS'      | '899007790088'      |
+			| ''                                               | 'Expense'     | '02.11.2022 16:31:47' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | '38/18SD'  | ''                  |
+			| ''                                               | 'Expense'     | '02.11.2022 16:31:47' | '3'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'S/Yellow' | ''                  |		
+	And I close all client application windows
+
+Scenario: _041625 check there is no Purchase return movements by the Register  "R1001 Purchases" (Return to consignor)
+	And I close all client application windows
+	* Select Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '195' |
+	* Check movements by the Register  "R1001 Purchases" 
+		And I click "Registrations report" button
+		And I select "R1001 Purchases" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R1001 Purchases"' |
+	And I close all client application windows
+
+Scenario: _041626 check there is no Purchase return movements by the Register  "R1002 Purchase returns" (Return to consignor)
+	And I close all client application windows
+	* Select Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '195' |
+	* Check movements by the Register  "R1002 Purchase returns" 
+		And I click "Registrations report" button
+		And I select "R1002 Purchase returns" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R1002 Purchase returns"' |
+	And I close all client application windows
+
+Scenario: _041627 check there is no Purchase return movements by the Register  "R1021 Vendors transactions" (Return to consignor)
+	And I close all client application windows
+	* Select Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '195' |
+	* Check movements by the Register  "R1021 Vendors transactions" 
+		And I click "Registrations report" button
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R1021 Vendors transactions"' |
+	And I close all client application windows
+
+Scenario: _041628 check there is no Purchase return movements by the Register  "R1040 Taxes outgoing" (Return to consignor)
+	And I close all client application windows
+	* Select Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '195' |
+	* Check movements by the Register  "R1040 Taxes outgoing" 
+		And I click "Registrations report" button
+		And I select "R1040 Taxes outgoing" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R1040 Taxes outgoing"' |
 	And I close all client application windows
 
 Scenario: _041630 Purchase return clear posting/mark for deletion

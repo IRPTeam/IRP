@@ -30,12 +30,30 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
-		PropertiesHeader = RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata());
-		FillPropertyValues(ThisObject, FillingData, PropertiesHeader);
-		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
-		ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);
+	If TypeOf(FillingData) = Type("Structure") Then
+		If FillingData.Property("BasedOn") Then
+			If FillingData.BasedOn = "SalesReportToConsignor" Then 
+				ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData, "TaxList, SerialLotNumbers");
+				Filling_BasedOn(FillingData);
+			EndIf;
+		EndIf;
 	EndIf;
+EndProcedure
+
+Procedure Filling_BasedOn(FillingData)
+	FillPropertyValues(ThisObject, FillingData);
+	For Each Row In FillingData.ItemList Do
+		NewRow = ThisObject.ItemList.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+	For Each Row In FillingData.SerialLotNumbers Do
+		NewRow = ThisObject.SerialLotNumbers.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+	For Each Row In FillingData.TaxList Do
+		NewRow = ThisObject.TaxList.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

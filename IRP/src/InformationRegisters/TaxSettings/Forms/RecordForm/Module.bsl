@@ -17,6 +17,33 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 &AtClient
+Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+	
+	If Not FOServer.IsUseCommissionTrading() Then
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True, DataCompositionComparisonType.Equal));
+		OpenSettings.FillingData = New Structure("OurCompany", True);
+	EndIf;
+	
+	DocumentsClient.CompanyStartChoice(Record, ThisObject, Item, ChoiceData, StandardProcessing, OpenSettings);	
+EndProcedure
+
+&AtClient
+Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	
+	If Not FOServer.IsUseCommissionTrading() Then
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True, ComparisonType.Equal));
+	EndIf;
+	
+	DocumentsClient.CompanyEditTextChange(Record, ThisObject, Item, Text, StandardProcessing, ArrayOfFilters);	
+EndProcedure
+
+&AtClient
 Procedure RecordTypeOnChange(Item)
 	SetVisible();
 EndProcedure

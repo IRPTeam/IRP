@@ -94,7 +94,7 @@ Procedure PutQueryFiltersToTempTables(TempTableManager, Filters)
 	Query.Execute();
 EndProcedure
 
-Function GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments, AddInfo = Undefined) Export
+Function GetDocumentTable_PurchaseDocument_ForPayment(ArrayOfBasisDocuments, DocumentName) Export
 
 	Filters = GetQueryFilters(Metadata.AccumulationRegisters.R1021B_VendorsTransactions, ArrayOfBasisDocuments);
 
@@ -105,7 +105,7 @@ Function GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments, AddI
 	Query.TempTablesManager = TempTableManager;
 	Query.Text =
 	"SELECT
-	|	""PurchaseInvoice"" AS BasedOn,
+	|	&DocumentName AS BasedOn,
 	|	VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS TransactionType,
 	|	R1021B_VendorsTransactions.Company AS Company,
 	|	R1021B_VendorsTransactions.Branch AS Branch,
@@ -130,6 +130,8 @@ Function GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments, AddI
 	|		R1021B_VendorsTransactions
 	|WHERE
 	|	R1021B_VendorsTransactions.AmountBalance > 0";
+	
+	Query.SetParameter("DocumentName", DocumentName);
 	
 	// get default agreement by partner for standard agreement
 	QueryResult = Query.Execute();
@@ -168,7 +170,7 @@ Function GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments, AddI
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	""PurchaseInvoice"" AS BasedOn,
+	|	&DocumentName AS BasedOn,
 	|	VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS TransactionType,
 	|	R1021B_VendorsTransactions.Company,
 	|	R1021B_VendorsTransactions.Branch,
@@ -192,7 +194,7 @@ Function GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments, AddI
 	|UNION ALL
 	|
 	|SELECT
-	|	""PurchaseInvoice"",
+	|	&DocumentName,
 	|	VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor),
 	|	PartnerTransactionsBalance.Company,
 	|	PartnerTransactionsBalance.Branch,
@@ -235,11 +237,12 @@ Function GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments, AddI
 	|	QueryTable_StandardAgreements AS QueryTable_StandardAgreements";
 
 	Query.SetParameter("QueryTable_StandardAgreements", QueryTable_StandardAgreements);
+	Query.SetParameter("DocumentName", DocumentName);
 	QueryResult = Query.Execute();
 	Return QueryResult.Unload();
 EndFunction
 
-Function GetDocumentTable_SalesInvoice_ForReceipt(ArrayOfBasisDocuments, AddInfo = Undefined) Export
+Function GetDocumentTable_SalesDocument_ForReceipt(ArrayOfBasisDocuments, DocumentName) Export
 
 	Filters = GetQueryFilters(Metadata.AccumulationRegisters.R2021B_CustomersTransactions, ArrayOfBasisDocuments);
 
@@ -250,7 +253,7 @@ Function GetDocumentTable_SalesInvoice_ForReceipt(ArrayOfBasisDocuments, AddInfo
 	Query.TempTablesManager = TempTableManager;
 	Query.Text =
 	"SELECT
-	|	""SalesInvoice"" AS BasedOn,
+	|	&DocumentName AS BasedOn,
 	|	VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer) AS TransactionType,
 	|	R2021B_CustomersTransactionsBalance.Company AS Company,
 	|	R2021B_CustomersTransactionsBalance.Branch AS Branch,
@@ -277,6 +280,7 @@ Function GetDocumentTable_SalesInvoice_ForReceipt(ArrayOfBasisDocuments, AddInfo
 	|	R2021B_CustomersTransactionsBalance.AmountBalance > 0";
 	
 	// get default agreement by partner for standard agreement
+	Query.SetParameter("DocumentName", DocumentName);
 	QueryResult = Query.Execute();
 	QueryTable_StandardAgreements = QueryResult.Unload();
 	For Each Row In QueryTable_StandardAgreements Do
@@ -284,15 +288,10 @@ Function GetDocumentTable_SalesInvoice_ForReceipt(ArrayOfBasisDocuments, AddInfo
 		AgreementParameters.Insert("Partner", Row.Partner);
 		AgreementParameters.Insert("Agreement", Catalogs.Agreements.EmptyRef());
 		AgreementParameters.Insert("ArrayOfFilters", New Array());
-		AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
-			ComparisonType.NotEqual));
-		AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("StandardAgreement",
-			Row.StandardAgreement, ComparisonType.Equal));
-		AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind",
-			Enums.AgreementKinds.Regular, ComparisonType.Equal));
-		AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type",
-			Enums.AgreementTypes.Customer, ComparisonType.Equal));
-
+		AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+		AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("StandardAgreement", Row.StandardAgreement, ComparisonType.Equal));
+		AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", Enums.AgreementKinds.Regular, ComparisonType.Equal));
+		AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", Enums.AgreementTypes.Customer, ComparisonType.Equal));
 		Row.Agreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
 	EndDo;
 
@@ -314,7 +313,7 @@ Function GetDocumentTable_SalesInvoice_ForReceipt(ArrayOfBasisDocuments, AddInfo
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	""SalesInvoice"" AS BasedOn,
+	|	&DocumentName AS BasedOn,
 	|	VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer) AS TransactionType,
 	|	R2021B_CustomersTransactionsBalance.Company,
 	|	R2021B_CustomersTransactionsBalance.Branch,
@@ -338,7 +337,7 @@ Function GetDocumentTable_SalesInvoice_ForReceipt(ArrayOfBasisDocuments, AddInfo
 	|UNION ALL
 	|
 	|SELECT
-	|	""SalesInvoice"",
+	|	&DocumentName,
 	|	VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer),
 	|	R2021B_CustomersTransactionsBalance.Company,
 	|	R2021B_CustomersTransactionsBalance.Branch,
@@ -381,6 +380,7 @@ Function GetDocumentTable_SalesInvoice_ForReceipt(ArrayOfBasisDocuments, AddInfo
 	|	QueryTable_StandardAgreements AS QueryTable_StandardAgreements";
 
 	Query.SetParameter("QueryTable_StandardAgreements", QueryTable_StandardAgreements);
+	Query.SetParameter("DocumentName", DocumentName);
 	QueryResult = Query.Execute();
 	Return QueryResult.Unload();
 EndFunction

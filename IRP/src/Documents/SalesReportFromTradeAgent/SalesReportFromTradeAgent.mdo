@@ -89,6 +89,9 @@
   <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
   <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R8010B_TradeAgentInventory</registerRecords>
+  <registerRecords>AccumulationRegister.R8011B_TradeAgentSerialLotNumber</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -205,6 +208,22 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="5bf2d270-ce1c-4066-b993-4f30fe75a4e1">
+    <name>TradeAgentFeeType</name>
+    <synonym>
+      <key>en</key>
+      <value>Trade agent fee type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.TradeAgentFeeTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="2d248c08-a16f-49b2-b521-440bf48ad9b1">
     <name>DocumentForm</name>
     <synonym>
@@ -228,6 +247,15 @@
     <synonym>
       <key>en</key>
       <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="06521f5f-ad67-404c-a352-74991d4ffb6e">
+    <name>CreateBySalesReport</name>
+    <synonym>
+      <key>en</key>
+      <value>Create by sales report</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
@@ -319,6 +347,20 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="3ca4e4d3-fbdf-4a73-92a9-2c706e2c2bde">
+      <name>ConsignorPrice</name>
+      <synonym>
+        <key>en</key>
+        <value>Consignor price</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typePrice</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="017cc8bf-1028-40fc-9bf1-4320d90548fa">
       <name>Price</name>
@@ -507,29 +549,30 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="440e061e-5a77-452d-804e-4682df36711f">
-      <name>SalesOrder</name>
+    <attributes uuid="9ca307f8-d5e1-4685-bf43-75ece251e05b">
+      <name>TradeAgentFeePercent</name>
       <synonym>
         <key>en</key>
-        <value>Sales order</value>
+        <value>Trade agent fee percent</value>
       </synonym>
       <type>
-        <types>DocumentRef.SalesOrder</types>
+        <types>DefinedType.typePercent</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="893366f3-363b-44a3-b9ac-cec6716bb9ee">
-      <name>SalesInvoice</name>
+    <attributes uuid="b0af120f-4a51-404a-9c07-f513b540654d">
+      <name>TradeAgentFeeAmount</name>
       <synonym>
         <key>en</key>
-        <value>Sales invoice</value>
+        <value>Trade agent fee amount</value>
       </synonym>
       <type>
-        <types>DocumentRef.SalesInvoice</types>
+        <types>DefinedType.typeAmount</types>
       </type>
+      <markNegatives>true</markNegatives>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>

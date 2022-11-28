@@ -6,7 +6,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-
+	
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 EndProcedure
 
@@ -37,11 +37,27 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		FillPropertyValues(ThisObject, FillingData);
 		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
 	ElsIf TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
-		PropertiesHeader = RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata());
-		FillPropertyValues(ThisObject, FillingData, PropertiesHeader);
-		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
-		ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);
+		If FillingData.BasedOn = "SalesReportToConsignor" Then
+			ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+			Filling_BasedOn(FillingData);
+		Else
+			PropertiesHeader = RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata());
+			FillPropertyValues(ThisObject, FillingData, PropertiesHeader);
+			LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
+			ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);
+		EndIf;	
 	EndIf;
+EndProcedure
+
+Procedure Filling_BasedOn(FillingData)
+	FillPropertyValues(ThisObject, FillingData);
+	For Each Row In FillingData.ItemList Do
+		NewRow = ThisObject.ItemList.Add();
+		FillPropertyValues(NewRow, Row);
+		If Not ValueIsFilled(NewRow.Key) Then
+			NewRow.Key = New UUID();
+		EndIf;
+	EndDo;
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
@@ -154,6 +170,16 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 				CommonFunctionsClientServer.ShowUsersMessage(
 					MessageText, 
 					"Object.ItemList[" + (QuerySelection.LineNumber - 1) + "].Store", 
+					"Object.ItemList");
+			EndIf;
+		EndDo;
+	EndIf;
+	
+	If ThisObject.TransactionType = Enums.SalesTransactionTypes.ShipmentToTradeAgent Then
+		For Each Row In ThisObject.ItemList Do
+			If Row.InventoryOrigin = Enums.InventoryOrigingTypes.ConsignorStocks Then
+				CommonFunctionsClientServer.ShowUsersMessage(R().Error_121, 
+					"Object.ItemList[" + (QuerySelection.LineNumber - 1) + "].InventoryOrigin", 
 					"Object.ItemList");
 			EndIf;
 		EndDo;

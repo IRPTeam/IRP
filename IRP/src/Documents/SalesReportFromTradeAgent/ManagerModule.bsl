@@ -115,12 +115,15 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2001T_Sales());
 	QueryArray.Add(R2040B_TaxesIncoming());
 	QueryArray.Add(R4050B_StockInventory());
+	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R8010B_TradeAgentInventory());
+	QueryArray.Add(R8011B_TradeAgentSerialLotNumber());
 	Return QueryArray;
 EndFunction
 
@@ -145,8 +148,6 @@ Function ItemList()
 		|	DocItemList.Ref.Currency AS Currency,
 		|	DocItemList.Unit AS Unit,
 		|	DocItemList.Ref.Date AS Period,
-		|	DocItemList.SalesOrder AS SalesOrder,
-		|	NOT DocItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
 		|	DocItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		|	DocItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	DocItemList.RevenueType AS RevenueType,
@@ -160,7 +161,8 @@ Function ItemList()
 		|	DocItemList.Key,
 		|	DocItemList.Ref.Branch AS Branch,
 		|	DocItemList.Ref.LegalNameContract AS LegalNameContract,
-		|	DocItemList.PriceType
+		|	DocItemList.PriceType,
+		|	DocItemList.Ref.Company.TradeAgentStore AS TradeAgentStore
 		|INTO ItemList
 		|FROM
 		|	Document.SalesReportFromTradeAgent.ItemList AS DocItemList
@@ -201,7 +203,9 @@ Function SerialLotNumbers()
 		|	SerialLotNumbers.SerialLotNumber,
 		|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
 		|	SerialLotNumbers.Quantity,
-		|	ItemList.ItemKey AS ItemKey
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Ref.Partner AS Partner,
+		|	ItemList.Ref.Agreement AS Agreement
 		|INTO SerialLotNumbers
 		|FROM
 		|	Document.SalesReportFromTradeAgent.SerialLotNumbers AS SerialLotNumbers
@@ -241,6 +245,7 @@ Function R4050B_StockInventory()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.TradeAgentStore AS Store,
 		|	ItemList.ItemKey,
 		|	SUM(ItemList.Quantity) AS Quantity
 		|INTO R4050B_StockInventory
@@ -253,7 +258,44 @@ Function R4050B_StockInventory()
 		|	VALUE(AccumulationRecordType.Expense),
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.TradeAgentStore,
 		|	ItemList.ItemKey";
+EndFunction
+
+Function R4010B_ActualStocks()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.TradeAgentStore AS Store,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	SUM(CASE
+		|		WHEN SerialLotNumbers.SerialLotNumber IS NULL
+		|			THEN ItemList.Quantity
+		|		ELSE SerialLotNumbers.Quantity
+		|	END) AS Quantity
+		|INTO R4010B_ActualStocks
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		|		ON ItemList.Key = SerialLotNumbers.Key
+		|WHERE
+		|	NOT ItemList.IsService
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.TradeAgentStore,
+		|	ItemList.ItemKey,
+		|	CASE
+		|		WHEN SerialLotNumbers.StockBalanceDetail
+		|			THEN SerialLotNumbers.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END";
 EndFunction
 
 Function R2020B_AdvancesFromCustomers()
@@ -282,7 +324,7 @@ Function R2021B_CustomersTransactions()
 		|	ItemList.Partner,
 		|	ItemList.Agreement,
 		|	ItemList.Basis,
-		|	ItemList.SalesOrder AS Order,
+		|	UNDEFINED AS Order,
 		|	SUM(ItemList.Amount) AS Amount,
 		|	UNDEFINED AS CustomersAdvancesClosing
 		|INTO R2021B_CustomersTransactions
@@ -293,7 +335,6 @@ Function R2021B_CustomersTransactions()
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.Basis,
-		|	ItemList.SalesOrder,
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.Currency,
@@ -372,7 +413,7 @@ Function T2015S_TransactionsInfo()
 	|	ItemList.Partner,
 	|	ItemList.LegalName,
 	|	ItemList.Agreement,
-	|	ItemList.SalesOrder AS Order,
+	|	UNDEFINED AS Order,
 	|	TRUE AS IsCustomerTransaction,
 	|	ItemList.Basis AS TransactionBasis,
 	|	SUM(ItemList.Amount) AS Amount,
@@ -390,7 +431,6 @@ Function T2015S_TransactionsInfo()
 	|	ItemList.Partner,
 	|	ItemList.LegalName,
 	|	ItemList.Agreement,
-	|	ItemList.SalesOrder,
 	|	ItemList.Basis";
 EndFunction
 
@@ -398,6 +438,7 @@ Function T6020S_BatchKeysInfo()
 	Return
 		"SELECT
 		|	ItemList.ItemKey,
+		|	ItemList.TradeAgentStore AS Store,
 		|	ItemList.Company,
 		|	SUM(ItemList.Quantity) AS Quantity,
 		|	ItemList.Period,
@@ -407,11 +448,54 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList AS ItemList
 		|WHERE
 		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
-		|	AND FALSE
 		|
 		|GROUP BY
 		|	ItemList.ItemKey,
+		|	ItemList.TradeAgentStore,
 		|	ItemList.Company,
 		|	ItemList.Period,
 		|	VALUE(Enum.BatchDirection.Expense)";
+EndFunction
+
+Function R8010B_TradeAgentInventory()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.ItemKey,
+		|	ItemList.Partner,
+		|	ItemList.Agreement,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO R8010B_TradeAgentInventory
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.ItemKey,
+		|	ItemList.Partner,
+		|	ItemList.Agreement";
+EndFunction
+
+Function R8011B_TradeAgentSerialLotNumber()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	SerialLotNumbers.Period,
+		|	SerialLotNumbers.Company,
+		|	SerialLotNumbers.ItemKey,
+		|	SerialLotNumbers.Partner,
+		|	SerialLotNumbers.Agreement,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity
+		|INTO R8011B_TradeAgentSerialLotNumber
+		|FROM
+		|	SerialLotNumbers AS SerialLotNumbers
+		|WHERE
+		|	TRUE";
 EndFunction

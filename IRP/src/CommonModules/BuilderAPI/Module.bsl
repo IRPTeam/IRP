@@ -110,18 +110,24 @@ EndFunction
 //  InitialData - Structure - First initial data
 //  FillingData - Structure - Filling data
 //  DefaultTable - String - Default table name
+//  DocInfo - Structure - doc info
 // 
 // Returns:
 //  See CreateWrapper
-Function Initialize(Doc, InitialData = Undefined, FillingData = Undefined, DefaultTable = Undefined) Export
+Function Initialize(Doc, InitialData = Undefined, FillingData = Undefined, DefaultTable = Undefined, DocInfo = Undefined) Export
 	
-	If TypeOf(Doc) = Type("String") Then
-		DocMetadata = Metadata.Documents[Doc];
-		DocObject = Documents[DocMetadata.Name].CreateDocument();
-		DocObject.Fill(FillingData);
+	If DocInfo = Undefined Then
+		If TypeOf(Doc) = Type("String") Then
+			DocMetadata = Metadata.Documents[Doc];
+			DocObject = Documents[DocMetadata.Name].CreateDocument();
+			DocObject.Fill(FillingData);
+		Else
+			DocMetadata = Doc.Metadata();
+			DocObject = Doc.GetObject();
+		EndIf;
 	Else
-		DocMetadata = Doc.Metadata();
-		DocObject = Doc.GetObject();
+		DocMetadata = DocInfo.DocMetadata;
+		DocObject = DocInfo.DocObject;
 	EndIf;
 	
 	Wrapper = CreateWrapper(DefaultTable);

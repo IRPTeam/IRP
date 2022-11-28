@@ -1016,7 +1016,7 @@ Scenario: check the filter by customers in the sales documents
 	And I click Select button of "Partner" field
 	And I click "List" button
 	And I save number of "List" table lines as "QS"
-	Then "QS" variable is equal to 23
+	Then "QS" variable is equal to 25
 	And "List" table contains lines
 		| Description  |
 		| Ferron BP    |
@@ -1046,7 +1046,7 @@ Scenario: check the filter by vendors in the purchase documents
 	And I click Select button of "Partner" field
 	And I click "List" button
 	And I save number of "List" table lines as "QS"
-	Then "QS" variable is equal to 16
+	Then "QS" variable is equal to 18
 	And "List" table contains lines
 		| 'Description'      |
 		| 'Ferron BP'        |
@@ -1177,6 +1177,50 @@ Scenario: check the display of the header of the collapsible group in sales, pur
 				| Main Company |
 		And I select current line in "List" table
 
+
+Scenario: check the display of the header of the collapsible group in SalesReportFromTradeAgent
+	And I click the button named "FormCreate"
+	* Filling in the details of the document
+		If "Partner" attribute is editable Then
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| Description |
+			| Trade agent 1   |
+		And I select current line in "List" table
+		If "Legal name" attribute is present on the form Then
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| Description       |
+			| Trade agent 1 |
+		And I select current line in "List" table
+		If "Company" attribute is present on the form Then
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+				| Description  |
+				| Main Company |
+		And I select current line in "List" table
+
+Scenario: check the display of the header of the collapsible group in SalesReportToConsignor
+	And I click the button named "FormCreate"
+	* Filling in the details of the document
+		If "Partner" attribute is editable Then
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| Description |
+			| Consignor 1   |
+		And I select current line in "List" table
+		If "Legal name" attribute is present on the form Then
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| Description       |
+			| Consignor 1 |
+		And I select current line in "List" table
+		If "Company" attribute is present on the form Then
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+				| Description  |
+				| Main Company |
+		And I select current line in "List" table
 
 Scenario: check the display of the header of the collapsible group in expence/revenue documents
 	And I click the button named "FormCreate"
@@ -1613,6 +1657,63 @@ Scenario: check the barcode search in the sales documents + price and tax fillin
 		And "ItemList" table contains lines
 			| 'Item'  | 'Price'  | 'Item key' | 'Quantity'     | 'Unit' | 'Total amount' | 'Quantity in base unit' |
 			| 'Dress' | '520,00' | 'XS/Blue'  | '2,000' | 'pcs'  | '1 040,00'       | '2,000'                |
+	And I close all client application windows
+
+
+Scenario: check the barcode search in the sales report from trade agent + price and tax filling in
+	And I click the button named "FormCreate"
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
+		| 'Description'   |
+		| 'Trade agent 1' |
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	And I go to line in "List" table
+		| 'Description'                |
+		| 'Trade agent partner term 1' |
+	And I select current line in "List" table
+	And in the table "ItemList" I click "SearchByBarcode" button
+	And I input "2202283705" text in "InputFld" field
+	And I click "OK" button
+	* Check adding an items and filling in the price in the tabular part
+		And I click "Show row key" button		
+		And "ItemList" table contains lines
+			| 'Item'  | 'Price'  | 'Item key' | 'Quantity' | 'Unit' | 'Total amount' | 'Quantity in base unit' |
+			| 'Dress' | '520,00' | 'XS/Blue'  | '1,000'    | 'pcs'  | '520,00'       | '1,000'                 |
+		And in the table "ItemList" I click "SearchByBarcode" button
+		And I input "2202283705" text in "InputFld" field
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Price'  | 'Item key' | 'Quantity' | 'Unit' | 'Total amount' | 'Quantity in base unit' |
+			| 'Dress' | '520,00' | 'XS/Blue'  | '2,000'    | 'pcs'  | '1 040,00'     | '2,000'                 |
+	And I close all client application windows
+
+Scenario: check the barcode search in the sales report to consignor + price and tax filling in
+	And I click the button named "FormCreate"
+	And I click Select button of "Partner" field
+	And I go to line in "List" table
+		| 'Description' |
+		| 'Consignor 1' |
+	And I select current line in "List" table
+	And I click Select button of "Partner term" field
+	And I go to line in "List" table
+		| 'Description'              |
+		| 'Consignor partner term 1' |
+	And I select current line in "List" table
+	And in the table "ItemList" I click "SearchByBarcode" button
+	And I input "2202283705" text in "InputFld" field
+	And I click "OK" button
+	* Check adding an items and filling in the price in the tabular part
+		And I click "Show row key" button		
+		And "ItemList" table contains lines
+			| 'Item'  | 'Price'  | 'Item key' | 'Quantity' | 'Unit' | 'Total amount' | 'Quantity in base unit' |
+			| 'Dress' | '520,00' | 'XS/Blue'  | '1,000'    | 'pcs'  | '520,00'       | '1,000'                 |
+		And in the table "ItemList" I click "SearchByBarcode" button
+		And I input "2202283705" text in "InputFld" field
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Price'  | 'Item key' | 'Quantity' | 'Unit' | 'Total amount' | 'Quantity in base unit' |
+			| 'Dress' | '520,00' | 'XS/Blue'  | '2,000'    | 'pcs'  | '1 040,00'     | '2,000'                 |
 	And I close all client application windows
 
 Scenario: check the barcode search on the return documents

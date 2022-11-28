@@ -437,6 +437,8 @@
   <commonModules>CommonModule.DocSalesReportToConsignorClient</commonModules>
   <commonModules>CommonModule.DocSalesReportFromTradeAgentServer</commonModules>
   <commonModules>CommonModule.DocSalesReportToConsignorServer</commonModules>
+  <commonModules>CommonModule.CommissionTradeServer</commonModules>
+  <commonModules>CommonModule.CommissionTradePrivileged</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -846,6 +848,8 @@
   <enums>Enum.PurchaseTransactionTypes</enums>
   <enums>Enum.SalesReturnTransactionTypes</enums>
   <enums>Enum.PurchaseReturnTransactionTypes</enums>
+  <enums>Enum.InventoryOrigingTypes</enums>
+  <enums>Enum.TradeAgentFeeTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>
@@ -931,6 +935,7 @@
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.TemplateActions</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
+  <informationRegisters>InformationRegister.T8010S_ConsignorBatches</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -1012,6 +1017,12 @@
   <accumulationRegisters>AccumulationRegister.TM1010T_RowIDMovements</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1020B_AdvancesKey</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R8010B_TradeAgentInventory</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R8011B_TradeAgentSerialLotNumber</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R8012B_ConsignorInventory</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R8014T_ConsignorSales</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R8015T_ConsignorPrices</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

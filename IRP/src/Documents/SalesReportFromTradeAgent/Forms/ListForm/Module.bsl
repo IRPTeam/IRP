@@ -23,3 +23,9 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName, SelectedRows) Expo
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure CreateBySalesReport(Command)
+	OpenForm("Document.SalesReportFromTradeAgent.Form.CreateBySalesReport", , ThisObject, , , , , FormWindowOpeningMode.LockOwnerWindow);	
+EndProcedure
+

@@ -1358,6 +1358,28 @@ Scenario: _05825 sale of commission goods from the Main Company (Retail sales re
 				| 'Consignor stocks' | 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | ''           | 'pcs'  | '8908899880'         | '1,000'    | '200,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
 				| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | '76,27'      | 'pcs'  | ''                   | '5,000'    | '100,00' | '18%'         | ''              | '423,73'     | '500,00'       | 'Store 01' |
 				| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | ''           | 'pcs'  | ''                   | '2,000'    | '100,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
+	* Change quantity and check tax
+		And I go to line in "ItemList" table
+			| 'Inventory origin' | 'Item'  | 'Item key' | 'Net amount' | 'Price'  | 'Quantity' | 'Tax amount' | 'VAT' |
+			| 'Consignor stocks' | 'Scarf' | 'XS/Red'   | '423,73'     | '100,00' | '5,000'    | '76,27'      | '18%' |
+		And I select current line in "ItemList" table
+		And I input "4,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table became equal
+			| '#' | 'Price type'              | 'Item'               | 'Inventory origin' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' | 'Store'    |
+			| '1' | 'en description is empty' | 'Product 1 with SLN' | 'Consignor stocks' | 'PZU'      | '8908899880'         | 'pcs'  | ''           | '1,000'    | '200,00' | 'Without VAT' | '200,00'     | '200,00'       | 'Store 01' |
+			| '2' | 'en description is empty' | 'Scarf'              | 'Consignor stocks' | 'XS/Red'   | ''                   | 'pcs'  | '61,02'      | '4,000'    | '100,00' | '18%'         | '338,98'     | '400,00'       | 'Store 01' |
+			| '3' | 'en description is empty' | 'Scarf'              | 'Consignor stocks' | 'XS/Red'   | ''                   | 'pcs'  | '30,51'      | '2,000'    | '100,00' | '18%'         | '169,49'     | '200,00'       | 'Store 01' |
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Quantity' |
+			| 'Scarf' | 'XS/Red'   | '4,000'    |
+		And I select current line in "ItemList" table
+		And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table	
+		And "ItemList" table became equal
+			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Consignor stocks' | 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | ''           | 'pcs'  | '8908899880'         | '1,000'    | '200,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |
+			| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | '76,27'      | 'pcs'  | ''                   | '5,000'    | '100,00' | '18%'         | ''              | '423,73'     | '500,00'       | 'Store 01' |
+			| 'Consignor stocks' | 'en description is empty' | 'Scarf'              | 'XS/Red'   | ''           | 'pcs'  | ''                   | '2,000'    | '100,00' | 'Without VAT' | ''              | '200,00'     | '200,00'       | 'Store 01' |		
 	* Payment
 		And I move to "Payments" tab
 		And in the table "Payments" I click the button named "PaymentsAdd"

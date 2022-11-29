@@ -336,6 +336,29 @@ Scenario: _0154135 create document Retail Sales Receipt
 			| 'Number' |
 			| '$$NumberRetailSalesReceipt0154135$$'      |
 			And I close all client application windows
+	* Check auto filling inventory origin (FO Use commission trading switched off)
+		When set True value to the constant Use commission trading
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'                |
+			| '$$NumberRetailSalesReceipt0154135$$' |
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| 'Inventory origin' | 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Tax amount' | 'Quantity' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Own stocks'       | '350,00' | 'Shirt' | '18%' | '38/Black' | '106,78'     | '2,000'    | 'pcs'  | '593,22'     | '700,00'       | 'Store 01' |
+			| 'Own stocks'       | '550,00' | 'Dress' | '18%' | 'L/Green'  | '83,90'      | '1,000'    | 'pcs'  | '466,10'     | '550,00'       | 'Store 01' |
+			| 'Own stocks'       | '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '79,32'      | '1,000'    | 'pcs'  | '440,68'     | '520,00'       | 'Store 01' |
+		And I close all client application windows	
+		When set False value to the constant Use commission trading
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'                |
+			| '$$NumberRetailSalesReceipt0154135$$' |
+		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I activate "Inventory origin" field in "ItemList" table' |
+		And I close all client application windows		
+		
 
 
 			
@@ -677,6 +700,23 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "2 050,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		And I close all client application windows
+	* Check auto filling inventory origin (FO Use commission trading switched off)
+		When set True value to the constant Use commission trading
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| 'Inventory origin' | 'Profit loss center' | 'Revenue type' | 'Item'     | 'Price type'        | 'Item key'  | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' |
+			| 'Own stocks'       | 'Shop 01'            | ''             | 'Dress'    | 'Basic Price Types' | 'L/Green'   | '3,000'    | 'pcs'  | '251,69'     | '550,00' | '18%' | ''              | '1 398,31'   | '1 650,00'     | ''                    | 'Store 01' | ''       |
+			| 'Own stocks'       | 'Shop 01'            | ''             | 'Trousers' | 'Basic Price Types' | '38/Yellow' | '1,000'    | 'pcs'  | '61,02'      | '400,00' | '18%' | ''              | '338,98'     | '400,00'       | ''                    | 'Store 01' | ''       |
+		And I close all client application windows	
+		When set False value to the constant Use commission trading
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I activate "Inventory origin" field in "ItemList" table' |
+		And I close all client application windows		
 		
 
 

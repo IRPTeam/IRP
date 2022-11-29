@@ -79,7 +79,7 @@ Scenario: _4000120 check reports option save
 			| 'Service, Service'              | ''              |
 			| 'Router, Equipment'             | ''              |
 			| 'Bag, Bags'                     | ''              |
-			| 'Scarf, Clothes'                | ''              |
+			| 'Scarf, Clothes'                | '2202283715'    |
 			| 'Chewing gum, Chewing gum'      | ''              |
 			| 'Skittles, Candy TR'            | ''              |
 			| 'Total'                         | ''              |
@@ -116,7 +116,7 @@ Scenario: _4000120 check reports option save
 			| 'Service, Service, pcs'              | ''              |
 			| 'Router, Equipment, pcs'             | ''              |
 			| 'Bag, Bags, pcs'                     | ''              |
-			| 'Scarf, Clothes, pcs'                | ''              |
+			| 'Scarf, Clothes, pcs'                | '2202283715'    |
 			| 'Chewing gum, Chewing gum, pcs'      | ''              |
 			| 'Skittles, Candy TR, pcs'            | ''              |
 			| 'Total'                              | ''              |
@@ -160,7 +160,7 @@ Scenario: _4000125 check switching between options and default settings
 			| 'Service, Service'              | ''              |
 			| 'Router, Equipment'             | ''              |
 			| 'Bag, Bags'                     | ''              |
-			| 'Scarf, Clothes'                | ''              |
+			| 'Scarf, Clothes'                | '2202283715'    |
 			| 'Chewing gum, Chewing gum'      | ''              |
 			| 'Skittles, Candy TR'            | ''              |
 			| 'Total'                         | ''              |
@@ -187,7 +187,7 @@ Scenario: _4000125 check switching between options and default settings
 			| 'Service, Service, pcs'              | ''              |
 			| 'Router, Equipment, pcs'             | ''              |
 			| 'Bag, Bags, pcs'                     | ''              |
-			| 'Scarf, Clothes, pcs'                | ''              |
+			| 'Scarf, Clothes, pcs'                | '2202283715'    |
 			| 'Chewing gum, Chewing gum, pcs'      | ''              |
 			| 'Skittles, Candy TR, pcs'            | ''              |
 			| 'Total'                              | ''              |
@@ -214,7 +214,7 @@ Scenario: _4000125 check switching between options and default settings
 			| 'Service'              | ''              |
 			| 'Router'               | ''              |
 			| 'Bag'                  | ''              |
-			| 'Scarf'                | ''              |
+			| 'Scarf'                | '2202283715'    |
 			| 'Chewing gum'          | ''              |
 			| 'Skittles'             | ''              |
 			| 'Total'                | ''              |
@@ -316,7 +316,7 @@ Scenario: _4000128 check reports option share
 			| 'Service, Service, pcs'              | ''              |
 			| 'Router, Equipment, pcs'             | ''              |
 			| 'Bag, Bags, pcs'                     | ''              |
-			| 'Scarf, Clothes, pcs'                | ''              |
+			| 'Scarf, Clothes, pcs'                | '2202283715'    |
 			| 'Chewing gum, Chewing gum, pcs'      | ''              |
 			| 'Skittles, Candy TR, pcs'            | ''              |
 			| 'Total'                              | ''              |

@@ -163,16 +163,33 @@ Scenario: _024001 create document Sales Invoice based on sales order (partial qu
 		And I save the window as "$$SalesInvoice024008$$"
 		And I save the value of "Number" field as "$$NumberSalesInvoice024008$$"
 		And I click the button named "FormPostAndClose"
-	* Check creation
+	* Check auto filling inventory origin (FO Use commission trading switched off)
+		When set True value to the constant Use commission trading
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And "List" table contains lines
+		And I go to line in "List" table
 			| 'Number'                |
 			| '$$NumberSalesInvoice024008$$' |
-		And I close all client application windows
-  
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| '#' | 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center'      | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Quantity' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                             | 'Work order' | 'Revenue type' |
+			| '1' | 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'Distribution department' | 'No'                 | '75,36'      | 'pcs'            | ''                   | '1,000'    | '520,00'   | '18%' | '26,00'         | '418,64'     | '494,00'       | 'No'             | 'No'                         | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | ''           | 'Revenue'      |
+			| '2' | 'Own stocks'       | ''             | 'Basic Price Types' | 'Shirt' | '36/Red'   | 'Distribution department' | 'No'                 | '240,25'     | 'pcs'            | ''                   | '5,000'    | '350,00'   | '18%' | '175,00'        | '1 334,75'   | '1 575,00'     | 'No'             | 'No'                         | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | ''           | 'Revenue'      |
+			| '3' | 'Own stocks'       | ''             | 'Basic Price Types' | 'Boots' | '36/18SD'  | 'Front office'            | 'No'                 | '6 406,78'   | 'Boots (12 pcs)' | ''                   | '5,000'    | '8 400,00' | '18%' | ''              | '35 593,22'  | '42 000,00'    | 'No'             | 'No'                         | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | ''           | 'Revenue'      |
+		And I close all client application windows	
+		When set False value to the constant Use commission trading
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'                |
+			| '$$NumberSalesInvoice024008$$' |
+		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I activate "Inventory origin" field in "ItemList" table' |
+		And I close all client application windows		
+		
 		
 
 Scenario: _024002 check filling in Row Id info table in the SI (SO-SI)
+		And I close all client application windows
 	* Select SI
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
@@ -596,9 +613,9 @@ Scenario: _024007 create SI based on SC	without SO
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit' | 'Price' | 'Currency' |
 			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | 'Yes' | ''         | ''     | ''      | ''         |
-			| 'Dress (S/Yellow)'                                    | 'Yes' | '10,000'   | 'pcs'  | ''      | ''         |
-			| 'Dress (S/Yellow)'                                    | 'Yes' | '5,000'    | 'pcs'  | ''      | ''         |
-			| 'Dress (L/Green)'                                     | 'Yes' | '8,000'    | 'pcs'  | ''      | ''         |
+			| 'Dress (S/Yellow)'                                   | 'Yes' | '10,000'   | 'pcs'  | ''      | ''         |
+			| 'Dress (S/Yellow)'                                   | 'Yes' | '5,000'    | 'pcs'  | ''      | ''         |
+			| 'Dress (L/Green)'                                    | 'Yes' | '8,000'    | 'pcs'  | ''      | ''         |
 		Then the number of "BasisesTree" table lines is "равно" "4"
 		And I click "Ok" button
 	* Create SI
@@ -644,6 +661,27 @@ Scenario: _024025 create document Sales Invoice without Sales order and check Ro
 			| '1' | '$$Rov1SalesInvoice024025$$' | ''      | '$$Rov1SalesInvoice024025$$' | 'SC'        | '20,000' | ''          | ''             | '$$Rov1SalesInvoice024025$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I close all client application windows
+	* Check auto filling inventory origin (FO Use commission trading switched off)
+		When set True value to the constant Use commission trading
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'                       |
+			| '$$NumberSalesInvoice024025$$' |
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| 'Inventory origin' | 'Item'  |'Item key'|
+			| 'Own stocks'       | 'Dress' |'L/Green'|
+		And I close all client application windows	
+		When set False value to the constant Use commission trading
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'                       |
+			| '$$NumberSalesInvoice024025$$' |
+		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I activate "Inventory origin" field in "ItemList" table' |
+		And I close all client application windows		
+		
 		
 Scenario: _024027 cancel line in the SO and create SI
 	* Cancel line in the SO
@@ -827,6 +865,33 @@ Scenario: _024030 create SI based on SC with two same items (add linked document
 			| '1' | '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '10,000' | '6c91e0f0-6936-4c02-8827-a74810daf826' | 'SI'           | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
 			| '2' | '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' | ''          | '9,000'  | '367a8f1e-f5f8-4b1b-8181-f5579c9a8010' | 'SI'           | '5c5bf772-9ed5-470c-889a-79c10b8c1fef' |
 			| '3' | '*'   | 'Shipment confirmation 1 111 dated 15.02.2022 11:04:31' | '2d14e136-93bc-4968-b1a9-89e56be271cf' | ''          | '5,000'  | 'c2843939-e765-4207-81cf-1143a5137357' | 'SI'           | '2d14e136-93bc-4968-b1a9-89e56be271cf' |	
+		And I click the button named "FormPost"
+		And I delete "$$SalesInvoice024030$$" variable
+		And I delete "$$NumberSalesInvoice024030$$" variable
+		And I save the window as "$$SalesInvoice024030$$"
+		And I save the value of "Number" field as "$$NumberSalesInvoice024030$$"
+		And I click the button named "FormPostAndClose"
+	* Check auto filling inventory origin (FO Use commission trading switched off)
+		When set True value to the constant Use commission trading
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'                       |
+			| '$$NumberSalesInvoice024030$$' |
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| 'Inventory origin' | 'Item'  | 'Item key' |
+			| 'Own stocks'       | 'Dress' | 'XS/Blue'  |
+			| 'Own stocks'       | 'Dress' | 'M/White'  |
+		And I close all client application windows	
+		When set False value to the constant Use commission trading
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'                       |
+			| '$$NumberSalesInvoice024030$$' |
+		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I activate "Inventory origin" field in "ItemList" table' |
 		And I close all client application windows
 		
 					

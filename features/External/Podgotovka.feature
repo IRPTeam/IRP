@@ -1456,6 +1456,16 @@ Scenario: set True value to the constant Use commission trading
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window
+
+Scenario: set False value to the constant Use commission trading
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                 |
+			| 'Use commission trading' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
 		
 Scenario: set True value to the constant Use accounting
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"

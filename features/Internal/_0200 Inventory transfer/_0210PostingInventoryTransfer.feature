@@ -137,6 +137,29 @@ Scenario: _0201001 create IT based on ITO
 		And I save the window as "$$InventoryTransfer0201001$$"
 		And I save the value of "Number" field as "$$NumberInventoryTransfer0201001$$"
 		And I click the button named "FormPostAndClose"
+	* Check auto filling inventory origin (FO Use commission trading switched off)
+		When set True value to the constant Use commission trading
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'                             |
+			| '$$NumberInventoryTransfer0201001$$' |
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| 'Inventory origin' | 'Item'     | 'Item key'  |
+			| 'Own stocks'       | 'Trousers' | '38/Yellow' |
+			| 'Own stocks'       | 'Shirt'    | '38/Black'  |
+			| 'Own stocks'       | 'Boots'    | '36/18SD'   |
+		And I close all client application windows	
+		When set False value to the constant Use commission trading
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'                             |
+			| '$$NumberInventoryTransfer0201001$$' |
+		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And I activate "Inventory origin" field in "ItemList" table' |
+		And I close all client application windows
 
 	
 

@@ -3281,6 +3281,7 @@ Function ExtractData_FromITO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.StoreReceiver AS StoreReceiver,
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.ItemKey AS ItemKey,
+	|	Value(Enum.InventoryOrigingTypes.OwnStocks) AS InventoryOrigin,
 	|	0 AS Quantity,
 	|	BasisesTable.Key,
 	|	BasisesTable.Unit AS Unit,

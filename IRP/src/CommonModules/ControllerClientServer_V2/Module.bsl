@@ -78,6 +78,8 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	Parameters.Insert("ExtractedData"    , New Structure());
 	Parameters.Insert("LoadData"         , New Structure());
 	
+	Parameters.Insert("RowsForRecalculate", New Array());
+	
 	Parameters.LoadData.Insert("Address"                   , LoadParameters.Address);
 	Parameters.LoadData.Insert("GroupColumns"              , LoadParameters.GroupColumns);
 	Parameters.LoadData.Insert("SumColumns"                , LoadParameters.SumColumns);
@@ -4054,6 +4056,7 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 			And TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
 			
 			TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
+			Parameters.RowsForRecalculate = TableRows;
 		EndIf;
 	EndIf;
 	
@@ -9576,7 +9579,13 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 	
 	PriceIncludeTax = GetPriceIncludeTax(Parameters);
 	
-	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+	If Parameters.RowsForRecalculate.Count() Then
+		TableRows = Parameters.RowsForRecalculate;
+	Else
+		TableRows = GetRows(Parameters, Parameters.TableName);
+	EndIf;
+	
+	For Each Row In TableRows Do
 		
 		Options     = ModelClientServer_V2.CalculationsOptions();
 		Options.Ref = Parameters.Object.Ref;

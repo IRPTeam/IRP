@@ -25,6 +25,12 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	For Each Row In ThisObject.AccountPayableByDocuments Do
 		TotalTable.Add().Key = Row.Key;
 	EndDo;
+	For Each Row In ThisObject.ShipmentToTradeAgent Do
+		TotalTable.Add().Key = Row.Key;
+	EndDo;
+	For Each Row In ThisObject.ReceiptFromConsignor Do
+		TotalTable.Add().Key = Row.Key;
+	EndDo;
 	
 	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, TotalTable);
 	
@@ -60,6 +66,11 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndDo;
 	For Each Row In ThisObject.AccountPayableByDocuments Do
 		Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
+	For Each Row In ThisObject.ReceiptFromConsignor Do
+		Parameters = CurrenciesClientServer.GetParameters_V9(ThisObject, Row);
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;

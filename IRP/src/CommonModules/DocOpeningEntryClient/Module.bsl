@@ -61,23 +61,11 @@ Procedure InventoryItemOnChange(Object, Form, Item, CurrentData = Undefined) Exp
 EndProcedure
 
 Procedure InventoryItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-
-	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
-		DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type", 
-		PredefinedValue("Enum.ItemTypes.Service"), DataCompositionComparisonType.NotEqual));
-
-	DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+	DocumentsClient.ItemListItemStartChoice_IsNotServiceFilter(Object, Form, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 Procedure InventoryItemEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type", 
-		PredefinedValue("Enum.ItemTypes.Service"), ComparisonType.NotEqual));
-	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
+	DocumentsClient.ItemListItemEditTextChange_IsNotServiceFilter(Object, Form, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion

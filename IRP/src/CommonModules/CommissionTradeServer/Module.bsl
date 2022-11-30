@@ -782,12 +782,16 @@ Procedure PutResultToConsignorBatches(ItemListTable, ResultTable, ConsignorBatch
 EndProcedure
 
 Function GetEmptyConsignorBatchesTable()
+	ArrayOfBatchTypes = New Array();
+	ArrayOfBatchTypes.Add(Type("DocumentRef.PurchaseInvoice"));
+	ArrayOfBatchTypes.Add(Type("DocumentRef.OpeningEntry"));
+	BatchType = New TypeDescription(, ArrayOfBatchTypes);
 	ConsignorBatchesTable = New ValueTable();
 	ConsignorBatchesTable.Columns.Add("Key"      , Metadata.DefinedTypes.typeRowID.Type);
 	ConsignorBatchesTable.Columns.Add("ItemKey"  , New TypeDescription("CatalogRef.ItemKeys"));
 	ConsignorBatchesTable.Columns.Add("SerialLotNumber"  , New TypeDescription("CatalogRef.SerialLotNumbers"));
 	ConsignorBatchesTable.Columns.Add("Store"    , New TypeDescription("CatalogRef.Stores"));
-	ConsignorBatchesTable.Columns.Add("Batch"    , New TypeDescription("DocumentRef.PurchaseInvoice"));
+	ConsignorBatchesTable.Columns.Add("Batch"    , BatchType);
 	ConsignorBatchesTable.Columns.Add("Quantity" , Metadata.DefinedTypes.typeQuantity.Type);
 	Return ConsignorBatchesTable;
 EndFunction

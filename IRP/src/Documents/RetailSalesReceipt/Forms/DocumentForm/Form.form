@@ -1514,7 +1514,7 @@
         </items>
         <items xsi:type="form:FormField">
           <name>ItemListUseSerialLotNumber</name>
-          <id>1064</id>
+          <id>1120</id>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
@@ -1524,7 +1524,7 @@
           </dataPath>
           <extendedTooltip>
             <name>ItemListUseSerialLotNumberExtendedTooltip</name>
-            <id>1066</id>
+            <id>1122</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1539,7 +1539,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>ItemListUseSerialLotNumberContextMenu</name>
-            <id>1065</id>
+            <id>1121</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>

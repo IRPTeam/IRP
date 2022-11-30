@@ -74,11 +74,19 @@ Function GetArrayOfMultiDirectionDocument()
 EndFunction
 
 Function IsNotMultiDirectionDocument(Document)
-	ArrayOfTypes = GetArrayOfMultiDirectionDocument();
-	If ArrayOfTypes.Find(TypeOf(Document)) = Undefined Then
-		Return True;
+	If TypeOf(Document) = Type("DocumentRef.OpeningEntry") Then
+		If ValueIsFilled(Document.PartnerTradeAgent) Then
+			Return False; // is multidirection
+		Else
+			Return True;
+		EndIf;
+	Else
+		ArrayOfTypes = GetArrayOfMultiDirectionDocument();
+		If ArrayOfTypes.Find(TypeOf(Document)) = Undefined Then
+			Return True;
+		EndIf;
 	EndIf;
-	Return False;
+	Return False; // is multidirection
 EndFunction
 
 Function IsShipmentToTradeAgent(Document)
@@ -86,6 +94,12 @@ Function IsShipmentToTradeAgent(Document)
 		And Document.TransactionType = Enums.SalesTransactionTypes.ShipmentToTradeAgent Then
 			Return True; // is shipment to trade agent
 	EndIf;
+	
+	If TypeOf(Document) = Type("DocumentRef.OpeningEntry")
+		And ValueIsFilled(Document.PartnerTradeAgent) Then
+			Return True; // is shipment to trade agent
+	EndIf;
+	
 	Return False; 
 EndFunction
 

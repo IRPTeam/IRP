@@ -25,6 +25,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	ReceiptFromConsignor.Key AS Key,
 	|	SUM(ReceiptFromConsignor.Amount) AS Amount,
 	|	ReceiptFromConsignor.Currency AS Currency,
+	|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef) AS CurrencyMovementType,
 	|	SUM(ReceiptFromConsignor.AmountTax) AS AmountTax
 	|FROM
 	|	Document.OpeningEntry.ReceiptFromConsignor AS ReceiptFromConsignor
@@ -37,7 +38,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	ReceiptFromConsignor.Ref.Date,
 	|	VALUE(Enum.BatchDirection.Receipt),
 	|	ReceiptFromConsignor.Key,
-	|	ReceiptFromConsignor.Currency";
+	|	ReceiptFromConsignor.Currency,
+	|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef)";
 	Query.SetParameter("Ref", Ref);
 	
 	QueryResult = Query.Execute();
@@ -493,6 +495,7 @@ Function ReceiptFromConsignor()
 		|	ReceiptFromConsignor.Ref.PartnerConsignor AS Partner,
 		|	ReceiptFromConsignor.Ref.AgreementConsignor AS Agreement,
 		|	ReceiptFromConsignor.Ref AS PurchaseInvoice,
+		|	ReceiptFromConsignor.Ref AS Batch,
 		|	ReceiptFromConsignor.Currency AS Currency,
 		|	ReceiptFromConsignor.SerialLotNumber AS SerialLotNumber,
 		|	ReceiptFromConsignor.Store AS Store,

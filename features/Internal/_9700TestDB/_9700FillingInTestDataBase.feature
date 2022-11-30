@@ -90,6 +90,7 @@ When Create catalog Specifications objects (test data base)
 When Create catalog Stores objects (test data base)
 When Create catalog TaxRates objects (test data base)
 When Create catalog Taxes objects (test data base)
+When Create catalog SerialLotNumbers objects (test data base)
 When Create information register Taxes records (test data base)
 * Tax settings
 		Given I open hyperlink "e1cib/list/Catalog.Companies"

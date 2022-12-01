@@ -121,5 +121,6 @@
     <types>DocumentRef.ProductionPlanningClosing</types>
     <types>CatalogRef.BusinessUnits</types>
     <types>DocumentRef.CashExpense</types>
+    <types>CatalogRef.SourceOfOrigins</types>
   </type>
 </mdclass:DefinedType>

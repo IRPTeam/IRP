@@ -1111,6 +1111,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment then T6020S_BatchKeysInfo.RowID else undefined end AS ItemLinkID,
 	|	T6020S_BatchKeysInfo.BatchConsignor AS BatchConsignor,
 	|	T6020S_BatchKeysInfo.Store AS Store,
+	|	T6020S_BatchKeysInfo.SerialLotNumber AS SerialLotNumber,
+	|	T6020S_BatchKeysInfo.SourceOfOrigin AS SourceOfOrigin,
 	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey
 	|INTO BatchKeysRegister
 	|FROM
@@ -1138,6 +1140,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment then T6020S_BatchKeysInfo.RowID else undefined end,
 	|	T6020S_BatchKeysInfo.BatchConsignor,
 	|	T6020S_BatchKeysInfo.Store,
+	|	T6020S_BatchKeysInfo.SerialLotNumber,
+	|	T6020S_BatchKeysInfo.SourceOfOrigin,
 	|	T6020S_BatchKeysInfo.ItemKey
 	|;
 	|
@@ -1195,6 +1199,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment then T6020S_BatchKeysInfo.RowID else undefined end AS ItemLinkID,
 	|	T6020S_BatchKeysInfo.BatchConsignor AS BatchConsignor,
 	|	T6020S_BatchKeysInfo.Store AS Store,
+	|	T6020S_BatchKeysInfo.SerialLotNumber AS SerialLotNumber,
+	|	T6020S_BatchKeysInfo.SourceOfOrigin AS SourceOfOrigin,
 	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey
 	|INTO BatchKeysRegisterOutPeriod
 	|FROM
@@ -1217,6 +1223,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	case when T6020S_BatchKeysInfo.Recorder refs Document.ItemStockAdjustment then T6020S_BatchKeysInfo.RowID else undefined end,
 	|	T6020S_BatchKeysInfo.BatchConsignor,
 	|	T6020S_BatchKeysInfo.Store,
+	|	T6020S_BatchKeysInfo.SerialLotNumber,
+	|	T6020S_BatchKeysInfo.SourceOfOrigin,
 	|	T6020S_BatchKeysInfo.ItemKey
 	|;
 	|
@@ -1241,6 +1249,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegister.ItemLinkID AS ItemLinkID,
 	|	BatchKeysRegister.BatchConsignor AS BatchConsignor,
 	|	BatchKeysRegister.Store AS Store,
+	|	BatchKeysRegister.SerialLotNumber AS SerialLotNumber,
+	|	BatchKeysRegister.SourceOfOrigin AS SourceOfOrigin,
 	|	BatchKeysRegister.ItemKey AS ItemKey
 	|INTO BatchKeysInfo
 	|FROM
@@ -1268,6 +1278,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|	BatchKeysRegisterOutPeriod.ItemLinkID,
 	|	BatchKeysRegisterOutPeriod.BatchConsignor,
 	|	BatchKeysRegisterOutPeriod.Store,
+	|	BatchKeysRegisterOutPeriod.SerialLotNumber,
+	|	BatchKeysRegisterOutPeriod.SourceOfOrigin,
 	|	BatchKeysRegisterOutPeriod.ItemKey
 	|FROM
 	|	BatchKeysRegisterOutPeriod AS BatchKeysRegisterOutPeriod
@@ -1300,6 +1312,8 @@ Function GetBatchTree(TempTablesManager, CalculationSettings)
 	|		INNER JOIN Catalog.BatchKeys AS BatchKeys
 	|		ON (BatchKeys.ItemKey = BatchKeysInfo.ItemKey)
 	|		AND (BatchKeys.Store = BatchKeysInfo.Store)
+	|		AND (BatchKeys.SerialLotNumber = BatchKeysInfo.SerialLotNumber)
+	|		AND (BatchKeys.SourceOfOrigin = BatchKeysInfo.SourceOfOrigin)
 	|		AND (NOT BatchKeys.DeletionMark)
 	|GROUP BY
 	|	BatchKeys.Ref,

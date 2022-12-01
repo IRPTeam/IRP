@@ -51,19 +51,19 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
-    <name>ItemKeyItem</name>
-    <id>10</id>
+    <name>SourceOfOriginOwner</name>
+    <id>16</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Object.ItemKey.Item</segments>
+      <segments>Object.SourceOfOriginOwner</segments>
     </dataPath>
     <extendedTooltip>
-      <name>ItemKeyItemExtendedTooltip</name>
-      <id>12</id>
+      <name>SourceOfOriginOwnerExtendedTooltip</name>
+      <id>18</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -77,8 +77,8 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>ItemKeyItemContextMenu</name>
-      <id>11</id>
+      <name>SourceOfOriginOwnerContextMenu</name>
+      <id>17</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -87,7 +87,7 @@
       <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
-    <editMode>Enter</editMode>
+    <editMode>EnterOnInput</editMode>
     <showInHeader>true</showInHeader>
     <headerHorizontalAlign>Left</headerHorizontalAlign>
     <showInFooter>true</showInFooter>
@@ -101,7 +101,7 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
-    <name>ItemKey</name>
+    <name>Description</name>
     <id>4</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -109,10 +109,10 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Object.ItemKey</segments>
+      <segments>Object.Description</segments>
     </dataPath>
     <extendedTooltip>
-      <name>ItemKeyExtendedTooltip</name>
+      <name>DescriptionExtendedTooltip</name>
       <id>6</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -127,7 +127,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>ItemKeyContextMenu</name>
+      <name>DescriptionContextMenu</name>
       <id>5</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -151,7 +151,7 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
-    <name>Store</name>
+    <name>CustomProductID</name>
     <id>7</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -159,10 +159,10 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Object.Store</segments>
+      <segments>Object.CustomProductID</segments>
     </dataPath>
     <extendedTooltip>
-      <name>StoreExtendedTooltip</name>
+      <name>CustomProductIDExtendedTooltip</name>
       <id>9</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -177,7 +177,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>StoreContextMenu</name>
+      <name>CustomProductIDContextMenu</name>
       <id>8</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -201,7 +201,57 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
-    <name>SerialLotNumber</name>
+    <name>CustomDeclarationID</name>
+    <id>10</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+      <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.CustomDeclarationID</segments>
+    </dataPath>
+    <extendedTooltip>
+      <name>CustomDeclarationIDExtendedTooltip</name>
+      <id>12</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+      <name>CustomDeclarationIDContextMenu</name>
+      <id>11</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+    </contextMenu>
+    <type>InputField</type>
+    <editMode>EnterOnInput</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+    </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
+    <name>CountryOfOrigin</name>
     <id>13</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -209,10 +259,10 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Object.SerialLotNumber</segments>
+      <segments>Object.CountryOfOrigin</segments>
     </dataPath>
     <extendedTooltip>
-      <name>SerialLotNumberExtendedTooltip</name>
+      <name>CountryOfOriginExtendedTooltip</name>
       <id>15</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -227,7 +277,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>SerialLotNumberContextMenu</name>
+      <name>CountryOfOriginContextMenu</name>
       <id>14</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -237,7 +287,7 @@
       <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
-    <editMode>Enter</editMode>
+    <editMode>EnterOnInput</editMode>
     <showInHeader>true</showInHeader>
     <headerHorizontalAlign>Left</headerHorizontalAlign>
     <showInFooter>true</showInFooter>
@@ -251,19 +301,19 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
-    <name>SourceOfOrigin</name>
-    <id>16</id>
+    <name>BatchBalanceDetail</name>
+    <id>19</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Object.SourceOfOrigin</segments>
+      <segments>Object.BatchBalanceDetail</segments>
     </dataPath>
     <extendedTooltip>
-      <name>SourceOfOriginExtendedTooltip</name>
-      <id>18</id>
+      <name>BatchBalanceDetailExtendedTooltip</name>
+      <id>21</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -277,8 +327,8 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>SourceOfOriginContextMenu</name>
-      <id>17</id>
+      <name>BatchBalanceDetailContextMenu</name>
+      <id>20</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -286,19 +336,12 @@
       </userVisible>
       <autoFill>true</autoFill>
     </contextMenu>
-    <type>InputField</type>
-    <editMode>Enter</editMode>
+    <type>CheckBoxField</type>
+    <editMode>EnterOnInput</editMode>
     <showInHeader>true</showInHeader>
     <headerHorizontalAlign>Left</headerHorizontalAlign>
     <showInFooter>true</showInFooter>
-    <extInfo xsi:type="form:InputFieldExtInfo">
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <wrap>true</wrap>
-      <chooseType>true</chooseType>
-      <typeDomainEnabled>true</typeDomainEnabled>
-      <textEdit>true</textEdit>
-    </extInfo>
+    <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
   </items>
   <autoCommandBar>
     <name>FormCommandBar</name>
@@ -311,6 +354,14 @@
     <horizontalAlign>Left</horizontalAlign>
     <autoFill>true</autoFill>
   </autoCommandBar>
+  <handlers>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
+  </handlers>
   <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
@@ -324,7 +375,7 @@
     <name>Object</name>
     <id>1</id>
     <valueType>
-      <types>CatalogObject.BatchKeys</types>
+      <types>CatalogObject.SourceOfOrigins</types>
     </valueType>
     <view>
       <common>true</common>
@@ -339,5 +390,18 @@
     <navigationPanel/>
     <commandBar/>
   </commandInterface>
-  <extInfo xsi:type="form:CatalogFormExtInfo"/>
+  <extInfo xsi:type="form:CatalogFormExtInfo">
+    <handlers>
+      <event>BeforeWriteAtServer</event>
+      <name>BeforeWriteAtServer</name>
+    </handlers>
+    <handlers>
+      <event>AfterWriteAtServer</event>
+      <name>AfterWriteAtServer</name>
+    </handlers>
+    <handlers>
+      <event>OnReadAtServer</event>
+      <name>OnReadAtServer</name>
+    </handlers>
+  </extInfo>
 </form:Form>

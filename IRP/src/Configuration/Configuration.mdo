@@ -720,6 +720,7 @@
   <catalogs>Catalog.UserGroups</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
+  <catalogs>Catalog.SourceOfOrigins</catalogs>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalRevenueAllocation</documents>
   <documents>Document.BankPayment</documents>
@@ -1023,6 +1024,7 @@
   <accumulationRegisters>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8014T_ConsignorSales</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8015T_ConsignorPrices</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R9010B_SourceOfOriginStock</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

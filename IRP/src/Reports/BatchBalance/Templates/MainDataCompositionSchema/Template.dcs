@@ -87,6 +87,9 @@
 		<field xsi:type="DataSetFieldField">
 			<dataPath>BatchKey</dataPath>
 			<field>BatchKey</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>ItemKey</dataPath>
@@ -465,6 +468,9 @@
 			<field xsi:type="DataSetFieldField">
 				<dataPath>BatchKey</dataPath>
 				<field>BatchKey</field>
+				<role>
+					<dcscom:dimension>true</dcscom:dimension>
+				</role>
 			</field>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>AmountCostOpeningBalance</dataPath>
@@ -618,6 +624,7 @@
 	R6020B_BatchBalanceBalanceAndTurnovers.Store,
 	R6020B_BatchBalanceBalanceAndTurnovers.ItemKey,
 	R6020B_BatchBalanceBalanceAndTurnovers.Batch,
+	R6020B_BatchBalanceBalanceAndTurnovers.BatchKey,
 	R6020B_BatchBalanceBalanceAndTurnovers.QuantityOpeningBalance AS QuantityOpeningBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.QuantityReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.QuantityExpense,

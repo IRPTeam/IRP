@@ -997,7 +997,7 @@ Procedure AgreementConsignorStartChoice(Item, ChoiceData, StandardProcessing)
 	_Parameters = New Structure();
 	_Parameters.Insert("Partner"   , Object.PartnerConsignor);
 	_Parameters.Insert("Agreement" , Object.AgreementConsignor);
-	_Parameters.Insert("LegalName" , Object.AgreementLegalName);
+	_Parameters.Insert("LegalName" , Object.LegalNameConsignor);
 	DocumentsClient.AgreementStartChoice_TransactionTypeFilter(Object, ThisObject, Item, ChoiceData, StandardProcessing, TransactionType, _Parameters);
 EndProcedure
 

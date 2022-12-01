@@ -169,8 +169,8 @@ Scenario: Create catalog CashAccounts objects (Second Company)
 Scenario: Create catalog Companies objects (Main company)
 
 	And I check or create for catalog "Companies" objects with Data Exchange Load parameter set to true:
-		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'OurCompany' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |
-		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'False'           | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | ''            | ''                                                                 | 'Enum.CompanyLegalType.Company' | 'True' | 'Main Company'             | ''                 | ''               | 'Main Company TR'             |
+		| 'Ref'                                                               | 'DeletionMark' | 'Country'                                                           | 'MainCompany' | 'Partner' | 'Type'                          | 'OurCompany' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr'  | 
+		| 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'False'        | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | ''            | ''        | 'Enum.CompanyLegalType.Company' | 'True'       | 'Main Company'   | ''                 | ''               | 'Main Company TR' |
 
 	And I refill object tabular section  "Currencies":
 		| 'Ref'                                                               | 'MovementType'                                                                                    |

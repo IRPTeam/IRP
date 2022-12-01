@@ -58,6 +58,7 @@ Scenario: _042900 preparation (Opening entry)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
+		When Create information register TaxSettings records (Concignor 1)
 		When update ItemKeys
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
@@ -78,9 +79,24 @@ Scenario: _042900 preparation (Opening entry)
 				| "DocumentDiscount" |
 			When add Plugin for document discount
 			When Create catalog CancelReturnReasons objects
+	* Company settings
+		Given I open hyperlink "e1cib/list/Catalog.Companies"	
+		And I go to line in "List" table
+			| Description  |
+			| Main Company |
+		And I select current line in "List" table
+		And I move to "Comission trading" tab
+		And I click Select button of "Trade agent store" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Trade agent store' |
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I close all client application windows
 	* Load documents
 		When Create document OpeningEntry objects
 		When Create document OpeningEntry objects (stock control serial lot numbers)
+		When Create document OpeningEntry objects (commission trade)
 		And I execute 1C:Enterprise script at server
 			| "Documents.OpeningEntry.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
@@ -96,7 +112,13 @@ Scenario: _042900 preparation (Opening entry)
 		And I execute 1C:Enterprise script at server
 			| "Documents.OpeningEntry.FindByNumber(9).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
-			| "Documents.OpeningEntry.FindByNumber(9).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.OpeningEntry.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.OpeningEntry.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.OpeningEntry.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.OpeningEntry.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.OpeningEntry.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
@@ -454,7 +476,175 @@ Scenario: _042914 check Opening entry movements by the Register  "R5010 Reconcil
 			| ''                                           | 'Receipt'     | '07.09.2020 21:27:18' | '100'       | 'Main Company' | 'Front office' | 'TRY'      | 'DFC'        | 'DFC Legal name contract' |					
 		And I close all client application windows
 
-Scenario: _042915 check Opening entry movements by the Register  "R5010 Reconciliation statement" (AR/AP by documents)
+Scenario: _042915 check Opening entry movements by the Register  "R4010 Actual stocks" (shipment to trade agent)
+	When set True value to the constant Use commission trading
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '14' |
+	* Check movements by the Register  "R4010 Actual stocks" 
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 14 dated 01.12.2022 12:41:27' | ''            | ''                    | ''          | ''                  | ''         | ''                  |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''                  | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'            | ''            | ''                    | ''          | ''                  | ''         | ''                  |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'        | ''         | ''                  |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Store'             | 'Item key' | 'Serial lot number' |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:27' | '20'        | 'Trade agent store' | 'PZU'      | '8908899879'        |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:27' | '30'        | 'Trade agent store' | 'XS/Blue'  | ''                  |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:27' | '100'       | 'Trade agent store' | 'UNIQ'     | ''                  |
+			| ''                                           | 'Expense'     | '01.12.2022 12:41:27' | '20'        | 'Store 05'          | 'PZU'      | '8908899879'        |
+			| ''                                           | 'Expense'     | '01.12.2022 12:41:27' | '30'        | 'Store 05'          | 'XS/Blue'  | ''                  |
+			| ''                                           | 'Expense'     | '01.12.2022 12:41:27' | '100'       | 'Store 05'          | 'UNIQ'     | ''                  |	
+		And I close all client application windows
+
+Scenario: _042916 check Opening entry movements by the Register  "R4011 Free stocks" (shipment to trade agent)
+	When set True value to the constant Use commission trading
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '14' |
+	* Check movements by the Register  "R4011 Free stocks" 
+		And I click "Registrations report" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 14 dated 01.12.2022 12:41:27' | ''            | ''                    | ''          | ''           | ''         |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''           | ''         |
+			| 'Register  "R4011 Free stocks"'              | ''            | ''                    | ''          | ''           | ''         |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
+			| ''                                           | 'Expense'     | '01.12.2022 12:41:27' | '20'        | 'Store 05'   | 'PZU'      |
+			| ''                                           | 'Expense'     | '01.12.2022 12:41:27' | '30'        | 'Store 05'   | 'XS/Blue'  |
+			| ''                                           | 'Expense'     | '01.12.2022 12:41:27' | '100'       | 'Store 05'   | 'UNIQ'     |
+		And I close all client application windows
+
+Scenario: _042917 check Opening entry movements by the Register  "R4014 Serial lot numbers" (shipment to trade agent)
+	When set True value to the constant Use commission trading
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '14' |
+	* Check movements by the Register  "R4014 Serial lot numbers" 
+		And I click "Registrations report" button
+		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 14 dated 01.12.2022 12:41:27' | ''            | ''                    | ''          | ''             | ''       | ''      | ''         | ''                  |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''       | ''      | ''         | ''                  |
+			| 'Register  "R4014 Serial lot numbers"'       | ''            | ''                    | ''          | ''             | ''       | ''      | ''         | ''                  |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''      | ''         | ''                  |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch' | 'Store' | 'Item key' | 'Serial lot number' |
+			| ''                                           | 'Expense'     | '01.12.2022 12:41:27' | '20'        | 'Main Company' | ''       | ''      | 'PZU'      | '8908899879'        |
+			| ''                                           | 'Expense'     | '01.12.2022 12:41:27' | '100'       | 'Main Company' | ''       | ''      | 'UNIQ'     | '09987897977889'    |		
+		And I close all client application windows
+
+Scenario: _042918 check Opening entry movements by the Register  "R4050 Stock inventory" (shipment to trade agent)
+	When set True value to the constant Use commission trading
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '14' |
+	* Check movements by the Register  "R4050 Stock inventory" 
+		And I click "Registrations report" button
+		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 14 dated 01.12.2022 12:41:27' | ''            | ''                    | ''          | ''             | ''                  | ''         |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                  | ''         |
+			| 'Register  "R4050 Stock inventory"'          | ''            | ''                    | ''          | ''             | ''                  | ''         |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                  | ''         |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'             | 'Item key' |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:27' | '20'        | 'Main Company' | 'Trade agent store' | 'PZU'      |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:27' | '30'        | 'Main Company' | 'Trade agent store' | 'XS/Blue'  |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:27' | '100'       | 'Main Company' | 'Trade agent store' | 'UNIQ'     |
+			| ''                                           | 'Expense'     | '01.12.2022 12:41:27' | '20'        | 'Main Company' | 'Store 05'          | 'PZU'      |
+			| ''                                           | 'Expense'     | '01.12.2022 12:41:27' | '30'        | 'Main Company' | 'Store 05'          | 'XS/Blue'  |
+			| ''                                           | 'Expense'     | '01.12.2022 12:41:27' | '100'       | 'Main Company' | 'Store 05'          | 'UNIQ'     |
+		And I close all client application windows
+
+Scenario: _042919 check Opening entry movements by the Register  "R8010 Trade agent inventory" (shipment to trade agent)
+	When set True value to the constant Use commission trading
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '14' |
+	* Check movements by the Register  "R8010 Trade agent inventory" 
+		And I click "Registrations report" button
+		And I select "R8010 Trade agent inventory" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 14 dated 01.12.2022 12:41:27' | ''            | ''                    | ''          | ''             | ''         | ''              | ''                           |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''         | ''              | ''                           |
+			| 'Register  "R8010 Trade agent inventory"'    | ''            | ''                    | ''          | ''             | ''         | ''              | ''                           |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''              | ''                           |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Partner'       | 'Agreement'                  |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:27' | '20'        | 'Main Company' | 'PZU'      | 'Trade agent 1' | 'Trade agent partner term 1' |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:27' | '30'        | 'Main Company' | 'XS/Blue'  | 'Trade agent 1' | 'Trade agent partner term 1' |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:27' | '100'       | 'Main Company' | 'UNIQ'     | 'Trade agent 1' | 'Trade agent partner term 1' |		
+		And I close all client application windows
+
+Scenario: _042920 check Opening entry movements by the Register  "R8011 Trade agent serial lot number" (shipment to trade agent)
+	When set True value to the constant Use commission trading
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '14' |
+	* Check movements by the Register  "R8011 Trade agent serial lot number" 
+		And I click "Registrations report" button
+		And I select "R8011 Trade agent serial lot number" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 14 dated 01.12.2022 12:41:27'      | ''            | ''                    | ''          | ''             | ''         | ''              | ''                           | ''                  |
+			| 'Document registrations records'                  | ''            | ''                    | ''          | ''             | ''         | ''              | ''                           | ''                  |
+			| 'Register  "R8011 Trade agent serial lot number"' | ''            | ''                    | ''          | ''             | ''         | ''              | ''                           | ''                  |
+			| ''                                                | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''              | ''                           | ''                  |
+			| ''                                                | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Partner'       | 'Agreement'                  | 'Serial lot number' |
+			| ''                                                | 'Receipt'     | '01.12.2022 12:41:27' | '20'        | 'Main Company' | 'PZU'      | 'Trade agent 1' | 'Trade agent partner term 1' | '8908899879'        |
+			| ''                                                | 'Receipt'     | '01.12.2022 12:41:27' | '100'       | 'Main Company' | 'UNIQ'     | 'Trade agent 1' | 'Trade agent partner term 1' | '09987897977889'    |		
+		And I close all client application windows
+
+Scenario: _042921 check Opening entry movements by the Register  "T6020 Batch keys info" (shipment to trade agent)
+	When set True value to the constant Use commission trading
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '14' |
+	* Check movements by the Register  "T6020 Batch keys info" 
+		And I click "Registrations report" button
+		And I select "T6020 Batch keys info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 14 dated 01.12.2022 12:41:27' | ''                    | ''          | ''       | ''           | ''                  | ''             | ''                  | ''         | ''          | ''                       | ''         | ''               | ''              | ''                                     | ''                   | ''             | ''       | ''     | ''           | ''                |
+			| 'Document registrations records'             | ''                    | ''          | ''       | ''           | ''                  | ''             | ''                  | ''         | ''          | ''                       | ''         | ''               | ''              | ''                                     | ''                   | ''             | ''       | ''     | ''           | ''                |
+			| 'Register  "T6020 Batch keys info"'          | ''                    | ''          | ''       | ''           | ''                  | ''             | ''                  | ''         | ''          | ''                       | ''         | ''               | ''              | ''                                     | ''                   | ''             | ''       | ''     | ''           | ''                |
+			| ''                                           | 'Period'              | 'Resources' | ''       | ''           | ''                  | 'Dimensions'   | ''                  | ''         | ''          | ''                       | ''         | ''               | ''              | ''                                     | ''                   | ''             | ''       | ''     | ''           | ''                |
+			| ''                                           | ''                    | 'Quantity'  | 'Amount' | 'Amount tax' | 'Amount cost ratio' | 'Company'      | 'Store'             | 'Item key' | 'Direction' | 'Currency movement type' | 'Currency' | 'Batch document' | 'Sales invoice' | 'Row ID'                               | 'Profit loss center' | 'Expense type' | 'Branch' | 'Work' | 'Work sheet' | 'Batch consignor' |
+			| ''                                           | '01.12.2022 12:41:27' | '20'        | ''       | ''           | ''                  | 'Main Company' | 'Store 05'          | 'PZU'      | 'Expense'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | ''                |
+			| ''                                           | '01.12.2022 12:41:27' | '20'        | ''       | ''           | ''                  | 'Main Company' | 'Trade agent store' | 'PZU'      | 'Receipt'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | ''                |
+			| ''                                           | '01.12.2022 12:41:27' | '30'        | ''       | ''           | ''                  | 'Main Company' | 'Store 05'          | 'XS/Blue'  | 'Expense'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | ''                |
+			| ''                                           | '01.12.2022 12:41:27' | '30'        | ''       | ''           | ''                  | 'Main Company' | 'Trade agent store' | 'XS/Blue'  | 'Receipt'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | ''                |
+			| ''                                           | '01.12.2022 12:41:27' | '100'       | ''       | ''           | ''                  | 'Main Company' | 'Store 05'          | 'UNIQ'     | 'Expense'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | ''                |
+			| ''                                           | '01.12.2022 12:41:27' | '100'       | ''       | ''           | ''                  | 'Main Company' | 'Trade agent store' | 'UNIQ'     | 'Receipt'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | ''                |	
+		And I close all client application windows
+
+Scenario: _042922 check Opening entry movements by the Register  "R5010 Reconciliation statement" (AR/AP by documents)
 	And I close all client application windows
 	* Select Opening entry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
@@ -474,6 +664,160 @@ Scenario: _042915 check Opening entry movements by the Register  "R5010 Reconcil
 			| ''                                           | 'Receipt'     | '07.09.2020 21:27:57' | '200'       | 'Main Company' | 'Front office' | 'TRY'      | 'DFC'           | 'DFC Legal name contract' |
 			| ''                                           | 'Expense'     | '07.09.2020 21:27:57' | '100'       | 'Main Company' | 'Front office' | 'TRY'      | 'DFC'           | 'DFC Legal name contract' |
 			| ''                                           | 'Expense'     | '07.09.2020 21:27:57' | '200'       | 'Main Company' | 'Front office' | 'TRY'      | 'Company Maxim' | ''                        |
+		And I close all client application windows
+
+Scenario: _042923 check Opening entry movements by the Register  "R4010 Actual stocks" (receipt from consignor)
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '15' |
+	* Check movements by the Register  "R4010 Actual stocks" 
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 15 dated 01.12.2022 12:41:39' | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| 'Register  "R4010 Actual stocks"'            | ''            | ''                    | ''          | ''           | ''         | ''                  |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         | ''                  |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:39' | '50'        | 'Store 08'   | 'M/White'  | ''                  |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:39' | '70'        | 'Store 08'   | 'PZU'      | '8908899877'        |		
+		And I close all client application windows
+
+Scenario: _042924 check Opening entry movements by the Register  "R4011 Free stocks" (receipt from consignor)
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '15' |
+	* Check movements by the Register  "R4011 Free stocks" 
+		And I click "Registrations report" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 15 dated 01.12.2022 12:41:39' | ''            | ''                    | ''          | ''           | ''         |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''           | ''         |
+			| 'Register  "R4011 Free stocks"'              | ''            | ''                    | ''          | ''           | ''         |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:39' | '50'        | 'Store 08'   | 'M/White'  |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:39' | '70'        | 'Store 08'   | 'PZU'      |		
+		And I close all client application windows
+
+Scenario: _042925 check Opening entry movements by the Register  "R4014 Serial lot numbers" (receipt from consignor)
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '15' |
+	* Check movements by the Register  "R4014 Serial lot numbers" 
+		And I click "Registrations report" button
+		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 15 dated 01.12.2022 12:41:39' | ''            | ''                    | ''          | ''             | ''       | ''      | ''         | ''                  |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''       | ''      | ''         | ''                  |
+			| 'Register  "R4014 Serial lot numbers"'       | ''            | ''                    | ''          | ''             | ''       | ''      | ''         | ''                  |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''      | ''         | ''                  |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch' | 'Store' | 'Item key' | 'Serial lot number' |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:39' | '70'        | 'Main Company' | ''       | ''      | 'PZU'      | '8908899877'        |	
+		And I close all client application windows
+
+Scenario: _042926 check Opening entry movements by the Register  "R8012 Consignor inventory" (receipt from consignor)
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '15' |
+	* Check movements by the Register  "R8012 Consignor inventory" 
+		And I click "Registrations report" button
+		And I select "R8012 Consignor inventory" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 15 dated 01.12.2022 12:41:39' | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
+			| 'Register  "R8012 Consignor inventory"'      | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                  | ''            | ''                         |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Serial lot number' | 'Partner'     | 'Agreement'                |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:39' | '50'        | 'Main Company' | 'M/White'  | ''                  | 'Consignor 1' | 'Consignor partner term 1' |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:39' | '70'        | 'Main Company' | 'PZU'      | '8908899877'        | 'Consignor 1' | 'Consignor partner term 1' |		
+		And I close all client application windows
+
+Scenario: _042927 check Opening entry movements by the Register  "R8013 Consignor batch wise balance" (receipt from consignor)
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '15' |
+	* Check movements by the Register  "R8013 Consignor batch wise balance" 
+		And I click "Registrations report" button
+		And I select "R8013 Consignor batch wise balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 15 dated 01.12.2022 12:41:39'     | ''            | ''                    | ''          | ''             | ''                                           | ''         | ''         | ''                  |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''                                           | ''         | ''         | ''                  |
+			| 'Register  "R8013 Consignor batch wise balance"' | ''            | ''                    | ''          | ''             | ''                                           | ''         | ''         | ''                  |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                           | ''         | ''         | ''                  |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Batch'                                      | 'Store'    | 'Item key' | 'Serial lot number' |
+			| ''                                               | 'Receipt'     | '01.12.2022 12:41:39' | '50'        | 'Main Company' | 'Opening entry 15 dated 01.12.2022 12:41:39' | 'Store 08' | 'M/White'  | ''                  |
+			| ''                                               | 'Receipt'     | '01.12.2022 12:41:39' | '70'        | 'Main Company' | 'Opening entry 15 dated 01.12.2022 12:41:39' | 'Store 08' | 'PZU'      | '8908899877'        |	
+		And I close all client application windows
+
+Scenario: _042928 check Opening entry movements by the Register  "R8015 Consignor prices" (receipt from consignor)
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '15' |
+	* Check movements by the Register  "R8015 Consignor prices" 
+		And I click "Registrations report" button
+		And I select "R8015 Consignor prices" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 15 dated 01.12.2022 12:41:39' | ''                    | ''          | ''             | ''            | ''                         | ''                                           | ''         | ''                  | ''                             | ''         |
+			| 'Document registrations records'             | ''                    | ''          | ''             | ''            | ''                         | ''                                           | ''         | ''                  | ''                             | ''         |
+			| 'Register  "R8015 Consignor prices"'         | ''                    | ''          | ''             | ''            | ''                         | ''                                           | ''         | ''                  | ''                             | ''         |
+			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''            | ''                         | ''                                           | ''         | ''                  | ''                             | ''         |
+			| ''                                           | ''                    | 'Price'     | 'Company'      | 'Partner'     | 'Partner term'             | 'Purchase invoice'                           | 'Item key' | 'Serial lot number' | 'Multi currency movement type' | 'Currency' |
+			| ''                                           | '01.12.2022 12:41:39' | '8,56'      | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Opening entry 15 dated 01.12.2022 12:41:39' | 'M/White'  | ''                  | 'Reporting currency'           | 'USD'      |
+			| ''                                           | '01.12.2022 12:41:39' | '8,56'      | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Opening entry 15 dated 01.12.2022 12:41:39' | 'PZU'      | '8908899877'        | 'Reporting currency'           | 'USD'      |
+			| ''                                           | '01.12.2022 12:41:39' | '50'        | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Opening entry 15 dated 01.12.2022 12:41:39' | 'M/White'  | ''                  | 'Local currency'               | 'TRY'      |
+			| ''                                           | '01.12.2022 12:41:39' | '50'        | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Opening entry 15 dated 01.12.2022 12:41:39' | 'M/White'  | ''                  | 'TRY'                          | 'TRY'      |
+			| ''                                           | '01.12.2022 12:41:39' | '50'        | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Opening entry 15 dated 01.12.2022 12:41:39' | 'M/White'  | ''                  | 'en description is empty'      | 'TRY'      |
+			| ''                                           | '01.12.2022 12:41:39' | '50'        | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Opening entry 15 dated 01.12.2022 12:41:39' | 'PZU'      | '8908899877'        | 'Local currency'               | 'TRY'      |
+			| ''                                           | '01.12.2022 12:41:39' | '50'        | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Opening entry 15 dated 01.12.2022 12:41:39' | 'PZU'      | '8908899877'        | 'TRY'                          | 'TRY'      |
+			| ''                                           | '01.12.2022 12:41:39' | '50'        | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Opening entry 15 dated 01.12.2022 12:41:39' | 'PZU'      | '8908899877'        | 'en description is empty'      | 'TRY'      |
+		
+				
+		And I close all client application windows
+
+Scenario: _042929 check Opening entry movements by the Register  "T6020 Batch keys info" (receipt from consignor)
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '15' |
+	* Check movements by the Register  "T6020 Batch keys info" 
+		And I click "Registrations report" button
+		And I select "T6020 Batch keys info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 15 dated 01.12.2022 12:41:39' | ''                    | ''          | ''       | ''           | ''                  | ''             | ''         | ''         | ''          | ''                       | ''         | ''               | ''              | ''                                     | ''                   | ''             | ''       | ''     | ''           | ''                |
+			| 'Document registrations records'             | ''                    | ''          | ''       | ''           | ''                  | ''             | ''         | ''         | ''          | ''                       | ''         | ''               | ''              | ''                                     | ''                   | ''             | ''       | ''     | ''           | ''                |
+			| 'Register  "T6020 Batch keys info"'          | ''                    | ''          | ''       | ''           | ''                  | ''             | ''         | ''         | ''          | ''                       | ''         | ''               | ''              | ''                                     | ''                   | ''             | ''       | ''     | ''           | ''                |
+			| ''                                           | 'Period'              | 'Resources' | ''       | ''           | ''                  | 'Dimensions'   | ''         | ''         | ''          | ''                       | ''         | ''               | ''              | ''                                     | ''                   | ''             | ''       | ''     | ''           | ''                |
+			| ''                                           | ''                    | 'Quantity'  | 'Amount' | 'Amount tax' | 'Amount cost ratio' | 'Company'      | 'Store'    | 'Item key' | 'Direction' | 'Currency movement type' | 'Currency' | 'Batch document' | 'Sales invoice' | 'Row ID'                               | 'Profit loss center' | 'Expense type' | 'Branch' | 'Work' | 'Work sheet' | 'Batch consignor' |
+			| ''                                           | '01.12.2022 12:41:39' | '50'        | ''       | ''           | ''                  | 'Main Company' | 'Store 08' | 'M/White'  | 'Receipt'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | ''                |
+			| ''                                           | '01.12.2022 12:41:39' | '70'        | ''       | ''           | ''                  | 'Main Company' | 'Store 08' | 'PZU'      | 'Receipt'   | ''                       | ''         | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | ''                |	
 		And I close all client application windows
 
 Scenario: _042930 Opening entry clear posting/mark for deletion

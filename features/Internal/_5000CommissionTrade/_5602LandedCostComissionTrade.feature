@@ -18,7 +18,7 @@ Background:
 
 
 
-Scenario: _05602 preparation (landed cost commission trade)
+Scenario: _05702 preparation (landed cost commission trade)
 	When set True value to the constant
 	When set True value to the constant Use commission trading
 	And I close TestClient session
@@ -76,6 +76,8 @@ Scenario: _05602 preparation (landed cost commission trade)
 		When Create document PurchaseInvoice and PurchaseReturn objects (comission trade)
 		When Create document InventoryTransfer objects (comission trade)
 		When Create document SalesInvoice and SalesReturn objects (comission trade)
+		When Create document SalesReportToConsignor objects (landed cost)
+		When Create document CalculationMovementCosts objects (comission trade, consignment)
 	* Post document
 		* Posting Purchase invoice
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -102,6 +104,30 @@ Scenario: _05602 preparation (landed cost commission trade)
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And Delay "3"
+		* Posting SalesReportToConsignor
+			Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
+			And Delay "3"
+		* Posting CalculationMovementCosts
+			Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
+			And Delay "3"
+	And I close all client application windows
+		
 
-Scenario: _05602 check preparation
+Scenario: _05702 check preparation
 	When check preparation
+
+Scenario: _057003 check batch balance
+	And I close all client application windows
+	Given I open hyperlink "e1cib/app/Report.BatchBalance"
+	* Select period
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		And I input "01.11.2022" text in the field named "DateBegin"
+		And I input "04.11.2022" text in the field named "DateEnd"
+		And I click the button named "Select"
+	And I click "Generate" button
+	And "Result" spreadsheet document contains "BathBalance_057_1" template lines by template
+	And I close all client application windows

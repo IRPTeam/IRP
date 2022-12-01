@@ -9,7 +9,8 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	ViewServer_V2.OnCreateAtServer(Object, Form, "AccountBalance, AdvanceFromCustomers, AdvanceToSuppliers,
 		|AccountPayableByAgreements, AccountPayableByDocuments,
 		|AccountReceivableByDocuments, AccountReceivableByAgreements,
-		|Inventory");
+		|Inventory,
+		|ShipmentToTradeAgent, ReceiptFromConsignor");
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export

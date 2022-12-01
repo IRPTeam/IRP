@@ -76,31 +76,11 @@ Procedure LegalNameOnChange(Object, Form, Item) Export
 EndProcedure
 
 Procedure LegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-
-	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
-		DataCompositionComparisonType.NotEqual));
-	OpenSettings.FormParameters = New Structure();
-	If ValueIsFilled(Object.Partner) Then
-		OpenSettings.FormParameters.Insert("Partner", Object.Partner);
-		OpenSettings.FormParameters.Insert("FilterByPartnerHierarchy", True);
-	EndIf;
-	OpenSettings.FillingData = New Structure("Partner", Object.Partner);
-
-	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+	DocumentsClient.LegalNameStartChoice_PartnerFilter(Object, Form, Item, ChoiceData, StandardProcessing, Object.Partner);	
 EndProcedure
 
 Procedure LegalNameTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	AdditionalParameters = New Structure();
-	If ValueIsFilled(Object.Partner) Then
-		AdditionalParameters.Insert("Partner", Object.Partner);
-		AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
-	EndIf;
-	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
-		AdditionalParameters);
+	DocumentsClient.LegalNameTextChange_PartnerFilter(Object, Form, Item, Text, StandardProcessing, Object.Partner);
 EndProcedure
 
 #EndRegion

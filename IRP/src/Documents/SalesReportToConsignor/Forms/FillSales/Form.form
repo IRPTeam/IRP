@@ -1653,6 +1653,7 @@
       <id>19</id>
       <valueType>
         <types>DocumentRef.PurchaseInvoice</types>
+        <types>DocumentRef.OpeningEntry</types>
       </valueType>
       <view>
         <common>true</common>

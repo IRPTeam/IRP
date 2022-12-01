@@ -782,12 +782,13 @@ Procedure PutResultToConsignorBatches(ItemListTable, ResultTable, ConsignorBatch
 EndProcedure
 
 Function GetEmptyConsignorBatchesTable()
+	InfoReg = Metadata.InformationRegisters.T8010S_ConsignorBatches.Dimensions;
 	ConsignorBatchesTable = New ValueTable();
-	ConsignorBatchesTable.Columns.Add("Key"      , Metadata.DefinedTypes.typeRowID.Type);
-	ConsignorBatchesTable.Columns.Add("ItemKey"  , New TypeDescription("CatalogRef.ItemKeys"));
-	ConsignorBatchesTable.Columns.Add("SerialLotNumber"  , New TypeDescription("CatalogRef.SerialLotNumbers"));
-	ConsignorBatchesTable.Columns.Add("Store"    , New TypeDescription("CatalogRef.Stores"));
-	ConsignorBatchesTable.Columns.Add("Batch"    , New TypeDescription("DocumentRef.PurchaseInvoice"));
+	ConsignorBatchesTable.Columns.Add("Key"      , InfoReg.Key.Type);
+	ConsignorBatchesTable.Columns.Add("ItemKey"  , InfoReg.ItemKey.Type);
+	ConsignorBatchesTable.Columns.Add("SerialLotNumber", InfoReg.SerialLotNumber.Type);
+	ConsignorBatchesTable.Columns.Add("Store"    , InfoReg.Store.Type);
+	ConsignorBatchesTable.Columns.Add("Batch"    , InfoReg.Batch.Type);
 	ConsignorBatchesTable.Columns.Add("Quantity" , Metadata.DefinedTypes.typeQuantity.Type);
 	Return ConsignorBatchesTable;
 EndFunction

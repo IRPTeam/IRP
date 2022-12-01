@@ -190,7 +190,7 @@ EndFunction
 
 // returns list of Table attributes for get value before the change
 Function GetListPropertyNamesBeforeChange()
-	Return "ItemList.Store, ItemList.DeliveryDate, ItemList.ItemKey, Inventory.ItemKey";
+	Return "ItemList.Store, ItemList.DeliveryDate, ItemList.ItemKey, Inventory.ItemKey, ShipmentToTradeAgent.ItemKey, ReceiptFromConsignor.ItemKey";
 EndFunction
 
 // returns list of Form attributes for get value before the change
@@ -1043,6 +1043,168 @@ Procedure InventoryAmountOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "Inventory", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "Inventory", Rows);
 	ControllerClientServer_V2.InventoryAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region SHIPMENT_TO_TRADE_AGENT
+
+Function ShipmentToTradeAgentBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "ShipmentToTradeAgent", Cancel, Clone, CurrentData,
+		"ShipmentToTradeAgentOnAddRowFormNotify", "ShipmentToTradeAgentOnCopyRowFormNotify");
+	Form.Items.ShipmentToTradeAgent.CurrentRow = NewRow.GetID();
+	If Form.Items.ShipmentToTradeAgent.CurrentRow <> Undefined Then
+		Form.Items.ShipmentToTradeAgent.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure ShipmentToTradeAgentOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure ShipmentToTradeAgentOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure ShipmentToTradeAgentAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "ShipmentToTradeAgent");
+EndProcedure
+
+#EndRegion
+
+#Region SHIPMENT_TO_TRADE_AGENT_COLUMNS
+
+#Region SHIPMENT_TO_TRADE_AGENT_ITEM
+
+// ShipmentToTradeAgent.Item
+Procedure ShipmentToTradeAgentItemOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ShipmentToTradeAgent", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ShipmentToTradeAgent", Rows);
+	ControllerClientServer_V2.ShipmentToTradeAgentItemOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region SHIPMENT_TO_TRADE_AGENT_ITEM_KEY
+
+// ShipmentToTradeAgent.ItemKey
+Procedure ShipmentToTradeAgentItemKeyOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ShipmentToTradeAgent", CurrentData);
+	FormParameters = GetFormParameters(Form);
+	FetchFromCacheBeforeChange_List("ShipmentToTradeAgent.ItemKey", FormParameters, Rows);
+	
+	ServerParameters = GetServerParameters(Object);
+	ServerParameters.Rows      = Rows;
+	ServerParameters.TableName = "ShipmentToTradeAgent";
+	
+	Parameters = GetParameters(ServerParameters, FormParameters);
+	ControllerClientServer_V2.ShipmentToTradeAgentItemKeyOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region SHIPMENT_TO_TRADE_AGENT_QUANTITY
+
+// ShipmentToTradeAgent.Quantity
+Procedure ShipmentToTradeAgentQuantityOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ShipmentToTradeAgent", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ShipmentToTradeAgent", Rows);
+	ControllerClientServer_V2.ShipmentToTradeAgentQuantityOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region RECEIPT_FROM_CONSIGNOR
+
+Function ReceiptFromConsignorBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "ReceiptFromConsignor", Cancel, Clone, CurrentData,
+		"ReceiptFromConsignorOnAddRowFormNotify", "ReceiptFromConsignorOnCopyRowFormNotify");
+	Form.Items.ReceiptFromConsignor.CurrentRow = NewRow.GetID();
+	If Form.Items.ReceiptFromConsignor.CurrentRow <> Undefined Then
+		Form.Items.ReceiptFromConsignor.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure ReceiptFromConsignorOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure ReceiptFromConsignorOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure ReceiptFromConsignorAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "ReceiptFromConsignor");
+EndProcedure
+
+#EndRegion
+
+#Region RECEIPT_FROM_CONSIGNOR_COLUMNS
+
+#Region RECEIPT_FROM_CONSIGNOR_ITEM
+
+// ReceiptFromConsignor.Item
+Procedure ReceiptFromConsignorItemOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ReceiptFromConsignor", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ReceiptFromConsignor", Rows);
+	ControllerClientServer_V2.ReceiptFromConsignorItemOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region RECEIPT_FROM_CONSIGNOR_ITEM_KEY
+
+// ReceiptFromConsignor.ItemKey
+Procedure ReceiptFromConsignorItemKeyOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ReceiptFromConsignor", CurrentData);
+	FormParameters = GetFormParameters(Form);
+	FetchFromCacheBeforeChange_List("ReceiptFromConsignor.ItemKey", FormParameters, Rows);
+	
+	ServerParameters = GetServerParameters(Object);
+	ServerParameters.Rows      = Rows;
+	ServerParameters.TableName = "ReceiptFromConsignor";
+	
+	Parameters = GetParameters(ServerParameters, FormParameters);
+	ControllerClientServer_V2.ReceiptFromConsignorItemKeyOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region RECEIPT_FROM_CONSIGNOR_QUANTITY
+
+// ReceiptFromConsignor.Quantity
+Procedure ReceiptFromConsignorQuantityOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ReceiptFromConsignor", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ReceiptFromConsignor", Rows);
+	ControllerClientServer_V2.ReceiptFromConsignorQuantityOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region RECEIPT_FROM_CONSIGNOR_PRICE
+
+// ReceiptFromConsignor.Price
+Procedure ReceiptFromConsignorPriceOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ReceiptFromConsignor", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ReceiptFromConsignor", Rows);
+	ControllerClientServer_V2.ReceiptFromConsignorPriceOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region RECEIPT_FROM_CONSIGNOR_AMOUNT
+
+// ReceiptFromConsignor.Amount
+Procedure ReceiptFromConsignorAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ReceiptFromConsignor", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ReceiptFromConsignor", Rows);
+	ControllerClientServer_V2.ReceiptFromConsignorAmountOnChange(Parameters);
 EndProcedure
 
 #EndRegion
@@ -2814,6 +2976,28 @@ EndProcedure
 
 #EndRegion
 
+#Region PARTNER_TRADE_AGENT
+
+Procedure PartnerTradeAgentOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.PartnerTradeAgentOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region PARTNER_CONSIGNOR
+
+Procedure PartnerConsignorOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.PartnerConsignorOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 #Region LEGAL_NAME
 
 Procedure LegalNameOnChange(Object, Form, TableNames) Export
@@ -2828,6 +3012,29 @@ Procedure OnSetLegalNameNotify(Parameters) Export
 EndProcedure
 
 #EndRegion
+
+#Region LEGAL_NAME_TRADE_AGENT
+
+Procedure LegalNameTradeAgentOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.LegalNameTradeAgentOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region LEGAL_NAME_CONSIGNOR
+
+Procedure LegalNameConsignorOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.LegalNameConsignorOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 
 #Region CONSOLIDATED_RETAIL_SALES
 
@@ -2925,6 +3132,29 @@ Procedure OnSetAgreementNotify(Parameters) Export
 EndProcedure
 
 #EndRegion
+
+#Region AGREEMENT_TRADE_AGENT
+
+Procedure AgreementTradeAgentOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.AgreementTradeAgentOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region AGREEMENT_CONSIGNOR
+
+Procedure AgreementConsignorOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.AgreementConsignorOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 
 #Region RETAIL_CUSTOMER
 

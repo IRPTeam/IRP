@@ -2344,6 +2344,72 @@ EndProcedure
 
 #EndRegion
 
+#Region PARTNER_TRADE_AGENT
+
+// PartnerTradeAgent.OnChange
+Procedure PartnerTradeAgentOnChange(Parameters) Export
+	Binding = BindPartnerTradeAgent(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PartnerTradeAgent.Set
+Procedure SetPartnerTradeAgent(Parameters, Results) Export
+	Binding = BindPartnerTradeAgent(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PartnerTradeAgent.Get
+Function GetPartnerTradeAgent(Parameters)
+	Return GetPropertyObject(Parameters, BindPartnerTradeAgent(Parameters).DataPath);
+EndFunction
+
+// PartnerTradeAgent.Bind
+Function BindPartnerTradeAgent(Parameters)
+	DataPath = "PartnerTradeAgent";
+	Binding = New Structure();
+	
+	Binding.Insert("OpeningEntry",
+		"StepChangeAgreementTradeAgentByPartner,
+		|StepChangeLegalNameTradeAgentByPartner");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PARTNER_CONSIGNOR
+
+// PartnerConsignor.OnChange
+Procedure PartnerConsignorOnChange(Parameters) Export
+	Binding = BindPartnerConsignor(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PartnerConsignor.Set
+Procedure SetPartnerConsignor(Parameters, Results) Export
+	Binding = BindPartnerConsignor(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PartnerConsignor.Get
+Function GetPartnerConsignor(Parameters)
+	Return GetPropertyObject(Parameters, BindPartnerConsignor(Parameters).DataPath);
+EndFunction
+
+// PartnerConsignor.Bind
+Function BindPartnerConsignor(Parameters)
+	DataPath = "PartnerConsignor";
+	Binding = New Structure();
+	
+	Binding.Insert("OpeningEntry",
+		"StepChangeAgreementConsignorByPartner,
+		|StepChangeLegalNameConsignorByPartner");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
 #Region LEGAL_NAME
 
 // LegalName.OnChange
@@ -2390,6 +2456,84 @@ Procedure StepChangeLegalNameByRetailCustomer(Parameters, Chain) Export
 	Options.RetailCustomer = GetRetailCustomer(Parameters);
 	Options.StepName = "StepChangeLegalNameByRetailCustomer";
 	Chain.ChangeLegalNameByRetailCustomer.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region LEGAL_NAME_TRADE_AGENT
+
+// LegalNameTradeAgent.OnChange
+Procedure LegalNameTradeAgentOnChange(Parameters) Export
+	Binding = BindLegalNameTradeAgent(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// LegalNameTradeAgent.Set
+Procedure SetLegalNameTradeAgent(Parameters, Results) Export
+	Binding = BindLegalNameTradeAgent(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// LegalNameTradeAgent.Get
+Function GetLegalNameTradeAgent(Parameters)
+	Return GetPropertyObject(Parameters, BindLegalNameTradeAgent(Parameters).DataPath);
+EndFunction
+
+// LegalNameTradeAgent.Bind
+Function BindLegalNameTradeAgent(Parameters)
+	DataPath = "LegalNameTradeAgent";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// LegalNameTradeAgent.ChangeLegalNameTradeAgentByPartner.Step
+Procedure StepChangeLegalNameTradeAgentByPartner(Parameters, Chain) Export
+	Chain.ChangeLegalNameByPartner.Enable = True;
+	Chain.ChangeLegalNameByPartner.Setter = "SetLegalNameTradeAgent";
+	Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
+	Options.Partner   = GetPartnerTradeAgent(Parameters);
+	Options.LegalName = GetLegalNameTradeAgent(Parameters);
+	Options.StepName = "StepChangeLegalNameTradeAgentByPartner";
+	Chain.ChangeLegalNameByPartner.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region LEGAL_NAME_CONSIGNOR
+
+// LegalNameConsignor.OnChange
+Procedure LegalNameConsignorOnChange(Parameters) Export
+	Binding = BindLegalNameConsignor(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// LegalNameConsignor.Set
+Procedure SetLegalNameConsignor(Parameters, Results) Export
+	Binding = BindLegalNameConsignor(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// LegalNameConsignor.Get
+Function GetLegalNameConsignor(Parameters)
+	Return GetPropertyObject(Parameters, BindLegalNameConsignor(Parameters).DataPath);
+EndFunction
+
+// LegalNameConsignor.Bind
+Function BindLegalNameConsignor(Parameters)
+	DataPath = "LegalNameConsignor";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// LegalNameConsignor.ChangeLegalNameConsignorByPartner.Step
+Procedure StepChangeLegalNameConsignorByPartner(Parameters, Chain) Export
+	Chain.ChangeLegalNameByPartner.Enable = True;
+	Chain.ChangeLegalNameByPartner.Setter = "SetLegalNameConsignor";
+	Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
+	Options.Partner   = GetPartnerConsignor(Parameters);
+	Options.LegalName = GetLegalNameConsignor(Parameters);
+	Options.StepName = "StepChangeLegalNameConsignorByPartner";
+	Chain.ChangeLegalNameByPartner.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -3287,6 +3431,90 @@ Procedure StepChangeAgreementByRetailCustomer(Parameters, Chain) Export
 	Options.RetailCustomer = GetRetailCustomer(Parameters);
 	Options.StepName = "StepChangeAgreementByRetailCustomer";
 	Chain.ChangeAgreementByRetailCustomer.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region AGREEMENT_TRADE_AGENT
+
+// AgreementTradeAgent.OnChange
+Procedure AgreementTradeAgentOnChange(Parameters) Export
+	Binding = BindAgreementTradeAgent(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// AgreementTradeAgent.Set
+Procedure SetAgreementTradeAgent(Parameters, Results) Export
+	Binding = BindAgreementTradeAgent(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// AgreementTradeAgent.Get
+Function GetAgreementTradeAgent(Parameters)
+	Return GetPropertyObject(Parameters, BindAgreementTradeAgent(Parameters).DataPath);
+EndFunction
+
+// AgreementTradeAgent.Bind
+Function BindAgreementTradeAgent(Parameters)
+	DataPath = "AgreementTradeAgent";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// AgreementTradeAgent.ChangeAgreementByPartner.Step
+Procedure StepChangeAgreementTradeAgentByPartner(Parameters, Chain) Export
+	Chain.ChangeAgreementByPartner.Enable = True;
+	Chain.ChangeAgreementByPartner.Setter = "SetAgreementTradeAgent";
+	Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
+	Options.Partner       = GetPartnerTradeAgent(Parameters);
+	Options.Agreement     = GetAgreementTradeAgent(Parameters);
+	Options.CurrentDate   = GetDate(Parameters);
+	Options.AgreementType = PredefinedValue("Enum.AgreementTypes.TradeAgent");
+	Options.TransactionType = PredefinedValue("Enum.SalesTransactionTypes.ShipmentToTradeAgent");
+	Options.StepName = "StepChangeAgreementTradeAgentByPartner";
+	Chain.ChangeAgreementByPartner.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region AGREEMNT_CONSIGNOR
+
+// AgreementConsignor.OnChange
+Procedure AgreementConsignorOnChange(Parameters) Export
+	Binding = BindAgreementConsignor(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// AgreementConsignor.Set
+Procedure SetAgreementConsignor(Parameters, Results) Export
+	Binding = BindAgreementConsignor(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// AgreementConsignor.Get
+Function GetAgreementConsignor(Parameters)
+	Return GetPropertyObject(Parameters, BindAgreementConsignor(Parameters).DataPath);
+EndFunction
+
+// AgreementConsignor.Bind
+Function BindAgreementConsignor(Parameters)
+	DataPath = "AgreementConsignor";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// AgreementConsignor.ChangeAgreementByPartner.Step
+Procedure StepChangeAgreementConsignorByPartner(Parameters, Chain) Export
+	Chain.ChangeAgreementByPartner.Enable = True;
+	Chain.ChangeAgreementByPartner.Setter = "SetAgreementConsignor";
+	Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
+	Options.Partner       = GetPartnerConsignor(Parameters);
+	Options.Agreement     = GetAgreementConsignor(Parameters);
+	Options.CurrentDate   = GetDate(Parameters);
+	Options.AgreementType = PredefinedValue("Enum.AgreementTypes.Consignor");
+	Options.TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.ReceiptFromConsignor");
+	Options.StepName = "StepChangeAgreementConsignorByPartner";
+	Chain.ChangeAgreementByPartner.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -10415,6 +10643,472 @@ EndProcedure
 
 #EndRegion
 
+#Region SHIPMENT_TO_TRADE_AGENT
+
+#Region SHIPMENT_TO_TRADE_AGENT_ITEM
+
+// ShipmentToTradeAgent.Item.OnChange
+Procedure ShipmentToTradeAgentItemOnChange(Parameters) Export
+	Binding = BindShipmentToTradeAgentItem(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ShipmentToTradeAgent.Item.Set
+Procedure SetShipmentToTradeAgentItem(Parameters, Results) Export
+	Binding = BindShipmentToTradeAgentItem(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ShipmentToTradeAgent.Item.Get
+Function GetShipmentToTradeAgentItem(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindShipmentToTradeAgentItem(Parameters).DataPath, _Key);
+EndFunction
+
+// ShipmentToTradeAgent.Item.Bind
+Function BindShipmentToTradeAgentItem(Parameters)
+	DataPath = "ShipmentToTradeAgent.Item";
+	Binding = New Structure();
+	Binding.Insert("OpeningEntry", "StepShipmentToTradeAgentChangeItemKeyByItem");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region SHIPMENT_TO_TRADE_AGENT_ITEMKEY
+
+// ShipmentToTradeAgent.ItemKey.OnChange
+Procedure ShipmentToTradeAgentItemKeyOnChange(Parameters) Export
+	Binding = BindShipmentToTradeAgentItemKey(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ShipmentToTradeAgent.ItemKey.Set
+Procedure SetShipmentToTradeAgentItemKey(Parameters, Results) Export
+	Binding = BindShipmentToTradeAgentItemKey(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ShipmentToTradeAgent.ItemKey.Get
+Function GetShipmentToTradeAgentItemKey(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindShipmentToTradeAgentItemKey(Parameters).DataPath, _Key);
+EndFunction
+
+// ShipmentToTradeAgent.ItemKey.Get.IsChanged
+Function GetShipmentToTradeAgentItemKey_IsChanged(Parameters, _Key)
+	Return IsChangedProperty(Parameters, BindShipmentToTradeAgentItemKey(Parameters).DataPath, _Key).IsChanged
+		Or IsChangedPropertyDirectly_List(Parameters, _Key).IsChanged;
+EndFunction
+
+// ShipmentToTradeAgent.ItemKey.Bind
+Function BindShipmentToTradeAgentItemKey(Parameters)
+	DataPath = "ShipmentToTradeAgent.ItemKey";
+	Binding = New Structure();
+	Binding.Insert("OpeningEntry", 
+		"StepShipmentToTradeAgentChangeUseSerialLotNumberByItemKey,
+		|StepShipmentToTradeAgentClearSerialLotNumberByItemKey");
+		
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ShipmentToTradeAgent.ItemKey.ChangeItemKeyByItem.Step
+Procedure StepShipmentToTradeAgentChangeItemKeyByItem(Parameters, Chain) Export
+	Chain.ChangeItemKeyByItem.Enable = True;
+	Chain.ChangeItemKeyByItem.Setter = "SetShipmentToTradeAgentItemKey";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeItemKeyByItemOptions();
+		Options.Item    = GetShipmentToTradeAgentItem(Parameters, Row.Key);
+		Options.ItemKey = GetShipmentToTradeAgentItemKey(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepShipmentToTradeAgentChangeItemKeyByItem";
+		Chain.ChangeItemKeyByItem.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region SHIPMENT_TO_TRADE_AGENT_SERIAL_LOT_NUMBER
+
+// ShipmentToTradeAgent.SerialLotNumber.Set
+Procedure SetShipmentToTradeAgentSerialLotNumber(Parameters, Results) Export
+	Binding = BindShipmentToTradeAgentSerialLotNumber(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ShipmentToTradeAgent.SerialLotNumber.Get
+Function GetShipmentToTradeAgentSerialLotNumber(Parameters, _Key)
+	Binding = BindShipmentToTradeAgentSerialLotNumber(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// ShipmentToTradeAgent.SerialLotNumber.Bind
+Function BindShipmentToTradeAgentSerialLotNumber(Parameters)
+	DataPath = "ShipmentToTradeAgent.SerialLotNumber";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ShipmentToTradeAgent.SeriaLotNumber.ClearInventorySerialLotNumberByItemKey.Step
+Procedure StepShipmentToTradeAgentClearSerialLotNumberByItemKey(Parameters, Chain) Export
+	Chain.ClearSerialLotNumberByItemKey.Enable = True;
+	Chain.ClearSerialLotNumberByItemKey.Setter = "SetShipmentToTradeAgentSerialLotNumber";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ClearSerialLotNumberByItemKeyOptions();
+		Options.ItemKeyIsChanged  = GetShipmentToTradeAgentItemKey_IsChanged(Parameters, Row.Key);
+		Options.CurrentSerialLotNumber = GetShipmentToTradeAgentSerialLotNumber(Parameters, Row.Key);
+		Options.Key      = Row.Key;
+		Options.StepName = "StepShipmentToTradeAgentClearSerialLotNumberByItemKey";
+		Chain.ClearSerialLotNumberByItemKey.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region SHIPMENT_TO_TRADE_AGENT_USE_SERIAL_LOT_NUMBER
+
+// ShipmentToTradeAgent.UseSerialLotNumber.Set
+Procedure SetShipmentToTradeAgentUseSerialLotNumber(Parameters, Results) Export
+	Binding = BindShipmentToTradeAgentUseSerialLotNumber(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ShipmentToTradeAgent.UseSerialLotNumber.Bind
+Function BindShipmentToTradeAgentUseSerialLotNumber(Parameters)
+	DataPath = "ShipmentToTradeAgent.UseSerialLotNumber";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ShipmentToTradeAgent.UseSerialLotNumber.ShipmentToTradeAgentChangeUseSerialLotNumberByItemKey.Step
+Procedure StepShipmentToTradeAgentChangeUseSerialLotNumberByItemKey(Parameters, Chain) Export
+	Chain.ChangeUseSerialLotNumberByItemKey.Enable = True;
+	Chain.ChangeUseSerialLotNumberByItemKey.Setter = "SetShipmentToTradeAgentUseSerialLotNumber";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeUseSerialLotNumberByItemKeyOptions();
+		Options.ItemKey  = GetShipmentToTradeAgentItemKey(Parameters, Row.Key);
+		Options.Key      = Row.Key;
+		Options.StepName = "StepShipmentToTradeAgentChangeUseSerialLotNumberByItemKey";
+		Chain.ChangeUseSerialLotNumberByItemKey.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region SHIPMENT_TO_TRADE_AGENT_QUANTITY
+
+// ShipmentToTradeAgent.Quantity.OnChange
+Procedure ShipmentToTradeAgentQuantityOnChange(Parameters) Export
+	Binding = BindShipmentToTradeAgentQuantity(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ShipmentToTradeAgent.Quantity.Set
+Procedure SetShipmentToTradeAgentQuantity(Parameters, Results) Export
+	Binding = BindShipmentToTradeAgentQuantity(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ShipmentToTradeAgent.Quantity.Bind
+Function BindShipmentToTradeAgentQuantity(Parameters)
+	DataPath = "ShipmentToTradeAgent.Quantity";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#EndRegion
+
+#Region RECEIPT_FROM_CONSIGNOR
+
+#Region RECEIPT_FROM_CONSIGNOR_ITEM
+
+// ReceiptFromConsignor.Item.OnChange
+Procedure ReceiptFromConsignorItemOnChange(Parameters) Export
+	Binding = BindReceiptFromConsignorItem(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ReceiptFromConsignor.Item.Set
+Procedure SetReceiptFromConsignorItem(Parameters, Results) Export
+	Binding = BindReceiptFromConsignorItem(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ReceiptFromConsignor.Item.Get
+Function GetReceiptFromConsignorItem(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindReceiptFromConsignorItem(Parameters).DataPath, _Key);
+EndFunction
+
+// ReceiptFromConsignor.Item.Bind
+Function BindReceiptFromConsignorItem(Parameters)
+	DataPath = "ReceiptFromConsignor.Item";
+	Binding = New Structure();
+	Binding.Insert("OpeningEntry", "StepReceiptFromConsignorChangeItemKeyByItem");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region RECEIPT_FROM_CONSIGNOR_ITEMKEY
+
+// ReceiptFromConsignor.ItemKey.OnChange
+Procedure ReceiptFromConsignorItemKeyOnChange(Parameters) Export
+	Binding = BindReceiptFromConsignorItemKey(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ReceiptFromConsignor.ItemKey.Set
+Procedure SetReceiptFromConsignorItemKey(Parameters, Results) Export
+	Binding = BindReceiptFromConsignorItemKey(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ReceiptFromConsignor.ItemKey.Get
+Function GetReceiptFromConsignorItemKey(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindReceiptFromConsignorItemKey(Parameters).DataPath, _Key);
+EndFunction
+
+// ReceiptFromConsignor.ItemKey.Get.IsChanged
+Function GetReceiptFromConsignorItemKey_IsChanged(Parameters, _Key)
+	Return IsChangedProperty(Parameters, BindReceiptFromConsignorItemKey(Parameters).DataPath, _Key).IsChanged
+		Or IsChangedPropertyDirectly_List(Parameters, _Key).IsChanged;
+EndFunction
+
+// ReceiptFromConsignor.ItemKey.Bind
+Function BindReceiptFromConsignorItemKey(Parameters)
+	DataPath = "ReceiptFromConsignor.ItemKey";
+	Binding = New Structure();
+	Binding.Insert("OpeningEntry", 
+		"StepReceiptFromConsignorChangeUseSerialLotNumberByItemKey,
+		|StepReceiptFromConsignorClearSerialLotNumberByItemKey");
+		
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ReceiptFromConsignor.ItemKey.ChangeItemKeyByItem.Step
+Procedure StepReceiptFromConsignorChangeItemKeyByItem(Parameters, Chain) Export
+	Chain.ChangeItemKeyByItem.Enable = True;
+	Chain.ChangeItemKeyByItem.Setter = "SetReceiptFromConsignorItemKey";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeItemKeyByItemOptions();
+		Options.Item    = GetReceiptFromConsignorItem(Parameters, Row.Key);
+		Options.ItemKey = GetReceiptFromConsignorItemKey(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepReceiptFromConsignorChangeItemKeyByItem";
+		Chain.ChangeItemKeyByItem.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region RECEIPT_FROM_CONSIGNOR_SERIAL_LOT_NUMBER
+
+// ReceiptFromConsignor.SerialLotNumber.Set
+Procedure SetReceiptFromConsignorSerialLotNumber(Parameters, Results) Export
+	Binding = BindReceiptFromConsignorSerialLotNumber(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ReceiptFromConsignor.SerialLotNumber.Get
+Function GetReceiptFromConsignorSerialLotNumber(Parameters, _Key)
+	Binding = BindReceiptFromConsignorSerialLotNumber(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// ReceiptFromConsignor.SerialLotNumber.Bind
+Function BindReceiptFromConsignorSerialLotNumber(Parameters)
+	DataPath = "ReceiptFromConsignor.SerialLotNumber";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ReceiptFromConsignor.SeriaLotNumber.ClearReceiptFromConsignorSerialLotNumberByItemKey.Step
+Procedure StepReceiptFromConsignorClearSerialLotNumberByItemKey(Parameters, Chain) Export
+	Chain.ClearSerialLotNumberByItemKey.Enable = True;
+	Chain.ClearSerialLotNumberByItemKey.Setter = "SetReceiptFromConsignorSerialLotNumber";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ClearSerialLotNumberByItemKeyOptions();
+		Options.ItemKeyIsChanged  = GetReceiptFromConsignorItemKey_IsChanged(Parameters, Row.Key);
+		Options.CurrentSerialLotNumber = GetReceiptFromConsignorSerialLotNumber(Parameters, Row.Key);
+		Options.Key      = Row.Key;
+		Options.StepName = "StepReceiptFromConsignorClearSerialLotNumberByItemKey";
+		Chain.ClearSerialLotNumberByItemKey.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region RECEIPT_FROM_CONSIGNOR_USE_SERIAL_LOT_NUMBER
+
+// ReceiptFromConsignor.UseSerialLotNumber.Set
+Procedure SetReceiptFromConsignorUseSerialLotNumber(Parameters, Results) Export
+	Binding = BindReceiptFromConsignorUseSerialLotNumber(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ReceiptFromConsignor.UseSerialLotNumber.Bind
+Function BindReceiptFromConsignorUseSerialLotNumber(Parameters)
+	DataPath = "ReceiptFromConsignor.UseSerialLotNumber";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// ReceiptFromConsignor.UseSerialLotNumber.ReceiptFromConsignorChangeUseSerialLotNumberByItemKey.Step
+Procedure StepReceiptFromConsignorChangeUseSerialLotNumberByItemKey(Parameters, Chain) Export
+	Chain.ChangeUseSerialLotNumberByItemKey.Enable = True;
+	Chain.ChangeUseSerialLotNumberByItemKey.Setter = "SetReceiptFromConsignorUseSerialLotNumber";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeUseSerialLotNumberByItemKeyOptions();
+		Options.ItemKey  = GetReceiptFromConsignorItemKey(Parameters, Row.Key);
+		Options.Key      = Row.Key;
+		Options.StepName = "StepReceiptFromConsignorChangeUseSerialLotNumberByItemKey";
+		Chain.ChangeUseSerialLotNumberByItemKey.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
+#Region RECEIPT_FROM_CONSIGNOR_QUANTITY
+
+// ReceiptFromConsignor.Quantity.OnChange
+Procedure ReceiptFromConsignorQuantityOnChange(Parameters) Export
+	Binding = BindReceiptFromConsignorQuantity(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ReceiptFromConsignor.Quantity.Set
+Procedure SetReceiptFromConsignorQuantity(Parameters, Results) Export
+	Binding = BindReceiptFromConsignorQuantity(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ReceiptFromConsignor.Quantity.Get
+Function GetReceiptFromConsignorQuantity(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindReceiptFromConsignorQuantity(Parameters).DataPath, _Key);
+EndFunction
+
+// ReceiptFromConsignor.Quantity.Bind
+Function BindReceiptFromConsignorQuantity(Parameters)
+	DataPath = "ReceiptFromConsignor.Quantity";
+	Binding = New Structure();	
+	Binding.Insert("OpeningEntry", "StepReceiptFromConsignorCalculations_IsQuantityChanged");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region RECEIPT_FROM_CONSIGNOR_PRICE
+
+// ReceiptFromConsignor.Price.OnChange
+Procedure ReceiptFromConsignorPriceOnChange(Parameters) Export
+	Binding = BindReceiptFromConsignorPrice(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ReceiptFromConsignor.Price.Set
+Procedure SetReceiptFromConsignorPrice(Parameters, Results) Export
+	Binding = BindReceiptFromConsignorPrice(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ReceiptFromConsignor.Price.Get
+Function GetReceiptFromConsignorPrice(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindReceiptFromConsignorPrice(Parameters).DataPath, _Key);
+EndFunction
+
+// ReceiptFromConsignor.Price.Bind
+Function BindReceiptFromConsignorPrice(Parameters)
+	DataPath = "ReceiptFromConsignor.Price";
+	Binding = New Structure();
+	Binding.Insert("OpeningEntry", "StepReceiptFromConsignorCalculations_IsPriceChanged");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region RECEIPT_FROM_CONSIGNOR_AMOUNT
+
+// ReceiptFromConsignor.Amount.OnChange
+Procedure ReceiptFromConsignorAmountOnChange(Parameters) Export
+	Binding = BindReceiptFromConsignorAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ReceiptFromConsignor.Amount.Set
+Procedure SetReceiptFromConsignorAmount(Parameters, Results) Export
+	Binding = BindReceiptFromConsignorAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ReceiptFromConsignor.Amount.Get
+Function GetReceiptFromConsignorAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindReceiptFromConsignorAmount(Parameters).DataPath , _Key);
+EndFunction
+
+// ReceiptFromConsignor.Amount.Bind
+Function BindReceiptFromConsignorAmount(Parameters)
+	DataPath = "ReceiptFromConsignor.Amount";
+	Binding = New Structure();
+	Binding.Insert("OpeningEntry", "StepReceiptFromConsignorCalculations_IsAmountChanged");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region RECEIPT_FROM_CONSIGNOR_CALCULATION
+
+// ReceiptFromConsignor.SimpleCalculations.[IsQuantityChanged].Step
+Procedure StepReceiptFromConsignorCalculations_IsQuantityChanged(Parameters, Chain) Export
+	StepReceiptFromConsignorCalculations(Parameters, Chain, "IsQuantityChanged");
+EndProcedure
+
+// ReceiptFromConsignor.SimpleCalculations.[IsPriceChanged].Step
+Procedure StepReceiptFromConsignorCalculations_IsPriceChanged(Parameters, Chain) Export
+	StepReceiptFromConsignorCalculations(Parameters, Chain, "IsPriceChanged");
+EndProcedure
+
+// ReceiptFromConsignor.SimpleCalculations.[IsAmountChanged].Step
+Procedure StepReceiptFromConsignorCalculations_IsAmountChanged(Parameters, Chain) Export
+	StepReceiptFromConsignorCalculations(Parameters, Chain, "IsAmountChanged");
+EndProcedure
+
+// ReceiptFromConsignor.Calculations.Set
+Procedure SetReceiptFromConsignorCalculations(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Price" , BindReceiptFromConsignorPrice(Parameters));
+	ResourceToBinding.Insert("Amount", BindReceiptFromConsignorAmount(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+Procedure StepReceiptFromConsignorCalculations(Parameters, Chain, WhoIsChanged)
+	Chain.SimpleCalculations.Enable = True;
+	Chain.SimpleCalculations.Setter = "SetReceiptFromConsignorCalculations";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options     = ModelClientServer_V2.SimpleCalculationsOptions();
+		Options.Ref = Parameters.Object.Ref;
+		Options.Key = Row.Key;
+		Options.DontExecuteIfExecutedBefore = True;
+		
+		If WhoIsChanged = "IsPriceChanged" Or WhoIsChanged = "IsQuantityChanged" Then
+			Options.CalculateAmount.Enable = True;
+		ElsIf WhoIsChanged = "IsAmountChanged" Then
+			Options.CalculatePrice.Enable = True;
+		Else
+			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
+		EndIf;
+		
+		Options.Amount   = GetReceiptFromConsignorAmount(Parameters, Row.Key);
+		Options.Price    = GetReceiptFromConsignorPrice(Parameters, Row.Key);
+		Options.Quantity = GetReceiptFromConsignorQuantity(Parameters, Row.Key);
+		Options.StepName = "StepReceiptFromConsignorCalculations";
+		Chain.SimpleCalculations.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
 #Region ACCOUNT_BALANCE
 
 #Region ACCOUNT_BALANCE_ACCOUNT
@@ -10639,6 +11333,8 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetBillOfMaterialsNotify"            Then ViewClient_V2.OnSetBillOfMaterialsNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListBillOfMaterialsNotify"    Then ViewClient_V2.OnSetItemListBillOfMaterialsNotify(Parameters);
 	ElsIf ViewNotify = "OnSetTradeAgentFeeTypeNotify"          Then ViewClient_V2.OnSetTradeAgentFeeTypeNotify(Parameters);
+	ElsIf ViewNotify = "ShipmentToTradeAgentOnAddRowFormNotify" Then ViewClient_V2.ShipmentToTradeAgentOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "ReceiptFromConsignorOnAddRowFormNotify" Then ViewClient_V2.ReceiptFromConsignorOnAddRowFormNotify(Parameters);
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);
 	EndIf;

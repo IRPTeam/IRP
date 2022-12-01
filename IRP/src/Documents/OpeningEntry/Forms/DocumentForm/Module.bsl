@@ -76,6 +76,23 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrenciesAccountReceivableByDocuments.Enabled  = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesAccountPayableByAgreements.Enabled    = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesAccountPayableByDocuments.Enabled     = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesReceiptFromConsignor.Enabled          = Not Form.ReadOnly;
+	
+	UseCommissionTrading = FOServer.IsUseCommissionTrading();
+	
+	Form.Items.GroupReceiptFromConsignor.Visible = UseCommissionTrading;
+
+	Form.Items.PartnerTradeAgent.Visible    = UseCommissionTrading;
+	Form.Items.LegalNameTradeAgent.Visible  = UseCommissionTrading;
+	Form.Items.AgreementTradeAgent.Visible  = UseCommissionTrading;
+	Form.Items.ShipmentToTradeAgent.Visible = UseCommissionTrading;
+
+	Form.Items.GroupShipmentToTradeAgent.Visible = UseCommissionTrading;
+
+	Form.Items.PartnerConsignor.Visible     = UseCommissionTrading;
+	Form.Items.LegalNameConsignor.Visible   = UseCommissionTrading;
+	Form.Items.AgreementConsignor.Visible   = UseCommissionTrading;
+	Form.Items.ReceiptFromConsignor.Visible = UseCommissionTrading;
 EndProcedure
 
 &AtClientAtServerNoContext
@@ -839,14 +856,360 @@ Procedure EditCurrenciesAccountPayableByDocuments(Command)
 EndProcedure
 
 &AtClient
+Procedure EditCurrenciesReceiptFromConsignor(Command)
+	CurrentData = ThisObject.Items.ReceiptFromConsignor.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V9(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
 
 #EndRegion
 
+
+#Region PARTNER_TRADE_AGENT
+
+&AtClient
+Procedure PartnerTradeAgentOnChange(Item)
+	ViewClient_V2.PartnerTradeAgentOnChange(Object, ThisObject, "ShipmentToTradeAgent");
+EndProcedure
+
+&AtClient
+Procedure PartnerTradeAgentStartChoice(Item, ChoiceData, StandardProcessing)
+	TransactionType = PredefinedValue("Enum.SalesTransactionTypes.ShipmentToTradeAgent");
+	DocumentsClient.PartnerStartChoice_TransactionTypeFilter(Object, ThisObject, Item, ChoiceData, StandardProcessing, TransactionType);
+EndProcedure
+
+&AtClient
+Procedure PartnerTradeAgentEditTextChange(Item, Text, StandardProcessing)
+	TransactionType = PredefinedValue("Enum.SalesTransactionTypes.ShipmentToTradeAgent");
+	DocumentsClient.PartnerTextChange_TransactionTypeFilter(Object, ThisObject, Item, Text, StandardProcessing, TransactionType);	
+EndProcedure
+
+#EndRegion
+
+#Region LEGAL_NAME_TRADE_AGENT
+
+&AtClient
+Procedure LegalNameTradeAgentOnChange(Item)
+	ViewClient_V2.LegalNameOnChange(Object, ThisObject, "ShipmentToTradeAgent");
+EndProcedure
+
+&AtClient
+Procedure LegalNameTradeAgentStartChoice(Item, ChoiceData, StandardProcessing)
+	DocumentsClient.LegalNameStartChoice_PartnerFilter(Object, ThisObject, Item, ChoiceData, StandardProcessing, Object.PartnerTradeAgent);
+EndProcedure
+
+&AtClient
+Procedure LegalNameTradeAgentEditTextChange(Item, Text, StandardProcessing)
+	DocumentsClient.LegalNameTextChange_PartnerFilter(Object, ThisObject, Item, Text, StandardProcessing, Object.PartnerTradeAgent);
+EndProcedure
+
+#EndRegion
+
+#Region AGREEMENT_TRADE_AGENT
+
+&AtClient
+Procedure AgreementTradeAgentOnChange(Item)
+	ViewClient_V2.AgreementTradeAgentOnChange(Object, ThisObject, "ShipmentToTradeAgent");
+EndProcedure
+
+&AtClient
+Procedure AgreementTradeAgentStartChoice(Item, ChoiceData, StandardProcessing)
+	TransactionType = PredefinedValue("Enum.SalesTransactionTypes.ShipmentToTradeAgent");
+	_Parameters = New Structure();
+	_Parameters.Insert("Partner"   , Object.PartnerTradeAgent);
+	_Parameters.Insert("Agreement" , Object.AgreementTradeAgent);
+	_Parameters.Insert("LegalName" , Object.LegalNameTradeAgent);
+	DocumentsClient.AgreementStartChoice_TransactionTypeFilter(Object, ThisObject, Item, ChoiceData, StandardProcessing, TransactionType, _Parameters);
+EndProcedure
+
+&AtClient
+Procedure AgreementTradeAgentEditTextChange(Item, Text, StandardProcessing)
+	TransactionType = PredefinedValue("Enum.SalesTransactionTypes.ShipmentToTradeAgent");
+	_Parameters = New Structure();
+	_Parameters.Insert("Partner"   , Object.PartnerTradeAgent);
+	DocumentsClient.AgreementTextChange_TransactionTypeFilter(Object, ThisObject, Item, Text, StandardProcessing, TransactionType, _Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region PARTNER_CONSIGNOR
+
+&AtClient
+Procedure PartnerConsignorOnChange(Item)
+	ViewClient_V2.PartnerConsignorOnChange(Object, ThisObject, "ReceiptFromConsignor");
+EndProcedure
+
+&AtClient
+Procedure PartnerConsignorStartChoice(Item, ChoiceData, StandardProcessing)
+	TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.ReceiptFromConsignor");
+	DocumentsClient.PartnerStartChoice_TransactionTypeFilter(Object, ThisObject, Item, ChoiceData, StandardProcessing, TransactionType);	
+EndProcedure
+
+&AtClient
+Procedure PartnerConsignorEditTextChange(Item, Text, StandardProcessing)
+	TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.ReceiptFromConsignor");
+	DocumentsClient.PartnerTextChange_TransactionTypeFilter(Object, ThisObject, Item, Text, StandardProcessing, TransactionType);	
+EndProcedure
+
+#EndRegion
+
+#Region LEGAL_NAME_CONSIGNOR
+
+&AtClient
+Procedure LegalNameConsignorOnChange(Item)
+	ViewClient_V2.LegalNameOnChange(Object, ThisObject, "ReceiptFromConsignor");
+EndProcedure
+
+&AtClient
+Procedure LegalNameConsignorStartChoice(Item, ChoiceData, StandardProcessing)
+	DocumentsClient.LegalNameStartChoice_PartnerFilter(Object, ThisObject, Item, ChoiceData, StandardProcessing, Object.PartnerConsignor);
+EndProcedure
+
+&AtClient
+Procedure LegalNameConsignorEditTextChange(Item, Text, StandardProcessing)
+	DocumentsClient.LegalNameTextChange_PartnerFilter(Object, ThisObject, Item, Text, StandardProcessing, Object.PartnerConsignor);
+EndProcedure
+
+#EndRegion
+
+#Region AGREEMENT_CONSIGNOR
+
+&AtClient
+Procedure AgreementConsignorOnChange(Item)
+	ViewClient_V2.AgreementConsignorOnChange(Object, ThisObject, "ReceiptFromConsignor");
+EndProcedure
+
+&AtClient
+Procedure AgreementConsignorStartChoice(Item, ChoiceData, StandardProcessing)
+	TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.ReceiptFromConsignor");
+	_Parameters = New Structure();
+	_Parameters.Insert("Partner"   , Object.PartnerConsignor);
+	_Parameters.Insert("Agreement" , Object.AgreementConsignor);
+	_Parameters.Insert("LegalName" , Object.LegalNameConsignor);
+	DocumentsClient.AgreementStartChoice_TransactionTypeFilter(Object, ThisObject, Item, ChoiceData, StandardProcessing, TransactionType, _Parameters);
+EndProcedure
+
+&AtClient
+Procedure AgreementConsignorEditTextChange(Item, Text, StandardProcessing)
+	TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.ReceiptFromConsignor");
+	_Parameters = New Structure();
+	_Parameters.Insert("Partner"   , Object.PartnerConsignor);
+	DocumentsClient.AgreementTextChange_TransactionTypeFilter(Object, ThisObject, Item, Text, StandardProcessing, TransactionType, _Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region SHIPMENT_TO_TRADE_AGENT
+
+&AtClient
+Procedure ShipmentToTradeAgentBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	ViewClient_V2.ShipmentToTradeAgentBeforeAddRow(Object, ThisObject, Cancel, Clone);
+EndProcedure
+
+&AtClient
+Procedure ShipmentToTradeAgentAfterDeleteRow(Item)
+	ViewClient_V2.ShipmentToTradeAgentAfterDeleteRow(Object, ThisObject);
+EndProcedure
+
+#Region SHIPMENT_TO_TRADE_AGENT_COLUMNS
+
+#Region _ITEM
+
+&AtClient
+Procedure ShipmentToTradeAgentItemOnChange(Item)
+	ViewClient_V2.ShipmentToTradeAgentItemOnChange(Object, ThisObject, Undefined);
+EndProcedure
+
+&AtClient
+Procedure ShipmentToTradeAgentItemStartChoice(Item, ChoiceData, StandardProcessing)
+	DocumentsClient.ItemListItemStartChoice_IsNotServiceFilter(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ShipmentToTradeAgentItemEditTextChange(Item, Text, StandardProcessing)
+	DocumentsClient.ItemListItemEditTextChange_IsNotServiceFilter(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region _ITEM_KEY
+
+&AtClient
+Procedure ShipmentToTradeAgentItemKeyOnChange(Item)
+	ViewClient_V2.ShipmentToTradeAgentItemKeyOnChange(Object, ThisObject, Undefined);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY
+
+&AtClient
+Procedure ShipmentToTradeAgentQuantityOnChange(Item)
+	ViewClient_V2.ShipmentToTradeAgentQuantityOnChange(Object, ThisObject, Undefined);
+EndProcedure
+
+#EndRegion
+
+#Region SERIAL_LOT_NUMBER
+
+&AtClient
+Procedure ShipmentToTradeAgentSerialLotNumberStartChoice(Item, ChoiceData, StandardProcessing)
+	CurrentData = Items.ShipmentToTradeAgent.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item"    , CurrentData.Item);
+	FormParameters.Insert("ItemKey" , CurrentData.ItemKey);
+
+	SerialLotNumberClient.StartChoice(Item, ChoiceData, StandardProcessing, ThisObject, FormParameters);	
+EndProcedure
+
+&AtClient
+Procedure ShipmentToTradeAgentSerialLotNumberEditTextChange(Item, Text, StandardProcessing)
+	CurrentData = Items.ShipmentToTradeAgent.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item"    , CurrentData.Item);
+	FormParameters.Insert("ItemKey" , CurrentData.ItemKey);
+
+	SerialLotNumberClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);	
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region RECEIP_FROM_CONSIGNOR
+
+&AtClient
+Procedure ReceiptFromConsignorBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	ViewClient_V2.ReceiptFromConsignorBeforeAddRow(Object, ThisObject, Cancel, Clone);
+EndProcedure
+
+&AtClient
+Procedure ReceiptFromConsignorAfterDeleteRow(Item)
+	ViewClient_V2.ReceiptFromConsignorAfterDeleteRow(Object, ThisObject);
+EndProcedure
+
+#Region RECEIP_FROM_CONSIGNOR_COLUMNS
+
+#Region _ITEM
+
+&AtClient
+Procedure ReceiptFromConsignorItemOnChange(Item)
+	ViewClient_V2.ReceiptFromConsignorItemOnChange(Object, ThisObject, Undefined);
+EndProcedure
+
+&AtClient
+Procedure ReceiptFromConsignorItemStartChoice(Item, ChoiceData, StandardProcessing)
+	DocumentsClient.ItemListItemStartChoice_IsNotServiceFilter(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ReceiptFromConsignorItemEditTextChange(Item, Text, StandardProcessing)
+	DocumentsClient.ItemListItemEditTextChange_IsNotServiceFilter(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region _ITEM_KEY
+
+&AtClient
+Procedure ReceiptFromConsignorItemKeyOnChange(Item)
+	ViewClient_V2.ReceiptFromConsignorItemKeyOnChange(Object, ThisObject, Undefined);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY
+
+&AtClient
+Procedure ReceiptFromConsignorQuantityOnChange(Item)
+	ViewClient_V2.ReceiptFromConsignorQuantityOnChange(Object, ThisObject, Undefined);
+EndProcedure
+
+#EndRegion
+
+#Region PRICE
+
+&AtClient
+Procedure ReceiptFromConsignorPriceOnChange(Item)
+	ViewClient_V2.ReceiptFromConsignorPriceOnChange(Object, ThisObject, Undefined);
+EndProcedure
+
+#EndRegion
+
+#Region AMOUNT
+
+&AtClient
+Procedure ReceiptFromConsignorAmountOnChange(Item)
+	ViewClient_V2.ReceiptFromConsignorAmountOnChange(Object, ThisObject, Undefined);
+EndProcedure
+
+#EndRegion
+
+#Region SERIAL_LOT_NUMBER
+
+&AtClient
+Procedure ReceiptFromConsignorSerialLotNumberStartChoice(Item, ChoiceData, StandardProcessing)
+	CurrentData = Items.ReceiptFromConsignor.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item"    , CurrentData.Item);
+	FormParameters.Insert("ItemKey" , CurrentData.ItemKey);
+
+	SerialLotNumberClient.StartChoice(Item, ChoiceData, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+&AtClient
+Procedure ReceiptFromConsignorSerialLotNumberEditTextChange(Item, Text, StandardProcessing)
+	CurrentData = Items.ReceiptFromConsignor.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item"    , CurrentData.Item);
+	FormParameters.Insert("ItemKey" , CurrentData.ItemKey);
+
+	SerialLotNumberClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
 MainTables = "AccountBalance, AdvanceFromCustomers, AdvanceToSuppliers,
 		|AccountPayableByAgreements, AccountPayableByDocuments,
 		|AccountReceivableByDocuments, AccountReceivableByAgreements,
-		|Inventory";
+		|Inventory,
+		|ShipmentToTradeAgent, ReceiptFromConsignor";
 

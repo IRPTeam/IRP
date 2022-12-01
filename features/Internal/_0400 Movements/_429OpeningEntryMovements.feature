@@ -58,6 +58,7 @@ Scenario: _042900 preparation (Opening entry)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
+		When Create information register TaxSettings records (Concignor 1)
 		When update ItemKeys
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
@@ -78,6 +79,20 @@ Scenario: _042900 preparation (Opening entry)
 				| "DocumentDiscount" |
 			When add Plugin for document discount
 			When Create catalog CancelReturnReasons objects
+	* Company settings
+		Given I open hyperlink "e1cib/list/Catalog.Companies"	
+		And I go to line in "List" table
+			| Description  |
+			| Main Company |
+		And I select current line in "List" table
+		And I move to "Comission trading" tab
+		And I click Select button of "Trade agent store" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Trade agent store' |
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I close all client application windows
 	* Load documents
 		When Create document OpeningEntry objects
 		When Create document OpeningEntry objects (stock control serial lot numbers)

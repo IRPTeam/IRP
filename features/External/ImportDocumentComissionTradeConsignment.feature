@@ -49,6 +49,7 @@ Scenario: Create document CalculationMovementCosts objects (comission trade, con
 		| 'Ref'                                                                               | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'BeginDate'          | 'EndDate'            | 'CalculationMode'                         | 'RaiseOnCalculationError' |
 		| 'e1cib/data/Document.CalculationMovementCosts?ref=b788b483d858e32911ed5a8bbe642066' | 'False'        | 1        | '28.10.2022 12:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | '28.10.2022 0:00:00' | '05.11.2022 0:00:00' | 'Enum.CalculationMode.LandedCost'         | 'False'                   |
 		| 'e1cib/data/Document.CalculationMovementCosts?ref=b788b483d858e32911ed5a8bbe642073' | 'False'        | 2        | '02.11.2022 12:49:50' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | '28.10.2022 0:00:00' | '03.11.2022 0:00:00' | 'Enum.CalculationMode.AdditionalItemCost' | 'False'                   |
+		| 'e1cib/data/Document.CalculationMovementCosts?ref=b788b483d858e32911ed5a8bbe642074' | 'False'        | 3        | '01.12.2022 12:49:50' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | '01.12.2022 0:00:00' | '01.12.2022 0:00:00' | 'Enum.CalculationMode.LandedCost'         | 'False'                   |
 
 Scenario: Create document SalesInvoice objects (comission trade, consignment)
 

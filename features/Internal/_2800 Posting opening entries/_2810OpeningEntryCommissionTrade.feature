@@ -59,6 +59,7 @@ Scenario: _410010 preparation (Opening entries)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog Partners objects (trade agent and consignor)
 		When Create catalog Agreements objects (commision trade, own companies)
+		When Create information register TaxSettings records (Concignor 1)
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"

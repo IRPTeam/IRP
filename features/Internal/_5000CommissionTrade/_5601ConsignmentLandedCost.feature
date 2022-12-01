@@ -62,6 +62,7 @@ Scenario: _05602 preparation (consignment landed cost)
 		When update ItemKeys
 		When Create catalog Partners objects
 		When Data preparation (comission stock)
+		When Create information register TaxSettings records (Concignor 1)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -84,8 +85,14 @@ Scenario: _05602 preparation (consignment landed cost)
 		When Create document SalesInvoice objects (comission trade, consignment)
 		When Create document SalesReturn objects (comission trade, consignment)
 		When Create document SalesReportFromTradeAgent objects (comission trade, consignment)
+		When Create document OpeningEntry objects (commission trade)
 		When Create document CalculationMovementCosts objects (comission trade, consignment)
 	* Post document
+		* Posting Opening entry
+			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
+			And Delay "3"
 		* Posting Purchase invoice
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 			Then I select all lines of "List" table

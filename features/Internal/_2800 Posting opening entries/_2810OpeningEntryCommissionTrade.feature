@@ -226,6 +226,16 @@ Scenario: _410012 create Opening entry shipment to trade agent
 			And I select current line in "List" table
 			Then the form attribute named "LegalNameTradeAgent" became equal to "Trade agent 2"
 			Then the form attribute named "AgreementTradeAgent" became equal to "Trade agent 2"
+			And I click Select button of "Legal name" field
+			And I go to line in "List" table
+				| 'Description'   |
+				| 'Trade agent 2' |
+			And I select current line in "List" table
+			And I click Select button of "Agreement" field
+			And I go to line in "List" table
+				| 'Description'   |
+				| 'Trade agent 2' |
+			And I select current line in "List" table
 		* First item (without serial lot number)
 			And I move to "Shipment to trade agent" tab
 			And in the table "ShipmentToTradeAgent" I click the button named "ShipmentToTradeAgentAdd"		
@@ -432,6 +442,16 @@ Scenario: _410013 create Opening entry receipt from consignor
 			And I select current line in "List" table
 			Then the form attribute named "LegalNameConsignor" became equal to "Consignor 1"
 			Then the form attribute named "AgreementConsignor" became equal to "Consignor partner term 1"
+			And I click Select button of "Legal name" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Consignor 1' |
+			And I select current line in "List" table
+			And I click Select button of "Agreement" field
+			And I go to line in "List" table
+				| 'Description'              |
+				| 'Consignor partner term 1' |
+			And I select current line in "List" table
 		* First item (without serial lot number)
 			And I move to "Receipt from consignor" tab
 			And in the table "ReceiptFromConsignor" I click the button named "ReceiptFromConsignorAdd"

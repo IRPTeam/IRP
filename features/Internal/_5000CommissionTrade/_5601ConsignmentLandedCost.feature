@@ -142,3 +142,14 @@ Scenario: _056003 check batch balance
 	And "Result" spreadsheet document contains "BathBalance_056_1" template lines by template
 	And I close all client application windows
 
+Scenario: _056004 check batch balance (Opening entry)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/app/Report.BatchBalance"
+	* Select period
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		And I input "01.12.2022" text in the field named "DateBegin"
+		And I input "01.12.2022" text in the field named "DateEnd"
+		And I click the button named "Select"
+	And I click "Generate" button
+	And "Result" spreadsheet document contains "BathBalance_056_2" template lines by template
+	And I close all client application windows

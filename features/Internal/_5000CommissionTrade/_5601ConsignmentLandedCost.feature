@@ -62,6 +62,7 @@ Scenario: _05602 preparation (consignment landed cost)
 		When update ItemKeys
 		When Create catalog Partners objects
 		When Data preparation (comission stock)
+		When Create information register TaxSettings records (Concignor 1)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -84,8 +85,14 @@ Scenario: _05602 preparation (consignment landed cost)
 		When Create document SalesInvoice objects (comission trade, consignment)
 		When Create document SalesReturn objects (comission trade, consignment)
 		When Create document SalesReportFromTradeAgent objects (comission trade, consignment)
+		When Create document OpeningEntry objects (commission trade)
 		When Create document CalculationMovementCosts objects (comission trade, consignment)
 	* Post document
+		* Posting Opening entry
+			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
+			And Delay "3"
 		* Posting Purchase invoice
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 			Then I select all lines of "List" table
@@ -135,3 +142,14 @@ Scenario: _056003 check batch balance
 	And "Result" spreadsheet document contains "BathBalance_056_1" template lines by template
 	And I close all client application windows
 
+Scenario: _056004 check batch balance (Opening entry)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/app/Report.BatchBalance"
+	* Select period
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		And I input "01.12.2022" text in the field named "DateBegin"
+		And I input "01.12.2022" text in the field named "DateEnd"
+		And I click the button named "Select"
+	And I click "Generate" button
+	And "Result" spreadsheet document contains "BathBalance_056_2" template lines by template
+	And I close all client application windows

@@ -306,7 +306,11 @@ EndFunction
 Function GetTaxRatesForConsignorBatches(Parameters) Export
 	ArrayOfCompany = New Array();
 	For Each Row In Parameters.ConsignorBatches Do
-		Company = Row.Batch.LegalName;
+		If TypeOf(Row.Batch) = Type("DocumentRef.OpeningEntry") Then
+			Company = Row.Batch.LegalNameConsignor;
+		Else
+			Company = Row.Batch.LegalName;
+		EndIf;
 		If ValueIsFilled(Company) And ArrayOfCompany.Find(Company) = Undefined Then
 			ArrayOfCompany.Add(Company);
 		EndIf;

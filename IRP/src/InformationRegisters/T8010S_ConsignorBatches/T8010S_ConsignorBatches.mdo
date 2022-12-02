@@ -122,6 +122,7 @@
     </synonym>
     <type>
       <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.OpeningEntry</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

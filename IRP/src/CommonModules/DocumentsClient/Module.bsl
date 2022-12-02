@@ -35,7 +35,7 @@ EndProcedure
 Procedure PartnerStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, TransactionType) Export
 	PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(TransactionType);
 	
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+	OpenSettings = GetOpenSettingsStructure();
 
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
@@ -165,10 +165,34 @@ EndProcedure
 
 #Region ItemAgreement
 
-Procedure AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, TransactionType) Export
+Procedure AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, TransactionType, Parameters = Undefined) Export
+	If Parameters <> Undefined Then
+		If Parameters.Property("Company") Then
+			Company = Parameters.Company;
+		Else
+			Company = Object.Company;
+		EndIf;
+		
+		If Parameters.Property("Partner") Then
+			Partner = Parameters.Partner;
+		Else
+			Partner = Object.Partner;
+		EndIf;
+		
+		If Parameters.Property("LegalName") Then
+			LegalName = Parameters.LegalName;
+		Else
+			LegalName = Object.LegalName;
+		EndIf;
+	Else
+		Company   = Object.Company;
+		Partner   = Object.Partner;
+		LegalName = Object.LegalName;
+	EndIf;
+	
 	AgreementType = ModelServer_V2.GetAgreementTypeByTransactionType(TransactionType);
 	
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+	OpenSettings = GetOpenSettingsStructure();
 
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
@@ -176,16 +200,16 @@ Procedure AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceD
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"), DataCompositionComparisonType.NotEqual));
 	
 	OpenSettings.FormParameters = New Structure();
-	OpenSettings.FormParameters.Insert("Partner"                     , Object.Partner);
+	OpenSettings.FormParameters.Insert("Partner"                     , Partner);
 	OpenSettings.FormParameters.Insert("IncludeFilterByPartner"      , True);
 	OpenSettings.FormParameters.Insert("IncludePartnerSegments"      , True);
 	OpenSettings.FormParameters.Insert("EndOfUseDate"                , Object.Date);
 	OpenSettings.FormParameters.Insert("IncludeFilterByEndOfUseDate" , True);
 	
 	OpenSettings.FillingData = New Structure();
-	OpenSettings.FillingData.Insert("Partner"   , Object.Partner);
-	OpenSettings.FillingData.Insert("LegalName" , Object.LegalName);
-	OpenSettings.FillingData.Insert("Company"   , Object.Company);
+	OpenSettings.FillingData.Insert("Partner"   , Partner);
+	OpenSettings.FillingData.Insert("LegalName" , LegalName);
+	OpenSettings.FillingData.Insert("Company"   , Company);
 	OpenSettings.FillingData.Insert("Type"      , AgreementType);
 
 	AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
@@ -226,7 +250,17 @@ Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
-Procedure AgreementTextChange_TransactionTypeFilter(Object, Form, Item, Text, StandardProcessing, TransactionType) Export
+Procedure AgreementTextChange_TransactionTypeFilter(Object, Form, Item, Text, StandardProcessing, TransactionType, Parameters = Undefined) Export
+	If Parameters <> Undefined Then
+		If Parameters.Property("Partner") Then
+			Partner = Parameters.Partner;
+		Else
+			Partner = Object.Partner;
+		EndIf;
+	Else
+		Partner   = Object.Partner;
+	EndIf;
+	
 	AgreementType = ModelServer_V2.GetAgreementTypeByTransactionType(TransactionType);
 	
 	ArrayOfFilters = New Array();
@@ -238,8 +272,8 @@ Procedure AgreementTextChange_TransactionTypeFilter(Object, Form, Item, Text, St
 	AdditionalParameters.Insert("IncludeFilterByPartner"      , True);
 	AdditionalParameters.Insert("IncludePartnerSegments"      , True);
 	AdditionalParameters.Insert("EndOfUseDate"                , Object.Date);
-	AdditionalParameters.Insert("Partner"                     , Object.Partner);
-	DocumentsClient.AgreementEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
+	AdditionalParameters.Insert("Partner"                     , Partner);
+	AgreementEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
 EndProcedure
 
 Procedure AgreementEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters = Undefined,
@@ -265,6 +299,21 @@ EndProcedure
 #EndRegion
 
 #Region ItemCompany
+
+Procedure LegalNameStartChoice_PartnerFilter(Object, Form, Item, ChoiceData, StandardProcessing, Partner) Export
+	OpenSettings = GetOpenSettingsStructure();
+
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.FormParameters = New Structure();
+	If ValueIsFilled(Partner) Then
+		OpenSettings.FormParameters.Insert("Partner", Partner);
+		OpenSettings.FormParameters.Insert("FilterByPartnerHierarchy", True);
+	EndIf;
+	OpenSettings.FillingData = New Structure("Partner", Partner);
+
+	CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
 	If OpenSettings = Undefined Then
@@ -298,6 +347,17 @@ Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing,
 	SetCurrentRow(Object, Form, Item, OpenSettings.FormParameters, "LegalName");
 
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure LegalNameTextChange_PartnerFilter(Object, Form, Item, Text, StandardProcessing, Partner) Export
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	AdditionalParameters = New Structure();
+	If ValueIsFilled(Partner) Then
+		AdditionalParameters.Insert("Partner", Partner);
+		AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
+	EndIf;
+	CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
 EndProcedure
 
 Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters = Undefined, AdditionalParameters = Undefined) Export
@@ -643,6 +703,18 @@ Function GetOpenSettingsForSelectItemWithoutServiceFilter(OpenSettings = Undefin
 	Return OpenSettings;
 EndFunction
 
+Procedure ItemListItemStartChoice_IsNotServiceFilter(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	OpenSettings = GetOpenSettingsStructure();
+
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type", 
+		PredefinedValue("Enum.ItemTypes.Service"), DataCompositionComparisonType.NotEqual));
+
+	ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
 Procedure ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
 
 	If OpenSettings = Undefined Then
@@ -684,6 +756,14 @@ Function GetArrayOfFiltersForSelectItemWithoutServiceFilter(AddInfo = Undefined)
 	ArrayOfFilters.Add(NotService);
 	Return ArrayOfFilters;
 EndFunction
+
+Procedure ItemListItemEditTextChange_IsNotServiceFilter(Object, Form, Item, Text, StandardProcessing) Export
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type", 
+		PredefinedValue("Enum.ItemTypes.Service"), ComparisonType.NotEqual));
+	ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
+EndProcedure
 
 Procedure ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters = Undefined) Export
 	If ArrayOfFilters = Undefined Then
@@ -1150,7 +1230,9 @@ Function GetFormItemNames()
 				|ProductionTreeIsMaterial,
 				|ProductionTreeIsService,
 				|ProductionsKey,
-				|ConsignorBatches";
+				|ConsignorBatches,
+				|ShipmentToTradeAgentKey, ShipmentToTradeAgentUseSerialLotNumber,
+				|ReceiptFromConsignorKey, ReceiptFromConsignorUseSerialLotNumber";
 	Return ItemNames;
 EndFunction	
 

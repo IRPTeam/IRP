@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1d40562f-e6cf-496e-bbe2-25062d51a544">
-  <name>DocSalesReportFromTradeAgentServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc sales report from trade agent server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocSalesReportFromTradeAgentServer</name>
+ <synonym>
+  <key>en</key>
+  <value>Doc sales report from trade agent server</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ отчет от комиссионера о продажах сервер</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

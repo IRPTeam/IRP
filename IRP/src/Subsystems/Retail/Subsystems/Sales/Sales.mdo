@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="08ac4f3c-1b3e-4b56-89f1-03ca1a890ca6">
-  <name>Sales</name>
-  <synonym>
-    <key>en</key>
-    <value>Sales</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.ConsolidatedRetailSales</content>
-  <content>Document.RetailReturnReceipt</content>
-  <content>Document.RetailSalesReceipt</content>
-  <parentSubsystem>Subsystem.Retail</parentSubsystem>
+ <name>Sales</name>
+ <synonym>
+  <key>en</key>
+  <value>Sales</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Продажа</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Satış</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.ConsolidatedRetailSales</content>
+ <content>Document.RetailReturnReceipt</content>
+ <content>Document.RetailSalesReceipt</content>
+ <parentSubsystem>Subsystem.Retail</parentSubsystem>
 </mdclass:Subsystem>

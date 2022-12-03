@@ -14,6 +14,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Planning period</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Период планирования</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Planlama dönemi</v8:content>
+				</v8:item>
 			</title>
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
@@ -39,6 +47,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Company</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Организация</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Şirket</v8:content>
+				</v8:item>
 			</title>
 			<role>
 				<dcscom:dimension>true</dcscom:dimension>
@@ -61,6 +77,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Q produced material</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество произведенного сырья</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Üretilen malzeme miktar</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -86,6 +110,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Q planned material</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество запланированого сырья</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Planlanan malzeme miktarı</v8:content>
+				</v8:item>
 			</title>
 			<useRestriction>
 				<field>true</field>
@@ -109,6 +141,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Q corrected production</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество исправленное производство</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Düzeltilen üretim miktarı</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -134,6 +174,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Q planned production</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество запланированого производства</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Üretim planlanan miktar</v8:content>
+				</v8:item>
 			</title>
 			<useRestriction>
 				<field>true</field>
@@ -158,6 +206,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Q produced production</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество произведеного производства</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Üretim üretilen miktar</v8:content>
+				</v8:item>
 			</title>
 			<useRestriction>
 				<field>true</field>
@@ -173,6 +229,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Q corrected material</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество исправленного сырья</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Düzeltilen malzeme miktarı</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -206,6 +270,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Material item</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Номенклатура сырья</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Hammadde malzeme</v8:content>
+				</v8:item>
 			</title>
 			<role>
 				<dcscom:ignoreNullValues>true</dcscom:ignoreNullValues>
@@ -219,6 +291,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Material item key</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Характеристика сырья</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Hammadde varyant</v8:content>
+				</v8:item>
 			</title>
 			<role>
 				<dcscom:ignoreNullValues>true</dcscom:ignoreNullValues>
@@ -231,6 +311,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Product item key</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Готовая продукция</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Mamul malzeme</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -529,6 +617,14 @@ end</expression>
 				<v8:lang>en</v8:lang>
 				<v8:content>Q planned</v8:content>
 			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Количество запланировано</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Planlanan miktar</v8:content>
+			</v8:item>
 		</title>
 	</calculatedField>
 	<calculatedField>
@@ -541,6 +637,14 @@ end</expression>
 			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>Q corrected</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Количество исправлено</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Düzeltilen miktar</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -555,6 +659,14 @@ end</expression>
 				<v8:lang>en</v8:lang>
 				<v8:content>Q produced</v8:content>
 			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Количество произведено</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Üretilen miktar</v8:content>
+			</v8:item>
 		</title>
 	</calculatedField>
 	<calculatedField>
@@ -567,6 +679,14 @@ end</expression>
 			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>Q need to produce</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Количество нужно произвести</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Üretim kalan miktar</v8:content>
 			</v8:item>
 		</title>
 		<appearance>
@@ -592,6 +712,14 @@ end</expression>
 			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>Q deviation</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Количество разница</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Fark miktarı</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -622,6 +750,14 @@ end</expression>
 				<v8:lang>en</v8:lang>
 				<v8:content>Begin of period</v8:content>
 			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Начало периода</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem başı</v8:content>
+			</v8:item>
 		</title>
 		<valueType>
 			<v8:Type>xs:dateTime</v8:Type>
@@ -640,6 +776,14 @@ end</expression>
 				<v8:lang>en</v8:lang>
 				<v8:content>End of period</v8:content>
 			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Конец периода</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem sonu</v8:content>
+			</v8:item>
 		</title>
 		<valueType>
 			<v8:Type>xs:dateTime</v8:Type>
@@ -657,6 +801,14 @@ end</expression>
 			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>Business unit</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Подразделение</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Departman</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -714,7 +866,20 @@ end</expression>
 					<dcsset:comparisonType>InList</dcsset:comparisonType>
 					<dcsset:right xsi:nil="true"/>
 					<dcsset:userSettingID>5f496f1d-c6cc-4927-8883-c0e01b7b9dee</dcsset:userSettingID>
-					<dcsset:userSettingPresentation xsi:type="xs:string">Planning periods</dcsset:userSettingPresentation>
+					<dcsset:userSettingPresentation xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Planning periods</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Периоды планирования</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Planlama dönemleri</v8:content>
+						</v8:item>
+					</dcsset:userSettingPresentation>
 				</dcsset:item>
 			</dcsset:filter>
 			<dcsset:dataParameters>
@@ -723,7 +888,20 @@ end</expression>
 					<dcscor:parameter>BusinessUnit</dcscor:parameter>
 					<dcscor:value xsi:nil="true"/>
 					<dcsset:userSettingID>45eb68ee-291a-4948-99bd-35a8f8ab650b</dcsset:userSettingID>
-					<dcsset:userSettingPresentation xsi:type="xs:string">Business unit</dcsset:userSettingPresentation>
+					<dcsset:userSettingPresentation xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Business unit</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Подразделение</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Departman</v8:content>
+						</v8:item>
+					</dcsset:userSettingPresentation>
 				</dcscor:item>
 			</dcsset:dataParameters>
 			<dcsset:conditionalAppearance>

@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b751a7e8-ae56-4f44-b9a9-fcf5700c1374">
-  <name>DocChequeBondTransactionClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc cheque bond transaction client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocChequeBondTransactionClient</name>
+ <synonym>
+  <key>en</key>
+  <value>Doc cheque bond transaction client</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ операция по чекам и долговым обязательствам клиент</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak çek/senet bordrosu client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

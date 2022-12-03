@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="57f86d09-5798-43ac-8975-26d8cfa5b1a6">
-  <name>UseCommissionTrading</name>
-  <synonym>
-    <key>en</key>
-    <value>Use commission trading</value>
-  </synonym>
-  <location>Constant.UseCommissionTrading</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Document.SalesReturnOrder.Attribute.TransactionType</content>
-  <content>Document.PurchaseReturnOrder.Attribute.TransactionType</content>
-  <content>Document.PurchaseInvoice.Attribute.TransactionType</content>
-  <content>Subsystem.SalesAR.Subsystem.CommissionTrading</content>
-  <content>Document.PurchaseOrder.Attribute.TransactionType</content>
-  <content>Document.SalesInvoice.Attribute.TransactionType</content>
-  <content>Document.SalesOrderClosing.Attribute.TransactionType</content>
-  <content>Document.SalesReturn.Attribute.TransactionType</content>
-  <content>Document.SalesOrder.Attribute.TransactionType</content>
-  <content>Document.PurchaseOrderClosing.Attribute.TransactionType</content>
-  <content>Document.PurchaseReturn.Attribute.TransactionType</content>
-  <content>Catalog.Partners.Attribute.Consignor</content>
-  <content>Catalog.Partners.Attribute.TradeAgent</content>
-  <content>Enum.InventoryOrigingTypes</content>
+ <name>UseCommissionTrading</name>
+ <synonym>
+  <key>en</key>
+  <value>Use commission trading</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать комиссионную торговлю</value>
+ </synonym>
+ <location>Constant.UseCommissionTrading</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Document.SalesReturnOrder.Attribute.TransactionType</content>
+ <content>Document.PurchaseReturnOrder.Attribute.TransactionType</content>
+ <content>Document.PurchaseInvoice.Attribute.TransactionType</content>
+ <content>Subsystem.SalesAR.Subsystem.CommissionTrading</content>
+ <content>Document.PurchaseOrder.Attribute.TransactionType</content>
+ <content>Document.SalesInvoice.Attribute.TransactionType</content>
+ <content>Document.SalesOrderClosing.Attribute.TransactionType</content>
+ <content>Document.SalesReturn.Attribute.TransactionType</content>
+ <content>Document.SalesOrder.Attribute.TransactionType</content>
+ <content>Document.PurchaseOrderClosing.Attribute.TransactionType</content>
+ <content>Document.PurchaseReturn.Attribute.TransactionType</content>
+ <content>Catalog.Partners.Attribute.Consignor</content>
+ <content>Catalog.Partners.Attribute.TradeAgent</content>
+ <content>Enum.InventoryOrigingTypes</content>
 </mdclass:FunctionalOption>

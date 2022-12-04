@@ -14,6 +14,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Item</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Номенклатура</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Malzeme</v8:content>
+				</v8:item>
 			</title>
 			<valueType>
 				<v8:Type xmlns:d5p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d5p1:CatalogRef.Items</v8:Type>
@@ -26,6 +34,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Item Key</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Характеристика</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Varyant</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -40,6 +56,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Barcode</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Штрихкод</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Barkod</v8:content>
+				</v8:item>
 			</title>
 			<valueType>
 				<v8:TypeId>c23154ca-d846-4adb-b794-5385974f0ff4</v8:TypeId>
@@ -52,6 +76,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Price</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Цена</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fiyat</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -66,6 +98,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Unit</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Ед. изм.</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Birim</v8:content>
+				</v8:item>
 			</title>
 			<valueType>
 				<v8:Type xmlns:d5p1="http://v8.1c.ru/8.1/data/enterprise/current-config">d5p1:CatalogRef.Units</v8:Type>
@@ -78,6 +118,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Barcode type</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Тип штрихкода</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Barkod tipi</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -96,6 +144,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Quantity</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Miktar</v8:content>
+				</v8:item>
 			</title>
 			<valueType>
 				<v8:TypeId>5b2a4219-ddae-4642-88f6-3588aac85ae7</v8:TypeId>
@@ -110,6 +166,14 @@
 			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>Period</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Период</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem</v8:content>
 			</v8:item>
 		</title>
 		<valueType>

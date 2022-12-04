@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:ScheduledJob xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4fa61483-704d-4d7a-baf3-fa3552ea01d5">
-  <name>AddExternalFunctionsToJobQueue</name>
-  <synonym>
-    <key>en</key>
-    <value>Add external functions to job queue</value>
-  </synonym>
-  <methodName>CommonModule.ServiceSystemServer.AddExternalFunctionsToJobQueue</methodName>
-  <restartCountOnFailure>3</restartCountOnFailure>
-  <restartIntervalOnFailure>10</restartIntervalOnFailure>
+ <name>AddExternalFunctionsToJobQueue</name>
+ <synonym>
+  <key>en</key>
+  <value>Add external functions to job queue</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Добавить функции в очередь заданий</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Dış fonksiyonu görev kuyruğuna ekle</value>
+ </synonym>
+ <methodName>CommonModule.ServiceSystemServer.AddExternalFunctionsToJobQueue</methodName>
+ <restartCountOnFailure>3</restartCountOnFailure>
+ <restartIntervalOnFailure>10</restartIntervalOnFailure>
 </mdclass:ScheduledJob>

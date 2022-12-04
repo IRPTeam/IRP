@@ -1,29 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1c4c3ef2-5cd1-4b00-91ee-ba7b3779eb4c">
-  <producedTypes>
-    <refType typeId="41c4d675-1dc6-426c-9574-a204bd3be151" valueTypeId="3a970b5a-c48f-4765-880c-8cff6f8a1253"/>
-    <listType typeId="c7482969-b65f-4e29-9d8a-79345e3b821b" valueTypeId="b95a4c05-9aac-4300-8ed1-1824ef16df33"/>
-    <managerType typeId="48d2bd7a-7632-4464-b098-9752596069c5" valueTypeId="ba3f4975-cc19-4bae-8608-4c05eb0a33c6"/>
-  </producedTypes>
-  <name>PlanningPeriodTypes</name>
+ <producedTypes>
+  <refType typeId="41c4d675-1dc6-426c-9574-a204bd3be151" valueTypeId="3a970b5a-c48f-4765-880c-8cff6f8a1253"/>
+  <listType typeId="c7482969-b65f-4e29-9d8a-79345e3b821b" valueTypeId="b95a4c05-9aac-4300-8ed1-1824ef16df33"/>
+  <managerType typeId="48d2bd7a-7632-4464-b098-9752596069c5" valueTypeId="ba3f4975-cc19-4bae-8608-4c05eb0a33c6"/>
+ </producedTypes>
+ <name>PlanningPeriodTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>Planning period types</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Типы периодов планирования</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Planlama dönem tipleri</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="fc785567-3bd9-45c3-a367-8350ed1dbc45">
+  <name>Financial</name>
   <synonym>
-    <key>en</key>
-    <value>Planning period types</value>
+   <key>en</key>
+   <value>Financial</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="fc785567-3bd9-45c3-a367-8350ed1dbc45">
-    <name>Financial</name>
-    <synonym>
-      <key>en</key>
-      <value>Financial</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="52d85de5-c220-42b4-aecc-0eaaa0258ee2">
-    <name>Manufacturing</name>
-    <synonym>
-      <key>en</key>
-      <value>Manufacturing</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>ru</key>
+   <value>Финансовый</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Finansal</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="52d85de5-c220-42b4-aecc-0eaaa0258ee2">
+  <name>Manufacturing</name>
+  <synonym>
+   <key>en</key>
+   <value>Manufacturing</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Производство</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Üretim</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

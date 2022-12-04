@@ -28,6 +28,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Free quantity</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Свободное количество</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Serbest miktar</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -67,6 +75,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Entry demand quantity</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Вводное количество потребности</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Talep miktar girişi</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -76,6 +92,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Corrected demand quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество корректировки потребности</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Düzeltilen talep miktarı</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -87,6 +111,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Final demand quantity</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Финальное количество потребности</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Nihai talep miktarı</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -96,6 +128,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Balance quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество остаток</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Bakiye miktarı</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -107,6 +147,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Reserved quantity</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество в резерве</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Rezerv edilen miktar</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -116,6 +164,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Needed produce quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество к производству</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Üretmek gereken miktar</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -127,6 +183,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Produced produce quantity</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество произведено</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Üretilen miktar</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -136,6 +200,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Reserved produce quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество готовой продукции в резерве</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Üretim rezerv miktarı</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -147,6 +219,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Written off produce quantity</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Списанное количество в производство</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Stok çıkış üretim miktarı</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -156,6 +236,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Needed procurement quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Требуемое количество обеспечения</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Tedarik ihtiyaç miktarı</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -167,6 +255,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Request procurement quantity</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество к обеспечению по заявке</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Satın alma talep miktarı</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -176,6 +272,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Lack procurement quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количство недостатка обеспечения</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Tedarik eksik miktarı</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -187,6 +291,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Order transfer quantity</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество заказа на перемещение</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Depo transfer sipariş miktarı</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -196,6 +308,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Confirmed transfer quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Подтвержденное количество перемещения</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Onaylanan tranfser miktarı</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -207,6 +327,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Order purchase quantity</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Количество заказа поставшикам</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Satın alma sipariş miktarı</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
@@ -216,6 +344,14 @@
 				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Confirmed purchase quantity</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Подтвержденное количество закупки</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Onaylanan alım miktarı</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -346,6 +482,14 @@ FROM
 				<v8:lang>en</v8:lang>
 				<v8:content>Begin of period</v8:content>
 			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Начало периода</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem başı</v8:content>
+			</v8:item>
 		</title>
 		<valueType>
 			<v8:Type>xs:dateTime</v8:Type>
@@ -363,6 +507,14 @@ FROM
 				<v8:lang>en</v8:lang>
 				<v8:content>Period</v8:content>
 			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Период</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem</v8:content>
+			</v8:item>
 		</title>
 		<valueType>
 			<v8:Type>xs:dateTime</v8:Type>
@@ -379,6 +531,14 @@ FROM
 			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>End of period</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Конец периода</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem sonu</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -401,6 +561,14 @@ FROM
 							<v8:lang>en</v8:lang>
 							<v8:content>Demand</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Потребность</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Talep</v8:content>
+						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>EntryDemandQuantity</dcsset:field>
@@ -408,6 +576,14 @@ FROM
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Entry</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Ввод</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Giriş</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -418,6 +594,14 @@ FROM
 								<v8:lang>en</v8:lang>
 								<v8:content>Corrected</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Корректировки</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Düzeltme</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -426,6 +610,14 @@ FROM
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Final</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Финальный</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Nihai</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -437,6 +629,14 @@ FROM
 							<v8:lang>en</v8:lang>
 							<v8:content>Balance</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Остаток</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Bakiye</v8:content>
+						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>BalanceQuantity</dcsset:field>
@@ -444,6 +644,14 @@ FROM
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Quantity</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Количество</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Miktar</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -454,6 +662,14 @@ FROM
 								<v8:lang>en</v8:lang>
 								<v8:content>Reserved</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Зарезервировано</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Rezervde</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -462,6 +678,14 @@ FROM
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Free</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Свободный</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Serbest</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -473,6 +697,14 @@ FROM
 							<v8:lang>en</v8:lang>
 							<v8:content>To produce</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Осталось произвести</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Üretilecek</v8:content>
+						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>NeededProduceQuantity</dcsset:field>
@@ -480,6 +712,14 @@ FROM
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Needed</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Потребность</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>İhtiyaç</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -490,6 +730,14 @@ FROM
 								<v8:lang>en</v8:lang>
 								<v8:content>Produced</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Произведено</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Üretilen</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -499,6 +747,14 @@ FROM
 								<v8:lang>en</v8:lang>
 								<v8:content>Reserved</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Зарезервировано</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Rezervde</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -507,6 +763,14 @@ FROM
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Written off</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Списано</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Stok çıkış yapılan</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -518,6 +782,14 @@ FROM
 							<v8:lang>en</v8:lang>
 							<v8:content>Procurement</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Обеспечение</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Tedarik şekli</v8:content>
+						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>NeededProcurementQuantity</dcsset:field>
@@ -525,6 +797,14 @@ FROM
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Needed</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Потребность</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>İhtiyaç</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -535,6 +815,14 @@ FROM
 								<v8:lang>en</v8:lang>
 								<v8:content>Request</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Заявка</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Talep</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -543,6 +831,14 @@ FROM
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Lack</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Недостача</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Eksik</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -554,6 +850,14 @@ FROM
 							<v8:lang>en</v8:lang>
 							<v8:content>Transfer</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Перемещение</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Transfer</v8:content>
+						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>OrderTransferQuantity</dcsset:field>
@@ -561,6 +865,14 @@ FROM
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Created</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Создан</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Oluşturuldu</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -570,6 +882,14 @@ FROM
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Confirmed</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Подтверждено</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Onaylandı</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -581,6 +901,14 @@ FROM
 							<v8:lang>en</v8:lang>
 							<v8:content>Purchase</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Закупки</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Alımlar</v8:content>
+						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>OrderPurchaseQuantity</dcsset:field>
@@ -588,6 +916,14 @@ FROM
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Create</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Создать</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Oluştur</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -597,6 +933,14 @@ FROM
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Confirmed</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Подтверждено</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>tr</v8:lang>
+								<v8:content>Onaylandı</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>

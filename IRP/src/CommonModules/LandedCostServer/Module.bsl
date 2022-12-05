@@ -1988,6 +1988,40 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 		CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpense, TableOfNewReceivedBatches);
 	ElsIf IsDecompositeDocument(Document) Then
 		CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpense, TableOfNewReceivedBatches);
+	ElsIf TypeOf(Document) = Type("DocumentRef.SalesReturn") Or TypeOf(Document) = Type("DocumentRef.RetailReturnReceipt") Then
+		
+		For Each Row In TableOfReturnedBatches Do
+			NewRowReceivedBatch = TableOfNewReceivedBatches.Add();
+			NewRowReceivedBatch.Batch            = Row.Batch;
+			NewRowReceivedBatch.BatchKey         = Row.BatchKey;
+			NewRowReceivedBatch.Document         = Row.Document;
+			NewRowReceivedBatch.Company          = Row.Company;
+			NewRowReceivedBatch.Date             = Row.Date;
+			NewRowReceivedBatch.Quantity         = Row.Quantity;
+			NewRowReceivedBatch.Amount           = Row.Amount;
+			NewRowReceivedBatch.AmountTax        = Row.AmountTax;
+			NewRowReceivedBatch.AmountCostRatio  = Row.AmountCostRatio;
+			NewRowReceivedBatch.QuantityBalance  = Row.Quantity;
+			NewRowReceivedBatch.AmountBalance    = Row.Amount;
+			NewRowReceivedBatch.AmountTaxBalance = Row.AmountTax;
+			NewRowReceivedBatch.AmountCostRatioBalance = Row.AmountCostRatio;
+			NewRowReceivedBatch.IsOpeningBalance = False;
+			NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
+		EndDo;
+	
+		For Each Row In TableOfNewReceivedBatches Do
+			FillPropertyValues(Rows.Add(), Row);
+		EndDo;
+		ArrayForDelete = New Array();
+		For Each Row In Rows Do
+			If Not ValueIsFilled(Row.AmountBalance) Then
+				ArrayForDelete.Add(Row);
+			EndIf;
+		EndDo;
+		For Each Row In ArrayForDelete Do
+			Rows.Delete(Row);
+		EndDo;
+		
 	ElsIf TypeOf(Document) = Type("DocumentRef.BatchReallocateIncoming") Then
 
 		For Each Row_Receipt In DataForReceipt Do

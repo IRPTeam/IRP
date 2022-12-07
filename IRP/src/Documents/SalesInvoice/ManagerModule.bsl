@@ -514,6 +514,8 @@ Function R9010B_SourceOfOriginStock()
 		|		INNER JOIN SourceOfOrigins AS SourceOfOrigins
 		|		ON ItemList.Key = SourceOfOrigins.Key
 		|		AND NOT SourceOfOrigins.SourceOfOriginStock.Ref IS NULL
+		|WHERE
+		|	ItemList.IsSales
 		|GROUP BY
 		|	VALUE(AccumulationRecordType.Expense),
 		|	ItemList.Period,
@@ -1238,7 +1240,28 @@ Function T6020S_BatchKeysInfo()
 		|WHERE
 		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
 		|;
-		|
+		|//////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ItemList.Key,
+		|	ItemList.ItemKey,
+		|	ItemList.TradeAgentStore,
+		|	ItemList.Company,
+		|	CASE
+		|		WHEN ConsignorBatches.Quantity IS NULL
+		|			THEN ItemList.Quantity
+		|		ELSE ConsignorBatches.Quantity
+		|	END AS Quantity,
+		|	ItemList.Period,
+		|	VALUE(Enum.BatchDirection.Receipt) AS Direction
+		|INTO BatchKeysInfo_2
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN ConsignorBatches AS ConsignorBatches
+		|		ON ItemList.Key = ConsignorBatches.Key
+		|WHERE
+		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+		|	AND ItemList.IsShipmentToTradeAgent
+		|;	
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	BatchKeysInfo_1.ItemKey,
@@ -1272,28 +1295,55 @@ Function T6020S_BatchKeysInfo()
 		|UNION ALL
 		|
 		|SELECT
-		|	ItemList.ItemKey,
-		|	ItemList.TradeAgentStore,
-		|	ItemList.Company,
-		|	SUM(ItemList.Quantity),
-		|	ItemList.Period,
-		|	VALUE(Enum.BatchDirection.Receipt),
+		|	BatchKeysInfo_2.ItemKey,
+		|	BatchKeysInfo_2.TradeAgentStore,
+		|	BatchKeysInfo_2.Company,
+		|	SUM(CASE
+		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
+		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
+		|		ELSE BatchKeysInfo_2.Quantity
+		|	END) AS Quantity,
+		|	BatchKeysInfo_2.Period,
+		|	BatchKeysInfo_2.Direction,
+
+//		|	ItemList.ItemKey,
+//		|	ItemList.TradeAgentStore,
+//		|	ItemList.Company,
+//		|	SUM(ItemList.Quantity),
+//		|	ItemList.Period,
+//		|	VALUE(Enum.BatchDirection.Receipt),
 		|	UNDEFINED,
-		|	VALUE(Catalog.SourceOfOrigins.EmptyRef),
-		|	VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)),
+		|	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef))
+	
+//		|	VALUE(Catalog.SourceOfOrigins.EmptyRef),
+//		|	VALUE(Catalog.SerialLotNumbers.EmptyRef)
 		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
-		|	AND ItemList.IsShipmentToTradeAgent
+		|	BatchKeysInfo_2 AS BatchKeysInfo_2
+		|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
+		|		ON BatchKeysInfo_2.Key = SourceOfOrigins.Key
 		|GROUP BY
-		|	ItemList.ItemKey,
-		|	ItemList.TradeAgentStore,
-		|	ItemList.Company,
-		|	ItemList.Period,
-		|	VALUE(Enum.BatchDirection.Receipt),
-		|	VALUE(Catalog.SourceOfOrigins.EmptyRef),
-		|	VALUE(Catalog.SerialLotNumbers.EmptyRef)";
+		|	BatchKeysInfo_2.ItemKey,
+		|	BatchKeysInfo_2.TradeAgentStore,
+		|	BatchKeysInfo_2.Company,
+		|	BatchKeysInfo_2.Period,
+		|	BatchKeysInfo_2.Direction,
+		|	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)),
+		|	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef))";
+
+//		|FROM
+//		|	ItemList AS ItemList
+//		|WHERE
+//		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+//		|	AND ItemList.IsShipmentToTradeAgent
+//		|GROUP BY
+//		|	ItemList.ItemKey,
+//		|	ItemList.TradeAgentStore,
+//		|	ItemList.Company,
+//		|	ItemList.Period,
+//		|	VALUE(Enum.BatchDirection.Receipt),
+//		|	VALUE(Catalog.SourceOfOrigins.EmptyRef),
+//		|	VALUE(Catalog.SerialLotNumbers.EmptyRef)";
 EndFunction
 
 Function R8010B_TradeAgentInventory()

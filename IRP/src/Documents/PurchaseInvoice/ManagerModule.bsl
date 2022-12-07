@@ -705,6 +705,8 @@ Function R9010B_SourceOfOriginStock()
 		|		INNER JOIN SourceOfOrigins AS SourceOfOrigins
 		|		ON ItemList.Key = SourceOfOrigins.Key
 		|		AND NOT SourceOfOrigins.SourceOfOriginStock.Ref IS NULL
+		|WHERE
+		|	ItemList.IsPurchase
 		|GROUP BY
 		|	VALUE(AccumulationRecordType.Receipt),
 		|	ItemList.Period,

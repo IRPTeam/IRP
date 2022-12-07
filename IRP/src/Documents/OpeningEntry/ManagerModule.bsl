@@ -26,7 +26,17 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	SUM(ReceiptFromConsignor.Amount) AS Amount,
 	|	ReceiptFromConsignor.Currency AS Currency,
 	|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef) AS CurrencyMovementType,
-	|	SUM(ReceiptFromConsignor.AmountTax) AS AmountTax
+	|	SUM(ReceiptFromConsignor.AmountTax) AS AmountTax,
+	|	CASE
+	|		WHEN ReceiptFromConsignor.SerialLotNumber.BatchBalanceDetail
+	|			THEN ReceiptFromConsignor.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END AS SerialLotNumber,
+	|	CASE
+	|		WHEN ReceiptFromConsignor.SourceOfOrigin.BatchBalanceDetail
+	|			THEN ReceiptFromConsignor.SourceOfOrigin
+	|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+	|	END AS SourceOfOrigin
 	|FROM
 	|	Document.OpeningEntry.ReceiptFromConsignor AS ReceiptFromConsignor
 	|WHERE
@@ -39,7 +49,17 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	VALUE(Enum.BatchDirection.Receipt),
 	|	ReceiptFromConsignor.Key,
 	|	ReceiptFromConsignor.Currency,
-	|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef)";
+	|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef),
+	|	CASE
+	|		WHEN ReceiptFromConsignor.SerialLotNumber.BatchBalanceDetail
+	|			THEN ReceiptFromConsignor.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END,
+	|	CASE
+	|		WHEN ReceiptFromConsignor.SourceOfOrigin.BatchBalanceDetail
+	|			THEN ReceiptFromConsignor.SourceOfOrigin
+	|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+	|	END";
 	Query.SetParameter("Ref", Ref);
 	
 	QueryResult = Query.Execute();
@@ -71,7 +91,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.CopyColumns();
 	If BatchKeysInfo_DataTable.Count() Then
 		BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.Copy(New Structure("CurrencyMovementType", CurrencyMovementType));
-		BatchKeysInfo_DataTableGrouped.GroupBy("Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType", 
+		BatchKeysInfo_DataTableGrouped.GroupBy("Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SerialLotNumber, SourceOfOrigin", 
 		"Quantity, Amount, AmountTax");	
 	EndIf;
 	
@@ -250,7 +270,8 @@ Function ItemList()
 	|	OpeningEntryInventory.Amount AS Amount,
 	|	OpeningEntryInventory.AmountTax AS AmountTax,
 	|	OpeningEntryInventory.Ref.Company.LandedCostCurrencyMovementType AS CurrencyMovementType,
-	|	OpeningEntryInventory.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency
+	|	OpeningEntryInventory.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency,
+	|	OpeningEntryInventory.SourceOfOrigin AS SourceOfOrigin
 	|INTO ItemList
 	|FROM
 	|	Document.OpeningEntry.Inventory AS OpeningEntryInventory
@@ -476,7 +497,8 @@ Function ShipmentToTradeAgent()
 		|		WHEN ShipmentToTradeAgent.SerialLotNumber.Ref IS NULL
 		|			THEN FALSE
 		|		ELSE TRUE
-		|	END AS isSerialLotNumberSet
+		|	END AS isSerialLotNumberSet,
+		|	ShipmentToTradeAgent.SourceOfOrigin
 		|INTO ShipmentToTradeAgent
 		|FROM
 		|	Document.OpeningEntry.ShipmentToTradeAgent AS ShipmentToTradeAgent
@@ -953,6 +975,16 @@ Function T6020S_BatchKeysInfo()
 		|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
 		|	ItemList.CurrencyMovementType,
 		|	ItemList.Currency,
+		|	CASE
+		|		WHEN ItemList.SerialLotNumber.BatchBalanceDetail
+		|			THEN ItemList.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	CASE
+		|		WHEN ItemList.SourceOfOrigin.BatchBalanceDetail
+		|			THEN ItemList.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END AS SourceOfOrigin,
 		|	SUM(ItemList.Quantity) AS Quantity,
 		|	SUM(ItemList.Amount) AS Amount,
 		|	SUM(ItemList.AmountTax) AS AmountTax
@@ -968,7 +1000,17 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.ItemKey,
 		|	ItemList.Period,
 		|	ItemList.Store,
-		|	VALUE(Enum.BatchDirection.Receipt)
+		|	VALUE(Enum.BatchDirection.Receipt),
+		|	CASE
+		|		WHEN ItemList.SerialLotNumber.BatchBalanceDetail
+		|			THEN ItemList.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	CASE
+		|		WHEN ItemList.SourceOfOrigin.BatchBalanceDetail
+		|			THEN ItemList.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END
 		|
 		|UNION ALL
 		|
@@ -980,6 +1022,16 @@ Function T6020S_BatchKeysInfo()
 		|	VALUE(Enum.BatchDirection.Expense),
 		|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef),
 		|	Value(Catalog.Currencies.EmptyRef),
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SerialLotNumber.BatchBalanceDetail
+		|			THEN ShipmentToTradeAgent.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SourceOfOrigin.BatchBalanceDetail
+		|			THEN ShipmentToTradeAgent.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END AS SourceOfOrigin,
 		|	SUM(ShipmentToTradeAgent.Quantity),
 		|	0,
 		|	0
@@ -994,7 +1046,17 @@ Function T6020S_BatchKeysInfo()
 		|	ShipmentToTradeAgent.ItemKey,
 		|	VALUE(Enum.BatchDirection.Expense),
 		|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef),
-		|	Value(Catalog.Currencies.EmptyRef)
+		|	Value(Catalog.Currencies.EmptyRef),
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SerialLotNumber.BatchBalanceDetail
+		|			THEN ShipmentToTradeAgent.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SourceOfOrigin.BatchBalanceDetail
+		|			THEN ShipmentToTradeAgent.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END
 		|
 		|UNION ALL
 		|
@@ -1006,6 +1068,16 @@ Function T6020S_BatchKeysInfo()
 		|	VALUE(Enum.BatchDirection.Receipt),
 		|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef),
 		|	Value(Catalog.Currencies.EmptyRef),
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SerialLotNumber.BatchBalanceDetail
+		|			THEN ShipmentToTradeAgent.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SourceOfOrigin.BatchBalanceDetail
+		|			THEN ShipmentToTradeAgent.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END AS SourceOfOrigin,
 		|	SUM(ShipmentToTradeAgent.Quantity),
 		|	0,
 		|	0
@@ -1020,7 +1092,17 @@ Function T6020S_BatchKeysInfo()
 		|	ShipmentToTradeAgent.ItemKey,
 		|	VALUE(Enum.BatchDirection.Receipt),
 		|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef),
-		|	Value(Catalog.Currencies.EmptyRef)
+		|	Value(Catalog.Currencies.EmptyRef),
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SerialLotNumber.BatchBalanceDetail
+		|			THEN ShipmentToTradeAgent.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	CASE
+		|		WHEN ShipmentToTradeAgent.SourceOfOrigin.BatchBalanceDetail
+		|			THEN ShipmentToTradeAgent.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END
 		|
 		|UNION ALL
 		|
@@ -1032,6 +1114,8 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo.Direction,
 		|	BatchKeysInfo.CurrencyMovementType,
 		|	BatchKeysInfo.Currency,
+		|	BatchKeysInfo.SerialLotNumber,
+		|	BatchKeysInfo.SourceOfOrigin,
 		|	SUM(BatchKeysInfo.Quantity) AS Quantity,
 		|	SUM(BatchKeysInfo.Amount) AS Amount,
 		|	SUM(BatchKeysInfo.AmountTax) AS AmountTax
@@ -1046,7 +1130,9 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo.ItemKey,
 		|	BatchKeysInfo.Direction,
 		|	BatchKeysInfo.CurrencyMovementType,
-		|	BatchKeysInfo.Currency
+		|	BatchKeysInfo.Currency,
+		|	BatchKeysInfo.SerialLotNumber,
+		|	BatchKeysInfo.SourceOfOrigin
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -1058,6 +1144,8 @@ Function T6020S_BatchKeysInfo()
 		|	Table.Direction,
 		|	Table.CurrencyMovementType,
 		|	Table.Currency,
+		|	Table.SerialLotNumber,
+		|	Table.SourceOfOrigin,
 		|	Table.Quantity,
 		|	Table.Amount,
 		|	Table.AmountTax

@@ -1810,6 +1810,21 @@ Scenario: Create catalog SerialLotNumbers objects (serial lot numbers)
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d165' | 'False'        | 22     | '09987897977894' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'False'    | 'True'               | 'False'                       |
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d166' | 'False'        | 23     | '09987897977895' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'False'    | 'True'               | 'False'                       |
 
+Scenario: Create catalog SerialLotNumbers objects (serial lot numbers, with batch balance details)
+
+	And I check or create for catalog "SerialLotNumbers" objects with Data Exchange Load parameter set to true:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Description'    | 'SerialLotNumberOwner'                                             | 'Inactive' | 'StockBalanceDetail' | 'EachSerialLotNumberIsUnique' |'BatchBalanceDetail' |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b780c87413d4c65f11ecd519fda72072' | 'False'        | '8908899877'     | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72071' | 'False'    | 'True'               | 'False'                       | 'True'               |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f8958535f' | 'False'        | '09987897977889' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'False'    | 'False'              | 'False'                       | 'False'              |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f89585360' | 'False'        | '09987897977890' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'False'    | 'False'              | 'False'                       | 'False'              |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f89585361' | 'False'        | '899007790088'   | 'e1cib/data/Catalog.Items?ref=b781cf3f5e36b25611ecd69f89585359'    | 'False'    | 'False'              | 'False'                       | 'False'              |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd8431212163a' | 'False'        | '8908899879'     | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72071' | 'False'    | 'True'               | 'False'                       | 'True'               |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae5e' | 'False'        | '8908899880'     | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72071' | 'False'    | 'True'               | 'True'                        | 'True'               |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae5f' | 'False'        | '8908899881'     | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72071' | 'False'    | 'True'               | 'True'                        | 'True'               |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed64ba446bae60' | 'False'        | '09987897977891' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'False'    | 'True'               | 'False'                       | 'True'               |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d164' | 'False'        | '09987897977893' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'False'    | 'True'               | 'False'                       | 'True'               |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d165' | 'False'        | '09987897977894' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'False'    | 'True'               | 'False'                       | 'True'               |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b78bf3a601f806a711ed6b0dc233d166' | 'False'        | '09987897977895' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535b' | 'False'    | 'True'               | 'False'                       | 'True'               |
 
 
 

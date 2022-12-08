@@ -529,7 +529,8 @@ Function ReceiptFromConsignor()
 		|		WHEN ReceiptFromConsignor.SerialLotNumber.Ref IS NULL
 		|			THEN FALSE
 		|		ELSE TRUE
-		|	END AS isSerialLotNumberSet
+		|	END AS isSerialLotNumberSet,
+		|	ReceiptFromConsignor.SourceOfOrigin
 		|INTO ReceiptFromConsignor
 		|FROM
 		|	Document.OpeningEntry.ReceiptFromConsignor AS ReceiptFromConsignor

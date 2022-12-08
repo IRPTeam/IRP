@@ -21,18 +21,68 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	If Parameters.Key.IsEmpty() Then
+		FillParamsOnCreate();
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Return;
+	Form.Items.Owner.Visible = Form.OwnerSelect = "Manual";
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
+	ThisObject.OwnerSelect = "Manual";
 	SetVisibilityAvailability(Object, ThisObject);	
+EndProcedure
+
+&AtClient
+Procedure OwnerSelectOnChange(Item)
+	UpdateAttributesByOwner();
+EndProcedure
+
+&AtClient
+Procedure OwnerOnChange(Item)
+	UpdateAttributesByOwner();
+EndProcedure
+
+&AtClient
+Procedure UpdateAttributesByOwner()
+	If OwnerSelect <> "Manual" Then
+		Object.SourceOfOriginOwner = ThisObject[OwnerSelect];
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure FillParamsOnCreate()
+	ThisObject.OwnerSelect = "Manual";
+
+	If Not Parameters.ItemType.IsEmpty() Then
+		ThisObject.ItemType = Parameters.ItemType;
+		Object.SourceOfOriginOwner = Parameters.ItemType;
+		Items.OwnerSelect.ChoiceList.Add("ItemType", ThisObject.ItemType);
+		ThisObject.OwnerSelect = "ItemType";
+	EndIf;
+	
+	If Not Parameters.Item.IsEmpty() Then
+		ThisObject.Item = Parameters.Item;
+		Object.SourceOfOriginOwner = Parameters.Item;
+		Items.OwnerSelect.ChoiceList.Add("Item", ThisObject.Item);
+		ThisObject.OwnerSelect = "Item";
+	EndIf;
+	
+	If Not Parameters.ItemKey.IsEmpty() Then
+		ThisObject.ItemKey = Parameters.ItemKey;
+		Object.SourceOfOriginOwner = Parameters.ItemKey;
+		Items.OwnerSelect.ChoiceList.Add("ItemKey", ThisObject.ItemKey);
+		ThisObject.OwnerSelect = "ItemKey";
+	EndIf;
+		
+	// delete manual, if have other types
+	If Items.OwnerSelect.ChoiceList.Count() > 1 Then
+		Items.OwnerSelect.ChoiceList.Delete(0);
+	EndIf;
 EndProcedure
 
 #Region AddAttributes

@@ -396,6 +396,25 @@ Procedure SerialLotNumbersEditTextChange(Object, Form, Item, Text, StandardProce
 	Item.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
 EndProcedure
 
+Procedure SourceOfOriginsEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters = Undefined,
+	AdditionalParameters = Undefined) Export
+
+	If ArrayOfFilters = Undefined Then
+		ArrayOfFilters = New Array();
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Inactive", True, ComparisonType.Equal));
+	EndIf;
+
+	If AdditionalParameters = Undefined Then
+		AdditionalParameters = New Structure();
+	EndIf;
+
+	ArrayOfChoiceParameters = New Array();
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.CustomSearchFilter"   , DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters)));
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.AdditionalParameters" , DocumentsServer.SerializeArrayOfFilters(AdditionalParameters)));
+	Item.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
+EndProcedure
+
 #EndRegion
 
 #Region Status
@@ -930,6 +949,31 @@ Procedure SerialLotNumberStartChoice(Object, Form, Item, ChoiceData, StandardPro
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
+Procedure SourceOfOriginsStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
+	If OpenSettings = Undefined Then
+		OpenSettings = GetOpenSettingsStructure();
+	EndIf;
+
+	StandardProcessing = False;
+
+	If OpenSettings.FormName = Undefined Then
+		OpenSettings.FormName = "Catalog.SourceOfOrigins.ChoiceForm";
+	EndIf;
+
+	If OpenSettings.FormFilters = Undefined Then
+		FormFilters = New Array();
+		FormFilters.Add(CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+		FormFilters.Add(CreateFilterItem("Inactive", True, DataCompositionComparisonType.NotEqual));
+	EndIf;
+
+	If OpenSettings.FormParameters = Undefined Then
+		FormParameters = New Structure();
+		FormParameters.Insert("FillingData", New Structure());
+	EndIf;
+
+	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
 #EndRegion
 
 #Region ItemList
@@ -1232,7 +1276,8 @@ Function GetFormItemNames()
 				|ProductionsKey,
 				|ConsignorBatches,
 				|ShipmentToTradeAgentKey, ShipmentToTradeAgentUseSerialLotNumber,
-				|ReceiptFromConsignorKey, ReceiptFromConsignorUseSerialLotNumber";
+				|ReceiptFromConsignorKey, ReceiptFromConsignorUseSerialLotNumber,
+				|SourceOfOriginsKey";
 	Return ItemNames;
 EndFunction	
 

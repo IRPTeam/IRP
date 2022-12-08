@@ -136,6 +136,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -145,6 +146,21 @@
     <synonym>
       <key>en</key>
       <value>Batch balance detail</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b9358737-33be-4413-90c5-0d7c86a3f7d0">
+    <name>Inactive</name>
+    <synonym>
+      <key>en</key>
+      <value>Inactive</value>
     </synonym>
     <type>
       <types>Boolean</types>
@@ -238,6 +254,15 @@
     <synonym>
       <key>en</key>
       <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="3c07ea65-c8c0-4293-abf6-4abff10c8a58">
+    <name>EditSourceOfOrigins</name>
+    <synonym>
+      <key>en</key>
+      <value>Edit source of origins</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

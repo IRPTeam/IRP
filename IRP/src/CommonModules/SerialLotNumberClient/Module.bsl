@@ -56,6 +56,7 @@ Procedure AddNewSerialLotNumbers(Result, Parameters, AddNewLot = False, AddInfo 
 			ViewClient_V2.SetItemListQuantity(Parameters.Object, Parameters.Form, ArrayOfItemListRows[0], TotalQuantity);
 		EndIf;
 	EndIf;
+	SourceOfOriginClient.UpdateSourceOfOriginsQuantity(Parameters.Object, Parameters.Form);
 EndProcedure
 
 Procedure OnFinishEditSerialLotNumbers(Result, Parameters) Export
@@ -70,6 +71,7 @@ Procedure PresentationClearing(Object, Form, Item, AddInfo = Undefined) Export
 	CurrentData.SerialLotNumberIsFilling = False;
 	DeleteUnusedSerialLotNumbers(Object, CurrentData.Key);
 	UpdateSerialLotNumbersTree(Object, Form);
+	SourceOfOriginClient.UpdateSourceOfOriginsQuantity(Object, Form);
 EndProcedure
 
 Procedure PresentationClearingOnCopy(Object, Form, Item, AddInfo = Undefined) Export

@@ -122,7 +122,8 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	ArrayOfTableNames.Add("SerialLotNumbers");
 	ArrayOfTableNames.Add("BillOfMaterialsList");
 	ArrayOfTableNames.Add("Materials");
-	
+	ArrayOfTableNames.Add("SourceOfOrigins");
+		
 	// MetadataName
 	// Tables.TableName.Columns
 	// DependentTables

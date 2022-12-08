@@ -261,7 +261,7 @@ Function R9010B_SourceOfOriginStock()
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Branch,
-		|	ItemList.Store,
+		|	ItemList.TradeAgentStore AS Store,
 		|	ItemList.ItemKey,
 		|	SourceOfOrigins.SourceOfOriginStock AS SourceOfOrigin,
 		|	SourceOfOrigins.SerialLotNumber,
@@ -277,7 +277,7 @@ Function R9010B_SourceOfOriginStock()
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Branch,
-		|	ItemList.Store,
+		|	ItemList.TradeAgentStore,
 		|	ItemList.ItemKey,
 		|	SourceOfOrigins.SourceOfOriginStock,
 		|	SourceOfOrigins.SerialLotNumber";
@@ -508,7 +508,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.ItemKey,
 		|	ItemList.TradeAgentStore AS Store,
 		|	ItemList.Company,
-		|	SUM(ItemList.Quantity) AS Quantity,
+		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Period,
 		|	VALUE(Enum.BatchDirection.Expense) AS Direction
 		|INTO BatchKeysInfo_1
@@ -516,13 +516,6 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList AS ItemList
 		|WHERE
 		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
-		|
-		|GROUP BY
-		|	ItemList.ItemKey,
-		|	ItemList.TradeAgentStore,
-		|	ItemList.Company,
-		|	ItemList.Period,
-		|	VALUE(Enum.BatchDirection.Expense)
 		|;
 		|////////////////////////////////////////////////////////////////////////
 		|SELECT
@@ -534,8 +527,6 @@ Function T6020S_BatchKeysInfo()
 		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
 		|		ELSE BatchKeysInfo_1.Quantity
 		|	END) AS Quantity,
-		
-//		|	SUM(ItemList.Quantity) AS Quantity,
 		|	BatchKeysInfo_1.Period,
 		|	BatchKeysInfo_1.Direction,
 		|	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin,
@@ -545,12 +536,6 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_1 AS BatchKeysInfo_1
 		|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
 		|		ON BatchKeysInfo_1.Key = SourceOfOrigins.Key
-		
-//		|FROM
-//		|	ItemList AS ItemList
-//		|WHERE
-//		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
-		|
 		|GROUP BY
 		|	BatchKeysInfo_1.ItemKey,
 		|	BatchKeysInfo_1.Store,
@@ -559,11 +544,6 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_1.Direction,
 		|	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)),
 		|	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef))";
-//		|	ItemList.ItemKey,
-//		|	ItemList.TradeAgentStore,
-//		|	ItemList.Company,
-//		|	ItemList.Period,
-//		|	VALUE(Enum.BatchDirection.Expense)";
 EndFunction
 
 Function R8010B_TradeAgentInventory()

@@ -251,6 +251,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R8012B_ConsignorInventory());
 	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
 	QueryArray.Add(R8015T_ConsignorPrices());
+	QueryArray.Add(R9010B_SourceOfOriginStock());
 	Return QueryArray;
 EndFunction
 
@@ -1306,6 +1307,76 @@ Function R8015T_ConsignorPrices()
 		|FROM ReceiptFromConsignor AS ReceiptFromConsignor
 		|WHERE 
 		|	TRUE";
+EndFunction
+
+Function R9010B_SourceOfOriginStock()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.SourceOfOrigin,
+		|	CASE
+		|		WHEN ItemList.SerialLotNumber.BatchBalanceDetail
+		|			THEN ItemList.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO R9010B_SourceOfOriginStock
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.SourceOfOrigin.Ref IS NULL
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.SourceOfOrigin,
+		|	CASE
+		|		WHEN ItemList.SerialLotNumber.BatchBalanceDetail
+		|			THEN ItemList.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ReceiptFromConsignor.Period,
+		|	ReceiptFromConsignor.Company,
+		|	ReceiptFromConsignor.Branch,
+		|	ReceiptFromConsignor.Store,
+		|	ReceiptFromConsignor.ItemKey,
+		|	ReceiptFromConsignor.SourceOfOrigin,
+		|	CASE
+		|		WHEN ReceiptFromConsignor.SerialLotNumber.BatchBalanceDetail
+		|			THEN ReceiptFromConsignor.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	SUM(ReceiptFromConsignor.Quantity) AS Quantity
+		|FROM
+		|	ReceiptFromConsignor AS ReceiptFromConsignor
+		|WHERE
+		|	NOT ReceiptFromConsignor.SourceOfOrigin.Ref IS NULL
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ReceiptFromConsignor.Period,
+		|	ReceiptFromConsignor.Company,
+		|	ReceiptFromConsignor.Branch,
+		|	ReceiptFromConsignor.Store,
+		|	ReceiptFromConsignor.ItemKey,
+		|	ReceiptFromConsignor.SourceOfOrigin,
+		|	CASE
+		|		WHEN ReceiptFromConsignor.SerialLotNumber.BatchBalanceDetail
+		|			THEN ReceiptFromConsignor.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END";
 EndFunction
 
 #EndRegion

@@ -665,6 +665,7 @@ Function SourceOfOrigins()
 		|			THEN SourceOfOrigins.SourceOfOrigin
 		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
 		|	END AS SourceOfOrigin,
+		|	SourceOfOrigins.SerialLotNumber AS SerialLotNumberStock,
 		|	SourceOfOrigins.SourceOfOrigin AS SourceOfOriginStock,
 		|	SUM(SourceOfOrigins.Quantity) AS Quantity
 		|INTO SourceOfOrigins
@@ -684,6 +685,7 @@ Function SourceOfOrigins()
 		|			THEN SourceOfOrigins.SourceOfOrigin
 		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
 		|	END,
+		|	SourceOfOrigins.SerialLotNumber,
 		|	SourceOfOrigins.SourceOfOrigin";
 EndFunction
 
@@ -1320,7 +1322,7 @@ EndFunction
 Function R8012B_ConsignorInventory()
 	Return
 		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt),
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.ItemKey,
@@ -1353,19 +1355,20 @@ EndFunction
 Function R8013B_ConsignorBatchWiseBalance()
 	Return
 		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Key,
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Invoice AS Batch,
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
-		|	SUM(case
+		|	case
 		|		when SerialLotNumbers.SerialLotNumber.Ref IS NULL
 		|			Then ItemList.Quantity
 		|		ELSE SerialLotNumbers.Quantity
-		|	end) AS Quantity,
+		|	end AS Quantity,
 		|	SerialLotNumbers.SerialLotNumber
-		|INTO R8013B_ConsignorBatchWiseBalance
+		|INTO ConsignorBatchWiseBalance_1
 		|FROM
 		|	ItemList AS ItemList
 		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
@@ -1373,14 +1376,37 @@ Function R8013B_ConsignorBatchWiseBalance()
 		|WHERE
 		|	NOT ItemList.IsService
 		|	AND ItemList.IsReceiptFromConsignor
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ConsignorBatchWiseBalance_1.RecordType,
+		|	ConsignorBatchWiseBalance_1.Period,
+		|	ConsignorBatchWiseBalance_1.Company,
+		|	ConsignorBatchWiseBalance_1.Batch,
+		|	ConsignorBatchWiseBalance_1.Store,
+		|	ConsignorBatchWiseBalance_1.ItemKey,
+		|	SUM(CASE
+		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
+		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
+		|		ELSE ConsignorBatchWiseBalance_1.Quantity
+		|	END) AS Quantity,
+		|	SourceOfOrigins.SourceOfOriginStock AS SourceOfOrigin,
+		|	SourceOfOrigins.SerialLotNumberStock AS SerialLotNumber
+		|INTO R8013B_ConsignorBatchWiseBalance
+		|FROM
+		|	ConsignorBatchWiseBalance_1 AS ConsignorBatchWiseBalance_1
+		|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
+		|		ON ConsignorBatchWiseBalance_1.Key = SourceOfOrigins.Key
 		|GROUP BY
-		|	VALUE(AccumulationRecordType.Receipt),
-		|	ItemList.Period,
-		|	ItemList.Company,
-		|	ItemList.Invoice,
-		|	ItemList.Store,
-		|	ItemList.ItemKey,
-		|	SerialLotNumbers.SerialLotNumber";
+		|	ConsignorBatchWiseBalance_1.RecordType,
+		|	ConsignorBatchWiseBalance_1.Period,
+		|	ConsignorBatchWiseBalance_1.Company,
+		|	ConsignorBatchWiseBalance_1.Batch,
+		|	ConsignorBatchWiseBalance_1.Store,
+		|	ConsignorBatchWiseBalance_1.ItemKey,
+		|	SourceOfOrigins.SourceOfOriginStock,
+		|	SourceOfOrigins.SerialLotNumberStock";
 EndFunction
 
 Function R8015T_ConsignorPrices()

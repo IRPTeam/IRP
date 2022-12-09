@@ -7484,6 +7484,7 @@ Procedure StepConsignorBatchesFillBatches(Parameters, Chain) Export
 	Options.DocObject = Parameters.Object;
 	Options.Table_ItemList         = GetOption_Table_ItemList(Parameters);
 	Options.Table_SerialLotNumbers = GetOption_Table_SerialLotNumbers(Parameters);
+	Options.Table_SourceOfOrigins  = GetOption_Table_SourceOfOrigins(Parameters);
 	Options.Table_ConsignorBatches = GetConsignorBatches(Parameters);
 	Options.SilentMode = Not Parameters.FormIsExists;	
 	
@@ -7510,6 +7511,16 @@ Function GetOption_Table_SerialLotNumbers(Parameters)
 	Table = New Array();
 	For Each Row In Parameters.Object.SerialLotNumbers Do
 		NewRow = New Structure("Key, SerialLotNumber, Quantity");
+		FillPropertyValues(NewRow, Row);
+		Table.Add(NewRow);
+	EndDo;
+	Return Table;
+EndFunction
+
+Function GetOption_Table_SourceOfOrigins(Parameters)
+	Table = New Array();
+	For Each Row In Parameters.Object.SourceOfOrigins Do
+		NewRow = New Structure("Key, SerialLotNumber, SourceOfOrigin, Quantity");
 		FillPropertyValues(NewRow, Row);
 		Table.Add(NewRow);
 	EndDo;

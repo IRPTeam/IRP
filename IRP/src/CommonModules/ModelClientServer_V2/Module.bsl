@@ -1933,7 +1933,7 @@ EndFunction
 #Region CONSIGNOR_BATCHES
 
 Function ConsignorBatchesFillBatchesOptions() Export
-	Return GetChainLinkOptions("DocObject, Table_ItemList, Table_SerialLotNumbers, Table_ConsignorBatches, SilentMode");
+	Return GetChainLinkOptions("DocObject, Table_ItemList, Table_SerialLotNumbers, Table_SourceOfOrigins, Table_ConsignorBatches, SilentMode");
 EndFunction
 
 Function ConsignorBatchesFillBatchesExecute(Options) Export
@@ -1945,6 +1945,7 @@ Function ConsignorBatchesFillBatchesExecute(Options) Export
 	ConsignorBatches = CommissionTradeServer.GetConsignorBatchesTable(Options.DocObject, 
 		Options.Table_ItemList, 
 		Options.Table_SerialLotNumbers, 
+		Options.Table_SourceOfOrigins, 
 		Options.Table_ConsignorBatches, 
 		SilentMode);
 	Return New Structure("ConsignorBatches", ConsignorBatches);	

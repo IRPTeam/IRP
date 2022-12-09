@@ -632,7 +632,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			EndIf;
 		EndIf;
 		
-	EndDo;
+	EndDo; // Result
 	
 EndProcedure
 

@@ -1,5 +1,5 @@
 
-Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumber, Table_ConsignorBatches, SilentMode = False) Export
+Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumber, Table_SourceOfOrigins, Table_ConsignorBatches, SilentMode = False) Export
 	tmpItemList = New ValueTable();
 	tmpItemList.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	tmpItemList.Columns.Add("InventoryOrigin" , New TypeDescription("EnumRef.InventoryOrigingTypes"));
@@ -21,10 +21,21 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 		FillPropertyValues(tmpSerialLotNumbers.Add(), Row);
 	EndDo;
 	
+	tmpSourceOfOrigins = New ValueTable();
+	tmpSourceOfOrigins.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	tmpSourceOfOrigins.Columns.Add("SerialLotNumber" , New TypeDescription("CatalogRef.SerialLotNumbers"));
+	tmpSourceOfOrigins.Columns.Add("SourceOfOrigin"  , New TypeDescription("CatalogRef.SourceOfOrigins"));
+	tmpSourceOfOrigins.Columns.Add("Quantity"        , Metadata.DefinedTypes.typeQuantity.Type);
+	
+	For Each Row In Table_SourceOfOrigins Do
+		FillPropertyValues(tmpSourceOfOrigins.Add(), Row);
+	EndDo;
+	
 	tmpConsignorBatches = New ValueTable();
 	tmpConsignorBatches.Columns.Add("Key"      , Metadata.DefinedTypes.typeRowID.Type);
 	tmpConsignorBatches.Columns.Add("ItemKey"  , New TypeDescription("CatalogRef.ItemKeys"));
 	tmpConsignorBatches.Columns.Add("SerialLotNumber", New TypeDescription("CatalogRef.SerialLotNumbers"));
+	tmpConsignorBatches.Columns.Add("SourceOfOrigin" , New TypeDescription("CatalogRef.SourceOfOrigins"));
 	tmpConsignorBatches.Columns.Add("Store"    , New TypeDescription("CatalogRef.Stores"));
 	tmpConsignorBatches.Columns.Add("Batch"    , New TypeDescription("DocumentRef.SalesInvoice"));
 	tmpConsignorBatches.Columns.Add("Quantity" , Metadata.DefinedTypes.typeQuantity.Type);
@@ -55,6 +66,17 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
+	|	tmpSourceOfOrigins.Key,
+	|	tmpSourceOfOrigins.SerialLotNumber,
+	|	tmpSourceOfOrigins.SourceOfOrigin,
+	|	tmpSourceOfOrigins.Quantity
+	|INTO tmpSourceOfOrigins
+	|FROM
+	|	&tmpSourceOfOrigins AS tmpSourceOfOrigins
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
 	|	tmpItemList.Key,
 	|	tmpItemList.InventoryOrigin,
 	|	tmpItemList.Company,
@@ -66,19 +88,42 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	|		ELSE tmpSerialLotNumbers.Quantity
 	|	END AS Quantity,
 	|	ISNULL(tmpSerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
+	|INTO tmpItemList_1
 	|FROM
 	|	tmpItemList AS tmpItemList
 	|		LEFT JOIN tmpSerialLotNumbers AS tmpSerialLotNumbers
-	|		ON tmpItemList.Key = tmpSerialLotNumbers.Key";
+	|		ON tmpItemList.Key = tmpSerialLotNumbers.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpItemList_1.Key,
+	|	tmpItemList_1.InventoryOrigin,
+	|	tmpItemList_1.Company,
+	|	tmpItemList_1.ItemKey,
+	|	tmpItemList_1.Store,
+	|	tmpItemList_1.SerialLotNumber,
+	|	CASE
+	|		WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
+	|			THEN ISNULL(tmpSourceOfOrigins.Quantity, 0)
+	|		ELSE tmpItemList_1.Quantity
+	|	END AS Quantity,
+	|	ISNULL(tmpSourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin
+	|FROM
+	|	tmpItemList_1 AS tmpItemList_1
+	|		LEFT JOIN tmpSourceOfOrigins AS tmpSourceOfOrigins
+	|		ON tmpItemList_1.Key = tmpSourceOfOrigins.Key";
 	Query.SetParameter("tmpItemList", tmpItemList);
 	Query.SetParameter("tmpSerialLotNumbers", tmpSerialLotNumbers);
+	Query.SetParameter("tmpSourceOfOrigins", tmpSourceOfOrigins);
+	
 	QueryResult = Query.Execute();
 	ItemListTable = QueryResult.Unload();
 	ConsignorBatches = GetRegistrateConsignorBatches(DocObject, ItemListTable, tmpConsignorBatches, SilentMode);
 	
 	Table_ConsignorBatches = New Array();
 	For Each Row In ConsignorBatches Do
-		NewRow = New Structure("Key, ItemKey, SerialLotNumber, Store, Batch, Quantity");
+		NewRow = New Structure("Key, ItemKey, SerialLotNumber, SourceOfOrigin, Store, Batch, Quantity");
 		FillPropertyValues(NewRow, Row);
 		Table_ConsignorBatches.Add(NewRow);
 	EndDo;
@@ -95,7 +140,7 @@ Function GetRegistrateConsignorBatches(DocObject, ItemListTable, ConsignorBatche
 	
 	ArrayForDelete = New Array();
 	For Each Row In RegisterConsignorBatches Do
-		If Not ItemListTable.FindRows(New Structure("Key, SerialLotNumber", Row.Key, Row.SerialLotNumber)).Count() Then
+		If Not ItemListTable.FindRows(New Structure("Key, SerialLotNumber, SourceOfOrigin", Row.Key, Row.SerialLotNumber, Row.SourceOfOrigin)).Count() Then
 			ArrayForDelete.Add(Row);
 		EndIf;
 	EndDo;
@@ -109,6 +154,7 @@ Function GetRegistrateConsignorBatches(DocObject, ItemListTable, ConsignorBatche
 	ItemListFiltered.Columns.Add("Company"  , New TypeDescription("CatalogRef.Companies"));
 	ItemListFiltered.Columns.Add("ItemKey"  , New TypeDescription("CatalogRef.ItemKeys"));
 	ItemListFiltered.Columns.Add("SerialLotNumber", New TypeDescription("CatalogRef.SerialLotNumbers"));
+	ItemListFiltered.Columns.Add("SourceOfOrigin", New TypeDescription("CatalogRef.SourceOfOrigins"));
 	ItemListFiltered.Columns.Add("Store"    , New TypeDescription("CatalogRef.Stores"));
 	ItemListFiltered.Columns.Add("Quantity" , Metadata.DefinedTypes.typeQuantity.Type);
 	
@@ -127,7 +173,7 @@ Function GetRegistrateConsignorBatches(DocObject, ItemListTable, ConsignorBatche
 		IsChanged_Store   = False;
 		BatchQuantity = 0;
 		
-		BatchRows = RegisterConsignorBatches.FindRows(New Structure("Key, SerialLotNumber", Row.Key, Row.SerialLotNumber));
+		BatchRows = RegisterConsignorBatches.FindRows(New Structure("Key, SerialLotNumber, SourceOfOrigin", Row.Key, Row.SerialLotNumber, Row.SourceOfOrigin));
 		For Each BatchRow In BatchRows Do
 			BatchQuantity = BatchQuantity + BatchRow.Quantity;
 			
@@ -158,6 +204,7 @@ Function GetRegistrateConsignorBatches(DocObject, ItemListTable, ConsignorBatche
 			NewRow.Company  = Row.Company;
 			NewRow.ItemKey  = Row.ItemKey;
 			NewRow.SerialLotNumber  = Row.SerialLotNumber;
+			NewRow.SourceOfOrigin   = Row.SourceOfOrigin;
 			NewRow.Store    = Row.Store;
 			NewRow.Quantity = Row.Quantity;
 		EndIf;
@@ -176,6 +223,7 @@ Function GetRegistrateConsignorBatches(DocObject, ItemListTable, ConsignorBatche
 			Filter.Insert("Key"             , Row.Key);
 			Filter.Insert("ItemKey"         , Row.ItemKey);
 			Filter.Insert("SerialLotNumber" , Row.SerialLotNumber);
+			Filter.Insert("SourceOfOrigin"  , Row.SourceOfOrigin);
 			Filter.Insert("Store"           , Row.Store);
 			
 			If ConsignorBatchesTable.FindRows(Filter).Count() = 0 Then
@@ -335,6 +383,7 @@ Function GetConsignorBatches_Sales_Transfer(ItemListTable, DocObject, SilentMode
 	|	ItemListTable.Company,
 	|	ItemListTable.ItemKey,
 	|	ItemListTable.SerialLotNumber,
+	|	ItemListTable.SourceOfOrigin,
 	|	ItemListTable.Store,
 	|	ItemListTable.Quantity
 	|INTO ItemListTable
@@ -347,6 +396,7 @@ Function GetConsignorBatches_Sales_Transfer(ItemListTable, DocObject, SilentMode
 	|	ItemListTable.Company,
 	|	ItemListTable.ItemKey,
 	|	ItemListTable.SerialLotNumber,
+	|	ItemListTable.SourceOfOrigin,
 	|	ItemListTable.Store,
 	|	SUM(ItemListTable.Quantity) AS Quantity
 	|INTO ItemListTableGrouped
@@ -356,6 +406,7 @@ Function GetConsignorBatches_Sales_Transfer(ItemListTable, DocObject, SilentMode
 	|	ItemListTable.Company,
 	|	ItemListTable.ItemKey,
 	|	ItemListTable.SerialLotNumber,
+	|	ItemListTable.SourceOfOrigin,
 	|	ItemListTable.Store
 	|;
 	|
@@ -363,23 +414,26 @@ Function GetConsignorBatches_Sales_Transfer(ItemListTable, DocObject, SilentMode
 	|SELECT
 	|	ItemListTableGrouped.ItemKey AS ItemKey,
 	|	ItemListTableGrouped.SerialLotNumber AS SerialLotNumber,
+	|	ItemListTableGrouped.SourceOfOrigin AS SourceOfOrigin,
 	|	ItemListTableGrouped.Store AS Store,
 	|	Batches.Batch AS Batch,
 	|	ItemListTableGrouped.Quantity AS Quantity,
 	|	ISNULL(Batches.QuantityBalance, 0) AS QuantityBalance
 	|FROM
 	|	ItemListTableGrouped AS ItemListTableGrouped
-	|		LEFT JOIN AccumulationRegister.R8013B_ConsignorBatchWiseBalance.Balance(&Boundary, (Company, ItemKey, SerialLotNumber, Store) IN
+	|		LEFT JOIN AccumulationRegister.R8013B_ConsignorBatchWiseBalance.Balance(&Boundary, (Company, ItemKey, SerialLotNumber, SourceOfOrigin, Store) IN
 	|			(SELECT
 	|				ItemListTableGrouped.Company,
 	|				ItemListTableGrouped.ItemKey,
 	|				ItemListTableGrouped.SerialLotNumber,
+	|				ItemListTableGrouped.SourceOfOrigin,
 	|				ItemListTableGrouped.Store
 	|			FROM
 	|				ItemListTableGrouped AS ItemListTableGrouped)) AS Batches
 	|		ON ItemListTableGrouped.Company = Batches.Company
 	|		AND ItemListTableGrouped.ItemKey = Batches.ItemKey
 	|		AND ItemListTableGrouped.SerialLotNumber = Batches.SerialLotNumber
+	|		AND ItemListTableGrouped.SourceOfOrigin = Batches.SourceOfOrigin
 	|		AND ItemListTableGrouped.Store = Batches.Store
 	|
 	|ORDER BY
@@ -389,6 +443,7 @@ Function GetConsignorBatches_Sales_Transfer(ItemListTable, DocObject, SilentMode
 	|BY
 	|	ItemKey,
 	|	SerialLotNumber,
+	|	SourceOfOrigin,
 	|	Store";
 	
 	Query.SetParameter("ItemListTable", ItemListTable);
@@ -408,7 +463,7 @@ Function GetConsignorBatches_Sales_Transfer(ItemListTable, DocObject, SilentMode
 	If Not BatchResult.HaveError Then
 		PutResultToConsignorBatches(ItemListTable, BatchResult.ResultTable, ConsignorBatchesTable);
 	EndIf;
-	ConsignorBatchesTable.GroupBy("Key, ItemKey, SerialLotNumber, Store, Batch","Quantity");
+	ConsignorBatchesTable.GroupBy("Key, ItemKey, SerialLotNumber, SourceOfOrigin, Store, Batch","Quantity");
 	Return ConsignorBatchesTable;
 EndFunction
 
@@ -699,49 +754,53 @@ Function GetResultTable(BatchTree, SilentMode)
 	ResultTable = New ValueTable();
 	ResultTable.Columns.Add("ItemKey");
 	ResultTable.Columns.Add("SerialLotNumber");
+	ResultTable.Columns.Add("SourceOfOrigin");
 	ResultTable.Columns.Add("Store");
 	ResultTable.Columns.Add("Batch");
 	ResultTable.Columns.Add("Quantity");
 
 	HaveError = False;
-	For Each Row_ItemKey In BatchTree.Rows Do
-		For Each Row_SerialLotNumber In Row_ItemKey.Rows Do
-			For Each Row_Store In Row_SerialLotNumber.Rows Do
+	For Each Row_ItemKey In BatchTree.Rows Do // BatchTree
+		For Each Row_SerialLotNumber In Row_ItemKey.Rows Do // ItemKey
+			For Each Row_SourceOfOrigin In Row_SerialLotNumber.Rows Do // SerialLotNumber
+				For Each Row_Store In Row_SourceOfOrigin.Rows Do // SourceOfOrigin
 			
-				NeedExpense = Row_Store.Quantity;
+					NeedExpense = Row_Store.Quantity;
 		
-				For Each Row_Batch In Row_Store.Rows Do
-					If NeedExpense = 0 Or Row_Batch.QuantityBalance = 0 Then
-						Continue;
+					For Each Row_Batch In Row_Store.Rows Do
+						If NeedExpense = 0 Or Row_Batch.QuantityBalance = 0 Then
+							Continue;
+						EndIf;
+		
+						CanExpense = Min(NeedExpense, Row_Batch.QuantityBalance);
+			
+						NewRow = ResultTable.Add();
+						NewRow.ItemKey  = Row_ItemKey.ItemKey;
+						NewRow.SerialLotNumber  = Row_SerialLotNumber.SerialLotNumber;
+						NewRow.SourceOfOrigin   = Row_SourceOfOrigin.SourceOfOrigin;
+						NewRow.Store    = Row_Store.Store;
+						NewRow.Batch    = Row_Batch.Batch;
+						NewRow.Quantity = CanExpense;
+			
+						Row_Batch.QuantityBalance = Row_Batch.QuantityBalance - CanExpense;
+						NeedExpense = NeedExpense - CanExpense;
+					EndDo; // Row_Store.Rows
+		
+					If NeedExpense <> 0 Then
+						If Not SilentMode Then
+							Required  = Format(Row_Store.Quantity, "NFD=3;");
+							Remaining = Format(Row_Store.Quantity - NeedExpense, "NFD=3;");
+							Lack = Format(NeedExpense, "NFD=3;");
+			
+							Msg = StrTemplate(R().Error_120, Row_ItemKey.ItemKey, Row_Store.Store, Required, Remaining, Lack);
+							CommonFunctionsClientServer.ShowUsersMessage(Msg);
+						EndIf;
+						HaveError = True;			
 					EndIf;
-		
-					CanExpense = Min(NeedExpense, Row_Batch.QuantityBalance);
-			
-					NewRow = ResultTable.Add();
-					NewRow.ItemKey  = Row_ItemKey.ItemKey;
-					NewRow.SerialLotNumber  = Row_SerialLotNumber.SerialLotNumber;
-					NewRow.Store    = Row_Store.Store;
-					NewRow.Batch    = Row_Batch.Batch;
-					NewRow.Quantity = CanExpense;
-			
-					Row_Batch.QuantityBalance = Row_Batch.QuantityBalance - CanExpense;
-					NeedExpense = NeedExpense - CanExpense;
-				EndDo; // Row_Store.Rows
-		
-				If NeedExpense <> 0 Then
-					If Not SilentMode Then
-						Required  = Format(Row_Store.Quantity, "NFD=3;");
-						Remaining = Format(Row_Store.Quantity - NeedExpense, "NFD=3;");
-						Lack = Format(NeedExpense, "NFD=3;");
-			
-						Msg = StrTemplate(R().Error_120, Row_ItemKey.ItemKey, Row_Store.Store, Required, Remaining, Lack);
-						CommonFunctionsClientServer.ShowUsersMessage(Msg);
-					EndIf;
-					HaveError = True;			
-				EndIf;
-			EndDo; // Row_SerialLotNumber.Rows
-		EndDo; // Row_ItemKey.Rows
-	EndDo; // BatchTree.Rows
+				EndDo; // SourceOfOrigin
+			EndDo; // SerialLotNumber
+		EndDo; // ItemKey
+	EndDo; // BatchTree
 	
 	Return New Structure("ResultTable, HaveError", ResultTable, HaveError);
 EndFunction
@@ -762,6 +821,10 @@ Procedure PutResultToConsignorBatches(ItemListTable, ResultTable, ConsignorBatch
 				Continue;
 			EndIf;
 				
+			If Row.SourceOfOrigin <> Row_Result.SourceOfOrigin Then
+				Continue;
+			EndIf;
+				
 			If NeedExpense = 0 Or Row_Result.Quantity = 0 Then
 				Continue;
 			EndIf;
@@ -774,6 +837,7 @@ Procedure PutResultToConsignorBatches(ItemListTable, ResultTable, ConsignorBatch
 			NewRow.Key      = Row.Key;
 			NewRow.ItemKey  = Row.ItemKey;
 			NewRow.SerialLotNumber  = Row.SerialLotNumber;
+			NewRow.SourceOfOrigin   = Row.SourceOfOrigin;
 			NewRow.Store    = Row.Store;
 			NewRow.Batch    = Row_Result.Batch;
 			NewRow.Quantity = CanExpense;
@@ -787,6 +851,7 @@ Function GetEmptyConsignorBatchesTable()
 	ConsignorBatchesTable.Columns.Add("Key"      , InfoReg.Key.Type);
 	ConsignorBatchesTable.Columns.Add("ItemKey"  , InfoReg.ItemKey.Type);
 	ConsignorBatchesTable.Columns.Add("SerialLotNumber", InfoReg.SerialLotNumber.Type);
+	ConsignorBatchesTable.Columns.Add("SourceOfOrigin" , InfoReg.SourceOfOrigin.Type);
 	ConsignorBatchesTable.Columns.Add("Store"    , InfoReg.Store.Type);
 	ConsignorBatchesTable.Columns.Add("Batch"    , InfoReg.Batch.Type);
 	ConsignorBatchesTable.Columns.Add("Quantity" , Metadata.DefinedTypes.typeQuantity.Type);
@@ -800,6 +865,7 @@ Function GetRegisterConsignorBatches(DocObject)
 	|	T8010S_ConsignorBatches.Key,
 	|	T8010S_ConsignorBatches.ItemKey,
 	|	T8010S_ConsignorBatches.SerialLotNumber,
+	|	T8010S_ConsignorBatches.SourceOfOrigin,
 	|	T8010S_ConsignorBatches.Store,
 	|	T8010S_ConsignorBatches.Batch,
 	|	T8010S_ConsignorBatches.Quantity
@@ -917,10 +983,18 @@ Function GetExistingRows(Object, StoreInHeader, FilterStructure, FilterValues) E
 		NewRow_SerialLotNumber.Quantity        = FilterValues.Quantity;
 	EndIf;
 	
+	If ValueIsFilled(FilterValues.SourceOfOrigin) Then
+		NewRow_SourceOfOrigin = Wrapper.Object.SourceOfOrigins.Add();
+		NewRow_SourceOfOrigin.Key = NewRow.Key;
+		NewRow_SourceOfOrigin.SerialLotNumber = FilterValues.SerialLotNumber;
+		NewRow_SourceOfOrigin.SourceOfOrigin  = FilterValues.SourceOfOrigin;
+		NewRow_SourceOfOrigin.Quantity        = FilterValues.Quantity;
+	EndIf;
+	
 	BuilderAPI.SetRowProperty(Wrapper, NewRow, "InventoryOrigin", Enums.InventoryOrigingTypes.ConsignorStocks);
 	
 	ActualStocksBalance    = GetActualStocksBalance(Object, NewRow.Store, NewRow.ItemKey, FilterValues.SerialLotNumber);
-	ConsignorStocksBalance = GetConsignorStocksBalance(Object, Object.Company, NewRow.Store, NewRow.ItemKey, FilterValues.SerialLotNumber);
+	ConsignorStocksBalance = GetConsignorStocksBalance(Object, Object.Company, NewRow.Store, NewRow.ItemKey, FilterValues.SerialLotNumber, FilterValues.SourceOfOrigin);
 	
 	Filter = New Structure("Store, ItemKey", NewRow.Store, NewRow.ItemKey);
 	ItemListRows = Object.ItemList.FindRows(Filter);
@@ -1036,7 +1110,7 @@ Function GetActualStocksBalance(DocObject, Store, ItemKey, SerialLotNumber)
 	Return 0;
 EndFunction
 
-Function GetConsignorStocksBalance(DocObject, Company, Store, ItemKey, SerialLotNumber)
+Function GetConsignorStocksBalance(DocObject, Company, Store, ItemKey, SerialLotNumber, SourceOfOrigin)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -1045,7 +1119,8 @@ Function GetConsignorStocksBalance(DocObject, Company, Store, ItemKey, SerialLot
 	|	AccumulationRegister.R8013B_ConsignorBatchWiseBalance.Balance(&Boundary, Store = &Store
 	|	AND ItemKey = &ItemKey
 	|	AND Company = &Company
-	|	AND SerialLotNumber = &SerialLotNumber) AS R8013B_ConsignorBatchWiseBalance";
+	|	AND SerialLotNumber = &SerialLotNumber
+	|	AND SourceOfOrigin = &SourceOfOrigin) AS R8013B_ConsignorBatchWiseBalance";
 	If ValueIsFilled(DocObject.Ref) Then
 		Query.SetParameter("Boundary", New Boundary(DocObject.Ref.PointInTime(), BoundaryType.Excluding));
 	Else
@@ -1055,9 +1130,15 @@ Function GetConsignorStocksBalance(DocObject, Company, Store, ItemKey, SerialLot
 	Query.SetParameter("Store"   , Store);
 	Query.SetParameter("ItemKey" , ItemKey);
 	If ValueIsFilled(SerialLotNumber) Then
-		Query.SetParameter("SerialLotNumber" , SerialLotNumber);
+		Query.SetParameter("SerialLotNumber", SerialLotNumber);
 	Else
-		Query.SetParameter("SerialLotNumber" , Catalogs.SerialLotNumbers.EmptyRef());
+		Query.SetParameter("SerialLotNumber", Catalogs.SerialLotNumbers.EmptyRef());
+	EndIf;
+	
+	If ValueIsFilled(SourceOfOrigin) Then
+		Query.SetParameter("SourceOfOrigin", SourceOfOrigin);
+	Else
+		Query.SetParameter("SourceOfOrigin", Catalogs.SourceOfOrigins.EmptyRef());
 	EndIf;
 		
 	QueryResult = Query.Execute();

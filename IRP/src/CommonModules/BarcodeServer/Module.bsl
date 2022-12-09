@@ -27,6 +27,7 @@ Function SearchByBarcodes(Val Barcodes, Settings) Export
 	|	Barcodes.ItemKey AS ItemKey,
 	|	Barcodes.ItemKey.Item AS Item,
 	|	ISNULL(Barcodes.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
+	|	Barcodes.SourceOfOrigin AS SourceOfOrigin,
 	|	Barcodes.Unit AS Unit,
 	|	1 AS Quantity,
 	|	Barcodes.ItemKey.Unit AS ItemKeyUnit,

@@ -1258,6 +1258,21 @@ Scenario: Create catalog TaxRates objects
 		| 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef011' | 'False'           | '0'    | 'Without VAT'    | ''                 | ''               | 'Without VAT TR' |
 		| 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef012' | 'False'           | '0'    | '0%'             | ''                 | ''               | '0%'             |
 		| 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef013' | 'False'           | '1'    | '1%'             | ''                 | ''               | '1%'             |
+
+
+Scenario: Create catalog SourceOfOrigins objects
+
+	// Catalog.SourceOfOrigins
+
+	And I check or create catalog "SourceOfOrigins" objects:
+		| 'Ref'                                                                     | 'DeletionMark' | 'Code' | 'Description'                                   | 'CustomProductID' | 'CustomDeclarationID' | 'CountryOfOrigin'                                                   | 'SourceOfOriginOwner'                                               | 'BatchBalanceDetail' | 'Inactive' |
+		| 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed76d014207909' | 'False'        | 11     | 'Source of origin 4'                            | '9000990'         | '8900090'             | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | 'e1cib/data/Catalog.Items?ref=b781cf3f5e36b25611ecd69f89585358'     | 'True'               | 'False'    |
+		| 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed76d01420790a' | 'False'        | 12     | 'Source of origin without batch balance detail' | '78899'           | '90099'               | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1854' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f6'     | 'False'              | 'False'    |
+		| 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed76d014207919' | 'False'        | 13     | 'Source of origin 5'                            | '9000991'         | '8900091'             | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf115bcc9c5f0' | 'True'               | 'False'    |
+		| 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed76d014207920' | 'False'        | 14     | 'Source of origin 6'                            | '9000992'         | '8900092'             | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb49ef' | 'True'               | 'False'    |
+
+
+
 Scenario: Create catalog Taxes objects
 
 	And I check or create catalog "Taxes" objects:

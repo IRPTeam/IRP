@@ -1942,10 +1942,14 @@ Function ConsignorBatchesFillBatchesExecute(Options) Export
 		SilentMode = True;
 	EndIf;
 	
+	SourceOfOrigins = SourceOfOriginServer.CalculateSourceOfOriginsTable(Options.Table_ItemList, 
+		Options.Table_SerialLotNumbers, 
+		Options.Table_SourceOfOrigins);
+	
 	ConsignorBatches = CommissionTradeServer.GetConsignorBatchesTable(Options.DocObject, 
 		Options.Table_ItemList, 
 		Options.Table_SerialLotNumbers, 
-		Options.Table_SourceOfOrigins, 
+		SourceOfOrigins, 
 		Options.Table_ConsignorBatches, 
 		SilentMode);
 	Return New Structure("ConsignorBatches", ConsignorBatches);	

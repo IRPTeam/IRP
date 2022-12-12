@@ -34,10 +34,15 @@ Procedure AddNewSerialLotNumbers(Result, Parameters, AddNewLot = False, AddInfo 
 	EndIf;
 	
 	For Each Row In Result.SerialLotNumbers Do
-		NewRow = Parameters.Object.SerialLotNumbers.Add();
+		FoundRows = Parameters.Object.SerialLotNumbers.FindRows(New Structure("Key, SerialLotNumber", Result.RowKey, Row.SerialLotNumber));
+		If FoundRows.Count() Then
+			NewRow = FoundRows[0];
+		Else
+			NewRow = Parameters.Object.SerialLotNumbers.Add();
+		EndIf;
 		NewRow.Key = Result.RowKey;
 		NewRow.SerialLotNumber = Row.SerialLotNumber;
-		NewRow.Quantity = Row.Quantity;
+		NewRow.Quantity = NewRow.Quantity + Row.Quantity;
 	EndDo;
 	
 	TotalQuantity = 0;

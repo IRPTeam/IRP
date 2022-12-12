@@ -1302,6 +1302,7 @@ Function R8015T_ConsignorPrices()
 		|	ReceiptFromConsignor.PurchaseInvoice,
 		|	ReceiptFromConsignor.ItemKey,
 		|	ReceiptFromConsignor.SerialLotNumber,
+		|	ReceiptFromConsignor.SourceOfOrigin,
 		|	ReceiptFromConsignor.Currency,
 		|	ReceiptFromConsignor.Price
 		|INTO R8015T_ConsignorPrices

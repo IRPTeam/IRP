@@ -75,6 +75,7 @@ Function GetConsignorSales(Parameters) Export
 	|	ConsignorSales.SalesInvoice,
 	|	ConsignorSales.PurchaseInvoice,
 	|	ConsignorSales.SerialLotNumber AS SerialLotNumber,
+	|	ConsignorSales.SourceOfOrigin AS SourceOfOrigin,
 	|	0 AS SumColumn,
 	|	TRUE AS Use,
 	|	CASE

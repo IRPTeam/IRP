@@ -147,6 +147,8 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 		ServerData.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") And IsItemList);	
 	Parameters.Insert("BillOfMaterialsListExists" , 
 		ServerData.ObjectMetadataInfo.Tables.Property("BillOfMaterialsList") And IsProductionsList);	
+	Parameters.Insert("SourceOfOriginsExists" , 
+		ServerData.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") And IsItemList);	
 	
 	Parameters.Insert("ArrayOfTaxInfo"         , ServerData.ArrayOfTaxInfo);
 	
@@ -370,6 +372,9 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	// Manufacturing calculations
 	SettersMap.Insert("Command_UpdateCurrentQuantity"  , "StepChangeCurrentQuantityInProductions");
 	SettersMap.Insert("Command_UpdateByBillOfMaterials", "StepMaterialsCalculations");
+	
+	// Source of origins
+	SettersMap.Insert("Command_UpdateConsignorBatches"  , "StepConsignorBatchesFillBatches");
 	
 	Return SettersMap.Get(DataPath);
 EndFunction
@@ -11372,7 +11377,8 @@ EndFunction
 
 Function IsFullLoadTabularSection(Parameters, PropertyName)
 	_PropertyName = Upper(PropertyName);
-	If _PropertyName = Upper("ConsignorBatches") Then
+	If _PropertyName = Upper("ConsignorBatches")
+		Or _PropertyName = Upper("SourceOfOrigins") Then
 		Return True;
 	EndIf;
 	Return False;
@@ -11952,6 +11958,9 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 	If Parameters.SerialLotNumbersExists And Not Parameters.Cache.Property("SerialLotNumbers") Then
 		Parameters.Cache.Insert("SerialLotNumbers", New Array());
 	EndIf;
+	If Parameters.SourceOfOriginsExists And Not Parameters.Cache.Property("SourceOfOrigins") Then
+		Parameters.Cache.Insert("SourceOfOrigins", New Array());
+	EndIf;
 	
 	ProcessedKeys = New Array();
 	AllExtractedData = New Structure();
@@ -11978,6 +11987,18 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 			EndDo;
 		EndIf;
 		
+		// add source of origins to separeted table
+		If Parameters.SourceOfOriginsExists Then
+			Filter = New Structure(SourceColumnsGroupBy);
+			FillPropertyValues(Filter, SourceRow);
+			For Each RowSoO In SourceTableExpanded.FindRows(Filter) Do
+				NewRowSoO = New Structure(Parameters.ObjectMetadataInfo.Tables.SourceOfOrigins.Columns);
+				FillPropertyValues(NewRowSoO, RowSoO);
+				NewRowSoO.Key = NewRow.Key;
+				Parameters.Cache.SourceOfOrigins.Add(NewRowSoO);
+			EndDo;
+		EndIf;
+			
 		// fill new row default values from user settings
 		AddNewRow(TableName, Parameters);
 		// fill new row from source table

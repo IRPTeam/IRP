@@ -20,6 +20,7 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	For Each Row In Table_SerialLotNumber Do
 		FillPropertyValues(tmpSerialLotNumbers.Add(), Row);
 	EndDo;
+	tmpSerialLotNumbers.GroupBy("Key, SerialLotNumber", "Quantity");
 	
 	tmpSourceOfOrigins = New ValueTable();
 	tmpSourceOfOrigins.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
@@ -28,7 +29,11 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	tmpSourceOfOrigins.Columns.Add("Quantity"        , Metadata.DefinedTypes.typeQuantity.Type);
 	
 	For Each Row In Table_SourceOfOrigins Do
-		FillPropertyValues(tmpSourceOfOrigins.Add(), Row);
+		NewRow = tmpSourceOfOrigins.Add();
+		FillPropertyValues(NewRow, Row);
+		If Not ValueIsFilled(NewRow.SerialLotNumber) Then
+			NewRow.SerialLotNumber = Catalogs.SerialLotNumbers.EmptyRef();
+		EndIf;
 	EndDo;
 	
 	tmpConsignorBatches = New ValueTable();
@@ -112,7 +117,8 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	|FROM
 	|	tmpItemList_1 AS tmpItemList_1
 	|		LEFT JOIN tmpSourceOfOrigins AS tmpSourceOfOrigins
-	|		ON tmpItemList_1.Key = tmpSourceOfOrigins.Key";
+	|		ON tmpItemList_1.Key = tmpSourceOfOrigins.Key
+	|		AND tmpItemList_1.SerialLotNumber = tmpSourceOfOrigins.SerialLotNumber";
 	Query.SetParameter("tmpItemList", tmpItemList);
 	Query.SetParameter("tmpSerialLotNumbers", tmpSerialLotNumbers);
 	Query.SetParameter("tmpSourceOfOrigins", tmpSourceOfOrigins);
@@ -926,9 +932,10 @@ EndFunction
 
 Function __GetFillingDataBySalesReportToConsignor(DocRef) Export
 	FillingData = New Structure("BasedOn", "SalesReportToConsignor");
-	FillingData.Insert("ItemList", New Array());
-	FillingData.Insert("TaxList", New Array());
-	FillingData.Insert("SerialLotNumbers", New Array());
+	FillingData.Insert("ItemList"         , New Array());
+	FillingData.Insert("TaxList"          , New Array());
+	FillingData.Insert("SerialLotNumbers" , New Array());
+	FillingData.Insert("SourceOfOrigins"  , New Array());
 	
 	FillingData.Insert("Partner", DocRef.Company.Partner);
 	
@@ -952,10 +959,16 @@ Function __GetFillingDataBySalesReportToConsignor(DocRef) Export
 		FillingData.SerialLotNumbers.Add(NewRow);
 	EndDo;
 	
+	For Each Row In DocRef.SourceOfOrigins Do
+		NewRow = New Structure("Key, SerialLotNumber, SourceOfOrigin, Quantity");
+		FillPropertyValues(NewRow, Row);
+		FillingData.SourceOfOrigins.Add(NewRow);
+	EndDo;
+	
 	Return FillingData;
 EndFunction	
 
-Function GetExistingRows(Object, StoreInHeader, FilterStructure, FilterValues) Export
+Function GetExistingRows(Object, StoreInHeader, FilterStructure, FilterValues, FirstCall = True) Export
 	Result = New Structure();
 	Result.Insert("ArrayOfRowKeys", New Array());
 	Result.Insert("InventoryOrigin", Enums.InventoryOrigingTypes.OwnStocks);
@@ -966,37 +979,37 @@ Function GetExistingRows(Object, StoreInHeader, FilterStructure, FilterValues) E
 	
 	Wrapper = BuilderAPI.Initialize(Object, , ,"ItemList", DocInfo);
 	
-	NewRow = BuilderAPI.AddRow(Wrapper, "ItemList");
-	BuilderAPI.SetRowProperty(Wrapper, NewRow, "Item"           , FilterValues.Item);
-	BuilderAPI.SetRowProperty(Wrapper, NewRow, "ItemKey"        , FilterValues.ItemKey);
-	BuilderAPI.SetRowProperty(Wrapper, NewRow, "Unit"           , FilterValues.Unit);
-	BuilderAPI.SetRowProperty(Wrapper, NewRow, "Quantity"       , FilterValues.Quantity);
+	NewRow_ItemList = BuilderAPI.AddRow(Wrapper, "ItemList");
+	BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "Item"           , FilterValues.Item);
+	BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "ItemKey"        , FilterValues.ItemKey);
+	BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "Unit"           , FilterValues.Unit);
+	BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "Quantity"       , FilterValues.Quantity);
 	
 	If ValueIsFilled(StoreInHeader) Then
-		BuilderAPI.SetRowProperty(Wrapper, NewRow, "Store", StoreInHeader);
+		BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "Store", StoreInHeader);
 	EndIf;
 	
 	If ValueIsFilled(FilterValues.SerialLotNumber) Then
 		NewRow_SerialLotNumber = Wrapper.Object.SerialLotNumbers.Add();
-		NewRow_SerialLotNumber.Key = NewRow.Key;
+		NewRow_SerialLotNumber.Key = NewRow_ItemList.Key;
 		NewRow_SerialLotNumber.SerialLotNumber = FilterValues.SerialLotNumber;
 		NewRow_SerialLotNumber.Quantity        = FilterValues.Quantity;
 	EndIf;
 	
 	If ValueIsFilled(FilterValues.SourceOfOrigin) Then
 		NewRow_SourceOfOrigin = Wrapper.Object.SourceOfOrigins.Add();
-		NewRow_SourceOfOrigin.Key = NewRow.Key;
+		NewRow_SourceOfOrigin.Key = NewRow_ItemList.Key;
 		NewRow_SourceOfOrigin.SerialLotNumber = FilterValues.SerialLotNumber;
 		NewRow_SourceOfOrigin.SourceOfOrigin  = FilterValues.SourceOfOrigin;
 		NewRow_SourceOfOrigin.Quantity        = FilterValues.Quantity;
 	EndIf;
 	
-	BuilderAPI.SetRowProperty(Wrapper, NewRow, "InventoryOrigin", Enums.InventoryOrigingTypes.ConsignorStocks);
+	BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "InventoryOrigin", Enums.InventoryOrigingTypes.ConsignorStocks);
 	
-	ActualStocksBalance    = GetActualStocksBalance(Object, NewRow.Store, NewRow.ItemKey, FilterValues.SerialLotNumber);
-	ConsignorStocksBalance = GetConsignorStocksBalance(Object, Object.Company, NewRow.Store, NewRow.ItemKey, FilterValues.SerialLotNumber, FilterValues.SourceOfOrigin);
+	ActualStocksBalance    = GetActualStocksBalance(Object, NewRow_ItemList.Store, NewRow_ItemList.ItemKey, FilterValues.SerialLotNumber);
+	ConsignorStocksBalance = GetConsignorStocksBalance(Object, Object.Company, NewRow_ItemList.Store, NewRow_ItemList.ItemKey, FilterValues.SerialLotNumber);
 	
-	Filter = New Structure("Store, ItemKey", NewRow.Store, NewRow.ItemKey);
+	Filter = New Structure("Store, ItemKey", NewRow_ItemList.Store, NewRow_ItemList.ItemKey);
 	ItemListRows = Object.ItemList.FindRows(Filter);
 	
 	QuantityInDocument = 0;
@@ -1006,72 +1019,146 @@ Function GetExistingRows(Object, StoreInHeader, FilterStructure, FilterValues) E
 		
 	HowManyOwnStocks = ActualStocksBalance - ConsignorStocksBalance - QuantityInDocument; 
 	
-	IsOwnStocks = False;
-	IsConsignorStocks = False;
-	If HowManyOwnStocks - NewRow.QuantityInBaseUnit >= 0 Then
-		// is own stocks
-		IsOwnStocks = True;
+	ConsignorStockIsAvailable = False;
+	
+	If HowManyOwnStocks - NewRow_ItemList.QuantityInBaseUnit >= 0 Then
+		Return AsOwnStocks(Object, Result, FilterStructure, FilterValues);		
 	Else
 		ConsignorStockAvailableQuantity = 0;
 		For Each Row In Wrapper.Object.ConsignorBatches Do
-			If Row.Key <> NewRow.Key Then
+			If Row.Key <> NewRow_ItemList.Key Then
 				Continue;
 			EndIf;
 			ConsignorStockAvailableQuantity = ConsignorStockAvailableQuantity + Row.Quantity;
 		EndDo;
-		If NewRow.QuantityInBaseUnit = ConsignorStockAvailableQuantity Then
-			// is consignor stocks
-			IsConsignorStocks = True;
+			
+		If NewRow_ItemList.QuantityInBaseUnit = ConsignorStockAvailableQuantity Then
+			ConsignorStockIsAvailable = True;
 		Else
-			// is own stocks
-			IsOwnStocks = True;
+			ConsignorStockIsAvailable = False;
 		EndIf;
 	EndIf;
 	
-	If IsOwnStocks Then
-		FillPropertyValues(FilterStructure, FilterValues);
-		FilterStructure.Insert("InventoryOrigin", Enums.InventoryOrigingTypes.OwnStocks);
-		ItemListRows = Object.ItemList.FindRows(FilterStructure);
-		For Each Row In ItemListRows Do
-			Result.ArrayOfRowKeys.Add(Row.Key);
-		EndDo;
-		Return Result;
-	EndIf;
-		
-	If IsConsignorStocks Then
-		FillPropertyValues(FilterStructure, FilterValues);
-		FilterStructure.Insert("InventoryOrigin", Enums.InventoryOrigingTypes.ConsignorStocks);
-		ItemListRows = Object.ItemList.FindRows(FilterStructure);
-		// check taxes
-		ArrayOfTaxes = New Array();
-		For Each TaxRow In Wrapper.Object.TaxList Do
-			If TaxRow.Key = NewRow.Key And ValueIsFilled(TaxRow.Tax) Then
-				ArrayOfTaxes.Add(New Structure("Tax, TaxRate", TaxRow.Tax, TaxRow.TaxRate));
-			EndIf;
-		EndDo;
-		
-		For Each Row In ItemListRows Do
-			TaxListRows = Object.TaxList.FindRows(New Structure("Key", Row.Key));
-			IsAllTaxesTheSame = False;
-			If ArrayOfTaxes.Count() = TaxListRows.Count() Then
-				IsTaxesTheSame = True;
-				For i = 0 To ArrayOfTaxes.Count() - 1 Do
-					If ArrayOfTaxes[i].Tax <> TaxListRows[i].Tax Or ArrayOfTaxes[i].TaxRate <> TaxListRows[i].TaxRate Then
-						IsTaxesTheSame = False;
-					EndIf;
+	If ConsignorStockIsAvailable Then
+		Return AsConsignorStocks(Object, Wrapper, NewRow_ItemList, Result, FilterStructure, FilterValues);
+	Else
+		If FirstCall And Not ValueIsFilled(FilterValues.SourceOfOrigin) Then
+			
+			ConsignorBatchesOnStock = GetConsignorBatchesOnStock(Object, Object.Company, NewRow_ItemList.Store, NewRow_ItemList.ItemKey, FilterValues.SerialLotNumber);
+			// Batch, Store, ItemKey, SerialLotNumber, SourceOfOrigin
+			
+			ConsignorBatchesGrouped = Object.ConsignorBatches.Unload();
+			ConsignorBatchesGrouped.GroupBy("Batch, Store, ItemKey, SerialLotNumber, SourceOfOrigin", "Quantity");
+			
+			For Each Row_ConsignorBatchesGrouped In ConsignorBatchesGrouped Do
+				Filter = New Structure("Batch, Store, ItemKey, SerialLotNumber, SourceOfOrigin");
+				FillPropertyValues(Filter, Row_ConsignorBatchesGrouped);
+				Rows_ConsignorBatchesOnStock = ConsignorBatchesOnStock.FindRows(Filter);
+				For Each Row_ConsignorBatchesOnStock In Rows_ConsignorBatchesOnStock Do
+					Row_ConsignorBatchesOnStock.Quantity = Row_ConsignorBatchesOnStock.Quantity - Row_ConsignorBatchesGrouped.Quantity;
 				EndDo;
-				If IsTaxesTheSame Then
-					IsAllTaxesTheSame = True;
-				EndIf;
+			EndDo;
+			
+			HaveOtherConsugnorBatches = False;
+			For Each Row_ConsignorBatchesOnStock In ConsignorBatchesOnStock Do
+				If Row_ConsignorBatchesOnStock.Quantity > 0 Then 
+					If ValueIsFilled(Row_ConsignorBatchesOnStock.SourceOfOrigin) Then
+						FilterValues.SourceOfOrigin = Row_ConsignorBatchesOnStock.SourceOfOrigin;
+						HaveOtherConsugnorBatches = True;
+						Return GetExistingRows(Object, StoreInHeader, FilterStructure, FilterValues, False);
+					Else
+						Break;
+					EndIf; // Source of origin  = Is Filled
+				EndIf; // > 0
+			EndDo; // ConsignorBatchesOnStock
+			
+			If Not HaveOtherConsugnorBatches Then
+				Return AsOwnStocks(Object, Result, FilterStructure, FilterValues);
 			EndIf;
-			If IsAllTaxesTheSame Then
-				Result.ArrayOfRowKeys.Add(Row.Key);
-			EndIf;
-		EndDo;
-		Result.InventoryOrigin = Enums.InventoryOrigingTypes.ConsignorStocks;
-		Return Result;
+			
+		Else // Second call
+			Return AsOwnStocks(Object, Result, FilterStructure, FilterValues);
+		EndIf;
 	EndIf;
-	
+		
+	Return Result;
+EndFunction
+
+Function AsOwnStocks(Object, Result, FilterStructure, FilterValues)
+	FillPropertyValues(FilterStructure, FilterValues);
+	FilterStructure.Insert("InventoryOrigin", Enums.InventoryOrigingTypes.OwnStocks);
+
+	ItemListRows = Object.ItemList.FindRows(FilterStructure);
+	For Each Row In ItemListRows Do
+		SkipItemListRow = False;
+		If CommonFunctionsClientServer.ObjectHasProperty(Object, "SourceOfOrigins") Then
+			_SourceOfOriginRef = ?(ValueIsFilled(FilterValues.SourceOfOrigin), FilterValues.SourceOfOrigin, Catalogs.SourceOfOrigins.EmptyRef());
+			For Each _Row In Object.SourceOfOrigins Do
+				If _Row.Key = Row.Key Then
+					If _Row.SourceOfOrigin <> _SourceOfOriginRef Then
+						SkipItemListRow = True;
+						Break;
+					EndIf;
+				EndIf;
+			EndDo; 
+		EndIf;
+		If SkipItemListRow Then
+			Continue;
+		EndIf;
+			
+		Result.ArrayOfRowKeys.Add(Row.Key);
+	EndDo;
+	Return Result;
+EndFunction
+
+Function AsConsignorStocks(Object, Wrapper, NewRow_ItemList, Result, FilterStructure, FilterValues)
+	FillPropertyValues(FilterStructure, FilterValues);
+	FilterStructure.Insert("InventoryOrigin", Enums.InventoryOrigingTypes.ConsignorStocks);
+	ItemListRows = Object.ItemList.FindRows(FilterStructure);
+	// check taxes
+	ArrayOfTaxes = New Array();
+	For Each TaxRow In Wrapper.Object.TaxList Do
+		If TaxRow.Key = NewRow_ItemList.Key And ValueIsFilled(TaxRow.Tax) Then
+			ArrayOfTaxes.Add(New Structure("Tax, TaxRate", TaxRow.Tax, TaxRow.TaxRate));
+		EndIf;
+	EndDo;
+		
+	For Each Row In ItemListRows Do
+			
+		SkipItemListRow = False;
+		If CommonFunctionsClientServer.ObjectHasProperty(Object, "SourceOfOrigins") Then
+			_SourceOfOriginRef = ?(ValueIsFilled(FilterValues.SourceOfOrigin), FilterValues.SourceOfOrigin, Catalogs.SourceOfOrigins.EmptyRef());
+			For Each _Row In Object.SourceOfOrigins Do
+				If _Row.Key = Row.Key Then
+					If _Row.SourceOfOrigin <> _SourceOfOriginRef Then
+						SkipItemListRow = True;
+						Break;
+					EndIf;
+				EndIf;
+			EndDo; 
+		EndIf;
+		If SkipItemListRow Then
+			Continue;
+		EndIf;
+			
+		TaxListRows = Object.TaxList.FindRows(New Structure("Key", Row.Key));
+		IsAllTaxesTheSame = False;
+		If ArrayOfTaxes.Count() = TaxListRows.Count() Then
+			IsTaxesTheSame = True;
+			For i = 0 To ArrayOfTaxes.Count() - 1 Do
+				If ArrayOfTaxes[i].Tax <> TaxListRows[i].Tax Or ArrayOfTaxes[i].TaxRate <> TaxListRows[i].TaxRate Then
+					IsTaxesTheSame = False;
+				EndIf;
+			EndDo;
+			If IsTaxesTheSame Then
+				IsAllTaxesTheSame = True;
+			EndIf;
+		EndIf;
+		If IsAllTaxesTheSame Then
+			Result.ArrayOfRowKeys.Add(Row.Key);
+		EndIf;
+	EndDo;
+	Result.InventoryOrigin = Enums.InventoryOrigingTypes.ConsignorStocks;
 	Return Result;
 EndFunction
 
@@ -1110,7 +1197,7 @@ Function GetActualStocksBalance(DocObject, Store, ItemKey, SerialLotNumber)
 	Return 0;
 EndFunction
 
-Function GetConsignorStocksBalance(DocObject, Company, Store, ItemKey, SerialLotNumber, SourceOfOrigin)
+Function GetConsignorStocksBalance(DocObject, Company, Store, ItemKey, SerialLotNumber)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -1119,8 +1206,7 @@ Function GetConsignorStocksBalance(DocObject, Company, Store, ItemKey, SerialLot
 	|	AccumulationRegister.R8013B_ConsignorBatchWiseBalance.Balance(&Boundary, Store = &Store
 	|	AND ItemKey = &ItemKey
 	|	AND Company = &Company
-	|	AND SerialLotNumber = &SerialLotNumber
-	|	AND SourceOfOrigin = &SourceOfOrigin) AS R8013B_ConsignorBatchWiseBalance";
+	|	AND SerialLotNumber = &SerialLotNumber) AS R8013B_ConsignorBatchWiseBalance";
 	If ValueIsFilled(DocObject.Ref) Then
 		Query.SetParameter("Boundary", New Boundary(DocObject.Ref.PointInTime(), BoundaryType.Excluding));
 	Else
@@ -1134,13 +1220,7 @@ Function GetConsignorStocksBalance(DocObject, Company, Store, ItemKey, SerialLot
 	Else
 		Query.SetParameter("SerialLotNumber", Catalogs.SerialLotNumbers.EmptyRef());
 	EndIf;
-	
-	If ValueIsFilled(SourceOfOrigin) Then
-		Query.SetParameter("SourceOfOrigin", SourceOfOrigin);
-	Else
-		Query.SetParameter("SourceOfOrigin", Catalogs.SourceOfOrigins.EmptyRef());
-	EndIf;
-		
+			
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
@@ -1149,3 +1229,46 @@ Function GetConsignorStocksBalance(DocObject, Company, Store, ItemKey, SerialLot
 	Return 0;
 EndFunction
 	
+Function GetConsignorBatchesOnStock(DocObject, Company, Store, ItemKey, SerialLotNumber)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	R8013B_ConsignorBatchWiseBalance.Batch,
+	|	R8013B_ConsignorBatchWiseBalance.Store,
+	|	R8013B_ConsignorBatchWiseBalance.ItemKey,
+	|	R8013B_ConsignorBatchWiseBalance.SerialLotNumber,
+	|	R8013B_ConsignorBatchWiseBalance.SourceOfOrigin,
+	|	SUM(R8013B_ConsignorBatchWiseBalance.QuantityBalance) AS Quantity,
+	|	R8013B_ConsignorBatchWiseBalance.Batch.Date AS BatchDate
+	|FROM
+	|	AccumulationRegister.R8013B_ConsignorBatchWiseBalance.Balance(&Boundary, Store = &Store
+	|	AND ItemKey = &ItemKey
+	|	AND Company = &Company
+	|	AND SerialLotNumber = &SerialLotNumber) AS R8013B_ConsignorBatchWiseBalance
+	|GROUP BY
+	|	R8013B_ConsignorBatchWiseBalance.Batch,
+	|	R8013B_ConsignorBatchWiseBalance.Store,
+	|	R8013B_ConsignorBatchWiseBalance.ItemKey,
+	|	R8013B_ConsignorBatchWiseBalance.SerialLotNumber,
+	|	R8013B_ConsignorBatchWiseBalance.SourceOfOrigin,
+	|	R8013B_ConsignorBatchWiseBalance.Batch.Date";
+	If ValueIsFilled(DocObject.Ref) Then
+		Query.SetParameter("Boundary", New Boundary(DocObject.Ref.PointInTime(), BoundaryType.Excluding));
+	Else
+		Query.SetParameter("Boundary", CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(DocObject.Ref, DocObject.Date));
+	EndIf;
+	Query.SetParameter("Company" , Company);
+	Query.SetParameter("Store"   , Store);
+	Query.SetParameter("ItemKey" , ItemKey);
+	If ValueIsFilled(SerialLotNumber) Then
+		Query.SetParameter("SerialLotNumber", SerialLotNumber);
+	Else
+		Query.SetParameter("SerialLotNumber", Catalogs.SerialLotNumbers.EmptyRef());
+	EndIf;
+			
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	QueryTable.Sort("BatchDate");
+	Return QueryTable;	
+EndFunction
+

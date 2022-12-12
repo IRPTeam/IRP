@@ -1367,7 +1367,7 @@ Function R8013B_ConsignorBatchWiseBalance()
 		|			Then ItemList.Quantity
 		|		ELSE SerialLotNumbers.Quantity
 		|	end AS Quantity,
-		|	SerialLotNumbers.SerialLotNumber
+		|	ISNULL(SerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
 		|INTO ConsignorBatchWiseBalance_1
 		|FROM
 		|	ItemList AS ItemList
@@ -1398,6 +1398,7 @@ Function R8013B_ConsignorBatchWiseBalance()
 		|	ConsignorBatchWiseBalance_1 AS ConsignorBatchWiseBalance_1
 		|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
 		|		ON ConsignorBatchWiseBalance_1.Key = SourceOfOrigins.Key
+		|		AND ConsignorBatchWiseBalance_1.SerialLotNumber = SourceOfOrigins.SerialLotNumberStock
 		|GROUP BY
 		|	ConsignorBatchWiseBalance_1.RecordType,
 		|	ConsignorBatchWiseBalance_1.Period,
@@ -1412,6 +1413,7 @@ EndFunction
 Function R8015T_ConsignorPrices()
 	Return
 		"SELECT
+		|	ItemList.Key,
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Partner,
@@ -1419,24 +1421,45 @@ Function R8015T_ConsignorPrices()
 		|	ItemList.Invoice AS PurchaseInvoice,
 		|	ItemList.ItemKey,
 		|	ItemList.Currency,
-		|	AVG(ItemList.Price) AS Price,
-		|	SerialLotNumbers.SerialLotNumber
-		|INTO R8015T_ConsignorPrices
+		|	ItemList.Price,
+		|	ISNULL(SerialLotNumbers.SerialLotNumber, Value(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
+		|INTO ConsignorPrices_1
 		|FROM
 		|	ItemList AS ItemList
-		|	LEFT JOIN SerialLotNumbers AS SerialLotNumbers ON
-		|	SerialLotNumbers.Key = ItemList.Key
+		|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+		|		ON SerialLotNumbers.Key = ItemList.Key
 		|WHERE
 		|	ItemList.IsReceiptFromConsignor
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ConsignorPrices_1.Period,
+		|	ConsignorPrices_1.Company,
+		|	ConsignorPrices_1.Partner,
+		|	ConsignorPrices_1.Agreement,
+		|	ConsignorPrices_1.PurchaseInvoice,
+		|	ConsignorPrices_1.ItemKey,
+		|	ConsignorPrices_1.Currency,
+		|	AVG(ConsignorPrices_1.Price) AS Price,
+		|	SourceOfOrigins.SourceOfOriginStock AS SourceOfOrigin,
+		|	SourceOfOrigins.SerialLotNumberStock AS SerialLotNumber
+		|INTO R8015T_ConsignorPrices
+		|FROM
+		|	ConsignorPrices_1 AS ConsignorPrices_1
+		|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
+		|		ON ConsignorPrices_1.Key = SourceOfOrigins.Key
+		|		AND ConsignorPrices_1.SerialLotNumber = SourceOfOrigins.SerialLotNumberStock
 		|GROUP BY
-		|	ItemList.Period,
-		|	ItemList.Company,
-		|	ItemList.Partner,
-		|	ItemList.Agreement,
-		|	ItemList.Invoice,
-		|	ItemList.ItemKey,
-		|	ItemList.Currency,
-		|	SerialLotNumbers.SerialLotNumber";
+		|	ConsignorPrices_1.Period,
+		|	ConsignorPrices_1.Company,
+		|	ConsignorPrices_1.Partner,
+		|	ConsignorPrices_1.Agreement,
+		|	ConsignorPrices_1.PurchaseInvoice,
+		|	ConsignorPrices_1.ItemKey,
+		|	ConsignorPrices_1.Currency,
+		|	SourceOfOrigins.SourceOfOriginStock,
+		|	SourceOfOrigins.SerialLotNumberStock";
 EndFunction
 
 #Region Accounting

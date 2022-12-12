@@ -440,6 +440,7 @@
   <commonModules>CommonModule.CommissionTradeServer</commonModules>
   <commonModules>CommonModule.CommissionTradePrivileged</commonModules>
   <commonModules>CommonModule.SourceOfOriginClient</commonModules>
+  <commonModules>CommonModule.SourceOfOriginServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

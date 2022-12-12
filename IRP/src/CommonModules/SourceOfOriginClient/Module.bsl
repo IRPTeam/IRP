@@ -75,9 +75,12 @@ Procedure AddNewSourceOfOrigins(Result, Parameters) Export
 	EndDo;
 	
 	For Each Row In Result.SourceOfOrigins Do
-		FillPropertyValues(Parameters.Object.SourceOfOrigins.Add(), Row);
+		NewRow = Parameters.Object.SourceOfOrigins.Add();
+		FillPropertyValues(NewRow, Row);
+		NewRow.Key = Result.RowKey;
 	EndDo;
 	
+	RecalculateConsignorBatches(Parameters.Object, Parameters.Form);
 	UpdateSourceOfOriginsPresentation(Parameters.Object);
 EndProcedure
 
@@ -90,19 +93,7 @@ Procedure PresentationClearing(Object, Form, Item, AddInfo = Undefined) Export
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	DeleteUnusedSourceOfOrigins(Object, CurrentData.Key);
-EndProcedure
-
-Procedure UpdateSourceOfOriginsPresentation(Object) Export
-	For Each RowItemList In Object.ItemList Do
-		ArrayOfSourceOfOrigins = Object.SourceOfOrigins.FindRows(New Structure("Key", RowItemList.Key));
-		RowItemList.SourceOfOriginsPresentation.Clear();		
-		For Each RowSourceOfOrigins In ArrayOfSourceOfOrigins Do
-			If ValueIsFilled(RowSourceOfOrigins.SourceOfOrigin) Then
-				RowItemList.SourceOfOriginsPresentation.Add(RowSourceOfOrigins.SourceOfOrigin);
-			EndIf;
-		EndDo;
-	EndDo;
+	DeleteUnusedSourceOfOrigins(Object, Form, CurrentData.Key);
 EndProcedure
 
 Procedure UpdateSourceOfOriginsQuantity(Object, Form) Export
@@ -110,7 +101,23 @@ Procedure UpdateSourceOfOriginsQuantity(Object, Form) Export
 		SerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", Row_ItemList.Key));
 		If SerialLotNumbers.Count() Then
 			
-			For Each Row_SerialLotNumbers In SerialLotNumbers Do // SerialLotNumbers
+			SerialLotNumbersGrouped = New Array();
+			For Each Row0 In SerialLotNumbers Do
+				FoundRow = Undefined;
+				For Each Row1 In SerialLotNumbersGrouped Do
+					If Row0.Key = Row1.Key And Row0.SerialLotNumber = Row1.SerialLotNumber Then
+						FoundRow = Row1;
+						Break;
+					EndIf;
+				EndDo;
+				If FoundRow <> Undefined Then
+					FoundRow.Quantity = FoundRow.Quantity + Row0.Quantity;
+				Else
+					SerialLotNumbersGrouped.Add(New Structure("Key, SerialLotNumber, Quantity", Row0.Key, Row0.SerialLotNumber, Row0.Quantity));
+				EndIf;
+			EndDo;
+			
+			For Each Row_SerialLotNumbers In SerialLotNumbersGrouped Do // SerialLotNumbers
 				SourceOfOrigins = Object.SourceOfOrigins.FindRows(New Structure("Key, SerialLotNumber", 
 					Row_ItemList.Key, Row_SerialLotNumbers.SerialLotNumber));
 					
@@ -153,11 +160,11 @@ Procedure UpdateSourceOfOriginsQuantity(Object, Form) Export
 			
 		EndIf; // SerialLotNumbers.Count()
 	EndDo;
-	DeleteUnusedSourceOfOrigins(Object);
+	DeleteUnusedSourceOfOrigins(Object, Form);
 	UpdateSourceOfOriginsPresentation(Object);
 EndProcedure
 
-Procedure DeleteUnusedSourceOfOrigins(Object, KeyForDelete = Undefined) Export
+Procedure DeleteUnusedSourceOfOrigins(Object, Form, KeyForDelete = Undefined) Export
 	If KeyForDelete = Undefined Then
 		ArrayForDelete = New Array();
 		For Each Row In Object.SourceOfOrigins Do
@@ -178,7 +185,7 @@ Procedure DeleteUnusedSourceOfOrigins(Object, KeyForDelete = Undefined) Export
 	If Object.Property("SerialLotNumbers") Then
 		ArrayForDelete = New Array();
 		For Each Row In Object.SourceOfOrigins Do
-			If Not ValueIsFilled(Row.SerialLotNumber) Then
+			If Not ValueIsFilled(Row.SerialLotNumber) And Not Object.SerialLotNumbers.FindRows(New Structure("Key", Row.Key)).Count() Then
 				Continue;
 			EndIf;
 			
@@ -194,6 +201,33 @@ Procedure DeleteUnusedSourceOfOrigins(Object, KeyForDelete = Undefined) Export
 			Object.SourceOfOrigins.Delete(Row);
 		EndDo;
 	EndIf;
+	
+	RecalculateConsignorBatches(Object, Form);
+EndProcedure
+
+Procedure RecalculateConsignorBatches(Object, Form)
+	If Not Object.Property("ConsignorBatches") Then
+		Return;
+	EndIf;
+	
+	FormParameters = ControllerClientServer_V2.GetFormParameters(Form);
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
+	ServerParameters.TableName = "ItemList";		
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
+	Property = New Structure("DataPath", "Command_UpdateConsignorBatches");
+	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);	
+EndProcedure
+
+Procedure UpdateSourceOfOriginsPresentation(Object) Export
+	For Each RowItemList In Object.ItemList Do
+		ArrayOfSourceOfOrigins = Object.SourceOfOrigins.FindRows(New Structure("Key", RowItemList.Key));
+		RowItemList.SourceOfOriginsPresentation.Clear();		
+		For Each RowSourceOfOrigins In ArrayOfSourceOfOrigins Do
+			If ValueIsFilled(RowSourceOfOrigins.SourceOfOrigin) Then
+				RowItemList.SourceOfOriginsPresentation.Add(RowSourceOfOrigins.SourceOfOrigin);
+			EndIf;
+		EndDo;
+	EndDo;
 EndProcedure
 
 Procedure StartChoice(Item, ChoiceData, StandardProcessing, Object, Params) Export

@@ -72,6 +72,7 @@
   <defaultObjectForm>Catalog.SourceOfOrigins.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.SourceOfOrigins.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.SourceOfOrigins.Form.ChoiceForm</defaultChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="b99a35df-7e7e-475f-a3b0-419399797c9e">
     <name>CustomProductID</name>
     <synonym>

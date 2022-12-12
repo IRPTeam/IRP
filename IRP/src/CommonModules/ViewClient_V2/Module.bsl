@@ -1636,7 +1636,7 @@ Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
-		SourceOfOriginClient.DeleteUnusedSourceOfOrigins(Parameters.Object);
+		SourceOfOriginClient.DeleteUnusedSourceOfOrigins(Parameters.Object, Parameters.Form);
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
@@ -1749,7 +1749,7 @@ Procedure OnSetItemListItemKey(Parameters) Export
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
-		SourceOfOriginClient.DeleteUnusedSourceOfOrigins(Parameters.Object);
+		SourceOfOriginClient.DeleteUnusedSourceOfOrigins(Parameters.Object, Parameters.Form);
 		SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Parameters.Object);
 	EndIf;
 EndProcedure

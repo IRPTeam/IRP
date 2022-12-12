@@ -6,6 +6,7 @@ EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
+	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
 EndProcedure
 
 #EndRegion

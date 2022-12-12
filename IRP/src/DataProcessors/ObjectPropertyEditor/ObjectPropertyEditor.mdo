@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fb74ecea-9507-4258-b105-35f229f3ff5a">
+  <producedTypes>
+    <objectType typeId="1876b23b-555a-451d-9da2-7e12a1923d39" valueTypeId="39666d59-3520-4976-a29e-8bcaa12bc01f"/>
+    <managerType typeId="554ea4c0-d254-415e-bfdf-c54e42adefdd" valueTypeId="7241d4d9-5250-43d4-8547-314762504768"/>
+  </producedTypes>
+  <name>ObjectPropertyEditor</name>
+  <synonym>
+    <key>en</key>
+    <value>Object property editor</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.ObjectPropertyEditor.Form.Form</defaultForm>
+  <forms uuid="10223689-ce1e-4f26-a649-6812834b1b9d">
+    <name>Form</name>
+    <synonym>
+      <key>en</key>
+      <value>Form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <commands uuid="ffaf836f-fc31-4a41-8867-1c05c5397636">
+    <name>GroupEditProperties</name>
+    <synonym>
+      <key>en</key>
+      <value>Group editing of properties</value>
+    </synonym>
+    <group>FormCommandBarImportant</group>
+    <commandParameterType>
+      <types>DefinedType.typeAddPropertyOwners</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.SpreadsheetReadOnly</picture>
+    </picture>
+  </commands>
+</mdclass:DataProcessor>

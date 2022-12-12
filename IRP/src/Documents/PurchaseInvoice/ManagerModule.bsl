@@ -708,7 +708,7 @@ Function R9010B_SourceOfOriginStock()
 		|		ON ItemList.Key = SourceOfOrigins.Key
 		|		AND NOT SourceOfOrigins.SourceOfOriginStock.Ref IS NULL
 		|WHERE
-		|	ItemList.IsPurchase
+		|	TRUE
 		|GROUP BY
 		|	VALUE(AccumulationRecordType.Receipt),
 		|	ItemList.Period,

@@ -6,10 +6,6 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-
-//	If WriteMode = DocumentWriteMode.Posting Then
-//		CommissionTradeServer.FillConsignorBatches_ReturnToConsignor(ThisObject);
-//	EndIf;
 	
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 EndProcedure
@@ -49,13 +45,11 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure OnCopy(CopiedObject)
-
 	LinkedTables = New Array();
 	LinkedTables.Add(SpecialOffers);
 	LinkedTables.Add(TaxList);
 	LinkedTables.Add(Currencies);
 	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);
-
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

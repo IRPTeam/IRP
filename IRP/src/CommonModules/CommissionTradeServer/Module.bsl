@@ -276,6 +276,7 @@ Function GetTableConsignorBatchWiseBalanceForSalesReturn(DocObject, ItemListTabl
 	|	ItemList.Store,
 	|	ItemList.ItemKey,
 	|	ItemList.SerialLotNumber,
+	|	ItemList.SourceOfOrigin,
 	|	ItemList.Quantity
 	|INTO ItemList
 	|FROM
@@ -289,6 +290,7 @@ Function GetTableConsignorBatchWiseBalanceForSalesReturn(DocObject, ItemListTabl
 	|	ItemList.Store,
 	|	ItemList.ItemKey,
 	|	ItemList.SerialLotNumber,
+	|	ItemList.SourceOfOrigin,
 	|	SUM(ItemList.Quantity) AS Quantity
 	|INTO ItemListGrouped
 	|FROM
@@ -298,7 +300,8 @@ Function GetTableConsignorBatchWiseBalanceForSalesReturn(DocObject, ItemListTabl
 	|	ItemList.SalesDocument,
 	|	ItemList.Store,
 	|	ItemList.ItemKey,
-	|	ItemList.SerialLotNumber
+	|	ItemList.SerialLotNumber,
+	|	ItemList.SourceOfOrigin
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -308,15 +311,17 @@ Function GetTableConsignorBatchWiseBalanceForSalesReturn(DocObject, ItemListTabl
 	|	Batches.Batch,
 	|	Batches.ItemKey,
 	|	Batches.SerialLotNumber,
+	|	Batches.SourceOfOrigin,
 	|	Batches.Quantity
 	|FROM
 	|	AccumulationRegister.R8013B_ConsignorBatchWiseBalance AS Batches
 	|WHERE
-	|	(Company, ItemKey, SerialLotNumber, Recorder) IN
+	|	(Company, ItemKey, SerialLotNumber, SourceOfOrigin, Recorder) IN
 	|		(SELECT
 	|			ItemList.Company,
 	|			ItemList.ItemKey,
 	|			ItemList.SerialLotNumber,
+	|			ItemList.SourceOfOrigin,
 	|			ItemList.SalesDocument
 	|		FROM
 	|			ItemListGrouped AS ItemList)
@@ -329,6 +334,7 @@ Function GetTableConsignorBatchWiseBalanceForSalesReturn(DocObject, ItemListTabl
 	|	ItemList.Store,
 	|	ItemList.ItemKey,
 	|	ItemList.SerialLotNumber,
+	|	ItemList.SourceOfOrigin,
 	|	ItemList.Quantity AS Quantity
 	|FROM
 	|	ItemListGrouped AS ItemList";
@@ -346,6 +352,7 @@ Function GetTableConsignorBatchWiseBalanceForSalesReturn(DocObject, ItemListTabl
 	ConsignorBatches.Columns.Add("Store"    , AccReg.Dimensions.Store.Type);
 	ConsignorBatches.Columns.Add("ItemKey"  , AccReg.Dimensions.ItemKey.Type);
 	ConsignorBatches.Columns.Add("SerialLotNumber" , AccReg.Dimensions.SerialLotNumber.Type);
+	ConsignorBatches.Columns.Add("SourceOfOrigin"  , AccReg.Dimensions.SourceOfOrigin.Type);
 	ConsignorBatches.Columns.Add("Quantity" , AccReg.Resources.Quantity.Type);
 	ConsignorBatches.Columns.Add("SalesDocument" , AccReg.StandardAttributes.Recorder.Type);
 	
@@ -357,6 +364,7 @@ Function GetTableConsignorBatchWiseBalanceForSalesReturn(DocObject, ItemListTabl
 		Filter.Insert("SalesDocument"   , Row_DocumentItemList.SalesDocument);
 		Filter.Insert("ItemKey"         , Row_DocumentItemList.ItemKey);
 		Filter.Insert("SerialLotNumber" , Row_DocumentItemList.SerialLotNumber);
+		Filter.Insert("SourceOfOrigin"  , Row_DocumentItemList.SourceOfOrigin);
 		
 		RegisterBatchesRows = RegisterBatches.FindRows(Filter);
 		For Each Row_RegisterBatches In RegisterBatchesRows Do
@@ -371,6 +379,7 @@ Function GetTableConsignorBatchWiseBalanceForSalesReturn(DocObject, ItemListTabl
 			NewRow.Store    = Row_DocumentItemList.Store;
 			NewRow.ItemKey  = Row_RegisterBatches.ItemKey;
 			NewRow.SerialLotNumber = Row_RegisterBatches.SerialLotNumber;
+			NewRow.SourceOfOrigin  = Row_RegisterBatches.SourceOfOrigin;
 			NewRow.Quantity = CanReceipt;
 			NewRow.SalesDocument = Row_DocumentItemList.SalesDocument;
 			
@@ -483,6 +492,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|	ItemListTable.Batch,
 	|	ItemListTable.ItemKey,
 	|	ItemListTable.SerialLotNumber,
+	|	ItemListTable.SourceOfOrigin,
 	|	ItemListTable.Store,
 	|	ItemListTable.Quantity
 	|INTO ItemListTable
@@ -498,6 +508,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|	ItemListTable.Batch,
 	|	ItemListTable.ItemKey,
 	|	ItemListTable.SerialLotNumber,
+	|	ItemListTable.SourceOfOrigin,
 	|	ItemListTable.Store,
 	|	SUM(ItemListTable.Quantity) AS Quantity
 	|INTO ItemListTable_Batches
@@ -512,6 +523,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|	ItemListTable.Batch,
 	|	ItemListTable.ItemKey,
 	|	ItemListTable.SerialLotNumber,
+	|	ItemListTable.SourceOfOrigin,
 	|	ItemListTable.Store
 	|;
 	|
@@ -522,6 +534,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|	ItemListTable.Agreement,
 	|	ItemListTable.ItemKey,
 	|	ItemListTable.SerialLotNumber,
+	|	ItemListTable.SourceOfOrigin,
 	|	ItemListTable.Store,
 	|	SUM(ItemListTable.Quantity) AS Quantity
 	|INTO ItemListTable_Grouped
@@ -535,6 +548,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|	ItemListTable.Agreement,
 	|	ItemListTable.ItemKey,
 	|	ItemListTable.SerialLotNumber,
+	|	ItemListTable.SourceOfOrigin,
 	|	ItemListTable.Store
 	|;
 	|
@@ -545,6 +559,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|	ItemListTable_Batches.Agreement,
 	|	ItemListTable_Batches.ItemKey,
 	|	ItemListTable_Batches.SerialLotNumber,
+	|	ItemListTable_Batches.SourceOfOrigin,
 	|	ItemListTable_Batches.Store,
 	|	Batches.Batch AS Batch,
 	|	SUM(ItemListTable_Batches.Quantity) AS Quantity,
@@ -553,7 +568,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|FROM
 	|	ItemListTable_Batches AS ItemListTable_Batches
 	|		LEFT JOIN AccumulationRegister.R8013B_ConsignorBatchWiseBalance.Balance(&Boundary, (Company, Batch.Partner,
-	|			Batch.Agreement, Batch, ItemKey, SerialLotNumber, Store) IN
+	|			Batch.Agreement, Batch, ItemKey, SerialLotNumber, SourceOfOrigin, Store) IN
 	|			(SELECT
 	|				ItemListTable_Batches.Company,
 	|				ItemListTable_Batches.Partner,
@@ -561,6 +576,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|				ItemListTable_Batches.Batch,
 	|				ItemListTable_Batches.ItemKey,
 	|				ItemListTable_Batches.SerialLotNumber,
+	|				ItemListTable_Batches.SourceOfOrigin,
 	|				ItemListTable_Batches.Store
 	|			FROM
 	|				ItemListTable_Batches AS ItemListTable_Batches)) AS Batches
@@ -570,6 +586,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|		AND ItemListTable_Batches.Batch = Batches.Batch
 	|		AND ItemListTable_Batches.ItemKey = Batches.ItemKey
 	|		AND ItemListTable_Batches.SerialLotNumber = Batches.SerialLotNumber
+	|		AND ItemListTable_Batches.SourceOfOrigin = Batches.SourceOfOrigin
 	|		AND ItemListTable_Batches.Store = Batches.Store
 	|GROUP BY
 	|	ItemListTable_Batches.Company,
@@ -577,6 +594,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|	ItemListTable_Batches.Agreement,
 	|	ItemListTable_Batches.ItemKey,
 	|	ItemListTable_Batches.SerialLotNumber,
+	|	ItemListTable_Batches.SourceOfOrigin,
 	|	ItemListTable_Batches.Store,
 	|	Batches.Batch
 	|;
@@ -588,6 +606,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|	ItemListTable_Grouped.Agreement,
 	|	ItemListTable_Grouped.ItemKey,
 	|	ItemListTable_Grouped.SerialLotNumber,
+	|	ItemListTable_Grouped.SourceOfOrigin,
 	|	ItemListTable_Grouped.Store,
 	|	Batches.Batch AS Batch,
 	|	SUM(ItemListTable_Grouped.Quantity) AS Quantity,
@@ -596,13 +615,14 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|FROM
 	|	ItemListTable_Grouped AS ItemListTable_Grouped
 	|		LEFT JOIN AccumulationRegister.R8013B_ConsignorBatchWiseBalance.Balance(&Boundary, (Company, Batch.Partner,
-	|			Batch.Agreement, ItemKey, SerialLotNumber, Store) IN
+	|			Batch.Agreement, ItemKey, SerialLotNumber, SourceOfOrigin, Store) IN
 	|			(SELECT
 	|				ItemListTable_Grouped.Company,
 	|				ItemListTable_Grouped.Partner,
 	|				ItemListTable_Grouped.Agreement,
 	|				ItemListTable_Grouped.ItemKey,
 	|				ItemListTable_Grouped.SerialLotNumber,
+	|				ItemListTable_Grouped.SourceOfOrigin,
 	|				ItemListTable_Grouped.Store
 	|			FROM
 	|				ItemListTable_Grouped AS ItemListTable_Grouped)) AS Batches
@@ -611,6 +631,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|		AND ItemListTable_Grouped.Agreement = Batches.Batch.Agreement
 	|		AND ItemListTable_Grouped.ItemKey = Batches.ItemKey
 	|		AND ItemListTable_Grouped.SerialLotNumber = Batches.SerialLotNumber
+	|		AND ItemListTable_Grouped.SourceOfOrigin = Batches.SourceOfOrigin
 	|		AND ItemListTable_Grouped.Store = Batches.Store
 	|GROUP BY
 	|	ItemListTable_Grouped.Company,
@@ -618,6 +639,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|	ItemListTable_Grouped.Agreement,
 	|	ItemListTable_Grouped.ItemKey,
 	|	ItemListTable_Grouped.SerialLotNumber,
+	|	ItemListTable_Grouped.SourceOfOrigin,
 	|	ItemListTable_Grouped.Store,
 	|	Batches.Batch
 	|;
@@ -629,6 +651,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|	ConsignorBatchWiseBalance_Grouped.Agreement,
 	|	ConsignorBatchWiseBalance_Grouped.ItemKey,
 	|	ConsignorBatchWiseBalance_Grouped.SerialLotNumber,
+	|	ConsignorBatchWiseBalance_Grouped.SourceOfOrigin,
 	|	ConsignorBatchWiseBalance_Grouped.Store,
 	|	ConsignorBatchWiseBalance_Grouped.Batch,
 	|	ConsignorBatchWiseBalance_Grouped.Quantity,
@@ -643,6 +666,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|		AND ConsignorBatchWiseBalance_Grouped.Agreement = ConsignorBatchWiseBalance_Batches.Agreement
 	|		AND ConsignorBatchWiseBalance_Grouped.ItemKey = ConsignorBatchWiseBalance_Batches.ItemKey
 	|		AND ConsignorBatchWiseBalance_Grouped.SerialLotNumber = ConsignorBatchWiseBalance_Batches.SerialLotNumber
+	|		AND ConsignorBatchWiseBalance_Grouped.SourceOfOrigin = ConsignorBatchWiseBalance_Batches.SourceOfOrigin
 	|		AND ConsignorBatchWiseBalance_Grouped.Store = ConsignorBatchWiseBalance_Batches.Store
 	|		AND ConsignorBatchWiseBalance_Grouped.Batch = ConsignorBatchWiseBalance_Batches.Batch
 	|;
@@ -651,6 +675,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|SELECT
 	|	Table.ItemKey,
 	|	Table.SerialLotNumber,
+	|	Table.SourceOfOrigin,
 	|	Table.Store,
 	|	Table.Batch,
 	|	Table.Quantity,
@@ -665,6 +690,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|BY
 	|	ItemKey,
 	|	SerialLotNumber,
+	|	SourceOfOrigin,
 	|	Store
 	|;
 	|
@@ -672,6 +698,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|SELECT
 	|	Table.ItemKey,
 	|	Table.SerialLotNumber,
+	|	Table.SourceOfOrigin,
 	|	Table.Store,
 	|	Table.Batch,
 	|	Table.Quantity,
@@ -686,6 +713,7 @@ Function GetConsignorBatches_ReturnToConsignor(ItemListTable, DocObject, SilentM
 	|BY
 	|	ItemKey,
 	|	SerialLotNumber,
+	|	SourceOfOrigin,
 	|	Store";
 	
 	Query.SetParameter("ItemListTable", ItemListTable);

@@ -1632,7 +1632,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 
 			If ValueIsFilled(Row.SalesInvoice) Then // return by sales invoice
 
-				TableOfBatchBySales = GetSalesBatches(Row.SalesInvoice, Tables.DataForSalesBatches, Row.BatchKey.ItemKey);
+				TableOfBatchBySales = GetSalesBatches(Row.SalesInvoice, Tables.DataForSalesBatches, Row.BatchKey);
 
 				NeedReceipt = Row.Quantity; // how many returned (quantity)
 
@@ -2548,25 +2548,7 @@ Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpe
 	EndDo;
 EndProcedure
 
-// Get sales batches.
-// 
-// Parameters:
-//  SalesInvoice - DocumentRef.SalesInvoice - Sales invoice
-//  DataForSalesBatches - ValueTable - Data for sales batches
-//  ItemKey - CatalogRef.ItemKeys - Item key
-// 
-// Returns:
-//  ValueTable - Get sales batches:
-//  * Batch - CatalogRef.Batches
-//  * BatchKey - CatalogRef.BatchKeys
-//  * SalesInvoice - See AccumulationRegister.R6050T_SalesBatches.SalesInvoice
-//  * Quantity - Number
-//  * Amount - Number
-//  * AmountTax - Number
-//  * Document - See Catalog.Batches.Document
-//  * Date - Date
-//  * Company - CatalogRef.Companies
-Function GetSalesBatches(SalesInvoice, DataForSalesBatches, ItemKey)
+Function GetSalesBatches(SalesInvoice, DataForSalesBatches, BatchKey)
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -2596,7 +2578,9 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, ItemKey)
 	|INTO SalesBatches
 	|FROM
 	|	AccumulationRegister.R6050T_SalesBatches.Turnovers(, , Record, SalesInvoice = &SalesInvoice
-	|	AND BatchKey.ItemKey = &BatchKey_ItemKey) AS R6050T_SalesBatchesTurnovers
+	|	AND BatchKey.ItemKey = &BatchKey_ItemKey
+	|	AND BatchKey.SerialLotNumber = &BatchKey_SerialLotNumber
+	|	AND BatchKey.SourceOfOrigin = &BatchKey_SourceOfOrigin) AS R6050T_SalesBatchesTurnovers
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -2615,6 +2599,8 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, ItemKey)
 	|WHERE
 	|	DataForSalesBatches.SalesInvoice = &SalesInvoice
 	|	AND DataForSalesBatches.BatchKey.ItemKey = &BatchKey_ItemKey
+	|	AND DataForSalesBatches.BatchKey.SerialLotNumber = &BatchKey_SerialLotNumber
+	|	AND DataForSalesBatches.BatchKey.SourceOfOrigin = &BatchKey_SourceOfOrigin
 	|
 	|UNION ALL
 	|
@@ -2654,9 +2640,11 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, ItemKey)
 	|	AllData.Batch.Company
 	|ORDER BY
 	|	Date";
-	Query.SetParameter("SalesInvoice", SalesInvoice);
-	Query.SetParameter("DataForSalesBatches", DataForSalesBatches);
-	Query.SetParameter("BatchKey_ItemKey", ItemKey);
+	Query.SetParameter("SalesInvoice"             , SalesInvoice);
+	Query.SetParameter("DataForSalesBatches"      , DataForSalesBatches);
+	Query.SetParameter("BatchKey_ItemKey"         , BatchKey.ItemKey);
+	Query.SetParameter("BatchKey_SerialLotNumber" , BatchKey.SerialLotNumber);
+	Query.SetParameter("BatchKey_SourceOfOrigin"  , BatchKey.SourceOfOrigin);
 	Table_SalesBatches = Query.Execute().Unload();
 	Return Table_SalesBatches;
 EndFunction

@@ -1813,6 +1813,12 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				EndIf;
 			EndIf;
 			
+			// stock adjustment as writeoff - only own stocks
+			IsOnlyOwnStocks = False;
+			If TypeOf(Row.Document) = Type("DocumentRef.StockAdjustmentAsWriteOff") Then
+				IsOnlyOwnStocks = True;
+			EndIf;
+			
 			For Each Row_Batch In FilteredRows Do
 
 				If Row_Batch.Date > Row.Date Then
@@ -1848,6 +1854,16 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 				// is sales/transfer consignor stocks, expense only consignor batches
 				If IsSales_ConsignorStocks Or IsTransfer_ConsignorStocks Or IsPurchaseReturn_ConsignorStocks Then
 					If Row_Batch.Batch.Document <> Row.BatchConsignor Then
+						Continue;
+					EndIf;
+				EndIf;
+				
+				// is write off - only own stocks
+				If IsOnlyOwnStocks Then
+					IsReceiptFromConsignor = TypeOf(Row_Batch.Batch.Document) = Type("DocumentRef.PurchaseInvoice") 
+						And Row_Batch.Batch.Document.TransactionType = Enums.PurchaseTransactionTypes.ReceiptFromConsignor;
+				
+					If IsReceiptFromConsignor Then
 						Continue;
 					EndIf;
 				EndIf;
@@ -2230,6 +2246,14 @@ Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewRece
 				EndIf;
 				
 				If Row.BatchKey.ItemKey <> Row_Expense.BatchKey.ItemKey Then
+					Continue;
+				EndIf;
+				
+				If Row.BatchKey.SerialLotNumber <> Row_Expense.BatchKey.SerialLotNumber Then
+					Continue;
+				EndIf;
+				
+				If Row.BatchKey.SourceOfOrigin <> Row_Expense.BatchKey.SourceOfOrigin Then
 					Continue;
 				EndIf;
 				

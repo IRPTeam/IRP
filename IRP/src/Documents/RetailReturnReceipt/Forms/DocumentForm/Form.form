@@ -5071,7 +5071,6 @@
       <items xsi:type="form:Table">
         <name>SourceOfOrigins</name>
         <id>674</id>
-        <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>

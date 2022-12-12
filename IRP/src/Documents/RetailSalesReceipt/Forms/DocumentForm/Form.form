@@ -5282,7 +5282,6 @@
       <items xsi:type="form:Table">
         <name>SourceOfOrigins</name>
         <id>1125</id>
-        <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>
@@ -6509,7 +6508,6 @@
       <items xsi:type="form:Table">
         <name>ConsignorBatches</name>
         <id>1086</id>
-        <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>

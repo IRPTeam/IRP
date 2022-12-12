@@ -35,6 +35,12 @@ Scenario: _042900 preparation (Opening entry)
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers, with batch balance details)
+		When Create catalog SourceOfOrigins objects
 		When Create catalog Stores objects
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
@@ -98,6 +104,7 @@ Scenario: _042900 preparation (Opening entry)
 		When Create document OpeningEntry objects
 		When Create document OpeningEntry objects (stock control serial lot numbers)
 		When Create document OpeningEntry objects (commission trade)
+		When Create document OpeningEntry objects (with source of origin)
 		And I execute 1C:Enterprise script at server
 			| "Documents.OpeningEntry.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
@@ -120,6 +127,8 @@ Scenario: _042900 preparation (Opening entry)
 			| "Documents.OpeningEntry.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.OpeningEntry.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.OpeningEntry.FindByNumber(111).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.OpeningEntry.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
@@ -819,6 +828,28 @@ Scenario: _042929 check Opening entry movements by the Register  "T6020 Batch ke
 			| ''                                           | ''                    | 'Quantity'  | 'Amount' | 'Amount tax' | 'Amount cost ratio' | 'Company'      | 'Store'    | 'Item key' | 'Direction' | 'Currency movement type' | 'Currency' | 'Batch document' | 'Sales invoice' | 'Row ID'                               | 'Profit loss center' | 'Expense type' | 'Branch' | 'Work' | 'Work sheet' | 'Batch consignor' |
 			| ''                                           | '01.12.2022 12:41:39' | '50'        | '2 500'  | '381,36'     | ''                  | 'Main Company' | 'Store 08' | 'M/White'  | 'Receipt'   | 'Local currency'         | 'TRY'      | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | ''                |
 			| ''                                           | '01.12.2022 12:41:39' | '70'        | '3 500'  | '533,9'      | ''                  | 'Main Company' | 'Store 08' | 'PZU'      | 'Receipt'   | 'Local currency'         | 'TRY'      | ''               | ''              | '                                    ' | ''                   | ''             | ''       | ''     | ''           | ''                |
+		And I close all client application windows
+
+Scenario: _042931 check Opening entry movements by the Register  "R9010 Source of origin stock" (source of origin)
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '111' |
+	* Check movements by the Register  "R9010 Source of origin stock" 
+		And I click "Registrations report" button
+		And I select "R9010 Source of origin stock" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 111 dated 08.12.2022 15:48:28' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''         | ''                   | ''                  |
+			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''                        | ''         | ''         | ''                   | ''                  |
+			| 'Register  "R9010 Source of origin stock"'    | ''            | ''                    | ''          | ''             | ''                        | ''         | ''         | ''                   | ''                  |
+			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''         | ''                   | ''                  |
+			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Store'    | 'Item key' | 'Source of origin'   | 'Serial lot number' |
+			| ''                                            | 'Receipt'     | '08.12.2022 15:48:28' | '2'         | 'Main Company' | 'Distribution department' | 'Store 01' | 'XS/Blue'  | 'Source of origin 5' | ''                  |
+			| ''                                            | 'Receipt'     | '08.12.2022 15:48:28' | '2'         | 'Main Company' | 'Distribution department' | 'Store 01' | 'M/White'  | 'Source of origin 3' | ''                  |
+			| ''                                            | 'Receipt'     | '08.12.2022 15:48:28' | '2'         | 'Main Company' | 'Distribution department' | 'Store 01' | 'UNIQ'     | 'Source of origin 4' | '09987897977893'    |				
 		And I close all client application windows
 
 Scenario: _042930 Opening entry clear posting/mark for deletion

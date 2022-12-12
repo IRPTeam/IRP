@@ -1647,12 +1647,12 @@ Scenario: _092008 check serial lot number in the Opening entry
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$OpeningEntry092008$$'               | ''            | ''                           | ''          | ''             | ''       | ''          | ''          | ''                  |
-			| 'Document registrations records'       | ''            | ''                           | ''          | ''             | ''       | ''          | ''          | ''                  |
-			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                           | ''          | ''             | ''       | ''          | ''          | ''                  |
-			| ''                                     | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''          | ''          | ''                  |
-			| ''                                     | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Store'     | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '1'         | 'Main Company' | '*'      | 'Store 01'  | '38/Yellow' | '99098809009999'    |
+			| '$$OpeningEntry092008$$'               | ''            | ''                           | ''          | ''             | ''       | ''      | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''                           | ''          | ''             | ''       | ''      | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                           | ''          | ''             | ''       | ''      | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''      | ''          | ''                  |
+			| ''                                     | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Store' | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '1'         | 'Main Company' | '*'      | ''      | '38/Yellow' | '99098809009999'    |
 		And I close current window
 	* Clear post Opening entry and check movements
 		And I activate "$$OpeningEntry092008$$" window			
@@ -1680,7 +1680,7 @@ Scenario: _092008 check serial lot number in the Opening entry
 			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                           | ''          | ''             | ''       | ''         | ''          | ''                  |
 			| ''                                     | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''         | ''          | ''                  |
 			| ''                                     | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Store'    | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '5'         | 'Main Company' | '*'      | 'Store 01' | '38/Yellow' | '99098809009999'    |
+			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '5'         | 'Main Company' | '*'      | ''         | '38/Yellow' | '99098809009999'    |
 		And I close current window
 	* Add one more string with the same item and different Serial lot number
 		And I activate "$$OpeningEntry092008$$" window
@@ -1720,8 +1720,8 @@ Scenario: _092008 check serial lot number in the Opening entry
 			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                           | ''          | ''             | ''       | ''         | ''          | ''                  |
 			| ''                                     | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''         | ''          | ''                  |
 			| ''                                     | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Store'    | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '5'         | 'Main Company' | '*'      | 'Store 01' | '38/Yellow' | '99098809009999'    |
-			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '8'         | 'Main Company' | '*'      | 'Store 01' | '38/Yellow' | '99098809009910'    |
+			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '5'         | 'Main Company' | '*'      | ''         | '38/Yellow' | '99098809009999'    |
+			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '8'         | 'Main Company' | '*'      | ''         | '38/Yellow' | '99098809009910'    |
 		And I close all client application windows
 
 

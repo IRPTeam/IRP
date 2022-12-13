@@ -97,6 +97,9 @@ Procedure PresentationClearing(Object, Form, Item, AddInfo = Undefined) Export
 EndProcedure
 
 Procedure UpdateSourceOfOriginsQuantity(Object, Form) Export
+	If Not CommonFunctionsClientServer.ObjectHasProperty(Object, "SourceOfOrigins") Then
+		Return;
+	EndIf;
 	For Each Row_ItemList In Object.ItemList Do
 		SerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", Row_ItemList.Key));
 		If SerialLotNumbers.Count() Then

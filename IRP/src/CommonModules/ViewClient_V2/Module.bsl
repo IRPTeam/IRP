@@ -2638,7 +2638,7 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 		EndIf;
 		
 		If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
-			SourceOfOriginClient.UpdateSourceOfOriginPresentation(Object);
+			SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
 		EndIf;
 		
 		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"

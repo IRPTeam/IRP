@@ -720,6 +720,7 @@ Function GetInfoByItemsKey(ItemsKey, AddInfo = Undefined) Export
 	|	ItemKey.Ref AS ItemKey,
 	|	ItemKey.Item AS Item,
 	|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
+	|	VALUE(Catalog.SourceOfOrigins.EmptyRef) AS SourceOfOrigin,
 	|	CASE WHEN ItemKey.Unit = VALUE(Catalog.Units.EmptyRef) THEN
 	|		ItemKey.Item.Unit
 	|	ELSE

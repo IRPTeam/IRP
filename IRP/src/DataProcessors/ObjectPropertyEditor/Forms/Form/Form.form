@@ -69,6 +69,10 @@
       <dataPath xsi:type="form:DataPath">
         <segments>ObjectTable</segments>
       </dataPath>
+      <handlers>
+        <event>OnChange</event>
+        <name>ObjectTableOnChange</name>
+      </handlers>
       <extendedTooltip>
         <name>ObjectTableExtendedTooltip</name>
         <id>27</id>
@@ -507,6 +511,38 @@
       <headerHorizontalAlign>Left</headerHorizontalAlign>
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+    </items>
+    <items xsi:type="form:FormGroup">
+      <name>PropertiesFields</name>
+      <id>47</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <title>
+        <key>en</key>
+        <value>Properties table group for fields</value>
+      </title>
+      <extendedTooltip>
+        <name>PropertiesFieldsExtendedTooltip</name>
+        <id>48</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <type>ColumnGroup</type>
+      <extInfo xsi:type="form:ColumnGroupExtInfo">
+        <showTitle>true</showTitle>
+      </extInfo>
     </items>
     <autoCommandBar>
       <name>PropertiesTableCommandBar</name>

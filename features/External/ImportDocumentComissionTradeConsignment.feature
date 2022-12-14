@@ -436,6 +436,12 @@ Scenario: Create document InventoryTransfer objects (comission trade)
 		| 'Ref'                                                                        | 'Key'                                  | 'SerialLotNumber'                                                          | 'Quantity' |
 		| 'e1cib/data/Document.InventoryTransfer?ref=b788b483d858e32911ed5abb0e7e88b9' | '054608e2-dbab-4baf-b387-5f2446c5102b' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f89585361' | 3          |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                        | 'Key'                                  | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.InventoryTransfer?ref=b788b483d858e32911ed5abb0e7e88b9' | '054608e2-dbab-4baf-b387-5f2446c5102b' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f89585361' | ''               | 3          |
+		| 'e1cib/data/Document.InventoryTransfer?ref=b788b483d858e32911ed5abb0e7e88b9' | 'f24b23bc-cf04-48b9-ba56-215dd3ed0fc8' | ''                                                                         | ''               | 2          |
+		| 'e1cib/data/Document.InventoryTransfer?ref=b788b483d858e32911ed5abb0e7e88b9' | 'f286d474-75dd-4c4f-a521-c36b1dd4cc3b' | ''                                                                         | ''               | 2          |
+
 	
 Scenario: Create document PurchaseInvoice and PurchaseReturn objects (comission trade)
 
@@ -758,6 +764,14 @@ Scenario: Create document SalesInvoice and SalesReturn objects (comission trade)
 		| 'e1cib/data/Document.SalesInvoice?ref=b788b483d858e32911ed5abb0e7e88a7' | '39043c7e-1198-4ae7-b4f9-408ba4a2a4cc' | '39043c7e-1198-4ae7-b4f9-408ba4a2a4cc' | 1          | ''      | ''            | ''         | 'e1cib/data/Catalog.RowIDs?ref=b788b483d858e32911ed5abb0e7e88a9' | '                                    ' |
 		| 'e1cib/data/Document.SalesInvoice?ref=b788b483d858e32911ed5abb0e7e88a7' | '0e840263-804e-4014-969b-fc359e012989' | '0e840263-804e-4014-969b-fc359e012989' | 1          | ''      | ''            | ''         | 'e1cib/data/Catalog.RowIDs?ref=b788b483d858e32911ed5abb0e7e88b0' | '                                    ' |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                   | 'Key'                                  | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesInvoice?ref=b788b483d858e32911ed5abb0e7e88a7' | 'dabba903-d3bc-4d63-83be-01c89c63e2fa' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f8958535f' | ''               | 6          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b788b483d858e32911ed5abb0e7e88a7' | '06ecf6b9-a5f7-4c78-8b29-072fdc868aa4' | ''                                                                         | ''               | 2          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b788b483d858e32911ed5abb0e7e88a7' | '39043c7e-1198-4ae7-b4f9-408ba4a2a4cc' | ''                                                                         | ''               | 1          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b788b483d858e32911ed5abb0e7e88a7' | '0e840263-804e-4014-969b-fc359e012989' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f8958535f' | ''               | 1          |
+
+
 	And I check or create document "SalesReturn" objects:
 		| 'Ref'                                                                  | 'DeletionMark' | 'Number' | 'Date'               | 'Posted' | 'Agreement'                                                          | 'Company'                                                           | 'Currency'                                                           | 'DateOfShipment'     | 'LegalName'                                                         | 'ManagerSegment' | 'Partner'                                                          | 'PriceIncludeTax' | 'LegalNameContract' | 'TransactionType'                                     | 'Author'                                                        | 'Branch'                                                                | 'Description' | 'DocumentAmount' |
 		| 'e1cib/data/Document.SalesReturn?ref=b788b483d858e32911ed5abb0e7e88b6' | 'False'        | 193      | '05.11.2022 0:00:00' | 'False'  | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf118bdb7bb73' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '01.01.0001 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a4' | ''               | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1873' | 'True'            | ''                  | 'Enum.SalesReturnTransactionTypes.ReturnFromCustomer' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' | ''            | 1200             |
@@ -786,6 +800,11 @@ Scenario: Create document SalesInvoice and SalesReturn objects (comission trade)
 		| 'Ref'                                                                  | 'Key'                                  | 'RowID'                                | 'Quantity' | 'Basis'                                                                 | 'CurrentStep'                                     | 'NextStep'                                    | 'RowRef'                                                         | 'BasisKey'                             |
 		| 'e1cib/data/Document.SalesReturn?ref=b788b483d858e32911ed5abb0e7e88b6' | '3254132b-2779-471c-8b66-5b7974ebd4ac' | '06ecf6b9-a5f7-4c78-8b29-072fdc868aa4' | 2          | 'e1cib/data/Document.SalesInvoice?ref=b788b483d858e32911ed5abb0e7e88a7' | 'e1cib/data/Catalog.MovementRules?refName=SRO_SR' | 'e1cib/data/Catalog.MovementRules?refName=GR' | 'e1cib/data/Catalog.RowIDs?ref=b788b483d858e32911ed5abb0e7e88a8' | '06ecf6b9-a5f7-4c78-8b29-072fdc868aa4' |
 		| 'e1cib/data/Document.SalesReturn?ref=b788b483d858e32911ed5abb0e7e88b6' | '692c1ec3-0591-4ed8-adeb-d084576ad303' | '0e840263-804e-4014-969b-fc359e012989' | 1          | 'e1cib/data/Document.SalesInvoice?ref=b788b483d858e32911ed5abb0e7e88a7' | 'e1cib/data/Catalog.MovementRules?refName=SRO_SR' | 'e1cib/data/Catalog.MovementRules?refName=GR' | 'e1cib/data/Catalog.RowIDs?ref=b788b483d858e32911ed5abb0e7e88b0' | '0e840263-804e-4014-969b-fc359e012989' |
+
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                  | 'Key'                                  | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.SalesReturn?ref=b788b483d858e32911ed5abb0e7e88b6' | '3254132b-2779-471c-8b66-5b7974ebd4ac' | ''                                                                         | ''               | 2          |
+		| 'e1cib/data/Document.SalesReturn?ref=b788b483d858e32911ed5abb0e7e88b6' | '692c1ec3-0591-4ed8-adeb-d084576ad303' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f8958535f' | ''               | 1          |
 
 
 Scenario: Create document SalesReportToConsignor objects (comission trade)

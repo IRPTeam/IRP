@@ -1399,14 +1399,14 @@ Scenario: _0401349 check Sales invoice movements by the Register  "R8013 Consign
 		And I select "R8013 Consignor batch wise balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 194 dated 04.11.2022 16:33:38'    | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  |
-			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  |
-			| 'Register  "R8013 Consignor batch wise balance"' | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  |
-			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                               | ''         | ''         | ''                  |
-			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Batch'                                          | 'Store'    | 'Item key' | 'Serial lot number' |
-			| ''                                               | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'S/Yellow' | ''                  |
-			| ''                                               | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'UNIQ'     | '09987897977889'    |
-			| ''                                               | 'Expense'     | '04.11.2022 16:33:38' | '4'         | 'Main Company' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'Store 02' | 'UNIQ'     | '09987897977889'    |
+			| 'Sales invoice 194 dated 04.11.2022 16:33:38'    | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  | ''                 |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  | ''                 |
+			| 'Register  "R8013 Consignor batch wise balance"' | ''            | ''                    | ''          | ''             | ''                                               | ''         | ''         | ''                  | ''                 |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                               | ''         | ''         | ''                  | ''                 |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Batch'                                          | 'Store'    | 'Item key' | 'Serial lot number' | 'Source of origin' |
+			| ''                                               | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'S/Yellow' | ''                  | ''                 |
+			| ''                                               | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Main Company' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'Store 02' | 'UNIQ'     | '09987897977889'    | ''                 |
+			| ''                                               | 'Expense'     | '04.11.2022 16:33:38' | '4'         | 'Main Company' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'Store 02' | 'UNIQ'     | '09987897977889'    | ''                 |
 		And I close all client application windows
 
 Scenario: _0401350 check Sales invoice movements by the Register  "T2015 Transactions info" (consignor and own stocks)

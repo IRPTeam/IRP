@@ -331,9 +331,6 @@
         <showTitle>true</showTitle>
         <throughAlign>Auto</throughAlign>
         <currentRowUse>Auto</currentRowUse>
-        <associatedTableElementId xsi:type="core:StringValue">
-          <value>SettingsFilter</value>
-        </associatedTableElementId>
       </extInfo>
     </items>
     <items xsi:type="form:Button">
@@ -554,6 +551,10 @@
       </userVisible>
       <horizontalAlign>Left</horizontalAlign>
     </autoCommandBar>
+    <handlers>
+      <event>Selection</event>
+      <name>PropertiesTableSelection</name>
+    </handlers>
     <searchStringAddition>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -771,7 +772,7 @@
       </title>
       <id>3</id>
       <valueType>
-        <types>DefinedType.typeAddPropertyOwners</types>
+        <types>AnyRef</types>
       </valueType>
       <view>
         <common>true</common>

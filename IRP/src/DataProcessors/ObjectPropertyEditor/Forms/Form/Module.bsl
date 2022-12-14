@@ -16,7 +16,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			ThisObject["ObjectType"] = TypeKey;
 			SetTablesList(ThisObject);
 			If Not IsBlankString(GetObjectTable(ThisObject)) Then
-				SetNewTable(ThisObject);
+				SetNewTable();
 				SetRefsToFilter(RefsList, ThisObject.DataSettingsComposer);
 				LoadTableData();
 			EndIf;
@@ -38,7 +38,7 @@ Procedure ObjectTypeOnChange(Item)
 	If Not GetObjectType(ThisObject) = Undefined Then
 		SetTablesList(ThisObject);
 		If Not IsBlankString(GetObjectTable(ThisObject)) Then
-			SetNewTable(ThisObject);
+			SetNewTable();
 		EndIf;
 	EndIf;
 
@@ -46,7 +46,24 @@ EndProcedure
 
 &AtClient
 Procedure ObjectTableOnChange(Item)
-	SetNewTable(ThisObject);
+	SetNewTable();
+EndProcedure
+
+// Properties table selection.
+// 
+// Parameters:
+//  Item - FormTable - Item
+//  RowSelected - Number - Row selected
+//  Field - FormField - Field
+//  StandardProcessing - Boolean - Standard processing
+&AtClient
+Procedure PropertiesTableSelection(Item, RowSelected, Field, StandardProcessing)
+	If Field = Items.PropertiesTableObject Then
+		DataRow = ThisObject.PropertiesTable.FindByID(RowSelected);
+		If Not DataRow = Undefined Then
+			ShowValue(, DataRow.Object);
+		EndIf;
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -128,6 +145,193 @@ EndFunction
 
 #Region FormProperty_Setting
 
+// Set tables list.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+&AtClientAtServerNoContext
+Procedure SetTablesList(Form)
+	CL_String = "ChoiceList";
+	OT_String = "ObjectTable";
+	
+	TablesChoiceList = Form.Items[OT_String][CL_String]; // ValueList of String
+	TablesChoiceList.Clear();
+	
+	TablesStructure = GetFormCash(Form).ObjectTables.Get(GetObjectType(Form));
+	If TypeOf(TablesStructure) = Type("Structure") Then
+		For Each TableKeyValue In TablesStructure Do
+			TableKey = TableKeyValue.Key; // String
+			TableValue = TableKeyValue.Value; // String
+			TablesChoiceList.Add(TableKey, TableValue);
+		EndDo;
+	EndIf;
+	
+	If TablesChoiceList.Count() > 0 Then
+		Form.ObjectTable = TablesChoiceList[0].Value;
+	EndIf;
+	
+	Form.Items[OT_String].Enabled = TablesChoiceList.Count() > 1;
+EndProcedure
+
+// Set new table.
+// 
+&AtServer
+Procedure SetNewTable()
+	SetSourceSettings(ThisObject);
+	SetTableSettings(ThisObject);
+EndProcedure	
+	
+// Set source settings.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+&AtServerNoContext
+Procedure SetSourceSettings(Form)
+	
+	TS_String = "TabularSections";
+	Table_String = GetObjectTable(Form); // String
+	
+	MetaObject = Metadata.FindByType(GetObjectType(Form));
+	MetaObjectTable = MetaObject[TS_String][Table_String]; // MetadataObjectTabularSection
+	
+	DCSchema = New DataCompositionSchema;
+
+	DS = DCSchema.DataSources.Add();
+	DS.Name = "DataSources";
+	DS.DataSourceType = "Local";
+	
+	DataSet = DCSchema.DataSets.Add(Type("DataCompositionSchemaDataSetQuery"));
+	DataSet.Name = "DataSet";
+	DataSet.DataSource = "DataSources";
+	DataSet.Query = 
+	"SELECT
+	|	Table.Ref,
+	|	Table.Property,
+	|	Table.Value
+	|FROM
+	|	" + MetaObject.FullName() + "." + Table_String + " AS Table";
+	
+	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
+	DataField.Field = "Ref";
+	DataField.DataPath = "Ref";
+	DataField.Title = "Ref";
+		
+	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
+	DataField.Field = "Property";
+	DataField.DataPath = "Property";
+	DataField.Title = MetaObjectTable.Attributes.Property.Synonym;
+		
+	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
+	DataField.Field = "Value";
+	DataField.DataPath = "Value";
+	DataField.Title = MetaObjectTable.Attributes.Value.Synonym;
+		
+	SchemaAddress = PutToTempStorage(DCSchema, Form.UUID);
+  	AvailableSettingsSource = New DataCompositionAvailableSettingsSource(SchemaAddress);
+	
+	FormCash = GetFormCash(Form);
+	FormCash.SchemaAddress = SchemaAddress; 
+    
+    DSC_String = "DataSettingsComposer";
+    DataSettingsComposer = Form[DSC_String]; // DataCompositionSettingsComposer
+	DataSettingsComposer.Initialize(AvailableSettingsSource);
+    DataSettingsComposer.LoadSettings(DCSchema.DefaultSettings);
+    
+	SelectionItems = DataSettingsComposer.Settings.Selection.Items;
+	SelectionItems.Clear();
+	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Ref");
+	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Property");
+	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Value");
+	
+    DataSettingsComposer.Settings.Structure.Clear();
+    RefGroup = DataSettingsComposer.Settings.Structure.Add(Type("DataCompositionGroup"));
+	RefGroup.GroupFields.Items.Add(Type("DataCompositionGroupField")).Field = New DataCompositionField("Ref");
+	RefGroup.Selection.Items.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Ref");
+	DetailGroup = RefGroup.Structure.Add(Type("DataCompositionGroup"));
+	DetailGroup.Selection.Items.Add(Type("DataCompositionAutoSelectedField"));
+    
+EndProcedure
+
+// Set refs to filter.
+// 
+// Parameters:
+//  RefsArray - Array of AnyRef 
+//  DataSettingsComposer - DataCompositionSettingsComposer - Data settings composer
+&AtClientAtServerNoContext
+Procedure SetRefsToFilter(RefsArray, DataSettingsComposer)
+	List = New ValueList;
+	List.LoadValues(RefsArray);
+	
+	RefsFilter = DataSettingsComposer.Settings.Filter.Items.Add(Type("DataCompositionFilterItem"));
+	RefsFilter.LeftValue = New DataCompositionField("Ref");
+	RefsFilter.ComparisonType  = DataCompositionComparisonType.InList;
+	//@skip-warning
+	RefsFilter.RightValue = List;
+	RefsFilter.Use = True;
+EndProcedure
+
+// Set table settings.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+&AtServerNoContext
+Procedure SetTableSettings(Form)
+	
+	Form.PropertiesTable.Clear();
+	LoadNewColumns(Form);
+	
+	PT_String = "PropertiesTable";
+	
+	Oldfields = New Array; // Array of FormField
+	For Each FieldItem In Form.Items.PropertiesFields.ChildItems Do
+		Oldfields.Add(FieldItem);
+	EndDo;
+	For Each FieldItem In Oldfields Do
+		Form.Items.Delete(FieldItem);
+	EndDo;
+	
+	OldAttributes = New Array; // Array of String
+	CurrentColumns = Form.GetAttributes(PT_String);
+	For Each ColumnItem In CurrentColumns Do
+		If ColumnItem.Name = "Object" Or ColumnItem.Name = "isModified" Then
+			Continue;
+		EndIf;
+		OldAttributes.Add(StrTemplate("%1.%2", ColumnItem.Path, ColumnItem.Name));
+	EndDo;
+	Form.ChangeAttributes(, OldAttributes);
+	
+	NewAttributes = New Array; // Array of FormAttribute
+	ColumnsData = GetFormCash(Form).ColumnsData;
+	For Each ColumnItem In ColumnsData Do
+		ColumnDescription = ColumnItem.Value; // See GetFieldDescription
+		FormAttribute = New FormAttribute(
+			ColumnItem.Key, 
+			?(ColumnDescription.isCollection = True, 
+				New TypeDescription(ColumnDescription.ValueType, "ValueList"),
+				ColumnDescription.ValueType), 
+			PT_String, 
+			ColumnDescription.Presentation);
+		NewAttributes.Add(FormAttribute);
+	EndDo;
+	Form.ChangeAttributes(NewAttributes);
+	
+	For Each ColumnItem In ColumnsData Do
+		ColumnDescription = ColumnItem.Value; // See GetFieldDescription
+		NewFormItem = Form.Items.Add(PT_String + ColumnItem.Key, Type("FormField"), Form.Items.PropertiesFields);
+		NewFormItem.Type = FormFieldType.InputField;
+		NewFormItem.DataPath = PT_String + "." + ColumnItem.Key;
+		NewFormItem.ChooseType = False;
+		ParametersArray = New Array; // Array of ChoiceParameter
+		ParametersArray.Add(New ChoiceParameter("Filter.Owner", ColumnDescription.Ref));
+		NewFormItem.ChoiceParameters = New FixedArray(ParametersArray);
+	EndDo;
+	
+EndProcedure
+
+#EndRegion
+
+#Region LoadData
+
 // Load metadata.
 // 
 // Parameters:
@@ -143,7 +347,7 @@ Procedure LoadMetadata(FormCash)
 	TypeChoiceList.Clear();
 	FormCash.ObjectTables.Clear();
 	
-	AvailableTypes = Metadata.DefinedTypes.typeAddPropertyOwners.Type.Types();
+	AvailableTypes = GetAvailableTypes();
 	For Each AvailableType In AvailableTypes Do
 		
 		ItemPreffics = "";
@@ -181,173 +385,6 @@ Procedure LoadMetadata(FormCash)
 	TypeChoiceList.SortByPresentation();
 	
 EndProcedure
-
-// Set tables list.
-// 
-// Parameters:
-//  Form - ClientApplicationForm - Form
-&AtClientAtServerNoContext
-Procedure SetTablesList(Form)
-	CL_String = "ChoiceList";
-	OT_String = "ObjectTable";
-	
-	TablesChoiceList = Form.Items[OT_String][CL_String]; // ValueList of String
-	TablesChoiceList.Clear();
-	
-	TablesStructure = GetFormCash(Form).ObjectTables.Get(GetObjectType(Form));
-	If TypeOf(TablesStructure) = Type("Structure") Then
-		For Each TableKeyValue In TablesStructure Do
-			TableKey = TableKeyValue.Key; // String
-			TableValue = TableKeyValue.Value; // String
-			TablesChoiceList.Add(TableKey, TableValue);
-		EndDo;
-	EndIf;
-	
-	If TablesChoiceList.Count() > 0 Then
-		Form.ObjectTable = TablesChoiceList[0].Value;
-	EndIf;
-	
-	Form.Items[OT_String].Enabled = TablesChoiceList.Count() > 1;
-EndProcedure
-
-// Set new table.
-// 
-// Parameters:
-//  Form - ClientApplicationForm - Form
-&AtClientAtServerNoContext
-Procedure SetNewTable(Form)
-	SetSourceSettings(Form);
-	SetTableSettings(Form);
-EndProcedure	
-	
-// Set source settings.
-// 
-// Parameters:
-//  Form - ClientApplicationForm - Form
-&AtServerNoContext
-Procedure SetSourceSettings(Form)
-	
-	TS_String = "TabularSections";
-	Table_String = GetObjectTable(Form); // String
-	
-	MetaObject = Metadata.FindByType(GetObjectType(Form));
-	MetaObjectTable = MetaObject[TS_String][Table_String]; // MetadataObjectTabularSection
-	
-	DCSchema = New DataCompositionSchema;
-
-	DS = DCSchema.DataSources.Add();
-	DS.Name = "DataSources";
-	DS.DataSourceType = "Local";
-	
-	DataSet = DCSchema.DataSets.Add(Type("DataCompositionSchemaDataSetQuery"));
-	DataSet.Name = "DataSet1";
-	DataSet.DataSource = "DataSources";
-	DataSet.Query = 
-	"SELECT
-	|	Table.Ref,
-	|	Table.Property,
-	|	Table.Value
-	|FROM
-	|	" + MetaObject.FullName() + "." + Table_String + " AS Table";
-	
-	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
-	DataField.Field = "Ref";
-	DataField.DataPath = "Ref";
-	DataField.Title = "Ref";
-		
-	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
-	DataField.Field = "Property";
-	DataField.DataPath = "Property";
-	DataField.Title = MetaObjectTable.Attributes.Property.Synonym;
-		
-	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
-	DataField.Field = "Value";
-	DataField.DataPath = "Value";
-	DataField.Title = MetaObjectTable.Attributes.Value.Synonym;
-		
-	SchemaAddress = PutToTempStorage(DCSchema, Form.UUID);
-  	AvailableSettingsSource = New DataCompositionAvailableSettingsSource(SchemaAddress);
-	
-	FormCash = GetFormCash(Form);
-	FormCash.SchemaAddress = SchemaAddress; 
-    
-    DSC_String = "DataSettingsComposer";
-    DataSettingsComposer = Form[DSC_String]; // DataCompositionSettingsComposer
-	DataSettingsComposer.Initialize(AvailableSettingsSource);
-    DataSettingsComposer.LoadSettings(DCSchema.DefaultSettings);
-    
-EndProcedure
-
-// Set refs to filter.
-// 
-// Parameters:
-//  RefsArray - Array of AnyRef 
-//  DataSettingsComposer - DataCompositionSettingsComposer - Data settings composer
-&AtClientAtServerNoContext
-Procedure SetRefsToFilter(RefsArray, DataSettingsComposer)
-	List = New ValueList;
-	List.LoadValues(RefsArray);
-	
-	RefsFilter = DataSettingsComposer.Settings.Filter.Items.Add(Type("DataCompositionFilterItem"));
-	RefsFilter.LeftValue = New DataCompositionField("Ref");
-	RefsFilter.ComparisonType  = DataCompositionComparisonType.InList;
-	//@skip-warning
-	RefsFilter.RightValue = List;
-	RefsFilter.Use = True;
-EndProcedure
-
-// Set table settings.
-// 
-// Parameters:
-//  Form - ClientApplicationForm - Form
-&AtServerNoContext
-Procedure SetTableSettings(Form)
-	LoadNewColumns(Form);
-	
-	PT_String = "PropertiesTable";
-	
-	Oldfields = New Array; // Array of FormField
-	For Each FieldItem In Form.Items.PropertiesFields.ChildItems Do
-		Oldfields.Add(FieldItem);
-	EndDo;
-	For Each FieldItem In Oldfields Do
-		Form.Items.Delete(FieldItem);
-	EndDo;
-	
-	OldAttributes = New Array; // Array of FormAttribute
-	CurrentColumns = Form.GetAttributes(PT_String);
-	For Each ColumnItem In CurrentColumns Do
-		If ColumnItem.Name = "Object" Or ColumnItem.Name = "isModified" Then
-			Continue;
-		EndIf;
-		OldAttributes.Add(ColumnItem);
-	EndDo;
-	Form.ChangeAttributes(, OldAttributes);
-	
-	NewAttributes = New Array; // Array of FormAttribute
-	ColumnsData = GetFormCash(Form).ColumnsData;
-	For Each ColumnItem In ColumnsData Do
-		ColumnDescription = ColumnItem.Value; // See GetFieldDescription
-		FormAttribute = New FormAttribute(
-			ColumnItem.Key, 
-			ColumnDescription.ValueType, 
-			PT_String, 
-			ColumnDescription.Presentation);
-		NewAttributes.Add(FormAttribute);
-	EndDo;
-	Form.ChangeAttributes(NewAttributes);
-	
-	For Each ColumnItem In ColumnsData Do
-		NewFormItem = Form.Items.Add(PT_String + ColumnItem.Key, Type("FormField"), Form.Items.PropertiesFields);
-		NewFormItem.Type = FormFieldType.InputField;
-		NewFormItem.DataPath = PT_String + "." + ColumnItem.Key;
-	EndDo;
-	
-EndProcedure
-
-#EndRegion
-
-#Region LoadData
 
 // Load new columns.
 // 
@@ -401,61 +438,81 @@ Procedure LoadNewColumns(Form)
 		EndDo;
 	EndIf;
 	
-	AvailableItems_Table = New ValueTable;
-	ArrayType = New Array; // Array of Type
-	If AvailableItems.Count() = 0 Then
-		ArrayType.Add(GetObjectType(Form));
-	Else
-		ArrayType.Add(TypeOf(AvailableItems[0]));
-	EndIf;
-	AvailableItems_Table.Columns.Add("Property", New TypeDescription(ArrayType));
-	For Each AvailableItem In AvailableItems Do
-		AvailableItems_Table.Add()["Property"] = AvailableItem;
-	EndDo;
-	
 	Query = New Query;
-	Query.SetParameter("AvailableItems", AvailableItems_Table);
-	Query.Text = StrTemplate(
-	"SELECT
-	|	AvailableItems.Property
-	|INTO tmpAvailableItems
-	|FROM
-	|	&AvailableItems AS AvailableItems
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
-	|	Table.Property
-	|INTO tmpExistingItems
-	|FROM
-	|	%1 AS Table
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	ISNULL(tmpAvailableItems.Property, tmpExistingItems.Property) AS Property,
-	|	ISNULL(tmpAvailableItems.Property.Presentation, tmpExistingItems.Property.Presentation) AS Presentation,
-	|	ISNULL(tmpAvailableItems.Property.ValueType, tmpExistingItems.Property.ValueType) AS ValueType,
-	|	NOT tmpAvailableItems.Property is Null AS isAvailable,
-	|	NOT tmpExistingItems.Property is Null AS isExisting
-	|FROM
-	|	tmpAvailableItems AS tmpAvailableItems
-	|		FULL JOIN tmpExistingItems AS tmpExistingItems
-	|		ON tmpExistingItems.Property = tmpAvailableItems.Property
-	|
-	|ORDER BY
-	|	Property,
-	|	isAvailable DESC", TableDataPath);
+	
+	If AvailableItems.Count() = 0 Then
+		Query.Text = StrTemplate(
+		"SELECT DISTINCT
+		|	Table.Property
+		|INTO tmpProperties
+		|FROM
+		|	%1 AS Table
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	tmpProperties.Property AS Property,
+		|	tmpProperties.Property.Presentation AS Presentation,
+		|	tmpProperties.Property.ValueType AS ValueType,
+		|	FALSE AS isAvailable,
+		|	TRUE AS isExisting
+		|FROM
+		|	tmpProperties AS tmpProperties
+		|
+		|ORDER BY
+		|	Property", TableDataPath);
+	Else
+		AvailableItems_Table = New ValueTable;
+		ArrayType = New Array; // Array of Type
+		ArrayType.Add(TypeOf(AvailableItems[0]));
+		AvailableItems_Table.Columns.Add("Property", New TypeDescription(ArrayType));
+		For Each AvailableItem In AvailableItems Do
+			AvailableItems_Table.Add()["Property"] = AvailableItem;
+		EndDo;
+		Query.SetParameter("AvailableItems", AvailableItems_Table);
+		Query.Text = StrTemplate(
+		"SELECT
+		|	AvailableItems.Property
+		|INTO tmpAvailableItems
+		|FROM
+		|	&AvailableItems AS AvailableItems
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	Table.Property
+		|INTO tmpExistingItems
+		|FROM
+		|	%1 AS Table
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ISNULL(tmpExistingItems.Property, tmpAvailableItems.Property) AS Property,
+		|	ISNULL(tmpExistingItems.Property.Presentation, tmpAvailableItems.Property.Presentation) AS Presentation,
+		|	ISNULL(tmpExistingItems.Property.ValueType, tmpAvailableItems.Property.ValueType) AS ValueType,
+		|	NOT tmpAvailableItems.Property is Null AS isAvailable,
+		|	NOT tmpExistingItems.Property is Null AS isExisting
+		|FROM
+		|	tmpAvailableItems AS tmpAvailableItems
+		|		FULL JOIN tmpExistingItems AS tmpExistingItems
+		|		ON tmpExistingItems.Property = tmpAvailableItems.Property
+		|
+		|ORDER BY
+		|	Property,
+		|	isAvailable DESC", TableDataPath);
+	EndIf;
 	
 	QuerySelection = Query.Execute().Select();
 	While QuerySelection.Next() Do
 		ItemRef = QuerySelection.Property; // AnyRef
-		ItemKey = StrReplace("Field_" + ItemRef.UUID(), "-", "");
+		ItemKey = GetFieldKeyFromRef(ItemRef);
 		ItemPresentation = QuerySelection.Presentation; // String
 		ValueType = QuerySelection.ValueType; // TypeDescription
 		isAvailable = QuerySelection.isAvailable; // Boolean
 		isExisting = QuerySelection.isExisting; // Boolean
-		ColumnsData.Insert(ItemKey, GetFieldDescription(ItemRef, ItemPresentation, ValueType, isAvailable, isExisting));
+		ColumnsData.Insert(ItemKey, GetFieldDescription(
+			ItemRef, ItemPresentation, ValueType, isAvailable, isExisting, ContainsValuesCollection(ItemRef, Form)));
 	EndDo;
 	
 	FormCash = GetFormCash(Form);
@@ -465,7 +522,48 @@ EndProcedure
 
 &AtServer
 Procedure LoadTableData()
-	// TODO:
+	
+	ColumnsData = GetFormCash(ThisObject).ColumnsData;
+	SchemaAddress = GetFormCash(ThisObject).SchemaAddress;
+	Schema = GetFromTempStorage(SchemaAddress); // DataCompositionSchema
+	
+	TemplateComposer = New DataCompositionTemplateComposer;
+	DataCompositionTemplate = TemplateComposer.Execute(
+		Schema, 
+		ThisObject.DataSettingsComposer.GetSettings(), , , 
+		Type("DataCompositionValueCollectionTemplateGenerator"));
+	
+	DataCompositionProcessor = New DataCompositionProcessor;
+	DataCompositionProcessor.Инициализировать(DataCompositionTemplate);
+	
+	DataTree = New ValueTree();
+	OutputProcessor = New DataCompositionResultValueCollectionOutputProcessor;
+	OutputProcessor.SetObject(DataTree);
+	OutputProcessor.Output(DataCompositionProcessor);
+	
+	ThisObject.PropertiesTable.Clear();
+	For Each RowData In DataTree.Rows Do
+		TableRecord = ThisObject.PropertiesTable.Add();
+		DataRef = RowData["Ref"]; // AnyRef
+		TableRecord["Object"] = DataRef;
+		For Each RowProperty In RowData.Rows Do
+			PropertyRef = RowProperty["Property"]; // AnyRef
+			PropertyKey = GetFieldKeyFromRef(PropertyRef);
+			ColumnDescription = Undefined; // See GetFieldDescription
+			If ColumnsData.Property(PropertyKey, ColumnDescription) Then
+				If ColumnDescription.isCollection Then
+					If TableRecord[PropertyKey] = Undefined Then
+						TableRecord[PropertyKey] = New ValueList();
+					EndIf;
+					PropertyValues = TableRecord[PropertyKey]; // ValueList of Arbitrary, Undefined
+					PropertyValues.Add(RowProperty["Value"]);
+				Else
+					TableRecord[PropertyKey] = RowProperty["Value"];
+				EndIf;
+			EndIf;
+		EndDo;
+	EndDo;
+	
 EndProcedure
 
 #EndRegion
@@ -487,20 +585,31 @@ EndProcedure
 // * ValueType - TypeDescription, Arbitrary -
 // * isAvailable - Boolean, Arbitrary -
 // * isExisting - Boolean, Arbitrary -
+// * isCollection - Boolean -
 &AtServerNoContext
-Function GetFieldDescription(Ref, Presentation, ValueType, isAvailable, isExisting)
+Function GetFieldDescription(Ref, Presentation, ValueType, isAvailable, isExisting, isCollection)
 	Result = New Structure;
 	Result.Insert("Ref", Ref);
 	Result.Insert("Presentation", Presentation);
 	Result.Insert("ValueType", ValueType);
 	Result.Insert("isAvailable", isAvailable);
 	Result.Insert("isExisting", isExisting);
+	Result.Insert("isCollection", isCollection);
 	Return Result;
 EndFunction
 
 #EndRegion
 
 #Region OtherFunction
+
+// Get available types.
+// 
+// Returns:
+//  Array of Type - Get available types
+&AtServerNoContext
+Function GetAvailableTypes()
+	Return Metadata.DefinedTypes.typeAddPropertyOwners.Type.Types();
+EndFunction
 
 // Is chart of characteristic types.
 // 
@@ -534,6 +643,31 @@ Function GetObjectProperty(Object, Property)
 	Except
 		Return Undefined;
 	EndTry;
+EndFunction
+
+// Get field key from ref.
+// 
+// Parameters:
+//  Ref - AnyRef - Ref
+// 
+// Returns:
+//  String - Get field key from ref
+&AtClientAtServerNoContext
+Function GetFieldKeyFromRef(Ref)
+	Return StrReplace("Field_" + Ref.UUID(), "-", "");
+EndFunction
+
+// Contains values collection.
+// 
+// Parameters:
+//  Property - AnyRef - Property
+//  Form - ClientApplicationForm - Form
+// 
+// Returns:
+//  Boolean - Contains values collection
+&AtServerNoContext
+Function ContainsValuesCollection(Property, Form)
+	Return False;
 EndFunction
 
 #EndRegion

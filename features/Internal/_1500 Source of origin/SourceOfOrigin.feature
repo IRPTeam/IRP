@@ -13,7 +13,6 @@ Background:
 
 Scenario: _150041 preparation
 	When set True value to the constant
-
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -61,6 +60,8 @@ Scenario: _150041 preparation
 		When Create catalog Partners objects
 		When Data preparation (comission stock)
 		When Create catalog SourceOfOrigins objects
+		When Create catalog PaymentTypes objects
+		When Create catalog BankTerms objects (for Shop 02)	
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -364,6 +365,7 @@ Scenario: _150047 check filling source of origin in the PI
 				| 'Source of origin' |
 				| 'Source of origin 6'    |
 			And I select current line in "List" table
+			And I click "Show row key" button
 			And "SourceOfOrigins" table became equal
 				| 'Serial lot number' | 'Source of origin'   | 'Quantity' |
 				| '899007790088'      | 'Source of origin 6' | '10,000'   |
@@ -736,6 +738,7 @@ Scenario: _150052 check filling source of origin in the SI
 				| 'Price type'              | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'             | 'Source of origins'                      | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Work order' | 'Revenue type' | 'Sales person' |
 				| 'Basic Price Types'       | 'Dress'              | 'XS/Blue'  | ''                   | 'No'                 | '158,64'     | 'pcs'  | ''                               | 'Source of origin 5'                     | '2,000'    | '520,00' | '18%' | ''              | '881,36'     | '1 040,00'     | 'No'             | 'No'                         | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            | ''           | ''             | ''             |
 				| 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | '122,03'     | 'pcs'  | '09987897977893; 09987897977895' | 'Source of origin 6; Source of origin 4' | '4,000'    | '200,00' | '18%' | ''              | '677,97'     | '800,00'       | 'No'             | 'No'                         | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            | ''           | ''             | ''             |
+			And I click "Show row key" button
 			And "SourceOfOrigins" table became equal
 				| '#' | 'Key' | 'Serial lot number' | 'Source of origin'   | 'Quantity' |
 				| '1' | '*'   | ''                  | 'Source of origin 5' | '2,000'    |
@@ -861,11 +864,618 @@ Scenario: _150053 check filling source of origin in the IT
 				| 'Product 3 with SLN' | 'UNIQ'     | '09987897977893'     | 'pcs'  | 'Source of origin 4' | '2,000'    | ''                         | ''                    |
 			And I close all client application windows
 
+Scenario: _150054 check filling source of origin in the RSR
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	And I click "Create" button
+	* Filling in main info
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+	* Add items and fill source of origin
+		* Without serial lot number
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XS/Blue'  |
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And I activate "Source of origins" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of "Source of origins" attribute in "ItemList" table
+			And I activate "Source of origin" field in "SourceOfOrigins" table
+			And I select current line in "SourceOfOrigins" table
+			And I click choice button of "Source of origin" attribute in "SourceOfOrigins" table
+			Then "Source of origins" window is opened
+			And I go to line in "List" table
+				| 'Country of origin' | 'Source of origin'   |
+				| 'Turkey'            | 'Source of origin 5' |
+			And I activate "Source of origin" field in "List" table
+			And I select current line in "List" table
+			And I finish line editing in "SourceOfOrigins" table
+			And I activate "Quantity" field in "SourceOfOrigins" table
+			And I select current line in "SourceOfOrigins" table
+			And I click "Ok" button
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* With serial lot number
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate field named "ItemListItem" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'        | 'Reference'          |
+				| 'Product 3 with SLN' | 'Product 3 with SLN' |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'               | 'Item key' |
+				| 'Product 3 with SLN' | 'UNIQ'     |
+			And I select current line in "List" table
+			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			Then "Select serial lot numbers" window is opened
+			And in the table "SerialLotNumbers" I click "Add" button
+			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+			Then "Item serial/lot numbers" window is opened
+			And I activate field named "Owner" in "List" table
+			And I go to line in "List" table
+				| 'Code' | 'Owner' | 'Reference'      | 'Serial number'  |
+				| '9'    | 'UNIQ'  | '09987897977893' | '09987897977893' |
+			And I activate "Serial number" field in "List" table
+			And I select current line in "List" table
+			Then "Select serial lot numbers *" window is opened
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+			And I activate field named "Owner" in "List" table
+			And I go to line in "List" table
+				| 'Owner' | 'Reference'      | 'Serial number'  |
+				| 'UNIQ'  | '09987897977895' | '09987897977895' |
+			And I select current line in "List" table
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button
+			And I activate "Source of origins" field in "ItemList" table
+			And I click choice button of "Source of origins" attribute in "ItemList" table
+			And I activate "Source of origin" field in "SourceOfOrigins" table
+			And I select current line in "SourceOfOrigins" table
+			And I click choice button of "Source of origin" attribute in "SourceOfOrigins" table
+			And I go to line in "List" table
+				| 'Source of origin'   |
+				| 'Source of origin 6' |
+			And I activate "Source of origin" field in "List" table
+			And I select current line in "List" table
+			And I finish line editing in "SourceOfOrigins" table
+			And I go to line in "SourceOfOrigins" table
+				| 'Quantity' | 'Serial lot number' |
+				| '2,000'    | '09987897977895'    |
+			And I select current line in "SourceOfOrigins" table
+			And I click choice button of "Source of origin" attribute in "SourceOfOrigins" table
+			And I go to line in "List" table
+				| 'Source of origin'   |
+				| 'Source of origin 4' |
+			And I select current line in "List" table
+			And I finish line editing in "SourceOfOrigins" table
+			And I click "Ok" button
+			And I finish line editing in "ItemList" table
+			And I activate "Price" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "200,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I move to "Payments" tab
+			And in the table "Payments" I click the button named "PaymentsAdd"
+			And I select current line in "Payments" table
+			And I activate "Payment type" field in "Payments" table
+			And I select current line in "Payments" table
+			And I click choice button of "Payment type" attribute in "Payments" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Cash'        |
+			And I select current line in "List" table
+			And I activate field named "PaymentsAmount" in "Payments" table
+			And I input "1 840,00" text in the field named "PaymentsAmount" of "Payments" table
+			And I finish line editing in "Payments" table	
+		* Post
+			And I click the button named "FormPost"
+			And I delete "$$RetailSalesReceipt1$$" variable
+			And I delete "$$NumberRetailSalesReceipt1$$" variable
+			And I save the window as "$$RetailSalesReceipt1$$"
+			And I save the value of the field named "Number" as "$$NumberRetailSalesReceipt1$$"
+			And I click the button named "FormPostAndClose"
+		* Check creation
+			And "List" table contains lines
+				| 'Number'                        |
+				| '$$NumberRetailSalesReceipt1$$' |
+			And I go to line in "List" table
+				| 'Number'                        |
+				| '$$NumberRetailSalesReceipt1$$' |
+			And I select current line in "List" table	
+			And "ItemList" table contains lines
+				| 'Price type'              | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'             | 'Source of origins'                      | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Detail' | 'Revenue type' | 'Sales person' |
+				| 'Basic Price Types'       | 'Dress'              | 'XS/Blue'  | ''                   | 'No'                 | '158,64'     | 'pcs'  | ''                               | 'Source of origin 5'                     | '2,000'    | '520,00' | '18%' | ''              | '881,36'     | '1 040,00'     | 'Store 01' | ''       | ''             | ''             |
+				| 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | '122,03'     | 'pcs'  | '09987897977893; 09987897977895' | 'Source of origin 6; Source of origin 4' | '4,000'    | '200,00' | '18%' | ''              | '677,97'     | '800,00'       | 'Store 01' | ''       | ''             | ''             |
+			And I click "Show row key" button
+			And "SourceOfOrigins" table became equal
+				| '#' | 'Key' | 'Serial lot number' | 'Source of origin'   | 'Quantity' |
+				| '1' | '*'   | ''                  | 'Source of origin 5' | '2,000'    |
+				| '2' | '*'   | '09987897977893'    | 'Source of origin 6' | '2,000'    |
+				| '3' | '*'   | '09987897977895'    | 'Source of origin 4' | '2,000'    |	
+			And I close all client application windows
 
 
-								
-							
-								
+Scenario: _150055 check filling source of origin in the Stock adjustment as write off
+	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+	And I click "Create" button
+	* Filling in main info
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'     |
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'Store 01' |
+		And I select current line in "List" table
+	* Add items and fill source of origin
+		* Without serial lot number
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XS/Blue'  |
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And I activate "Source of origins" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of "Source of origins" attribute in "ItemList" table
+			And I activate "Source of origin" field in "SourceOfOrigins" table
+			And I select current line in "SourceOfOrigins" table
+			And I click choice button of "Source of origin" attribute in "SourceOfOrigins" table
+			And I go to line in "List" table
+				| 'Country of origin' | 'Source of origin'   |
+				| 'Turkey'            | 'Source of origin 5' |
+			And I select current line in "List" table
+			And I finish line editing in "SourceOfOrigins" table
+			And I activate "Quantity" field in "SourceOfOrigins" table
+			And I select current line in "SourceOfOrigins" table
+			And I click "Ok" button
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I activate "Profit loss center" field in "ItemList" table
+			And I click choice button of "Profit loss center" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'             |
+				| 'Distribution department' |
+			And I select current line in "List" table
+			And I activate "Expense type" field in "ItemList" table
+			And I click choice button of "Expense type" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Expense'     |
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+		* With serial lot number
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate field named "ItemListItem" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'        | 'Reference'          |
+				| 'Product 3 with SLN' | 'Product 3 with SLN' |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'               | 'Item key' |
+				| 'Product 3 with SLN' | 'UNIQ'     |
+			And I select current line in "List" table
+			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			Then "Select serial lot numbers" window is opened
+			And in the table "SerialLotNumbers" I click "Add" button
+			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+			Then "Item serial/lot numbers" window is opened
+			And I activate field named "Owner" in "List" table
+			And I go to line in "List" table
+				| 'Code' | 'Owner' | 'Reference'      | 'Serial number'  |
+				| '9'    | 'UNIQ'  | '09987897977893' | '09987897977893' |
+			And I activate "Serial number" field in "List" table
+			And I select current line in "List" table
+			Then "Select serial lot numbers *" window is opened
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+			And I activate field named "Owner" in "List" table
+			And I go to line in "List" table
+				| 'Owner' | 'Reference'      | 'Serial number'  |
+				| 'UNIQ'  | '09987897977895' | '09987897977895' |
+			And I select current line in "List" table
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button
+			And I activate "Source of origins" field in "ItemList" table
+			And I click choice button of "Source of origins" attribute in "ItemList" table
+			And I activate "Source of origin" field in "SourceOfOrigins" table
+			And I select current line in "SourceOfOrigins" table
+			And I click choice button of "Source of origin" attribute in "SourceOfOrigins" table
+			And I go to line in "List" table
+				| 'Source of origin'   |
+				| 'Source of origin 6' |
+			And I activate "Source of origin" field in "List" table
+			And I select current line in "List" table
+			And I finish line editing in "SourceOfOrigins" table
+			And I go to line in "SourceOfOrigins" table
+				| 'Quantity' | 'Serial lot number' |
+				| '2,000'    | '09987897977895'    |
+			And I select current line in "SourceOfOrigins" table
+			And I click choice button of "Source of origin" attribute in "SourceOfOrigins" table
+			And I go to line in "List" table
+				| 'Source of origin'   |
+				| 'Source of origin 4' |
+			And I select current line in "List" table
+			And I finish line editing in "SourceOfOrigins" table
+			And I click "Ok" button
+			And I finish line editing in "ItemList" table
+			And I activate "Profit loss center" field in "ItemList" table
+			And I click choice button of "Profit loss center" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'             |
+				| 'Distribution department' |
+			And I select current line in "List" table
+			And I activate "Expense type" field in "ItemList" table
+			And I click choice button of "Expense type" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Expense'     |
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+		* Post
+			And I click the button named "FormPost"
+			And I delete "$$StockAdjustmentAsWriteOff1$$" variable
+			And I delete "$$NumberStockAdjustmentAsWriteOff1$$" variable
+			And I save the window as "$$StockAdjustmentAsWriteOff1$$"
+			And I save the value of the field named "Number" as "$$NumberStockAdjustmentAsWriteOff1$$"
+			And I click the button named "FormPostAndClose"
+		* Check creation
+			And "List" table contains lines
+				| 'Number'                        |
+				| '$$NumberStockAdjustmentAsWriteOff1$$' |
+			And I go to line in "List" table
+				| 'Number'                        |
+				| '$$NumberStockAdjustmentAsWriteOff1$$' |
+			And I select current line in "List" table	
+			And "ItemList" table contains lines
+				| 'Item'               | 'Item key' | 'Unit' | 'Serial lot numbers'             | 'Source of origins'                      | 'Quantity' |
+				| 'Dress'              | 'XS/Blue'  | 'pcs'  | ''                               | 'Source of origin 5'                     | '2,000'    |
+				| 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977895' | 'Source of origin 6; Source of origin 4' | '4,000'    |
+			And I click "Show row key" button
+			And "SourceOfOrigins" table became equal
+				| '#' | 'Key' | 'Serial lot number' | 'Source of origin'   | 'Quantity' |
+				| '1' | '*'   | ''                  | 'Source of origin 5' | '2,000'    |
+				| '2' | '*'   | '09987897977893'    | 'Source of origin 6' | '2,000'    |
+				| '3' | '*'   | '09987897977895'    | 'Source of origin 4' | '2,000'    |	
+			And I close all client application windows						
+
+Scenario: _150056 check filling source of origin in the PR
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I click "Create" button
+	* Filling in main info
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'       |
+		And I select current line in "List" table
+	* Add items and fill source of origin
+		* Without serial lot number
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XS/Blue'  |
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			// And I activate "Source of origins" field in "ItemList" table
+			// And I select current line in "ItemList" table
+			// And I click choice button of "Source of origins" attribute in "ItemList" table
+			// And I activate "Source of origin" field in "SourceOfOrigins" table
+			// And I select current line in "SourceOfOrigins" table
+			// And I click choice button of "Source of origin" attribute in "SourceOfOrigins" table
+			// Then "Source of origins" window is opened
+			// And I go to line in "List" table
+			// 	| 'Country of origin' | 'Source of origin'   |
+			// 	| 'Turkey'            | 'Source of origin 5' |
+			// And I activate "Source of origin" field in "List" table
+			// And I select current line in "List" table
+			// And I finish line editing in "SourceOfOrigins" table
+			// And I activate "Quantity" field in "SourceOfOrigins" table
+			// And I select current line in "SourceOfOrigins" table
+			// And I click "Ok" button
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I activate "Price" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "100,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* With serial lot number
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate field named "ItemListItem" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'        | 'Reference'          |
+				| 'Product 3 with SLN' | 'Product 3 with SLN' |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'               | 'Item key' |
+				| 'Product 3 with SLN' | 'UNIQ'     |
+			And I select current line in "List" table
+			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			Then "Select serial lot numbers" window is opened
+			And in the table "SerialLotNumbers" I click "Add" button
+			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+			Then "Item serial/lot numbers" window is opened
+			And I activate field named "Owner" in "List" table
+			And I go to line in "List" table
+				| 'Code' | 'Owner' | 'Reference'      | 'Serial number'  |
+				| '9'    | 'UNIQ'  | '09987897977893' | '09987897977893' |
+			And I activate "Serial number" field in "List" table
+			And I select current line in "List" table
+			Then "Select serial lot numbers *" window is opened
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button
+			And I activate "Source of origins" field in "ItemList" table
+			And I click choice button of "Source of origins" attribute in "ItemList" table
+			And I activate "Source of origin" field in "SourceOfOrigins" table
+			And I select current line in "SourceOfOrigins" table
+			And I click choice button of "Source of origin" attribute in "SourceOfOrigins" table
+			And I go to line in "List" table
+				| 'Source of origin'   |
+				| 'Source of origin 4' |
+			And I select current line in "List" table
+			And I finish line editing in "SourceOfOrigins" table
+			And I click "Ok" button
+			And I finish line editing in "ItemList" table
+			And I activate "Price" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "100,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Link with PI
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XS/Blue'  |
+			And in the table "ItemList" I click "Link unlink basis documents" button
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' |
+				| '20,000'   | 'Dress (XS/Blue)'  | 'pcs'  |
+			And in the table "BasisesTree" I click the button named "Link"
+			And I go to line in "ItemListRows" table
+				| 'Row presentation'          |
+				| 'Product 3 with SLN (UNIQ)' |
+			And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+			And I go to line in "BasisesTree" table
+				| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'          | 'Unit' |
+				| 'TRY'      | '100,00' | '10,000'   | 'Product 3 with SLN (UNIQ)' | 'pcs'  |
+			And in the table "BasisesTree" I click the button named "Link"
+			And I click "Ok" button
+		* Post
+			And I click the button named "FormPost"
+			And I delete "$$PurchaseReturn1$$" variable
+			And I delete "$$NumberPurchaseReturn1$$" variable
+			And I save the window as "$$PurchaseReturn1$$"
+			And I save the value of the field named "Number" as "$$NumberPurchaseReturn1$$"
+			And I click the button named "FormPostAndClose"
+		* Check creation
+			And "List" table contains lines
+				| 'Number'                              |
+				| '$$NumberPurchaseReturn1$$' |
+			And I go to line in "List" table
+				| 'Number'                              |
+				| '$$NumberPurchaseReturn1$$' |
+			And I select current line in "List" table	
+			And "ItemList" table became equal
+				| 'Item'               | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Return reason' | 'Source of origins'  | 'Price'  | 'VAT' | 'Total amount' | 'Store'    | 'Quantity' | 'Use shipment confirmation' | 'Purchase invoice'                               | 'Net amount' |
+				| 'Dress'              | 'XS/Blue'  | '30,51'      | 'pcs'  | ''                   | ''              | 'Source of origin 5' | '100,00' | '18%' | '200,00'       | 'Store 01' | '2,000'    | 'No'                        | 'Purchase invoice 192 dated 30.10.2022 12:00:00' | '169,49'     |
+				| 'Product 3 with SLN' | 'UNIQ'     | '30,51'      | 'pcs'  | '09987897977889'     | ''              | 'Source of origin 4' | '100,00' | '18%' | '200,00'       | 'Store 01' | '2,000'    | 'No'                        | 'Purchase invoice 192 dated 30.10.2022 12:00:00' | '169,49'     |
+			And I click "Show row key" button			
+			And "SourceOfOrigins" table became equal
+				| '#' | 'Key' | 'Serial lot number' | 'Source of origin'   | 'Quantity' |
+				| '1' | '*'   | ''                  | 'Source of origin 4' | '2,000'    |
+				| '2' | '*'   | '09987897977893'    | 'Source of origin 5' | '2,000'    |
+			And I close all client application windows
+		
+
+Scenario: _150057 check filling source of origin in the SR
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I click "Create" button
+	* Filling in main info
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'       |
+		And I select current line in "List" table
+	* Add items and fill source of origin
+		* Without serial lot number
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XS/Blue'  |
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			// And I activate "Source of origins" field in "ItemList" table
+			// And I select current line in "ItemList" table
+			// And I click choice button of "Source of origins" attribute in "ItemList" table
+			// And I activate "Source of origin" field in "SourceOfOrigins" table
+			// And I select current line in "SourceOfOrigins" table
+			// And I click choice button of "Source of origin" attribute in "SourceOfOrigins" table
+			// Then "Source of origins" window is opened
+			// And I go to line in "List" table
+			// 	| 'Country of origin' | 'Source of origin'   |
+			// 	| 'Turkey'            | 'Source of origin 5' |
+			// And I activate "Source of origin" field in "List" table
+			// And I select current line in "List" table
+			// And I finish line editing in "SourceOfOrigins" table
+			// And I activate "Quantity" field in "SourceOfOrigins" table
+			// And I select current line in "SourceOfOrigins" table
+			// And I click "Ok" button
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* With serial lot number
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate field named "ItemListItem" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'        | 'Reference'          |
+				| 'Product 3 with SLN' | 'Product 3 with SLN' |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'               | 'Item key' |
+				| 'Product 3 with SLN' | 'UNIQ'     |
+			And I select current line in "List" table
+			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			Then "Select serial lot numbers" window is opened
+			And in the table "SerialLotNumbers" I click "Add" button
+			And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+			Then "Item serial/lot numbers" window is opened
+			And I activate field named "Owner" in "List" table
+			And I go to line in "List" table
+				| 'Owner' | 'Reference'      | 'Serial number'  |
+				| 'UNIQ'  | '09987897977893' | '09987897977893' |
+			And I activate "Serial number" field in "List" table
+			And I select current line in "List" table
+			Then "Select serial lot numbers *" window is opened
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button
+			And I activate "Source of origins" field in "ItemList" table
+			And I click choice button of "Source of origins" attribute in "ItemList" table
+			And I activate "Source of origin" field in "SourceOfOrigins" table
+			And I select current line in "SourceOfOrigins" table
+			And I click choice button of "Source of origin" attribute in "SourceOfOrigins" table
+			And I go to line in "List" table
+				| 'Source of origin'   |
+				| 'Source of origin 6' |
+			And I select current line in "List" table
+			And I finish line editing in "SourceOfOrigins" table
+			And I click "Ok" button
+			And I finish line editing in "ItemList" table
+			And I activate "Price" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "100,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Link with SI
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XS/Blue'  |
+			And in the table "ItemList" I click "Link unlink basis documents" button
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' |
+				| '2,000'    | 'Dress (XS/Blue)'  | 'pcs'  |
+			And in the table "BasisesTree" I click the button named "Link"
+			And I go to line in "ItemListRows" table
+				| 'Row presentation'          |
+				| 'Product 3 with SLN (UNIQ)' |
+			And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+			And I go to line in "BasisesTree" table
+				| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'          | 'Unit' |
+				| 'TRY'      | '200,00' | '4,000'    | 'Product 3 with SLN (UNIQ)' | 'pcs'  |
+			And in the table "BasisesTree" I click the button named "Link"
+			And I click "Ok" button
+		* Post
+			And I click the button named "FormPost"
+			And I delete "$$SalesReturn1$$" variable
+			And I delete "$$NumberSalesReturn1$$" variable
+			And I save the window as "$$SalesReturn1$$"
+			And I save the value of the field named "Number" as "$$NumberSalesReturn1$$"
+			And I click the button named "FormPostAndClose"
+		* Check creation
+			And "List" table contains lines
+				| 'Number'                 |
+				| '$$NumberSalesReturn1$$' |
+			And I go to line in "List" table
+				| 'Number'                 |
+				| '$$NumberSalesReturn1$$' |
+			And I select current line in "List" table	
+			And "ItemList" table became equal
+				| 'Item'               | 'Item key' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Source of origins'  | 'Sales invoice' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Store'    | 'VAT' |
+				| 'Dress'              | 'XS/Blue'  | '79,32'      | 'pcs'  | ''                   | 'Source of origin 5' | '*'             | '1,000'    | '520,00' | '440,68'     | '520,00'       | 'Store 01' | '18%' |
+				| 'Product 3 with SLN' | 'UNIQ'     | '30,51'      | 'pcs'  | '09987897977893'     | 'Source of origin 6' | '*'             | '2,000'    | '100,00' | '169,49'     | '200,00'       | 'Store 01' | '18%' |		
+			And I click "Show row key" button			
+			And "SourceOfOrigins" table became equal
+				| '#' | 'Key' | 'Serial lot number' | 'Source of origin'   | 'Quantity' |
+				| '1' | '*'   | ''                  | 'Source of origin 5' | '1,000'    |
+				| '2' | '*'   | '09987897977893'    | 'Source of origin 6' | '2,000'    |
+			And I close all client application windows							
 								
 				
 	

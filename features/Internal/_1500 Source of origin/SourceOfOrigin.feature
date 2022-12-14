@@ -1,8 +1,8 @@
 ﻿#language: en
 @tree
-@LandedCost
+@SourceOfOrigin
 
-Feature: Landed cost
+Feature: Source of origin
 
 Variables:
 import "Variables.feature"

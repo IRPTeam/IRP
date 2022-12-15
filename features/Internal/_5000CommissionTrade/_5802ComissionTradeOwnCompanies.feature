@@ -1731,8 +1731,167 @@ Scenario: _05830 сheck recognition of own and commission goods when scanning a 
 			| 'Own stocks'       | 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | '117,46'     | 'pcs'  | '09987897977893; 09987897977893; 09987897977893; 09987897977894; 09987897977895; 09987897977895; 09987897977895' | '7,000'    | '110,00' | '18%'         | ''              | '652,54'     | '770,00'       | 'Store 01' |
 			| 'Consignor stocks' | 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | ''                   | 'No'                 | '67,12'      | 'pcs'  | '09987897977893; 09987897977893; 09987897977894; 09987897977894'                                                 | '4,000'    | '110,00' | '18%'         | ''              | '372,88'     | '440,00'       | 'Store 01' |
 		And I close all client application windows
-		
-				
+
+
+Scenario: _05831 сheck recognition of own and commission goods when scanning a barcode in the IT
+		And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"	
+		If "List" table contains lines Then
+			| 'Number'         |
+			| '$$NumberSI10$$' |
+			And I go to line in "List" table
+				| 'Number'         |
+				| '$$NumberSI10$$' |
+			And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I close all client application windows
+	* Open IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "StoreSender"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "StoreReceiver"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02' |
+		And I select current line in "List" table
+	* Scan item (Dress M/Brown)
+		* Own stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Item'  | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Quantity' |
+				| 'Own stocks'       | 'Dress' | 'M/Brown'  | 'pcs'  | ''                   | '2,000'    |
+		* Consignor stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"	
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Item'  | 'Item key' | 'Unit' | 'Serial lot numbers' |'Quantity' |
+				| 'Own stocks'       | 'Dress' | 'M/Brown'  | 'pcs'  | ''                   | '2,000'    |
+				| 'Consignor stocks' | 'Dress' | 'M/Brown'  | 'pcs'  | ''                   | '2,000'    |
+		* Over stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283714" text in the field named "InputFld"
+			And I click the button named "OK"				
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Item'  | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Quantity' |
+				| 'Own stocks'       | 'Dress' | 'M/Brown'  | 'pcs'  | ''                   | '3,000'    |
+				| 'Consignor stocks' | 'Dress' | 'M/Brown'  | 'pcs'  | ''                   | '2,000'    |
+	* Scan item (Dress S/Yellow)		
+		* Consignor stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283713" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "2202283713" text in the field named "InputFld"
+			And I click the button named "OK"	
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Item'  | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Quantity' |
+				| 'Own stocks'       | 'Dress' | 'M/Brown'  | 'pcs'  | ''                   | '3,000'    |
+				| 'Consignor stocks' | 'Dress' | 'M/Brown'  | 'pcs'  | ''                   | '2,000'    |
+				| 'Consignor stocks' | 'Dress' | 'S/Yellow' | 'pcs'  | ''                   | '2,000'    |
+	* Scan item with serial lot number (with stock balance detail, own and consignor stock)
+		* Own stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Consignor stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Over stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977893" text in the field named "InputFld"
+			And I click the button named "OK"
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Item'               | 'Item key' | 'Unit' | 'Serial lot numbers'                             | 'Quantity' |
+				| 'Own stocks'       | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                                               | '3,000'    |
+				| 'Consignor stocks' | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                                               | '2,000'    |
+				| 'Consignor stocks' | 'Dress'              | 'S/Yellow' | 'pcs'  | ''                                               | '2,000'    |
+				| 'Own stocks'       | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977893; 09987897977893' | '3,000'    |
+				| 'Consignor stocks' | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977893'                 | '2,000'    |
+	* Scan item with serial lot number (with stock balance detail, only consignor stock)
+		* Consignor stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977894" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977894" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Over stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977894" text in the field named "InputFld"
+			And I click the button named "OK"
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Item'               | 'Item key' | 'Unit' | 'Serial lot numbers'                                             | 'Quantity' |
+				| 'Own stocks'       | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                                                               | '3,000'    |
+				| 'Consignor stocks' | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                                                               | '2,000'    |
+				| 'Consignor stocks' | 'Dress'              | 'S/Yellow' | 'pcs'  | ''                                                               | '2,000'    |
+				| 'Own stocks'       | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977893; 09987897977893; 09987897977894' | '4,000'    |
+				| 'Consignor stocks' | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977893; 09987897977894; 09987897977894' | '4,000'    |
+	* Scan item with serial lot number (with stock balance detail, only own stock)
+		* Own stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977895" text in the field named "InputFld"
+			And I click the button named "OK"
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977895" text in the field named "InputFld"
+			And I click the button named "OK"
+		* Over stock
+			And in the table "ItemList" I click the button named "SearchByBarcode"
+			Then "Enter a barcode" window is opened
+			And I input "09987897977895" text in the field named "InputFld"
+			And I click the button named "OK"
+			And "ItemList" table became equal
+				| 'Inventory origin' | 'Item'               | 'Item key' | 'Unit' | 'Serial lot numbers'                                                                                             | 'Quantity' |
+				| 'Own stocks'       | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                                                                                                               | '3,000'    |
+				| 'Consignor stocks' | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                                                                                                               | '2,000'    |
+				| 'Consignor stocks' | 'Dress'              | 'S/Yellow' | 'pcs'  | ''                                                                                                               | '2,000'    |
+				| 'Own stocks'       | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977893; 09987897977893; 09987897977894; 09987897977895; 09987897977895; 09987897977895' | '7,000'    |
+				| 'Consignor stocks' | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977893; 09987897977894; 09987897977894'                                                 | '4,000'    |
+			And I close all client application windows
+
+
 Scenario: _05832 сheck recognition of own and commission goods when scanning a barcode in the RSR
 		And I close all client application windows
 	* Preparation
@@ -2070,7 +2229,9 @@ Scenario: _05834 сheck recognition of own and commission goods when scanning a 
 		And I close all client application windows
 		
 				
-				
+Scenario: _05835 сheck recognition of own and commission goods when scanning a barcode in the IT
+		And I close all client application windows	
+
 					
 				
 

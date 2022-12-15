@@ -250,8 +250,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.CopyColumns();
 	If BatchKeysInfo_DataTable.Count() Then
 		BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.Copy(New Structure("CurrencyMovementType", CurrencyMovementType));
-		BatchKeysInfo_DataTableGrouped.GroupBy("Period, RowID, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SourceOfOrigin, SerialLotNumber, 
-		|Quantity, Amount, AmountTax");	
+		BatchKeysInfo_DataTableGrouped.GroupBy("Period, RowID, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SourceOfOrigin, SerialLotNumber", 
+		"Quantity, Amount, AmountTax");	
 	EndIf;
 	
 	Query = New Query();

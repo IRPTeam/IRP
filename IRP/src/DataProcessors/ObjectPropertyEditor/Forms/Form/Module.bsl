@@ -66,6 +66,18 @@ Procedure PropertiesTableSelection(Item, RowSelected, Field, StandardProcessing)
 	EndIf;
 EndProcedure
 
+// Properties table value on change.
+// 
+// Parameters:
+//  Item - FormField - Item
+&AtClient
+Procedure PropertiesTableValueOnChange(Item)
+	
+	RowValue = Items.PropertiesTable.CurrentData;
+	CheckRowModified(RowValue);
+	
+EndProcedure
+
 #EndRegion
 
 #Region Form_Commands
@@ -75,9 +87,58 @@ Procedure Refresh(Command)
 	LoadTableData();
 EndProcedure
 
+&AtClient
+Procedure Save(Command)
+	SaveAtServer();
+	LoadTableData();
+EndProcedure
+
 #EndRegion
 
 #Region Private
+
+&AtClient
+Procedure CheckRowModified(RowValue)
+	
+	isModified = False;
+	
+	For Each ColumnKeyValue In GetFormCash(ThisObject).ColumnsData Do
+		ColumnKey = ColumnKeyValue.Key; // String
+		ColumnValue = ColumnKeyValue.Value; // See GetFieldDescription
+		CurrentValue = RowValue[ColumnKey]; // Arbitrary, ValueList
+		OldValue = RowValue[ColumnKey + "_old"]; // Arbitrary, ValueList
+		If ColumnValue.isCollection Then
+			If Not TypeOf(CurrentValue) = TypeOf(OldValue) Then
+				isModified = True;
+				Break;
+			ElsIf Not TypeOf(CurrentValue) = Type("ValueList") Then
+				isModified = True;
+				Break;
+			ElsIf Not CurrentValue.Count() = OldValue.Count() Then
+				isModified = True;
+				Break;
+			Else
+				For Each ListItem In CurrentValue Do
+					If OldValue.FindByValue(ListItem.Value) = Undefined Then
+						isModified = True;
+						Break;
+					EndIf;
+				EndDo;
+				If isModified Then
+					Break;
+				EndIf;
+			EndIf;
+		Else
+			If Not CurrentValue = OldValue Then
+				isModified = True;
+				Break;
+			EndIf;
+		EndIf;
+	EndDo;
+	
+	RowValue.isModified = isModified;
+
+EndProcedure
 
 #Region FormProperty_Getting
 
@@ -307,23 +368,34 @@ Procedure SetTableSettings(Form)
 		FormAttribute = New FormAttribute(
 			ColumnItem.Key, 
 			?(ColumnDescription.isCollection = True, 
-				New TypeDescription(ColumnDescription.ValueType, "ValueList"),
+				New TypeDescription(ColumnDescription.CollectionValueType, "Undefined"),
 				ColumnDescription.ValueType), 
 			PT_String, 
 			ColumnDescription.Presentation);
+		NewAttributes.Add(FormAttribute);
+		FormAttribute = New FormAttribute(
+			ColumnItem.Key + "_old", 
+			?(ColumnDescription.isCollection = True, 
+				ColumnDescription.CollectionValueType,
+				ColumnDescription.ValueType), 
+			PT_String, 
+			ColumnDescription.Presentation + " (old)");
 		NewAttributes.Add(FormAttribute);
 	EndDo;
 	Form.ChangeAttributes(NewAttributes);
 	
 	For Each ColumnItem In ColumnsData Do
+		ColumnKey = ColumnItem.Key; // String
 		ColumnDescription = ColumnItem.Value; // See GetFieldDescription
-		NewFormItem = Form.Items.Add(PT_String + ColumnItem.Key, Type("FormField"), Form.Items.PropertiesFields);
+		NewFormItem = Form.Items.Add(ColumnKey, Type("FormField"), Form.Items.PropertiesFields);
 		NewFormItem.Type = FormFieldType.InputField;
-		NewFormItem.DataPath = PT_String + "." + ColumnItem.Key;
+		NewFormItem.DataPath = PT_String + "." + ColumnKey;
 		NewFormItem.ChooseType = False;
+		NewFormItem.TypeRestriction = ColumnDescription.ValueType;
 		ParametersArray = New Array; // Array of ChoiceParameter
 		ParametersArray.Add(New ChoiceParameter("Filter.Owner", ColumnDescription.Ref));
 		NewFormItem.ChoiceParameters = New FixedArray(ParametersArray);
+		NewFormItem.SetAction("OnChange", "PropertiesTableValueOnChange");
 	EndDo;
 	
 EndProcedure
@@ -560,8 +632,50 @@ Procedure LoadTableData()
 				Else
 					TableRecord[PropertyKey] = RowProperty["Value"];
 				EndIf;
+				TableRecord[PropertyKey + "_old"] = TableRecord[PropertyKey];
 			EndIf;
 		EndDo;
+	EndDo;
+	
+EndProcedure
+
+#EndRegion
+
+#Region SaveData
+
+&AtServer
+Procedure SaveAtServer()
+	
+	ModifiedRows = ThisObject.PropertiesTable.FindRows(New Structure("isModified", True));
+	For Each Row In ModifiedRows Do
+		
+		ModifiedObject = Row.Object.GetObject();
+		ModifiedTable = ModifiedObject[ThisObject.ObjectTable]; // TabularSection
+		ModifiedTable.Clear();
+		
+		For Each ColumndKeyValue In GetFormCash(ThisObject).ColumnsData Do
+			ColumnKey = ColumndKeyValue.Key; // String
+			ColumnDescription = ColumndKeyValue.Value; // See GetFieldDescription
+			
+			ColumnValue = Row[ColumnKey]; // Arbitrary, Undefined
+			If TypeOf(ColumnValue) = Type("ValueList") And ColumnValue.Count() = 0 Then
+				ColumnValue = Undefined;
+			EndIf;
+
+			If TypeOf(ColumnValue) = Type("ValueList") Then
+				For Each CollectionItem In ColumnValue Do
+					NewRecord = ModifiedTable.Add();
+					NewRecord["Property"] = ColumnDescription.Ref;
+					NewRecord["Value"] = CollectionItem.Value;
+				EndDo;
+			ElsIf Not ColumnValue = Undefined Then
+				NewRecord = ModifiedTable.Add();
+				NewRecord["Property"] = ColumnDescription.Ref;
+				NewRecord["Value"] = ColumnValue;
+			EndIf;
+		EndDo;
+		
+		ModifiedObject.Write();
 	EndDo;
 	
 EndProcedure
@@ -586,6 +700,7 @@ EndProcedure
 // * isAvailable - Boolean, Arbitrary -
 // * isExisting - Boolean, Arbitrary -
 // * isCollection - Boolean -
+// * CollectionValueType - TypeDescription -
 &AtServerNoContext
 Function GetFieldDescription(Ref, Presentation, ValueType, isAvailable, isExisting, isCollection)
 	Result = New Structure;
@@ -595,6 +710,7 @@ Function GetFieldDescription(Ref, Presentation, ValueType, isAvailable, isExisti
 	Result.Insert("isAvailable", isAvailable);
 	Result.Insert("isExisting", isExisting);
 	Result.Insert("isCollection", isCollection);
+	Result.Insert("CollectionValueType", New TypeDescription(ValueType, "ValueList"));
 	Return Result;
 EndFunction
 

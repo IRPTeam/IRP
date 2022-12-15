@@ -6,6 +6,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	FormCash = GetFormCash(ThisObject);
+	FormCash.CountConditionalAppearance = ThisObject.ConditionalAppearance.Items.Count();
 	LoadMetadata(FormCash);
 	
 	RefsList = Parameters["RefsList"]; // Array, Undefined
@@ -223,6 +224,7 @@ EndProcedure
 // * ColumnsData - Structure:
 //	** Key - String
 //	** Value - See GetFieldDescription
+// * CountConditionalAppearance - Number
 &AtClientAtServerNoContext
 Function GetFormCash(Form)
 	FormCash = Form["FormDataCash"]; // Structure, Undefined
@@ -234,6 +236,7 @@ Function GetFormCash(Form)
 	FormCash.Insert("ObjectTables", New Map);
 	FormCash.Insert("SchemaAddress", "");
 	FormCash.Insert("ColumnsData", New Structure);
+	FormCash.Insert("CountConditionalAppearance", 0);
 	
 	Form["FormDataCash"] = FormCash;
 	
@@ -403,10 +406,16 @@ EndProcedure
 &AtServerNoContext
 Procedure SetTableSettings(Form)
 	
+	PT_String = "PropertiesTable";
+	
 	Form.PropertiesTable.Clear();
 	LoadNewColumns(Form);
 	
-	PT_String = "PropertiesTable";
+	PrimaryCount = GetFormCash(Form).CountConditionalAppearance;
+	While Form.ConditionalAppearance.Items.Count() > PrimaryCount Do
+		LastItem = Form.ConditionalAppearance.Items.Get(Form.ConditionalAppearance.Items.Count() - 1);
+		Form.ConditionalAppearance.Items.Delete(LastItem);
+	EndDo;
 	
 	Oldfields = New Array; // Array of FormField
 	For Each FieldItem In Form.Items.PropertiesFields.ChildItems Do
@@ -448,6 +457,7 @@ Procedure SetTableSettings(Form)
 	For Each ColumnItem In ColumnsData Do
 		ColumnKey = ColumnItem.Key; // String
 		ColumnDescription = ColumnItem.Value; // See GetFieldDescription
+		
 		NewFormItem = Form.Items.Add(ColumnKey, Type("FormField"), Form.Items.PropertiesFields);
 		NewFormItem.Type = FormFieldType.InputField;
 		NewFormItem.DataPath = PT_String + "." + ColumnKey;
@@ -457,7 +467,74 @@ Procedure SetTableSettings(Form)
 		ParametersArray.Add(New ChoiceParameter("Filter.Owner", ColumnDescription.Ref));
 		NewFormItem.ChoiceParameters = New FixedArray(ParametersArray);
 		NewFormItem.SetAction("OnChange", "PropertiesTableValueOnChange");
+		
+		CreateConditionalAppearance(Form, NewFormItem);
 	EndDo;
+	
+EndProcedure
+
+// Create conditional appearance.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+//  NewFormItem - FormFieldExtensionForATextDocument, FormFieldExtensionForAGanttChartField, FormFieldExtensionForALabelField, FormFieldExtensionForADendrogramField, FormFieldExtensionForAPictureField, FormFieldExtensionForATrackBarField, FormFieldExtensionForAPlanner, FormFieldExtensionForAChartField, FormFieldExtensionForAFormattedDocument, FormFieldExtensionForATextBox, FormFieldExtensionForAGeographicalSchemaField, FormFieldExtensionForAPeriodField, FormFieldExtensionForASpreadsheetDocumentField, FormField, FormExtensionForAHTMLDocumentField, FormFieldExtensionForACheckBoxField, FormFieldExtensionForACalendarField, FormFieldExtensionForAProgressBarField, FormFieldExtensionForARadioButtonField, FormFieldExtensionForAGraphicalSchemaField - New form item
+&AtServerNoContext
+Procedure CreateConditionalAppearance(Form, NewFormItem)
+	
+	ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
+	ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightGreen);
+	FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+	FilterItem.ComparisonType = DataCompositionComparisonType.NotEqual;
+	FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
+	//@skip-warning
+	FilterItem.RightValue = Undefined;
+	FilterItem.Use = True;
+	FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+	FilterItem.ComparisonType = DataCompositionComparisonType.NotEqual;
+	FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
+	//@skip-warning
+	FilterItem.RightValue = New DataCompositionField(NewFormItem.DataPath + "_old");
+	FilterItem.Use = True;
+	AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
+	AppearanceField.Field = New DataCompositionField(NewFormItem.Name);
+	AppearanceField.Use = True;
+	
+	ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
+	ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightGray);
+	FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+	FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
+	FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
+	//@skip-warning
+	FilterItem.RightValue = Undefined;
+	FilterItem.Use = True;
+	FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+	FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
+	FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
+	//@skip-warning
+	FilterItem.RightValue = New DataCompositionField(NewFormItem.DataPath + "_old");
+	FilterItem.Use = True;
+	AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
+	AppearanceField.Field = New DataCompositionField(NewFormItem.Name);
+	AppearanceField.Use = True;
+
+	ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
+	ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightPink);
+	ConditionalAppearanceItem.Appearance.SetParameterValue("Text", R().IM_Info_Cleared);
+	FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+	FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
+	FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
+	//@skip-warning
+	FilterItem.RightValue = Undefined;
+	FilterItem.Use = True;
+	FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+	FilterItem.ComparisonType = DataCompositionComparisonType.NotEqual;
+	FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
+	//@skip-warning
+	FilterItem.RightValue = New DataCompositionField(NewFormItem.DataPath + "_old");
+	FilterItem.Use = True;
+	AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
+	AppearanceField.Field = New DataCompositionField(NewFormItem.Name);
+	AppearanceField.Use = True;
 	
 EndProcedure
 

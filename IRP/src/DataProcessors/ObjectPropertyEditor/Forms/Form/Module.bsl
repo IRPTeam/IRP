@@ -73,9 +73,28 @@ EndProcedure
 //  Item - FormField - Item
 &AtClient
 Procedure PropertiesTableValueOnChange(Item)
-	
 	RowValue = Items.PropertiesTable.CurrentData;
-	CheckRowModified(RowValue);
+	CheckRowModified(ThisObject, RowValue);
+EndProcedure
+
+// Properties table value start choice.
+// 
+// Parameters:
+//  Item - FormField - Item
+//  ChoiceData - ValueList - Choice data
+//  StandardProcessing - Boolean - Standard processing
+&AtClient
+Procedure PropertiesTableValueStartChoice(Item, ChoiceData, StandardProcessing)
+	
+	FieldName = Item.Name; // String
+	FieldDescription = Undefined; // See GetFieldDescription
+	If GetFormCash(ThisObject).ColumnsData.Property(FieldName, FieldDescription) Then
+		If TypeOf(Items.PropertiesTable.CurrentData[FieldName]) = Type("ValueList") Then
+			Items.PropertiesTable.CurrentData[FieldName]["ValueType"] = FieldDescription.ValueType;
+		ElsIf Items.PropertiesTable.CurrentData[FieldName] = Undefined Then
+			Item.TypeRestriction = FieldDescription.ValueType;
+		EndIf;
+	EndIf;
 	
 EndProcedure
 
@@ -109,7 +128,7 @@ Procedure DeleteCurrentValue(Command)
 		Else
 			RowValue[Field] = Undefined;
 		EndIf;
-		CheckRowModified(RowValue);
+		CheckRowModified(ThisObject, RowValue);
 	EndDo;
 
 EndProcedure
@@ -138,7 +157,7 @@ Procedure CopyThisValueToEmptyCells(Command)
 			EndIf;
 		EndIf;
 		
-		CheckRowModified(Row);
+		CheckRowModified(ThisObject, Row);
 	EndDo;
 
 EndProcedure
@@ -154,7 +173,7 @@ Procedure SetNewValue(Command)
 			Continue;
 		EndIf;
 		Row[Field] = CurrentRow[Field]; // Arbitrary, ValueList
-		CheckRowModified(Row);
+		CheckRowModified(ThisObject, Row);
 	EndDo;
 
 EndProcedure
@@ -163,41 +182,46 @@ EndProcedure
 
 #Region Private
 
-&AtClient
-Procedure CheckRowModified(RowValue)
+&AtClientAtServerNoContext
+Procedure CheckRowModified(Form, RowValue)
 	
 	isModified = False;
 	
-	For Each ColumnKeyValue In GetFormCash(ThisObject).ColumnsData Do
+	For Each ColumnKeyValue In GetFormCash(Form).ColumnsData Do
 		ColumnKey = ColumnKeyValue.Key; // String
 		ColumnValue = ColumnKeyValue.Value; // See GetFieldDescription
 		CurrentValue = RowValue[ColumnKey]; // Arbitrary, ValueList
 		OldValue = RowValue[ColumnKey + "_old"]; // Arbitrary, ValueList
 		If ColumnValue.isCollection Then
-			If Not TypeOf(CurrentValue) = TypeOf(OldValue) Then
+			If Not TypeOf(CurrentValue) = Type("ValueList") Then
+				CurrentValue = New ValueList();
+				RowValue[ColumnKey] = CurrentValue;
+			EndIf;
+			If Not TypeOf(OldValue) = Type("ValueList") Then
+				OldValue = New ValueList();
+				RowValue[ColumnKey + "_old"] = CurrentValue;
+			EndIf;
+			RowValue[ColumnKey + "_modified"] = 0;
+			If CurrentValue.Count() = 0 And OldValue.Count() = 0 Then
+				RowValue[ColumnKey + "_modified"] = 1;
+			ElsIf CurrentValue.Count() = 0 Then
+				RowValue[ColumnKey + "_modified"] = 2;
 				isModified = True;
-				Break;
-			ElsIf Not TypeOf(CurrentValue) = Type("ValueList") Then
-				isModified = True;
-				Break;
 			ElsIf Not CurrentValue.Count() = OldValue.Count() Then
+				RowValue[ColumnKey + "_modified"] = 3;
 				isModified = True;
-				Break;
 			Else
 				For Each ListItem In CurrentValue Do
 					If OldValue.FindByValue(ListItem.Value) = Undefined Then
+						RowValue[ColumnKey + "_modified"] = 3;
 						isModified = True;
 						Break;
 					EndIf;
 				EndDo;
-				If isModified Then
-					Break;
-				EndIf;
 			EndIf;
 		Else
 			If Not CurrentValue = OldValue Then
 				isModified = True;
-				Break;
 			EndIf;
 		EndIf;
 	EndDo;
@@ -332,13 +356,15 @@ Procedure SetSourceSettings(Form)
 	DataSet = DCSchema.DataSets.Add(Type("DataCompositionSchemaDataSetQuery"));
 	DataSet.Name = "DataSet";
 	DataSet.DataSource = "DataSources";
-	DataSet.Query = 
+	DataSet.Query =
 	"SELECT
 	|	Table.Ref,
-	|	Table.Property,
-	|	Table.Value
+	|	Attributes.Property,
+	|	Attributes.Value
 	|FROM
-	|	" + MetaObject.FullName() + "." + Table_String + " AS Table";
+	|	" + MetaObject.FullName() + "." + Table_String + " AS Attributes
+	|		FULL JOIN " + MetaObject.FullName() + " AS Table
+	|		ON Attributes.Ref = Table.Ref";
 	
 	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
 	DataField.Field = "Ref";
@@ -451,6 +477,14 @@ Procedure SetTableSettings(Form)
 			PT_String, 
 			ColumnDescription.Presentation + " (old)");
 		NewAttributes.Add(FormAttribute);
+		If ColumnDescription.isCollection Then
+			FormAttribute = New FormAttribute(
+				ColumnItem.Key + "_modified", 
+				New TypeDescription("Number"), 
+				PT_String, 
+				ColumnDescription.Presentation + " (*)");
+			NewAttributes.Add(FormAttribute);
+		EndIf;
 	EndDo;
 	Form.ChangeAttributes(NewAttributes);
 	
@@ -462,13 +496,13 @@ Procedure SetTableSettings(Form)
 		NewFormItem.Type = FormFieldType.InputField;
 		NewFormItem.DataPath = PT_String + "." + ColumnKey;
 		NewFormItem.ChooseType = False;
-		NewFormItem.TypeRestriction = ColumnDescription.CollectionValueType;
 		ParametersArray = New Array; // Array of ChoiceParameter
 		ParametersArray.Add(New ChoiceParameter("Filter.Owner", ColumnDescription.Ref));
 		NewFormItem.ChoiceParameters = New FixedArray(ParametersArray);
 		NewFormItem.SetAction("OnChange", "PropertiesTableValueOnChange");
+		NewFormItem.SetAction("StartChoice", "PropertiesTableValueStartChoice");
 		
-		CreateConditionalAppearance(Form, NewFormItem);
+		CreateConditionalAppearance(Form, NewFormItem, ColumnDescription.isCollection);
 	EndDo;
 	
 EndProcedure
@@ -478,63 +512,105 @@ EndProcedure
 // Parameters:
 //  Form - ClientApplicationForm - Form
 //  NewFormItem - FormFieldExtensionForATextDocument, FormFieldExtensionForAGanttChartField, FormFieldExtensionForALabelField, FormFieldExtensionForADendrogramField, FormFieldExtensionForAPictureField, FormFieldExtensionForATrackBarField, FormFieldExtensionForAPlanner, FormFieldExtensionForAChartField, FormFieldExtensionForAFormattedDocument, FormFieldExtensionForATextBox, FormFieldExtensionForAGeographicalSchemaField, FormFieldExtensionForAPeriodField, FormFieldExtensionForASpreadsheetDocumentField, FormField, FormExtensionForAHTMLDocumentField, FormFieldExtensionForACheckBoxField, FormFieldExtensionForACalendarField, FormFieldExtensionForAProgressBarField, FormFieldExtensionForARadioButtonField, FormFieldExtensionForAGraphicalSchemaField - New form item
+//	isCollection - Boolean 
 &AtServerNoContext
-Procedure CreateConditionalAppearance(Form, NewFormItem)
+Procedure CreateConditionalAppearance(Form, NewFormItem, isCollection)
 	
-	ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
-	ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightGreen);
-	FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
-	FilterItem.ComparisonType = DataCompositionComparisonType.NotEqual;
-	FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
-	//@skip-warning
-	FilterItem.RightValue = Undefined;
-	FilterItem.Use = True;
-	FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
-	FilterItem.ComparisonType = DataCompositionComparisonType.NotEqual;
-	FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
-	//@skip-warning
-	FilterItem.RightValue = New DataCompositionField(NewFormItem.DataPath + "_old");
-	FilterItem.Use = True;
-	AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
-	AppearanceField.Field = New DataCompositionField(NewFormItem.Name);
-	AppearanceField.Use = True;
+	If Not isCollection Then
+		ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
+		ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightGreen);
+		FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+		FilterItem.ComparisonType = DataCompositionComparisonType.NotEqual;
+		FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
+		//@skip-warning
+		FilterItem.RightValue = Undefined;
+		FilterItem.Use = True;
+		FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+		FilterItem.ComparisonType = DataCompositionComparisonType.NotEqual;
+		FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
+		//@skip-warning
+		FilterItem.RightValue = New DataCompositionField(NewFormItem.DataPath + "_old");
+		FilterItem.Use = True;
+		AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
+		AppearanceField.Field = New DataCompositionField(NewFormItem.Name);
+		AppearanceField.Use = True;
+		
+		ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
+		ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightGray);
+		FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+		FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
+		FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
+		//@skip-warning
+		FilterItem.RightValue = Undefined;
+		FilterItem.Use = True;
+		FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+		FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
+		FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
+		//@skip-warning
+		FilterItem.RightValue = New DataCompositionField(NewFormItem.DataPath + "_old");
+		FilterItem.Use = True;
+		AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
+		AppearanceField.Field = New DataCompositionField(NewFormItem.Name);
+		AppearanceField.Use = True;
 	
-	ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
-	ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightGray);
-	FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
-	FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
-	FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
-	//@skip-warning
-	FilterItem.RightValue = Undefined;
-	FilterItem.Use = True;
-	FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
-	FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
-	FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
-	//@skip-warning
-	FilterItem.RightValue = New DataCompositionField(NewFormItem.DataPath + "_old");
-	FilterItem.Use = True;
-	AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
-	AppearanceField.Field = New DataCompositionField(NewFormItem.Name);
-	AppearanceField.Use = True;
-
-	ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
-	ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightPink);
-	ConditionalAppearanceItem.Appearance.SetParameterValue("Text", R().IM_Info_Cleared);
-	FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
-	FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
-	FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
-	//@skip-warning
-	FilterItem.RightValue = Undefined;
-	FilterItem.Use = True;
-	FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
-	FilterItem.ComparisonType = DataCompositionComparisonType.NotEqual;
-	FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
-	//@skip-warning
-	FilterItem.RightValue = New DataCompositionField(NewFormItem.DataPath + "_old");
-	FilterItem.Use = True;
-	AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
-	AppearanceField.Field = New DataCompositionField(NewFormItem.Name);
-	AppearanceField.Use = True;
+		ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
+		ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightPink);
+		//@skip-warning
+		ConditionalAppearanceItem.Appearance.SetParameterValue("Text", R().IM_Info_Cleared);
+		FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+		FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
+		FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
+		//@skip-warning
+		FilterItem.RightValue = Undefined;
+		FilterItem.Use = True;
+		FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+		FilterItem.ComparisonType = DataCompositionComparisonType.NotEqual;
+		FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
+		//@skip-warning
+		FilterItem.RightValue = New DataCompositionField(NewFormItem.DataPath + "_old");
+		FilterItem.Use = True;
+		AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
+		AppearanceField.Field = New DataCompositionField(NewFormItem.Name);
+		AppearanceField.Use = True;
+	Else
+		ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
+		ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightGray);
+		FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+		FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
+		FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath + "_modified");
+		//@skip-warning
+		FilterItem.RightValue = 1;
+		FilterItem.Use = True;
+		AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
+		AppearanceField.Field = New DataCompositionField(NewFormItem.Name);
+		AppearanceField.Use = True;
+		
+		ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
+		ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightPink);
+		//@skip-warning
+		ConditionalAppearanceItem.Appearance.SetParameterValue("Text", R().IM_Info_Cleared);
+		FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+		FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
+		FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath + "_modified");
+		//@skip-warning
+		FilterItem.RightValue = 2;
+		FilterItem.Use = True;
+		AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
+		AppearanceField.Field = New DataCompositionField(NewFormItem.Name);
+		AppearanceField.Use = True;
+	
+		ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
+		ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightGreen);
+		FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+		FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
+		FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath + "_modified");
+		//@skip-warning
+		FilterItem.RightValue = 3;
+		FilterItem.Use = True;
+		AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
+		AppearanceField.Field = New DataCompositionField(NewFormItem.Name);
+		AppearanceField.Use = True;
+	EndIf;
 	
 EndProcedure
 
@@ -733,6 +809,11 @@ EndProcedure
 &AtServer
 Procedure LoadTableData()
 	
+	Ref_String = "Ref";
+	Object_String = "Object";
+	Property_String = "Property";
+	Value_String = "Value";
+	
 	ColumnsData = GetFormCash(ThisObject).ColumnsData;
 	SchemaAddress = GetFormCash(ThisObject).SchemaAddress;
 	Schema = GetFromTempStorage(SchemaAddress); // DataCompositionSchema
@@ -754,10 +835,13 @@ Procedure LoadTableData()
 	ThisObject.PropertiesTable.Clear();
 	For Each RowData In DataTree.Rows Do
 		TableRecord = ThisObject.PropertiesTable.Add();
-		DataRef = RowData["Ref"]; // AnyRef
-		TableRecord["Object"] = DataRef;
+		DataRef = RowData[Ref_String]; // AnyRef
+		TableRecord[Object_String] = DataRef;
 		For Each RowProperty In RowData.Rows Do
-			PropertyRef = RowProperty["Property"]; // AnyRef
+			PropertyRef = RowProperty[Property_String]; // AnyRef
+			If PropertyRef = Null Then
+				Break;
+			EndIf;
 			PropertyKey = GetFieldKeyFromRef(PropertyRef);
 			ColumnDescription = Undefined; // See GetFieldDescription
 			If ColumnsData.Property(PropertyKey, ColumnDescription) Then
@@ -766,13 +850,14 @@ Procedure LoadTableData()
 						TableRecord[PropertyKey] = New ValueList();
 					EndIf;
 					PropertyValues = TableRecord[PropertyKey]; // ValueList of Arbitrary, Undefined
-					PropertyValues.Add(RowProperty["Value"]);
+					PropertyValues.Add(RowProperty[Value_String]);
 				Else
-					TableRecord[PropertyKey] = RowProperty["Value"];
+					TableRecord[PropertyKey] = RowProperty[Value_String];
 				EndIf;
 				TableRecord[PropertyKey + "_old"] = TableRecord[PropertyKey];
 			EndIf;
 		EndDo;
+		CheckRowModified(ThisObject, TableRecord);
 	EndDo;
 	
 EndProcedure
@@ -783,6 +868,9 @@ EndProcedure
 
 &AtServer
 Procedure SaveAtServer()
+	
+	Property_String = "Property";
+	Value_String = "Value";
 	
 	ModifiedRows = ThisObject.PropertiesTable.FindRows(New Structure("isModified", True));
 	For Each Row In ModifiedRows Do
@@ -803,13 +891,13 @@ Procedure SaveAtServer()
 			If TypeOf(ColumnValue) = Type("ValueList") Then
 				For Each CollectionItem In ColumnValue Do
 					NewRecord = ModifiedTable.Add();
-					NewRecord["Property"] = ColumnDescription.Ref;
-					NewRecord["Value"] = CollectionItem.Value;
+					NewRecord[Property_String] = ColumnDescription.Ref;
+					NewRecord[Value_String] = CollectionItem.Value;
 				EndDo;
 			ElsIf Not ColumnValue = Undefined Then
 				NewRecord = ModifiedTable.Add();
-				NewRecord["Property"] = ColumnDescription.Ref;
-				NewRecord["Value"] = ColumnValue;
+				NewRecord[Property_String] = ColumnDescription.Ref;
+				NewRecord[Value_String] = ColumnValue;
 			EndIf;
 		EndDo;
 		

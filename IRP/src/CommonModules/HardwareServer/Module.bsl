@@ -62,6 +62,7 @@ Function GetConnectionSettings(HardwareRef) Export
 	If SelectionDetailRecords.Next() Then
 		Settings.Insert("Hardware", SelectionDetailRecords.Ref);
 		Settings.Insert("EquipmentType", SelectionDetailRecords.EquipmentType);
+		Settings.Insert("DriverEquipmentType", GetDriverEquipmentType(SelectionDetailRecords.EquipmentType));
 		Settings.Insert("AddInID", SelectionDetailRecords.AddInID);
 		Settings.Insert("Driver", SelectionDetailRecords.Driver);
 		Settings.Insert("ID", "");
@@ -119,6 +120,20 @@ Function GetAllWorkstationHardwareList(Workstation) Export
 		HardwareList.Add(SelectionDetailRecords.Hardware);
 	EndIf;
 	Return HardwareList;
+EndFunction
+
+#EndRegion
+
+#Region Private
+
+Function GetDriverEquipmentType(EquipmentType)
+	ReturnValue = "";
+	If EquipmentType = Enums.EquipmentTypes.InputDevice Then
+		ReturnValue = "СканерШтрихкода";
+	ElsIf EquipmentType = Enums.EquipmentTypes.FiscalPrinter Then
+		ReturnValue = "ККТ";
+	EndIf;
+	Return ReturnValue;
 EndFunction
 
 #EndRegion

@@ -131,7 +131,6 @@ Async Function ConnectHardware(Hardware)
 	ResultData.Insert("ErrorDescription", "");
 	ResultData.Insert("ConnectParameters", New Structure());
 	
-	
 	ConnectedDevice = GetConnectedDevice(globalEquipments.ConnectionSettings, Device.Hardware);
 	If ConnectedDevice = Undefined Then
 
@@ -142,7 +141,7 @@ Async Function ConnectHardware(Hardware)
 			ResultData.ErrorDescription = ErrorDescription;
 			ResultData.ConnectParameters = Device.ConnectParameters;
 		Else
-			Result = Settings.ConnectedDriver.DriverObject.SetParameter("EquipmentType", "ККТ");
+			Result = Settings.ConnectedDriver.DriverObject.SetParameter("EquipmentType", Settings.ConnectedDriver.DriverEquipmentType);
 			Result = Settings.ConnectedDriver.DriverObject.Open(Settings.ConnectedDriver.ID);
 			globalEquipments.Drivers.Get(Settings.Hardware).ID = Settings.ConnectedDriver.ID;
 			If Settings.ConnectedDriver.DriverObject <> Undefined Then
@@ -195,6 +194,7 @@ Async Function GetDriverObject(DriverInfo, ErrorText = Undefined)
 		DeviceConnection = New Structure;
 		DeviceConnection.Insert("ID", "");
 		DeviceConnection.Insert("DriverObject", DriverObject);
+		DeviceConnection.Insert("DriverEquipmentType", DriverInfo.DriverEquipmentType);
 		DeviceConnection.Insert("DriverRef", DriverInfo.Driver);
 		DeviceConnection.Insert("Hardware", DriverInfo.Hardware);
 		DeviceConnection.Insert("AddInID", DriverInfo.AddInID);

@@ -104,8 +104,8 @@ EndProcedure
 Async Procedure OpenSession(Command)
 	DocConsolidatedRetailSales = DocConsolidatedRetailSalesServer.CreateDocument(Object.Company, Object.Branch, ThisObject.Workstation);
 
-	Result = Await EquipmentFiscalPrinterClient.OpenShift(DocConsolidatedRetailSales);
-	If Result.Success Then
+	EquipmentOpenShiftResult = Await EquipmentFiscalPrinterClient.OpenShift(DocConsolidatedRetailSales);
+	If EquipmentOpenShiftResult.Success Then
 		ChangeConsolidatedRetailSales(Object, ThisObject, DocConsolidatedRetailSales);
 		DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
 		
@@ -130,16 +130,19 @@ Procedure CloseSession(Command)
 EndProcedure
 
 &AtClient
-Procedure CloseSessionFinish(Result, AddInfo) Export
+Async Procedure CloseSessionFinish(Result, AddInfo) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
 	
-	DocConsolidatedRetailSalesServer.CloseDocument(Object.ConsolidatedRetailSales, Result);
-	ChangeConsolidatedRetailSales(Object, ThisObject, Undefined);
+	EquipmentCloseShiftResult = Await EquipmentFiscalPrinterClient.CloseShift(Object.ConsolidatedRetailSales);
+	If EquipmentCloseShiftResult.Success Then
+		DocConsolidatedRetailSalesServer.CloseDocument(Object.ConsolidatedRetailSales, Result);
+		ChangeConsolidatedRetailSales(Object, ThisObject, Undefined);
 	
-	SetVisibilityAvailability(Object, ThisObject);
-	EnabledPaymentButton();
+		SetVisibilityAvailability(Object, ThisObject);
+		EnabledPaymentButton();
+	EndIf;
 EndProcedure
 
 &AtClient

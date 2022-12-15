@@ -1,6 +1,6 @@
 #Region API
 
-Function OpenShiftSettings() Export
+Function ShiftSettings() Export
 	
 	Str = New Structure();;
 	Str.Insert("Cashier", PredefinedValue("Catalog.Partners.EmptyRef"));
@@ -24,39 +24,14 @@ Function OpenShiftSettings() Export
 	
 EndFunction
 
-Function OpenShiftGetXMLOperationSettings() Export
+Function ShiftGetXMLOperationSettings() Export
 	Str = New Structure;
-	Str.Insert("CashierName", "");
+	Str.Insert("CashierName", "");	//Mandatory
 	Str.Insert("CashierINN", "");
 	Str.Insert("SaleAddress", "");
 	Str.Insert("SaleLocation", "");
 	Return Str;
 EndFunction
-
-Функция OpenShiftGetXMLOperation(ОбщиеПараметры)
-	
-	ЗаписьXML = Новый ЗаписьXML();
-	ЗаписьXML.УстановитьСтроку("UTF-8");
-	ЗаписьXML.ЗаписатьОбъявлениеXML();
-	ЗаписьXML.ЗаписатьНачалоЭлемента("InputParameters");
-	ЗаписьXML.ЗаписатьНачалоЭлемента("Parameters");
-	
-	ЗаписьXML.ЗаписатьАтрибут("CashierName", ?(Not IsBlankString(ОбщиеПараметры.CashierName), XMLСтрока(ОбщиеПараметры.CashierName), "Администратор"));
-	ЗаписьXML.ЗаписатьАтрибут("CashierINN" , ?(Not IsBlankString(ОбщиеПараметры.CashierINN), XMLСтрока(ОбщиеПараметры.CashierINN), ""));
-	Если Not IsBlankString(ОбщиеПараметры.SaleAddress) Тогда   
-		ЗаписьXML.ЗаписатьАтрибут("SaleAddress", XMLСтрока(ОбщиеПараметры.АдресРасчетов));
-	КонецЕсли;
-	Если Not IsBlankString(ОбщиеПараметры.SaleLocation) Тогда  
-		ЗаписьXML.ЗаписатьАтрибут("SaleLocation", XMLСтрока(ОбщиеПараметры.МестоРасчетов));
-	КонецЕсли;
-	
-	ЗаписьXML.ЗаписатьКонецЭлемента();
-	ЗаписьXML.ЗаписатьКонецЭлемента();
-	
-	Возврат ЗаписьXML.Закрыть();
-	
-КонецФункции  
-
 
 // Open shift.
 // 
@@ -70,11 +45,11 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
-	Parameters = OpenShiftSettings();
-	OpenShiftGetXMLOperationSettings = OpenShiftGetXMLOperationSettings();
-	OpenShiftGetXMLOperationSettings.CashierName = String(CRS.Author);
+	Parameters = ShiftSettings();
+	ShiftGetXMLOperationSettings = ShiftGetXMLOperationSettings();
+	ShiftGetXMLOperationSettings.CashierName = String(CRS.Author);
 	
-	Parameters.ParametersXML = OpenShiftGetXMLOperation(OpenShiftGetXMLOperationSettings);
+	Parameters.ParametersXML = EquipmentFiscalPrinterServer.ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	
 	LineLength = 0;
 	Result = Settings.ConnectedDriver.DriverObject.GetLineLength(Settings.ConnectedDriver.ID, LineLength);
@@ -85,21 +60,47 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 		Raise "Can not get data KKT";
 	EndIf;
 	
-	Result = OpenShiftResult();
+	Result = ShiftResult();
 	ResultInfo = Settings.ConnectedDriver.DriverObject.OpenShift(Settings.ConnectedDriver.ID, Parameters.ParametersXML, Parameters.ResultXML);
 	If ResultInfo Then
 		Result.Success = True;
 	Else
 		CommonFunctionsClientServer.ShowUsersMessage(R().EqFP_ShiftAlreadyOpened);
+		Result.Success = True;
 	EndIf;
 	
 	Return Result;
 EndFunction
 
-Function OpenShiftResult() Export
-	Str = New Structure;
-	Str.Insert("Success", False);
-	Return Str;
+Async Function CloseShift(ConsolidatedRetailSales) Export
+	
+	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
+	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
+		
+	Parameters = ShiftSettings();
+	ShiftGetXMLOperationSettings = ShiftGetXMLOperationSettings();
+	ShiftGetXMLOperationSettings.CashierName = String(CRS.Author);
+	
+	Parameters.ParametersXML = EquipmentFiscalPrinterServer.ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
+	
+	LineLength = 0;
+	Result = Settings.ConnectedDriver.DriverObject.GetLineLength(Settings.ConnectedDriver.ID, LineLength);
+	
+	Result = ShiftResult();
+	ResultInfo = Settings.ConnectedDriver.DriverObject.CloseShift(Settings.ConnectedDriver.ID, Parameters.ParametersXML, Parameters.ResultXML);
+	If ResultInfo Then
+		Result.Success = True;
+	Else
+		CommonFunctionsClientServer.ShowUsersMessage(R().EqFP_ShiftIsNotOpened);
+	EndIf;
+	
+	Return Result;
+EndFunction
+
+Function ShiftResult() Export
+	ReturnValue = New Structure;
+	ReturnValue.Insert("Success", False);
+	Return ReturnValue;
 EndFunction
 
 #EndRegion

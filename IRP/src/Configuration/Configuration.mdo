@@ -440,6 +440,7 @@
   <commonModules>CommonModule.CommissionTradeServer</commonModules>
   <commonModules>CommonModule.CommissionTradePrivileged</commonModules>
   <commonModules>CommonModule.EquipmentFiscalPrinterClient</commonModules>
+  <commonModules>CommonModule.EquipmentFiscalPrinterServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

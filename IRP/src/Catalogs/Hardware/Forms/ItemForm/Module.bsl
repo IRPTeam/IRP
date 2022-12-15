@@ -19,9 +19,11 @@ EndProcedure
 
 &AtClient
 Async Procedure OnOpen(Cancel)
-	Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref);
-	Settings.Callback = New NotifyDescription("FillDriverParameters_End", ThisObject);
-	HardwareClient.FillDriverParameters(Settings);
+	If ValueIsFilled(Parameters.Key) Then
+		Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref);
+		Settings.Callback = New NotifyDescription("FillDriverParameters_End", ThisObject);
+		HardwareClient.FillDriverParameters(Settings);
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -52,7 +54,7 @@ Procedure FillDriverParametersAtServer(DriverParametersXML, Parameters)
 		While XMLReader.Read() Do  
 			
 			If XMLReader.Name = "Parameter" And XMLReader.NodeType = XMLNodeType.StartElement Then  
-				ReadOnly = ?(Upper(XMLReader.AttributeValue("ReadOnly")) = "TRUE", True, False) 
+				ReadOnlyType = ?(Upper(XMLReader.AttributeValue("ReadOnly")) = "TRUE", True, False) 
 										Or ?(Upper(XMLReader.AttributeValue("ReadOnly")) = "ИСТИНА", True, False);
 				Name   =  XMLReader.AttributeValue("Name");
 				Caption = XMLReader.AttributeValue("Caption");
@@ -73,7 +75,7 @@ Procedure FillDriverParametersAtServer(DriverParametersXML, Parameters)
 				NewRow.DefaultValue = DefaultValue;
 				NewRow.Description = Description;
 				NewRow.FieldFormat = FieldFormat;
-				NewRow.ReadOnly = ReadOnly;
+				NewRow.ReadOnly = ReadOnlyType;
 				NewRow.Value = NewRow.DefaultValue;
 			EndIf;
 			

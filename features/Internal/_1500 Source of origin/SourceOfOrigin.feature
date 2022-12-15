@@ -323,7 +323,8 @@ Scenario: _150045 check filling source of origin in the Opening entry
 				| 'Owner' | 'Reference'      | 'Serial number'  |
 				| 'UNIQ'  | '09987897977893' | '09987897977893' |
 			And I activate "Serial number" field in "List" table
-			And I select current line in "List" table		
+			And I select current line in "List" table
+				
 		* Check filling Opening entry
 			And "Inventory" table became equal
 				| 'Amount' | 'Item'               | 'Item key' | 'Store'    | 'Quantity' | 'Price' | 'Amount tax' | 'Item serial/lot number' | 'Source of origin'   |
@@ -365,7 +366,6 @@ Scenario: _150047 check filling source of origin in the PI
 				| 'Source of origin' |
 				| 'Source of origin 6'    |
 			And I select current line in "List" table
-			And I click "Show row key" button
 			And "SourceOfOrigins" table became equal
 				| 'Serial lot number' | 'Source of origin'   | 'Quantity' |
 				| '899007790088'      | 'Source of origin 6' | '10,000'   |

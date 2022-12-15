@@ -556,7 +556,7 @@ Procedure CreateConditionalAppearance(Form, NewFormItem, isCollection)
 		ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
 		ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightPink);
 		//@skip-warning
-		ConditionalAppearanceItem.Appearance.SetParameterValue("Text", R().IM_Info_Cleared);
+		ConditionalAppearanceItem.Appearance.SetParameterValue("Text", StrTemplate("<%1>", R().Form_002));
 		FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
 		FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
 		FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
@@ -588,7 +588,7 @@ Procedure CreateConditionalAppearance(Form, NewFormItem, isCollection)
 		ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
 		ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightPink);
 		//@skip-warning
-		ConditionalAppearanceItem.Appearance.SetParameterValue("Text", R().IM_Info_Cleared);
+		ConditionalAppearanceItem.Appearance.SetParameterValue("Text", StrTemplate("<%1>", R().Form_002));
 		FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
 		FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
 		FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath + "_modified");

@@ -776,7 +776,7 @@ Scenario: _050025 create Sales report co consignor
 			And in the table "Sales" I click "Fill sales" button
 			And "Sales" table became equal
 				| 'Use' | 'Item'               | 'Price type'              | 'Item key' | 'Consignor price' | 'Quantity' | 'Sales invoice'                               | 'Unit' | 'Price'  | 'Net amount' | 'Purchase invoice'                               | 'Total amount' |
-				| 'Yes' | 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '100,00'          | '2,000'    | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'pcs'  | '200,00' | '338,98'     | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '400,00'       |
+				| 'Yes' | 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '100,00'          | '6,000'    | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'pcs'  | '200,00' | '1 016,95'   | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '1 200,00'     |
 				| 'Yes' | 'Dress'              | 'Basic Price Types'       | 'S/Yellow' | '550,00'          | '2,000'    | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'pcs'  | '550,00' | '932,20'     | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '1 100,00'     |
 		* Filling sales (only return)
 			And I click Select button of "Sales period" field			
@@ -808,12 +808,12 @@ Scenario: _050025 create Sales report co consignor
 			And I click the button named "Select"
 			And in the table "Sales" I click "Fill sales" button
 			And I click "Ok" button
-			And "ItemList" table became equal
+			And "ItemList" table contains lines
 				| '#' | 'Item'               | 'Price type'              | 'Item key' | 'Consignor price' | 'Serial lot numbers' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Sales invoice'                               | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'Net amount' | 'Purchase invoice'                               | 'Total amount' |
 				| '1' | 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '100,00'          | '09987897977889'     | 'pcs'  | 'No'                 | '-1,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-20,00'                 | '200,00' | '-169,49'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-200,00'      |
 				| '2' | 'Dress'              | 'Basic Price Types'       | 'S/Yellow' | '550,00'          | ''                   | 'pcs'  | 'No'                 | '-2,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-110,00'                | '550,00' | '-932,20'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-1 100,00'    |
-				| '3' | 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '100,00'          | '09987897977889'     | 'pcs'  | 'No'                 | '3,000'    | '$$SI10$$' | '10,00'                   | '36,00'                  | '120,00' | '305,09'     | '$$PI3$$' | '360,00'       |
-				| '4' | 'Dress'              | 'Basic Price without VAT' | 'S/Yellow' | '550,00'          | ''                   | 'pcs'  | 'No'                 | '2,000'    | '$$SI10$$' | '10,00'                   | '93,22'                  | '466,10' | '790,00'     | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '932,20'       |	
+				| '3' | 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '100,00'          | '09987897977889'     | 'pcs'  | 'No'                 | '3,000'    | '$$SI10$$'                                    | '10,00'                   | '36,00'                  | '120,00' | '305,08'     | '$$PI3$$'                                        | '360,00'       |
+				| '4' | 'Dress'              | 'Basic Price without VAT' | 'S/Yellow' | '550,00'          | ''                   | 'pcs'  | 'No'                 | '2,000'    | '$$SI10$$'                                    | '10,00'                   | '93,22'                  | '466,10' | '790,00'     | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '932,20'       |
 		* Change period and update sales
 			And I input "01.11.2022" text in "Start date" field
 			And in the table "ItemList" I click "Fill sales" button

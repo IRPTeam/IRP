@@ -93,6 +93,71 @@ Procedure Save(Command)
 	LoadTableData();
 EndProcedure
 
+&AtClient
+Procedure DeleteCurrentValue(Command)
+	
+	RowValue = Items.PropertiesTable.CurrentData;
+	Field = Items.PropertiesTable.CurrentItem.Name; // String
+	FieldDescription = GetFormCash(ThisObject).ColumnsData[Field]; // See GetFieldDescription
+	
+	For Each SelectedRow In Items.PropertiesTable.SelectedRows Do
+		RowIndex = SelectedRow; // Number
+		RowValue = ThisObject.PropertiesTable.FindByID(RowIndex);
+		If FieldDescription.isCollection Then
+			RowValue[Field] = New ValueList();
+		Else
+			RowValue[Field] = Undefined;
+		EndIf;
+		CheckRowModified(RowValue);
+	EndDo;
+
+EndProcedure
+
+&AtClient
+Procedure CopyThisValueToEmptyCells(Command)
+	
+	CurrentRow = Items.PropertiesTable.CurrentData;
+	Field = Items.PropertiesTable.CurrentItem.Name; // String
+	FieldDescription = GetFormCash(ThisObject).ColumnsData[Field]; // See GetFieldDescription
+	CurrentValue = CurrentRow[Field]; // Arbitrary, ValueList
+	
+	For Each Row In ThisObject.PropertiesTable Do
+		If Row = CurrentRow Then
+			Continue;
+		EndIf;
+		
+		RowValue = Row[Field]; // Arbitrary, ValueList
+		If FieldDescription.isCollection Then
+			If RowValue = Undefined Or (TypeOf(RowValue) = Type("ValueList") And RowValue.Count() = 0) Then
+				Row[Field] = CurrentValue;
+			EndIf;
+		Else
+			If RowValue = Undefined Then
+				Row[Field] = CurrentValue;
+			EndIf;
+		EndIf;
+		
+		CheckRowModified(Row);
+	EndDo;
+
+EndProcedure
+
+&AtClient
+Procedure SetNewValue(Command)
+	
+	CurrentRow = Items.PropertiesTable.CurrentData;
+	Field = Items.PropertiesTable.CurrentItem.Name; // String
+	
+	For Each Row In ThisObject.PropertiesTable Do
+		If Row = CurrentRow Then
+			Continue;
+		EndIf;
+		Row[Field] = CurrentRow[Field]; // Arbitrary, ValueList
+		CheckRowModified(Row);
+	EndDo;
+
+EndProcedure
+
 #EndRegion
 
 #Region Private
@@ -367,17 +432,13 @@ Procedure SetTableSettings(Form)
 		ColumnDescription = ColumnItem.Value; // See GetFieldDescription
 		FormAttribute = New FormAttribute(
 			ColumnItem.Key, 
-			?(ColumnDescription.isCollection = True, 
-				New TypeDescription(ColumnDescription.CollectionValueType, "Undefined"),
-				ColumnDescription.ValueType), 
+			New TypeDescription(ColumnDescription.CollectionValueType, "Undefined"), 
 			PT_String, 
 			ColumnDescription.Presentation);
 		NewAttributes.Add(FormAttribute);
 		FormAttribute = New FormAttribute(
 			ColumnItem.Key + "_old", 
-			?(ColumnDescription.isCollection = True, 
-				ColumnDescription.CollectionValueType,
-				ColumnDescription.ValueType), 
+			FormAttribute.ValueType, 
 			PT_String, 
 			ColumnDescription.Presentation + " (old)");
 		NewAttributes.Add(FormAttribute);
@@ -391,7 +452,7 @@ Procedure SetTableSettings(Form)
 		NewFormItem.Type = FormFieldType.InputField;
 		NewFormItem.DataPath = PT_String + "." + ColumnKey;
 		NewFormItem.ChooseType = False;
-		NewFormItem.TypeRestriction = ColumnDescription.ValueType;
+		NewFormItem.TypeRestriction = ColumnDescription.CollectionValueType;
 		ParametersArray = New Array; // Array of ChoiceParameter
 		ParametersArray.Add(New ChoiceParameter("Filter.Owner", ColumnDescription.Ref));
 		NewFormItem.ChoiceParameters = New FixedArray(ParametersArray);

@@ -94,17 +94,18 @@ Function GetDocument(Company, Branch, Workstation) Export
 EndFunction
 
 Function CreateDocument(Company, Branch, Workstation) Export
-	OpeningDateTime = CommonFunctionsServer.GetCurrentSessionDate();
 	
 	FillingValues = New Structure();
-	FillingValues.Insert("Company"        , Company);
-	FillingValues.Insert("Branch"         , Branch);
-	FillingValues.Insert("CashAccount"    , Workstation.CashAccount);
-	FillingValues.Insert("OpeningDate"    , OpeningDateTime);
-	FillingValues.Insert("Status"         , Enums.ConsolidatedRetailSalesStatuses.Open);
+	FillingValues.Insert("Company", Company);
+	FillingValues.Insert("Branch", Branch);
+	FillingValues.Insert("CashAccount", Workstation.CashAccount);
+	FillingValues.Insert("Date", CommonFunctionsServer.GetCurrentSessionDate());
+	FillingValues.Insert("Status", Enums.ConsolidatedRetailSalesStatuses.New);
+	
+	FiscalPrinter = HardwareServer.GetWorkstationHardwareByEquipmentType(Workstation, Enums.EquipmentTypes.FiscalPrinter);
+	FillingValues.Insert("FiscalPrinter", FiscalPrinter[0]);
 	
 	Doc = Documents.ConsolidatedRetailSales.CreateDocument();
-	Doc.Date = OpeningDateTime;
 	Doc.Fill(FillingValues);
 	Doc.Write(DocumentWriteMode.Posting);
 	Return Doc.Ref;

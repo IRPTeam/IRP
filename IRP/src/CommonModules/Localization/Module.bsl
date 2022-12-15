@@ -290,6 +290,9 @@ Function Strings(Lang) Export
 	Strings.Insert("EqError_003", NStr("en = 'It has to be minimum one dot at Add ID.'", Lang));
 	Strings.Insert("EqError_004", NStr("en = 'Before install driver - it has to be loaded.'", Lang));
 	Strings.Insert("EqError_005", NStr("en = 'The equipment driver %1 has incorrect AddIn ID %2.'", Lang));
+	
+	Strings.Insert("EqFP_ShiftAlreadyOpened", NStr("en = 'Shift already opened.'", Lang));
+	
 #EndRegion
 
 #Region POS

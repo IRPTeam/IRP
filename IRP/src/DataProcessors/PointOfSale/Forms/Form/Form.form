@@ -2184,6 +2184,7 @@
                   <items xsi:type="form:Button">
                     <name>CancelSession</name>
                     <id>1080</id>
+                    <visible>true</visible>
                     <enabled>true</enabled>
                     <userVisible>
                       <common>true</common>

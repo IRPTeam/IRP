@@ -57,11 +57,18 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
 	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
-		SessionIsOpened = ValueIsFilled(Object.ConsolidatedRetailSales);
-		Form.Items.OpenSession.Enabled = Not SessionIsOpened;
-		Form.Items.CloseSession.Enabled = SessionIsOpened;
-		Form.Items.CancelSession.Enabled = SessionIsOpened;
-		Form.Items.GroupCommonCommands.Visible = True;
+		SessionIsCreated = Not Object.ConsolidatedRetailSales.IsEmpty();
+		If SessionIsCreated Then
+			Status = CommonFunctionsServer.GetRefAttribute(Object.ConsolidatedRetailSales, "Status");
+			Form.Items.OpenSession.Enabled = Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.New");
+			Form.Items.CloseSession.Enabled = Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.Open");
+			Form.Items.CancelSession.Enabled = Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.New");
+			Form.Items.GroupCommonCommands.Visible = True;
+		Else
+			Form.Items.OpenSession.Enabled = Not SessionIsCreated;
+			Form.Items.CloseSession.Enabled = SessionIsCreated;
+			Form.Items.CancelSession.Enabled = SessionIsCreated;
+		EndIf;
 	Else
 		Form.Items.GroupCommonCommands.Visible = False;
 	EndIf;
@@ -94,13 +101,17 @@ EndProcedure
 #Region CONSOLIDATED_RETAIL_SALES
 
 &AtClient
-Procedure OpenSession(Command)
-	ChangeConsolidatedRetailSales(Object, ThisObject, 
-		DocConsolidatedRetailSalesServer.CreateDocument(Object.Company, Object.Branch, ThisObject.Workstation));
-	DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
-	
-	SetVisibilityAvailability(Object, ThisObject);
-	EnabledPaymentButton();
+Async Procedure OpenSession(Command)
+	DocConsolidatedRetailSales = DocConsolidatedRetailSalesServer.CreateDocument(Object.Company, Object.Branch, ThisObject.Workstation);
+
+	Result = Await EquipmentFiscalPrinterClient.OpenShift(DocConsolidatedRetailSales);
+	If Result.Success Then
+		ChangeConsolidatedRetailSales(Object, ThisObject, DocConsolidatedRetailSales);
+		DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
+		
+		SetVisibilityAvailability(Object, ThisObject);
+		EnabledPaymentButton();
+	EndIf;
 EndProcedure
 
 &AtClient

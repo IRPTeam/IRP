@@ -29,7 +29,19 @@ Function GetDriverSettings(AddInID) Export
 	Return Settings;
 EndFunction
 
-//
+
+// Get connection settings.
+// 
+// Parameters:
+//  HardwareRef - CatalogRef.Hardware - Hardware ref
+// 
+// Returns:
+//  Structure - Get connection settings:
+// * Hardware - CatalogRef.Hardware -
+// * EquipmentType - EnumRef.EquipmentTypes -
+// * AddInID - String -
+// * Driver - CatalogRef.EquipmentDrivers -
+// * ConnectParameters - Structure -
 Function GetConnectionSettings(HardwareRef) Export
 	Query = New Query();
 	Query.Text =
@@ -52,6 +64,7 @@ Function GetConnectionSettings(HardwareRef) Export
 		Settings.Insert("EquipmentType", SelectionDetailRecords.EquipmentType);
 		Settings.Insert("AddInID", SelectionDetailRecords.AddInID);
 		Settings.Insert("Driver", SelectionDetailRecords.Driver);
+		Settings.Insert("ID", "");
 
 		ConnectParameters = New Structure();
 		For Each Row In SelectionDetailRecords.Ref.ConnectParameters Do

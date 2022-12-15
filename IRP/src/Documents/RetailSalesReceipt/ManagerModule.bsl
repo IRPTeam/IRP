@@ -989,7 +989,8 @@ Function R8014T_ConsignorSales()
 		|	ItemList.Price,
 		|	ItemList.PriceType,
 		|	ItemList.PriceIncludeTax,
-		|	ConsignorBatches.Quantity TotalQuantity,
+//		|	ConsignorBatches.Quantity TotalQuantity,
+		|	ConsignorBatches.Quantity,
 		|	CASE
 		|		WHEN ItemList.Quantity = 0
 		|			THEN 0
@@ -1013,14 +1014,15 @@ Function R8014T_ConsignorSales()
 		|SELECT
 		|
 		|	ConsignorSales.*,
-		|	ConsignorSales.TotalQuantity,
+//		|	ConsignorSales.TotalQuantity,
+		|	ConsignorSales.Quantity,
 		|	ConsignorSales.NetAmount,
 		|	ConsignorSales.Amount,
-		|	CASE
-		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
-		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
-		|		ELSE ConsignorSales.TotalQuantity
-		|	END AS Quantity,
+//		|	CASE
+//		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
+//		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
+//		|		ELSE ConsignorSales.TotalQuantity
+//		|	END AS Quantity,
 		|	SourceOfOrigins.SourceOfOriginStock AS SourceOfOrigin,
 		|	SourceOfOrigins.SerialLotNumberStock AS SerialLotNumber
 		|INTO ConsignorSales_1
@@ -1036,7 +1038,7 @@ Function R8014T_ConsignorSales()
 		|
 		|	ConsignorSales_1.*,
 		|	ConsignorSales_1.Key,
-		|	ConsignorSales_1.TotalQuantity,
+//		|	ConsignorSales_1.TotalQuantity,
 		|	ConsignorSales_1.NetAmount,
 		|	ConsignorSales_1.Amount,
 		|	ConsignorPrices.Price AS ConsignorPrice
@@ -1057,17 +1059,17 @@ Function R8014T_ConsignorSales()
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	ConsignorSales_1_1.*,
-		|	CASE
-		|		WHEN ConsignorSales_1_1.TotalQuantity = 0
-		|			THEN 0
-		|		ELSE (ConsignorSales_1_1.NetAmount / ConsignorSales_1_1.TotalQuantity) * ConsignorSales_1_1.Quantity
-		|	END AS NetAmount,
-		|	CASE
-		|		WHEN ConsignorSales_1_1.TotalQuantity = 0
-		|			THEN 0
-		|		ELSE (ConsignorSales_1_1.Amount / ConsignorSales_1_1.TotalQuantity) * ConsignorSales_1_1.Quantity
-		|	END AS Amount
+		|	ConsignorSales_1_1.*
+//		|	CASE
+//		|		WHEN ConsignorSales_1_1.TotalQuantity = 0
+//		|			THEN 0
+//		|		ELSE (ConsignorSales_1_1.NetAmount / ConsignorSales_1_1.TotalQuantity) * ConsignorSales_1_1.Quantity
+//		|	END AS NetAmount,
+//		|	CASE
+//		|		WHEN ConsignorSales_1_1.TotalQuantity = 0
+//		|			THEN 0
+//		|		ELSE (ConsignorSales_1_1.Amount / ConsignorSales_1_1.TotalQuantity) * ConsignorSales_1_1.Quantity
+//		|	END AS Amount
 		|INTO R8014T_ConsignorSales
 		|FROM
 		|	ConsignorSales_1_1 AS ConsignorSales_1_1

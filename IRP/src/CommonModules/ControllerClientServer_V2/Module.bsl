@@ -4232,6 +4232,10 @@ EndProcedure
 // TaxRate.Get
 Function GetTaxRate(Parameters, Row)
 	TaxRates = New Structure();
+	If Not CommonFunctionsClientServer.ObjectHasProperty(Row, "TaxRates") Then
+		Return TaxRates;
+	EndIf;
+	
 	ReadOnlyFromCache = Not Parameters.FormTaxColumnsExists;
 	For Each TaxRate In Row.TaxRates Do
 		If ReadOnlyFromCache And ValueIsFilled(TaxRate.Value) Then

@@ -103,6 +103,15 @@ Function IsShipmentToTradeAgent(Document)
 	Return False; 
 EndFunction
 
+Function IsReturnFromTradeAgent(Document)
+	If TypeOf(Document) = Type("DocumentRef.SalesReturn")
+		And Document.TransactionType = Enums.SalesReturnTransactionTypes.ReturnFromTradeAgent Then
+			Return True; // is shipment to trade agent
+	EndIf;
+	
+	Return False; 
+EndFunction
+
 #EndRegion
 
 #Region BATCHES_DOCUMENTS
@@ -2000,6 +2009,29 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 	
 	If IsTransferDocument(Document) Or IsShipmentToTradeAgent(Document) Then
 		CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewReceivedBatches, CalculationSettings);
+	ElsIf IsReturnFromTradeAgent(Document) Then
+		
+		For Each Row In TableOfReturnedBatches Do
+			NewRowReceivedBatch = TableOfNewReceivedBatches.Add();
+			NewRowReceivedBatch.Batch            = Row.Batch;
+			NewRowReceivedBatch.BatchKey         = Row.BatchKey;
+			NewRowReceivedBatch.Document         = Row.Document;
+			NewRowReceivedBatch.Company          = Row.Company;
+			NewRowReceivedBatch.Date             = Row.Date;
+			NewRowReceivedBatch.Quantity         = Row.Quantity;
+			NewRowReceivedBatch.Amount           = Row.Amount;
+			NewRowReceivedBatch.AmountTax        = Row.AmountTax;
+			NewRowReceivedBatch.AmountCostRatio  = Row.AmountCostRatio;
+			NewRowReceivedBatch.QuantityBalance  = Row.Quantity;
+			NewRowReceivedBatch.AmountBalance    = Row.Amount;
+			NewRowReceivedBatch.AmountTaxBalance = Row.AmountTax;
+			NewRowReceivedBatch.AmountCostRatioBalance = Row.AmountCostRatio;
+			NewRowReceivedBatch.IsOpeningBalance = False;
+			NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
+		EndDo;  
+		TableOfReturnedBatches.Clear();
+		CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewReceivedBatches, CalculationSettings);
+	
 	ElsIf IsCompositeDocument(Document) Then
 		CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpense, TableOfNewReceivedBatches);
 	ElsIf IsDecompositeDocument(Document) Then

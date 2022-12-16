@@ -267,6 +267,10 @@
 //  * Title_00100 - String - Select base documents in the "%1" document.
 //  * UsersEvent_001 - String - User not found by UUID %1 and name %2.
 //  * UsersEvent_002 - String - User found by UUID %1 and name %2.
+//	* Str_Catalog - String - Catalog
+//	* Str_Catalogs - String - Catalogs
+//	* Str_Document - String - Document
+//	* Str_Documents - String - Documents
 Function Strings(Lang) Export
 
 	Strings = New Structure();
@@ -939,6 +943,13 @@ Function Strings(Lang) Export
 	Strings.Insert("Default_010", NStr("en = '$'", Lang));
 	Strings.Insert("Default_011", NStr("en = 'My Company'", Lang));
 	Strings.Insert("Default_012", NStr("en = 'My Store'", Lang));
+#EndRegion
+
+#Region OtherString
+	Strings.Insert("Str_Catalog", NStr("en = 'Catalog'", Lang));
+	Strings.Insert("Str_Catalogs", NStr("en = 'Catalogs'", Lang));
+	Strings.Insert("Str_Document", NStr("en = 'Document'", Lang));
+	Strings.Insert("Str_Documents", NStr("en = 'Documents'", Lang));
 #EndRegion
 
 	Return Strings;

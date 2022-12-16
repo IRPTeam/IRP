@@ -475,7 +475,7 @@ Procedure SetTableSettings(Form)
 			ColumnItem.Key + "_old", 
 			FormAttribute.ValueType, 
 			PT_String, 
-			ColumnDescription.Presentation + " (old)");
+			ColumnDescription.Presentation + " (~)");
 		NewAttributes.Add(FormAttribute);
 		If ColumnDescription.isCollection Then
 			FormAttribute = New FormAttribute(
@@ -639,10 +639,12 @@ Procedure LoadMetadata(FormCash)
 		ItemPreffics = "";
 		ItemPicture = Undefined;
 		If Catalogs.AllRefsType().ContainsType(AvailableType) Then
-			ItemPreffics = "(catalog) ";
+			//@skip-warning
+			ItemPreffics = StrTemplate("(" + R().Str_Catalog + ") ");
 			ItemPicture = PictureLib.Catalog;
 		ElsIf Documents.AllRefsType().ContainsType(AvailableType) Then
-			ItemPreffics = "(document) ";
+			//@skip-warning
+			ItemPreffics = StrTemplate("(" + R().Str_Document + ") ");
 			ItemPicture = PictureLib.DocumentJournal;
 		EndIf;
 		TypeChoiceList.Add(AvailableType, ItemPreffics + AvailableType, , ItemPicture);

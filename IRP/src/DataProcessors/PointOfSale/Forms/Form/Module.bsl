@@ -106,6 +106,7 @@ Async Procedure OpenSession(Command)
 
 	EquipmentOpenShiftResult = Await EquipmentFiscalPrinterClient.OpenShift(DocConsolidatedRetailSales);
 	If EquipmentOpenShiftResult.Success Then
+		DocConsolidatedRetailSalesServer.DocumentOpenShift(DocConsolidatedRetailSales, EquipmentOpenShiftResult);
 		ChangeConsolidatedRetailSales(Object, ThisObject, DocConsolidatedRetailSales);
 		DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
 		
@@ -137,7 +138,7 @@ Async Procedure CloseSessionFinish(Result, AddInfo) Export
 	
 	EquipmentCloseShiftResult = Await EquipmentFiscalPrinterClient.CloseShift(Object.ConsolidatedRetailSales);
 	If EquipmentCloseShiftResult.Success Then
-		DocConsolidatedRetailSalesServer.CloseDocument(Object.ConsolidatedRetailSales, Result);
+		DocConsolidatedRetailSalesServer.DocumentCloseShift(Object.ConsolidatedRetailSales, EquipmentCloseShiftResult, Result);
 		ChangeConsolidatedRetailSales(Object, ThisObject, Undefined);
 	
 		SetVisibilityAvailability(Object, ThisObject);

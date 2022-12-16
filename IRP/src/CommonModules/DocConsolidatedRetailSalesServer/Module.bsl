@@ -111,9 +111,24 @@ Function CreateDocument(Company, Branch, Workstation) Export
 	Return Doc.Ref;
 EndFunction
 
-Procedure CloseDocument(DocRef, UserData = Undefined) Export
+Procedure DocumentOpenShift(DocRef, ShiftData, UserData = Undefined) Export
 	DocObject = DocRef.GetObject();
-	DocObject.ClosingDate = CommonFunctionsServer.GetCurrentSessionDate();
+	DocObject.OpeningDate = ShiftData.DateTime;
+	DocObject.ShiftNumber = ShiftData.ShiftNumber;
+	DocObject.Status = Enums.ConsolidatedRetailSalesStatuses.Open;
+	If Not UserData = Undefined Then
+		DocObject.PaymentList.Clear();
+		FillPropertyValues(DocObject, UserData, , "PaymentList");
+		For Each Item in UserData.PaymentList Do
+			FillPropertyValues(DocObject.PaymentList.Add(), Item);
+		EndDo;
+	EndIf;
+	DocObject.Write(DocumentWriteMode.Posting);
+EndProcedure
+
+Procedure DocumentCloseShift(DocRef, ShiftData, UserData = Undefined) Export
+	DocObject = DocRef.GetObject();
+	DocObject.ClosingDate = ShiftData.DateTime;
 	DocObject.Status = Enums.ConsolidatedRetailSalesStatuses.Close;
 	If Not UserData = Undefined Then
 		DocObject.PaymentList.Clear();

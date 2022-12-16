@@ -667,7 +667,7 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|FROM
 	|	InformationRegister.T6060S_BatchCostAllocationInfo AS T6060S_BatchCostAllocationInfo
 	|WHERE
-	|	T6060S_BatchCostAllocationInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
+	|	T6060S_BatchCostAllocationInfo.Period <= ENDOFPERIOD(&EndPeriod, DAY)
 	|	AND T6060S_BatchCostAllocationInfo.Company = &Company
 	|GROUP BY
 	|	T6060S_BatchCostAllocationInfo.Company,
@@ -743,6 +743,7 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|		ON R6010B_BatchWiseBalance.Batch.Document = CostAmounts.Document
 	|		AND R6010B_BatchWiseBalance.Batch.Company = CostAmounts.Company
 	|		AND R6010B_BatchWiseBalance.BatchKey.ItemKey = CostAmounts.ItemKey
+	|		AND R6010B_BatchWiseBalance.Recorder.Date BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
 	|WHERE
 	|	CostAmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0
 	|;
@@ -768,6 +769,7 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|		ON R6050T_SalesBatches.Batch.Document = CostAmounts.Document
 	|		AND R6050T_SalesBatches.Batch.Company = CostAmounts.Company
 	|		AND R6050T_SalesBatches.BatchKey.ItemKey = CostAmounts.ItemKey
+	|		AND R6050T_SalesBatches.Recorder.Date BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
 	|WHERE
 	|	CostAmounts.AmountPerOneUnit * R6050T_SalesBatches.Quantity <> 0";
 
@@ -820,7 +822,7 @@ Procedure DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, Cal
 	|FROM
 	|	InformationRegister.T6070S_BatchRevenueAllocationInfo AS T6070S_BatchRevenueAllocationInfo
 	|WHERE
-	|	T6070S_BatchRevenueAllocationInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
+	|	T6070S_BatchRevenueAllocationInfo.Period <= ENDOFPERIOD(&EndPeriod, DAY)
 	|	AND T6070S_BatchRevenueAllocationInfo.Company = &Company
 	|GROUP BY
 	|	T6070S_BatchRevenueAllocationInfo.Company,
@@ -896,6 +898,7 @@ Procedure DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, Cal
 	|		ON R6010B_BatchWiseBalance.Batch.Document = RevenueAmounts.Document
 	|		AND R6010B_BatchWiseBalance.Batch.Company = RevenueAmounts.Company
 	|		AND R6010B_BatchWiseBalance.BatchKey.ItemKey = RevenueAmounts.ItemKey
+	|		AND R6010B_BatchWiseBalance.Recorder.Date BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
 	|WHERE
 	|	RevenueAmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0
 	|;
@@ -921,6 +924,7 @@ Procedure DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, Cal
 	|		ON R6050T_SalesBatches.Batch.Document = RevenueAmounts.Document
 	|		AND R6050T_SalesBatches.Batch.Company = RevenueAmounts.Company
 	|		AND R6050T_SalesBatches.BatchKey.ItemKey = RevenueAmounts.ItemKey
+	|		AND R6050T_SalesBatches.Recorder.Date BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
 	|WHERE
 	|	RevenueAmounts.AmountPerOneUnit * R6050T_SalesBatches.Quantity <> 0";
 

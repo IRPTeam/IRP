@@ -1735,18 +1735,20 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 					NewRow_ReturnedBatches.AmountCostRatioBalance = ReceiptAmountCostRatio;
 					
 					// Data for receipt
-					NewRow_DataForReceipt = Tables.DataForReceipt.Add();
+					If Not IsReturnFromTradeAgent(Row.Document) Then
+						NewRow_DataForReceipt = Tables.DataForReceipt.Add();
 					
-					NewRow_DataForReceipt.Company   = _BatchBySales_Company;
-					NewRow_DataForReceipt.Batch     = _BatchBySales_Batch;
+						NewRow_DataForReceipt.Company   = _BatchBySales_Company;
+						NewRow_DataForReceipt.Batch     = _BatchBySales_Batch;
 					
-					NewRow_DataForReceipt.BatchKey  = Row.BatchKey;
-					NewRow_DataForReceipt.Document  = Row.Document;
-					NewRow_DataForReceipt.Period    = Row.Date;
-					NewRow_DataForReceipt.Quantity  = ReceiptQuantity;
-					NewRow_DataForReceipt.Amount    = ReceiptAmount;
-					NewRow_DataForReceipt.AmountTax = ReceiptAmountTax;
-					NewRow_DataForReceipt.AmountCostRatio = ReceiptAmountCostRatio;
+						NewRow_DataForReceipt.BatchKey  = Row.BatchKey;
+						NewRow_DataForReceipt.Document  = Row.Document;
+						NewRow_DataForReceipt.Period    = Row.Date;
+						NewRow_DataForReceipt.Quantity  = ReceiptQuantity;
+						NewRow_DataForReceipt.Amount    = ReceiptAmount;
+						NewRow_DataForReceipt.AmountTax = ReceiptAmountTax;
+						NewRow_DataForReceipt.AmountCostRatio = ReceiptAmountCostRatio;
+					EndIf;
 				EndDo; // return by sales invoice
 
 				If NeedReceipt <> 0 Then

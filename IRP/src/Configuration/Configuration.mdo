@@ -852,6 +852,8 @@
   <enums>Enum.PurchaseReturnTransactionTypes</enums>
   <enums>Enum.InventoryOrigingTypes</enums>
   <enums>Enum.TradeAgentFeeTypes</enums>
+  <enums>Enum.ReceiptPaymentMethods</enums>
+  <enums>Enum.DocumentFiscalStatuses</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>
@@ -938,6 +940,7 @@
   <informationRegisters>InformationRegister.TemplateActions</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <informationRegisters>InformationRegister.T8010S_ConsignorBatches</informationRegisters>
+  <informationRegisters>InformationRegister.DocumentFiscalStatus</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

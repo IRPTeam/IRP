@@ -21,6 +21,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Object.Branch = Parameters.Branch;
 	Object.Workstation = Parameters.Workstation;
 	FillPaymentTypes();
+	FillPaymentMethods();
 	
 EndProcedure
 
@@ -113,6 +114,7 @@ Procedure Enter(Command)
 	
 	ReturnValue = New Structure();
 	ReturnValue.Insert("Payments", Payments);
+	ReturnValue.Insert("ReceiptPaymentMethod", ReceiptPaymentMethod);
 	Close(ReturnValue);
 	
 EndProcedure
@@ -363,6 +365,13 @@ Procedure FillPaymentsAtServer()
 	Items.Cash.Enabled = CashPaymentTypes.Count();
 	Items.Card.Enabled = BankPaymentTypes.Count();
 
+EndProcedure
+
+&AtServer
+Procedure FillPaymentMethods()
+	
+	ReceiptPaymentMethod = Enums.ReceiptPaymentMethods.FullCalculation;
+	
 EndProcedure
 
 // Get bank payment types value.

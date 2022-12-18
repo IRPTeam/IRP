@@ -595,13 +595,19 @@ EndFunction
 #Region RegionArea
 
 &AtClient
-Procedure PaymentFormClose(Result, AdditionalData) Export
+Async Procedure PaymentFormClose(Result, AdditionalData) Export
 
 	If Result = Undefined Then
 		Return;
 	EndIf;
 	
 	CashbackAmount = WriteTransaction(Result);
+	ResultPrint = Await PrintFiscalReceipt();
+	If ResultPrint Then
+		
+	Else
+		Return;
+	EndIf;
 	DetailedInformation = R().S_030 + ": " + Format(CashbackAmount, "NFD=2; NZ=0;");
 	SetDetailedInfo(DetailedInformation);
 	
@@ -623,6 +629,42 @@ Procedure NewTransaction()
 	
 	EnabledPaymentButton();
 	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Async Function PrintFiscalReceipt()
+	EquipmentPrintFiscalReceiptResult = Await EquipmentFiscalPrinterClient.ProcessCheck(Object.ConsolidatedRetailSales, DocRef);
+	If EquipmentPrintFiscalReceiptResult.Success Then
+	SetFiscalStatus(Object.Ref
+						, EquipmentPrintFiscalReceiptResult.Status
+						, EquipmentPrintFiscalReceiptResult.FiscalResponse
+						, EquipmentPrintFiscalReceiptResult.DataPresentation);
+	Else
+		SetFiscalStatus(Object.Ref
+						, EquipmentPrintFiscalReceiptResult.Status
+						, EquipmentPrintFiscalReceiptResult.ErrorDescription);
+	EndIf;
+	Return EquipmentPrintFiscalReceiptResult.Success;
+EndFunction
+
+&AtServerNoContext
+Procedure SetFiscalStatus(DocumentRef, Status = "Prepaired", FiscalResponse = "", DataPresentation = "")
+	If Status = "Prepaired" Then
+		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
+																, Enums.DocumentFiscalStatuses.Prepaired);
+	ElsIf Status = "Printed" Then
+		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
+																, Enums.DocumentFiscalStatuses.Printed
+																, FiscalResponse
+																, DataPresentation);
+	ElsIf Status = "FiscalReturnedError" Then
+		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
+																, Enums.DocumentFiscalStatuses.FiscalReturnedError
+																, FiscalResponse);
+	ElsIf Status = "NotPrinted" Then
+		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
+																, Enums.DocumentFiscalStatuses.NotPrinted);
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -672,9 +714,11 @@ Function WriteTransaction(Result)
 	ObjectValue = FormAttributeToValue("Object");
 	ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	ObjectValue.Payments.Load(Payments);
+	ObjectValue.PaymentMethod = Result.ReceiptPaymentMethod;
 	DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
 
 	ObjectValue.Write(DocumentWriteMode.Posting);
+	
 	DocRef = ObjectValue.Ref;
 	DPPointOfSaleServer.AfterPostingDocument(DocRef);
 	CashAmountFilter = New Structure();

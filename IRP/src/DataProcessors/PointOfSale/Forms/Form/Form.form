@@ -6273,7 +6273,15 @@ person</value>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>
-    <navigationPanel/>
+    <navigationPanel>
+      <cmiFragmentRecord>
+        <command>InformationRegister.DocumentFiscalStatus.StandardCommand.OpenByValue.Document</command>
+        <commandParameter xsi:type="form:DataPath">
+          <segments>Object.Ref</segments>
+        </commandParameter>
+        <userVisible/>
+      </cmiFragmentRecord>
+    </navigationPanel>
     <commandBar/>
   </commandInterface>
   <extInfo xsi:type="form:DocumentFormExtInfo">

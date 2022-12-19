@@ -821,14 +821,14 @@ Function GetResultTable(BatchTree, SilentMode)
 					EndDo; // Row_Store.Rows
 		
 					If NeedExpense <> 0 Then
-						If Not SilentMode Then
-							Required  = Format(Row_Store.Quantity, "NFD=3;");
-							Remaining = Format(Row_Store.Quantity - NeedExpense, "NFD=3;");
-							Lack = Format(NeedExpense, "NFD=3;");
-			
-							Msg = StrTemplate(R().Error_120, Row_ItemKey.ItemKey, Row_Store.Store, Required, Remaining, Lack);
-							CommonFunctionsClientServer.ShowUsersMessage(Msg);
-						EndIf;
+//						If Not SilentMode Then
+//							Required  = Format(Row_Store.Quantity, "NFD=3;");
+//							Remaining = Format(Row_Store.Quantity - NeedExpense, "NFD=3;");
+//							Lack = Format(NeedExpense, "NFD=3;");
+//			
+//							Msg = StrTemplate(R().Error_120, Row_ItemKey.ItemKey, Row_Store.Store, Required, Remaining, Lack);
+//							CommonFunctionsClientServer.ShowUsersMessage(Msg);
+//						EndIf;
 						HaveError = True;			
 					EndIf;
 				EndDo; // SourceOfOrigin

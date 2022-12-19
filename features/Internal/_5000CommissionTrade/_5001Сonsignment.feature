@@ -30,7 +30,9 @@ Scenario: _05002 preparation (consignment)
 		When Create catalog Items objects (serial lot numbers)
 		When Create catalog ItemKeys objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
-		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers, with batch balance details)
+		When Create catalog Countries objects
+		When Create catalog SourceOfOrigins objects
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
 		When Create catalog Items objects
@@ -133,8 +135,8 @@ Scenario: _050003 create SI (Shipment to trade agent)
 		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Code' | 'Owner' | 'Reference'  | 'Serial number' |
-			| '17'   | 'PZU'   | '8908899879' | '8908899879'    |
+			| 'Owner' | 'Reference'  | 'Serial number' |
+			| 'PZU'   | '8908899879' | '8908899879'    |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
 		And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
@@ -144,8 +146,8 @@ Scenario: _050003 create SI (Shipment to trade agent)
 		Then "Item serial/lot numbers" window is opened
 		And I activate field named "Owner" in "List" table
 		And I go to line in "List" table
-			| 'Code' | 'Owner' | 'Reference'  | 'Serial number' |
-			| '13'   | 'PZU'   | '8908899877' | '8908899877'    |
+			| 'Owner' | 'Reference'  | 'Serial number' |
+			| 'PZU'   | '8908899877' | '8908899877'    |
 		And I select current line in "List" table
 		And I finish line editing in "SerialLotNumbers" table
 		And I activate "Quantity" field in "SerialLotNumbers" table
@@ -700,5 +702,6 @@ Scenario: _050021 check Purchase invoice generate for concignor fee (based on Sa
 			| '$$NumberPIFee1$$' |
 		And I close all client application windows			
 				
+
 
 

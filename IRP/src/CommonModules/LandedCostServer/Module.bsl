@@ -1712,30 +1712,32 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 						_BatchBySales_Batch    = Row.Batch;
 					EndIf;
 					
-					// Table of returned batches
-					NewRow_ReturnedBatches = TableOfReturnedBatches.Add();
-					NewRow_ReturnedBatches.IsOpeningBalance = False;
-					NewRow_ReturnedBatches.Skip             = True;
-					NewRow_ReturnedBatches.Priority         = 0;
-					NewRow_ReturnedBatches.BatchKey         = Row.BatchKey;
-					NewRow_ReturnedBatches.Quantity         = ReceiptQuantity;
-					NewRow_ReturnedBatches.Amount           = ReceiptAmount;
-					NewRow_ReturnedBatches.AmountTax        = ReceiptAmountTax;
-					NewRow_ReturnedBatches.AmountCostRatio  = ReceiptAmountCostRatio;
-					
-					NewRow_ReturnedBatches.Document         = _BatchBySales_Document;
-					NewRow_ReturnedBatches.Company          = _BatchBySales_Company;
-					NewRow_ReturnedBatches.Batch            = _BatchBySales_Batch;
-					
-					NewRow_ReturnedBatches.Date             = Row.Date;
-					NewRow_ReturnedBatches.Direction        = Enums.BatchDirection.Receipt;
-					NewRow_ReturnedBatches.QuantityBalance  = ReceiptQuantity;
-					NewRow_ReturnedBatches.AmountBalance    = ReceiptAmount;
-					NewRow_ReturnedBatches.AmountTaxBalance = ReceiptAmountTax;
-					NewRow_ReturnedBatches.AmountCostRatioBalance = ReceiptAmountCostRatio;
-					
-					// Data for receipt
 					If Not IsReturnFromTradeAgent(Row.Document) Then
+						
+						// Table of returned batches
+						NewRow_ReturnedBatches = TableOfReturnedBatches.Add();
+						NewRow_ReturnedBatches.IsOpeningBalance = False;
+						NewRow_ReturnedBatches.Skip             = True;
+						NewRow_ReturnedBatches.Priority         = 0;
+						NewRow_ReturnedBatches.BatchKey         = Row.BatchKey;
+						NewRow_ReturnedBatches.Quantity         = ReceiptQuantity;
+						NewRow_ReturnedBatches.Amount           = ReceiptAmount;
+						NewRow_ReturnedBatches.AmountTax        = ReceiptAmountTax;
+						NewRow_ReturnedBatches.AmountCostRatio  = ReceiptAmountCostRatio;
+					
+						NewRow_ReturnedBatches.Document         = _BatchBySales_Document;
+						NewRow_ReturnedBatches.Company          = _BatchBySales_Company;
+						NewRow_ReturnedBatches.Batch            = _BatchBySales_Batch;
+					
+						NewRow_ReturnedBatches.Date             = Row.Date;
+						NewRow_ReturnedBatches.Direction        = Enums.BatchDirection.Receipt;
+						NewRow_ReturnedBatches.QuantityBalance  = ReceiptQuantity;
+						NewRow_ReturnedBatches.AmountBalance    = ReceiptAmount;
+						NewRow_ReturnedBatches.AmountTaxBalance = ReceiptAmountTax;
+						NewRow_ReturnedBatches.AmountCostRatioBalance = ReceiptAmountCostRatio;
+					
+						// Data for receipt
+					
 						NewRow_DataForReceipt = Tables.DataForReceipt.Add();
 					
 						NewRow_DataForReceipt.Company   = _BatchBySales_Company;
@@ -2013,25 +2015,25 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 		CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewReceivedBatches, CalculationSettings);
 	ElsIf IsReturnFromTradeAgent(Document) Then
 		
-		For Each Row In TableOfReturnedBatches Do
-			NewRowReceivedBatch = TableOfNewReceivedBatches.Add();
-			NewRowReceivedBatch.Batch            = Row.Batch;
-			NewRowReceivedBatch.BatchKey         = Row.BatchKey;
-			NewRowReceivedBatch.Document         = Row.Document;
-			NewRowReceivedBatch.Company          = Row.Company;
-			NewRowReceivedBatch.Date             = Row.Date;
-			NewRowReceivedBatch.Quantity         = Row.Quantity;
-			NewRowReceivedBatch.Amount           = Row.Amount;
-			NewRowReceivedBatch.AmountTax        = Row.AmountTax;
-			NewRowReceivedBatch.AmountCostRatio  = Row.AmountCostRatio;
-			NewRowReceivedBatch.QuantityBalance  = Row.Quantity;
-			NewRowReceivedBatch.AmountBalance    = Row.Amount;
-			NewRowReceivedBatch.AmountTaxBalance = Row.AmountTax;
-			NewRowReceivedBatch.AmountCostRatioBalance = Row.AmountCostRatio;
-			NewRowReceivedBatch.IsOpeningBalance = False;
-			NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
-		EndDo;  
-		TableOfReturnedBatches.Clear();
+//		For Each Row In TableOfReturnedBatches Do
+//			NewRowReceivedBatch = TableOfNewReceivedBatches.Add();
+//			NewRowReceivedBatch.Batch            = Row.Batch;
+//			NewRowReceivedBatch.BatchKey         = Row.BatchKey;
+//			NewRowReceivedBatch.Document         = Row.Document;
+//			NewRowReceivedBatch.Company          = Row.Company;
+//			NewRowReceivedBatch.Date             = Row.Date;
+//			NewRowReceivedBatch.Quantity         = Row.Quantity;
+//			NewRowReceivedBatch.Amount           = Row.Amount;
+//			NewRowReceivedBatch.AmountTax        = Row.AmountTax;
+//			NewRowReceivedBatch.AmountCostRatio  = Row.AmountCostRatio;
+//			NewRowReceivedBatch.QuantityBalance  = Row.Quantity;
+//			NewRowReceivedBatch.AmountBalance    = Row.Amount;
+//			NewRowReceivedBatch.AmountTaxBalance = Row.AmountTax;
+//			NewRowReceivedBatch.AmountCostRatioBalance = Row.AmountCostRatio;
+//			NewRowReceivedBatch.IsOpeningBalance = False;
+//			NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
+//		EndDo;  
+//		TableOfReturnedBatches.Clear();
 		CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewReceivedBatches, CalculationSettings);
 	
 	ElsIf IsCompositeDocument(Document) Then

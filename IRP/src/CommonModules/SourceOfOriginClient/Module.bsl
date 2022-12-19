@@ -68,17 +68,32 @@ Procedure AddNewSourceOfOrigins(Result, Parameters) Export
 		Return;
 	EndIf;
 	
-	ArrayForDelete = Parameters.Object.SourceOfOrigins.FindRows(New Structure("Key", Result.RowKey));
-	
-	For Each Row In ArrayForDelete Do
-		Parameters.Object.SourceOfOrigins.Delete(Row);
-	EndDo;
-	
 	For Each Row In Result.SourceOfOrigins Do
-		NewRow = Parameters.Object.SourceOfOrigins.Add();
-		FillPropertyValues(NewRow, Row);
-		NewRow.Key = Result.RowKey;
+		Filter = New Structure();
+		Filter.Insert("Key", Result.RowKey);
+		Filter.Insert("SerialLotNumber", ?(ValueIsFilled(Row.SerialLotNumber), Row.SerialLotNumber,
+			PredefinedValue("Catalog.SerialLotNumbers.EmptyRef")));
+		FilteredRows = Parameters.Object.SourceOfOrigins.FindRows(Filter);
+		If FilteredRows.Count() Then                     
+			FilteredRows[0].SourceOfOrigin = Row.SourceOfOrigin;
+		Else
+			NewRow = Parameters.Object.SourceOfOrigins.Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.Key = Result.RowKey;
+		EndIf;
 	EndDo;
+	
+//	ArrayForDelete = Parameters.Object.SourceOfOrigins.FindRows(New Structure("Key", Result.RowKey));
+	
+//	For Each Row In ArrayForDelete Do
+//		Parameters.Object.SourceOfOrigins.Delete(Row);
+//	EndDo;
+	
+//	For Each Row In Result.SourceOfOrigins Do
+//		NewRow = Parameters.Object.SourceOfOrigins.Add();
+//		FillPropertyValues(NewRow, Row);
+//		NewRow.Key = Result.RowKey;
+//	EndDo;
 	
 	RecalculateConsignorBatches(Parameters.Object, Parameters.Form);
 	UpdateSourceOfOriginsPresentation(Parameters.Object);

@@ -1585,6 +1585,11 @@ Scenario: _092008 check serial lot number in the Opening entry
 			| 'Description'     |
 			| 'Main Company' |
 		And I select current line in "List" table
+		And I click Select button of "Branch" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Front office' |
+		And I select current line in "List" table
 	* Add items (first item with serial lot number, second - without serial lot number)
 		And I move to "Inventory" tab
 		And in the table "Inventory" I click the button named "InventoryAdd"
@@ -2482,6 +2487,7 @@ Scenario: _092015 check serial lot number in the Shipment confirmation
 			| 'Description'     |
 			| 'Company Ferron BP' |
 		And I select current line in "List" table
+
 	* Add items (first item with serial lot number, second - without serial lot number)
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table

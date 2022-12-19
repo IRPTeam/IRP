@@ -36,8 +36,12 @@ Scenario: _001 test data
 		When Create catalog IntegrationSettings objects (LC)
 		When Create catalog ItemKeys objects (LC)
 		When Create catalog ItemSegments objects (LC)
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
 		When Create catalog ReportOptions objects
 		When Create catalog SerialLotNumbers objects (LC)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create catalog ItemTypes objects (LC)
 		When Create catalog Units objects (LC)
 		When Create catalog Items objects (LC)
@@ -55,6 +59,7 @@ Scenario: _001 test data
 		When Create catalog TaxRates objects (LC)
 		When Create catalog Taxes objects (LC)
 		When Create catalog InterfaceGroups objects (LC)
+		When Create information register Barcodes records
 		When Create catalog AccessGroups objects (LC)
 		When Create catalog AccessProfiles objects (LC)
 		When Create catalog UserGroups objects (LC)
@@ -2448,7 +2453,42 @@ Scenario: _028 check landed cost by materials
 		And I close all client application windows
 
 				
-
-		
+Scenario: _030 check landed cost (double return)
+	And I close all client application windows
+	* Load documents for double return
+		When Data preparation (double return, landed cost)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(9012).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(185).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(186).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseReturn.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Check movement cost calculation
+		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		Then "Select period" window is opened
+		And I input "05.12.2022" text in the field named "DateBegin"
+		And I input "07.12.2022" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I click "Generate" button
+		And "Result" spreadsheet document contains "BathBalance_070_2" template lines by template
+		And I close all client application windows
+				
+	
 				
 				

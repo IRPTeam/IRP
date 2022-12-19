@@ -217,16 +217,16 @@ Procedure RecalculateConsignorBatches(Object, Form)
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
 	ServerParameters.TableName = "ItemList";		
 	
-	Rows = New Array();          
-	ConsignorStocks = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks");
-	For Each Row In Object.ItemList Do
-		If Row.InventoryOrigin = ConsignorStocks Then
-			Rows.Add(Rows);
-		EndIf;
-	EndDo;
+//	Rows = New Array();          
+//	ConsignorStocks = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks");
+//	For Each Row In Object.ItemList Do
+//		If Row.InventoryOrigin = ConsignorStocks Then
+//			Rows.Add(Rows);
+//		EndIf;
+//	EndDo;
 	
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
-	Parameters.Rows = Rows;
+//	Parameters.Rows = Rows;
 	
 	Property = New Structure("DataPath", "Command_UpdateConsignorBatches");
 	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);	

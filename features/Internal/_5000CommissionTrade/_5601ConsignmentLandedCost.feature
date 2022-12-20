@@ -35,6 +35,7 @@ Scenario: _05602 preparation (consignment landed cost)
 		When Create catalog Units objects
 		When Create catalog Items objects
 		When Create catalog PriceTypes objects
+		When Create catalog SourceOfOrigins objects
 		When Create catalog Specifications objects
 		When Create catalog Partners objects (trade agent and consignor)
 		When Create chart of characteristic types AddAttributeAndProperty objects
@@ -76,6 +77,10 @@ Scenario: _05602 preparation (consignment landed cost)
 	* Post document
 		And I execute 1C:Enterprise script at server
  			| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+ 			| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+ 			| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Setting for Company
 		When settings for Company (commission trade)
 	And I close all client application windows

@@ -10397,6 +10397,11 @@ Procedure GetBasisInfoRecursive(Basis, BasisKey, RowID, ResultTable, Key)
 	If BasisInfo.Basis = Undefined Then
 		Return;
 	EndIf;
+	
+	If ResultTable.FindRows(New Structure("Recorder", BasisInfo.Basis)).Count() Then
+		Return;
+	EndIf;
+	
 	NewRow = ResultTable.Add();
 	NewRow.Key = Key;
 	NewRow.Recorder = BasisInfo.Basis;

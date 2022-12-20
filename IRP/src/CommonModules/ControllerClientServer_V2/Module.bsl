@@ -4297,11 +4297,11 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 //			Parameters.RowsForRecalculate = TableRows;
 //		EndIf;
 		If TableRows.Count() = 1
-			And TableRows[0].Property("InventoryOrigin") 
-			And TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
-			
-			TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
-			Parameters.RowsForRecalculate = TableRows;						
+			And TableRows[0].Property("InventoryOrigin") Then
+			If TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then			
+				TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
+				Parameters.RowsForRecalculate = TableRows;
+			EndIf;
 		Else
 			TableRows = New Array();
 			For Each Row In TableRows Do

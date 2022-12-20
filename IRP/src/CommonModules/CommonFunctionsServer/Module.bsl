@@ -138,8 +138,9 @@ EndFunction
 // Returns:
 //  String - Serialize JSON
 Function SerializeJSON(Value, AddInfo = Undefined) Export
+	Settings = New JSONWriterSettings(, Chars.Tab);
 	Writer = New JSONWriter();
-	Writer.SetString();
+	Writer.SetString(Settings);
 	WriteJSON(Writer, Value);
 	Result = Writer.Close();
 	Return Result;

@@ -37,17 +37,17 @@ Function ObjectXDTO(ObjectStructure, TypeName, URI, TreeData)
 	If ObjectStructure = Undefined Then
 		Return DataXDTO;
 	EndIf;
-		
+
 	For Each ObjectData In ObjectStructure Do
 		
-		If TypeOf(ObjectData) = Type("KeyAndValue") AND TypeOf(ObjectData.Value) = Type("Structure") Then //объект
+		If TypeOf(ObjectData) = Type("KeyAndValue") AND TypeOf(ObjectData.Value) = Type("Structure") Then // Object
 			XDTOTypeStructure = XDTOType.Properties.Get(ObjectData.Key).Type;
 		
 			NewRow = TreeData.GetItems().Add();
 			NewRow.Name = ObjectData.Key;
 			NewRow.CanBeEmpty = XDTOType.Properties.Get(ObjectData.Key).LowerBound = 0;
 			DataXDTO[ObjectData.Key] = ObjectXDTO(ObjectData.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, NewRow);
-		ElsIf TypeOf(ObjectData) = Type("KeyAndValue") AND TypeOf(ObjectData.Value) = Type("Array") Then //список
+		ElsIf TypeOf(ObjectData) = Type("KeyAndValue") AND TypeOf(ObjectData.Value) = Type("Array") Then // List
 			XDTOTypeRow = XDTOType.Properties.Get(ObjectData.Key).Type;
 			
 			NewRowArray = TreeData.GetItems().Add();
@@ -78,7 +78,13 @@ Function ObjectXDTO(ObjectStructure, TypeName, URI, TreeData)
 							NewRow = NewRowArray.GetItems().Add();
 							NewRow.Name = Str.Key;
 							NewRow.CanBeEmpty =  XDTOTypeRow.Properties.Get(Str.Key).LowerBound = 0;
-							DataXDTORow[Str.Key].Add(ObjectXDTO(Str.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, NewRow));
+							If CommonFunctionsServer.XDTOFactoryObject(Object.WSName).Create(XDTOTypeStructure) = Undefined Then // Simple type
+								For Each El In Str.Value Do
+									DataXDTORow[Str.Key].Add(El);
+								EndDo;
+							Else
+								DataXDTORow[Str.Key].Add(ObjectXDTO(Str.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, NewRow));
+							EndIf;
 						ElsIf TypeOf(Str.Value) = Type("Structure") Then
 							
 							NewRow = NewRowArray.GetItems().Add();
@@ -109,8 +115,14 @@ Function ObjectXDTO(ObjectStructure, TypeName, URI, TreeData)
 					Continue;
 				EndIf; 
 				If TypeOf(DataXDTO[ObjectDataKeyValue.Key]) =  Type("XDTOList") Then
-										
-					DataXDTO[ObjectDataKeyValue.Key].Add(ObjectXDTO(ObjectDataKeyValue.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, NewRow));
+					If CommonFunctionsServer.XDTOFactoryObject(Object.WSName).Create(XDTOTypeStructure) = Undefined Then // Simple type
+						For Each El In ObjectDataKeyValue.Value Do
+							DataXDTO[ObjectDataKeyValue.Key].Add(El);
+						EndDo;
+					Else
+						XDTOSet = ObjectXDTO(ObjectDataKeyValue.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, NewRow);
+						DataXDTO[ObjectDataKeyValue.Key].Add(XDTOSet);
+					EndIf;
 				ElsIf TypeOf(ObjectDataKeyValue.Value) = Type("Structure") Then
 					DataXDTO[ObjectDataKeyValue.Key] = ObjectXDTO(ObjectDataKeyValue.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, NewRow);
 				Else 
@@ -119,12 +131,14 @@ Function ObjectXDTO(ObjectStructure, TypeName, URI, TreeData)
 
 			EndDo;
 		
-		Else
+		ElsIf TypeOf(ObjectData) = Type("KeyAndValue") Then
 			NewRow = TreeData.GetItems().Add();
 			NewRow.Name = ObjectData.Key;
 			NewRow.CanBeEmpty = XDTOType.Properties.Get(ObjectData.Key).LowerBound = 0;
 			NewRow.Value = ObjectData.Value;
 			SetObject(DataXDTO, XDTOType, ObjectData.Key, ObjectData.Value, TreeData);
+		Else
+			 
 		EndIf; 
 		
 	EndDo;
@@ -140,10 +154,6 @@ Procedure SetObject(XDTO, Type, Property, Val Value = Undefined, NewRow)
 		ContData = Type.Properties.Get(Property);
 		ContentType = ContData.Type;
 		NewRow.DataType = ContentType.Name;
-
-		If NOT ContData.LowerBound Then 
-			Return;
-		EndIf;
 		
 		If ContentType.Name = "normalizedString" OR ContentType.Name = "string" Then
 			 Value = "";

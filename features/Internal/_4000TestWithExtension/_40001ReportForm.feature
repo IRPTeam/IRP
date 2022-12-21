@@ -78,7 +78,7 @@ Scenario: _4000120 check reports option save
 			| 'Bound Dress+Trousers, Clothes' | ''              |
 			| 'Service, Service'              | ''              |
 			| 'Router, Equipment'             | ''              |
-			| 'Bag, Bags'                     | ''              |
+			| 'Bag, Bags'                     | '890086768'     |
 			| 'Scarf, Clothes'                | '2202283715'    |
 			| 'Chewing gum, Chewing gum'      | ''              |
 			| 'Skittles, Candy TR'            | ''              |
@@ -115,7 +115,7 @@ Scenario: _4000120 check reports option save
 			| 'Bound Dress+Trousers, Clothes, pcs' | ''              |
 			| 'Service, Service, pcs'              | ''              |
 			| 'Router, Equipment, pcs'             | ''              |
-			| 'Bag, Bags, pcs'                     | ''              |
+			| 'Bag, Bags, pcs'                     | '890086768'     |
 			| 'Scarf, Clothes, pcs'                | '2202283715'    |
 			| 'Chewing gum, Chewing gum, pcs'      | ''              |
 			| 'Skittles, Candy TR, pcs'            | ''              |
@@ -159,7 +159,7 @@ Scenario: _4000125 check switching between options and default settings
 			| 'Bound Dress+Trousers, Clothes' | ''              |
 			| 'Service, Service'              | ''              |
 			| 'Router, Equipment'             | ''              |
-			| 'Bag, Bags'                     | ''              |
+			| 'Bag, Bags'                     | '890086768'     |
 			| 'Scarf, Clothes'                | '2202283715'    |
 			| 'Chewing gum, Chewing gum'      | ''              |
 			| 'Skittles, Candy TR'            | ''              |
@@ -186,7 +186,7 @@ Scenario: _4000125 check switching between options and default settings
 			| 'Bound Dress+Trousers, Clothes, pcs' | ''              |
 			| 'Service, Service, pcs'              | ''              |
 			| 'Router, Equipment, pcs'             | ''              |
-			| 'Bag, Bags, pcs'                     | ''              |
+			| 'Bag, Bags, pcs'                     | '890086768'     |
 			| 'Scarf, Clothes, pcs'                | '2202283715'    |
 			| 'Chewing gum, Chewing gum, pcs'      | ''              |
 			| 'Skittles, Candy TR, pcs'            | ''              |
@@ -213,7 +213,7 @@ Scenario: _4000125 check switching between options and default settings
 			| 'Bound Dress+Trousers' | ''              |
 			| 'Service'              | ''              |
 			| 'Router'               | ''              |
-			| 'Bag'                  | ''              |
+			| 'Bag'                  | '890086768'     |
 			| 'Scarf'                | '2202283715'    |
 			| 'Chewing gum'          | ''              |
 			| 'Skittles'             | ''              |
@@ -315,7 +315,7 @@ Scenario: _4000128 check reports option share
 			| 'Bound Dress+Trousers, Clothes, pcs' | ''              |
 			| 'Service, Service, pcs'              | ''              |
 			| 'Router, Equipment, pcs'             | ''              |
-			| 'Bag, Bags, pcs'                     | ''              |
+			| 'Bag, Bags, pcs'                     | '890086768'     |
 			| 'Scarf, Clothes, pcs'                | '2202283715'    |
 			| 'Chewing gum, Chewing gum, pcs'      | ''              |
 			| 'Skittles, Candy TR, pcs'            | ''              |

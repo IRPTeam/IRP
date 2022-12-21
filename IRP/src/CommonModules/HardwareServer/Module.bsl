@@ -116,9 +116,9 @@ Function GetAllWorkstationHardwareList(Workstation) Export
 	QueryResult = Query.Execute();
 	SelectionDetailRecords = QueryResult.Select();
 	HardwareList = New Array();
-	If SelectionDetailRecords.Next() Then
+	While SelectionDetailRecords.Next() Do
 		HardwareList.Add(SelectionDetailRecords.Hardware);
-	EndIf;
+	EndDo;
 	Return HardwareList;
 EndFunction
 

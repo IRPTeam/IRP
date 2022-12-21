@@ -120,6 +120,56 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 	Return Result;
 EndFunction
 
+Async Function PrintXReport(ConsolidatedRetailSales) Export
+	
+	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
+	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
+		
+	Parameters = ShiftSettings();
+	ShiftGetXMLOperationSettings = ShiftGetXMLOperationSettings();
+	ShiftGetXMLOperationSettings.CashierName = String(CRS.Author);
+	
+	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
+	
+	Result = ShiftResultStructure();
+	
+	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
+																			, Parameters.ParametersXML
+																			, Parameters.ResultXML);
+	If ResultInfo Then
+		ShiftData = ShiftResultStructure();
+		FillDataFromDeviceResponse(ShiftData, Parameters.ResultXML);
+		If ShiftData.ShiftState = 1 Then
+			Result.ErrorDescription = R().EqFP_ShiftAlreadyClosed;
+			Result.Status = "FiscalReturnedError";
+			CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+			Return Result;
+		ElsIf ShiftData.ShiftState = 2 Then
+			
+		ElsIf ShiftData.ShiftState = 3 Then
+			Result.ErrorDescription = R().EqFP_ShiftIsExpired;
+			Result.Status = "FiscalReturnedError";
+			CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+			Return Result;
+		EndIf;
+	Else
+		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+		Return Result;
+	EndIf;
+	
+	ResultInfo = Settings.ConnectedDriver.DriverObject.PrintXReport(Settings.ConnectedDriver.ID, Parameters.ParametersXML);
+	If ResultInfo Then
+		Result.Success = True;
+	Else
+		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+		Return Result;
+	EndIf;
+	
+	Return Result;
+EndFunction
+
 Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
 	
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
@@ -180,6 +230,110 @@ Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
 	Else
 		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
 		Result.Status = "FiscalReturnedError";
+		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+		Return Result;
+	EndIf;
+	
+	Return Result;
+EndFunction
+
+Async Function CashInCome(ConsolidatedRetailSales, Summ) Export
+	
+	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
+	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
+		
+	Parameters = ShiftSettings();
+	ShiftGetXMLOperationSettings = ShiftGetXMLOperationSettings();
+	ShiftGetXMLOperationSettings.CashierName = String(CRS.Author);
+	
+	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
+	
+	Result = ShiftResultStructure();
+	
+	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
+																			, Parameters.ParametersXML
+																			, Parameters.ResultXML);
+	If ResultInfo Then
+		ShiftData = ShiftResultStructure();
+		FillDataFromDeviceResponse(ShiftData, Parameters.ResultXML);
+		If ShiftData.ShiftState = 1 Then
+			Result.ErrorDescription = R().EqFP_ShiftAlreadyClosed;
+			Result.Status = "FiscalReturnedError";
+			CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+			Return Result;
+		ElsIf ShiftData.ShiftState = 2 Then
+			
+		ElsIf ShiftData.ShiftState = 3 Then
+			Result.ErrorDescription = R().EqFP_ShiftIsExpired;
+			Result.Status = "FiscalReturnedError";
+			CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+			Return Result;
+		EndIf;
+	Else
+		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+		Return Result;
+	EndIf;
+	
+	ResultInfo = Settings.ConnectedDriver.DriverObject.CashInOutcome(Settings.ConnectedDriver.ID
+																		, Parameters.ParametersXML
+																		, Summ);
+	If ResultInfo Then
+		Result.Success = True;
+	Else
+		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+		Return Result;
+	EndIf;
+	
+	Return Result;
+EndFunction
+
+Async Function CashOutCome(ConsolidatedRetailSales, Summ) Export
+	
+	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
+	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
+		
+	Parameters = ShiftSettings();
+	ShiftGetXMLOperationSettings = ShiftGetXMLOperationSettings();
+	ShiftGetXMLOperationSettings.CashierName = String(CRS.Author);
+	
+	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
+	
+	Result = ShiftResultStructure();
+	
+	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
+																			, Parameters.ParametersXML
+																			, Parameters.ResultXML);
+	If ResultInfo Then
+		ShiftData = ShiftResultStructure();
+		FillDataFromDeviceResponse(ShiftData, Parameters.ResultXML);
+		If ShiftData.ShiftState = 1 Then
+			Result.ErrorDescription = R().EqFP_ShiftAlreadyClosed;
+			Result.Status = "FiscalReturnedError";
+			CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+			Return Result;
+		ElsIf ShiftData.ShiftState = 2 Then
+			
+		ElsIf ShiftData.ShiftState = 3 Then
+			Result.ErrorDescription = R().EqFP_ShiftIsExpired;
+			Result.Status = "FiscalReturnedError";
+			CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+			Return Result;
+		EndIf;
+	Else
+		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+		Return Result;
+	EndIf;
+	
+	ResultInfo = Settings.ConnectedDriver.DriverObject.CashInOutcome(Settings.ConnectedDriver.ID
+																		, Parameters.ParametersXML
+																		, -Summ);
+	If ResultInfo Then
+		Result.Success = True;
+	Else
+		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;

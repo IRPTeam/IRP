@@ -173,6 +173,15 @@ Procedure CancelSessionFinish(Result, AddInfo) Export
 	SetVisibilityAvailability(Object, ThisObject);
 	EnabledPaymentButton();
 EndProcedure
+
+&AtClient
+Async Procedure PrintXReport(Command)
+	
+	EquipmentResult = Await EquipmentFiscalPrinterClient.PrintXReport(Object.ConsolidatedRetailSales);
+	If EquipmentResult.Success Then
+		
+	EndIf;
+EndProcedure
 			
 #EndRegion
 
@@ -1000,3 +1009,4 @@ Procedure FillCashInList()
 		FillPropertyValues(ThisObject.CashInList.Add(), QuerySelection);
 	EndDo;
 EndProcedure
+

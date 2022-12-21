@@ -496,59 +496,59 @@ Scenario: _050010 create SI (commission products sales)
 			| '$$NumberSI10$$' |
 		And I close all client application windows			
 
-Scenario: _050012 сheck the message when selling commission goods more than there is in the balance
-	And I close all client application windows
-	* Open SI form
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I click the button named "FormCreate"
-	* Filling in the details
-		And I activate field named "ItemListLineNumber" in "ItemList" table
-		And I click Choice button of the field named "Partner"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'DFC'         |
-		And I select current line in "List" table
-		And I click Choice button of the field named "Agreement"
-		And I go to line in "List" table
-			| 'Description'      |
-			| 'Partner term DFC' |
-		And I select current line in "List" table
-		And I click Choice button of the field named "Store"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
-		And I select current line in "List" table
-	* Add item
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I activate field named "ItemListItem" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-		Then "Items" window is opened
-		And I go to line in "List" table
-			| 'Description'        |
-			| 'Dress' |
-		And I select current line in "List" table
-		And I activate field named "ItemListItemKey" in "ItemList" table
-		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Dress' | 'S/Yellow' |
-		And I select current line in "List" table
-		And I activate "Inventory origin" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table	
-		And I activate "Use shipment confirmation" field in "ItemList" table
-		And I remove "Use shipment confirmation" checkbox in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "50,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Post and check message
-		And I click "Post" button	
-		Then there are lines in TestClient message log
-			|'Consignor batch shortage Item key: S/Yellow Store: Store 02 Required:50,000 Remaining:32,000 Lack:18,000\n'|				
-	* Clear posting
-		And I click "Cancel posting" button
-	And I close all client application windows
+// Scenario: _050012 сheck the message when selling commission goods more than there is in the balance
+// 	And I close all client application windows
+// 	* Open SI form
+// 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+// 		And I click the button named "FormCreate"
+// 	* Filling in the details
+// 		And I activate field named "ItemListLineNumber" in "ItemList" table
+// 		And I click Choice button of the field named "Partner"
+// 		And I go to line in "List" table
+// 			| 'Description' |
+// 			| 'DFC'         |
+// 		And I select current line in "List" table
+// 		And I click Choice button of the field named "Agreement"
+// 		And I go to line in "List" table
+// 			| 'Description'      |
+// 			| 'Partner term DFC' |
+// 		And I select current line in "List" table
+// 		And I click Choice button of the field named "Store"
+// 		And I go to line in "List" table
+// 			| 'Description' |
+// 			| 'Store 02'    |
+// 		And I select current line in "List" table
+// 	* Add item
+// 		And in the table "ItemList" I click the button named "ItemListAdd"
+// 		And I activate field named "ItemListItem" in "ItemList" table
+// 		And I select current line in "ItemList" table
+// 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+// 		Then "Items" window is opened
+// 		And I go to line in "List" table
+// 			| 'Description'        |
+// 			| 'Dress' |
+// 		And I select current line in "List" table
+// 		And I activate field named "ItemListItemKey" in "ItemList" table
+// 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+// 		And I go to line in "List" table
+// 			| 'Item'  | 'Item key' |
+// 			| 'Dress' | 'S/Yellow' |
+// 		And I select current line in "List" table
+// 		And I activate "Inventory origin" field in "ItemList" table
+// 		And I select current line in "ItemList" table
+// 		And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table	
+// 		And I activate "Use shipment confirmation" field in "ItemList" table
+// 		And I remove "Use shipment confirmation" checkbox in "ItemList" table
+// 		And I select current line in "ItemList" table
+// 		And I input "50,000" text in "Quantity" field of "ItemList" table
+// 		And I finish line editing in "ItemList" table
+// 	* Post and check message
+// 		And I click "Post" button	
+// 		Then there are lines in TestClient message log
+// 			|'Consignor batch shortage Item key: S/Yellow Store: Store 02 Required:50,000 Remaining:32,000 Lack:18,000\n'|				
+// 	* Clear posting
+// 		And I click "Cancel posting" button
+// 	And I close all client application windows
 	
 Scenario: _050014 create SR (return commission products that was sailed our customer)
 	And I close all client application windows

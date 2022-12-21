@@ -919,7 +919,9 @@
   </formCommands>
   <parameters>
     <name>RefsList</name>
-    <valueType/>
+    <valueType>
+      <types>ValueList</types>
+    </valueType>
   </parameters>
   <commandInterface>
     <navigationPanel/>

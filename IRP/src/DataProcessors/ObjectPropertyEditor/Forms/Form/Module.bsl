@@ -9,9 +9,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	FormCash.CountConditionalAppearance = ThisObject.ConditionalAppearance.Items.Count();
 	LoadMetadata(FormCash);
 	
-	RefsList = Parameters["RefsList"]; // Array, Undefined
-	If TypeOf(RefsList) = Type("Array") Then
-		TypeKey = TypeOf(RefsList[0]);
+	RefsList = Parameters.RefsList;
+	If RefsList.Count() > 0 Then
+		TypeKey = TypeOf(RefsList[0].Value);
 		TypeRecord = Items.ObjectType.ChoiceList.FindByValue(TypeKey);
 		If Not TypeRecord = Undefined Then
 			ThisObject["ObjectType"] = TypeKey;
@@ -74,7 +74,9 @@ EndProcedure
 &AtClient
 Procedure PropertiesTableValueOnChange(Item)
 	RowValue = Items.PropertiesTable.CurrentData;
-	CheckRowModified(ThisObject, RowValue);
+	If Not RowValue = Undefined Then
+		CheckRowModified(ThisObject, RowValue);
+	EndIf;
 EndProcedure
 
 // Properties table value start choice.
@@ -182,8 +184,17 @@ EndProcedure
 
 #Region Private
 
+// Check row modified.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+//  RowValue - FormDataStructure, FormDataCollectionItem, FormDataTreeItem, Undefined - Row value
 &AtClientAtServerNoContext
 Procedure CheckRowModified(Form, RowValue)
+	
+	If RowValue = Undefined Then
+		Return;
+	EndIf;
 	
 	isModified = False;
 	
@@ -356,15 +367,18 @@ Procedure SetSourceSettings(Form)
 	DataSet = DCSchema.DataSets.Add(Type("DataCompositionSchemaDataSetQuery"));
 	DataSet.Name = "DataSet";
 	DataSet.DataSource = "DataSources";
-	DataSet.Query =
+	DataSet.Query = StrTemplate(
 	"SELECT
 	|	Table.Ref,
 	|	Attributes.Property,
 	|	Attributes.Value
 	|FROM
-	|	" + MetaObject.FullName() + "." + Table_String + " AS Attributes
-	|		FULL JOIN " + MetaObject.FullName() + " AS Table
-	|		ON Attributes.Ref = Table.Ref";
+	|	%1.%2 AS Attributes
+	|		FULL JOIN %3 AS Table
+	|		ON Attributes.Ref = Table.Ref", 
+		MetaObject.FullName(), 
+		Table_String, 
+		MetaObject.FullName());
 	
 	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
 	DataField.Field = "Ref";
@@ -410,18 +424,15 @@ EndProcedure
 // Set refs to filter.
 // 
 // Parameters:
-//  RefsArray - Array of AnyRef 
+//  RefsList - ValueList of AnyRef 
 //  DataSettingsComposer - DataCompositionSettingsComposer - Data settings composer
 &AtClientAtServerNoContext
-Procedure SetRefsToFilter(RefsArray, DataSettingsComposer)
-	List = New ValueList;
-	List.LoadValues(RefsArray);
-	
+Procedure SetRefsToFilter(RefsList, DataSettingsComposer)
 	RefsFilter = DataSettingsComposer.Settings.Filter.Items.Add(Type("DataCompositionFilterItem"));
 	RefsFilter.LeftValue = New DataCompositionField("Ref");
 	RefsFilter.ComparisonType  = DataCompositionComparisonType.InList;
 	//@skip-warning
-	RefsFilter.RightValue = List;
+	RefsFilter.RightValue = RefsList;
 	RefsFilter.Use = True;
 EndProcedure
 
@@ -700,7 +711,7 @@ Procedure LoadNewColumns(Form)
 			TypeOption_Table = CharacteristicRecord.CharacteristicTypes;
 			TypeOption_FieldRef = CharacteristicRecord.KeyField;
 			TypeOption_FieldFilter = CharacteristicRecord.TypesFilterField;
-			TypeOption_FilterValue = GetObjectProperty(CharacteristicRecord, "TypesFilterValue");
+			TypeOption_FilterValue = CharacteristicRecord.TypesFilterValue;
 		EndIf;
 	EndDo;
 	
@@ -755,7 +766,7 @@ Procedure LoadNewColumns(Form)
 		ArrayType.Add(TypeOf(AvailableItems[0]));
 		AvailableItems_Table.Columns.Add("Property", New TypeDescription(ArrayType));
 		For Each AvailableItem In AvailableItems Do
-			AvailableItems_Table.Add()["Property"] = AvailableItem;
+			AvailableItems_Table.Add().Property = AvailableItem;
 		EndDo;
 		Query.SetParameter("AvailableItems", AvailableItems_Table);
 		Query.Text = StrTemplate(

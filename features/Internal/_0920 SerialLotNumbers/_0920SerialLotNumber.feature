@@ -1647,12 +1647,12 @@ Scenario: _092008 check serial lot number in the Opening entry
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$OpeningEntry092008$$'               | ''            | ''                           | ''          | ''             | ''       | ''      | ''          | ''                  |
-			| 'Document registrations records'       | ''            | ''                           | ''          | ''             | ''       | ''      | ''          | ''                  |
-			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                           | ''          | ''             | ''       | ''      | ''          | ''                  |
-			| ''                                     | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''      | ''          | ''                  |
-			| ''                                     | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Store' | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '1'         | 'Main Company' | '*'      | ''      | '38/Yellow' | '99098809009999'    |
+			| '$$OpeningEntry092008$$'               | ''            | ''                           | ''          | ''             | ''       | ''          | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''                           | ''          | ''             | ''       | ''          | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                           | ''          | ''             | ''       | ''          | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''          | ''          | ''                  |
+			| ''                                     | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Store'     | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '1'         | 'Main Company' | '*'      | ''          | '38/Yellow' | '99098809009999'    |
 		And I close current window
 	* Clear post Opening entry and check movements
 		And I activate "$$OpeningEntry092008$$" window			
@@ -1665,7 +1665,7 @@ Scenario: _092008 check serial lot number in the Opening entry
 	* Change quantity, post document and check movements
 		And I activate "$$OpeningEntry092008$$" window
 		And I go to line in "Inventory" table
-			| 'Item'     | 'Item key'  | 'Item serial/lot number' | 'Quantity' |
+			| 'Item'     | 'Item key'  | 'Item serial/lot number'             | 'Quantity' |
 			| 'Trousers' | '38/Yellow' | '99098809009999'                     | '1,000'    |
 		And I select current line in "Inventory" table
 		And I input "5,000" text in "Quantity" field of "Inventory" table
@@ -3145,7 +3145,7 @@ Scenario: _092035 product scanning with and without serial lot number
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Serials'      | 'Quantity' |
-			| 'Dress' | 'M/White'  | '89999; 89999' | '2,000'    |
+			| 'Dress' | 'M/White'  | '89999'        | '2,000'    |
 	* Check product scanning without own serial lot number
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in "InputFld" field
@@ -3165,7 +3165,7 @@ Scenario: _092035 product scanning with and without serial lot number
 		And I click "Ok" button
 		And "ItemList" table became equal
 			| 'Item'  | 'Item key' | 'Serials'      | 'Quantity' |
-			| 'Dress' | 'M/White'  | '89999; 89999' | '2,000'    |
+			| 'Dress' | 'M/White'  | '89999'        | '2,000'    |
 			| 'Dress' | 'XS/Blue'  | '10'           | '1,000'    |
 	* Check product scanning without own serial lot number (input  serial lot number by string)
 		And I click "Search by barcode (F7)" button
@@ -3182,7 +3182,7 @@ Scenario: _092035 product scanning with and without serial lot number
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Serials'      | 'Quantity' |
-			| 'Dress' | 'M/White'  | '89999; 89999' | '2,000'    |
+			| 'Dress' | 'M/White'  | '89999'        | '2,000'    |
 			| 'Dress' | 'XS/Blue'  | '10'           | '1,000'    |
 			| 'Dress' | 'L/Green'  | '10'           | '1,000'    |
 	* Check message if user scan new serial lot number

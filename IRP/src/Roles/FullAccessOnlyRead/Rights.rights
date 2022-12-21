@@ -7214,4 +7214,26 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Catalog.SourceOfOrigins</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R9010B_SourceOfOriginStock</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

@@ -332,4 +332,36 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <dimensions uuid="7cc7a75b-d9c8-4f28-8292-711110c6e34e">
+    <name>SerialLotNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Serial lot number</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.SerialLotNumbers</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="43d1a55c-8bfb-41f4-9a7f-f0a7bad8c0f0">
+    <name>SourceOfOrigin</name>
+    <synonym>
+      <key>en</key>
+      <value>Source of origin</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.SourceOfOrigins</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
 </mdclass:InformationRegister>

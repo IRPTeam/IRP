@@ -114,6 +114,7 @@
   <registerRecords>AccumulationRegister.R8012B_ConsignorInventory</registerRecords>
   <registerRecords>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</registerRecords>
   <registerRecords>AccumulationRegister.R8015T_ConsignorPrices</registerRecords>
+  <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1601,6 +1602,73 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <indexing>Index</indexing>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="0d4f83c5-b6cd-496a-ad7f-4a23b0102035">
+    <producedTypes>
+      <objectType typeId="e12958c1-bb48-41c1-bfce-8675daba9ba0" valueTypeId="3e02b84c-d824-414e-bd6a-e2ff23b970d3"/>
+      <rowType typeId="659a7b00-f31e-4871-8df6-ad486415c9b2" valueTypeId="6b330be1-8426-4956-a61a-2d23d3bd262c"/>
+    </producedTypes>
+    <name>SourceOfOrigins</name>
+    <synonym>
+      <key>en</key>
+      <value>Source of origins</value>
+    </synonym>
+    <attributes uuid="48a88cf5-8631-4e5b-88ca-ae1de8830aa7">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9cafbdeb-2c07-4f05-9261-3406b61003ce">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="650f5710-e873-4fab-98b2-a17da9be27cf">
+      <name>SourceOfOrigin</name>
+      <synonym>
+        <key>en</key>
+        <value>Source of origin</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SourceOfOrigins</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="30387464-0d87-49dc-81e8-a59143433d59">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>

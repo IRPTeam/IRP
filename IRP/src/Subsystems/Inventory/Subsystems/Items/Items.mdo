@@ -23,5 +23,6 @@
   <content>Document.ItemStockAdjustment</content>
   <content>Catalog.PartnerItems</content>
   <content>Catalog.SerialLotNumbers</content>
+  <content>Catalog.SourceOfOrigins</content>
   <parentSubsystem>Subsystem.Inventory</parentSubsystem>
 </mdclass:Subsystem>

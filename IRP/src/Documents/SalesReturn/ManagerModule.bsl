@@ -44,8 +44,21 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	SerialLotNumbers.Ref = &Ref
 	|;
 	|
+	|/////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SourceOfOrigins.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|INTO tmpSourceOfOrigins
+	|FROM
+	|	Document.SalesReturn.SourceOfOrigins AS SourceOfOrigins
+	|WHERE
+	|	SourceOfOrigins.Ref = &Ref
+	|;
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
+	|	tmpItemList.Key,
 	|	tmpItemList.Company,
 	|	tmpItemList.SalesDocument,
 	|	tmpItemList.Store,
@@ -56,10 +69,33 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|		ELSE tmpSerialLotNumbers.Quantity
 	|	END AS Quantity,
 	|	ISNULL(tmpSerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
+	|INTO tmpItemList_1
 	|FROM
 	|	tmpItemList AS tmpItemList
 	|		LEFT JOIN tmpSerialLotNumbers AS tmpSerialLotNumbers
-	|		ON tmpItemList.Key = tmpSerialLotNumbers.Key";
+	|		ON tmpItemList.Key = tmpSerialLotNumbers.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpItemList_1.Key,
+	|	tmpItemList_1.Company,
+	|	tmpItemList_1.SalesDocument,
+	|	tmpItemList_1.Store,
+	|	tmpItemList_1.ItemKey,
+	|	tmpItemList_1.SerialLotNumber,
+	|	CASE
+	|		WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
+	|			THEN ISNULL(tmpSourceOfOrigins.Quantity, 0)
+	|		ELSE tmpItemList_1.Quantity
+	|	END AS Quantity,
+	|	ISNULL(tmpSourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin
+	|FROM
+	|	tmpItemList_1 AS tmpItemList_1
+	|		LEFT JOIN tmpSourceOfOrigins AS tmpSourceOfOrigins
+	|		ON tmpItemList_1.Key = tmpSourceOfOrigins.Key
+	|		AND tmpItemList_1.SerialLotNumber = tmpSourceOfOrigins.SerialLotNumber";
+	
 	Query.SetParameter("Ref", Ref);
 	ItemListTable = Query.Execute().Unload();
 	ConsignorBatches = CommissionTradeServer.GetTableConsignorBatchWiseBalanceForSalesReturn(Parameters.Object, ItemListTable);
@@ -73,14 +109,50 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query = New Query();
 	Query.Text =
 	"SELECT
-	|	SalesReturn.Ref AS Document,
-	|	SalesReturn.Company AS Company,
-	|	SalesReturn.Ref.Date AS Period
+	|	SourceOfOrigins.Key AS Key,
+	|	CASE
+	|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+	|			THEN SourceOfOrigins.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END AS SerialLotNumber,
+	|	CASE
+	|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+	|			THEN SourceOfOrigins.SourceOfOrigin
+	|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+	|	END AS SourceOfOrigin,
+	
+	//--#--
+	|	SourceOfOrigins.SourceOfOrigin AS SourceOfOriginStock,
+	|	SourceOfOrigins.SerialLotNumber AS SerialLotNumberStock,
+	//--#--
+	
+	|	SUM(SourceOfOrigins.Quantity) AS Quantity
+	|INTO tmpSourceOfOrigins
 	|FROM
-	|	Document.SalesReturn AS SalesReturn
+	|	Document.SalesReturn.SourceOfOrigins AS SourceOfOrigins
 	|WHERE
-	|	SalesReturn.Ref = &Ref
+	|	SourceOfOrigins.Ref = &Ref
+	|
+	|GROUP BY
+	|	SourceOfOrigins.Key,
+	|	CASE
+	|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+	|			THEN SourceOfOrigins.SerialLotNumber
+	|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+	|	END,
+	|	CASE
+	|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+	|			THEN SourceOfOrigins.SourceOfOrigin
+	|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+	|	END,
+	
+	//--#--
+	|   SourceOfOrigins.SourceOfOrigin,
+	|   SourceOfOrigins.SerialLotNumber
+	//--#--
+	
 	|;
+	
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -106,6 +178,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	END AS SalesInvoiceIsFilled,
 	|	SalesReturnItemList.SalesInvoice AS SalesInvoice,
 	|	SalesReturnItemList.SalesInvoice.Company AS SalesInvoice_Company
+	|INTO tmpItemList
 	|FROM
 	|	Document.SalesReturn.ItemList AS SalesReturnItemList
 	|WHERE
@@ -126,13 +199,65 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|			THEN TRUE
 	|		ELSE FALSE
 	|	END,
-	|	VALUE(Enum.BatchDirection.Receipt)";
+	|	VALUE(Enum.BatchDirection.Receipt)
+	|;
+	|SELECT
+	|	SalesReturn.Ref AS Document,
+	|	SalesReturn.Company AS Company,
+	|	SalesReturn.Ref.Date AS Period
+	|FROM
+	|	Document.SalesReturn AS SalesReturn
+	|WHERE
+	|	SalesReturn.Ref = &Ref
+	|;
+	
+	|SELECT
+	|	tmpItemList.ItemKey,
+	|	tmpItemList.Store,
+	|	tmpItemList.Company,
+	|	tmpItemList.Quantity AS TotalQuantity,
+	|	tmpItemList.Period,
+	|	tmpItemList.Direction,
+	|	tmpItemList.Key,
+	|	tmpItemList.Currency,
+	|	tmpItemList.Amount AS TotalAmount,
+	|	tmpItemList.SalesInvoiceIsFilled,
+	|	tmpItemList.SalesInvoice,
+	|	tmpItemList.SalesInvoice_Company,
+	|	ISNULL(tmpSourceOfOrigins.Quantity, 0) AS QuantityBySourceOrigin,
+	|	CASE
+	|		WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
+	|			THEN ISNULL(tmpSourceOfOrigins.Quantity, 0)
+	|		ELSE tmpItemList.Quantity
+	|	END AS Quantity,
+	|	CASE
+	|		WHEN tmpItemList.Quantity <> 0
+	|			THEN CASE
+	|					WHEN ISNULL(tmpSourceOfOrigins.Quantity, 0) <> 0
+	|						THEN tmpItemList.Amount / tmpItemList.Quantity * ISNULL(tmpSourceOfOrigins.Quantity, 0)
+	|					ELSE tmpItemList.Amount
+	|				END
+	|		ELSE 0
+	|	END AS Amount,
+	|	ISNULL(tmpSourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin,
+	|	ISNULL(tmpSourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
+	//--#--
+	|	ISNULL(tmpSourceOfOrigins.SourceOfOriginStock, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOriginStock,
+	|	ISNULL(tmpSourceOfOrigins.SerialLotNumberStock, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumberStock	
+	//--#--
+	
+	|FROM
+	|	tmpItemList AS tmpItemList
+	|		LEFT JOIN tmpSourceOfOrigins AS tmpSourceOfOrigins
+	|		ON tmpItemList.Key = tmpSourceOfOrigins.Key";
 	
 	Query.SetParameter("Ref", Ref);
 	QueryResults = Query.ExecuteBatch();
 	
-	BatchesInfo   = QueryResults[0].Unload();
-	BatchKeysInfo = QueryResults[1].Unload();
+//	BatchesInfo   = QueryResults[0].Unload();
+//	BatchKeysInfo = QueryResults[1].Unload();	
+	BatchesInfo   = QueryResults[2].Unload();
+	BatchKeysInfo = QueryResults[3].Unload();
 	
 	DontCreateBatch = True;
 	For Each BatchKey In BatchKeysInfo Do
@@ -189,6 +314,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	BatchKeysInfo.Key,
+	|	BatchKeysInfo.TotalQuantity,
+	|	BatchKeysInfo.Quantity,
 	|	*
 	|INTO BatchKeysInfo
 	|FROM
@@ -198,7 +325,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	BatchKeysInfo.Key,
-	|	ISNULL(TaxListAmounts.AmountTax, 0) AS AmountTax,
+	|	case
+	|		when BatchKeysInfo.TotalQuantity <> 0
+	|			then (isnull(TaxListAmounts.AmountTax, 0) / BatchKeysInfo.TotalQuantity) * BatchKeysInfo.Quantity
+	|		else 0
+	|	end as AmountTax,
+//	|	ISNULL(TaxListAmounts.AmountTax, 0) AS AmountTax,
 	|	BatchKeysInfo.*
 	|FROM
 	|	BatchKeysInfo AS BatchKeysInfo
@@ -235,8 +367,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.CopyColumns();
 	If BatchKeysInfo_DataTable.Count() Then
 		BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.Copy(New Structure("CurrencyMovementType", CurrencyMovementType));
-		BatchKeysInfo_DataTableGrouped.GroupBy("Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice", 
-		"Quantity, Amount, AmountTax");	
+		//--#--
+		//BatchKeysInfo_DataTableGrouped.GroupBy("Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, 
+		BatchKeysInfo_DataTableGrouped.GroupBy("Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock,
+		//--#--
+		|Quantity, Amount, AmountTax");	
 	EndIf;
 	
 	BatchKeysInfo_DataTableGrouped.Columns.Add("BatchConsignor", New TypeDescription("DocumentRef.PurchaseInvoice"));
@@ -253,10 +388,16 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	For Each Row In BatchKeysInfo_DataTableGrouped Do
 		Filter = New Structure();
-		Filter.Insert("Company"       , Row.Company);	
-		Filter.Insert("Store"         , Row.Store);	
-		Filter.Insert("ItemKey"       , Row.ItemKey);	
-		Filter.Insert("SalesDocument" , Row.SalesInvoice);
+		Filter.Insert("Company"         , Row.Company);	
+		Filter.Insert("Store"           , Row.Store);	
+		Filter.Insert("ItemKey"         , Row.ItemKey);	
+		//--#--
+		//Filter.Insert("SourceOfOrigin"  , Row.SourceOfOrigin);	
+		//Filter.Insert("SerialLotNumber" , Row.SerialLotNumber);	
+		Filter.Insert("SourceOfOrigin"  , Row.SourceOfOriginStock);	
+		Filter.Insert("SerialLotNumber" , Row.SerialLotNumberStock);	
+		//--#--
+		Filter.Insert("SalesDocument"   , Row.SalesInvoice);
 		
 		FilteredRows = ConsignorBatches.FindRows(Filter);
 		
@@ -427,6 +568,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(GoodReceiptInfo());
 	QueryArray.Add(Taxes());
 	QueryArray.Add(SerialLotNumbers());
+	QueryArray.Add(SourceOfOrigins());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
@@ -461,6 +603,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
 	QueryArray.Add(R8012B_ConsignorInventory());
 	QueryArray.Add(R8014T_ConsignorSales());
+	QueryArray.Add(R9010B_SourceOfOriginStock());
 	Return QueryArray;
 EndFunction
 
@@ -639,6 +782,75 @@ Function Taxes()
 		|		ON ItemList.Key = TaxList.Key
 		|		AND ItemList.Ref = &Ref
 		|		AND TaxList.Ref = &Ref";
+EndFunction
+
+Function SourceOfOrigins()
+	Return
+		"SELECT
+		|	SourceOfOrigins.Key AS Key,
+		|	CASE
+		|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END AS SerialLotNumber,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END AS SourceOfOrigin,
+		|	SourceOfOrigins.SourceOfOrigin AS SourceOfOriginStock,
+		|	SourceOfOrigins.SerialLotNumber AS SerialLotNumberStock,
+		|	SUM(SourceOfOrigins.Quantity) AS Quantity
+		|INTO SourceOfOrigins
+		|FROM
+		|	Document.SalesReturn.SourceOfOrigins AS SourceOfOrigins
+		|WHERE
+		|	SourceOfOrigins.Ref = &Ref
+		|GROUP BY
+		|	SourceOfOrigins.Key,
+		|	CASE
+		|		WHEN SourceOfOrigins.SerialLotNumber.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SerialLotNumber
+		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
+		|	END,
+		|	CASE
+		|		WHEN SourceOfOrigins.SourceOfOrigin.BatchBalanceDetail
+		|			THEN SourceOfOrigins.SourceOfOrigin
+		|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
+		|	END,
+		|	SourceOfOrigins.SourceOfOrigin,
+		|	SourceOfOrigins.SerialLotNumber";
+EndFunction
+
+Function R9010B_SourceOfOriginStock()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	SourceOfOrigins.SourceOfOriginStock AS SourceOfOrigin,
+		|	SourceOfOrigins.SerialLotNumber,
+		|	SUM(SourceOfOrigins.Quantity) AS Quantity
+		|INTO R9010B_SourceOfOriginStock
+		|FROM
+		|	ItemList AS ItemList
+		|		INNER JOIN SourceOfOrigins AS SourceOfOrigins
+		|		ON ItemList.Key = SourceOfOrigins.Key
+		|		AND NOT SourceOfOrigins.SourceOfOriginStock.Ref IS NULL
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	SourceOfOrigins.SourceOfOriginStock,
+		|	SourceOfOrigins.SerialLotNumber";
 EndFunction
 
 Function R2001T_Sales()
@@ -1155,7 +1367,9 @@ Function T6020S_BatchKeysInfo()
 		|	SUM(BatchKeysInfo.Quantity) AS Quantity,
 		|	SUM(BatchKeysInfo.Amount) AS Amount,
 		|	SUM(BatchKeysInfo.AmountTax) AS AmountTax,
-		|	BatchKeysInfo.BatchConsignor
+		|	BatchKeysInfo.BatchConsignor,
+		|	BatchKeysInfo.SerialLotNumber,
+		|	BatchKeysInfo.SourceOfOrigin
 		|INTO T6020S_BatchKeysInfo
 		|FROM
 		|	BatchKeysInfo
@@ -1170,7 +1384,9 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo.SalesInvoice,
 		|	BatchKeysInfo.ItemKey,
 		|	BatchKeysInfo.Store,
-		|	BatchKeysInfo.BatchConsignor
+		|	BatchKeysInfo.BatchConsignor,
+		|	BatchKeysInfo.SerialLotNumber,
+		|	BatchKeysInfo.SourceOfOrigin
 		|
 		|UNION ALL
 		|
@@ -1183,12 +1399,24 @@ Function T6020S_BatchKeysInfo()
 		|	UNDEFINED,
 		|	ItemList.ItemKey,
 		|	ItemList.TradeAgentStore,
-		|	SUM(ItemList.Quantity),
+		
+		|	SUM(CASE
+		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
+		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
+		|		ELSE ItemList.Quantity
+		|	END) AS Quantity,
+		
+//		|	SUM(ItemList.Quantity),
 		|	0,
 		|	0,
-		|	UNDEFINED
+		|	UNDEFINED,
+		|	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
+		|	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin
+	
 		|FROM
 		|	ItemList AS ItemList
+		|LEFT JOIN SourceOfOrigins AS SourceOfOrigins
+		|		ON ItemList.Key = SourceOfOrigins.Key
 		|WHERE
 		|	NOT ItemList.IsService
 		|	AND ItemList.IsReturnFromTradeAgent
@@ -1197,7 +1425,9 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Company,
 		|	VALUE(Enum.BatchDirection.Expense),
 		|	ItemList.ItemKey,
-		|	ItemList.TradeAgentStore";
+		|	ItemList.TradeAgentStore,
+		|	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)),
+		|	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef))";
 EndFunction
 
 Function R8010B_TradeAgentInventory()
@@ -1253,6 +1483,7 @@ Function R8013B_ConsignorBatchWiseBalance()
 		|	ConsignorBatches.Store,
 		|	ConsignorBatches.ItemKey,
 		|	ConsignorBatches.SerialLotNumber,
+		|	ConsignorBatches.SourceOfOrigin,
 		|	SUM(ConsignorBatches.Quantity) AS Quantity
 		|INTO R8013B_ConsignorBatchWiseBalance
 		|FROM
@@ -1265,6 +1496,7 @@ Function R8013B_ConsignorBatchWiseBalance()
 		|	ConsignorBatches.Batch,
 		|	ConsignorBatches.Store,
 		|	ConsignorBatches.SerialLotNumber,
+		|	ConsignorBatches.SourceOfOrigin,
 		|	ConsignorBatches.ItemKey";
 EndFunction
 		
@@ -1301,6 +1533,7 @@ Function R8014T_ConsignorSales()
 		|	ConsignorBatches.SalesDocument AS SalesInvoice,
 		|	ConsignorBatches.ItemKey,
 		|	ConsignorBatches.SerialLotNumber,
+		|	ConsignorBatches.SourceOfOrigin,
 		|	SUM(ConsignorBatches.Quantity) AS Quantity,
 		|	ConsignorBatches.Batch AS BatchConsignor
 		|INTO ReturnedConsignorBatches
@@ -1310,6 +1543,7 @@ Function R8014T_ConsignorSales()
 		|	ConsignorBatches.SalesDocument,
 		|	ConsignorBatches.ItemKey,
 		|	ConsignorBatches.SerialLotNumber,
+		|	ConsignorBatches.SourceOfOrigin,
 		|	ConsignorBatches.Batch
 		|;
 		|////////////////////////////////////////////////////////////////////////////////
@@ -1319,13 +1553,14 @@ Function R8014T_ConsignorSales()
 		|FROM
 		|	AccumulationRegister.R8014T_ConsignorSales AS ConsignorSales
 		|WHERE
-		|	(Company, Recorder, PurchaseInvoice, ItemKey, SerialLotNumber) IN
+		|	(Company, Recorder, PurchaseInvoice, ItemKey, SerialLotNumber, SourceOfOrigin) IN
 		|		(SELECT
 		|			ReturnedConsignorBatches.Company,
 		|			ReturnedConsignorBatches.SalesInvoice,
 		|			ReturnedConsignorBatches.BatchConsignor,
 		|			ReturnedConsignorBatches.ItemKey,
-		|			ReturnedConsignorBatches.SerialLotNumber
+		|			ReturnedConsignorBatches.SerialLotNumber,
+		|			ReturnedConsignorBatches.SourceOfOrigin
 		|		FROM
 		|			ReturnedConsignorBatches AS ReturnedConsignorBatches)
 		|	AND ConsignorSales.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
@@ -1357,5 +1592,6 @@ Function R8014T_ConsignorSales()
 		|		AND ReturnedConsignorBatches.SalesInvoice = ConsignorSales.SalesInvoice
 		|		AND ReturnedConsignorBatches.ItemKey = ConsignorSales.ItemKey
 		|		AND ReturnedConsignorBatches.SerialLotNumber = ConsignorSales.SerialLotNumber
+		|		AND ReturnedConsignorBatches.SourceOfOrigin = ConsignorSales.SourceOfOrigin
 		|		AND ReturnedConsignorBatches.BatchConsignor = ConsignorSales.PurchaseInvoice";
 EndFunction	

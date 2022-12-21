@@ -795,6 +795,13 @@
         <value>116</value>
       </code>
     </items>
+    <items id="db94bd26-6e76-456d-ac94-596e062dcc79">
+      <name>Catalog_SourceOfOrigins</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>117</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

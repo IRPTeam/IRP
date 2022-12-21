@@ -3025,6 +3025,12 @@ Scenario: Create document RetailSalesReceipt and RetailReturnReceipt (consignor)
 		| 'e1cib/data/Document.RetailSalesReceipt?ref=b78bf3a601f806a711ed640da24b72a4' | '8b0b91bc-33a7-4a41-a6f9-c2759ac4de23' | '8b0b91bc-33a7-4a41-a6f9-c2759ac4de23' | 1          | ''      | ''            | ''         | 'e1cib/data/Catalog.RowIDs?ref=b78bf3a601f806a711ed640da24b72a2' | '                                    ' |
 		| 'e1cib/data/Document.RetailSalesReceipt?ref=b78bf3a601f806a711ed640da24b72a4' | 'f3d688c7-7c7b-4432-9725-06721e496320' | 'f3d688c7-7c7b-4432-9725-06721e496320' | 4          | ''      | ''            | ''         | 'e1cib/data/Catalog.RowIDs?ref=b78bf3a601f806a711ed640da24b72a3' | '                                    ' |
 
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                         | 'Key'                                  | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b78bf3a601f806a711ed640da24b72a4' | '6ebea8a7-366d-409c-84a7-19f5714085e9' | ''                                                                         | ''               | 2          |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b78bf3a601f806a711ed640da24b72a4' | '8b0b91bc-33a7-4a41-a6f9-c2759ac4de23' | ''                                                                         | ''               | 1          |
+		| 'e1cib/data/Document.RetailSalesReceipt?ref=b78bf3a601f806a711ed640da24b72a4' | 'f3d688c7-7c7b-4432-9725-06721e496320' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b781cf3f5e36b25611ecd69f89585360' | ''               | 4          |
+
 
 
 Scenario: Create document RetailSalesReceipt objects (check movements)

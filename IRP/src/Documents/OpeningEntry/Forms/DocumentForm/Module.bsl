@@ -223,6 +223,40 @@ EndProcedure
 
 #EndRegion
 
+#Region SOURCE_OF_ORIGINS
+
+&AtClient
+Procedure InventorySourceOfOriginStartChoice(Item, ChoiceData, StandardProcessing)
+	CurrentData = Items.Inventory.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item"    , CurrentData.Item);
+	FormParameters.Insert("ItemKey" , CurrentData.ItemKey);
+
+	SourceOfOriginClient.StartChoice(Item, ChoiceData, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+&AtClient
+Procedure InventorySourceOfOriginEditTextChange(Item, Text, StandardProcessing)
+	CurrentData = Items.Inventory.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item"    , CurrentData.Item);
+	FormParameters.Insert("ItemKey" , CurrentData.ItemKey);
+
+	SourceOfOriginClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+#EndRegion
+
 #Region INVENTORY_QUANTITY
 
 &AtClient
@@ -1096,6 +1130,40 @@ EndProcedure
 
 #EndRegion
 
+#Region SOURCE_OF_ORIGINS
+
+&AtClient
+Procedure ShipmentToTradeAgentSourceOfOriginStartChoice(Item, ChoiceData, StandardProcessing)
+	CurrentData = Items.ShipmentToTradeAgent.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item"    , CurrentData.Item);
+	FormParameters.Insert("ItemKey" , CurrentData.ItemKey);
+
+	SourceOfOriginClient.StartChoice(Item, ChoiceData, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+&AtClient
+Procedure ShipmentToTradeAgentSourceOfOriginEditTextChange(Item, Text, StandardProcessing)
+	CurrentData = Items.ShipmentToTradeAgent.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item"    , CurrentData.Item);
+	FormParameters.Insert("ItemKey" , CurrentData.ItemKey);
+
+	SourceOfOriginClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #EndRegion
@@ -1199,6 +1267,40 @@ Procedure ReceiptFromConsignorSerialLotNumberEditTextChange(Item, Text, Standard
 	FormParameters.Insert("ItemKey" , CurrentData.ItemKey);
 
 	SerialLotNumberClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+#EndRegion
+
+#Region SOURCE_OF_ORIGIN
+
+&AtClient
+Procedure ReceiptFromConsignorSourceOfOriginStartChoice(Item, ChoiceData, StandardProcessing)
+	CurrentData = Items.ReceiptFromConsignor.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item"    , CurrentData.Item);
+	FormParameters.Insert("ItemKey" , CurrentData.ItemKey);
+
+	SourceOfOriginClient.StartChoice(Item, ChoiceData, StandardProcessing, ThisObject, FormParameters);
+EndProcedure
+
+&AtClient
+Procedure ReceiptFromConsignorSourceOfOriginEditTextChange(Item, Text, StandardProcessing)
+	CurrentData = Items.ReceiptFromConsignor.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	FormParameters = New Structure();
+	FormParameters.Insert("ItemType", Undefined);
+	FormParameters.Insert("Item"    , CurrentData.Item);
+	FormParameters.Insert("ItemKey" , CurrentData.ItemKey);
+
+	SourceOfOriginClient.EditTextChange(Item, Text, StandardProcessing, ThisObject, FormParameters);
 EndProcedure
 
 #EndRegion

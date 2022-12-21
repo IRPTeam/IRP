@@ -9,7 +9,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	List.Parameters.SetParameterValue("ItemType", Catalogs.ItemTypes.EmptyRef());
 	
 	If Parameters.Property("SerialLotNumberOwner") Then
-		SerialLotNumberOwner = Parameters.SerialLotNumberOwner;
+		ThisObject.SerialLotNumberOwner = Parameters.SerialLotNumberOwner;
 		If TypeOf(Parameters.SerialLotNumberOwner) = Type("CatalogRef.ItemKeys") Then
 			List.Parameters.SetParameterValue("isItemKey", True);
 			List.Parameters.SetParameterValue("ItemKeyRef", Parameters.SerialLotNumberOwner);

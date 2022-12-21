@@ -2394,7 +2394,22 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
+	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key
+	|;
+	|
+	|///////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.SalesInvoice.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key";
+
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -2404,6 +2419,7 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	TableTaxList          = QueryResults[3].Unload();
 	TableSpecialOffers    = QueryResults[4].Unload();
 	TableSerialLotNumbers = QueryResults[5].Unload();
+	TableSourceOfOrigins  = QueryResults[6].Unload();
 
 	Tables = New Structure();
 	Tables.Insert("ItemList", TableItemList);
@@ -2411,6 +2427,7 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Tables.Insert("TaxList", TableTaxList);
 	Tables.Insert("SpecialOffers", TableSpecialOffers);
 	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
+	Tables.Insert("SourceOfOrigins" , TableSourceOfOrigins);
 
 	AddTables(Tables);
 
@@ -2996,8 +3013,22 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Document.PurchaseInvoice.SerialLotNumbers AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
-
+	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.PurchaseInvoice.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key";
+	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
@@ -3006,6 +3037,7 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	TableTaxList          = QueryResults[3].Unload();
 	TableSpecialOffers    = QueryResults[4].Unload();
 	TableSerialLotNumbers = QueryResults[5].Unload();
+	TableSourceOfOrigins  = QueryResults[6].Unload();
 
 	Tables = New Structure();
 	Tables.Insert("ItemList", TableItemList);
@@ -3013,6 +3045,7 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Tables.Insert("TaxList", TableTaxList);
 	Tables.Insert("SpecialOffers", TableSpecialOffers);
 	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
+	Tables.Insert("SourceOfOrigins" , TableSourceOfOrigins);
 
 	AddTables(Tables);
 
@@ -4038,7 +4071,21 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Payments.Commission,
 	|	Payments.PaymentTerminal,
 	|	Payments.PaymentType,
-	|	Payments.Percent";
+	|	Payments.Percent
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.RetailSalesReceipt.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key";
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -4049,14 +4096,16 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	TableSpecialOffers    = QueryResults[4].Unload();
 	TableSerialLotNumbers = QueryResults[5].Unload();
 	TablePayments         = QueryResults[6].Unload();
+	TableSourceOfOrigins  = QueryResults[7].Unload();
 
 	Tables = New Structure();
-	Tables.Insert("ItemList", TableItemList);
-	Tables.Insert("RowIDInfo", TableRowIDInfo);
-	Tables.Insert("TaxList", TableTaxList);
-	Tables.Insert("SpecialOffers", TableSpecialOffers);
-	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
-	Tables.Insert("Payments", TablePayments);
+	Tables.Insert("ItemList"         , TableItemList);
+	Tables.Insert("RowIDInfo"        , TableRowIDInfo);
+	Tables.Insert("TaxList"          , TableTaxList);
+	Tables.Insert("SpecialOffers"    , TableSpecialOffers);
+	Tables.Insert("SerialLotNumbers" , TableSerialLotNumbers);
+	Tables.Insert("Payments"         , TablePayments);
+	Tables.Insert("SourceOfOrigins"  , TableSourceOfOrigins);
 
 	AddTables(Tables);
 
@@ -4402,6 +4451,10 @@ Procedure AddTables(Tables)
 
 	If Not Tables.Property("Payments") Then
 		Tables.Insert("Payments", GetEmptyTable_Payments());
+	EndIf;
+	
+	If Not Tables.Property("SourceOfOrigins") Then
+		Tables.Insert("SourceOfOrigins", GetEmptyTable_SourceOfOrigins());
 	EndIf;
 EndProcedure
 
@@ -9436,6 +9489,7 @@ Function JoinAllExtractedData(ArrayOfData)
 	Tables.Insert("SerialLotNumbers"      , GetEmptyTable_SerialLotNumbers());
 	Tables.Insert("Payments"              , GetEmptyTable_Payments());
 	Tables.Insert("Materials"             , GetEmptyTable_Materials());
+	Tables.Insert("SourceOfOrigins"       , GetEmptyTable_SourceOfOrigins());
 	
 	For Each Data In ArrayOfData Do
 		For Each Table In Tables Do
@@ -9458,6 +9512,7 @@ Function GetTableNames_Refreshable()
 	NamesArray.Add("SerialLotNumbers");
 	NamesArray.Add("Payments");
 	NamesArray.Add("Materials");
+	NamesArray.Add("SourceOfOrigins");
 	Return NamesArray;
 EndFunction
 
@@ -9750,6 +9805,23 @@ Function GetEmptyTable_Materials()
 EndFunction
 
 #EndRegion
+
+#Region EmptyTables_SourceOfOrigins
+
+Function GetColumnNames_SourceOfOrigins()
+	Return "Key, Ref, SerialLotNumber, SourceOfOrigin";
+EndFunction
+
+Function GetColumnNamesSum_SourceOfOrigins()
+	Return "Quantity";
+EndFunction
+
+Function GetEmptyTable_SourceOfOrigins()
+	Return GetEmptyTable(GetColumnNames_SourceOfOrigins() + ", " + GetColumnNamesSum_SourceOfOrigins());
+EndFunction
+
+#EndRegion
+
 
 #EndRegion
 

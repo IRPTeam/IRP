@@ -34,10 +34,15 @@ Procedure AddNewSerialLotNumbers(Result, Parameters, AddNewLot = False, AddInfo 
 	EndIf;
 	
 	For Each Row In Result.SerialLotNumbers Do
-		NewRow = Parameters.Object.SerialLotNumbers.Add();
+		FoundRows = Parameters.Object.SerialLotNumbers.FindRows(New Structure("Key, SerialLotNumber", Result.RowKey, Row.SerialLotNumber));
+		If FoundRows.Count() Then
+			NewRow = FoundRows[0];
+		Else
+			NewRow = Parameters.Object.SerialLotNumbers.Add();
+		EndIf;
 		NewRow.Key = Result.RowKey;
 		NewRow.SerialLotNumber = Row.SerialLotNumber;
-		NewRow.Quantity = Row.Quantity;
+		NewRow.Quantity = NewRow.Quantity + Row.Quantity;
 	EndDo;
 	
 	TotalQuantity = 0;
@@ -56,6 +61,7 @@ Procedure AddNewSerialLotNumbers(Result, Parameters, AddNewLot = False, AddInfo 
 			ViewClient_V2.SetItemListQuantity(Parameters.Object, Parameters.Form, ArrayOfItemListRows[0], TotalQuantity);
 		EndIf;
 	EndIf;
+	SourceOfOriginClient.UpdateSourceOfOriginsQuantity(Parameters.Object, Parameters.Form);
 EndProcedure
 
 Procedure OnFinishEditSerialLotNumbers(Result, Parameters) Export
@@ -70,6 +76,7 @@ Procedure PresentationClearing(Object, Form, Item, AddInfo = Undefined) Export
 	CurrentData.SerialLotNumberIsFilling = False;
 	DeleteUnusedSerialLotNumbers(Object, CurrentData.Key);
 	UpdateSerialLotNumbersTree(Object, Form);
+	SourceOfOriginClient.UpdateSourceOfOriginsQuantity(Object, Form);
 EndProcedure
 
 Procedure PresentationClearingOnCopy(Object, Form, Item, AddInfo = Undefined) Export

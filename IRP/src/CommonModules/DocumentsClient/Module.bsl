@@ -396,6 +396,25 @@ Procedure SerialLotNumbersEditTextChange(Object, Form, Item, Text, StandardProce
 	Item.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
 EndProcedure
 
+Procedure SourceOfOriginsEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters = Undefined,
+	AdditionalParameters = Undefined) Export
+
+	If ArrayOfFilters = Undefined Then
+		ArrayOfFilters = New Array();
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Inactive", True, ComparisonType.Equal));
+	EndIf;
+
+	If AdditionalParameters = Undefined Then
+		AdditionalParameters = New Structure();
+	EndIf;
+
+	ArrayOfChoiceParameters = New Array();
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.CustomSearchFilter"   , DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters)));
+	ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.AdditionalParameters" , DocumentsServer.SerializeArrayOfFilters(AdditionalParameters)));
+	Item.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
+EndProcedure
+
 #EndRegion
 
 #Region Status
@@ -473,6 +492,8 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	Form 	= AddInfo.Form;
 	
 	UseSerialLotNumbers = Object.Property("SerialLotNumbers");
+	UseSourceOfOrigins  = Object.Property("SourceOfOrigins");
+	
 	isSerialLotNumberAtRow = False;
 	
 	ObjectRefType = TypeOf(Object.Ref);
@@ -527,11 +548,29 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			ExistingRows = Object.ItemList.FindRows(FilterStructure);	
 		EndIf;
 		
-		If ExistingRows.Count() Then
+		If ExistingRows.Count() Then // increment Quantity in existing row
 			Row = ExistingRows[0];
 			
-			If UseInventoryOrigin Then
-				If UseSerialLotNumbers Then
+			_UpdateQuantity = True;
+			
+			If UseInventoryOrigin Then 
+				If UseSourceOfOrigins Then // with InventoryOrigin and SourceOfOrigins
+					If ValueIsFilled(ResultElement.SourceOfOrigin) Then
+						SourceOfOriginsArray = New Array();
+						SourceOfOrigins = New Structure("SerialLotNumber, SourceOfOrigin, Quantity");
+						If ValueIsFilled(ResultElement.SerialLotNumber) Then
+							SourceOfOrigins.SerialLotNumber = ResultElement.SerialLotNumber;
+						EndIf;
+						SourceOfOrigins.SourceOfOrigin = ResultElement.SourceOfOrigin;
+						SourceOfOrigins.Quantity = 1;
+						SourceOfOriginsArray.Add(SourceOfOrigins);
+						SourceOfOriginsStructure = New Structure("RowKey, SourceOfOrigins", Row.Key, SourceOfOriginsArray);
+
+						SourceOfOriginClient.AddNewSourceOfOrigins(SourceOfOriginsStructure, AddInfo);
+					EndIf;
+				EndIf;
+				
+				If UseSerialLotNumbers Then // with InventoryOrigin and SerialLotNumbers
 					If ValueIsFilled(ResultElement.SerialLotNumber) Then
 						SerialLotNumbersArray = New Array();
 						SerialLotNumbers = New Structure("SerialLotNumber, Quantity");
@@ -541,21 +580,25 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 						SerialLotNumbersStructure = New Structure("RowKey, SerialLotNumbers", Row.Key, SerialLotNumbersArray);
 
 						SerialLotNumberClient.AddNewSerialLotNumbers(SerialLotNumbersStructure, AddInfo, True, AddInfo);
-					Else
-						ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);
+						_UpdateQuantity = False;
 					EndIf;
-				Else
-					ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);	
 				EndIf;
-			Else
+				
+				If _UpdateQuantity Then
+					ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);
+				EndIf;
+				
+			Else // NOT UseInventoryOrigin
+			
 				If ObjectRefType = Type("DocumentRef.PhysicalInventory")
 					Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
 					ViewClient_V2.SetItemListPhysCount(Object, Form, Row, Row.PhysCount + ResultElement.Quantity);
 				Else
 					ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);
 				EndIf;
+				
 			EndIf;
-		Else
+		Else // add new row to ItemList
 			FillingValues = New Structure();
 			FillingValues.Insert("Item"     , ResultElement.Item);
 			FillingValues.Insert("ItemKey"  , ResultElement.ItemKey);
@@ -571,6 +614,24 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			
 			Row = ViewClient_V2.ItemListAddFilledRow(Object, Form, FillingValues);
 			
+			// SourceOfOrigin AND InventoryOrigin
+			If UseInventoryOrigin Then
+				If UseSourceOfOrigins And ValueIsFilled(ResultElement.SourceOfOrigin) Then
+					SourceOfOriginsArray = New Array();
+					SourceOfOrigins = New Structure("SerialLotNumber, SourceOfOrigin, Quantity");
+					If ValueIsFilled(ResultElement.SerialLotNumber) Then
+						SourceOfOrigins.SerialLotNumber = ResultElement.SerialLotNumber;
+					EndIf;
+					SourceOfOrigins.SourceOfOrigin = ResultElement.SourceOfOrigin;
+					SourceOfOrigins.Quantity = 1;
+					SourceOfOriginsArray.Add(SourceOfOrigins);
+					SourceOfOriginsStructure = New Structure("RowKey, SourceOfOrigins", Row.Key, SourceOfOriginsArray);
+
+					SourceOfOriginClient.AddNewSourceOfOrigins(SourceOfOriginsStructure, AddInfo);
+				EndIf;
+			EndIf;
+			
+			// SerialLotNumbers AND InventoryOrigin
 			If UseInventoryOrigin Then
 				If UseSerialLotNumbers And ValueIsFilled(ResultElement.SerialLotNumber) Then
 					SerialLotNumbersArray = New Array();
@@ -590,9 +651,10 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			
 		EndIf;
 		
+		// SerialLotNumbers and NOT InventoryOrigin
 		If UseSerialLotNumbers Then
 			If ValueIsFilled(ResultElement.SerialLotNumber) Then
-				If Not UseInventoryOrigin Then
+				If Not UseInventoryOrigin Then // serial lot number for documents without inventory origin
 					SerialLotNumbersArray = New Array();
 					SerialLotNumbers = New Structure("SerialLotNumber, Quantity");
 					SerialLotNumbers.SerialLotNumber = ResultElement.SerialLotNumber;
@@ -613,7 +675,29 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			EndIf;
 		EndIf;
 		
-	EndDo;
+		// SourceOfOrigins and NOT InventoryOrigin
+		If UseSourceOfOrigins Then
+			If ValueIsFilled(ResultElement.SourceOfOrigin) Then
+				If Not UseInventoryOrigin Then // source of origins for documents without inventory origin
+					SourceOfOriginsArray = New Array();
+					SourceOfOrigins = New Structure("SerialLotNumber, SourceOfOrigin, Quantity");
+					If ValueIsFilled(ResultElement.SerialLotNumber) Then
+						SourceOfOrigins.SerialLotNumber = ResultElement.SerialLotNumber;
+					EndIf;
+					SourceOfOrigins.SourceOfOrigin = ResultElement.SourceOfOrigin;
+					SourceOfOrigins.Quantity = 1;
+					SourceOfOriginsArray.Add(SourceOfOrigins);
+					SourceOfOriginsStructure = New Structure("RowKey, SourceOfOrigins", Row.Key, SourceOfOriginsArray);
+
+					SourceOfOriginClient.AddNewSourceOfOrigins(SourceOfOriginsStructure, AddInfo);
+				EndIf;
+			//ElsIf ResultElement.UseSourceOfOrigin Then
+				// need open form for choice source of origin
+			EndIf;
+		// ElsIf <> for document without tabular section SourceOfOrigins
+		EndIf;
+		
+	EndDo; // Result
 	
 EndProcedure
 
@@ -914,6 +998,31 @@ Procedure SerialLotNumberStartChoice(Object, Form, Item, ChoiceData, StandardPro
 
 	If OpenSettings.FormName = Undefined Then
 		OpenSettings.FormName = "Catalog.SerialLotNumbers.ChoiceForm";
+	EndIf;
+
+	If OpenSettings.FormFilters = Undefined Then
+		FormFilters = New Array();
+		FormFilters.Add(CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+		FormFilters.Add(CreateFilterItem("Inactive", True, DataCompositionComparisonType.NotEqual));
+	EndIf;
+
+	If OpenSettings.FormParameters = Undefined Then
+		FormParameters = New Structure();
+		FormParameters.Insert("FillingData", New Structure());
+	EndIf;
+
+	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure SourceOfOriginsStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings = Undefined) Export
+	If OpenSettings = Undefined Then
+		OpenSettings = GetOpenSettingsStructure();
+	EndIf;
+
+	StandardProcessing = False;
+
+	If OpenSettings.FormName = Undefined Then
+		OpenSettings.FormName = "Catalog.SourceOfOrigins.ChoiceForm";
 	EndIf;
 
 	If OpenSettings.FormFilters = Undefined Then
@@ -1232,7 +1341,8 @@ Function GetFormItemNames()
 				|ProductionsKey,
 				|ConsignorBatches,
 				|ShipmentToTradeAgentKey, ShipmentToTradeAgentUseSerialLotNumber,
-				|ReceiptFromConsignorKey, ReceiptFromConsignorUseSerialLotNumber";
+				|ReceiptFromConsignorKey, ReceiptFromConsignorUseSerialLotNumber,
+				|SourceOfOrigins";
 	Return ItemNames;
 EndFunction	
 

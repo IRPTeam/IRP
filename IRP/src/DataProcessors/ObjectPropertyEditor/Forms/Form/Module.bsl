@@ -711,6 +711,7 @@ Procedure LoadNewColumns(Form)
 			TypeOption_Table = CharacteristicRecord.CharacteristicTypes;
 			TypeOption_FieldRef = CharacteristicRecord.KeyField;
 			TypeOption_FieldFilter = CharacteristicRecord.TypesFilterField;
+			//@skip-warning
 			TypeOption_FilterValue = CharacteristicRecord.TypesFilterValue;
 		EndIf;
 	EndDo;
@@ -766,6 +767,7 @@ Procedure LoadNewColumns(Form)
 		ArrayType.Add(TypeOf(AvailableItems[0]));
 		AvailableItems_Table.Columns.Add("Property", New TypeDescription(ArrayType));
 		For Each AvailableItem In AvailableItems Do
+			//@skip-warning
 			AvailableItems_Table.Add().Property = AvailableItem;
 		EndDo;
 		Query.SetParameter("AvailableItems", AvailableItems_Table);
@@ -981,23 +983,6 @@ Function isChartOfCharacteristicTypes(ValueTypes)
 		EndIf;
 	EndDo;
 	Return False;
-EndFunction
-
-// Get object property.
-// 
-// Parameters:
-//  Object - Arbitrary - Object
-//  Property - String - Property
-// 
-// Returns:
-//  Arbitrary, Undefined
-&AtClientAtServerNoContext
-Function GetObjectProperty(Object, Property)
-	Try
-		Return Object[Property];
-	Except
-		Return Undefined;
-	EndTry;
 EndFunction
 
 // Get field key from ref.

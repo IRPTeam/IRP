@@ -7,6 +7,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	ChoiceData.Add(Enums.IncomingPaymentTransactionType.CashTransferOrder);
 	ChoiceData.Add(Enums.IncomingPaymentTransactionType.TransferFromPOS);
 	ChoiceData.Add(Enums.IncomingPaymentTransactionType.ReturnFromVendor);
+	ChoiceData.Add(Enums.IncomingPaymentTransactionType.CustomerAdvance);
 	If Parameters.Filter.Property("Ref") And TypeOf(Parameters.Filter.Ref) = Type("DocumentRef.BankReceipt") Then
 		ChoiceData.Add(Enums.IncomingPaymentTransactionType.PaymentFromCustomerByPOS);
 		ChoiceData.Add(Enums.IncomingPaymentTransactionType.ReceiptByCheque);

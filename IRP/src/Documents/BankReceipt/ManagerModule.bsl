@@ -208,6 +208,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3035T_CashPlanning.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R2023B_AdvancesFromRetailCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
@@ -303,6 +304,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(R3050T_PosCashBalances());
 	QueryArray.Add(R3021B_CashInTransitIncoming());
+	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
 	Return QueryArray;
 EndFunction
 
@@ -388,6 +390,8 @@ Function PaymentList()
 	|		IsCashTransferOrder,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.ReturnFromVendor) AS IsReturnFromVendor,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CustomerAdvance) AS IsCustomerAdvance,
+	|	PaymentList.RetailCustomer AS RetailCustomer,
 	|	PaymentList.Ref.Branch AS Branch,
 	|	PaymentList.LegalNameContract AS LegalNameContract,
 	|	PaymentList.Order,
@@ -524,6 +528,23 @@ Function R2020B_AdvancesFromCustomers()
 		   |WHERE
 		   |	OffsetOfAdvances.Document = &Ref";
 EndFunction
+
+Function R2023B_AdvancesFromRetailCustomers()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.RetailCustomer,
+		|	PaymentList.Amount,
+		|	PaymentList.Key
+		|INTO R2023B_AdvancesFromRetailCustomers
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsCustomerAdvance";
+EndFunction	
 
 Function R1020B_AdvancesToVendors()
 	Return "SELECT
@@ -795,7 +816,8 @@ Function R3050T_PosCashBalances()
 	|FROM
 	|	PaymentList AS PaymentList
 	|WHERE
-	|	PaymentList.IsPaymentFromCustomerByPOS";
+	|	PaymentList.IsPaymentFromCustomerByPOS
+	|	OR PaymentList.IsCustomerAdvance";
 EndFunction
 
 Function R3021B_CashInTransitIncoming()

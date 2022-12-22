@@ -20,6 +20,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Object.Amount = Parameters.Amount;
 	Object.Branch = Parameters.Branch;
 	Object.Workstation = Parameters.Workstation;
+	ThisObject.IsAdvance = Parameters.IsAdvance;
 	FillPaymentTypes();
 	
 EndProcedure
@@ -42,17 +43,20 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	CardPaymentFilter.Insert("PaymentTypeEnum", Enums.PaymentTypes.Card);
 	CardAmounts = PaymentsValue.Copy(CardPaymentFilter, "Amount");
 	CardAmount = CardAmounts.Total("Amount");
-	If CardAmount > Object.Amount Then
-		ErrorMessages.Add(R().POS_s2);
-	EndIf;
-	If CardAmount = Object.Amount And CashAmount Then
-		ErrorMessages.Add(R().POS_s3);
-	EndIf;
+	
+	If Not ThisObject.IsAdvance Then
+		If CardAmount > Object.Amount Then
+			ErrorMessages.Add(R().POS_s2);
+		EndIf;
+		If CardAmount = Object.Amount And CashAmount Then
+			ErrorMessages.Add(R().POS_s3);
+		EndIf;
 
-	If Not ErrorMessages.Count() And PaymentsAmountTotal <> (Object.Amount + Object.Cashback) Then
-		ErrorMessages.Add(R().POS_s4);
+		If Not ErrorMessages.Count() And PaymentsAmountTotal <> (Object.Amount + Object.Cashback) Then
+			ErrorMessages.Add(R().POS_s4);
+		EndIf;
 	EndIf;
-
+	
 	If ErrorMessages.Count() Then
 		Cancel = True;
 		For Each ErrorMessage In ErrorMessages Do
@@ -183,6 +187,7 @@ Procedure OpenPaymentForm(PaymentTypesTable, PaymentType)
 		ButtonSettings = POSClient.ButtonSettings();
 
 		FillPropertyValues(ButtonSettings, PaymentTypesTable[0]);
+		ButtonSettings.PaymentTypeEnum = PaymentType;
 		ChoiceEndAdditionalParameters = New Structure();
 		FillPayments(ButtonSettings, ChoiceEndAdditionalParameters);
 	EndIf;
@@ -356,9 +361,11 @@ Procedure FillPaymentsAtServer()
 	BankPaymentTypesValue = GetBankPaymentTypesValue(Object.Branch);
 	ValueToFormAttribute(BankPaymentTypesValue, "BankPaymentTypes");
 
-	PaymentAgentValue = GetPaymentAgentTypesValue(Object.Branch);
-	ValueToFormAttribute(PaymentAgentValue, "PaymentAgentTypes");
-
+	If Not ThisObject.IsAdvance Then
+		PaymentAgentValue = GetPaymentAgentTypesValue(Object.Branch);
+		ValueToFormAttribute(PaymentAgentValue, "PaymentAgentTypes");
+	EndIf;
+	
 	Items.Cash.Enabled = ThisObject.CashPaymentTypes.Count();
 	Items.Card.Enabled = ThisObject.BankPaymentTypes.Count();
 	Items.PaymentAgent.Enabled = ThisObject.PaymentAgentTypes.Count();

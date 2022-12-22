@@ -2662,6 +2662,23 @@
       </edit>
     </columns>
   </attributes>
+  <attributes>
+    <name>IsAdvance</name>
+    <title>
+      <key>en</key>
+      <value>Is advance</value>
+    </title>
+    <id>32</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>Card</name>
     <title>
@@ -3027,6 +3044,12 @@
       <types>CatalogRef.Workstations</types>
     </valueType>
     <keyParameter>true</keyParameter>
+  </parameters>
+  <parameters>
+    <name>IsAdvance</name>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
   </parameters>
   <commandInterface>
     <navigationPanel/>

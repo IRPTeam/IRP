@@ -361,6 +361,25 @@ Procedure qPayment(Command)
 EndProcedure
 
 &AtClient
+Procedure Advance(Command)
+	If Not ValueIsFilled(Object.RetailCustomer) Then
+		// "Error. Retail customer is not filled
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_123);
+		Return;
+	EndIf;
+	
+	OpenFormNotifyDescription = New NotifyDescription("AdvanceFormClose", ThisObject);
+	ObjectParameters = New Structure();
+	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
+	ObjectParameters.Insert("Branch", Object.Branch);
+	ObjectParameters.Insert("Workstation", Workstation);
+	ObjectParameters.Insert("IsAdvance", True);
+	
+	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
+		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+EndProcedure
+
+&AtClient
 Procedure DocReturn(Command)
 	OpenForm("Document.RetailReturnReceipt.ObjectForm");
 EndProcedure
@@ -595,6 +614,53 @@ Procedure PaymentFormClose(Result, AdditionalData) Export
 	NewTransaction();
 	Modified = False;
 EndProcedure
+
+&AtClient
+Procedure AdvanceFormClose(Result, AdditionalData) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	ArrayOfPayments = New Array();
+	For Each Row In Result.Payments Do
+		NewPayment = New Structure();
+		NewPayment.Insert("PaymentType");
+		NewPayment.Insert("PaymentTypeEnum");
+		NewPayment.Insert("Amount");
+		NewPayment.Insert("Account");
+		NewPayment.Insert("BankTerm");
+		NewPayment.Insert("Percent");
+		NewPayment.Insert("Commission");
+		FillPropertyValues(NewPayment, Row);
+		ArrayOfPayments.Add(NewPayment);
+	EndDo;
+	CreateDocumentsAtServer(ArrayOfPayments);
+EndProcedure
+
+&AtServer
+Procedure CreateDocumentsAtServer(ArrayOfPayments)
+	BankReceipt = Undefined;
+	CashReceipt = Undefined;
+	For Each Row In ArrayOfPayments Do
+		If Row.PaymentTypeEnum = Enums.PaymentTypes.Cash Then
+			If CashReceipt = Undefined Then
+				CashReceipt = BuilderAPI.Initialize("CashReceipt");
+				BuilderAPI.SetProperty(CashReceipt, "Company"     , Object.Company);
+				BuilderAPI.SetProperty(CashReceipt, "Branch"      , Object.Branch);
+				BuilderAPI.SetProperty(CashReceipt, "Date"        , CurrentSessionDate());
+				BuilderAPI.SetProperty(CashReceipt, "CashAccount" , Row.Account);
+			EndIf;
+			
+			NewRow = BuilderAPI.AddRow(CashReceipt, "Payments");
+			BuilderAPI.SetRowProperty(CashReceipt, NewRow, "RetailCustomer", Object.RetailCustomer);
+			BuilderAPI.SetRowProperty(CashReceipt, NewRow, "TotalAmount"   , Row.Amount);
+			
+			
+		ElsIf Row.PaymentTypeEnum = Enums.PaymentTypes.Card Then
+			
+		EndIf
+	EndDo;
+EndProcedure	
 
 &AtClient
 Procedure NewTransaction()

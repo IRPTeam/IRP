@@ -4051,6 +4051,59 @@
                     <representationInContextMenu>Auto</representationInContextMenu>
                     <shapeRepresentation>WhenActive</shapeRepresentation>
                   </items>
+                  <items xsi:type="form:Button">
+                    <name>Advance</name>
+                    <id>1146</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <defaultItem>true</defaultItem>
+                    <extendedTooltip>
+                      <name>AdvanceExtendedTooltip</name>
+                      <id>1147</id>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <type>Label</type>
+                      <autoMaxWidth>true</autoMaxWidth>
+                      <autoMaxHeight>true</autoMaxHeight>
+                      <extInfo xsi:type="form:LabelDecorationExtInfo">
+                        <horizontalAlign>Left</horizontalAlign>
+                      </extInfo>
+                    </extendedTooltip>
+                    <type>UsualButton</type>
+                    <commandName>Form.Command.Advance</commandName>
+                    <representation>Auto</representation>
+                    <autoMaxWidth>true</autoMaxWidth>
+                    <maxHeight>3</maxHeight>
+                    <horizontalStretch>true</horizontalStretch>
+                    <verticalStretch>true</verticalStretch>
+                    <groupVerticalAlign>Bottom</groupVerticalAlign>
+                    <placementArea>UserCmds</placementArea>
+                    <textColor xsi:type="core:ColorRef">
+                      <color>Style.AccentColor</color>
+                    </textColor>
+                    <backColor xsi:type="core:ColorRef">
+                      <color>Web.HoneyDew</color>
+                    </backColor>
+                    <borderColor xsi:type="core:ColorRef">
+                      <color>Style.AccentColor</color>
+                    </borderColor>
+                    <font xsi:type="core:FontRef">
+                      <font>Style.LargeTextFont</font>
+                      <bold>true</bold>
+                      <italic>false</italic>
+                      <underline>false</underline>
+                      <strikeout>false</strikeout>
+                      <scale>100</scale>
+                    </font>
+                    <representationInContextMenu>Auto</representationInContextMenu>
+                    <shapeRepresentation>WhenActive</shapeRepresentation>
+                  </items>
                   <visible>true</visible>
                   <enabled>true</enabled>
                   <userVisible>
@@ -6286,6 +6339,23 @@ person</value>
       </handler>
     </action>
     <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Advance</name>
+    <title>
+      <key>en</key>
+      <value>Advance</value>
+    </title>
+    <id>30</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>Advance</name>
+      </handler>
+    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

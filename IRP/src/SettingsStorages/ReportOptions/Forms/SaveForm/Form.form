@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema">
   <title>
     <key>en</key>
     <value>Save report option</value>
@@ -738,6 +738,54 @@ WHERE
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ReportOption</dataPath>
+        <field>ReportOption</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Options list report option</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Shared</dataPath>
+        <field>Shared</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Options list shared</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>isCurrentOption</dataPath>
+        <field>isCurrentOption</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Options listis current option</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>OptionKey</dataPath>
+        <field>OptionKey</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Options list option key</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
     </extInfo>
   </attributes>
   <attributes>

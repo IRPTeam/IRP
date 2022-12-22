@@ -335,9 +335,6 @@ EndProcedure
 // 
 // Parameters:
 //  Settings - See FillDriverParametersSettings
-// 
-// Returns:
-//  Boolean
 Async Procedure TestDevice(Settings) Export
 	If Settings.Hardware.IsEmpty() Then
 		Return;

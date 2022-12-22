@@ -28,6 +28,9 @@
     "lock-out-of-try": {
       "enabled": false
     },
+    "db-object-ref-non-ref-type": {
+      "enabled": false
+    },
     "right-configuration-extensions-administration": {
       "enabled": false
     },
@@ -182,6 +185,9 @@
       "enabled": false
     },
     "right-interactive-delete-marked-predefined-data": {
+      "enabled": false
+    },
+    "db-object-anyref-type": {
       "enabled": false
     },
     "md-list-object-presentation": {

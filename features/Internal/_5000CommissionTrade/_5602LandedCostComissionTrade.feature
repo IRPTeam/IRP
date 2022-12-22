@@ -32,6 +32,7 @@ Scenario: _05702 preparation (landed cost commission trade)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create catalog ItemTypes objects
+		When Create catalog SourceOfOrigins objects
 		When Create catalog Units objects
 		When Create catalog Items objects
 		When Create catalog PriceTypes objects
@@ -78,7 +79,14 @@ Scenario: _05702 preparation (landed cost commission trade)
 		When Create document SalesInvoice and SalesReturn objects (comission trade)
 		When Create document SalesReportToConsignor objects (landed cost)
 		When Create document CalculationMovementCosts objects (comission trade, consignment)
+		When Create document OpeningEntry objects (comission trade, landed cost)
+		When Create document Retail sales receipt and RetailReturnReceipt objects (comission trade, landed cost)
 	* Post document
+		* Posting Opening entry
+			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
+			And Delay "3"
 		* Posting Purchase invoice
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 			Then I select all lines of "List" table
@@ -109,11 +117,22 @@ Scenario: _05702 preparation (landed cost commission trade)
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And Delay "3"
+		* Posting Retail sales receipt
+			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
+			And Delay "3"
+		* Posting Retail return receipt
+			Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
+			And Delay "3"
 		* Posting CalculationMovementCosts
 			Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And Delay "3"
+		
 	And I close all client application windows
 		
 

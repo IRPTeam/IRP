@@ -25,13 +25,17 @@ Scenario: _05502 preparation (commission products sales)
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog BusinessUnits objects (Shop 02, use consolidated retail sales)	
 		When Create catalog Items objects (serial lot numbers)
 		When Create catalog ItemKeys objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
 		When Create catalog Items objects
+		When Create catalog Countries objects
+		When Create catalog SourceOfOrigins objects
 		When Create catalog PriceTypes objects
 		When Create catalog Specifications objects
 		When Create catalog Partners objects (trade agent and consignor)
@@ -58,8 +62,17 @@ Scenario: _05502 preparation (commission products sales)
 		When Create information register CurrencyRates records
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
+		When Create information register UserSettings records (Retail)
 		When update ItemKeys
 		When Create catalog Partners objects
+		When Create catalog CashAccounts objects
+		When Create catalog PaymentTypes objects
+		When Create catalog Workstations objects
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 01' |
+		And I click "Set current workstation" button
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -68,6 +81,7 @@ Scenario: _05502 preparation (commission products sales)
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
+		When Data preparation (comission stock)
 	* Tax settings
 		When filling in Tax settings for company
 	* Setting for Company
@@ -482,59 +496,59 @@ Scenario: _050010 create SI (commission products sales)
 			| '$$NumberSI10$$' |
 		And I close all client application windows			
 
-Scenario: _050012 сheck the message when selling commission goods more than there is in the balance
-	And I close all client application windows
-	* Open SI form
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I click the button named "FormCreate"
-	* Filling in the details
-		And I activate field named "ItemListLineNumber" in "ItemList" table
-		And I click Choice button of the field named "Partner"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'DFC'         |
-		And I select current line in "List" table
-		And I click Choice button of the field named "Agreement"
-		And I go to line in "List" table
-			| 'Description'      |
-			| 'Partner term DFC' |
-		And I select current line in "List" table
-		And I click Choice button of the field named "Store"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
-		And I select current line in "List" table
-	* Add item
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I activate field named "ItemListItem" in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-		Then "Items" window is opened
-		And I go to line in "List" table
-			| 'Description'        |
-			| 'Dress' |
-		And I select current line in "List" table
-		And I activate field named "ItemListItemKey" in "ItemList" table
-		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Dress' | 'S/Yellow' |
-		And I select current line in "List" table
-		And I activate "Inventory origin" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table	
-		And I activate "Use shipment confirmation" field in "ItemList" table
-		And I remove "Use shipment confirmation" checkbox in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "50,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Post and check message
-		And I click "Post" button	
-		Then there are lines in TestClient message log
-			|'Consignor batch shortage Item key: S/Yellow Store: Store 02 Required:50,000 Remaining:32,000 Lack:18,000\n'|				
-	* Clear posting
-		And I click "Cancel posting" button
-	And I close all client application windows
+// Scenario: _050012 сheck the message when selling commission goods more than there is in the balance
+// 	And I close all client application windows
+// 	* Open SI form
+// 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+// 		And I click the button named "FormCreate"
+// 	* Filling in the details
+// 		And I activate field named "ItemListLineNumber" in "ItemList" table
+// 		And I click Choice button of the field named "Partner"
+// 		And I go to line in "List" table
+// 			| 'Description' |
+// 			| 'DFC'         |
+// 		And I select current line in "List" table
+// 		And I click Choice button of the field named "Agreement"
+// 		And I go to line in "List" table
+// 			| 'Description'      |
+// 			| 'Partner term DFC' |
+// 		And I select current line in "List" table
+// 		And I click Choice button of the field named "Store"
+// 		And I go to line in "List" table
+// 			| 'Description' |
+// 			| 'Store 02'    |
+// 		And I select current line in "List" table
+// 	* Add item
+// 		And in the table "ItemList" I click the button named "ItemListAdd"
+// 		And I activate field named "ItemListItem" in "ItemList" table
+// 		And I select current line in "ItemList" table
+// 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+// 		Then "Items" window is opened
+// 		And I go to line in "List" table
+// 			| 'Description'        |
+// 			| 'Dress' |
+// 		And I select current line in "List" table
+// 		And I activate field named "ItemListItemKey" in "ItemList" table
+// 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+// 		And I go to line in "List" table
+// 			| 'Item'  | 'Item key' |
+// 			| 'Dress' | 'S/Yellow' |
+// 		And I select current line in "List" table
+// 		And I activate "Inventory origin" field in "ItemList" table
+// 		And I select current line in "ItemList" table
+// 		And I select "Consignor stocks" exact value from "Inventory origin" drop-down list in "ItemList" table	
+// 		And I activate "Use shipment confirmation" field in "ItemList" table
+// 		And I remove "Use shipment confirmation" checkbox in "ItemList" table
+// 		And I select current line in "ItemList" table
+// 		And I input "50,000" text in "Quantity" field of "ItemList" table
+// 		And I finish line editing in "ItemList" table
+// 	* Post and check message
+// 		And I click "Post" button	
+// 		Then there are lines in TestClient message log
+// 			|'Consignor batch shortage Item key: S/Yellow Store: Store 02 Required:50,000 Remaining:32,000 Lack:18,000\n'|				
+// 	* Clear posting
+// 		And I click "Cancel posting" button
+// 	And I close all client application windows
 	
 Scenario: _050014 create SR (return commission products that was sailed our customer)
 	And I close all client application windows
@@ -776,7 +790,7 @@ Scenario: _050025 create Sales report co consignor
 			And in the table "Sales" I click "Fill sales" button
 			And "Sales" table became equal
 				| 'Use' | 'Item'               | 'Price type'              | 'Item key' | 'Consignor price' | 'Quantity' | 'Sales invoice'                               | 'Unit' | 'Price'  | 'Net amount' | 'Purchase invoice'                               | 'Total amount' |
-				| 'Yes' | 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '100,00'          | '6,000'    | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'pcs'  | '200,00' | '1 016,95'   | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '1 200,00'     |
+				| 'Yes' | 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '100,00'          | '2,000'    | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'pcs'  | '200,00' | '338,98'     | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '400,00'     |
 				| 'Yes' | 'Dress'              | 'Basic Price Types'       | 'S/Yellow' | '550,00'          | '2,000'    | 'Sales invoice 194 dated 04.11.2022 16:33:38' | 'pcs'  | '550,00' | '932,20'     | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '1 100,00'     |
 		* Filling sales (only return)
 			And I click Select button of "Sales period" field			
@@ -812,7 +826,7 @@ Scenario: _050025 create Sales report co consignor
 				| '#' | 'Item'               | 'Price type'              | 'Item key' | 'Consignor price' | 'Serial lot numbers' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Sales invoice'                               | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'Net amount' | 'Purchase invoice'                               | 'Total amount' |
 				| '1' | 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '100,00'          | '09987897977889'     | 'pcs'  | 'No'                 | '-1,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-20,00'                 | '200,00' | '-169,49'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-200,00'      |
 				| '2' | 'Dress'              | 'Basic Price Types'       | 'S/Yellow' | '550,00'          | ''                   | 'pcs'  | 'No'                 | '-2,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-110,00'                | '550,00' | '-932,20'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-1 100,00'    |
-				| '3' | 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '100,00'          | '09987897977889'     | 'pcs'  | 'No'                 | '3,000'    | '$$SI10$$'                                    | '10,00'                   | '36,00'                  | '120,00' | '305,08'     | '$$PI3$$'                                        | '360,00'       |
+				| '3' | 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '100,00'          | '09987897977889'     | 'pcs'  | 'No'                 | '3,000'    | '$$SI10$$'                                    | '10,00'                   | '36,00'                  | '120,00' | '305,09'     | '$$PI3$$'                                        | '360,00'       |
 				| '4' | 'Dress'              | 'Basic Price without VAT' | 'S/Yellow' | '550,00'          | ''                   | 'pcs'  | 'No'                 | '2,000'    | '$$SI10$$'                                    | '10,00'                   | '93,22'                  | '466,10' | '790,00'     | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '932,20'       |
 		* Change period and update sales
 			And I input "01.11.2022" text in "Start date" field
@@ -1109,9 +1123,178 @@ Scenario: _050028 check Sales invoice generate for trade agent fee (based on Sal
 		And I close all client application windows			
 
 				
+Scenario: _050041 check filling source of origin in the SI (consignors products)
+	And I close all client application windows
+	* Open SI form
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'         |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Agreement"
+		And I go to line in "List" table
+			| 'Description'      |
+			| 'Basic Partner terms, without VAT' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
+		And I move to "Other" tab	
+	* Add items	
+		And I move to "Item list" tab
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		Then "Enter a barcode" window is opened
+		And I input "57897909799" text in the field named "InputFld"
+		And I click the button named "OK"
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		Then "Enter a barcode" window is opened
+		And I input "57897909799" text in the field named "InputFld"
+		And I click the button named "OK"
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		Then "Enter a barcode" window is opened
+		And I input "890086768" text in the field named "InputFld"
+		And I click the button named "OK"
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		Then "Enter a barcode" window is opened
+		And I input "57897909799" text in the field named "InputFld"
+		And I click the button named "OK"
+	* Check filling
+		And "ItemList" table became equal
+			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Unit' | 'Serial lot numbers' | 'Source of origins'   | 'Quantity' | 'Price' | 'VAT' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Detail' |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | 'pcs'  | '57897909799'        | 'Source of origin 9'  | '2,000'    | ''      | '18%' | ''             | 'No'             | 'No'                         | ''                    | 'Store 02' | ''              | ''       |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Bag'                | 'ODS'      | 'No'                 | 'pcs'  | ''                   | 'Source of origin 11'  | '1,000'    | ''      | '18%' | ''             | 'No'             | 'No'                         | ''                    | 'Store 02' | ''              | ''       |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | 'pcs'  | '57897909799'        | 'Source of origin 10' | '1,000'    | ''      | '18%' | ''             | 'No'             | 'No'                         | ''                    | 'Store 02' | ''              | ''       |
+	* Add one more item and check filling
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		Then "Enter a barcode" window is opened
+		And I input "89088088989" text in the field named "InputFld"
+		And I click the button named "OK"
+		And "ItemList" table became equal
+			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'       | 'Source of origins'                      | 'Quantity' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Store'    |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | ''           | 'pcs'  | '57897909799; 89088088989' | 'Source of origin 9; Source of origin 9' | '3,000'    | ''      | '18%' | ''              | ''           | ''             | 'No'                         | 'Store 02' |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Bag'                | 'ODS'      | 'No'                 | ''           | 'pcs'  | ''                         | 'Source of origin 11'                     | '1,000'    | ''      | '18%' | ''              | ''           | ''             | 'No'                         | 'Store 02' |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | ''           | 'pcs'  | '57897909799'              | 'Source of origin 10'                    | '1,000'    | ''      | '18%' | ''              | ''           | ''             | 'No'                         | 'Store 02' |
+		And I close all client application windows
+		
+				
+		
+		
+Scenario: _050042 check filling source of origin in the RSR (consignors products)
+	And I close all client application windows
+	* Open RSR form
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'         |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Agreement"
+		And I go to line in "List" table
+			| 'Description'      |
+			| 'Basic Partner terms, without VAT' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
+		And I move to "Other" tab	
+	* Add items	
+		And I move to "Item list" tab
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		Then "Enter a barcode" window is opened
+		And I input "57897909799" text in the field named "InputFld"
+		And I click the button named "OK"
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		Then "Enter a barcode" window is opened
+		And I input "57897909799" text in the field named "InputFld"
+		And I click the button named "OK"
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		Then "Enter a barcode" window is opened
+		And I input "890086768" text in the field named "InputFld"
+		And I click the button named "OK"
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		Then "Enter a barcode" window is opened
+		And I input "57897909799" text in the field named "InputFld"
+		And I click the button named "OK"
+	* Check filling
+		And "ItemList" table became equal
+			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Unit' | 'Serial lot numbers' | 'Source of origins'   | 'Quantity' | 'Price' | 'VAT' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | 'pcs'  | '57897909799'        | 'Source of origin 9'  | '2,000'    | ''      | '18%' | ''             | ''                    | 'Store 02' | ''       |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Bag'                | 'ODS'      | 'No'                 | 'pcs'  | ''                   | 'Source of origin 11'  | '1,000'    | ''      | '18%' | ''             | ''                    | 'Store 02' | ''       |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | 'pcs'  | '57897909799'        | 'Source of origin 10' | '1,000'    | ''      | '18%' | ''             | ''                    | 'Store 02' | ''       |
+	* Add one more item and check filling
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		Then "Enter a barcode" window is opened
+		And I input "89088088989" text in the field named "InputFld"
+		And I click the button named "OK"
+		And "ItemList" table became equal
+			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'       | 'Source of origins'                      | 'Quantity' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | ''           | 'pcs'  | '57897909799; 89088088989' | 'Source of origin 9; Source of origin 9' | '3,000'    | ''      | '18%' | ''              | ''           | ''             | 'Store 02' |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Bag'                | 'ODS'      | 'No'                 | ''           | 'pcs'  | ''                         | 'Source of origin 11'                     | '1,000'    | ''      | '18%' | ''              | ''           | ''             | 'Store 02' |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | ''           | 'pcs'  | '57897909799'              | 'Source of origin 10'                    | '1,000'    | ''      | '18%' | ''              | ''           | ''             | 'Store 02' |
+		And I close all client application windows
+		
+				
 
+Scenario: _050043 check filling source of origin in the RSR POS (consignors products)
+	And I close all client application windows
+	* Preparation
+		And I execute 1C:Enterprise script at server
+ 			| "Documents.InventoryTransfer.FindByNumber(598).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Open POS and create RSR
+		And In the command interface I select "Retail" "Point of sale"
+		Then "Point of sales" window is opened
+	* Scan items
+		And I click "Search by barcode (F7)" button
+		And I input "57897909799" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I click "Search by barcode (F7)" button
+		And I input "89088088989" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I click "Search by barcode (F7)" button
+		And I input "890086768" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' | 'Quantity' | 'Serials'                  |
+			| 'Product 6 with SLN' | 'PZU'      | '2,000'    | '57897909799; 89088088989' |
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item' | 'Item key' | 'Quantity' |
+			| 'Bag'  | 'ODS'      | '1,000'    |
+		And I select current line in "ItemList" table
+		And I input "120,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Payment (+)" button
+		Then "Payment" window is opened
+		And I click the button named "Enter"
+	* Check filling source of origin
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
+		And I go to line in "List" table
+			| 'Σ'      |
+			| '320,00' |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Serial lot numbers'       | 'Unit' | 'Tax amount' | 'Source of origins'                      | 'Quantity' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Consignor stocks' | 'en description is empty' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | '57897909799; 89088088989' | 'pcs'  | '30,51'      | 'Source of origin 9; Source of origin 9' | '2,000'    | '100,00' | '18%' | '169,49'     | '200,00'       | 'Store 01' |
+			| 'Consignor stocks' | 'en description is empty' | 'Bag'                | 'ODS'      | 'No'                 | ''                         | 'pcs'  | '18,31'      | 'Source of origin 11'                    | '1,000'    | '120,00' | '18%' | '101,69'     | '120,00'       | 'Store 01' |
+		And I close all client application windows
+		
 				
-				
+						
+
 				
 							
 						

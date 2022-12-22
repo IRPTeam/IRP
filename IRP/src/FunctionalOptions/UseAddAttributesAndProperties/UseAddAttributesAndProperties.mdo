@@ -11,4 +11,5 @@
   <content>Catalog.AddAttributeAndPropertyValues</content>
   <content>ChartOfCharacteristicTypes.AddAttributeAndProperty</content>
   <content>CommonCommand.AddProperties</content>
+  <content>DataProcessor.ObjectPropertyEditor</content>
 </mdclass:FunctionalOption>

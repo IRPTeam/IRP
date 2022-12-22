@@ -4232,6 +4232,10 @@ EndProcedure
 // TaxRate.Get
 Function GetTaxRate(Parameters, Row)
 	TaxRates = New Structure();
+	If Not CommonFunctionsClientServer.ObjectHasProperty(Row, "TaxRates") Then
+		Return TaxRates;
+	EndIf;
+	
 	ReadOnlyFromCache = Not Parameters.FormTaxColumnsExists;
 	For Each TaxRate In Row.TaxRates Do
 		If ReadOnlyFromCache And ValueIsFilled(TaxRate.Value) Then
@@ -4285,11 +4289,27 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 	
 	TableRows =  GetRows(Parameters, Parameters.TableName);
 	If UseInventoryOrigin Then
-		If TableRows.Count() 
-			And TableRows[0].Property("InventoryOrigin") 
-			And TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
-			
-			TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
+//		If TableRows.Count() 
+//			And TableRows[0].Property("InventoryOrigin") 
+//			And TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
+//			
+//			TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
+//			Parameters.RowsForRecalculate = TableRows;
+//		EndIf;
+		If TableRows.Count() = 1
+			And TableRows[0].Property("InventoryOrigin") Then
+			If TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then			
+				TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
+				Parameters.RowsForRecalculate = TableRows;
+			EndIf;
+		Else
+			TableRows = New Array();
+			For Each Row In TableRows Do
+				If Row.Property("InventoryOrigin") 
+					And Row.InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
+					TableRows.Add(Row);
+				EndIf;
+			EndDo;
 			Parameters.RowsForRecalculate = TableRows;
 		EndIf;
 	EndIf;
@@ -7468,7 +7488,7 @@ EndFunction
 Function BindConsignorBatches(Parameters)
 	DataPath = "ConsignorBatches";
 	Binding = New Structure();
-		
+			
 	Binding.Insert("SalesInvoice",
 		"StepChangeTaxRate_AgreementInHeader_InventoryOrigin");
 	

@@ -68,17 +68,32 @@ Procedure AddNewSourceOfOrigins(Result, Parameters) Export
 		Return;
 	EndIf;
 	
-	ArrayForDelete = Parameters.Object.SourceOfOrigins.FindRows(New Structure("Key", Result.RowKey));
-	
-	For Each Row In ArrayForDelete Do
-		Parameters.Object.SourceOfOrigins.Delete(Row);
-	EndDo;
-	
 	For Each Row In Result.SourceOfOrigins Do
-		NewRow = Parameters.Object.SourceOfOrigins.Add();
-		FillPropertyValues(NewRow, Row);
-		NewRow.Key = Result.RowKey;
+		Filter = New Structure();
+		Filter.Insert("Key", Result.RowKey);
+		Filter.Insert("SerialLotNumber", ?(ValueIsFilled(Row.SerialLotNumber), Row.SerialLotNumber,
+			PredefinedValue("Catalog.SerialLotNumbers.EmptyRef")));
+		FilteredRows = Parameters.Object.SourceOfOrigins.FindRows(Filter);
+		If FilteredRows.Count() Then                     
+			FilteredRows[0].SourceOfOrigin = Row.SourceOfOrigin;
+		Else
+			NewRow = Parameters.Object.SourceOfOrigins.Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.Key = Result.RowKey;
+		EndIf;
 	EndDo;
+	
+//	ArrayForDelete = Parameters.Object.SourceOfOrigins.FindRows(New Structure("Key", Result.RowKey));
+	
+//	For Each Row In ArrayForDelete Do
+//		Parameters.Object.SourceOfOrigins.Delete(Row);
+//	EndDo;
+	
+//	For Each Row In Result.SourceOfOrigins Do
+//		NewRow = Parameters.Object.SourceOfOrigins.Add();
+//		FillPropertyValues(NewRow, Row);
+//		NewRow.Key = Result.RowKey;
+//	EndDo;
 	
 	RecalculateConsignorBatches(Parameters.Object, Parameters.Form);
 	UpdateSourceOfOriginsPresentation(Parameters.Object);
@@ -216,7 +231,18 @@ Procedure RecalculateConsignorBatches(Object, Form)
 	FormParameters = ControllerClientServer_V2.GetFormParameters(Form);
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
 	ServerParameters.TableName = "ItemList";		
+	
+//	Rows = New Array();          
+//	ConsignorStocks = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks");
+//	For Each Row In Object.ItemList Do
+//		If Row.InventoryOrigin = ConsignorStocks Then
+//			Rows.Add(Rows);
+//		EndIf;
+//	EndDo;
+	
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
+//	Parameters.Rows = Rows;
+	
 	Property = New Structure("DataPath", "Command_UpdateConsignorBatches");
 	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);	
 EndProcedure

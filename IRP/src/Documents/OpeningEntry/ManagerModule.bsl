@@ -1283,6 +1283,7 @@ Function R8013B_ConsignorBatchWiseBalance()
 		|	ReceiptFromConsignor.Batch,
 		|	ReceiptFromConsignor.ItemKey,
 		|	ReceiptFromConsignor.SerialLotNumber,
+		|	ReceiptFromConsignor.SourceOfOrigin,
 		|	ReceiptFromConsignor.Quantity
 		|INTO R8013B_ConsignorBatchWiseBalance
 		|FROM

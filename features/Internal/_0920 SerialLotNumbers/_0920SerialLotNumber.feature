@@ -1585,6 +1585,11 @@ Scenario: _092008 check serial lot number in the Opening entry
 			| 'Description'     |
 			| 'Main Company' |
 		And I select current line in "List" table
+		And I click Select button of "Branch" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Front office' |
+		And I select current line in "List" table
 	* Add items (first item with serial lot number, second - without serial lot number)
 		And I move to "Inventory" tab
 		And in the table "Inventory" I click the button named "InventoryAdd"
@@ -2482,6 +2487,7 @@ Scenario: _092015 check serial lot number in the Shipment confirmation
 			| 'Description'     |
 			| 'Company Ferron BP' |
 		And I select current line in "List" table
+
 	* Add items (first item with serial lot number, second - without serial lot number)
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
@@ -3139,7 +3145,7 @@ Scenario: _092035 product scanning with and without serial lot number
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Serials'      | 'Quantity' |
-			| 'Dress' | 'M/White'  | '89999; 89999' | '2,000'    |
+			| 'Dress' | 'M/White'  | '89999'        | '2,000'    |
 	* Check product scanning without own serial lot number
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in "InputFld" field
@@ -3159,7 +3165,7 @@ Scenario: _092035 product scanning with and without serial lot number
 		And I click "Ok" button
 		And "ItemList" table became equal
 			| 'Item'  | 'Item key' | 'Serials'      | 'Quantity' |
-			| 'Dress' | 'M/White'  | '89999; 89999' | '2,000'    |
+			| 'Dress' | 'M/White'  | '89999'        | '2,000'    |
 			| 'Dress' | 'XS/Blue'  | '10'           | '1,000'    |
 	* Check product scanning without own serial lot number (input  serial lot number by string)
 		And I click "Search by barcode (F7)" button
@@ -3176,7 +3182,7 @@ Scenario: _092035 product scanning with and without serial lot number
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Serials'      | 'Quantity' |
-			| 'Dress' | 'M/White'  | '89999; 89999' | '2,000'    |
+			| 'Dress' | 'M/White'  | '89999'        | '2,000'    |
 			| 'Dress' | 'XS/Blue'  | '10'           | '1,000'    |
 			| 'Dress' | 'L/Green'  | '10'           | '1,000'    |
 	* Check message if user scan new serial lot number

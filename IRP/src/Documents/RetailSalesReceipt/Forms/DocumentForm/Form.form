@@ -1614,7 +1614,7 @@
         </items>
         <items xsi:type="form:FormField">
           <name>ItemListSourceOfOriginsPresentation</name>
-          <id>1157</id>
+          <id>1120</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -1625,7 +1625,7 @@
           </dataPath>
           <extendedTooltip>
             <name>ItemListSourceOfOriginsPresentationExtendedTooltip</name>
-            <id>1161</id>
+            <id>1122</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1640,7 +1640,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>ItemListSourceOfOriginsPresentationContextMenu</name>
-            <id>1160</id>
+            <id>1121</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -5244,93 +5244,6 @@
           <chooseType>true</chooseType>
           <typeDomainEnabled>true</typeDomainEnabled>
           <textEdit>true</textEdit>
-        </extInfo>
-      </items>
-      <items xsi:type="form:FormField">
-        <name>PaymentMethod</name>
-        <id>1156</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.PaymentMethod</segments>
-        </dataPath>
-        <extendedTooltip>
-          <name>PaymentMethodExtendedTooltip</name>
-          <id>1159</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>PaymentMethodContextMenu</name>
-          <id>1158</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>InputField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <listChoiceMode>true</listChoiceMode>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
-          <choiceList>
-            <presentation>
-              <key>en</key>
-              <value>Full calculation</value>
-            </presentation>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.ReceiptPaymentMethods.EnumValue.FullCalculation</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <presentation>
-              <key>en</key>
-              <value>Partial prepayment</value>
-            </presentation>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.ReceiptPaymentMethods.EnumValue.PartialPrepayment</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <presentation>
-              <key>en</key>
-              <value>Full prepayment</value>
-            </presentation>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.ReceiptPaymentMethods.EnumValue.FullPrepayment</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <presentation>
-              <key>en</key>
-              <value>Advance payment</value>
-            </presentation>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.ReceiptPaymentMethods.EnumValue.AdvancePayment</value>
-            </value>
-          </choiceList>
         </extInfo>
       </items>
       <visible>true</visible>

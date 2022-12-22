@@ -281,8 +281,12 @@ Function ObjectXDTOStructure(XDTOType, Val ArrayList, WSName = Undefined, FillEm
 					EndIf;
 				EndIf;
 			EndIf;
-		ElsIf FillEmptyValues Then			
-			If Property.Type.Name = "string" Then
+		ElsIf FillEmptyValues Then
+			If Not Property.DefaultValue = Undefined Then
+				XDTOStructure.Insert(Property.Name, Property.DefaultValue.Value);
+			ElsIf Not StrCompare(Property.Type.Name, "uuid") Then
+				XDTOStructure.Insert(Property.Name, String(New UUID));
+			ElsIf Property.Type.Name = "string" Then
 				XDTOStructure.Insert(Property.Name, Property.Name);
 			ElsIf Property.Type.Name = "boolean" Then
 				XDTOStructure.Insert(Property.Name, True);

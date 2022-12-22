@@ -828,6 +828,10 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow,
 			ArrayOfExcludeProperties.Add("SerialLotNumberIsFilling");
 		EndIf;
 		
+		If Parameters.ObjectMetadataInfo.DependentTables.Find("SourceOfOrigins") <> Undefined Then
+			ArrayOfExcludeProperties.Add("SourceOfOriginsPresentation");
+		EndIf;
+		
 		FillPropertyValues(NewRow, OriginRows[0], , StrConcat(ArrayOfExcludeProperties, ","));
 		
 		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
@@ -913,6 +917,10 @@ Procedure OnOpenFormNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") Then
 		SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);	
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
+		SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Parameters.Object);
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
@@ -1627,6 +1635,10 @@ Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
 	
+	If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
+		SourceOfOriginClient.DeleteUnusedSourceOfOrigins(Parameters.Object, Parameters.Form);
+	EndIf;
+	
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
@@ -1734,6 +1746,11 @@ Procedure OnSetItemListItemKey(Parameters) Export
 		SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Parameters.Object);
 		SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
+		SourceOfOriginClient.DeleteUnusedSourceOfOrigins(Parameters.Object, Parameters.Form);
+		SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Parameters.Object);
 	EndIf;
 EndProcedure
 
@@ -2053,6 +2070,10 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 	// Update -> SrialLotNubersTree
 	If Parameters.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") Then
 		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
+		SourceOfOriginClient.UpdateSourceOfOriginsQuantity(Parameters.Object, Parameters.Form);
 	EndIf;
 	
 	// Update -> RowIDInfoQuantity
@@ -2614,6 +2635,10 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 		If Parameters.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") Then
 			SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
 			SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
+		EndIf;
+		
+		If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
+			SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
 		EndIf;
 		
 		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"

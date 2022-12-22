@@ -5242,6 +5242,23 @@
           <common>true</common>
         </edit>
       </columns>
+      <columns>
+        <name>SourceOfOriginsPresentation</name>
+        <title>
+          <key>en</key>
+          <value>Source of origins</value>
+        </title>
+        <id>186</id>
+        <valueType>
+          <types>ValueList</types>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
     </additionalColumns>
   </attributes>
   <attributes>

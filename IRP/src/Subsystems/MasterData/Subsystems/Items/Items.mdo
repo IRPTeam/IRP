@@ -19,5 +19,6 @@
   <content>Catalog.PrintTemplates</content>
   <content>Catalog.SerialLotNumbers</content>
   <content>Catalog.UnitsOfMeasurement</content>
+  <content>Catalog.SourceOfOrigins</content>
   <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

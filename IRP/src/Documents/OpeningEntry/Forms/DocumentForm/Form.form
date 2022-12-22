@@ -1099,6 +1099,64 @@
             <textEdit>true</textEdit>
           </extInfo>
         </items>
+        <items xsi:type="form:FormField">
+          <name>InventorySourceOfOrigin</name>
+          <id>1287</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Inventory.SourceOfOrigin</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>InventorySourceOfOriginExtendedTooltip</name>
+            <id>1289</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>InventorySourceOfOriginContextMenu</name>
+            <id>1288</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>InventorySourceOfOriginStartChoice</name>
+            </handlers>
+            <handlers>
+              <event>EditTextChange</event>
+              <name>InventorySourceOfOriginEditTextChange</name>
+            </handlers>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
         <autoCommandBar>
           <name>InventoryCommandBar</name>
           <id>308</id>
@@ -7480,6 +7538,64 @@
             <textEdit>true</textEdit>
           </extInfo>
         </items>
+        <items xsi:type="form:FormField">
+          <name>ShipmentToTradeAgentSourceOfOrigin</name>
+          <id>1290</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ShipmentToTradeAgent.SourceOfOrigin</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ShipmentToTradeAgentSourceOfOriginExtendedTooltip</name>
+            <id>1292</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ShipmentToTradeAgentSourceOfOriginContextMenu</name>
+            <id>1291</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>ShipmentToTradeAgentSourceOfOriginStartChoice</name>
+            </handlers>
+            <handlers>
+              <event>EditTextChange</event>
+              <name>ShipmentToTradeAgentSourceOfOriginEditTextChange</name>
+            </handlers>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
         <autoCommandBar>
           <name>ShipmentToTradeAgentCommandBar</name>
           <id>1200</id>
@@ -8505,6 +8621,64 @@
             <handlers>
               <event>EditTextChange</event>
               <name>ReceiptFromConsignorSerialLotNumberEditTextChange</name>
+            </handlers>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>ReceiptFromConsignorSourceOfOrigin</name>
+          <id>1293</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ReceiptFromConsignor.SourceOfOrigin</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ReceiptFromConsignorSourceOfOriginExtendedTooltip</name>
+            <id>1295</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ReceiptFromConsignorSourceOfOriginContextMenu</name>
+            <id>1294</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>ReceiptFromConsignorSourceOfOriginStartChoice</name>
+            </handlers>
+            <handlers>
+              <event>EditTextChange</event>
+              <name>ReceiptFromConsignorSourceOfOriginEditTextChange</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>

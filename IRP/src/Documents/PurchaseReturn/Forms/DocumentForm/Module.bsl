@@ -1,3 +1,4 @@
+
 #Region FORM
 
 &AtServer
@@ -356,6 +357,20 @@ EndProcedure
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
 	SerialLotNumberClient.PresentationClearing(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region SOURCE_OF_ORIGINS
+
+&AtClient
+Procedure ItemListSourceOfOriginsPresentationStartChoice(Item, ChoiceData, StandardProcessing)
+	SourceOfOriginClient.PresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListSourceOfOriginsPresentationClearing(Item, StandardProcessing)
+	SourceOfOriginClient.PresentationClearing(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #EndRegion

@@ -18,5 +18,6 @@
   <content>Catalog.FillingTemplates</content>
   <content>DataProcessor.CreateRegExp</content>
   <content>Catalog.Extensions</content>
+  <content>DataProcessor.ObjectPropertyEditor</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

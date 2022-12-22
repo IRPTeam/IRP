@@ -267,6 +267,10 @@
 //  * Title_00100 - String - Select base documents in the "%1" document.
 //  * UsersEvent_001 - String - User not found by UUID %1 and name %2.
 //  * UsersEvent_002 - String - User found by UUID %1 and name %2.
+//	* Str_Catalog - String - Catalog
+//	* Str_Catalogs - String - Catalogs
+//	* Str_Document - String - Document
+//	* Str_Documents - String - Documents
 Function Strings(Lang) Export
 
 	Strings = New Structure();
@@ -705,6 +709,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_119", NStr("en = 'Error Eval code'", Lang) + Chars.LF);
 	Strings.Insert("Error_120", NStr("en = 'Consignor batch shortage Item key: %1 Store: %2 Required:%3 Remaining:%4 Lack:%5'", Lang) + Chars.LF);
 	Strings.Insert("Error_121", NStr("en = 'Goods received from consignor cannot be shipped to trade agent'", Lang) + Chars.LF);
+	Strings.Insert("Error_122", NStr("en = 'Error. Find recursive basis by RowID: %1. Basis list:'", Lang) + Chars.LF);
 	
 	// manufacturing errors
 	Strings.Insert("MF_Error_001", NStr("en = 'Repetitive materials [%1]'", Lang));
@@ -944,6 +949,13 @@ Function Strings(Lang) Export
 	Strings.Insert("Default_010", NStr("en = '$'", Lang));
 	Strings.Insert("Default_011", NStr("en = 'My Company'", Lang));
 	Strings.Insert("Default_012", NStr("en = 'My Store'", Lang));
+#EndRegion
+
+#Region OtherString
+	Strings.Insert("Str_Catalog", NStr("en = 'Catalog'", Lang));
+	Strings.Insert("Str_Catalogs", NStr("en = 'Catalogs'", Lang));
+	Strings.Insert("Str_Document", NStr("en = 'Document'", Lang));
+	Strings.Insert("Str_Documents", NStr("en = 'Documents'", Lang));
 #EndRegion
 
 	Return Strings;

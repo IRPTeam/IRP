@@ -122,7 +122,8 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	ArrayOfTableNames.Add("SerialLotNumbers");
 	ArrayOfTableNames.Add("BillOfMaterialsList");
 	ArrayOfTableNames.Add("Materials");
-	
+	ArrayOfTableNames.Add("SourceOfOrigins");
+		
 	// MetadataName
 	// Tables.TableName.Columns
 	// DependentTables
@@ -146,6 +147,8 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 		ServerData.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") And IsItemList);	
 	Parameters.Insert("BillOfMaterialsListExists" , 
 		ServerData.ObjectMetadataInfo.Tables.Property("BillOfMaterialsList") And IsProductionsList);	
+	Parameters.Insert("SourceOfOriginsExists" , 
+		ServerData.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") And IsItemList);	
 	
 	Parameters.Insert("ArrayOfTaxInfo"         , ServerData.ArrayOfTaxInfo);
 	
@@ -369,6 +372,9 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	// Manufacturing calculations
 	SettersMap.Insert("Command_UpdateCurrentQuantity"  , "StepChangeCurrentQuantityInProductions");
 	SettersMap.Insert("Command_UpdateByBillOfMaterials", "StepMaterialsCalculations");
+	
+	// Source of origins
+	SettersMap.Insert("Command_UpdateConsignorBatches"  , "StepConsignorBatchesFillBatches");
 	
 	Return SettersMap.Get(DataPath);
 EndFunction
@@ -4226,6 +4232,10 @@ EndProcedure
 // TaxRate.Get
 Function GetTaxRate(Parameters, Row)
 	TaxRates = New Structure();
+	If Not CommonFunctionsClientServer.ObjectHasProperty(Row, "TaxRates") Then
+		Return TaxRates;
+	EndIf;
+	
 	ReadOnlyFromCache = Not Parameters.FormTaxColumnsExists;
 	For Each TaxRate In Row.TaxRates Do
 		If ReadOnlyFromCache And ValueIsFilled(TaxRate.Value) Then
@@ -4279,11 +4289,27 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 	
 	TableRows =  GetRows(Parameters, Parameters.TableName);
 	If UseInventoryOrigin Then
-		If TableRows.Count() 
-			And TableRows[0].Property("InventoryOrigin") 
-			And TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
-			
-			TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
+//		If TableRows.Count() 
+//			And TableRows[0].Property("InventoryOrigin") 
+//			And TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
+//			
+//			TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
+//			Parameters.RowsForRecalculate = TableRows;
+//		EndIf;
+		If TableRows.Count() = 1
+			And TableRows[0].Property("InventoryOrigin") Then
+			If TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then			
+				TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
+				Parameters.RowsForRecalculate = TableRows;
+			EndIf;
+		Else
+			TableRows = New Array();
+			For Each Row In TableRows Do
+				If Row.Property("InventoryOrigin") 
+					And Row.InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
+					TableRows.Add(Row);
+				EndIf;
+			EndDo;
 			Parameters.RowsForRecalculate = TableRows;
 		EndIf;
 	EndIf;
@@ -7462,7 +7488,7 @@ EndFunction
 Function BindConsignorBatches(Parameters)
 	DataPath = "ConsignorBatches";
 	Binding = New Structure();
-		
+			
 	Binding.Insert("SalesInvoice",
 		"StepChangeTaxRate_AgreementInHeader_InventoryOrigin");
 	
@@ -7483,6 +7509,7 @@ Procedure StepConsignorBatchesFillBatches(Parameters, Chain) Export
 	Options.DocObject = Parameters.Object;
 	Options.Table_ItemList         = GetOption_Table_ItemList(Parameters);
 	Options.Table_SerialLotNumbers = GetOption_Table_SerialLotNumbers(Parameters);
+	Options.Table_SourceOfOrigins  = GetOption_Table_SourceOfOrigins(Parameters);
 	Options.Table_ConsignorBatches = GetConsignorBatches(Parameters);
 	Options.SilentMode = Not Parameters.FormIsExists;	
 	
@@ -7509,6 +7536,16 @@ Function GetOption_Table_SerialLotNumbers(Parameters)
 	Table = New Array();
 	For Each Row In Parameters.Object.SerialLotNumbers Do
 		NewRow = New Structure("Key, SerialLotNumber, Quantity");
+		FillPropertyValues(NewRow, Row);
+		Table.Add(NewRow);
+	EndDo;
+	Return Table;
+EndFunction
+
+Function GetOption_Table_SourceOfOrigins(Parameters)
+	Table = New Array();
+	For Each Row In Parameters.Object.SourceOfOrigins Do
+		NewRow = New Structure("Key, SerialLotNumber, SourceOfOrigin, Quantity");
 		FillPropertyValues(NewRow, Row);
 		Table.Add(NewRow);
 	EndDo;
@@ -11360,7 +11397,8 @@ EndFunction
 
 Function IsFullLoadTabularSection(Parameters, PropertyName)
 	_PropertyName = Upper(PropertyName);
-	If _PropertyName = Upper("ConsignorBatches") Then
+	If _PropertyName = Upper("ConsignorBatches")
+		Or _PropertyName = Upper("SourceOfOrigins") Then
 		Return True;
 	EndIf;
 	Return False;
@@ -11940,6 +11978,9 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 	If Parameters.SerialLotNumbersExists And Not Parameters.Cache.Property("SerialLotNumbers") Then
 		Parameters.Cache.Insert("SerialLotNumbers", New Array());
 	EndIf;
+	If Parameters.SourceOfOriginsExists And Not Parameters.Cache.Property("SourceOfOrigins") Then
+		Parameters.Cache.Insert("SourceOfOrigins", New Array());
+	EndIf;
 	
 	ProcessedKeys = New Array();
 	AllExtractedData = New Structure();
@@ -11966,6 +12007,18 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 			EndDo;
 		EndIf;
 		
+		// add source of origins to separeted table
+		If Parameters.SourceOfOriginsExists Then
+			Filter = New Structure(SourceColumnsGroupBy);
+			FillPropertyValues(Filter, SourceRow);
+			For Each RowSoO In SourceTableExpanded.FindRows(Filter) Do
+				NewRowSoO = New Structure(Parameters.ObjectMetadataInfo.Tables.SourceOfOrigins.Columns);
+				FillPropertyValues(NewRowSoO, RowSoO);
+				NewRowSoO.Key = NewRow.Key;
+				Parameters.Cache.SourceOfOrigins.Add(NewRowSoO);
+			EndDo;
+		EndIf;
+			
 		// fill new row default values from user settings
 		AddNewRow(TableName, Parameters);
 		// fill new row from source table

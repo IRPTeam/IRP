@@ -2,17 +2,17 @@
 Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	StandardProcessing = False;
 	ChoiceData = New ValueList();
-	ChoiceData.Add(Enums.IncomingPaymentTransactionType.PaymentFromCustomer);
-	ChoiceData.Add(Enums.IncomingPaymentTransactionType.CurrencyExchange);
-	ChoiceData.Add(Enums.IncomingPaymentTransactionType.CashTransferOrder);
-	ChoiceData.Add(Enums.IncomingPaymentTransactionType.TransferFromPOS);
-	ChoiceData.Add(Enums.IncomingPaymentTransactionType.ReturnFromVendor);
+	ChoiceData.Add(PaymentFromCustomer);
+	ChoiceData.Add(CurrencyExchange);
+	ChoiceData.Add(CashTransferOrder);
+	ChoiceData.Add(TransferFromPOS);
+	ChoiceData.Add(ReturnFromVendor);
 	If Parameters.Filter.Property("Ref") And TypeOf(Parameters.Filter.Ref) = Type("DocumentRef.BankReceipt") Then
-		ChoiceData.Add(Enums.IncomingPaymentTransactionType.PaymentFromCustomerByPOS);
-		ChoiceData.Add(Enums.IncomingPaymentTransactionType.ReceiptByCheque);
+		ChoiceData.Add(PaymentFromCustomerByPOS);
+		ChoiceData.Add(ReceiptByCheque);
 	Else
 		If FOServer.IsUseConsolidatedRetailSales() Then
-			ChoiceData.Add(Enums.IncomingPaymentTransactionType.CashIn);
+			ChoiceData.Add(CashIn);
 		EndIf;	
 	EndIf;
 EndProcedure

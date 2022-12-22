@@ -142,6 +142,9 @@
     "common-module-type": {
       "enabled": false
     },
+    "reading-attribute-from-database": {
+      "enabled": false
+    },
     "invocation-form-event-handler": {
       "enabled": false
     },
@@ -155,6 +158,9 @@
       "enabled": false
     },
     "common-module-name-client": {
+      "enabled": false
+    },
+    "right-delete": {
       "enabled": false
     },
     "common-module-name-global": {

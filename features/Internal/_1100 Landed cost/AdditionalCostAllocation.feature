@@ -1105,7 +1105,54 @@ Scenario: _071 create additional revenue allocation (row, by amount)
 		And I close all client application windows		
 						
 			
-			
+		
+Scenario: _080 allocation of the additional cost to the invoice of the previous period		
+	* Preparation	
+		When allocation of the additional cost to the invoice of the previous period
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(9021).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(9022).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(9021).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.AdditionalCostAllocation.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.AdditionalCostAllocation.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(9022).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(9).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Check
+		Given I open hyperlink "e1cib/app/Report.BatchBalance"	
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I activate field named "OptionsListReportOption" in "OptionsList" table
+		And I select current line in "OptionsList" table
+		And I set checkbox named "SettingsComposerUserSettingsItem2Use"
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 03'    |
+		And I select current line in "List" table
+		Then "Batch balance (Test)" window is opened
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		Then "Select period" window is opened
+		And I input "01.12.2022" text in the field named "DateBegin"
+		And I input "04.12.2022" text in the field named "DateEnd"
+		And I click the button named "Select"		
+		And I click "Generate" button
+	* Check landed cost
+		And "Result" spreadsheet document contains "BathBalance_071_2" template lines by template	
+		And I close all client application windows
+		
+		
 						
 						
 			

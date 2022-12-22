@@ -166,6 +166,8 @@ EndProcedure
 #Region ItemAgreement
 
 Procedure AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, TransactionType, Parameters = Undefined) Export
+	CompanyIsSet = True;
+	DateIsSet    = True;
 	If Parameters <> Undefined Then
 		If Parameters.Property("Company") Then
 			Company = Parameters.Company;
@@ -185,9 +187,22 @@ Procedure AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceD
 			LegalName = Object.LegalName;
 		EndIf;
 	Else
-		Company   = Object.Company;
+		If CommonFunctionsClientServer.ObjectHasProperty(Object, "Company") Then
+			Company = Object.Company;
+		Else
+			Company = Undefined;
+			CompanyIsSet = False;
+		EndIf;
+		
 		Partner   = Object.Partner;
 		LegalName = Object.LegalName;
+	EndIf;
+
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Date") Then
+		Date = Object.Date;
+	Else
+		Date = Undefined;
+		DateIsSet = False;
 	EndIf;
 	
 	AgreementType = ModelServer_V2.GetAgreementTypeByTransactionType(TransactionType);
@@ -203,13 +218,17 @@ Procedure AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceD
 	OpenSettings.FormParameters.Insert("Partner"                     , Partner);
 	OpenSettings.FormParameters.Insert("IncludeFilterByPartner"      , True);
 	OpenSettings.FormParameters.Insert("IncludePartnerSegments"      , True);
-	OpenSettings.FormParameters.Insert("EndOfUseDate"                , Object.Date);
+	If DateIsSet Then
+		OpenSettings.FormParameters.Insert("EndOfUseDate", Date);
+	EndIf;
 	OpenSettings.FormParameters.Insert("IncludeFilterByEndOfUseDate" , True);
 	
 	OpenSettings.FillingData = New Structure();
 	OpenSettings.FillingData.Insert("Partner"   , Partner);
 	OpenSettings.FillingData.Insert("LegalName" , LegalName);
-	OpenSettings.FillingData.Insert("Company"   , Company);
+	If CompanyIsSet Then
+		OpenSettings.FillingData.Insert("Company"   , Company);
+	EndIf;
 	OpenSettings.FillingData.Insert("Type"      , AgreementType);
 
 	AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);

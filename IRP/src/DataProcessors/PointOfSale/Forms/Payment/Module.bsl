@@ -119,30 +119,27 @@ EndProcedure
 
 &AtClient
 Procedure CloseButton(Command)
-	
 	Close();
-	
 EndProcedure
 
 &AtClient
 Procedure Cash(Command)
-	
-	OpenPaymentForm(CashPaymentTypes, PredefinedValue("Enum.PaymentTypes.Cash"));
-	
+	OpenPaymentForm(ThisObject.CashPaymentTypes, PredefinedValue("Enum.PaymentTypes.Cash"));
 EndProcedure
 
 &AtClient
 Procedure Card(Command)
-	
-	OpenPaymentForm(BankPaymentTypes, PredefinedValue("Enum.PaymentTypes.Card"));
-
+	OpenPaymentForm(ThisObject.BankPaymentTypes, PredefinedValue("Enum.PaymentTypes.Card"));
 EndProcedure
 
 &AtClient
 Procedure Certificate(Command)
-	
 	Return;
-	
+EndProcedure
+
+&AtClient
+Procedure PaymentAgent(Command)
+	OpenPaymentForm(ThisObject.PaymentAgentTypes, PredefinedValue("Enum.PaymentTypes.PaymentAgent"));
 EndProcedure
 
 &AtClient
@@ -353,16 +350,18 @@ EndProcedure
 
 &AtServer
 Procedure FillPaymentsAtServer()
-	
 	CashPaymentTypesValue = GetCashPaymentTypesValue();
 	ValueToFormAttribute(CashPaymentTypesValue, "CashPaymentTypes");
 
 	BankPaymentTypesValue = GetBankPaymentTypesValue(Object.Branch);
 	ValueToFormAttribute(BankPaymentTypesValue, "BankPaymentTypes");
 
-	Items.Cash.Enabled = CashPaymentTypes.Count();
-	Items.Card.Enabled = BankPaymentTypes.Count();
+	PaymentAgentValue = GetPaymentAgentTypesValue(Object.Branch);
+	ValueToFormAttribute(PaymentAgentValue, "PaymentAgentTypes");
 
+	Items.Cash.Enabled = ThisObject.CashPaymentTypes.Count();
+	Items.Card.Enabled = ThisObject.BankPaymentTypes.Count();
+	Items.PaymentAgent.Enabled = ThisObject.PaymentAgentTypes.Count();
 EndProcedure
 
 // Get bank payment types value.
@@ -421,7 +420,6 @@ EndFunction
 //  	*Account - CatalogRef.CashAccounts
 &AtServer
 Function GetCashPaymentTypesValue()
-	
 	Query = New Query();
 	Query.Text = "SELECT
 	|	PaymentTypes.Ref AS PaymentType,
@@ -435,7 +433,23 @@ Function GetCashPaymentTypesValue()
 	|	AND NOT PaymentTypes.DeletionMark";
 	Query.SetParameter("CashAccount", Object.Workstation.CashAccount);
 	Return Query.Execute().Unload();
-	
+EndFunction
+
+&AtServer
+Function GetPaymentAgentTypesValue(Branch)
+	Query = New Query();
+	Query.Text = 
+		"SELECT
+		|	PaymentTypes.Ref AS PaymentType,
+		|	PaymentTypes.Description_en AS Description
+		|FROM
+		|	Catalog.PaymentTypes AS PaymentTypes
+		|WHERE
+		|	PaymentTypes.Type = VALUE(Enum.PaymentTypes.PaymentAgent)
+		|	AND NOT PaymentTypes.DeletionMark
+		|	AND PaymentTypes.Branch = &Branch";
+	Query.SetParameter("Branch", Branch);
+	Return Query.Execute().Unload();
 EndFunction
 
 // Fill payments
@@ -445,12 +459,11 @@ EndFunction
 //  AdditionalParameters - Arbitrary - Additional parameters
 &AtClient
 Procedure FillPayments(Result, AdditionalParameters) Export
-	
 	If Result = Undefined Then
 		Return;
 	EndIf;
 
-	FoundPayment = Payments.FindRows(Result);
+	FoundPayment = ThisObject.Payments.FindRows(Result);
 	If FoundPayment.Count() Then
 		Row = FoundPayment[0];
 		Row.Amount = 0;
@@ -466,12 +479,17 @@ Procedure FillPayments(Result, AdditionalParameters) Export
 		If Result.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Card") Then
 			DefaultPaymentFilter.Insert("BankTerm", Result.BankTerm);
 			DefaultPayment = BankPaymentTypes.FindRows(DefaultPaymentFilter);
-			Row.Percent = DefaultPayment[0].Percent;			
+			Row.Percent = DefaultPayment[0].Percent;
+			Row.Account = DefaultPayment[0].Account;
+		ElsIf Result.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.PaymentAgent") Then
+			DefaultPayment = CashPaymentTypes.FindRows(DefaultPaymentFilter);
+			//DefaultPayment.Percent = ????
 		Else
 			DefaultPayment = CashPaymentTypes.FindRows(DefaultPaymentFilter);
+			Row.Account = DefaultPayment[0].Account;
 		EndIf;
 		
-		Row.Account = DefaultPayment[0].Account;
+		//Row.Account = DefaultPayment[0].Account;
 	EndIf;
 	
 	If (Object.Amount - Payments.Total("Amount")) <= 0 Then
@@ -492,7 +510,6 @@ Procedure FillPayments(Result, AdditionalParameters) Export
 	
 	CalculatePaymentsAmountTotal();
 	FormatPaymentsAmountStringRows();
-	
 EndProcedure
 
 &AtClient

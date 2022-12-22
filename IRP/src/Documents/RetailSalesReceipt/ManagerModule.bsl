@@ -230,6 +230,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(OffersInfo());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(SourceOfOrigins());
+	QueryArray.Add(PaymentAgent());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
@@ -256,6 +257,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
 	QueryArray.Add(R8014T_ConsignorSales());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
+	QueryArray.Add(T2015S_TransactionsInfo());
 	Return QueryArray;
 EndFunction
 
@@ -512,6 +514,33 @@ Function SourceOfOrigins()
 		|	SourceOfOrigins.SerialLotNumber";
 EndFunction
 
+Function PaymentAgent()
+	Return
+		"SELECT
+		|	Payments.Ref.Date AS Period,
+		|	Payments.Ref.Company AS Company,
+		|	Payments.Ref.Branch AS Branch,
+		|	Payments.Ref.Currency AS Currency,
+		|	Payments.PaymentType.LegalName AS LegalName,
+		|	Payments.PaymentType.Partner AS Partner,
+		|	Payments.PaymentType.Agreement AS Agreement,
+		|	CASE
+		|		WHEN Payments.PaymentType.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			THEN Payments.Ref
+		|		ELSE UNDEFINED
+		|	END AS Basis,
+		|	UNDEFINED AS Order,
+		|	Payments.Amount AS Amount,
+		|	UNDEFINED AS CustomersAdvancesClosing,
+		|	Payments.PaymentType.LegalNameContract AS LegalNameContract
+		|INTO PaymentAgent
+		|FROM
+		|	Document.RetailSalesReceipt.Payments AS Payments
+		|WHERE
+		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.PaymentAgent)
+		|	AND Payments.Ref = &Ref";
+EndFunction
+
 Function R9010B_SourceOfOriginStock()
 	Return 
 		"SELECT
@@ -666,108 +695,223 @@ Function R2005T_SalesSpecialOffers()
 EndFunction
 
 Function R2021B_CustomersTransactions()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument AS Basis,
-		   |	SUM(ItemList.TotalAmount) AS Amount,
-		   |	UNDEFINED AS CustomersAdvancesClosing
-		   |INTO R2021B_CustomersTransactions
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.UsePartnerTransactions
-		   |GROUP BY
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Period,
-		   |	VALUE(AccumulationRecordType.Receipt)
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument,
-		   |	SUM(ItemList.TotalAmount),
-		   |	UNDEFINED
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.UsePartnerTransactions
-		   |GROUP BY
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Period,
-		   |	VALUE(AccumulationRecordType.Expense)";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument AS Basis,
+		|	UNDEFINED AS Order,
+		|	SUM(ItemList.TotalAmount) AS Amount,
+		|	UNDEFINED AS CustomersAdvancesClosing
+		|INTO R2021B_CustomersTransactions
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.UsePartnerTransactions
+		|GROUP BY
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.Period,
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	UNDEFINED,
+		|	SUM(ItemList.TotalAmount),
+		|	UNDEFINED
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.UsePartnerTransactions
+		|GROUP BY
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.Period,
+		|	VALUE(AccumulationRecordType.Expense)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentAgent.Period,
+		|	PaymentAgent.Company,
+		|	PaymentAgent.Branch,
+		|	PaymentAgent.Currency,
+		|	PaymentAgent.LegalName,
+		|	PaymentAgent.Partner,
+		|	PaymentAgent.Agreement,
+		|	PaymentAgent.Basis,
+		|	PaymentAgent.Order,
+		|	SUM(PaymentAgent.Amount) AS Amount,
+		|	PaymentAgent.CustomersAdvancesClosing
+		|FROM
+		|	PaymentAgent AS PaymentAgent
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	PaymentAgent.Period,
+		|	PaymentAgent.Company,
+		|	PaymentAgent.Branch,
+		|	PaymentAgent.Currency,
+		|	PaymentAgent.LegalName,
+		|	PaymentAgent.Partner,
+		|	PaymentAgent.Agreement,
+		|	PaymentAgent.Basis,
+		|	PaymentAgent.Order,
+		|	PaymentAgent.CustomersAdvancesClosing
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.Agreement,
+		|	OffsetOfAdvances.TransactionDocument,
+		|	OffsetOfAdvances.TransactionOrder,
+		|	OffsetOfAdvances.Amount,
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
 Function R5010B_ReconciliationStatement()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.LegalName,
-		   |	ItemList.LegalNameContract,
-		   |	ItemList.Currency,
-		   |	SUM(ItemList.TotalAmount) AS Amount,
-		   |	ItemList.Period
-		   |INTO R5010B_ReconciliationStatement
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.UsePartnerTransactions
-		   |GROUP BY
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.LegalName,
-		   |	ItemList.LegalNameContract,
-		   |	ItemList.Currency,
-		   |	ItemList.Period
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.LegalName,
-		   |	ItemList.LegalNameContract,
-		   |	ItemList.Currency,
-		   |	SUM(ItemList.TotalAmount),
-		   |	ItemList.Period
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.UsePartnerTransactions
-		   |GROUP BY
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.LegalName,
-		   |	ItemList.LegalNameContract,
-		   |	ItemList.Currency,
-		   |	ItemList.Period";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
+		|	ItemList.Currency,
+		|	SUM(ItemList.TotalAmount) AS Amount,
+		|	ItemList.Period
+		|INTO R5010B_ReconciliationStatement
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.UsePartnerTransactions
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
+		|	ItemList.Currency,
+		|	ItemList.Period,
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
+		|	ItemList.Currency,
+		|	SUM(ItemList.TotalAmount),
+		|	ItemList.Period
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.UsePartnerTransactions
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
+		|	ItemList.Currency,
+		|	ItemList.Period,
+		|	VALUE(AccumulationRecordType.Expense)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentAgent.Company,
+		|	PaymentAgent.Branch,
+		|	PaymentAgent.LegalName,
+		|	PaymentAgent.LegalNameContract,
+		|	PaymentAgent.Currency,
+		|	SUM(PaymentAgent.Amount) AS Amount,
+		|	PaymentAgent.Period
+		|FROM
+		|	PaymentAgent AS PaymentAgent
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	PaymentAgent.Company,
+		|	PaymentAgent.Branch,
+		|	PaymentAgent.LegalName,
+		|	PaymentAgent.LegalNameContract,
+		|	PaymentAgent.Currency,
+		|	PaymentAgent.Period";
+EndFunction
+
+Function T2015S_TransactionsInfo()
+	Return 
+		"SELECT
+		|	PaymentAgent.Period,
+		|	PaymentAgent.Company,
+		|	PaymentAgent.Branch,
+		|	PaymentAgent.Currency,
+		|	PaymentAgent.Partner,
+		|	PaymentAgent.LegalName,
+		|	PaymentAgent.Agreement,
+		|	PaymentAgent.Order,
+		|	TRUE AS IsCustomerTransaction,
+		|	PaymentAgent.Basis AS TransactionBasis,
+		|	SUM(PaymentAgent.Amount) AS Amount,
+		|	TRUE AS IsDue
+		|INTO T2015S_TransactionsInfo
+		|FROM
+		|	PaymentAgent AS PaymentAgent
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	PaymentAgent.Period,
+		|	PaymentAgent.Company,
+		|	PaymentAgent.Branch,
+		|	PaymentAgent.Currency,
+		|	PaymentAgent.Partner,
+		|	PaymentAgent.LegalName,
+		|	PaymentAgent.Agreement,
+		|	PaymentAgent.Order,
+		|	PaymentAgent.Basis";
 EndFunction
 
 Function T3010S_RowIDInfo()

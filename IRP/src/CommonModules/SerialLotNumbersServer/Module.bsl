@@ -208,11 +208,11 @@ EndFunction
 // Returns:
 //  CatalogRef.SerialLotNumbers
 Function GetNewSerialLotNumber(Barcode, ItemKey) Export
-	Options = SerialLotNumbersServer.GetSeriallotNumerOptions();
+	Options = GetSeriallotNumerOptions();
 	Options.Barcode = Barcode;
 	Options.Owner = ItemKey;
 	Options.Description = Barcode;
-	SerialLotNumber = SerialLotNumbersServer.CreateNewSerialLotNumber(Options);
+	SerialLotNumber = CreateNewSerialLotNumber(Options);
 	If Not SerialLotNumber.IsEmpty() Then
 		Option = New Structure();
 		Option.Insert("ItemKey", ItemKey);

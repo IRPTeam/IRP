@@ -6,7 +6,7 @@ EndProcedure
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
-	DocLabelingServer.CreateCommandsAndItems(Object);
+	CreateCommandsAndItems(Object);
 	SetGroupItemsList(Object, Form);
 EndProcedure
 

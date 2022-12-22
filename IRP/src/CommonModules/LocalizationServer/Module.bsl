@@ -106,7 +106,7 @@ Function CatalogDescriptionWithAddAttributes(Val Ref, Val LangCode = "", AddInfo
 		Presentation = StrConcat(UsersL, "/");
 	ElsIf Ref.Metadata() = Metadata.Catalogs.ItemKeys Or Ref.Metadata() = Metadata.Catalogs.PriceKeys Then
 		If ValueIsFilled(Ref.Item) And Not Ref.AddAttributes.Count() Then
-			Presentation = LocalizationServer.CatalogDescription(Ref.Item, LangCode, AddInfo);
+			Presentation = CatalogDescription(Ref.Item, LangCode, AddInfo);
 		EndIf;
 	EndIf;
 	Return Presentation;

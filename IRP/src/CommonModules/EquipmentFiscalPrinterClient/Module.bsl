@@ -216,7 +216,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
 	Result = ReceiptResultStructure();
 	
 	ResultInfo = Settings.ConnectedDriver.DriverObject.ProcessCheck(Settings.ConnectedDriver.ID
-																	, True
+																	, False
 																	, Parameters.ParametersXML
 																	, Parameters.ResultXML);
 	If ResultInfo Then
@@ -503,7 +503,9 @@ Function ReceiptGetXMLOperation(CommonParameters) Export
 		XMLWriter.WriteStartElement("FiscalString");
 		XMLWriter.WriteAttribute("AmountWithDiscount", ToXMLString(Item.AmountWithDiscount));
 		XMLWriter.WriteAttribute("DiscountAmount", ToXMLString(Item.DiscountAmount));
-		XMLWriter.WriteAttribute("MarkingCode", ToXMLString(Item.MarkingCode));
+		If Item.Property("MarkingCode") Then
+			XMLWriter.WriteAttribute("MarkingCode", ToXMLString(Item.MarkingCode));
+		EndIf;
 		XMLWriter.WriteAttribute("MeasureOfQuantity", ToXMLString(Item.MeasureOfQuantity));
 		XMLWriter.WriteAttribute("Name", ToXMLString(Item.Name));
 		XMLWriter.WriteAttribute("Quantity", ToXMLString(Item.Quantity));

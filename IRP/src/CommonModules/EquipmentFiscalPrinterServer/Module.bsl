@@ -4,9 +4,12 @@ Function PrepareReceiptData(RetailSalesReceipt) Export
 	Var Str;
 	Str = New Structure;
 	Str.Insert("CashierName", String(RetailSalesReceipt.Author));
-	Str.Insert("OperationType", 1);
-	Str.Insert("TaxationSystem", 0);	//TODO: TaxSystem choice
-	
+	If TypeOf(RetailSalesReceipt.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
+		Str.Insert("OperationType", 1);
+	Else
+		Str.Insert("OperationType", 2);
+	EndIf;
+	Str.Insert("TaxationSystem", 0);	//TODO: TaxSystem choice 
 	FiscalStrings = New Array;
 	For Each Item In RetailSalesReceipt.ItemList Do
 		RowFilter = New Structure();
@@ -18,7 +21,7 @@ Function PrepareReceiptData(RetailSalesReceipt) Export
 		FiscalStringData.Insert("DiscountAmount", Item.OffersAmount);
 		If SLNRows.Count() = 1 Then
 			FiscalStringData.Insert("MarkingCode", String(SLNRows[0].SerialLotNumber));	//TODO: Marking defenition
-		ElsIf SLNRows.Count() = 1 Then
+		ElsIf SLNRows.Count() > 1 Then
 			Raise("A few SerialLotNumber found!");
 		EndIf;
 		FiscalStringData.Insert("MeasureOfQuantity", "255");

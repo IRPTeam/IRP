@@ -898,9 +898,10 @@ Procedure CashInListSelection(Item, RowSelected, Field, StandardProcessing)
 		Return;
 	EndIf;
 	CashInData = New Structure();
-	CashInData.Insert("MoneyTransfer" , CurrentData.MoneyTransfer);
-	CashInData.Insert("Currency"      , CurrentData.Currency);
-	CashInData.Insert("Amount"        , CurrentData.Amount);
+	CashInData.Insert("MoneyTransfer"           , CurrentData.MoneyTransfer);
+	CashInData.Insert("Currency"                , CurrentData.Currency);
+	CashInData.Insert("Amount"                  , CurrentData.Amount);
+	CashInData.Insert("ConsolidatedRetailSales" , Object.ConsolidatedRetailSales);
 	
 	FillingData = GetFillingDataMoneyTransferForCashReceipt(CashInData);
 	OpenForm(
@@ -974,7 +975,8 @@ Function GetFillingDataMoneyTransferForCashReceipt(CashInData)
 	FillingData.Insert("Company"        , CashInData.MoneyTransfer.Company);	
 	FillingData.Insert("Branch"         , CashInData.MoneyTransfer.Branch);	
 	FillingData.Insert("CashAccount"    , ThisObject.Workstation.CashAccount);	
-	FillingData.Insert("Currency"       , CashInData.Currency);	
+	FillingData.Insert("Currency"       , CashInData.Currency);
+	FillingData.Insert("ConsolidatedRetailSales" , CashInData.ConsolidatedRetailSales);	
 	FillingData.Insert("PaymentList"    , New Array());	
 	NewRow = New Structure();
 	NewRow.Insert("TotalAmount"           , CashInData.Amount);	

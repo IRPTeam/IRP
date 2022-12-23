@@ -1,5 +1,6 @@
 Function SeparationUsed() Export
-	Return Constants.SaasMode.Get();
+//	Return Constants.SaasMode.Get();
+Возврат Ложь;
 EndFunction
 
 Function isAreaActive() Export

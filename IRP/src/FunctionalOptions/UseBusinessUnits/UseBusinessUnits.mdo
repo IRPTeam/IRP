@@ -59,7 +59,6 @@
   <content>AccumulationRegister.R6080T_OtherPeriodsRevenues.Dimension.Branch</content>
   <content>Catalog.PartnersBankAccounts.Attribute.Branch</content>
   <content>AccumulationRegister.R6070T_OtherPeriodsExpenses.Dimension.Branch</content>
-  <content>DataProcessor.PointOfSale.Attribute.Branch</content>
   <content>AccumulationRegister.R1014T_CanceledPurchaseOrders.Dimension.Branch</content>
   <content>AccumulationRegister.R5011B_CustomersAging.Dimension.Branch</content>
   <content>InformationRegister.T2014S_AdvancesInfo.Dimension.Branch</content>

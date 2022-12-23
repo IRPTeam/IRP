@@ -73,7 +73,7 @@ EndProcedure
 
 Function CheckLockData(Source, Cancel = False, isNew = False, OnOpen = False) Export
 	If Cancel OR Source.DataExchange.Load 
-		OR SessionParameters.IgnoreLockModificationData 
+		//OR SessionParameters.IgnoreLockModificationData 
 		OR Not Constants.UseLockDataModification.Get() Then
 			
 		Return False;

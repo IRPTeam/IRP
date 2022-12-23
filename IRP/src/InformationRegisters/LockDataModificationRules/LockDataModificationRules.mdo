@@ -16,6 +16,8 @@
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
+  <defaultRecordForm>InformationRegister.LockDataModificationRules.Form.RecordForm</defaultRecordForm>
+  <defaultListForm>InformationRegister.LockDataModificationRules.Form.ListForm</defaultListForm>
   <dataLockControlMode>Managed</dataLockControlMode>
   <recordPresentation>
     <key>en</key>
@@ -196,4 +198,22 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <forms uuid="24725370-381a-4571-b8e5-1511c469adef">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="37d14c42-8f37-4d8f-94e6-c1581eb689eb">
+    <name>RecordForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Record form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:InformationRegister>

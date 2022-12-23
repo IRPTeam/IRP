@@ -7,7 +7,6 @@
   </synonym>
   <location>Constant.UseRetail</location>
   <privilegedGetMode>true</privilegedGetMode>
-  <content>DataProcessor.PointOfSale</content>
   <content>Document.CashStatement</content>
   <content>Catalog.CashStatementStatuses</content>
   <content>Catalog.PaymentTerminals</content>

@@ -94,6 +94,7 @@
   <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
   <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
+  <registerRecords>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -440,6 +441,20 @@
       </synonym>
       <type>
         <types>DocumentRef.MoneyTransfer</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9119bb69-ceaa-4922-a807-142529faafb0">
+      <name>RetailCustomer</name>
+      <synonym>
+        <key>en</key>
+        <value>Retail customer</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.RetailCustomers</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

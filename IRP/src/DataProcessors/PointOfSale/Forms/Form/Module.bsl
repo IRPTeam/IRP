@@ -379,7 +379,31 @@ Procedure qPayment(Command)
 	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
 	ObjectParameters.Insert("Branch", Object.Branch);
 	ObjectParameters.Insert("Workstation", Workstation);
+	ObjectParameters.Insert("IsAdvance", False);
+	ObjectParameters.Insert("RetailCustomer", Object.RetailCustomer);
+	ObjectParameters.Insert("Company", Object.Company);
 
+	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
+		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+EndProcedure
+
+&AtClient
+Procedure Advance(Command)
+	If Not ValueIsFilled(Object.RetailCustomer) Then
+		// "Error. Retail customer is not filled
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_123);
+		Return;
+	EndIf;
+	
+	OpenFormNotifyDescription = New NotifyDescription("AdvanceFormClose", ThisObject);
+	ObjectParameters = New Structure();
+	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
+	ObjectParameters.Insert("Branch", Object.Branch);
+	ObjectParameters.Insert("Workstation", Workstation);
+	ObjectParameters.Insert("IsAdvance", True);
+	ObjectParameters.Insert("RetailCustomer", Object.RetailCustomer);
+	ObjectParameters.Insert("Company", Object.Company);
+	
 	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
 		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
@@ -625,6 +649,108 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	NewTransaction();
 	Modified = False;
 EndProcedure
+
+&AtClient
+Procedure AdvanceFormClose(Result, AdditionalData) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	ArrayOfPayments = New Array();
+	For Each Row In Result.Payments Do
+		If Row.Amount < 0 Then
+			Continue;
+		EndIf;
+		NewPayment = New Structure();
+		NewPayment.Insert("PaymentType");
+		NewPayment.Insert("PaymentTypeEnum");
+		NewPayment.Insert("Amount");
+		NewPayment.Insert("Account");
+		NewPayment.Insert("BankTerm");
+		NewPayment.Insert("Percent");
+		NewPayment.Insert("Commission");
+		FillPropertyValues(NewPayment, Row);
+		ArrayOfPayments.Add(NewPayment);
+	EndDo;
+	CreateDocumentsAtServer(ArrayOfPayments);
+	Object.RetailCustomer = Undefined;
+EndProcedure
+
+&AtServer
+Procedure CreateDocumentsAtServer(ArrayOfPayments)
+	// cash receipt
+	CashReceiptTable = New ValueTable();
+	CashReceiptTable.Columns.Add("Account");
+	CashReceiptTable.Columns.Add("Amount");
+	
+	For Each Row In ArrayOfPayments Do
+		If Row.PaymentTypeEnum = Enums.PaymentTypes.Cash Then
+			NewRow = CashReceiptTable.Add();
+			NewRow.Account = Row.Account;
+			NewRow.Amount  = Row.Amount;
+		EndIf;
+	EndDo;
+	
+	CashReceiptTableGrouped = CashReceiptTable.Copy();
+	CashReceiptTableGrouped.GroupBy("Account");
+	For Each RowHeader In CashReceiptTableGrouped Do
+		CashReceipt = BuilderAPI.Initialize("CashReceipt");
+		BuilderAPI.SetProperty(CashReceipt, "Company"     , Object.Company, "PaymentList");
+		BuilderAPI.SetProperty(CashReceipt, "Branch"      , Object.Branch, "PaymentList");
+		BuilderAPI.SetProperty(CashReceipt, "Date"        , CurrentSessionDate(), "PaymentList");
+		BuilderAPI.SetProperty(CashReceipt, "TransactionType" , Enums.IncomingPaymentTransactionType.CustomerAdvance, "PaymentList");
+		BuilderAPI.SetProperty(CashReceipt, "CashAccount" , RowHeader.Account, "PaymentList");
+	
+		
+		For Each RowList In CashReceiptTable.FindRows(New Structure("Account", RowHeader.Account)) Do	
+			NewRow = BuilderAPI.AddRow(CashReceipt, "PaymentList");
+			BuilderAPI.SetRowProperty(CashReceipt, NewRow, "RetailCustomer", Object.RetailCustomer, "PaymentList");
+			BuilderAPI.SetRowProperty(CashReceipt, NewRow, "TotalAmount"   , RowList.Amount, "PaymentList");
+		EndDo;
+		BuilderAPI.Write(CashReceipt, DocumentWriteMode.Posting);
+	EndDo;
+	
+	// bank receipt
+	BankReceiptTable = New ValueTable();
+	BankReceiptTable.Columns.Add("Account");
+	BankReceiptTable.Columns.Add("PaymentType");
+	BankReceiptTable.Columns.Add("PaymentTerminal");
+	BankReceiptTable.Columns.Add("BankTerm");
+	BankReceiptTable.Columns.Add("Amount");
+	
+	For Each Row In ArrayOfPayments Do
+		If Row.PaymentTypeEnum = Enums.PaymentTypes.Card Then
+			NewRow = BankReceiptTable.Add();
+			NewRow.Account         = Row.Account;
+			NewRow.PaymentType     = Row.PaymentType;
+//			NewRow.PaymentTerminal = Row.PaymentTerminal;
+			NewRow.BankTerm        = Row.BankTerm;
+			NewRow.Amount          = Row.Amount;
+		EndIf;
+	EndDo;
+	
+	BankReceiptTableGrouped = BankReceiptTable.Copy();
+	BankReceiptTableGrouped.GroupBy("Account");
+	For Each RowHeader In BankReceiptTableGrouped Do
+		BankReceipt = BuilderAPI.Initialize("BankReceipt");
+		BuilderAPI.SetProperty(BankReceipt, "Company"     , Object.Company, "PaymentList");
+		BuilderAPI.SetProperty(BankReceipt, "Branch"      , Object.Branch, "PaymentList");
+		BuilderAPI.SetProperty(BankReceipt, "Date"        , CurrentSessionDate(), "PaymentList");
+		BuilderAPI.SetProperty(BankReceipt, "TransactionType" , Enums.IncomingPaymentTransactionType.CustomerAdvance, "PaymentList");
+		BuilderAPI.SetProperty(BankReceipt, "Account" , RowHeader.Account, "PaymentList");
+	
+		For Each RowList In BankReceiptTable.FindRows(New Structure("Account", RowHeader.Account)) Do	
+			NewRow = BuilderAPI.AddRow(BankReceipt, "PaymentList");
+			BuilderAPI.SetRowProperty(BankReceipt, NewRow, "RetailCustomer"   , Object.RetailCustomer, "PaymentList");
+			BuilderAPI.SetRowProperty(BankReceipt, NewRow, "PaymentType"      , RowList.PaymentType, "PaymentList");
+			BuilderAPI.SetRowProperty(BankReceipt, NewRow, "BankTerm"         , RowList.BankTerm, "PaymentList");
+//			BuilderAPI.SetRowProperty(BankReceipt, NewRow, "PaymentTerminal"  , RowList.PaymentTerminal, "PaymentList");
+			BuilderAPI.SetRowProperty(BankReceipt, NewRow, "TotalAmount"      , RowList.Amount, "PaymentList");
+		EndDo;
+		BuilderAPI.Write(BankReceipt, DocumentWriteMode.Posting);
+	EndDo;
+	
+EndProcedure	
 
 &AtClient
 Procedure NewTransaction()

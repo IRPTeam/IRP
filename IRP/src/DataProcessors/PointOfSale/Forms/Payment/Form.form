@@ -1090,7 +1090,7 @@
             <id>69</id>
             <items xsi:type="form:FormGroup">
               <name>Group1</name>
-              <id>179</id>
+              <id>186</id>
               <items xsi:type="form:Button">
                 <name>Loyality</name>
                 <id>117</id>
@@ -1180,7 +1180,7 @@
               </title>
               <extendedTooltip>
                 <name>Group1ExtendedTooltip</name>
-                <id>180</id>
+                <id>185</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -2766,6 +2766,23 @@
     <id>32</id>
     <valueType>
       <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>ReceiptPaymentMethod</name>
+    <title>
+      <key>en</key>
+      <value>Receipt payment method</value>
+    </title>
+    <id>33</id>
+    <valueType>
+      <types>EnumRef.ReceiptPaymentMethods</types>
     </valueType>
     <view>
       <common>true</common>

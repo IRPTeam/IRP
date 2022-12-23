@@ -537,6 +537,7 @@ Function ReceiptGetXMLOperation(CommonParameters) Export
 EndFunction
 
 Function ToXMLString(Data)
+	//@skip-check Undefined function
 	Return XMLString(Data);
 EndFunction
 

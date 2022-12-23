@@ -661,6 +661,26 @@ EndProcedure
 
 Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, CalculationSettings)
 	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	MAX(CalculationMovementCosts.EndDate) AS EndDate
+	|FROM
+	|	Document.CalculationMovementCosts AS CalculationMovementCosts
+	|WHERE
+	|	CalculationMovementCosts.Ref <> &Ref
+	|	AND CalculationMovementCosts.Posted
+	|	AND CalculationMovementCosts.Company = &Company
+	|	AND CalculationMovementCosts.CalculationMode = VALUE(Enum.CalculationMode.AdditionalItemCost)";
+	Query.SetParameter("Ref", CalculationSettings.CalculationMovementCostRef);
+	Query.SetParameter("Company", CalculationSettings.Company);
+	EndLastPeriod = Date(1, 1, 1);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		EndLastPeriod = QuerySelection.EndDate;
+	EndIf;
+	
+	Query = New Query();
 	TempTablesManager = New TempTablesManager();
 	Query.TempTablesManager = TempTablesManager;
 	Query.Text =
@@ -752,7 +772,8 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|		ON R6010B_BatchWiseBalance.Batch.Document = CostAmounts.Document
 	|		AND R6010B_BatchWiseBalance.Batch.Company = CostAmounts.Company
 	|		AND R6010B_BatchWiseBalance.BatchKey.ItemKey = CostAmounts.ItemKey
-	|		AND R6010B_BatchWiseBalance.Recorder.Date BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
+	|		AND R6010B_BatchWiseBalance.Document.Date <= ENDOFPERIOD(&EndPeriod, DAY)
+	|		AND R6010B_BatchWiseBalance.Document.Date > ENDOFPERIOD(&EndLastPeriod, DAY)
 	|WHERE
 	|	CostAmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0
 	|;
@@ -778,13 +799,16 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|		ON R6050T_SalesBatches.Batch.Document = CostAmounts.Document
 	|		AND R6050T_SalesBatches.Batch.Company = CostAmounts.Company
 	|		AND R6050T_SalesBatches.BatchKey.ItemKey = CostAmounts.ItemKey
-	|		AND R6050T_SalesBatches.Recorder.Date BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
+	|		AND R6050T_SalesBatches.SalesInvoice.Date <= ENDOFPERIOD(&EndPeriod, DAY)
+	|		AND R6050T_SalesBatches.SalesInvoice.Date > ENDOFPERIOD(&EndLastPeriod, DAY)
 	|WHERE
 	|	CostAmounts.AmountPerOneUnit * R6050T_SalesBatches.Quantity <> 0";
 
-	Query.SetParameter("Company", CalculationSettings.Company);
-	Query.SetParameter("BeginPeriod", CalculationSettings.BeginPeriod);
-	Query.SetParameter("EndPeriod", CalculationSettings.EndPeriod);
+	Query.SetParameter("Company"       , CalculationSettings.Company);
+	Query.SetParameter("BeginPeriod"   , CalculationSettings.BeginPeriod);
+	Query.SetParameter("EndPeriod"     , CalculationSettings.EndPeriod);
+	Query.SetParameter("EndLastPeriod" , EndLastPeriod);
+	
 	QueryResults = Query.ExecuteBatch();
 
 	RecordSetR6010B = AccumulationRegisters.R6010B_BatchWiseBalance.CreateRecordSet();
@@ -817,6 +841,26 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 EndProcedure
 
 Procedure DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, CalculationSettings)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	MAX(CalculationMovementCosts.EndDate) AS EndDate
+	|FROM
+	|	Document.CalculationMovementCosts AS CalculationMovementCosts
+	|WHERE
+	|	CalculationMovementCosts.Ref <> &Ref
+	|	AND CalculationMovementCosts.Posted
+	|	AND CalculationMovementCosts.Company = &Company
+	|	AND CalculationMovementCosts.CalculationMode = VALUE(Enum.CalculationMode.AdditionalItemRevenue)";
+	Query.SetParameter("Ref", CalculationSettings.CalculationMovementCostRef);
+	Query.SetParameter("Company", CalculationSettings.Company);
+	EndLastPeriod = Date(1, 1, 1);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		EndLastPeriod = QuerySelection.EndDate;
+	EndIf;
+	
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -907,7 +951,8 @@ Procedure DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, Cal
 	|		ON R6010B_BatchWiseBalance.Batch.Document = RevenueAmounts.Document
 	|		AND R6010B_BatchWiseBalance.Batch.Company = RevenueAmounts.Company
 	|		AND R6010B_BatchWiseBalance.BatchKey.ItemKey = RevenueAmounts.ItemKey
-	|		AND R6010B_BatchWiseBalance.Recorder.Date BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
+	|		AND R6010B_BatchWiseBalance.Document.Date <= ENDOFPERIOD(&EndPeriod, DAY)
+	|		AND R6010B_BatchWiseBalance.Document.Date > ENDOFPERIOD(&EndLastPeriod, DAY)
 	|WHERE
 	|	RevenueAmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0
 	|;
@@ -933,13 +978,16 @@ Procedure DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, Cal
 	|		ON R6050T_SalesBatches.Batch.Document = RevenueAmounts.Document
 	|		AND R6050T_SalesBatches.Batch.Company = RevenueAmounts.Company
 	|		AND R6050T_SalesBatches.BatchKey.ItemKey = RevenueAmounts.ItemKey
-	|		AND R6050T_SalesBatches.Recorder.Date BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
+	|		AND R6050T_SalesBatches.SalesInvoice.Date <= ENDOFPERIOD(&EndPeriod, DAY)
+	|		AND R6050T_SalesBatches.SalesInvoice.Date > ENDOFPERIOD(&EndLastPeriod, DAY)
 	|WHERE
 	|	RevenueAmounts.AmountPerOneUnit * R6050T_SalesBatches.Quantity <> 0";
 
-	Query.SetParameter("Company", CalculationSettings.Company);
-	Query.SetParameter("BeginPeriod", CalculationSettings.BeginPeriod);
-	Query.SetParameter("EndPeriod", CalculationSettings.EndPeriod);
+	Query.SetParameter("Company"       , CalculationSettings.Company);
+	Query.SetParameter("BeginPeriod"   , CalculationSettings.BeginPeriod);
+	Query.SetParameter("EndPeriod"     , CalculationSettings.EndPeriod);
+	Query.SetParameter("EndLastPeriod" , EndLastPeriod);
+	
 	QueryResults = Query.ExecuteBatch();
 
 	RecordSetR6010B = AccumulationRegisters.R6010B_BatchWiseBalance.CreateRecordSet();

@@ -340,9 +340,7 @@ Async Procedure TestDevice(Settings) Export
 		Return;
 	EndIf;
 	
-	Device = HardwareServer.GetConnectionSettings(Settings.Hardware);
-	Settings.ConnectedDriver = Await GetDriverObject(Device);
-	
+	Settings = Await FillDriverParametersSettings(Settings.Hardware);
 	Settings.ServiceCallback = New NotifyDescription("TestDevice_End", ThisObject, Settings);
 	SetParameter_End(Undefined, Undefined, Settings)
 EndProcedure

@@ -19,7 +19,7 @@ EndProcedure
 
 &AtClient
 Async Procedure OnOpen(Cancel)
-	If ValueIsFilled(Parameters.Key) Then
+	If ValueIsFilled(Parameters.Key) And Not Object.Ref.IsEmpty() Then
 		Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref);
 		Settings.Callback = New NotifyDescription("FillDriverParameters_End", ThisObject);
 		HardwareClient.FillDriverParameters(Settings);
@@ -141,10 +141,12 @@ EndProcedure
 &AtClient
 Async Procedure Test(Command)
 	ClearMessages();
-
-	ReadOnly = True;
-	CommandBar.Enabled = False;
-
+	
+	If Modified OR Object.Ref.IsEmpty() Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_024);
+		Return;
+	EndIf;
+	
 	Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref);
 	Settings.Callback = New NotifyDescription("EndTestDevice", ThisObject, Settings);
 	Settings.AdditionalCommand = "CheckHealth";
@@ -164,7 +166,6 @@ EndProcedure
 
 &AtClient
 Procedure EndTestDevice(Result, OutParameters, AddInfo) Export
-	CommandBar.Enabled = True;
 	If TypeOf(OutParameters) = Type("Array") Then
 		OutParameter = StrConcat(OutParameters, Chars.LF); 
 		If Not Result Then

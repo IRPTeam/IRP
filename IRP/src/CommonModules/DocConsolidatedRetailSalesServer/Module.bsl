@@ -101,9 +101,11 @@ Function CreateDocument(Company, Branch, Workstation) Export
 	FillingValues.Insert("CashAccount", Workstation.CashAccount);
 	FillingValues.Insert("Date", CommonFunctionsServer.GetCurrentSessionDate());
 	FillingValues.Insert("Status", Enums.ConsolidatedRetailSalesStatuses.New);
-	
+	FillingValues.Insert("FiscalPrinter", Catalogs.Hardware.EmptyRef());
 	FiscalPrinter = HardwareServer.GetWorkstationHardwareByEquipmentType(Workstation, Enums.EquipmentTypes.FiscalPrinter);
-	FillingValues.Insert("FiscalPrinter", FiscalPrinter[0]);
+	If FiscalPrinter.Count() Then
+		FillingValues.Insert("FiscalPrinter", FiscalPrinter[0]);
+	EndIf;
 	
 	Doc = Documents.ConsolidatedRetailSales.CreateDocument();
 	Doc.Fill(FillingValues);

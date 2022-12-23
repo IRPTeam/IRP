@@ -10,6 +10,10 @@
 Async Function OpenShift(ConsolidatedRetailSales) Export
 	
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
+	If CRS.FiscalPrinter.isEmpty() Then
+		Return ShiftResultStructure();
+	EndIf;
+	
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
 	Parameters = ShiftSettings();
@@ -74,6 +78,9 @@ EndFunction
 Async Function CloseShift(ConsolidatedRetailSales) Export
 	
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
+	If CRS.FiscalPrinter.isEmpty() Then
+		Return ShiftResultStructure();
+	EndIf;
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
 	Parameters = ShiftSettings();
@@ -123,6 +130,9 @@ EndFunction
 Async Function PrintXReport(ConsolidatedRetailSales) Export
 	
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
+	If CRS.FiscalPrinter.isEmpty() Then
+		Return ShiftResultStructure();
+	EndIf;
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
 	Parameters = ShiftSettings();
@@ -173,6 +183,9 @@ EndFunction
 Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
 	
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
+	If CRS.FiscalPrinter.isEmpty() Then
+		Return ReceiptResultStructure();
+	EndIf;
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
 	Parameters = ShiftSettings();
@@ -240,6 +253,9 @@ EndFunction
 Async Function CashInCome(ConsolidatedRetailSales, Summ) Export
 	
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
+	If CRS.FiscalPrinter.isEmpty() Then
+		Return ShiftResultStructure();
+	EndIf;
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
 	Parameters = ShiftSettings();
@@ -292,6 +308,9 @@ EndFunction
 Async Function CashOutCome(ConsolidatedRetailSales, Summ) Export
 	
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
+	If CRS.FiscalPrinter.isEmpty() Then
+		Return ShiftResultStructure();
+	EndIf;
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
 	Parameters = ShiftSettings();
@@ -363,7 +382,7 @@ EndFunction
 
 Function ShiftResultStructure()
 	ReturnValue = New Structure;
-	ReturnValue.Insert("Success", False);
+	ReturnValue.Insert("Success", True);
 	ReturnValue.Insert("ErrorDescription", "");
 	
 	ReturnValue.Insert("BacklogDocumentFirstDateTime", Date(1, 1, 1));
@@ -375,7 +394,7 @@ Function ShiftResultStructure()
 	ReturnValue.Insert("CountersOperationType2", GetCountersOperationType());
 	ReturnValue.Insert("CountersOperationType3", GetCountersOperationType());
 	ReturnValue.Insert("CountersOperationType4", GetCountersOperationType());
-	ReturnValue.Insert("DateTime", Date(1, 1, 1));
+	ReturnValue.Insert("DateTime", CurrentDate());
 	ReturnValue.Insert("FNError", False);
 	ReturnValue.Insert("FNFail", False);
 	ReturnValue.Insert("FNOverflow", False);
@@ -387,7 +406,7 @@ EndFunction
 
 Function ReceiptResultStructure()
 	ReturnValue = New Structure;
-	ReturnValue.Insert("Success", False);
+	ReturnValue.Insert("Success", True);
 	ReturnValue.Insert("ErrorDescription", "");
 	ReturnValue.Insert("Status", "");
 	ReturnValue.Insert("FiscalResponse", "");
@@ -395,7 +414,7 @@ Function ReceiptResultStructure()
 	
 	ReturnValue.Insert("AddressSiteInspections", "");
 	ReturnValue.Insert("CheckNumber", 0);
-	ReturnValue.Insert("DateTime", Date(1, 1, 1));
+	ReturnValue.Insert("DateTime", CurrentDate());
 	ReturnValue.Insert("FiscalSign", "");
 	ReturnValue.Insert("ShiftClosingCheckNumber", 0);
 	ReturnValue.Insert("ShiftNumber", 0);

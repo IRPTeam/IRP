@@ -35,11 +35,17 @@ Procedure BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters) 
 		CreditNoteTableName = Parameters.CreditNoteTableName;
 	EndIf;
 
+	RetailSalesReceiptTableName = Undefined;
+	If Parameters.Property("RetailSalesReceiptTableName") Then
+		RetailSalesReceiptTableName = Parameters.RetailSalesReceiptTableName;
+	EndIf;
+	
 	FilterStructure = CreateFilterByParameters(Parameters.Ref, TransferParameters, Parameters.TableName,
 		OpeningEntryTableName1, 
 		OpeningEntryTableName2, 
 		DebitNoteTableName, 
-		CreditNoteTableName);
+		CreditNoteTableName,
+		RetailSalesReceiptTableName);
 	FormParameters = New Structure("CustomFilter", FilterStructure);
 
 	EnteredItems = New Array;
@@ -70,7 +76,8 @@ Function CreateFilterByParameters(Ref, Parameters, TableName,
 			OpeningEntryTableName1,
 			OpeningEntryTableName2, 
 			DebitNoteTableName, 
-			CreditNoteTableName)
+			CreditNoteTableName,
+			RetailSalesReceiptTableName)
 
 	QueryParameters = New Structure();
 	QueryParameters.Insert("Ref", Ref);
@@ -81,7 +88,8 @@ Function CreateFilterByParameters(Ref, Parameters, TableName,
 			OpeningEntryTableName1, 
 			OpeningEntryTableName2, 
 			DebitNoteTableName, 
-			CreditNoteTableName);
+			CreditNoteTableName,
+			RetailSalesReceiptTableName);
 	QueryText_DocWithBalance = GetDocWithBalanceQueryText();
 	QueryText_AllDoc = GetAllDocQueryText();
 	QueryText = QueryText_Doc + "; " + QueryText_DocWithBalance + "; " + QueryText_AllDoc;  
@@ -96,7 +104,8 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 			OpeningEntryTableName1, 
 			OpeningEntryTableName2, 
 			DebitNoteTableName, 
-			CreditNoteTableName)
+			CreditNoteTableName,
+			RetailSalesReceiptTableName)
 
 	QueryText_TableName = 
 	"SELECT ALLOWED
@@ -113,6 +122,25 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 	|WHERE
 	|	True
 	|	%2";
+
+	QueryText_RetailSalesReceipt = "";
+	If RetailSalesReceiptTableName <> Undefined Then
+		QueryText_RetailSalesReceipt = "
+		|UNION ALL
+		|SELECT
+		|	CustomersTransactions.Recorder,
+		|	CustomersTransactions.Company,
+		|	CustomersTransactions.Partner,
+		|	CustomersTransactions.LegalName,
+		|	CustomersTransactions.Agreement,
+		|	CustomersTransactions.Amount,
+		|	CustomersTransactions.Currency
+		|FROM
+		|	AccumulationRegister.R2021B_CustomersTransactions AS CustomersTransactions
+		|WHERE
+		|	CustomersTransactions.Recorder REFS Document.RetailSalesReceipt
+		|	%1";
+	EndIf;
 
 	QueryText_OpeningEntryTableName1 = "";
 	If OpeningEntryTableName1 <> Undefined Then
@@ -202,7 +230,8 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 	ArrayOfConditionsOpeningEntry = New Array();
 	ArrayOfConditionsDebitNote = New Array();
 	ArrayOfConditionsCreditNote = New Array();
-
+	ArrayOfConditionsRetailSalesReceipt = New Array();
+	
 	If Parameters.Property("Type") Then
 		QueryParameters.Insert("Type", Parameters.Type);
 		ArrayOfConditions.Add(" AND Obj.Type = &Type");
@@ -224,6 +253,7 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 		ArrayOfConditionsOpeningEntry.Add(" AND NOT OpeningEntry.Ref.DeletionMark = &Unmarked");
 		ArrayOfConditionsDebitNote.Add(" AND NOT DebitNote.Ref.DeletionMark = &Unmarked");
 		ArrayOfConditionsCreditNote.Add(" AND NOT CreditNote.Ref.DeletionMark = &Unmarked");
+		ArrayOfConditionsRetailSalesReceipt.Add(" AND NOT CustomersTransactions.Recorder.DeletionMark = &Unmarked");
 	EndIf;
 
 	If Parameters.Property("Partner") Then
@@ -232,6 +262,7 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 		ArrayOfConditionsOpeningEntry.Add(" AND OpeningEntry.Partner = &Partner");
 		ArrayOfConditionsDebitNote.Add(" AND DebitNote.Partner = &Partner");
 		ArrayOfConditionsCreditNote.Add(" AND CreditNote.Partner = &Partner");
+		ArrayOfConditionsRetailSalesReceipt.Add(" AND CustomersTransactions.Partner = &Partner");
 	EndIf;
 
 	If Parameters.Property("LegalName") Then
@@ -240,6 +271,7 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 		ArrayOfConditionsOpeningEntry.Add(" AND OpeningEntry.LegalName = &LegalName");
 		ArrayOfConditionsDebitNote.Add(" AND DebitNote.LegalName = &LegalName");
 		ArrayOfConditionsCreditNote.Add(" AND CreditNote.LegalName = &LegalName");
+		ArrayOfConditionsRetailSalesReceipt.Add(" AND CustomersTransactions.Partner = &Partner");
 	EndIf;
 
 	If Parameters.Property("Agreement") Then
@@ -248,6 +280,7 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 		ArrayOfConditionsOpeningEntry.Add(" AND OpeningEntry.Agreement = &Agreement");
 		ArrayOfConditionsDebitNote.Add(" AND DebitNote.Agreement = &Agreement");
 		ArrayOfConditionsCreditNote.Add(" AND CreditNote.Agreement = &Agreement");
+		ArrayOfConditionsRetailSalesReceipt.Add(" AND CustomersTransactions.Agreement = &Agreement");
 	EndIf;
 
 	If Parameters.Property("Company") Then
@@ -256,6 +289,7 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 		ArrayOfConditionsOpeningEntry.Add(" AND OpeningEntry.Ref.Company = &Company");
 		ArrayOfConditionsDebitNote.Add(" AND DebitNote.Ref.Company = &Company");
 		ArrayOfConditionsCreditNote.Add(" AND CreditNote.Ref.Company = &Company");
+		ArrayOfConditionsRetailSalesReceipt.Add(" AND CustomersTransactions.Company = &Company");
 	EndIf;
 
 	If Parameters.Property("Agreement_ApArPostingDetail") Then
@@ -272,14 +306,20 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 		ArrayOfConditionsOpeningEntry.Add(" AND OpeningEntry.Ref.Posted = &Posted");
 		ArrayOfConditionsDebitNote.Add(" AND DebitNote.Ref.Posted = &Posted");
 		ArrayOfConditionsCreditNote.Add(" AND CreditNote.Ref.Posted = &Posted");
+		ArrayOfConditionsRetailSalesReceipt.Add(" AND CustomersTransactions.Recorder.Posted = &Posted");
 	EndIf;
 
 	ConditionsText             = StrConcat(ArrayOfConditions);
 	ConditionsOpeningEntryText = StrConcat(ArrayOfConditionsOpeningEntry);
 	ConditionsDebitNoteText    = StrConcat(ArrayOfConditionsDebitNote);
 	ConditionsCreditNoteText   = StrConcat(ArrayOfConditionsCreditNote);
+	ConditionsRetailSalesReceiptText = StrConcat(ArrayOfConditionsRetailSalesReceipt);
 
 	QueryText_TableName = StrTemplate(QueryText_TableName, TableName, ConditionsText);
+
+	If RetailSalesReceiptTableName <> Undefined Then
+		QueryText_RetailSalesReceipt = StrTemplate(QueryText_RetailSalesReceipt, ConditionsRetailSalesReceiptText);
+	EndIf;
 
 	If OpeningEntryTableName1 <> Undefined Then
 		QueryText_OpeningEntryTableName1 = StrTemplate(QueryText_OpeningEntryTableName1, OpeningEntryTableName1,
@@ -303,8 +343,8 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 			QueryText_OpeningEntryTableName1 + 
 			QueryText_OpeningEntryTableName2 + 
 			QueryText_DebitNote	+ 
-			QueryText_CreditNote;
-			
+			QueryText_CreditNote +
+			QueryText_RetailSalesReceipt;
 EndFunction
 
 Function GetDocWithBalanceQueryText()

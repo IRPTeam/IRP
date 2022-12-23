@@ -997,20 +997,99 @@
           <items xsi:type="form:FormGroup">
             <name>Группа2</name>
             <id>69</id>
-            <items xsi:type="form:Button">
-              <name>Loyality</name>
-              <id>117</id>
-              <title>
-                <key>en</key>
-                <value>Loyality points</value>
-              </title>
+            <items xsi:type="form:FormGroup">
+              <name>Group1</name>
+              <id>179</id>
+              <items xsi:type="form:Button">
+                <name>Loyality</name>
+                <id>117</id>
+                <title>
+                  <key>en</key>
+                  <value>Loyality points</value>
+                </title>
+                <visible>true</visible>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <extendedTooltip>
+                  <name>LoyalityExtendedTooltip</name>
+                  <id>118</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <type>UsualButton</type>
+                <commandName>Form.Command.Certificate</commandName>
+                <representation>Auto</representation>
+                <width>8</width>
+                <autoMaxWidth>true</autoMaxWidth>
+                <height>3</height>
+                <autoMaxHeight>true</autoMaxHeight>
+                <placementArea>UserCmds</placementArea>
+                <textColor xsi:type="core:ColorRef">
+                  <color>Windows.ToolTip</color>
+                </textColor>
+                <font xsi:type="core:FontRef">
+                  <font>Style.ExtraLargeTextFont</font>
+                </font>
+                <representationInContextMenu>Auto</representationInContextMenu>
+              </items>
+              <items xsi:type="form:Button">
+                <name>PaymentAgent</name>
+                <id>183</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <extendedTooltip>
+                  <name>PaymentAgentExtendedTooltip</name>
+                  <id>184</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <type>UsualButton</type>
+                <commandName>Form.Command.PaymentAgent</commandName>
+                <representation>Auto</representation>
+                <width>7</width>
+                <autoMaxWidth>true</autoMaxWidth>
+                <height>3</height>
+                <autoMaxHeight>true</autoMaxHeight>
+                <placementArea>UserCmds</placementArea>
+                <font xsi:type="core:FontRef">
+                  <font>Style.ExtraLargeTextFont</font>
+                </font>
+                <representationInContextMenu>Auto</representationInContextMenu>
+              </items>
               <visible>true</visible>
+              <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
               </userVisible>
+              <title>
+                <key>en</key>
+                <value>Group1</value>
+              </title>
               <extendedTooltip>
-                <name>LoyalityExtendedTooltip</name>
-                <id>118</id>
+                <name>Group1ExtendedTooltip</name>
+                <id>180</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -1023,21 +1102,15 @@
                   <horizontalAlign>Left</horizontalAlign>
                 </extInfo>
               </extendedTooltip>
-              <type>UsualButton</type>
-              <commandName>Form.Command.Certificate</commandName>
-              <representation>Auto</representation>
-              <width>15</width>
-              <autoMaxWidth>true</autoMaxWidth>
-              <height>3</height>
-              <autoMaxHeight>true</autoMaxHeight>
-              <placementArea>UserCmds</placementArea>
-              <textColor xsi:type="core:ColorRef">
-                <color>Windows.ToolTip</color>
-              </textColor>
-              <font xsi:type="core:FontRef">
-                <font>Style.ExtraLargeTextFont</font>
-              </font>
-              <representationInContextMenu>Auto</representationInContextMenu>
+              <type>UsualGroup</type>
+              <extInfo xsi:type="form:UsualGroupExtInfo">
+                <group>AlwaysHorizontal</group>
+                <behavior>Auto</behavior>
+                <showLeftMargin>true</showLeftMargin>
+                <united>true</united>
+                <throughAlign>Auto</throughAlign>
+                <currentRowUse>Auto</currentRowUse>
+              </extInfo>
             </items>
             <items xsi:type="form:Decoration">
               <name>DecorationColumn2</name>
@@ -2070,6 +2143,10 @@
     <event>FillCheckProcessingAtServer</event>
     <name>FillCheckProcessingAtServer</name>
   </handlers>
+  <handlers>
+    <event>OnOpen</event>
+    <name>OnOpen</name>
+  </handlers>
   <windowOpeningMode>LockWholeInterface</windowOpeningMode>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -2555,6 +2632,57 @@
       </edit>
     </columns>
   </attributes>
+  <attributes>
+    <name>PaymentAgentTypes</name>
+    <title>
+      <key>en</key>
+      <value>Payment agent types</value>
+    </title>
+    <id>30</id>
+    <valueType>
+      <types>ValueTable</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <columns>
+      <name>PaymentType</name>
+      <title>
+        <key>en</key>
+        <value>Payment type</value>
+      </title>
+      <id>31</id>
+      <valueType>
+        <types>CatalogRef.PaymentTypes</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+  </attributes>
+  <attributes>
+    <name>IsAdvance</name>
+    <title>
+      <key>en</key>
+      <value>Is advance</value>
+    </title>
+    <id>32</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>Card</name>
     <title>
@@ -2879,6 +3007,23 @@
     </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
+  <formCommands>
+    <name>PaymentAgent</name>
+    <title>
+      <key>en</key>
+      <value>P\A</value>
+    </title>
+    <id>22</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>PaymentAgent</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
   <parameters>
     <name>Amount</name>
     <valueType>
@@ -2903,6 +3048,24 @@
       <types>CatalogRef.Workstations</types>
     </valueType>
     <keyParameter>true</keyParameter>
+  </parameters>
+  <parameters>
+    <name>IsAdvance</name>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+  </parameters>
+  <parameters>
+    <name>RetailCustomer</name>
+    <valueType>
+      <types>CatalogRef.RetailCustomers</types>
+    </valueType>
+  </parameters>
+  <parameters>
+    <name>Company</name>
+    <valueType>
+      <types>CatalogRef.Companies</types>
+    </valueType>
   </parameters>
   <commandInterface>
     <navigationPanel/>

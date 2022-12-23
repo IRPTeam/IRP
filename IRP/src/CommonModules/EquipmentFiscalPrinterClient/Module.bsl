@@ -382,7 +382,7 @@ EndFunction
 
 Function ShiftResultStructure()
 	ReturnValue = New Structure;
-	ReturnValue.Insert("Success", True);
+	ReturnValue.Insert("Success", False);
 	ReturnValue.Insert("ErrorDescription", "");
 	
 	ReturnValue.Insert("BacklogDocumentFirstDateTime", Date(1, 1, 1));
@@ -406,7 +406,7 @@ EndFunction
 
 Function ReceiptResultStructure()
 	ReturnValue = New Structure;
-	ReturnValue.Insert("Success", True);
+	ReturnValue.Insert("Success", False);
 	ReturnValue.Insert("ErrorDescription", "");
 	ReturnValue.Insert("Status", "");
 	ReturnValue.Insert("FiscalResponse", "");

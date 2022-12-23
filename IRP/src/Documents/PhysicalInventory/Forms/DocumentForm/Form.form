@@ -3906,7 +3906,7 @@
     <name>PhysicalCountByLocationList</name>
     <title>
       <key>en</key>
-      <value>Physical count by location list</value>
+      <value>Count rows</value>
     </title>
     <id>6</id>
     <valueType>
@@ -3946,7 +3946,7 @@ GROUP BY
           <localValue>
             <content>
               <key>en</key>
-              <value>Physical count by location list count rows</value>
+              <value>Count rows</value>
             </content>
           </localValue>
         </title>
@@ -3958,11 +3958,94 @@ GROUP BY
           <localValue>
             <content>
               <key>en</key>
-              <value>Physical count by location list phys count</value>
+              <value>Phys. count</value>
             </content>
           </localValue>
         </title>
       </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Number</dataPath>
+        <field>Number</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Date</dataPath>
+        <field>Date</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PhysicalInventory</dataPath>
+        <field>PhysicalInventory</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ResponsibleUser</dataPath>
+        <field>ResponsibleUser</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>RuleEditQuantity</dataPath>
+        <field>RuleEditQuantity</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Store</dataPath>
+        <field>Store</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>UseSerialLot</dataPath>
+        <field>UseSerialLot</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Author</dataPath>
+        <field>Author</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Branch</dataPath>
+        <field>Branch</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description</dataPath>
+        <field>Description</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ItemList</dataPath>
+        <field>ItemList</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>AddAttributes</dataPath>
+        <field>AddAttributes</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PointInTime</dataPath>
+        <field>PointInTime</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Ref</dataPath>
+        <field>Ref</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Status</dataPath>
+        <field>Status</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>DeletionMark</dataPath>
+        <field>DeletionMark</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Posted</dataPath>
+        <field>Posted</field>
+      </fields>
+      <parameters>
+        <name>PhysicalInventoryRef</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Physical inventory ref</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>DocumentRef.PhysicalInventory</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
     </extInfo>
   </attributes>
   <attributes>

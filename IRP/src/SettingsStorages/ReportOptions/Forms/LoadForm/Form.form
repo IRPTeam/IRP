@@ -1068,7 +1068,7 @@ WHERE
           <localValue>
             <content>
               <key>en</key>
-              <value>Options listis current option</value>
+              <value>Is current option</value>
             </content>
           </localValue>
         </title>
@@ -1080,7 +1080,7 @@ WHERE
           <localValue>
             <content>
               <key>en</key>
-              <value>Options list option key</value>
+              <value>Option key</value>
             </content>
           </localValue>
         </title>
@@ -1092,7 +1092,7 @@ WHERE
           <localValue>
             <content>
               <key>en</key>
-              <value>Options list shared</value>
+              <value>Shared</value>
             </content>
           </localValue>
         </title>
@@ -1104,11 +1104,90 @@ WHERE
           <localValue>
             <content>
               <key>en</key>
-              <value>Options list report option</value>
+              <value>Report option</value>
             </content>
           </localValue>
         </title>
       </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description</dataPath>
+        <field>Description</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ObjectKey</dataPath>
+        <field>ObjectKey</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Option</dataPath>
+        <field>Option</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Predefined</dataPath>
+        <field>Predefined</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PredefinedDataName</dataPath>
+        <field>PredefinedDataName</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Author</dataPath>
+        <field>Author</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>DeletionMark</dataPath>
+        <field>DeletionMark</field>
+      </fields>
+      <parameters>
+        <name>ObjectKey</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Object key</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>String</types>
+          <stringQualifiers>
+            <length>1024</length>
+          </stringQualifiers>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>Author</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Author</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>CatalogRef.Users</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>CurrentSettingsKey</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Current settings key</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>String</types>
+          <stringQualifiers>
+            <length>36</length>
+          </stringQualifiers>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
     </extInfo>
   </attributes>
   <attributes>

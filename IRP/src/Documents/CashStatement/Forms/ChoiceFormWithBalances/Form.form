@@ -847,19 +847,19 @@ GROUP BY
           <localValue>
             <content>
               <key>en</key>
-              <value>List amount</value>
+              <value>Amount</value>
             </content>
           </localValue>
         </title>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>AmountBalance</dataPath>
+        <dataPath>[Amount balance]</dataPath>
         <field>AmountBalance</field>
         <title>
           <localValue>
             <content>
               <key>en</key>
-              <value>List amount balance</value>
+              <value>Balance</value>
             </content>
           </localValue>
         </title>
@@ -871,7 +871,7 @@ GROUP BY
           <localValue>
             <content>
               <key>en</key>
-              <value>List commission balance</value>
+              <value>Commission balance</value>
             </content>
           </localValue>
         </title>
@@ -883,11 +883,187 @@ GROUP BY
           <localValue>
             <content>
               <key>en</key>
-              <value>List commission</value>
+              <value>Commission</value>
             </content>
           </localValue>
         </title>
       </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>BasisDocument</dataPath>
+        <field>BasisDocument</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>BegOfPeriod</dataPath>
+        <field>BegOfPeriod</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>CashAccount</dataPath>
+        <field>CashAccount</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ClosingBalance</dataPath>
+        <field>ClosingBalance</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>EndOfPeriod</dataPath>
+        <field>EndOfPeriod</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>OpeningBalance</dataPath>
+        <field>OpeningBalance</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>RealCashBalance</dataPath>
+        <field>RealCashBalance</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ReturnsAmount</dataPath>
+        <field>ReturnsAmount</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>SalesAmount</dataPath>
+        <field>SalesAmount</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Status</dataPath>
+        <field>Status</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Author</dataPath>
+        <field>Author</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description</dataPath>
+        <field>Description</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>CashTransactionList</dataPath>
+        <field>CashTransactionList</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PaymentList</dataPath>
+        <field>PaymentList</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>AddAttributes</dataPath>
+        <field>AddAttributes</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Currencies</dataPath>
+        <field>Currencies</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PointInTime</dataPath>
+        <field>PointInTime</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Date</dataPath>
+        <field>Date</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Number</dataPath>
+        <field>Number</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Company</dataPath>
+        <field>Company</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Branch</dataPath>
+        <field>Branch</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Ref</dataPath>
+        <field>Ref</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>DeletionMark</dataPath>
+        <field>DeletionMark</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Posted</dataPath>
+        <field>Posted</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>CurrencyMovementType</dataPath>
+        <field>CurrencyMovementType</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Currency</dataPath>
+        <field>Currency</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Account</dataPath>
+        <field>Account</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ReceiptingAccount</dataPath>
+        <field>ReceiptingAccount</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Basis</dataPath>
+        <field>Basis</field>
+      </fields>
+      <parameters>
+        <name>Period</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Period</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>Date</types>
+          <dateQualifiers/>
+        </valueType>
+      </parameters>
+      <parameters>
+        <name>Company</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Company</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>CatalogRef.Companies</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>Branch</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Branch</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>CatalogRef.BusinessUnits</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>Account</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Account</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>CatalogRef.CashAccounts</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
     </extInfo>
   </attributes>
   <commandInterface>

@@ -2143,6 +2143,10 @@
     <event>FillCheckProcessingAtServer</event>
     <name>FillCheckProcessingAtServer</name>
   </handlers>
+  <handlers>
+    <event>OnOpen</event>
+    <name>OnOpen</name>
+  </handlers>
   <windowOpeningMode>LockWholeInterface</windowOpeningMode>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -3049,6 +3053,18 @@
     <name>IsAdvance</name>
     <valueType>
       <types>Boolean</types>
+    </valueType>
+  </parameters>
+  <parameters>
+    <name>RetailCustomer</name>
+    <valueType>
+      <types>CatalogRef.RetailCustomers</types>
+    </valueType>
+  </parameters>
+  <parameters>
+    <name>Company</name>
+    <valueType>
+      <types>CatalogRef.Companies</types>
     </valueType>
   </parameters>
   <commandInterface>

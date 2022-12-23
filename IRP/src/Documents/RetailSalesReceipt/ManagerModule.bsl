@@ -258,6 +258,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R8014T_ConsignorSales());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
 	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
 	Return QueryArray;
 EndFunction
 
@@ -326,23 +327,26 @@ Function ItemList()
 EndFunction
 
 Function Payments()
-	Return "SELECT
-		   |	Payments.Ref.Date AS Period,
-		   |	Payments.Ref.Company AS Company,
-		   |	Payments.Ref.Branch AS Branch,
-		   |	Payments.Account AS Account,
-		   |	Payments.Ref.Currency AS Currency,
-		   |	Payments.Amount AS Amount,
-		   |	Payments.PaymentType AS PaymentType,
-		   |	Payments.PaymentTerminal AS PaymentTerminal,
-		   |	Payments.BankTerm AS BankTerm,
-		   |	Payments.Percent AS Percent,
-		   |	Payments.Commission AS Commission
-		   |INTO Payments
-		   |FROM
-		   |	Document.RetailSalesReceipt.Payments AS Payments
-		   |WHERE
-		   |	Payments.Ref = &Ref";
+	Return 
+		"SELECT
+		|	Payments.Ref.Date AS Period,
+		|	Payments.Ref.Company AS Company,
+		|	Payments.Ref.Branch AS Branch,
+		|	Payments.Ref.RetailCustomer AS RetailCustomer,
+		|	Payments.Account AS Account,
+		|	Payments.Ref.Currency AS Currency,
+		|	Payments.Amount AS Amount,
+		|	Payments.PaymentType AS PaymentType,
+		|	Payments.PaymentTerminal AS PaymentTerminal,
+		|	Payments.BankTerm AS BankTerm,
+		|	Payments.Percent AS Percent,
+		|	Payments.Commission AS Commission,
+		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Advance) AS IsAdvance
+		|INTO Payments
+		|FROM
+		|	Document.RetailSalesReceipt.Payments AS Payments
+		|WHERE
+		|	Payments.Ref = &Ref";
 EndFunction
 
 Function RetailSales()
@@ -541,6 +545,28 @@ Function PaymentAgent()
 		|	AND Payments.Ref = &Ref";
 EndFunction
 
+Function R2023B_AdvancesFromRetailCustomers()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	Payments.Period,
+		|	Payments.Company,
+		|	Payments.Branch,
+		|	Payments.RetailCustomer,
+		|	SUM(Payments.Amount) AS Amount
+		|INTO R2023B_AdvancesFromRetailCustomers
+		|FROM
+		|	Payments AS Payments
+		|WHERE
+		|	Payments.IsAdvance
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	Payments.Period,
+		|	Payments.Company,
+		|	Payments.Branch,
+		|	Payments.RetailCustomer";
+EndFunction
+
 Function R9010B_SourceOfOriginStock()
 	Return 
 		"SELECT
@@ -592,7 +618,7 @@ Function R3010B_CashOnHand()
 		   |FROM
 		   |	Payments AS Payments
 		   |WHERE
-		   |	TRUE";
+		   |	NOT Payments.IsAdvance";
 EndFunction
 
 Function R4011B_FreeStocks()

@@ -355,6 +355,9 @@ Procedure qPayment(Command)
 	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
 	ObjectParameters.Insert("Branch", Object.Branch);
 	ObjectParameters.Insert("Workstation", Workstation);
+	ObjectParameters.Insert("IsAdvance", False);
+	ObjectParameters.Insert("RetailCustomer", Object.RetailCustomer);
+	ObjectParameters.Insert("Company", Object.Company);
 
 	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
 		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);
@@ -374,6 +377,8 @@ Procedure Advance(Command)
 	ObjectParameters.Insert("Branch", Object.Branch);
 	ObjectParameters.Insert("Workstation", Workstation);
 	ObjectParameters.Insert("IsAdvance", True);
+	ObjectParameters.Insert("RetailCustomer", Object.RetailCustomer);
+	ObjectParameters.Insert("Company", Object.Company);
 	
 	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
 		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);

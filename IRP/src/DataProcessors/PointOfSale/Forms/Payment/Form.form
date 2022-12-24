@@ -10,103 +10,6 @@
     <items xsi:type="form:FormGroup">
       <name>GroupAmount</name>
       <id>43</id>
-      <items xsi:type="form:FormField">
-        <name>Amount</name>
-        <id>19</id>
-        <titleFont xsi:type="core:FontRef">
-          <font>Style.ExtraLargeTextFont</font>
-          <height>0.0</height>
-        </titleFont>
-        <visible>true</visible>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Amount</segments>
-        </dataPath>
-        <extendedTooltip>
-          <name>AmountExtendedTooltip</name>
-          <id>21</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>AmountContextMenu</name>
-          <id>20</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>LabelField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:LabelFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <horizontalStretch>false</horizontalStretch>
-          <font xsi:type="core:FontRef">
-            <font>Style.ExtraLargeTextFont</font>
-          </font>
-        </extInfo>
-      </items>
-      <items xsi:type="form:Decoration">
-        <name>DecorationAmountAfter</name>
-        <id>166</id>
-        <title>
-          <key>en</key>
-          <value>Decoration amount after</value>
-        </title>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <extendedTooltip>
-          <name>DecorationAmountAfterExtendedTooltip</name>
-          <id>168</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>DecorationAmountAfterContextMenu</name>
-          <id>167</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <autoMaxWidth>true</autoMaxWidth>
-        <height>1</height>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:PictureDecorationExtInfo">
-          <fileDragMode>AsFileRef</fileDragMode>
-        </extInfo>
-      </items>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -346,6 +249,124 @@
             <borderColor xsi:type="core:ColorRef">
               <color>Style.FormBackColor</color>
             </borderColor>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>Amount</name>
+          <id>19</id>
+          <titleFont xsi:type="core:FontRef">
+            <font>Style.ExtraLargeTextFont</font>
+            <bold>true</bold>
+            <italic>false</italic>
+            <underline>false</underline>
+            <strikeout>false</strikeout>
+          </titleFont>
+          <visible>true</visible>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Amount</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>AmountExtendedTooltip</name>
+            <id>21</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>AmountContextMenu</name>
+            <id>20</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>LabelField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:LabelFieldExtInfo">
+            <autoMaxHeight>true</autoMaxHeight>
+            <horizontalStretch>true</horizontalStretch>
+            <font xsi:type="core:FontRef">
+              <font>Style.ExtraLargeTextFont</font>
+              <bold>true</bold>
+              <italic>false</italic>
+              <underline>false</underline>
+              <strikeout>false</strikeout>
+            </font>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>Cashback</name>
+          <id>154</id>
+          <titleFont xsi:type="core:FontRef">
+            <font>Style.ExtraLargeTextFont</font>
+            <bold>true</bold>
+            <italic>false</italic>
+            <underline>false</underline>
+            <strikeout>false</strikeout>
+          </titleFont>
+          <visible>true</visible>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Cashback</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>CashbackExtendedTooltip</name>
+            <id>156</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>CashbackContextMenu</name>
+            <id>155</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>LabelField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:LabelFieldExtInfo">
+            <autoMaxHeight>true</autoMaxHeight>
+            <horizontalStretch>true</horizontalStretch>
+            <font xsi:type="core:FontRef">
+              <font>Style.ExtraLargeTextFont</font>
+              <bold>true</bold>
+              <italic>false</italic>
+              <underline>false</underline>
+              <strikeout>false</strikeout>
+            </font>
           </extInfo>
         </items>
         <items xsi:type="form:Table">
@@ -742,10 +763,10 @@
           <changeRowSet>true</changeRowSet>
           <changeRowOrder>true</changeRowOrder>
           <autoMaxWidth>true</autoMaxWidth>
+          <height>5</height>
           <autoMaxHeight>true</autoMaxHeight>
           <autoMaxRowsCount>true</autoMaxRowsCount>
           <selectionMode>MultiRow</selectionMode>
-          <header>true</header>
           <headerHeight>1</headerHeight>
           <footer>true</footer>
           <footerHeight>1</footerHeight>
@@ -756,8 +777,10 @@
           <searchOnInput>Auto</searchOnInput>
           <initialListView>Auto</initialListView>
           <horizontalStretch>true</horizontalStretch>
-          <verticalStretch>true</verticalStretch>
           <fileDragMode>AsFileRef</fileDragMode>
+          <borderColor xsi:type="core:ColorRef">
+            <color>Style.FormBackColor</color>
+          </borderColor>
           <rowFilter xsi:type="core:UndefinedValue"/>
         </items>
         <visible>true</visible>
@@ -801,96 +824,256 @@
         <name>GroupAmountsRight</name>
         <id>53</id>
         <items xsi:type="form:FormGroup">
-          <name>ЦифроваяКлавиатура</name>
-          <id>55</id>
-          <items xsi:type="form:FormGroup">
-            <name>Группа1</name>
-            <id>57</id>
-            <items xsi:type="form:Button">
-              <name>Certificate</name>
-              <id>136</id>
-              <visible>true</visible>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <extendedTooltip>
-                <name>CertificateExtendedTooltip</name>
-                <id>137</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <type>UsualButton</type>
-              <commandName>Form.Command.Certificate</commandName>
-              <representation>PictureAndText</representation>
-              <width>15</width>
-              <autoMaxWidth>true</autoMaxWidth>
-              <height>3</height>
-              <autoMaxHeight>true</autoMaxHeight>
-              <placementArea>UserCmds</placementArea>
-              <textColor xsi:type="core:ColorRef">
-                <color>Windows.ToolTip</color>
-              </textColor>
-              <backColor xsi:type="core:ColorRef">
-                <color>Web.HoneyDew</color>
-              </backColor>
-              <font xsi:type="core:FontRef">
-                <font>Style.ExtraLargeTextFont</font>
-              </font>
-              <representationInContextMenu>Auto</representationInContextMenu>
-            </items>
-            <items xsi:type="form:Decoration">
-              <name>DecorationColumn1</name>
-              <id>119</id>
-              <title>
-                <key>en</key>
-                <value>Decoration column1</value>
-              </title>
+          <name>GroupTop</name>
+          <id>187</id>
+          <items xsi:type="form:Button">
+            <name>Certificate</name>
+            <id>136</id>
+            <visible>true</visible>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>CertificateExtendedTooltip</name>
+              <id>137</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <extendedTooltip>
-                <name>DecorationColumn1ExtendedTooltip</name>
-                <id>121</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <contextMenu>
-                <name>DecorationColumn1ContextMenu</name>
-                <id>120</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <autoFill>true</autoFill>
-              </contextMenu>
+              <type>Label</type>
               <autoMaxWidth>true</autoMaxWidth>
-              <height>1</height>
               <autoMaxHeight>true</autoMaxHeight>
-              <extInfo xsi:type="form:PictureDecorationExtInfo">
-                <fileDragMode>AsFileRef</fileDragMode>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
               </extInfo>
-            </items>
+            </extendedTooltip>
+            <type>UsualButton</type>
+            <commandName>Form.Command.Certificate</commandName>
+            <representation>PictureAndText</representation>
+            <width>5</width>
+            <autoMaxWidth>true</autoMaxWidth>
+            <height>3</height>
+            <autoMaxHeight>true</autoMaxHeight>
+            <horizontalStretch>true</horizontalStretch>
+            <placementArea>UserCmds</placementArea>
+            <textColor xsi:type="core:ColorRef">
+              <color>Windows.ToolTip</color>
+            </textColor>
+            <backColor xsi:type="core:ColorRef">
+              <color>Web.HoneyDew</color>
+            </backColor>
+            <font xsi:type="core:FontRef">
+              <font>Style.ExtraLargeTextFont</font>
+            </font>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
+            <name>Loyality</name>
+            <id>117</id>
+            <title>
+              <key>en</key>
+              <value>Loyality points</value>
+            </title>
+            <visible>true</visible>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>LoyalityExtendedTooltip</name>
+              <id>118</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualButton</type>
+            <commandName>Form.Command.Certificate</commandName>
+            <representation>Auto</representation>
+            <width>5</width>
+            <autoMaxWidth>true</autoMaxWidth>
+            <height>3</height>
+            <autoMaxHeight>true</autoMaxHeight>
+            <horizontalStretch>true</horizontalStretch>
+            <placementArea>UserCmds</placementArea>
+            <textColor xsi:type="core:ColorRef">
+              <color>Windows.ToolTip</color>
+            </textColor>
+            <font xsi:type="core:FontRef">
+              <font>Style.ExtraLargeTextFont</font>
+            </font>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
+            <name>PaymentAgent</name>
+            <id>183</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>PaymentAgentExtendedTooltip</name>
+              <id>184</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualButton</type>
+            <commandName>Form.Command.PaymentAgent</commandName>
+            <representation>Auto</representation>
+            <width>5</width>
+            <autoMaxWidth>true</autoMaxWidth>
+            <height>3</height>
+            <autoMaxHeight>true</autoMaxHeight>
+            <horizontalStretch>true</horizontalStretch>
+            <placementArea>UserCmds</placementArea>
+            <font xsi:type="core:FontRef">
+              <font>Style.ExtraLargeTextFont</font>
+            </font>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
+            <name>Card</name>
+            <id>1</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>CardExtendedTooltip</name>
+              <id>2</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualButton</type>
+            <commandName>Form.Command.Card</commandName>
+            <representation>PictureAndText</representation>
+            <width>5</width>
+            <autoMaxWidth>true</autoMaxWidth>
+            <height>3</height>
+            <autoMaxHeight>true</autoMaxHeight>
+            <horizontalStretch>true</horizontalStretch>
+            <placementArea>UserCmds</placementArea>
+            <backColor xsi:type="core:ColorRef">
+              <color>Web.Cream</color>
+            </backColor>
+            <font xsi:type="core:FontRef">
+              <font>Style.ExtraLargeTextFont</font>
+            </font>
+            <picture xsi:type="core:PictureRef">
+              <picture>CommonPicture.Finance</picture>
+            </picture>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
+            <name>Cash</name>
+            <id>177</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>CashExtendedTooltip</name>
+              <id>178</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualButton</type>
+            <commandName>Form.Command.Cash</commandName>
+            <representation>PictureAndText</representation>
+            <width>5</width>
+            <autoMaxWidth>true</autoMaxWidth>
+            <height>3</height>
+            <autoMaxHeight>true</autoMaxHeight>
+            <horizontalStretch>true</horizontalStretch>
+            <placementArea>UserCmds</placementArea>
+            <backColor xsi:type="core:ColorRef">
+              <color>Web.AliceBlue</color>
+            </backColor>
+            <font xsi:type="core:FontRef">
+              <font>Style.ExtraLargeTextFont</font>
+            </font>
+            <picture xsi:type="core:PictureRef">
+              <picture>CommonPicture.Purchase</picture>
+            </picture>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <title>
+            <key>en</key>
+            <value>Top</value>
+          </title>
+          <extendedTooltip>
+            <name>GroupTopExtendedTooltip</name>
+            <id>188</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <type>UsualGroup</type>
+          <extInfo xsi:type="form:UsualGroupExtInfo">
+            <group>AlwaysHorizontal</group>
+            <behavior>Auto</behavior>
+            <showLeftMargin>true</showLeftMargin>
+            <united>true</united>
+            <throughAlign>Auto</throughAlign>
+            <currentRowUse>Auto</currentRowUse>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormGroup">
+          <name>Keyboard</name>
+          <id>55</id>
+          <items xsi:type="form:FormGroup">
+            <name>GroupOne</name>
+            <id>57</id>
             <items xsi:type="form:Button">
               <name>__7</name>
               <id>61</id>
@@ -1060,8 +1243,12 @@
             <userVisible>
               <common>true</common>
             </userVisible>
+            <title>
+              <key>en</key>
+              <value>Group one</value>
+            </title>
             <extendedTooltip>
-              <name>Группа1РасширеннаяПодсказка</name>
+              <name>GroupOneExtendedTooltip</name>
               <id>58</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1086,167 +1273,8 @@
             </extInfo>
           </items>
           <items xsi:type="form:FormGroup">
-            <name>Группа2</name>
+            <name>GroupTwo</name>
             <id>69</id>
-            <items xsi:type="form:FormGroup">
-              <name>Group1</name>
-              <id>186</id>
-              <items xsi:type="form:Button">
-                <name>Loyality</name>
-                <id>117</id>
-                <title>
-                  <key>en</key>
-                  <value>Loyality points</value>
-                </title>
-                <visible>true</visible>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <extendedTooltip>
-                  <name>LoyalityExtendedTooltip</name>
-                  <id>118</id>
-                  <visible>true</visible>
-                  <enabled>true</enabled>
-                  <userVisible>
-                    <common>true</common>
-                  </userVisible>
-                  <type>Label</type>
-                  <autoMaxWidth>true</autoMaxWidth>
-                  <autoMaxHeight>true</autoMaxHeight>
-                  <extInfo xsi:type="form:LabelDecorationExtInfo">
-                    <horizontalAlign>Left</horizontalAlign>
-                  </extInfo>
-                </extendedTooltip>
-                <type>UsualButton</type>
-                <commandName>Form.Command.Certificate</commandName>
-                <representation>Auto</representation>
-                <width>8</width>
-                <autoMaxWidth>true</autoMaxWidth>
-                <height>3</height>
-                <autoMaxHeight>true</autoMaxHeight>
-                <placementArea>UserCmds</placementArea>
-                <textColor xsi:type="core:ColorRef">
-                  <color>Windows.ToolTip</color>
-                </textColor>
-                <font xsi:type="core:FontRef">
-                  <font>Style.ExtraLargeTextFont</font>
-                </font>
-                <representationInContextMenu>Auto</representationInContextMenu>
-              </items>
-              <items xsi:type="form:Button">
-                <name>PaymentAgent</name>
-                <id>183</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <extendedTooltip>
-                  <name>PaymentAgentExtendedTooltip</name>
-                  <id>184</id>
-                  <visible>true</visible>
-                  <enabled>true</enabled>
-                  <userVisible>
-                    <common>true</common>
-                  </userVisible>
-                  <type>Label</type>
-                  <autoMaxWidth>true</autoMaxWidth>
-                  <autoMaxHeight>true</autoMaxHeight>
-                  <extInfo xsi:type="form:LabelDecorationExtInfo">
-                    <horizontalAlign>Left</horizontalAlign>
-                  </extInfo>
-                </extendedTooltip>
-                <type>UsualButton</type>
-                <commandName>Form.Command.PaymentAgent</commandName>
-                <representation>Auto</representation>
-                <width>7</width>
-                <autoMaxWidth>true</autoMaxWidth>
-                <height>3</height>
-                <autoMaxHeight>true</autoMaxHeight>
-                <placementArea>UserCmds</placementArea>
-                <font xsi:type="core:FontRef">
-                  <font>Style.ExtraLargeTextFont</font>
-                </font>
-                <representationInContextMenu>Auto</representationInContextMenu>
-              </items>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <title>
-                <key>en</key>
-                <value>Group1</value>
-              </title>
-              <extendedTooltip>
-                <name>Group1ExtendedTooltip</name>
-                <id>185</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <type>UsualGroup</type>
-              <extInfo xsi:type="form:UsualGroupExtInfo">
-                <group>AlwaysHorizontal</group>
-                <behavior>Auto</behavior>
-                <showLeftMargin>true</showLeftMargin>
-                <united>true</united>
-                <throughAlign>Auto</throughAlign>
-                <currentRowUse>Auto</currentRowUse>
-              </extInfo>
-            </items>
-            <items xsi:type="form:Decoration">
-              <name>DecorationColumn2</name>
-              <id>122</id>
-              <title>
-                <key>en</key>
-                <value>Decoration column2</value>
-              </title>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <extendedTooltip>
-                <name>DecorationColumn2ExtendedTooltip</name>
-                <id>124</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <contextMenu>
-                <name>DecorationColumn2ContextMenu</name>
-                <id>123</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <autoFill>true</autoFill>
-              </contextMenu>
-              <autoMaxWidth>true</autoMaxWidth>
-              <height>1</height>
-              <autoMaxHeight>true</autoMaxHeight>
-              <extInfo xsi:type="form:PictureDecorationExtInfo">
-                <fileDragMode>AsFileRef</fileDragMode>
-              </extInfo>
-            </items>
             <items xsi:type="form:Button">
               <name>__8</name>
               <id>73</id>
@@ -1419,8 +1447,12 @@
             <userVisible>
               <common>true</common>
             </userVisible>
+            <title>
+              <key>en</key>
+              <value>Group two</value>
+            </title>
             <extendedTooltip>
-              <name>Группа2РасширеннаяПодсказка</name>
+              <name>GroupTwoExtendedTooltip</name>
               <id>70</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1445,94 +1477,8 @@
             </extInfo>
           </items>
           <items xsi:type="form:FormGroup">
-            <name>Группа3</name>
+            <name>GroupThree</name>
             <id>81</id>
-            <items xsi:type="form:Button">
-              <name>Card</name>
-              <id>1</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <extendedTooltip>
-                <name>CardExtendedTooltip</name>
-                <id>2</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <type>UsualButton</type>
-              <commandName>Form.Command.Card</commandName>
-              <representation>PictureAndText</representation>
-              <width>15</width>
-              <autoMaxWidth>true</autoMaxWidth>
-              <height>3</height>
-              <autoMaxHeight>true</autoMaxHeight>
-              <placementArea>UserCmds</placementArea>
-              <backColor xsi:type="core:ColorRef">
-                <color>Web.Cream</color>
-              </backColor>
-              <font xsi:type="core:FontRef">
-                <font>Style.ExtraLargeTextFont</font>
-              </font>
-              <picture xsi:type="core:PictureRef">
-                <picture>CommonPicture.Finance</picture>
-              </picture>
-              <representationInContextMenu>Auto</representationInContextMenu>
-            </items>
-            <items xsi:type="form:Decoration">
-              <name>DecorationColumn3</name>
-              <id>125</id>
-              <title>
-                <key>en</key>
-                <value>Decoration column3</value>
-              </title>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <extendedTooltip>
-                <name>DecorationColumn3ExtendedTooltip</name>
-                <id>127</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <contextMenu>
-                <name>DecorationColumn3ContextMenu</name>
-                <id>126</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <autoFill>true</autoFill>
-              </contextMenu>
-              <autoMaxWidth>true</autoMaxWidth>
-              <height>1</height>
-              <autoMaxHeight>true</autoMaxHeight>
-              <extInfo xsi:type="form:PictureDecorationExtInfo">
-                <fileDragMode>AsFileRef</fileDragMode>
-              </extInfo>
-            </items>
             <items xsi:type="form:Button">
               <name>__9</name>
               <id>85</id>
@@ -1705,8 +1651,12 @@
             <userVisible>
               <common>true</common>
             </userVisible>
+            <title>
+              <key>en</key>
+              <value>Group three</value>
+            </title>
             <extendedTooltip>
-              <name>Группа3РасширеннаяПодсказка</name>
+              <name>GroupThreeExtendedTooltip</name>
               <id>82</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1731,94 +1681,8 @@
             </extInfo>
           </items>
           <items xsi:type="form:FormGroup">
-            <name>Группа4</name>
+            <name>GroupEnter</name>
             <id>134</id>
-            <items xsi:type="form:Button">
-              <name>Cash</name>
-              <id>177</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <extendedTooltip>
-                <name>CashExtendedTooltip</name>
-                <id>178</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <type>UsualButton</type>
-              <commandName>Form.Command.Cash</commandName>
-              <representation>PictureAndText</representation>
-              <width>15</width>
-              <autoMaxWidth>true</autoMaxWidth>
-              <height>3</height>
-              <autoMaxHeight>true</autoMaxHeight>
-              <placementArea>UserCmds</placementArea>
-              <backColor xsi:type="core:ColorRef">
-                <color>Web.AliceBlue</color>
-              </backColor>
-              <font xsi:type="core:FontRef">
-                <font>Style.ExtraLargeTextFont</font>
-              </font>
-              <picture xsi:type="core:PictureRef">
-                <picture>CommonPicture.Purchase</picture>
-              </picture>
-              <representationInContextMenu>Auto</representationInContextMenu>
-            </items>
-            <items xsi:type="form:Decoration">
-              <name>DecorationColumn4</name>
-              <id>138</id>
-              <title>
-                <key>en</key>
-                <value>Decoration column4</value>
-              </title>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <extendedTooltip>
-                <name>DecorationColumn4ExtendedTooltip</name>
-                <id>140</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <contextMenu>
-                <name>DecorationColumn4ContextMenu</name>
-                <id>139</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <autoFill>true</autoFill>
-              </contextMenu>
-              <autoMaxWidth>true</autoMaxWidth>
-              <height>1</height>
-              <autoMaxHeight>true</autoMaxHeight>
-              <extInfo xsi:type="form:PictureDecorationExtInfo">
-                <fileDragMode>AsFileRef</fileDragMode>
-              </extInfo>
-            </items>
             <items xsi:type="form:Button">
               <name>NumpadBackspace</name>
               <id>175</id>
@@ -1890,10 +1754,9 @@
               <defaultButton>true</defaultButton>
               <width>15</width>
               <autoMaxWidth>true</autoMaxWidth>
-              <height>6</height>
+              <height>7</height>
               <autoMaxHeight>true</autoMaxHeight>
               <horizontalStretch>true</horizontalStretch>
-              <verticalStretch>true</verticalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
                 <font>Style.ExtraLargeTextFont</font>
@@ -1905,8 +1768,12 @@
             <userVisible>
               <common>true</common>
             </userVisible>
+            <title>
+              <key>en</key>
+              <value>Group enter</value>
+            </title>
             <extendedTooltip>
-              <name>Группа4ExtendedTooltip</name>
+              <name>GroupEnterExtendedTooltip</name>
               <id>135</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1935,12 +1802,16 @@
           <userVisible>
             <common>true</common>
           </userVisible>
+          <title>
+            <key>en</key>
+            <value>Keyboard</value>
+          </title>
           <toolTip>
             <key>en</key>
             <value>Digital keyboard</value>
           </toolTip>
           <extendedTooltip>
-            <name>ЦифроваяКлавиатураРасширеннаяПодсказка</name>
+            <name>KeyboardExtendedTooltip</name>
             <id>56</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1994,7 +1865,7 @@
         </extendedTooltip>
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
-          <group>HorizontalIfPossible</group>
+          <group>Vertical</group>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -2071,145 +1942,6 @@
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>Vertical</group>
       <horizontalAlign>Center</horizontalAlign>
-      <showLeftMargin>true</showLeftMargin>
-      <united>true</united>
-      <throughAlign>Auto</throughAlign>
-      <currentRowUse>Auto</currentRowUse>
-    </extInfo>
-  </items>
-  <items xsi:type="form:FormGroup">
-    <name>GroupCashback</name>
-    <id>152</id>
-    <items xsi:type="form:FormField">
-      <name>Cashback</name>
-      <id>154</id>
-      <titleFont xsi:type="core:FontRef">
-        <font>Style.NormalTextFont</font>
-        <height>20.0</height>
-      </titleFont>
-      <visible>true</visible>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>Object.Cashback</segments>
-      </dataPath>
-      <extendedTooltip>
-        <name>CashbackExtendedTooltip</name>
-        <id>156</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>CashbackContextMenu</name>
-        <id>155</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>LabelField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:LabelFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <font xsi:type="core:FontRef">
-          <font>Style.NormalTextFont</font>
-          <height>20.0</height>
-        </font>
-      </extInfo>
-    </items>
-    <items xsi:type="form:Decoration">
-      <name>DecorationCashbackAfter</name>
-      <id>163</id>
-      <title>
-        <key>en</key>
-        <value>Decoration cashback after</value>
-      </title>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <extendedTooltip>
-        <name>DecorationCashbackAfterExtendedTooltip</name>
-        <id>165</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>DecorationCashbackAfterContextMenu</name>
-        <id>164</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <autoMaxWidth>true</autoMaxWidth>
-      <height>1</height>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:PictureDecorationExtInfo">
-        <fileDragMode>AsFileRef</fileDragMode>
-      </extInfo>
-    </items>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-      <common>true</common>
-    </userVisible>
-    <title>
-      <key>en</key>
-      <value>Cashback:</value>
-    </title>
-    <toolTip>
-      <key>en</key>
-      <value>Group amount</value>
-    </toolTip>
-    <horizontalStretch>false</horizontalStretch>
-    <extendedTooltip>
-      <name>GroupCashbackExtendedTooltip</name>
-      <id>153</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-    </extendedTooltip>
-    <type>UsualGroup</type>
-    <extInfo xsi:type="form:UsualGroupExtInfo">
-      <group>HorizontalIfPossible</group>
-      <representation>NormalSeparation</representation>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>

@@ -9,9 +9,12 @@
 //  See OpenShiftResult
 Async Function OpenShift(ConsolidatedRetailSales) Export
 	
+	Result = ShiftResultStructure();
+	
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Return ShiftResultStructure();
+		Result.Success = True;
+		Return Result;
 	EndIf;
 	
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
@@ -23,7 +26,7 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	
 	LineLength = 0;
-	Result = Settings.ConnectedDriver.DriverObject.GetLineLength(Settings.ConnectedDriver.ID
+	Settings.ConnectedDriver.DriverObject.GetLineLength(Settings.ConnectedDriver.ID
 																	, LineLength);
 	
 	DataKKT = "";
@@ -33,8 +36,6 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 		Raise "Can not get data KKT";
 	EndIf;
 
-	Result = ShiftResultStructure();
-	
 	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
 																			, Parameters.ParametersXML
 																			, Parameters.ResultXML);
@@ -76,10 +77,11 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 EndFunction
 
 Async Function CloseShift(ConsolidatedRetailSales) Export
-	
+	Result = ShiftResultStructure();
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Return ShiftResultStructure();
+		Result.Success = True;
+		Return Result;
 	EndIf;
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
@@ -88,8 +90,6 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 	ShiftGetXMLOperationSettings.CashierName = String(CRS.Author);
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
-	
-	Result = ShiftResultStructure();
 	
 	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
 																			, Parameters.ParametersXML
@@ -128,10 +128,11 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 EndFunction
 
 Async Function PrintXReport(ConsolidatedRetailSales) Export
-	
+	Result = ShiftResultStructure();
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Return ShiftResultStructure();
+		Result.Success = True;
+		Return Result;
 	EndIf;
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
@@ -140,8 +141,6 @@ Async Function PrintXReport(ConsolidatedRetailSales) Export
 	ShiftGetXMLOperationSettings.CashierName = String(CRS.Author);
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
-	
-	Result = ShiftResultStructure();
 	
 	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
 																			, Parameters.ParametersXML
@@ -181,10 +180,11 @@ Async Function PrintXReport(ConsolidatedRetailSales) Export
 EndFunction
 
 Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
-	
+	Result = ReceiptResultStructure();
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Return ReceiptResultStructure();
+		Result.Success = True;
+		Return Result;
 	EndIf;
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
@@ -192,11 +192,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
 	XMLOperationSettings = ShiftGetXMLOperationSettings();
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(XMLOperationSettings);
-
-	Result = ReceiptResultStructure();
-	
 	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
-																			, Parameters.ParametersXML
 																			, Parameters.ResultXML);
 	If ResultInfo Then
 		ShiftData = ShiftResultStructure();
@@ -251,10 +247,11 @@ Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
 EndFunction
 
 Async Function CashInCome(ConsolidatedRetailSales, Summ) Export
-	
+	Result = ShiftResultStructure();
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Return ShiftResultStructure();
+		Result.Success = True;
+		Return Result;
 	EndIf;
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
@@ -263,11 +260,7 @@ Async Function CashInCome(ConsolidatedRetailSales, Summ) Export
 	ShiftGetXMLOperationSettings.CashierName = String(CRS.Author);
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
-	
-	Result = ShiftResultStructure();
-	
 	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
-																			, Parameters.ParametersXML
 																			, Parameters.ResultXML);
 	If ResultInfo Then
 		ShiftData = ShiftResultStructure();
@@ -306,10 +299,11 @@ Async Function CashInCome(ConsolidatedRetailSales, Summ) Export
 EndFunction
 
 Async Function CashOutCome(ConsolidatedRetailSales, Summ) Export
-	
+	Result = ShiftResultStructure();
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
-		Return ShiftResultStructure();
+		Result.Success = True;
+		Return Result;
 	EndIf;
 	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
 		
@@ -319,10 +313,7 @@ Async Function CashOutCome(ConsolidatedRetailSales, Summ) Export
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	
-	Result = ShiftResultStructure();
-	
 	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
-																			, Parameters.ParametersXML
 																			, Parameters.ResultXML);
 	If ResultInfo Then
 		ShiftData = ShiftResultStructure();

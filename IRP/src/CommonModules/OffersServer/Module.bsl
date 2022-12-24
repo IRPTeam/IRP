@@ -167,10 +167,11 @@ Function CreateOffersTree(Val Object, Val ItemList, Val SpecialOffers, ArrayOfOf
 	|	END AS isSelect,
 	|	NOT SpecialOffers.Manually AS Auto,
 	|	SpecialOffers.Priority AS Priority,
+	|	SpecialOffers.SequentialCalculationForEachRow AS isSequential,
 	|	0 AS TotalPercent,
 	|	0 AS TotalAmount,
-	|  UNDEFINED AS Rule,
-	|  UNDEFINED AS Presentation
+	|	UNDEFINED AS Rule,
+	|	UNDEFINED AS Presentation
 	|FROM
 	|	Catalog.SpecialOffers AS SpecialOffers
 	|WHERE
@@ -383,6 +384,8 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 
 			If StrOffers.AllRuleIsOk Then
 
+				CalculateOfferGroup(Object, StrOffers, StrOffers.Offer.Parent.SpecialOfferType);
+				
 				OfferCalculateIsOk = True;
 				If OffersInfo.Property("ItemListRowKey") Then
 					OfferCalculateIsOk = CalculateOffer_ForRow(Object, StrOffers, StrOffers.Offer.SpecialOfferType,
@@ -392,7 +395,15 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 				EndIf;
 
 				If OfferCalculateIsOk Then
-					StrOffers.Amount = StrOffers.Rows.Total("Amount");
+					If OffersInfo.Property("ItemListRowKey") Then
+						StrOffers.Amount = 0;
+						KeyRows = StrOffers.Rows.FindRows(New Structure("Key", OffersInfo.ItemListRowKey));
+						For Each KeyRow In KeyRows Do
+							StrOffers.Amount = StrOffers.Amount + KeyRow.Amount;
+						EndDo;
+					Else
+						StrOffers.Amount = StrOffers.Rows.Total("Amount");
+					EndIf;
 				Else
 					OffersTree.Rows.Delete(StrOffers);
 					StrOffersIndex = StrOffersIndex - 1;
@@ -401,13 +412,43 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 			EndIf;
 
 		ElsIf StrOffers.isFolder Then
-			CalculateOffersRecursion(Object, StrOffers, OffersInfo, StrOffersIndex);
+			
+			If StrOffers.isSequential And Not OffersInfo.Property("ItemListRowKey") And Object.ItemList.Count() > 1 Then
+				
+				RowOffersInfo = New Structure;
+				RowOffersInfo.Insert("ItemListRowKey");
+				For Each InfoKeyValue In OffersInfo Do
+					RowOffersInfo.Insert(InfoKeyValue.Key, InfoKeyValue.Value);
+				EndDo;
+				
+				For Each ItemListRow In Object.ItemList Do
+					RowOffersInfo.ItemListRowKey = ItemListRow.Key;
+					
+					CalculateOffersRecursion(Object, StrOffers, RowOffersInfo, StrOffersIndex);
 
-			StrOffers.Amount = StrOffers.Rows.Total("Amount");
-			StrOffers.AllRuleIsOk = StrOffers.Rows.Total("AllRuleIsOk");
+					StrOffers.Amount = StrOffers.Rows.Total("Amount");
+					StrOffers.AllRuleIsOk = StrOffers.Rows.Total("AllRuleIsOk");
 
-			If StrOffers.AllRuleIsOk Then
-				CalculateOfferGroup(Object, StrOffers, StrOffers.Offer.SpecialOfferType);
+					If StrOffers.AllRuleIsOk Then
+						CalculateOfferGroup(Object, StrOffers, StrOffers.Offer.SpecialOfferType);
+					EndIf;
+					
+					ClearAmountInRows(StrOffers);
+				EndDo;
+				
+				RestoreAmountInRows(StrOffers, Object);
+			
+			Else
+			
+				CalculateOffersRecursion(Object, StrOffers, OffersInfo, StrOffersIndex);
+
+				StrOffers.Amount = StrOffers.Rows.Total("Amount");
+				StrOffers.AllRuleIsOk = StrOffers.Rows.Total("AllRuleIsOk");
+
+				If StrOffers.AllRuleIsOk Then
+					CalculateOfferGroup(Object, StrOffers, StrOffers.Offer.SpecialOfferType);
+				EndIf;
+				
 			EndIf;
 
 		EndIf;
@@ -519,3 +560,31 @@ Function GetArrayOfAllOffers_ForRow(Val Object, OffersAddress, ItemListRowKey) E
 	EndDo;
 	Return ArrayOfRows;
 EndFunction
+
+Function ClearAmountInRows(Row)
+
+	Row.Amount = 0;
+	Row.TotalInGroupOffers = 0;
+	
+	If Row.isFolder Then
+		For Each ChildRow In Row.Rows Do
+			ClearAmountInRows(ChildRow);
+		EndDo;
+	EndIf;
+
+EndFunction
+
+Function RestoreAmountInRows(Row, Object)
+
+	If Row.isFolder Then
+		For Each ChildRow In Row.Rows Do
+			RestoreAmountInRows(ChildRow, Object);
+		EndDo;
+	EndIf;
+	
+	Row.Amount = Row.Rows.Total("Amount");
+	If Row.isFolder And Row.AllRuleIsOk Then
+		CalculateOfferGroup(Object, Row, Row.Offer.SpecialOfferType);
+	EndIf;
+
+EndFunction // RestoreAmountInRows()

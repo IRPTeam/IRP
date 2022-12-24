@@ -834,7 +834,8 @@ GROUP BY
 	CashStatement.Branch,
 	CashStatement.BegOfPeriod,
 	CashStatement.EndOfPeriod,
-	CashStatement.Date</queryText>
+	CashStatement.Date,
+	CashStatement.Number</queryText>
       <mainTable>Document.CashStatement</mainTable>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>
@@ -853,13 +854,13 @@ GROUP BY
         </title>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>[Amount balance]</dataPath>
+        <dataPath>AmountBalance</dataPath>
         <field>AmountBalance</field>
         <title>
           <localValue>
             <content>
               <key>en</key>
-              <value>Balance</value>
+              <value>Amount Balance</value>
             </content>
           </localValue>
         </title>
@@ -871,7 +872,7 @@ GROUP BY
           <localValue>
             <content>
               <key>en</key>
-              <value>Commission balance</value>
+              <value>Commission Balance</value>
             </content>
           </localValue>
         </title>
@@ -887,6 +888,46 @@ GROUP BY
             </content>
           </localValue>
         </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Date</dataPath>
+        <field>Date</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Number</dataPath>
+        <field>Number</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Company</dataPath>
+        <field>Company</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Branch</dataPath>
+        <field>Branch</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Ref</dataPath>
+        <field>Ref</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>CurrencyMovementType</dataPath>
+        <field>CurrencyMovementType</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Currency</dataPath>
+        <field>Currency</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Account</dataPath>
+        <field>Account</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ReceiptingAccount</dataPath>
+        <field>ReceiptingAccount</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Basis</dataPath>
+        <field>Basis</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>BasisDocument</dataPath>
@@ -957,52 +998,12 @@ GROUP BY
         <field>PointInTime</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Date</dataPath>
-        <field>Date</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Number</dataPath>
-        <field>Number</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Company</dataPath>
-        <field>Company</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Branch</dataPath>
-        <field>Branch</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Ref</dataPath>
-        <field>Ref</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>DeletionMark</dataPath>
         <field>DeletionMark</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Posted</dataPath>
         <field>Posted</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>CurrencyMovementType</dataPath>
-        <field>CurrencyMovementType</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Currency</dataPath>
-        <field>Currency</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Account</dataPath>
-        <field>Account</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ReceiptingAccount</dataPath>
-        <field>ReceiptingAccount</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Basis</dataPath>
-        <field>Basis</field>
       </fields>
       <parameters>
         <name>Period</name>

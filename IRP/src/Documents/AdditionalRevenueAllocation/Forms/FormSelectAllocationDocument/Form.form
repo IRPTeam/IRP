@@ -388,11 +388,30 @@ WHERE
           <localValue>
             <content>
               <key>en</key>
-              <value>List basis</value>
+              <value>Basis</value>
             </content>
           </localValue>
         </title>
       </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Company</dataPath>
+        <field>Company</field>
+      </fields>
+      <parameters>
+        <name>Company</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Company</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>CatalogRef.Companies</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
     </extInfo>
   </attributes>
   <formCommands>

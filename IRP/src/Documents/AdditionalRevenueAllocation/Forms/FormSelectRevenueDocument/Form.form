@@ -493,11 +493,114 @@ GROUP BY
           <localValue>
             <content>
               <key>en</key>
-              <value>List amount</value>
+              <value>Amount</value>
             </content>
           </localValue>
         </title>
       </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Basis</dataPath>
+        <field>Basis</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Company</dataPath>
+        <field>Company</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Currency</dataPath>
+        <field>Currency</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Branch</dataPath>
+        <field>Branch</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>RowID</dataPath>
+        <field>RowID</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ItemKey</dataPath>
+        <field>ItemKey</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>CurrencyMovementType</dataPath>
+        <field>CurrencyMovementType</field>
+      </fields>
+      <parameters>
+        <name>BalancePeriod</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Balance period</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>Date</types>
+          <dateQualifiers/>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>Period</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Period</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>Date</types>
+          <dateQualifiers/>
+        </valueType>
+      </parameters>
+      <parameters>
+        <name>SelectedDocuments</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Selected documents</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType/>
+        <useRestriction>true</useRestriction>
+        <valueListAllowed>true</valueListAllowed>
+      </parameters>
+      <parameters>
+        <name>Company</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Company</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>CatalogRef.Companies</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>CurrencyMovementType</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Currency movement type</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
     </extInfo>
   </attributes>
   <formCommands>

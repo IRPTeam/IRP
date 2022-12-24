@@ -768,6 +768,10 @@ EndProcedure
 
 &AtClient
 Async Function PrintFiscalReceipt()
+	If Object.ConsolidatedRetailSales.IsEmpty() Then
+		Return True;
+	EndIf;
+	
 	EquipmentPrintFiscalReceiptResult = Await EquipmentFiscalPrinterClient.ProcessCheck(Object.ConsolidatedRetailSales, DocRef);
 	If EquipmentPrintFiscalReceiptResult.Success Then
 	SetFiscalStatus(Object.Ref
@@ -887,7 +891,7 @@ EndProcedure
 
 &AtClient
 Procedure EnabledPaymentButton()
-	Items.qPayment.Enabled = Object.ItemList.Count();
+	Items.GroupPaymentButtons.Enabled = Object.ItemList.Count();
 	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
 		SetPaymentButtonOnServer();
 	EndIf;
@@ -902,7 +906,7 @@ Procedure SetPaymentButtonOnServer()
 		Items.qPayment.TextColor = ColorGreen;
 		Items.qPayment.BorderColor = ColorGreen;
 	Else
-		Items.qPayment.Enabled = False;
+		Items.GroupPaymentButtons.Enabled = False;
 		Items.qPayment.Title = R().InfoMessage_SessionIsClosed;
 		Items.qPayment.TextColor = ColorRed;
 		Items.qPayment.BorderColor = ColorRed;

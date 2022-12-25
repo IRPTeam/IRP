@@ -19,7 +19,7 @@ EndProcedure
 
 &AtClient
 Async Procedure OnOpen(Cancel)
-	If ValueIsFilled(Parameters.Key) And Not Object.Ref.IsEmpty() Then
+	If ValueIsFilled(Parameters.Key) And Not Object.Ref.IsEmpty() And Not Object.Driver.IsEmpty() Then
 		Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref);
 		Settings.Callback = New NotifyDescription("FillDriverParameters_End", ThisObject);
 		HardwareClient.FillDriverParameters(Settings);

@@ -1614,7 +1614,7 @@
         </items>
         <items xsi:type="form:FormField">
           <name>ItemListSourceOfOriginsPresentation</name>
-          <id>1167</id>
+          <id>1165</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -1625,7 +1625,7 @@
           </dataPath>
           <extendedTooltip>
             <name>ItemListSourceOfOriginsPresentationExtendedTooltip</name>
-            <id>1166</id>
+            <id>1167</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1640,7 +1640,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>ItemListSourceOfOriginsPresentationContextMenu</name>
-            <id>1165</id>
+            <id>1166</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1654,6 +1654,14 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>ItemListSourceOfOriginsPresentationStartChoice</name>
+            </handlers>
+            <handlers>
+              <event>Clearing</event>
+              <name>ItemListSourceOfOriginsPresentationClearing</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>

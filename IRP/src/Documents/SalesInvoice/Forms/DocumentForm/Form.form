@@ -1648,6 +1648,14 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>Clearing</event>
+              <name>ItemListSourceOfOriginsPresentationClearing</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>ItemListSourceOfOriginsPresentationStartChoice</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>

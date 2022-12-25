@@ -23,6 +23,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.IsAdvance = Parameters.IsAdvance;
 	
 	FillPaymentTypes();
+	FillPaymentMethods();
 	
 	If Not ThisObject.IsAdvance And ValueIsFilled(Parameters.RetailCustomer) Then
 		AdvanceAmount = GetAdvanceByRetailCustomer(Parameters.Company, Parameters.Branch, Parameters.RetailCustomer);
@@ -179,6 +180,7 @@ Procedure Enter(Command)
 	
 	ReturnValue = New Structure();
 	ReturnValue.Insert("Payments", Payments);
+	ReturnValue.Insert("ReceiptPaymentMethod", ReceiptPaymentMethod);
 	Close(ReturnValue);
 EndProcedure
 
@@ -440,6 +442,13 @@ Procedure FillPaymentsAtServer()
 	Items.Cash.Enabled = ThisObject.CashPaymentTypes.Count();
 	Items.Card.Enabled = ThisObject.BankPaymentTypes.Count();
 	Items.PaymentAgent.Enabled = ThisObject.PaymentAgentTypes.Count();
+EndProcedure
+
+&AtServer
+Procedure FillPaymentMethods()
+	
+	ReceiptPaymentMethod = Enums.ReceiptPaymentMethods.FullCalculation;
+	
 EndProcedure
 
 // Get bank payment types value.

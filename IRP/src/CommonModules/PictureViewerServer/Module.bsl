@@ -326,7 +326,7 @@ Function GetArrayOfFileIDAsURLParameter(OwnerRef) Export
 		Return "";
 	EndIf;
 
-	TableOfFiles = PictureViewerServer.GetPicturesByObjectRef(OwnerRef);
+	TableOfFiles = GetPicturesByObjectRef(OwnerRef);
 	ArrayOfFileID = New Array();
 	For Each Row In TableOfFiles Do
 		ArrayOfFileID.Add(Row.FileID);
@@ -505,7 +505,7 @@ EndFunction
 //  Array of See GetPictureSettingsStructure
 Function PicturesInfoForSlider(ItemRef, FileRef = Undefined, UseFullSizePhoto = False) Export
 
-	Pictures = PictureViewerServer.GetPicturesByObjectRef(ItemRef, , FileRef);
+	Pictures = GetPicturesByObjectRef(ItemRef, , FileRef);
 
 	PicArray = New Array();
 	For Each Picture In Pictures Do

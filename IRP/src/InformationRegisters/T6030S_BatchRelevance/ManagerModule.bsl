@@ -399,7 +399,7 @@ Function GetPointInTime(Date, Company, Store, ItemKey)
 EndFunction
 
 Procedure SetIsRelevance(Date, Company, Store, ItemKey, DocRef)
-	RecordSet = InformationRegisters.T6030S_BatchRelevance.CreateRecordSet();
+	RecordSet = CreateRecordSet();
 	RecordSet.Filter.Date.Set(Date);
 	RecordSet.Filter.Company.Set(Company);
 	RecordSet.Filter.Store.Set(Store);
@@ -414,7 +414,7 @@ Procedure SetIsRelevance(Date, Company, Store, ItemKey, DocRef)
 EndProcedure
 
 Procedure ClearRecordSet(Date, Company, Store, ItemKey)
-	RecordSet = InformationRegisters.T6030S_BatchRelevance.CreateRecordSet();
+	RecordSet = CreateRecordSet();
 	RecordSet.Filter.Date.Set(Date);
 	RecordSet.Filter.Company.Set(Company);
 	RecordSet.Filter.Store.Set(Store);
@@ -425,7 +425,7 @@ Procedure ClearRecordSet(Date, Company, Store, ItemKey)
 EndProcedure
 
 Procedure WriteRecordSet(DocumentRef, Date, Company, Store, ItemKey, IsRelevance = False, FilterByDate = True)
-	RecordSet = InformationRegisters.T6030S_BatchRelevance.CreateRecordSet();
+	RecordSet = CreateRecordSet();
 	If FilterByDate Then
 		RecordSet.Filter.Date.Set(Date);
 	EndIf;

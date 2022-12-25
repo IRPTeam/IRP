@@ -28,6 +28,9 @@
     "lock-out-of-try": {
       "enabled": false
     },
+    "db-object-ref-non-ref-type": {
+      "enabled": false
+    },
     "right-configuration-extensions-administration": {
       "enabled": false
     },
@@ -139,6 +142,9 @@
     "common-module-type": {
       "enabled": false
     },
+    "reading-attribute-from-database": {
+      "enabled": false
+    },
     "invocation-form-event-handler": {
       "enabled": false
     },
@@ -152,6 +158,9 @@
       "enabled": false
     },
     "common-module-name-client": {
+      "enabled": false
+    },
+    "right-delete": {
       "enabled": false
     },
     "common-module-name-global": {
@@ -182,6 +191,9 @@
       "enabled": false
     },
     "right-interactive-delete-marked-predefined-data": {
+      "enabled": false
+    },
+    "db-object-anyref-type": {
       "enabled": false
     },
     "md-list-object-presentation": {

@@ -90,7 +90,7 @@ Function GetChoiceDataTable_ByUser(Parameters)
 	|		AND ObjectStatusesUsers.User = &User";
 	Query.Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text, "ObjectStatuses");
 	
-	Query.SetParameter("Parent"              , Catalogs.ObjectStatuses.ProductionPlanningCorrection);
+	Query.SetParameter("Parent"              , ProductionPlanningCorrection);
 	Query.SetParameter("Filter_SearchString" , ValueIsFilled(Parameters.SearchString));
 	Query.SetParameter("SearchString"        , ?(ValueIsFilled(Parameters.SearchString),Parameters.SearchString, ""));
 	Query.SetParameter("User"                , SessionParameters.CurrentUser);

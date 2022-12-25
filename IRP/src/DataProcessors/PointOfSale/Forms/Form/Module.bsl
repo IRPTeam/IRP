@@ -57,11 +57,18 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
 	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
-		SessionIsOpened = ValueIsFilled(Object.ConsolidatedRetailSales);
-		Form.Items.OpenSession.Enabled = Not SessionIsOpened;
-		Form.Items.CloseSession.Enabled = SessionIsOpened;
-		Form.Items.CancelSession.Enabled = SessionIsOpened;
-		Form.Items.GroupCommonCommands.Visible = True;
+		SessionIsCreated = Not Object.ConsolidatedRetailSales.IsEmpty();
+		If SessionIsCreated Then
+			Status = CommonFunctionsServer.GetRefAttribute(Object.ConsolidatedRetailSales, "Status");
+			Form.Items.OpenSession.Enabled = Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.New");
+			Form.Items.CloseSession.Enabled = Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.Open");
+			Form.Items.CancelSession.Enabled = Status = PredefinedValue("Enum.ConsolidatedRetailSalesStatuses.New");
+			Form.Items.GroupCommonCommands.Visible = True;
+		Else
+			Form.Items.OpenSession.Enabled = Not SessionIsCreated;
+			Form.Items.CloseSession.Enabled = SessionIsCreated;
+			Form.Items.CancelSession.Enabled = SessionIsCreated;
+		EndIf;
 	Else
 		Form.Items.GroupCommonCommands.Visible = False;
 	EndIf;
@@ -94,13 +101,18 @@ EndProcedure
 #Region CONSOLIDATED_RETAIL_SALES
 
 &AtClient
-Procedure OpenSession(Command)
-	ChangeConsolidatedRetailSales(Object, ThisObject, 
-		DocConsolidatedRetailSalesServer.CreateDocument(Object.Company, Object.Branch, ThisObject.Workstation));
-	DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
-	
-	SetVisibilityAvailability(Object, ThisObject);
-	EnabledPaymentButton();
+Async Procedure OpenSession(Command)
+	DocConsolidatedRetailSales = DocConsolidatedRetailSalesServer.CreateDocument(Object.Company, Object.Branch, ThisObject.Workstation);
+
+	EquipmentOpenShiftResult = Await EquipmentFiscalPrinterClient.OpenShift(DocConsolidatedRetailSales);
+	If EquipmentOpenShiftResult.Success Then
+		DocConsolidatedRetailSalesServer.DocumentOpenShift(DocConsolidatedRetailSales, EquipmentOpenShiftResult);
+		ChangeConsolidatedRetailSales(Object, ThisObject, DocConsolidatedRetailSales);
+		DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
+		
+		SetVisibilityAvailability(Object, ThisObject);
+		EnabledPaymentButton();
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -119,16 +131,19 @@ Procedure CloseSession(Command)
 EndProcedure
 
 &AtClient
-Procedure CloseSessionFinish(Result, AddInfo) Export
+Async Procedure CloseSessionFinish(Result, AddInfo) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
 	
-	DocConsolidatedRetailSalesServer.CloseDocument(Object.ConsolidatedRetailSales, Result);
-	ChangeConsolidatedRetailSales(Object, ThisObject, Undefined);
+	EquipmentCloseShiftResult = Await EquipmentFiscalPrinterClient.CloseShift(Object.ConsolidatedRetailSales);
+	If EquipmentCloseShiftResult.Success Then
+		DocConsolidatedRetailSalesServer.DocumentCloseShift(Object.ConsolidatedRetailSales, EquipmentCloseShiftResult, Result);
+		ChangeConsolidatedRetailSales(Object, ThisObject, Undefined);
 	
-	SetVisibilityAvailability(Object, ThisObject);
-	EnabledPaymentButton();
+		SetVisibilityAvailability(Object, ThisObject);
+		EnabledPaymentButton();
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -157,6 +172,15 @@ Procedure CancelSessionFinish(Result, AddInfo) Export
 	
 	SetVisibilityAvailability(Object, ThisObject);
 	EnabledPaymentButton();
+EndProcedure
+
+&AtClient
+Async Procedure PrintXReport(Command)
+	
+	EquipmentResult = Await EquipmentFiscalPrinterClient.PrintXReport(Object.ConsolidatedRetailSales);
+	If EquipmentResult.Success Then
+		
+	EndIf;
 EndProcedure
 			
 #EndRegion
@@ -604,13 +628,19 @@ EndFunction
 #Region RegionArea
 
 &AtClient
-Procedure PaymentFormClose(Result, AdditionalData) Export
+Async Procedure PaymentFormClose(Result, AdditionalData) Export
 
 	If Result = Undefined Then
 		Return;
 	EndIf;
 	
 	CashbackAmount = WriteTransaction(Result);
+	ResultPrint = Await PrintFiscalReceipt();
+	If ResultPrint Then
+		
+	Else
+		Return;
+	EndIf;
 	DetailedInformation = R().S_030 + ": " + Format(CashbackAmount, "NFD=2; NZ=0;");
 	SetDetailedInfo(DetailedInformation);
 	
@@ -736,6 +766,46 @@ Procedure NewTransaction()
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
+&AtClient
+Async Function PrintFiscalReceipt()
+	If Object.ConsolidatedRetailSales.IsEmpty() Then
+		Return True;
+	EndIf;
+	
+	EquipmentPrintFiscalReceiptResult = Await EquipmentFiscalPrinterClient.ProcessCheck(Object.ConsolidatedRetailSales, DocRef);
+	If EquipmentPrintFiscalReceiptResult.Success Then
+	SetFiscalStatus(Object.Ref
+						, EquipmentPrintFiscalReceiptResult.Status
+						, EquipmentPrintFiscalReceiptResult.FiscalResponse
+						, EquipmentPrintFiscalReceiptResult.DataPresentation);
+	Else
+		SetFiscalStatus(Object.Ref
+						, EquipmentPrintFiscalReceiptResult.Status
+						, EquipmentPrintFiscalReceiptResult.ErrorDescription);
+	EndIf;
+	Return EquipmentPrintFiscalReceiptResult.Success;
+EndFunction
+
+&AtServerNoContext
+Procedure SetFiscalStatus(DocumentRef, Status = "Prepaired", FiscalResponse = "", DataPresentation = "")
+	If Status = "Prepaired" Then
+		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
+																, Enums.DocumentFiscalStatuses.Prepaired);
+	ElsIf Status = "Printed" Then
+		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
+																, Enums.DocumentFiscalStatuses.Printed
+																, FiscalResponse
+																, DataPresentation);
+	ElsIf Status = "FiscalReturnedError" Then
+		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
+																, Enums.DocumentFiscalStatuses.FiscalReturnedError
+																, FiscalResponse);
+	ElsIf Status = "NotPrinted" Then
+		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
+																, Enums.DocumentFiscalStatuses.NotPrinted);
+	EndIf;
+EndProcedure
+
 &AtServer
 Procedure NewTransactionAtServer()
 	ObjectValue = Documents.RetailSalesReceipt.CreateDocument();
@@ -783,9 +853,11 @@ Function WriteTransaction(Result)
 	ObjectValue = FormAttributeToValue("Object");
 	ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	ObjectValue.Payments.Load(Payments);
+	ObjectValue.PaymentMethod = Result.ReceiptPaymentMethod;
 	DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
 
 	ObjectValue.Write(DocumentWriteMode.Posting);
+	
 	DocRef = ObjectValue.Ref;
 	DPPointOfSaleServer.AfterPostingDocument(DocRef);
 	CashAmountFilter = New Structure();
@@ -819,7 +891,7 @@ EndProcedure
 
 &AtClient
 Procedure EnabledPaymentButton()
-	Items.qPayment.Enabled = Object.ItemList.Count();
+	Items.GroupPaymentButtons.Enabled = Object.ItemList.Count();
 	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
 		SetPaymentButtonOnServer();
 	EndIf;
@@ -834,7 +906,7 @@ Procedure SetPaymentButtonOnServer()
 		Items.qPayment.TextColor = ColorGreen;
 		Items.qPayment.BorderColor = ColorGreen;
 	Else
-		Items.qPayment.Enabled = False;
+		Items.GroupPaymentButtons.Enabled = False;
 		Items.qPayment.Title = R().InfoMessage_SessionIsClosed;
 		Items.qPayment.TextColor = ColorRed;
 		Items.qPayment.BorderColor = ColorRed;
@@ -956,9 +1028,10 @@ Procedure CashInListSelection(Item, RowSelected, Field, StandardProcessing)
 		Return;
 	EndIf;
 	CashInData = New Structure();
-	CashInData.Insert("MoneyTransfer" , CurrentData.MoneyTransfer);
-	CashInData.Insert("Currency"      , CurrentData.Currency);
-	CashInData.Insert("Amount"        , CurrentData.Amount);
+	CashInData.Insert("MoneyTransfer"           , CurrentData.MoneyTransfer);
+	CashInData.Insert("Currency"                , CurrentData.Currency);
+	CashInData.Insert("Amount"                  , CurrentData.Amount);
+	CashInData.Insert("ConsolidatedRetailSales" , Object.ConsolidatedRetailSales);
 	
 	FillingData = GetFillingDataMoneyTransferForCashReceipt(CashInData);
 	OpenForm(
@@ -1032,7 +1105,8 @@ Function GetFillingDataMoneyTransferForCashReceipt(CashInData)
 	FillingData.Insert("Company"        , CashInData.MoneyTransfer.Company);	
 	FillingData.Insert("Branch"         , CashInData.MoneyTransfer.Branch);	
 	FillingData.Insert("CashAccount"    , ThisObject.Workstation.CashAccount);	
-	FillingData.Insert("Currency"       , CashInData.Currency);	
+	FillingData.Insert("Currency"       , CashInData.Currency);
+	FillingData.Insert("ConsolidatedRetailSales" , CashInData.ConsolidatedRetailSales);	
 	FillingData.Insert("PaymentList"    , New Array());	
 	NewRow = New Structure();
 	NewRow.Insert("TotalAmount"           , CashInData.Amount);	
@@ -1067,3 +1141,4 @@ Procedure FillCashInList()
 		FillPropertyValues(ThisObject.CashInList.Add(), QuerySelection);
 	EndDo;
 EndProcedure
+

@@ -1,7 +1,7 @@
 Function GetOrCreateDataBaseStatusInfo() Export
 
 	If Not Saas.isAreaActive() Then
-		Return Catalogs.DataBaseStatus.EmptyRef();
+		Return EmptyRef();
 	EndIf;
 
 	ComputerName = ComputerName();
@@ -30,8 +30,8 @@ Function GetOrCreateDataBaseStatusInfo() Export
 		Return SelectionDetailRecords.Ref;
 	EndDo;
 
-	NewConnection = Catalogs.DataBaseStatus.CreateItem();
-	If Not Catalogs.DataBaseStatus.Select().Next() Then
+	NewConnection = CreateItem();
+	If Not Select().Next() Then
 		NewConnection.isProduction = True;
 	EndIf;
 

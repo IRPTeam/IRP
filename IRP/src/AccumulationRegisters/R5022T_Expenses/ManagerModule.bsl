@@ -13,7 +13,7 @@ Procedure Expenses_Clear(DocObjectRef, Cancel) Export
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
-		RecordSet = AccumulationRegisters.R5022T_Expenses.CreateRecordSet();
+		RecordSet = CreateRecordSet();
 		RecordSet.Filter.Recorder.Set(QuerySelection.Recorder);
 		
 		RecordSet.Read();
@@ -59,7 +59,7 @@ Procedure Expenses_LoadRecords(CalculationMovementCostRef) Export
 	QuerySelection = QueryResult.Select(QueryResultIteration.ByGroups);
 	While QuerySelection.Next() Do
 		
-		RecordSet = AccumulationRegisters.R5022T_Expenses.CreateRecordSet();
+		RecordSet = CreateRecordSet();
 		RecordSet.Filter.Recorder.Set(QuerySelection.Document);
 		
 		ExpenseTable = RecordSet.Unload();

@@ -28,7 +28,7 @@ EndFunction
 Procedure SetUsersToReportOption(Val ReportOption, Val UsersArray) Export
 
 	If Not UsersArray.Count() Then
-		SharedReportOptionsSet = InformationRegisters.SharedReportOptions.CreateRecordSet();
+		SharedReportOptionsSet = CreateRecordSet();
 		SharedReportOptionsSet.Filter.ReportOption.Set(ReportOption);
 		SharedReportOptionsSet.Write();
 	EndIf;
@@ -69,7 +69,7 @@ Procedure SetUsersToReportOption(Val ReportOption, Val UsersArray) Export
 	BaseUsersSorted = BaseUsers.UnloadColumn("Ref");
 	BaseUsersSortedVal = ValueToStringInternal(BaseUsersSorted);
 
-	SharedReportOptionsSet = InformationRegisters.SharedReportOptions.CreateRecordSet();
+	SharedReportOptionsSet = CreateRecordSet();
 	SharedReportOptionsSet.Filter.ReportOption.Set(ReportOption);
 	SharedReportOptionsSet.Write();
 	If BaseUsersSortedVal = UsersSortedVal Then

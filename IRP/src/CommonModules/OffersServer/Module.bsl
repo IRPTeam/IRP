@@ -384,7 +384,9 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 
 			If StrOffers.AllRuleIsOk Then
 
-				CalculateOfferGroup(Object, StrOffers, StrOffers.Offer.Parent.SpecialOfferType);
+				If Not StrOffers.Offer.Parent.isEmpty() Then
+					CalculateOfferGroup(Object, StrOffers, StrOffers.Offer.Parent.SpecialOfferType);
+				EndIf;
 				
 				OfferCalculateIsOk = True;
 				If OffersInfo.Property("ItemListRowKey") Then

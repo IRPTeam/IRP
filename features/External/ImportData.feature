@@ -1397,6 +1397,13 @@ Scenario: Create information register TaxSettings records (Concignor 1)
 		| '16.11.2022 0:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | 'e1cib/data/Catalog.Agreements?ref=b78bf3a601f806a711ed64ba446bae65' | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef011' |
 		| '16.11.2022 0:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef011' |
 
+Scenario: Create information register TaxSettings records (Concignor 2)
+	And I check or create information register "TaxSettings" records:
+		| 'Period'              | 'Company'                                                           | 'Tax'                                                           | 'ItemKey' | 'Item' | 'ItemType' | 'Agreement'                                                          | 'TaxRate'                                                          |
+		| '16.11.2022 00:00:00' | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca7a5' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef011' |
+
+
+
 
 Scenario: Create information register Taxes records (VAT)
 

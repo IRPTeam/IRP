@@ -25,7 +25,7 @@ Function PrepareReceiptData(RetailSalesReceipt) Export
 			Raise("A few SerialLotNumber found!");
 		EndIf;
 		FiscalStringData.Insert("MeasureOfQuantity", "255");
-		FiscalStringData.Insert("Name", String(Item.Item));
+		FiscalStringData.Insert("Name", String(Item.Item) + " " + String(Item.ItemKey));
 		FiscalStringData.Insert("Quantity", Item.Quantity);
 		If RetailSalesReceipt.PaymentMethod = Enums.ReceiptPaymentMethods.FullPrepayment Then
 			FiscalStringData.Insert("PaymentMethod", 1);
@@ -44,8 +44,12 @@ Function PrepareReceiptData(RetailSalesReceipt) Export
 		EndIf;
 		FiscalStringData.Insert("PriceWithDiscount", Round(Item.TotalAmount / Item.Quantity, 2));
 		If TaxRows.Count() > 0 Then
-			FiscalStringData.Insert("VATRate", Format(TaxRows[0].TaxRate.Rate, "NZ=0; NG=0;"));
-			FiscalStringData.Insert("VATAmount", TaxRows[0].Amount);
+			If Not TaxRows[0].TaxRate.Rate = 0 Then  
+				FiscalStringData.Insert("VATRate", Format(TaxRows[0].TaxRate.Rate, "NZ=0; NG=0;"));
+				FiscalStringData.Insert("VATAmount", TaxRows[0].Amount);
+			Else
+				FiscalStringData.Insert("VATRate", "none");
+			EndIf;
 		Else
 			Raise("Tax isn't found!");
 		EndIf;

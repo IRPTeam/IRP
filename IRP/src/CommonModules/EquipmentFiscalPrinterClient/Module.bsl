@@ -193,6 +193,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(XMLOperationSettings);
 	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
+																			, Parameters.ParametersXML
 																			, Parameters.ResultXML);
 	If ResultInfo Then
 		ShiftData = ShiftResultStructure();
@@ -261,6 +262,7 @@ Async Function CashInCome(ConsolidatedRetailSales, Summ) Export
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
+																			, Parameters.ParametersXML
 																			, Parameters.ResultXML);
 	If ResultInfo Then
 		ShiftData = ShiftResultStructure();
@@ -314,6 +316,7 @@ Async Function CashOutCome(ConsolidatedRetailSales, Summ) Export
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	
 	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
+																			, Parameters.ParametersXML
 																			, Parameters.ResultXML);
 	If ResultInfo Then
 		ShiftData = ShiftResultStructure();

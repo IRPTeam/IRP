@@ -101,35 +101,39 @@ Procedure BeginGetDriverEnd(DriverObject, Params) Export
 	If IsBlankString(DriverObject) Then
 		CurrentStatus = R().Eq_002 + ": " + Chars.NBSp + Object.AddInID;
 	Else
+		Try
+			Notify = New NotifyDescription("BeginGetDriverEndAfter", ThisObject);
+			DriverObject.НачатьВызовПолучитьОписание(Notify, "");
+		Except
+			Raise "Old drive revision."
+		EndTry;
 
-		Notify = New NotifyDescription("GetVersionEnd", ThisObject);
-		DriverObject.НачатьВызовПолучитьНомерВерсии(Notify);
-
-		CurrentVersion = "";
-		DriverName      = "";
-		DriverNotify          = "";
-		EqType           = "";
-		IntegrationAddin   = Ложь;
-		MainDriverInstalled = Ложь;
-		InterfaceRevision         = 3003;
-		DriverURLLoad       = "";
-		Notify = New NotifyDescription("BeginGetDriverEndAfter", ЭтотОбъект);
-		DriverObject.НачатьВызовПолучитьОписание(Notify, DriverName, DriverNotify, EqType, InterfaceRevision,
-			IntegrationAddin, MainDriverInstalled, DriverURLLoad);
 	EndIf;
 EndProcedure
 
 &AtClient
 Procedure BeginGetDriverEndAfter(Result, Params, AddInfo) Export
-	Return;
-EndProcedure
-
-&AtClient
-Procedure GetVersionEnd(Result, Params, AddInfo) Export
-	If Not IsBlankString(Result) Then
-		CurrentVersion = Result;
+	
+	If Result Then
+		FillDriverInfo(Params);
 		UpdateCurrentStatusDriver();
 	EndIf;
+	
+EndProcedure
+
+&AtServer
+Procedure FillDriverInfo(Val Params)
+	Array = New Array;
+	For Each Param In Params Do
+		DriverInfoObj = CommonFunctionsServer.DeserializeXMLUseXDTOFactory(Param); // XDTODataObject
+		CurrentVersion = DriverInfoObj.DriverVersion;
+		
+		For Each KeyRow In DriverInfoObj.Properties() Do
+			Array.Add(KeyRow.Name + ": " + DriverInfoObj[KeyRow.Name]);
+		EndDo;
+		
+	EndDo;
+	DriverInfo = StrConcat(Array, Chars.LF);
 EndProcedure
 
 &AtClient

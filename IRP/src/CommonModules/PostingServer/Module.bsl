@@ -737,7 +737,7 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 		EndIf;
 
 		If Not Records_InDocument.Columns.Count() Then
-			Records_InDocument = PostingServer.CreateTable(Metadata.AccumulationRegisters.R4011B_FreeStocks);
+			Records_InDocument = CreateTable(Metadata.AccumulationRegisters.R4011B_FreeStocks);
 		EndIf;
 
 		Exists_R4011B_FreeStocks = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "Exists_R4011B_FreeStocks");
@@ -1198,7 +1198,7 @@ EndProcedure
 Procedure SetRegisters(Tables, DocumentRef, UseOldRegisters = False) Export
 	For Each Register In DocumentRef.Metadata().RegisterRecords Do
 		If UseOldRegisters Or UseRegister(Register.Name) Then
-			Tables.Insert(Register.Name, PostingServer.CreateTable(Register));
+			Tables.Insert(Register.Name, CreateTable(Register));
 		EndIf;
 	EndDo;
 EndProcedure

@@ -29,7 +29,19 @@ Function GetDriverSettings(AddInID) Export
 	Return Settings;
 EndFunction
 
-//
+
+// Get connection settings.
+// 
+// Parameters:
+//  HardwareRef - CatalogRef.Hardware - Hardware ref
+// 
+// Returns:
+//  Structure - Get connection settings:
+// * Hardware - CatalogRef.Hardware -
+// * EquipmentType - EnumRef.EquipmentTypes -
+// * AddInID - String -
+// * Driver - CatalogRef.EquipmentDrivers -
+// * ConnectParameters - Structure -
 Function GetConnectionSettings(HardwareRef) Export
 	Query = New Query();
 	Query.Text =
@@ -50,8 +62,10 @@ Function GetConnectionSettings(HardwareRef) Export
 	If SelectionDetailRecords.Next() Then
 		Settings.Insert("Hardware", SelectionDetailRecords.Ref);
 		Settings.Insert("EquipmentType", SelectionDetailRecords.EquipmentType);
+		Settings.Insert("DriverEquipmentType", GetDriverEquipmentType(SelectionDetailRecords.EquipmentType));
 		Settings.Insert("AddInID", SelectionDetailRecords.AddInID);
 		Settings.Insert("Driver", SelectionDetailRecords.Driver);
+		Settings.Insert("ID", "");
 
 		ConnectParameters = New Structure();
 		For Each Row In SelectionDetailRecords.Ref.ConnectParameters Do
@@ -102,10 +116,24 @@ Function GetAllWorkstationHardwareList(Workstation) Export
 	QueryResult = Query.Execute();
 	SelectionDetailRecords = QueryResult.Select();
 	HardwareList = New Array();
-	If SelectionDetailRecords.Next() Then
+	While SelectionDetailRecords.Next() Do
 		HardwareList.Add(SelectionDetailRecords.Hardware);
-	EndIf;
+	EndDo;
 	Return HardwareList;
+EndFunction
+
+#EndRegion
+
+#Region Private
+
+Function GetDriverEquipmentType(EquipmentType)
+	ReturnValue = "";
+	If EquipmentType = Enums.EquipmentTypes.InputDevice Then
+		ReturnValue = "СканерШтрихкода";
+	ElsIf EquipmentType = Enums.EquipmentTypes.FiscalPrinter Then
+		ReturnValue = "ККТ";
+	EndIf;
+	Return ReturnValue;
 EndFunction
 
 #EndRegion

@@ -135,7 +135,7 @@ Function GetRefsByOneProperty(ArrayOfFoundedItemKeys, Item, Attribute, Value)
 EndFunction
 
 Function CreateRefByProperties(TableOfProperties, Item, AddInfo = Undefined) Export
-	NewObject = Catalogs.PriceKeys.CreateItem();
+	NewObject = CreateItem();
 	NewObject.Item = Item;
 	For Each TableOfPropertiesRow In TableOfProperties Do
 		NewRowAddAttributes = NewObject.AddAttributes.Add();

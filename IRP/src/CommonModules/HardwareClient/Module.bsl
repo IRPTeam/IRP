@@ -59,30 +59,6 @@ Procedure InstallDriver(ID, NotifyOnCloseArchive = Undefined) Export
 	BeginInstallAddIn(NotifyOnCloseArchive, DriverRef);
 EndProcedure
 
-Procedure BeginStartAdditionalCommand(NotifyOnClose, Command, IncomingParams, ID, Parameters) Export
-	ConnectedDevice = GetConnectedDevice(globalEquipments.ConnectionSettings, ID);
-
-	If ConnectedDevice = Undefined Then
-		DeviceData = HardwareServer.GetConnectionSettings(ID);
-		CommandParameters = New Structure();
-		CommandParameters.Insert("Command", Command);
-		CommandParameters.Insert("IncomingParams", IncomingParams);
-		CommandParameters.Insert("Parameters", Parameters);
-		CommandParameters.Insert("DeviceData", DeviceData);
-		CommandParameters.Insert("NotifyOnClose", NotifyOnClose);
-		Notify = New NotifyDescription("BeginStartAdditionalCommand_End", ThisObject, CommandParameters);
-		BeginGetDriver(Notify, DeviceData);
-	Else
-		OutParameters = New Array();
-		OutParameters.Add(999);
-		OutParameters.Add(R().EqError_001);
-		OutParameters.Add(R().Eq_001);
-		ResultData = RunningOperationOnEquipmentParams(False, R().EqError_001, ID);
-		ResultData.OutParameters = OutParameters;
-		ExecuteNotifyProcessing(NotifyOnClose, ResultData);
-	EndIf;
-EndProcedure
-
 Function RunningOperationOnEquipmentParams(Result = False, Error = Undefined, ID = Undefined) Export
 	ResultData = New Structure();
 	ResultData.Insert("Result", Result);
@@ -142,67 +118,62 @@ Async Procedure BeginConnectEquipment(Workstation) Export
 	HardwareList = HardwareServer.GetAllWorkstationHardwareList(Workstation);
 
 	For Each Hardware In HardwareList Do
-		DriverObject = Undefined;
-		Device = HardwareServer.GetConnectionSettings(Hardware);
-
-		ConnectedDevice = GetConnectedDevice(globalEquipments.ConnectionSettings, Device.Hardware);
-		If ConnectedDevice = Undefined Then
-			ProcessingModule = GetProcessingModule(Device.EquipmentType);
-
-			DriverObject = Await GetDriverObject(Device);
-			
-			If DriverObject = Undefined Then
-				ErrorDescription = StrTemplate(R().Eq_007, Hardware);
-				ResultData = New Structure("Result, ErrorDescription, ConnectParameters", False, ErrorDescription,
-					Device.ConnectParameters);
-				ExecuteNotifyProcessing(ConnectionNotify, ResultData);
-				Continue;
-			EndIf;
-			
-			OutParameters = Undefined;
-			Result = ProcessingModule.ConnectDevice(DriverObject, Device.ConnectParameters, OutParameters);
-
-			If OutParameters.Count() >= 2 Then
-				Device.Insert("EventSource", OutParameters[0]);
-				Device.Insert("EventsNames", OutParameters[1]);
-			Else
-				Device.Insert("EventSource", "");
-				Device.Insert("EventsNames", Undefined);
-			EndIf;
-
-			ConnectParameters = globalEquipments.ConnectionSettings;
-			ConnectParameters.Add(Device);
-
-			If DriverObject <> Undefined Then
-				ErrorDescription = R().Eq_003;
-				ResultData = New Structure("Result, ErrorDescription, ConnectParameters", Result, ErrorDescription,
-					Device.ConnectParameters);
-				ExecuteNotifyProcessing(ConnectionNotify, ResultData);
-			EndIf;
-		Else
-			If DriverObject <> Undefined Then
-				ErrorDescription = R().Eq_003;
-				ResultData = New Structure("Result, ErrorDescription, ConnectParameters", True, ErrorDescription,
-					ConnectedDevice.ConnectParameters);
-				ExecuteNotifyProcessing(ConnectionNotify, ResultData);
-			EndIf;
-		EndIf;
+		ResultData = Await ConnectHardware(Hardware);
+		ExecuteNotifyProcessing(ConnectionNotify, ResultData);
 	EndDo;
 EndProcedure
+
+Async Function ConnectHardware(Hardware)
+	DriverObject = Undefined;
+	Device = HardwareServer.GetConnectionSettings(Hardware);
+	ResultData = New Structure();
+	ResultData.Insert("Result", False);
+	ResultData.Insert("ErrorDescription", "");
+	ResultData.Insert("ConnectParameters", New Structure());
+	
+	ConnectedDevice = GetConnectedDevice(globalEquipments.ConnectionSettings, Device.Hardware);
+	If ConnectedDevice = Undefined Then
+
+		Settings = Await FillDriverParametersSettings(Hardware);
+		
+		If Settings.ConnectedDriver = Undefined Then
+			ErrorDescription = StrTemplate(R().Eq_007, Hardware);
+			ResultData.ErrorDescription = ErrorDescription;
+			ResultData.ConnectParameters = Device.ConnectParameters;
+		Else
+			Result = Settings.ConnectedDriver.DriverObject.SetParameter("EquipmentType", Settings.ConnectedDriver.DriverEquipmentType);
+			Result = Settings.ConnectedDriver.DriverObject.Open(Settings.ConnectedDriver.ID);
+			globalEquipments.Drivers.Get(Settings.Hardware).ID = Settings.ConnectedDriver.ID;
+			If Settings.ConnectedDriver.DriverObject <> Undefined Then
+				ErrorDescription = R().Eq_003;
+				
+				ResultData.Result = Result;
+				ResultData.ErrorDescription = ErrorDescription;
+				ResultData.ConnectParameters = Device.ConnectParameters;
+			EndIf;
+		EndIf;
+	Else
+		If DriverObject <> Undefined Then
+			ErrorDescription = R().Eq_003;
+			ResultData.Result = True;
+			ResultData.ErrorDescription = ErrorDescription;
+			ResultData.ConnectParameters = ConnectedDevice.ConnectParameters;
+		EndIf;
+	EndIf;
+	Return ResultData;
+EndFunction
 
 #EndRegion
 
 #Region Private
 
 Async Function GetDriverObject(DriverInfo, ErrorText = Undefined)
+	AlreadyConnected = globalEquipments.Drivers.Get(DriverInfo.Hardware);
+	If Not AlreadyConnected = Undefined Then
+		Return AlreadyConnected;
+	EndIf;
+	
 	DriverObject = Undefined;
-
-	For Each DriverData Из globalEquipments.Drivers Do
-		If DriverData.Key = DriverInfo.Driver Then
-			DriverObject = DriverData.Value;
-			Return DriverObject;
-		EndIf;
-	EndDo;
 
 	If DriverObject = Undefined Then
 		ObjectName = StrSplit(DriverInfo.AddInID, ".");
@@ -216,16 +187,25 @@ Async Function GetDriverObject(DriverInfo, ErrorText = Undefined)
 		EndIf;
 	EndIf;
 
-	If DriverObject <> Undefined Then
-		globalEquipments.Drivers.Insert(DriverInfo.Driver, DriverObject);
-		DriverObject = globalEquipments.Drivers[DriverInfo.Driver];
+	If DriverObject = Undefined Then
+		Raise "Can not coonnect driver";
+	Else
+		
+		DeviceConnection = New Structure;
+		DeviceConnection.Insert("ID", "");
+		DeviceConnection.Insert("DriverObject", DriverObject);
+		DeviceConnection.Insert("DriverEquipmentType", DriverInfo.DriverEquipmentType);
+		DeviceConnection.Insert("DriverRef", DriverInfo.Driver);
+		DeviceConnection.Insert("Hardware", DriverInfo.Hardware);
+		DeviceConnection.Insert("AddInID", DriverInfo.AddInID);
+		globalEquipments.Drivers.Insert(DriverInfo.Hardware, DeviceConnection);
+		Return DeviceConnection;
 	EndIf;
 
-	Return DriverObject;
 EndFunction
 
 Function GetProcessingModule(EquipmentType)
-	Return Undefined;
+	Return HardwareClient;
 EndFunction
 
 Procedure ConnectHardware_End(Result, Param) Export
@@ -235,5 +215,190 @@ Procedure ConnectHardware_End(Result, Param) Export
 		Status(R().Eq_005);
 	EndIf;
 EndProcedure
+
+#EndRegion
+
+#Region API
+
+
+// Fill driver parameters settings.
+// 
+// Parameters:
+//  Hardware - CatalogRef.Hardware
+// 
+// Returns:
+//  Structure - Fill driver parameters settings:
+// * Hardware - CatalogRef.Hardware -
+// * Callback - NotifyDescription, Undefined -
+// * ConnectedDriver - Arbitrary, Undefined -
+// * ParametersDriver - See ParametersDriverDescription
+// * AdditionalCommand - String -
+// * SetParameters - Structure -
+// * OutParameters - Array of Number -
+// * ServiceCallback - NotifyDescription, Undefined -
+Async Function FillDriverParametersSettings(Hardware) Export
+		
+	Device = HardwareServer.GetConnectionSettings(Hardware);
+	ConnectedDriver = Await GetDriverObject(Device);
+	
+	Str = New Structure;
+	Str.Insert("ID", "");
+	Str.Insert("Hardware", Hardware);
+	Str.Insert("Callback", Undefined);
+	Str.Insert("ConnectedDriver", ConnectedDriver);
+	Str.Insert("ParametersDriver", ParametersDriverDescription());
+	Str.Insert("AdditionalCommand", "");
+	Str.Insert("SetParameters", New Structure);
+	Str.Insert("OutParameters", New Array);
+	Str.Insert("ServiceCallback", Undefined);
+	Return Str;
+EndFunction
+
+// Fill driver parameters.
+// 
+// Parameters:
+//  Settings - See FillDriverParametersSettings
+Procedure FillDriverParameters(Settings) Export
+	If Settings.Hardware.IsEmpty() Then
+		Return;
+	EndIf;
+
+	Notify = New NotifyDescription("GetDescription_End", ThisObject, Settings);
+	Settings.ConnectedDriver.DriverObject.НачатьВызовПолучитьОписание(Notify, "");
+EndProcedure
+
+Procedure GetDescription_End(Result, Parameters, Settings) Export
+	ParametersDriver = Settings.ParametersDriver;
+	Data = Parameters[0];
+	If Not IsBlankString(Parameters[0]) Then
+		XMLReader = New XMLReader(); 
+		XMLReader.SetString(Data);
+		XMLReader.MoveToContent();
+		If XMLReader.Name = "DriverDescription" И XMLReader.NodeType = XMLNodeType.StartElement Then
+			ParametersDriver.Name = XMLReader.AttributeValue("Name");
+			ParametersDriver.Description = XMLReader.AttributeValue("Description");
+			ParametersDriver.EquipmentType = XMLReader.AttributeValue("EquipmentType");
+			ParametersDriver.DriverVersion = XMLReader.AttributeValue("DriverVersion");
+			ParametersDriver.IntegrationComponentVersion = XMLReader.AttributeValue("IntegrationComponentVersion");
+			ParametersDriver.IntegrationComponent = StrCompare(XMLReader.AttributeValue("IntegrationComponent"), "TRUE") = 0;
+			ParametersDriver.MainDriverInstalled = StrCompare(XMLReader.AttributeValue("MainDriverInstalled"), "TRUE") = 0;
+			ParametersDriver.DownloadURL = XMLReader.AttributeValue("DownloadURL");
+			ParametersDriver.LogIsEnabled = StrCompare(XMLReader.AttributeValue("LogIsEnabled"), "TRUE") = 0;   
+			ParametersDriver.LogPath = XMLReader.AttributeValue("LogPath");
+			ParametersDriver.IsEmulator = StrCompare(XMLReader.AttributeValue("IsEmulator"), "TRUE") = 0;
+		EndIf;
+	EndIf;
+	Settings.ParametersDriver = ParametersDriver;
+	
+	Notify = New NotifyDescription("GetInterfaceRevision_End", ThisObject, Settings);
+	Settings.ConnectedDriver.DriverObject.НачатьВызовПолучитьРевизиюИнтерфейса(Notify);
+EndProcedure
+
+Procedure GetInterfaceRevision_End(Result, Parameters, Settings) Export
+	Settings.ParametersDriver.InterfaceRevision = Result;
+	
+	Notify = New NotifyDescription("GetParameters_End", ThisObject, Settings);
+	Params = "";
+	Settings.ConnectedDriver.DriverObject.НачатьВызовПолучитьПараметры(Notify, Params);
+EndProcedure
+
+Procedure GetParameters_End(Result, Parameters, Settings) Export
+	Settings.ParametersDriver.DriverParametersXML = Parameters[0];
+	
+	Notify = New NotifyDescription("GetAdditionalActions_End", ThisObject, Settings);
+	Settings.ConnectedDriver.DriverObject.НачатьВызовПолучитьДополнительныеДействия(Notify, "");
+EndProcedure
+
+Procedure GetAdditionalActions_End(Result, Parameters, Settings) Export
+	Settings.ParametersDriver.AdditionalActionsXML = Parameters[0];
+	Settings.ParametersDriver.Installed = True;
+	
+	Result = New Structure;
+	Result.Insert("Settings", Settings);
+	ExecuteNotifyProcessing(Settings.Callback, Result);
+EndProcedure
+
+Procedure SetParameter_End(Result, Parameters, Settings) Export
+	For Each Parameter In Settings.SetParameters Do
+		Notify = New NotifyDescription("SetParameter_End", ThisObject, Settings);
+		Settings.ConnectedDriver.DriverObject.НачатьВызовУстановитьПараметр(Notify, Parameter.Key, Parameter.Value);
+		Settings.SetParameters.Delete(Parameter.Key);
+		Return;
+	EndDo;
+	
+	If Settings.SetParameters.Count() = 0 Then
+		ExecuteNotifyProcessing(Settings.ServiceCallback, Settings);
+	EndIf;
+EndProcedure
+
+// Test device.
+// 
+// Parameters:
+//  Settings - See FillDriverParametersSettings
+Async Procedure TestDevice(Settings) Export
+	If Settings.Hardware.IsEmpty() Then
+		Return;
+	EndIf;
+	
+	Settings = Await FillDriverParametersSettings(Settings.Hardware);
+	Settings.ServiceCallback = New NotifyDescription("TestDevice_End", ThisObject, Settings);
+	SetParameter_End(Undefined, Undefined, Settings)
+EndProcedure
+
+Procedure TestDevice_End(Result, Settings) Export
+
+	TestResult		= "";
+	DemoIsActivated = "";
+
+	Settings.ConnectedDriver.DriverObject.НачатьВызовТестУстройства(Settings.Callback, TestResult, DemoIsActivated);
+	
+EndProcedure
+
+#Region Service
+
+// Parameters driver description.
+// 
+// Returns:
+//  Structure - Parameters driver description:
+// * Installed - Boolean -
+// * DriverVersion - String - 
+// * IntegrationComponentVersion - String -
+// * Name - String -
+// * Description - String -
+// * EquipmentType - String -
+// * IntegrationComponent - Boolean -
+// * MainDriverInstalled - Boolean -
+// * InterfaceRevision - Number -
+// * DownloadURL - String -
+// * DriverParametersXML - String -
+// * AdditionalActionsXML - String -
+// * DriverDescriptionXML - String -
+// * LogIsEnabled - Boolean -
+// * LogPath - String -
+// * IsEmulator - Boolean -
+Function ParametersDriverDescription() Export
+	
+	Result = New Structure();
+	Result.Insert("Installed", False);
+	Result.Insert("DriverVersion");
+	Result.Insert("IntegrationComponentVersion");
+	Result.Insert("Name", "");
+	Result.Insert("Description" , "");
+	Result.Insert("EquipmentType" , "");
+	Result.Insert("IntegrationComponent"  , False);
+	Result.Insert("MainDriverInstalled", False);
+	Result.Insert("InterfaceRevision" , 3009);
+	Result.Insert("DownloadURL" , "");
+	Result.Insert("DriverParametersXML" , "");
+	Result.Insert("AdditionalActionsXML", "");
+	Result.Insert("DriverDescriptionXML" , "");
+	Result.Insert("LogIsEnabled" , False);
+	Result.Insert("LogPath" , "");
+	Result.Insert("IsEmulator" , False);
+	Return Result;
+	
+EndFunction
+
+#EndRegion
 
 #EndRegion

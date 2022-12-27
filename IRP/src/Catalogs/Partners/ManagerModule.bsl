@@ -36,7 +36,7 @@ Function GetArrayOfParents(Partner, OnlyHierarchy = False) Export
 EndFunction
 
 Function GetCompaniesForPartner(Partner) Export
-	PartnerHierarchy = Catalogs.Partners.GetArrayOfParents(Partner);
+	PartnerHierarchy = GetArrayOfParents(Partner);
 	TempTable = New ValueTable();
 	TempTable.Columns.Add("Partner", New TypeDescription("CatalogRef.Partners"));
 	TempTable.Columns.Add("Level", New TypeDescription("Number"));

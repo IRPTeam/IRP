@@ -9,7 +9,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 		If Parameters.FilterPartnersByCompanies Then
 			CompaniesArray = New Array();
 			CompaniesArray.Add(Parameters.Company);
-			PartnersArray = CatPartnersServer.GetPartnersByCompanies(CompaniesArray);
+			PartnersArray = GetPartnersByCompanies(CompaniesArray);
 			Form.List.Parameters.SetParameterValue("PartnersByCompanies", PartnersArray);
 		EndIf;
 	EndIf;

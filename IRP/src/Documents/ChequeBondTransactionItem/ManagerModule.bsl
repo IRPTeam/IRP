@@ -1487,7 +1487,7 @@ EndFunction
 
 Function CreateAndPostDocument(ChequeRef, ChequeBondTransactionRef)
 	ChequeInfo = GetChequeInfo(ChequeRef, ChequeBondTransactionRef);
-	DocumentObject = Documents.ChequeBondTransactionItem.CreateDocument();
+	DocumentObject = CreateDocument();
 	FillDocument(DocumentObject, ChequeInfo);
 	WriteDocument(DocumentObject, DocumentWriteMode.Posting);
 	Return DocumentObject.Ref;

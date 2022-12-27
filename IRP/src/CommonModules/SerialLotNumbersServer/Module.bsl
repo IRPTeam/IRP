@@ -133,7 +133,11 @@ EndFunction
 Function isSerialLotNumberNameMatchRegExp(Value, Owner) Export
 	
 	Str = GetSerialLotNumbersRegExpRules(Owner);
-	Str.isMatch = CommonFunctionsServer.Regex(Value, Str.RegExp);
+	If Str.ItemType.RegExpSerialLotNumbersRules.Count() Then
+		Str.isMatch = CommonFunctionsServer.Regex(Value, Str.RegExp);
+	Else
+		Str.isMatch = True;
+	EndIf;
 	
 	Return Str;
 	
@@ -208,11 +212,11 @@ EndFunction
 // Returns:
 //  CatalogRef.SerialLotNumbers
 Function GetNewSerialLotNumber(Barcode, ItemKey) Export
-	Options = SerialLotNumbersServer.GetSeriallotNumerOptions();
+	Options = GetSeriallotNumerOptions();
 	Options.Barcode = Barcode;
 	Options.Owner = ItemKey;
 	Options.Description = Barcode;
-	SerialLotNumber = SerialLotNumbersServer.CreateNewSerialLotNumber(Options);
+	SerialLotNumber = CreateNewSerialLotNumber(Options);
 	If Not SerialLotNumber.IsEmpty() Then
 		Option = New Structure();
 		Option.Insert("ItemKey", ItemKey);

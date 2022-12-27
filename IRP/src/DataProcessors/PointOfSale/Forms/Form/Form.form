@@ -2184,6 +2184,7 @@
                   <items xsi:type="form:Button">
                     <name>CancelSession</name>
                     <id>1080</id>
+                    <visible>true</visible>
                     <enabled>true</enabled>
                     <userVisible>
                       <common>true</common>
@@ -2312,6 +2313,65 @@
                   <extendedTooltip>
                     <name>GroupCashCommandsExtendedTooltip</name>
                     <id>1135</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <type>Label</type>
+                    <autoMaxWidth>true</autoMaxWidth>
+                    <autoMaxHeight>true</autoMaxHeight>
+                    <extInfo xsi:type="form:LabelDecorationExtInfo">
+                      <horizontalAlign>Left</horizontalAlign>
+                    </extInfo>
+                  </extendedTooltip>
+                  <extInfo xsi:type="form:ButtonGroupExtInfo"/>
+                </items>
+                <items xsi:type="form:FormGroup">
+                  <name>GroupReports</name>
+                  <id>1146</id>
+                  <items xsi:type="form:Button">
+                    <name>PrintXReport</name>
+                    <id>1148</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <extendedTooltip>
+                      <name>PrintXReportExtendedTooltip</name>
+                      <id>1149</id>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <type>Label</type>
+                      <autoMaxWidth>true</autoMaxWidth>
+                      <autoMaxHeight>true</autoMaxHeight>
+                      <extInfo xsi:type="form:LabelDecorationExtInfo">
+                        <horizontalAlign>Left</horizontalAlign>
+                      </extInfo>
+                    </extendedTooltip>
+                    <commandName>Form.Command.PrintXReport</commandName>
+                    <representation>Auto</representation>
+                    <autoMaxWidth>true</autoMaxWidth>
+                    <autoMaxHeight>true</autoMaxHeight>
+                    <placementArea>UserCmds</placementArea>
+                    <representationInContextMenu>Auto</representationInContextMenu>
+                  </items>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <title>
+                    <key>en</key>
+                    <value>Reports</value>
+                  </title>
+                  <extendedTooltip>
+                    <name>GroupReportsExtendedTooltip</name>
+                    <id>1147</id>
                     <visible>true</visible>
                     <enabled>true</enabled>
                     <userVisible>
@@ -3998,18 +4058,203 @@
                       </font>
                     </extInfo>
                   </items>
-                  <items xsi:type="form:Button">
-                    <name>qPayment</name>
-                    <id>604</id>
+                  <items xsi:type="form:FormGroup">
+                    <name>GroupPaymentButtons</name>
+                    <id>1158</id>
+                    <items xsi:type="form:Button">
+                      <name>qPayment</name>
+                      <id>604</id>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <defaultItem>true</defaultItem>
+                      <extendedTooltip>
+                        <name>qPaymentExtendedTooltip</name>
+                        <id>605</id>
+                        <visible>true</visible>
+                        <enabled>true</enabled>
+                        <userVisible>
+                          <common>true</common>
+                        </userVisible>
+                        <type>Label</type>
+                        <autoMaxWidth>true</autoMaxWidth>
+                        <autoMaxHeight>true</autoMaxHeight>
+                        <extInfo xsi:type="form:LabelDecorationExtInfo">
+                          <horizontalAlign>Left</horizontalAlign>
+                        </extInfo>
+                      </extendedTooltip>
+                      <type>UsualButton</type>
+                      <commandName>Form.Command.qPayment</commandName>
+                      <representation>Auto</representation>
+                      <autoMaxWidth>true</autoMaxWidth>
+                      <maxHeight>3</maxHeight>
+                      <horizontalStretch>true</horizontalStretch>
+                      <verticalStretch>true</verticalStretch>
+                      <groupVerticalAlign>Bottom</groupVerticalAlign>
+                      <placementArea>UserCmds</placementArea>
+                      <textColor xsi:type="core:ColorRef">
+                        <color>Style.AccentColor</color>
+                      </textColor>
+                      <backColor xsi:type="core:ColorRef">
+                        <color>Web.HoneyDew</color>
+                      </backColor>
+                      <borderColor xsi:type="core:ColorRef">
+                        <color>Style.AccentColor</color>
+                      </borderColor>
+                      <font xsi:type="core:FontRef">
+                        <font>Style.LargeTextFont</font>
+                        <bold>true</bold>
+                        <italic>false</italic>
+                        <underline>false</underline>
+                        <strikeout>false</strikeout>
+                        <scale>100</scale>
+                      </font>
+                      <representationInContextMenu>Auto</representationInContextMenu>
+                      <shapeRepresentation>WhenActive</shapeRepresentation>
+                    </items>
+                    <items xsi:type="form:FormGroup">
+                      <name>CommandBarPayments</name>
+                      <id>1160</id>
+                      <items xsi:type="form:FormGroup">
+                        <name>SubmenuPayments</name>
+                        <id>1162</id>
+                        <items xsi:type="form:Button">
+                          <name>Advance</name>
+                          <id>1155</id>
+                          <visible>true</visible>
+                          <enabled>true</enabled>
+                          <userVisible>
+                            <common>true</common>
+                          </userVisible>
+                          <skipOnInput>true</skipOnInput>
+                          <extendedTooltip>
+                            <name>AdvanceExtendedTooltip</name>
+                            <id>1157</id>
+                            <visible>true</visible>
+                            <enabled>true</enabled>
+                            <userVisible>
+                              <common>true</common>
+                            </userVisible>
+                            <type>Label</type>
+                            <autoMaxWidth>true</autoMaxWidth>
+                            <autoMaxHeight>true</autoMaxHeight>
+                            <extInfo xsi:type="form:LabelDecorationExtInfo">
+                              <horizontalAlign>Left</horizontalAlign>
+                            </extInfo>
+                          </extendedTooltip>
+                          <commandName>Form.Command.Advance</commandName>
+                          <representation>Auto</representation>
+                          <autoMaxWidth>true</autoMaxWidth>
+                          <maxHeight>3</maxHeight>
+                          <horizontalStretch>true</horizontalStretch>
+                          <verticalStretch>true</verticalStretch>
+                          <groupVerticalAlign>Bottom</groupVerticalAlign>
+                          <placementArea>UserCmds</placementArea>
+                          <textColor xsi:type="core:ColorRef">
+                            <color>Style.AccentColor</color>
+                          </textColor>
+                          <backColor xsi:type="core:ColorRef">
+                            <color>Web.HoneyDew</color>
+                          </backColor>
+                          <borderColor xsi:type="core:ColorRef">
+                            <color>Style.AccentColor</color>
+                          </borderColor>
+                          <font xsi:type="core:FontRef">
+                            <font>Style.LargeTextFont</font>
+                            <bold>true</bold>
+                            <italic>false</italic>
+                            <underline>false</underline>
+                            <strikeout>false</strikeout>
+                            <scale>100</scale>
+                          </font>
+                          <representationInContextMenu>Auto</representationInContextMenu>
+                          <shapeRepresentation>WhenActive</shapeRepresentation>
+                        </items>
+                        <visible>true</visible>
+                        <enabled>true</enabled>
+                        <userVisible>
+                          <common>true</common>
+                        </userVisible>
+                        <title>
+                          <key>en</key>
+                          <value>Submenu payments</value>
+                        </title>
+                        <height>3</height>
+                        <extendedTooltip>
+                          <name>SubmenuPaymentsExtendedTooltip</name>
+                          <id>1163</id>
+                          <visible>true</visible>
+                          <enabled>true</enabled>
+                          <userVisible>
+                            <common>true</common>
+                          </userVisible>
+                          <type>Label</type>
+                          <autoMaxWidth>true</autoMaxWidth>
+                          <autoMaxHeight>true</autoMaxHeight>
+                          <extInfo xsi:type="form:LabelDecorationExtInfo">
+                            <horizontalAlign>Left</horizontalAlign>
+                          </extInfo>
+                        </extendedTooltip>
+                        <type>Popup</type>
+                        <extInfo xsi:type="form:PopupGroupExtInfo">
+                          <picture xsi:type="core:PictureRef">
+                            <picture>StdPicture.MoveDown</picture>
+                          </picture>
+                          <representation>Picture</representation>
+                          <shapeRepresentation>None</shapeRepresentation>
+                          <backColor xsi:type="core:ColorRef">
+                            <color>Style.FormBackColor</color>
+                          </backColor>
+                        </extInfo>
+                      </items>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <title>
+                        <key>en</key>
+                        <value>Payments</value>
+                      </title>
+                      <width>3</width>
+                      <height>2</height>
+                      <horizontalStretch>false</horizontalStretch>
+                      <verticalStretch>false</verticalStretch>
+                      <groupVerticalAlign>Center</groupVerticalAlign>
+                      <extendedTooltip>
+                        <name>CommandBarPaymentsExtendedTooltip</name>
+                        <id>1161</id>
+                        <visible>true</visible>
+                        <enabled>true</enabled>
+                        <userVisible>
+                          <common>true</common>
+                        </userVisible>
+                        <type>Label</type>
+                        <autoMaxWidth>true</autoMaxWidth>
+                        <autoMaxHeight>true</autoMaxHeight>
+                        <extInfo xsi:type="form:LabelDecorationExtInfo">
+                          <horizontalAlign>Left</horizontalAlign>
+                        </extInfo>
+                      </extendedTooltip>
+                      <type>CommandBar</type>
+                      <extInfo xsi:type="form:CommandBarExtInfo">
+                        <horizontalAlign>Left</horizontalAlign>
+                      </extInfo>
+                    </items>
                     <visible>true</visible>
                     <enabled>true</enabled>
                     <userVisible>
                       <common>true</common>
                     </userVisible>
-                    <defaultItem>true</defaultItem>
+                    <title>
+                      <key>en</key>
+                      <value>Payment buttons</value>
+                    </title>
                     <extendedTooltip>
-                      <name>qPaymentExtendedTooltip</name>
-                      <id>605</id>
+                      <name>GroupPaymentButtonsExtendedTooltip</name>
+                      <id>1159</id>
                       <visible>true</visible>
                       <enabled>true</enabled>
                       <userVisible>
@@ -4022,34 +4267,15 @@
                         <horizontalAlign>Left</horizontalAlign>
                       </extInfo>
                     </extendedTooltip>
-                    <type>UsualButton</type>
-                    <commandName>Form.Command.qPayment</commandName>
-                    <representation>Auto</representation>
-                    <autoMaxWidth>true</autoMaxWidth>
-                    <maxHeight>3</maxHeight>
-                    <horizontalStretch>true</horizontalStretch>
-                    <verticalStretch>true</verticalStretch>
-                    <groupVerticalAlign>Bottom</groupVerticalAlign>
-                    <placementArea>UserCmds</placementArea>
-                    <textColor xsi:type="core:ColorRef">
-                      <color>Style.AccentColor</color>
-                    </textColor>
-                    <backColor xsi:type="core:ColorRef">
-                      <color>Web.HoneyDew</color>
-                    </backColor>
-                    <borderColor xsi:type="core:ColorRef">
-                      <color>Style.AccentColor</color>
-                    </borderColor>
-                    <font xsi:type="core:FontRef">
-                      <font>Style.LargeTextFont</font>
-                      <bold>true</bold>
-                      <italic>false</italic>
-                      <underline>false</underline>
-                      <strikeout>false</strikeout>
-                      <scale>100</scale>
-                    </font>
-                    <representationInContextMenu>Auto</representationInContextMenu>
-                    <shapeRepresentation>WhenActive</shapeRepresentation>
+                    <type>UsualGroup</type>
+                    <extInfo xsi:type="form:UsualGroupExtInfo">
+                      <group>AlwaysHorizontal</group>
+                      <behavior>Auto</behavior>
+                      <showLeftMargin>true</showLeftMargin>
+                      <united>true</united>
+                      <throughAlign>Auto</throughAlign>
+                      <currentRowUse>Auto</currentRowUse>
+                    </extInfo>
                   </items>
                   <visible>true</visible>
                   <enabled>true</enabled>
@@ -6288,8 +6514,33 @@ person</value>
     <representation>TextPicture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
+  <formCommands>
+    <name>Advance</name>
+    <title>
+      <key>en</key>
+      <value>Advance</value>
+    </title>
+    <id>30</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>Advance</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
   <commandInterface>
-    <navigationPanel/>
+    <navigationPanel>
+      <cmiFragmentRecord>
+        <command>InformationRegister.DocumentFiscalStatus.StandardCommand.OpenByValue.Document</command>
+        <commandParameter xsi:type="form:DataPath">
+          <segments>Object.Ref</segments>
+        </commandParameter>
+        <userVisible/>
+      </cmiFragmentRecord>
+    </navigationPanel>
     <commandBar/>
   </commandInterface>
   <extInfo xsi:type="form:DocumentFormExtInfo">

@@ -14,7 +14,7 @@ Procedure GeneratePhysicalCountByLocation(Parameters, AddInfo = Undefined) Expor
 
 		For Each Instance In Parameters.ArrayOfInstance Do
 
-			PhysicalCountByLocationObject = Documents.PhysicalCountByLocation.CreateDocument();
+			PhysicalCountByLocationObject = CreateDocument();
 
 			// try lock for modify
 			PhysicalCountByLocationObject.Lock();
@@ -83,7 +83,7 @@ EndFunction
 //	Spreadsheet - SpreadsheetDocument - spreadsheet document to fill out and print.
 //	Ref - Arbitrary - contains a reference to the object for which the print command was executed.
 Procedure PrintQR(Spreadsheet, Ref) Export
-	Template = Documents.PhysicalCountByLocation.GetTemplate("PrintQR");
+	Template = GetTemplate("PrintQR");
 	Query = New Query();
 	Query.Text =
 	"SELECT

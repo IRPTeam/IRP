@@ -3,12 +3,12 @@
 Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	StandardProcessing = False;
 	ChoiceData = New ValueList();
-	ChoiceData.Add(Enums.ShipmentConfirmationTransactionTypes.InventoryTransfer);
-	ChoiceData.Add(Enums.ShipmentConfirmationTransactionTypes.Sales);
-	ChoiceData.Add(Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor);
+	ChoiceData.Add(InventoryTransfer);
+	ChoiceData.Add(Sales);
+	ChoiceData.Add(ReturnToVendor);
 	
 	If FOServer.IsUseCommissionTrading() Then
-		ChoiceData.Add(Enums.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent);
-		ChoiceData.Add(Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor);
+		ChoiceData.Add(ShipmentToTradeAgent);
+		ChoiceData.Add(ReturnToConsignor);
 	EndIf;	
 EndProcedure

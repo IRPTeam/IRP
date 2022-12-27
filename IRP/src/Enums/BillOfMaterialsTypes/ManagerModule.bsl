@@ -4,10 +4,10 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	ChoiceData = New ValueList();
 	
 	If FOServer.IsUseWorkOrders() Then
-		ChoiceData.Add(Enums.BillOfMaterialsTypes.Work);
+		ChoiceData.Add(Work);
 	EndIf;
 	
 	If FOServer.IsUseManufacturing() Then
-		ChoiceData.Add(Enums.BillOfMaterialsTypes.Product);
+		ChoiceData.Add(Product);
 	EndIf;
 EndProcedure

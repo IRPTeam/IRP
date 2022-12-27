@@ -33,4 +33,18 @@
       <value>Loyality point</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="acb4e908-95d9-4a02-aea5-3332a8eb783e">
+    <name>PaymentAgent</name>
+    <synonym>
+      <key>en</key>
+      <value>Payment agent</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="5537df59-4c8e-4e42-8a88-45e4655cb043">
+    <name>Advance</name>
+    <synonym>
+      <key>en</key>
+      <value>Advance</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

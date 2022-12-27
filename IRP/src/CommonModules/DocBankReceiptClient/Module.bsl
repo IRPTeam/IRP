@@ -275,6 +275,7 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 	Parameters.Insert("OpeningEntryTableName1", "AccountPayableByDocuments");
 	Parameters.Insert("OpeningEntryTableName2", "AccountReceivableByDocuments");
 	Parameters.Insert("DebitNoteTableName", "Transactions");
+	Parameters.Insert("RetailSalesReceiptTableName", "Document.RetailSalesReceipt");	
 	Parameters.Insert("Ref", Object.Ref);
 	Parameters.Insert("IsReturnTransactionType", 
 		Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor"));

@@ -245,8 +245,8 @@ Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProc
 		CurrentData = Form.Items.ItemList.CurrentData;
 		If CurrentData <> Undefined Then
 			FormParameters = New Structure();
-			FormParameters.Insert("SelectedRowInfo", RowIDInfoClient.GetSelectedRowInfo(CurrentData));
-			FormParameters.Insert("TablesInfo"     , RowIDInfoClient.GetTablesInfo(Object, CurrentData.Key));
+			FormParameters.Insert("SelectedRowInfo", GetSelectedRowInfo(CurrentData));
+			FormParameters.Insert("TablesInfo"     , GetTablesInfo(Object, CurrentData.Key));
 			FormParameters.Insert("Ref"            , Object.Ref);
 			OpenForm("CommonForm.InfoLinkedDocumentRows", FormParameters, , , , , , FormWindowOpeningMode.LockOwnerWindow);
 		EndIf;

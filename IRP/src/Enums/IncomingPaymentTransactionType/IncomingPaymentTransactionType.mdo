@@ -68,4 +68,11 @@
       <value>Cash in</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="93362fc5-fd4e-4452-b87f-5c0211e7cc3b">
+    <name>CustomerAdvance</name>
+    <synonym>
+      <key>en</key>
+      <value>Customer advance</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

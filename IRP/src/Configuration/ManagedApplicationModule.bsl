@@ -60,6 +60,14 @@ Procedure ConnectAllEquipments() Export
 	HardwareClient.BeginConnectEquipment(globalWorkstation);
 EndProcedure
 
+Procedure ExternEventProcessing(Source, Event, Data)
+	If Data <> Undefined Then
+		If Event = "NewBarcode" Or Event = "Штрихкод" Then
+			Notify("NewBarcode", Data);
+		EndIf;
+	EndIf;
+EndProcedure
+
 // New equipments.
 // 
 // Returns:

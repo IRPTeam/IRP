@@ -90,10 +90,13 @@ Scenario: _041 test data
 			| 'Currency' | 'Deferred calculation' | 'Description'    | 'Reference'      | 'Source'       | 'Type'  |
 			| 'TRY'      | 'No'                   | 'Local currency' | 'Local currency' | 'Forex Seling' | 'Legal' |
 		And I select current line in "List" table
-		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"		
+		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"	
+		And I go to line in "CompanyTaxes" table
+			| 'Tax' |
+			| 'VAT' |
+		And I set "Use" checkbox in "CompanyTaxes" table
+		And I finish line editing in "CompanyTaxes" table	
 		And I click "Save and close" button
-		And I wait "Main Company (Company) *" window closing in 20 seconds
-		Then "Companies" window is opened
 		And I go to line in "List" table
 			| 'Description'    |
 			| 'Second Company' |

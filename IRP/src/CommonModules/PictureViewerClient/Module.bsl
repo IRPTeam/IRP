@@ -225,7 +225,7 @@ Procedure PictureViewHTMLOnClick(Form, Item, EventData, StandardProcessing) Expo
 	If Form.Object.Ref.isEmpty() Then
 		ShowMessageBox(Undefined, R().InfoMessage_004);
 	Else
-		PictureViewerClient.HTMLEvent(Form, Form.Object, Item.Document.defaultView.call1C);
+		HTMLEvent(Form, Form.Object, Item.Document.defaultView.call1C);
 	EndIf;
 EndProcedure
 
@@ -282,12 +282,12 @@ Procedure HTMLEventAction(Val EventName, Val Parameter, Val Source, Form) Export
 	If EventName = "UpdateObjectPictures" And Source = Form.UUID Then
 		UpdateHTMLPicture(Form.Items.PictureViewHTML, Form);
 	ElsIf EventName = "UpdateObjectPictures_AddNewOne" And Source = Form.UUID Then
-		HTMLWindow = PictureViewerClient.InfoDocumentComplete(Form.Items.PictureViewHTML);
-		PictureInfo = PictureViewerClient.PicturesInfoForSlider(Form.Object.Ref, Form.UUID, Parameter);
+		HTMLWindow = InfoDocumentComplete(Form.Items.PictureViewHTML);
+		PictureInfo = PicturesInfoForSlider(Form.Object.Ref, Form.UUID, Parameter);
 		JSON = CommonFunctionsServer.SerializeJSON(PictureInfo);
 		HTMLWindow.addNewSlide(JSON);
 	ElsIf EventName = "UpdateObjectPictures_Delete" And Source = Form.UUID Then
-		HTMLWindow = PictureViewerClient.InfoDocumentComplete(Form.Items.PictureViewHTML);
+		HTMLWindow = InfoDocumentComplete(Form.Items.PictureViewHTML);
 		HTMLWindow.removeCurrentSlide(Parameter);
 	ElsIf EventName = "UpdateObjectPictures_UpdateAll" And Source = Form.UUID Then
 		UpdateHTMLPicture(Form.Items.PictureViewHTML, Form);
@@ -314,8 +314,8 @@ Procedure AddPictureFromGallery(ClosureResult, AdditionalParameters) Export
 EndProcedure
 
 Async Procedure UpdateHTMLPicture(Item, Form) Export
-	HTMLWindow = PictureViewerClient.InfoDocumentComplete(Item);
-	JSON = PictureViewerClient.PicturesInfoForSlider(Form.Object.Ref, Form.UUID);
+	HTMLWindow = InfoDocumentComplete(Item);
+	JSON = PicturesInfoForSlider(Form.Object.Ref, Form.UUID);
 	HTMLWindow.fillSlider(JSON);
 EndProcedure
 
@@ -366,7 +366,7 @@ Procedure HTMLViewControl(Form, CommandName) Export
 	
 	If CommandName = "ViewPictures" Then
 		Form.Items.PictureViewHTML.Visible = Visible;
-		PictureViewerClient.UpdateObjectPictures(Form, PredefinedValue("Catalog.Items.EmptyRef"));
+		UpdateObjectPictures(Form, PredefinedValue("Catalog.Items.EmptyRef"));
 	ElsIf CommandName = "ViewAdditionalAttribute" Then
 		Form.Items.AddAttributeViewHTML.Visible = Visible;
 		AddAttributesAndPropertiesClient.UpdateObjectAddAttributeHTML(Form, PredefinedValue("Catalog.Items.EmptyRef"));

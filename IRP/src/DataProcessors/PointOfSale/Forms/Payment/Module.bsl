@@ -20,46 +20,114 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Object.Amount = Parameters.Amount;
 	Object.Branch = Parameters.Branch;
 	Object.Workstation = Parameters.Workstation;
-	FillPaymentTypes();
+	ThisObject.IsAdvance = Parameters.IsAdvance;
 	
+	FillPaymentTypes();
+	FillPaymentMethods();
+	
+	If Not ThisObject.IsAdvance And ValueIsFilled(Parameters.RetailCustomer) Then
+		AdvanceAmount = GetAdvanceByRetailCustomer(Parameters.Company, Parameters.Branch, Parameters.RetailCustomer);
+		If ValueIsFilled(AdvanceAmount) Then
+			AdvancePaymentType = GetAdvancePaymentType();
+			If ValueIsFilled(AdvancePaymentType) Then	
+				AdvancePayment = ThisObject.Payments.Add();
+				AdvancePayment.Amount = Min(AdvanceAmount, Parameters.Amount);
+				AdvancePayment.Description     = String(AdvancePaymentType);
+				AdvancePayment.PaymentType     = AdvancePaymentType;
+				AdvancePayment.PaymentTypeEnum = AdvancePaymentType.Type;
+			EndIf;
+		EndIf;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	CalculatePaymentsAmountTotal();
+	FormatPaymentsAmountStringRows();
 EndProcedure
 
 &AtServer
-Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
+Function GetAdvanceByRetailCustomer(_Company, _Branch, _RetailCustomer)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	R2023B_AdvancesFromRetailCustomersBalance.AmountBalance AS Amount
+	|FROM
+	|	AccumulationRegister.R2023B_AdvancesFromRetailCustomers.Balance(, Company = &Company
+	|	AND Branch = &Branch
+	|	AND RetailCustomer = &RetailCustomer) AS R2023B_AdvancesFromRetailCustomersBalance";
+	Query.SetParameter("Company", _Company);
+	Query.SetParameter("Branch", _Branch);
+	Query.SetParameter("RetailCustomer", _RetailCustomer);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		Return QuerySelection.Amount;
+	EndIf;
+	Return 0;
+EndFunction
 	
+&AtServer
+Function GetAdvancePaymentType()
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	PaymentTypes.Ref
+	|FROM
+	|	Catalog.PaymentTypes AS PaymentTypes
+	|WHERE
+	|	NOT PaymentTypes.DeletionMark
+	|	AND PaymentTypes.Type = VALUE(Enum.PaymentTypes.Advance)";
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		Return QuerySelection.Ref;
+	EndIf;
+	Return Undefined;
+EndFunction	
+	
+&AtServer
+Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	ErrorMessages = New Array();
 
-	If PaymentsAmountTotal < Object.Amount Then
-		ErrorMessages.Add(R().POS_s1);
+	If Not ThisObject.IsAdvance Then
+		If ThisObject.PaymentsAmountTotal < Object.Amount Then
+			ErrorMessages.Add(R().POS_s1);
+		EndIf;
 	EndIf;
-
+	
 	PaymentsValue = FormAttributeToValue("Payments");
+	
 	CashPaymentFilter = New Structure();
 	CashPaymentFilter.Insert("PaymentTypeEnum", Enums.PaymentTypes.Cash);
 	CashAmounts = PaymentsValue.Copy(CashPaymentFilter, "Amount");
 	CashAmount = CashAmounts.Total("Amount");
+	
 	CardPaymentFilter = New Structure();
 	CardPaymentFilter.Insert("PaymentTypeEnum", Enums.PaymentTypes.Card);
 	CardAmounts = PaymentsValue.Copy(CardPaymentFilter, "Amount");
 	CardAmount = CardAmounts.Total("Amount");
-	If CardAmount > Object.Amount Then
-		ErrorMessages.Add(R().POS_s2);
-	EndIf;
-	If CardAmount = Object.Amount And CashAmount Then
-		ErrorMessages.Add(R().POS_s3);
-	EndIf;
+	
+	If Not ThisObject.IsAdvance Then
+		If CardAmount > Object.Amount Then
+			ErrorMessages.Add(R().POS_s2);
+		EndIf;
+		
+		If CardAmount = Object.Amount And CashAmount Then
+			ErrorMessages.Add(R().POS_s3);
+		EndIf;
 
-	If Not ErrorMessages.Count() And PaymentsAmountTotal <> (Object.Amount + Object.Cashback) Then
-		ErrorMessages.Add(R().POS_s4);
+		If Not ErrorMessages.Count() And PaymentsAmountTotal <> (Object.Amount + Object.Cashback) Then
+			ErrorMessages.Add(R().POS_s4);
+		EndIf;
 	EndIf;
-
+	
 	If ErrorMessages.Count() Then
 		Cancel = True;
 		For Each ErrorMessage In ErrorMessages Do
 			CommonFunctionsClientServer.ShowUsersMessage(ErrorMessage);
 		EndDo;
 	EndIf;
-
 EndProcedure
 
 #EndRegion
@@ -91,7 +159,6 @@ EndProcedure
 
 &AtClient
 Procedure Enter(Command)
-	
 	If Not Payments.Count() And CashPaymentTypes.Count() Then
 		ButtonSettings = POSClient.ButtonSettings();
 		FillPropertyValues(ButtonSettings, CashPaymentTypes[0]);
@@ -113,42 +180,48 @@ Procedure Enter(Command)
 	
 	ReturnValue = New Structure();
 	ReturnValue.Insert("Payments", Payments);
+	ReturnValue.Insert("ReceiptPaymentMethod", ReceiptPaymentMethod);
 	Close(ReturnValue);
-	
 EndProcedure
 
 &AtClient
 Procedure CloseButton(Command)
-	
 	Close();
-	
 EndProcedure
 
 &AtClient
 Procedure Cash(Command)
-	
-	OpenPaymentForm(CashPaymentTypes, PredefinedValue("Enum.PaymentTypes.Cash"));
-	
+	OpenPaymentForm(ThisObject.CashPaymentTypes, PredefinedValue("Enum.PaymentTypes.Cash"));
 EndProcedure
 
 &AtClient
 Procedure Card(Command)
-	
-	OpenPaymentForm(BankPaymentTypes, PredefinedValue("Enum.PaymentTypes.Card"));
-
+	OpenPaymentForm(ThisObject.BankPaymentTypes, PredefinedValue("Enum.PaymentTypes.Card"));
 EndProcedure
 
 &AtClient
 Procedure Certificate(Command)
-	
 	Return;
-	
+EndProcedure
+
+&AtClient
+Procedure PaymentAgent(Command)
+	OpenPaymentForm(ThisObject.PaymentAgentTypes, PredefinedValue("Enum.PaymentTypes.PaymentAgent"));
 EndProcedure
 
 &AtClient
 Procedure NumPress(Command)
 	
-	If Not Payments.Count() And CashPaymentTypes.Count() Then
+	PaymentsCount = 0;
+	For Each Row In ThisObject.Payments Do
+		If Row.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Advance") Then
+			Continue;
+		EndIf;
+		PaymentsCount = PaymentsCount + 1;
+	EndDo;
+	
+//	If Not Payments.Count() And CashPaymentTypes.Count() Then
+	If Not PaymentsCount And CashPaymentTypes.Count() Then
 		ButtonSettings = POSClient.ButtonSettings();
 		FillPropertyValues(ButtonSettings, CashPaymentTypes[0]);
 		AdditionalParameters = New Structure();
@@ -186,6 +259,7 @@ Procedure OpenPaymentForm(PaymentTypesTable, PaymentType)
 		ButtonSettings = POSClient.ButtonSettings();
 
 		FillPropertyValues(ButtonSettings, PaymentTypesTable[0]);
+		ButtonSettings.PaymentTypeEnum = PaymentType;
 		ChoiceEndAdditionalParameters = New Structure();
 		FillPayments(ButtonSettings, ChoiceEndAdditionalParameters);
 	EndIf;
@@ -194,24 +268,25 @@ EndProcedure
 
 &AtClient
 Procedure CalculatePaymentsAmountTotal()
+	ThisObject.PaymentsAmountTotal = Payments.Total("Amount");
 	
-	PaymentsAmountTotal = Payments.Total("Amount");
 	CashFilter = New Structure();
 	CashFilter.Insert("PaymentTypeEnum", PredefinedValue("Enum.PaymentTypes.Cash"));
 	CashRows = Payments.FindRows(CashFilter);
+	
 	PaymentCashAmount = 0;
 	For Each CashRow In CashRows Do
 		PaymentCashAmount = PaymentCashAmount + CashRow.Amount;
 	EndDo;
 	
-	If PaymentsAmountTotal > Object.Amount And PaymentsAmountTotal - Object.Amount <= PaymentCashAmount Then
-		CashbackValue = PaymentsAmountTotal - Object.Amount;
+	If ThisObject.PaymentsAmountTotal > Object.Amount 
+		And ThisObject.PaymentsAmountTotal - Object.Amount <= PaymentCashAmount Then
+		CashbackValue = ThisObject.PaymentsAmountTotal - Object.Amount;
 	Else
 		CashbackValue = 0;
 	EndIf;
 	
 	Object.Cashback = CashbackValue;
-	
 EndProcedure
 
 &AtClient
@@ -353,16 +428,27 @@ EndProcedure
 
 &AtServer
 Procedure FillPaymentsAtServer()
-	
 	CashPaymentTypesValue = GetCashPaymentTypesValue();
 	ValueToFormAttribute(CashPaymentTypesValue, "CashPaymentTypes");
 
 	BankPaymentTypesValue = GetBankPaymentTypesValue(Object.Branch);
 	ValueToFormAttribute(BankPaymentTypesValue, "BankPaymentTypes");
 
-	Items.Cash.Enabled = CashPaymentTypes.Count();
-	Items.Card.Enabled = BankPaymentTypes.Count();
+	If Not ThisObject.IsAdvance Then
+		PaymentAgentValue = GetPaymentAgentTypesValue(Object.Branch);
+		ValueToFormAttribute(PaymentAgentValue, "PaymentAgentTypes");
+	EndIf;
+	
+	Items.Cash.Enabled = ThisObject.CashPaymentTypes.Count();
+	Items.Card.Enabled = ThisObject.BankPaymentTypes.Count();
+	Items.PaymentAgent.Enabled = ThisObject.PaymentAgentTypes.Count();
+EndProcedure
 
+&AtServer
+Procedure FillPaymentMethods()
+	
+	ReceiptPaymentMethod = Enums.ReceiptPaymentMethods.FullCalculation;
+	
 EndProcedure
 
 // Get bank payment types value.
@@ -421,7 +507,6 @@ EndFunction
 //  	*Account - CatalogRef.CashAccounts
 &AtServer
 Function GetCashPaymentTypesValue()
-	
 	Query = New Query();
 	Query.Text = "SELECT
 	|	PaymentTypes.Ref AS PaymentType,
@@ -435,7 +520,23 @@ Function GetCashPaymentTypesValue()
 	|	AND NOT PaymentTypes.DeletionMark";
 	Query.SetParameter("CashAccount", Object.Workstation.CashAccount);
 	Return Query.Execute().Unload();
-	
+EndFunction
+
+&AtServer
+Function GetPaymentAgentTypesValue(Branch)
+	Query = New Query();
+	Query.Text = 
+		"SELECT
+		|	PaymentTypes.Ref AS PaymentType,
+		|	PaymentTypes.Description_en AS Description
+		|FROM
+		|	Catalog.PaymentTypes AS PaymentTypes
+		|WHERE
+		|	PaymentTypes.Type = VALUE(Enum.PaymentTypes.PaymentAgent)
+		|	AND NOT PaymentTypes.DeletionMark
+		|	AND PaymentTypes.Branch = &Branch";
+	Query.SetParameter("Branch", Branch);
+	Return Query.Execute().Unload();
 EndFunction
 
 // Fill payments
@@ -445,12 +546,11 @@ EndFunction
 //  AdditionalParameters - Arbitrary - Additional parameters
 &AtClient
 Procedure FillPayments(Result, AdditionalParameters) Export
-	
 	If Result = Undefined Then
 		Return;
 	EndIf;
 
-	FoundPayment = Payments.FindRows(Result);
+	FoundPayment = ThisObject.Payments.FindRows(Result);
 	If FoundPayment.Count() Then
 		Row = FoundPayment[0];
 		Row.Amount = 0;
@@ -466,12 +566,17 @@ Procedure FillPayments(Result, AdditionalParameters) Export
 		If Result.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Card") Then
 			DefaultPaymentFilter.Insert("BankTerm", Result.BankTerm);
 			DefaultPayment = BankPaymentTypes.FindRows(DefaultPaymentFilter);
-			Row.Percent = DefaultPayment[0].Percent;			
+			Row.Percent = DefaultPayment[0].Percent;
+			Row.Account = DefaultPayment[0].Account;
+		ElsIf Result.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.PaymentAgent") Then
+			DefaultPayment = CashPaymentTypes.FindRows(DefaultPaymentFilter);
+			//DefaultPayment.Percent = ????
 		Else
 			DefaultPayment = CashPaymentTypes.FindRows(DefaultPaymentFilter);
+			Row.Account = DefaultPayment[0].Account;
 		EndIf;
 		
-		Row.Account = DefaultPayment[0].Account;
+		//Row.Account = DefaultPayment[0].Account;
 	EndIf;
 	
 	If (Object.Amount - Payments.Total("Amount")) <= 0 Then
@@ -492,7 +597,6 @@ Procedure FillPayments(Result, AdditionalParameters) Export
 	
 	CalculatePaymentsAmountTotal();
 	FormatPaymentsAmountStringRows();
-	
 EndProcedure
 
 &AtClient

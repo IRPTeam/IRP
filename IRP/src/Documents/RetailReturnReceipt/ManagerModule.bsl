@@ -206,7 +206,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
 	|WHERE
 	|	RetailReturnReceiptItemList.Ref = &Ref
-	|	AND RetailReturnReceiptItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+//	|	AND RetailReturnReceiptItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+	|	AND NOT RetailReturnReceiptItemList.IsService
 	|GROUP BY
 	|	RetailReturnReceiptItemList.ItemKey,
 	|	RetailReturnReceiptItemList.Store,
@@ -665,7 +666,8 @@ Function ItemList()
 	|		ELSE ItemList.RetailSalesReceipt
 	|	END AS RetailSalesReceipt,
 	|	ItemList.Key AS RowKey,
-	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+//	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+	|	ItemList.IsService AS IsService,
 	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 	|	ItemList.RevenueType AS RevenueType,
 	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,

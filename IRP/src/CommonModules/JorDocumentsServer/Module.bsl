@@ -8,7 +8,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 				Form.List.Parameters.SetParameterValue(QueryParameter.Key, QueryParameter.Value);
 			EndIf;
 		EndDo;
-		Ref = CustomFilter.QueryParameters.Ref;
 		Period = EndOfDay(CurrentSessionDate());
 		Form.List.Parameters.SetParameterValue("Period", Period);
 	EndIf;

@@ -17,7 +17,7 @@ Function GetOrCreateTopLevel(UniqueID, AddInfo = Undefined) Export
 		Return QueryResult.Ref;
 	EndIf;
 
-	NewGroup = Catalogs.DataMappingItems.CreateFolder();
+	NewGroup = CreateFolder();
 	NewGroup.Description = UniqueID;
 	NewGroup.UniqueID = UniqueID;
 	NewGroup.Write();
@@ -41,7 +41,7 @@ Function GetOrCreateMappingItem(CreationStructure, AddInfo = Undefined) Export
 		NewItem = MapItem.Ref.GetObject();
 
 	Else
-		NewItem = Catalogs.DataMappingItems.CreateItem();
+		NewItem = CreateItem();
 		NewItem.Description = CreationStructure.Value;
 		NewItem.SimpleValue = CreationStructure.Value;
 		NewItem.TypeValue = CreationStructure.Type;
@@ -77,14 +77,14 @@ Function GetMappingItem(CreationStructure, AddInfo = Undefined) Export
 		Return QueryResult.Ref;
 	EndIf;
 
-	Return Catalogs.DataMappingItems.EmptyRef();
+	Return EmptyRef();
 EndFunction
 
 Function GetCreationStructure(AddInfo = Undefined) Export
 	CreationStructure = New Structure();
 	CreationStructure.Insert("Value", "");
 	CreationStructure.Insert("Type", "");
-	CreationStructure.Insert("TopLevel", Catalogs.DataMappingItems.EmptyRef());
+	CreationStructure.Insert("TopLevel", EmptyRef());
 	CreationStructure.Insert("Ref", Undefined);
 	Return CreationStructure;
 EndFunction

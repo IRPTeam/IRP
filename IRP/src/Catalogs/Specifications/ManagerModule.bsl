@@ -79,7 +79,7 @@ Function FindOrCreateRefByProperties(TableOfItems, QuantityTable, ItemBundle, Ad
 EndFunction
 
 Function CreateRefByProperties(TableOfItems, QuantityTable, ItemBundle, AddInfo = Undefined) Export
-	NewObject = Catalogs.Specifications.CreateItem();
+	NewObject = CreateItem();
 	NewObject.ItemBundle = ItemBundle;
 	NewObject.Type = GetSpecificationType(TableOfItems, AddInfo);
 

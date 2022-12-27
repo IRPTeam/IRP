@@ -61,7 +61,6 @@ Procedure UpdateDefaults() Export
 	Try
 		UpdateDefaultsAtTransaction();
 	Except
-		Success = False;
 		ErrorDescription = ErrorDescription();
 	EndTry;
 	

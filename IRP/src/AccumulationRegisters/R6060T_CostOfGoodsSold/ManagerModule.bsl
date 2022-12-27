@@ -14,7 +14,7 @@ Procedure CostOfGoodsSold_Clear(DocObjectRef, Cancel) Export
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
-		RecordSet = AccumulationRegisters.R6060T_CostOfGoodsSold.CreateRecordSet();
+		RecordSet = CreateRecordSet();
 		RecordSet.Filter.Recorder.Set(QuerySelection.Recorder);
 		
 		RecordSet.Read();
@@ -283,7 +283,7 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 		If Not ValueIsFilled(QuerySelection.Document) Then
 			Continue;
 		EndIf;
-		RecordSet = AccumulationRegisters.R6060T_CostOfGoodsSold.CreateRecordSet();
+		RecordSet = CreateRecordSet();
 		RecordSet.Filter.Recorder.Set(QuerySelection.Document);
 		QuerySelectionDetails = QuerySelection.Select();
 		While QuerySelectionDetails.Next() Do

@@ -166,6 +166,8 @@ EndProcedure
 #Region ItemAgreement
 
 Procedure AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, TransactionType, Parameters = Undefined) Export
+	CompanyIsSet = True;
+	DateIsSet    = True;
 	If Parameters <> Undefined Then
 		If Parameters.Property("Company") Then
 			Company = Parameters.Company;
@@ -185,9 +187,22 @@ Procedure AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceD
 			LegalName = Object.LegalName;
 		EndIf;
 	Else
-		Company   = Object.Company;
+		If CommonFunctionsClientServer.ObjectHasProperty(Object, "Company") Then
+			Company = Object.Company;
+		Else
+			Company = Undefined;
+			CompanyIsSet = False;
+		EndIf;
+		
 		Partner   = Object.Partner;
 		LegalName = Object.LegalName;
+	EndIf;
+
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Date") Then
+		Date = Object.Date;
+	Else
+		Date = Undefined;
+		DateIsSet = False;
 	EndIf;
 	
 	AgreementType = ModelServer_V2.GetAgreementTypeByTransactionType(TransactionType);
@@ -203,13 +218,17 @@ Procedure AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceD
 	OpenSettings.FormParameters.Insert("Partner"                     , Partner);
 	OpenSettings.FormParameters.Insert("IncludeFilterByPartner"      , True);
 	OpenSettings.FormParameters.Insert("IncludePartnerSegments"      , True);
-	OpenSettings.FormParameters.Insert("EndOfUseDate"                , Object.Date);
+	If DateIsSet Then
+		OpenSettings.FormParameters.Insert("EndOfUseDate", Date);
+	EndIf;
 	OpenSettings.FormParameters.Insert("IncludeFilterByEndOfUseDate" , True);
 	
 	OpenSettings.FillingData = New Structure();
 	OpenSettings.FillingData.Insert("Partner"   , Partner);
 	OpenSettings.FillingData.Insert("LegalName" , LegalName);
-	OpenSettings.FillingData.Insert("Company"   , Company);
+	If CompanyIsSet Then
+		OpenSettings.FillingData.Insert("Company"   , Company);
+	EndIf;
 	OpenSettings.FillingData.Insert("Type"      , AgreementType);
 
 	AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
@@ -1490,7 +1509,7 @@ EndProcedure
 #Region RevenueType
 
 Procedure RevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+	OpenSettings = GetOpenSettingsStructure();
 
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
@@ -1500,7 +1519,7 @@ Procedure RevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcess
 	OpenSettings.FormParameters = New Structure();
 	OpenSettings.FillingData = New Structure();
 
-	DocumentsClient.ExpenseAndRevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+	ExpenseAndRevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 Procedure RevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
@@ -1509,7 +1528,7 @@ Procedure RevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsRevenue", True, ComparisonType.Equal));
 
 	AdditionalParameters = New Structure();
-	DocumentsClient.ExpenseAndRevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
+	ExpenseAndRevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
 		AdditionalParameters);
 EndProcedure
 
@@ -1518,7 +1537,7 @@ EndProcedure
 #Region ExpenseType
 
 Procedure ExpenseTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+	OpenSettings = GetOpenSettingsStructure();
 
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
@@ -1530,7 +1549,7 @@ Procedure ExpenseTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcess
 	OpenSettings.FormParameters = New Structure();
 	OpenSettings.FillingData = New Structure();
 
-	DocumentsClient.ExpenseAndRevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+	ExpenseAndRevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 Procedure ExpenseTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
@@ -1539,7 +1558,7 @@ Procedure ExpenseTypeEditTextChange(Object, Form, Item, Text, StandardProcessing
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsExpense", True, ComparisonType.Equal));
 
 	AdditionalParameters = New Structure();
-	DocumentsClient.ExpenseAndRevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
+	ExpenseAndRevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
 		AdditionalParameters);
 EndProcedure
 
@@ -1548,7 +1567,7 @@ EndProcedure
 #Region FinancialMovementType
 
 Procedure FinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+	OpenSettings = GetOpenSettingsStructure();
 
 	OpenSettings.ArrayOfFilters = New Array();
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
@@ -1560,7 +1579,7 @@ Procedure FinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, Stand
 	OpenSettings.FormParameters = New Structure();
 	OpenSettings.FillingData = New Structure();
 
-	DocumentsClient.ExpenseAndRevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+	ExpenseAndRevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 Procedure FinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
@@ -1569,7 +1588,7 @@ Procedure FinancialMovementTypeEditTextChange(Object, Form, Item, Text, Standard
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsFinancialMovementType", True, ComparisonType.Equal));
 
 	AdditionalParameters = New Structure();
-	DocumentsClient.ExpenseAndRevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
+	ExpenseAndRevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
 		AdditionalParameters);
 EndProcedure
 

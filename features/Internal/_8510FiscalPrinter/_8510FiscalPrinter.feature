@@ -30,6 +30,7 @@ Scenario: _0850000 preparation (fiscal printer)
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
+		When Create catalog Partners and Payment type (Bank)
 		When Create catalog Units objects
 		When Create catalog Items objects
 		When Create catalog PriceTypes objects
@@ -368,6 +369,31 @@ Scenario: _0850017 advance payment from POS
 		And I input "002" text in "ID" field
 		And I move to the next attribute
 		And I click "OK" button
+	* Select first item (scan by barcode, with serial lot number)
+		And I click "Search by barcode (F7)" button
+		And I input "57897909799" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Bank credit
+		And I click "Payment (+)" button
+		And I click "P\A" button
+		And "Payments" table became equal
+			| 'Payment type' | 'Amount' |
+			| 'Bank credit'  | '100,00' |
+		And I click the button named "Enter"
+
+	
+Scenario: _0850018 bank credit payment
+	And I close all client application windows
+	And In the command interface I select "Retail" "Point of sale"
+	* Select retail customer
+		And I click "Search customer" button
+		And I input "005" text in "ID" field
+		And I move to the next attribute
+		And I click "OK" button
 	* Advance
 		Then "Point of sales *" window is opened
 		And I click the button named "Advance"
@@ -376,7 +402,6 @@ Scenario: _0850017 advance payment from POS
 		And I click "0" button
 		And I click "0" button
 		And I click the button named "Enter"
-	* Check
 
 		
 Scenario: _0260130 create cash out

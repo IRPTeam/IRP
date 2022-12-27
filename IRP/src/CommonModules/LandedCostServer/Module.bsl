@@ -677,7 +677,9 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
-		EndLastPeriod = QuerySelection.EndDate;
+		If ValueIsFilled(QuerySelection.EndDate) Then
+			EndLastPeriod = QuerySelection.EndDate;
+		EndIf;
 	EndIf;
 	
 	Query = New Query();
@@ -858,7 +860,9 @@ Procedure DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, Cal
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
-		EndLastPeriod = QuerySelection.EndDate;
+		If ValueIsFilled(QuerySelection.EndDate) Then
+			EndLastPeriod = QuerySelection.EndDate;
+		EndIf;
 	EndIf;
 	
 	Query = New Query();

@@ -91,9 +91,9 @@ Scenario: move the Discount 2 without Vat special offer from Maximum to Minimum
 		| 'Discount 2 without Vat' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And in the table "List" I click the button named "ListContextMenuLevelDown"
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Launch' | 'Manually' | 'Priority' | 'Special offer type' |
 		| 'No'     | 'No'       | '2'        | 'Minimum'            |
@@ -230,8 +230,9 @@ Scenario:  move the Discount Price 1 to Minimum
 		| 'Discount Price 1' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
@@ -245,8 +246,9 @@ Scenario:  move the Discount Price 1 to Maximum
 		| 'Discount Price 1' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Maximum'            |
@@ -260,8 +262,9 @@ Scenario:  move the Discount Price 2 special offer to Maximum
 		| 'Discount Price 2' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Maximum'            |
@@ -275,8 +278,9 @@ Scenario: move the special offer Discount Price 2 to Minimum (for test)
 		| 'Discount Price 2' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
@@ -290,8 +294,9 @@ Scenario: move the Discount Price 1 to Sum
 		| 'Discount Price 1' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Sum'            |
@@ -305,8 +310,9 @@ Scenario: move the Discount Price 2 special offer to Sum
 		| 'Discount Price 2' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Sum'            |
@@ -354,8 +360,9 @@ Scenario: move the Discount 1 without Vat discount to Minimum
 		| 'Discount 1 without Vat' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
@@ -369,8 +376,9 @@ Scenario: move the Discount 2 without Vat discount to the Minimum group
 		| 'Discount 2 without Vat' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
@@ -384,8 +392,9 @@ Scenario: move the Discount 1 without Vat discount to the Sum group
 		| 'Discount 1 without Vat' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Sum'            |
@@ -400,8 +409,9 @@ Scenario: move the Discount 1 without Vat discount to the Sum in Minimum group
 		| 'Discount 2 without Vat' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
@@ -419,8 +429,9 @@ Scenario: move the group Sum in Minimum to Minimum
 		| 'Sum in Minimum' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
@@ -434,8 +445,9 @@ Scenario: move the Discount 1 without Vat discount to Sum in Minimum
 		| 'Discount 1 without Vat' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
@@ -453,7 +465,9 @@ Scenario: move the Discount 2 without Vat discount to Special Offers
 		| 'Discount 2 without Vat' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
+	And I go to line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I click the button named "FormChoose"
 
 Scenario: move Discount 1 without Vat in Special Offers
@@ -463,8 +477,9 @@ Scenario: move Discount 1 without Vat in Special Offers
 		| 'Description'              |
 		| 'Discount 1 without Vat' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
-	Then "Special offers" window is opened
-	And I move one level down in "List" table
+	And I go to line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I click the button named "FormChoose"
 
 Scenario: change auto setting 3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms
@@ -559,8 +574,9 @@ Scenario: move the discount All items 5+1, Discount on Basic Partner terms to th
 		| 'All items 5+1, Discount on Basic Partner terms' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
@@ -574,8 +590,9 @@ Scenario: move the discount 3+1 Dress and Trousers (not multiplicity), Discount 
 		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
@@ -589,8 +606,9 @@ Scenario: move the discount 4+1 Dress and Trousers, Discount on Basic Partner te
 		| '4+1 Dress and Trousers, Discount on Basic Partner terms' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
@@ -604,8 +622,9 @@ Scenario: move the discount All items 5+1, Discount on Basic Partner terms to th
 		| 'All items 5+1, Discount on Basic Partner terms' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Sum'            |
@@ -619,8 +638,9 @@ Scenario: move the discount 3+1 Dress and Trousers (not multiplicity), Discount 
 		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Sum'            |
@@ -634,8 +654,9 @@ Scenario: move the discount 4+1 Dress and Trousers, Discount on Basic Partner te
 		| '4+1 Dress and Trousers, Discount on Basic Partner terms' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Sum'            |
@@ -683,7 +704,6 @@ Scenario: move the discount All items 5+1, Discount on Basic Partner terms to th
 		| 'All items 5+1, Discount on Basic Partner terms' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
 	And I go to line in "List" table
         | 'Special offer type' | 'Priority' |
         | 'Special Offers'     | '1'        |
@@ -697,7 +717,6 @@ Scenario: move the discount 3+1 Dress and Trousers (not multiplicity), Discount 
 		| '3+1 Dress and Trousers (not multiplicity), Discount on Basic Partner terms' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
 	And I go to line in "List" table
         | 'Special offer type' | 'Priority' |
         | 'Special Offers'     | '1'        |
@@ -711,7 +730,6 @@ Scenario: move the discount 4+1 Dress and Trousers, Discount on Basic Partner te
 		| '4+1 Dress and Trousers, Discount on Basic Partner terms' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
 	And I go to line in "List" table
         | 'Special offer type' | 'Priority' |
         | 'Special Offers'     | '1'        |
@@ -725,7 +743,6 @@ Scenario: move Discount Price 1 to Special Offers
 		| 'Discount Price 1' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
 	And I go to line in "List" table
         | 'Special offer type' | 'Priority' |
         | 'Special Offers'     | '1'        |
@@ -739,7 +756,6 @@ Scenario: move Discount Price 1 to the group Special Offers
 		| 'Discount Price 2' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
 	And I go to line in "List" table
         | 'Special offer type' | 'Priority' |
         | 'Special Offers'     | '1'        |

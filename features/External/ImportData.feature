@@ -1515,6 +1515,11 @@ Scenario: Create information register PricesByProperties records
 
 Scenario: Create information register ItemSegments records (discount)
 
+	And I check or create catalog "ItemSegments" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade821' | 'False'        | 1      | 'Dress'          | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade822' | 'False'        | 2      | 'Bags'           | ''                 | ''               | ''               |
+
 	And I check or create information register "ItemSegments" records:
 		| 'Segment'                                                              | 'ItemKey'                                                          |
 		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed860db2075304' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' |

@@ -49,6 +49,7 @@ Scenario: _03000 preparation (Discount)
 		When Create information register TaxSettings records
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
+		When Create information register ItemSegments records (discount)
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
 		When update ItemKeys
@@ -143,6 +144,21 @@ Scenario: _030005 add Plugin FivePlusOne
 		And I click "Save and close" button
 		And Delay 10
 	Then I check for the "ExternalDataProc" catalog element with the "Description_en" "ExternalFivePlusOne"
+
+Scenario: _0300051 add Plugin TwoPlusPartOfThird
+	Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+	And I click the button named "FormCreate"
+	And I select external file "$Path$/DataProcessor/TwoPlusPartOfThird.epf"
+	And I click the button named "FormAddExtDataProc"
+	And I input "" text in "Path to plugin for test" field
+	And I input "TwoPlusPartOfThird" text in "Name" field
+	And I click Open button of the field named "Description_en"
+	And I input "TwoPlusPartOfThird" text in the field named "Description_en"
+	And I input "TwoPlusPartOfThird" text in the field named "Description_tr"
+	And I click "Ok" button
+	And I click "Save and close" button
+	And I wait "Plugins (create)" window closing in 10 seconds
+	Then I check for the "ExternalDataProc" catalog element with the "Description_en" "TwoPlusPartOfThird"
 
 
 Scenario: _030006 create Special Offer Types (price type)
@@ -1289,3 +1305,189 @@ Scenario: _030026 create Document discount
 	And I change checkbox "Manual input value"
 	And I click "Save and close" button
 	And I wait "Special offer (create) *" window closing in 20 seconds
+
+
+Scenario: _030028 create group consistently
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click the button named "FormCreateFolder"
+	And I click Select button of "Special offer type" field
+	And I click the button named "FormCreate"
+	And I click Select button of "Plugins" field
+	And I go to line in "List" table
+		| 'Description'                 |
+		| 'ExternalSpecialOfferRules' |
+	And I select current line in "List" table
+	And I click Open button of the field named "Description_en"
+	And I input "Сonsistently" text in the field named "Description_en"
+	And I input "Сonsistently" text in the field named "Description_tr"
+	And I click "Ok" button
+	And I change checkbox "Group types"
+	And I click "Save" button
+	And I click "Set settings" button
+	And Delay 2
+	And I select "Consequentially" exact value from "Type joining" drop-down list
+	When save the special offer setting
+	And I click the button named "FormChoose"
+	And I set checkbox "Sequential calculation for each row in document"	
+	And I click Open button of the field named "Description_en"
+	And I input "Consequentially" text in the field named "Description_en"
+	And I input "Consequentially" text in the field named "Description_tr"
+	And I click "Ok" button
+	And I input "18" text in "Priority" field
+	And I click "Save and close" button
+	And Delay 10
+	Then I check for the "SpecialOffers" catalog element with the "Description_en" "Consequentially"
+
+
+Scenario: _030030 create Discount coupon
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click the button named "FormCreate"
+	And I input "Discount coupon 10%" text in the field named "Description_en"
+	And I click Open button of "ENG" field
+	And I input "Discount coupon 10% TR" text in the field named "Description_tr"
+	And I click "Ok" button
+	And I select "Purchases and sales" exact value from "Document type" drop-down list
+	* Add type
+		And I click Select button of "Special offer type" field
+		And I click the button named "FormCreate"
+		And I input "Discount coupon 10%" text in the field named "Description_en"
+		And I click Open button of "ENG" field
+		And I input "Discount coupon 10% TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Select button of "Plugins" field
+		Then "Plugins" window is opened
+		And I go to line in "List" table
+			| Description      |
+			| DocumentDiscount |
+		And I select current line in "List" table
+		And I click "Save" button
+		And I click "Set settings" button
+		And I input "10,00" text in "Default percent" field
+		And I click "Save settings" button
+		And I click "Save and close" button
+		And I wait "Special offer type (create) *" window closing in 20 seconds
+		Then "Special offer types" window is opened
+		And I click the button named "FormChoose"
+		And I input "19" text in "Priority" field
+	* Add rule
+		And in the table "Rules" I click the button named "RulesAdd"
+		And I click choice button of "Rule" attribute in "Rules" table
+		And I click the button named "FormCreate"
+		And I input "Discount coupon 10%" text in "ENG" field
+		And I click Select button of "Plugins" field
+		And I go to line in "List" table
+			| 'Description'      |
+			| 'DocumentDiscount' |
+		And I select current line in "List" table
+		And I click "Save" button
+		And I click "Set settings" button
+		And I input "10,00" text in "Default percent" field
+		And I click "Save settings" button
+		And I click "Save and close" button
+		And I click the button named "FormChoose"
+	And I input current date in "Start of" field
+	And I set checkbox "Manually"
+	And I click "Save and close" button
+	* Move to the group 
+		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'Discount coupon 10%' |
+		And in the table "List" I click the button named "ListContextMenuMoveItem"
+		Then "Special offers" window is opened
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Special offer type' |
+			| 'Сonsistently'       |
+		And I click the button named "FormChoose"
+
+
+Scenario: _030031 create two plus part of third discount
+	Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+	And I click the button named "FormCreate"
+	And I input "Two plus part of third" text in the field named "Description_en"
+	And I click Open button of "ENG" field
+	And I input "Two plus part of third 10% TR" text in the field named "Description_tr"
+	And I click "Ok" button
+	And I select "Purchases and sales" exact value from "Document type" drop-down list
+	* Add type
+		And I click Select button of "Special offer type" field
+		And I click the button named "FormCreate"
+		And I input "Two plus part of third 40%" text in the field named "Description_en"
+		And I click Open button of "ENG" field
+		And I input "Two plus part of third 40% TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Select button of "Plugins" field
+		Then "Plugins" window is opened
+		And I go to line in "List" table
+			| Description      |
+			| TwoPlusPartOfThird |
+		And I select current line in "List" table
+		And I click "Save" button
+		And I click "Set settings" button
+		And I click Select button of "Main segment" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I input "2" text in "Main items quantity" field
+		And I click Select button of "Offer segment" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Bags'        |
+		And I select current line in "List" table
+		And I input "1" text in "Offer items quantity" field
+		And I input "60,000" text in "Discount percentage" field
+		And I click "Save settings" button
+		And I click "Save and close" button
+		And I click the button named "FormChoose"
+		And I input "20" text in "Priority" field
+	* Add rule
+		And in the table "Rules" I click the button named "RulesAdd"
+		And I click choice button of "Rule" attribute in "Rules" table
+		And I click the button named "FormCreate"
+		And I input "Two plus part of third 40%" text in the field named "Description_en"
+		And I click Open button of "ENG" field
+		And I input "Two plus part of third 40% TR" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click Select button of "Plugins" field
+		Then "Plugins" window is opened
+		And I go to line in "List" table
+			| Description      |
+			| TwoPlusPartOfThird |
+		And I select current line in "List" table
+		And I click "Save" button
+		And I click "Set settings" button
+		And I click Select button of "Main segment" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I input "2" text in "Main items quantity" field
+		And I click Select button of "Offer segment" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Bags'        |
+		And I select current line in "List" table
+		And I input "1" text in "Offer items quantity" field
+		And I input "60,000" text in "Discount percentage" field
+		And I click "Save settings" button
+		And I click "Save and close" button
+		And I click the button named "FormChoose"
+	And I input current date in "Start of" field
+	And I set checkbox "Manually"
+	And I click "Save and close" button
+	* Move to the group 
+		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'Discount coupon 10%' |
+		And in the table "List" I click the button named "ListContextMenuMoveItem"
+		Then "Special offers" window is opened
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Special offer type' |
+			| 'Сonsistently'       |
+		And I click the button named "FormChoose"

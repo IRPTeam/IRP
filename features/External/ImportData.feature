@@ -1522,11 +1522,11 @@ Scenario: Create information register ItemSegments records (discount)
 
 	And I check or create information register "ItemSegments" records:
 		| 'Segment'                                                              | 'ItemKey'                                                          |
-		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed860db2075304' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' |
-		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed860db2075304' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fd' |
-		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed860db2075304' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fe' |
-		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed860db2075305' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf1277d18ed8c' |
-		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed860db2075305' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf1277d18ed8d' |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade821' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade821' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fd' |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade821' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fe' |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade822' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf1277d18ed8c' |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade822' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf1277d18ed8d' |
 
 
 Scenario: Create catalog IntegrationSettings objects

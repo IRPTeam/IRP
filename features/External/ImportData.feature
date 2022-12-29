@@ -2505,6 +2505,17 @@ Scenario: Create second Workstation
 		| 'e1cib/data/Catalog.Workstations?ref=b784ae4f9cb08e5e11ed1a17667e6bb4' | 'False'        | '000000000002' | 'Workstation 02' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186a' | ''              | ''          | 'TeamAgent' |
 
 
+Scenario: Create PaymentType (advance)
+
+	// Catalog.PaymentTypes
+
+	And I check or create catalog "PaymentTypes" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Parent' | 'Code' | 'Type'                      | 'Icon'                                  | 'isIconSet' | 'Partner' | 'LegalName' | 'Agreement' | 'LegalNameContract' | 'Branch' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.PaymentTypes?ref=b790eb46b44093f611ed877301bc6957' | 'False'        | ''       | 12     | 'Enum.PaymentTypes.Advance' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | ''        | ''          | ''          | ''                  | ''       | 'Advance'        | ''                 | ''               | ''               |
+
+
+
+
 Scenario: Create catalog ExternalFunctions objects
 
 	And I check or create catalog "ExternalFunctions" objects:

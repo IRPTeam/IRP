@@ -39,6 +39,7 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		When Create catalog Stores objects
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
+		When Create catalog Partners and Payment type (Bank)
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create chart of characteristic types CurrencyMovementType objects
@@ -90,6 +91,9 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load RetailSalesReceipt
+		When Create document Retail sales receipt (payment type - bank credit)
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(110).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document RetailSalesReceipt and RetailReturnReceipt (consignor)
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(1113).GetObject().Write(DocumentWriteMode.Posting);" |
@@ -101,10 +105,13 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document RetailSalesReceipt and RetailRetutnReceipt objects (with discount)
 		When Create document RetailSalesReceipt (stock control serial lot numbers) 
+		When Create document Retail sales receipt (payment type - customer advance)
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(112).GetObject().Write(DocumentWriteMode.Posting);" |
 
 Scenario: _0424001 check preparation
 	When check preparation
@@ -499,6 +506,68 @@ Scenario: _042423 check Retail sales receipt movements by the Register  "R8014 C
 			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '932,2'      | '1 100'  | '6ebea8a7-366d-409c-84a7-19f5714085e9' | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'S/Yellow' | ''                  | ''                  | 'pcs'  | 'Basic Price without VAT' | 'No'                 | 'Local currency'               | 'TRY'      | 'No'                | '550'             | '466,1' |
 			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '932,2'      | '1 100'  | '6ebea8a7-366d-409c-84a7-19f5714085e9' | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'S/Yellow' | ''                  | ''                  | 'pcs'  | 'Basic Price without VAT' | 'No'                 | 'TRY'                          | 'TRY'      | 'No'                | '550'             | '466,1' |
 			| ''                                                     | '14.11.2022 13:29:44' | '2'         | '932,2'      | '1 100'  | '6ebea8a7-366d-409c-84a7-19f5714085e9' | 'Main Company' | 'Consignor 1' | 'Consignor partner term 1' | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | 'S/Yellow' | ''                  | ''                  | 'pcs'  | 'Basic Price without VAT' | 'No'                 | 'en description is empty'      | 'TRY'      | 'No'                | '550'             | '466,1' |		
+		And I close all client application windows
+
+Scenario: _042424 check Retail sales receipt movements by the Register "R2021 Customer transactions" (payment type - bank credit) 
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '110' |
+	* Check movements by the Register  "R2021 Customer transactions"
+		And I click "Registrations report" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 110 dated 29.12.2022 14:47:30' | ''            | ''                    | ''          | ''             | ''        | ''                             | ''         | ''           | ''        | ''          | ''                                                   | ''      | ''                     | ''                           |
+			| 'Document registrations records'                     | ''            | ''                    | ''          | ''             | ''        | ''                             | ''         | ''           | ''        | ''          | ''                                                   | ''      | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"'            | ''            | ''                    | ''          | ''             | ''        | ''                             | ''         | ''           | ''        | ''          | ''                                                   | ''      | ''                     | ''                           |
+			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                             | ''         | ''           | ''        | ''          | ''                                                   | ''      | 'Attributes'           | ''                           |
+			| ''                                                   | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Multi currency movement type' | 'Currency' | 'Legal name' | 'Partner' | 'Agreement' | 'Basis'                                              | 'Order' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                                   | 'Receipt'     | '29.12.2022 14:47:30' | '984,4'     | 'Main Company' | 'Shop 02' | 'Reporting currency'           | 'USD'      | 'Bank 1'     | 'Bank 1'  | 'Bank 1'    | 'Retail sales receipt 110 dated 29.12.2022 14:47:30' | ''      | 'No'                   | ''                           |
+			| ''                                                   | 'Receipt'     | '29.12.2022 14:47:30' | '5 750'     | 'Main Company' | 'Shop 02' | 'Local currency'               | 'TRY'      | 'Bank 1'     | 'Bank 1'  | 'Bank 1'    | 'Retail sales receipt 110 dated 29.12.2022 14:47:30' | ''      | 'No'                   | ''                           |
+			| ''                                                   | 'Receipt'     | '29.12.2022 14:47:30' | '5 750'     | 'Main Company' | 'Shop 02' | 'TRY'                          | 'TRY'      | 'Bank 1'     | 'Bank 1'  | 'Bank 1'    | 'Retail sales receipt 110 dated 29.12.2022 14:47:30' | ''      | 'No'                   | ''                           |
+			| ''                                                   | 'Receipt'     | '29.12.2022 14:47:30' | '5 750'     | 'Main Company' | 'Shop 02' | 'en description is empty'      | 'TRY'      | 'Bank 1'     | 'Bank 1'  | 'Bank 1'    | 'Retail sales receipt 110 dated 29.12.2022 14:47:30' | ''      | 'No'                   | ''                           |		
+		And I close all client application windows
+
+Scenario: _042425 check Retail sales receipt movements by the Register  "R5010 Reconciliation statement" (payment type - bank credit) 
+		And I close all client application windows	
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '110' |
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 110 dated 29.12.2022 14:47:30' | ''            | ''                    | ''          | ''             | ''        | ''         | ''           | ''                    |
+			| 'Document registrations records'                     | ''            | ''                    | ''          | ''             | ''        | ''         | ''           | ''                    |
+			| 'Register  "R5010 Reconciliation statement"'         | ''            | ''                    | ''          | ''             | ''        | ''         | ''           | ''                    |
+			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''         | ''           | ''                    |
+			| ''                                                   | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Currency' | 'Legal name' | 'Legal name contract' |
+			| ''                                                   | 'Receipt'     | '29.12.2022 14:47:30' | '5 750'     | 'Main Company' | 'Shop 02' | 'TRY'      | 'Bank 1'     | ''                    |		
+		And I close all client application windows
+
+Scenario: _042426 check Retail sales receipt movements by the Register  "R2023 Advances from retail customers" (payment type - customer advance) 
+		And I close all client application windows	
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '112' |
+	* Check movements by the Register  "R2023 Advances from retail customers"
+		And I click "Registrations report" button
+		And I select "R2023 Advances from retail customers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 112 dated 29.12.2022 17:25:31' | ''            | ''                    | ''          | ''             | ''        | ''                |
+			| 'Document registrations records'                     | ''            | ''                    | ''          | ''             | ''        | ''                |
+			| 'Register  "R2023 Advances from retail customers"'   | ''            | ''                    | ''          | ''             | ''        | ''                |
+			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                |
+			| ''                                                   | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Retail customer' |
+			| ''                                                   | 'Expense'     | '29.12.2022 17:25:31' | '500'       | 'Main Company' | 'Shop 02' | 'Sam Jons'        |		
 		And I close all client application windows
 
 Scenario: _042430 Retail sales receipt clear posting/mark for deletion

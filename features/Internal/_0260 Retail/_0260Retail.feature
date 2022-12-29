@@ -46,11 +46,13 @@ Scenario: _0260100 preparation (retail)
 		When Create catalog PartnerSegments objects
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog TaxRates objects
-		When Create catalog Taxes objects	
+		When Create catalog Taxes objects
+		When Create PaymentType (advance)	
 		When Create information register TaxSettings records
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When Create catalog Partners and Payment type (Bank)
 		When Create catalog Users objects
 		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
@@ -533,6 +535,164 @@ Scenario: _0260130 create cash out
 			| '$$NumberCashReceipt2$$' | '3 480,00' | 'Main Company' | 'Cash desk №2' | '$$CashReceipt2$$' | 'TRY'      | 'Cash in'          | 'CI'     |
 		And I close all client application windows
 
+Scenario: _0260132 create RSR (payment by bank credit)
+		And I close all client application windows
+	* Open POS and create RSR
+		And In the command interface I select "Retail" "Point of sale"
+		And I expand current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| 'Item'           |
+			| 'Dress, XS/Blue' |
+		And I select current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| 'Item'           |
+			| 'Dress, L/Green' |
+		And I select current line in "ItemsPickup" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Price'  | 'Quantity' | 'Total'  |
+			| 'Dress' | 'XS/Blue'  | '520,00' | '1,000'    | '520,00' |
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Payment (+)" button
+	* Payment by bank credit
+		And I click "P\A" button
+		And "Payments" table became equal
+			| 'Payment type' | 'Amount'   |
+			| 'Bank credit'  | '5 750,00' |
+		And I click the button named "Enter"
+		And Delay 2
+	* Check RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Σ'        |
+			| '5 750,00' |
+		And I select current line in "List" table
+		And I move to "Payments" tab
+		And "Payments" table became equal
+			| '#' | 'Amount'   | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Account' | 'Percent' |
+			| '1' | '5 750,00' | ''           | 'Bank credit'  | ''                 | ''          | ''        | ''        |
+		And I close all client application windows
+		
+
+Scenario: _0260133 create advance payment from POS (Cash, Card)
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+		And I expand current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| 'Item'           |
+			| 'Dress, XS/Blue' |
+		And I select current line in "ItemsPickup" table
+	* Select retail customer (cash advance)
+		And I move to the tab named "ButtonPage"
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Sam Jons'    |
+		And I select current line in "List" table
+		And I click "OK" button	
+	* Advance payment
+		And I click the button named "Advance"
+		Then "Payment" window is opened
+		And I click "4" button
+		And I click "0" button
+		And I click "0" button
+		And I click the button named "Enter"
+	* Select retail customer (cash advance)
+		And I move to the tab named "ButtonPage"
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Sam Jons'    |
+		And I select current line in "List" table
+		And I click "OK" button	
+	* Advance payment (card advance)
+		And I click the button named "Advance"
+		Then "Payment" window is opened
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_1"
+		And I click "1" button
+		And I click "0" button
+		And I click "0" button
+		And I click the button named "Enter"
+	* Check cash receipt
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Amount' | 'Transaction type' |
+			| '400,00' | 'Customer advance' |
+		And I select current line in "List" table
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "CashAccount" became equal to "Pos cash account 1"
+		Then the form attribute named "TransactionType" became equal to "Customer advance"
+		And "PaymentList" table became equal
+			| '#' | 'Retail customer' | 'Total amount' |
+			| '1' | 'Sam Jons'        | '400,00'       |
+		Then the form attribute named "Branch" became equal to "Shop 02"
+		And the editing text of form attribute named "DocumentAmount" became equal to "400,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+	* Check bank receipt  
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Amount' | 'Transaction type' |
+			| '100,00' | 'Customer advance' |
+		And I select current line in "List" table
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Account" became equal to "Transit Main"
+		Then the form attribute named "TransactionType" became equal to "Customer advance"
+		And "PaymentList" table became equal
+			| '#' | 'Retail customer' | 'Total amount' |
+			| '1' | 'Sam Jons'        | '100,00'       |
+		Then the form attribute named "Branch" became equal to "Shop 02"
+		And the editing text of form attribute named "DocumentAmount" became equal to "100,00"
+		And I close all client application windows
+	* Create RSR and check using advance 
+		And In the command interface I select "Retail" "Point of sale"
+		And I expand current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| 'Item'           |
+			| 'Dress, XS/Blue' |
+		And I select current line in "ItemsPickup" table
+		And I move to the tab named "ButtonPage"
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Sam Jons'    |
+		And I select current line in "List" table
+		And I click "OK" button	
+		And I click "Payment (+)" button
+		And "Payments" table became equal
+			| 'Payment type' | 'Amount' |
+			| 'Advance'      | '500,00' |
+		Then "Payment" window is opened
+		And I click "Card (*)" button
+		Then "Payment types" window is opened
+		And I click the hyperlink named "Page_0"
+		And "Payments" table became equal
+			| 'Payment type' | 'Amount' |
+			| 'Advance'      | '500,00' |
+			| 'Card 02'      | '20,00'  |
+		And I click the button named "Enter"
+		And Delay 2
+	* Check RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Σ'      |
+			| '520,00' |
+		And I select current line in "List" table
+		And I move to "Payments" tab	
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term'    | 'Account'        | 'Percent' |
+			| '1' | '500,00' | ''           | 'Advance'      | ''                 | ''             | ''               | ''        |
+			| '2' | '20,00'  | '0,40'       | 'Card 02'      | ''                 | 'Bank term 02' | 'Transit Second' | '2,00'    |
+		And I close all client application windows
+		
+				
+						
+				
+		
+						
 
 
 							

@@ -107,8 +107,9 @@ Scenario: move Discount 2 without Vat and Discount 1 without Vat discounts from 
 		| 'Discount 1 without Vat' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Launch' | 'Manually' | 'Priority' | 'Special offer type' |
 		| 'No'     | 'No'       | '3'        | 'Maximum'            |
@@ -132,8 +133,9 @@ Scenario: transfer Discount 2 without Vat and Discount 1 without Vat discounts f
 		| 'Discount 1 without Vat' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |
@@ -157,8 +159,9 @@ Scenario: transfer the Discount Price 2 discount to the Minimum group
 		| 'Discount Price 2' |
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	Then "Special offers" window is opened
-	And I move one level down in "List" table
-	And I move one level down in "List" table
+	And I expand a line in "List" table
+		| 'Priority' | 'Special offer type' |
+		| '1'        | 'Special Offers'     |
 	And I go to line in "List" table
 		| 'Special offer type' |
 		| 'Minimum'            |

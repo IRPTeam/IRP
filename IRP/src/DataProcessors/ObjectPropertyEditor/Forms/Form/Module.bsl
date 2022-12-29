@@ -90,12 +90,24 @@ Procedure PropertiesTableValueStartChoice(Item, ChoiceData, StandardProcessing)
 	
 	FieldName = Item.Name; // String
 	FieldDescription = Undefined; // See GetFieldDescription
+	CurrentFieldValue = Items.PropertiesTable.CurrentData[FieldName]; // Arbitrary, String, ValueList
 	If GetFormCash(ThisObject).ColumnsData.Property(FieldName, FieldDescription) Then
-		If TypeOf(Items.PropertiesTable.CurrentData[FieldName]) = Type("ValueList") Then
-			Items.PropertiesTable.CurrentData[FieldName]["ValueType"] = FieldDescription.ValueType;
-		ElsIf Items.PropertiesTable.CurrentData[FieldName] = Undefined Then
+		If TypeOf(CurrentFieldValue) = Type("ValueList") Then
+			CurrentFieldValue.ValueType = FieldDescription.ValueType;
+		ElsIf CurrentFieldValue = Undefined Then
 			Item.TypeRestriction = FieldDescription.ValueType;
 		EndIf;
+	EndIf;
+	
+	If TypeOf(CurrentFieldValue) = Type("String") Then
+		StandardProcessing = False;
+		OpenForm("DataProcessor.ObjectPropertyEditor.Form.EditMultilineText", 
+				New Structure("ExternalText", CurrentFieldValue), 
+				ThisObject, , , ,
+				New NotifyDescription("OnEditedMultilineTextEnd", 
+					ThisObject, 
+					New Structure("RowKey, FieldName", Items.PropertiesTable.CurrentData.GetID(), FieldName)),
+				FormWindowOpeningMode.LockOwnerWindow);
 	EndIf;
 	
 EndProcedure
@@ -178,6 +190,25 @@ Procedure SetNewValue(Command)
 		CheckRowModified(ThisObject, Row);
 	EndDo;
 
+EndProcedure
+
+#EndRegion
+
+#Region NotifyDescriptions
+
+// On edited multiline text end.
+// 
+// Parameters:
+//  ChangedText - String, Undefined - Changed text
+//  AddInfo - Structure - Add info:
+//		* RowKey - Number -
+//		* FieldName - String -
+&AtClient
+Procedure OnEditedMultilineTextEnd(ChangedText, AddInfo) Export
+	If ValueIsFilled(ChangedText) Then
+		CurrentRow = ThisObject.PropertiesTable.FindByID(AddInfo.RowKey);
+		CurrentRow[AddInfo.FieldName] = ChangedText;
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -352,50 +383,10 @@ EndProcedure
 &AtServerNoContext
 Procedure SetSourceSettings(Form)
 	
-	TS_String = "TabularSections";
-	Table_String = GetObjectTable(Form); // String
-	
-	MetaObject = Metadata.FindByType(GetObjectType(Form));
-	MetaObjectTable = MetaObject[TS_String][Table_String]; // MetadataObjectTabularSection
-	
-	DCSchema = New DataCompositionSchema;
-
-	DS = DCSchema.DataSources.Add();
-	DS.Name = "DataSources";
-	DS.DataSourceType = "Local";
-	
-	DataSet = DCSchema.DataSets.Add(Type("DataCompositionSchemaDataSetQuery"));
-	DataSet.Name = "DataSet";
-	DataSet.DataSource = "DataSources";
-	DataSet.Query = StrTemplate(
-	"SELECT
-	|	Table.Ref,
-	|	Attributes.Property,
-	|	Attributes.Value
-	|FROM
-	|	%1.%2 AS Attributes
-	|		FULL JOIN %3 AS Table
-	|		ON Attributes.Ref = Table.Ref", 
-		MetaObject.FullName(), 
-		Table_String, 
-		MetaObject.FullName());
-	
-	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
-	DataField.Field = "Ref";
-	DataField.DataPath = "Ref";
-	DataField.Title = "Ref";
-		
-	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
-	DataField.Field = "Property";
-	DataField.DataPath = "Property";
-	DataField.Title = MetaObjectTable.Attributes.Property.Synonym;
-		
-	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
-	DataField.Field = "Value";
-	DataField.DataPath = "Value";
-	DataField.Title = MetaObjectTable.Attributes.Value.Synonym;
+	DCSchema = GetDCSchema(Form);
 		
 	SchemaAddress = PutToTempStorage(DCSchema, Form.UUID);
+  	
   	AvailableSettingsSource = New DataCompositionAvailableSettingsSource(SchemaAddress);
 	
 	FormCash = GetFormCash(Form);
@@ -420,6 +411,62 @@ Procedure SetSourceSettings(Form)
 	DetailGroup.Selection.Items.Add(Type("DataCompositionAutoSelectedField"));
     
 EndProcedure
+
+// Get DCSchema.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+// 
+// Returns:
+//  DataCompositionSchema
+&AtServerNoContext
+Function GetDCSchema(Form)
+
+	TS_String = "TabularSections";
+	Table_String = GetObjectTable(Form); // String
+	
+	MetaObject = Metadata.FindByType(GetObjectType(Form));
+	MetaObjectTable = MetaObject[TS_String][Table_String]; // MetadataObjectTabularSection
+	
+	DCSchema = New DataCompositionSchema;
+
+	DS = DCSchema.DataSources.Add();
+	DS.Name = "DataSources";
+	DS.DataSourceType = "Local";
+	
+	DataSet = DCSchema.DataSets.Add(Type("DataCompositionSchemaDataSetQuery"));
+	DataSet.Name = "DataSet";
+	DataSet.DataSource = "DataSources";
+	DataSet.Query = StrTemplate(
+		"SELECT
+		|	Table.Ref,
+		|	Attributes.Property,
+		|	Attributes.Value
+		|FROM
+		|	%1.%2 AS Attributes
+		|		FULL JOIN %3 AS Table
+		|		ON Attributes.Ref = Table.Ref", 
+		MetaObject.FullName(), 
+		Table_String, 
+		MetaObject.FullName());
+	
+	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
+	DataField.Field = "Ref";
+	DataField.DataPath = "Ref";
+	DataField.Title = "Ref";
+		
+	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
+	DataField.Field = "Property";
+	DataField.DataPath = "Property";
+	DataField.Title = MetaObjectTable.Attributes.Property.Synonym;
+		
+	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
+	DataField.Field = "Value";
+	DataField.DataPath = "Value";
+	DataField.Title = MetaObjectTable.Attributes.Value.Synonym;
+	
+	Return DCSchema;
+EndFunction
 
 // Set refs to filter.
 // 
@@ -513,9 +560,23 @@ Procedure SetTableSettings(Form)
 		NewFormItem.SetAction("OnChange", "PropertiesTableValueOnChange");
 		NewFormItem.SetAction("StartChoice", "PropertiesTableValueStartChoice");
 		
+		AddFormItemProperties(NewFormItem, ColumnDescription);
+		
 		CreateConditionalAppearance(Form, NewFormItem, ColumnDescription.isCollection);
 	EndDo;
 	
+EndProcedure
+
+// Add form item properties.
+// 
+// Parameters:
+//  NewFormItem - FormFieldExtensionForACalendarField, FormFieldExtensionForACheckBoxField, FormFieldExtensionForADendrogramField, FormFieldExtensionForAGraphicalSchemaField, FormFieldExtensionForASpreadsheetDocumentField, FormExtensionForAHTMLDocumentField, FormFieldExtensionForAPictureField, FormFieldExtensionForATextDocument, FormFieldExtensionForAGeographicalSchemaField, FormFieldExtensionForATrackBarField, FormFieldExtensionForALabelField, FormFieldExtensionForATextBox, FormFieldExtensionForARadioButtonField, FormFieldExtensionForAPlanner, FormField, FormFieldExtensionForAChartField, FormFieldExtensionForAPeriodField, FormFieldExtensionForAProgressBarField, FormFieldExtensionForAGanttChartField, FormFieldExtensionForAFormattedDocument - New form item
+//  ColumnDescription - See GetFieldDescription
+&AtServerNoContext
+Procedure AddFormItemProperties(NewFormItem, ColumnDescription)
+	If Not ColumnDescription.isCollection And ColumnDescription.ValueType.ContainsType(Type("String")) Then
+		NewFormItem.ChoiceButton = True;
+	EndIf;
 EndProcedure
 
 // Create conditional appearance.
@@ -826,8 +887,6 @@ Procedure LoadTableData()
 	
 	Ref_String = "Ref";
 	Object_String = "Object";
-	Property_String = "Property";
-	Value_String = "Value";
 	
 	ColumnsData = GetFormCash(ThisObject).ColumnsData;
 	SchemaAddress = GetFormCash(ThisObject).SchemaAddress;
@@ -840,7 +899,7 @@ Procedure LoadTableData()
 		Type("DataCompositionValueCollectionTemplateGenerator"));
 	
 	DataCompositionProcessor = New DataCompositionProcessor;
-	DataCompositionProcessor.Инициализировать(DataCompositionTemplate);
+	DataCompositionProcessor.Initialize(DataCompositionTemplate);
 	
 	DataTree = New ValueTree();
 	OutputProcessor = New DataCompositionResultValueCollectionOutputProcessor;
@@ -853,7 +912,7 @@ Procedure LoadTableData()
 		DataRef = RowData[Ref_String]; // AnyRef
 		TableRecord[Object_String] = DataRef;
 		For Each RowProperty In RowData.Rows Do
-			PropertyRef = RowProperty[Property_String]; // AnyRef
+			PropertyRef = ReadPropertyFromTreeRow(RowProperty);
 			If PropertyRef = Null Then
 				Break;
 			EndIf;
@@ -865,9 +924,9 @@ Procedure LoadTableData()
 						TableRecord[PropertyKey] = New ValueList();
 					EndIf;
 					PropertyValues = TableRecord[PropertyKey]; // ValueList of Arbitrary, Undefined
-					PropertyValues.Add(RowProperty[Value_String]);
+					PropertyValues.Add(ReadPropertyValueFromTreeRow(RowProperty, PropertyRef));
 				Else
-					TableRecord[PropertyKey] = RowProperty[Value_String];
+					TableRecord[PropertyKey] = ReadPropertyValueFromTreeRow(RowProperty, PropertyRef);
 				EndIf;
 				TableRecord[PropertyKey + "_old"] = TableRecord[PropertyKey];
 			EndIf;
@@ -877,15 +936,39 @@ Procedure LoadTableData()
 	
 EndProcedure
 
+// Read property from Tree Row.
+// 
+// Parameters:
+//  TreeRow - ValueTreeRow - TableRow:
+//  * Property - ChartOfCharacteristicTypesRef.AddAttributeAndProperty, AnyRef, Arbitrary - Property
+// 
+// Returns:
+//  ChartOfCharacteristicTypesRef.AddAttributeAndProperty, AnyRef, Arbitrary
+&AtServer
+Function ReadPropertyFromTreeRow(TreeRow)
+	Return TreeRow.Property;
+EndFunction
+
+// Read property value from Tree Row.
+// 
+// Parameters:
+//  TreeRow - ValueTreeRow - TableRow:
+//  * Value - Characteristic.AddAttributeAndProperty, Arbitrary, Undefined - 
+//  Property - ChartOfCharacteristicTypesRef.AddAttributeAndProperty, AnyRef, Arbitrary - Property
+// 
+// Returns:
+//  Characteristic.AddAttributeAndProperty, Arbitrary, Undefined - Value
+&AtServer
+Function ReadPropertyValueFromTreeRow(TreeRow, Property)
+	Return TreeRow.Value;
+EndFunction
+
 #EndRegion
 
 #Region SaveData
 
 &AtServer
 Procedure SaveAtServer()
-	
-	Property_String = "Property";
-	Value_String = "Value";
 	
 	ModifiedRows = ThisObject.PropertiesTable.FindRows(New Structure("isModified", True));
 	For Each Row In ModifiedRows Do
@@ -905,20 +988,29 @@ Procedure SaveAtServer()
 
 			If TypeOf(ColumnValue) = Type("ValueList") Then
 				For Each CollectionItem In ColumnValue Do
-					NewRecord = ModifiedTable.Add();
-					NewRecord[Property_String] = ColumnDescription.Ref;
-					NewRecord[Value_String] = CollectionItem.Value;
+					WritePropertyValue(ModifiedTable, ColumnDescription.Ref, CollectionItem.Value);
 				EndDo;
 			ElsIf Not ColumnValue = Undefined Then
-				NewRecord = ModifiedTable.Add();
-				NewRecord[Property_String] = ColumnDescription.Ref;
-				NewRecord[Value_String] = ColumnValue;
+				WritePropertyValue(ModifiedTable, ColumnDescription.Ref, ColumnValue);
 			EndIf;
 		EndDo;
 		
 		ModifiedObject.Write();
 	EndDo;
 	
+EndProcedure
+
+// Write property value to Table.
+// 
+// Parameters:
+//  Table - TabularSection, CatalogTabularSection.ItemKeys.AddAttributes - Table
+//  Property - ChartOfCharacteristicTypesRef.AddAttributeAndProperty, AnyRef, Arbitrary - Property
+//  Value - Characteristic.AddAttributeAndProperty, Arbitrary, Undefined - Value
+&AtServer
+Procedure WritePropertyValue(Table, Property, Value)
+	NewRecord = Table.Add();
+	NewRecord.Property = Property;
+	NewRecord.Value = Value;
 EndProcedure
 
 #EndRegion

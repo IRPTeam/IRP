@@ -415,6 +415,10 @@
       <event>Selection</event>
       <name>PropertiesTableSelection</name>
     </handlers>
+    <handlers>
+      <event>OnActivateField</event>
+      <name>PropertiesTableOnActivateField</name>
+    </handlers>
     <searchStringAddition>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -547,16 +551,16 @@
       <name>PropertiesTableContextMenu</name>
       <id>3</id>
       <items xsi:type="form:Button">
-        <name>PropertiesTableContextMenuCopyThisValueToEmptyCells</name>
-        <id>51</id>
+        <name>PropertiesTableContextMenuSetValueForSelectedRows</name>
+        <id>73</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>
         </userVisible>
         <extendedTooltip>
-          <name>PropertiesTableContextMenuCopyThisValueToEmptyCellsExtendedTooltip</name>
-          <id>52</id>
+          <name>PropertiesTableContextMenuSetValueForSelectedRowsExtendedTooltip</name>
+          <id>74</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -569,7 +573,7 @@
             <horizontalAlign>Left</horizontalAlign>
           </extInfo>
         </extendedTooltip>
-        <commandName>Form.Command.CopyThisValueToEmptyCells</commandName>
+        <commandName>Form.Command.SetValueForSelectedRows</commandName>
         <representation>Auto</representation>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -600,6 +604,36 @@
           </extInfo>
         </extendedTooltip>
         <commandName>Form.Command.SetNewValue</commandName>
+        <representation>Auto</representation>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <placementArea>UserCmds</placementArea>
+        <representationInContextMenu>Auto</representationInContextMenu>
+      </items>
+      <items xsi:type="form:Button">
+        <name>PropertiesTableContextMenuCopyThisValueToEmptyCells</name>
+        <id>51</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <extendedTooltip>
+          <name>PropertiesTableContextMenuCopyThisValueToEmptyCellsExtendedTooltip</name>
+          <id>52</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <commandName>Form.Command.CopyThisValueToEmptyCells</commandName>
         <representation>Auto</representation>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -912,6 +946,27 @@
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>SetNewValue</name>
+      </handler>
+    </action>
+    <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>SetValueForSelectedRows</name>
+    <title>
+      <key>en</key>
+      <value>Set value for selected rows</value>
+    </title>
+    <id>7</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.QueryWizardCreateNestedQuery</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>SetValueForSelectedRows</name>
       </handler>
     </action>
     <representation>TextPicture</representation>

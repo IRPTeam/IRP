@@ -526,6 +526,16 @@ Function ReceiptGetXMLOperation(CommonParameters) Export
 		XMLWriter.WriteAttribute("PriceWithDiscount", ToXMLString(Item.PriceWithDiscount));
 		XMLWriter.WriteAttribute("VATRate", ToXMLString(Item.VATRate));
 		XMLWriter.WriteAttribute("VATAmount", ToXMLString(Item.VATAmount));
+		If Item.Property("CalculationAgent") Then
+			XMLWriter.WriteAttribute("CalculationAgent", ToXMLString(Item.CalculationAgent));
+		EndIf;
+		If Item.Property("VendorData") Then
+			XMLWriter.WriteStartElement("VendorData");
+			XMLWriter.WriteAttribute("VendorINN", ToXMLString(Item.VendorData.VendorINN));
+			XMLWriter.WriteAttribute("VendorName", ToXMLString(Item.VendorData.VendorName));
+			XMLWriter.WriteAttribute("VendorPhone", ToXMLString(Item.VendorData.VendorPhone));
+			XMLWriter.WriteEndElement();
+		EndIf;
 		XMLWriter.WriteEndElement();
 	EndDo;
 	For Each Item In CommonParameters.TextStrings Do

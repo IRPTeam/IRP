@@ -16,6 +16,7 @@ Function PrepareReceiptData(RetailSalesReceipt) Export
 		RowFilter.Insert("Key", Item.Key);
 		SLNRows = RetailSalesReceipt.SerialLotNumbers.FindRows(RowFilter);
 		TaxRows = RetailSalesReceipt.TaxList.FindRows(RowFilter);
+		CBRows = RetailSalesReceipt.ConsignorBatches.FindRows(RowFilter);
 		FiscalStringData = New Structure();
 		FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
 		FiscalStringData.Insert("DiscountAmount", Item.OffersAmount);
@@ -44,14 +45,22 @@ Function PrepareReceiptData(RetailSalesReceipt) Export
 		EndIf;
 		FiscalStringData.Insert("PriceWithDiscount", Round(Item.TotalAmount / Item.Quantity, 2));
 		If TaxRows.Count() > 0 Then
-			If Not TaxRows[0].TaxRate.Rate = 0 Then  
-				FiscalStringData.Insert("VATRate", Format(TaxRows[0].TaxRate.Rate, "NZ=0; NG=0;"));
-				FiscalStringData.Insert("VATAmount", TaxRows[0].Amount);
+			If Not TaxRows[0].TaxRate.NoRate Then
+				FiscalStringData.Insert("VATRate", "none");  
 			Else
-				FiscalStringData.Insert("VATRate", "none");
+				FiscalStringData.Insert("VATRate", Format(TaxRows[0].TaxRate.Rate, "NZ=0; NG=0;"));
 			EndIf;
+			FiscalStringData.Insert("VATAmount", TaxRows[0].Amount);
 		Else
 			Raise("Tax isn't found!");
+		EndIf;
+		If CBRows.Count() > 0 Then
+			VendorData = New Structure;
+			VendorData.Insert("VendorINN", CBRows[0].Batch.LegalName.TaxID);
+			VendorData.Insert("VendorName", String(CBRows[0].Batch.LegalName));
+			VendorData.Insert("VendorPhone", "");
+			FiscalStringData.Insert("CalculationAgent", "5");
+			FiscalStringData.Insert("VendorData", VendorData);
 		EndIf;
 		FiscalStrings.Add(FiscalStringData);
 	EndDo;

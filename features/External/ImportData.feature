@@ -1513,6 +1513,22 @@ Scenario: Create information register PricesByProperties records
 		| '01.09.2020 12:00:00' | 'e1cib/data/Document.PriceList?ref=aa78120ed92fbced11eaf1365f10e317' | '2'          | 'True'    | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe' | 'e1cib/data/Catalog.PriceKeys?ref=aa78120ed92fbced11eaf1365f10e319' | '300'   |
 		| '01.09.2020 12:00:00' | 'e1cib/data/Document.PriceList?ref=aa78120ed92fbced11eaf1365f10e317' | '3'          | 'True'    | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe' | 'e1cib/data/Catalog.PriceKeys?ref=aa78120ed92fbced11eaf1365f10e31a' | '415'   |
 
+Scenario: Create information register ItemSegments records (discount)
+
+	And I check or create catalog "ItemSegments" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade821' | 'False'        | 1      | 'Dress'          | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade822' | 'False'        | 2      | 'Bags'           | ''                 | ''               | ''               |
+
+	And I check or create information register "ItemSegments" records:
+		| 'Segment'                                                              | 'ItemKey'                                                          |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade821' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade821' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fd' |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade821' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fe' |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade822' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf1277d18ed8c' |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade822' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf1277d18ed8d' |
+
+
 Scenario: Create catalog IntegrationSettings objects
 
 	And I check or create catalog "IntegrationSettings" objects:

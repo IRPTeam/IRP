@@ -1142,3 +1142,4 @@ Procedure FillCashInList()
 	EndDo;
 EndProcedure
 
+

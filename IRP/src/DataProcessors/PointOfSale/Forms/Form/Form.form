@@ -6531,6 +6531,27 @@ person</value>
     </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
+  <formCommands>
+    <name>PrintXReport</name>
+    <title>
+      <key>en</key>
+      <value>Print X Report</value>
+    </title>
+    <id>31</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.AppearanceCircleGreen</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>PrintXReport</name>
+      </handler>
+    </action>
+    <functionalOptions>FunctionalOption.UseConsolidatedRetailSales</functionalOptions>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
   <commandInterface>
     <navigationPanel>
       <cmiFragmentRecord>

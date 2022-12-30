@@ -21,7 +21,7 @@ Function PrepareReceiptData(RetailSalesReceipt) Export
 		FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
 		FiscalStringData.Insert("DiscountAmount", Item.OffersAmount);
 		If SLNRows.Count() = 1 Then
-			FiscalStringData.Insert("MarkingCode", String(SLNRows[0].SerialLotNumber.MarkingCode));	//TODO: Marking defenition
+			FiscalStringData.Insert("MarkingCode", String(SLNRows[0].SerialLotNumber.CodeString));	//TODO: Marking defenition
 		ElsIf SLNRows.Count() > 1 Then
 			Raise("A few SerialLotNumber found!");
 		EndIf;
@@ -86,6 +86,8 @@ Function PrepareReceiptData(RetailSalesReceipt) Export
 				Str.Insert("Cash", Str.Cash + Payment.Amount);
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
 				Str.Insert("ElectronicPayment", Str.ElectronicPayment + Payment.Amount);
+			Else
+				Str.Insert("Cash", Str.Cash + Payment.Amount);
 			EndIf;
 //		ElsIf RetailSalesReceipt.PaymentMethod = Enums.ReceiptPaymentMethods.PartialSettlementAndCredit Then
 //			Str.Insert("PrePayment", Str.PrePayment + Payment.Amount);
@@ -98,6 +100,25 @@ Function PrepareReceiptData(RetailSalesReceipt) Export
 	
 	Return Str;
 EndFunction
+
+Procedure SetFiscalStatus(DocumentRef, Status = "Prepaired", FiscalResponse = "", DataPresentation = "") Export
+	If Status = "Prepaired" Then
+		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
+																, Enums.DocumentFiscalStatuses.Prepaired);
+	ElsIf Status = "Printed" Then
+		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
+																, Enums.DocumentFiscalStatuses.Printed
+																, FiscalResponse
+																, DataPresentation);
+	ElsIf Status = "FiscalReturnedError" Then
+		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
+																, Enums.DocumentFiscalStatuses.FiscalReturnedError
+																, FiscalResponse);
+	ElsIf Status = "NotPrinted" Then
+		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
+																, Enums.DocumentFiscalStatuses.NotPrinted);
+	EndIf;
+EndProcedure
 
 #EndRegion
 	

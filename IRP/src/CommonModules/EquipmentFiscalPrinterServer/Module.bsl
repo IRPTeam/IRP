@@ -21,7 +21,7 @@ Function PrepareReceiptData(RetailSalesReceipt) Export
 		FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
 		FiscalStringData.Insert("DiscountAmount", Item.OffersAmount);
 		If SLNRows.Count() = 1 Then
-			FiscalStringData.Insert("MarkingCode", String(SLNRows[0].SerialLotNumber));	//TODO: Marking defenition
+			FiscalStringData.Insert("MarkingCode", String(SLNRows[0].SerialLotNumber.ID));	//TODO: Marking defenition
 		ElsIf SLNRows.Count() > 1 Then
 			Raise("A few SerialLotNumber found!");
 		EndIf;

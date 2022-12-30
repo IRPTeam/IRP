@@ -262,7 +262,7 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Object.ID</segments>
+      <segments>Object.CodeString</segments>
     </dataPath>
     <extendedTooltip>
       <name>IDExtendedTooltip</name>

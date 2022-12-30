@@ -311,6 +311,22 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="8544a414-e4f8-403d-80e5-52e92fd03f01">
+    <name>SequentialCalculationForEachRow</name>
+    <synonym>
+      <key>en</key>
+      <value>Sequential calculation for each row in document</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <use>ForFolder</use>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="0f4c534b-e7a5-4315-af0f-02d495968dc0">
     <producedTypes>
       <objectType typeId="fe81f38e-668c-430c-9f3e-aa282e964d44" valueTypeId="e36eb4d8-089b-45d7-a9a6-cb7ee8a67952"/>

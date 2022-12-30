@@ -35,6 +35,7 @@ Scenario: _043400 preparation (Bank receipt)
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog LegalNameContracts objects
 		When Create catalog Stores objects
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
@@ -148,6 +149,7 @@ Scenario: _043400 preparation (Bank receipt)
 		When Create document BankReceipt objects (exchange and transfer)
 		When Create document BankReceipt objects (advance)
 		When Create document BankReceipt objects (POS)
+		When Create document Bank receipt (Customer advance)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
@@ -160,6 +162,8 @@ Scenario: _043400 preparation (Bank receipt)
 			| "Documents.BankReceipt.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(1519).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
@@ -828,7 +832,67 @@ Scenario: _0434294 check Bank receipt movements by the Register "R3010 Cash on h
 			| ''                                             | 'Expense'     | '24.06.2022 15:19:39' | '5'         | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
 	And I close all client application windows	
 		
+Scenario: _0434295 check Bank receipt movements by the Register  "R2023 Advances from retail customers" (advance from retail customer)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '10'      |
+	* Check movements by the Register  "R2023 Advances from retail customers" 
+		And I click "Registrations report" button
+		And I select "R2023 Advances from retail customers" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 10 dated 29.12.2022 15:11:54'        | ''            | ''                    | ''          | ''             | ''        | ''                |
+			| 'Document registrations records'                   | ''            | ''                    | ''          | ''             | ''        | ''                |
+			| 'Register  "R2023 Advances from retail customers"' | ''            | ''                    | ''          | ''             | ''        | ''                |
+			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                |
+			| ''                                                 | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Retail customer' |
+			| ''                                                 | 'Receipt'     | '29.12.2022 15:11:54' | '100'       | 'Main Company' | 'Shop 02' | 'Sam Jons'        |		
+	And I close all client application windows	
 
+Scenario: _0434296 check Bank receipt movements by the Register  "R3010 Cash on hand" (advance from retail customer)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '10'      |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 10 dated 29.12.2022 15:11:54' | ''            | ''                    | ''          | ''             | ''        | ''             | ''         | ''                             | ''                     |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''        | ''             | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'            | ''            | ''                    | ''          | ''             | ''        | ''             | ''         | ''                             | ''                     |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''             | ''         | ''                             | 'Attributes'           |
+			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                          | 'Receipt'     | '29.12.2022 15:11:54' | '17,12'     | 'Main Company' | 'Shop 02' | 'Transit Main' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '29.12.2022 15:11:54' | '100'       | 'Main Company' | 'Shop 02' | 'Transit Main' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '29.12.2022 15:11:54' | '100'       | 'Main Company' | 'Shop 02' | 'Transit Main' | 'TRY'      | 'en description is empty'      | 'No'                   |		
+	And I close all client application windows
+
+Scenario: _0434297 check Bank receipt movements by the Register  "R3050 Pos cash balances" (advance from retail customer)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '10'      |
+	* Check movements by the Register  "R3050 Pos cash balances" 
+		And I click "Registrations report" button
+		And I select "R3050 Pos cash balances" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 10 dated 29.12.2022 15:11:54' | ''                    | ''          | ''           | ''             | ''        | ''             | ''             | ''                 |
+			| 'Document registrations records'            | ''                    | ''          | ''           | ''             | ''        | ''             | ''             | ''                 |
+			| 'Register  "R3050 Pos cash balances"'       | ''                    | ''          | ''           | ''             | ''        | ''             | ''             | ''                 |
+			| ''                                          | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''        | ''             | ''             | ''                 |
+			| ''                                          | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Payment type' | 'Account'      | 'Payment terminal' |
+			| ''                                          | '29.12.2022 15:11:54' | '100'       | ''           | 'Main Company' | 'Shop 02' | 'Card 01'      | 'Transit Main' | ''                 |		
+	And I close all client application windows
 
 Scenario: _043430 Bank receipt clear posting/mark for deletion
 	And I close all client application windows

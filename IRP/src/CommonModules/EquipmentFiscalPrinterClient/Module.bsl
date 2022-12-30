@@ -54,7 +54,7 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 			Return Result;
 		EndIf;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -68,7 +68,7 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 		FillPropertyValues(Result, ShiftData);
 		Result.Success = True;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -107,7 +107,7 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 			
 		EndIf;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -119,7 +119,7 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 		FillPropertyValues(Result, ShiftData);
 		Result.Success = True;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -162,7 +162,7 @@ Async Function PrintXReport(ConsolidatedRetailSales) Export
 			Return Result;
 		EndIf;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -171,7 +171,7 @@ Async Function PrintXReport(ConsolidatedRetailSales) Export
 	If ResultInfo Then
 		Result.Success = True;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -212,7 +212,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
 			Return Result;
 		EndIf;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		Result.Status = "FiscalReturnedError";
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
@@ -238,7 +238,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
 		Result.FiscalResponse = Parameters.ResultXML;
 		Result.Success = True;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		Result.Status = "FiscalReturnedError";
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
@@ -281,7 +281,7 @@ Async Function CashInCome(ConsolidatedRetailSales, Summ) Export
 			Return Result;
 		EndIf;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -292,7 +292,7 @@ Async Function CashInCome(ConsolidatedRetailSales, Summ) Export
 	If ResultInfo Then
 		Result.Success = True;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -335,7 +335,7 @@ Async Function CashOutCome(ConsolidatedRetailSales, Summ) Export
 			Return Result;
 		EndIf;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -346,7 +346,7 @@ Async Function CashOutCome(ConsolidatedRetailSales, Summ) Export
 	If ResultInfo Then
 		Result.Success = True;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;

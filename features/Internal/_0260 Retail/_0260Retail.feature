@@ -727,7 +727,7 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			Then "Terminals: Session closing" window is opened
 			And I go to line in "TerminalTable" table
 				| 'In Base'  | 'Operation' | 'Payment type' |
-				| '4 770,00' | 'Sales'     | 'Card 02'      |
+				| '4 790,00' | 'Sales'     | 'Card 02'      |
 			And I activate "In Terminal" field in "TerminalTable" table
 			And I select current line in "TerminalTable" table
 			And I input "4 770,00" text in "In Terminal" field of "TerminalTable" table
@@ -749,11 +749,11 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			Then the form attribute named "CashAccount" became equal to "Pos cash account 1"
 			And the editing text of form attribute named "BalanceBeginning" became equal to "1 040,00"
 			Then the form attribute named "CurrencyBalanceBeginning" became equal to "TRY"
-			And the editing text of form attribute named "BalanceIncoming" became equal to "8 550,00"
+			And the editing text of form attribute named "BalanceIncoming" became equal to "8 950,00"
 			Then the form attribute named "CurrencyBalanceIncoming" became equal to "TRY"
 			And the editing text of form attribute named "BalanceOutcoming" became equal to "5 590,00"
 			Then the form attribute named "CurrencyBalanceOutcoming" became equal to "TRY"
-			And the editing text of form attribute named "BalanceEnd" became equal to "4 000,00"
+			And the editing text of form attribute named "BalanceEnd" became equal to "4 400,00"
 			Then the form attribute named "CurrencyBalanceEnd" became equal to "TRY"
 			And the editing text of form attribute named "BalanceReal" became equal to "0,00"
 			Then the form attribute named "Company" became equal to "Main Company"
@@ -782,16 +782,19 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			| '$$RetailReturnReceiptNew$$' | 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
 			| '*'                          | 'Main Company' | '-520'   | 'Shop 02' | 'TRY'      | 'CI'     |
 			| '*'                          | 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
-		Then the number of "Documents" table lines is "equal" "8"
+			| '*'                          | 'Main Company' | '5 750'  | 'Shop 02' | 'TRY'      | 'CI'     |
+			| '*'                          | 'Main Company' | '520'    | 'Shop 02' | 'TRY'      | 'CI'     |
+
+		Then the number of "Documents" table lines is "equal" "10"
 		Then the form attribute named "Branch" became equal to "Shop 02"
-		And the editing text of form attribute named "BalanceEnd" became equal to "4 000,00"
+		And the editing text of form attribute named "BalanceEnd" became equal to "4 400,00"
 		And the editing text of form attribute named "BalanceReal" became equal to "4 000,00"
 		And "PaymentList" table became equal
 			| '#' | 'Amount'   | 'Is return' | 'Payment type' | 'Payment terminal' | 'Real amount' |
 			| '1' | '7 550,00' | 'No'        | 'Cash'         | ''                 | '7 550,00'    |
 			| '2' | '1 070,00' | 'Yes'       | 'Cash'         | ''                 | '1 070,02'    |
 			| '3' | '3 180,00' | 'No'        | 'Card 01'      | ''                 | '3 180,00'    |
-			| '4' | '4 770,00' | 'No'        | 'Card 02'      | ''                 | '4 770,00'    |
+			| '4' | '4 790,00' | 'No'        | 'Card 02'      | ''                 | '4 770,00'    |
 			| '5' | '550,00'   | 'Yes'       | 'Card 02'      | ''                 | '550,00'      |	
 		And I close all client application windows		
 

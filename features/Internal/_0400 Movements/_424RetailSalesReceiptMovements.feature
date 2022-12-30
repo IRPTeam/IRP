@@ -43,6 +43,9 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog Partners objects (trade agent and consignor)
+		When Create catalog BankTerms objects (for Shop 02)
+		When Create catalog BusinessUnits objects (Shop 02, use consolidated retail sales)
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
 		When Create information register TaxSettings records
@@ -57,6 +60,7 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		When Create catalog ItemTypes objects (serial lot numbers)
 		When Create catalog Items objects (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create PaymentType (advance)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)

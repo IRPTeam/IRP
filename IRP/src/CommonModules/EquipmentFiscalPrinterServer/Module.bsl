@@ -16,7 +16,11 @@ Function PrepareReceiptData(RetailSalesReceipt) Export
 		RowFilter.Insert("Key", Item.Key);
 		SLNRows = RetailSalesReceipt.SerialLotNumbers.FindRows(RowFilter);
 		TaxRows = RetailSalesReceipt.TaxList.FindRows(RowFilter);
-		CBRows = RetailSalesReceipt.ConsignorBatches.FindRows(RowFilter);
+		If TypeOf(RetailSalesReceipt.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
+			CBRows = RetailSalesReceipt.ConsignorBatches.FindRows(RowFilter);
+		Else
+			CBRows = New Array;
+		EndIf;
 		FiscalStringData = New Structure();
 		FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
 		FiscalStringData.Insert("DiscountAmount", Item.OffersAmount);
@@ -42,6 +46,8 @@ Function PrepareReceiptData(RetailSalesReceipt) Export
 			FiscalStringData.Insert("PaymentMethod", 6);
 		ElsIf RetailSalesReceipt.PaymentMethod = Enums.ReceiptPaymentMethods.LoanPayment Then
 			FiscalStringData.Insert("PaymentMethod", 7);
+		Else
+			FiscalStringData.Insert("PaymentMethod", 4);
 		EndIf;
 		FiscalStringData.Insert("PriceWithDiscount", Round(Item.TotalAmount / Item.Quantity, 2));
 		If TaxRows.Count() > 0 Then
@@ -95,6 +101,14 @@ Function PrepareReceiptData(RetailSalesReceipt) Export
 //			Str.Insert("PrePayment", Str.PrePayment + Payment.Amount);
 //		ElsIf RetailSalesReceipt.PaymentMethod = Enums.ReceiptPaymentMethods.LoanPayment Then
 //			Str.Insert("PrePayment", Str.PrePayment + Payment.Amount);
+		Else
+			If Payment.PaymentType.Type = Enums.PaymentTypes.Cash Then
+				Str.Insert("Cash", Str.Cash + Payment.Amount);
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
+				Str.Insert("ElectronicPayment", Str.ElectronicPayment + Payment.Amount);
+			Else
+				Str.Insert("Cash", Str.Cash + Payment.Amount);
+			EndIf;
 		EndIf;
 	EndDo;
 	

@@ -350,7 +350,8 @@ Function ItemList()
 		|	NOT SalesInvoiceItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
 		|	TableRowIDInfo.RowID AS RowKey,
 		|	SalesInvoiceItemList.DeliveryDate AS DeliveryDate,
-		|	SalesInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+//		|	SalesInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+		|	SalesInvoiceItemList.IsService AS IsService,
 		|	SalesInvoiceItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	SalesInvoiceItemList.RevenueType AS RevenueType,
 		|	SalesInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
@@ -410,7 +411,8 @@ Function ItemListLandedCost()
 		|	ItemList.AdditionalAnalytic,
 		|	ItemList.NetAmount,
 		|	ItemList.IsAdditionalItemRevenue,
-		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+//		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+		|	ItemList.IsService AS IsService,
 		|	TableRowIDInfo.RowID AS RowID
 		|INTO ItemListLandedCost
 		|FROM
@@ -1286,7 +1288,8 @@ Function T6020S_BatchKeysInfo()
 		|		LEFT JOIN ConsignorBatches AS ConsignorBatches
 		|		ON ItemList.Key = ConsignorBatches.Key
 		|WHERE
-		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+//		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+		|	NOT ItemList.IsService
 		|;
 		|
 		|//////////////////////////////////////////////////////////////////////////////////
@@ -1317,7 +1320,8 @@ Function T6020S_BatchKeysInfo()
 		|		LEFT JOIN ConsignorBatches AS ConsignorBatches
 		|		ON ItemList.Key = ConsignorBatches.Key
 		|WHERE
-		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+//		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+		|	NOT ItemList.IsService
 		|	AND ItemList.IsShipmentToTradeAgent
 		|;
 		|

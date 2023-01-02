@@ -13,7 +13,7 @@ Procedure SynchronizeItemKeysAttributes() Export
 	|	ItemTypesAvailableAttributes.Attribute";
 	QueryResult = Query.Execute();
 	ArrayOfAttributes = QueryResult.Unload().UnloadColumn("Attribute");
-	SynchronizeAttributes(Catalogs.AddAttributeAndPropertySets.Catalog_ItemKeys, ArrayOfAttributes);
+	SynchronizeAttributes(Catalog_ItemKeys, ArrayOfAttributes);
 EndProcedure
 
 Procedure SynchronizePriceKeysAttributes() Export
@@ -30,7 +30,7 @@ Procedure SynchronizePriceKeysAttributes() Export
 	|	ItemTypesAvailableAttributes.Attribute";
 	QueryResult = Query.Execute();
 	ArrayOfAttributes = QueryResult.Unload().UnloadColumn("Attribute");
-	SynchronizeAttributes(Catalogs.AddAttributeAndPropertySets.Catalog_PriceKeys, ArrayOfAttributes);
+	SynchronizeAttributes(Catalog_PriceKeys, ArrayOfAttributes);
 EndProcedure
 
 Function GetExtensionAttributesListByObjectMetadata(ObjectMetadata, Ref) Export
@@ -52,7 +52,7 @@ Function GetExtensionAttributesListByObjectMetadata(ObjectMetadata, Ref) Export
 	If FoundRefs.Count() Then
 		AddAttributeAndPropertySetRef = FoundRefs[0].Ref;
 	Else
-		AddAttributeAndPropertySetRef = Catalogs.AddAttributeAndPropertySets.EmptyRef();
+		AddAttributeAndPropertySetRef = EmptyRef();
 	EndIf;
 
 	AttributeNames = New Array();

@@ -161,6 +161,7 @@
  <registerRecords>AccumulationRegister.R8013B_ConsignorBatchWiseBalance</registerRecords>
  <registerRecords>AccumulationRegister.R8014T_ConsignorSales</registerRecords>
  <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
+ <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -2183,6 +2184,10 @@
    <key>en</key>
    <value>Source of origins</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Источники происхождения</value>
+  </synonym>
   <attributes uuid="babc145a-5d3b-45b7-91ce-bd00e027f07b">
    <name>Key</name>
    <synonym>
@@ -2232,6 +2237,10 @@
    <synonym>
     <key>en</key>
     <value>Source of origin</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Источник происхождения</value>
    </synonym>
    <type>
     <types>CatalogRef.SourceOfOrigins</types>

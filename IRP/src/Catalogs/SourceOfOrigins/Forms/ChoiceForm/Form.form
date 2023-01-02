@@ -775,6 +775,10 @@
        <key>en</key>
        <value>Use filter</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Использовать отбор</value>
+      </content>
      </localValue>
     </title>
     <valueType/>

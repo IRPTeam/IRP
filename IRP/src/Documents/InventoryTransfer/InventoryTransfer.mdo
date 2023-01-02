@@ -909,6 +909,10 @@
    <key>en</key>
    <value>Source of origins</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Источники происхождения</value>
+  </synonym>
   <attributes uuid="ca64eeed-9dfc-49b4-a1c8-1f1bb6600e2b">
    <name>Key</name>
    <synonym>
@@ -958,6 +962,10 @@
    <synonym>
     <key>en</key>
     <value>Source of origin</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Источник происхождения</value>
    </synonym>
    <type>
     <types>CatalogRef.SourceOfOrigins</types>

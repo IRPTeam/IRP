@@ -31,5 +31,5 @@ Function GetBillOfMaterialsByItemKey(ItemKey) Export
 		Selection.Next();
 		Return Selection.Ref;
 	EndIf;
-	Return Catalogs.BillOfMaterials.EmptyRef();
+	Return EmptyRef();
 EndFunction

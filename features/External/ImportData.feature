@@ -751,8 +751,8 @@ Scenario: Create catalog ItemTypes objects (serial lot numbers)
 Scenario: Create catalog ItemTypes objects (Furniture)
 
 	And I check or create for catalog "ItemTypes" objects with Data Exchange Load parameter set to true:
-		| 'Ref'                                                               | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Type' | 'UseSerialLotNumber' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          |
-		| 'e1cib/data/Catalog.ItemTypes?ref=aa78178ed92fbced11eaf15dc8cb47ee' | 'False'        | ''       | 'False'    | ''     | ''                   | 'Furniture'      | ''                 | ''               | 'Furniture TR'   | '_6da4444bef3f4f93b6c51881f2c0a6b9' |
+		| 'Ref'                                                               | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Type' | 'UseSerialLotNumber' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          | 'Type'                   |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78178ed92fbced11eaf15dc8cb47ee' | 'False'        | ''       | 'False'    | ''     | ''                   | 'Furniture'      | ''                 | ''               | 'Furniture TR'   | '_6da4444bef3f4f93b6c51881f2c0a6b9' | 'Enum.ItemTypes.Product' |
 
 Scenario: Create catalog Items objects (serial lot numbers)
 
@@ -888,6 +888,35 @@ Scenario: Create catalog PartnerSegments objects
 		| 'e1cib/data/Catalog.PartnerSegments?ref=aa78120ed92fbced11eaf116b327099c' | 'False'        | 'False'         | 'True'     | 'Region 2'       | ''                 | ''               | '2 Region'       |
 		| 'e1cib/data/Catalog.PartnerSegments?ref=aa78120ed92fbced11eaf1277d18ed7a' | 'False'        | 'False'         | 'False'    | 'Standard'       | ''                 | ''               | ''               |
 		| 'e1cib/data/Catalog.PartnerSegments?ref=aa78120ed92fbced11eaf134a6a4759e' | 'False'        | 'False'         | 'False'    | 'Vendor'         | ''                 | ''               | ''               |
+
+
+
+Scenario: Create catalog Partners and Payment type (Bank)
+
+	// Catalog.Partners
+
+	And I check or create catalog "Partners" objects:
+		| 'Ref'                                                              | 'DeletionMark' | 'Parent' | 'Code' | 'Customer' | 'Vendor' | 'Employee' | 'Consignor' | 'TradeAgent' | 'ManagerSegment' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Partners?ref=b790eb46b44093f611ed85b827e1638f' | 'False'        | ''       | 180     | 'True'     | 'False'  | 'False'    | 'False'     | 'False'      | ''               | 'Bank 1'         | ''                 | ''               | ''               |
+
+	// Catalog.Agreements
+
+	And I check or create catalog "Agreements" objects:
+		| 'Ref'                                                                | 'DeletionMark' | 'Code'  | 'Number' | 'Date'                | 'PartnerSegment' | 'Partner'                                                          | 'Company' | 'PriceType'                                                          | 'ItemSegment' | 'StartUsing'          | 'EndOfUse'            | 'ManagerSegment' | 'PriceIncludeTax' | 'DaysBeforeDelivery' | 'Store' | 'Type'                         | 'LegalName' | 'CurrencyMovementType'                                                                            | 'ApArPostingDetail'                  | 'StandardAgreement' | 'Kind'                        | 'UseCreditLimit' | 'CreditLimitAmount' | 'PaymentTerm' | 'TradeAgentFeeType' | 'TradeAgentFeePercent' | 'TradeAgentFeeItem' | 'TradeAgentFeeItemKey' | 'TradeAgentFeeProfitLossCenter' | 'TradeAgentFeeExpenseRevenueType' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Agreements?ref=b790eb46b44093f611ed85b827e16391' | 'False'        | 177     | ''       | '01.01.0001 00:00:00' | ''               | 'e1cib/data/Catalog.Partners?ref=b790eb46b44093f611ed85b827e1638f' | ''        | 'e1cib/data/Catalog.PriceTypes?ref=aa6b120ed92fbced11eacd8baf320dc8' | ''            | '01.01.0001 00:00:00' | '01.01.0001 00:00:00' | ''               | 'False'           |                      | ''      | 'Enum.AgreementTypes.Customer' | ''          | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | 'Enum.ApArPostingDetail.ByDocuments' | ''                  | 'Enum.AgreementKinds.Regular' | 'False'          |                     | ''            | ''                  |                        | ''                  | ''                     | ''                              | ''                                | 'Bank 1'         | ''                 | ''               | ''               |
+
+	// Catalog.Companies
+
+	And I check or create catalog "Companies" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Code'  | 'Country' | 'MainCompany' | 'Partner'                                                          | 'Type'                          | 'OurCompany' | 'LandedCostCurrencyMovementType' | 'LandedCostExpenseType' | 'LandedCostFillEmptyAmount' | 'LandedCostPriceTypeForEmptyAmount' | 'TradeAgentStore' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Companies?ref=b790eb46b44093f611ed85b827e16390' | 'False'        | 145     | ''        | ''            | 'e1cib/data/Catalog.Partners?ref=b790eb46b44093f611ed85b827e1638f' | 'Enum.CompanyLegalType.Company' | 'False'      | ''                               | ''                      | 'False'                     | ''                                  | ''                | 'Bank 1'         | ''                 | ''               | ''               |
+
+	// Catalog.PaymentTypes
+
+	And I check or create catalog "PaymentTypes" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Parent' | 'Code' | 'Type'                           | 'Icon'                                  | 'isIconSet' | 'Partner'                                                          | 'LegalName'                                                         | 'Agreement'                                                          | 'LegalNameContract' | 'Branch'                                                                | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.PaymentTypes?ref=b790eb46b44093f611ed85b827e16392' | 'False'        | ''       | 8      | 'Enum.PaymentTypes.PaymentAgent' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | 'e1cib/data/Catalog.Partners?ref=b790eb46b44093f611ed85b827e1638f' | 'e1cib/data/Catalog.Companies?ref=b790eb46b44093f611ed85b827e16390' | 'e1cib/data/Catalog.Agreements?ref=b790eb46b44093f611ed85b827e16391' | ''                  | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' | 'Bank credit'    | ''                 | ''               | ''               |
+
 
 
 Scenario: Create catalog Partners objects
@@ -1397,6 +1426,13 @@ Scenario: Create information register TaxSettings records (Concignor 1)
 		| '16.11.2022 0:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | 'e1cib/data/Catalog.Agreements?ref=b78bf3a601f806a711ed64ba446bae65' | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef011' |
 		| '16.11.2022 0:00:00'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef011' |
 
+Scenario: Create information register TaxSettings records (Concignor 2)
+	And I check or create information register "TaxSettings" records:
+		| 'Period'              | 'Company'                                                           | 'Tax'                                                           | 'ItemKey' | 'Item' | 'ItemType' | 'Agreement'                                                          | 'TaxRate'                                                          |
+		| '16.11.2022 00:00:00' | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca7a5' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef011' |
+
+
+
 
 Scenario: Create information register Taxes records (VAT)
 
@@ -1512,6 +1548,22 @@ Scenario: Create information register PricesByProperties records
 		| '01.09.2020 12:00:00' | 'e1cib/data/Document.PriceList?ref=aa78120ed92fbced11eaf1365f10e317' | '1'          | 'True'    | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe' | 'e1cib/data/Catalog.PriceKeys?ref=aa78120ed92fbced11eaf1365f10e318' | '350'   |
 		| '01.09.2020 12:00:00' | 'e1cib/data/Document.PriceList?ref=aa78120ed92fbced11eaf1365f10e317' | '2'          | 'True'    | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe' | 'e1cib/data/Catalog.PriceKeys?ref=aa78120ed92fbced11eaf1365f10e319' | '300'   |
 		| '01.09.2020 12:00:00' | 'e1cib/data/Document.PriceList?ref=aa78120ed92fbced11eaf1365f10e317' | '3'          | 'True'    | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe' | 'e1cib/data/Catalog.PriceKeys?ref=aa78120ed92fbced11eaf1365f10e31a' | '415'   |
+
+Scenario: Create information register ItemSegments records (discount)
+
+	And I check or create catalog "ItemSegments" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade821' | 'False'        | 1      | 'Dress'          | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade822' | 'False'        | 2      | 'Bags'           | ''                 | ''               | ''               |
+
+	And I check or create information register "ItemSegments" records:
+		| 'Segment'                                                              | 'ItemKey'                                                          |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade821' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade821' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fd' |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade821' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fe' |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade822' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf1277d18ed8c' |
+		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade822' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf1277d18ed8d' |
+
 
 Scenario: Create catalog IntegrationSettings objects
 
@@ -2302,6 +2354,9 @@ Scenario: Create catalog RetailCustomers objects (check POS)
 		| 'Ref'                                                                     | 'DeletionMark' | 'Code'          | 'Description'                                  | 'Name'                 | 'Surname'                 | 'UsePartnerTransactions' | 'Partner'                                                          | 'LegalName'                                                         | 'Agreement'                                                          | 'UsePartnerInfo' |
 		| 'e1cib/data/Catalog.RetailCustomers?ref=b76cbacb2511e57d11ebe9f994538237' | 'False'        | '002'           | 'Name Retail customer Surname Retail customer' | 'Name Retail customer' | 'Surname Retail customer' | 'True'                   | 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebebbd152ab7f6' | 'e1cib/data/Catalog.Companies?ref=b76cbacb2511e57d11ebebbd152ab7f7' | 'e1cib/data/Catalog.Agreements?ref=b76cbacb2511e57d11ebebbd152ab7f8' | 'True'           |
 		| 'e1cib/data/Catalog.RetailCustomers?ref=b76cbacb2511e57d11ebe9f994538238' | 'False'        | '003'           | 'Retail customer Second'                       | 'Retail customer'      | 'Second'                  | 'False'                  | ''                                                                 | ''                                                                  | ''                                                                   | 'False'          |
+		| 'e1cib/data/Catalog.RetailCustomers?ref=b790eb46b44093f611ed85bf15e9b21f' | 'False'        | '004'  | 'Daniel Smith' | 'Daniel' | 'Smith'   | 'False'                  | ''        | ''          | ''          | 'False'          |
+		| 'e1cib/data/Catalog.RetailCustomers?ref=b790eb46b44093f611ed85bf15e9b220' | 'False'        | '005'  | 'Sam Jons'     | 'Sam'    | 'Jons'    | 'False'                  | ''        | ''          | ''          | 'False'          |
+
 
 Scenario: Create catalog Partners objects (Customer)
 
@@ -2464,6 +2519,17 @@ Scenario: Create second Workstation
 	And I check or create catalog "Workstations" objects:
 		| 'Ref'                                                                  | 'DeletionMark' | 'Code'         | 'Description'    | 'CashAccount'                                                          | 'PrintTemplate' | 'UserGroup' | 'UniqueID'  |
 		| 'e1cib/data/Catalog.Workstations?ref=b784ae4f9cb08e5e11ed1a17667e6bb4' | 'False'        | '000000000002' | 'Workstation 02' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186a' | ''              | ''          | 'TeamAgent' |
+
+
+Scenario: Create PaymentType (advance)
+
+	// Catalog.PaymentTypes
+
+	And I check or create catalog "PaymentTypes" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Parent' | 'Code' | 'Type'                      | 'Icon'                                  | 'isIconSet' | 'Partner' | 'LegalName' | 'Agreement' | 'LegalNameContract' | 'Branch' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.PaymentTypes?ref=b790eb46b44093f611ed877301bc6957' | 'False'        | ''       | 12     | 'Enum.PaymentTypes.Advance' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | ''        | ''          | ''          | ''                  | ''       | 'Advance'        | ''                 | ''               | ''               |
+
+
 
 
 Scenario: Create catalog ExternalFunctions objects

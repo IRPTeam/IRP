@@ -870,8 +870,8 @@ Function HTMLAddAttributes() Export
 EndFunction
 
 Function PrepareDataForHTML(ItemRef, Filter = Undefined) Export
-	ArrayProperties = AddAttributesAndPropertiesServer.AllPropertiesArrayByFilter(ItemRef, Filter);
-	ArrayAttributes = AddAttributesAndPropertiesServer.AllAttributesArrayByFilter(ItemRef, Filter);
+	ArrayProperties = AllPropertiesArrayByFilter(ItemRef, Filter);
+	ArrayAttributes = AllAttributesArrayByFilter(ItemRef, Filter);
 
 	ArrayAttributesValue = AdditionAttributeValueByRef(ItemRef, ArrayAttributes);
 	ArrayPropertiesValue = AdditionPropertyValueByRef(ItemRef, ArrayProperties);

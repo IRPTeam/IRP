@@ -798,6 +798,10 @@
        <key>en</key>
        <value>Is item key</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Это характеристика</value>
+      </content>
      </localValue>
     </title>
     <valueType/>
@@ -810,6 +814,10 @@
       <content>
        <key>en</key>
        <value>Item key ref</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Ссылка характеристики</value>
       </content>
      </localValue>
     </title>
@@ -824,6 +832,10 @@
        <key>en</key>
        <value>Is item type</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Это вид номенклатуры</value>
+      </content>
      </localValue>
     </title>
     <valueType/>
@@ -837,6 +849,10 @@
        <key>en</key>
        <value>Is item</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Это номенклатура</value>
+      </content>
      </localValue>
     </title>
     <valueType/>
@@ -849,6 +865,10 @@
   <title>
    <key>en</key>
    <value>Source of origin owner</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Владелец источника происхождения</value>
   </title>
   <id>2</id>
   <valueType>

@@ -2460,6 +2460,10 @@
     <key>en</key>
     <value>Source of origin</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Источник происхождения</value>
+   </synonym>
    <type>
     <types>CatalogRef.SourceOfOrigins</types>
    </type>
@@ -2546,6 +2550,10 @@
    <key>en</key>
    <value>Source of origins</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Источники происхождения</value>
+  </synonym>
   <attributes uuid="96042cee-89cb-4f7d-b83f-1364552b4ba5">
    <name>Key</name>
    <synonym>
@@ -2595,6 +2603,10 @@
    <synonym>
     <key>en</key>
     <value>Source of origin</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Источник происхождения</value>
    </synonym>
    <type>
     <types>CatalogRef.SourceOfOrigins</types>

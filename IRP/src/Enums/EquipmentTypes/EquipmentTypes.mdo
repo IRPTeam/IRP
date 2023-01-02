@@ -50,4 +50,11 @@
    <value>Barkod okuyucusu</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="9cd0cff5-3e9b-4593-9f4c-793f8e610b03">
+  <name>FiscalPrinter</name>
+  <synonym>
+   <key>en</key>
+   <value>Fiscal printer</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

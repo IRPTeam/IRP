@@ -201,6 +201,57 @@
    <textEdit>true</textEdit>
   </extInfo>
  </items>
+ <items xsi:type="form:FormField">
+  <name>DriverInfo</name>
+  <id>22</id>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <dataPath xsi:type="form:DataPath">
+   <segments>DriverInfo</segments>
+  </dataPath>
+  <extendedTooltip>
+   <name>DriverInfoExtendedTooltip</name>
+   <id>24</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <contextMenu>
+   <name>DriverInfoContextMenu</name>
+   <id>23</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <autoFill>true</autoFill>
+  </contextMenu>
+  <type>TextDocumentField</type>
+  <readOnly>true</readOnly>
+  <editMode>Enter</editMode>
+  <showInHeader>true</showInHeader>
+  <headerHorizontalAlign>Left</headerHorizontalAlign>
+  <showInFooter>true</showInFooter>
+  <extInfo xsi:type="form:TextDocFieldExtInfo">
+   <width>50</width>
+   <autoMaxWidth>true</autoMaxWidth>
+   <height>10</height>
+   <autoMaxHeight>true</autoMaxHeight>
+   <horizontalStretch>true</horizontalStretch>
+   <verticalStretch>true</verticalStretch>
+  </extInfo>
+ </items>
  <autoCommandBar>
   <name>FormCommandBar</name>
   <id>-1</id>
@@ -405,6 +456,24 @@
    <value>Mevcut sürüm</value>
   </title>
   <id>4</id>
+  <valueType>
+   <types>String</types>
+   <stringQualifiers/>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>DriverInfo</name>
+  <title>
+   <key>en</key>
+   <value>Driver info</value>
+  </title>
+  <id>5</id>
   <valueType>
    <types>String</types>
    <stringQualifiers/>

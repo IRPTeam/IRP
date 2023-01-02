@@ -196,7 +196,7 @@ Function GetUniqueItemKeyByItem(Item) Export
 		Selection.Next();
 		Return Selection.Ref;
 	EndIf;
-	Return Catalogs.ItemKeys.EmptyRef();
+	Return EmptyRef();
 EndFunction
 
 Procedure UpdateDescriptions(ItemKeyObject, DescriptionsUpdated = False) Export
@@ -228,7 +228,7 @@ Function FindOrCreateRefByProperties(TableOfProperties, Item, AddInfo = Undefine
 EndFunction
 
 Function CreateRefByProperties(TableOfProperties, Item, AddInfo = Undefined) Export
-	NewObject = Catalogs.ItemKeys.CreateItem();
+	NewObject = CreateItem();
 	NewObject.Item = Item;
 	For Each TableOfPropertiesRow In TableOfProperties Do
 		NewRowAddAttributes = NewObject.AddAttributes.Add();
@@ -249,7 +249,7 @@ Function FindOrCreateRefBySpecification(Specification, Item, AddInfo = Undefined
 EndFunction
 
 Function CreateRefsBySpecification(Specification, Item, AddInfo = Undefined) Export
-	NewObject = Catalogs.ItemKeys.CreateItem();
+	NewObject = CreateItem();
 	NewObject.Item = Item;
 	NewObject.Specification = Specification;
 	NewObject.Write();
@@ -275,7 +275,7 @@ Function GetRefsBySpecification(Specification, Item, AddInfo = Undefined) Export
 	If QuerySelection.Next() Then
 		Return QuerySelection.Ref;
 	Else
-		Return Catalogs.ItemKeys.EmptyRef();
+		Return EmptyRef();
 	EndIf;
 EndFunction
 

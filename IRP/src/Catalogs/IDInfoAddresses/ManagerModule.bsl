@@ -27,7 +27,7 @@ Function FindCatalogItem(Deep, Parent, Level, Value, Country, IDInfoType)
 	Query.SetParameter("Country", Country);
 	Query.SetParameter("Level", Level);
 	Query.SetParameter("Value", Value);
-	Query.SetParameter("Parent", ?(ValueIsFilled(Parent), Parent, Catalogs.IDInfoAddresses.EmptyRef()));
+	Query.SetParameter("Parent", ?(ValueIsFilled(Parent), Parent, EmptyRef()));
 	Query.SetParameter("Owner", IDInfoType);
 
 	QueryResult = Query.Execute();
@@ -44,7 +44,7 @@ EndFunction
 Function CreateCatalogItem(Parent, Level, Value, Country, IDInfoType)
 	Result = New Structure("Success, Ref, ErrorMessage", False, Undefined, "");
 
-	NewItem = Catalogs.IDInfoAddresses.CreateItem();
+	NewItem = CreateItem();
 	NewItem.Owner = IDInfoType;
 	NewItem.Parent = Parent;
 	NewItem.Level = Level;
@@ -70,7 +70,7 @@ EndFunction
 
 Function WriteDataToCatalog(Values, Country, IDInfoType) Export
 	Deep = 1;
-	CurrentParent = Catalogs.IDInfoAddresses.EmptyRef();
+	CurrentParent = EmptyRef();
 	BeginTransaction(DataLockControlMode.Managed);
 	Try
 		For Each Row In Values Do

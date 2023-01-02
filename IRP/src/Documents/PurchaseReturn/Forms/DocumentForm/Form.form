@@ -4782,6 +4782,10 @@
     <key>en</key>
     <value>Source of origin</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Источник происхождения</value>
+   </title>
    <extendedTooltip>
     <name>GroupSourceOfOriginExtendedTooltip</name>
     <id>768</id>
@@ -6472,6 +6476,10 @@
     <title>
      <key>en</key>
      <value>Source of origins</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Источники происхождения</value>
     </title>
     <id>178</id>
     <valueType>

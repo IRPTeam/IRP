@@ -39,6 +39,7 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
 		When Create catalog Partners objects
+		When Create catalog Partners and Payment type (Bank)
 		When Create catalog Companies objects (partners company)
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
@@ -666,7 +667,6 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		And I click "5" button
 		And I click "1" button
 		Then the form attribute named "Amount" became equal to "2 050"
-		Then the form attribute named "DecorationAmountAfter" became equal to "Decoration amount after"
 		And "Payments" table became equal
 			| 'Payment type' | 'Amount'   |
 			| 'Cash'         | '2 051,00' |
@@ -768,7 +768,6 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 		And I click "5" button
 		And I click "0" button
 		Then the form attribute named "Amount" became equal to "2 050"
-		Then the form attribute named "DecorationAmountAfter" became equal to "Decoration amount after"
 		And "Payments" table became equal
 			| 'Payment type'    | 'Amount'   |
 			| 'Card 01'         | '2 050,00' |

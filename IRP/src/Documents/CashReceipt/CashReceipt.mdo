@@ -110,6 +110,7 @@
  <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
+ <registerRecords>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -258,6 +259,21 @@
   <fillValue xsi:type="core:StringValue">
    <value/>
   </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="b90f4596-428e-4147-8d83-046ccb077236">
+  <name>ConsolidatedRetailSales</name>
+  <synonym>
+   <key>en</key>
+   <value>Consolidated retail sales</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.ConsolidatedRetailSales</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
@@ -633,6 +649,20 @@
    </synonym>
    <type>
     <types>DocumentRef.MoneyTransfer</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="9119bb69-ceaa-4922-a807-142529faafb0">
+   <name>RetailCustomer</name>
+   <synonym>
+    <key>en</key>
+    <value>Retail customer</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.RetailCustomers</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
@@ -1120,6 +1150,19 @@
    <types>DocumentRef.SalesReportFromTradeAgent</types>
   </commandParameterType>
   <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
+ <commands uuid="2b5bc34a-7a21-4bbf-8478-d8de5fcc26cb">
+  <name>PrintCashIn</name>
+  <synonym>
+   <key>en</key>
+   <value>Print cash in</value>
+  </synonym>
+  <group>FormCommandBarImportant</group>
+  <commandParameterType>
+   <types>DocumentRef.CashReceipt</types>
+  </commandParameterType>
+  <modifiesData>true</modifiesData>
   <representation>Auto</representation>
  </commands>
 </mdclass:Document>

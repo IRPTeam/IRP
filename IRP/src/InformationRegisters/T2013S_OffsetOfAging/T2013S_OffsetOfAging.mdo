@@ -93,6 +93,8 @@
    <types>DocumentRef.PurchaseOrderClosing</types>
    <types>DocumentRef.SalesOrderClosing</types>
    <types>DocumentRef.SalesInvoice</types>
+   <types>DocumentRef.RetailReturnReceipt</types>
+   <types>DocumentRef.RetailSalesReceipt</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

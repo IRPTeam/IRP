@@ -218,8 +218,8 @@ Function GetAgreementByPartner(AgreementParameters) Export
 	AdditionalParameters.Insert("Partner", Partner);
 	
 	Parameters = New Structure();
-	Parameters.Insert("CustomSearchFilter"   , DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters));
-	Parameters.Insert("AdditionalParameters" , DocumentsServer.SerializeArrayOfFilters(AdditionalParameters));
+	Parameters.Insert("CustomSearchFilter"   , SerializeArrayOfFilters(ArrayOfFilters));
+	Parameters.Insert("AdditionalParameters" , SerializeArrayOfFilters(AdditionalParameters));
 	Parameters.Insert("Agreement"            , AgreementParameters.Agreement);
 
 	Return Catalogs.Agreements.GetDefaultChoiceRef(Parameters);
@@ -240,8 +240,8 @@ Function GetLegalNameByPartner(Partner, LegalName) Export
 	EndIf;
 		
 	Parameters = New Structure();
-	Parameters.Insert("CustomSearchFilter"   , DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters));
-	Parameters.Insert("AdditionalParameters" , DocumentsServer.SerializeArrayOfFilters(AdditionalParameters));
+	Parameters.Insert("CustomSearchFilter"   , SerializeArrayOfFilters(ArrayOfFilters));
+	Parameters.Insert("AdditionalParameters" , SerializeArrayOfFilters(AdditionalParameters));
 	Parameters.Insert("LegalName"            , LegalName);
 		
 	Return Catalogs.Companies.GetDefaultChoiceRef(Parameters);
@@ -265,8 +265,8 @@ Function GetCashAccountByCompany(Company, CashAccount, CashAccountType) Export
 	AdditionalParameters = New Structure();
 	
 	Parameters = New Structure();
-	Parameters.Insert("CustomSearchFilter"   , DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters));
-	Parameters.Insert("AdditionalParameters" , DocumentsServer.SerializeArrayOfFilters(AdditionalParameters));
+	Parameters.Insert("CustomSearchFilter"   , SerializeArrayOfFilters(ArrayOfFilters));
+	Parameters.Insert("AdditionalParameters" , SerializeArrayOfFilters(AdditionalParameters));
 	Parameters.Insert("CashAccount"          , CashAccount);
 		
 	Return Catalogs.CashAccounts.GetDefaultChoiceRef(Parameters);

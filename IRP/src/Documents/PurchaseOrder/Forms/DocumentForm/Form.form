@@ -3170,7 +3170,7 @@
      <id>11</id>
      <items xsi:type="form:Button">
       <name>ItemListContextMenuSetSpecialOffersAtRow</name>
-      <id>615</id>
+      <id>729</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -3178,7 +3178,7 @@
       </userVisible>
       <extendedTooltip>
        <name>ItemListContextMenuSetSpecialOffersAtRowExtendedTooltip</name>
-       <id>616</id>
+       <id>728</id>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>

@@ -319,6 +319,11 @@ Function Strings(Lang) Export
 	Strings.Insert("EqError_005", NStr("en='The equipment driver %1 has incorrect AddIn ID %2.';
 		|ru='У драйвера оборудования %1 неправильный AddIn ID %2.';
 		|tr='Donanım %1 sürücüsü yanlış AddIn ID %2 bilgisine sahiptir.'", Lang));
+	
+	Strings.Insert("EqFP_ShiftAlreadyOpened", NStr("en='Shift already opened.'", Lang));
+	Strings.Insert("EqFP_ShiftIsNotOpened", NStr("en='Shift is not opened.'", Lang));
+	Strings.Insert("EqFP_ShiftAlreadyClosed", NStr("en='Shift already closed.'", Lang));
+	
 #EndRegion
 
 #Region POS
@@ -1026,7 +1031,9 @@ Function Strings(Lang) Export
 		|ru='Нехватка партии комитента, номенклатура: %1, склад: %2. Требуется:%3 Остаток:%4 Не хватает:%5'", Lang) + Chars.LF);
 	Strings.Insert("Error_121", NStr("en='Goods received from consignor cannot be shipped to trade agent';
 		|ru='Товары полученные от комитента не могут быть отправлены комиссионеру'", Lang) + Chars.LF);
-	Strings.Insert("Error_122", NStr("en='Error. Find recursive basis by RowID: %1. Basis list:'", Lang) + Chars.LF);
+	Strings.Insert("Error_122", NStr("en='Error. Find recursive basis by RowID: %1. Basis list:';
+		|ru='Ошибка. Найдено замкнутый цикл по ID стрки: %1. Список документов основания:'", Lang) + Chars.LF);
+	Strings.Insert("Error_123", NStr("en='Error. Retail customer is not filled'", Lang) + Chars.LF);
 	
 	// manufacturing errors
 	Strings.Insert("MF_Error_001", NStr("en='Repetitive materials [%1]';

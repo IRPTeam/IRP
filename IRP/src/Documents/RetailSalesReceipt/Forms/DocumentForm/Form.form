@@ -1638,7 +1638,7 @@
     </items>
     <items xsi:type="form:FormField">
      <name>ItemListSourceOfOriginsPresentation</name>
-     <id>1120</id>
+     <id>1165</id>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -1649,7 +1649,7 @@
      </dataPath>
      <extendedTooltip>
       <name>ItemListSourceOfOriginsPresentationExtendedTooltip</name>
-      <id>1122</id>
+      <id>1167</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -1664,7 +1664,7 @@
      </extendedTooltip>
      <contextMenu>
       <name>ItemListSourceOfOriginsPresentationContextMenu</name>
-      <id>1121</id>
+      <id>1166</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -5269,6 +5269,56 @@
     </extInfo>
    </items>
    <items xsi:type="form:FormField">
+    <name>PaymentMethod</name>
+    <id>1162</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+     <segments>Object.PaymentMethod</segments>
+    </dataPath>
+    <extendedTooltip>
+     <name>PaymentMethodExtendedTooltip</name>
+     <id>1164</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+     <name>PaymentMethodContextMenu</name>
+     <id>1163</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <autoFill>true</autoFill>
+    </contextMenu>
+    <type>InputField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:InputFieldExtInfo">
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <wrap>true</wrap>
+     <chooseType>true</chooseType>
+     <typeDomainEnabled>true</typeDomainEnabled>
+     <textEdit>true</textEdit>
+    </extInfo>
+   </items>
+   <items xsi:type="form:FormField">
     <name>Author</name>
     <id>202</id>
     <visible>true</visible>
@@ -5796,6 +5846,10 @@
    <title>
     <key>en</key>
     <value>Source of origin</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Источник происхождения</value>
    </title>
    <extendedTooltip>
     <name>GroupSourceOfOriginExtendedTooltip</name>
@@ -8110,6 +8164,10 @@
     <title>
      <key>en</key>
      <value>Source of origins</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Источники происхождения</value>
     </title>
     <id>173</id>
     <valueType>

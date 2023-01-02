@@ -13,6 +13,10 @@
   <key>en</key>
   <value>R9010 Source of origin stock</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R9010 Остатки товаров по источникам происхождения</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <enableTotalsSplitting>true</enableTotalsSplitting>
@@ -130,6 +134,10 @@
   <synonym>
    <key>en</key>
    <value>Source of origin</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Источник происхождения</value>
   </synonym>
   <type>
    <types>CatalogRef.SourceOfOrigins</types>

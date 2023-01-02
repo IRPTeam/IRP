@@ -157,9 +157,7 @@ Scenario: transfer the Discount 1 without Vat discount from Maximum to Minimum.
 	And in the table "List" I click the button named "ListContextMenuMoveItem"
 	And in the table "List" I click the button named "ListContextMenuLevelDown"
 	And Delay 2
-	And I move one level down in "List" table
-	And Delay 1
-	And I move one level down in "List" table
+	And I click "List" button
 	And I go to line in "List" table
 		| 'Launch' | 'Manually' | 'Priority' | 'Special offer type' |
 		| 'No'     | 'No'       | '2'        | 'Minimum'            |

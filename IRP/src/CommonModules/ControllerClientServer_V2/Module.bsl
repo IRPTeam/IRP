@@ -1249,6 +1249,7 @@ Procedure MultiSetTransactionType_BankReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("PaymentTerminal"          , BindPaymentListPaymentTerminal(Parameters));
 	ResourceToBinding.Insert("BankTerm"                 , BindPaymentListBankTerm(Parameters));
 	ResourceToBinding.Insert("CommissionIsSeparate"     , BindPaymentListCommissionIsSeparate(Parameters));
+	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1278,6 +1279,7 @@ Procedure MultiSetTransactionType_CashReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("AmountExchange"           , BindPaymentListAmountExchange(Parameters));
 	ResourceToBinding.Insert("CurrencyExchange"         , BindCurrencyExchange(Parameters));
 	ResourceToBinding.Insert("MoneyTransfer"            , BindPaymentListMoneyTransfer(Parameters));
+	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1327,6 +1329,7 @@ Procedure StepClearByTransactionTypeBankReceipt(Parameters, Chain) Export
 		Options.PaymentTerminal          = GetPaymentListPaymentTerminal(Parameters, Row.Key);
 		Options.BankTerm                 = GetPaymentListBankTerm(Parameters, Row.Key);
 		Options.CommissionIsSeparate     = GetPaymentListCommissionIsSeparate(Parameters, Row.Key);
+		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankReceipt";
 		Chain.ClearByTransactionTypeBankReceipt.Options.Add(Options);
@@ -1370,6 +1373,7 @@ Procedure StepClearByTransactionTypeCashReceipt(Parameters, Chain) Export
 		Options.Order                    = GetPaymentListOrder(Parameters, Row.Key);
 		Options.AmountExchange           = GetPaymentListAmountExchange(Parameters, Row.Key);
 		Options.MoneyTransfer            = GetPaymentListMoneyTransfer(Parameters, Row.Key);
+		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashReceipt";
 		Chain.ClearByTransactionTypeCashReceipt.Options.Add(Options);
@@ -4605,6 +4609,34 @@ Procedure StepPaymentListChangePartnerByLegalName(Parameters, Chain) Export
 		Chain.ChangePartnerByLegalName.Options.Add(Options);
 	EndDo;
 EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_LIST_RETAIL_CUSTOMER
+
+// PaymentList.RetailCustomer.OnChange
+Procedure PaymentListRetailCustomerOnChange(Parameters) Export
+	Binding = BindPaymentListRetailCustomer(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.RetailCustomer.Set
+Procedure SetPaymentListRetailCustomer(Parameters, Results) Export
+	Binding = BindPaymentListRetailCustomer(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.RetailCustomer.Get
+Function GetPaymentListRetailCustomer(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListRetailCustomer(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.RetailCustomer.Bind
+Function BindPaymentListRetailCustomer(Parameters)
+	DataPath = "PaymentList.RetailCustomer";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
 
 #EndRegion
 

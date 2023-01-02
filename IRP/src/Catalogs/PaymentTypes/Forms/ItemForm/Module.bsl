@@ -1,8 +1,12 @@
 #Region FormEventHandlers
 
 &AtServer
+Procedure OnReadAtServer(CurrentObject)
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+EndProcedure
+
+&AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
@@ -11,7 +15,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		CurrentObject = FormAttributeToValue("Object");
 		Icon = PutToTempStorage(CurrentObject.Icon.Get());
 	EndIf;
-	
+	If Parameters.Key.IsEmpty() Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -23,6 +29,21 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	EndIf;
 EndProcedure
 
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form)	
+	IsPaymentAgent = Object.Type = PredefinedValue("Enum.PaymentTypes.PaymentAgent");
+	Form.Items.Partner.Visible = IsPaymentAgent;
+	Form.Items.LegalName.Visible = IsPaymentAgent;
+	Form.Items.Agreement.Visible = IsPaymentAgent;
+	Form.Items.LegalNameContract.Visible = IsPaymentAgent;
+	Form.Items.Branch.Visible = IsPaymentAgent;
+EndProcedure
+
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
@@ -31,6 +52,52 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure TypeOnChange(Item)
+	If Object.Type <> PredefinedValue("Enum.PaymentTypes.PaymentAgent") Then
+		Object.Partner = Undefined;
+		Object.LegalName = Undefined;
+		Object.Agreement = Undefined;
+		Object.LegalNameContract = Undefined;
+		Object.Branch = Undefined;
+	EndIf;
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
+	DocumentsClient.PartnerStartChoice_TransactionTypeFilter(Object, ThisObject, Item, ChoiceData, StandardProcessing, 
+		PredefinedValue("Enum.SalesTransactionTypes.Sales"));
+EndProcedure
+
+&AtClient
+Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
+	DocumentsClient.PartnerTextChange_TransactionTypeFilter(Object, ThisObject, Item, Text, StandardProcessing,
+		PredefinedValue("Enum.SalesTransactionTypes.Sales"));
+EndProcedure
+
+&AtClient
+Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocumentsClient.LegalNameStartChoice_PartnerFilter(Object, ThisObject, Item, ChoiceData, StandardProcessing, Object.Partner);
+EndProcedure
+
+&AtClient
+Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocumentsClient.LegalNameTextChange_PartnerFilter(Object, ThisObject, Item, Text, StandardProcessing, Object.Partner);
+EndProcedure
+
+&AtClient
+Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	DocumentsClient.AgreementStartChoice_TransactionTypeFilter(Object, ThisObject, Item, ChoiceData, StandardProcessing, 
+		PredefinedValue("Enum.SalesTransactionTypes.Sales"));
+EndProcedure
+
+&AtClient
+Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
+	DocumentsClient.AgreementTextChange_TransactionTypeFilter(Object, ThisObject, Item, Text, StandardProcessing, 
+		PredefinedValue("Enum.SalesTransactionTypes.Sales"));
+EndProcedure
 
 #Region AddAttributes
 
@@ -102,7 +169,6 @@ Procedure SelectFileEnd(Files, AdditionalParameters) Export
 	BD = New BinaryData(Files[0].FullName);
 	Icon = PutToTempStorage(BD, UUID);
 	Object.isIconSet = True;
-
 EndProcedure
 
 #EndRegion

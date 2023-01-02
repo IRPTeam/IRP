@@ -705,7 +705,7 @@ Function GetFromTaxesCache(Parameters)
 		ArrayOfTaxes = New Array();
 
 		DocumentName = Parameters.TaxesCache.Ref.Metadata().Name;
-		ArrayOfAllTaxes = TaxesServer.GetTaxesByCompany(Parameters.TaxesCache.Date, Parameters.TaxesCache.Company);
+		ArrayOfAllTaxes = GetTaxesByCompany(Parameters.TaxesCache.Date, Parameters.TaxesCache.Company);
 		For Each ItemOfAllTaxes In ArrayOfAllTaxes Do
 			If ItemOfAllTaxes.UseDocuments.FindRows(New Structure("DocumentName", DocumentName)).Count() Then
 				ArrayOfTaxes.Add(ItemOfAllTaxes.Tax);

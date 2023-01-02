@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <items xsi:type="form:FormGroup">
   <name>GroupTitle</name>
   <id>183</id>
@@ -4082,15 +4082,7 @@
   <name>PhysicalCountByLocationList</name>
   <title>
    <key>en</key>
-   <value>Physical count by location list</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Пересчеты товаров</value>
-  </title>
-  <title>
-   <key>tr</key>
-   <value>Lokasyon sayım fiş listesi</value>
+   <value>Count rows</value>
   </title>
   <id>6</id>
   <valueType>
@@ -4123,6 +4115,113 @@ GROUP BY
    <customQuery>true</customQuery>
    <autoSaveUserSettings>true</autoSaveUserSettings>
    <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>CountRows</dataPath>
+    <field>CountRows</field>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Count rows</value>
+      </content>
+     </localValue>
+    </title>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PhysCount</dataPath>
+    <field>PhysCount</field>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Phys. count</value>
+      </content>
+     </localValue>
+    </title>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Number</dataPath>
+    <field>Number</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Date</dataPath>
+    <field>Date</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PhysicalInventory</dataPath>
+    <field>PhysicalInventory</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ResponsibleUser</dataPath>
+    <field>ResponsibleUser</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>RuleEditQuantity</dataPath>
+    <field>RuleEditQuantity</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Store</dataPath>
+    <field>Store</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>UseSerialLot</dataPath>
+    <field>UseSerialLot</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Author</dataPath>
+    <field>Author</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Branch</dataPath>
+    <field>Branch</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description</dataPath>
+    <field>Description</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ItemList</dataPath>
+    <field>ItemList</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>AddAttributes</dataPath>
+    <field>AddAttributes</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PointInTime</dataPath>
+    <field>PointInTime</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Ref</dataPath>
+    <field>Ref</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Status</dataPath>
+    <field>Status</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DeletionMark</dataPath>
+    <field>DeletionMark</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Posted</dataPath>
+    <field>Posted</field>
+   </fields>
+   <parameters>
+    <name>PhysicalInventoryRef</name>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Physical inventory ref</value>
+      </content>
+     </localValue>
+    </title>
+    <valueType>
+     <types>DocumentRef.PhysicalInventory</types>
+    </valueType>
+    <useRestriction>true</useRestriction>
+   </parameters>
   </extInfo>
  </attributes>
  <attributes>

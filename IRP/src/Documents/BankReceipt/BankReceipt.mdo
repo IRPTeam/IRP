@@ -111,6 +111,7 @@
  <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
+ <registerRecords>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -863,6 +864,20 @@
      <precision>6</precision>
      <scale>2</scale>
     </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="ee7e0577-d519-4f36-8d95-34c9f045e259">
+   <name>RetailCustomer</name>
+   <synonym>
+    <key>en</key>
+    <value>Retail customer</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.RetailCustomers</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

@@ -28,4 +28,13 @@
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
+ <forms uuid="3d32ba2a-6daf-461d-8b97-5ae43b439838">
+  <name>EditMultilineText</name>
+  <synonym>
+   <key>en</key>
+   <value>Edit multiline text</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

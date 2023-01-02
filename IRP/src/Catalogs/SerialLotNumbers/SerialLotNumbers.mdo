@@ -272,6 +272,10 @@
    <key>en</key>
    <value>Batch balance detail</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид учета партий товаров</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>

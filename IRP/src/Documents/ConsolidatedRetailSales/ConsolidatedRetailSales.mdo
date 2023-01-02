@@ -360,6 +360,39 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="50ffa31f-1339-4641-a23b-43759381fa62">
+  <name>FiscalPrinter</name>
+  <synonym>
+   <key>en</key>
+   <value>Fiscal printer</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Hardware</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e74cb3da-a8ad-45b3-8fb5-de2cb4c162d1">
+  <name>ShiftNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>Shift number</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>32</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="24b0c474-293a-4109-9bb3-07883a53de72">
   <name>DocumentForm</name>
   <synonym>

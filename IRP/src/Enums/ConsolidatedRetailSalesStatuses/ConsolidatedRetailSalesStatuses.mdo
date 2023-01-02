@@ -65,4 +65,11 @@
    <value>İptal</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="72c916d2-ff46-4eb1-972e-d84794fe0588">
+  <name>New</name>
+  <synonym>
+   <key>en</key>
+   <value>New</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

@@ -12,6 +12,10 @@
   <key>en</key>
   <value>Source of origins</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Источники происхождения</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.SourceOfOrigins.StandardAttribute.Code</inputByString>
  <inputByString>Catalog.SourceOfOrigins.StandardAttribute.Description</inputByString>
@@ -22,6 +26,10 @@
   <synonym>
    <key>en</key>
    <value>Source of origin</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Источник происхождения</value>
   </synonym>
   <fillChecking>ShowError</fillChecking>
   <fullTextSearch>Use</fullTextSearch>
@@ -59,6 +67,10 @@
   <key>en</key>
   <value>Source of origin</value>
  </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Источник происхождения</value>
+ </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>12</codeLength>
@@ -79,6 +91,10 @@
    <key>en</key>
    <value>Custom product ID</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Артикул покупателя</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers>
@@ -97,6 +113,10 @@
    <key>en</key>
    <value>Custom declaration ID</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Номер ГТД</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers>
@@ -114,6 +134,10 @@
   <synonym>
    <key>en</key>
    <value>Country of origin</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Страна происхождения</value>
   </synonym>
   <type>
    <types>CatalogRef.Countries</types>
@@ -155,6 +179,10 @@
   <synonym>
    <key>en</key>
    <value>Batch balance detail</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид учета партий товаров</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -336,6 +364,10 @@
   <synonym>
    <key>en</key>
    <value>Edit source of origins</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Изменить источник происхождения</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

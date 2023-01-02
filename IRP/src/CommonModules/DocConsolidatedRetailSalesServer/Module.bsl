@@ -94,25 +94,43 @@ Function GetDocument(Company, Branch, Workstation) Export
 EndFunction
 
 Function CreateDocument(Company, Branch, Workstation) Export
-	OpeningDateTime = CommonFunctionsServer.GetCurrentSessionDate();
 	
 	FillingValues = New Structure();
-	FillingValues.Insert("Company"        , Company);
-	FillingValues.Insert("Branch"         , Branch);
-	FillingValues.Insert("CashAccount"    , Workstation.CashAccount);
-	FillingValues.Insert("OpeningDate"    , OpeningDateTime);
-	FillingValues.Insert("Status"         , Enums.ConsolidatedRetailSalesStatuses.Open);
+	FillingValues.Insert("Company", Company);
+	FillingValues.Insert("Branch", Branch);
+	FillingValues.Insert("CashAccount", Workstation.CashAccount);
+	FillingValues.Insert("Date", CommonFunctionsServer.GetCurrentSessionDate());
+	FillingValues.Insert("Status", Enums.ConsolidatedRetailSalesStatuses.New);
+	FillingValues.Insert("FiscalPrinter", Catalogs.Hardware.EmptyRef());
+	FiscalPrinter = HardwareServer.GetWorkstationHardwareByEquipmentType(Workstation, Enums.EquipmentTypes.FiscalPrinter);
+	If FiscalPrinter.Count() Then
+		FillingValues.Insert("FiscalPrinter", FiscalPrinter[0]);
+	EndIf;
 	
 	Doc = Documents.ConsolidatedRetailSales.CreateDocument();
-	Doc.Date = OpeningDateTime;
 	Doc.Fill(FillingValues);
 	Doc.Write(DocumentWriteMode.Posting);
 	Return Doc.Ref;
 EndFunction
 
-Procedure CloseDocument(DocRef, UserData = Undefined) Export
+Procedure DocumentOpenShift(DocRef, ShiftData, UserData = Undefined) Export
 	DocObject = DocRef.GetObject();
-	DocObject.ClosingDate = CommonFunctionsServer.GetCurrentSessionDate();
+	DocObject.OpeningDate = ShiftData.DateTime;
+	DocObject.ShiftNumber = ShiftData.ShiftNumber;
+	DocObject.Status = Enums.ConsolidatedRetailSalesStatuses.Open;
+	If Not UserData = Undefined Then
+		DocObject.PaymentList.Clear();
+		FillPropertyValues(DocObject, UserData, , "PaymentList");
+		For Each Item in UserData.PaymentList Do
+			FillPropertyValues(DocObject.PaymentList.Add(), Item);
+		EndDo;
+	EndIf;
+	DocObject.Write(DocumentWriteMode.Posting);
+EndProcedure
+
+Procedure DocumentCloseShift(DocRef, ShiftData, UserData = Undefined) Export
+	DocObject = DocRef.GetObject();
+	DocObject.ClosingDate = ShiftData.DateTime;
 	DocObject.Status = Enums.ConsolidatedRetailSalesStatuses.Close;
 	If Not UserData = Undefined Then
 		DocObject.PaymentList.Clear();

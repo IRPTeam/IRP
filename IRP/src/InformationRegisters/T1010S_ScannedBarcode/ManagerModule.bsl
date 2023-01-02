@@ -6,7 +6,7 @@
 //  Barcode - DefinedType.typeBarcode, Array - Array or single barcode to save 
 Procedure SaveBarcode(Basis, Barcode, Quantity = 1) Export
 
-	NewBarcode = InformationRegisters.T1010S_ScannedBarcode.CreateRecordManager();
+	NewBarcode = CreateRecordManager();
 
 	NewBarcode.InfoID = New UUID();
 	NewBarcode.Period = CurrentDate();
@@ -28,7 +28,7 @@ Procedure ClearHistoryByBasis(Basis) Export
 		Return;
 	EndIf;
 
-	NewBarcodeSet = InformationRegisters.T1010S_ScannedBarcode.CreateRecordSet();
+	NewBarcodeSet = CreateRecordSet();
 	NewBarcodeSet.Filter.Basis.Set(Basis);
 	NewBarcodeSet.Write();
 

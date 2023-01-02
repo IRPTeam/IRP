@@ -2785,6 +2785,10 @@
     <key>en</key>
     <value>Source of origin</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Источник происхождения</value>
+   </title>
    <id>40</id>
    <valueType>
     <types>CatalogRef.SourceOfOrigins</types>

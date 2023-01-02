@@ -779,6 +779,10 @@
        <key>ru</key>
        <value>Использовать отбор</value>
       </content>
+      <content>
+       <key>tr</key>
+       <value>Filtre uygula</value>
+      </content>
      </localValue>
     </title>
     <valueType/>

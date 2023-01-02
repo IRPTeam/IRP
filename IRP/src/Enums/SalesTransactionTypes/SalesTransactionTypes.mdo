@@ -14,6 +14,10 @@
   <key>ru</key>
   <value>Вид операций реализации</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Satış işlem tipleri</value>
+ </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="ecf776ab-9e00-4383-8903-f79f90804b12">
@@ -40,6 +44,10 @@
   <synonym>
    <key>ru</key>
    <value>Отгрузка комиссионеру</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Konsiyeye alana sevkiyat</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

@@ -17,6 +17,10 @@
   <key>ru</key>
   <value>R8015 Цены товаров принятых на комиссию</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R8015 Konsinye ürün fiyatları</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -186,6 +190,10 @@
   <synonym>
    <key>ru</key>
    <value>Источник происхождения</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Envanter menşei</value>
   </synonym>
   <type>
    <types>CatalogRef.SourceOfOrigins</types>

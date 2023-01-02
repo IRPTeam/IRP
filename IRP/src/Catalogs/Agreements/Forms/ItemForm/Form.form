@@ -181,6 +181,10 @@
         <key>ru</key>
         <value>Комитент</value>
        </presentation>
+       <presentation>
+        <key>tr</key>
+        <value>Konsiyeye veren</value>
+       </presentation>
        <value xsi:type="core:ReferenceValue">
         <value>Enum.AgreementTypes.EnumValue.Consignor</value>
        </value>
@@ -193,6 +197,10 @@
        <presentation>
         <key>ru</key>
         <value>Комиссионер</value>
+       </presentation>
+       <presentation>
+        <key>tr</key>
+        <value>Ödeme aracı kurum</value>
        </presentation>
        <value xsi:type="core:ReferenceValue">
         <value>Enum.AgreementTypes.EnumValue.TradeAgent</value>
@@ -1877,6 +1885,10 @@
    <title>
     <key>ru</key>
     <value>Комиссионная торговля</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Konsinye satış</value>
    </title>
    <extendedTooltip>
     <name>GroupCommissionTradeExtendedTooltip</name>

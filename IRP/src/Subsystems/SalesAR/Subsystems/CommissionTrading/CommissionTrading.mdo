@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Комиссионная торговля</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Konsinye satışı</value>
+ </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>
  <content>Document.SalesReportFromTradeAgent</content>

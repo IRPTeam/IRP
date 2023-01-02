@@ -579,6 +579,14 @@
     <key>en</key>
     <value>Predefined settings</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Предопределенные настройки</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Önceden tanımlı ayarlar</value>
+   </title>
    <extendedTooltip>
     <name>PagePredefinedSettingsExtendedTooltip</name>
     <id>45</id>
@@ -1148,6 +1156,14 @@
     <key>en</key>
     <value>Driver settings</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Настройки драйвера</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Sürücü ayarları</value>
+   </title>
    <extendedTooltip>
     <name>PageDriverSettingsExtendedTooltip</name>
     <id>47</id>
@@ -1177,6 +1193,14 @@
   <title>
    <key>en</key>
    <value>Main</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Основное</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Ana</value>
   </title>
   <extendedTooltip>
    <name>PagesMainExtendedTooltip</name>
@@ -1282,6 +1306,14 @@
    <key>en</key>
    <value>Driver parameter</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Параметры драйвера</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Sürücü parametresi</value>
+  </title>
   <id>3</id>
   <valueType>
    <types>ValueTable</types>
@@ -1297,6 +1329,14 @@
    <title>
     <key>en</key>
     <value>Name</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Имя</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Ad</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1315,6 +1355,14 @@
    <title>
     <key>en</key>
     <value>Value</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Значение</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Değer</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1343,6 +1391,14 @@
     <key>en</key>
     <value>Read only</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Только чтение</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Salt okunur</value>
+   </title>
    <id>6</id>
    <valueType>
     <types>Boolean</types>
@@ -1359,6 +1415,14 @@
    <title>
     <key>en</key>
     <value>Caption</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Заголовок</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Başlık</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1377,6 +1441,14 @@
    <title>
     <key>en</key>
     <value>Default value</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Значение по умолчанию</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Varsayılan değer</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1407,6 +1479,14 @@
     <key>en</key>
     <value>Description</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Наименование</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Tanım</value>
+   </title>
    <id>10</id>
    <valueType>
     <types>String</types>
@@ -1425,6 +1505,14 @@
     <key>en</key>
     <value>Field format</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Формат поля</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Alan formatı</value>
+   </title>
    <id>11</id>
    <valueType>
     <types>String</types>
@@ -1442,6 +1530,14 @@
    <title>
     <key>en</key>
     <value>Value list data</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Данные списка значений</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Değer liste verisi</value>
    </title>
    <id>12</id>
    <valueType>

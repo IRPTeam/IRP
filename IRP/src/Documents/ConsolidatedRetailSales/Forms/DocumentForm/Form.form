@@ -2594,6 +2594,10 @@
         <key>ru</key>
         <value>Группа остатки по программе</value>
        </title>
+       <title>
+        <key>tr</key>
+        <value>Grup programa göre bakiyeler</value>
+       </title>
        <extendedTooltip>
         <name>GroupBalanceInBaseExtendedTooltip</name>
         <id>231</id>
@@ -2788,6 +2792,10 @@
         <key>ru</key>
         <value>Группа физические остатки</value>
        </title>
+       <title>
+        <key>tr</key>
+        <value>Grup gerçek balance</value>
+       </title>
        <extendedTooltip>
         <name>GroupBalanceRealExtendedTooltip</name>
         <id>233</id>
@@ -2825,6 +2833,10 @@
       <title>
        <key>ru</key>
        <value>Группа остатков</value>
+      </title>
+      <title>
+       <key>tr</key>
+       <value>Bakiyeler grubu</value>
       </title>
       <extendedTooltip>
        <name>GroupOfBalancesExtendedTooltip</name>
@@ -2902,6 +2914,10 @@
      <key>ru</key>
      <value>Группа Страницы пользовательских данных</value>
     </title>
+    <title>
+     <key>tr</key>
+     <value>Grup kullanıcı veri sayfaları</value>
+    </title>
     <extendedTooltip>
      <name>GroupUserDataPagesExtendedTooltip</name>
      <id>225</id>
@@ -2935,6 +2951,10 @@
    <title>
     <key>ru</key>
     <value>Пользовательские данные</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Kullanıcı verisi</value>
    </title>
    <extendedTooltip>
     <name>GroupUserDataExtendedTooltip</name>

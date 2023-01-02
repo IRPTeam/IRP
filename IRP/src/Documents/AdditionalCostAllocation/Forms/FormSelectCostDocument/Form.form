@@ -503,6 +503,14 @@ GROUP BY
        <key>en</key>
        <value>Amount</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Сумма оплаты</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Tutar</value>
+      </content>
      </localValue>
     </title>
    </fields>
@@ -542,6 +550,10 @@ GROUP BY
        <key>en</key>
        <value>Balance period</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Период остатка</value>
+      </content>
      </localValue>
     </title>
     <valueType>
@@ -558,6 +570,14 @@ GROUP BY
        <key>en</key>
        <value>Period</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Период</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Dönem</value>
+      </content>
      </localValue>
     </title>
     <valueType>
@@ -573,6 +593,10 @@ GROUP BY
        <key>en</key>
        <value>Selected documents</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Выбранные документы</value>
+      </content>
      </localValue>
     </title>
     <valueType/>
@@ -586,6 +610,14 @@ GROUP BY
       <content>
        <key>en</key>
        <value>Company</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Организация</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Şirket</value>
       </content>
      </localValue>
     </title>
@@ -601,6 +633,14 @@ GROUP BY
       <content>
        <key>en</key>
        <value>Currency movement type</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Вид мультивалютной аналитики</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Çoklu döviz hareket tipi</value>
       </content>
      </localValue>
     </title>

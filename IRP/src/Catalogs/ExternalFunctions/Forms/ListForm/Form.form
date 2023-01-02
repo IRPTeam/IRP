@@ -1240,6 +1240,14 @@ FROM
        <key>en</key>
        <value>Job add time</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Время добавления регл. задания</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Görev ekleme saati</value>
+      </content>
      </localValue>
     </title>
    </fields>
@@ -1251,6 +1259,14 @@ FROM
       <content>
        <key>en</key>
        <value>Job finish time</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Время окончания регл. задания</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Görev tamamlama saati</value>
       </content>
      </localValue>
     </title>
@@ -1264,6 +1280,14 @@ FROM
        <key>en</key>
        <value>Job status</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Статус задания</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Görev statüsü</value>
+      </content>
      </localValue>
     </title>
    </fields>
@@ -1275,6 +1299,14 @@ FROM
       <content>
        <key>en</key>
        <value>Job start time</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Дата начала задания</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Görev başlatma saati</value>
       </content>
      </localValue>
     </title>

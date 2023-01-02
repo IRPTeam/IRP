@@ -16,6 +16,10 @@
   <key>ru</key>
   <value>Отчет комитенту о продажах</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Konsiyeye verene satış raporu</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.SalesReportToConsignor.StandardAttribute.Number</inputByString>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -77,6 +81,10 @@
  <listPresentation>
   <key>ru</key>
   <value>Отчет комитенту о продажах</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Konsiyeye verenlere satış raporu</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -327,6 +335,10 @@
    <key>ru</key>
    <value>Вид вознаграждения комиссионера</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Konsinye alan komisyon tipi</value>
+  </synonym>
   <type>
    <types>EnumRef.TradeAgentFeeTypes</types>
   </type>
@@ -397,6 +409,10 @@
   <synonym>
    <key>ru</key>
    <value>Заполнить продажи</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satışları doldur</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -547,6 +563,10 @@
    <synonym>
     <key>ru</key>
     <value>Цена комитента</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Konsinye fiyatı</value>
    </synonym>
    <type>
     <types>DefinedType.typePrice</types>
@@ -812,6 +832,10 @@
     <key>ru</key>
     <value>Процент вознаграждения комиссионера</value>
    </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Konsinye alan komisyon oranı</value>
+   </synonym>
    <type>
     <types>DefinedType.typePercent</types>
    </type>
@@ -829,6 +853,10 @@
    <synonym>
     <key>ru</key>
     <value>Сумма вознаграждения комиссионера</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Konsinye alan komisyonu</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -1397,6 +1425,10 @@
    <key>ru</key>
    <value>Источники происхождения</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Envanter menşeileri</value>
+  </synonym>
   <attributes uuid="8f8cc3c8-9d5a-4e72-917e-40f0b2e55d69">
    <name>Key</name>
    <synonym>
@@ -1450,6 +1482,10 @@
    <synonym>
     <key>ru</key>
     <value>Источник происхождения</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Envanter menşei</value>
    </synonym>
    <type>
     <types>CatalogRef.SourceOfOrigins</types>

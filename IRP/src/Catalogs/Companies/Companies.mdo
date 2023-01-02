@@ -330,6 +330,10 @@
    <key>ru</key>
    <value>Склад комиссионера</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ödeme aracı deposu</value>
+  </synonym>
   <type>
    <types>CatalogRef.Stores</types>
   </type>

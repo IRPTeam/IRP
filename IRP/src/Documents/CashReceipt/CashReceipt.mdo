@@ -268,6 +268,14 @@
    <key>en</key>
    <value>Consolidated retail sales</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Отчеты о розничных продажах</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Konsolide perakende satış fişleri</value>
+  </synonym>
   <type>
    <types>DocumentRef.ConsolidatedRetailSales</types>
   </type>
@@ -660,6 +668,14 @@
    <synonym>
     <key>en</key>
     <value>Retail customer</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Розничный покупатель</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Perakende müşteri</value>
    </synonym>
    <type>
     <types>CatalogRef.RetailCustomers</types>
@@ -1157,6 +1173,10 @@
   <synonym>
    <key>en</key>
    <value>Print cash in</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Распечатать внесение</value>
   </synonym>
   <group>FormCommandBarImportant</group>
   <commandParameterType>

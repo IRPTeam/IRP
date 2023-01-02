@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Технический</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Teknik</value>
+ </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <subsystems>Localization</subsystems>
  <subsystems>Marketing</subsystems>

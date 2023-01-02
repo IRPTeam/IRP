@@ -18,6 +18,10 @@
   <key>ru</key>
   <value>T8010 Партии комитента</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>T8010 Konsinye partileri</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -151,6 +155,10 @@
   <synonym>
    <key>ru</key>
    <value>Источник происхождения</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Envanter menşei</value>
   </synonym>
   <type>
    <types>CatalogRef.SourceOfOrigins</types>

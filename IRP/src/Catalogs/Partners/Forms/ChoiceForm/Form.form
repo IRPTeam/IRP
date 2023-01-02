@@ -893,6 +893,10 @@ WHERE
    <key>ru</key>
    <value>Комитент</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Konsiyeye veren</value>
+  </title>
   <id>7</id>
   <valueType>
    <types>Boolean</types>
@@ -913,6 +917,10 @@ WHERE
   <title>
    <key>ru</key>
    <value>Комиссионер</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Ödeme aracı kurum</value>
   </title>
   <id>8</id>
   <valueType>

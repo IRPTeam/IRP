@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Рачет себестоимости</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Maliyet hesaplama</value>
+ </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>
  <content>Document.AdditionalCostAllocation</content>

@@ -17,6 +17,10 @@
   <key>ru</key>
   <value>R8013 Остатки партий товаров принятых на комиссию</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R8013 Konsinye malzeme partileri</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <enableTotalsSplitting>true</enableTotalsSplitting>
@@ -161,6 +165,10 @@
   <synonym>
    <key>ru</key>
    <value>Источник происхождения</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Envanter menşei</value>
   </synonym>
   <type>
    <types>CatalogRef.SourceOfOrigins</types>

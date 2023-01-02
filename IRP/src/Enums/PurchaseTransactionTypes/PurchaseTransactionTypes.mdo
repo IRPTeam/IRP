@@ -14,6 +14,10 @@
   <key>ru</key>
   <value>Виды операций закупок</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Alım işlem tipleri</value>
+ </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="79252a78-c81a-41f3-ba14-d9dc4b8e0309">
@@ -40,6 +44,10 @@
   <synonym>
    <key>ru</key>
    <value>Приход товара от комитента</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Konsinyeye verenden gelen</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

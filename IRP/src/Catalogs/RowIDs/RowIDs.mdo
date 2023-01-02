@@ -803,6 +803,10 @@
    <key>ru</key>
    <value>Операция (Продажи)</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İşlem tipi (Satışlar)</value>
+  </synonym>
   <type>
    <types>EnumRef.SalesTransactionTypes</types>
   </type>
@@ -821,6 +825,10 @@
   <synonym>
    <key>ru</key>
    <value>Операция (Закупки)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İşlem tipi (Alım)</value>
   </synonym>
   <type>
    <types>EnumRef.PurchaseTransactionTypes</types>
@@ -841,6 +849,10 @@
    <key>ru</key>
    <value>Операция (Возврат от покупателя)</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İşlem tipi (Satış iade)</value>
+  </synonym>
   <type>
    <types>EnumRef.SalesReturnTransactionTypes</types>
   </type>
@@ -859,6 +871,10 @@
   <synonym>
    <key>ru</key>
    <value>Операция (Возврат поступления)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İşlem tipi (Alım iade)</value>
   </synonym>
   <type>
    <types>EnumRef.PurchaseReturnTransactionTypes</types>

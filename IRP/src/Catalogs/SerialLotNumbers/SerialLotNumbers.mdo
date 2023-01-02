@@ -276,6 +276,10 @@
    <key>ru</key>
    <value>Вид учета партий товаров</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Parti bakiye detayları</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>

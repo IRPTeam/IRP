@@ -164,6 +164,10 @@
    <key>ru</key>
    <value>Использовать внесения и изъятия из кассы</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Perakende kasa girişi/kasa çıkışı fişleri kullan</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>

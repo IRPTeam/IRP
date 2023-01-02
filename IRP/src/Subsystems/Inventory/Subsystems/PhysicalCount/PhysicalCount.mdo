@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Инвентаризация</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Depo sayım fişi</value>
+ </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>
  <content>Document.PhysicalCountByLocation</content>

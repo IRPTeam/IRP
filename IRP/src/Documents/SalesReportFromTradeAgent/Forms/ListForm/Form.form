@@ -809,6 +809,10 @@ GROUP BY
    <key>ru</key>
    <value>Создать на основании отчета о продажа</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Satışlara göre oluştur</value>
+  </title>
   <id>1</id>
   <use>
    <common>true</common>

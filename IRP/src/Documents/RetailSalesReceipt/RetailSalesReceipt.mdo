@@ -502,6 +502,10 @@
    <key>en</key>
    <value>Payment method</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид оплаты</value>
+  </synonym>
   <type>
    <types>EnumRef.ReceiptPaymentMethods</types>
   </type>
@@ -1070,6 +1074,10 @@
    <synonym>
     <key>ru</key>
     <value>Происхождение товара</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Envanter menşei</value>
    </synonym>
    <type>
     <types>EnumRef.InventoryOrigingTypes</types>
@@ -2437,6 +2445,10 @@
    <key>ru</key>
    <value>Партии комитента</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Konsinye partileri</value>
+  </synonym>
   <attributes uuid="4ec573ef-6b75-4dfc-90c2-6e4783fc5433">
    <name>Key</name>
    <synonym>
@@ -2512,6 +2524,10 @@
    <synonym>
     <key>ru</key>
     <value>Источник происхождения</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Envanter menşei</value>
    </synonym>
    <type>
     <types>CatalogRef.SourceOfOrigins</types>
@@ -2603,6 +2619,10 @@
    <key>ru</key>
    <value>Источники происхождения</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Envanter menşeileri</value>
+  </synonym>
   <attributes uuid="2a0ba40f-480c-4502-bdba-7ee64b68a438">
    <name>Key</name>
    <synonym>
@@ -2656,6 +2676,10 @@
    <synonym>
     <key>ru</key>
     <value>Источник происхождения</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Envanter menşei</value>
    </synonym>
    <type>
     <types>CatalogRef.SourceOfOrigins</types>

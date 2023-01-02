@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Документ отчет от комиссионера о продажах сервер</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak konsiyeye alandan satış raporu sunucu</value>
+ </synonym>
  <server>true</server>
  <serverCall>true</serverCall>
 </mdclass:CommonModule>

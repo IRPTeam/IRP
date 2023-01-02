@@ -3792,6 +3792,10 @@
     <key>ru</key>
     <value>Источник происхождения</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Envanter menşei</value>
+   </title>
    <extendedTooltip>
     <name>GroupSourceOfOriginExtendedTooltip</name>
     <id>1013</id>
@@ -4455,6 +4459,10 @@
     <title>
      <key>ru</key>
      <value>Источники происхождения</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Envanter menşeileri</value>
     </title>
     <id>176</id>
     <valueType>

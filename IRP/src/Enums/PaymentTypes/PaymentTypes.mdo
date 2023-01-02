@@ -71,12 +71,24 @@
    <key>en</key>
    <value>Payment agent</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Платежный агент</value>
+  </synonym>
  </enumValues>
  <enumValues uuid="5537df59-4c8e-4e42-8a88-45e4655cb043">
   <name>Advance</name>
   <synonym>
    <key>en</key>
    <value>Advance</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Авансы</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Avans</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

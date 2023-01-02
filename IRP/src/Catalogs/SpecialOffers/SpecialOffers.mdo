@@ -421,6 +421,14 @@
    <key>en</key>
    <value>Sequential calculation for each row in document</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Последовательный расчет для каждой строки в документе</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evraktaki tüm satırlar için sıralı hesaplama</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>

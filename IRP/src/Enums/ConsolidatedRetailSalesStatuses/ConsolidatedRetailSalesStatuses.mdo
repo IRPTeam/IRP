@@ -71,5 +71,9 @@
    <key>en</key>
    <value>New</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Новый</value>
+  </synonym>
  </enumValues>
 </mdclass:Enum>

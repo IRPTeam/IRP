@@ -199,6 +199,10 @@
    <key>ru</key>
    <value>Пользователь подтвердил разницу в остатках</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kullanıcı bakiyelerdeki farkını onayladı</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>
@@ -217,6 +221,10 @@
   <synonym>
    <key>ru</key>
    <value>Пользователь подтвердил разницу при проверке</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kullanıcı çıkışta farkları onayladı</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -237,6 +245,10 @@
    <key>ru</key>
    <value>Пользователь подтвердивший разницу с платежным терминалом</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kullanıcı banka pos terminal ile farkını onayladı</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>
@@ -255,6 +267,10 @@
   <synonym>
    <key>ru</key>
    <value>Конечный остаток</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dönem sonu bakiye</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -275,6 +291,10 @@
    <key>ru</key>
    <value>Физический остаток</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Gerçek bakiyeler</value>
+  </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
   </type>
@@ -293,6 +313,10 @@
   <synonym>
    <key>ru</key>
    <value>Внесение</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Para girişi</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -313,6 +337,10 @@
    <key>ru</key>
    <value>Физическое внесение</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Gerçek nakit girişi</value>
+  </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
   </type>
@@ -331,6 +359,10 @@
   <synonym>
    <key>ru</key>
    <value>Изъятие</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nakit çıkışı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -351,6 +383,10 @@
    <key>ru</key>
    <value>Физическая сумма изъятия</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Gerçek nakit çıkışı</value>
+  </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
   </type>
@@ -366,6 +402,14 @@
    <key>en</key>
    <value>Fiscal printer</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Фискальный принтер</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Yazar kasa</value>
+  </synonym>
   <type>
    <types>CatalogRef.Hardware</types>
   </type>
@@ -380,6 +424,10 @@
   <synonym>
    <key>en</key>
    <value>Shift number</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Номер смены</value>
   </synonym>
   <type>
    <types>String</types>
@@ -537,6 +585,10 @@
     <key>ru</key>
     <value>Это возврат</value>
    </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Bu iade</value>
+   </synonym>
    <type>
     <types>Boolean</types>
    </type>
@@ -620,6 +672,10 @@
    <synonym>
     <key>ru</key>
     <value>Физическая сумма</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Gerçek tutar</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>

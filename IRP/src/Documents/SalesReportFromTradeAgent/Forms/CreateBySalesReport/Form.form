@@ -683,6 +683,10 @@
    <key>ru</key>
    <value>Список отчета по продажам</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Satışlar listesi</value>
+  </title>
   <id>1</id>
   <valueType>
    <types>ValueTable</types>
@@ -702,6 +706,10 @@
    <title>
     <key>ru</key>
     <value>Ссылка на отчет по продажам</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Satışlar ref</value>
    </title>
    <id>2</id>
    <valueType>

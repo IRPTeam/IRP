@@ -2789,6 +2789,10 @@
     <key>ru</key>
     <value>Источник происхождения</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Envanter menşei</value>
+   </title>
    <id>40</id>
    <valueType>
     <types>CatalogRef.SourceOfOrigins</types>

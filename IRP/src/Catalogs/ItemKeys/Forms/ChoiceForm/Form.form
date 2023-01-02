@@ -865,6 +865,14 @@ FROM
        <key>en</key>
        <value>Item key</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Характеристика</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Varyant</value>
+      </content>
      </localValue>
     </title>
    </fields>

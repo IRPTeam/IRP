@@ -4084,6 +4084,10 @@
    <key>en</key>
    <value>Count rows</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Количество строк</value>
+  </title>
   <id>6</id>
   <valueType>
    <types>DynamicList</types>
@@ -4124,6 +4128,10 @@ GROUP BY
        <key>en</key>
        <value>Count rows</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Количество строк</value>
+      </content>
      </localValue>
     </title>
    </fields>
@@ -4135,6 +4143,14 @@ GROUP BY
       <content>
        <key>en</key>
        <value>Phys. count</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Фактическое количество</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Sayım adedi</value>
       </content>
      </localValue>
     </title>
@@ -4214,6 +4230,10 @@ GROUP BY
       <content>
        <key>en</key>
        <value>Physical inventory ref</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Ссылка инвентаризация товаров</value>
       </content>
      </localValue>
     </title>

@@ -5,6 +5,14 @@
   <key>en</key>
   <value>Equipment fiscal printer</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Торговое оборудование фискальный принтер</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Donanım yazar kasa</value>
+ </synonym>
  <server>true</server>
  <serverCall>true</serverCall>
 </mdclass:CommonModule>

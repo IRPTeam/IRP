@@ -146,5 +146,9 @@
    <key>en</key>
    <value>Customer advance</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Аванс покупателя</value>
+  </synonym>
  </enumValues>
 </mdclass:Enum>

@@ -14,6 +14,10 @@
   <key>ru</key>
   <value>Виды вознаграждения комиссионера</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Konsinye alan komisyon tipleri</value>
+ </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="249cfbb3-f0b7-4cb8-98b4-d8abae4f8352">
@@ -40,6 +44,10 @@
   <synonym>
    <key>ru</key>
    <value>Разница с ценами комитента</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Konsinye fiyat farkı</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

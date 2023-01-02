@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Источник происхождения клиент</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Envanter menşeisi client</value>
+ </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

@@ -14,6 +14,10 @@
   <key>ru</key>
   <value>Вид операций возвратов от покупателей</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Satış iade işlem tipleri</value>
+ </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="07331f84-4b8f-4397-aafb-ed00109a3667">
@@ -40,6 +44,10 @@
   <synonym>
    <key>ru</key>
    <value>Возврат от комиссионера</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Konsinyeye alandan iade</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

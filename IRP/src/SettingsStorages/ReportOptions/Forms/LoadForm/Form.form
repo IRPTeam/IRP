@@ -1102,6 +1102,14 @@ WHERE
        <key>en</key>
        <value>Is current option</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Это текущая настройка</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Geçerli ayar</value>
+      </content>
      </localValue>
     </title>
    </fields>
@@ -1113,6 +1121,14 @@ WHERE
       <content>
        <key>en</key>
        <value>Option key</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Ключ настройки</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Ayar anahtarı</value>
       </content>
      </localValue>
     </title>
@@ -1126,6 +1142,10 @@ WHERE
        <key>en</key>
        <value>Shared</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Общий</value>
+      </content>
      </localValue>
     </title>
    </fields>
@@ -1137,6 +1157,14 @@ WHERE
       <content>
        <key>en</key>
        <value>Report option</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Вариант отчета</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Rapor seçeneği</value>
       </content>
      </localValue>
     </title>
@@ -1177,6 +1205,14 @@ WHERE
        <key>en</key>
        <value>Object key</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Ключ объекта</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Nesne anahtarı</value>
+      </content>
      </localValue>
     </title>
     <valueType>
@@ -1195,6 +1231,14 @@ WHERE
        <key>en</key>
        <value>Author</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Автор</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Kayıt oluşturan</value>
+      </content>
      </localValue>
     </title>
     <valueType>
@@ -1209,6 +1253,14 @@ WHERE
       <content>
        <key>en</key>
        <value>Current settings key</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Ключ текущих настроек</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Mevcut ayarlar anahtarı</value>
       </content>
      </localValue>
     </title>

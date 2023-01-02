@@ -13,6 +13,14 @@
   <key>en</key>
   <value>R2023 Advances from retail customers</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R2023 Авансы полученные (от розничных покупателей)</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R2023 Perakende müşteri avansları</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <enableTotalsSplitting>true</enableTotalsSplitting>
@@ -21,6 +29,14 @@
   <synonym>
    <key>en</key>
    <value>Amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма оплаты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -34,6 +50,14 @@
   <synonym>
    <key>en</key>
    <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -49,6 +73,14 @@
    <key>en</key>
    <value>Branch</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
   </type>
@@ -62,6 +94,14 @@
   <synonym>
    <key>en</key>
    <value>Retail customer</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Розничный покупатель</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Perakende müşteri</value>
   </synonym>
   <type>
    <types>CatalogRef.RetailCustomers</types>

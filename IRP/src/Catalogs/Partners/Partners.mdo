@@ -269,6 +269,10 @@
    <key>ru</key>
    <value>Комитент</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Konsiyeye veren</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>
@@ -287,6 +291,10 @@
   <synonym>
    <key>ru</key>
    <value>Комиссионер</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ödeme aracı kurum</value>
   </synonym>
   <type>
    <types>Boolean</types>

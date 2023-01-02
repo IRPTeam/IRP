@@ -2369,6 +2369,10 @@
           <key>ru</key>
           <value>Группа команд сеанса</value>
          </title>
+         <title>
+          <key>tr</key>
+          <value>Seans komutlar grubu</value>
+         </title>
          <extendedTooltip>
           <name>GroupSessionComandsExtendedTooltip</name>
           <id>1133</id>
@@ -2462,6 +2466,10 @@
           <key>ru</key>
           <value>Группа кассовых команд</value>
          </title>
+         <title>
+          <key>tr</key>
+          <value>Grup kasa komutları</value>
+         </title>
          <extendedTooltip>
           <name>GroupCashCommandsExtendedTooltip</name>
           <id>1135</id>
@@ -2521,6 +2529,14 @@
           <key>en</key>
           <value>Reports</value>
          </title>
+         <title>
+          <key>ru</key>
+          <value>Отчеты</value>
+         </title>
+         <title>
+          <key>tr</key>
+          <value>Raporlar</value>
+         </title>
          <extendedTooltip>
           <name>GroupReportsExtendedTooltip</name>
           <id>1147</id>
@@ -2550,6 +2566,10 @@
         <title>
          <key>ru</key>
          <value>Подменю общих команд</value>
+        </title>
+        <title>
+         <key>tr</key>
+         <value>Genel komutlar alt menüsü</value>
         </title>
         <width>1</width>
         <extendedTooltip>
@@ -2587,6 +2607,10 @@
        <title>
         <key>ru</key>
         <value>Группа общих команд</value>
+       </title>
+       <title>
+        <key>tr</key>
+        <value>Genel komutlar grubu</value>
        </title>
        <horizontalStretch>false</horizontalStretch>
        <groupHorizontalAlign>Right</groupHorizontalAlign>
@@ -4429,6 +4453,10 @@
              <key>en</key>
              <value>Submenu payments</value>
             </title>
+            <title>
+             <key>ru</key>
+             <value>Подменю оплаты</value>
+            </title>
             <height>3</height>
             <extendedTooltip>
              <name>SubmenuPaymentsExtendedTooltip</name>
@@ -4466,6 +4494,14 @@
             <key>en</key>
             <value>Payments</value>
            </title>
+           <title>
+            <key>ru</key>
+            <value>Платежи</value>
+           </title>
+           <title>
+            <key>tr</key>
+            <value>Ödemeler</value>
+           </title>
            <width>3</width>
            <height>2</height>
            <horizontalStretch>false</horizontalStretch>
@@ -4499,6 +4535,10 @@
           <title>
            <key>en</key>
            <value>Payment buttons</value>
+          </title>
+          <title>
+           <key>ru</key>
+           <value>Кнопки оплат</value>
           </title>
           <extendedTooltip>
            <name>GroupPaymentButtonsExtendedTooltip</name>
@@ -5858,6 +5898,10 @@
      <key>ru</key>
      <value>Источники происхождения</value>
     </title>
+    <title>
+     <key>tr</key>
+     <value>Envanter menşeileri</value>
+    </title>
     <id>186</id>
     <valueType>
      <types>ValueList</types>
@@ -6732,6 +6776,10 @@
    <key>ru</key>
    <value>Закрытие смены HTML</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>HTML vardya statüsü</value>
+  </title>
   <id>184</id>
   <valueType>
    <types>FormattedString</types>
@@ -7386,6 +7434,10 @@ elemanı seç</value>
    <key>ru</key>
    <value>Обновить перемещение денег</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Para transfer değişitir</value>
+  </title>
   <id>27</id>
   <use>
    <common>true</common>
@@ -7439,6 +7491,10 @@ elemanı seç</value>
    <key>ru</key>
    <value>Вернуться на начальную страницу</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Ana sayfaya dön</value>
+  </title>
   <id>29</id>
   <use>
    <common>true</common>
@@ -7459,6 +7515,14 @@ elemanı seç</value>
   <title>
    <key>en</key>
    <value>Advance</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Авансы</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Avans</value>
   </title>
   <id>30</id>
   <use>

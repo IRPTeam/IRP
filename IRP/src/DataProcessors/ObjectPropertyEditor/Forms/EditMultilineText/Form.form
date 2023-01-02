@@ -137,6 +137,14 @@
    <key>en</key>
    <value>Text</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Текст</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Metin</value>
+  </title>
   <id>1</id>
   <valueType>
    <types>TextDocument</types>
@@ -153,6 +161,14 @@
   <title>
    <key>en</key>
    <value>Item name</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Наименование номенклатуры</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Malzeme tanımı</value>
   </title>
   <id>2</id>
   <valueType>
@@ -172,6 +188,14 @@
    <key>en</key>
    <value>OK</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>ОК</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Tamam</value>
+  </title>
   <id>1</id>
   <use>
    <common>true</common>
@@ -188,6 +212,14 @@
   <title>
    <key>en</key>
    <value>Voice narrator</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Голосовая запись</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Ses anlatıcı</value>
   </title>
   <id>2</id>
   <use>

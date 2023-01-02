@@ -56,5 +56,13 @@
    <key>en</key>
    <value>Fiscal printer</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Фискальный принтер</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Yazar kasa</value>
+  </synonym>
  </enumValues>
 </mdclass:Enum>

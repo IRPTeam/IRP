@@ -478,6 +478,10 @@
    <key>ru</key>
    <value>Партия комитента</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Konsinye partisi</value>
+  </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>
   </type>
@@ -521,6 +525,10 @@
   <synonym>
    <key>ru</key>
    <value>Источник происхождения</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Envanter menşei</value>
   </synonym>
   <type>
    <types>CatalogRef.SourceOfOrigins</types>

@@ -252,6 +252,10 @@
         <key>en</key>
         <value>Full calculation</value>
        </presentation>
+       <presentation>
+        <key>ru</key>
+        <value>Полный расчет</value>
+       </presentation>
        <value xsi:type="core:ReferenceValue">
         <value>Enum.ReceiptPaymentMethods.EnumValue.FullCalculation</value>
        </value>
@@ -260,6 +264,10 @@
        <presentation>
         <key>en</key>
         <value>Partial prepayment</value>
+       </presentation>
+       <presentation>
+        <key>ru</key>
+        <value>Частичная предоплата</value>
        </presentation>
        <value xsi:type="core:ReferenceValue">
         <value>Enum.ReceiptPaymentMethods.EnumValue.PartialPrepayment</value>
@@ -270,6 +278,10 @@
         <key>en</key>
         <value>Full prepayment</value>
        </presentation>
+       <presentation>
+        <key>ru</key>
+        <value>Полная предоплата</value>
+       </presentation>
        <value xsi:type="core:ReferenceValue">
         <value>Enum.ReceiptPaymentMethods.EnumValue.FullPrepayment</value>
        </value>
@@ -278,6 +290,10 @@
        <presentation>
         <key>en</key>
         <value>Advance payment</value>
+       </presentation>
+       <presentation>
+        <key>ru</key>
+        <value>Предоплата</value>
        </presentation>
        <value xsi:type="core:ReferenceValue">
         <value>Enum.ReceiptPaymentMethods.EnumValue.AdvancePayment</value>
@@ -931,6 +947,14 @@
        <key>en</key>
        <value>Loyality points</value>
       </title>
+      <title>
+       <key>ru</key>
+       <value>Бонусные баллы</value>
+      </title>
+      <title>
+       <key>tr</key>
+       <value>Sadakat puanları</value>
+      </title>
       <visible>true</visible>
       <userVisible>
        <common>true</common>
@@ -1099,6 +1123,14 @@
       <key>en</key>
       <value>Top</value>
      </title>
+     <title>
+      <key>ru</key>
+      <value>Верх</value>
+     </title>
+     <title>
+      <key>tr</key>
+      <value>Üst</value>
+     </title>
      <extendedTooltip>
       <name>GroupTopExtendedTooltip</name>
       <id>188</id>
@@ -1135,6 +1167,14 @@
        <id>61</id>
        <title>
         <key>en</key>
+        <value>7</value>
+       </title>
+       <title>
+        <key>ru</key>
+        <value>7</value>
+       </title>
+       <title>
+        <key>tr</key>
         <value>7</value>
        </title>
        <visible>true</visible>
@@ -1178,6 +1218,14 @@
         <key>en</key>
         <value>4</value>
        </title>
+       <title>
+        <key>ru</key>
+        <value>4</value>
+       </title>
+       <title>
+        <key>tr</key>
+        <value>4</value>
+       </title>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>
@@ -1219,6 +1267,14 @@
         <key>en</key>
         <value>1</value>
        </title>
+       <title>
+        <key>ru</key>
+        <value>1</value>
+       </title>
+       <title>
+        <key>tr</key>
+        <value>1</value>
+       </title>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>
@@ -1258,6 +1314,14 @@
        <id>67</id>
        <title>
         <key>en</key>
+        <value>0</value>
+       </title>
+       <title>
+        <key>ru</key>
+        <value>0</value>
+       </title>
+       <title>
+        <key>tr</key>
         <value>0</value>
        </title>
        <visible>true</visible>
@@ -1303,6 +1367,10 @@
        <key>en</key>
        <value>Group one</value>
       </title>
+      <title>
+       <key>ru</key>
+       <value>Группа один</value>
+      </title>
       <extendedTooltip>
        <name>GroupOneExtendedTooltip</name>
        <id>58</id>
@@ -1336,6 +1404,14 @@
        <id>73</id>
        <title>
         <key>en</key>
+        <value>8</value>
+       </title>
+       <title>
+        <key>ru</key>
+        <value>8</value>
+       </title>
+       <title>
+        <key>tr</key>
         <value>8</value>
        </title>
        <visible>true</visible>
@@ -1379,6 +1455,14 @@
         <key>en</key>
         <value>5</value>
        </title>
+       <title>
+        <key>ru</key>
+        <value>5</value>
+       </title>
+       <title>
+        <key>tr</key>
+        <value>5</value>
+       </title>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>
@@ -1420,6 +1504,14 @@
         <key>en</key>
         <value>2</value>
        </title>
+       <title>
+        <key>ru</key>
+        <value>2</value>
+       </title>
+       <title>
+        <key>tr</key>
+        <value>2</value>
+       </title>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>
@@ -1459,6 +1551,14 @@
        <id>91</id>
        <title>
         <key>en</key>
+        <value>.</value>
+       </title>
+       <title>
+        <key>ru</key>
+        <value>.</value>
+       </title>
+       <title>
+        <key>tr</key>
         <value>.</value>
        </title>
        <visible>true</visible>
@@ -1507,6 +1607,10 @@
        <key>en</key>
        <value>Group two</value>
       </title>
+      <title>
+       <key>ru</key>
+       <value>Группа два</value>
+      </title>
       <extendedTooltip>
        <name>GroupTwoExtendedTooltip</name>
        <id>70</id>
@@ -1540,6 +1644,14 @@
        <id>85</id>
        <title>
         <key>en</key>
+        <value>9</value>
+       </title>
+       <title>
+        <key>ru</key>
+        <value>9</value>
+       </title>
+       <title>
+        <key>tr</key>
         <value>9</value>
        </title>
        <visible>true</visible>
@@ -1583,6 +1695,14 @@
         <key>en</key>
         <value>6</value>
        </title>
+       <title>
+        <key>ru</key>
+        <value>6</value>
+       </title>
+       <title>
+        <key>tr</key>
+        <value>6</value>
+       </title>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>
@@ -1624,6 +1744,14 @@
         <key>en</key>
         <value>3</value>
        </title>
+       <title>
+        <key>ru</key>
+        <value>3</value>
+       </title>
+       <title>
+        <key>tr</key>
+        <value>3</value>
+       </title>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>
@@ -1663,6 +1791,14 @@
        <id>79</id>
        <title>
         <key>en</key>
+        <value>C</value>
+       </title>
+       <title>
+        <key>ru</key>
+        <value>C</value>
+       </title>
+       <title>
+        <key>tr</key>
         <value>C</value>
        </title>
        <visible>true</visible>
@@ -1710,6 +1846,10 @@
       <title>
        <key>en</key>
        <value>Group three</value>
+      </title>
+      <title>
+       <key>ru</key>
+       <value>Дерево групп</value>
       </title>
       <extendedTooltip>
        <name>GroupThreeExtendedTooltip</name>
@@ -1783,6 +1923,14 @@
         <key>en</key>
         <value>Enter</value>
        </title>
+       <title>
+        <key>ru</key>
+        <value>Enter</value>
+       </title>
+       <title>
+        <key>tr</key>
+        <value>Giriş</value>
+       </title>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>
@@ -1828,6 +1976,10 @@
        <key>en</key>
        <value>Group enter</value>
       </title>
+      <title>
+       <key>ru</key>
+       <value>Группа ввод</value>
+      </title>
       <extendedTooltip>
        <name>GroupEnterExtendedTooltip</name>
        <id>135</id>
@@ -1862,9 +2014,21 @@
       <key>en</key>
       <value>Keyboard</value>
      </title>
+     <title>
+      <key>ru</key>
+      <value>Клавиатура</value>
+     </title>
      <toolTip>
       <key>en</key>
       <value>Digital keyboard</value>
+     </toolTip>
+     <toolTip>
+      <key>ru</key>
+      <value>Цифровая клавиатура</value>
+     </toolTip>
+     <toolTip>
+      <key>tr</key>
+      <value>Dijital klavye</value>
      </toolTip>
      <extendedTooltip>
       <name>KeyboardExtendedTooltip</name>
@@ -2773,6 +2937,10 @@
    <key>en</key>
    <value>Payment agent types</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Виды платежных агентов</value>
+  </title>
   <id>30</id>
   <valueType>
    <types>ValueTable</types>
@@ -2788,6 +2956,14 @@
    <title>
     <key>en</key>
     <value>Payment type</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Вид оплаты</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Ödeme tipi</value>
    </title>
    <id>31</id>
    <valueType>
@@ -2807,6 +2983,10 @@
    <key>en</key>
    <value>Is advance</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Это аванс</value>
+  </title>
   <id>32</id>
   <valueType>
    <types>Boolean</types>
@@ -2823,6 +3003,10 @@
   <title>
    <key>en</key>
    <value>Receipt payment method</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Вид оплаты чека</value>
   </title>
   <id>33</id>
   <valueType>
@@ -3316,6 +3500,10 @@
   <title>
    <key>en</key>
    <value>P\A</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Плат. агент</value>
   </title>
   <id>22</id>
   <use>

@@ -460,6 +460,14 @@ FROM
        <key>en</key>
        <value>Description</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Наименование</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Tanım</value>
+      </content>
      </localValue>
     </title>
    </fields>

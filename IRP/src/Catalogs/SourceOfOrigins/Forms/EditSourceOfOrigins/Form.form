@@ -631,6 +631,10 @@
    <key>ru</key>
    <value>Источники происхождения</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Envanter menşeileri</value>
+  </title>
   <id>1</id>
   <valueType>
    <types>ValueTable</types>
@@ -700,6 +704,10 @@
    <title>
     <key>ru</key>
     <value>Источник происхождения</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Envanter menşei</value>
    </title>
    <id>4</id>
    <valueType>

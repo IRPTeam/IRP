@@ -710,6 +710,10 @@ GROUP BY
        <key>en</key>
        <value>Store outgoing</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Склад отправитель</value>
+      </content>
      </localValue>
     </title>
    </fields>

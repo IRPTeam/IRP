@@ -107,6 +107,10 @@
    <key>ru</key>
    <value>Источник происхождения</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Envanter menşei</value>
+  </synonym>
   <type>
    <types>CatalogRef.SourceOfOrigins</types>
   </type>

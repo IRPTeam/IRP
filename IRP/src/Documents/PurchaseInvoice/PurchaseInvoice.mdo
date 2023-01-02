@@ -2475,6 +2475,10 @@
    <key>ru</key>
    <value>Источники происхождения</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Envanter menşeileri</value>
+  </synonym>
   <attributes uuid="48a88cf5-8631-4e5b-88ca-ae1de8830aa7">
    <name>Key</name>
    <synonym>
@@ -2528,6 +2532,10 @@
    <synonym>
     <key>ru</key>
     <value>Источник происхождения</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Envanter menşei</value>
    </synonym>
    <type>
     <types>CatalogRef.SourceOfOrigins</types>

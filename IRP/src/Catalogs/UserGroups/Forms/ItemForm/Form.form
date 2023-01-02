@@ -550,6 +550,14 @@ WHERE
        <key>en</key>
        <value>Users login</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Идентификация пользователей</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Kullanıcılar kimlik doğrulaması</value>
+      </content>
      </localValue>
     </title>
    </fields>
@@ -561,6 +569,14 @@ WHERE
       <content>
        <key>en</key>
        <value>Users description</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Наименования пользователя</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Kullanıcı açıklamaları</value>
       </content>
      </localValue>
     </title>

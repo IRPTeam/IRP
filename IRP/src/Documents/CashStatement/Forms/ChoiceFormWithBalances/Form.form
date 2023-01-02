@@ -874,6 +874,14 @@ GROUP BY
        <key>en</key>
        <value>Amount</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Сумма оплаты</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Tutar</value>
+      </content>
      </localValue>
     </title>
    </fields>
@@ -885,6 +893,10 @@ GROUP BY
       <content>
        <key>en</key>
        <value>Amount Balance</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Сумма остатка</value>
       </content>
      </localValue>
     </title>
@@ -898,6 +910,10 @@ GROUP BY
        <key>en</key>
        <value>Commission Balance</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Остатки комиссии</value>
+      </content>
      </localValue>
     </title>
    </fields>
@@ -909,6 +925,14 @@ GROUP BY
       <content>
        <key>en</key>
        <value>Commission</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Сумма комиссии</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Komisyon</value>
       </content>
      </localValue>
     </title>
@@ -1037,6 +1061,14 @@ GROUP BY
        <key>en</key>
        <value>Period</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Период</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Dönem</value>
+      </content>
      </localValue>
     </title>
     <valueType>
@@ -1051,6 +1083,14 @@ GROUP BY
       <content>
        <key>en</key>
        <value>Company</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Организация</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Şirket</value>
       </content>
      </localValue>
     </title>
@@ -1067,6 +1107,14 @@ GROUP BY
        <key>en</key>
        <value>Branch</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Структурное подразделение</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Şube</value>
+      </content>
      </localValue>
     </title>
     <valueType>
@@ -1081,6 +1129,14 @@ GROUP BY
       <content>
        <key>en</key>
        <value>Account</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Касса/банк</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Hesap</value>
       </content>
      </localValue>
     </title>

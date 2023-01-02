@@ -320,9 +320,15 @@ Function Strings(Lang) Export
 		|ru='У драйвера оборудования %1 неправильный AddIn ID %2.';
 		|tr='Donanım %1 sürücüsü yanlış AddIn ID %2 bilgisine sahiptir.'", Lang));
 	
-	Strings.Insert("EqFP_ShiftAlreadyOpened", NStr("en='Shift already opened.'", Lang));
-	Strings.Insert("EqFP_ShiftIsNotOpened", NStr("en='Shift is not opened.'", Lang));
-	Strings.Insert("EqFP_ShiftAlreadyClosed", NStr("en='Shift already closed.'", Lang));
+	Strings.Insert("EqFP_ShiftAlreadyOpened", NStr("en='Shift already opened.';
+		|ru='Смена уже открыта.';
+		|tr='Vardya artık açılmış.'", Lang));
+	Strings.Insert("EqFP_ShiftIsNotOpened", NStr("en='Shift is not opened.';
+		|ru='Смена не открыта.';
+		|tr='Vardya açılmamıştı.'", Lang));
+	Strings.Insert("EqFP_ShiftAlreadyClosed", NStr("en='Shift already closed.';
+		|ru='Смена уже закрыта.';
+		|tr='Vardya kapanmıştı.'", Lang));
 	
 #EndRegion
 
@@ -1028,12 +1034,17 @@ Function Strings(Lang) Export
 		|ru='Ошибка кода Выполнить';
 		|tr='EVAL kod hatası'", Lang) + Chars.LF);
 	Strings.Insert("Error_120", NStr("en='Consignor batch shortage Item key: %1 Store: %2 Required:%3 Remaining:%4 Lack:%5';
-		|ru='Нехватка партии комитента, номенклатура: %1, склад: %2. Требуется:%3 Остаток:%4 Не хватает:%5'", Lang) + Chars.LF);
+		|ru='Нехватка партии комитента, номенклатура: %1, склад: %2. Требуется:%3 Остаток:%4 Не хватает:%5';
+		|tr='Konsinye parti eksiği, Varyant: %1 Depo: %2 Gerekiyor:%3 Kalan:%4 Eksik:%5'", Lang) + Chars.LF);
 	Strings.Insert("Error_121", NStr("en='Goods received from consignor cannot be shipped to trade agent';
-		|ru='Товары полученные от комитента не могут быть отправлены комиссионеру'", Lang) + Chars.LF);
+		|ru='Товары полученные от комитента не могут быть отправлены комиссионеру';
+		|tr='Konsinye olarak alınan mallar, konsinye olarak verilemez'", Lang) + Chars.LF);
 	Strings.Insert("Error_122", NStr("en='Error. Find recursive basis by RowID: %1. Basis list:';
-		|ru='Ошибка. Найдено замкнутый цикл по ID стрки: %1. Список документов основания:'", Lang) + Chars.LF);
-	Strings.Insert("Error_123", NStr("en='Error. Retail customer is not filled'", Lang) + Chars.LF);
+		|ru='Ошибка. Найдено замкнутый цикл по ID стрки: %1. Список документов основания:';
+		|tr='Hata. Satır ID kaynak evraklarında sonsuz döngü bulundu: %1. Kaynak evrak listesi:'", Lang) + Chars.LF);
+	Strings.Insert("Error_123", NStr("en='Error. Retail customer is not filled';
+		|ru='Ошибка. Не заполнен розничный покупатель';
+		|tr='Hata. Perakende müşteri boştur'", Lang) + Chars.LF);
 	
 	// manufacturing errors
 	Strings.Insert("MF_Error_001", NStr("en='Repetitive materials [%1]';
@@ -1069,11 +1080,14 @@ Function Strings(Lang) Export
 	
 	// Errors matching attributes of basis and related documents
 	Strings.Insert("Error_ChangeAttribute_RelatedDocsExist", NStr("en='Cannot change %1 if related documents exist';
-		|ru='Нельзя изменить %1 если есть связанные документы'", Lang));
+		|ru='Нельзя изменить %1 если есть связанные документы';
+		|tr='Bağlı evrak varsa, %1 değiştirilemez'", Lang));
 	Strings.Insert("Error_AttributeDontMatchValueFromBasisDoc", NStr("en='%1 must be [%2] (according to %3)';
-		|ru='%1 должен быть [%2] (по %3)'", Lang));
+		|ru='%1 должен быть [%2] (по %3)';
+		|tr='%1 olmalı [%2] (buna göre: %3)'", Lang));
 	Strings.Insert("Error_AttributeDontMatchValueFromBasisDoc_Row", NStr("en='%1 must be [%2] (according to %3) in row [%4]';
-		|ru='%1 должен быть [%2] (по %3) в строке [%4]'", Lang));
+		|ru='%1 должен быть [%2] (по %3) в строке [%4]';
+		|tr='%1 olmalı [%2] (buna göre %3) satırda [%4]'", Lang));
 	
 	// Store does not match company
 	Strings.Insert("Error_Store_Company", NStr("en='Store [%1] does not match company [%2]';
@@ -1240,7 +1254,8 @@ Function Strings(Lang) Export
 		|ru='Оплата (+)';
 		|tr='Ödeme (+)'", Lang));
 	Strings.Insert("InfoMessage_SessionIsClosed", NStr("en='Session is closed';
-		|ru='Сессия закрыта'", Lang));
+		|ru='Сессия закрыта';
+		|tr='Vardya kapandı'", Lang));
 	Strings.Insert("InfoMessage_Sales", NStr("en='Sales';
 		|ru='Продажа';
 		|tr='Satış'", Lang));

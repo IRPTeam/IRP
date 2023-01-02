@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Комиссионная торговля привелегированный</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Konsinye satış öncellikli</value>
+ </synonym>
  <server>true</server>
  <serverCall>true</serverCall>
  <privileged>true</privileged>

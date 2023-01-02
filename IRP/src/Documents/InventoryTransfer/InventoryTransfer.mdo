@@ -539,6 +539,10 @@
     <key>ru</key>
     <value>Происхождение товара</value>
    </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Envanter menşei</value>
+   </synonym>
    <type>
     <types>EnumRef.InventoryOrigingTypes</types>
    </type>
@@ -913,6 +917,10 @@
    <key>ru</key>
    <value>Источники происхождения</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Envanter menşeileri</value>
+  </synonym>
   <attributes uuid="ca64eeed-9dfc-49b4-a1c8-1f1bb6600e2b">
    <name>Key</name>
    <synonym>
@@ -966,6 +974,10 @@
    <synonym>
     <key>ru</key>
     <value>Источник происхождения</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Envanter menşei</value>
    </synonym>
    <type>
     <types>CatalogRef.SourceOfOrigins</types>

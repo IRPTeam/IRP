@@ -802,6 +802,10 @@
        <key>ru</key>
        <value>Это характеристика</value>
       </content>
+      <content>
+       <key>tr</key>
+       <value>Bu varyant</value>
+      </content>
      </localValue>
     </title>
     <valueType/>
@@ -818,6 +822,10 @@
       <content>
        <key>ru</key>
        <value>Ссылка характеристики</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Varyant ref</value>
       </content>
      </localValue>
     </title>
@@ -836,6 +844,10 @@
        <key>ru</key>
        <value>Это вид номенклатуры</value>
       </content>
+      <content>
+       <key>tr</key>
+       <value>Bu malzeme tipi</value>
+      </content>
      </localValue>
     </title>
     <valueType/>
@@ -853,6 +865,10 @@
        <key>ru</key>
        <value>Это номенклатура</value>
       </content>
+      <content>
+       <key>tr</key>
+       <value>Bu malzeme</value>
+      </content>
      </localValue>
     </title>
     <valueType/>
@@ -869,6 +885,10 @@
   <title>
    <key>ru</key>
    <value>Владелец источника происхождения</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Envanter menşei sahibi</value>
   </title>
   <id>2</id>
   <valueType>

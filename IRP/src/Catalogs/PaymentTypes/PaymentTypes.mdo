@@ -159,6 +159,14 @@
    <key>en</key>
    <value>Partner</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Партнер</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Cari hesap</value>
+  </synonym>
   <type>
    <types>CatalogRef.Partners</types>
   </type>
@@ -173,6 +181,14 @@
   <synonym>
    <key>en</key>
    <value>Legal name</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Контрагент</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura hesabı</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -189,6 +205,14 @@
    <key>en</key>
    <value>Agreement</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Соглашение</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sözleşme</value>
+  </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
   </type>
@@ -203,6 +227,14 @@
   <synonym>
    <key>en</key>
    <value>Legal name contract</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Договор контрагента</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura hesap kontratı</value>
   </synonym>
   <type>
    <types>CatalogRef.LegalNameContracts</types>
@@ -222,6 +254,14 @@
   <synonym>
    <key>en</key>
    <value>Branch</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>

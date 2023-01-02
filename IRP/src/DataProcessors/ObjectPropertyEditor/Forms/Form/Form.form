@@ -233,6 +233,14 @@
    <key>en</key>
    <value>Header group</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Группа шапки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Başlık grup</value>
+  </title>
   <extendedTooltip>
    <name>HeaderGroupExtendedTooltip</name>
    <id>21</id>
@@ -328,6 +336,14 @@
     <key>en</key>
     <value>*</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>*</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>*</value>
+   </title>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
@@ -380,6 +396,14 @@
    <title>
     <key>en</key>
     <value>Properties table group for fields</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Группа свойств таблицы для полей</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Alanlar için özellikler tablo grubu</value>
    </title>
    <extendedTooltip>
     <name>PropertiesFieldsExtendedTooltip</name>
@@ -702,6 +726,14 @@
    <key>en</key>
    <value>Properties table</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Таблица свойств</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Özellikler tablosu</value>
+  </title>
   <id>2</id>
   <valueType>
    <types>ValueTable</types>
@@ -743,6 +775,14 @@
     <key>en</key>
     <value>Is modified</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Изменен</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Değiştirildi</value>
+   </title>
    <id>4</id>
    <valueType>
     <types>Boolean</types>
@@ -760,6 +800,14 @@
   <title>
    <key>en</key>
    <value>Object type</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Тип объекта</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Obje tipi</value>
   </title>
   <id>5</id>
   <valueType/>
@@ -802,6 +850,14 @@
    <key>en</key>
    <value>Form data cash</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Кеш данных формы</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Form veri cache</value>
+  </title>
   <id>7</id>
   <valueType/>
   <view>
@@ -816,6 +872,14 @@
   <title>
    <key>en</key>
    <value>Data settings composer</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Компоновщик настроек данных</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Veri inşa edilme şeması</value>
   </title>
   <id>8</id>
   <valueType>
@@ -892,6 +956,14 @@
    <key>en</key>
    <value>Delete current value</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Удалить текущее значение</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Aktif değeri kaldır</value>
+  </title>
   <id>4</id>
   <use>
    <common>true</common>
@@ -913,6 +985,14 @@
    <key>en</key>
    <value>Copy this value to empty cells</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Скопировать значение в пустые клетки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Bu değeri boş hücrelere yapıştır</value>
+  </title>
   <id>5</id>
   <use>
    <common>true</common>
@@ -933,6 +1013,14 @@
   <title>
    <key>en</key>
    <value>Set this value to all cells</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Установить текущее значение для всех клеток</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Tüm hücrelere aynı değeri yapıştır</value>
   </title>
   <id>6</id>
   <use>

@@ -14,6 +14,10 @@
   <key>en</key>
   <value>Document fiscal status</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Фискальный статус документа</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -22,6 +26,14 @@
   <synonym>
    <key>en</key>
    <value>Status</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Статус</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Statü</value>
   </synonym>
   <type>
    <types>EnumRef.DocumentFiscalStatuses</types>
@@ -39,6 +51,10 @@
    <key>en</key>
    <value>Fiscal response</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Фискальный ответ</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers/>
@@ -54,6 +70,10 @@
   <synonym>
    <key>en</key>
    <value>Data presentation</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Представление данных</value>
   </synonym>
   <type>
    <types>String</types>
@@ -72,6 +92,14 @@
   <synonym>
    <key>en</key>
    <value>Document</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Документ</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak</value>
   </synonym>
   <type>
    <types>String</types>

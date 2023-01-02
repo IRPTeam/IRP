@@ -109,6 +109,10 @@
    <key>ru</key>
    <value>Группа кодов</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Kod grubu</value>
+  </title>
   <extendedTooltip>
    <name>GroupCodeExtendedTooltip</name>
    <id>52</id>

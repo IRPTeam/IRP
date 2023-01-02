@@ -17,6 +17,10 @@
   <key>ru</key>
   <value>R8011 Серии комиссионера</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R8011 Konsinyeye alan seri lot numaraları</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <enableTotalsSplitting>true</enableTotalsSplitting>

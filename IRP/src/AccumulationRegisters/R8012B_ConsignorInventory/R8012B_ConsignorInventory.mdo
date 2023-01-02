@@ -17,6 +17,10 @@
   <key>ru</key>
   <value>R8012 Товара полученные на комиссию</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R8012 Konsinye stokları</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <enableTotalsSplitting>true</enableTotalsSplitting>

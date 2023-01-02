@@ -17,6 +17,10 @@
   <key>ru</key>
   <value>R8010 Товары отданные на комиссию</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R8010 Konsinyeye verilen stoklar</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <enableTotalsSplitting>true</enableTotalsSplitting>

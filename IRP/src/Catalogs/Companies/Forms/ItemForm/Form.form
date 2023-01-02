@@ -2068,6 +2068,10 @@
     <key>ru</key>
     <value>Комиссионная торговля</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Konsinye satış</value>
+   </title>
    <extendedTooltip>
     <name>GroupComissionTradingExtendedTooltip</name>
     <id>146</id>

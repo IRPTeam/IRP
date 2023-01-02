@@ -7921,6 +7921,10 @@
     <key>ru</key>
     <value>Отгрузка комиссионеру</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Konsiyeye alana sevkiyat</value>
+   </title>
    <extendedTooltip>
     <name>GroupShipmentToTradeAgentExtendedTooltip</name>
     <id>1178</id>
@@ -9047,6 +9051,10 @@
     <key>ru</key>
     <value>Приход товара от комитента</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Konsinyeye verenden gelen</value>
+   </title>
    <extendedTooltip>
     <name>GroupReceiptFromConsignorExtendedTooltip</name>
     <id>1180</id>
@@ -9924,6 +9932,10 @@
   <title>
    <key>ru</key>
    <value>Изменить валюты поступлений от комитента</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Konsinyeye verenden gelen dövizi değiştir</value>
   </title>
   <id>10</id>
   <use>

@@ -5825,6 +5825,10 @@
     <key>ru</key>
     <value>Источник происхождения</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Envanter menşei</value>
+   </title>
    <extendedTooltip>
     <name>GroupSourceOfOriginExtendedTooltip</name>
     <id>1409</id>
@@ -7213,6 +7217,10 @@
     <key>ru</key>
     <value>Партии комитента</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Konsinye partileri</value>
+   </title>
    <extendedTooltip>
     <name>GroupConsignorBatchesExtendedTooltip</name>
     <id>1373</id>
@@ -8221,6 +8229,10 @@
     <title>
      <key>ru</key>
      <value>Источники происхождения</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Envanter menşeileri</value>
     </title>
     <id>180</id>
     <valueType>

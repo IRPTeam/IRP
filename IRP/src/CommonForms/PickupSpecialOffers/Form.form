@@ -172,6 +172,14 @@
       <key>en</key>
       <value>%</value>
      </title>
+     <title>
+      <key>ru</key>
+      <value>%</value>
+     </title>
+     <title>
+      <key>tr</key>
+      <value>%</value>
+     </title>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -865,6 +873,14 @@
    <title>
     <key>en</key>
     <value>Is sequential</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Последовательно</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Sıralıdır</value>
    </title>
    <id>9</id>
    <valueType>

@@ -17,6 +17,10 @@
   <key>ru</key>
   <value>R8014 Продажи товаров принятых на комиссию</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R8014 Konsinye satışları</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -271,6 +275,10 @@
    <key>ru</key>
    <value>Источник происхождения</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Envanter menşei</value>
+  </synonym>
   <type>
    <types>CatalogRef.SourceOfOrigins</types>
   </type>
@@ -415,6 +423,10 @@
   <synonym>
    <key>ru</key>
    <value>Цена комитента</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Konsinye fiyatı</value>
   </synonym>
   <type>
    <types>DefinedType.typePrice</types>

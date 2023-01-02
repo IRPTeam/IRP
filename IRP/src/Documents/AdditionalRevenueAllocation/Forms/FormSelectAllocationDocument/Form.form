@@ -398,6 +398,14 @@ WHERE
        <key>en</key>
        <value>Basis</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Документ основания</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Kaynak evrak</value>
+      </content>
      </localValue>
     </title>
    </fields>
@@ -412,6 +420,14 @@ WHERE
       <content>
        <key>en</key>
        <value>Company</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Организация</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Şirket</value>
       </content>
      </localValue>
     </title>

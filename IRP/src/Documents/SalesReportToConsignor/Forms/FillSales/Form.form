@@ -1423,6 +1423,10 @@
    <key>ru</key>
    <value>Период продаж</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Satış dönemi</value>
+  </title>
   <id>1</id>
   <valueType>
    <types>StandardPeriod</types>
@@ -1693,6 +1697,10 @@
     <key>ru</key>
     <value>Цена комитента</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Konsinye fiyatı</value>
+   </title>
    <id>12</id>
    <valueType>
     <types>DefinedType.typePrice</types>
@@ -1916,6 +1924,10 @@
     <key>ru</key>
     <value>Колонка сумм</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Tutar kolon</value>
+   </title>
    <id>21</id>
    <valueType>
     <types>Number</types>
@@ -1940,6 +1952,10 @@
     <key>ru</key>
     <value>Процент вознаграждения комиссионера</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Konsinye alan komisyon oranı</value>
+   </title>
    <id>22</id>
    <valueType>
     <types>DefinedType.typePercent</types>
@@ -1960,6 +1976,10 @@
    <title>
     <key>ru</key>
     <value>Источник происхождения</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Envanter menşei</value>
    </title>
    <id>23</id>
    <valueType>
@@ -1982,6 +2002,10 @@
   <title>
    <key>ru</key>
    <value>Заполнить продажи</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Satışları doldur</value>
   </title>
   <id>1</id>
   <use>

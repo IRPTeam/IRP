@@ -881,6 +881,10 @@
       <key>ru</key>
       <value>Период продаж</value>
      </title>
+     <title>
+      <key>tr</key>
+      <value>Satış dönemi</value>
+     </title>
      <extendedTooltip>
       <name>GroupSalesPeriodExtendedTooltip</name>
       <id>997</id>
@@ -3912,6 +3916,10 @@
     <key>ru</key>
     <value>Источник происхождения</value>
    </title>
+   <title>
+    <key>tr</key>
+    <value>Envanter menşei</value>
+   </title>
    <extendedTooltip>
     <name>GroupSourceOfOriginExtendedTooltip</name>
     <id>1019</id>
@@ -3991,6 +3999,10 @@
       <key>ru</key>
       <value>Сумма вознаграждения</value>
      </title>
+     <title>
+      <key>tr</key>
+      <value>Komisyon tutarı</value>
+     </title>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -4052,6 +4064,10 @@
     <title>
      <key>ru</key>
      <value>Группа сумма вознаграждения комиссионера</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Grup konsinye alan komisyon tutarı</value>
     </title>
     <extendedTooltip>
      <name>GroupTradeAgentFeeAmountExtendedTooltip</name>
@@ -4676,6 +4692,10 @@
      <key>ru</key>
      <value>Источники происхождения</value>
     </title>
+    <title>
+     <key>tr</key>
+     <value>Envanter menşeileri</value>
+    </title>
     <id>166</id>
     <valueType>
      <types>ValueList</types>
@@ -5267,6 +5287,10 @@
   <title>
    <key>ru</key>
    <value>Заполнить продажи</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Satışları doldur</value>
   </title>
   <id>17</id>
   <use>

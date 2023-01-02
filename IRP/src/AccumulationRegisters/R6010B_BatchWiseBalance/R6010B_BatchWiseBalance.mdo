@@ -179,6 +179,10 @@
    <key>ru</key>
    <value>Это продажа товаров комитента</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bu konsinye stokları</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>

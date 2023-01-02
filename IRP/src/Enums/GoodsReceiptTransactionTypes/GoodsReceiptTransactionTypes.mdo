@@ -75,6 +75,10 @@
    <key>ru</key>
    <value>Приход товара от комитента</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Konsinyeye verenden gelen</value>
+  </synonym>
  </enumValues>
  <enumValues uuid="30bdec1c-11d9-477d-9ad8-2b6ecad7de2c">
   <name>ReturnFromTradeAgent</name>
@@ -85,6 +89,10 @@
   <synonym>
    <key>ru</key>
    <value>Возврат от комиссионера</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Konsinyeye alandan iade</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

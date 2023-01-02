@@ -9,6 +9,10 @@
   <key>ru</key>
   <value>Использовать комиссионную торговлю</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kullanmak - Konsinye satışı</value>
+ </synonym>
  <location>Constant.UseCommissionTrading</location>
  <privilegedGetMode>true</privilegedGetMode>
  <content>Document.SalesReturnOrder.Attribute.TransactionType</content>

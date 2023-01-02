@@ -8,6 +8,10 @@
   <key>ru</key>
   <value>Создание перемещение денег</value>
  </title>
+ <title>
+  <key>tr</key>
+  <value>Para tranfseri oluştur</value>
+ </title>
  <items xsi:type="form:FormGroup">
   <name>GroupCompany</name>
   <id>10</id>
@@ -125,6 +129,10 @@
   <title>
    <key>ru</key>
    <value>Группа компаний</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Şirket grubu</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -679,6 +687,10 @@
    <key>ru</key>
    <value>Группа отправитель и получатель</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Gönderen ve alıcı grubu</value>
+  </title>
   <extendedTooltip>
    <name>GroupSenderReceiverExtendedTooltip</name>
    <id>13</id>
@@ -993,6 +1005,10 @@
    <key>ru</key>
    <value>Итого по платежному терминалу</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Banka POS'unda toplam</value>
+  </title>
   <id>9</id>
   <valueType>
    <types>DefinedType.typeAmount</types>
@@ -1087,6 +1103,10 @@
   <title>
    <key>ru</key>
    <value>Создать перемещение денег</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Para transfer oluştur</value>
   </title>
   <id>1</id>
   <use>

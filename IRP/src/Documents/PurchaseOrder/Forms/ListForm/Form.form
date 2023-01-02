@@ -990,6 +990,14 @@ GROUP BY
        <key>en</key>
        <value>Closed</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Закрытая</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Kapalı</value>
+      </content>
      </localValue>
     </title>
    </fields>
@@ -1001,6 +1009,14 @@ GROUP BY
       <content>
        <key>en</key>
        <value>Store</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Склад</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Depo</value>
       </content>
      </localValue>
     </title>

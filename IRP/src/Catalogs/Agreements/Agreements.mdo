@@ -629,6 +629,10 @@
    <key>ru</key>
    <value>Вид вознаграждения</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Komisyon tipi</value>
+  </synonym>
   <type>
    <types>EnumRef.TradeAgentFeeTypes</types>
   </type>
@@ -647,6 +651,10 @@
   <synonym>
    <key>ru</key>
    <value>Процент вознаграждения</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Komisyon oranı</value>
   </synonym>
   <type>
    <types>DefinedType.typePercent</types>
@@ -717,6 +725,10 @@
    <key>ru</key>
    <value>Центр прибыли/убытков</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kar/zarar merkezi</value>
+  </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
   </type>
@@ -735,6 +747,10 @@
   <synonym>
    <key>ru</key>
    <value>Статья доходов / расходов</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Gider / gelir tipi</value>
   </synonym>
   <type>
    <types>CatalogRef.ExpenseAndRevenueTypes</types>

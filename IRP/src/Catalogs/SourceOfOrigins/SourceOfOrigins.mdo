@@ -16,6 +16,10 @@
   <key>ru</key>
   <value>Источники происхождения</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Envanter menşeileri</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.SourceOfOrigins.StandardAttribute.Code</inputByString>
  <inputByString>Catalog.SourceOfOrigins.StandardAttribute.Description</inputByString>
@@ -30,6 +34,10 @@
   <synonym>
    <key>ru</key>
    <value>Источник происхождения</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Envanter menşei</value>
   </synonym>
   <fillChecking>ShowError</fillChecking>
   <fullTextSearch>Use</fullTextSearch>
@@ -71,6 +79,10 @@
   <key>ru</key>
   <value>Источник происхождения</value>
  </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Envanter menşei</value>
+ </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>12</codeLength>
@@ -95,6 +107,10 @@
    <key>ru</key>
    <value>Артикул покупателя</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Gümrük kodu</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers>
@@ -117,6 +133,10 @@
    <key>ru</key>
    <value>Номер ГТД</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Gümrük beyanname kodu</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers>
@@ -138,6 +158,10 @@
   <synonym>
    <key>ru</key>
    <value>Страна происхождения</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Menşei ülke</value>
   </synonym>
   <type>
    <types>CatalogRef.Countries</types>
@@ -183,6 +207,10 @@
   <synonym>
    <key>ru</key>
    <value>Вид учета партий товаров</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Parti bakiye detayları</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -368,6 +396,10 @@
   <synonym>
    <key>ru</key>
    <value>Изменить источник происхождения</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Envanter menşei değiştir</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

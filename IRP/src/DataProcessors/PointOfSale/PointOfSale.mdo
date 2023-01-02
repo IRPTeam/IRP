@@ -200,6 +200,10 @@
    <key>ru</key>
    <value>Закрытие смены</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vardya kapanışı</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
@@ -212,6 +216,10 @@
   <synonym>
    <key>ru</key>
    <value>Изъятие</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nakit çıkışı</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

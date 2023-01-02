@@ -506,6 +506,10 @@
    <key>ru</key>
    <value>Вид оплаты</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ödeme metodu</value>
+  </synonym>
   <type>
    <types>EnumRef.ReceiptPaymentMethods</types>
   </type>

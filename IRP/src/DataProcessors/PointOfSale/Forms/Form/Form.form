@@ -4457,6 +4457,10 @@
              <key>ru</key>
              <value>Подменю оплаты</value>
             </title>
+            <title>
+             <key>tr</key>
+             <value>Ödemeler alt menüsü</value>
+            </title>
             <height>3</height>
             <extendedTooltip>
              <name>SubmenuPaymentsExtendedTooltip</name>
@@ -4539,6 +4543,10 @@
           <title>
            <key>ru</key>
            <value>Кнопки оплат</value>
+          </title>
+          <title>
+           <key>tr</key>
+           <value>Ödeme butonları</value>
           </title>
           <extendedTooltip>
            <name>GroupPaymentButtonsExtendedTooltip</name>

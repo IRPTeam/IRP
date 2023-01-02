@@ -150,5 +150,9 @@
    <key>ru</key>
    <value>Аванс покупателя</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Müşteri avansı</value>
+  </synonym>
  </enumValues>
 </mdclass:Enum>

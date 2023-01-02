@@ -429,6 +429,10 @@
    <key>ru</key>
    <value>Номер смены</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vardya numarası</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers>

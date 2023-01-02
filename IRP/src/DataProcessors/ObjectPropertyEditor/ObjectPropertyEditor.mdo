@@ -46,6 +46,10 @@
    <key>ru</key>
    <value>Редактировать многострочный текст</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çoklu satır metni değiştir</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>

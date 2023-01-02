@@ -714,6 +714,10 @@ GROUP BY
        <key>ru</key>
        <value>Склад отправитель</value>
       </content>
+      <content>
+       <key>tr</key>
+       <value>Çıkış depo</value>
+      </content>
      </localValue>
     </title>
    </fields>

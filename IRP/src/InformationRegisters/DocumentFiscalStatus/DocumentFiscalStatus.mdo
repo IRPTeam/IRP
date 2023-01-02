@@ -18,6 +18,10 @@
   <key>ru</key>
   <value>Фискальный статус документа</value>
  </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak fiscal statüsü</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -55,6 +59,10 @@
    <key>ru</key>
    <value>Фискальный ответ</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Yazak kasa cevabı</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers/>
@@ -74,6 +82,10 @@
   <synonym>
    <key>ru</key>
    <value>Представление данных</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Veri görüntüleme</value>
   </synonym>
   <type>
    <types>String</types>

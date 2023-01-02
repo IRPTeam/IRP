@@ -800,6 +800,10 @@ WHERE
        <key>ru</key>
        <value>Общий</value>
       </content>
+      <content>
+       <key>tr</key>
+       <value>Paylaşıldı</value>
+      </content>
      </localValue>
     </title>
    </fields>

@@ -4088,6 +4088,10 @@
    <key>ru</key>
    <value>Количество строк</value>
   </title>
+  <title>
+   <key>tr</key>
+   <value>Satır adedi</value>
+  </title>
   <id>6</id>
   <valueType>
    <types>DynamicList</types>
@@ -4131,6 +4135,10 @@ GROUP BY
       <content>
        <key>ru</key>
        <value>Количество строк</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Satır adedi</value>
       </content>
      </localValue>
     </title>
@@ -4234,6 +4242,10 @@ GROUP BY
       <content>
        <key>ru</key>
        <value>Ссылка инвентаризация товаров</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Depo sayım fişi ref</value>
       </content>
      </localValue>
     </title>

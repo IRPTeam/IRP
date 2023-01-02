@@ -898,6 +898,10 @@ GROUP BY
        <key>ru</key>
        <value>Сумма остатка</value>
       </content>
+      <content>
+       <key>tr</key>
+       <value>Tutar bakiyesi</value>
+      </content>
      </localValue>
     </title>
    </fields>
@@ -913,6 +917,10 @@ GROUP BY
       <content>
        <key>ru</key>
        <value>Остатки комиссии</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Komisyon bakiyesi</value>
       </content>
      </localValue>
     </title>

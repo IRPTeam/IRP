@@ -75,6 +75,10 @@
    <key>ru</key>
    <value>Платежный агент</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ödeme aracı kurum</value>
+  </synonym>
  </enumValues>
  <enumValues uuid="5537df59-4c8e-4e42-8a88-45e4655cb043">
   <name>Advance</name>

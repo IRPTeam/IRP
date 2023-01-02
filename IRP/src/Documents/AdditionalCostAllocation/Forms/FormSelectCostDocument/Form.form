@@ -554,6 +554,10 @@ GROUP BY
        <key>ru</key>
        <value>Период остатка</value>
       </content>
+      <content>
+       <key>tr</key>
+       <value>Bakiye dönemi</value>
+      </content>
      </localValue>
     </title>
     <valueType>
@@ -596,6 +600,10 @@ GROUP BY
       <content>
        <key>ru</key>
        <value>Выбранные документы</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Seçilen evraklar</value>
       </content>
      </localValue>
     </title>

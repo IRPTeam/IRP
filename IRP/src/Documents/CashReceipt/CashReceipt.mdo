@@ -1178,6 +1178,10 @@
    <key>ru</key>
    <value>Распечатать внесение</value>
   </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nakit çıkışı yazdır</value>
+  </synonym>
   <group>FormCommandBarImportant</group>
   <commandParameterType>
    <types>DocumentRef.CashReceipt</types>

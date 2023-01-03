@@ -19,6 +19,7 @@
 // * Barcode  - DefinedType.typeBarcode
 // * ItemType - CatalogRef.ItemTypes -
 // * UseSerialLotNumber - Boolean -
+// * AlwaysAddNewRowAfterScan - Boolean -
 Function SearchByBarcodes(Val Barcodes, Settings) Export
 
 	ReturnValue = New Array();
@@ -36,7 +37,8 @@ Function SearchByBarcodes(Val Barcodes, Settings) Export
 	|	Barcodes.Barcode AS Barcode,
 	|	Barcodes.ItemKey.Item.ItemType AS ItemType,
 	|	Barcodes.ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
-	|	Barcodes.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService
+	|	Barcodes.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
+	|	Barcodes.ItemKey.Item.ItemType.AlwaysAddNewRowAfterScan AS AlwaysAddNewRowAfterScan
 	|FROM
 	|	InformationRegister.Barcodes AS Barcodes
 	|WHERE

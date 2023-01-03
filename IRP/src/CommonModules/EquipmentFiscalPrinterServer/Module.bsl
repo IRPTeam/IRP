@@ -25,7 +25,12 @@ Function PrepareReceiptData(RetailSalesReceipt) Export
 		FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
 		FiscalStringData.Insert("DiscountAmount", Item.OffersAmount);
 		If SLNRows.Count() = 1 Then
-			FiscalStringData.Insert("MarkingCode", String(SLNRows[0].SerialLotNumber.CodeString));	//TODO: Marking defenition
+			If IsBlankString(SLNRows[0].SerialLotNumber.CodeString) Then
+				FiscalStringData.Insert("CalculationSubject", "32");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject	
+			Else
+				FiscalStringData.Insert("MarkingCode", SLNRows[0].SerialLotNumber.CodeString);	//TODO: Marking defenition
+				FiscalStringData.Insert("CalculationSubject", "33");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+			EndIf;
 		ElsIf SLNRows.Count() > 1 Then
 			Raise("A few SerialLotNumber found!");
 		EndIf;

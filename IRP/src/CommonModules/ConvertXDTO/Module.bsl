@@ -92,7 +92,7 @@ Function PrepareObjectXDTO(ObjectStructure, TypeName, URI, WSName) Export
 	If ObjectStructure = Undefined Then
 		Return DataXDTO;
 	EndIf;
-		
+	
 	For Each ObjectData In ObjectStructure Do
 		
 		If TypeOf(ObjectData) = Type("KeyAndValue") AND TypeOf(ObjectData.Value) = Type("Structure") Then //объект
@@ -146,7 +146,9 @@ Function PrepareObjectXDTO(ObjectStructure, TypeName, URI, WSName) Export
 							If TypeOf(Str.Value) = Type("Array") Then
 								For Each StrArray In Str.Value Do
 									DataXDTORow[StrKey].Add(PrepareObjectXDTO(StrArray, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName));
-								EndDo;	
+								EndDo;
+							ElsIf TypeOf(Str.Value) = Type("String") Then
+								SetObject(DataXDTORow, XDTOTypeStructure, Str.Key, Str.Value, WSName);
 							Else
 								DataXDTORow[StrKey].Add(PrepareObjectXDTO(Str.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName));
 							EndIf;

@@ -751,8 +751,8 @@ Scenario: Create catalog ItemTypes objects (serial lot numbers)
 Scenario: Create catalog ItemTypes objects (Furniture)
 
 	And I check or create for catalog "ItemTypes" objects with Data Exchange Load parameter set to true:
-		| 'Ref'                                                               | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Type' | 'UseSerialLotNumber' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          | 'Type'                   |
-		| 'e1cib/data/Catalog.ItemTypes?ref=aa78178ed92fbced11eaf15dc8cb47ee' | 'False'        | ''       | 'False'    | ''     | ''                   | 'Furniture'      | ''                 | ''               | 'Furniture TR'   | '_6da4444bef3f4f93b6c51881f2c0a6b9' | 'Enum.ItemTypes.Product' |
+		| 'Ref'                                                               | 'DeletionMark' | 'Parent' | 'IsFolder' | 'UseSerialLotNumber' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          | 'Type'                   |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78178ed92fbced11eaf15dc8cb47ee' | 'False'        | ''       | 'False'    | ''                   | 'Furniture'      | ''                 | ''               | 'Furniture TR'   | '_6da4444bef3f4f93b6c51881f2c0a6b9' | 'Enum.ItemTypes.Product' |
 
 Scenario: Create catalog Items objects (serial lot numbers)
 

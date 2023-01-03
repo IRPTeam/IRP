@@ -105,6 +105,8 @@ Function PrepareReceiptData(RetailSalesReceipt) Export
 				Str.Insert("Cash", Str.Cash + Payment.Amount);
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
 				Str.Insert("ElectronicPayment", Str.ElectronicPayment + Payment.Amount);
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
+				Str.Insert("PostPayment", Str.PostPayment + Payment.Amount);
 			Else
 				Str.Insert("Cash", Str.Cash + Payment.Amount);
 			EndIf;
@@ -119,6 +121,8 @@ Function PrepareReceiptData(RetailSalesReceipt) Export
 				Str.Insert("Cash", Str.Cash + Payment.Amount);
 			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.Card Then
 				Str.Insert("ElectronicPayment", Str.ElectronicPayment + Payment.Amount);
+			ElsIf Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
+				Str.Insert("PostPayment", Str.PostPayment + Payment.Amount);
 			Else
 				Str.Insert("Cash", Str.Cash + Payment.Amount);
 			EndIf;

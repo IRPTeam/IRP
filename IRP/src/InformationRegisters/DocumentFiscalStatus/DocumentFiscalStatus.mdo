@@ -14,7 +14,6 @@
     <key>en</key>
     <value>Document fiscal status</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <resources uuid="06a1ad82-83ab-4490-9370-1fb93414cfbd">

@@ -774,12 +774,12 @@ Async Function PrintFiscalReceipt()
 	
 	EquipmentPrintFiscalReceiptResult = Await EquipmentFiscalPrinterClient.ProcessCheck(Object.ConsolidatedRetailSales, DocRef);
 	If EquipmentPrintFiscalReceiptResult.Success Then
-	SetFiscalStatus(Object.Ref
+	SetFiscalStatus(DocRef
 						, EquipmentPrintFiscalReceiptResult.Status
 						, EquipmentPrintFiscalReceiptResult.FiscalResponse
 						, EquipmentPrintFiscalReceiptResult.DataPresentation);
 	Else
-		SetFiscalStatus(Object.Ref
+		SetFiscalStatus(DocRef
 						, EquipmentPrintFiscalReceiptResult.Status
 						, EquipmentPrintFiscalReceiptResult.ErrorDescription);
 	EndIf;

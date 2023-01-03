@@ -1,5 +1,8 @@
 &AtClient
 Procedure ListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	If Clone Then
+		Return;
+	EndIf;
 	FillingValues = CommonFormActionsServer.RestoreFillingData(FillingData);
 
 	Cancel = True;

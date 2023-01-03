@@ -98,6 +98,7 @@ Procedure ReceiverStartChoice(Object, Form, Item, ChoiceData, StandardProcessing
 	CashAccountTypes = New ValueList();
 	CashAccountTypes.Add(PredefinedValue("Enum.CashAccountTypes.Bank"));
 	CashAccountTypes.Add(PredefinedValue("Enum.CashAccountTypes.Cash"));
+	CashAccountTypes.Add(PredefinedValue("Enum.CashAccountTypes.POSCashAccount"));
 	
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", CashAccountTypes, DataCompositionComparisonType.InList));
@@ -109,6 +110,7 @@ Procedure ReceiverEditTextChange(Object, Form, Item, Text, StandardProcessing) E
 	CashAccountTypes = New ValueList();
 	CashAccountTypes.Add(PredefinedValue("Enum.CashAccountTypes.Bank"));
 	CashAccountTypes.Add(PredefinedValue("Enum.CashAccountTypes.Cash"));
+	CashAccountTypes.Add(PredefinedValue("Enum.CashAccountTypes.POSCashAccount"));
 	
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", CashAccountTypes, ComparisonType.InList));

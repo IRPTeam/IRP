@@ -891,7 +891,9 @@ EndProcedure
 
 &AtClient
 Procedure EnabledPaymentButton()
-	Items.GroupPaymentButtons.Enabled = Object.ItemList.Count();
+	Items.qPayment.Enabled = Object.ItemList.Count() > 0;
+	Items.CommandBarPayments.Enabled = Object.ItemList.Count() = 0;
+	
 	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
 		SetPaymentButtonOnServer();
 	EndIf;
@@ -905,6 +907,7 @@ Procedure SetPaymentButtonOnServer()
 		Items.qPayment.Title = R().InfoMessage_Payment;
 		Items.qPayment.TextColor = ColorGreen;
 		Items.qPayment.BorderColor = ColorGreen;
+		Items.GroupPaymentButtons.Enabled = True;
 	Else
 		Items.GroupPaymentButtons.Enabled = False;
 		Items.qPayment.Title = R().InfoMessage_SessionIsClosed;

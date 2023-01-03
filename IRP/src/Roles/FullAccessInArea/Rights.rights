@@ -1705,17 +1705,6 @@
 		</right>
 	</object>
 	<object>
-		<name>DocumentJournal.AllDocuments</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Report.PriceInfo</name>
 		<right>
 			<name>Use</name>
@@ -3476,17 +3465,6 @@
 	</object>
 	<object>
 		<name>CommonForm.InfoLinkedDocumentRows</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>DocumentJournal.DocumentsForOutgoingPayment</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -10241,17 +10219,6 @@
 		</right>
 		<right>
 			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>DocumentJournal.DocumentsForIncomingPayment</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>

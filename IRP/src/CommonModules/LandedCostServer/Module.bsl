@@ -663,14 +663,14 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	MAX(CalculationMovementCosts.EndDate) AS EndDate
+	|	MAX(R6020B_BatchBalance.Period) AS EndDate
 	|FROM
-	|	Document.CalculationMovementCosts AS CalculationMovementCosts
+	|	AccumulationRegister.R6020B_BatchBalance AS R6020B_BatchBalance
 	|WHERE
-	|	CalculationMovementCosts.Ref <> &Ref
-	|	AND CalculationMovementCosts.Posted
-	|	AND CalculationMovementCosts.Company = &Company
-	|	AND CalculationMovementCosts.CalculationMode = VALUE(Enum.CalculationMode.AdditionalItemCost)";
+	|	R6020B_BatchBalance.Company = &Company
+	|	AND R6020B_BatchBalance.CalculationMovementCost <> &Ref
+	|	AND R6020B_BatchBalance.AmountCost <> 0";
+	
 	Query.SetParameter("Ref", CalculationSettings.CalculationMovementCostRef);
 	Query.SetParameter("Company", CalculationSettings.Company);
 	EndLastPeriod = Date(1, 1, 1);
@@ -846,14 +846,14 @@ Procedure DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, Cal
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	MAX(CalculationMovementCosts.EndDate) AS EndDate
+	|	MAX(R6020B_BatchBalance.Period) AS EndDate
 	|FROM
-	|	Document.CalculationMovementCosts AS CalculationMovementCosts
+	|	AccumulationRegister.R6020B_BatchBalance AS R6020B_BatchBalance
 	|WHERE
-	|	CalculationMovementCosts.Ref <> &Ref
-	|	AND CalculationMovementCosts.Posted
-	|	AND CalculationMovementCosts.Company = &Company
-	|	AND CalculationMovementCosts.CalculationMode = VALUE(Enum.CalculationMode.AdditionalItemRevenue)";
+	|	R6020B_BatchBalance.Company = &Company
+	|	AND R6020B_BatchBalance.CalculationMovementCost <> &Ref
+	|	AND R6020B_BatchBalance.AmountCost <> 0";
+	
 	Query.SetParameter("Ref", CalculationSettings.CalculationMovementCostRef);
 	Query.SetParameter("Company", CalculationSettings.Company);
 	EndLastPeriod = Date(1, 1, 1);

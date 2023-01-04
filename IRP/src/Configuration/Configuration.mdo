@@ -790,7 +790,6 @@
   <documents>Document.SalesReportToConsignor</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
-  <documentJournals>DocumentJournal.AllDocuments</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>
   <enums>Enum.AgreementKinds</enums>
   <enums>Enum.AgreementTypes</enums>

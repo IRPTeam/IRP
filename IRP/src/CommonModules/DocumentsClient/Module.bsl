@@ -282,6 +282,7 @@ Procedure AgreementTextChange_TransactionTypeFilter(Object, Form, Item, Text, St
 	
 	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Date") Then
 		Date = Object.Date;
+		DateIsSet = True;
 	Else
 		Date = Undefined;
 		DateIsSet = False;

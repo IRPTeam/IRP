@@ -554,11 +554,18 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 		InventoryOrigin = Undefined;
 		
 		UseInventoryOrigin = (ObjectRefType = Type("DocumentRef.RetailSalesReceipt") 
-			Or ObjectRefType = Type("DocumentRef.SalesInvoice")) And FOServer.IsUseCommissionTrading();
+			Or ObjectRefType = Type("DocumentRef.SalesInvoice")
+			Or ObjectRefType = Type("DocumentRef.InventoryTransfer")) 
+			And FOServer.IsUseCommissionTrading();
 		
 		If UseInventoryOrigin Then
+			If ObjectRefType = Type("DocumentRef.InventoryTransfer") Then
+				StoreRef = Object.StoreSender;
+			Else
+				StoreRef = Form.Store;
+			EndIf;
 			
-			ResultExistingRows = CommissionTradeServer.GetExistingRows(Object, Form.Store, FilterStructure, ResultElement);
+			ResultExistingRows = CommissionTradeServer.GetExistingRows(Object, StoreRef, FilterStructure, ResultElement);
 			
 			If ValueIsFilled(ResultExistingRows.InventoryOrigin) Then
 				InventoryOrigin = ResultExistingRows.InventoryOrigin;

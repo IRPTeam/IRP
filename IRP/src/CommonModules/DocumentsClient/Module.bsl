@@ -280,6 +280,14 @@ Procedure AgreementTextChange_TransactionTypeFilter(Object, Form, Item, Text, St
 		Partner   = Object.Partner;
 	EndIf;
 	
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Date") Then
+		Date = Object.Date;
+		DateIsSet = True;
+	Else
+		Date = Undefined;
+		DateIsSet = False;
+	EndIf;
+	
 	AgreementType = ModelServer_V2.GetAgreementTypeByTransactionType(TransactionType);
 	
 	ArrayOfFilters = New Array();
@@ -290,7 +298,9 @@ Procedure AgreementTextChange_TransactionTypeFilter(Object, Form, Item, Text, St
 	AdditionalParameters.Insert("IncludeFilterByEndOfUseDate" , True);
 	AdditionalParameters.Insert("IncludeFilterByPartner"      , True);
 	AdditionalParameters.Insert("IncludePartnerSegments"      , True);
-	AdditionalParameters.Insert("EndOfUseDate"                , Object.Date);
+	If DateIsSet Then
+		AdditionalParameters.Insert("EndOfUseDate", Date);
+	EndIf;
 	AdditionalParameters.Insert("Partner"                     , Partner);
 	AgreementEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
 EndProcedure

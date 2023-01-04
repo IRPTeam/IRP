@@ -29,6 +29,19 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <resources uuid="7fa28d25-a300-47c1-8127-eaae0cae1a1c">
+    <name>Commission</name>
+    <synonym>
+      <key>en</key>
+      <value>Commission</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
   <dimensions uuid="889034bc-1162-4671-9fed-4eeb624a1c7e">
     <name>Company</name>
     <synonym>
@@ -58,10 +71,10 @@
     <useInTotals>true</useInTotals>
   </dimensions>
   <dimensions uuid="a826c7cf-d60c-4d62-bbc9-cafebcf8ee48">
-    <name>PaymentType</name>
+    <name>PaymentTypeEnum</name>
     <synonym>
       <key>en</key>
-      <value>Payment type</value>
+      <value>Payment type enum</value>
     </synonym>
     <type>
       <types>EnumRef.PaymentTypes</types>
@@ -112,5 +125,58 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="11a4bbab-53ef-4200-9cd1-76282fa1e9e1">
+    <name>Account</name>
+    <synonym>
+      <key>en</key>
+      <value>Account</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.CashAccounts</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="35bf7dc3-75bc-4810-9969-677267004aa0">
+    <name>PaymentType</name>
+    <synonym>
+      <key>en</key>
+      <value>Payment type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.PaymentTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </dimensions>
+  <dimensions uuid="6726ce86-a418-441a-9986-8bea9d11fada">
+    <name>PaymentTerminal</name>
+    <synonym>
+      <key>en</key>
+      <value>Payment terminal</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.PaymentTerminals</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </dimensions>
+  <dimensions uuid="9beb9ee4-0c8a-4b22-8466-637b77d3c1dd">
+    <name>BankTerm</name>
+    <synonym>
+      <key>en</key>
+      <value>Bank term</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BankTerms</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
   </dimensions>
 </mdclass:AccumulationRegister>

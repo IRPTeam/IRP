@@ -393,6 +393,7 @@ Function PaymentList()
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.ReturnFromVendor) AS IsReturnFromVendor,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CustomerAdvance) AS IsCustomerAdvance,
 	|	PaymentList.RetailCustomer AS RetailCustomer,
+	|	PaymentList.BankTerm AS BankTerm,
 	|	PaymentList.Ref.Branch AS Branch,
 	|	PaymentList.LegalNameContract AS LegalNameContract,
 	|	PaymentList.Order,
@@ -721,9 +722,14 @@ Function R3026B_SalesOrdersCustomerAdvance()
 	|	PaymentList.Company,
 	|	PaymentList.Branch,
 	|	PaymentList.Currency,
-	|	VALUE(Enum.PaymentTypes.Card) AS PaymentType,
+	|	VALUE(Enum.PaymentTypes.Card) AS PaymentTypeEnum,
 	|	PaymentList.RetailCustomer,
 	|	PaymentList.Order,
+	|	PaymentList.Account,
+	|	PaymentList.PaymentType,
+	|	PaymentList.PaymentTerminal,
+	|	PaymentList.BankTerm,
+	|	PaymentList.Commission,
 	|	PaymentList.Amount
 	|INTO R3026B_SalesOrdersCustomerAdvance
 	|FROM

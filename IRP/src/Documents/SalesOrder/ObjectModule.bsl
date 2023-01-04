@@ -23,11 +23,7 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	If ThisObject.TransactionType = Enums.SalesTransactionTypes.RetailSales Then
-		CommonFunctionsServer.DeleteFormArrayIfPresent(CheckedAttributes, "Partner");
-		CommonFunctionsServer.DeleteFormArrayIfPresent(CheckedAttributes, "LegalName");
-		CommonFunctionsServer.DeleteFormArrayIfPresent(CheckedAttributes, "Agreement");
-	Else
+	If ThisObject.TransactionType <> Enums.SalesTransactionTypes.RetailSales Then
 		CommonFunctionsServer.DeleteFormArrayIfPresent(CheckedAttributes, "RetailCustomer");
 	EndIf;
 	

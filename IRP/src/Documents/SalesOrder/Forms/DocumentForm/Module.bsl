@@ -89,13 +89,9 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form)
 	IsTransactionType_Sales                = Object.TransactionType = PredefinedValue("Enum.SalesTransactionTypes.Sales");
 	IsTransactionType_RetailSales          = Object.TransactionType = PredefinedValue("Enum.SalesTransactionTypes.RetailSales");
-//	IsTransactionType_ShipmentToTradeAgent = Object.TransactionType = PredefinedValue("Enum.SalesTransactionTypes.ShipmentToTradeAgent");
 	
 	Form.Items.RetailCustomer.Visible = IsTransactionType_RetailSales;
 	Form.Items.Payments.Visible       = IsTransactionType_RetailSales;
-//	Form.Items.Partner.Visible   = IsTransactionType_Sales Or IsTransactionType_ShipmentToTradeAgent;
-//	Form.Items.LegalName.Visible = IsTransactionType_Sales Or IsTransactionType_ShipmentToTradeAgent;
-//	Form.Items.Agreement.Visible = IsTransactionType_Sales Or IsTransactionType_ShipmentToTradeAgent;
 
 	Form.Items.GroupAging.Visible = IsTransactionType_Sales;
 	
@@ -168,6 +164,15 @@ EndProcedure
 &AtClient
 Procedure TransactionTypeOnChange(Item)
 	DocSalesOrderClient.TransactionTypeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region RETAIL_CUSTOMER
+
+&AtClient
+Procedure RetailCustomerOnChange(Item)
+	DocSalesOrderClient.RetailCustomerOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

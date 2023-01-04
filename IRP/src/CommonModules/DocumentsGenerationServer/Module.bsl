@@ -432,7 +432,7 @@ Function GetDocumentTable_SalesOrder_ToBePaid(ArrayOfBasisDocuments) Export
 	Return QueryResult.Unload();
 EndFunction
 
-Function GetDocumentTable_SalesOrder_CustomerAdvance(ArrayOfBasisDocuments, PaymentType) Export
+Function GetDocumentTable_SalesOrder_CustomerAdvance(ArrayOfBasisDocuments, PaymentTypeEnum) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -443,14 +443,20 @@ Function GetDocumentTable_SalesOrder_CustomerAdvance(ArrayOfBasisDocuments, Paym
 	|	R3026B_SalesOrdersCustomerAdvance.Currency,
 	|	R3026B_SalesOrdersCustomerAdvance.RetailCustomer,
 	|	R3026B_SalesOrdersCustomerAdvance.Order,
+	|	R3026B_SalesOrdersCustomerAdvance.Account AS Account,
+	|	R3026B_SalesOrdersCustomerAdvance.Account AS CashAccount,
+	|	R3026B_SalesOrdersCustomerAdvance.PaymentType AS PaymentType,
+	|	R3026B_SalesOrdersCustomerAdvance.PaymentTerminal AS PaymentTerminal,
+	|	R3026B_SalesOrdersCustomerAdvance.BankTerm AS BankTerm,
+	|	R3026B_SalesOrdersCustomerAdvance.CommissionBalance AS Commission,
 	|	R3026B_SalesOrdersCustomerAdvance.AmountBalance AS Amount
 	|FROM
 	|	AccumulationRegister.R3026B_SalesOrdersCustomerAdvance.Balance(, Order IN (&ArrayOfBasisDocuments)
-	|	AND PaymentType = &PaymentType) AS R3026B_SalesOrdersCustomerAdvance
+	|	AND PaymentTypeEnum = &PaymentTypeEnum) AS R3026B_SalesOrdersCustomerAdvance
 	|WHERE
 	|	R3026B_SalesOrdersCustomerAdvance.AmountBalance > 0";
 	Query.SetParameter("ArrayOfBasisDocuments", ArrayOfBasisDocuments);
-	Query.SetParameter("PaymentType", PaymentType);
+	Query.SetParameter("PaymentTypeEnum", PaymentTypeEnum);
 	QueryResult = Query.Execute();
 	Return QueryResult.Unload();
 EndFunction

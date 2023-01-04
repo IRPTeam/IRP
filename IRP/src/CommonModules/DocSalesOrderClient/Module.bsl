@@ -61,6 +61,14 @@ EndProcedure
 
 #EndRegion
 
+#Region RETAIL_CUSTOMER
+
+Procedure RetailCustomerOnChange(Object, Form, Item) Export
+	ViewClient_V2.RetailCustomerOnChange(Object, Form, "ItemList");
+EndProcedure
+
+#EndRegion
+
 #Region PARTNER
 
 Procedure PartnerOnChange(Object, Form, Item) Export

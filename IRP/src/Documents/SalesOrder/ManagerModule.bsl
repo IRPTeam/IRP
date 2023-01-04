@@ -622,9 +622,30 @@ Function R3026B_SalesOrdersCustomerAdvance()
 		|	Payments.Ref.Company AS Company,
 		|	Payments.Ref.Branch AS Branch,
 		|	Payments.Ref.Currency AS Currency,
-		|	Payments.PaymentType.Type AS PaymentType,
+		|	Payments.PaymentType.Type AS PaymentTypeEnum,
+		|	Payments.Account AS Account,
 		|	Payments.Ref.RetailCustomer AS RetailCustomer,
 		|	Payments.Ref AS Order,
+		|	CASE WHEN Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Card) THEN
+		|	Payments.PaymentType
+		|	ELSE UNDEFINED
+		|	END AS PaymentType,
+		|	
+		|	CASE WHEN Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Card) THEN
+		|	Payments.PaymentTerminal
+		|	ELSE UNDEFINED
+		|	END AS PaymentTerminal,
+		|	
+		|	CASE WHEN Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Card) THEN
+		|	Payments.BankTerm
+		|	ELSE UNDEFINED
+		|	END AS BankTerm,
+		|	
+		|	SUM(CASE WHEN Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Card) THEN
+		|	Payments.Commission
+		|	ELSE 0
+		|	END) AS Commission,
+		|	
 		|	SUM(Payments.Amount) AS Amount
 		|INTO R3026B_SalesOrdersCustomerAdvance
 		|FROM
@@ -640,8 +661,24 @@ Function R3026B_SalesOrdersCustomerAdvance()
 		|	Payments.Ref.Branch,
 		|	Payments.Ref.Currency,
 		|	Payments.PaymentType.Type,
+		|	Payments.Account,
 		|	Payments.Ref.RetailCustomer,
-		|	Payments.Ref";
+		|	Payments.Ref,
+		|	CASE WHEN Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Card) THEN
+		|	Payments.PaymentType
+		|	ELSE UNDEFINED
+		|	END,
+		|	
+		|	CASE WHEN Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Card) THEN
+		|	Payments.PaymentTerminal
+		|	ELSE UNDEFINED
+		|	END,
+		|	
+		|	CASE WHEN Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Card) THEN
+		|	Payments.BankTerm
+		|	ELSE UNDEFINED
+		|	END
+		|	";
 EndFunction
 
 #EndRegion

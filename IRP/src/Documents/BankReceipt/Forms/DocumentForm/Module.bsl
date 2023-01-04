@@ -120,7 +120,8 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.RetailCustomer,
 		|PaymentList.PaymentType,
 		|PaymentList.PaymentTerminal,
-		|PaymentList.BankTerm";
+		|PaymentList.BankTerm,
+		|PaymentList.Order";
 	EndIf;
 	
 	ArrayOfVisibleAttributes = New Array();

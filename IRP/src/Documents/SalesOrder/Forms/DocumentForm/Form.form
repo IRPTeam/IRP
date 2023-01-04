@@ -452,6 +452,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.RetailCustomer</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>RetailCustomerOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>RetailCustomerExtendedTooltip</name>
             <id>875</id>

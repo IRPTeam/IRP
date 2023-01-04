@@ -101,7 +101,6 @@ EndFunction
 
 &AtServer
 Function JoinDocumentsStructure(ArrayOfTables)
-
 	ValueTable = New ValueTable();
 	ValueTable.Columns.Add("BasedOn"         , New TypeDescription("String"));
 	ValueTable.Columns.Add("Company"         , New TypeDescription("CatalogRef.Companies"));
@@ -120,7 +119,8 @@ Function JoinDocumentsStructure(ArrayOfTables)
 		New TypeDescription(Metadata.DefinedTypes.typePlaningTransactionBasises.Type));
 	ValueTable.Columns.Add("FinancialMovementType", New TypeDescription("CatalogRef.ExpenseAndRevenueTypes"));
 	ValueTable.Columns.Add("Order", New TypeDescription("DocumentRef.SalesOrder"));
-	ValueTable.Columns.Add("MoneyTransfer", New TypeDescription("DocumentRef.MoneyTransfer"));
+	ValueTable.Columns.Add("MoneyTransfer"  , New TypeDescription("DocumentRef.MoneyTransfer"));
+	ValueTable.Columns.Add("RetailCustomer" , New TypeDescription("CatalogRef.RetailCustomers"));
 	
 	For Each Table In ArrayOfTables Do
 		For Each Row In Table Do
@@ -166,6 +166,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			NewRow.Insert("FinancialMovementType"   , RowPaymentList.FinancialMovementType);
 			NewRow.Insert("Order"                   , RowPaymentList.Order);
 			NewRow.Insert("MoneyTransfer"           , RowPaymentList.MoneyTransfer);
+			NewRow.Insert("RetailCustomer"          , RowPaymentList.RetailCustomer);
 			Result.PaymentList.Add(NewRow);
 		EndDo;
 		ArrayOfResults.Add(Result);

@@ -2712,11 +2712,17 @@ EndFunction
 Function BindRetailCustomer(Parameters)
 	DataPath = "RetailCustomer";
 	Binding = New Structure();
+	
 	Binding.Insert("RetailSalesReceipt",
 		"StepChangePartnerByRetailCustomer,
 		|StepChangeAgreementByRetailCustomer,
 		|StepChangeLegalNameByRetailCustomer,
 		|StepChangeUsePartnerTransactionsByRetailCustomer");
+		
+	Binding.Insert("SalesOrder",
+		"StepChangePartnerByRetailCustomer,
+		|StepChangeAgreementByRetailCustomer,
+		|StepChangeLegalNameByRetailCustomer");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction

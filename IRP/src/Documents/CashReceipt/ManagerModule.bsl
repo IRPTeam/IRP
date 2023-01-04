@@ -624,8 +624,9 @@ Function R3026B_SalesOrdersCustomerAdvance()
 		|	PaymentList.Company,
 		|	PaymentList.Branch,
 		|	PaymentList.Currency,
-		|	VALUE(Enum.PaymentTypes.Cash) AS PaymentType,
+		|	VALUE(Enum.PaymentTypes.Cash) AS PaymentTypeEnum,
 		|	PaymentList.RetailCustomer,
+		|	PaymentList.CashAccount AS Account,
 		|	PaymentList.Order,
 		|	PaymentList.Amount
 		|INTO R3026B_SalesOrdersCustomerAdvance

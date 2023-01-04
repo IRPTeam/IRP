@@ -215,6 +215,21 @@ Function GetLinkedDocumentsFilter_RRR(Object) Export
 	Return Filter;
 EndFunction
 
+Function GetLinkedDocumentsFilter_RSR(Object) Export
+	Filter = New Structure();
+	Filter.Insert("RetailCustomer"       , Object.RetailCustomer);
+	Filter.Insert("CurrencySales"        , Object.Currency);
+	Filter.Insert("PriceIncludeTaxSales" , Object.PriceIncludeTax);
+	Filter.Insert("Ref"                  , Object.Ref);
+	Filter.Insert("TransactionTypeSales" , Object.TransactionType);
+	
+	VisibleFields = New Structure();
+	VisibleFields.Insert("Company");
+	VisibleFields.Insert("Branch");
+	Filter.Insert("VisibleFields", VisibleFields);
+	Return Filter;
+EndFunction
+
 Function GetLinkedDocumentsFilter_WO(Object) Export
 	Filter = New Structure();
 	Filter.Insert("Company"              , Object.Company);

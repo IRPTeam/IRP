@@ -53,13 +53,14 @@ EndFunction
 
 &AtServer
 Function GetDocumentsStructure(ArrayOfBasisDocuments)
-	ArrayOf_CashTransferOrder = New Array();
-	ArrayOf_IncomingPaymentOrder = New Array();
-	ArrayOf_SalesInvoice = New Array();
-	ArrayOf_SalesOrder = New Array();
-	ArrayOf_PurchaseReturn = New Array();
-	ArrayOf_MoneyTransfer = New Array();
-	ArrayOf_SalesReportFromTradeAgent = New Array();
+	ArrayOf_CashTransferOrder          = New Array();
+	ArrayOf_IncomingPaymentOrder       = New Array();
+	ArrayOf_SalesInvoice               = New Array();
+	ArrayOf_SalesOrder_ToBePaid        = New Array();
+	ArrayOf_SalesOrder_CustomerAdvance = New Array();
+	ArrayOf_PurchaseReturn             = New Array();
+	ArrayOf_MoneyTransfer              = New Array();
+	ArrayOf_SalesReportFromTradeAgent  = New Array();
 	
 	For Each Row In ArrayOfBasisDocuments Do
 		If TypeOf(Row) = Type("DocumentRef.CashTransferOrder") Then
@@ -69,7 +70,11 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 		ElsIf TypeOf(Row) = Type("DocumentRef.SalesInvoice") Then
 			ArrayOf_SalesInvoice.Add(Row);
 		ElsIf TypeOf(Row) = Type("DocumentRef.SalesOrder") Then
-			ArrayOf_SalesOrder.Add(Row);
+			If Row.TransactionType = Enums.SalesTransactionTypes.Sales Then
+				ArrayOf_SalesOrder_ToBePaid.Add(Row);
+			ElsIf Row.TransactionType = Enums.SalesTransactionTypes.RetailSales Then
+				ArrayOf_SalesOrder_CustomerAdvance.Add(Row);
+			EndIf;
 		ElsIf TypeOf(Row) = Type("DocumentRef.PurchaseReturn") Then
 			ArrayOf_PurchaseReturn.Add(Row);
 		ElsIf TypeOf(Row) = Type("DocumentRef.MoneyTransfer") Then
@@ -85,7 +90,8 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOfTables.Add(GetDocumentTable_CashTransferOrder(ArrayOf_CashTransferOrder));
 	ArrayOfTables.Add(GetDocumentTable_IncomingPaymentOrder(ArrayOf_IncomingPaymentOrder));
 	ArrayOfTables.Add(GetDocumentTable_SalesInvoice(ArrayOf_SalesInvoice));
-	ArrayOfTables.Add(GetDocumentTable_SalesOrder(ArrayOf_SalesOrder));
+	ArrayOfTables.Add(GetDocumentTable_SalesOrder_TobePaid(ArrayOf_SalesOrder_ToBePaid));
+	ArrayOfTables.Add(GetDocumentTable_SalesOrder_CustomerAdvance(ArrayOf_SalesOrder_CustomerAdvance));
 	ArrayOfTables.Add(GetDocumentTable_PurchaseReturn(ArrayOf_PurchaseReturn));
 	ArrayOfTables.Add(GetDocumentTable_MoneyTransfer(ArrayOf_MoneyTransfer));
 	ArrayOfTables.Add(GetDocumentTable_SalesReportFromTradeAgent(ArrayOf_SalesReportFromTradeAgent));
@@ -243,8 +249,13 @@ Function GetDocumentTable_SalesInvoice(ArrayOfBasisDocuments)
 EndFunction
 
 &AtServer
-Function GetDocumentTable_SalesOrder(ArrayOfBasisDocuments)
-	Return DocumentsGenerationServer.GetDocumentTable_SalesOrder_ForReceipt(ArrayOfBasisDocuments);
+Function GetDocumentTable_SalesOrder_ToBePaid(ArrayOfBasisDocuments)
+	Return DocumentsGenerationServer.GetDocumentTable_SalesOrder_ToBePaid(ArrayOfBasisDocuments);
+EndFunction
+
+&AtServer
+Function GetDocumentTable_SalesOrder_CustomerAdvance(ArrayOfBasisDocuments)
+	Return DocumentsGenerationServer.GetDocumentTable_SalesOrder_CustomerAdvance(ArrayOfBasisDocuments, Enums.PaymentTypes.Cash);
 EndFunction
 
 &AtServer

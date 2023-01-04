@@ -342,6 +342,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4037B_PlannedReceiptReservationRequests());
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(R3024B_SalesOrdersToBePaid());
+	QueryArray.Add(R3026B_SalesOrdersCustomerAdvance());
 	Return QueryArray;
 EndFunction
 
@@ -415,7 +416,8 @@ Function R2011B_SalesOrdersShipment()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.isCanceled
-		|	AND NOT ItemList.IsService";
+		|	AND NOT ItemList.IsService
+		|	AND (ItemList.IsSales OR ItemList.IsShipmentToTradeAgent)";
 EndFunction
 
 Function R2012B_SalesOrdersInvoiceClosing()
@@ -610,6 +612,36 @@ Function R3024B_SalesOrdersToBePaid()
 		|	PaymentTerms.Ref.LegalName,
 		|	PaymentTerms.Ref.Partner,
 		|	VALUE(AccumulationRecordType.Receipt)";
+EndFunction
+
+Function R3026B_SalesOrdersCustomerAdvance()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Payments.Ref.Date AS Period,
+		|	Payments.Ref.Company AS Company,
+		|	Payments.Ref.Branch AS Branch,
+		|	Payments.Ref.Currency AS Currency,
+		|	Payments.PaymentType.Type AS PaymentType,
+		|	Payments.Ref.RetailCustomer AS RetailCustomer,
+		|	Payments.Ref AS Order,
+		|	SUM(Payments.Amount) AS Amount
+		|INTO R3026B_SalesOrdersCustomerAdvance
+		|FROM
+		|	Document.SalesOrder.Payments AS Payments
+		|WHERE
+		|	Payments.Ref = &Ref
+		|	AND &StatusInfoPosting
+		|	AND Payments.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.RetailSales)
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	Payments.Ref.Date,
+		|	Payments.Ref.Company,
+		|	Payments.Ref.Branch,
+		|	Payments.Ref.Currency,
+		|	Payments.PaymentType.Type,
+		|	Payments.Ref.RetailCustomer,
+		|	Payments.Ref";
 EndFunction
 
 #EndRegion

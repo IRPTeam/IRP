@@ -10209,6 +10209,9 @@ Function BindPaymentsPaymentType(Parameters)
 	Binding.Insert("RetailReturnReceipt", 
 		"StepPaymentsGetPercent");
 	
+	Binding.Insert("SalesOrder", 
+		"StepPaymentsGetPercent");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -10242,6 +10245,9 @@ Function BindPaymentsBankTerm(Parameters)
 		"StepPaymentsGetPercent");
 	
 	Binding.Insert("RetailReturnReceipt", 
+		"StepPaymentsGetPercent");
+	
+	Binding.Insert("SalesOrder", 
 		"StepPaymentsGetPercent");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
@@ -10301,6 +10307,9 @@ Function BindPaymentsAmount(Parameters)
 	
 	Binding.Insert("RetailReturnReceipt", 
 		"StepPaymentsCalculateCommission");
+		
+	Binding.Insert("SalesOrder", 
+		"StepPaymentsCalculateCommission");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -10336,6 +10345,10 @@ Function BindPaymentsCommission(Parameters)
 	
 	Binding.Insert("RetailReturnReceipt", 
 		"StepChangePercentByAmount");
+		
+	Binding.Insert("SalesOrder", 
+		"StepChangePercentByAmount");
+		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -10383,6 +10396,9 @@ Function BindPaymentsPercent(Parameters)
 		"StepPaymentsCalculateCommission");
 	
 	Binding.Insert("RetailReturnReceipt", 
+		"StepPaymentsCalculateCommission");
+		
+	Binding.Insert("SalesOrder", 
 		"StepPaymentsCalculateCommission");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);

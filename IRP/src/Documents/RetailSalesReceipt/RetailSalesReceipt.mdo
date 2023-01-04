@@ -731,6 +731,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="4475734f-7623-40b1-88b2-1f4ac08c3c3e">
+      <name>SalesOrder</name>
+      <synonym>
+        <key>en</key>
+        <value>Sales order</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.SalesOrder</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="0d32dd7b-16e6-4c0b-a360-865e3d47dc78">
     <producedTypes>
@@ -1756,4 +1770,17 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <commands uuid="fac0f0ce-cdcd-4e1f-ae4e-961fb1021bce">
+    <name>Genarate</name>
+    <synonym>
+      <key>en</key>
+      <value>Retail sales receipt</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.SalesOrder</types>
+    </commandParameterType>
+    <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

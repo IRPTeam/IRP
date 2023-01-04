@@ -1,4 +1,5 @@
 
+
 #Region FORM
 
 &AtServer
@@ -86,14 +87,24 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	IsTransactionType_Sales = Object.TransactionType = PredefinedValue("Enum.SalesTransactionTypes.Sales");
+	IsTransactionType_Sales                = Object.TransactionType = PredefinedValue("Enum.SalesTransactionTypes.Sales");
+	IsTransactionType_RetailSales          = Object.TransactionType = PredefinedValue("Enum.SalesTransactionTypes.RetailSales");
+//	IsTransactionType_ShipmentToTradeAgent = Object.TransactionType = PredefinedValue("Enum.SalesTransactionTypes.ShipmentToTradeAgent");
+	
+	Form.Items.RetailCustomer.Visible = IsTransactionType_RetailSales;
+	Form.Items.Payments.Visible       = IsTransactionType_RetailSales;
+//	Form.Items.Partner.Visible   = IsTransactionType_Sales Or IsTransactionType_ShipmentToTradeAgent;
+//	Form.Items.LegalName.Visible = IsTransactionType_Sales Or IsTransactionType_ShipmentToTradeAgent;
+//	Form.Items.Agreement.Visible = IsTransactionType_Sales Or IsTransactionType_ShipmentToTradeAgent;
+
+	Form.Items.GroupAging.Visible = IsTransactionType_Sales;
+	
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 	If Not Form.ClosingOrder.IsEmpty() Then
 		Form.ReadOnly = True;
 	EndIf;
 	Form.Items.GroupHead.Visible = Not Form.ClosingOrder.IsEmpty();
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
-	Form.Items.GroupAging.Visible = IsTransactionType_Sales;
 	DocumentsClientServer.SetReadOnlyPaymentTermsCanBePaid(Object, Form);
 EndProcedure
 
@@ -486,6 +497,45 @@ Procedure SpecialOffersEditFinish_ForRow(Result, AdditionalParameters) Export
 EndProcedure
 
 #EndRegion
+
+#EndRegion
+
+#Region PAYMENT_TYPE
+
+&AtClient
+Procedure PaymentsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocSalesOrderClient.PaymentsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure PaymentsPaymentTypeOnChange(Item)
+	DocSalesOrderClient.PaymentsPaymentTypeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentsBankTermOnChange(Item)
+	DocSalesOrderClient.PaymentsBankTermOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentsAccountOnChange(Item)
+	DocSalesOrderClient.PaymentsAccountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentsAmountOnChange(Item)
+	DocSalesOrderClient.PaymentsAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentsPercentOnChange(Item)
+	DocSalesOrderClient.PaymentsPercentOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentsCommissionOnChange(Item)
+	DocSalesOrderClient.PaymentsCommissionOnChange(Object, ThisObject, Item);
+EndProcedure
 
 #EndRegion
 

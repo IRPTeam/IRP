@@ -151,5 +151,10 @@ Procedure SetFiscalStatus(DocumentRef, Status = "Prepaired", FiscalResponse = ""
 	EndIf;
 EndProcedure
 
+Function GetStatusData(DocumentRef) Export
+	FiscalStatus = InformationRegisters.DocumentFiscalStatus.GetStatusData(DocumentRef);
+	Return FiscalStatus;
+EndFunction
+
 #EndRegion
 	

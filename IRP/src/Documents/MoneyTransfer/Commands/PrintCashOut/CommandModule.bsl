@@ -8,11 +8,9 @@ EndProcedure
 Async Procedure PrintCashOut(CommandParameter)
 	ConsolidatedRetailSales = CommonFunctionsServer.GetRefAttribute(CommandParameter, "ConsolidatedRetailSales");
 	If Not IsConsolidatedRetailSalesEmpty(ConsolidatedRetailSales) Then
-		EquipmentResult = Await EquipmentFiscalPrinterClient.CashInCome(ConsolidatedRetailSales
+		EquipmentResult = Await EquipmentFiscalPrinterClient.CashOutCome(ConsolidatedRetailSales
+				, CommandParameter
 				, - CommonFunctionsServer.GetRefAttribute(CommandParameter, "SendAmount"));
-		If EquipmentResult.Success Then
-	
-		EndIf;
 	EndIf;
 EndProcedure
 

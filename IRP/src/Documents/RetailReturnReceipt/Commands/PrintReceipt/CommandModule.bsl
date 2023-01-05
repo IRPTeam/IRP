@@ -11,16 +11,6 @@ Async Procedure PrintReceipt(CommandParameter)
 		Return;
 	EndIf;
 	EquipmentPrintFiscalReceiptResult = Await EquipmentFiscalPrinterClient.ProcessCheck(ConsolidatedRetailSales, CommandParameter);
-	If EquipmentPrintFiscalReceiptResult.Success Then
-		EquipmentFiscalPrinterServer.SetFiscalStatus(CommandParameter
-						, EquipmentPrintFiscalReceiptResult.Status
-						, EquipmentPrintFiscalReceiptResult.FiscalResponse
-						, EquipmentPrintFiscalReceiptResult.DataPresentation);
-	Else
-		EquipmentFiscalPrinterServer.SetFiscalStatus(CommandParameter
-						, EquipmentPrintFiscalReceiptResult.Status
-						, EquipmentPrintFiscalReceiptResult.ErrorDescription);
-	EndIf;
 EndProcedure
 
 &AtServer

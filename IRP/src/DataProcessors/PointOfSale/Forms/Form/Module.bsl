@@ -636,9 +636,7 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	
 	CashbackAmount = WriteTransaction(Result);
 	ResultPrint = Await PrintFiscalReceipt();
-	If ResultPrint Then
-		
-	Else
+	If Not ResultPrint Then
 		Return;
 	EndIf;
 	DetailedInformation = R().S_030 + ": " + Format(CashbackAmount, "NFD=2; NZ=0;");
@@ -773,38 +771,8 @@ Async Function PrintFiscalReceipt()
 	EndIf;
 	
 	EquipmentPrintFiscalReceiptResult = Await EquipmentFiscalPrinterClient.ProcessCheck(Object.ConsolidatedRetailSales, DocRef);
-	If EquipmentPrintFiscalReceiptResult.Success Then
-	SetFiscalStatus(DocRef
-						, EquipmentPrintFiscalReceiptResult.Status
-						, EquipmentPrintFiscalReceiptResult.FiscalResponse
-						, EquipmentPrintFiscalReceiptResult.DataPresentation);
-	Else
-		SetFiscalStatus(DocRef
-						, EquipmentPrintFiscalReceiptResult.Status
-						, EquipmentPrintFiscalReceiptResult.ErrorDescription);
-	EndIf;
 	Return EquipmentPrintFiscalReceiptResult.Success;
 EndFunction
-
-&AtServerNoContext
-Procedure SetFiscalStatus(DocumentRef, Status = "Prepaired", FiscalResponse = "", DataPresentation = "")
-	If Status = "Prepaired" Then
-		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
-																, Enums.DocumentFiscalStatuses.Prepaired);
-	ElsIf Status = "Printed" Then
-		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
-																, Enums.DocumentFiscalStatuses.Printed
-																, FiscalResponse
-																, DataPresentation);
-	ElsIf Status = "FiscalReturnedError" Then
-		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
-																, Enums.DocumentFiscalStatuses.FiscalReturnedError
-																, FiscalResponse);
-	ElsIf Status = "NotPrinted" Then
-		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
-																, Enums.DocumentFiscalStatuses.NotPrinted);
-	EndIf;
-EndProcedure
 
 &AtServer
 Procedure NewTransactionAtServer()

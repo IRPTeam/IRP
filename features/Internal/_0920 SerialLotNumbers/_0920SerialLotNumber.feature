@@ -548,6 +548,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 
 	
 Scenario: _092004 check serial lot number in the Sales invoice
+		And I close all client application windows
 	* Create Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"

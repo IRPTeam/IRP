@@ -1839,12 +1839,12 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 			And I input "09987897977893" text in the field named "InputFld"
 			And I click the button named "OK"
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Item'               | 'Item key' | 'Unit' | 'Serial lot numbers'                             | 'Quantity' |
-				| 'Own stocks'       | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                                               | '3,000'    |
-				| 'Consignor stocks' | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                                               | '2,000'    |
-				| 'Consignor stocks' | 'Dress'              | 'S/Yellow' | 'pcs'  | ''                                               | '2,000'    |
-				| 'Own stocks'       | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977893; 09987897977893' | '3,000'    |
-				| 'Consignor stocks' | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977893'                 | '2,000'    |
+				| 'Inventory origin' | 'Item'               | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Quantity' |
+				| 'Own stocks'       | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                   | '3,000'    |
+				| 'Consignor stocks' | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                   | '2,000'    |
+				| 'Consignor stocks' | 'Dress'              | 'S/Yellow' | 'pcs'  | ''                   | '2,000'    |
+				| 'Own stocks'       | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893'     | '3,000'    |
+				| 'Consignor stocks' | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893'     | '2,000'    |
 	* Scan item with serial lot number (with stock balance detail, only consignor stock)
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
@@ -1861,12 +1861,12 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 			And I input "09987897977894" text in the field named "InputFld"
 			And I click the button named "OK"
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Item'               | 'Item key' | 'Unit' | 'Serial lot numbers'                                             | 'Quantity' |
-				| 'Own stocks'       | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                                                               | '3,000'    |
-				| 'Consignor stocks' | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                                                               | '2,000'    |
-				| 'Consignor stocks' | 'Dress'              | 'S/Yellow' | 'pcs'  | ''                                                               | '2,000'    |
-				| 'Own stocks'       | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977893; 09987897977893; 09987897977894' | '4,000'    |
-				| 'Consignor stocks' | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977893; 09987897977894; 09987897977894' | '4,000'    |
+				| 'Inventory origin' | 'Item'               | 'Item key' | 'Unit' | 'Serial lot numbers'             | 'Quantity' |
+				| 'Own stocks'       | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                               | '3,000'    |
+				| 'Consignor stocks' | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                               | '2,000'    |
+				| 'Consignor stocks' | 'Dress'              | 'S/Yellow' | 'pcs'  | ''                               | '2,000'    |
+				| 'Own stocks'       | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977894' | '4,000'    |
+				| 'Consignor stocks' | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977894' | '4,000'    |
 	* Scan item with serial lot number (with stock balance detail, only own stock)
 		* Own stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
@@ -1883,12 +1883,12 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 			And I input "09987897977895" text in the field named "InputFld"
 			And I click the button named "OK"
 			And "ItemList" table became equal
-				| 'Inventory origin' | 'Item'               | 'Item key' | 'Unit' | 'Serial lot numbers'                                                                                             | 'Quantity' |
-				| 'Own stocks'       | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                                                                                                               | '3,000'    |
-				| 'Consignor stocks' | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                                                                                                               | '2,000'    |
-				| 'Consignor stocks' | 'Dress'              | 'S/Yellow' | 'pcs'  | ''                                                                                                               | '2,000'    |
-				| 'Own stocks'       | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977893; 09987897977893; 09987897977894; 09987897977895; 09987897977895; 09987897977895' | '7,000'    |
-				| 'Consignor stocks' | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977893; 09987897977894; 09987897977894'                                                 | '4,000'    |
+				| 'Inventory origin' | 'Item'               | 'Item key' | 'Unit' | 'Serial lot numbers'                             | 'Quantity' |
+				| 'Own stocks'       | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                                               | '3,000'    |
+				| 'Consignor stocks' | 'Dress'              | 'M/Brown'  | 'pcs'  | ''                                               | '2,000'    |
+				| 'Consignor stocks' | 'Dress'              | 'S/Yellow' | 'pcs'  | ''                                               | '2,000'    |
+				| 'Own stocks'       | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977894; 09987897977895' | '7,000'    |
+				| 'Consignor stocks' | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'  | '09987897977893; 09987897977894'                 | '4,000'    |
 			And I close all client application windows
 
 

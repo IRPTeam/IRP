@@ -295,7 +295,8 @@ Function ItemList()
 	|	ItemList.Ref.Currency AS Currency,
 	|	ItemList.Ref.Date AS Period,
 	|	ItemList.Ref AS RetailSalesReceipt,
-	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+//	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+	|	ItemList.IsService AS IsService,
 	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 	|	ItemList.RevenueType AS RevenueType,
 	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
@@ -992,7 +993,8 @@ Function T6020S_BatchKeysInfo()
 		|		LEFT JOIN ConsignorBatches AS ConsignorBatches
 		|		ON ItemList.Key = ConsignorBatches.Key
 		|WHERE
-		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+//		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+		|	NOT ItemList.IsService
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////

@@ -183,7 +183,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	Document.SalesReturn.ItemList AS SalesReturnItemList
 	|WHERE
 	|	SalesReturnItemList.Ref = &Ref
-	|	AND SalesReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+//	|	AND SalesReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+	|	AND NOT SalesReturnItemList.IsService
 	|GROUP BY
 	|	SalesReturnItemList.ItemKey,
 	|	SalesReturnItemList.Store,
@@ -438,6 +439,10 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	BatchKeysInfo_DataTableGrouped_Copy.Columns.Delete("__tmp_Amount");
 	BatchKeysInfo_DataTableGrouped_Copy.Columns.Delete("__tmp_AmountTax");
 		
+	BatchKeysInfo_DataTableGrouped_Copy.GroupBy(
+	"BatchConsignor, Company ,Currency, CurrencyMovementType, Direction, ItemKey, Period, SalesInvoice, SerialLotNumber, SourceOfOrigin, Store",
+	"Quantity, Amount, AmountTax");
+	
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = 
@@ -675,7 +680,8 @@ Function ItemList()
 	|	NOT GoodsReceipts.Key IS NULL AS GoodsReceiptExists,
 	|	GoodsReceipts.GoodsReceipt,
 	|	ItemList.NetAmount,
-	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+//	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+	|	ItemList.IsService AS IsService,
 	|	ItemList.ReturnReason,
 	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 	|	ItemList.RevenueType AS RevenueType,

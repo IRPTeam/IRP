@@ -7,6 +7,11 @@ Procedure OnOpen(Cancel)
 	BarcodeHasAnyCharactersOnChange(Undefined);
 EndProcedure
 
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	ErrorSound = DataProcessors.MobileInvent.GetTemplate("ErrorSound");
+EndProcedure
+
 #EndRegion
 
 #Region Barcode
@@ -73,8 +78,19 @@ Procedure ManualInputBarcode(Barcode)
 EndProcedure
 
 &AtClient
-Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
-	Info = "";
+Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
+	Info = "";          
+	
+	If Object.Ref.IsEmpty() Then
+		DocumentIsSet = False;
+		Message = FindAndSetDocument(Result.Barcodes[0], DocumentIsSet);
+		If Not DocumentIsSet Then
+			CommonFunctionsClientServer.ShowUsersMessage(Message);
+		EndIf;
+		BarcodeInput = "";
+		Return;
+	EndIf;
+	
 	If Object.Ref.IsEmpty() Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_025, "DocumentRef");
 	EndIf;
@@ -84,7 +100,25 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		If Row.isService Then
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_026, Row.Item));
 			BarcodeClient.CloseMobileScanner();
-			AttachIdleHandler("BeginEditBarcode", 0.1, True);
+			AttachIdleHandler("BeginEditBarcode", 0.1, True);   
+#If MobileClient Then
+		MultimediaTools.PlayAudio(ErrorSound);
+#EndIf		
+			Return;
+		EndIf;
+		
+		Filter = New Structure;
+		Filter.Insert("Item", Row.Item);
+		Filter.Insert("ItemKey", Row.ItemKey);
+		Filter.Insert("SerialLotNumber", Row.SerialLotNumber);
+		
+		If Row.EachSerialLotNumberIsUnique And Object.ItemList.FindRows(Filter).Count() Then
+			BarcodeInput = StrTemplate(R().Error_113, Row.SerialLotNumber);
+			DoMessageBoxAsync(BarcodeInput, 10);   
+#If MobileClient Then
+			MultimediaTools.PlayAudio(ErrorSound);
+#EndIf
+
 			Return;
 		EndIf;
 		
@@ -104,7 +138,11 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 				BarcodeInput = "";			
 				AttachIdleHandler("BeginEditBarcode", 0.1, True);	
 			EndIf;
-		EndIf;
+		EndIf;     
+#If MobileClient Then
+		MultimediaTools.PlaySoundAlert(SoundAlert.None, True);
+#EndIf
+
 	EndDo;
 	
 	If Result.FoundedItems.Count() Then
@@ -112,17 +150,22 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			BarcodeClient.CloseMobileScanner();
 			StartEditQuantity(NewRow.GetID(), True);
 		EndIf;
-		Write();
+		Write();      
+		BarcodeInput = "";
 		If ScanEmulator Then
-			BarcodeInput = "";				
 			AttachIdleHandler("BeginEditBarcode", 0.1, True);
 		EndIf;
-	Else
+	Else           
+#If MobileClient Then
+		MultimediaTools.PlayAudio(ErrorSound);
+#EndIf
 		If ScanEmulator Then
 			Info = StrTemplate(R().S_019, Result.Barcodes[0]);
 			BarcodeInput = "";
 			AttachIdleHandler("BeginEditBarcode", 0.1, True);
-		EndIf;
+		Else
+			DoMessageBoxAsync(StrTemplate(R().S_019, Result.Barcodes[0]));
+		EndIf;                                               
 	EndIf;
 
 EndProcedure

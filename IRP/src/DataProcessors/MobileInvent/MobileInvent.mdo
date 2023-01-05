@@ -29,4 +29,12 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <templates uuid="b41b9ac8-7474-4bb9-95ab-2dc7e1cc1241">
+    <name>ErrorSound</name>
+    <synonym>
+      <key>en</key>
+      <value>Error sound</value>
+    </synonym>
+    <templateType>BinaryData</templateType>
+  </templates>
 </mdclass:DataProcessor>

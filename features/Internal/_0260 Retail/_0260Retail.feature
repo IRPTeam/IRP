@@ -580,11 +580,6 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 	And I close all client application windows
 	* Open POS
 		And In the command interface I select "Retail" "Point of sale"
-		And I expand current line in "ItemsPickup" table
-		And I go to line in "ItemsPickup" table
-			| 'Item'           |
-			| 'Dress, XS/Blue' |
-		And I select current line in "ItemsPickup" table
 	* Select retail customer (cash advance)
 		And I move to the tab named "ButtonPage"
 		And I click "Search customer" button

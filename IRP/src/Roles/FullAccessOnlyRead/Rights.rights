@@ -782,17 +782,6 @@
 		</right>
 	</object>
 	<object>
-		<name>DocumentJournal.AllDocuments</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.ChequeBondTransaction</name>
 		<right>
 			<name>Read</name>

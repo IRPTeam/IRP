@@ -452,9 +452,7 @@ Function GetDocumentTable_SalesOrder_CustomerAdvance(ArrayOfBasisDocuments, Paym
 	|	R3026B_SalesOrdersCustomerAdvance.AmountBalance AS Amount
 	|FROM
 	|	AccumulationRegister.R3026B_SalesOrdersCustomerAdvance.Balance(, Order IN (&ArrayOfBasisDocuments)
-	|	AND PaymentTypeEnum = &PaymentTypeEnum) AS R3026B_SalesOrdersCustomerAdvance
-	|WHERE
-	|	R3026B_SalesOrdersCustomerAdvance.AmountBalance > 0";
+	|	AND PaymentTypeEnum = &PaymentTypeEnum) AS R3026B_SalesOrdersCustomerAdvance";
 	Query.SetParameter("ArrayOfBasisDocuments", ArrayOfBasisDocuments);
 	Query.SetParameter("PaymentTypeEnum", PaymentTypeEnum);
 	QueryResult = Query.Execute();

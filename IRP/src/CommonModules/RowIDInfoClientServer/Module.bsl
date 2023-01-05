@@ -217,16 +217,13 @@ EndFunction
 
 Function GetLinkedDocumentsFilter_RSR(Object) Export
 	Filter = New Structure();
+	Filter.Insert("Company"              , Object.Company);
+	Filter.Insert("Branch"               , Object.Branch);
 	Filter.Insert("RetailCustomer"       , Object.RetailCustomer);
 	Filter.Insert("CurrencySales"        , Object.Currency);
+	Filter.Insert("TransactionTypeSales" , PredefinedValue("Enum.SalesTransactionTypes.RetailSales"));
 	Filter.Insert("PriceIncludeTaxSales" , Object.PriceIncludeTax);
 	Filter.Insert("Ref"                  , Object.Ref);
-	Filter.Insert("TransactionTypeSales" , Object.TransactionType);
-	
-	VisibleFields = New Structure();
-	VisibleFields.Insert("Company");
-	VisibleFields.Insert("Branch");
-	Filter.Insert("VisibleFields", VisibleFields);
 	Return Filter;
 EndFunction
 

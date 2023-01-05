@@ -68,13 +68,13 @@ Function GetSelectedRowInfo(CurrentData, ArrayOfFilterExcludeFields = Undefined)
 		Store = CurrentData.Store;
 	EndIf;
 	Result.SelectedRow = New Structure();
-	Result.SelectedRow.Insert("Key", CurrentData.Key);
-	Result.SelectedRow.Insert("Item", CurrentData.Item);
-	Result.SelectedRow.Insert("ItemKey", CurrentData.ItemKey);
-	Result.SelectedRow.Insert("Store", Store);
-	Result.SelectedRow.Insert("Unit", CurrentData.Unit);
-	Result.SelectedRow.Insert("Quantity", CurrentData.Quantity);
-	Result.SelectedRow.Insert("LineNumber", CurrentData.LineNumber);
+	Result.SelectedRow.Insert("Key"        , CurrentData.Key);
+	Result.SelectedRow.Insert("Item"       , CurrentData.Item);
+	Result.SelectedRow.Insert("ItemKey"    , CurrentData.ItemKey);
+	Result.SelectedRow.Insert("Store"      , Store);
+	Result.SelectedRow.Insert("Unit"       , CurrentData.Unit);
+	Result.SelectedRow.Insert("Quantity"   , CurrentData.Quantity);
+	Result.SelectedRow.Insert("LineNumber" , CurrentData.LineNumber);
 
 	Result.SelectedRow.Insert("QuantityInBaseUnit", 0);
 	Result.SelectedRow.Insert("BasisUnit", Undefined);
@@ -88,9 +88,9 @@ Function GetSelectedRowInfo(CurrentData, ArrayOfFilterExcludeFields = Undefined)
 	EndIf;
 
 	Result.FilterBySelectedRow = New Structure();
-	Result.FilterBySelectedRow.Insert("ItemKey", CurrentData.ItemKey);
-	Result.FilterBySelectedRow.Insert("Store", Store);
-	Result.FilterBySelectedRow.Insert("StoreReturn", Store);
+	Result.FilterBySelectedRow.Insert("ItemKey"     , CurrentData.ItemKey);
+	Result.FilterBySelectedRow.Insert("Store"       , Store);
+	Result.FilterBySelectedRow.Insert("StoreReturn" , Store);
 	
 	If ArrayOfFilterExcludeFields <> Undefined Then
 		Result.Insert("ArrayOfFilterExcludeFields", ArrayOfFilterExcludeFields);

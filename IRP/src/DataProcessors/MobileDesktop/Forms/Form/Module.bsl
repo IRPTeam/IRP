@@ -93,11 +93,9 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		MultimediaTools.CloseBarcodeScanning();
 #EndIf
 	Else
-#If Not MobileClient Then
 		For Each Row In Result.Barcodes Do
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, Row));
+			Barcode = StrTemplate(R().S_019, Row);
 		EndDo;
-#EndIf
 	EndIf;
 
 	For Each Row In Result.FoundedItems Do

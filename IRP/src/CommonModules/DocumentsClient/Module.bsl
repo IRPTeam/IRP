@@ -584,7 +584,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			ExistingRows = Object.ItemList.FindRows(FilterStructure);	
 		EndIf;
 		
-		If ExistingRows.Count() Then // increment Quantity in existing row
+		If ExistingRows.Count() And Not ResultElement.AlwaysAddNewRowAfterScan Then // increment Quantity in existing row
 			Row = ExistingRows[0];
 			
 			_UpdateQuantity = True;

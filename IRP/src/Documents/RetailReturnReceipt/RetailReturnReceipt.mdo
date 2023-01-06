@@ -348,6 +348,25 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="0d0eee6c-6abf-4c02-803c-9c7bee02ee48">
+    <name>PaymentMethod</name>
+    <synonym>
+      <key>en</key>
+      <value>Payment method</value>
+    </synonym>
+    <type>
+      <types>EnumRef.ReceiptPaymentMethods</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:ReferenceValue">
+      <value>Enum.ReceiptPaymentMethods.EnumValue.FullCalculation</value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="e0f081d4-5d22-4460-ba59-2f55d8d61e66">
     <name>DocumentForm</name>
     <synonym>
@@ -1516,6 +1535,19 @@
       <types>DocumentRef.RetailSalesReceipt</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
+  <commands uuid="48aac96f-5891-4b5e-b079-6a12983630f5">
+    <name>PrintReceipt</name>
+    <synonym>
+      <key>en</key>
+      <value>Print receipt</value>
+    </synonym>
+    <group>FormCommandBarImportant</group>
+    <commandParameterType>
+      <types>DocumentRef.RetailReturnReceipt</types>
+    </commandParameterType>
+    <modifiesData>true</modifiesData>
     <representation>Auto</representation>
   </commands>
 </mdclass:Document>

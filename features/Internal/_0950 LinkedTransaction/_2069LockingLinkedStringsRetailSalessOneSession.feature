@@ -317,6 +317,7 @@ Scenario: _2069006 check locking tab in the Retail return receipt with linked do
 			And I input "11 300,00" text in "Amount" field of "Payments" table
 			And I finish line editing in "Payments" table
 			And I move to "Item list" tab
+			And I select "Full calculation" exact value from "Payment method" drop-down list
 			And I click "Post" button
 			Then "1C:Enterprise" window is opened
 			And I click the button named "OK"

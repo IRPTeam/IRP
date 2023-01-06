@@ -54,7 +54,7 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 			Return Result;
 		EndIf;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -68,7 +68,7 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 		FillPropertyValues(Result, ShiftData);
 		Result.Success = True;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -107,7 +107,7 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 			
 		EndIf;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -119,7 +119,7 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 		FillPropertyValues(Result, ShiftData);
 		Result.Success = True;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -162,7 +162,7 @@ Async Function PrintXReport(ConsolidatedRetailSales) Export
 			Return Result;
 		EndIf;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -171,7 +171,7 @@ Async Function PrintXReport(ConsolidatedRetailSales) Export
 	If ResultInfo Then
 		Result.Success = True;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -181,6 +181,15 @@ EndFunction
 
 Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
 	Result = ReceiptResultStructure();
+	StatusData = EquipmentFiscalPrinterServer.GetStatusData(RetailSalesReceipt);
+	If StatusData.IsPrinted Then
+		Result.Status = StatusData.Status;
+		Result.DataPresentation = StatusData.DataPresentation;
+		Result.FiscalResponse = StatusData.FiscalResponse;
+		Result.Success = True;
+		CommonFunctionsClientServer.ShowUsersMessage(R().EqFP_DocumentAlreadyPrinted);
+		Return Result;
+	EndIf;
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
 		Result.Success = True;
@@ -193,6 +202,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(XMLOperationSettings);
 	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
+																			, Parameters.ParametersXML
 																			, Parameters.ResultXML);
 	If ResultInfo Then
 		ShiftData = ShiftResultStructure();
@@ -211,7 +221,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
 			Return Result;
 		EndIf;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		Result.Status = "FiscalReturnedError";
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
@@ -221,8 +231,6 @@ Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
 	XMLOperationSettings = ReceiptGetXMLOperationSettings(RetailSalesReceipt);
 	
 	Parameters.ParametersXML = ReceiptGetXMLOperation(XMLOperationSettings);
-
-	Result = ReceiptResultStructure();
 	
 	ResultInfo = Settings.ConnectedDriver.DriverObject.ProcessCheck(Settings.ConnectedDriver.ID
 																	, False
@@ -236,18 +244,35 @@ Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
 		Result.DataPresentation = " " + Result.ShiftNumber + " " + Result.DateTime;
 		Result.FiscalResponse = Parameters.ResultXML;
 		Result.Success = True;
+		
+		EquipmentFiscalPrinterServer.SetFiscalStatus(RetailSalesReceipt
+						, Result.Status
+						, Result.FiscalResponse
+						, " " + Result.ShiftNumber + " " + Result.DateTime);
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		Result.Status = "FiscalReturnedError";
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+		
+		EquipmentFiscalPrinterServer.SetFiscalStatus(RetailSalesReceipt
+						, Result.Status
+						, Result.ErrorDescription);
+		
 		Return Result;
 	EndIf;
 	
 	Return Result;
 EndFunction
 
-Async Function CashInCome(ConsolidatedRetailSales, Summ) Export
+Async Function CashInCome(ConsolidatedRetailSales, PrintDocument, Summ) Export
 	Result = ShiftResultStructure();
+	StatusData = EquipmentFiscalPrinterServer.GetStatusData(PrintDocument);
+	If StatusData.IsPrinted Then
+		Result.Status = StatusData.Status;
+		Result.Success = True;
+		CommonFunctionsClientServer.ShowUsersMessage(R().EqFP_DocumentAlreadyPrinted);
+		Return Result;
+	EndIf;
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
 		Result.Success = True;
@@ -261,6 +286,7 @@ Async Function CashInCome(ConsolidatedRetailSales, Summ) Export
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
+																			, Parameters.ParametersXML
 																			, Parameters.ResultXML);
 	If ResultInfo Then
 		ShiftData = ShiftResultStructure();
@@ -279,7 +305,7 @@ Async Function CashInCome(ConsolidatedRetailSales, Summ) Export
 			Return Result;
 		EndIf;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -288,18 +314,34 @@ Async Function CashInCome(ConsolidatedRetailSales, Summ) Export
 																		, Parameters.ParametersXML
 																		, Summ);
 	If ResultInfo Then
+		Result.Status = "Printed";
 		Result.Success = True;
+		EquipmentFiscalPrinterServer.SetFiscalStatus(PrintDocument
+						, Result.Status);
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
+		Result.Status = "FiscalReturnedError";
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+		
+		EquipmentFiscalPrinterServer.SetFiscalStatus(PrintDocument
+						, Result.Status
+						, Result.ErrorDescription);
+						
 		Return Result;
 	EndIf;
 	
 	Return Result;
 EndFunction
 
-Async Function CashOutCome(ConsolidatedRetailSales, Summ) Export
+Async Function CashOutCome(ConsolidatedRetailSales, PrintDocument, Summ) Export
 	Result = ShiftResultStructure();
+	StatusData = EquipmentFiscalPrinterServer.GetStatusData(PrintDocument);
+	If StatusData.IsPrinted Then
+		Result.Status = StatusData.Status;
+		Result.Success = True;
+		CommonFunctionsClientServer.ShowUsersMessage(R().EqFP_DocumentAlreadyPrinted);
+		Return Result;
+	EndIf;
 	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter, Author");
 	If CRS.FiscalPrinter.isEmpty() Then
 		Result.Success = True;
@@ -314,6 +356,7 @@ Async Function CashOutCome(ConsolidatedRetailSales, Summ) Export
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	
 	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
+																			, Parameters.ParametersXML
 																			, Parameters.ResultXML);
 	If ResultInfo Then
 		ShiftData = ShiftResultStructure();
@@ -332,7 +375,7 @@ Async Function CashOutCome(ConsolidatedRetailSales, Summ) Export
 			Return Result;
 		EndIf;
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -341,10 +384,19 @@ Async Function CashOutCome(ConsolidatedRetailSales, Summ) Export
 																		, Parameters.ParametersXML
 																		, -Summ);
 	If ResultInfo Then
+		Result.Status = "Printed";
 		Result.Success = True;
+		EquipmentFiscalPrinterServer.SetFiscalStatus(PrintDocument
+						, Result.Status);
 	Else
-		Result.ErrorDescription = Settings.ConnectedDriver.DriverObject.GetLastError();
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
+		Result.Status = "FiscalReturnedError";
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+		
+		EquipmentFiscalPrinterServer.SetFiscalStatus(PrintDocument
+						, Result.Status
+						, Result.ErrorDescription);
+						
 		Return Result;
 	EndIf;
 	
@@ -375,6 +427,7 @@ Function ShiftResultStructure()
 	ReturnValue = New Structure;
 	ReturnValue.Insert("Success", False);
 	ReturnValue.Insert("ErrorDescription", "");
+	ReturnValue.Insert("Status", "");
 	
 	ReturnValue.Insert("BacklogDocumentFirstDateTime", Date(1, 1, 1));
 	ReturnValue.Insert("BacklogDocumentFirstNumber", 0);
@@ -523,6 +576,16 @@ Function ReceiptGetXMLOperation(CommonParameters) Export
 		XMLWriter.WriteAttribute("PriceWithDiscount", ToXMLString(Item.PriceWithDiscount));
 		XMLWriter.WriteAttribute("VATRate", ToXMLString(Item.VATRate));
 		XMLWriter.WriteAttribute("VATAmount", ToXMLString(Item.VATAmount));
+		If Item.Property("CalculationAgent") Then
+			XMLWriter.WriteAttribute("CalculationAgent", ToXMLString(Item.CalculationAgent));
+		EndIf;
+		If Item.Property("VendorData") Then
+			XMLWriter.WriteStartElement("VendorData");
+			XMLWriter.WriteAttribute("VendorINN", ToXMLString(Item.VendorData.VendorINN));
+			XMLWriter.WriteAttribute("VendorName", ToXMLString(Item.VendorData.VendorName));
+			XMLWriter.WriteAttribute("VendorPhone", ToXMLString(Item.VendorData.VendorPhone));
+			XMLWriter.WriteEndElement();
+		EndIf;
 		XMLWriter.WriteEndElement();
 	EndDo;
 	For Each Item In CommonParameters.TextStrings Do

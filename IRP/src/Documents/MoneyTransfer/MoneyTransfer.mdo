@@ -278,6 +278,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="19ce7ff1-d608-4a42-9195-b43166feee3d">
+    <name>ConsolidatedRetailSales</name>
+    <synonym>
+      <key>en</key>
+      <value>Consolidated retail sales</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.ConsolidatedRetailSales</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="9199dc05-6aa4-4c94-99b2-08023fc5cb21">
     <name>DocumentForm</name>
     <synonym>
@@ -497,6 +512,19 @@
       <types>DocumentRef.CashTransferOrder</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
+  <commands uuid="e3b9469c-5d7c-49c6-a76e-f92bcb46e8df">
+    <name>PrintCashOut</name>
+    <synonym>
+      <key>en</key>
+      <value>Print cash out</value>
+    </synonym>
+    <group>FormCommandBarImportant</group>
+    <commandParameterType>
+      <types>DocumentRef.MoneyTransfer</types>
+    </commandParameterType>
+    <modifiesData>true</modifiesData>
     <representation>Auto</representation>
   </commands>
 </mdclass:Document>

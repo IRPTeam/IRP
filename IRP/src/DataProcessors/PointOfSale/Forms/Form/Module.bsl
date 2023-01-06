@@ -636,9 +636,7 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	
 	CashbackAmount = WriteTransaction(Result);
 	ResultPrint = Await PrintFiscalReceipt();
-	If ResultPrint Then
-		
-	Else
+	If Not ResultPrint Then
 		Return;
 	EndIf;
 	DetailedInformation = R().S_030 + ": " + Format(CashbackAmount, "NFD=2; NZ=0;");
@@ -773,38 +771,8 @@ Async Function PrintFiscalReceipt()
 	EndIf;
 	
 	EquipmentPrintFiscalReceiptResult = Await EquipmentFiscalPrinterClient.ProcessCheck(Object.ConsolidatedRetailSales, DocRef);
-	If EquipmentPrintFiscalReceiptResult.Success Then
-	SetFiscalStatus(Object.Ref
-						, EquipmentPrintFiscalReceiptResult.Status
-						, EquipmentPrintFiscalReceiptResult.FiscalResponse
-						, EquipmentPrintFiscalReceiptResult.DataPresentation);
-	Else
-		SetFiscalStatus(Object.Ref
-						, EquipmentPrintFiscalReceiptResult.Status
-						, EquipmentPrintFiscalReceiptResult.ErrorDescription);
-	EndIf;
 	Return EquipmentPrintFiscalReceiptResult.Success;
 EndFunction
-
-&AtServerNoContext
-Procedure SetFiscalStatus(DocumentRef, Status = "Prepaired", FiscalResponse = "", DataPresentation = "")
-	If Status = "Prepaired" Then
-		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
-																, Enums.DocumentFiscalStatuses.Prepaired);
-	ElsIf Status = "Printed" Then
-		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
-																, Enums.DocumentFiscalStatuses.Printed
-																, FiscalResponse
-																, DataPresentation);
-	ElsIf Status = "FiscalReturnedError" Then
-		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
-																, Enums.DocumentFiscalStatuses.FiscalReturnedError
-																, FiscalResponse);
-	ElsIf Status = "NotPrinted" Then
-		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef
-																, Enums.DocumentFiscalStatuses.NotPrinted);
-	EndIf;
-EndProcedure
 
 &AtServer
 Procedure NewTransactionAtServer()
@@ -891,7 +859,9 @@ EndProcedure
 
 &AtClient
 Procedure EnabledPaymentButton()
-	Items.GroupPaymentButtons.Enabled = Object.ItemList.Count();
+	Items.qPayment.Enabled = Object.ItemList.Count() > 0;
+	Items.CommandBarPayments.Enabled = Object.ItemList.Count() = 0;
+	
 	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
 		SetPaymentButtonOnServer();
 	EndIf;
@@ -905,6 +875,7 @@ Procedure SetPaymentButtonOnServer()
 		Items.qPayment.Title = R().InfoMessage_Payment;
 		Items.qPayment.TextColor = ColorGreen;
 		Items.qPayment.BorderColor = ColorGreen;
+		Items.GroupPaymentButtons.Enabled = True;
 	Else
 		Items.GroupPaymentButtons.Enabled = False;
 		Items.qPayment.Title = R().InfoMessage_SessionIsClosed;
@@ -1141,4 +1112,5 @@ Procedure FillCashInList()
 		FillPropertyValues(ThisObject.CashInList.Add(), QuerySelection);
 	EndDo;
 EndProcedure
+
 

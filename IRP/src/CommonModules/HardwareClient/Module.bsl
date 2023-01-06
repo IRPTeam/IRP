@@ -259,10 +259,13 @@ EndFunction
 // Parameters:
 //  Settings - See FillDriverParametersSettings
 Procedure FillDriverParameters(Settings) Export
+	#If WebClient Then
+		Return;
+	#EndIf 
 	If Settings.Hardware.IsEmpty() Then
 		Return;
 	EndIf;
-
+	
 	Notify = New NotifyDescription("GetDescription_End", ThisObject, Settings);
 	Settings.ConnectedDriver.DriverObject.НачатьВызовПолучитьОписание(Notify, "");
 EndProcedure

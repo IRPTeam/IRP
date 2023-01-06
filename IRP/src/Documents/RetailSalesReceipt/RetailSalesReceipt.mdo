@@ -1785,4 +1785,17 @@
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>
   </commands>
+  <commands uuid="ffa641d0-bd4b-42a4-b8d4-580b70a31f79">
+    <name>PrintReceipt</name>
+    <synonym>
+      <key>en</key>
+      <value>Print receipt</value>
+    </synonym>
+    <group>FormCommandBarImportant</group>
+    <commandParameterType>
+      <types>DocumentRef.RetailSalesReceipt</types>
+    </commandParameterType>
+    <modifiesData>true</modifiesData>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

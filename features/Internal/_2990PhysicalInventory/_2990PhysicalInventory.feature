@@ -858,9 +858,7 @@ Scenario: _2990016 check Physical count by location (mobile form)
 		And I click the button named "OK"
 		Then "DocumentRef" form attribute became equal to "Location count 2*" template
 	* Scan barcode without serial lot number (with scan emulator)
-		And I move to "Group settings" tab
-		And I set checkbox "Scan emulator"
-		And I move to "Group main" tab		
+		And I set checkbox "Scan emulator"	
 		And I input "67789997777805" text in the field named "BarcodeInput"
 		And I move to the next attribute
 		* Create unique serial from string
@@ -880,17 +878,13 @@ Scenario: _2990016 check Physical count by location (mobile form)
 			And I move to the next attribute
 			And I click the button named "OK"
 	* Scan barcode with serial lot number
-		And I move to "Group settings" tab
 		And I set checkbox "Edit quantity"
-		And I move to "Group main" tab
 		And I input "23455677788976667" text in the field named "BarcodeInput"
 		And I move to the next attribute
 		And I input "3,000" text in the field named "Quantity"
 		And I click the button named "OK"
 	* Scan barcode with serial lot number (without scan emulator)
-		And I move to "Group settings" tab
 		And I remove checkbox "Scan emulator"
-		And I move to "Group main" tab
 		And I click the button named "SearchByBarcode"
 		Then "Enter a barcode" window is opened
 		And I input "23455677788976667" text in the field named "InputFld"
@@ -903,7 +897,6 @@ Scenario: _2990016 check Physical count by location (mobile form)
 			| 'Product 1 with SLN' | 'PZU'      | '8908899877'        | '3,000'       | '*'    |
 			| 'Product 1 with SLN' | 'ODS'      | '234567'            | '1,000'       | '*'    |
 	* Delete string
-		And I move to "Group settings" tab
 		And I remove checkbox "Edit quantity"
 		And I go to line in "ItemList" table
 			| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' |
@@ -981,9 +974,7 @@ Scenario: _2990016 filling Physical count by location (mobile form without scan 
 			| 'Boots'              | '36/18SD'  | ''                  | '1,000'       |
 		And I click "Save" button		
 	* Change Phys. count (manual)
-		And I move to "Group settings" tab
 		And I set checkbox "Edit quantity"
-		And I move to "Group main" tab
 		And I activate "Phys. count" field in "ItemList" table
 		And I go to the first line in "ItemList" table
 		And I select current line in "ItemList" table

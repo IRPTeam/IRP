@@ -68,3 +68,15 @@ Function InfoSample() Export
 	Return Info;
 
 EndFunction
+
+Function Play(Sound) Export
+#If MobileClient Then
+	MultimediaTools.PlayAudio(Sound);
+#EndIf	
+EndFunction
+
+Procedure Vibrate() Export
+#If MobileClient Then
+	MultimediaTools.PlaySoundAlert(SoundAlert.None, True);
+#EndIf
+EndProcedure

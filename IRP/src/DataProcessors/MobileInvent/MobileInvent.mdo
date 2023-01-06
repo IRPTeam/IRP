@@ -37,4 +37,20 @@
     </synonym>
     <templateType>BinaryData</templateType>
   </templates>
+  <templates uuid="091cba53-5ade-4728-aa39-9ad5041f5183">
+    <name>Done</name>
+    <synonym>
+      <key>en</key>
+      <value>Done</value>
+    </synonym>
+    <templateType>BinaryData</templateType>
+  </templates>
+  <templates uuid="4b612e45-831e-4240-bded-a550e5fa0c3d">
+    <name>SameItemKeyBarcode</name>
+    <synonym>
+      <key>en</key>
+      <value>Same item key barcode</value>
+    </synonym>
+    <templateType>BinaryData</templateType>
+  </templates>
 </mdclass:DataProcessor>

@@ -1902,21 +1902,6 @@
       <common>true</common>
     </edit>
   </attributes>
-  <attributes>
-    <name>ErrorSound</name>
-    <title>
-      <key>en</key>
-      <value>Error sound</value>
-    </title>
-    <id>1</id>
-    <valueType/>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-  </attributes>
   <formCommands>
     <name>SearchByBarcode</name>
     <id>2</id>

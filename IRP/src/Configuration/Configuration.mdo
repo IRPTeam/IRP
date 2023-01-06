@@ -39,6 +39,14 @@
    <functionality>Camera</functionality>
    <use>true</use>
   </functionality>
+  <functionality>
+   <functionality>AudioPlaybackAndVibration</functionality>
+   <use>true</use>
+  </functionality>
+  <functionality>
+   <functionality>BackgroundAudioPlaybackAndVibration</functionality>
+   <use>true</use>
+  </functionality>
  </usedMobileApplicationFunctionalities>
  <mainSectionPicture/>
  <defaultLanguage>Language.English</defaultLanguage>
@@ -870,7 +878,6 @@
  <documents>Document.SalesReportToConsignor</documents>
  <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
  <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
- <documentJournals>DocumentJournal.AllDocuments</documentJournals>
  <enums>Enum.AccountingAnalyticTypes</enums>
  <enums>Enum.AgreementKinds</enums>
  <enums>Enum.AgreementTypes</enums>

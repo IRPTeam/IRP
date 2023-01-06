@@ -224,8 +224,11 @@ Scenario: _0850002 open session
 		And I select "Open" exact value from the drop-down list named "Status"
 		And I activate "Icon" field in "Documents" table
 		And I click "Post and close" button
+		And I close all client application windows
 		And In the command interface I select "Retail" "Point of sale"
 		And I click "Close session" button
+		Then "Finish: Session closing" window is opened
+		And I click "Close session" button		
 		And Delay 2
 		And I click "Open session" button
 	* Check
@@ -382,11 +385,11 @@ Scenario: _0850017 advance payment from POS
 		And I click "P\A" button
 		And "Payments" table became equal
 			| 'Payment type' | 'Amount' |
-			| 'Bank credit'  | '100,00' |
+			| 'Bank credit'  | '118,00' |
 		And I click the button named "Enter"
 
 	
-Scenario: _0850018 bank credit payment
+Scenario: _0850018 advance payment
 	And I close all client application windows
 	And In the command interface I select "Retail" "Point of sale"
 	* Select retail customer
@@ -394,8 +397,15 @@ Scenario: _0850018 bank credit payment
 		And I input "005" text in "ID" field
 		And I move to the next attribute
 		And I click "OK" button
+	* Select first item (scan by barcode, with serial lot number)
+		And I click "Search by barcode (F7)" button
+		And I input "57897909799" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 	* Advance
-		Then "Point of sales *" window is opened
 		And I click the button named "Advance"
 		Then "Payment" window is opened
 		And I click "2" button

@@ -67,6 +67,24 @@ Procedure PropertiesTableSelection(Item, RowSelected, Field, StandardProcessing)
 	EndIf;
 EndProcedure
 
+// Properties table OnActivateField.
+// 
+// Parameters:
+//  Item - FormTable - Item
+&AtClient
+Procedure PropertiesTableOnActivateField(Item)
+	CurrentField = Item.CurrentItem.Name;
+	AutoColor = Items.PropertiesTableObject.TitleBackColor;
+	For Each TableField In Items.PropertiesFields.ChildItems Do
+		If TableField.Name = CurrentField Then
+			TableField.TitleBackColor = New Color(255, 255, 0);
+		Else
+			TableField.TitleBackColor = AutoColor;
+		EndIf;
+	EndDo;
+
+EndProcedure
+
 // Properties table value on change.
 // 
 // Parameters:
@@ -101,12 +119,14 @@ Procedure PropertiesTableValueStartChoice(Item, ChoiceData, StandardProcessing)
 	
 	If TypeOf(CurrentFieldValue) = Type("String") Then
 		StandardProcessing = False;
+		SelectedRows = New Array; // Array of Number
+		SelectedRows.Add(Items.PropertiesTable.CurrentData.GetID());
 		OpenForm("DataProcessor.ObjectPropertyEditor.Form.EditMultilineText", 
 				New Structure("ExternalText", CurrentFieldValue), 
 				ThisObject, , , ,
 				New NotifyDescription("OnEditedMultilineTextEnd", 
 					ThisObject, 
-					New Structure("RowKey, FieldName", Items.PropertiesTable.CurrentData.GetID(), FieldName)),
+					New Structure("SelectedRows, FieldName", SelectedRows, FieldName)),
 				FormWindowOpeningMode.LockOwnerWindow);
 	EndIf;
 	
@@ -192,6 +212,68 @@ Procedure SetNewValue(Command)
 
 EndProcedure
 
+&AtClient
+Procedure SetValueForSelectedRows(Command)
+	
+	RowValue = Items.PropertiesTable.CurrentData;
+	Field = Items.PropertiesTable.CurrentItem.Name; // String
+	CurrentRowValue = RowValue[Field]; // String, Number, Arbitrary, ValueList
+	
+	SelectedRows = New Array; // Array of Number
+	For Each SelectedRow In Items.PropertiesTable.SelectedRows Do
+		RowIndex = SelectedRow; // Number
+		SelectedRows.Add(RowIndex);
+	EndDo;
+	
+	FieldDescription = GetFormCash(ThisObject).ColumnsData[Field]; // See GetFieldDescription
+	ClearType = New TypeDescription(FieldDescription.ValueType, , "Undefined");
+	If FieldDescription.isCollection Then
+		If Not TypeOf(CurrentRowValue) = Type("ValueList") Then
+			NewValue = New ValueList; // ValueList of String, Number, Arbitrary
+			If Not CurrentRowValue = Undefined Then
+				NewValue.Add(CurrentRowValue);
+			EndIf;
+			NewValue.ValueType = ClearType;
+			CurrentRowValue = NewValue;
+			ClearType = New TypeDescription(FieldDescription.CollectionValueType, , "Undefined");
+		EndIf;
+	Else
+		If CurrentRowValue = Undefined Then
+			CurrentRowValue = ClearType.AdjustValue();
+		EndIf;
+	EndIf;
+	
+	If TypeOf(CurrentRowValue) = Type("String") Then
+		OpenForm("DataProcessor.ObjectPropertyEditor.Form.EditMultilineText", 
+			New Structure("ExternalText", CurrentRowValue), 
+			ThisObject, , , ,
+			New NotifyDescription("OnEditedMultilineTextEnd", 
+				ThisObject, 
+				New Structure("SelectedRows, FieldName", SelectedRows, Field)),
+			FormWindowOpeningMode.LockOwnerWindow);
+	ElsIf Not IsBlankString(FieldDescription.ValueChoiceForm) Then
+		OpenFormParameters = New Structure;
+		OpenFormParameters.Insert("Key", CurrentRowValue);
+		OpenFormParameters.Insert("Filter", New Structure("Owner", FieldDescription.Ref));
+		OpenForm(FieldDescription.ValueChoiceForm, 
+			OpenFormParameters, 
+			ThisObject, , , ,
+			New NotifyDescription("SetValueForSelectedRowsEnd", 
+				ThisObject, 
+				New Structure("FieldName, SelectedRows", Field, SelectedRows)), 
+			FormWindowOpeningMode.LockOwnerWindow);
+	Else
+		ShowInputValue(
+			New NotifyDescription("SetValueForSelectedRowsEnd", 
+				ThisObject, 
+				New Structure("FieldName, SelectedRows", Field, SelectedRows)), 
+			CurrentRowValue, 
+			"Input new value", 
+			ClearType);
+	EndIf;
+
+EndProcedure
+
 #EndRegion
 
 #Region NotifyDescriptions
@@ -201,13 +283,32 @@ EndProcedure
 // Parameters:
 //  ChangedText - String, Undefined - Changed text
 //  AddInfo - Structure - Add info:
-//		* RowKey - Number -
 //		* FieldName - String -
+//		* SelectedRows - Array of Number -
 &AtClient
 Procedure OnEditedMultilineTextEnd(ChangedText, AddInfo) Export
 	If ValueIsFilled(ChangedText) Then
-		CurrentRow = ThisObject.PropertiesTable.FindByID(AddInfo.RowKey);
-		CurrentRow[AddInfo.FieldName] = ChangedText;
+		For Each RowKey In AddInfo.SelectedRows Do
+			CurrentRow = ThisObject.PropertiesTable.FindByID(RowKey);
+			CurrentRow[AddInfo.FieldName] = ChangedText;
+		EndDo;
+	EndIf;
+EndProcedure
+
+// Set value for selected rows end.
+// 
+// Parameters:
+//  ChangedValue - Arbitrary - Changed value
+//  AddInfo - Structure - Add info:
+//		* FieldName - String -
+//		* SelectedRows - Array of Number -
+&AtClient
+Procedure SetValueForSelectedRowsEnd(ChangedValue, AddInfo) Export
+	If Not ChangedValue = Undefined Then
+		For Each RowKey In AddInfo.SelectedRows Do
+			CurrentRow = ThisObject.PropertiesTable.FindByID(RowKey);
+			CurrentRow[AddInfo.FieldName] = ChangedValue;
+		EndDo;
 	EndIf;
 EndProcedure
 
@@ -1034,6 +1135,7 @@ EndProcedure
 // * isExisting - Boolean, Arbitrary -
 // * isCollection - Boolean -
 // * CollectionValueType - TypeDescription -
+// * ValueChoiceForm - String -
 &AtServerNoContext
 Function GetFieldDescription(Ref, Presentation, ValueType, isAvailable, isExisting, isCollection)
 	Result = New Structure;
@@ -1044,6 +1146,16 @@ Function GetFieldDescription(Ref, Presentation, ValueType, isAvailable, isExisti
 	Result.Insert("isExisting", isExisting);
 	Result.Insert("isCollection", isCollection);
 	Result.Insert("CollectionValueType", New TypeDescription(ValueType, "ValueList"));
+	Result.Insert("ValueChoiceForm", "");
+	
+	EmptyValue = ValueType.AdjustValue(); // CatalogRef
+	If Catalogs.AllRefsType().ContainsType(TypeOf(EmptyValue)) Then
+		ValueMetadata = EmptyValue.Metadata();
+		If Not ValueMetadata.DefaultChoiceForm = Undefined And ValueMetadata.Owners.Count() > 0 Then
+			Result.Insert("ValueChoiceForm", ValueMetadata.DefaultChoiceForm.FullName());
+		EndIf;
+	EndIf;
+	
 	Return Result;
 EndFunction
 

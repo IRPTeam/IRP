@@ -96,6 +96,25 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("Ref", Ref);
 	QueryResult = Query.Execute();
 	ItemListTable = QueryResult.Unload();
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ConsignorBatches.Key,
+	|	ConsignorBatches.ItemKey,
+	|	ConsignorBatches.SerialLotNumber,
+	|	ConsignorBatches.SourceOfOrigin,
+	|	ConsignorBatches.Store,
+	|	ConsignorBatches.Batch,
+	|	ConsignorBatches.Quantity
+	|FROM
+	|	Document.InventoryTransfer.ConsignorBatches AS ConsignorBatches
+	|WHERE
+	|	ConsignorBatches.Ref = &Ref";
+	Query.SetParameter("Ref", Ref);
+	QueryResult = Query.Execute();
+	ConsignorBatches = QueryResult.Unload();
+	
 	ConsignorBatches = CommissionTradeServer.GetRegistrateConsignorBatches(Parameters.Object, ItemListTable);
 	
 	Query = New Query();
@@ -838,11 +857,6 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo.StoreReceiver,
 		|	BatchKeysInfo.ItemKey,
 		|	BatchKeysInfo.BatchConsignor,
-		//|	SUM(CASE
-		//|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
-		//|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
-		//|		ELSE BatchKeysInfo.Quantity
-		//|	END) AS Quantity,
 		|
 		|CASE WHEN BatchKeysInfo.IsConsignorBatches THEN
 	 	| BatchKeysInfo.ConsignorQuantity
@@ -866,15 +880,6 @@ Function T6020S_BatchKeysInfo()
 		|				THEN BatchKeysInfo.SerialLotNumber = SourceOfOrigins.SerialLotNumberStock
 		|			ELSE TRUE
 		|		END
-//		|GROUP BY
-//		|	BatchKeysInfo.Period,
-//		|	BatchKeysInfo.Company,
-//		|	BatchKeysInfo.StoreSender,
-//		|	BatchKeysInfo.StoreReceiver,
-//		|	BatchKeysInfo.ItemKey,
-//		|	BatchKeysInfo.BatchConsignor,
-//		|	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)),
-//		|	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef))
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -960,12 +965,6 @@ Function R8013B_ConsignorBatchWiseBalance()
 		|	ConsignorBatchWiseBalance.ItemKey,
 		|	ConsignorBatchWiseBalance.StoreSender,
 		|	ConsignorBatchWiseBalance.StoreReceiver,
-//		|	SUM(CASE
-//		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
-//		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
-//		|		ELSE ConsignorBatchWiseBalance.Quantity
-//		|	END) AS Quantity,
-		|	
 		|	SUM(ISNULL(ConsignorBatchWiseBalance.Quantity,0)) AS Quantity,
 		|
 		|	SourceOfOrigins.SourceOfOriginStock AS SourceOfOrigin,

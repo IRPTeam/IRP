@@ -1077,6 +1077,14 @@
    <key>en</key>
    <value>Set value for selected rows</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Установить значение для текущей строки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Seçilen satırlar için değer ata</value>
+  </title>
   <id>7</id>
   <use>
    <common>true</common>

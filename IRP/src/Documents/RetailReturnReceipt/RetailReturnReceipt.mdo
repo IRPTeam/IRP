@@ -466,6 +466,14 @@
    <key>en</key>
    <value>Payment method</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид оплаты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ödeme metodu</value>
+  </synonym>
   <type>
    <types>EnumRef.ReceiptPaymentMethods</types>
   </type>
@@ -2326,6 +2334,14 @@
   <synonym>
    <key>en</key>
    <value>Print receipt</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Распечатать чек</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fiş yazdır</value>
   </synonym>
   <group>FormCommandBarImportant</group>
   <commandParameterType>

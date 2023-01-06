@@ -117,6 +117,14 @@
    <key>en</key>
    <value>No rate</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Без налогов</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vergi yok</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>

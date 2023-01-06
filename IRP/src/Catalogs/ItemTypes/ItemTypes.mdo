@@ -272,6 +272,14 @@
    <key>en</key>
    <value>Always add new row after scan</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Всегда добавлять новую строку при сканировании</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Okutulduğunda hep yeni satır ekle</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>

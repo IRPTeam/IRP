@@ -4679,6 +4679,14 @@
     <key>en</key>
     <value>Consignor batches</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Партии комитента</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Konsinye partileri</value>
+   </title>
    <extendedTooltip>
     <name>GroupConsignorBatchesExtendedTooltip</name>
     <id>360</id>

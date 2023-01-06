@@ -329,7 +329,9 @@ Function Strings(Lang) Export
 	Strings.Insert("EqFP_ShiftAlreadyClosed", NStr("en='Shift already closed.';
 		|ru='Смена уже закрыта.';
 		|tr='Vardya kapanmıştı.'", Lang));
-	Strings.Insert("EqFP_DocumentAlreadyPrinted", NStr("en='The document is already printed.'", Lang));
+	Strings.Insert("EqFP_DocumentAlreadyPrinted", NStr("en='The document is already printed.';
+		|ru='Документ уже пробит';
+		|tr='Evrak önceden yazdırılmıştı'", Lang));
 	
 #EndRegion
 

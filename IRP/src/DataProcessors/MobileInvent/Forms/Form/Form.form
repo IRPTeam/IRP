@@ -1282,6 +1282,14 @@
       <key>en</key>
       <value>Scan</value>
      </title>
+     <title>
+      <key>ru</key>
+      <value>Сканирование</value>
+     </title>
+     <title>
+      <key>tr</key>
+      <value>Tara</value>
+     </title>
      <extendedTooltip>
       <name>PageButtonExtendedTooltip</name>
       <id>133</id>
@@ -2107,6 +2115,14 @@
   <title>
    <key>en</key>
    <value>Error sound</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Звук ошибки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Hata sesi</value>
   </title>
   <id>1</id>
   <valueType/>

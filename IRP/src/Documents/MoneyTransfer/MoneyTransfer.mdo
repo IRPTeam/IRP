@@ -776,6 +776,14 @@
    <key>en</key>
    <value>Print cash out</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Изъятие ДС</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nakit çıkışı yazdır</value>
+  </synonym>
   <group>FormCommandBarImportant</group>
   <commandParameterType>
    <types>DocumentRef.MoneyTransfer</types>

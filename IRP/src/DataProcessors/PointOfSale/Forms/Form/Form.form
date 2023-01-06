@@ -7475,6 +7475,14 @@ elemanı seç</value>
    <key>en</key>
    <value>Print X Report</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Печать отчета без гашения</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>X rapor yazdır</value>
+  </title>
   <id>31</id>
   <use>
    <common>true</common>

@@ -295,6 +295,14 @@
    <key>en</key>
    <value>Code string</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Код строкой</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satır kodu</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers>

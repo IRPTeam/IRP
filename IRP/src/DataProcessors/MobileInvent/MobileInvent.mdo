@@ -59,6 +59,14 @@
    <key>en</key>
    <value>Error sound</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Звук ошибки</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Hata sesi</value>
+  </synonym>
   <templateType>BinaryData</templateType>
  </templates>
 </mdclass:DataProcessor>

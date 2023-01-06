@@ -913,11 +913,27 @@
    <key>en</key>
    <value>Consignor batches</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Партии комитента</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Konsinye partileri</value>
+  </synonym>
   <attributes uuid="c9fb00cc-2cdd-4577-b561-f0e61ac51c85">
    <name>Key</name>
    <synonym>
     <key>en</key>
     <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -933,6 +949,14 @@
     <key>en</key>
     <value>Item key</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Varyant</value>
+   </synonym>
    <type>
     <types>CatalogRef.ItemKeys</types>
    </type>
@@ -946,6 +970,14 @@
    <synonym>
     <key>en</key>
     <value>Serial lot number</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Серия номенклатуры</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
    </synonym>
    <type>
     <types>CatalogRef.SerialLotNumbers</types>
@@ -961,6 +993,14 @@
     <key>en</key>
     <value>Source of origin</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Источник происхождения</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Envanter menşei</value>
+   </synonym>
    <type>
     <types>CatalogRef.SourceOfOrigins</types>
    </type>
@@ -974,6 +1014,14 @@
    <synonym>
     <key>en</key>
     <value>Store</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Склад</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Depo</value>
    </synonym>
    <type>
     <types>CatalogRef.Stores</types>
@@ -989,6 +1037,14 @@
     <key>en</key>
     <value>Batch</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Партия</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Parti</value>
+   </synonym>
    <type>
     <types>DocumentRef.PurchaseInvoice</types>
     <types>DocumentRef.OpeningEntry</types>
@@ -1003,6 +1059,14 @@
    <synonym>
     <key>en</key>
     <value>Quantity</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Количество</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Miktar</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>

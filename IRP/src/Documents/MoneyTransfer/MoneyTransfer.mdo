@@ -396,6 +396,14 @@
    <key>en</key>
    <value>Consolidated retail sales</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Отчеты о розничных продажах</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Konsolide perakende satış fişleri</value>
+  </synonym>
   <type>
    <types>DocumentRef.ConsolidatedRetailSales</types>
   </type>

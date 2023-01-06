@@ -1203,6 +1203,14 @@
       <key>en</key>
       <value>Info</value>
      </title>
+     <title>
+      <key>ru</key>
+      <value>Контактная информация</value>
+     </title>
+     <title>
+      <key>tr</key>
+      <value>Bilgi</value>
+     </title>
      <extendedTooltip>
       <name>PageInfoExtendedTooltip</name>
       <id>135</id>
@@ -1304,6 +1312,14 @@
      <key>en</key>
      <value>Group bottom</value>
     </title>
+    <title>
+     <key>ru</key>
+     <value>Группа подвал</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Grup footer</value>
+    </title>
     <extendedTooltip>
      <name>GroupBottomExtendedTooltip</name>
      <id>131</id>
@@ -1333,6 +1349,14 @@
    <title>
     <key>en</key>
     <value>Main</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Основное</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Ana</value>
    </title>
    <extendedTooltip>
     <name>GroupMainExtendedTooltip</name>
@@ -1605,6 +1629,14 @@
    <title>
     <key>en</key>
     <value>Settings</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Настройки</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Ayarlar</value>
    </title>
    <extendedTooltip>
     <name>GroupSettingsExtendedTooltip</name>

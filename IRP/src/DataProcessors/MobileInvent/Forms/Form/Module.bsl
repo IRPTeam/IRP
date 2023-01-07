@@ -155,9 +155,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			AttachIdleHandler("BeginEditBarcode", 0.1, True);
 		EndIf;
 	Else           
-#If MobileClient Then
-		MultimediaTools.PlayAudio(ErrorSound);
-#EndIf
+		MobileSubsystem.Play(Sound.Error);
 		If ScanEmulator Then
 			Info = StrTemplate(R().S_019, Result.Barcodes[0]);
 			BarcodeInput = "";

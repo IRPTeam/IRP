@@ -1,8 +1,12 @@
 
+&AtClient
+Var Sound Export; // See FillSoundList
+
 #Region FormEvent
 
 &AtClient
 Procedure OnOpen(Cancel)
+	Sound = FillSoundList();
 	HideWhenMobileEmulatorBarcode();
 	BarcodeHasAnyCharactersOnChange(Undefined);
 EndProcedure
@@ -27,6 +31,8 @@ EndProcedure
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
+//	ElsIf EventName = "NewBarcode" And Not IsInputAvailable() Then 
+//		MobileSubsystem.Play(Sound.Error);
 	EndIf;
 EndProcedure
 
@@ -101,9 +107,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_026, Row.Item));
 			BarcodeClient.CloseMobileScanner();
 			AttachIdleHandler("BeginEditBarcode", 0.1, True);   
-#If MobileClient Then
-		MultimediaTools.PlayAudio(ErrorSound);
-#EndIf		
+			MobileSubsystem.Play(Sound.Error);
 			Return;
 		EndIf;
 		
@@ -115,9 +119,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		If Row.EachSerialLotNumberIsUnique And Object.ItemList.FindRows(Filter).Count() Then
 			BarcodeInput = StrTemplate(R().Error_113, Row.SerialLotNumber);
 			DoMessageBoxAsync(BarcodeInput, 10);   
-#If MobileClient Then
-			MultimediaTools.PlayAudio(ErrorSound);
-#EndIf
+			MobileSubsystem.Play(Sound.Error);
 
 			Return;
 		EndIf;
@@ -139,10 +141,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 				AttachIdleHandler("BeginEditBarcode", 0.1, True);	
 			EndIf;
 		EndIf;     
-#If MobileClient Then
-		MultimediaTools.PlaySoundAlert(SoundAlert.None, True);
-#EndIf
-
+		MobileSubsystem.Vibrate();
 	EndDo;
 	
 	If Result.FoundedItems.Count() Then
@@ -375,3 +374,13 @@ Procedure ItemListBeforeRowChange(Item, Cancel)
 	Cancel = True;
 	StartEditQuantity(Items.ItemList.CurrentRow);
 EndProcedure
+
+&AtServer
+Function FillSoundList()
+	Sounds = New Structure;
+	Sounds.Insert("Error", DataProcessors.MobileInvent.GetTemplate("ErrorSound"));
+	Sounds.Insert("Done", DataProcessors.MobileInvent.GetTemplate("Done"));
+	Sounds.Insert("SameItemKeyBarcode", DataProcessors.MobileInvent.GetTemplate("SameItemKeyBarcode"));
+	Return Sounds;
+EndFunction
+

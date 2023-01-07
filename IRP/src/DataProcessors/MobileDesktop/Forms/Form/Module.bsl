@@ -1,12 +1,24 @@
+
+&AtClient
+Var Sound Export; // See FillSoundList
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, DataProcessors.MobileDesktop, Items.PageAddInfo);
 EndProcedure
 
 &AtClient
+Procedure OnOpen(Cancel)
+	Sound = FillSoundList();
+	SetVisible();
+EndProcedure
+
+&AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
+//	ElsIf EventName = "NewBarcode" And Not IsInputAvailable() Then 
+//		MobileSubsystem.Play(Sound.Error);
 	EndIf;
 EndProcedure
 
@@ -92,16 +104,46 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 #If MobileClient Then
 		MultimediaTools.CloseBarcodeScanning();
 #EndIf
+		If CountScanTheSameItem <= 1 Then
+		Else
+			If AlreadyScanCount = 0 Then
+				AlreadyScanCount = 1;
+			Else
+				If ItemKey = Result.FoundedItems[0].ItemKey Then
+					AlreadyScanCount = AlreadyScanCount + 1;
+					
+					If AlreadyScanCount = CountScanTheSameItem Then
+						AlreadyScanCount = 0
+					EndIf;
+				Else
+					MobileSubsystem.Play(Sound.Error);
+					CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Mob_001, Result.FoundedItems[0].ItemKey, ItemKey));
+					Return;
+				EndIf;
+			EndIf;
+		EndIf;
 	Else
 		For Each Row In Result.Barcodes Do
 			Barcode = StrTemplate(R().S_019, Row);
 		EndDo;
+		MobileSubsystem.Play(Sound.Error);
 	EndIf;
 
 	For Each Row In Result.FoundedItems Do
 		FillData(Row);
+		MobileSubsystem.Vibrate();
 	EndDo;
 
+EndProcedure
+
+&AtClient
+Procedure HideScanButtonOnChange(Item)
+	SetVisible();
+EndProcedure
+
+&AtClient
+Procedure HideStatusButtonOnChange(Item)
+	SetVisible();
 EndProcedure
 
 &AtClient
@@ -111,11 +153,25 @@ Procedure FillData(Row)
 	If Not ValueIsFilled(ItemKey) Then
 		ItemOnChangeAtServer();
 	EndIf;
-
+	SerialLotNumber = Row.SerialLotNumber;
 	SetPictureView();
 	ShowStatus();
+	Items.SerialLotNumber.Visible = Row.UseSerialLotNumber;
 	Barcode = Row.Barcode;
 EndProcedure
+
+&AtClient
+Procedure Clear(Command)
+	AlreadyScanCount = 0;
+	Barcode = "";
+	ItemKey = Undefined;
+	ItemRef = Undefined;
+	Photo = Undefined;
+	PictureDecoration = Undefined;
+	SerialLotNumber = Undefined;
+	UseSeriallotNumber = False;
+EndProcedure
+
 
 &AtClient
 Procedure ScanBarcodeEndMobile(Barcode, Result, Message, Parameters) Export
@@ -176,4 +232,19 @@ EndProcedure
 &AtClient
 Procedure NotOK(Command)
 	WriteReg(False);
+EndProcedure
+
+&AtServer
+Function FillSoundList()
+	Sounds = New Structure;
+	Sounds.Insert("Error", DataProcessors.MobileInvent.GetTemplate("ErrorSound"));
+	Sounds.Insert("Done", DataProcessors.MobileInvent.GetTemplate("Done"));
+	Sounds.Insert("SameItemKeyBarcode", DataProcessors.MobileInvent.GetTemplate("SameItemKeyBarcode"));
+	Return Sounds;
+EndFunction
+
+&AtClient
+Procedure SetVisible()
+	Items.FormSearchByBarcode.Visible = Not HideScanButton;
+	Items.GroupBottom.Visible = Not HideStatusButton;
 EndProcedure

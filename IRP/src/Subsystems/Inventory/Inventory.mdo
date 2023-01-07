@@ -24,6 +24,7 @@
  <content>Report.BatchBalance</content>
  <content>Report.BatchBalanceSimple</content>
  <content>Document.GoodsReceipt</content>
+ <content>DataProcessor.MobileDesktop</content>
  <subsystems>Items</subsystems>
  <subsystems>Transfers</subsystems>
  <subsystems>CostCalculation</subsystems>

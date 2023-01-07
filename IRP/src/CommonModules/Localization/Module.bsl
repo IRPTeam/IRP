@@ -1558,5 +1558,11 @@ Function Strings(Lang) Export
 		|tr='Evraklar'", Lang));
 #EndRegion
 
+#Region Mobile
+	// %1 - Some item key
+	// %2 - Other item key
+	Strings.Insert("Mob_001", NStr("en='Current barcode used in %1
+		|But before you scan for %2'", Lang));
+#EndRegion
 	Return Strings;
 EndFunction

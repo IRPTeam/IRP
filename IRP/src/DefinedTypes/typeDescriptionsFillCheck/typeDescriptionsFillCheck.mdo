@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeDescriptionsFillCheck</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip tanım doldurma kontrolü</value>
+  <key>en</key>
+  <value>Type descriptions fill check</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип проверка заполнения наименования</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Type descriptions fill check</value>
+  <key>tr</key>
+  <value>Tip tanım doldurma kontrolü</value>
  </synonym>
  <type>
   <types>CatalogObject.TaxRates</types>

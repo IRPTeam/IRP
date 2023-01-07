@@ -110,16 +110,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Numara/Tarih</value>
+   <key>en</key>
+   <value>Number/Date</value>
   </title>
   <title>
    <key>ru</key>
    <value>Номер/Дата</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Number/Date</value>
+   <key>tr</key>
+   <value>Numara/Tarih</value>
   </title>
   <extendedTooltip>
    <name>GroupNumberDateExtendedTooltip</name>
@@ -657,16 +657,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Çek/Senet</value>
+    <key>en</key>
+    <value>Cheque</value>
    </title>
    <title>
     <key>ru</key>
     <value>Банковский чек</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Cheque</value>
+    <key>tr</key>
+    <value>Çek/Senet</value>
    </title>
    <readOnly>true</readOnly>
    <extendedTooltip>
@@ -849,16 +849,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Hesap</value>
+    <key>en</key>
+    <value>Account</value>
    </title>
    <title>
     <key>ru</key>
     <value>Касса/банк</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Account</value>
+    <key>tr</key>
+    <value>Hesap</value>
    </title>
    <readOnly>true</readOnly>
    <extendedTooltip>
@@ -1191,16 +1191,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Cari hesap</value>
+    <key>en</key>
+    <value>Partner</value>
    </title>
    <title>
     <key>ru</key>
     <value>Партнер</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Partner</value>
+    <key>tr</key>
+    <value>Cari hesap</value>
    </title>
    <readOnly>true</readOnly>
    <extendedTooltip>
@@ -1230,16 +1230,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
+   <key>en</key>
+   <value>Pages</value>
   </title>
   <title>
    <key>ru</key>
    <value>Страницы</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Pages</value>
+   <key>tr</key>
+   <value>Satırlar</value>
   </title>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>
@@ -1333,16 +1333,16 @@
  <formCommands>
   <name>ShowHiddenTables</name>
   <title>
-   <key>tr</key>
-   <value>Gizli tabloları göster</value>
+   <key>en</key>
+   <value>Show hidden tables</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать скрытые таблицы</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Show hidden tables</value>
+   <key>tr</key>
+   <value>Gizli tabloları göster</value>
   </title>
   <id>1</id>
   <use>

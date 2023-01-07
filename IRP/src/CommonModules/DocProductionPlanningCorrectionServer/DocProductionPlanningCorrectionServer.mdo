@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a37c01ec-7aee-4b4d-a8af-2c5e134db199">
  <name>DocProductionPlanningCorrectionServer</name>
  <synonym>
-  <key>tr</key>
-  <value>Evrak üretim planlama düzeltmesi server</value>
+  <key>en</key>
+  <value>Doc production planning correction server</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документ корректировка планирования производства</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Doc production planning correction server</value>
+  <key>tr</key>
+  <value>Evrak üretim planlama düzeltmesi server</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

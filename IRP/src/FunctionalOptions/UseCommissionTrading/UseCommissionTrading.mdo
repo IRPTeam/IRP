@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="57f86d09-5798-43ac-8975-26d8cfa5b1a6">
  <name>UseCommissionTrading</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanmak - Konsinye satışı</value>
+  <key>en</key>
+  <value>Use commission trading</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать комиссионную торговлю</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use commission trading</value>
+  <key>tr</key>
+  <value>Kullanmak - Konsinye satışı</value>
  </synonym>
  <location>Constant.UseCommissionTrading</location>
  <privilegedGetMode>true</privilegedGetMode>

@@ -362,16 +362,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Nesneler grubu</value>
+      <key>en</key>
+      <value>Refers to objects group</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа объектов применения</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Refers to objects group</value>
+      <key>tr</key>
+      <value>Nesneler grubu</value>
      </title>
      <extendedTooltip>
       <name>RefersToObjectsGroupExtendedTooltip</name>
@@ -606,16 +606,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Nesneler</value>
+    <key>en</key>
+    <value>Refers to objects</value>
    </title>
    <title>
     <key>ru</key>
     <value>Объекты применения</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Refers to objects</value>
+    <key>tr</key>
+    <value>Nesneler</value>
    </title>
    <extendedTooltip>
     <name>GroupRefersToObjectsExtendedTooltip</name>
@@ -644,16 +644,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Group genel</value>
+   <key>en</key>
+   <value>Group main</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа основная</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group main</value>
+   <key>tr</key>
+   <value>Group genel</value>
   </title>
   <extendedTooltip>
    <name>GroupMainExtendedTooltip</name>
@@ -721,16 +721,16 @@
    <columns>
     <name>PictureIndex</name>
     <title>
-     <key>tr</key>
-     <value>Resim indeksi</value>
+     <key>en</key>
+     <value>Picture index</value>
     </title>
     <title>
      <key>ru</key>
      <value>Индекс картинки</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Picture index</value>
+     <key>tr</key>
+     <value>Resim indeksi</value>
     </title>
     <id>2</id>
     <valueType>
@@ -751,16 +751,16 @@
  <formCommands>
   <name>AddRefersToObject</name>
   <title>
-   <key>tr</key>
-   <value>Nesneleri doldur</value>
+   <key>en</key>
+   <value>Add refers to object</value>
   </title>
   <title>
    <key>ru</key>
    <value>Добавить</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Add refers to object</value>
+   <key>tr</key>
+   <value>Nesneleri doldur</value>
   </title>
   <id>1</id>
   <use>

@@ -9,16 +9,16 @@
  </producedTypes>
  <name>BatchReallocateIncoming</name>
  <synonym>
-  <key>tr</key>
-  <value>Malzeme parti transfer - gelen</value>
+  <key>en</key>
+  <value>Batch reallocate incoming</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Перемещение партий товаров - входящий</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Batch reallocate incoming</value>
+  <key>tr</key>
+  <value>Malzeme parti transfer - gelen</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.BatchReallocateIncoming.StandardAttribute.Number</inputByString>
@@ -43,16 +43,16 @@
  <attributes uuid="cb94110f-4e19-47a9-96fd-97c003afdbd9">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -66,16 +66,16 @@
  <attributes uuid="1a895331-f624-421c-8ed1-6ecdcc816e4a">
   <name>Document</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
+   <key>en</key>
+   <value>Document</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Document</value>
+   <key>tr</key>
+   <value>Evrak</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>
@@ -101,16 +101,16 @@
  <attributes uuid="59f20340-3eba-485f-96e6-44a23fa859ab">
   <name>BatchReallocate</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme parti tranferi</value>
+   <key>en</key>
+   <value>Batch reallocate</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Партия распределения</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Batch reallocate</value>
+   <key>tr</key>
+   <value>Malzeme parti tranferi</value>
   </synonym>
   <type>
    <types>DocumentRef.CalculationMovementCosts</types>
@@ -125,16 +125,16 @@
  <attributes uuid="f6357b88-2412-4b28-9942-9da94027d5a3">
   <name>Outgoing</name>
   <synonym>
-   <key>tr</key>
-   <value>Çıkan</value>
+   <key>en</key>
+   <value>Outgoing</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Исходящий</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Outgoing</value>
+   <key>tr</key>
+   <value>Çıkan</value>
   </synonym>
   <type>
    <types>DocumentRef.BatchReallocateOutgoing</types>
@@ -148,16 +148,16 @@
  <forms uuid="4ee1e274-a088-4fb4-a8fd-56eac88f4804">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -165,16 +165,16 @@
  <forms uuid="66cf1854-fdc9-444d-aaf6-dd205d487121">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -182,16 +182,16 @@
  <forms uuid="ba1da1e5-da19-4067-88ba-258ed626c473">
   <name>DocumentForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
+   <key>en</key>
+   <value>Document form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма документа</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Document form</value>
+   <key>tr</key>
+   <value>Evrak formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -203,30 +203,30 @@
   </producedTypes>
   <name>ItemList</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme listesi</value>
+   <key>en</key>
+   <value>Item list</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Товары</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item list</value>
+   <key>tr</key>
+   <value>Malzeme listesi</value>
   </synonym>
   <attributes uuid="96b322e8-a637-468b-82aa-aa00c543a850">
    <name>ItemKey</name>
    <synonym>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </synonym>
    <type>
     <types>CatalogRef.ItemKeys</types>
@@ -239,16 +239,16 @@
   <attributes uuid="25194771-e9fe-47d9-a6a0-1578a27b1bcd">
    <name>Store</name>
    <synonym>
-    <key>tr</key>
-    <value>Depo</value>
+    <key>en</key>
+    <value>Store</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Склад</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Store</value>
+    <key>tr</key>
+    <value>Depo</value>
    </synonym>
    <type>
     <types>CatalogRef.Stores</types>
@@ -266,16 +266,16 @@
   <attributes uuid="9398e525-a9a0-4e3f-9bd3-1c25118c2080">
    <name>Quantity</name>
    <synonym>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Количество</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>

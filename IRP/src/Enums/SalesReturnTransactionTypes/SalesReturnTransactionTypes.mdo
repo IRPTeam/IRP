@@ -7,47 +7,47 @@
  </producedTypes>
  <name>SalesReturnTransactionTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Satış iade işlem tipleri</value>
+  <key>en</key>
+  <value>Sales return transaction types</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Вид операций возвратов от покупателей</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Sales return transaction types</value>
+  <key>tr</key>
+  <value>Satış iade işlem tipleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="07331f84-4b8f-4397-aafb-ed00109a3667">
   <name>ReturnFromCustomer</name>
   <synonym>
-   <key>tr</key>
-   <value>Satış iadesi</value>
+   <key>en</key>
+   <value>Return from customer</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Возврат покупателя</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Return from customer</value>
+   <key>tr</key>
+   <value>Satış iadesi</value>
   </synonym>
  </enumValues>
  <enumValues uuid="b328dd7a-73b0-4516-8ddc-18b507ed6c70">
   <name>ReturnFromTradeAgent</name>
   <synonym>
-   <key>tr</key>
-   <value>Konsinyeye alandan iade</value>
+   <key>en</key>
+   <value>Return from trade agent</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Возврат от комиссионера</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Return from trade agent</value>
+   <key>tr</key>
+   <value>Konsinyeye alandan iade</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

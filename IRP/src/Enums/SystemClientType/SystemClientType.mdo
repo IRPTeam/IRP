@@ -7,122 +7,122 @@
  </producedTypes>
  <name>SystemClientType</name>
  <synonym>
-  <key>tr</key>
-  <value>Sistem istemci tipi</value>
+  <key>en</key>
+  <value>System client type</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип клиента</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>System client type</value>
+  <key>tr</key>
+  <value>Sistem istemci tipi</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="1909c650-9630-4302-abfe-4bd995159ef3">
   <name>MobileAppClient</name>
   <synonym>
-   <key>tr</key>
-   <value>Mobil uygulama istemcisi</value>
+   <key>en</key>
+   <value>Mobile app client</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Мобильное приложение</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Mobile app client</value>
+   <key>tr</key>
+   <value>Mobil uygulama istemcisi</value>
   </synonym>
  </enumValues>
  <enumValues uuid="e0fb3a04-8a0f-4821-bc5c-dcafb1acc79e">
   <name>MobileClient</name>
   <synonym>
-   <key>tr</key>
-   <value>Mobil istemci</value>
+   <key>en</key>
+   <value>Mobile client</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Мобильный клиент</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Mobile client</value>
+   <key>tr</key>
+   <value>Mobil istemci</value>
   </synonym>
  </enumValues>
  <enumValues uuid="48cbdd67-cdd0-4994-ab49-bab075a1dbb9">
   <name>ThickClientManagedApplication</name>
   <synonym>
-   <key>tr</key>
-   <value>İnce istemci yönetilen uygulama</value>
+   <key>en</key>
+   <value>Thick client managed application</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Толстый клиент управляемое приложение</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Thick client managed application</value>
+   <key>tr</key>
+   <value>İnce istemci yönetilen uygulama</value>
   </synonym>
  </enumValues>
  <enumValues uuid="eb27727b-3ceb-4bc9-84a5-39a1ffd90f46">
   <name>ThinClient</name>
   <synonym>
-   <key>tr</key>
-   <value>Kalın istemci</value>
+   <key>en</key>
+   <value>Thin client</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Тонкий клиент</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Thin client</value>
+   <key>tr</key>
+   <value>Kalın istemci</value>
   </synonym>
  </enumValues>
  <enumValues uuid="174348cf-bea4-4160-8a7c-72fcc53e9535">
   <name>WebClient</name>
   <synonym>
-   <key>tr</key>
-   <value>Web istemci</value>
+   <key>en</key>
+   <value>Web client</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Web клиент</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Web client</value>
+   <key>tr</key>
+   <value>Web istemci</value>
   </synonym>
  </enumValues>
  <enumValues uuid="1d206d92-3c6f-457e-a96a-94d3243abe03">
   <name>ExternalConnection</name>
   <synonym>
-   <key>tr</key>
-   <value>Dış bağlantı</value>
+   <key>en</key>
+   <value>External connection</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Внешние соединение</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>External connection</value>
+   <key>tr</key>
+   <value>Dış bağlantı</value>
   </synonym>
  </enumValues>
  <enumValues uuid="2cff2bd5-544b-4f46-a0af-c30b0e3d9be7">
   <name>Other</name>
   <synonym>
-   <key>tr</key>
-   <value>Diğer</value>
+   <key>en</key>
+   <value>Other</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительно</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Other</value>
+   <key>tr</key>
+   <value>Diğer</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

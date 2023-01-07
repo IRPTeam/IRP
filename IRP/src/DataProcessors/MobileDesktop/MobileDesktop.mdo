@@ -6,23 +6,23 @@
  </producedTypes>
  <name>MobileDesktop</name>
  <synonym>
-  <key>tr</key>
-  <value>Masaüstü</value>
+  <key>en</key>
+  <value>Desktop</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Мобильный стол</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Desktop</value>
+  <key>tr</key>
+  <value>Masaüstü</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.MobileDesktop.Form.Form</defaultForm>
  <forms uuid="87f1cb68-1da7-47f3-8d01-dbe6f1abff8a">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -30,7 +30,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>

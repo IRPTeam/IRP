@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseSimpleMode</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Basit mod</value>
+  <key>en</key>
+  <value>Use simple mode</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать простой режим</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use simple mode</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Basit mod</value>
  </synonym>
  <type>
   <types>Boolean</types>

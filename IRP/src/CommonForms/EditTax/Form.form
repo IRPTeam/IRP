@@ -446,16 +446,16 @@
     <name>ItemListTotalTaxAmount</name>
     <id>193</id>
     <title>
-     <key>tr</key>
-     <value>Vergi</value>
+     <key>en</key>
+     <value>Tax</value>
     </title>
     <title>
      <key>ru</key>
      <value>Налог</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Tax</value>
+     <key>tr</key>
+     <value>Vergi</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -660,16 +660,16 @@
  <attributes>
   <name>TaxTree</name>
   <title>
-   <key>tr</key>
-   <value>Vergi ağacı</value>
+   <key>en</key>
+   <value>Tax tree</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дерево налогов</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Tax tree</value>
+   <key>tr</key>
+   <value>Vergi ağacı</value>
   </title>
   <id>1</id>
   <valueType>
@@ -685,16 +685,16 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </title>
    <id>15</id>
    <valueType>
@@ -710,16 +710,16 @@
   <columns>
    <name>Tax</name>
    <title>
-    <key>tr</key>
-    <value>Vergi</value>
+    <key>en</key>
+    <value>Tax</value>
    </title>
    <title>
     <key>ru</key>
     <value>Налог</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Tax</value>
+    <key>tr</key>
+    <value>Vergi</value>
    </title>
    <id>16</id>
    <valueType>
@@ -735,16 +735,16 @@
   <columns>
    <name>Analytics</name>
    <title>
-    <key>tr</key>
-    <value>Detaylar</value>
+    <key>en</key>
+    <value>Analytics</value>
    </title>
    <title>
     <key>ru</key>
     <value>Аналитика учета</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Analytics</value>
+    <key>tr</key>
+    <value>Detaylar</value>
    </title>
    <id>17</id>
    <valueType>
@@ -760,16 +760,16 @@
   <columns>
    <name>TaxRate</name>
    <title>
-    <key>tr</key>
-    <value>Vergi oranı</value>
+    <key>en</key>
+    <value>Tax rate</value>
    </title>
    <title>
     <key>ru</key>
     <value>Налоговая ставка</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Tax rate</value>
+    <key>tr</key>
+    <value>Vergi oranı</value>
    </title>
    <id>20</id>
    <valueType>
@@ -785,16 +785,16 @@
   <columns>
    <name>Amount</name>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
+    <key>en</key>
+    <value>Amount</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Amount</value>
+    <key>tr</key>
+    <value>Tutar</value>
    </title>
    <id>21</id>
    <valueType>
@@ -810,16 +810,16 @@
   <columns>
    <name>Level</name>
    <title>
-    <key>tr</key>
-    <value>Seviye</value>
+    <key>en</key>
+    <value>Level</value>
    </title>
    <title>
     <key>ru</key>
     <value>Уровень</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Level</value>
+    <key>tr</key>
+    <value>Seviye</value>
    </title>
    <id>22</id>
    <valueType>
@@ -838,16 +838,16 @@
   <columns>
    <name>ManualAmount</name>
    <title>
-    <key>tr</key>
-    <value>Manuel tutar</value>
+    <key>en</key>
+    <value>Manual amount</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ручная корректировка</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Manual amount</value>
+    <key>tr</key>
+    <value>Manuel tutar</value>
    </title>
    <id>23</id>
    <valueType>
@@ -863,16 +863,16 @@
   <columns>
    <name>ReadOnly</name>
    <title>
-    <key>tr</key>
-    <value>Salt okunur</value>
+    <key>en</key>
+    <value>Read only</value>
    </title>
    <title>
     <key>ru</key>
     <value>Только чтение</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Read only</value>
+    <key>tr</key>
+    <value>Salt okunur</value>
    </title>
    <id>24</id>
    <valueType>
@@ -888,16 +888,16 @@
   <columns>
    <name>PictureEdit</name>
    <title>
-    <key>tr</key>
-    <value>Resim düzelt</value>
+    <key>en</key>
+    <value>Picture edit</value>
    </title>
    <title>
     <key>ru</key>
     <value>Редактирование картинки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Picture edit</value>
+    <key>tr</key>
+    <value>Resim düzelt</value>
    </title>
    <id>25</id>
    <valueType>
@@ -916,16 +916,16 @@
   <columns>
    <name>Currency</name>
    <title>
-    <key>tr</key>
-    <value>Döviz</value>
+    <key>en</key>
+    <value>Currency</value>
    </title>
    <title>
     <key>ru</key>
     <value>Валюта</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Currency</value>
+    <key>tr</key>
+    <value>Döviz</value>
    </title>
    <id>4</id>
    <valueType>
@@ -941,16 +941,16 @@
   <columns>
    <name>RowPresentation</name>
    <title>
-    <key>tr</key>
-    <value>Satır görüntüleme</value>
+    <key>en</key>
+    <value>Row presentation</value>
    </title>
    <title>
     <key>ru</key>
     <value>Представление строки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Row presentation</value>
+    <key>tr</key>
+    <value>Satır görüntüleme</value>
    </title>
    <id>18</id>
    <valueType>
@@ -968,16 +968,16 @@
  <attributes>
   <name>MainTableKey</name>
   <title>
-   <key>tr</key>
-   <value>Ana tablo anahtarı</value>
+   <key>en</key>
+   <value>Main table key</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ключ основной таблицы</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Main table key</value>
+   <key>tr</key>
+   <value>Ana tablo anahtarı</value>
   </title>
   <id>3</id>
   <valueType>
@@ -993,16 +993,16 @@
  <attributes>
   <name>MainTableCurrency</name>
   <title>
-   <key>tr</key>
-   <value>Ana tablo dövizi</value>
+   <key>en</key>
+   <value>Main table currency</value>
   </title>
   <title>
    <key>ru</key>
    <value>Основная таблица валют</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Main table currency</value>
+   <key>tr</key>
+   <value>Ana tablo dövizi</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1018,16 +1018,16 @@
  <attributes>
   <name>TaxTable</name>
   <title>
-   <key>tr</key>
-   <value>Vergi tablosu</value>
+   <key>en</key>
+   <value>Tax table</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица налогов</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Tax table</value>
+   <key>tr</key>
+   <value>Vergi tablosu</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1042,16 +1042,16 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1067,16 +1067,16 @@
   <columns>
    <name>Tax</name>
    <title>
-    <key>tr</key>
-    <value>Vergi</value>
+    <key>en</key>
+    <value>Tax</value>
    </title>
    <title>
     <key>ru</key>
     <value>Налог</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Tax</value>
+    <key>tr</key>
+    <value>Vergi</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1092,16 +1092,16 @@
   <columns>
    <name>Analytics</name>
    <title>
-    <key>tr</key>
-    <value>Detaylar</value>
+    <key>en</key>
+    <value>Analytics</value>
    </title>
    <title>
     <key>ru</key>
     <value>Аналитика учета</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Analytics</value>
+    <key>tr</key>
+    <value>Detaylar</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1117,16 +1117,16 @@
   <columns>
    <name>TaxRate</name>
    <title>
-    <key>tr</key>
-    <value>Vergi oranı</value>
+    <key>en</key>
+    <value>Tax rate</value>
    </title>
    <title>
     <key>ru</key>
     <value>Налоговая ставка</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Tax rate</value>
+    <key>tr</key>
+    <value>Vergi oranı</value>
    </title>
    <id>13</id>
    <valueType>
@@ -1142,16 +1142,16 @@
   <columns>
    <name>ManualAmount</name>
    <title>
-    <key>tr</key>
-    <value>Manuel tutar</value>
+    <key>en</key>
+    <value>Manual amount</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ручная корректировка</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Manual amount</value>
+    <key>tr</key>
+    <value>Manuel tutar</value>
    </title>
    <id>14</id>
    <valueType>
@@ -1167,16 +1167,16 @@
   <columns>
    <name>Amount</name>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
+    <key>en</key>
+    <value>Amount</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Amount</value>
+    <key>tr</key>
+    <value>Tutar</value>
    </title>
    <id>15</id>
    <valueType>
@@ -1192,16 +1192,16 @@
   <columns>
    <name>IncludeToTotalAmount</name>
    <title>
-    <key>tr</key>
-    <value>Toplam tutara dahil</value>
+    <key>en</key>
+    <value>Include to total amount</value>
    </title>
    <title>
     <key>ru</key>
     <value>Включается в общую сумму</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Include to total amount</value>
+    <key>tr</key>
+    <value>Toplam tutara dahil</value>
    </title>
    <id>16</id>
    <valueType>
@@ -1218,16 +1218,16 @@
  <attributes>
   <name>TotalTaxAmount</name>
   <title>
-   <key>tr</key>
-   <value>Toplam vergi tutarı</value>
+   <key>en</key>
+   <value>Total tax amount</value>
   </title>
   <title>
    <key>ru</key>
    <value>Налоги</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Total tax amount</value>
+   <key>tr</key>
+   <value>Toplam vergi tutarı</value>
   </title>
   <id>17</id>
   <valueType>
@@ -1243,16 +1243,16 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>Ok</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ок</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Ok</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <id>1</id>
   <use>
@@ -1268,16 +1268,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <id>2</id>
   <use>

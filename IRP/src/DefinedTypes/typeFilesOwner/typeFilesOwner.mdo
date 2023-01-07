@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeFilesOwner</name>
  <synonym>
-  <key>tr</key>
-  <value>Dosya sahip tipi</value>
+  <key>en</key>
+  <value>Type files owner</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип владелец файлов</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Type files owner</value>
+  <key>tr</key>
+  <value>Dosya sahip tipi</value>
  </synonym>
  <type>
   <types>CatalogRef.Companies</types>

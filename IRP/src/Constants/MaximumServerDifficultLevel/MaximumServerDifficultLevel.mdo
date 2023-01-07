@@ -7,16 +7,16 @@
  </producedTypes>
  <name>MaximumServerDifficultLevel</name>
  <synonym>
-  <key>tr</key>
-  <value>Sever azami zorluk seviyesi</value>
+  <key>en</key>
+  <value>Maximum server difficult level</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Максимальный уровень сложности сервера</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Maximum server difficult level</value>
+  <key>tr</key>
+  <value>Sever azami zorluk seviyesi</value>
  </synonym>
  <comment>Each external function has difficult level. This constant show how much external function can be runned at one time</comment>
  <type>

@@ -53,16 +53,16 @@
     <radioButtonsType>Tumbler</radioButtonsType>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Tümü</value>
+      <key>en</key>
+      <value>All</value>
      </presentation>
      <presentation>
       <key>ru</key>
       <value>Все</value>
      </presentation>
      <presentation>
-      <key>en</key>
-      <value>All</value>
+      <key>tr</key>
+      <value>Tümü</value>
      </presentation>
      <value xsi:type="core:StringValue">
       <value>all</value>
@@ -70,16 +70,16 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Tek</value>
+      <key>en</key>
+      <value>Single</value>
      </presentation>
      <presentation>
       <key>ru</key>
       <value>Единичный</value>
      </presentation>
      <presentation>
-      <key>en</key>
-      <value>Single</value>
+      <key>tr</key>
+      <value>Tek</value>
      </presentation>
      <value xsi:type="core:StringValue">
       <value>single</value>
@@ -87,16 +87,16 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Ürün reçetesi</value>
+      <key>en</key>
+      <value>Specification</value>
      </presentation>
      <presentation>
       <key>ru</key>
       <value>Спецификация товара</value>
      </presentation>
      <presentation>
-      <key>en</key>
-      <value>Specification</value>
+      <key>tr</key>
+      <value>Ürün reçetesi</value>
      </presentation>
      <value xsi:type="core:StringValue">
       <value>specification</value>
@@ -163,16 +163,16 @@
     <typeDomainEnabled>true</typeDomainEnabled>
     <textEdit>true</textEdit>
     <inputHint>
-     <key>tr</key>
-     <value>Ara (Ctrl+F)</value>
+     <key>en</key>
+     <value>Search (Ctrl+F)</value>
     </inputHint>
     <inputHint>
      <key>ru</key>
      <value>Поиск (Ctrl+F)</value>
     </inputHint>
     <inputHint>
-     <key>en</key>
-     <value>Search (Ctrl+F)</value>
+     <key>tr</key>
+     <value>Ara (Ctrl+F)</value>
     </inputHint>
    </extInfo>
   </items>
@@ -214,16 +214,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -862,16 +862,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Varyant</value>
+       <key>en</key>
+       <value>Item key</value>
       </content>
       <content>
        <key>ru</key>
        <value>Характеристика</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Item key</value>
+       <key>tr</key>
+       <value>Varyant</value>
       </content>
      </localValue>
     </title>
@@ -881,16 +881,16 @@ FROM
  <attributes>
   <name>Item</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme</value>
+   <key>en</key>
+   <value>Item</value>
   </title>
   <title>
    <key>ru</key>
    <value>Номенклатура</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item</value>
+   <key>tr</key>
+   <value>Malzeme</value>
   </title>
   <id>2</id>
   <valueType>
@@ -906,16 +906,16 @@ FROM
  <attributes>
   <name>SelectedFilters</name>
   <title>
-   <key>tr</key>
-   <value>Seçilen filtreler</value>
+   <key>en</key>
+   <value>Selected filters</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбранные фильтры</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Selected filters</value>
+   <key>tr</key>
+   <value>Seçilen filtreler</value>
   </title>
   <id>3</id>
   <valueType>
@@ -930,16 +930,16 @@ FROM
   <columns>
    <name>Attribute</name>
    <title>
-    <key>tr</key>
-    <value>Alan</value>
+    <key>en</key>
+    <value>Attribute</value>
    </title>
    <title>
     <key>ru</key>
     <value>Реквизит</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Attribute</value>
+    <key>tr</key>
+    <value>Alan</value>
    </title>
    <id>4</id>
    <valueType>
@@ -955,16 +955,16 @@ FROM
   <columns>
    <name>Value</name>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </title>
    <id>5</id>
    <valueType>
@@ -980,16 +980,16 @@ FROM
   <columns>
    <name>Name</name>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
+    <key>en</key>
+    <value>Name</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Name</value>
+    <key>tr</key>
+    <value>Ad</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1007,16 +1007,16 @@ FROM
  <attributes>
   <name>IsSpecificationFilter</name>
   <title>
-   <key>tr</key>
-   <value>Bu reçete filtresi</value>
+   <key>en</key>
+   <value>Is specification filter</value>
   </title>
   <title>
    <key>ru</key>
    <value>Спецификация</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Is specification filter</value>
+   <key>tr</key>
+   <value>Bu reçete filtresi</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1035,16 +1035,16 @@ FROM
  <attributes>
   <name>SearchString</name>
   <title>
-   <key>tr</key>
-   <value>Arama satırı</value>
+   <key>en</key>
+   <value>Search string</value>
   </title>
   <title>
    <key>ru</key>
    <value>Строка поиска</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Search string</value>
+   <key>tr</key>
+   <value>Arama satırı</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1061,16 +1061,16 @@ FROM
  <formCommands>
   <name>CreateNewItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Yeni oluştur</value>
+   <key>en</key>
+   <value>Create new</value>
   </title>
   <title>
    <key>ru</key>
    <value>Создать новый</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Create new</value>
+   <key>tr</key>
+   <value>Yeni oluştur</value>
   </title>
   <id>1</id>
   <use>

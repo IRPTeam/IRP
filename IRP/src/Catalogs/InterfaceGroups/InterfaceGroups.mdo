@@ -9,16 +9,16 @@
  </producedTypes>
  <name>InterfaceGroups</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanıcı arayüzü grupları</value>
+  <key>en</key>
+  <value>UI groups</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Интерфейсные группы</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>UI groups</value>
+  <key>tr</key>
+  <value>Kullanıcı arayüzü grupları</value>
  </synonym>
  <comment>Groups for form items</comment>
  <useStandardCommands>true</useStandardCommands>
@@ -136,16 +136,16 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Kullanıcı arayüzü grubu</value>
+  <key>en</key>
+  <value>UI group</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Интерфейсная группа</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>UI group</value>
+  <key>tr</key>
+  <value>Kullanıcı arayüzü grubu</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -163,16 +163,16 @@
  <attributes uuid="d236ed08-b323-45ba-94b9-61f3f3caa99f">
   <name>FormPosition</name>
   <synonym>
-   <key>tr</key>
-   <value>Form konumu</value>
+   <key>en</key>
+   <value>Form position</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Расположение на форме</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Form position</value>
+   <key>tr</key>
+   <value>Form konumu</value>
   </synonym>
   <type>
    <types>String</types>
@@ -181,7 +181,7 @@
    </stringQualifiers>
   </type>
   <format>
-   <key>tr</key>
+   <key>en</key>
    <value>BF=Left; BT=Right</value>
   </format>
   <format>
@@ -189,11 +189,11 @@
    <value>BF=Слева; BT=Справа</value>
   </format>
   <format>
-   <key>en</key>
+   <key>tr</key>
    <value>BF=Left; BT=Right</value>
   </format>
   <editFormat>
-   <key>tr</key>
+   <key>en</key>
    <value>BF=Left; BT=Right</value>
   </editFormat>
   <editFormat>
@@ -201,7 +201,7 @@
    <value>BF=Слева; BT=Справа</value>
   </editFormat>
   <editFormat>
-   <key>en</key>
+   <key>tr</key>
    <value>BF=Left; BT=Right</value>
   </editFormat>
   <minValue xsi:type="core:UndefinedValue"/>
@@ -215,16 +215,16 @@
  <attributes uuid="727b5db2-a516-4e70-8526-04e73e915091">
   <name>Behavior</name>
   <synonym>
-   <key>tr</key>
-   <value>Davranış</value>
+   <key>en</key>
+   <value>Behavior</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Поведение</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Behavior</value>
+   <key>tr</key>
+   <value>Davranış</value>
   </synonym>
   <type>
    <types>EnumRef.InterfaceGroupBehaviors</types>
@@ -242,16 +242,16 @@
  <attributes uuid="64eaa31e-8bbe-4a52-9571-5e813f386d9e">
   <name>ChildFormItemsGroup</name>
   <synonym>
-   <key>tr</key>
-   <value>Alt form öğeler grubu</value>
+   <key>en</key>
+   <value>Child form items group</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дочерняя форма группы элементов</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Child form items group</value>
+   <key>tr</key>
+   <value>Alt form öğeler grubu</value>
   </synonym>
   <type>
    <types>EnumRef.InterfaceGroupChildFormItemsGroups</types>
@@ -269,16 +269,16 @@
  <attributes uuid="cffb28a4-e499-4c12-9445-27e92653bbf1">
   <name>Collapsed</name>
   <synonym>
-   <key>tr</key>
-   <value>Daraltılmış</value>
+   <key>en</key>
+   <value>Collapsed</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Свернуто</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Collapsed</value>
+   <key>tr</key>
+   <value>Daraltılmış</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -296,30 +296,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <attributes uuid="8bacd07d-d339-4f07-a82e-a9296e13efbc">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Свойство</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -332,16 +332,16 @@
   <attributes uuid="8662cbd3-5923-4f68-bef0-d2c561b56364">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -359,16 +359,16 @@
  <forms uuid="980e9405-07a9-44bb-ab5d-270556d15a31">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -376,16 +376,16 @@
  <forms uuid="e15ee082-13d1-43c6-8593-6c2d0e37e6f0">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -393,16 +393,16 @@
  <forms uuid="dd8be842-e3d0-46db-8549-c8b61981026e">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

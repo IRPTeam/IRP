@@ -2,16 +2,16 @@
 <mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="e7c9ae22-24e3-4ce2-a5fe-aa847dc16108">
  <name>Manufacturing</name>
  <synonym>
-  <key>tr</key>
-  <value>Üretim</value>
+  <key>en</key>
+  <value>Manufacturing</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Производство</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Manufacturing</value>
+  <key>tr</key>
+  <value>Üretim</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

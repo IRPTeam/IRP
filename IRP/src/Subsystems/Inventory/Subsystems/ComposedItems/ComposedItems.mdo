@@ -2,16 +2,16 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="21f29cb4-6186-4915-ac7f-8dd3d0c517e2">
  <name>ComposedItems</name>
  <synonym>
-  <key>tr</key>
-  <value>Birden fazla tür olan öğeler</value>
+  <key>en</key>
+  <value>Composed items</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Наборы товаров</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Composed items</value>
+  <key>tr</key>
+  <value>Birden fazla tür olan öğeler</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

@@ -2,16 +2,16 @@
 <mdclass:SessionParameter xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="acf1baf9-445b-422c-930c-b6d8450c4476">
  <name>CurrentUserPartner</name>
  <synonym>
-  <key>tr</key>
-  <value>Geçerli kullanıcı cari hesabı</value>
+  <key>en</key>
+  <value>Current user partner</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Текущий партнер пользователя</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Current user partner</value>
+  <key>tr</key>
+  <value>Geçerli kullanıcı cari hesabı</value>
  </synonym>
  <type>
   <types>CatalogRef.Partners</types>

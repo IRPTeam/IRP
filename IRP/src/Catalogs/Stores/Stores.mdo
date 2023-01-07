@@ -9,16 +9,16 @@
  </producedTypes>
  <name>Stores</name>
  <synonym>
-  <key>tr</key>
-  <value>Depolar</value>
+  <key>en</key>
+  <value>Stores</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Склады</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Stores</value>
+  <key>tr</key>
+  <value>Depolar</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -57,16 +57,16 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectPresentation>
-  <key>tr</key>
-  <value>Depo</value>
+  <key>en</key>
+  <value>Store</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Склад</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>Store</value>
+  <key>tr</key>
+  <value>Depo</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -92,16 +92,16 @@
  <attributes uuid="3415780f-5e2a-4973-9684-31e6cbd80b77">
   <name>UseGoodsReceipt</name>
   <synonym>
-   <key>tr</key>
-   <value>Stok girişi için irsaliye kullanmak</value>
+   <key>en</key>
+   <value>Use goods receipt</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Используется приходная товарная накладная</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Use goods receipt</value>
+   <key>tr</key>
+   <value>Stok girişi için irsaliye kullanmak</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -115,16 +115,16 @@
  <attributes uuid="8c9cda5d-e069-44a9-ab76-300935c3b2b3">
   <name>UseShipmentConfirmation</name>
   <synonym>
-   <key>tr</key>
-   <value>Stok çıkışı için irsalliye kullanmak</value>
+   <key>en</key>
+   <value>Use shipment confirmation</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Используется расходная товарная накладная</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Use shipment confirmation</value>
+   <key>tr</key>
+   <value>Stok çıkışı için irsalliye kullanmak</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -138,7 +138,7 @@
  <attributes uuid="8868bb6a-ddb2-44da-ae45-0c2139f5ee41">
   <name>Transit</name>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Transit</value>
   </synonym>
   <synonym>
@@ -146,7 +146,7 @@
    <value>Транзитный</value>
   </synonym>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Transit</value>
   </synonym>
   <type>
@@ -161,16 +161,16 @@
  <attributes uuid="7ab9d0bf-d328-4e13-8c7d-3dd2fa27829e">
   <name>NegativeStockControl</name>
   <synonym>
-   <key>tr</key>
-   <value>Negatif stok kontrolü</value>
+   <key>en</key>
+   <value>Negative stock control</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Контроль отрицательных остатков</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Negative stock control</value>
+   <key>tr</key>
+   <value>Negatif stok kontrolü</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -184,16 +184,16 @@
  <attributes uuid="456a0079-2ba0-436c-835e-a677894e2b66">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -217,30 +217,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <attributes uuid="8faac03c-1811-4356-900f-97432b50972f">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -253,16 +253,16 @@
   <attributes uuid="f4dd26e2-1278-48d9-bf2b-031d5d270922">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -279,16 +279,16 @@
   <attributes uuid="e42f17ae-98a2-411e-ac59-517839525bd2">
    <name>SearchLiteral</name>
    <synonym>
-    <key>tr</key>
-    <value>Arama metni</value>
+    <key>en</key>
+    <value>Search literal</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Текстовая строка</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Search literal</value>
+    <key>tr</key>
+    <value>Arama metni</value>
    </synonym>
    <type>
     <types>String</types>
@@ -305,16 +305,16 @@
  <forms uuid="1d10b69f-8c8e-457a-92e9-47e0d6eacfda">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -322,16 +322,16 @@
  <forms uuid="9f680fb5-9734-45a8-9d08-e7cdc6653d02">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -339,16 +339,16 @@
  <forms uuid="8970963a-fc6d-493c-b9b0-1f48fd751cd8">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

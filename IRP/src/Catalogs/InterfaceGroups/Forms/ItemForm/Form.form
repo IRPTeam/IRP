@@ -77,16 +77,16 @@
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Sol</value>
+     <key>en</key>
+     <value>Left</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Слева</value>
     </presentation>
     <presentation>
-     <key>en</key>
-     <value>Left</value>
+     <key>tr</key>
+     <value>Sol</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>Left</value>
@@ -94,16 +94,16 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>tr</key>
-     <value>Sağ</value>
+     <key>en</key>
+     <value>Right</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Справа</value>
     </presentation>
     <presentation>
-     <key>en</key>
-     <value>Right</value>
+     <key>tr</key>
+     <value>Sağ</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>Right</value>
@@ -356,16 +356,16 @@
  <attributes>
   <name>Picture</name>
   <title>
-   <key>tr</key>
-   <value>Resim</value>
+   <key>en</key>
+   <value>Picture</value>
   </title>
   <title>
    <key>ru</key>
    <value>Картинка</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Picture</value>
+   <key>tr</key>
+   <value>Resim</value>
   </title>
   <id>2</id>
   <valueType>

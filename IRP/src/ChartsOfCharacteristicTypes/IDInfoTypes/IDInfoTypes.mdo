@@ -10,16 +10,16 @@
  </producedTypes>
  <name>IDInfoTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>İletişim bilgi türleri</value>
+  <key>en</key>
+  <value>Contact info types</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Вид контактной информации</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Contact info types</value>
+  <key>tr</key>
+  <value>İletişim bilgi türleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -27,16 +27,16 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>İletişim bilgi türü</value>
+  <key>en</key>
+  <value>Contact info type</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Вид контактной информации</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>Contact info type</value>
+  <key>tr</key>
+  <value>İletişim bilgi türü</value>
  </objectPresentation>
  <characteristicExtValues>Catalog.IDInfoAddresses</characteristicExtValues>
  <type>
@@ -57,16 +57,16 @@
  <attributes uuid="9e80b819-ee53-4f2d-884a-2a48390eeb09">
   <name>Comment</name>
   <synonym>
-   <key>tr</key>
-   <value>Açıklama</value>
+   <key>en</key>
+   <value>Comment</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Комментарий</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Comment</value>
+   <key>tr</key>
+   <value>Açıklama</value>
   </synonym>
   <type>
    <types>String</types>
@@ -85,16 +85,16 @@
  <attributes uuid="c9507572-811f-4bce-9ddb-bae460f63187">
   <name>ShowOnForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Formda göster</value>
+   <key>en</key>
+   <value>Show on form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Показывать на форме</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Show on form</value>
+   <key>tr</key>
+   <value>Formda göster</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -108,16 +108,16 @@
  <attributes uuid="05de6f05-29a5-49b9-9770-3699186b7080">
   <name>ReadOnly</name>
   <synonym>
-   <key>tr</key>
-   <value>Salt okunur</value>
+   <key>en</key>
+   <value>Read only</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Только чтение</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Read only</value>
+   <key>tr</key>
+   <value>Salt okunur</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -135,30 +135,30 @@
   </producedTypes>
   <name>ExternalDataProcess</name>
   <synonym>
-   <key>tr</key>
-   <value>Eklentiler</value>
+   <key>en</key>
+   <value>Plugins</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Внешние обработки</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Plugins</value>
+   <key>tr</key>
+   <value>Eklentiler</value>
   </synonym>
   <attributes uuid="97042539-5fd3-4d0d-9edb-2f2308bb2bbc">
    <name>Country</name>
    <synonym>
-    <key>tr</key>
-    <value>Ülke</value>
+    <key>en</key>
+    <value>Country</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Страна</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Country</value>
+    <key>tr</key>
+    <value>Ülke</value>
    </synonym>
    <type>
     <types>CatalogRef.Countries</types>
@@ -169,16 +169,16 @@
   <attributes uuid="1cf38532-4bc1-47ec-b32d-769d817b54cc">
    <name>ExternalDataProc</name>
    <synonym>
-    <key>tr</key>
-    <value>Eklentiler</value>
+    <key>en</key>
+    <value>Plugins</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Внешняя обработка</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Plugins</value>
+    <key>tr</key>
+    <value>Eklentiler</value>
    </synonym>
    <type>
     <types>CatalogRef.ExternalDataProc</types>
@@ -189,16 +189,16 @@
   <attributes uuid="03ee1a47-cbc6-4069-85cf-4bb276377668">
    <name>Settings</name>
    <synonym>
-    <key>tr</key>
-    <value>Ayarlar</value>
+    <key>en</key>
+    <value>Settings</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Настройки</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Settings</value>
+    <key>tr</key>
+    <value>Ayarlar</value>
    </synonym>
    <type>
     <types>ValueStorage</types>
@@ -216,30 +216,30 @@
   </producedTypes>
   <name>RelatedValues</name>
   <synonym>
-   <key>tr</key>
-   <value>Bağlı değerler</value>
+   <key>en</key>
+   <value>Related values</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Связанные виды контактной информации</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Related values</value>
+   <key>tr</key>
+   <value>Bağlı değerler</value>
   </synonym>
   <attributes uuid="ffcf1a90-f99a-47b7-816f-34f62e89b44d">
    <name>IDInfoType</name>
    <synonym>
-    <key>tr</key>
-    <value>İletişim bilgi türü</value>
+    <key>en</key>
+    <value>Contact info type</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Вид контактной информации</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Contact info type</value>
+    <key>tr</key>
+    <value>İletişim bilgi türü</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>
@@ -251,16 +251,16 @@
  <forms uuid="8e2a0489-4c4a-4b6a-92d9-b3c681455193">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -268,16 +268,16 @@
  <forms uuid="fd75f5ca-0369-412f-97ea-73d0d18620c0">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -285,16 +285,16 @@
  <forms uuid="24e8ad33-3d87-47e0-826e-32575174c328">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -302,16 +302,16 @@
  <forms uuid="6665f12b-d3a6-4ad7-bf34-eaa5895e0d4c">
   <name>SelectCountryForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Ülke seçme formu</value>
+   <key>en</key>
+   <value>Select country form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора страны</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Select country form</value>
+   <key>tr</key>
+   <value>Ülke seçme formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

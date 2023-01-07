@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T9010S_AccountsItemKey</name>
  <synonym>
-  <key>tr</key>
-  <value>Muh. hesaplar (varyant)</value>
+  <key>en</key>
+  <value>Accounts (Item key)</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Бух. счета (характеристика)</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Accounts (Item key)</value>
+  <key>tr</key>
+  <value>Muh. hesaplar (varyant)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +30,16 @@
  <resources uuid="26486334-1d28-4aa5-bdfc-a98d6b0de605">
   <name>Account</name>
   <synonym>
-   <key>tr</key>
-   <value>Hesap</value>
+   <key>en</key>
+   <value>Account</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Касса/банк</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Account</value>
+   <key>tr</key>
+   <value>Hesap</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -58,16 +58,16 @@
  <dimensions uuid="a443958b-1e9e-4fdc-938b-87a5ee9ced38">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -84,16 +84,16 @@
  <dimensions uuid="32fe3276-60f3-49c5-bef8-2bd4e363ccd2">
   <name>Variant</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Variant</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Variant</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypeVariants</types>
@@ -110,16 +110,16 @@
  <dimensions uuid="3447e9a2-e541-486c-89cd-478a6831d63a">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -136,16 +136,16 @@
  <dimensions uuid="f88b6c42-9393-4872-af2b-bd11349609b7">
   <name>Item</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme</value>
+   <key>en</key>
+   <value>Item</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Номенклатура</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item</value>
+   <key>tr</key>
+   <value>Malzeme</value>
   </synonym>
   <type>
    <types>CatalogRef.Items</types>
@@ -162,16 +162,16 @@
  <dimensions uuid="7644f0ea-a14f-4675-ad33-5e77928f2fc6">
   <name>ItemType</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme tipi</value>
+   <key>en</key>
+   <value>Item type</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид номенклатуры</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item type</value>
+   <key>tr</key>
+   <value>Malzeme tipi</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemTypes</types>
@@ -188,16 +188,16 @@
  <dimensions uuid="3adf4539-a31f-4aaa-918e-2146bfaa1e26">
   <name>TypeOfItemType</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme tip tipi</value>
+   <key>en</key>
+   <value>Type of item type</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Тип вида номенклатуры</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Type of item type</value>
+   <key>tr</key>
+   <value>Malzeme tip tipi</value>
   </synonym>
   <type>
    <types>EnumRef.ItemTypes</types>
@@ -213,16 +213,16 @@
  <forms uuid="cd7c54e0-943c-4273-9547-d3ce810eeb30">
   <name>RecordForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
+   <key>en</key>
+   <value>Record form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма записи</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Record form</value>
+   <key>tr</key>
+   <value>Kayıt formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

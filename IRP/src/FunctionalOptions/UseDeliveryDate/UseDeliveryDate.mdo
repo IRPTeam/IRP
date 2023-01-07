@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="39153ba1-128f-4989-97f6-b96056571019">
  <name>UseDeliveryDate</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Teslim tarihi</value>
+  <key>en</key>
+  <value>Use delivery date</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать дату доставки</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use delivery date</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Teslim tarihi</value>
  </synonym>
  <location>Constant.UseDeliveryDate</location>
  <privilegedGetMode>true</privilegedGetMode>

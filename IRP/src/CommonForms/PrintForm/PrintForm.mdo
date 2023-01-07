@@ -2,16 +2,16 @@
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="99d45dda-857e-4c0c-b91d-70e8cf54c488">
  <name>PrintForm</name>
  <synonym>
-  <key>tr</key>
-  <value>Çıktı form</value>
+  <key>en</key>
+  <value>Print form</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Печатная форма</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Print form</value>
+  <key>tr</key>
+  <value>Çıktı form</value>
  </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>

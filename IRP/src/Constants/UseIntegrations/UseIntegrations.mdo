@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseIntegrations</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Entegrasyonlar</value>
+  <key>en</key>
+  <value>Use integrations</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать настройки интеграций</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use integrations</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Entegrasyonlar</value>
  </synonym>
  <type>
   <types>Boolean</types>

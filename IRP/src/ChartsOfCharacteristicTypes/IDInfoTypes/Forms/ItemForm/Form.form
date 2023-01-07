@@ -644,16 +644,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Eklentiler</value>
+    <key>en</key>
+    <value>Plugins</value>
    </title>
    <title>
     <key>ru</key>
     <value>Внешние обработки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Plugins</value>
+    <key>tr</key>
+    <value>Eklentiler</value>
    </title>
    <extendedTooltip>
     <name>GroupPageExternalDataProcExtendedTooltip</name>
@@ -969,16 +969,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Bağlı değerler</value>
+    <key>en</key>
+    <value>Related values</value>
    </title>
    <title>
     <key>ru</key>
     <value>Связанные виды контактной информации</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Related values</value>
+    <key>tr</key>
+    <value>Bağlı değerler</value>
    </title>
    <extendedTooltip>
     <name>GroupRelatedValuesExtendedTooltip</name>
@@ -1007,16 +1007,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
+   <key>en</key>
+   <value>Group main pages</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа главных страниц</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group main pages</value>
+   <key>tr</key>
+   <value>Grup ana sayfalar</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -1131,16 +1131,16 @@
  <attributes>
   <name>AddressResult</name>
   <title>
-   <key>tr</key>
-   <value>Adres sonucu</value>
+   <key>en</key>
+   <value>Address result</value>
   </title>
   <title>
    <key>ru</key>
    <value>Адрес результата</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Address result</value>
+   <key>tr</key>
+   <value>Adres sonucu</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1157,16 +1157,16 @@
  <attributes>
   <name>RowNumber</name>
   <title>
-   <key>tr</key>
-   <value>Satır numarası</value>
+   <key>en</key>
+   <value>Row number</value>
   </title>
   <title>
    <key>ru</key>
    <value>Номер строки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Row number</value>
+   <key>tr</key>
+   <value>Satır numarası</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1185,29 +1185,29 @@
  <formCommands>
   <name>SetSettings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarları belirle</value>
+   <key>en</key>
+   <value>Set settings</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить настройки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Set settings</value>
+   <key>tr</key>
+   <value>Ayarları belirle</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Ayarları belirle</value>
+   <key>en</key>
+   <value>Set settings</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Заполнить настройки</value>
   </toolTip>
   <toolTip>
-   <key>en</key>
-   <value>Set settings</value>
+   <key>tr</key>
+   <value>Ayarları belirle</value>
   </toolTip>
   <use>
    <common>true</common>

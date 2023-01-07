@@ -11,16 +11,16 @@
  </producedTypes>
  <name>JobQueue</name>
  <synonym>
-  <key>tr</key>
-  <value>Görev kuyruğu</value>
+  <key>en</key>
+  <value>Job queue</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Очередь заданий</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Job queue</value>
+  <key>tr</key>
+  <value>Görev kuyruğu</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,33 +30,33 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <enableTotalsSliceLast>true</enableTotalsSliceLast>
  <recordPresentation>
-  <key>tr</key>
-  <value>Görev kuyruğu</value>
+  <key>en</key>
+  <value>Job queue</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Очередь заданий</value>
  </recordPresentation>
  <recordPresentation>
-  <key>en</key>
-  <value>Job queue</value>
- </recordPresentation>
- <listPresentation>
   <key>tr</key>
   <value>Görev kuyruğu</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Job queue</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Очередь заданий</value>
  </listPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Job queue</value>
+  <key>tr</key>
+  <value>Görev kuyruğu</value>
  </listPresentation>
  <resources uuid="afa41998-e59b-4515-88c2-453f7cd946f4">
   <name>Start</name>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Start</value>
   </synonym>
   <synonym>
@@ -64,7 +64,7 @@
    <value>Старт</value>
   </synonym>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Start</value>
   </synonym>
   <type>
@@ -80,16 +80,16 @@
  <resources uuid="7dc8d47a-7488-4c95-b5ab-70dcfd006bd4">
   <name>Status</name>
   <synonym>
-   <key>tr</key>
-   <value>Statü</value>
+   <key>en</key>
+   <value>Status</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Статус</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Status</value>
+   <key>tr</key>
+   <value>Statü</value>
   </synonym>
   <type>
    <types>EnumRef.JobStatus</types>
@@ -103,16 +103,16 @@
  <resources uuid="8a8f7f6f-2c93-436c-9ea3-83913c66702d">
   <name>Description</name>
   <synonym>
-   <key>tr</key>
-   <value>Tanım</value>
+   <key>en</key>
+   <value>Description</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Наименование</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Description</value>
+   <key>tr</key>
+   <value>Tanım</value>
   </synonym>
   <type>
    <types>String</types>
@@ -127,16 +127,16 @@
  <resources uuid="56209d99-5c5e-4b8e-9666-54c7296fdd0c">
   <name>Finish</name>
   <synonym>
-   <key>tr</key>
-   <value>Bitiş</value>
+   <key>en</key>
+   <value>Finish</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Закончить</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Finish</value>
+   <key>tr</key>
+   <value>Bitiş</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -151,16 +151,16 @@
  <resources uuid="23b184b3-3590-465c-96fa-1d1980c0b3be">
   <name>DifficultLevel</name>
   <synonym>
-   <key>tr</key>
-   <value>Zorluk seviyesi</value>
+   <key>en</key>
+   <value>Difficult level</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Уровень сложности</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Difficult level</value>
+   <key>tr</key>
+   <value>Zorluk seviyesi</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -182,7 +182,7 @@
  <resources uuid="43cd7830-c0c8-4beb-bf5a-84ac1a3a42e2">
   <name>Log</name>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Log</value>
   </synonym>
   <synonym>
@@ -190,7 +190,7 @@
    <value>Логи</value>
   </synonym>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Log</value>
   </synonym>
   <type>
@@ -205,16 +205,16 @@
  <resources uuid="2635ce90-d1a4-4f9d-a87a-adb0436c8814">
   <name>Result</name>
   <synonym>
-   <key>tr</key>
-   <value>Sonuç</value>
+   <key>en</key>
+   <value>Result</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Результат</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Result</value>
+   <key>tr</key>
+   <value>Sonuç</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -228,16 +228,16 @@
  <resources uuid="60bca419-4713-4d7d-82d5-e563e8c6bd2f">
   <name>Parameters</name>
   <synonym>
-   <key>tr</key>
-   <value>Parametreler</value>
+   <key>en</key>
+   <value>Parameters</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Параметры</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Parameters</value>
+   <key>tr</key>
+   <value>Parametreler</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -251,16 +251,16 @@
  <resources uuid="a92db30e-38ae-4e71-aec4-ff2c56b89927">
   <name>JobID</name>
   <synonym>
-   <key>tr</key>
-   <value>Görev ID</value>
+   <key>en</key>
+   <value>Job ID</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>ID задания</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Job ID</value>
+   <key>tr</key>
+   <value>Görev ID</value>
   </synonym>
   <type>
    <types>UUID</types>
@@ -274,16 +274,16 @@
  <resources uuid="8de45f02-ecf0-4beb-9b4c-5202ff37381c">
   <name>UserMessages</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı mesajları</value>
+   <key>en</key>
+   <value>User messages</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Пользовательские сообщения</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>User messages</value>
+   <key>tr</key>
+   <value>Kullanıcı mesajları</value>
   </synonym>
   <type>
    <types>String</types>
@@ -298,16 +298,16 @@
  <dimensions uuid="7926796a-9514-4e88-b937-c4749c2931ce">
   <name>Job</name>
   <synonym>
-   <key>tr</key>
-   <value>Görev</value>
+   <key>en</key>
+   <value>Job</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Задание</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Job</value>
+   <key>tr</key>
+   <value>Görev</value>
   </synonym>
   <type>
    <types>CatalogRef.ExternalFunctions</types>
@@ -325,16 +325,16 @@
  <forms uuid="6241f184-55c6-42b6-8c68-1574730957bb">
   <name>RecordForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
+   <key>en</key>
+   <value>Record form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма записи</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Record form</value>
+   <key>tr</key>
+   <value>Kayıt formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

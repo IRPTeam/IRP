@@ -61,16 +61,16 @@
     <typeDomainEnabled>true</typeDomainEnabled>
     <textEdit>true</textEdit>
     <inputHint>
-     <key>tr</key>
-     <value>Doldurun ve Enter basınız</value>
+     <key>en</key>
+     <value>Type and press enter</value>
     </inputHint>
     <inputHint>
      <key>ru</key>
      <value>Введите и нажмите Enter</value>
     </inputHint>
     <inputHint>
-     <key>en</key>
-     <value>Type and press enter</value>
+     <key>tr</key>
+     <value>Doldurun ve Enter basınız</value>
     </inputHint>
    </extInfo>
   </items>
@@ -1833,16 +1833,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Seçilen</value>
+   <key>en</key>
+   <value>Picked out</value>
   </title>
   <title>
    <key>ru</key>
    <value>Подобрано</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Picked out</value>
+   <key>tr</key>
+   <value>Seçilen</value>
   </title>
   <extendedTooltip>
    <name>GroupPickedOutExtendedTooltip</name>
@@ -1931,16 +1931,16 @@
  <attributes>
   <name>ItemKeyList</name>
   <title>
-   <key>tr</key>
-   <value>Varyant listesi</value>
+   <key>en</key>
+   <value>Item key list</value>
   </title>
   <title>
    <key>ru</key>
    <value>Товары</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item key list</value>
+   <key>tr</key>
+   <value>Varyant listesi</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1956,16 +1956,16 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Характеристика</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </title>
    <id>13</id>
    <valueType>
@@ -1981,16 +1981,16 @@
   <columns>
    <name>InStock</name>
    <title>
-    <key>tr</key>
-    <value>Stokta</value>
+    <key>en</key>
+    <value>In stock</value>
    </title>
    <title>
     <key>ru</key>
     <value>В наличии</value>
    </title>
    <title>
-    <key>en</key>
-    <value>In stock</value>
+    <key>tr</key>
+    <value>Stokta</value>
    </title>
    <id>14</id>
    <valueType>
@@ -2009,16 +2009,16 @@
   <columns>
    <name>Title</name>
    <title>
-    <key>tr</key>
-    <value>Başlık</value>
+    <key>en</key>
+    <value>Title</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Title</value>
+    <key>tr</key>
+    <value>Başlık</value>
    </title>
    <id>15</id>
    <valueType>
@@ -2037,16 +2037,16 @@
   <columns>
    <name>PickedOut</name>
    <title>
-    <key>tr</key>
-    <value>Seçilen</value>
+    <key>en</key>
+    <value>Picked out</value>
    </title>
    <title>
     <key>ru</key>
     <value>Выбранные документы</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Picked out</value>
+    <key>tr</key>
+    <value>Seçilen</value>
    </title>
    <id>16</id>
    <valueType>
@@ -2062,16 +2062,16 @@
   <columns>
    <name>Price</name>
    <title>
-    <key>tr</key>
-    <value>Fiyat</value>
+    <key>en</key>
+    <value>Price</value>
    </title>
    <title>
     <key>ru</key>
     <value>Цена</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Price</value>
+    <key>tr</key>
+    <value>Fiyat</value>
    </title>
    <id>20</id>
    <valueType>
@@ -2087,16 +2087,16 @@
   <columns>
    <name>Unit</name>
    <title>
-    <key>tr</key>
-    <value>Birim</value>
+    <key>en</key>
+    <value>Unit</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ед. изм.</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Unit</value>
+    <key>tr</key>
+    <value>Birim</value>
    </title>
    <id>24</id>
    <valueType>
@@ -2113,16 +2113,16 @@
   <columns>
    <name>InStockReceiver</name>
    <title>
-    <key>tr</key>
-    <value>Alıcı depodaki</value>
+    <key>en</key>
+    <value>In stock receiver</value>
    </title>
    <title>
     <key>ru</key>
     <value>В наличии на складе-получателе</value>
    </title>
    <title>
-    <key>en</key>
-    <value>In stock receiver</value>
+    <key>tr</key>
+    <value>Alıcı depodaki</value>
    </title>
    <id>28</id>
    <valueType>
@@ -2141,16 +2141,16 @@
   <columns>
    <name>SerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
+    <key>en</key>
+    <value>Serial lot number</value>
    </title>
    <title>
     <key>ru</key>
     <value>Серия номенклатуры</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Serial lot number</value>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
    </title>
    <id>33</id>
    <valueType>
@@ -2166,16 +2166,16 @@
   <columns>
    <name>UseSerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri/lot numaraları kullan</value>
+    <key>en</key>
+    <value>Use serial lot number</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ведется учет по сериям номенклатуры</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Use serial lot number</value>
+    <key>tr</key>
+    <value>Seri/lot numaraları kullan</value>
    </title>
    <id>34</id>
    <valueType>
@@ -2191,16 +2191,16 @@
   <columns>
    <name>isService</name>
    <title>
-    <key>tr</key>
-    <value>Bu hizmet</value>
+    <key>en</key>
+    <value>Is service</value>
    </title>
    <title>
     <key>ru</key>
     <value>Это услуга</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Is service</value>
+    <key>tr</key>
+    <value>Bu hizmet</value>
    </title>
    <id>39</id>
    <valueType>
@@ -2217,16 +2217,16 @@
  <attributes>
   <name>ItemList</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme listesi</value>
+   <key>en</key>
+   <value>Item list</value>
   </title>
   <title>
    <key>ru</key>
    <value>Товары</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item list</value>
+   <key>tr</key>
+   <value>Malzeme listesi</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2241,16 +2241,16 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
+    <key>en</key>
+    <value>Item</value>
    </title>
    <title>
     <key>ru</key>
     <value>Номенклатура</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item</value>
+    <key>tr</key>
+    <value>Malzeme</value>
    </title>
    <id>2</id>
    <valueType>
@@ -2266,16 +2266,16 @@
   <columns>
    <name>InStock</name>
    <title>
-    <key>tr</key>
-    <value>Stokta</value>
+    <key>en</key>
+    <value>In stock</value>
    </title>
    <title>
     <key>ru</key>
     <value>В наличии</value>
    </title>
    <title>
-    <key>en</key>
-    <value>In stock</value>
+    <key>tr</key>
+    <value>Stokta</value>
    </title>
    <id>3</id>
    <valueType>
@@ -2294,16 +2294,16 @@
   <columns>
    <name>Title</name>
    <title>
-    <key>tr</key>
-    <value>Başlık</value>
+    <key>en</key>
+    <value>Title</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Title</value>
+    <key>tr</key>
+    <value>Başlık</value>
    </title>
    <id>4</id>
    <valueType>
@@ -2322,16 +2322,16 @@
   <columns>
    <name>PickedOut</name>
    <title>
-    <key>tr</key>
-    <value>Seçilen</value>
+    <key>en</key>
+    <value>Picked out</value>
    </title>
    <title>
     <key>ru</key>
     <value>Подобрано</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Picked out</value>
+    <key>tr</key>
+    <value>Seçilen</value>
    </title>
    <id>5</id>
    <valueType>
@@ -2347,16 +2347,16 @@
   <columns>
    <name>ItemKeyCount</name>
    <title>
-    <key>tr</key>
-    <value>Varyant sayısı</value>
+    <key>en</key>
+    <value>Item key count</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество характеристик</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item key count</value>
+    <key>tr</key>
+    <value>Varyant sayısı</value>
    </title>
    <id>17</id>
    <valueType>
@@ -2376,16 +2376,16 @@
   <columns>
    <name>Price</name>
    <title>
-    <key>tr</key>
-    <value>Fiyat</value>
+    <key>en</key>
+    <value>Price</value>
    </title>
    <title>
     <key>ru</key>
     <value>Цена</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Price</value>
+    <key>tr</key>
+    <value>Fiyat</value>
    </title>
    <id>21</id>
    <valueType>
@@ -2401,16 +2401,16 @@
   <columns>
    <name>Unit</name>
    <title>
-    <key>tr</key>
-    <value>Birim</value>
+    <key>en</key>
+    <value>Unit</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ед. изм.</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Unit</value>
+    <key>tr</key>
+    <value>Birim</value>
    </title>
    <id>25</id>
    <valueType>
@@ -2427,16 +2427,16 @@
   <columns>
    <name>InStockReceiver</name>
    <title>
-    <key>tr</key>
-    <value>Alıcı depodaki</value>
+    <key>en</key>
+    <value>In stock receiver</value>
    </title>
    <title>
     <key>ru</key>
     <value>В наличии на складе-получателе</value>
    </title>
    <title>
-    <key>en</key>
-    <value>In stock receiver</value>
+    <key>tr</key>
+    <value>Alıcı depodaki</value>
    </title>
    <id>29</id>
    <valueType>
@@ -2455,16 +2455,16 @@
   <columns>
    <name>UseSerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri/lot numaraları kullan</value>
+    <key>en</key>
+    <value>Use serial lot number</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ведется учет по сериям номенклатуры</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Use serial lot number</value>
+    <key>tr</key>
+    <value>Seri/lot numaraları kullan</value>
    </title>
    <id>35</id>
    <valueType>
@@ -2480,16 +2480,16 @@
   <columns>
    <name>SerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
+    <key>en</key>
+    <value>Serial lot number</value>
    </title>
    <title>
     <key>ru</key>
     <value>Серия номенклатуры</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Serial lot number</value>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
    </title>
    <id>36</id>
    <valueType>
@@ -2505,16 +2505,16 @@
   <columns>
    <name>isService</name>
    <title>
-    <key>tr</key>
-    <value>Bu hizmet</value>
+    <key>en</key>
+    <value>Is service</value>
    </title>
    <title>
     <key>ru</key>
     <value>Это услуга</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Is service</value>
+    <key>tr</key>
+    <value>Bu hizmet</value>
    </title>
    <id>38</id>
    <valueType>
@@ -2531,16 +2531,16 @@
  <attributes>
   <name>ItemTableValue</name>
   <title>
-   <key>tr</key>
-   <value>Malzemeler tablosu değeri</value>
+   <key>en</key>
+   <value>Item table value</value>
   </title>
   <title>
    <key>ru</key>
    <value>Значение таблицы номенклатуры</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item table value</value>
+   <key>tr</key>
+   <value>Malzemeler tablosu değeri</value>
   </title>
   <id>3</id>
   <valueType>
@@ -2555,16 +2555,16 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
+    <key>en</key>
+    <value>Item</value>
    </title>
    <title>
     <key>ru</key>
     <value>Номенклатура</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item</value>
+    <key>tr</key>
+    <value>Malzeme</value>
    </title>
    <id>9</id>
    <valueType>
@@ -2580,16 +2580,16 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Характеристика</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </title>
    <id>10</id>
    <valueType>
@@ -2606,16 +2606,16 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </title>
    <id>11</id>
    <valueType>
@@ -2631,16 +2631,16 @@
   <columns>
    <name>Price</name>
    <title>
-    <key>tr</key>
-    <value>Fiyat</value>
+    <key>en</key>
+    <value>Price</value>
    </title>
    <title>
     <key>ru</key>
     <value>Цена</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Price</value>
+    <key>tr</key>
+    <value>Fiyat</value>
    </title>
    <id>22</id>
    <valueType>
@@ -2656,16 +2656,16 @@
   <columns>
    <name>Amount</name>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
+    <key>en</key>
+    <value>Amount</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Amount</value>
+    <key>tr</key>
+    <value>Tutar</value>
    </title>
    <id>23</id>
    <valueType>
@@ -2681,16 +2681,16 @@
   <columns>
    <name>Unit</name>
    <title>
-    <key>tr</key>
-    <value>Birim</value>
+    <key>en</key>
+    <value>Unit</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ед. изм.</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Unit</value>
+    <key>tr</key>
+    <value>Birim</value>
    </title>
    <id>26</id>
    <valueType>
@@ -2707,16 +2707,16 @@
   <columns>
    <name>SerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
+    <key>en</key>
+    <value>Serial lot number</value>
    </title>
    <title>
     <key>ru</key>
     <value>Серия номенклатуры</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Serial lot number</value>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
    </title>
    <id>31</id>
    <valueType>
@@ -2732,16 +2732,16 @@
   <columns>
    <name>UseSerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri/lot numaraları kullan</value>
+    <key>en</key>
+    <value>Use serial lot number</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ведется учет по сериям номенклатуры</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Use serial lot number</value>
+    <key>tr</key>
+    <value>Seri/lot numaraları kullan</value>
    </title>
    <id>32</id>
    <valueType>
@@ -2757,16 +2757,16 @@
   <columns>
    <name>isService</name>
    <title>
-    <key>tr</key>
-    <value>Bu hizmet</value>
+    <key>en</key>
+    <value>Is service</value>
    </title>
    <title>
     <key>ru</key>
     <value>Это услуга</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Is service</value>
+    <key>tr</key>
+    <value>Bu hizmet</value>
    </title>
    <id>37</id>
    <valueType>
@@ -2782,16 +2782,16 @@
   <columns>
    <name>SourceOfOrigin</name>
    <title>
-    <key>tr</key>
-    <value>Envanter menşei</value>
+    <key>en</key>
+    <value>Source of origin</value>
    </title>
    <title>
     <key>ru</key>
     <value>Источник происхождения</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Source of origin</value>
+    <key>tr</key>
+    <value>Envanter menşei</value>
    </title>
    <id>40</id>
    <valueType>
@@ -2808,16 +2808,16 @@
  <attributes>
   <name>ItemType</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme tipi</value>
+   <key>en</key>
+   <value>Item type</value>
   </title>
   <title>
    <key>ru</key>
    <value>Вид номенклатуры</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item type</value>
+   <key>tr</key>
+   <value>Malzeme tipi</value>
   </title>
   <id>4</id>
   <valueType>
@@ -2833,16 +2833,16 @@
  <attributes>
   <name>Stores</name>
   <title>
-   <key>tr</key>
-   <value>Depolar</value>
+   <key>en</key>
+   <value>Stores</value>
   </title>
   <title>
    <key>ru</key>
    <value>Склады</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Stores</value>
+   <key>tr</key>
+   <value>Depolar</value>
   </title>
   <id>5</id>
   <valueType>
@@ -2861,16 +2861,16 @@
  <attributes>
   <name>EndPeriod</name>
   <title>
-   <key>tr</key>
-   <value>Son tarih</value>
+   <key>en</key>
+   <value>End period</value>
   </title>
   <title>
    <key>ru</key>
    <value>Конец периода</value>
   </title>
   <title>
-   <key>en</key>
-   <value>End period</value>
+   <key>tr</key>
+   <value>Son tarih</value>
   </title>
   <id>6</id>
   <valueType>
@@ -2887,16 +2887,16 @@
  <attributes>
   <name>PriceType</name>
   <title>
-   <key>tr</key>
-   <value>Fiyat tipi</value>
+   <key>en</key>
+   <value>Price type</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип цен</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Price type</value>
+   <key>tr</key>
+   <value>Fiyat tipi</value>
   </title>
   <id>18</id>
   <valueType>
@@ -2912,16 +2912,16 @@
  <attributes>
   <name>TitleFilter</name>
   <title>
-   <key>tr</key>
-   <value>Filtre tanımı</value>
+   <key>en</key>
+   <value>Title filter</value>
   </title>
   <title>
    <key>ru</key>
    <value>Поиск по наименованию</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Title filter</value>
+   <key>tr</key>
+   <value>Filtre tanımı</value>
   </title>
   <id>19</id>
   <valueType>
@@ -2940,16 +2940,16 @@
  <attributes>
   <name>ReceiverStores</name>
   <title>
-   <key>tr</key>
-   <value>Alıcı depolar</value>
+   <key>en</key>
+   <value>Receiver stores</value>
   </title>
   <title>
    <key>ru</key>
    <value>Склад-получатель</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Receiver stores</value>
+   <key>tr</key>
+   <value>Alıcı depolar</value>
   </title>
   <id>30</id>
   <valueType>
@@ -2968,16 +2968,16 @@
  <formCommands>
   <name>CommandBack</name>
   <title>
-   <key>tr</key>
-   <value>Geri</value>
+   <key>en</key>
+   <value>Back</value>
   </title>
   <title>
    <key>ru</key>
    <value>Назад</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Back</value>
+   <key>tr</key>
+   <value>Geri</value>
   </title>
   <id>1</id>
   <use>
@@ -2993,16 +2993,16 @@
  <formCommands>
   <name>CommandSaveAndClose</name>
   <title>
-   <key>tr</key>
-   <value>Evraka aktar</value>
+   <key>en</key>
+   <value>Transfer to document</value>
   </title>
   <title>
    <key>ru</key>
    <value>Перенести в документ</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Transfer to document</value>
+   <key>tr</key>
+   <value>Evraka aktar</value>
   </title>
   <id>2</id>
   <use>

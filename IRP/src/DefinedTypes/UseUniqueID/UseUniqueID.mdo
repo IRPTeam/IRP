@@ -5,16 +5,16 @@
  </producedTypes>
  <name>UseUniqueID</name>
  <synonym>
-  <key>tr</key>
-  <value>Eşsiz ID kullan</value>
+  <key>en</key>
+  <value>Use unique ID</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использование уникального ID</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use unique ID</value>
+  <key>tr</key>
+  <value>Eşsiz ID kullan</value>
  </synonym>
  <type>
   <types>ChartOfCharacteristicTypesObject.AddAttributeAndProperty</types>

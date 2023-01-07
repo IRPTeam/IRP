@@ -9,16 +9,16 @@
  </producedTypes>
  <name>Taxes</name>
  <synonym>
-  <key>tr</key>
-  <value>Vergi tipleri</value>
+  <key>en</key>
+  <value>Tax types</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Виды налогов</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Tax types</value>
+  <key>tr</key>
+  <value>Vergi tipleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -58,16 +58,16 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Vergi türü</value>
+  <key>en</key>
+  <value>Tax type</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Вид налога</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>Tax type</value>
+  <key>tr</key>
+  <value>Vergi türü</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -85,16 +85,16 @@
  <attributes uuid="96dd4c52-3f32-422a-9a9f-8a80bfc5da45">
   <name>ExternalDataProcSettings</name>
   <synonym>
-   <key>tr</key>
-   <value>Eklentiler ayarları</value>
+   <key>en</key>
+   <value>Plugin settings</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Настройки внешней обработки</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Plugin settings</value>
+   <key>tr</key>
+   <value>Eklentiler ayarları</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -108,16 +108,16 @@
  <attributes uuid="55d1c507-7cbc-44c5-a841-eb9d029a7df2">
   <name>ExternalDataProc</name>
   <synonym>
-   <key>tr</key>
-   <value>Eklentiler</value>
+   <key>en</key>
+   <value>Plugins</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Внешняя обработка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Plugins</value>
+   <key>tr</key>
+   <value>Eklentiler</value>
   </synonym>
   <type>
    <types>CatalogRef.ExternalDataProc</types>
@@ -132,16 +132,16 @@
  <attributes uuid="756e5b91-20cc-4d3b-ac64-44a1b36a8948">
   <name>Type</name>
   <synonym>
-   <key>tr</key>
-   <value>Tip</value>
+   <key>en</key>
+   <value>Type</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Type</value>
+   <key>tr</key>
+   <value>Tip</value>
   </synonym>
   <type>
    <types>EnumRef.TaxType</types>
@@ -159,30 +159,30 @@
   </producedTypes>
   <name>TaxRates</name>
   <synonym>
-   <key>tr</key>
-   <value>Vergi oranları</value>
+   <key>en</key>
+   <value>Tax rates</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Налоговые ставки</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Tax rates</value>
+   <key>tr</key>
+   <value>Vergi oranları</value>
   </synonym>
   <attributes uuid="ecc823f8-14ce-43b4-b8b9-167d43789b03">
    <name>TaxRate</name>
    <synonym>
-    <key>tr</key>
-    <value>Vergi oranı</value>
+    <key>en</key>
+    <value>Tax rate</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Налоговая ставка</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Tax rate</value>
+    <key>tr</key>
+    <value>Vergi oranı</value>
    </synonym>
    <type>
     <types>CatalogRef.TaxRates</types>
@@ -200,30 +200,30 @@
   </producedTypes>
   <name>UseDocuments</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak kullanmak</value>
+   <key>en</key>
+   <value>Use documents</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документы применения</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Use documents</value>
+   <key>tr</key>
+   <value>Evrak kullanmak</value>
   </synonym>
   <attributes uuid="39f0bb03-7fe7-4444-a256-ba920c587672">
    <name>DocumentName</name>
    <synonym>
-    <key>tr</key>
-    <value>Evrak ismi</value>
+    <key>en</key>
+    <value>Document name</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Наименование документа</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Document name</value>
+    <key>tr</key>
+    <value>Evrak ismi</value>
    </synonym>
    <type>
     <types>String</types>
@@ -244,30 +244,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <attributes uuid="9083420a-a5b7-4c23-9627-09df5bd74a36">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -280,16 +280,16 @@
   <attributes uuid="9cbb4176-9889-4488-95f8-603ca242a1ee">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -306,16 +306,16 @@
   <attributes uuid="3c68d3c4-e72d-4679-a1f9-2d50cc72cf16">
    <name>SearchLiteral</name>
    <synonym>
-    <key>tr</key>
-    <value>Arama metni</value>
+    <key>en</key>
+    <value>Search literal</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Буквальный поиск</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Search literal</value>
+    <key>tr</key>
+    <value>Arama metni</value>
    </synonym>
    <type>
     <types>String</types>
@@ -332,16 +332,16 @@
  <forms uuid="976c42dd-94f0-4def-88b5-5d9c13d6f5cc">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -349,16 +349,16 @@
  <forms uuid="2f2d97af-e862-478c-b833-d840f4e88036">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -366,16 +366,16 @@
  <forms uuid="f5551971-f031-4c07-82db-b47cb2d864f3">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

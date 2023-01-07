@@ -2,16 +2,16 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a66d9645-1cc9-4162-a2c8-ac670130642e">
  <name>Technical</name>
  <synonym>
-  <key>tr</key>
-  <value>Teknik</value>
+  <key>en</key>
+  <value>Technical</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Технический</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Technical</value>
+  <key>tr</key>
+  <value>Teknik</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <subsystems>Localization</subsystems>

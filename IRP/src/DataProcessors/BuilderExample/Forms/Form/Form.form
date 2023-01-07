@@ -67,16 +67,16 @@
  <attributes>
   <name>PartnerRef</name>
   <title>
-   <key>tr</key>
-   <value> Cari hesap ref</value>
+   <key>en</key>
+   <value>Partner ref</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка партнера</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Partner ref</value>
+   <key>tr</key>
+   <value> Cari hesap ref</value>
   </title>
   <id>2</id>
   <valueType>
@@ -92,16 +92,16 @@
  <formCommands>
   <name>CreateSC</name>
   <title>
-   <key>tr</key>
-   <value>Sevk irsaliyesini oluştur</value>
+   <key>en</key>
+   <value>Create SC</value>
   </title>
   <title>
    <key>ru</key>
    <value>Создать расходный ордер на товары</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Create SC</value>
+   <key>tr</key>
+   <value>Sevk irsaliyesini oluştur</value>
   </title>
   <id>4</id>
   <use>

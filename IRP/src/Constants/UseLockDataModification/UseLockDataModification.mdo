@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseLockDataModification</name>
  <synonym>
-  <key>tr</key>
-  <value>Veri düzeltme kısıtlamayı kullanmak</value>
+  <key>en</key>
+  <value>Use lock data modification</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать запрет изменения данных</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use lock data modification</value>
+  <key>tr</key>
+  <value>Veri düzeltme kısıtlamayı kullanmak</value>
  </synonym>
  <type>
   <types>Boolean</types>

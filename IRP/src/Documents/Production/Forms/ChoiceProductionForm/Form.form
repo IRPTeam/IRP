@@ -2,16 +2,16 @@
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <items xsi:type="form:Addition">
   <title>
-   <key>tr</key>
-   <value>Arama satırı</value>
+   <key>en</key>
+   <value>Search string</value>
   </title>
   <title>
    <key>ru</key>
    <value>Строка поиска</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Search string</value>
+   <key>tr</key>
+   <value>Arama satırı</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -276,16 +276,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Üretim tablosu grup varyant malzemesi</value>
+    <key>en</key>
+    <value>Production table group item key item</value>
    </title>
    <title>
     <key>ru</key>
     <value>Таблица производства группа номенклатура характеристики</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Production table group item key item</value>
+    <key>tr</key>
+    <value>Üretim tablosu grup varyant malzemesi</value>
    </title>
    <extendedTooltip>
     <name>ProductionTableGroupItemKeyItemExtendedTooltip</name>
@@ -815,16 +815,16 @@
  <attributes>
   <name>ProductionTable</name>
   <title>
-   <key>tr</key>
-   <value>Üretim tablosu</value>
+   <key>en</key>
+   <value>Production table</value>
   </title>
   <title>
    <key>ru</key>
    <value>Производственная таблица</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Production table</value>
+   <key>tr</key>
+   <value>Üretim tablosu</value>
   </title>
   <id>1</id>
   <valueType>
@@ -839,16 +839,16 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>tr</key>
-    <value>Üretim</value>
+    <key>en</key>
+    <value>Production</value>
    </title>
    <title>
     <key>ru</key>
     <value>Производство</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Production</value>
+    <key>tr</key>
+    <value>Üretim</value>
    </title>
    <id>2</id>
    <valueType>
@@ -864,16 +864,16 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Характеристика</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </title>
    <id>3</id>
    <valueType>
@@ -889,16 +889,16 @@
   <columns>
    <name>ItemPicture</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme resimi</value>
+    <key>en</key>
+    <value>Item picture</value>
    </title>
    <title>
     <key>ru</key>
     <value>Картинка номенклатуры</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item picture</value>
+    <key>tr</key>
+    <value>Malzeme resimi</value>
    </title>
    <id>4</id>
    <valueType>
@@ -917,16 +917,16 @@
   <columns>
    <name>BasisUnit</name>
    <title>
-    <key>tr</key>
-    <value>Birim</value>
+    <key>en</key>
+    <value>Unit</value>
    </title>
    <title>
     <key>ru</key>
     <value>Единица измерения</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Unit</value>
+    <key>tr</key>
+    <value>Birim</value>
    </title>
    <id>5</id>
    <valueType>
@@ -942,16 +942,16 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Q</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Q</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </title>
    <id>6</id>
    <valueType>
@@ -971,16 +971,16 @@
   <columns>
    <name>Selected</name>
    <title>
-    <key>tr</key>
-    <value>Seçilmiş</value>
+    <key>en</key>
+    <value>Selected</value>
    </title>
    <title>
     <key>ru</key>
     <value>Выбранные</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Selected</value>
+    <key>tr</key>
+    <value>Seçilmiş</value>
    </title>
    <id>7</id>
    <valueType>
@@ -996,16 +996,16 @@
   <columns>
    <name>BillOfMaterials</name>
    <title>
-    <key>tr</key>
-    <value>Üretim reçetesi</value>
+    <key>en</key>
+    <value>Bill of materials</value>
    </title>
    <title>
     <key>ru</key>
     <value>Спецификация (Производство)</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Bill of materials</value>
+    <key>tr</key>
+    <value>Üretim reçetesi</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1021,16 +1021,16 @@
   <columns>
    <name>TotalQuantity</name>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Q</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Q</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </title>
    <id>13</id>
    <valueType>
@@ -1050,16 +1050,16 @@
   <columns>
    <name>OutputID</name>
    <title>
-    <key>tr</key>
-    <value>Çıkış ID</value>
+    <key>en</key>
+    <value>Output ID</value>
    </title>
    <title>
     <key>ru</key>
     <value>ID вывода</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Output ID</value>
+    <key>tr</key>
+    <value>Çıkış ID</value>
    </title>
    <id>14</id>
    <valueType>
@@ -1078,7 +1078,7 @@
   <columns>
    <name>UniqueID</name>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Unique ID</value>
    </title>
    <title>
@@ -1086,7 +1086,7 @@
     <value>Уникальный ID</value>
    </title>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Unique ID</value>
    </title>
    <id>15</id>
@@ -1106,16 +1106,16 @@
   <columns>
    <name>ProductionType</name>
    <title>
-    <key>tr</key>
-    <value>Üretim tipi</value>
+    <key>en</key>
+    <value>Production type</value>
    </title>
    <title>
     <key>ru</key>
     <value>Вид производства</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Production type</value>
+    <key>tr</key>
+    <value>Üretim tipi</value>
    </title>
    <id>16</id>
    <valueType>
@@ -1131,16 +1131,16 @@
   <columns>
    <name>BusinessUnit</name>
    <title>
-    <key>tr</key>
-    <value>Departman</value>
+    <key>en</key>
+    <value>Business unit</value>
    </title>
    <title>
     <key>ru</key>
     <value>Подразделение</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Business unit</value>
+    <key>tr</key>
+    <value>Departman</value>
    </title>
    <id>17</id>
    <valueType>
@@ -1156,16 +1156,16 @@
   <columns>
    <name>StoreProduction</name>
    <title>
-    <key>tr</key>
-    <value>Hazır ürün deposu</value>
+    <key>en</key>
+    <value>Store production</value>
    </title>
    <title>
     <key>ru</key>
     <value>Склад готовой продукции</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Store production</value>
+    <key>tr</key>
+    <value>Hazır ürün deposu</value>
    </title>
    <id>18</id>
    <valueType>
@@ -1182,16 +1182,16 @@
  <attributes>
   <name>Company</name>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </title>
   <title>
    <key>ru</key>
    <value>Организация</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1207,16 +1207,16 @@
  <attributes>
   <name>PlanningPeriod</name>
   <title>
-   <key>tr</key>
-   <value>Planlama dönemi</value>
+   <key>en</key>
+   <value>Planning period</value>
   </title>
   <title>
    <key>ru</key>
    <value>Период планирования</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Planning period</value>
+   <key>tr</key>
+   <value>Planlama dönemi</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1232,16 +1232,16 @@
  <attributes>
   <name>ProductionPlanning</name>
   <title>
-   <key>tr</key>
-   <value>Üretim planlama fişi</value>
+   <key>en</key>
+   <value>Production planning</value>
   </title>
   <title>
    <key>ru</key>
    <value>Планирование производства</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Production planning</value>
+   <key>tr</key>
+   <value>Üretim planlama fişi</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1257,16 +1257,16 @@
  <attributes>
   <name>BusinessUnits</name>
   <title>
-   <key>tr</key>
-   <value>Departmanlar</value>
+   <key>en</key>
+   <value>Business units</value>
   </title>
   <title>
    <key>ru</key>
    <value>Подразделения</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Business units</value>
+   <key>tr</key>
+   <value>Departmanlar</value>
   </title>
   <id>20</id>
   <valueType>
@@ -1285,16 +1285,16 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>Ok</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ок</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Ok</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <id>1</id>
   <use>
@@ -1310,16 +1310,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <id>2</id>
   <use>

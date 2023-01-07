@@ -509,16 +509,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Boyutlar</value>
+   <key>en</key>
+   <value>Dimensions</value>
   </title>
   <title>
    <key>ru</key>
    <value>Измерения</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Dimensions</value>
+   <key>tr</key>
+   <value>Boyutlar</value>
   </title>
   <extendedTooltip>
    <name>GroupDimensionsExtendedTooltip</name>
@@ -540,16 +540,16 @@
    <group>Vertical</group>
    <behavior>Collapsible</behavior>
    <collapsedRepresentationTitle>
-    <key>tr</key>
-    <value>Boyutlar</value>
+    <key>en</key>
+    <value>Dimensions</value>
    </collapsedRepresentationTitle>
    <collapsedRepresentationTitle>
     <key>ru</key>
     <value>Измерения</value>
    </collapsedRepresentationTitle>
    <collapsedRepresentationTitle>
-    <key>en</key>
-    <value>Dimensions</value>
+    <key>tr</key>
+    <value>Boyutlar</value>
    </collapsedRepresentationTitle>
    <collapsed>true</collapsed>
    <representation>WeakSeparation</representation>
@@ -619,16 +619,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ağırlık bilgisi</value>
+   <key>en</key>
+   <value>Weight information</value>
   </title>
   <title>
    <key>ru</key>
    <value>Информация о весе</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Weight information</value>
+   <key>tr</key>
+   <value>Ağırlık bilgisi</value>
   </title>
   <extendedTooltip>
    <name>GroupWeightInformationExtendedTooltip</name>
@@ -650,16 +650,16 @@
    <group>HorizontalIfPossible</group>
    <behavior>Collapsible</behavior>
    <collapsedRepresentationTitle>
-    <key>tr</key>
-    <value>Ağırlık bilgisi</value>
+    <key>en</key>
+    <value>Weight information</value>
    </collapsedRepresentationTitle>
    <collapsedRepresentationTitle>
     <key>ru</key>
     <value>Информация о весе</value>
    </collapsedRepresentationTitle>
    <collapsedRepresentationTitle>
-    <key>en</key>
-    <value>Weight information</value>
+    <key>tr</key>
+    <value>Ağırlık bilgisi</value>
    </collapsedRepresentationTitle>
    <collapsed>true</collapsed>
    <representation>WeakSeparation</representation>
@@ -746,16 +746,16 @@
  <formCommands>
   <name>UnlockAttributes</name>
   <title>
-   <key>tr</key>
-   <value>Alan kilidi çöz</value>
+   <key>en</key>
+   <value>Unlock attributes</value>
   </title>
   <title>
    <key>ru</key>
    <value>Разблокировать реквизиты</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Unlock attributes</value>
+   <key>tr</key>
+   <value>Alan kilidi çöz</value>
   </title>
   <id>2</id>
   <use>

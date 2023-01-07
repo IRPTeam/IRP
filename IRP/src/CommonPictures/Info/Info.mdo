@@ -2,15 +2,15 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5ac399f7-fc38-4fc1-9fc7-105e47e5950e">
  <name>Info</name>
  <synonym>
-  <key>tr</key>
-  <value>Bilgi</value>
+  <key>en</key>
+  <value>Info</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Информация</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Info</value>
+  <key>tr</key>
+  <value>Bilgi</value>
  </synonym>
 </mdclass:CommonPicture>

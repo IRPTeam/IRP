@@ -7,77 +7,77 @@
  </producedTypes>
  <name>AgreementTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Sözleşme tipleri</value>
+  <key>en</key>
+  <value>Partner term types</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Типы соглашений</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Partner term types</value>
+  <key>tr</key>
+  <value>Sözleşme tipleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="578a44a6-4ba2-449e-9053-6b7fbe143f91">
   <name>Customer</name>
   <synonym>
-   <key>tr</key>
-   <value>Müşteri</value>
+   <key>en</key>
+   <value>Customer</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Клиент</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Customer</value>
+   <key>tr</key>
+   <value>Müşteri</value>
   </synonym>
  </enumValues>
  <enumValues uuid="01eff728-d491-46eb-8a1c-a99c70c7e375">
   <name>Vendor</name>
   <synonym>
-   <key>tr</key>
-   <value>Terarikçi</value>
+   <key>en</key>
+   <value>Vendor</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Поставщик</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Vendor</value>
+   <key>tr</key>
+   <value>Terarikçi</value>
   </synonym>
  </enumValues>
  <enumValues uuid="614b37ec-88bc-4496-966a-7c4aad559e56">
   <name>Consignor</name>
   <synonym>
-   <key>tr</key>
-   <value>Konsiyeye veren</value>
+   <key>en</key>
+   <value>Consignor</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Комитент</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Consignor</value>
+   <key>tr</key>
+   <value>Konsiyeye veren</value>
   </synonym>
  </enumValues>
  <enumValues uuid="5a4ae7b2-20b2-4b04-acf9-c19f12688457">
   <name>TradeAgent</name>
   <synonym>
-   <key>tr</key>
-   <value>Ödeme aracı kurum</value>
+   <key>en</key>
+   <value>Trade agent</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Комиссионер</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Trade agent</value>
+   <key>tr</key>
+   <value>Ödeme aracı kurum</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

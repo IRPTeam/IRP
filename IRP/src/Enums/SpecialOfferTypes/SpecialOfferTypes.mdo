@@ -7,47 +7,47 @@
  </producedTypes>
  <name>SpecialOfferTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Kapmanya tipleri</value>
+  <key>en</key>
+  <value>Special offer types</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Способы применения скидок</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Special offer types</value>
+  <key>tr</key>
+  <value>Kapmanya tipleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="bbff86dd-33a9-4b54-a326-2003197fedd9">
   <name>ForDocument</name>
   <synonym>
-   <key>tr</key>
-   <value>Evraka uygula</value>
+   <key>en</key>
+   <value>For document</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>На документ</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>For document</value>
+   <key>tr</key>
+   <value>Evraka uygula</value>
   </synonym>
  </enumValues>
  <enumValues uuid="e690ace0-77c5-4b03-a6e8-7fa08d5c31dc">
   <name>ForRow</name>
   <synonym>
-   <key>tr</key>
-   <value>Satıra uygula</value>
+   <key>en</key>
+   <value>For row</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>На строки</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>For row</value>
+   <key>tr</key>
+   <value>Satıra uygula</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

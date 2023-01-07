@@ -9,16 +9,16 @@
  </producedTypes>
  <name>FileStorageVolumes</name>
  <synonym>
-  <key>tr</key>
-  <value>Dosya depolama boyutları</value>
+  <key>en</key>
+  <value>File storage volumes</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тома хранения файлов</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>File storage volumes</value>
+  <key>tr</key>
+  <value>Dosya depolama boyutları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.FileStorageVolumes.StandardAttribute.Description</inputByString>
@@ -59,16 +59,16 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Dosya depolama hacmi</value>
+  <key>en</key>
+  <value>File storage volume</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Тома хранения файлов</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>File storage volume</value>
+  <key>tr</key>
+  <value>Dosya depolama hacmi</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -86,16 +86,16 @@
  <attributes uuid="7480283a-c370-40a7-a50b-2d39a8b91f5b">
   <name>FilesType</name>
   <synonym>
-   <key>tr</key>
-   <value>Dosya tipi</value>
+   <key>en</key>
+   <value>Files type</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Тип файлов</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Files type</value>
+   <key>tr</key>
+   <value>Dosya tipi</value>
   </synonym>
   <type>
    <types>EnumRef.FileTypes</types>
@@ -109,16 +109,16 @@
  <attributes uuid="d6bbbff6-ae7f-48d4-997b-044c872b5194">
   <name>POSTIntegrationSettings</name>
   <synonym>
-   <key>tr</key>
-   <value>POST Entegrasyon ayarları</value>
+   <key>en</key>
+   <value>POST Integration settings</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>POST интеграционные настройки</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>POST Integration settings</value>
+   <key>tr</key>
+   <value>POST Entegrasyon ayarları</value>
   </synonym>
   <type>
    <types>CatalogRef.IntegrationSettings</types>
@@ -132,16 +132,16 @@
  <attributes uuid="abbdb7b7-f388-4850-b213-664ac7513f2d">
   <name>GETIntegrationSettings</name>
   <synonym>
-   <key>tr</key>
-   <value>GET Entegrasyon ayarları</value>
+   <key>en</key>
+   <value>GET Integration settings</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>GET интеграционные настройки</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>GET Integration settings</value>
+   <key>tr</key>
+   <value>GET Entegrasyon ayarları</value>
   </synonym>
   <type>
    <types>CatalogRef.IntegrationSettings</types>
@@ -159,30 +159,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <attributes uuid="3ac33011-e5fc-423a-a209-7fdb8499ce1f">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Свойство</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -195,16 +195,16 @@
   <attributes uuid="c44cba3b-65c9-4b85-abf7-661d6027ce90">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -222,16 +222,16 @@
  <forms uuid="e833b5c6-7cf5-4de7-9b9a-b93f40e93134">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -239,16 +239,16 @@
  <forms uuid="91232f0d-e17c-4011-921c-4e8b8cc9bee4">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -256,16 +256,16 @@
  <forms uuid="5327ede5-2ef4-41f1-be5b-103fd137f381">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

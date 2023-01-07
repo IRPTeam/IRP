@@ -2,16 +2,16 @@
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="28eea8f0-8674-4c92-9448-d136f47b543d">
  <name>EditHiddenTables</name>
  <synonym>
-  <key>tr</key>
-  <value>Gizli tabloları düzelt</value>
+  <key>en</key>
+  <value>Edit hidden tables</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Редактирование скрытых таблиц</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Edit hidden tables</value>
+  <key>tr</key>
+  <value>Gizli tabloları düzelt</value>
  </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>

@@ -7,47 +7,47 @@
  </producedTypes>
  <name>PurchaseTransactionTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Alım işlem tipleri</value>
+  <key>en</key>
+  <value>Purchase transaction types</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Виды операций закупок</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Purchase transaction types</value>
+  <key>tr</key>
+  <value>Alım işlem tipleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="79252a78-c81a-41f3-ba14-d9dc4b8e0309">
   <name>Purchase</name>
   <synonym>
-   <key>tr</key>
-   <value>Alımlar</value>
+   <key>en</key>
+   <value>Purchase</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Закупки</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Purchase</value>
+   <key>tr</key>
+   <value>Alımlar</value>
   </synonym>
  </enumValues>
  <enumValues uuid="f75b49f9-ed39-442b-b7b8-6818820c8cbf">
   <name>ReceiptFromConsignor</name>
   <synonym>
-   <key>tr</key>
-   <value>Konsinyeye verenden gelen</value>
+   <key>en</key>
+   <value>Receipt from consignor</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Приход товара от комитента</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Receipt from consignor</value>
+   <key>tr</key>
+   <value>Konsinyeye verenden gelen</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

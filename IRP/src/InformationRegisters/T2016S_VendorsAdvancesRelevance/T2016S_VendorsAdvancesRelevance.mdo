@@ -11,45 +11,45 @@
  </producedTypes>
  <name>T2016S_VendorsAdvancesRelevance</name>
  <synonym>
-  <key>tr</key>
-  <value>T2016 Tedarikçi avanslar durumu</value>
+  <key>en</key>
+  <value>T2016 Vendors advances relevance</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>T2016 Актуальность авансов поставщиков</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>T2016 Vendors advances relevance</value>
+  <key>tr</key>
+  <value>T2016 Tedarikçi avanslar durumu</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>T2016 Tedarikçi avanslar durumu</value>
+  <key>en</key>
+  <value>T2016 Vendors advances relevance</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>T2016 Актуальность авансов поставщиков</value>
  </recordPresentation>
  <recordPresentation>
-  <key>en</key>
-  <value>T2016 Vendors advances relevance</value>
+  <key>tr</key>
+  <value>T2016 Tedarikçi avanslar durumu</value>
  </recordPresentation>
  <resources uuid="40aaee78-4c5b-455a-b89c-eef5a0aa2ed9">
   <name>Document</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
+   <key>en</key>
+   <value>Document</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Document</value>
+   <key>tr</key>
+   <value>Evrak</value>
   </synonym>
   <type>
    <types>DocumentRef.CashPayment</types>
@@ -75,16 +75,16 @@
  <resources uuid="c49d428b-25eb-4abd-986f-c29a06984cdb">
   <name>IsRelevance</name>
   <synonym>
-   <key>tr</key>
-   <value>Geçerli</value>
+   <key>en</key>
+   <value>Is relevance</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Актуальный</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Is relevance</value>
+   <key>tr</key>
+   <value>Geçerli</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -98,16 +98,16 @@
  <dimensions uuid="de70e951-d786-493a-b4cf-363b79428ad7">
   <name>Date</name>
   <synonym>
-   <key>tr</key>
-   <value>Tarih</value>
+   <key>en</key>
+   <value>Date</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дата</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Date</value>
+   <key>tr</key>
+   <value>Tarih</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -124,16 +124,16 @@
  <dimensions uuid="535dccc7-97a9-4bb2-b04b-09c771ff3755">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -149,16 +149,16 @@
  <dimensions uuid="12c1675b-95de-44c2-ba77-b2e646dd25d1">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -174,16 +174,16 @@
  <dimensions uuid="9d4fb034-838a-4ac9-b9e2-d015604f2b1b">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
+   <key>en</key>
+   <value>Currency</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюта</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Currency</value>
+   <key>tr</key>
+   <value>Döviz</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -199,16 +199,16 @@
  <dimensions uuid="a0e8aa2d-3423-4b5a-b3fa-bd0262dec380">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
+   <key>en</key>
+   <value>Partner</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Партнер</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Partner</value>
+   <key>tr</key>
+   <value>Cari hesap</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>

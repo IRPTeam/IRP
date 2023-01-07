@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c5edfca3-3b8d-40cb-965b-f57c34c9ab9c">
  <name>UserSettingsClientServer</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanıcı ayarları client server</value>
+  <key>en</key>
+  <value>User settings client server</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Пользовательские настройки клиент сервер</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>User settings client server</value>
+  <key>tr</key>
+  <value>Kullanıcı ayarları client server</value>
  </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <server>true</server>

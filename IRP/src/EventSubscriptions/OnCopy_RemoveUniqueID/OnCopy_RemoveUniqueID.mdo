@@ -2,16 +2,16 @@
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a326fe12-46b9-4ee1-91ad-d7ffbda626fa">
  <name>OnCopy_RemoveUniqueID</name>
  <synonym>
-  <key>tr</key>
-  <value>Kopyalamada benzersiz kimliği kaldır</value>
+  <key>en</key>
+  <value>On copy remove unique ID</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Очистка уникального ID при копировании</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>On copy remove unique ID</value>
+  <key>tr</key>
+  <value>Kopyalamada benzersiz kimliği kaldır</value>
  </synonym>
  <source>
   <types>DefinedType.UseUniqueID</types>

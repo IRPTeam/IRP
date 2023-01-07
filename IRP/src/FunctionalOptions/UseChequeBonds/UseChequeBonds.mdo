@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6708cd01-c936-4ddf-a33d-ce85eaf4087d">
  <name>UseChequeBonds</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Çek/senetler</value>
+  <key>en</key>
+  <value>Use cheque bonds</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать чеки/долговые обязательства</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use cheque bonds</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Çek/senetler</value>
  </synonym>
  <location>Constant.UseChequeBonds</location>
  <privilegedGetMode>true</privilegedGetMode>

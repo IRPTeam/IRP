@@ -2,16 +2,16 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4e49ca66-c920-4833-8ead-b5894fcdb135">
  <name>AddAttributesAndProperties</name>
  <synonym>
-  <key>tr</key>
-  <value>Ek alan ve özellikler</value>
+  <key>en</key>
+  <value>Additional attributes and properties</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Дополнительные реквизиты и сведения</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Additional attributes and properties</value>
+  <key>tr</key>
+  <value>Ek alan ve özellikler</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

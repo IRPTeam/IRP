@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R1011B_PurchaseOrdersReceipt</name>
  <synonym>
-  <key>tr</key>
-  <value>R1011 Satın alma sipariş tedariği</value>
+  <key>en</key>
+  <value>R1011 Receipt of purchase orders</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R1011 Прием товаров по заказам поставщикам</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>R1011 Receipt of purchase orders</value>
+  <key>tr</key>
+  <value>R1011 Satın alma sipariş tedariği</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +27,16 @@
  <resources uuid="8fba6929-cc6d-48de-98f5-8cc6a171d63c">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +48,16 @@
  <dimensions uuid="b73843d8-61b2-4fa1-b9f8-d71b9c4bd202">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -70,16 +70,16 @@
  <dimensions uuid="dbad0fd1-0915-4f12-bdcc-b1094403fc0d">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -92,16 +92,16 @@
  <dimensions uuid="86a14c63-2587-49ba-b749-3bd558be1780">
   <name>Order</name>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
+   <key>en</key>
+   <value>Order</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Заказ</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Order</value>
+   <key>tr</key>
+   <value>Sipariş</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseReturnOrder</types>
@@ -115,16 +115,16 @@
  <dimensions uuid="d9d8b2bb-1e87-4c1f-a038-4a753f1d52bd">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>

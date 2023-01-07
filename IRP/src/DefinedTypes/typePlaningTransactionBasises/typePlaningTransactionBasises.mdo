@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typePlaningTransactionBasises</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlem temeli planlama türü</value>
+  <key>en</key>
+  <value>Type planning transaction basises</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип плановый документ-основание</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Type planning transaction basises</value>
+  <key>tr</key>
+  <value>İşlem temeli planlama türü</value>
  </synonym>
  <type>
   <types>DocumentRef.CashTransferOrder</types>

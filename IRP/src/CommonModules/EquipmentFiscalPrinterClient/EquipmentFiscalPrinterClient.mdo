@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="183be138-6ec3-4e1c-98c6-296335cfb6f4">
  <name>EquipmentFiscalPrinterClient</name>
  <synonym>
-  <key>tr</key>
-  <value>Donanım yazar kasa</value>
+  <key>en</key>
+  <value>Equipment fiscal printer</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Торговое оборудование фискальный принтер</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Equipment fiscal printer</value>
+  <key>tr</key>
+  <value>Donanım yazar kasa</value>
  </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

@@ -2,16 +2,16 @@
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cde552ba-f522-4b71-a675-51cff5d8743b">
  <name>RelatedDocuments</name>
  <synonym>
-  <key>tr</key>
-  <value>Bağlı evrakları</value>
+  <key>en</key>
+  <value>Related documents</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Связанные документы</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Related documents</value>
+  <key>tr</key>
+  <value>Bağlı evrakları</value>
  </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>

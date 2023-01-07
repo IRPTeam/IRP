@@ -6,23 +6,23 @@
  </producedTypes>
  <name>CreateSerialLotNumbers</name>
  <synonym>
-  <key>tr</key>
-  <value>Seri lotları oluştur</value>
+  <key>en</key>
+  <value>Create serial lot numbers</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Создать серийные номера номенклатуры</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Create serial lot numbers</value>
+  <key>tr</key>
+  <value>Seri lotları oluştur</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.CreateSerialLotNumbers.Form.Form</defaultForm>
  <forms uuid="9b9f7bb7-9f9f-4a5a-85b4-1deff573be54">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -30,7 +30,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>

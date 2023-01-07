@@ -367,16 +367,16 @@
        <radioButtonsType>Tumbler</radioButtonsType>
        <choiceList>
         <presentation>
-         <key>tr</key>
-         <value>Kendi çekimiz</value>
+         <key>en</key>
+         <value>Own</value>
         </presentation>
         <presentation>
          <key>ru</key>
          <value>Собственные</value>
         </presentation>
         <presentation>
-         <key>en</key>
-         <value>Own</value>
+         <key>tr</key>
+         <value>Kendi çekimiz</value>
         </presentation>
         <value xsi:type="core:StringValue">
          <value>Own</value>
@@ -384,16 +384,16 @@
        </choiceList>
        <choiceList>
         <presentation>
-         <key>tr</key>
-         <value>Üst öğeden al</value>
+         <key>en</key>
+         <value>Inherit</value>
         </presentation>
         <presentation>
          <key>ru</key>
          <value>Унаследованная</value>
         </presentation>
         <presentation>
-         <key>en</key>
-         <value>Inherit</value>
+         <key>tr</key>
+         <value>Üst öğeden al</value>
         </presentation>
         <value xsi:type="core:StringValue">
          <value>Inherit</value>
@@ -865,16 +865,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Boyutlar</value>
+     <key>en</key>
+     <value>Dimensions</value>
     </title>
     <title>
      <key>ru</key>
      <value>Измерения</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Dimensions</value>
+     <key>tr</key>
+     <value>Boyutlar</value>
     </title>
     <extendedTooltip>
      <name>GroupDimensionsExtendedTooltip</name>
@@ -896,16 +896,16 @@
      <group>Vertical</group>
      <behavior>Collapsible</behavior>
      <collapsedRepresentationTitle>
-      <key>tr</key>
-      <value>Boyutlar</value>
+      <key>en</key>
+      <value>Dimensions</value>
      </collapsedRepresentationTitle>
      <collapsedRepresentationTitle>
       <key>ru</key>
       <value>Измерения</value>
      </collapsedRepresentationTitle>
      <collapsedRepresentationTitle>
-      <key>en</key>
-      <value>Dimensions</value>
+      <key>tr</key>
+      <value>Boyutlar</value>
      </collapsedRepresentationTitle>
      <collapsed>true</collapsed>
      <representation>WeakSeparation</representation>
@@ -975,16 +975,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Ağırlık bilgisi</value>
+     <key>en</key>
+     <value>Weight information</value>
     </title>
     <title>
      <key>ru</key>
      <value>Информация о весе</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Weight information</value>
+     <key>tr</key>
+     <value>Ağırlık bilgisi</value>
     </title>
     <extendedTooltip>
      <name>GroupWeightInformationExtendedTooltip</name>
@@ -1006,16 +1006,16 @@
      <group>HorizontalIfPossible</group>
      <behavior>Collapsible</behavior>
      <collapsedRepresentationTitle>
-      <key>tr</key>
-      <value>Ağırlık bilgisi</value>
+      <key>en</key>
+      <value>Weight information</value>
      </collapsedRepresentationTitle>
      <collapsedRepresentationTitle>
       <key>ru</key>
       <value>Информация о весе</value>
      </collapsedRepresentationTitle>
      <collapsedRepresentationTitle>
-      <key>en</key>
-      <value>Weight information</value>
+      <key>tr</key>
+      <value>Ağırlık bilgisi</value>
      </collapsedRepresentationTitle>
      <collapsed>true</collapsed>
      <representation>WeakSeparation</representation>
@@ -1541,16 +1541,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Fiyatları etkileyen MD5</value>
+     <key>en</key>
+     <value>Affect pricing MD5</value>
     </title>
     <title>
      <key>ru</key>
      <value>MD5 влияния на цену</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Affect pricing MD5</value>
+     <key>tr</key>
+     <value>Fiyatları etkileyen MD5</value>
     </title>
     <extendedTooltip>
      <name>GroupAffectPricingMD5ExtendedTooltip</name>
@@ -1857,16 +1857,16 @@
  <attributes>
   <name>SpecificationMode</name>
   <title>
-   <key>tr</key>
-   <value>Ürün reçetesi</value>
+   <key>en</key>
+   <value>Specification</value>
   </title>
   <title>
    <key>ru</key>
    <value>Спецификация товара</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Specification</value>
+   <key>tr</key>
+   <value>Ürün reçetesi</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1883,16 +1883,16 @@
  <attributes>
   <name>ItemType</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme tipi</value>
+   <key>en</key>
+   <value>Item type</value>
   </title>
   <title>
    <key>ru</key>
    <value>Вид номенклатуры</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item type</value>
+   <key>tr</key>
+   <value>Malzeme tipi</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1908,16 +1908,16 @@
  <attributes>
   <name>InheritUnit</name>
   <title>
-   <key>tr</key>
-   <value>Bağlı birim</value>
+   <key>en</key>
+   <value>Inherit unit</value>
   </title>
   <title>
    <key>ru</key>
    <value>Унаследованная единица измерения</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Inherit unit</value>
+   <key>tr</key>
+   <value>Bağlı birim</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1933,16 +1933,16 @@
  <attributes>
   <name>PictureViewHTML</name>
   <title>
-   <key>tr</key>
-   <value>Resim HTML önizleme</value>
+   <key>en</key>
+   <value>Picture view HTML</value>
   </title>
   <title>
    <key>ru</key>
    <value>Просмотр изображений HTML</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Picture view HTML</value>
+   <key>tr</key>
+   <value>Resim HTML önizleme</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1959,16 +1959,16 @@
  <attributes>
   <name>AddAttributeViewHTML</name>
   <title>
-   <key>tr</key>
-   <value>Ek özellik görünümü HTML</value>
+   <key>en</key>
+   <value>Additional attribute view HTML</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отображение дополнительного реквизита в HTML поле</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Additional attribute view HTML</value>
+   <key>tr</key>
+   <value>Ek özellik görünümü HTML</value>
   </title>
   <id>7</id>
   <valueType>

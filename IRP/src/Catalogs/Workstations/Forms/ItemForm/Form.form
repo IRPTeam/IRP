@@ -102,16 +102,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kod grubu</value>
+   <key>en</key>
+   <value>Group of code</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа кодов</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group of code</value>
+   <key>tr</key>
+   <value>Kod grubu</value>
   </title>
   <extendedTooltip>
    <name>GroupCodeExtendedTooltip</name>
@@ -771,16 +771,16 @@
  <formCommands>
   <name>SetCurrent</name>
   <title>
-   <key>tr</key>
-   <value>Geçerli olarak işaretle</value>
+   <key>en</key>
+   <value>Set current</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить текущее</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Set current</value>
+   <key>tr</key>
+   <value>Geçerli olarak işaretle</value>
   </title>
   <id>1</id>
   <use>

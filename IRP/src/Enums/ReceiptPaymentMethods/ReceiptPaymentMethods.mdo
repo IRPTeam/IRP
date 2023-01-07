@@ -7,122 +7,122 @@
  </producedTypes>
  <name>ReceiptPaymentMethods</name>
  <synonym>
-  <key>tr</key>
-  <value>Perakende satış fiş ödeme tipleri</value>
+  <key>en</key>
+  <value>Receipt payment methods</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Виды оплаты чека ККМ</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Receipt payment methods</value>
+  <key>tr</key>
+  <value>Perakende satış fiş ödeme tipleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="8a49f461-0a0d-43e9-a13e-82d93d6af16d">
   <name>FullPrepayment</name>
   <synonym>
-   <key>tr</key>
-   <value>Ful peşin ödeme</value>
+   <key>en</key>
+   <value>Full prepayment</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Полная предоплата</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Full prepayment</value>
+   <key>tr</key>
+   <value>Ful peşin ödeme</value>
   </synonym>
  </enumValues>
  <enumValues uuid="940ba78d-a10c-432d-9389-e6305a8731cd">
   <name>PartialPrepayment</name>
   <synonym>
-   <key>tr</key>
-   <value>Parçalı peşin ödeme</value>
+   <key>en</key>
+   <value>Partial prepayment</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Частичная предоплата</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Partial prepayment</value>
+   <key>tr</key>
+   <value>Parçalı peşin ödeme</value>
   </synonym>
  </enumValues>
  <enumValues uuid="451902da-b7a5-45b6-91a4-8cfe6ef78dc7">
   <name>AdvancePayment</name>
   <synonym>
-   <key>tr</key>
-   <value>Avans ödeme</value>
+   <key>en</key>
+   <value>Advance payment</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Предоплата</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Advance payment</value>
+   <key>tr</key>
+   <value>Avans ödeme</value>
   </synonym>
  </enumValues>
  <enumValues uuid="866fbaa5-dae2-48c3-8bc2-1222157cb25d">
   <name>FullCalculation</name>
   <synonym>
-   <key>tr</key>
-   <value>Ful hesaplama</value>
+   <key>en</key>
+   <value>Full calculation</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Полный расчет</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Full calculation</value>
+   <key>tr</key>
+   <value>Ful hesaplama</value>
   </synonym>
  </enumValues>
  <enumValues uuid="7f84fb93-ab1e-4b29-a903-f74c686505e5">
   <name>PartialSettlementAndCredit</name>
   <synonym>
-   <key>tr</key>
-   <value>Parçalı hesaplaşma ve kredi</value>
+   <key>en</key>
+   <value>Partial settlement and credit</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Частичный расчет и кредит</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Partial settlement and credit</value>
+   <key>tr</key>
+   <value>Parçalı hesaplaşma ve kredi</value>
   </synonym>
  </enumValues>
  <enumValues uuid="6b26691f-8c1f-4126-b8c0-bf9220966c29">
   <name>TransferOnCredit</name>
   <synonym>
-   <key>tr</key>
-   <value>Kredi için transfer</value>
+   <key>en</key>
+   <value>Transfer on credit</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Трансфер по кредиту</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Transfer on credit</value>
+   <key>tr</key>
+   <value>Kredi için transfer</value>
   </synonym>
  </enumValues>
  <enumValues uuid="792c6582-2ab8-43ad-bd7f-5ed947f7ed82">
   <name>LoanPayment</name>
   <synonym>
-   <key>tr</key>
-   <value>Borç ödeme</value>
+   <key>en</key>
+   <value>Loan payment</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Оплата кредитом</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Loan payment</value>
+   <key>tr</key>
+   <value>Borç ödeme</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

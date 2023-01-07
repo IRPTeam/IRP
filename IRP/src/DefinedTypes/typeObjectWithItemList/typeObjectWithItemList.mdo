@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeObjectWithItemList</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip malzemeler listesi içeren nesne</value>
+  <key>en</key>
+  <value>Type object with item list</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип объект с таблицей товаров</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Type object with item list</value>
+  <key>tr</key>
+  <value>Tip malzemeler listesi içeren nesne</value>
  </synonym>
  <type>
   <types>DocumentRef.SalesReportFromTradeAgent</types>

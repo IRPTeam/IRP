@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R6050T_SalesBatches</name>
  <synonym>
-  <key>tr</key>
-  <value>R6050 Satış partileri</value>
+  <key>en</key>
+  <value>R6050 Sales batches</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R6050 Партии реализованной продукции</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>R6050 Sales batches</value>
+  <key>tr</key>
+  <value>R6050 Satış partileri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +28,16 @@
  <resources uuid="5a8ea705-89d3-48f4-9445-9c80e6d7cd01">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -49,16 +49,16 @@
  <resources uuid="d8c2d5a9-08b4-4d3e-928f-5c70e2eab723">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -70,16 +70,16 @@
  <resources uuid="5323e40f-dd4f-4799-bafa-5aeb608cc35c">
   <name>AmountCost</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek maliyet tutarı</value>
+   <key>en</key>
+   <value>Amount cost</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма доп. расходов</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Amount cost</value>
+   <key>tr</key>
+   <value>Ek maliyet tutarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -91,16 +91,16 @@
  <resources uuid="18194789-6916-4a1f-85be-7461ab12894f">
   <name>AmountTax</name>
   <synonym>
-   <key>tr</key>
-   <value>Vergi tutarı</value>
+   <key>en</key>
+   <value>Amount tax</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма налогов</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Amount tax</value>
+   <key>tr</key>
+   <value>Vergi tutarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -112,16 +112,16 @@
  <resources uuid="04d74dfd-457a-47c1-b808-72a1e73ba8dd">
   <name>AmountCostRatio</name>
   <synonym>
-   <key>tr</key>
-   <value>Maliyet tutar katsayısı</value>
+   <key>en</key>
+   <value>Amount cost ratio</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Коеф. добавочной стоимости</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Amount cost ratio</value>
+   <key>tr</key>
+   <value>Maliyet tutar katsayısı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -133,16 +133,16 @@
  <dimensions uuid="c728c832-7cdd-417e-b575-31112913b75b">
   <name>Batch</name>
   <synonym>
-   <key>tr</key>
-   <value>Parti</value>
+   <key>en</key>
+   <value>Batch</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Партия</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Batch</value>
+   <key>tr</key>
+   <value>Parti</value>
   </synonym>
   <type>
    <types>CatalogRef.Batches</types>
@@ -155,16 +155,16 @@
  <dimensions uuid="ccccafb9-c919-4131-9812-96cf6a1e0af5">
   <name>BatchKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Parti anahtarı</value>
+   <key>en</key>
+   <value>Batch key</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ключ партии</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Batch key</value>
+   <key>tr</key>
+   <value>Parti anahtarı</value>
   </synonym>
   <type>
    <types>CatalogRef.BatchKeys</types>
@@ -177,16 +177,16 @@
  <dimensions uuid="12eb986b-0b6c-44ef-96b1-a47c4f96d93b">
   <name>SalesInvoice</name>
   <synonym>
-   <key>tr</key>
-   <value>Satış faturası</value>
+   <key>en</key>
+   <value>Sales invoice</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Реализация товаров и услуг</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Sales invoice</value>
+   <key>tr</key>
+   <value>Satış faturası</value>
   </synonym>
   <type>
    <types>DocumentRef.RetailSalesReceipt</types>

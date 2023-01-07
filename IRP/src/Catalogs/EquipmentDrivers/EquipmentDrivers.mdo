@@ -9,16 +9,16 @@
  </producedTypes>
  <name>EquipmentDrivers</name>
  <synonym>
-  <key>tr</key>
-  <value>Donanım sürücüleri</value>
+  <key>en</key>
+  <value>Equipment drivers</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Драйвера оборудования</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Equipment drivers</value>
+  <key>tr</key>
+  <value>Donanım sürücüleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.EquipmentDrivers.StandardAttribute.Description</inputByString>
@@ -59,16 +59,16 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Donanım sürücüsü</value>
+  <key>en</key>
+  <value>Equipment driver</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Драйвер оборудования</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>Equipment driver</value>
+  <key>tr</key>
+  <value>Donanım sürücüsü</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -84,16 +84,16 @@
  <attributes uuid="5e34a05c-a1fe-4b19-aaea-22dc6988991e">
   <name>Driver</name>
   <synonym>
-   <key>tr</key>
-   <value>Sürücü</value>
+   <key>en</key>
+   <value>Driver</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Драйвер</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Driver</value>
+   <key>tr</key>
+   <value>Sürücü</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -107,7 +107,7 @@
  <attributes uuid="dbff0461-21c4-4233-9940-1565ec36ea25">
   <name>AddInID</name>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>AddIn ID</value>
   </synonym>
   <synonym>
@@ -115,7 +115,7 @@
    <value>AddIn ID</value>
   </synonym>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>AddIn ID</value>
   </synonym>
   <type>
@@ -135,16 +135,16 @@
  <attributes uuid="202ee702-3571-4175-abc9-6fba1bbeee7a">
   <name>DriverLoaded</name>
   <synonym>
-   <key>tr</key>
-   <value>Sürücü yüklendi</value>
+   <key>en</key>
+   <value>Driver loaded</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Драйвер загружен</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Driver loaded</value>
+   <key>tr</key>
+   <value>Sürücü yüklendi</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -162,30 +162,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <attributes uuid="9715cfdd-e0be-4846-9fed-65215eeaa882">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Свойство</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -198,16 +198,16 @@
   <attributes uuid="b146ea43-e2c1-41ed-a01b-e9ef76f1103e">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -225,16 +225,16 @@
  <forms uuid="8c3e9760-3345-45d6-b985-d2722b97fe07">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

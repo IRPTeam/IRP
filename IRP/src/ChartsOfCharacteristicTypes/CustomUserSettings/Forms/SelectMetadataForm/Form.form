@@ -170,16 +170,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Üstveri objeler tablo grubu</value>
+    <key>en</key>
+    <value>Metadata objects table group</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа таблиц объектов метаданных</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Metadata objects table group</value>
+    <key>tr</key>
+    <value>Üstveri objeler tablo grubu</value>
    </title>
    <extendedTooltip>
     <name>MetadataObjectsTableGroupExtendedTooltip</name>
@@ -469,16 +469,16 @@
  <attributes>
   <name>MetadataObjectsTable</name>
   <title>
-   <key>tr</key>
-   <value>Üstveri obje tablosu</value>
+   <key>en</key>
+   <value>Metadata objects table</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица объектов</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Metadata objects table</value>
+   <key>tr</key>
+   <value>Üstveri obje tablosu</value>
   </title>
   <id>1</id>
   <valueType>
@@ -493,16 +493,16 @@
   <columns>
    <name>Synonym</name>
    <title>
-    <key>tr</key>
-    <value>Eşanlamlı</value>
+    <key>en</key>
+    <value>Synonym</value>
    </title>
    <title>
     <key>ru</key>
     <value>Синоним</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Synonym</value>
+    <key>tr</key>
+    <value>Eşanlamlı</value>
    </title>
    <id>2</id>
    <valueType>
@@ -519,16 +519,16 @@
   <columns>
    <name>FullName</name>
    <title>
-    <key>tr</key>
-    <value>Tam isim</value>
+    <key>en</key>
+    <value>Full name</value>
    </title>
    <title>
     <key>ru</key>
     <value>Полное наименование</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Full name</value>
+    <key>tr</key>
+    <value>Tam isim</value>
    </title>
    <id>3</id>
    <valueType>
@@ -545,16 +545,16 @@
   <columns>
    <name>PictureIndex</name>
    <title>
-    <key>tr</key>
-    <value>Resim indeksi</value>
+    <key>en</key>
+    <value>Picture index</value>
    </title>
    <title>
     <key>ru</key>
     <value>Индекс картинки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Picture index</value>
+    <key>tr</key>
+    <value>Resim indeksi</value>
    </title>
    <id>4</id>
    <valueType>
@@ -573,16 +573,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использовать</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <id>5</id>
    <valueType>
@@ -599,16 +599,16 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>Ok</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ок</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Ok</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <id>1</id>
   <use>
@@ -624,16 +624,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <id>2</id>
   <use>

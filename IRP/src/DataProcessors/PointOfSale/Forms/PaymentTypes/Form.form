@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>tr</key>
-  <value>Ödeme tipleri</value>
+  <key>en</key>
+  <value>Payment types</value>
  </title>
  <title>
   <key>ru</key>
   <value>Виды оплаты</value>
  </title>
  <title>
-  <key>en</key>
-  <value>Payment types</value>
+  <key>tr</key>
+  <value>Ödeme tipleri</value>
  </title>
  <items xsi:type="form:FormGroup">
   <name>GroupTitle</name>
@@ -130,16 +130,16 @@
    <common>true</common>
   </userVisible>
   <toolTip>
-   <key>tr</key>
-   <value>Grup tanımı</value>
+   <key>en</key>
+   <value>Group title</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Название группы</value>
   </toolTip>
   <toolTip>
-   <key>en</key>
-   <value>Group title</value>
+   <key>tr</key>
+   <value>Grup tanımı</value>
   </toolTip>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -179,16 +179,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ödemeler grubu</value>
+    <key>en</key>
+    <value>Payment group</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа вида оплат</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Payment group</value>
+    <key>tr</key>
+    <value>Ödemeler grubu</value>
    </title>
    <extendedTooltip>
     <name>PaymentGroupExtendedTooltip</name>
@@ -217,16 +217,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ödeme sayfaları</value>
+   <key>en</key>
+   <value>Payment pages</value>
   </title>
   <title>
    <key>ru</key>
    <value>Страницы оплат</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Payment pages</value>
+   <key>tr</key>
+   <value>Ödeme sayfaları</value>
   </title>
   <extendedTooltip>
    <name>PaymentPagesExtendedTooltip</name>
@@ -276,16 +276,16 @@
  <attributes>
   <name>LinkedPayButtons</name>
   <title>
-   <key>tr</key>
-   <value>Bağlı ödeme butonları</value>
+   <key>en</key>
+   <value>Linked pay buttons</value>
   </title>
   <title>
    <key>ru</key>
    <value>Кнопки связанных оплат</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Linked pay buttons</value>
+   <key>tr</key>
+   <value>Bağlı ödeme butonları</value>
   </title>
   <id>2</id>
   <valueType>
@@ -300,16 +300,16 @@
   <columns>
    <name>ButtonName</name>
    <title>
-    <key>tr</key>
-    <value>Buton tanımı</value>
+    <key>en</key>
+    <value>Button name</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование кнопки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Button name</value>
+    <key>tr</key>
+    <value>Buton tanımı</value>
    </title>
    <id>3</id>
    <valueType>
@@ -326,16 +326,16 @@
   <columns>
    <name>PaymentType</name>
    <title>
-    <key>tr</key>
-    <value>Ödeme tipi</value>
+    <key>en</key>
+    <value>Payment type</value>
    </title>
    <title>
     <key>ru</key>
     <value>Вид оплаты</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Payment type</value>
+    <key>tr</key>
+    <value>Ödeme tipi</value>
    </title>
    <id>5</id>
    <valueType>
@@ -351,16 +351,16 @@
   <columns>
    <name>BankTerm</name>
    <title>
-    <key>tr</key>
-    <value>Banka sözleşmesi</value>
+    <key>en</key>
+    <value>Bank term</value>
    </title>
    <title>
     <key>ru</key>
     <value>Соглашение с банком</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Bank term</value>
+    <key>tr</key>
+    <value>Banka sözleşmesi</value>
    </title>
    <id>6</id>
    <valueType>
@@ -376,16 +376,16 @@
   <columns>
    <name>PaymentTypeEnum</name>
    <title>
-    <key>tr</key>
-    <value>Ödeme türü sıralaması</value>
+    <key>en</key>
+    <value>Payment type enum</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип вида оплаты</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Payment type enum</value>
+    <key>tr</key>
+    <value>Ödeme türü sıralaması</value>
    </title>
    <id>7</id>
    <valueType>
@@ -402,7 +402,7 @@
  <formCommands>
   <name>CloseButton</name>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>[Esc]</value>
   </title>
   <title>
@@ -410,21 +410,21 @@
    <value>[Esc]</value>
   </title>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>[Esc]</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Kapat tuşu</value>
+   <key>en</key>
+   <value>Close button</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Закрыть</value>
   </toolTip>
   <toolTip>
-   <key>en</key>
-   <value>Close button</value>
+   <key>tr</key>
+   <value>Kapat tuşu</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -443,16 +443,16 @@
  <formCommands>
   <name>PayButtonPress</name>
   <title>
-   <key>tr</key>
-   <value>Servis komutu</value>
+   <key>en</key>
+   <value>Service command</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сервисная команда</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Service command</value>
+   <key>tr</key>
+   <value>Servis komutu</value>
   </title>
   <id>3</id>
   <use>
@@ -468,7 +468,7 @@
  <formCommands>
   <name>BackToSelectGroup</name>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>[0]</value>
   </title>
   <title>
@@ -476,7 +476,7 @@
    <value>[0]</value>
   </title>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>[0]</value>
   </title>
   <id>4</id>
@@ -497,16 +497,16 @@
  <formCommands>
   <name>PayButtonGroup</name>
   <title>
-   <key>tr</key>
-   <value>Ödeme buton grubu</value>
+   <key>en</key>
+   <value>Pay button group</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа кнопок оплаты</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Pay button group</value>
+   <key>tr</key>
+   <value>Ödeme buton grubu</value>
   </title>
   <id>5</id>
   <use>

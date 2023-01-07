@@ -12,16 +12,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Serbest ayarlar klasörü</value>
+    <key>en</key>
+    <value>Custom settings folder</value>
    </title>
    <title>
     <key>ru</key>
     <value>Папка пользовательских настроек</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Custom settings folder</value>
+    <key>tr</key>
+    <value>Serbest ayarlar klasörü</value>
    </title>
    <verticalStretch>false</verticalStretch>
    <extendedTooltip>
@@ -55,16 +55,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup parametreler</value>
+   <key>en</key>
+   <value>Group custom parameters</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа настраиваемые параметры</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group custom parameters</value>
+   <key>tr</key>
+   <value>Grup parametreler</value>
   </title>
   <extendedTooltip>
    <name>GroupCustomParametersExtendedTooltip</name>
@@ -288,16 +288,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup yazı tipi düzeltme sonucu</value>
+    <key>en</key>
+    <value>Group result font formatting</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа результат форматирования шрифта</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Group result font formatting</value>
+    <key>tr</key>
+    <value>Grup yazı tipi düzeltme sonucu</value>
    </title>
    <extendedTooltip>
     <name>GroupResultFontFormattingExtendedTooltip</name>
@@ -606,16 +606,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup kenar sonucu</value>
+    <key>en</key>
+    <value>Group result borders</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа результат границы</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Group result borders</value>
+    <key>tr</key>
+    <value>Grup kenar sonucu</value>
    </title>
    <extendedTooltip>
     <name>GroupResultBordersExtendedTooltip</name>
@@ -769,16 +769,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup hızalama sonucu</value>
+    <key>en</key>
+    <value>Group result align</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа результат выравнивания</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Group result align</value>
+    <key>tr</key>
+    <value>Grup hızalama sonucu</value>
    </title>
    <extendedTooltip>
     <name>GroupResultAlignExtendedTooltip</name>
@@ -904,28 +904,28 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Undo/Redo result</value>
+     <key>en</key>
+     <value>Result un re do</value>
     </title>
     <title>
      <key>ru</key>
      <value>Результат назад вперед</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Result un re do</value>
-    </title>
-    <toolTip>
      <key>tr</key>
      <value>Undo/Redo result</value>
+    </title>
+    <toolTip>
+     <key>en</key>
+     <value>Result un re do</value>
     </toolTip>
     <toolTip>
      <key>ru</key>
      <value>Результат назад вперед</value>
     </toolTip>
     <toolTip>
-     <key>en</key>
-     <value>Result un re do</value>
+     <key>tr</key>
+     <value>Undo/Redo result</value>
     </toolTip>
     <extendedTooltip>
      <name>ResultUnReDoExtendedTooltip</name>
@@ -952,16 +952,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup diğer sonuç</value>
+    <key>en</key>
+    <value>Group result other</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа результат другой</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Group result other</value>
+    <key>tr</key>
+    <value>Grup diğer sonuç</value>
    </title>
    <extendedTooltip>
     <name>GroupResultOtherExtendedTooltip</name>
@@ -986,16 +986,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup araç çubuk sonucu</value>
+   <key>en</key>
+   <value>Group result command bar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа результат панель свойств</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group result command bar</value>
+   <key>tr</key>
+   <value>Grup araç çubuk sonucu</value>
   </title>
   <extendedTooltip>
    <name>GroupResultCommandBarExtendedTooltip</name>
@@ -1090,16 +1090,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Form grup araç çubuğu sakla</value>
+    <key>en</key>
+    <value>Form group command bar save</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа сохранить в панели команд</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Form group command bar save</value>
+    <key>tr</key>
+    <value>Form grup araç çubuğu sakla</value>
    </title>
    <extendedTooltip>
     <name>FormGroupCommandBarSaveExtendedTooltip</name>
@@ -1256,16 +1256,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Form grup araç çubuğu daralt</value>
+    <key>en</key>
+    <value>Form group command bar collapse</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сворачиваемая группа в панели команд</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Form group command bar collapse</value>
+    <key>tr</key>
+    <value>Form grup araç çubuğu daralt</value>
    </title>
    <extendedTooltip>
     <name>FormGroupCommandBarCollapseExtendedTooltip</name>
@@ -1452,16 +1452,16 @@
  <attributes>
   <name>Result</name>
   <title>
-   <key>tr</key>
-   <value>Sonuç</value>
+   <key>en</key>
+   <value>Result</value>
   </title>
   <title>
    <key>ru</key>
    <value>Результат</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Result</value>
+   <key>tr</key>
+   <value>Sonuç</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1492,16 +1492,16 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>tr</key>
-   <value>Grup malzemeler</value>
+   <key>en</key>
+   <value>Group items</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа элементов</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group items</value>
+   <key>tr</key>
+   <value>Grup malzemeler</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1520,16 +1520,16 @@
  <formCommands>
   <name>CustomParameters</name>
   <title>
-   <key>tr</key>
-   <value>Parametreler</value>
+   <key>en</key>
+   <value>Custom parameters</value>
   </title>
   <title>
    <key>ru</key>
    <value>Настраиваемые параметры</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Custom parameters</value>
+   <key>tr</key>
+   <value>Parametreler</value>
   </title>
   <id>1</id>
   <use>
@@ -1545,16 +1545,16 @@
  <formCommands>
   <name>EditReport</name>
   <title>
-   <key>tr</key>
-   <value>Rapor düzelt</value>
+   <key>en</key>
+   <value>Edit report</value>
   </title>
   <title>
    <key>ru</key>
    <value>Изменить представление</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Edit report</value>
+   <key>tr</key>
+   <value>Rapor düzelt</value>
   </title>
   <id>2</id>
   <use>

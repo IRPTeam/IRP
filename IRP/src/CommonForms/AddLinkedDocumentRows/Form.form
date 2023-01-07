@@ -175,16 +175,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Kaynaklar agacı grup görünümü</value>
+    <key>en</key>
+    <value>Basises tree group presentation</value>
    </title>
    <title>
     <key>ru</key>
     <value>Представление дерева документов оснований</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Basises tree group presentation</value>
+    <key>tr</key>
+    <value>Kaynaklar agacı grup görünümü</value>
    </title>
    <extendedTooltip>
     <name>BasisesTreeGroupPresentationExtendedTooltip</name>
@@ -2102,16 +2102,16 @@
  <attributes>
   <name>MainFilter</name>
   <title>
-   <key>tr</key>
-   <value>Genel filtre</value>
+   <key>en</key>
+   <value>Main filter</value>
   </title>
   <title>
    <key>ru</key>
    <value>Основной фильтр</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Main filter</value>
+   <key>tr</key>
+   <value>Genel filtre</value>
   </title>
   <id>13</id>
   <valueType/>
@@ -2125,16 +2125,16 @@
  <attributes>
   <name>ResultsTable</name>
   <title>
-   <key>tr</key>
-   <value>Sonuçlar tablosu</value>
+   <key>en</key>
+   <value>Results table</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица результатов</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Results table</value>
+   <key>tr</key>
+   <value>Sonuçlar tablosu</value>
   </title>
   <id>38</id>
   <valueType>
@@ -2149,16 +2149,16 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
+    <key>en</key>
+    <value>Item</value>
    </title>
    <title>
     <key>ru</key>
     <value>Номенклатура</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item</value>
+    <key>tr</key>
+    <value>Malzeme</value>
    </title>
    <id>39</id>
    <valueType>
@@ -2174,16 +2174,16 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Характеристика</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </title>
    <id>40</id>
    <valueType>
@@ -2199,16 +2199,16 @@
   <columns>
    <name>Store</name>
    <title>
-    <key>tr</key>
-    <value>Depo</value>
+    <key>en</key>
+    <value>Store</value>
    </title>
    <title>
     <key>ru</key>
     <value>Склад</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Store</value>
+    <key>tr</key>
+    <value>Depo</value>
    </title>
    <id>41</id>
    <valueType>
@@ -2224,16 +2224,16 @@
   <columns>
    <name>BasisUnit</name>
    <title>
-    <key>tr</key>
-    <value>Ana birim</value>
+    <key>en</key>
+    <value>Basis unit</value>
    </title>
    <title>
     <key>ru</key>
     <value>Базовая единица измерения</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Basis unit</value>
+    <key>tr</key>
+    <value>Ana birim</value>
    </title>
    <id>42</id>
    <valueType>
@@ -2249,16 +2249,16 @@
   <columns>
    <name>CurrentStep</name>
    <title>
-    <key>tr</key>
-    <value>Geçerli adım</value>
+    <key>en</key>
+    <value>Current step</value>
    </title>
    <title>
     <key>ru</key>
     <value>Текущий шаг</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Current step</value>
+    <key>tr</key>
+    <value>Geçerli adım</value>
    </title>
    <id>43</id>
    <valueType>
@@ -2274,16 +2274,16 @@
   <columns>
    <name>RowRef</name>
    <title>
-    <key>tr</key>
-    <value>Satır Ref</value>
+    <key>en</key>
+    <value>Row ref</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка строки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Row ref</value>
+    <key>tr</key>
+    <value>Satır Ref</value>
    </title>
    <id>44</id>
    <valueType>
@@ -2299,16 +2299,16 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </title>
    <id>45</id>
    <valueType>
@@ -2324,16 +2324,16 @@
   <columns>
    <name>RowID</name>
    <title>
-    <key>tr</key>
-    <value>Satır ID</value>
+    <key>en</key>
+    <value>Row ID</value>
    </title>
    <title>
     <key>ru</key>
     <value>ID Строки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Row ID</value>
+    <key>tr</key>
+    <value>Satır ID</value>
    </title>
    <id>46</id>
    <valueType>
@@ -2349,16 +2349,16 @@
   <columns>
    <name>QuantityInBaseUnit</name>
    <title>
-    <key>tr</key>
-    <value>Ana birim miktarı</value>
+    <key>en</key>
+    <value>Quantity in base unit</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество в основной единице измерения</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Quantity in base unit</value>
+    <key>tr</key>
+    <value>Ana birim miktarı</value>
    </title>
    <id>47</id>
    <valueType>
@@ -2374,16 +2374,16 @@
   <columns>
    <name>Basis</name>
    <title>
-    <key>tr</key>
-    <value>Kaynak evrak</value>
+    <key>en</key>
+    <value>Basis</value>
    </title>
    <title>
     <key>ru</key>
     <value>Документ основание</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Basis</value>
+    <key>tr</key>
+    <value>Kaynak evrak</value>
    </title>
    <id>48</id>
    <valueType>
@@ -2399,16 +2399,16 @@
   <columns>
    <name>BasisKey</name>
    <title>
-    <key>tr</key>
-    <value>Kaynak anahtar</value>
+    <key>en</key>
+    <value>Basis key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ документа основания</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Basis key</value>
+    <key>tr</key>
+    <value>Kaynak anahtar</value>
    </title>
    <id>49</id>
    <valueType>
@@ -2424,16 +2424,16 @@
   <columns>
    <name>Unit</name>
    <title>
-    <key>tr</key>
-    <value>Birim</value>
+    <key>en</key>
+    <value>Unit</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ед. изм.</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Unit</value>
+    <key>tr</key>
+    <value>Birim</value>
    </title>
    <id>65</id>
    <valueType>
@@ -2449,16 +2449,16 @@
   <columns>
    <name>ParentBasis</name>
    <title>
-    <key>tr</key>
-    <value>Üst öğe kaynağı</value>
+    <key>en</key>
+    <value>Parent basis</value>
    </title>
    <title>
     <key>ru</key>
     <value>Родительский документ основания</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Parent basis</value>
+    <key>tr</key>
+    <value>Üst öğe kaynağı</value>
    </title>
    <id>66</id>
    <valueType>
@@ -2474,16 +2474,16 @@
   <columns>
    <name>IsMainDocument</name>
    <title>
-    <key>tr</key>
-    <value>Bu ana evrak</value>
+    <key>en</key>
+    <value>Is main document</value>
    </title>
    <title>
     <key>ru</key>
     <value>Это основной документ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Is main document</value>
+    <key>tr</key>
+    <value>Bu ana evrak</value>
    </title>
    <id>68</id>
    <valueType>
@@ -2500,16 +2500,16 @@
  <attributes>
   <name>SetAllCheckedOnOpen</name>
   <title>
-   <key>tr</key>
-   <value>Açıldığında hepsini işaretli yap</value>
+   <key>en</key>
+   <value>Set all checked on open</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить все галочки при открытии</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Set all checked on open</value>
+   <key>tr</key>
+   <value>Açıldığında hepsini işaretli yap</value>
   </title>
   <id>54</id>
   <valueType>
@@ -2525,16 +2525,16 @@
  <attributes>
   <name>BasisesTree</name>
   <title>
-   <key>tr</key>
-   <value>Kaynaklar agacı</value>
+   <key>en</key>
+   <value>BasisesTree</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дерево документов оснований</value>
   </title>
   <title>
-   <key>en</key>
-   <value>BasisesTree</value>
+   <key>tr</key>
+   <value>Kaynaklar agacı</value>
   </title>
   <id>58</id>
   <valueType>
@@ -2549,16 +2549,16 @@
   <columns>
    <name>Basis</name>
    <title>
-    <key>tr</key>
-    <value>Kaynak evrak</value>
+    <key>en</key>
+    <value>Basis</value>
    </title>
    <title>
     <key>ru</key>
     <value>Документ основание</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Basis</value>
+    <key>tr</key>
+    <value>Kaynak evrak</value>
    </title>
    <id>8</id>
    <valueType>
@@ -2574,16 +2574,16 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
+    <key>en</key>
+    <value>Item</value>
    </title>
    <title>
     <key>ru</key>
     <value>Номенклатура</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item</value>
+    <key>tr</key>
+    <value>Malzeme</value>
    </title>
    <id>9</id>
    <valueType>
@@ -2599,16 +2599,16 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Характеристика</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </title>
    <id>10</id>
    <valueType>
@@ -2624,16 +2624,16 @@
   <columns>
    <name>BasisUnit</name>
    <title>
-    <key>tr</key>
-    <value>Ana birim</value>
+    <key>en</key>
+    <value>Basis unit</value>
    </title>
    <title>
     <key>ru</key>
     <value>Базовая единица измерения</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Basis unit</value>
+    <key>tr</key>
+    <value>Ana birim</value>
    </title>
    <id>11</id>
    <valueType>
@@ -2649,16 +2649,16 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </title>
    <id>12</id>
    <valueType>
@@ -2674,16 +2674,16 @@
   <columns>
    <name>Level</name>
    <title>
-    <key>tr</key>
-    <value>Seviye</value>
+    <key>en</key>
+    <value>Level</value>
    </title>
    <title>
     <key>ru</key>
     <value>Уровень</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Level</value>
+    <key>tr</key>
+    <value>Seviye</value>
    </title>
    <id>15</id>
    <valueType>
@@ -2702,16 +2702,16 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </title>
    <id>16</id>
    <valueType>
@@ -2727,16 +2727,16 @@
   <columns>
    <name>Store</name>
    <title>
-    <key>tr</key>
-    <value>Depo</value>
+    <key>en</key>
+    <value>Store</value>
    </title>
    <title>
     <key>ru</key>
     <value>Склад</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Store</value>
+    <key>tr</key>
+    <value>Depo</value>
    </title>
    <id>21</id>
    <valueType>
@@ -2752,16 +2752,16 @@
   <columns>
    <name>RowID</name>
    <title>
-    <key>tr</key>
-    <value>Satır ID</value>
+    <key>en</key>
+    <value>Row ID</value>
    </title>
    <title>
     <key>ru</key>
     <value>ID Строки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Row ID</value>
+    <key>tr</key>
+    <value>Satır ID</value>
    </title>
    <id>27</id>
    <valueType>
@@ -2777,16 +2777,16 @@
   <columns>
    <name>RowRef</name>
    <title>
-    <key>tr</key>
-    <value>Satır Ref</value>
+    <key>en</key>
+    <value>Row ref</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка строки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Row ref</value>
+    <key>tr</key>
+    <value>Satır Ref</value>
    </title>
    <id>28</id>
    <valueType>
@@ -2802,16 +2802,16 @@
   <columns>
    <name>CurrentStep</name>
    <title>
-    <key>tr</key>
-    <value>Geçerli adım</value>
+    <key>en</key>
+    <value>Current step</value>
    </title>
    <title>
     <key>ru</key>
     <value>Текущий шаг</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Current step</value>
+    <key>tr</key>
+    <value>Geçerli adım</value>
    </title>
    <id>31</id>
    <valueType>
@@ -2827,16 +2827,16 @@
   <columns>
    <name>RowPresentation</name>
    <title>
-    <key>tr</key>
-    <value>Satır görüntüleme</value>
+    <key>en</key>
+    <value>Row presentation</value>
    </title>
    <title>
     <key>ru</key>
     <value>Представление строки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Row presentation</value>
+    <key>tr</key>
+    <value>Satır görüntüleme</value>
    </title>
    <id>33</id>
    <valueType>
@@ -2855,16 +2855,16 @@
   <columns>
    <name>Picture</name>
    <title>
-    <key>tr</key>
-    <value>Resim</value>
+    <key>en</key>
+    <value>Picture</value>
    </title>
    <title>
     <key>ru</key>
     <value>Картинка</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Picture</value>
+    <key>tr</key>
+    <value>Resim</value>
    </title>
    <id>34</id>
    <valueType>
@@ -2883,16 +2883,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <title>
     <key>ru</key>
     <value>Применить</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <id>52</id>
    <valueType>
@@ -2908,16 +2908,16 @@
   <columns>
    <name>Linked</name>
    <title>
-    <key>tr</key>
-    <value>Bağlı</value>
+    <key>en</key>
+    <value>Linked</value>
    </title>
    <title>
     <key>ru</key>
     <value>Линковать</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Linked</value>
+    <key>tr</key>
+    <value>Bağlı</value>
    </title>
    <id>53</id>
    <valueType>
@@ -2933,16 +2933,16 @@
   <columns>
    <name>BasisKey</name>
    <title>
-    <key>tr</key>
-    <value>Kaynak anahtar</value>
+    <key>en</key>
+    <value>Basis key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ документа основания</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Basis key</value>
+    <key>tr</key>
+    <value>Kaynak anahtar</value>
    </title>
    <id>56</id>
    <valueType>
@@ -2958,16 +2958,16 @@
   <columns>
    <name>Price</name>
    <title>
-    <key>tr</key>
-    <value>Fiyat</value>
+    <key>en</key>
+    <value>Price</value>
    </title>
    <title>
     <key>ru</key>
     <value>Цена</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Price</value>
+    <key>tr</key>
+    <value>Fiyat</value>
    </title>
    <id>59</id>
    <valueType>
@@ -2983,16 +2983,16 @@
   <columns>
    <name>Currency</name>
    <title>
-    <key>tr</key>
-    <value>Döviz</value>
+    <key>en</key>
+    <value>Currency</value>
    </title>
    <title>
     <key>ru</key>
     <value>Валюта</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Currency</value>
+    <key>tr</key>
+    <value>Döviz</value>
    </title>
    <id>60</id>
    <valueType>
@@ -3008,16 +3008,16 @@
   <columns>
    <name>Unit</name>
    <title>
-    <key>tr</key>
-    <value>Birim</value>
+    <key>en</key>
+    <value>Unit</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ед. изм.</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Unit</value>
+    <key>tr</key>
+    <value>Birim</value>
    </title>
    <id>62</id>
    <valueType>
@@ -3034,16 +3034,16 @@
   <columns>
    <name>QuantityInBaseUnit</name>
    <title>
-    <key>tr</key>
-    <value>Ana birim miktarı</value>
+    <key>en</key>
+    <value>Quantity in base unit</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество в основной единице измерения</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Quantity in base unit</value>
+    <key>tr</key>
+    <value>Ana birim miktarı</value>
    </title>
    <id>63</id>
    <valueType>
@@ -3059,16 +3059,16 @@
   <columns>
    <name>DeepLevel</name>
    <title>
-    <key>tr</key>
-    <value>Derinlik seviyesi</value>
+    <key>en</key>
+    <value>Deep level</value>
    </title>
    <title>
     <key>ru</key>
     <value>Нижний уровень</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Deep level</value>
+    <key>tr</key>
+    <value>Derinlik seviyesi</value>
    </title>
    <id>64</id>
    <valueType>
@@ -3084,16 +3084,16 @@
   <columns>
    <name>IsMainDocument</name>
    <title>
-    <key>tr</key>
-    <value>Bu ana evrak</value>
+    <key>en</key>
+    <value>Is main document</value>
    </title>
    <title>
     <key>ru</key>
     <value>Это основной документ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Is main document</value>
+    <key>tr</key>
+    <value>Bu ana evrak</value>
    </title>
    <id>67</id>
    <valueType>
@@ -3109,16 +3109,16 @@
   <columns>
    <name>CompanyPresentation</name>
    <title>
-    <key>tr</key>
-    <value>Şirket</value>
+    <key>en</key>
+    <value>Company</value>
    </title>
    <title>
     <key>ru</key>
     <value>Организация</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Company</value>
+    <key>tr</key>
+    <value>Şirket</value>
    </title>
    <id>70</id>
    <valueType>
@@ -3135,16 +3135,16 @@
   <columns>
    <name>BranchPresentation</name>
    <title>
-    <key>tr</key>
-    <value>Şube</value>
+    <key>en</key>
+    <value>Branch</value>
    </title>
    <title>
     <key>ru</key>
     <value>Структурное подразделение</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Branch</value>
+    <key>tr</key>
+    <value>Şube</value>
    </title>
    <id>71</id>
    <valueType>
@@ -3162,16 +3162,16 @@
  <attributes>
   <name>VisibleFields</name>
   <title>
-   <key>tr</key>
-   <value>Görünür alanlar</value>
+   <key>en</key>
+   <value>Visible fields</value>
   </title>
   <title>
    <key>ru</key>
    <value>Видимые поля</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Visible fields</value>
+   <key>tr</key>
+   <value>Görünür alanlar</value>
   </title>
   <id>69</id>
   <valueType/>
@@ -3185,16 +3185,16 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>Ok</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ок</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Ok</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <id>3</id>
   <use>
@@ -3210,16 +3210,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <id>4</id>
   <use>
@@ -3235,16 +3235,16 @@
  <formCommands>
   <name>CheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü işaretle</value>
+   <key>en</key>
+   <value>Check all</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать все</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Check all</value>
+   <key>tr</key>
+   <value>Tümü işaretle</value>
   </title>
   <id>5</id>
   <use>
@@ -3263,16 +3263,16 @@
  <formCommands>
   <name>UncheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü kaldır</value>
+   <key>en</key>
+   <value>Uncheck all</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отменить все</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Uncheck all</value>
+   <key>tr</key>
+   <value>Tümü kaldır</value>
   </title>
   <id>6</id>
   <use>
@@ -3291,16 +3291,16 @@
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır anahtar göster</value>
+   <key>en</key>
+   <value>Show row key</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать ключ строки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Show row key</value>
+   <key>tr</key>
+   <value>Satır anahtar göster</value>
   </title>
   <id>7</id>
   <use>

@@ -7,16 +7,16 @@
    <name>DecorationClosingOrder</name>
    <id>280</id>
    <title>
-    <key>tr</key>
-    <value>Planlama dönemi kapanmıştı:</value>
+    <key>en</key>
+    <value>This planning period is closed by:</value>
    </title>
    <title>
     <key>ru</key>
     <value>Данные период планирования закрыт:</value>
    </title>
    <title>
-    <key>en</key>
-    <value>This planning period is closed by:</value>
+    <key>tr</key>
+    <value>Planlama dönemi kapanmıştı:</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -116,16 +116,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup başlık</value>
+   <key>en</key>
+   <value>Group head</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа заголовок</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group head</value>
+   <key>tr</key>
+   <value>Grup başlık</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -168,16 +168,16 @@
      <name>DecorationGroupTitleCollapsedPicture</name>
      <id>53</id>
      <title>
-      <key>tr</key>
-      <value>Dekorasyon grubu başlık daraltılmış resmi</value>
+      <key>en</key>
+      <value>Decoration group title collapsed picture</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа декораций рисунок свернутой шапки</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Decoration group title collapsed picture</value>
+      <key>tr</key>
+      <value>Dekorasyon grubu başlık daraltılmış resmi</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -227,16 +227,16 @@
      <name>DecorationGroupTitleCollapsedLabel</name>
      <id>56</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
+      <key>en</key>
+      <value>Please, fill the document</value>
      </title>
      <title>
       <key>ru</key>
       <value>Пожалуйста, заполните документ</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Please, fill the document</value>
+      <key>tr</key>
+      <value>Lütfen, evrakı doldurunuz</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -363,16 +363,16 @@
      <name>DecorationGroupTitleUncollapsedLabel</name>
      <id>64</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
+      <key>en</key>
+      <value>Please, fill the document</value>
      </title>
      <title>
       <key>ru</key>
       <value>Пожалуйста, заполните документ</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Please, fill the document</value>
+      <key>tr</key>
+      <value>Lütfen, evrakı doldurunuz</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -851,16 +851,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup planlama dönemleri</value>
+      <key>en</key>
+      <value>Group planning periods</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа планирования периода</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Group planning periods</value>
+      <key>tr</key>
+      <value>Grup planlama dönemleri</value>
      </title>
      <extendedTooltip>
       <name>GroupPlanningPeriodsExtendedTooltip</name>
@@ -1479,16 +1479,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Üretim</value>
+    <key>en</key>
+    <value>Production</value>
    </title>
    <title>
     <key>ru</key>
     <value>Производство</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Production</value>
+    <key>tr</key>
+    <value>Üretim</value>
    </title>
    <extendedTooltip>
     <name>GrouProductionExtendedTooltip</name>
@@ -2591,16 +2591,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Malzemeler</value>
+    <key>en</key>
+    <value>Materials</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сырье</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Materials</value>
+    <key>tr</key>
+    <value>Malzemeler</value>
    </title>
    <extendedTooltip>
     <name>GroupMaterialsExtendedTooltip</name>
@@ -2938,16 +2938,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
+    <key>en</key>
+    <value>Other</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дополнительно</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Other</value>
+    <key>tr</key>
+    <value>Diğer</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -2976,16 +2976,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
+   <key>en</key>
+   <value>Group main pages</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа главных страниц</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group main pages</value>
+   <key>tr</key>
+   <value>Grup ana sayfalar</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -3094,16 +3094,16 @@
    <columns>
     <name>Picture</name>
     <title>
-     <key>tr</key>
-     <value>Resim</value>
+     <key>en</key>
+     <value>Picture</value>
     </title>
     <title>
      <key>ru</key>
      <value>Картинка</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Picture</value>
+     <key>tr</key>
+     <value>Resim</value>
     </title>
     <id>5</id>
     <valueType>
@@ -3124,16 +3124,16 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>tr</key>
-   <value>Grup nesneler</value>
+   <key>en</key>
+   <value>Group items</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа элементов</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group items</value>
+   <key>tr</key>
+   <value>Grup nesneler</value>
   </title>
   <id>2</id>
   <valueType>
@@ -3152,16 +3152,16 @@
  <attributes>
   <name>Description</name>
   <title>
-   <key>tr</key>
-   <value>Tanım</value>
+   <key>en</key>
+   <value>Description</value>
   </title>
   <title>
    <key>ru</key>
    <value>Наименование</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Description</value>
+   <key>tr</key>
+   <value>Tanım</value>
   </title>
   <id>3</id>
   <valueType>
@@ -3178,16 +3178,16 @@
  <attributes>
   <name>ProductionPlanningClosing</name>
   <title>
-   <key>tr</key>
-   <value>Üretim planlama kapanışı</value>
+   <key>en</key>
+   <value>Production planning closing</value>
   </title>
   <title>
    <key>ru</key>
    <value>Закрытие планирования производства</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Production planning closing</value>
+   <key>tr</key>
+   <value>Üretim planlama kapanışı</value>
   </title>
   <id>4</id>
   <valueType>
@@ -3203,16 +3203,16 @@
  <formCommands>
   <name>UpdateByBillOfMaterials</name>
   <title>
-   <key>tr</key>
-   <value>Reçeteye göre güncelle</value>
+   <key>en</key>
+   <value>Update by bill of materials</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить по спецификации</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Update by bill of materials</value>
+   <key>tr</key>
+   <value>Reçeteye göre güncelle</value>
   </title>
   <id>1</id>
   <use>
@@ -3233,16 +3233,16 @@
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır antahtarı göster</value>
+   <key>en</key>
+   <value>Show row key</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать row key</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Show row key</value>
+   <key>tr</key>
+   <value>Satır antahtarı göster</value>
   </title>
   <id>2</id>
   <use>

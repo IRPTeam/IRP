@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T6070S_BatchRevenueAllocationInfo</name>
  <synonym>
-  <key>tr</key>
-  <value>T6060 Parti ek gelir dağıtım bilgisi</value>
+  <key>en</key>
+  <value>T6070 Batch revenue allocation info</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>T6070 ​Информация по распределению доп. доходов на партию</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>T6070 Batch revenue allocation info</value>
+  <key>tr</key>
+  <value>T6060 Parti ek gelir dağıtım bilgisi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +30,16 @@
  <resources uuid="f80c9253-6769-45c5-b823-a19d1f5a74fd">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -53,16 +53,16 @@
  <dimensions uuid="1e4cbf17-fd6a-4ee9-a687-140d0447faa9">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -77,16 +77,16 @@
  <dimensions uuid="a952c1bc-af3e-4127-8f9c-2d61b5aea4a1">
   <name>Document</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
+   <key>en</key>
+   <value>Document</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Document</value>
+   <key>tr</key>
+   <value>Evrak</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>
@@ -101,16 +101,16 @@
  <dimensions uuid="c141358f-b29d-467c-b3b6-f6f66e56729a">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
+   <key>en</key>
+   <value>Store</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Store</value>
+   <key>tr</key>
+   <value>Depo</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -125,16 +125,16 @@
  <dimensions uuid="662dd5d0-1219-49a6-92e1-20adef637ece">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -149,16 +149,16 @@
  <dimensions uuid="91556fce-969a-4d14-8ea9-3ebb6a6ccd29">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz hareket tipi</value>
+   <key>en</key>
+   <value>Currency movement type</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид мультивалютной аналитики</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Currency movement type</value>
+   <key>tr</key>
+   <value>Çoklu döviz hareket tipi</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -173,16 +173,16 @@
  <dimensions uuid="bb867bc6-6456-49c4-bc9f-4e685276308f">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
+   <key>en</key>
+   <value>Currency</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюта</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Currency</value>
+   <key>tr</key>
+   <value>Döviz</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>

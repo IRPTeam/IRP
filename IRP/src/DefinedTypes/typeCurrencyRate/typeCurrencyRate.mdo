@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeCurrencyRate</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip döviz kuru</value>
+  <key>en</key>
+  <value>Type currency rate</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип курс валют</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Type currency rate</value>
+  <key>tr</key>
+  <value>Tip döviz kuru</value>
  </synonym>
  <type>
   <types>Number</types>

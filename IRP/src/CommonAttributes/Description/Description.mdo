@@ -2,16 +2,16 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="1148941f-4dbe-4ef0-a934-561dd175bf90">
  <name>Description</name>
  <synonym>
-  <key>tr</key>
-  <value>Tanım</value>
+  <key>en</key>
+  <value>Description</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Комментарий</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Description</value>
+  <key>tr</key>
+  <value>Tanım</value>
  </synonym>
  <type>
   <types>String</types>

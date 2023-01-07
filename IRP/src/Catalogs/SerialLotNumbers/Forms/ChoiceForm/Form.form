@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -113,16 +113,16 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Seri numarası</value>
+    <key>en</key>
+    <value>Serial number</value>
    </title>
    <title>
     <key>ru</key>
     <value>Серийный номер</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Serial number</value>
+    <key>tr</key>
+    <value>Seri numarası</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -532,16 +532,16 @@ WHERE
  <attributes>
   <name>FillingData</name>
   <title>
-   <key>tr</key>
-   <value>Veri doldurma</value>
+   <key>en</key>
+   <value>Filling data</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполненные данные</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Filling data</value>
+   <key>tr</key>
+   <value>Veri doldurma</value>
   </title>
   <id>2</id>
   <valueType>

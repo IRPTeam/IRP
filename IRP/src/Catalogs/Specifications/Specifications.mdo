@@ -9,16 +9,16 @@
  </producedTypes>
  <name>Specifications</name>
  <synonym>
-  <key>tr</key>
-  <value>Malzeme reçeteleri</value>
+  <key>en</key>
+  <value>Specifications</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Спецификации товаров</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Specifications</value>
+  <key>tr</key>
+  <value>Malzeme reçeteleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -57,16 +57,16 @@
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectPresentation>
-  <key>tr</key>
-  <value>Ürün reçetesi</value>
+  <key>en</key>
+  <value>Specification</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Спецификация товара</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>Specification</value>
+  <key>tr</key>
+  <value>Ürün reçetesi</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -84,16 +84,16 @@
  <attributes uuid="3ab2e28d-23cc-4663-9278-95a988030745">
   <name>Type</name>
   <synonym>
-   <key>tr</key>
-   <value>Tip</value>
+   <key>en</key>
+   <value>Type</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Type</value>
+   <key>tr</key>
+   <value>Tip</value>
   </synonym>
   <type>
    <types>EnumRef.SpecificationType</types>
@@ -107,16 +107,16 @@
  <attributes uuid="758c3868-18e1-4102-b684-62676c7d7c57">
   <name>ItemBundle</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme takımı</value>
+   <key>en</key>
+   <value>Item bundle</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Номенклатура набора</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item bundle</value>
+   <key>tr</key>
+   <value>Malzeme takımı</value>
   </synonym>
   <type>
    <types>CatalogRef.Items</types>
@@ -130,16 +130,16 @@
  <attributes uuid="f206459e-07da-4bbf-8def-0b1e6dca4c79">
   <name>UniqueMD5</name>
   <synonym>
-   <key>tr</key>
-   <value>Eşsiz MD5</value>
+   <key>en</key>
+   <value>Unique MD5</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Уникальный MD5</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Unique MD5</value>
+   <key>tr</key>
+   <value>Eşsiz MD5</value>
   </synonym>
   <type>
    <types>String</types>
@@ -162,30 +162,30 @@
   </producedTypes>
   <name>DataSet</name>
   <synonym>
-   <key>tr</key>
-   <value>İçerik</value>
+   <key>en</key>
+   <value>Data set</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Набор данных</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Data set</value>
+   <key>tr</key>
+   <value>İçerik</value>
   </synonym>
   <attributes uuid="225c783b-ef06-4624-90db-f33aad0e7a36">
    <name>Key</name>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ключ</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -199,16 +199,16 @@
   <attributes uuid="6161d092-06e2-4f8f-9937-12e385b3ff93">
    <name>Item</name>
    <synonym>
-    <key>tr</key>
-    <value>Malzeme</value>
+    <key>en</key>
+    <value>Item</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Номенклатура</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Item</value>
+    <key>tr</key>
+    <value>Malzeme</value>
    </synonym>
    <type>
     <types>CatalogRef.Items</types>
@@ -222,16 +222,16 @@
   <attributes uuid="87fd3728-7fca-4c94-a01e-c57381784548">
    <name>Attribute</name>
    <synonym>
-    <key>tr</key>
-    <value>Alan</value>
+    <key>en</key>
+    <value>Attribute</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Реквизит</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Attribute</value>
+    <key>tr</key>
+    <value>Alan</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -244,16 +244,16 @@
   <attributes uuid="df014a9f-205a-4934-8a6f-781297c12559">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -271,30 +271,30 @@
   </producedTypes>
   <name>DataQuantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Veri miktarı</value>
+   <key>en</key>
+   <value>Data quantity</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Данные по количеству</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Data quantity</value>
+   <key>tr</key>
+   <value>Veri miktarı</value>
   </synonym>
   <attributes uuid="693f22f2-b706-4976-82f5-931e8be96e07">
    <name>Key</name>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ключ</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -308,16 +308,16 @@
   <attributes uuid="4fd4218b-614f-4c70-94e0-590d4bd8a855">
    <name>Quantity</name>
    <synonym>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Количество</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantityInSpecifications</types>
@@ -335,30 +335,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <attributes uuid="efb3de71-7745-4c2f-83f1-805bb336a9a6">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -375,16 +375,16 @@
   <attributes uuid="d85592ed-2834-4413-8c5f-e35b30948cc0">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -397,16 +397,16 @@
   <attributes uuid="a6e7b415-471b-483f-b4fc-03c765346851">
    <name>SearchLiteral</name>
    <synonym>
-    <key>tr</key>
-    <value>Arama metni</value>
+    <key>en</key>
+    <value>Search literal</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Буквальный поиск</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Search literal</value>
+    <key>tr</key>
+    <value>Arama metni</value>
    </synonym>
    <type>
     <types>String</types>
@@ -423,16 +423,16 @@
  <forms uuid="d2bf8307-d4f9-4ae0-869c-24a56ff68c4a">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -440,16 +440,16 @@
  <forms uuid="b558f2fc-e742-4c45-a34a-1bb4d50b665f">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -457,16 +457,16 @@
  <forms uuid="30dfd148-e5bf-4808-a453-e1e922d08cc4">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

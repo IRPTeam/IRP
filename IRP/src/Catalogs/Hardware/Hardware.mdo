@@ -9,16 +9,16 @@
  </producedTypes>
  <name>Hardware</name>
  <synonym>
-  <key>tr</key>
-  <value>Donanım</value>
+  <key>en</key>
+  <value>Hardware</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Оборудование</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Hardware</value>
+  <key>tr</key>
+  <value>Donanım</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.Hardware.StandardAttribute.Code</inputByString>
@@ -60,16 +60,16 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Donanım</value>
+  <key>en</key>
+  <value>Hardware</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Оборудование</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>Hardware</value>
+  <key>tr</key>
+  <value>Donanım</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -85,16 +85,16 @@
  <attributes uuid="9753667e-e27e-4c25-afad-8cd1ef0e0961">
   <name>EquipmentType</name>
   <synonym>
-   <key>tr</key>
-   <value>Donanım tipi</value>
+   <key>en</key>
+   <value>Types of Equipment</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Виды оборудования</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Types of Equipment</value>
+   <key>tr</key>
+   <value>Donanım tipi</value>
   </synonym>
   <type>
    <types>EnumRef.EquipmentTypes</types>
@@ -107,16 +107,16 @@
  <attributes uuid="a325d8a3-741f-44c5-b7a0-bd9bdd6f3b40">
   <name>Driver</name>
   <synonym>
-   <key>tr</key>
-   <value>Sürücü</value>
+   <key>en</key>
+   <value>Driver</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Драйвер</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Driver</value>
+   <key>tr</key>
+   <value>Sürücü</value>
   </synonym>
   <type>
    <types>CatalogRef.EquipmentDrivers</types>
@@ -135,30 +135,30 @@
   </producedTypes>
   <name>ConnectParameters</name>
   <synonym>
-   <key>tr</key>
-   <value>Parametreleri bağlayın</value>
+   <key>en</key>
+   <value>Connect parameters</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Параметры подключения</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Connect parameters</value>
+   <key>tr</key>
+   <value>Parametreleri bağlayın</value>
   </synonym>
   <attributes uuid="805ffe86-574a-4a56-a17d-3fb9178e03c2">
    <name>Name</name>
    <synonym>
-    <key>tr</key>
-    <value>Ad</value>
+    <key>en</key>
+    <value>Name</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Наименование</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Name</value>
+    <key>tr</key>
+    <value>Ad</value>
    </synonym>
    <type>
     <types>String</types>
@@ -174,16 +174,16 @@
   <attributes uuid="f966ae63-5e31-4a00-b122-94ec7d3b5b3d">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -214,30 +214,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <attributes uuid="bc79049a-6f81-46c9-8bc3-3967405a3b8d">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -250,16 +250,16 @@
   <attributes uuid="337ae5b1-dbff-4efb-8448-d935c31527f2">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -277,16 +277,16 @@
  <forms uuid="161f3551-9be0-4efa-bc08-af1e45560d8a">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

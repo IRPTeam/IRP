@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -727,16 +727,16 @@
     <name>JobAddTimeBottom</name>
     <id>57</id>
     <title>
-     <key>tr</key>
-     <value>Ekle</value>
+     <key>en</key>
+     <value>Add</value>
     </title>
     <title>
      <key>ru</key>
      <value>Добавить</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Add</value>
+     <key>tr</key>
+     <value>Ekle</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -789,7 +789,7 @@
     <name>JobStartTimeBottom</name>
     <id>72</id>
     <title>
-     <key>tr</key>
+     <key>en</key>
      <value>Start</value>
     </title>
     <title>
@@ -797,7 +797,7 @@
      <value>Старт</value>
     </title>
     <title>
-     <key>en</key>
+     <key>tr</key>
      <value>Start</value>
     </title>
     <visible>true</visible>
@@ -851,16 +851,16 @@
     <name>JobFinishTimeBottom</name>
     <id>63</id>
     <title>
-     <key>tr</key>
-     <value>Bitiş</value>
+     <key>en</key>
+     <value>Finish</value>
     </title>
     <title>
      <key>ru</key>
      <value>Закончить</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Finish</value>
+     <key>tr</key>
+     <value>Bitiş</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -915,16 +915,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Zaman</value>
+    <key>en</key>
+    <value>Time</value>
    </title>
    <title>
     <key>ru</key>
     <value>Время</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Time</value>
+    <key>tr</key>
+    <value>Zaman</value>
    </title>
    <extendedTooltip>
     <name>GroupJobTimeExtendedTooltip</name>
@@ -957,16 +957,16 @@
     <name>JobInfo</name>
     <id>69</id>
     <title>
-     <key>tr</key>
-     <value>Bilgi</value>
+     <key>en</key>
+     <value>Info</value>
     </title>
     <title>
      <key>ru</key>
      <value>Контактная информация</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Info</value>
+     <key>tr</key>
+     <value>Bilgi</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -1020,16 +1020,16 @@
     <name>MessageFromJob</name>
     <id>78</id>
     <title>
-     <key>tr</key>
-     <value>Kullanıcı mesajı</value>
+     <key>en</key>
+     <value>User message</value>
     </title>
     <title>
      <key>ru</key>
      <value>Пользовательское сообщение</value>
     </title>
     <title>
-     <key>en</key>
-     <value>User message</value>
+     <key>tr</key>
+     <value>Kullanıcı mesajı</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -1085,16 +1085,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup metin</value>
+    <key>en</key>
+    <value>Group text</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа следующий</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Group text</value>
+    <key>tr</key>
+    <value>Grup metin</value>
    </title>
    <extendedTooltip>
     <name>GroupJobTextExtendedTooltip</name>
@@ -1126,16 +1126,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Görev detayı</value>
+   <key>en</key>
+   <value>Job detail</value>
   </title>
   <title>
    <key>ru</key>
    <value>Детали задания</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Job detail</value>
+   <key>tr</key>
+   <value>Görev detayı</value>
   </title>
   <extendedTooltip>
    <name>GroupJobDetailExtendedTooltip</name>
@@ -1237,16 +1237,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Görev ekleme saati</value>
+       <key>en</key>
+       <value>Job add time</value>
       </content>
       <content>
        <key>ru</key>
        <value>Время добавления регл. задания</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Job add time</value>
+       <key>tr</key>
+       <value>Görev ekleme saati</value>
       </content>
      </localValue>
     </title>
@@ -1257,16 +1257,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Görev tamamlama saati</value>
+       <key>en</key>
+       <value>Job finish time</value>
       </content>
       <content>
        <key>ru</key>
        <value>Время окончания регл. задания</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Job finish time</value>
+       <key>tr</key>
+       <value>Görev tamamlama saati</value>
       </content>
      </localValue>
     </title>
@@ -1277,16 +1277,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Görev statüsü</value>
+       <key>en</key>
+       <value>Job status</value>
       </content>
       <content>
        <key>ru</key>
        <value>Статус задания</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Job status</value>
+       <key>tr</key>
+       <value>Görev statüsü</value>
       </content>
      </localValue>
     </title>
@@ -1297,16 +1297,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Görev başlatma saati</value>
+       <key>en</key>
+       <value>Job start time</value>
       </content>
       <content>
        <key>ru</key>
        <value>Дата начала задания</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Job start time</value>
+       <key>tr</key>
+       <value>Görev başlatma saati</value>
       </content>
      </localValue>
     </title>

@@ -11,56 +11,56 @@
  </producedTypes>
  <name>UserSettings</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanıcı varsayılan ayarları</value>
+  <key>en</key>
+  <value>User defaults settings</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Пользовательские настройки по умолчанию</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>User defaults settings</value>
+  <key>tr</key>
+  <value>Kullanıcı varsayılan ayarları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Kullanıcı varsayılan ayarı</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Пользовательские настройки по умолчанию</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
   <value>User default settings</value>
  </recordPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Kullanıcı varsayılan ayarları</value>
- </listPresentation>
- <listPresentation>
+ <recordPresentation>
   <key>ru</key>
   <value>Пользовательские настройки по умолчанию</value>
- </listPresentation>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Kullanıcı varsayılan ayarı</value>
+ </recordPresentation>
  <listPresentation>
   <key>en</key>
   <value>User defaults settings</value>
  </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Пользовательские настройки по умолчанию</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Kullanıcı varsayılan ayarları</value>
+ </listPresentation>
  <resources uuid="67edf6ff-8a5a-403b-a302-278d9d6f3338">
   <name>KindOfAttribute</name>
   <synonym>
-   <key>tr</key>
-   <value>Öznitellik türü</value>
+   <key>en</key>
+   <value>Kind of attribute</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид реквизита</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Kind of attribute</value>
+   <key>tr</key>
+   <value>Öznitellik türü</value>
   </synonym>
   <type>
    <types>EnumRef.KindsOfAttributes</types>
@@ -74,16 +74,16 @@
  <resources uuid="b5c5bfb2-6b37-4783-9ef4-b0487f3aa19a">
   <name>Value</name>
   <synonym>
-   <key>tr</key>
-   <value>Değer</value>
+   <key>en</key>
+   <value>Value</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Значение</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Value</value>
+   <key>tr</key>
+   <value>Değer</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -111,16 +111,16 @@
  <dimensions uuid="294152d5-e325-4588-8b43-c7a9e643bcb0">
   <name>UserOrGroup</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı veya grup</value>
+   <key>en</key>
+   <value>User or group</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Пользователь или группа пользователей</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>User or group</value>
+   <key>tr</key>
+   <value>Kullanıcı veya grup</value>
   </synonym>
   <type>
    <types>CatalogRef.UserGroups</types>
@@ -137,16 +137,16 @@
  <dimensions uuid="439dca42-68f6-4b1b-81e8-0b869833b22e">
   <name>MetadataObject</name>
   <synonym>
-   <key>tr</key>
-   <value>Üstveri nesnesi</value>
+   <key>en</key>
+   <value>Metadata object</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Объект метаданных</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Metadata object</value>
+   <key>tr</key>
+   <value>Üstveri nesnesi</value>
   </synonym>
   <type>
    <types>String</types>
@@ -166,16 +166,16 @@
  <dimensions uuid="fa6d600a-4784-4609-a589-55d3b69b8c8e">
   <name>AttributeName</name>
   <synonym>
-   <key>tr</key>
-   <value>Alan ismi</value>
+   <key>en</key>
+   <value>Attribute name</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Наименование реквизита</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Attribute name</value>
+   <key>tr</key>
+   <value>Alan ismi</value>
   </synonym>
   <type>
    <types>String</types>

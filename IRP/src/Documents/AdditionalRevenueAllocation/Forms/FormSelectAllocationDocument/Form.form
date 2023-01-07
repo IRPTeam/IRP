@@ -355,16 +355,16 @@
  <attributes>
   <name>List</name>
   <title>
-   <key>tr</key>
-   <value>Liste</value>
+   <key>en</key>
+   <value>List</value>
   </title>
   <title>
    <key>ru</key>
    <value>Список</value>
   </title>
   <title>
-   <key>en</key>
-   <value>List</value>
+   <key>tr</key>
+   <value>Liste</value>
   </title>
   <id>1</id>
   <valueType>
@@ -395,16 +395,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Kaynak evrak</value>
+       <key>en</key>
+       <value>Basis</value>
       </content>
       <content>
        <key>ru</key>
        <value>Документ основания</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Basis</value>
+       <key>tr</key>
+       <value>Kaynak evrak</value>
       </content>
      </localValue>
     </title>
@@ -418,16 +418,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Şirket</value>
+       <key>en</key>
+       <value>Company</value>
       </content>
       <content>
        <key>ru</key>
        <value>Организация</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Company</value>
+       <key>tr</key>
+       <value>Şirket</value>
       </content>
      </localValue>
     </title>
@@ -441,16 +441,16 @@ WHERE
  <formCommands>
   <name>Select</name>
   <title>
-   <key>tr</key>
-   <value>Seç</value>
+   <key>en</key>
+   <value>Select</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Select</value>
+   <key>tr</key>
+   <value>Seç</value>
   </title>
   <id>1</id>
   <use>

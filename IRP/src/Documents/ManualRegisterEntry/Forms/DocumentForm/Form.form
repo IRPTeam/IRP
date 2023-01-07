@@ -13,16 +13,16 @@
      <name>DecorationGroupTitleCollapsedPicture</name>
      <id>84</id>
      <title>
-      <key>tr</key>
-      <value>Dekorasyon grubu tanım birleşmiş resim</value>
+      <key>en</key>
+      <value>Decoration group title collapsed picture</value>
      </title>
      <title>
       <key>ru</key>
       <value>Сворачиваемая группа формы</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Decoration group title collapsed picture</value>
+      <key>tr</key>
+      <value>Dekorasyon grubu tanım birleşmiş resim</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -72,16 +72,16 @@
      <name>DecorationGroupTitleCollapsedLabel</name>
      <id>87</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurun</value>
+      <key>en</key>
+      <value>Please, fill the document</value>
      </title>
      <title>
       <key>ru</key>
       <value>Пожалуйста, заполните документ</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Please, fill the document</value>
+      <key>tr</key>
+      <value>Lütfen, evrakı doldurun</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -208,16 +208,16 @@
      <name>DecorationGroupTitleUncollapsedLabel</name>
      <id>95</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurun</value>
+      <key>en</key>
+      <value>Please, fill the document</value>
      </title>
      <title>
       <key>ru</key>
       <value>Пожалуйста, заполните документ</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Please, fill the document</value>
+      <key>tr</key>
+      <value>Lütfen, evrakı doldurun</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -506,16 +506,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup malzeme başlıkları</value>
+    <key>en</key>
+    <value>Group title items</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа заголовок товаров</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Group title items</value>
+    <key>tr</key>
+    <value>Grup malzeme başlıkları</value>
    </title>
    <extendedTooltip>
     <name>GroupTitleItemsExtendedTooltip</name>
@@ -738,16 +738,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
+    <key>en</key>
+    <value>Other</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дополнительно</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Other</value>
+    <key>tr</key>
+    <value>Diğer</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -776,16 +776,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
+   <key>en</key>
+   <value>Group main pages</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа главных страниц</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group main pages</value>
+   <key>tr</key>
+   <value>Grup ana sayfalar</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -928,16 +928,16 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>tr</key>
-   <value>Grup malzemeler</value>
+   <key>en</key>
+   <value>Group items</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа элементов</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group items</value>
+   <key>tr</key>
+   <value>Grup malzemeler</value>
   </title>
   <id>3</id>
   <valueType>
@@ -956,16 +956,16 @@
  <attributes>
   <name>Description</name>
   <title>
-   <key>tr</key>
-   <value>Tanım</value>
+   <key>en</key>
+   <value>Description</value>
   </title>
   <title>
    <key>ru</key>
    <value>Комментарий</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Description</value>
+   <key>tr</key>
+   <value>Tanım</value>
   </title>
   <id>4</id>
   <valueType>

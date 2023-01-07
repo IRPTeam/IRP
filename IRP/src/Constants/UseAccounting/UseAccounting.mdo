@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseAccounting</name>
  <synonym>
-  <key>tr</key>
-  <value>Muhasebe kullan</value>
+  <key>en</key>
+  <value>Use accounting</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать бухгалтерию</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use accounting</value>
+  <key>tr</key>
+  <value>Muhasebe kullan</value>
  </synonym>
  <type>
   <types>Boolean</types>

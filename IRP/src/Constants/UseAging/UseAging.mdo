@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseAging</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Cari hesap yaşlandırma</value>
+  <key>en</key>
+  <value>Use aging</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать отсрочку оплат партнеров</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use aging</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Cari hesap yaşlandırma</value>
  </synonym>
  <type>
   <types>Boolean</types>

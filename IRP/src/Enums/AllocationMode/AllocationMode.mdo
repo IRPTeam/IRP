@@ -7,47 +7,47 @@
  </producedTypes>
  <name>AllocationMode</name>
  <synonym>
-  <key>tr</key>
-  <value>Dağıtım tipi</value>
+  <key>en</key>
+  <value>Allocation mode</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Способ распределения</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Allocation mode</value>
+  <key>tr</key>
+  <value>Dağıtım tipi</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="2e135a87-f681-41fe-80fb-392dd88892fb">
   <name>ByDocuments</name>
   <synonym>
-   <key>tr</key>
-   <value>Evraklar</value>
+   <key>en</key>
+   <value>By documents</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>По документам</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>By documents</value>
+   <key>tr</key>
+   <value>Evraklar</value>
   </synonym>
  </enumValues>
  <enumValues uuid="6d83acad-749c-4fdc-b47d-ec088c5f537a">
   <name>ByRows</name>
   <synonym>
-   <key>tr</key>
-   <value>Satırlar</value>
+   <key>en</key>
+   <value>By rows</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>По строкам</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>By rows</value>
+   <key>tr</key>
+   <value>Satırlar</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

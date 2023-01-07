@@ -7,47 +7,47 @@
  </producedTypes>
  <name>AccountingAnalyticTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Muhasebe analitik tipleri</value>
+  <key>en</key>
+  <value>Accounting analytic types</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Типы бухгалтерской аналитики</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Accounting analytic types</value>
+  <key>tr</key>
+  <value>Muhasebe analitik tipleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="c96eced9-6bed-4612-aa0c-41e4d11b1864">
   <name>Debit</name>
   <synonym>
-   <key>tr</key>
-   <value>Borç</value>
+   <key>en</key>
+   <value>Debit</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дебит</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Debit</value>
+   <key>tr</key>
+   <value>Borç</value>
   </synonym>
  </enumValues>
  <enumValues uuid="843926ee-bbb6-415a-bf1c-b994f5c69eea">
   <name>Credit</name>
   <synonym>
-   <key>tr</key>
-   <value>Alacak</value>
+   <key>en</key>
+   <value>Credit</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Кредит</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Credit</value>
+   <key>tr</key>
+   <value>Alacak</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

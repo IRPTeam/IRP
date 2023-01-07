@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseAllFunctional</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Tüm seçenekler</value>
+  <key>en</key>
+  <value>Use all functional</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать все функции</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use all functional</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Tüm seçenekler</value>
  </synonym>
  <type>
   <types>Boolean</types>

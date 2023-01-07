@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="91635161-b914-40aa-a121-f3fd00cc5791">
  <name>UseLandedCost</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Maliyet hesaplama</value>
+  <key>en</key>
+  <value>Use landed cost</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать расчет себестоимости</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use landed cost</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Maliyet hesaplama</value>
  </synonym>
  <location>Constant.UseLandedCost</location>
  <privilegedGetMode>true</privilegedGetMode>

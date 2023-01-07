@@ -9,16 +9,16 @@
  </producedTypes>
  <name>SpecialOfferTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Kapmanya tipleri</value>
+  <key>en</key>
+  <value>Special offer types</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Способы применения скидок</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Special offer types</value>
+  <key>tr</key>
+  <value>Kapmanya tipleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -57,16 +57,16 @@
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectPresentation>
-  <key>tr</key>
-  <value>Kampanya tipi</value>
+  <key>en</key>
+  <value>Special offer type</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Способ применения скидок</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>Special offer type</value>
+  <key>tr</key>
+  <value>Kampanya tipi</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -84,16 +84,16 @@
  <attributes uuid="d996a4a8-2bd9-4434-adeb-4da6e14e0c9a">
   <name>Settings</name>
   <synonym>
-   <key>tr</key>
-   <value>Ayarlar</value>
+   <key>en</key>
+   <value>Settings</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Настройки</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Settings</value>
+   <key>tr</key>
+   <value>Ayarlar</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -107,16 +107,16 @@
  <attributes uuid="ddffb9c9-39f9-44c2-a794-fb4f7d2754af">
   <name>ExternalDataProc</name>
   <synonym>
-   <key>tr</key>
-   <value>Eklentiler</value>
+   <key>en</key>
+   <value>Plugins</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Внешняя обработка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Plugins</value>
+   <key>tr</key>
+   <value>Eklentiler</value>
   </synonym>
   <type>
    <types>CatalogRef.ExternalDataProc</types>
@@ -130,16 +130,16 @@
  <attributes uuid="3fc055dd-0704-414b-893b-ed0f1fafb674">
   <name>TermsOfDiscountCalculation</name>
   <synonym>
-   <key>tr</key>
-   <value>Iskonto hesaplama terminleri</value>
+   <key>en</key>
+   <value>Terms of discount calculation</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Условия расчета специального предложения</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Terms of discount calculation</value>
+   <key>tr</key>
+   <value>Iskonto hesaplama terminleri</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -154,16 +154,16 @@
  <attributes uuid="106f3214-eac0-4383-9ebf-8f7b3d6ab990">
   <name>GroupTypes</name>
   <synonym>
-   <key>tr</key>
-   <value>Grup tipler</value>
+   <key>en</key>
+   <value>Group types</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Группа специальных предложений</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Group types</value>
+   <key>tr</key>
+   <value>Grup tipler</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -181,30 +181,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <attributes uuid="b97a4c96-6aba-4a42-8138-89439c97c200">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -217,16 +217,16 @@
   <attributes uuid="d7e50128-be6b-4b0c-adae-41bd39fee45b">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -244,16 +244,16 @@
  <forms uuid="dc46fa55-bb86-4295-b13e-0b1cfb8f2d68">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -261,16 +261,16 @@
  <forms uuid="3217d845-1185-444e-96cd-84d4235674ff">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -278,16 +278,16 @@
  <forms uuid="9985bda0-771f-42cc-bac5-1d309fd936c0">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

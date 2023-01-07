@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>tr</key>
-  <value>Ülke seç</value>
+  <key>en</key>
+  <value>Select country</value>
  </title>
  <title>
   <key>ru</key>
   <value>Страны</value>
  </title>
  <title>
-  <key>en</key>
-  <value>Select country</value>
+  <key>tr</key>
+  <value>Ülke seç</value>
  </title>
  <items xsi:type="form:Table">
   <name>CountryTable</name>
@@ -274,16 +274,16 @@
  <attributes>
   <name>CountryTable</name>
   <title>
-   <key>tr</key>
-   <value>Ülke tablosu</value>
+   <key>en</key>
+   <value>Country table</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица стран</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Country table</value>
+   <key>tr</key>
+   <value>Ülke tablosu</value>
   </title>
   <id>1</id>
   <valueType>
@@ -298,16 +298,16 @@
   <columns>
    <name>Country</name>
    <title>
-    <key>tr</key>
-    <value>Ülke</value>
+    <key>en</key>
+    <value>Country</value>
    </title>
    <title>
     <key>ru</key>
     <value>Страна</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Country</value>
+    <key>tr</key>
+    <value>Ülke</value>
    </title>
    <id>2</id>
    <valueType>
@@ -323,16 +323,16 @@
   <columns>
    <name>ExternalDataProc</name>
    <title>
-    <key>tr</key>
-    <value>Eklentiler</value>
+    <key>en</key>
+    <value>Plugins</value>
    </title>
    <title>
     <key>ru</key>
     <value>Внешние обработки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Plugins</value>
+    <key>tr</key>
+    <value>Eklentiler</value>
    </title>
    <id>3</id>
    <valueType>
@@ -348,16 +348,16 @@
   <columns>
    <name>Settings</name>
    <title>
-    <key>tr</key>
-    <value>Ayarlar</value>
+    <key>en</key>
+    <value>Settings</value>
    </title>
    <title>
     <key>ru</key>
     <value>Настройки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Settings</value>
+    <key>tr</key>
+    <value>Ayarlar</value>
    </title>
    <id>4</id>
    <valueType>

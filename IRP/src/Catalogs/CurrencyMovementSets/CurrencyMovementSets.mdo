@@ -9,16 +9,16 @@
  </producedTypes>
  <name>CurrencyMovementSets</name>
  <synonym>
-  <key>tr</key>
-  <value>Çoklu döviz kırılım görünüm tanımları</value>
+  <key>en</key>
+  <value>Multi currency movement sets</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Настройки вывода мультивалютной аналитики</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Multi currency movement sets</value>
+  <key>tr</key>
+  <value>Çoklu döviz kırılım görünüm tanımları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -26,16 +26,16 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Çoklu döviz kırılım görünüm tanımı</value>
+  <key>en</key>
+  <value>Multi currency movement set</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Настройки вывода мультивалютной аналитики</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>Multi currency movement set</value>
+  <key>tr</key>
+  <value>Çoklu döviz kırılım görünüm tanımı</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -180,30 +180,30 @@
   </producedTypes>
   <name>CurrencyMovements</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz kırılımları</value>
+   <key>en</key>
+   <value>Multi currency movements</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Мультивалютная аналитика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Multi currency movements</value>
+   <key>tr</key>
+   <value>Çoklu döviz kırılımları</value>
   </synonym>
   <attributes uuid="909e88c1-cf12-4c03-9416-f0c0b1fb85d1">
    <name>CurrencyMovementType</name>
    <synonym>
-    <key>tr</key>
-    <value>Çoklu döviz kırılım tipi</value>
+    <key>en</key>
+    <value>Multi currency movement type</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Вид мультивалютной аналитики</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Multi currency movement type</value>
+    <key>tr</key>
+    <value>Çoklu döviz kırılım tipi</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -217,16 +217,16 @@
  <forms uuid="d20072bf-0c41-4003-9f07-fdee7afb447c">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -234,16 +234,16 @@
  <forms uuid="2f64f964-0756-4a68-8a0c-a819e91b52fb">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -251,16 +251,16 @@
  <forms uuid="34622b7e-cf77-4d01-8f11-a05fb8a2f81f">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

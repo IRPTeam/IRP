@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typePercent</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip yüzde</value>
+  <key>en</key>
+  <value>Type percent</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип процент</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Type percent</value>
+  <key>tr</key>
+  <value>Tip yüzde</value>
  </synonym>
  <type>
   <types>Number</types>

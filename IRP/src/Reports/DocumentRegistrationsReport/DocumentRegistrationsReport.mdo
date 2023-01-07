@@ -6,32 +6,32 @@
  </producedTypes>
  <name>DocumentRegistrationsReport</name>
  <synonym>
-  <key>tr</key>
-  <value>Evrak hareket raporu</value>
+  <key>en</key>
+  <value>Document registrations report</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Движения документа</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Document registrations report</value>
+  <key>tr</key>
+  <value>Evrak hareket raporu</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>Report.DocumentRegistrationsReport.Form.ReportForm</defaultForm>
  <forms uuid="6dee31f1-d62d-48b5-b0e2-9ca62cec3a7f">
   <name>ReportForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Rapor formu</value>
+   <key>en</key>
+   <value>Report form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма отчета</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Report form</value>
+   <key>tr</key>
+   <value>Rapor formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -39,31 +39,31 @@
  <templates uuid="d14a12c6-2345-42a5-a78d-7cdba85316a1">
   <name>Template</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon</value>
+   <key>en</key>
+   <value>Template</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Шаблон</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Template</value>
+   <key>tr</key>
+   <value>Şablon</value>
   </synonym>
  </templates>
  <commands uuid="a58a72b2-363c-46be-96aa-5ab5cd8f0cd3">
   <name>RegistrationsReport</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak hareket raporu</value>
+   <key>en</key>
+   <value>Registrations report</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Движения документа</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Registrations report</value>
+   <key>tr</key>
+   <value>Evrak hareket raporu</value>
   </synonym>
   <group>CommandGroup.Service</group>
   <commandParameterType>

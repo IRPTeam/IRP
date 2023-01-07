@@ -2,15 +2,15 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3858f299-9d07-425e-bbb3-f8b98d093d17">
  <name>RunMobileClient</name>
  <synonym>
-  <key>tr</key>
-  <value>Mobil istemci çalıştırma</value>
+  <key>en</key>
+  <value>Run mobile client</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Запуск мобильного клиента</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Run mobile client</value>
+  <key>tr</key>
+  <value>Mobil istemci çalıştırma</value>
  </synonym>
 </mdclass:Role>

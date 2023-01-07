@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UsePartnersHierarchy</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Cari hesap hiyerarşi</value>
+  <key>en</key>
+  <value>Use partners hierarchy</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать иерархию партнеров</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use partners hierarchy</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Cari hesap hiyerarşi</value>
  </synonym>
  <type>
   <types>Boolean</types>

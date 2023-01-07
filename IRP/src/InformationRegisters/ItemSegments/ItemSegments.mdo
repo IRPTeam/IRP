@@ -11,47 +11,47 @@
  </producedTypes>
  <name>ItemSegments</name>
  <synonym>
-  <key>tr</key>
-  <value>Malzeme segmentlerinin içeriği</value>
+  <key>en</key>
+  <value>Item segments content</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Состав сегмента номенклатуры</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Item segments content</value>
+  <key>tr</key>
+  <value>Malzeme segmentlerinin içeriği</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Malzeme segment içeriği</value>
- </recordPresentation>
- <recordPresentation>
-  <key>ru</key>
-  <value>Состав сегмента номенклатуры</value>
- </recordPresentation>
- <recordPresentation>
   <key>en</key>
   <value>Item segment content</value>
  </recordPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Malzeme segmentlerinin içeriği</value>
- </listPresentation>
- <listPresentation>
+ <recordPresentation>
   <key>ru</key>
   <value>Состав сегмента номенклатуры</value>
- </listPresentation>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Malzeme segment içeriği</value>
+ </recordPresentation>
  <listPresentation>
   <key>en</key>
   <value>Item segments content</value>
  </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Состав сегмента номенклатуры</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Malzeme segmentlerinin içeriği</value>
+ </listPresentation>
  <dimensions uuid="5154e93f-9298-49ae-bee3-ba4b78f8b6cc">
   <name>Segment</name>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Segment</value>
   </synonym>
   <synonym>
@@ -59,7 +59,7 @@
    <value>Сегмент</value>
   </synonym>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Segment</value>
   </synonym>
   <type>
@@ -79,16 +79,16 @@
  <dimensions uuid="301acb84-f422-4b06-9c55-3601244d674b">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>

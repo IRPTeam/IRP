@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T9013S_AccountsTax</name>
  <synonym>
-  <key>tr</key>
-  <value>Muh. hesaplar (Vergi)</value>
+  <key>en</key>
+  <value>Accounts (Tax)</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Бух. счета (налоги)</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Accounts (Tax)</value>
+  <key>tr</key>
+  <value>Muh. hesaplar (Vergi)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +30,16 @@
  <resources uuid="79e4eb7b-a808-4175-9b3a-699bac85e512">
   <name>Account</name>
   <synonym>
-   <key>tr</key>
-   <value>Hesap</value>
+   <key>en</key>
+   <value>Account</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Касса/банк</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Account</value>
+   <key>tr</key>
+   <value>Hesap</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -58,16 +58,16 @@
  <dimensions uuid="055d2b93-7a3a-4f88-a0f8-1309a66b26ef">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -84,16 +84,16 @@
  <dimensions uuid="d9250323-9eba-48f9-9110-1e2690728d65">
   <name>Variant</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Variant</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Variant</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypeVariants</types>
@@ -110,16 +110,16 @@
  <dimensions uuid="1fc84d18-ad29-4a35-b55f-ed8196a21e9f">
   <name>Tax</name>
   <synonym>
-   <key>tr</key>
-   <value>Vergi</value>
+   <key>en</key>
+   <value>Tax</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Налог</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Tax</value>
+   <key>tr</key>
+   <value>Vergi</value>
   </synonym>
   <type>
    <types>CatalogRef.Taxes</types>
@@ -136,16 +136,16 @@
  <forms uuid="58556965-0cbb-4b51-ac27-78ad96f4a6a4">
   <name>RecordForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
+   <key>en</key>
+   <value>Record form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма записи</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Record form</value>
+   <key>tr</key>
+   <value>Kayıt formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3f905c3a-e211-4439-aaec-e1d4469a915a">
  <name>UsePartnerItems</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Cari hesap malzemeleri</value>
+  <key>en</key>
+  <value>Use partner items</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать номенклатуру партнеров</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use partner items</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Cari hesap malzemeleri</value>
  </synonym>
  <location>Constant.UsePartnerItems</location>
  <privilegedGetMode>true</privilegedGetMode>

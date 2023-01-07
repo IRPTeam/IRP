@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeBarcode</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip barkod</value>
+  <key>en</key>
+  <value>Type barcode</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип штрихкода</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Type barcode</value>
+  <key>tr</key>
+  <value>Tip barkod</value>
  </synonym>
  <type>
   <types>String</types>

@@ -386,16 +386,16 @@
  <attributes>
   <name>Properties</name>
   <title>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Properties</value>
   </title>
   <title>
    <key>ru</key>
    <value>Свойства</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Properties</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </title>
   <id>1</id>
   <valueType>
@@ -410,16 +410,16 @@
   <columns>
    <name>Property</name>
    <title>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </title>
    <title>
     <key>ru</key>
     <value>Характеристика</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </title>
    <id>2</id>
    <valueType>
@@ -435,16 +435,16 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </title>
    <id>3</id>
    <valueType>
@@ -460,16 +460,16 @@
   <columns>
    <name>TypeDef</name>
    <title>
-    <key>tr</key>
-    <value>Tip açıklama</value>
+    <key>en</key>
+    <value>Type def</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип наименования</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Type def</value>
+    <key>tr</key>
+    <value>Tip açıklama</value>
    </title>
    <id>5</id>
    <valueType>
@@ -486,7 +486,7 @@
  <attributes>
   <name>Ref</name>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Ref</value>
   </title>
   <title>
@@ -494,7 +494,7 @@
    <value>Ссылка</value>
   </title>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Ref</value>
   </title>
   <id>4</id>
@@ -511,16 +511,16 @@
  <formCommands>
   <name>Save</name>
   <title>
-   <key>tr</key>
-   <value>Kaydet</value>
+   <key>en</key>
+   <value>Save</value>
   </title>
   <title>
    <key>ru</key>
    <value>Записать</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Save</value>
+   <key>tr</key>
+   <value>Kaydet</value>
   </title>
   <id>1</id>
   <use>
@@ -540,16 +540,16 @@
  <formCommands>
   <name>SaveAndClose</name>
   <title>
-   <key>tr</key>
-   <value>Kaydet ve kapat</value>
+   <key>en</key>
+   <value>Save and close</value>
   </title>
   <title>
    <key>ru</key>
    <value>Записать и закрыть</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Save and close</value>
+   <key>tr</key>
+   <value>Kaydet ve kapat</value>
   </title>
   <id>2</id>
   <use>

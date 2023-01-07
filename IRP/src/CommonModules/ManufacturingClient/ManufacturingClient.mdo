@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8becc4ef-993a-4587-bc7f-d45640a57d20">
  <name>ManufacturingClient</name>
  <synonym>
-  <key>tr</key>
-  <value>Üretim client</value>
+  <key>en</key>
+  <value>Manufacturing client</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Производство клиент</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Manufacturing client</value>
+  <key>tr</key>
+  <value>Üretim client</value>
  </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

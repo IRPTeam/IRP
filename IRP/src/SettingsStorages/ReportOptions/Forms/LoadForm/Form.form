@@ -530,16 +530,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Değişken</value>
+    <key>en</key>
+    <value>Custom</value>
    </title>
    <title>
     <key>ru</key>
     <value>Пользовательский</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Custom</value>
+    <key>tr</key>
+    <value>Değişken</value>
    </title>
    <extendedTooltip>
     <name>GroupPageCustomExtendedTooltip</name>
@@ -634,16 +634,16 @@
      <name>StandardOptionsPresentation</name>
      <id>167</id>
      <title>
-      <key>tr</key>
-      <value>Rapor seçeneği</value>
+      <key>en</key>
+      <value>Report option</value>
      </title>
      <title>
       <key>ru</key>
       <value>Вариант отчета</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Report option</value>
+      <key>tr</key>
+      <value>Rapor seçeneği</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -923,16 +923,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Standart</value>
+    <key>en</key>
+    <value>Standard</value>
    </title>
    <title>
     <key>ru</key>
     <value>Стандартное</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Standard</value>
+    <key>tr</key>
+    <value>Standart</value>
    </title>
    <extendedTooltip>
     <name>GroupPageStandardExtendedTooltip</name>
@@ -1041,16 +1041,16 @@
  <attributes>
   <name>OptionsList</name>
   <title>
-   <key>tr</key>
-   <value>Seçenek listesi</value>
+   <key>en</key>
+   <value>Options list</value>
   </title>
   <title>
    <key>ru</key>
    <value>Варианты отчетов</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Options list</value>
+   <key>tr</key>
+   <value>Seçenek listesi</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1099,16 +1099,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Geçerli ayar</value>
+       <key>en</key>
+       <value>Is current option</value>
       </content>
       <content>
        <key>ru</key>
        <value>Это текущая настройка</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Is current option</value>
+       <key>tr</key>
+       <value>Geçerli ayar</value>
       </content>
      </localValue>
     </title>
@@ -1119,16 +1119,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Ayar anahtarı</value>
+       <key>en</key>
+       <value>Option key</value>
       </content>
       <content>
        <key>ru</key>
        <value>Ключ настройки</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Option key</value>
+       <key>tr</key>
+       <value>Ayar anahtarı</value>
       </content>
      </localValue>
     </title>
@@ -1139,16 +1139,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Paylaşıldı</value>
+       <key>en</key>
+       <value>Shared</value>
       </content>
       <content>
        <key>ru</key>
        <value>Общий</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Shared</value>
+       <key>tr</key>
+       <value>Paylaşıldı</value>
       </content>
      </localValue>
     </title>
@@ -1159,16 +1159,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Rapor seçeneği</value>
+       <key>en</key>
+       <value>Report option</value>
       </content>
       <content>
        <key>ru</key>
        <value>Вариант отчета</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Report option</value>
+       <key>tr</key>
+       <value>Rapor seçeneği</value>
       </content>
      </localValue>
     </title>
@@ -1206,16 +1206,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Nesne anahtarı</value>
+       <key>en</key>
+       <value>Object key</value>
       </content>
       <content>
        <key>ru</key>
        <value>Ключ объекта</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Object key</value>
+       <key>tr</key>
+       <value>Nesne anahtarı</value>
       </content>
      </localValue>
     </title>
@@ -1232,16 +1232,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Kayıt oluşturan</value>
+       <key>en</key>
+       <value>Author</value>
       </content>
       <content>
        <key>ru</key>
        <value>Автор</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Author</value>
+       <key>tr</key>
+       <value>Kayıt oluşturan</value>
       </content>
      </localValue>
     </title>
@@ -1255,16 +1255,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Mevcut ayarlar anahtarı</value>
+       <key>en</key>
+       <value>Current settings key</value>
       </content>
       <content>
        <key>ru</key>
        <value>Ключ текущих настроек</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Current settings key</value>
+       <key>tr</key>
+       <value>Mevcut ayarlar anahtarı</value>
       </content>
      </localValue>
     </title>
@@ -1281,16 +1281,16 @@ WHERE
  <attributes>
   <name>CurrentSettingsKey</name>
   <title>
-   <key>tr</key>
-   <value>Mevcut ayarlar anahtarı</value>
+   <key>en</key>
+   <value>Current settings key</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ключ текущих настроек</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Current settings key</value>
+   <key>tr</key>
+   <value>Mevcut ayarlar anahtarı</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1309,16 +1309,16 @@ WHERE
  <attributes>
   <name>ObjectKey</name>
   <title>
-   <key>tr</key>
-   <value>Nesne anahtarı</value>
+   <key>en</key>
+   <value>Object key</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ключ объекта</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Object key</value>
+   <key>tr</key>
+   <value>Nesne anahtarı</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1335,16 +1335,16 @@ WHERE
  <attributes>
   <name>StandardOptions</name>
   <title>
-   <key>tr</key>
-   <value>Varsayılan ayar</value>
+   <key>en</key>
+   <value>Standard options</value>
   </title>
   <title>
    <key>ru</key>
    <value>Стандарные варианты</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Standard options</value>
+   <key>tr</key>
+   <value>Varsayılan ayar</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1359,16 +1359,16 @@ WHERE
   <columns>
    <name>isCurrentOption</name>
    <title>
-    <key>tr</key>
-    <value>Geçerli ayar</value>
+    <key>en</key>
+    <value>Is current option</value>
    </title>
    <title>
     <key>ru</key>
     <value>Это текущая настройка</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Is current option</value>
+    <key>tr</key>
+    <value>Geçerli ayar</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1384,16 +1384,16 @@ WHERE
   <columns>
    <name>OptionKey</name>
    <title>
-    <key>tr</key>
-    <value>Ayar anahtarı</value>
+    <key>en</key>
+    <value>Option key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ настройки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Option key</value>
+    <key>tr</key>
+    <value>Ayar anahtarı</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1412,16 +1412,16 @@ WHERE
   <columns>
    <name>Presentation</name>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
+    <key>en</key>
+    <value>Presentation</value>
    </title>
    <title>
     <key>ru</key>
     <value>Специальные предложения</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Presentation</value>
+    <key>tr</key>
+    <value>Görünüm</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1441,16 +1441,16 @@ WHERE
  <formCommands>
   <name>LoadSetting</name>
   <title>
-   <key>tr</key>
-   <value>Yükleme ayarları</value>
+   <key>en</key>
+   <value>Load setting</value>
   </title>
   <title>
    <key>ru</key>
    <value>Загрузить настройки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Load setting</value>
+   <key>tr</key>
+   <value>Yükleme ayarları</value>
   </title>
   <id>1</id>
   <use>
@@ -1466,16 +1466,16 @@ WHERE
  <formCommands>
   <name>ShowMarkedForDeletion</name>
   <title>
-   <key>tr</key>
-   <value>Silmek için işaretlenenleri göster</value>
+   <key>en</key>
+   <value>Show marked for deletion</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать помеченые на удаление</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Show marked for deletion</value>
+   <key>tr</key>
+   <value>Silmek için işaretlenenleri göster</value>
   </title>
   <id>2</id>
   <use>

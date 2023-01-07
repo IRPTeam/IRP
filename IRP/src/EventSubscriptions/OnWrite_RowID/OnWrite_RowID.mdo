@@ -2,16 +2,16 @@
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="45dc7e40-2add-441e-8339-e9525e92f20a">
  <name>OnWrite_RowID</name>
  <synonym>
-  <key>tr</key>
-  <value>Satır ID saklandığında</value>
+  <key>en</key>
+  <value>On write row ID</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>При записи row ID</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>On write row ID</value>
+  <key>tr</key>
+  <value>Satır ID saklandığında</value>
  </synonym>
  <source>
   <types>DocumentObject</types>

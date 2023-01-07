@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseCommissionTrading</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanmak - Konsinye satışı</value>
+  <key>en</key>
+  <value>Use commission trading</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать комиссионную торговлю</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use commission trading</value>
+  <key>tr</key>
+  <value>Kullanmak - Konsinye satışı</value>
  </synonym>
  <type>
   <types>Boolean</types>

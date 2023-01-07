@@ -856,16 +856,16 @@
  <attributes>
   <name>PictureViewHTML</name>
   <title>
-   <key>tr</key>
-   <value>Resim HTML önizleme</value>
+   <key>en</key>
+   <value>Picture view HTML</value>
   </title>
   <title>
    <key>ru</key>
    <value>Просмотр изображений HTML</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Picture view HTML</value>
+   <key>tr</key>
+   <value>Resim HTML önizleme</value>
   </title>
   <id>2</id>
   <valueType>
@@ -882,16 +882,16 @@
  <attributes>
   <name>PictureViewRegular</name>
   <title>
-   <key>tr</key>
-   <value>Resim normal önizleme</value>
+   <key>en</key>
+   <value>Picture view regular</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обычный просмотр картинки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Picture view regular</value>
+   <key>tr</key>
+   <value>Resim normal önizleme</value>
   </title>
   <id>3</id>
   <valueType>
@@ -908,16 +908,16 @@
  <attributes>
   <name>Preview</name>
   <title>
-   <key>tr</key>
-   <value>Önizleme</value>
+   <key>en</key>
+   <value>Preview</value>
   </title>
   <title>
    <key>ru</key>
    <value>Предварительный просмотр</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Preview</value>
+   <key>tr</key>
+   <value>Önizleme</value>
   </title>
   <id>4</id>
   <valueType>
@@ -934,16 +934,16 @@
  <formCommands>
   <name>Upload</name>
   <title>
-   <key>tr</key>
-   <value>Yükle</value>
+   <key>en</key>
+   <value>Upload</value>
   </title>
   <title>
    <key>ru</key>
    <value>Загрузить</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Upload</value>
+   <key>tr</key>
+   <value>Yükle</value>
   </title>
   <id>1</id>
   <use>

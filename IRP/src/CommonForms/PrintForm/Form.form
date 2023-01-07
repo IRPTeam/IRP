@@ -10,7 +10,7 @@
     <name>FormHide</name>
     <id>116</id>
     <title>
-     <key>tr</key>
+     <key>en</key>
      <value>&lt;</value>
     </title>
     <title>
@@ -18,7 +18,7 @@
      <value>&lt;</value>
     </title>
     <title>
-     <key>en</key>
+     <key>tr</key>
      <value>&lt;</value>
     </title>
     <visible>true</visible>
@@ -54,7 +54,7 @@
     <name>FormShow</name>
     <id>118</id>
     <title>
-     <key>tr</key>
+     <key>en</key>
      <value>&gt;</value>
     </title>
     <title>
@@ -62,7 +62,7 @@
      <value>&gt;</value>
     </title>
     <title>
-     <key>en</key>
+     <key>tr</key>
      <value>&gt;</value>
     </title>
     <enabled>true</enabled>
@@ -264,16 +264,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Araç çubuğu üst</value>
+    <key>en</key>
+    <value>Command bar top</value>
    </title>
    <title>
     <key>ru</key>
     <value>Панель управления верх</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Command bar top</value>
+    <key>tr</key>
+    <value>Araç çubuğu üst</value>
    </title>
    <horizontalStretch>false</horizontalStretch>
    <extendedTooltip>
@@ -303,16 +303,16 @@
     <name>LayoutLang</name>
     <id>184</id>
     <title>
-     <key>tr</key>
-     <value>Maket</value>
+     <key>en</key>
+     <value>Layout</value>
     </title>
     <title>
      <key>ru</key>
      <value>Макет</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Layout</value>
+     <key>tr</key>
+     <value>Maket</value>
     </title>
     <enabled>true</enabled>
     <userVisible>
@@ -374,16 +374,16 @@
     <name>DataLang</name>
     <id>198</id>
     <title>
-     <key>tr</key>
-     <value>Veri</value>
+     <key>en</key>
+     <value>Data</value>
     </title>
     <title>
      <key>ru</key>
      <value>Данные</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Data</value>
+     <key>tr</key>
+     <value>Veri</value>
     </title>
     <enabled>true</enabled>
     <userVisible>
@@ -447,7 +447,7 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Model</value>
    </title>
    <title>
@@ -455,7 +455,7 @@
     <value>Модель</value>
    </title>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Model</value>
    </title>
    <extendedTooltip>
@@ -488,28 +488,28 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup buton üst</value>
+   <key>en</key>
+   <value>Group button top</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа кнопки верх</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group button top</value>
-  </title>
-  <toolTip>
    <key>tr</key>
    <value>Grup buton üst</value>
+  </title>
+  <toolTip>
+   <key>en</key>
+   <value>Group button top</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Группа кнопки верх</value>
   </toolTip>
   <toolTip>
-   <key>en</key>
-   <value>Group button top</value>
+   <key>tr</key>
+   <value>Grup buton üst</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupButtonTopExtendedTooltip</name>
@@ -742,16 +742,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup yazı tipi düzeltme sonucu</value>
+     <key>en</key>
+     <value>Group result font formatting</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа результат форматирования шрифта</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Group result font formatting</value>
+     <key>tr</key>
+     <value>Grup yazı tipi düzeltme sonucu</value>
     </title>
     <extendedTooltip>
      <name>GroupResultFontFormattingExtendedTooltip</name>
@@ -1069,16 +1069,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup kenar sonucu</value>
+     <key>en</key>
+     <value>Group result borders</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа результат границы</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Group result borders</value>
+     <key>tr</key>
+     <value>Grup kenar sonucu</value>
     </title>
     <extendedTooltip>
      <name>GroupResultBordersExtendedTooltip</name>
@@ -1236,16 +1236,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup hızalama sonucu</value>
+     <key>en</key>
+     <value>Group result align</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа результат выравнивания</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Group result align</value>
+     <key>tr</key>
+     <value>Grup hızalama sonucu</value>
     </title>
     <extendedTooltip>
      <name>GroupResultAlignExtendedTooltip</name>
@@ -1374,28 +1374,28 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Undo/Redo result</value>
+      <key>en</key>
+      <value>Result un re do</value>
      </title>
      <title>
       <key>ru</key>
       <value>Результат назад вперед</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Result un re do</value>
-     </title>
-     <toolTip>
       <key>tr</key>
       <value>Undo/Redo result</value>
+     </title>
+     <toolTip>
+      <key>en</key>
+      <value>Result un re do</value>
      </toolTip>
      <toolTip>
       <key>ru</key>
       <value>Результат назад вперед</value>
      </toolTip>
      <toolTip>
-      <key>en</key>
-      <value>Result un re do</value>
+      <key>tr</key>
+      <value>Undo/Redo result</value>
      </toolTip>
      <extendedTooltip>
       <name>ResultUnReDoExtendedTooltip</name>
@@ -1422,16 +1422,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup diğer sonuç</value>
+     <key>en</key>
+     <value>Group result other</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа результат другой</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Group result other</value>
+     <key>tr</key>
+     <value>Grup diğer sonuç</value>
     </title>
     <extendedTooltip>
      <name>GroupResultOtherExtendedTooltip</name>
@@ -1456,16 +1456,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup araç çubuk sonucu</value>
+    <key>en</key>
+    <value>Group result command bar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа результат панель свойств</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Group result command bar</value>
+    <key>tr</key>
+    <value>Grup araç çubuk sonucu</value>
    </title>
    <extendedTooltip>
     <name>GroupResultCommandBarExtendedTooltip</name>
@@ -1696,16 +1696,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Yazdır</value>
+      <key>en</key>
+      <value>Print</value>
      </title>
      <title>
       <key>ru</key>
       <value>Печать</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Print</value>
+      <key>tr</key>
+      <value>Yazdır</value>
      </title>
      <extendedTooltip>
       <name>PrintFormConfigLangExtendedTooltip</name>
@@ -2072,16 +2072,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup config</value>
+    <key>en</key>
+    <value>GroupConfig</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа конфигурация</value>
    </title>
    <title>
-    <key>en</key>
-    <value>GroupConfig</value>
+    <key>tr</key>
+    <value>Grup config</value>
    </title>
    <extendedTooltip>
     <name>GroupConfigExtendedTooltip</name>
@@ -2180,16 +2180,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup sonuç</value>
+    <key>en</key>
+    <value>GroupResult</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа результат</value>
    </title>
    <title>
-    <key>en</key>
-    <value>GroupResult</value>
+    <key>tr</key>
+    <value>Grup sonuç</value>
    </title>
    <extendedTooltip>
     <name>GroupResultExtendedTooltip</name>
@@ -2221,16 +2221,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup 1</value>
+   <key>en</key>
+   <value>Group1</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа 1</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group1</value>
+   <key>tr</key>
+   <value>Grup 1</value>
   </title>
   <extendedTooltip>
    <name>GroupGeneralExtendedTooltip</name>
@@ -2289,16 +2289,16 @@
  <attributes>
   <name>Result</name>
   <title>
-   <key>tr</key>
-   <value>Sonuç</value>
+   <key>en</key>
+   <value>Result</value>
   </title>
   <title>
    <key>ru</key>
    <value>Результат</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Result</value>
+   <key>tr</key>
+   <value>Sonuç</value>
   </title>
   <id>1</id>
   <valueType>
@@ -2315,16 +2315,16 @@
  <attributes>
   <name>PrintFormConfig</name>
   <title>
-   <key>tr</key>
-   <value>Çıktı form yapısı</value>
+   <key>en</key>
+   <value>Print form config</value>
   </title>
   <title>
    <key>ru</key>
    <value>Печатать из конфигурации</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Print form config</value>
+   <key>tr</key>
+   <value>Çıktı form yapısı</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2339,16 +2339,16 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>tr</key>
-    <value>Obje</value>
+    <key>en</key>
+    <value>Object</value>
    </title>
    <title>
     <key>ru</key>
     <value>Объект</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Object</value>
+    <key>tr</key>
+    <value>Obje</value>
    </title>
    <id>3</id>
    <valueType>
@@ -2367,16 +2367,16 @@
   <columns>
    <name>CountCopy</name>
    <title>
-    <key>tr</key>
-    <value>Kopya sayısı</value>
+    <key>en</key>
+    <value>Count copy</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество копий</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Count copy</value>
+    <key>tr</key>
+    <value>Kopya sayısı</value>
    </title>
    <id>4</id>
    <valueType>
@@ -2395,16 +2395,16 @@
   <columns>
    <name>Print</name>
    <title>
-    <key>tr</key>
-    <value>Yazdır</value>
+    <key>en</key>
+    <value>Print</value>
    </title>
    <title>
     <key>ru</key>
     <value>Печать</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Print</value>
+    <key>tr</key>
+    <value>Yazdır</value>
    </title>
    <id>5</id>
    <valueType>
@@ -2420,7 +2420,7 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Ref</value>
    </title>
    <title>
@@ -2428,7 +2428,7 @@
     <value>Ссылка</value>
    </title>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Ref</value>
    </title>
    <id>6</id>
@@ -2445,16 +2445,16 @@
   <columns>
    <name>NameTemplate</name>
    <title>
-    <key>tr</key>
-    <value>Maket ismi</value>
+    <key>en</key>
+    <value>Name template</value>
    </title>
    <title>
     <key>ru</key>
     <value>Имя макета</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Name template</value>
+    <key>tr</key>
+    <value>Maket ismi</value>
    </title>
    <id>7</id>
    <valueType>
@@ -2473,16 +2473,16 @@
   <columns>
    <name>SpreadsheetDoc</name>
    <title>
-    <key>tr</key>
-    <value>Tablo evrakı</value>
+    <key>en</key>
+    <value>Spreadsheet document</value>
    </title>
    <title>
     <key>ru</key>
     <value>Табличный документ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Spreadsheet document</value>
+    <key>tr</key>
+    <value>Tablo evrakı</value>
    </title>
    <id>8</id>
    <valueType/>
@@ -2496,16 +2496,16 @@
   <columns>
    <name>BuilderLayout</name>
    <title>
-    <key>tr</key>
-    <value>Oluşturucu maketi</value>
+    <key>en</key>
+    <value>Builder layout</value>
    </title>
    <title>
     <key>ru</key>
     <value>Макет построителя</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Builder layout</value>
+    <key>tr</key>
+    <value>Oluşturucu maketi</value>
    </title>
    <id>9</id>
    <valueType>
@@ -2521,16 +2521,16 @@
   <columns>
    <name>Template</name>
    <title>
-    <key>tr</key>
-    <value>Şablon</value>
+    <key>en</key>
+    <value>Template</value>
    </title>
    <title>
     <key>ru</key>
     <value>Шаблон</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Template</value>
+    <key>tr</key>
+    <value>Şablon</value>
    </title>
    <id>10</id>
    <valueType>
@@ -2547,16 +2547,16 @@
   <columns>
    <name>LayoutLang</name>
    <title>
-    <key>tr</key>
-    <value>MD</value>
+    <key>en</key>
+    <value>LL</value>
    </title>
    <title>
     <key>ru</key>
     <value>ЯМ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>LL</value>
+    <key>tr</key>
+    <value>MD</value>
    </title>
    <id>12</id>
    <valueType>
@@ -2575,16 +2575,16 @@
   <columns>
    <name>DataLang</name>
    <title>
-    <key>tr</key>
-    <value>VD</value>
+    <key>en</key>
+    <value>DL</value>
    </title>
    <title>
     <key>ru</key>
     <value>ЯД</value>
    </title>
    <title>
-    <key>en</key>
-    <value>DL</value>
+    <key>tr</key>
+    <value>VD</value>
    </title>
    <id>15</id>
    <valueType>
@@ -2604,16 +2604,16 @@
  <attributes>
   <name>LayoutLang</name>
   <title>
-   <key>tr</key>
-   <value>Maket dili</value>
+   <key>en</key>
+   <value>Layout lang</value>
   </title>
   <title>
    <key>ru</key>
    <value>Язык макета</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Layout lang</value>
+   <key>tr</key>
+   <value>Maket dili</value>
   </title>
   <id>11</id>
   <valueType>
@@ -2630,16 +2630,16 @@
  <attributes>
   <name>DataLang</name>
   <title>
-   <key>tr</key>
-   <value>Veri dili</value>
+   <key>en</key>
+   <value>Data lang</value>
   </title>
   <title>
    <key>ru</key>
    <value>Язык данных</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Data lang</value>
+   <key>tr</key>
+   <value>Veri dili</value>
   </title>
   <id>13</id>
   <valueType>
@@ -2656,16 +2656,16 @@
  <attributes>
   <name>IdResult</name>
   <title>
-   <key>tr</key>
-   <value>Sonuç ID</value>
+   <key>en</key>
+   <value>Id result</value>
   </title>
   <title>
    <key>ru</key>
    <value>ID результата</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Id result</value>
+   <key>tr</key>
+   <value>Sonuç ID</value>
   </title>
   <id>16</id>
   <valueType>
@@ -2684,16 +2684,16 @@
  <formCommands>
   <name>EditResult</name>
   <title>
-   <key>tr</key>
-   <value>Değiştir</value>
+   <key>en</key>
+   <value>Edit</value>
   </title>
   <title>
    <key>ru</key>
    <value>Редактирование</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Edit</value>
+   <key>tr</key>
+   <value>Değiştir</value>
   </title>
   <id>1</id>
   <use>
@@ -2713,16 +2713,16 @@
  <formCommands>
   <name>SendEmail</name>
   <title>
-   <key>tr</key>
-   <value>Mail gönderme</value>
+   <key>en</key>
+   <value>Send email</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отправка маила</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Send email</value>
+   <key>tr</key>
+   <value>Mail gönderme</value>
   </title>
   <id>2</id>
   <use>
@@ -2733,16 +2733,16 @@
  <formCommands>
   <name>Hide</name>
   <title>
-   <key>tr</key>
-   <value>Sakla</value>
+   <key>en</key>
+   <value>Hide</value>
   </title>
   <title>
    <key>ru</key>
    <value>Скрыть</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Hide</value>
+   <key>tr</key>
+   <value>Sakla</value>
   </title>
   <id>3</id>
   <use>
@@ -2758,16 +2758,16 @@
  <formCommands>
   <name>Show</name>
   <title>
-   <key>tr</key>
-   <value>Göster</value>
+   <key>en</key>
+   <value>Show</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отображать</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Show</value>
+   <key>tr</key>
+   <value>Göster</value>
   </title>
   <id>4</id>
   <use>
@@ -2783,16 +2783,16 @@
  <formCommands>
   <name>Print</name>
   <title>
-   <key>tr</key>
-   <value>Yazdır</value>
+   <key>en</key>
+   <value>Print</value>
   </title>
   <title>
    <key>ru</key>
    <value>Печать</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Print</value>
+   <key>tr</key>
+   <value>Yazdır</value>
   </title>
   <id>5</id>
   <use>
@@ -2812,29 +2812,29 @@
  <formCommands>
   <name>ChangeLang</name>
   <title>
-   <key>tr</key>
-   <value>Dil değiştir</value>
+   <key>en</key>
+   <value>Change lang</value>
   </title>
   <title>
    <key>ru</key>
    <value>Изменить язык</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Change lang</value>
+   <key>tr</key>
+   <value>Dil değiştir</value>
   </title>
   <id>6</id>
   <toolTip>
-   <key>tr</key>
-   <value>Maket veya veri dili değiştir</value>
+   <key>en</key>
+   <value>Change layout or data lang</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Изменить язык макета или представления данных</value>
   </toolTip>
   <toolTip>
-   <key>en</key>
-   <value>Change layout or data lang</value>
+   <key>tr</key>
+   <value>Maket veya veri dili değiştir</value>
   </toolTip>
   <use>
    <common>true</common>

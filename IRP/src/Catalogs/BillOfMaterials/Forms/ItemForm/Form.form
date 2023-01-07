@@ -69,16 +69,16 @@
     <name>DecorationChangeActive</name>
     <id>124</id>
     <title>
-     <key>tr</key>
-     <value>Aktif:</value>
+     <key>en</key>
+     <value>Active:</value>
     </title>
     <title>
      <key>ru</key>
      <value>Активный:</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Active:</value>
+     <key>tr</key>
+     <value>Aktif:</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -154,16 +154,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Aktif</value>
+    <key>en</key>
+    <value>Active</value>
    </title>
    <title>
     <key>ru</key>
     <value>Активный</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Active</value>
+    <key>tr</key>
+    <value>Aktif</value>
    </title>
    <extendedTooltip>
     <name>GroupChangeActiveExtendedTooltip</name>
@@ -195,16 +195,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup header</value>
+   <key>en</key>
+   <value>Group header</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа шапка</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group header</value>
+   <key>tr</key>
+   <value>Grup header</value>
   </title>
   <extendedTooltip>
    <name>GroupHeaderExtendedTooltip</name>
@@ -590,16 +590,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup (sol)</value>
+    <key>en</key>
+    <value>Group left</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группировка по левому краю</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Group left</value>
+    <key>tr</key>
+    <value>Grup (sol)</value>
    </title>
    <extendedTooltip>
     <name>GroupLeftExtendedTooltip</name>
@@ -834,16 +834,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup (sağ)</value>
+    <key>en</key>
+    <value>Group right</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группировка по правому краю</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Group right</value>
+    <key>tr</key>
+    <value>Grup (sağ)</value>
    </title>
    <extendedTooltip>
     <name>GroupRightExtendedTooltip</name>
@@ -875,16 +875,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Başlık nesneleri</value>
+   <key>en</key>
+   <value>Title items</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заголовок номенклатура</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Title items</value>
+   <key>tr</key>
+   <value>Başlık nesneleri</value>
   </title>
   <extendedTooltip>
    <name>GroupTitleItemsExtendedTooltip</name>
@@ -1522,16 +1522,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Karışım</value>
+    <key>en</key>
+    <value>Content</value>
    </title>
    <title>
     <key>ru</key>
     <value>Состав</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Content</value>
+    <key>tr</key>
+    <value>Karışım</value>
    </title>
    <extendedTooltip>
     <name>PageContentExtendedTooltip</name>
@@ -1732,16 +1732,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup Üretim ağacı</value>
+      <key>en</key>
+      <value>Production tree group1</value>
      </title>
      <title>
       <key>ru</key>
       <value>Производственное дерево группа 1</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Production tree group1</value>
+      <key>tr</key>
+      <value>Grup Üretim ağacı</value>
      </title>
      <extendedTooltip>
       <name>ProductionTreeGroupItemItemKeyExtendedTooltip</name>
@@ -2042,16 +2042,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Detaylar</value>
+    <key>en</key>
+    <value>Details</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дополнительно</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Details</value>
+    <key>tr</key>
+    <value>Detaylar</value>
    </title>
    <extendedTooltip>
     <name>PageDetailsExtendedTooltip</name>
@@ -2080,16 +2080,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ana sayfaklar</value>
+   <key>en</key>
+   <value>Main pages</value>
   </title>
   <title>
    <key>ru</key>
    <value>Основные страницы</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Main pages</value>
+   <key>tr</key>
+   <value>Ana sayfaklar</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -2192,16 +2192,16 @@
  <attributes>
   <name>ProductionTree</name>
   <title>
-   <key>tr</key>
-   <value>Üretim ağacı</value>
+   <key>en</key>
+   <value>Production tree</value>
   </title>
   <title>
    <key>ru</key>
    <value>Производственное дерево</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Production tree</value>
+   <key>tr</key>
+   <value>Üretim ağacı</value>
   </title>
   <id>3</id>
   <valueType>
@@ -2216,16 +2216,16 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>tr</key>
-    <value>Mamul, yarım mamul, malzeme</value>
+    <key>en</key>
+    <value>Product, Semiproduct, Material</value>
    </title>
    <title>
     <key>ru</key>
     <value>Готовая продукция, Полуфабрикат, Сырье</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Product, Semiproduct, Material</value>
+    <key>tr</key>
+    <value>Mamul, yarım mamul, malzeme</value>
    </title>
    <id>4</id>
    <valueType>
@@ -2241,16 +2241,16 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Характеристика</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </title>
    <id>5</id>
    <valueType>
@@ -2266,16 +2266,16 @@
   <columns>
    <name>Unit</name>
    <title>
-    <key>tr</key>
-    <value>Birim</value>
+    <key>en</key>
+    <value>Unit</value>
    </title>
    <title>
     <key>ru</key>
     <value>Единица измерения</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Unit</value>
+    <key>tr</key>
+    <value>Birim</value>
    </title>
    <id>6</id>
    <valueType>
@@ -2291,16 +2291,16 @@
   <columns>
    <name>ItemPicture</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme resimi</value>
+    <key>en</key>
+    <value>Item picture</value>
    </title>
    <title>
     <key>ru</key>
     <value>Картинка номенклатуры</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item picture</value>
+    <key>tr</key>
+    <value>Malzeme resimi</value>
    </title>
    <id>7</id>
    <valueType>
@@ -2319,16 +2319,16 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </title>
    <id>8</id>
    <valueType>
@@ -2345,16 +2345,16 @@
  <attributes>
   <name>ProductionPlanningExists</name>
   <title>
-   <key>tr</key>
-   <value>Üretim planlama fişi</value>
+   <key>en</key>
+   <value>Production planning</value>
   </title>
   <title>
    <key>ru</key>
    <value>Планирование производства</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Production planning</value>
+   <key>tr</key>
+   <value>Üretim planlama fişi</value>
   </title>
   <id>9</id>
   <valueType>
@@ -2371,16 +2371,16 @@
  <formCommands>
   <name>SetAsDefault</name>
   <title>
-   <key>tr</key>
-   <value>Varsayılan olarak işaretle</value>
+   <key>en</key>
+   <value>Set as default</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить как основной</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Set as default</value>
+   <key>tr</key>
+   <value>Varsayılan olarak işaretle</value>
   </title>
   <id>1</id>
   <use>

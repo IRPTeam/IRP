@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeIDInfoOwners</name>
  <synonym>
-  <key>tr</key>
-  <value>İletişim bilgilerin sahiplerin türü</value>
+  <key>en</key>
+  <value>Type contact info owners</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип владелец контактной информации</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Type contact info owners</value>
+  <key>tr</key>
+  <value>İletişim bilgilerin sahiplerin türü</value>
  </synonym>
  <type>
   <types>CatalogRef.Companies</types>

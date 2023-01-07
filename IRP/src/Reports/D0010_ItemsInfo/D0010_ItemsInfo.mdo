@@ -6,32 +6,32 @@
  </producedTypes>
  <name>D0010_ItemsInfo</name>
  <synonym>
-  <key>tr</key>
-  <value>D0010 Malzeme bilgisi</value>
+  <key>en</key>
+  <value>D0010 Items info</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>D0010 Информация по товарам</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>D0010 Items info</value>
+  <key>tr</key>
+  <value>D0010 Malzeme bilgisi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.D0010_ItemsInfo.Template.Template</mainDataCompositionSchema>
  <templates uuid="90839a07-b22d-4340-b88f-20470644660e">
   <name>Template</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon</value>
+   <key>en</key>
+   <value>Template</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Шаблон</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Template</value>
+   <key>tr</key>
+   <value>Şablon</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

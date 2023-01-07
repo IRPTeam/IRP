@@ -349,16 +349,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Kullanıcılar</value>
+    <key>en</key>
+    <value>Users</value>
    </title>
    <title>
     <key>ru</key>
     <value>Пользователи</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Users</value>
+    <key>tr</key>
+    <value>Kullanıcılar</value>
    </title>
    <extendedTooltip>
     <name>GroupUsersExtendedTooltip</name>
@@ -471,16 +471,16 @@
  <attributes>
   <name>UsersList</name>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı listesi</value>
+   <key>en</key>
+   <value>Users list</value>
   </title>
   <title>
    <key>ru</key>
    <value>Перечень пользователей</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Users list</value>
+   <key>tr</key>
+   <value>Kullanıcı listesi</value>
   </title>
   <id>3</id>
   <valueType>
@@ -495,16 +495,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использовать</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <id>6</id>
    <valueType>
@@ -520,16 +520,16 @@
   <columns>
    <name>User</name>
    <title>
-    <key>tr</key>
-    <value>Kullanıcı</value>
+    <key>en</key>
+    <value>User</value>
    </title>
    <title>
     <key>ru</key>
     <value>Пользователь</value>
    </title>
    <title>
-    <key>en</key>
-    <value>User</value>
+    <key>tr</key>
+    <value>Kullanıcı</value>
    </title>
    <id>7</id>
    <valueType>
@@ -546,16 +546,16 @@
  <formCommands>
   <name>SaveShare</name>
   <title>
-   <key>tr</key>
-   <value>Kaydet (paylaş)</value>
+   <key>en</key>
+   <value>Save (share)</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сохранить (поделиться)</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Save (share)</value>
+   <key>tr</key>
+   <value>Kaydet (paylaş)</value>
   </title>
   <id>1</id>
   <use>
@@ -571,16 +571,16 @@
  <formCommands>
   <name>CheckAllUsers</name>
   <title>
-   <key>tr</key>
-   <value>Tüm kullanıcıları kontrol edin</value>
+   <key>en</key>
+   <value>Check all users</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать всех пользователей</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Check all users</value>
+   <key>tr</key>
+   <value>Tüm kullanıcıları kontrol edin</value>
   </title>
   <id>2</id>
   <use>
@@ -599,16 +599,16 @@
  <formCommands>
   <name>UncheckAllUsers</name>
   <title>
-   <key>tr</key>
-   <value>Tüm kullanıcıların işaretini kaldırın</value>
+   <key>en</key>
+   <value>Uncheck all users</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отменить для всех выбранных</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Uncheck all users</value>
+   <key>tr</key>
+   <value>Tüm kullanıcıların işaretini kaldırın</value>
   </title>
   <id>3</id>
   <use>

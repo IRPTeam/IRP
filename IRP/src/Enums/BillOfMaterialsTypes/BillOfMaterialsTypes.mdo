@@ -7,47 +7,47 @@
  </producedTypes>
  <name>BillOfMaterialsTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Reçete tipleri</value>
+  <key>en</key>
+  <value>Bill of materials types</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Типы спецификаций</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Bill of materials types</value>
+  <key>tr</key>
+  <value>Reçete tipleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="523e5db1-59f8-4de1-87ef-d8172d91aa7e">
   <name>Product</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme</value>
+   <key>en</key>
+   <value>Product</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Товар</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Product</value>
+   <key>tr</key>
+   <value>Malzeme</value>
   </synonym>
  </enumValues>
  <enumValues uuid="0431f3bc-2f13-4fc0-a007-32cff608e7e2">
   <name>Work</name>
   <synonym>
-   <key>tr</key>
-   <value>Çalışma</value>
+   <key>en</key>
+   <value>Work</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Работа</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Work</value>
+   <key>tr</key>
+   <value>Çalışma</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

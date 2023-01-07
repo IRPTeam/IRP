@@ -408,16 +408,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup görünüm</value>
+    <key>en</key>
+    <value>Group presentation</value>
    </title>
    <title>
     <key>ru</key>
     <value>Представление группы</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Group presentation</value>
+    <key>tr</key>
+    <value>Grup görünüm</value>
    </title>
    <extendedTooltip>
     <name>GroupPresentationExtendedTooltip</name>
@@ -767,16 +767,16 @@
  <attributes>
   <name>OperationsTree</name>
   <title>
-   <key>tr</key>
-   <value>Hareketler ağacı</value>
+   <key>en</key>
+   <value>Operations tree</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дерево операций</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Operations tree</value>
+   <key>tr</key>
+   <value>Hareketler ağacı</value>
   </title>
   <id>2</id>
   <valueType>
@@ -791,16 +791,16 @@
   <columns>
    <name>Document</name>
    <title>
-    <key>tr</key>
-    <value>Evrak</value>
+    <key>en</key>
+    <value>Document</value>
    </title>
    <title>
     <key>ru</key>
     <value>Документ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Document</value>
+    <key>tr</key>
+    <value>Evrak</value>
    </title>
    <id>3</id>
    <valueType>
@@ -816,16 +816,16 @@
   <columns>
    <name>AccountingOperation</name>
    <title>
-    <key>tr</key>
-    <value>Muhasebe işlemi</value>
+    <key>en</key>
+    <value>Accounting operation</value>
    </title>
    <title>
     <key>ru</key>
     <value>Бухгалтерская операция</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Accounting operation</value>
+    <key>tr</key>
+    <value>Muhasebe işlemi</value>
    </title>
    <id>4</id>
    <valueType>
@@ -841,16 +841,16 @@
   <columns>
    <name>Period</name>
    <title>
-    <key>tr</key>
-    <value>Dönem</value>
+    <key>en</key>
+    <value>Period</value>
    </title>
    <title>
     <key>ru</key>
     <value>Период</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Period</value>
+    <key>tr</key>
+    <value>Dönem</value>
    </title>
    <id>5</id>
    <valueType>
@@ -869,16 +869,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использовать</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <id>6</id>
    <valueType>
@@ -894,16 +894,16 @@
   <columns>
    <name>Level</name>
    <title>
-    <key>tr</key>
-    <value>Seviye</value>
+    <key>en</key>
+    <value>Level</value>
    </title>
    <title>
     <key>ru</key>
     <value>Уровень</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Level</value>
+    <key>tr</key>
+    <value>Seviye</value>
    </title>
    <id>7</id>
    <valueType>
@@ -922,16 +922,16 @@
   <columns>
    <name>Picture</name>
    <title>
-    <key>tr</key>
-    <value>Resim</value>
+    <key>en</key>
+    <value>Picture</value>
    </title>
    <title>
     <key>ru</key>
     <value>Картинка</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Picture</value>
+    <key>tr</key>
+    <value>Resim</value>
    </title>
    <id>8</id>
    <valueType>
@@ -950,16 +950,16 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
+    <key>en</key>
+    <value>Presentation</value>
    </title>
    <title>
     <key>ru</key>
     <value>Специальные предложения</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Presentation</value>
+    <key>tr</key>
+    <value>Görünüm</value>
    </title>
    <id>9</id>
    <valueType>

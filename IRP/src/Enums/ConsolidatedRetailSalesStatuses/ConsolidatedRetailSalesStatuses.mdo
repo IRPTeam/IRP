@@ -7,77 +7,77 @@
  </producedTypes>
  <name>ConsolidatedRetailSalesStatuses</name>
  <synonym>
-  <key>tr</key>
-  <value>Konsolide perakende satış fişler statüleri</value>
+  <key>en</key>
+  <value>Consolidated retail sales statuses</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Статусы отчетов о розничных продажах</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Consolidated retail sales statuses</value>
+  <key>tr</key>
+  <value>Konsolide perakende satış fişler statüleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="e2d86647-e946-458d-964e-24434df40f86">
   <name>Open</name>
   <synonym>
-   <key>tr</key>
-   <value>Açık</value>
+   <key>en</key>
+   <value>Open</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Открыт</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Open</value>
+   <key>tr</key>
+   <value>Açık</value>
   </synonym>
  </enumValues>
  <enumValues uuid="0414a574-76a2-428f-9d11-c753807731dc">
   <name>Close</name>
   <synonym>
-   <key>tr</key>
-   <value>Kapalı</value>
+   <key>en</key>
+   <value>Close</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Закрыть</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Close</value>
+   <key>tr</key>
+   <value>Kapalı</value>
   </synonym>
  </enumValues>
  <enumValues uuid="f43ece8b-9ab5-449d-b2d9-443db1e4f39e">
   <name>Cancel</name>
   <synonym>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Отмена</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </synonym>
  </enumValues>
  <enumValues uuid="72c916d2-ff46-4eb1-972e-d84794fe0588">
   <name>New</name>
   <synonym>
-   <key>tr</key>
-   <value>Yeni</value>
+   <key>en</key>
+   <value>New</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Новый</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>New</value>
+   <key>tr</key>
+   <value>Yeni</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

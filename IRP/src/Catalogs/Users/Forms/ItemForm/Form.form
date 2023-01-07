@@ -61,16 +61,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup listede göster</value>
+      <key>en</key>
+      <value>Group show in list</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа показать в списке</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Group show in list</value>
+      <key>tr</key>
+      <value>Grup listede göster</value>
      </title>
      <extendedTooltip>
       <name>GroupShowInListExtendedTooltip</name>
@@ -153,16 +153,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup bir sonraki girişte şifreyi sıfırla</value>
+      <key>en</key>
+      <value>Group change password on next login</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа Поменять пароль при следующем входе</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Group change password on next login</value>
+      <key>tr</key>
+      <value>Grup bir sonraki girişte şifreyi sıfırla</value>
      </title>
      <extendedTooltip>
       <name>GroupChangePasswordOnNextLoginExtendedTooltip</name>
@@ -245,16 +245,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Devre dışı</value>
+      <key>en</key>
+      <value>Disable</value>
      </title>
      <title>
       <key>ru</key>
       <value>Не активен</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Disable</value>
+      <key>tr</key>
+      <value>Devre dışı</value>
      </title>
      <extendedTooltip>
       <name>GroupDisableExtendedTooltip</name>
@@ -289,16 +289,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Kullanıcı ayarlar grubu</value>
+     <key>en</key>
+     <value>Group of user options</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа пользовательских настроек</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Group of user options</value>
+     <key>tr</key>
+     <value>Kullanıcı ayarlar grubu</value>
     </title>
     <extendedTooltip>
      <name>GroupUserOptionsExtendedTooltip</name>
@@ -377,7 +377,7 @@
     <name>Description</name>
     <id>1</id>
     <title>
-     <key>tr</key>
+     <key>en</key>
      <value>Login</value>
     </title>
     <title>
@@ -385,7 +385,7 @@
      <value>Логин</value>
     </title>
     <title>
-     <key>en</key>
+     <key>tr</key>
      <value>Login</value>
     </title>
     <visible>true</visible>
@@ -563,16 +563,16 @@
      <typeDomainEnabled>true</typeDomainEnabled>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Otomatik</value>
+       <key>en</key>
+       <value>Auto</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Авто</value>
       </presentation>
       <presentation>
-       <key>en</key>
-       <value>Auto</value>
+       <key>tr</key>
+       <value>Otomatik</value>
       </presentation>
       <value xsi:type="core:StringValue">
        <value>Auto</value>
@@ -580,16 +580,16 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>tr</key>
-       <value>Küçük yazılar</value>
+       <key>en</key>
+       <value>Compact</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Компактный</value>
       </presentation>
       <presentation>
-       <key>en</key>
-       <value>Compact</value>
+       <key>tr</key>
+       <value>Küçük yazılar</value>
       </presentation>
       <value xsi:type="core:StringValue">
        <value>Compact</value>
@@ -597,7 +597,7 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>tr</key>
+       <key>en</key>
        <value>Normal</value>
       </presentation>
       <presentation>
@@ -605,7 +605,7 @@
        <value>Нормальный</value>
       </presentation>
       <presentation>
-       <key>en</key>
+       <key>tr</key>
        <value>Normal</value>
       </presentation>
       <value xsi:type="core:StringValue">
@@ -618,16 +618,16 @@
     <name>LocalizationCode</name>
     <id>10</id>
     <title>
-     <key>tr</key>
-     <value>Veri görüntüleme dili</value>
+     <key>en</key>
+     <value>Data localization</value>
     </title>
     <title>
      <key>ru</key>
      <value>Язык представления данных</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Data localization</value>
+     <key>tr</key>
+     <value>Veri görüntüleme dili</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -681,16 +681,16 @@
     <name>InterfaceLocalizationCode</name>
     <id>27</id>
     <title>
-     <key>tr</key>
-     <value>Arayüz görüntüleme dili</value>
+     <key>en</key>
+     <value>Interface localization</value>
     </title>
     <title>
      <key>ru</key>
      <value>Язык интерфейса</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Interface localization</value>
+     <key>tr</key>
+     <value>Arayüz görüntüleme dili</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -849,16 +849,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Varsayılan ayarlar</value>
+     <key>en</key>
+     <value>Default settings</value>
     </title>
     <title>
      <key>ru</key>
      <value>Настройки по умолчанию</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Default settings</value>
+     <key>tr</key>
+     <value>Varsayılan ayarlar</value>
     </title>
     <extendedTooltip>
      <name>GroupDefaultSettingsExtendedTooltip</name>
@@ -892,16 +892,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ayarlar</value>
+    <key>en</key>
+    <value>Settings</value>
    </title>
    <title>
     <key>ru</key>
     <value>Настройки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Settings</value>
+    <key>tr</key>
+    <value>Ayarlar</value>
    </title>
    <extendedTooltip>
     <name>GroupSettingsExtendedTooltip</name>
@@ -1215,16 +1215,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Roller</value>
+    <key>en</key>
+    <value>Roles</value>
    </title>
    <title>
     <key>ru</key>
     <value>Роли доступа</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Roles</value>
+    <key>tr</key>
+    <value>Roller</value>
    </title>
    <extendedTooltip>
     <name>GroupRolesExtendedTooltip</name>
@@ -1253,16 +1253,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Group genel</value>
+   <key>en</key>
+   <value>Group main</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа основная</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group main</value>
+   <key>tr</key>
+   <value>Group genel</value>
   </title>
   <extendedTooltip>
    <name>GroupMainExtendedTooltip</name>
@@ -1391,16 +1391,16 @@
  <attributes>
   <name>Password</name>
   <title>
-   <key>tr</key>
-   <value>Parola</value>
+   <key>en</key>
+   <value>Password</value>
   </title>
   <title>
    <key>ru</key>
    <value>Пароль</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Password</value>
+   <key>tr</key>
+   <value>Parola</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1417,16 +1417,16 @@
  <attributes>
   <name>RoleList</name>
   <title>
-   <key>tr</key>
-   <value>Rol listesi</value>
+   <key>en</key>
+   <value>Role list</value>
   </title>
   <title>
    <key>ru</key>
    <value>Список ролей</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Role list</value>
+   <key>tr</key>
+   <value>Rol listesi</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1445,16 +1445,16 @@
  <formCommands>
   <name>SetPassword</name>
   <title>
-   <key>tr</key>
-   <value>Parola tanımla</value>
+   <key>en</key>
+   <value>Set password</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить пароль</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Set password</value>
+   <key>tr</key>
+   <value>Parola tanımla</value>
   </title>
   <id>1</id>
   <use>
@@ -1474,16 +1474,16 @@
  <formCommands>
   <name>Settings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarlar</value>
+   <key>en</key>
+   <value>Settings</value>
   </title>
   <title>
    <key>ru</key>
    <value>Настройки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Settings</value>
+   <key>tr</key>
+   <value>Ayarlar</value>
   </title>
   <id>2</id>
   <use>

@@ -11,16 +11,16 @@
  </producedTypes>
  <name>Basic</name>
  <synonym>
-  <key>tr</key>
-  <value>Hesap planı (basic)</value>
+  <key>en</key>
+  <value>Account charts (Basic)</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Планы счетов (Основной)</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Account charts (Basic)</value>
+  <key>tr</key>
+  <value>Hesap planı (basic)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>ChartOfAccounts.Basic.StandardAttribute.Code</inputByString>
@@ -115,16 +115,16 @@
  <createOnInput>DontUse</createOnInput>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Hesap planı (basic)</value>
+  <key>en</key>
+  <value>Account chart (Basic)</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>План счетов (Основной)</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>Account chart (Basic)</value>
+  <key>tr</key>
+  <value>Hesap planı (basic)</value>
  </objectPresentation>
  <extDimensionTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</extDimensionTypes>
  <maxExtDimensionCount>3</maxExtDimensionCount>
@@ -141,16 +141,16 @@
  <attributes uuid="b37dad27-9ea5-4c9d-8d6d-bb9d13f202d7">
   <name>Variant</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Variant</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Variant</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypeVariants</types>
@@ -166,16 +166,16 @@
  <accountingFlags uuid="5920e61e-e449-47c2-be3c-28c212cec148">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -188,16 +188,16 @@
  <accountingFlags uuid="14c93e6d-5bd9-4d82-a64e-5bc911816e37">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
+   <key>en</key>
+   <value>Currency</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюты</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Currency</value>
+   <key>tr</key>
+   <value>Döviz</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -210,16 +210,16 @@
  <extDimensionAccountingFlags uuid="40aefe23-4b20-4d5a-b3b8-1ebddaba5cd2">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -232,16 +232,16 @@
  <extDimensionAccountingFlags uuid="d9534319-0d59-4c10-877b-222bf53d7a4f">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
+   <key>en</key>
+   <value>Currency</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюты</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Currency</value>
+   <key>tr</key>
+   <value>Döviz</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -254,16 +254,16 @@
  <extDimensionAccountingFlags uuid="a618412c-8483-4c61-8a45-6972e784ae41">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма оплаты</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -276,16 +276,16 @@
  <forms uuid="660e1999-76d1-42b2-9c78-4a9c131ce45a">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -293,16 +293,16 @@
  <forms uuid="eca16ee5-76ad-4477-8113-51ffa224d6d3">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -310,16 +310,16 @@
  <forms uuid="058b9e45-620b-4cd6-aab5-385ceba80b3e">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

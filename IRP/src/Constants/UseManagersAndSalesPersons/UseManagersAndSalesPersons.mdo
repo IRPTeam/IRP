@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseManagersAndSalesPersons</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Müşteri temsilcileri ve satış elemanlar</value>
+  <key>en</key>
+  <value>Use managers and sales persons</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать менеджеров и продавцев</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use managers and sales persons</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Müşteri temsilcileri ve satış elemanlar</value>
  </synonym>
  <type>
   <types>Boolean</types>

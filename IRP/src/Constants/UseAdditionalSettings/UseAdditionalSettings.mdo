@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseAdditionalSettings</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Ek ayarlar</value>
+  <key>en</key>
+  <value>Use additional settings</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать дополнительные настройки</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use additional settings</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Ek ayarlar</value>
  </synonym>
  <type>
   <types>Boolean</types>

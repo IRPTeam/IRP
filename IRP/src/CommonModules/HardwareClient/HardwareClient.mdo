@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d0d72137-1100-4010-b5b0-83cf1f94efce">
  <name>HardwareClient</name>
  <synonym>
-  <key>tr</key>
-  <value>Donanım client</value>
+  <key>en</key>
+  <value>Hardware client</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Оборудование клиент</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Hardware client</value>
+  <key>tr</key>
+  <value>Donanım client</value>
  </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

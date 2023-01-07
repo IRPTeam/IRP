@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R6060T_CostOfGoodsSold</name>
  <synonym>
-  <key>tr</key>
-  <value>R6060 Satılan malın maliyeti</value>
+  <key>en</key>
+  <value>R6060 Cost of goods sold</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R6060 Себестоимость реализованный товаров</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>R6060 Cost of goods sold</value>
+  <key>tr</key>
+  <value>R6060 Satılan malın maliyeti</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +28,16 @@
  <resources uuid="14ed000e-e1af-46c7-bdc0-a376975ec56a">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -49,16 +49,16 @@
  <resources uuid="3aa260eb-3056-464e-be3c-a18188fd80ca">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -70,16 +70,16 @@
  <resources uuid="fd96dbbd-cfbe-4af0-a19f-255e1494e023">
   <name>AmountCost</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek maliyet tutarı</value>
+   <key>en</key>
+   <value>Amount cost</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма доп. расходов</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Amount cost</value>
+   <key>tr</key>
+   <value>Ek maliyet tutarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -91,16 +91,16 @@
  <resources uuid="3a1a5009-aac8-45c5-bf0b-c561d71974ad">
   <name>AmountTax</name>
   <synonym>
-   <key>tr</key>
-   <value>Vergi tutarı</value>
+   <key>en</key>
+   <value>Amount tax</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма налогов</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Amount tax</value>
+   <key>tr</key>
+   <value>Vergi tutarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -112,16 +112,16 @@
  <resources uuid="f9102d56-0140-4400-b342-cc48d2a30367">
   <name>AmountCostRatio</name>
   <synonym>
-   <key>tr</key>
-   <value>Maliyet tutar katsayısı</value>
+   <key>en</key>
+   <value>Amount cost ratio</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Коеф. добавочной стоимости</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Amount cost ratio</value>
+   <key>tr</key>
+   <value>Maliyet tutar katsayısı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -133,16 +133,16 @@
  <attributes uuid="8c8f1709-0dba-4082-93ce-434a813d07a5">
   <name>CalculationMovementCost</name>
   <synonym>
-   <key>tr</key>
-   <value>Maliyet hesaplama fişi</value>
+   <key>en</key>
+   <value>Calculation movement cost</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Расчет себестоимости товаров</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Calculation movement cost</value>
+   <key>tr</key>
+   <value>Maliyet hesaplama fişi</value>
   </synonym>
   <type>
    <types>DocumentRef.CalculationMovementCosts</types>
@@ -154,16 +154,16 @@
  <dimensions uuid="5c48e7a3-82fb-4588-9270-b1b099fc48ab">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -176,16 +176,16 @@
  <dimensions uuid="c117283c-59d6-4360-acc3-483cb10613a2">
   <name>SalesInvoice</name>
   <synonym>
-   <key>tr</key>
-   <value>Satış faturası</value>
+   <key>en</key>
+   <value>Sales invoice</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Реализация товаров и услуг</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Sales invoice</value>
+   <key>tr</key>
+   <value>Satış faturası</value>
   </synonym>
   <type>
    <types>DocumentRef.RetailReturnReceipt</types>
@@ -203,16 +203,16 @@
  <dimensions uuid="df76f4b8-573e-4d0f-9ea5-ba71141b07f3">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -225,16 +225,16 @@
  <dimensions uuid="3dbeef2f-0811-484a-8eba-8c6431469f40">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz hareket tipi</value>
+   <key>en</key>
+   <value>Currency movement type</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид мультивалютной аналитики</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Currency movement type</value>
+   <key>tr</key>
+   <value>Çoklu döviz hareket tipi</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -247,16 +247,16 @@
  <dimensions uuid="56b9c017-f8cf-4c59-a0ac-358d10b2931c">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
+   <key>en</key>
+   <value>Currency</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюта</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Currency</value>
+   <key>tr</key>
+   <value>Döviz</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>

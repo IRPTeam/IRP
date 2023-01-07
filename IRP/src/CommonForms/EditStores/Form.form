@@ -226,16 +226,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Üretim ağacı varyant grubu</value>
+    <key>en</key>
+    <value>Production tree group item key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Производство группа дерева характеристик</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Production tree group item key</value>
+    <key>tr</key>
+    <value>Üretim ağacı varyant grubu</value>
    </title>
    <extendedTooltip>
     <name>ProductionTreeGroupItemKeyExtendedTooltip</name>
@@ -1284,16 +1284,16 @@
  <attributes>
   <name>ProductionTree</name>
   <title>
-   <key>tr</key>
-   <value>Üretim ağacı</value>
+   <key>en</key>
+   <value>Production tree</value>
   </title>
   <title>
    <key>ru</key>
    <value>Производственное дерево</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Production tree</value>
+   <key>tr</key>
+   <value>Üretim ağacı</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1308,16 +1308,16 @@
   <columns>
    <name>ItemPicture</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme resimi</value>
+    <key>en</key>
+    <value>Item picture</value>
    </title>
    <title>
     <key>ru</key>
     <value>Картинка номенклатуры</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item picture</value>
+    <key>tr</key>
+    <value>Malzeme resimi</value>
    </title>
    <id>2</id>
    <valueType>
@@ -1336,16 +1336,16 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
+    <key>en</key>
+    <value>Item</value>
    </title>
    <title>
     <key>ru</key>
     <value>Номенклатура</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item</value>
+    <key>tr</key>
+    <value>Malzeme</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1361,16 +1361,16 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Характеристика</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1386,16 +1386,16 @@
   <columns>
    <name>Unit</name>
    <title>
-    <key>tr</key>
-    <value>Birim</value>
+    <key>en</key>
+    <value>Unit</value>
    </title>
    <title>
     <key>ru</key>
     <value>Единица измерения</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Unit</value>
+    <key>tr</key>
+    <value>Birim</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1411,16 +1411,16 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1440,16 +1440,16 @@
   <columns>
    <name>MaterialStore</name>
    <title>
-    <key>tr</key>
-    <value>Hammadde deposu</value>
+    <key>en</key>
+    <value>Material store</value>
    </title>
    <title>
     <key>ru</key>
     <value>Склад сырья</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Material store</value>
+    <key>tr</key>
+    <value>Hammadde deposu</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1465,16 +1465,16 @@
   <columns>
    <name>ReleaseStore</name>
    <title>
-    <key>tr</key>
-    <value>Hazır ürün deposu</value>
+    <key>en</key>
+    <value>Release store</value>
    </title>
    <title>
     <key>ru</key>
     <value>Склад готовой продукции</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Release store</value>
+    <key>tr</key>
+    <value>Hazır ürün deposu</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1490,16 +1490,16 @@
   <columns>
    <name>InputID</name>
    <title>
-    <key>tr</key>
-    <value>Giriş ID</value>
+    <key>en</key>
+    <value>Input ID</value>
    </title>
    <title>
     <key>ru</key>
     <value>ID ввода</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Input ID</value>
+    <key>tr</key>
+    <value>Giriş ID</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1516,16 +1516,16 @@
   <columns>
    <name>OutputID</name>
    <title>
-    <key>tr</key>
-    <value>Çıkış ID</value>
+    <key>en</key>
+    <value>Output ID</value>
    </title>
    <title>
     <key>ru</key>
     <value>ID вывода</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Output ID</value>
+    <key>tr</key>
+    <value>Çıkış ID</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1542,7 +1542,7 @@
   <columns>
    <name>UniqueID</name>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Unique ID</value>
    </title>
    <title>
@@ -1550,7 +1550,7 @@
     <value>Уникальный ID</value>
    </title>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Unique ID</value>
    </title>
    <id>11</id>
@@ -1568,16 +1568,16 @@
   <columns>
    <name>IsProduct</name>
    <title>
-    <key>tr</key>
-    <value>Canlı ortam</value>
+    <key>en</key>
+    <value>Is product</value>
    </title>
    <title>
     <key>ru</key>
     <value>Это товар</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Is product</value>
+    <key>tr</key>
+    <value>Canlı ortam</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1593,16 +1593,16 @@
   <columns>
    <name>IsSemiproduct</name>
    <title>
-    <key>tr</key>
-    <value>Bu yarı mamul</value>
+    <key>en</key>
+    <value>Is semiproduct</value>
    </title>
    <title>
     <key>ru</key>
     <value>Это полуфабрикат</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Is semiproduct</value>
+    <key>tr</key>
+    <value>Bu yarı mamul</value>
    </title>
    <id>13</id>
    <valueType>
@@ -1618,16 +1618,16 @@
   <columns>
    <name>IsMaterial</name>
    <title>
-    <key>tr</key>
-    <value>bu malzeme</value>
+    <key>en</key>
+    <value>Is material</value>
    </title>
    <title>
     <key>ru</key>
     <value>Это сырье</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Is material</value>
+    <key>tr</key>
+    <value>bu malzeme</value>
    </title>
    <id>14</id>
    <valueType>
@@ -1643,16 +1643,16 @@
   <columns>
    <name>IsService</name>
    <title>
-    <key>tr</key>
-    <value>Bu hizmet</value>
+    <key>en</key>
+    <value>Is service</value>
    </title>
    <title>
     <key>ru</key>
     <value>Это услуга</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Is service</value>
+    <key>tr</key>
+    <value>Bu hizmet</value>
    </title>
    <id>15</id>
    <valueType>
@@ -1668,16 +1668,16 @@
   <columns>
    <name>WriteoffStore</name>
    <title>
-    <key>tr</key>
-    <value>Çıkış depo</value>
+    <key>en</key>
+    <value>Writeoff store</value>
    </title>
    <title>
     <key>ru</key>
     <value>Склад расхода</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Writeoff store</value>
+    <key>tr</key>
+    <value>Çıkış depo</value>
    </title>
    <id>17</id>
    <valueType>
@@ -1693,16 +1693,16 @@
   <columns>
    <name>SurplusStore</name>
    <title>
-    <key>tr</key>
-    <value>Giriş depo</value>
+    <key>en</key>
+    <value>Surplus store</value>
    </title>
    <title>
     <key>ru</key>
     <value>Склад прихода</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Surplus store</value>
+    <key>tr</key>
+    <value>Giriş depo</value>
    </title>
    <id>18</id>
    <valueType>
@@ -1718,16 +1718,16 @@
   <columns>
    <name>WriteoffStoreEnable</name>
    <title>
-    <key>tr</key>
-    <value>Çıkış depo açık</value>
+    <key>en</key>
+    <value>Writeoff store enable</value>
    </title>
    <title>
     <key>ru</key>
     <value>Включить склад расхода</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Writeoff store enable</value>
+    <key>tr</key>
+    <value>Çıkış depo açık</value>
    </title>
    <id>19</id>
    <valueType>
@@ -1743,16 +1743,16 @@
   <columns>
    <name>SurplusStoreEnable</name>
    <title>
-    <key>tr</key>
-    <value>Giriş depo açık</value>
+    <key>en</key>
+    <value>Surplus store enable</value>
    </title>
    <title>
     <key>ru</key>
     <value>Включить склад прихода</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Surplus store enable</value>
+    <key>tr</key>
+    <value>Giriş depo açık</value>
    </title>
    <id>20</id>
    <valueType>
@@ -1769,16 +1769,16 @@
  <attributes>
   <name>RowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
+   <key>en</key>
+   <value>Row key</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ключ строки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Row key</value>
+   <key>tr</key>
+   <value>Satır anahtarı</value>
   </title>
   <id>16</id>
   <valueType>
@@ -1795,16 +1795,16 @@
  <attributes>
   <name>Company</name>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </title>
   <title>
    <key>ru</key>
    <value>Организация</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </title>
   <id>21</id>
   <valueType>
@@ -1820,16 +1820,16 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>Ok</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ок</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Ok</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <id>1</id>
   <use>
@@ -1845,16 +1845,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <id>2</id>
   <use>
@@ -1870,16 +1870,16 @@
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır antahtarı göster</value>
+   <key>en</key>
+   <value>Show row key</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать row key</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Show row key</value>
+   <key>tr</key>
+   <value>Satır antahtarı göster</value>
   </title>
   <id>3</id>
   <use>

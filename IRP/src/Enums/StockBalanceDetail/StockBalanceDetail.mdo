@@ -7,47 +7,47 @@
  </producedTypes>
  <name>StockBalanceDetail</name>
  <synonym>
-  <key>tr</key>
-  <value>Stok bakiye detayları</value>
+  <key>en</key>
+  <value>Stock balance detail</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Вид учета товаров по складам</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Stock balance detail</value>
+  <key>tr</key>
+  <value>Stok bakiye detayları</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="7dabf78d-9f60-4ca2-91b0-17701ed69054">
   <name>ByItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyanta göre</value>
+   <key>en</key>
+   <value>By item key</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>По характеристикам</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>By item key</value>
+   <key>tr</key>
+   <value>Varyanta göre</value>
   </synonym>
  </enumValues>
  <enumValues uuid="5658e438-f93c-4c17-9a94-03204dae7cfc">
   <name>BySerialLotNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numarasına göre</value>
+   <key>en</key>
+   <value>By serial lot number</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>По сериям номенклатуры</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>By serial lot number</value>
+   <key>tr</key>
+   <value>Seri lot numarasına göre</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

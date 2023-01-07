@@ -11,45 +11,45 @@
  </producedTypes>
  <name>RetailWorkers</name>
  <synonym>
-  <key>tr</key>
-  <value>Perakende çalışanları</value>
+  <key>en</key>
+  <value>Retail workers</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Розничные сотрудники</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Retail workers</value>
+  <key>tr</key>
+  <value>Perakende çalışanları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Perakende çalışanları</value>
+  <key>en</key>
+  <value>Retail workers</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Розничные сотрудники</value>
  </recordPresentation>
  <recordPresentation>
-  <key>en</key>
-  <value>Retail workers</value>
+  <key>tr</key>
+  <value>Perakende çalışanları</value>
  </recordPresentation>
  <dimensions uuid="321bdc86-9ea1-43df-a7c6-dee15456fa0e">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
+   <key>en</key>
+   <value>Store</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Store</value>
+   <key>tr</key>
+   <value>Depo</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -67,16 +67,16 @@
  <dimensions uuid="c693dde5-ac16-4825-979f-eae5f739a44b">
   <name>Worker</name>
   <synonym>
-   <key>tr</key>
-   <value>Çalışan</value>
+   <key>en</key>
+   <value>Worker</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сотрудник</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Worker</value>
+   <key>tr</key>
+   <value>Çalışan</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -99,16 +99,16 @@
  <commands uuid="c85eeec0-da25-4dbb-92bf-d8d9a496df82">
   <name>RetailWorkers</name>
   <synonym>
-   <key>tr</key>
-   <value>Perakende çalışanları</value>
+   <key>en</key>
+   <value>Retail workers</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Розничные сотрудники</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Retail workers</value>
+   <key>tr</key>
+   <value>Perakende çalışanları</value>
   </synonym>
   <group>FormCommandBarImportant</group>
   <commandParameterType>

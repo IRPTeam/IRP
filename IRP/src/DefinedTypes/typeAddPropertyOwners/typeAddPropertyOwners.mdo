@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeAddPropertyOwners</name>
  <synonym>
-  <key>tr</key>
-  <value>Tip ek özellik sahipleri</value>
+  <key>en</key>
+  <value>Type add property owners</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип владелец дополнительных свойств</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Type add property owners</value>
+  <key>tr</key>
+  <value>Tip ek özellik sahipleri</value>
  </synonym>
  <type>
   <types>CatalogRef.LockDataModificationReasons</types>

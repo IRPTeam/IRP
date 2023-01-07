@@ -2,16 +2,16 @@
 <mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="ed706715-f2a9-4190-9212-84b4711bc6bb">
  <name>SalesAR</name>
  <synonym>
-  <key>tr</key>
-  <value>Satışlar</value>
+  <key>en</key>
+  <value>Sales - A/R</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Продажи</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Sales - A/R</value>
+  <key>tr</key>
+  <value>Satışlar</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

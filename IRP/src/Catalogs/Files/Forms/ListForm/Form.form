@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -837,16 +837,16 @@
  <formCommands>
   <name>DeleteUnusedFiles</name>
   <title>
-   <key>tr</key>
-   <value>Kullanılmaya dosyaları sil</value>
+   <key>en</key>
+   <value>Delete unused files</value>
   </title>
   <title>
    <key>ru</key>
    <value>Удалить неиспользуемые файлы</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Delete unused files</value>
+   <key>tr</key>
+   <value>Kullanılmaya dosyaları sil</value>
   </title>
   <id>1</id>
   <use>

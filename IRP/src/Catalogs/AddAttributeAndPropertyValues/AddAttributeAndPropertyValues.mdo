@@ -9,16 +9,16 @@
  </producedTypes>
  <name>AddAttributeAndPropertyValues</name>
  <synonym>
-  <key>tr</key>
-  <value>Ek özellik değerleri</value>
+  <key>en</key>
+  <value>Additional attribute values</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Значения дополнительных реквизитов и сведений</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Additional attribute values</value>
+  <key>tr</key>
+  <value>Ek özellik değerleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -42,16 +42,16 @@
   <dataHistory>Use</dataHistory>
   <name>Ref</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellik değerleri</value>
+   <key>en</key>
+   <value>Additional attribute values</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Значения дополнительных реквизитов и сведений</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Additional attribute values</value>
+   <key>tr</key>
+   <value>Ek özellik değerleri</value>
   </synonym>
   <fillValue xsi:type="core:UndefinedValue"/>
   <minValue xsi:type="core:UndefinedValue"/>
@@ -77,16 +77,16 @@
   <dataHistory>Use</dataHistory>
   <name>Owner</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellik</value>
+   <key>en</key>
+   <value>Additional attribute</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительный реквизит</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Additional attribute</value>
+   <key>tr</key>
+   <value>Ek özellik</value>
   </synonym>
   <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
@@ -124,16 +124,16 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectPresentation>
-  <key>tr</key>
-  <value>Ek özellik değerleri</value>
+  <key>en</key>
+  <value>Additional attribute value</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Значение дополнительных реквизитов и сведений</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>Additional attribute value</value>
+  <key>tr</key>
+  <value>Ek özellik değerleri</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -152,16 +152,16 @@
  <attributes uuid="41f52a81-828d-4ecb-9a3c-961d248c0804">
   <name>AdditionalID</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek ID</value>
+   <key>en</key>
+   <value>Additional ID</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительный ID</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Additional ID</value>
+   <key>tr</key>
+   <value>Ek ID</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -189,16 +189,16 @@
  <forms uuid="2f86661f-b92e-46ec-a5ad-2414105cdc3a">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -206,16 +206,16 @@
  <forms uuid="88007e72-96e4-46f6-9c87-b63f30e2eda0">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -223,16 +223,16 @@
  <forms uuid="800edfe4-6e05-4b19-b6d7-28952fb712b3">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

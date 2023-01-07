@@ -7,16 +7,16 @@
    <name>OwnerSelect</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Sahip seç</value>
+    <key>en</key>
+    <value>Select owner</value>
    </title>
    <title>
     <key>ru</key>
     <value>Выбрать владельца</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Select owner</value>
+    <key>tr</key>
+    <value>Sahip seç</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -64,16 +64,16 @@
     <radioButtonsType>Tumbler</radioButtonsType>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Manuel</value>
+      <key>en</key>
+      <value>Manual</value>
      </presentation>
      <presentation>
       <key>ru</key>
       <value>Вручную</value>
      </presentation>
      <presentation>
-      <key>en</key>
-      <value>Manual</value>
+      <key>tr</key>
+      <value>Manuel</value>
      </presentation>
      <value xsi:type="core:StringValue">
       <value>Manual</value>
@@ -85,16 +85,16 @@
    <name>CreateBarcodeWithSerialLotNumber</name>
    <id>25</id>
    <title>
-    <key>tr</key>
-    <value>Barkod oluştur</value>
+    <key>en</key>
+    <value>Create barcode</value>
    </title>
    <title>
     <key>ru</key>
     <value>Создать штрихкод</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Create barcode</value>
+    <key>tr</key>
+    <value>Barkod oluştur</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -145,16 +145,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Üst</value>
+   <key>en</key>
+   <value>Top</value>
   </title>
   <title>
    <key>ru</key>
    <value>Верх</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Top</value>
+   <key>tr</key>
+   <value>Üst</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -342,16 +342,16 @@
    <name>EachSerialLotNumberIsUnique</name>
    <id>30</id>
    <title>
-    <key>tr</key>
-    <value>Eşsiz</value>
+    <key>en</key>
+    <value>Unique</value>
    </title>
    <title>
     <key>ru</key>
     <value>Уникальный</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Unique</value>
+    <key>tr</key>
+    <value>Eşsiz</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -528,16 +528,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup footer</value>
+   <key>en</key>
+   <value>Group bottom</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа подвал</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group bottom</value>
+   <key>tr</key>
+   <value>Grup footer</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -614,16 +614,16 @@
  <attributes>
   <name>OwnerSelect</name>
   <title>
-   <key>tr</key>
-   <value>Sahip seçme</value>
+   <key>en</key>
+   <value>Owner select</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать владельца</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Owner select</value>
+   <key>tr</key>
+   <value>Sahip seçme</value>
   </title>
   <id>2</id>
   <valueType>
@@ -640,16 +640,16 @@
  <attributes>
   <name>ItemType</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme tipi</value>
+   <key>en</key>
+   <value>Item type</value>
   </title>
   <title>
    <key>ru</key>
    <value>Вид номенклатуры</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item type</value>
+   <key>tr</key>
+   <value>Malzeme tipi</value>
   </title>
   <id>3</id>
   <valueType>
@@ -665,16 +665,16 @@
  <attributes>
   <name>Item</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme</value>
+   <key>en</key>
+   <value>Item</value>
   </title>
   <title>
    <key>ru</key>
    <value>Номенклатура</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item</value>
+   <key>tr</key>
+   <value>Malzeme</value>
   </title>
   <id>4</id>
   <valueType>
@@ -690,16 +690,16 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </title>
   <title>
    <key>ru</key>
    <value>Характеристика</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </title>
   <id>5</id>
   <valueType>
@@ -715,16 +715,16 @@
  <attributes>
   <name>Barcode</name>
   <title>
-   <key>tr</key>
-   <value>Barkod</value>
+   <key>en</key>
+   <value>Barcode</value>
   </title>
   <title>
    <key>ru</key>
    <value>Штрихкод</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Barcode</value>
+   <key>tr</key>
+   <value>Barkod</value>
   </title>
   <id>6</id>
   <valueType>
@@ -741,16 +741,16 @@
  <attributes>
   <name>CreateBarcodeWithSerialLotNumber</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot numarasını ve barkodunu oluştur</value>
+   <key>en</key>
+   <value>Create barcode with serial lot number</value>
   </title>
   <title>
    <key>ru</key>
    <value>Создавать штрихкода с серийными номерами</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Create barcode with serial lot number</value>
+   <key>tr</key>
+   <value>Seri lot numarasını ve barkodunu oluştur</value>
   </title>
   <id>7</id>
   <valueType>

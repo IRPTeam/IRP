@@ -6,32 +6,32 @@
  </producedTypes>
  <name>D1001_Purchases</name>
  <synonym>
-  <key>tr</key>
-  <value>D1001 Alımlar</value>
+  <key>en</key>
+  <value>D1001 Purchases</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>D1010 Закупки</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>D1001 Purchases</value>
+  <key>tr</key>
+  <value>D1001 Alımlar</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.D1001_Purchases.Template.Template</mainDataCompositionSchema>
  <templates uuid="ba189443-b3f1-45cd-9a43-57958a5cd477">
   <name>Template</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon</value>
+   <key>en</key>
+   <value>Template</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Шаблон</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Template</value>
+   <key>tr</key>
+   <value>Şablon</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

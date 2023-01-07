@@ -2,15 +2,15 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bb916123-47c6-4b43-8f00-b97cc93d1d0a">
  <name>FilterForUserSettings</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanıcı ayarlar filtresi</value>
+  <key>en</key>
+  <value>Filter for user settings</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Фильтр пользовательских настроек</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Filter for user settings</value>
+  <key>tr</key>
+  <value>Kullanıcı ayarlar filtresi</value>
  </synonym>
 </mdclass:Role>

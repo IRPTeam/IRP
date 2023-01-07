@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="96216ed1-af38-4cb7-9e0c-aa3923536ad6">
  <name>UseMobile</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Mobil fonksiyonu</value>
+  <key>en</key>
+  <value>Use mobile</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать мобильный функционал</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use mobile</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Mobil fonksiyonu</value>
  </synonym>
  <location>Constant.UseMobile</location>
  <privilegedGetMode>true</privilegedGetMode>

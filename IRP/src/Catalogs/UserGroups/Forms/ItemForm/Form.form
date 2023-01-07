@@ -506,16 +506,16 @@
  <attributes>
   <name>Users</name>
   <title>
-   <key>tr</key>
-   <value>Kullanıcılar</value>
+   <key>en</key>
+   <value>Users</value>
   </title>
   <title>
    <key>ru</key>
    <value>Пользователи</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Users</value>
+   <key>tr</key>
+   <value>Kullanıcılar</value>
   </title>
   <id>2</id>
   <valueType>
@@ -547,16 +547,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Kullanıcılar kimlik doğrulaması</value>
+       <key>en</key>
+       <value>Users login</value>
       </content>
       <content>
        <key>ru</key>
        <value>Идентификация пользователей</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Users login</value>
+       <key>tr</key>
+       <value>Kullanıcılar kimlik doğrulaması</value>
       </content>
      </localValue>
     </title>
@@ -567,16 +567,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Kullanıcı açıklamaları</value>
+       <key>en</key>
+       <value>Users description</value>
       </content>
       <content>
        <key>ru</key>
        <value>Наименования пользователя</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Users description</value>
+       <key>tr</key>
+       <value>Kullanıcı açıklamaları</value>
       </content>
      </localValue>
     </title>
@@ -586,16 +586,16 @@ WHERE
  <formCommands>
   <name>Settings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarlar</value>
+   <key>en</key>
+   <value>Settings</value>
   </title>
   <title>
    <key>ru</key>
    <value>Настройки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Settings</value>
+   <key>tr</key>
+   <value>Ayarlar</value>
   </title>
   <id>1</id>
   <use>

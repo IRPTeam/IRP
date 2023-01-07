@@ -2,16 +2,16 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6e73db61-546e-4cdf-ab4a-d645479cc5c1">
  <name>SchedulingOfPaymentDeadlines</name>
  <synonym>
-  <key>tr</key>
-  <value>Ödeme son tarih zamanlaması</value>
+  <key>en</key>
+  <value>Scheduling of payment deadlines</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Планирование денежных средств</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Scheduling of payment deadlines</value>
+  <key>tr</key>
+  <value>Ödeme son tarih zamanlaması</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

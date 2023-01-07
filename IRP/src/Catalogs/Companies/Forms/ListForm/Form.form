@@ -53,16 +53,16 @@
     <radioButtonsType>Tumbler</radioButtonsType>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Tümü</value>
+      <key>en</key>
+      <value>All</value>
      </presentation>
      <presentation>
       <key>ru</key>
       <value>Все</value>
      </presentation>
      <presentation>
-      <key>en</key>
-      <value>All</value>
+      <key>tr</key>
+      <value>Tümü</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>0</value>
@@ -70,16 +70,16 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Kendi şirketlerimiz</value>
+      <key>en</key>
+      <value>Own companies</value>
      </presentation>
      <presentation>
       <key>ru</key>
       <value>Собственные организации</value>
      </presentation>
      <presentation>
-      <key>en</key>
-      <value>Own companies</value>
+      <key>tr</key>
+      <value>Kendi şirketlerimiz</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>1</value>
@@ -87,16 +87,16 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Cari hesap şirketleri</value>
+      <key>en</key>
+      <value>Partner companies</value>
      </presentation>
      <presentation>
       <key>ru</key>
       <value>Контрагенты</value>
      </presentation>
      <presentation>
-      <key>en</key>
-      <value>Partner companies</value>
+      <key>tr</key>
+      <value>Cari hesap şirketleri</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>2</value>
@@ -110,16 +110,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -156,16 +156,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -260,16 +260,16 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
+    <key>en</key>
+    <value>Description</value>
    </title>
    <title>
     <key>ru</key>
     <value>Комментарий</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Description</value>
+    <key>tr</key>
+    <value>Tanım</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -621,16 +621,16 @@ FROM
  <attributes>
   <name>OurCompanyFilter</name>
   <title>
-   <key>tr</key>
-   <value>Kendi şirketimiz filter</value>
+   <key>en</key>
+   <value>Our Company filter</value>
   </title>
   <title>
    <key>ru</key>
    <value>Фильтр по нашей организации</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Our Company filter</value>
+   <key>tr</key>
+   <value>Kendi şirketimiz filter</value>
   </title>
   <id>3</id>
   <valueType>

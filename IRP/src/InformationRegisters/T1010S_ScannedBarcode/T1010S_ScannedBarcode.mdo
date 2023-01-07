@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T1010S_ScannedBarcode</name>
  <synonym>
-  <key>tr</key>
-  <value>Okutulan barkod</value>
+  <key>en</key>
+  <value>Scanned barcode</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Просканированный штрихкод</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Scanned barcode</value>
+  <key>tr</key>
+  <value>Okutulan barkod</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -28,42 +28,42 @@
  <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Okutulan barkod</value>
+  <key>en</key>
+  <value>Scanned barcode</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Просканированный штрихкод</value>
  </recordPresentation>
  <recordPresentation>
-  <key>en</key>
-  <value>Scanned barcode</value>
+  <key>tr</key>
+  <value>Okutulan barkod</value>
  </recordPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Okutulan barkodlar</value>
+  <key>en</key>
+  <value>Scanned barcodes</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Просканированные штрихкоды</value>
  </listPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Scanned barcodes</value>
+  <key>tr</key>
+  <value>Okutulan barkodlar</value>
  </listPresentation>
  <resources uuid="ad9b3ba1-2a02-4039-a2ad-4a1037bec2b5">
   <name>Barcode</name>
   <synonym>
-   <key>tr</key>
-   <value>Barkod</value>
+   <key>en</key>
+   <value>Barcode</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Штрихкод</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Barcode</value>
+   <key>tr</key>
+   <value>Barkod</value>
   </synonym>
   <type>
    <types>DefinedType.typeBarcode</types>
@@ -78,16 +78,16 @@
  <resources uuid="8f0e1373-28f6-4592-8e78-db6021cac142">
   <name>User</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı</value>
+   <key>en</key>
+   <value>User</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Пользователь</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>User</value>
+   <key>tr</key>
+   <value>Kullanıcı</value>
   </synonym>
   <type>
    <types>CatalogRef.Users</types>
@@ -101,16 +101,16 @@
  <resources uuid="5f419aee-66f8-42cf-ab1c-15841c4b9512">
   <name>Count</name>
   <synonym>
-   <key>tr</key>
-   <value>Barkod sayısı</value>
+   <key>en</key>
+   <value>Count</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество штрихкодов</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Count</value>
+   <key>tr</key>
+   <value>Barkod sayısı</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -128,16 +128,16 @@
  <dimensions uuid="559d3e1d-b52f-4ea6-9b50-b15c7eabb2bd">
   <name>Basis</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
+   <key>en</key>
+   <value>Basis</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ основание</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Basis</value>
+   <key>tr</key>
+   <value>Kaynak evrak</value>
   </synonym>
   <type>
    <types>DocumentRef</types>
@@ -153,16 +153,16 @@
  <dimensions uuid="d59a991a-d010-4645-bb11-80fc39ffa641">
   <name>InfoID</name>
   <synonym>
-   <key>tr</key>
-   <value>Eşsiz ID</value>
+   <key>en</key>
+   <value>Info ID</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Идентификатор</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Info ID</value>
+   <key>tr</key>
+   <value>Eşsiz ID</value>
   </synonym>
   <type>
    <types>UUID</types>
@@ -178,16 +178,16 @@
  <forms uuid="f1e7b88d-cab3-44dc-ade1-ef2626ea5214">
   <name>RecordForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
+   <key>en</key>
+   <value>Record form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма записи</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Record form</value>
+   <key>tr</key>
+   <value>Kayıt formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

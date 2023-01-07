@@ -169,7 +169,7 @@
      <name>OffersTotalPercent</name>
      <id>25</id>
      <title>
-      <key>tr</key>
+      <key>en</key>
       <value>%</value>
      </title>
      <title>
@@ -177,7 +177,7 @@
       <value>%</value>
      </title>
      <title>
-      <key>en</key>
+      <key>tr</key>
       <value>%</value>
      </title>
      <visible>true</visible>
@@ -491,16 +491,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup kampanya ağacı</value>
+    <key>en</key>
+    <value>Group offers tree</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дерево групп скидок</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Group offers tree</value>
+    <key>tr</key>
+    <value>Grup kampanya ağacı</value>
    </title>
    <extendedTooltip>
     <name>GroupOffersTreeExtendedTooltip</name>
@@ -529,16 +529,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
+   <key>en</key>
+   <value>Group main pages</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа главных страниц</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group main pages</value>
+   <key>tr</key>
+   <value>Grup ana sayfalar</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -589,16 +589,16 @@
  <attributes>
   <name>Offers</name>
   <title>
-   <key>tr</key>
-   <value>Iskonto</value>
+   <key>en</key>
+   <value>Offers</value>
   </title>
   <title>
    <key>ru</key>
    <value>Скидки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Offers</value>
+   <key>tr</key>
+   <value>Iskonto</value>
   </title>
   <id>1</id>
   <valueType>
@@ -613,16 +613,16 @@
   <columns>
    <name>Offer</name>
    <title>
-    <key>tr</key>
-    <value>Iskonto</value>
+    <key>en</key>
+    <value>Offer</value>
    </title>
    <title>
     <key>ru</key>
     <value>Скидка</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Offer</value>
+    <key>tr</key>
+    <value>Iskonto</value>
    </title>
    <id>2</id>
    <valueType>
@@ -639,16 +639,16 @@
   <columns>
    <name>isSelect</name>
    <title>
-    <key>tr</key>
-    <value>Seçildi</value>
+    <key>en</key>
+    <value>Is select</value>
    </title>
    <title>
     <key>ru</key>
     <value>Применяется</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Is select</value>
+    <key>tr</key>
+    <value>Seçildi</value>
    </title>
    <id>3</id>
    <valueType>
@@ -664,16 +664,16 @@
   <columns>
    <name>isFolder</name>
    <title>
-    <key>tr</key>
-    <value>Bu klasör</value>
+    <key>en</key>
+    <value>Is folder</value>
    </title>
    <title>
     <key>ru</key>
     <value>Это папка</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Is folder</value>
+    <key>tr</key>
+    <value>Bu klasör</value>
    </title>
    <id>1</id>
    <valueType>
@@ -689,16 +689,16 @@
   <columns>
    <name>Priority</name>
    <title>
-    <key>tr</key>
-    <value>Önem</value>
+    <key>en</key>
+    <value>Priority</value>
    </title>
    <title>
     <key>ru</key>
     <value>Приоритет</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Priority</value>
+    <key>tr</key>
+    <value>Önem</value>
    </title>
    <id>4</id>
    <valueType>
@@ -717,16 +717,16 @@
   <columns>
    <name>Auto</name>
    <title>
-    <key>tr</key>
-    <value>Otomatik</value>
+    <key>en</key>
+    <value>Auto</value>
    </title>
    <title>
     <key>ru</key>
     <value>Авто</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Auto</value>
+    <key>tr</key>
+    <value>Otomatik</value>
    </title>
    <id>5</id>
    <valueType>
@@ -742,16 +742,16 @@
   <columns>
    <name>TotalPercent</name>
    <title>
-    <key>tr</key>
-    <value>Toplam yüzde</value>
+    <key>en</key>
+    <value>Total percent</value>
    </title>
    <title>
     <key>ru</key>
     <value>Итоговый процент</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Total percent</value>
+    <key>tr</key>
+    <value>Toplam yüzde</value>
    </title>
    <id>6</id>
    <valueType>
@@ -767,16 +767,16 @@
   <columns>
    <name>TotalAmount</name>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
+    <key>en</key>
+    <value>Amount</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма оплаты</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Amount</value>
+    <key>tr</key>
+    <value>Tutar</value>
    </title>
    <id>7</id>
    <valueType>
@@ -792,16 +792,16 @@
   <columns>
    <name>Rule</name>
    <title>
-    <key>tr</key>
-    <value>Kural</value>
+    <key>en</key>
+    <value>Rule</value>
    </title>
    <title>
     <key>ru</key>
     <value>Правило</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Rule</value>
+    <key>tr</key>
+    <value>Kural</value>
    </title>
    <id>8</id>
    <valueType>
@@ -817,16 +817,16 @@
   <columns>
    <name>RuleStatus</name>
    <title>
-    <key>tr</key>
-    <value>Kural statüsü</value>
+    <key>en</key>
+    <value>Rule status</value>
    </title>
    <title>
     <key>ru</key>
     <value>Статус правила</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Rule status</value>
+    <key>tr</key>
+    <value>Kural statüsü</value>
    </title>
    <id>17</id>
    <valueType>
@@ -845,16 +845,16 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
+    <key>en</key>
+    <value>Presentation</value>
    </title>
    <title>
     <key>ru</key>
     <value>Специальные предложения</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Presentation</value>
+    <key>tr</key>
+    <value>Görünüm</value>
    </title>
    <id>20</id>
    <valueType>
@@ -871,16 +871,16 @@
   <columns>
    <name>isSequential</name>
    <title>
-    <key>tr</key>
-    <value>Sıralıdır</value>
+    <key>en</key>
+    <value>Is sequential</value>
    </title>
    <title>
     <key>ru</key>
     <value>Последовательно</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Is sequential</value>
+    <key>tr</key>
+    <value>Sıralıdır</value>
    </title>
    <id>9</id>
    <valueType>
@@ -897,16 +897,16 @@
  <attributes>
   <name>Percent</name>
   <title>
-   <key>tr</key>
-   <value>Yüzde</value>
+   <key>en</key>
+   <value>Percent</value>
   </title>
   <title>
    <key>ru</key>
    <value>Процент</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Percent</value>
+   <key>tr</key>
+   <value>Yüzde</value>
   </title>
   <id>12</id>
   <valueType>
@@ -926,16 +926,16 @@
  <attributes>
   <name>FormType</name>
   <title>
-   <key>tr</key>
-   <value>Form tipi</value>
+   <key>en</key>
+   <value>Form type</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип формы</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Form type</value>
+   <key>tr</key>
+   <value>Form tipi</value>
   </title>
   <id>14</id>
   <valueType>
@@ -952,16 +952,16 @@
  <attributes>
   <name>ItemListRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Malzemeler listesi satır anahtarı</value>
+   <key>en</key>
+   <value>Item list row key</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ключ строки элемента</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item list row key</value>
+   <key>tr</key>
+   <value>Malzemeler listesi satır anahtarı</value>
   </title>
   <id>16</id>
   <valueType>
@@ -977,16 +977,16 @@
  <attributes>
   <name>SelectedOffersRow</name>
   <title>
-   <key>tr</key>
-   <value>Seçilen kapmanyalar satırı</value>
+   <key>en</key>
+   <value>Selected offers row</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбранные строки скидок</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Selected offers row</value>
+   <key>tr</key>
+   <value>Seçilen kapmanyalar satırı</value>
   </title>
   <id>19</id>
   <valueType>
@@ -1005,16 +1005,16 @@
  <attributes>
   <name>FormParametersInfo</name>
   <title>
-   <key>tr</key>
-   <value>Form ayarları bilgisi</value>
+   <key>en</key>
+   <value>Form parameters info</value>
   </title>
   <title>
    <key>ru</key>
    <value>Информация о параметрах формы</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Form parameters info</value>
+   <key>tr</key>
+   <value>Form ayarları bilgisi</value>
   </title>
   <id>21</id>
   <valueType/>
@@ -1028,29 +1028,29 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>OK</value>
   </title>
   <title>
    <key>ru</key>
    <value>ОК</value>
   </title>
   <title>
-   <key>en</key>
-   <value>OK</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>OK</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>ОК</value>
   </toolTip>
   <toolTip>
-   <key>en</key>
-   <value>OK</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -1065,16 +1065,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <id>4</id>
   <use>

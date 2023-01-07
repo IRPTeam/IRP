@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R1002T_PurchaseReturns</name>
  <synonym>
-  <key>tr</key>
-  <value>R1002 Alım iadeleri</value>
+  <key>en</key>
+  <value>R1002 Purchase returns</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R1002 Возвраты поступлений</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>R1002 Purchase returns</value>
+  <key>tr</key>
+  <value>R1002 Alım iadeleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +28,16 @@
  <resources uuid="04d3ed32-b9f0-48a0-a85a-b847ac7151c3">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -49,16 +49,16 @@
  <resources uuid="2ad5c63f-7f9a-4e62-a6df-3e1d6d16fb62">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -70,16 +70,16 @@
  <resources uuid="a221cfe4-c080-4e52-8f7d-12dffa74ccd9">
   <name>NetAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Net tutar</value>
+   <key>en</key>
+   <value>Net amount</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма без налогов</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Net amount</value>
+   <key>tr</key>
+   <value>Net tutar</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -91,16 +91,16 @@
  <attributes uuid="b0ec6434-2a6a-4b97-9e6f-27f8c42b4f2f">
   <name>DeferredCalculation</name>
   <synonym>
-   <key>tr</key>
-   <value>Ertelenen hesaplama</value>
+   <key>en</key>
+   <value>Deferred calculation</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Отложенный расчет</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Deferred calculation</value>
+   <key>tr</key>
+   <value>Ertelenen hesaplama</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -112,16 +112,16 @@
  <dimensions uuid="4608cc2d-700d-483c-82ee-09dc67ad290a">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -134,16 +134,16 @@
  <dimensions uuid="aec26f47-c3c8-4c6d-a458-caffd6c068e6">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -156,16 +156,16 @@
  <dimensions uuid="ecf9658f-d140-4129-8bf3-b1a8a08f975e">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz kırılım tipi</value>
+   <key>en</key>
+   <value>Multi currency movement type</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид мультивалютной аналитики</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Multi currency movement type</value>
+   <key>tr</key>
+   <value>Çoklu döviz kırılım tipi</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -178,16 +178,16 @@
  <dimensions uuid="df4795e5-c83a-4406-bcc9-8f27b90409a1">
   <name>Currency</name>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
+   <key>en</key>
+   <value>Currency</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюта</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Currency</value>
+   <key>tr</key>
+   <value>Döviz</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -200,16 +200,16 @@
  <dimensions uuid="4669fab0-3ed8-4965-983f-1a91dab91c82">
   <name>Invoice</name>
   <synonym>
-   <key>tr</key>
-   <value>Fatura</value>
+   <key>en</key>
+   <value>Invoice</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Инвойс</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Invoice</value>
+   <key>tr</key>
+   <value>Fatura</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>
@@ -223,16 +223,16 @@
  <dimensions uuid="09337dac-b9c5-4232-9cdd-1ce7632625a2">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -245,16 +245,16 @@
  <dimensions uuid="11248df1-4f01-4901-be98-0dccc9904195">
   <name>RowKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
+   <key>en</key>
+   <value>Row key</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ключ строки</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Row key</value>
+   <key>tr</key>
+   <value>Satır anahtarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>
@@ -267,16 +267,16 @@
  <dimensions uuid="297a37bb-22f2-400b-aecf-4cc8010f2abc">
   <name>ReturnReason</name>
   <synonym>
-   <key>tr</key>
-   <value>İade sebebi</value>
+   <key>en</key>
+   <value>Return reason</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Причина возврата</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Return reason</value>
+   <key>tr</key>
+   <value>İade sebebi</value>
   </synonym>
   <type>
    <types>CatalogRef.CancelReturnReasons</types>

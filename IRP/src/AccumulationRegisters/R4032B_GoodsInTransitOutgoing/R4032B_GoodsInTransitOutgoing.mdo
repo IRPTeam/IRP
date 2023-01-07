@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R4032B_GoodsInTransitOutgoing</name>
  <synonym>
-  <key>tr</key>
-  <value>R4032 Yoldaki ürünler (çıkan)</value>
+  <key>en</key>
+  <value>R4032 Goods in transit (outgoing)</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R4032 Товары в пути (к расходу)</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>R4032 Goods in transit (outgoing)</value>
+  <key>tr</key>
+  <value>R4032 Yoldaki ürünler (çıkan)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +27,16 @@
  <resources uuid="58e511ee-0dea-435c-80db-13559084b99f">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +48,16 @@
  <dimensions uuid="807ae812-03e2-4451-948c-6db763076dfc">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
+   <key>en</key>
+   <value>Store</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Store</value>
+   <key>tr</key>
+   <value>Depo</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -70,16 +70,16 @@
  <dimensions uuid="b252728f-3ce7-4f73-b9d6-a35165d446ff">
   <name>Basis</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
+   <key>en</key>
+   <value>Basis</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ основание</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Basis</value>
+   <key>tr</key>
+   <value>Kaynak evrak</value>
   </synonym>
   <type>
    <types>DefinedType.typeShipmentBasis</types>
@@ -92,16 +92,16 @@
  <dimensions uuid="fd99485b-9a8a-4d33-b349-ed995eb95175">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>

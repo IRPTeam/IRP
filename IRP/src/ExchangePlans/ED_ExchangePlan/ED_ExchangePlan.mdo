@@ -9,16 +9,16 @@
  </producedTypes>
  <name>ED_ExchangePlan</name>
  <synonym>
-  <key>tr</key>
-  <value>Dışarı aktarma Veri alış veriş planı</value>
+  <key>en</key>
+  <value>Export Data Exchange plan</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>План обмена экспортными данными</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Export Data Exchange plan</value>
+  <key>tr</key>
+  <value>Dışarı aktarma Veri alış veriş planı</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>ExchangePlan.ED_ExchangePlan.StandardAttribute.Code</inputByString>
@@ -28,28 +28,28 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Dışarı aktarma Veri alış veriş planı</value>
+  <key>en</key>
+  <value>Export Data Exchange plan</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>План обмена экспортными данными</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>Export Data Exchange plan</value>
+  <key>tr</key>
+  <value>Dışarı aktarma Veri alış veriş planı</value>
  </objectPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Dışarı aktarma Veri alış veriş planları</value>
+  <key>en</key>
+  <value>Export Data Exchange plans</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Планы обмена экспортными данными</value>
  </listPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Export Data Exchange plans</value>
+  <key>tr</key>
+  <value>Dışarı aktarma Veri alış veriş planları</value>
  </listPresentation>
  <codeLength>9</codeLength>
  <codeAllowedLength>Variable</codeAllowedLength>

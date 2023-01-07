@@ -16,16 +16,16 @@
    </dataPath>
    <titleLocation>None</titleLocation>
    <toolTip>
-    <key>tr</key>
-    <value>HTML ön izleme için simge</value>
+    <key>en</key>
+    <value>Icon for HTML preview</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
     <value>Картинка для превью в HTML поле</value>
    </toolTip>
    <toolTip>
-    <key>en</key>
-    <value>Icon for HTML preview</value>
+    <key>tr</key>
+    <value>HTML ön izleme için simge</value>
    </toolTip>
    <extendedTooltip>
     <name>IconExtendedTooltip</name>
@@ -66,16 +66,16 @@
     <height>3</height>
     <hyperlink>true</hyperlink>
     <nonselectedPictureText>
-     <key>tr</key>
-     <value>Eklemek için tıklayın</value>
+     <key>en</key>
+     <value>Click to add</value>
     </nonselectedPictureText>
     <nonselectedPictureText>
      <key>ru</key>
      <value>Нажмите, чтобы добавить картинку</value>
     </nonselectedPictureText>
     <nonselectedPictureText>
-     <key>en</key>
-     <value>Click to add</value>
+     <key>tr</key>
+     <value>Eklemek için tıklayın</value>
     </nonselectedPictureText>
     <fileDragMode>AsFileRef</fileDragMode>
    </extInfo>
@@ -550,16 +550,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup (sağ)</value>
+    <key>en</key>
+    <value>Group right</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группировка по правому краю</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Group right</value>
+    <key>tr</key>
+    <value>Grup (sağ)</value>
    </title>
    <extendedTooltip>
     <name>GroupRightExtendedTooltip</name>
@@ -591,16 +591,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup 1</value>
+   <key>en</key>
+   <value>Group1</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа 1</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group1</value>
+   <key>tr</key>
+   <value>Grup 1</value>
   </title>
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
@@ -672,16 +672,16 @@
  <attributes>
   <name>Icon</name>
   <title>
-   <key>tr</key>
-   <value>Simge</value>
+   <key>en</key>
+   <value>Icon</value>
   </title>
   <title>
    <key>ru</key>
    <value>Иконка</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Icon</value>
+   <key>tr</key>
+   <value>Simge</value>
   </title>
   <id>2</id>
   <valueType>

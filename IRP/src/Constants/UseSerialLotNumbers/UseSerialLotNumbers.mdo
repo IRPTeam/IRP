@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseSerialLotNumbers</name>
  <synonym>
-  <key>tr</key>
-  <value>Seri lotu kullanmak</value>
+  <key>en</key>
+  <value>Use serial lot numbers</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать серийные номера</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use serial lot numbers</value>
+  <key>tr</key>
+  <value>Seri lotu kullanmak</value>
  </synonym>
  <type>
   <types>Boolean</types>

@@ -2,15 +2,15 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4f8d4da6-e6ef-49be-a713-d6d3e2f901ff">
  <name>Price</name>
  <synonym>
-  <key>tr</key>
-  <value>Fiyat</value>
+  <key>en</key>
+  <value>Price</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Цена</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Price</value>
+  <key>tr</key>
+  <value>Fiyat</value>
  </synonym>
 </mdclass:CommonPicture>

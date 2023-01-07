@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -113,16 +113,16 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Seri numarası</value>
+    <key>en</key>
+    <value>Serial number</value>
    </title>
    <title>
     <key>ru</key>
     <value>Серийный номер</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Serial number</value>
+    <key>tr</key>
+    <value>Seri numarası</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -175,16 +175,16 @@
    <name>Inactive</name>
    <id>27</id>
    <title>
-    <key>tr</key>
-    <value>Aktif değil</value>
+    <key>en</key>
+    <value>Inactive</value>
    </title>
    <title>
     <key>ru</key>
     <value>Неактивная</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Inactive</value>
+    <key>tr</key>
+    <value>Aktif değil</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -230,16 +230,16 @@
    <name>Owner</name>
    <id>22</id>
    <title>
-    <key>tr</key>
-    <value>Sahip</value>
+    <key>en</key>
+    <value>Owner</value>
    </title>
    <title>
     <key>ru</key>
     <value>Владелец</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Owner</value>
+    <key>tr</key>
+    <value>Sahip</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -602,16 +602,16 @@ WHERE
  <attributes>
   <name>SerialLotNumberOwner</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot sahibi</value>
+   <key>en</key>
+   <value>Serial lot number owner</value>
   </title>
   <title>
    <key>ru</key>
    <value>Владелец серийных номеров</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Serial lot number owner</value>
+   <key>tr</key>
+   <value>Seri lot sahibi</value>
   </title>
   <id>2</id>
   <valueType>

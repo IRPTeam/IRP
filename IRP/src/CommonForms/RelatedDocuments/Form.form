@@ -173,16 +173,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Evrak ağacı grup satırı</value>
+    <key>en</key>
+    <value>Documents tree group row</value>
    </title>
    <title>
     <key>ru</key>
     <value>Строка группы дерева документов</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Documents tree group row</value>
+    <key>tr</key>
+    <value>Evrak ağacı grup satırı</value>
    </title>
    <extendedTooltip>
     <name>DocumentsTreeGroupRowExtendedTooltip</name>
@@ -834,16 +834,16 @@
  <attributes>
   <name>DocumentsTree</name>
   <title>
-   <key>tr</key>
-   <value>Evrak ağacı</value>
+   <key>en</key>
+   <value>Documents tree</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дерево документов</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Documents tree</value>
+   <key>tr</key>
+   <value>Evrak ağacı</value>
   </title>
   <id>1</id>
   <valueType>
@@ -858,7 +858,7 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Ref</value>
    </title>
    <title>
@@ -866,7 +866,7 @@
     <value>Ссылка</value>
    </title>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Ref</value>
    </title>
    <id>2</id>
@@ -883,16 +883,16 @@
   <columns>
    <name>Amount</name>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
+    <key>en</key>
+    <value>Amount</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Amount</value>
+    <key>tr</key>
+    <value>Tutar</value>
    </title>
    <id>3</id>
    <valueType>
@@ -908,16 +908,16 @@
   <columns>
    <name>Posted</name>
    <title>
-    <key>tr</key>
-    <value>Kaydedildi</value>
+    <key>en</key>
+    <value>Posted</value>
    </title>
    <title>
     <key>ru</key>
     <value>Провести</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Posted</value>
+    <key>tr</key>
+    <value>Kaydedildi</value>
    </title>
    <id>4</id>
    <valueType>
@@ -933,16 +933,16 @@
   <columns>
    <name>DeletionMark</name>
    <title>
-    <key>tr</key>
-    <value>Silmek için işaret</value>
+    <key>en</key>
+    <value>Deletion mark</value>
    </title>
    <title>
     <key>ru</key>
     <value>Пометить на удаление</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Deletion mark</value>
+    <key>tr</key>
+    <value>Silmek için işaret</value>
    </title>
    <id>5</id>
    <valueType>
@@ -958,16 +958,16 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
+    <key>en</key>
+    <value>Presentation</value>
    </title>
    <title>
     <key>ru</key>
     <value>Представление</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Presentation</value>
+    <key>tr</key>
+    <value>Görünüm</value>
    </title>
    <id>6</id>
    <valueType>
@@ -984,16 +984,16 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
+    <key>en</key>
+    <value>Name</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Name</value>
+    <key>tr</key>
+    <value>Ad</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1010,16 +1010,16 @@
   <columns>
    <name>LimitationByParent</name>
    <title>
-    <key>tr</key>
-    <value>Üst öğeye göre sınır</value>
+    <key>en</key>
+    <value>Limitation by parent</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ограничение по родителю</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Limitation by parent</value>
+    <key>tr</key>
+    <value>Üst öğeye göre sınır</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1035,16 +1035,16 @@
   <columns>
    <name>DocumentStatus</name>
    <title>
-    <key>tr</key>
-    <value>Evrak statüsü</value>
+    <key>en</key>
+    <value>Document status</value>
    </title>
    <title>
     <key>ru</key>
     <value>Статус документа</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Document status</value>
+    <key>tr</key>
+    <value>Evrak statüsü</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1063,16 +1063,16 @@
   <columns>
    <name>IsCurrentDocument</name>
    <title>
-    <key>tr</key>
-    <value>Bu işaretlenen evrak</value>
+    <key>en</key>
+    <value>Is current document</value>
    </title>
    <title>
     <key>ru</key>
     <value>Текущий документ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Is current document</value>
+    <key>tr</key>
+    <value>Bu işaretlenen evrak</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1089,16 +1089,16 @@
  <attributes>
   <name>DocumentRef</name>
   <title>
-   <key>tr</key>
-   <value>Evrak ref</value>
+   <key>en</key>
+   <value>Document ref</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка документа</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Document ref</value>
+   <key>tr</key>
+   <value>Evrak ref</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1114,16 +1114,16 @@
  <attributes>
   <name>CacheAttributes</name>
   <title>
-   <key>tr</key>
-   <value>Önbellek ek alanları</value>
+   <key>en</key>
+   <value>Cache attributes</value>
   </title>
   <title>
    <key>ru</key>
    <value>Атрибуты кэша</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Cache attributes</value>
+   <key>tr</key>
+   <value>Önbellek ek alanları</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1138,16 +1138,16 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </title>
    <id>4</id>
    <valueType/>
@@ -1161,16 +1161,16 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </title>
    <id>5</id>
    <valueType/>
@@ -1185,16 +1185,16 @@
  <attributes>
   <name>Cache</name>
   <title>
-   <key>tr</key>
-   <value>Önbellek</value>
+   <key>en</key>
+   <value>Cache</value>
   </title>
   <title>
    <key>ru</key>
    <value>Кэш</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Cache</value>
+   <key>tr</key>
+   <value>Önbellek</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1209,16 +1209,16 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </title>
    <id>8</id>
    <valueType/>
@@ -1232,16 +1232,16 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </title>
    <id>9</id>
    <valueType/>
@@ -1256,16 +1256,16 @@
  <formCommands>
   <name>Edit</name>
   <title>
-   <key>tr</key>
-   <value>Değiştir</value>
+   <key>en</key>
+   <value>Edit</value>
   </title>
   <title>
    <key>ru</key>
    <value>Редактировать</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Edit</value>
+   <key>tr</key>
+   <value>Değiştir</value>
   </title>
   <id>1</id>
   <use>
@@ -1285,16 +1285,16 @@
  <formCommands>
   <name>Post</name>
   <title>
-   <key>tr</key>
-   <value>Kaydet</value>
+   <key>en</key>
+   <value>Post</value>
   </title>
   <title>
    <key>ru</key>
    <value>Провести</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Post</value>
+   <key>tr</key>
+   <value>Kaydet</value>
   </title>
   <id>2</id>
   <use>
@@ -1314,16 +1314,16 @@
  <formCommands>
   <name>Unpost</name>
   <title>
-   <key>tr</key>
-   <value>Kaydetme iptal</value>
+   <key>en</key>
+   <value>Unpost</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отменить проведение</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Unpost</value>
+   <key>tr</key>
+   <value>Kaydetme iptal</value>
   </title>
   <id>3</id>
   <use>
@@ -1343,16 +1343,16 @@
  <formCommands>
   <name>Delete</name>
   <title>
-   <key>tr</key>
-   <value>Kaldır</value>
+   <key>en</key>
+   <value>Delete</value>
   </title>
   <title>
    <key>ru</key>
    <value>Пометить на удаление/Снять пометку</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Delete</value>
+   <key>tr</key>
+   <value>Kaldır</value>
   </title>
   <id>4</id>
   <use>
@@ -1372,16 +1372,16 @@
  <formCommands>
   <name>Refresh</name>
   <title>
-   <key>tr</key>
-   <value>Yenile</value>
+   <key>en</key>
+   <value>Refresh</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Refresh</value>
+   <key>tr</key>
+   <value>Yenile</value>
   </title>
   <id>6</id>
   <use>
@@ -1401,16 +1401,16 @@
  <formCommands>
   <name>GenerateForCurrent</name>
   <title>
-   <key>tr</key>
-   <value>Aktif olanı için</value>
+   <key>en</key>
+   <value>For current</value>
   </title>
   <title>
    <key>ru</key>
    <value>Для текущего</value>
   </title>
   <title>
-   <key>en</key>
-   <value>For current</value>
+   <key>tr</key>
+   <value>Aktif olanı için</value>
   </title>
   <id>7</id>
   <use>

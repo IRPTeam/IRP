@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b9f829ef-1ab8-4fcb-b1ea-5600fc883ae8">
  <name>DocConsolidatedRetailSalesServer</name>
  <synonym>
-  <key>tr</key>
-  <value>Doc konsolide perakende satış fişleri server</value>
+  <key>en</key>
+  <value>Doc consolidated retail sales server</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документ отчет о розничных продажах сервер</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Doc consolidated retail sales server</value>
+  <key>tr</key>
+  <value>Doc konsolide perakende satış fişleri server</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

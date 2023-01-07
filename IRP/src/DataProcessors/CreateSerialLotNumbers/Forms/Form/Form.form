@@ -65,16 +65,16 @@
        <color>Style.FormBackColor</color>
       </borderColor>
       <inputHint>
-       <key>tr</key>
-       <value>Malzeme</value>
+       <key>en</key>
+       <value>Item</value>
       </inputHint>
       <inputHint>
        <key>ru</key>
        <value>Номенклатура</value>
       </inputHint>
       <inputHint>
-       <key>en</key>
-       <value>Item</value>
+       <key>tr</key>
+       <value>Malzeme</value>
       </inputHint>
      </extInfo>
     </items>
@@ -140,16 +140,16 @@
        <color>Style.FormBackColor</color>
       </borderColor>
       <inputHint>
-       <key>tr</key>
-       <value>Özellik</value>
+       <key>en</key>
+       <value>Property</value>
       </inputHint>
       <inputHint>
        <key>ru</key>
        <value>Свойство</value>
       </inputHint>
       <inputHint>
-       <key>en</key>
-       <value>Property</value>
+       <key>tr</key>
+       <value>Özellik</value>
       </inputHint>
      </extInfo>
     </items>
@@ -257,16 +257,16 @@
       <specialTextInputMode>None</specialTextInputMode>
       <onScreenKeyboardReturnKeyText>Search</onScreenKeyboardReturnKeyText>
       <inputHint>
-       <key>tr</key>
-       <value>Barkod</value>
+       <key>en</key>
+       <value>Barcode</value>
       </inputHint>
       <inputHint>
        <key>ru</key>
        <value>Штрихкод</value>
       </inputHint>
       <inputHint>
-       <key>en</key>
-       <value>Barcode</value>
+       <key>tr</key>
+       <value>Barkod</value>
       </inputHint>
      </extInfo>
     </items>
@@ -332,16 +332,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup barkod girişi</value>
+     <key>en</key>
+     <value>Group input barcode</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа ввод штрихкода</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Group input barcode</value>
+     <key>tr</key>
+     <value>Grup barkod girişi</value>
     </title>
     <extendedTooltip>
      <name>GroupInputBarcodeExtendedTooltip</name>
@@ -714,16 +714,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup footer</value>
+     <key>en</key>
+     <value>Group bottom</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа подвал</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Group bottom</value>
+     <key>tr</key>
+     <value>Grup footer</value>
     </title>
     <extendedTooltip>
      <name>GroupBottomExtendedTooltip</name>
@@ -755,16 +755,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Genel</value>
+    <key>en</key>
+    <value>Main</value>
    </title>
    <title>
     <key>ru</key>
     <value>Основной</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Main</value>
+    <key>tr</key>
+    <value>Genel</value>
    </title>
    <extendedTooltip>
     <name>GroupMainExtendedTooltip</name>
@@ -846,16 +846,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ayarlar</value>
+    <key>en</key>
+    <value>Settings</value>
    </title>
    <title>
     <key>ru</key>
     <value>Настройки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Settings</value>
+    <key>tr</key>
+    <value>Ayarlar</value>
    </title>
    <extendedTooltip>
     <name>GroupSettingsExtendedTooltip</name>
@@ -884,16 +884,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup sayfalar</value>
+   <key>en</key>
+   <value>Group pages</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа страницы</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group pages</value>
+   <key>tr</key>
+   <value>Grup sayfalar</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -963,16 +963,16 @@
  <attributes>
   <name>Barcode</name>
   <title>
-   <key>tr</key>
-   <value>Barkod</value>
+   <key>en</key>
+   <value>Barcode</value>
   </title>
   <title>
    <key>ru</key>
    <value>Штрихкод</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Barcode</value>
+   <key>tr</key>
+   <value>Barkod</value>
   </title>
   <id>2</id>
   <valueType>
@@ -989,16 +989,16 @@
  <attributes>
   <name>ItemRef</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme ref</value>
+   <key>en</key>
+   <value>Item ref</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка номенклатура</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item ref</value>
+   <key>tr</key>
+   <value>Malzeme ref</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1014,16 +1014,16 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </title>
   <title>
    <key>ru</key>
    <value>Характеристика</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1040,16 +1040,16 @@
  <attributes>
   <name>UseSeriallotNumber</name>
   <title>
-   <key>tr</key>
-   <value>Seri lotları kullan</value>
+   <key>en</key>
+   <value>Use seriallot number</value>
   </title>
   <title>
    <key>ru</key>
    <value>Использовать серийные номера</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Use seriallot number</value>
+   <key>tr</key>
+   <value>Seri lotları kullan</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1065,16 +1065,16 @@
  <attributes>
   <name>SerialLotNumberList</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot listesi</value>
+   <key>en</key>
+   <value>Serial lot number list</value>
   </title>
   <title>
    <key>ru</key>
    <value>Список серийных номеров</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Serial lot number list</value>
+   <key>tr</key>
+   <value>Seri lot listesi</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1089,16 +1089,16 @@
   <columns>
    <name>SerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
+    <key>en</key>
+    <value>Serial lot number</value>
    </title>
    <title>
     <key>ru</key>
     <value>Серия номенклатуры</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Serial lot number</value>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1114,16 +1114,16 @@
   <columns>
    <name>Barcode</name>
    <title>
-    <key>tr</key>
-    <value>Barkod</value>
+    <key>en</key>
+    <value>Barcode</value>
    </title>
    <title>
     <key>ru</key>
     <value>Штрихкод</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Barcode</value>
+    <key>tr</key>
+    <value>Barkod</value>
    </title>
    <id>14</id>
    <valueType>
@@ -1140,16 +1140,16 @@
  <attributes>
   <name>ScanEmulator</name>
   <title>
-   <key>tr</key>
-   <value>Okutma emülatorü</value>
+   <key>en</key>
+   <value>Scan emulator</value>
   </title>
   <title>
    <key>ru</key>
    <value>Эмулятор сканирования</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Scan emulator</value>
+   <key>tr</key>
+   <value>Okutma emülatorü</value>
   </title>
   <id>15</id>
   <valueType>
@@ -1165,16 +1165,16 @@
  <attributes>
   <name>BarcodeInput</name>
   <title>
-   <key>tr</key>
-   <value>Barkod girişi</value>
+   <key>en</key>
+   <value>Barcode input</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ввод штрихкода</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Barcode input</value>
+   <key>tr</key>
+   <value>Barkod girişi</value>
   </title>
   <id>16</id>
   <valueType>
@@ -1191,16 +1191,16 @@
  <attributes>
   <name>Info</name>
   <title>
-   <key>tr</key>
-   <value>Bilgi</value>
+   <key>en</key>
+   <value>Info</value>
   </title>
   <title>
    <key>ru</key>
    <value>Контактная информация</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Info</value>
+   <key>tr</key>
+   <value>Bilgi</value>
   </title>
   <id>17</id>
   <valueType>

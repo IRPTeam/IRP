@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -113,16 +113,16 @@
    <name>Description</name>
    <id>16</id>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
+    <key>en</key>
+    <value>Description</value>
    </title>
    <title>
     <key>ru</key>
     <value>Комментарий</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Description</value>
+    <key>tr</key>
+    <value>Tanım</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -510,16 +510,16 @@ WHERE
  <attributes>
   <name>Item</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme</value>
+   <key>en</key>
+   <value>Item</value>
   </title>
   <title>
    <key>ru</key>
    <value>Номенклатура</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item</value>
+   <key>tr</key>
+   <value>Malzeme</value>
   </title>
   <id>2</id>
   <valueType>
@@ -535,16 +535,16 @@ WHERE
  <formCommands>
   <name>ShowAllUnits</name>
   <title>
-   <key>tr</key>
-   <value>Tüm birimleri göster</value>
+   <key>en</key>
+   <value>Show all units</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать все единицы измерения</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Show all units</value>
+   <key>tr</key>
+   <value>Tüm birimleri göster</value>
   </title>
   <id>1</id>
   <use>

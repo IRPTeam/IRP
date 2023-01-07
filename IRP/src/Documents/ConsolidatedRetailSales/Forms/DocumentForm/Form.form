@@ -13,16 +13,16 @@
      <name>DecorationGroupTitleCollapsedPicture</name>
      <id>19</id>
      <title>
-      <key>tr</key>
-      <value>Dekorasyon grubu başlık daraltılmış resmi</value>
+      <key>en</key>
+      <value>Decoration group title collapsed picture</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа декораций рисунок свернутой шапки</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Decoration group title collapsed picture</value>
+      <key>tr</key>
+      <value>Dekorasyon grubu başlık daraltılmış resmi</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -72,16 +72,16 @@
      <name>DecorationGroupTitleCollapsedLabel</name>
      <id>22</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
+      <key>en</key>
+      <value>Please, fill the document</value>
      </title>
      <title>
       <key>ru</key>
       <value>Пожалуйста, заполните документ</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Please, fill the document</value>
+      <key>tr</key>
+      <value>Lütfen, evrakı doldurunuz</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -208,16 +208,16 @@
      <name>DecorationGroupTitleUncollapsedLabel</name>
      <id>30</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
+      <key>en</key>
+      <value>Please, fill the document</value>
      </title>
      <title>
       <key>ru</key>
       <value>Пожалуйста, заполните документ</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Please, fill the document</value>
+      <key>tr</key>
+      <value>Lütfen, evrakı doldurunuz</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -1445,16 +1445,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Evraklar</value>
+    <key>en</key>
+    <value>Documents</value>
    </title>
    <title>
     <key>ru</key>
     <value>Документы</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Documents</value>
+    <key>tr</key>
+    <value>Evraklar</value>
    </title>
    <extendedTooltip>
     <name>GroupDocumentsExtendedTooltip</name>
@@ -1690,16 +1690,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
+    <key>en</key>
+    <value>Other</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дополнительно</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Other</value>
+    <key>tr</key>
+    <value>Diğer</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -2342,16 +2342,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>İşlemler</value>
+      <key>en</key>
+      <value>Transactions</value>
      </title>
      <title>
       <key>ru</key>
       <value>Основное</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Transactions</value>
+      <key>tr</key>
+      <value>İşlemler</value>
      </title>
      <extendedTooltip>
       <name>UserDataTransactionsExtendedTooltip</name>
@@ -2587,16 +2587,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup programa göre bakiyeler</value>
+        <key>en</key>
+        <value>GroupBalanceInBase</value>
        </title>
        <title>
         <key>ru</key>
         <value>Группа остатки по программе</value>
        </title>
        <title>
-        <key>en</key>
-        <value>GroupBalanceInBase</value>
+        <key>tr</key>
+        <value>Grup programa göre bakiyeler</value>
        </title>
        <extendedTooltip>
         <name>GroupBalanceInBaseExtendedTooltip</name>
@@ -2785,16 +2785,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup gerçek balance</value>
+        <key>en</key>
+        <value>GroupBalanceReal</value>
        </title>
        <title>
         <key>ru</key>
         <value>Группа физические остатки</value>
        </title>
        <title>
-        <key>en</key>
-        <value>GroupBalanceReal</value>
+        <key>tr</key>
+        <value>Grup gerçek balance</value>
        </title>
        <extendedTooltip>
         <name>GroupBalanceRealExtendedTooltip</name>
@@ -2827,16 +2827,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Bakiyeler grubu</value>
+       <key>en</key>
+       <value>Group of balances</value>
       </title>
       <title>
        <key>ru</key>
        <value>Группа остатков</value>
       </title>
       <title>
-       <key>en</key>
-       <value>Group of balances</value>
+       <key>tr</key>
+       <value>Bakiyeler grubu</value>
       </title>
       <extendedTooltip>
        <name>GroupOfBalancesExtendedTooltip</name>
@@ -2869,16 +2869,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Bakiye</value>
+      <key>en</key>
+      <value>Balance</value>
      </title>
      <title>
       <key>ru</key>
       <value>Остаток</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Balance</value>
+      <key>tr</key>
+      <value>Bakiye</value>
      </title>
      <extendedTooltip>
       <name>UserDataBalanceExtendedTooltip</name>
@@ -2907,16 +2907,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Grup kullanıcı veri sayfaları</value>
+     <key>en</key>
+     <value>GroupUserDataPages</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа Страницы пользовательских данных</value>
     </title>
     <title>
-     <key>en</key>
-     <value>GroupUserDataPages</value>
+     <key>tr</key>
+     <value>Grup kullanıcı veri sayfaları</value>
     </title>
     <extendedTooltip>
      <name>GroupUserDataPagesExtendedTooltip</name>
@@ -2945,16 +2945,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Kullanıcı verisi</value>
+    <key>en</key>
+    <value>User data</value>
    </title>
    <title>
     <key>ru</key>
     <value>Пользовательские данные</value>
    </title>
    <title>
-    <key>en</key>
-    <value>User data</value>
+    <key>tr</key>
+    <value>Kullanıcı verisi</value>
    </title>
    <extendedTooltip>
     <name>GroupUserDataExtendedTooltip</name>
@@ -2983,16 +2983,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
+   <key>en</key>
+   <value>Pages</value>
   </title>
   <title>
    <key>ru</key>
    <value>Страницы</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Pages</value>
+   <key>tr</key>
+   <value>Satırlar</value>
   </title>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>
@@ -3129,16 +3129,16 @@
  <attributes>
   <name>Description</name>
   <title>
-   <key>tr</key>
-   <value>Tanım</value>
+   <key>en</key>
+   <value>Description</value>
   </title>
   <title>
    <key>ru</key>
    <value>Наименование</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Description</value>
+   <key>tr</key>
+   <value>Tanım</value>
   </title>
   <id>2</id>
   <valueType>
@@ -3155,16 +3155,16 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>tr</key>
-   <value>Grup nesneler</value>
+   <key>en</key>
+   <value>Group items</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа элементов</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group items</value>
+   <key>tr</key>
+   <value>Grup nesneler</value>
   </title>
   <id>3</id>
   <valueType>
@@ -3183,16 +3183,16 @@
  <attributes>
   <name>Documents</name>
   <title>
-   <key>tr</key>
-   <value>Evraklar</value>
+   <key>en</key>
+   <value>Documents</value>
   </title>
   <title>
    <key>ru</key>
    <value>Документы</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Documents</value>
+   <key>tr</key>
+   <value>Evraklar</value>
   </title>
   <id>4</id>
   <valueType>
@@ -3263,16 +3263,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Evrak</value>
+       <key>en</key>
+       <value>Document</value>
       </content>
       <content>
        <key>ru</key>
        <value>Документ</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Document</value>
+       <key>tr</key>
+       <value>Evrak</value>
       </content>
      </localValue>
     </title>
@@ -3314,16 +3314,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Konsolide perakende satış fişleri</value>
+       <key>en</key>
+       <value>Consolidated retail sales</value>
       </content>
       <content>
        <key>ru</key>
        <value>Отчеты о розничных продажах</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Consolidated retail sales</value>
+       <key>tr</key>
+       <value>Konsolide perakende satış fişleri</value>
       </content>
      </localValue>
     </title>
@@ -3337,16 +3337,16 @@ WHERE
  <formCommands>
   <name>ShowHiddenTables</name>
   <title>
-   <key>tr</key>
-   <value>Gizli tabloları göster</value>
+   <key>en</key>
+   <value>Show hidden tables</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать скрытые таблицы</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Show hidden tables</value>
+   <key>tr</key>
+   <value>Gizli tabloları göster</value>
   </title>
   <id>1</id>
   <use>
@@ -3365,16 +3365,16 @@ WHERE
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır antahtarı göster</value>
+   <key>en</key>
+   <value>Show row key</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать row key</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Show row key</value>
+   <key>tr</key>
+   <value>Satır antahtarı göster</value>
   </title>
   <id>2</id>
   <use>

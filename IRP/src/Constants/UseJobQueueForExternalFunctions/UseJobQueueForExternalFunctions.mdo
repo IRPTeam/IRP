@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseJobQueueForExternalFunctions</name>
  <synonym>
-  <key>tr</key>
-  <value>Dış fonksiyonlar için görev kuyruğunu kullan</value>
+  <key>en</key>
+  <value>Use job queue for external functions</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать очередь заданий для внешних функций</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use job queue for external functions</value>
+  <key>tr</key>
+  <value>Dış fonksiyonlar için görev kuyruğunu kullan</value>
  </synonym>
  <type>
   <types>Boolean</types>

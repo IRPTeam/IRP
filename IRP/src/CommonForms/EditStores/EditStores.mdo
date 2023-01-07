@@ -2,16 +2,16 @@
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ef976591-1cac-4900-95b6-1e926fdc0918">
  <name>EditStores</name>
  <synonym>
-  <key>tr</key>
-  <value>Depo değiştir</value>
+  <key>en</key>
+  <value>Edit stores</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Изменить склады</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Edit stores</value>
+  <key>tr</key>
+  <value>Depo değiştir</value>
  </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>

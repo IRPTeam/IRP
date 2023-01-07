@@ -7,47 +7,47 @@
  </producedTypes>
  <name>MaterialsCostWriteOff</name>
  <synonym>
-  <key>tr</key>
-  <value>Bileşenler çıkış maliyeti</value>
+  <key>en</key>
+  <value>Materials cost write off</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Стоимость комплектующих для списания</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Materials cost write off</value>
+  <key>tr</key>
+  <value>Bileşenler çıkış maliyeti</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="4a500dc8-1967-4cf1-8312-f0ff58baf356">
   <name>IncludeToWorkCost</name>
   <synonym>
-   <key>tr</key>
-   <value>Çalışma maliyetine dahil et</value>
+   <key>en</key>
+   <value>Include to work cost</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Включать в стоимость работ</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Include to work cost</value>
+   <key>tr</key>
+   <value>Çalışma maliyetine dahil et</value>
   </synonym>
  </enumValues>
  <enumValues uuid="180e21e7-5b29-4ac6-a4d5-996f9ef022b8">
   <name>NotInclude</name>
   <synonym>
-   <key>tr</key>
-   <value>Dahil etme</value>
+   <key>en</key>
+   <value>Not include</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Не включать</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Not include</value>
+   <key>tr</key>
+   <value>Dahil etme</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

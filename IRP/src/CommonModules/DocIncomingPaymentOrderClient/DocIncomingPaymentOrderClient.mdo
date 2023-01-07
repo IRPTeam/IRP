@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fcbbeb43-946a-47e1-970d-75d9e2184ceb">
  <name>DocIncomingPaymentOrderClient</name>
  <synonym>
-  <key>tr</key>
-  <value>Evrak gelen tahsilat siparişi client</value>
+  <key>en</key>
+  <value>Doc incoming payment order client</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документ заявка на поступление денежных средств клиент</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Doc incoming payment order client</value>
+  <key>tr</key>
+  <value>Evrak gelen tahsilat siparişi client</value>
  </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

@@ -11,46 +11,46 @@
  </producedTypes>
  <name>BundleContents</name>
  <synonym>
-  <key>tr</key>
-  <value>Paket içeriği</value>
+  <key>en</key>
+  <value>Bundles content</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Содержимое наборов номенклатуры</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Bundles content</value>
+  <key>tr</key>
+  <value>Paket içeriği</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
  <writeMode>RecorderSubordinate</writeMode>
  <dataLockControlMode>Managed</dataLockControlMode>
  <listPresentation>
-  <key>tr</key>
-  <value>Paket içeriği</value>
+  <key>en</key>
+  <value>Bundles content</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Содержимое наборов номенклатуры</value>
  </listPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Bundles content</value>
+  <key>tr</key>
+  <value>Paket içeriği</value>
  </listPresentation>
  <resources uuid="619bc356-6709-4982-a405-5f6d402386f0">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -64,16 +64,16 @@
  <dimensions uuid="bb1aa1dd-5b75-484d-8983-1bc93df50d92">
   <name>ItemKeyBundle</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant takımı</value>
+   <key>en</key>
+   <value>Item key bundle</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Набор характеристик</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item key bundle</value>
+   <key>tr</key>
+   <value>Varyant takımı</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -88,16 +88,16 @@
  <dimensions uuid="dcaf2058-e605-4077-852a-2bc66faabee3">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>

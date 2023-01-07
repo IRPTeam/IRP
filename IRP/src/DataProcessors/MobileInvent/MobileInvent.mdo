@@ -6,23 +6,23 @@
  </producedTypes>
  <name>MobileInvent</name>
  <synonym>
-  <key>tr</key>
-  <value>Mobil sayım</value>
+  <key>en</key>
+  <value>Mobile invent</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Мобильная инвентаризация</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Mobile invent</value>
+  <key>tr</key>
+  <value>Mobil sayım</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.MobileInvent.Form.Form</defaultForm>
  <forms uuid="bf28c181-f1f4-48ae-ad8b-8b2c1c642596">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -30,7 +30,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
@@ -39,16 +39,16 @@
  <forms uuid="68f4d239-f5bf-4ebb-873b-5b8640fae222">
   <name>RowForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Satır formu</value>
+   <key>en</key>
+   <value>Row form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма строка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Row form</value>
+   <key>tr</key>
+   <value>Satır formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -56,44 +56,44 @@
  <templates uuid="b41b9ac8-7474-4bb9-95ab-2dc7e1cc1241">
   <name>ErrorSound</name>
   <synonym>
-   <key>tr</key>
-   <value>Hata sesi</value>
+   <key>en</key>
+   <value>Error sound</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Звук ошибки</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Error sound</value>
+   <key>tr</key>
+   <value>Hata sesi</value>
   </synonym>
   <templateType>BinaryData</templateType>
  </templates>
  <templates uuid="091cba53-5ade-4728-aa39-9ad5041f5183">
   <name>Done</name>
   <synonym>
-   <key>tr</key>
-   <value>Tamamlandı</value>
+   <key>en</key>
+   <value>Done</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Завершено</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Done</value>
+   <key>tr</key>
+   <value>Tamamlandı</value>
   </synonym>
   <templateType>BinaryData</templateType>
  </templates>
  <templates uuid="4b612e45-831e-4240-bded-a550e5fa0c3d">
   <name>SameItemKeyBarcode</name>
   <synonym>
-   <key>ru</key>
-   <value>Одинаковый штрихкод характеристики</value>
-  </synonym>
-  <synonym>
    <key>en</key>
    <value>Same item key barcode</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Одинаковый штрихкод характеристики</value>
   </synonym>
   <templateType>BinaryData</templateType>
  </templates>

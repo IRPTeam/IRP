@@ -9,16 +9,16 @@
  </producedTypes>
  <name>ManualRegisterEntry</name>
  <synonym>
-  <key>tr</key>
-  <value>Manuel kayıt tablo düzeltme fişi</value>
+  <key>en</key>
+  <value>Manual register entry</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Ручная проводка в регистры</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Manual register entry</value>
+  <key>tr</key>
+  <value>Manuel kayıt tablo düzeltme fişi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.ManualRegisterEntry.StandardAttribute.Number</inputByString>
@@ -59,28 +59,28 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Manuel kayıt tablo düzeltme fişi</value>
+  <key>en</key>
+  <value>Manual register entry</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Ручная проводка в регистры</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>Manual register entry</value>
+  <key>tr</key>
+  <value>Manuel kayıt tablo düzeltme fişi</value>
  </objectPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Manuel kayıt tablo düzeltme fişleri</value>
+  <key>en</key>
+  <value>Manual register entries</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Ручные проводки в регистры</value>
  </listPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Manual register entries</value>
+  <key>tr</key>
+  <value>Manuel kayıt tablo düzeltme fişleri</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -148,16 +148,16 @@
  <attributes uuid="0efb3e65-ce41-418b-bedd-d2b4e61ae11a">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -171,16 +171,16 @@
  <forms uuid="8dd092ee-efb1-4209-aa78-3cfd4775f3bf">
   <name>DocumentForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
+   <key>en</key>
+   <value>Document form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма документа</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Document form</value>
+   <key>tr</key>
+   <value>Evrak formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -188,16 +188,16 @@
  <forms uuid="cc7ba433-f893-4aca-ab26-e12404b5f12b">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -205,16 +205,16 @@
  <forms uuid="41a1bcca-d2be-4e85-a592-7d656316283d">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -226,30 +226,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <attributes uuid="7a3a7a12-7533-477d-b76e-e12f3f838bcd">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -261,16 +261,16 @@
   <attributes uuid="f967edc4-8d24-42b8-bd4a-b4f6e95cd509">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>

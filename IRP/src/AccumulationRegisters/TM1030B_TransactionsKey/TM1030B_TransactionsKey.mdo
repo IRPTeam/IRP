@@ -10,16 +10,16 @@
  </producedTypes>
  <name>TM1030B_TransactionsKey</name>
  <synonym>
-  <key>tr</key>
-  <value>TM1030 Cari hesap hareket anahtarı</value>
+  <key>en</key>
+  <value>TM1030 Transactions key</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>TM1030 Ключи партнерских транзакций</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>TM1030 Transactions key</value>
+  <key>tr</key>
+  <value>TM1030 Cari hesap hareket anahtarı</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultListForm>AccumulationRegister.TM1030B_TransactionsKey.Form.ListForm</defaultListForm>
@@ -28,16 +28,16 @@
  <resources uuid="7f559dbe-251c-4cd0-a6d3-490ee14d1a51">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -49,16 +49,16 @@
  <dimensions uuid="0d5042db-39ec-49b3-a55e-636a08833f10">
   <name>TransactionKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap hareket anahtarı</value>
+   <key>en</key>
+   <value>Transaction key</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ключ партнерской транзакции</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Transaction key</value>
+   <key>tr</key>
+   <value>Cari hesap hareket anahtarı</value>
   </synonym>
   <type>
    <types>CatalogRef.TransactionsKeys</types>
@@ -72,16 +72,16 @@
  <forms uuid="e26360fb-1ab0-458b-81e1-24522208200e">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

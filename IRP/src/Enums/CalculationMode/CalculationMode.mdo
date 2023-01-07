@@ -7,77 +7,77 @@
  </producedTypes>
  <name>CalculationMode</name>
  <synonym>
-  <key>tr</key>
-  <value>Hesaplama türü</value>
+  <key>en</key>
+  <value>Calculation mode</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Вид расчета</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Calculation mode</value>
+  <key>tr</key>
+  <value>Hesaplama türü</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="bffa7f17-aa06-4533-8238-f6597368a5b9">
   <name>LandedCost</name>
   <synonym>
-   <key>tr</key>
-   <value>Ürün maliyet hesaplama</value>
+   <key>en</key>
+   <value>Landed cost</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Расчет себестоимости товаров</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Landed cost</value>
+   <key>tr</key>
+   <value>Ürün maliyet hesaplama</value>
   </synonym>
  </enumValues>
  <enumValues uuid="bc3e075a-555d-45fc-889f-3ca360c6662c">
   <name>AdditionalItemCost</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek maliyet hesaplama</value>
+   <key>en</key>
+   <value>Additional item cost</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Доп. расход на товары</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Additional item cost</value>
+   <key>tr</key>
+   <value>Ek maliyet hesaplama</value>
   </synonym>
  </enumValues>
  <enumValues uuid="854f820a-12e7-4d31-a9e4-3759774e2b2b">
   <name>AdditionalItemRevenue</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek gelir hesaplama</value>
+   <key>en</key>
+   <value>Additional item revenue</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Доп. доходы на товары</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Additional item revenue</value>
+   <key>tr</key>
+   <value>Ek gelir hesaplama</value>
   </synonym>
  </enumValues>
  <enumValues uuid="721900e9-3d68-49fc-8872-40ceb43b6ac1">
   <name>LandedCostBatchReallocate</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme parti transferi</value>
+   <key>en</key>
+   <value>Landed cost (batch reallocate)</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Перемещение партий</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Landed cost (batch reallocate)</value>
+   <key>tr</key>
+   <value>Malzeme parti transferi</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

@@ -4,16 +4,16 @@
   <name>UserOrGroup</name>
   <id>50</id>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı/Kullanıcı grubu</value>
+   <key>en</key>
+   <value>User/User group</value>
   </title>
   <title>
    <key>ru</key>
    <value>Пользователь/Группа пользователей</value>
   </title>
   <title>
-   <key>en</key>
-   <value>User/User group</value>
+   <key>tr</key>
+   <value>Kullanıcı/Kullanıcı grubu</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -281,16 +281,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Üst veri ağaç grubu sütunlar adı</value>
+    <key>en</key>
+    <value>Metadata tree group name columns</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа дерева метаданных наименование колонок</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Metadata tree group name columns</value>
+    <key>tr</key>
+    <value>Üst veri ağaç grubu sütunlar adı</value>
    </title>
    <extendedTooltip>
     <name>MetadataTreeGroupNameColumnsExtendedTooltip</name>
@@ -553,16 +553,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Üstveri ağaç grubu yönetme</value>
+     <key>en</key>
+     <value>Metadata tree group manage</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа дерева метаданных управление</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Metadata tree group manage</value>
+     <key>tr</key>
+     <value>Üstveri ağaç grubu yönetme</value>
     </title>
     <extendedTooltip>
      <name>MetadataTreeGroupManageExtendedTooltip</name>
@@ -873,16 +873,16 @@
  <attributes>
   <name>UserOrGroup</name>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı veya grup</value>
+   <key>en</key>
+   <value>User or group</value>
   </title>
   <title>
    <key>ru</key>
    <value>Пользователь или группа пользователей</value>
   </title>
   <title>
-   <key>en</key>
-   <value>User or group</value>
+   <key>tr</key>
+   <value>Kullanıcı veya grup</value>
   </title>
   <id>1</id>
   <valueType>
@@ -899,16 +899,16 @@
  <attributes>
   <name>MetadataTree</name>
   <title>
-   <key>tr</key>
-   <value>Üstveri ağacı</value>
+   <key>en</key>
+   <value>Metadata tree</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дерево метаданных</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Metadata tree</value>
+   <key>tr</key>
+   <value>Üstveri ağacı</value>
   </title>
   <id>2</id>
   <valueType>
@@ -923,16 +923,16 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
+    <key>en</key>
+    <value>Name</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Name</value>
+    <key>tr</key>
+    <value>Ad</value>
    </title>
    <id>3</id>
    <valueType>
@@ -949,16 +949,16 @@
   <columns>
    <name>FullName</name>
    <title>
-    <key>tr</key>
-    <value>Tam isim</value>
+    <key>en</key>
+    <value>Full name</value>
    </title>
    <title>
     <key>ru</key>
     <value>Полное наименование</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Full name</value>
+    <key>tr</key>
+    <value>Tam isim</value>
    </title>
    <id>4</id>
    <valueType>
@@ -975,16 +975,16 @@
   <columns>
    <name>GroupName</name>
    <title>
-    <key>tr</key>
-    <value>Grup isim</value>
+    <key>en</key>
+    <value>Group name</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование группы</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Group name</value>
+    <key>tr</key>
+    <value>Grup isim</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1001,16 +1001,16 @@
   <columns>
    <name>Synonym</name>
    <title>
-    <key>tr</key>
-    <value>Eşanlamlı</value>
+    <key>en</key>
+    <value>Synonym</value>
    </title>
    <title>
     <key>ru</key>
     <value>Синоним</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Synonym</value>
+    <key>tr</key>
+    <value>Eşanlamlı</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1027,16 +1027,16 @@
   <columns>
    <name>KindOfAttribute</name>
    <title>
-    <key>tr</key>
-    <value>Öznitellik türü</value>
+    <key>en</key>
+    <value>Kind of attribute</value>
    </title>
    <title>
     <key>ru</key>
     <value>Вид реквизита</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Kind of attribute</value>
+    <key>tr</key>
+    <value>Öznitellik türü</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1052,16 +1052,16 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1089,16 +1089,16 @@
   <columns>
    <name>TypeRestriction</name>
    <title>
-    <key>tr</key>
-    <value>Kısıtlama tipi</value>
+    <key>en</key>
+    <value>Type restriction</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ограничение по типу</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Type restriction</value>
+    <key>tr</key>
+    <value>Kısıtlama tipi</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1114,16 +1114,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использовать</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1139,16 +1139,16 @@
   <columns>
    <name>SettingID</name>
    <title>
-    <key>tr</key>
-    <value>Ayarları ID'si</value>
+    <key>en</key>
+    <value>Setting ID</value>
    </title>
    <title>
     <key>ru</key>
     <value>ID Настройки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Setting ID</value>
+    <key>tr</key>
+    <value>Ayarları ID'si</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1164,16 +1164,16 @@
   <columns>
    <name>AddAttributeRef</name>
    <title>
-    <key>tr</key>
-    <value>Ek öznitelik bağlantısı</value>
+    <key>en</key>
+    <value>Additional attribute ref</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка дополнительного реквизита</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Additional attribute ref</value>
+    <key>tr</key>
+    <value>Ek öznitelik bağlantısı</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1189,16 +1189,16 @@
   <columns>
    <name>ValueFromGroup</name>
    <title>
-    <key>tr</key>
-    <value>Gruptan değer</value>
+    <key>en</key>
+    <value>Value from group</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение группы пользовательских настроек</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Value from group</value>
+    <key>tr</key>
+    <value>Gruptan değer</value>
    </title>
    <id>13</id>
    <valueType>
@@ -1226,16 +1226,16 @@
   <columns>
    <name>PictureIndex</name>
    <title>
-    <key>tr</key>
-    <value>Resim indeksi</value>
+    <key>en</key>
+    <value>Picture index</value>
    </title>
    <title>
     <key>ru</key>
     <value>Индекс картинки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Picture index</value>
+    <key>tr</key>
+    <value>Resim indeksi</value>
    </title>
    <id>14</id>
    <valueType>
@@ -1255,16 +1255,16 @@
  <attributes>
   <name>FilterByName</name>
   <title>
-   <key>tr</key>
-   <value>İsime göre filtre</value>
+   <key>en</key>
+   <value>Filter by name</value>
   </title>
   <title>
    <key>ru</key>
    <value>Фильтр по наименованию</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Filter by name</value>
+   <key>tr</key>
+   <value>İsime göre filtre</value>
   </title>
   <id>15</id>
   <valueType>
@@ -1281,16 +1281,16 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>Ok</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ок</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Ok</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <id>1</id>
   <use>
@@ -1306,16 +1306,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <id>2</id>
   <use>
@@ -1331,16 +1331,16 @@
  <formCommands>
   <name>FilterByAttributeName</name>
   <title>
-   <key>tr</key>
-   <value>Öznitellik ismine göre filtrele</value>
+   <key>en</key>
+   <value>Filter by attribute name</value>
   </title>
   <title>
    <key>ru</key>
    <value>Фильтр по наименованию реквизита</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Filter by attribute name</value>
+   <key>tr</key>
+   <value>Öznitellik ismine göre filtrele</value>
   </title>
   <id>3</id>
   <use>
@@ -1360,16 +1360,16 @@
  <formCommands>
   <name>OnlyUsedRows</name>
   <title>
-   <key>tr</key>
-   <value>Sadece kullanılan satırlar</value>
+   <key>en</key>
+   <value>Only used rows</value>
   </title>
   <title>
    <key>ru</key>
    <value>Только используемые строки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Only used rows</value>
+   <key>tr</key>
+   <value>Sadece kullanılan satırlar</value>
   </title>
   <id>4</id>
   <use>
@@ -1385,16 +1385,16 @@
  <formCommands>
   <name>MetadataTreeCollapseAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü daralt</value>
+   <key>en</key>
+   <value>Collapse all</value>
   </title>
   <title>
    <key>ru</key>
    <value>Свернуть все</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Collapse all</value>
+   <key>tr</key>
+   <value>Tümü daralt</value>
   </title>
   <id>5</id>
   <use>
@@ -1413,16 +1413,16 @@
  <formCommands>
   <name>MetadataTreeExpandAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü genişlet</value>
+   <key>en</key>
+   <value>Expande all</value>
   </title>
   <title>
    <key>ru</key>
    <value>Развернуть все</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Expande all</value>
+   <key>tr</key>
+   <value>Tümü genişlet</value>
   </title>
   <id>6</id>
   <use>
@@ -1441,16 +1441,16 @@
  <formCommands>
   <name>SetDefaultSettings</name>
   <title>
-   <key>tr</key>
-   <value>Varsayılan değerleri belirle</value>
+   <key>en</key>
+   <value>Set default settings</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить настройки по умолчанию</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Set default settings</value>
+   <key>tr</key>
+   <value>Varsayılan değerleri belirle</value>
   </title>
   <id>7</id>
   <use>

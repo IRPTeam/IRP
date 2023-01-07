@@ -2,15 +2,15 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="56f2b6a0-b11c-4558-9405-b9d6b9f41f4b">
  <name>UseOutput</name>
  <synonym>
-  <key>tr</key>
-  <value>Çıktı alma (Yazdırma)</value>
+  <key>en</key>
+  <value>Use output</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Вывод</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use output</value>
+  <key>tr</key>
+  <value>Çıktı alma (Yazdırma)</value>
  </synonym>
 </mdclass:Role>

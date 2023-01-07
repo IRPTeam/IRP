@@ -2,16 +2,16 @@
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d8dee104-37b4-433a-86c9-1b99d42bdd96">
  <name>MainSettings</name>
  <synonym>
-  <key>tr</key>
-  <value>Genel ayarlar</value>
+  <key>en</key>
+  <value>Main settings</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Основные настройки</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Main settings</value>
+  <key>tr</key>
+  <value>Genel ayarlar</value>
  </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>

@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -66,16 +66,16 @@
     <name>Code</name>
     <id>38</id>
     <title>
-     <key>tr</key>
-     <value>Kod</value>
+     <key>en</key>
+     <value>Code</value>
     </title>
     <title>
      <key>ru</key>
      <value>Код</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Code</value>
+     <key>tr</key>
+     <value>Kod</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -128,16 +128,16 @@
     <name>Description</name>
     <id>22</id>
     <title>
-     <key>tr</key>
-     <value>Tanım</value>
+     <key>en</key>
+     <value>Description</value>
     </title>
     <title>
      <key>ru</key>
      <value>Комментарий</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Description</value>
+     <key>tr</key>
+     <value>Tanım</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -190,16 +190,16 @@
     <name>ItemType</name>
     <id>16</id>
     <title>
-     <key>tr</key>
-     <value>Malzeme tipi</value>
+     <key>en</key>
+     <value>Item type</value>
     </title>
     <title>
      <key>ru</key>
      <value>Вид номенклатуры</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Item type</value>
+     <key>tr</key>
+     <value>Malzeme tipi</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -249,16 +249,16 @@
     <name>Ref</name>
     <id>25</id>
     <title>
-     <key>tr</key>
-     <value>Referans</value>
+     <key>en</key>
+     <value>Reference</value>
     </title>
     <title>
      <key>ru</key>
      <value>Ссылка</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Reference</value>
+     <key>tr</key>
+     <value>Referans</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -737,16 +737,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Ayarlar paneli göster</value>
+     <key>en</key>
+     <value>View settings panel</value>
     </title>
     <title>
      <key>ru</key>
      <value>Показать панель настроек</value>
     </title>
     <title>
-     <key>en</key>
-     <value>View settings panel</value>
+     <key>tr</key>
+     <value>Ayarlar paneli göster</value>
     </title>
     <extendedTooltip>
      <name>ViewSettingsPanelExtendedTooltip</name>
@@ -778,16 +778,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Grup HTML</value>
+    <key>en</key>
+    <value>Group HTML</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа HTML</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Group HTML</value>
+    <key>tr</key>
+    <value>Grup HTML</value>
    </title>
    <extendedTooltip>
     <name>GroupHTMLExtendedTooltip</name>
@@ -909,16 +909,16 @@ FROM
  <attributes>
   <name>AddAttributeViewHTML</name>
   <title>
-   <key>tr</key>
-   <value>Ek özellik görünümü HTML</value>
+   <key>en</key>
+   <value>Additional attribute view HTML</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отображение дополнительного реквизита в HTML поле</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Additional attribute view HTML</value>
+   <key>tr</key>
+   <value>Ek özellik görünümü HTML</value>
   </title>
   <id>2</id>
   <valueType>
@@ -935,16 +935,16 @@ FROM
  <attributes>
   <name>PictureViewHTML</name>
   <title>
-   <key>tr</key>
-   <value>Resim HTML önizleme</value>
+   <key>en</key>
+   <value>Picture view HTML</value>
   </title>
   <title>
    <key>ru</key>
    <value>Просмотр изображений HTML</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Picture view HTML</value>
+   <key>tr</key>
+   <value>Resim HTML önizleme</value>
   </title>
   <id>3</id>
   <valueType>
@@ -961,16 +961,16 @@ FROM
  <formCommands>
   <name>ViewPictures</name>
   <title>
-   <key>tr</key>
-   <value>Resimleri göster</value>
+   <key>en</key>
+   <value>View pictures</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать картинки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>View pictures</value>
+   <key>tr</key>
+   <value>Resimleri göster</value>
   </title>
   <id>1</id>
   <use>
@@ -990,16 +990,16 @@ FROM
  <formCommands>
   <name>ViewAdditionalAttribute</name>
   <title>
-   <key>tr</key>
-   <value>Ek alanları göster</value>
+   <key>en</key>
+   <value>View additional attribute</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать внешний реквизит</value>
   </title>
   <title>
-   <key>en</key>
-   <value>View additional attribute</value>
+   <key>tr</key>
+   <value>Ek alanları göster</value>
   </title>
   <id>2</id>
   <use>

@@ -379,16 +379,16 @@
  <attributes>
   <name>MetadataTree</name>
   <title>
-   <key>tr</key>
-   <value>Üstveri ağacı</value>
+   <key>en</key>
+   <value>Metadata tree</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дерево метаданных</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Metadata tree</value>
+   <key>tr</key>
+   <value>Üstveri ağacı</value>
   </title>
   <id>2</id>
   <valueType>
@@ -403,16 +403,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <title>
     <key>ru</key>
     <value>Применить</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <id>4</id>
    <valueType>
@@ -428,16 +428,16 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
+    <key>en</key>
+    <value>Name</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Name</value>
+    <key>tr</key>
+    <value>Ad</value>
    </title>
    <id>5</id>
    <valueType>
@@ -455,16 +455,16 @@
  <formCommands>
   <name>SaveSettings</name>
   <title>
-   <key>tr</key>
-   <value>Ayarları kaydet</value>
+   <key>en</key>
+   <value>Save settings</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сохранить настройки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Save settings</value>
+   <key>tr</key>
+   <value>Ayarları kaydet</value>
   </title>
   <id>1</id>
   <use>
@@ -484,16 +484,16 @@
  <formCommands>
   <name>UpdateDataHistory</name>
   <title>
-   <key>tr</key>
-   <value>Veri tarihçesini güncelle</value>
+   <key>en</key>
+   <value>Update data history</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить историю данных</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Update data history</value>
+   <key>tr</key>
+   <value>Veri tarihçesini güncelle</value>
   </title>
   <id>2</id>
   <use>

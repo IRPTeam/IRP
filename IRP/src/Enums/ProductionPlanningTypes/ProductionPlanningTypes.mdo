@@ -7,77 +7,77 @@
  </producedTypes>
  <name>ProductionPlanningTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>(CORE) Üretim planlama tipleri</value>
+  <key>en</key>
+  <value>(CORE) Production planning types</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>(ЯДРО) Виды планирования производства</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>(CORE) Production planning types</value>
+  <key>tr</key>
+  <value>(CORE) Üretim planlama tipleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="2005d8c3-7f25-498a-8560-1e5ad514bec2">
   <name>Planned</name>
   <synonym>
-   <key>tr</key>
-   <value>Planlanan</value>
+   <key>en</key>
+   <value>Planned</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Итого план</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Planned</value>
+   <key>tr</key>
+   <value>Planlanan</value>
   </synonym>
  </enumValues>
  <enumValues uuid="1e69ac9e-abe9-4cca-bbf8-70369f7720c6">
   <name>Produced</name>
   <synonym>
-   <key>tr</key>
-   <value>Üretilen</value>
+   <key>en</key>
+   <value>Produced</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Произведено</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Produced</value>
+   <key>tr</key>
+   <value>Üretilen</value>
   </synonym>
  </enumValues>
  <enumValues uuid="dcbf66b8-cfda-4f71-8a13-892ce3ad2aa5">
   <name>PlanAdjustment</name>
   <synonym>
-   <key>tr</key>
-   <value>Plan düzeltme</value>
+   <key>en</key>
+   <value>Plan adjustment</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Корректировка планирования</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Plan adjustment</value>
+   <key>tr</key>
+   <value>Plan düzeltme</value>
   </synonym>
  </enumValues>
  <enumValues uuid="2dfc5b64-cda2-463e-b631-970b22070334">
   <name>Closing</name>
   <synonym>
-   <key>tr</key>
-   <value>Kapanış</value>
+   <key>en</key>
+   <value>Closing</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Закрытие</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Closing</value>
+   <key>tr</key>
+   <value>Kapanış</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

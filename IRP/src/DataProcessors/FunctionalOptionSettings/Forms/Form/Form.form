@@ -2,16 +2,16 @@
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <items xsi:type="form:Addition">
   <title>
-   <key>tr</key>
-   <value>Ara</value>
+   <key>en</key>
+   <value>Search</value>
   </title>
   <title>
    <key>ru</key>
    <value>Поиск</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Search</value>
+   <key>tr</key>
+   <value>Ara</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -555,16 +555,16 @@
  <attributes>
   <name>FunctionalOptions</name>
   <title>
-   <key>tr</key>
-   <value>İşlevsel seçenekleri</value>
+   <key>en</key>
+   <value>Functional options</value>
   </title>
   <title>
    <key>ru</key>
    <value>Функциональные опции</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Functional options</value>
+   <key>tr</key>
+   <value>İşlevsel seçenekleri</value>
   </title>
   <id>2</id>
   <valueType>
@@ -579,16 +579,16 @@
   <columns>
    <name>OptionName</name>
    <title>
-    <key>tr</key>
-    <value>Seçenek tanımı</value>
+    <key>en</key>
+    <value>Option name</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование свойства</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Option name</value>
+    <key>tr</key>
+    <value>Seçenek tanımı</value>
    </title>
    <id>3</id>
    <valueType>
@@ -605,16 +605,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использовать</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <id>4</id>
    <valueType>
@@ -630,16 +630,16 @@
   <columns>
    <name>OptionPresentation</name>
    <title>
-    <key>tr</key>
-    <value>Seçenek</value>
+    <key>en</key>
+    <value>Option</value>
    </title>
    <title>
     <key>ru</key>
     <value>Вариант</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Option</value>
+    <key>tr</key>
+    <value>Seçenek</value>
    </title>
    <id>5</id>
    <valueType>
@@ -657,16 +657,16 @@
  <formCommands>
   <name>Save</name>
   <title>
-   <key>tr</key>
-   <value>Sakla</value>
+   <key>en</key>
+   <value>Save</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сохранить</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Save</value>
+   <key>tr</key>
+   <value>Sakla</value>
   </title>
   <id>1</id>
   <use>
@@ -682,16 +682,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <id>2</id>
   <use>
@@ -707,16 +707,16 @@
  <formCommands>
   <name>CheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü işaretle</value>
+   <key>en</key>
+   <value>Check all</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать все</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Check all</value>
+   <key>tr</key>
+   <value>Tümü işaretle</value>
   </title>
   <id>3</id>
   <use>
@@ -736,16 +736,16 @@
  <formCommands>
   <name>UncheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü kaldır</value>
+   <key>en</key>
+   <value>Uncheck all</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отменить все</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Uncheck all</value>
+   <key>tr</key>
+   <value>Tümü kaldır</value>
   </title>
   <id>4</id>
   <use>
@@ -765,16 +765,16 @@
  <formCommands>
   <name>UpdateDefaults</name>
   <title>
-   <key>tr</key>
-   <value>Varsayılan değerleri güncelle</value>
+   <key>en</key>
+   <value>Update defaults</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить значения по умолчанию</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Update defaults</value>
+   <key>tr</key>
+   <value>Varsayılan değerleri güncelle</value>
   </title>
   <id>5</id>
   <use>
@@ -790,16 +790,16 @@
  <formCommands>
   <name>UpdateAllUserSettings</name>
   <title>
-   <key>tr</key>
-   <value>Tüm kullanıcı ayarları güncelle</value>
+   <key>en</key>
+   <value>Update all user settings</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить все пользовательские настройки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Update all user settings</value>
+   <key>tr</key>
+   <value>Tüm kullanıcı ayarları güncelle</value>
   </title>
   <id>6</id>
   <use>

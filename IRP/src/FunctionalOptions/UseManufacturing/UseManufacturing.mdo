@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8d3d403a-ee8d-48ff-8e0f-75d3ba1bef62">
  <name>UseManufacturing</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanmak - Üretim</value>
+  <key>en</key>
+  <value>Use manufacturing</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать производство</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use manufacturing</value>
+  <key>tr</key>
+  <value>Kullanmak - Üretim</value>
  </synonym>
  <location>Constant.UseManufacturing</location>
  <privilegedGetMode>true</privilegedGetMode>

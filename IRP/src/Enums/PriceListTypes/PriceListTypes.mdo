@@ -7,62 +7,62 @@
  </producedTypes>
  <name>PriceListTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Fiyat liste tipleri</value>
+  <key>en</key>
+  <value>Price list types</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Вид установки цен номенклатуры</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Price list types</value>
+  <key>tr</key>
+  <value>Fiyat liste tipleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="dc6d4a77-bb91-480d-819a-5fbc54129be0">
   <name>PriceByItems</name>
   <synonym>
-   <key>tr</key>
-   <value>Fiyatlar - malzeme bazlı</value>
+   <key>en</key>
+   <value>Price by items</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Цены по номенклатуре</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Price by items</value>
+   <key>tr</key>
+   <value>Fiyatlar - malzeme bazlı</value>
   </synonym>
  </enumValues>
  <enumValues uuid="fba7ff04-313c-4d9b-b252-1306e3282285">
   <name>PriceByItemKeys</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyanta göre fiyatlar</value>
+   <key>en</key>
+   <value>Price by item keys</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Цена по характеристике</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Price by item keys</value>
+   <key>tr</key>
+   <value>Varyanta göre fiyatlar</value>
   </synonym>
  </enumValues>
  <enumValues uuid="0e4ed812-8c11-443a-8575-f0b307331163">
   <name>PriceByProperties</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özelliklere göre fiyatlar</value>
+   <key>en</key>
+   <value>Price by properties</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Цены по свойствам</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Price by properties</value>
+   <key>tr</key>
+   <value>Ek özelliklere göre fiyatlar</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

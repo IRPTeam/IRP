@@ -6,32 +6,32 @@
  </producedTypes>
  <name>DetailingSupplies</name>
  <synonym>
-  <key>tr</key>
-  <value>Tedarik detaylandırma</value>
+  <key>en</key>
+  <value>Detailing supplies</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Детализация обеспечения</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Detailing supplies</value>
+  <key>tr</key>
+  <value>Tedarik detaylandırma</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.DetailingSupplies.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="89cce7b1-8ca0-4326-9b33-200d7e381e1f">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
+   <key>en</key>
+   <value>Main data composition schema</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основная схема компоновки</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Main data composition schema</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

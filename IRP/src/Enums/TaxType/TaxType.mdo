@@ -7,47 +7,47 @@
  </producedTypes>
  <name>TaxType</name>
  <synonym>
-  <key>tr</key>
-  <value>Vergi türü</value>
+  <key>en</key>
+  <value>Tax type</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Вид налога</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Tax type</value>
+  <key>tr</key>
+  <value>Vergi türü</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="617ef3ad-7549-4bcc-875f-ec7cd2d60aab">
   <name>Rate</name>
   <synonym>
-   <key>tr</key>
-   <value>Oran</value>
+   <key>en</key>
+   <value>Rate</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ставка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Rate</value>
+   <key>tr</key>
+   <value>Oran</value>
   </synonym>
  </enumValues>
  <enumValues uuid="455cfb08-4b79-442d-a44b-92b8298c6a16">
   <name>Amount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

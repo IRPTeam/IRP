@@ -377,16 +377,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Profiller</value>
+    <key>en</key>
+    <value>Profiles</value>
    </title>
    <title>
     <key>ru</key>
     <value>Профили</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Profiles</value>
+    <key>tr</key>
+    <value>Profiller</value>
    </title>
    <extendedTooltip>
     <name>GroupProfilesExtendedTooltip</name>
@@ -701,16 +701,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Kullanıcılar</value>
+    <key>en</key>
+    <value>Users</value>
    </title>
    <title>
     <key>ru</key>
     <value>Пользователи</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Users</value>
+    <key>tr</key>
+    <value>Kullanıcılar</value>
    </title>
    <extendedTooltip>
     <name>GroupUsersExtendedTooltip</name>
@@ -739,28 +739,28 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
+   <key>en</key>
+   <value>Group main pages</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа главных страниц</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group main pages</value>
-  </title>
-  <toolTip>
    <key>tr</key>
    <value>Grup ana sayfalar</value>
+  </title>
+  <toolTip>
+   <key>en</key>
+   <value>Group main pages</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Группа главных страниц</value>
   </toolTip>
   <toolTip>
-   <key>en</key>
-   <value>Group main pages</value>
+   <key>tr</key>
+   <value>Grup ana sayfalar</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>

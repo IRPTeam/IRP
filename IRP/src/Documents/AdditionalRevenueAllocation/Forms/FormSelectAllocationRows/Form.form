@@ -136,16 +136,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Görünüm</value>
+        <key>en</key>
+        <value>Presentation</value>
        </title>
        <title>
         <key>ru</key>
         <value>Специальные предложения</value>
        </title>
        <title>
-        <key>en</key>
-        <value>Presentation</value>
+        <key>tr</key>
+        <value>Görünüm</value>
        </title>
        <extendedTooltip>
         <name>ListGroupPresentationExtendedTooltip</name>
@@ -390,16 +390,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Evraklar</value>
+      <key>en</key>
+      <value>Documents</value>
      </title>
      <title>
       <key>ru</key>
       <value>Документы</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Documents</value>
+      <key>tr</key>
+      <value>Evraklar</value>
      </title>
      <extendedTooltip>
       <name>GroupDocumentsExtendedTooltip</name>
@@ -1036,16 +1036,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Satırlar</value>
+      <key>en</key>
+      <value>Rows</value>
      </title>
      <title>
       <key>ru</key>
       <value>Строки</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Rows</value>
+      <key>tr</key>
+      <value>Satırlar</value>
      </title>
      <extendedTooltip>
       <name>GroupRowsExtendedTooltip</name>
@@ -1074,16 +1074,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Satır düzenleyicisi</value>
+     <key>en</key>
+     <value>Row editor</value>
     </title>
     <title>
      <key>ru</key>
      <value>Редактор строк</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Row editor</value>
+     <key>tr</key>
+     <value>Satır düzenleyicisi</value>
     </title>
     <extendedTooltip>
      <name>GroupRowEditorExtendedTooltip</name>
@@ -1111,16 +1111,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Satır düzenleyicisi</value>
+    <key>en</key>
+    <value>Row editor</value>
    </title>
    <title>
     <key>ru</key>
     <value>Редактор строк</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Row editor</value>
+    <key>tr</key>
+    <value>Satır düzenleyicisi</value>
    </title>
    <extendedTooltip>
     <name>GroupPageRowEditorExtendedTooltip</name>
@@ -1322,16 +1322,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Görünüm</value>
+      <key>en</key>
+      <value>Presentation</value>
      </title>
      <title>
       <key>ru</key>
       <value>Специальные предложения</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Presentation</value>
+      <key>tr</key>
+      <value>Görünüm</value>
      </title>
      <extendedTooltip>
       <name>ResultTreeGroupPresentationExtendedTooltip</name>
@@ -1589,16 +1589,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Sonuçlar</value>
+    <key>en</key>
+    <value>Results</value>
    </title>
    <title>
     <key>ru</key>
     <value>Результаты</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Results</value>
+    <key>tr</key>
+    <value>Sonuçlar</value>
    </title>
    <extendedTooltip>
     <name>GroupResultsExtendedTooltip</name>
@@ -1627,16 +1627,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ana sayfalar</value>
+   <key>en</key>
+   <value>Main pages</value>
   </title>
   <title>
    <key>ru</key>
    <value>Основные страницы</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Main pages</value>
+   <key>tr</key>
+   <value>Ana sayfalar</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -1780,16 +1780,16 @@
  <attributes>
   <name>List</name>
   <title>
-   <key>tr</key>
-   <value>Liste</value>
+   <key>en</key>
+   <value>List</value>
   </title>
   <title>
    <key>ru</key>
    <value>Список</value>
   </title>
   <title>
-   <key>en</key>
-   <value>List</value>
+   <key>tr</key>
+   <value>Liste</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1820,16 +1820,16 @@ WHERE
  <attributes>
   <name>DocumentRows</name>
   <title>
-   <key>tr</key>
-   <value>Evrak satırları</value>
+   <key>en</key>
+   <value>Document rows</value>
   </title>
   <title>
    <key>ru</key>
    <value>Строки документа</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Document rows</value>
+   <key>tr</key>
+   <value>Evrak satırları</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1844,16 +1844,16 @@ WHERE
   <columns>
    <name>BasisRowID</name>
    <title>
-    <key>tr</key>
-    <value>Kaynak evrak satır ID</value>
+    <key>en</key>
+    <value>Basis row ID</value>
    </title>
    <title>
     <key>ru</key>
     <value>ID строки документа основания</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Basis row ID</value>
+    <key>tr</key>
+    <value>Kaynak evrak satır ID</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1869,16 +1869,16 @@ WHERE
   <columns>
    <name>RowID</name>
    <title>
-    <key>tr</key>
-    <value>Satır ID</value>
+    <key>en</key>
+    <value>Row ID</value>
    </title>
    <title>
     <key>ru</key>
     <value>ID Строки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Row ID</value>
+    <key>tr</key>
+    <value>Satır ID</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1894,16 +1894,16 @@ WHERE
   <columns>
    <name>Document</name>
    <title>
-    <key>tr</key>
-    <value>Evrak</value>
+    <key>en</key>
+    <value>Document</value>
    </title>
    <title>
     <key>ru</key>
     <value>Документ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Document</value>
+    <key>tr</key>
+    <value>Evrak</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1919,16 +1919,16 @@ WHERE
   <columns>
    <name>Store</name>
    <title>
-    <key>tr</key>
-    <value>Depo</value>
+    <key>en</key>
+    <value>Store</value>
    </title>
    <title>
     <key>ru</key>
     <value>Склад</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Store</value>
+    <key>tr</key>
+    <value>Depo</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1944,16 +1944,16 @@ WHERE
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Характеристика</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1969,16 +1969,16 @@ WHERE
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использовать</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1995,16 +1995,16 @@ WHERE
  <attributes>
   <name>BasisRowID</name>
   <title>
-   <key>tr</key>
-   <value>Kaynak evrak satır ID</value>
+   <key>en</key>
+   <value>Basis row ID</value>
   </title>
   <title>
    <key>ru</key>
    <value>ID строки документа основания</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Basis row ID</value>
+   <key>tr</key>
+   <value>Kaynak evrak satır ID</value>
   </title>
   <id>9</id>
   <valueType>
@@ -2020,16 +2020,16 @@ WHERE
  <attributes>
   <name>ResultTree</name>
   <title>
-   <key>tr</key>
-   <value>Sonuç ağacı</value>
+   <key>en</key>
+   <value>Result tree</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дерево результата</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Result tree</value>
+   <key>tr</key>
+   <value>Sonuç ağacı</value>
   </title>
   <id>10</id>
   <valueType>
@@ -2044,16 +2044,16 @@ WHERE
   <columns>
    <name>RowID</name>
    <title>
-    <key>tr</key>
-    <value>Satır ID</value>
+    <key>en</key>
+    <value>Row ID</value>
    </title>
    <title>
     <key>ru</key>
     <value>ID Строки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Row ID</value>
+    <key>tr</key>
+    <value>Satır ID</value>
    </title>
    <id>11</id>
    <valueType>
@@ -2069,16 +2069,16 @@ WHERE
   <columns>
    <name>Document</name>
    <title>
-    <key>tr</key>
-    <value>Evrak</value>
+    <key>en</key>
+    <value>Document</value>
    </title>
    <title>
     <key>ru</key>
     <value>Документ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Document</value>
+    <key>tr</key>
+    <value>Evrak</value>
    </title>
    <id>12</id>
    <valueType>
@@ -2094,16 +2094,16 @@ WHERE
   <columns>
    <name>Store</name>
    <title>
-    <key>tr</key>
-    <value>Depo</value>
+    <key>en</key>
+    <value>Store</value>
    </title>
    <title>
     <key>ru</key>
     <value>Склад</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Store</value>
+    <key>tr</key>
+    <value>Depo</value>
    </title>
    <id>13</id>
    <valueType>
@@ -2119,16 +2119,16 @@ WHERE
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Характеристика</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </title>
    <id>14</id>
    <valueType>
@@ -2144,16 +2144,16 @@ WHERE
   <columns>
    <name>Use</name>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использовать</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <id>15</id>
    <valueType>
@@ -2169,16 +2169,16 @@ WHERE
   <columns>
    <name>Level</name>
    <title>
-    <key>tr</key>
-    <value>Seviye</value>
+    <key>en</key>
+    <value>Level</value>
    </title>
    <title>
     <key>ru</key>
     <value>Уровень</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Level</value>
+    <key>tr</key>
+    <value>Seviye</value>
    </title>
    <id>16</id>
    <valueType>
@@ -2197,16 +2197,16 @@ WHERE
   <columns>
    <name>Icon</name>
    <title>
-    <key>tr</key>
-    <value>Simge</value>
+    <key>en</key>
+    <value>Icon</value>
    </title>
    <title>
     <key>ru</key>
     <value>Иконка</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Icon</value>
+    <key>tr</key>
+    <value>Simge</value>
    </title>
    <id>17</id>
    <valueType>
@@ -2225,16 +2225,16 @@ WHERE
   <columns>
    <name>Presentation</name>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
+    <key>en</key>
+    <value>Presentation</value>
    </title>
    <title>
     <key>ru</key>
     <value>Специальные предложения</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Presentation</value>
+    <key>tr</key>
+    <value>Görünüm</value>
    </title>
    <id>18</id>
    <valueType>
@@ -2252,16 +2252,16 @@ WHERE
  <formCommands>
   <name>SelectDocument</name>
   <title>
-   <key>tr</key>
-   <value>Seç</value>
+   <key>en</key>
+   <value>Select</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Select</value>
+   <key>tr</key>
+   <value>Seç</value>
   </title>
   <id>1</id>
   <use>
@@ -2277,16 +2277,16 @@ WHERE
  <formCommands>
   <name>EditorCancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <id>2</id>
   <use>
@@ -2302,16 +2302,16 @@ WHERE
  <formCommands>
   <name>EditorOk</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>Ok</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ок</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Ok</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <id>3</id>
   <use>
@@ -2327,16 +2327,16 @@ WHERE
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>Ok</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ок</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Ok</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <id>4</id>
   <use>
@@ -2352,16 +2352,16 @@ WHERE
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <id>5</id>
   <use>
@@ -2377,16 +2377,16 @@ WHERE
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır antahtarı göster</value>
+   <key>en</key>
+   <value>Show row key</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать row key</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Show row key</value>
+   <key>tr</key>
+   <value>Satır antahtarı göster</value>
   </title>
   <id>6</id>
   <use>
@@ -2405,16 +2405,16 @@ WHERE
  <formCommands>
   <name>CheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü işaretle</value>
+   <key>en</key>
+   <value>Check all</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать все</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Check all</value>
+   <key>tr</key>
+   <value>Tümü işaretle</value>
   </title>
   <id>7</id>
   <use>
@@ -2434,16 +2434,16 @@ WHERE
  <formCommands>
   <name>UncheckAll</name>
   <title>
-   <key>tr</key>
-   <value>Tümü kaldır</value>
+   <key>en</key>
+   <value>Uncheck all</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отменить все</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Uncheck all</value>
+   <key>tr</key>
+   <value>Tümü kaldır</value>
   </title>
   <id>8</id>
   <use>

@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T9012S_AccountsPartner</name>
  <synonym>
-  <key>tr</key>
-  <value>Hesaplar (Cari hesap)</value>
+  <key>en</key>
+  <value>Accounts (Partner)</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Счета (Партнер)</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Accounts (Partner)</value>
+  <key>tr</key>
+  <value>Hesaplar (Cari hesap)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +30,16 @@
  <resources uuid="b58f6c66-64fe-41d2-9489-7fe9174b2795">
   <name>AccountAdvancesVendor</name>
   <synonym>
-   <key>tr</key>
-   <value>Tedarikçi hesabı (avans)</value>
+   <key>en</key>
+   <value>Account Vendor (advances)</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Счет поставщика (аванс)</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Account Vendor (advances)</value>
+   <key>tr</key>
+   <value>Tedarikçi hesabı (avans)</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -58,16 +58,16 @@
  <resources uuid="b8166b89-b113-4e0b-acf0-16ca3d5e746e">
   <name>AccountTransactionsVendor</name>
   <synonym>
-   <key>tr</key>
-   <value>Tedarikçi hesabı (hareketler)</value>
+   <key>en</key>
+   <value>Account Vendor (transactions)</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Счет поставщика (транзакции)</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Account Vendor (transactions)</value>
+   <key>tr</key>
+   <value>Tedarikçi hesabı (hareketler)</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -86,16 +86,16 @@
  <resources uuid="fde676d3-c449-48be-9611-9dab970a1523">
   <name>AccountAdvancesCustomer</name>
   <synonym>
-   <key>tr</key>
-   <value>Müşteri hesabı (avans)</value>
+   <key>en</key>
+   <value>Account Customer (advances)</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Счет покупателя (аванс)</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Account Customer (advances)</value>
+   <key>tr</key>
+   <value>Müşteri hesabı (avans)</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -114,16 +114,16 @@
  <resources uuid="bdba5000-f6ce-4fd1-8db0-35bc4dda9c60">
   <name>AccountTransactionsCustomer</name>
   <synonym>
-   <key>tr</key>
-   <value>Müşteri hesabı (hareketler)</value>
+   <key>en</key>
+   <value>Account Customer (transactions)</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Счет покупателя (транзакции)</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Account Customer (transactions)</value>
+   <key>tr</key>
+   <value>Müşteri hesabı (hareketler)</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -142,16 +142,16 @@
  <dimensions uuid="63f9c712-8432-4ec8-afb1-5ab2166541b0">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -168,16 +168,16 @@
  <dimensions uuid="2eca7011-c535-459c-92cc-b873b122e050">
   <name>Variant</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Variant</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Variant</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypeVariants</types>
@@ -194,16 +194,16 @@
  <dimensions uuid="14d18982-1bd5-40ce-be9c-d7608d17540c">
   <name>Partner</name>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
+   <key>en</key>
+   <value>Partner</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Партнер</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Partner</value>
+   <key>tr</key>
+   <value>Cari hesap</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -220,16 +220,16 @@
  <dimensions uuid="b67f39e4-62be-4753-84e9-207e67a7a831">
   <name>Agreement</name>
   <synonym>
-   <key>tr</key>
-   <value>Sözleşme</value>
+   <key>en</key>
+   <value>Agreement</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Соглашение</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Agreement</value>
+   <key>tr</key>
+   <value>Sözleşme</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -246,16 +246,16 @@
  <forms uuid="f4d9c850-72e5-46e2-86fc-207034084f82">
   <name>RecordForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
+   <key>en</key>
+   <value>Record form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма записи</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Record form</value>
+   <key>tr</key>
+   <value>Kayıt formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

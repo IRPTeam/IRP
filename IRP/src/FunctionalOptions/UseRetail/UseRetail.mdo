@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7431c75c-3571-4986-8a9b-a9e296aea714">
  <name>UseRetail</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Perakende</value>
+  <key>en</key>
+  <value>Use retail</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать розничный модуль</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use retail</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Perakende</value>
  </synonym>
  <location>Constant.UseRetail</location>
  <privilegedGetMode>true</privilegedGetMode>

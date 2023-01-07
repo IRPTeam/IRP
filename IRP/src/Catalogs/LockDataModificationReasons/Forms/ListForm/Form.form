@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -149,16 +149,16 @@
    <name>SetOneRuleForAllObjects</name>
    <id>25</id>
    <title>
-    <key>tr</key>
-    <value>Tek kural</value>
+    <key>en</key>
+    <value>One rule</value>
    </title>
    <title>
     <key>ru</key>
     <value>Одно правило</value>
    </title>
    <title>
-    <key>en</key>
-    <value>One rule</value>
+    <key>tr</key>
+    <value>Tek kural</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -204,16 +204,16 @@
    <name>DisableRule</name>
    <id>28</id>
    <title>
-    <key>tr</key>
-    <value>Devre dışı</value>
+    <key>en</key>
+    <value>Disable</value>
    </title>
    <title>
     <key>ru</key>
     <value>Не активен</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Disable</value>
+    <key>tr</key>
+    <value>Devre dışı</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>

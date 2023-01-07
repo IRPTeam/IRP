@@ -7,16 +7,16 @@
  </producedTypes>
  <name>DocumentsForOutgoingPayment</name>
  <synonym>
-  <key>tr</key>
-  <value>Çıkan ödeme evrakları</value>
+  <key>en</key>
+  <value>Documents for outgoing payment</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документы исходящих платежей</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Documents for outgoing payment</value>
+  <key>tr</key>
+  <value>Çıkan ödeme evrakları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registeredDocuments>Document.PurchaseInvoice</registeredDocuments>
@@ -28,16 +28,16 @@
  <forms uuid="ee7ba466-99fc-4d4c-a348-04e885d0deab">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

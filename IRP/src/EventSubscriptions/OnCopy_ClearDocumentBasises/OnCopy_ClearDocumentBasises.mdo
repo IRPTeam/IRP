@@ -2,16 +2,16 @@
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d688f223-7102-41a5-88f9-6b37ab01f7fa">
  <name>OnCopy_ClearDocumentBasises</name>
  <synonym>
-  <key>tr</key>
-  <value>Kopyalarken evrak kaynak evrakı temizle</value>
+  <key>en</key>
+  <value>On copy clear document basises</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>При копировании очищать документы основания</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>On copy clear document basises</value>
+  <key>tr</key>
+  <value>Kopyalarken evrak kaynak evrakı temizle</value>
  </synonym>
  <source>
   <types>DocumentObject</types>

@@ -202,28 +202,28 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Group genel</value>
+   <key>en</key>
+   <value>Group main</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа основная</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group main</value>
-  </title>
-  <toolTip>
    <key>tr</key>
    <value>Group genel</value>
+  </title>
+  <toolTip>
+   <key>en</key>
+   <value>Group main</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Группа основная</value>
   </toolTip>
   <toolTip>
-   <key>en</key>
-   <value>Group main</value>
+   <key>tr</key>
+   <value>Group genel</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupMainExtendedTooltip</name>
@@ -684,7 +684,7 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Tree</value>
    </title>
    <title>
@@ -692,20 +692,20 @@
     <value>Дерево</value>
    </title>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Tree</value>
    </title>
    <toolTip>
-    <key>tr</key>
-    <value>Grup ağacı</value>
+    <key>en</key>
+    <value>Group tree</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
     <value>Группа дерево</value>
    </toolTip>
    <toolTip>
-    <key>en</key>
-    <value>Group tree</value>
+    <key>tr</key>
+    <value>Grup ağacı</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupTreeExtendedTooltip</name>
@@ -788,7 +788,7 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>XML Preview</value>
    </title>
    <title>
@@ -796,20 +796,20 @@
     <value>Предварительный просмотр XML</value>
    </title>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>XML Preview</value>
    </title>
    <toolTip>
-    <key>tr</key>
-    <value>Grup XML preview</value>
+    <key>en</key>
+    <value>Group XMLPreview</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
     <value>Группа XML предварительный просмотр</value>
    </toolTip>
    <toolTip>
-    <key>en</key>
-    <value>Group XMLPreview</value>
+    <key>tr</key>
+    <value>Grup XML preview</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupXMLPreviewExtendedTooltip</name>
@@ -892,19 +892,19 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>XML Kaynak</value>
+    <key>en</key>
+    <value>XML Source</value>
    </title>
    <title>
     <key>ru</key>
     <value>XML источник</value>
    </title>
    <title>
-    <key>en</key>
-    <value>XML Source</value>
+    <key>tr</key>
+    <value>XML Kaynak</value>
    </title>
    <toolTip>
-    <key>tr</key>
+    <key>en</key>
     <value>Group XMLSource</value>
    </toolTip>
    <toolTip>
@@ -912,7 +912,7 @@
     <value>Группа XML источник</value>
    </toolTip>
    <toolTip>
-    <key>en</key>
+    <key>tr</key>
     <value>Group XMLSource</value>
    </toolTip>
    <extendedTooltip>
@@ -1047,19 +1047,19 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Validasyon yap</value>
+    <key>en</key>
+    <value>Validate</value>
    </title>
    <title>
     <key>ru</key>
     <value>Проверить</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Validate</value>
+    <key>tr</key>
+    <value>Validasyon yap</value>
    </title>
    <toolTip>
-    <key>tr</key>
+    <key>en</key>
     <value>Group XMLTo validate</value>
    </toolTip>
    <toolTip>
@@ -1067,7 +1067,7 @@
     <value>Группа XML для проверки</value>
    </toolTip>
    <toolTip>
-    <key>en</key>
+    <key>tr</key>
     <value>Group XMLTo validate</value>
    </toolTip>
    <extendedTooltip>
@@ -1151,7 +1151,7 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>JSON</value>
    </title>
    <title>
@@ -1159,7 +1159,7 @@
     <value>JSON</value>
    </title>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>JSON</value>
    </title>
    <extendedTooltip>
@@ -1189,28 +1189,28 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup sayfalar</value>
+   <key>en</key>
+   <value>Group pages</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа страницы</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group pages</value>
-  </title>
-  <toolTip>
    <key>tr</key>
    <value>Grup sayfalar</value>
+  </title>
+  <toolTip>
+   <key>en</key>
+   <value>Group pages</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Группа страницы</value>
   </toolTip>
   <toolTip>
-   <key>en</key>
-   <value>Group pages</value>
+   <key>tr</key>
+   <value>Grup sayfalar</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -1240,7 +1240,7 @@
    <name>FormReadStructure</name>
    <id>52</id>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Read structure</value>
    </title>
    <title>
@@ -1248,7 +1248,7 @@
     <value>Структура чтения</value>
    </title>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Read structure</value>
    </title>
    <visible>true</visible>
@@ -1282,7 +1282,7 @@
    <name>FormValidateXML</name>
    <id>61</id>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Validate XML</value>
    </title>
    <title>
@@ -1290,7 +1290,7 @@
     <value>Проверить XML</value>
    </title>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Validate XML</value>
    </title>
    <visible>true</visible>
@@ -1397,7 +1397,7 @@
  <attributes>
   <name>TreeData</name>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Tree data</value>
   </title>
   <title>
@@ -1405,7 +1405,7 @@
    <value>Данные дерева</value>
   </title>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Tree data</value>
   </title>
   <id>2</id>
@@ -1421,16 +1421,16 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
+    <key>en</key>
+    <value>Name</value>
    </title>
    <title>
     <key>ru</key>
     <value>Имя</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Name</value>
+    <key>tr</key>
+    <value>Ad</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1447,16 +1447,16 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </title>
    <id>4</id>
    <valueType/>
@@ -1470,7 +1470,7 @@
   <columns>
    <name>Array</name>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Array</value>
    </title>
    <title>
@@ -1478,7 +1478,7 @@
     <value>Массив</value>
    </title>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Array</value>
    </title>
    <id>5</id>
@@ -1495,7 +1495,7 @@
   <columns>
    <name>DataType</name>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Data type</value>
    </title>
    <title>
@@ -1503,7 +1503,7 @@
     <value>Тип данных</value>
    </title>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Data type</value>
    </title>
    <id>6</id>
@@ -1521,16 +1521,16 @@
   <columns>
    <name>CanBeEmpty</name>
    <title>
-    <key>tr</key>
-    <value>Boş olabilir</value>
+    <key>en</key>
+    <value>Can be empty</value>
    </title>
    <title>
     <key>ru</key>
     <value>Может быть пустым</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Can be empty</value>
+    <key>tr</key>
+    <value>Boş olabilir</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1547,7 +1547,7 @@
  <attributes>
   <name>XML</name>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>XML</value>
   </title>
   <title>
@@ -1555,7 +1555,7 @@
    <value>XML</value>
   </title>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>XML</value>
   </title>
   <id>3</id>
@@ -1576,7 +1576,7 @@
  <attributes>
   <name>HTML</name>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>HTML</value>
   </title>
   <title>
@@ -1584,7 +1584,7 @@
    <value>HTML</value>
   </title>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>HTML</value>
   </title>
   <id>4</id>
@@ -1602,7 +1602,7 @@
  <attributes>
   <name>XMLToValidate</name>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>XML to validate</value>
   </title>
   <title>
@@ -1610,7 +1610,7 @@
    <value>XML для проверки</value>
   </title>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>XML to validate</value>
   </title>
   <id>5</id>
@@ -1631,7 +1631,7 @@
  <attributes>
   <name>ErrorLog</name>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Error log</value>
   </title>
   <title>
@@ -1639,7 +1639,7 @@
    <value>Лог ошибок</value>
   </title>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Error log</value>
   </title>
   <id>6</id>
@@ -1657,7 +1657,7 @@
  <attributes>
   <name>JSON</name>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>JSON</value>
   </title>
   <title>
@@ -1665,7 +1665,7 @@
    <value>JSON</value>
   </title>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>JSON</value>
   </title>
   <id>8</id>
@@ -1683,16 +1683,16 @@
  <attributes>
   <name>EmptyValues</name>
   <title>
-   <key>tr</key>
-   <value>Boş değerler</value>
+   <key>en</key>
+   <value>Empty values</value>
   </title>
   <title>
    <key>ru</key>
    <value>Пустые значения</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Empty values</value>
+   <key>tr</key>
+   <value>Boş değerler</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1708,7 +1708,7 @@
  <formCommands>
   <name>ReadStructure</name>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Read structure</value>
   </title>
   <title>
@@ -1716,12 +1716,12 @@
    <value>Структура чтения</value>
   </title>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Read structure</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>tr</key>
+   <key>en</key>
    <value>Read structure</value>
   </toolTip>
   <toolTip>
@@ -1729,7 +1729,7 @@
    <value>Структура чтения</value>
   </toolTip>
   <toolTip>
-   <key>en</key>
+   <key>tr</key>
    <value>Read structure</value>
   </toolTip>
   <use>
@@ -1745,7 +1745,7 @@
  <formCommands>
   <name>ValidateXML</name>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Validate XML</value>
   </title>
   <title>
@@ -1753,12 +1753,12 @@
    <value>Проверить XML</value>
   </title>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Validate XML</value>
   </title>
   <id>2</id>
   <toolTip>
-   <key>tr</key>
+   <key>en</key>
    <value>Validate XML</value>
   </toolTip>
   <toolTip>
@@ -1766,7 +1766,7 @@
    <value>Проверить XML</value>
   </toolTip>
   <toolTip>
-   <key>en</key>
+   <key>tr</key>
    <value>Validate XML</value>
   </toolTip>
   <use>
@@ -1782,16 +1782,16 @@
  <formCommands>
   <name>ValidateJSON</name>
   <title>
-   <key>tr</key>
-   <value>JSON validasyon yap</value>
+   <key>en</key>
+   <value>Validate JSON</value>
   </title>
   <title>
    <key>ru</key>
    <value>Проверить JSON</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Validate JSON</value>
+   <key>tr</key>
+   <value>JSON validasyon yap</value>
   </title>
   <id>3</id>
   <use>

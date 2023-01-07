@@ -675,16 +675,16 @@
  <attributes>
   <name>TemplateActions</name>
   <title>
-   <key>tr</key>
-   <value>Şablon işlemleri</value>
+   <key>en</key>
+   <value>Template actions</value>
   </title>
   <title>
    <key>ru</key>
    <value>Действия шаблона</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Template actions</value>
+   <key>tr</key>
+   <value>Şablon işlemleri</value>
   </title>
   <id>4</id>
   <valueType>

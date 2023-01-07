@@ -13,16 +13,16 @@
      <name>DecorationGroupTitleCollapsedPicture</name>
      <id>189</id>
      <title>
-      <key>tr</key>
-      <value>Dekorasyon grubu tanım birleşmiş resim</value>
+      <key>en</key>
+      <value>Decoration group title collapsed picture</value>
      </title>
      <title>
       <key>ru</key>
       <value>Сворачиваемая группа формы</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Decoration group title collapsed picture</value>
+      <key>tr</key>
+      <value>Dekorasyon grubu tanım birleşmiş resim</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -72,16 +72,16 @@
      <name>DecorationGroupTitleCollapsedLabel</name>
      <id>192</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurun</value>
+      <key>en</key>
+      <value>Please, fill the document</value>
      </title>
      <title>
       <key>ru</key>
       <value>Пожалуйста, заполните документ</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Please, fill the document</value>
+      <key>tr</key>
+      <value>Lütfen, evrakı doldurun</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -209,16 +209,16 @@
      <name>DecorationGroupTitleUncollapsedLabel</name>
      <id>200</id>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurun</value>
+      <key>en</key>
+      <value>Please, fill the document</value>
      </title>
      <title>
       <key>ru</key>
       <value>Пожалуйста, заполните документ</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Please, fill the document</value>
+      <key>tr</key>
+      <value>Lütfen, evrakı doldurun</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -1644,16 +1644,16 @@
       <name>UpdatePhysCount</name>
       <id>450</id>
       <title>
-       <key>tr</key>
-       <value>Lokasyonlardan doldur</value>
+       <key>en</key>
+       <value>Fill from locations</value>
       </title>
       <title>
        <key>ru</key>
        <value>Заполнить из пересчетов товара</value>
       </title>
       <title>
-       <key>en</key>
-       <value>Fill from locations</value>
+       <key>tr</key>
+       <value>Lokasyonlardan doldur</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1932,16 +1932,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Satır açıklaması</value>
+     <key>en</key>
+     <value>Row description</value>
     </title>
     <title>
      <key>ru</key>
      <value>Описание строки</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Row description</value>
+     <key>tr</key>
+     <value>Satır açıklaması</value>
     </title>
     <extendedTooltip>
      <name>GroupRowDescriptionExtendedTooltip</name>
@@ -1977,16 +1977,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Malzemeler</value>
+    <key>en</key>
+    <value>Items</value>
    </title>
    <title>
     <key>ru</key>
     <value>Товары</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Items</value>
+    <key>tr</key>
+    <value>Malzemeler</value>
    </title>
    <extendedTooltip>
     <name>GroupItemListExtendedTooltip</name>
@@ -2019,16 +2019,16 @@
     <name>DecorationStatusHistory</name>
     <id>354</id>
     <title>
-     <key>tr</key>
-     <value>Geçmiş</value>
+     <key>en</key>
+     <value>History</value>
     </title>
     <title>
      <key>ru</key>
      <value>История статусов</value>
     </title>
     <title>
-     <key>en</key>
-     <value>History</value>
+     <key>tr</key>
+     <value>Geçmiş</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -2228,16 +2228,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
+    <key>en</key>
+    <value>Other</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дополнительно</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Other</value>
+    <key>tr</key>
+    <value>Diğer</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -2710,16 +2710,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Lokasyon sayım fişi</value>
+    <key>en</key>
+    <value>Physical count by location</value>
    </title>
    <title>
     <key>ru</key>
     <value>Пересчет товаров</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Physical count by location</value>
+    <key>tr</key>
+    <value>Lokasyon sayım fişi</value>
    </title>
    <extendedTooltip>
     <name>GroupPhysicalCountByLocationExtendedTooltip</name>
@@ -2749,16 +2749,16 @@
     <name>RuleEditQuantity</name>
     <id>367</id>
     <title>
-     <key>tr</key>
-     <value>Kullanıcı miktarı düzeltebilir</value>
+     <key>en</key>
+     <value>User can edit quantity</value>
     </title>
     <title>
      <key>ru</key>
      <value>Пользователь может устанавливать количество</value>
     </title>
     <title>
-     <key>en</key>
-     <value>User can edit quantity</value>
+     <key>tr</key>
+     <value>Kullanıcı miktarı düzeltebilir</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -2815,16 +2815,16 @@
       <segments>Object.UseSerialLot</segments>
      </dataPath>
      <toolTip>
-      <key>tr</key>
-      <value>Bu parametre değiştirmeden önce malzeme listesini temizlemek lazım</value>
+      <key>en</key>
+      <value>You have to clear item list, before change this option</value>
      </toolTip>
      <toolTip>
       <key>ru</key>
       <value>Для изменения настройки необходимо очистить таблицу товаров</value>
      </toolTip>
      <toolTip>
-      <key>en</key>
-      <value>You have to clear item list, before change this option</value>
+      <key>tr</key>
+      <value>Bu parametre değiştirmeden önce malzeme listesini temizlemek lazım</value>
      </toolTip>
      <toolTipRepresentation>ShowBottom</toolTipRepresentation>
      <handlers>
@@ -2869,16 +2869,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Seri lotu kullanmak</value>
+     <key>en</key>
+     <value>Use serial lot numbers</value>
     </title>
     <title>
      <key>ru</key>
      <value>Использовать серийные номера</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Use serial lot numbers</value>
+     <key>tr</key>
+     <value>Seri lotu kullanmak</value>
     </title>
     <extendedTooltip>
      <name>UseSerialLotNumbersExtendedTooltip</name>
@@ -2910,16 +2910,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Kurallar</value>
+    <key>en</key>
+    <value>Rules</value>
    </title>
    <title>
     <key>ru</key>
     <value>Правила</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Rules</value>
+    <key>tr</key>
+    <value>Kurallar</value>
    </title>
    <extendedTooltip>
     <name>GroupRulesExtendedTooltip</name>
@@ -3682,16 +3682,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Satır ID Bilgisi</value>
+    <key>en</key>
+    <value>Row ID Info</value>
    </title>
    <title>
     <key>ru</key>
     <value>Row ID Инфо</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Row ID Info</value>
+    <key>tr</key>
+    <value>Satır ID Bilgisi</value>
    </title>
    <extendedTooltip>
     <name>GroupRowIDInfoExtendedTooltip</name>
@@ -3720,16 +3720,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ana sayfaklar</value>
+   <key>en</key>
+   <value>Main pages</value>
   </title>
   <title>
    <key>ru</key>
    <value>Основные страницы</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Main pages</value>
+   <key>tr</key>
+   <value>Ana sayfaklar</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -3898,16 +3898,16 @@
    <columns>
     <name>Locked</name>
     <title>
-     <key>tr</key>
-     <value>Kilitli</value>
+     <key>en</key>
+     <value>Locked</value>
     </title>
     <title>
      <key>ru</key>
      <value>Заблокировано</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Locked</value>
+     <key>tr</key>
+     <value>Kilitli</value>
     </title>
     <id>7</id>
     <valueType>
@@ -3923,16 +3923,16 @@
    <columns>
     <name>IsExternalLinked</name>
     <title>
-     <key>tr</key>
-     <value>Dışarıdan bağlı</value>
+     <key>en</key>
+     <value>Is external linked</value>
     </title>
     <title>
      <key>ru</key>
      <value>Внешняя ссылка</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Is external linked</value>
+     <key>tr</key>
+     <value>Dışarıdan bağlı</value>
     </title>
     <id>10</id>
     <valueType>
@@ -3948,16 +3948,16 @@
    <columns>
     <name>IsInternalLinked</name>
     <title>
-     <key>tr</key>
-     <value>İçerden bağlı</value>
+     <key>en</key>
+     <value>Is internal linked</value>
     </title>
     <title>
      <key>ru</key>
      <value>Внутренняя ссылка</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Is internal linked</value>
+     <key>tr</key>
+     <value>İçerden bağlı</value>
     </title>
     <id>11</id>
     <valueType>
@@ -3973,16 +3973,16 @@
    <columns>
     <name>ExternalLinks</name>
     <title>
-     <key>tr</key>
-     <value>Dış bağlantılar</value>
+     <key>en</key>
+     <value>External links</value>
     </title>
     <title>
      <key>ru</key>
      <value>Внешние ссылки</value>
     </title>
     <title>
-     <key>en</key>
-     <value>External links</value>
+     <key>tr</key>
+     <value>Dış bağlantılar</value>
     </title>
     <id>12</id>
     <valueType>
@@ -3999,16 +3999,16 @@
    <columns>
     <name>InternalLinks</name>
     <title>
-     <key>tr</key>
-     <value>İç bağlantılar</value>
+     <key>en</key>
+     <value>Internal links</value>
     </title>
     <title>
      <key>ru</key>
      <value>Внутренние ссылки</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Internal links</value>
+     <key>tr</key>
+     <value>İç bağlantılar</value>
     </title>
     <id>13</id>
     <valueType>
@@ -4027,16 +4027,16 @@
  <attributes>
   <name>Description</name>
   <title>
-   <key>tr</key>
-   <value>Tanım</value>
+   <key>en</key>
+   <value>Description</value>
   </title>
   <title>
    <key>ru</key>
    <value>Комментарий</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Description</value>
+   <key>tr</key>
+   <value>Tanım</value>
   </title>
   <id>3</id>
   <valueType>
@@ -4053,16 +4053,16 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>tr</key>
-   <value>Grup malzemeler</value>
+   <key>en</key>
+   <value>Group items</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа элементов</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group items</value>
+   <key>tr</key>
+   <value>Grup malzemeler</value>
   </title>
   <id>5</id>
   <valueType>
@@ -4081,16 +4081,16 @@
  <attributes>
   <name>PhysicalCountByLocationList</name>
   <title>
-   <key>tr</key>
-   <value>Satır adedi</value>
+   <key>en</key>
+   <value>Count rows</value>
   </title>
   <title>
    <key>ru</key>
    <value>Количество строк</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Count rows</value>
+   <key>tr</key>
+   <value>Satır adedi</value>
   </title>
   <id>6</id>
   <valueType>
@@ -4129,16 +4129,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Satır adedi</value>
+       <key>en</key>
+       <value>Count rows</value>
       </content>
       <content>
        <key>ru</key>
        <value>Количество строк</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Count rows</value>
+       <key>tr</key>
+       <value>Satır adedi</value>
       </content>
      </localValue>
     </title>
@@ -4149,16 +4149,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Sayım adedi</value>
+       <key>en</key>
+       <value>Phys. count</value>
       </content>
       <content>
        <key>ru</key>
        <value>Фактическое количество</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Phys. count</value>
+       <key>tr</key>
+       <value>Sayım adedi</value>
       </content>
      </localValue>
     </title>
@@ -4236,16 +4236,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Depo sayım fişi ref</value>
+       <key>en</key>
+       <value>Physical inventory ref</value>
       </content>
       <content>
        <key>ru</key>
        <value>Ссылка инвентаризация товаров</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Physical inventory ref</value>
+       <key>tr</key>
+       <value>Depo sayım fişi ref</value>
       </content>
      </localValue>
     </title>
@@ -4259,16 +4259,16 @@ GROUP BY
  <attributes>
   <name>ExternalLinkedDocs</name>
   <title>
-   <key>tr</key>
-   <value>Dışarında bağlı evraklar</value>
+   <key>en</key>
+   <value>External linked docs</value>
   </title>
   <title>
    <key>ru</key>
    <value>Документы, связанные с внешними ссылками</value>
   </title>
   <title>
-   <key>en</key>
-   <value>External linked docs</value>
+   <key>tr</key>
+   <value>Dışarında bağlı evraklar</value>
   </title>
   <id>14</id>
   <valueType>
@@ -4287,16 +4287,16 @@ GROUP BY
  <attributes>
   <name>InternalLinkedDocs</name>
   <title>
-   <key>tr</key>
-   <value>İçerden bağlı evraklar</value>
+   <key>en</key>
+   <value>Internal linked docs</value>
   </title>
   <title>
    <key>ru</key>
    <value>Документы, связанные с внутренними ссылками</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Internal linked docs</value>
+   <key>tr</key>
+   <value>İçerden bağlı evraklar</value>
   </title>
   <id>15</id>
   <valueType>
@@ -4315,16 +4315,16 @@ GROUP BY
  <attributes>
   <name>LockedFields</name>
   <title>
-   <key>tr</key>
-   <value>Kilitli alanlar</value>
+   <key>en</key>
+   <value>Locked fields</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заблокированные поля</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Locked fields</value>
+   <key>tr</key>
+   <value>Kilitli alanlar</value>
   </title>
   <id>16</id>
   <valueType>
@@ -4343,16 +4343,16 @@ GROUP BY
  <formCommands>
   <name>OpenPickupItems</name>
   <title>
-   <key>tr</key>
-   <value>Seç</value>
+   <key>en</key>
+   <value>Pickup</value>
   </title>
   <title>
    <key>ru</key>
    <value>Подбор товара</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Pickup</value>
+   <key>tr</key>
+   <value>Seç</value>
   </title>
   <id>1</id>
   <use>
@@ -4390,16 +4390,16 @@ GROUP BY
  <formCommands>
   <name>FillExpCount</name>
   <title>
-   <key>tr</key>
-   <value>Programa göre bakiye doldur</value>
+   <key>en</key>
+   <value>Fill expected count</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить по текущим остаткам</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Fill expected count</value>
+   <key>tr</key>
+   <value>Programa göre bakiye doldur</value>
   </title>
   <id>3</id>
   <use>
@@ -4416,16 +4416,16 @@ GROUP BY
  <formCommands>
   <name>UpdatePhysCount</name>
   <title>
-   <key>tr</key>
-   <value>Sayılan adetleri güncelle</value>
+   <key>en</key>
+   <value>Update phys. count</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить фактическое количество</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Update phys. count</value>
+   <key>tr</key>
+   <value>Sayılan adetleri güncelle</value>
   </title>
   <id>7</id>
   <use>
@@ -4442,16 +4442,16 @@ GROUP BY
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır anahtar göster</value>
+   <key>en</key>
+   <value>Show row key</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать ключ строки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Show row key</value>
+   <key>tr</key>
+   <value>Satır anahtar göster</value>
   </title>
   <id>8</id>
   <use>
@@ -4470,16 +4470,16 @@ GROUP BY
  <formCommands>
   <name>UnlockLinkedRows</name>
   <title>
-   <key>tr</key>
-   <value>Bağlı satırların kilidi kaldır</value>
+   <key>en</key>
+   <value>Unlock linked rows</value>
   </title>
   <title>
    <key>ru</key>
    <value>Разблокировать связанные строки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Unlock linked rows</value>
+   <key>tr</key>
+   <value>Bağlı satırların kilidi kaldır</value>
   </title>
   <id>9</id>
   <use>
@@ -4498,16 +4498,16 @@ GROUP BY
  <formCommands>
   <name>ShowHiddenTables</name>
   <title>
-   <key>tr</key>
-   <value>Gizli tabloları göster</value>
+   <key>en</key>
+   <value>Show hidden tables</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать скрытые таблицы</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Show hidden tables</value>
+   <key>tr</key>
+   <value>Gizli tabloları göster</value>
   </title>
   <id>10</id>
   <use>
@@ -4526,16 +4526,16 @@ GROUP BY
  <formCommands>
   <name>LoadDataFromTable</name>
   <title>
-   <key>tr</key>
-   <value>Tablodan veri yükle</value>
+   <key>en</key>
+   <value>LoadDataFromTable</value>
   </title>
   <title>
    <key>ru</key>
    <value>Загрузить из таблицы</value>
   </title>
   <title>
-   <key>en</key>
-   <value>LoadDataFromTable</value>
+   <key>tr</key>
+   <value>Tablodan veri yükle</value>
   </title>
   <id>11</id>
   <use>

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>tr</key>
-  <value>Satış ekranı</value>
+  <key>en</key>
+  <value>Point of sales</value>
  </title>
  <title>
   <key>ru</key>
   <value>Рабочее место кассира</value>
  </title>
  <title>
-  <key>en</key>
-  <value>Point of sales</value>
+  <key>tr</key>
+  <value>Satış ekranı</value>
  </title>
  <items xsi:type="form:FormGroup">
   <name>GroupMainPages</name>
@@ -120,16 +120,16 @@
         <name>SalesPersonByDefault</name>
         <id>1018</id>
         <title>
-         <key>tr</key>
-         <value>Satış elemanı</value>
+         <key>en</key>
+         <value>Sales person</value>
         </title>
         <title>
          <key>ru</key>
          <value>Продавец</value>
         </title>
         <title>
-         <key>en</key>
-         <value>Sales person</value>
+         <key>tr</key>
+         <value>Satış elemanı</value>
         </title>
         <titleTextColor xsi:type="core:ColorRef">
          <color>Style.AccentColor</color>
@@ -281,16 +281,16 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>tr</key>
-         <value>Grup Perakende müşteri</value>
+         <key>en</key>
+         <value>Group Retail customer</value>
         </title>
         <title>
          <key>ru</key>
          <value>Группа Розничный покупатель</value>
         </title>
         <title>
-         <key>en</key>
-         <value>Group Retail customer</value>
+         <key>tr</key>
+         <value>Grup Perakende müşteri</value>
         </title>
         <extendedTooltip>
          <name>GroupRetailCustomerExtendedTooltip</name>
@@ -322,16 +322,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Grup başlık üst</value>
+        <key>en</key>
+        <value>Group header top</value>
        </title>
        <title>
         <key>ru</key>
         <value>Группа шапка верх</value>
        </title>
        <title>
-        <key>en</key>
-        <value>Group header top</value>
+        <key>tr</key>
+        <value>Grup başlık üst</value>
        </title>
        <extendedTooltip>
         <name>GroupHeaderTopExtendedTooltip</name>
@@ -514,16 +514,16 @@
             <common>true</common>
            </userVisible>
            <title>
-            <key>tr</key>
-            <value>Malzeme</value>
+            <key>en</key>
+            <value>Item</value>
            </title>
            <title>
             <key>ru</key>
             <value>Номенклатура</value>
            </title>
            <title>
-            <key>en</key>
-            <value>Item</value>
+            <key>tr</key>
+            <value>Malzeme</value>
            </title>
            <titleFont xsi:type="core:FontRef">
             <font>Style.LargeTextFont</font>
@@ -562,16 +562,16 @@
            <name>ItemListSerialLotNumbersPresentation</name>
            <id>970</id>
            <title>
-            <key>tr</key>
-            <value>Seri/lot</value>
+            <key>en</key>
+            <value>Serials</value>
            </title>
            <title>
             <key>ru</key>
             <value>Серийные номера</value>
            </title>
            <title>
-            <key>en</key>
-            <value>Serials</value>
+            <key>tr</key>
+            <value>Seri/lot</value>
            </title>
            <titleFont xsi:type="core:FontRef">
             <font>Style.LargeTextFont</font>
@@ -646,16 +646,16 @@
            <name>ItemListQuantity</name>
            <id>794</id>
            <title>
-            <key>tr</key>
-            <value>Miktar</value>
+            <key>en</key>
+            <value>Quantity</value>
            </title>
            <title>
             <key>ru</key>
             <value>Количество</value>
            </title>
            <title>
-            <key>en</key>
-            <value>Quantity</value>
+            <key>tr</key>
+            <value>Miktar</value>
            </title>
            <titleFont xsi:type="core:FontRef">
             <font>Style.LargeTextFont</font>
@@ -850,16 +850,16 @@
            <name>ItemListOffersAmount</name>
            <id>788</id>
            <title>
-            <key>tr</key>
-            <value>Iskonto</value>
+            <key>en</key>
+            <value>Offers</value>
            </title>
            <title>
             <key>ru</key>
             <value>Специальные предложения</value>
            </title>
            <title>
-            <key>en</key>
-            <value>Offers</value>
+            <key>tr</key>
+            <value>Iskonto</value>
            </title>
            <titleFont xsi:type="core:FontRef">
             <font>Style.LargeTextFont</font>
@@ -986,16 +986,16 @@
             <name>ItemListTotalAmount</name>
             <id>776</id>
             <title>
-             <key>tr</key>
-             <value>Toplam</value>
+             <key>en</key>
+             <value>Total</value>
             </title>
             <title>
              <key>ru</key>
              <value>Итого</value>
             </title>
             <title>
-             <key>en</key>
-             <value>Total</value>
+             <key>tr</key>
+             <value>Toplam</value>
             </title>
             <titleFont xsi:type="core:FontRef">
              <font>Style.LargeTextFont</font>
@@ -1138,16 +1138,16 @@
             <common>true</common>
            </userVisible>
            <title>
-            <key>tr</key>
-            <value>Grup malzemeler toplam</value>
+            <key>en</key>
+            <value>Item list group total</value>
            </title>
            <title>
             <key>ru</key>
             <value>Группа товары итоги</value>
            </title>
            <title>
-            <key>en</key>
-            <value>Item list group total</value>
+            <key>tr</key>
+            <value>Grup malzemeler toplam</value>
            </title>
            <extendedTooltip>
             <name>ItemListGroupTotalExtendedTooltip</name>
@@ -1408,16 +1408,16 @@
           <common>true</common>
          </userVisible>
          <title>
-          <key>tr</key>
-          <value>Malzeme liste sayfası</value>
+          <key>en</key>
+          <value>Item list page</value>
          </title>
          <title>
           <key>ru</key>
           <value>Товары</value>
          </title>
          <title>
-          <key>en</key>
-          <value>Item list page</value>
+          <key>tr</key>
+          <value>Malzeme liste sayfası</value>
          </title>
          <extendedTooltip>
           <name>ItemListPageExtendedTooltip</name>
@@ -1880,16 +1880,16 @@
           <common>true</common>
          </userVisible>
          <title>
-          <key>tr</key>
-          <value>Seri lot numara sayfası</value>
+          <key>en</key>
+          <value>Serial numbers page</value>
          </title>
          <title>
           <key>ru</key>
           <value>Серийные номера</value>
          </title>
          <title>
-          <key>en</key>
-          <value>Serial numbers page</value>
+          <key>tr</key>
+          <value>Seri lot numara sayfası</value>
          </title>
          <extendedTooltip>
           <name>SerialNumbersPageExtendedTooltip</name>
@@ -1918,16 +1918,16 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>tr</key>
-         <value>Grup tablo sayfası</value>
+         <key>en</key>
+         <value>Group table page</value>
         </title>
         <title>
          <key>ru</key>
          <value>Группа таблица страница</value>
         </title>
         <title>
-         <key>en</key>
-         <value>Group table page</value>
+         <key>tr</key>
+         <value>Grup tablo sayfası</value>
         </title>
         <extendedTooltip>
          <name>GroupTablePageExtendedTooltip</name>
@@ -1958,16 +1958,16 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>tr</key>
-         <value>Grup footer</value>
+         <key>en</key>
+         <value>Group bottom</value>
         </title>
         <title>
          <key>ru</key>
          <value>Группа подвал</value>
         </title>
         <title>
-         <key>en</key>
-         <value>Group bottom</value>
+         <key>tr</key>
+         <value>Grup footer</value>
         </title>
         <extendedTooltip>
          <name>GroupBottomExtendedTooltip</name>
@@ -1999,16 +1999,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Ana sayfaklar</value>
+        <key>en</key>
+        <value>Main pages</value>
        </title>
        <title>
         <key>ru</key>
         <value>Основные страницы</value>
        </title>
        <title>
-        <key>en</key>
-        <value>Main pages</value>
+        <key>tr</key>
+        <value>Ana sayfaklar</value>
        </title>
        <extendedTooltip>
         <name>MainPagesExtendedTooltip</name>
@@ -2040,16 +2040,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Grup sol yatay</value>
+       <key>en</key>
+       <value>Group left vertical</value>
       </title>
       <title>
        <key>ru</key>
        <value>Группа лево вертикально</value>
       </title>
       <title>
-       <key>en</key>
-       <value>Group left vertical</value>
+       <key>tr</key>
+       <value>Grup sol yatay</value>
       </title>
       <extendedTooltip>
        <name>GroupLeftVerticalExtendedTooltip</name>
@@ -2081,28 +2081,28 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup (sol)</value>
+      <key>en</key>
+      <value>Group left</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группировка по левому краю</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Group left</value>
-     </title>
-     <toolTip>
       <key>tr</key>
       <value>Grup (sol)</value>
+     </title>
+     <toolTip>
+      <key>en</key>
+      <value>Group left</value>
      </toolTip>
      <toolTip>
       <key>ru</key>
       <value>Группировка по левому краю</value>
      </toolTip>
      <toolTip>
-      <key>en</key>
-      <value>Group left</value>
+      <key>tr</key>
+      <value>Grup (sol)</value>
      </toolTip>
      <extendedTooltip>
       <name>GroupLeftExtendedTooltip</name>
@@ -2362,16 +2362,16 @@
           <common>true</common>
          </userVisible>
          <title>
-          <key>tr</key>
-          <value>Seans komutlar grubu</value>
+          <key>en</key>
+          <value>Group of session commands</value>
          </title>
          <title>
           <key>ru</key>
           <value>Группа команд сеанса</value>
          </title>
          <title>
-          <key>en</key>
-          <value>Group of session commands</value>
+          <key>tr</key>
+          <value>Seans komutlar grubu</value>
          </title>
          <extendedTooltip>
           <name>GroupSessionComandsExtendedTooltip</name>
@@ -2459,16 +2459,16 @@
           <common>true</common>
          </userVisible>
          <title>
-          <key>tr</key>
-          <value>Grup kasa komutları</value>
+          <key>en</key>
+          <value>Group of cash commands</value>
          </title>
          <title>
           <key>ru</key>
           <value>Группа кассовых команд</value>
          </title>
          <title>
-          <key>en</key>
-          <value>Group of cash commands</value>
+          <key>tr</key>
+          <value>Grup kasa komutları</value>
          </title>
          <extendedTooltip>
           <name>GroupCashCommandsExtendedTooltip</name>
@@ -2526,16 +2526,16 @@
           <common>true</common>
          </userVisible>
          <title>
-          <key>tr</key>
-          <value>Raporlar</value>
+          <key>en</key>
+          <value>Reports</value>
          </title>
          <title>
           <key>ru</key>
           <value>Отчеты</value>
          </title>
          <title>
-          <key>en</key>
-          <value>Reports</value>
+          <key>tr</key>
+          <value>Raporlar</value>
          </title>
          <extendedTooltip>
           <name>GroupReportsExtendedTooltip</name>
@@ -2560,16 +2560,16 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>tr</key>
-         <value>Genel komutlar alt menüsü</value>
+         <key>en</key>
+         <value>Submenu of common commands</value>
         </title>
         <title>
          <key>ru</key>
          <value>Подменю общих команд</value>
         </title>
         <title>
-         <key>en</key>
-         <value>Submenu of common commands</value>
+         <key>tr</key>
+         <value>Genel komutlar alt menüsü</value>
         </title>
         <width>1</width>
         <extendedTooltip>
@@ -2601,16 +2601,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Genel komutlar grubu</value>
+        <key>en</key>
+        <value>Group of common commands</value>
        </title>
        <title>
         <key>ru</key>
         <value>Группа общих команд</value>
        </title>
        <title>
-        <key>en</key>
-        <value>Group of common commands</value>
+        <key>tr</key>
+        <value>Genel komutlar grubu</value>
        </title>
        <horizontalStretch>false</horizontalStretch>
        <groupHorizontalAlign>Right</groupHorizontalAlign>
@@ -2640,16 +2640,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Grup 2</value>
+       <key>en</key>
+       <value>Group2</value>
       </title>
       <title>
        <key>ru</key>
        <value>Группа 2</value>
       </title>
       <title>
-       <key>en</key>
-       <value>Group2</value>
+       <key>tr</key>
+       <value>Grup 2</value>
       </title>
       <extendedTooltip>
        <name>GroupDateExtendedTooltip</name>
@@ -2738,16 +2738,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Grup resim</value>
+       <key>en</key>
+       <value>Group picture</value>
       </title>
       <title>
        <key>ru</key>
        <value>Группа картинки</value>
       </title>
       <title>
-       <key>en</key>
-       <value>Group picture</value>
+       <key>tr</key>
+       <value>Grup resim</value>
       </title>
       <verticalStretch>true</verticalStretch>
       <extendedTooltip>
@@ -3308,16 +3308,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Ana</value>
+        <key>en</key>
+        <value>Main</value>
        </title>
        <title>
         <key>ru</key>
         <value>Основное</value>
        </title>
        <title>
-        <key>en</key>
-        <value>Main</value>
+        <key>tr</key>
+        <value>Ana</value>
        </title>
        <extendedTooltip>
         <name>ButtonPageExtendedTooltip</name>
@@ -3485,16 +3485,16 @@
           <common>true</common>
          </userVisible>
          <title>
-          <key>tr</key>
-          <value>Grup ürün seç</value>
+          <key>en</key>
+          <value>Items pickup group</value>
          </title>
          <title>
           <key>ru</key>
           <value>Группа подбора товара</value>
          </title>
          <title>
-          <key>en</key>
-          <value>Items pickup group</value>
+          <key>tr</key>
+          <value>Grup ürün seç</value>
          </title>
          <extendedTooltip>
           <name>ItemsPickupGroupExtendedTooltip</name>
@@ -3758,16 +3758,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Malzemeler</value>
+        <key>en</key>
+        <value>Items</value>
        </title>
        <title>
         <key>ru</key>
         <value>Элементы формы</value>
        </title>
        <title>
-        <key>en</key>
-        <value>Items</value>
+        <key>tr</key>
+        <value>Malzemeler</value>
        </title>
        <horizontalStretch>true</horizontalStretch>
        <verticalStretch>true</verticalStretch>
@@ -3924,16 +3924,16 @@
           <color>Style.AccentColor</color>
          </borderColor>
          <inputHint>
-          <key>tr</key>
-          <value>Sözleşme</value>
+          <key>en</key>
+          <value>Partner term</value>
          </inputHint>
          <inputHint>
           <key>ru</key>
           <value>Соглашение</value>
          </inputHint>
          <inputHint>
-          <key>en</key>
-          <value>Partner term</value>
+          <key>tr</key>
+          <value>Sözleşme</value>
          </inputHint>
          <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
         </extInfo>
@@ -3993,16 +3993,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Ek detaylar</value>
+        <key>en</key>
+        <value>Additional</value>
        </title>
        <title>
         <key>ru</key>
         <value>Дополнительный</value>
        </title>
        <title>
-        <key>en</key>
-        <value>Additional</value>
+        <key>tr</key>
+        <value>Ek detaylar</value>
        </title>
        <extendedTooltip>
         <name>AdditionalPageExtendedTooltip</name>
@@ -4034,16 +4034,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Sayfa buton</value>
+       <key>en</key>
+       <value>Page button</value>
       </title>
       <title>
        <key>ru</key>
        <value>Страница кнопка</value>
       </title>
       <title>
-       <key>en</key>
-       <value>Page button</value>
+       <key>tr</key>
+       <value>Sayfa buton</value>
       </title>
       <verticalStretch>true</verticalStretch>
       <extendedTooltip>
@@ -4117,16 +4117,16 @@
           <name>ItemListTotalQuantity</name>
           <id>840</id>
           <title>
-           <key>tr</key>
-           <value>Miktar</value>
+           <key>en</key>
+           <value>Quantity</value>
           </title>
           <title>
            <key>ru</key>
            <value>Количество</value>
           </title>
           <title>
-           <key>en</key>
-           <value>Quantity</value>
+           <key>tr</key>
+           <value>Miktar</value>
           </title>
           <titleTextColor xsi:type="core:ColorRef">
            <color>Web.DarkGreen</color>
@@ -4189,16 +4189,16 @@
           <name>ItemListTotalOffersAmount</name>
           <id>843</id>
           <title>
-           <key>tr</key>
-           <value>Iskonto</value>
+           <key>en</key>
+           <value>Offer</value>
           </title>
           <title>
            <key>ru</key>
            <value>Специальное предложения</value>
           </title>
           <title>
-           <key>en</key>
-           <value>Offer</value>
+           <key>tr</key>
+           <value>Iskonto</value>
           </title>
           <titleTextColor xsi:type="core:ColorRef">
            <color>Web.DarkGreen</color>
@@ -4261,16 +4261,16 @@
           <name>ItemListTotalTotalAmount</name>
           <id>846</id>
           <title>
-           <key>tr</key>
-           <value>Toplam</value>
+           <key>en</key>
+           <value>Total</value>
           </title>
           <title>
            <key>ru</key>
            <value>Итого</value>
           </title>
           <title>
-           <key>en</key>
-           <value>Total</value>
+           <key>tr</key>
+           <value>Toplam</value>
           </title>
           <titleTextColor xsi:type="core:ColorRef">
            <color>Web.DarkGreen</color>
@@ -4450,16 +4450,16 @@
              <common>true</common>
             </userVisible>
             <title>
-             <key>tr</key>
-             <value>Ödemeler alt menüsü</value>
+             <key>en</key>
+             <value>Submenu payments</value>
             </title>
             <title>
              <key>ru</key>
              <value>Подменю оплаты</value>
             </title>
             <title>
-             <key>en</key>
-             <value>Submenu payments</value>
+             <key>tr</key>
+             <value>Ödemeler alt menüsü</value>
             </title>
             <height>3</height>
             <extendedTooltip>
@@ -4495,16 +4495,16 @@
             <common>true</common>
            </userVisible>
            <title>
-            <key>tr</key>
-            <value>Ödemeler</value>
+            <key>en</key>
+            <value>Payments</value>
            </title>
            <title>
             <key>ru</key>
             <value>Платежи</value>
            </title>
            <title>
-            <key>en</key>
-            <value>Payments</value>
+            <key>tr</key>
+            <value>Ödemeler</value>
            </title>
            <width>3</width>
            <height>2</height>
@@ -4537,16 +4537,16 @@
            <common>true</common>
           </userVisible>
           <title>
-           <key>tr</key>
-           <value>Ödeme butonları</value>
+           <key>en</key>
+           <value>Payment buttons</value>
           </title>
           <title>
            <key>ru</key>
            <value>Кнопки оплат</value>
           </title>
           <title>
-           <key>en</key>
-           <value>Payment buttons</value>
+           <key>tr</key>
+           <value>Ödeme butonları</value>
           </title>
           <extendedTooltip>
            <name>GroupPaymentButtonsExtendedTooltip</name>
@@ -4579,16 +4579,16 @@
           <common>true</common>
          </userVisible>
          <title>
-          <key>tr</key>
-          <value>Ödeme</value>
+          <key>en</key>
+          <value>Payment</value>
          </title>
          <title>
           <key>ru</key>
           <value>Оплата</value>
          </title>
          <title>
-          <key>en</key>
-          <value>Payment</value>
+          <key>tr</key>
+          <value>Ödeme</value>
          </title>
          <extendedTooltip>
           <name>GroupPaymentRightExtendedTooltip</name>
@@ -4620,16 +4620,16 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>tr</key>
-         <value>Ödeme</value>
+         <key>en</key>
+         <value>Payment</value>
         </title>
         <title>
          <key>ru</key>
          <value>Оплата</value>
         </title>
         <title>
-         <key>en</key>
-         <value>Payment</value>
+         <key>tr</key>
+         <value>Ödeme</value>
         </title>
         <extendedTooltip>
          <name>PagePaymentExtendedTooltip</name>
@@ -4664,16 +4664,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>tr</key>
-        <value>Sayfalar ödeme</value>
+        <key>en</key>
+        <value>Pages payment</value>
        </title>
        <title>
         <key>ru</key>
         <value>Страницы оплат</value>
        </title>
        <title>
-        <key>en</key>
-        <value>Pages payment</value>
+        <key>tr</key>
+        <value>Sayfalar ödeme</value>
        </title>
        <extendedTooltip>
         <name>PagesPaymentExtendedTooltip</name>
@@ -4701,16 +4701,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>tr</key>
-       <value>Grup Ödemeler</value>
+       <key>en</key>
+       <value>Group Payment</value>
       </title>
       <title>
        <key>ru</key>
        <value>Группа Оплаты</value>
       </title>
       <title>
-       <key>en</key>
-       <value>Group Payment</value>
+       <key>tr</key>
+       <value>Grup Ödemeler</value>
       </title>
       <extendedTooltip>
        <name>GroupPaymentExtendedTooltip</name>
@@ -4742,28 +4742,28 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Grup tuşları</value>
+      <key>en</key>
+      <value>Group buttons</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа кнопок</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Group buttons</value>
-     </title>
-     <toolTip>
       <key>tr</key>
       <value>Grup tuşları</value>
+     </title>
+     <toolTip>
+      <key>en</key>
+      <value>Group buttons</value>
      </toolTip>
      <toolTip>
       <key>ru</key>
       <value>Группа кнопок</value>
      </toolTip>
      <toolTip>
-      <key>en</key>
-      <value>Group buttons</value>
+      <key>tr</key>
+      <value>Grup tuşları</value>
      </toolTip>
      <verticalStretch>true</verticalStretch>
      <extendedTooltip>
@@ -4796,28 +4796,28 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Group genel</value>
+     <key>en</key>
+     <value>Group main</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа основная</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Group main</value>
-    </title>
-    <toolTip>
      <key>tr</key>
      <value>Group genel</value>
+    </title>
+    <toolTip>
+     <key>en</key>
+     <value>Group main</value>
     </toolTip>
     <toolTip>
      <key>ru</key>
      <value>Группа основная</value>
     </toolTip>
     <toolTip>
-     <key>en</key>
-     <value>Group main</value>
+     <key>tr</key>
+     <value>Group genel</value>
     </toolTip>
     <extendedTooltip>
      <name>GroupMainExtendedTooltip</name>
@@ -4849,16 +4849,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ana</value>
+    <key>en</key>
+    <value>Main</value>
    </title>
    <title>
     <key>ru</key>
     <value>Основное</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Main</value>
+    <key>tr</key>
+    <value>Ana</value>
    </title>
    <extendedTooltip>
     <name>MainPageExtendedTooltip</name>
@@ -5339,16 +5339,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Nakit</value>
+    <key>en</key>
+    <value>Cash</value>
    </title>
    <title>
     <key>ru</key>
     <value>Касса</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Cash</value>
+    <key>tr</key>
+    <value>Nakit</value>
    </title>
    <extendedTooltip>
     <name>CashPageExtendedTooltip</name>
@@ -5377,16 +5377,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Ana sayfaklar</value>
+   <key>en</key>
+   <value>Main pages</value>
   </title>
   <title>
    <key>ru</key>
    <value>Основные страницы</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Main pages</value>
+   <key>tr</key>
+   <value>Ana sayfaklar</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -5440,16 +5440,16 @@
  <attributes>
   <name>TextLine</name>
   <title>
-   <key>tr</key>
-   <value>Metin satırı</value>
+   <key>en</key>
+   <value>Text line</value>
   </title>
   <title>
    <key>ru</key>
    <value>Текстовая строка</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Text line</value>
+   <key>tr</key>
+   <value>Metin satırı</value>
   </title>
   <id>5</id>
   <valueType>
@@ -5466,16 +5466,16 @@
  <attributes>
   <name>ItemsPickup</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme seç</value>
+   <key>en</key>
+   <value>Items pickup</value>
   </title>
   <title>
    <key>ru</key>
    <value>Подбор товара</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Items pickup</value>
+   <key>tr</key>
+   <value>Malzeme seç</value>
   </title>
   <id>7</id>
   <valueType>
@@ -5523,16 +5523,16 @@
  <attributes>
   <name>CurrentPriceType</name>
   <title>
-   <key>tr</key>
-   <value>Geçerli fiyat tipi</value>
+   <key>en</key>
+   <value>Current price type</value>
   </title>
   <title>
    <key>ru</key>
    <value>Текущий вид цены</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Current price type</value>
+   <key>tr</key>
+   <value>Geçerli fiyat tipi</value>
   </title>
   <id>9</id>
   <valueType>
@@ -5548,16 +5548,16 @@
  <attributes>
   <name>Object</name>
   <title>
-   <key>tr</key>
-   <value>Obje</value>
+   <key>en</key>
+   <value>Object</value>
   </title>
   <title>
    <key>ru</key>
    <value>Объект</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Object</value>
+   <key>tr</key>
+   <value>Obje</value>
   </title>
   <id>10</id>
   <valueType>
@@ -5577,16 +5577,16 @@
    <columns>
     <name>RatePresentation</name>
     <title>
-     <key>tr</key>
-     <value>Kur görüntüleme</value>
+     <key>en</key>
+     <value>Rate presentation</value>
     </title>
     <title>
      <key>ru</key>
      <value>Представление курса</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Rate presentation</value>
+     <key>tr</key>
+     <value>Kur görüntüleme</value>
     </title>
     <id>166</id>
     <valueType>
@@ -5602,16 +5602,16 @@
    <columns>
     <name>IsVisible</name>
     <title>
-     <key>tr</key>
-     <value>Görünür</value>
+     <key>en</key>
+     <value>Is visible</value>
     </title>
     <title>
      <key>ru</key>
      <value>Видимый</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Is visible</value>
+     <key>tr</key>
+     <value>Görünür</value>
     </title>
     <id>167</id>
     <valueType>
@@ -5632,16 +5632,16 @@
    <columns>
     <name>Info</name>
     <title>
-     <key>tr</key>
-     <value>Bilgi</value>
+     <key>en</key>
+     <value>Info</value>
     </title>
     <title>
      <key>ru</key>
      <value>Информация</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Info</value>
+     <key>tr</key>
+     <value>Bilgi</value>
     </title>
     <id>27</id>
     <valueType>
@@ -5672,16 +5672,16 @@
    <columns>
     <name>SerialLotNumbersPresentation</name>
     <title>
-     <key>tr</key>
-     <value>Seri lot numara görünümü</value>
+     <key>en</key>
+     <value>Serial lot numbers presentation</value>
     </title>
     <title>
      <key>ru</key>
      <value>Представление серий номенклатуры</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Serial lot numbers presentation</value>
+     <key>tr</key>
+     <value>Seri lot numara görünümü</value>
     </title>
     <id>40</id>
     <valueType>
@@ -5698,16 +5698,16 @@
    <columns>
     <name>SerialLotNumberIsFilling</name>
     <title>
-     <key>tr</key>
-     <value>Seri lot numaralar dolduruluyor</value>
+     <key>en</key>
+     <value>Serial lot number is filling</value>
     </title>
     <title>
      <key>ru</key>
      <value>Номер серии заполнен</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Serial lot number is filling</value>
+     <key>tr</key>
+     <value>Seri lot numaralar dolduruluyor</value>
     </title>
     <id>42</id>
     <valueType>
@@ -5723,16 +5723,16 @@
    <columns>
     <name>IsExternalLinked</name>
     <title>
-     <key>tr</key>
-     <value>Dışarıdan bağlı</value>
+     <key>en</key>
+     <value>Is external linked</value>
     </title>
     <title>
      <key>ru</key>
      <value>Внешняя ссылка</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Is external linked</value>
+     <key>tr</key>
+     <value>Dışarıdan bağlı</value>
     </title>
     <id>172</id>
     <valueType>
@@ -5748,16 +5748,16 @@
    <columns>
     <name>IsInternalLinked</name>
     <title>
-     <key>tr</key>
-     <value>İçerden bağlı</value>
+     <key>en</key>
+     <value>Is internal linked</value>
     </title>
     <title>
      <key>ru</key>
      <value>Внутренняя ссылка</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Is internal linked</value>
+     <key>tr</key>
+     <value>İçerden bağlı</value>
     </title>
     <id>173</id>
     <valueType>
@@ -5773,16 +5773,16 @@
    <columns>
     <name>ExternalLinks</name>
     <title>
-     <key>tr</key>
-     <value>Dış bağlantılar</value>
+     <key>en</key>
+     <value>External links</value>
     </title>
     <title>
      <key>ru</key>
      <value>Внешние ссылки</value>
     </title>
     <title>
-     <key>en</key>
-     <value>External links</value>
+     <key>tr</key>
+     <value>Dış bağlantılar</value>
     </title>
     <id>174</id>
     <valueType>
@@ -5799,16 +5799,16 @@
    <columns>
     <name>InternalLinks</name>
     <title>
-     <key>tr</key>
-     <value>İç bağlantılar</value>
+     <key>en</key>
+     <value>Internal links</value>
     </title>
     <title>
      <key>ru</key>
      <value>Внутренние ссылки</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Internal links</value>
+     <key>tr</key>
+     <value>İç bağlantılar</value>
     </title>
     <id>175</id>
     <valueType>
@@ -5825,16 +5825,16 @@
    <columns>
     <name>SourceOfOriginsPresentation</name>
     <title>
-     <key>tr</key>
-     <value>Envanter menşeileri</value>
+     <key>en</key>
+     <value>Source of origins</value>
     </title>
     <title>
      <key>ru</key>
      <value>Источники происхождения</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Source of origins</value>
+     <key>tr</key>
+     <value>Envanter menşeileri</value>
     </title>
     <id>186</id>
     <valueType>
@@ -5852,16 +5852,16 @@
  <attributes>
   <name>PriceType</name>
   <title>
-   <key>tr</key>
-   <value>Fiyat tipi</value>
+   <key>en</key>
+   <value>Price type</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип цен</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Price type</value>
+   <key>tr</key>
+   <value>Fiyat tipi</value>
   </title>
   <id>13</id>
   <valueType>
@@ -5877,16 +5877,16 @@
  <attributes>
   <name>CurrentAgreement</name>
   <title>
-   <key>tr</key>
-   <value>Geçerli sözleşme</value>
+   <key>en</key>
+   <value>Current agreement</value>
   </title>
   <title>
    <key>ru</key>
    <value>Текущее соглашение</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Current agreement</value>
+   <key>tr</key>
+   <value>Geçerli sözleşme</value>
   </title>
   <id>15</id>
   <valueType>
@@ -5902,16 +5902,16 @@
  <attributes>
   <name>CurrentDate</name>
   <title>
-   <key>tr</key>
-   <value>Geçerli tarhi</value>
+   <key>en</key>
+   <value>Current date</value>
   </title>
   <title>
    <key>ru</key>
    <value>Текущая дата</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Current date</value>
+   <key>tr</key>
+   <value>Geçerli tarhi</value>
   </title>
   <id>16</id>
   <valueType>
@@ -5928,16 +5928,16 @@
  <attributes>
   <name>CurrentDeliveryDate</name>
   <title>
-   <key>tr</key>
-   <value>Geçerli teslimat tarihi</value>
+   <key>en</key>
+   <value>Current delivery date</value>
   </title>
   <title>
    <key>ru</key>
    <value>Текущая дата выполнения</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Current delivery date</value>
+   <key>tr</key>
+   <value>Geçerli teslimat tarihi</value>
   </title>
   <id>17</id>
   <valueType>
@@ -5956,16 +5956,16 @@
  <attributes>
   <name>CurrentPartner</name>
   <title>
-   <key>tr</key>
-   <value>Geçerli cari hesap</value>
+   <key>en</key>
+   <value>Current partner</value>
   </title>
   <title>
    <key>ru</key>
    <value>Текущий партнер</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Current partner</value>
+   <key>tr</key>
+   <value>Geçerli cari hesap</value>
   </title>
   <id>18</id>
   <valueType>
@@ -5981,16 +5981,16 @@
  <attributes>
   <name>CurrentStore</name>
   <title>
-   <key>tr</key>
-   <value>Geçerli depo</value>
+   <key>en</key>
+   <value>Current store</value>
   </title>
   <title>
    <key>ru</key>
    <value>Текущий склад</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Current store</value>
+   <key>tr</key>
+   <value>Geçerli depo</value>
   </title>
   <id>20</id>
   <valueType>
@@ -6006,16 +6006,16 @@
  <attributes>
   <name>DeliveryDate</name>
   <title>
-   <key>tr</key>
-   <value>Teslim tarihi</value>
+   <key>en</key>
+   <value>Delivery date</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дата выполнения</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Delivery date</value>
+   <key>tr</key>
+   <value>Teslim tarihi</value>
   </title>
   <id>21</id>
   <valueType>
@@ -6034,16 +6034,16 @@
  <attributes>
   <name>Store</name>
   <title>
-   <key>tr</key>
-   <value>Depo</value>
+   <key>en</key>
+   <value>Store</value>
   </title>
   <title>
    <key>ru</key>
    <value>Склад</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Store</value>
+   <key>tr</key>
+   <value>Depo</value>
   </title>
   <id>22</id>
   <valueType>
@@ -6059,16 +6059,16 @@
  <attributes>
   <name>Description</name>
   <title>
-   <key>tr</key>
-   <value>Tanım</value>
+   <key>en</key>
+   <value>Description</value>
   </title>
   <title>
    <key>ru</key>
    <value>Комментарий</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Description</value>
+   <key>tr</key>
+   <value>Tanım</value>
   </title>
   <id>23</id>
   <valueType>
@@ -6085,16 +6085,16 @@
  <attributes>
   <name>StoreBeforeChange</name>
   <title>
-   <key>tr</key>
-   <value>Depo</value>
+   <key>en</key>
+   <value>Store</value>
   </title>
   <title>
    <key>ru</key>
    <value>Склад</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Store</value>
+   <key>tr</key>
+   <value>Depo</value>
   </title>
   <id>24</id>
   <valueType>
@@ -6110,16 +6110,16 @@
  <attributes>
   <name>TaxAndOffersCalculated</name>
   <title>
-   <key>tr</key>
-   <value>Vergi ve ıskonto hesaplandı</value>
+   <key>en</key>
+   <value>Tax and offers calculated</value>
   </title>
   <title>
    <key>ru</key>
    <value>Налоги и скидки рассчитаны</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Tax and offers calculated</value>
+   <key>tr</key>
+   <value>Vergi ve ıskonto hesaplandı</value>
   </title>
   <id>29</id>
   <valueType>
@@ -6135,16 +6135,16 @@
  <attributes>
   <name>DetailedInformation</name>
   <title>
-   <key>tr</key>
-   <value>Detaylı bilgi</value>
+   <key>en</key>
+   <value>Detailed information</value>
   </title>
   <title>
    <key>ru</key>
    <value>Подробная информация</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Detailed information</value>
+   <key>tr</key>
+   <value>Detaylı bilgi</value>
   </title>
   <id>32</id>
   <valueType>
@@ -6161,16 +6161,16 @@
  <attributes>
   <name>ItemPicture</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme resimi</value>
+   <key>en</key>
+   <value>Item picture</value>
   </title>
   <title>
    <key>ru</key>
    <value>Картинка номенклатуры</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item picture</value>
+   <key>tr</key>
+   <value>Malzeme resimi</value>
   </title>
   <id>36</id>
   <valueType>
@@ -6187,16 +6187,16 @@
  <attributes>
   <name>HTMLDate</name>
   <title>
-   <key>tr</key>
-   <value>HTML tarih</value>
+   <key>en</key>
+   <value>HTMLDate</value>
   </title>
   <title>
    <key>ru</key>
    <value>HTMLДата</value>
   </title>
   <title>
-   <key>en</key>
-   <value>HTMLDate</value>
+   <key>tr</key>
+   <value>HTML tarih</value>
   </title>
   <id>37</id>
   <valueType>
@@ -6213,16 +6213,16 @@
  <attributes>
   <name>HTMLTextTemplate</name>
   <title>
-   <key>tr</key>
-   <value>HTML metin şablonu</value>
+   <key>en</key>
+   <value>HTML text template</value>
   </title>
   <title>
    <key>ru</key>
    <value>Текстовый шаблон HTML</value>
   </title>
   <title>
-   <key>en</key>
-   <value>HTML text template</value>
+   <key>tr</key>
+   <value>HTML metin şablonu</value>
   </title>
   <id>38</id>
   <valueType>
@@ -6239,16 +6239,16 @@
  <attributes>
   <name>SerialLotNumbersTree</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot numara ağacı</value>
+   <key>en</key>
+   <value>Serial lot numbers tree</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дерево серий номенклатуры</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Serial lot numbers tree</value>
+   <key>tr</key>
+   <value>Seri lot numara ağacı</value>
   </title>
   <id>39</id>
   <valueType>
@@ -6264,16 +6264,16 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </title>
    <id>157</id>
    <valueType>
@@ -6289,16 +6289,16 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
+    <key>en</key>
+    <value>Item</value>
    </title>
    <title>
     <key>ru</key>
     <value>Номенклатура</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item</value>
+    <key>tr</key>
+    <value>Malzeme</value>
    </title>
    <id>158</id>
    <valueType>
@@ -6314,16 +6314,16 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Характеристика</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </title>
    <id>159</id>
    <valueType>
@@ -6339,16 +6339,16 @@
   <columns>
    <name>SerialLotNumber</name>
    <title>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
+    <key>en</key>
+    <value>Serial lot number</value>
    </title>
    <title>
     <key>ru</key>
     <value>Серия номенклатуры</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Serial lot number</value>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
    </title>
    <id>160</id>
    <valueType>
@@ -6364,16 +6364,16 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </title>
    <id>161</id>
    <valueType>
@@ -6389,16 +6389,16 @@
   <columns>
    <name>Level</name>
    <title>
-    <key>tr</key>
-    <value>Seviye</value>
+    <key>en</key>
+    <value>Level</value>
    </title>
    <title>
     <key>ru</key>
     <value>Уровень</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Level</value>
+    <key>tr</key>
+    <value>Seviye</value>
    </title>
    <id>162</id>
    <valueType>
@@ -6417,16 +6417,16 @@
   <columns>
    <name>ItemKeyQuantity</name>
    <title>
-    <key>tr</key>
-    <value>Varyant adet</value>
+    <key>en</key>
+    <value>Item key quantity</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество характеристики</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Item key quantity</value>
+    <key>tr</key>
+    <value>Varyant adet</value>
    </title>
    <id>165</id>
    <valueType>
@@ -6443,16 +6443,16 @@
  <attributes>
   <name>Workstation</name>
   <title>
-   <key>tr</key>
-   <value>Çalışma yeri</value>
+   <key>en</key>
+   <value>Workstation</value>
   </title>
   <title>
    <key>ru</key>
    <value>Рабочее место</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Workstation</value>
+   <key>tr</key>
+   <value>Çalışma yeri</value>
   </title>
   <id>168</id>
   <valueType>
@@ -6468,16 +6468,16 @@
  <attributes>
   <name>ExternalLinkedDocs</name>
   <title>
-   <key>tr</key>
-   <value>Dışarında bağlı evraklar</value>
+   <key>en</key>
+   <value>External linked docs</value>
   </title>
   <title>
    <key>ru</key>
    <value>Документы, связанные с внешними ссылками</value>
   </title>
   <title>
-   <key>en</key>
-   <value>External linked docs</value>
+   <key>tr</key>
+   <value>Dışarında bağlı evraklar</value>
   </title>
   <id>169</id>
   <valueType>
@@ -6496,16 +6496,16 @@
  <attributes>
   <name>InternalLinkedDocs</name>
   <title>
-   <key>tr</key>
-   <value>İçerden bağlı evraklar</value>
+   <key>en</key>
+   <value>Internal linked docs</value>
   </title>
   <title>
    <key>ru</key>
    <value>Документы, связанные с внутренними ссылками</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Internal linked docs</value>
+   <key>tr</key>
+   <value>İçerden bağlı evraklar</value>
   </title>
   <id>170</id>
   <valueType>
@@ -6524,16 +6524,16 @@
  <attributes>
   <name>LockedFields</name>
   <title>
-   <key>tr</key>
-   <value>Kilitli alanlar</value>
+   <key>en</key>
+   <value>Locked fields</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заблокированные поля</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Locked fields</value>
+   <key>tr</key>
+   <value>Kilitli alanlar</value>
   </title>
   <id>171</id>
   <valueType>
@@ -6552,16 +6552,16 @@
  <attributes>
   <name>SalesPersonByDefault</name>
   <title>
-   <key>tr</key>
-   <value>Varsayılan satış elemanı</value>
+   <key>en</key>
+   <value>Sales person by default</value>
   </title>
   <title>
    <key>ru</key>
    <value>Продавец по умолчанию</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Sales person by default</value>
+   <key>tr</key>
+   <value>Varsayılan satış elemanı</value>
   </title>
   <id>176</id>
   <valueType>
@@ -6577,16 +6577,16 @@
  <attributes>
   <name>DocRef</name>
   <title>
-   <key>tr</key>
-   <value>Evrak ref</value>
+   <key>en</key>
+   <value>Doc ref</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка на документ</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Doc ref</value>
+   <key>tr</key>
+   <value>Evrak ref</value>
   </title>
   <id>177</id>
   <valueType>
@@ -6603,16 +6603,16 @@
  <attributes>
   <name>CashInList</name>
   <title>
-   <key>tr</key>
-   <value>Para giriş listesi</value>
+   <key>en</key>
+   <value>Cash in list</value>
   </title>
   <title>
    <key>ru</key>
    <value>Список внесений</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Cash in list</value>
+   <key>tr</key>
+   <value>Para giriş listesi</value>
   </title>
   <id>179</id>
   <valueType>
@@ -6627,16 +6627,16 @@
   <columns>
    <name>MoneyTransfer</name>
    <title>
-    <key>tr</key>
-    <value>Kasa/banka transfer fişi</value>
+    <key>en</key>
+    <value>Money transfer</value>
    </title>
    <title>
     <key>ru</key>
     <value>Перемещение денежных средств</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Money transfer</value>
+    <key>tr</key>
+    <value>Kasa/banka transfer fişi</value>
    </title>
    <id>180</id>
    <valueType>
@@ -6652,16 +6652,16 @@
   <columns>
    <name>Currency</name>
    <title>
-    <key>tr</key>
-    <value>Döviz</value>
+    <key>en</key>
+    <value>Currency</value>
    </title>
    <title>
     <key>ru</key>
     <value>Валюты</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Currency</value>
+    <key>tr</key>
+    <value>Döviz</value>
    </title>
    <id>181</id>
    <valueType>
@@ -6677,16 +6677,16 @@
   <columns>
    <name>Amount</name>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
+    <key>en</key>
+    <value>Amount</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма оплаты</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Amount</value>
+    <key>tr</key>
+    <value>Tutar</value>
    </title>
    <id>182</id>
    <valueType>
@@ -6703,16 +6703,16 @@
  <attributes>
   <name>SessionStatus</name>
   <title>
-   <key>tr</key>
-   <value>HTML vardya statüsü</value>
+   <key>en</key>
+   <value>HTML Session status</value>
   </title>
   <title>
    <key>ru</key>
    <value>Закрытие смены HTML</value>
   </title>
   <title>
-   <key>en</key>
-   <value>HTML Session status</value>
+   <key>tr</key>
+   <value>HTML vardya statüsü</value>
   </title>
   <id>184</id>
   <valueType>
@@ -6729,16 +6729,16 @@
  <attributes>
   <name>ConsolidatedRetailSales</name>
   <title>
-   <key>tr</key>
-   <value>Konsolide perakende satış fişleri</value>
+   <key>en</key>
+   <value>Consolidated retail sales</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отчеты о розничных продажах</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Consolidated retail sales</value>
+   <key>tr</key>
+   <value>Konsolide perakende satış fişleri</value>
   </title>
   <id>185</id>
   <valueType>
@@ -6755,29 +6755,29 @@
  <formCommands>
   <name>qPayment</name>
   <title>
-   <key>tr</key>
-   <value>Ödeme (+)</value>
+   <key>en</key>
+   <value>Payment (+)</value>
   </title>
   <title>
    <key>ru</key>
    <value>Оплата (+)</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Payment (+)</value>
+   <key>tr</key>
+   <value>Ödeme (+)</value>
   </title>
   <id>5</id>
   <toolTip>
-   <key>tr</key>
-   <value>Ödeme</value>
+   <key>en</key>
+   <value>Payment</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Оплата</value>
   </toolTip>
   <toolTip>
-   <key>en</key>
-   <value>Payment</value>
+   <key>tr</key>
+   <value>Ödeme</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -6793,29 +6793,29 @@
  <formCommands>
   <name>ShowPictures</name>
   <title>
-   <key>tr</key>
-   <value>Resimleri göster</value>
+   <key>en</key>
+   <value>Show pictures</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показывать картинки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Show pictures</value>
+   <key>tr</key>
+   <value>Resimleri göster</value>
   </title>
   <id>6</id>
   <toolTip>
-   <key>tr</key>
-   <value>Resimleri göster</value>
+   <key>en</key>
+   <value>Show pictures</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Показывать картинки</value>
   </toolTip>
   <toolTip>
-   <key>en</key>
-   <value>Show pictures</value>
+   <key>tr</key>
+   <value>Resimleri göster</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -6833,9 +6833,9 @@
  <formCommands>
   <name>ShowItems</name>
   <title>
-   <key>tr</key>
-   <value>Ürün
-seç</value>
+   <key>en</key>
+   <value>Show
+items</value>
   </title>
   <title>
    <key>ru</key>
@@ -6843,22 +6843,22 @@ seç</value>
 </value>
   </title>
   <title>
-   <key>en</key>
-   <value>Show
-items</value>
+   <key>tr</key>
+   <value>Ürün
+seç</value>
   </title>
   <id>8</id>
   <toolTip>
-   <key>tr</key>
-   <value>Malzemeleri göster</value>
+   <key>en</key>
+   <value>Show items</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Показать товары</value>
   </toolTip>
   <toolTip>
-   <key>en</key>
-   <value>Show items</value>
+   <key>tr</key>
+   <value>Malzemeleri göster</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -6874,16 +6874,16 @@ items</value>
  <formCommands>
   <name>OpenPickupItems</name>
   <title>
-   <key>tr</key>
-   <value>Seç</value>
+   <key>en</key>
+   <value>Pickup</value>
   </title>
   <title>
    <key>ru</key>
    <value>Подбор товара</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Pickup</value>
+   <key>tr</key>
+   <value>Seç</value>
   </title>
   <id>9</id>
   <use>
@@ -6902,9 +6902,9 @@ items</value>
  <formCommands>
   <name>SearchByBarcode</name>
   <title>
-   <key>tr</key>
-   <value>Barkod
-bul (F7)</value>
+   <key>en</key>
+   <value>Search by
+barcode (F7)</value>
   </title>
   <title>
    <key>ru</key>
@@ -6912,9 +6912,9 @@ bul (F7)</value>
 ШК (F7)</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Search by
-barcode (F7)</value>
+   <key>tr</key>
+   <value>Barkod
+bul (F7)</value>
   </title>
   <id>10</id>
   <use>
@@ -6935,16 +6935,16 @@ barcode (F7)</value>
  <formCommands>
   <name>DocReturn</name>
   <title>
-   <key>tr</key>
-   <value>İade</value>
+   <key>en</key>
+   <value>Return</value>
   </title>
   <title>
    <key>ru</key>
    <value>Возврат</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Return</value>
+   <key>tr</key>
+   <value>İade</value>
   </title>
   <id>11</id>
   <use>
@@ -6960,9 +6960,9 @@ barcode (F7)</value>
  <formCommands>
   <name>ChangeCashier</name>
   <title>
-   <key>tr</key>
-   <value>Kasiyer
-değiştir</value>
+   <key>en</key>
+   <value>Change
+cashier</value>
   </title>
   <title>
    <key>ru</key>
@@ -6970,9 +6970,9 @@ değiştir</value>
 кассира</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Change
-cashier</value>
+   <key>tr</key>
+   <value>Kasiyer
+değiştir</value>
   </title>
   <id>12</id>
   <use>
@@ -6988,9 +6988,9 @@ cashier</value>
  <formCommands>
   <name>CancelReceipt</name>
   <title>
-   <key>tr</key>
-   <value>Fişi
-iptal et</value>
+   <key>en</key>
+   <value>Cancel
+receipt</value>
   </title>
   <title>
    <key>ru</key>
@@ -6998,9 +6998,9 @@ iptal et</value>
 чек</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Cancel
-receipt</value>
+   <key>tr</key>
+   <value>Fişi
+iptal et</value>
   </title>
   <id>13</id>
   <use>
@@ -7016,9 +7016,9 @@ receipt</value>
  <formCommands>
   <name>CalculateOffers</name>
   <title>
-   <key>tr</key>
-   <value>İndirim
-hesapla</value>
+   <key>en</key>
+   <value>Calculate
+offers</value>
   </title>
   <title>
    <key>ru</key>
@@ -7026,9 +7026,9 @@ hesapla</value>
 скидок</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Calculate
-offers</value>
+   <key>tr</key>
+   <value>İndirim
+hesapla</value>
   </title>
   <id>14</id>
   <use>
@@ -7044,9 +7044,9 @@ offers</value>
  <formCommands>
   <name>PrintReceipt</name>
   <title>
-   <key>tr</key>
-   <value>Son fişi
-yazdır</value>
+   <key>en</key>
+   <value>Print last
+receipt</value>
   </title>
   <title>
    <key>ru</key>
@@ -7054,9 +7054,9 @@ yazdır</value>
 чека</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Print last
-receipt</value>
+   <key>tr</key>
+   <value>Son fişi
+yazdır</value>
   </title>
   <id>15</id>
   <use>
@@ -7072,16 +7072,16 @@ receipt</value>
  <formCommands>
   <name>CloseButton</name>
   <title>
-   <key>tr</key>
-   <value>Çıkış</value>
+   <key>en</key>
+   <value>Exit</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выход</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Exit</value>
+   <key>tr</key>
+   <value>Çıkış</value>
   </title>
   <id>16</id>
   <use>
@@ -7097,9 +7097,9 @@ receipt</value>
  <formCommands>
   <name>SearchCustomer</name>
   <title>
-   <key>tr</key>
-   <value>Müşteri
-bul</value>
+   <key>en</key>
+   <value>Search
+customer</value>
   </title>
   <title>
    <key>ru</key>
@@ -7107,9 +7107,9 @@ bul</value>
 клиентов</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Search
-customer</value>
+   <key>tr</key>
+   <value>Müşteri
+bul</value>
   </title>
   <id>18</id>
   <use>
@@ -7125,16 +7125,16 @@ customer</value>
  <formCommands>
   <name>ClearRetailCustomer</name>
   <title>
-   <key>tr</key>
-   <value>Perakende müşteriyi temizle</value>
+   <key>en</key>
+   <value>Clear retail customer</value>
   </title>
   <title>
    <key>ru</key>
    <value>Очистка розничного покупателя</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Clear retail customer</value>
+   <key>tr</key>
+   <value>Perakende müşteriyi temizle</value>
   </title>
   <id>19</id>
   <use>
@@ -7154,9 +7154,9 @@ customer</value>
  <formCommands>
   <name>SetSpecialOffersAtRow</name>
   <title>
-   <key>tr</key>
-   <value>Satır
-Iskonto</value>
+   <key>en</key>
+   <value>Discount
+current row</value>
   </title>
   <title>
    <key>ru</key>
@@ -7164,9 +7164,9 @@ Iskonto</value>
 на строку</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Discount
-current row</value>
+   <key>tr</key>
+   <value>Satır
+Iskonto</value>
   </title>
   <id>20</id>
   <use>
@@ -7186,9 +7186,9 @@ current row</value>
  <formCommands>
   <name>SetSpecialOffers</name>
   <title>
-   <key>tr</key>
-   <value>Evrak
-Iskonto</value>
+   <key>en</key>
+   <value>Discount
+document</value>
   </title>
   <title>
    <key>ru</key>
@@ -7196,9 +7196,9 @@ Iskonto</value>
 на документ</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Discount
-document</value>
+   <key>tr</key>
+   <value>Evrak
+Iskonto</value>
   </title>
   <id>21</id>
   <use>
@@ -7218,9 +7218,9 @@ document</value>
  <formCommands>
   <name>SetSalesPerson</name>
   <title>
-   <key>tr</key>
-   <value>Satış
-elemanı seç</value>
+   <key>en</key>
+   <value>Set sales
+person</value>
   </title>
   <title>
    <key>ru</key>
@@ -7228,9 +7228,9 @@ elemanı seç</value>
  продавца</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Set sales
-person</value>
+   <key>tr</key>
+   <value>Satış
+elemanı seç</value>
   </title>
   <id>22</id>
   <use>
@@ -7246,16 +7246,16 @@ person</value>
  <formCommands>
   <name>OpenSession</name>
   <title>
-   <key>tr</key>
-   <value>Seans aç</value>
+   <key>en</key>
+   <value>Open session</value>
   </title>
   <title>
    <key>ru</key>
    <value>Открытая сессия</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Open session</value>
+   <key>tr</key>
+   <value>Seans aç</value>
   </title>
   <id>23</id>
   <use>
@@ -7275,16 +7275,16 @@ person</value>
  <formCommands>
   <name>CloseSession</name>
   <title>
-   <key>tr</key>
-   <value>Seans kapat</value>
+   <key>en</key>
+   <value>Close session</value>
   </title>
   <title>
    <key>ru</key>
    <value>Закрыть сессию</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Close session</value>
+   <key>tr</key>
+   <value>Seans kapat</value>
   </title>
   <id>24</id>
   <use>
@@ -7304,16 +7304,16 @@ person</value>
  <formCommands>
   <name>CancelSession</name>
   <title>
-   <key>tr</key>
-   <value>Seans kapat</value>
+   <key>en</key>
+   <value>Cancel session</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отменить сессию</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Cancel session</value>
+   <key>tr</key>
+   <value>Seans kapat</value>
   </title>
   <id>25</id>
   <use>
@@ -7333,16 +7333,16 @@ person</value>
  <formCommands>
   <name>CreateCashIn</name>
   <title>
-   <key>tr</key>
-   <value>Para girişi oluştur</value>
+   <key>en</key>
+   <value>Create cash in</value>
   </title>
   <title>
    <key>ru</key>
    <value>Создать внесение ДС</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Create cash in</value>
+   <key>tr</key>
+   <value>Para girişi oluştur</value>
   </title>
   <id>26</id>
   <use>
@@ -7361,16 +7361,16 @@ person</value>
  <formCommands>
   <name>UpdateMoneyTransfers</name>
   <title>
-   <key>tr</key>
-   <value>Para transfer değişitir</value>
+   <key>en</key>
+   <value>Update money transfers</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить перемещение денег</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Update money transfers</value>
+   <key>tr</key>
+   <value>Para transfer değişitir</value>
   </title>
   <id>27</id>
   <use>
@@ -7390,16 +7390,16 @@ person</value>
  <formCommands>
   <name>CreateCashOut</name>
   <title>
-   <key>tr</key>
-   <value>Para çıkışı oluştur</value>
+   <key>en</key>
+   <value>Create cash out</value>
   </title>
   <title>
    <key>ru</key>
    <value>Создать изъятие ДС</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Create cash out</value>
+   <key>tr</key>
+   <value>Para çıkışı oluştur</value>
   </title>
   <id>28</id>
   <use>
@@ -7418,16 +7418,16 @@ person</value>
  <formCommands>
   <name>ReturnToMain</name>
   <title>
-   <key>tr</key>
-   <value>Ana sayfaya dön</value>
+   <key>en</key>
+   <value>Return to Main</value>
   </title>
   <title>
    <key>ru</key>
    <value>Вернуться на начальную страницу</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Return to Main</value>
+   <key>tr</key>
+   <value>Ana sayfaya dön</value>
   </title>
   <id>29</id>
   <use>
@@ -7447,16 +7447,16 @@ person</value>
  <formCommands>
   <name>Advance</name>
   <title>
-   <key>tr</key>
-   <value>Avans</value>
+   <key>en</key>
+   <value>Advance</value>
   </title>
   <title>
    <key>ru</key>
    <value>Авансы</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Advance</value>
+   <key>tr</key>
+   <value>Avans</value>
   </title>
   <id>30</id>
   <use>
@@ -7472,16 +7472,16 @@ person</value>
  <formCommands>
   <name>PrintXReport</name>
   <title>
-   <key>tr</key>
-   <value>X rapor yazdır</value>
+   <key>en</key>
+   <value>Print X Report</value>
   </title>
   <title>
    <key>ru</key>
    <value>Печать отчета без гашения</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Print X Report</value>
+   <key>tr</key>
+   <value>X rapor yazdır</value>
   </title>
   <id>31</id>
   <use>

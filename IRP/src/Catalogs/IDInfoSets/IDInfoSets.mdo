@@ -9,16 +9,16 @@
  </producedTypes>
  <name>IDInfoSets</name>
  <synonym>
-  <key>tr</key>
-  <value>İletişim bilgi setleri</value>
+  <key>en</key>
+  <value>Contact info sets</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Настройки контактной информации</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Contact info sets</value>
+  <key>tr</key>
+  <value>İletişim bilgi setleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -26,16 +26,16 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>İletişim bilgi seti</value>
+  <key>en</key>
+  <value>Contact info set</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Настройки контактной информации</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>Contact info set</value>
+  <key>tr</key>
+  <value>İletişim bilgi seti</value>
  </objectPresentation>
  <hierarchyType>HierarchyOfItems</hierarchyType>
  <levelCount>2</levelCount>
@@ -80,30 +80,30 @@
   </producedTypes>
   <name>IDInfoTypes</name>
   <synonym>
-   <key>tr</key>
-   <value>İletişim bilgi türleri</value>
+   <key>en</key>
+   <value>Contact info types</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид контактной информации</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Contact info types</value>
+   <key>tr</key>
+   <value>İletişim bilgi türleri</value>
   </synonym>
   <attributes uuid="6d89c214-8d2d-400b-832d-b3b2a2a84fc7">
    <name>IDInfoType</name>
    <synonym>
-    <key>tr</key>
-    <value>İletişim bilgi türü</value>
+    <key>en</key>
+    <value>Contact info type</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Вид контактной информации</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Contact info type</value>
+    <key>tr</key>
+    <value>İletişim bilgi türü</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>
@@ -115,16 +115,16 @@
   <attributes uuid="e83e531a-fc1e-47e4-8a00-88fdde5f3b9d">
    <name>Condition</name>
    <synonym>
-    <key>tr</key>
-    <value>Koşul</value>
+    <key>en</key>
+    <value>Condition</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Условие</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Condition</value>
+    <key>tr</key>
+    <value>Koşul</value>
    </synonym>
    <type>
     <types>ValueStorage</types>
@@ -136,16 +136,16 @@
   <attributes uuid="b4187b53-0f80-4dee-a00b-086de74bd280">
    <name>IsConditionSet</name>
    <synonym>
-    <key>tr</key>
-    <value>Koşul belirlendi</value>
+    <key>en</key>
+    <value>Is condition set</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Условие</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Is condition set</value>
+    <key>tr</key>
+    <value>Koşul belirlendi</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -161,16 +161,16 @@
  <forms uuid="f08efaf3-5938-432a-8dff-098c00f34d57">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -178,16 +178,16 @@
  <forms uuid="271fcb48-951b-4df7-97a1-8670eddf9a8e">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -195,16 +195,16 @@
  <forms uuid="e52d1a10-929d-4ab3-a346-2dc67ad4ad5f">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -212,16 +212,16 @@
  <forms uuid="ec0f09b0-b42e-4a37-a589-2703f508597a">
   <name>EditCondition</name>
   <synonym>
-   <key>tr</key>
-   <value>Koşul değiştir</value>
+   <key>en</key>
+   <value>Edit condition</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Редактировать условие</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Edit condition</value>
+   <key>tr</key>
+   <value>Koşul değiştir</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -229,32 +229,32 @@
  <templates uuid="5e050964-1a71-4925-acb4-cfa30fac99fd">
   <name>DCS_Catalog</name>
   <synonym>
-   <key>tr</key>
-   <value>DCS kart listesi</value>
+   <key>en</key>
+   <value>DCS catalog</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Справочник DCS</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>DCS catalog</value>
+   <key>tr</key>
+   <value>DCS kart listesi</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>
  <templates uuid="560090de-208d-4be6-80e8-490462b943d5">
   <name>DCS_Document</name>
   <synonym>
-   <key>tr</key>
-   <value>DCS evrak</value>
+   <key>en</key>
+   <value>DCS document</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ DCS</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>DCS document</value>
+   <key>tr</key>
+   <value>DCS evrak</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

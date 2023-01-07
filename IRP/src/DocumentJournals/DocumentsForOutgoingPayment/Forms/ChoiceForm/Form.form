@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -129,16 +129,16 @@
    <name>AmountByDocumentDate</name>
    <id>52</id>
    <title>
-    <key>tr</key>
-    <value>Statü</value>
+    <key>en</key>
+    <value>Status</value>
    </title>
    <title>
     <key>ru</key>
     <value>Статус</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Status</value>
+    <key>tr</key>
+    <value>Statü</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -185,16 +185,16 @@
    <extInfo xsi:type="form:CheckBoxFieldExtInfo">
     <checkBoxType>Tumbler</checkBoxType>
     <editFormat>
-     <key>tr</key>
-     <value>BF='Tüm zamanlar'; BT='Evrak tarihine göre'</value>
+     <key>en</key>
+     <value>BF='Current time'; BT='By document date'</value>
     </editFormat>
     <editFormat>
      <key>ru</key>
      <value>BF='Текущее время'; BT='По дате документа'</value>
     </editFormat>
     <editFormat>
-     <key>en</key>
-     <value>BF='Current time'; BT='By document date'</value>
+     <key>tr</key>
+     <value>BF='Tüm zamanlar'; BT='Evrak tarihine göre'</value>
     </editFormat>
    </extInfo>
   </items>
@@ -204,16 +204,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Başlık grubu</value>
+   <key>en</key>
+   <value>Group of header</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа шапка</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group of header</value>
+   <key>tr</key>
+   <value>Başlık grubu</value>
   </title>
   <extendedTooltip>
    <name>GroupHeaderExtendedTooltip</name>
@@ -256,16 +256,16 @@
    <name>Ref</name>
    <id>31</id>
    <title>
-    <key>tr</key>
-    <value>Evrak</value>
+    <key>en</key>
+    <value>Document</value>
    </title>
    <title>
     <key>ru</key>
     <value>Документ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Document</value>
+    <key>tr</key>
+    <value>Evrak</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -468,16 +468,16 @@
    <name>Agreement</name>
    <id>46</id>
    <title>
-    <key>tr</key>
-    <value>Sözleşme</value>
+    <key>en</key>
+    <value>Partner term</value>
    </title>
    <title>
     <key>ru</key>
     <value>Валюта соглашения</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Partner term</value>
+    <key>tr</key>
+    <value>Sözleşme</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -580,16 +580,16 @@
    <name>DocumentAmount</name>
    <id>40</id>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
+    <key>en</key>
+    <value>Amount</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Amount</value>
+    <key>tr</key>
+    <value>Tutar</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -888,16 +888,16 @@ FROM
  <attributes>
   <name>AmountByDocumentDate</name>
   <title>
-   <key>tr</key>
-   <value>Evrak tarihine göre tutar</value>
+   <key>en</key>
+   <value>Amount by document date</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сумма на дату документа</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Amount by document date</value>
+   <key>tr</key>
+   <value>Evrak tarihine göre tutar</value>
   </title>
   <id>2</id>
   <valueType>
@@ -913,16 +913,16 @@ FROM
  <formCommands>
   <name>CommandSelect</name>
   <title>
-   <key>tr</key>
-   <value>Seç</value>
+   <key>en</key>
+   <value>Select</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Select</value>
+   <key>tr</key>
+   <value>Seç</value>
   </title>
   <id>1</id>
   <use>

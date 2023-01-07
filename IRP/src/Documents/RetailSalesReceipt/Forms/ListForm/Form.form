@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -63,16 +63,16 @@
    <name>Number</name>
    <id>16</id>
    <title>
-    <key>tr</key>
-    <value>Numara</value>
+    <key>en</key>
+    <value>Number</value>
    </title>
    <title>
     <key>ru</key>
     <value>Номер</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Number</value>
+    <key>tr</key>
+    <value>Numara</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -122,16 +122,16 @@
    <name>Date</name>
    <id>19</id>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
+    <key>en</key>
+    <value>Date</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дата</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Date</value>
+    <key>tr</key>
+    <value>Tarih</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -180,16 +180,16 @@
    <name>Company</name>
    <id>34</id>
    <title>
-    <key>tr</key>
-    <value>Şirket</value>
+    <key>en</key>
+    <value>Company</value>
    </title>
    <title>
     <key>ru</key>
     <value>Организация</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Company</value>
+    <key>tr</key>
+    <value>Şirket</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -242,16 +242,16 @@
    <name>DocumentAmount</name>
    <id>25</id>
    <title>
-    <key>tr</key>
-    <value>Evrak tutarı</value>
+    <key>en</key>
+    <value>Σ</value>
    </title>
    <title>
     <key>ru</key>
     <value>Σ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Σ</value>
+    <key>tr</key>
+    <value>Evrak tutarı</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -300,16 +300,16 @@
    <name>Currency</name>
    <id>31</id>
    <title>
-    <key>tr</key>
-    <value>Döviz</value>
+    <key>en</key>
+    <value>Currency</value>
    </title>
    <title>
     <key>ru</key>
     <value>Валюта</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Currency</value>
+    <key>tr</key>
+    <value>Döviz</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -888,16 +888,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>tr</key>
-       <value>Depo</value>
+       <key>en</key>
+       <value>Store</value>
       </content>
       <content>
        <key>ru</key>
        <value>Склад</value>
       </content>
       <content>
-       <key>en</key>
-       <value>Store</value>
+       <key>tr</key>
+       <value>Depo</value>
       </content>
      </localValue>
     </title>

@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseContactInformation</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Adresler</value>
+  <key>en</key>
+  <value>Use contact information</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать контактную информацию</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use contact information</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Adresler</value>
  </synonym>
  <type>
   <types>Boolean</types>

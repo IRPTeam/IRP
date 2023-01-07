@@ -2,16 +2,16 @@
 <mdclass:SessionParameter xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d06d7ebd-70f0-4493-adcc-c5b371d74698">
  <name>RunBackgroundJobInDebugMode</name>
  <synonym>
-  <key>tr</key>
-  <value>Arka plan görevleri debut modunda çalıştır</value>
+  <key>en</key>
+  <value>Run background job in debug mode</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Запускать фоновые задания в режиме отладки</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Run background job in debug mode</value>
+  <key>tr</key>
+  <value>Arka plan görevleri debut modunda çalıştır</value>
  </synonym>
  <type>
   <types>Boolean</types>

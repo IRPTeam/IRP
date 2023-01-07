@@ -62,16 +62,16 @@
      <color>Style.FormBackColor</color>
     </borderColor>
     <inputHint>
-     <key>tr</key>
-     <value>Malzeme</value>
+     <key>en</key>
+     <value>Item</value>
     </inputHint>
     <inputHint>
      <key>ru</key>
      <value>Номенклатура</value>
     </inputHint>
     <inputHint>
-     <key>en</key>
-     <value>Item</value>
+     <key>tr</key>
+     <value>Malzeme</value>
     </inputHint>
    </extInfo>
   </items>
@@ -140,16 +140,16 @@
      <color>Style.FormBackColor</color>
     </borderColor>
     <inputHint>
-     <key>tr</key>
-     <value>Özellik</value>
+     <key>en</key>
+     <value>Property</value>
     </inputHint>
     <inputHint>
      <key>ru</key>
      <value>Характеристика</value>
     </inputHint>
     <inputHint>
-     <key>en</key>
-     <value>Property</value>
+     <key>tr</key>
+     <value>Özellik</value>
     </inputHint>
    </extInfo>
   </items>
@@ -250,16 +250,16 @@
     <name>SerialLotNumber</name>
     <id>108</id>
     <title>
-     <key>tr</key>
-     <value>Seri lot numaraları</value>
+     <key>en</key>
+     <value>Serial lot number</value>
     </title>
     <title>
      <key>ru</key>
      <value>Серия номенклатуры</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Serial lot number</value>
+     <key>tr</key>
+     <value>Seri lot numaraları</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -309,16 +309,16 @@
      <typeDomainEnabled>true</typeDomainEnabled>
      <textEdit>true</textEdit>
      <inputHint>
-      <key>tr</key>
-      <value>Seri lot numaraları</value>
+      <key>en</key>
+      <value>Serial lot number</value>
      </inputHint>
      <inputHint>
       <key>ru</key>
       <value>Серия номенклатуры</value>
      </inputHint>
      <inputHint>
-      <key>en</key>
-      <value>Serial lot number</value>
+      <key>tr</key>
+      <value>Seri lot numaraları</value>
      </inputHint>
     </extInfo>
    </items>
@@ -376,16 +376,16 @@
        <horizontalStretch>true</horizontalStretch>
        <verticalStretch>true</verticalStretch>
        <nonselectedPictureText>
-        <key>tr</key>
-        <value>Resim bulunamadı</value>
+        <key>en</key>
+        <value>Picture not found</value>
        </nonselectedPictureText>
        <nonselectedPictureText>
         <key>ru</key>
         <value>Картинка не найдена</value>
        </nonselectedPictureText>
        <nonselectedPictureText>
-        <key>en</key>
-        <value>Picture not found</value>
+        <key>tr</key>
+        <value>Resim bulunamadı</value>
        </nonselectedPictureText>
        <border xsi:type="core:BorderDef">
         <width>1</width>
@@ -399,16 +399,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Sayfa slider</value>
+      <key>en</key>
+      <value>Page slider</value>
      </title>
      <title>
       <key>ru</key>
       <value>Картинки</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Page slider</value>
+      <key>tr</key>
+      <value>Sayfa slider</value>
      </title>
      <extendedTooltip>
       <name>PageSliderExtendedTooltip</name>
@@ -440,16 +440,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>tr</key>
-      <value>Sayfa ek bilgiler</value>
+      <key>en</key>
+      <value>Page add info</value>
      </title>
      <title>
       <key>ru</key>
       <value>Страница доп. информация</value>
      </title>
      <title>
-      <key>en</key>
-      <value>Page add info</value>
+      <key>tr</key>
+      <value>Sayfa ek bilgiler</value>
      </title>
      <extendedTooltip>
       <name>PageAddInfoExtendedTooltip</name>
@@ -478,16 +478,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>tr</key>
-     <value>Slider grubu</value>
+     <key>en</key>
+     <value>Group slider</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа слайдер</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Group slider</value>
+     <key>tr</key>
+     <value>Slider grubu</value>
     </title>
     <extendedTooltip>
      <name>GroupSliderExtendedTooltip</name>
@@ -514,16 +514,16 @@
     <name>ItemItemType</name>
     <id>83</id>
     <title>
-     <key>tr</key>
-     <value>Tip</value>
+     <key>en</key>
+     <value>Type</value>
     </title>
     <title>
      <key>ru</key>
      <value>Вид</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Type</value>
+     <key>tr</key>
+     <value>Tip</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -572,7 +572,7 @@
     <name>ItemItemID</name>
     <id>86</id>
     <title>
-     <key>tr</key>
+     <key>en</key>
      <value>ID</value>
     </title>
     <title>
@@ -580,7 +580,7 @@
      <value>Артикул</value>
     </title>
     <title>
-     <key>en</key>
+     <key>tr</key>
      <value>ID</value>
     </title>
     <visible>true</visible>
@@ -630,16 +630,16 @@
     <name>ItemKeyItemKeyID</name>
     <id>89</id>
     <title>
-     <key>tr</key>
-     <value>Anahtar ID</value>
+     <key>en</key>
+     <value>Key ID</value>
     </title>
     <title>
      <key>ru</key>
      <value>Артикул характеристики</value>
     </title>
     <title>
-     <key>en</key>
-     <value>Key ID</value>
+     <key>tr</key>
+     <value>Anahtar ID</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -691,28 +691,28 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Resim</value>
+    <key>en</key>
+    <value>Picture</value>
    </title>
    <title>
     <key>ru</key>
     <value>Картинка</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Picture</value>
+    <key>tr</key>
+    <value>Resim</value>
    </title>
    <toolTip>
-    <key>tr</key>
-    <value>Grup resim</value>
+    <key>en</key>
+    <value>Group picture</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
     <value>Группа картинки</value>
    </toolTip>
    <toolTip>
-    <key>en</key>
-    <value>Group picture</value>
+    <key>tr</key>
+    <value>Grup resim</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupPictureExtendedTooltip</name>
@@ -1059,28 +1059,28 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Malzemeler özellikleri</value>
+    <key>en</key>
+    <value>Items property</value>
    </title>
    <title>
     <key>ru</key>
     <value>Свойства номенклатуры</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Items property</value>
+    <key>tr</key>
+    <value>Malzemeler özellikleri</value>
    </title>
    <toolTip>
-    <key>tr</key>
-    <value>Grup malzeme özellikleri</value>
+    <key>en</key>
+    <value>Group items property</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
     <value>Группа объект свойство</value>
    </toolTip>
    <toolTip>
-    <key>en</key>
-    <value>Group items property</value>
+    <key>tr</key>
+    <value>Grup malzeme özellikleri</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupItemsPropertyExtendedTooltip</name>
@@ -1420,28 +1420,28 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Anahtar özellik</value>
+    <key>en</key>
+    <value>Key property</value>
    </title>
    <title>
     <key>ru</key>
     <value>Свойства характеристики</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Key property</value>
+    <key>tr</key>
+    <value>Anahtar özellik</value>
    </title>
    <toolTip>
-    <key>tr</key>
-    <value>Grup anahtar özellikleri</value>
+    <key>en</key>
+    <value>Group key property</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
     <value>Группа ключ свойство</value>
    </toolTip>
    <toolTip>
-    <key>en</key>
-    <value>Group key property</value>
+    <key>tr</key>
+    <value>Grup anahtar özellikleri</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupKeyPropertyExtendedTooltip</name>
@@ -1672,16 +1672,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>tr</key>
-    <value>Ayarlar</value>
+    <key>en</key>
+    <value>Settings</value>
    </title>
    <title>
     <key>ru</key>
     <value>Настройки</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Settings</value>
+    <key>tr</key>
+    <value>Ayarlar</value>
    </title>
    <extendedTooltip>
     <name>GroupSettingsExtendedTooltip</name>
@@ -1710,28 +1710,28 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Sayfalar grubu</value>
+   <key>en</key>
+   <value>Group pages</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа страниц</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group pages</value>
-  </title>
-  <toolTip>
    <key>tr</key>
    <value>Sayfalar grubu</value>
+  </title>
+  <toolTip>
+   <key>en</key>
+   <value>Group pages</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Группа страниц</value>
   </toolTip>
   <toolTip>
-   <key>en</key>
-   <value>Group pages</value>
+   <key>tr</key>
+   <value>Sayfalar grubu</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -1872,16 +1872,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup footer</value>
+   <key>en</key>
+   <value>Group bottom</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа подвал</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group bottom</value>
+   <key>tr</key>
+   <value>Grup footer</value>
   </title>
   <extendedTooltip>
    <name>GroupBottomExtendedTooltip</name>
@@ -1985,16 +1985,16 @@
  <attributes>
   <name>Barcode</name>
   <title>
-   <key>tr</key>
-   <value>Barkod</value>
+   <key>en</key>
+   <value>Barcode</value>
   </title>
   <title>
    <key>ru</key>
    <value>Штрихкод</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Barcode</value>
+   <key>tr</key>
+   <value>Barkod</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2011,16 +2011,16 @@
  <attributes>
   <name>ItemRef</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme ref</value>
+   <key>en</key>
+   <value>Item ref</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка номенклатура</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item ref</value>
+   <key>tr</key>
+   <value>Malzeme ref</value>
   </title>
   <id>3</id>
   <valueType>
@@ -2036,16 +2036,16 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </title>
   <title>
    <key>ru</key>
    <value>Характеристика</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </title>
   <id>4</id>
   <valueType>
@@ -2062,16 +2062,16 @@
  <attributes>
   <name>Photo</name>
   <title>
-   <key>tr</key>
-   <value>Foto</value>
+   <key>en</key>
+   <value>Photo</value>
   </title>
   <title>
    <key>ru</key>
    <value>Фото</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Photo</value>
+   <key>tr</key>
+   <value>Foto</value>
   </title>
   <id>5</id>
   <valueType>
@@ -2087,16 +2087,16 @@
  <attributes>
   <name>PictureDecoration</name>
   <title>
-   <key>tr</key>
-   <value>Resim dekorasyon</value>
+   <key>en</key>
+   <value>Picture decoration</value>
   </title>
   <title>
    <key>ru</key>
    <value>Декорация картинки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Picture decoration</value>
+   <key>tr</key>
+   <value>Resim dekorasyon</value>
   </title>
   <id>6</id>
   <valueType>
@@ -2113,16 +2113,16 @@
  <attributes>
   <name>SerialLotNumber</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
+   <key>en</key>
+   <value>Serial lot number</value>
   </title>
   <title>
    <key>ru</key>
    <value>Серия номенклатуры</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Serial lot number</value>
+   <key>tr</key>
+   <value>Seri lot numaraları</value>
   </title>
   <id>8</id>
   <valueType>
@@ -2139,16 +2139,16 @@
  <attributes>
   <name>UseSeriallotNumber</name>
   <title>
-   <key>tr</key>
-   <value>Seri lotları kullan</value>
+   <key>en</key>
+   <value>Use seriallot number</value>
   </title>
   <title>
    <key>ru</key>
    <value>Использовать серийные номера</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Use seriallot number</value>
+   <key>tr</key>
+   <value>Seri lotları kullan</value>
   </title>
   <id>9</id>
   <valueType>
@@ -2164,12 +2164,12 @@
  <attributes>
   <name>CountScanTheSameItem</name>
   <title>
-   <key>ru</key>
-   <value>Количество сканируемых штрихкодов на один товар</value>
-  </title>
-  <title>
    <key>en</key>
    <value>Count scan the same item</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Количество сканируемых штрихкодов на один товар</value>
   </title>
   <id>10</id>
   <valueType>
@@ -2192,12 +2192,12 @@
  <attributes>
   <name>AlreadyScanCount</name>
   <title>
-   <key>ru</key>
-   <value>Количество просканированных</value>
-  </title>
-  <title>
    <key>en</key>
    <value>Already scan count</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Количество просканированных</value>
   </title>
   <id>12</id>
   <valueType>
@@ -2217,12 +2217,12 @@
  <attributes>
   <name>HideScanButton</name>
   <title>
-   <key>ru</key>
-   <value>Скрыть кнопку сканирования штрихкода</value>
-  </title>
-  <title>
    <key>en</key>
    <value>Hide scan button</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Скрыть кнопку сканирования штрихкода</value>
   </title>
   <id>13</id>
   <valueType>
@@ -2241,12 +2241,12 @@
  <attributes>
   <name>HideStatusButton</name>
   <title>
-   <key>ru</key>
-   <value>Скрыть кнопку статуса</value>
-  </title>
-  <title>
    <key>en</key>
    <value>Hide status button</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Скрыть кнопку статуса</value>
   </title>
   <id>14</id>
   <valueType>
@@ -2283,29 +2283,29 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>OK</value>
   </title>
   <title>
    <key>ru</key>
    <value>ОК</value>
   </title>
   <title>
-   <key>en</key>
-   <value>OK</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <id>2</id>
   <toolTip>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>OK</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>ОК</value>
   </toolTip>
   <toolTip>
-   <key>en</key>
-   <value>OK</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -2320,29 +2320,29 @@
  <formCommands>
   <name>NotOK</name>
   <title>
-   <key>tr</key>
-   <value>OK Değil</value>
+   <key>en</key>
+   <value>Not OK</value>
   </title>
   <title>
    <key>ru</key>
    <value>Не подтверждено</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Not OK</value>
+   <key>tr</key>
+   <value>OK Değil</value>
   </title>
   <id>3</id>
   <toolTip>
-   <key>tr</key>
-   <value>OK Değil</value>
+   <key>en</key>
+   <value>Not OK</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Не подтверждено</value>
   </toolTip>
   <toolTip>
-   <key>en</key>
-   <value>Not OK</value>
+   <key>tr</key>
+   <value>OK Değil</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -2357,16 +2357,16 @@
  <formCommands>
   <name>Clear</name>
   <title>
-   <key>tr</key>
-   <value>Temizle</value>
+   <key>en</key>
+   <value>Clear</value>
   </title>
   <title>
    <key>ru</key>
    <value>Очистить</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Clear</value>
+   <key>tr</key>
+   <value>Temizle</value>
   </title>
   <id>4</id>
   <use>

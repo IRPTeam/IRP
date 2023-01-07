@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3a48aa50-0f07-4659-943b-fd2df919739f">
  <name>UseItemKey</name>
  <synonym>
-  <key>tr</key>
-  <value>Varyant kullanmak</value>
+  <key>en</key>
+  <value>Use item key</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать ключи аналитики (характеристики) номенклатуры</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use item key</value>
+  <key>tr</key>
+  <value>Varyant kullanmak</value>
  </synonym>
  <location>Constant.UseItemKey</location>
  <privilegedGetMode>true</privilegedGetMode>

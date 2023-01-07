@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseBusinessUnits</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Departmanlar</value>
+  <key>en</key>
+  <value>Use business units</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать подразделения</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use business units</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Departmanlar</value>
  </synonym>
  <type>
   <types>Boolean</types>

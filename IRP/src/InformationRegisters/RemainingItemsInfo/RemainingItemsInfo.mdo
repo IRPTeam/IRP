@@ -11,56 +11,56 @@
  </producedTypes>
  <name>RemainingItemsInfo</name>
  <synonym>
-  <key>tr</key>
-  <value>Malzeme bakiye bilgisi</value>
+  <key>en</key>
+  <value>Remaining items info</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Информация по остаткам товаров</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Remaining items info</value>
+  <key>tr</key>
+  <value>Malzeme bakiye bilgisi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Malzeme bakiye bilgisi</value>
+  <key>en</key>
+  <value>Remaining item info</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Информация по остаткам товара</value>
  </recordPresentation>
  <recordPresentation>
-  <key>en</key>
-  <value>Remaining item info</value>
- </recordPresentation>
- <listPresentation>
   <key>tr</key>
   <value>Malzeme bakiye bilgisi</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Remaining items info</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Информация по остаткам товаров</value>
  </listPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Remaining items info</value>
+  <key>tr</key>
+  <value>Malzeme bakiye bilgisi</value>
  </listPresentation>
  <resources uuid="46dc1d13-93c7-4aeb-9ed7-a195cfaa920d">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -73,16 +73,16 @@
  <dimensions uuid="64e24f8d-c74c-4853-9e00-d00dee0fbd71">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -97,16 +97,16 @@
  <dimensions uuid="95ab521b-469c-473d-b656-79510595393e">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
+   <key>en</key>
+   <value>Store</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Store</value>
+   <key>tr</key>
+   <value>Depo</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -121,16 +121,16 @@
  <dimensions uuid="fe15f2c1-8c4a-4c97-a4b6-3164a8dddf24">
   <name>Unit</name>
   <synonym>
-   <key>tr</key>
-   <value>Birim</value>
+   <key>en</key>
+   <value>Unit</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ед. изм.</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Unit</value>
+   <key>tr</key>
+   <value>Birim</value>
   </synonym>
   <type>
    <types>CatalogRef.Units</types>

@@ -9,16 +9,16 @@
  </producedTypes>
  <name>BusinessUnits</name>
  <synonym>
-  <key>tr</key>
-  <value>Departmanlar</value>
+  <key>en</key>
+  <value>Business units</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Подразделения</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Business units</value>
+  <key>tr</key>
+  <value>Departmanlar</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -58,16 +58,16 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Departman</value>
+  <key>en</key>
+  <value>Business unit</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Подразделение</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>Business unit</value>
+  <key>tr</key>
+  <value>Departman</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -85,16 +85,16 @@
  <attributes uuid="f9a37c70-5521-431b-bfc5-fc177e0f9d33">
   <name>Department</name>
   <synonym>
-   <key>tr</key>
-   <value>Departman</value>
+   <key>en</key>
+   <value>Department</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Подразделение</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Department</value>
+   <key>tr</key>
+   <value>Departman</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -109,16 +109,16 @@
  <attributes uuid="01ca20c3-d344-4dc0-8163-48394b3f2c70">
   <name>Workshop</name>
   <synonym>
-   <key>tr</key>
-   <value>Atolye</value>
+   <key>en</key>
+   <value>Workshop</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Цех</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Workshop</value>
+   <key>tr</key>
+   <value>Atolye</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -133,16 +133,16 @@
  <attributes uuid="0a474302-6bb4-4f06-b199-58f28710a7ab">
   <name>Retail</name>
   <synonym>
-   <key>tr</key>
-   <value>Perakende</value>
+   <key>en</key>
+   <value>Retail</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Розница</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Retail</value>
+   <key>tr</key>
+   <value>Perakende</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -157,16 +157,16 @@
  <attributes uuid="72f0042f-9766-4477-af76-a3633fef9c3e">
   <name>UseConsolidatedRetailSales</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanmak - Konsolide perakende satış fişleri</value>
+   <key>en</key>
+   <value>Use consolidated retail sales</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Использовать - Отчеты о розничных продажах</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Use consolidated retail sales</value>
+   <key>tr</key>
+   <value>Kullanmak - Konsolide perakende satış fişleri</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -180,16 +180,16 @@
  <attributes uuid="f63ed0aa-493b-4462-9ffa-b0c5a232daf3">
   <name>MaterialStore</name>
   <synonym>
-   <key>tr</key>
-   <value>Hammadde deposu</value>
+   <key>en</key>
+   <value>Material store (input, writeoff)</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад сырья</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Material store (input, writeoff)</value>
+   <key>tr</key>
+   <value>Hammadde deposu</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -203,16 +203,16 @@
  <attributes uuid="e2b0ef2c-b5bc-4be8-a3b6-5a4533b3bf2e">
   <name>ReleaseStore</name>
   <synonym>
-   <key>tr</key>
-   <value>Hazır ürün deposu</value>
+   <key>en</key>
+   <value>Release store (output, surplus)</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад готовой продукции</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Release store (output, surplus)</value>
+   <key>tr</key>
+   <value>Hazır ürün deposu</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -226,16 +226,16 @@
  <attributes uuid="a7e74170-3004-4b0e-829c-863e07579fae">
   <name>SemiproductStore</name>
   <synonym>
-   <key>tr</key>
-   <value>Yarı mamul deposu</value>
+   <key>en</key>
+   <value>Semiproduct store (input, writeoff)</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад полуфабрикатов</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Semiproduct store (input, writeoff)</value>
+   <key>tr</key>
+   <value>Yarı mamul deposu</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -253,30 +253,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <attributes uuid="32a2d18d-da17-4983-9fcb-afe80b4a640c">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -289,16 +289,16 @@
   <attributes uuid="11284a0a-3bea-4359-a642-c57b223e2b45">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -316,16 +316,16 @@
  <forms uuid="3b2e1f6a-39b3-4bcc-9f0e-15bf0df36432">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -333,16 +333,16 @@
  <forms uuid="ad98df43-b4be-4328-894a-f01d6c6fa33c">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -350,16 +350,16 @@
  <forms uuid="e8822c90-869b-4875-8e78-a729a8634330">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

@@ -350,16 +350,16 @@
  <attributes>
   <name>RecordType</name>
   <title>
-   <key>tr</key>
-   <value>Kayıt tipi</value>
+   <key>en</key>
+   <value>Record type</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип записи</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Record type</value>
+   <key>tr</key>
+   <value>Kayıt tipi</value>
   </title>
   <id>2</id>
   <valueType>

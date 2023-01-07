@@ -207,16 +207,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Grup 1</value>
+   <key>en</key>
+   <value>Group1</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа 1</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group1</value>
+   <key>tr</key>
+   <value>Grup 1</value>
   </title>
   <extendedTooltip>
    <name>GroupScanExtendedTooltip</name>
@@ -405,16 +405,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Alt</value>
+   <key>en</key>
+   <value>Bottom</value>
   </title>
   <title>
    <key>ru</key>
    <value>Подвал</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Bottom</value>
+   <key>tr</key>
+   <value>Alt</value>
   </title>
   <extendedTooltip>
    <name>GroupBottomExtendedTooltip</name>
@@ -476,16 +476,16 @@
  <attributes>
   <name>Quantity</name>
   <title>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </title>
   <title>
    <key>ru</key>
    <value>Количество</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </title>
   <id>2</id>
   <valueType>
@@ -501,16 +501,16 @@
  <attributes>
   <name>ItemRef</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme ref</value>
+   <key>en</key>
+   <value>Item ref</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка номенклатура</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item ref</value>
+   <key>tr</key>
+   <value>Malzeme ref</value>
   </title>
   <id>3</id>
   <valueType>
@@ -526,16 +526,16 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </title>
   <title>
    <key>ru</key>
    <value>Характеристика</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </title>
   <id>4</id>
   <valueType>
@@ -552,16 +552,16 @@
  <attributes>
   <name>RowId</name>
   <title>
-   <key>tr</key>
-   <value>Satır ID</value>
+   <key>en</key>
+   <value>Row id</value>
   </title>
   <title>
    <key>ru</key>
    <value>Id строки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Row id</value>
+   <key>tr</key>
+   <value>Satır ID</value>
   </title>
   <id>6</id>
   <valueType>
@@ -580,16 +580,16 @@
  <attributes>
   <name>Picture</name>
   <title>
-   <key>tr</key>
-   <value>Resim</value>
+   <key>en</key>
+   <value>Picture</value>
   </title>
   <title>
    <key>ru</key>
    <value>Картинка</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Picture</value>
+   <key>tr</key>
+   <value>Resim</value>
   </title>
   <id>7</id>
   <valueType>
@@ -606,16 +606,16 @@
  <attributes>
   <name>AutoMode</name>
   <title>
-   <key>tr</key>
-   <value>Auto modu</value>
+   <key>en</key>
+   <value>Auto mode</value>
   </title>
   <title>
    <key>ru</key>
    <value>Автоматический вариант</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Auto mode</value>
+   <key>tr</key>
+   <value>Auto modu</value>
   </title>
   <id>8</id>
   <valueType>
@@ -631,16 +631,16 @@
  <attributes>
   <name>SerialLotNumber</name>
   <title>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
+   <key>en</key>
+   <value>Serial lot number</value>
   </title>
   <title>
    <key>ru</key>
    <value>Серия номенклатуры</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Serial lot number</value>
+   <key>tr</key>
+   <value>Seri lot numaraları</value>
   </title>
   <id>9</id>
   <valueType>
@@ -657,16 +657,16 @@
  <attributes>
   <name>UseSerialLotNumber</name>
   <title>
-   <key>tr</key>
-   <value>Seri/lot numaraları kullan</value>
+   <key>en</key>
+   <value>Use serial lot number</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ведется учет по сериям номенклатуры</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Use serial lot number</value>
+   <key>tr</key>
+   <value>Seri/lot numaraları kullan</value>
   </title>
   <id>10</id>
   <valueType>
@@ -682,16 +682,16 @@
  <attributes>
   <name>ActiveItem</name>
   <title>
-   <key>tr</key>
-   <value>Aktif nesne</value>
+   <key>en</key>
+   <value>Active item</value>
   </title>
   <title>
    <key>ru</key>
    <value>Активный объект</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Active item</value>
+   <key>tr</key>
+   <value>Aktif nesne</value>
   </title>
   <id>11</id>
   <valueType>
@@ -708,16 +708,16 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>OK</value>
   </title>
   <title>
    <key>ru</key>
    <value>ОК</value>
   </title>
   <title>
-   <key>en</key>
-   <value>OK</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <id>1</id>
   <use>

@@ -11,56 +11,56 @@
  </producedTypes>
  <name>BranchBankTerms</name>
  <synonym>
-  <key>tr</key>
-  <value>Şube banka sözleşmesi</value>
+  <key>en</key>
+  <value>Branch bank terms</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Соглашение с банком структурного подразделения</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Branch bank terms</value>
+  <key>tr</key>
+  <value>Şube banka sözleşmesi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Şube banka sözleşmesi</value>
+  <key>en</key>
+  <value>Branch bank term</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Соглашение с банком структурного подразделения</value>
  </recordPresentation>
  <recordPresentation>
-  <key>en</key>
-  <value>Branch bank term</value>
+  <key>tr</key>
+  <value>Şube banka sözleşmesi</value>
  </recordPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Şube banka sözleşmeleri</value>
+  <key>en</key>
+  <value>Branch bank terms</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Соглашения с банком структурного подразделения</value>
  </listPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Branch bank terms</value>
+  <key>tr</key>
+  <value>Şube banka sözleşmeleri</value>
  </listPresentation>
  <dimensions uuid="495bc5fa-d746-44a1-8a3e-abd9d5bc7fb8">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -76,16 +76,16 @@
  <dimensions uuid="45b0d38b-549e-40af-9673-82adaed1ae44">
   <name>BankTerm</name>
   <synonym>
-   <key>tr</key>
-   <value>Banka sözleşmesi</value>
+   <key>en</key>
+   <value>Bank term</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Соглашение с банком</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Bank term</value>
+   <key>tr</key>
+   <value>Banka sözleşmesi</value>
   </synonym>
   <type>
    <types>CatalogRef.BankTerms</types>

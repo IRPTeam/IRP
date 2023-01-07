@@ -9,16 +9,16 @@
  </producedTypes>
  <name>AccessGroups</name>
  <synonym>
-  <key>tr</key>
-  <value>Kullanıcı erişim grupları</value>
+  <key>en</key>
+  <value>User access groups</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Группы доступа пользователей</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>User access groups</value>
+  <key>tr</key>
+  <value>Kullanıcı erişim grupları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -57,28 +57,28 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectPresentation>
-  <key>tr</key>
-  <value>Kullanıcı erişim grubu</value>
+  <key>en</key>
+  <value>User access group</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Группа доступа пользователей</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>User access group</value>
+  <key>tr</key>
+  <value>Kullanıcı erişim grubu</value>
  </objectPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Kullanıcı erişim grupları</value>
+  <key>en</key>
+  <value>User access groups</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Группы доступа пользователей</value>
  </listPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>User access groups</value>
+  <key>tr</key>
+  <value>Kullanıcı erişim grupları</value>
  </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -100,30 +100,30 @@
   </producedTypes>
   <name>Profiles</name>
   <synonym>
-   <key>tr</key>
-   <value>Profiller</value>
+   <key>en</key>
+   <value>Profiles</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Профили</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Profiles</value>
+   <key>tr</key>
+   <value>Profiller</value>
   </synonym>
   <attributes uuid="c98bde96-193a-42e8-9ce5-c6e507dfb9ac">
    <name>Profile</name>
    <synonym>
-    <key>tr</key>
-    <value>Profil</value>
+    <key>en</key>
+    <value>Profile</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Профиль</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Profile</value>
+    <key>tr</key>
+    <value>Profil</value>
    </synonym>
    <type>
     <types>CatalogRef.AccessProfiles</types>
@@ -140,30 +140,30 @@
   </producedTypes>
   <name>Users</name>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcılar</value>
+   <key>en</key>
+   <value>Users</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Пользователи</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Users</value>
+   <key>tr</key>
+   <value>Kullanıcılar</value>
   </synonym>
   <attributes uuid="4ddcb09d-ff6c-415b-a519-08469fe52339">
    <name>User</name>
    <synonym>
-    <key>tr</key>
-    <value>Kullanıcı</value>
+    <key>en</key>
+    <value>User</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Пользователь</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>User</value>
+    <key>tr</key>
+    <value>Kullanıcı</value>
    </synonym>
    <type>
     <types>CatalogRef.Users</types>
@@ -180,30 +180,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <attributes uuid="4276137a-4750-4172-844a-a850eb648968">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Свойство</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -216,16 +216,16 @@
   <attributes uuid="0ec74aad-909a-424a-a246-a7b75e482eff">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -243,16 +243,16 @@
  <forms uuid="4834790e-58e6-473b-b3f3-988d799569ee">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -260,16 +260,16 @@
  <forms uuid="f259c78d-279c-4820-9a8a-a970e736ee6a">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -277,16 +277,16 @@
  <forms uuid="c236196d-015b-4ef4-895e-55a09553cc24">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

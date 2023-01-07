@@ -6,16 +6,16 @@
  </producedTypes>
  <name>AnaliseDocumentMovements</name>
  <synonym>
-  <key>tr</key>
-  <value>Evrak hareketleri analiz et</value>
+  <key>en</key>
+  <value>Analise document movements</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Проанализировать движения документа</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Analise document movements</value>
+  <key>tr</key>
+  <value>Evrak hareketleri analiz et</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.AnaliseDocumentMovements.Form.Form</defaultForm>
@@ -26,30 +26,30 @@
   </producedTypes>
   <name>Info</name>
   <synonym>
-   <key>tr</key>
-   <value>Bilgi</value>
+   <key>en</key>
+   <value>Info</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Контактная информация</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Info</value>
+   <key>tr</key>
+   <value>Bilgi</value>
   </synonym>
   <attributes uuid="04bb90dc-3a3d-4d68-9d4a-b3bc797db905">
    <name>Document</name>
    <synonym>
-    <key>tr</key>
-    <value>Evrak</value>
+    <key>en</key>
+    <value>Document</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Документ</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Document</value>
+    <key>tr</key>
+    <value>Evrak</value>
    </synonym>
    <type>
     <types>String</types>
@@ -66,16 +66,16 @@
   <attributes uuid="760abdcb-ee96-44a1-b1f5-85fa73cfcdb9">
    <name>Register</name>
    <synonym>
-    <key>tr</key>
-    <value>Kayıt tablosu</value>
+    <key>en</key>
+    <value>Register</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Регистр</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Register</value>
+    <key>tr</key>
+    <value>Kayıt tablosu</value>
    </synonym>
    <type>
     <types>String</types>
@@ -92,16 +92,16 @@
   <attributes uuid="c02ff034-64f5-4c9d-857e-68ca1f346d34">
    <name>Recorder</name>
    <synonym>
-    <key>tr</key>
-    <value>İşlem evrakı</value>
+    <key>en</key>
+    <value>Recorder</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Регистратор</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Recorder</value>
+    <key>tr</key>
+    <value>İşlem evrakı</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -113,16 +113,16 @@
   <attributes uuid="be3fb2e0-0f79-4c7c-82ee-23fd0025c312">
    <name>Conditions</name>
    <synonym>
-    <key>tr</key>
-    <value>Koşullar</value>
+    <key>en</key>
+    <value>Conditions</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Условия</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Conditions</value>
+    <key>tr</key>
+    <value>Koşullar</value>
    </synonym>
    <type>
     <types>String</types>
@@ -138,16 +138,16 @@
   <attributes uuid="be055081-9a11-4c85-862b-8d458cc7327b">
    <name>Query</name>
    <synonym>
-    <key>tr</key>
-    <value>Sorgu</value>
+    <key>en</key>
+    <value>Query</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Запрос</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Query</value>
+    <key>tr</key>
+    <value>Sorgu</value>
    </synonym>
    <type>
     <types>String</types>
@@ -163,16 +163,16 @@
   <attributes uuid="ecdea8c4-d90a-4795-9d80-f557bae8d5ee">
    <name>Parameters</name>
    <synonym>
-    <key>tr</key>
-    <value>Parametreler</value>
+    <key>en</key>
+    <value>Parameters</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Параметры</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Parameters</value>
+    <key>tr</key>
+    <value>Parametreler</value>
    </synonym>
    <type>
     <types>String</types>
@@ -188,16 +188,16 @@
   <attributes uuid="ac02f4d2-8093-4b81-9e75-c32062b8b567">
    <name>Receipt</name>
    <synonym>
-    <key>tr</key>
-    <value>Giriş</value>
+    <key>en</key>
+    <value>Receipt</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Приход</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Receipt</value>
+    <key>tr</key>
+    <value>Giriş</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -209,16 +209,16 @@
   <attributes uuid="e9373a2d-c727-4d0e-a978-563a1dad5e33">
    <name>Expense</name>
    <synonym>
-    <key>tr</key>
-    <value>Gider</value>
+    <key>en</key>
+    <value>Expense</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Расход</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Expense</value>
+    <key>tr</key>
+    <value>Gider</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -231,7 +231,7 @@
  <forms uuid="0cdba87d-7d5d-4b0f-9136-2b28ee9772ef">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -239,7 +239,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
@@ -248,32 +248,32 @@
  <templates uuid="89108f7c-2840-440e-85d3-3bcc959db5b6">
   <name>FeatureTemplate</name>
   <synonym>
-   <key>tr</key>
-   <value>Özellik şablonu</value>
+   <key>en</key>
+   <value>Feature template</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Шаблон свойства</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Feature template</value>
+   <key>tr</key>
+   <value>Özellik şablonu</value>
   </synonym>
   <templateType>TextDocument</templateType>
  </templates>
  <templates uuid="d9839a5b-b754-4255-a7df-3a7c593d505c">
   <name>FeatureRowTemplate</name>
   <synonym>
-   <key>tr</key>
-   <value>Özellik satır şablonu</value>
+   <key>en</key>
+   <value>Feature row template</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Шаблон строки свойства</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Feature row template</value>
+   <key>tr</key>
+   <value>Özellik satır şablonu</value>
   </synonym>
   <templateType>TextDocument</templateType>
  </templates>

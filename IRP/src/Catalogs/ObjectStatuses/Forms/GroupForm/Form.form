@@ -4,16 +4,16 @@
   <name>PredefinedDataName</name>
   <id>3</id>
   <title>
-   <key>tr</key>
-   <value>Nesne ismi</value>
+   <key>en</key>
+   <value>Object name</value>
   </title>
   <title>
    <key>ru</key>
    <value>Наименование объекта</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Object name</value>
+   <key>tr</key>
+   <value>Nesne ismi</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>

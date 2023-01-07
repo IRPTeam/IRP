@@ -7,47 +7,47 @@
  </producedTypes>
  <name>ItemTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Malzeme tipleri</value>
+  <key>en</key>
+  <value>Item types</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Виды номенклатуры</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Item types</value>
+  <key>tr</key>
+  <value>Malzeme tipleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="4be789f8-2d36-4169-9f2d-4c825c8d712c">
   <name>Service</name>
   <synonym>
-   <key>tr</key>
-   <value>Servis</value>
+   <key>en</key>
+   <value>Service</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Услуга</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Service</value>
+   <key>tr</key>
+   <value>Servis</value>
   </synonym>
  </enumValues>
  <enumValues uuid="7bbe3a49-8365-4785-a38c-abee4d666e13">
   <name>Product</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme</value>
+   <key>en</key>
+   <value>Product</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Товар</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Product</value>
+   <key>tr</key>
+   <value>Malzeme</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

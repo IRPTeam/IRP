@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typePurchaseBasis</name>
  <synonym>
-  <key>tr</key>
-  <value>tip alım kaynak evrakı</value>
+  <key>en</key>
+  <value>Type purchase basis</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип основание закупки</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Type purchase basis</value>
+  <key>tr</key>
+  <value>tip alım kaynak evrakı</value>
  </synonym>
  <type>
   <types>DocumentRef.InternalSupplyRequest</types>

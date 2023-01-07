@@ -130,16 +130,16 @@
     <radioButtonsType>Tumbler</radioButtonsType>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Tedarikçiler</value>
+      <key>en</key>
+      <value>Vendors</value>
      </presentation>
      <presentation>
       <key>ru</key>
       <value>Поставщики</value>
      </presentation>
      <presentation>
-      <key>en</key>
-      <value>Vendors</value>
+      <key>tr</key>
+      <value>Tedarikçiler</value>
      </presentation>
      <value xsi:type="core:StringValue">
       <value>Vendors</value>
@@ -147,16 +147,16 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>tr</key>
-      <value>Müşteriler</value>
+      <key>en</key>
+      <value>Customers</value>
      </presentation>
      <presentation>
       <key>ru</key>
       <value>Клиенты</value>
      </presentation>
      <presentation>
-      <key>en</key>
-      <value>Customers</value>
+      <key>tr</key>
+      <value>Müşteriler</value>
      </presentation>
      <value xsi:type="core:StringValue">
       <value>Customers</value>
@@ -170,16 +170,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Group genel</value>
+   <key>en</key>
+   <value>Group main</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа основная</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Group main</value>
+   <key>tr</key>
+   <value>Group genel</value>
   </title>
   <extendedTooltip>
    <name>GroupMainExtendedTooltip</name>
@@ -304,16 +304,16 @@
  <attributes>
   <name>Doc</name>
   <title>
-   <key>tr</key>
-   <value>Evrak</value>
+   <key>en</key>
+   <value>Doc</value>
   </title>
   <title>
    <key>ru</key>
    <value>Документ</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Doc</value>
+   <key>tr</key>
+   <value>Evrak</value>
   </title>
   <id>2</id>
   <valueType>
@@ -330,16 +330,16 @@
  <attributes>
   <name>Period</name>
   <title>
-   <key>tr</key>
-   <value>Dönem</value>
+   <key>en</key>
+   <value>Period</value>
   </title>
   <title>
    <key>ru</key>
    <value>Период</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Period</value>
+   <key>tr</key>
+   <value>Dönem</value>
   </title>
   <id>3</id>
   <valueType>
@@ -355,16 +355,16 @@
  <attributes>
   <name>ReportType</name>
   <title>
-   <key>tr</key>
-   <value>Rapor tipi</value>
+   <key>en</key>
+   <value>Report type</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип отчета</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Report type</value>
+   <key>tr</key>
+   <value>Rapor tipi</value>
   </title>
   <id>4</id>
   <valueType>
@@ -381,16 +381,16 @@
  <formCommands>
   <name>Run</name>
   <title>
-   <key>tr</key>
-   <value>Çalıştır</value>
+   <key>en</key>
+   <value>Run</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выполнить</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Run</value>
+   <key>tr</key>
+   <value>Çalıştır</value>
   </title>
   <id>1</id>
   <use>

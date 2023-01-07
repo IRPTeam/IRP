@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R4017B_InternalSupplyRequestProcurement</name>
  <synonym>
-  <key>tr</key>
-  <value>R4017 İç talep sipariş tedariği</value>
+  <key>en</key>
+  <value>R4017 Procurement of internal supply requests</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R4017 Приход товаров по заявкам на обеспечение</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>R4017 Procurement of internal supply requests</value>
+  <key>tr</key>
+  <value>R4017 İç talep sipariş tedariği</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +27,16 @@
  <resources uuid="c4f2850c-38e3-4974-98c8-1dc7237f019f">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +48,16 @@
  <dimensions uuid="5740d0aa-53c9-46ee-ac79-96292754a2db">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -70,16 +70,16 @@
  <dimensions uuid="d3089d4d-2083-4bda-8356-e9dd11194297">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -92,16 +92,16 @@
  <dimensions uuid="8935c973-8360-4ce5-97a5-629f1187ab63">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
+   <key>en</key>
+   <value>Store</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Store</value>
+   <key>tr</key>
+   <value>Depo</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -114,16 +114,16 @@
  <dimensions uuid="a956392d-cb22-4599-9655-33ba65e4162f">
   <name>InternalSupplyRequest</name>
   <synonym>
-   <key>tr</key>
-   <value>İç talep siparişi</value>
+   <key>en</key>
+   <value>Internal supply request</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Заявка на обеспечение товара</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Internal supply request</value>
+   <key>tr</key>
+   <value>İç talep siparişi</value>
   </synonym>
   <type>
    <types>DocumentRef.InternalSupplyRequest</types>
@@ -136,16 +136,16 @@
  <dimensions uuid="90ded717-fe78-40de-a8b7-d3c60fcae7b4">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>

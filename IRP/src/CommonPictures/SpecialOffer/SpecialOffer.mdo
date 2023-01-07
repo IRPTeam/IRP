@@ -2,15 +2,15 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ee5b5784-6640-4551-89b6-0584fc88318a">
  <name>SpecialOffer</name>
  <synonym>
-  <key>tr</key>
-  <value>Kampanya</value>
+  <key>en</key>
+  <value>Special offer</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Скидка</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Special offer</value>
+  <key>tr</key>
+  <value>Kampanya</value>
  </synonym>
 </mdclass:CommonPicture>

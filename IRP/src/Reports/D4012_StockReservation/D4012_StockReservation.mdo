@@ -6,32 +6,32 @@
  </producedTypes>
  <name>D4012_StockReservation</name>
  <synonym>
-  <key>tr</key>
-  <value>D4012 Stok rezerv tablosu</value>
+  <key>en</key>
+  <value>D4012 Stock reservation</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>D4012 Товары в резерве</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>D4012 Stock reservation</value>
+  <key>tr</key>
+  <value>D4012 Stok rezerv tablosu</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.D4012_StockReservation.Template.Template</mainDataCompositionSchema>
  <templates uuid="bc96d914-2cee-4aee-a961-d1956eb0d5a2">
   <name>Template</name>
   <synonym>
-   <key>tr</key>
-   <value>Şablon</value>
+   <key>en</key>
+   <value>Template</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Шаблон</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Template</value>
+   <key>tr</key>
+   <value>Şablon</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

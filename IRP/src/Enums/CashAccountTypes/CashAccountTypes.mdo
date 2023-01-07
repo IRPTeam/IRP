@@ -7,53 +7,53 @@
  </producedTypes>
  <name>CashAccountTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Kasa/banka tipleri</value>
+  <key>en</key>
+  <value>Cash account types</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Виды мест хранения денежных средств</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Cash account types</value>
+  <key>tr</key>
+  <value>Kasa/banka tipleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="d51c1e26-6658-4fd9-a2bf-9bd7a8c1164d">
   <name>Bank</name>
   <synonym>
-   <key>tr</key>
-   <value>Banka</value>
+   <key>en</key>
+   <value>Bank</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Банковский счет</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Bank</value>
+   <key>tr</key>
+   <value>Banka</value>
   </synonym>
  </enumValues>
  <enumValues uuid="574c6301-f60a-48e7-8b09-a5e75da0a750">
   <name>Cash</name>
   <synonym>
-   <key>tr</key>
-   <value>Kasa</value>
+   <key>en</key>
+   <value>Cash</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Касса</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Cash</value>
+   <key>tr</key>
+   <value>Kasa</value>
   </synonym>
  </enumValues>
  <enumValues uuid="9a4687c6-dc01-42a3-b95c-1cb860faa504">
   <name>Transit</name>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Transit</value>
   </synonym>
   <synonym>
@@ -61,14 +61,14 @@
    <value>Транзитный</value>
   </synonym>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Transit</value>
   </synonym>
  </enumValues>
  <enumValues uuid="5656b9fa-ea7c-47ef-a836-ce78cdbc12df">
   <name>POS</name>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>POS</value>
   </synonym>
   <synonym>
@@ -76,23 +76,23 @@
    <value>Платежный терминал</value>
   </synonym>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>POS</value>
   </synonym>
  </enumValues>
  <enumValues uuid="a62019c2-3b3c-4844-88c3-0bab04533f1d">
   <name>POSCashAccount</name>
   <synonym>
-   <key>tr</key>
-   <value>Kasa POS</value>
+   <key>en</key>
+   <value>POS cash account</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Платежный терминал</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>POS cash account</value>
+   <key>tr</key>
+   <value>Kasa POS</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

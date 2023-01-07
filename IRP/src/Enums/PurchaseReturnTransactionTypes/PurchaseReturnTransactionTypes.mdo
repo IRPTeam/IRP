@@ -7,47 +7,47 @@
  </producedTypes>
  <name>PurchaseReturnTransactionTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>Alım iade işlem tipleri</value>
+  <key>en</key>
+  <value>Purchase return transaction types</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Вид операций возвратов поставщику</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Purchase return transaction types</value>
+  <key>tr</key>
+  <value>Alım iade işlem tipleri</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="a6fac584-07aa-47d9-a9d5-57424c2b836b">
   <name>ReturnToVendor</name>
   <synonym>
-   <key>tr</key>
-   <value>Alım iadesi</value>
+   <key>en</key>
+   <value>Return to vendor</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Возврат поставщику</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Return to vendor</value>
+   <key>tr</key>
+   <value>Alım iadesi</value>
   </synonym>
  </enumValues>
  <enumValues uuid="4a69a6bc-8c36-4e3f-a91b-c5b855974093">
   <name>ReturnToConsignor</name>
   <synonym>
-   <key>tr</key>
-   <value>Konsinyeye verene iade</value>
+   <key>en</key>
+   <value>Return to consignor</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Возврат комитенту</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Return to consignor</value>
+   <key>tr</key>
+   <value>Konsinyeye verene iade</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

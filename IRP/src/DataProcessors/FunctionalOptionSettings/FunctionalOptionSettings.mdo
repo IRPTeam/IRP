@@ -6,23 +6,23 @@
  </producedTypes>
  <name>FunctionalOptionSettings</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenekler ayarları</value>
+  <key>en</key>
+  <value>Functional option settings</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Настройки функциональных опций</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Functional option settings</value>
+  <key>tr</key>
+  <value>İşlevsel seçenekler ayarları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.FunctionalOptionSettings.Form.Form</defaultForm>
  <forms uuid="fc0e81fc-90ec-415d-9d9d-eaa43b0de9f1">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -30,7 +30,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>

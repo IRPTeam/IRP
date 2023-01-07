@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fd11f5cc-69a9-49bb-97ea-da285c126831">
  <name>UseExpenseAndRevenueTypes</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Gider/gelir tipleri</value>
+  <key>en</key>
+  <value>Use expense and revenue types</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать статьи расходов/доходов</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use expense and revenue types</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Gider/gelir tipleri</value>
  </synonym>
  <location>Constant.UseExpenseAndRevenueTypes</location>
  <privilegedGetMode>true</privilegedGetMode>

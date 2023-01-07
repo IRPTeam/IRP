@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UsePriceByProperties</name>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Özelliklere göre fiyatlar</value>
+  <key>en</key>
+  <value>Use price by properties</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать установку цен по свойствам</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Use price by properties</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Özelliklere göre fiyatlar</value>
  </synonym>
  <type>
   <types>Boolean</types>

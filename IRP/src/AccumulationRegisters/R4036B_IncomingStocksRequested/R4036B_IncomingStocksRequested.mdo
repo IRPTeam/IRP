@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R4036B_IncomingStocksRequested</name>
  <synonym>
-  <key>tr</key>
-  <value>R4035 Gelecek mallar rezervi</value>
+  <key>en</key>
+  <value>R4036 Incoming stock requested</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R4036 Заявки на планируемый приход товара</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>R4036 Incoming stock requested</value>
+  <key>tr</key>
+  <value>R4035 Gelecek mallar rezervi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +27,16 @@
  <resources uuid="6e3b4657-bef1-4ba0-9d3c-64f16fbe9fc5">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +48,16 @@
  <dimensions uuid="f757a851-79ce-4d05-be44-b57a67b7b872">
   <name>IncomingStore</name>
   <synonym>
-   <key>tr</key>
-   <value>Gelen depo</value>
+   <key>en</key>
+   <value>Incoming store</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад получатель</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Incoming store</value>
+   <key>tr</key>
+   <value>Gelen depo</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -70,16 +70,16 @@
  <dimensions uuid="2a2fa763-221b-4880-9add-345d746d5d0a">
   <name>RequesterStore</name>
   <synonym>
-   <key>tr</key>
-   <value>Talep eden depo</value>
+   <key>en</key>
+   <value>Requester store</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад заявитель</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Requester store</value>
+   <key>tr</key>
+   <value>Talep eden depo</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -92,16 +92,16 @@
  <dimensions uuid="63952859-daf8-48f3-9aba-42c3b61b5605">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -114,16 +114,16 @@
  <dimensions uuid="37950e3b-bf61-478a-a6b8-57daf6e4a6d6">
   <name>Order</name>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
+   <key>en</key>
+   <value>Order</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Заказ</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Order</value>
+   <key>tr</key>
+   <value>Sipariş</value>
   </synonym>
   <type>
    <types>DocumentRef.ProductionPlanning</types>
@@ -138,16 +138,16 @@
  <dimensions uuid="6eba2b27-88a2-4810-ade4-a925802c2e28">
   <name>Requester</name>
   <synonym>
-   <key>tr</key>
-   <value>Talep eden</value>
+   <key>en</key>
+   <value>Requester</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ заявитель</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Requester</value>
+   <key>tr</key>
+   <value>Talep eden</value>
   </synonym>
   <type>
    <types>DocumentRef.SalesOrder</types>

@@ -454,16 +454,16 @@
  <attributes>
   <name>PriceTypes</name>
   <title>
-   <key>tr</key>
-   <value>Fiyat türlerini güncelleyin</value>
+   <key>en</key>
+   <value>Update price types</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить виды цен</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Update price types</value>
+   <key>tr</key>
+   <value>Fiyat türlerini güncelleyin</value>
   </title>
   <id>1</id>
   <valueType>
@@ -479,16 +479,16 @@
  <attributes>
   <name>Prices</name>
   <title>
-   <key>tr</key>
-   <value>Fiyatları güncelleyin</value>
+   <key>en</key>
+   <value>Update prices</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить цены</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Update prices</value>
+   <key>tr</key>
+   <value>Fiyatları güncelleyin</value>
   </title>
   <id>2</id>
   <valueType>
@@ -504,16 +504,16 @@
  <attributes>
   <name>Stores</name>
   <title>
-   <key>tr</key>
-   <value>Depoları güncelle</value>
+   <key>en</key>
+   <value>Update stores</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить склады</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Update stores</value>
+   <key>tr</key>
+   <value>Depoları güncelle</value>
   </title>
   <id>3</id>
   <valueType>
@@ -529,16 +529,16 @@
  <attributes>
   <name>PaymentTerm</name>
   <title>
-   <key>tr</key>
-   <value>Ödeme koşulu</value>
+   <key>en</key>
+   <value>Payment term</value>
   </title>
   <title>
    <key>ru</key>
    <value>Условие оплаты</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Payment term</value>
+   <key>tr</key>
+   <value>Ödeme koşulu</value>
   </title>
   <id>4</id>
   <valueType>
@@ -554,16 +554,16 @@
  <attributes>
   <name>TaxRates</name>
   <title>
-   <key>tr</key>
-   <value>Vergi oranları</value>
+   <key>en</key>
+   <value>Tax rates</value>
   </title>
   <title>
    <key>ru</key>
    <value>Налоговые ставки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Tax rates</value>
+   <key>tr</key>
+   <value>Vergi oranları</value>
   </title>
   <id>5</id>
   <valueType>
@@ -579,16 +579,16 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>OK</value>
   </title>
   <title>
    <key>ru</key>
    <value>ОК</value>
   </title>
   <title>
-   <key>en</key>
-   <value>OK</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <id>1</id>
   <use>
@@ -604,16 +604,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <id>2</id>
   <use>

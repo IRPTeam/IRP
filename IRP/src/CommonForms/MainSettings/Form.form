@@ -235,16 +235,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>tr</key>
-   <value>Başlık</value>
+   <key>en</key>
+   <value>Header</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заголовок</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Header</value>
+   <key>tr</key>
+   <value>Başlık</value>
   </title>
   <extendedTooltip>
    <name>HeaderExtendedTooltip</name>

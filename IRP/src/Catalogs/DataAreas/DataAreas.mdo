@@ -9,16 +9,16 @@
  </producedTypes>
  <name>DataAreas</name>
  <synonym>
-  <key>tr</key>
-  <value>Veri alanları</value>
+  <key>en</key>
+  <value>Data areas</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Рабочие области</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Data areas</value>
+  <key>tr</key>
+  <value>Veri alanları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.DataAreas.StandardAttribute.Description</inputByString>
@@ -104,16 +104,16 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Veri bölümü</value>
+  <key>en</key>
+  <value>Data area</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Рабочая область</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>Data area</value>
+  <key>tr</key>
+  <value>Veri bölümü</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -130,16 +130,16 @@
  <attributes uuid="2a3e108e-14e7-42e8-b359-5689cdb2ba3e">
   <name>DataAreaStatus</name>
   <synonym>
-   <key>tr</key>
-   <value>Veri alanlar statüsü</value>
+   <key>en</key>
+   <value>Data area status</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Статус рабочей области</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Data area status</value>
+   <key>tr</key>
+   <value>Veri alanlar statüsü</value>
   </synonym>
   <type>
    <types>EnumRef.DataAreaStatus</types>
@@ -157,7 +157,7 @@
  <attributes uuid="e5540f3b-b560-4de9-b6c0-7a96c84b25b1">
   <name>AdminLogin</name>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Login</value>
   </synonym>
   <synonym>
@@ -165,7 +165,7 @@
    <value>Логин</value>
   </synonym>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Login</value>
   </synonym>
   <type>
@@ -187,16 +187,16 @@
  <attributes uuid="6f0f5f5f-64f9-45f8-9ea5-30891f50ed3e">
   <name>AdminPassword</name>
   <synonym>
-   <key>tr</key>
-   <value>Parola</value>
+   <key>en</key>
+   <value>Password</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Пароль</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Password</value>
+   <key>tr</key>
+   <value>Parola</value>
   </synonym>
   <type>
    <types>String</types>
@@ -216,16 +216,16 @@
  <attributes uuid="a48b3f93-474c-48b9-be43-88b3fab9a38d">
   <name>AdminLocalization</name>
   <synonym>
-   <key>tr</key>
-   <value>Lokalizasyon</value>
+   <key>en</key>
+   <value>Localization</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Локализация</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Localization</value>
+   <key>tr</key>
+   <value>Lokalizasyon</value>
   </synonym>
   <type>
    <types>String</types>
@@ -246,16 +246,16 @@
  <attributes uuid="eb5be1a5-fce6-49c0-b03b-ee5645a5f908">
   <name>InterfaceLocalizationCode</name>
   <synonym>
-   <key>tr</key>
-   <value>Arayüz</value>
+   <key>en</key>
+   <value>Interface</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Интерфейс</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Interface</value>
+   <key>tr</key>
+   <value>Arayüz</value>
   </synonym>
   <type>
    <types>String</types>
@@ -275,16 +275,16 @@
  <attributes uuid="473b65fe-b265-4e2f-b480-25411d176356">
   <name>CompanyName</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket ünvanı</value>
+   <key>en</key>
+   <value>Company name</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Наименование организации</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Company name</value>
+   <key>tr</key>
+   <value>Şirket ünvanı</value>
   </synonym>
   <type>
    <types>String</types>
@@ -303,16 +303,16 @@
  <forms uuid="4595f5e6-379f-4749-9857-2ee6be27244b">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -320,16 +320,16 @@
  <forms uuid="fcc5e3c4-4c39-4491-bdb8-51b55d59ba00">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -337,16 +337,16 @@
  <commands uuid="a1e22850-a1af-443a-bbfc-b967b2b11cb5">
   <name>LoginToArea</name>
   <synonym>
-   <key>tr</key>
-   <value>Alana login yap</value>
+   <key>en</key>
+   <value>Login to area</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Авторизация в рабочей области</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Login to area</value>
+   <key>tr</key>
+   <value>Alana login yap</value>
   </synonym>
   <group>FormCommandBarImportant</group>
   <commandParameterType>
@@ -357,16 +357,16 @@
  <commands uuid="efc483c9-9908-4b83-afd0-f8131e9002d6">
   <name>LogOutFromArea</name>
   <synonym>
-   <key>tr</key>
-   <value>Alandan log out yap</value>
+   <key>en</key>
+   <value>Log out from area</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Выход из рабочей области</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Log out from area</value>
+   <key>tr</key>
+   <value>Alandan log out yap</value>
   </synonym>
   <group>NavigationPanelOrdinary</group>
   <commandParameterType/>
@@ -375,16 +375,16 @@
  <commands uuid="f11e090e-06b6-40ca-bf8b-4266cf467009">
   <name>UpdateAreas</name>
   <synonym>
-   <key>tr</key>
-   <value>Bölgeleri güncelle</value>
+   <key>en</key>
+   <value>Update areas</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Обновить области</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Update areas</value>
+   <key>tr</key>
+   <value>Bölgeleri güncelle</value>
   </synonym>
   <group>ActionsPanelTools</group>
   <commandParameterType/>

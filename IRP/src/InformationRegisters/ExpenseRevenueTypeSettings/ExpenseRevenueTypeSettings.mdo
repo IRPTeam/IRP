@@ -11,45 +11,45 @@
  </producedTypes>
  <name>ExpenseRevenueTypeSettings</name>
  <synonym>
-  <key>tr</key>
-  <value>Gider/gelir tip ayarları</value>
+  <key>en</key>
+  <value>Expense revenue type settings</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Настройки статей затрат и доходов</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Expense revenue type settings</value>
+  <key>tr</key>
+  <value>Gider/gelir tip ayarları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Gider/gelir tip ayarı</value>
+  <key>en</key>
+  <value>Expense revenue type setting</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Настройка статей затрат и доходов</value>
  </recordPresentation>
  <recordPresentation>
-  <key>en</key>
-  <value>Expense revenue type setting</value>
+  <key>tr</key>
+  <value>Gider/gelir tip ayarı</value>
  </recordPresentation>
  <resources uuid="ed9bfe39-d687-4f4c-aa64-9ffb8852c356">
   <name>ExpenseType</name>
   <synonym>
-   <key>tr</key>
-   <value>Gider tipi</value>
+   <key>en</key>
+   <value>Expense type</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Статьи затрат</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Expense type</value>
+   <key>tr</key>
+   <value>Gider tipi</value>
   </synonym>
   <type>
    <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -69,16 +69,16 @@
  <resources uuid="b48ff0ab-a838-4055-9552-fa5041ed0920">
   <name>RevenueType</name>
   <synonym>
-   <key>tr</key>
-   <value>Gelir tipi</value>
+   <key>en</key>
+   <value>Revenue type</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Статья доходов</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Revenue type</value>
+   <key>tr</key>
+   <value>Gelir tipi</value>
   </synonym>
   <type>
    <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -98,16 +98,16 @@
  <dimensions uuid="15f02684-fe91-43cc-a79d-d2e718bcba10">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -130,16 +130,16 @@
  <dimensions uuid="62fda659-a169-4775-8741-0ac7534e9396">
   <name>ItemType</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme tipi</value>
+   <key>en</key>
+   <value>Item type</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид номенклатуры</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item type</value>
+   <key>tr</key>
+   <value>Malzeme tipi</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemTypes</types>
@@ -155,16 +155,16 @@
  <dimensions uuid="a2fd549e-b701-4e7c-823a-1212d981e102">
   <name>Item</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme</value>
+   <key>en</key>
+   <value>Item</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Номенклатура</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item</value>
+   <key>tr</key>
+   <value>Malzeme</value>
   </synonym>
   <type>
    <types>CatalogRef.Items</types>
@@ -180,16 +180,16 @@
  <dimensions uuid="9cf5a1c8-d17e-4970-829d-34187654502b">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>

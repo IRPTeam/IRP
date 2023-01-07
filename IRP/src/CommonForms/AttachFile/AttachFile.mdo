@@ -2,16 +2,16 @@
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d3b0efa8-f2f7-4328-ae72-61bdb22d58e0">
  <name>AttachFile</name>
  <synonym>
-  <key>tr</key>
-  <value>Dış dosya ekle</value>
+  <key>en</key>
+  <value>Attach file</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Прикрепленный файл</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Attach file</value>
+  <key>tr</key>
+  <value>Dış dosya ekle</value>
  </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>

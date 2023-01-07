@@ -11,57 +11,57 @@
  </producedTypes>
  <name>CreatedProcurementOrders</name>
  <synonym>
-  <key>tr</key>
-  <value>Oluşturulan tedarik siparişleri</value>
+  <key>en</key>
+  <value>Created procurement orders</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Созданные заказы обеспечения</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Created procurement orders</value>
+  <key>tr</key>
+  <value>Oluşturulan tedarik siparişleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Oluşturulan tedarik siparişi</value>
+  <key>en</key>
+  <value>Created procurement order</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Созданный заказ обеспечения</value>
  </recordPresentation>
  <recordPresentation>
-  <key>en</key>
-  <value>Created procurement order</value>
+  <key>tr</key>
+  <value>Oluşturulan tedarik siparişi</value>
  </recordPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Oluşturulan tedarik siparişleri</value>
+  <key>en</key>
+  <value>Created procurement orders</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Созданные заказы обеспечения</value>
  </listPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Created procurement orders</value>
+  <key>tr</key>
+  <value>Oluşturulan tedarik siparişleri</value>
  </listPresentation>
  <dimensions uuid="2839d916-f331-4c01-bce0-f77301d97ab9">
   <name>Order</name>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
+   <key>en</key>
+   <value>Order</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Заказ</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Order</value>
+   <key>tr</key>
+   <value>Sipariş</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseOrder</types>

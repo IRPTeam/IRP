@@ -2,16 +2,16 @@
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="79868951-da4b-482d-b039-dc7ca5f00ec3">
  <name>PickupSpecialOffers</name>
  <synonym>
-  <key>tr</key>
-  <value>Kapmanya seç</value>
+  <key>en</key>
+  <value>Pickup special offers</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Подбор скидок</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Pickup special offers</value>
+  <key>tr</key>
+  <value>Kapmanya seç</value>
  </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>

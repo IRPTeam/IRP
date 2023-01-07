@@ -7,32 +7,32 @@
  </producedTypes>
  <name>SerialNumbersOwner</name>
  <synonym>
-  <key>tr</key>
-  <value>Seri numaralarının sahibi</value>
+  <key>en</key>
+  <value>Serial numbers owner</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Владелец серийного номера</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Serial numbers owner</value>
+  <key>tr</key>
+  <value>Seri numaralarının sahibi</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="2a48a7ee-d8e9-46d7-b2d7-996331a0150a">
   <name>ItemType</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme tipi</value>
+   <key>en</key>
+   <value>Item type</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид номенклатуры</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item type</value>
+   <key>tr</key>
+   <value>Malzeme tipi</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

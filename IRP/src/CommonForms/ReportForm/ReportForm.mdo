@@ -2,16 +2,16 @@
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="19ba6893-0d88-41d9-a692-9d015cd4be30">
  <name>ReportForm</name>
  <synonym>
-  <key>tr</key>
-  <value>Rapor formu</value>
+  <key>en</key>
+  <value>Report form</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Форма отчета</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Report form</value>
+  <key>tr</key>
+  <value>Rapor formu</value>
  </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>

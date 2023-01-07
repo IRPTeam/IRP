@@ -7,62 +7,62 @@
  </producedTypes>
  <name>AllocationMethod</name>
  <synonym>
-  <key>tr</key>
-  <value>Dağıtma metodu</value>
+  <key>en</key>
+  <value>Allocation method</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Метод распределения</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Allocation method</value>
+  <key>tr</key>
+  <value>Dağıtma metodu</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="1da518d1-f7cb-4fb2-9edd-c2328e23e654">
   <name>ByQuantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktara göre</value>
+   <key>en</key>
+   <value>By quantity</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>По количеству</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>By quantity</value>
+   <key>tr</key>
+   <value>Miktara göre</value>
   </synonym>
  </enumValues>
  <enumValues uuid="0494e610-3666-4c25-a684-e75ed7f472fa">
   <name>ByAmount</name>
   <synonym>
-   <key>tr</key>
-   <value>Tutara göre</value>
+   <key>en</key>
+   <value>By amount</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>По сумме</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>By amount</value>
+   <key>tr</key>
+   <value>Tutara göre</value>
   </synonym>
  </enumValues>
  <enumValues uuid="7be6addf-d26f-418e-a1a7-bcd620c64431">
   <name>ByWeight</name>
   <synonym>
-   <key>tr</key>
-   <value>Ağırlığa göre</value>
+   <key>en</key>
+   <value>By weight</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>По весу</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>By weight</value>
+   <key>tr</key>
+   <value>Ağırlığa göre</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

@@ -6,32 +6,32 @@
  </producedTypes>
  <name>ScanBarcode</name>
  <synonym>
-  <key>tr</key>
-  <value>Barkod okut</value>
+  <key>en</key>
+  <value>Scan barcode</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Сканирование штрихкода</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Scan barcode</value>
+  <key>tr</key>
+  <value>Barkod okut</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.ScanBarcode.Form.Form</defaultForm>
  <attributes uuid="72468f78-2375-4869-ad40-b0afc5e1f4ba">
   <name>Basis</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
+   <key>en</key>
+   <value>Basis</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ основание</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Basis</value>
+   <key>tr</key>
+   <value>Kaynak evrak</value>
   </synonym>
   <type>
    <types>DocumentRef</types>
@@ -46,30 +46,30 @@
   </producedTypes>
   <name>ItemList</name>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme listesi</value>
+   <key>en</key>
+   <value>Item list</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Товары</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item list</value>
+   <key>tr</key>
+   <value>Malzeme listesi</value>
   </synonym>
   <attributes uuid="a4e9b360-ca8d-4976-bf4b-213d82096b33">
    <name>Item</name>
    <synonym>
-    <key>tr</key>
-    <value>Malzeme</value>
+    <key>en</key>
+    <value>Item</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Номенклатура</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Item</value>
+    <key>tr</key>
+    <value>Malzeme</value>
    </synonym>
    <type>
     <types>CatalogRef.Items</types>
@@ -81,16 +81,16 @@
   <attributes uuid="2dee50a0-fa19-4d5e-9aa2-e77b18767708">
    <name>ItemKey</name>
    <synonym>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </synonym>
    <type>
     <types>CatalogRef.ItemKeys</types>
@@ -103,16 +103,16 @@
   <attributes uuid="0c940dc0-1154-421d-8778-2981c9b2e3d3">
    <name>Unit</name>
    <synonym>
-    <key>tr</key>
-    <value>Birim</value>
+    <key>en</key>
+    <value>Unit</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ед. изм.</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Unit</value>
+    <key>tr</key>
+    <value>Birim</value>
    </synonym>
    <type>
     <types>CatalogRef.Units</types>
@@ -124,16 +124,16 @@
   <attributes uuid="1ca49b3e-f959-45a2-8c9d-d08352d4ebcd">
    <name>Quantity</name>
    <synonym>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Количество</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -145,16 +145,16 @@
   <attributes uuid="8edb82e4-1177-4938-adcf-964f2e03ab53">
    <name>ScannedQuantity</name>
    <synonym>
-    <key>tr</key>
-    <value>Okutulan</value>
+    <key>en</key>
+    <value>Scanned</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Просканировано</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Scanned</value>
+    <key>tr</key>
+    <value>Okutulan</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -167,7 +167,7 @@
  <forms uuid="2c533795-bfcc-4d37-b4c7-055e4d38192e">
   <name>Form</name>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -175,7 +175,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
@@ -184,16 +184,16 @@
  <forms uuid="5888f1d9-2318-47b4-a37a-e4b37214bb73">
   <name>RowForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Satır formu</value>
+   <key>en</key>
+   <value>Row form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма строка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Row form</value>
+   <key>tr</key>
+   <value>Satır formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

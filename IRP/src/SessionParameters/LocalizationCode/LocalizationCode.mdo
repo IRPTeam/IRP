@@ -2,16 +2,16 @@
 <mdclass:SessionParameter xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="adee4dae-7769-4ed9-9273-3386cb11d473">
  <name>LocalizationCode</name>
  <synonym>
-  <key>tr</key>
-  <value>Lokalisasyon kodu</value>
+  <key>en</key>
+  <value>Localization code</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Код локализации</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Localization code</value>
+  <key>tr</key>
+  <value>Lokalisasyon kodu</value>
  </synonym>
  <type>
   <types>String</types>

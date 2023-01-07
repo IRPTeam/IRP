@@ -222,16 +222,16 @@
    <name>CurrenciesTableCurrencyFrom</name>
    <id>21</id>
    <title>
-    <key>tr</key>
-    <value>Gönderen</value>
+    <key>en</key>
+    <value>From</value>
    </title>
    <title>
     <key>ru</key>
     <value>С</value>
    </title>
    <title>
-    <key>en</key>
-    <value>From</value>
+    <key>tr</key>
+    <value>Gönderen</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -286,16 +286,16 @@
    <name>CurrenciesTableMovementTypeCurrency</name>
    <id>45</id>
    <title>
-    <key>tr</key>
-    <value>Alıcı</value>
+    <key>en</key>
+    <value>To</value>
    </title>
    <title>
     <key>ru</key>
     <value>На</value>
    </title>
    <title>
-    <key>en</key>
-    <value>To</value>
+    <key>tr</key>
+    <value>Alıcı</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -403,16 +403,16 @@
    <name>CurrenciesTableRatePresentation</name>
    <id>48</id>
    <title>
-    <key>tr</key>
-    <value>Oran</value>
+    <key>en</key>
+    <value>Rate</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ставка</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Rate</value>
+    <key>tr</key>
+    <value>Oran</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -933,16 +933,16 @@
  <attributes>
   <name>Currencies</name>
   <title>
-   <key>tr</key>
-   <value>Dövizler</value>
+   <key>en</key>
+   <value>Currencies</value>
   </title>
   <title>
    <key>ru</key>
    <value>Валюты</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Currencies</value>
+   <key>tr</key>
+   <value>Dövizler</value>
   </title>
   <id>1</id>
   <valueType>
@@ -957,16 +957,16 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </title>
    <id>2</id>
    <valueType>
@@ -995,16 +995,16 @@
   <columns>
    <name>Rate</name>
    <title>
-    <key>tr</key>
-    <value>Oran</value>
+    <key>en</key>
+    <value>Rate</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ставка</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Rate</value>
+    <key>tr</key>
+    <value>Oran</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1020,16 +1020,16 @@
   <columns>
    <name>ReverseRate</name>
    <title>
-    <key>tr</key>
-    <value>Ters kur</value>
+    <key>en</key>
+    <value>Reverse rate</value>
    </title>
    <title>
     <key>ru</key>
     <value>Обратный курс</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Reverse rate</value>
+    <key>tr</key>
+    <value>Ters kur</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1045,16 +1045,16 @@
   <columns>
    <name>ShowReverseRate</name>
    <title>
-    <key>tr</key>
-    <value>Ters kur göster</value>
+    <key>en</key>
+    <value>Show reverse rate</value>
    </title>
    <title>
     <key>ru</key>
     <value>Показать обратный курс</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Show reverse rate</value>
+    <key>tr</key>
+    <value>Ters kur göster</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1070,16 +1070,16 @@
   <columns>
    <name>Multiplicity</name>
    <title>
-    <key>tr</key>
-    <value>Çarpan</value>
+    <key>en</key>
+    <value>Multiplicity</value>
    </title>
    <title>
     <key>ru</key>
     <value>Кратность</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Multiplicity</value>
+    <key>tr</key>
+    <value>Çarpan</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1098,16 +1098,16 @@
   <columns>
    <name>MovementType</name>
    <title>
-    <key>tr</key>
-    <value>Hareket tipi</value>
+    <key>en</key>
+    <value>Movement type</value>
    </title>
    <title>
     <key>ru</key>
     <value>Статья движених денежных средств</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Movement type</value>
+    <key>tr</key>
+    <value>Hareket tipi</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1123,16 +1123,16 @@
   <columns>
    <name>Amount</name>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
+    <key>en</key>
+    <value>Amount</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Amount</value>
+    <key>tr</key>
+    <value>Tutar</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1148,16 +1148,16 @@
   <columns>
    <name>RatePresentation</name>
    <title>
-    <key>tr</key>
-    <value>Kur görüntüleme</value>
+    <key>en</key>
+    <value>Rate presentation</value>
    </title>
    <title>
     <key>ru</key>
     <value>Представление курса</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Rate presentation</value>
+    <key>tr</key>
+    <value>Kur görüntüleme</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1173,16 +1173,16 @@
   <columns>
    <name>IsVisible</name>
    <title>
-    <key>tr</key>
-    <value>Görünür</value>
+    <key>en</key>
+    <value>Is visible</value>
    </title>
    <title>
     <key>ru</key>
     <value>Видимый</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Is visible</value>
+    <key>tr</key>
+    <value>Görünür</value>
    </title>
    <id>18</id>
    <valueType>
@@ -1198,16 +1198,16 @@
   <columns>
    <name>IsFixed</name>
    <title>
-    <key>tr</key>
-    <value>Sabittir</value>
+    <key>en</key>
+    <value>Is fixed</value>
    </title>
    <title>
     <key>ru</key>
     <value>Фиксированный</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Is fixed</value>
+    <key>tr</key>
+    <value>Sabittir</value>
    </title>
    <id>20</id>
    <valueType>
@@ -1223,16 +1223,16 @@
   <columns>
    <name>RateOrigin</name>
    <title>
-    <key>tr</key>
-    <value>Kur aslı</value>
+    <key>en</key>
+    <value>Rate origin</value>
    </title>
    <title>
     <key>ru</key>
     <value>Базовый курс</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Rate origin</value>
+    <key>tr</key>
+    <value>Kur aslı</value>
    </title>
    <id>21</id>
    <valueType>
@@ -1248,16 +1248,16 @@
   <columns>
    <name>ReverseRateOrigin</name>
    <title>
-    <key>tr</key>
-    <value>Ters kur aslı</value>
+    <key>en</key>
+    <value>Reverse rate origin</value>
    </title>
    <title>
     <key>ru</key>
     <value>Обратный базовый курс</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Reverse rate origin</value>
+    <key>tr</key>
+    <value>Ters kur aslı</value>
    </title>
    <id>22</id>
    <valueType>
@@ -1273,16 +1273,16 @@
   <columns>
    <name>MultiplicityOrigin</name>
    <title>
-    <key>tr</key>
-    <value>Çarpan aslı</value>
+    <key>en</key>
+    <value>Multiplicity origin</value>
    </title>
    <title>
     <key>ru</key>
     <value>Базовая кратность</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Multiplicity origin</value>
+    <key>tr</key>
+    <value>Çarpan aslı</value>
    </title>
    <id>23</id>
    <valueType>
@@ -1302,16 +1302,16 @@
  <attributes>
   <name>DocumentAmount</name>
   <title>
-   <key>tr</key>
-   <value>Evrak tutarı</value>
+   <key>en</key>
+   <value>Document amount</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сумма документа</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Document amount</value>
+   <key>tr</key>
+   <value>Evrak tutarı</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1327,16 +1327,16 @@
  <attributes>
   <name>RowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
+   <key>en</key>
+   <value>Row key</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ключ строки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Row key</value>
+   <key>tr</key>
+   <value>Satır anahtarı</value>
   </title>
   <id>19</id>
   <valueType>
@@ -1352,7 +1352,7 @@
  <attributes>
   <name>Ref</name>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Ref</value>
   </title>
   <title>
@@ -1360,7 +1360,7 @@
    <value>Ссылка</value>
   </title>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Ref</value>
   </title>
   <id>24</id>
@@ -1377,16 +1377,16 @@
  <attributes>
   <name>Date</name>
   <title>
-   <key>tr</key>
-   <value>Tarih</value>
+   <key>en</key>
+   <value>Date</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дата</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Date</value>
+   <key>tr</key>
+   <value>Tarih</value>
   </title>
   <id>25</id>
   <valueType>
@@ -1403,16 +1403,16 @@
  <attributes>
   <name>Company</name>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </title>
   <title>
    <key>ru</key>
    <value>Организация</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </title>
   <id>26</id>
   <valueType>
@@ -1428,16 +1428,16 @@
  <attributes>
   <name>Currency</name>
   <title>
-   <key>tr</key>
-   <value>Döviz</value>
+   <key>en</key>
+   <value>Currency</value>
   </title>
   <title>
    <key>ru</key>
    <value>Валюта</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Currency</value>
+   <key>tr</key>
+   <value>Döviz</value>
   </title>
   <id>27</id>
   <valueType>
@@ -1453,16 +1453,16 @@
  <attributes>
   <name>Agreement</name>
   <title>
-   <key>tr</key>
-   <value>Sözleşme</value>
+   <key>en</key>
+   <value>Agreement</value>
   </title>
   <title>
    <key>ru</key>
    <value>Соглашение</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Agreement</value>
+   <key>tr</key>
+   <value>Sözleşme</value>
   </title>
   <id>28</id>
   <valueType>
@@ -1478,16 +1478,16 @@
  <attributes>
   <name>CurrenciesFromDocument</name>
   <title>
-   <key>tr</key>
-   <value>Dövizler</value>
+   <key>en</key>
+   <value>Currencies</value>
   </title>
   <title>
    <key>ru</key>
    <value>Валюты</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Currencies</value>
+   <key>tr</key>
+   <value>Dövizler</value>
   </title>
   <id>29</id>
   <valueType>
@@ -1502,16 +1502,16 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </title>
    <id>2</id>
    <valueType>
@@ -1540,16 +1540,16 @@
   <columns>
    <name>Rate</name>
    <title>
-    <key>tr</key>
-    <value>Oran</value>
+    <key>en</key>
+    <value>Rate</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ставка</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Rate</value>
+    <key>tr</key>
+    <value>Oran</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1565,16 +1565,16 @@
   <columns>
    <name>ReverseRate</name>
    <title>
-    <key>tr</key>
-    <value>Ters kur</value>
+    <key>en</key>
+    <value>Reverse rate</value>
    </title>
    <title>
     <key>ru</key>
     <value>Обратный курс</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Reverse rate</value>
+    <key>tr</key>
+    <value>Ters kur</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1590,16 +1590,16 @@
   <columns>
    <name>ShowReverseRate</name>
    <title>
-    <key>tr</key>
-    <value>Ters kur göster</value>
+    <key>en</key>
+    <value>Show reverse rate</value>
    </title>
    <title>
     <key>ru</key>
     <value>Показать обратный курс</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Show reverse rate</value>
+    <key>tr</key>
+    <value>Ters kur göster</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1615,16 +1615,16 @@
   <columns>
    <name>Multiplicity</name>
    <title>
-    <key>tr</key>
-    <value>Çarpan</value>
+    <key>en</key>
+    <value>Multiplicity</value>
    </title>
    <title>
     <key>ru</key>
     <value>Кратность</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Multiplicity</value>
+    <key>tr</key>
+    <value>Çarpan</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1643,16 +1643,16 @@
   <columns>
    <name>MovementType</name>
    <title>
-    <key>tr</key>
-    <value>Hareket tipi</value>
+    <key>en</key>
+    <value>Movement type</value>
    </title>
    <title>
     <key>ru</key>
     <value>Статья движених денежных средств</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Movement type</value>
+    <key>tr</key>
+    <value>Hareket tipi</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1668,16 +1668,16 @@
   <columns>
    <name>Amount</name>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
+    <key>en</key>
+    <value>Amount</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Amount</value>
+    <key>tr</key>
+    <value>Tutar</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1693,16 +1693,16 @@
   <columns>
    <name>IsFixed</name>
    <title>
-    <key>tr</key>
-    <value>Sabittir</value>
+    <key>en</key>
+    <value>Is fixed</value>
    </title>
    <title>
     <key>ru</key>
     <value>Фиксированный</value>
    </title>
    <title>
-    <key>en</key>
-    <value>Is fixed</value>
+    <key>tr</key>
+    <value>Sabittir</value>
    </title>
    <id>20</id>
    <valueType>
@@ -1719,16 +1719,16 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>Ok</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ок</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Ok</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <id>1</id>
   <use>
@@ -1744,16 +1744,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <id>2</id>
   <use>
@@ -1769,16 +1769,16 @@
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>tr</key>
-   <value>Satır anahtar göster</value>
+   <key>en</key>
+   <value>Show row key</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать ключ строки</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Show row key</value>
+   <key>tr</key>
+   <value>Satır anahtar göster</value>
   </title>
   <id>3</id>
   <use>
@@ -1797,16 +1797,16 @@
  <formCommands>
   <name>CurrencyRates</name>
   <title>
-   <key>tr</key>
-   <value>Döviz kurları</value>
+   <key>en</key>
+   <value>Currency rates</value>
   </title>
   <title>
    <key>ru</key>
    <value>Курсы валюты</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Currency rates</value>
+   <key>tr</key>
+   <value>Döviz kurları</value>
   </title>
   <id>4</id>
   <use>
@@ -1826,7 +1826,7 @@
  <formCommands>
   <name>Update</name>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Update</value>
   </title>
   <title>
@@ -1834,7 +1834,7 @@
    <value>Обновить</value>
   </title>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Update</value>
   </title>
   <id>5</id>

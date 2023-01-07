@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R9010B_SourceOfOriginStock</name>
  <synonym>
-  <key>tr</key>
-  <value>R9010 Envanter menşei stokları</value>
+  <key>en</key>
+  <value>R9010 Source of origin stock</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R9010 Остатки товаров по источникам происхождения</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>R9010 Source of origin stock</value>
+  <key>tr</key>
+  <value>R9010 Envanter menşei stokları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +27,16 @@
  <resources uuid="edacc098-dac6-46cf-842a-847442e28deb">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -48,16 +48,16 @@
  <dimensions uuid="a91e54e0-10f1-4b0e-ab0d-f7cd6159f1b8">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -70,16 +70,16 @@
  <dimensions uuid="08f6ea0b-7aaa-4640-999f-d85c17609fa8">
   <name>Branch</name>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -92,16 +92,16 @@
  <dimensions uuid="f4d6bcf8-263a-43d3-bf23-2f54777ea929">
   <name>Store</name>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
+   <key>en</key>
+   <value>Store</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Store</value>
+   <key>tr</key>
+   <value>Depo</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -114,16 +114,16 @@
  <dimensions uuid="fa147c56-c8f9-4c2c-bb7d-2a739afc40ef">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -136,16 +136,16 @@
  <dimensions uuid="02fd05c8-1b2b-44d8-9767-ef8ff200e399">
   <name>SourceOfOrigin</name>
   <synonym>
-   <key>tr</key>
-   <value>Envanter menşei</value>
+   <key>en</key>
+   <value>Source of origin</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Источник происхождения</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Source of origin</value>
+   <key>tr</key>
+   <value>Envanter menşei</value>
   </synonym>
   <type>
    <types>CatalogRef.SourceOfOrigins</types>
@@ -158,16 +158,16 @@
  <dimensions uuid="b3fcb49a-d481-485d-9400-d43dae5e6c28">
   <name>SerialLotNumber</name>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
+   <key>en</key>
+   <value>Serial lot number</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Серия номенклатуры</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Serial lot number</value>
+   <key>tr</key>
+   <value>Seri lot numaraları</value>
   </synonym>
   <type>
    <types>CatalogRef.SerialLotNumbers</types>

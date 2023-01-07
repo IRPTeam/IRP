@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R7040T_ManualMaterialsCorretionInProduction</name>
  <synonym>
-  <key>tr</key>
-  <value>R7040 Üretimdeki hammade kullanımı manuel düzeltme</value>
+  <key>en</key>
+  <value>R7040 Manual materials corretion in production</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R7040 Ручные корректировки сырья в производстве</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>R7040 Manual materials corretion in production</value>
+  <key>tr</key>
+  <value>R7040 Üretimdeki hammade kullanımı manuel düzeltme</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +28,16 @@
  <resources uuid="7dc9f0a5-5010-4146-a8b4-dde8987f7c49">
   <name>Quantity</name>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -49,16 +49,16 @@
  <resources uuid="9351d619-25d1-474c-a10a-801f29790680">
   <name>QuantityBOM</name>
   <synonym>
-   <key>tr</key>
-   <value>Üretim reçete miktarı</value>
+   <key>en</key>
+   <value>Quantity BOM</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество по спецификации</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Quantity BOM</value>
+   <key>tr</key>
+   <value>Üretim reçete miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -70,16 +70,16 @@
  <dimensions uuid="f7941f48-c944-4eaf-86d5-6896d8e7600a">
   <name>Company</name>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -92,16 +92,16 @@
  <dimensions uuid="2ccbad16-f310-4f8b-8caa-6df49e7b28fd">
   <name>BusinessUnit</name>
   <synonym>
-   <key>tr</key>
-   <value>Departman</value>
+   <key>en</key>
+   <value>Business unit</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Подразделение</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Business unit</value>
+   <key>tr</key>
+   <value>Departman</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -114,16 +114,16 @@
  <dimensions uuid="d5b65cc8-406b-467e-affd-d00b5805e4e3">
   <name>BillOfMaterials</name>
   <synonym>
-   <key>tr</key>
-   <value>Üretim reçetesi</value>
+   <key>en</key>
+   <value>Bill of materials</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Спецификация (Производство)</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Bill of materials</value>
+   <key>tr</key>
+   <value>Üretim reçetesi</value>
   </synonym>
   <type>
    <types>CatalogRef.BillOfMaterials</types>
@@ -136,16 +136,16 @@
  <dimensions uuid="28567faa-c403-4a37-97c7-7b81b81aaffe">
   <name>PlanningPeriod</name>
   <synonym>
-   <key>tr</key>
-   <value>Planlama dönemi</value>
+   <key>en</key>
+   <value>Planning period</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Период планирования</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Planning period</value>
+   <key>tr</key>
+   <value>Planlama dönemi</value>
   </synonym>
   <type>
    <types>CatalogRef.PlanningPeriods</types>
@@ -158,16 +158,16 @@
  <dimensions uuid="33cb4d02-73c2-48a7-8dc4-155d8dfd1dfc">
   <name>ItemKeyBOM</name>
   <synonym>
-   <key>tr</key>
-   <value>Reçete varyantı</value>
+   <key>en</key>
+   <value>Item key BOM</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика по спецификации</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item key BOM</value>
+   <key>tr</key>
+   <value>Reçete varyantı</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -180,16 +180,16 @@
  <dimensions uuid="3daaa617-4405-47f4-955c-b8f4780b115a">
   <name>ItemKey</name>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>

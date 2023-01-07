@@ -138,16 +138,16 @@
  <attributes>
   <name>Text</name>
   <title>
-   <key>tr</key>
-   <value>Metin</value>
+   <key>en</key>
+   <value>Text</value>
   </title>
   <title>
    <key>ru</key>
    <value>Текст</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Text</value>
+   <key>tr</key>
+   <value>Metin</value>
   </title>
   <id>1</id>
   <valueType>
@@ -163,16 +163,16 @@
  <attributes>
   <name>ItemName</name>
   <title>
-   <key>tr</key>
-   <value>Malzeme tanımı</value>
+   <key>en</key>
+   <value>Item name</value>
   </title>
   <title>
    <key>ru</key>
    <value>Наименование элемента</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Item name</value>
+   <key>tr</key>
+   <value>Malzeme tanımı</value>
   </title>
   <id>2</id>
   <valueType>
@@ -189,16 +189,16 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>OK</value>
   </title>
   <title>
    <key>ru</key>
    <value>ОК</value>
   </title>
   <title>
-   <key>en</key>
-   <value>OK</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <id>1</id>
   <use>
@@ -214,16 +214,16 @@
  <formCommands>
   <name>VoiceNarrator</name>
   <title>
-   <key>tr</key>
-   <value>Ses anlatıcı</value>
+   <key>en</key>
+   <value>Voice narrator</value>
   </title>
   <title>
    <key>ru</key>
    <value>Голосовая запись</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Voice narrator</value>
+   <key>tr</key>
+   <value>Ses anlatıcı</value>
   </title>
   <id>2</id>
   <use>

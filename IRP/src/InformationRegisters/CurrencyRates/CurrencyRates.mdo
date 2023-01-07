@@ -11,58 +11,58 @@
  </producedTypes>
  <name>CurrencyRates</name>
  <synonym>
-  <key>tr</key>
-  <value>Döviz kurları</value>
+  <key>en</key>
+  <value>Currency rates</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Курсы валюты</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Currency rates</value>
+  <key>tr</key>
+  <value>Döviz kurları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
  <mainFilterOnPeriod>true</mainFilterOnPeriod>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Döviz kuru</value>
+  <key>en</key>
+  <value>Currency rate</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Курс валюты</value>
  </recordPresentation>
  <recordPresentation>
-  <key>en</key>
-  <value>Currency rate</value>
+  <key>tr</key>
+  <value>Döviz kuru</value>
  </recordPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Döviz kurları</value>
+  <key>en</key>
+  <value>Currency rates</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Курсы валюты</value>
  </listPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Currency rates</value>
+  <key>tr</key>
+  <value>Döviz kurları</value>
  </listPresentation>
  <resources uuid="a6129b2c-aedf-4ead-abdd-824477778f4f">
   <name>Multiplicity</name>
   <synonym>
-   <key>tr</key>
-   <value>Çarpan</value>
+   <key>en</key>
+   <value>Multiplicity</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Кратность</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Multiplicity</value>
+   <key>tr</key>
+   <value>Çarpan</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -81,16 +81,16 @@
  <resources uuid="db86501b-de2d-4f98-97d6-e03fbd89b224">
   <name>Rate</name>
   <synonym>
-   <key>tr</key>
-   <value>Oran</value>
+   <key>en</key>
+   <value>Rate</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ставка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Rate</value>
+   <key>tr</key>
+   <value>Oran</value>
   </synonym>
   <type>
    <types>DefinedType.typeCurrencyRate</types>
@@ -104,16 +104,16 @@
  <dimensions uuid="9c3b0ee4-351f-43c5-bfca-e33a2b05c817">
   <name>CurrencyFrom</name>
   <synonym>
-   <key>tr</key>
-   <value>Dövizden</value>
+   <key>en</key>
+   <value>Currency from</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>С валюты</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Currency from</value>
+   <key>tr</key>
+   <value>Dövizden</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -130,16 +130,16 @@
  <dimensions uuid="846f0ce7-3734-45ed-a4b8-d829224173b4">
   <name>CurrencyTo</name>
   <synonym>
-   <key>tr</key>
-   <value>Dövize</value>
+   <key>en</key>
+   <value>Currency to</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>На валюту</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Currency to</value>
+   <key>tr</key>
+   <value>Dövize</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -155,16 +155,16 @@
  <dimensions uuid="18187ec9-383e-4f7c-8279-0684d287d97a">
   <name>Source</name>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak</value>
+   <key>en</key>
+   <value>Source</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Источник</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Source</value>
+   <key>tr</key>
+   <value>Kaynak</value>
   </synonym>
   <type>
    <types>CatalogRef.IntegrationSettings</types>

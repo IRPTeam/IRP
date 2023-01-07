@@ -11,56 +11,56 @@
  </producedTypes>
  <name>AttachedFiles</name>
  <synonym>
-  <key>tr</key>
-  <value>Dış dosyalar</value>
+  <key>en</key>
+  <value>Attached files</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Прикрепленные файлы</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Attached files</value>
+  <key>tr</key>
+  <value>Dış dosyalar</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>tr</key>
-  <value>Dış dosya</value>
+  <key>en</key>
+  <value>Attached file</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Прикрепленный файл</value>
  </recordPresentation>
  <recordPresentation>
-  <key>en</key>
-  <value>Attached file</value>
+  <key>tr</key>
+  <value>Dış dosya</value>
  </recordPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Dış dosyalar</value>
+  <key>en</key>
+  <value>Attached files</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Прикрепленные файлы</value>
  </listPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Attached files</value>
+  <key>tr</key>
+  <value>Dış dosyalar</value>
  </listPresentation>
  <resources uuid="21dca71f-b68c-4283-bb07-94fb7a86dd8f">
   <name>Priority</name>
   <synonym>
-   <key>tr</key>
-   <value>Önem</value>
+   <key>en</key>
+   <value>Priority</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Приоритет</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Priority</value>
+   <key>tr</key>
+   <value>Önem</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -77,16 +77,16 @@
  <attributes uuid="3a569aa1-4f93-4139-a71b-e285d070886e">
   <name>CreationDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Oluşturma tarihi</value>
+   <key>en</key>
+   <value>Creation date</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дата создания</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Creation date</value>
+   <key>tr</key>
+   <value>Oluşturma tarihi</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -101,16 +101,16 @@
  <dimensions uuid="6a2ce54d-155f-4064-9a4b-43c8a8aefc63">
   <name>Owner</name>
   <synonym>
-   <key>tr</key>
-   <value>Sahip</value>
+   <key>en</key>
+   <value>Owner</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Владелец</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Owner</value>
+   <key>tr</key>
+   <value>Sahip</value>
   </synonym>
   <type>
    <types>DefinedType.typeFilesOwner</types>
@@ -128,16 +128,16 @@
  <dimensions uuid="dd894eb2-bc76-4f09-bfe7-5c4f650512ad">
   <name>File</name>
   <synonym>
-   <key>tr</key>
-   <value>Dosya</value>
+   <key>en</key>
+   <value>File</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Файл</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>File</value>
+   <key>tr</key>
+   <value>Dosya</value>
   </synonym>
   <type>
    <types>CatalogRef.Files</types>

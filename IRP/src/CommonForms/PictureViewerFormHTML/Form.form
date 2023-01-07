@@ -74,16 +74,16 @@
  <attributes>
   <name>PictureHTML</name>
   <title>
-   <key>tr</key>
-   <value>HTML resim</value>
+   <key>en</key>
+   <value>Picture HTML</value>
   </title>
   <title>
    <key>ru</key>
    <value>Картинка в HTML</value>
   </title>
   <title>
-   <key>en</key>
-   <value>Picture HTML</value>
+   <key>tr</key>
+   <value>HTML resim</value>
   </title>
   <id>1</id>
   <valueType>

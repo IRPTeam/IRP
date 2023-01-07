@@ -2,15 +2,15 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="08a24d44-4043-45cf-bbbf-2de57c5e376a">
  <name>Total</name>
  <synonym>
-  <key>tr</key>
-  <value>Toplam</value>
+  <key>en</key>
+  <value>Total</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Итого</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Total</value>
+  <key>tr</key>
+  <value>Toplam</value>
  </synonym>
 </mdclass:CommonPicture>

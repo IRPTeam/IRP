@@ -9,16 +9,16 @@
  </producedTypes>
  <name>PlanningPeriods</name>
  <synonym>
-  <key>tr</key>
-  <value>Planlama dönemleri</value>
+  <key>en</key>
+  <value>Planning periods</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Периоды планирования</value>
  </synonym>
  <synonym>
-  <key>en</key>
-  <value>Planning periods</value>
+  <key>tr</key>
+  <value>Planlama dönemleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.PlanningPeriods.StandardAttribute.Code</inputByString>
@@ -60,16 +60,16 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>tr</key>
-  <value>Planlama dönemi</value>
+  <key>en</key>
+  <value>Planning period</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Период планирования</value>
  </objectPresentation>
  <objectPresentation>
-  <key>en</key>
-  <value>Planning period</value>
+  <key>tr</key>
+  <value>Planlama dönemi</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -88,16 +88,16 @@
  <attributes uuid="91cc0df3-c756-4573-8f0c-4f9f844fb721">
   <name>BeginDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Başlangıç tarihi</value>
+   <key>en</key>
+   <value>Begin date</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Начало периода</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Begin date</value>
+   <key>tr</key>
+   <value>Başlangıç tarihi</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -114,16 +114,16 @@
  <attributes uuid="c3b271fa-56af-48c8-8dcb-6bef1ee113d2">
   <name>EndDate</name>
   <synonym>
-   <key>tr</key>
-   <value>Bitiş tarih</value>
+   <key>en</key>
+   <value>End date</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Конец периода</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>End date</value>
+   <key>tr</key>
+   <value>Bitiş tarih</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -140,16 +140,16 @@
  <attributes uuid="c10de959-bc44-4981-aed6-5a7f6ee7d405">
   <name>Type</name>
   <synonym>
-   <key>tr</key>
-   <value>Tip</value>
+   <key>en</key>
+   <value>Type</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Type</value>
+   <key>tr</key>
+   <value>Tip</value>
   </synonym>
   <type>
    <types>EnumRef.PlanningPeriodTypes</types>
@@ -168,30 +168,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <attributes uuid="33cc600a-0761-4898-8e0a-fff142eaf9f0">
    <name>Property</name>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Свойство</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -204,16 +204,16 @@
   <attributes uuid="5d65d604-f8e9-41af-9e9f-1cea97100aea">
    <name>Value</name>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -235,30 +235,30 @@
   </producedTypes>
   <name>BusinessUnits</name>
   <synonym>
-   <key>tr</key>
-   <value>Departmanlar</value>
+   <key>en</key>
+   <value>Business units</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Подразделения</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Business units</value>
+   <key>tr</key>
+   <value>Departmanlar</value>
   </synonym>
   <attributes uuid="f54d04c5-d1f9-4473-99c0-2cfd955ac4a2">
    <name>BusinessUnit</name>
    <synonym>
-    <key>tr</key>
-    <value>Departman</value>
+    <key>en</key>
+    <value>Business unit</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Подразделение</value>
    </synonym>
    <synonym>
-    <key>en</key>
-    <value>Business unit</value>
+    <key>tr</key>
+    <value>Departman</value>
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
@@ -273,16 +273,16 @@
  <forms uuid="e893d468-79d6-4537-8695-257b2a028b67">
   <name>ItemForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -290,16 +290,16 @@
  <forms uuid="e652e5d2-dad9-4ca4-bdd8-e113b3626128">
   <name>ListForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -307,16 +307,16 @@
  <forms uuid="ce6092d3-c988-4407-971c-2ff205a9aaa8">
   <name>ChoiceForm</name>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

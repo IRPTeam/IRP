@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -606,16 +606,16 @@
  <formCommands>
   <name>CreateDocuments</name>
   <title>
-   <key>en</key>
-   <value>Create documents</value>
+   <key>tr</key>
+   <value>Evrakları oluştur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Создать документы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evrakları oluştur</value>
+   <key>en</key>
+   <value>Create documents</value>
   </title>
   <id>1</id>
   <use>

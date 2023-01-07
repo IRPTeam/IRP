@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -753,16 +753,16 @@
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Item ref</value>
+       <key>tr</key>
+       <value>Malzeme ref</value>
       </content>
       <content>
        <key>ru</key>
        <value>Ссылка номенклатура</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Malzeme ref</value>
+       <key>en</key>
+       <value>Item ref</value>
       </content>
      </localValue>
     </title>
@@ -774,16 +774,16 @@
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Item type</value>
+       <key>tr</key>
+       <value>Malzeme tipi</value>
       </content>
       <content>
        <key>ru</key>
        <value>Вид номенклатуры</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Malzeme tipi</value>
+       <key>en</key>
+       <value>Item type</value>
       </content>
      </localValue>
     </title>
@@ -795,16 +795,16 @@
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Is item key</value>
+       <key>tr</key>
+       <value>Bu varyant</value>
       </content>
       <content>
        <key>ru</key>
        <value>Это характеристика</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Bu varyant</value>
+       <key>en</key>
+       <value>Is item key</value>
       </content>
      </localValue>
     </title>
@@ -816,16 +816,16 @@
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Item key ref</value>
+       <key>tr</key>
+       <value>Varyant ref</value>
       </content>
       <content>
        <key>ru</key>
        <value>Ссылка характеристики</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Varyant ref</value>
+       <key>en</key>
+       <value>Item key ref</value>
       </content>
      </localValue>
     </title>
@@ -837,16 +837,16 @@
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Is item type</value>
+       <key>tr</key>
+       <value>Bu malzeme tipi</value>
       </content>
       <content>
        <key>ru</key>
        <value>Это вид номенклатуры</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Bu malzeme tipi</value>
+       <key>en</key>
+       <value>Is item type</value>
       </content>
      </localValue>
     </title>
@@ -858,16 +858,16 @@
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Is item</value>
+       <key>tr</key>
+       <value>Bu malzeme</value>
       </content>
       <content>
        <key>ru</key>
        <value>Это номенклатура</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Bu malzeme</value>
+       <key>en</key>
+       <value>Is item</value>
       </content>
      </localValue>
     </title>
@@ -879,16 +879,16 @@
  <attributes>
   <name>SourceOfOriginOwner</name>
   <title>
-   <key>en</key>
-   <value>Source of origin owner</value>
+   <key>tr</key>
+   <value>Envanter menşei sahibi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Владелец источника происхождения</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Envanter menşei sahibi</value>
+   <key>en</key>
+   <value>Source of origin owner</value>
   </title>
   <id>2</id>
   <valueType>

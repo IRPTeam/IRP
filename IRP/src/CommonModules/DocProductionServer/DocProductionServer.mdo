@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3a2c7756-8934-4b3c-b9d9-c6324bcac4c4">
  <name>DocProductionServer</name>
  <synonym>
-  <key>en</key>
-  <value>Doc production server</value>
+  <key>tr</key>
+  <value>Evrak üretim server</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документ производство сервер</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Evrak üretim server</value>
+  <key>en</key>
+  <value>Doc production server</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

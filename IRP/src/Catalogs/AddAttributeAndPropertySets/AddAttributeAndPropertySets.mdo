@@ -9,32 +9,32 @@
  </producedTypes>
  <name>AddAttributeAndPropertySets</name>
  <synonym>
-  <key>en</key>
-  <value>Additional attribute sets</value>
+  <key>tr</key>
+  <value>Ek özellik ayarları</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Настройки дополнительных реквизитов и сведений</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Ek özellik ayarları</value>
+  <key>en</key>
+  <value>Additional attribute sets</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectPresentation>
-  <key>en</key>
-  <value>Additional attribute set</value>
+  <key>tr</key>
+  <value>Ek öznitelik grubu</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Настройка дополнительных реквизитов и сведений</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Ek öznitelik grubu</value>
+  <key>en</key>
+  <value>Additional attribute set</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -832,30 +832,30 @@
   </producedTypes>
   <name>Attributes</name>
   <synonym>
-   <key>en</key>
-   <value>Attributes</value>
+   <key>tr</key>
+   <value>Ek alanlar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Реквизиты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ek alanlar</value>
+   <key>en</key>
+   <value>Attributes</value>
   </synonym>
   <attributes uuid="80c4cfb8-465c-47b9-956d-60dad6cc77e4">
    <name>Attribute</name>
    <synonym>
-    <key>en</key>
-    <value>Attribute</value>
+    <key>tr</key>
+    <value>Alan</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Реквизит</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Alan</value>
+    <key>en</key>
+    <value>Attribute</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -867,16 +867,16 @@
   <attributes uuid="a5ed841f-c7ca-455f-a862-2d1c9175493b">
    <name>Condition</name>
    <synonym>
-    <key>en</key>
-    <value>Condition</value>
+    <key>tr</key>
+    <value>Koşul</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Условие</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Koşul</value>
+    <key>en</key>
+    <value>Condition</value>
    </synonym>
    <type>
     <types>ValueStorage</types>
@@ -888,16 +888,16 @@
   <attributes uuid="41b0e27f-df2c-49f4-846e-ac8fdc7d8ad4">
    <name>IsConditionSet</name>
    <synonym>
-    <key>en</key>
-    <value>Is condition set</value>
+    <key>tr</key>
+    <value>Koşul belirlendi</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Условие</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Koşul belirlendi</value>
+    <key>en</key>
+    <value>Is condition set</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -912,16 +912,16 @@
   <attributes uuid="e90ab08a-d83c-4d9d-bd32-2a3a48d03587">
    <name>InterfaceGroup</name>
    <synonym>
-    <key>en</key>
-    <value>UI group</value>
+    <key>tr</key>
+    <value>Kullanıcı arayüzü grubu</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Интерфейсная группа</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Kullanıcı arayüzü grubu</value>
+    <key>en</key>
+    <value>UI group</value>
    </synonym>
    <comment>Name of group for attribute</comment>
    <type>
@@ -935,16 +935,16 @@
   <attributes uuid="7ad65860-4869-4104-96f2-6f7d4e74e542">
    <name>Required</name>
    <synonym>
-    <key>en</key>
-    <value>Required</value>
+    <key>tr</key>
+    <value>Zorunlu</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Обязательный для заполнения</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Zorunlu</value>
+    <key>en</key>
+    <value>Required</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -957,16 +957,16 @@
   <attributes uuid="71b4625a-8e0a-41a1-b6e0-1ab83ed78d93">
    <name>ShowInHTML</name>
    <synonym>
-    <key>en</key>
-    <value>Show in HTML</value>
+    <key>tr</key>
+    <value>HTML olarak göster</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Отображается в HTML</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>HTML olarak göster</value>
+    <key>en</key>
+    <value>Show in HTML</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -984,30 +984,30 @@
   </producedTypes>
   <name>Properties</name>
   <synonym>
-   <key>en</key>
-   <value>Properties</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Свойства</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Properties</value>
   </synonym>
   <attributes uuid="b9140641-608f-4582-8a42-2dfd3e257d41">
    <name>Property</name>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -1019,16 +1019,16 @@
   <attributes uuid="c4664993-2b71-4723-a9db-9ef5a5a2a5c6">
    <name>Condition</name>
    <synonym>
-    <key>en</key>
-    <value>Condition</value>
+    <key>tr</key>
+    <value>Koşul</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Условие</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Koşul</value>
+    <key>en</key>
+    <value>Condition</value>
    </synonym>
    <type>
     <types>ValueStorage</types>
@@ -1040,16 +1040,16 @@
   <attributes uuid="678ece06-d283-4b04-b6b1-40a1668fa140">
    <name>IsConditionSet</name>
    <synonym>
-    <key>en</key>
-    <value>Is condition set</value>
+    <key>tr</key>
+    <value>Koşul belirlendi</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Условие</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Koşul belirlendi</value>
+    <key>en</key>
+    <value>Is condition set</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -1064,16 +1064,16 @@
   <attributes uuid="d57788a9-75b9-4593-836f-d865423c2412">
    <name>ShowInHTML</name>
    <synonym>
-    <key>en</key>
-    <value>Show in HTML</value>
+    <key>tr</key>
+    <value>HTML olarak göster</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Отображается в HTML</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>HTML olarak göster</value>
+    <key>en</key>
+    <value>Show in HTML</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1091,30 +1091,30 @@
   </producedTypes>
   <name>ExtensionAttributes</name>
   <synonym>
-   <key>en</key>
-   <value>Extension attributes</value>
+   <key>tr</key>
+   <value>Uzantı ek alanlar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Реквизиты расширения</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Uzantı ek alanlar</value>
+   <key>en</key>
+   <value>Extension attributes</value>
   </synonym>
   <attributes uuid="cc91d81e-d42c-4e33-b97a-e31dfe9433a4">
    <name>Attribute</name>
    <synonym>
-    <key>en</key>
-    <value>Attribute</value>
+    <key>tr</key>
+    <value>Alan</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Реквизит</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Alan</value>
+    <key>en</key>
+    <value>Attribute</value>
    </synonym>
    <type>
     <types>String</types>
@@ -1129,16 +1129,16 @@
   <attributes uuid="459ea82b-eda8-406b-bf96-e808bc73d004">
    <name>Condition</name>
    <synonym>
-    <key>en</key>
-    <value>Condition</value>
+    <key>tr</key>
+    <value>Koşul</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Условие</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Koşul</value>
+    <key>en</key>
+    <value>Condition</value>
    </synonym>
    <type>
     <types>ValueStorage</types>
@@ -1150,16 +1150,16 @@
   <attributes uuid="b0e89822-73e0-4299-9eb8-96e0f293ddb3">
    <name>IsConditionSet</name>
    <synonym>
-    <key>en</key>
-    <value>Is condition set</value>
+    <key>tr</key>
+    <value>Koşul belirlendi</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Условие</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Koşul belirlendi</value>
+    <key>en</key>
+    <value>Is condition set</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -1174,16 +1174,16 @@
   <attributes uuid="ec630a45-e714-4875-b9cb-b1d97ee41fd9">
    <name>InterfaceGroup</name>
    <synonym>
-    <key>en</key>
-    <value>UI group</value>
+    <key>tr</key>
+    <value>Kullanıcı arayüzü grubu</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Интерфейсная группа</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Kullanıcı arayüzü grubu</value>
+    <key>en</key>
+    <value>UI group</value>
    </synonym>
    <comment>Name of group for attribute</comment>
    <type>
@@ -1197,16 +1197,16 @@
   <attributes uuid="a9b27c61-2808-425a-8afe-15a6dd7caabb">
    <name>Required</name>
    <synonym>
-    <key>en</key>
-    <value>Required</value>
+    <key>tr</key>
+    <value>Zorunlu</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Обязательный для заполнения</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Zorunlu</value>
+    <key>en</key>
+    <value>Required</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1219,16 +1219,16 @@
   <attributes uuid="616a32e8-0418-4f30-91f8-4a55b78bdb6e">
    <name>ShowInHTML</name>
    <synonym>
-    <key>en</key>
-    <value>Show in HTML</value>
+    <key>tr</key>
+    <value>HTML olarak göster</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Отображается в HTML</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>HTML olarak göster</value>
+    <key>en</key>
+    <value>Show in HTML</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1241,16 +1241,16 @@
   <attributes uuid="f187379b-1551-4e3d-a832-be0d79967ca4">
    <name>Show</name>
    <synonym>
-    <key>en</key>
-    <value>Show</value>
+    <key>tr</key>
+    <value>Göster</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Отображать</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Göster</value>
+    <key>en</key>
+    <value>Show</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1264,16 +1264,16 @@
  <forms uuid="333dfaea-30f0-4b62-a4f2-ec34b2892f28">
   <name>ItemForm</name>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -1281,16 +1281,16 @@
  <forms uuid="c2447e7a-2ea5-4e27-9d50-1b2c5cb709ad">
   <name>EditCondition</name>
   <synonym>
-   <key>en</key>
-   <value>Edit condition</value>
+   <key>tr</key>
+   <value>Koşul değiştir</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Редактировать условие</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Koşul değiştir</value>
+   <key>en</key>
+   <value>Edit condition</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -1298,16 +1298,16 @@
  <forms uuid="f18418ea-d0b2-487c-9397-d88335f33e2e">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -1315,16 +1315,16 @@
  <forms uuid="8d999616-7ec1-4449-84d3-2d2d11fabae0">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -1332,32 +1332,32 @@
  <templates uuid="f2f206a0-f85d-44cd-a5f6-d3560c17bce1">
   <name>DCS_Catalog</name>
   <synonym>
-   <key>en</key>
-   <value>DCS catalog</value>
+   <key>tr</key>
+   <value>DCS kart listesi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Справочник DCS</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>DCS kart listesi</value>
+   <key>en</key>
+   <value>DCS catalog</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>
  <templates uuid="e550ab2e-fb52-4923-86ef-30b0b9ef15bd">
   <name>DCS_Document</name>
   <synonym>
-   <key>en</key>
-   <value>DCS document</value>
+   <key>tr</key>
+   <value>DCS evrak</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ DCS</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>DCS evrak</value>
+   <key>en</key>
+   <value>DCS document</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

@@ -232,16 +232,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Types</value>
+   <key>tr</key>
+   <value>Tipler</value>
   </title>
   <title>
    <key>ru</key>
    <value>Типы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tipler</value>
+   <key>en</key>
+   <value>Types</value>
   </title>
   <extendedTooltip>
    <name>GroupBusinessUnitsTypesExtendedTooltip</name>

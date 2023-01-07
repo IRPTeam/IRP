@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T6090S_CompositeBatchesAmountValues</name>
  <synonym>
-  <key>en</key>
-  <value>T6090 Composite batches amount values</value>
+  <key>tr</key>
+  <value>T6090 Transfer edilen içerik parti tutar değerleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>T6090 Значения сумм композитных партий</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>T6090 Transfer edilen içerik parti tutar değerleri</value>
+  <key>en</key>
+  <value>T6090 Composite batches amount values</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +30,16 @@
  <resources uuid="bd71d269-555e-4a13-81e7-24d4481bcb2a">
   <name>Quantity</name>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -53,16 +53,16 @@
  <resources uuid="1181ffb8-d668-471f-82c9-b902ae4111bb">
   <name>Amount</name>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -76,16 +76,16 @@
  <resources uuid="0f5e8d7a-d710-4229-83f7-bca650a594fe">
   <name>AmountTax</name>
   <synonym>
-   <key>en</key>
-   <value>Amount tax</value>
+   <key>tr</key>
+   <value>Vergi tutarı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма налогов</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Vergi tutarı</value>
+   <key>en</key>
+   <value>Amount tax</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -99,16 +99,16 @@
  <resources uuid="d772806e-224c-4d45-9064-70b2166d8269">
   <name>AmountCostRatio</name>
   <synonym>
-   <key>en</key>
-   <value>Amount cost ratio</value>
+   <key>tr</key>
+   <value>Maliyet tutar katsayısı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Коеф. добавочной стоимости</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Maliyet tutar katsayısı</value>
+   <key>en</key>
+   <value>Amount cost ratio</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -122,16 +122,16 @@
  <dimensions uuid="d5a9f86c-7983-4e38-b28e-10d344581d62">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -146,16 +146,16 @@
  <dimensions uuid="ea7114a9-5196-4a9b-b785-c1b9f4ac4dd7">
   <name>BatchComposite</name>
   <synonym>
-   <key>en</key>
-   <value>Batch composite</value>
+   <key>tr</key>
+   <value>Parti içeriği</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Композит партии</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Parti içeriği</value>
+   <key>en</key>
+   <value>Batch composite</value>
   </synonym>
   <type>
    <types>CatalogRef.Batches</types>
@@ -170,16 +170,16 @@
  <dimensions uuid="3e6787c5-6e6a-4fc0-b999-0ffa4f34f947">
   <name>BatchKeyComposite</name>
   <synonym>
-   <key>en</key>
-   <value>Batch key composite</value>
+   <key>tr</key>
+   <value>Karmaşık parti anahtarı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Композит ключа партии</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Karmaşık parti anahtarı</value>
+   <key>en</key>
+   <value>Batch key composite</value>
   </synonym>
   <type>
    <types>CatalogRef.BatchKeys</types>
@@ -194,16 +194,16 @@
  <dimensions uuid="069f6b57-8f59-46c9-b694-4e9bc0a784a6">
   <name>Batch</name>
   <synonym>
-   <key>en</key>
-   <value>Batch</value>
+   <key>tr</key>
+   <value>Parti</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Партия</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Parti</value>
+   <key>en</key>
+   <value>Batch</value>
   </synonym>
   <type>
    <types>CatalogRef.Batches</types>
@@ -218,16 +218,16 @@
  <dimensions uuid="9ba54ee3-99ca-43bd-b810-9b719aa191ca">
   <name>BatchKey</name>
   <synonym>
-   <key>en</key>
-   <value>Batch key</value>
+   <key>tr</key>
+   <value>Parti anahtarı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ключ партии</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Parti anahtarı</value>
+   <key>en</key>
+   <value>Batch key</value>
   </synonym>
   <type>
    <types>CatalogRef.BatchKeys</types>

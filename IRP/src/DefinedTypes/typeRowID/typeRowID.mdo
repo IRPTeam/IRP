@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeRowID</name>
  <synonym>
-  <key>en</key>
-  <value>Type row ID</value>
+  <key>tr</key>
+  <value>Tip satır ID</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип ID строки</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tip satır ID</value>
+  <key>en</key>
+  <value>Type row ID</value>
  </synonym>
  <type>
   <types>String</types>

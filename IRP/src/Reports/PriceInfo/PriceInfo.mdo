@@ -6,16 +6,16 @@
  </producedTypes>
  <name>PriceInfo</name>
  <synonym>
-  <key>en</key>
-  <value>Price info</value>
+  <key>tr</key>
+  <value>Fiyat bilgisi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Цены</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Fiyat bilgisi</value>
+  <key>en</key>
+  <value>Price info</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>Report.PriceInfo.Form.ReportForm</defaultForm>
@@ -23,16 +23,16 @@
  <attributes uuid="b81a2f3e-6046-4c4e-9888-144465cbb123">
   <name>PriceOwner</name>
   <synonym>
-   <key>en</key>
-   <value>Price owner</value>
+   <key>tr</key>
+   <value>Fiyat sahibi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Владелец цены</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Fiyat sahibi</value>
+   <key>en</key>
+   <value>Price owner</value>
   </synonym>
   <type>
    <types>CatalogRef.Items</types>
@@ -44,16 +44,16 @@
  <attributes uuid="d8f0650f-aae0-4eb0-b74c-6d84d50ced3b">
   <name>PricePeriod</name>
   <synonym>
-   <key>en</key>
-   <value>Price period</value>
+   <key>tr</key>
+   <value>Fiyat dönemi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Период цен</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Fiyat dönemi</value>
+   <key>en</key>
+   <value>Price period</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -67,16 +67,16 @@
  <forms uuid="34a342e7-dcb1-4c0d-bf95-00c4bebdbcaa">
   <name>ReportForm</name>
   <synonym>
-   <key>en</key>
-   <value>Report form</value>
+   <key>tr</key>
+   <value>Rapor formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма отчета</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Rapor formu</value>
+   <key>en</key>
+   <value>Report form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -84,32 +84,32 @@
  <templates uuid="cfd9f7b0-29d5-4680-9d09-040b2a288858">
   <name>DataCompositionSchema</name>
   <synonym>
-   <key>en</key>
-   <value>Data composition schema</value>
+   <key>tr</key>
+   <value>Veri inşa edilme şeması</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Схема компоновки данных</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Veri inşa edilme şeması</value>
+   <key>en</key>
+   <value>Data composition schema</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>
  <commands uuid="560e3271-6873-4ed2-87d1-9fb7d82b2e80">
   <name>OpenPriceInfo</name>
   <synonym>
-   <key>en</key>
-   <value>Price info</value>
+   <key>tr</key>
+   <value>Fiyat bilgisi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Цены</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Fiyat bilgisi</value>
+   <key>en</key>
+   <value>Price info</value>
   </synonym>
   <group>FormNavigationPanelImportant</group>
   <commandParameterType>

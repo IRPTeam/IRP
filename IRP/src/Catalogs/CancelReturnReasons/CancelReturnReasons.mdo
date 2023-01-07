@@ -9,16 +9,16 @@
  </producedTypes>
  <name>CancelReturnReasons</name>
  <synonym>
-  <key>en</key>
-  <value>Cancel/Return reasons</value>
+  <key>tr</key>
+  <value>İptal/İade sebebi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Причины отмены/возврата</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İptal/İade sebebi</value>
+  <key>en</key>
+  <value>Cancel/Return reasons</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.CancelReturnReasons.StandardAttribute.Code</inputByString>
@@ -59,16 +59,16 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>en</key>
-  <value>Cancel/Return reason</value>
+  <key>tr</key>
+  <value>İptal/İade sebebi</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Причины отмены/возврата</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>İptal/İade sebebi</value>
+  <key>en</key>
+  <value>Cancel/Return reason</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -89,30 +89,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <attributes uuid="8b6b292b-e21f-40d2-9562-3e35a817c308">
    <name>Property</name>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Свойство</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -125,16 +125,16 @@
   <attributes uuid="b9761ab2-83ce-4ad9-876f-857d5dc80b47">
    <name>Value</name>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -152,16 +152,16 @@
  <forms uuid="e810c5d2-ad92-4231-a4e8-e57ede69f39d">
   <name>ItemForm</name>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -169,16 +169,16 @@
  <forms uuid="7013cfec-0872-4e46-adf8-1261471ed510">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -186,16 +186,16 @@
  <forms uuid="98ade9a8-0683-4a43-9d95-d05a19963128">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

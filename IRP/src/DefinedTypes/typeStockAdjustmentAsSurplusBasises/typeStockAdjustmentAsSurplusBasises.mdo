@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeStockAdjustmentAsSurplusBasises</name>
  <synonym>
-  <key>en</key>
-  <value>Type stock adjustment as surplus basises</value>
+  <key>tr</key>
+  <value>Tip stok sayım giriş fiş kaynak evrakı</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип основание оприходования товаров</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tip stok sayım giriş fiş kaynak evrakı</value>
+  <key>en</key>
+  <value>Type stock adjustment as surplus basises</value>
  </synonym>
  <type>
   <types>DocumentRef.PhysicalInventory</types>

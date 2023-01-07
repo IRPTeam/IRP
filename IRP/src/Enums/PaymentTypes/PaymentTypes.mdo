@@ -7,92 +7,92 @@
  </producedTypes>
  <name>PaymentTypes</name>
  <synonym>
-  <key>en</key>
-  <value>Payment types</value>
+  <key>tr</key>
+  <value>Ödeme tipleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Виды оплаты</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Ödeme tipleri</value>
+  <key>en</key>
+  <value>Payment types</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="d6587561-910d-4c85-af97-071be3270a45">
   <name>Cash</name>
   <synonym>
-   <key>en</key>
-   <value>Cash</value>
+   <key>tr</key>
+   <value>Kasa</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Касса</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kasa</value>
+   <key>en</key>
+   <value>Cash</value>
   </synonym>
  </enumValues>
  <enumValues uuid="ee294f6d-7a97-4756-877a-d07000d57c25">
   <name>Card</name>
   <synonym>
-   <key>en</key>
-   <value>Card</value>
+   <key>tr</key>
+   <value>Kart</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Плат. карта</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kart</value>
+   <key>en</key>
+   <value>Card</value>
   </synonym>
  </enumValues>
  <enumValues uuid="5bcccccf-fc1d-4df0-9f09-5c10340a7ee8">
   <name>LoyalityPoint</name>
   <synonym>
-   <key>en</key>
-   <value>Loyality point</value>
+   <key>tr</key>
+   <value>Sadakat puanı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Бонусные баллы</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Sadakat puanı</value>
+   <key>en</key>
+   <value>Loyality point</value>
   </synonym>
  </enumValues>
  <enumValues uuid="acb4e908-95d9-4a02-aea5-3332a8eb783e">
   <name>PaymentAgent</name>
   <synonym>
-   <key>en</key>
-   <value>Payment agent</value>
+   <key>tr</key>
+   <value>Ödeme aracı kurum</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Платежный агент</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ödeme aracı kurum</value>
+   <key>en</key>
+   <value>Payment agent</value>
   </synonym>
  </enumValues>
  <enumValues uuid="5537df59-4c8e-4e42-8a88-45e4655cb043">
   <name>Advance</name>
   <synonym>
-   <key>en</key>
-   <value>Advance</value>
+   <key>tr</key>
+   <value>Avans</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Авансы</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Avans</value>
+   <key>en</key>
+   <value>Advance</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

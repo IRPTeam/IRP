@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeStockAdjustmentAsWriteOffBasises</name>
  <synonym>
-  <key>en</key>
-  <value>Type stock adjustment as write off basises</value>
+  <key>tr</key>
+  <value>Tip stok sayım çıkış fiş kaynak evrakı</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип основание списания товаров</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tip stok sayım çıkış fiş kaynak evrakı</value>
+  <key>en</key>
+  <value>Type stock adjustment as write off basises</value>
  </synonym>
  <type>
   <types>DocumentRef.PhysicalInventory</types>

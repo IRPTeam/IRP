@@ -7,16 +7,16 @@
  </producedTypes>
  <name>EnableLinkedRowsIntegrity</name>
  <synonym>
-  <key>en</key>
-  <value>Enable linked rows integrity</value>
+  <key>tr</key>
+  <value>Bağlı satır bütünlülüğü aç</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Включить проверку целостности связанных строк</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Bağlı satır bütünlülüğü aç</value>
+  <key>en</key>
+  <value>Enable linked rows integrity</value>
  </synonym>
  <type>
   <types>Boolean</types>

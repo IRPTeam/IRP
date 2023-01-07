@@ -9,16 +9,16 @@
  </producedTypes>
  <name>CustomersAdvancesClosing</name>
  <synonym>
-  <key>en</key>
-  <value>Customers advances closing</value>
+  <key>tr</key>
+  <value>Müşteri avans kapatma</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Закрытие авансов покупателей</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Müşteri avans kapatma</value>
+  <key>en</key>
+  <value>Customers advances closing</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.CustomersAdvancesClosing.StandardAttribute.Number</inputByString>
@@ -27,28 +27,28 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
+  <key>tr</key>
+  <value>Müşteri avans kapatma</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Закрытие авансов покупателей</value>
+ </objectPresentation>
+ <objectPresentation>
   <key>en</key>
   <value>Customers advance closing</value>
  </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Закрытие авансов покупателей</value>
- </objectPresentation>
- <objectPresentation>
+ <listPresentation>
   <key>tr</key>
   <value>Müşteri avans kapatma</value>
- </objectPresentation>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Закрытие авансов покупателей</value>
+ </listPresentation>
  <listPresentation>
   <key>en</key>
   <value>Customers advances closing</value>
- </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Закрытие авансов покупателей</value>
- </listPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>Müşteri avans kapatma</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -67,16 +67,16 @@
  <attributes uuid="0c3fe97d-7a1f-4b9a-8063-5b8f338711fa">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -97,16 +97,16 @@
  <attributes uuid="f2410b4b-4e5e-446c-9a38-4f3fd8957b1c">
   <name>BeginOfPeriod</name>
   <synonym>
-   <key>en</key>
-   <value>Begin of period</value>
+   <key>tr</key>
+   <value>Dönem başı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Начало периода</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Dönem başı</value>
+   <key>en</key>
+   <value>Begin of period</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -124,16 +124,16 @@
  <attributes uuid="7d531020-011d-4404-8657-9941daa77160">
   <name>EndOfPeriod</name>
   <synonym>
-   <key>en</key>
-   <value>End of period</value>
+   <key>tr</key>
+   <value>Dönem sonu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Конец периода</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Dönem sonu</value>
+   <key>en</key>
+   <value>End of period</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -151,16 +151,16 @@
  <forms uuid="ae7d1124-a3c3-401e-97a2-3a255177a6c8">
   <name>DocumentForm</name>
   <synonym>
-   <key>en</key>
-   <value>Document form</value>
+   <key>tr</key>
+   <value>Evrak formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма документа</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
+   <key>en</key>
+   <value>Document form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -168,16 +168,16 @@
  <forms uuid="d9d037e4-9d99-4e3b-8995-7ae479f6195f">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -185,16 +185,16 @@
  <forms uuid="07e2d1b4-05ef-4bdb-9236-e0ecbb90a6f4">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

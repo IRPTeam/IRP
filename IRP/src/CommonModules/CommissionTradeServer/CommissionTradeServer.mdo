@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cdafdf76-57f5-4699-bfa7-6265a78ce3e2">
  <name>CommissionTradeServer</name>
  <synonym>
-  <key>en</key>
-  <value>Commission trade server</value>
+  <key>tr</key>
+  <value>Konsinye satışı server</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Комиссионная торговля сервер</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Konsinye satışı server</value>
+  <key>en</key>
+  <value>Commission trade server</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

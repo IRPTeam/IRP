@@ -7,16 +7,16 @@
    <name>FormGenerate</name>
    <id>8</id>
    <title>
-    <key>en</key>
-    <value>Refresh</value>
+    <key>tr</key>
+    <value>Yenile</value>
    </title>
    <title>
     <key>ru</key>
     <value>Обновить</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Yenile</value>
+    <key>en</key>
+    <value>Refresh</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -54,16 +54,16 @@
    <name>PricePeriod</name>
    <id>10</id>
    <title>
-    <key>en</key>
-    <value>on date</value>
+    <key>tr</key>
+    <value>Geçerlilik tarihi</value>
    </title>
    <title>
     <key>ru</key>
     <value>на дату</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Geçerlilik tarihi</value>
+    <key>en</key>
+    <value>on date</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -248,16 +248,16 @@
  <attributes>
   <name>Result</name>
   <title>
-   <key>en</key>
-   <value>Result</value>
+   <key>tr</key>
+   <value>Sonuç</value>
   </title>
   <title>
    <key>ru</key>
    <value>Результат</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sonuç</value>
+   <key>en</key>
+   <value>Result</value>
   </title>
   <id>2</id>
   <valueType>

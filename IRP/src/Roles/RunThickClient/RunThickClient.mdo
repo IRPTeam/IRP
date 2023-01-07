@@ -2,15 +2,15 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f3a9ea04-1d49-4b31-bff3-a5370b1ad9b2">
  <name>RunThickClient</name>
  <synonym>
-  <key>en</key>
-  <value>Run thick client</value>
+  <key>tr</key>
+  <value>Kalın istemci çalıştırma</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Запуск толстого клиента</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kalın istemci çalıştırma</value>
+  <key>en</key>
+  <value>Run thick client</value>
  </synonym>
 </mdclass:Role>

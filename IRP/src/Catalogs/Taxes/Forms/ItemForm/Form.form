@@ -132,16 +132,16 @@
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Rate</value>
+     <key>tr</key>
+     <value>Oran</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Ставка</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Oran</value>
+     <key>en</key>
+     <value>Rate</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.TaxType.EnumValue.Rate</value>
@@ -149,16 +149,16 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Amount</value>
+     <key>tr</key>
+     <value>Tutar</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Сумма</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Tutar</value>
+     <key>en</key>
+     <value>Amount</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.TaxType.EnumValue.Amount</value>
@@ -576,16 +576,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Tax rates</value>
+    <key>tr</key>
+    <value>Vergi oranları</value>
    </title>
    <title>
     <key>ru</key>
     <value>Налоговые ставки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Vergi oranları</value>
+    <key>en</key>
+    <value>Tax rates</value>
    </title>
    <extendedTooltip>
     <name>GroupTaxRatesExtendedTooltip</name>
@@ -906,16 +906,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Use documents</value>
+    <key>tr</key>
+    <value>Evrak kullanmak</value>
    </title>
    <title>
     <key>ru</key>
     <value>Документы применения</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Evrak kullanmak</value>
+    <key>en</key>
+    <value>Use documents</value>
    </title>
    <extendedTooltip>
     <name>GroupUseDocumentsExtendedTooltip</name>
@@ -944,16 +944,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group main pages</value>
+   <key>tr</key>
+   <value>Grup ana sayfalar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа главных страниц</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
+   <key>en</key>
+   <value>Group main pages</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -1022,16 +1022,16 @@
  <attributes>
   <name>AddressResult</name>
   <title>
-   <key>en</key>
-   <value>Address result</value>
+   <key>tr</key>
+   <value>Adres sonucu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Адрес результата</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Adres sonucu</value>
+   <key>en</key>
+   <value>Address result</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1048,16 +1048,16 @@
  <formCommands>
   <name>ExternalDataProcSettings</name>
   <title>
-   <key>en</key>
-   <value>Settings</value>
+   <key>tr</key>
+   <value>Ayarlar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarlar</value>
+   <key>en</key>
+   <value>Settings</value>
   </title>
   <id>1</id>
   <use>

@@ -2,15 +2,15 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="10d24999-277c-4e66-810a-9c3fe853de5e">
  <name>Factory</name>
  <synonym>
-  <key>en</key>
-  <value>Factory</value>
+  <key>tr</key>
+  <value>Fabrika</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Фабрика</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Fabrika</value>
+  <key>en</key>
+  <value>Factory</value>
  </synonym>
 </mdclass:CommonPicture>

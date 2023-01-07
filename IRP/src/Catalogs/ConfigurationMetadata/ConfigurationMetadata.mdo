@@ -9,16 +9,16 @@
  </producedTypes>
  <name>ConfigurationMetadata</name>
  <synonym>
-  <key>en</key>
-  <value>Configuration metadata</value>
+  <key>tr</key>
+  <value>Konfigürasyon anaverisi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Метаданные конфигурации</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Konfigürasyon anaverisi</value>
+  <key>en</key>
+  <value>Configuration metadata</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -76,16 +76,16 @@
   <dataHistory>Use</dataHistory>
   <name>Parent</name>
   <synonym>
-   <key>en</key>
-   <value>Parent</value>
+   <key>tr</key>
+   <value>Üst öğe</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Родитель</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Üst öğe</value>
+   <key>en</key>
+   <value>Parent</value>
   </synonym>
   <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
@@ -114,16 +114,16 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>en</key>
-  <value>Configuration metadata</value>
+  <key>tr</key>
+  <value>Konfigürasyon anaverisi</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Метаданные конфигурации</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Konfigürasyon anaverisi</value>
+  <key>en</key>
+  <value>Configuration metadata</value>
  </objectPresentation>
  <hierarchical>true</hierarchical>
  <hierarchyType>HierarchyOfItems</hierarchyType>
@@ -173,16 +173,16 @@
  <attributes uuid="c1323631-5529-43f7-94d3-70abc4f80fdc">
   <name>Extension</name>
   <synonym>
-   <key>en</key>
-   <value>Extension</value>
+   <key>tr</key>
+   <value>Uzantı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Расширение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Uzantı</value>
+   <key>en</key>
+   <value>Extension</value>
   </synonym>
   <type>
    <types>CatalogRef.Extensions</types>
@@ -196,16 +196,16 @@
  <attributes uuid="4c5116b9-b786-40fc-bf62-ca9f303ca025">
   <name>CheckDescriptionDuplicate</name>
   <synonym>
-   <key>en</key>
-   <value>Check description duplicate</value>
+   <key>tr</key>
+   <value>Tanım duplike kontrolü</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Поверить задвоенность наименования</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tanım duplike kontrolü</value>
+   <key>en</key>
+   <value>Check description duplicate</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -219,16 +219,16 @@
  <attributes uuid="e487cc9a-c41a-4fc0-955b-32afd191113e">
   <name>CheckDescriptionFilling</name>
   <synonym>
-   <key>en</key>
-   <value>Check description filling</value>
+   <key>tr</key>
+   <value>Tanım duplike kontrolü</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Проверка заполнения наименования</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tanım duplike kontrolü</value>
+   <key>en</key>
+   <value>Check description filling</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -242,16 +242,16 @@
  <attributes uuid="a9819821-f441-4740-ab99-d97309248954">
   <name>ObjectName</name>
   <synonym>
-   <key>en</key>
-   <value>Object name</value>
+   <key>tr</key>
+   <value>Nesne ismi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Наименование объекта</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Nesne ismi</value>
+   <key>en</key>
+   <value>Object name</value>
   </synonym>
   <type>
    <types>String</types>
@@ -269,16 +269,16 @@
  <attributes uuid="f7c954dd-436d-4983-9d86-4147f0e39cf5">
   <name>ObjectFullName</name>
   <synonym>
-   <key>en</key>
-   <value>Object full name</value>
+   <key>tr</key>
+   <value>Nesne ful tanımı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Полное наименование объекта</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Nesne ful tanımı</value>
+   <key>en</key>
+   <value>Object full name</value>
   </synonym>
   <type>
    <types>String</types>
@@ -296,16 +296,16 @@
  <attributes uuid="b783a657-e3df-405d-a2c8-90579272608b">
   <name>Unused</name>
   <synonym>
-   <key>en</key>
-   <value>Unused</value>
+   <key>tr</key>
+   <value>Kullanım dışı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Не используется</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kullanım dışı</value>
+   <key>en</key>
+   <value>Unused</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -319,16 +319,16 @@
  <forms uuid="e0eaab55-a0e3-4730-98df-0377c61e508d">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -336,16 +336,16 @@
  <forms uuid="360b8f17-2d37-4d3a-9a8f-384daa8e706f">
   <name>ItemForm</name>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

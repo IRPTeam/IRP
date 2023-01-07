@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typePresentation</name>
  <synonym>
-  <key>en</key>
-  <value>Type presentation</value>
+  <key>tr</key>
+  <value>Tip görünüm</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип представление</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tip görünüm</value>
+  <key>en</key>
+  <value>Type presentation</value>
  </synonym>
  <type>
   <types>CatalogManager.ItemTypes</types>

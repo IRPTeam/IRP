@@ -84,16 +84,16 @@
  <attributes>
   <name>HTMLGallery</name>
   <title>
-   <key>en</key>
-   <value>HTML gallery</value>
+   <key>tr</key>
+   <value>HTML galerisi</value>
   </title>
   <title>
    <key>ru</key>
    <value>HTML галерея картинок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>HTML galerisi</value>
+   <key>en</key>
+   <value>HTML gallery</value>
   </title>
   <id>20</id>
   <valueType>

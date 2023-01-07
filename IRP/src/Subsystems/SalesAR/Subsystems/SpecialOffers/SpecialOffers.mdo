@@ -2,16 +2,16 @@
 <mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="c109f339-842d-4835-95d9-307166224b49">
  <name>SpecialOffers</name>
  <synonym>
-  <key>en</key>
-  <value>Special offers</value>
+  <key>tr</key>
+  <value>Kampanyalar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Скидки</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kampanyalar</value>
+  <key>en</key>
+  <value>Special offers</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

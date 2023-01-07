@@ -11,57 +11,57 @@
  </producedTypes>
  <name>TemplateActions</name>
  <synonym>
-  <key>en</key>
-  <value>Template actions</value>
+  <key>tr</key>
+  <value>Şablon işlemleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Действия шаблона</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Şablon işlemleri</value>
+  <key>en</key>
+  <value>Template actions</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>en</key>
-  <value>Template action</value>
+  <key>tr</key>
+  <value>Şablon işlemi</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Действие шаблон</value>
  </recordPresentation>
  <recordPresentation>
-  <key>tr</key>
-  <value>Şablon işlemi</value>
+  <key>en</key>
+  <value>Template action</value>
  </recordPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Template actions</value>
+  <key>tr</key>
+  <value>Şablon işlemleri</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Действия шаблона</value>
  </listPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Şablon işlemleri</value>
+  <key>en</key>
+  <value>Template actions</value>
  </listPresentation>
  <attributes uuid="b710f50b-fac5-4ac8-a47a-f826589cb557">
   <name>AttributeType</name>
   <synonym>
-   <key>en</key>
-   <value>Attribute type</value>
+   <key>tr</key>
+   <value>Alan tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Тип реквизита</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Alan tipi</value>
+   <key>en</key>
+   <value>Attribute type</value>
   </synonym>
   <type>
    <types>String</types>
@@ -80,16 +80,16 @@
  <attributes uuid="aec5d541-f036-4676-a08b-50b3f4754df0">
   <name>Name</name>
   <synonym>
-   <key>en</key>
-   <value>Name</value>
+   <key>tr</key>
+   <value>Ad</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Имя</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ad</value>
+   <key>en</key>
+   <value>Name</value>
   </synonym>
   <type>
    <types>String</types>
@@ -108,7 +108,7 @@
  <attributes uuid="aa99cc09-1883-49e4-bcbb-e7d404cebcde">
   <name>Path</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Path</value>
   </synonym>
   <synonym>
@@ -116,7 +116,7 @@
    <value>Путь</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Path</value>
   </synonym>
   <type>
@@ -136,16 +136,16 @@
  <attributes uuid="f2b6cab0-54d0-4896-8f0e-d737e41689bb">
   <name>CheckRegExp</name>
   <synonym>
-   <key>en</key>
-   <value>Check reg exp</value>
+   <key>tr</key>
+   <value>RegExp kontrol</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Проверить RegExp</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>RegExp kontrol</value>
+   <key>en</key>
+   <value>Check reg exp</value>
   </synonym>
   <type>
    <types>String</types>
@@ -162,16 +162,16 @@
  <attributes uuid="55677483-9587-44fb-a7a2-903cbed41a94">
   <name>Value</name>
   <synonym>
-   <key>en</key>
-   <value>Value</value>
+   <key>tr</key>
+   <value>Değer</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Значение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Değer</value>
+   <key>en</key>
+   <value>Value</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -194,16 +194,16 @@
  <attributes uuid="08780f4b-b0ef-4b8c-8e7f-aa63fc7044f7">
   <name>Action</name>
   <synonym>
-   <key>en</key>
-   <value>Action</value>
+   <key>tr</key>
+   <value>İşlem</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Действие</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İşlem</value>
+   <key>en</key>
+   <value>Action</value>
   </synonym>
   <type>
    <types>CatalogRef.ExternalFunctions</types>
@@ -217,16 +217,16 @@
  <dimensions uuid="051ffc83-7209-4058-82c5-2ca8b40d81ec">
   <name>FillingTemplate</name>
   <synonym>
-   <key>en</key>
-   <value>Filling template</value>
+   <key>tr</key>
+   <value>Şablon doldurma</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Заполнение шаблона</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şablon doldurma</value>
+   <key>en</key>
+   <value>Filling template</value>
   </synonym>
   <type>
    <types>CatalogRef.FillingTemplates</types>
@@ -245,16 +245,16 @@
  <dimensions uuid="699e3dd1-f16d-41ea-8efe-4fd32eb3ab84">
   <name>Priority</name>
   <synonym>
-   <key>en</key>
-   <value>Priority</value>
+   <key>tr</key>
+   <value>Önem</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Приоритет</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Önem</value>
+   <key>en</key>
+   <value>Priority</value>
   </synonym>
   <type>
    <types>Number</types>

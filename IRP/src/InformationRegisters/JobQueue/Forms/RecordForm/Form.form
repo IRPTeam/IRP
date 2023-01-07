@@ -10,16 +10,16 @@
     <name>Period</name>
     <id>1</id>
     <title>
-     <key>en</key>
-     <value>Add</value>
+     <key>tr</key>
+     <value>Ekle</value>
     </title>
     <title>
      <key>ru</key>
      <value>Добавить</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Ekle</value>
+     <key>en</key>
+     <value>Add</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -174,16 +174,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Group left</value>
+    <key>tr</key>
+    <value>Grup (sol)</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группировка по левому краю</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Grup (sol)</value>
+    <key>en</key>
+    <value>Group left</value>
    </title>
    <extendedTooltip>
     <name>GroupLeftExtendedTooltip</name>
@@ -328,16 +328,16 @@
      </dataPath>
      <titleLocation>None</titleLocation>
      <toolTip>
-      <key>en</key>
-      <value>Difficult level</value>
+      <key>tr</key>
+      <value>Zorluk seviyesi</value>
      </toolTip>
      <toolTip>
       <key>ru</key>
       <value>Уровень сложности</value>
      </toolTip>
      <toolTip>
-      <key>tr</key>
-      <value>Zorluk seviyesi</value>
+      <key>en</key>
+      <value>Difficult level</value>
      </toolTip>
      <extendedTooltip>
       <name>DifficultLevelExtendedTooltip</name>
@@ -384,16 +384,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group lvl</value>
+     <key>tr</key>
+     <value>Grup seviye</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа уровня</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Grup seviye</value>
+     <key>en</key>
+     <value>Group lvl</value>
     </title>
     <extendedTooltip>
      <name>GroupLvlExtendedTooltip</name>
@@ -471,16 +471,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Group right</value>
+    <key>tr</key>
+    <value>Grup (sağ)</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группировка по правому краю</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Grup (sağ)</value>
+    <key>en</key>
+    <value>Group right</value>
    </title>
    <extendedTooltip>
     <name>GroupRightExtendedTooltip</name>
@@ -512,16 +512,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group top</value>
+   <key>tr</key>
+   <value>Grup üst</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа верхние уровень</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup üst</value>
+   <key>en</key>
+   <value>Group top</value>
   </title>
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
@@ -556,16 +556,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group bottom</value>
+   <key>tr</key>
+   <value>Grup footer</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа подвал</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup footer</value>
+   <key>en</key>
+   <value>Group bottom</value>
   </title>
   <extendedTooltip>
    <name>GroupBottomExtendedTooltip</name>
@@ -654,16 +654,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Description</value>
+    <key>tr</key>
+    <value>Tanım</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
+    <key>en</key>
+    <value>Description</value>
    </title>
    <extendedTooltip>
     <name>PageDescriptionExtendedTooltip</name>
@@ -746,16 +746,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>User messages</value>
+    <key>tr</key>
+    <value>Kullanıcı mesajları</value>
    </title>
    <title>
     <key>ru</key>
     <value>Пользовательские сообщения</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullanıcı mesajları</value>
+    <key>en</key>
+    <value>User messages</value>
    </title>
    <extendedTooltip>
     <name>PageUserMassagesExtendedTooltip</name>
@@ -839,7 +839,7 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Log</value>
    </title>
    <title>
@@ -847,7 +847,7 @@
     <value>Логи</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Log</value>
    </title>
    <extendedTooltip>
@@ -931,16 +931,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Result</value>
+    <key>tr</key>
+    <value>Sonuç</value>
    </title>
    <title>
     <key>ru</key>
     <value>Результат</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sonuç</value>
+    <key>en</key>
+    <value>Result</value>
    </title>
    <extendedTooltip>
     <name>PageResultExtendedTooltip</name>
@@ -1023,16 +1023,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Parameters</value>
+    <key>tr</key>
+    <value>Parametreler</value>
    </title>
    <title>
     <key>ru</key>
     <value>Параметры</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Parametreler</value>
+    <key>en</key>
+    <value>Parameters</value>
    </title>
    <extendedTooltip>
     <name>PageParametersExtendedTooltip</name>
@@ -1061,16 +1061,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Pages main</value>
+   <key>tr</key>
+   <value>Sayfalar genel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Страницы основные</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sayfalar genel</value>
+   <key>en</key>
+   <value>Pages main</value>
   </title>
   <extendedTooltip>
    <name>PagesMainExtendedTooltip</name>
@@ -1131,7 +1131,7 @@
  <attributes>
   <name>Log</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Log</value>
   </title>
   <title>
@@ -1139,7 +1139,7 @@
    <value>Логи</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Log</value>
   </title>
   <id>2</id>
@@ -1157,16 +1157,16 @@
  <attributes>
   <name>Result</name>
   <title>
-   <key>en</key>
-   <value>Result</value>
+   <key>tr</key>
+   <value>Sonuç</value>
   </title>
   <title>
    <key>ru</key>
    <value>Результат</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sonuç</value>
+   <key>en</key>
+   <value>Result</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1183,16 +1183,16 @@
  <attributes>
   <name>DataParameters</name>
   <title>
-   <key>en</key>
-   <value>Data parameters</value>
+   <key>tr</key>
+   <value>Veri parametreleri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Параметры данных</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Veri parametreleri</value>
+   <key>en</key>
+   <value>Data parameters</value>
   </title>
   <id>4</id>
   <valueType>

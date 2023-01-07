@@ -6,32 +6,32 @@
  </producedTypes>
  <name>AllRegistersMovement</name>
  <synonym>
-  <key>en</key>
-  <value>All registers movement</value>
+  <key>tr</key>
+  <value>Tüm kayıt tablo hareketleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Движения по всем регистрам</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tüm kayıt tablo hareketleri</value>
+  <key>en</key>
+  <value>All registers movement</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.AllRegistersMovement.Template.Template</mainDataCompositionSchema>
  <templates uuid="777e7b06-dae0-4f4e-a03e-d8322924c8f5">
   <name>Template</name>
   <synonym>
-   <key>en</key>
-   <value>Template</value>
+   <key>tr</key>
+   <value>Şablon</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Шаблон</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şablon</value>
+   <key>en</key>
+   <value>Template</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

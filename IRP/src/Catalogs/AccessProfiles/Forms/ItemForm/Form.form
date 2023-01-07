@@ -551,16 +551,16 @@
    <columns>
     <name>Use</name>
     <title>
-     <key>en</key>
-     <value>Use</value>
+     <key>tr</key>
+     <value>Kullan</value>
     </title>
     <title>
      <key>ru</key>
      <value>Применить</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Kullan</value>
+     <key>en</key>
+     <value>Use</value>
     </title>
     <id>2</id>
     <valueType>
@@ -578,16 +578,16 @@
  <attributes>
   <name>Roles</name>
   <title>
-   <key>en</key>
-   <value>Roles</value>
+   <key>tr</key>
+   <value>Roller</value>
   </title>
   <title>
    <key>ru</key>
    <value>Роли доступа</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Roller</value>
+   <key>en</key>
+   <value>Roles</value>
   </title>
   <id>3</id>
   <valueType>
@@ -602,16 +602,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использовать</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <id>4</id>
    <valueType>
@@ -627,16 +627,16 @@
   <columns>
    <name>Role</name>
    <title>
-    <key>en</key>
-    <value>Role</value>
+    <key>tr</key>
+    <value>Rol</value>
    </title>
    <title>
     <key>ru</key>
     <value>Роль доступа</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Rol</value>
+    <key>en</key>
+    <value>Role</value>
    </title>
    <id>5</id>
    <valueType>
@@ -655,16 +655,16 @@
   <columns>
    <name>Configuration</name>
    <title>
-    <key>en</key>
-    <value>Configuration</value>
+    <key>tr</key>
+    <value>Kongigürasyon</value>
    </title>
    <title>
     <key>ru</key>
     <value>Конфигурация</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kongigürasyon</value>
+    <key>en</key>
+    <value>Configuration</value>
    </title>
    <id>6</id>
    <valueType>
@@ -683,16 +683,16 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>en</key>
-    <value>Presentation</value>
+    <key>tr</key>
+    <value>Görünüm</value>
    </title>
    <title>
     <key>ru</key>
     <value>Представление</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
+    <key>en</key>
+    <value>Presentation</value>
    </title>
    <id>7</id>
    <valueType>
@@ -712,16 +712,16 @@
  <formCommands>
   <name>UpdateRoles</name>
   <title>
-   <key>en</key>
-   <value>Update roles</value>
+   <key>tr</key>
+   <value>Rolleri güncelle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить роли доступа</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Rolleri güncelle</value>
+   <key>en</key>
+   <value>Update roles</value>
   </title>
   <id>1</id>
   <use>

@@ -2,15 +2,15 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0fd6f749-7efb-4bcb-8537-3159ffa15b1c">
  <name>Dimensions</name>
  <synonym>
-  <key>en</key>
-  <value>Dimensions</value>
+  <key>tr</key>
+  <value>Boyutlar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Измерения</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Boyutlar</value>
+  <key>en</key>
+  <value>Dimensions</value>
  </synonym>
 </mdclass:CommonPicture>

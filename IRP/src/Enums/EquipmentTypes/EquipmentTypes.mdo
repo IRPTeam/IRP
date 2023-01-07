@@ -7,62 +7,62 @@
  </producedTypes>
  <name>EquipmentTypes</name>
  <synonym>
-  <key>en</key>
-  <value>Types of Equipment</value>
+  <key>tr</key>
+  <value>Donanım tipi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Виды оборудования</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Donanım tipi</value>
+  <key>en</key>
+  <value>Types of Equipment</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="52ba21cc-77f4-49d1-bb3b-b32358f92728">
   <name>InputDevice</name>
   <synonym>
-   <key>en</key>
-   <value>Input device</value>
+   <key>tr</key>
+   <value>Bağlanan cihaz</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Устройство ввода</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Bağlanan cihaz</value>
+   <key>en</key>
+   <value>Input device</value>
   </synonym>
  </enumValues>
  <enumValues uuid="6e28e4d8-2707-43dd-93f3-30d0b69063a8">
   <name>BarcodeScanner</name>
   <synonym>
-   <key>en</key>
-   <value>Barcode scanner</value>
+   <key>tr</key>
+   <value>Barkod okuyucusu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сканер штрихкодов</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Barkod okuyucusu</value>
+   <key>en</key>
+   <value>Barcode scanner</value>
   </synonym>
  </enumValues>
  <enumValues uuid="9cd0cff5-3e9b-4593-9f4c-793f8e610b03">
   <name>FiscalPrinter</name>
   <synonym>
-   <key>en</key>
-   <value>Fiscal printer</value>
+   <key>tr</key>
+   <value>Yazar kasa</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Фискальный принтер</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Yazar kasa</value>
+   <key>en</key>
+   <value>Fiscal printer</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

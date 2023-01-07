@@ -6,23 +6,23 @@
  </producedTypes>
  <name>ObjectPropertyEditor</name>
  <synonym>
-  <key>en</key>
-  <value>Object property editor</value>
+  <key>tr</key>
+  <value>Nesne parametre sihirbazı</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Конструктор свойст объекта</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Nesne parametre sihirbazı</value>
+  <key>en</key>
+  <value>Object property editor</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.ObjectPropertyEditor.Form.Form</defaultForm>
  <forms uuid="10223689-ce1e-4f26-a649-6812834b1b9d">
   <name>Form</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -30,7 +30,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
@@ -39,16 +39,16 @@
  <forms uuid="3d32ba2a-6daf-461d-8b97-5ae43b439838">
   <name>EditMultilineText</name>
   <synonym>
-   <key>en</key>
-   <value>Edit multiline text</value>
+   <key>tr</key>
+   <value>Çoklu satır metni değiştir</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Редактировать многострочный текст</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu satır metni değiştir</value>
+   <key>en</key>
+   <value>Edit multiline text</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

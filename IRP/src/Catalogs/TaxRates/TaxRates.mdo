@@ -9,16 +9,16 @@
  </producedTypes>
  <name>TaxRates</name>
  <synonym>
-  <key>en</key>
-  <value>Tax rates</value>
+  <key>tr</key>
+  <value>Vergi oranları</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Налоговые ставки</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Vergi oranları</value>
+  <key>en</key>
+  <value>Tax rates</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <searchStringModeOnInputByString>AnyPart</searchStringModeOnInputByString>
@@ -58,16 +58,16 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectPresentation>
-  <key>en</key>
-  <value>Tax rate</value>
+  <key>tr</key>
+  <value>Vergi oranı</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Налоговая ставка</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Vergi oranı</value>
+  <key>en</key>
+  <value>Tax rate</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -85,16 +85,16 @@
  <attributes uuid="367043cc-3645-45c8-97ac-e2335eac9659">
   <name>Rate</name>
   <synonym>
-   <key>en</key>
-   <value>Rate</value>
+   <key>tr</key>
+   <value>Oran</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ставка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Oran</value>
+   <key>en</key>
+   <value>Rate</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -114,16 +114,16 @@
  <attributes uuid="45958f45-808f-41be-89b2-81738230fc1e">
   <name>NoRate</name>
   <synonym>
-   <key>en</key>
-   <value>No rate</value>
+   <key>tr</key>
+   <value>Vergi yok</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Без налогов</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Vergi yok</value>
+   <key>en</key>
+   <value>No rate</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -141,30 +141,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <attributes uuid="7d4d66de-2bd0-4ee8-bcb1-c372da85876c">
    <name>Property</name>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -177,16 +177,16 @@
   <attributes uuid="50aa5e13-7ebc-4f21-93b7-34f1164d725c">
    <name>Value</name>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -204,16 +204,16 @@
  <forms uuid="fdc572c9-73b4-4551-9734-49d57e3cbab0">
   <name>ItemForm</name>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -221,16 +221,16 @@
  <forms uuid="9d512fe8-087b-400c-a897-49afc7db058b">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -238,16 +238,16 @@
  <forms uuid="9d284f67-9e81-48b7-a207-cefff9162ab7">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

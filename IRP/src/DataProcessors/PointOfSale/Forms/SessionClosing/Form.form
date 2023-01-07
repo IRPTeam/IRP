@@ -10,9 +10,9 @@
     <name>WarningsLabel</name>
     <id>68</id>
     <title>
-     <key>en</key>
-     <value>Documents of the current session that could not be posted. 
-Data needs to be corrected!</value>
+     <key>tr</key>
+     <value>Geçerli vardyanın kaydedilmez evraklar. 
+Veri düzeltilmelidir!</value>
     </title>
     <title>
      <key>ru</key>
@@ -20,9 +20,9 @@ Data needs to be corrected!</value>
 Данные необходимо исправить!</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Geçerli vardyanın kaydedilmez evraklar. 
-Veri düzeltilmelidir!</value>
+     <key>en</key>
+     <value>Documents of the current session that could not be posted. 
+Data needs to be corrected!</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -83,16 +83,16 @@ Veri düzeltilmelidir!</value>
      <name>ListOfWarningDocumentsRef</name>
      <id>50</id>
      <title>
-      <key>en</key>
-      <value>Documents</value>
+      <key>tr</key>
+      <value>Evraklar</value>
      </title>
      <title>
       <key>ru</key>
       <value>Документы</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Evraklar</value>
+      <key>en</key>
+      <value>Documents</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -438,16 +438,16 @@ Veri düzeltilmelidir!</value>
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Warnings</value>
+    <key>tr</key>
+    <value>Uyarılar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Уведомления</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Uyarılar</value>
+    <key>en</key>
+    <value>Warnings</value>
    </title>
    <extendedTooltip>
     <name>WarningsPageExtendedTooltip</name>
@@ -477,9 +477,9 @@ Veri düzeltilmelidir!</value>
     <name>CashboxLabel</name>
     <id>77</id>
     <title>
-     <key>en</key>
-     <value>Cash registers are now closing.
-Take X-reports and compare with the data below.</value>
+     <key>tr</key>
+     <value>Yazar kasa şimdi kapanıyor.
+ X reporu alıp, aşağıdaki veri ile kıyaslayınız.</value>
     </title>
     <title>
      <key>ru</key>
@@ -487,9 +487,9 @@ Take X-reports and compare with the data below.</value>
 Небходимо снять отчет без гашения и сверить с текущими данными системы.</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Yazar kasa şimdi kapanıyor.
- X reporu alıp, aşağıdaki veri ile kıyaslayınız.</value>
+     <key>en</key>
+     <value>Cash registers are now closing.
+Take X-reports and compare with the data below.</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -650,16 +650,16 @@ Take X-reports and compare with the data below.</value>
      <name>CashTableAmountInBase</name>
      <id>96</id>
      <title>
-      <key>en</key>
-      <value>In Base</value>
+      <key>tr</key>
+      <value>Programa göre</value>
      </title>
      <title>
       <key>ru</key>
       <value>По программе</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Programa göre</value>
+      <key>en</key>
+      <value>In Base</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -714,16 +714,16 @@ Take X-reports and compare with the data below.</value>
      <name>CashTableAmountInRegister</name>
      <id>99</id>
      <title>
-      <key>en</key>
-      <value>In Register</value>
+      <key>tr</key>
+      <value>Yazar kasada</value>
      </title>
      <title>
       <key>ru</key>
       <value>По регистру</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Yazar kasada</value>
+      <key>en</key>
+      <value>In Register</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -1002,16 +1002,16 @@ Take X-reports and compare with the data below.</value>
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Cashboxes</value>
+    <key>tr</key>
+    <value>Nakit çekmece</value>
    </title>
    <title>
     <key>ru</key>
     <value>Денежные ящики</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Nakit çekmece</value>
+    <key>en</key>
+    <value>Cashboxes</value>
    </title>
    <extendedTooltip>
     <name>CashboxesPageExtendedTooltip</name>
@@ -1041,9 +1041,9 @@ Take X-reports and compare with the data below.</value>
     <name>TerminalLabel</name>
     <id>107</id>
     <title>
-     <key>en</key>
-     <value>Payment terminals are now closing.
-Take X-reports and compare with the data below.</value>
+     <key>tr</key>
+     <value>Banka pos terminaller kapanıyor.
+ X raporu alıp, aşağıdaki veri ile kıyaslayınız.</value>
     </title>
     <title>
      <key>ru</key>
@@ -1051,9 +1051,9 @@ Take X-reports and compare with the data below.</value>
  Необходимо снять предварительные отчеты и сверить с текущими данными системы.</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Banka pos terminaller kapanıyor.
- X raporu alıp, aşağıdaki veri ile kıyaslayınız.</value>
+     <key>en</key>
+     <value>Payment terminals are now closing.
+Take X-reports and compare with the data below.</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -1265,16 +1265,16 @@ Take X-reports and compare with the data below.</value>
      <name>TerminalTableAmountInBase</name>
      <id>129</id>
      <title>
-      <key>en</key>
-      <value>In Base</value>
+      <key>tr</key>
+      <value>Programa göre</value>
      </title>
      <title>
       <key>ru</key>
       <value>По программе</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Programa göre</value>
+      <key>en</key>
+      <value>In Base</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -1329,16 +1329,16 @@ Take X-reports and compare with the data below.</value>
      <name>TerminalTableAmountInTerminal</name>
      <id>132</id>
      <title>
-      <key>en</key>
-      <value>In Terminal</value>
+      <key>tr</key>
+      <value>Banka pos terminalinde</value>
      </title>
      <title>
       <key>ru</key>
       <value>По платежному терминалу</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Banka pos terminalinde</value>
+      <key>en</key>
+      <value>In Terminal</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -1617,16 +1617,16 @@ Take X-reports and compare with the data below.</value>
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Terminals</value>
+    <key>tr</key>
+    <value>Banka posları</value>
    </title>
    <title>
     <key>ru</key>
     <value>Терминалы</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Banka posları</value>
+    <key>en</key>
+    <value>Terminals</value>
    </title>
    <extendedTooltip>
     <name>TerminalsPageExtendedTooltip</name>
@@ -1800,16 +1800,16 @@ Take X-reports and compare with the data below.</value>
     <name>DecorationLabelChecking</name>
     <id>241</id>
     <title>
-     <key>en</key>
-     <value>Checking balance amounts</value>
+     <key>tr</key>
+     <value>Tutar bakiye kontrolü</value>
     </title>
     <title>
      <key>ru</key>
      <value>Проверка сумм по остатку</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Tutar bakiye kontrolü</value>
+     <key>en</key>
+     <value>Checking balance amounts</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -2067,16 +2067,16 @@ Take X-reports and compare with the data below.</value>
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Group of balance in base</value>
+      <key>tr</key>
+      <value>Programa göre bakiyeler grubu</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа остатков по программе</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Programa göre bakiyeler grubu</value>
+      <key>en</key>
+      <value>Group of balance in base</value>
      </title>
      <extendedTooltip>
       <name>GroupBalanceInBaseExtendedTooltip</name>
@@ -2651,16 +2651,16 @@ Take X-reports and compare with the data below.</value>
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Group of real balances</value>
+      <key>tr</key>
+      <value>Gerçek bakiyeler grubu</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа физических остатков</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Gerçek bakiyeler grubu</value>
+      <key>en</key>
+      <value>Group of real balances</value>
      </title>
      <extendedTooltip>
       <name>GroupBalanceRealExtendedTooltip</name>
@@ -2693,16 +2693,16 @@ Take X-reports and compare with the data below.</value>
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group of balance groups</value>
+     <key>tr</key>
+     <value>Grup bakiye grupları</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа группы остатков</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Grup bakiye grupları</value>
+     <key>en</key>
+     <value>Group of balance groups</value>
     </title>
     <extendedTooltip>
      <name>GroupOfBalanceGroupsExtendedTooltip</name>
@@ -2831,16 +2831,16 @@ Take X-reports and compare with the data below.</value>
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Balance</value>
+    <key>tr</key>
+    <value>Bakiye</value>
    </title>
    <title>
     <key>ru</key>
     <value>Остаток</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Bakiye</value>
+    <key>en</key>
+    <value>Balance</value>
    </title>
    <extendedTooltip>
     <name>BalancePageExtendedTooltip</name>
@@ -3017,11 +3017,11 @@ Take X-reports and compare with the data below.</value>
     <name>ClosingLabel</name>
     <id>162</id>
     <title>
-     <key>en</key>
-     <value>All data has been verified. You can close the session.
+     <key>tr</key>
+     <value>Tüm veriler doğrulanmıştır. Vardiya kapanabilir.
 
-1. Click on the button below to close the Consolidated Retail Sales document
-2. Take Z-reports</value>
+1. Konsolide perakende satış fişi kapatmak için aşağıdaki butona basınız
+2. Z rapor almak</value>
     </title>
     <title>
      <key>ru</key>
@@ -3031,11 +3031,11 @@ Take X-reports and compare with the data below.</value>
 2. Сформировать отчеты с гашением</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Tüm veriler doğrulanmıştır. Vardiya kapanabilir.
+     <key>en</key>
+     <value>All data has been verified. You can close the session.
 
-1. Konsolide perakende satış fişi kapatmak için aşağıdaki butona basınız
-2. Z rapor almak</value>
+1. Click on the button below to close the Consolidated Retail Sales document
+2. Take Z-reports</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -3123,16 +3123,16 @@ Take X-reports and compare with the data below.</value>
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Finish</value>
+    <key>tr</key>
+    <value>Bitiş</value>
    </title>
    <title>
     <key>ru</key>
     <value>Закончить</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Bitiş</value>
+    <key>en</key>
+    <value>Finish</value>
    </title>
    <extendedTooltip>
     <name>FinishPageExtendedTooltip</name>
@@ -3161,16 +3161,16 @@ Take X-reports and compare with the data below.</value>
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group of closing pages</value>
+   <key>tr</key>
+   <value>Grup kapanış sayfalar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа страниц закрытия</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup kapanış sayfalar</value>
+   <key>en</key>
+   <value>Group of closing pages</value>
   </title>
   <extendedTooltip>
    <name>ClosingPagesExtendedTooltip</name>
@@ -3271,16 +3271,16 @@ Take X-reports and compare with the data below.</value>
    <name>Close</name>
    <id>160</id>
    <title>
-    <key>en</key>
-    <value>Exit</value>
+    <key>tr</key>
+    <value>Çıkış</value>
    </title>
    <title>
     <key>ru</key>
     <value>Выход</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Çıkış</value>
+    <key>en</key>
+    <value>Exit</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -3336,16 +3336,16 @@ Take X-reports and compare with the data below.</value>
  <attributes>
   <name>Company</name>
   <title>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </title>
   <title>
    <key>ru</key>
    <value>Организация</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </title>
   <id>1</id>
   <valueType>
@@ -3361,16 +3361,16 @@ Take X-reports and compare with the data below.</value>
  <attributes>
   <name>Store</name>
   <title>
-   <key>en</key>
-   <value>Store</value>
+   <key>tr</key>
+   <value>Depo</value>
   </title>
   <title>
    <key>ru</key>
    <value>Склад</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Depo</value>
+   <key>en</key>
+   <value>Store</value>
   </title>
   <id>2</id>
   <valueType>
@@ -3386,16 +3386,16 @@ Take X-reports and compare with the data below.</value>
  <attributes>
   <name>Branch</name>
   <title>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </title>
   <title>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </title>
   <id>3</id>
   <valueType>
@@ -3411,16 +3411,16 @@ Take X-reports and compare with the data below.</value>
  <attributes>
   <name>Workstation</name>
   <title>
-   <key>en</key>
-   <value>Workstation</value>
+   <key>tr</key>
+   <value>Çalışma yeri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Рабочее место</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Çalışma yeri</value>
+   <key>en</key>
+   <value>Workstation</value>
   </title>
   <id>4</id>
   <valueType>
@@ -3436,16 +3436,16 @@ Take X-reports and compare with the data below.</value>
  <attributes>
   <name>CashAccount</name>
   <title>
-   <key>en</key>
-   <value>Cash account</value>
+   <key>tr</key>
+   <value>Kasa/Banka</value>
   </title>
   <title>
    <key>ru</key>
    <value>Касса/банк</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kasa/Banka</value>
+   <key>en</key>
+   <value>Cash account</value>
   </title>
   <id>5</id>
   <valueType>
@@ -3461,16 +3461,16 @@ Take X-reports and compare with the data below.</value>
  <attributes>
   <name>ConsolidatedRetailSales</name>
   <title>
-   <key>en</key>
-   <value>Consolidated retail sales</value>
+   <key>tr</key>
+   <value>Konsolide perakende satış fişleri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отчеты о розничных продажах</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Konsolide perakende satış fişleri</value>
+   <key>en</key>
+   <value>Consolidated retail sales</value>
   </title>
   <id>6</id>
   <valueType>
@@ -3487,16 +3487,16 @@ Take X-reports and compare with the data below.</value>
  <attributes>
   <name>ListOfWarningDocuments</name>
   <title>
-   <key>en</key>
-   <value>List of warning documents</value>
+   <key>tr</key>
+   <value>Uyarı evrakların listesi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Список документов с предупреждениями</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Uyarı evrakların listesi</value>
+   <key>en</key>
+   <value>List of warning documents</value>
   </title>
   <id>11</id>
   <valueType>
@@ -3571,16 +3571,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Consolidated retail sales</value>
+       <key>tr</key>
+       <value>Konsolide perakende satış fişleri</value>
       </content>
       <content>
        <key>ru</key>
        <value>Отчеты о розничных продажах</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Konsolide perakende satış fişleri</value>
+       <key>en</key>
+       <value>Consolidated retail sales</value>
       </content>
      </localValue>
     </title>
@@ -3596,16 +3596,16 @@ WHERE
  <attributes>
   <name>WarningDocumentsAreExisted</name>
   <title>
-   <key>en</key>
-   <value>Warning documents are existed</value>
+   <key>tr</key>
+   <value>Uyarı evraklar mevcut</value>
   </title>
   <title>
    <key>ru</key>
    <value>Есть документы с предупреждением</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Uyarı evraklar mevcut</value>
+   <key>en</key>
+   <value>Warning documents are existed</value>
   </title>
   <id>12</id>
   <valueType>
@@ -3621,16 +3621,16 @@ WHERE
  <attributes>
   <name>CashTable</name>
   <title>
-   <key>en</key>
-   <value>Cash table</value>
+   <key>tr</key>
+   <value>Naklit tablosu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица наличных денег</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Naklit tablosu</value>
+   <key>en</key>
+   <value>Cash table</value>
   </title>
   <id>13</id>
   <valueType>
@@ -3645,16 +3645,16 @@ WHERE
   <columns>
    <name>PaymentType</name>
    <title>
-    <key>en</key>
-    <value>Payment type</value>
+    <key>tr</key>
+    <value>Ödeme tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Вид оплаты</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ödeme tipi</value>
+    <key>en</key>
+    <value>Payment type</value>
    </title>
    <id>14</id>
    <valueType>
@@ -3670,16 +3670,16 @@ WHERE
   <columns>
    <name>AmountInBase</name>
    <title>
-    <key>en</key>
-    <value>Amount in base</value>
+    <key>tr</key>
+    <value>Programa göre tutar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма остатка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Programa göre tutar</value>
+    <key>en</key>
+    <value>Amount in base</value>
    </title>
    <id>15</id>
    <valueType>
@@ -3695,16 +3695,16 @@ WHERE
   <columns>
    <name>AmountInRegister</name>
    <title>
-    <key>en</key>
-    <value>Amount in register</value>
+    <key>tr</key>
+    <value>Kasada bakiye</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма по регистру</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kasada bakiye</value>
+    <key>en</key>
+    <value>Amount in register</value>
    </title>
    <id>16</id>
    <valueType>
@@ -3720,16 +3720,16 @@ WHERE
   <columns>
    <name>Operation</name>
    <title>
-    <key>en</key>
-    <value>Operation</value>
+    <key>tr</key>
+    <value>İşlem</value>
    </title>
    <title>
     <key>ru</key>
     <value>Операция</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>İşlem</value>
+    <key>en</key>
+    <value>Operation</value>
    </title>
    <id>25</id>
    <valueType>
@@ -3746,16 +3746,16 @@ WHERE
   <columns>
    <name>isReturn</name>
    <title>
-    <key>en</key>
-    <value>Is return</value>
+    <key>tr</key>
+    <value>Bu iade</value>
    </title>
    <title>
     <key>ru</key>
     <value>Это возврат</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Bu iade</value>
+    <key>en</key>
+    <value>Is return</value>
    </title>
    <id>36</id>
    <valueType>
@@ -3772,16 +3772,16 @@ WHERE
  <attributes>
   <name>CashConfirm</name>
   <title>
-   <key>en</key>
-   <value>I confirm the difference between actual data and accounting.</value>
+   <key>tr</key>
+   <value>Gerçek veri ile program verisi arasındaki farkına onay veriyorum.</value>
   </title>
   <title>
    <key>ru</key>
    <value>Я подтверждаю разницу между учетными и фактическими данными</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Gerçek veri ile program verisi arasındaki farkına onay veriyorum.</value>
+   <key>en</key>
+   <value>I confirm the difference between actual data and accounting.</value>
   </title>
   <id>17</id>
   <valueType>
@@ -3797,16 +3797,16 @@ WHERE
  <attributes>
   <name>TerminalTable</name>
   <title>
-   <key>en</key>
-   <value>Terminal table</value>
+   <key>tr</key>
+   <value>Banka pos terminal tablosu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица платежных терминалов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Banka pos terminal tablosu</value>
+   <key>en</key>
+   <value>Terminal table</value>
   </title>
   <id>18</id>
   <valueType>
@@ -3821,16 +3821,16 @@ WHERE
   <columns>
    <name>PaymentType</name>
    <title>
-    <key>en</key>
-    <value>Payment type</value>
+    <key>tr</key>
+    <value>Ödeme tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Вид оплаты</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ödeme tipi</value>
+    <key>en</key>
+    <value>Payment type</value>
    </title>
    <id>19</id>
    <valueType>
@@ -3846,16 +3846,16 @@ WHERE
   <columns>
    <name>PaymentTerminal</name>
    <title>
-    <key>en</key>
-    <value>Payment terminal</value>
+    <key>tr</key>
+    <value>Ödeme terminali</value>
    </title>
    <title>
     <key>ru</key>
     <value>Платежный терминал</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ödeme terminali</value>
+    <key>en</key>
+    <value>Payment terminal</value>
    </title>
    <id>20</id>
    <valueType>
@@ -3871,16 +3871,16 @@ WHERE
   <columns>
    <name>AmountInBase</name>
    <title>
-    <key>en</key>
-    <value>Amount in base</value>
+    <key>tr</key>
+    <value>Programa göre tutar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма остатка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Programa göre tutar</value>
+    <key>en</key>
+    <value>Amount in base</value>
    </title>
    <id>21</id>
    <valueType>
@@ -3896,16 +3896,16 @@ WHERE
   <columns>
    <name>AmountInTerminal</name>
    <title>
-    <key>en</key>
-    <value>Amount in terminal</value>
+    <key>tr</key>
+    <value>Banka post terminalindeki tutar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма по платежному терминалу</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Banka post terminalindeki tutar</value>
+    <key>en</key>
+    <value>Amount in terminal</value>
    </title>
    <id>22</id>
    <valueType>
@@ -3921,16 +3921,16 @@ WHERE
   <columns>
    <name>Operation</name>
    <title>
-    <key>en</key>
-    <value>Operation</value>
+    <key>tr</key>
+    <value>İşlem</value>
    </title>
    <title>
     <key>ru</key>
     <value>Операция</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>İşlem</value>
+    <key>en</key>
+    <value>Operation</value>
    </title>
    <id>26</id>
    <valueType>
@@ -3947,16 +3947,16 @@ WHERE
   <columns>
    <name>isReturn</name>
    <title>
-    <key>en</key>
-    <value>Is return</value>
+    <key>tr</key>
+    <value>Bu iade</value>
    </title>
    <title>
     <key>ru</key>
     <value>Это возврат</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Bu iade</value>
+    <key>en</key>
+    <value>Is return</value>
    </title>
    <id>37</id>
    <valueType>
@@ -3973,16 +3973,16 @@ WHERE
  <attributes>
   <name>TerminalConfirm</name>
   <title>
-   <key>en</key>
-   <value>I confirm the difference between actual data and accounting.</value>
+   <key>tr</key>
+   <value>Gerçek veri ile program verisi arasındaki farkına onay veriyorum.</value>
   </title>
   <title>
    <key>ru</key>
    <value>Я подтверждаю разницу между учетными и фактическими данными</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Gerçek veri ile program verisi arasındaki farkına onay veriyorum.</value>
+   <key>en</key>
+   <value>I confirm the difference between actual data and accounting.</value>
   </title>
   <id>23</id>
   <valueType>
@@ -3998,16 +3998,16 @@ WHERE
  <attributes>
   <name>Currency</name>
   <title>
-   <key>en</key>
-   <value>Currency</value>
+   <key>tr</key>
+   <value>Döviz</value>
   </title>
   <title>
    <key>ru</key>
    <value>Валюты</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Döviz</value>
+   <key>en</key>
+   <value>Currency</value>
   </title>
   <id>24</id>
   <valueType>
@@ -4023,16 +4023,16 @@ WHERE
  <attributes>
   <name>BalanceBegin</name>
   <title>
-   <key>en</key>
-   <value>At the begin</value>
+   <key>tr</key>
+   <value>Devreden</value>
   </title>
   <title>
    <key>ru</key>
    <value>Начальный остаток</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Devreden</value>
+   <key>en</key>
+   <value>At the begin</value>
   </title>
   <id>27</id>
   <valueType>
@@ -4048,16 +4048,16 @@ WHERE
  <attributes>
   <name>BalanceCashIn</name>
   <title>
-   <key>en</key>
-   <value>Cash In</value>
+   <key>tr</key>
+   <value>Para girişi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Внесение</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Para girişi</value>
+   <key>en</key>
+   <value>Cash In</value>
   </title>
   <id>28</id>
   <valueType>
@@ -4073,16 +4073,16 @@ WHERE
  <attributes>
   <name>BalanceCashOut</name>
   <title>
-   <key>en</key>
-   <value>Cash Out</value>
+   <key>tr</key>
+   <value>Nakit çıkışı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Изъятие</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Nakit çıkışı</value>
+   <key>en</key>
+   <value>Cash Out</value>
   </title>
   <id>29</id>
   <valueType>
@@ -4098,16 +4098,16 @@ WHERE
  <attributes>
   <name>BalanceEnd</name>
   <title>
-   <key>en</key>
-   <value>At the end</value>
+   <key>tr</key>
+   <value>Dönem sonu</value>
   </title>
   <title>
    <key>ru</key>
    <value>На конец</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dönem sonu</value>
+   <key>en</key>
+   <value>At the end</value>
   </title>
   <id>30</id>
   <valueType>
@@ -4123,16 +4123,16 @@ WHERE
  <attributes>
   <name>BalanceReal</name>
   <title>
-   <key>en</key>
-   <value>Real cash</value>
+   <key>tr</key>
+   <value>Gerçek nakit</value>
   </title>
   <title>
    <key>ru</key>
    <value>Физический остаток наличных денег</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Gerçek nakit</value>
+   <key>en</key>
+   <value>Real cash</value>
   </title>
   <id>31</id>
   <valueType>
@@ -4148,16 +4148,16 @@ WHERE
  <attributes>
   <name>BalanceConfirm</name>
   <title>
-   <key>en</key>
-   <value>I confirm the difference between actual data and accounting.</value>
+   <key>tr</key>
+   <value>Gerçek veri ile program verisi arasındaki farkına onay veriyorum.</value>
   </title>
   <title>
    <key>ru</key>
    <value>Я подтверждаю разницу между учетными и фактическими данными</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Gerçek veri ile program verisi arasındaki farkına onay veriyorum.</value>
+   <key>en</key>
+   <value>I confirm the difference between actual data and accounting.</value>
   </title>
   <id>32</id>
   <valueType>
@@ -4173,16 +4173,16 @@ WHERE
  <attributes>
   <name>OpeningDate</name>
   <title>
-   <key>en</key>
-   <value>Opening date</value>
+   <key>tr</key>
+   <value>Açılış tarihi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дата открытия</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Açılış tarihi</value>
+   <key>en</key>
+   <value>Opening date</value>
   </title>
   <id>33</id>
   <valueType>
@@ -4199,16 +4199,16 @@ WHERE
  <attributes>
   <name>BalanceRealIn</name>
   <title>
-   <key>en</key>
-   <value>Real cash In</value>
+   <key>tr</key>
+   <value>Gerçek nakit girişi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Физическое внесение</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Gerçek nakit girişi</value>
+   <key>en</key>
+   <value>Real cash In</value>
   </title>
   <id>38</id>
   <valueType>
@@ -4224,16 +4224,16 @@ WHERE
  <attributes>
   <name>BalanceRealOut</name>
   <title>
-   <key>en</key>
-   <value>Real cash out</value>
+   <key>tr</key>
+   <value>Gerçek nakit çıkışı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Физическая сумма изъятия</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Gerçek nakit çıkışı</value>
+   <key>en</key>
+   <value>Real cash out</value>
   </title>
   <id>39</id>
   <valueType>
@@ -4249,16 +4249,16 @@ WHERE
  <attributes>
   <name>BalanceRealBedin</name>
   <title>
-   <key>en</key>
-   <value>Real begin</value>
+   <key>tr</key>
+   <value>Gerçek ilk tarih bakiye</value>
   </title>
   <title>
    <key>ru</key>
    <value>Физический начальный остаток</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Gerçek ilk tarih bakiye</value>
+   <key>en</key>
+   <value>Real begin</value>
   </title>
   <id>40</id>
   <valueType>
@@ -4274,16 +4274,16 @@ WHERE
  <formCommands>
   <name>CloseSession</name>
   <title>
-   <key>en</key>
-   <value>Close session</value>
+   <key>tr</key>
+   <value>Seans kapat</value>
   </title>
   <title>
    <key>ru</key>
    <value>Закрыть сессию</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seans kapat</value>
+   <key>en</key>
+   <value>Close session</value>
   </title>
   <id>1</id>
   <use>
@@ -4299,16 +4299,16 @@ WHERE
  <formCommands>
   <name>DeleteDoc</name>
   <title>
-   <key>en</key>
-   <value>Mark to delete</value>
+   <key>tr</key>
+   <value>Silmek için işaretle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Пометить на удаление</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Silmek için işaretle</value>
+   <key>en</key>
+   <value>Mark to delete</value>
   </title>
   <id>3</id>
   <use>
@@ -4328,16 +4328,16 @@ WHERE
  <formCommands>
   <name>EditDoc</name>
   <title>
-   <key>en</key>
-   <value>Edit document</value>
+   <key>tr</key>
+   <value>Evrakı değiştir</value>
   </title>
   <title>
    <key>ru</key>
    <value>Изменить документ</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evrakı değiştir</value>
+   <key>en</key>
+   <value>Edit document</value>
   </title>
   <id>4</id>
   <use>
@@ -4357,16 +4357,16 @@ WHERE
  <formCommands>
   <name>PreviousPage</name>
   <title>
-   <key>en</key>
-   <value>Previous page</value>
+   <key>tr</key>
+   <value>Önceki</value>
   </title>
   <title>
    <key>ru</key>
    <value>Предыдущая страница</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Önceki</value>
+   <key>en</key>
+   <value>Previous page</value>
   </title>
   <id>5</id>
   <use>
@@ -4386,16 +4386,16 @@ WHERE
  <formCommands>
   <name>ToCurrent</name>
   <title>
-   <key>en</key>
-   <value>To current</value>
+   <key>tr</key>
+   <value>Geçerli olana</value>
   </title>
   <title>
    <key>ru</key>
    <value>В текущую</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Geçerli olana</value>
+   <key>en</key>
+   <value>To current</value>
   </title>
   <id>6</id>
   <use>

@@ -67,7 +67,7 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>HTML</value>
    </title>
    <title>
@@ -75,7 +75,7 @@
     <value>HTML</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>HTML</value>
    </title>
    <extendedTooltip>
@@ -159,16 +159,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Source</value>
+    <key>tr</key>
+    <value>Kaynak</value>
    </title>
    <title>
     <key>ru</key>
     <value>Источник</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kaynak</value>
+    <key>en</key>
+    <value>Source</value>
    </title>
    <extendedTooltip>
     <name>GroupTextExtendedTooltip</name>
@@ -197,16 +197,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group main</value>
+   <key>tr</key>
+   <value>Group genel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа основная</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Group genel</value>
+   <key>en</key>
+   <value>Group main</value>
   </title>
   <extendedTooltip>
    <name>GroupMainExtendedTooltip</name>
@@ -258,7 +258,7 @@
  <attributes>
   <name>HTML</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>HTML</value>
   </title>
   <title>
@@ -266,7 +266,7 @@
    <value>HTML</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>HTML</value>
   </title>
   <id>1</id>
@@ -284,16 +284,16 @@
  <attributes>
   <name>Type</name>
   <title>
-   <key>en</key>
-   <value>Type</value>
+   <key>tr</key>
+   <value>Tip</value>
   </title>
   <title>
    <key>ru</key>
    <value>Вид</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tip</value>
+   <key>en</key>
+   <value>Type</value>
   </title>
   <id>2</id>
   <valueType>
@@ -309,16 +309,16 @@
  <attributes>
   <name>SrcUUID</name>
   <title>
-   <key>en</key>
-   <value>Src UUID</value>
+   <key>tr</key>
+   <value>Soruce UUID</value>
   </title>
   <title>
    <key>ru</key>
    <value>Src UUID</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Soruce UUID</value>
+   <key>en</key>
+   <value>Src UUID</value>
   </title>
   <id>3</id>
   <valueType>
@@ -334,16 +334,16 @@
  <attributes>
   <name>AddInfoAddress</name>
   <title>
-   <key>en</key>
-   <value>Add info address</value>
+   <key>tr</key>
+   <value>Adres ek bilgileri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дополнительная информация адреса</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Adres ek bilgileri</value>
+   <key>en</key>
+   <value>Add info address</value>
   </title>
   <id>4</id>
   <valueType>

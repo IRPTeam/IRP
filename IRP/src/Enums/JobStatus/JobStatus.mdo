@@ -7,83 +7,83 @@
  </producedTypes>
  <name>JobStatus</name>
  <synonym>
-  <key>en</key>
-  <value>Job status</value>
+  <key>tr</key>
+  <value>Görev statüsü</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Статус задания</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Görev statüsü</value>
+  <key>en</key>
+  <value>Job status</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="0b47550c-96af-411e-af14-7c491b035d56">
   <name>Completed</name>
   <synonym>
-   <key>en</key>
-   <value>Completed</value>
+   <key>tr</key>
+   <value>Tamamlandı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Завершен</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tamamlandı</value>
+   <key>en</key>
+   <value>Completed</value>
   </synonym>
  </enumValues>
  <enumValues uuid="7741b97c-2c54-433b-a403-b8c22518957d">
   <name>Wait</name>
   <synonym>
-   <key>en</key>
-   <value>Wait</value>
+   <key>tr</key>
+   <value>Devam ediyor</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ожидание</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Devam ediyor</value>
+   <key>en</key>
+   <value>Wait</value>
   </synonym>
  </enumValues>
  <enumValues uuid="ccf5e52d-7fb5-41c2-b9b7-329e82ad62d2">
   <name>Failed</name>
   <synonym>
-   <key>en</key>
-   <value>Failed</value>
+   <key>tr</key>
+   <value>Başarısız</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Не успешен</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Başarısız</value>
+   <key>en</key>
+   <value>Failed</value>
   </synonym>
  </enumValues>
  <enumValues uuid="b0d590b0-d9a9-40a0-a697-e3533008ab31">
   <name>Active</name>
   <synonym>
-   <key>en</key>
-   <value>Active</value>
+   <key>tr</key>
+   <value>Aktif</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Активный</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Aktif</value>
+   <key>en</key>
+   <value>Active</value>
   </synonym>
  </enumValues>
  <enumValues uuid="bd23f04d-3bde-4117-ab5a-23c96316803c">
   <name>Canceled</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Canceled</value>
   </synonym>
   <synonym>
@@ -91,23 +91,23 @@
    <value>Canceled</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Canceled</value>
   </synonym>
  </enumValues>
  <enumValues uuid="d8150dd1-afc8-4975-9545-e4bc74bc52b9">
   <name>Pause</name>
   <synonym>
-   <key>en</key>
-   <value>Pause</value>
+   <key>tr</key>
+   <value>Duraklat</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Пауза</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Duraklat</value>
+   <key>en</key>
+   <value>Pause</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

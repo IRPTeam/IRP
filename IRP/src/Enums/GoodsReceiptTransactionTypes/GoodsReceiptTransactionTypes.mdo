@@ -7,92 +7,92 @@
  </producedTypes>
  <name>GoodsReceiptTransactionTypes</name>
  <synonym>
-  <key>en</key>
-  <value>Goods receipt transaction types</value>
+  <key>tr</key>
+  <value>alım irsaliye işlem tipleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Операции приходных товарных накладных</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>alım irsaliye işlem tipleri</value>
+  <key>en</key>
+  <value>Goods receipt transaction types</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="92719e3c-e09b-4495-b985-8839ed4c6244">
   <name>InventoryTransfer</name>
   <synonym>
-   <key>en</key>
-   <value>Inventory transfer</value>
+   <key>tr</key>
+   <value>Depo transfer fişi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Перемещение товаров</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Depo transfer fişi</value>
+   <key>en</key>
+   <value>Inventory transfer</value>
   </synonym>
  </enumValues>
  <enumValues uuid="2706b4ed-b7d9-44d7-8c14-f5dc4f3dda97">
   <name>Purchase</name>
   <synonym>
-   <key>en</key>
-   <value>Purchase</value>
+   <key>tr</key>
+   <value>Alımlar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Закупки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Alımlar</value>
+   <key>en</key>
+   <value>Purchase</value>
   </synonym>
  </enumValues>
  <enumValues uuid="68c878be-c77b-48c3-80df-878110430bf3">
   <name>ReturnFromCustomer</name>
   <synonym>
-   <key>en</key>
-   <value>Return from customer</value>
+   <key>tr</key>
+   <value>Satış iadesi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Возврат покупателя</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Satış iadesi</value>
+   <key>en</key>
+   <value>Return from customer</value>
   </synonym>
  </enumValues>
  <enumValues uuid="82f356e4-55be-4b1b-a7c2-019851911a1d">
   <name>ReceiptFromConsignor</name>
   <synonym>
-   <key>en</key>
-   <value>Receipt from consignor</value>
+   <key>tr</key>
+   <value>Konsinyeye verenden gelen</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Приход товара от комитента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Konsinyeye verenden gelen</value>
+   <key>en</key>
+   <value>Receipt from consignor</value>
   </synonym>
  </enumValues>
  <enumValues uuid="30bdec1c-11d9-477d-9ad8-2b6ecad7de2c">
   <name>ReturnFromTradeAgent</name>
   <synonym>
-   <key>en</key>
-   <value>Return from trade agent</value>
+   <key>tr</key>
+   <value>Konsinyeye alandan iade</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Возврат от комиссионера</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Konsinyeye alandan iade</value>
+   <key>en</key>
+   <value>Return from trade agent</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

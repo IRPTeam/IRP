@@ -5,47 +5,47 @@
  </producedTypes>
  <name>ReportOptions</name>
  <synonym>
-  <key>en</key>
-  <value>Report options</value>
+  <key>tr</key>
+  <value>Rapor seçenekleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Варианты отчета</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Rapor seçenekleri</value>
+  <key>en</key>
+  <value>Report options</value>
  </synonym>
  <defaultSaveForm>SettingsStorage.ReportOptions.Form.SaveForm</defaultSaveForm>
  <defaultLoadForm>SettingsStorage.ReportOptions.Form.LoadForm</defaultLoadForm>
  <forms uuid="f23f5e01-5a16-4494-ab71-37a3e2cfbf44">
   <name>SaveForm</name>
   <synonym>
-   <key>en</key>
-   <value>Save form</value>
+   <key>tr</key>
+   <value>Form kaydet</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сохранить форму</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Form kaydet</value>
+   <key>en</key>
+   <value>Save form</value>
   </synonym>
  </forms>
  <forms uuid="93fb0566-9a73-45da-835b-0c2811c50bc0">
   <name>LoadForm</name>
   <synonym>
-   <key>en</key>
-   <value>Load form</value>
+   <key>tr</key>
+   <value>Yükleme kaynağı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Загрузить форму</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Yükleme kaynağı</value>
+   <key>en</key>
+   <value>Load form</value>
   </synonym>
  </forms>
 </mdclass:SettingsStorage>

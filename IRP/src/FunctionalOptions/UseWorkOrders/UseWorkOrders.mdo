@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="16ee6e2a-19d8-4a40-8298-13a12770440e">
  <name>UseWorkOrders</name>
  <synonym>
-  <key>en</key>
-  <value>Use work orders</value>
+  <key>tr</key>
+  <value>Kullanmak - İş emirleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать заказ наряды</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kullanmak - İş emirleri</value>
+  <key>en</key>
+  <value>Use work orders</value>
  </synonym>
  <location>Constant.UseWorkOrders</location>
  <privilegedGetMode>true</privilegedGetMode>

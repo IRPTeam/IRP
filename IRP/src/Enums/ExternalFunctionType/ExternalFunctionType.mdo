@@ -7,23 +7,23 @@
  </producedTypes>
  <name>ExternalFunctionType</name>
  <synonym>
-  <key>en</key>
-  <value>External function type</value>
+  <key>tr</key>
+  <value>Dış fonksiyon tipi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип внешней функции</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Dış fonksiyon tipi</value>
+  <key>en</key>
+  <value>External function type</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="c499e7b4-ff9e-4de8-8703-b76cc226b606">
   <name>Eval</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Eval</value>
   </synonym>
   <synonym>
@@ -31,29 +31,29 @@
    <value>Выполнить</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Eval</value>
   </synonym>
  </enumValues>
  <enumValues uuid="94dbb95f-6d1b-48cc-8b9b-b97808d23472">
   <name>RegExp</name>
   <synonym>
-   <key>en</key>
-   <value>Reg exp</value>
+   <key>tr</key>
+   <value>RegExp</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Регулярные выражения</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>RegExp</value>
+   <key>en</key>
+   <value>Reg exp</value>
   </synonym>
  </enumValues>
  <enumValues uuid="251a7a5c-963d-4838-a444-68415369d7f3">
   <name>Execute</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Execute</value>
   </synonym>
   <synonym>
@@ -61,23 +61,23 @@
    <value>Выполнить</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Execute</value>
   </synonym>
  </enumValues>
  <enumValues uuid="b3d16ef0-4733-4912-ab40-d7a4e85f54ed">
   <name>ReturnResultByRegExpMatch</name>
   <synonym>
-   <key>en</key>
-   <value>Return result by reg exp match</value>
+   <key>tr</key>
+   <value>RegExp'e göre sonucu iade et</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вернуть результат по совпадению RegExp </value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>RegExp'e göre sonucu iade et</value>
+   <key>en</key>
+   <value>Return result by reg exp match</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

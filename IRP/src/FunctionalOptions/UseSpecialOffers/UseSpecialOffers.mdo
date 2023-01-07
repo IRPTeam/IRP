@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f4b8b3ca-8d13-4e4d-9756-f8f1f331d9cf">
  <name>UseSpecialOffers</name>
  <synonym>
-  <key>en</key>
-  <value>Use special offers</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Kampanyalar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать скидки</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Kampanyalar</value>
+  <key>en</key>
+  <value>Use special offers</value>
  </synonym>
  <location>Constant.UseSpecialOffers</location>
  <privilegedGetMode>true</privilegedGetMode>

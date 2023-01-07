@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeOrders</name>
  <synonym>
-  <key>en</key>
-  <value>Type orders</value>
+  <key>tr</key>
+  <value>Tip siparişler</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип заказы</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tip siparişler</value>
+  <key>en</key>
+  <value>Type orders</value>
  </synonym>
  <type>
   <types>DocumentRef.SalesReturnOrder</types>

@@ -2,16 +2,16 @@
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b0d6cb4e-9ca9-4e7e-8ddd-09cc63ce46c5">
  <name>Posting_RowID</name>
  <synonym>
-  <key>en</key>
-  <value>Posting Row ID</value>
+  <key>tr</key>
+  <value>Satır ID kaydederken</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>При проведении Row ID</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Satır ID kaydederken</value>
+  <key>en</key>
+  <value>Posting Row ID</value>
  </synonym>
  <source>
   <types>DocumentObject</types>

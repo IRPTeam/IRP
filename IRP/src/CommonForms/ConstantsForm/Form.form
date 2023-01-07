@@ -1544,16 +1544,16 @@
  <formCommands>
   <name>UpdateInterface</name>
   <title>
-   <key>en</key>
-   <value>Update interface</value>
+   <key>tr</key>
+   <value>Arayüz güncelle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить интерфейс</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Arayüz güncelle</value>
+   <key>en</key>
+   <value>Update interface</value>
   </title>
   <id>1</id>
   <use>

@@ -6,23 +6,23 @@
  </producedTypes>
  <name>ProductionWorkspace</name>
  <synonym>
-  <key>en</key>
-  <value>Production workspace</value>
+  <key>tr</key>
+  <value>Üretim masaüstü</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Рабочее место мастера</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Üretim masaüstü</value>
+  <key>en</key>
+  <value>Production workspace</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.ProductionWorkspace.Form.Form</defaultForm>
  <forms uuid="d07bc542-b86a-4fb0-b495-576154e0a354">
   <name>Form</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -30,7 +30,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>

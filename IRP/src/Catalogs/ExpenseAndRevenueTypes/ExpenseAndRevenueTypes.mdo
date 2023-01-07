@@ -9,16 +9,16 @@
  </producedTypes>
  <name>ExpenseAndRevenueTypes</name>
  <synonym>
-  <key>en</key>
-  <value>Expense and revenue types</value>
+  <key>tr</key>
+  <value>Gider ve gelir tipleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Статьи доходов и расходов</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Gider ve gelir tipleri</value>
+  <key>en</key>
+  <value>Expense and revenue types</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -76,16 +76,16 @@
   <dataHistory>Use</dataHistory>
   <name>Parent</name>
   <synonym>
-   <key>en</key>
-   <value>Parent</value>
+   <key>tr</key>
+   <value>Üst öğe</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Родитель</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Üst öğe</value>
+   <key>en</key>
+   <value>Parent</value>
   </synonym>
   <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
@@ -146,16 +146,16 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>en</key>
-  <value>Expense and revenue type</value>
+  <key>tr</key>
+  <value>Gider ve gelir türü</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Статья доходов и расходов</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Gider ve gelir türü</value>
+  <key>en</key>
+  <value>Expense and revenue type</value>
  </objectPresentation>
  <hierarchical>true</hierarchical>
  <hierarchyType>HierarchyOfItems</hierarchyType>
@@ -175,16 +175,16 @@
  <attributes uuid="77e74b7d-9037-4fde-9b7e-1272cb503bc9">
   <name>IsExpense</name>
   <synonym>
-   <key>en</key>
-   <value>Is expense</value>
+   <key>tr</key>
+   <value>Gider tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Это статья затрат</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Gider tipi</value>
+   <key>en</key>
+   <value>Is expense</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -199,16 +199,16 @@
  <attributes uuid="b6b22093-33ea-4a8b-8004-474ebddcaa73">
   <name>IsRevenue</name>
   <synonym>
-   <key>en</key>
-   <value>Is revenue</value>
+   <key>tr</key>
+   <value>Gelir tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Это статья доходов</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Gelir tipi</value>
+   <key>en</key>
+   <value>Is revenue</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -223,16 +223,16 @@
  <attributes uuid="6f12f709-2908-4334-98f8-6b2d0257c0dc">
   <name>IsFinancialMovementType</name>
   <synonym>
-   <key>en</key>
-   <value>Is financial movement type</value>
+   <key>tr</key>
+   <value>Finans hareket tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Это статья движений денежных средств</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Finans hareket tipi</value>
+   <key>en</key>
+   <value>Is financial movement type</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -251,30 +251,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <attributes uuid="8be41110-2d11-47c9-97f6-3b183be5a56b">
    <name>Property</name>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -287,16 +287,16 @@
   <attributes uuid="9ab0d71e-c10f-443e-b7d3-04b8e94c04c4">
    <name>Value</name>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -314,16 +314,16 @@
  <forms uuid="40b038de-71f9-4410-8247-b962e131b497">
   <name>ItemForm</name>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -331,16 +331,16 @@
  <forms uuid="3aef72b9-a6c0-41e9-b8b3-fd42b72dfee5">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -348,16 +348,16 @@
  <forms uuid="2fa4d0d1-dcb5-4887-87dd-96f14ec6e2b7">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

@@ -207,16 +207,16 @@
  <attributes>
   <name>AddressResult</name>
   <title>
-   <key>en</key>
-   <value>Address result</value>
+   <key>tr</key>
+   <value>Adres sonucu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Адрес результата</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Adres sonucu</value>
+   <key>en</key>
+   <value>Address result</value>
   </title>
   <id>2</id>
   <valueType>
@@ -233,29 +233,29 @@
  <formCommands>
   <name>SetSettings</name>
   <title>
-   <key>en</key>
-   <value>Set settings</value>
+   <key>tr</key>
+   <value>Ayarları belirle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarları belirle</value>
+   <key>en</key>
+   <value>Set settings</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>en</key>
-   <value>Set settings</value>
+   <key>tr</key>
+   <value>Ayarları belirle</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Заполнить настройки</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Ayarları belirle</value>
+   <key>en</key>
+   <value>Set settings</value>
   </toolTip>
   <use>
    <common>true</common>

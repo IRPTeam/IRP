@@ -2,15 +2,15 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="99987ca0-849e-48c5-8b0e-95f1e0624acd">
  <name>Work</name>
  <synonym>
-  <key>en</key>
-  <value>Work</value>
+  <key>tr</key>
+  <value>Çalışma</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Работа</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Çalışma</value>
+  <key>en</key>
+  <value>Work</value>
  </synonym>
 </mdclass:CommonPicture>

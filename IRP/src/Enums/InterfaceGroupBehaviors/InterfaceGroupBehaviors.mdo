@@ -7,53 +7,53 @@
  </producedTypes>
  <name>InterfaceGroupBehaviors</name>
  <synonym>
-  <key>en</key>
-  <value>Interface group behaviors</value>
+  <key>tr</key>
+  <value>Arayüz grup görüntüleme tipleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Поведение группы</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Arayüz grup görüntüleme tipleri</value>
+  <key>en</key>
+  <value>Interface group behaviors</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="9d4d2e81-23d4-4889-8081-5a36a3787f2d">
   <name>Usual</name>
   <synonym>
-   <key>en</key>
-   <value>Usual</value>
+   <key>tr</key>
+   <value>Genel</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Обычная</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Genel</value>
+   <key>en</key>
+   <value>Usual</value>
   </synonym>
  </enumValues>
  <enumValues uuid="f382a5ce-c57f-46a0-a43e-3ccc0a313b1d">
   <name>Collapsible</name>
   <synonym>
-   <key>en</key>
-   <value>Collapsible</value>
+   <key>tr</key>
+   <value>Açılır panel</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сворачиваемая</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Açılır panel</value>
+   <key>en</key>
+   <value>Collapsible</value>
   </synonym>
  </enumValues>
  <enumValues uuid="533bd7a9-273c-4b87-8889-7c7e0b6cfd15">
   <name>PopUp</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Pop up</value>
   </synonym>
   <synonym>
@@ -61,7 +61,7 @@
    <value>Всплывающая</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Pop up</value>
   </synonym>
  </enumValues>

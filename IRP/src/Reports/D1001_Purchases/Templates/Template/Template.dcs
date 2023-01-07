@@ -11,16 +11,16 @@
 			<field>Company</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Company</v8:content>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Şirket</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Организация</v8:content>
 				</v8:item>
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Şirket</v8:content>
+					<v8:lang>en</v8:lang>
+					<v8:content>Company</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -32,16 +32,16 @@
 			<field>Branch</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Branch</v8:content>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Şube</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Структурное подразделение</v8:content>
 				</v8:item>
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Şube</v8:content>
+					<v8:lang>en</v8:lang>
+					<v8:content>Branch</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -53,16 +53,16 @@
 			<field>CurrencyMovementType</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Multi currency movement type</v8:content>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Çoklu döviz kırılım tipi</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Вид мультивалютной аналитики</v8:content>
 				</v8:item>
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Çoklu döviz kırılım tipi</v8:content>
+					<v8:lang>en</v8:lang>
+					<v8:content>Multi currency movement type</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -74,16 +74,16 @@
 			<field>Currency</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Currency</v8:content>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Döviz</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Валюта</v8:content>
 				</v8:item>
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Döviz</v8:content>
+					<v8:lang>en</v8:lang>
+					<v8:content>Currency</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -95,16 +95,16 @@
 			<field>Invoice</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Invoice</v8:content>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Fatura</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Инвойс</v8:content>
 				</v8:item>
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Fatura</v8:content>
+					<v8:lang>en</v8:lang>
+					<v8:content>Invoice</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -116,16 +116,16 @@
 			<field>ItemKey</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Item key</v8:content>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Varyant</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Характеристика</v8:content>
 				</v8:item>
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Varyant</v8:content>
+					<v8:lang>en</v8:lang>
+					<v8:content>Item key</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -137,16 +137,16 @@
 			<field>QuantityTurnover</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Turnover</v8:content>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Miktar</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Количество</v8:content>
 				</v8:item>
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Miktar</v8:content>
+					<v8:lang>en</v8:lang>
+					<v8:content>Quantity Turnover</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -155,16 +155,16 @@
 			<field>AmountTurnover</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Amount Turnover</v8:content>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Tutar</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Сумма</v8:content>
 				</v8:item>
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Tutar</v8:content>
+					<v8:lang>en</v8:lang>
+					<v8:content>Amount Turnover</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -173,16 +173,16 @@
 			<field>NetAmountTurnover</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Net amount Turnover</v8:content>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Net tutar</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Сумма без налогов</v8:content>
 				</v8:item>
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Net tutar</v8:content>
+					<v8:lang>en</v8:lang>
+					<v8:content>Net amount Turnover</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -191,16 +191,16 @@
 			<field>OffersAmountTurnover</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Offers amount Turnover</v8:content>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Iskonto tutarı</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Сумма скидки</v8:content>
 				</v8:item>
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Iskonto tutarı</v8:content>
+					<v8:lang>en</v8:lang>
+					<v8:content>Offers amount Turnover</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -209,16 +209,16 @@
 			<field>RowKey</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Row key</v8:content>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Satır anahtarı</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Ключ строки</v8:content>
 				</v8:item>
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Satır anahtarı</v8:content>
+					<v8:lang>en</v8:lang>
+					<v8:content>Row key</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -227,16 +227,16 @@
 			<field>Item</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Item</v8:content>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Malzeme</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Номенклатура</v8:content>
 				</v8:item>
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Malzeme</v8:content>
+					<v8:lang>en</v8:lang>
+					<v8:content>Item</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -245,16 +245,16 @@
 			<field>Recorder</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Recorder</v8:content>
+					<v8:lang>tr</v8:lang>
+					<v8:content>İşlem evrakı</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Регистратор</v8:content>
 				</v8:item>
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>İşlem evrakı</v8:content>
+					<v8:lang>en</v8:lang>
+					<v8:content>Recorder</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -267,16 +267,16 @@
 			<field>DayPeriod</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Period, day</v8:content>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dönem, gün</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Период, день</v8:content>
 				</v8:item>
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dönem, gün</v8:content>
+					<v8:lang>en</v8:lang>
+					<v8:content>Period, day</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -288,7 +288,7 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>en</v8:lang>
+							<v8:lang>tr</v8:lang>
 							<v8:content>DF=dd.MM.yyyy</v8:content>
 						</v8:item>
 						<v8:item>
@@ -296,7 +296,7 @@
 							<v8:content>DF=dd.MM.yyyy</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
+							<v8:lang>en</v8:lang>
 							<v8:content>DF=dd.MM.yyyy</v8:content>
 						</v8:item>
 					</dcscor:value>
@@ -308,16 +308,16 @@
 			<field>WeekPeriod</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Period, week</v8:content>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dönem, hafta</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Период, неделя</v8:content>
 				</v8:item>
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dönem, hafta</v8:content>
+					<v8:lang>en</v8:lang>
+					<v8:content>Period, week</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -329,7 +329,7 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>en</v8:lang>
+							<v8:lang>tr</v8:lang>
 							<v8:content>DF=dd.MM.yyyy</v8:content>
 						</v8:item>
 						<v8:item>
@@ -337,7 +337,7 @@
 							<v8:content>DF=dd.MM.yyyy</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
+							<v8:lang>en</v8:lang>
 							<v8:content>DF=dd.MM.yyyy</v8:content>
 						</v8:item>
 					</dcscor:value>
@@ -349,16 +349,16 @@
 			<field>MonthPeriod</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Period, month</v8:content>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dönem, ay</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Период, месяц</v8:content>
 				</v8:item>
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dönem, ay</v8:content>
+					<v8:lang>en</v8:lang>
+					<v8:content>Period, month</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -370,7 +370,7 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>en</v8:lang>
+							<v8:lang>tr</v8:lang>
 							<v8:content>DF='MMMM yyyy'</v8:content>
 						</v8:item>
 						<v8:item>
@@ -378,7 +378,7 @@
 							<v8:content>DF='MMMM yyyy'</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
+							<v8:lang>en</v8:lang>
 							<v8:content>DF='MMMM yyyy'</v8:content>
 						</v8:item>
 					</dcscor:value>
@@ -390,16 +390,16 @@
 			<field>YearPeriod</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Period, year</v8:content>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dönem, yıl</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Период, год</v8:content>
 				</v8:item>
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dönem, yıl</v8:content>
+					<v8:lang>en</v8:lang>
+					<v8:content>Period, year</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -411,7 +411,7 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>en</v8:lang>
+							<v8:lang>tr</v8:lang>
 							<v8:content>DF=yyyy</v8:content>
 						</v8:item>
 						<v8:item>
@@ -419,7 +419,7 @@
 							<v8:content>DF=yyyy</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
+							<v8:lang>en</v8:lang>
 							<v8:content>DF=yyyy</v8:content>
 						</v8:item>
 					</dcscor:value>
@@ -431,16 +431,16 @@
 			<field>SecondPeriod</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
-					<v8:lang>en</v8:lang>
-					<v8:content>Period</v8:content>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Dönem</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
 					<v8:content>Период</v8:content>
 				</v8:item>
 				<v8:item>
-					<v8:lang>tr</v8:lang>
-					<v8:content>Dönem</v8:content>
+					<v8:lang>en</v8:lang>
+					<v8:content>Period</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -490,16 +490,16 @@ FROM
 		<name>BeginOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>en</v8:lang>
-				<v8:content>Begin of period</v8:content>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem başı</v8:content>
 			</v8:item>
 			<v8:item>
 				<v8:lang>ru</v8:lang>
 				<v8:content>Начало периода</v8:content>
 			</v8:item>
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem başı</v8:content>
+				<v8:lang>en</v8:lang>
+				<v8:content>Begin of period</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -517,16 +517,16 @@ FROM
 		<name>EndOfPeriod</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>en</v8:lang>
-				<v8:content>End of period</v8:content>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem sonu</v8:content>
 			</v8:item>
 			<v8:item>
 				<v8:lang>ru</v8:lang>
 				<v8:content>Конец периода</v8:content>
 			</v8:item>
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem sonu</v8:content>
+				<v8:lang>en</v8:lang>
+				<v8:content>End of period</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -544,16 +544,16 @@ FROM
 		<name>Period</name>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>en</v8:lang>
-				<v8:content>Period</v8:content>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Dönem</v8:content>
 			</v8:item>
 			<v8:item>
 				<v8:lang>ru</v8:lang>
 				<v8:content>Период</v8:content>
 			</v8:item>
 			<v8:item>
-				<v8:lang>tr</v8:lang>
-				<v8:content>Dönem</v8:content>
+				<v8:lang>en</v8:lang>
+				<v8:content>Period</v8:content>
 			</v8:item>
 		</title>
 		<valueType>

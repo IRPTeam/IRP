@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="43208d7c-c042-4ede-bbaa-c2bdf19eab42">
  <name>UseShipmentConfirmationAndGoodsReceipts</name>
  <synonym>
-  <key>en</key>
-  <value>Use shipment confirmation and goods receipts</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Sevk/alım irsaliyeler</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать приходные/расходные накладные на товары</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Sevk/alım irsaliyeler</value>
+  <key>en</key>
+  <value>Use shipment confirmation and goods receipts</value>
  </synonym>
  <location>Constant.UseShipmentConfirmationAndGoodsReceipts</location>
  <privilegedGetMode>true</privilegedGetMode>

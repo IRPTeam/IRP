@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R2001T_Sales</name>
  <synonym>
-  <key>en</key>
-  <value>R2001 Sales</value>
+  <key>tr</key>
+  <value>R2001 Satışlar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R2001 Продажи</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>R2001 Satışlar</value>
+  <key>en</key>
+  <value>R2001 Sales</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +28,16 @@
  <resources uuid="568d7cd8-be19-4018-820f-b5ad97da44de">
   <name>Quantity</name>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -49,16 +49,16 @@
  <resources uuid="a662a2f9-467c-420c-b759-0fda3c246955">
   <name>Amount</name>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -70,16 +70,16 @@
  <resources uuid="362634ef-2891-4b82-961f-c06bf6fdc395">
   <name>NetAmount</name>
   <synonym>
-   <key>en</key>
-   <value>Net amount</value>
+   <key>tr</key>
+   <value>Net tutar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма без налогов</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Net tutar</value>
+   <key>en</key>
+   <value>Net amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -91,16 +91,16 @@
  <resources uuid="dcb32c3f-eba2-48df-a454-09cac35dce2a">
   <name>OffersAmount</name>
   <synonym>
-   <key>en</key>
-   <value>Offers amount</value>
+   <key>tr</key>
+   <value>Iskonto tutarı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма скидки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Iskonto tutarı</value>
+   <key>en</key>
+   <value>Offers amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -112,16 +112,16 @@
  <dimensions uuid="2a2d5dc9-7870-4d5b-8d30-9f21237383cb">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -134,16 +134,16 @@
  <dimensions uuid="8902bdc0-67f7-4139-9469-ab5f8a7fc663">
   <name>Branch</name>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -156,16 +156,16 @@
  <dimensions uuid="d522a3a9-aba6-480a-9f63-c78b5a16cb4d">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>en</key>
-   <value>Multi currency movement type</value>
+   <key>tr</key>
+   <value>Çoklu döviz kırılım tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид мультивалютной аналитики</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz kırılım tipi</value>
+   <key>en</key>
+   <value>Multi currency movement type</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -178,16 +178,16 @@
  <dimensions uuid="59ce519e-6cf1-4959-ad72-f47d72cb8e96">
   <name>Currency</name>
   <synonym>
-   <key>en</key>
-   <value>Currency</value>
+   <key>tr</key>
+   <value>Döviz</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюта</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
+   <key>en</key>
+   <value>Currency</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -200,16 +200,16 @@
  <dimensions uuid="969d4950-9565-4ba5-91ee-076bf363bdee">
   <name>Invoice</name>
   <synonym>
-   <key>en</key>
-   <value>Invoice</value>
+   <key>tr</key>
+   <value>Fatura</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Инвойс</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Fatura</value>
+   <key>en</key>
+   <value>Invoice</value>
   </synonym>
   <type>
    <types>DocumentRef.SalesReportFromTradeAgent</types>
@@ -226,16 +226,16 @@
  <dimensions uuid="214784f6-66ec-4f0a-819d-3f15592cdca2">
   <name>ItemKey</name>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -248,16 +248,16 @@
  <dimensions uuid="bf37f8ff-1c16-406e-9663-024c506b00f6">
   <name>RowKey</name>
   <synonym>
-   <key>en</key>
-   <value>Row key</value>
+   <key>tr</key>
+   <value>Satır anahtarı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ключ строки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
+   <key>en</key>
+   <value>Row key</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>
@@ -270,16 +270,16 @@
  <dimensions uuid="bfc92649-60aa-4ecb-9b9b-3e82aa1cd40a">
   <name>SalesPerson</name>
   <synonym>
-   <key>en</key>
-   <value>Sales person</value>
+   <key>tr</key>
+   <value>Satış elemanı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Продавец</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Satış elemanı</value>
+   <key>en</key>
+   <value>Sales person</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>

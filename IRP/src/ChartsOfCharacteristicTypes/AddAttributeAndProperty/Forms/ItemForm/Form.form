@@ -48,16 +48,16 @@
    </dataPath>
    <titleLocation>None</titleLocation>
    <toolTip>
-    <key>en</key>
-    <value>Icon for HTML preview</value>
+    <key>tr</key>
+    <value>HTML ön izleme için simge</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
     <value>Картинка для превью в HTML поле</value>
    </toolTip>
    <toolTip>
-    <key>tr</key>
-    <value>HTML ön izleme için simge</value>
+    <key>en</key>
+    <value>Icon for HTML preview</value>
    </toolTip>
    <extendedTooltip>
     <name>IconExtendedTooltip</name>
@@ -98,16 +98,16 @@
     <height>3</height>
     <hyperlink>true</hyperlink>
     <nonselectedPictureText>
-     <key>en</key>
-     <value>Click to add</value>
+     <key>tr</key>
+     <value>Eklemek için tıklayın</value>
     </nonselectedPictureText>
     <nonselectedPictureText>
      <key>ru</key>
      <value>Нажмите, чтобы добавить картинку</value>
     </nonselectedPictureText>
     <nonselectedPictureText>
-     <key>tr</key>
-     <value>Eklemek için tıklayın</value>
+     <key>en</key>
+     <value>Click to add</value>
     </nonselectedPictureText>
     <fileDragMode>AsFileRef</fileDragMode>
    </extInfo>
@@ -345,16 +345,16 @@
  <attributes>
   <name>Icon</name>
   <title>
-   <key>en</key>
-   <value>Icon</value>
+   <key>tr</key>
+   <value>Simge</value>
   </title>
   <title>
    <key>ru</key>
    <value>Иконка</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Simge</value>
+   <key>en</key>
+   <value>Icon</value>
   </title>
   <id>2</id>
   <valueType>
@@ -371,16 +371,16 @@
  <formCommands>
   <name>SetRequiredAtAllSets</name>
   <title>
-   <key>en</key>
-   <value>Set "Required" at all sets</value>
+   <key>tr</key>
+   <value>"Zorunlu" işareti tümü için uygula</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить обязательное заполнение для всех реквизитов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>"Zorunlu" işareti tümü için uygula</value>
+   <key>en</key>
+   <value>Set "Required" at all sets</value>
   </title>
   <id>1</id>
   <use>

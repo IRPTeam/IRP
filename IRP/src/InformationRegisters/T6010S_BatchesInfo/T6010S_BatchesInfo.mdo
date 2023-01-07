@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T6010S_BatchesInfo</name>
  <synonym>
-  <key>en</key>
-  <value>T6010 Batches info</value>
+  <key>tr</key>
+  <value>T6010 Partiler bilgisi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>T6010 Информация по партиям</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>T6010 Partiler bilgisi</value>
+  <key>en</key>
+  <value>T6010 Batches info</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +30,16 @@
  <dimensions uuid="eece2ada-1969-49a0-bbe6-02b1c40bf59e">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -54,16 +54,16 @@
  <dimensions uuid="b447502f-5c19-4688-811f-f11fd499174a">
   <name>Document</name>
   <synonym>
-   <key>en</key>
-   <value>Document</value>
+   <key>tr</key>
+   <value>Evrak</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
+   <key>en</key>
+   <value>Document</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>

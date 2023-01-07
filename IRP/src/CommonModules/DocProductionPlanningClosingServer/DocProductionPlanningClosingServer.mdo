@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5dbf29c7-ce97-4f1d-b4f2-dd375727fd84">
  <name>DocProductionPlanningClosingServer</name>
  <synonym>
-  <key>en</key>
-  <value>Doc production planning closing server</value>
+  <key>tr</key>
+  <value>Evrak üretim planlama kapanışı server</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документ закрытие планирования производства сервер</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Evrak üretim planlama kapanışı server</value>
+  <key>en</key>
+  <value>Doc production planning closing server</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

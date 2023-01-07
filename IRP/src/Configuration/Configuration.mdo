@@ -2,7 +2,7 @@
 <mdclass:Configuration xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f795147b-016b-4e3c-9d02-58181f16d51e">
  <name>IRP</name>
  <synonym>
-  <key>en</key>
+  <key>tr</key>
   <value>IRP</value>
  </synonym>
  <synonym>
@@ -10,7 +10,7 @@
   <value>IRP</value>
  </synonym>
  <synonym>
-  <key>tr</key>
+  <key>en</key>
   <value>IRP</value>
  </synonym>
  <containedObjects classId="9cd510cd-abfc-11d4-9434-004095e12fc7" objectId="e3520cbe-9782-4189-a67d-a0c8964a51a5"/>
@@ -51,7 +51,7 @@
  <mainSectionPicture/>
  <defaultLanguage>Language.English</defaultLanguage>
  <copyright>
-  <key>en</key>
+  <key>tr</key>
   <value>IRP Team</value>
  </copyright>
  <copyright>
@@ -59,11 +59,11 @@
   <value>IRP Team</value>
  </copyright>
  <copyright>
-  <key>tr</key>
+  <key>en</key>
   <value>IRP Team</value>
  </copyright>
  <vendorInformationAddress>
-  <key>en</key>
+  <key>tr</key>
   <value>https://github.com/IRPTeam/IRP</value>
  </vendorInformationAddress>
  <vendorInformationAddress>
@@ -71,11 +71,11 @@
   <value>https://github.com/IRPTeam/IRP</value>
  </vendorInformationAddress>
  <vendorInformationAddress>
-  <key>tr</key>
+  <key>en</key>
   <value>https://github.com/IRPTeam/IRP</value>
  </vendorInformationAddress>
  <configurationInformationAddress>
-  <key>en</key>
+  <key>tr</key>
   <value>https://github.com/IRPTeam/IRP</value>
  </configurationInformationAddress>
  <configurationInformationAddress>
@@ -83,7 +83,7 @@
   <value>https://github.com/IRPTeam/IRP</value>
  </configurationInformationAddress>
  <configurationInformationAddress>
-  <key>tr</key>
+  <key>en</key>
   <value>https://github.com/IRPTeam/IRP</value>
  </configurationInformationAddress>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -93,96 +93,96 @@
  <languages uuid="f1c59d1c-aafe-420b-96cd-c5f1608cf9c1">
   <name>English</name>
   <synonym>
-   <key>en</key>
-   <value>English</value>
+   <key>tr</key>
+   <value>İngilizce</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Английский</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İngilizce</value>
+   <key>en</key>
+   <value>English</value>
   </synonym>
   <languageCode>en</languageCode>
  </languages>
  <languages uuid="415e5f90-29b0-4f1b-a0a7-42cb96b2b637">
   <name>Turkish</name>
   <synonym>
-   <key>en</key>
-   <value>Turkish</value>
+   <key>tr</key>
+   <value>Türkçe</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Турецкий</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Türkçe</value>
+   <key>en</key>
+   <value>Turkish</value>
   </synonym>
   <languageCode>tr</languageCode>
  </languages>
  <languages uuid="d624d3ce-c30c-4aa3-951e-9629714a3809">
   <name>Russian</name>
   <synonym>
-   <key>en</key>
-   <value>Russian</value>
+   <key>tr</key>
+   <value>Rusça</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Русский</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Rusça</value>
+   <key>en</key>
+   <value>Russian</value>
   </synonym>
   <languageCode>ru</languageCode>
  </languages>
  <languages uuid="eaf5ce2f-f41e-4912-9067-c51b8c98c69c">
   <name>French</name>
   <synonym>
-   <key>en</key>
-   <value>French</value>
+   <key>tr</key>
+   <value>Fransızca</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Француский</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Fransızca</value>
+   <key>en</key>
+   <value>French</value>
   </synonym>
   <languageCode>fr</languageCode>
  </languages>
  <languages uuid="6c7093f5-ffe3-4d21-b9a4-2eab98a4864b">
   <name>German</name>
   <synonym>
-   <key>en</key>
-   <value>German</value>
+   <key>tr</key>
+   <value>Almanca</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Немецкий</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Almanca</value>
+   <key>en</key>
+   <value>German</value>
   </synonym>
   <languageCode>de</languageCode>
  </languages>
  <languages uuid="b37d11ba-9391-4abb-b99b-01f060a79638">
   <name>HASH</name>
   <synonym>
-   <key>en</key>
-   <value>HASH</value>
+   <key>tr</key>
+   <value>Hash</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>HASH</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Hash</value>
+   <key>en</key>
+   <value>HASH</value>
   </synonym>
   <languageCode>ha</languageCode>
  </languages>

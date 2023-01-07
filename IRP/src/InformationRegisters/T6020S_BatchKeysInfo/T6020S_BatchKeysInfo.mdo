@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T6020S_BatchKeysInfo</name>
  <synonym>
-  <key>en</key>
-  <value>T6020 Batch keys info</value>
+  <key>tr</key>
+  <value>T6020 Parti anahtar bilgisi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>T6020 Информация по ключам партий</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>T6020 Parti anahtar bilgisi</value>
+  <key>en</key>
+  <value>T6020 Batch keys info</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +30,16 @@
  <resources uuid="eb023ddc-5ca6-4802-926b-b3e7beab38c2">
   <name>Quantity</name>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -53,16 +53,16 @@
  <resources uuid="46d0fd07-9e37-4c51-a739-ded86fb856bc">
   <name>Amount</name>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -76,16 +76,16 @@
  <resources uuid="06212b6c-ee03-4aec-be70-2b05fc04203a">
   <name>AmountTax</name>
   <synonym>
-   <key>en</key>
-   <value>Amount tax</value>
+   <key>tr</key>
+   <value>Vergi tutarı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма налогов</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Vergi tutarı</value>
+   <key>en</key>
+   <value>Amount tax</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -99,16 +99,16 @@
  <resources uuid="f81bb39f-89cb-49ea-a465-7fa60da910b2">
   <name>AmountCostRatio</name>
   <synonym>
-   <key>en</key>
-   <value>Amount cost ratio</value>
+   <key>tr</key>
+   <value>Maliyet tutar katsayısı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Коеф. добавочной стоимости</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Maliyet tutar katsayısı</value>
+   <key>en</key>
+   <value>Amount cost ratio</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -122,16 +122,16 @@
  <dimensions uuid="05621708-6413-4a3b-bac7-a42925c6ffdb">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -147,16 +147,16 @@
  <dimensions uuid="1dfb3db9-b4eb-49f9-af73-86e56953e760">
   <name>Store</name>
   <synonym>
-   <key>en</key>
-   <value>Store</value>
+   <key>tr</key>
+   <value>Depo</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
+   <key>en</key>
+   <value>Store</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -172,16 +172,16 @@
  <dimensions uuid="89938973-1b16-4484-9305-37596c19593a">
   <name>ItemKey</name>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -197,16 +197,16 @@
  <dimensions uuid="9b85ab65-8cd3-47eb-946b-18294291b42b">
   <name>Direction</name>
   <synonym>
-   <key>en</key>
-   <value>Direction</value>
+   <key>tr</key>
+   <value>Yön</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Направление</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Yön</value>
+   <key>en</key>
+   <value>Direction</value>
   </synonym>
   <type>
    <types>EnumRef.BatchDirection</types>
@@ -221,16 +221,16 @@
  <dimensions uuid="7e26e922-6b24-41a1-9caa-f13057ebe12c">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>en</key>
-   <value>Currency movement type</value>
+   <key>tr</key>
+   <value>Çoklu döviz hareket tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид мультивалютной аналитики</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz hareket tipi</value>
+   <key>en</key>
+   <value>Currency movement type</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -245,16 +245,16 @@
  <dimensions uuid="1af6750b-5338-4524-9e13-43c5b66272e4">
   <name>Currency</name>
   <synonym>
-   <key>en</key>
-   <value>Currency</value>
+   <key>tr</key>
+   <value>Döviz</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюта</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
+   <key>en</key>
+   <value>Currency</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -269,16 +269,16 @@
  <dimensions uuid="87401b9c-25a1-42bc-89e5-e106940835d8">
   <name>BatchDocument</name>
   <synonym>
-   <key>en</key>
-   <value>Batch document</value>
+   <key>tr</key>
+   <value>Parti evrakı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ партии</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Parti evrakı</value>
+   <key>en</key>
+   <value>Batch document</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>
@@ -306,16 +306,16 @@
  <dimensions uuid="8b2814d3-8b65-4fca-b86b-06cf5bc2600d">
   <name>SalesInvoice</name>
   <synonym>
-   <key>en</key>
-   <value>Sales invoice</value>
+   <key>tr</key>
+   <value>Satış faturası</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Реализация товаров и услуг</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Satış faturası</value>
+   <key>en</key>
+   <value>Sales invoice</value>
   </synonym>
   <type>
    <types>DocumentRef.RetailSalesReceipt</types>
@@ -331,16 +331,16 @@
  <dimensions uuid="21fc2362-66bb-4a0d-99ed-64cb51f1a0c5">
   <name>RowID</name>
   <synonym>
-   <key>en</key>
-   <value>Row ID</value>
+   <key>tr</key>
+   <value>Satır ID</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>ID Строки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Satır ID</value>
+   <key>en</key>
+   <value>Row ID</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>
@@ -355,16 +355,16 @@
  <dimensions uuid="44543172-cea2-4fc7-a168-d30faab4b645">
   <name>ProfitLossCenter</name>
   <synonym>
-   <key>en</key>
-   <value>Profit loss center</value>
+   <key>tr</key>
+   <value>Kar/Zarar merkezi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Центр прибыли/убытков</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kar/Zarar merkezi</value>
+   <key>en</key>
+   <value>Profit loss center</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -377,16 +377,16 @@
  <dimensions uuid="b63ad6fb-bcec-49f2-9ffe-72eb724a5ea7">
   <name>ExpenseType</name>
   <synonym>
-   <key>en</key>
-   <value>Expense type</value>
+   <key>tr</key>
+   <value>Gider tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Статьи затрат</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Gider tipi</value>
+   <key>en</key>
+   <value>Expense type</value>
   </synonym>
   <type>
    <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -399,16 +399,16 @@
  <dimensions uuid="837ffdb8-6d92-4d34-8d41-3e1c2ec6b08e">
   <name>Branch</name>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -423,16 +423,16 @@
  <dimensions uuid="062ee647-2645-45b9-9819-bbd08759c7ec">
   <name>Work</name>
   <synonym>
-   <key>en</key>
-   <value>Work</value>
+   <key>tr</key>
+   <value>Çalışma</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Работа</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Çalışma</value>
+   <key>en</key>
+   <value>Work</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -447,16 +447,16 @@
  <dimensions uuid="cafa425f-0c56-425f-ae18-fca4a6678d22">
   <name>WorkSheet</name>
   <synonym>
-   <key>en</key>
-   <value>Work sheet</value>
+   <key>tr</key>
+   <value>Çalışma tutanağı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Лист учета рабочего времени</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Çalışma tutanağı</value>
+   <key>en</key>
+   <value>Work sheet</value>
   </synonym>
   <type>
    <types>DocumentRef.WorkSheet</types>
@@ -471,16 +471,16 @@
  <dimensions uuid="889ea06a-1f08-4723-b654-110a67835d56">
   <name>BatchConsignor</name>
   <synonym>
-   <key>en</key>
-   <value>Batch consignor</value>
+   <key>tr</key>
+   <value>Konsinye partisi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Партия комитента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Konsinye partisi</value>
+   <key>en</key>
+   <value>Batch consignor</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>
@@ -495,16 +495,16 @@
  <dimensions uuid="7cc7a75b-d9c8-4f28-8292-711110c6e34e">
   <name>SerialLotNumber</name>
   <synonym>
-   <key>en</key>
-   <value>Serial lot number</value>
+   <key>tr</key>
+   <value>Seri lot numaraları</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Серия номенклатуры</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
+   <key>en</key>
+   <value>Serial lot number</value>
   </synonym>
   <type>
    <types>CatalogRef.SerialLotNumbers</types>
@@ -519,16 +519,16 @@
  <dimensions uuid="43d1a55c-8bfb-41f4-9a7f-f0a7bad8c0f0">
   <name>SourceOfOrigin</name>
   <synonym>
-   <key>en</key>
-   <value>Source of origin</value>
+   <key>tr</key>
+   <value>Envanter menşei</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Источник происхождения</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Envanter menşei</value>
+   <key>en</key>
+   <value>Source of origin</value>
   </synonym>
   <type>
    <types>CatalogRef.SourceOfOrigins</types>

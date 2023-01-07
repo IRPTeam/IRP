@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R3035T_CashPlanning</name>
  <synonym>
-  <key>en</key>
-  <value>R3035 Cash planning</value>
+  <key>tr</key>
+  <value>R3035 Finansal planlama</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R3035 Планирование денежных средств</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>R3035 Finansal planlama</value>
+  <key>en</key>
+  <value>R3035 Cash planning</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +28,16 @@
  <resources uuid="fc714122-31e8-45ce-b8a0-e13ba46099f8">
   <name>Amount</name>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -49,16 +49,16 @@
  <attributes uuid="d2b9135f-e339-41c9-aeb9-79b796a19898">
   <name>DeferredCalculation</name>
   <synonym>
-   <key>en</key>
-   <value>Deferred calculation</value>
+   <key>tr</key>
+   <value>Ertelenen hesaplama</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Отложенный расчет</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ertelenen hesaplama</value>
+   <key>en</key>
+   <value>Deferred calculation</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -70,16 +70,16 @@
  <dimensions uuid="1ac1a12b-ddd5-494d-bacf-e25695704457">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -92,16 +92,16 @@
  <dimensions uuid="14720588-f951-4bb5-8ced-51293438724c">
   <name>Branch</name>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -114,16 +114,16 @@
  <dimensions uuid="17cd708c-7a33-44e0-a8f8-bd4d9590a1a6">
   <name>BasisDocument</name>
   <synonym>
-   <key>en</key>
-   <value>Basis document</value>
+   <key>tr</key>
+   <value>Kaynak evrak</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ основание</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
+   <key>en</key>
+   <value>Basis document</value>
   </synonym>
   <type>
    <types>DefinedType.typePlaningTransactionBasises</types>
@@ -136,16 +136,16 @@
  <dimensions uuid="f6e992e9-e8e5-4d9b-a331-c0c39a04a7e9">
   <name>Account</name>
   <synonym>
-   <key>en</key>
-   <value>Account</value>
+   <key>tr</key>
+   <value>Kasa/Banka</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Касса/Банковский счет</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kasa/Banka</value>
+   <key>en</key>
+   <value>Account</value>
   </synonym>
   <type>
    <types>CatalogRef.CashAccounts</types>
@@ -158,16 +158,16 @@
  <dimensions uuid="e338568d-462c-4a27-9c25-c21b904592e8">
   <name>Currency</name>
   <synonym>
-   <key>en</key>
-   <value>Currency</value>
+   <key>tr</key>
+   <value>Döviz</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюта</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
+   <key>en</key>
+   <value>Currency</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -180,16 +180,16 @@
  <dimensions uuid="77dfc47b-a680-4564-b547-ee3569b84c2b">
   <name>CashFlowDirection</name>
   <synonym>
-   <key>en</key>
-   <value>Cash flow direction</value>
+   <key>tr</key>
+   <value>Nakit akış yönü</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Направление денежного потока</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Nakit akış yönü</value>
+   <key>en</key>
+   <value>Cash flow direction</value>
   </synonym>
   <type>
    <types>EnumRef.CashFlowDirections</types>
@@ -202,16 +202,16 @@
  <dimensions uuid="fe68b927-0d0d-434f-928d-476d5051eac2">
   <name>Partner</name>
   <synonym>
-   <key>en</key>
-   <value>Partner</value>
+   <key>tr</key>
+   <value>Cari hesap</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Партнер</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
+   <key>en</key>
+   <value>Partner</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -224,16 +224,16 @@
  <dimensions uuid="0a6e57bd-3640-4b77-8dcb-538b194031ea">
   <name>LegalName</name>
   <synonym>
-   <key>en</key>
-   <value>Legal name</value>
+   <key>tr</key>
+   <value>Fatura hesabı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Контрагент</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Fatura hesabı</value>
+   <key>en</key>
+   <value>Legal name</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -246,16 +246,16 @@
  <dimensions uuid="1460b4e0-4a90-4125-aadd-1cdca4f5329c">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>en</key>
-   <value>Multi currency movement type</value>
+   <key>tr</key>
+   <value>Çoklu döviz kırılım tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид мультивалютной аналитики</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz kırılım tipi</value>
+   <key>en</key>
+   <value>Multi currency movement type</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -268,16 +268,16 @@
  <dimensions uuid="d06ca054-690c-44fe-9089-b11670d57039">
   <name>FinancialMovementType</name>
   <synonym>
-   <key>en</key>
-   <value>Financial movement type</value>
+   <key>tr</key>
+   <value>Finans hareket tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Статья движений денежных средств</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Finans hareket tipi</value>
+   <key>en</key>
+   <value>Financial movement type</value>
   </synonym>
   <type>
    <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -290,16 +290,16 @@
  <dimensions uuid="3adc5d19-57a4-46cc-b0de-a1498b699694">
   <name>PlanningPeriod</name>
   <synonym>
-   <key>en</key>
-   <value>Planning period</value>
+   <key>tr</key>
+   <value>Planlama dönemi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Период планирования</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Planlama dönemi</value>
+   <key>en</key>
+   <value>Planning period</value>
   </synonym>
   <type>
    <types>CatalogRef.PlanningPeriods</types>

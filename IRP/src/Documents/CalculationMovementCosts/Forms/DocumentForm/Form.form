@@ -149,16 +149,16 @@
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>en</key>
-    <value>For all companies</value>
+    <key>tr</key>
+    <value>Tüm şirketler için</value>
    </inputHint>
    <inputHint>
     <key>ru</key>
     <value>Для всех организаций</value>
    </inputHint>
    <inputHint>
-    <key>tr</key>
-    <value>Tüm şirketler için</value>
+    <key>en</key>
+    <value>For all companies</value>
    </inputHint>
   </extInfo>
  </items>

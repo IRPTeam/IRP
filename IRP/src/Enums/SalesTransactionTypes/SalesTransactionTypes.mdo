@@ -7,47 +7,47 @@
  </producedTypes>
  <name>SalesTransactionTypes</name>
  <synonym>
-  <key>en</key>
-  <value>Sales transaction types</value>
+  <key>tr</key>
+  <value>Satış işlem tipleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Вид операций реализации</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Satış işlem tipleri</value>
+  <key>en</key>
+  <value>Sales transaction types</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="ecf776ab-9e00-4383-8903-f79f90804b12">
   <name>Sales</name>
   <synonym>
-   <key>en</key>
-   <value>Sales</value>
+   <key>tr</key>
+   <value>Satış</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Продажа</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Satış</value>
+   <key>en</key>
+   <value>Sales</value>
   </synonym>
  </enumValues>
  <enumValues uuid="c314613a-f1b1-4991-873f-be6f6d2d91b6">
   <name>ShipmentToTradeAgent</name>
   <synonym>
-   <key>en</key>
-   <value>Shipment to trade agent</value>
+   <key>tr</key>
+   <value>Konsiyeye alana sevkiyat</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Отгрузка комиссионеру</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Konsiyeye alana sevkiyat</value>
+   <key>en</key>
+   <value>Shipment to trade agent</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

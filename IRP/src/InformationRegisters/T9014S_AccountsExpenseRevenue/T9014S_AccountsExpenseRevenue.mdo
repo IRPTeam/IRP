@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T9014S_AccountsExpenseRevenue</name>
  <synonym>
-  <key>en</key>
-  <value>Accounts (Expense / Revenue)</value>
+  <key>tr</key>
+  <value>Muh. hesaplar (giderler/gelirler)</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Бух. счета - Затраты/доходы</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Muh. hesaplar (giderler/gelirler)</value>
+  <key>en</key>
+  <value>Accounts (Expense / Revenue)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +30,16 @@
  <resources uuid="7098c274-62dd-4d32-a6fa-b34f96f33a2a">
   <name>Account</name>
   <synonym>
-   <key>en</key>
-   <value>Account</value>
+   <key>tr</key>
+   <value>Hesap</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Касса/банк</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Hesap</value>
+   <key>en</key>
+   <value>Account</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -58,16 +58,16 @@
  <dimensions uuid="b923400a-6f16-4fe0-a61e-d9ba57fc9002">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -84,16 +84,16 @@
  <dimensions uuid="45f6fdd1-6108-41a1-9c2f-d679491bc594">
   <name>Variant</name>
   <synonym>
-   <key>en</key>
-   <value>Variant</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Variant</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypeVariants</types>
@@ -110,16 +110,16 @@
  <dimensions uuid="807be97c-be6b-4a3d-8f4c-d870b20e9ad1">
   <name>ExpenseRevenue</name>
   <synonym>
-   <key>en</key>
-   <value>Expense / Revenue</value>
+   <key>tr</key>
+   <value>Gider / Gelir</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Затраты / доходы</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Gider / Gelir</value>
+   <key>en</key>
+   <value>Expense / Revenue</value>
   </synonym>
   <type>
    <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -136,16 +136,16 @@
  <forms uuid="513676d2-16f5-42b9-a3cf-f3f4524f051f">
   <name>RecordForm</name>
   <synonym>
-   <key>en</key>
-   <value>Record form</value>
+   <key>tr</key>
+   <value>Kayıt formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма записи</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
+   <key>en</key>
+   <value>Record form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

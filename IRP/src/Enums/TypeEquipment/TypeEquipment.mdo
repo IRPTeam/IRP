@@ -7,77 +7,77 @@
  </producedTypes>
  <name>TypeEquipment</name>
  <synonym>
-  <key>en</key>
-  <value>Type equipment</value>
+  <key>tr</key>
+  <value>Donanım türü</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Вид оборудования</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Donanım türü</value>
+  <key>en</key>
+  <value>Type equipment</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="b55052e6-bac8-4642-aca9-2b563fde894f">
   <name>BankTerminal</name>
   <synonym>
-   <key>en</key>
-   <value>Bank terminal</value>
+   <key>tr</key>
+   <value>POS terminal</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Банковский терминал</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>POS terminal</value>
+   <key>en</key>
+   <value>Bank terminal</value>
   </synonym>
  </enumValues>
  <enumValues uuid="93331c36-34de-457d-ae04-66f664429268">
   <name>Display</name>
   <synonym>
-   <key>en</key>
-   <value>Display</value>
+   <key>tr</key>
+   <value>Müşteri ekranı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дисплей покупателя</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Müşteri ekranı</value>
+   <key>en</key>
+   <value>Display</value>
   </synonym>
  </enumValues>
  <enumValues uuid="da26fb28-a4dc-4c61-ab68-1f5c8b3375c2">
   <name>FiscalPrinter</name>
   <synonym>
-   <key>en</key>
-   <value>Fiscal printer</value>
+   <key>tr</key>
+   <value>Yazar kasa</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Фискальный принтер</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Yazar kasa</value>
+   <key>en</key>
+   <value>Fiscal printer</value>
   </synonym>
  </enumValues>
  <enumValues uuid="bda90896-6092-4344-8de2-f24591d094d7">
   <name>ReceiptPrinter</name>
   <synonym>
-   <key>en</key>
-   <value>Receipt printer</value>
+   <key>tr</key>
+   <value>Fiş yazıcısı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Принтер чеков</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Fiş yazıcısı</value>
+   <key>en</key>
+   <value>Receipt printer</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

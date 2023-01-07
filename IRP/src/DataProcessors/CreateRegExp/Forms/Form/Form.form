@@ -12,16 +12,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Group row parts button top</value>
+    <key>tr</key>
+    <value>Grup satır parçası buton üst</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа части строки кнопка верх</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Grup satır parçası buton üst</value>
+    <key>en</key>
+    <value>Group row parts button top</value>
    </title>
    <extendedTooltip>
     <name>GroupRowPartsButtonTopExtendedTooltip</name>
@@ -56,16 +56,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Group row parts button bottom</value>
+    <key>tr</key>
+    <value>Grup satır parçası buton alt</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа части строки кнопка низ</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Grup satır parçası buton alt</value>
+    <key>en</key>
+    <value>Group row parts button bottom</value>
    </title>
    <extendedTooltip>
     <name>GroupRowPartsButtonBottomExtendedTooltip</name>
@@ -97,16 +97,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Row parts button group</value>
+   <key>tr</key>
+   <value>Satır çarşası buton grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа кнопок частей строк</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satır çarşası buton grubu</value>
+   <key>en</key>
+   <value>Row parts button group</value>
   </title>
   <height>4</height>
   <horizontalStretch>true</horizontalStretch>
@@ -148,16 +148,16 @@
    <name>TypeConstant</name>
    <id>159</id>
    <title>
-    <key>en</key>
-    <value>Costant</value>
+    <key>tr</key>
+    <value>Sabit</value>
    </title>
    <title>
     <key>ru</key>
     <value>Константа</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sabit</value>
+    <key>en</key>
+    <value>Costant</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -202,16 +202,16 @@
      <name>ChangeExpressionType</name>
     </handlers>
     <nonselectedPictureText>
-     <key>en</key>
-     <value>Constant</value>
+     <key>tr</key>
+     <value>Sabit değer</value>
     </nonselectedPictureText>
     <nonselectedPictureText>
      <key>ru</key>
      <value>Константа</value>
     </nonselectedPictureText>
     <nonselectedPictureText>
-     <key>tr</key>
-     <value>Sabit değer</value>
+     <key>en</key>
+     <value>Constant</value>
     </nonselectedPictureText>
     <enableStartDrag>true</enableStartDrag>
     <enableDrag>true</enableDrag>
@@ -229,16 +229,16 @@
    <name>TypeVariable</name>
    <id>162</id>
    <title>
-    <key>en</key>
-    <value>Variable</value>
+    <key>tr</key>
+    <value>Değişken</value>
    </title>
    <title>
     <key>ru</key>
     <value>Переменная</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değişken</value>
+    <key>en</key>
+    <value>Variable</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -283,16 +283,16 @@
      <name>ChangeExpressionType</name>
     </handlers>
     <nonselectedPictureText>
-     <key>en</key>
-     <value>Variable</value>
+     <key>tr</key>
+     <value>Değişken</value>
     </nonselectedPictureText>
     <nonselectedPictureText>
      <key>ru</key>
      <value>Переменная</value>
     </nonselectedPictureText>
     <nonselectedPictureText>
-     <key>tr</key>
-     <value>Değişken</value>
+     <key>en</key>
+     <value>Variable</value>
     </nonselectedPictureText>
     <enableStartDrag>true</enableStartDrag>
     <enableDrag>true</enableDrag>
@@ -310,7 +310,7 @@
    <name>TypeManual</name>
    <id>165</id>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Manual</value>
    </title>
    <title>
@@ -318,7 +318,7 @@
     <value>Manual</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Manual</value>
    </title>
    <visible>true</visible>
@@ -364,16 +364,16 @@
      <name>ChangeExpressionType</name>
     </handlers>
     <nonselectedPictureText>
-     <key>en</key>
-     <value>Calculate</value>
+     <key>tr</key>
+     <value>Hesapla</value>
     </nonselectedPictureText>
     <nonselectedPictureText>
      <key>ru</key>
      <value>Рассчитать</value>
     </nonselectedPictureText>
     <nonselectedPictureText>
-     <key>tr</key>
-     <value>Hesapla</value>
+     <key>en</key>
+     <value>Calculate</value>
     </nonselectedPictureText>
     <enableStartDrag>true</enableStartDrag>
     <enableDrag>true</enableDrag>
@@ -391,16 +391,16 @@
    <name>TypeAnyText</name>
    <id>183</id>
    <title>
-    <key>en</key>
-    <value>Any text</value>
+    <key>tr</key>
+    <value>Herhangi bir metin</value>
    </title>
    <title>
     <key>ru</key>
     <value>Любой текст</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Herhangi bir metin</value>
+    <key>en</key>
+    <value>Any text</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -445,16 +445,16 @@
      <name>ChangeExpressionType</name>
     </handlers>
     <nonselectedPictureText>
-     <key>en</key>
-     <value>Any text</value>
+     <key>tr</key>
+     <value>Herhangi bir metin</value>
     </nonselectedPictureText>
     <nonselectedPictureText>
      <key>ru</key>
      <value>Любой текст</value>
     </nonselectedPictureText>
     <nonselectedPictureText>
-     <key>tr</key>
-     <value>Herhangi bir metin</value>
+     <key>en</key>
+     <value>Any text</value>
     </nonselectedPictureText>
     <enableStartDrag>true</enableStartDrag>
     <enableDrag>true</enableDrag>
@@ -474,16 +474,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Expression type</value>
+   <key>tr</key>
+   <value>Değer tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Вид представления</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Değer tipi</value>
+   <key>en</key>
+   <value>Expression type</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <groupHorizontalAlign>Center</groupHorizontalAlign>
@@ -617,16 +617,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group RegExp check</value>
+   <key>tr</key>
+   <value>Grup RegExp kontrol</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа RegExp проверка</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup RegExp kontrol</value>
+   <key>en</key>
+   <value>Group RegExp check</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <groupVerticalAlign>Center</groupVerticalAlign>
@@ -723,16 +723,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Preview</value>
+    <key>tr</key>
+    <value>Ön izleme</value>
    </title>
    <title>
     <key>ru</key>
     <value>Предварительный просмотр</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ön izleme</value>
+    <key>en</key>
+    <value>Preview</value>
    </title>
    <extendedTooltip>
     <name>PagePreviewExtendedTooltip</name>
@@ -1032,16 +1032,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Rows</value>
+    <key>tr</key>
+    <value>Satırlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Строки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Satırlar</value>
+    <key>en</key>
+    <value>Rows</value>
    </title>
    <extendedTooltip>
     <name>PageTableTestRowsExtendedTooltip</name>
@@ -1557,16 +1557,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Row parts</value>
+    <key>tr</key>
+    <value>Satır parçası</value>
    </title>
    <title>
     <key>ru</key>
     <value>Части строки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Satır parçası</value>
+    <key>en</key>
+    <value>Row parts</value>
    </title>
    <extendedTooltip>
     <name>PageRowPartsExtendedTooltip</name>
@@ -1595,16 +1595,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Rows</value>
+   <key>tr</key>
+   <value>Satırlar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Строки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
+   <key>en</key>
+   <value>Rows</value>
   </title>
   <extendedTooltip>
    <name>PageTestRowsExtendedTooltip</name>
@@ -1703,16 +1703,16 @@
  <attributes>
   <name>TestRexExpStrings</name>
   <title>
-   <key>en</key>
-   <value>Test rex exp strings</value>
+   <key>tr</key>
+   <value>RexExp satırları test et</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тестировать RefExp строки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>RexExp satırları test et</value>
+   <key>en</key>
+   <value>Test rex exp strings</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1730,16 +1730,16 @@
   <columns>
    <name>Row</name>
    <title>
-    <key>en</key>
-    <value>Row</value>
+    <key>tr</key>
+    <value>Satır</value>
    </title>
    <title>
     <key>ru</key>
     <value>Строка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Satır</value>
+    <key>en</key>
+    <value>Row</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1757,16 +1757,16 @@
  <attributes>
   <name>RegExp</name>
   <title>
-   <key>en</key>
-   <value>Reg exp</value>
+   <key>tr</key>
+   <value>RegExp</value>
   </title>
   <title>
    <key>ru</key>
    <value>Регулярные выражения</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>RegExp</value>
+   <key>en</key>
+   <value>Reg exp</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1783,16 +1783,16 @@
  <attributes>
   <name>HTMLRegExpTestRowsAnalyze</name>
   <title>
-   <key>en</key>
-   <value>HTMLReg exp test rows analyze</value>
+   <key>tr</key>
+   <value>HTML RegExp test satırlar analiz</value>
   </title>
   <title>
    <key>ru</key>
    <value>HTML RegExp анализ тестрования строк</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>HTML RegExp test satırlar analiz</value>
+   <key>en</key>
+   <value>HTMLReg exp test rows analyze</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1809,16 +1809,16 @@
  <formCommands>
   <name>FillTestRows</name>
   <title>
-   <key>en</key>
-   <value>Fill test rows</value>
+   <key>tr</key>
+   <value>Test satır doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить тестовые строки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Test satır doldur</value>
+   <key>en</key>
+   <value>Fill test rows</value>
   </title>
   <id>1</id>
   <use>
@@ -1834,16 +1834,16 @@
  <formCommands>
   <name>UpdateRegExp</name>
   <title>
-   <key>en</key>
-   <value>Update RegExp</value>
+   <key>tr</key>
+   <value>RegExp değiştir</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить RegExp</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>RegExp değiştir</value>
+   <key>en</key>
+   <value>Update RegExp</value>
   </title>
   <id>2</id>
   <use>
@@ -1863,16 +1863,16 @@
  <formCommands>
   <name>Done</name>
   <title>
-   <key>en</key>
-   <value>Done</value>
+   <key>tr</key>
+   <value>Tamamlandı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Завершено</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tamamlandı</value>
+   <key>en</key>
+   <value>Done</value>
   </title>
   <id>3</id>
   <use>

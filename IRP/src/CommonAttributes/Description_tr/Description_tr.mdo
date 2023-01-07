@@ -2,7 +2,7 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="a24f9032-2cd0-4e54-b5e1-e3a92b958d06">
  <name>Description_tr</name>
  <synonym>
-  <key>en</key>
+  <key>tr</key>
   <value>TR</value>
  </synonym>
  <synonym>
@@ -10,7 +10,7 @@
   <value>Наименование (tr)</value>
  </synonym>
  <synonym>
-  <key>tr</key>
+  <key>en</key>
   <value>TR</value>
  </synonym>
  <type>

@@ -7,62 +7,62 @@
  </producedTypes>
  <name>InvoicingStatuses</name>
  <synonym>
-  <key>en</key>
-  <value>Invoicing statuses</value>
+  <key>tr</key>
+  <value>Fatura kapatma statüleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Статусы закрытия инвойсами</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Fatura kapatma statüleri</value>
+  <key>en</key>
+  <value>Invoicing statuses</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="a08711be-1e46-4c15-914d-8243dd52bff8">
   <name>Awaiting</name>
   <synonym>
-   <key>en</key>
-   <value>Awaiting</value>
+   <key>tr</key>
+   <value>Beklemede</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>В ожидании</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Beklemede</value>
+   <key>en</key>
+   <value>Awaiting</value>
   </synonym>
  </enumValues>
  <enumValues uuid="a15ab1b3-b40d-4896-8d80-f4c1d33b6c84">
   <name>Invoicing</name>
   <synonym>
-   <key>en</key>
-   <value>Invoicing</value>
+   <key>tr</key>
+   <value>Faturalandırılıyor</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>В процессе</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Faturalandırılıyor</value>
+   <key>en</key>
+   <value>Invoicing</value>
   </synonym>
  </enumValues>
  <enumValues uuid="f7f39f0d-1d59-4ca0-864d-91ef4cc6dcdc">
   <name>Closed</name>
   <synonym>
-   <key>en</key>
-   <value>Closed</value>
+   <key>tr</key>
+   <value>Tamamlandı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Завершен</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tamamlandı</value>
+   <key>en</key>
+   <value>Closed</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

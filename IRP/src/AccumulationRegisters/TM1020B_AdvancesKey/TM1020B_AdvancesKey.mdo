@@ -10,16 +10,16 @@
  </producedTypes>
  <name>TM1020B_AdvancesKey</name>
  <synonym>
-  <key>en</key>
-  <value>TM1020 Advances key</value>
+  <key>tr</key>
+  <value>TM1020 Cari hesap avans anahtarları</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>TM1050 Ключи авансов партнеров</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>TM1020 Cari hesap avans anahtarları</value>
+  <key>en</key>
+  <value>TM1020 Advances key</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultListForm>AccumulationRegister.TM1020B_AdvancesKey.Form.ListForm</defaultListForm>
@@ -28,16 +28,16 @@
  <resources uuid="ffc15173-69ce-480f-8f6c-01f2b116fd87">
   <name>Amount</name>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -49,16 +49,16 @@
  <dimensions uuid="2056ac88-0767-4242-ba6b-5f59482fa52e">
   <name>AdvanceKey</name>
   <synonym>
-   <key>en</key>
-   <value>Advance key</value>
+   <key>tr</key>
+   <value>Cari hesap avans anahtarı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ключ аванса партнеров</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap avans anahtarı</value>
+   <key>en</key>
+   <value>Advance key</value>
   </synonym>
   <type>
    <types>CatalogRef.AdvancesKeys</types>
@@ -72,16 +72,16 @@
  <forms uuid="4271fa25-2f1d-41a5-a26c-b04bd47cb03b">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

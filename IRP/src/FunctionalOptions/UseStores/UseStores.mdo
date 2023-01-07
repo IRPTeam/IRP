@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="03e62563-ad25-479e-a6ce-66f9df8a26ee">
  <name>UseStores</name>
  <synonym>
-  <key>en</key>
-  <value>Use stores</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Çoklu depolar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать больше одного склада</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Çoklu depolar</value>
+  <key>en</key>
+  <value>Use stores</value>
  </synonym>
  <location>Constant.UseStores</location>
  <privilegedGetMode>true</privilegedGetMode>

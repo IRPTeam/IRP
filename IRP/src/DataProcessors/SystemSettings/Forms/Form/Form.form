@@ -12,9 +12,9 @@
    <segments>RunBackgroundJobInDebugMode</segments>
   </dataPath>
   <toolTip>
-   <key>en</key>
-   <value>For debug bacground jobs set this flag.
-After that - all jobs in CURRENT session will be start as common code, not like job.</value>
+   <key>tr</key>
+   <value>Arka plan görevlerini hata ayıklaması için bu işareti işaretleyiniz.
+ Ondan sonra GEÇERLİ seansın tüm görevler arka plan olarak değil, normal kod olarak çalıştırılacak</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
@@ -22,9 +22,9 @@ After that - all jobs in CURRENT session will be start as common code, not like 
  После этого все задания в ТЕКУЩЕМ сеансе будут запускаться как обычный код, а не как фоновое задание.</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Arka plan görevlerini hata ayıklaması için bu işareti işaretleyiniz.
- Ondan sonra GEÇERLİ seansın tüm görevler arka plan olarak değil, normal kod olarak çalıştırılacak</value>
+   <key>en</key>
+   <value>For debug bacground jobs set this flag.
+After that - all jobs in CURRENT session will be start as common code, not like job.</value>
   </toolTip>
   <toolTipRepresentation>ShowBottom</toolTipRepresentation>
   <handlers>
@@ -77,16 +77,16 @@ After that - all jobs in CURRENT session will be start as common code, not like 
    <segments>IgnoreLockModificationData</segments>
   </dataPath>
   <toolTip>
-   <key>en</key>
-   <value>If this option is ON - all lock data reason will be disabled for current session</value>
+   <key>tr</key>
+   <value>Bu seçenek AÇIK ise - bu seans için tüm veri düzeltme kurallar devre dışı bırakılacak</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Если данный переключатель ВКЛЮЧЕН - все ограничения изменения данных для данного сеанса будут отключены.</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Bu seçenek AÇIK ise - bu seans için tüm veri düzeltme kurallar devre dışı bırakılacak</value>
+   <key>en</key>
+   <value>If this option is ON - all lock data reason will be disabled for current session</value>
   </toolTip>
   <toolTipRepresentation>ShowBottom</toolTipRepresentation>
   <handlers>
@@ -167,16 +167,16 @@ After that - all jobs in CURRENT session will be start as common code, not like 
  <attributes>
   <name>RunBackgroundJobInDebugMode</name>
   <title>
-   <key>en</key>
-   <value>Run background job in debug mode</value>
+   <key>tr</key>
+   <value>Arka plan görevleri debut modunda çalıştır</value>
   </title>
   <title>
    <key>ru</key>
    <value>Запускать фоновые задания в режиме отладки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Arka plan görevleri debut modunda çalıştır</value>
+   <key>en</key>
+   <value>Run background job in debug mode</value>
   </title>
   <id>2</id>
   <valueType>
@@ -192,16 +192,16 @@ After that - all jobs in CURRENT session will be start as common code, not like 
  <attributes>
   <name>IgnoreLockModificationData</name>
   <title>
-   <key>en</key>
-   <value>Ignore lock modification data</value>
+   <key>tr</key>
+   <value>Veri düzeltme kuralları dikkate alma</value>
   </title>
   <title>
    <key>ru</key>
    <value>Игнорировать запрет изменения данных</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Veri düzeltme kuralları dikkate alma</value>
+   <key>en</key>
+   <value>Ignore lock modification data</value>
   </title>
   <id>3</id>
   <valueType>

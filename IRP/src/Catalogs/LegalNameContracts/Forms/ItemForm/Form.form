@@ -209,16 +209,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Dates</value>
+   <key>tr</key>
+   <value>Tarihler</value>
   </title>
   <title>
    <key>ru</key>
    <value>Даты</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tarihler</value>
+   <key>en</key>
+   <value>Dates</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -404,16 +404,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Bank account</value>
+   <key>tr</key>
+   <value>Banka hesabı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Банковский счет</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Banka hesabı</value>
+   <key>en</key>
+   <value>Bank account</value>
   </title>
   <extendedTooltip>
    <name>GroupBankAccountExtendedTooltip</name>

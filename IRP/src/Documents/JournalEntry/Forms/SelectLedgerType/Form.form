@@ -124,16 +124,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Journal entrys group icon</value>
+    <key>tr</key>
+    <value>Mahsup fişleri grup resim</value>
    </title>
    <title>
     <key>ru</key>
     <value>Бух. операции группа картинка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Mahsup fişleri grup resim</value>
+    <key>en</key>
+    <value>Journal entrys group icon</value>
    </title>
    <extendedTooltip>
     <name>JournalEntriesGroupIconExtendedTooltip</name>
@@ -476,16 +476,16 @@
  <attributes>
   <name>JournalEntries</name>
   <title>
-   <key>en</key>
-   <value>Journal entrys</value>
+   <key>tr</key>
+   <value>Mahsup fişleri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Бухгалтерские операции</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Mahsup fişleri</value>
+   <key>en</key>
+   <value>Journal entrys</value>
   </title>
   <id>1</id>
   <valueType>
@@ -500,16 +500,16 @@
   <columns>
    <name>Icon</name>
    <title>
-    <key>en</key>
-    <value>Icon</value>
+    <key>tr</key>
+    <value>Simge</value>
    </title>
    <title>
     <key>ru</key>
     <value>Иконка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Simge</value>
+    <key>en</key>
+    <value>Icon</value>
    </title>
    <id>2</id>
    <valueType>
@@ -525,16 +525,16 @@
   <columns>
    <name>JournalEntry</name>
    <title>
-    <key>en</key>
-    <value>Journal entry</value>
+    <key>tr</key>
+    <value>Mahsup fişi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Бухгалтерская операция</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Mahsup fişi</value>
+    <key>en</key>
+    <value>Journal entry</value>
    </title>
    <id>3</id>
    <valueType>
@@ -550,16 +550,16 @@
   <columns>
    <name>LedgerType</name>
    <title>
-    <key>en</key>
-    <value>Ledger type</value>
+    <key>tr</key>
+    <value>Defter tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип учета</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Defter tipi</value>
+    <key>en</key>
+    <value>Ledger type</value>
    </title>
    <id>4</id>
    <valueType>
@@ -576,16 +576,16 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>en</key>
-   <value>Ok</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>Ok</value>
   </title>
   <id>1</id>
   <use>
@@ -601,16 +601,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <id>2</id>
   <use>

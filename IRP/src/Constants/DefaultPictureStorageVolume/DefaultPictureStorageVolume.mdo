@@ -7,16 +7,16 @@
  </producedTypes>
  <name>DefaultPictureStorageVolume</name>
  <synonym>
-  <key>en</key>
-  <value>Default picture storage volume</value>
+  <key>tr</key>
+  <value>Varsayılan depolama resim hacmi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Том хранения картинок по умолчанию</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Varsayılan depolama resim hacmi</value>
+  <key>en</key>
+  <value>Default picture storage volume</value>
  </synonym>
  <type>
   <types>CatalogRef.FileStorageVolumes</types>

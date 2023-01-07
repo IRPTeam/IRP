@@ -479,16 +479,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Partner info</value>
+   <key>tr</key>
+   <value>Cari hesap bilgisi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Информация о партнере</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Cari hesap bilgisi</value>
+   <key>en</key>
+   <value>Partner info</value>
   </title>
   <extendedTooltip>
    <name>GroupPartnerInfoExtendedTooltip</name>

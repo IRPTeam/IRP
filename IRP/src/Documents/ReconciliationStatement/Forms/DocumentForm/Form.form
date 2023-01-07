@@ -13,16 +13,16 @@
      <name>DecorationGroupTitleCollapsedPicture</name>
      <id>90</id>
      <title>
-      <key>en</key>
-      <value>Decoration group title collapsed picture</value>
+      <key>tr</key>
+      <value>Dekorasyon grubu tanım birleşmiş resim</value>
      </title>
      <title>
       <key>ru</key>
       <value>Сворачиваемая группа формы</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Dekorasyon grubu tanım birleşmiş resim</value>
+      <key>en</key>
+      <value>Decoration group title collapsed picture</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -72,16 +72,16 @@
      <name>DecorationGroupTitleCollapsedLabel</name>
      <id>93</id>
      <title>
-      <key>en</key>
-      <value>Please, fill the document</value>
+      <key>tr</key>
+      <value>Lütfen, evrakı doldurun</value>
      </title>
      <title>
       <key>ru</key>
       <value>Пожалуйста, заполните документ</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurun</value>
+      <key>en</key>
+      <value>Please, fill the document</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -208,16 +208,16 @@
      <name>DecorationGroupTitleUncollapsedLabel</name>
      <id>101</id>
      <title>
-      <key>en</key>
-      <value>Please, fill the document</value>
+      <key>tr</key>
+      <value>Lütfen, evrakı doldurun</value>
      </title>
      <title>
       <key>ru</key>
       <value>Пожалуйста, заполните документ</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurun</value>
+      <key>en</key>
+      <value>Please, fill the document</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -644,16 +644,16 @@
       <name>DecorationStatusHistory</name>
       <id>81</id>
       <title>
-       <key>en</key>
-       <value>History</value>
+       <key>tr</key>
+       <value>Geçmiş</value>
       </title>
       <title>
        <key>ru</key>
        <value>История статусов</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Geçmiş</value>
+       <key>en</key>
+       <value>History</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -914,16 +914,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group right</value>
+     <key>tr</key>
+     <value>Grup (sağ)</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группировка по правому краю</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Grup (sağ)</value>
+     <key>en</key>
+     <value>Group right</value>
     </title>
     <extendedTooltip>
      <name>GroupTitleRightExtendedTooltip</name>
@@ -984,16 +984,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group title</value>
+   <key>tr</key>
+   <value>Grup tanımı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Название группы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup tanımı</value>
+   <key>en</key>
+   <value>Group title</value>
   </title>
   <extendedTooltip>
    <name>GroupTitleExtendedTooltip</name>
@@ -1073,7 +1073,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <format>
-       <key>en</key>
+       <key>tr</key>
        <value>NZ=0.00</value>
       </format>
       <format>
@@ -1081,7 +1081,7 @@
        <value>NZ=0.00</value>
       </format>
       <format>
-       <key>tr</key>
+       <key>en</key>
        <value>NZ=0.00</value>
       </format>
      </extInfo>
@@ -1131,7 +1131,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <format>
-       <key>en</key>
+       <key>tr</key>
        <value>NZ=0.00</value>
       </format>
       <format>
@@ -1139,7 +1139,7 @@
        <value>NZ=0.00</value>
       </format>
       <format>
-       <key>tr</key>
+       <key>en</key>
        <value>NZ=0.00</value>
       </format>
      </extInfo>
@@ -1682,7 +1682,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <format>
-       <key>en</key>
+       <key>tr</key>
        <value>NZ=0.00</value>
       </format>
       <format>
@@ -1690,7 +1690,7 @@
        <value>NZ=0.00</value>
       </format>
       <format>
-       <key>tr</key>
+       <key>en</key>
        <value>NZ=0.00</value>
       </format>
      </extInfo>
@@ -1740,7 +1740,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <format>
-       <key>en</key>
+       <key>tr</key>
        <value>NZ=0.00</value>
       </format>
       <format>
@@ -1748,7 +1748,7 @@
        <value>NZ=0.00</value>
       </format>
       <format>
-       <key>tr</key>
+       <key>en</key>
        <value>NZ=0.00</value>
       </format>
      </extInfo>
@@ -1790,16 +1790,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Transactions</value>
+    <key>tr</key>
+    <value>İşlemler</value>
    </title>
    <title>
     <key>ru</key>
     <value>Основное</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>İşlemler</value>
+    <key>en</key>
+    <value>Transactions</value>
    </title>
    <extendedTooltip>
     <name>GroupTransactionsExtendedTooltip</name>
@@ -2031,16 +2031,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Other</value>
+    <key>tr</key>
+    <value>Diğer</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дополнительно</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
+    <key>en</key>
+    <value>Other</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -2069,16 +2069,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group main pages</value>
+   <key>tr</key>
+   <value>Grup ana sayfalar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа главных страниц</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
+   <key>en</key>
+   <value>Group main pages</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPaigesExtendedTooltip</name>
@@ -2183,16 +2183,16 @@
  <attributes>
   <name>Description</name>
   <title>
-   <key>en</key>
-   <value>Description</value>
+   <key>tr</key>
+   <value>Tanım</value>
   </title>
   <title>
    <key>ru</key>
    <value>Комментарий</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tanım</value>
+   <key>en</key>
+   <value>Description</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2209,16 +2209,16 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>en</key>
-   <value>Group items</value>
+   <key>tr</key>
+   <value>Grup malzemeler</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа элементов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup malzemeler</value>
+   <key>en</key>
+   <value>Group items</value>
   </title>
   <id>3</id>
   <valueType>
@@ -2237,16 +2237,16 @@
  <formCommands>
   <name>Fill</name>
   <title>
-   <key>en</key>
-   <value>Fill</value>
+   <key>tr</key>
+   <value>Doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Doldur</value>
+   <key>en</key>
+   <value>Fill</value>
   </title>
   <id>1</id>
   <use>
@@ -2263,16 +2263,16 @@
  <formCommands>
   <name>ShowHiddenTables</name>
   <title>
-   <key>en</key>
-   <value>Show hidden tables</value>
+   <key>tr</key>
+   <value>Gizli tabloları göster</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать скрытые таблицы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Gizli tabloları göster</value>
+   <key>en</key>
+   <value>Show hidden tables</value>
   </title>
   <id>2</id>
   <use>

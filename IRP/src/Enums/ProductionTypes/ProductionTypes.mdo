@@ -7,47 +7,47 @@
  </producedTypes>
  <name>ProductionTypes</name>
  <synonym>
-  <key>en</key>
-  <value>Production type</value>
+  <key>tr</key>
+  <value>Üretim tipi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Вид производства</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Üretim tipi</value>
+  <key>en</key>
+  <value>Production type</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="db4396f9-7540-4a4e-addf-1a8873868857">
   <name>Product</name>
   <synonym>
-   <key>en</key>
-   <value>Product</value>
+   <key>tr</key>
+   <value>Malzeme</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Товар</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme</value>
+   <key>en</key>
+   <value>Product</value>
   </synonym>
  </enumValues>
  <enumValues uuid="ae058f56-8806-4f46-870b-7ee6105d73d8">
   <name>Semiproduct</name>
   <synonym>
-   <key>en</key>
-   <value>Semiproduct</value>
+   <key>tr</key>
+   <value>Yarı mamul</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Полуфабрикат</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Yarı mamul</value>
+   <key>en</key>
+   <value>Semiproduct</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

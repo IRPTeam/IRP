@@ -2,7 +2,7 @@
 <mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="daf80fe7-152c-48ef-97e6-445975662a3a">
  <name>Saas</name>
  <synonym>
-  <key>en</key>
+  <key>tr</key>
   <value>Saas</value>
  </synonym>
  <synonym>
@@ -10,7 +10,7 @@
   <value>SaaS</value>
  </synonym>
  <synonym>
-  <key>tr</key>
+  <key>en</key>
   <value>Saas</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>

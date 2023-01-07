@@ -2,16 +2,16 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="25646f28-8647-40e3-bd9f-ab6044227c87">
  <name>Other</name>
  <synonym>
-  <key>en</key>
-  <value>Other</value>
+  <key>tr</key>
+  <value>Diğer</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Дополнительно</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Diğer</value>
+  <key>en</key>
+  <value>Other</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <content>InformationRegister.CompanyLedgerTypes</content>

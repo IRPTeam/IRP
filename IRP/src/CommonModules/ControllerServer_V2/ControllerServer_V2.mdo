@@ -2,7 +2,7 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a8a7efb5-b5f8-4f78-96e2-776203aeacf4">
  <name>ControllerServer_V2</name>
  <synonym>
-  <key>en</key>
+  <key>tr</key>
   <value>Controller server v2</value>
  </synonym>
  <synonym>
@@ -10,7 +10,7 @@
   <value>Контроллер сервер v1</value>
  </synonym>
  <synonym>
-  <key>tr</key>
+  <key>en</key>
   <value>Controller server v2</value>
  </synonym>
  <server>true</server>

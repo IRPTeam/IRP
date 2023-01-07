@@ -6,32 +6,32 @@
  </producedTypes>
  <name>PointOfSale</name>
  <synonym>
-  <key>en</key>
-  <value>Point of sale</value>
+  <key>tr</key>
+  <value>Satış ekranı</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Рабочее место кассира</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Satış ekranı</value>
+  <key>en</key>
+  <value>Point of sale</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.PointOfSale.Form.Form</defaultForm>
  <attributes uuid="a569aba7-c821-4877-8f3a-6b44d7cae57f">
   <name>Amount</name>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -42,16 +42,16 @@
  <attributes uuid="691cb651-dbb4-492f-8417-9655a1705d0d">
   <name>Discount</name>
   <synonym>
-   <key>en</key>
-   <value>Discount</value>
+   <key>tr</key>
+   <value>İndirim</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Скидка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İndirim</value>
+   <key>en</key>
+   <value>Discount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -62,16 +62,16 @@
  <attributes uuid="819cdf46-4204-4684-bbf4-58f53d95f194">
   <name>Cashback</name>
   <synonym>
-   <key>en</key>
-   <value>Cashback</value>
+   <key>tr</key>
+   <value>Para üstü</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сдача</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Para üstü</value>
+   <key>en</key>
+   <value>Cashback</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -82,16 +82,16 @@
  <attributes uuid="a9f12336-8a92-4eee-9b66-29ee982bd135">
   <name>CustomerCash</name>
   <synonym>
-   <key>en</key>
-   <value>Customer cash</value>
+   <key>tr</key>
+   <value>Müşteri nakit</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Оплата клиента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Müşteri nakit</value>
+   <key>en</key>
+   <value>Customer cash</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -102,16 +102,16 @@
  <attributes uuid="7fd5393a-ed15-4de7-955c-be5d3715b311">
   <name>Workstation</name>
   <synonym>
-   <key>en</key>
-   <value>Workstation</value>
+   <key>tr</key>
+   <value>Çalışma yeri</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Рабочее место</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Çalışma yeri</value>
+   <key>en</key>
+   <value>Workstation</value>
   </synonym>
   <type>
    <types>CatalogRef.Workstations</types>
@@ -122,16 +122,16 @@
  <attributes uuid="6f075ed4-8717-425d-a8f2-f3596b403efa">
   <name>Branch</name>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -142,7 +142,7 @@
  <forms uuid="6e29de76-f7b4-42c8-a2b7-9df2359eb2f3">
   <name>Form</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -150,7 +150,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
@@ -159,16 +159,16 @@
  <forms uuid="757bb849-077b-44b3-a4de-7853e891ca13">
   <name>Payment</name>
   <synonym>
-   <key>en</key>
-   <value>Payment</value>
+   <key>tr</key>
+   <value>Ödeme</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Оплата</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ödeme</value>
+   <key>en</key>
+   <value>Payment</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -176,16 +176,16 @@
  <forms uuid="e0163b39-c31e-4412-8c14-58fdd43c4cc4">
   <name>PaymentTypes</name>
   <synonym>
-   <key>en</key>
-   <value>Payment types</value>
+   <key>tr</key>
+   <value>Ödeme tipleri</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Виды оплаты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ödeme tipleri</value>
+   <key>en</key>
+   <value>Payment types</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -193,16 +193,16 @@
  <forms uuid="7d563f30-7545-4d8c-9bd2-d1e63038bde6">
   <name>SessionClosing</name>
   <synonym>
-   <key>en</key>
-   <value>Session closing</value>
+   <key>tr</key>
+   <value>Vardya kapanışı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Закрытие смены</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Vardya kapanışı</value>
+   <key>en</key>
+   <value>Session closing</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -210,16 +210,16 @@
  <forms uuid="4885bd97-2e9d-4295-abe0-7776837890ae">
   <name>CashOut</name>
   <synonym>
-   <key>en</key>
-   <value>Cash out</value>
+   <key>tr</key>
+   <value>Nakit çıkışı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Изъятие</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Nakit çıkışı</value>
+   <key>en</key>
+   <value>Cash out</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

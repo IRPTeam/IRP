@@ -6,16 +6,16 @@
  </producedTypes>
  <name>CreateRegExp</name>
  <synonym>
-  <key>en</key>
-  <value>Create RegExp</value>
+  <key>tr</key>
+  <value>RegExp oluştur</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Создать RegExp</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>RegExp oluştur</value>
+  <key>en</key>
+  <value>Create RegExp</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.CreateRegExp.Form.Form</defaultForm>
@@ -26,30 +26,30 @@
   </producedTypes>
   <name>RowParts</name>
   <synonym>
-   <key>en</key>
-   <value>Row parts</value>
+   <key>tr</key>
+   <value>Satır parçası</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Части строки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Satır parçası</value>
+   <key>en</key>
+   <value>Row parts</value>
   </synonym>
   <attributes uuid="c74d06bd-ee73-42ed-a9f7-d65288628973">
    <name>ExpressionType</name>
    <synonym>
-    <key>en</key>
-    <value>Expression type</value>
+    <key>tr</key>
+    <value>Değer tipi</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Вид представления</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Değer tipi</value>
+    <key>en</key>
+    <value>Expression type</value>
    </synonym>
    <type>
     <types>String</types>
@@ -64,7 +64,7 @@
   <attributes uuid="f7920710-b0c0-4365-8f09-61c9fcd5cb83">
    <name>ID</name>
    <synonym>
-    <key>en</key>
+    <key>tr</key>
     <value>ID</value>
    </synonym>
    <synonym>
@@ -72,7 +72,7 @@
     <value>ID</value>
    </synonym>
    <synonym>
-    <key>tr</key>
+    <key>en</key>
     <value>ID</value>
    </synonym>
    <type>
@@ -88,16 +88,16 @@
   <attributes uuid="ff89796b-f68b-42d9-9b7e-a1d5a343f1ba">
    <name>RowPart</name>
    <synonym>
-    <key>en</key>
-    <value>Row part</value>
+    <key>tr</key>
+    <value>Satır parçası</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Часть строки</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Satır parçası</value>
+    <key>en</key>
+    <value>Row part</value>
    </synonym>
    <type>
     <types>String</types>
@@ -112,16 +112,16 @@
   <attributes uuid="2a15a267-9d17-4be3-8d85-26089e44aa7b">
    <name>RegExp</name>
    <synonym>
-    <key>en</key>
-    <value>Reg exp</value>
+    <key>tr</key>
+    <value>RegExp</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Регулярные выражения</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>RegExp</value>
+    <key>en</key>
+    <value>Reg exp</value>
    </synonym>
    <type>
     <types>String</types>
@@ -136,16 +136,16 @@
   <attributes uuid="eccbda08-6a77-49bd-997e-122c89f32e3e">
    <name>isWhitespace</name>
    <synonym>
-    <key>en</key>
-    <value>Is whitespace</value>
+    <key>tr</key>
+    <value>Tüm karakterler</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Это белый список</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Tüm karakterler</value>
+    <key>en</key>
+    <value>Is whitespace</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -157,16 +157,16 @@
   <attributes uuid="702adb42-ed27-47e9-b8be-c3a40107c7d3">
    <name>ExternalFunction</name>
    <synonym>
-    <key>en</key>
-    <value>External function</value>
+    <key>tr</key>
+    <value>Dış fonksiyon</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Внешняя функция</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Dış fonksiyon</value>
+    <key>en</key>
+    <value>External function</value>
    </synonym>
    <type>
     <types>CatalogRef.ExternalFunctions</types>
@@ -179,7 +179,7 @@
  <forms uuid="5e274039-734d-4653-8f72-75e59019cd44">
   <name>Form</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -187,7 +187,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>

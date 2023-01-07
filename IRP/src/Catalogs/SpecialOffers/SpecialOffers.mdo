@@ -9,16 +9,16 @@
  </producedTypes>
  <name>SpecialOffers</name>
  <synonym>
-  <key>en</key>
-  <value>Special offers</value>
+  <key>tr</key>
+  <value>Kampanyalar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Скидки</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kampanyalar</value>
+  <key>en</key>
+  <value>Special offers</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -76,16 +76,16 @@
   <dataHistory>Use</dataHistory>
   <name>Parent</name>
   <synonym>
-   <key>en</key>
-   <value>Parent</value>
+   <key>tr</key>
+   <value>Üst öğe</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Родитель</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Üst öğe</value>
+   <key>en</key>
+   <value>Parent</value>
   </synonym>
   <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
@@ -145,16 +145,16 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectPresentation>
-  <key>en</key>
-  <value>Special offer</value>
+  <key>tr</key>
+  <value>Kampanya</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Скидка</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Kampanya</value>
+  <key>en</key>
+  <value>Special offer</value>
  </objectPresentation>
  <hierarchical>true</hierarchical>
  <levelCount>2</levelCount>
@@ -174,16 +174,16 @@
  <attributes uuid="fab4eaec-2a2f-40c0-ba87-06946e527260">
   <name>Settings</name>
   <synonym>
-   <key>en</key>
-   <value>Settings</value>
+   <key>tr</key>
+   <value>Ayarlar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Настройки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ayarlar</value>
+   <key>en</key>
+   <value>Settings</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -197,16 +197,16 @@
  <attributes uuid="e49008d4-cc2d-49ee-ad19-a9d5688e57db">
   <name>SpecialOfferType</name>
   <synonym>
-   <key>en</key>
-   <value>Special offer type</value>
+   <key>tr</key>
+   <value>Kampanya tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Способ применения скидок</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kampanya tipi</value>
+   <key>en</key>
+   <value>Special offer type</value>
   </synonym>
   <type>
    <types>CatalogRef.SpecialOfferTypes</types>
@@ -221,16 +221,16 @@
  <attributes uuid="38476fa2-c496-458b-a723-0f0b845fedf0">
   <name>Priority</name>
   <synonym>
-   <key>en</key>
-   <value>Priority</value>
+   <key>tr</key>
+   <value>Önem</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Приоритет</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Önem</value>
+   <key>en</key>
+   <value>Priority</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -251,16 +251,16 @@
  <attributes uuid="9b34285b-59b0-4197-8663-b7fbe83cb4b2">
   <name>Manually</name>
   <synonym>
-   <key>en</key>
-   <value>Manually</value>
+   <key>tr</key>
+   <value>Manuel</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ручное назначение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Manuel</value>
+   <key>en</key>
+   <value>Manually</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -274,16 +274,16 @@
  <attributes uuid="434f75b6-d091-4e19-ad9e-8ca99d2ea281">
   <name>StartOf</name>
   <synonym>
-   <key>en</key>
-   <value>Start of</value>
+   <key>tr</key>
+   <value>Başlangıç tarihi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дата начала действия</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Başlangıç tarihi</value>
+   <key>en</key>
+   <value>Start of</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -299,16 +299,16 @@
  <attributes uuid="c875e906-b9f4-40f9-acaf-be4553286880">
   <name>EndOf</name>
   <synonym>
-   <key>en</key>
-   <value>End of</value>
+   <key>tr</key>
+   <value>Bitiş</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дата окончания действия</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Bitiş</value>
+   <key>en</key>
+   <value>End of</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -324,16 +324,16 @@
  <attributes uuid="82b22115-a469-4b57-9ad2-95d4db243b7e">
   <name>Launch</name>
   <synonym>
-   <key>en</key>
-   <value>Launch</value>
+   <key>tr</key>
+   <value>Başlatmak</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Активировать</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Başlatmak</value>
+   <key>en</key>
+   <value>Launch</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -348,16 +348,16 @@
  <attributes uuid="db183eec-aa74-4a1a-b58e-cb057aa535c3">
   <name>ManualInputValue</name>
   <synonym>
-   <key>en</key>
-   <value>Manual input value</value>
+   <key>tr</key>
+   <value>Manuel girilen değer</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ручной выбор значения</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Manuel girilen değer</value>
+   <key>en</key>
+   <value>Manual input value</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -371,16 +371,16 @@
  <attributes uuid="9efa1600-cea0-4e6c-a280-446db770215d">
   <name>Type</name>
   <synonym>
-   <key>en</key>
-   <value>Type</value>
+   <key>tr</key>
+   <value>Tip</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tip</value>
+   <key>en</key>
+   <value>Type</value>
   </synonym>
   <type>
    <types>EnumRef.SpecialOfferTypes</types>
@@ -394,16 +394,16 @@
  <attributes uuid="b09a7cf3-e6db-4fb2-b968-2dc9deaf697a">
   <name>DocumentType</name>
   <synonym>
-   <key>en</key>
-   <value>Document type</value>
+   <key>tr</key>
+   <value>Evrak tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Действует на документы</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak tipi</value>
+   <key>en</key>
+   <value>Document type</value>
   </synonym>
   <type>
    <types>EnumRef.OffersDocumentTypes</types>
@@ -418,16 +418,16 @@
  <attributes uuid="8544a414-e4f8-403d-80e5-52e92fd03f01">
   <name>SequentialCalculationForEachRow</name>
   <synonym>
-   <key>en</key>
-   <value>Sequential calculation for each row in document</value>
+   <key>tr</key>
+   <value>Evraktaki tüm satırlar için sıralı hesaplama</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Последовательный расчет для каждой строки в документе</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evraktaki tüm satırlar için sıralı hesaplama</value>
+   <key>en</key>
+   <value>Sequential calculation for each row in document</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -446,30 +446,30 @@
   </producedTypes>
   <name>Rules</name>
   <synonym>
-   <key>en</key>
-   <value>Rules</value>
+   <key>tr</key>
+   <value>Kurallar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Правила</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kurallar</value>
+   <key>en</key>
+   <value>Rules</value>
   </synonym>
   <attributes uuid="45a0606f-4972-4dca-b61f-5fd1515a7b42">
    <name>Rule</name>
    <synonym>
-    <key>en</key>
-    <value>Rule</value>
+    <key>tr</key>
+    <value>Kural</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Условия предоставления</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Kural</value>
+    <key>en</key>
+    <value>Rule</value>
    </synonym>
    <type>
     <types>CatalogRef.SpecialOfferRules</types>
@@ -487,30 +487,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <attributes uuid="cd6c532c-99d6-4daa-a8ef-64b3604ddeca">
    <name>Property</name>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -523,16 +523,16 @@
   <attributes uuid="6ac9d908-b79c-4a4d-9ec3-c17c46f75b44">
    <name>Value</name>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -550,16 +550,16 @@
  <forms uuid="308c8297-9e1b-490e-94ef-83b2234a6303">
   <name>ItemForm</name>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -567,16 +567,16 @@
  <forms uuid="7e929be8-086d-46cc-9d96-ce729bb3795f">
   <name>GroupForm</name>
   <synonym>
-   <key>en</key>
-   <value>Group form</value>
+   <key>tr</key>
+   <value>Grup from</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма группы</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Grup from</value>
+   <key>en</key>
+   <value>Group form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -584,16 +584,16 @@
  <forms uuid="610e407f-0df2-495a-9905-4f689ddcb0d6">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -601,16 +601,16 @@
  <forms uuid="594ff96e-be44-4fff-9a94-e6c6f39b6199">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

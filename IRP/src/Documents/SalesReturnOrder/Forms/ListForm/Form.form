@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -885,16 +885,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Store</value>
+       <key>tr</key>
+       <value>Depo</value>
       </content>
       <content>
        <key>ru</key>
        <value>Склад</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Depo</value>
+       <key>en</key>
+       <value>Store</value>
       </content>
      </localValue>
     </title>

@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="24b3e9e5-d3b3-411b-b503-fb29c44fd3e7">
  <name>UseManagersAndSalesPersons</name>
  <synonym>
-  <key>en</key>
-  <value>Use managers and sales persons</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Müşteri temsilcileri ve satış elemanlar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать менеджеров и продавцев</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Müşteri temsilcileri ve satış elemanlar</value>
+  <key>en</key>
+  <value>Use managers and sales persons</value>
  </synonym>
  <location>Constant.UseManagersAndSalesPersons</location>
  <privilegedGetMode>true</privilegedGetMode>

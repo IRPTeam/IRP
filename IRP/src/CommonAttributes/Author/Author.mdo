@@ -2,16 +2,16 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="95e1dea9-ce13-4aa5-8df6-a67fb0588ec5">
  <name>Author</name>
  <synonym>
-  <key>en</key>
-  <value>Author</value>
+  <key>tr</key>
+  <value>Kayıt oluşturan</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Автор</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kayıt oluşturan</value>
+  <key>en</key>
+  <value>Author</value>
  </synonym>
  <type>
   <types>CatalogRef.Users</types>

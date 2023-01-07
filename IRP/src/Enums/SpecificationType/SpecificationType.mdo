@@ -7,38 +7,38 @@
  </producedTypes>
  <name>SpecificationType</name>
  <synonym>
-  <key>en</key>
-  <value>Specification type</value>
+  <key>tr</key>
+  <value>Malzeme reçete tipi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Вид спецификации</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Malzeme reçete tipi</value>
+  <key>en</key>
+  <value>Specification type</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="8168e16c-84eb-4b95-a725-a043bef47281">
   <name>Bundle</name>
   <synonym>
-   <key>en</key>
-   <value>Bundle</value>
+   <key>tr</key>
+   <value>Malzeme takımı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Набор</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme takımı</value>
+   <key>en</key>
+   <value>Bundle</value>
   </synonym>
  </enumValues>
  <enumValues uuid="b3310141-ae38-40ef-bf28-132a44f98bec">
   <name>Set</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Set</value>
   </synonym>
   <synonym>
@@ -46,7 +46,7 @@
    <value>Комплект</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Set</value>
   </synonym>
  </enumValues>

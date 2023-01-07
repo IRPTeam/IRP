@@ -52,16 +52,16 @@
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>en</key>
-    <value>Item</value>
+    <key>tr</key>
+    <value>Malzeme</value>
    </inputHint>
    <inputHint>
     <key>ru</key>
     <value>Номенклатура</value>
    </inputHint>
    <inputHint>
-    <key>tr</key>
-    <value>Malzeme</value>
+    <key>en</key>
+    <value>Item</value>
    </inputHint>
   </extInfo>
  </items>
@@ -126,16 +126,16 @@
     </datapath>
    </choiceParameterLinks>
    <inputHint>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </inputHint>
    <inputHint>
     <key>ru</key>
     <value>Характеристика</value>
    </inputHint>
    <inputHint>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </inputHint>
   </extInfo>
  </items>
@@ -263,16 +263,16 @@
      </datapath>
     </choiceParameterLinks>
     <inputHint>
-     <key>en</key>
-     <value>Unit</value>
+     <key>tr</key>
+     <value>Birim</value>
     </inputHint>
     <inputHint>
      <key>ru</key>
      <value>Ед. изм.</value>
     </inputHint>
     <inputHint>
-     <key>tr</key>
-     <value>Birim</value>
+     <key>en</key>
+     <value>Unit</value>
     </inputHint>
    </extInfo>
   </items>
@@ -422,7 +422,7 @@
       <autoMaxHeight>true</autoMaxHeight>
       <wrap>true</wrap>
       <format>
-       <key>en</key>
+       <key>tr</key>
        <value>DF=dd.MM.yyyy</value>
       </format>
       <format>
@@ -430,11 +430,11 @@
        <value>DF=dd.MM.yyyy</value>
       </format>
       <format>
-       <key>tr</key>
+       <key>en</key>
        <value>DF=dd.MM.yyyy</value>
       </format>
       <editFormat>
-       <key>en</key>
+       <key>tr</key>
        <value>DF=dd.MM.yyyy</value>
       </editFormat>
       <editFormat>
@@ -442,7 +442,7 @@
        <value>DF=dd.MM.yyyy</value>
       </editFormat>
       <editFormat>
-       <key>tr</key>
+       <key>en</key>
        <value>DF=dd.MM.yyyy</value>
       </editFormat>
       <chooseType>true</chooseType>
@@ -737,28 +737,28 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Documents</value>
+    <key>tr</key>
+    <value>Evraklar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Документы</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Evraklar</value>
+    <key>en</key>
+    <value>Documents</value>
    </title>
    <toolTip>
-    <key>en</key>
-    <value>Group productions</value>
+    <key>tr</key>
+    <value>Grup üretim</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
     <value>Группа производство</value>
    </toolTip>
    <toolTip>
-    <key>tr</key>
-    <value>Grup üretim</value>
+    <key>en</key>
+    <value>Group productions</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupGoodsReceiptExtendedTooltip</name>
@@ -834,16 +834,16 @@
      <typeDomainEnabled>true</typeDomainEnabled>
      <textEdit>true</textEdit>
      <inputHint>
-      <key>en</key>
-      <value>Store</value>
+      <key>tr</key>
+      <value>Depo</value>
      </inputHint>
      <inputHint>
       <key>ru</key>
       <value>Склад</value>
      </inputHint>
      <inputHint>
-      <key>tr</key>
-      <value>Depo</value>
+      <key>en</key>
+      <value>Store</value>
      </inputHint>
     </extInfo>
    </items>
@@ -901,28 +901,28 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Settings</value>
+    <key>tr</key>
+    <value>Ayarlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Настройки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ayarlar</value>
+    <key>en</key>
+    <value>Settings</value>
    </title>
    <toolTip>
-    <key>en</key>
-    <value>Group documents</value>
+    <key>tr</key>
+    <value>Grup evraklar</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
     <value>Группа документы</value>
    </toolTip>
    <toolTip>
-    <key>tr</key>
-    <value>Grup evraklar</value>
+    <key>en</key>
+    <value>Group documents</value>
    </toolTip>
    <extendedTooltip>
     <name>PageSettingsExtendedTooltip</name>
@@ -1117,16 +1117,16 @@
  <attributes>
   <name>Item</name>
   <title>
-   <key>en</key>
-   <value>Item</value>
+   <key>tr</key>
+   <value>Malzeme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Номенклатура</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Malzeme</value>
+   <key>en</key>
+   <value>Item</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1142,16 +1142,16 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </title>
   <title>
    <key>ru</key>
    <value>Характеристика</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1167,16 +1167,16 @@
  <attributes>
   <name>Quantity</name>
   <title>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Количество</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1192,16 +1192,16 @@
  <attributes>
   <name>Unit</name>
   <title>
-   <key>en</key>
-   <value>Unit</value>
+   <key>tr</key>
+   <value>Birim</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ед. изм.</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Birim</value>
+   <key>en</key>
+   <value>Unit</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1217,16 +1217,16 @@
  <attributes>
   <name>GoodsInTransitIncoming</name>
   <title>
-   <key>en</key>
-   <value>Goods in transit incoming</value>
+   <key>tr</key>
+   <value>Yol stok durumu (Gelen)</value>
   </title>
   <title>
    <key>ru</key>
    <value>Товары к получению</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yol stok durumu (Gelen)</value>
+   <key>en</key>
+   <value>Goods in transit incoming</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1241,16 +1241,16 @@
   <columns>
    <name>Basis</name>
    <title>
-    <key>en</key>
-    <value>Basis</value>
+    <key>tr</key>
+    <value>Kaynak evrak</value>
    </title>
    <title>
     <key>ru</key>
     <value>Документ основание</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kaynak evrak</value>
+    <key>en</key>
+    <value>Basis</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1266,16 +1266,16 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1291,16 +1291,16 @@
   <columns>
    <name>RowID</name>
    <title>
-    <key>en</key>
-    <value>Row ID</value>
+    <key>tr</key>
+    <value>Satır ID</value>
    </title>
    <title>
     <key>ru</key>
     <value>ID Строки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Satır ID</value>
+    <key>en</key>
+    <value>Row ID</value>
    </title>
    <id>15</id>
    <valueType>
@@ -1316,16 +1316,16 @@
   <columns>
    <name>CurrentStep</name>
    <title>
-    <key>en</key>
-    <value>Current step</value>
+    <key>tr</key>
+    <value>Geçerli adım</value>
    </title>
    <title>
     <key>ru</key>
     <value>Текущий шаг</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Geçerli adım</value>
+    <key>en</key>
+    <value>Current step</value>
    </title>
    <id>16</id>
    <valueType>
@@ -1341,16 +1341,16 @@
   <columns>
    <name>RowRef</name>
    <title>
-    <key>en</key>
-    <value>Row ref</value>
+    <key>tr</key>
+    <value>Satır Ref</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка строки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Satır Ref</value>
+    <key>en</key>
+    <value>Row ref</value>
    </title>
    <id>17</id>
    <valueType>
@@ -1366,16 +1366,16 @@
   <columns>
    <name>BasisKey</name>
    <title>
-    <key>en</key>
-    <value>Basis key</value>
+    <key>tr</key>
+    <value>Kaynak anahtar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ документа основания</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kaynak anahtar</value>
+    <key>en</key>
+    <value>Basis key</value>
    </title>
    <id>18</id>
    <valueType>
@@ -1391,16 +1391,16 @@
   <columns>
    <name>BasisUnit</name>
    <title>
-    <key>en</key>
-    <value>Basis unit</value>
+    <key>tr</key>
+    <value>Ana birim</value>
    </title>
    <title>
     <key>ru</key>
     <value>Базовая единица измерения</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ana birim</value>
+    <key>en</key>
+    <value>Basis unit</value>
    </title>
    <id>19</id>
    <valueType>
@@ -1416,16 +1416,16 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>en</key>
-    <value>Item</value>
+    <key>tr</key>
+    <value>Malzeme</value>
    </title>
    <title>
     <key>ru</key>
     <value>Номенклатура</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
+    <key>en</key>
+    <value>Item</value>
    </title>
    <id>20</id>
    <valueType>
@@ -1441,16 +1441,16 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </title>
    <title>
     <key>ru</key>
     <value>Характеристика</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </title>
    <id>21</id>
    <valueType>
@@ -1466,16 +1466,16 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </title>
    <id>22</id>
    <valueType>
@@ -1491,16 +1491,16 @@
   <columns>
    <name>ParentBasis</name>
    <title>
-    <key>en</key>
-    <value>Parent basis</value>
+    <key>tr</key>
+    <value>Üst öğe kaynağı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Родительский документ основания</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Üst öğe kaynağı</value>
+    <key>en</key>
+    <value>Parent basis</value>
    </title>
    <id>23</id>
    <valueType>
@@ -1516,16 +1516,16 @@
   <columns>
    <name>QuantityInBaseUnit</name>
    <title>
-    <key>en</key>
-    <value>Quantity in base unit</value>
+    <key>tr</key>
+    <value>Ana birim miktarı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество в основной ед. изм.</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ana birim miktarı</value>
+    <key>en</key>
+    <value>Quantity in base unit</value>
    </title>
    <id>24</id>
    <valueType>
@@ -1541,16 +1541,16 @@
   <columns>
    <name>Store</name>
    <title>
-    <key>en</key>
-    <value>Store</value>
+    <key>tr</key>
+    <value>Depo</value>
    </title>
    <title>
     <key>ru</key>
     <value>Склад</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Depo</value>
+    <key>en</key>
+    <value>Store</value>
    </title>
    <id>25</id>
    <valueType>
@@ -1566,16 +1566,16 @@
   <columns>
    <name>Unit</name>
    <title>
-    <key>en</key>
-    <value>Unit</value>
+    <key>tr</key>
+    <value>Birim</value>
    </title>
    <title>
     <key>ru</key>
     <value>Единица измерения</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Birim</value>
+    <key>en</key>
+    <value>Unit</value>
    </title>
    <id>26</id>
    <valueType>
@@ -1592,16 +1592,16 @@
  <attributes>
   <name>DocGoodsReceipt</name>
   <title>
-   <key>en</key>
-   <value>Doc goods receipt</value>
+   <key>tr</key>
+   <value>Evrak alım irsaliyesi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Документ приходные товарные накладные</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evrak alım irsaliyesi</value>
+   <key>en</key>
+   <value>Doc goods receipt</value>
   </title>
   <id>13</id>
   <valueType>
@@ -1617,16 +1617,16 @@
  <attributes>
   <name>Store</name>
   <title>
-   <key>en</key>
-   <value>Store</value>
+   <key>tr</key>
+   <value>Depo</value>
   </title>
   <title>
    <key>ru</key>
    <value>Склад</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Depo</value>
+   <key>en</key>
+   <value>Store</value>
   </title>
   <id>14</id>
   <valueType>
@@ -1662,16 +1662,16 @@
  <formCommands>
   <name>InputBarcode</name>
   <title>
-   <key>en</key>
-   <value>Input barcode</value>
+   <key>tr</key>
+   <value>Barkod giriniz</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ввести штрихкод</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Barkod giriniz</value>
+   <key>en</key>
+   <value>Input barcode</value>
   </title>
   <id>2</id>
   <use>
@@ -1690,16 +1690,16 @@
  <formCommands>
   <name>ButtonGoodsReceipt</name>
   <title>
-   <key>en</key>
-   <value>Create Goods receipt</value>
+   <key>tr</key>
+   <value>Alım irsaliyesi oluştur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Создать приходный ордер на товары</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Alım irsaliyesi oluştur</value>
+   <key>en</key>
+   <value>Create Goods receipt</value>
   </title>
   <id>4</id>
   <use>

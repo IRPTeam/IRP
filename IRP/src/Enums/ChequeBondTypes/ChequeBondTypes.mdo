@@ -7,77 +7,77 @@
  </producedTypes>
  <name>ChequeBondTypes</name>
  <synonym>
-  <key>en</key>
-  <value>Cheque bond types</value>
+  <key>tr</key>
+  <value>Çek/Senet tipleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Типы банковских чеков</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Çek/Senet tipleri</value>
+  <key>en</key>
+  <value>Cheque bond types</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="0551469f-89ee-4fd0-8f6f-079f1ef276f9">
   <name>OwnCheque</name>
   <synonym>
-   <key>en</key>
-   <value>Own cheque</value>
+   <key>tr</key>
+   <value>Kendi çekimiz</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Собственный банковский чек</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kendi çekimiz</value>
+   <key>en</key>
+   <value>Own cheque</value>
   </synonym>
  </enumValues>
  <enumValues uuid="41eefbdc-80b6-42b6-9b8f-ec99605cc365">
   <name>PartnerCheque</name>
   <synonym>
-   <key>en</key>
-   <value>Partner cheque</value>
+   <key>tr</key>
+   <value>Müşteri çeki</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Партнерский банковский чек</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Müşteri çeki</value>
+   <key>en</key>
+   <value>Partner cheque</value>
   </synonym>
  </enumValues>
  <enumValues uuid="e609d87c-b3ad-47dc-acd8-4c149e62fbf6">
   <name>OwnObligation</name>
   <synonym>
-   <key>en</key>
-   <value>Own obligation</value>
+   <key>tr</key>
+   <value>Kendi senedimiz</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Собственная облигация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kendi senedimiz</value>
+   <key>en</key>
+   <value>Own obligation</value>
   </synonym>
  </enumValues>
  <enumValues uuid="b4d90fd5-3960-4cc4-bb4b-2311483fa5af">
   <name>PartnerObligation</name>
   <synonym>
-   <key>en</key>
-   <value>Partner obligation</value>
+   <key>tr</key>
+   <value>Müşteri senedi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Партнерская облигация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Müşteri senedi</value>
+   <key>en</key>
+   <value>Partner obligation</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

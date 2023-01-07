@@ -535,16 +535,16 @@
  <formCommands>
   <name>SetCondition</name>
   <title>
-   <key>en</key>
-   <value>Set condition</value>
+   <key>tr</key>
+   <value>Koşul belirle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить условие</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Koşul belirle</value>
+   <key>en</key>
+   <value>Set condition</value>
   </title>
   <id>1</id>
   <use>

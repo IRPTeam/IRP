@@ -2,15 +2,15 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="25cb1887-58c9-4e55-9496-ebb8ea4137e5">
  <name>BarcodePicture</name>
  <synonym>
-  <key>en</key>
-  <value>Barcode picture</value>
+  <key>tr</key>
+  <value>Bakord resmi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Картинка штрихкода</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Bakord resmi</value>
+  <key>en</key>
+  <value>Barcode picture</value>
  </synonym>
 </mdclass:CommonPicture>

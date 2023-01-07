@@ -7,7 +7,7 @@
    <name>Code</name>
    <id>55</id>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>ID</value>
    </title>
    <title>
@@ -15,7 +15,7 @@
     <value>Артикул</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>ID</value>
    </title>
    <visible>true</visible>
@@ -544,16 +544,16 @@
   <name>FormWriteAndClose</name>
   <id>64</id>
   <title>
-   <key>en</key>
-   <value>OK</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <title>
    <key>ru</key>
    <value>ОК</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>OK</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -614,16 +614,16 @@
  <attributes>
   <name>List</name>
   <title>
-   <key>en</key>
-   <value>List</value>
+   <key>tr</key>
+   <value>Liste</value>
   </title>
   <title>
    <key>ru</key>
    <value>Список</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Liste</value>
+   <key>en</key>
+   <value>List</value>
   </title>
   <id>2</id>
   <valueType>
@@ -649,16 +649,16 @@
  <attributes>
   <name>RetailCustomer</name>
   <title>
-   <key>en</key>
-   <value>Retail customer</value>
+   <key>tr</key>
+   <value>Perakende müşteri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Розничный покупатель</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Perakende müşteri</value>
+   <key>en</key>
+   <value>Retail customer</value>
   </title>
   <id>6</id>
   <valueType>
@@ -676,16 +676,16 @@
  <formCommands>
   <name>Clear</name>
   <title>
-   <key>en</key>
-   <value>Clear</value>
+   <key>tr</key>
+   <value>Temizle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Очистить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Temizle</value>
+   <key>en</key>
+   <value>Clear</value>
   </title>
   <id>4</id>
   <use>

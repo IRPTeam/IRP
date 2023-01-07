@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -63,16 +63,16 @@
    <name>Code</name>
    <id>25</id>
    <title>
-    <key>en</key>
-    <value>Code</value>
+    <key>tr</key>
+    <value>Kod</value>
    </title>
    <title>
     <key>ru</key>
     <value>Код</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kod</value>
+    <key>en</key>
+    <value>Code</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -125,16 +125,16 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>en</key>
-    <value>Description</value>
+    <key>tr</key>
+    <value>Tanım</value>
    </title>
    <title>
     <key>ru</key>
     <value>Комментарий</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
+    <key>en</key>
+    <value>Description</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -187,7 +187,7 @@
    <name>Ref</name>
    <id>22</id>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Ref</value>
    </title>
    <title>
@@ -195,7 +195,7 @@
     <value>Ссылка</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Ref</value>
    </title>
    <visible>true</visible>

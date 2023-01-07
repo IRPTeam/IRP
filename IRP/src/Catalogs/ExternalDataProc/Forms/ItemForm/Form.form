@@ -380,16 +380,16 @@
  <attributes>
   <name>DataProcStorageAddress</name>
   <title>
-   <key>en</key>
-   <value>Data proc storage address</value>
+   <key>tr</key>
+   <value>Veri işlemci depolama adresi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Адрес хранения внешней обработки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Veri işlemci depolama adresi</value>
+   <key>en</key>
+   <value>Data proc storage address</value>
   </title>
   <id>2</id>
   <valueType>
@@ -406,29 +406,29 @@
  <formCommands>
   <name>AddExtDataProc</name>
   <title>
-   <key>en</key>
-   <value>Add plugin</value>
+   <key>tr</key>
+   <value>Eklenti ekle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Добавить внешнюю обработку</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Eklenti ekle</value>
+   <key>en</key>
+   <value>Add plugin</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>en</key>
-   <value>Add plugin</value>
+   <key>tr</key>
+   <value>Eklenti ekle</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Добавить внешнюю обработку</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Eklenti ekle</value>
+   <key>en</key>
+   <value>Add plugin</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -443,16 +443,16 @@
  <formCommands>
   <name>ExportExtDataProc</name>
   <title>
-   <key>en</key>
-   <value>Export plugin</value>
+   <key>tr</key>
+   <value>Eklentiyi dışa aktar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Экспорт внешней обработки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Eklentiyi dışa aktar</value>
+   <key>en</key>
+   <value>Export plugin</value>
   </title>
   <id>2</id>
   <use>

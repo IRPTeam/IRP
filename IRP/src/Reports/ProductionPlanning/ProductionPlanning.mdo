@@ -6,32 +6,32 @@
  </producedTypes>
  <name>ProductionPlanning</name>
  <synonym>
-  <key>en</key>
-  <value>Production planning</value>
+  <key>tr</key>
+  <value>Üretim planlama fişi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Планирование производства</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Üretim planlama fişi</value>
+  <key>en</key>
+  <value>Production planning</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.ProductionPlanning.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="7fad9709-e71e-4528-ba55-976b474989b8">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>en</key>
-   <value>Main data composition schema</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основная схема компоновки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
+   <key>en</key>
+   <value>Main data composition schema</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

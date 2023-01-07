@@ -11,55 +11,55 @@
  </producedTypes>
  <name>AddProperties</name>
  <synonym>
-  <key>en</key>
-  <value>Add properties</value>
+  <key>tr</key>
+  <value>Ek özellikler</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Дополнительные свойства</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Ek özellikler</value>
+  <key>en</key>
+  <value>Add properties</value>
  </synonym>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>en</key>
-  <value>Add property</value>
+  <key>tr</key>
+  <value>Ek özellik</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Дополнительное свойство</value>
  </recordPresentation>
  <recordPresentation>
-  <key>tr</key>
-  <value>Ek özellik</value>
+  <key>en</key>
+  <value>Add property</value>
  </recordPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Add properties</value>
+  <key>tr</key>
+  <value>Ek özellikler</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Дополнительные свойства</value>
  </listPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Ek özellikler</value>
+  <key>en</key>
+  <value>Add properties</value>
  </listPresentation>
  <resources uuid="1eb0cbdc-acff-4879-b2c7-5c801d7b2483">
   <name>Value</name>
   <synonym>
-   <key>en</key>
-   <value>Value</value>
+   <key>tr</key>
+   <value>Değer</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Значение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Değer</value>
+   <key>en</key>
+   <value>Value</value>
   </synonym>
   <type>
    <types>Characteristic.AddAttributeAndProperty</types>
@@ -73,16 +73,16 @@
  <dimensions uuid="8e919f69-0697-44bc-8331-eb26934b7c28">
   <name>Object</name>
   <synonym>
-   <key>en</key>
-   <value>Object</value>
+   <key>tr</key>
+   <value>Obje</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Объект</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Obje</value>
+   <key>en</key>
+   <value>Object</value>
   </synonym>
   <type>
    <types>DocumentRef</types>
@@ -100,16 +100,16 @@
  <dimensions uuid="8a064a95-81a7-4e99-9c5f-90289333a3bd">
   <name>Property</name>
   <synonym>
-   <key>en</key>
-   <value>Property</value>
+   <key>tr</key>
+   <value>Özellik</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Özellik</value>
+   <key>en</key>
+   <value>Property</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>

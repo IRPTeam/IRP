@@ -10,16 +10,16 @@
  </producedTypes>
  <name>CustomUserSettings</name>
  <synonym>
-  <key>en</key>
-  <value>Custom user settings</value>
+  <key>tr</key>
+  <value>Kullanıcı özel ayarları</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Пользовательские настройки</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kullanıcı özel ayarları</value>
+  <key>en</key>
+  <value>Custom user settings</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -27,28 +27,28 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>en</key>
-  <value>Custom user setting</value>
+  <key>tr</key>
+  <value>Kullanıcı özel ayarı</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Пользовательская настройка</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Kullanıcı özel ayarı</value>
+  <key>en</key>
+  <value>Custom user setting</value>
  </objectPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Custom user settings</value>
+  <key>tr</key>
+  <value>Kullanıcı özel ayarları</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Пользовательские настройки</value>
  </listPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Kullanıcı özel ayarları</value>
+  <key>en</key>
+  <value>Custom user settings</value>
  </listPresentation>
  <type>
   <types>CatalogRef.Companies</types>
@@ -77,16 +77,16 @@
  <attributes uuid="742d8075-b4a2-446c-a29f-a9791ac72ac7">
   <name>IsCommon</name>
   <synonym>
-   <key>en</key>
-   <value>Is common</value>
+   <key>tr</key>
+   <value>Ortak ayar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Общие</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ortak ayar</value>
+   <key>en</key>
+   <value>Is common</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -104,30 +104,30 @@
   </producedTypes>
   <name>RefersToObjects</name>
   <synonym>
-   <key>en</key>
-   <value>Refers to objects</value>
+   <key>tr</key>
+   <value>Nesneler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Объекты применения</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Nesneler</value>
+   <key>en</key>
+   <value>Refers to objects</value>
   </synonym>
   <attributes uuid="bfcf599e-4a9b-47a0-b422-d68c8174ad7f">
    <name>FullName</name>
    <synonym>
-    <key>en</key>
-    <value>Full name</value>
+    <key>tr</key>
+    <value>Tam isim</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Полное наименование</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Tam isim</value>
+    <key>en</key>
+    <value>Full name</value>
    </synonym>
    <type>
     <types>String</types>
@@ -143,16 +143,16 @@
   <attributes uuid="da121987-abf6-48da-ac66-fdabb0f1600f">
    <name>Synonym</name>
    <synonym>
-    <key>en</key>
-    <value>Synonym</value>
+    <key>tr</key>
+    <value>Eşanlamlı</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Синоним</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Eşanlamlı</value>
+    <key>en</key>
+    <value>Synonym</value>
    </synonym>
    <type>
     <types>String</types>
@@ -169,16 +169,16 @@
  <forms uuid="6625de4c-24f9-4b91-9a3a-ad4964713160">
   <name>ItemForm</name>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -186,16 +186,16 @@
  <forms uuid="99fb2020-18df-47b1-a334-31a73b0fef8f">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -203,16 +203,16 @@
  <forms uuid="194a47a4-2c8f-4e15-a9db-5f6a83f27dd4">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -220,16 +220,16 @@
  <forms uuid="1c4c55ce-a7b4-4b42-be41-73934c106afc">
   <name>SelectMetadataForm</name>
   <synonym>
-   <key>en</key>
-   <value>Select metadata</value>
+   <key>tr</key>
+   <value>Üstveri seç</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Выбор объектов применения</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Üstveri seç</value>
+   <key>en</key>
+   <value>Select metadata</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

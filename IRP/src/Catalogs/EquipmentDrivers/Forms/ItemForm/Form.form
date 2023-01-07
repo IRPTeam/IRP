@@ -392,16 +392,16 @@
  <attributes>
   <name>FileAddress</name>
   <title>
-   <key>en</key>
-   <value>File address</value>
+   <key>tr</key>
+   <value>Dosya adresi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Адрес файла</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dosya adresi</value>
+   <key>en</key>
+   <value>File address</value>
   </title>
   <id>2</id>
   <valueType>
@@ -418,16 +418,16 @@
  <attributes>
   <name>CurrentStatus</name>
   <title>
-   <key>en</key>
-   <value>Current status</value>
+   <key>tr</key>
+   <value>Mevcut durum</value>
   </title>
   <title>
    <key>ru</key>
    <value>Текущий статус</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Mevcut durum</value>
+   <key>en</key>
+   <value>Current status</value>
   </title>
   <id>3</id>
   <valueType>
@@ -444,16 +444,16 @@
  <attributes>
   <name>CurrentVersion</name>
   <title>
-   <key>en</key>
-   <value>Current version</value>
+   <key>tr</key>
+   <value>Mevcut sürüm</value>
   </title>
   <title>
    <key>ru</key>
    <value>Текущая версия</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Mevcut sürüm</value>
+   <key>en</key>
+   <value>Current version</value>
   </title>
   <id>4</id>
   <valueType>
@@ -470,16 +470,16 @@
  <attributes>
   <name>DriverInfo</name>
   <title>
-   <key>en</key>
-   <value>Driver info</value>
+   <key>tr</key>
+   <value>Sürücü bilgi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Информация по драйверу</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sürücü bilgi</value>
+   <key>en</key>
+   <value>Driver info</value>
   </title>
   <id>5</id>
   <valueType>
@@ -496,29 +496,29 @@
  <formCommands>
   <name>AddFile</name>
   <title>
-   <key>en</key>
-   <value>Add file</value>
+   <key>tr</key>
+   <value>Dosya ekle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Добавить файл</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dosya ekle</value>
+   <key>en</key>
+   <value>Add file</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>en</key>
-   <value>Add file</value>
+   <key>tr</key>
+   <value>Dosya ekle</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Добавить файл</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Dosya ekle</value>
+   <key>en</key>
+   <value>Add file</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -537,29 +537,29 @@
  <formCommands>
   <name>SaveFile</name>
   <title>
-   <key>en</key>
-   <value>Save file</value>
+   <key>tr</key>
+   <value>Dosya kaydet</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сохранить файл</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dosya kaydet</value>
+   <key>en</key>
+   <value>Save file</value>
   </title>
   <id>2</id>
   <toolTip>
-   <key>en</key>
-   <value>Save file</value>
+   <key>tr</key>
+   <value>Dosya kaydet</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Сохранить файл</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Dosya kaydet</value>
+   <key>en</key>
+   <value>Save file</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -577,16 +577,16 @@
  <formCommands>
   <name>Install</name>
   <title>
-   <key>en</key>
-   <value>Install</value>
+   <key>tr</key>
+   <value>Kurulum yap</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kurulum yap</value>
+   <key>en</key>
+   <value>Install</value>
   </title>
   <id>3</id>
   <use>

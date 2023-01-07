@@ -563,16 +563,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Main</value>
+    <key>tr</key>
+    <value>Ana</value>
    </title>
    <title>
     <key>ru</key>
     <value>Основное</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ana</value>
+    <key>en</key>
+    <value>Main</value>
    </title>
    <extendedTooltip>
     <name>GroupMainPageExtendedTooltip</name>
@@ -1054,16 +1054,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Stores</value>
+    <key>tr</key>
+    <value>Depolar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Склады</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Depolar</value>
+    <key>en</key>
+    <value>Stores</value>
    </title>
    <extendedTooltip>
     <name>GroupStoresExtendedTooltip</name>
@@ -1438,16 +1438,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Sales</value>
+    <key>tr</key>
+    <value>Satışlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Продажи</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Satışlar</value>
+    <key>en</key>
+    <value>Sales</value>
    </title>
    <extendedTooltip>
     <name>GroupSalesExtendedTooltip</name>
@@ -1822,16 +1822,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Purchases</value>
+    <key>tr</key>
+    <value>Alımlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Закупки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Alımlar</value>
+    <key>en</key>
+    <value>Purchases</value>
    </title>
    <extendedTooltip>
     <name>GroupPurchasesExtendedTooltip</name>
@@ -1860,16 +1860,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group pages</value>
+   <key>tr</key>
+   <value>Sayfalar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа страниц</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sayfalar grubu</value>
+   <key>en</key>
+   <value>Group pages</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>

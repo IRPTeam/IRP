@@ -70,16 +70,16 @@
     <name>Description</name>
     <id>36</id>
     <title>
-     <key>en</key>
-     <value>Description</value>
+     <key>tr</key>
+     <value>Tanım</value>
     </title>
     <title>
      <key>ru</key>
      <value>Комментарий</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Tanım</value>
+     <key>en</key>
+     <value>Description</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -371,16 +371,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Tree and list</value>
+   <key>tr</key>
+   <value>Ağaç ve liste</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дерево и список</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ağaç ve liste</value>
+   <key>en</key>
+   <value>Tree and list</value>
   </title>
   <extendedTooltip>
    <name>TreeAndListExtendedTooltip</name>
@@ -415,16 +415,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -461,16 +461,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>

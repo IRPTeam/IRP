@@ -52,16 +52,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Settings</value>
+   <key>tr</key>
+   <value>Ayarlar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarlar</value>
+   <key>en</key>
+   <value>Settings</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <groupHorizontalAlign>Right</groupHorizontalAlign>
@@ -1022,16 +1022,16 @@
  <attributes>
   <name>ShowAllRegisters</name>
   <title>
-   <key>en</key>
-   <value>Show all registers</value>
+   <key>tr</key>
+   <value>Tüm kayıt tabloları göster</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать все регистры</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tüm kayıt tabloları göster</value>
+   <key>en</key>
+   <value>Show all registers</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1047,16 +1047,16 @@
  <formCommands>
   <name>FillMovements</name>
   <title>
-   <key>en</key>
-   <value>Fill movements</value>
+   <key>tr</key>
+   <value>Hareketleri doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить движения</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hareketleri doldur</value>
+   <key>en</key>
+   <value>Fill movements</value>
   </title>
   <id>1</id>
   <use>
@@ -1076,16 +1076,16 @@
  <formCommands>
   <name>GenerateFeatureTemplate</name>
   <title>
-   <key>en</key>
-   <value>Generate feature template</value>
+   <key>tr</key>
+   <value>Özellik şablonu oluştur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сформировать шаблон свойства</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Özellik şablonu oluştur</value>
+   <key>en</key>
+   <value>Generate feature template</value>
   </title>
   <id>2</id>
   <use>

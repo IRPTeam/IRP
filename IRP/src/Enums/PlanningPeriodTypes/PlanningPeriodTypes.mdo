@@ -7,47 +7,47 @@
  </producedTypes>
  <name>PlanningPeriodTypes</name>
  <synonym>
-  <key>en</key>
-  <value>Planning period types</value>
+  <key>tr</key>
+  <value>Planlama dönem tipleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Типы периодов планирования</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Planlama dönem tipleri</value>
+  <key>en</key>
+  <value>Planning period types</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="fc785567-3bd9-45c3-a367-8350ed1dbc45">
   <name>Financial</name>
   <synonym>
-   <key>en</key>
-   <value>Financial</value>
+   <key>tr</key>
+   <value>Finansal</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Финансовый</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Finansal</value>
+   <key>en</key>
+   <value>Financial</value>
   </synonym>
  </enumValues>
  <enumValues uuid="52d85de5-c220-42b4-aecc-0eaaa0258ee2">
   <name>Manufacturing</name>
   <synonym>
-   <key>en</key>
-   <value>Manufacturing</value>
+   <key>tr</key>
+   <value>Üretim</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Производство</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Üretim</value>
+   <key>en</key>
+   <value>Manufacturing</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

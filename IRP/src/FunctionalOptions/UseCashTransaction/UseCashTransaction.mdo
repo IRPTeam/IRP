@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5de1d5eb-3321-4630-9c11-4796dcd44406">
  <name>UseCashTransaction</name>
  <synonym>
-  <key>en</key>
-  <value>Use cash transaction</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Para hareketleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать денежные операции</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Para hareketleri</value>
+  <key>en</key>
+  <value>Use cash transaction</value>
  </synonym>
  <location>Constant.UseCashTransaction</location>
  <privilegedGetMode>true</privilegedGetMode>

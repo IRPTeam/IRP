@@ -11,58 +11,58 @@
  </producedTypes>
  <name>Taxes</name>
  <synonym>
-  <key>en</key>
-  <value>Company taxes</value>
+  <key>tr</key>
+  <value>Şirket vergileri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Налоги организации</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Şirket vergileri</value>
+  <key>en</key>
+  <value>Company taxes</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultRecordForm>InformationRegister.Taxes.Form.RecordForm</defaultRecordForm>
  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>en</key>
-  <value>Company tax</value>
+  <key>tr</key>
+  <value>Şirket vergisi</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Налог организации</value>
  </recordPresentation>
  <recordPresentation>
-  <key>tr</key>
-  <value>Şirket vergisi</value>
+  <key>en</key>
+  <value>Company tax</value>
  </recordPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Company taxes</value>
+  <key>tr</key>
+  <value>Şirket vergileri</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Налоги организации</value>
  </listPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Şirket vergileri</value>
+  <key>en</key>
+  <value>Company taxes</value>
  </listPresentation>
  <resources uuid="f51ef633-7048-483b-a625-da52e21085f4">
   <name>Use</name>
   <synonym>
-   <key>en</key>
-   <value>Use</value>
+   <key>tr</key>
+   <value>Kullan</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Применить</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kullan</value>
+   <key>en</key>
+   <value>Use</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -76,16 +76,16 @@
  <resources uuid="a25d893c-31bd-463f-95c2-1b23da47ba5e">
   <name>Priority</name>
   <synonym>
-   <key>en</key>
-   <value>Priority</value>
+   <key>tr</key>
+   <value>Önem</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Приоритет</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Önem</value>
+   <key>en</key>
+   <value>Priority</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -102,16 +102,16 @@
  <resources uuid="2fd43b13-548f-4fde-80f0-4dbd45bc4d33">
   <name>IncludeToLandedCost</name>
   <synonym>
-   <key>en</key>
-   <value>Include to landed cost</value>
+   <key>tr</key>
+   <value>Maliyete dahil et</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Включать в расчет себестоимости</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Maliyete dahil et</value>
+   <key>en</key>
+   <value>Include to landed cost</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -125,16 +125,16 @@
  <dimensions uuid="ea15a6c3-3598-4685-abe5-9fa75df0f291">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -151,16 +151,16 @@
  <dimensions uuid="f39ae6cd-8867-474d-92a3-44eb78d9f27e">
   <name>Tax</name>
   <synonym>
-   <key>en</key>
-   <value>Tax</value>
+   <key>tr</key>
+   <value>Vergi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Налог</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Vergi</value>
+   <key>en</key>
+   <value>Tax</value>
   </synonym>
   <type>
    <types>CatalogRef.Taxes</types>
@@ -175,16 +175,16 @@
  <forms uuid="e106da62-9cde-470d-880e-10c2c65b3b42">
   <name>RecordForm</name>
   <synonym>
-   <key>en</key>
-   <value>Record form</value>
+   <key>tr</key>
+   <value>Kayıt formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма записи</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
+   <key>en</key>
+   <value>Record form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

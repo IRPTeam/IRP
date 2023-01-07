@@ -7,77 +7,77 @@
  </producedTypes>
  <name>DocumentPostingTypes</name>
  <synonym>
-  <key>en</key>
-  <value>Document posting types</value>
+  <key>tr</key>
+  <value>Evrak hareket tipleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Типы проводок документа</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Evrak hareket tipleri</value>
+  <key>en</key>
+  <value>Document posting types</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="733ab7f4-b9d9-4098-bf25-1e89b7a8cd8e">
   <name>Posting</name>
   <synonym>
-   <key>en</key>
-   <value>Posting</value>
+   <key>tr</key>
+   <value>Kayıt</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Делает проводки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt</value>
+   <key>en</key>
+   <value>Posting</value>
   </synonym>
  </enumValues>
  <enumValues uuid="2d394447-f5a5-475b-8276-e98186ccb811">
   <name>Reversal</name>
   <synonym>
-   <key>en</key>
-   <value>Reversal</value>
+   <key>tr</key>
+   <value>Ters kayıt</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Отменяет проводки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ters kayıt</value>
+   <key>en</key>
+   <value>Reversal</value>
   </synonym>
  </enumValues>
  <enumValues uuid="15519572-6e5c-4d7e-b0d6-5f92e9a31bdb">
   <name>Nothing</name>
   <synonym>
-   <key>en</key>
-   <value>Nothing</value>
+   <key>tr</key>
+   <value>Kayıt yok</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Без изменений</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt yok</value>
+   <key>en</key>
+   <value>Nothing</value>
   </synonym>
  </enumValues>
  <enumValues uuid="a1f36681-4511-40bc-ba50-fe18bdf5b5a4">
   <name>Correction</name>
   <synonym>
-   <key>en</key>
-   <value>Correction</value>
+   <key>tr</key>
+   <value>Düzeltme kaydı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сторно</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Düzeltme kaydı</value>
+   <key>en</key>
+   <value>Correction</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

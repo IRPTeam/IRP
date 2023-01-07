@@ -257,16 +257,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>item type and presentation</value>
+      <key>tr</key>
+      <value>Item tipi ve görünümü</value>
      </title>
      <title>
       <key>ru</key>
       <value>вид номенклатуры и представление</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Item tipi ve görünümü</value>
+      <key>en</key>
+      <value>item type and presentation</value>
      </title>
      <extendedTooltip>
       <name>GroupItemTypeAndPresentationExtendedTooltip</name>
@@ -684,16 +684,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Attributes</value>
+    <key>tr</key>
+    <value>Ek alanlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Реквизиты</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ek alanlar</value>
+    <key>en</key>
+    <value>Attributes</value>
    </title>
    <extendedTooltip>
     <name>GroupAttributesItemKeysExtendedTooltip</name>
@@ -1021,16 +1021,16 @@
       <name>AttributesSetCondition</name>
       <id>60</id>
       <title>
-       <key>en</key>
-       <value>Set condition</value>
+       <key>tr</key>
+       <value>Koşul belirle</value>
       </title>
       <title>
        <key>ru</key>
        <value>Установить условие</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Koşul belirle</value>
+       <key>en</key>
+       <value>Set condition</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1239,16 +1239,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Attributes</value>
+    <key>tr</key>
+    <value>Ek alanlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Реквизиты</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ek alanlar</value>
+    <key>en</key>
+    <value>Attributes</value>
    </title>
    <extendedTooltip>
     <name>GroupAttributesExtendedTooltip</name>
@@ -1483,16 +1483,16 @@
       <name>PropertiesSetConditionProperty</name>
       <id>65</id>
       <title>
-       <key>en</key>
-       <value>Set condition</value>
+       <key>tr</key>
+       <value>Koşul belirle</value>
       </title>
       <title>
        <key>ru</key>
        <value>Установить условие</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Koşul belirle</value>
+       <key>en</key>
+       <value>Set condition</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1702,16 +1702,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Properties</value>
+    <key>tr</key>
+    <value>Ek özellikler</value>
    </title>
    <title>
     <key>ru</key>
     <value>Свойства</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ek özellikler</value>
+    <key>en</key>
+    <value>Properties</value>
    </title>
    <extendedTooltip>
     <name>GroupPropertiesExtendedTooltip</name>
@@ -2324,16 +2324,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Extension attributes</value>
+    <key>tr</key>
+    <value>Uzantı ek alanlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Реквизиты расширения</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Uzantı ek alanlar</value>
+    <key>en</key>
+    <value>Extension attributes</value>
    </title>
    <extendedTooltip>
     <name>GroupExtensionAttributesExtendedTooltip</name>
@@ -2362,16 +2362,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Pages</value>
+   <key>tr</key>
+   <value>Satırlar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Страницы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
+   <key>en</key>
+   <value>Pages</value>
   </title>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>
@@ -2443,16 +2443,16 @@
    <columns>
     <name>ConditionData</name>
     <title>
-     <key>en</key>
-     <value>Condition data</value>
+     <key>tr</key>
+     <value>Koşul verisi</value>
     </title>
     <title>
      <key>ru</key>
      <value>Данные условия</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Koşul verisi</value>
+     <key>en</key>
+     <value>Condition data</value>
     </title>
     <id>9</id>
     <valueType>
@@ -2469,16 +2469,16 @@
    <columns>
     <name>Unprocessed</name>
     <title>
-     <key>en</key>
-     <value>Unprocessed</value>
+     <key>tr</key>
+     <value>İşlenmemiş</value>
     </title>
     <title>
      <key>ru</key>
      <value>Необработанный</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>İşlenmemiş</value>
+     <key>en</key>
+     <value>Unprocessed</value>
     </title>
     <id>11</id>
     <valueType>
@@ -2499,16 +2499,16 @@
    <columns>
     <name>ConditionData</name>
     <title>
-     <key>en</key>
-     <value>Condition data</value>
+     <key>tr</key>
+     <value>Koşul verisi</value>
     </title>
     <title>
      <key>ru</key>
      <value>Данные условия</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Koşul verisi</value>
+     <key>en</key>
+     <value>Condition data</value>
     </title>
     <id>14</id>
     <valueType>
@@ -2525,16 +2525,16 @@
    <columns>
     <name>Unprocessed</name>
     <title>
-     <key>en</key>
-     <value>Unprocessed</value>
+     <key>tr</key>
+     <value>İşlenmemiş</value>
     </title>
     <title>
      <key>ru</key>
      <value>Необработанный</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>İşlenmemiş</value>
+     <key>en</key>
+     <value>Unprocessed</value>
     </title>
     <id>15</id>
     <valueType>
@@ -2555,16 +2555,16 @@
    <columns>
     <name>ConditionData</name>
     <title>
-     <key>en</key>
-     <value>Condition data</value>
+     <key>tr</key>
+     <value>Koşul verisi</value>
     </title>
     <title>
      <key>ru</key>
      <value>Данные условия</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Koşul verisi</value>
+     <key>en</key>
+     <value>Condition data</value>
     </title>
     <id>12</id>
     <valueType>
@@ -2581,16 +2581,16 @@
    <columns>
     <name>Unprocessed</name>
     <title>
-     <key>en</key>
-     <value>Unprocessed</value>
+     <key>tr</key>
+     <value>İşlenmemiş</value>
     </title>
     <title>
      <key>ru</key>
      <value>Необработанный</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>İşlenmemiş</value>
+     <key>en</key>
+     <value>Unprocessed</value>
     </title>
     <id>13</id>
     <valueType>
@@ -2608,16 +2608,16 @@
  <attributes>
   <name>AttributesTree</name>
   <title>
-   <key>en</key>
-   <value>Attributes tree</value>
+   <key>tr</key>
+   <value>Ek alan ağacı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дерево реквизитов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek alan ağacı</value>
+   <key>en</key>
+   <value>Attributes tree</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2632,16 +2632,16 @@
   <columns>
    <name>Picture</name>
    <title>
-    <key>en</key>
-    <value>Picture</value>
+    <key>tr</key>
+    <value>Resim</value>
    </title>
    <title>
     <key>ru</key>
     <value>Картинка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Resim</value>
+    <key>en</key>
+    <value>Picture</value>
    </title>
    <id>3</id>
    <valueType>
@@ -2660,16 +2660,16 @@
   <columns>
    <name>Attribute</name>
    <title>
-    <key>en</key>
-    <value>Attribute</value>
+    <key>tr</key>
+    <value>Alan</value>
    </title>
    <title>
     <key>ru</key>
     <value>Реквизит</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Alan</value>
+    <key>en</key>
+    <value>Attribute</value>
    </title>
    <id>4</id>
    <valueType>
@@ -2685,16 +2685,16 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>en</key>
-    <value>Presentation</value>
+    <key>tr</key>
+    <value>Görünüm</value>
    </title>
    <title>
     <key>ru</key>
     <value>Представление</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
+    <key>en</key>
+    <value>Presentation</value>
    </title>
    <id>5</id>
    <valueType>
@@ -2711,16 +2711,16 @@
   <columns>
    <name>ItemType</name>
    <title>
-    <key>en</key>
-    <value>Item type</value>
+    <key>tr</key>
+    <value>Malzeme tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Вид номенклатуры</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Malzeme tipi</value>
+    <key>en</key>
+    <value>Item type</value>
    </title>
    <id>8</id>
    <valueType>
@@ -2737,16 +2737,16 @@
  <attributes>
   <name>CopiedAttribute</name>
   <title>
-   <key>en</key>
-   <value>Copied attribute</value>
+   <key>tr</key>
+   <value>Kopyalanmış alan</value>
   </title>
   <title>
    <key>ru</key>
    <value>Скопированный реквизит</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kopyalanmış alan</value>
+   <key>en</key>
+   <value>Copied attribute</value>
   </title>
   <id>10</id>
   <valueType>
@@ -2762,16 +2762,16 @@
  <formCommands>
   <name>SetConditionAttribute</name>
   <title>
-   <key>en</key>
-   <value>Set condition attribute</value>
+   <key>tr</key>
+   <value>Koşul özelliği ayarla</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить условие применения реквизита</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Koşul özelliği ayarla</value>
+   <key>en</key>
+   <value>Set condition attribute</value>
   </title>
   <id>1</id>
   <use>
@@ -2787,16 +2787,16 @@
  <formCommands>
   <name>SetConditionProperty</name>
   <title>
-   <key>en</key>
-   <value>Set condition property</value>
+   <key>tr</key>
+   <value>Koşul ayarla</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить условие применения свойства</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Koşul ayarla</value>
+   <key>en</key>
+   <value>Set condition property</value>
   </title>
   <id>2</id>
   <use>
@@ -2812,16 +2812,16 @@
  <formCommands>
   <name>EditItemType</name>
   <title>
-   <key>en</key>
-   <value>Edit item type</value>
+   <key>tr</key>
+   <value>Malzeme tipi değiştir</value>
   </title>
   <title>
    <key>ru</key>
    <value>Редактировать вид номенклатуры</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Malzeme tipi değiştir</value>
+   <key>en</key>
+   <value>Edit item type</value>
   </title>
   <id>3</id>
   <use>
@@ -2837,16 +2837,16 @@
  <formCommands>
   <name>DeleteItemType</name>
   <title>
-   <key>en</key>
-   <value>Delete item type</value>
+   <key>tr</key>
+   <value>Malzeme tipi kaldır</value>
   </title>
   <title>
    <key>ru</key>
    <value>Удалить вид номенклатуры</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Malzeme tipi kaldır</value>
+   <key>en</key>
+   <value>Delete item type</value>
   </title>
   <id>5</id>
   <use>
@@ -2866,16 +2866,16 @@
  <formCommands>
   <name>FillExtensionAttributesList</name>
   <title>
-   <key>en</key>
-   <value>Fill attributes list</value>
+   <key>tr</key>
+   <value>Ek alanlar listesi doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить список реквизитов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek alanlar listesi doldur</value>
+   <key>en</key>
+   <value>Fill attributes list</value>
   </title>
   <id>7</id>
   <use>
@@ -2891,16 +2891,16 @@
  <formCommands>
   <name>SetConditionExtensionAttribute</name>
   <title>
-   <key>en</key>
-   <value>Set condition</value>
+   <key>tr</key>
+   <value>Koşul belirle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить условие</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Koşul belirle</value>
+   <key>en</key>
+   <value>Set condition</value>
   </title>
   <id>8</id>
   <use>

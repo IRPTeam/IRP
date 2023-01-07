@@ -7,16 +7,16 @@
  </producedTypes>
  <name>ProcurementMethods</name>
  <synonym>
-  <key>en</key>
-  <value>Procurement methods</value>
+  <key>tr</key>
+  <value>Tedarik çekilleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Методы обеспечения</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tedarik çekilleri</value>
+  <key>en</key>
+  <value>Procurement methods</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -24,76 +24,76 @@
  <enumValues uuid="a21ed9eb-3b89-4ebb-a0eb-56fe2da7f3c6">
   <name>Stock</name>
   <synonym>
-   <key>en</key>
-   <value>Stock</value>
+   <key>tr</key>
+   <value>Stoktan</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Отгрузить со склада</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Stoktan</value>
+   <key>en</key>
+   <value>Stock</value>
   </synonym>
  </enumValues>
  <enumValues uuid="a3575b26-1be5-4e44-a6b5-b0a97cea8970">
   <name>Purchase</name>
   <synonym>
-   <key>en</key>
-   <value>Purchase</value>
+   <key>tr</key>
+   <value>Alımlar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Закупки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Alımlar</value>
+   <key>en</key>
+   <value>Purchase</value>
   </synonym>
  </enumValues>
  <enumValues uuid="df48db5d-09e6-4327-9ddf-762cafdaaedd">
   <name>NoReserve</name>
   <synonym>
-   <key>en</key>
-   <value>No reserve</value>
+   <key>tr</key>
+   <value>Rezervsiz</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Без резерва</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Rezervsiz</value>
+   <key>en</key>
+   <value>No reserve</value>
   </synonym>
  </enumValues>
  <enumValues uuid="3df487da-b58c-4b37-bcd7-67193e9ba328">
   <name>IncomingReserve</name>
   <synonym>
-   <key>en</key>
-   <value>Incoming reserve</value>
+   <key>tr</key>
+   <value>Beklenen rezerv</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Входящий резерв</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Beklenen rezerv</value>
+   <key>en</key>
+   <value>Incoming reserve</value>
   </synonym>
  </enumValues>
  <forms uuid="b97ec4ea-f339-408e-9f93-9ff3d56939ba">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

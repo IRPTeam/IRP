@@ -268,16 +268,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Dates</value>
+   <key>tr</key>
+   <value>Tarihler</value>
   </title>
   <title>
    <key>ru</key>
    <value>Даты</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tarihler</value>
+   <key>en</key>
+   <value>Dates</value>
   </title>
   <extendedTooltip>
    <name>GroupDatesExtendedTooltip</name>
@@ -686,16 +686,16 @@
  <attributes>
   <name>ProductionPlanningExists</name>
   <title>
-   <key>en</key>
-   <value>Production planning</value>
+   <key>tr</key>
+   <value>Üretim planlama fişi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Планирование производства</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Üretim planlama fişi</value>
+   <key>en</key>
+   <value>Production planning</value>
   </title>
   <id>2</id>
   <valueType>

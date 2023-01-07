@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -113,16 +113,16 @@
    <name>Description</name>
    <id>16</id>
    <title>
-    <key>en</key>
-    <value>Description</value>
+    <key>tr</key>
+    <value>Tanım</value>
    </title>
    <title>
     <key>ru</key>
     <value>Комментарий</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
+    <key>en</key>
+    <value>Description</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -172,16 +172,16 @@
    <name>Type</name>
    <id>19</id>
    <title>
-    <key>en</key>
-    <value>Type</value>
+    <key>tr</key>
+    <value>Tip</value>
    </title>
    <title>
     <key>ru</key>
     <value>Вид</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
+    <key>en</key>
+    <value>Type</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -534,16 +534,16 @@ FROM
  <attributes>
   <name>CustomFilterByItem</name>
   <title>
-   <key>en</key>
-   <value>Custom filter by item</value>
+   <key>tr</key>
+   <value>İsteğe bağlı malzemeye göre filtre</value>
   </title>
   <title>
    <key>ru</key>
    <value>Пользовательский фильтр по номенклатуре</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İsteğe bağlı malzemeye göre filtre</value>
+   <key>en</key>
+   <value>Custom filter by item</value>
   </title>
   <id>2</id>
   <valueType/>

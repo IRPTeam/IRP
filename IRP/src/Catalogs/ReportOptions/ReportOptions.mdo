@@ -9,32 +9,32 @@
  </producedTypes>
  <name>ReportOptions</name>
  <synonym>
-  <key>en</key>
-  <value>Report options</value>
+  <key>tr</key>
+  <value>Rapor seçenekleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Варианты отчета</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Rapor seçenekleri</value>
+  <key>en</key>
+  <value>Report options</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectPresentation>
-  <key>en</key>
-  <value>Report option</value>
+  <key>tr</key>
+  <value>Rapor seçeneği</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Вариант отчета</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Rapor seçeneği</value>
+  <key>en</key>
+  <value>Report option</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -49,16 +49,16 @@
  <attributes uuid="6ccd4096-7481-44ed-aff0-4dbf174d94c8">
   <name>ObjectKey</name>
   <synonym>
-   <key>en</key>
-   <value>Object key</value>
+   <key>tr</key>
+   <value>Nesne anahtarı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ключ объекта</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Nesne anahtarı</value>
+   <key>en</key>
+   <value>Object key</value>
   </synonym>
   <type>
    <types>String</types>
@@ -77,16 +77,16 @@
  <attributes uuid="1852a63e-536c-4218-8bd2-374c73f4e4bf">
   <name>Option</name>
   <synonym>
-   <key>en</key>
-   <value>Option</value>
+   <key>tr</key>
+   <value>Seçenek</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вариант</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçenek</value>
+   <key>en</key>
+   <value>Option</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -100,16 +100,16 @@
  <forms uuid="e6c58e50-1134-4822-83f4-420a88051843">
   <name>ItemForm</name>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

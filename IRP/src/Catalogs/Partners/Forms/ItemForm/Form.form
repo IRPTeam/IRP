@@ -337,16 +337,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Types</value>
+     <key>tr</key>
+     <value>Tipler</value>
     </title>
     <title>
      <key>ru</key>
      <value>Типы</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Tipler</value>
+     <key>en</key>
+     <value>Types</value>
     </title>
     <extendedTooltip>
      <name>GroupPartnerTypesExtendedTooltip</name>
@@ -577,16 +577,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Info</value>
+    <key>tr</key>
+    <value>Bilgi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Информация</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Bilgi</value>
+    <key>en</key>
+    <value>Info</value>
    </title>
    <extendedTooltip>
     <name>Group2ExtendedTooltip</name>
@@ -618,16 +618,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Contact information</value>
+    <key>tr</key>
+    <value>İletişim bilgileri</value>
    </title>
    <title>
     <key>ru</key>
     <value>Контактная информация</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>İletişim bilgileri</value>
+    <key>en</key>
+    <value>Contact information</value>
    </title>
    <extendedTooltip>
     <name>GroupContactInformationExtendedTooltip</name>
@@ -656,28 +656,28 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group main pages</value>
+   <key>tr</key>
+   <value>Grup ana sayfalar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа главных страниц</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
-  </title>
-  <toolTip>
    <key>en</key>
    <value>Group main pages</value>
+  </title>
+  <toolTip>
+   <key>tr</key>
+   <value>Grup ana sayfalar</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Группа главных страниц</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
+   <key>en</key>
+   <value>Group main pages</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -749,16 +749,16 @@
  <attributes>
   <name>SalesOrdersList</name>
   <title>
-   <key>en</key>
-   <value>Sales orders list</value>
+   <key>tr</key>
+   <value>Satış sipariş listesi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Перечень заказов клиента</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satış sipariş listesi</value>
+   <key>en</key>
+   <value>Sales orders list</value>
   </title>
   <id>2</id>
   <valueType>
@@ -793,16 +793,16 @@ WHERE
  <attributes>
   <name>ThisIsNew</name>
   <title>
-   <key>en</key>
-   <value>This is new</value>
+   <key>tr</key>
+   <value>Bu yeni</value>
   </title>
   <title>
    <key>ru</key>
    <value>Это новый</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Bu yeni</value>
+   <key>en</key>
+   <value>This is new</value>
   </title>
   <id>3</id>
   <valueType>

@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -749,16 +749,16 @@
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Item</value>
+       <key>tr</key>
+       <value>Malzeme</value>
       </content>
       <content>
        <key>ru</key>
        <value>Номенклатура</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Malzeme</value>
+       <key>en</key>
+       <value>Item</value>
       </content>
      </localValue>
     </title>
@@ -772,16 +772,16 @@
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Use filter</value>
+       <key>tr</key>
+       <value>Filtre uygula</value>
       </content>
       <content>
        <key>ru</key>
        <value>Использовать отбор</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Filtre uygula</value>
+       <key>en</key>
+       <value>Use filter</value>
       </content>
      </localValue>
     </title>
@@ -793,16 +793,16 @@
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Item type</value>
+       <key>tr</key>
+       <value>Malzeme tipi</value>
       </content>
       <content>
        <key>ru</key>
        <value>Вид номенклатуры</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Malzeme tipi</value>
+       <key>en</key>
+       <value>Item type</value>
       </content>
      </localValue>
     </title>
@@ -816,16 +816,16 @@
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Item key</value>
+       <key>tr</key>
+       <value>Varyant</value>
       </content>
       <content>
        <key>ru</key>
        <value>Характеристика</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Varyant</value>
+       <key>en</key>
+       <value>Item key</value>
       </content>
      </localValue>
     </title>
@@ -839,16 +839,16 @@
  <attributes>
   <name>FillingData</name>
   <title>
-   <key>en</key>
-   <value>Filling data</value>
+   <key>tr</key>
+   <value>Veri doldurma</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполненные данные</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Veri doldurma</value>
+   <key>en</key>
+   <value>Filling data</value>
   </title>
   <id>2</id>
   <valueType>

@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -63,16 +63,16 @@
    <name>Number</name>
    <id>16</id>
    <title>
-    <key>en</key>
-    <value>Number</value>
+    <key>tr</key>
+    <value>Numara</value>
    </title>
    <title>
     <key>ru</key>
     <value>Номер</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Numara</value>
+    <key>en</key>
+    <value>Number</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -122,16 +122,16 @@
    <name>Date</name>
    <id>19</id>
    <title>
-    <key>en</key>
-    <value>Date</value>
+    <key>tr</key>
+    <value>Tarih</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дата</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
+    <key>en</key>
+    <value>Date</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -180,16 +180,16 @@
    <name>SalesOrder</name>
    <id>43</id>
    <title>
-    <key>en</key>
-    <value>Sales order</value>
+    <key>tr</key>
+    <value>Satış siparişi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Заказ покупателя</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Satış siparişi</value>
+    <key>en</key>
+    <value>Sales order</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -242,16 +242,16 @@
    <name>Partner</name>
    <id>22</id>
    <title>
-    <key>en</key>
-    <value>Partner</value>
+    <key>tr</key>
+    <value>Cari hesap</value>
    </title>
    <title>
     <key>ru</key>
     <value>Партнер</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Cari hesap</value>
+    <key>en</key>
+    <value>Partner</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -300,16 +300,16 @@
    <name>DocumentAmount</name>
    <id>25</id>
    <title>
-    <key>en</key>
-    <value>Σ</value>
+    <key>tr</key>
+    <value>Evrak tutarı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Evrak tutarı</value>
+    <key>en</key>
+    <value>Σ</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -362,16 +362,16 @@
    <name>Currency</name>
    <id>31</id>
    <title>
-    <key>en</key>
-    <value>Currency</value>
+    <key>tr</key>
+    <value>Döviz</value>
    </title>
    <title>
     <key>ru</key>
     <value>Валюта</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Döviz</value>
+    <key>en</key>
+    <value>Currency</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -424,16 +424,16 @@
    <name>Company</name>
    <id>37</id>
    <title>
-    <key>en</key>
-    <value>Company</value>
+    <key>tr</key>
+    <value>Şirket</value>
    </title>
    <title>
     <key>ru</key>
     <value>Организация</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Şirket</value>
+    <key>en</key>
+    <value>Company</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -536,16 +536,16 @@
    <name>Store</name>
    <id>46</id>
    <title>
-    <key>en</key>
-    <value>Store</value>
+    <key>tr</key>
+    <value>Depo</value>
    </title>
    <title>
     <key>ru</key>
     <value>Склад</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Depo</value>
+    <key>en</key>
+    <value>Store</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -598,16 +598,16 @@
    <name>Author</name>
    <id>40</id>
    <title>
-    <key>en</key>
-    <value>Author</value>
+    <key>tr</key>
+    <value>Sorumlu</value>
    </title>
    <title>
     <key>ru</key>
     <value>Автор</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sorumlu</value>
+    <key>en</key>
+    <value>Author</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -660,7 +660,7 @@
    <name>Ref</name>
    <id>28</id>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Ref</value>
    </title>
    <title>
@@ -668,7 +668,7 @@
     <value>Ссылка</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Ref</value>
    </title>
    <visible>true</visible>

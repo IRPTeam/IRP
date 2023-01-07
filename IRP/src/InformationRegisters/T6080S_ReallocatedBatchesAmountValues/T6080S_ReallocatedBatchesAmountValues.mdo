@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T6080S_ReallocatedBatchesAmountValues</name>
  <synonym>
-  <key>en</key>
-  <value>T6080 Reallocated batches amount values</value>
+  <key>tr</key>
+  <value>T6080 Tranfer edilen malzeme partilerin tutar değerleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>T6080 Значения сумм перемещенных партий товаров</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>T6080 Tranfer edilen malzeme partilerin tutar değerleri</value>
+  <key>en</key>
+  <value>T6080 Reallocated batches amount values</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +30,16 @@
  <resources uuid="e3f0555f-181c-4db5-bf98-288829598617">
   <name>Quantity</name>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -53,16 +53,16 @@
  <resources uuid="a3175003-5d67-4333-b65e-54612d9f684d">
   <name>Amount</name>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -76,16 +76,16 @@
  <resources uuid="71546a51-546f-47fd-88a1-92ccf2a98366">
   <name>AmountTax</name>
   <synonym>
-   <key>en</key>
-   <value>Amount tax</value>
+   <key>tr</key>
+   <value>Vergi tutarı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма налогов</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Vergi tutarı</value>
+   <key>en</key>
+   <value>Amount tax</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -99,16 +99,16 @@
  <resources uuid="021080c6-a3f7-488f-8f4b-a4f2a355a121">
   <name>AmountCostRatio</name>
   <synonym>
-   <key>en</key>
-   <value>Amount cost ratio</value>
+   <key>tr</key>
+   <value>Maliyet tutar katsayısı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Коеф. добавочной стоимости</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Maliyet tutar katsayısı</value>
+   <key>en</key>
+   <value>Amount cost ratio</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -122,16 +122,16 @@
  <dimensions uuid="5cd8efa9-c3a5-4d58-a217-89b3ce627e4f">
   <name>OutgoingDocument</name>
   <synonym>
-   <key>en</key>
-   <value>Outgoing document</value>
+   <key>tr</key>
+   <value>Çıkış evrakı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Исходящий документ</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Çıkış evrakı</value>
+   <key>en</key>
+   <value>Outgoing document</value>
   </synonym>
   <type>
    <types>DocumentRef.BatchReallocateOutgoing</types>
@@ -147,16 +147,16 @@
  <dimensions uuid="9597e956-d3f5-4669-8f17-853cf7554755">
   <name>IncomingDocument</name>
   <synonym>
-   <key>en</key>
-   <value>Incoming document</value>
+   <key>tr</key>
+   <value>Gelen evrak</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Входящий документ</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Gelen evrak</value>
+   <key>en</key>
+   <value>Incoming document</value>
   </synonym>
   <type>
    <types>DocumentRef.BatchReallocateIncoming</types>
@@ -172,16 +172,16 @@
  <dimensions uuid="7216dd47-3b77-4051-a393-5cd735e090bb">
   <name>BatchKey</name>
   <synonym>
-   <key>en</key>
-   <value>Batch key</value>
+   <key>tr</key>
+   <value>Parti anahtarı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ключ партии</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Parti anahtarı</value>
+   <key>en</key>
+   <value>Batch key</value>
   </synonym>
   <type>
    <types>CatalogRef.BatchKeys</types>

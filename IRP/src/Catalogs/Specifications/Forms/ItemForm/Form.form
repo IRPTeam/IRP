@@ -142,16 +142,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Unique MD5</value>
+   <key>tr</key>
+   <value>Eşsiz MD5</value>
   </title>
   <title>
    <key>ru</key>
    <value>Уникальный MD5</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Eşsiz MD5</value>
+   <key>en</key>
+   <value>Unique MD5</value>
   </title>
   <extendedTooltip>
    <name>GroupUniqueMD5ExtendedTooltip</name>
@@ -233,16 +233,16 @@
     <radioButtonsType>Tumbler</radioButtonsType>
     <choiceList>
      <presentation>
-      <key>en</key>
-      <value>Bundle</value>
+      <key>tr</key>
+      <value>Malzeme takımı</value>
      </presentation>
      <presentation>
       <key>ru</key>
       <value>Набор</value>
      </presentation>
      <presentation>
-      <key>tr</key>
-      <value>Malzeme takımı</value>
+      <key>en</key>
+      <value>Bundle</value>
      </presentation>
      <value xsi:type="core:ReferenceValue">
       <value>Enum.SpecificationType.EnumValue.Bundle</value>
@@ -250,7 +250,7 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>en</key>
+      <key>tr</key>
       <value>Set</value>
      </presentation>
      <presentation>
@@ -258,7 +258,7 @@
       <value>Комплект</value>
      </presentation>
      <presentation>
-      <key>tr</key>
+      <key>en</key>
       <value>Set</value>
      </presentation>
      <value xsi:type="core:ReferenceValue">
@@ -399,16 +399,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Add new page</value>
+    <key>tr</key>
+    <value>Yeni sayfa ekle</value>
    </title>
    <title>
     <key>ru</key>
     <value>Добавление новой вкладки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Yeni sayfa ekle</value>
+    <key>en</key>
+    <value>Add new page</value>
    </title>
    <extendedTooltip>
     <name>GroupAddNewPageExtendedTooltip</name>
@@ -439,16 +439,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group main pages</value>
+   <key>tr</key>
+   <value>Grup ana sayfalar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа главных страниц</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
+   <key>en</key>
+   <value>Group main pages</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -521,16 +521,16 @@
  <attributes>
   <name>DynamicDataForm</name>
   <title>
-   <key>en</key>
-   <value>Dynamic data form</value>
+   <key>tr</key>
+   <value>Dinamik veri formu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Динамическая форма</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dinamik veri formu</value>
+   <key>en</key>
+   <value>Dynamic data form</value>
   </title>
   <id>6</id>
   <valueType>

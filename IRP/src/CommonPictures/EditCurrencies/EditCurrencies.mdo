@@ -2,15 +2,15 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="87bccfea-0e6b-4a5e-881e-1964c4086038">
  <name>EditCurrencies</name>
  <synonym>
-  <key>en</key>
-  <value>Edit currencies</value>
+  <key>tr</key>
+  <value>Dövizleri düzelt</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Редактирование валют</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Dövizleri düzelt</value>
+  <key>en</key>
+  <value>Edit currencies</value>
  </synonym>
 </mdclass:CommonPicture>

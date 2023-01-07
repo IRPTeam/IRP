@@ -9,16 +9,16 @@
  </producedTypes>
  <name>PurchaseReturn</name>
  <synonym>
-  <key>en</key>
-  <value>Purchase return</value>
+  <key>tr</key>
+  <value>Alım iadesi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Возврат поставщику</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Alım iadesi</value>
+  <key>en</key>
+  <value>Purchase return</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.PurchaseReturn.StandardAttribute.Number</inputByString>
@@ -116,16 +116,16 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <listPresentation>
-  <key>en</key>
-  <value>Purchase returns</value>
+  <key>tr</key>
+  <value>Satın alma iadeleri</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Возвраты поставщикам</value>
  </listPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Satın alma iadeleri</value>
+  <key>en</key>
+  <value>Purchase returns</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -169,16 +169,16 @@
  <attributes uuid="42d50ae2-c4ad-46e3-9c99-3d1e127cd5fb">
   <name>Agreement</name>
   <synonym>
-   <key>en</key>
-   <value>Partner term</value>
+   <key>tr</key>
+   <value>Sözleşme</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Соглашение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Sözleşme</value>
+   <key>en</key>
+   <value>Partner term</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -192,16 +192,16 @@
  <attributes uuid="bd028fda-cfe5-4c06-8cbe-1ae8c2ca85d3">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -216,16 +216,16 @@
  <attributes uuid="f935cb6b-43ee-43d8-8326-298871db3b41">
   <name>Currency</name>
   <synonym>
-   <key>en</key>
-   <value>Currency</value>
+   <key>tr</key>
+   <value>Döviz</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюта</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
+   <key>en</key>
+   <value>Currency</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -239,16 +239,16 @@
  <attributes uuid="f290c738-6ee8-4b6d-bbfd-fb7919b2e6a9">
   <name>DateOfShipment</name>
   <synonym>
-   <key>en</key>
-   <value>Date of shipment</value>
+   <key>tr</key>
+   <value>Sevkiyat tarihi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дата отгрузки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Sevkiyat tarihi</value>
+   <key>en</key>
+   <value>Date of shipment</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -257,16 +257,16 @@
    </dateQualifiers>
   </type>
   <toolTip>
-   <key>en</key>
-   <value>Date </value>
+   <key>tr</key>
+   <value>Tarih</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Дата</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Tarih</value>
+   <key>en</key>
+   <value>Date </value>
   </toolTip>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -277,16 +277,16 @@
  <attributes uuid="62b3a5c6-dacd-47f5-a27d-95ed57ddf85b">
   <name>LegalName</name>
   <synonym>
-   <key>en</key>
-   <value>Legal name</value>
+   <key>tr</key>
+   <value>Fatura hesabı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Контрагент</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Fatura hesabı</value>
+   <key>en</key>
+   <value>Legal name</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -301,16 +301,16 @@
  <attributes uuid="a3987e84-190b-4ea4-8297-621101a17dd0">
   <name>ManagerSegment</name>
   <synonym>
-   <key>en</key>
-   <value>Manager segment</value>
+   <key>tr</key>
+   <value>Plasiyer grubu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Менеджер сегмента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Plasiyer grubu</value>
+   <key>en</key>
+   <value>Manager segment</value>
   </synonym>
   <type>
    <types>CatalogRef.PartnerSegments</types>
@@ -330,16 +330,16 @@
  <attributes uuid="817d7015-b522-431d-94da-51e65babc650">
   <name>Partner</name>
   <synonym>
-   <key>en</key>
-   <value>Partner</value>
+   <key>tr</key>
+   <value>Cari hesap</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Партнер</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
+   <key>en</key>
+   <value>Partner</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -354,16 +354,16 @@
  <attributes uuid="a78fce62-67f7-455a-bbdd-4b759be76203">
   <name>PriceIncludeTax</name>
   <synonym>
-   <key>en</key>
-   <value>Price includes tax</value>
+   <key>tr</key>
+   <value>Fiyata KDV dahil</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Цена включает НДС</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Fiyata KDV dahil</value>
+   <key>en</key>
+   <value>Price includes tax</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -377,16 +377,16 @@
  <attributes uuid="29080e03-80ed-4605-9723-2c6f5740e659">
   <name>LegalNameContract</name>
   <synonym>
-   <key>en</key>
-   <value>Legal name contract</value>
+   <key>tr</key>
+   <value>Fatura hesap kontratı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Договор контрагента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Fatura hesap kontratı</value>
+   <key>en</key>
+   <value>Legal name contract</value>
   </synonym>
   <type>
    <types>CatalogRef.LegalNameContracts</types>
@@ -404,16 +404,16 @@
  <attributes uuid="aab2c31c-3182-4e76-a13e-96cd8b3c145b">
   <name>TransactionType</name>
   <synonym>
-   <key>en</key>
-   <value>Transaction type</value>
+   <key>tr</key>
+   <value>İşlem tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Операция</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İşlem tipi</value>
+   <key>en</key>
+   <value>Transaction type</value>
   </synonym>
   <type>
    <types>EnumRef.PurchaseReturnTransactionTypes</types>
@@ -429,16 +429,16 @@
  <forms uuid="9f2e8d27-04be-485e-9703-2d021903a951">
   <name>DocumentForm</name>
   <synonym>
-   <key>en</key>
-   <value>Document form</value>
+   <key>tr</key>
+   <value>Evrak formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма документа</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
+   <key>en</key>
+   <value>Document form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -446,16 +446,16 @@
  <forms uuid="d3fda480-8295-4dbc-b2c9-98c0f2f16fb6">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -463,16 +463,16 @@
  <forms uuid="5607ef60-1636-4c7c-b296-0efd2a0fbcb1">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -484,16 +484,16 @@
   </producedTypes>
   <name>ItemList</name>
   <synonym>
-   <key>en</key>
-   <value>Item list</value>
+   <key>tr</key>
+   <value>Malzeme listesi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Товары</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme listesi</value>
+   <key>en</key>
+   <value>Item list</value>
   </synonym>
   <standardAttributes>
    <dataHistory>Use</dataHistory>
@@ -506,16 +506,16 @@
   <attributes uuid="852cca70-278e-493f-b053-7077a956bef1">
    <name>Key</name>
    <synonym>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ключ</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -527,16 +527,16 @@
   <attributes uuid="2168ebb7-e6bb-4294-8bd7-89e1834b9928">
    <name>Cancel</name>
    <synonym>
-    <key>en</key>
-    <value>Cancel</value>
+    <key>tr</key>
+    <value>İptal</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Отмена</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>İptal</value>
+    <key>en</key>
+    <value>Cancel</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -548,16 +548,16 @@
   <attributes uuid="715180ae-362d-4b57-a3ed-1f91548359e4">
    <name>Item</name>
    <synonym>
-    <key>en</key>
-    <value>Item</value>
+    <key>tr</key>
+    <value>Malzeme</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Номенклатура</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Malzeme</value>
+    <key>en</key>
+    <value>Item</value>
    </synonym>
    <type>
     <types>CatalogRef.Items</types>
@@ -571,16 +571,16 @@
   <attributes uuid="64f85659-2572-4125-a607-3f4ee2d31753">
    <name>ItemKey</name>
    <synonym>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </synonym>
    <type>
     <types>CatalogRef.ItemKeys</types>
@@ -598,16 +598,16 @@
   <attributes uuid="3e254236-0745-490e-9055-19acbf3f41b7">
    <name>Store</name>
    <synonym>
-    <key>en</key>
-    <value>Store</value>
+    <key>tr</key>
+    <value>Depo</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Склад</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Depo</value>
+    <key>en</key>
+    <value>Store</value>
    </synonym>
    <type>
     <types>CatalogRef.Stores</types>
@@ -625,16 +625,16 @@
   <attributes uuid="3fb82f45-fc45-49a9-858f-5075a0376c86">
    <name>NetAmount</name>
    <synonym>
-    <key>en</key>
-    <value>Net amount</value>
+    <key>tr</key>
+    <value>Net tutar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Сумма без налогов</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Net tutar</value>
+    <key>en</key>
+    <value>Net amount</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -646,16 +646,16 @@
   <attributes uuid="0fc2a596-430d-45bf-8c1b-e3a6ba08c555">
    <name>OffersAmount</name>
    <synonym>
-    <key>en</key>
-    <value>Offers amount</value>
+    <key>tr</key>
+    <value>Iskonto tutarı</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Сумма скидки</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Iskonto tutarı</value>
+    <key>en</key>
+    <value>Offers amount</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -667,16 +667,16 @@
   <attributes uuid="515ad951-80b3-4f8b-b990-a64442d6217a">
    <name>Price</name>
    <synonym>
-    <key>en</key>
-    <value>Price</value>
+    <key>tr</key>
+    <value>Fiyat</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Цена</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Fiyat</value>
+    <key>en</key>
+    <value>Price</value>
    </synonym>
    <type>
     <types>DefinedType.typePrice</types>
@@ -688,16 +688,16 @@
   <attributes uuid="7d0d67bf-6aa2-49e7-b4ba-a91e16481dfb">
    <name>PriceType</name>
    <synonym>
-    <key>en</key>
-    <value>Price type</value>
+    <key>tr</key>
+    <value>Fiyat tipi</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Тип цен</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Fiyat tipi</value>
+    <key>en</key>
+    <value>Price type</value>
    </synonym>
    <type>
     <types>CatalogRef.PriceTypes</types>
@@ -709,16 +709,16 @@
   <attributes uuid="0e146e22-f912-4a27-96b5-51e90086410f">
    <name>Quantity</name>
    <synonym>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Количество</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -730,16 +730,16 @@
   <attributes uuid="75e21313-1888-4fa9-aee8-e7c72637a546">
    <name>TaxAmount</name>
    <synonym>
-    <key>en</key>
-    <value>Tax amount</value>
+    <key>tr</key>
+    <value>Vergi tutarı</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Сумма налогов</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Vergi tutarı</value>
+    <key>en</key>
+    <value>Tax amount</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -751,16 +751,16 @@
   <attributes uuid="5be8cb20-3ea6-434e-91b6-72538f03a00b">
    <name>TotalAmount</name>
    <synonym>
-    <key>en</key>
-    <value>Total amount</value>
+    <key>tr</key>
+    <value>Toplam tutar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Итого</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Toplam tutar</value>
+    <key>en</key>
+    <value>Total amount</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -772,16 +772,16 @@
   <attributes uuid="7360bff0-a855-4376-99fd-c8cb828db664">
    <name>Unit</name>
    <synonym>
-    <key>en</key>
-    <value>Unit</value>
+    <key>tr</key>
+    <value>Birim</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ед. изм.</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Birim</value>
+    <key>en</key>
+    <value>Unit</value>
    </synonym>
    <type>
     <types>CatalogRef.Units</types>
@@ -798,16 +798,16 @@
   <attributes uuid="4d517aca-e34a-441a-9407-fd8580871ba1">
    <name>PurchaseReturnOrder</name>
    <synonym>
-    <key>en</key>
-    <value>Purchase return order</value>
+    <key>tr</key>
+    <value>Alım iade siparişi</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Заказ на возврат поставщику</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Alım iade siparişi</value>
+    <key>en</key>
+    <value>Purchase return order</value>
    </synonym>
    <type>
     <types>DocumentRef.PurchaseReturnOrder</types>
@@ -820,16 +820,16 @@
   <attributes uuid="9c48c6a7-dfc3-451f-acfa-5d9348bcbd53">
    <name>PurchaseInvoice</name>
    <synonym>
-    <key>en</key>
-    <value>Purchase invoice</value>
+    <key>tr</key>
+    <value>Satın alma faturası</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Поступление товаров и услуг</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Satın alma faturası</value>
+    <key>en</key>
+    <value>Purchase invoice</value>
    </synonym>
    <type>
     <types>DocumentRef.PurchaseInvoice</types>
@@ -842,16 +842,16 @@
   <attributes uuid="82590ab9-d9b2-4fbb-85c0-8b0c88bd5667">
    <name>DontCalculateRow</name>
    <synonym>
-    <key>en</key>
-    <value>Dont calculate row</value>
+    <key>tr</key>
+    <value>Satır hesaplanmayacak</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Не рассчитывать строки</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Satır hesaplanmayacak</value>
+    <key>en</key>
+    <value>Dont calculate row</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -864,16 +864,16 @@
   <attributes uuid="4a4de192-0615-421c-9e18-cb47085ba790">
    <name>QuantityInBaseUnit</name>
    <synonym>
-    <key>en</key>
-    <value>Quantity in base unit</value>
+    <key>tr</key>
+    <value>Ana birim miktarı</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Количество в основной единице измерения</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Ana birim miktarı</value>
+    <key>en</key>
+    <value>Quantity in base unit</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -885,16 +885,16 @@
   <attributes uuid="5d99742b-a7e2-4675-b71f-5a5cf5201f57">
    <name>Detail</name>
    <synonym>
-    <key>en</key>
-    <value>Detail</value>
+    <key>tr</key>
+    <value>Detaylar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Комментарий</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Detaylar</value>
+    <key>en</key>
+    <value>Detail</value>
    </synonym>
    <type>
     <types>DefinedType.typeDescription</types>
@@ -907,16 +907,16 @@
   <attributes uuid="273c2816-11a4-49a8-b888-64941560640e">
    <name>ProfitLossCenter</name>
    <synonym>
-    <key>en</key>
-    <value>Profit loss center</value>
+    <key>tr</key>
+    <value>Kar/Zarar merkezi</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Центр прибыли/убытков</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Kar/Zarar merkezi</value>
+    <key>en</key>
+    <value>Profit loss center</value>
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
@@ -929,16 +929,16 @@
   <attributes uuid="c1c24cea-3784-4236-89c7-973ca9fb0a72">
    <name>ExpenseType</name>
    <synonym>
-    <key>en</key>
-    <value>Expense type</value>
+    <key>tr</key>
+    <value>Gider tipi</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Статья расходов</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Gider tipi</value>
+    <key>en</key>
+    <value>Expense type</value>
    </synonym>
    <type>
     <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -951,16 +951,16 @@
   <attributes uuid="0a11de5f-00e8-4298-9b79-9b96b5ba4b6a">
    <name>AdditionalAnalytic</name>
    <synonym>
-    <key>en</key>
-    <value>Additional analytic</value>
+    <key>tr</key>
+    <value>Ek detaylar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Дополнительная аналитика</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Ek detaylar</value>
+    <key>en</key>
+    <value>Additional analytic</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -973,16 +973,16 @@
   <attributes uuid="a7e7aab4-82b8-435a-a49c-db8abd861573">
    <name>UseShipmentConfirmation</name>
    <synonym>
-    <key>en</key>
-    <value>Use shipment confirmation</value>
+    <key>tr</key>
+    <value>Stok çıkışı için irsalliye kullanmak</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Используется расходная товарная накладная</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Stok çıkışı için irsalliye kullanmak</value>
+    <key>en</key>
+    <value>Use shipment confirmation</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -995,16 +995,16 @@
   <attributes uuid="118de4cc-c7a6-441d-85e0-afef34c9b772">
    <name>ReturnReason</name>
    <synonym>
-    <key>en</key>
-    <value>Return reason</value>
+    <key>tr</key>
+    <value>İade sebebi</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Причина возврата</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>İade sebebi</value>
+    <key>en</key>
+    <value>Return reason</value>
    </synonym>
    <type>
     <types>CatalogRef.CancelReturnReasons</types>
@@ -1016,16 +1016,16 @@
   <attributes uuid="91a3f60a-9252-4c51-b085-e04b0d937f8b">
    <name>UseSerialLotNumber</name>
    <synonym>
-    <key>en</key>
-    <value>Use serial lot number</value>
+    <key>tr</key>
+    <value>Seri/lot numaraları kullan</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ведется учет по сериям номенклатуры</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Seri/lot numaraları kullan</value>
+    <key>en</key>
+    <value>Use serial lot number</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1038,16 +1038,16 @@
   <attributes uuid="9d488317-7d9e-434b-90f6-f562d2355ee8">
    <name>IsService</name>
    <synonym>
-    <key>en</key>
-    <value>Is service</value>
+    <key>tr</key>
+    <value>Bu hizmet</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Это услуга</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Bu hizmet</value>
+    <key>en</key>
+    <value>Is service</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1065,16 +1065,16 @@
   </producedTypes>
   <name>SpecialOffers</name>
   <synonym>
-   <key>en</key>
-   <value>Special offers</value>
+   <key>tr</key>
+   <value>Kampanyalar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Скидки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kampanyalar</value>
+   <key>en</key>
+   <value>Special offers</value>
   </synonym>
   <standardAttributes>
    <dataHistory>Use</dataHistory>
@@ -1087,16 +1087,16 @@
   <attributes uuid="34c3276d-5ce7-440a-885d-bf393d8c9c09">
    <name>Key</name>
    <synonym>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ключ</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -1108,16 +1108,16 @@
   <attributes uuid="dc76589d-f384-4f79-8691-fda47f4a1341">
    <name>Offer</name>
    <synonym>
-    <key>en</key>
-    <value>Special offer</value>
+    <key>tr</key>
+    <value>Kampanya</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Скидка</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Kampanya</value>
+    <key>en</key>
+    <value>Special offer</value>
    </synonym>
    <type>
     <types>CatalogRef.SpecialOffers</types>
@@ -1129,16 +1129,16 @@
   <attributes uuid="55f1569d-c4f2-46ef-bc60-acb0187ab3aa">
    <name>Amount</name>
    <synonym>
-    <key>en</key>
-    <value>Amount</value>
+    <key>tr</key>
+    <value>Tutar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Сумма</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Tutar</value>
+    <key>en</key>
+    <value>Amount</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -1150,16 +1150,16 @@
   <attributes uuid="eac23830-85dd-49ad-bc7c-315b750ad98b">
    <name>Percent</name>
    <synonym>
-    <key>en</key>
-    <value>Percent</value>
+    <key>tr</key>
+    <value>Yüzde</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Процент</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Yüzde</value>
+    <key>en</key>
+    <value>Percent</value>
    </synonym>
    <type>
     <types>DefinedType.typePercent</types>
@@ -1176,16 +1176,16 @@
   </producedTypes>
   <name>TaxList</name>
   <synonym>
-   <key>en</key>
-   <value>Tax list</value>
+   <key>tr</key>
+   <value>Vergi listesi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Налоги</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Vergi listesi</value>
+   <key>en</key>
+   <value>Tax list</value>
   </synonym>
   <standardAttributes>
    <dataHistory>Use</dataHistory>
@@ -1198,16 +1198,16 @@
   <attributes uuid="8519ad3c-d46c-46fe-b371-9cd014e8e347">
    <name>Key</name>
    <synonym>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ключ</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -1220,16 +1220,16 @@
   <attributes uuid="d29fa6a5-7d3e-4d9d-be1c-51088e8cf860">
    <name>Tax</name>
    <synonym>
-    <key>en</key>
-    <value>Tax</value>
+    <key>tr</key>
+    <value>Vergi</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Налог</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Vergi</value>
+    <key>en</key>
+    <value>Tax</value>
    </synonym>
    <type>
     <types>CatalogRef.Taxes</types>
@@ -1242,16 +1242,16 @@
   <attributes uuid="e0f18b04-6bfe-4027-a0d3-9b806e9b310f">
    <name>Amount</name>
    <synonym>
-    <key>en</key>
-    <value>Amount</value>
+    <key>tr</key>
+    <value>Tutar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Сумма</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Tutar</value>
+    <key>en</key>
+    <value>Amount</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -1264,16 +1264,16 @@
   <attributes uuid="e6f6bf91-8043-49f6-aa00-832d388977ac">
    <name>Analytics</name>
    <synonym>
-    <key>en</key>
-    <value>Analytics</value>
+    <key>tr</key>
+    <value>Detaylar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Аналитика учета</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Detaylar</value>
+    <key>en</key>
+    <value>Analytics</value>
    </synonym>
    <type>
     <types>CatalogRef.TaxAnalytics</types>
@@ -1286,16 +1286,16 @@
   <attributes uuid="22cad565-db85-467f-b694-521fc60b1ba0">
    <name>TaxRate</name>
    <synonym>
-    <key>en</key>
-    <value>Tax rate</value>
+    <key>tr</key>
+    <value>Vergi oranı</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Налоговая ставка</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Vergi oranı</value>
+    <key>en</key>
+    <value>Tax rate</value>
    </synonym>
    <type>
     <types>CatalogRef.TaxRates</types>
@@ -1308,16 +1308,16 @@
   <attributes uuid="58c66f43-3a70-40d6-9e9f-c917121d9515">
    <name>IncludeToTotalAmount</name>
    <synonym>
-    <key>en</key>
-    <value>Include to total amount</value>
+    <key>tr</key>
+    <value>Toplam tutara dahil</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Включается в общую сумму</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Toplam tutara dahil</value>
+    <key>en</key>
+    <value>Include to total amount</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1330,16 +1330,16 @@
   <attributes uuid="1b3d1ae4-bef7-49b6-af99-6a1e2840bfb4">
    <name>ManualAmount</name>
    <synonym>
-    <key>en</key>
-    <value>Manual amount</value>
+    <key>tr</key>
+    <value>Manuel tutar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ручная корректировка</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Manuel tutar</value>
+    <key>en</key>
+    <value>Manual amount</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -1357,30 +1357,30 @@
   </producedTypes>
   <name>Currencies</name>
   <synonym>
-   <key>en</key>
-   <value>Currencies</value>
+   <key>tr</key>
+   <value>Dövizler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Dövizler</value>
+   <key>en</key>
+   <value>Currencies</value>
   </synonym>
   <attributes uuid="86c75ee0-6e90-472a-988b-1deeeddcfc8f">
    <name>Key</name>
    <synonym>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ключ</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -1393,16 +1393,16 @@
   <attributes uuid="1ed690ab-d57d-44b5-9ee1-fe55be9f203d">
    <name>CurrencyFrom</name>
    <synonym>
-    <key>en</key>
-    <value>Currency from</value>
+    <key>tr</key>
+    <value>Dövizden</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>С валюты</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Dövizden</value>
+    <key>en</key>
+    <value>Currency from</value>
    </synonym>
    <type>
     <types>CatalogRef.Currencies</types>
@@ -1415,16 +1415,16 @@
   <attributes uuid="cc9ed0ed-aeee-4b77-a7f8-c4bd85359248">
    <name>Rate</name>
    <synonym>
-    <key>en</key>
-    <value>Rate</value>
+    <key>tr</key>
+    <value>Oran</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ставка</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Oran</value>
+    <key>en</key>
+    <value>Rate</value>
    </synonym>
    <type>
     <types>DefinedType.typeCurrencyRate</types>
@@ -1437,16 +1437,16 @@
   <attributes uuid="c0c9ea85-1892-425d-9638-ae569d87dafb">
    <name>ReverseRate</name>
    <synonym>
-    <key>en</key>
-    <value>Reverse rate</value>
+    <key>tr</key>
+    <value>Ters kur</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Обратный курс</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Ters kur</value>
+    <key>en</key>
+    <value>Reverse rate</value>
    </synonym>
    <type>
     <types>DefinedType.typeCurrencyRate</types>
@@ -1459,16 +1459,16 @@
   <attributes uuid="a0015682-741a-42a4-b9a6-73efbc0a9825">
    <name>ShowReverseRate</name>
    <synonym>
-    <key>en</key>
-    <value>Show reverse rate</value>
+    <key>tr</key>
+    <value>Ters kur göster</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Показать обратный курс</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Ters kur göster</value>
+    <key>en</key>
+    <value>Show reverse rate</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1481,16 +1481,16 @@
   <attributes uuid="1cb87b77-bf06-4ec5-b68e-28ec0d28ccd7">
    <name>Multiplicity</name>
    <synonym>
-    <key>en</key>
-    <value>Multiplicity</value>
+    <key>tr</key>
+    <value>Çarpan</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Кратность</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Çarpan</value>
+    <key>en</key>
+    <value>Multiplicity</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -1506,16 +1506,16 @@
   <attributes uuid="ccccce76-8233-4f70-b2c0-1e987dbe6b50">
    <name>MovementType</name>
    <synonym>
-    <key>en</key>
-    <value>Movement type</value>
+    <key>tr</key>
+    <value>Hareket tipi</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Статья движених денежных средств</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Hareket tipi</value>
+    <key>en</key>
+    <value>Movement type</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -1528,16 +1528,16 @@
   <attributes uuid="a6c14bb3-400e-47ba-afc1-b8d6841219a8">
    <name>Amount</name>
    <synonym>
-    <key>en</key>
-    <value>Amount</value>
+    <key>tr</key>
+    <value>Tutar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Сумма</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Tutar</value>
+    <key>en</key>
+    <value>Amount</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -1550,16 +1550,16 @@
   <attributes uuid="c4e5b357-f1fc-4db6-856b-7c55e722ecd6">
    <name>IsFixed</name>
    <synonym>
-    <key>en</key>
-    <value>Is fixed</value>
+    <key>tr</key>
+    <value>Sabittir</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Фиксированный</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Sabittir</value>
+    <key>en</key>
+    <value>Is fixed</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -1577,30 +1577,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <attributes uuid="619f65c5-9877-48ef-98bd-a3c323d36227">
    <name>Property</name>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -1612,16 +1612,16 @@
   <attributes uuid="dc7eed20-da36-47cc-97e8-595fc5ef81b8">
    <name>Value</name>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -1642,30 +1642,30 @@
   </producedTypes>
   <name>SerialLotNumbers</name>
   <synonym>
-   <key>en</key>
-   <value>Serial lot numbers</value>
+   <key>tr</key>
+   <value>Seri lot numaralar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Серии номенклатуры</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numaralar</value>
+   <key>en</key>
+   <value>Serial lot numbers</value>
   </synonym>
   <attributes uuid="2ebc523d-8173-4504-9b0f-9c09f069ed1f">
    <name>Key</name>
    <synonym>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ключ</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -1678,16 +1678,16 @@
   <attributes uuid="faf43e21-b7e7-45cc-a9ca-533f2a8e7aaa">
    <name>SerialLotNumber</name>
    <synonym>
-    <key>en</key>
-    <value>Serial lot number</value>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Серия номенклатуры</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
+    <key>en</key>
+    <value>Serial lot number</value>
    </synonym>
    <type>
     <types>CatalogRef.SerialLotNumbers</types>
@@ -1700,16 +1700,16 @@
   <attributes uuid="0a145baa-e9f8-43a9-83c4-99ca1a9f9130">
    <name>Quantity</name>
    <synonym>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Количество</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -1727,30 +1727,30 @@
   </producedTypes>
   <name>ShipmentConfirmations</name>
   <synonym>
-   <key>en</key>
-   <value>Shipment confirmations</value>
+   <key>tr</key>
+   <value>Sevk irsaliyeleri</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Расходные товарные накладные</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Sevk irsaliyeleri</value>
+   <key>en</key>
+   <value>Shipment confirmations</value>
   </synonym>
   <attributes uuid="4527f4cf-9cb1-4fb1-b79d-cf26da67562a">
    <name>Key</name>
    <synonym>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ключ</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -1763,16 +1763,16 @@
   <attributes uuid="68b425db-aeca-4885-ae97-42302b7c411d">
    <name>ShipmentConfirmation</name>
    <synonym>
-    <key>en</key>
-    <value>Shipment confirmation</value>
+    <key>tr</key>
+    <value>Sevk irsaliyesi</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Расходная товарная накладная</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Sevk irsaliyesi</value>
+    <key>en</key>
+    <value>Shipment confirmation</value>
    </synonym>
    <type>
     <types>DocumentRef.ShipmentConfirmation</types>
@@ -1785,16 +1785,16 @@
   <attributes uuid="b0a73a4c-d69d-44eb-bd16-549c8266a30e">
    <name>Quantity</name>
    <synonym>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Количество</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -1806,16 +1806,16 @@
   <attributes uuid="2ab14a4f-af87-46de-b80f-49da16d5a01c">
    <name>QuantityInShipmentConfirmation</name>
    <synonym>
-    <key>en</key>
-    <value>Quantity in shipment confirmation</value>
+    <key>tr</key>
+    <value>Satış irsaliyesindeki miktar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Количество в приходной накладной</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Satış irsaliyesindeki miktar</value>
+    <key>en</key>
+    <value>Quantity in shipment confirmation</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -1828,16 +1828,16 @@
   <attributes uuid="e292d6be-762d-4ee4-9094-f16ab122409f">
    <name>BasisKey</name>
    <synonym>
-    <key>en</key>
-    <value>Basis key</value>
+    <key>tr</key>
+    <value>Kaynak anahtar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ключ документа основания</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Kaynak anahtar</value>
+    <key>en</key>
+    <value>Basis key</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -1854,16 +1854,16 @@
   </producedTypes>
   <name>RowIDInfo</name>
   <synonym>
-   <key>en</key>
-   <value>Row IDInfo</value>
+   <key>tr</key>
+   <value>Satır ID bilgisi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Row ID Инфо</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Satır ID bilgisi</value>
+   <key>en</key>
+   <value>Row IDInfo</value>
   </synonym>
   <standardAttributes>
    <dataHistory>Use</dataHistory>
@@ -1876,16 +1876,16 @@
   <attributes uuid="245432d8-e0a6-4965-b7dc-c35b711c7118">
    <name>Key</name>
    <synonym>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ключ</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -1897,16 +1897,16 @@
   <attributes uuid="aa424a12-724a-4221-9446-14986331c06b">
    <name>RowID</name>
    <synonym>
-    <key>en</key>
-    <value>Row ID</value>
+    <key>tr</key>
+    <value>Satır ID</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>ID Строки</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Satır ID</value>
+    <key>en</key>
+    <value>Row ID</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -1918,16 +1918,16 @@
   <attributes uuid="027d982d-3f77-4d73-8fdd-5b97fb6ef12b">
    <name>Quantity</name>
    <synonym>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Количество</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -1940,16 +1940,16 @@
   <attributes uuid="44cd8671-736f-49ef-b4d3-e238f9d74d70">
    <name>Basis</name>
    <synonym>
-    <key>en</key>
-    <value>Basis</value>
+    <key>tr</key>
+    <value>Kaynak evrak</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Документ основание</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Kaynak evrak</value>
+    <key>en</key>
+    <value>Basis</value>
    </synonym>
    <type>
     <types>DocumentRef</types>
@@ -1962,16 +1962,16 @@
   <attributes uuid="a68ffe51-e277-41d7-bb8f-66422690ead9">
    <name>CurrentStep</name>
    <synonym>
-    <key>en</key>
-    <value>Current step</value>
+    <key>tr</key>
+    <value>Geçerli adım</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Текущий шаг</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Geçerli adım</value>
+    <key>en</key>
+    <value>Current step</value>
    </synonym>
    <type>
     <types>CatalogRef.MovementRules</types>
@@ -1984,16 +1984,16 @@
   <attributes uuid="3ff07efe-2569-49b6-9c28-05c2d6975995">
    <name>NextStep</name>
    <synonym>
-    <key>en</key>
-    <value>Next step</value>
+    <key>tr</key>
+    <value>Sonraki adım</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Следующий шаг</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Sonraki adım</value>
+    <key>en</key>
+    <value>Next step</value>
    </synonym>
    <type>
     <types>CatalogRef.MovementRules</types>
@@ -2006,16 +2006,16 @@
   <attributes uuid="0b75038b-434b-4c09-b15e-d99b2c5ef40c">
    <name>RowRef</name>
    <synonym>
-    <key>en</key>
-    <value>Row ref</value>
+    <key>tr</key>
+    <value>Satır Ref</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ссылка строки</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Satır Ref</value>
+    <key>en</key>
+    <value>Row ref</value>
    </synonym>
    <type>
     <types>CatalogRef.RowIDs</types>
@@ -2028,16 +2028,16 @@
   <attributes uuid="eb362c35-c99a-4fec-a1bd-71447d9057e9">
    <name>BasisKey</name>
    <synonym>
-    <key>en</key>
-    <value>Basis key</value>
+    <key>tr</key>
+    <value>Kaynak anahtar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ключ документа основания</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Kaynak anahtar</value>
+    <key>en</key>
+    <value>Basis key</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -2054,30 +2054,30 @@
   </producedTypes>
   <name>SourceOfOrigins</name>
   <synonym>
-   <key>en</key>
-   <value>Source of origins</value>
+   <key>tr</key>
+   <value>Envanter menşeileri</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Источники происхождения</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Envanter menşeileri</value>
+   <key>en</key>
+   <value>Source of origins</value>
   </synonym>
   <attributes uuid="4b80e952-d9aa-4ed9-9e9f-5e7f75572310">
    <name>Key</name>
    <synonym>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ключ</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -2090,16 +2090,16 @@
   <attributes uuid="ad3eadc2-2d33-4e02-98d2-9d81b4289ac0">
    <name>SerialLotNumber</name>
    <synonym>
-    <key>en</key>
-    <value>Serial lot number</value>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Серия номенклатуры</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
+    <key>en</key>
+    <value>Serial lot number</value>
    </synonym>
    <type>
     <types>CatalogRef.SerialLotNumbers</types>
@@ -2112,16 +2112,16 @@
   <attributes uuid="95024757-dc23-47a8-b563-88f77186f0f5">
    <name>SourceOfOrigin</name>
    <synonym>
-    <key>en</key>
-    <value>Source of origin</value>
+    <key>tr</key>
+    <value>Envanter menşei</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Источник происхождения</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Envanter menşei</value>
+    <key>en</key>
+    <value>Source of origin</value>
    </synonym>
    <type>
     <types>CatalogRef.SourceOfOrigins</types>
@@ -2134,16 +2134,16 @@
   <attributes uuid="30bdd0ee-19ee-4fd1-bcba-7509f3d22920">
    <name>Quantity</name>
    <synonym>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Количество</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -2157,16 +2157,16 @@
  <commands uuid="d53c1c62-7a81-4f9c-ab47-6e66a1567e9b">
   <name>Generate</name>
   <synonym>
-   <key>en</key>
-   <value>Purchase return</value>
+   <key>tr</key>
+   <value>Alım iadesi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Возврат поставщику</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Alım iadesi</value>
+   <key>en</key>
+   <value>Purchase return</value>
   </synonym>
   <group>FormCommandBarCreateBasedOn</group>
   <commandParameterType>

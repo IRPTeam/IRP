@@ -2,16 +2,16 @@
 <mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="68228508-02c9-480b-aafd-9ad2d28d0eee">
  <name>Inventory</name>
  <synonym>
-  <key>en</key>
-  <value>Inventory</value>
+  <key>tr</key>
+  <value>Stok</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Склад</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Stok</value>
+  <key>en</key>
+  <value>Inventory</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

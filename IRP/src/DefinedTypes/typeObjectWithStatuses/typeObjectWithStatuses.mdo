@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeObjectWithStatuses</name>
  <synonym>
-  <key>en</key>
-  <value>Type object with statuses</value>
+  <key>tr</key>
+  <value>Tip statüye sahip siparişler</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип объект со статусом</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tip statüye sahip siparişler</value>
+  <key>en</key>
+  <value>Type object with statuses</value>
  </synonym>
  <type>
   <types>DocumentRef.IncomingPaymentOrder</types>

@@ -2,16 +2,16 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2d829312-7dcc-4505-a657-c45007a3cd0d">
  <name>ChequeBond</name>
  <synonym>
-  <key>en</key>
-  <value>Cheque bond</value>
+  <key>tr</key>
+  <value>Çek/Senet</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Банковский чек</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Çek/Senet</value>
+  <key>en</key>
+  <value>Cheque bond</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

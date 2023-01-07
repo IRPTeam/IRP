@@ -6,23 +6,23 @@
  </producedTypes>
  <name>StoreKeeperWorkspace</name>
  <synonym>
-  <key>en</key>
-  <value>Store keeper workspace</value>
+  <key>tr</key>
+  <value>Depocu çalışma alanı</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Рабочее место менеджера склада</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Depocu çalışma alanı</value>
+  <key>en</key>
+  <value>Store keeper workspace</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.StoreKeeperWorkspace.Form.Form</defaultForm>
  <forms uuid="97793506-8fa7-45bf-a81d-a34350987958">
   <name>Form</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -30,7 +30,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>

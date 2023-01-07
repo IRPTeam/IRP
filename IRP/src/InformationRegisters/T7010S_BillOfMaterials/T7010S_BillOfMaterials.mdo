@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T7010S_BillOfMaterials</name>
  <synonym>
-  <key>en</key>
-  <value>T7010 Bill of materials</value>
+  <key>tr</key>
+  <value>T7010 Üretim reçeteleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>T7010 Спецификации (Производство)</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>T7010 Üretim reçeteleri</value>
+  <key>en</key>
+  <value>T7010 Bill of materials</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultListForm>InformationRegister.T7010S_BillOfMaterials.Form.ListForm</defaultListForm>
@@ -30,16 +30,16 @@
  <resources uuid="955269a7-8ac7-49dd-a51e-5a3b3ab42a7d">
   <name>BillOfMaterials</name>
   <synonym>
-   <key>en</key>
-   <value>Bill of materials</value>
+   <key>tr</key>
+   <value>Üretim reçetesi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Спецификация (Производство)</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Üretim reçetesi</value>
+   <key>en</key>
+   <value>Bill of materials</value>
   </synonym>
   <type>
    <types>CatalogRef.BillOfMaterials</types>
@@ -54,16 +54,16 @@
  <resources uuid="9795bf1b-2ed4-499a-b80e-35793911296a">
   <name>Unit</name>
   <synonym>
-   <key>en</key>
-   <value>Unit</value>
+   <key>tr</key>
+   <value>Birim</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Единица измерения</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Birim</value>
+   <key>en</key>
+   <value>Unit</value>
   </synonym>
   <type>
    <types>CatalogRef.Units</types>
@@ -77,16 +77,16 @@
  <resources uuid="d3fb5d33-0fc2-4d8b-b694-49c83849f0f9">
   <name>Quantity</name>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -100,16 +100,16 @@
  <resources uuid="628a1bdd-ea3c-407e-86f5-b797f638be4e">
   <name>BasisUnit</name>
   <synonym>
-   <key>en</key>
-   <value>Basis unit</value>
+   <key>tr</key>
+   <value>Ana birim</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Базовая единица измерения</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ana birim</value>
+   <key>en</key>
+   <value>Basis unit</value>
   </synonym>
   <type>
    <types>CatalogRef.Units</types>
@@ -123,16 +123,16 @@
  <resources uuid="70b48c35-38fd-4880-a76e-c84a9b4bc467">
   <name>BasisQuantity</name>
   <synonym>
-   <key>en</key>
-   <value>Basis quantity</value>
+   <key>tr</key>
+   <value>Kaynak miktar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество в основной ед.изм.</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak miktar</value>
+   <key>en</key>
+   <value>Basis quantity</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -146,16 +146,16 @@
  <dimensions uuid="442fa39d-c0d5-4a7d-8fab-35dc272422af">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -171,16 +171,16 @@
  <dimensions uuid="85986ae4-aed8-44e1-8c4c-41d1d741a590">
   <name>PlanningDocument</name>
   <synonym>
-   <key>en</key>
-   <value>Planning document</value>
+   <key>tr</key>
+   <value>Planlama evrakı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ планирования</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Planlama evrakı</value>
+   <key>en</key>
+   <value>Planning document</value>
   </synonym>
   <type>
    <types>DocumentRef.ProductionPlanning</types>
@@ -194,16 +194,16 @@
  <dimensions uuid="547743bc-a015-44e4-af9c-ef1efcaac4db">
   <name>BusinessUnit</name>
   <synonym>
-   <key>en</key>
-   <value>Business unit</value>
+   <key>tr</key>
+   <value>Departman</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Подразделение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Departman</value>
+   <key>en</key>
+   <value>Business unit</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -219,16 +219,16 @@
  <dimensions uuid="bb05bb3d-3cbc-4386-8c52-32e95f7c3feb">
   <name>InputID</name>
   <synonym>
-   <key>en</key>
-   <value>Input ID</value>
+   <key>tr</key>
+   <value>Giriş ID</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>ID ввода</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Giriş ID</value>
+   <key>en</key>
+   <value>Input ID</value>
   </synonym>
   <type>
    <types>String</types>
@@ -247,16 +247,16 @@
  <dimensions uuid="c9e0824f-baba-47c7-9edd-038970161a0c">
   <name>OutputID</name>
   <synonym>
-   <key>en</key>
-   <value>Output ID</value>
+   <key>tr</key>
+   <value>Çıkış ID</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>ID вывода</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Çıkış ID</value>
+   <key>en</key>
+   <value>Output ID</value>
   </synonym>
   <type>
    <types>String</types>
@@ -275,7 +275,7 @@
  <dimensions uuid="78f9789b-b01e-40da-8ec5-9c9a18fb86c5">
   <name>UniqueID</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Unique ID</value>
   </synonym>
   <synonym>
@@ -283,7 +283,7 @@
    <value>Уникальный ID</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Unique ID</value>
   </synonym>
   <type>
@@ -305,16 +305,16 @@
  <dimensions uuid="5cd88ea1-5f59-4914-a558-bf35206643fe">
   <name>SurplusStore</name>
   <synonym>
-   <key>en</key>
-   <value>Surplus store</value>
+   <key>tr</key>
+   <value>Giriş depo</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад прихода</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Giriş depo</value>
+   <key>en</key>
+   <value>Surplus store</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -329,16 +329,16 @@
  <dimensions uuid="9ab6e966-21e4-4d46-b4ac-b52257afd0d1">
   <name>WriteoffStore</name>
   <synonym>
-   <key>en</key>
-   <value>Writeoff store</value>
+   <key>tr</key>
+   <value>Çıkış depo</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад расхода</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Çıkış depo</value>
+   <key>en</key>
+   <value>Writeoff store</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -353,16 +353,16 @@
  <dimensions uuid="ddea6dc9-0963-4be5-9644-23fd5f53eb36">
   <name>ItemKey</name>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -378,16 +378,16 @@
  <dimensions uuid="79d0a89f-4a8b-4d7e-b65c-13d77ba943c9">
   <name>IsProduct</name>
   <synonym>
-   <key>en</key>
-   <value>Is product</value>
+   <key>tr</key>
+   <value>Canlı ortam</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Это товар</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Canlı ortam</value>
+   <key>en</key>
+   <value>Is product</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -402,16 +402,16 @@
  <dimensions uuid="ba307a40-7f77-4d13-97c9-c5ef9bcb9ce2">
   <name>IsSemiproduct</name>
   <synonym>
-   <key>en</key>
-   <value>Is semiproduct</value>
+   <key>tr</key>
+   <value>Bu yarı mamul</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Это полуфабрикат</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Bu yarı mamul</value>
+   <key>en</key>
+   <value>Is semiproduct</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -426,16 +426,16 @@
  <dimensions uuid="1dd38f1d-f0d9-4776-b6ad-f15b8200d3f5">
   <name>IsMaterial</name>
   <synonym>
-   <key>en</key>
-   <value>Is material</value>
+   <key>tr</key>
+   <value>bu malzeme</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Это сырье</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>bu malzeme</value>
+   <key>en</key>
+   <value>Is material</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -450,16 +450,16 @@
  <dimensions uuid="598b0dfe-e39c-4e12-9d36-6319a1d54680">
   <name>IsService</name>
   <synonym>
-   <key>en</key>
-   <value>Is service</value>
+   <key>tr</key>
+   <value>Bu hizmet</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Это услуга</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Bu hizmet</value>
+   <key>en</key>
+   <value>Is service</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -474,16 +474,16 @@
  <dimensions uuid="ca33f872-7848-4f64-ac06-5a0dcec2f07f">
   <name>PlanningPeriod</name>
   <synonym>
-   <key>en</key>
-   <value>Planning period</value>
+   <key>tr</key>
+   <value>Planlama dönemi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Период планирования</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Planlama dönemi</value>
+   <key>en</key>
+   <value>Planning period</value>
   </synonym>
   <type>
    <types>CatalogRef.PlanningPeriods</types>
@@ -499,16 +499,16 @@
  <forms uuid="cc7d65f9-9532-44ef-9eba-db41275125c1">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

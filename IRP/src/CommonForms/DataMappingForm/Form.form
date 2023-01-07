@@ -393,16 +393,16 @@
  <attributes>
   <name>DataMapping</name>
   <title>
-   <key>en</key>
-   <value>Data mapping</value>
+   <key>tr</key>
+   <value>Veri mappleme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сопоставление данных</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Veri mappleme</value>
+   <key>en</key>
+   <value>Data mapping</value>
   </title>
   <id>1</id>
   <valueType>
@@ -417,16 +417,16 @@
   <columns>
    <name>Info</name>
    <title>
-    <key>en</key>
-    <value>Info</value>
+    <key>tr</key>
+    <value>Bilgi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Информация</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Bilgi</value>
+    <key>en</key>
+    <value>Info</value>
    </title>
    <id>3</id>
    <valueType>
@@ -444,16 +444,16 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </title>
    <id>4</id>
    <valueType>
@@ -470,7 +470,7 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Ref</value>
    </title>
    <title>
@@ -478,7 +478,7 @@
     <value>Ссылка</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Ref</value>
    </title>
    <id>5</id>
@@ -495,16 +495,16 @@
   <columns>
    <name>Type</name>
    <title>
-    <key>en</key>
-    <value>Type</value>
+    <key>tr</key>
+    <value>Tip</value>
    </title>
    <title>
     <key>ru</key>
     <value>Вид</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
+    <key>en</key>
+    <value>Type</value>
    </title>
    <id>6</id>
    <valueType>
@@ -522,16 +522,16 @@
  <attributes>
   <name>TopLevel</name>
   <title>
-   <key>en</key>
-   <value>Top level</value>
+   <key>tr</key>
+   <value>Üst seviye</value>
   </title>
   <title>
    <key>ru</key>
    <value>Верхний уровень</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Üst seviye</value>
+   <key>en</key>
+   <value>Top level</value>
   </title>
   <id>7</id>
   <valueType>
@@ -547,16 +547,16 @@
  <formCommands>
   <name>SaveMapping</name>
   <title>
-   <key>en</key>
-   <value>Save mapping</value>
+   <key>tr</key>
+   <value>Mapping kaydet</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сохранить сопоставление</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Mapping kaydet</value>
+   <key>en</key>
+   <value>Save mapping</value>
   </title>
   <id>1</id>
   <use>

@@ -10,16 +10,16 @@
  </producedTypes>
  <name>AddAttributeAndProperty</name>
  <synonym>
-  <key>en</key>
-  <value>Additional attribute types</value>
+  <key>tr</key>
+  <value>Ek özellik tipleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Типы дополнительных реквизитов и сведений</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Ek özellik tipleri</value>
+  <key>en</key>
+  <value>Additional attribute types</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -27,16 +27,16 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>en</key>
-  <value>Additional attribute type</value>
+  <key>tr</key>
+  <value>Ek özellik tipi</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Тип дополнительного реквизита</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Ek özellik tipi</value>
+  <key>en</key>
+  <value>Additional attribute type</value>
  </objectPresentation>
  <characteristicExtValues>Catalog.AddAttributeAndPropertyValues</characteristicExtValues>
  <type>
@@ -70,16 +70,16 @@
  <attributes uuid="a46de28d-274c-4547-a6fd-6e426d8be0b0">
   <name>Icon</name>
   <synonym>
-   <key>en</key>
-   <value>Icon</value>
+   <key>tr</key>
+   <value>Simge</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Иконка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Simge</value>
+   <key>en</key>
+   <value>Icon</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -93,16 +93,16 @@
  <attributes uuid="c6468cbb-beb3-46b0-bec6-8e7652700222">
   <name>isIconSet</name>
   <synonym>
-   <key>en</key>
-   <value>Is icon set</value>
+   <key>tr</key>
+   <value>Simge belirlendi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Иконка установлена</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Simge belirlendi</value>
+   <key>en</key>
+   <value>Is icon set</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -116,16 +116,16 @@
  <forms uuid="c33e15bc-2f64-4500-8ca5-c9789a8dc330">
   <name>ItemForm</name>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -133,16 +133,16 @@
  <forms uuid="43c074e4-cce6-4d47-88bc-d04dd235a2e1">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -150,16 +150,16 @@
  <forms uuid="a27f0ea2-37c3-4170-84b5-212b32322ea5">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -167,16 +167,16 @@
  <forms uuid="3812a981-a428-45ce-9ef3-67f2529720c8">
   <name>GroupForm</name>
   <synonym>
-   <key>en</key>
-   <value>Group form</value>
+   <key>tr</key>
+   <value>Grup from</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма группы</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Grup from</value>
+   <key>en</key>
+   <value>Group form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

@@ -7,77 +7,77 @@
  </producedTypes>
  <name>CurrencyType</name>
  <synonym>
-  <key>en</key>
-  <value>Currency type</value>
+  <key>tr</key>
+  <value>Döviz tipi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Вид валюты</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Döviz tipi</value>
+  <key>en</key>
+  <value>Currency type</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="74a98b5f-09be-4378-b240-360fd3b85310">
   <name>Reporting</name>
   <synonym>
-   <key>en</key>
-   <value>Reporting</value>
+   <key>tr</key>
+   <value>Raporlama</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюта отчетности</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Raporlama</value>
+   <key>en</key>
+   <value>Reporting</value>
   </synonym>
  </enumValues>
  <enumValues uuid="c1add2a7-bcce-4236-a477-a89cf58a90da">
   <name>Legal</name>
   <synonym>
-   <key>en</key>
-   <value>Legal</value>
+   <key>tr</key>
+   <value>Yerel</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Локальная валюта</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Yerel</value>
+   <key>en</key>
+   <value>Legal</value>
   </synonym>
  </enumValues>
  <enumValues uuid="1cca85a5-c8b2-435e-bbd0-4d3f3863d278">
   <name>Agreement</name>
   <synonym>
-   <key>en</key>
-   <value>Partner term</value>
+   <key>tr</key>
+   <value>Sözleşme</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюта соглашения</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Sözleşme</value>
+   <key>en</key>
+   <value>Partner term</value>
   </synonym>
  </enumValues>
  <enumValues uuid="ba397fef-d6cb-401d-9f1e-264138a7ed80">
   <name>Budgeting</name>
   <synonym>
-   <key>en</key>
-   <value>Budgeting</value>
+   <key>tr</key>
+   <value>Bütçe</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюта бюджетирования</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Bütçe</value>
+   <key>en</key>
+   <value>Budgeting</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

@@ -7,47 +7,47 @@
  </producedTypes>
  <name>BatchDirection</name>
  <synonym>
-  <key>en</key>
-  <value>Batch direction</value>
+  <key>tr</key>
+  <value>Parti yönü</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Направление партии</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Parti yönü</value>
+  <key>en</key>
+  <value>Batch direction</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="03ec6752-4923-4369-a849-4fc56ca5fa51">
   <name>Receipt</name>
   <synonym>
-   <key>en</key>
-   <value>Receipt</value>
+   <key>tr</key>
+   <value>Giriş</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Приход</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Giriş</value>
+   <key>en</key>
+   <value>Receipt</value>
   </synonym>
  </enumValues>
  <enumValues uuid="5105d989-2cdf-4291-90b7-c40c026e7a48">
   <name>Expense</name>
   <synonym>
-   <key>en</key>
-   <value>Expense</value>
+   <key>tr</key>
+   <value>Çıkış</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Расход</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Çıkış</value>
+   <key>en</key>
+   <value>Expense</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

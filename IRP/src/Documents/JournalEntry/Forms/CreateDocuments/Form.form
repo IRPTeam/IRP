@@ -559,16 +559,16 @@
  <attributes>
   <name>Company</name>
   <title>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </title>
   <title>
    <key>ru</key>
    <value>Организация</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </title>
   <id>3</id>
   <valueType>
@@ -584,16 +584,16 @@
  <attributes>
   <name>LedgerType</name>
   <title>
-   <key>en</key>
-   <value>Ledger type</value>
+   <key>tr</key>
+   <value>Defter tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип учета</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Defter tipi</value>
+   <key>en</key>
+   <value>Ledger type</value>
   </title>
   <id>4</id>
   <valueType>
@@ -609,16 +609,16 @@
  <attributes>
   <name>Period</name>
   <title>
-   <key>en</key>
-   <value>Period</value>
+   <key>tr</key>
+   <value>Dönem</value>
   </title>
   <title>
    <key>ru</key>
    <value>Период</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dönem</value>
+   <key>en</key>
+   <value>Period</value>
   </title>
   <id>5</id>
   <valueType>
@@ -634,16 +634,16 @@
  <attributes>
   <name>TableDocuments</name>
   <title>
-   <key>en</key>
-   <value>Table documents</value>
+   <key>tr</key>
+   <value>Tablo evrakları</value>
   </title>
   <title>
    <key>ru</key>
    <value>Табличные документы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tablo evrakları</value>
+   <key>en</key>
+   <value>Table documents</value>
   </title>
   <id>6</id>
   <valueType>
@@ -658,16 +658,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <id>7</id>
    <valueType>
@@ -683,16 +683,16 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>en</key>
-    <value>Name</value>
+    <key>tr</key>
+    <value>Ad</value>
    </title>
    <title>
     <key>ru</key>
     <value>Имя</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
+    <key>en</key>
+    <value>Name</value>
    </title>
    <id>8</id>
    <valueType>
@@ -709,16 +709,16 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>en</key>
-    <value>Presentation</value>
+    <key>tr</key>
+    <value>Görünüm</value>
    </title>
    <title>
     <key>ru</key>
     <value>Специальные предложения</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
+    <key>en</key>
+    <value>Presentation</value>
    </title>
    <id>9</id>
    <valueType>
@@ -736,16 +736,16 @@
  <formCommands>
   <name>CreateDocuments</name>
   <title>
-   <key>en</key>
-   <value>Create documents</value>
+   <key>tr</key>
+   <value>Evrakları oluştur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Создать документы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evrakları oluştur</value>
+   <key>en</key>
+   <value>Create documents</value>
   </title>
   <id>1</id>
   <use>
@@ -761,16 +761,16 @@
  <formCommands>
   <name>CheckAll</name>
   <title>
-   <key>en</key>
-   <value>Check all</value>
+   <key>tr</key>
+   <value>Tümü işaretle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать все</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tümü işaretle</value>
+   <key>en</key>
+   <value>Check all</value>
   </title>
   <id>2</id>
   <use>
@@ -790,16 +790,16 @@
  <formCommands>
   <name>UncheckAll</name>
   <title>
-   <key>en</key>
-   <value>Uncheck all</value>
+   <key>tr</key>
+   <value>Tümü kaldır</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отменить все</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tümü kaldır</value>
+   <key>en</key>
+   <value>Uncheck all</value>
   </title>
   <id>3</id>
   <use>

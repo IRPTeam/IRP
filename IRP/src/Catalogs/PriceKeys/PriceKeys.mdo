@@ -9,16 +9,16 @@
  </producedTypes>
  <name>PriceKeys</name>
  <synonym>
-  <key>en</key>
-  <value>Price keys</value>
+  <key>tr</key>
+  <value>Fiyat anahtarları</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Ключи аналитики ценообразования</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Fiyat anahtarları</value>
+  <key>en</key>
+  <value>Price keys</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -42,16 +42,16 @@
   <dataHistory>Use</dataHistory>
   <name>Ref</name>
   <synonym>
-   <key>en</key>
-   <value>Price key</value>
+   <key>tr</key>
+   <value>Fiyat anahtarı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ключ аналитики ценообразования</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Fiyat anahtarı</value>
+   <key>en</key>
+   <value>Price key</value>
   </synonym>
   <fillValue xsi:type="core:UndefinedValue"/>
   <minValue xsi:type="core:UndefinedValue"/>
@@ -144,16 +144,16 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectPresentation>
-  <key>en</key>
-  <value>Price key</value>
+  <key>tr</key>
+  <value>Fiyat anahtarı</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Ключ аналитики ценообразования</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Fiyat anahtarı</value>
+  <key>en</key>
+  <value>Price key</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -171,16 +171,16 @@
  <attributes uuid="2a44f399-3ed6-44fe-bd76-c3a07c911c9e">
   <name>Item</name>
   <synonym>
-   <key>en</key>
-   <value>Item</value>
+   <key>tr</key>
+   <value>Malzeme</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Номенклатура</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme</value>
+   <key>en</key>
+   <value>Item</value>
   </synonym>
   <type>
    <types>CatalogRef.Items</types>
@@ -196,16 +196,16 @@
  <attributes uuid="d7166b36-bc92-4d73-90f5-35d1ceadc370">
   <name>AffectPricingMD5</name>
   <synonym>
-   <key>en</key>
-   <value>Affect pricing MD5</value>
+   <key>tr</key>
+   <value>Fiyatları etkileyen MD5</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>MD5 влияния на цену</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Fiyatları etkileyen MD5</value>
+   <key>en</key>
+   <value>Affect pricing MD5</value>
   </synonym>
   <type>
    <types>String</types>
@@ -229,30 +229,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <attributes uuid="c5edcb05-e2fa-438c-a430-d6d8210f9b4f">
    <name>Property</name>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -265,16 +265,16 @@
   <attributes uuid="183331b4-7fc0-4022-bce5-7f0515da009a">
    <name>Value</name>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -291,16 +291,16 @@
   <attributes uuid="3de32041-ac59-40b4-a558-68e865fbf4f8">
    <name>SearchLiteral</name>
    <synonym>
-    <key>en</key>
-    <value>Search literal</value>
+    <key>tr</key>
+    <value>Arama metni</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Буквальный поиск</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Arama metni</value>
+    <key>en</key>
+    <value>Search literal</value>
    </synonym>
    <type>
     <types>String</types>
@@ -317,16 +317,16 @@
  <forms uuid="60ae17ba-41e2-4fde-805f-278e5db1c1f3">
   <name>ItemForm</name>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -334,16 +334,16 @@
  <forms uuid="b4dc3428-a79f-40d2-9075-dd928a378f4a">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -351,16 +351,16 @@
  <forms uuid="7a82912f-0bf1-4db6-a653-8ecc4ce75a52">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

@@ -230,16 +230,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Header group</value>
+   <key>tr</key>
+   <value>Başlık grup</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа шапки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Başlık grup</value>
+   <key>en</key>
+   <value>Header group</value>
   </title>
   <extendedTooltip>
    <name>HeaderGroupExtendedTooltip</name>
@@ -333,7 +333,7 @@
    <name>PropertiesTableisModified</name>
    <id>17</id>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>*</value>
    </title>
    <title>
@@ -341,7 +341,7 @@
     <value>*</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>*</value>
    </title>
    <visible>true</visible>
@@ -394,16 +394,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Properties table group for fields</value>
+    <key>tr</key>
+    <value>Alanlar için özellikler tablo grubu</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа свойств таблицы для полей</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Alanlar için özellikler tablo grubu</value>
+    <key>en</key>
+    <value>Properties table group for fields</value>
    </title>
    <extendedTooltip>
     <name>PropertiesFieldsExtendedTooltip</name>
@@ -757,16 +757,16 @@
  <attributes>
   <name>PropertiesTable</name>
   <title>
-   <key>en</key>
-   <value>Properties table</value>
+   <key>tr</key>
+   <value>Özellikler tablosu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица свойств</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Özellikler tablosu</value>
+   <key>en</key>
+   <value>Properties table</value>
   </title>
   <id>2</id>
   <valueType>
@@ -781,16 +781,16 @@
   <columns>
    <name>Object</name>
    <title>
-    <key>en</key>
-    <value>Object</value>
+    <key>tr</key>
+    <value>Obje</value>
    </title>
    <title>
     <key>ru</key>
     <value>Объект</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Obje</value>
+    <key>en</key>
+    <value>Object</value>
    </title>
    <id>3</id>
    <valueType>
@@ -806,16 +806,16 @@
   <columns>
    <name>isModified</name>
    <title>
-    <key>en</key>
-    <value>Is modified</value>
+    <key>tr</key>
+    <value>Değiştirildi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Изменен</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değiştirildi</value>
+    <key>en</key>
+    <value>Is modified</value>
    </title>
    <id>4</id>
    <valueType>
@@ -832,16 +832,16 @@
  <attributes>
   <name>ObjectType</name>
   <title>
-   <key>en</key>
-   <value>Object type</value>
+   <key>tr</key>
+   <value>Obje tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип объекта</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Obje tipi</value>
+   <key>en</key>
+   <value>Object type</value>
   </title>
   <id>5</id>
   <valueType/>
@@ -855,16 +855,16 @@
  <attributes>
   <name>ObjectTable</name>
   <title>
-   <key>en</key>
-   <value>Table</value>
+   <key>tr</key>
+   <value>Tablo</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tablo</value>
+   <key>en</key>
+   <value>Table</value>
   </title>
   <id>6</id>
   <valueType>
@@ -881,16 +881,16 @@
  <attributes>
   <name>FormDataCash</name>
   <title>
-   <key>en</key>
-   <value>Form data cash</value>
+   <key>tr</key>
+   <value>Form veri cache</value>
   </title>
   <title>
    <key>ru</key>
    <value>Кеш данных формы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Form veri cache</value>
+   <key>en</key>
+   <value>Form data cash</value>
   </title>
   <id>7</id>
   <valueType/>
@@ -904,16 +904,16 @@
  <attributes>
   <name>DataSettingsComposer</name>
   <title>
-   <key>en</key>
-   <value>Data settings composer</value>
+   <key>tr</key>
+   <value>Veri inşa edilme şeması</value>
   </title>
   <title>
    <key>ru</key>
    <value>Компоновщик настроек данных</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Veri inşa edilme şeması</value>
+   <key>en</key>
+   <value>Data settings composer</value>
   </title>
   <id>8</id>
   <valueType>
@@ -929,16 +929,16 @@
  <formCommands>
   <name>Refresh</name>
   <title>
-   <key>en</key>
-   <value>Refresh</value>
+   <key>tr</key>
+   <value>Yenile</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yenile</value>
+   <key>en</key>
+   <value>Refresh</value>
   </title>
   <id>2</id>
   <use>
@@ -958,16 +958,16 @@
  <formCommands>
   <name>Save</name>
   <title>
-   <key>en</key>
-   <value>Save</value>
+   <key>tr</key>
+   <value>Kaydet</value>
   </title>
   <title>
    <key>ru</key>
    <value>Записать</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kaydet</value>
+   <key>en</key>
+   <value>Save</value>
   </title>
   <id>3</id>
   <use>
@@ -987,16 +987,16 @@
  <formCommands>
   <name>DeleteCurrentValue</name>
   <title>
-   <key>en</key>
-   <value>Delete current value</value>
+   <key>tr</key>
+   <value>Aktif değeri kaldır</value>
   </title>
   <title>
    <key>ru</key>
    <value>Удалить текущее значение</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Aktif değeri kaldır</value>
+   <key>en</key>
+   <value>Delete current value</value>
   </title>
   <id>4</id>
   <use>
@@ -1016,16 +1016,16 @@
  <formCommands>
   <name>CopyThisValueToEmptyCells</name>
   <title>
-   <key>en</key>
-   <value>Copy this value to empty cells</value>
+   <key>tr</key>
+   <value>Bu değeri boş hücrelere yapıştır</value>
   </title>
   <title>
    <key>ru</key>
    <value>Скопировать значение в пустые клетки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Bu değeri boş hücrelere yapıştır</value>
+   <key>en</key>
+   <value>Copy this value to empty cells</value>
   </title>
   <id>5</id>
   <use>
@@ -1045,16 +1045,16 @@
  <formCommands>
   <name>SetNewValue</name>
   <title>
-   <key>en</key>
-   <value>Set this value to all cells</value>
+   <key>tr</key>
+   <value>Tüm hücrelere aynı değeri yapıştır</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить текущее значение для всех клеток</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tüm hücrelere aynı değeri yapıştır</value>
+   <key>en</key>
+   <value>Set this value to all cells</value>
   </title>
   <id>6</id>
   <use>
@@ -1074,16 +1074,16 @@
  <formCommands>
   <name>SetValueForSelectedRows</name>
   <title>
-   <key>en</key>
-   <value>Set value for selected rows</value>
+   <key>tr</key>
+   <value>Seçilen satırlar için değer ata</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить значение для текущей строки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seçilen satırlar için değer ata</value>
+   <key>en</key>
+   <value>Set value for selected rows</value>
   </title>
   <id>7</id>
   <use>

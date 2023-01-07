@@ -376,16 +376,16 @@
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>For document</value>
+     <key>tr</key>
+     <value>Evraka uygula</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>На документ</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Evraka uygula</value>
+     <key>en</key>
+     <value>For document</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.SpecialOfferTypes.EnumValue.ForDocument</value>
@@ -393,16 +393,16 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>For row</value>
+     <key>tr</key>
+     <value>Satıra uygula</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>На строки</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Satıra uygula</value>
+     <key>en</key>
+     <value>For row</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.SpecialOfferTypes.EnumValue.ForRow</value>

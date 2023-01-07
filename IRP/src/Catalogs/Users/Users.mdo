@@ -9,16 +9,16 @@
  </producedTypes>
  <name>Users</name>
  <synonym>
-  <key>en</key>
-  <value>Users</value>
+  <key>tr</key>
+  <value>Kullanıcılar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Пользователи</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kullanıcılar</value>
+  <key>en</key>
+  <value>Users</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -57,16 +57,16 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectPresentation>
-  <key>en</key>
-  <value>User</value>
+  <key>tr</key>
+  <value>Kullanıcı</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Пользователь</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Kullanıcı</value>
+  <key>en</key>
+  <value>User</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -85,16 +85,16 @@
  <attributes uuid="50918958-78a5-44c1-b7ca-ec497c80e13a">
   <name>InfobaseUserID</name>
   <synonym>
-   <key>en</key>
-   <value>Infobase user ID</value>
+   <key>tr</key>
+   <value>Veritabanı kullanıcı IDsi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>ID пользователя</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Veritabanı kullanıcı IDsi</value>
+   <key>en</key>
+   <value>Infobase user ID</value>
   </synonym>
   <type>
    <types>UUID</types>
@@ -109,16 +109,16 @@
  <attributes uuid="5836f711-fac3-4ab0-a7b9-07e85fd0b1f7">
   <name>Partner</name>
   <synonym>
-   <key>en</key>
-   <value>Partner</value>
+   <key>tr</key>
+   <value>Cari hesap</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Партнер</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
+   <key>en</key>
+   <value>Partner</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -137,16 +137,16 @@
  <attributes uuid="0df89fa5-fe7a-4f73-b1f2-1d62178ce55d">
   <name>LocalizationCode</name>
   <synonym>
-   <key>en</key>
-   <value>Localization code</value>
+   <key>tr</key>
+   <value>Lokalisasyon kodu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Код локализации</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Lokalisasyon kodu</value>
+   <key>en</key>
+   <value>Localization code</value>
   </synonym>
   <type>
    <types>String</types>
@@ -165,16 +165,16 @@
  <attributes uuid="1abd382e-53a5-4c43-998c-4b92ac067214">
   <name>ShowInList</name>
   <synonym>
-   <key>en</key>
-   <value>Show in list</value>
+   <key>tr</key>
+   <value>Listede göster</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Показывать в списке выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Listede göster</value>
+   <key>en</key>
+   <value>Show in list</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -188,16 +188,16 @@
  <attributes uuid="420a7bee-afd5-4885-87f9-7272b8e4669b">
   <name>UserGroup</name>
   <synonym>
-   <key>en</key>
-   <value>User group</value>
+   <key>tr</key>
+   <value>Kullanıcı grubu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Группа пользователей</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı grubu</value>
+   <key>en</key>
+   <value>User group</value>
   </synonym>
   <type>
    <types>CatalogRef.UserGroups</types>
@@ -211,16 +211,16 @@
  <attributes uuid="528e23a4-6ab5-461d-8215-2e7d22ad21c2">
   <name>InterfaceLocalizationCode</name>
   <synonym>
-   <key>en</key>
-   <value>Interface localization code</value>
+   <key>tr</key>
+   <value>Arayüz dil kodu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Код локализации интерфейса</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Arayüz dil kodu</value>
+   <key>en</key>
+   <value>Interface localization code</value>
   </synonym>
   <type>
    <types>String</types>
@@ -240,16 +240,16 @@
  <attributes uuid="f8412bc3-551f-4e4c-a6f9-2948fb895094">
   <name>FormScaleVariant</name>
   <synonym>
-   <key>en</key>
-   <value>Form scale variant</value>
+   <key>tr</key>
+   <value>Form ölçü biçimi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вариант отображения форм</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Form ölçü biçimi</value>
+   <key>en</key>
+   <value>Form scale variant</value>
   </synonym>
   <type>
    <types>String</types>
@@ -268,16 +268,16 @@
  <attributes uuid="5b26269a-56e7-4ae6-9090-431c81c58943">
   <name>Disable</name>
   <synonym>
-   <key>en</key>
-   <value>Disable</value>
+   <key>tr</key>
+   <value>Devre dışı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Не активен</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Devre dışı</value>
+   <key>en</key>
+   <value>Disable</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -291,16 +291,16 @@
  <attributes uuid="a40f6964-e7bf-45c2-8158-d6aaf3801ac2">
   <name>ChangePasswordOnNextLogin</name>
   <synonym>
-   <key>en</key>
-   <value>Change password on next login</value>
+   <key>tr</key>
+   <value>Bir sonraki girişte şifre sıfırla</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Поменять пароль при следующем входе</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Bir sonraki girişte şifre sıfırla</value>
+   <key>en</key>
+   <value>Change password on next login</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -318,30 +318,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <attributes uuid="bd919773-3532-4155-900d-3aa296a157ad">
    <name>Property</name>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -354,16 +354,16 @@
   <attributes uuid="4dac3d33-f557-4f6e-82bf-540e750593b4">
    <name>Value</name>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -380,16 +380,16 @@
   <attributes uuid="ec293683-5954-4766-be21-bde44f2897e8">
    <name>SearchLiteral</name>
    <synonym>
-    <key>en</key>
-    <value>Search literal</value>
+    <key>tr</key>
+    <value>Arama metni</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Буквальный поиск</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Arama metni</value>
+    <key>en</key>
+    <value>Search literal</value>
    </synonym>
    <type>
     <types>String</types>
@@ -406,16 +406,16 @@
  <forms uuid="7a12a6af-0633-4c8c-93f8-26d3784e8f39">
   <name>ItemForm</name>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -423,16 +423,16 @@
  <forms uuid="e8569e23-60b4-4d9a-b65f-b2e963e824ef">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -440,16 +440,16 @@
  <forms uuid="41970557-391e-456b-86e2-5bf959f43b5c">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -457,16 +457,16 @@
  <forms uuid="76381369-4ca9-48dd-8778-c6c5a0224e4d">
   <name>InputPassword</name>
   <synonym>
-   <key>en</key>
-   <value>Input password</value>
+   <key>tr</key>
+   <value>Parola gitiniz</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Установка пароля</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Parola gitiniz</value>
+   <key>en</key>
+   <value>Input password</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

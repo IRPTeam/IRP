@@ -9,16 +9,16 @@
  </producedTypes>
  <name>WorkOrderClosing</name>
  <synonym>
-  <key>en</key>
-  <value>Work order closing</value>
+  <key>tr</key>
+  <value>İş emri kapanışı</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Закрытие заказ наряда</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İş emri kapanışı</value>
+  <key>en</key>
+  <value>Work order closing</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.WorkOrderClosing.StandardAttribute.Number</inputByString>

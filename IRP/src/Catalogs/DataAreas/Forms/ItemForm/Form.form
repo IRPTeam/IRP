@@ -361,7 +361,7 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Admin</value>
   </title>
   <title>
@@ -369,7 +369,7 @@
    <value>Админ</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Admin</value>
   </title>
   <extendedTooltip>
@@ -457,16 +457,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </title>
   <title>
    <key>ru</key>
    <value>Организация</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </title>
   <extendedTooltip>
    <name>GroupCompanyExtendedTooltip</name>

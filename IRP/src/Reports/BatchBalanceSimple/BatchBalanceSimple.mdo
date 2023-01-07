@@ -6,32 +6,32 @@
  </producedTypes>
  <name>BatchBalanceSimple</name>
  <synonym>
-  <key>en</key>
-  <value>Batch balance (simple)</value>
+  <key>tr</key>
+  <value>Parti bakiyeleri (basit)</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Остаток по партиям (простой)</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Parti bakiyeleri (basit)</value>
+  <key>en</key>
+  <value>Batch balance (simple)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.BatchBalanceSimple.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="0c06b934-435b-4fca-959a-c33c07349d8f">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>en</key>
-   <value>Main data composition schema</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основная схема компоновки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
+   <key>en</key>
+   <value>Main data composition schema</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

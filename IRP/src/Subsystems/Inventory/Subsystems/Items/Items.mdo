@@ -2,16 +2,16 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="888a0bad-f8a9-4fd1-9224-3bf477f8d604">
  <name>Items</name>
  <synonym>
-  <key>en</key>
-  <value>Items</value>
+  <key>tr</key>
+  <value>Malzemeler</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Номенклатура</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Malzemeler</value>
+  <key>en</key>
+  <value>Items</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

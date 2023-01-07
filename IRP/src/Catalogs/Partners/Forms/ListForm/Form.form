@@ -249,16 +249,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -295,16 +295,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -399,16 +399,16 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>en</key>
-    <value>Description</value>
+    <key>tr</key>
+    <value>Tanım</value>
    </title>
    <title>
     <key>ru</key>
     <value>Комментарий</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
+    <key>en</key>
+    <value>Description</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -768,16 +768,16 @@ FROM
  <attributes>
   <name>FilterCustomer</name>
   <title>
-   <key>en</key>
-   <value>Customer</value>
+   <key>tr</key>
+   <value>Müşteri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Клиент</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Müşteri</value>
+   <key>en</key>
+   <value>Customer</value>
   </title>
   <id>3</id>
   <valueType>
@@ -793,16 +793,16 @@ FROM
  <attributes>
   <name>FilterVendor</name>
   <title>
-   <key>en</key>
-   <value>Vendor</value>
+   <key>tr</key>
+   <value>Terarikçi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Поставщик</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Terarikçi</value>
+   <key>en</key>
+   <value>Vendor</value>
   </title>
   <id>4</id>
   <valueType>
@@ -818,16 +818,16 @@ FROM
  <attributes>
   <name>FilterEmployee</name>
   <title>
-   <key>en</key>
-   <value>Employee</value>
+   <key>tr</key>
+   <value>Personel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сотрудник</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Personel</value>
+   <key>en</key>
+   <value>Employee</value>
   </title>
   <id>5</id>
   <valueType>
@@ -843,16 +843,16 @@ FROM
  <attributes>
   <name>FilterConsignor</name>
   <title>
-   <key>en</key>
-   <value>Consignor</value>
+   <key>tr</key>
+   <value>Konsiyeye veren</value>
   </title>
   <title>
    <key>ru</key>
    <value>Комитент</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Konsiyeye veren</value>
+   <key>en</key>
+   <value>Consignor</value>
   </title>
   <id>6</id>
   <valueType>
@@ -868,16 +868,16 @@ FROM
  <attributes>
   <name>FilterTradeAgent</name>
   <title>
-   <key>en</key>
-   <value>Trade agent</value>
+   <key>tr</key>
+   <value>Ödeme aracı kurum</value>
   </title>
   <title>
    <key>ru</key>
    <value>Комиссионер</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ödeme aracı kurum</value>
+   <key>en</key>
+   <value>Trade agent</value>
   </title>
   <id>7</id>
   <valueType>

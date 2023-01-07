@@ -11,32 +11,32 @@
  </producedTypes>
  <name>DocumentFiscalStatus</name>
  <synonym>
-  <key>en</key>
-  <value>Document fiscal status</value>
+  <key>tr</key>
+  <value>Evrak fiscal statüsü</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Фискальный статус документа</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Evrak fiscal statüsü</value>
+  <key>en</key>
+  <value>Document fiscal status</value>
  </synonym>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <resources uuid="06a1ad82-83ab-4490-9370-1fb93414cfbd">
   <name>Status</name>
   <synonym>
-   <key>en</key>
-   <value>Status</value>
+   <key>tr</key>
+   <value>Statü</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Статус</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Statü</value>
+   <key>en</key>
+   <value>Status</value>
   </synonym>
   <type>
    <types>EnumRef.DocumentFiscalStatuses</types>
@@ -51,16 +51,16 @@
  <attributes uuid="57efa06c-9cde-43c8-a1ca-1af9b4c65b19">
   <name>FiscalResponse</name>
   <synonym>
-   <key>en</key>
-   <value>Fiscal response</value>
+   <key>tr</key>
+   <value>Yazak kasa cevabı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Фискальный ответ</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Yazak kasa cevabı</value>
+   <key>en</key>
+   <value>Fiscal response</value>
   </synonym>
   <type>
    <types>String</types>
@@ -75,16 +75,16 @@
  <attributes uuid="3ea10de5-40f9-4384-99f4-65bb473e7a82">
   <name>DataPresentation</name>
   <synonym>
-   <key>en</key>
-   <value>Data presentation</value>
+   <key>tr</key>
+   <value>Veri görüntüleme</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Представление данных</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Veri görüntüleme</value>
+   <key>en</key>
+   <value>Data presentation</value>
   </synonym>
   <type>
    <types>String</types>
@@ -101,16 +101,16 @@
  <dimensions uuid="8aca71c3-5c59-4c48-a43c-62bc7ebf4959">
   <name>Document</name>
   <synonym>
-   <key>en</key>
-   <value>Document</value>
+   <key>tr</key>
+   <value>Evrak</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
+   <key>en</key>
+   <value>Document</value>
   </synonym>
   <type>
    <types>DocumentRef.RetailSalesReceipt</types>

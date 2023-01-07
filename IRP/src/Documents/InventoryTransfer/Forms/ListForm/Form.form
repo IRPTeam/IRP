@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -252,16 +252,16 @@
    <name>StatusOutgoing</name>
    <id>40</id>
    <title>
-    <key>en</key>
-    <value>Status outgoing</value>
+    <key>tr</key>
+    <value>Sevk statüsü</value>
    </title>
    <title>
     <key>ru</key>
     <value>Статус отгрузки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sevk statüsü</value>
+    <key>en</key>
+    <value>Status outgoing</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -360,16 +360,16 @@
    <name>StatusIncoming</name>
    <id>43</id>
    <title>
-    <key>en</key>
-    <value>Status incoming</value>
+    <key>tr</key>
+    <value>Kabul statüsü</value>
    </title>
    <title>
     <key>ru</key>
     <value>Статус получения</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kabul statüsü</value>
+    <key>en</key>
+    <value>Status incoming</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>

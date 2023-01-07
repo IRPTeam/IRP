@@ -344,16 +344,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Stock balance details</value>
+   <key>tr</key>
+   <value>Stok bakiye detayları</value>
   </title>
   <title>
    <key>ru</key>
    <value>Настройки учета товаров по складам</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Stok bakiye detayları</value>
+   <key>en</key>
+   <value>Stock balance details</value>
   </title>
   <horizontalStretch>false</horizontalStretch>
   <groupHorizontalAlign>Left</groupHorizontalAlign>
@@ -806,16 +806,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Available attributes</value>
+    <key>tr</key>
+    <value>Ulaşılabilir ek alanlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Доступные реквизиты</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ulaşılabilir ek alanlar</value>
+    <key>en</key>
+    <value>Available attributes</value>
    </title>
    <extendedTooltip>
     <name>GroupAvailableAttributesExtendedTooltip</name>
@@ -1276,16 +1276,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Serial lot number settings</value>
+    <key>tr</key>
+    <value>Seri lot ayarları</value>
    </title>
    <title>
     <key>ru</key>
     <value>Настройки серийных номеров</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Seri lot ayarları</value>
+    <key>en</key>
+    <value>Serial lot number settings</value>
    </title>
    <extendedTooltip>
     <name>PageSerialLotNumbersSettingsExtendedTooltip</name>
@@ -1314,16 +1314,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group main pages</value>
+   <key>tr</key>
+   <value>Grup ana sayfalar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа главных страниц</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
+   <key>en</key>
+   <value>Group main pages</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>

@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeCashAdvanceBasises</name>
  <synonym>
-  <key>en</key>
-  <value>Type cash advance basises</value>
+  <key>tr</key>
+  <value>Tip İş avans kaynağı</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип основание аванса</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tip İş avans kaynağı</value>
+  <key>en</key>
+  <value>Type cash advance basises</value>
  </synonym>
  <type>
   <types>DocumentRef.CashTransferOrder</types>

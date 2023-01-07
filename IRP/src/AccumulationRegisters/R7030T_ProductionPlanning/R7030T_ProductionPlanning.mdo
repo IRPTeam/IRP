@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R7030T_ProductionPlanning</name>
  <synonym>
-  <key>en</key>
-  <value>R7030 Production planning</value>
+  <key>tr</key>
+  <value>R7030 Üretim planlama</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R7030 Планирование производства</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>R7030 Üretim planlama</value>
+  <key>en</key>
+  <value>R7030 Production planning</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +28,16 @@
  <resources uuid="720458ca-9c29-489f-a32c-74c26e6a48f3">
   <name>Quantity</name>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -49,16 +49,16 @@
  <dimensions uuid="6db16253-f0eb-4c91-aee7-f7efd0a15ed0">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -72,16 +72,16 @@
  <dimensions uuid="dac9584b-bfb8-475c-b123-d982cb4a3fa9">
   <name>PlanningDocument</name>
   <synonym>
-   <key>en</key>
-   <value>Planning document</value>
+   <key>tr</key>
+   <value>Planlama evrakı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ планирования</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Planlama evrakı</value>
+   <key>en</key>
+   <value>Planning document</value>
   </synonym>
   <type>
    <types>DocumentRef.ProductionPlanning</types>
@@ -95,16 +95,16 @@
  <dimensions uuid="973affcd-1d25-4d17-879a-9c15cb661333">
   <name>BusinessUnit</name>
   <synonym>
-   <key>en</key>
-   <value>Business unit</value>
+   <key>tr</key>
+   <value>Departman</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Подразделение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Departman</value>
+   <key>en</key>
+   <value>Business unit</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -117,16 +117,16 @@
  <dimensions uuid="66697d0e-bba8-451a-bb46-6e3185158f7d">
   <name>Store</name>
   <synonym>
-   <key>en</key>
-   <value>Store</value>
+   <key>tr</key>
+   <value>Depo</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
+   <key>en</key>
+   <value>Store</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -139,16 +139,16 @@
  <dimensions uuid="6613f70e-8913-4172-8732-f723f6708a9a">
   <name>ItemKey</name>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -161,16 +161,16 @@
  <dimensions uuid="e91717dd-1b33-48f2-8af4-6b0986f5c000">
   <name>PlanningType</name>
   <synonym>
-   <key>en</key>
-   <value>Planning type</value>
+   <key>tr</key>
+   <value>Planlama tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид планирования</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Planlama tipi</value>
+   <key>en</key>
+   <value>Planning type</value>
   </synonym>
   <type>
    <types>EnumRef.ProductionPlanningTypes</types>
@@ -183,16 +183,16 @@
  <dimensions uuid="a63432fb-51ac-4e98-8bcc-626c83eb5d66">
   <name>PlanningPeriod</name>
   <synonym>
-   <key>en</key>
-   <value>Planning period</value>
+   <key>tr</key>
+   <value>Planlama dönemi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Период планирования</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Planlama dönemi</value>
+   <key>en</key>
+   <value>Planning period</value>
   </synonym>
   <type>
    <types>CatalogRef.PlanningPeriods</types>
@@ -205,16 +205,16 @@
  <dimensions uuid="7b3ea3cf-3bb7-4ef6-b359-0ef22d1ca745">
   <name>ProductionType</name>
   <synonym>
-   <key>en</key>
-   <value>Production type</value>
+   <key>tr</key>
+   <value>Üretim tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид производства</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Üretim tipi</value>
+   <key>en</key>
+   <value>Production type</value>
   </synonym>
   <type>
    <types>EnumRef.ProductionTypes</types>
@@ -227,16 +227,16 @@
  <dimensions uuid="cea5188a-3c5a-41d5-b125-840ba8c72805">
   <name>BillOfMaterials</name>
   <synonym>
-   <key>en</key>
-   <value>Bill of materials</value>
+   <key>tr</key>
+   <value>Üretim reçetesi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Спецификация (Производство)</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Üretim reçetesi</value>
+   <key>en</key>
+   <value>Bill of materials</value>
   </synonym>
   <type>
    <types>CatalogRef.BillOfMaterials</types>

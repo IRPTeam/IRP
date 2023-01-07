@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -723,16 +723,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Item key</value>
+       <key>tr</key>
+       <value>Varyant</value>
       </content>
       <content>
        <key>ru</key>
        <value>Характеристика</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Varyant</value>
+       <key>en</key>
+       <value>Item key</value>
       </content>
      </localValue>
     </title>
@@ -742,16 +742,16 @@ FROM
  <attributes>
   <name>AddAttributeViewHTML</name>
   <title>
-   <key>en</key>
-   <value>Additional attribute view HTML</value>
+   <key>tr</key>
+   <value>Ek özellik görünümü HTML</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отображение дополнительного реквизита в HTML поле</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek özellik görünümü HTML</value>
+   <key>en</key>
+   <value>Additional attribute view HTML</value>
   </title>
   <id>2</id>
   <valueType>
@@ -768,16 +768,16 @@ FROM
  <attributes>
   <name>PictureViewHTML</name>
   <title>
-   <key>en</key>
-   <value>Picture view HTML</value>
+   <key>tr</key>
+   <value>Resim HTML önizleme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Просмотр изображений HTML</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Resim HTML önizleme</value>
+   <key>en</key>
+   <value>Picture view HTML</value>
   </title>
   <id>3</id>
   <valueType>

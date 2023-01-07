@@ -689,16 +689,16 @@
  <attributes>
   <name>SettingsComposer</name>
   <title>
-   <key>en</key>
-   <value>Settings composer</value>
+   <key>tr</key>
+   <value>Ayarlar sihirbazı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Набор настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarlar sihirbazı</value>
+   <key>en</key>
+   <value>Settings composer</value>
   </title>
   <id>1</id>
   <valueType>
@@ -714,16 +714,16 @@
  <attributes>
   <name>ResultTable</name>
   <title>
-   <key>en</key>
-   <value>Result table</value>
+   <key>tr</key>
+   <value>Sonuç tablosu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица результатов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sonuç tablosu</value>
+   <key>en</key>
+   <value>Result table</value>
   </title>
   <id>2</id>
   <valueType>
@@ -738,7 +738,7 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Ref</value>
    </title>
    <title>
@@ -746,7 +746,7 @@
     <value>Ссылка</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Ref</value>
    </title>
    <id>4</id>
@@ -764,7 +764,7 @@
  <attributes>
   <name>Ref</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Ref</value>
   </title>
   <title>
@@ -772,7 +772,7 @@
    <value>Ссылка</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Ref</value>
   </title>
   <id>5</id>
@@ -789,16 +789,16 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>en</key>
-   <value>Ok</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>Ok</value>
   </title>
   <id>1</id>
   <use>
@@ -814,16 +814,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <id>2</id>
   <use>
@@ -839,16 +839,16 @@
  <formCommands>
   <name>Verify</name>
   <title>
-   <key>en</key>
-   <value>Verify</value>
+   <key>tr</key>
+   <value>Onayla</value>
   </title>
   <title>
    <key>ru</key>
    <value>Проверить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Onayla</value>
+   <key>en</key>
+   <value>Verify</value>
   </title>
   <id>3</id>
   <use>

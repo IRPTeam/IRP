@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UsePlannedReceiptReservation</name>
  <synonym>
-  <key>en</key>
-  <value>Use planned receipt reservation</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Planlanan stok giriş rezervi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать резерв запланированного прихода товара</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Planlanan stok giriş rezervi</value>
+  <key>en</key>
+  <value>Use planned receipt reservation</value>
  </synonym>
  <type>
   <types>Boolean</types>

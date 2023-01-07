@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -802,16 +802,16 @@ GROUP BY
  <formCommands>
   <name>CreateBySalesReport</name>
   <title>
-   <key>en</key>
-   <value>Create by sales report</value>
+   <key>tr</key>
+   <value>Satışlara göre oluştur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Создать на основании отчета о продажа</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satışlara göre oluştur</value>
+   <key>en</key>
+   <value>Create by sales report</value>
   </title>
   <id>1</id>
   <use>

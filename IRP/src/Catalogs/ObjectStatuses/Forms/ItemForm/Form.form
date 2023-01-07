@@ -135,16 +135,16 @@
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>en</key>
-    <value>Select object</value>
+    <key>tr</key>
+    <value>Nesne seç</value>
    </inputHint>
    <inputHint>
     <key>ru</key>
     <value>Выбрать объект</value>
    </inputHint>
    <inputHint>
-    <key>tr</key>
-    <value>Nesne seç</value>
+    <key>en</key>
+    <value>Select object</value>
    </inputHint>
   </extInfo>
  </items>
@@ -592,16 +592,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Next possible statuses</value>
+    <key>tr</key>
+    <value>Sonraki uygun statüler</value>
    </title>
    <title>
     <key>ru</key>
     <value>Следующие возможные статусы</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sonraki uygun statüler</value>
+    <key>en</key>
+    <value>Next possible statuses</value>
    </title>
    <extendedTooltip>
     <name>GroupNextPossibleStatusesExtendedTooltip</name>
@@ -673,16 +673,16 @@
      <radioButtonsType>Tumbler</radioButtonsType>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>Posting</value>
+       <key>tr</key>
+       <value>Kayıt</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Проведение</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>Kayıt</value>
+       <key>en</key>
+       <value>Posting</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Posting</value>
@@ -690,16 +690,16 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>Correction</value>
+       <key>tr</key>
+       <value>Düzeltme kaydı</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Сторно</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>Düzeltme kaydı</value>
+       <key>en</key>
+       <value>Correction</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Correction</value>
@@ -707,16 +707,16 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>Reversal</value>
+       <key>tr</key>
+       <value>Ters kayıt</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Отменяет проводки</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>Ters kayıt</value>
+       <key>en</key>
+       <value>Reversal</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Reversal</value>
@@ -724,16 +724,16 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>Nothing</value>
+       <key>tr</key>
+       <value>Kayıt yok</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Без изменений</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>Kayıt yok</value>
+       <key>en</key>
+       <value>Nothing</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Nothing</value>
@@ -787,16 +787,16 @@
      <radioButtonsType>Tumbler</radioButtonsType>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>Posting</value>
+       <key>tr</key>
+       <value>Kayıt</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Проведение</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>Kayıt</value>
+       <key>en</key>
+       <value>Posting</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Posting</value>
@@ -804,16 +804,16 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>Correction</value>
+       <key>tr</key>
+       <value>Düzeltme kaydı</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Сторно</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>Düzeltme kaydı</value>
+       <key>en</key>
+       <value>Correction</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Correction</value>
@@ -821,16 +821,16 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>Reversal</value>
+       <key>tr</key>
+       <value>Ters kayıt</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Отменяет проводки</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>Ters kayıt</value>
+       <key>en</key>
+       <value>Reversal</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Reversal</value>
@@ -838,16 +838,16 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>Nothing</value>
+       <key>tr</key>
+       <value>Kayıt yok</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Без изменений</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>Kayıt yok</value>
+       <key>en</key>
+       <value>Nothing</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Nothing</value>
@@ -901,16 +901,16 @@
      <radioButtonsType>Tumbler</radioButtonsType>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>Posting</value>
+       <key>tr</key>
+       <value>Kayıt</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Проведение</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>Kayıt</value>
+       <key>en</key>
+       <value>Posting</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Posting</value>
@@ -918,16 +918,16 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>Correction</value>
+       <key>tr</key>
+       <value>Düzeltme kaydı</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Сторно</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>Düzeltme kaydı</value>
+       <key>en</key>
+       <value>Correction</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Correction</value>
@@ -935,16 +935,16 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>Reversal</value>
+       <key>tr</key>
+       <value>Ters kayıt</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Отменяет проводки</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>Ters kayıt</value>
+       <key>en</key>
+       <value>Reversal</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Reversal</value>
@@ -952,16 +952,16 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>Nothing</value>
+       <key>tr</key>
+       <value>Kayıt yok</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Без изменений</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>Kayıt yok</value>
+       <key>en</key>
+       <value>Nothing</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Nothing</value>
@@ -1015,16 +1015,16 @@
      <radioButtonsType>Tumbler</radioButtonsType>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>Posting</value>
+       <key>tr</key>
+       <value>Kayıt</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Проведение</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>Kayıt</value>
+       <key>en</key>
+       <value>Posting</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Posting</value>
@@ -1032,16 +1032,16 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>Correction</value>
+       <key>tr</key>
+       <value>Düzeltme kaydı</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Сторно</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>Düzeltme kaydı</value>
+       <key>en</key>
+       <value>Correction</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Correction</value>
@@ -1049,16 +1049,16 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>Reversal</value>
+       <key>tr</key>
+       <value>Ters kayıt</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Отменяет проводки</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>Ters kayıt</value>
+       <key>en</key>
+       <value>Reversal</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Reversal</value>
@@ -1066,16 +1066,16 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>Nothing</value>
+       <key>tr</key>
+       <value>Kayıt yok</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Без изменений</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>Kayıt yok</value>
+       <key>en</key>
+       <value>Nothing</value>
       </presentation>
       <value xsi:type="core:ReferenceValue">
        <value>Enum.DocumentPostingTypes.EnumValue.Nothing</value>
@@ -1089,16 +1089,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Posting</value>
+    <key>tr</key>
+    <value>Kayıt</value>
    </title>
    <title>
     <key>ru</key>
     <value>Проведение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kayıt</value>
+    <key>en</key>
+    <value>Posting</value>
    </title>
    <extendedTooltip>
     <name>GroupPostingExtendedTooltip</name>
@@ -1414,16 +1414,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Users</value>
+    <key>tr</key>
+    <value>Kullanıcılar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Пользователи</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullanıcılar</value>
+    <key>en</key>
+    <value>Users</value>
    </title>
    <extendedTooltip>
     <name>GroupUsersExtendedTooltip</name>
@@ -1452,16 +1452,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Pages</value>
+   <key>tr</key>
+   <value>Satırlar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Страницы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
+   <key>en</key>
+   <value>Pages</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>

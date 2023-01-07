@@ -2,15 +2,15 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f78a3fc8-20f4-45bf-9051-4e81daf7faaa">
  <name>LockedRows</name>
  <synonym>
-  <key>en</key>
-  <value>Locked rows</value>
+  <key>tr</key>
+  <value>Kilitli satırlar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Заблокированные строки</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kilitli satırlar</value>
+  <key>en</key>
+  <value>Locked rows</value>
  </synonym>
 </mdclass:CommonPicture>

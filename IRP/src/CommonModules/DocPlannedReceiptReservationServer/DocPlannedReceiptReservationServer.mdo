@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dc539fba-386e-441a-bab0-94cdb6ec5f9e">
  <name>DocPlannedReceiptReservationServer</name>
  <synonym>
-  <key>en</key>
-  <value>Doc planned receipt reservation server</value>
+  <key>tr</key>
+  <value>Evrak planlanan ürün giriş rezervi server</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документ резерв планируемого прихода товара сервер</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Evrak planlanan ürün giriş rezervi server</value>
+  <key>en</key>
+  <value>Doc planned receipt reservation server</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

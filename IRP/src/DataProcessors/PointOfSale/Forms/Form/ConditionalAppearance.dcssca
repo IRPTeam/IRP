@@ -35,16 +35,16 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>en</v8:lang>
-						<v8:content>&lt; Select serial lot number &gt;</v8:content>
+						<v8:lang>tr</v8:lang>
+						<v8:content>&lt; seri lot numarası seçiniz &gt;</v8:content>
 					</v8:item>
 					<v8:item>
 						<v8:lang>ru</v8:lang>
 						<v8:content>&lt; Выбрать серию номенклатуры &gt;</v8:content>
 					</v8:item>
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>&lt; seri lot numarası seçiniz &gt;</v8:content>
+						<v8:lang>en</v8:lang>
+						<v8:content>&lt; Select serial lot number &gt;</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>
@@ -74,16 +74,16 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>en</v8:lang>
-						<v8:content>Select serial lot number</v8:content>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Seri lot numarası seçiniz</v8:content>
 					</v8:item>
 					<v8:item>
 						<v8:lang>ru</v8:lang>
 						<v8:content>Выбрать серию номенклатуры</v8:content>
 					</v8:item>
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Seri lot numarası seçiniz</v8:content>
+						<v8:lang>en</v8:lang>
+						<v8:content>Select serial lot number</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>

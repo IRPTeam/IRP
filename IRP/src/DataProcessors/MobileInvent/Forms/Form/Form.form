@@ -65,16 +65,16 @@
       <typeDomainEnabled>true</typeDomainEnabled>
       <textEdit>true</textEdit>
       <inputHint>
-       <key>en</key>
-       <value>Count location</value>
+       <key>tr</key>
+       <value>Lokasyon hesapla</value>
       </inputHint>
       <inputHint>
        <key>ru</key>
        <value>Количество локации</value>
       </inputHint>
       <inputHint>
-       <key>tr</key>
-       <value>Lokasyon hesapla</value>
+       <key>en</key>
+       <value>Count location</value>
       </inputHint>
      </extInfo>
     </items>
@@ -116,16 +116,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group add</value>
+     <key>tr</key>
+     <value>Grup ekle</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа добавить</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Grup ekle</value>
+     <key>en</key>
+     <value>Group add</value>
     </title>
     <extendedTooltip>
      <name>GroupAddExtendedTooltip</name>
@@ -222,16 +222,16 @@
       <specialTextInputMode>None</specialTextInputMode>
       <onScreenKeyboardReturnKeyText>Continue</onScreenKeyboardReturnKeyText>
       <inputHint>
-       <key>en</key>
-       <value>Barcode</value>
+       <key>tr</key>
+       <value>Barkod</value>
       </inputHint>
       <inputHint>
        <key>ru</key>
        <value>Штрихкод</value>
       </inputHint>
       <inputHint>
-       <key>tr</key>
-       <value>Barkod</value>
+       <key>en</key>
+       <value>Barcode</value>
       </inputHint>
      </extInfo>
     </items>
@@ -291,16 +291,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group input barcode</value>
+     <key>tr</key>
+     <value>Grup barkod girişi</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа ввод штрихкода</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Grup barkod girişi</value>
+     <key>en</key>
+     <value>Group input barcode</value>
     </title>
     <extendedTooltip>
      <name>GroupInputBarcodeExtendedTooltip</name>
@@ -521,16 +521,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Item list group Item</value>
+      <key>tr</key>
+      <value>Malzemeler grup malzeme</value>
      </title>
      <title>
       <key>ru</key>
       <value>Товары группа номенклатуры</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Malzemeler grup malzeme</value>
+      <key>en</key>
+      <value>Item list group Item</value>
      </title>
      <extendedTooltip>
       <name>ItemListGroupItemExtendedTooltip</name>
@@ -684,16 +684,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Item list group count</value>
+      <key>tr</key>
+      <value>Malzemeler grup adet</value>
      </title>
      <title>
       <key>ru</key>
       <value>Товары группа количество</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Malzemeler grup adet</value>
+      <key>en</key>
+      <value>Item list group count</value>
      </title>
      <extendedTooltip>
       <name>ItemListGroupCountExtendedTooltip</name>
@@ -872,16 +872,16 @@
       <name>ItemListContextMenuDelete</name>
       <id>124</id>
       <title>
-       <key>en</key>
-       <value>Delete</value>
+       <key>tr</key>
+       <value>Kaldır</value>
       </title>
       <title>
        <key>ru</key>
        <value>Удалить</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Kaldır</value>
+       <key>en</key>
+       <value>Delete</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -914,16 +914,16 @@
       <name>ItemListContextMenuFind</name>
       <id>128</id>
       <title>
-       <key>en</key>
-       <value>Search</value>
+       <key>tr</key>
+       <value>Ara</value>
       </title>
       <title>
        <key>ru</key>
        <value>Поиск</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Ara</value>
+       <key>en</key>
+       <value>Search</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -956,16 +956,16 @@
       <name>ItemListContextMenuChange</name>
       <id>126</id>
       <title>
-       <key>en</key>
-       <value>Edit</value>
+       <key>tr</key>
+       <value>Değiştir</value>
       </title>
       <title>
        <key>ru</key>
        <value>Редактировать</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Değiştir</value>
+       <key>en</key>
+       <value>Edit</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1200,16 +1200,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Info</value>
+      <key>tr</key>
+      <value>Bilgi</value>
      </title>
      <title>
       <key>ru</key>
       <value>Контактная информация</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Bilgi</value>
+      <key>en</key>
+      <value>Info</value>
      </title>
      <extendedTooltip>
       <name>PageInfoExtendedTooltip</name>
@@ -1279,16 +1279,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Scan</value>
+      <key>tr</key>
+      <value>Tara</value>
      </title>
      <title>
       <key>ru</key>
       <value>Сканирование</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Tara</value>
+      <key>en</key>
+      <value>Scan</value>
      </title>
      <extendedTooltip>
       <name>PageButtonExtendedTooltip</name>
@@ -1317,16 +1317,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group bottom</value>
+     <key>tr</key>
+     <value>Grup footer</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа подвал</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Grup footer</value>
+     <key>en</key>
+     <value>Group bottom</value>
     </title>
     <extendedTooltip>
      <name>GroupBottomExtendedTooltip</name>
@@ -1355,16 +1355,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Main</value>
+    <key>tr</key>
+    <value>Ana</value>
    </title>
    <title>
     <key>ru</key>
     <value>Основное</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ana</value>
+    <key>en</key>
+    <value>Main</value>
    </title>
    <extendedTooltip>
     <name>GroupMainExtendedTooltip</name>
@@ -1544,16 +1544,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group scan emulator</value>
+     <key>tr</key>
+     <value>Grup okutma emülatörü</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа эмулятор сканирования</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Grup okutma emülatörü</value>
+     <key>en</key>
+     <value>Group scan emulator</value>
     </title>
     <extendedTooltip>
      <name>GroupScanEmulatorExtendedTooltip</name>
@@ -1635,16 +1635,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Settings</value>
+    <key>tr</key>
+    <value>Ayarlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Настройки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ayarlar</value>
+    <key>en</key>
+    <value>Settings</value>
    </title>
    <extendedTooltip>
     <name>GroupSettingsExtendedTooltip</name>
@@ -1673,16 +1673,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group pages</value>
+   <key>tr</key>
+   <value>Sayfalar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа страниц</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sayfalar grubu</value>
+   <key>en</key>
+   <value>Group pages</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -1853,16 +1853,16 @@
  <attributes>
   <name>DetailedInformation</name>
   <title>
-   <key>en</key>
-   <value>Detailed information</value>
+   <key>tr</key>
+   <value>Detaylı bilgi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Подробная информация</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Detaylı bilgi</value>
+   <key>en</key>
+   <value>Detailed information</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1879,16 +1879,16 @@
  <attributes>
   <name>Object</name>
   <title>
-   <key>en</key>
-   <value>Object</value>
+   <key>tr</key>
+   <value>Obje</value>
   </title>
   <title>
    <key>ru</key>
    <value>Объект</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Obje</value>
+   <key>en</key>
+   <value>Object</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1910,16 +1910,16 @@
  <attributes>
   <name>DocumentRef</name>
   <title>
-   <key>en</key>
-   <value>Document ref</value>
+   <key>tr</key>
+   <value>Evrak ref</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка документа</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evrak ref</value>
+   <key>en</key>
+   <value>Document ref</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1935,16 +1935,16 @@
  <attributes>
   <name>SecondTryToInputQuantity</name>
   <title>
-   <key>en</key>
-   <value>Second try to input quantity</value>
+   <key>tr</key>
+   <value>Miktar girişi ikinci denemesi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Вторичный ввод количества</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Miktar girişi ikinci denemesi</value>
+   <key>en</key>
+   <value>Second try to input quantity</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1960,16 +1960,16 @@
  <attributes>
   <name>RuleEditQuantity</name>
   <title>
-   <key>en</key>
-   <value>Edit quantity</value>
+   <key>tr</key>
+   <value>Miktar düzeltme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ввод количества</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Miktar düzeltme</value>
+   <key>en</key>
+   <value>Edit quantity</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1985,16 +1985,16 @@
  <attributes>
   <name>Description</name>
   <title>
-   <key>en</key>
-   <value>Description</value>
+   <key>tr</key>
+   <value>Tanım</value>
   </title>
   <title>
    <key>ru</key>
    <value>Комментарий</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tanım</value>
+   <key>en</key>
+   <value>Description</value>
   </title>
   <id>8</id>
   <valueType>
@@ -2011,16 +2011,16 @@
  <attributes>
   <name>ScanEmulator</name>
   <title>
-   <key>en</key>
-   <value>Scan emulator</value>
+   <key>tr</key>
+   <value>Okutma emülatorü</value>
   </title>
   <title>
    <key>ru</key>
    <value>Эмулятор сканирования</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Okutma emülatorü</value>
+   <key>en</key>
+   <value>Scan emulator</value>
   </title>
   <id>9</id>
   <valueType>
@@ -2036,16 +2036,16 @@
  <attributes>
   <name>BarcodeInput</name>
   <title>
-   <key>en</key>
-   <value>Barcode input</value>
+   <key>tr</key>
+   <value>Barkod girişi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ввод штрихкода</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Barkod girişi</value>
+   <key>en</key>
+   <value>Barcode input</value>
   </title>
   <id>10</id>
   <valueType>
@@ -2062,16 +2062,16 @@
  <attributes>
   <name>BarcodeHasAnyCharacters</name>
   <title>
-   <key>en</key>
-   <value>Barcode has any characters</value>
+   <key>tr</key>
+   <value>Barkod her karatker kullanabilir</value>
   </title>
   <title>
    <key>ru</key>
    <value>Штрихкод может иметь любые символы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Barkod her karatker kullanabilir</value>
+   <key>en</key>
+   <value>Barcode has any characters</value>
   </title>
   <id>12</id>
   <valueType>
@@ -2087,16 +2087,16 @@
  <attributes>
   <name>Info</name>
   <title>
-   <key>en</key>
-   <value>Info</value>
+   <key>tr</key>
+   <value>Bilgi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Контактная информация</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Bilgi</value>
+   <key>en</key>
+   <value>Info</value>
   </title>
   <id>13</id>
   <valueType>
@@ -2130,16 +2130,16 @@
  <formCommands>
   <name>CompleteLocation</name>
   <title>
-   <key>en</key>
-   <value>Complete location</value>
+   <key>tr</key>
+   <value>Lokasyon kapat</value>
   </title>
   <title>
    <key>ru</key>
    <value>Закрыть локацию</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Lokasyon kapat</value>
+   <key>en</key>
+   <value>Complete location</value>
   </title>
   <id>3</id>
   <use>
@@ -2158,16 +2158,16 @@
  <formCommands>
   <name>InputBarcode</name>
   <title>
-   <key>en</key>
-   <value>Input barcode</value>
+   <key>tr</key>
+   <value>Barkod giriniz</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ввести штрихкод</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Barkod giriniz</value>
+   <key>en</key>
+   <value>Input barcode</value>
   </title>
   <id>4</id>
   <use>
@@ -2187,16 +2187,16 @@
  <formCommands>
   <name>OpenRow</name>
   <title>
-   <key>en</key>
-   <value>Edit row</value>
+   <key>tr</key>
+   <value>Satır değiştir</value>
   </title>
   <title>
    <key>ru</key>
    <value>Редактировать строку</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satır değiştir</value>
+   <key>en</key>
+   <value>Edit row</value>
   </title>
   <id>5</id>
   <use>

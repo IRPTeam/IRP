@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseItemKey</name>
  <synonym>
-  <key>en</key>
-  <value>Use item key</value>
+  <key>tr</key>
+  <value>Varyant kullanmak</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать ключи аналитики (характеристики) номенклатуры</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Varyant kullanmak</value>
+  <key>en</key>
+  <value>Use item key</value>
  </synonym>
  <type>
   <types>Boolean</types>

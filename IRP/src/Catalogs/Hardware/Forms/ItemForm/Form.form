@@ -576,16 +576,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Predefined settings</value>
+    <key>tr</key>
+    <value>Önceden tanımlı ayarlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Предопределенные настройки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Önceden tanımlı ayarlar</value>
+    <key>en</key>
+    <value>Predefined settings</value>
    </title>
    <extendedTooltip>
     <name>PagePredefinedSettingsExtendedTooltip</name>
@@ -1153,16 +1153,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Driver settings</value>
+    <key>tr</key>
+    <value>Sürücü ayarları</value>
    </title>
    <title>
     <key>ru</key>
     <value>Настройки драйвера</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sürücü ayarları</value>
+    <key>en</key>
+    <value>Driver settings</value>
    </title>
    <extendedTooltip>
     <name>PageDriverSettingsExtendedTooltip</name>
@@ -1191,16 +1191,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Main</value>
+   <key>tr</key>
+   <value>Ana</value>
   </title>
   <title>
    <key>ru</key>
    <value>Основное</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ana</value>
+   <key>en</key>
+   <value>Main</value>
   </title>
   <extendedTooltip>
    <name>PagesMainExtendedTooltip</name>
@@ -1303,16 +1303,16 @@
  <attributes>
   <name>DriverParameter</name>
   <title>
-   <key>en</key>
-   <value>Driver parameter</value>
+   <key>tr</key>
+   <value>Sürücü parametresi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Параметры драйвера</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sürücü parametresi</value>
+   <key>en</key>
+   <value>Driver parameter</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1327,16 +1327,16 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>en</key>
-    <value>Name</value>
+    <key>tr</key>
+    <value>Ad</value>
    </title>
    <title>
     <key>ru</key>
     <value>Имя</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
+    <key>en</key>
+    <value>Name</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1353,16 +1353,16 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1388,16 +1388,16 @@
   <columns>
    <name>ReadOnly</name>
    <title>
-    <key>en</key>
-    <value>Read only</value>
+    <key>tr</key>
+    <value>Salt okunur</value>
    </title>
    <title>
     <key>ru</key>
     <value>Только чтение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Salt okunur</value>
+    <key>en</key>
+    <value>Read only</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1413,16 +1413,16 @@
   <columns>
    <name>Caption</name>
    <title>
-    <key>en</key>
-    <value>Caption</value>
+    <key>tr</key>
+    <value>Başlık</value>
    </title>
    <title>
     <key>ru</key>
     <value>Заголовок</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Başlık</value>
+    <key>en</key>
+    <value>Caption</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1439,16 +1439,16 @@
   <columns>
    <name>DefaultValue</name>
    <title>
-    <key>en</key>
-    <value>Default value</value>
+    <key>tr</key>
+    <value>Varsayılan değer</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение по умолчанию</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Varsayılan değer</value>
+    <key>en</key>
+    <value>Default value</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1476,16 +1476,16 @@
   <columns>
    <name>Description</name>
    <title>
-    <key>en</key>
-    <value>Description</value>
+    <key>tr</key>
+    <value>Tanım</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
+    <key>en</key>
+    <value>Description</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1502,16 +1502,16 @@
   <columns>
    <name>FieldFormat</name>
    <title>
-    <key>en</key>
-    <value>Field format</value>
+    <key>tr</key>
+    <value>Alan formatı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Формат поля</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Alan formatı</value>
+    <key>en</key>
+    <value>Field format</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1528,16 +1528,16 @@
   <columns>
    <name>ValueListData</name>
    <title>
-    <key>en</key>
-    <value>Value list data</value>
+    <key>tr</key>
+    <value>Değer liste verisi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Данные списка значений</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer liste verisi</value>
+    <key>en</key>
+    <value>Value list data</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1554,16 +1554,16 @@
  <formCommands>
   <name>LoadSettings</name>
   <title>
-   <key>en</key>
-   <value>Load settings</value>
+   <key>tr</key>
+   <value>Ayarları yükle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Загрузить настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarları yükle</value>
+   <key>en</key>
+   <value>Load settings</value>
   </title>
   <id>1</id>
   <use>
@@ -1579,7 +1579,7 @@
  <formCommands>
   <name>Test</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Test</value>
   </title>
   <title>
@@ -1587,7 +1587,7 @@
    <value>Тест</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Test</value>
   </title>
   <id>2</id>

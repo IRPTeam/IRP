@@ -11,56 +11,56 @@
  </producedTypes>
  <name>IDInfo</name>
  <synonym>
-  <key>en</key>
-  <value>Contact info</value>
+  <key>tr</key>
+  <value>İletişim bilgi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Контактная информация</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İletişim bilgi</value>
+  <key>en</key>
+  <value>Contact info</value>
  </synonym>
  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>en</key>
-  <value>Contact info</value>
+  <key>tr</key>
+  <value>İletişim bilgi</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Контактная информация</value>
  </recordPresentation>
  <recordPresentation>
+  <key>en</key>
+  <value>Contact info</value>
+ </recordPresentation>
+ <listPresentation>
   <key>tr</key>
   <value>İletişim bilgi</value>
- </recordPresentation>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Контактная информация</value>
+ </listPresentation>
  <listPresentation>
   <key>en</key>
   <value>Contacts info</value>
  </listPresentation>
- <listPresentation>
-  <key>ru</key>
-  <value>Контактная информация</value>
- </listPresentation>
- <listPresentation>
-  <key>tr</key>
-  <value>İletişim bilgi</value>
- </listPresentation>
  <resources uuid="f704a578-563f-49d8-85f9-8232e7b2f17e">
   <name>Value</name>
   <synonym>
-   <key>en</key>
-   <value>Value</value>
+   <key>tr</key>
+   <value>Değer</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Значение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Değer</value>
+   <key>en</key>
+   <value>Value</value>
   </synonym>
   <type>
    <types>Characteristic.IDInfoTypes</types>
@@ -74,16 +74,16 @@
  <resources uuid="1fa68620-62a7-403a-91ff-e350ea174d58">
   <name>Info</name>
   <synonym>
-   <key>en</key>
-   <value>Info</value>
+   <key>tr</key>
+   <value>Bilgi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Контактная информация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Bilgi</value>
+   <key>en</key>
+   <value>Info</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -97,16 +97,16 @@
  <attributes uuid="ec6c0f46-d6da-4b0b-8d5b-e7e292b31da1">
   <name>Country</name>
   <synonym>
-   <key>en</key>
-   <value>Country</value>
+   <key>tr</key>
+   <value>Ülke</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Страна</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ülke</value>
+   <key>en</key>
+   <value>Country</value>
   </synonym>
   <type>
    <types>CatalogRef.Countries</types>
@@ -120,16 +120,16 @@
  <dimensions uuid="1ff8f3eb-08e8-4eea-aae7-32004a223af6">
   <name>Object</name>
   <synonym>
-   <key>en</key>
-   <value>Object</value>
+   <key>tr</key>
+   <value>Obje</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Объект</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Obje</value>
+   <key>en</key>
+   <value>Object</value>
   </synonym>
   <type>
    <types>DocumentRef</types>
@@ -146,16 +146,16 @@
  <dimensions uuid="f2096ab0-3e02-4202-a1fe-ea3dfa46e994">
   <name>IDInfoType</name>
   <synonym>
-   <key>en</key>
-   <value>Contact info type</value>
+   <key>tr</key>
+   <value>İletişim bilgi türü</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид контактной информации</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İletişim bilgi türü</value>
+   <key>en</key>
+   <value>Contact info type</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>

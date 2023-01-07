@@ -7,16 +7,16 @@
    <name>DecorationClosingOrder</name>
    <id>174</id>
    <title>
-    <key>en</key>
-    <value>This planning period is closed by:</value>
+    <key>tr</key>
+    <value>Planlama dönemi kapanmıştı:</value>
    </title>
    <title>
     <key>ru</key>
     <value>Данные период планирования закрыт:</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Planlama dönemi kapanmıştı:</value>
+    <key>en</key>
+    <value>This planning period is closed by:</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -116,16 +116,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group head</value>
+   <key>tr</key>
+   <value>Grup başlık</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа заголовок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup başlık</value>
+   <key>en</key>
+   <value>Group head</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -168,16 +168,16 @@
      <name>DecorationGroupTitleCollapsedPicture</name>
      <id>53</id>
      <title>
-      <key>en</key>
-      <value>Decoration group title collapsed picture</value>
+      <key>tr</key>
+      <value>Dekorasyon grubu başlık daraltılmış resmi</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа декораций рисунок свернутой шапки</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Dekorasyon grubu başlık daraltılmış resmi</value>
+      <key>en</key>
+      <value>Decoration group title collapsed picture</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -227,16 +227,16 @@
      <name>DecorationGroupTitleCollapsedLabel</name>
      <id>56</id>
      <title>
-      <key>en</key>
-      <value>Please, fill the document</value>
+      <key>tr</key>
+      <value>Lütfen, evrakı doldurunuz</value>
      </title>
      <title>
       <key>ru</key>
       <value>Пожалуйста, заполните документ</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
+      <key>en</key>
+      <value>Please, fill the document</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -363,16 +363,16 @@
      <name>DecorationGroupTitleUncollapsedLabel</name>
      <id>64</id>
      <title>
-      <key>en</key>
-      <value>Please, fill the document</value>
+      <key>tr</key>
+      <value>Lütfen, evrakı doldurunuz</value>
      </title>
      <title>
       <key>ru</key>
       <value>Пожалуйста, заполните документ</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
+      <key>en</key>
+      <value>Please, fill the document</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -851,16 +851,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Group planning periods</value>
+      <key>tr</key>
+      <value>Grup planlama dönemleri</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа планирования периода</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Grup planlama dönemleri</value>
+      <key>en</key>
+      <value>Group planning periods</value>
      </title>
      <extendedTooltip>
       <name>GroupPlanningPeriodsExtendedTooltip</name>
@@ -1017,16 +1017,16 @@
       <name>StatusHistory</name>
       <id>153</id>
       <title>
-       <key>en</key>
-       <value>History</value>
+       <key>tr</key>
+       <value>Geçmiş</value>
       </title>
       <title>
        <key>ru</key>
        <value>История статусов</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Geçmiş</value>
+       <key>en</key>
+       <value>History</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1076,16 +1076,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Group status</value>
+      <key>tr</key>
+      <value>Grup statüler</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа статуса</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Grup statüler</value>
+      <key>en</key>
+      <value>Group status</value>
      </title>
      <extendedTooltip>
       <name>GroupStatusExtendedTooltip</name>
@@ -1261,16 +1261,16 @@
      <name>PictureCurrentQuantittyError</name>
      <id>164</id>
      <title>
-      <key>en</key>
-      <value>Picture current quantitty error</value>
+      <key>tr</key>
+      <value>Resim geçerli adet hatası</value>
      </title>
      <title>
       <key>ru</key>
       <value>Картинка ошибка текущего количества</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Resim geçerli adet hatası</value>
+      <key>en</key>
+      <value>Picture current quantitty error</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -1316,16 +1316,16 @@
      <name>LabelCurrentQuantityError</name>
      <id>161</id>
      <title>
-      <key>en</key>
-      <value>Current quantity not actual</value>
+      <key>tr</key>
+      <value>Geçerli adet gerçek değil</value>
      </title>
      <title>
       <key>ru</key>
       <value>Текущее количество не актуальное</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Geçerli adet gerçek değil</value>
+      <key>en</key>
+      <value>Current quantity not actual</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -1405,16 +1405,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group current quantity error</value>
+     <key>tr</key>
+     <value>Grup geçerli adet hatası</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа ошибка текущего количества</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Grup geçerli adet hatası</value>
+     <key>en</key>
+     <value>Group current quantity error</value>
     </title>
     <extendedTooltip>
      <name>GroupCurrentQuantityErrorExtendedTooltip</name>
@@ -2170,16 +2170,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Productions</value>
+    <key>tr</key>
+    <value>Üretimler</value>
    </title>
    <title>
     <key>ru</key>
     <value>Документы производства</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Üretimler</value>
+    <key>en</key>
+    <value>Productions</value>
    </title>
    <extendedTooltip>
     <name>GrouProductionsExtendedTooltip</name>
@@ -2474,16 +2474,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Other</value>
+    <key>tr</key>
+    <value>Diğer</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дополнительно</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
+    <key>en</key>
+    <value>Other</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -3762,16 +3762,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Bill of materials</value>
+    <key>tr</key>
+    <value>Üretim reçetesi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Спецификация (Производство)</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Üretim reçetesi</value>
+    <key>en</key>
+    <value>Bill of materials</value>
    </title>
    <extendedTooltip>
     <name>GroupBillOfMaterialsExtendedTooltip</name>
@@ -3800,16 +3800,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group main pages</value>
+   <key>tr</key>
+   <value>Grup ana sayfalar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа главных страниц</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
+   <key>en</key>
+   <value>Group main pages</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -3915,16 +3915,16 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>en</key>
-   <value>Group items</value>
+   <key>tr</key>
+   <value>Grup nesneler</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа элементов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup nesneler</value>
+   <key>en</key>
+   <value>Group items</value>
   </title>
   <id>2</id>
   <valueType>
@@ -3943,16 +3943,16 @@
  <attributes>
   <name>Description</name>
   <title>
-   <key>en</key>
-   <value>Description</value>
+   <key>tr</key>
+   <value>Tanım</value>
   </title>
   <title>
    <key>ru</key>
    <value>Наименование</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tanım</value>
+   <key>en</key>
+   <value>Description</value>
   </title>
   <id>3</id>
   <valueType>
@@ -3969,16 +3969,16 @@
  <attributes>
   <name>ProductionPlanningCorrectionExists</name>
   <title>
-   <key>en</key>
-   <value>Production planning correction</value>
+   <key>tr</key>
+   <value>Üretim planlama düzeltme fişi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Корректировка планирования производства</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Üretim planlama düzeltme fişi</value>
+   <key>en</key>
+   <value>Production planning correction</value>
   </title>
   <id>5</id>
   <valueType>
@@ -3995,16 +3995,16 @@
  <attributes>
   <name>ProductionPlanningClosing</name>
   <title>
-   <key>en</key>
-   <value>Production planning closing</value>
+   <key>tr</key>
+   <value>Üretim planlama kapanışı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Закрытие планирования производства</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Üretim planlama kapanışı</value>
+   <key>en</key>
+   <value>Production planning closing</value>
   </title>
   <id>6</id>
   <valueType>
@@ -4020,7 +4020,7 @@
  <formCommands>
   <name>UpdateCurrentQuantity</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Update</value>
   </title>
   <title>
@@ -4028,7 +4028,7 @@
    <value>Изменение</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Update</value>
   </title>
   <id>1</id>
@@ -4050,16 +4050,16 @@
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>en</key>
-   <value>Show row key</value>
+   <key>tr</key>
+   <value>Satır antahtarı göster</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать row key</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satır antahtarı göster</value>
+   <key>en</key>
+   <value>Show row key</value>
   </title>
   <id>2</id>
   <use>
@@ -4078,16 +4078,16 @@
  <formCommands>
   <name>EditStores</name>
   <title>
-   <key>en</key>
-   <value>Edit stores</value>
+   <key>tr</key>
+   <value>Depo değiştir</value>
   </title>
   <title>
    <key>ru</key>
    <value>Изменить склады</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Depo değiştir</value>
+   <key>en</key>
+   <value>Edit stores</value>
   </title>
   <id>3</id>
   <use>

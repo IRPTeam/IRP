@@ -11,56 +11,56 @@
  </producedTypes>
  <name>DataMappingTable</name>
  <synonym>
-  <key>en</key>
-  <value>Data mapping table</value>
+  <key>tr</key>
+  <value>Veri mapping tablosu</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Таблица соответствий внешних данных</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Veri mapping tablosu</value>
+  <key>en</key>
+  <value>Data mapping table</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>en</key>
-  <value>Data mapping table</value>
+  <key>tr</key>
+  <value>Veri mapping tablosu</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Таблица соответствий внешних данных</value>
  </recordPresentation>
  <recordPresentation>
-  <key>tr</key>
-  <value>Veri mapping tablosu</value>
+  <key>en</key>
+  <value>Data mapping table</value>
  </recordPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Data mapping tables</value>
+  <key>tr</key>
+  <value>Veri mapping tabloları</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Таблицы соответствий внешних данных</value>
  </listPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Veri mapping tabloları</value>
+  <key>en</key>
+  <value>Data mapping tables</value>
  </listPresentation>
  <resources uuid="6167ec7a-3b1f-4320-a1d4-19e7c0c3b158">
   <name>Target</name>
   <synonym>
-   <key>en</key>
-   <value>Target</value>
+   <key>tr</key>
+   <value>Hedef</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Получатель</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Hedef</value>
+   <key>en</key>
+   <value>Target</value>
   </synonym>
   <type>
    <types>AnyRef</types>
@@ -74,16 +74,16 @@
  <resources uuid="25c2994f-585c-46ea-a0f7-b8c4b4ca4401">
   <name>AddInfo</name>
   <synonym>
-   <key>en</key>
-   <value>Add info</value>
+   <key>tr</key>
+   <value>Ek bilgiler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительная информация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ek bilgiler</value>
+   <key>en</key>
+   <value>Add info</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -112,16 +112,16 @@
  <attributes uuid="0a634db2-c62e-4b3e-ba9c-f7f7667c97a5">
   <name>DataInStorage</name>
   <synonym>
-   <key>en</key>
-   <value>Data in storage</value>
+   <key>tr</key>
+   <value>Veri hazinedeki veri</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Данные в хранилище</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Veri hazinedeki veri</value>
+   <key>en</key>
+   <value>Data in storage</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -135,16 +135,16 @@
  <dimensions uuid="55e4a4be-84ef-4772-84d9-30395a61d0b9">
   <name>Source</name>
   <synonym>
-   <key>en</key>
-   <value>Source</value>
+   <key>tr</key>
+   <value>Kaynak</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Источник</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak</value>
+   <key>en</key>
+   <value>Source</value>
   </synonym>
   <type>
    <types>CatalogRef.DataMappingItems</types>

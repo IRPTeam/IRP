@@ -140,16 +140,16 @@
    <name>PutInTable</name>
    <id>20</id>
    <title>
-    <key>en</key>
-    <value>Output</value>
+    <key>tr</key>
+    <value>Sonuç</value>
    </title>
    <title>
     <key>ru</key>
     <value>Вывод</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sonuç</value>
+    <key>en</key>
+    <value>Output</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -192,7 +192,7 @@
    <extInfo xsi:type="form:CheckBoxFieldExtInfo">
     <checkBoxType>Tumbler</checkBoxType>
     <editFormat>
-     <key>en</key>
+     <key>tr</key>
      <value>BF=List; BT=Table</value>
     </editFormat>
     <editFormat>
@@ -200,7 +200,7 @@
      <value>BF=Список; BT=Таблица</value>
     </editFormat>
     <editFormat>
-     <key>tr</key>
+     <key>en</key>
      <value>BF=List; BT=Table</value>
     </editFormat>
    </extInfo>
@@ -377,16 +377,16 @@
  <attributes>
   <name>Document</name>
   <title>
-   <key>en</key>
-   <value>Document</value>
+   <key>tr</key>
+   <value>Evrak</value>
   </title>
   <title>
    <key>ru</key>
    <value>Документ</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evrak</value>
+   <key>en</key>
+   <value>Document</value>
   </title>
   <id>3</id>
   <valueType/>
@@ -400,16 +400,16 @@
  <attributes>
   <name>PutInTable</name>
   <title>
-   <key>en</key>
-   <value>Put in table</value>
+   <key>tr</key>
+   <value>Giriş tablosu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Giriş tablosu</value>
+   <key>en</key>
+   <value>Put in table</value>
   </title>
   <id>4</id>
   <valueType>
@@ -425,16 +425,16 @@
  <attributes>
   <name>ResultTable</name>
   <title>
-   <key>en</key>
-   <value>Result table</value>
+   <key>tr</key>
+   <value>Sonuç tablosu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица результатов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sonuç tablosu</value>
+   <key>en</key>
+   <value>Result table</value>
   </title>
   <id>5</id>
   <valueType>
@@ -451,16 +451,16 @@
  <attributes>
   <name>FilterRegister</name>
   <title>
-   <key>en</key>
-   <value>Register</value>
+   <key>tr</key>
+   <value>Kayıt tablosu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Регистр</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kayıt tablosu</value>
+   <key>en</key>
+   <value>Register</value>
   </title>
   <id>7</id>
   <valueType>
@@ -477,16 +477,16 @@
  <attributes>
   <name>ShowItemInItemKey</name>
   <title>
-   <key>en</key>
-   <value>Show item in item key</value>
+   <key>tr</key>
+   <value>Varyant yanında malzeme göster</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отображать номенклатуру</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Varyant yanında malzeme göster</value>
+   <key>en</key>
+   <value>Show item in item key</value>
   </title>
   <id>8</id>
   <valueType>
@@ -502,16 +502,16 @@
  <formCommands>
   <name>GenerateReport</name>
   <title>
-   <key>en</key>
-   <value>Generate report</value>
+   <key>tr</key>
+   <value>Rapor oluştur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сформировать</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Rapor oluştur</value>
+   <key>en</key>
+   <value>Generate report</value>
   </title>
   <id>1</id>
   <use>

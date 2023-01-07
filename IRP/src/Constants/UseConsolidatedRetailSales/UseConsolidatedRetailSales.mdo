@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseConsolidatedRetailSales</name>
  <synonym>
-  <key>en</key>
-  <value>Use consolidated retail sales</value>
+  <key>tr</key>
+  <value>Kullanmak - Konsolide perakende satış fişleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать - Отчеты о розничных продажах</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kullanmak - Konsolide perakende satış fişleri</value>
+  <key>en</key>
+  <value>Use consolidated retail sales</value>
  </synonym>
  <type>
   <types>Boolean</types>

@@ -283,16 +283,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group template spreadsheet command bar</value>
+     <key>tr</key>
+     <value>Grup şablon tablo araç çubuğu</value>
     </title>
     <title>
      <key>ru</key>
      <value>Панель команд шаблонов</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Grup şablon tablo araç çubuğu</value>
+     <key>en</key>
+     <value>Group template spreadsheet command bar</value>
     </title>
     <extendedTooltip>
      <name>GroupTemplateSpreadsheetCommandBarExtendedTooltip</name>
@@ -507,16 +507,16 @@
       <radioButtonsType>Tumbler</radioButtonsType>
       <choiceList>
        <presentation>
-        <key>en</key>
-        <value>fixed</value>
+        <key>tr</key>
+        <value>düzeltildi</value>
        </presentation>
        <presentation>
         <key>ru</key>
         <value>фиксированная</value>
        </presentation>
        <presentation>
-        <key>tr</key>
-        <value>düzeltildi</value>
+        <key>en</key>
+        <value>fixed</value>
        </presentation>
        <value xsi:type="core:StringValue">
         <value>fixed</value>
@@ -524,16 +524,16 @@
       </choiceList>
       <choiceList>
        <presentation>
-        <key>en</key>
-        <value>free</value>
+        <key>tr</key>
+        <value>serbest</value>
        </presentation>
        <presentation>
         <key>ru</key>
         <value>произвольная</value>
        </presentation>
        <presentation>
-        <key>tr</key>
-        <value>serbest</value>
+        <key>en</key>
+        <value>free</value>
        </presentation>
        <value xsi:type="core:StringValue">
         <value>free</value>
@@ -893,16 +893,16 @@
  <attributes>
   <name>TemplateSpreadsheet</name>
   <title>
-   <key>en</key>
-   <value>Template spreadsheet</value>
+   <key>tr</key>
+   <value>Şablon tablo</value>
   </title>
   <title>
    <key>ru</key>
    <value>Шаблон</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şablon tablo</value>
+   <key>en</key>
+   <value>Template spreadsheet</value>
   </title>
   <id>2</id>
   <valueType>
@@ -920,16 +920,16 @@
  <attributes>
   <name>AvailableFields</name>
   <title>
-   <key>en</key>
-   <value>Available fields</value>
+   <key>tr</key>
+   <value>Ulaşılabilir alanlar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Доступные поля</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ulaşılabilir alanlar</value>
+   <key>en</key>
+   <value>Available fields</value>
   </title>
   <id>3</id>
   <valueType>
@@ -945,16 +945,16 @@
  <attributes>
   <name>LabelsInRow</name>
   <title>
-   <key>en</key>
-   <value>Labels in row</value>
+   <key>tr</key>
+   <value>Satırda etiket sayısı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Количество шаблонов в строке</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satırda etiket sayısı</value>
+   <key>en</key>
+   <value>Labels in row</value>
   </title>
   <id>4</id>
   <valueType>
@@ -976,16 +976,16 @@
  <attributes>
   <name>LabelsInColumn</name>
   <title>
-   <key>en</key>
-   <value>Labels in column</value>
+   <key>tr</key>
+   <value>Sütunda etiket sayısı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Количество шаблонов в столбце</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sütunda etiket sayısı</value>
+   <key>en</key>
+   <value>Labels in column</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1007,16 +1007,16 @@
  <attributes>
   <name>PasteFieldAs</name>
   <title>
-   <key>en</key>
-   <value>Paste field as</value>
+   <key>tr</key>
+   <value>Yazdır nesne tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Вставка полей</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yazdır nesne tipi</value>
+   <key>en</key>
+   <value>Paste field as</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1035,16 +1035,16 @@
  <attributes>
   <name>DataSource</name>
   <title>
-   <key>en</key>
-   <value>Data source</value>
+   <key>tr</key>
+   <value>Kaynak veri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Источник данных</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kaynak veri</value>
+   <key>en</key>
+   <value>Data source</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1063,16 +1063,16 @@
  <formCommands>
   <name>GetDefault</name>
   <title>
-   <key>en</key>
-   <value>Get default</value>
+   <key>tr</key>
+   <value>Varsayılan getir</value>
   </title>
   <title>
    <key>ru</key>
    <value>По умолчанию</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Varsayılan getir</value>
+   <key>en</key>
+   <value>Get default</value>
   </title>
   <id>2</id>
   <use>

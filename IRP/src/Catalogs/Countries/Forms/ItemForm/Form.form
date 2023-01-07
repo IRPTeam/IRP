@@ -391,16 +391,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Country property</value>
+   <key>tr</key>
+   <value>Ülke özellikleri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Свойства страны</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ülke özellikleri</value>
+   <key>en</key>
+   <value>Country property</value>
   </title>
   <extendedTooltip>
    <name>GroupCountryPropertyExtendedTooltip</name>

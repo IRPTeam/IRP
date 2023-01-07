@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>en</key>
-  <value>Creating a Money Transfer</value>
+  <key>tr</key>
+  <value>Para tranfseri oluştur</value>
  </title>
  <title>
   <key>ru</key>
   <value>Создание перемещение денег</value>
  </title>
  <title>
-  <key>tr</key>
-  <value>Para tranfseri oluştur</value>
+  <key>en</key>
+  <value>Creating a Money Transfer</value>
  </title>
  <items xsi:type="form:FormGroup">
   <name>GroupCompany</name>
@@ -123,16 +123,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group of company</value>
+   <key>tr</key>
+   <value>Şirket grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа компаний</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şirket grubu</value>
+   <key>en</key>
+   <value>Group of company</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -379,16 +379,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Sender</value>
+    <key>tr</key>
+    <value>Gönderen</value>
    </title>
    <title>
     <key>ru</key>
     <value>Отправитель</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Gönderen</value>
+    <key>en</key>
+    <value>Sender</value>
    </title>
    <extendedTooltip>
     <name>GroupSenderExtendedTooltip</name>
@@ -636,16 +636,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Receiver</value>
+    <key>tr</key>
+    <value>Alıcı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Получатель</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Alıcı</value>
+    <key>en</key>
+    <value>Receiver</value>
    </title>
    <extendedTooltip>
     <name>GroupReceiverExtendedTooltip</name>
@@ -680,16 +680,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group of Sender and Receiver</value>
+   <key>tr</key>
+   <value>Gönderen ve alıcı grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа отправитель и получатель</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Gönderen ve alıcı grubu</value>
+   <key>en</key>
+   <value>Group of Sender and Receiver</value>
   </title>
   <extendedTooltip>
    <name>GroupSenderReceiverExtendedTooltip</name>
@@ -823,16 +823,16 @@
  <attributes>
   <name>Company</name>
   <title>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </title>
   <title>
    <key>ru</key>
    <value>Организация</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </title>
   <id>1</id>
   <valueType>
@@ -848,16 +848,16 @@
  <attributes>
   <name>Branch</name>
   <title>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </title>
   <title>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </title>
   <id>2</id>
   <valueType>
@@ -873,16 +873,16 @@
  <attributes>
   <name>Sender</name>
   <title>
-   <key>en</key>
-   <value>Sender</value>
+   <key>tr</key>
+   <value>Gönderen</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отправитель</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Gönderen</value>
+   <key>en</key>
+   <value>Sender</value>
   </title>
   <id>4</id>
   <valueType>
@@ -898,16 +898,16 @@
  <attributes>
   <name>Receiver</name>
   <title>
-   <key>en</key>
-   <value>Receiver</value>
+   <key>tr</key>
+   <value>Alıcı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Получатель</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Alıcı</value>
+   <key>en</key>
+   <value>Receiver</value>
   </title>
   <id>5</id>
   <valueType>
@@ -923,16 +923,16 @@
  <attributes>
   <name>SendFinancialMovementType</name>
   <title>
-   <key>en</key>
-   <value>Financial movement type</value>
+   <key>tr</key>
+   <value>Finans hareket tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Статья движений денежных средств</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Finans hareket tipi</value>
+   <key>en</key>
+   <value>Financial movement type</value>
   </title>
   <id>6</id>
   <valueType>
@@ -948,16 +948,16 @@
  <attributes>
   <name>ReceiveFinancialMovementType</name>
   <title>
-   <key>en</key>
-   <value>Financial movement type</value>
+   <key>tr</key>
+   <value>Finans hareket tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Статья движений денежных средств</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Finans hareket tipi</value>
+   <key>en</key>
+   <value>Financial movement type</value>
   </title>
   <id>7</id>
   <valueType>
@@ -973,16 +973,16 @@
  <attributes>
   <name>Currency</name>
   <title>
-   <key>en</key>
-   <value>Currency</value>
+   <key>tr</key>
+   <value>Döviz</value>
   </title>
   <title>
    <key>ru</key>
    <value>Валюты</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Döviz</value>
+   <key>en</key>
+   <value>Currency</value>
   </title>
   <id>8</id>
   <valueType>
@@ -998,16 +998,16 @@
  <attributes>
   <name>TotalAtPOS</name>
   <title>
-   <key>en</key>
-   <value>Total at POS</value>
+   <key>tr</key>
+   <value>Banka POS'unda toplam</value>
   </title>
   <title>
    <key>ru</key>
    <value>Итого по платежному терминалу</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Banka POS'unda toplam</value>
+   <key>en</key>
+   <value>Total at POS</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1023,16 +1023,16 @@
  <attributes>
   <name>SendAmount</name>
   <title>
-   <key>en</key>
-   <value>Send amount</value>
+   <key>tr</key>
+   <value>Gönderilen tutar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сумма отправки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Gönderilen tutar</value>
+   <key>en</key>
+   <value>Send amount</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1048,16 +1048,16 @@
  <attributes>
   <name>Description</name>
   <title>
-   <key>en</key>
-   <value>Description</value>
+   <key>tr</key>
+   <value>Tanım</value>
   </title>
   <title>
    <key>ru</key>
    <value>Наименование</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tanım</value>
+   <key>en</key>
+   <value>Description</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1074,16 +1074,16 @@
  <attributes>
   <name>FillingData</name>
   <title>
-   <key>en</key>
-   <value>Filling data</value>
+   <key>tr</key>
+   <value>Veri doldurma</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполненные данные</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Veri doldurma</value>
+   <key>en</key>
+   <value>Filling data</value>
   </title>
   <id>12</id>
   <valueType/>
@@ -1097,16 +1097,16 @@
  <formCommands>
   <name>CreateMoneyTransfer</name>
   <title>
-   <key>en</key>
-   <value>Create money transfer</value>
+   <key>tr</key>
+   <value>Para transfer oluştur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Создать перемещение денег</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Para transfer oluştur</value>
+   <key>en</key>
+   <value>Create money transfer</value>
   </title>
   <id>1</id>
   <use>

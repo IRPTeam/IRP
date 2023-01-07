@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R2040B_TaxesIncoming</name>
  <synonym>
-  <key>en</key>
-  <value>R2040 Taxes incoming</value>
+  <key>tr</key>
+  <value>R2040 Hesaplanan vergiler</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R2040 Налоги к начислению</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>R2040 Hesaplanan vergiler</value>
+  <key>en</key>
+  <value>R2040 Taxes incoming</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +27,16 @@
  <resources uuid="9c6bdd54-1621-427d-9f28-6d0e004f5ec6">
   <name>TaxableAmount</name>
   <synonym>
-   <key>en</key>
-   <value>Taxable amount</value>
+   <key>tr</key>
+   <value>KDV Matrahı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма оборота</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>KDV Matrahı</value>
+   <key>en</key>
+   <value>Taxable amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -48,16 +48,16 @@
  <resources uuid="b3e1c316-d676-4ade-8ce5-47876cdee89d">
   <name>TaxAmount</name>
   <synonym>
-   <key>en</key>
-   <value>Tax amount</value>
+   <key>tr</key>
+   <value>Vergi tutarı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма налогов</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Vergi tutarı</value>
+   <key>en</key>
+   <value>Tax amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -69,16 +69,16 @@
  <dimensions uuid="0a9cec06-c1ab-4bc4-815e-72e50d156521">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -91,16 +91,16 @@
  <dimensions uuid="ea220aca-7d3b-4eee-8fb0-201afbde6dbf">
   <name>Branch</name>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -113,16 +113,16 @@
  <dimensions uuid="1c4ef7d7-28f7-452c-a5e0-45c18e73152b">
   <name>Tax</name>
   <synonym>
-   <key>en</key>
-   <value>Tax</value>
+   <key>tr</key>
+   <value>Vergi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Налог</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Vergi</value>
+   <key>en</key>
+   <value>Tax</value>
   </synonym>
   <type>
    <types>CatalogRef.Taxes</types>
@@ -135,16 +135,16 @@
  <dimensions uuid="61d10cb7-bbcf-47d3-af43-ac8d28182b37">
   <name>TaxRate</name>
   <synonym>
-   <key>en</key>
-   <value>Tax rate</value>
+   <key>tr</key>
+   <value>Vergi oranı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Налоговая ставка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Vergi oranı</value>
+   <key>en</key>
+   <value>Tax rate</value>
   </synonym>
   <type>
    <types>CatalogRef.TaxRates</types>
@@ -157,16 +157,16 @@
  <dimensions uuid="ec6597b1-ec59-4e9d-9538-e35479285027">
   <name>TaxMovementType</name>
   <synonym>
-   <key>en</key>
-   <value>Tax movement type</value>
+   <key>tr</key>
+   <value>Vergiler hareket tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид поступления</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Vergiler hareket tipi</value>
+   <key>en</key>
+   <value>Tax movement type</value>
   </synonym>
   <type>
    <types>String</types>

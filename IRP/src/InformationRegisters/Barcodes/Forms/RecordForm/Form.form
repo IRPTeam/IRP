@@ -352,16 +352,16 @@
  <attributes>
   <name>ItemKeyItem</name>
   <title>
-   <key>en</key>
-   <value>Item key item</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </title>
   <title>
    <key>ru</key>
    <value>Номенклатура характеристики</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key item</value>
   </title>
   <id>2</id>
   <valueType>
@@ -377,16 +377,16 @@
  <attributes>
   <name>UseItemFilter</name>
   <title>
-   <key>en</key>
-   <value>Use item filter</value>
+   <key>tr</key>
+   <value>Malzeme filtre kullan</value>
   </title>
   <title>
    <key>ru</key>
    <value>Использовать фильтр</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Malzeme filtre kullan</value>
+   <key>en</key>
+   <value>Use item filter</value>
   </title>
   <id>4</id>
   <valueType>
@@ -402,16 +402,16 @@
  <attributes>
   <name>ItemFilter</name>
   <title>
-   <key>en</key>
-   <value>Item filter</value>
+   <key>tr</key>
+   <value>Malzeme filtresi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Фильтр элемента</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Malzeme filtresi</value>
+   <key>en</key>
+   <value>Item filter</value>
   </title>
   <id>5</id>
   <valueType>

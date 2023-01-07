@@ -2,16 +2,16 @@
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="eb2b504e-73e3-44cd-9bae-a7dd6b0aa373">
  <name>ShareToUsers</name>
  <synonym>
-  <key>en</key>
-  <value>Share to users</value>
+  <key>tr</key>
+  <value>Kullanıcılarla paylaşın</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Поделиться с пользователями</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kullanıcılarla paylaşın</value>
+  <key>en</key>
+  <value>Share to users</value>
  </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>

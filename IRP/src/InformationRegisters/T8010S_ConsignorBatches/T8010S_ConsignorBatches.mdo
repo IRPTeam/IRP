@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T8010S_ConsignorBatches</name>
  <synonym>
-  <key>en</key>
-  <value>T8010 Consignor batches</value>
+  <key>tr</key>
+  <value>T8010 Konsinye partileri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>T8010 Партии комитента</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>T8010 Konsinye partileri</value>
+  <key>en</key>
+  <value>T8010 Consignor batches</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -28,16 +28,16 @@
  <resources uuid="8d0466c4-cd88-4a65-b9ba-a6592ac92d32">
   <name>Quantity</name>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -51,16 +51,16 @@
  <dimensions uuid="41913651-7d15-441a-8658-3d7e7cc99717">
   <name>Document</name>
   <synonym>
-   <key>en</key>
-   <value>Document</value>
+   <key>tr</key>
+   <value>Evrak</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
+   <key>en</key>
+   <value>Document</value>
   </synonym>
   <type>
    <types>DocumentRef.SalesInvoice</types>
@@ -77,16 +77,16 @@
  <dimensions uuid="abf09171-7461-41a0-a2a7-dd253f7dbe3f">
   <name>Key</name>
   <synonym>
-   <key>en</key>
-   <value>Key</value>
+   <key>tr</key>
+   <value>Anahtar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ключ</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Anahtar</value>
+   <key>en</key>
+   <value>Key</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>
@@ -101,16 +101,16 @@
  <dimensions uuid="d72a3b66-b8f1-4a26-9a22-9c6c5144ee83">
   <name>ItemKey</name>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
@@ -125,16 +125,16 @@
  <dimensions uuid="2b6449f5-1420-439e-845c-512c265dd846">
   <name>SerialLotNumber</name>
   <synonym>
-   <key>en</key>
-   <value>Serial lot number</value>
+   <key>tr</key>
+   <value>Seri lot numaraları</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Серия номенклатуры</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
+   <key>en</key>
+   <value>Serial lot number</value>
   </synonym>
   <type>
    <types>CatalogRef.SerialLotNumbers</types>
@@ -149,16 +149,16 @@
  <dimensions uuid="6dc0fb5b-40fa-41fa-ada8-986fa4072e43">
   <name>SourceOfOrigin</name>
   <synonym>
-   <key>en</key>
-   <value>Source of origin</value>
+   <key>tr</key>
+   <value>Envanter menşei</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Источник происхождения</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Envanter menşei</value>
+   <key>en</key>
+   <value>Source of origin</value>
   </synonym>
   <type>
    <types>CatalogRef.SourceOfOrigins</types>
@@ -173,16 +173,16 @@
  <dimensions uuid="a774ded3-94aa-4353-aba1-183ebf1667c4">
   <name>Store</name>
   <synonym>
-   <key>en</key>
-   <value>Store</value>
+   <key>tr</key>
+   <value>Depo</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
+   <key>en</key>
+   <value>Store</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -197,16 +197,16 @@
  <dimensions uuid="ce0db579-b740-4ef1-bd64-a1545b8f8fd1">
   <name>Batch</name>
   <synonym>
-   <key>en</key>
-   <value>Batch</value>
+   <key>tr</key>
+   <value>Parti</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Партия</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Parti</value>
+   <key>en</key>
+   <value>Batch</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>

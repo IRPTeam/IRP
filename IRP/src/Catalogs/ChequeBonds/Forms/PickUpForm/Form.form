@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -208,16 +208,16 @@
    <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
     <choiceList>
      <presentation>
-      <key>en</key>
-      <value>Own</value>
+      <key>tr</key>
+      <value>Kendi çekimiz</value>
      </presentation>
      <presentation>
       <key>ru</key>
       <value>Собственные</value>
      </presentation>
      <presentation>
-      <key>tr</key>
-      <value>Kendi çekimiz</value>
+      <key>en</key>
+      <value>Own</value>
      </presentation>
      <value xsi:type="core:ReferenceValue">
       <value>Enum.ChequeBondTypes.EnumValue.OwnCheque</value>
@@ -225,16 +225,16 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>en</key>
-      <value>Partner</value>
+      <key>tr</key>
+      <value>Cari hesap</value>
      </presentation>
      <presentation>
       <key>ru</key>
       <value>Партнер</value>
      </presentation>
      <presentation>
-      <key>tr</key>
-      <value>Cari hesap</value>
+      <key>en</key>
+      <value>Partner</value>
      </presentation>
      <value xsi:type="core:ReferenceValue">
       <value>Enum.ChequeBondTypes.EnumValue.PartnerCheque</value>
@@ -1358,16 +1358,16 @@ WHERE
  <attributes>
   <name>PickedCheckBonds</name>
   <title>
-   <key>en</key>
-   <value>Picked check bonds</value>
+   <key>tr</key>
+   <value>Seçilen çek/senetler</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбранные банковские чеки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seçilen çek/senetler</value>
+   <key>en</key>
+   <value>Picked check bonds</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1382,16 +1382,16 @@ WHERE
   <columns>
    <name>ChequeBond</name>
    <title>
-    <key>en</key>
-    <value>Cheque bond</value>
+    <key>tr</key>
+    <value>Çek/Senet</value>
    </title>
    <title>
     <key>ru</key>
     <value>Банковский чек</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Çek/Senet</value>
+    <key>en</key>
+    <value>Cheque bond</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1407,16 +1407,16 @@ WHERE
   <columns>
    <name>Status</name>
    <title>
-    <key>en</key>
-    <value>Status</value>
+    <key>tr</key>
+    <value>Statü</value>
    </title>
    <title>
     <key>ru</key>
     <value>Статус</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Statü</value>
+    <key>en</key>
+    <value>Status</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1433,16 +1433,16 @@ WHERE
  <attributes>
   <name>StatusSelection</name>
   <title>
-   <key>en</key>
-   <value>Status</value>
+   <key>tr</key>
+   <value>Statü</value>
   </title>
   <title>
    <key>ru</key>
    <value>Статус</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Statü</value>
+   <key>en</key>
+   <value>Status</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1458,16 +1458,16 @@ WHERE
  <attributes>
   <name>StatusCheck</name>
   <title>
-   <key>en</key>
-   <value>Status check</value>
+   <key>tr</key>
+   <value>Statü kontrolü</value>
   </title>
   <title>
    <key>ru</key>
    <value>Статус банковского чека</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Statü kontrolü</value>
+   <key>en</key>
+   <value>Status check</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1483,16 +1483,16 @@ WHERE
  <attributes>
   <name>FilterByStatusIndex</name>
   <title>
-   <key>en</key>
-   <value>Filter by status index</value>
+   <key>tr</key>
+   <value>Statü indexe göre filtrele</value>
   </title>
   <title>
    <key>ru</key>
    <value>Фильтр по индексу статуса</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Statü indexe göre filtrele</value>
+   <key>en</key>
+   <value>Filter by status index</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1511,16 +1511,16 @@ WHERE
  <attributes>
   <name>ChequeBondType</name>
   <title>
-   <key>en</key>
-   <value>Cheque bond type</value>
+   <key>tr</key>
+   <value>Çek/Senet tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип банковского чека</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Çek/Senet tipi</value>
+   <key>en</key>
+   <value>Cheque bond type</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1536,16 +1536,16 @@ WHERE
  <attributes>
   <name>FilterByChequeBondType</name>
   <title>
-   <key>en</key>
-   <value>Filter by cheque bond type</value>
+   <key>tr</key>
+   <value>Çek türüne göre filtrele</value>
   </title>
   <title>
    <key>ru</key>
    <value>Фильтр по типам банковских чеков</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Çek türüne göre filtrele</value>
+   <key>en</key>
+   <value>Filter by cheque bond type</value>
   </title>
   <id>12</id>
   <valueType>
@@ -1564,16 +1564,16 @@ WHERE
  <attributes>
   <name>Source</name>
   <title>
-   <key>en</key>
-   <value>Source</value>
+   <key>tr</key>
+   <value>Kaynak</value>
   </title>
   <title>
    <key>ru</key>
    <value>Источник</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kaynak</value>
+   <key>en</key>
+   <value>Source</value>
   </title>
   <id>13</id>
   <valueType>
@@ -1589,16 +1589,16 @@ WHERE
  <formCommands>
   <name>CommandSaveAndClose</name>
   <title>
-   <key>en</key>
-   <value>Transfer to document</value>
+   <key>tr</key>
+   <value>Evraka aktar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Перенести в документ</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evraka aktar</value>
+   <key>en</key>
+   <value>Transfer to document</value>
   </title>
   <id>1</id>
   <use>

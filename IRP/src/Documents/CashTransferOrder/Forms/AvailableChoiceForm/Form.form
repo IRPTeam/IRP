@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>en</key>
-  <value>Cash transfer orders</value>
+  <key>tr</key>
+  <value>Finansal transfer siparişleri</value>
  </title>
  <title>
   <key>ru</key>
   <value>Заявки на перемещение денежных средств</value>
  </title>
  <title>
-  <key>tr</key>
-  <value>Finansal transfer siparişleri</value>
+  <key>en</key>
+  <value>Cash transfer orders</value>
  </title>
  <items xsi:type="form:FormGroup">
   <name>ListSettingsComposerUserSettings</name>
@@ -21,16 +21,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -75,16 +75,16 @@
    <name>Selected</name>
    <id>67</id>
    <title>
-    <key>en</key>
-    <value>Selected</value>
+    <key>tr</key>
+    <value>Seçilmiş</value>
    </title>
    <title>
     <key>ru</key>
     <value>Выбранные</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Seçilmiş</value>
+    <key>en</key>
+    <value>Selected</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -130,16 +130,16 @@
    <name>Number</name>
    <id>49</id>
    <title>
-    <key>en</key>
-    <value>Number</value>
+    <key>tr</key>
+    <value>Numara</value>
    </title>
    <title>
     <key>ru</key>
     <value>Номер</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Numara</value>
+    <key>en</key>
+    <value>Number</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -192,16 +192,16 @@
    <name>Date</name>
    <id>52</id>
    <title>
-    <key>en</key>
-    <value>Date</value>
+    <key>tr</key>
+    <value>Tarih</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дата</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
+    <key>en</key>
+    <value>Date</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -254,16 +254,16 @@
    <name>Company</name>
    <id>61</id>
    <title>
-    <key>en</key>
-    <value>Company</value>
+    <key>tr</key>
+    <value>Şirket</value>
    </title>
    <title>
     <key>ru</key>
     <value>Организация</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Şirket</value>
+    <key>en</key>
+    <value>Company</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -316,16 +316,16 @@
    <name>Sender</name>
    <id>55</id>
    <title>
-    <key>en</key>
-    <value>Sender</value>
+    <key>tr</key>
+    <value>Gönderen</value>
    </title>
    <title>
     <key>ru</key>
     <value>Отправитель</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Gönderen</value>
+    <key>en</key>
+    <value>Sender</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -378,16 +378,16 @@
    <name>SendCurrency</name>
    <id>58</id>
    <title>
-    <key>en</key>
-    <value>Send currency</value>
+    <key>tr</key>
+    <value>Gönderilen döviz</value>
    </title>
    <title>
     <key>ru</key>
     <value>Валюта отправки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Gönderilen döviz</value>
+    <key>en</key>
+    <value>Send currency</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -440,16 +440,16 @@
    <name>IsCurrencyExchange</name>
    <id>64</id>
    <title>
-    <key>en</key>
-    <value>Is currency exchange</value>
+    <key>tr</key>
+    <value>Bu döviz bozdurma</value>
    </title>
    <title>
     <key>ru</key>
     <value>Это обмен валюты</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Bu döviz bozdurma</value>
+    <key>en</key>
+    <value>Is currency exchange</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>

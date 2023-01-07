@@ -388,7 +388,7 @@
  <attributes>
   <name>Ref</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Ref</value>
   </title>
   <title>
@@ -396,7 +396,7 @@
    <value>Ссылка</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Ref</value>
   </title>
   <id>1</id>
@@ -413,16 +413,16 @@
  <attributes>
   <name>IDInfo</name>
   <title>
-   <key>en</key>
-   <value>Contact info</value>
+   <key>tr</key>
+   <value>İletişim bilgi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Контактная информация</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İletişim bilgi</value>
+   <key>en</key>
+   <value>Contact info</value>
   </title>
   <id>2</id>
   <valueType>
@@ -437,16 +437,16 @@
   <columns>
    <name>IDInfoType</name>
    <title>
-    <key>en</key>
-    <value>Type</value>
+    <key>tr</key>
+    <value>Tip</value>
    </title>
    <title>
     <key>ru</key>
     <value>Вид</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
+    <key>en</key>
+    <value>Type</value>
    </title>
    <id>3</id>
    <valueType>
@@ -462,16 +462,16 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </title>
    <id>4</id>
    <valueType>
@@ -487,16 +487,16 @@
   <columns>
    <name>TypeDef</name>
    <title>
-    <key>en</key>
-    <value>Type def</value>
+    <key>tr</key>
+    <value>Tip açıklama</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип наименования</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tip açıklama</value>
+    <key>en</key>
+    <value>Type def</value>
    </title>
    <id>5</id>
    <valueType>
@@ -512,16 +512,16 @@
   <columns>
    <name>Country</name>
    <title>
-    <key>en</key>
-    <value>Country</value>
+    <key>tr</key>
+    <value>Ülke</value>
    </title>
    <title>
     <key>ru</key>
     <value>Страна</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ülke</value>
+    <key>en</key>
+    <value>Country</value>
    </title>
    <id>6</id>
    <valueType>
@@ -538,16 +538,16 @@
  <formCommands>
   <name>Save</name>
   <title>
-   <key>en</key>
-   <value>Save</value>
+   <key>tr</key>
+   <value>Kaydet</value>
   </title>
   <title>
    <key>ru</key>
    <value>Записать</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kaydet</value>
+   <key>en</key>
+   <value>Save</value>
   </title>
   <id>1</id>
   <use>
@@ -567,16 +567,16 @@
  <formCommands>
   <name>SaveAndClose</name>
   <title>
-   <key>en</key>
-   <value>Save and close</value>
+   <key>tr</key>
+   <value>Kaydet ve kapat</value>
   </title>
   <title>
    <key>ru</key>
    <value>Записать и закрыть</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kaydet ve kapat</value>
+   <key>en</key>
+   <value>Save and close</value>
   </title>
   <id>2</id>
   <use>

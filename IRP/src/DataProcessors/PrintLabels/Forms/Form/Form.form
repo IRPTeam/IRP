@@ -1033,16 +1033,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Main</value>
+    <key>tr</key>
+    <value>Ana</value>
    </title>
    <title>
     <key>ru</key>
     <value>Основное</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ana</value>
+    <key>en</key>
+    <value>Main</value>
    </title>
    <extendedTooltip>
     <name>GroupMainExtendedTooltip</name>
@@ -1117,16 +1117,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Settings</value>
+    <key>tr</key>
+    <value>Ayarlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Настройки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ayarlar</value>
+    <key>en</key>
+    <value>Settings</value>
    </title>
    <extendedTooltip>
     <name>GroupSettingsExtendedTooltip</name>
@@ -1155,16 +1155,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group pages</value>
+   <key>tr</key>
+   <value>Sayfalar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа страниц</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sayfalar grubu</value>
+   <key>en</key>
+   <value>Group pages</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -1333,16 +1333,16 @@
  <attributes>
   <name>ItemList</name>
   <title>
-   <key>en</key>
-   <value>Item list</value>
+   <key>tr</key>
+   <value>Malzeme listesi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Товары</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Malzeme listesi</value>
+   <key>en</key>
+   <value>Item list</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1357,16 +1357,16 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>en</key>
-    <value>Item</value>
+    <key>tr</key>
+    <value>Malzeme</value>
    </title>
    <title>
     <key>ru</key>
     <value>Номенклатура</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
+    <key>en</key>
+    <value>Item</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1382,16 +1382,16 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </title>
    <title>
     <key>ru</key>
     <value>Характеристика</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1407,16 +1407,16 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1436,16 +1436,16 @@
   <columns>
    <name>Barcode</name>
    <title>
-    <key>en</key>
-    <value>Barcode</value>
+    <key>tr</key>
+    <value>Barkod</value>
    </title>
    <title>
     <key>ru</key>
     <value>Штрихкод</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Barkod</value>
+    <key>en</key>
+    <value>Barcode</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1461,16 +1461,16 @@
   <columns>
    <name>Template</name>
    <title>
-    <key>en</key>
-    <value>Template</value>
+    <key>tr</key>
+    <value>Şablon</value>
    </title>
    <title>
     <key>ru</key>
     <value>Шаблон</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Şablon</value>
+    <key>en</key>
+    <value>Template</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1486,16 +1486,16 @@
   <columns>
    <name>Price</name>
    <title>
-    <key>en</key>
-    <value>Price</value>
+    <key>tr</key>
+    <value>Fiyat</value>
    </title>
    <title>
     <key>ru</key>
     <value>Цена</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Fiyat</value>
+    <key>en</key>
+    <value>Price</value>
    </title>
    <id>21</id>
    <valueType>
@@ -1511,16 +1511,16 @@
   <columns>
    <name>Unit</name>
    <title>
-    <key>en</key>
-    <value>Unit</value>
+    <key>tr</key>
+    <value>Birim</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ед. изм.</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Birim</value>
+    <key>en</key>
+    <value>Unit</value>
    </title>
    <id>23</id>
    <valueType>
@@ -1536,16 +1536,16 @@
   <columns>
    <name>TemplateHash</name>
    <title>
-    <key>en</key>
-    <value>Template hash</value>
+    <key>tr</key>
+    <value>Şablon hash</value>
    </title>
    <title>
     <key>ru</key>
     <value>Hash шаблона</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Şablon hash</value>
+    <key>en</key>
+    <value>Template hash</value>
    </title>
    <id>25</id>
    <valueType>
@@ -1564,16 +1564,16 @@
   <columns>
    <name>Print</name>
    <title>
-    <key>en</key>
-    <value>Print</value>
+    <key>tr</key>
+    <value>Yazdır</value>
    </title>
    <title>
     <key>ru</key>
     <value>Печать</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Yazdır</value>
+    <key>en</key>
+    <value>Print</value>
    </title>
    <id>29</id>
    <valueType>
@@ -1589,16 +1589,16 @@
   <columns>
    <name>BarcodeType</name>
    <title>
-    <key>en</key>
-    <value>Barcode type</value>
+    <key>tr</key>
+    <value>Barkod tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип штрихкода</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Barkod tipi</value>
+    <key>en</key>
+    <value>Barcode type</value>
    </title>
    <id>30</id>
    <valueType>
@@ -1617,16 +1617,16 @@
   <columns>
    <name>PriceType</name>
    <title>
-    <key>en</key>
-    <value>Price type</value>
+    <key>tr</key>
+    <value>Fiyat tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип цен</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Fiyat tipi</value>
+    <key>en</key>
+    <value>Price type</value>
    </title>
    <id>36</id>
    <valueType>
@@ -1643,16 +1643,16 @@
  <attributes>
   <name>Object</name>
   <title>
-   <key>en</key>
-   <value>Object</value>
+   <key>tr</key>
+   <value>Obje</value>
   </title>
   <title>
    <key>ru</key>
    <value>Объект</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Obje</value>
+   <key>en</key>
+   <value>Object</value>
   </title>
   <id>12</id>
   <valueType>
@@ -1669,16 +1669,16 @@
  <attributes>
   <name>PriceType</name>
   <title>
-   <key>en</key>
-   <value>Price type</value>
+   <key>tr</key>
+   <value>Fiyat tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип цен</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Fiyat tipi</value>
+   <key>en</key>
+   <value>Price type</value>
   </title>
   <id>22</id>
   <valueType>
@@ -1694,16 +1694,16 @@
  <attributes>
   <name>SplitTemplatesByPages</name>
   <title>
-   <key>en</key>
-   <value>Split templates by pages</value>
+   <key>tr</key>
+   <value>Şablonları sayfalara dağıt</value>
   </title>
   <title>
    <key>ru</key>
    <value>Распределить шаблоны по страницам</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şablonları sayfalara dağıt</value>
+   <key>en</key>
+   <value>Split templates by pages</value>
   </title>
   <id>24</id>
   <valueType>
@@ -1719,16 +1719,16 @@
  <attributes>
   <name>LabelTemplate</name>
   <title>
-   <key>en</key>
-   <value>Label template</value>
+   <key>tr</key>
+   <value>Etiket şablonu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Шаблон этикетки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Etiket şablonu</value>
+   <key>en</key>
+   <value>Label template</value>
   </title>
   <id>28</id>
   <valueType>
@@ -1744,16 +1744,16 @@
  <attributes>
   <name>BarcodeType</name>
   <title>
-   <key>en</key>
-   <value>Barcode type</value>
+   <key>tr</key>
+   <value>Barkod tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип штрихкода</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Barkod tipi</value>
+   <key>en</key>
+   <value>Barcode type</value>
   </title>
   <id>31</id>
   <valueType>
@@ -1772,16 +1772,16 @@
  <attributes>
   <name>BarcodeFontSize</name>
   <title>
-   <key>en</key>
-   <value>Barcode font size</value>
+   <key>tr</key>
+   <value>Barkod yazı tipi boyutu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Размер шрифта штрихкода</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Barkod yazı tipi boyutu</value>
+   <key>en</key>
+   <value>Barcode font size</value>
   </title>
   <id>34</id>
   <valueType>
@@ -1801,16 +1801,16 @@
  <formCommands>
   <name>SaveSettings</name>
   <title>
-   <key>en</key>
-   <value>Save settings</value>
+   <key>tr</key>
+   <value>Ayarları kaydet</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сохранить настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarları kaydet</value>
+   <key>en</key>
+   <value>Save settings</value>
   </title>
   <id>3</id>
   <use>
@@ -1829,16 +1829,16 @@
  <formCommands>
   <name>LoadSettings</name>
   <title>
-   <key>en</key>
-   <value>Load settings</value>
+   <key>tr</key>
+   <value>Ayarları yükle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Загрузить настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarları yükle</value>
+   <key>en</key>
+   <value>Load settings</value>
   </title>
   <id>4</id>
   <use>
@@ -1857,16 +1857,16 @@
  <formCommands>
   <name>Fill</name>
   <title>
-   <key>en</key>
-   <value>Fill</value>
+   <key>tr</key>
+   <value>Doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Doldur</value>
+   <key>en</key>
+   <value>Fill</value>
   </title>
   <id>5</id>
   <use>
@@ -1882,16 +1882,16 @@
  <formCommands>
   <name>Print</name>
   <title>
-   <key>en</key>
-   <value>Print</value>
+   <key>tr</key>
+   <value>Yazdır</value>
   </title>
   <title>
    <key>ru</key>
    <value>Печать</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yazdır</value>
+   <key>en</key>
+   <value>Print</value>
   </title>
   <id>6</id>
   <use>
@@ -1907,29 +1907,29 @@
  <formCommands>
   <name>CheckPrintForSelectedRows</name>
   <title>
-   <key>en</key>
-   <value>Check print for selected rows</value>
+   <key>tr</key>
+   <value>Seçili satırlar için yazdırı kontrol ediniz</value>
   </title>
   <title>
    <key>ru</key>
    <value>Проверить печать для выбранных строк</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seçili satırlar için yazdırı kontrol ediniz</value>
+   <key>en</key>
+   <value>Check print for selected rows</value>
   </title>
   <id>9</id>
   <toolTip>
-   <key>en</key>
-   <value>Check print for selected rows</value>
+   <key>tr</key>
+   <value>Seçili satırlar için yazdırı kontrol ediniz</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Проверить печать для выбранных строк</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Seçili satırlar için yazdırı kontrol ediniz</value>
+   <key>en</key>
+   <value>Check print for selected rows</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -1948,29 +1948,29 @@
  <formCommands>
   <name>UncheckPrintForSelectedRows</name>
   <title>
-   <key>en</key>
-   <value>Uncheck print for selected rows</value>
+   <key>tr</key>
+   <value>Seçili satırlar için yazdırı işaret kaldırma</value>
   </title>
   <title>
    <key>ru</key>
    <value>Снять флажок печати для выбранных строк</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seçili satırlar için yazdırı işaret kaldırma</value>
+   <key>en</key>
+   <value>Uncheck print for selected rows</value>
   </title>
   <id>10</id>
   <toolTip>
-   <key>en</key>
-   <value>Uncheck print for selected rows</value>
+   <key>tr</key>
+   <value>Seçili satırlar için yazdırı işaret kaldırma</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Снять флажок печати для выбранных строк</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Seçili satırlar için yazdırı işaret kaldırma</value>
+   <key>en</key>
+   <value>Uncheck print for selected rows</value>
   </toolTip>
   <use>
    <common>true</common>

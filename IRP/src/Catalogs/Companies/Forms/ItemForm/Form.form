@@ -342,16 +342,16 @@
     <name>OurCompany</name>
     <id>15</id>
     <title>
-     <key>en</key>
-     <value>Our Company</value>
+     <key>tr</key>
+     <value>Kendi şirketimiz</value>
     </title>
     <title>
      <key>ru</key>
      <value>Наша организация</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Kendi şirketimiz</value>
+     <key>en</key>
+     <value>Our Company</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -403,16 +403,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Info</value>
+    <key>tr</key>
+    <value>Bilgi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Контактная информация</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Bilgi</value>
+    <key>en</key>
+    <value>Info</value>
    </title>
    <extendedTooltip>
     <name>GroupInfoExtendedTooltip</name>
@@ -887,16 +887,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Currencies</value>
+    <key>tr</key>
+    <value>Dövizler</value>
    </title>
    <title>
     <key>ru</key>
     <value>Валюты</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dövizler</value>
+    <key>en</key>
+    <value>Currencies</value>
    </title>
    <extendedTooltip>
     <name>GroupCurrenciesExtendedTooltip</name>
@@ -928,16 +928,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Contact information</value>
+    <key>tr</key>
+    <value>İletişim bilgileri</value>
    </title>
    <title>
     <key>ru</key>
     <value>Контактная информация</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>İletişim bilgileri</value>
+    <key>en</key>
+    <value>Contact information</value>
    </title>
    <extendedTooltip>
     <name>GroupContactInformationExtendedTooltip</name>
@@ -1398,16 +1398,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Tax types</value>
+    <key>tr</key>
+    <value>Vergi tipleri</value>
    </title>
    <title>
     <key>ru</key>
     <value>Вид налога</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Vergi tipleri</value>
+    <key>en</key>
+    <value>Tax types</value>
    </title>
    <extendedTooltip>
     <name>GroupTaxesExtendedTooltip</name>
@@ -1774,16 +1774,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Ledger types</value>
+    <key>tr</key>
+    <value>Defter tipleri</value>
    </title>
    <title>
     <key>ru</key>
     <value>Типы учета</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Defter tipleri</value>
+    <key>en</key>
+    <value>Ledger types</value>
    </title>
    <extendedTooltip>
     <name>GroupLedgerTypesExtendedTooltip</name>
@@ -1813,16 +1813,16 @@
     <name>LandedCostCurrencyMovementType</name>
     <id>128</id>
     <title>
-     <key>en</key>
-     <value>Currency movement type</value>
+     <key>tr</key>
+     <value>Çoklu döviz hareket tipi</value>
     </title>
     <title>
      <key>ru</key>
      <value>Вид мультивалютной аналитики</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Çoklu döviz hareket tipi</value>
+     <key>en</key>
+     <value>Currency movement type</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -2020,16 +2020,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Landed cost</value>
+    <key>tr</key>
+    <value>Ürün maliyet hesaplama</value>
    </title>
    <title>
     <key>ru</key>
     <value>Расчет себестоимости товаров</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ürün maliyet hesaplama</value>
+    <key>en</key>
+    <value>Landed cost</value>
    </title>
    <extendedTooltip>
     <name>GroupLandedCostExtendedTooltip</name>
@@ -2111,16 +2111,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Comission trading</value>
+    <key>tr</key>
+    <value>Konsinye satış</value>
    </title>
    <title>
     <key>ru</key>
     <value>Комиссионная торговля</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Konsinye satış</value>
+    <key>en</key>
+    <value>Comission trading</value>
    </title>
    <extendedTooltip>
     <name>GroupComissionTradingExtendedTooltip</name>
@@ -2149,16 +2149,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group pages</value>
+   <key>tr</key>
+   <value>Sayfalar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа страниц</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sayfalar grubu</value>
+   <key>en</key>
+   <value>Group pages</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -2231,16 +2231,16 @@
  <attributes>
   <name>CompanyTaxes</name>
   <title>
-   <key>en</key>
-   <value>Company taxes</value>
+   <key>tr</key>
+   <value>Şirket vergileri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Налоги организации</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şirket vergileri</value>
+   <key>en</key>
+   <value>Company taxes</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2256,16 +2256,16 @@
   <columns>
    <name>Tax</name>
    <title>
-    <key>en</key>
-    <value>Tax</value>
+    <key>tr</key>
+    <value>Vergi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Налог</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Vergi</value>
+    <key>en</key>
+    <value>Tax</value>
    </title>
    <id>3</id>
    <valueType>
@@ -2281,16 +2281,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <title>
     <key>ru</key>
     <value>Применить</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <id>4</id>
    <valueType>
@@ -2306,16 +2306,16 @@
   <columns>
    <name>Priority</name>
    <title>
-    <key>en</key>
-    <value>Priority</value>
+    <key>tr</key>
+    <value>Önem</value>
    </title>
    <title>
     <key>ru</key>
     <value>Приоритет</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Önem</value>
+    <key>en</key>
+    <value>Priority</value>
    </title>
    <id>5</id>
    <valueType>
@@ -2334,16 +2334,16 @@
   <columns>
    <name>Period</name>
    <title>
-    <key>en</key>
-    <value>Period</value>
+    <key>tr</key>
+    <value>Dönem</value>
    </title>
    <title>
     <key>ru</key>
     <value>Период</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dönem</value>
+    <key>en</key>
+    <value>Period</value>
    </title>
    <id>6</id>
    <valueType>
@@ -2362,16 +2362,16 @@
   <columns>
    <name>IncludeToLandedCost</name>
    <title>
-    <key>en</key>
-    <value>Include to landed cost</value>
+    <key>tr</key>
+    <value>Maliyete dahil et</value>
    </title>
    <title>
     <key>ru</key>
     <value>Включать в расчет себестоимости</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Maliyete dahil et</value>
+    <key>en</key>
+    <value>Include to landed cost</value>
    </title>
    <id>13</id>
    <valueType>
@@ -2388,16 +2388,16 @@
  <attributes>
   <name>RewriteTaxes</name>
   <title>
-   <key>en</key>
-   <value>Rewrite taxes</value>
+   <key>tr</key>
+   <value>Vergileri yeniden kaydet</value>
   </title>
   <title>
    <key>ru</key>
    <value>Перезапись налогов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Vergileri yeniden kaydet</value>
+   <key>en</key>
+   <value>Rewrite taxes</value>
   </title>
   <id>7</id>
   <valueType>
@@ -2413,16 +2413,16 @@
  <attributes>
   <name>RewriteLedgerTypes</name>
   <title>
-   <key>en</key>
-   <value>Rewrite Ledger types</value>
+   <key>tr</key>
+   <value>Defter tiplerini tekrar kaydet</value>
   </title>
   <title>
    <key>ru</key>
    <value>Перезаписать типы учета</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Defter tiplerini tekrar kaydet</value>
+   <key>en</key>
+   <value>Rewrite Ledger types</value>
   </title>
   <id>8</id>
   <valueType>
@@ -2438,16 +2438,16 @@
  <attributes>
   <name>CompanyLedgerTypes</name>
   <title>
-   <key>en</key>
-   <value>Company Ledger types</value>
+   <key>tr</key>
+   <value>Şirket defter tipleri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Типы учета организации</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şirket defter tipleri</value>
+   <key>en</key>
+   <value>Company Ledger types</value>
   </title>
   <id>9</id>
   <valueType>
@@ -2463,16 +2463,16 @@
   <columns>
    <name>LedgerType</name>
    <title>
-    <key>en</key>
-    <value>Ledger type</value>
+    <key>tr</key>
+    <value>Defter tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип учета</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Defter tipi</value>
+    <key>en</key>
+    <value>Ledger type</value>
    </title>
    <id>10</id>
    <valueType>
@@ -2488,16 +2488,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использовать</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <id>11</id>
    <valueType>
@@ -2513,16 +2513,16 @@
   <columns>
    <name>Period</name>
    <title>
-    <key>en</key>
-    <value>Period</value>
+    <key>tr</key>
+    <value>Dönem</value>
    </title>
    <title>
     <key>ru</key>
     <value>Период</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dönem</value>
+    <key>en</key>
+    <value>Period</value>
    </title>
    <id>12</id>
    <valueType>

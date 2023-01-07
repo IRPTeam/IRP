@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseWorkOrders</name>
  <synonym>
-  <key>en</key>
-  <value>Use work orders</value>
+  <key>tr</key>
+  <value>Kullanmak - İş emirleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать заказ наряды</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kullanmak - İş emirleri</value>
+  <key>en</key>
+  <value>Use work orders</value>
  </synonym>
  <type>
   <types>Boolean</types>

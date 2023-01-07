@@ -7,16 +7,16 @@
  </producedTypes>
  <name>DataAreaStatus</name>
  <synonym>
-  <key>en</key>
-  <value>Data area status</value>
+  <key>tr</key>
+  <value>Veri alanlar statüsü</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Статус рабочей области</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Veri alanlar statüsü</value>
+  <key>en</key>
+  <value>Data area status</value>
  </synonym>
  <standardAttributes>
   <dataHistory>Use</dataHistory>
@@ -39,46 +39,46 @@
  <enumValues uuid="b05025ec-ba53-4144-bdbb-6b4fa7c7c1ab">
   <name>AreaPreparation</name>
   <synonym>
-   <key>en</key>
-   <value>Area preparation</value>
+   <key>tr</key>
+   <value>Alan hazırlama</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Подготовка области</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Alan hazırlama</value>
+   <key>en</key>
+   <value>Area preparation</value>
   </synonym>
  </enumValues>
  <enumValues uuid="247ab147-aaa9-4f44-8d72-5731ee0ed071">
   <name>Working</name>
   <synonym>
-   <key>en</key>
-   <value>Working</value>
+   <key>tr</key>
+   <value>Devam ediyor</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Рабочая</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Devam ediyor</value>
+   <key>en</key>
+   <value>Working</value>
   </synonym>
  </enumValues>
  <enumValues uuid="29053376-d9db-4b62-88fb-50267b81d0b8">
   <name>Closed</name>
   <synonym>
-   <key>en</key>
-   <value>Closed</value>
+   <key>tr</key>
+   <value>Kapalı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Закрытая</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kapalı</value>
+   <key>en</key>
+   <value>Closed</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

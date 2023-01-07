@@ -7,16 +7,16 @@
    <name>DecorationSaveDocument</name>
    <id>175</id>
    <title>
-    <key>en</key>
-    <value>Save document to fill accounting records</value>
+    <key>tr</key>
+    <value>Muhasebe kayıtları oluşturmak için evrakı kaydetmek gerekir</value>
    </title>
    <title>
     <key>ru</key>
     <value>Для заполнения бухгалтерских проводок необходимо сохранить документ</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Muhasebe kayıtları oluşturmak için evrakı kaydetmek gerekir</value>
+    <key>en</key>
+    <value>Save document to fill accounting records</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -68,16 +68,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group head</value>
+   <key>tr</key>
+   <value>Grup başlık</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа заголовок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup başlık</value>
+   <key>en</key>
+   <value>Group head</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -120,16 +120,16 @@
      <name>DecorationGroupTitleCollapsedPicture</name>
      <id>28</id>
      <title>
-      <key>en</key>
-      <value>Decoration group title collapsed picture</value>
+      <key>tr</key>
+      <value>Dekorasyon grubu başlık daraltılmış resmi</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа декораций рисунок свернутой шапки</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Dekorasyon grubu başlık daraltılmış resmi</value>
+      <key>en</key>
+      <value>Decoration group title collapsed picture</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -179,16 +179,16 @@
      <name>DecorationGroupTitleCollapsedLabel</name>
      <id>31</id>
      <title>
-      <key>en</key>
-      <value>Please, fill the document</value>
+      <key>tr</key>
+      <value>Lütfen, evrakı doldurunuz</value>
      </title>
      <title>
       <key>ru</key>
       <value>Пожалуйста, заполните документ</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
+      <key>en</key>
+      <value>Please, fill the document</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -315,16 +315,16 @@
      <name>DecorationGroupTitleUncollapsedLabel</name>
      <id>39</id>
      <title>
-      <key>en</key>
-      <value>Please, fill the document</value>
+      <key>tr</key>
+      <value>Lütfen, evrakı doldurunuz</value>
      </title>
      <title>
       <key>ru</key>
       <value>Пожалуйста, заполните документ</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
+      <key>en</key>
+      <value>Please, fill the document</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -817,16 +817,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Group title items</value>
+    <key>tr</key>
+    <value>Grup malzeme başlıkları</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа заголовок товаров</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Grup malzeme başlıkları</value>
+    <key>en</key>
+    <value>Group title items</value>
    </title>
    <extendedTooltip>
     <name>GroupTitleItemsExtendedTooltip</name>
@@ -1165,16 +1165,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>Group is fixed</value>
+        <key>tr</key>
+        <value>Grup sabitlendi</value>
        </title>
        <title>
         <key>ru</key>
         <value>Группа фиксированная</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Grup sabitlendi</value>
+        <key>en</key>
+        <value>Group is fixed</value>
        </title>
        <extendedTooltip>
         <name>GroupIsFixedExtendedTooltip</name>
@@ -1203,16 +1203,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Active</value>
+       <key>tr</key>
+       <value>Aktif</value>
       </title>
       <title>
        <key>ru</key>
        <value>Активный</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Aktif</value>
+       <key>en</key>
+       <value>Active</value>
       </title>
       <extendedTooltip>
        <name>GroupActiveExtendedTooltip</name>
@@ -1240,16 +1240,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Period</value>
+      <key>tr</key>
+      <value>Dönem</value>
      </title>
      <title>
       <key>ru</key>
       <value>Период</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Dönem</value>
+      <key>en</key>
+      <value>Period</value>
      </title>
      <extendedTooltip>
       <name>RegisterRecordsGroupPeriodExtendedTooltip</name>
@@ -1329,16 +1329,16 @@
       <name>RegisterRecordsExtDimensionDr1</name>
       <id>94</id>
       <title>
-       <key>en</key>
-       <value>Ext. Dim. Debit</value>
+       <key>tr</key>
+       <value>Borç kırılım</value>
       </title>
       <title>
        <key>ru</key>
        <value>Субконто Дт</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Borç kırılım</value>
+       <key>en</key>
+       <value>Ext. Dim. Debit</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1495,16 +1495,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Dr ext dimensions</value>
+      <key>tr</key>
+      <value>Kırılımlar</value>
      </title>
      <title>
       <key>ru</key>
       <value>Субконто Дт</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Kırılımlar</value>
+      <key>en</key>
+      <value>Dr ext dimensions</value>
      </title>
      <extendedTooltip>
       <name>RegisterRecordsGroupDrExtDimensionsExtendedTooltip</name>
@@ -1534,16 +1534,16 @@
       <name>RegisterRecordsCurrencyDr</name>
       <id>118</id>
       <title>
-       <key>en</key>
-       <value>Debit currency</value>
+       <key>tr</key>
+       <value>Döviz (Borç)</value>
       </title>
       <title>
        <key>ru</key>
        <value>Валюта Дт</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Döviz (Borç)</value>
+       <key>en</key>
+       <value>Debit currency</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1596,16 +1596,16 @@
       <name>RegisterRecordsCurrencyAmountDr</name>
       <id>133</id>
       <title>
-       <key>en</key>
-       <value>Debit amount</value>
+       <key>tr</key>
+       <value>Borç tutarı</value>
       </title>
       <title>
        <key>ru</key>
        <value>Сумма Дт</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Borç tutarı</value>
+       <key>en</key>
+       <value>Debit amount</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1658,16 +1658,16 @@
       <name>RegisterRecordsQuantityDr</name>
       <id>127</id>
       <title>
-       <key>en</key>
-       <value>DebitQuantity</value>
+       <key>tr</key>
+       <value>Borç miktar</value>
       </title>
       <title>
        <key>ru</key>
        <value>Количество дебит</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Borç miktar</value>
+       <key>en</key>
+       <value>DebitQuantity</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1722,16 +1722,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Register records group dr currency</value>
+      <key>tr</key>
+      <value>Kayıt hareketleri grup borç döviz</value>
      </title>
      <title>
       <key>ru</key>
       <value>Проводки группа валюта дт</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Kayıt hareketleri grup borç döviz</value>
+      <key>en</key>
+      <value>Register records group dr currency</value>
      </title>
      <extendedTooltip>
       <name>RegisterRecordsGroupDrCurrencyExtendedTooltip</name>
@@ -1811,16 +1811,16 @@
       <name>RegisterRecordsExtDimensionCr1</name>
       <id>97</id>
       <title>
-       <key>en</key>
-       <value>Ext. Dim. Credit</value>
+       <key>tr</key>
+       <value>Alacak kırılım</value>
       </title>
       <title>
        <key>ru</key>
        <value>Субконто Кт</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Alacak kırılım</value>
+       <key>en</key>
+       <value>Ext. Dim. Credit</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1977,16 +1977,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Cr ext dimensions</value>
+      <key>tr</key>
+      <value>Alacak kırılımlar</value>
      </title>
      <title>
       <key>ru</key>
       <value>Субконто Кт</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Alacak kırılımlar</value>
+      <key>en</key>
+      <value>Cr ext dimensions</value>
      </title>
      <extendedTooltip>
       <name>RegisterRecordsGroupCrExtDimensionsExtendedTooltip</name>
@@ -2016,16 +2016,16 @@
       <name>RegisterRecordsCurrencyCr</name>
       <id>121</id>
       <title>
-       <key>en</key>
-       <value>Credit currency</value>
+       <key>tr</key>
+       <value>Alacak dövizi</value>
       </title>
       <title>
        <key>ru</key>
        <value>Валюта Кт</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Alacak dövizi</value>
+       <key>en</key>
+       <value>Credit currency</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -2078,16 +2078,16 @@
       <name>RegisterRecordsCurrencyAmountCr</name>
       <id>136</id>
       <title>
-       <key>en</key>
-       <value>Credit amount</value>
+       <key>tr</key>
+       <value>Alacak tutar</value>
       </title>
       <title>
        <key>ru</key>
        <value>Сумма Кт</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Alacak tutar</value>
+       <key>en</key>
+       <value>Credit amount</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -2140,16 +2140,16 @@
       <name>RegisterRecordsQuantityCr</name>
       <id>130</id>
       <title>
-       <key>en</key>
-       <value>Credit quantity</value>
+       <key>tr</key>
+       <value>Alacak miktar</value>
       </title>
       <title>
        <key>ru</key>
        <value>Количество Кт</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Alacak miktar</value>
+       <key>en</key>
+       <value>Credit quantity</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -2204,16 +2204,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Register records group cr currency</value>
+      <key>tr</key>
+      <value>Kayıt hareketleri grup alacak döviz</value>
      </title>
      <title>
       <key>ru</key>
       <value>Проводки группа валюта кт</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Kayıt hareketleri grup alacak döviz</value>
+      <key>en</key>
+      <value>Register records group cr currency</value>
      </title>
      <extendedTooltip>
       <name>RegisterRecordsGroupCrCurrencyExtendedTooltip</name>
@@ -2544,16 +2544,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Records</value>
+    <key>tr</key>
+    <value>Kayıtlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Проводки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kayıtlar</value>
+    <key>en</key>
+    <value>Records</value>
    </title>
    <extendedTooltip>
     <name>GroupRecordsExtendedTooltip</name>
@@ -3353,16 +3353,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Info</value>
+    <key>tr</key>
+    <value>Bilgi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Контактная информация</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Bilgi</value>
+    <key>en</key>
+    <value>Info</value>
    </title>
    <extendedTooltip>
     <name>GroupInfoExtendedTooltip</name>
@@ -3598,16 +3598,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Other</value>
+    <key>tr</key>
+    <value>Diğer</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дополнительно</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
+    <key>en</key>
+    <value>Other</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -3636,16 +3636,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Main pages</value>
+   <key>tr</key>
+   <value>Ana sayfalar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Основные страницы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ana sayfalar</value>
+   <key>en</key>
+   <value>Main pages</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -3720,16 +3720,16 @@
  <attributes>
   <name>Description</name>
   <title>
-   <key>en</key>
-   <value>Description</value>
+   <key>tr</key>
+   <value>Tanım</value>
   </title>
   <title>
    <key>ru</key>
    <value>Комментарий</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tanım</value>
+   <key>en</key>
+   <value>Description</value>
   </title>
   <id>2</id>
   <valueType>
@@ -3746,16 +3746,16 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>en</key>
-   <value>Group items</value>
+   <key>tr</key>
+   <value>Grup nesneler</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа элементов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup nesneler</value>
+   <key>en</key>
+   <value>Group items</value>
   </title>
   <id>3</id>
   <valueType>
@@ -3774,16 +3774,16 @@
  <formCommands>
   <name>SwitchRecordsActivity</name>
   <title>
-   <key>en</key>
-   <value>Switch records activity</value>
+   <key>tr</key>
+   <value>Kayıt geçerlilik belirtisini çevir</value>
   </title>
   <title>
    <key>ru</key>
    <value>Переключить активность проводок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kayıt geçerlilik belirtisini çevir</value>
+   <key>en</key>
+   <value>Switch records activity</value>
   </title>
   <id>1</id>
   <use>

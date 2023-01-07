@@ -9,16 +9,16 @@
  </producedTypes>
  <name>AccessProfiles</name>
  <synonym>
-  <key>en</key>
-  <value>User access profiles</value>
+  <key>tr</key>
+  <value>Kullanıcı erişim profilleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Профили доступа пользователей</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kullanıcı erişim profilleri</value>
+  <key>en</key>
+  <value>User access profiles</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -57,16 +57,16 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectPresentation>
-  <key>en</key>
-  <value>User access profile</value>
+  <key>tr</key>
+  <value>Kullanıcı erişim profili</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Профиль доступа пользователей</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Kullanıcı erişim profili</value>
+  <key>en</key>
+  <value>User access profile</value>
  </objectPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -88,30 +88,30 @@
   </producedTypes>
   <name>Roles</name>
   <synonym>
-   <key>en</key>
-   <value>Roles</value>
+   <key>tr</key>
+   <value>Roller</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Роли доступа</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Roller</value>
+   <key>en</key>
+   <value>Roles</value>
   </synonym>
   <attributes uuid="32fa6642-808b-4834-b855-65bcf56410b7">
    <name>Role</name>
    <synonym>
-    <key>en</key>
-    <value>Role</value>
+    <key>tr</key>
+    <value>Rol</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Роль доступа</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Rol</value>
+    <key>en</key>
+    <value>Role</value>
    </synonym>
    <type>
     <types>String</types>
@@ -126,16 +126,16 @@
   <attributes uuid="c93d98a4-9921-4b01-b4c0-2b3f51fc4677">
    <name>Configuration</name>
    <synonym>
-    <key>en</key>
-    <value>Configuration</value>
+    <key>tr</key>
+    <value>Kongigürasyon</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Конфигурация</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Kongigürasyon</value>
+    <key>en</key>
+    <value>Configuration</value>
    </synonym>
    <type>
     <types>String</types>
@@ -155,30 +155,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <attributes uuid="f0826579-4946-4cd7-8473-5929f0b3e1f4">
    <name>Property</name>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Свойство</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -191,16 +191,16 @@
   <attributes uuid="1e115a3a-2cb1-4f4d-8ce3-a55682c29c1f">
    <name>Value</name>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -218,16 +218,16 @@
  <forms uuid="4d529441-1543-47ab-85c3-3005a7f0ac76">
   <name>ItemForm</name>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -235,16 +235,16 @@
  <forms uuid="6b81a5f9-c8ab-4431-83bf-abb2e105e495">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -252,16 +252,16 @@
  <forms uuid="41ea0f7c-7517-40e0-8840-76086134410e">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

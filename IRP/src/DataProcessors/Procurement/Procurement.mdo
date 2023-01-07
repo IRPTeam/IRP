@@ -6,23 +6,23 @@
  </producedTypes>
  <name>Procurement</name>
  <synonym>
-  <key>en</key>
-  <value>Procurement</value>
+  <key>tr</key>
+  <value>Tedarik şekli</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Обеспечение</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tedarik şekli</value>
+  <key>en</key>
+  <value>Procurement</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.Procurement.Form.Form</defaultForm>
  <forms uuid="967b7891-91c8-4e5e-a038-49554bf53fb5">
   <name>Form</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -30,7 +30,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
@@ -39,16 +39,16 @@
  <forms uuid="3409247c-15f1-4cbf-ba7e-a77d497553de">
   <name>FormCreateOrders</name>
   <synonym>
-   <key>en</key>
-   <value>Form create orders</value>
+   <key>tr</key>
+   <value>Sipariş oluşturma formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма создания заказов</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş oluşturma formu</value>
+   <key>en</key>
+   <value>Form create orders</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -56,16 +56,16 @@
  <forms uuid="1d9bcace-e258-4334-ba78-7b7730deb967">
   <name>FormSelectInternalSupplyRequest</name>
   <synonym>
-   <key>en</key>
-   <value>Select internal supply request</value>
+   <key>tr</key>
+   <value>İç talep siparişi seç</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Выбрать заявку на обеспечение товаром</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İç talep siparişi seç</value>
+   <key>en</key>
+   <value>Select internal supply request</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

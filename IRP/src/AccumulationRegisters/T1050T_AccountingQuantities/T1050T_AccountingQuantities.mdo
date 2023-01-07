@@ -10,16 +10,16 @@
  </producedTypes>
  <name>T1050T_AccountingQuantities</name>
  <synonym>
-  <key>en</key>
-  <value>T1050 Accounting quantities</value>
+  <key>tr</key>
+  <value>T1050 Muhasebe miktarlar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>T1050 Бухгалтерские количества</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>T1050 Muhasebe miktarlar</value>
+  <key>en</key>
+  <value>T1050 Accounting quantities</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +28,16 @@
  <resources uuid="38c943bd-6709-455d-a437-ae006f285767">
   <name>Quantity</name>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -49,16 +49,16 @@
  <dimensions uuid="e246bf1a-8a41-4dcb-b48e-ad25f910e9d8">
   <name>RowKey</name>
   <synonym>
-   <key>en</key>
-   <value>Row key</value>
+   <key>tr</key>
+   <value>Satır anahtarı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ключ строки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
+   <key>en</key>
+   <value>Row key</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>
@@ -72,16 +72,16 @@
  <dimensions uuid="688d050f-b03b-49a0-9aa7-2014aecbace2">
   <name>Operation</name>
   <synonym>
-   <key>en</key>
-   <value>Operation</value>
+   <key>tr</key>
+   <value>İşlem</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Операция</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İşlem</value>
+   <key>en</key>
+   <value>Operation</value>
   </synonym>
   <type>
    <types>CatalogRef.AccountingOperations</types>

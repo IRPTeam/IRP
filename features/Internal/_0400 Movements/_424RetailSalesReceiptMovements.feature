@@ -416,8 +416,7 @@ Scenario: _042419 check Retail sales receipt movements by the Register  "R4011 F
 			| 'Register  "R4011 Free stocks"'                        | ''            | ''                    | ''          | ''           | ''         |
 			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''         |
 			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key' |
-			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '1'         | 'Store 02'   | 'S/Yellow' |
-			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '2'         | 'Store 02'   | 'S/Yellow' |
+			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '3'         | 'Store 02'   | 'S/Yellow' |
 			| ''                                                     | 'Expense'     | '14.11.2022 13:29:44' | '4'         | 'Store 02'   | 'UNIQ'     |		
 		And I close all client application windows
 

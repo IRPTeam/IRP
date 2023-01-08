@@ -114,10 +114,10 @@ EndProcedure
 
 Async Procedure BeginConnectEquipment(Workstation) Export
 
-	ConnectionNotify = New NotifyDescription("ConnectHardware_End", ThisObject);
 	HardwareList = HardwareServer.GetAllWorkstationHardwareList(Workstation);
 
 	For Each Hardware In HardwareList Do
+		ConnectionNotify = New NotifyDescription("ConnectHardware_End", ThisObject, Hardware);
 		ResultData = Await ConnectHardware(Hardware);
 		ExecuteNotifyProcessing(ConnectionNotify, ResultData);
 	EndDo;
@@ -210,9 +210,9 @@ EndFunction
 
 Procedure ConnectHardware_End(Result, Param) Export
 	If Result.Result Then
-		Status(R().Eq_004);
+		Status(StrTemplate(R().Eq_004, Param));
 	Else
-		Status(R().Eq_005);
+		Status(StrTemplate(R().Eq_005, Param));
 	EndIf;
 EndProcedure
 
@@ -321,7 +321,13 @@ Procedure GetAdditionalActions_End(Result, Parameters, Settings) Export
 	ExecuteNotifyProcessing(Settings.Callback, Result);
 EndProcedure
 
-Procedure SetParameter_End(Result, Parameters, Settings) Export
+Procedure SetParameter_End(Result = True, Parameters = Undefined, Settings) Export
+	
+	If Not Result Then
+		ExecuteNotifyProcessing(Settings.ServiceCallback, Result);
+		Return;
+	EndIf;
+	
 	For Each Parameter In Settings.SetParameters Do
 		Notify = New NotifyDescription("SetParameter_End", ThisObject, Settings);
 		Settings.ConnectedDriver.DriverObject.НачатьВызовУстановитьПараметр(Notify, Parameter.Key, Parameter.Value);
@@ -330,7 +336,7 @@ Procedure SetParameter_End(Result, Parameters, Settings) Export
 	EndDo;
 	
 	If Settings.SetParameters.Count() = 0 Then
-		ExecuteNotifyProcessing(Settings.ServiceCallback, Settings);
+		ExecuteNotifyProcessing(Settings.ServiceCallback, Result);
 	EndIf;
 EndProcedure
 
@@ -343,9 +349,8 @@ Async Procedure TestDevice(Settings) Export
 		Return;
 	EndIf;
 	
-	Settings = Await FillDriverParametersSettings(Settings.Hardware);
 	Settings.ServiceCallback = New NotifyDescription("TestDevice_End", ThisObject, Settings);
-	SetParameter_End(Undefined, Undefined, Settings)
+	SetParameter_End(, , Settings)
 EndProcedure
 
 Procedure TestDevice_End(Result, Settings) Export

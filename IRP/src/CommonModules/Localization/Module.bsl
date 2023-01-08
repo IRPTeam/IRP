@@ -279,8 +279,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Eq_001", NStr("en = 'Installed'", Lang));
 	Strings.Insert("Eq_002", NStr("en = 'Not installed'", Lang));
 	Strings.Insert("Eq_003", NStr("en = 'There are no errors.'", Lang));
-	Strings.Insert("Eq_004", NStr("en = 'Scanner is connected.'", Lang));
-	Strings.Insert("Eq_005", NStr("en = 'Error. Scanner not connected.'", Lang));
+	Strings.Insert("Eq_004", NStr("en = '%1 connected.'", Lang));
+	Strings.Insert("Eq_005", NStr("en = '%1 NOT connected.'", Lang));
 	Strings.Insert("Eq_006", NStr("en = 'Installed on current PC.'", Lang));
 	Strings.Insert("Eq_007", NStr("en = 'Can not connect device %1'", Lang));
 

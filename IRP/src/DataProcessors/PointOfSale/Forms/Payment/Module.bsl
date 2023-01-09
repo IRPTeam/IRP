@@ -20,6 +20,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Object.Amount = Parameters.Amount;
 	Object.Branch = Parameters.Branch;
 	Object.Workstation = Parameters.Workstation;
+	Object.Discount = Parameters.Discount;
 	ThisObject.IsAdvance = Parameters.IsAdvance;
 	
 	FillPaymentTypes();

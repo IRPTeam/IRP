@@ -56,5 +56,13 @@
    <key>en</key>
    <value>Retail sales</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Розничный продажи</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Perakende satışlar</value>
+  </synonym>
  </enumValues>
 </mdclass:Enum>

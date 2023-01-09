@@ -192,6 +192,14 @@
    <key>en</key>
    <value>Mid name</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Отчество</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İkinci isim</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers>

@@ -13,6 +13,14 @@
   <key>en</key>
   <value>R3026 Sales orders customer advance</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R3026 Авансы покупателей по заказам покупателей</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R3026 Satış siparişlerin müşteri avansları</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <enableTotalsSplitting>true</enableTotalsSplitting>

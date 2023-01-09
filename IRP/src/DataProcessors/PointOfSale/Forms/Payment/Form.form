@@ -3132,6 +3132,14 @@
    <key>en</key>
    <value>Special offer</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Скидка</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Kampanya</value>
+  </title>
   <id>34</id>
   <valueType>
    <types>DefinedType.typeAmount</types>

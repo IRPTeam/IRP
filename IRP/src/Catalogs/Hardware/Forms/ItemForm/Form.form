@@ -1667,6 +1667,14 @@
    <key>en</key>
    <value>Reload settings</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Перезаполнить настройки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Ayarları tekrar yükle</value>
+  </title>
   <id>3</id>
   <use>
    <common>true</common>
@@ -1683,6 +1691,14 @@
   <title>
    <key>en</key>
    <value>Write settings</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Записать настройки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Ayarları kaydet</value>
   </title>
   <id>4</id>
   <use>

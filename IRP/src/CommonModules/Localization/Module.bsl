@@ -285,8 +285,12 @@ Function Strings(Lang) Export
 	Strings.Insert("Eq_003", NStr("en='There are no errors.';
 		|ru='Ошибок нет.';
 		|tr='Bir hata tespit edilemedi.'", Lang));
-	Strings.Insert("Eq_004", NStr("en='%1 connected.'", Lang));
-	Strings.Insert("Eq_005", NStr("en='%1 NOT connected.'", Lang));
+	Strings.Insert("Eq_004", NStr("en='%1 connected.';
+		|ru='%1 успешно присоединен.';
+		|tr='%1 başarıyla bağlandı.'", Lang));
+	Strings.Insert("Eq_005", NStr("en='%1 NOT connected.';
+		|ru='%1 НЕ присоединен.';
+		|tr='%1 bağlanamadı.'", Lang));
 	Strings.Insert("Eq_006", NStr("en='Installed on current PC.';
 		|ru='Установить на текущий компьютер';
 		|tr='Bu bilgisayara kurulmuştu.'", Lang));

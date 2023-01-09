@@ -22,6 +22,14 @@
    <key>en</key>
    <value>Amount</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма оплаты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar</value>
+  </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
   </type>
@@ -35,6 +43,14 @@
    <key>en</key>
    <value>Commission</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма комиссии</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Komisyon</value>
+  </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
   </type>
@@ -47,6 +63,14 @@
   <synonym>
    <key>en</key>
    <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -62,6 +86,14 @@
    <key>en</key>
    <value>Branch</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
   </type>
@@ -75,6 +107,14 @@
   <synonym>
    <key>en</key>
    <value>Payment type enum</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Тип вида оплаты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ödeme türü sıralaması</value>
   </synonym>
   <type>
    <types>EnumRef.PaymentTypes</types>
@@ -90,6 +130,14 @@
    <key>en</key>
    <value>Currency</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
   </type>
@@ -103,6 +151,14 @@
   <synonym>
    <key>en</key>
    <value>Retail customer</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Розничный покупатель</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Perakende müşteri</value>
   </synonym>
   <type>
    <types>CatalogRef.RetailCustomers</types>
@@ -118,6 +174,14 @@
    <key>en</key>
    <value>Order</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Заказ</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sipariş</value>
+  </synonym>
   <type>
    <types>DocumentRef.SalesOrder</types>
   </type>
@@ -131,6 +195,14 @@
   <synonym>
    <key>en</key>
    <value>Account</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Касса/банк</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Hesap</value>
   </synonym>
   <type>
    <types>CatalogRef.CashAccounts</types>
@@ -146,6 +218,14 @@
    <key>en</key>
    <value>Payment type</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид оплаты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ödeme tipi</value>
+  </synonym>
   <type>
    <types>CatalogRef.PaymentTypes</types>
   </type>
@@ -159,6 +239,14 @@
    <key>en</key>
    <value>Payment terminal</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Платежный терминал</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ödeme terminali</value>
+  </synonym>
   <type>
    <types>CatalogRef.PaymentTerminals</types>
   </type>
@@ -171,6 +259,14 @@
   <synonym>
    <key>en</key>
    <value>Bank term</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Соглашение с банком</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Banka sözleşmesi</value>
   </synonym>
   <type>
    <types>CatalogRef.BankTerms</types>

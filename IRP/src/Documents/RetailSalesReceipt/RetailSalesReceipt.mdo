@@ -1099,6 +1099,14 @@
     <key>en</key>
     <value>Sales order</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Заказ покупателя</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Satış siparişi</value>
+   </synonym>
    <type>
     <types>DocumentRef.SalesOrder</types>
    </type>
@@ -2737,6 +2745,14 @@
   <synonym>
    <key>en</key>
    <value>Retail sales receipt</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Реализация розничному покупателю</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Perakende satış fişi</value>
   </synonym>
   <group>FormCommandBarCreateBasedOn</group>
   <commandParameterType>

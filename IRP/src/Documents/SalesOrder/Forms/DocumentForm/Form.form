@@ -3832,6 +3832,14 @@
     <key>en</key>
     <value>Payments</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Платежи</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Ödemeler</value>
+   </title>
    <extendedTooltip>
     <name>GroupPaymentsExtendedTooltip</name>
     <id>877</id>

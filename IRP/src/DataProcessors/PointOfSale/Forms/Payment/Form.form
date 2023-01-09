@@ -324,6 +324,65 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
+     <name>SpecialOffer</name>
+     <id>192</id>
+     <titleFont xsi:type="core:FontRef">
+      <font>Style.ExtraLargeTextFont</font>
+      <bold>true</bold>
+      <italic>false</italic>
+      <underline>false</underline>
+      <strikeout>false</strikeout>
+     </titleFont>
+     <visible>true</visible>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.Discount</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>SpecialOfferExtendedTooltip</name>
+      <id>194</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>SpecialOfferContextMenu</name>
+      <id>193</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>LabelField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:LabelFieldExtInfo">
+      <autoMaxHeight>true</autoMaxHeight>
+      <horizontalStretch>true</horizontalStretch>
+      <font xsi:type="core:FontRef">
+       <font>Style.ExtraLargeTextFont</font>
+       <bold>true</bold>
+       <italic>false</italic>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
      <name>Amount</name>
      <id>19</id>
      <titleFont xsi:type="core:FontRef">
@@ -358,65 +417,6 @@
      <contextMenu>
       <name>AmountContextMenu</name>
       <id>20</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-     </contextMenu>
-     <type>LabelField</type>
-     <editMode>Enter</editMode>
-     <showInHeader>true</showInHeader>
-     <headerHorizontalAlign>Left</headerHorizontalAlign>
-     <showInFooter>true</showInFooter>
-     <extInfo xsi:type="form:LabelFieldExtInfo">
-      <autoMaxHeight>true</autoMaxHeight>
-      <horizontalStretch>true</horizontalStretch>
-      <font xsi:type="core:FontRef">
-       <font>Style.ExtraLargeTextFont</font>
-       <bold>true</bold>
-       <italic>false</italic>
-       <underline>false</underline>
-       <strikeout>false</strikeout>
-      </font>
-     </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
-     <name>Cashback</name>
-     <id>154</id>
-     <titleFont xsi:type="core:FontRef">
-      <font>Style.ExtraLargeTextFont</font>
-      <bold>true</bold>
-      <italic>false</italic>
-      <underline>false</underline>
-      <strikeout>false</strikeout>
-     </titleFont>
-     <visible>true</visible>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <dataPath xsi:type="form:DataPath">
-      <segments>Object.Cashback</segments>
-     </dataPath>
-     <extendedTooltip>
-      <name>CashbackExtendedTooltip</name>
-      <id>156</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-       <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-     </extendedTooltip>
-     <contextMenu>
-      <name>CashbackContextMenu</name>
-      <id>155</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -835,7 +835,7 @@
      <changeRowSet>true</changeRowSet>
      <changeRowOrder>true</changeRowOrder>
      <autoMaxWidth>true</autoMaxWidth>
-     <height>5</height>
+     <height>4</height>
      <autoMaxHeight>true</autoMaxHeight>
      <autoMaxRowsCount>true</autoMaxRowsCount>
      <selectionMode>MultiRow</selectionMode>
@@ -854,6 +854,65 @@
       <color>Style.FormBackColor</color>
      </borderColor>
      <rowFilter xsi:type="core:UndefinedValue"/>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>Cashback</name>
+     <id>154</id>
+     <titleFont xsi:type="core:FontRef">
+      <font>Style.ExtraLargeTextFont</font>
+      <bold>true</bold>
+      <italic>false</italic>
+      <underline>false</underline>
+      <strikeout>false</strikeout>
+     </titleFont>
+     <visible>true</visible>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.Cashback</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>CashbackExtendedTooltip</name>
+      <id>156</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>CashbackContextMenu</name>
+      <id>155</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>LabelField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:LabelFieldExtInfo">
+      <autoMaxHeight>true</autoMaxHeight>
+      <horizontalStretch>true</horizontalStretch>
+      <font xsi:type="core:FontRef">
+       <font>Style.ExtraLargeTextFont</font>
+       <bold>true</bold>
+       <italic>false</italic>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </extInfo>
     </items>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -3067,6 +3126,23 @@
    <common>true</common>
   </edit>
  </attributes>
+ <attributes>
+  <name>SpecialOffer</name>
+  <title>
+   <key>en</key>
+   <value>Special offer</value>
+  </title>
+  <id>34</id>
+  <valueType>
+   <types>DefinedType.typeAmount</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>Card</name>
   <title>
@@ -3574,7 +3650,7 @@
    <types>Number</types>
    <numberQualifiers>
     <precision>15</precision>
-    <scale>3</scale>
+    <scale>5</scale>
    </numberQualifiers>
   </valueType>
   <keyParameter>true</keyParameter>
@@ -3609,6 +3685,16 @@
   <name>Company</name>
   <valueType>
    <types>CatalogRef.Companies</types>
+  </valueType>
+ </parameters>
+ <parameters>
+  <name>Discount</name>
+  <valueType>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>15</precision>
+    <scale>5</scale>
+   </numberQualifiers>
   </valueType>
  </parameters>
  <commandInterface>

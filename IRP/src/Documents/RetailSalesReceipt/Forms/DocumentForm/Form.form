@@ -9107,6 +9107,14 @@
    <key>en</key>
    <value>Add basis documents</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Заполнить документы основания</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Kaynak evrak ekle</value>
+  </title>
   <id>11</id>
   <use>
    <common>true</common>
@@ -9127,6 +9135,14 @@
   <title>
    <key>en</key>
    <value>Link unlink basis documents</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Залинковать/разлинковать документы основания</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Bağlı olmayan kaynak evrakı ile bağlantı kur</value>
   </title>
   <id>12</id>
   <use>

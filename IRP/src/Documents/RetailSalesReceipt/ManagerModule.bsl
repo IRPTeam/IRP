@@ -11,6 +11,7 @@ EndFunction
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure();
 	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	
 	Query = New Query();
@@ -219,6 +220,11 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
+	If ValueIsFilled(Ref) Then
+		StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	Else
+		StrParams.Insert("BalancePeriod", Undefined);
+	EndIf;
 	Return StrParams;
 EndFunction
 
@@ -259,6 +265,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R9010B_SourceOfOriginStock());
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
+	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
+	QueryArray.Add(R4012B_StockReservation());
 	Return QueryArray;
 EndFunction
 
@@ -295,7 +303,6 @@ Function ItemList()
 	|	ItemList.Ref.Currency AS Currency,
 	|	ItemList.Ref.Date AS Period,
 	|	ItemList.Ref AS RetailSalesReceipt,
-//	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 	|	ItemList.IsService AS IsService,
 	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 	|	ItemList.RevenueType AS RevenueType,
@@ -308,6 +315,8 @@ Function ItemList()
 	|	ItemList.NetAmount AS NetAmount,
 	|	ItemList.OffersAmount AS OffersAmount,
 	|	ItemList.Ref AS Invoice,
+	|	ItemList.SalesOrder AS SalesOrder,
+	|	NOT ItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
 	|	ItemList.Key AS RowKey,
 	|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions,
 	|	ItemList.Ref.Branch AS Branch,
@@ -319,10 +328,13 @@ Function ItemList()
 	|	ItemList.PriceType,
 	|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
 	|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.OwnStocks) AS IsOwnStocks,
-	|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.ConsignorStocks) AS IsConsignorStocks
+	|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.ConsignorStocks) AS IsConsignorStocks,
+	|	TableRowIDInfo.RowID AS RowID
 	|INTO ItemList
 	|FROM
 	|	Document.RetailSalesReceipt.ItemList AS ItemList
+	|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+	|		ON ItemList.Key = TableRowIDInfo.Key
 	|WHERE
 	|	ItemList.Ref = &Ref";
 EndFunction
@@ -623,14 +635,140 @@ Function R3010B_CashOnHand()
 EndFunction
 
 Function R4011B_FreeStocks()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	*
-		   |INTO R4011B_FreeStocks
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService";
+	Return 
+		"SELECT
+		|	ItemList.Period AS Period,
+		|	ItemList.Store AS Store,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.SalesOrder AS SalesOrder,
+		|	ItemList.SalesOrderExists AS SalesOrderExists,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO ItemListGroup
+		|FROM
+		|	ItemList AS ItemList
+		|Where
+		|	NOT ItemList.IsService
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.SalesOrder,
+		|	ItemList.SalesOrderExists
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	StockReservation.Store AS Store,
+		|	StockReservation.Order AS Basis,
+		|	StockReservation.ItemKey AS ItemKey,
+		|	StockReservation.QuantityBalance AS Quantity
+		|INTO TmpStockReservation
+		|FROM
+		|	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
+		|		(SELECT
+		|			ItemList.Store,
+		|			ItemList.ItemKey,
+		|			ItemList.SalesOrder
+		|		FROM
+		|			ItemList AS ItemList)) AS StockReservation
+		|WHERE
+		|	StockReservation.QuantityBalance > 0
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemListGroup.Period AS Period,
+		|	ItemListGroup.Store AS Store,
+		|	ItemListGroup.ItemKey AS ItemKey,
+		|	ItemListGroup.Quantity - ISNULL(TmpStockReservation.Quantity, 0) AS Quantity
+		|INTO R4011B_FreeStocks
+		|FROM
+		|	ItemListGroup AS ItemListGroup
+		|		LEFT JOIN TmpStockReservation AS TmpStockReservation
+		|		ON (ItemListGroup.Store = TmpStockReservation.Store)
+		|		AND (ItemListGroup.ItemKey = TmpStockReservation.ItemKey)
+		|		AND TmpStockReservation.Basis = ItemListGroup.SalesOrder
+		|WHERE
+		|	ItemListGroup.Quantity > ISNULL(TmpStockReservation.Quantity, 0)
+		|
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|DROP ItemListGroup
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|DROP TmpStockReservation";
+EndFunction
+
+Function R4012B_StockReservation()
+	Return 
+		"SELECT
+		|	ItemList.Period AS Period,
+		|	ItemList.Store AS Store,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.SalesOrder AS SalesOrder,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO TmpItemListGroup
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.SalesOrderExists
+		|GROUP BY
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.SalesOrder
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	R4012B_StockReservationBalance.Store AS Store,
+		|	R4012B_StockReservationBalance.ItemKey AS ItemKey,
+		|	R4012B_StockReservationBalance.Order AS Order,
+		|	R4012B_StockReservationBalance.QuantityBalance AS QuantityBalance
+		|INTO TmpStockReservation
+		|FROM
+		|	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
+		|		(SELECT
+		|			ItemList.Store,
+		|			ItemList.ItemKey,
+		|			ItemList.SalesOrder
+		|		FROM
+		|			TmpItemListGroup AS ItemList)) AS R4012B_StockReservationBalance
+		|WHERE
+		|	R4012B_StockReservationBalance.QuantityBalance > 0
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemListGroup.Period AS Period,
+		|	ItemListGroup.SalesOrder AS Order,
+		|	ItemListGroup.ItemKey AS ItemKey,
+		|	ItemListGroup.Store AS Store,
+		|	CASE
+		|		WHEN StockReservation.QuantityBalance > ItemListGroup.Quantity
+		|			THEN ItemListGroup.Quantity
+		|		ELSE StockReservation.QuantityBalance
+		|	END AS Quantity
+		|INTO R4012B_StockReservation
+		|FROM
+		|	TmpItemListGroup AS ItemListGroup
+		|		INNER JOIN TmpStockReservation AS StockReservation
+		|		ON ItemListGroup.SalesOrder = StockReservation.Order
+		|		AND ItemListGroup.ItemKey = StockReservation.ItemKey
+		|		AND ItemListGroup.Store = StockReservation.Store
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|DROP TmpItemListGroup
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|DROP TmpStockReservation";
 EndFunction
 
 Function R4010B_ActualStocks()
@@ -993,7 +1131,6 @@ Function T6020S_BatchKeysInfo()
 		|		LEFT JOIN ConsignorBatches AS ConsignorBatches
 		|		ON ItemList.Key = ConsignorBatches.Key
 		|WHERE
-//		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
 		|	NOT ItemList.IsService
 		|;
 		|
@@ -1005,12 +1142,6 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_1.Period,
 		|	BatchKeysInfo_1.Direction,
 		|	BatchKeysInfo_1.BatchConsignor,
-//		|	SUM(CASE
-//		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
-//		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
-//		|		ELSE BatchKeysInfo_1.Quantity
-//		|	END) AS Quantity,
-		
 		|CASE WHEN BatchKeysInfo_1.IsConsignorBatches THEN
 	 	| BatchKeysInfo_1.ConsignorQuantity
 		|ELSE
@@ -1034,15 +1165,6 @@ Function T6020S_BatchKeysInfo()
 		|			else true
 		|		end
 		|;
-//		|GROUP BY
-//		|	BatchKeysInfo_1.ItemKey,
-//		|	BatchKeysInfo_1.Store,
-//		|	BatchKeysInfo_1.Company,
-//		|	BatchKeysInfo_1.Period,
-//		|	BatchKeysInfo_1.Direction,
-//		|	BatchKeysInfo_1.BatchConsignor,
-//		|	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)),
-//		|	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef))";
 		|SELECT
 		|	BatchKeysInfo.ItemKey,
 		|	BatchKeysInfo.Store,
@@ -1116,12 +1238,6 @@ Function R8013B_ConsignorBatchWiseBalance()
 		|	ConsignorBatchWiseBalance_1.Batch,
 		|	ConsignorBatchWiseBalance_1.ItemKey,
 		|	ConsignorBatchWiseBalance_1.Store,
-//		|	SUM(CASE
-//		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
-//		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
-//		|		ELSE ConsignorBatchWiseBalance_1.Quantity
-//		|	END) AS Quantity,
-		|	
 		|	SUM(ISNULL(ConsignorBatchWiseBalance_1.Quantity, 0)) AS Quantity,
 		|
 		|	SourceOfOrigins.SourceOfOriginStock AS SourceOfOrigin,
@@ -1161,7 +1277,6 @@ Function R8014T_ConsignorSales()
 		|	ItemList.Price,
 		|	ItemList.PriceType,
 		|	ItemList.PriceIncludeTax,
-//		|	ConsignorBatches.Quantity TotalQuantity,
 		|	ConsignorBatches.Quantity,
 		|	CASE
 		|		WHEN ItemList.Quantity = 0
@@ -1186,15 +1301,9 @@ Function R8014T_ConsignorSales()
 		|SELECT
 		|
 		|	ConsignorSales.*,
-//		|	ConsignorSales.TotalQuantity,
 		|	ConsignorSales.Quantity,
 		|	ConsignorSales.NetAmount,
 		|	ConsignorSales.Amount,
-//		|	CASE
-//		|		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
-//		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
-//		|		ELSE ConsignorSales.TotalQuantity
-//		|	END AS Quantity,
 		|	SourceOfOrigins.SourceOfOriginStock AS SourceOfOrigin,
 		|	SourceOfOrigins.SerialLotNumberStock AS SerialLotNumber
 		|INTO ConsignorSales_1
@@ -1210,7 +1319,6 @@ Function R8014T_ConsignorSales()
 		|
 		|	ConsignorSales_1.*,
 		|	ConsignorSales_1.Key,
-//		|	ConsignorSales_1.TotalQuantity,
 		|	ConsignorSales_1.NetAmount,
 		|	ConsignorSales_1.Amount,
 		|	ConsignorPrices.Price AS ConsignorPrice
@@ -1232,21 +1340,32 @@ Function R8014T_ConsignorSales()
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	ConsignorSales_1_1.*
-//		|	CASE
-//		|		WHEN ConsignorSales_1_1.TotalQuantity = 0
-//		|			THEN 0
-//		|		ELSE (ConsignorSales_1_1.NetAmount / ConsignorSales_1_1.TotalQuantity) * ConsignorSales_1_1.Quantity
-//		|	END AS NetAmount,
-//		|	CASE
-//		|		WHEN ConsignorSales_1_1.TotalQuantity = 0
-//		|			THEN 0
-//		|		ELSE (ConsignorSales_1_1.Amount / ConsignorSales_1_1.TotalQuantity) * ConsignorSales_1_1.Quantity
-//		|	END AS Amount
 		|INTO R8014T_ConsignorSales
 		|FROM
 		|	ConsignorSales_1_1 AS ConsignorSales_1_1
 		|WHERE
 		|	TRUE";
+EndFunction
+
+Function R2012B_SalesOrdersInvoiceClosing()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period AS Period,
+		|	ItemList.Company AS Company,
+		|	ItemList.Branch AS Branch,
+		|	ItemList.SalesOrder AS Order,
+		|	ItemList.Currency AS Currency,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.RowID AS RowKey,
+		|	ItemList.Quantity AS Quantity,
+		|	ItemList.TotalAmount AS Amount,
+		|	ItemList.NetAmount AS NetAmount
+		|INTO R2012B_SalesOrdersInvoiceClosing
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.SalesOrderExists";
 EndFunction
 
 #EndRegion

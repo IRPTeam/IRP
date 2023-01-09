@@ -264,6 +264,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2014S_AdvancesInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
+	QueryArray.Add(R3026B_SalesOrdersCustomerAdvance());
 	Return QueryArray;
 EndFunction
 
@@ -597,21 +598,43 @@ EndFunction
 
 Function R3024B_SalesOrdersToBePaid()
 	Return 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	PaymentList.Period,
-	|	PaymentList.Company,
-	|	PaymentList.Branch,
-	|	PaymentList.Currency,
-	|	PaymentList.Partner,
-	|	PaymentList.LegalName,
-	|	PaymentList.Order,
-	|	PaymentList.Amount
-	|INTO R3024B_SalesOrdersToBePaid
-	|FROM
-	|	PaymentList AS PaymentList
-	|WHERE
-	|	NOT PaymentList.Order.Ref IS NULL";
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Currency,
+		|	PaymentList.Partner,
+		|	PaymentList.LegalName,
+		|	PaymentList.Order,
+		|	PaymentList.Amount
+		|INTO R3024B_SalesOrdersToBePaid
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	NOT PaymentList.Order.Ref IS NULL
+		|	AND PaymentList.IsPaymentFromCustomer";
+EndFunction
+
+Function R3026B_SalesOrdersCustomerAdvance()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Currency,
+		|	VALUE(Enum.PaymentTypes.Cash) AS PaymentTypeEnum,
+		|	PaymentList.RetailCustomer,
+		|	PaymentList.CashAccount AS Account,
+		|	PaymentList.Order,
+		|	PaymentList.Amount
+		|INTO R3026B_SalesOrdersCustomerAdvance
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	NOT PaymentList.Order.Ref IS NULL
+		|	AND PaymentList.IsCustomerAdvance";
 EndFunction
 
 Function T2014S_AdvancesInfo()

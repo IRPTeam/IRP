@@ -121,7 +121,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(R5011B_CustomersAging());
-	
+	QueryArray.Add(R3026B_SalesOrdersCustomerAdvance());
 	Return QueryArray;
 EndFunction
 
@@ -296,6 +296,18 @@ Function R3024B_SalesOrdersToBePaid()
 	|INTO R3024B_SalesOrdersToBePaid
 	|FROM
 	|	AccumulationRegister.R3024B_SalesOrdersToBePaid.Balance(&BalancePeriod, Order = &SalesOrder) AS Balance";
+EndFunction
+
+Function R3026B_SalesOrdersCustomerAdvance()
+	Return 
+	"SELECT
+	|	&Period AS Period,
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	Balance.AmountBalance AS Amount,
+	|	*
+	|INTO R3026B_SalesOrdersCustomerAdvance
+	|FROM
+	|	AccumulationRegister.R3026B_SalesOrdersCustomerAdvance.Balance(&BalancePeriod, Order = &SalesOrder) AS Balance";
 EndFunction
 
 Function T2014S_AdvancesInfo()

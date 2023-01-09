@@ -981,3 +981,16 @@ Function GetRelatedDocuments(DocumentRef, WithoutDeleted = False) Export
 	EndIf;
 	Return Query.Execute().Unload().UnloadColumn(0);
 EndFunction
+
+// Delete from array if present.
+// 
+// Parameters:
+//  Array - Array
+//  Value - Arbitrary
+Procedure DeleteFormArrayIfPresent(Array, Value) Export
+	Index = Array.Find(Value);
+	If Index <> Undefined Then
+		Array.Delete(Index);
+	EndIf;
+EndProcedure	
+	

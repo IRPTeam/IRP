@@ -215,6 +215,18 @@ Function GetLinkedDocumentsFilter_RRR(Object) Export
 	Return Filter;
 EndFunction
 
+Function GetLinkedDocumentsFilter_RSR(Object) Export
+	Filter = New Structure();
+	Filter.Insert("Company"              , Object.Company);
+	Filter.Insert("Branch"               , Object.Branch);
+	Filter.Insert("RetailCustomer"       , Object.RetailCustomer);
+	Filter.Insert("CurrencySales"        , Object.Currency);
+	Filter.Insert("TransactionTypeSales" , PredefinedValue("Enum.SalesTransactionTypes.RetailSales"));
+	Filter.Insert("PriceIncludeTaxSales" , Object.PriceIncludeTax);
+	Filter.Insert("Ref"                  , Object.Ref);
+	Return Filter;
+EndFunction
+
 Function GetLinkedDocumentsFilter_WO(Object) Export
 	Filter = New Structure();
 	Filter.Insert("Company"              , Object.Company);

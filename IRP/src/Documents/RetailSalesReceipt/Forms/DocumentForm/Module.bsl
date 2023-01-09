@@ -86,7 +86,10 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.ReadOnly = DocConsolidatedRetailSalesServer.IsClosedRetailDocument(Object.Ref);
 	
-	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrencies.Enabled           = Not Form.ReadOnly;
+	Form.Items.AddBasisDocuments.Enabled        = Not Form.ReadOnly;
+	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
+	
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 	
 	UseConsolidatedRetailSales = DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch);
@@ -616,6 +619,58 @@ EndProcedure
 #EndRegion
 
 #Region LINKED_DOCUMENTS
+
+&AtClient
+Procedure LinkUnlinkBasisDocuments(Command)
+	FormParameters = New Structure();
+	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_RSR(Object));
+	FormParameters.Insert("SelectedRowInfo", RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
+	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", ThisObject);
+	OpenForm("CommonForm.LinkUnlinkDocumentRows", FormParameters, , , , ,
+		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject, NotifyParameters), 
+			FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure AddBasisDocuments(Command)
+	FormParameters = New Structure();
+	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_RSR(Object));
+	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", ThisObject);
+	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
+		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject, NotifyParameters), 
+			FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	ThisObject.Modified = True;
+	ExtractedData = AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
+	If ExtractedData <> Undefined Then
+		ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, ThisObject, "ItemList");
+	EndIf;
+EndProcedure
+
+&AtServer
+Function AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
+	ExtractedData = Undefined;
+	If Result.Operation = "LinkUnlinkDocumentRows" Then
+		LinkedResult = RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
+	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
+		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+	EndIf;
+	ExtractedData = ControllerClientServer_V2.AddLinkedDocumentRows(Object, ThisObject, LinkedResult, "ItemList");
+	LockLinkedRows();
+	Return ExtractedData;
+EndFunction
 
 &AtServer
 Procedure LockLinkedRows()

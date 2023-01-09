@@ -65,10 +65,6 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create catalog ExpenseAndRevenueTypes objects
 	* Tax settings
 		When filling in Tax settings for company
-	* Add sales tax
-		When Create catalog Taxes objects (Sales tax)
-		When Create information register TaxSettings (Sales tax)
-		When Create information register Taxes records (Sales tax)
 		When Create catalog RetailCustomers objects (check POS)
 		When Create catalog UserGroups objects
 	* Create payment terminal
@@ -146,7 +142,12 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create document RetailSalesReceipt objects (with retail customer)
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);" |
-	
+	* Load RSO
+		When create RetailSalesOrder objects
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(315).GetObject().Write(DocumentWriteMode.Posting);" |	
 	
 Scenario: _01541001 check preparation
 	When check preparation	
@@ -4425,7 +4426,228 @@ Scenario: _0154199 copy line in Payment tab in the Retail sales receipt
 		
 				
 				
+Scenario: _0154250 create retail sales order
+	* Preparation
+		When set True value to the constant Use commission trading
+		And I close TestClient session
+		Given I open new TestClient session or connect the existing one
+	* Create retail sales receipt (with pre-payment)
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		* Filling header
+			And I select "Retail sales" exact value from "Transaction type" drop-down list
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And I click Select button of "Retail customer" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Sam Jons'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+		* Check filling
+			Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
+			Then the form attribute named "Partner" became equal to "Retail customer"
+			Then the form attribute named "LegalName" became equal to "Company Retail customer"
+			Then the form attribute named "Agreement" became equal to "Retail partner term"
+			Then the form attribute named "Status" became equal to "Approved"
+			Then the form attribute named "Company" became equal to "Main Company"
+			Then the form attribute named "TransactionType" became equal to "Retail sales"		
+		* Filling items tab
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate "Item" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I activate field named "Description" in "List" table
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XS/Blue'  |
+			And I activate field named "ItemKey" in "List" table
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate "Item" field in "ItemList" table
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Boots'       |
+			And I select current line in "List" table
+			And I activate "Item key" field in "ItemList" table
+			And I click choice button of "Item key" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Boots' | '37/18SD'  |
+			And I select current line in "List" table
+		* Filling payments
+			And I move to "Payments" tab
+			And in the table "Payments" I click the button named "PaymentsAdd"
+			And I activate "Payment type" field in "Payments" table
+			And I select current line in "Payments" table
+			And I click choice button of "Payment type" attribute in "Payments" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Card 02'     |
+			And I activate field named "Description" in "List" table
+			And I select current line in "List" table
+			And I activate "Bank term" field in "Payments" table
+			And I click choice button of "Bank term" attribute in "Payments" table
+			Then "Bank terms" window is opened
+			And I activate field named "Description" in "List" table
+			And I select current line in "List" table
+			And I activate field named "PaymentsAmount" in "Payments" table
+			And I input "1 000,00" text in the field named "PaymentsAmount" of "Payments" table
+			And I finish line editing in "Payments" table
+			And I click "Post" button
+		* Check payments
+			And "Payments" table became equal
+				| '#' | 'Amount'   | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term'    | 'Account' | 'Percent' |
+				| '1' | '1 000,00' | '20,00'      | 'Card 02'      | ''                 | 'Bank term 01' | ''        | '2,00'    |
+		* Post Sales order
+			And I delete "$$NumberSalesOrder50$$" variable
+			And I delete "$$SalesOrder50$$" variable
+			And I save the value of "Number" field as "$$NumberSalesOrder50$$"
+			And I click the button named "FormPost"
+			And I save the window as "$$SalesOrder50$$"
+			And I click the button named "FormPostAndClose"
+			And "List" table contains lines
+				| 'Number'                 |
+				| '$$NumberSalesOrder50$$' |
+			And I close all client application windows
+						
+					
+Scenario: _0154255 create Bank receipt based on retail sales order
+	And I close all client application windows
+	* Select retail sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"									
+		And I go to line in "List" table
+			| 'Number' |
+			| '314'    |
+	* Create bank receipt
+		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
+		And I click Choice button of the field named "Account"
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Bank account, TRY' |
+		And I select current line in "List" table
+	* Check filling
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
+		Then the form attribute named "TransactionType" became equal to "Customer advance"
+		Then the form attribute named "Currency" became equal to "TRY"
+		And "PaymentList" table became equal
+			| '#' | 'Commission' | 'Retail customer' | 'Expense type' | 'Payment type' | 'Commission percent' | 'Additional analytic' | 'Payment terminal' | 'Bank term'    | 'Order'                                     | 'Total amount' | 'Financial movement type' | 'Profit loss center' |
+			| '1' | '20,00'      | 'Sam Jons'        | ''             | 'Card 02'      | '2,00'               | ''                    | ''                 | 'Bank term 01' | 'Sales order 314 dated 09.01.2023 12:49:08' | '1 000,00'     | ''                        | ''                   |
+		And I click "Post" button
+		And I delete "$$NumberBankReceipt314$$" variable
+		And I delete "$$BankReceipt314$$" variable
+		And I save the value of "Number" field as "$$NumberBankReceipt314$$"
+		And I click the button named "FormPost"
+		And I save the window as "$$BankReceipt314$$"
+		And I click the button named "FormPostAndClose"
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And "List" table contains lines
+			| 'Number'                 |
+			| '$$NumberBankReceipt314$$' |
+		And I close all client application windows		
+				
+	
+		
+Scenario: _0154260 create Cash receipt based on retail sales order
+	And I close all client application windows
+	* Select retail sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"									
+		And I go to line in "List" table
+			| 'Number' |
+			| '315'    |
+	* Create cash receipt
+		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
+	* Check filling
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "CashAccount" became equal to "Cash desk №1"
+		Then the form attribute named "TransactionType" became equal to "Customer advance"
+		Then the form attribute named "Currency" became equal to "TRY"
+		And "PaymentList" table became equal
+			| '#' | 'Retail customer' | 'Order'                                     | 'Total amount' | 'Financial movement type' |
+			| '1' | 'Sam Jons'        | 'Sales order 315 dated 09.01.2023 13:02:11' | '1 000,00'     | ''                        |
+		And I click "Post" button
+		And I delete "$$NumberCashReceipt315$$" variable
+		And I delete "$$CashReceipt315$$" variable
+		And I save the value of "Number" field as "$$NumberCashReceipt315$$"
+		And I click the button named "FormPost"
+		And I save the window as "$$CashReceipt315$$"
+		And I click the button named "FormPostAndClose"
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"		
+		And "List" table contains lines
+			| 'Number'                 |
+			| '$$NumbeCashReceipt315$$' |
+		And I close all client application windows
 
+Scenario: _0154265 create retail sales receipt based on retail sales order
+	And I close all client application windows
+	* Select retail sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"									
+		And I go to line in "List" table
+			| 'Number' |
+			| '314'    |
+	* Create retail sales receipt
+		And I click the button named "FormDocumentRetailSalesReceiptGenarate"
+		And I click "Ok" button
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table became equal
+			| '#' | 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' | 'Sales order'                               | 'Revenue type' |
+			| '1' | 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | ''                   | 'No'                 | ''                   | 'pcs'  | '158,64'     | ''                  | '2,000'    | '520,00' | '18%' | ''              | '881,36'     | '1 040,00'     | ''                    | 'Store 01' | ''       | 'Sales order 314 dated 09.01.2023 12:49:08' | ''             |
+			| '2' | 'Own stocks'       | ''             | 'Basic Price Types' | 'Boots' | '37/18SD'  | ''                   | 'No'                 | ''                   | 'pcs'  | '213,56'     | ''                  | '2,000'    | '700,00' | '18%' | ''              | '1 186,44'   | '1 400,00'     | ''                    | 'Store 01' | ''       | 'Sales order 314 dated 09.01.2023 12:49:08' | ''             |
+		And "Payments" table became equal
+			| '#' | 'Amount'   | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term'    | 'Account' | 'Percent' |
+			| '1' | '1 000,00' | '20,00'      | 'Card 02'      | ''                 | 'Bank term 01' | ''        | '2,00'    |
+		And I move to "Payments" tab
+		And in the table "Payments" I click "Add" button
+		And I activate "Payment type" field in "Payments" table
+		And I select current line in "Payments" table
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Cash'        |
+		And I select current line in "List" table
+		And I activate "Account" field in "Payments" table
+		And I click choice button of "Account" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №2' |
+		And I select current line in "List" table
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I input "1 440,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table	
+		And I click "Post" button
+		And I delete "$$NumberRetailSalesReceipt314$$" variable
+		And I delete "$$RetailSalesReceipt314$$" variable
+		And I save the value of "Number" field as "$$NumberRetailSalesReceipt314$$"
+		And I click the button named "FormPost"
+		And I save the window as "$$RetailSalesReceipt314$$"
+		And I click the button named "FormPostAndClose"
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"		
+		And "List" table contains lines
+			| 'Number'                 |
+			| '$$NumberRetailSalesReceipt314$$' |
+		And I close all client application windows
+						
+
+
+
+
+		
+		 
 		
 				
 		

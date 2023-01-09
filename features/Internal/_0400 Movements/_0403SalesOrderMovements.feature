@@ -79,6 +79,11 @@ Scenario: _040148 preparation (sales order movements)
 		When Create document SalesOrder objects (check movements, SC before SI, not Use shipment sheduling)
 		When Create document SalesOrder objects (with aging, prepaid)
 		When Create document SalesOrder objects (with aging, post-shipment credit)
+		When create RetailSalesOrder objects
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(315).GetObject().Write(DocumentWriteMode.Posting);" |	
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server	
@@ -395,6 +400,41 @@ Scenario: _0401571 check Sales order movements by the Register  "R4012 Stock Res
 			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          | ''                                          |
 			| ''                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  | 'Order'                                     |
 			| ''                                          | 'Receipt'     | '02.06.2021 00:00:00' | '1'         | 'Store 02'   | '36/Yellow' | 'Sales order 112 dated 30.05.2021 12:24:18' |		
+		And I close all client application windows
+
+Scenario: _0401572 check Retail Sales order movements by the Register  "R3026 Sales orders customer advance"
+	* Select Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '314' |
+	* Check movements by the Register  "R3026 Sales orders customer advance" 
+		And I click "Registrations report" button
+		And I select "R3026 Sales orders customer advance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales order 314 dated 09.01.2023 12:49:08'       | ''            | ''                    | ''          | ''           | ''             | ''       | ''                  | ''         | ''                | ''                                          | ''        | ''             | ''                 | ''             |
+			| 'Document registrations records'                  | ''            | ''                    | ''          | ''           | ''             | ''       | ''                  | ''         | ''                | ''                                          | ''        | ''             | ''                 | ''             |
+			| 'Register  "R3026 Sales orders customer advance"' | ''            | ''                    | ''          | ''           | ''             | ''       | ''                  | ''         | ''                | ''                                          | ''        | ''             | ''                 | ''             |
+			| ''                                                | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''       | ''                  | ''         | ''                | ''                                          | ''        | ''             | ''                 | ''             |
+			| ''                                                | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch' | 'Payment type enum' | 'Currency' | 'Retail customer' | 'Order'                                     | 'Account' | 'Payment type' | 'Payment terminal' | 'Bank term'    |
+			| ''                                                | 'Receipt'     | '09.01.2023 12:49:08' | '1 000'     | '20'         | 'Main Company' | ''       | 'Card'              | 'TRY'      | 'Sam Jons'        | 'Sales order 314 dated 09.01.2023 12:49:08' | ''        | 'Card 02'      | ''                 | 'Bank term 01' |		
+		And I close all client application windows
+
+Scenario: _0401574 check there is no Sales order movements by the Register  "R3026 Sales orders customer advance"
+	* Select Sales order
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R3026 Sales orders customer advance" 
+		And I click "Registrations report" button
+		And I select "R3026 Sales orders customer advance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales order 1 dated 27.01.2021 19:50:45' |
+			| 'Document registrations records'          |
 		And I close all client application windows
 
 Scenario: _0401573 Sales order clear posting/mark for deletion

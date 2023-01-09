@@ -144,12 +144,18 @@ Scenario: _043400 preparation (Bank receipt)
 				| "Documents.SalesReturn.FindByNumber(104).GetObject().Write(DocumentWriteMode.Posting);" |
 			And I execute 1C:Enterprise script at server
 				| "Documents.SalesReturn.FindByNumber(105).GetObject().Write(DocumentWriteMode.Posting);" |
+		When create RetailSalesOrder objects
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(315).GetObject().Write(DocumentWriteMode.Posting);" |	
 	* Load Bank receipt
 		When Create document BankReceipt objects
 		When Create document BankReceipt objects (exchange and transfer)
 		When Create document BankReceipt objects (advance)
 		When Create document BankReceipt objects (POS)
 		When Create document Bank receipt (Customer advance)
+		When Create document BankReceipt objects (retail customer advance)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
@@ -172,6 +178,8 @@ Scenario: _043400 preparation (Bank receipt)
 			| "Documents.BankReceipt.FindByNumber(1521).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(1522).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		If "List" table contains lines Then
 				| 'Number'  |
@@ -892,6 +900,26 @@ Scenario: _0434297 check Bank receipt movements by the Register  "R3050 Pos cash
 			| ''                                          | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''        | ''             | ''             | ''                 |
 			| ''                                          | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Payment type' | 'Account'      | 'Payment terminal' |
 			| ''                                          | '29.12.2022 15:11:54' | '100'       | ''           | 'Main Company' | 'Shop 02' | 'Card 01'      | 'Transit Main' | ''                 |		
+	And I close all client application windows
+
+Scenario: _0434298 check Bank receipt movements by the Register  "R3026 Sales orders customer advance" (advance from retail customer, sales order)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '314'      |
+	* Check movements by the Register  "R3026 Sales orders customer advance" 
+		And I click "Registrations report" button
+		And I select "R3026 Sales orders customer advance" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 314 dated 09.01.2023 13:12:24'      | ''            | ''                    | ''          | ''           | ''             | ''       | ''                  | ''         | ''                | ''                                          | ''                  | ''             | ''                 | ''             |
+			| 'Document registrations records'                  | ''            | ''                    | ''          | ''           | ''             | ''       | ''                  | ''         | ''                | ''                                          | ''                  | ''             | ''                 | ''             |
+			| 'Register  "R3026 Sales orders customer advance"' | ''            | ''                    | ''          | ''           | ''             | ''       | ''                  | ''         | ''                | ''                                          | ''                  | ''             | ''                 | ''             |
+			| ''                                                | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''       | ''                  | ''         | ''                | ''                                          | ''                  | ''             | ''                 | ''             |
+			| ''                                                | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch' | 'Payment type enum' | 'Currency' | 'Retail customer' | 'Order'                                     | 'Account'           | 'Payment type' | 'Payment terminal' | 'Bank term'    |
+			| ''                                                | 'Expense'     | '09.01.2023 13:12:24' | '1 000'     | '20'         | 'Main Company' | ''       | 'Card'              | 'TRY'      | 'Sam Jons'        | 'Sales order 314 dated 09.01.2023 12:49:08' | 'Bank account, TRY' | 'Card 02'      | ''                 | 'Bank term 01' |
 	And I close all client application windows
 
 Scenario: _043430 Bank receipt clear posting/mark for deletion

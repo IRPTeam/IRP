@@ -116,6 +116,15 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 			| "Documents.RetailSalesReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(112).GetObject().Write(DocumentWriteMode.Posting);" |
+		When create RetailSalesOrder objects
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(315).GetObject().Write(DocumentWriteMode.Posting);" |	
+		When Create document Retail sales receipt (based on retail sales order)
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);" |	
+
 
 Scenario: _0424001 check preparation
 	When check preparation
@@ -572,6 +581,42 @@ Scenario: _042426 check Retail sales receipt movements by the Register  "R2023 A
 			| ''                                                   | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Retail customer' |
 			| ''                                                   | 'Expense'     | '29.12.2022 17:25:31' | '500'       | 'Main Company' | 'Shop 02' | 'Sam Jons'        |		
 		And I close all client application windows
+
+Scenario: _042427 check Retail sales receipt movements by the Register  "R3026 Sales orders customer advance" (based on sales order) 
+		And I close all client application windows	
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '314' |
+	* Check movements by the Register  "R3026 Sales orders customer advance"
+		And I click "Registrations report" button
+		And I select "R3026 Sales orders customer advance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales order 314 dated 09.01.2023 12:49:08'       | ''            | ''                    | ''          | ''           | ''             | ''       | ''                  | ''         | ''                | ''                                          | ''        | ''             | ''                 | ''             |
+			| 'Document registrations records'                  | ''            | ''                    | ''          | ''           | ''             | ''       | ''                  | ''         | ''                | ''                                          | ''        | ''             | ''                 | ''             |
+			| 'Register  "R3026 Sales orders customer advance"' | ''            | ''                    | ''          | ''           | ''             | ''       | ''                  | ''         | ''                | ''                                          | ''        | ''             | ''                 | ''             |
+			| ''                                                | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''       | ''                  | ''         | ''                | ''                                          | ''        | ''             | ''                 | ''             |
+			| ''                                                | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch' | 'Payment type enum' | 'Currency' | 'Retail customer' | 'Order'                                     | 'Account' | 'Payment type' | 'Payment terminal' | 'Bank term'    |
+			| ''                                                | 'Receipt'     | '09.01.2023 12:49:08' | '1 000'     | '20'         | 'Main Company' | ''       | 'Card'              | 'TRY'      | 'Sam Jons'        | 'Sales order 314 dated 09.01.2023 12:49:08' | ''        | 'Card 02'      | ''                 | 'Bank term 01' |		
+		And I close all client application windows
+
+Scenario:_042428 check Retail sales receipt movements by the Register  "R3026 Sales orders customer advance" (without sales order)
+	And I close all client application windows
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '112' |
+	* Check movements by the Register  "R3026 Sales orders customer advance" 
+		And I click "Registrations report" button
+		And I select "R3026 Sales orders customer advance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| Register  "R3026 Sales orders customer advance" |
+		And I close all client application windows
+
 
 Scenario: _042430 Retail sales receipt clear posting/mark for deletion
 	And I close all client application windows

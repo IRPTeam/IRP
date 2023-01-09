@@ -643,8 +643,9 @@ Function R3010B_CashOnHand()
 	|FROM
 	|	PaymentList AS PaymentList
 	|WHERE
-	|	PaymentList.IsTransferFromPOS
-	|	AND NOT PaymentList.CommissionIsSeparate";
+	|	(PaymentList.IsTransferFromPOS
+	|	AND NOT PaymentList.CommissionIsSeparate)
+	|	OR (PaymentList.IsPaymentFromCustomerByPOS)";
 EndFunction
 
 Function R3035T_CashPlanning()
@@ -691,7 +692,7 @@ Function R5022T_Expenses()
 	|FROM
 	|	PaymentList AS PaymentList
 	|WHERE
-	|	PaymentList.Commission <> 0 AND NOT PaymentList.IsPaymentFromCustomerByPOS";
+	|	PaymentList.Commission <> 0";
 EndFunction
 
 Function R3024B_SalesOrdersToBePaid()

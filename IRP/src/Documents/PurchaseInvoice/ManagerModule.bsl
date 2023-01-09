@@ -1328,6 +1328,7 @@ Function R8012B_ConsignorInventory()
 		|	ItemList.ItemKey,
 		|	ItemList.Partner,
 		|	ItemList.Agreement,
+		|	ItemList.LegalName,
 		|	SUM(case
 		|		when SerialLotNumbers.SerialLotNumber.Ref IS NULL
 		|			Then ItemList.Quantity
@@ -1349,6 +1350,7 @@ Function R8012B_ConsignorInventory()
 		|	ItemList.ItemKey,
 		|	ItemList.Partner,
 		|	ItemList.Agreement,
+		|	ItemList.LegalName,
 		|	SerialLotNumbers.SerialLotNumber";
 EndFunction
 

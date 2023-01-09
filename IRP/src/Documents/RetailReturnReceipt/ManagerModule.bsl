@@ -1276,6 +1276,11 @@ Function R8012B_ConsignorInventory()
 		|	ConsignorBatches.SerialLotNumber,
 		|	ConsignorBatches.Batch.Partner AS Partner,
 		|	ConsignorBatches.Batch.Agreement AS Agreement,
+		|	CASE
+		|		WHEN ConsignorBatches.Batch REFS Document.OpeningEntry
+		|			THEN ConsignorBatches.Batch.LegalNameConsignor
+		|		ELSE ConsignorBatches.Batch.LegalName
+		|	END AS LegalName,
 		|	SUM(ConsignorBatches.Quantity) AS Quantity
 		|INTO R8012B_ConsignorInventory
 		|FROM
@@ -1288,7 +1293,12 @@ Function R8012B_ConsignorInventory()
 		|	ConsignorBatches.ItemKey,
 		|	ConsignorBatches.SerialLotNumber,
 		|	ConsignorBatches.Batch.Partner,
-		|	ConsignorBatches.Batch.Agreement";		
+		|	ConsignorBatches.Batch.Agreement,
+		|	CASE
+		|		WHEN ConsignorBatches.Batch REFS Document.OpeningEntry
+		|			THEN ConsignorBatches.Batch.LegalNameConsignor
+		|		ELSE ConsignorBatches.Batch.LegalName
+		|	END";		
 EndFunction
 		
 Function R8014T_ConsignorSales()

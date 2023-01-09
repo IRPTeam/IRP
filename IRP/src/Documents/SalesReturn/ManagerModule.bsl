@@ -680,7 +680,6 @@ Function ItemList()
 	|	NOT GoodsReceipts.Key IS NULL AS GoodsReceiptExists,
 	|	GoodsReceipts.GoodsReceipt,
 	|	ItemList.NetAmount,
-//	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 	|	ItemList.IsService AS IsService,
 	|	ItemList.ReturnReason,
 	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
@@ -1411,8 +1410,6 @@ Function T6020S_BatchKeysInfo()
 		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
 		|		ELSE ItemList.Quantity
 		|	END) AS Quantity,
-		
-//		|	SUM(ItemList.Quantity),
 		|	0,
 		|	0,
 		|	UNDEFINED,
@@ -1445,6 +1442,7 @@ Function R8010B_TradeAgentInventory()
 		|	ItemList.ItemKey,
 		|	ItemList.Partner,
 		|	ItemList.Agreement,
+		|	ItemList.LegalName,
 		|	SUM(ItemList.Quantity) AS Quantity
 		|INTO R8010B_TradeAgentInventory
 		|FROM
@@ -1458,7 +1456,8 @@ Function R8010B_TradeAgentInventory()
 		|	ItemList.Company,
 		|	ItemList.ItemKey,
 		|	ItemList.Partner,
-		|	ItemList.Agreement";
+		|	ItemList.Agreement,
+		|	ItemList.LegalName";
 EndFunction
 
 Function R8011B_TradeAgentSerialLotNumber()
@@ -1516,6 +1515,11 @@ Function R8012B_ConsignorInventory()
 		|	ConsignorBatches.SerialLotNumber,
 		|	ConsignorBatches.Batch.Partner AS Partner,
 		|	ConsignorBatches.Batch.Agreement AS Agreement,
+		|	CASE
+		|		WHEN ConsignorBatches.Batch REFS Document.OpeningEntry
+		|			THEN ConsignorBatches.Batch.LegalNameConsignor
+		|		ELSE ConsignorBatches.Batch.LegalName
+		|	END AS LegalName,
 		|	SUM(ConsignorBatches.Quantity) AS Quantity
 		|INTO R8012B_ConsignorInventory
 		|FROM
@@ -1528,7 +1532,12 @@ Function R8012B_ConsignorInventory()
 		|	ConsignorBatches.ItemKey,
 		|	ConsignorBatches.SerialLotNumber,
 		|	ConsignorBatches.Batch.Partner,
-		|	ConsignorBatches.Batch.Agreement";		
+		|	ConsignorBatches.Batch.Agreement,
+		|	CASE
+		|		WHEN ConsignorBatches.Batch REFS Document.OpeningEntry
+		|			THEN ConsignorBatches.Batch.LegalNameConsignor
+		|		ELSE ConsignorBatches.Batch.LegalName
+		|	END";		
 EndFunction
 		
 Function R8014T_ConsignorSales()

@@ -1200,12 +1200,17 @@ Function R8012B_ConsignorInventory()
 		|	ConsignorBatches.SerialLotNumber,
 		|	ConsignorBatches.Batch.Partner AS Partner,
 		|	ConsignorBatches.Batch.Agreement AS Agreement,
+		|	CASE
+		|		WHEN ConsignorBatches.Batch REFS Document.OpeningEntry
+		|			THEN ConsignorBatches.Batch.LegalNameConsignor
+		|		ELSE ConsignorBatches.Batch.LegalName
+		|	END AS LegalName,
 		|	ConsignorBatches.Quantity
 		|INTO R8012B_ConsignorInventory
 		|FROM
 		|	ItemList AS ItemList
-		|	LEFT JOIN ConsignorBatches AS ConsignorBatches ON
-		|	ItemList.Key = ConsignorBatches.Key
+		|		LEFT JOIN ConsignorBatches AS ConsignorBatches
+		|		ON ItemList.Key = ConsignorBatches.Key
 		|WHERE
 		|	ItemList.IsConsignorStocks";		
 EndFunction

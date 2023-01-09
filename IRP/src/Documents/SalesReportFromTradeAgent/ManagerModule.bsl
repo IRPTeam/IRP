@@ -555,20 +555,21 @@ Function R8010B_TradeAgentInventory()
 		|	ItemList.ItemKey,
 		|	ItemList.Partner,
 		|	ItemList.Agreement,
+		|	ItemList.LegalName,
 		|	SUM(ItemList.Quantity) AS Quantity
 		|INTO R8010B_TradeAgentInventory
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.IsService
-		|
 		|GROUP BY
 		|	VALUE(AccumulationRecordType.Expense),
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.ItemKey,
 		|	ItemList.Partner,
-		|	ItemList.Agreement";
+		|	ItemList.Agreement,
+		|	ItemList.LegalName";
 EndFunction
 
 Function R8011B_TradeAgentSerialLotNumber()

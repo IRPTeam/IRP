@@ -23,7 +23,10 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-
+	If ThisObject.TransactionType <> Enums.SalesTransactionTypes.RetailSales Then
+		CommonFunctionsServer.DeleteFormArrayIfPresent(CheckedAttributes, "RetailCustomer");
+	EndIf;
+	
 	If Not IsNew() And Modified() Then
 		ClosingOrder = DocSalesOrderClosingServer.GetLastSalesOrderClosingBySalesOrder(Ref);
 		If Not ClosingOrder.IsEmpty() Then

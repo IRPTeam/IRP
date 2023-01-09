@@ -608,8 +608,16 @@ Function R2012B_SalesOrdersInvoiceClosing()
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period AS Period,
+		|	ItemList.Company AS Company,
+		|	ItemList.Branch AS Branch,
 		|	ItemList.SalesOrder AS Order,
-		|	*
+		|	ItemList.Currency AS Currency,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.RowKey AS RowKey,
+		|	ItemList.Quantity AS Quantity,
+		|	ItemList.Amount AS Amount,
+		|	ItemList.NetAmount AS NetAmount
 		|INTO R2012B_SalesOrdersInvoiceClosing
 		|FROM
 		|	ItemList AS ItemList

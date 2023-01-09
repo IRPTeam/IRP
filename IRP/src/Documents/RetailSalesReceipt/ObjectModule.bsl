@@ -65,6 +65,15 @@ Procedure UndoPosting(Cancel)
 	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
 EndProcedure
 
+Procedure Filling(FillingData, FillingText, StandardProcessing)
+	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
+		PropertiesHeader = RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata());
+		FillPropertyValues(ThisObject, FillingData, PropertiesHeader);
+		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
+		ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);
+	EndIf;
+EndProcedure
+
 Procedure OnCopy(CopiedObject)
 	LinkedTables = New Array();
 	LinkedTables.Add(SpecialOffers);

@@ -271,6 +271,13 @@
         <value>29</value>
       </code>
     </items>
+    <items id="76ea620f-f573-4956-ab75-69811a81b355">
+      <name>RSR</name>
+      <description>RSR</description>
+      <code xsi:type="core:StringValue">
+        <value>30</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

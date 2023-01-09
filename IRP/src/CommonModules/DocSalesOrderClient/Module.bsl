@@ -61,6 +61,14 @@ EndProcedure
 
 #EndRegion
 
+#Region RETAIL_CUSTOMER
+
+Procedure RetailCustomerOnChange(Object, Form, Item) Export
+	ViewClient_V2.RetailCustomerOnChange(Object, Form, "ItemList");
+EndProcedure
+
+#EndRegion
+
 #Region PARTNER
 
 Procedure PartnerOnChange(Object, Form, Item) Export
@@ -389,3 +397,36 @@ Procedure PickupProcurementEnd(Result, AdditionalParameters) Export
 EndProcedure
 
 #EndRegion
+
+#Region PAYMENT_TYPE
+
+Procedure PaymentsBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.PaymentsBeforeAddRow(Object, Form, Cancel, Clone);
+EndProcedure
+
+Procedure PaymentsPaymentTypeOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentsPaymentTypeOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure PaymentsBankTermOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentsBankTermOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure PaymentsAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentsAmountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure PaymentsPercentOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentsPercentOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure PaymentsCommissionOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentsCommissionOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure PaymentsAccountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.PaymentsAccountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+

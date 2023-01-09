@@ -102,7 +102,8 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.PlaningTransactionBasis";
 	ElsIf TransactionType = CustomerAdvance Then
 		StrByType = "
-		|PaymentList.RetailCustomer";
+		|PaymentList.RetailCustomer,
+		|PaymentList.Order";
 	EndIf;
 
 	ArrayOfVisibleAttributes = New Array();

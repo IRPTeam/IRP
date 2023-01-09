@@ -26,4 +26,11 @@
       <value>Shipment to trade agent</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="68f46b93-cb50-4c25-9982-77c7c902a13c">
+    <name>RetailSales</name>
+    <synonym>
+      <key>en</key>
+      <value>Retail sales</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

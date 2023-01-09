@@ -139,6 +139,44 @@ Procedure LoadSettings(Command)
 EndProcedure
 
 &AtClient
+Async Procedure ReloadSettings(Command)
+	If ValueIsFilled(Parameters.Key) And Not Object.Ref.IsEmpty() And Not Object.Driver.IsEmpty() Then
+		DriverParameter.Clear();
+		Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref);
+		Settings.Callback = New NotifyDescription("FillDriverParameters_End", ThisObject);
+		HardwareClient.FillDriverParameters(Settings);
+	EndIf;
+EndProcedure
+
+&AtClient
+Async Procedure WriteSettings(Command)
+	If Modified OR Object.Ref.IsEmpty() Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_024);
+		Return;
+	EndIf;
+	
+	Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref);
+	Settings.ServiceCallback = New NotifyDescription("EndWriteSettings", ThisObject, Settings);
+	
+	For Each Row In DriverParameter Do
+		If Row.ReadOnly Then
+			Continue;
+		EndIf;
+		Settings.SetParameters.Insert(Row.Name, Row.Value);
+	EndDo;
+	HardwareClient.SetParameter_End(, , Settings);
+EndProcedure
+
+&AtClient
+Procedure EndWriteSettings(Result, AddInfo) Export
+	If Not Result Then
+		Status(Result, , , PictureLib.Stop);
+	Else
+		Status(Result, , , PictureLib.AppearanceFlagGreen);
+	EndIf;
+EndProcedure
+
+&AtClient
 Async Procedure Test(Command)
 	ClearMessages();
 	

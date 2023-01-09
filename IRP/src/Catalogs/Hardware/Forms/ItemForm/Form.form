@@ -982,6 +982,66 @@
     <autoCommandBar>
      <name>DriverParameterCommandBar</name>
      <id>71</id>
+     <items xsi:type="form:Button">
+      <name>DriverParameterReloadSettings</name>
+      <id>104</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+       <name>DriverParameterReloadSettingsExtendedTooltip</name>
+       <id>105</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.ReloadSettings</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+     </items>
+     <items xsi:type="form:Button">
+      <name>DriverParameterWriteSettings</name>
+      <id>106</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+       <name>DriverParameterWriteSettingsExtendedTooltip</name>
+       <id>107</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.WriteSettings</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+     </items>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -1599,7 +1659,40 @@
     <name>Test</name>
    </handler>
   </action>
-  <modifiesStoredData>true</modifiesStoredData>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>ReloadSettings</name>
+  <title>
+   <key>en</key>
+   <value>Reload settings</value>
+  </title>
+  <id>3</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>ReloadSettings</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>WriteSettings</name>
+  <title>
+   <key>en</key>
+   <value>Write settings</value>
+  </title>
+  <id>4</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>WriteSettings</name>
+   </handler>
+  </action>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <commandInterface>

@@ -908,6 +908,21 @@
   <fillValue xsi:type="core:UndefinedValue"/>
   <indexing>Index</indexing>
  </attributes>
+ <attributes uuid="7dfc231a-475f-4b94-a619-dbf65a7376a7">
+  <name>RetailCustomer</name>
+  <synonym>
+   <key>en</key>
+   <value>Retail customer</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.RetailCustomers</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="651805ba-bc1e-443a-8ae5-b2b855347771">
   <name>ItemForm</name>
   <synonym>

@@ -33,10 +33,17 @@ EndProcedure
 Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array();
 	AttributesArray.Add("Company");
+	
+	If Object.TransactionType = Enums.SalesTransactionTypes.RetailSales Then
+		AttributesArray.Add("RetailCustomer");
+	EndIf;
+	
 	AttributesArray.Add("Partner");
 	AttributesArray.Add("LegalName");
 	AttributesArray.Add("Agreement");	
+	
 	AttributesArray.Add("Status");
+	
 	If FOServer.IsUseCommissionTrading() Then
 		AttributesArray.Add("TransactionType");
 	EndIf;

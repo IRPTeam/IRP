@@ -107,6 +107,7 @@
  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
  <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
+ <registerRecords>AccumulationRegister.R3026B_SalesOrdersCustomerAdvance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -390,7 +391,27 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.Ref</name>
+   <field>Document.SalesOrder.StandardAttribute.Ref</field>
+  </choiceParameterLinks>
   <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="4b1588cd-0ce1-4d58-b938-25933a081be9">
+  <name>RetailCustomer</name>
+  <synonym>
+   <key>en</key>
+   <value>Retail customer</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.RetailCustomers</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -1747,6 +1768,128 @@
    </synonym>
    <type>
     <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="e2cefdb5-ec18-4d55-bf32-13204ddf3b0c">
+  <producedTypes>
+   <objectType typeId="da80457b-fa56-4e06-b029-c1fbec23b8f1" valueTypeId="093269c9-1ad9-42f5-95c4-f05d195362e5"/>
+   <rowType typeId="0082f7fb-4996-46fd-8fc9-5c758230a137" valueTypeId="259b6877-8579-4996-91ab-f0e7c7cdd8ca"/>
+  </producedTypes>
+  <name>Payments</name>
+  <synonym>
+   <key>en</key>
+   <value>Payments</value>
+  </synonym>
+  <attributes uuid="bcc37ace-6f97-47f8-92dd-eb6ab83aca73">
+   <name>Key</name>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="c1d51265-0844-48ad-b324-51aefb488d42">
+   <name>PaymentType</name>
+   <synonym>
+    <key>en</key>
+    <value>Payment type</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.PaymentTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="8f117174-6a49-4675-98ec-325ce7b35c21">
+   <name>PaymentTerminal</name>
+   <synonym>
+    <key>en</key>
+    <value>Payment terminal</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.PaymentTerminals</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="7ac8977c-45bd-428d-bd26-6e9d070b591d">
+   <name>Account</name>
+   <synonym>
+    <key>en</key>
+    <value>Account</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.CashAccounts</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="ffa1d696-e140-497c-9cbd-a63b6d9414bd">
+   <name>Amount</name>
+   <synonym>
+    <key>en</key>
+    <value>Amount</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="82bd9176-2db0-4769-a055-4c1989dfa03e">
+   <name>Percent</name>
+   <synonym>
+    <key>en</key>
+    <value>Percent</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typePercent</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="f5276940-1bab-4ca9-81b5-e433d154de42">
+   <name>Commission</name>
+   <synonym>
+    <key>en</key>
+    <value>Commission</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="670fe248-f2a8-42fc-94ab-150fbfcdf309">
+   <name>BankTerm</name>
+   <synonym>
+    <key>en</key>
+    <value>Bank term</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BankTerms</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

@@ -137,7 +137,6 @@ Scenario: _001 test data
 		When Create document StockAdjustmentAsWriteOff objects (LC)
 		When Create document Unbundling objects (LC)
 		When Create document StockAdjustmentAsWriteOff objects (LC)
-		When Create document Unbundling objects (LC)
 		When Create document RetailSalesReceipt objects (LC)
 		When Create document RetailReturnReceipt objects (LC)
 		When Create document ItemStockAdjustment objects (LC)
@@ -191,7 +190,7 @@ Scenario: _001 test data
 		Then "Goods receipts" window is opened
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
-		And Delay "50"
+		And Delay "10"
 	* Posting Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		Then "Shipment confirmations" window is opened
@@ -2233,7 +2232,7 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 			And I click "Save and close" button
 			And I click the button named "FormChoose"
 			And I activate "Amount" field in "Payments" table
-			And I input "2 000,00" text in "Amount" field of "Payments" table
+			And I input "2 360,00" text in "Amount" field of "Payments" table
 			And I finish line editing in "Payments" table
 			And I move to "Other" tab
 			And I input "15.08.2021 19:32:00" text in "Date" field
@@ -2252,6 +2251,9 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 			And I select current line in "ItemList" table
 			And I input "1 000,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table	
+			When in opened panel I select "Retail return receipt (create) *"
+			Then "Retail return receipt (create) *" window is opened
+			And I move to "Other" tab			
 			And I click "Post and close" button
 		* Batches calculation
 			Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"

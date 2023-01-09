@@ -112,6 +112,7 @@
  <content>Document.Production.Attribute.ProductionPlanning</content>
  <content>Document.SalesReportToConsignor.TabularSection.ItemList.Attribute.PurchaseInvoice</content>
  <content>Document.SalesReportToConsignor.TabularSection.ItemList.Attribute.SalesInvoice</content>
+ <content>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.SalesOrder</content>
  <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
   <name>RelatedDocuments</name>
   <synonym>

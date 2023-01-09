@@ -186,6 +186,24 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="30c70b2b-ca24-4058-8083-bb46c4ba9211">
+  <name>MidName</name>
+  <synonym>
+   <key>en</key>
+   <value>Mid name</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>200</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <attributes uuid="9a32a16c-c3af-4605-b9c5-4a823c8f617f">
   <name>Surname</name>
   <synonym>

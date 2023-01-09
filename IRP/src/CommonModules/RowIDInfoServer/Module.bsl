@@ -1291,13 +1291,18 @@ EndProcedure
 
 Function GetNextStep_SO(Source, RowItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
-	If RowItemList.ProcurementMethod = Enums.ProcurementMethods.Purchase Then
-		NextStep = Catalogs.MovementRules.PO_PI;
+	
+	If Source.TransactionType = Enums.SalesTransactionTypes.RetailSales Then
+		NextStep = Catalogs.MovementRules.RSR;
 	Else
-		If RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service Then
-			NextStep = Catalogs.MovementRules.SI_WO_WS;
+		If RowItemList.ProcurementMethod = Enums.ProcurementMethods.Purchase Then
+			NextStep = Catalogs.MovementRules.PO_PI;
 		Else
-			NextStep = Catalogs.MovementRules.SI_SC;
+			If RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service Then
+				NextStep = Catalogs.MovementRules.SI_WO_WS;
+			Else
+				NextStep = Catalogs.MovementRules.SI_SC;
+			EndIf;
 		EndIf;
 	EndIf;
 	Return NextStep;
@@ -1625,10 +1630,20 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		RowRefObject.StoreReceiver = Source.StoreReceiver;
 	EndIf;
 	
-	If Is.SO Or Is.SI Or Is.SRO Or Is.SR Or Is.RSR Or Is.RRR Or Is.WO Then
+	If Is.SI Or Is.SRO Or Is.SR Or Is.RSR Or Is.RRR Or Is.WO Then
 		RowRefObject.PartnerSales         = Source.Partner;
 		RowRefObject.LegalNameSales       = Source.LegalName;
 		RowRefObject.AgreementSales       = Source.Agreement;
+		RowRefObject.CurrencySales        = Source.Currency;
+		RowRefObject.PriceIncludeTaxSales = Source.PriceIncludeTax;
+	ElsIf Is.SO Then
+		If Source.TransactionType = Enums.SalesTransactionTypes.RetailSales Then
+			RowRefObject.RetailCustomer = Source.RetailCustomer;
+		Else
+			RowRefObject.PartnerSales   = Source.Partner;
+			RowRefObject.LegalNameSales = Source.LegalName;
+			RowRefObject.AgreementSales = Source.Agreement;		
+		EndIf;
 		RowRefObject.CurrencySales        = Source.Currency;
 		RowRefObject.PriceIncludeTaxSales = Source.PriceIncludeTax;
 	ElsIf Is.PO Or Is.PI Or Is.PRO Or Is.PR Then
@@ -2176,6 +2191,7 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref AS ShipmentBasis,
 	|	ItemList.Ref AS PurchaseBasis,
 	|	ItemList.Ref AS Requester,
+	|	ItemList.Ref.RetailCustomer AS RetailCustomer,
 	|	ItemList.Ref.Partner AS Partner,
 	|	ItemList.Ref.LegalName AS LegalName,
 	|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
@@ -2259,7 +2275,33 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Document.SalesOrder.SpecialOffers AS SpecialOffers
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SpecialOffers.Ref
-	|		AND BasisesTable.BasisKey = SpecialOffers.Key";
+	|		AND BasisesTable.BasisKey = SpecialOffers.Key
+	|;
+	|
+	|///////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	Payments.PaymentType,
+	|	Payments.PaymentTerminal,
+	|	Payments.Account,
+	|	Payments.Amount,
+	|	Payments.Percent,
+	|	Payments.Commission,
+	|	Payments.BankTerm,
+	|	Payments.Key
+	|FROM
+	|	Document.SalesOrder.Payments AS Payments
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = Payments.Ref
+	|GROUP BY
+	|	Payments.Key,
+	|	Payments.Account,
+	|	Payments.Amount,
+	|	Payments.BankTerm,
+	|	Payments.Commission,
+	|	Payments.PaymentTerminal,
+	|	Payments.PaymentType,
+	|	Payments.Percent";
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -2268,12 +2310,14 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	TableItemList      = QueryResults[2].Unload();
 	TableTaxList       = QueryResults[3].Unload();
 	TableSpecialOffers = QueryResults[4].Unload();
+	TablePayments      = QueryResults[5].Unload();
 
 	Tables = New Structure();
-	Tables.Insert("RowIDInfo", TableRowIDInfo);
-	Tables.Insert("ItemList", TableItemList);
-	Tables.Insert("TaxList", TableTaxList);
-	Tables.Insert("SpecialOffers", TableSpecialOffers);
+	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
+	Tables.Insert("ItemList"      , TableItemList);
+	Tables.Insert("TaxList"       , TableTaxList);
+	Tables.Insert("SpecialOffers" , TableSpecialOffers);
+	Tables.Insert("Payments"      , TablePayments);
 
 	AddTables(Tables);
 
@@ -4680,6 +4724,8 @@ Function GetBasises(Ref, FilterValues) Export
 		Return GetBasisesFor_SRO(FilterValues);
 	ElsIf Is.RRR Then
 		Return GetBasisesFor_RRR(FilterValues);
+	ElsIf Is.RSR Then
+		Return GetBasisesFor_RSR(FilterValues);
 	ElsIf Is.PRR Then
 		Return GetBasisesFor_PRR(FilterValues);
 	ElsIf Is.WO Then
@@ -4867,6 +4913,16 @@ Function GetBasisesFor_RRR(FilterValues)
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
 
+Function GetBasisesFor_RSR(FilterValues)
+	StepArray = New Array();
+	StepArray.Add(Catalogs.MovementRules.RSR);
+
+	FilterSets = GetAvailableFilterSets();
+	FilterSets.SO_ForRSR = True;
+
+	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
+EndFunction
+
 Function GetBasisesFor_PRR(FilterValues)
 	StepArray = New Array();
 	StepArray.Add(Catalogs.MovementRules.PRR);
@@ -4911,6 +4967,7 @@ Function GetAvailableFilterSets()
 	Result.Insert("SO_ForSC", False);
 	Result.Insert("SO_ForPO_ForPI", False);
 	Result.Insert("SO_ForPRR", False);
+	Result.Insert("SO_ForRSR", False);
 
 	Result.Insert("SC_ForSI", False);
 	Result.Insert("SI_ForSC", False);
@@ -4983,6 +5040,11 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 	If FilterSets.SO_ForWS Then
 		ApplyFilterSet_SO_ForWS(Query);
 		QueryArray.Add(GetDataByFilterSet_SO_ForWS());
+	EndIf;
+	
+	If FilterSets.SO_ForRSR Then
+		ApplyFilterSet_SO_ForRSR(Query);
+		QueryArray.Add(GetDataByFilterSet_SO_ForRSR());
 	EndIf;
 	
 	If FilterSets.SI_ForSC Then
@@ -5188,6 +5250,8 @@ Function GetFieldsToLock_InternalLink(DocAliase, InternalDocAliase)
 		Return GetFieldsToLock_InternalLink_SRO(InternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.RRR Then
 		Return GetFieldsToLock_InternalLink_RRR(InternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.RSR Then
+		Return GetFieldsToLock_InternalLink_RSR(InternalDocAliase, Aliases);	
 	ElsIf DocAliase = Aliases.PRR Then
 		Return GetFieldsToLock_InternalLink_PRR(InternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.WO Then
@@ -5215,6 +5279,22 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 							  |PartnerSales         , Partner,
 							  |LegalNameSales       , LegalName,
 							  |AgreementSales       , Agreement,
+							  |CurrencySales        , Currency,
+							  |TransactionTypeSales , TransactionType,
+							  |PriceIncludeTaxSales , PriceIncludeTax,
+							  |ProcurementMethod    , ItemList.ProcurementMethod,
+							  |ItemKey              , ItemList.ItemKey,
+							  |Store                , ItemList.Store";
+	
+	ElsIf ExternalDocAliase = Aliases.RSR Then
+		Result.Header   = "Company, Branch, Store, RetailCustomer, Currency, PriceIncludeTax, Status,
+			|ItemListSetProcurementMethods, TransactionType";
+				
+		Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company              , Company,
+							  |Branch               , Branch,
+							  |RetailCustomer       , RetailCustomer,
 							  |CurrencySales        , Currency,
 							  |TransactionTypeSales , TransactionType,
 							  |PriceIncludeTaxSales , PriceIncludeTax,
@@ -5646,6 +5726,68 @@ Procedure ApplyFilterSet_SO_ForWS(Query)
 	Query.Execute();
 EndProcedure
 
+Procedure ApplyFilterSet_SO_ForRSR(Query)
+	Query.Text =
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_SO_ForRSR
+	|FROM
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_RetailCustomer
+	|					THEN RowRef.RetailCustomer = &RetailCustomer
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_CurrencySales
+	|					THEN RowRef.CurrencySales = &CurrencySales
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_TransactionTypeSales
+	|					THEN RowRef.TransactionTypeSales = &TransactionTypeSales
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_PriceIncludeTaxSales
+	|					THEN RowRef.PriceIncludeTaxSales = &PriceIncludeTaxSales
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure
+
 Function GetDataByFilterSet_SO_ForSI()
 	Return "SELECT 
 		   |	Doc.ItemKey,
@@ -5814,6 +5956,35 @@ Function GetDataByFilterSet_SO_ForWS()
 		   |		ON Doc.Ref = RowIDInfo.Ref
 		   |		AND Doc.Key = RowIDInfo.Key
 		   |		INNER JOIN RowIDMovements_SO_ForWS AS RowIDMovements
+		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
+		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
+		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
+EndFunction
+
+Function GetDataByFilterSet_SO_ForRSR()
+	Return "SELECT 
+		   |	Doc.ItemKey,
+		   |	Doc.ItemKey.Item,
+		   |	Doc.Store,
+		   |	Doc.Ref,
+		   |	Doc.Key,
+		   |	Doc.Key,
+		   |	CASE
+		   |		WHEN Doc.ItemKey.Unit.Ref IS NULL
+		   |			THEN Doc.ItemKey.Item.Unit
+		   |		ELSE Doc.ItemKey.Unit
+		   |	END AS BasisUnit,
+		   |	RowIDMovements.Quantity,
+		   |	RowIDMovements.RowRef,
+		   |	RowIDMovements.RowID,
+		   |	RowIDMovements.Step,
+		   |	Doc.LineNumber
+		   |FROM
+		   |	Document.SalesOrder.ItemList AS Doc
+		   |		INNER JOIN Document.SalesOrder.RowIDInfo AS RowIDInfo
+		   |		ON Doc.Ref = RowIDInfo.Ref
+		   |		AND Doc.Key = RowIDInfo.Key
+		   |		INNER JOIN RowIDMovements_SO_ForRSR AS RowIDMovements
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
 		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
 		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
@@ -8312,6 +8483,22 @@ EndFunction
 
 #EndRegion
 
+#Region Document_RSR
+
+Function GetFieldsToLock_InternalLink_RSR(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.SO Then
+		Result.Header   = "Company, Branch, Store, RetailCustomer, Partner, LegalName, Agreement, Currency, 
+			|PriceIncludeTax, UsePartnerTransactions";
+		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
+	Else
+		Raise StrTemplate("Not supported Internal link for [RSR] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
+
+#EndRegion
+
 #Region Document_StockAdjustmentAsSurplus
 
 Function GetFieldsToLock_InternalLink_StockAdjustmentAsSurplus(InternalDocAliase, Aliases)
@@ -9267,6 +9454,9 @@ Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False) Export
 	If DocReceiverMetadata = Metadata.Documents.SalesInvoice Then
 		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName" 
 				+ ?(NameAsAlias, ", TransactionTypeSales", ", TransactionType");
+	
+	ElsIf DocReceiverMetadata = Metadata.Documents.RetailSalesReceipt Then
+		Return "Company, Branch, RetailCustomer, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
 				
 	ElsIf DocReceiverMetadata = Metadata.Documents.ShipmentConfirmation Then
 		Return "Company, Branch, Partner, LegalName, TransactionType";
@@ -10677,6 +10867,7 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.SC);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.WO);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.WS);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.RSR);
 	EndIf;
 	
 	If Is.SI Then
@@ -10838,6 +11029,10 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 	
 	If Is.SRO Then
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SRO, DocAliases.SI);
+	EndIf;
+	
+	If Is.RSR Then 
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RSR, DocAliases.SO);
 	EndIf;
 	
 	If Is.RRR Then 

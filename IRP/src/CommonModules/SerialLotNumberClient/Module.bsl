@@ -144,7 +144,39 @@ Procedure DeleteUnusedSerialLotNumbers(Object, KeyForDelete = Undefined) Export
 		For Each Row In ArrayOfUnusedRows Do
 			Object.SerialLotNumbers.Delete(Row);
 		EndDo;
-	Else
+		
+		ArrayOfItemKeys = New Array();
+		For Each Row In Object.ItemList Do
+			NewRow = New Structure("Key, ItemKey, SerialLotNumbers", Row.Key, Row.ItemKey, New Array());
+			For Each RowSLN In Object.SerialLotNumbers.FindRows(New Structure("Key", Row.Key)) Do
+				NewRow.SerialLotNumbers.Add(New Structure("SerialLotNumber", RowSLN.SerialLotNUmber));
+			EndDo;
+			If NewRow.SerialLotNumbers.Count() Then
+				ArrayOfItemKeys.Add(NewRow);
+			EndIf;
+		EndDo;
+		If ArrayOfItemKeys.Count() Then
+			ArrayOfWrongSerialLotNumbers = SerialLotNumbersServer.GetWrongSerialLotNumbers(ArrayOfItemKeys);
+			ArrayForDelete = New Array();
+		
+			For Each RowSNL In Object.SerialLotNumbers Do
+				IsWrongSerialLotNumber = False;
+				For Each Row In ArrayOfWrongSerialLotNumbers Do
+					If Row.Key = RowSNL.Key And Row.SerialLotNumber = RowSNL.SerialLotNumber Then
+						IsWrongSerialLotNumber = True;
+					EndIf;
+				EndDo;
+				If IsWrongSerialLotNumber Then
+					ArrayForDelete.Add(RowSNL);
+				EndIf;
+			EndDo;
+		
+			For Each Row In ArrayForDelete Do
+				Object.SerialLotNumbers.Delete(Row);
+			EndDo;
+		EndIf;
+		
+	Else // Ke <> Undefined
 		ArrayRowsForDelete = Object.SerialLotNumbers.FindRows(New Structure("Key", KeyForDelete));
 		For Each Row In ArrayRowsForDelete Do
 			Object.SerialLotNumbers.Delete(Row);

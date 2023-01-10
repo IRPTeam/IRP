@@ -116,6 +116,21 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 			| "Documents.RetailSalesReceipt.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(112).GetObject().Write(DocumentWriteMode.Posting);" |
+		When create RetailSalesOrder objects
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(315).GetObject().Write(DocumentWriteMode.Posting);" |	
+		When Create document CashReceipt objects advance from retail customer
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashReceipt.FindByNumber(315).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document BankReceipt objects (retail customer advance)
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document Retail sales receipt (based on retail sales order)
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);" |	
+
 
 Scenario: _0424001 check preparation
 	When check preparation
@@ -571,6 +586,27 @@ Scenario: _042426 check Retail sales receipt movements by the Register  "R2023 A
 			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                |
 			| ''                                                   | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Retail customer' |
 			| ''                                                   | 'Expense'     | '29.12.2022 17:25:31' | '500'       | 'Main Company' | 'Shop 02' | 'Sam Jons'        |		
+		And I close all client application windows
+
+Scenario: _042427 check Retail sales receipt movements by the Register  "R2012 Invoice closing of sales orders" (based on retail sales order) 
+		And I close all client application windows	
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '314' |
+	* Check movements by the Register  "R2012 Invoice closing of sales orders"
+		And I click "Registrations report" button
+		And I select "R2012 Invoice closing of sales orders" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 314 dated 09.01.2023 13:34:51' | ''            | ''                    | ''          | ''       | ''           | ''             | ''        | ''                                          | ''         | ''         | ''                                     |
+			| 'Document registrations records'                     | ''            | ''                    | ''          | ''       | ''           | ''             | ''        | ''                                          | ''         | ''         | ''                                     |
+			| 'Register  "R2012 Invoice closing of sales orders"'  | ''            | ''                    | ''          | ''       | ''           | ''             | ''        | ''                                          | ''         | ''         | ''                                     |
+			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | ''       | ''           | 'Dimensions'   | ''        | ''                                          | ''         | ''         | ''                                     |
+			| ''                                                   | ''            | ''                    | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Branch'  | 'Order'                                     | 'Currency' | 'Item key' | 'Row key'                              |
+			| ''                                                   | 'Expense'     | '09.01.2023 13:34:51' | '1'         | '520'    | '440,68'     | 'Main Company' | 'Shop 01' | 'Sales order 314 dated 09.01.2023 12:49:08' | 'TRY'      | 'XS/Blue'  | '23b88999-d27d-462f-94f4-fa7b09b4b20c' |
+			| ''                                                   | 'Expense'     | '09.01.2023 13:34:51' | '2'         | '1 400'  | '1 186,44'   | 'Main Company' | 'Shop 01' | 'Sales order 314 dated 09.01.2023 12:49:08' | 'TRY'      | '37/18SD'  | '5bdde23c-effa-4551-9989-3e2d76766c28' |	
 		And I close all client application windows
 
 Scenario: _042430 Retail sales receipt clear posting/mark for deletion

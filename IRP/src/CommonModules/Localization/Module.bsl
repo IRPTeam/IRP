@@ -1257,7 +1257,7 @@ Function Strings(Lang) Export
 		|ru='Оплата (+)';
 		|tr='Ödeme (+)'", Lang));
 	Strings.Insert("InfoMessage_SessionIsClosed", NStr("en='Session is closed';
-		|ru='Сессия закрыта';
+		|ru='Смена закрыта';
 		|tr='Vardya kapandı'", Lang));
 	Strings.Insert("InfoMessage_Sales", NStr("en='Sales';
 		|ru='Продажа';

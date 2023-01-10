@@ -646,14 +646,14 @@ Scenario: _042525 check Retail return receipt movements by the Register  "R8012 
 		And I select "R8012 Consignor inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail return receipt 1 113 dated 14.11.2022 13:57:09' | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
-			| 'Document registrations records'                        | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
-			| 'Register  "R8012 Consignor inventory"'                 | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
-			| ''                                                      | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                  | ''            | ''                         |
-			| ''                                                      | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Serial lot number' | 'Partner'     | 'Agreement'                |
-			| ''                                                      | 'Receipt'     | '14.11.2022 13:57:09' | '1'         | 'Main Company' | 'UNIQ'     | '09987897977890'    | 'Consignor 2' | 'Consignor 2 partner term' |
-			| ''                                                      | 'Receipt'     | '14.11.2022 13:57:09' | '2'         | 'Main Company' | 'S/Yellow' | ''                  | 'Consignor 1' | 'Consignor partner term 1' |
-			| ''                                                      | 'Receipt'     | '14.11.2022 13:57:09' | '2'         | 'Main Company' | 'UNIQ'     | '09987897977890'    | 'Consignor 1' | 'Consignor partner term 1' |		
+			| 'Retail return receipt 1 113 dated 14.11.2022 13:57:09' | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         | ''            |
+			| 'Document registrations records'                        | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         | ''            |
+			| 'Register  "R8012 Consignor inventory"'                 | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         | ''            |
+			| ''                                                      | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                  | ''            | ''                         | ''            |
+			| ''                                                      | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Serial lot number' | 'Partner'     | 'Agreement'                | 'Legal name'  |
+			| ''                                                      | 'Receipt'     | '14.11.2022 13:57:09' | '1'         | 'Main Company' | 'UNIQ'     | '09987897977890'    | 'Consignor 2' | 'Consignor 2 partner term' | 'Consignor 2' |
+			| ''                                                      | 'Receipt'     | '14.11.2022 13:57:09' | '2'         | 'Main Company' | 'S/Yellow' | ''                  | 'Consignor 1' | 'Consignor partner term 1' | 'Consignor 1' |
+			| ''                                                      | 'Receipt'     | '14.11.2022 13:57:09' | '2'         | 'Main Company' | 'UNIQ'     | '09987897977890'    | 'Consignor 1' | 'Consignor partner term 1' | 'Consignor 1' |
 		And I close all client application windows
 
 Scenario: _042526 check Retail return receipt movements by the Register  "R8013 Consignor batch wise balance" (consignor and own stocks)

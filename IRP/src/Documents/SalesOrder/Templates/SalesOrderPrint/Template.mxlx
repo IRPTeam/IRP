@@ -345,7 +345,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>Единица измерения</v8:content>
+							<v8:content>Ед. изм.</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
@@ -429,7 +429,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>Общая сумма</v8:content>
+							<v8:content>Итого</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>

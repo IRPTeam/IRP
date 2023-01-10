@@ -58,7 +58,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Üretim reçete miktarı</value>
+   <value>Reçete miktarı</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>

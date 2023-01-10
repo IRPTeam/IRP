@@ -5174,7 +5174,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Специальные предложения</value>
+      <value>Скидки</value>
      </title>
      <title>
       <key>tr</key>
@@ -5957,7 +5957,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Наименование</value>
+   <value>Комментарий</value>
   </title>
   <title>
    <key>tr</key>
@@ -6033,7 +6033,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Специальные предложения</value>
+   <value>Скидки</value>
   </title>
   <title>
    <key>tr</key>
@@ -6220,7 +6220,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Специальные предложения</value>
+   <value>% Скидки</value>
   </title>
   <title>
    <key>tr</key>

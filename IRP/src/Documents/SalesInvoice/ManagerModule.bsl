@@ -1424,6 +1424,7 @@ Function R8010B_TradeAgentInventory()
 		|	ItemList.ItemKey,
 		|	ItemList.Partner,
 		|	ItemList.Agreement,
+		|	ItemList.LegalName,
 		|	SUM(ItemList.Quantity) AS Quantity
 		|INTO R8010B_TradeAgentInventory
 		|FROM
@@ -1431,14 +1432,14 @@ Function R8010B_TradeAgentInventory()
 		|WHERE
 		|	NOT ItemList.IsService
 		|	AND ItemList.IsShipmentToTradeAgent
-		|
 		|GROUP BY
 		|	VALUE(AccumulationRecordType.Receipt),
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.ItemKey,
 		|	ItemList.Partner,
-		|	ItemList.Agreement";
+		|	ItemList.Agreement,
+		|	ItemList.LegalName";
 EndFunction
 
 Function R8011B_TradeAgentSerialLotNumber()
@@ -1469,12 +1470,17 @@ Function R8012B_ConsignorInventory()
 		|	ConsignorBatches.SerialLotNumber,
 		|	ConsignorBatches.Batch.Partner AS Partner,
 		|	ConsignorBatches.Batch.Agreement AS Agreement,
+		|	CASE
+		|		WHEN ConsignorBatches.Batch REFS Document.OpeningEntry
+		|			THEN ConsignorBatches.Batch.LegalNameConsignor
+		|		ELSE ConsignorBatches.Batch.LegalName
+		|	END AS LegalName,
 		|	ConsignorBatches.Quantity
 		|INTO R8012B_ConsignorInventory
 		|FROM
 		|	ItemList AS ItemList
-		|	LEFT JOIN ConsignorBatches AS ConsignorBatches ON
-		|	ItemList.Key = ConsignorBatches.Key
+		|		LEFT JOIN ConsignorBatches AS ConsignorBatches
+		|		ON ItemList.Key = ConsignorBatches.Key
 		|WHERE
 		|	ItemList.IsSales
 		|	AND ItemList.IsConsignorStocks";		

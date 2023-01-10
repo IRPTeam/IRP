@@ -35,7 +35,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Сумма оплаты</value>
+   <value>Сумма</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -238,7 +238,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Валюты</value>
+   <value>Валюта</value>
   </synonym>
   <synonym>
    <key>tr</key>

@@ -65,7 +65,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Start</value>
+   <value>Başlat</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -108,7 +108,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Наименование</value>
+   <value>Комментарий</value>
   </synonym>
   <synonym>
    <key>tr</key>

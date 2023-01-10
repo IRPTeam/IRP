@@ -855,7 +855,7 @@
            </title>
            <title>
             <key>ru</key>
-            <value>Специальные предложения</value>
+            <value>Скидки</value>
            </title>
            <title>
             <key>tr</key>
@@ -2367,7 +2367,7 @@
          </title>
          <title>
           <key>ru</key>
-          <value>Группа команд сеанса</value>
+          <value>Группа команд смены</value>
          </title>
          <title>
           <key>tr</key>
@@ -3763,7 +3763,7 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Элементы формы</value>
+        <value>Номенклатура</value>
        </title>
        <title>
         <key>tr</key>
@@ -3998,7 +3998,7 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Дополнительный</value>
+        <value>Дополнительно</value>
        </title>
        <title>
         <key>tr</key>
@@ -4194,7 +4194,7 @@
           </title>
           <title>
            <key>ru</key>
-           <value>Специальное предложения</value>
+           <value>Скидка</value>
           </title>
           <title>
            <key>tr</key>
@@ -6657,7 +6657,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Валюты</value>
+    <value>Валюта</value>
    </title>
    <title>
     <key>tr</key>
@@ -6682,7 +6682,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Сумма оплаты</value>
+    <value>Сумма</value>
    </title>
    <title>
     <key>tr</key>
@@ -7251,7 +7251,7 @@ elemanı seç</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Открытая сессия</value>
+   <value>Открыть смену</value>
   </title>
   <title>
    <key>tr</key>
@@ -7280,7 +7280,7 @@ elemanı seç</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Закрыть сессию</value>
+   <value>Закрыть кассовую смену</value>
   </title>
   <title>
    <key>tr</key>
@@ -7309,7 +7309,7 @@ elemanı seç</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Отменить сессию</value>
+   <value>Отменить смену</value>
   </title>
   <title>
    <key>tr</key>

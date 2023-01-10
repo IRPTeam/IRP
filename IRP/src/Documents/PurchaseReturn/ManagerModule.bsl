@@ -926,15 +926,6 @@ Function T6020S_BatchKeysInfo()
 		|		ON ItemList.Key = ConsignorBatches.Key
 		|WHERE
 		|	NOT ItemList.IsService
-//		|GROUP BY
-//		|	ItemList.Key,
-//		|	ItemList.Period,
-//		|	VALUE(Enum.BatchDirection.Expense),
-//		|	ItemList.Company,
-//		|	ItemList.Store,
-//		|	ItemList.ItemKey,
-//		|	ItemList.BatchDocument,
-//		|	ConsignorBatches.Batch
 		|;
 		|//////////////////////////////////////////////////////////////////////////////////////////
 		|SELECT
@@ -950,12 +941,6 @@ Function T6020S_BatchKeysInfo()
 		|			THEN ISNULL(SourceOfOrigins.Quantity, 0)
 		|		ELSE BatchKeysInfo_1.Quantity
 		|	END) AS Quantity,
-	
-//		|	SUM(case
-//		|		when ConsignorBatches.Quantity is null
-//		|			then ItemList.Quantity
-//		|		else ConsignorBatches.Quantity
-//		|	end) AS Quantity
 		|	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin,
 		|	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
 		|INTO T6020S_BatchKeysInfo
@@ -968,15 +953,6 @@ Function T6020S_BatchKeysInfo()
 		|				then BatchKeysInfo_1.SerialLotNumber = SourceOfOrigins.SerialLotNumberStock
 		|			else true
 		|		end
-
-
-//		|INTO T6020S_BatchKeysInfo
-//		|FROM
-//		|	ItemList AS ItemList
-//		|		LEFT JOIN ConsignorBatches AS ConsignorBatches
-//		|		ON ItemList.Key = ConsignorBatches.Key
-//		|WHERE
-//		|	NOT ItemList.IsService
 		|GROUP BY
 		|	BatchKeysInfo_1.Period,
 		|	BatchKeysInfo_1.Direction,
@@ -987,14 +963,6 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_1.BatchConsignor,
 		|	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)),
 		|	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef))";
-		
-//		|	ItemList.Period,
-//		|	VALUE(Enum.BatchDirection.Expense),
-//		|	ItemList.Company,
-//		|	ItemList.Store,
-//		|	ItemList.ItemKey,
-//		|	ItemList.BatchDocument,
-//		|	ConsignorBatches.Batch";		
 EndFunction
 	
 Function R8012B_ConsignorInventory()
@@ -1007,12 +975,13 @@ Function R8012B_ConsignorInventory()
 		|	ConsignorBatches.SerialLotNumber,
 		|	ItemList.Partner,
 		|	ItemList.Agreement,
+		|	ItemList.LegalName,
 		|	SUM(ConsignorBatches.Quantity) AS Quantity
 		|INTO R8012B_ConsignorInventory
 		|FROM
 		|	ItemList AS ItemList
-		|	LEFT JOIN ConsignorBatches AS ConsignorBatches ON
-		|	ItemList.Key = ConsignorBatches.Key
+		|		LEFT JOIN ConsignorBatches AS ConsignorBatches
+		|		ON ItemList.Key = ConsignorBatches.Key
 		|WHERE
 		|	NOT ItemList.IsService
 		|	AND ItemList.IsReturnToConsignor
@@ -1023,7 +992,8 @@ Function R8012B_ConsignorInventory()
 		|	ItemList.ItemKey,
 		|	ConsignorBatches.SerialLotNumber,
 		|	ItemList.Partner,
-		|	ItemList.Agreement";
+		|	ItemList.Agreement,
+		|	ItemList.LegalName";
 EndFunction
 
 Function R8013B_ConsignorBatchWiseBalance()

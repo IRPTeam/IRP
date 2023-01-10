@@ -1050,15 +1050,15 @@ Scenario: _0401334 check Sales invoice movements by the Register  "R8010 Trade a
 		And I select "R8010 Trade agent inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 192 dated 02.11.2022 10:53:19' | ''            | ''                    | ''          | ''             | ''         | ''              | ''                           |
-			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''         | ''              | ''                           |
-			| 'Register  "R8010 Trade agent inventory"'     | ''            | ''                    | ''          | ''             | ''         | ''              | ''                           |
-			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''              | ''                           |
-			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Partner'       | 'Agreement'                  |
-			| ''                                            | 'Receipt'     | '02.11.2022 10:53:19' | '1'         | 'Main Company' | '37/18SD'  | 'Trade agent 1' | 'Trade agent partner term 1' |
-			| ''                                            | 'Receipt'     | '02.11.2022 10:53:19' | '2'         | 'Main Company' | 'UNIQ'     | 'Trade agent 1' | 'Trade agent partner term 1' |
-			| ''                                            | 'Receipt'     | '02.11.2022 10:53:19' | '4'         | 'Main Company' | 'XS/Blue'  | 'Trade agent 1' | 'Trade agent partner term 1' |
-			| ''                                            | 'Receipt'     | '02.11.2022 10:53:19' | '4'         | 'Main Company' | 'PZU'      | 'Trade agent 1' | 'Trade agent partner term 1' |		
+			| 'Sales invoice 192 dated 02.11.2022 10:53:19' | ''            | ''                    | ''          | ''             | ''         | ''              | ''                           | ''              |
+			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''         | ''              | ''                           | ''              |
+			| 'Register  "R8010 Trade agent inventory"'     | ''            | ''                    | ''          | ''             | ''         | ''              | ''                           | ''              |
+			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''              | ''                           | ''              |
+			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Partner'       | 'Agreement'                  | 'Legal name'    |
+			| ''                                            | 'Receipt'     | '02.11.2022 10:53:19' | '1'         | 'Main Company' | '37/18SD'  | 'Trade agent 1' | 'Trade agent partner term 1' | 'Trade agent 1' |
+			| ''                                            | 'Receipt'     | '02.11.2022 10:53:19' | '2'         | 'Main Company' | 'UNIQ'     | 'Trade agent 1' | 'Trade agent partner term 1' | 'Trade agent 1' |
+			| ''                                            | 'Receipt'     | '02.11.2022 10:53:19' | '4'         | 'Main Company' | 'XS/Blue'  | 'Trade agent 1' | 'Trade agent partner term 1' | 'Trade agent 1' |
+			| ''                                            | 'Receipt'     | '02.11.2022 10:53:19' | '4'         | 'Main Company' | 'PZU'      | 'Trade agent 1' | 'Trade agent partner term 1' | 'Trade agent 1' |
 	And I close all client application windows
 
 Scenario: _0401335 check Sales invoice movements by the Register  "R8011 Trade agent serial lot number" (Shipment to trade agent)
@@ -1345,14 +1345,14 @@ Scenario: _0401349 check Sales invoice movements by the Register  "R8012 Consign
 		And I select "R8012 Consignor inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 194 dated 04.11.2022 16:33:38' | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
-			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
-			| 'Register  "R8012 Consignor inventory"'       | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
-			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                  | ''            | ''                         |
-			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Serial lot number' | 'Partner'     | 'Agreement'                |
-			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Main Company' | 'S/Yellow' | ''                  | 'Consignor 1' | 'Consignor partner term 1' |
-			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Main Company' | 'UNIQ'     | '09987897977889'    | 'Consignor 1' | 'Consignor partner term 1' |
-			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '4'         | 'Main Company' | 'UNIQ'     | '09987897977889'    | 'Consignor 2' | 'Consignor 2 partner term' |		
+			| 'Sales invoice 194 dated 04.11.2022 16:33:38' | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         | ''            |
+			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         | ''            |
+			| 'Register  "R8012 Consignor inventory"'       | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         | ''            |
+			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                  | ''            | ''                         | ''            |
+			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Serial lot number' | 'Partner'     | 'Agreement'                | 'Legal name'  |
+			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Main Company' | 'S/Yellow' | ''                  | 'Consignor 1' | 'Consignor partner term 1' | 'Consignor 1' |
+			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '2'         | 'Main Company' | 'UNIQ'     | '09987897977889'    | 'Consignor 1' | 'Consignor partner term 1' | 'Consignor 1' |
+			| ''                                            | 'Expense'     | '04.11.2022 16:33:38' | '4'         | 'Main Company' | 'UNIQ'     | '09987897977889'    | 'Consignor 2' | 'Consignor 2 partner term' | 'Consignor 2' |
 		And I close all client application windows
 
 Scenario: _0401349 check Sales invoice movements by the Register  "R8013 Consignor batch wise balance" (consignor and own stocks)

@@ -487,6 +487,7 @@ Function ShipmentToTradeAgent()
 		|	ShipmentToTradeAgent.Ref.Branch AS Branch,
 		|	ShipmentToTradeAgent.Ref.PartnerTradeAgent AS Partner,
 		|	ShipmentToTradeAgent.Ref.AgreementTradeAgent AS Agreement,
+		|	ShipmentToTradeAgent.Ref.LegalNameTradeAgent AS LegalName,
 		|	ShipmentToTradeAgent.Store,
 		|	ShipmentToTradeAgent.Ref AS Batch,
 		|	ShipmentToTradeAgent.SerialLotNumber,
@@ -517,6 +518,7 @@ Function ReceiptFromConsignor()
 		|	ReceiptFromConsignor.Ref.Branch AS Branch,
 		|	ReceiptFromConsignor.Ref.PartnerConsignor AS Partner,
 		|	ReceiptFromConsignor.Ref.AgreementConsignor AS Agreement,
+		|	ReceiptFromConsignor.Ref.LegalNameConsignor AS LegalName,
 		|	ReceiptFromConsignor.Ref AS PurchaseInvoice,
 		|	ReceiptFromConsignor.Ref AS Batch,
 		|	ReceiptFromConsignor.Currency AS Currency,
@@ -1228,6 +1230,7 @@ Function R8010B_TradeAgentInventory()
 		|	ShipmentToTradeAgent.Company,
 		|	ShipmentToTradeAgent.Partner,
 		|	ShipmentToTradeAgent.Agreement,
+		|	ShipmentToTradeAgent.LegalName,
 		|	ShipmentToTradeAgent.ItemKey,
 		|	ShipmentToTradeAgent.Quantity
 		|INTO R8010B_TradeAgentInventory
@@ -1263,6 +1266,7 @@ Function R8012B_ConsignorInventory()
 		|	ReceiptFromConsignor.Company,
 		|	ReceiptFromConsignor.Partner,
 		|	ReceiptFromConsignor.Agreement,
+		|	ReceiptFromConsignor.LegalName,
 		|	ReceiptFromConsignor.ItemKey,
 		|	ReceiptFromConsignor.SerialLotNumber,
 		|	ReceiptFromConsignor.Quantity

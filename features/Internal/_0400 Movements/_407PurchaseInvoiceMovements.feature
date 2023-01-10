@@ -885,16 +885,16 @@ Scenario: _0401028 check Purchase invoice movements by the Register  "R8012 Cons
 		And I select "R8012 Consignor inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 195 dated 02.11.2022 16:31:38' | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
-			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
-			| 'Register  "R8012 Consignor inventory"'          | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
-			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                  | ''            | ''                         |
-			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Serial lot number' | 'Partner'     | 'Agreement'                |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '2'         | 'Main Company' | 'UNIQ'     | '09987897977889'    | 'Consignor 1' | 'Consignor partner term 1' |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '2'         | 'Main Company' | 'UNIQ'     | '09987897977890'    | 'Consignor 1' | 'Consignor partner term 1' |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '2'         | 'Main Company' | 'ODS'      | '899007790088'      | 'Consignor 1' | 'Consignor partner term 1' |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Main Company' | '38/18SD'  | ''                  | 'Consignor 1' | 'Consignor partner term 1' |
-			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '14'        | 'Main Company' | 'S/Yellow' | ''                  | 'Consignor 1' | 'Consignor partner term 1' |		
+			| 'Purchase invoice 195 dated 02.11.2022 16:31:38' | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         | ''            |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         | ''            |
+			| 'Register  "R8012 Consignor inventory"'          | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         | ''            |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                  | ''            | ''                         | ''            |
+			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Serial lot number' | 'Partner'     | 'Agreement'                | 'Legal name'  |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '2'         | 'Main Company' | 'UNIQ'     | '09987897977889'    | 'Consignor 1' | 'Consignor partner term 1' | 'Consignor 1' |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '2'         | 'Main Company' | 'UNIQ'     | '09987897977890'    | 'Consignor 1' | 'Consignor partner term 1' | 'Consignor 1' |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '2'         | 'Main Company' | 'ODS'      | '899007790088'      | 'Consignor 1' | 'Consignor partner term 1' | 'Consignor 1' |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '10'        | 'Main Company' | '38/18SD'  | ''                  | 'Consignor 1' | 'Consignor partner term 1' | 'Consignor 1' |
+			| ''                                               | 'Receipt'     | '02.11.2022 16:31:38' | '14'        | 'Main Company' | 'S/Yellow' | ''                  | 'Consignor 1' | 'Consignor partner term 1' | 'Consignor 1' |
 		And I close all client application windows
 
 Scenario: _0401029 check Purchase invoice movements by the Register  "R8013 Consignor batch wise balance" (Receipt from consignor)

@@ -46,6 +46,7 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
+		When Create PaymentType (advance)
 		When Create information register TaxSettings records
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
@@ -144,10 +145,53 @@ Scenario: _0154100 preparation ( filling documents)
 			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load RSO
 		When create RetailSalesOrder objects
+		* Payment types
+			Given I open hyperlink "e1cib/list/Document.SalesOrder"									
+			And I go to line in "List" table
+				| 'Number' |
+				| '314'    |
+			And I select current line in "List" table
+			And I move to "Payments" tab
+			And I activate "Payment type" field in "Payments" table
+			And I select current line in "Payments" table
+			And I click choice button of "Payment type" attribute in "Payments" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Card 02'     |
+			And I select current line in "List" table
+			And I activate "Bank term" field in "Payments" table
+			And I click choice button of "Bank term" attribute in "Payments" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Bank term 01'     |
+			And I select current line in "List" table
+			And I finish line editing in "Payments" table
+			And I click the button named "FormPostAndClose"	
+			Given I open hyperlink "e1cib/list/Document.SalesOrder"									
+			And I go to line in "List" table
+				| 'Number' |
+				| '315'    |
+			And I select current line in "List" table
+			And I move to "Payments" tab
+			And I activate "Payment type" field in "Payments" table
+			And I select current line in "Payments" table
+			And I click choice button of "Payment type" attribute in "Payments" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Cash'        |
+			And I select current line in "List" table
+			And I activate "Account" field in "Payments" table
+			And I click choice button of "Account" attribute in "Payments" table
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Cash desk №1' |
+			And I select current line in "List" table
+			And I finish line editing in "Payments" table
+			And I click the button named "FormPostAndClose"	
 		And I execute 1C:Enterprise script at server
-			| "Documents.RetailSalesReceipt.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesOrder.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
-			| "Documents.RetailSalesReceipt.FindByNumber(315).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.SalesOrder.FindByNumber(315).GetObject().Write(DocumentWriteMode.Posting);" |	
 	
 Scenario: _01541001 check preparation
 	When check preparation	
@@ -4527,7 +4571,7 @@ Scenario: _0154255 create Bank receipt based on retail sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"									
 		And I go to line in "List" table
 			| 'Number' |
-			| '314'    |
+			| '314'    |		
 	* Create bank receipt
 		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
 		And I click Choice button of the field named "Account"
@@ -4543,6 +4587,10 @@ Scenario: _0154255 create Bank receipt based on retail sales order
 		And "PaymentList" table became equal
 			| '#' | 'Commission' | 'Retail customer' | 'Expense type' | 'Payment type' | 'Commission percent' | 'Additional analytic' | 'Payment terminal' | 'Bank term'    | 'Order'                                     | 'Total amount' | 'Financial movement type' | 'Profit loss center' |
 			| '1' | '20,00'      | 'Sam Jons'        | ''             | 'Card 02'      | '2,00'               | ''                    | ''                 | 'Bank term 01' | 'Sales order 314 dated 09.01.2023 12:49:08' | '1 000,00'     | ''                        | ''                   |
+		And I activate "Total amount" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "1 010,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table	
 		And I click "Post" button
 		And I delete "$$NumberBankReceipt314$$" variable
 		And I delete "$$BankReceipt314$$" variable
@@ -4585,7 +4633,7 @@ Scenario: _0154260 create Cash receipt based on retail sales order
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"		
 		And "List" table contains lines
 			| 'Number'                 |
-			| '$$NumbeCashReceipt315$$' |
+			| '$$NumberCashReceipt315$$' |
 		And I close all client application windows
 
 Scenario: _0154265 create retail sales receipt based on retail sales order
@@ -4609,8 +4657,8 @@ Scenario: _0154265 create retail sales receipt based on retail sales order
 			| '1' | 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | ''                   | 'No'                 | ''                   | 'pcs'  | '158,64'     | ''                  | '2,000'    | '520,00' | '18%' | ''              | '881,36'     | '1 040,00'     | ''                    | 'Store 01' | ''       | 'Sales order 314 dated 09.01.2023 12:49:08' | ''             |
 			| '2' | 'Own stocks'       | ''             | 'Basic Price Types' | 'Boots' | '37/18SD'  | ''                   | 'No'                 | ''                   | 'pcs'  | '213,56'     | ''                  | '2,000'    | '700,00' | '18%' | ''              | '1 186,44'   | '1 400,00'     | ''                    | 'Store 01' | ''       | 'Sales order 314 dated 09.01.2023 12:49:08' | ''             |
 		And "Payments" table became equal
-			| '#' | 'Amount'   | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term'    | 'Account' | 'Percent' |
-			| '1' | '1 000,00' | '20,00'      | 'Card 02'      | ''                 | 'Bank term 01' | ''        | '2,00'    |
+			| '#' | 'Amount'   | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Account' | 'Percent' |
+			| '1' | '1 010,00' | ''           | 'Advance'      | ''                 | ''          | ''        | ''        |
 		And I move to "Payments" tab
 		And in the table "Payments" I click "Add" button
 		And I activate "Payment type" field in "Payments" table
@@ -4627,7 +4675,7 @@ Scenario: _0154265 create retail sales receipt based on retail sales order
 			| 'Cash desk №2' |
 		And I select current line in "List" table
 		And I activate field named "PaymentsAmount" in "Payments" table
-		And I input "1 440,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I input "1 430,00" text in the field named "PaymentsAmount" of "Payments" table
 		And I finish line editing in "Payments" table	
 		And I click "Post" button
 		And I delete "$$NumberRetailSalesReceipt314$$" variable

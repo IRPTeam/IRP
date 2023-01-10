@@ -32,10 +32,14 @@ Scenario: _040148 preparation (sales order movements)
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
+		When Create PaymentType (advance)
+		When Create catalog PaymentTypes objects
+		When Create catalog BankTerms objects
 		When Create catalog Units objects
 		When Create catalog Items objects
 		When Create catalog PriceTypes objects
 		When Create catalog Specifications objects
+		When Create catalog RetailCustomers objects (check POS)
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
@@ -50,6 +54,7 @@ Scenario: _040148 preparation (sales order movements)
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
 		When Create information register TaxSettings records
+		When Create catalog CashAccounts objects
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
@@ -418,7 +423,7 @@ Scenario: _0401572 check Retail Sales order movements by the Register  "R3026 Sa
 			| 'Register  "R3026 Sales orders customer advance"' | ''            | ''                    | ''          | ''           | ''             | ''       | ''                  | ''         | ''                | ''                                          | ''        | ''             | ''                 | ''             |
 			| ''                                                | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''       | ''                  | ''         | ''                | ''                                          | ''        | ''             | ''                 | ''             |
 			| ''                                                | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch' | 'Payment type enum' | 'Currency' | 'Retail customer' | 'Order'                                     | 'Account' | 'Payment type' | 'Payment terminal' | 'Bank term'    |
-			| ''                                                | 'Receipt'     | '09.01.2023 12:49:08' | '1 000'     | '20'         | 'Main Company' | ''       | 'Card'              | 'TRY'      | 'Sam Jons'        | 'Sales order 314 dated 09.01.2023 12:49:08' | ''        | 'Card 02'      | ''                 | 'Bank term 01' |		
+			| ''                                                | 'Receipt'     | '09.01.2023 12:49:08' | '1 000'     | '20'         | 'Main Company' | ''       | 'Card'              | 'TRY'      | 'Sam Jons'        | 'Sales order 314 dated 09.01.2023 12:49:08' | ''        | 'Card 02'      | ''                 | 'Test01'       |		
 		And I close all client application windows
 
 Scenario: _0401574 check there is no Sales order movements by the Register  "R3026 Sales orders customer advance"

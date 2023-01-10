@@ -374,6 +374,8 @@ Procedure qPayment(Command)
 		Return;
 	EndIf;
 
+	OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object, ThisObject, "SpecialOffersEditFinish_ForDocument", Undefined, True);
+
 	OpenFormNotifyDescription = New NotifyDescription("PaymentFormClose", ThisObject);
 	ObjectParameters = New Structure();
 	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
@@ -382,7 +384,7 @@ Procedure qPayment(Command)
 	ObjectParameters.Insert("IsAdvance", False);
 	ObjectParameters.Insert("RetailCustomer", Object.RetailCustomer);
 	ObjectParameters.Insert("Company", Object.Company);
-
+	ObjectParameters.Insert("Discount", Object.ItemList.Total("OffersAmount"));
 	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
 		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);
 EndProcedure

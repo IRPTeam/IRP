@@ -285,3 +285,35 @@ Procedure SetUnique(Object) Export
 		EndIf;
 	EndDo;
 EndProcedure
+
+
+Function GetWrongSerialLotNumbers(ArrayOfItemKeys) Export
+	ArrayOfWrongSerialLotNumbers = New Array();
+	
+	For Each Row In ArrayOfItemKeys Do
+		For Each RowSLN In Row.SerialLotNumbers Do
+			If Not ValueIsFilled(RowSLN.SerialLotNumber) Then
+				ArrayOfWrongSerialLotNumbers.Add(New Structure("Key, SerialLotNumber"));
+				Continue;
+			EndIf;
+			IsWrongSerialLotNumber = True;
+			Owner = RowSLN.SerialLotNumber.SerialLotNumberOwner;
+			If Not ValueIsFilled(Owner) Then
+				IsWrongSerialLotNumber = False;
+			ElsIf Owner = Row.ItemKey Then
+				IsWrongSerialLotNumber = False;
+			ElsIf Owner = Row.ItemKey.Item Then
+				IsWrongSerialLotNumber = False;
+			ElsIf Owner = Row.ItemKey.Item.ItemType Then
+				IsWrongSerialLotNumber = False;
+			EndIf;
+			If IsWrongSerialLotNumber Then
+				ArrayOfWrongSerialLotNumbers.Add(New Structure("Key, SerialLotNumber", Row.Key, RowSLN.SerialLotNumber));
+			EndIf;
+		EndDo;
+	EndDo;
+	
+	Return ArrayOfWrongSerialLotNumbers;
+EndFUnction
+
+

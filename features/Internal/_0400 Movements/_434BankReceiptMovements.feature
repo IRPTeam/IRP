@@ -614,6 +614,9 @@ Scenario: _0434282 check Bank receipt movements by the Register "R3010 Cash on h
 			| ''                                             | 'Receipt'     | '23.06.2022 19:41:15' | '17,12'     | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
 			| ''                                             | 'Receipt'     | '23.06.2022 19:41:15' | '100'       | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                                             | 'Receipt'     | '23.06.2022 19:41:15' | '100'       | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                             | 'Expense'     | '23.06.2022 19:41:15' | '1,71'      | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | 'Expense'     | '23.06.2022 19:41:15' | '10'        | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | 'Expense'     | '23.06.2022 19:41:15' | '10'        | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |		
 	And I close all client application windows		
 			
 
@@ -703,6 +706,9 @@ Scenario: _0434287 check Bank receipt movements by the Register "R3010 Cash on h
 			| ''                                             | 'Receipt'     | '23.06.2022 17:50:08' | '17,12'     | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
 			| ''                                             | 'Receipt'     | '23.06.2022 17:50:08' | '100'       | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                                             | 'Receipt'     | '23.06.2022 17:50:08' | '100'       | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                             | 'Expense'     | '23.06.2022 17:50:08' | '1,71'      | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                             | 'Expense'     | '23.06.2022 17:50:08' | '10'        | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                             | 'Expense'     | '23.06.2022 17:50:08' | '10'        | 'Main Company' | 'Distribution department' | 'POS account, Comission separate, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |		
 		And I close all client application windows
 		
 

@@ -3898,6 +3898,109 @@ Scenario: _092083 check serial lot numbers in the POS
 			| 'Dress' | 'XS/Blue'  | '0512; 0514' | '2,000'    |
 		And I close all client application windows
 							
+Scenario: _092087 check cleaning serial lot number in documents
+		And I close all client application windows
+	* Open Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"	
+		And I click "Create" button
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Product 1 with SLN' |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'               | 'Item key' |
+			| 'Product 1 with SLN' | 'PZU'      |
+		And I select current line in "List" table
+		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I activate field named "Owner" in "List" table
+		And I go to line in "List" table
+			| 'Owner' | 'Serial number' |
+			| 'PZU'   | '456789'        |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+	* Check filling
+		And "ItemList" table became equal
+			| 'Item'               | 'Item key' | 'Serial lot numbers' |
+			| 'Product 1 with SLN' | 'PZU'      | '456789'             |
+	* Reselect item key and cleaning serial lot number
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'               | 'Item key' |
+			| 'Product 1 with SLN' | 'ODS'      |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| 'Item'               | 'Item key' | 'Serial lot numbers' |
+			| 'Product 1 with SLN' | 'ODS'      | ''                   |
+		And I close all client application windows
+	* Open Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
+		And I click "Create" button
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Product 1 with SLN' |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'               | 'Item key' |
+			| 'Product 1 with SLN' | 'PZU'      |
+		And I select current line in "List" table
+		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I activate field named "Owner" in "List" table
+		And I go to line in "List" table
+			| 'Owner' | 'Serial number' |
+			| 'PZU'   | '456789'        |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+	* Check filling
+		And "ItemList" table became equal
+			| 'Item'               | 'Item key' | 'Serial lot numbers' |
+			| 'Product 1 with SLN' | 'PZU'      | '456789'             |
+	* Reselect item key and cleaning serial lot number
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'               | 'Item key' |
+			| 'Product 1 with SLN' | 'ODS'      |
+		And I select current line in "List" table
+		And "ItemList" table became equal
+			| 'Item'               | 'Item key' | 'Serial lot numbers' |
+			| 'Product 1 with SLN' | 'ODS'      | ''                   |
+		And I close all client application windows
+
+				 
+		
+				
+				
+						
+
+
+
 
 Scenario: _092090 uncheck checkbox Use serial lot number in the Item type
 	Given I open hyperlink "e1cib/list/Catalog.ItemTypes"

@@ -596,14 +596,14 @@ Scenario: _042919 check Opening entry movements by the Register  "R8010 Trade ag
 		And I select "R8010 Trade agent inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Opening entry 14 dated 01.12.2022 12:41:27' | ''            | ''                    | ''          | ''             | ''         | ''              | ''                           |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''         | ''              | ''                           |
-			| 'Register  "R8010 Trade agent inventory"'    | ''            | ''                    | ''          | ''             | ''         | ''              | ''                           |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''              | ''                           |
-			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Partner'       | 'Agreement'                  |
-			| ''                                           | 'Receipt'     | '01.12.2022 12:41:27' | '20'        | 'Main Company' | 'PZU'      | 'Trade agent 1' | 'Trade agent partner term 1' |
-			| ''                                           | 'Receipt'     | '01.12.2022 12:41:27' | '30'        | 'Main Company' | 'XS/Blue'  | 'Trade agent 1' | 'Trade agent partner term 1' |
-			| ''                                           | 'Receipt'     | '01.12.2022 12:41:27' | '100'       | 'Main Company' | 'UNIQ'     | 'Trade agent 1' | 'Trade agent partner term 1' |		
+			| 'Opening entry 14 dated 01.12.2022 12:41:27' | ''            | ''                    | ''          | ''             | ''         | ''              | ''                           | ''              |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''         | ''              | ''                           | ''              |
+			| 'Register  "R8010 Trade agent inventory"'    | ''            | ''                    | ''          | ''             | ''         | ''              | ''                           | ''              |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''              | ''                           | ''              |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Partner'       | 'Agreement'                  | 'Legal name'    |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:27' | '20'        | 'Main Company' | 'PZU'      | 'Trade agent 1' | 'Trade agent partner term 1' | 'Trade agent 1' |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:27' | '30'        | 'Main Company' | 'XS/Blue'  | 'Trade agent 1' | 'Trade agent partner term 1' | 'Trade agent 1' |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:27' | '100'       | 'Main Company' | 'UNIQ'     | 'Trade agent 1' | 'Trade agent partner term 1' | 'Trade agent 1' |
 		And I close all client application windows
 
 Scenario: _042920 check Opening entry movements by the Register  "R8011 Trade agent serial lot number" (shipment to trade agent)
@@ -750,13 +750,13 @@ Scenario: _042926 check Opening entry movements by the Register  "R8012 Consigno
 		And I select "R8012 Consignor inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Opening entry 15 dated 01.12.2022 12:41:39' | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
-			| 'Register  "R8012 Consignor inventory"'      | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                  | ''            | ''                         |
-			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Serial lot number' | 'Partner'     | 'Agreement'                |
-			| ''                                           | 'Receipt'     | '01.12.2022 12:41:39' | '50'        | 'Main Company' | 'M/White'  | ''                  | 'Consignor 1' | 'Consignor partner term 1' |
-			| ''                                           | 'Receipt'     | '01.12.2022 12:41:39' | '70'        | 'Main Company' | 'PZU'      | '8908899877'        | 'Consignor 1' | 'Consignor partner term 1' |		
+			| 'Opening entry 15 dated 01.12.2022 12:41:39' | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         | ''            |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         | ''            |
+			| 'Register  "R8012 Consignor inventory"'      | ''            | ''                    | ''          | ''             | ''         | ''                  | ''            | ''                         | ''            |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                  | ''            | ''                         | ''            |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Serial lot number' | 'Partner'     | 'Agreement'                | 'Legal name'  |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:39' | '50'        | 'Main Company' | 'M/White'  | ''                  | 'Consignor 1' | 'Consignor partner term 1' | 'Consignor 1' |
+			| ''                                           | 'Receipt'     | '01.12.2022 12:41:39' | '70'        | 'Main Company' | 'PZU'      | '8908899877'        | 'Consignor 1' | 'Consignor partner term 1' | 'Consignor 1' |
 		And I close all client application windows
 
 Scenario: _042927 check Opening entry movements by the Register  "R8013 Consignor batch wise balance" (receipt from consignor)

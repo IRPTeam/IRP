@@ -52,6 +52,7 @@ Scenario: _05602 preparation (consignment landed cost)
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects
 		When Create chart of characteristic types CurrencyMovementType objects
+		When Create catalog ReportOptions objects
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
 		When Create information register TaxSettings records
@@ -138,6 +139,10 @@ Scenario: _056002 check preparation
 Scenario: _056003 check batch balance
 	And I close all client application windows
 	Given I open hyperlink "e1cib/app/Report.BatchBalance"
+	And I click "Select option..." button
+	And I move to "Custom" tab
+	And I activate field named "OptionsListReportOption" in "OptionsList" table
+	And I select current line in "OptionsList" table
 	* Select period
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
 		And I input "29.10.2022" text in the field named "DateBegin"

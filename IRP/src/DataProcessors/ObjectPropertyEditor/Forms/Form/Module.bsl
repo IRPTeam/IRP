@@ -7,6 +7,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	FormCash = GetFormCash(ThisObject);
 	FormCash.CountConditionalAppearance = ThisObject.ConditionalAppearance.Items.Count();
+	FormCash.CountNewConditionalAppearance = ThisObject.ConditionalAppearance.Items.Count();
+	
 	LoadMetadata(FormCash);
 	
 	RefsList = Parameters.RefsList;
@@ -148,130 +150,129 @@ Procedure Save(Command)
 EndProcedure
 
 &AtClient
-Procedure DeleteCurrentValue(Command)
+Procedure FieldSettings(Command)
+	OpenForm("DataProcessor.ObjectPropertyEditor.Form.FieldSettings", 
+		New Structure("ColumnsData", GetFormCash(ThisObject).ColumnsData), 
+		ThisObject, , , ,
+		New NotifyDescription("FieldSettingsEnd", ThisObject),
+		FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure MarkOffAll(Command)
+	For Each TableRow In ThisObject.PropertiesTable Do
+		TableRow.Marked = False;
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure MarkOnAll(Command)
+	For Each TableRow In ThisObject.PropertiesTable Do
+		TableRow.Marked = True;
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure MarkSelectedRows(Command)
+	For Each RowIndex In Items.PropertiesTable.SelectedRows Do
+		RowIndex = RowIndex; // Number
+		Row = ThisObject.PropertiesTable.Get(RowIndex);
+		Row.Marked = True; 
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure DeleteMarkedValue(Command)
 	
-	RowValue = Items.PropertiesTable.CurrentData;
 	Field = Items.PropertiesTable.CurrentItem.Name; // String
 	FieldDescription = GetFormCash(ThisObject).ColumnsData[Field]; // See GetFieldDescription
 	
-	For Each SelectedRow In Items.PropertiesTable.SelectedRows Do
-		RowIndex = SelectedRow; // Number
-		RowValue = ThisObject.PropertiesTable.FindByID(RowIndex);
+	MarkedRows = ThisObject.PropertiesTable.FindRows(New Structure("Marked", True));
+	For Each MarkedRow In MarkedRows Do
 		If FieldDescription.isCollection Then
-			RowValue[Field] = New ValueList();
+			SetNewValueToRowField(ThisObject, MarkedRow, Field, New ValueList());
 		Else
-			RowValue[Field] = Undefined;
+			SetNewValueToRowField(ThisObject, MarkedRow, Field, Undefined);
 		EndIf;
-		CheckRowModified(ThisObject, RowValue);
 	EndDo;
 
 EndProcedure
 
 &AtClient
-Procedure CopyThisValueToEmptyCells(Command)
+Procedure SetValueToEmptyCells(Command)
 	
-	CurrentRow = Items.PropertiesTable.CurrentData;
+	If Items.PropertiesTable.CurrentItem.Parent = Items.PropertiesTable Then
+		Return;
+	EndIf;
+	
 	Field = Items.PropertiesTable.CurrentItem.Name; // String
 	FieldDescription = GetFormCash(ThisObject).ColumnsData[Field]; // See GetFieldDescription
-	CurrentValue = CurrentRow[Field]; // Arbitrary, ValueList
+	
+	SelectedRows = New Array; // Array of Number
 	
 	For Each Row In ThisObject.PropertiesTable Do
-		If Row = CurrentRow Then
-			Continue;
-		EndIf;
-		
 		RowValue = Row[Field]; // Arbitrary, ValueList
 		If FieldDescription.isCollection Then
 			If RowValue = Undefined Or (TypeOf(RowValue) = Type("ValueList") And RowValue.Count() = 0) Then
-				Row[Field] = CurrentValue;
+				SelectedRows.Add(Row.GetID());
 			EndIf;
 		Else
 			If RowValue = Undefined Then
-				Row[Field] = CurrentValue;
+				SelectedRows.Add(Row.GetID());
 			EndIf;
 		EndIf;
-		
-		CheckRowModified(ThisObject, Row);
 	EndDo;
+
+	SettingNewValueForRows(SelectedRows);
 
 EndProcedure
 
 &AtClient
-Procedure SetNewValue(Command)
+Procedure SetValueForMarkedRows(Command)
 	
-	CurrentRow = Items.PropertiesTable.CurrentData;
-	Field = Items.PropertiesTable.CurrentItem.Name; // String
-	
-	For Each Row In ThisObject.PropertiesTable Do
-		If Row = CurrentRow Then
-			Continue;
-		EndIf;
-		Row[Field] = CurrentRow[Field]; // Arbitrary, ValueList
-		CheckRowModified(ThisObject, Row);
-	EndDo;
-
-EndProcedure
-
-&AtClient
-Procedure SetValueForSelectedRows(Command)
-	
-	RowValue = Items.PropertiesTable.CurrentData;
-	Field = Items.PropertiesTable.CurrentItem.Name; // String
-	CurrentRowValue = RowValue[Field]; // String, Number, Arbitrary, ValueList
+	If Items.PropertiesTable.CurrentItem.Parent = Items.PropertiesTable Then
+		Return;
+	EndIf;
 	
 	SelectedRows = New Array; // Array of Number
-	For Each SelectedRow In Items.PropertiesTable.SelectedRows Do
-		RowIndex = SelectedRow; // Number
+	MarkedRows = ThisObject.PropertiesTable.FindRows(New Structure("Marked", True));
+	For Each MarkedRow In MarkedRows Do
+		RowIndex = MarkedRow.GetID(); // Number
 		SelectedRows.Add(RowIndex);
 	EndDo;
-	
-	FieldDescription = GetFormCash(ThisObject).ColumnsData[Field]; // See GetFieldDescription
-	ClearType = New TypeDescription(FieldDescription.ValueType, , "Undefined");
-	If FieldDescription.isCollection Then
-		If Not TypeOf(CurrentRowValue) = Type("ValueList") Then
-			NewValue = New ValueList; // ValueList of String, Number, Arbitrary
-			If Not CurrentRowValue = Undefined Then
-				NewValue.Add(CurrentRowValue);
-			EndIf;
-			NewValue.ValueType = ClearType;
-			CurrentRowValue = NewValue;
-			ClearType = New TypeDescription(FieldDescription.CollectionValueType, , "Undefined");
-		EndIf;
-	Else
-		If CurrentRowValue = Undefined Then
-			CurrentRowValue = ClearType.AdjustValue();
-		EndIf;
-	EndIf;
-	
-	If TypeOf(CurrentRowValue) = Type("String") Then
-		OpenForm("DataProcessor.ObjectPropertyEditor.Form.EditMultilineText", 
-			New Structure("ExternalText", CurrentRowValue), 
-			ThisObject, , , ,
-			New NotifyDescription("OnEditedMultilineTextEnd", 
-				ThisObject, 
-				New Structure("SelectedRows, FieldName", SelectedRows, Field)),
-			FormWindowOpeningMode.LockOwnerWindow);
-	ElsIf Not IsBlankString(FieldDescription.ValueChoiceForm) Then
-		OpenFormParameters = New Structure;
-		OpenFormParameters.Insert("Key", CurrentRowValue);
-		OpenFormParameters.Insert("Filter", New Structure("Owner", FieldDescription.Ref));
-		OpenForm(FieldDescription.ValueChoiceForm, 
-			OpenFormParameters, 
-			ThisObject, , , ,
-			New NotifyDescription("SetValueForSelectedRowsEnd", 
-				ThisObject, 
-				New Structure("FieldName, SelectedRows", Field, SelectedRows)), 
-			FormWindowOpeningMode.LockOwnerWindow);
-	Else
-		ShowInputValue(
-			New NotifyDescription("SetValueForSelectedRowsEnd", 
-				ThisObject, 
-				New Structure("FieldName, SelectedRows", Field, SelectedRows)), 
-			CurrentRowValue, 
-			"Input new value", 
-			ClearType);
-	EndIf;
 
+	SettingNewValueForRows(SelectedRows);
+
+EndProcedure
+
+&AtClient
+Procedure CopyThisRowValueToMarkedRows(Command)
+	
+	CurrentRow = Items.PropertiesTable.CurrentData;
+	If CurrentRow = Undefined Then
+		Return;
+	EndIf;
+	
+	RowDescription = New Array; // Array of Structure
+	ColumnsData = GetFormCash(ThisObject).ColumnsData;
+	For Each ColumnKeyValue In ColumnsData Do
+		FieldName = ColumnKeyValue.Key; // String
+		FieldDescription = ColumnKeyValue.Value; // See GetFieldDescription
+		FieldData = New Structure;
+		FieldData.Insert("Property", FieldDescription.Ref);
+		FieldData.Insert("Value", CurrentRow[FieldName]);
+		FieldData.Insert("isCollection", FieldDescription.isCollection);
+		FieldData.Insert("FieldName", FieldName);
+		RowDescription.Add(FieldData);
+	EndDo;
+	
+	OpenForm("DataProcessor.ObjectPropertyEditor.Form.PropertyPackEditor", 
+		New Structure("RowData", RowDescription), 
+		ThisObject, 
+		UUID, , ,
+		New NotifyDescription("CopyThisRowValueToMarkedRowsEnd", ThisObject), 
+		FormWindowOpeningMode.LockWholeInterface);
+	
 EndProcedure
 
 #EndRegion
@@ -290,7 +291,7 @@ Procedure OnEditedMultilineTextEnd(ChangedText, AddInfo) Export
 	If ValueIsFilled(ChangedText) Then
 		For Each RowKey In AddInfo.SelectedRows Do
 			CurrentRow = ThisObject.PropertiesTable.FindByID(RowKey);
-			CurrentRow[AddInfo.FieldName] = ChangedText;
+			SetNewValueToRowField(ThisObject, CurrentRow, AddInfo.FieldName, ChangedText);
 		EndDo;
 	EndIf;
 EndProcedure
@@ -307,14 +308,74 @@ Procedure SetValueForSelectedRowsEnd(ChangedValue, AddInfo) Export
 	If Not ChangedValue = Undefined Then
 		For Each RowKey In AddInfo.SelectedRows Do
 			CurrentRow = ThisObject.PropertiesTable.FindByID(RowKey);
-			CurrentRow[AddInfo.FieldName] = ChangedValue;
+			SetNewValueToRowField(ThisObject, CurrentRow, AddInfo.FieldName, ChangedValue);
 		EndDo;
 	EndIf;
 EndProcedure
 
+// Set value for selected rows end.
+// 
+// Parameters:
+//  RowData - Array of Structure:
+// 		* FieldName - String -
+// 		* Value - Undefined -
+//  AddInfo - Structure
+&AtClient
+Procedure CopyThisRowValueToMarkedRowsEnd(RowData, AddInfo) Export
+	If Not RowData = Undefined Then
+		MarkedRows = ThisObject.PropertiesTable.FindRows(New Structure("Marked", True));
+		For Each MarkedRow In MarkedRows Do
+			For Each FieldData In RowData Do
+				SetNewValueToRowField(ThisObject, MarkedRow, FieldData.FieldName, FieldData.Value);
+			EndDo;
+		EndDo;
+	EndIf;
+EndProcedure
+
+// Field settings end.
+// 
+// Parameters:
+//  Result - Boolean, Undefined - Result
+//  AddInfo - Undefined - Add info
+&AtClient
+Procedure FieldSettingsEnd(Result, AddInfo) Export
+	If Result = True Then
+		SetPropertyAvailability();
+	EndIf;
+EndProcedure	
+
 #EndRegion
 
 #Region Private
+
+&AtClientAtServerNoContext
+Procedure SetNewValueToRowField(Form, Row, Field, Val NewValue)
+	
+	If TypeOf(NewValue) = Type("ValueList") Then
+		CopyValy = New ValueList; // ValueList of String, Number, Arbitrary
+		For Each ListItem In NewValue Do
+			ItemValue = ListItem.Value; // String, Number, Arbitrary
+			CopyValy.Add(ItemValue);
+		EndDo;
+		CopyValy.ValueType = NewValue.ValueType;
+		NewValue = CopyValy; 
+	EndIf;
+	
+	FormCash = GetFormCash(Form);
+	FieldDescription = FormCash.ColumnsData[Field]; // See GetFieldDescription
+	
+	If FormCash.ConstraintName = "" Then
+		Row[Field] = NewValue;
+	Else
+		PropertyValues = FormCash.PropertyConstraints.Get(Row.Constraint); // Array of AnyRef
+		If Not PropertyValues.Find(FieldDescription.Ref) = Undefined Then
+			Row[Field] = NewValue;
+		EndIf;
+	EndIf;
+	
+	CheckRowModified(Form, Row);
+	
+EndProcedure
 
 // Check row modified.
 // 
@@ -391,7 +452,12 @@ EndProcedure
 // * ColumnsData - Structure:
 //	** Key - String
 //	** Value - See GetFieldDescription
-// * CountConditionalAppearance - Number
+// * CountConditionalAppearance - Number - Number of predefined appearance
+// * CountNewConditionalAppearance - Number - Number of appearances after table settings
+// * ConstraintName - String - Name of ref' property for constraint
+// * PropertyConstraints - Map - Set properties constraints:
+//	** Key - CatalogRef - Ref of properties constraint
+//	** Value - Array of ChartOfCharacteristicTypesRef - Array of available properties 
 &AtClientAtServerNoContext
 Function GetFormCash(Form)
 	FormCash = Form["FormDataCash"]; // Structure, Undefined
@@ -404,6 +470,9 @@ Function GetFormCash(Form)
 	FormCash.Insert("SchemaAddress", "");
 	FormCash.Insert("ColumnsData", New Structure);
 	FormCash.Insert("CountConditionalAppearance", 0);
+	FormCash.Insert("CountNewConditionalAppearance", 0);
+	FormCash.Insert("ConstraintName", "");
+	FormCash.Insert("PropertyConstraints", New Map);
 	
 	Form["FormDataCash"] = FormCash;
 	
@@ -441,6 +510,76 @@ EndFunction
 
 #Region FormProperty_Setting
 
+// Setting new value for rows.
+// 
+// Parameters:
+//  SelectedRows - Array of Number - Selected rows
+&AtClient
+Procedure SettingNewValueForRows(SelectedRows)
+
+	RowValue = Items.PropertiesTable.CurrentData;
+	Field = Items.PropertiesTable.CurrentItem.Name; // String
+	CurrentRowValue = RowValue[Field]; // String, Number, Arbitrary, ValueList
+	
+	FieldDescription = GetFormCash(ThisObject).ColumnsData[Field]; // See GetFieldDescription
+	ClearType = New TypeDescription(FieldDescription.ValueType, , "Undefined");
+	If FieldDescription.isCollection Then
+		If Not TypeOf(CurrentRowValue) = Type("ValueList") Then
+			NewValue = New ValueList; // ValueList of String, Number, Arbitrary
+			If Not CurrentRowValue = Undefined Then
+				NewValue.Add(CurrentRowValue);
+			EndIf;
+			NewValue.ValueType = ClearType;
+			CurrentRowValue = NewValue;
+		EndIf;
+	Else
+		If CurrentRowValue = Undefined Then
+			CurrentRowValue = ClearType.AdjustValue();
+		EndIf;
+	EndIf;
+	
+	If TypeOf(CurrentRowValue) = Type("String") Then
+		OpenForm("DataProcessor.ObjectPropertyEditor.Form.EditMultilineText", 
+			New Structure("ExternalText", CurrentRowValue), 
+			ThisObject, , , ,
+			New NotifyDescription("OnEditedMultilineTextEnd", 
+				ThisObject, 
+				New Structure("SelectedRows, FieldName", SelectedRows, Field)),
+			FormWindowOpeningMode.LockOwnerWindow);
+			
+	ElsIf TypeOf(CurrentRowValue) = Type("ValueList") Then
+		OpenForm("DataProcessor.ObjectPropertyEditor.Form.EditValueList", 
+			New Structure("List, ItemType", CurrentRowValue, ClearType), 
+			ThisObject, , , ,
+			New NotifyDescription("SetValueForSelectedRowsEnd", 
+				ThisObject, 
+				New Structure("SelectedRows, FieldName", SelectedRows, Field)),
+			FormWindowOpeningMode.LockOwnerWindow);
+			
+	ElsIf Not IsBlankString(FieldDescription.ValueChoiceForm) Then
+		OpenFormParameters = New Structure;
+		OpenFormParameters.Insert("Key", CurrentRowValue);
+		OpenFormParameters.Insert("Filter", New Structure("Owner", FieldDescription.Ref));
+		OpenForm(FieldDescription.ValueChoiceForm, 
+			OpenFormParameters, 
+			ThisObject, , , ,
+			New NotifyDescription("SetValueForSelectedRowsEnd", 
+				ThisObject, 
+				New Structure("FieldName, SelectedRows", Field, SelectedRows)), 
+			FormWindowOpeningMode.LockOwnerWindow);
+			
+	Else
+		ShowInputValue(
+			New NotifyDescription("SetValueForSelectedRowsEnd", 
+				ThisObject, 
+				New Structure("FieldName, SelectedRows", Field, SelectedRows)), 
+			CurrentRowValue, 
+			"Input new value", 
+			ClearType);
+	EndIf;
+	
+EndProcedure
+
 // Set tables list.
 // 
 // Parameters:
@@ -473,8 +612,15 @@ EndProcedure
 // 
 &AtServer
 Procedure SetNewTable()
+	SetPropertiesConstraint(ThisObject);
 	SetSourceSettings(ThisObject);
 	SetTableSettings(ThisObject);
+EndProcedure
+
+&AtServerNoContext
+Procedure SetPropertiesConstraint(Form)
+	FormCash = GetFormCash(Form);
+	FormCash.ConstraintName = GetConstraintName(GetObjectType(Form), GetObjectTable(Form)); 
 EndProcedure	
 	
 // Set source settings.
@@ -503,11 +649,14 @@ Procedure SetSourceSettings(Form)
 	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Ref");
 	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Property");
 	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Value");
+	SelectionItems.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Constraint");
 	
     DataSettingsComposer.Settings.Structure.Clear();
     RefGroup = DataSettingsComposer.Settings.Structure.Add(Type("DataCompositionGroup"));
 	RefGroup.GroupFields.Items.Add(Type("DataCompositionGroupField")).Field = New DataCompositionField("Ref");
 	RefGroup.Selection.Items.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Ref");
+	RefGroup.GroupFields.Items.Add(Type("DataCompositionGroupField")).Field = New DataCompositionField("Constraint");
+	RefGroup.Selection.Items.Add(Type("DataCompositionSelectedField")).Field = New DataCompositionField("Constraint");
 	DetailGroup = RefGroup.Structure.Add(Type("DataCompositionGroup"));
 	DetailGroup.Selection.Items.Add(Type("DataCompositionAutoSelectedField"));
     
@@ -526,6 +675,8 @@ Function GetDCSchema(Form)
 	TS_String = "TabularSections";
 	Table_String = GetObjectTable(Form); // String
 	
+	FormCash = GetFormCash(Form);
+	 
 	MetaObject = Metadata.FindByType(GetObjectType(Form));
 	MetaObjectTable = MetaObject[TS_String][Table_String]; // MetadataObjectTabularSection
 	
@@ -541,6 +692,7 @@ Function GetDCSchema(Form)
 	DataSet.Query = StrTemplate(
 		"SELECT
 		|	Table.Ref,
+		|	%4 As Constraint,
 		|	Attributes.Property,
 		|	Attributes.Value
 		|FROM
@@ -549,7 +701,8 @@ Function GetDCSchema(Form)
 		|		ON Attributes.Ref = Table.Ref", 
 		MetaObject.FullName(), 
 		Table_String, 
-		MetaObject.FullName());
+		MetaObject.FullName(),
+		?(IsBlankString(FormCash.ConstraintName), "Undefined", "Table.Ref." + FormCash.ConstraintName));
 	
 	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
 	DataField.Field = "Ref";
@@ -560,12 +713,22 @@ Function GetDCSchema(Form)
 	DataField.Field = "Property";
 	DataField.DataPath = "Property";
 	DataField.Title = MetaObjectTable.Attributes.Property.Synonym;
+	DataField.UseRestriction.Condition = True;
+	DataField.AttributeUseRestriction.Condition = True;
 		
 	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
 	DataField.Field = "Value";
 	DataField.DataPath = "Value";
 	DataField.Title = MetaObjectTable.Attributes.Value.Synonym;
+	DataField.UseRestriction.Condition = True;
+	DataField.AttributeUseRestriction.Condition = True;
 	
+	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
+	DataField.Field = "Constraint";
+	DataField.DataPath = "Constraint";
+	DataField.UseRestriction.Condition = True;
+	DataField.AttributeUseRestriction.Condition = True;
+		
 	Return DCSchema;
 EndFunction
 
@@ -613,7 +776,10 @@ Procedure SetTableSettings(Form)
 	OldAttributes = New Array; // Array of String
 	CurrentColumns = Form.GetAttributes(PT_String);
 	For Each ColumnItem In CurrentColumns Do
-		If ColumnItem.Name = "Object" Or ColumnItem.Name = "isModified" Then
+		If ColumnItem.Name = "Object" 
+				Or ColumnItem.Name = "Constraint"
+				Or ColumnItem.Name = "Marked"
+				Or ColumnItem.Name = "isModified" Then
 			Continue;
 		EndIf;
 		OldAttributes.Add(StrTemplate("%1.%2", ColumnItem.Path, ColumnItem.Name));
@@ -666,6 +832,8 @@ Procedure SetTableSettings(Form)
 		CreateConditionalAppearance(Form, NewFormItem, ColumnDescription.isCollection);
 	EndDo;
 	
+	GetFormCash(Form).CountNewConditionalAppearance = Form.ConditionalAppearance.Items.Count();
+	
 EndProcedure
 
 // Add form item properties.
@@ -709,24 +877,6 @@ Procedure CreateConditionalAppearance(Form, NewFormItem, isCollection)
 		AppearanceField.Use = True;
 		
 		ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
-		ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightGray);
-		FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
-		FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
-		FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
-		//@skip-warning
-		FilterItem.RightValue = Undefined;
-		FilterItem.Use = True;
-		FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
-		FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
-		FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath);
-		//@skip-warning
-		FilterItem.RightValue = New DataCompositionField(NewFormItem.DataPath + "_old");
-		FilterItem.Use = True;
-		AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
-		AppearanceField.Field = New DataCompositionField(NewFormItem.Name);
-		AppearanceField.Use = True;
-	
-		ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
 		ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightPink);
 		//@skip-warning
 		ConditionalAppearanceItem.Appearance.SetParameterValue("Text", StrTemplate("<%1>", R().Form_002));
@@ -747,18 +897,6 @@ Procedure CreateConditionalAppearance(Form, NewFormItem, isCollection)
 		AppearanceField.Use = True;
 	Else
 		ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
-		ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightGray);
-		FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
-		FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
-		FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath + "_modified");
-		//@skip-warning
-		FilterItem.RightValue = 1;
-		FilterItem.Use = True;
-		AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
-		AppearanceField.Field = New DataCompositionField(NewFormItem.Name);
-		AppearanceField.Use = True;
-		
-		ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
 		ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightPink);
 		//@skip-warning
 		ConditionalAppearanceItem.Appearance.SetParameterValue("Text", StrTemplate("<%1>", R().Form_002));
@@ -766,7 +904,7 @@ Procedure CreateConditionalAppearance(Form, NewFormItem, isCollection)
 		FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
 		FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath + "_modified");
 		//@skip-warning
-		FilterItem.RightValue = 2;
+		FilterItem.RightValue = 2; // Now zero quantity, but before more
 		FilterItem.Use = True;
 		AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
 		AppearanceField.Field = New DataCompositionField(NewFormItem.Name);
@@ -778,7 +916,7 @@ Procedure CreateConditionalAppearance(Form, NewFormItem, isCollection)
 		FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
 		FilterItem.LeftValue = New DataCompositionField(NewFormItem.DataPath + "_modified");
 		//@skip-warning
-		FilterItem.RightValue = 3;
+		FilterItem.RightValue = 3; // Quantity has changed
 		FilterItem.Use = True;
 		AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
 		AppearanceField.Field = New DataCompositionField(NewFormItem.Name);
@@ -969,6 +1107,9 @@ Procedure LoadNewColumns(Form)
 	QuerySelection = Query.Execute().Select();
 	While QuerySelection.Next() Do
 		ItemRef = QuerySelection.Property; // AnyRef
+		If Not ValueIsFilled(ItemRef) Then
+			Continue;
+		EndIf;
 		ItemKey = GetFieldKeyFromRef(ItemRef);
 		ItemPresentation = QuerySelection.Presentation; // String
 		ValueType = QuerySelection.ValueType; // TypeDescription
@@ -988,6 +1129,7 @@ Procedure LoadTableData()
 	
 	Ref_String = "Ref";
 	Object_String = "Object";
+	Constraint_String = "Constraint";
 	
 	ColumnsData = GetFormCash(ThisObject).ColumnsData;
 	SchemaAddress = GetFormCash(ThisObject).SchemaAddress;
@@ -1011,7 +1153,9 @@ Procedure LoadTableData()
 	For Each RowData In DataTree.Rows Do
 		TableRecord = ThisObject.PropertiesTable.Add();
 		DataRef = RowData[Ref_String]; // AnyRef
+		ConstraintRef = RowData[Constraint_String]; // AnyRef
 		TableRecord[Object_String] = DataRef;
+		TableRecord[Constraint_String] = ConstraintRef;
 		For Each RowProperty In RowData.Rows Do
 			PropertyRef = ReadPropertyFromTreeRow(RowProperty);
 			If PropertyRef = Null Then
@@ -1035,6 +1179,109 @@ Procedure LoadTableData()
 		CheckRowModified(ThisObject, TableRecord);
 	EndDo;
 	
+	LoadConstraints();
+	
+	SetPropertyAvailability();
+	
+EndProcedure
+
+&AtServer
+Procedure LoadConstraints()
+	
+	String_Value = "Value";
+	String_Ref = "Ref";
+	
+	FormCash = GetFormCash(ThisObject);
+	FormCash.PropertyConstraints.Clear();
+	
+	If IsBlankString(FormCash.ConstraintName) Then
+		Return;
+	EndIf;
+	
+	ConstraintTree = GetConstraintTree(
+		GetObjectType(ThisObject), 
+		GetObjectTable(ThisObject),
+		ThisObject.PropertiesTable.Unload(, "Constraint").UnloadColumn(0));
+		
+	If ConstraintTree = Undefined Then
+		Return;
+	EndIf;
+	
+	For Each ConstraintRow In ConstraintTree.Rows Do
+		ConstraintValues = New Array; // Array of AnyRef
+		For Each ValueRow In ConstraintRow.Rows Do
+			ValueValue = ValueRow[String_Value]; // AnyRef
+			ConstraintValues.Add(ValueValue);
+		EndDo;
+		FormCash.PropertyConstraints.Insert(ConstraintRow[String_Ref], ConstraintValues);
+	EndDo;
+
+EndProcedure
+
+&AtServer
+Procedure SetPropertyAvailability()
+	
+	FormCash = GetFormCash(ThisObject);
+	If FormCash.ConstraintName = "" Then
+		Return;
+	EndIf;
+	
+	AllAvailableProperty = New Array; // Array of AnyRef
+	PropertyNames = New Map;
+	
+	ConstraintTable = ThisObject.PropertiesTable.Unload(, "Constraint");
+	ConstraintTable.GroupBy("Constraint");
+	
+	For Each ConstraintRecord In ConstraintTable Do
+		ConstraintValues = FormCash.PropertyConstraints.Get(ConstraintRecord.Constraint); // Array of AnyRef
+		If TypeOf(ConstraintValues) = Type("Array") Then
+			For Each Constraint In ConstraintValues Do
+				If AllAvailableProperty.Find(Constraint) = Undefined Then
+					AllAvailableProperty.Add(Constraint);
+				EndIf;
+			EndDo;
+		EndIf;
+	EndDo;
+	
+	For Each ColumndKeyValue In FormCash.ColumnsData Do
+		ColumnName = ColumndKeyValue.Key; // String
+		ColumnDescription = ColumndKeyValue.Value; // See GetFieldDescription
+		Items.Find(ColumnName).Visible = 
+			ColumnDescription.isVisible And Not (AllAvailableProperty.Find(ColumnDescription.Ref) = Undefined);
+		PropertyNames.Insert(ColumnDescription.Ref, ColumnName);
+	EndDo;
+
+	ConditionalAppearanceCount = FormCash.CountNewConditionalAppearance;
+	While ThisObject.ConditionalAppearance.Items.Count() > ConditionalAppearanceCount Do
+		LastItem = ThisObject.ConditionalAppearance.Items.Get(ThisObject.ConditionalAppearance.Items.Count() - 1);
+		ThisObject.ConditionalAppearance.Items.Delete(LastItem);
+	EndDo;
+	
+	For Each ConstraintRecord In ConstraintTable Do
+		If Not ValueIsFilled(ConstraintRecord.Constraint) Then
+			Continue;
+		EndIf;
+		ConstraintValues = FormCash.PropertyConstraints.Get(ConstraintRecord.Constraint); // Array of AnyRef
+		If ConstraintValues.Count() < PropertyNames.Count() Then
+			ConditionalAppearanceItem = ThisObject.ConditionalAppearance.Items.Add();
+			ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightGray);
+			ConditionalAppearanceItem.Appearance.SetParameterValue("ReadOnly", True);
+			FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+			FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
+			FilterItem.LeftValue = New DataCompositionField("PropertiesTable.Constraint");
+			//@skip-warning
+			FilterItem.RightValue = ConstraintRecord.Constraint;
+			FilterItem.Use = True;
+			For Each PropertyKeyValue In PropertyNames Do
+				If ConstraintValues.Find(PropertyKeyValue.Key) = Undefined Then
+					AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
+					AppearanceField.Field = New DataCompositionField(PropertyKeyValue.Value);
+					AppearanceField.Use = True;
+				EndIf;
+			EndDo;
+		EndIf;
+	EndDo;
+
 EndProcedure
 
 // Read property from Tree Row.
@@ -1133,6 +1380,7 @@ EndProcedure
 // * ValueType - TypeDescription, Arbitrary -
 // * isAvailable - Boolean, Arbitrary -
 // * isExisting - Boolean, Arbitrary -
+// * isVisible - Boolean, Arbitrary -
 // * isCollection - Boolean -
 // * CollectionValueType - TypeDescription -
 // * ValueChoiceForm - String -
@@ -1144,6 +1392,7 @@ Function GetFieldDescription(Ref, Presentation, ValueType, isAvailable, isExisti
 	Result.Insert("ValueType", ValueType);
 	Result.Insert("isAvailable", isAvailable);
 	Result.Insert("isExisting", isExisting);
+	Result.Insert("isVisible", True);
 	Result.Insert("isCollection", isCollection);
 	Result.Insert("CollectionValueType", New TypeDescription(ValueType, "ValueList"));
 	Result.Insert("ValueChoiceForm", "");
@@ -1170,6 +1419,59 @@ EndFunction
 &AtServerNoContext
 Function GetAvailableTypes()
 	Return Metadata.DefinedTypes.typeAddPropertyOwners.Type.Types();
+EndFunction
+
+// Get constraint name.
+// 
+// Parameters:
+//  ObjectType - Type - Object type
+//  ObjectTable - String - Object table
+// 
+// Returns:
+//  String - Get constraint name
+&AtServerNoContext
+Function GetConstraintName(ObjectType, ObjectTable)
+	
+	If ObjectType = Type("CatalogRef.ItemKeys") And ObjectTable = "AddAttributes" Then
+		Return "Item.ItemType";
+	Else
+		Return "";
+	EndIf;
+	
+EndFunction
+
+// Get constraint tree.
+// 
+// Parameters:
+//  ObjectType - Type - Object type
+//  ObjectTable - String - Object table
+//  ConstraintRefs - AnyRef, Arbitrary - Constraint refs
+// 
+// Returns:
+//  ValueTree
+//		* Ref - AnyRef
+//		* Value - AnyRef
+&AtServerNoContext
+Function GetConstraintTree(ObjectType, ObjectTable, ConstraintRefs)
+	
+	If ObjectType = Type("CatalogRef.ItemKeys") And ObjectTable = "AddAttributes" Then
+		Query = New Query(
+		"SELECT DISTINCT
+		|	ItemTypesAvailableAttributes.Ref AS Ref,
+		|	ItemTypesAvailableAttributes.Attribute AS Value
+		|FROM
+		|	Catalog.ItemTypes.AvailableAttributes AS ItemTypesAvailableAttributes
+		|WHERE
+		|	ItemTypesAvailableAttributes.Ref IN (&Refs)
+		|TOTALS
+		|BY
+		|	Ref");
+		Query.SetParameter("Refs", ConstraintRefs);
+		Return Query.Execute().Unload(QueryResultIteration.ByGroups);
+	Else
+		Return Undefined;
+	EndIf;
+	
 EndFunction
 
 // Is chart of characteristic types.

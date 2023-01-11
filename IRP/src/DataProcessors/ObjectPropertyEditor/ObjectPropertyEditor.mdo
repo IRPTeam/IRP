@@ -29,4 +29,31 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="3a8545c6-abee-442b-b6cc-f4653659d1e7">
+    <name>EditValueList</name>
+    <synonym>
+      <key>en</key>
+      <value>Edit value list</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="c26ffce1-9a8d-4ed1-8b5f-b2779d553898">
+    <name>PropertyPackEditor</name>
+    <synonym>
+      <key>en</key>
+      <value>Property pack editor</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="45342813-29ea-423e-a1a6-14db9e160002">
+    <name>FieldSettings</name>
+    <synonym>
+      <key>en</key>
+      <value>Field settings</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:DataProcessor>

@@ -34,9 +34,12 @@ Procedure EditAccounting(Result, AdditionalParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
+	
+	
 	Form = AdditionalParameters.Form;
 	Object = AdditionalParameters.Object;
-	Form.Modified = True;
+	Test = 1;
+	
 	
 	DebitType = PredefinedValue("Enum.AccountingAnalyticTypes.Debit");
 	CreditType = PredefinedValue("Enum.AccountingAnalyticTypes.Credit");

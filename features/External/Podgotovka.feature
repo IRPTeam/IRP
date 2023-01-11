@@ -1465,6 +1465,17 @@ Scenario: set True value to the constant Use retail orders
 		And I click "Save" button
 		And I close current window
 
+
+Scenario: set False value to the constant Use retail orders
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		Then "Functional option settings" window is opened
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                 |
+			| 'Use retail orders' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close current window
+
 Scenario: set False value to the constant Use commission trading
 		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
 		Then "Functional option settings" window is opened

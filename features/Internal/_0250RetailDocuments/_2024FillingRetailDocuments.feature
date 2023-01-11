@@ -4472,7 +4472,7 @@ Scenario: _0154199 copy line in Payment tab in the Retail sales receipt
 				
 Scenario: _0154250 create retail sales order
 	* Preparation
-		When set True value to the constant Use commission trading
+		When set True value to the constant Use retail orders
 		And I close TestClient session
 		Given I open new TestClient session or connect the existing one
 	* Create retail sales receipt (with pre-payment)

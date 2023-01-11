@@ -568,6 +568,36 @@ Scenario: _042425 check Retail sales receipt movements by the Register  "R5010 R
 			| ''                                                   | 'Receipt'     | '29.12.2022 14:47:30' | '5 750'     | 'Main Company' | 'Shop 02' | 'TRY'      | 'Bank 1'     | ''                    |		
 		And I close all client application windows
 
+Scenario:_0424128 check absence Retail sales receipt movements by the Register  "R3010 Cash on hand" (payment agent)
+	And I close all client application windows
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '110' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| Register  "R3010 Cash on hand" |
+		And I close all client application windows
+
+Scenario:_0424129 check absence Retail sales receipt movements by the Register  "R3050 Pos cash balances" (payment agent)
+	And I close all client application windows
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '110' |
+	* Check movements by the Register  "R3050 Pos cash balances" 
+		And I click "Registrations report" button
+		And I select "R3050 Pos cash balances" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| Register  "R3050 Pos cash balances" |
+		And I close all client application windows
+
 Scenario: _042426 check Retail sales receipt movements by the Register  "R2023 Advances from retail customers" (payment type - customer advance) 
 		And I close all client application windows	
 	* Select Retail sales receipt

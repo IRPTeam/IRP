@@ -535,6 +535,7 @@
   <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseCommissionTrading</functionalOptions>
+  <functionalOptions>FunctionalOption.UseRetailOrders</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -625,6 +626,7 @@
   <constants>Constant.UseUnitsAndDimensions</constants>
   <constants>Constant.UseWorkOrders</constants>
   <constants>Constant.UseCommissionTrading</constants>
+  <constants>Constant.UseRetailOrders</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>

@@ -2275,34 +2275,44 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Document.SalesOrder.SpecialOffers AS SpecialOffers
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SpecialOffers.Ref
-	|		AND BasisesTable.BasisKey = SpecialOffers.Key
-	|;
-	|
-	|///////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
-	|	UNDEFINED AS Ref,
-	|	Payments.PaymentType,
-	|	Payments.PaymentTerminal,
-	|	Payments.Account,
-	|	Payments.Amount,
-	|	Payments.Percent,
-	|	Payments.Commission,
-	|	Payments.BankTerm,
-	|	Payments.Key
-	|FROM
-	|	Document.SalesOrder.Payments AS Payments
-	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = Payments.Ref
-	|GROUP BY
-	|	Payments.Key,
-	|	Payments.Account,
-	|	Payments.Amount,
-	|	Payments.BankTerm,
-	|	Payments.Commission,
-	|	Payments.PaymentTerminal,
-	|	Payments.PaymentType,
-	|	Payments.Percent";
+	|		AND BasisesTable.BasisKey = SpecialOffers.Key";
 
+	QueryPaymentsAmount = New Query();
+	QueryPaymentsAmount.Text = 
+	"SELECT
+	|	SUM(R3026B_SalesOrdersCustomerAdvance.Amount) AS Amount,
+	|	VALUE(Catalog.PaymentTypes.EmptyRef) AS PaymentType
+	|FROM
+	|	AccumulationRegister.R3026B_SalesOrdersCustomerAdvance AS R3026B_SalesOrdersCustomerAdvance
+	|WHERE
+	|	R3026B_SalesOrdersCustomerAdvance.Order IN (&Orders)
+	|	AND (R3026B_SalesOrdersCustomerAdvance.Recorder REFS Document.CashReceipt
+	|	OR R3026B_SalesOrdersCustomerAdvance.Recorder REFS Document.BankReceipt)
+	|GROUP BY
+	|	VALUE(Catalog.PaymentTypes.EmptyRef)
+	|HAVING
+	|	SUM(R3026B_SalesOrdersCustomerAdvance.Amount) > 0";
+	
+	QueryPaymentsAmount.SetParameter("Orders", BasisesTable.UnloadColumn("Basis"));
+	
+	QueryPaymentsType = New Query();
+	QueryPaymentsType.Text = 
+	"SELECT
+	|	MAX(PaymentTypes.Ref) AS PaymentType
+	|FROM
+	|	Catalog.PaymentTypes AS PaymentTypes
+	|WHERE
+	|	NOT PaymentTypes.DeletionMark
+	|	AND PaymentTypes.Type = VALUE(Enum.PaymentTypes.Advance)";
+	PaymentsTypeSelection = QueryPaymentsType.Execute().Select();
+	PaymentType = Catalogs.PaymentTypes.EmptyRef();
+	If PaymentsTypeSelection.Next() Then
+		PaymentType = PaymentsTypeSelection.PaymentType;
+	EndIf;
+	
+	TablePayments = QueryPaymentsAmount.Execute().Unload();
+	TablePayments.FillValues(PaymentType, "PaymentType");
+	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
@@ -2310,7 +2320,7 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	TableItemList      = QueryResults[2].Unload();
 	TableTaxList       = QueryResults[3].Unload();
 	TableSpecialOffers = QueryResults[4].Unload();
-	TablePayments      = QueryResults[5].Unload();
+	//TablePayments      = QueryResults[5].Unload();
 
 	Tables = New Structure();
 	Tables.Insert("RowIDInfo"     , TableRowIDInfo);

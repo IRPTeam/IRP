@@ -354,7 +354,8 @@ Function Payments()
 		|	Payments.BankTerm AS BankTerm,
 		|	Payments.Percent AS Percent,
 		|	Payments.Commission AS Commission,
-		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Advance) AS IsAdvance
+		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Advance) AS IsAdvance,
+		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.PaymentAgent) AS IsPaymentAgent
 		|INTO Payments
 		|FROM
 		|	Document.RetailSalesReceipt.Payments AS Payments
@@ -624,14 +625,16 @@ Function R4014B_SerialLotNumber()
 EndFunction
 
 Function R3010B_CashOnHand()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	*
-		   |INTO R3010B_CashOnHand
-		   |FROM
-		   |	Payments AS Payments
-		   |WHERE
-		   |	NOT Payments.IsAdvance";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R3010B_CashOnHand
+		|FROM
+		|	Payments AS Payments
+		|WHERE
+		|	NOT (Payments.IsAdvance
+		|	OR Payments.IsPaymentAgent)";
 EndFunction
 
 Function R4011B_FreeStocks()
@@ -808,13 +811,15 @@ Function R4010B_ActualStocks()
 EndFunction
 
 Function R3050T_PosCashBalances()
-	Return "SELECT
-		   |	*
-		   |INTO R3050T_PosCashBalances
-		   |FROM
-		   |	Payments AS Payments
-		   |WHERE
-		   |	TRUE";
+	Return 
+		"SELECT
+		|	*
+		|INTO R3050T_PosCashBalances
+		|FROM
+		|	Payments AS Payments
+		|WHERE
+		|	NOT (Payments.IsAdvance
+		|	OR Payments.IsPaymentAgent)";
 EndFunction
 
 Function R2050T_RetailSales()
@@ -1200,12 +1205,17 @@ Function R8012B_ConsignorInventory()
 		|	ConsignorBatches.SerialLotNumber,
 		|	ConsignorBatches.Batch.Partner AS Partner,
 		|	ConsignorBatches.Batch.Agreement AS Agreement,
+		|	CASE
+		|		WHEN ConsignorBatches.Batch REFS Document.OpeningEntry
+		|			THEN ConsignorBatches.Batch.LegalNameConsignor
+		|		ELSE ConsignorBatches.Batch.LegalName
+		|	END AS LegalName,
 		|	ConsignorBatches.Quantity
 		|INTO R8012B_ConsignorInventory
 		|FROM
 		|	ItemList AS ItemList
-		|	LEFT JOIN ConsignorBatches AS ConsignorBatches ON
-		|	ItemList.Key = ConsignorBatches.Key
+		|		LEFT JOIN ConsignorBatches AS ConsignorBatches
+		|		ON ItemList.Key = ConsignorBatches.Key
 		|WHERE
 		|	ItemList.IsConsignorStocks";		
 EndFunction

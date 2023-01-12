@@ -71,7 +71,8 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	PaymentToVendor   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
 	ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
 	ReturnToCustomerByPOS  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS");
-	PaymentByCheque   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentByCheque");
+	PaymentByCheque     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentByCheque");
+	EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
 	
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
@@ -102,6 +103,11 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	ElsIf TransactionType = PaymentByCheque Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis";
+	ElsIf TransactionType = EmployeeCashAdvance Then
+		StrByType = "
+		|PaymentList.Partner,
+		|PaymentList.PlaningTransactionBasis,
+		|PaymentList.BasisDocument";		
 	EndIf;
 	
 	ArrayOfVisibleAttributes = New Array();
@@ -120,13 +126,19 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Form.Items[TrimAll(ItemName)].Visible = Visibility;
 	EndDo;
 	
-	If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange")
-		Or Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder") Then
+	IsCurrencyExchange    = Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
+	IsCashTransferOrder   = Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
+	IsPaymentByCheque     = Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentByCheque");
+	IsEmployeeCashAdvance = Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
+	
+	ArrayTypes = New Array();
+	
+	If IsCurrencyExchange Or IsCashTransferOrder Then
 		BasedOnCashTransferOrder = False;
 		BasedOnCashTransferOrder = False;
 		For Each Row In Object.PaymentList Do
-			If TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") And ValueIsFilled(
-				Row.PlaningTransactionBasis) Then
+			If TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") 
+				And ValueIsFilled(Row.PlaningTransactionBasis) Then
 				BasedOnCashTransferOrder = True;
 				Break;
 			EndIf;
@@ -134,24 +146,19 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Form.Items.Account.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Account);
 		Form.Items.Company.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Company);
 		Form.Items.Currency.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
-
-		ArrayTypes = New Array();
-		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
-		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	
-	ElsIf Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentByCheque") Then
-		
-		ArrayTypes = New Array();
+		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));	
+	ElsIf IsPaymentByCheque Then
 		ArrayTypes.Add(Type("DocumentRef.ChequeBondTransactionItem"));
-		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
-	
+	ElsIf IsEmployeeCashAdvance Then
+		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
 	Else
-		ArrayTypes = New Array();
 		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
 		ArrayTypes.Add(Type("DocumentRef.IncomingPaymentOrder"));
 		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
-		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	EndIf;
+	Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
+	
 	Form.Items.TransitAccount.ReadOnly = ValueIsFilled(Object.TransitAccount);
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;

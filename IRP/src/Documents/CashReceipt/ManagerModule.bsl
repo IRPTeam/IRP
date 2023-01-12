@@ -24,12 +24,10 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("QueryTable", QueryTablePaymentList);
 	QueryResults = Query.ExecuteBatch();
 
-	Tables.CashInTransit           = QueryResults[1].Unload();
+	Tables.CashInTransit = QueryResults[1].Unload();
 
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
 
 	Return Tables;
 EndFunction
@@ -168,7 +166,6 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-#Region NewRegistersPosting
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
@@ -181,9 +178,9 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3035T_CashPlanning.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R2023B_AdvancesFromRetailCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-
+	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -193,10 +190,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit, New Structure("RecordType, RecordSet",
 		AccumulationRecordType.Expense, Parameters.DocumentDataTables.CashInTransit));
 
-#Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-#EndRegion
-
 	Return PostingDataTables;
 EndFunction
 
@@ -225,8 +219,6 @@ Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefine
 EndProcedure
 
 #EndRegion
-
-#Region NewRegistersPosting
 
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure();
@@ -265,6 +257,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
 	QueryArray.Add(R3026B_SalesOrdersCustomerAdvance());
+	QueryArray.Add(R3027B_EmployeeCashAdvance());
 	Return QueryArray;
 EndFunction
 
@@ -314,6 +307,7 @@ Function PaymentList()
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.ReturnFromVendor) AS IsReturnFromVendor,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CashIn) AS IsCashIn,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CustomerAdvance) AS IsCustomerAdvance,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.EmployeeCashAdvance) AS IsEmployeeCashAdvance,
 	|	PaymentList.RetailCustomer AS RetailCustomer,
 	|	PaymentList.MoneyTransfer AS MoneyTransfer,
 	|	PaymentList.MoneyTransfer.Sender AS AccountFrom,
@@ -327,6 +321,27 @@ Function PaymentList()
 	|	Document.CashReceipt.PaymentList AS PaymentList
 	|WHERE
 	|	PaymentList.Ref = &Ref";
+EndFunction
+
+Function R3027B_EmployeeCashAdvance()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.Key,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Partner,
+		|	PaymentList.Currency,
+		|	PaymentList.CashAccount AS Account,
+		|	PaymentList.PlaningTransactionBasis,
+		|	PaymentList.FinancialMovementType,
+		|	PaymentList.Amount
+		|INTO R3027B_EmployeeCashAdvance
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsEmployeeCashAdvance";
 EndFunction
 
 Function R3021B_CashInTransitIncoming()
@@ -726,5 +741,3 @@ Function T2015S_TransactionsInfo()
 	|	PaymentList.IsReturnFromVendor
 	|	AND NOT PaymentList.IsAdvance";
 EndFunction
-
-#EndRegion

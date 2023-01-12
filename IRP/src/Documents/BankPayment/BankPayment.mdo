@@ -98,6 +98,7 @@
   <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+  <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -160,6 +161,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
     <choiceParameterLinks>
       <name>Filter.Ref</name>
       <field>Document.BankPayment.StandardAttribute.Ref</field>
@@ -1025,6 +1027,7 @@
       <types>DocumentRef.OutgoingPaymentOrder</types>
       <types>DocumentRef.SalesReturn</types>
       <types>DocumentRef.SalesReportToConsignor</types>
+      <types>DocumentRef.EmployeeCashAdvance</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

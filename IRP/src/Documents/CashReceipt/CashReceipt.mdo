@@ -96,6 +96,7 @@
   <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
   <registerRecords>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</registerRecords>
   <registerRecords>AccumulationRegister.R3026B_SalesOrdersCustomerAdvance</registerRecords>
+  <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -173,6 +174,11 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <choiceParameterLinks>
+      <name>Filter.Ref</name>
+      <field>Document.CashReceipt.StandardAttribute.Ref</field>
+    </choiceParameterLinks>
     <fillValue xsi:type="core:ReferenceValue">
       <value>Enum.IncomingPaymentTransactionType.EnumValue.PaymentFromCustomer</value>
     </fillValue>
@@ -765,6 +771,7 @@
       <types>DocumentRef.MoneyTransfer</types>
       <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.SalesReportFromTradeAgent</types>
+      <types>DocumentRef.EmployeeCashAdvance</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

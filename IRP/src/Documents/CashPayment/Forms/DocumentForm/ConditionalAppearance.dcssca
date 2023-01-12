@@ -12,6 +12,11 @@
 				<comparisonType>NotEqual</comparisonType>
 				<right xsi:type="dcscor:DesignTimeValue">Enum.ApArPostingDetail.ByDocuments</right>
 			</item>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.TransactionType</left>
+				<comparisonType>NotEqual</comparisonType>
+				<right xsi:type="dcscor:DesignTimeValue">Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance</right>
+			</item>
 		</filter>
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">

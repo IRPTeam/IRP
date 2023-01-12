@@ -936,7 +936,8 @@ Procedure OnOpenFormNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "CashExpense"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransfer"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "InventoryTransferOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "EmployeeCashAdvance" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	
@@ -2218,6 +2219,26 @@ Procedure PaymentListAfterDeleteRow(Object, Form) Export
 	DeleteRows(Object, Form, "PaymentList");
 EndProcedure
 
+Procedure PaymentListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
+	Parameters = GetLoadParameters(Object, Form, "PaymentList", Address, GroupColumn, SumColumn);
+	Parameters.LoadData.ExecuteAllViewNotify = True;
+	NewRows = New Array();
+	For i = 1 To Parameters.LoadData.CountRows Do
+		NewRow = Object.PaymentList.Add();
+		NewRow.Key = String(New UUID());
+		NewRows.Add(NewRow);
+	EndDo;
+	WrappedRows = ControllerClientServer_V2.WrapRows(Parameters, NewRows);
+	If Parameters.Property("Rows") Then
+		For Each Row In WrappedRows Do
+			Parameters.Rows.Add(Row);
+		EndDo;
+	Else
+		Parameters.Insert("Rows", WrappedRows);
+	EndIf;
+	ControllerClientServer_V2.PaymentListLoad(Parameters);
+EndProcedure
+
 #EndRegion
 
 #Region _PAYMENT_LIST_COLUMNS
@@ -2931,7 +2952,8 @@ Procedure OnSetTransactionTypeNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"           
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"    
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"          
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "OutgoingPaymentOrder" Then
 	
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;

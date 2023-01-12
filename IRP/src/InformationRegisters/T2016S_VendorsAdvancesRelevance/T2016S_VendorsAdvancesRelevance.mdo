@@ -40,6 +40,7 @@
       <types>DocumentRef.OpeningEntry</types>
       <types>DocumentRef.SalesReportToConsignor</types>
       <types>DocumentRef.PurchaseOrderClosing</types>
+      <types>DocumentRef.EmployeeCashAdvance</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

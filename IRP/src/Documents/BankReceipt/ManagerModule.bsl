@@ -196,7 +196,6 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-#Region NewRegisterPosting
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
@@ -209,9 +208,9 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3021B_CashInTransitIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R2023B_AdvancesFromRetailCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -306,6 +305,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3021B_CashInTransitIncoming());
 	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
 	QueryArray.Add(R3026B_SalesOrdersCustomerAdvance());
+	QueryArray.Add(R3027B_EmployeeCashAdvance());
 	Return QueryArray;
 EndFunction
 
@@ -392,6 +392,7 @@ Function PaymentList()
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.ReturnFromVendor) AS IsReturnFromVendor,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CustomerAdvance) AS IsCustomerAdvance,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.EmployeeCashAdvance) AS IsEmployeeCashAdvance,
 	|	PaymentList.RetailCustomer AS RetailCustomer,
 	|	PaymentList.BankTerm AS BankTerm,
 	|	PaymentList.Ref.Branch AS Branch,
@@ -405,6 +406,27 @@ Function PaymentList()
 	|	Document.BankReceipt.PaymentList AS PaymentList
 	|WHERE
 	|	PaymentList.Ref = &Ref";
+EndFunction
+
+Function R3027B_EmployeeCashAdvance()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.Key,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Partner,
+		|	PaymentList.Currency,
+		|	PaymentList.Account,
+		|	PaymentList.PlaningTransactionBasis,
+		|	PaymentList.FinancialMovementType,
+		|	PaymentList.Amount - PaymentList.Commission AS Amount
+		|INTO R3027B_EmployeeCashAdvance
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsEmployeeCashAdvance";
 EndFunction
 
 Function R2021B_CustomersTransactions()

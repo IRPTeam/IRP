@@ -94,6 +94,7 @@
       <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.ProductionPlanningClosing</types>
       <types>DocumentRef.CashExpense</types>
+      <types>DocumentRef.EmployeeCashAdvance</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

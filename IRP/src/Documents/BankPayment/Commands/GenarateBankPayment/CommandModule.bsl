@@ -53,12 +53,13 @@ EndFunction
 
 &AtServer
 Function GetDocumentsStructure(ArrayOfBasisDocuments)
-	ArrayOf_CashTransferOrder = New Array();
-	ArrayOf_OutgoingPaymentOrder = New Array();
-	ArrayOf_PurchaseInvoice = New Array();
-	ArrayOf_PurchaseOrder = New Array();
-	ArrayOf_SalesReturn = New Array();
+	ArrayOf_CashTransferOrder      = New Array();
+	ArrayOf_OutgoingPaymentOrder   = New Array();
+	ArrayOf_PurchaseInvoice        = New Array();
+	ArrayOf_PurchaseOrder          = New Array();
+	ArrayOf_SalesReturn            = New Array();
 	ArrayOf_SalesReportToConsignor = New Array();
+	ArrayOf_EmployeeCashAdvance    = New Array();
 	
 	For Each Row In ArrayOfBasisDocuments Do
 
@@ -74,6 +75,8 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 			ArrayOf_SalesReturn.Add(Row);
 		ElsIf TypeOf(Row) = Type("DocumentRef.SalesReportToConsignor") Then
 			ArrayOf_SalesReportToConsignor.Add(Row);
+		ElsIf TypeOf(Row) = Type("DocumentRef.EmployeeCashAdvance") Then
+			ArrayOf_EmployeeCashAdvance.Add(Row);
 		Else
 			Raise R().Error_043;
 		EndIf;
@@ -87,6 +90,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOfTables.Add(GetDocumentTable_PurchaseOrder(ArrayOf_PurchaseOrder));
 	ArrayOfTables.Add(GetDocumentTable_SalesReturn(ArrayOf_SalesReturn));
 	ArrayOfTables.Add(GetDocumentTable_SalesReportToConsignor(ArrayOf_SalesReportToConsignor));
+	ArrayOfTables.Add(GetDocumentTable_EmployeeCashAdvance(ArrayOf_EmployeeCashAdvance));
 	
 	Return JoinDocumentsStructure(ArrayOfTables);
 EndFunction
@@ -186,7 +190,7 @@ Function GetDocumentTable_OutgoingPaymentOrder(ArrayOfBasisDocuments)
 	Query.Text =
 	"SELECT ALLOWED
 	|	""OutgoingPaymentOrder"" AS BasedOn,
-	|	VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS TransactionType,
+	|	R3035T_CashPlanningTurnovers.BasisDocument.TransactionType AS TransactionType,
 	|	R3035T_CashPlanningTurnovers.FinancialMovementType AS FinancialMovementType,
 	|	R3035T_CashPlanningTurnovers.Company AS Company,
 	|	R3035T_CashPlanningTurnovers.Branch AS Branch,
@@ -204,6 +208,95 @@ Function GetDocumentTable_OutgoingPaymentOrder(ArrayOfBasisDocuments)
 	|	R3035T_CashPlanningTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Bank)
 	|	AND R3035T_CashPlanningTurnovers.AmountTurnover > 0";
 	Query.SetParameter("ArrayOfBasisDocuments", ArrayOfBasisDocuments);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
+
+&AtServer
+Function GetDocumentTable_EmployeeCashAdvance(ArrayOfBasisDocuments)
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	TableBasisDocument.Company,
+	|	TableBasisDocument.Branch,
+	|	TableBasisDocument.Account,
+	|	TableBasisDocument.Currency,
+	|	TableBasisDocument.Partner,
+	|	TableBasisDocument.FinancialMovementType,
+	|	TableBasisDocument.PlaningTransactionBasis,
+	|	TableBasisDocument.BasisDocument
+	|INTO TableBasisDocument
+	|FROM
+	|	&TableBasisDocument AS TableBasisDocument
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT ALLOWED
+	|	""EmployeeCashAdvance"" AS BasedOn,
+	|	VALUE(Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance) AS TransactionType,
+	|	R3027B_EmployeeCashAdvanceBalance.Company,
+	|	R3027B_EmployeeCashAdvanceBalance.Branch,
+	|	R3027B_EmployeeCashAdvanceBalance.Account,
+	|	R3027B_EmployeeCashAdvanceBalance.Currency,
+	|	R3027B_EmployeeCashAdvanceBalance.Partner,
+	|	R3027B_EmployeeCashAdvanceBalance.FinancialMovementType,
+	|	R3027B_EmployeeCashAdvanceBalance.PlaningTransactionBasis,
+	|	-R3027B_EmployeeCashAdvanceBalance.AmountBalance AS Amount,
+	|	TableBasisDocument.BasisDocument
+	|FROM
+	|	AccumulationRegister.R3027B_EmployeeCashAdvance.Balance(, (Company, Branch, Account, Currency, Partner,
+	|		FinancialMovementType, PlaningTransactionBasis) IN
+	|		(SELECT
+	|			TableBasisDocument.Company,
+	|			TableBasisDocument.Branch,
+	|			TableBasisDocument.Account,
+	|			TableBasisDocument.Currency,
+	|			TableBasisDocument.Partner,
+	|			TableBasisDocument.FinancialMovementType,
+	|			TableBasisDocument.PlaningTransactionBasis
+	|		FROM
+	|			TableBasisDocument AS TableBasisDocument)
+	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	AND Account.Type = VALUE(Enum.CashAccountTypes.Bank)) AS R3027B_EmployeeCashAdvanceBalance
+	|		INNER JOIN TableBasisDocument AS TableBasisDocument
+	|		ON TableBasisDocument.Company = R3027B_EmployeeCashAdvanceBalance.Company
+	|		AND TableBasisDocument.Branch = R3027B_EmployeeCashAdvanceBalance.Branch
+	|		AND TableBasisDocument.Account = R3027B_EmployeeCashAdvanceBalance.Account
+	|		AND TableBasisDocument.Currency = R3027B_EmployeeCashAdvanceBalance.Currency
+	|		AND TableBasisDocument.Partner = R3027B_EmployeeCashAdvanceBalance.Partner
+	|		AND TableBasisDocument.FinancialMovementType = R3027B_EmployeeCashAdvanceBalance.FinancialMovementType
+	|		AND TableBasisDocument.PlaningTransactionBasis = R3027B_EmployeeCashAdvanceBalance.PlaningTransactionBasis
+	|WHERE
+	|	R3027B_EmployeeCashAdvanceBalance.AmountBalance < 0";
+	
+	AccReg = Metadata.AccumulationRegisters.R3027B_EmployeeCashAdvance.Dimensions;
+	TableBasisDocument = New ValueTable();
+	TableBasisDocument.Columns.Add("Company"  , AccReg.Company.Type);
+	TableBasisDocument.Columns.Add("Branch"   , AccReg.Branch.Type);
+	TableBasisDocument.Columns.Add("Account"  , AccReg.Account.Type);
+	TableBasisDocument.Columns.Add("Currency" , AccReg.Currency.Type);
+	TableBasisDocument.Columns.Add("Partner"  , AccReg.Partner.Type);
+	TableBasisDocument.Columns.Add("FinancialMovementType"  , AccReg.FinancialMovementType.Type);
+	TableBasisDocument.Columns.Add("PlaningTransactionBasis", AccReg.PlaningTransactionBasis.Type);
+	TableBasisDocument.Columns.Add("BasisDocument"          , New TypeDescription("DocumentRef.EmployeeCashAdvance"));
+		
+	For Each Basis In ArrayOfBasisDocuments Do
+		For Each Row In Basis.PaymentList Do
+			NewRow = TableBasisDocument.Add();
+			NewRow.Company  = Basis.Company;
+			NewRow.Branch   = Basis.Branch;
+			NewRow.Account  = Row.Account;
+			NewRow.Currency = Row.Currency;
+			NewRow.Partner  = Basis.Partner;
+			NewRow.FinancialMovementType   = Row.FinancialMovementType;
+			NewRow.PlaningTransactionBasis = Row.PlaningTransactionBasis;
+			NewRow.BasisDocument = Basis;
+		EndDo;
+	EndDo;
+	
+	Query.SetParameter("TableBasisDocument", TableBasisDocument);
+	
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	Return QueryTable;

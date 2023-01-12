@@ -35,17 +35,50 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 			CurrencyTable = Parameters.Object.Currencies.Unload();
 			DocumentCondition = False;
 
-			If TypeOf(Parameters.Object.Ref) = Type("DocumentRef.CashReceipt") Or TypeOf(Parameters.Object.Ref) = Type(
-				"DocumentRef.BankReceipt") Then
+			// Partner, Agreement, LegalName, Key, BasisDocument
+			_PaymentList = New ValueTable();
+			_PaymentList.Columns.Add("Partner");
+			_PaymentList.Columns.Add("Agreement");
+			_PaymentList.Columns.Add("LegalName");
+			_PaymentList.Columns.Add("Key");
+			_PaymentList.Columns.Add("BasisDocument");
+			
+			If TypeOf(Parameters.Object.Ref) = Type("DocumentRef.CashReceipt") Or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.BankReceipt") Then
 				DocumentCondition = True;
-				Name_LegalName = "Payer";
 				RegisterType = Type("AccumulationRegisterRecordSet.R2021B_CustomersTransactions");
+				For Each RowPaymentList In Parameters.Object.PaymentList Do
+					NewRowPaymentList = _PaymentList.Add();
+					FillPropertyValues(NewRowPaymentList, RowPaymentList);
+					NewRowPaymentList.LegalName = RowPaymentList.Payer;
+				EndDo;
 			EndIf;
-			If TypeOf(Parameters.Object.Ref) = Type("DocumentRef.CashPayment") Or TypeOf(Parameters.Object.Ref) = Type(
-				"DocumentRef.BankPayment") Then
+			If TypeOf(Parameters.Object.Ref) = Type("DocumentRef.CashPayment") Or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.BankPayment") Then
 				DocumentCondition = True;
-				Name_LegalName = "Payee";
 				RegisterType = Type("AccumulationRegisterRecordSet.R1021B_VendorsTransactions");
+				For Each RowPaymentList In Parameters.Object.PaymentList Do
+					NewRowPaymentList = _PaymentList.Add();
+					FillPropertyValues(NewRowPaymentList, RowPaymentList);
+					NewRowPaymentList.LegalName = RowPaymentList.Payee;
+				EndDo;
+			EndIf;
+			If TypeOf(Parameters.Object.Ref) = Type("DocumentRef.EmployeeCashAdvance") Then
+				DocumentCondition = True;
+				RegisterType = Type("AccumulationRegisterRecordSet.R1021B_VendorsTransactions");
+				For Each RowPaymentList In Parameters.Object.PaymentList Do
+					If Not ValueIsFilled(RowPaymentList.Invoice) Then
+						Continue;
+					EndIf;
+					NewRowPaymentList = _PaymentList.Add();
+					NewRowPaymentList.Partner   = RowPaymentList.Invoice.Partner;
+					NewRowPaymentList.Agreement = RowPaymentList.Invoice.Agreement;
+					NewRowPaymentList.LegalName = RowPaymentList.Invoice.LegalName;
+					NewRowPaymentList.Key       = RowPaymentList.Key;
+					If RowPaymentList.Invoice.Agreement.ApArPostingDetail = Enums.ApArPostingDetail.ByDocuments Then
+						NewRowPaymentList.BasisDocument = RowPaymentList.Invoice;
+					Else
+						NewRowPaymentList.BasisDocument = Undefined;
+					EndIf;	
+				EndDo;
 			EndIf;
 			If DocumentCondition Then
 				TableOfAgreementMovementTypes = New ValueTable();
@@ -57,8 +90,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 				For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
 					If TypeOf(ItemOfPostingInfo.Key) = RegisterType Then
 						If ItemOfPostingInfo.Value.Recordset.Columns.Find("Key") = Undefined Then
-							ItemOfPostingInfo.Value.Recordset.Columns.Add("Key",
-								New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+							ItemOfPostingInfo.Value.Recordset.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 						EndIf;
 						For Each RowRecordSet In ItemOfPostingInfo.Value.Recordset Do
 							NewRow = TableOfAgreementMovementTypes.Add();
@@ -66,12 +98,11 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 							NewRow.Partner      = RowRecordSet.Partner;
 							NewRow.LegalName    = RowRecordSet.LegalName;
 							NewRow.Amount       = RowRecordSet.Amount;
-							For Each RowPaymentList In Parameters.Object.PaymentList Do
+							For Each RowPaymentList In _PaymentList Do
 								PartnerAndLegalNameCondition = False;
 								AgreementCondition = False;
 								BasisDocumentCondition = False;
-								If RowPaymentList.Partner = RowRecordSet.Partner And RowPaymentList[Name_LegalName]
-									= RowRecordSet.LegalName Then
+								If RowPaymentList.Partner = RowRecordSet.Partner And RowPaymentList.LegalName = RowRecordSet.LegalName Then
 									PartnerAndLegalNameCondition = True;
 								EndIf;
 								If Not ValueIsFilled(RowPaymentList.Agreement) Then
@@ -86,8 +117,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 										EndIf;
 									EndIf;
 								EndIf;
-								If Not ValueIsFilled(RowPaymentList.BasisDocument) Or RowPaymentList.BasisDocument
-									= RowRecordSet.Basis Then
+								If Not ValueIsFilled(RowPaymentList.BasisDocument) Or RowPaymentList.BasisDocument = RowRecordSet.Basis Then
 									BasisDocumentCondition = True;
 								EndIf;
 								If PartnerAndLegalNameCondition And AgreementCondition And BasisDocumentCondition Then
@@ -100,25 +130,23 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 
 				TableOfAgreementMovementTypes.GroupBy("MovementType, Partner, LegalName, Amount, Key");
 
-				For Each RowPaymentList In Parameters.Object.PaymentList Do
+				For Each RowPaymentList In _PaymentList Do
 					If ValueIsFilled(RowPaymentList.Agreement) Then
 						Continue;
 					EndIf;
 					For Each RowMovementTypes In TableOfAgreementMovementTypes Do
-						If RowPaymentList.Partner = RowMovementTypes.Partner And RowPaymentList[Name_LegalName]
-							= RowMovementTypes.LegalName Then
-							ArrayOfCurrencies = CurrencyTable.FindRows(
-							New Structure("Key, MovementType", RowPaymentList.Key, RowMovementTypes.MovementType));
+						If RowPaymentList.Partner = RowMovementTypes.Partner And RowPaymentList.LegalName = RowMovementTypes.LegalName Then
+							ArrayOfCurrencies = CurrencyTable.FindRows(New Structure("Key, MovementType", RowPaymentList.Key, RowMovementTypes.MovementType));
 							If Not ArrayOfCurrencies.Count() Then
-								NewRow = AddRowToCurrencyTable(Parameters.Object.Date, CurrencyTable, RowPaymentList.Key,
-									Parameters.Object.Currency, RowMovementTypes.MovementType);
+								NewRow = AddRowToCurrencyTable(Parameters.Object.Date, CurrencyTable, RowPaymentList.Key, Parameters.Object.Currency, RowMovementTypes.MovementType);
 								CurrenciesClientServer.CalculateAmountByRow(NewRow, RowMovementTypes.Amount);
 							EndIf;
 						EndIf;
 					EndDo;
 				EndDo;
 
-			EndIf;
+			EndIf; // DocumentCondition
+			
 			Query.SetParameter("CurrencyTable", CurrencyTable);
 		Else
 			Query.SetParameter("CurrencyTable", CurrencyTable);
@@ -128,8 +156,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 			If ItemOfPostingInfo.Value.RecordSet.Count() Then
 				UseAgreementMovementType = IsUseAgreementMovementType(ItemOfPostingInfo);
 				UseCurrencyJoin = IsUseCurrencyJoin(Parameters, ItemOfPostingInfo);
-				ItemOfPostingInfo.Value.RecordSet = ExpandTable(TempTableManager, ItemOfPostingInfo.Value.RecordSet,
-					UseAgreementMovementType, UseCurrencyJoin);
+				ItemOfPostingInfo.Value.RecordSet = ExpandTable(TempTableManager, ItemOfPostingInfo.Value.RecordSet, UseAgreementMovementType, UseCurrencyJoin);
 			EndIf;
 		EndDo;
 	EndIf;
@@ -157,15 +184,13 @@ Function IsUseCurrencyJoin(Parameters, ItemOfPostingInfo)
 
 	FilterByDocument = False;
 
-	If (TypeOf(Parameters.Object) = Type("DocumentObject.BankReceipt") Or TypeOf(Parameters.Object) = Type(
-		"DocumentRef.BankReceipt")) And Parameters.Object.TransactionType
-		= Enums.IncomingPaymentTransactionType.CurrencyExchange Then
+	If (TypeOf(Parameters.Object) = Type("DocumentObject.BankReceipt") Or TypeOf(Parameters.Object) = Type("DocumentRef.BankReceipt")) 
+		And Parameters.Object.TransactionType = Enums.IncomingPaymentTransactionType.CurrencyExchange Then
 		FilterByDocument = True;
 	EndIf;
 
-	If (TypeOf(Parameters.Object) = Type("DocumentObject.CashReceipt") Or TypeOf(Parameters.Object) = Type(
-		"DocumentRef.CashReceipt")) And Parameters.Object.TransactionType
-		= Enums.IncomingPaymentTransactionType.CurrencyExchange Then
+	If (TypeOf(Parameters.Object) = Type("DocumentObject.CashReceipt") Or TypeOf(Parameters.Object) = Type("DocumentRef.CashReceipt")) 
+		And Parameters.Object.TransactionType = Enums.IncomingPaymentTransactionType.CurrencyExchange Then
 		FilterByDocument = True;
 	EndIf;
 
@@ -355,7 +380,6 @@ Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 	EmptyCurrenciesTable.Columns.Add("MovementType"    , Columns.MovementType.Type);
 	EmptyCurrenciesTable.Columns.Add("Amount"          , Columns.Amount.Type);
 
-	
 	RatePeriod    = CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(Parameters.Ref, Parameters.Date);
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Parameters.Agreement);
 	

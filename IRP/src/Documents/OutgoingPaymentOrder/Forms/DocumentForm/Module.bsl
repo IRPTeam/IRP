@@ -44,8 +44,49 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
+	AttributesForChangeVisible = GetVisibleAttributesByTransactionType(Object.TransactionType);
+	For Each Attr In AttributesForChangeVisible.AllAttributes Do
+		ItemName = StrReplace(Attr, ".", "");
+		Visibility = (AttributesForChangeVisible.VisibleAttributes.Find(Attr) <> Undefined);
+		Form.Items[TrimAll(ItemName)].Visible = Visibility;
+	EndDo;
+	
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure
+
+&AtClientAtServerNoContext
+Function GetVisibleAttributesByTransactionType(TransactionType)
+	StrAll = "
+	|PaymentList.Partner,
+	|PaymentList.PartnerBankAccount,
+	|PaymentList.Payee,
+	|PaymentList.Basis";
+	
+	ArrayOfAllAttributes = New Array();
+	For Each ArrayItem In StrSplit(StrAll, ",") Do
+		ArrayOfAllAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
+	EndDo;
+	
+	EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
+	PaymentToVendor     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
+
+	If TransactionType = EmployeeCashAdvance Then
+		StrByType = "
+		|PaymentList.Partner";
+	ElsIf TransactionType = PaymentToVendor Then
+		StrByType = "
+		|PaymentList.Partner,
+		|PaymentList.PartnerBankAccount,
+		|PaymentList.Payee,
+		|PaymentList.Basis";
+	EndIf;
+
+	ArrayOfVisibleAttributes = New Array();
+	For Each ArrayItem In StrSplit(StrByType, ",") Do
+		ArrayOfVisibleAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
+	EndDo;
+	Return New Structure("AllAttributes, VisibleAttributes", ArrayOfAllAttributes, ArrayOfVisibleAttributes);
+EndFunction
 
 #EndRegion
 
@@ -119,6 +160,15 @@ EndProcedure
 &AtClient
 Procedure StatusOnChange(Item)
 	DocOutgoingPaymentOrderClient.StatusOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region TRANSACTION_TYPE
+
+&AtClient
+Procedure TransactionTypeOnChange(Item)
+	DocOutgoingPaymentOrderClient.TransactionTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

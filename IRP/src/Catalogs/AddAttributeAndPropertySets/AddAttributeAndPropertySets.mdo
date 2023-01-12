@@ -802,6 +802,13 @@
         <value>117</value>
       </code>
     </items>
+    <items id="b457b8eb-cc82-4a03-a143-a4d5f47cb911">
+      <name>Document_EmployeeCashAdvance</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>118</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

@@ -103,6 +103,23 @@ Function GetParameters_V9(Object, Row) Export
 	Return Parameters;
 EndFunction
 
+Function GetParameters_V10(Object, Row) Export
+	Parameters = New Structure();
+	Parameters.Insert("Ref"            , Object.Ref);
+	Parameters.Insert("Date"           , Object.Date);
+	Parameters.Insert("Company"        , Object.Company);
+	Parameters.Insert("Currency"       , Row.Currency);
+	If ValueIsFilled(Row.Invoice) Then
+		Parameters.Insert("Agreement"      , Row.Invoice.Agreement);
+	Else
+		Parameters.Insert("Agreement"      , Undefined);
+	EndIf;
+	Parameters.Insert("RowKey"         , Row.Key);
+	Parameters.Insert("DocumentAmount" , Row.TotalAmount);
+	Parameters.Insert("Currencies"     , GetCurrenciesTable(Object.Currencies, Row.Key));
+	Return Parameters;
+EndFunction
+
 Function GetCurrenciesTable(Currencies, RowKey = Undefined) Export
 	ArrayOfCurrenciesRows = New Array();
 	For Each Row In Currencies Do

@@ -122,5 +122,6 @@
     <types>CatalogRef.BusinessUnits</types>
     <types>DocumentRef.CashExpense</types>
     <types>CatalogRef.SourceOfOrigins</types>
+    <types>DocumentRef.EmployeeCashAdvance</types>
   </type>
 </mdclass:DefinedType>

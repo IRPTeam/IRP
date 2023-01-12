@@ -14,5 +14,6 @@
   <content>Document.DebitNote</content>
   <content>Document.CustomersAdvancesClosing</content>
   <content>Document.VendorsAdvancesClosing</content>
+  <content>Document.EmployeeCashAdvance</content>
   <parentSubsystem>Subsystem.Treasury</parentSubsystem>
 </mdclass:Subsystem>

@@ -172,6 +172,7 @@ Function GetChain()
 	Chain.Insert("ClearByTransactionTypeBankReceipt", GetChainLink("ClearByTransactionTypeBankReceiptExecute"));
 	Chain.Insert("ClearByTransactionTypeCashPayment", GetChainLink("ClearByTransactionTypeCashPaymentExecute"));
 	Chain.Insert("ClearByTransactionTypeCashReceipt", GetChainLink("ClearByTransactionTypeCashReceiptExecute"));
+	Chain.Insert("ClearByTransactionTypeOutgoingPaymentOrder", GetChainLink("ClearByTransactionTypeOutgoingPaymentOrderExecute"));
 	
 	// Changes
 	Chain.Insert("ChangeManagerSegmentByPartner", GetChainLink("ChangeManagerSegmentByPartnerExecute"));
@@ -568,12 +569,16 @@ EndFunction
 #Region CHANGE_CASH_ACCOUNT_BY_PARTNER
 
 Function ChangeCashAccountByPartnerOptions() Export
-	Return GetChainLinkOptions("Partner, LegalName, Currency");
+	Return GetChainLinkOptions("Partner, LegalName, Currency, TransactionType");
 EndFunction
 
 Function ChangeCashAccountByPartnerExecute(Options) Export
-	Return DocumentsServer.GetBankAccountByPartner(Options.Partner,
-			Options.LegalName, Options.Currency);
+	If Options.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance")
+	Or Options.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance") Then
+		Return Undefined;
+	EndIf;
+	
+	Return DocumentsServer.GetBankAccountByPartner(Options.Partner, Options.LegalName, Options.Currency);
 EndFunction
 
 #EndRegion
@@ -652,10 +657,15 @@ EndFunction
 #Region CHANGE_LEGAL_NAME_BY_PARTNER
 
 Function ChangeLegalNameByPartnerOptions() Export
-	Return GetChainLinkOptions("Partner, LegalName");
+	Return GetChainLinkOptions("Partner, LegalName, TransactionType");
 EndFunction
 
 Function ChangeLegalNameByPartnerExecute(Options) Export
+	If Options.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance")
+	Or Options.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance") Then
+		Return Undefined;
+	EndIf;
+	
 	Return DocumentsServer.GetLegalNameByPartner(Options.Partner, Options.LegalName);
 EndFunction
 
@@ -2826,7 +2836,8 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Outgoing_PaymentToVendor   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
 	Outgoing_ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
 	Outgoing_ReturnToCustomerByPOS  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS");
-	Outgoing_PaymentByCheque   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentByCheque");
+	Outgoing_PaymentByCheque     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentByCheque");
+	Outgoing_EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
@@ -2853,6 +2864,9 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 			|PaymentTerminal,
 			|BankTerm";
 		EndIf;
+	ElsIf Options.TransactionType = Outgoing_EmployeeCashAdvance Then
+		StrByType = "
+		|Partner"; 		
 	EndIf;
 	
 	ArrayOfAttributes = New Array();
@@ -2920,6 +2934,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Incoming_PaymentFromCustomerByPOS = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomerByPOS");
 	Incoming_ReceiptByCheque     = PredefinedValue("Enum.IncomingPaymentTransactionType.ReceiptByCheque");
 	Incoming_CustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance");
+	Incoming_EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
@@ -2958,6 +2973,9 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 		|PaymentType,
 		|PaymentTerminal,
 		|BankTerm";
+	ElsIf Options.TransactionType = Incoming_EmployeeCashAdvance Then
+		StrByType = "
+		|Partner";
 	EndIf;
 	
 	ArrayOfAttributes = New Array();
@@ -3003,12 +3021,13 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
 	Outgoing_PaymentToVendor   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
 	Outgoing_ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
+	Outgoing_EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
 
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
 	If Options.TransactionType = Outgoing_CashTransferOrder Then
 		StrByType = "";
-	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Then
+	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Or Options.TransactionType = Outgoing_EmployeeCashAdvance Then
 		StrByType = "
 		|Partner"; 
 	ElsIf Options.TransactionType = Outgoing_PaymentToVendor Or Options.TransactionType = Outgoing_ReturnToCustomer Then
@@ -3072,6 +3091,7 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	Incoming_ReturnFromVendor    = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor");
 	Incoming_CashIn              = PredefinedValue("Enum.IncomingPaymentTransactionType.CashIn");
 	Incoming_CustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance");
+	Incoming_EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order, MoneyTransfer - clearing always
@@ -3093,8 +3113,59 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	ElsIf Options.TransactionType = Incoming_CustomerAdvance Then
 		StrByType = "
 		|RetailCustomer";
+	ElsIf Options.TransactionType = Incoming_EmployeeCashAdvance Then
+		StrByType = "
+		|Partner";
 	EndIf;
 	
+	ArrayOfAttributes = New Array();
+	For Each ArrayItem In StrSplit(StrByType, ",") Do
+		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
+	EndDo;
+	
+	For Each KeyValue In Result Do
+		AttrName = TrimAll(KeyValue.Key);
+		If Not ValueIsFilled(AttrName) Then
+			Continue;
+		EndIf;
+		If ArrayOfAttributes.Find(AttrName) = Undefined Then
+			Result[AttrName] = Undefined;
+		EndIf;
+	EndDo;
+	Return Result;
+EndFunction
+
+// Outgoing payment order
+Function ClearByTransactionTypeOutgoingPaymentOrderOptions() Export
+	Return GetChainLinkOptions("TransactionType,
+		|Partner,
+		|PartnerBankAccount,
+		|Payee,
+		|BasisDocument");
+EndFunction
+
+Function ClearByTransactionTypeOutgoingPaymentOrderExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("Partner"                  , Options.Partner);
+	Result.Insert("PartnerBankAccount"       , Options.PartnerBankAccount);
+	Result.Insert("Payee"                    , Options.Payee);
+	Result.Insert("BasisDocument"            , Options.BasisDocument);
+
+	Outgoing_EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
+	Outgoing_PaymentToVendor     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
+
+	// list of properties which not needed clear
+	// BasisDocument - clearing always
+	If Options.TransactionType = Outgoing_EmployeeCashAdvance Then
+		StrByType = "
+		|PaymentList.Partner";
+	ElsIf Options.TransactionType = Outgoing_PaymentToVendor Then
+		StrByType = "
+		|PaymentList.Partner,
+		|PaymentList.PartnerBankAccount,
+		|PaymentList.Payee";
+	EndIf;
+		
 	ArrayOfAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrByType, ",") Do
 		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));

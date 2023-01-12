@@ -96,6 +96,10 @@
     <metadata>Document.BankReceipt</metadata>
     <use>Use</use>
   </content>
+  <content>
+    <metadata>Document.EmployeeCashAdvance</metadata>
+    <use>Use</use>
+  </content>
   <autoUse>DontUse</autoUse>
   <dataSeparation>DontUse</dataSeparation>
   <usersSeparation>DontUse</usersSeparation>

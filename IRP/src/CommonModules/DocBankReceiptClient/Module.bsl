@@ -127,16 +127,21 @@ EndProcedure
 
 Procedure PaymentListPartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", False,
-		DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", False, DataCompositionComparisonType.Equal));
 	OpenSettings.FormParameters = New Structure();
-	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Payer) Then
-		OpenSettings.FormParameters.Insert("Company", Form.Items.PaymentList.CurrentData.Payer);
-		OpenSettings.FormParameters.Insert("FilterPartnersByCompanies", True);
+	OpenSettings.FillingData = New Structure();
+	
+	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance") Then
+		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Employee", True, DataCompositionComparisonType.Equal));
+	Else
+		If ValueIsFilled(Form.Items.PaymentList.CurrentData.Payer) Then
+			OpenSettings.FormParameters.Insert("Company", Form.Items.PaymentList.CurrentData.Payer);
+			OpenSettings.FormParameters.Insert("FilterPartnersByCompanies", True);
+		EndIf;
+		OpenSettings.FillingData.Insert("Company", Form.Items.PaymentList.CurrentData.Payer);
 	EndIf;
-	OpenSettings.FillingData = New Structure("Company", Form.Items.PaymentList.CurrentData.Payer);
+	
 	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -144,12 +149,15 @@ Procedure PaymentListPartnerEditTextChange(Object, Form, Item, Text, StandardPro
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	AdditionalParameters = New Structure();
-	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Payer) Then
-		AdditionalParameters.Insert("Company", Form.Items.PaymentList.CurrentData.Payer);
-		AdditionalParameters.Insert("FilterPartnersByCompanies", True);
+	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance") Then
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Employee", True, ComparisonType.Equal));
+	Else
+		If ValueIsFilled(Form.Items.PaymentList.CurrentData.Payer) Then
+			AdditionalParameters.Insert("Company", Form.Items.PaymentList.CurrentData.Payer);
+			AdditionalParameters.Insert("FilterPartnersByCompanies", True);
+		EndIf;
 	EndIf;
-	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
-		AdditionalParameters);
+	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
 EndProcedure
 
 #EndRegion
@@ -259,6 +267,15 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 		Return;
 	EndIf;
 
+	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance") Then
+		Parameters = New Structure();
+		Parameters.Insert("Filter", New Structure());
+		Parameters.Filter.Insert("Partner", CurrentData.Partner);
+		Parameters.Filter.Insert("DeletionMark", False);
+		OpenForm("Document.EmployeeCashAdvance.ChoiceForm", Parameters, Item);
+		Return;
+	EndIf;
+	
 	Parameters = New Structure();
 	Parameters.Insert("Filter", New Structure());
 	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Payer) Then

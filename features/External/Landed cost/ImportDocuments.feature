@@ -1469,9 +1469,9 @@ Scenario: Create information register BundleContents records (LC)
 Scenario: Create information register Taxes records (LC)
 
 	And I check or create information register "Taxes" records:
-		| 'Period'             | 'Company'                                                           | 'Tax'                                                           | 'Use' | 'Priority' | 'IncludeToLandedCost' |
-		| '01.10.2019 0:00:00' | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b' | 'Yes' | '1'        | 'True'                |
-		| '01.10.2019 0:00:00' | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862c' | 'Yes' | '2'        | 'False'               |
+		| 'Period'             | 'Company'                                                           | 'Tax'                                                           | 'Use'  | 'Priority' | 'IncludeToLandedCost' |
+		| '01.10.2019 0:00:00' | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b' | 'True' | '1'        | 'True'                |
+		| '01.10.2019 0:00:00' | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862c' | 'True' | '2'        | 'False'               |
 
 Scenario: Create information register CurrencyRates records (LC)
 

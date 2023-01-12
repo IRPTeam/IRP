@@ -569,6 +569,48 @@
 				</dcscor:item>
 			</appearance>
 		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>InventoryOrigin</dataPath>
+			<field>InventoryOrigin</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SourceOfOrigin</dataPath>
+			<field>SourceOfOrigin</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>SerialLotNumber</dataPath>
+			<field>SerialLotNumber</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Consignor.Partner</dataPath>
+			<field>Partner</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Consignor.Agreement</dataPath>
+			<field>Agreement</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Consignor.LegalName</dataPath>
+			<field>LegalName</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
 		<item xsi:type="DataSetQuery">
 			<name>BatchBalance</name>
 			<field xsi:type="DataSetFieldField">
@@ -802,6 +844,48 @@
 					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
 				</role>
 			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>InventoryOrigin</dataPath>
+				<field>InventoryOrigin</field>
+				<role>
+					<dcscom:dimension>true</dcscom:dimension>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>SourceOfOrigin</dataPath>
+				<field>SourceOfOrigin</field>
+				<role>
+					<dcscom:dimension>true</dcscom:dimension>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>SerialLotNumber</dataPath>
+				<field>SerialLotNumber</field>
+				<role>
+					<dcscom:dimension>true</dcscom:dimension>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Partner</dataPath>
+				<field>Partner</field>
+				<role>
+					<dcscom:dimension>true</dcscom:dimension>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Agreement</dataPath>
+				<field>Agreement</field>
+				<role>
+					<dcscom:dimension>true</dcscom:dimension>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>LegalName</dataPath>
+				<field>LegalName</field>
+				<role>
+					<dcscom:dimension>true</dcscom:dimension>
+				</role>
+			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
 	R6020B_BatchBalanceBalanceAndTurnovers.Company,
@@ -809,6 +893,12 @@
 	R6020B_BatchBalanceBalanceAndTurnovers.ItemKey,
 	R6020B_BatchBalanceBalanceAndTurnovers.Batch,
 	R6020B_BatchBalanceBalanceAndTurnovers.BatchKey,
+	R6020B_BatchBalanceBalanceAndTurnovers.InventoryOrigin,
+	R6020B_BatchBalanceBalanceAndTurnovers.SourceOfOrigin,
+	R6020B_BatchBalanceBalanceAndTurnovers.SerialLotNumber,
+	R6020B_BatchBalanceBalanceAndTurnovers.Partner,
+	R6020B_BatchBalanceBalanceAndTurnovers.Agreement,
+	R6020B_BatchBalanceBalanceAndTurnovers.LegalName,
 	R6020B_BatchBalanceBalanceAndTurnovers.QuantityOpeningBalance AS QuantityOpeningBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.QuantityReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.QuantityExpense,
@@ -1777,6 +1867,11 @@ WHERE
 							<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
 							<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
 						</dcsset:item>
+						<dcsset:item xsi:type="dcsset:GroupItemField">
+							<dcsset:field>InventoryOrigin</dcsset:field>
+							<dcsset:groupType>Items</dcsset:groupType>
+							<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+						</dcsset:item>
 					</dcsset:groupItems>
 					<dcsset:order>
 						<dcsset:item xsi:type="dcsset:OrderItemAuto"/>
@@ -1799,6 +1894,16 @@ WHERE
 								<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
 								<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
 								<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
+							</dcsset:item>
+							<dcsset:item xsi:type="dcsset:GroupItemField">
+								<dcsset:field>SerialLotNumber</dcsset:field>
+								<dcsset:groupType>Items</dcsset:groupType>
+								<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+							</dcsset:item>
+							<dcsset:item xsi:type="dcsset:GroupItemField">
+								<dcsset:field>SourceOfOrigin</dcsset:field>
+								<dcsset:groupType>Items</dcsset:groupType>
+								<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
 							</dcsset:item>
 						</dcsset:groupItems>
 						<dcsset:order>

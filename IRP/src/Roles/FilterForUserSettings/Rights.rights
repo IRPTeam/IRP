@@ -1568,4 +1568,43 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.EmployeeCashAdvance</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeCashAdvance.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeCashAdvance.TabularSection.PaymentList.Attribute.ProfitLossCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeCashAdvance.TabularSection.PaymentList.Attribute.ExpenseType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.EmployeeCashAdvance.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

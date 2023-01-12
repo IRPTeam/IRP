@@ -143,6 +143,11 @@ Scenario: _043600 preparation (Cash receipt)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashReceipt.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load SO, SI, IPO
+		When create RetailSalesOrder objects
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(315).GetObject().Write(DocumentWriteMode.Posting);" |	
 		When Create document SalesOrder objects (with aging, prepaid)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(112).GetObject().Write(DocumentWriteMode.Posting);" |
@@ -188,6 +193,9 @@ Scenario: _043600 preparation (Cash receipt)
 		| "Documents.CashReceipt.FindByNumber(516).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
 		| "Documents.CashReceipt.FindByNumber(517).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create document CashReceipt objects advance from retail customer
+	And I execute 1C:Enterprise script at server
+		| "Documents.CashReceipt.FindByNumber(315).GetObject().Write(DocumentWriteMode.Posting);" |	
 	When Create document CashReceipt objects (with partner term by document, without basis)
 	And I execute 1C:Enterprise script at server
 		| "Documents.CashReceipt.FindByNumber(518).GetObject().Write(DocumentWriteMode.Posting);" |
@@ -665,6 +673,42 @@ Scenario: _043632 check Cash receipt movements by the Register  "R3010 Cash on h
 			| ''                                          | 'Receipt'     | '29.12.2022 15:09:05' | '68,48'     | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'USD'      | 'Reporting currency'           | 'No'                   |
 			| ''                                          | 'Receipt'     | '29.12.2022 15:09:05' | '400'       | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                                          | 'Receipt'     | '29.12.2022 15:09:05' | '400'       | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'TRY'      | 'en description is empty'      | 'No'                   |		
+	And I close all client application windows
+
+Scenario: _043633 check Cash receipt movements by the Register  "R3026 Sales orders customer advance" (advance from retail customer, sales order)
+	And I close all client application windows
+	* Select Cash receipt
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '315' |
+	* Check movements by the Register  "R3026 Sales orders customer advance" 
+		And I click "Registrations report" button
+		And I select "R3026 Sales orders customer advance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash receipt 315 dated 09.01.2023 13:20:51'      | ''            | ''                    | ''          | ''           | ''             | ''       | ''                  | ''         | ''                | ''                                          | ''             | ''             | ''                 | ''          |
+			| 'Document registrations records'                  | ''            | ''                    | ''          | ''           | ''             | ''       | ''                  | ''         | ''                | ''                                          | ''             | ''             | ''                 | ''          |
+			| 'Register  "R3026 Sales orders customer advance"' | ''            | ''                    | ''          | ''           | ''             | ''       | ''                  | ''         | ''                | ''                                          | ''             | ''             | ''                 | ''          |
+			| ''                                                | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''       | ''                  | ''         | ''                | ''                                          | ''             | ''             | ''                 | ''          |
+			| ''                                                | ''            | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch' | 'Payment type enum' | 'Currency' | 'Retail customer' | 'Order'                                     | 'Account'      | 'Payment type' | 'Payment terminal' | 'Bank term' |
+			| ''                                                | 'Expense'     | '09.01.2023 13:20:51' | '1 000'     | ''           | 'Main Company' | ''       | 'Cash'              | 'TRY'      | 'Sam Jons'        | 'Sales order 315 dated 09.01.2023 13:02:11' | 'Cash desk №1' | ''             | ''                 | ''          |		
+	And I close all client application windows
+
+Scenario: _043634 check absence Cash receipt movements by the Register "R3026 Sales orders customer advance" (not advance from retail customer, sales order)
+	And I close all client application windows
+	* Select Cash receipt
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '10' |
+		And I select current line in "List" table
+	* Check movements by the Register  "R3026 Sales orders customer advance" 
+		And I click "Registrations report" button
+		And I select "R3026 Sales orders customer advance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'R3026 Sales orders customer advance'   | 
 	And I close all client application windows
 
 Scenario: _043630 Cash receipt clear posting/mark for deletion

@@ -230,6 +230,28 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="267ab3c8-4f24-4576-b949-b5b8780c5f1f">
+  <name>TransactionType</name>
+  <synonym>
+   <key>en</key>
+   <value>Transaction type</value>
+  </synonym>
+  <type>
+   <types>EnumRef.IncomingPaymentTransactionType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.Ref</name>
+   <field>Document.IncomingPaymentOrder.StandardAttribute.Ref</field>
+  </choiceParameterLinks>
+  <fillValue xsi:type="core:ReferenceValue">
+   <value>Enum.IncomingPaymentTransactionType.EnumValue.PaymentFromCustomer</value>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="c84d8328-9e1b-416a-bcde-b09dfd972845">
   <name>DocumentForm</name>
   <synonym>

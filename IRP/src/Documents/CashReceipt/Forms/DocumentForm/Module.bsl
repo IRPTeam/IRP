@@ -73,6 +73,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	TransferFromPOS     = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS");
 	CashIn              = PredefinedValue("Enum.IncomingPaymentTransactionType.CashIn");
 	CustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance");
+	EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 	
 	// visible columns
 	If TransactionType = CashTransferOrder Then
@@ -104,6 +105,11 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		StrByType = "
 		|PaymentList.RetailCustomer,
 		|PaymentList.Order";
+	ElsIf TransactionType = EmployeeCashAdvance Then
+		StrByType = "
+		|PaymentList.Partner,
+		|PaymentList.PlaningTransactionBasis,
+		|PaymentList.BasisDocument";		
 	EndIf;
 
 	ArrayOfVisibleAttributes = New Array();
@@ -122,8 +128,13 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Form.Items[TrimAll(ItemName)].Visible = Visibility;
 	EndDo;
 
-	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange")
-		Or Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder") Then
+	IsCurrencyExchange    = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
+	IsCashTransferOrder   = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
+	IsEmployeeCashAdvance = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
+	
+	ArrayTypes = New Array();
+	
+	If IsCurrencyExchange Or IsCashTransferOrder Then
 		BasedOnCashTransferOrder = False;
 		For Each Row In Object.PaymentList Do
 			If TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") 
@@ -135,18 +146,17 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Form.Items.CurrencyExchange.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.CurrencyExchange);
 		Form.Items.CashAccount.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.CashAccount);
 		Form.Items.Company.ReadOnly 	= BasedOnCashTransferOrder And ValueIsFilled(Object.Company);
-		Form.Items.Currency.ReadOnly 	= BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
-
-		ArrayTypes = New Array();
+		Form.Items.Currency.ReadOnly 	= BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);		
 		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
-		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
+	ElsIf IsEmployeeCashAdvance Then
+		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
 	Else
-		ArrayTypes = New Array();
 		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
 		ArrayTypes.Add(Type("DocumentRef.IncomingPaymentOrder"));
 		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
-		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	EndIf;
+	Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
+	
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure
 

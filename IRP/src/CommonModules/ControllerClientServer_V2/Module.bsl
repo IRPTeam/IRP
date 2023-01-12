@@ -1194,10 +1194,15 @@ Function BindTransactionType(Parameters)
 		"StepChangeTransitAccountByAccount,
 		|StepClearByTransactionTypeBankReceipt");
 	
-	Binding.Insert("CashPayment" , "StepClearByTransactionTypeCashPayment");
-	Binding.Insert("CashReceipt" , 
+	Binding.Insert("CashPayment", 
+		"StepClearByTransactionTypeCashPayment");
+		
+	Binding.Insert("CashReceipt", 
 		"StepClearByTransactionTypeCashReceipt,
 		|StepChangeCashAccountByTransactionType");
+	
+	Binding.Insert("OutgoingPaymentOrder",
+		"StepClearByTransactionTypeOutgoingPaymentOrder");
 	
 	Binding.Insert("ShipmentConfirmation"  , "StepChangePartnerByTransactionType");
 	Binding.Insert("GoodsReceipt"          , "StepChangePartnerByTransactionType");
@@ -1281,6 +1286,17 @@ Procedure MultiSetTransactionType_CashReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("CurrencyExchange"         , BindCurrencyExchange(Parameters));
 	ResourceToBinding.Insert("MoneyTransfer"            , BindPaymentListMoneyTransfer(Parameters));
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+// TransactionType.OutgoingPaymentOrder.MultiSet
+Procedure MultiSetTransactionType_OutgoingPaymentOrder(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Partner"            , BindPaymentListPartner(Parameters));
+	ResourceToBinding.Insert("PartnerBankAccount" , BindPaymentListPartnerBankAccount(Parameters));	
+	ResourceToBinding.Insert("Payee"              , BindPaymentListLegalName(Parameters));
+	ResourceToBinding.Insert("BasisDocument"      , BindPaymentListBasisDocument(Parameters));
+	
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1378,6 +1394,25 @@ Procedure StepClearByTransactionTypeCashReceipt(Parameters, Chain) Export
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashReceipt";
 		Chain.ClearByTransactionTypeCashReceipt.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+// TransactionType.ClearByTransactionTypeOutgoingPaymentOrder.Step
+Procedure StepClearByTransactionTypeOutgoingPaymentOrder(Parameters, Chain) Export
+	Chain.ClearByTransactionTypeOutgoingPaymentOrder.Enable = True;
+	Chain.ClearByTransactionTypeOutgoingPaymentOrder.Setter = "MultiSetTransactionType_OutgoingPaymentOrder";
+		
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		Options = ModelClientServer_V2.ClearByTransactionTypeOutgoingPaymentOrderOptions();
+		Options.TransactionType    = GetTransactionType(Parameters);
+		Options.Partner            = GetPaymentListPartner(Parameters, Row.Key);
+		Options.PartnerBankAccount = GetPaymentListPartnerBankAccount(Parameters, Row.Key);
+		Options.Payee              = GetPaymentListLegalName(Parameters, Row.Key);
+		Options.BasisDocument      = GetPaymentListBasisDocument(Parameters, Row.Key);
+		
+		Options.Key = Row.Key;
+		Options.StepName = "StepClearByTransactionTypeOutgoingPaymentOrder";
+		Chain.ClearByTransactionTypeOutgoingPaymentOrder.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -1975,6 +2010,10 @@ Function BindDate(Parameters)
 		"StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_WithoutAgreement");
 		
+	Binding.Insert("EmployeeCashAdvance",
+		"StepRequireCallCreateTaxesFormControls, 
+		|StepChangeTaxRate_WithoutAgreement");
+		
 	Binding.Insert("ProductionPlanning", 
 		"StepChangePlanningPeriodByDateAndBusinessUnit");
 		
@@ -2124,6 +2163,10 @@ Function BindCompany(Parameters)
 		"StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_WithoutAgreement,
 		|StepChangeCashAccountByCompany_AccountTypeIsCash");
+	
+	Binding.Insert("EmployeeCashAdvance",
+		"StepRequireCallCreateTaxesFormControls, 
+		|StepChangeTaxRate_WithoutAgreement");
 	
 	Binding.Insert("MoneyTransfer",
 		"StepChangeAccountSenderByCompany,
@@ -4667,6 +4710,11 @@ Procedure SetPaymentListPartnerBankAccount(Parameters, Results) Export
 	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
 EndProcedure
 
+// PaymentList.PartnerBankAccount.Get
+Function GetPaymentListPartnerBankAccount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListPartnerBankAccount(Parameters).DataPath , _Key);
+EndFunction
+
 // PaymentList.PartnerBankAccount.Bind
 Function BindPaymentListPartnerBankAccount(Parameters)
 	DataPath = "PaymentList.PartnerBankAccount";
@@ -4683,6 +4731,7 @@ Procedure StepPaymentListChangeCashAccountByPartner(Parameters, Chain) Export
 		Options.Partner   = GetPaymentListPartner(Parameters, Row.Key);
 		Options.LegalName = GetPaymentListLegalName(Parameters, Row.Key);
 		Options.Currency  = GetCurrency(Parameters);
+		Options.TransactionType = GetTransactionType(Parameters);
 		Options.Key = Row.Key;
 		Options.StepName = "PaymentListChangeCashAccountByPartner";
 		Chain.ChangeCashAccountByPartner.Options.Add(Options);
@@ -4774,7 +4823,18 @@ EndFunction
 Function BindDefaultPaymentListCurrency(Parameters)
 	DataPath = "PaymentList.Currency";
 	Binding = New Structure();
-	Return BindSteps("StepPaymentListDefaultCurrencyInList", DataPath, Binding, Parameters);
+	Binding.Insert("BankPayment"             ,"StepPaymentListDefaultCurrencyInList");
+	Binding.Insert("BankReceipt"             ,"StepPaymentListDefaultCurrencyInList");
+	Binding.Insert("CashExpense"             ,"StepPaymentListDefaultCurrencyInList");
+	Binding.Insert("CashPayment"             ,"StepPaymentListDefaultCurrencyInList");
+	Binding.Insert("CashReceipt"             ,"StepPaymentListDefaultCurrencyInList");
+	Binding.Insert("CashRevenue"             ,"StepPaymentListDefaultCurrencyInList");
+	Binding.Insert("CashStatement"           ,"StepPaymentListDefaultCurrencyInList");
+	Binding.Insert("ConsolidatedRetailSales" ,"StepPaymentListDefaultCurrencyInList");
+	Binding.Insert("IncomingPaymentOrder"    ,"StepPaymentListDefaultCurrencyInList");
+	Binding.Insert("OutgoingPaymentOrder"    ,"StepPaymentListDefaultCurrencyInList");
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
 // PaymentList.Currency.Bind
@@ -4843,8 +4903,9 @@ Procedure StepPaymentListChangeLegalNameByPartner(Parameters, Chain) Export
 	Chain.ChangeLegalNameByPartner.Setter = "SetPaymentListLegalName";
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
-		Options.Partner   = GetPaymentListPartner(Parameters, Row.Key);
-		Options.LegalName = GetPaymentListLegalName(Parameters, Row.Key);
+		Options.Partner         = GetPaymentListPartner(Parameters, Row.Key);
+		Options.LegalName       = GetPaymentListLegalName(Parameters, Row.Key);
+		Options.TransactionType = GetTransactionType(Parameters);
 		Options.Key = Row.Key;
 		Options.StepName = "StepPaymentListChangeLegalNameByPartner";
 		Chain.ChangeLegalNameByPartner.Options.Add(Options);
@@ -5002,7 +5063,14 @@ EndFunction
 
 // PaymentList.BasisDocument.Bind
 Function BindPaymentListBasisDocument(Parameters)
-	DataPath = "PaymentList.BasisDocument";
+	DataPath = New Map();
+	DataPath.Insert("BankPayment", "PaymentList.BasisDocument");
+	DataPath.Insert("BankReceipt", "PaymentList.BasisDocument");
+	DataPath.Insert("CashPayment", "PaymentList.BasisDocument");
+	DataPath.Insert("CashReceipt", "PaymentList.BasisDocument");
+	
+	DataPath.Insert("IncomingPaymentOrder", "PaymentList.Basis");
+	DataPath.Insert("OutgoingPaymentOrder", "PaymentList.Basis");
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -5845,7 +5913,7 @@ EndProcedure
 
 #EndRegion
 
-#Region FINANCIAL_MOVEMENT_TYPE
+#Region PAYMENT_LIST_FINANCIAL_MOVEMENT_TYPE
 
 // PaymentList.FinancialMovementType.Set
 Procedure SetPaymentListFinancialMovementType(Parameters, Results) Export
@@ -5864,6 +5932,42 @@ Function BindPaymentListFinancialMovementType(Parameters)
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_LOAD_DATA
+
+// PaymentList.Load
+Procedure PaymentListLoad(Parameters) Export
+	Binding = BindPaymentListLoad(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.Load.Set
+#If Server Then
+	
+Procedure ServerTableLoaderPaymentList(Parameters, Results) Export
+	Binding = BindPaymentListLoad(Parameters);
+	LoaderTable(Binding.DataPath, Parameters, Results);
+EndProcedure
+
+#EndIf
+
+// PaymentList.Load.Bind
+Function BindPaymentListLoad(Parameters)
+	DataPath = "PaymentList";
+	Binding = New Structure();
+	Return BindSteps("StepPaymentListLoadTable", DataPath, Binding, Parameters);
+EndFunction
+
+// PaymentList.LoadAtServer.Step
+Procedure StepPaymentListLoadTable(Parameters, Chain) Export
+	Chain.LoadTable.Enable = True;
+	Chain.LoadTable.Setter = "ServerTableLoaderPaymentList";
+	Options = ModelClientServer_V2.LoadTableOptions();
+	Options.TableAddress = Parameters.LoadData.Address;
+	Chain.LoadTable.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 
@@ -10192,7 +10296,7 @@ EndProcedure
 
 #EndRegion
 
-#Region LOAD_DATA
+#Region ITEM_LIST_LOAD_DATA
 
 // ItemList.Load
 Procedure ItemListLoad(Parameters) Export

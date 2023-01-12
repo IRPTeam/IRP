@@ -161,6 +161,14 @@
    <key>en</key>
    <value>Legal name</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Контрагент</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura hesabı</value>
+  </synonym>
   <type>
    <types>CatalogRef.Companies</types>
   </type>

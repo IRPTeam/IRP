@@ -5,6 +5,14 @@
   <key>en</key>
   <value>Use retail orders</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать - заказы розничных покупателей</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kullanmak - Perakende müşteri siparişleri</value>
+ </synonym>
  <location>Constant.UseRetailOrders</location>
  <privilegedGetMode>true</privilegedGetMode>
  <content>Document.SalesOrder.Attribute.TransactionType</content>

@@ -5,6 +5,14 @@
   <key>en</key>
   <value>Doc employee cash advance server</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Док подотчеты сотрудников сервер</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak personel iş avans kapaması server</value>
+ </synonym>
  <server>true</server>
  <serverCall>true</serverCall>
 </mdclass:CommonModule>

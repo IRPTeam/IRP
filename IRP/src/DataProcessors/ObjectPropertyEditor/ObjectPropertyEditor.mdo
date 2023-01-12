@@ -59,6 +59,14 @@
    <key>en</key>
    <value>Edit value list</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Изменить список значений</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Değer listesini değiştir</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
@@ -68,6 +76,14 @@
    <key>en</key>
    <value>Property pack editor</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Конструктор пакета настроек</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ayarlar takımı sihirbazı</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
@@ -76,6 +92,14 @@
   <synonym>
    <key>en</key>
    <value>Field settings</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Настройки поля</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Alan ayarları</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

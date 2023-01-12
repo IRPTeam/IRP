@@ -443,6 +443,14 @@
    <key>en</key>
    <value>Fields table</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Таблица полей</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Alanlar tablosu</value>
+  </title>
   <id>1</id>
   <valueType>
    <types>ValueTable</types>
@@ -458,6 +466,14 @@
    <title>
     <key>en</key>
     <value>Is visible</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Видимый</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Görünür</value>
    </title>
    <id>2</id>
    <valueType>
@@ -475,6 +491,14 @@
    <title>
     <key>en</key>
     <value>Field</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Поле</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Alan</value>
    </title>
    <id>3</id>
    <valueType>
@@ -494,6 +518,14 @@
     <key>en</key>
     <value>Type</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Вид</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Tip</value>
+   </title>
    <id>4</id>
    <valueType>
     <types>String</types>
@@ -511,6 +543,14 @@
    <title>
     <key>en</key>
     <value>Field name</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Наименование поля</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Alan ismi</value>
    </title>
    <id>5</id>
    <valueType>
@@ -530,6 +570,14 @@
   <title>
    <key>en</key>
    <value>Check all</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Выбрать все</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Tümü işaretle</value>
   </title>
   <id>1</id>
   <use>
@@ -551,6 +599,14 @@
    <key>en</key>
    <value>Uncheck all</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Отменить все</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Tümü kaldır</value>
+  </title>
   <id>2</id>
   <use>
    <common>true</common>
@@ -570,6 +626,14 @@
   <title>
    <key>en</key>
    <value>Apply setting</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Применить настройки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Ayarları uygula</value>
   </title>
   <id>3</id>
   <use>

@@ -452,6 +452,14 @@
    <key>en</key>
    <value>Properties table</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Таблица свойств</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Özellikler tablosu</value>
+  </title>
   <id>1</id>
   <valueType>
    <types>ValueTable</types>
@@ -467,6 +475,14 @@
    <title>
     <key>en</key>
     <value>Is marked</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Помечен</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>İşeretlendi</value>
    </title>
    <id>2</id>
    <valueType>
@@ -485,6 +501,14 @@
     <key>en</key>
     <value>Property</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Свойство</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Özellik</value>
+   </title>
    <id>3</id>
    <valueType>
     <types>AnyRef</types>
@@ -501,6 +525,14 @@
    <title>
     <key>en</key>
     <value>Is collection</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Это коллекция</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Bu koleksiyondur</value>
    </title>
    <id>4</id>
    <valueType>
@@ -519,6 +551,14 @@
     <key>en</key>
     <value>Value</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Значение</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Değer</value>
+   </title>
    <id>5</id>
    <valueType/>
    <view>
@@ -533,6 +573,14 @@
    <title>
     <key>en</key>
     <value>Field name</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Наименование поля</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Alan ismi</value>
    </title>
    <id>6</id>
    <valueType>
@@ -552,6 +600,14 @@
   <title>
    <key>en</key>
    <value>Set values</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Установить значения</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Değerleri belirle</value>
   </title>
   <id>1</id>
   <use>
@@ -573,6 +629,14 @@
   <title>
    <key>en</key>
    <value>Uncheck</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Убрать пометку</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>İşareti kaldır</value>
   </title>
   <id>2</id>
   <use>

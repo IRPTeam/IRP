@@ -10,6 +10,14 @@
   <key>en</key>
   <value>Use retail orders</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать - заказы розничных покупателей</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kullanmak - Perakende müşteri siparişleri</value>
+ </synonym>
  <type>
   <types>Boolean</types>
  </type>

@@ -5,6 +5,14 @@
   <key>en</key>
   <value>Doc employee cash advance client</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Док подотчеты сотрудников клиент</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak personel iş avans kapaması client</value>
+ </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

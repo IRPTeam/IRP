@@ -348,6 +348,14 @@
    <key>en</key>
    <value>List</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Список</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Liste</value>
+  </title>
   <id>1</id>
   <valueType>
    <types>ValueList</types>
@@ -367,6 +375,14 @@
   <title>
    <key>en</key>
    <value>OK</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>ОК</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <id>1</id>
   <use>

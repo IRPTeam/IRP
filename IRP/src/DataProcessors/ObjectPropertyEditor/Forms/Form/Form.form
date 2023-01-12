@@ -746,6 +746,14 @@
      <key>en</key>
      <value>Marking commands</value>
     </title>
+    <title>
+     <key>ru</key>
+     <value>Пометка команд</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Komutları işaretleme</value>
+    </title>
     <extendedTooltip>
      <name>PropertiesTableMarkingExtendedTooltip</name>
      <id>81</id>
@@ -835,6 +843,14 @@
      <key>en</key>
      <value>Modifing commands</value>
     </title>
+    <title>
+     <key>ru</key>
+     <value>Изменить команды</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Komutları değiştirme</value>
+    </title>
     <extendedTooltip>
      <name>PropertiesTableModifingExtendedTooltip</name>
      <id>79</id>
@@ -894,6 +910,14 @@
      <key>en</key>
      <value>Copying commands</value>
     </title>
+    <title>
+     <key>ru</key>
+     <value>Копирование команд</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Komutları kopyalama</value>
+    </title>
     <extendedTooltip>
      <name>PropertiesTableCopyingExtendedTooltip</name>
      <id>93</id>
@@ -952,6 +976,14 @@
     <title>
      <key>en</key>
      <value>Deleting commands</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Удаление команд</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Silinen komutlar</value>
     </title>
     <extendedTooltip>
      <name>PropertiesTableDeletingExtendedTooltip</name>
@@ -1110,6 +1142,14 @@
     <key>en</key>
     <value>Constraint</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Ограничения</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Kısıtlamalar</value>
+   </title>
    <id>9</id>
    <valueType>
     <types>AnyRef</types>
@@ -1126,6 +1166,14 @@
    <title>
     <key>en</key>
     <value>Marked</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Помечен</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>İşaretlendi</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1300,6 +1348,14 @@
    <key>en</key>
    <value>Set value to empty cells</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Установить значение в пустые ячейки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Boş satırlara değeri belirle</value>
+  </title>
   <id>5</id>
   <use>
    <common>true</common>
@@ -1320,6 +1376,14 @@
   <title>
    <key>en</key>
    <value>Mark all rows</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Пометить все строки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Tüm satırları işaretle</value>
   </title>
   <id>8</id>
   <use>
@@ -1342,6 +1406,14 @@
    <key>en</key>
    <value>Unmark all rows</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Убрать пометку у всех строк</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Tüm satırlardan işareti kaldır</value>
+  </title>
   <id>9</id>
   <use>
    <common>true</common>
@@ -1362,6 +1434,14 @@
   <title>
    <key>en</key>
    <value>Delete value in marked rows</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Удалить значение в помеченных строках</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>İşeretlenen satırlarda değeri temizle</value>
   </title>
   <id>10</id>
   <use>
@@ -1384,6 +1464,14 @@
    <key>en</key>
    <value>Set value for marked rows</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Установить значение у помеченных строк</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>İşaretlenen satırlarda değeri belirle</value>
+  </title>
   <id>11</id>
   <use>
    <common>true</common>
@@ -1404,6 +1492,14 @@
   <title>
    <key>en</key>
    <value>Copy this row value to marked rows</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Скопировать значение в помеченные строки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Bu satır değeri tüm işaretlenen satırlara kopyala</value>
   </title>
   <id>14</id>
   <use>
@@ -1426,6 +1522,14 @@
    <key>en</key>
    <value>Mark selected rows</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Пометить выбранные строки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Seçilen satıları işaretle</value>
+  </title>
   <id>15</id>
   <use>
    <common>true</common>
@@ -1446,6 +1550,14 @@
   <title>
    <key>en</key>
    <value>Fields</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Поля</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Alanlar</value>
   </title>
   <id>16</id>
   <use>

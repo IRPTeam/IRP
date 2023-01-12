@@ -267,6 +267,14 @@
    <key>en</key>
    <value>Inventory origin</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Происхождение товара</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Envanter menşei</value>
+  </synonym>
   <type>
    <types>EnumRef.InventoryOrigingTypes</types>
   </type>
@@ -280,6 +288,14 @@
   <synonym>
    <key>en</key>
    <value>Source of origin</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Источник происхождения</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Envanter menşei</value>
   </synonym>
   <type>
    <types>CatalogRef.SourceOfOrigins</types>
@@ -295,6 +311,14 @@
    <key>en</key>
    <value>Serial lot number</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Серия номенклатуры</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seri lot numaraları</value>
+  </synonym>
   <type>
    <types>CatalogRef.SerialLotNumbers</types>
   </type>
@@ -308,6 +332,14 @@
   <synonym>
    <key>en</key>
    <value>Partner</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Партнер</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Cari hesap</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -323,6 +355,14 @@
    <key>en</key>
    <value>Agreement</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Соглашение</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sözleşme</value>
+  </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
   </type>
@@ -336,6 +376,14 @@
   <synonym>
    <key>en</key>
    <value>Legal name</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Контрагент</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura hesabı</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>

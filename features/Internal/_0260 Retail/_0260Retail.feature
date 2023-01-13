@@ -440,7 +440,7 @@ Scenario: _0260115 create RRR prior periods and check Consolidated retail sales 
 		Then the form attribute named "LegalName" became equal to "Company Retail customer"
 		Then the form attribute named "Agreement" became equal to "Retail partner term"
 		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "ConsolidatedRetailSales" became equal to ""
+		Then the form attribute named "ConsolidatedRetailSales" became equal to "$$ConsolidatedRetailSales2$$"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
 			| '#' | 'Retail sales receipt'                             | 'Item'  | 'Sales person' | 'Profit loss center' | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Return reason' | 'Revenue type' | 'Detail' | 'VAT' | 'Offers amount' | 'Landed cost' |
@@ -475,7 +475,8 @@ Scenario: _0260115 create RRR prior periods and check Consolidated retail sales 
 			| '$$RetailReturnReceiptNew$$' | 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
 			| '*'                          | 'Main Company' | '-520'   | 'Shop 02' | 'TRY'      | 'CI'     |
 			| '*'                          | 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
-		Then the number of "Documents" table lines is "equal" "8"
+			| '$$RetailReturnReceiptOld$$' | 'Main Company' | '-1 040' | 'Shop 02' | 'TRY'      | 'CI'     |
+		Then the number of "Documents" table lines is "equal" "9"
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		Then the form attribute named "Author" became equal to "CI"
 		And I close all client application windows
@@ -701,12 +702,12 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			And "CashTable" table became equal
 				| 'Operation' | 'Payment type' | 'In Base'  | 'In Register' |
 				| 'Sales'     | 'Cash'         | '7 550,00' | ''            |
-				| 'Returns'   | 'Cash'         | '1 070,00' | ''            |
+				| 'Returns'   | 'Cash'         | '2 110,00' | ''            |
 			And I go to line in "CashTable" table
 				| 'Operation' | 'Payment type' | 'In Base'  | 'In Register' |
-				| 'Returns'   | 'Cash'         | '1 070,00' | ''            |
+				| 'Returns'   | 'Cash'         | '2 110,00' | ''            |
 			And I select current line in "CashTable" table
-			And I input "1 070,02" text in "In Register" field of "CashTable" table
+			And I input "2 110,02" text in "In Register" field of "CashTable" table
 			And I finish line editing in "CashTable" table
 			And I go to line in "CashTable" table
 				| 'In Base'  | 'Operation' | 'Payment type' |
@@ -716,7 +717,7 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			And I finish line editing in "CashTable" table
 			And I go to line in "CashTable" table
 				| 'In Base'  | 'In Register' | 'Operation' | 'Payment type' |
-				| '1 070,00' | '1 070,02'    | 'Returns'   | 'Cash'         |
+				| '2 110,00' | '2 110,02'    | 'Returns'   | 'Cash'         |
 			And I set checkbox named "CashConfirm"
 		* Filling card part		
 			Then "Terminals: Session closing" window is opened
@@ -777,17 +778,17 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			| '$$RetailReturnReceiptNew$$' | 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
 			| '*'                          | 'Main Company' | '-520'   | 'Shop 02' | 'TRY'      | 'CI'     |
 			| '*'                          | 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
+			| '$$RetailReturnReceiptOld$$' | 'Main Company' | '-1 040' | 'Shop 02' | 'TRY'      | 'CI'     |
 			| '*'                          | 'Main Company' | '5 750'  | 'Shop 02' | 'TRY'      | 'CI'     |
 			| '*'                          | 'Main Company' | '520'    | 'Shop 02' | 'TRY'      | 'CI'     |
-
-		Then the number of "Documents" table lines is "equal" "10"
+		Then the number of "Documents" table lines is "equal" "11"
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		And the editing text of form attribute named "BalanceEnd" became equal to "4 400,00"
 		And the editing text of form attribute named "BalanceReal" became equal to "4 000,00"
 		And "PaymentList" table became equal
 			| '#' | 'Amount'   | 'Is return' | 'Payment type' | 'Payment terminal' | 'Real amount' |
 			| '1' | '7 550,00' | 'No'        | 'Cash'         | ''                 | '7 550,00'    |
-			| '2' | '1 070,00' | 'Yes'       | 'Cash'         | ''                 | '1 070,02'    |
+			| '2' | '2 110,00' | 'Yes'       | 'Cash'         | ''                 | '2 110,02'    |
 			| '3' | '3 180,00' | 'No'        | 'Card 01'      | ''                 | '3 180,00'    |
 			| '4' | '4 790,00' | 'No'        | 'Card 02'      | ''                 | '4 770,00'    |
 			| '5' | '550,00'   | 'Yes'       | 'Card 02'      | ''                 | '550,00'      |	

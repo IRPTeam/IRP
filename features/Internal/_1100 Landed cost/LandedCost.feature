@@ -2061,6 +2061,7 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 	And I close all client application windows
 	* Сhecking the report (Store 10)
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And Delay 10
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description' |
@@ -2354,6 +2355,7 @@ Scenario: _027 check calculation movements cost for ItemStockAdjustment
 		And I wait "Calculation movement costs (create) *" window closing in 20 seconds
 	* Check report
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And Delay 10
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description' |

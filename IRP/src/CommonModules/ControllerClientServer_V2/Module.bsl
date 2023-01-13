@@ -1944,7 +1944,7 @@ Function BindDate(Parameters)
 		"StepChangeAgreementByPartner_AgreementTypeIsCustomer, 
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
-		|StepChangeConsolidatedRetailSalesByWorkstationForReturn");
+		|StepChangeConsolidatedRetailSalesByWorkstation");
 
 	Binding.Insert("PurchaseOrder",
 		"StepItemListChangePriceTypeByAgreement,
@@ -2000,7 +2000,8 @@ Function BindDate(Parameters)
 		
 	Binding.Insert("CashReceipt",
 		"StepRequireCallCreateTaxesFormControls, 
-		|StepChangeTaxRate_AgreementInList");
+		|StepChangeTaxRate_AgreementInList,
+		|StepChangeConsolidatedRetailSalesByWorkstation");
 
 	Binding.Insert("CashExpense",
 		"StepRequireCallCreateTaxesFormControls, 
@@ -2129,7 +2130,7 @@ Function BindCompany(Parameters)
 		"StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey,
-		|StepChangeConsolidatedRetailSalesByWorkstationForReturn");
+		|StepChangeConsolidatedRetailSalesByWorkstation");
 	
 	Binding.Insert("IncomingPaymentOrder", "StepChangeCashAccountByCompany_AccountTypeIsEmpty");
 	Binding.Insert("OutgoingPaymentOrder", "StepChangeCashAccountByCompany_AccountTypeIsEmpty");
@@ -2227,7 +2228,7 @@ Function BindBranch(Parameters)
 	DataPath = "Branch";
 	Binding = New Structure();
 	Binding.Insert("RetailSalesReceipt", "StepChangeConsolidatedRetailSalesByWorkstation");
-	Binding.Insert("RetailReturnReceipt", "StepChangeConsolidatedRetailSalesByWorkstationForReturn");
+	Binding.Insert("RetailReturnReceipt", "StepChangeConsolidatedRetailSalesByWorkstation");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -2630,6 +2631,7 @@ Procedure StepChangeConsolidatedRetailSalesByWorkstation(Parameters, Chain) Expo
 	Chain.ChangeConsolidatedRetailSalesByWorkstation.Options.Add(Options);
 EndProcedure
 
+// TODO: Remove #1677
 // ConsolidatedRetailSales.ChangeConsolidatedRetailSalesByWorkstationForReturn.Step
 Procedure StepChangeConsolidatedRetailSalesByWorkstationForReturn(Parameters, Chain) Export
 	Chain.ChangeConsolidatedRetailSalesByWorkstationForReturn.Enable = True;
@@ -2677,7 +2679,8 @@ Function BindWorkstation(Parameters)
 	DataPath = "Workstation";
 	Binding = New Structure();
 	Binding.Insert("RetailSalesReceipt"  , "StepChangeConsolidatedRetailSalesByWorkstation");
-	Binding.Insert("RetailReturnReceipt" , "StepChangeConsolidatedRetailSalesByWorkstationForReturn");
+	Binding.Insert("RetailReturnReceipt" , "StepChangeConsolidatedRetailSalesByWorkstation");
+	Binding.Insert("CashReceipt" 		 , "StepChangeConsolidatedRetailSalesByWorkstation");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 
@@ -8232,7 +8235,7 @@ Function BindItemListSalesDocument(Parameters)
 	
 	Binding.Insert("RetailReturnReceipt" , 
 		"StepChangeLandedCostBySalesDocument,
-		|StepChangeConsolidatedRetailSalesByWorkstationForReturn");
+		|StepChangeConsolidatedRetailSalesByWorkstation");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction

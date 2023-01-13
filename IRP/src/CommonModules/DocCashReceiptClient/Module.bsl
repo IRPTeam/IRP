@@ -521,3 +521,11 @@ EndProcedure
 #EndRegion
 
 #EndRegion
+
+#Region WORKSTATION
+
+Procedure WorkstationOnChange(Object, Form, Item) Export
+	ViewClient_V2.WorkstationOnChange(Object, Form, "PaymentList");
+EndProcedure
+
+#EndRegion

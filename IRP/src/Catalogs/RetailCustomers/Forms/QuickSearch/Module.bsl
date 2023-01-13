@@ -26,7 +26,7 @@ EndProcedure
 Procedure FillFilterList()
 	List.SettingsComposer.Settings.Filter.Items.Clear();
 	For Each FilterField In Items.GroupFilter.ChildItems Do
-		If IsBlankString(RetailCustomer[FilterField.Name]) Then
+		If Not ValueIsFilled(RetailCustomer[FilterField.Name]) Then
 			Continue;
 		EndIf;
 		FilterItem = List.SettingsComposer.Settings.Filter.Items.Add(Type("DataCompositionFilterItem"));

@@ -8,7 +8,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.Currency = Parameters.Currency;
 	ThisObject.Store = Parameters.Store;
 	ThisObject.Workstation = Parameters.Workstation;
-	ThisObject.ConsolidatedRetailSales = Parameters.ConsolidatedRetailSales; 
+	ThisObject.ConsolidatedRetailSales = Parameters.ConsolidatedRetailSales;
+	ThisObject.AutoCreateMoneyTransfer = Parameters.AutoCreateMoneyTransfer; 
 	
 	CRS_Attributes = CommonFunctionsServer.GetAttributesFromRef(
 			ThisObject.ConsolidatedRetailSales, "Company, Branch, CashAccount, OpeningDate");
@@ -119,6 +120,8 @@ Procedure CloseSession(Command)
 	ClosingData.Insert("BalanceEnd", ThisObject.BalanceEnd);
 	ClosingData.Insert("BalanceReal", ThisObject.BalanceReal);
 	
+	ClosingData.Insert("AutoCreateMoneyTransfer", ThisObject.AutoCreateMoneyTransfer);
+	
 	PaymentList = New Array();
 	For Each TableItem In ThisObject.CashTable Do
 		ItemStructure = New Structure;
@@ -127,7 +130,7 @@ Procedure CloseSession(Command)
 		ItemStructure.Insert("Amount", TableItem.AmountInBase);
 		ItemStructure.Insert("RealAmount", TableItem.AmountInRegister);
 		PaymentList.Add(ItemStructure);
-	EndDo; 
+	EndDo;
 	For Each TableItem In ThisObject.TerminalTable Do
 		ItemStructure = New Structure;
 		ItemStructure.Insert("isReturn", TableItem.isReturn);

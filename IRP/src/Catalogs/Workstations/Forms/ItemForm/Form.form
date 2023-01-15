@@ -64,6 +64,7 @@
       <dataPath xsi:type="form:DataPath">
         <segments>Object.UseCashInAndCashOut</segments>
       </dataPath>
+      <titleLocation>Right</titleLocation>
       <extendedTooltip>
         <name>UseCashInAndCashOutExtendedTooltip</name>
         <id>50</id>
@@ -82,6 +83,50 @@
       <contextMenu>
         <name>UseCashInAndCashOutContextMenu</name>
         <id>49</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>CheckBoxField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>AutoCreateMoneyTransferAtSessionClosing</name>
+      <id>53</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.AutoCreateMoneyTransferAtSessionClosing</segments>
+      </dataPath>
+      <titleLocation>Right</titleLocation>
+      <extendedTooltip>
+        <name>AutoCreateMoneyTransferAtSessionClosingExtendedTooltip</name>
+        <id>55</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>AutoCreateMoneyTransferAtSessionClosingContextMenu</name>
+        <id>54</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>

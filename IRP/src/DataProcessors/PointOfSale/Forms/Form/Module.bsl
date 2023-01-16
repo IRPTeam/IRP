@@ -121,6 +121,8 @@ Procedure CloseSession(Command)
 	FormParameters.Insert("Currency", Object.Currency);
 	FormParameters.Insert("Store", ThisObject.Store);
 	FormParameters.Insert("Workstation", Object.Workstation);
+	FormParameters.Insert("AutoCreateMoneyTransfer"
+		, CommonFunctionsServer.GetRefAttribute(Object.Workstation, "AutoCreateMoneyTransferAtSessionClosing"));
 	FormParameters.Insert("ConsolidatedRetailSales", Object.ConsolidatedRetailSales);
 	
 	NotifyDescription = New NotifyDescription("CloseSessionFinish", ThisObject);
@@ -134,6 +136,10 @@ EndProcedure
 Async Procedure CloseSessionFinish(Result, AddInfo) Export
 	If Result = Undefined Then
 		Return;
+	EndIf;
+	
+	If Result.AutoCreateMoneyTransfer Then
+		CreateCashOut(Commands.CreateCashOut, True);
 	EndIf;
 	
 	EquipmentCloseShiftResult = Await EquipmentFiscalPrinterClient.CloseShift(Object.ConsolidatedRetailSales);
@@ -1026,9 +1032,12 @@ Procedure UpdateMoneyTransfers(Command)
 EndProcedure
 
 &AtClient
-Procedure CreateCashOut(Command)
+Procedure CreateCashOut(Command, AutoCreateMoneyTransfer = False)
+	OpenFormParameters = New Structure();
+	OpenFormParameters.Insert("AutoCreateMoneyTransfer", AutoCreateMoneyTransfer);
+	OpenFormParameters.Insert("FillingData", GetFillingDataMoneyTransfer(0));
 	OpenForm("DataProcessor.PointOfSale.Form.CashOut", 
-			New Structure("FillingData", GetFillingDataMoneyTransfer(0)), , 
+			OpenFormParameters, , 
 			UUID, , , 
 			New NotifyDescription("CreateCashOutFinish", ThisObject), 
 			FormWindowOpeningMode.LockWholeInterface);

@@ -132,7 +132,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Query = New Query();
 	Query.Text =
-	//---------------------------------------------------------
 	"SELECT
 	|	SourceOfOrigins.Key AS Key,
 	|	CASE
@@ -145,12 +144,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|			THEN SourceOfOrigins.SourceOfOrigin
 	|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
 	|	END AS SourceOfOrigin,
-	
-	//--#--
 	|	SourceOfOrigins.SourceOfOrigin AS SourceOfOriginStock,
 	|	SourceOfOrigins.SerialLotNumber AS SerialLotNumberStock,
-	//--#--
-	
 	|	SUM(SourceOfOrigins.Quantity) AS Quantity
 	|INTO tmpSourceOfOrigins
 	|FROM
@@ -170,15 +165,10 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|			THEN SourceOfOrigins.SourceOfOrigin
 	|		ELSE VALUE(Catalog.SourceOfOrigins.EmptyRef)
 	|	END,
-	
-	//--#--
 	|   SourceOfOrigins.SourceOfOrigin,
 	|   SourceOfOrigins.SerialLotNumber
-	//--#--
-	
 	|;
 	|
-	//---------------------------------------------------------
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT // --[1]
 	|	RetailReturnReceiptItemList.ItemKey AS ItemKey,
@@ -206,7 +196,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
 	|WHERE
 	|	RetailReturnReceiptItemList.Ref = &Ref
-//	|	AND RetailReturnReceiptItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
 	|	AND NOT RetailReturnReceiptItemList.IsService
 	|GROUP BY
 	|	RetailReturnReceiptItemList.ItemKey,
@@ -266,11 +255,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	END AS Amount,
 	|	ISNULL(tmpSourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOrigin,
 	|	ISNULL(tmpSourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
-	
-	//--#--
 	|	ISNULL(tmpSourceOfOrigins.SourceOfOriginStock, VALUE(Catalog.SourceOfOrigins.EmptyRef)) AS SourceOfOriginStock,
 	|	ISNULL(tmpSourceOfOrigins.SerialLotNumberStock, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumberStock	
-	//--#--
 	|
 	|FROM
 	|	tmpItemList AS tmpItemList
@@ -280,8 +266,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("Ref", Ref);
 	QueryResults = Query.ExecuteBatch();
 	
-//	BatchesInfo   = QueryResults[0].Unload();
-//	BatchKeysInfo = QueryResults[1].Unload();
 	BatchesInfo   = QueryResults[2].Unload();
 	BatchKeysInfo = QueryResults[3].Unload();
 
@@ -356,7 +340,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|			then (isnull(TaxListAmounts.AmountTax, 0) / BatchKeysInfo.TotalQuantity) * BatchKeysInfo.Quantity
 	|		else 0
 	|	end as AmountTax,
-//	|	ISNULL(TaxListAmounts.AmountTax, 0) AS AmountTax,
 	|	BatchKeysInfo.*
 	|FROM
 	|	BatchKeysInfo AS BatchKeysInfo
@@ -393,10 +376,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.CopyColumns();
 	If BatchKeysInfo_DataTable.Count() Then
 		BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.Copy(New Structure("CurrencyMovementType", CurrencyMovementType));
-		//--#--
-		//BatchKeysInfo_DataTableGrouped.GroupBy("Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, 
 		BatchKeysInfo_DataTableGrouped.GroupBy("Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock,
-		//--#--
 		|Quantity, Amount, AmountTax");	
 	EndIf;
 		
@@ -417,12 +397,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		Filter.Insert("Company"         , Row.Company);	
 		Filter.Insert("Store"           , Row.Store);	
 		Filter.Insert("ItemKey"         , Row.ItemKey);	
-		//--#--
-		//Filter.Insert("SourceOfOrigin"  , Row.SourceOfOrigin);	
-		//Filter.Insert("SerialLotNumber" , Row.SerialLotNumber);	
 		Filter.Insert("SourceOfOrigin"  , Row.SourceOfOriginStock);	
 		Filter.Insert("SerialLotNumber" , Row.SerialLotNumberStock);	
-		//--#--
 		Filter.Insert("SalesDocument"   , Row.SalesInvoice);
 		
 		FilteredRows = ConsignorBatches.FindRows(Filter);
@@ -464,9 +440,14 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	BatchKeysInfo_DataTableGrouped_Copy.Columns.Delete("__tmp_Amount");
 	BatchKeysInfo_DataTableGrouped_Copy.Columns.Delete("__tmp_AmountTax");
 	
-	BatchKeysInfo_DataTableGrouped_Copy.GroupBy(
-	"BatchConsignor, Company ,Currency, CurrencyMovementType, Direction, ItemKey, Period, SalesInvoice, SerialLotNumber, SourceOfOrigin, Store",
-	"Quantity, Amount, AmountTax");
+	If BatchKeysInfo_DataTableGrouped_Copy.Count() Then
+		BatchKeysInfo_DataTableGrouped_Copy.GroupBy(
+		"BatchConsignor, Company ,Currency, CurrencyMovementType, Direction, ItemKey, Period, SalesInvoice, SerialLotNumber, SourceOfOrigin, Store",
+		"Quantity, Amount, AmountTax");
+	Else
+		BatchKeysInfo_DataTableGrouped_Copy.Columns.Add("CurrencyMovementType", New TypeDescription("ChartOfCharacteristicTypesRef.CurrencyMovementType"));
+	EndIf;
+	
 	
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;

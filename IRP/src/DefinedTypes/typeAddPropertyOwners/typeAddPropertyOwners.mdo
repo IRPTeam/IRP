@@ -123,5 +123,6 @@
     <types>DocumentRef.CashExpense</types>
     <types>CatalogRef.SourceOfOrigins</types>
     <types>DocumentRef.EmployeeCashAdvance</types>
+    <types>DocumentRef.ProductionCostsAllocation</types>
   </type>
 </mdclass:DefinedType>

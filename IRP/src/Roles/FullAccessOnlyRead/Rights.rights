@@ -7280,4 +7280,26 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>AccumulationRegister.R7050T_ProductionDurations</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ProductionCostsAllocation</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

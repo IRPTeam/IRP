@@ -16,4 +16,5 @@
   <content>Report.ProductionPlanning</content>
   <content>DataProcessor.ProductionWorkspace</content>
   <content>Catalog.BusinessUnits.Attribute.Workshop</content>
+  <content>Document.ProductionCostsAllocation</content>
 </mdclass:FunctionalOption>

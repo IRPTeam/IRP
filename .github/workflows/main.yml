@@ -15,8 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     name: Assign to One Project
     steps:
-    - name: Assign NEW issues and NEW pull requests to project 2
-      uses: srggrs/assign-one-project-github-action@1.2.1
-      if: github.event.action == 'opened'
+    - name: Add To GitHub projects
+      uses: actions/add-to-project@v0.4.0
       with:
-        project: 'https://github.com/orgs/IRPTeam/projects/8'
+        # URL of the project to add issues to
+        project-url: 'https://github.com/orgs/IRPTeam/projects/8'
+        # A GitHub personal access token with write access to the project
+        github-token:  ${{ secrets.GITHUB_TOKEN }}
+        # A comma-separated list of labels to use as a filter for issue to be added
+        #labeled: # optional
+        # The behavior of the labels filter, AND to match all labels, OR to match any label, NOT to exclude any listed label (default is OR)
+        #label-operator: # optional

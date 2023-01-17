@@ -603,7 +603,9 @@ Scenario: _0850025 sales return (cash)
 		And I click "Post" button
 		And I click "Print receipt" button
 	* Check fiscal log
+		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML6"
 				
@@ -620,7 +622,9 @@ Scenario: _0850025 sales return (bank credit)
 		And I click "Post" button
 		And I click "Print receipt" button
 	* Check fiscal log
+		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML7"
 						
@@ -647,7 +651,9 @@ Scenario: _0850026 sales return (card)
 		And I click "Post" button
 		And I click "Print receipt" button
 	* Check fiscal log
+		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML8"
 
@@ -655,6 +661,7 @@ Scenario: _0850030 print X report
 	And I close all client application windows
 	And In the command interface I select "Retail" "Point of sale"
 	And I click "Print X Report" button
+	And Delay 5
 	And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 	And I check "$ParsingResult$" with "0" and method is "PrintXReport"	
 
@@ -721,15 +728,12 @@ Scenario: _0260152 close sessiion
 		And In the command interface I select "Retail" "Point of sale"	
 	* Close session
 		And I click "Close session" button
-		And I change checkbox "I confirm the difference between actual data and accounting."
-		Then "Terminals: Session closing" window is opened
-		And I change checkbox "I confirm the difference between actual data and accounting."
-		Then "Balance: Session closing" window is opened
-		And I change checkbox "Auto create money transfer"
-		And I change checkbox "I confirm the difference between actual data and accounting."
-		Then "Finish: Session closing" window is opened
-		And I move to the next attribute
+		And I set checkbox named "CashConfirm"
+		And I set checkbox named "TerminalConfirm"
+		And I set checkbox named "CashConfirm"
+		And I move to the next attribute		
 		And I click "Close session" button
+		And Delay 5
 	* Check fiscal log
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And I check "$ParsingResult$" with "0" and method is "CloseShift"	

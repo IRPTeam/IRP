@@ -150,6 +150,42 @@ Scenario: _090502 check barcode display by Item and item key
 		| '2202283713' | 'pcs'  | 'S/Yellow' |
 	And I close all client application windows
 
+Scenario: _090503 copy barcode
+	And I close all client application windows
+	* From item
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| Description |
+			| Dress       |
+		And I select current line in "List" table
+		And In this window I click command interface button "Barcodes"
+		And I go to line in "List" table
+			| 'Barcode'    |
+			| '2202283713' |
+		And in the table "List" I click "Copy" button
+		Then the form attribute named "Barcode" became equal to "2202283713"
+		Then the form attribute named "ItemKey" became equal to "S/Yellow"
+		Then the form attribute named "SerialLotNumber" became equal to ""
+		Then the form attribute named "SourceOfOrigin" became equal to ""
+		Then the form attribute named "Unit" became equal to "pcs"
+		Then the form attribute named "Presentation" became equal to "2202283713"
+		And I close all client application windows
+	* From register
+		Given I open hyperlink "e1cib/list/InformationRegister.Barcodes"
+		And I go to line in "List" table
+			| 'Barcode'    |
+			| '2202283713' |
+		And in the table "List" I click "Copy" button		
+		Then the form attribute named "Barcode" became equal to "2202283713"
+		Then the form attribute named "ItemKey" became equal to "S/Yellow"
+		Then the form attribute named "SerialLotNumber" became equal to ""
+		Then the form attribute named "SourceOfOrigin" became equal to ""
+		Then the form attribute named "Unit" became equal to "pcs"
+		Then the form attribute named "Presentation" became equal to "2202283713"
+		And I close all client application windows
+				
+				
+	
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

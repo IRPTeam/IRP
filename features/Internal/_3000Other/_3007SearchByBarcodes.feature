@@ -245,7 +245,34 @@ Scenario: _300723 barcode check in Price list
 				| 'Dress' | ''      | 'pcs'      |
 		And I close all client application windows
 		
+Scenario: _300725 check function Always add new row after scan
+	And I close all client application windows
+	* Select item type
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"		
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Clothes'     |
+		And I select current line in "List" table
+		And I set checkbox "Always add new row after scan"
+		And I click "Save and close" button
+	* Check function Always add new row after scan
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+		And I click "SearchByBarcode" button
+		And I input "2202283713" text in "InputFld" field
+		And I click "OK" button
+		And I click "SearchByBarcode" button
+		And I input "2202283713" text in "InputFld" field
+		And I click "OK" button
+		And "ItemList" table became equal
+			| '#' | 'Item'  | 'Item key' | 'Unit' | 'Quantity' |
+			| '1' | 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'    |
+			| '2' | 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'    |
+		And I close all client application windows
 		
+		
+				
+						
 			
 
 

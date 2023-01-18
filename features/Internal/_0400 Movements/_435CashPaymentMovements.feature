@@ -150,6 +150,9 @@ Scenario: _043500 preparation (Cash payment)
 		When Create document CashPayment objects (with partner term by document, without basis)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashPayment.FindByNumber(328).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document CashPayment objects (return retail customer advance)
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashPayment.FindByNumber(311).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		
 Scenario: _0435001 check preparation
@@ -401,6 +404,53 @@ Scenario: _043523 check Cash payment movements by the Register "R1020 Advances t
 			| ''                                           | 'Receipt'     | '08.02.2022 13:44:32' | '50'        | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                         |				
 	And I close all client application windows
 
+
+Scenario: _043524 check Cash payment movements by the Register  "R2023 Advances from retail customers" (return retail customer advance)
+		And I close all client application windows
+	* Select Cash payment
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '311' |
+		And I select current line in "List" table
+	* Check movements by the Register  "R2023 Advances from retail customers" 
+		And I click "Registrations report" button
+		And I select "R2023 Advances from retail customers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 311 dated 18.01.2023 11:53:32'       | ''            | ''                    | ''          | ''             | ''       | ''                |
+			| 'Document registrations records'                   | ''            | ''                    | ''          | ''             | ''       | ''                |
+			| 'Register  "R2023 Advances from retail customers"' | ''            | ''                    | ''          | ''             | ''       | ''                |
+			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                |
+			| ''                                                 | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Retail customer' |
+			| ''                                                 | 'Expense'     | '18.01.2023 11:53:32' | '200'       | 'Main Company' | ''       | 'Sam Jons'        |		
+	And I close all client application windows
+
+
+Scenario: _043525 check Cash payment movements by the Register  "R3010 Cash on hand" (return retail customer advance)
+		And I close all client application windows
+	* Select Cash payment
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '311' |
+		And I select current line in "List" table
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 311 dated 18.01.2023 11:53:32' | ''            | ''                    | ''          | ''             | ''       | ''             | ''         | ''                             | ''                     |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''       | ''             | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'             | ''            | ''                    | ''          | ''             | ''       | ''             | ''         | ''                             | ''                     |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''             | ''         | ''                             | 'Attributes'           |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | 'Expense'     | '18.01.2023 11:53:32' | '34,24'     | 'Main Company' | ''       | 'Cash desk №2' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | 'Expense'     | '18.01.2023 11:53:32' | '200'       | 'Main Company' | ''       | 'Cash desk №2' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | 'Expense'     | '18.01.2023 11:53:32' | '200'       | 'Main Company' | ''       | 'Cash desk №2' | 'TRY'      | 'en description is empty'      | 'No'                   |		
+	And I close all client application windows
 
 Scenario: _043530 Cash payment clear posting/mark for deletion
 	And I close all client application windows

@@ -1,6 +1,10 @@
 
 #Region FunctionalOptions
 
+Function IsUseAccounting() Export
+	Return GetFunctionalOption("UseAccounting");
+EndFunction
+
 Function IsUseBankDocuments() Export
 	Return GetFunctionalOption("UseBankDocuments");
 EndFunction

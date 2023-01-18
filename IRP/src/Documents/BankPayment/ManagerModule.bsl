@@ -177,6 +177,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3035T_CashPlanning.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R2023B_AdvancesFromRetailCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
@@ -259,6 +260,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(R3050T_PosCashBalances());
+	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
 	QueryArray.Add(R3027B_EmployeeCashAdvance());
 	Return QueryArray;
 EndFunction
@@ -334,7 +336,9 @@ Function PaymentList()
 	|		IsCashTransferOrder,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer) AS IsReturnToCustomer,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS) AS IsReturnToCustomerByPOS,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CustomerAdvance) AS IsCustomerAdvance,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance) AS IsEmployeeCashAdvance,
+	|	PaymentList.RetailCustomer AS RetailCustomer,
 	|	PaymentList.Ref.Branch AS Branch,
 	|	PaymentList.LegalNameContract AS LegalNameContract,
 	|	PaymentList.Order,
@@ -493,6 +497,23 @@ Function R1020B_AdvancesToVendors()
 		   |WHERE
 		   |	OffsetOfAdvances.Document = &Ref";
 EndFunction
+
+Function R2023B_AdvancesFromRetailCustomers()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.RetailCustomer,
+		|	PaymentList.Amount,
+		|	PaymentList.Key
+		|INTO R2023B_AdvancesFromRetailCustomers
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsCustomerAdvance";
+EndFunction	
 
 Function R2020B_AdvancesFromCustomers()
 	Return "SELECT

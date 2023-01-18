@@ -52,8 +52,6 @@ Scenario: _0260100 preparation (retail)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When Create document Cash receipt (Customer advance)
-		When Create document Bank receipt (Customer advance)
 		When Create catalog Users objects
 		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
@@ -100,6 +98,12 @@ Scenario: _0260100 preparation (retail)
 			| "Documents.ConsolidatedRetailSales.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document Cash receipt (Customer advance)
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashReceipt.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |		
+		When Create document Bank receipt (Customer advance)
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Money transfer
 		When Create document MoneyTransfer objects (for cash in)
 		And I execute 1C:Enterprise script at server
@@ -149,7 +153,6 @@ Scenario: _0260106 create cash in
 		And "PaymentList" table became equal
 			| '#' | 'Total amount' | 'Financial movement type' | 'Money transfer'      |
 			| '1' | '1 000,00'     | 'Movement type 1'         | '$$MoneyTransfer11$$' |
-		
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		And the editing text of form attribute named "DocumentAmount" became equal to "1 000,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
@@ -162,10 +165,10 @@ Scenario: _0260106 create cash in
 		And I click the button named "FormPostAndClose"
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"		
-		And "List" table became equal
+		And "List" table contains lines
 			| 'Number'                 | 'Amount'   | 'Company'      | 'Cash account'       | 'Currency' | 'Transaction type' |
 			| '$$NumberCashReceipt1$$' | '1 000,00' | 'Main Company' | 'Pos cash account 1' | 'TRY'      | 'Cash in'          |
-		Then the number of "List" table lines is "равно" 1
+		Then the number of "List" table lines is "равно" 2
 		When in opened panel I select "Point of sales"
 		And in the table "CashInList" I click "Update money transfers" button
 		Then the number of "CashInList" table lines is "равно" 0

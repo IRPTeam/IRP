@@ -10,7 +10,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;
 	
-	If WriteMode = DocumentWriteMode.Posting Then
+	If FOServer.IsUseAccounting() And WriteMode = DocumentWriteMode.Posting Then
 		AccountingClientServer.UpdateAccountingTables(ThisObject, "PaymentList");
 	EndIf;
 	

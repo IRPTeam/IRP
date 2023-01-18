@@ -155,3 +155,11 @@ Procedure FinancialMovementTypeEditTextChange(Object, Form, Item, Text, Standard
 EndProcedure
 
 #EndRegion
+
+#Region WORKSTATION
+
+Procedure WorkstationOnChange(Object, Form, Item) Export
+	ViewClient_V2.WorkstationOnChange(Object, Form, "");
+EndProcedure
+
+#EndRegion

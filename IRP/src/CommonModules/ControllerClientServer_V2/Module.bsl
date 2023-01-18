@@ -2011,6 +2011,9 @@ Function BindDate(Parameters)
 		"StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_WithoutAgreement");
 		
+	Binding.Insert("MoneyTransfer",
+		"StepChangeConsolidatedRetailSalesByWorkstation");
+
 	Binding.Insert("EmployeeCashAdvance",
 		"StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_WithoutAgreement");
@@ -2171,7 +2174,8 @@ Function BindCompany(Parameters)
 	
 	Binding.Insert("MoneyTransfer",
 		"StepChangeAccountSenderByCompany,
-		|StepChangeAccountReceiverByCompany");
+		|StepChangeAccountReceiverByCompany,
+		|StepChangeConsolidatedRetailSalesByWorkstation");
 
 	Binding.Insert("CashTransferOrder",
 		"StepChangeAccountSenderByCompany,
@@ -2681,6 +2685,7 @@ Function BindWorkstation(Parameters)
 	Binding.Insert("RetailSalesReceipt"  , "StepChangeConsolidatedRetailSalesByWorkstation");
 	Binding.Insert("RetailReturnReceipt" , "StepChangeConsolidatedRetailSalesByWorkstation");
 	Binding.Insert("CashReceipt" 		 , "StepChangeConsolidatedRetailSalesByWorkstation");
+	Binding.Insert("MoneyTransfer" 		 , "StepChangeConsolidatedRetailSalesByWorkstation");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 

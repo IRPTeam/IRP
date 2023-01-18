@@ -170,6 +170,15 @@ EndProcedure
 
 #EndRegion
 
+#Region WORKSTATION
+
+&AtClient
+Procedure WorkstationOnChange(Item)
+	DocMoneyTransferClient.WorkstationOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
 #Region FINANCIAL_MOVEMENT_TYPE
 
 &AtClient

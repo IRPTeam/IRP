@@ -257,7 +257,61 @@ Scenario: _034905 check price type discount + discount coupon in POS
 		And I close all client application windows
 		
 						
-					
+Scenario: _034906 check price type discount + discount coupon in POS
+		And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description'         |
+			| 'Discount coupon 10%' |
+		And I select current line in "List" table
+		And I remove checkbox named "Manually"	
+		And I click "Save and close" button
+	* Open POS and add items
+		And In the command interface I select "Retail" "Point of sale"
+		Then "Point of sales" window is opened
+		And I click "Show items" button
+		And I go to line in "ItemsPickup" table
+			| 'Item'  |
+			| 'Dress' |
+		And I expand current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| 'Item'                |
+			| 'Dress, XS/Blue' |
+		And I select current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| 'Item'  |
+			| 'Dress' |
+		And I expand current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| 'Item'                |
+			| 'Dress, M/White' |
+		And I select current line in "ItemsPickup" table	
+	* Check calculate offers when press payment
+		And I click "Payment (+)" button
+		Then the form attribute named "SpecialOffer" became equal to "104"
+		Then the form attribute named "Amount" became equal to "936"
+	* Select one more discount and check discount recalculate
+		And I close "Payment" window
+		And I move to the tab named "ButtonPage"
+		And I click "Discount document" button
+		And I go to line in "Offers" table
+			| 'Is select'  | 'Presentation'     |
+			| '☐'         | 'Discount Price 1' |
+		And I select current line in "Offers" table
+		And in the table "Offers" I click "OK" button
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Payment (+)" button
+		Then the form attribute named "SpecialOffer" became equal to "226,2"
+		Then the form attribute named "Amount" became equal to "1 333,8"		
+	And I close all client application windows
+	
+				
+
 				
 								
 

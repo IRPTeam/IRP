@@ -148,7 +148,7 @@ Scenario: _0260106 create cash in
 		And "PaymentList" table became equal
 			| '#' | 'Total amount' | 'Financial movement type' | 'Money transfer'      |
 			| '1' | '1 000,00'     | 'Movement type 1'         | '$$MoneyTransfer11$$' |
-		
+		Then the form attribute named "ConsolidatedRetailSales" became equal to "$$ConsolidatedRetailSales2$$"
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		And the editing text of form attribute named "DocumentAmount" became equal to "1 000,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
@@ -508,6 +508,7 @@ Scenario: _0260130 create cash out
 			| 'Author' | 'Company'      | 'Receive amount' | 'Receive currency' | 'Receiver'     | 'Send amount' | 'Send currency' | 'Sender'             |
 			| 'CI'     | 'Main Company' | '3 480,00'       | 'TRY'              | 'Cash desk №2' | '3 480,00'    | 'TRY'           | 'Pos cash account 1' |
 		And I select current line in "List" table
+		Then the form attribute named "ConsolidatedRetailSales" became equal to "$$ConsolidatedRetailSales2$$"		
 		And I delete "$$NumberMoneyTransfer3$$" variable
 		And I delete "$$MoneyTransfer3$$" variable
 		And I save the value of "Number" field as "$$NumberMoneyTransfer3$$"

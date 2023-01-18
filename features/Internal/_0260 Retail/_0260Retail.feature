@@ -27,6 +27,7 @@ Scenario: _0260100 preparation (retail)
 		When Create catalog CashAccounts objects
 		When Create catalog Agreements objects
 		When Create catalog ObjectStatuses objects
+		When Create catalog Partners and Payment type (Bank)
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects

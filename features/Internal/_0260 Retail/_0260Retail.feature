@@ -52,7 +52,6 @@ Scenario: _0260100 preparation (retail)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When Create catalog Partners and Payment type (Bank)
 		When Create catalog Users objects
 		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
@@ -99,6 +98,12 @@ Scenario: _0260100 preparation (retail)
 			| "Documents.ConsolidatedRetailSales.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document Cash receipt (Customer advance)
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashReceipt.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |		
+		When Create document Bank receipt (Customer advance)
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Money transfer
 		When Create document MoneyTransfer objects (for cash in)
 		And I execute 1C:Enterprise script at server
@@ -167,10 +172,10 @@ Scenario: _0260106 create cash in
 		And I click the button named "FormPostAndClose"
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"		
-		And "List" table became equal
+		And "List" table contains lines
 			| 'Number'                 | 'Amount'   | 'Company'      | 'Cash account'       | 'Currency' | 'Transaction type' |
 			| '$$NumberCashReceipt1$$' | '1 000,00' | 'Main Company' | 'Pos cash account 1' | 'TRY'      | 'Cash in'          |
-		Then the number of "List" table lines is "равно" 1
+		Then the number of "List" table lines is "равно" 2
 		When in opened panel I select "Point of sales"
 		And in the table "CashInList" I click "Update money transfers" button
 		Then the number of "CashInList" table lines is "равно" 0
@@ -592,8 +597,8 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 		And I move to the tab named "ButtonPage"
 		And I click "Search customer" button
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Sam Jons'    |
+			| 'Description'     |
+			| 'Daniel Smith'    |
 		And I select current line in "List" table
 		And I click "OK" button	
 	* Advance payment
@@ -607,8 +612,8 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 		And I move to the tab named "ButtonPage"
 		And I click "Search customer" button
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Sam Jons'    |
+			| 'Description'     |
+			| 'Daniel Smith'    |
 		And I select current line in "List" table
 		And I click "OK" button	
 	* Advance payment (card advance)
@@ -631,7 +636,7 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 		Then the form attribute named "TransactionType" became equal to "Customer advance"
 		And "PaymentList" table became equal
 			| '#' | 'Retail customer' | 'Total amount' |
-			| '1' | 'Sam Jons'        | '400,00'       |
+			| '1' | 'Daniel Smith'    | '400,00'       |
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		And the editing text of form attribute named "DocumentAmount" became equal to "400,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
@@ -645,8 +650,8 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 		Then the form attribute named "Account" became equal to "Transit Main"
 		Then the form attribute named "TransactionType" became equal to "Customer advance"
 		And "PaymentList" table became equal
-			| '#' | 'Retail customer' | 'Total amount' |
-			| '1' | 'Sam Jons'        | '100,00'       |
+			| '#' | 'Retail customer'     | 'Total amount' |
+			| '1' | 'Daniel Smith'        | '100,00'       |
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		And the editing text of form attribute named "DocumentAmount" became equal to "100,00"
 		And I close all client application windows
@@ -660,8 +665,8 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 		And I move to the tab named "ButtonPage"
 		And I click "Search customer" button
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Sam Jons'    |
+			| 'Description'     |
+			| 'Daniel Smith'    |
 		And I select current line in "List" table
 		And I click "OK" button	
 		And I click "Payment (+)" button
@@ -692,9 +697,110 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 		And I close all client application windows
 		
 				
-						
+Scenario: _0260137 return advance payment (cash)	
+	And I close all client application windows
+	* Create Cash payment (customer advance)
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click the button named "FormCreate"	
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "Customer advance" exact value from "Transaction type" drop-down list
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №2' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  | 'Reference' |
+			| 'TRY'  | 'Turkish lira' | 'TRY'       |
+		And I select current line in "List" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate "Retail customer" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Retail customer" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Daniel Smith' |
+		And I select current line in "List" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I click "Post" button
+	* Check creation
+		And I delete "$$NumberCashPayment1$$" variable
+		And I delete "$$CashPayment1$$" variable
+		And I save the value of "Number" field as "$$NumberCashPayment1$$"
+		And I save the window as "$$CashPayment1$$"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And "List" table contains lines
+			| 'Number'                 |
+			| '$$NumberCashPayment1$$' |
+		And I close all client application windows		
+								
 				
-		
+	
+Scenario: _0260138 return advance payment (card)	
+	And I close all client application windows
+	* Create Bank payment (customer advance)
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click the button named "FormCreate"	
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "Customer advance" exact value from "Transaction type" drop-down list
+		And I click Select button of "Account" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Bank account, TRY' |
+		And I select current line in "List" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate "Retail customer" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Retail customer" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Sam Jons'     |
+		And I select current line in "List" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I click choice button of "Payment type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 01'     |
+		And I select current line in "List" table
+		And I activate "Payment terminal" field in "PaymentList" table
+		And I click choice button of "Payment terminal" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Payment terminal 01'     |
+		And I select current line in "List" table
+		And I activate "Bank term" field in "PaymentList" table
+		And I click choice button of "Bank term" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Bank term 02'     |
+		And I select current line in "List" table
+		And I finish line editing in "PaymentList" table		
+		And I click "Post" button
+	* Check creation
+		And I delete "$$NumberBankPayment1$$" variable
+		And I delete "$$BankPayment1$$" variable
+		And I save the value of "Number" field as "$$NumberBankPayment1$$"
+		And I save the window as "$$BankPayment1$$"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And "List" table contains lines
+			| 'Number'                 |
+			| '$$NumberBankPayment1$$' |
+		And I close all client application windows				
 						
 
 

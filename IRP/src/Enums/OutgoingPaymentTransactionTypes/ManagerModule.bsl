@@ -12,6 +12,7 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	If IsBankPayment Or IsCashPayment Then
 		ChoiceData.Add(PaymentToVendor);
 		ChoiceData.Add(ReturnToCustomer);
+		ChoiceData.Add(CustomerAdvance);
 		ChoiceData.Add(EmployeeCashAdvance);
 			
 		If FOServer.IsUseCashTransaction() Then

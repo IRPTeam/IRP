@@ -493,11 +493,11 @@ Scenario: _0260130 create cash out
 		Then the form attribute named "Sender" became equal to "Pos cash account 1"
 		Then the form attribute named "SendFinancialMovementType" became equal to "Movement type 1"
 		Then the form attribute named "SenderCurrency" became equal to "TRY"
-		And the editing text of form attribute named "TotalAtPOS" became equal to "7 480,00"
+		And the editing text of form attribute named "TotalAtPOS" became equal to "7 880,00"
 		Then the form attribute named "Receiver" became equal to "Cash desk №2"
 		Then the form attribute named "ReceiveFinancialMovementType" became equal to "Movement type 1"
 		Then the form attribute named "ReceiverCurrency" became equal to "TRY"
-		And the editing text of form attribute named "SendAmount" became equal to "7 480,00"
+		And the editing text of form attribute named "SendAmount" became equal to "7 880,00"
 		And I input "3 480,00" text in "Send amount" field
 		And I click "Create money transfer" button
 		Then in the TestClient message log contains lines by template:

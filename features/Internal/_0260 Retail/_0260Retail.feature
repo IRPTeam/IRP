@@ -124,8 +124,14 @@ Scenario: _0260105 open session
 	And I click "Open session" button
 	* Check
 	When I Check the steps for Exception
-		|'And I click "Open session" button'|		
-	And I close all client application windows
+		|'And I click "Open session" button'|	
+	Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+	And I go to line in "List" table
+		| 'Status'   |
+		| 'Open'     |
+	And I select current line in "List" table
+	And I save the window as "$$ConsolidatedRetailSales2$$" 
+	And I close all client application windows		
 
 
 

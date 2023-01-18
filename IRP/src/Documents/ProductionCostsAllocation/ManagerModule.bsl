@@ -83,6 +83,7 @@ Function GetAllocationInfo(BusinessUnit, ItemKey, Duration, Amount,Company, Begi
 	|WHERE
 	|	T7051S_ProductionDurationDetails.Company = &Company
 	|	AND T7051S_ProductionDurationDetails.BusinessUnit = &BusinessUnit
+	|	AND T7051S_ProductionDurationDetails.ItemKey = &ItemKey
 	|	AND T7051S_ProductionDurationDetails.Period BETWEEN BEGINOFPERIOD(&BeginDate, DAY) AND ENDOFPERIOD(&EndDate, DAY)
 	|GROUP BY
 	|	T7051S_ProductionDurationDetails.ItemKey,
@@ -90,6 +91,7 @@ Function GetAllocationInfo(BusinessUnit, ItemKey, Duration, Amount,Company, Begi
 	|	T7051S_ProductionDurationDetails.Store";
 	Query.SetParameter("Company"      , Company);
 	Query.SetParameter("BusinessUnit" , BusinessUnit);
+	Query.SetParameter("ItemKey"      , ItemKey);
 	Query.SetParameter("BeginDate"    , BeginDate);
 	Query.SetParameter("EndDate"      , EndDate);
 	QueryResult = Query.Execute();

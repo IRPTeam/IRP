@@ -57,27 +57,38 @@ Procedure AccountOnChange(Object, Form, Item) Export
 EndProcedure
 
 Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	CashAccountType = PredefinedValue("Enum.CashAccountTypes.Bank");
-	If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS") Then
-		CashAccountType = PredefinedValue("Enum.CashAccountTypes.POS");
-	EndIf;
-
 	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", CashAccountType, DataCompositionComparisonType.Equal));
+	
+	If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance") Then
+		AccountTypeList = New ValueList();
+		AccountTypeList.Add(PredefinedValue("Enum.CashAccountTypes.Bank"));
+		AccountTypeList.Add(PredefinedValue("Enum.CashAccountTypes.POS"));
+		ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", AccountTypeList, DataCompositionComparisonType.InList));
+	Else
+		CashAccountType = PredefinedValue("Enum.CashAccountTypes.Bank");
+		If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS") Then
+			CashAccountType = PredefinedValue("Enum.CashAccountTypes.POS");
+		EndIf;
+		ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", CashAccountType, DataCompositionComparisonType.Equal));
+	EndIf;
 	
 	CommonFormActions.AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, ArrayOfFilters);
-
 EndProcedure
 
 Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	CashAccountType = PredefinedValue("Enum.CashAccountTypes.Bank");
-	If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS") Then
-		CashAccountType = PredefinedValue("Enum.CashAccountTypes.POS");
-	EndIf;
-	
 	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", CashAccountType, ComparisonType.Equal));
-
+	If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance") Then
+		AccountTypeList = New ValueList();
+		AccountTypeList.Add(PredefinedValue("Enum.CashAccountTypes.Bank"));
+		AccountTypeList.Add(PredefinedValue("Enum.CashAccountTypes.POS"));
+		ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", AccountTypeList, ComparisonType.InList));
+	Else
+		CashAccountType = PredefinedValue("Enum.CashAccountTypes.Bank");
+		If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS") Then
+			CashAccountType = PredefinedValue("Enum.CashAccountTypes.POS");
+		EndIf;
+		ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", CashAccountType, ComparisonType.Equal));
+	EndIf;
 	CommonFormActions.AccountEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 

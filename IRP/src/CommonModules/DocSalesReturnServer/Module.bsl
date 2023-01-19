@@ -28,6 +28,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	DocumentsServer.FillSpecialOffersCache(Object, Form, "SalesInvoice");
 	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 	LockDataModificationPrivileged.LockFormIfObjectIsLocked(Form, CurrentObject);
+	SerialLotNumbersServer.UpdateSerialLotNumbersPresentation(Object);
 EndProcedure
 
 #EndRegion

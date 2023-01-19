@@ -813,6 +813,10 @@
   <event>OnCreateAtServer</event>
   <name>OnCreateAtServer</name>
  </handlers>
+ <handlers>
+  <event>OnOpen</event>
+  <name>OnOpen</name>
+ </handlers>
  <autoUrl>true</autoUrl>
  <group>Vertical</group>
  <autoFillCheck>true</autoFillCheck>
@@ -1087,6 +1091,23 @@
   </title>
   <id>12</id>
   <valueType/>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>AutoCreateMoneyTransfer</name>
+  <title>
+   <key>en</key>
+   <value>Auto create money transfer</value>
+  </title>
+  <id>13</id>
+  <valueType>
+   <types>Boolean</types>
+  </valueType>
   <view>
    <common>true</common>
   </view>

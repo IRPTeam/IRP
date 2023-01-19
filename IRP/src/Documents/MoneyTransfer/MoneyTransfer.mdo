@@ -413,6 +413,21 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="e0b1693f-173c-44bd-b6b7-e1dec47a19fb">
+  <name>Workstation</name>
+  <synonym>
+   <key>en</key>
+   <value>Workstation</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Workstations</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="9199dc05-6aa4-4c94-99b2-08023fc5cb21">
   <name>DocumentForm</name>
   <synonym>

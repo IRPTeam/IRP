@@ -110,6 +110,7 @@
  <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
+ <registerRecords>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -571,6 +572,20 @@
    </synonym>
    <type>
     <types>DocumentRef.PurchaseOrder</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="30ea9a1b-e862-4f9f-ac99-fd8e7b5550b3">
+   <name>RetailCustomer</name>
+   <synonym>
+    <key>en</key>
+    <value>Retail customer</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.RetailCustomers</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

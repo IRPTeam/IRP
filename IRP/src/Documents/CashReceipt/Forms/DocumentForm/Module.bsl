@@ -492,5 +492,11 @@ Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure WorkstationOnChange(Item)
+	DocCashReceiptClient.WorkstationOnChange(Object, ThisObject, Item);
+EndProcedure
+
+
 #EndRegion
 

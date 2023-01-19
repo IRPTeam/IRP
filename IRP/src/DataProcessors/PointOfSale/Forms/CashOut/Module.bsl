@@ -16,7 +16,19 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	ThisObject.FillingData = Parameters.FillingData;
 	
+	ThisObject.AutoCreateMoneyTransfer = Parameters.AutoCreateMoneyTransfer;
+	
 EndProcedure
+
+
+
+&AtClient
+Procedure OnOpen(Cancel)
+	If ThisObject.AutoCreateMoneyTransfer Then
+		CreateMoneyTransfer(Commands.CreateMoneyTransfer);
+	EndIf;
+EndProcedure
+
 
 &AtServer
 Function GetTotalAtPOS()

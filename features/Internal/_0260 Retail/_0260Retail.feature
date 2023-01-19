@@ -27,6 +27,7 @@ Scenario: _0260100 preparation (retail)
 		When Create catalog CashAccounts objects
 		When Create catalog Agreements objects
 		When Create catalog ObjectStatuses objects
+		When Create catalog Partners and Payment type (Bank)
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
@@ -52,7 +53,6 @@ Scenario: _0260100 preparation (retail)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
-		When Create catalog Partners and Payment type (Bank)
 		When Create catalog Users objects
 		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
@@ -99,6 +99,12 @@ Scenario: _0260100 preparation (retail)
 			| "Documents.ConsolidatedRetailSales.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document Cash receipt (Customer advance)
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashReceipt.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |		
+		When Create document Bank receipt (Customer advance)
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Money transfer
 		When Create document MoneyTransfer objects (for cash in)
 		And I execute 1C:Enterprise script at server
@@ -124,8 +130,14 @@ Scenario: _0260105 open session
 	And I click "Open session" button
 	* Check
 	When I Check the steps for Exception
-		|'And I click "Open session" button'|		
-	And I close all client application windows
+		|'And I click "Open session" button'|	
+	Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
+	And I go to line in "List" table
+		| 'Status'   |
+		| 'Open'     |
+	And I select current line in "List" table
+	And I save the window as "$$ConsolidatedRetailSales2$$" 
+	And I close all client application windows		
 
 
 
@@ -148,7 +160,7 @@ Scenario: _0260106 create cash in
 		And "PaymentList" table became equal
 			| '#' | 'Total amount' | 'Financial movement type' | 'Money transfer'      |
 			| '1' | '1 000,00'     | 'Movement type 1'         | '$$MoneyTransfer11$$' |
-		
+		Then the form attribute named "ConsolidatedRetailSales" became equal to "$$ConsolidatedRetailSales2$$"
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		And the editing text of form attribute named "DocumentAmount" became equal to "1 000,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
@@ -161,10 +173,10 @@ Scenario: _0260106 create cash in
 		And I click the button named "FormPostAndClose"
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"		
-		And "List" table became equal
+		And "List" table contains lines
 			| 'Number'                 | 'Amount'   | 'Company'      | 'Cash account'       | 'Currency' | 'Transaction type' |
 			| '$$NumberCashReceipt1$$' | '1 000,00' | 'Main Company' | 'Pos cash account 1' | 'TRY'      | 'Cash in'          |
-		Then the number of "List" table lines is "равно" 1
+		Then the number of "List" table lines is "равно" 2
 		When in opened panel I select "Point of sales"
 		And in the table "CashInList" I click "Update money transfers" button
 		Then the number of "CashInList" table lines is "равно" 0
@@ -440,7 +452,7 @@ Scenario: _0260115 create RRR prior periods and check Consolidated retail sales 
 		Then the form attribute named "LegalName" became equal to "Company Retail customer"
 		Then the form attribute named "Agreement" became equal to "Retail partner term"
 		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "ConsolidatedRetailSales" became equal to ""
+		Then the form attribute named "ConsolidatedRetailSales" became equal to "$$ConsolidatedRetailSales2$$"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
 			| '#' | 'Retail sales receipt'                             | 'Item'  | 'Sales person' | 'Profit loss center' | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Return reason' | 'Revenue type' | 'Detail' | 'VAT' | 'Offers amount' | 'Landed cost' |
@@ -475,7 +487,8 @@ Scenario: _0260115 create RRR prior periods and check Consolidated retail sales 
 			| '$$RetailReturnReceiptNew$$' | 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
 			| '*'                          | 'Main Company' | '-520'   | 'Shop 02' | 'TRY'      | 'CI'     |
 			| '*'                          | 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
-		Then the number of "Documents" table lines is "equal" "8"
+			| '$$RetailReturnReceiptOld$$' | 'Main Company' | '-1 040' | 'Shop 02' | 'TRY'      | 'CI'     |
+		Then the number of "Documents" table lines is "equal" "9"
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		Then the form attribute named "Author" became equal to "CI"
 		And I close all client application windows
@@ -492,11 +505,11 @@ Scenario: _0260130 create cash out
 		Then the form attribute named "Sender" became equal to "Pos cash account 1"
 		Then the form attribute named "SendFinancialMovementType" became equal to "Movement type 1"
 		Then the form attribute named "SenderCurrency" became equal to "TRY"
-		And the editing text of form attribute named "TotalAtPOS" became equal to "7 480,00"
+		And the editing text of form attribute named "TotalAtPOS" became equal to "7 880,00"
 		Then the form attribute named "Receiver" became equal to "Cash desk №2"
 		Then the form attribute named "ReceiveFinancialMovementType" became equal to "Movement type 1"
 		Then the form attribute named "ReceiverCurrency" became equal to "TRY"
-		And the editing text of form attribute named "SendAmount" became equal to "7 480,00"
+		And the editing text of form attribute named "SendAmount" became equal to "7 880,00"
 		And I input "3 480,00" text in "Send amount" field
 		And I click "Create money transfer" button
 		Then in the TestClient message log contains lines by template:
@@ -507,6 +520,7 @@ Scenario: _0260130 create cash out
 			| 'Author' | 'Company'      | 'Receive amount' | 'Receive currency' | 'Receiver'     | 'Send amount' | 'Send currency' | 'Sender'             |
 			| 'CI'     | 'Main Company' | '3 480,00'       | 'TRY'              | 'Cash desk №2' | '3 480,00'    | 'TRY'           | 'Pos cash account 1' |
 		And I select current line in "List" table
+		Then the form attribute named "ConsolidatedRetailSales" became equal to "$$ConsolidatedRetailSales2$$"		
 		And I delete "$$NumberMoneyTransfer3$$" variable
 		And I delete "$$MoneyTransfer3$$" variable
 		And I save the value of "Number" field as "$$NumberMoneyTransfer3$$"
@@ -584,8 +598,8 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 		And I move to the tab named "ButtonPage"
 		And I click "Search customer" button
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Sam Jons'    |
+			| 'Description'     |
+			| 'Daniel Smith'    |
 		And I select current line in "List" table
 		And I click "OK" button	
 	* Advance payment
@@ -599,8 +613,8 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 		And I move to the tab named "ButtonPage"
 		And I click "Search customer" button
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Sam Jons'    |
+			| 'Description'     |
+			| 'Daniel Smith'    |
 		And I select current line in "List" table
 		And I click "OK" button	
 	* Advance payment (card advance)
@@ -623,7 +637,7 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 		Then the form attribute named "TransactionType" became equal to "Customer advance"
 		And "PaymentList" table became equal
 			| '#' | 'Retail customer' | 'Total amount' |
-			| '1' | 'Sam Jons'        | '400,00'       |
+			| '1' | 'Daniel Smith'    | '400,00'       |
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		And the editing text of form attribute named "DocumentAmount" became equal to "400,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
@@ -637,8 +651,8 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 		Then the form attribute named "Account" became equal to "Transit Main"
 		Then the form attribute named "TransactionType" became equal to "Customer advance"
 		And "PaymentList" table became equal
-			| '#' | 'Retail customer' | 'Total amount' |
-			| '1' | 'Sam Jons'        | '100,00'       |
+			| '#' | 'Retail customer'     | 'Total amount' |
+			| '1' | 'Daniel Smith'        | '100,00'       |
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		And the editing text of form attribute named "DocumentAmount" became equal to "100,00"
 		And I close all client application windows
@@ -652,8 +666,8 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 		And I move to the tab named "ButtonPage"
 		And I click "Search customer" button
 		And I go to line in "List" table
-			| 'Description' |
-			| 'Sam Jons'    |
+			| 'Description'     |
+			| 'Daniel Smith'    |
 		And I select current line in "List" table
 		And I click "OK" button	
 		And I click "Payment (+)" button
@@ -684,9 +698,110 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 		And I close all client application windows
 		
 				
-						
+Scenario: _0260137 return advance payment (cash)	
+	And I close all client application windows
+	* Create Cash payment (customer advance)
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click the button named "FormCreate"	
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "Customer advance" exact value from "Transaction type" drop-down list
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №2' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Currency"
+		And I go to line in "List" table
+			| 'Code' | 'Description'  | 'Reference' |
+			| 'TRY'  | 'Turkish lira' | 'TRY'       |
+		And I select current line in "List" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate "Retail customer" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Retail customer" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Daniel Smith' |
+		And I select current line in "List" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I click "Post" button
+	* Check creation
+		And I delete "$$NumberCashPayment1$$" variable
+		And I delete "$$CashPayment1$$" variable
+		And I save the value of "Number" field as "$$NumberCashPayment1$$"
+		And I save the window as "$$CashPayment1$$"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And "List" table contains lines
+			| 'Number'                 |
+			| '$$NumberCashPayment1$$' |
+		And I close all client application windows		
+								
 				
-		
+	
+Scenario: _0260138 return advance payment (card)	
+	And I close all client application windows
+	* Create Bank payment (customer advance)
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click the button named "FormCreate"	
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "Customer advance" exact value from "Transaction type" drop-down list
+		And I click Select button of "Account" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Bank account, TRY' |
+		And I select current line in "List" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate "Retail customer" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Retail customer" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Sam Jons'     |
+		And I select current line in "List" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I click choice button of "Payment type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 01'     |
+		And I select current line in "List" table
+		And I activate "Payment terminal" field in "PaymentList" table
+		And I click choice button of "Payment terminal" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Payment terminal 01'     |
+		And I select current line in "List" table
+		And I activate "Bank term" field in "PaymentList" table
+		And I click choice button of "Bank term" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Bank term 02'     |
+		And I select current line in "List" table
+		And I finish line editing in "PaymentList" table		
+		And I click "Post" button
+	* Check creation
+		And I delete "$$NumberBankPayment1$$" variable
+		And I delete "$$BankPayment1$$" variable
+		And I save the value of "Number" field as "$$NumberBankPayment1$$"
+		And I save the window as "$$BankPayment1$$"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And "List" table contains lines
+			| 'Number'                 |
+			| '$$NumberBankPayment1$$' |
+		And I close all client application windows				
 						
 
 
@@ -701,12 +816,12 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			And "CashTable" table became equal
 				| 'Operation' | 'Payment type' | 'In Base'  | 'In Register' |
 				| 'Sales'     | 'Cash'         | '7 550,00' | ''            |
-				| 'Returns'   | 'Cash'         | '1 070,00' | ''            |
+				| 'Returns'   | 'Cash'         | '2 110,00' | ''            |
 			And I go to line in "CashTable" table
 				| 'Operation' | 'Payment type' | 'In Base'  | 'In Register' |
-				| 'Returns'   | 'Cash'         | '1 070,00' | ''            |
+				| 'Returns'   | 'Cash'         | '2 110,00' | ''            |
 			And I select current line in "CashTable" table
-			And I input "1 070,02" text in "In Register" field of "CashTable" table
+			And I input "2 110,02" text in "In Register" field of "CashTable" table
 			And I finish line editing in "CashTable" table
 			And I go to line in "CashTable" table
 				| 'In Base'  | 'Operation' | 'Payment type' |
@@ -716,7 +831,7 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			And I finish line editing in "CashTable" table
 			And I go to line in "CashTable" table
 				| 'In Base'  | 'In Register' | 'Operation' | 'Payment type' |
-				| '1 070,00' | '1 070,02'    | 'Returns'   | 'Cash'         |
+				| '2 110,00' | '2 110,02'    | 'Returns'   | 'Cash'         |
 			And I set checkbox named "CashConfirm"
 		* Filling card part		
 			Then "Terminals: Session closing" window is opened
@@ -742,13 +857,13 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 		* Check balance
 			Then the form attribute named "Workstation" became equal to "Workstation 01"
 			Then the form attribute named "CashAccount" became equal to "Pos cash account 1"
-			And the editing text of form attribute named "BalanceBeginning" became equal to "1 040,00"
+			And the editing text of form attribute named "BalanceBeginning" became equal to "1 440,00"
 			Then the form attribute named "CurrencyBalanceBeginning" became equal to "TRY"
 			And the editing text of form attribute named "BalanceIncoming" became equal to "8 950,00"
 			Then the form attribute named "CurrencyBalanceIncoming" became equal to "TRY"
 			And the editing text of form attribute named "BalanceOutcoming" became equal to "5 590,00"
 			Then the form attribute named "CurrencyBalanceOutcoming" became equal to "TRY"
-			And the editing text of form attribute named "BalanceEnd" became equal to "4 400,00"
+			And the editing text of form attribute named "BalanceEnd" became equal to "4 800,00"
 			Then the form attribute named "CurrencyBalanceEnd" became equal to "TRY"
 			And the editing text of form attribute named "BalanceReal" became equal to "0,00"
 			Then the form attribute named "Company" became equal to "Main Company"
@@ -777,17 +892,17 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			| '$$RetailReturnReceiptNew$$' | 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
 			| '*'                          | 'Main Company' | '-520'   | 'Shop 02' | 'TRY'      | 'CI'     |
 			| '*'                          | 'Main Company' | '-550'   | 'Shop 02' | 'TRY'      | 'CI'     |
+			| '$$RetailReturnReceiptOld$$' | 'Main Company' | '-1 040' | 'Shop 02' | 'TRY'      | 'CI'     |
 			| '*'                          | 'Main Company' | '5 750'  | 'Shop 02' | 'TRY'      | 'CI'     |
 			| '*'                          | 'Main Company' | '520'    | 'Shop 02' | 'TRY'      | 'CI'     |
-
-		Then the number of "Documents" table lines is "equal" "10"
+		Then the number of "Documents" table lines is "equal" "11"
 		Then the form attribute named "Branch" became equal to "Shop 02"
-		And the editing text of form attribute named "BalanceEnd" became equal to "4 400,00"
+		And the editing text of form attribute named "BalanceEnd" became equal to "4 800,00"
 		And the editing text of form attribute named "BalanceReal" became equal to "4 000,00"
 		And "PaymentList" table became equal
 			| '#' | 'Amount'   | 'Is return' | 'Payment type' | 'Payment terminal' | 'Real amount' |
 			| '1' | '7 550,00' | 'No'        | 'Cash'         | ''                 | '7 550,00'    |
-			| '2' | '1 070,00' | 'Yes'       | 'Cash'         | ''                 | '1 070,02'    |
+			| '2' | '2 110,00' | 'Yes'       | 'Cash'         | ''                 | '2 110,02'    |
 			| '3' | '3 180,00' | 'No'        | 'Card 01'      | ''                 | '3 180,00'    |
 			| '4' | '4 790,00' | 'No'        | 'Card 02'      | ''                 | '4 770,00'    |
 			| '5' | '550,00'   | 'Yes'       | 'Card 02'      | ''                 | '550,00'      |	

@@ -23,6 +23,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 	LockDataModificationPrivileged.LockFormIfObjectIsLocked(Form, CurrentObject);
+	SerialLotNumbersServer.UpdateSerialLotNumbersPresentation(Object);
 EndProcedure
 
 #EndRegion

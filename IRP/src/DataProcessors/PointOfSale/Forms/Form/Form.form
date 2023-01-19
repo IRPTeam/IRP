@@ -1091,6 +1091,71 @@
                         <fixingInTable>Right</fixingInTable>
                       </extInfo>
                     </items>
+                    <items xsi:type="form:FormField">
+                      <name>ItemListRetailSalesReceipt</name>
+                      <id>1174</id>
+                      <titleFont xsi:type="core:FontRef">
+                        <font>Style.LargeTextFont</font>
+                      </titleFont>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <dataPath xsi:type="form:DataPath">
+                        <segments>Object.ItemList.RetailSalesReceipt</segments>
+                      </dataPath>
+                      <titleBackColor xsi:type="core:ColorRef">
+                        <color>Style.FormBackColor</color>
+                      </titleBackColor>
+                      <extendedTooltip>
+                        <name>ItemListRetailSalesReceiptExtendedTooltip</name>
+                        <id>1176</id>
+                        <visible>true</visible>
+                        <enabled>true</enabled>
+                        <userVisible>
+                          <common>true</common>
+                        </userVisible>
+                        <type>Label</type>
+                        <autoMaxWidth>true</autoMaxWidth>
+                        <autoMaxHeight>true</autoMaxHeight>
+                        <extInfo xsi:type="form:LabelDecorationExtInfo">
+                          <horizontalAlign>Left</horizontalAlign>
+                        </extInfo>
+                      </extendedTooltip>
+                      <contextMenu>
+                        <name>ItemListRetailSalesReceiptContextMenu</name>
+                        <id>1175</id>
+                        <visible>true</visible>
+                        <enabled>true</enabled>
+                        <userVisible>
+                          <common>true</common>
+                        </userVisible>
+                        <autoFill>true</autoFill>
+                      </contextMenu>
+                      <type>InputField</type>
+                      <editMode>Enter</editMode>
+                      <showInHeader>true</showInHeader>
+                      <headerPicture xsi:type="core:PictureRef">
+                        <picture>CommonPicture.Integration</picture>
+                      </headerPicture>
+                      <headerHorizontalAlign>Left</headerHorizontalAlign>
+                      <showInFooter>true</showInFooter>
+                      <extInfo xsi:type="form:InputFieldExtInfo">
+                        <handlers>
+                          <event>StartChoice</event>
+                          <name>ItemListRetailSalesReceiptStartChoice</name>
+                        </handlers>
+                        <autoMaxWidth>true</autoMaxWidth>
+                        <autoMaxHeight>true</autoMaxHeight>
+                        <wrap>true</wrap>
+                        <chooseType>true</chooseType>
+                        <typeDomainEnabled>true</typeDomainEnabled>
+                        <font xsi:type="core:FontRef">
+                          <font>Style.LargeTextFont</font>
+                        </font>
+                      </extInfo>
+                    </items>
                     <autoCommandBar>
                       <name>ItemListCommandBar</name>
                       <id>608</id>
@@ -3010,6 +3075,7 @@
                     <name>Return</name>
                     <id>919</id>
                     <visible>true</visible>
+                    <enabled>true</enabled>
                     <userVisible>
                       <common>true</common>
                     </userVisible>
@@ -3817,6 +3883,59 @@
             <extInfo xsi:type="form:PagesGroupExtInfo">
               <pagesRepresentation>TabsOnTop</pagesRepresentation>
               <currentRowUse>Auto</currentRowUse>
+            </extInfo>
+          </items>
+          <items xsi:type="form:FormField">
+            <name>RetailSalesReceipt</name>
+            <id>1177</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>RetailSalesReceipt</segments>
+            </dataPath>
+            <titleLocation>Top</titleLocation>
+            <extendedTooltip>
+              <name>RetailSalesReceiptExtendedTooltip</name>
+              <id>1179</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>RetailSalesReceiptContextMenu</name>
+              <id>1178</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>InputField</type>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:InputFieldExtInfo">
+              <handlers>
+                <event>StartChoice</event>
+                <name>RetailSalesReceiptStartChoice</name>
+              </handlers>
+              <autoMaxHeight>true</autoMaxHeight>
+              <wrap>true</wrap>
+              <chooseType>true</chooseType>
+              <typeDomainEnabled>true</typeDomainEnabled>
             </extInfo>
           </items>
           <items xsi:type="form:FormGroup">
@@ -5351,6 +5470,23 @@
           <common>true</common>
         </edit>
       </columns>
+      <columns>
+        <name>RetailSalesReceipt</name>
+        <title>
+          <key>en</key>
+          <value>Retail sales receipt</value>
+        </title>
+        <id>190</id>
+        <valueType>
+          <types>DocumentRef.RetailSalesReceipt</types>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
     </additionalColumns>
   </attributes>
   <attributes>
@@ -5975,6 +6111,40 @@
       <common>true</common>
     </edit>
     <functionalOptions>FunctionalOption.UseConsolidatedRetailSales</functionalOptions>
+  </attributes>
+  <attributes>
+    <name>isReturn</name>
+    <title>
+      <key>en</key>
+      <value>Is return</value>
+    </title>
+    <id>189</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>RetailSalesReceipt</name>
+    <title>
+      <key>en</key>
+      <value>Retail sales receipt</value>
+    </title>
+    <id>191</id>
+    <valueType>
+      <types>DocumentRef.RetailSalesReceipt</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
   </attributes>
   <formCommands>
     <name>qPayment</name>

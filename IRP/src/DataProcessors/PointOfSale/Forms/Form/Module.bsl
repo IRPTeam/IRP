@@ -75,6 +75,11 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	Form.Items.GroupCashCommands.Visible = 
 		CommonFunctionsServer.GetRefAttribute(Form.Workstation, "UseCashInAndCashOut");
+		
+	Form.Items.RetailSalesReceipt.Visible =	Form.isReturn;
+	Form.Items.ItemListRetailSalesReceipt.Visible =	Form.isReturn;
+	
+	Form.Title = ?(Form.isReturn, R().InfoMessage_ReturnTitle, R().InfoMessage_POS_Title);
 EndProcedure
 
 #Region AGREEMENT
@@ -266,6 +271,24 @@ Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
 	DocRetailSalesReceiptClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
+&AtClient
+Procedure ItemListRetailSalesReceiptStartChoice(Item, ChoiceData, StandardProcessing)
+	StandardProcessing = False;
+
+	RowID = Undefined;
+	If Not Items.ItemList.CurrentRow = Undefined Then
+		RowID = Items.ItemList.CurrentRow;
+	EndIf;
+	
+	FindRetailSalesReceipt(RowID);
+EndProcedure
+
+&AtClient
+Procedure RetailSalesReceiptStartChoice(Item, ChoiceData, StandardProcessing)
+	StandardProcessing = False;
+	FindRetailSalesReceipt(Undefined);
+EndProcedure
+
 #Region SerialLotNumbers
 
 &AtClient
@@ -380,7 +403,9 @@ Procedure qPayment(Command)
 		Return;
 	EndIf;
 
-	OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object, ThisObject, "SpecialOffersEditFinish_ForDocument", Undefined, True);
+	If Not ThisObject.isReturn Then
+		OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object, ThisObject, "SpecialOffersEditFinish_ForDocument", Undefined, True);
+	EndIf;
 
 	OpenFormNotifyDescription = New NotifyDescription("PaymentFormClose", ThisObject);
 	ObjectParameters = New Structure();
@@ -418,7 +443,9 @@ EndProcedure
 
 &AtClient
 Procedure DocReturn(Command)
-	OpenForm("Document.RetailReturnReceipt.ObjectForm");
+	isReturn = Not isReturn;
+	SetVisibilityAvailability(Object, ThisObject);
+	EnabledPaymentButton();
 EndProcedure
 
 &AtClient
@@ -801,6 +828,7 @@ Procedure NewTransactionAtServer()
 	EndIf;
 	
 	SalesPersonByDefault = Undefined;
+	isReturn = False;
 EndProcedure
 
 &AtServer
@@ -826,25 +854,62 @@ Function WriteTransaction(Result)
 		EndIf;
 	EndDo;
 
-	ObjectValue = FormAttributeToValue("Object");
-	ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
-	ObjectValue.Payments.Load(Payments);
-	ObjectValue.PaymentMethod = Result.ReceiptPaymentMethod;
-	DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
-
-	ObjectValue.Write(DocumentWriteMode.Posting);
-	
-	DocRef = ObjectValue.Ref;
-	DPPointOfSaleServer.AfterPostingDocument(DocRef);
-	CashAmountFilter = New Structure();
-	CashAmountFilter.Insert("PaymentTypeEnum", PredefinedValue("Enum.PaymentTypes.Cash"));
-	CashAmountFoundRows = Payments.FindRows(CashAmountFilter);
 	CashbackAmount = 0;
-	For Each Row In CashAmountFoundRows Do
-		If Row.Amount < 0 Then
-			CashbackAmount = CashbackAmount + Row.Amount * (-1);
-		EndIf;
-	EndDo;
+	
+	If ThisObject.isReturn Then
+		ObjectValue = Documents.RetailReturnReceipt.CreateDocument();
+		FillPropertyValues(ObjectValue, ThisObject.Object);
+		For Each TableRecord In ThisObject.Object.ItemList Do
+			FillPropertyValues(ObjectValue.ItemList.Add(), TableRecord);
+		EndDo;
+		For Each TableRecord In ThisObject.Object.SpecialOffers Do
+			FillPropertyValues(ObjectValue.SpecialOffers.Add(), TableRecord);
+		EndDo;
+		For Each TableRecord In ThisObject.Object.TaxList Do
+			FillPropertyValues(ObjectValue.TaxList.Add(), TableRecord);
+		EndDo;
+		For Each TableRecord In ThisObject.Object.Currencies Do
+			FillPropertyValues(ObjectValue.Currencies.Add(), TableRecord);
+		EndDo;
+		For Each TableRecord In ThisObject.Object.SerialLotNumbers Do
+			FillPropertyValues(ObjectValue.SerialLotNumbers.Add(), TableRecord);
+		EndDo;
+		For Each TableRecord In ThisObject.Object.RowIDInfo Do
+			FillPropertyValues(ObjectValue.RowIDInfo.Add(), TableRecord);
+		EndDo;
+		For Each TableRecord In ThisObject.Object.SourceOfOrigins Do
+			FillPropertyValues(ObjectValue.SourceOfOrigins.Add(), TableRecord);
+		EndDo;
+		ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
+		ObjectValue.Payments.Load(Payments);
+		ObjectValue.PaymentMethod = Result.ReceiptPaymentMethod;
+		
+		ObjectValue.Write(DocumentWriteMode.Posting);
+		
+		DocRef = ObjectValue.Ref;
+		DPPointOfSaleServer.AfterPostingDocument(DocRef);
+	Else
+		
+		ObjectValue = FormAttributeToValue("Object");
+		ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
+		ObjectValue.Payments.Load(Payments);
+		ObjectValue.PaymentMethod = Result.ReceiptPaymentMethod;
+		DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
+	
+		ObjectValue.Write(DocumentWriteMode.Posting);
+		
+		DocRef = ObjectValue.Ref;
+		DPPointOfSaleServer.AfterPostingDocument(DocRef);
+		CashAmountFilter = New Structure();
+		CashAmountFilter.Insert("PaymentTypeEnum", PredefinedValue("Enum.PaymentTypes.Cash"));
+		CashAmountFoundRows = Payments.FindRows(CashAmountFilter);
+		For Each Row In CashAmountFoundRows Do
+			If Row.Amount < 0 Then
+				CashbackAmount = CashbackAmount + Row.Amount * (-1);
+			EndIf;
+		EndDo;
+	
+	EndIf;
 
 	Return CashbackAmount;
 EndFunction
@@ -869,26 +934,31 @@ EndProcedure
 Procedure EnabledPaymentButton()
 	Items.qPayment.Enabled = Object.ItemList.Count() > 0;
 	Items.CommandBarPayments.Enabled = Object.ItemList.Count() = 0;
-	
-	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
-		SetPaymentButtonOnServer();
-	EndIf;
+	SetPaymentButtonOnServer();
 EndProcedure
 
 &AtServer
 Procedure SetPaymentButtonOnServer()
 	ColorGreen = StyleColors.AccentColor;
 	ColorRed = StyleColors.NegativeTextColor;
-	If ValueIsFilled(Object.ConsolidatedRetailSales) Then
+	
+	If ThisObject.isReturn Then
+		Items.qPayment.Title = R().InfoMessage_PaymentReturn;
+		Items.qPayment.TextColor = ColorRed;
+	Else
 		Items.qPayment.Title = R().InfoMessage_Payment;
 		Items.qPayment.TextColor = ColorGreen;
-		Items.qPayment.BorderColor = ColorGreen;
-		Items.GroupPaymentButtons.Enabled = True;
-	Else
-		Items.GroupPaymentButtons.Enabled = False;
-		Items.qPayment.Title = R().InfoMessage_SessionIsClosed;
-		Items.qPayment.TextColor = ColorRed;
-		Items.qPayment.BorderColor = ColorRed;
+	EndIf;
+	Items.qPayment.BorderColor = ColorGreen;
+	Items.GroupPaymentButtons.Enabled = True;
+	
+	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
+		If Not ValueIsFilled(Object.ConsolidatedRetailSales) Then
+			Items.qPayment.Title = R().InfoMessage_SessionIsClosed;
+			Items.qPayment.TextColor = ColorRed;
+			Items.qPayment.BorderColor = ColorRed;
+			Items.GroupPaymentButtons.Enabled = False;
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -1124,4 +1194,92 @@ Procedure FillCashInList()
 	EndDo;
 EndProcedure
 
+&AtClient
+Procedure FindRetailSalesReceipt(RowID)
+	FormParameters = New Structure;
+	FormParameters.Insert("RetailCustomer", ThisObject.Object.RetailCustomer);
+	FormParameters.Insert("ReturnItemsAddress", getReturnItems(RowID));
+	
+	If Not RowID = Undefined Then
+		CurrentRow = Object.ItemList.FindByID(RowID);
+		FormParameters.Insert("ItemKey", CurrentRow.ItemKey);
+	EndIf;
+	
+	NotifyDescription = New NotifyDescription("FindRetailSalesReceiptFinish", ThisObject, RowID);
+	OpenForm("CommonForm.RetailSalesReceiptSelectionForReturn", 
+		FormParameters, ThisObject, UUID, , , NotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+EndProcedure
 
+&AtClient
+Procedure FindRetailSalesReceiptFinish(Result, RowID) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	If Not RowID = Undefined Then
+		CurrentRow = ThisObject.Object.ItemList.FindByID(RowID);
+		If Not CurrentRow = Undefined Then
+			ErrorMessageString = "";
+			ReturnData = Result[CurrentRow.ItemKey];
+			If ReturnData = Undefined Then
+				ErrorMessageString = StrTemplate(R().POS_Error_ReturnAmountNotFound, 
+					CurrentRow.ItemKey,
+					Format(CurrentRow.Quantity, "NZ=; NG=;"));
+			Else
+				AvailableQuantity = ReturnData.Quantity; 
+				CurrentReturn = ReturnData.RetailSalesReceipt;
+				If CurrentRow.Quantity > AvailableQuantity Then
+					ErrorMessageString = StrTemplate(R().POS_Error_ReturnAmountLess, 
+						CurrentRow.ItemKey,
+						Format(CurrentRow.Quantity, "NZ=; NG=;"),
+						Format(AvailableQuantity, "NZ=; NG=;"),
+						CurrentReturn);
+				Else
+					ReturnData.Quantity = ReturnData.Quantity - CurrentRow.Quantity;
+					CurrentRow.RetailSalesReceipt = CurrentReturn;
+					CurrentRow.Price = ReturnData.Price;
+					DocRetailSalesReceiptClient.ItemListPriceOnChange(
+						Object, ThisObject, Items.ItemListPrice, CurrentRow);
+				EndIf;
+			EndIf;
+			If Not IsBlankString(ErrorMessageString) Then
+				CommonFunctionsClientServer.ShowUsersMessage(ErrorMessageString);
+				Return;
+			EndIf;
+		EndIf;
+	EndIf;
+	
+	EmptySalesRow = ThisObject.Object.ItemList.FindRows(
+		New Structure("RetailSalesReceipt", PredefinedValue("Document.RetailSalesReceipt.EmptyRef")));
+		
+	For Each EmptyRow In EmptySalesRow Do
+		ReturnData = Result[EmptyRow.ItemKey];
+		If Not ReturnData = Undefined Then
+			AvailableQuantity = ReturnData.Quantity;
+			If AvailableQuantity > 0 And EmptyRow.Quantity <= AvailableQuantity Then
+				ReturnData.Quantity = ReturnData.Quantity - EmptyRow.Quantity;
+				EmptyRow.RetailSalesReceipt = ReturnData.RetailSalesReceipt;
+				EmptyRow.Price = ReturnData.Price;
+				DocRetailSalesReceiptClient.ItemListPriceOnChange(
+					Object, ThisObject, Items.ItemListPrice, EmptyRow);
+			EndIf;
+		EndIf;
+	EndDo;
+	
+EndProcedure
+	
+&AtServer
+Function getReturnItems(SkipRowID)
+	Rows = New Array;
+	For Each ListItem In ThisObject.Object.ItemList Do
+		If ListItem.GetID() = SkipRowID Then
+			Continue;
+		EndIf;
+		If Not ListItem.RetailSalesReceipt.IsEmpty() Then
+			Rows.Add(ListItem);
+		EndIf;
+	EndDo;
+	SelectedItems = ThisObject.Object.ItemList.Unload(Rows);
+	SelectedItems.GroupBy("ItemKey,RetailSalesReceipt", "Quantity");
+	Return PutToTempStorage(SelectedItems, ThisObject.UUID);
+EndFunction

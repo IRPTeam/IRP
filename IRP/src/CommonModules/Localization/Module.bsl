@@ -309,6 +309,12 @@ Function Strings(Lang) Export
 	Strings.Insert("POS_s3", NStr("en = 'There is no need to use cash, as card payments are sufficient to pay'", Lang));
 	Strings.Insert("POS_s4", NStr("en = 'Amounts of payments are incorrect'", Lang));
 	Strings.Insert("POS_s5", NStr("en = 'Select sales person'", Lang));
+	
+	Strings.Insert("POS_Error_ReturnAmountNotFound", NStr(
+		"en = 'Not found available for return %2 pieces of ""%1""'", Lang));
+	Strings.Insert("POS_Error_ReturnAmountLess", NStr(
+		"en = 'There are %2 ""%1"" items, which is more than the available %3 for return in the ""%4"" document.'", Lang));
+	
 #EndRegion
 
 #Region Service
@@ -820,9 +826,12 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_033", NStr("en = 'Do you want to stop job?'", Lang));
 	
 	Strings.Insert("InfoMessage_Payment", NStr("en = 'Payment (+)'", Lang));
+	Strings.Insert("InfoMessage_PaymentReturn", NStr("en = 'Payment Return'", Lang));
 	Strings.Insert("InfoMessage_SessionIsClosed", NStr("en = 'Session is closed'", Lang));
 	Strings.Insert("InfoMessage_Sales", NStr("en = 'Sales'", Lang));
 	Strings.Insert("InfoMessage_Returns", NStr("en = 'Returns'", Lang));
+	Strings.Insert("InfoMessage_ReturnTitle", NStr("en = 'Return'", Lang));
+	Strings.Insert("InfoMessage_POS_Title", NStr("en = 'Point of sales'", Lang));
 	
 #EndRegion
 

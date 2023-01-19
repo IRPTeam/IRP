@@ -183,6 +183,14 @@
    <key>en</key>
    <value>Auto create money transfer at session closing</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Автоматически создавать перемещение денег при закрытии смены</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vardiya kapanışında kasa tranfseri otomatik olarak oluştur</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>

@@ -116,6 +116,14 @@
    <key>en</key>
    <value>Customer advance</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Аванс покупателя</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Müşteri avansı</value>
+  </synonym>
  </enumValues>
  <enumValues uuid="3c391634-bcbf-4cdf-8e25-86fcef266bf3">
   <name>EmployeeCashAdvance</name>

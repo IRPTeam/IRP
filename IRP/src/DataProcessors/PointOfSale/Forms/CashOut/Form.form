@@ -1104,6 +1104,14 @@
    <key>en</key>
    <value>Auto create money transfer</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Автоматическое создание перемещения денег</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Para transferi otomatik oluştur</value>
+  </title>
   <id>13</id>
   <valueType>
    <types>Boolean</types>

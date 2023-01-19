@@ -365,6 +365,14 @@
    <key>en</key>
    <value>Birth date</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дата рождения</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Doğum günü</value>
+  </synonym>
   <type>
    <types>Date</types>
    <dateQualifiers>

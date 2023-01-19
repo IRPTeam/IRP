@@ -419,6 +419,14 @@
    <key>en</key>
    <value>Workstation</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Рабочее место</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çalışma yeri</value>
+  </synonym>
   <type>
    <types>CatalogRef.Workstations</types>
   </type>

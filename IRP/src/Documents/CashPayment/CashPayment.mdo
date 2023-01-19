@@ -584,6 +584,14 @@
     <key>en</key>
     <value>Retail customer</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Розничный покупатель</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Perakende müşteri</value>
+   </synonym>
    <type>
     <types>CatalogRef.RetailCustomers</types>
    </type>

@@ -857,13 +857,13 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 		* Check balance
 			Then the form attribute named "Workstation" became equal to "Workstation 01"
 			Then the form attribute named "CashAccount" became equal to "Pos cash account 1"
-			And the editing text of form attribute named "BalanceBeginning" became equal to "1 040,00"
+			And the editing text of form attribute named "BalanceBeginning" became equal to "1 440,00"
 			Then the form attribute named "CurrencyBalanceBeginning" became equal to "TRY"
 			And the editing text of form attribute named "BalanceIncoming" became equal to "8 950,00"
 			Then the form attribute named "CurrencyBalanceIncoming" became equal to "TRY"
 			And the editing text of form attribute named "BalanceOutcoming" became equal to "5 590,00"
 			Then the form attribute named "CurrencyBalanceOutcoming" became equal to "TRY"
-			And the editing text of form attribute named "BalanceEnd" became equal to "4 400,00"
+			And the editing text of form attribute named "BalanceEnd" became equal to "4 800,00"
 			Then the form attribute named "CurrencyBalanceEnd" became equal to "TRY"
 			And the editing text of form attribute named "BalanceReal" became equal to "0,00"
 			Then the form attribute named "Company" became equal to "Main Company"
@@ -897,7 +897,7 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			| '*'                          | 'Main Company' | '520'    | 'Shop 02' | 'TRY'      | 'CI'     |
 		Then the number of "Documents" table lines is "equal" "11"
 		Then the form attribute named "Branch" became equal to "Shop 02"
-		And the editing text of form attribute named "BalanceEnd" became equal to "4 400,00"
+		And the editing text of form attribute named "BalanceEnd" became equal to "4 800,00"
 		And the editing text of form attribute named "BalanceReal" became equal to "4 000,00"
 		And "PaymentList" table became equal
 			| '#' | 'Amount'   | 'Is return' | 'Payment type' | 'Payment terminal' | 'Real amount' |

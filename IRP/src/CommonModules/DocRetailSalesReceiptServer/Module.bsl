@@ -27,6 +27,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	Form.Taxes_CreateFormControls();
 	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 	LockDataModificationPrivileged.LockFormIfObjectIsLocked(Form, CurrentObject);
+	SerialLotNumbersServer.UpdateSerialLotNumbersPresentation(Object);
 EndProcedure
 
 #EndRegion

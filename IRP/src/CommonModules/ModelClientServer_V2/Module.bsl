@@ -2814,7 +2814,8 @@ Function ClearByTransactionTypeBankPaymentOptions() Export
 		|Order,
 		|PaymentType,
 		|PaymentTerminal,
-		|BankTerm");
+		|BankTerm,
+		|RetailCustomer");
 EndFunction
 
 Function ClearByTransactionTypeBankPaymentExecute(Options) Export
@@ -2830,6 +2831,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Result.Insert("PaymentType"              , Options.PaymentType);
 	Result.Insert("PaymentTerminal"          , Options.PaymentTerminal);
 	Result.Insert("BankTerm"                 , Options.BankTerm);
+	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
 	
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
@@ -2837,6 +2839,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Outgoing_ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
 	Outgoing_ReturnToCustomerByPOS  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS");
 	Outgoing_PaymentByCheque     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentByCheque");
+	Outgoing_CustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance");
 	Outgoing_EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
 	
 	// list of properties which not needed clear
@@ -2864,6 +2867,12 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 			|PaymentTerminal,
 			|BankTerm";
 		EndIf;
+	ElsIf Options.TransactionType = Outgoing_CustomerAdvance Then
+		StrByType = "
+		|RetailCustomer,
+		|PaymentType,
+		|PaymentTerminal,
+		|BankTerm";
 	ElsIf Options.TransactionType = Outgoing_EmployeeCashAdvance Then
 		StrByType = "
 		|Partner"; 		
@@ -3004,7 +3013,8 @@ Function ClearByTransactionTypeCashPaymentOptions() Export
 		|Agreement,
 		|LegalNameContract,
 		|Payee,
-		|Order");
+		|Order,
+		|RetailCustomer");
 EndFunction
 
 Function ClearByTransactionTypeCashPaymentExecute(Options) Export
@@ -3016,11 +3026,13 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	Result.Insert("LegalNameContract"        , Options.LegalNameContract);
 	Result.Insert("Payee"                    , Options.Payee);
 	Result.Insert("Order"                    , Options.Order);
+	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
 
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
 	Outgoing_PaymentToVendor   = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentToVendor");
 	Outgoing_ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
+	Outgoing_CustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance");
 	Outgoing_EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
 
 	// list of properties which not needed clear
@@ -3030,6 +3042,9 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	ElsIf Options.TransactionType = Outgoing_CurrencyExchange Or Options.TransactionType = Outgoing_EmployeeCashAdvance Then
 		StrByType = "
 		|Partner"; 
+	ElsIf Options.TransactionType = Outgoing_CustomerAdvance Then
+		StrByType = "
+		|RetailCustomer";
 	ElsIf Options.TransactionType = Outgoing_PaymentToVendor Or Options.TransactionType = Outgoing_ReturnToCustomer Then
 		StrByType = "
 		|Partner,

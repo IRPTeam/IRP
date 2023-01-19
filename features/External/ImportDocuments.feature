@@ -4710,6 +4710,42 @@ Scenario: Create document CashPayment objects (with partner term by document, wi
 		| 'e1cib/data/Document.CashPayment?ref=b77989a3e884cab211ec88d466c20f8d' | '4b9736fe-a175-4350-9256-1d53e4517149' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 1      | 1             | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d' | 50       | 'False'   |
 		| 'e1cib/data/Document.CashPayment?ref=b77989a3e884cab211ec88d466c20f8d' | '4b9736fe-a175-4350-9256-1d53e4517149' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 0.1712 | 5.8411        | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e' | 8.56     | 'False'   |
 
+
+Scenario: Create document BankPayment objects (return retail customer advance)
+
+	And I check or create document "BankPayment" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Account'                                                              | 'Company'                                                           | 'Currency'                                                           | 'TransactionType'                                      | 'TransitAccount' | 'DocNumber' | 'Author'                                                        | 'Branch' | 'Description' | 'DocumentAmount' |
+		| 'e1cib/data/Document.BankPayment?ref=b79392df2896a84411ed97130a4be00f' | 'False'        | 311      | '18.01.2023 12:02:58' | 'True'   | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186b' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'Enum.OutgoingPaymentTransactionTypes.CustomerAdvance' | ''               | ''          | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''            | 100              |
+
+	And I refill object tabular section "PaymentList":
+		| 'Ref'                                                                  | 'Key'                                  | 'BasisDocument' | 'Agreement' | 'Partner' | 'NetAmount' | 'TaxAmount' | 'TotalAmount' | 'Payee' | 'PlaningTransactionBasis' | 'Commission' | 'ProfitLossCenter' | 'ExpenseType' | 'AdditionalAnalytic' | 'FinancialMovementType' | 'LegalNameContract' | 'Order' | 'PaymentType'                                                          | 'PaymentTerminal'                                                          | 'BankTerm'                                                          | 'CommissionPercent' | 'RetailCustomer'                                                          |
+		| 'e1cib/data/Document.BankPayment?ref=b79392df2896a84411ed97130a4be00f' | '4ed35515-0538-4f12-b809-d24535911dd3' | ''              | ''          | ''        | 100         |             | 100           | ''      | ''                        | 1            | ''                 | ''            | ''                   | ''                      | ''                  | ''      | 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd0' | 'e1cib/data/Catalog.PaymentTerminals?ref=b79392df2896a84411ed970d86803930' | 'e1cib/data/Catalog.BankTerms?ref=b784ae4f9cb08e5e11ed224e1ee0a7fc' | 1                   | 'e1cib/data/Catalog.RetailCustomers?ref=b790eb46b44093f611ed85bf15e9b220' |
+
+	And I refill object tabular section "Currencies":
+		| 'Ref'                                                                  | 'Key'                                  | 'CurrencyFrom'                                                       | 'Rate' | 'ReverseRate' | 'ShowReverseRate' | 'Multiplicity' | 'MovementType'                                                                                    | 'Amount' | 'IsFixed' |
+		| 'e1cib/data/Document.BankPayment?ref=b79392df2896a84411ed97130a4be00f' | '4ed35515-0538-4f12-b809-d24535911dd3' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 1      | 1             | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d' | 100      | 'False'   |
+		| 'e1cib/data/Document.BankPayment?ref=b79392df2896a84411ed97130a4be00f' | '4ed35515-0538-4f12-b809-d24535911dd3' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 0.1712 | 5.8411        | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e' | 17.12    | 'False'   |
+
+Scenario: Create document CashPayment objects (return retail customer advance)
+
+	And I check or create document "CashPayment" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'CashAccount'                                                          | 'Company'                                                           | 'Currency'                                                           | 'TransactionType'                                      | 'DocNumber' | 'Author'                                                        | 'Branch' | 'Description' | 'DocumentAmount' |
+		| 'e1cib/data/Document.CashPayment?ref=b79392df2896a84411ed97130a4be00d' | 'False'        | 311      | '18.01.2023 11:53:32' | 'True'   | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c1869' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'Enum.OutgoingPaymentTransactionTypes.CustomerAdvance' | ''          | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''            | 200              |
+
+	And I refill object tabular section "PaymentList":
+		| 'Ref'                                                                  | 'Key'                                  | 'BasisDocument' | 'Agreement' | 'Partner' | 'NetAmount' | 'TaxAmount' | 'TotalAmount' | 'Payee' | 'PlaningTransactionBasis' | 'FinancialMovementType' | 'LegalNameContract' | 'Order' | 'RetailCustomer'                                                          |
+		| 'e1cib/data/Document.CashPayment?ref=b79392df2896a84411ed97130a4be00d' | 'a742c6e9-e605-4397-8739-07bef5213efd' | ''              | ''          | ''        | 200         |             | 200           | ''      | ''                        | ''                      | ''                  | ''      | 'e1cib/data/Catalog.RetailCustomers?ref=b790eb46b44093f611ed85bf15e9b220' |
+
+	And I refill object tabular section "Currencies":
+		| 'Ref'                                                                  | 'Key'                                  | 'CurrencyFrom'                                                       | 'Rate' | 'ReverseRate' | 'ShowReverseRate' | 'Multiplicity' | 'MovementType'                                                                                    | 'Amount' | 'IsFixed' |
+		| 'e1cib/data/Document.CashPayment?ref=b79392df2896a84411ed97130a4be00d' | 'a742c6e9-e605-4397-8739-07bef5213efd' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 1      | 1             | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d' | 200      | 'False'   |
+		| 'e1cib/data/Document.CashPayment?ref=b79392df2896a84411ed97130a4be00d' | 'a742c6e9-e605-4397-8739-07bef5213efd' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 0.1712 | 5.8411        | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e' | 34.24    | 'False'   |
+
+
+
+
+
+
 Scenario: Create document CashReceipt objects (with partner term by document, without basis)
 	// Document.CashReceipt
 

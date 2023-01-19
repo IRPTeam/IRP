@@ -71,7 +71,7 @@ Scenario: _0205001 preparation (commands)
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 			And I click the button named "FormCreate"
 		* Filling plugin data and adding it to the database
-			And I select external file "$Path$/DataProcessor/CheckExternalCommands.epf"
+			And I select external file "$Path$/features/External/step_definitions/CheckExternalCommands.epf"
 			And I click the button named "FormAddExtDataProc"
 			And I input "" text in "Path to plugin for test" field
 			And I input "PrintFormSalesOrder" text in "Name" field

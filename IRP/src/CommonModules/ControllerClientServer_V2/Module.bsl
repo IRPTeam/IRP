@@ -1234,6 +1234,7 @@ Procedure MultiSetTransactionType_BankPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("PaymentType"              , BindPaymentListPaymentType(Parameters));
 	ResourceToBinding.Insert("PaymentTerminal"          , BindPaymentListPaymentTerminal(Parameters));
 	ResourceToBinding.Insert("BankTerm"                 , BindPaymentListBankTerm(Parameters));
+	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1269,6 +1270,7 @@ Procedure MultiSetTransactionType_CashPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("BasisDocument"            , BindPaymentListBasisDocument(Parameters));
 	ResourceToBinding.Insert("PlanningTransactionBasis" , BindPaymentListPlanningTransactionBasis(Parameters));
 	ResourceToBinding.Insert("Order"                    , BindPaymentListOrder(Parameters));
+	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1318,6 +1320,7 @@ Procedure StepClearByTransactionTypeBankPayment(Parameters, Chain) Export
 		Options.PaymentType              = GetPaymentListPaymentType(Parameters, Row.Key);
 		Options.PaymentTerminal          = GetPaymentListPaymentTerminal(Parameters, Row.Key);
 		Options.BankTerm                 = GetPaymentListBankTerm(Parameters, Row.Key);
+		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankPayment";
 		Chain.ClearByTransactionTypeBankPayment.Options.Add(Options);
@@ -1367,6 +1370,7 @@ Procedure StepClearByTransactionTypeCashPayment(Parameters, Chain) Export
 		Options.LegalNameContract        = GetPaymentListLegalNameContract(Parameters, Row.Key);
 		Options.Payee                    = GetPaymentListLegalName(Parameters, Row.Key);
 		Options.Order                    = GetPaymentListOrder(Parameters, Row.Key);
+		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashPayment";
 		Chain.ClearByTransactionTypeCashPayment.Options.Add(Options);
@@ -2011,6 +2015,9 @@ Function BindDate(Parameters)
 		"StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_WithoutAgreement");
 		
+	Binding.Insert("MoneyTransfer",
+		"StepChangeConsolidatedRetailSalesByWorkstation");
+
 	Binding.Insert("EmployeeCashAdvance",
 		"StepRequireCallCreateTaxesFormControls, 
 		|StepChangeTaxRate_WithoutAgreement");
@@ -2171,7 +2178,8 @@ Function BindCompany(Parameters)
 	
 	Binding.Insert("MoneyTransfer",
 		"StepChangeAccountSenderByCompany,
-		|StepChangeAccountReceiverByCompany");
+		|StepChangeAccountReceiverByCompany,
+		|StepChangeConsolidatedRetailSalesByWorkstation");
 
 	Binding.Insert("CashTransferOrder",
 		"StepChangeAccountSenderByCompany,
@@ -2681,6 +2689,7 @@ Function BindWorkstation(Parameters)
 	Binding.Insert("RetailSalesReceipt"  , "StepChangeConsolidatedRetailSalesByWorkstation");
 	Binding.Insert("RetailReturnReceipt" , "StepChangeConsolidatedRetailSalesByWorkstation");
 	Binding.Insert("CashReceipt" 		 , "StepChangeConsolidatedRetailSalesByWorkstation");
+	Binding.Insert("MoneyTransfer" 		 , "StepChangeConsolidatedRetailSalesByWorkstation");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
 

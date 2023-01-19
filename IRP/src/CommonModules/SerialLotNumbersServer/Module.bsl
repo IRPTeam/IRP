@@ -286,7 +286,6 @@ Procedure SetUnique(Object) Export
 	EndDo;
 EndProcedure
 
-
 Function GetWrongSerialLotNumbers(ArrayOfItemKeys) Export
 	ArrayOfWrongSerialLotNumbers = New Array();
 	
@@ -316,4 +315,17 @@ Function GetWrongSerialLotNumbers(ArrayOfItemKeys) Export
 	Return ArrayOfWrongSerialLotNumbers;
 EndFUnction
 
-
+Procedure UpdateSerialLotNumbersPresentation(Object) Export
+	For Each RowItemList In Object.ItemList Do
+		ArrayOfSerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", RowItemList.Key));
+		RowItemList.SerialLotNumbersPresentation.Clear();		
+		SerialCount = 0;
+		For Each RowSerialLotNumber In ArrayOfSerialLotNumbers Do
+			RowItemList.SerialLotNumbersPresentation.Add(RowSerialLotNumber.SerialLotNumber);
+			SerialCount = SerialCount + RowSerialLotNumber.Quantity;
+		EndDo;
+		If RowItemList.UseSerialLotNumber Then
+			RowItemList.SerialLotNumberIsFilling = SerialCount > 0;
+		EndIf;
+	EndDo;
+EndProcedure

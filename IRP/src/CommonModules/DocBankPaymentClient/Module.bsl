@@ -81,7 +81,7 @@ Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Ex
 		AccountTypeList = New ValueList();
 		AccountTypeList.Add(PredefinedValue("Enum.CashAccountTypes.Bank"));
 		AccountTypeList.Add(PredefinedValue("Enum.CashAccountTypes.POS"));
-		ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", AccountTypeList, DataCompositionComparisonType.InList));
+		ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Type", AccountTypeList, ComparisonType.InList));
 	Else
 		CashAccountType = PredefinedValue("Enum.CashAccountTypes.Bank");
 		If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS") Then

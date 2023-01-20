@@ -92,7 +92,7 @@ Scenario: _2000 preparation (landed cost)
 		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 		And I click "Save and close" button
 	When Create document SalesInvoice objects (MF)
-	When Create catalog ReportOptions objects
+	When Create catalog ReportOptions objects (manufactoring)
 	When Create catalog MFBillOfMaterials objects
 	When Create catalog PlanningPeriods objects (MF)
 	When Create catalog BillOfMaterials objects (semiproducts)

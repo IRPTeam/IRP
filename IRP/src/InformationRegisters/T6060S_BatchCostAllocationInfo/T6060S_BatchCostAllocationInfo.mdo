@@ -58,6 +58,7 @@
     </synonym>
     <type>
       <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.Production</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

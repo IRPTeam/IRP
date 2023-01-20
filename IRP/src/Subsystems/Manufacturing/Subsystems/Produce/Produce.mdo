@@ -7,5 +7,6 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
+  <content>Document.ProductionCostsAllocation</content>
   <parentSubsystem>Subsystem.Manufacturing</parentSubsystem>
 </mdclass:Subsystem>

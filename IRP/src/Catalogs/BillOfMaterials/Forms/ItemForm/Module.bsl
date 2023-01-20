@@ -339,3 +339,8 @@ EndProcedure
 
 #EndRegion
 
+&AtClient
+Procedure UnlockForm(Command)
+	ThisObject.ReadOnly = False;	
+EndProcedure
+

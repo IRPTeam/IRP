@@ -71,6 +71,8 @@
   <registerRecords>AccumulationRegister.R7010T_DetailingSupplies</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
+  <registerRecords>AccumulationRegister.R7050T_ProductionDurations</registerRecords>
+  <registerRecords>InformationRegister.T7051S_ProductionDurationDetails</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -314,6 +316,25 @@
     </synonym>
     <type>
       <types>DefinedType.typePercent</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="178c7cb1-ead1-4886-8490-ce5fdc66105b">
+    <name>DurationOfProduction</name>
+    <synonym>
+      <key>en</key>
+      <value>Duration of production</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>5</precision>
+        <scale>2</scale>
+      </numberQualifiers>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

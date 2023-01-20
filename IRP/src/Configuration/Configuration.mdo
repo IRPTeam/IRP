@@ -453,6 +453,8 @@
   <commonModules>CommonModule.SourceOfOriginServer</commonModules>
   <commonModules>CommonModule.DocEmployeeCashAdvanceServer</commonModules>
   <commonModules>CommonModule.DocEmployeeCashAdvanceClient</commonModules>
+  <commonModules>CommonModule.DocProductionCostsAllocationClient</commonModules>
+  <commonModules>CommonModule.DocProductionCostsAllocationServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -801,6 +803,7 @@
   <documents>Document.SalesReportFromTradeAgent</documents>
   <documents>Document.SalesReportToConsignor</documents>
   <documents>Document.EmployeeCashAdvance</documents>
+  <documents>Document.ProductionCostsAllocation</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>
@@ -869,6 +872,7 @@
   <enums>Enum.TradeAgentFeeTypes</enums>
   <enums>Enum.ReceiptPaymentMethods</enums>
   <enums>Enum.DocumentFiscalStatuses</enums>
+  <enums>Enum.ExpenseTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>
@@ -957,6 +961,7 @@
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <informationRegisters>InformationRegister.T8010S_ConsignorBatches</informationRegisters>
   <informationRegisters>InformationRegister.DocumentFiscalStatus</informationRegisters>
+  <informationRegisters>InformationRegister.T7051S_ProductionDurationDetails</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -1048,6 +1053,7 @@
   <accumulationRegisters>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3026B_SalesOrdersCustomerAdvance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3027B_EmployeeCashAdvance</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R7050T_ProductionDurations</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

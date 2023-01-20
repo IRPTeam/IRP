@@ -451,6 +451,76 @@
 				<dcscom:dimension>true</dcscom:dimension>
 			</role>
 		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>NotDirectCostsOpeningBalance</dataPath>
+			<field>NotDirectCostsOpeningBalance</field>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>Group10</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>NotDirectCostsReceipt</dataPath>
+			<field>NotDirectCostsReceipt</field>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>NotDirectCostsExpense</dataPath>
+			<field>NotDirectCostsExpense</field>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>NotDirectCostsClosingBalance</dataPath>
+			<field>NotDirectCostsClosingBalance</field>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>Group10</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+			<appearance>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>Format</dcscor:parameter>
+					<dcscor:value xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>NFD=2</v8:content>
+						</v8:item>
+					</dcscor:value>
+				</dcscor:item>
+			</appearance>
+		</field>
 		<item xsi:type="DataSetQuery">
 			<name>BatchBalance</name>
 			<field xsi:type="DataSetFieldField">
@@ -702,6 +772,32 @@
 					<dcscom:dimension>true</dcscom:dimension>
 				</role>
 			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>NotDirectCostsOpeningBalance</dataPath>
+				<field>NotDirectCostsOpeningBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>NotDirectCosts</dcscom:balanceGroupName>
+					<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+				</role>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>NotDirectCostsReceipt</dataPath>
+				<field>NotDirectCostsReceipt</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>NotDirectCostsExpense</dataPath>
+				<field>NotDirectCostsExpense</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>NotDirectCostsClosingBalance</dataPath>
+				<field>NotDirectCostsClosingBalance</field>
+				<role>
+					<dcscom:balance>true</dcscom:balance>
+					<dcscom:balanceGroupName>NotDirectCosts</dcscom:balanceGroupName>
+					<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+				</role>
+			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT
 	R6020B_BatchBalanceBalanceAndTurnovers.Company,
@@ -731,6 +827,10 @@
 	R6020B_BatchBalanceBalanceAndTurnovers.AmountTaxReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.AmountTaxExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.AmountTaxClosingBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.NotDirectCostsOpeningBalance AS NotDirectCostsOpeningBalance,
+	R6020B_BatchBalanceBalanceAndTurnovers.NotDirectCostsReceipt,
+	R6020B_BatchBalanceBalanceAndTurnovers.NotDirectCostsExpense,
+	R6020B_BatchBalanceBalanceAndTurnovers.NotDirectCostsClosingBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostRatioOpeningBalance AS AmountCostRatioOpeningBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostRatioReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.AmountCostRatioExpense,
@@ -871,7 +971,11 @@ ORDER BY
 			THEN T6020S_BatchKeysInfo.Quantity
 		ELSE 0
 	END AS QuantityExpense,
-	T6020S_BatchKeysInfo.Recorder AS Recorder,
+	case
+		when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
+			then T6020S_BatchKeysInfo.ProductionDocument
+		else T6020S_BatchKeysInfo.Recorder
+	end AS Recorder,
 	T6020S_BatchKeysInfo.ItemKey.Item AS Item,
 	FALSE AS IsRelevance
 FROM
@@ -880,11 +984,19 @@ FROM
 		ON T6020S_BatchKeysInfo.Company = R6020B_BatchBalance.Company
 		AND T6020S_BatchKeysInfo.Store = R6020B_BatchBalance.Store
 		AND T6020S_BatchKeysInfo.ItemKey = R6020B_BatchBalance.ItemKey
-		AND T6020S_BatchKeysInfo.Recorder = R6020B_BatchBalance.Recorder
+		AND case
+			when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
+				then T6020S_BatchKeysInfo.ProductionDocument
+			else T6020S_BatchKeysInfo.Recorder
+		end = R6020B_BatchBalance.Recorder
 WHERE
 	R6020B_BatchBalance.Recorder IS NULL
 {WHERE
-	T6020S_BatchKeysInfo.Period BETWEEN BEGINOFPERIOD(&amp;BeginOfPeriod, DAY) AND ENDOFPERIOD(&amp;EndOfPeriod, DAY)}</query>
+	case
+		when T6020S_BatchKeysInfo.Recorder refs Document.ProductionCostsAllocation
+			then T6020S_BatchKeysInfo.ProductionDocument.Date
+		else T6020S_BatchKeysInfo.Period
+	end BETWEEN BEGINOFPERIOD(&amp;BeginOfPeriod, DAY) AND ENDOFPERIOD(&amp;EndOfPeriod, DAY)}</query>
 		</item>
 	</dataSet>
 	<totalField>
@@ -966,6 +1078,22 @@ WHERE
 	<totalField>
 		<dataPath>AmountCostRatioReceipt</dataPath>
 		<expression>Sum(AmountCostRatioReceipt)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>NotDirectCostsClosingBalance</dataPath>
+		<expression>Sum(NotDirectCostsClosingBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>NotDirectCostsExpense</dataPath>
+		<expression>Sum(NotDirectCostsExpense)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>NotDirectCostsOpeningBalance</dataPath>
+		<expression>Sum(NotDirectCostsOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>NotDirectCostsReceipt</dataPath>
+		<expression>Sum(NotDirectCostsReceipt)</expression>
 	</totalField>
 	<parameter>
 		<name>BeginOfPeriod</name>
@@ -1079,6 +1207,15 @@ WHERE
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>NotDirectCostsOpeningBalance</dcsset:field>
+						<dcsset:lwsTitle>
+							<v8:item>
+								<v8:lang>en</v8:lang>
+								<v8:content>Not-direct costs</v8:content>
+							</v8:item>
+						</dcsset:lwsTitle>
+					</dcsset:item>
 					<dcsset:placement>Horizontally</dcsset:placement>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
@@ -1130,6 +1267,15 @@ WHERE
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Cost ratio</v8:content>
+							</v8:item>
+						</dcsset:lwsTitle>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>NotDirectCostsReceipt</dcsset:field>
+						<dcsset:lwsTitle>
+							<v8:item>
+								<v8:lang>en</v8:lang>
+								<v8:content>Not-direct costs</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -1187,6 +1333,15 @@ WHERE
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>NotDirectCostsExpense</dcsset:field>
+						<dcsset:lwsTitle>
+							<v8:item>
+								<v8:lang>en</v8:lang>
+								<v8:content>Not-direct costs</v8:content>
+							</v8:item>
+						</dcsset:lwsTitle>
+					</dcsset:item>
 					<dcsset:placement>Horizontally</dcsset:placement>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
@@ -1238,6 +1393,15 @@ WHERE
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Cost ratio</v8:content>
+							</v8:item>
+						</dcsset:lwsTitle>
+					</dcsset:item>
+					<dcsset:item xsi:type="dcsset:SelectedItemField">
+						<dcsset:field>NotDirectCostsClosingBalance</dcsset:field>
+						<dcsset:lwsTitle>
+							<v8:item>
+								<v8:lang>en</v8:lang>
+								<v8:content>Not-direct costs</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>

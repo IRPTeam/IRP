@@ -8,6 +8,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 
 	ThisObject.DocumentAmount = CalculationServer.CalculateDocumentAmount(ItemList);
+	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 EndProcedure
 
 Procedure OnWrite(Cancel)

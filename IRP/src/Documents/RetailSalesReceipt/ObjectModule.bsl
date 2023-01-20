@@ -29,6 +29,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	ValuesBeforeWrite.Insert("DeletionMark", ThisObject.Ref.DeletionMark);
 	
 	ThisObject.AdditionalProperties.Insert("ValuesBeforeWrite", ValuesBeforeWrite);
+	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 EndProcedure
 
 Procedure OnWrite(Cancel)

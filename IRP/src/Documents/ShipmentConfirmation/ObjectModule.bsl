@@ -7,6 +7,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Partner = Undefined;
 		LegalName = Undefined;
 	EndIf;
+	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 EndProcedure
 
 Procedure OnWrite(Cancel)

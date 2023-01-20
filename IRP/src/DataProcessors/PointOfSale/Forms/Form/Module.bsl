@@ -233,32 +233,38 @@ EndProcedure
 &AtClient
 Procedure ItemListItemOnChange(Item)
 	DocRetailSalesReceiptClient.ItemListItemOnChange(Object, ThisObject, Item);
+	ClearRetailSalesReceipt();
 EndProcedure
 
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
 	DocRetailSalesReceiptClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
+	ClearRetailSalesReceipt();
 	UpdateHTMLPictures();
 EndProcedure
 
 &AtClient
 Procedure ItemListUnitOnChange(Item)
 	DocRetailSalesReceiptClient.ItemListUnitOnChange(Object, ThisObject, Item);
+	ClearRetailSalesReceipt();
 EndProcedure
 
 &AtClient
 Procedure ItemListQuantityOnChange(Item)
 	DocRetailSalesReceiptClient.ItemListQuantityOnChange(Object, ThisObject, Item);
+	ClearRetailSalesReceipt();
 EndProcedure
 
 &AtClient
 Procedure ItemListPriceOnChange(Item)
 	DocRetailSalesReceiptClient.ItemListPriceOnChange(Object, ThisObject, Item);
+	ClearRetailSalesReceipt();
 EndProcedure
 
 &AtClient
 Procedure ItemListTotalAmountOnChange(Item)
 	DocRetailSalesReceiptClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
+	ClearRetailSalesReceipt();
 EndProcedure
 
 &AtClient
@@ -287,6 +293,15 @@ EndProcedure
 Procedure RetailSalesReceiptStartChoice(Item, ChoiceData, StandardProcessing)
 	StandardProcessing = False;
 	FindRetailSalesReceipt(Undefined);
+EndProcedure
+
+&AtClient
+Procedure RetailSalesReceiptOnChange(Item)
+	If ThisObject.RetailSalesReceipt.IsEmpty() Then
+		For Each ListItem In ThisObject.Object.ItemList Do
+			ListItem.RetailSalesReceipt = ThisObject.RetailSalesReceipt; 
+		EndDo;
+	EndIf;
 EndProcedure
 
 #Region SerialLotNumbers
@@ -398,6 +413,23 @@ Procedure qPayment(Command)
 
 	Cancel = False;
 	DPPointOfSaleClient.BeforePayment(ThisObject, Cancel);
+	
+	If ThisObject.isReturn Then
+		If Not ThisObject.RetailSalesReceipt.IsEmpty() Then
+			EmptyRows = Object.ItemList.FindRows(
+				New Structure("RetailSalesReceipt", PredefinedValue("Document.RetailSalesReceipt.EmptyRef")));
+			If EmptyRows.Count() > 0 Then
+				Cancel = True;
+				For Each EmptyRow In EmptyRows Do
+					Message = StrTemplate(R().Error_077, EmptyRow.LineNumber);
+					Path = StrTemplate(
+						"Object.ItemList[%1].RetailSalesReceipt", 
+						Format(EmptyRow.LineNumber - 1, "NZ=; NG=;"));
+					CommonFunctionsClientServer.ShowUsersMessage(Message, Path);
+				EndDo;
+			EndIf;
+		EndIf;
+	EndIf;
 
 	If Cancel Then
 		Return;
@@ -444,6 +476,11 @@ EndProcedure
 &AtClient
 Procedure DocReturn(Command)
 	isReturn = Not isReturn;
+	ThisObject.RetailSalesReceipt = Undefined;
+	For Each ListItem In ThisObject.Object.ItemList Do
+		 ListItem.RetailSalesReceipt = Undefined;
+	EndDo;
+	
 	SetVisibilityAvailability(Object, ThisObject);
 	EnabledPaymentButton();
 EndProcedure
@@ -828,7 +865,8 @@ Procedure NewTransactionAtServer()
 	EndIf;
 	
 	SalesPersonByDefault = Undefined;
-	isReturn = False;
+	ThisObject.RetailSalesReceipt = Undefined;
+	ThisObject.isReturn = False;
 EndProcedure
 
 &AtServer
@@ -854,40 +892,17 @@ Function WriteTransaction(Result)
 		EndIf;
 	EndDo;
 
+	DocRef = Undefined;
 	CashbackAmount = 0;
 	
 	If ThisObject.isReturn Then
-		ObjectValue = Documents.RetailReturnReceipt.CreateDocument();
-		FillPropertyValues(ObjectValue, ThisObject.Object);
-		For Each TableRecord In ThisObject.Object.ItemList Do
-			FillPropertyValues(ObjectValue.ItemList.Add(), TableRecord);
-		EndDo;
-		For Each TableRecord In ThisObject.Object.SpecialOffers Do
-			FillPropertyValues(ObjectValue.SpecialOffers.Add(), TableRecord);
-		EndDo;
-		For Each TableRecord In ThisObject.Object.TaxList Do
-			FillPropertyValues(ObjectValue.TaxList.Add(), TableRecord);
-		EndDo;
-		For Each TableRecord In ThisObject.Object.Currencies Do
-			FillPropertyValues(ObjectValue.Currencies.Add(), TableRecord);
-		EndDo;
-		For Each TableRecord In ThisObject.Object.SerialLotNumbers Do
-			FillPropertyValues(ObjectValue.SerialLotNumbers.Add(), TableRecord);
-		EndDo;
-		For Each TableRecord In ThisObject.Object.RowIDInfo Do
-			FillPropertyValues(ObjectValue.RowIDInfo.Add(), TableRecord);
-		EndDo;
-		For Each TableRecord In ThisObject.Object.SourceOfOrigins Do
-			FillPropertyValues(ObjectValue.SourceOfOrigins.Add(), TableRecord);
-		EndDo;
-		ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
-		ObjectValue.Payments.Load(Payments);
-		ObjectValue.PaymentMethod = Result.ReceiptPaymentMethod;
+
+		If ThisObject.RetailSalesReceipt.IsEmpty() Then
+			CreateReturnWithoutBase(Result);
+		Else
+			CreateReturnOnBase(Result);
+		EndIf;
 		
-		ObjectValue.Write(DocumentWriteMode.Posting);
-		
-		DocRef = ObjectValue.Ref;
-		DPPointOfSaleServer.AfterPostingDocument(DocRef);
 	Else
 		
 		ObjectValue = FormAttributeToValue("Object");
@@ -900,17 +915,18 @@ Function WriteTransaction(Result)
 		
 		DocRef = ObjectValue.Ref;
 		DPPointOfSaleServer.AfterPostingDocument(DocRef);
-		CashAmountFilter = New Structure();
-		CashAmountFilter.Insert("PaymentTypeEnum", PredefinedValue("Enum.PaymentTypes.Cash"));
-		CashAmountFoundRows = Payments.FindRows(CashAmountFilter);
-		For Each Row In CashAmountFoundRows Do
-			If Row.Amount < 0 Then
-				CashbackAmount = CashbackAmount + Row.Amount * (-1);
-			EndIf;
-		EndDo;
 	
 	EndIf;
 
+	CashAmountFilter = New Structure();
+	CashAmountFilter.Insert("PaymentTypeEnum", PredefinedValue("Enum.PaymentTypes.Cash"));
+	CashAmountFoundRows = Payments.FindRows(CashAmountFilter);
+	For Each Row In CashAmountFoundRows Do
+		If Row.Amount < 0 Then
+			CashbackAmount = CashbackAmount + Row.Amount * (-1);
+		EndIf;
+	EndDo;
+	
 	Return CashbackAmount;
 EndFunction
 
@@ -1227,16 +1243,16 @@ Procedure FindRetailSalesReceiptFinish(Result, RowID) Export
 					Format(CurrentRow.Quantity, "NZ=; NG=;"));
 			Else
 				AvailableQuantity = ReturnData.Quantity; 
-				CurrentReturn = ReturnData.RetailSalesReceipt;
+				ThisObject.RetailSalesReceipt = ReturnData.RetailSalesReceipt;
 				If CurrentRow.Quantity > AvailableQuantity Then
 					ErrorMessageString = StrTemplate(R().POS_Error_ReturnAmountLess, 
 						CurrentRow.ItemKey,
 						Format(CurrentRow.Quantity, "NZ=; NG=;"),
 						Format(AvailableQuantity, "NZ=; NG=;"),
-						CurrentReturn);
+						ThisObject.RetailSalesReceipt);
 				Else
 					ReturnData.Quantity = ReturnData.Quantity - CurrentRow.Quantity;
-					CurrentRow.RetailSalesReceipt = CurrentReturn;
+					CurrentRow.RetailSalesReceipt = ThisObject.RetailSalesReceipt;
 					CurrentRow.Price = ReturnData.Price;
 					DocRetailSalesReceiptClient.ItemListPriceOnChange(
 						Object, ThisObject, Items.ItemListPrice, CurrentRow);
@@ -1255,10 +1271,11 @@ Procedure FindRetailSalesReceiptFinish(Result, RowID) Export
 	For Each EmptyRow In EmptySalesRow Do
 		ReturnData = Result[EmptyRow.ItemKey];
 		If Not ReturnData = Undefined Then
+			ThisObject.RetailSalesReceipt = ReturnData.RetailSalesReceipt;
 			AvailableQuantity = ReturnData.Quantity;
 			If AvailableQuantity > 0 And EmptyRow.Quantity <= AvailableQuantity Then
 				ReturnData.Quantity = ReturnData.Quantity - EmptyRow.Quantity;
-				EmptyRow.RetailSalesReceipt = ReturnData.RetailSalesReceipt;
+				EmptyRow.RetailSalesReceipt = ThisObject.RetailSalesReceipt;
 				EmptyRow.Price = ReturnData.Price;
 				DocRetailSalesReceiptClient.ItemListPriceOnChange(
 					Object, ThisObject, Items.ItemListPrice, EmptyRow);
@@ -1283,3 +1300,157 @@ Function getReturnItems(SkipRowID)
 	SelectedItems.GroupBy("ItemKey,RetailSalesReceipt", "Quantity");
 	Return PutToTempStorage(SelectedItems, ThisObject.UUID);
 EndFunction
+
+&AtServer
+Procedure CreateReturnOnBase(PaymentData)
+
+	ReturnData = ThisObject.Object.ItemList.Unload();
+	ReturnData.GroupBy("ItemKey, RetailSalesReceipt", "QuantityInBaseUnit");
+	ReturnData.Columns.RetailSalesReceipt.Name = "Basis";
+	
+	ArrayOfBasises = New Array();
+	For Each ReturnItem In ReturnData Do
+		If ValueIsFilled(ReturnItem.Basis) 
+				And ArrayOfBasises.Find(ReturnItem.Basis) = Undefined Then
+			ArrayOfBasises.Add(ReturnItem.Basis);
+		EndIf;
+	EndDo;
+	
+	MainFilter = New Structure();
+	MainFilter.Insert("Ref", PredefinedValue("Document.RetailReturnReceipt.EmptyRef"));
+	MainFilter.Insert("Basises", ArrayOfBasises); 
+	BasisesTable = RowIDInfoPrivileged.GetBasises(MainFilter.Ref, MainFilter);
+	
+	ClearArray = New Array;
+	RowFilter = New Structure("ItemKey, Basis");
+	For Each BasisesTableItem In BasisesTable Do
+		FillPropertyValues(RowFilter, BasisesTableItem);
+		
+		ReturnQuantity = 0;
+		ReturnDataItems = ReturnData.FindRows(RowFilter);
+		For Each ReturnDataItem In ReturnDataItems Do
+			ReturnQuantity = ReturnQuantity + ReturnDataItem.QuantityInBaseUnit; 
+		EndDo;
+		
+		If ReturnQuantity = 0 Then
+			ClearArray.Add(BasisesTableItem);
+		ElsIf BasisesTableItem.QuantityInBaseUnit > ReturnQuantity Then
+			BasisesTableItem.QuantityInBaseUnit = ReturnQuantity;
+		EndIf;
+		For Each ReturnDataItem In ReturnDataItems Do
+			If ReturnQuantity = 0 Then
+				Break;
+			EndIf; 
+			CurrentAmount = Min(ReturnDataItem.QuantityInBaseUnit, ReturnQuantity);
+			ReturnDataItem.QuantityInBaseUnit = ReturnDataItem.QuantityInBaseUnit - CurrentAmount; 
+			ReturnQuantity = ReturnQuantity - CurrentAmount;
+		EndDo;
+	EndDo;
+	For Each ClearItem In ClearArray Do
+		BasisesTable.Delete(ClearItem);
+	EndDo;
+	
+	BasisesTypes = New Array();
+	For Each Doc In Metadata.Documents Do
+		If Doc.TabularSections.Find("RowIDInfo") <> Undefined Then
+			BasisesTypes.Add(Type("DocumentRef." + Doc.Name));
+		EndIf;
+	EndDo;
+	ResultTable = New ValueTable();
+	ResultTable.Columns.Add("Basis"          , New TypeDescription(BasisesTypes));
+	ResultTable.Columns.Add("BasisKey"       , Metadata.DefinedTypes.typeRowID.Type);
+	ResultTable.Columns.Add("BasisUnit"      , New TypeDescription("CatalogRef.Units"));
+	ResultTable.Columns.Add("Unit"           , New TypeDescription("CatalogRef.Units"));
+	ResultTable.Columns.Add("CurrentStep"    , New TypeDescription("CatalogRef.MovementRules"));
+	ResultTable.Columns.Add("IsMainDocument" , New TypeDescription("Boolean"));
+	ResultTable.Columns.Add("Item"           , New TypeDescription("CatalogRef.Items"));
+	ResultTable.Columns.Add("ItemKey"        , New TypeDescription("CatalogRef.ItemKeys"));
+	ResultTable.Columns.Add("Key"            , Metadata.DefinedTypes.typeRowID.Type);
+	ResultTable.Columns.Add("ParentBasis"    , New TypeDescription(BasisesTypes));
+	ResultTable.Columns.Add("QuantityInBaseUnit" , Metadata.DefinedTypes.typeQuantity.Type);
+	ResultTable.Columns.Add("RowID"          , Metadata.DefinedTypes.typeRowID.Type);
+	ResultTable.Columns.Add("RowRef"         , New TypeDescription("CatalogRef.RowIDs"));
+	ResultTable.Columns.Add("Store"          , New TypeDescription("CatalogRef.Stores"));
+	
+	For Each Row In BasisesTable Do
+		NewRow = ResultTable.Add();
+		FillPropertyValues(NewRow, Row);
+		NewRow.Unit = Row.BasisUnit;
+	EndDo;
+	
+	ExtractedData = RowIDInfoPrivileged.ExtractData(ResultTable, MainFilter.Ref);
+	ArrayOfFillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(MainFilter.Ref.Metadata(), ExtractedData);
+	
+	NewDoc = Undefined;
+	For Each FillingValues In ArrayOfFillingValues Do
+		NewDoc = Documents.RetailReturnReceipt.CreateDocument();
+		NewDoc.Date = CurrentSessionDate();
+		NewDoc.Fill(FillingValues);
+		NewDoc.Write();
+	EndDo;
+	If Not NewDoc = Undefined Then
+		NewDoc.Write(DocumentWriteMode.Posting);
+		DocRef = NewDoc.Ref;
+		DPPointOfSaleServer.AfterPostingDocument(DocRef);
+	EndIf;
+	
+EndProcedure
+
+&AtServer
+Procedure CreateReturnWithoutBase(PaymentData)
+	
+	FillingData = New Structure();
+	FillingData.Insert("BasedOn"                , "RetailReturnReceipt");
+	FillingData.Insert("RetailCustomer"         , Object.RetailCustomer);
+	FillingData.Insert("Company"                , Object.Company);
+	FillingData.Insert("Branch"                 , Object.Branch);
+	FillingData.Insert("Partner"                , Object.Partner);
+	FillingData.Insert("LegalName"              , Object.LegalName);
+	FillingData.Insert("LegalNameContract"      , Object.LegalNameContract);
+	FillingData.Insert("Agreement"              , Object.Agreement);
+	FillingData.Insert("Currency"               , Object.Currency);
+	FillingData.Insert("PriceIncludeTax"        , Object.PriceIncludeTax);
+	FillingData.Insert("ManagerSegment"         , Object.ManagerSegment);
+	FillingData.Insert("UsePartnerTransactions" , Object.UsePartnerTransactions);
+	FillingData.Insert("Workstation"            , Object.Workstation);
+	FillingData.Insert("ConsolidatedRetailSales", Object.ConsolidatedRetailSales);
+	
+	FillingData.Insert("PaymentMethod"          , PaymentData.ReceiptPaymentMethod);
+	FillingData.Insert("Payments"               , PaymentData.Payments);
+	
+	FillingData.Insert("ItemList"               , GetItemListForReturn());
+	
+	NewDoc = Documents.RetailReturnReceipt.CreateDocument();
+	NewDoc.Date = CurrentSessionDate();
+	NewDoc.Fill(FillingData);
+	NewDoc.Write(DocumentWriteMode.Posting);
+	
+	DocRef = NewDoc.Ref;
+	DPPointOfSaleServer.AfterPostingDocument(DocRef);
+		
+EndProcedure
+
+Function GetItemListForReturn()
+	Result = New Array;
+	For Each ListItem In ThisObject.Object.ItemList Do
+		NewRecord = New Structure;
+		NewRecord.Insert("Key",       "");
+		NewRecord.Insert("Store",     ListItem.Store);
+		NewRecord.Insert("Item",      ListItem.Item);
+		NewRecord.Insert("ItemKey",   ListItem.ItemKey);
+		NewRecord.Insert("Unit",      ListItem.Unit);
+		NewRecord.Insert("Quantity",  ListItem.Quantity);
+		NewRecord.Insert("Price",     ListItem.Price);
+		NewRecord.Insert("IsService", ListItem.IsService);
+		Result.Add(NewRecord);
+	EndDo;
+	Return Result;
+EndFunction
+
+&AtClient
+Procedure ClearRetailSalesReceipt()
+	If ThisObject.isReturn Then
+		CurrentListRow = Items.ItemList.CurrentData;
+		CurrentListRow.RetailSalesReceipt = Undefined;
+	EndIf;
+EndProcedure

@@ -3897,6 +3897,10 @@
               <segments>RetailSalesReceipt</segments>
             </dataPath>
             <titleLocation>Top</titleLocation>
+            <handlers>
+              <event>OnChange</event>
+              <name>RetailSalesReceiptOnChange</name>
+            </handlers>
             <extendedTooltip>
               <name>RetailSalesReceiptExtendedTooltip</name>
               <id>1179</id>
@@ -3934,6 +3938,7 @@
               </handlers>
               <autoMaxHeight>true</autoMaxHeight>
               <wrap>true</wrap>
+              <clearButton>true</clearButton>
               <chooseType>true</chooseType>
               <typeDomainEnabled>true</typeDomainEnabled>
             </extInfo>

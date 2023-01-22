@@ -249,8 +249,8 @@ Scenario: _1010 create document Production planning
 			And I input "250,000" text in "Q" field of "Productions" table
 			And I click choice button of "Bill of materials" attribute in "Productions" table
 			And I go to line in "List" table
-				| 'Description'                        | 'Item'                               | 'Item key' |
-				| 'Стремянка номер 5 ступенчатая' | 'Стремянка номер 5 ступенчатая' | 'Стремянка номер 5 ступенчатая'  |
+				| 'Description'                   | 'Item'                          | 'Item key'                      |
+				| 'Стремянка номер 5 ступенчатая' | 'Стремянка номер 5 ступенчатая' | 'Стремянка номер 5 ступенчатая' |
 			And I select current line in "List" table		
 			And I finish line editing in "Productions" table
 			And "Productions" table contains lines

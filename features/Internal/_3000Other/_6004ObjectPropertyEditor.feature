@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@ExternalFunctions
+@Other
 
 
 Feature: object property editor

@@ -81,6 +81,19 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <resources uuid="13e47bb0-ac21-4737-bf63-35d8382cb74c">
+    <name>NotDirectCosts</name>
+    <synonym>
+      <key>en</key>
+      <value>Not direct costs</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
   <attributes uuid="51729166-c0ca-4937-a8ab-2b8b560c18ba">
     <name>Document</name>
     <synonym>

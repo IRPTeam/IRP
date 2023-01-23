@@ -809,6 +809,13 @@
         <value>118</value>
       </code>
     </items>
+    <items id="abe7fd0a-27f3-4cb2-9b6d-e4d5eeb1072c">
+      <name>Document_ProductionCostsAllocation</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>119</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

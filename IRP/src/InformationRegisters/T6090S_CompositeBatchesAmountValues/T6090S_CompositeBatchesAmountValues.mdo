@@ -79,6 +79,21 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="2928bf89-89ca-4df1-b9b3-495d5f97eaa2">
+    <name>NotDirectCosts</name>
+    <synonym>
+      <key>en</key>
+      <value>Not direct costs</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <dimensions uuid="d5a9f86c-7983-4e38-b28e-10d344581d62">
     <name>Company</name>
     <synonym>

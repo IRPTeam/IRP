@@ -829,3 +829,26 @@ Function GetInfoBillOfMaterials(BillOfMaterials)
 	Result.Insert("Materials", MaterialsTable);
 	Return Result;
 EndFunction
+
+Function GetDurationOfProductionByBillOfMaterials(BillOfMaterials, ItemKey, Unit, Quantity, CurrentDurationOfProduction) Export
+	If Not ValueIsFilled(BillOfMaterials) Then
+		Return CurrentDurationOfProduction;
+	EndIf;
+			
+	If Not ValueIsFilled(BillOfMaterials.Quantity) Then
+		Return CurrentDurationOfProduction;
+	EndIf;
+	
+	UnitFactor = GetItemInfo.GetUnitFactor(BillOfMaterials.ItemKey, BillOfMaterials.Unit);
+	QuantityInBaseUnit = BillOfMaterials.Quantity * UnitFactor;
+	If Not ValueIsFilled(QuantityInBaseUnit) Then
+		Return CurrentDurationOfProduction;
+	EndIf;
+	DurationInBasisUnit = (BillOfMaterials.Quantity / QuantityInBaseUnit) * BillOfMaterials.DurationOfProduction;
+	
+	UnitFactor = GetItemInfo.GetUnitFactor(ItemKey, Unit);
+	QuantityInBaseUnit = Quantity * UnitFactor;
+	
+	Return QuantityInBaseUnit * DurationInBasisUnit;
+EndFunction
+

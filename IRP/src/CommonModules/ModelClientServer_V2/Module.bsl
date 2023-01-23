@@ -282,7 +282,8 @@ Function GetChain()
 	Chain.Insert("ChangeExpenseTypeByBillOfMaterials"           , GetChainLink("ChangeExpenseTypeByBillOfMaterialsExecute"));
 	
 	Chain.Insert("ChangeBillOfMaterialsByItemKey" , GetChainLink("ChangeBillOfMaterialsByItemKeyExecute"));
-	Chain.Insert("ChangeCostMultiplierRatioByBillOfMaterials" , GetChainLink("ChangeCostMultiplierRatioByBillOfMaterialsExecute"));
+	Chain.Insert("ChangeCostMultiplierRatioByBillOfMaterials"  , GetChainLink("ChangeCostMultiplierRatioByBillOfMaterialsExecute"));
+	Chain.Insert("ChangeDurationOfProductionByBillOfMaterials" , GetChainLink("ChangeDurationOfProductionByBillOfMaterialsExecute"));
 	
 	Chain.Insert("ChangePlanningPeriodByDateAndBusinessUnit" , GetChainLink("ChangePlanningPeriodByDateAndBusinessUnitExecute"));
 	Chain.Insert("ChangeProductionPlanningByPlanningPeriod"  , GetChainLink("ChangeProductionPlanningByPlanningPeriodExecute"));
@@ -1450,6 +1451,22 @@ Function ChangeCostMultiplierRatioByBillOfMaterialsExecute(Options) Export
 	EndIf;
 	
 	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "CostMultiplierRatio");
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_DURATION_OF_PRODUCTION_BY_BILL_OF_MATERIALS		
+
+Function ChangeDurationOfProductionByBillOfMaterialsOptions() Export
+	Return GetChainLinkOptions("BillOfMaterials, ItemKey, Unit, Quantity, CurrentDurationOfProduction");
+EndFunction
+
+Function ChangeDurationOfProductionByBillOfMaterialsExecute(Options) Export
+	Return ManufacturingServer.GetDurationOfProductionByBillOfMaterials(Options.BillOfMaterials, 
+		Options.ItemKey, 
+		Options.Unit,
+		Options.Quantity,
+		Options.CurrentDurationOfProduction);
 EndFunction
 
 #EndRegion

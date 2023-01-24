@@ -310,10 +310,8 @@ Function Strings(Lang) Export
 	Strings.Insert("POS_s4", NStr("en = 'Amounts of payments are incorrect'", Lang));
 	Strings.Insert("POS_s5", NStr("en = 'Select sales person'", Lang));
 	
-	Strings.Insert("POS_Error_ReturnAmountNotFound", NStr(
-		"en = 'Not found available for return %2 pieces of ""%1""'", Lang));
 	Strings.Insert("POS_Error_ReturnAmountLess", NStr(
-		"en = 'There are %2 ""%1"" items, which is more than the available %3 for return in the ""%4"" document.'", Lang));
+		"en = 'There are %2 of ""%1"", which is more than the available %3 for return in document ""%4"" .'", Lang));
 	
 #EndRegion
 

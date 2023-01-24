@@ -161,58 +161,8 @@
     </dataPath>
     <titleLocation>None</titleLocation>
     <items xsi:type="form:FormField">
-      <name>ListSaleDate</name>
-      <id>74</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.SaleDate</segments>
-      </dataPath>
-      <extendedTooltip>
-        <name>ListSaleDateExtendedTooltip</name>
-        <id>76</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>ListSaleDateContextMenu</name>
-        <id>75</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <wrap>true</wrap>
-        <chooseType>true</chooseType>
-        <typeDomainEnabled>true</typeDomainEnabled>
-        <textEdit>true</textEdit>
-      </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
       <name>ListRetailSalesReceipt</name>
-      <id>77</id>
+      <id>95</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -223,7 +173,7 @@
       </dataPath>
       <extendedTooltip>
         <name>ListRetailSalesReceiptExtendedTooltip</name>
-        <id>79</id>
+        <id>97</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -238,7 +188,7 @@
       </extendedTooltip>
       <contextMenu>
         <name>ListRetailSalesReceiptContextMenu</name>
-        <id>78</id>
+        <id>96</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -461,19 +411,19 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>ListSelected</name>
-      <id>92</id>
+      <name>ListSaleDate</name>
+      <id>74</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Selected</segments>
+        <segments>List.SaleDate</segments>
       </dataPath>
       <extendedTooltip>
-        <name>ListSelectedExtendedTooltip</name>
-        <id>94</id>
+        <name>ListSaleDateExtendedTooltip</name>
+        <id>76</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -487,8 +437,8 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>ListSelectedContextMenu</name>
-        <id>93</id>
+        <name>ListSaleDateContextMenu</name>
+        <id>75</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -682,10 +632,6 @@
     <verticalStretch>true</verticalStretch>
     <fileDragMode>AsFileRef</fileDragMode>
     <extInfo xsi:type="form:DynamicListTableExtInfo">
-      <handlers>
-        <event>OnGetDataAtServer</event>
-        <name>ListOnGetDataAtServer</name>
-      </handlers>
       <autoRefreshPeriod>60</autoRefreshPeriod>
       <period>
         <startDate>0001-01-01T00:00:00</startDate>
@@ -807,8 +753,11 @@
 	SalesTable.RetailCustomer AS RetailCustomer,
 	R2050T_RetailSalesTurnovers.ItemKey,
 	SUM(R2050T_RetailSalesTurnovers.QuantityTurnover) AS Quantity,
-	SUM(R2050T_RetailSalesTurnovers.AmountTurnover) AS Amount,
-	SUM(0) AS Selected
+	SUM(R2050T_RetailSalesTurnovers.AmountTurnover * CASE
+		WHEN R2050T_RetailSalesTurnovers.QuantityTurnover &lt; 0
+			THEN -1
+		ELSE 1
+	END) AS Amount
 FROM
 	AccumulationRegister.R2050T_RetailSales.Turnovers AS R2050T_RetailSalesTurnovers
 		LEFT JOIN Document.RetailSalesReceipt AS SalesTable
@@ -896,18 +845,6 @@ HAVING
           </localValue>
         </title>
       </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Selected</dataPath>
-        <field>Selected</field>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Selected</value>
-            </content>
-          </localValue>
-        </title>
-      </fields>
       <parameters>
         <name>BeginOfPeriod</name>
         <title>
@@ -974,10 +911,6 @@ HAVING
     <valueType>
       <types>CatalogRef.ItemKeys</types>
     </valueType>
-  </parameters>
-  <parameters>
-    <name>SelectedItems</name>
-    <valueType/>
   </parameters>
   <commandInterface>
     <navigationPanel/>

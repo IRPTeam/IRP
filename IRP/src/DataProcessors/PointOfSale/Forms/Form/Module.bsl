@@ -906,10 +906,18 @@ Function WriteTransaction(Result)
 	
 	If ThisObject.isReturn Then
 
+		PaymentsTable = Result.Payments.Unload(); // ValueTable
+		For Each PaymentsItem In PaymentsTable Do
+			If PaymentsItem.Amount < 0 Then
+				CashbackAmount = CashbackAmount + PaymentsItem.Amount * (-1);
+			EndIf;
+		EndDo;
+		PaymentsTable.GroupBy("Account,BankTerm,PaymentType,PaymentTypeEnum", "Amount,Commission");
+		
 		If ThisObject.RetailBasis.IsEmpty() Then
-			CreateReturnWithoutBase(Result);
+			CreateReturnWithoutBase(PaymentsTable);
 		Else
-			CreateReturnOnBase(Result);
+			CreateReturnOnBase(PaymentsTable);
 		EndIf;
 		
 	Else
@@ -1426,6 +1434,18 @@ Procedure CreateReturnOnBase(PaymentData)
 	EndDo;
 	
 	ExtractedData = RowIDInfoPrivileged.ExtractData(ResultTable, MainFilter.Ref);
+	
+	isFirst = True;
+	For Each ExtractedDataItem In ExtractedData Do
+		ExtractedDataItem.Payments.Clear();
+		If isFirst Then
+			isFirst = False;
+			For Each PaymentDataItem In PaymentData Do
+				FillPropertyValues(ExtractedDataItem.Payments.Add(), PaymentDataItem);
+			EndDo;
+		EndIf;
+	EndDo;
+	
 	ArrayOfFillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(MainFilter.Ref.Metadata(), ExtractedData);
 	
 	NewDoc = Undefined;
@@ -1460,11 +1480,8 @@ Procedure CreateReturnWithoutBase(PaymentData)
 	FillingData.Insert("ManagerSegment"         , Object.ManagerSegment);
 	FillingData.Insert("UsePartnerTransactions" , Object.UsePartnerTransactions);
 	FillingData.Insert("Workstation"            , Object.Workstation);
-	FillingData.Insert("ConsolidatedRetailSales", Object.ConsolidatedRetailSales);
 	
-	FillingData.Insert("PaymentMethod"          , PaymentData.ReceiptPaymentMethod);
-	FillingData.Insert("Payments"               , PaymentData.Payments);
-	
+	FillingData.Insert("Payments"               , PaymentData);
 	FillingData.Insert("ItemList"               , GetItemListForReturn());
 	
 	NewDoc = Documents.RetailReturnReceipt.CreateDocument();

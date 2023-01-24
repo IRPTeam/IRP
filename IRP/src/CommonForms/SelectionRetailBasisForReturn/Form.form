@@ -211,56 +211,6 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>ListRetailCustomer</name>
-      <id>80</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.RetailCustomer</segments>
-      </dataPath>
-      <extendedTooltip>
-        <name>ListRetailCustomerExtendedTooltip</name>
-        <id>82</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>ListRetailCustomerContextMenu</name>
-        <id>81</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <wrap>true</wrap>
-        <chooseType>true</chooseType>
-        <typeDomainEnabled>true</typeDomainEnabled>
-        <textEdit>true</textEdit>
-      </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
       <name>ListItemKey</name>
       <id>83</id>
       <visible>true</visible>
@@ -411,6 +361,106 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>ListFiscalData</name>
+      <id>98</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.FiscalData</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>ListFiscalDataExtendedTooltip</name>
+        <id>100</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>ListFiscalDataContextMenu</name>
+        <id>99</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>ListRetailCustomer</name>
+      <id>80</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.RetailCustomer</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>ListRetailCustomerExtendedTooltip</name>
+        <id>82</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>ListRetailCustomerContextMenu</name>
+        <id>81</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>ListSaleDate</name>
       <id>74</id>
       <visible>true</visible>
@@ -469,7 +519,6 @@
         <common>true</common>
       </userVisible>
       <horizontalAlign>Left</horizontalAlign>
-      <autoFill>true</autoFill>
     </autoCommandBar>
     <handlers>
       <event>Selection</event>
@@ -757,11 +806,14 @@
 		WHEN R2050T_RetailSalesTurnovers.QuantityTurnover &lt; 0
 			THEN -1
 		ELSE 1
-	END) AS Amount
+	END) AS Amount,
+	MAX(ISNULL(DocumentFiscalStatus.DataPresentation, &quot;&quot;)) AS FiscalData
 FROM
 	AccumulationRegister.R2050T_RetailSales.Turnovers AS R2050T_RetailSalesTurnovers
 		LEFT JOIN Document.RetailSalesReceipt AS SalesTable
 		ON R2050T_RetailSalesTurnovers.RetailSalesReceipt = SalesTable.Ref
+		LEFT JOIN InformationRegister.DocumentFiscalStatus AS DocumentFiscalStatus
+		ON R2050T_RetailSalesTurnovers.RetailSalesReceipt = DocumentFiscalStatus.Document
 GROUP BY
 	R2050T_RetailSalesTurnovers.RetailSalesReceipt,
 	R2050T_RetailSalesTurnovers.ItemKey,
@@ -841,6 +893,18 @@ HAVING
             <content>
               <key>en</key>
               <value>Amount</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>FiscalData</dataPath>
+        <field>FiscalData</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Fiscal data</value>
             </content>
           </localValue>
         </title>

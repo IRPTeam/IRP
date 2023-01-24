@@ -132,12 +132,7 @@ Scenario: _604702 check filling additional attribute and filters in the ObjectPr
 		And I go to line in "FieldsTable" table
 			| 'Field name' | 'Is visible' | 'Type'                       |
 			| 'Article'    | 'Yes'        | 'Additional attribute value' |
-		And I set "Is visible" checkbox in "FieldsTable" table
-		And I finish line editing in "FieldsTable" table
-		And I go to line in "FieldsTable" table
-			| 'Field name'        | 'Is visible' | 'Type'                       |
-			| 'Article Stockings' | 'Yes'        | 'Additional attribute value' |
-		And I set "Is visible" checkbox in "FieldsTable" table
+		And I remove "Is visible" checkbox in "FieldsTable" table
 		And I finish line editing in "FieldsTable" table
 		And in the table "FieldsTable" I click "Apply setting" button
 		And I click the button named "Refresh"

@@ -85,28 +85,28 @@ Scenario: _604702 check filling additional attribute and filters in the ObjectPr
 	* Check filling additional attribute
 		And I click the button named "Refresh"
 		And "PropertiesTable" table contains lines
-			| 'Marked' | 'Is modified' | 'Object'                 | 'Brand' | 'Producer' | 'Article' | 'Country of consignment' | 'Article Stockings' |
-			| 'No'     | 'No'          | 'Dress'                  | 'Rose'  | 'UNIQ'     | ''        | 'Poland'                 | ''                  |
-			| 'No'     | 'No'          | 'Scarf + Dress'          | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'Skittles + Chewing gum' | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'Trousers'               | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'Shirt'                  | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'Boots'                  | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'High shoes'             | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'Box'                    | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'Bound Dress+Shirt'      | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'Bound Dress+Trousers'   | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'Service'                | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'Router'                 | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'Bag'                    | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'Scarf'                  | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'Chewing gum'            | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'Skittles'               | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'Socks'                  | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'Jacket J22001'          | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'Fee'                    | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'Candy Fruit'            | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'Stockings'              | ''      | ''         | ''        | ''                       | ''                  |
+			| 'Marked' | 'Is modified' | 'Object'                 | 'Brand' | 'Producer' | 'Article' | 'Country of consignment' |
+			| 'No'     | 'No'          | 'Dress'                  | 'Rose'  | 'UNIQ'     | ''        | 'Poland'                 |
+			| 'No'     | 'No'          | 'Scarf + Dress'          | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Skittles + Chewing gum' | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Trousers'               | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Shirt'                  | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Boots'                  | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'High shoes'             | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Box'                    | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Bound Dress+Shirt'      | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Bound Dress+Trousers'   | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Service'                | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Router'                 | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Bag'                    | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Scarf'                  | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Chewing gum'            | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Skittles'               | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Socks'                  | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Jacket J22001'          | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Fee'                    | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Candy Fruit'            | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'Stockings'              | ''      | ''         | ''        | ''                       |
 	* Add filter
 		And I click Select button of "Filter" field
 		And I expand current line in "FilterAvailableFields" table
@@ -124,9 +124,9 @@ Scenario: _604702 check filling additional attribute and filters in the ObjectPr
 		And I click the button named "Refresh"
 	* Check filter
 		And "PropertiesTable" table does not contain lines
-			| 'Marked' | 'Is modified' | 'Object'                 | 'Brand' | 'Producer' | 'Article' | 'Country of consignment' | 'Article Stockings' |
-			| 'No'     | 'No'          | 'Boots'                  | ''      | ''         | ''        | ''                       | ''                  |
-			| 'No'     | 'No'          | 'High shoes'             | ''      | ''         | ''        | ''                       | ''                  |			
+			| 'Marked' | 'Is modified' | 'Object'     | 'Brand' | 'Producer' | 'Article' | 'Country of consignment' |
+			| 'No'     | 'No'          | 'Boots'      | ''      | ''         | ''        | ''                       |
+			| 'No'     | 'No'          | 'High shoes' | ''      | ''         | ''        | ''                       |
 	* Select fields
 		And I click "Fields" button
 		And I go to line in "FieldsTable" table
@@ -231,28 +231,28 @@ Scenario: _604706 edit selected elements (ObjectPropertyEditor)
 			| 'ODS'                         |
 		And I click the button named "FormChoose"
 		And "PropertiesTable" table became equal
-			| 'Marked' | 'Is modified' | 'Object'                 | 'Brand' | 'Producer' | 'Article' | 'Country of consignment' | 'Article Stockings' |
-			| 'Yes'    | 'Yes'         | 'Dress'                  | 'Rose'  | 'PZU'      | ''        | 'Poland'                 | ''                  |
-			| 'No'     | 'Yes'         | 'Scarf + Dress'          | ''      | 'ODS'      | ''        | ''                       | ''                  |
-			| 'No'     | 'Yes'         | 'Skittles + Chewing gum' | ''      | 'ODS'      | ''        | ''                       | ''                  |
-			| 'Yes'    | 'Yes'         | 'Trousers'               | 'Rose'  | 'PZU'      | ''        | ''                       | ''                  |
-			| 'Yes'    | 'Yes'         | 'Shirt'                  | 'Rose'  | 'PZU'      | ''        | ''                       | ''                  |
-			| 'No'     | 'Yes'         | 'Boots'                  | ''      | 'ODS'      | ''        | ''                       | ''                  |
-			| 'No'     | 'Yes'         | 'High shoes'             | ''      | 'ODS'      | ''        | ''                       | ''                  |
-			| 'No'     | 'Yes'         | 'Box'                    | ''      | 'ODS'      | ''        | ''                       | ''                  |
-			| 'No'     | 'Yes'         | 'Bound Dress+Shirt'      | ''      | 'ODS'      | ''        | ''                       | ''                  |
-			| 'No'     | 'Yes'         | 'Bound Dress+Trousers'   | ''      | 'ODS'      | ''        | ''                       | ''                  |
-			| 'No'     | 'Yes'         | 'Service'                | ''      | 'ODS'      | ''        | ''                       | ''                  |
-			| 'No'     | 'Yes'         | 'Router'                 | ''      | 'ODS'      | ''        | ''                       | ''                  |
-			| 'No'     | 'Yes'         | 'Bag'                    | ''      | 'ODS'      | ''        | ''                       | ''                  |
-			| 'No'     | 'Yes'         | 'Scarf'                  | ''      | 'ODS'      | ''        | ''                       | ''                  |
-			| 'No'     | 'Yes'         | 'Chewing gum'            | ''      | 'ODS'      | ''        | ''                       | ''                  |
-			| 'No'     | 'Yes'         | 'Skittles'               | ''      | 'ODS'      | ''        | ''                       | ''                  |
-			| 'No'     | 'Yes'         | 'Socks'                  | ''      | 'ODS'      | ''        | ''                       | ''                  |
-			| 'No'     | 'Yes'         | 'Jacket J22001'          | ''      | 'ODS'      | ''        | ''                       | ''                  |
-			| 'No'     | 'Yes'         | 'Fee'                    | ''      | 'ODS'      | ''        | ''                       | ''                  |
-			| 'No'     | 'Yes'         | 'Candy Fruit'            | ''      | 'ODS'      | ''        | ''                       | ''                  |
-			| 'No'     | 'Yes'         | 'Stockings'              | ''      | 'ODS'      | ''        | ''                       | ''                  |
+			| 'Marked' | 'Is modified' | 'Object'                 | 'Brand' | 'Producer' | 'Article' | 'Country of consignment' |
+			| 'Yes'    | 'Yes'         | 'Dress'                  | 'Rose'  | 'PZU'      | ''        | 'Poland'                 |
+			| 'No'     | 'Yes'         | 'Scarf + Dress'          | ''      | 'ODS'      | ''        | ''                       |
+			| 'No'     | 'Yes'         | 'Skittles + Chewing gum' | ''      | 'ODS'      | ''        | ''                       |
+			| 'Yes'    | 'Yes'         | 'Trousers'               | 'Rose'  | 'PZU'      | ''        | ''                       |
+			| 'Yes'    | 'Yes'         | 'Shirt'                  | 'Rose'  | 'PZU'      | ''        | ''                       |
+			| 'No'     | 'Yes'         | 'Boots'                  | ''      | 'ODS'      | ''        | ''                       |
+			| 'No'     | 'Yes'         | 'High shoes'             | ''      | 'ODS'      | ''        | ''                       |
+			| 'No'     | 'Yes'         | 'Box'                    | ''      | 'ODS'      | ''        | ''                       |
+			| 'No'     | 'Yes'         | 'Bound Dress+Shirt'      | ''      | 'ODS'      | ''        | ''                       |
+			| 'No'     | 'Yes'         | 'Bound Dress+Trousers'   | ''      | 'ODS'      | ''        | ''                       |
+			| 'No'     | 'Yes'         | 'Service'                | ''      | 'ODS'      | ''        | ''                       |
+			| 'No'     | 'Yes'         | 'Router'                 | ''      | 'ODS'      | ''        | ''                       |
+			| 'No'     | 'Yes'         | 'Bag'                    | ''      | 'ODS'      | ''        | ''                       |
+			| 'No'     | 'Yes'         | 'Scarf'                  | ''      | 'ODS'      | ''        | ''                       |
+			| 'No'     | 'Yes'         | 'Chewing gum'            | ''      | 'ODS'      | ''        | ''                       |
+			| 'No'     | 'Yes'         | 'Skittles'               | ''      | 'ODS'      | ''        | ''                       |
+			| 'No'     | 'Yes'         | 'Socks'                  | ''      | 'ODS'      | ''        | ''                       |
+			| 'No'     | 'Yes'         | 'Jacket J22001'          | ''      | 'ODS'      | ''        | ''                       |
+			| 'No'     | 'Yes'         | 'Fee'                    | ''      | 'ODS'      | ''        | ''                       |
+			| 'No'     | 'Yes'         | 'Candy Fruit'            | ''      | 'ODS'      | ''        | ''                       |
+			| 'No'     | 'Yes'         | 'Stockings'              | ''      | 'ODS'      | ''        | ''                       |
 		And I click the button named "Save"
 		And I go to line in "PropertiesTable" table
 			| 'Object' |

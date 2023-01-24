@@ -804,6 +804,35 @@ Scenario: _0260138 return advance payment (card)
 		And I close all client application windows				
 						
 
+Scenario: _0260140 create RRR from POS
+	And I close all client application windows
+	* Open POS		
+		And In the command interface I select "Retail" "Point of sale"
+	* Create RRR
+		And I click the button named "Return"
+		Then "Return" window is opened
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I activate "Retail sales receipt" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Retail sales receipt" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Amount' | 'Quantity' |
+			| '1 560'  | '3'        |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click "Search by barcode (F7)" button
+		And I input "2202283739" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I click choice button of the attribute named "ItemListRetailSalesReceipt" in "ItemList" table
+		And I activate "Retail sales receipt" field in "List" table
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click "Payment Return" button
+		And I click the button named "Enter"
+		And I activate field named "ItemListRetailSalesReceipt" in "ItemList" table
+	
 
 							
 Scenario: _0260135 close session and check Consolidated retail sales filling	

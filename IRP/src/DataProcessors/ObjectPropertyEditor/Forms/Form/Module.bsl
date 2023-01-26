@@ -75,6 +75,11 @@ EndProcedure
 //  Item - FormTable - Item
 &AtClient
 Procedure PropertiesTableOnActivateField(Item)
+	
+	If Item.CurrentItem = Undefined Then
+		Return;
+	EndIf;
+	
 	CurrentField = Item.CurrentItem.Name;
 	AutoColor = Items.PropertiesTableObject.TitleBackColor;
 	For Each TableField In Items.PropertiesFields.ChildItems Do
@@ -1222,16 +1227,21 @@ EndProcedure
 Procedure SetPropertyAvailability()
 	
 	FormCash = GetFormCash(ThisObject);
+	
+	For Each ColumndKeyValue In FormCash.ColumnsData Do
+		ColumnName = ColumndKeyValue.Key; // String
+		ColumnDescription = ColumndKeyValue.Value; // See GetFieldDescription
+		Items.Find(ColumnName).Visible = ColumnDescription.isVisible;
+	EndDo;
+	
 	If FormCash.ConstraintName = "" Then
 		Return;
 	EndIf;
 	
-	AllAvailableProperty = New Array; // Array of AnyRef
-	PropertyNames = New Map;
-	
 	ConstraintTable = ThisObject.PropertiesTable.Unload(, "Constraint");
 	ConstraintTable.GroupBy("Constraint");
 	
+	AllAvailableProperty = New Array; // Array of AnyRef
 	For Each ConstraintRecord In ConstraintTable Do
 		ConstraintValues = FormCash.PropertyConstraints.Get(ConstraintRecord.Constraint); // Array of AnyRef
 		If TypeOf(ConstraintValues) = Type("Array") Then
@@ -1243,11 +1253,12 @@ Procedure SetPropertyAvailability()
 		EndIf;
 	EndDo;
 	
+	PropertyNames = New Map;
 	For Each ColumndKeyValue In FormCash.ColumnsData Do
 		ColumnName = ColumndKeyValue.Key; // String
 		ColumnDescription = ColumndKeyValue.Value; // See GetFieldDescription
-		Items.Find(ColumnName).Visible = 
-			ColumnDescription.isVisible And Not (AllAvailableProperty.Find(ColumnDescription.Ref) = Undefined);
+		Items.Find(ColumnName).Visible =  
+			Items.Find(ColumnName).Visible And Not (AllAvailableProperty.Find(ColumnDescription.Ref) = Undefined);
 		PropertyNames.Insert(ColumnDescription.Ref, ColumnName);
 	EndDo;
 
@@ -1457,12 +1468,15 @@ Function GetConstraintTree(ObjectType, ObjectTable, ConstraintRefs)
 	If ObjectType = Type("CatalogRef.ItemKeys") And ObjectTable = "AddAttributes" Then
 		Query = New Query(
 		"SELECT DISTINCT
-		|	ItemTypesAvailableAttributes.Ref AS Ref,
-		|	ItemTypesAvailableAttributes.Attribute AS Value
+		|	ItemTypes.Ref AS Ref,
+		|	ISNULL(ItemTypesAvailableAttributes.Attribute, VALUE(ChartOfCharacteristicTypes.AddAttributeAndProperty.EmptyRef)) AS
+		|		Value
 		|FROM
-		|	Catalog.ItemTypes.AvailableAttributes AS ItemTypesAvailableAttributes
+		|	Catalog.ItemTypes AS ItemTypes
+		|		LEFT JOIN Catalog.ItemTypes.AvailableAttributes AS ItemTypesAvailableAttributes
+		|		ON ItemTypes.Ref = ItemTypesAvailableAttributes.Ref
 		|WHERE
-		|	ItemTypesAvailableAttributes.Ref IN (&Refs)
+		|	ItemTypes.Ref IN (&Refs)
 		|TOTALS
 		|BY
 		|	Ref");

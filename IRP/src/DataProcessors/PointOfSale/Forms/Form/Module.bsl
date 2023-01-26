@@ -485,6 +485,7 @@ Procedure DocReturn(Command)
 	For Each ListItem In ThisObject.Object.ItemList Do
 		 ListItem.RetailBasis = Undefined;
 	EndDo;
+	ThisObject.BasisPayments.Clear();
 	
 	SetVisibilityAvailability(Object, ThisObject);
 	EnabledPaymentButton();
@@ -1428,6 +1429,7 @@ Procedure CreateReturnOnBase(PaymentData)
 		NewDoc = Documents.RetailReturnReceipt.CreateDocument();
 		NewDoc.Date = CurrentSessionDate();
 		NewDoc.Fill(FillingValues);
+		NewDoc.ConsolidatedRetailSales = ThisObject.Object.ConsolidatedRetailSales;
 		NewDoc.Write();
 	EndDo;
 	If Not NewDoc = Undefined Then
@@ -1455,6 +1457,7 @@ Procedure CreateReturnWithoutBase(PaymentData)
 	FillingData.Insert("ManagerSegment"         , Object.ManagerSegment);
 	FillingData.Insert("UsePartnerTransactions" , Object.UsePartnerTransactions);
 	FillingData.Insert("Workstation"            , Object.Workstation);
+	FillingData.Insert("ConsolidatedRetailSales", Object.ConsolidatedRetailSales);
 	
 	FillingData.Insert("Payments"               , PaymentData);
 	FillingData.Insert("ItemList"               , GetItemListForReturn());

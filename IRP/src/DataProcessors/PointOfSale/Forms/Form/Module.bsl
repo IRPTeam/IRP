@@ -1269,7 +1269,7 @@ Procedure FindRetailBasisFinish(Result, RowID) Export
 	
 	ThisObject.BasisPayments.Clear();
 	For Each PaymentItem In RetailBasisData.Payments Do
-		FillPropertyValues(ThisObject.Object.ItemList.Add(), PaymentItem);
+		FillPropertyValues(ThisObject.BasisPayments.Add(), PaymentItem);
 	EndDo;
 	
 	ThisObject.Object.ItemList.Clear();

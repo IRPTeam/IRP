@@ -1,3 +1,4 @@
+
 #Region FormEventHandlers
 
 &AtServer
@@ -197,6 +198,24 @@ Async Procedure Test(Command)
 	EndDo;
 	HardwareClient.TestDevice(Settings);
 EndProcedure
+
+&AtClient
+Procedure Connect(Command)
+	If Parameters.Key.IsEmpty() Then
+		Return;
+	EndIf;
+	HardwareClient.ConnectClientHardware(ThisObject.Object.Ref);
+EndProcedure
+
+
+&AtClient
+Procedure Disconnect(Command)
+	If Parameters.Key.IsEmpty() Then
+		Return;
+	EndIf;
+	HardwareClient.DiconnectClientHardware(ThisObject.Object.Ref);
+EndProcedure
+
 
 #EndRegion
 

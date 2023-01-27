@@ -117,10 +117,20 @@ Async Procedure BeginConnectEquipment(Workstation) Export
 	HardwareList = HardwareServer.GetAllWorkstationHardwareList(Workstation);
 
 	For Each Hardware In HardwareList Do
-		ConnectionNotify = New NotifyDescription("ConnectHardware_End", ThisObject, Hardware);
-		ResultData = Await ConnectHardware(Hardware);
-		ExecuteNotifyProcessing(ConnectionNotify, ResultData);
+		ConnectClientHardware(Hardware);
 	EndDo;
+EndProcedure
+
+Async Procedure ConnectClientHardware(Hardware) Export
+	ConnectionNotify = New NotifyDescription("ConnectHardware_End", ThisObject, Hardware);
+	ResultData = Await ConnectHardware(Hardware);
+	ExecuteNotifyProcessing(ConnectionNotify, ResultData);
+EndProcedure
+
+Async Procedure DiconnectClientHardware(Hardware) Export
+	ConnectionNotify = New NotifyDescription("DisconnectHardware_End", ThisObject, Hardware);
+	ResultData = Await DisconnectHardware(Hardware);
+	ExecuteNotifyProcessing(ConnectionNotify, ResultData);
 EndProcedure
 
 Async Function ConnectHardware(Hardware)
@@ -150,6 +160,42 @@ Async Function ConnectHardware(Hardware)
 				ResultData.Result = Result;
 				ResultData.ErrorDescription = ErrorDescription;
 				ResultData.ConnectParameters = Device.ConnectParameters;
+			EndIf;
+		EndIf;
+	Else
+		If DriverObject <> Undefined Then
+			ErrorDescription = R().Eq_003;
+			ResultData.Result = True;
+			ResultData.ErrorDescription = ErrorDescription;
+			ResultData.ConnectParameters = ConnectedDevice.ConnectParameters;
+		EndIf;
+	EndIf;
+	Return ResultData;
+EndFunction
+
+Async Function DisconnectHardware(Hardware)
+	DriverObject = Undefined;
+	Device = HardwareServer.GetConnectionSettings(Hardware);
+	ResultData = New Structure();
+	ResultData.Insert("Result", False);
+	ResultData.Insert("ErrorDescription", "");
+	ResultData.Insert("ConnectParameters", New Structure());
+	
+	ConnectedDevice = GetConnectedDevice(globalEquipments.ConnectionSettings, Device.Hardware);
+	If Not ConnectedDevice = Undefined Then
+
+		Settings = Await FillDriverParametersSettings(Hardware);
+		
+		If Settings.ConnectedDriver = Undefined Then
+			ErrorDescription = StrTemplate(R().Eq_010, Hardware);
+			ResultData.ErrorDescription = ErrorDescription;
+			ResultData.ConnectParameters = Device.ConnectParameters;
+		Else
+			Result = Settings.ConnectedDriver.DriverObject.Close(Settings.ConnectedDriver.ID);
+			If Result Then
+				ErrorDescription = R().Eq_003;
+				ResultData.Result = Result;
+				ResultData.ErrorDescription = ErrorDescription;
 			EndIf;
 		EndIf;
 	Else
@@ -213,6 +259,14 @@ Procedure ConnectHardware_End(Result, Param) Export
 		Status(StrTemplate(R().Eq_004, Param));
 	Else
 		Status(StrTemplate(R().Eq_005, Param));
+	EndIf;
+EndProcedure
+
+Procedure DisconnectHardware_End(Result, Param) Export
+	If Result.Result Then
+		Status(StrTemplate(R().Eq_008, Param));
+	Else
+		Status(StrTemplate(R().Eq_009, Param));
 	EndIf;
 EndProcedure
 

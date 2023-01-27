@@ -257,8 +257,11 @@ EndProcedure
 
 &AtClient
 Procedure ItemListQuantityOnChange(Item)
+	If ThisObject.isReturn Then
+		RecalculateOffer(Items.ItemList.CurrentData);
+		CheckByRetailBasis();
+	EndIf;
 	DocRetailSalesReceiptClient.ItemListQuantityOnChange(Object, ThisObject, Item);
-	CheckByRetailBasis();
 EndProcedure
 
 &AtClient
@@ -1278,7 +1281,32 @@ Procedure FindRetailBasisFinish(Result, RowID) Export
 		Row = ViewClient_V2.ItemListAddFilledRow(ThisObject.Object, ThisObject, ListItem);
 		Row.Key = ListItem.Key;
 		Row.RetailBasis = ThisObject.RetailBasis;
+		Row.RetailBasisQuantity = ListItem.Quantity;
 	EndDo;
+	
+	ThisObject.Object.SpecialOffers.Clear();
+	For Each OffersItem In RetailBasisData.SpecialOffers Do
+		OfferRow = ThisObject.Object.SpecialOffers.Add();
+		FillPropertyValues(OfferRow, OffersItem);
+		ListItems = ThisObject.Object.ItemList.FindRows(New Structure("Key", OfferRow.Key));
+		If ListItems.Count() > 0 Then
+			Row = ListItems[0];
+			Row.OffersAmount = OfferRow.Amount;
+			Row.RetailBasisOffersAmount = OfferRow.Amount;
+		EndIf;
+	EndDo;
+	If ThisObject.Object.SpecialOffers.Count() Then
+		ViewClient_V2.OffersOnChange(Object, ThisObject);
+	EndIf;
+	
+	ThisObject.Object.SerialLotNumbers.Clear();
+	For Each SerialLotNumberItem In RetailBasisData.SerialLotNumbers Do
+		Row = ThisObject.Object.SerialLotNumbers.Add();
+		Row.Key = SerialLotNumberItem.Key;
+		Row.SerialLotNumber = SerialLotNumberItem.SerialLotNumber;
+		Row.Quantity = SerialLotNumberItem.Quantity;
+	EndDo;
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(ThisObject.Object);
 	
 	EnabledPaymentButton();
 EndProcedure
@@ -1286,18 +1314,11 @@ EndProcedure
 &AtServer
 Function GetRetailBasisData()
 	
-	Resultat = New Structure;
-	
-	BasisPaymentsTable = ThisObject.RetailBasis.Payments.Unload(, "PaymentType,Amount");
-	BasisPaymentsTable.GroupBy("PaymentType", "Amount");
-	BasisPaymentsArray = New Array;
-	For Each TableItem In BasisPaymentsTable Do
-		ItemStructure = New Structure;
-		ItemStructure.Insert("PaymentType", TableItem.PaymentType);
-		ItemStructure.Insert("Amount", TableItem.Amount);
-		BasisPaymentsArray.Add(ItemStructure);
-	EndDo;
-	Resultat.Insert("Payments", BasisPaymentsArray);
+	ItemListArray = New Array;
+	PaymentsArray = New Array;
+	RowIDInfoArray = New Array;
+	SpecialOffersArray = New Array;
+	SerialLotNumbersArray = New Array;
 	
 	ArrayOfBasises = New Array();
 	ArrayOfBasises.Add(ThisObject.RetailBasis);
@@ -1305,82 +1326,90 @@ Function GetRetailBasisData()
 	MainFilter.Insert("Ref", PredefinedValue("Document.RetailReturnReceipt.EmptyRef"));
 	MainFilter.Insert("Basises", ArrayOfBasises); 
 	BasisesTable = RowIDInfoPrivileged.GetBasises(MainFilter.Ref, MainFilter);
-	SaleData = GetSaleData(ThisObject.RetailBasis);
 	
-	ItemListArray = New Array;
-	For Each TableItem In BasisesTable Do
-		ItemStructure = New Structure;
-		ItemStructure.Insert("Key", TableItem.Key);
-		ItemStructure.Insert("Item", TableItem.Item);
-		ItemStructure.Insert("ItemKey", TableItem.ItemKey);
-		ItemStructure.Insert("Unit", TableItem.BasisUnit);
-		ItemStructure.Insert("RowRef", TableItem.RowRef);
-		ItemStructure.Insert("RowID", TableItem.RowID);
-		ItemStructure.Insert("Quantity", TableItem.QuantityInBaseUnit);
+	ResultTable = GetBasisResultTable(BasisesTable);
+	ExtractedData = RowIDInfoPrivileged.ExtractData(ResultTable, MainFilter.Ref);
+	
+	If ExtractedData.Count() > 0 Then
+		DocumentData = ExtractedData[0];
 		
-		SaleRow = SaleData.Find(TableItem.Key, "Key");
-		If Not SaleRow = Undefined Then
-			ItemStructure.Insert("Price", SaleRow.Price);
-			ItemStructure.Insert("PriceType", SaleRow.PriceType);
-		Else
-			ItemStructure.Insert("Price", 0);
-			ItemStructure.Insert("PriceType", Catalogs.PriceTypes.EmptyRef());
-		EndIf;
+		For Each TableItem In DocumentData.Payments Do
+			ItemStructure = New Structure;
+			ItemStructure.Insert("PaymentType", TableItem.PaymentType);
+			ItemStructure.Insert("Amount", TableItem.Amount);
+			PaymentsArray.Add(ItemStructure);
+		EndDo;
 		
-		ItemListArray.Add(ItemStructure);
-	EndDo;
+		For Each TableItem In DocumentData.SerialLotNumbers Do
+			ItemStructure = New Structure;
+			ItemStructure.Insert("Key", TableItem.Key);
+			ItemStructure.Insert("SerialLotNumber", TableItem.SerialLotNumber);
+			ItemStructure.Insert("Quantity", TableItem.Quantity);
+			SerialLotNumbersArray.Add(ItemStructure);
+		EndDo;
+		
+		For Each TableItem In DocumentData.SpecialOffers Do
+			ItemStructure = New Structure;
+			ItemStructure.Insert("Key", TableItem.Key);
+			ItemStructure.Insert("Offer", TableItem.Offer);
+			ItemStructure.Insert("Amount", TableItem.Amount);
+			ItemStructure.Insert("Percent", TableItem.Percent);
+			SpecialOffersArray.Add(ItemStructure);
+		EndDo;
+		
+		For Each TableItem In DocumentData.RowIDInfo Do
+			ItemStructure = New Structure;
+			ItemStructure.Insert("Key", TableItem.Key);
+			ItemStructure.Insert("RowID", TableItem.RowID);
+			ItemStructure.Insert("Quantity", TableItem.Quantity);
+			ItemStructure.Insert("Basis", TableItem.Basis);
+			ItemStructure.Insert("BasisKey", TableItem.BasisKey);
+			ItemStructure.Insert("CurrentStep", TableItem.CurrentStep);
+			ItemStructure.Insert("RowRef", TableItem.RowRef);
+			RowIDInfoArray.Add(ItemStructure);
+		EndDo;
+		
+		For Each TableItem In DocumentData.ItemList Do
+			ItemStructure = New Structure;
+			ItemStructure.Insert("Key", TableItem.Key);
+			ItemStructure.Insert("Item", TableItem.Item);
+			ItemStructure.Insert("ItemKey", TableItem.ItemKey);
+			ItemStructure.Insert("Unit", TableItem.Unit);
+			ItemStructure.Insert("BasisUnit", TableItem.BasisUnit);
+			ItemStructure.Insert("Quantity", TableItem.Quantity);
+			ItemStructure.Insert("QuantityInBaseUnit", TableItem.QuantityInBaseUnit);
+			ItemStructure.Insert("Price", TableItem.Price);
+			ItemStructure.Insert("PriceType", TableItem.PriceType);
+			ItemListArray.Add(ItemStructure);
+		EndDo;
+	EndIf;
+	
+	Resultat = New Structure;
 	Resultat.Insert("ItemList", ItemListArray);
+	Resultat.Insert("Payments", PaymentsArray);
+	Resultat.Insert("RowIDInfo", RowIDInfoArray);
+	Resultat.Insert("SpecialOffers", SpecialOffersArray);
+	Resultat.Insert("SerialLotNumbers", SerialLotNumbersArray);
 	
 	Return Resultat;
 	
 EndFunction
 
 &AtServer
-Function GetSaleData(RetailRef)
-	Query = New Query;
-	Query.Text =
-	"SELECT
-	|	RetailSalesReceiptItemList.Key,
-	|	RetailSalesReceiptItemList.Item,
-	|	RetailSalesReceiptItemList.ItemKey,
-	|	RetailSalesReceiptItemList.Quantity,
-	|	RetailSalesReceiptItemList.Price,
-	|	RetailSalesReceiptItemList.PriceType
-	|FROM
-	|	Document.RetailSalesReceipt.ItemList AS RetailSalesReceiptItemList
-	|WHERE
-	|	RetailSalesReceiptItemList.Ref = &Ref";
-	Query.SetParameter("Ref", RetailRef);
-	Return Query.Execute().Unload();
-EndFunction
-	
-&AtServer
-Procedure CreateReturnOnBase(PaymentData)
-
-	ReturnData = ThisObject.Object.ItemList.Unload();
-	ReturnData.Columns.RetailBasis.Name = "Basis";
-	
+Function GetBasisTable(RetailBasis)
 	ArrayOfBasises = New Array();
-	ArrayOfBasises.Add(ThisObject.RetailBasis);
+	ArrayOfBasises.Add(RetailBasis);
 	
 	MainFilter = New Structure();
 	MainFilter.Insert("Ref", PredefinedValue("Document.RetailReturnReceipt.EmptyRef"));
-	MainFilter.Insert("Basises", ArrayOfBasises); 
-	BasisesTable = RowIDInfoPrivileged.GetBasises(MainFilter.Ref, MainFilter);
-	
-	ClearArray = New Array;
-	For Each BasisesTableItem In BasisesTable Do
-		ReturnDataItem = ReturnData.Find(BasisesTableItem.Key, "Key");
-		If Not ReturnDataItem = Undefined And ReturnDataItem.QuantityInBaseUnit > 0 Then
-			BasisesTableItem.QuantityInBaseUnit = ReturnDataItem.QuantityInBaseUnit;
-		Else
-			ClearArray.Add(BasisesTableItem);
-		EndIf;
-	EndDo;
-	For Each ClearItem In ClearArray Do
-		BasisesTable.Delete(ClearItem);
-	EndDo;
-	
+	MainFilter.Insert("Basises", ArrayOfBasises);
+	 
+	Return RowIDInfoPrivileged.GetBasises(MainFilter.Ref, MainFilter);
+EndFunction
+
+&AtServer
+Function GetBasisResultTable(Val BasisesTable)
+
 	BasisesTypes = New Array();
 	For Each Doc In Metadata.Documents Do
 		If Doc.TabularSections.Find("RowIDInfo") <> Undefined Then
@@ -1409,20 +1438,49 @@ Procedure CreateReturnOnBase(PaymentData)
 		NewRow.Unit = Row.BasisUnit;
 	EndDo;
 	
-	ExtractedData = RowIDInfoPrivileged.ExtractData(ResultTable, MainFilter.Ref);
+	Return ResultTable;
+	
+EndFunction
+
+&AtServer
+Procedure CreateReturnOnBase(PaymentData)
+
+	BasisesTable = GetBasisTable(ThisObject.RetailBasis);
+	
+	ClearArray = New Array;
+	For Each BasisesTableItem In BasisesTable Do
+		ReturnDataItems = ThisObject.Object.ItemList.FindRows(New Structure("Key", BasisesTableItem.Key));
+		If ReturnDataItems.Count() > 0 And ReturnDataItems[0].QuantityInBaseUnit > 0 Then
+			BasisesTableItem.QuantityInBaseUnit = ReturnDataItems[0].QuantityInBaseUnit;
+		Else
+			ClearArray.Add(BasisesTableItem);
+		EndIf;
+	EndDo;
+	For Each ClearItem In ClearArray Do
+		BasisesTable.Delete(ClearItem);
+	EndDo;
+	
+	ResultTable = GetBasisResultTable(BasisesTable);
+	ExtractedData = RowIDInfoPrivileged.ExtractData(
+		ResultTable, PredefinedValue("Document.RetailReturnReceipt.EmptyRef"));
 	
 	isFirst = True;
 	For Each ExtractedDataItem In ExtractedData Do
 		ExtractedDataItem.Payments.Clear();
+		ExtractedDataItem.SerialLotNumbers.Clear();
 		If isFirst Then
 			isFirst = False;
 			For Each PaymentDataItem In PaymentData Do
 				FillPropertyValues(ExtractedDataItem.Payments.Add(), PaymentDataItem);
 			EndDo;
+			For Each SerialItem In ThisObject.Object.SerialLotNumbers Do
+				FillPropertyValues(ExtractedDataItem.SerialLotNumbers.Add(), SerialItem);
+			EndDo;
 		EndIf;
 	EndDo;
 	
-	ArrayOfFillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(MainFilter.Ref.Metadata(), ExtractedData);
+	ArrayOfFillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(
+		PredefinedValue("Document.RetailReturnReceipt.EmptyRef").Metadata(), ExtractedData);
 	
 	NewDoc = Undefined;
 	For Each FillingValues In ArrayOfFillingValues Do
@@ -1462,6 +1520,18 @@ Procedure CreateReturnWithoutBase(PaymentData)
 	FillingData.Insert("Payments"               , PaymentData);
 	FillingData.Insert("ItemList"               , GetItemListForReturn());
 	
+	If Object.SerialLotNumbers.Count() > 0 Then
+		SerialLotNumbersArray = New Array;
+		For Each SerialItem In Object.SerialLotNumbers Do
+			NewRecord = New Structure;
+			NewRecord.Insert("Key", SerialItem.Key);
+			NewRecord.Insert("SerialLotNumber", SerialItem.SerialLotNumber);
+			NewRecord.Insert("Quantity", SerialItem.Quantity);
+			SerialLotNumbersArray.Add(NewRecord);
+		EndDo;
+		FillingData.Insert("SerialLotNumbers", SerialLotNumbersArray);
+	EndIf;
+	
 	NewDoc = Documents.RetailReturnReceipt.CreateDocument();
 	NewDoc.Date = CurrentSessionDate();
 	NewDoc.Fill(FillingData);
@@ -1476,14 +1546,18 @@ Function GetItemListForReturn()
 	Result = New Array;
 	For Each ListItem In ThisObject.Object.ItemList Do
 		NewRecord = New Structure;
-		NewRecord.Insert("Key",       "");
-		NewRecord.Insert("Store",     ListItem.Store);
-		NewRecord.Insert("Item",      ListItem.Item);
-		NewRecord.Insert("ItemKey",   ListItem.ItemKey);
-		NewRecord.Insert("Unit",      ListItem.Unit);
-		NewRecord.Insert("Quantity",  ListItem.Quantity);
-		NewRecord.Insert("Price",     ListItem.Price);
-		NewRecord.Insert("IsService", ListItem.IsService);
+		NewRecord.Insert("Key",          ListItem.Key);
+		NewRecord.Insert("Store",        ListItem.Store);
+		NewRecord.Insert("IsService",    ListItem.IsService);
+		NewRecord.Insert("Item",         ListItem.Item);
+		NewRecord.Insert("ItemKey",      ListItem.ItemKey);
+		NewRecord.Insert("Unit",         ListItem.Unit);
+		NewRecord.Insert("Quantity",     ListItem.Quantity);
+		NewRecord.Insert("Price",        ListItem.Price);
+		NewRecord.Insert("OffersAmount", ListItem.OffersAmount);
+		NewRecord.Insert("TaxAmount",    ListItem.TaxAmount);
+		NewRecord.Insert("NetAmount",    ListItem.NetAmount);
+		NewRecord.Insert("TotalAmount",  ListItem.TotalAmount);
 		Result.Add(NewRecord);
 	EndDo;
 	Return Result;
@@ -1496,15 +1570,23 @@ Procedure CheckByRetailBasis()
 	EndIf;
 EndProcedure
 
+&AtClient
+Procedure RecalculateOffer(ListItem)
+	ListItem.OffersAmount = 0;
+	If ListItem.RetailBasisOffersAmount <> 0 And ListItem.Quantity <> 0 Then
+		ListItem.OffersAmount = 
+			ListItem.RetailBasisOffersAmount * ListItem.Quantity / ListItem.RetailBasisQuantity;
+	EndIf;
+	OfferRow = ThisObject.Object.SpecialOffers.FindRows(New Structure("Key", ListItem.Key));
+	If OfferRow.Count() > 0 Then
+		OfferRow[0].Amount = ListItem.OffersAmount;
+	EndIf;  
+EndProcedure
+
 &AtServer
 Procedure CheckByRetailBasisAtServer()
 	
-	ArrayOfBasises = New Array();
-	ArrayOfBasises.Add(ThisObject.RetailBasis);
-	MainFilter = New Structure();
-	MainFilter.Insert("Ref", PredefinedValue("Document.RetailReturnReceipt.EmptyRef"));
-	MainFilter.Insert("Basises", ArrayOfBasises); 
-	BasisesTable = RowIDInfoPrivileged.GetBasises(MainFilter.Ref, MainFilter);
+	BasisesTable = GetBasisTable(ThisObject.RetailBasis);
 		
 	For Each ListItem In ThisObject.Object.ItemList Do
 		NeedQuantity = ListItem.QuantityInBaseUnit;

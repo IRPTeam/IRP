@@ -5807,6 +5807,40 @@
           <common>true</common>
         </edit>
       </columns>
+      <columns>
+        <name>RetailBasisQuantity</name>
+        <title>
+          <key>en</key>
+          <value>Retail basis quantity</value>
+        </title>
+        <id>195</id>
+        <valueType>
+          <types>DefinedType.typeQuantity</types>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
+      <columns>
+        <name>RetailBasisOffersAmount</name>
+        <title>
+          <key>en</key>
+          <value>Retail basis offers amount</value>
+        </title>
+        <id>196</id>
+        <valueType>
+          <types>DefinedType.typeAmount</types>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
     </additionalColumns>
   </attributes>
   <attributes>

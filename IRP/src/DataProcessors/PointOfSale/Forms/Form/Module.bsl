@@ -1285,15 +1285,10 @@ Procedure FindRetailBasisFinish(Result, RowID) Export
 	EndDo;
 	
 	ThisObject.Object.SpecialOffers.Clear();
+	ThisObject.RetailBasisSpecialOffers.Clear();
 	For Each OffersItem In RetailBasisData.SpecialOffers Do
-		OfferRow = ThisObject.Object.SpecialOffers.Add();
-		FillPropertyValues(OfferRow, OffersItem);
-		ListItems = ThisObject.Object.ItemList.FindRows(New Structure("Key", OfferRow.Key));
-		If ListItems.Count() > 0 Then
-			Row = ListItems[0];
-			Row.OffersAmount = OfferRow.Amount;
-			Row.RetailBasisOffersAmount = OfferRow.Amount;
-		EndIf;
+		FillPropertyValues(ThisObject.Object.SpecialOffers.Add(), OffersItem);
+		FillPropertyValues(ThisObject.RetailBasisSpecialOffers.Add(), OffersItem);
 	EndDo;
 	If ThisObject.Object.SpecialOffers.Count() Then
 		ViewClient_V2.OffersOnChange(Object, ThisObject);
@@ -1572,15 +1567,22 @@ EndProcedure
 
 &AtClient
 Procedure RecalculateOffer(ListItem)
-	ListItem.OffersAmount = 0;
-	If ListItem.RetailBasisOffersAmount <> 0 And ListItem.Quantity <> 0 Then
-		ListItem.OffersAmount = 
-			ListItem.RetailBasisOffersAmount * ListItem.Quantity / ListItem.RetailBasisQuantity;
+	If ListItem.RetailBasisQuantity = 0 Then
+		Return;
 	EndIf;
-	OfferRow = ThisObject.Object.SpecialOffers.FindRows(New Structure("Key", ListItem.Key));
-	If OfferRow.Count() > 0 Then
-		OfferRow[0].Amount = ListItem.OffersAmount;
-	EndIf;  
+	
+	ListItem.OffersAmount = 0;
+	OfferRows = ThisObject.Object.SpecialOffers.FindRows(New Structure("Key", ListItem.Key));
+	For Each OfferRow In OfferRows Do
+		RetailBasisAmount = 0;
+		BasisOffers = ThisObject.RetailBasisSpecialOffers.FindRows(
+			New Structure("Key, Offer", OfferRow.Key, OfferRow.Offer));
+		For Each BasisOffer In BasisOffers Do
+			RetailBasisAmount = RetailBasisAmount + BasisOffer.Amount; 
+		EndDo;
+		OfferRow.Amount = RetailBasisAmount * ListItem.Quantity / ListItem.RetailBasisQuantity;
+		ListItem.OffersAmount = ListItem.OffersAmount + OfferRow.Amount; 
+	EndDo;
 EndProcedure
 
 &AtServer

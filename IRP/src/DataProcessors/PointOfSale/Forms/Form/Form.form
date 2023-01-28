@@ -5824,23 +5824,11 @@
           <common>true</common>
         </edit>
       </columns>
-      <columns>
-        <name>RetailBasisOffersAmount</name>
-        <title>
-          <key>en</key>
-          <value>Retail basis offers amount</value>
-        </title>
-        <id>196</id>
-        <valueType>
-          <types>DefinedType.typeAmount</types>
-        </valueType>
-        <view>
-          <common>true</common>
-        </view>
-        <edit>
-          <common>true</common>
-        </edit>
-      </columns>
+    </additionalColumns>
+    <additionalColumns>
+      <tablePath xsi:type="form:DataPath">
+        <segments>Object.SpecialOffers</segments>
+      </tablePath>
     </additionalColumns>
   </attributes>
   <attributes>
@@ -6542,6 +6530,91 @@
       <id>194</id>
       <valueType>
         <types>DefinedType.typeAmount</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+  </attributes>
+  <attributes>
+    <name>RetailBasisSpecialOffers</name>
+    <title>
+      <key>en</key>
+      <value>Retail basis special offers</value>
+    </title>
+    <id>198</id>
+    <valueType>
+      <types>ValueTable</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <columns>
+      <name>Key</name>
+      <title>
+        <key>en</key>
+        <value>Key</value>
+      </title>
+      <id>199</id>
+      <valueType>
+        <types>DefinedType.typeRowID</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Offer</name>
+      <title>
+        <key>en</key>
+        <value>Offer</value>
+      </title>
+      <id>200</id>
+      <valueType>
+        <types>CatalogRef.SpecialOffers</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Amount</name>
+      <title>
+        <key>en</key>
+        <value>Amount</value>
+      </title>
+      <id>201</id>
+      <valueType>
+        <types>DefinedType.typeAmount</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Percent</name>
+      <title>
+        <key>en</key>
+        <value>Percent</value>
+      </title>
+      <id>202</id>
+      <valueType>
+        <types>DefinedType.typePercent</types>
       </valueType>
       <view>
         <common>true</common>

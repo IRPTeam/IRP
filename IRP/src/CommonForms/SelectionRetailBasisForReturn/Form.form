@@ -1,8 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:core_1="http://g5.1c.ru/v8/dt/data-composition-system/core" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema" xmlns:settings="http://g5.1c.ru/v8/dt/data-composition-system/settings">
   <items xsi:type="form:FormGroup">
     <name>Header</name>
     <id>1</id>
+    <items xsi:type="form:FormField">
+      <name>FiscalNumber</name>
+      <id>101</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>FiscalNumber</segments>
+      </dataPath>
+      <handlers>
+        <event>OnChange</event>
+        <name>FiscalNumberOnChange</name>
+      </handlers>
+      <extendedTooltip>
+        <name>FiscalNumberExtendedTooltip</name>
+        <id>103</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>FiscalNumberContextMenu</name>
+        <id>102</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <clearButton>true</clearButton>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
     <items xsi:type="form:FormField">
       <name>RetailCustomer</name>
       <id>3</id>
@@ -211,19 +266,19 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>ListItemKey</name>
-      <id>83</id>
+      <name>ListDocumentAmount</name>
+      <id>104</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.ItemKey</segments>
+        <segments>List.DocumentAmount</segments>
       </dataPath>
       <extendedTooltip>
-        <name>ListItemKeyExtendedTooltip</name>
-        <id>85</id>
+        <name>ListDocumentAmountExtendedTooltip</name>
+        <id>106</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -237,108 +292,8 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>ListItemKeyContextMenu</name>
-        <id>84</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <wrap>true</wrap>
-        <chooseType>true</chooseType>
-        <typeDomainEnabled>true</typeDomainEnabled>
-        <textEdit>true</textEdit>
-      </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
-      <name>ListQuantity</name>
-      <id>86</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Quantity</segments>
-      </dataPath>
-      <extendedTooltip>
-        <name>ListQuantityExtendedTooltip</name>
-        <id>88</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>ListQuantityContextMenu</name>
-        <id>87</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <wrap>true</wrap>
-        <chooseType>true</chooseType>
-        <typeDomainEnabled>true</typeDomainEnabled>
-        <textEdit>true</textEdit>
-      </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
-      <name>ListAmount</name>
-      <id>89</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Amount</segments>
-      </dataPath>
-      <extendedTooltip>
-        <name>ListAmountExtendedTooltip</name>
-        <id>91</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>ListAmountContextMenu</name>
-        <id>90</id>
+        <name>ListDocumentAmountContextMenu</name>
+        <id>105</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -800,14 +755,8 @@
 	R2050T_RetailSalesTurnovers.RetailSalesReceipt,
 	SalesTable.Date AS SaleDate,
 	SalesTable.RetailCustomer AS RetailCustomer,
-	R2050T_RetailSalesTurnovers.ItemKey,
-	SUM(R2050T_RetailSalesTurnovers.QuantityTurnover) AS Quantity,
-	SUM(R2050T_RetailSalesTurnovers.AmountTurnover * CASE
-		WHEN R2050T_RetailSalesTurnovers.QuantityTurnover &lt; 0
-			THEN -1
-		ELSE 1
-	END) AS Amount,
-	MAX(ISNULL(DocumentFiscalStatus.DataPresentation, &quot;&quot;)) AS FiscalData
+	MAX(ISNULL(DocumentFiscalStatus.DataPresentation, &quot;&quot;)) AS FiscalData,
+	SalesTable.DocumentAmount
 FROM
 	AccumulationRegister.R2050T_RetailSales.Turnovers AS R2050T_RetailSalesTurnovers
 		LEFT JOIN Document.RetailSalesReceipt AS SalesTable
@@ -816,9 +765,9 @@ FROM
 		ON R2050T_RetailSalesTurnovers.RetailSalesReceipt = DocumentFiscalStatus.Document
 GROUP BY
 	R2050T_RetailSalesTurnovers.RetailSalesReceipt,
-	R2050T_RetailSalesTurnovers.ItemKey,
 	SalesTable.Date,
-	SalesTable.RetailCustomer
+	SalesTable.RetailCustomer,
+	SalesTable.DocumentAmount
 HAVING
 	SUM(R2050T_RetailSalesTurnovers.QuantityTurnover) > 0</queryText>
       <autoFillAvailableFields>true</autoFillAvailableFields>
@@ -832,18 +781,6 @@ HAVING
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>ItemKey</dataPath>
         <field>ItemKey</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Quantity</dataPath>
-        <field>Quantity</field>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Quantity</value>
-            </content>
-          </localValue>
-        </title>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Company</dataPath>
@@ -886,18 +823,6 @@ HAVING
         <field>RetailCustomer</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Amount</dataPath>
-        <field>Amount</field>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Amount</value>
-            </content>
-          </localValue>
-        </title>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>FiscalData</dataPath>
         <field>FiscalData</field>
         <title>
@@ -908,6 +833,23 @@ HAVING
             </content>
           </localValue>
         </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>DocumentAmount</dataPath>
+        <field>DocumentAmount</field>
+        <appearance>
+          <items xsi:type="settings:SettingsParameterValue">
+            <parameter>
+              <value>Format</value>
+            </parameter>
+            <values xsi:type="core_1:LocalString">
+              <content>
+                <key>en</key>
+                <value>ND=15; NFD=2; NZ=</value>
+              </content>
+            </values>
+          </items>
+        </appearance>
       </fields>
       <parameters>
         <name>BeginOfPeriod</name>
@@ -940,8 +882,25 @@ HAVING
         </valueType>
       </parameters>
       <keyField>RetailSalesReceipt</keyField>
-      <keyField>ItemKey</keyField>
     </extInfo>
+  </attributes>
+  <attributes>
+    <name>FiscalNumber</name>
+    <title>
+      <key>en</key>
+      <value>Fiscal number</value>
+    </title>
+    <id>4</id>
+    <valueType>
+      <types>String</types>
+      <stringQualifiers/>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
   </attributes>
   <formCommands>
     <name>Choose</name>

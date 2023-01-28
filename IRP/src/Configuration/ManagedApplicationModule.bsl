@@ -1,6 +1,6 @@
 // @strict-types
 
-Var globalEquipments Export; // see NewEquipments
+Var globalEquipments Export; // see HardwareClient.NewEquipments
 Var globalWorkstation Export; // CatalogRef.Workstations
 
 Procedure OnStart()
@@ -50,7 +50,7 @@ Procedure BeforeStart(Cancel)
 		Raise AreaStatus.Status;
 	EndIf;
 
-	globalEquipments = NewEquipments();
+	globalEquipments = HardwareClient.NewEquipments();
 
 EndProcedure
 
@@ -67,18 +67,5 @@ Procedure ExternEventProcessing(Source, Event, Data)
 		EndIf;
 	EndIf;
 EndProcedure
-
-// New equipments.
-// 
-// Returns:
-//  Structure - New equipments:
-// * Drivers - Map -
-// * ConnectionSettings - Array of CatalogRef.IntegrationSettings -
-Function NewEquipments()
-	globalEquipments = New Structure();
-	globalEquipments.Insert("Drivers", New Map());
-	globalEquipments.Insert("ConnectionSettings", New Array());
-	Return globalEquipments;
-EndFunction
 
 #EndRegion

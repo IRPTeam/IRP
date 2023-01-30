@@ -54,6 +54,11 @@ Scenario: _0260100 preparation (retail)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog Users objects
+		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers, with batch balance details)
 		When update ItemKeys
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
@@ -99,6 +104,16 @@ Scenario: _0260100 preparation (retail)
 			| "Documents.ConsolidatedRetailSales.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document Cash receipt (Customer advance)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashReceipt.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |		
@@ -111,6 +126,9 @@ Scenario: _0260100 preparation (retail)
 			| "Documents.MoneyTransfer.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.MoneyTransfer.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document MoneyTransfer objects (for cash out)
+		And I execute 1C:Enterprise script at server
+			| "Documents.MoneyTransfer.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 		And I go to line in "List" table
 			| 'Number' |
@@ -804,36 +822,318 @@ Scenario: _0260138 return advance payment (card)
 		And I close all client application windows				
 						
 
-Scenario: _0260140 create RRR from POS
+Scenario: _0260139 create RRR from POS (first select basis document)
 	And I close all client application windows
-	* Open POS		
+	* Open POS
 		And In the command interface I select "Retail" "Point of sale"
-	* Create RRR
 		And I click the button named "Return"
-		Then "Return" window is opened
+	* Select basis document for retail return
+		And I click Select button of "Retail sales receipt (basis)" field
+		And I go to line in "List" table
+			| 'Retail sales receipt'                             |
+			| 'Retail sales receipt 3 dated 21.08.2022 10:00:00' |
+		And I select current line in "List" table
+	* Check payments type
+		And "BasisPayments" table became equal
+			| 'Payment type' | 'Amount'   |
+			| 'Cash'         | '1 040,00' |
+			| 'Card 01'      | '550,00'   |		
+	* Check filling items from retail sales receipt
+		And "ItemList" table became equal
+			| 'Item'               | 'Sales person' | 'Item key' | 'Serials'    | 'Price'  | 'Quantity' | 'Offers' | 'Total'    |
+			| 'Dress'              | ''             | 'XS/Blue'  | ''           | '520,00' | '2,000'    | ''       | '1 040,00' |
+			| 'Shirt'              | ''             | '38/Black' | ''           | '350,00' | '1,000'    | ''       | '350,00'   |
+			| 'Product 1 with SLN' | ''             | 'ODS'      | '9090098908' | '100,00' | '2,000'    | ''       | '200,00'   |
+	* Delete unnecessary lines and change quantity
+		And I go to line in "ItemList" table
+			| 'Item'               |
+			| 'Shirt'              |
+		And I delete a line in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Price'  | 'Quantity' | 'Total'    |
+			| 'Dress' | 'XS/Blue'  | '520,00' | '2,000'    | '1 040,00' |
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Post return
+		And I click "Payment Return" button
+		And I click the button named "Enter"
+	* Check return document
+		And I close current window
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Amount'              |
+			| '720,00'              |		
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "RetailCustomer" became equal to "Daniel Smith"
+		Then the form attribute named "ConsolidatedRetailSales" became equal to "$$ConsolidatedRetailSales2$$"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table became equal
+			| '#' | 'Retail sales receipt'                             | 'Item'               | 'Sales person' | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Return reason' | 'Source of origins' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' | 'VAT' | 'Offers amount' | 'Landed cost' |
+			| '1' | 'Retail sales receipt 3 dated 21.08.2022 10:00:00' | 'Dress'              | ''             | 'XS/Blue'  | 'Shop 02'            | 'No'                 | ''                   | 'pcs'  | '79,32'      | ''              | ''                  | '1,000'    | '520,00' | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            |
+			| '2' | 'Retail sales receipt 3 dated 21.08.2022 10:00:00' | 'Product 1 with SLN' | ''             | 'ODS'      | 'Shop 02'            | 'No'                 | '9090098908'         | 'pcs'  | '30,51'      | ''              | ''                  | '2,000'    | '100,00' | '169,49'     | '200,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            |
+		
+		Then the number of "SpecialOffers" table lines is "равно" 0
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Postponed payment' | 'Bank term' | 'Account'            | 'Percent' |
+			| '1' | '720,00' | ''           | 'Cash'         | ''                 | 'No'                | ''          | 'Pos cash account 1' | ''        |
+		
+		And "SerialLotNumbersTree" table became equal
+			| 'Item'               | 'Item key' | 'Serial lot number' | 'Item key quantity' | 'Quantity' |
+			| 'Product 1 with SLN' | 'ODS'      | ''                  | '2,000'             | '2,000'    |
+			| ''                   | ''         | '9090098908'        | ''                  | '2,000'    |
+		
+		Then the form attribute named "Workstation" became equal to "Workstation 01"
+		Then the form attribute named "Branch" became equal to "Shop 02"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "610,17"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "109,83"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "720,00"
+	And I close all client application windows
+	
+			
+Scenario: _0260139 create RRR from POS (first select basis document, different workstation)	
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+		And I click the button named "Return"
+	* Select basis document for retail return
+		And I click Select button of "Retail sales receipt (basis)" field
+		And I go to line in "List" table
+			| 'Retail sales receipt'                             |
+			| 'Retail sales receipt 6 dated 21.08.2022 11:21:19' |
+		And I select current line in "List" table
+	* Check payment info
+		And "BasisPayments" table became equal
+			| 'Payment type' | 'Amount' |
+			| 'Card 01'      | '750,00' |
+	* Check item tab
+		And "ItemList" table became equal
+			| 'Item'               | 'Sales person' | 'Item key' | 'Serials'        | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Shirt'              | ''             | '38/Black' | ''               | '350,00' | '1,000'    | ''       | '350,00' |
+			| 'Product 1 with SLN' | ''             | 'ODS'      | '9090098908'     | '100,00' | '2,000'    | ''       | '200,00' |
+			| 'Product 3 with SLN' | ''             | 'UNIQ'     | '09987897977891' | '200,00' | '1,000'    | ''       | '200,00' |
+	* Post return
+		And I click "Payment Return" button		
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_1"
+		And I click the button named "Enter"
+	* Check return document
+		And I close current window
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Amount'              |
+			| '750,00'              |		
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "ConsolidatedRetailSales" became equal to "$$ConsolidatedRetailSales2$$"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table became equal
+			| '#' | 'Retail sales receipt'                             | 'Item'               | 'Sales person' | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Return reason' | 'Source of origins' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' | 'VAT' | 'Offers amount' | 'Landed cost' |
+			| '1' | 'Retail sales receipt 6 dated 21.08.2022 11:21:19' | 'Shirt'              | ''             | '38/Black' | 'Shop 02'            | 'No'                 | ''                   | 'pcs'  | '53,39'      | ''              | ''                  | '1,000'    | '350,00' | '296,61'     | '350,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            |
+			| '2' | 'Retail sales receipt 6 dated 21.08.2022 11:21:19' | 'Product 1 with SLN' | ''             | 'ODS'      | 'Shop 02'            | 'No'                 | '9090098908'         | 'pcs'  | '30,51'      | ''              | ''                  | '2,000'    | '100,00' | '169,49'     | '200,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            |
+			| '3' | 'Retail sales receipt 6 dated 21.08.2022 11:21:19' | 'Product 3 with SLN' | ''             | 'UNIQ'     | 'Shop 02'            | 'No'                 | '09987897977891'     | 'pcs'  | '30,51'      | ''              | ''                  | '1,000'    | '200,00' | '169,49'     | '200,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            |
+		
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Postponed payment' | 'Bank term'    | 'Account'      | 'Percent' |
+			| '1' | '750,00' | ''           | 'Card 01'      | ''                 | 'No'                | 'Bank term 02' | 'Transit Main' | ''        |
+		
+		And "SerialLotNumbersTree" table became equal
+			| 'Item'               | 'Item key' | 'Serial lot number' | 'Item key quantity' | 'Quantity' |
+			| 'Product 1 with SLN' | 'ODS'      | ''                  | '2,000'             | '2,000'    |
+			| ''                   | ''         | '9090098908'        | ''                  | '2,000'    |
+			| 'Product 3 with SLN' | 'UNIQ'     | ''                  | '1,000'             | '1,000'    |
+			| ''                   | ''         | '09987897977891'    | ''                  | '1,000'    |
+		
+		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+		Then the form attribute named "Workstation" became equal to "Workstation 01"
+		Then the form attribute named "Branch" became equal to "Shop 01"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "635,59"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "114,41"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "750,00"
+	And I close all client application windows
+	
+Scenario: _0260140 create RRR from POS (add items than select basis document)	
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Select items
+		And I move to the tab named "ButtonPage"
 		And I click "Search by barcode (F7)" button
 		And I input "2202283705" text in the field named "InputFld"
 		And I click the button named "OK"
-		And I activate "Retail sales receipt" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I click choice button of "Retail sales receipt" attribute in "ItemList" table
+		And I click "Show items" button
+		And I expand current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| 'Item'           |
+			| 'Dress, L/Green' |
+		And I select current line in "ItemsPickup" table
+		And I move to the tab named "ButtonPage"
+		And I click the button named "Return"		
+		And I click Select button of "Retail sales receipt (basis)" field
+	* Select basis document
 		And I go to line in "List" table
-			| 'Amount' | 'Quantity' |
-			| '1 560'  | '3'        |
+			| 'Retail sales receipt'      |
+			| '$$RetailSalesReceiptNew$$' |
 		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I click "Search by barcode (F7)" button
-		And I input "2202283739" text in the field named "InputFld"
-		And I click the button named "OK"
-		And I click choice button of the attribute named "ItemListRetailSalesReceipt" in "ItemList" table
-		And I activate "Retail sales receipt" field in "List" table
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I click "Payment Return" button
+	* Check item and payment tabs
+		And "ItemList" table became equal
+			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'    |
+			| 'Dress' | ''             | 'XS/Blue'  | ''        | '520,00' | '2,000'    | ''       | '1 040,00' |
+		And "BasisPayments" table became equal
+			| 'Payment type' | 'Amount'   |
+			| 'Card 02'      | '1 590,00' |
+	* Post return
+		And I click "Payment Return" button		
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_1"
 		And I click the button named "Enter"
-		And I activate field named "ItemListRetailSalesReceipt" in "ItemList" table
+	* Check return document
+		And I close current window
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Amount'              |
+			| '1 040,00'            |		
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "RetailCustomer" became equal to ""
+		Then the form attribute named "ConsolidatedRetailSales" became equal to "$$ConsolidatedRetailSales2$$"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table became equal
+			| '#' | 'Retail sales receipt'      | 'Item'  | 'Sales person' | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Return reason' | 'Source of origins' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' | 'VAT' | 'Offers amount' | 'Landed cost' |
+			| '1' | '$$RetailSalesReceiptNew$$' | 'Dress' | ''             | 'XS/Blue'  | 'Shop 02'            | 'No'                 | ''                   | 'pcs'  | '158,64'     | ''              | ''                  | '2,000'    | '520,00' | '881,36'     | '1 040,00'     | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            |
+		Then the number of "SpecialOffers" table lines is "равно" 0
+		And "Payments" table became equal
+			| '#' | 'Amount'   | 'Commission' | 'Payment type' | 'Payment terminal' | 'Postponed payment' | 'Bank term'    | 'Account'      | 'Percent' |
+			| '1' | '1 040,00' | ''           | 'Card 01'      | ''                 | 'No'                | 'Bank term 02' | 'Transit Main' | ''        |
+		Then the form attribute named "Workstation" became equal to "Workstation 01"
+		Then the form attribute named "Branch" became equal to "Shop 02"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "881,36"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "158,64"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 040,00"
+	And I close all client application windows
 	
-
+				
+Scenario: _0260141 return from POS (without basis document)
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Select items
+		And I move to the tab named "ButtonPage"
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I click "Show items" button
+		And I expand current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| 'Item'           |
+			| 'Dress, L/Green' |
+		And I select current line in "ItemsPickup" table
+		And I move to the tab named "ButtonPage"
+		And I click the button named "Return"		
+	* Post return
+		And I click "Payment Return" button
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_1"
+		Then "Payment" window is opened
+		And I click "1" button
+		And I click "0" button
+		And I click "0" button
+		And I click "0" button
+		And I click "Cash (/)" button
+		And "Payments" table became equal
+			| 'Payment type' | 'Amount'   |
+			| 'Card 01'      | '1 000,00' |
+			| 'Cash'         | '70,00'    |
+		And I click the button named "Enter"
+	* Check return document
+		And I close current window
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Amount'              |
+			| '1 070,00'            |		
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Retail customer"
+		Then the form attribute named "LegalName" became equal to "Company Retail customer"
+		Then the form attribute named "Agreement" became equal to "Retail partner term"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "ConsolidatedRetailSales" became equal to "$$ConsolidatedRetailSales2$$"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table became equal
+			| '#' | 'Retail sales receipt' | 'Item'  | 'Sales person' | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Return reason' | 'Source of origins' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' | 'VAT' | 'Offers amount' | 'Landed cost' |
+			| '1' | ''                     | 'Dress' | ''             | 'XS/Blue'  | ''                   | 'No'                 | ''                   | 'pcs'  | '79,32'      | ''              | ''                  | '1,000'    | '520,00' | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            |
+			| '2' | ''                     | 'Dress' | ''             | 'L/Green'  | ''                   | 'No'                 | ''                   | 'pcs'  | '83,90'      | ''              | ''                  | '1,000'    | '550,00' | '466,10'     | '550,00'       | ''                    | 'Store 01' | ''             | ''       | '18%' | ''              | ''            |
+		
+		Then the number of "SpecialOffers" table lines is "равно" 0
+		And "Payments" table became equal
+			| '#' | 'Amount'   | 'Commission' | 'Payment type' | 'Payment terminal' | 'Postponed payment' | 'Bank term'    | 'Account'            | 'Percent' |
+			| '1' | '1 000,00' | ''           | 'Card 01'      | ''                 | 'No'                | 'Bank term 02' | 'Transit Main'       | ''        |
+			| '2' | '70,00'    | ''           | 'Cash'         | ''                 | 'No'                | ''             | 'Pos cash account 1' | ''        |
+		
+		Then the form attribute named "Workstation" became equal to "Workstation 01"
+		Then the form attribute named "Branch" became equal to "Shop 02"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "906,78"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "163,22"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 070,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+	And I close all client application windows
+	
+						
+Scenario: _0260142 filters in the Retail sales receipt (basis) form (POS)
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Check filters by retail customer
+		And I move to the tab named "ButtonPage"
+		And I click the button named "Return"
+		Then "Point of sales: Return" window is opened
+		And I click Select button of "Retail sales receipt (basis)" field
+		Then "Selection retail basis for return" window is opened
+		And I select from the drop-down list named "RetailCustomer" by "da" string
+		And "List" table contains lines
+			| 'Retail sales receipt'                              | 'Amount'   | 'Date'                | 'Fiscal data' | 'Retail customer' |
+			| 'Retail sales receipt 5 dated 21.08.2022 11:00:00'  | '550,00'   | '21.08.2022 11:00:00' | ''            | 'Daniel Smith'    |
+			| 'Retail sales receipt 3 dated 21.08.2022 10:00:00'  | '1 590,00' | '21.08.2022 10:00:00' | ''            | 'Daniel Smith'    |	
+		Then the number of "List" table lines is "равно" "3"	
+	* Check filters by item key
+		And I click Clear button of the field named "RetailCustomer"
+		And I select from the drop-down list named "ItemKey" by "ods" string
+		And I click Clear button of the field named "ItemKey"
+		And I select from the drop-down list named "ItemKey" by "blue" string
+		And "List" table does not contain lines
+			| 'Retail sales receipt'                             |
+			| 'Retail sales receipt 4 dated 21.08.2022 10:20:00' |
+			| 'Retail sales receipt 5 dated 21.08.2022 11:00:00' |
+			| 'Retail sales receipt 7 dated 21.08.2022 11:23:34' |
+	* Button choose
+		And I go to line in "List" table
+			| 'Retail sales receipt'                             |
+			| 'Retail sales receipt 3 dated 21.08.2022 10:00:00' |
+		And I click "Choose" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Dress' | ''             | 'XS/Blue'  | ''        | '520,00' | '1,000'    | ''       | '520,00' |
+			| 'Shirt' | ''             | '38/Black' | ''        | '350,00' | '1,000'    | ''       | '350,00' |
+		And I close all client application windows
+		
 							
 Scenario: _0260135 close session and check Consolidated retail sales filling	
 	And I close all client application windows
@@ -845,12 +1145,12 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			And "CashTable" table became equal
 				| 'Operation' | 'Payment type' | 'In Base'  | 'In Register' |
 				| 'Sales'     | 'Cash'         | '7 550,00' | ''            |
-				| 'Returns'   | 'Cash'         | '2 110,00' | ''            |
+				| 'Returns'   | 'Cash'         | '2 900,00' | ''            |
 			And I go to line in "CashTable" table
 				| 'Operation' | 'Payment type' | 'In Base'  | 'In Register' |
-				| 'Returns'   | 'Cash'         | '2 110,00' | ''            |
+				| 'Returns'   | 'Cash'         | '2 900,00' | ''            |
 			And I select current line in "CashTable" table
-			And I input "2 110,02" text in "In Register" field of "CashTable" table
+			And I input "2 900,02" text in "In Register" field of "CashTable" table
 			And I finish line editing in "CashTable" table
 			And I go to line in "CashTable" table
 				| 'In Base'  | 'Operation' | 'Payment type' |
@@ -860,7 +1160,7 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			And I finish line editing in "CashTable" table
 			And I go to line in "CashTable" table
 				| 'In Base'  | 'In Register' | 'Operation' | 'Payment type' |
-				| '2 110,00' | '2 110,02'    | 'Returns'   | 'Cash'         |
+				| '2 900,00' | '2 900,02'    | 'Returns'   | 'Cash'         |
 			And I set checkbox named "CashConfirm"
 		* Filling card part		
 			Then "Terminals: Session closing" window is opened
@@ -890,9 +1190,9 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			Then the form attribute named "CurrencyBalanceBeginning" became equal to "TRY"
 			And the editing text of form attribute named "BalanceIncoming" became equal to "8 950,00"
 			Then the form attribute named "CurrencyBalanceIncoming" became equal to "TRY"
-			And the editing text of form attribute named "BalanceOutcoming" became equal to "5 590,00"
+			And the editing text of form attribute named "BalanceOutcoming" became equal to "6 380,00"
 			Then the form attribute named "CurrencyBalanceOutcoming" became equal to "TRY"
-			And the editing text of form attribute named "BalanceEnd" became equal to "4 800,00"
+			And the editing text of form attribute named "BalanceEnd" became equal to "4 010,00"
 			Then the form attribute named "CurrencyBalanceEnd" became equal to "TRY"
 			And the editing text of form attribute named "BalanceReal" became equal to "0,00"
 			Then the form attribute named "Company" became equal to "Main Company"
@@ -924,17 +1224,22 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			| '$$RetailReturnReceiptOld$$' | 'Main Company' | '-1 040' | 'Shop 02' | 'TRY'      | 'CI'     |
 			| '*'                          | 'Main Company' | '5 750'  | 'Shop 02' | 'TRY'      | 'CI'     |
 			| '*'                          | 'Main Company' | '520'    | 'Shop 02' | 'TRY'      | 'CI'     |
-		Then the number of "Documents" table lines is "equal" "11"
+			| '*'                          | 'Main Company' | '-720'   | 'Shop 02' | 'TRY'      | 'CI'     |
+			| '*'                          | 'Main Company' | '-750'   | 'Shop 02' | 'TRY'      | 'CI'     |
+			| '*'                          | 'Main Company' | '-1 040' | 'Shop 02' | 'TRY'      | 'CI'     |
+			| '*'                          | 'Main Company' | '-1 070' | 'Shop 02' | 'TRY'      | 'CI'     |
+		Then the number of "Documents" table lines is "equal" "15"
 		Then the form attribute named "Branch" became equal to "Shop 02"
-		And the editing text of form attribute named "BalanceEnd" became equal to "4 800,00"
+		And the editing text of form attribute named "BalanceEnd" became equal to "4 010,00"
 		And the editing text of form attribute named "BalanceReal" became equal to "4 000,00"
 		And "PaymentList" table became equal
 			| '#' | 'Amount'   | 'Is return' | 'Payment type' | 'Payment terminal' | 'Real amount' |
 			| '1' | '7 550,00' | 'No'        | 'Cash'         | ''                 | '7 550,00'    |
-			| '2' | '2 110,00' | 'Yes'       | 'Cash'         | ''                 | '2 110,02'    |
+			| '2' | '2 900,00' | 'Yes'       | 'Cash'         | ''                 | '2 900,02'    |
 			| '3' | '3 180,00' | 'No'        | 'Card 01'      | ''                 | '3 180,00'    |
 			| '4' | '4 790,00' | 'No'        | 'Card 02'      | ''                 | '4 770,00'    |
-			| '5' | '550,00'   | 'Yes'       | 'Card 02'      | ''                 | '550,00'      |	
+			| '5' | '2 040,00' | 'Yes'       | 'Card 01'      | ''                 | ''            |
+			| '6' | '550,00'   | 'Yes'       | 'Card 02'      | ''                 | '550,00'      |
 		And I close all client application windows		
 
 Scenario: _0260145 check block RSR form if Consolidated retail sales is closed

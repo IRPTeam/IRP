@@ -284,19 +284,17 @@ Scenario: _0850000 preparation (fiscal printer)
 		And I select "Fiscal printer" exact value from "Types of Equipment" drop-down list
 		And I click Select button of "Driver" field
 		And I go to line in "List" table
-			| 'Description' |
+			| 'Description'  |
 			| 'KKT_3004'     |
 		And I select current line in "List" table
 		And I click "Save" button		
-		// Then "Hardware" window is opened
-		// And I select current line in "List" table
-		// Then "Fiscal printer (Hardware)" window is opened
 		And I click "Save and close" button
 		Then "Hardware" window is opened
 		And I go to line in "List" table
 			| 'Description'    |
 			| 'Fiscal printer' |
 		And I select current line in "List" table
+		And in the table "DriverParameter" I click "Reload settings" button		
 		And I go to line in "DriverParameter" table
 			| 'Name'    |
 			| 'LogFile' |
@@ -325,11 +323,24 @@ Scenario: _0850000 preparation (fiscal printer)
 			| 'Enable' | 'Hardware'       |
 			| 'Yes'    | 'Fiscal printer' |
 		And I click "Save and close" button
+	* Check fiscal printer status
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Fiscal printer'     |
+		And I select current line in "List" table
+		And I click "Connect" button
+		Then the form attribute named "CommandResult" became equal to template
+			| 'Fiscal printer connected.' |
+			| 'ID:KKT_3004*'              |
+		And I click "Disconnect" button
+		Then the form attribute named "CommandResult" became equal to "Fiscal printer disconnected."
+		And I click the button named "UpdateStatus"
+		Then the form attribute named "CommandResult" became equal to "Fiscal printer NOT connected."						
 	* Delete log file
-		And I close TestClient session
 		Then I delete '$$LogPath$$' file
-		Given I open new TestClient session or connect the existing one
 	* Check fiscal printer connection
+		And I click "Connect" button	
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"	
 		And I check "$ParsingResult$" with "0" and method is "Open"
 

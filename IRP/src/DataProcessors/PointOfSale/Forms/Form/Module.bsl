@@ -1472,6 +1472,8 @@ Procedure CreateReturnOnBase(PaymentData)
 				FillPropertyValues(ExtractedDataItem.SerialLotNumbers.Add(), SerialItem);
 			EndDo;
 		EndIf;
+		
+		ExtractedDataItem.ItemList.FillValues(ThisObject.Object.Branch, "Branch");
 	EndDo;
 	
 	ArrayOfFillingValues = RowIDInfoPrivileged.ConvertDataToFillingValues(

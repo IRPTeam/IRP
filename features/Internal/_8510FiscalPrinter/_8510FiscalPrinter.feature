@@ -340,7 +340,8 @@ Scenario: _0850000 preparation (fiscal printer)
 	* Delete log file
 		Then I delete '$$LogPath$$' file
 	* Check fiscal printer connection
-		And I click "Connect" button	
+		And I click "Connect" button
+		And Delay 5	
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"	
 		And I check "$ParsingResult$" with "0" and method is "Open"
 

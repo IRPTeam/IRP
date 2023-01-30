@@ -1607,4 +1607,47 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.Payroll</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.Payroll.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.Payroll.Attribute.Currency</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.TimeSheet</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.TimeSheet.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

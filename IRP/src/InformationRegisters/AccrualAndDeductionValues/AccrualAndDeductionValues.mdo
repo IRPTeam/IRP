@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b2422dc3-74c3-41f7-8130-b5037ef51c57">
+  <producedTypes>
+    <selectionType typeId="5ba51a6d-751b-464b-aacd-7c0dfb2afcb1" valueTypeId="448a2def-2eeb-4db3-a126-f306f17b64e4"/>
+    <listType typeId="9b50250d-04a5-457f-8ad3-23c1d07ddfbe" valueTypeId="907551cf-4447-42e6-91ec-8abbad8f8f70"/>
+    <managerType typeId="4e30d8cf-caeb-448d-8a8d-8225e4aaa3e8" valueTypeId="edf377e1-8ff0-4653-96c0-bf50f376c223"/>
+    <recordSetType typeId="0ad1f2d0-3acb-4b5d-8485-51b196acd5c7" valueTypeId="92dd9b83-f4e4-4619-a0b6-fc1dfd529490"/>
+    <recordKeyType typeId="6376b28b-385e-4d2b-81fa-c98c5c278ebb" valueTypeId="1952ee12-5275-4a25-b526-baa17ae40ef2"/>
+    <recordType typeId="b8c246c5-a44b-4749-8213-df2c0713d6d6" valueTypeId="f6949020-42e7-4b9c-a472-c1f7c551b6f2"/>
+    <recordManagerType typeId="269b4285-5af2-4769-b2b9-4b2a667fe049" valueTypeId="5415430d-4b14-4fbb-939c-8979ae7720ac"/>
+  </producedTypes>
+  <name>AccrualAndDeductionValues</name>
+  <synonym>
+    <key>en</key>
+    <value>Accrual and deduction values</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="b59ca333-121f-4f6b-8e16-8c8f767e566d">
+    <name>Value</name>
+    <synonym>
+      <key>en</key>
+      <value>Value</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <dimensions uuid="a863a8e5-d920-4eb4-aa7f-992e946932e7">
+    <name>EmployeeOrPosition</name>
+    <synonym>
+      <key>en</key>
+      <value>Employee or position</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+      <types>CatalogRef.EmployeePositions</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="a24b7fdd-becd-45c3-ac63-92f224c35edf">
+    <name>AccualOrDeductionType</name>
+    <synonym>
+      <key>en</key>
+      <value>Accual or deduction type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.AccrualAndDeductionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+</mdclass:InformationRegister>

@@ -2639,7 +2639,6 @@ Procedure StepChangeConsolidatedRetailSalesByWorkstation(Parameters, Chain) Expo
 	Chain.ChangeConsolidatedRetailSalesByWorkstation.Options.Add(Options);
 EndProcedure
 
-// TODO: Remove #1677
 // ConsolidatedRetailSales.ChangeConsolidatedRetailSalesByWorkstationForReturn.Step
 Procedure StepChangeConsolidatedRetailSalesByWorkstationForReturn(Parameters, Chain) Export
 	Chain.ChangeConsolidatedRetailSalesByWorkstationForReturn.Enable = True;
@@ -11757,6 +11756,86 @@ EndProcedure
 
 #EndRegion
 
+#Region PAYROLL_LIST
+
+#Region PAYROLL_LIST_LOAD_DATA
+
+// PayrollList.Load
+Procedure PayrollListLoad(Parameters) Export
+	Binding = BindPayrollListLoad(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PayrollList.Load.Set
+#If Server Then
+	
+Procedure ServerTableLoaderPayrollList(Parameters, Results) Export
+	Binding = BindPayrollListLoad(Parameters);
+	LoaderTable(Binding.DataPath, Parameters, Results);
+EndProcedure
+
+#EndIf
+
+// PayrollList.Load.Bind
+Function BindPayrollListLoad(Parameters)
+	DataPath = "PayrollList";
+	Binding = New Structure();
+	Return BindSteps("StepPayrollListLoadTable", DataPath, Binding, Parameters);
+EndFunction
+
+// PayrollList.LoadAtServer.Step
+Procedure StepPayrollListLoadTable(Parameters, Chain) Export
+	Chain.LoadTable.Enable = True;
+	Chain.LoadTable.Setter = "ServerTableLoaderPayrollList";
+	Options = ModelClientServer_V2.LoadTableOptions();
+	Options.TableAddress = Parameters.LoadData.Address;
+	Chain.LoadTable.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region TIME_SHEET_LIST
+
+#Region TIME_SHEET_LIST_LOAD_DATA
+
+// TimeSheetList.Load
+Procedure TimeSheetListLoad(Parameters) Export
+	Binding = BindTimeSheetListLoad(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TimeSheetList.Load.Set
+#If Server Then
+	
+Procedure ServerTableLoaderTimeSheetList(Parameters, Results) Export
+	Binding = BindTimeSheetListLoad(Parameters);
+	LoaderTable(Binding.DataPath, Parameters, Results);
+EndProcedure
+
+#EndIf
+
+// TimeSheetList.Load.Bind
+Function BindTimeSheetListLoad(Parameters)
+	DataPath = "TimeSheetList";
+	Binding = New Structure();
+	Return BindSteps("StepTimeSheetListLoadTable", DataPath, Binding, Parameters);
+EndFunction
+
+// TimeSheetList.LoadAtServer.Step
+Procedure StepTimeSheetListLoadTable(Parameters, Chain) Export
+	Chain.LoadTable.Enable = True;
+	Chain.LoadTable.Setter = "ServerTableLoaderTimeSheetList";
+	Options = ModelClientServer_V2.LoadTableOptions();
+	Options.TableAddress = Parameters.LoadData.Address;
+	Chain.LoadTable.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
 // called when all chain steps is complete
 Procedure OnChainComplete(Parameters) Export
 	#IF Client THEN
@@ -11891,6 +11970,10 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "ProductionDurationsListOnAddRowFormNotify"       Then ViewClient_V2.ProductionDurationsListOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "ProductionDurationsListOnCopyRowFormNotify"      Then ViewClient_V2.ProductionDurationsListOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "ProductionDurationsListAfterDeleteRowFormNotify" Then ViewClient_V2.ProductionDurationsListAfterDeleteRowFormNotify(Parameters);
+	
+	ElsIf ViewNotify = "PayrollListOnAddRowFormNotify"       Then ViewClient_V2.PayrollListOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "PayrollListOnCopyRowFormNotify"      Then ViewClient_V2.PayrollListOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "PayrollListAfterDeleteRowFormNotify" Then ViewClient_V2.PayrollListAfterDeleteRowFormNotify(Parameters);
 	
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);

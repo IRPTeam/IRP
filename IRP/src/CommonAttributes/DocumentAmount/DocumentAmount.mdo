@@ -100,6 +100,10 @@
     <metadata>Document.EmployeeCashAdvance</metadata>
     <use>Use</use>
   </content>
+  <content>
+    <metadata>Document.Payroll</metadata>
+    <use>Use</use>
+  </content>
   <autoUse>DontUse</autoUse>
   <dataSeparation>DontUse</dataSeparation>
   <usersSeparation>DontUse</usersSeparation>

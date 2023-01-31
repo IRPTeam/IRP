@@ -956,7 +956,7 @@ Scenario: _0260139 create RRR from POS (first select basis document, different w
 		
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "Workstation" became equal to "Workstation 01"
-		Then the form attribute named "Branch" became equal to "Shop 01"
+		Then the form attribute named "Branch" became equal to "Shop 02"
 		Then the form attribute named "Currency" became equal to "TRY"
 		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
 		Then the form attribute named "ItemListTotalNetAmount" became equal to "635,59"
@@ -1238,7 +1238,7 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			| '2' | '2 900,00' | 'Yes'       | 'Cash'         | ''                 | '2 900,02'    |
 			| '3' | '3 180,00' | 'No'        | 'Card 01'      | ''                 | '3 180,00'    |
 			| '4' | '4 790,00' | 'No'        | 'Card 02'      | ''                 | '4 770,00'    |
-			| '5' | '2 040,00' | 'Yes'       | 'Card 01'      | ''                 | ''            |
+			| '5' | '2 790,00' | 'Yes'       | 'Card 01'      | ''                 | ''            |
 			| '6' | '550,00'   | 'Yes'       | 'Card 02'      | ''                 | '550,00'      |
 		And I close all client application windows		
 

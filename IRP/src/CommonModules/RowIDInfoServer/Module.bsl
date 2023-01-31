@@ -4047,8 +4047,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.BasisUnit AS BasisUnit,
 	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit,
-	|	ItemList.SalesPerson,
-	|	ItemList.Ref.Workstation AS Workstation
+	|	ItemList.SalesPerson
 	|FROM
 	|	BasisesTable AS BasisesTable
 	|		LEFT JOIN Document.RetailSalesReceipt.ItemList AS ItemList

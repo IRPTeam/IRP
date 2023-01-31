@@ -10,6 +10,9 @@ Var AmountDotIsActive; // Boolean
 &AtClient
 Var AmountFractionDigitsMaxCount; // Number
 
+&AtClient
+Var FormCanBeClosed; // Boolean
+
 #EndRegion
 
 #Region FormEventHandlers
@@ -144,12 +147,29 @@ Procedure PaymentsOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure PaymentsBeforeRowChange(Item, Cancel)
+	CurrentData = Items.Payments.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	If CurrentData.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.Done") Then
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(R().POS_Error_PaymentAlreadyDone);
+	EndIf;
+	
+EndProcedure
+
+&AtClient
 Procedure PaymentsOnActivateRow(Item)
 	
 	CurrentData = Items.Payments.CurrentData;
 	If CurrentData <> Undefined Then
 		CurrentData.Edited = False;
 		CurrentData.AmountString = GetAmountString(CurrentData.Amount);
+		Items.GroupPaymentInfo.Visible = Not CurrentData.Hardware.IsEmpty();
+	Else
+		Items.GroupPaymentInfo.Visible = False;
 	EndIf;
 	
 EndProcedure
@@ -163,21 +183,12 @@ Procedure Enter(Command)
 	
 	For Each PaymentRow In Payments Do
 		If PaymentRow.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Card") Then
-			Settings = EquipmentAcquiringServer.GetAcquiringHardwareSettings();
-			Settings.Account = PaymentRow.Account;
-			Acquiring = EquipmentAcquiringServer.GetAcquiringHardware(Settings);
-			
-			If Acquiring.IsEmpty() Then
-				Continue;
-			EndIf;
-			
-			PaymentSettings = EquipmentAcquiringClient.PayByPaymentCardSettings();
-			PaymentSettings.In.Amount = PaymentRow.Amount;
-			
-			If EquipmentAcquiringClient.PayByPaymentCard(Acquiring, PaymentSettings) Then
-				
+			If PaymentRow.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.NotUse") OR
+				PaymentRow.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.Done") Then
+					
 			Else
-				
+				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().POS_Error_CheckPaymentsbyCard, PaymentRow.PaymentType));
+				Return;
 			EndIf;
 			
 		EndIf;
@@ -205,12 +216,25 @@ Procedure Enter(Command)
 	ReturnValue = New Structure();
 	ReturnValue.Insert("Payments", Payments);
 	ReturnValue.Insert("ReceiptPaymentMethod", ReceiptPaymentMethod);
+	FormCanBeClosed = True;
 	Close(ReturnValue);
 EndProcedure
 
 &AtClient
 Procedure CloseButton(Command)
 	Close();
+EndProcedure
+
+&AtClient
+Procedure BeforeClose(Cancel, Exit, WarningText, StandardProcessing)
+	For Each PaymentRow In Payments Do
+		If PaymentRow.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Card")
+			And PaymentRow.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.Done")
+			And Not FormCanBeClosed Then
+				Cancel = True;
+				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().POS_Error_OnClosePaymentAlreadyDone, PaymentRow.PaymentType));
+		EndIf;
+	EndDo;
 EndProcedure
 
 &AtClient
@@ -575,7 +599,7 @@ Procedure FillPayments(Result, AdditionalParameters) Export
 	EndIf;
 
 	FoundPayment = ThisObject.Payments.FindRows(Result);
-	If FoundPayment.Count() Then
+	If FoundPayment.Count() AND Result.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Cash") Then
 		Row = FoundPayment[0];
 		Row.Amount = 0;
 	Else
@@ -599,8 +623,6 @@ Procedure FillPayments(Result, AdditionalParameters) Export
 			DefaultPayment = CashPaymentTypes.FindRows(DefaultPaymentFilter);
 			Row.Account = DefaultPayment[0].Account;
 		EndIf;
-		
-		//Row.Account = DefaultPayment[0].Account;
 	EndIf;
 	
 	If (Object.Amount - Payments.Total("Amount")) <= 0 Then
@@ -613,6 +635,15 @@ Procedure FillPayments(Result, AdditionalParameters) Export
 	
 	If Result.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Cash") Then
 		Row.AmountString = GetAmountString(Row.Amount);
+	ElsIf Result.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Card") Then
+		Settings = EquipmentAcquiringServer.GetAcquiringHardwareSettings();
+		Settings.Account = Row.Account;
+		Row.Hardware = EquipmentAcquiringServer.GetAcquiringHardware(Settings);
+		If Row.Hardware.IsEmpty() Then
+			Row.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.NotUse");
+		Else
+			Row.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.New");
+		EndIf;
 	EndIf;
 	
 	Items.Payments.CurrentRow = Row.GetID();
@@ -639,8 +670,54 @@ EndFunction
 
 #EndRegion
 
+#Region Acquiring
+
+&AtClient
+Async Procedure Payment_PayByPaymentCard(Command)
+	
+	PaymentRow = Items.Payments.CurrentData;
+	
+	If PaymentRow = Undefined Then
+		Return;
+	EndIf;
+	
+	PaymentRow.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.New");
+	
+	PaymentSettings = EquipmentAcquiringClient.PayByPaymentCardSettings();
+	PaymentSettings.In.Amount = PaymentRow.Amount;
+	
+	If Await EquipmentAcquiringClient.PayByPaymentCard(PaymentRow.Hardware, PaymentSettings) Then
+		PaymentSettings.Delete("In");
+		PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
+		PaymentRow.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.Done");
+	Else
+		PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
+		PaymentRow.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.Error");
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure Payment_ReturnPaymentByPaymentCard(Command)
+	//TODO: Insert the handler content
+EndProcedure
+
+&AtClient
+Procedure Payment_CancelPaymentByPaymentCard(Command)
+	//TODO: Insert the handler content
+EndProcedure
+
+&AtClient
+Procedure Payment_EmergencyReversal(Command)
+	//TODO: Insert the handler content
+EndProcedure
+
+
+
+
+#EndRegion
+
 AmountFractionDigitsCount = 0;
 AmountDotIsActive = False;
 AmountFractionDigitsMaxCount = GetFractionDigitsMaxCount();
-
+FormCanBeClosed = False;
 	

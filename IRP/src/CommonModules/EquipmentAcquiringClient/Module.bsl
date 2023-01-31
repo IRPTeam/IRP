@@ -1,8 +1,10 @@
+// @strict-types
+
 
 // Terminal parameters.
 // 
 // Parameters:
-//  Hardware Hardware
+//  Hardware - CatalogRef.Hardware - Hardware
 //  Settings - See TerminalParametersSettings
 // 
 // Returns:
@@ -43,12 +45,22 @@ EndFunction
 // Returns:
 //  Boolean - Метод осуществляет авторизацию оплаты по карте
 Async Function PayByPaymentCard(Hardware, Settings) Export
-	Connections = Await HardwareClient.ConnectHardware(Hardware);
+	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
-	ConnectParameters.DriverObject.PayByPaymentCard(
-		Settings.In.DeviceID,
-		);
+	//@skip-check dynamic-access-method-not-found
+	Result = ConnectParameters.DriverObject.PayByPaymentCard(
+		ConnectParameters.ID,
+		Settings.In.MerchantNumber,
+		Settings.In.Amount,
+		Settings.InOut.CardNumber,
+		Settings.InOut.ReceiptNumber,
+		Settings.Out.RRNCode,
+		Settings.Out.AuthorizationCode,
+		Settings.Out.Slip
+	); // Boolean
 	
+	Connections = Await HardwareClient.DisconnectHardware(Hardware);
+	Return Result;
 EndFunction
 
 // Pay by payment card settings.
@@ -70,11 +82,11 @@ Function PayByPaymentCardSettings() Export
 	Str = New Structure;
 	Str.Insert("In", New Structure);
 	Str.In.Insert("DeviceID", "");
-	Str.In.Insert("MerchantNumber", Undefined);
-	Str.In.Insert("Amount", Undefined);
+	Str.In.Insert("MerchantNumber", 0);
+	Str.In.Insert("Amount", 0);
 	Str.Insert("InOut", New Structure);
-	Str.InOut.Insert("CardNumber", Undefined);
-	Str.InOut.Insert("ReceiptNumber", Undefined);
+	Str.InOut.Insert("CardNumber", "");
+	Str.InOut.Insert("ReceiptNumber", "");
 	Str.Insert("Out", New Structure);
 	Str.Out.Insert("RRNCode", "");
 	Str.Out.Insert("AuthorizationCode", "");
@@ -85,7 +97,7 @@ EndFunction
 // Return payment by payment card.
 // 
 // Parameters:
-//  Hardware Hardware
+//  Hardware - CatalogRef.Hardware - Hardware
 //  Settings - See ReturnPaymentByPaymentCardSettings
 // 
 // Returns:
@@ -131,7 +143,7 @@ EndFunction
 // Cancel payment by payment card.
 // 
 // Parameters:
-//  Hardware Hardware
+//  Hardware - CatalogRef.Hardware - Hardware
 //  Settings - See CancelPaymentByPaymentCardSettings
 // 
 // Returns:
@@ -174,7 +186,7 @@ EndFunction
 // Emergency reversal.
 // 
 // Parameters:
-//  Hardware Hardware
+//  Hardware - CatalogRef.Hardware - Hardware
 //  Settings - See EmergencyReversalSettings
 // 
 // Returns:
@@ -199,7 +211,7 @@ EndFunction
 // Settlement.
 // 
 // Parameters:
-//  Hardware Hardware
+//  Hardware - CatalogRef.Hardware - Hardware
 //  Settings - See SettlementSettings
 // 
 // Returns:

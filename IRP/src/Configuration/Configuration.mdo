@@ -176,6 +176,10 @@
   <commonPictures>CommonPicture.Unlock</commonPictures>
   <commonPictures>CommonPicture.Waiting</commonPictures>
   <commonPictures>CommonPicture.Work</commonPictures>
+  <commonPictures>CommonPicture.Payment_PayByPaymentCard</commonPictures>
+  <commonPictures>CommonPicture.Payment_ReturnPaymentByPaymentCard</commonPictures>
+  <commonPictures>CommonPicture.Payment_CancelPaymentByPaymentCard</commonPictures>
+  <commonPictures>CommonPicture.Payment_EmergencyReversal</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
@@ -876,6 +880,7 @@
   <enums>Enum.ReceiptPaymentMethods</enums>
   <enums>Enum.DocumentFiscalStatuses</enums>
   <enums>Enum.ExpenseTypes</enums>
+  <enums>Enum.AcquiringPaymentStatus</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

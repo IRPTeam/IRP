@@ -315,6 +315,9 @@ Function Strings(Lang) Export
 	Strings.Insert("POS_s4", NStr("en = 'Amounts of payments are incorrect'", Lang));
 	Strings.Insert("POS_s5", NStr("en = 'Select sales person'", Lang));
 	
+	Strings.Insert("POS_Error_CheckPaymentsbyCard", NStr("en = 'Check payment %1'", Lang));
+	Strings.Insert("POS_Error_PaymentAlreadyDone", NStr("en = 'Can not change payment. Cancel or Revers it before.'", Lang));
+	Strings.Insert("POS_Error_OnClosePaymentAlreadyDone", NStr("en = 'Cancel or Revers %1 before close.'", Lang));
 	Strings.Insert("POS_Error_ReturnAmountLess", NStr(
 		"en = 'There are %2 of ""%1"", which is more than the available %3 for return in document ""%4"" .'", Lang));
 	

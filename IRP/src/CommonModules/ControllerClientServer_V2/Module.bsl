@@ -11798,6 +11798,52 @@ EndProcedure
 
 #Region TIME_SHEET_LIST
 
+#Region TIME_SHEET_LIST_EMPLOYEE
+
+// TimeSheetList.Employee.OnChange
+Procedure TimeSheetListEmployeeOnChange(Parameters) Export
+	Binding = BindTimeSheetListEmployee(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TimeSheetList.Employee.Set
+Procedure SetTimeSheetListEmployee(Parameters, Results) Export
+	Binding = BindTimeSheetListEmployee(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// TimeSheetList.Employee.Bind
+Function BindTimeSheetListEmployee(Parameters)
+	DataPath = "TimeSheetList.Employee";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region TIME_SHEET_LIST_POSITION
+
+// TimeSheetList.Position.OnChange
+Procedure TimeSheetListPositionOnChange(Parameters) Export
+	Binding = BindTimeSheetListPosition(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TimeSheetList.Position.Set
+Procedure SetTimeSheetListPosition(Parameters, Results) Export
+	Binding = BindTimeSheetListPosition(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// TimeSheetList.Position.Bind
+Function BindTimeSheetListPosition(Parameters)
+	DataPath = "TimeSheetList.Position";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
 #Region TIME_SHEET_LIST_LOAD_DATA
 
 // TimeSheetList.Load
@@ -11974,6 +12020,10 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "PayrollListOnAddRowFormNotify"       Then ViewClient_V2.PayrollListOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "PayrollListOnCopyRowFormNotify"      Then ViewClient_V2.PayrollListOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "PayrollListAfterDeleteRowFormNotify" Then ViewClient_V2.PayrollListAfterDeleteRowFormNotify(Parameters);
+	
+	ElsIf ViewNotify = "TimeSheetListOnAddRowFormNotify"       Then ViewClient_V2.PayrollListOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "TimeSheetListOnCopyRowFormNotify"      Then ViewClient_V2.PayrollListOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "TimeSheetListAfterDeleteRowFormNotify" Then ViewClient_V2.PayrollListAfterDeleteRowFormNotify(Parameters);
 	
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);

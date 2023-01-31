@@ -57,7 +57,8 @@ Procedure TimeSheetListSelection(Object, Form, Item, RowSelected, Field, Standar
 EndProcedure
 
 Procedure TimeSheetListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
-	ViewClient_V2.TimeSheetListBeforeAddRow(Object, Form, Cancel, Clone);
+	Cancel = True;
+	//ViewClient_V2.TimeSheetListBeforeAddRow(Object, Form, Cancel, Clone);
 EndProcedure
 
 Procedure TimeSheetListBeforeDeleteRow(Object, Form, Item, Cancel) Export

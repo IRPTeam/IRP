@@ -2741,6 +2741,19 @@ Procedure TimeSheetListAfterDeleteRowFormNotify(Parameters) Export
 	Return;
 EndProcedure
 
+Function TimeSheetListAddFilledRow(Object, Form,  FillingValues) Export
+	Cancel      = False;
+	Clone       = False;
+	CurrentData = Undefined;
+	NewRow = AddOrCopyRow(Object, Form, "TimeSheetList", Cancel, Clone, CurrentData,
+		"TimeSheetListOnAddRowFormNotify", "TimeSheetListOnCopyRowFormNotify", FillingValues);
+	Form.Items.TimeSheetList.CurrentRow = NewRow.GetID();
+	If Form.Items.TimeSheetList.CurrentRow <> Undefined Then
+		Form.Items.TimeSheetList.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
 Procedure TimeSheetListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
 	Parameters = GetLoadParameters(Object, Form, "TimeSheetList", Address, GroupColumn, SumColumn);
 	Parameters.LoadData.ExecuteAllViewNotify = True;

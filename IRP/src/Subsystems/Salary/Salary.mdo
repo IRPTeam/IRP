@@ -8,8 +8,8 @@
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Document.Payroll</content>
-  <content>Catalog.AccrualAndDeductionTypes</content>
-  <content>Catalog.EmployeePositions</content>
   <content>Document.TimeSheet</content>
+  <content>CommonCommand.OpenPartnersEmployee</content>
   <subsystems>Settings</subsystems>
+  <subsystems>Catalogs</subsystems>
 </mdclass:Subsystem>

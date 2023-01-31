@@ -3,22 +3,25 @@
 	<item>
 		<selection>
 			<item>
-				<field>TimeSheetListDate</field>
+				<field>StaffingCompany</field>
 			</item>
 			<item>
-				<field>TimeSheetListAccrualAndDeductionType</field>
+				<field>StaffingBranch</field>
+			</item>
+			<item>
+				<field>StaffingPosition</field>
 			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.TimeSheetList.Visible</left>
+				<left xsi:type="dcscor:Field">Staffing.Fired</left>
 				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:boolean">false</right>
+				<right xsi:type="xs:boolean">true</right>
 			</item>
 		</filter>
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>Visible</dcscor:parameter>
+				<dcscor:parameter>MarkIncomplete</dcscor:parameter>
 				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
 			</dcscor:item>
 		</appearance>

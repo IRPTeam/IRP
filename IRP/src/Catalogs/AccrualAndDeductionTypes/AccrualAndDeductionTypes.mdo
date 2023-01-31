@@ -127,7 +127,6 @@
     <key>en</key>
     <value>Expense and revenue type</value>
   </objectPresentation>
-  <hierarchical>true</hierarchical>
   <hierarchyType>HierarchyOfItems</hierarchyType>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>

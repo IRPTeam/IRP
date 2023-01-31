@@ -173,3 +173,18 @@ Function GetSizePresentation(Size) Export
 	EndIf;
 	
 EndFunction
+
+Procedure DeleteValueFromArray(Array, Value) Export
+	Index = Array.Find(Value);
+	If Index <> Undefined Then
+		Array.Delete(Index);
+	EndIf;
+EndProcedure
+
+Procedure AddValueToArray(Array, Value) Export
+	Index = Array.Find(Value);
+	If Index = Undefined Then
+		Array.Add(Value);
+	EndIf;
+EndProcedure
+

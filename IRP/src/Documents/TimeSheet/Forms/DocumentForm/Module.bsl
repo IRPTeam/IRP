@@ -4,6 +4,7 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocTimeSheetServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	FillWorkersAtServer();
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
@@ -46,6 +47,7 @@ EndProcedure
 &AtClient
 Procedure AfterWrite(WriteParameters)
 	DocTimeSheetClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+	SetVisibleRowsTimeSheetList();
 EndProcedure
 
 &AtClient
@@ -55,7 +57,7 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Return;
+	Form.Items.FillTimeSheet.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 #EndRegion
@@ -97,7 +99,17 @@ EndProcedure
 
 &AtClient
 Procedure TimeSheetListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	DocTimeSheetClient.TimeSheetListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocTimeSheetClient.TimeSheetListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+	CurrentData = Items.Workers.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FillingValues = New Structure();
+	FillingValues.Insert("Employee", CurrentData.Employee);
+	FillingValues.Insert("Position", CurrentData.Position);
+	
+	ViewClient_V2.TimeSheetListAddFilledRow(Object, ThisObject, FillingValues);
+	SetVisibleRowsTimeSheetList();
 EndProcedure
 
 &AtClient
@@ -108,11 +120,51 @@ EndProcedure
 &AtClient
 Procedure TimeSheetListAfterDeleteRow(Item)
 	DocTimeSheetClient.TimeSheetListAfterDeleteRow(Object, ThisObject, Item);
+	FillWorkersAtClient();
 EndProcedure
 
 #Region TIME_SHEET_LIST_COLUMNS
 
 #EndRegion
+
+#EndRegion
+
+#Region WORKERS
+
+&AtClient
+Procedure SetVisibleRowsTimeSheetList()
+	CurrentData = Items.Workers.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	For Each Row In Object.TimeSheetList Do
+		Row.Visible = 
+			(Row.Employee = CurrentData.Employee)
+			And (Row.Position = CurrentData.Position);
+	EndDo;
+	
+	For Each Row In Object.TimeSheetList Do
+		If Row.Visible Then
+			Items.TimeSheetList.CurrentRow = Row.GetID();
+			Break;
+		EndIf;
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure WorkersOnActivateRow(Item)
+	SetVisibleRowsTimeSheetList();
+EndProcedure
+
+&AtClient
+Procedure WorkersBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	Cancel = True;
+EndProcedure
+
+&AtClient
+Procedure WorkersBeforeDeleteRow(Item, Cancel)
+	Cancel = True;
+EndProcedure
 
 #EndRegion
 
@@ -189,6 +241,91 @@ EndProcedure
 #EndRegion
 
 #Region COMMANDS
+
+&AtClient
+Procedure FillTimeSheet(Command)	
+	Result = FillTimeSheetAtServer();
+	Object.TimeSheetList.Clear();	
+	ViewClient_V2.TimeSheetListLoad(Object, ThisObject, Result.Address, Result.GroupColumn, Result.SumColumn);
+	ThisObject.Modified = True;
+	FillWorkersAtClient();
+EndProcedure
+
+&AtServer
+Function FillTimeSheetAtServer()
+	QueryParameters = New Structure();
+	QueryParameters.Insert("Company"   , Object.Company);
+	QueryParameters.Insert("Branch"    , Object.Branch);
+	QueryParameters.Insert("BeginDate" , Object.BeginDate);
+	QueryParameters.Insert("EndDate"   , Object.EndDate);
+	
+	ResultTable = DocTimeSheetServer.GetTimeSheet(QueryParameters);
+	Address = PutToTempStorage(ResultTable, ThisObject.UUID);
+	GroupColumn = "Date, Employee, Position, AccrualAndDeductionType";
+	SumColumn = "SumColumn";
+	Return New Structure("Address, GroupColumn, SumColumn", Address, GroupColumn, SumColumn);
+EndFunction
+
+&AtClient
+Procedure FillWorkersAtClient()
+	CurrentData = Items.Workers.CurrentData;
+	CurrentData_Employee = Undefined;
+	CurrentData_Position = Undefined;
+	If CurrentData <> Undefined Then
+		CurrentData_Employee = CurrentData.Employee;
+		CurrentData_Position = CurrentData.Position;
+	EndIf;
+	FillWorkersAtServer(CurrentData_Employee, CurrentData_Position);
+EndProcedure
+
+&AtServer
+Procedure FillWorkersAtServer(CurrentData_Employee = Undefined, CurrentData_Position = Undefined)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	TimeSheetList.Employee AS Employee,
+	|	TimeSheetList.Position AS Position,
+	|	TimeSheetList.Date AS Date
+	|into TimeSheetList
+	|From
+	|	&TimeSheetList AS TimeSheetList
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TimeSheetList.Employee AS Employee,
+	|	TimeSheetList.Position AS Position,
+	|	MIN(TimeSheetList.Date) AS BeginDate,
+	|	MAX(TimeSheetList.Date) AS EndDate
+	|FROM
+	|	TimeSheetList AS TimeSheetList
+	|GROUP BY
+	|	TimeSheetList.Employee,
+	|	TimeSheetList.Position
+	|
+	|ORDER BY
+	|	Employee";
+	Query.SetParameter("TimeSheetList", Object.TimeSheetList.Unload());
+	QueryResult = Query.Execute();
+	
+	ThisObject.Workers.Load(QueryResult.Unload());
+	
+	CurrentRowIsSet = False;
+	If CurrentData_Employee <> Undefined And CurrentData_Position <> Undefined Then
+		For Each Row In ThisObject.Workers Do
+			If Row.Employee = CurrentData_Employee
+				And Row.Position = CurrentData_Position Then
+				Items.Workers.CurrentRow = Row.GetID();
+				CurrentRowIsSet = True;
+				Break;
+			EndIf;
+		EndDo;
+	EndIf;
+	
+	If ThisObject.Workers.Count() And Not CurrentRowIsSet Then
+		Items.Workers.CurrentRow = ThisObject.Workers[0].GetID();
+	EndIf;
+EndProcedure
 
 &AtClient
 Procedure ShowRowKey(Command)

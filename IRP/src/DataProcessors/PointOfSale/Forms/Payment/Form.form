@@ -161,97 +161,6 @@
         <name>GroupAmountsLeft</name>
         <id>51</id>
         <items xsi:type="form:FormField">
-          <name>ReceiptPaymentMethod</name>
-          <id>179</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>ReceiptPaymentMethod</segments>
-          </dataPath>
-          <titleLocation>None</titleLocation>
-          <extendedTooltip>
-            <name>ReceiptPaymentMethodExtendedTooltip</name>
-            <id>181</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <type>Label</type>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <extInfo xsi:type="form:LabelDecorationExtInfo">
-              <horizontalAlign>Left</horizontalAlign>
-            </extInfo>
-          </extendedTooltip>
-          <contextMenu>
-            <name>ReceiptPaymentMethodContextMenu</name>
-            <id>180</id>
-            <visible>true</visible>
-            <enabled>true</enabled>
-            <userVisible>
-              <common>true</common>
-            </userVisible>
-            <autoFill>true</autoFill>
-          </contextMenu>
-          <type>RadioButtonField</type>
-          <editMode>Enter</editMode>
-          <showInHeader>true</showInHeader>
-          <headerHorizontalAlign>Left</headerHorizontalAlign>
-          <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
-            <radioButtonsType>Tumbler</radioButtonsType>
-            <itemHeight>1</itemHeight>
-            <columnsCount>2</columnsCount>
-            <equalElementsWidth>true</equalElementsWidth>
-            <choiceList>
-              <presentation>
-                <key>en</key>
-                <value>Full calculation</value>
-              </presentation>
-              <value xsi:type="core:ReferenceValue">
-                <value>Enum.ReceiptPaymentMethods.EnumValue.FullCalculation</value>
-              </value>
-            </choiceList>
-            <choiceList>
-              <presentation>
-                <key>en</key>
-                <value>Partial prepayment</value>
-              </presentation>
-              <value xsi:type="core:ReferenceValue">
-                <value>Enum.ReceiptPaymentMethods.EnumValue.PartialPrepayment</value>
-              </value>
-            </choiceList>
-            <choiceList>
-              <presentation>
-                <key>en</key>
-                <value>Full prepayment</value>
-              </presentation>
-              <value xsi:type="core:ReferenceValue">
-                <value>Enum.ReceiptPaymentMethods.EnumValue.FullPrepayment</value>
-              </value>
-            </choiceList>
-            <choiceList>
-              <presentation>
-                <key>en</key>
-                <value>Advance payment</value>
-              </presentation>
-              <value xsi:type="core:ReferenceValue">
-                <value>Enum.ReceiptPaymentMethods.EnumValue.AdvancePayment</value>
-              </value>
-            </choiceList>
-            <font xsi:type="core:FontRef">
-              <font>Style.ExtraLargeTextFont</font>
-            </font>
-            <borderColor xsi:type="core:ColorRef">
-              <color>Style.FormBackColor</color>
-            </borderColor>
-          </extInfo>
-        </items>
-        <items xsi:type="form:FormField">
           <name>SpecialOffer</name>
           <id>192</id>
           <titleFont xsi:type="core:FontRef">
@@ -1045,9 +954,6 @@
             <font xsi:type="core:FontRef">
               <font>Style.ExtraLargeTextFont</font>
             </font>
-            <picture xsi:type="core:PictureRef">
-              <picture>CommonPicture.Finance</picture>
-            </picture>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
@@ -1088,9 +994,6 @@
             <font xsi:type="core:FontRef">
               <font>Style.ExtraLargeTextFont</font>
             </font>
-            <picture xsi:type="core:PictureRef">
-              <picture>CommonPicture.Purchase</picture>
-            </picture>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <visible>true</visible>

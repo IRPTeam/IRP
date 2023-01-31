@@ -160,6 +160,29 @@ EndProcedure
 
 &AtClient
 Procedure Enter(Command)
+	
+	For Each PaymentRow In Payments Do
+		If PaymentRow.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Card") Then
+			Settings = EquipmentAcquiringServer.GetAcquiringHardwareSettings();
+			Settings.Account = PaymentRow.Account;
+			Acquiring = EquipmentAcquiringServer.GetAcquiringHardware(Settings);
+			
+			If Acquiring.IsEmpty() Then
+				Continue;
+			EndIf;
+			
+			PaymentSettings = EquipmentAcquiringClient.PayByPaymentCardSettings();
+			PaymentSettings.In.Amount = PaymentRow.Amount;
+			
+			If EquipmentAcquiringClient.PayByPaymentCard(Acquiring, PaymentSettings) Then
+				
+			Else
+				
+			EndIf;
+			
+		EndIf;
+	EndDo;
+	
 	If Not Payments.Count() And CashPaymentTypes.Count() Then
 		ButtonSettings = POSClient.ButtonSettings();
 		FillPropertyValues(ButtonSettings, CashPaymentTypes[0]);

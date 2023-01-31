@@ -61,6 +61,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.CommissionIsSeparate.Visible = IsBankAccount;
 	Form.Items.CashAccount.Visible = IsPOSCashAccount;
 	Form.Items.FinancialMovementType.Visible = IsPOSCashAccount;
+	Form.Items.Acquiring.Visible    = IsPOSAccount;
 	
 	If Form.CurrencyType = "Fixed" Then
 		Form.Items.Currency.Visible = True;
@@ -125,6 +126,9 @@ EndProcedure
 
 &AtClient
 Procedure TypeOnChange(Item)
+	
+	Object.Acquiring = Undefined;
+	
 	If Object.Type = PredefinedValue("Enum.CashAccountTypes.Bank")
 		Or Object.Type = PredefinedValue("Enum.CashAccountTypes.POS") Then
 		ThisObject.CurrencyType = "Fixed";

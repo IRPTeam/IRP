@@ -455,6 +455,8 @@
   <commonModules>CommonModule.DocEmployeeCashAdvanceClient</commonModules>
   <commonModules>CommonModule.DocProductionCostsAllocationClient</commonModules>
   <commonModules>CommonModule.DocProductionCostsAllocationServer</commonModules>
+  <commonModules>CommonModule.EquipmentAcquiringClient</commonModules>
+  <commonModules>CommonModule.EquipmentAcquiringServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

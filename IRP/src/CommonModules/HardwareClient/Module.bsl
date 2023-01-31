@@ -83,7 +83,7 @@ EndProcedure
 //  Structure:
 //  * Result - Boolean
 //  * ErrorDescription - String
-//  * ConnectParameters - Structure
+//  * ConnectParameters - See GetDriverObject
 Async Function ConnectHardware(Hardware) Export
 	Device = HardwareServer.GetConnectionSettings(Hardware);
 	ResultData = New Structure();
@@ -176,7 +176,7 @@ EndFunction
 // * DriverRef - CatalogRef.EquipmentDrivers, Arbitrary -
 // * Hardware - CatalogRef.Hardware, Arbitrary -
 // * AddInID - String, Arbitrary -
-Async Function GetDriverObject(DriverInfo)
+Async Function GetDriverObject(DriverInfo) Export
 	ConnectionSettings = globalEquipment_GetConnectionSettings(DriverInfo);
 	If ConnectionSettings.Connected Then
 		Return ConnectionSettings.Settings;

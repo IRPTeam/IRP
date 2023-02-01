@@ -125,6 +125,11 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 			| "Documents.RetailSalesReceipt.FindByNumber(1113).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailReturnReceipt.FindByNumber(1113).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document Retail sales receipt and Retail return receipt (payment type - bank credit)
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(110).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailReturnReceipt.FindByNumber(1206).GetObject().Write(DocumentWriteMode.Posting);" |
 
 
 Scenario: _0425001 check preparation
@@ -707,6 +712,80 @@ Scenario: _042527 check Retail return receipt movements by the Register  "R8014 
 			| ''                                                      | '14.11.2022 13:57:09' | '-1'        | '-400'       | '-400'    | 'f3d688c7-7c7b-4432-9725-06721e496320' | 'Main Company' | 'Consignor 2' | 'Consignor 2 partner term' | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'UNIQ'     | '09987897977890'    | ''                  | 'pcs'  | 'en description is empty' | 'No'                 | 'TRY'                          | 'TRY'      | 'No'                | '100'             | '400'   |
 			| ''                                                      | '14.11.2022 13:57:09' | '-1'        | '-400'       | '-400'    | 'f3d688c7-7c7b-4432-9725-06721e496320' | 'Main Company' | 'Consignor 2' | 'Consignor 2 partner term' | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'UNIQ'     | '09987897977890'    | ''                  | 'pcs'  | 'en description is empty' | 'No'                 | 'en description is empty'      | 'TRY'      | 'No'                | '100'             | '400'   |
 			| ''                                                      | '14.11.2022 13:57:09' | '-1'        | '-68,48'     | '-68,48'  | 'f3d688c7-7c7b-4432-9725-06721e496320' | 'Main Company' | 'Consignor 2' | 'Consignor 2 partner term' | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'Purchase invoice 196 dated 03.11.2022 16:32:57' | 'UNIQ'     | '09987897977890'    | ''                  | 'pcs'  | 'en description is empty' | 'No'                 | 'Reporting currency'           | 'USD'      | 'No'                | '17,12'           | '68,48' |		
+		And I close all client application windows
+
+
+Scenario: _042531 check Retail return receipt movements by the Register  "R2021 Customer transactions" (bank credit)
+		And I close all client application windows
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 206' |
+	* Check movements by the Register  "R2021 Customer transactions"
+		And I click "Registrations report" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 1 206 dated 01.02.2023 10:28:22' | ''            | ''                    | ''          | ''             | ''        | ''                             | ''         | ''           | ''        | ''          | ''                                                      | ''      | ''                     | ''                           |
+			| 'Document registrations records'                        | ''            | ''                    | ''          | ''             | ''        | ''                             | ''         | ''           | ''        | ''          | ''                                                      | ''      | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"'               | ''            | ''                    | ''          | ''             | ''        | ''                             | ''         | ''           | ''        | ''          | ''                                                      | ''      | ''                     | ''                           |
+			| ''                                                      | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                             | ''         | ''           | ''        | ''          | ''                                                      | ''      | 'Attributes'           | ''                           |
+			| ''                                                      | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Multi currency movement type' | 'Currency' | 'Legal name' | 'Partner' | 'Agreement' | 'Basis'                                                 | 'Order' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                                      | 'Receipt'     | '01.02.2023 10:28:22' | '-5 750'    | 'Main Company' | 'Shop 02' | 'Local currency'               | 'TRY'      | 'Bank 1'     | 'Bank 1'  | 'Bank 1'    | 'Retail return receipt 1 206 dated 01.02.2023 10:28:22' | ''      | 'No'                   | ''                           |
+			| ''                                                      | 'Receipt'     | '01.02.2023 10:28:22' | '-5 750'    | 'Main Company' | 'Shop 02' | 'TRY'                          | 'TRY'      | 'Bank 1'     | 'Bank 1'  | 'Bank 1'    | 'Retail return receipt 1 206 dated 01.02.2023 10:28:22' | ''      | 'No'                   | ''                           |
+			| ''                                                      | 'Receipt'     | '01.02.2023 10:28:22' | '-5 750'    | 'Main Company' | 'Shop 02' | 'en description is empty'      | 'TRY'      | 'Bank 1'     | 'Bank 1'  | 'Bank 1'    | 'Retail return receipt 1 206 dated 01.02.2023 10:28:22' | ''      | 'No'                   | ''                           |
+			| ''                                                      | 'Receipt'     | '01.02.2023 10:28:22' | '-984,4'    | 'Main Company' | 'Shop 02' | 'Reporting currency'           | 'USD'      | 'Bank 1'     | 'Bank 1'  | 'Bank 1'    | 'Retail return receipt 1 206 dated 01.02.2023 10:28:22' | ''      | 'No'                   | ''                           |		
+		And I close all client application windows
+
+Scenario: _042532 check Retail return receipt movements by the Register  "R5010 Reconciliation statement" (bank credit)
+		And I close all client application windows
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 206' |
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 1 206 dated 01.02.2023 10:28:22' | ''            | ''                    | ''          | ''             | ''        | ''         | ''           | ''                    |
+			| 'Document registrations records'                        | ''            | ''                    | ''          | ''             | ''        | ''         | ''           | ''                    |
+			| 'Register  "R5010 Reconciliation statement"'            | ''            | ''                    | ''          | ''             | ''        | ''         | ''           | ''                    |
+			| ''                                                      | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''         | ''           | ''                    |
+			| ''                                                      | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Currency' | 'Legal name' | 'Legal name contract' |
+			| ''                                                      | 'Receipt'     | '01.02.2023 10:28:22' | '-5 750'    | 'Main Company' | 'Shop 02' | 'TRY'      | 'Bank 1'     | ''                    |		
+		And I close all client application windows
+
+Scenario: _042533 check Retail return receipt movements absence by the Register  "R3010 Cash on hand" (bank credit) 
+	And I close all client application windows
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 206' |
+	* Check movements by the Register  "R3010 Cash on hand"
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| Register  "R3010 Cash on hand" |
+		And I close all client application windows
+
+Scenario: _042533 check Retail return receipt movements absence by the Register  "R3050 Pos cash balances" (bank credit) 
+	And I close all client application windows
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 206' |
+	* Check movements by the Register  "R3050 Pos cash balances"
+		And I click "Registrations report" button
+		And I select "R3050 Pos cash balances" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| Register  "R3050 Pos cash balances" |
 		And I close all client application windows
 
 Scenario: _042530 Retail return receipt clear posting/mark for deletion

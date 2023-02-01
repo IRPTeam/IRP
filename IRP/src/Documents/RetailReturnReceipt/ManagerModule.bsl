@@ -679,29 +679,35 @@ EndFunction
 
 Function Payments()
 	Return 
-	"SELECT
-	|	Payments.Ref.Date AS Period,
-	|	Payments.Ref.Company AS Company,
-	|	Payments.Ref AS Basis,
-	|	Payments.Account AS Account,
-	|	Payments.Account.Type = VALUE(Enum.CashAccountTypes.Bank) AS IsBankAccount,
-	|	Payments.Account.Type = VALUE(Enum.CashAccountTypes.Cash) AS IsCashAccount,
-	|	Payments.Account.Type = VALUE(Enum.CashAccountTypes.POS) AS IsPOSAccount,
-	|	Payments.PostponedPayment AS IsPostponedPayment,
-	|	Payments.Ref.Currency AS Currency,
-	|	Payments.Amount AS Amount,
-	|	Payments.Ref.Branch AS Branch,
-	|	Payments.PaymentType AS PaymentType,
-	|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Card) AS IsCardPayment,
-	|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Cash) AS IsCashPayment,
-	|	Payments.PaymentTerminal AS PaymentTerminal,
-	|	Payments.Percent AS Percent,
-	|	Payments.Commission AS Commission
-	|INTO Payments
-	|FROM
-	|	Document.RetailReturnReceipt.Payments AS Payments
-	|WHERE
-	|	Payments.Ref = &Ref";
+		"SELECT
+		|	Payments.Ref.Date AS Period,
+		|	Payments.Ref.Company AS Company,
+		|	Payments.Ref AS Basis,
+		|	Payments.Account AS Account,
+		|	Payments.Account.Type = VALUE(Enum.CashAccountTypes.Bank) AS IsBankAccount,
+		|	Payments.Account.Type = VALUE(Enum.CashAccountTypes.Cash) AS IsCashAccount,
+		|	Payments.Account.Type = VALUE(Enum.CashAccountTypes.POS) AS IsPOSAccount,
+		|	Payments.PostponedPayment AS IsPostponedPayment,
+		|	Payments.Ref.Currency AS Currency,
+		|	Payments.Amount AS Amount,
+		|	Payments.Ref.Branch AS Branch,
+		|	Payments.PaymentType AS PaymentType,
+		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Card) AS IsCardPayment,
+		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.Cash) AS IsCashPayment,
+		|	Payments.PaymentType.Type = VALUE(Enum.PaymentTypes.PaymentAgent) AS IsPaymentAgent,
+		|	Payments.PaymentTerminal AS PaymentTerminal,
+		|	Payments.Percent AS Percent,
+		|	Payments.Commission AS Commission,
+		|	CASE
+		|		WHEN Payments.PaymentType.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			THEN Payments.Ref
+		|		ELSE UNDEFINED
+		|	END AS BasisDocument
+		|INTO Payments
+		|FROM
+		|	Document.RetailReturnReceipt.Payments AS Payments
+		|WHERE
+		|	Payments.Ref = &Ref";
 EndFunction
 
 Function OffersInfo()
@@ -950,14 +956,15 @@ EndFunction
 
 Function R3010B_CashOnHand()
 	Return 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	*
-	|INTO R3010B_CashOnHand
-	|FROM
-	|	Payments AS Payments
-	|WHERE
-	|	NOT Payments.IsPostponedPayment";
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	*
+		|INTO R3010B_CashOnHand
+		|FROM
+		|	Payments AS Payments
+		|WHERE
+		|	NOT (Payments.IsPostponedPayment
+		|	OR Payments.IsPaymentAgent)";
 EndFunction
 
 Function R4011B_FreeStocks()
@@ -1009,15 +1016,15 @@ EndFunction
 
 Function R3050T_PosCashBalances()
 	Return 
-	"SELECT
-	|	- Payments.Amount AS Amount,
-	|	- Payments.Commission AS Commission,
-	|	*
-	|INTO R3050T_PosCashBalances
-	|FROM
-	|	Payments AS Payments
-	|WHERE
-	|	TRUE";
+		"SELECT
+		|	-Payments.Amount AS Amount,
+		|	-Payments.Commission AS Commission,
+		|	*
+		|INTO R3050T_PosCashBalances
+		|FROM
+		|	Payments AS Payments
+		|WHERE
+		|	NOT Payments.IsPaymentAgent";
 EndFunction
 
 Function R2050T_RetailSales()
@@ -1053,109 +1060,168 @@ Function R2002T_SalesReturns()
 		   |	TRUE";
 EndFunction
 
-Function R2021B_CustomersTransactions()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument AS Basis,
-		   |	- SUM(ItemList.TotalAmount) AS Amount,
-		   |	UNDEFINED AS CustomersAdvancesClosing
-		   |INTO R2021B_CustomersTransactions
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.UsePartnerTransactions
-		   |GROUP BY
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Period,
-		   |	VALUE(AccumulationRecordType.Receipt)
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument,
-		   |	SUM(ItemList.TotalAmount),
-		   |	UNDEFINED
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.UsePartnerTransactions
-		   |GROUP BY
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Period,
-		   |	VALUE(AccumulationRecordType.Expense)";
+Function R2021B_CustomersTransactions()	 
+	Return
+	 "SELECT
+	 |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	 |	ItemList.Period,
+	 |	ItemList.Company,
+	 |	ItemList.Branch,
+	 |	ItemList.Currency,
+	 |	ItemList.LegalName,
+	 |	ItemList.Partner,
+	 |	ItemList.Agreement,
+	 |	ItemList.BasisDocument AS Basis,
+	 |	-SUM(ItemList.TotalAmount) AS Amount,
+	 |	UNDEFINED AS CustomersAdvancesClosing
+	 |INTO R2021B_CustomersTransactions
+	 |FROM
+	 |	ItemList AS ItemList
+	 |WHERE
+	 |	ItemList.UsePartnerTransactions
+	 |GROUP BY
+	 |	ItemList.Agreement,
+	 |	ItemList.BasisDocument,
+	 |	ItemList.Company,
+	 |	ItemList.Branch,
+	 |	ItemList.Currency,
+	 |	ItemList.LegalName,
+	 |	ItemList.Partner,
+	 |	ItemList.Period,
+	 |	VALUE(AccumulationRecordType.Receipt)
+	 |
+	 |UNION ALL
+	 |
+	 |SELECT
+	 |	VALUE(AccumulationRecordType.Expense),
+	 |	ItemList.Period,
+	 |	ItemList.Company,
+	 |	ItemList.Branch,
+	 |	ItemList.Currency,
+	 |	ItemList.LegalName,
+	 |	ItemList.Partner,
+	 |	ItemList.Agreement,
+	 |	ItemList.BasisDocument,
+	 |	SUM(ItemList.TotalAmount),
+	 |	UNDEFINED
+	 |FROM
+	 |	ItemList AS ItemList
+	 |WHERE
+	 |	ItemList.UsePartnerTransactions
+	 |GROUP BY
+	 |	ItemList.Agreement,
+	 |	ItemList.BasisDocument,
+	 |	ItemList.Company,
+	 |	ItemList.Branch,
+	 |	ItemList.Currency,
+	 |	ItemList.LegalName,
+	 |	ItemList.Partner,
+	 |	ItemList.Period,
+	 |	VALUE(AccumulationRecordType.Expense)
+	 |
+	 |UNION ALL
+	 |
+	 |SELECT
+	 |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	 |	Payments.Period,
+	 |	Payments.Company,
+	 |	Payments.Branch,
+	 |	Payments.Currency,
+	 |	Payments.PaymentType.LegalName AS LegalName,
+	 |	Payments.PaymentType.Partner AS Partner,
+	 |	Payments.PaymentType.Agreement AS Agreement,
+	 |	Payments.BasisDocument AS Basis,
+	 |	-SUM(Payments.Amount) AS Amount,
+	 |	UNDEFINED AS CustomersAdvancesClosing
+	 |FROM
+	 |	Payments AS Payments
+	 |WHERE
+	 |	Payments.IsPaymentAgent
+	 |GROUP BY
+	 |	VALUE(AccumulationRecordType.Receipt),
+	 |	Payments.Period,
+	 |	Payments.Company,
+	 |	Payments.Branch,
+	 |	Payments.Currency,
+	 |	Payments.PaymentType.LegalName,
+	 |	Payments.PaymentType.Partner,
+	 |	Payments.PaymentType.Agreement,
+	 |	Payments.BasisDocument";
+
 EndFunction
 
 Function R5010B_ReconciliationStatement()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.LegalName,
-		   |	ItemList.LegalNameContract,
-		   |	ItemList.Currency,
-		   |	- SUM(ItemList.TotalAmount) AS Amount,
-		   |	ItemList.Period
-		   |INTO R5010B_ReconciliationStatement
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.UsePartnerTransactions
-		   |GROUP BY
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.LegalName,
-		   |	ItemList.LegalNameContract,
-		   |	ItemList.Currency,
-		   |	ItemList.Period
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.LegalName,
-		   |	ItemList.LegalNameContract,
-		   |	ItemList.Currency,
-		   |	SUM(ItemList.TotalAmount),
-		   |	ItemList.Period
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.UsePartnerTransactions
-		   |GROUP BY
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.LegalName,
-		   |	ItemList.LegalNameContract,
-		   |	ItemList.Currency,
-		   |	ItemList.Period";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
+		|	ItemList.Currency,
+		|	-SUM(ItemList.TotalAmount) AS Amount,
+		|	ItemList.Period
+		|INTO R5010B_ReconciliationStatement
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.UsePartnerTransactions
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
+		|	ItemList.Currency,
+		|	ItemList.Period,
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
+		|	ItemList.Currency,
+		|	SUM(ItemList.TotalAmount),
+		|	ItemList.Period
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.UsePartnerTransactions
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
+		|	ItemList.Currency,
+		|	ItemList.Period,
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Payments.Company,
+		|	Payments.Branch,
+		|	Payments.PaymentType.LegalName AS LegalName,
+		|	Payments.PaymentType.LegalNameContract AS LegalNameContract,
+		|	Payments.Currency,
+		|	-SUM(Payments.Amount) AS Amount,
+		|	Payments.Period
+		|FROM
+		|	Payments AS Payments
+		|WHERE
+		|	Payments.IsPaymentAgent
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	Payments.Company,
+		|	Payments.Branch,
+		|	Payments.PaymentType.LegalName,
+		|	Payments.PaymentType.LegalNameContract,
+		|	Payments.Currency,
+		|	Payments.Period";
 EndFunction
 
 Function T3010S_RowIDInfo()

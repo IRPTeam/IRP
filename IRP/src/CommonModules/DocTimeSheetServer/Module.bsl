@@ -91,9 +91,9 @@ Function GetStaffing(Company, Branch, _Day)
 	|	StaffingSliceLast.Position AS Position,
 	|	StaffingSliceLast.Period AS Date
 	|FROM
-	|	InformationRegister.Staffing.SliceLast(ENDOFPERIOD(&_Day, DAY), Company = &Company
+	|	InformationRegister.T9510S_Staffing.SliceLast(ENDOFPERIOD(&_Day, DAY), Company = &Company
 	|	AND Branch = &Branch) AS StaffingSliceLast
-	|		INNER JOIN InformationRegister.Staffing.SliceLast(ENDOFPERIOD(&_Day, DAY),) AS StaffingFiredSliceLast
+	|		INNER JOIN InformationRegister.T9510S_Staffing.SliceLast(ENDOFPERIOD(&_Day, DAY),) AS StaffingFiredSliceLast
 	|		ON (StaffingSliceLast.Employee = StaffingFiredSliceLast.Employee)
 	|WHERE
 	|	NOT StaffingFiredSliceLast.Fired";

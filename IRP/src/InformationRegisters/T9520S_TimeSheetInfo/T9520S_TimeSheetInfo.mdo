@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9f1acb11-d50b-40e5-a9d9-a2646db8990f">
+  <producedTypes>
+    <selectionType typeId="83b703c7-fb60-43d6-9bb2-c3645007ce53" valueTypeId="6dab9e08-a199-4f53-b3cb-7f3e3c8800dd"/>
+    <listType typeId="eeca99a2-d7c1-4500-8f8b-557612de8443" valueTypeId="679f5d1d-fb62-41ba-abbb-6e9be1f29e1e"/>
+    <managerType typeId="d99d8752-7e3e-4f48-a389-1a80b5744589" valueTypeId="d43156d2-806e-4795-8e41-4ec101677e0e"/>
+    <recordSetType typeId="6b3f4c23-3de5-4d7f-a4c5-6d1ae4ec825a" valueTypeId="4c087568-9a19-4671-bc23-24d92142c582"/>
+    <recordKeyType typeId="71ba5b32-2e39-458f-bf1f-e8cfcee563e1" valueTypeId="f8e18726-e31d-4549-a46c-22a9c9142f94"/>
+    <recordType typeId="5a5b67ea-42ae-494c-a823-76c10c0e1a9c" valueTypeId="073b51fc-ae30-4a1b-a650-d411c984b080"/>
+    <recordManagerType typeId="03f4fb28-bb79-4f72-bd1e-dc20d20d96ae" valueTypeId="e9064775-7fb4-49fb-b3bd-3cf50a0b045c"/>
+  </producedTypes>
+  <name>T9520S_TimeSheetInfo</name>
+  <synonym>
+    <key>en</key>
+    <value>T9520 Time sheet info</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <writeMode>RecorderSubordinate</writeMode>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <dimensions uuid="b5ce9181-ef7f-4ba3-a8ec-aa6e7ad11ad5">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="67eefcf9-46f0-4d6b-94a8-068e078baa6a">
+    <name>Branch</name>
+    <synonym>
+      <key>en</key>
+      <value>Branch</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="d2399293-fe74-41a6-aacb-6940b533a900">
+    <name>Date</name>
+    <synonym>
+      <key>en</key>
+      <value>Date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="7861ab30-76d0-41b7-8b53-ffb1b8c822ed">
+    <name>Employee</name>
+    <synonym>
+      <key>en</key>
+      <value>Employee</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="e1c24f8f-e979-4ac4-872c-5e6cfcf0839a">
+    <name>Position</name>
+    <synonym>
+      <key>en</key>
+      <value>Position</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.EmployeePositions</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="f4e4bdd3-6f3e-4c4d-8810-f6c5cd05daaa">
+    <name>AccrualAndDeductionType</name>
+    <synonym>
+      <key>en</key>
+      <value>Accrual and deduction type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.AccrualAndDeductionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </dimensions>
+</mdclass:InformationRegister>

@@ -7,7 +7,7 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
-  <content>InformationRegister.AccrualAndDeductionValues</content>
-  <content>InformationRegister.Staffing</content>
+  <content>InformationRegister.T9500S_AccrualAndDeductionValues</content>
+  <content>InformationRegister.T9510S_Staffing</content>
   <parentSubsystem>Subsystem.Salary</parentSubsystem>
 </mdclass:Subsystem>

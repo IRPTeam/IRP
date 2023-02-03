@@ -1297,7 +1297,7 @@ WHERE
     </edit>
     <functionalOptions>FunctionalOption.UseSalary</functionalOptions>
     <extInfo xsi:type="form:DynamicListExtInfo">
-      <mainTable>InformationRegister.Staffing</mainTable>
+      <mainTable>InformationRegister.T9510S_Staffing</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <autoSaveUserSettings>true</autoSaveUserSettings>

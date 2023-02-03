@@ -55,60 +55,47 @@ EndProcedure
 
 Function GetPayrolls(Parameters) Export
 	ResultTable = New ValueTable();
-	ResultTable.Columns.Add("Date");
 	ResultTable.Columns.Add("Employee");
 	ResultTable.Columns.Add("Position");
 	ResultTable.Columns.Add("AccrualAndDeductionType");
 	ResultTable.Columns.Add("Amount");
 	
-	BeginDate = BegOfDay(Parameters.BeginDate);
-	EndDate = BegOfDay(Parameters.EndDate);
-	
-	While BeginDate < EndDate Do	
-		ArrayOfStaffing = GetStaffing(Parameters.Company, Parameters.Branch, BeginDate);
-		
-		For Each Row In ArrayOfStaffing Do
-			NewRow = ResultTable.Add();
-			FillPropertyValues(NewRow, Row);
-			NewRow.Amount = 0;
-		EndDo;
-		
-		BeginDate = EndOfDay(BeginDate) + 1;
-	EndDo;
-	
-	ResultTable.Sort("Employee, Date");
-	
-	Return ResultTable;
-EndFunction
-
-Function GetStaffing(Company, Branch, _Day)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	EmployeePositionsSliceLast.Employee AS Employee,
-	|	EmployeePositionsSliceLast.Position AS Position,
-	|	EmployeePositionsSliceLast.Period AS Date
+	|	T9520S_TimeSheetInfo.Date AS Date,
+	|	T9520S_TimeSheetInfo.Employee AS Employee,
+	|	T9520S_TimeSheetInfo.Position AS Position,
+	|	T9520S_TimeSheetInfo.AccrualAndDeductionType AS AccrualAndDeductionType
 	|FROM
-	|	InformationRegister.Staffing.SliceLast(ENDOFPERIOD(&_Day, DAY), Company = &Company
-	|	AND Branch = &Branch) AS EmployeePositionsSliceLast
+	|	InformationRegister.T9520S_TimeSheetInfo AS T9520S_TimeSheetInfo
 	|WHERE
-	|	NOT EmployeePositionsSliceLast.Position.Ref IS NULL";
-	Query.SetParameter("Company", Company);
-	Query.SetParameter("Branch" , Branch);
-	Query.SetParameter("_Day"   , _Day);
+	|	T9520S_TimeSheetInfo.Date BETWEEN BEGINOFPERIOD(&BeginDate, DAY) AND ENDOFPERIOD(&EndDate, DAY)
+	|	AND T9520S_TimeSheetInfo.Company = &Company
+	|	AND T9520S_TimeSheetInfo.Branch = &Branch";
+	Query.SetParameter("BeginDate", Parameters.BeginDate);
+	Query.SetParameter("EndDate"  , Parameters.EndDate);
+	Query.SetParameter("Company"  , Parameters.Company);
+	Query.SetParameter("Branch"   , Parameters.Branch);
 	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	
-	ArrayOfResults = New Array();
 	While QuerySelection.Next() Do
-		ArrayOfResults.Add(New Structure("Employee, Position, Date", 
+		Value = SalaryServerReuse.GetAccualAndDeductionValue(QuerySelection.Date, 
 			QuerySelection.Employee,
 			QuerySelection.Position,
-			_Day));
+			QuerySelection.AccrualAndDeductionType);
+		CountDays = SalaryServerReuse.GetWorkDays(Parameters.BeginDate,
+			Parameters.EndDate,
+			QuerySelection.AccrualAndDeductionType);
 	EndDo;
 	
-	Return ArrayOfResults;
+	Return ResultTable;
 EndFunction
-	
+
+Function _MonthlySalary()
+		
+EndFunction
+
 

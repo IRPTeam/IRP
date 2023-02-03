@@ -9,10 +9,10 @@
     <recordType typeId="b8c246c5-a44b-4749-8213-df2c0713d6d6" valueTypeId="f6949020-42e7-4b9c-a472-c1f7c551b6f2"/>
     <recordManagerType typeId="269b4285-5af2-4769-b2b9-4b2a667fe049" valueTypeId="5415430d-4b14-4fbb-939c-8979ae7720ac"/>
   </producedTypes>
-  <name>AccrualAndDeductionValues</name>
+  <name>T9500S_AccrualAndDeductionValues</name>
   <synonym>
     <key>en</key>
-    <value>Accrual and deduction values</value>
+    <value>T9500 Accrual and deduction values</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>

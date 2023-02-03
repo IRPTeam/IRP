@@ -87,10 +87,46 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array();
+	QueryArray.Add(TimeSheet());
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array();
+	QueryArray.Add(T9520S_TimeSheetInfo());
 	Return QueryArray;
 EndFunction
+
+Function TimeSheet()
+	Return
+		"SELECT
+		|	TimeSheetTimeSheetList.Ref.Company AS Company,
+		|	TimeSheetTimeSheetList.Ref.Branch AS Branch,
+		|	TimeSheetTimeSheetList.Date,
+		|	TimeSheetTimeSheetList.Employee,
+		|	TimeSheetTimeSheetList.Position,
+		|	TimeSheetTimeSheetList.AccrualAndDeductionType
+		|INTO TimeSheet
+		|FROM
+		|	Document.TimeSheet.TimeSheetList AS TimeSheetTimeSheetList
+		|WHERE
+		|	TimeSheetTimeSheetList.Ref = &Ref
+		|	AND NOT TimeSheetTimeSheetList.AccrualAndDeductionType.Ref IS NULL"	
+EndFunction
+
+Function T9520S_TimeSheetInfo()
+	Return
+		"SELECT
+		|	TimeSheet.Company,
+		|	TimeSheet.Branch,
+		|	TimeSheet.Date,
+		|	TimeSheet.Employee,
+		|	TimeSheet.Position,
+		|	TimeSheet.AccrualAndDeductionType
+		|INTO T9520S_TimeSheetInfo
+		|FROM
+		|	TimeSheet AS TimeSheet
+		|WHERE
+		|	TRUE";
+EndFunction
+

@@ -325,7 +325,7 @@
     <name>Record</name>
     <id>1</id>
     <valueType>
-      <types>InformationRegisterRecordManager.Staffing</types>
+      <types>InformationRegisterRecordManager.T9510S_Staffing</types>
     </valueType>
     <view>
       <common>true</common>

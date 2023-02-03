@@ -7332,7 +7332,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.AccrualAndDeductionValues</name>
+		<name>InformationRegister.T9500S_AccrualAndDeductionValues</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -7343,7 +7343,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.Staffing</name>
+		<name>InformationRegister.T9510S_Staffing</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -7383,6 +7383,38 @@
 		</right>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonCommand.OpenPartnersEmployee</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9520S_TimeSheetInfo</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Salary.Subsystem.Settings</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Salary.Subsystem.Catalogs</name>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>

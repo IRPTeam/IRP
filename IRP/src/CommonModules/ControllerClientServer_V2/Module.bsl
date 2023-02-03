@@ -1235,6 +1235,7 @@ Procedure MultiSetTransactionType_BankPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("PaymentTerminal"          , BindPaymentListPaymentTerminal(Parameters));
 	ResourceToBinding.Insert("BankTerm"                 , BindPaymentListBankTerm(Parameters));
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
+	ResourceToBinding.Insert("Employee"                 , BindPaymentListEmployee(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1271,6 +1272,7 @@ Procedure MultiSetTransactionType_CashPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("PlanningTransactionBasis" , BindPaymentListPlanningTransactionBasis(Parameters));
 	ResourceToBinding.Insert("Order"                    , BindPaymentListOrder(Parameters));
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
+	ResourceToBinding.Insert("Employee"                 , BindPaymentListEmployee(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1321,6 +1323,7 @@ Procedure StepClearByTransactionTypeBankPayment(Parameters, Chain) Export
 		Options.PaymentTerminal          = GetPaymentListPaymentTerminal(Parameters, Row.Key);
 		Options.BankTerm                 = GetPaymentListBankTerm(Parameters, Row.Key);
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
+		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankPayment";
 		Chain.ClearByTransactionTypeBankPayment.Options.Add(Options);
@@ -1371,6 +1374,7 @@ Procedure StepClearByTransactionTypeCashPayment(Parameters, Chain) Export
 		Options.Payee                    = GetPaymentListLegalName(Parameters, Row.Key);
 		Options.Order                    = GetPaymentListOrder(Parameters, Row.Key);
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
+		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashPayment";
 		Chain.ClearByTransactionTypeCashPayment.Options.Add(Options);
@@ -4788,6 +4792,34 @@ EndFunction
 // PaymentList.RetailCustomer.Bind
 Function BindPaymentListRetailCustomer(Parameters)
 	DataPath = "PaymentList.RetailCustomer";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_EMPLOYEE
+
+// PaymentList.Employee.OnChange
+Procedure PaymentListEmployeeOnChange(Parameters) Export
+	Binding = BindPaymentListEmployee(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.Employee.Set
+Procedure SetPaymentListEmployee(Parameters, Results) Export
+	Binding = BindPaymentListEmployee(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.Employee.Get
+Function GetPaymentListEmployee(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListEmployee(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.Employee.Bind
+Function BindPaymentListEmployee(Parameters)
+	DataPath = "PaymentList.Employee";
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction

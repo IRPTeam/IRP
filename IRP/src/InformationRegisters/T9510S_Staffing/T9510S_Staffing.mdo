@@ -9,14 +9,14 @@
     <recordType typeId="e25eeb85-cb61-49e2-91b4-f35b67f33331" valueTypeId="b4a2f26a-ca50-4613-b279-49782fc5367e"/>
     <recordManagerType typeId="0025cda0-ecbf-4cb3-8bc2-e6a6d14781c4" valueTypeId="d1d6324a-b186-423c-a636-135bc9cbb30e"/>
   </producedTypes>
-  <name>Staffing</name>
+  <name>T9510S_Staffing</name>
   <synonym>
     <key>en</key>
-    <value>Staffing</value>
+    <value>T9510 Staffing</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
-  <defaultRecordForm>InformationRegister.Staffing.Form.RecordForm</defaultRecordForm>
+  <defaultRecordForm>InformationRegister.T9510S_Staffing.Form.RecordForm</defaultRecordForm>
   <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
   <dataLockControlMode>Managed</dataLockControlMode>
   <resources uuid="9cb6e57a-70d6-4fc2-9027-a2450ac5952d">

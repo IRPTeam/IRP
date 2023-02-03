@@ -118,7 +118,7 @@ Procedure StaffingAddContinue(Result, AdditionalParameters) Export
 		Write();
 		FormParameters = New Structure();
 		FormParameters.Insert("FillingValues", New Structure("Employee", Object.Ref));
-		OpenForm("InformationRegister.Staffing.RecordForm", FormParameters, 
+		OpenForm("InformationRegister.T9510S_Staffing.RecordForm", FormParameters, 
 			AdditionalParameters.Owner, , , , , FormWindowOpeningMode.LockOwnerWindow);	
 	EndIf;
 EndProcedure

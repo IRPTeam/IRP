@@ -219,7 +219,19 @@ Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 	FillSalesPersonInItemList();
 	CurrentData = Items.ItemList.CurrentData;
 	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.ItemKey));
+	If Object.ItemList.Count() = 0 Then
+		Modified = False;
+	EndIf;
 EndProcedure
+
+&AtClient
+Procedure BeforeClose(Cancel, Exit, WarningText, StandardProcessing)
+	If Object.ItemList.Count() Then
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(R().POS_s6, "Object.ItemList[0].Item", "Object.ItemList");
+	EndIf;
+EndProcedure
+
 
 &AtClient
 Procedure ItemListOnStartEdit(Item, NewRow, Clone)

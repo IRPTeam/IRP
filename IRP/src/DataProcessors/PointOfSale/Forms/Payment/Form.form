@@ -1050,6 +1050,10 @@
               <font xsi:type="core:FontRef">
                 <font>Style.LargeTextFont</font>
               </font>
+              <inputHint>
+                <key>en</key>
+                <value>RRN Code</value>
+              </inputHint>
             </extInfo>
           </items>
           <autoCommandBar>

@@ -314,6 +314,7 @@ Function Strings(Lang) Export
 	Strings.Insert("POS_s3", NStr("en = 'There is no need to use cash, as card payments are sufficient to pay'", Lang));
 	Strings.Insert("POS_s4", NStr("en = 'Amounts of payments are incorrect'", Lang));
 	Strings.Insert("POS_s5", NStr("en = 'Select sales person'", Lang));
+	Strings.Insert("POS_s6", NStr("en = 'Clear all Items before closing POS'", Lang));
 	
 	Strings.Insert("POS_Error_CheckPaymentsbyCard", NStr("en = 'Check payment %1'", Lang));
 	Strings.Insert("POS_Error_PaymentAlreadyDone", NStr("en = 'Can not change payment. Cancel or Revers it before.'", Lang));

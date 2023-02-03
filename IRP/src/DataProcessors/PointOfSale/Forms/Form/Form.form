@@ -5485,6 +5485,10 @@
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
   </handlers>
+  <handlers>
+    <event>BeforeClose</event>
+    <name>BeforeClose</name>
+  </handlers>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
   <verticalSpacing>None</verticalSpacing>

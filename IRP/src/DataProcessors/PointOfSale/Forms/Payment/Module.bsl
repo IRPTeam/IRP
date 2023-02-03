@@ -26,6 +26,14 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Object.Discount = Parameters.Discount;
 	ThisObject.IsAdvance = Parameters.IsAdvance;
 	
+	isReturn = Parameters.isReturn;
+	RetailBasis = Parameters.RetailBasis;
+	
+	Items.Payment_PayByPaymentCard.Visible = Not isReturn;
+	Items.Payment_ReturnPaymentByPaymentCard.Visible = isReturn;
+	
+	Items.PaymentsRRNCode.Visible = isReturn;
+	
 	FillPaymentTypes();
 	FillPaymentMethods();
 	
@@ -168,10 +176,23 @@ Procedure PaymentsOnActivateRow(Item)
 		CurrentData.Edited = False;
 		CurrentData.AmountString = GetAmountString(CurrentData.Amount);
 		Items.GroupPaymentInfo.Visible = Not CurrentData.Hardware.IsEmpty();
+		
+		If Items.GroupPaymentInfo.Visible And isReturn And Not RetailBasis.IsEmpty() Then
+			RRNArray = GetRRNCode(CurrentData.PaymentType);
+			Items.PaymentsRRNCode.ChoiceList.LoadValues(RRNArray);
+		EndIf;
+		SetEnablePaymentOptions(CurrentData);
 	Else
 		Items.GroupPaymentInfo.Visible = False;
 	EndIf;
 	
+EndProcedure
+
+&AtClient
+Procedure SetEnablePaymentOptions(CurrentData)
+	PaymentDone = CurrentData.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.Done");
+	Items.Payment_PayByPaymentCard.Enabled = Not PaymentDone;
+	Items.Payment_ReturnPaymentByPaymentCard.Enabled = Not PaymentDone;
 EndProcedure
 
 #EndRegion
@@ -681,12 +702,60 @@ Async Procedure Payment_PayByPaymentCard(Command)
 		Return;
 	EndIf;
 	
+	
 	PaymentRow.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.New");
 	
 	PaymentSettings = EquipmentAcquiringClient.PayByPaymentCardSettings();
 	PaymentSettings.In.Amount = PaymentRow.Amount;
 	
-	If Await EquipmentAcquiringClient.PayByPaymentCard(PaymentRow.Hardware, PaymentSettings) Then
+	Result = Await EquipmentAcquiringClient.PayByPaymentCard(PaymentRow.Hardware, PaymentSettings);
+	PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
+	If Result Then
+		PaymentRow.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.Done");
+		PaymentRow.RRNCode = PaymentSettings.Out.RRNCode;
+	Else
+		PaymentRow.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.Error");
+	EndIf;
+	SetEnablePaymentOptions(PaymentRow);
+EndProcedure
+
+&AtClient
+Async Procedure Payment_ReturnPaymentByPaymentCard(Command)
+	PaymentRow = Items.Payments.CurrentData;
+	
+	If PaymentRow = Undefined Then
+		Return;
+	EndIf;
+	
+	PaymentRow.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.New");
+	
+	PaymentSettings = EquipmentAcquiringClient.ReturnPaymentByPaymentCardSettings();
+	PaymentSettings.In.Amount = PaymentRow.Amount;
+	PaymentSettings.InOut.RRNCode = PaymentRow.RRNCode;
+	If Await EquipmentAcquiringClient.ReturnPaymentByPaymentCard(PaymentRow.Hardware, PaymentSettings) Then
+		PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
+		PaymentRow.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.Done");
+	Else
+		PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
+		PaymentRow.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.Error");
+	EndIf;
+	SetEnablePaymentOptions(PaymentRow);
+EndProcedure
+
+&AtClient
+Async Procedure Payment_CancelPaymentByPaymentCard(Command)
+	PaymentRow = Items.Payments.CurrentData;
+	
+	If PaymentRow = Undefined Then
+		Return;
+	EndIf;
+	
+	PaymentRow.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.New");
+	
+	PaymentSettings = EquipmentAcquiringClient.CancelPaymentByPaymentCardSettings();
+	PaymentSettings.In.Amount = PaymentRow.Amount;
+	
+	If Await EquipmentAcquiringClient.CancelPaymentByPaymentCard(PaymentRow.Hardware, PaymentSettings) Then
 		PaymentSettings.Delete("In");
 		PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
 		PaymentRow.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.Done");
@@ -697,21 +766,36 @@ Async Procedure Payment_PayByPaymentCard(Command)
 EndProcedure
 
 &AtClient
-Procedure Payment_ReturnPaymentByPaymentCard(Command)
-	//TODO: Insert the handler content
+Async Procedure Payment_EmergencyReversal(Command)
+	PaymentRow = Items.Payments.CurrentData;
+	
+	If PaymentRow = Undefined Then
+		Return;
+	EndIf;
+	
+	PaymentRow.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.New");
+	
+	PaymentSettings = EquipmentAcquiringClient.EmergencyReversalSettings();
+	
+	If Await EquipmentAcquiringClient.EmergencyReversal(PaymentRow.Hardware, PaymentSettings) Then
+		PaymentSettings.Delete("In");
+		PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
+		PaymentRow.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.Done");
+	Else
+		PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
+		PaymentRow.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.Error");
+	EndIf;
 EndProcedure
 
-&AtClient
-Procedure Payment_CancelPaymentByPaymentCard(Command)
-	//TODO: Insert the handler content
-EndProcedure
-
-&AtClient
-Procedure Payment_EmergencyReversal(Command)
-	//TODO: Insert the handler content
-EndProcedure
-
-
+&AtServer
+Function GetRRNCode(PaymentType)
+	Rows = RetailBasis.Payments.FindRows(New Structure("PaymentType", PaymentType));
+	Array = New Array;
+	For Each Row In Rows Do
+		Array.Add(Row.RRNCode);
+	EndDo;
+	Return Array;
+EndFunction
 
 
 #EndRegion

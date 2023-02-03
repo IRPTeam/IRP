@@ -455,6 +455,8 @@ Procedure qPayment(Command)
 	ObjectParameters.Insert("IsAdvance", False);
 	ObjectParameters.Insert("RetailCustomer", Object.RetailCustomer);
 	ObjectParameters.Insert("Company", Object.Company);
+	ObjectParameters.Insert("isReturn", ThisObject.isReturn);
+	ObjectParameters.Insert("RetailBasis", ThisObject.RetailBasis);
 	ObjectParameters.Insert("Discount", Object.ItemList.Total("OffersAmount"));
 	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
 		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);

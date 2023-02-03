@@ -1219,6 +1219,39 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="1922118a-41ed-4572-9ec3-0358b3480a52">
+      <name>RRNCode</name>
+      <synonym>
+        <key>en</key>
+        <value>RRN Code</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>30</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5a981616-9a46-4922-be96-7b043c081f4b">
+      <name>PaymentInfo</name>
+      <synonym>
+        <key>en</key>
+        <value>Payment info</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
+      </type>
+      <multiLine>true</multiLine>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="fac862fc-34a5-4249-954f-05cc4fcff6fb">
     <producedTypes>

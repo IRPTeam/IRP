@@ -42,21 +42,31 @@ EndFunction
 // Returns:
 //  Boolean - Метод осуществляет авторизацию оплаты по карте
 Async Function PayByPaymentCard(Hardware, Settings) Export
-	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
-	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
-	//@skip-check dynamic-access-method-not-found
-	Result = ConnectParameters.DriverObject.PayByPaymentCard(
-		ConnectParameters.ID,
-		Settings.In.MerchantNumber,
-		Settings.In.Amount,
-		Settings.InOut.CardNumber,
-		Settings.InOut.ReceiptNumber,
-		Settings.Out.RRNCode,
-		Settings.Out.AuthorizationCode,
-		Settings.Out.Slip
-	); // Boolean
+	Result = False;
+	LockForm(Settings, True);
+	Try
+		Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
+		ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+		//@skip-check dynamic-access-method-not-found
+		Result = ConnectParameters.DriverObject.PayByPaymentCard(
+			ConnectParameters.ID,
+			Settings.In.MerchantNumber,
+			Settings.In.Amount,
+			Settings.InOut.CardNumber,
+			Settings.InOut.ReceiptNumber,
+			Settings.Out.RRNCode,
+			Settings.Out.AuthorizationCode,
+			Settings.Out.Slip
+		); // Boolean
+		
+		Connections = Await HardwareClient.DisconnectHardware(Hardware);
+		
+	Except
+		Error = ErrorInfo();
+		CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.DetailErrorDescription(Error));
+	EndTry;
+	LockForm(Settings, False);
 	
-	Connections = Await HardwareClient.DisconnectHardware(Hardware);
 	Return Result;
 EndFunction
 
@@ -69,21 +79,30 @@ EndFunction
 // Returns:
 //  Boolean - Метод осуществляет возврат платежа по карте
 Async Function ReturnPaymentByPaymentCard(Hardware, Settings) Export
-	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
-	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
-	//@skip-check dynamic-access-method-not-found
-	Result = ConnectParameters.DriverObject.ReturnPaymentByPaymentCard(
-		ConnectParameters.ID,
-		Settings.In.MerchantNumber,
-		Settings.In.Amount,
-		Settings.InOut.CardNumber,
-		Settings.InOut.ReceiptNumber,
-		Settings.InOut.RRNCode,
-		Settings.Out.AuthorizationCode,
-		Settings.Out.Slip
-	); // Boolean
+	Result = False;
+	LockForm(Settings, True);
+	Try
+		Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
+		ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+		//@skip-check dynamic-access-method-not-found
+		Result = ConnectParameters.DriverObject.ReturnPaymentByPaymentCard(
+			ConnectParameters.ID,
+			Settings.In.MerchantNumber,
+			Settings.In.Amount,
+			Settings.InOut.CardNumber,
+			Settings.InOut.ReceiptNumber,
+			Settings.InOut.RRNCode,
+			Settings.Out.AuthorizationCode,
+			Settings.Out.Slip
+		); // Boolean
+		
+		Connections = Await HardwareClient.DisconnectHardware(Hardware);
+	Except
+		Error = ErrorInfo();
+		CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.DetailErrorDescription(Error));
+	EndTry;
 	
-	Connections = Await HardwareClient.DisconnectHardware(Hardware);
+	LockForm(Settings, False);
 	Return Result;
 EndFunction
 
@@ -194,7 +213,10 @@ EndFunction
 // Returns:
 //  Structure - Pay by payment card settings:
 // * Info - Structure:
-// ** Name - String - Settings name  
+// ** Name - String - Settings name
+// * Form - Structure - Lock and unlock form elements:
+// ** ElementToLock - ClientApplicationForm - Element or form. Will be locked until payment end
+// ** ElementToHideAndShow - FormDecoration - Element or form. Will be showed until payment end
 // * In - Structure:
 // ** DeviceID - String - Идентификатор устройства
 // ** MerchantNumber - Number - Номер мерчанта, доступного для данного эквайрингового терминала.
@@ -211,6 +233,10 @@ Function PayByPaymentCardSettings() Export
 	
 	Str.Insert("Info", New Structure);
 	Str.Info.Insert("Name", "PayByPaymentCardSettings");
+	
+	Str.Insert("Form", New Structure);
+	Str.Form.Insert("ElementToLock", Undefined);
+	Str.Form.Insert("ElementToHideAndShow", Undefined);
 	
 	Str.Insert("In", New Structure);
 	Str.In.Insert("DeviceID", "");
@@ -235,6 +261,9 @@ EndFunction
 //  Structure - Return payment by payment card settings:
 // * Info - Structure:
 // ** Name - String - Settings name
+// * Form - Structure - Lock and unlock form elements:
+// ** ElementToLock - ClientApplicationForm - Element or form. Will be locked until payment end
+// ** ElementToHideAndShow - FormDecoration - Element or form. Will be showed until payment end
 // * In - Structure:
 // ** DeviceID - String - Идентификатор устройства
 // ** MerchantNumber - Number - Номер мерчанта, доступного для данного эквайрингового терминала.
@@ -251,6 +280,10 @@ Function ReturnPaymentByPaymentCardSettings() Export
 		
 	Str.Insert("Info", New Structure);
 	Str.Info.Insert("Name", "ReturnPaymentByPaymentCardSettings");
+	
+	Str.Insert("Form", New Structure);
+	Str.Form.Insert("ElementToLock", Undefined);
+	Str.Form.Insert("ElementToHideAndShow", Undefined);
 	
 	Str.Insert("In", New Structure);
 	Str.In.Insert("DeviceID", "");
@@ -353,5 +386,46 @@ Function SettlementSettings() Export
 	
 	Return Str;
 EndFunction
+
+#EndRegion
+
+#Region PaymentForm
+
+// Open payment form settings.
+// 
+// Returns:
+//  Structure - Open payment form settings:
+// * Amount - Number -
+// * isReturn - Boolean -
+// * RRNCode - String -
+// * Hardware - CatalogRef.Hardware -
+// * Interactive - Boolean - If false and Amount > 0 then on form open start payment
+Function OpenPaymentFormSettings() Export
+	Str = New Structure;
+	Str.Insert("Amount", 0);
+	Str.Insert("isReturn", False);
+	Str.Insert("RRNCode", "");
+	Str.Insert("Hardware", PredefinedValue("Catalog.Hardware.EmptyRef"));
+	Str.Insert("Interactive", False);
+	Return Str;
+EndFunction
+
+#EndRegion
+
+#Region Service
+
+Procedure LockForm(Settings, Lock)
+	If Not Settings.Form.ElementToLock = Undefined Then
+		Settings.Form.ElementToLock.ReadOnly = Lock;
+	EndIf;
+	
+	If Not Settings.Form.ElementToHideAndShow = Undefined Then
+		Settings.Form.ElementToHideAndShow.Visible = Lock;
+	EndIf;
+	
+	If Not Lock Then
+		Settings.Delete("Form");
+	EndIf;
+EndProcedure
 
 #EndRegion

@@ -707,6 +707,7 @@ Async Procedure Payment_PayByPaymentCard(Command)
 	
 	PaymentSettings = EquipmentAcquiringClient.PayByPaymentCardSettings();
 	PaymentSettings.In.Amount = PaymentRow.Amount;
+	PaymentSettings.Form.ElementToLock = ThisObject;
 	
 	Result = Await EquipmentAcquiringClient.PayByPaymentCard(PaymentRow.Hardware, PaymentSettings);
 	PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
@@ -732,6 +733,8 @@ Async Procedure Payment_ReturnPaymentByPaymentCard(Command)
 	PaymentSettings = EquipmentAcquiringClient.ReturnPaymentByPaymentCardSettings();
 	PaymentSettings.In.Amount = PaymentRow.Amount;
 	PaymentSettings.InOut.RRNCode = PaymentRow.RRNCode;
+	PaymentSettings.Form.ElementToLock = ThisObject;
+	
 	If Await EquipmentAcquiringClient.ReturnPaymentByPaymentCard(PaymentRow.Hardware, PaymentSettings) Then
 		PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
 		PaymentRow.AcquiringPaymentStatus = PredefinedValue("Enum.AcquiringPaymentStatus.Done");

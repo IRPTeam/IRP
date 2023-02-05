@@ -208,6 +208,39 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="af8a7c74-5c82-428b-aa76-6e6b38370ba2">
+    <name>RRNCode</name>
+    <synonym>
+      <key>en</key>
+      <value>RRN Code</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>30</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="095f8392-3239-47a3-bf36-480bf57bc10d">
+    <name>PaymentInfo</name>
+    <synonym>
+      <key>en</key>
+      <value>Payment info</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <multiLine>true</multiLine>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="bf44b0ee-a0a1-4a4c-8523-3cea7817ea06">
     <name>DocumentForm</name>
     <synonym>

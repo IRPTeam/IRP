@@ -305,6 +305,8 @@ Function Strings(Lang) Export
 	Strings.Insert("EqFP_ShiftAlreadyClosed", NStr("en = 'Shift already closed.'", Lang));
 	Strings.Insert("EqFP_DocumentAlreadyPrinted", NStr("en = 'The document is already printed.'", Lang));
 	
+	Strings.Insert("EqAc_AlreadyhasTransaction", NStr("en = 'The document is already has transaction code. Transaction already was done. Else clear RRN code.'", Lang));
+	
 #EndRegion
 
 #Region POS

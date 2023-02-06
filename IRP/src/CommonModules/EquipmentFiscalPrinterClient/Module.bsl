@@ -179,9 +179,9 @@ Async Function PrintXReport(ConsolidatedRetailSales) Export
 	Return Result;
 EndFunction
 
-Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
+Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	Result = ReceiptResultStructure();
-	StatusData = EquipmentFiscalPrinterServer.GetStatusData(RetailSalesReceipt);
+	StatusData = EquipmentFiscalPrinterServer.GetStatusData(DataSource);
 	If StatusData.IsPrinted Then
 		Result.Status = StatusData.Status;
 		Result.DataPresentation = StatusData.DataPresentation;
@@ -228,7 +228,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
 	EndIf;
 	
 	Parameters = ReceiptSettings();
-	XMLOperationSettings = ReceiptGetXMLOperationSettings(RetailSalesReceipt);
+	XMLOperationSettings = ReceiptGetXMLOperationSettings(DataSource);
 	
 	Parameters.ParametersXML = ReceiptGetXMLOperation(XMLOperationSettings);
 	
@@ -245,7 +245,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
 		Result.FiscalResponse = Parameters.ResultXML;
 		Result.Success = True;
 		
-		EquipmentFiscalPrinterServer.SetFiscalStatus(RetailSalesReceipt
+		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource
 						, Result.Status
 						, Result.FiscalResponse
 						, " " + Result.ShiftNumber + " " + Result.DateTime);
@@ -254,7 +254,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, RetailSalesReceipt) Export
 		Result.Status = "FiscalReturnedError";
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		
-		EquipmentFiscalPrinterServer.SetFiscalStatus(RetailSalesReceipt
+		EquipmentFiscalPrinterServer.SetFiscalStatus(DataSource
 						, Result.Status
 						, Result.ErrorDescription);
 		

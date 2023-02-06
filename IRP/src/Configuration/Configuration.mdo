@@ -131,6 +131,7 @@
   <commonPictures>CommonPicture.CashOk</commonPictures>
   <commonPictures>CommonPicture.Cloud</commonPictures>
   <commonPictures>CommonPicture.CommonAttributes</commonPictures>
+  <commonPictures>CommonPicture.Creditcard</commonPictures>
   <commonPictures>CommonPicture.CurrencyRateDirection</commonPictures>
   <commonPictures>CommonPicture.Delivery</commonPictures>
   <commonPictures>CommonPicture.Dimensions</commonPictures>
@@ -156,6 +157,10 @@
   <commonPictures>CommonPicture.Mobile</commonPictures>
   <commonPictures>CommonPicture.OtherGroup</commonPictures>
   <commonPictures>CommonPicture.Payment</commonPictures>
+  <commonPictures>CommonPicture.Payment_CancelPaymentByPaymentCard</commonPictures>
+  <commonPictures>CommonPicture.Payment_EmergencyReversal</commonPictures>
+  <commonPictures>CommonPicture.Payment_PayByPaymentCard</commonPictures>
+  <commonPictures>CommonPicture.Payment_ReturnPaymentByPaymentCard</commonPictures>
   <commonPictures>CommonPicture.PersonCard</commonPictures>
   <commonPictures>CommonPicture.Price</commonPictures>
   <commonPictures>CommonPicture.Purchase</commonPictures>
@@ -456,6 +461,8 @@
   <commonModules>CommonModule.DocEmployeeCashAdvanceClient</commonModules>
   <commonModules>CommonModule.DocProductionCostsAllocationClient</commonModules>
   <commonModules>CommonModule.DocProductionCostsAllocationServer</commonModules>
+  <commonModules>CommonModule.EquipmentAcquiringClient</commonModules>
+  <commonModules>CommonModule.EquipmentAcquiringServer</commonModules>
   <commonModules>CommonModule.DocPayrollClient</commonModules>
   <commonModules>CommonModule.DocPayrollServer</commonModules>
   <commonModules>CommonModule.DocTimeSheetClient</commonModules>
@@ -671,6 +678,7 @@
   <commonForms>CommonForm.ShareToUsers</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.SelectionRetailBasisForReturn</commonForms>
+  <commonForms>CommonForm.PaymentByAcquiring</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>
@@ -887,6 +895,7 @@
   <enums>Enum.ReceiptPaymentMethods</enums>
   <enums>Enum.DocumentFiscalStatuses</enums>
   <enums>Enum.ExpenseTypes</enums>
+  <enums>Enum.AcquiringPaymentStatus</enums>
   <enums>Enum.AccrualAndDeductionPeriodicity</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>

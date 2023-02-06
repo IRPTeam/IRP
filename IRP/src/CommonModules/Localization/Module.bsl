@@ -283,7 +283,12 @@ Function Strings(Lang) Export
 	Strings.Insert("Eq_005", NStr("en = '%1 NOT connected.'", Lang));
 	Strings.Insert("Eq_006", NStr("en = 'Installed on current PC.'", Lang));
 	Strings.Insert("Eq_007", NStr("en = 'Can not connect device %1'", Lang));
-
+	Strings.Insert("Eq_008", NStr("en = '%1 disconnected.'", Lang));
+	Strings.Insert("Eq_009", NStr("en = '%1 NOT disconnected.'", Lang));
+	Strings.Insert("Eq_010", NStr("en = 'Can not disconnect device %1'", Lang));
+	Strings.Insert("Eq_011", NStr("en = 'Already connected'", Lang));
+	Strings.Insert("Eq_012", NStr("en = 'Already disconnected'", Lang));
+	
 	Strings.Insert("EqError_001", NStr(
 		"en = 'The device is connected. The device must be disabled before the operation.'", Lang));
 
@@ -300,6 +305,8 @@ Function Strings(Lang) Export
 	Strings.Insert("EqFP_ShiftAlreadyClosed", NStr("en = 'Shift already closed.'", Lang));
 	Strings.Insert("EqFP_DocumentAlreadyPrinted", NStr("en = 'The document is already printed.'", Lang));
 	
+	Strings.Insert("EqAc_AlreadyhasTransaction", NStr("en = 'The document is already has transaction code. Transaction already was done. Else clear RRN code.'", Lang));
+	
 #EndRegion
 
 #Region POS
@@ -309,7 +316,11 @@ Function Strings(Lang) Export
 	Strings.Insert("POS_s3", NStr("en = 'There is no need to use cash, as card payments are sufficient to pay'", Lang));
 	Strings.Insert("POS_s4", NStr("en = 'Amounts of payments are incorrect'", Lang));
 	Strings.Insert("POS_s5", NStr("en = 'Select sales person'", Lang));
+	Strings.Insert("POS_s6", NStr("en = 'Clear all Items before closing POS'", Lang));
 	
+	Strings.Insert("POS_Error_CheckPaymentsbyCard", NStr("en = 'Check payment %1'", Lang));
+	Strings.Insert("POS_Error_PaymentAlreadyDone", NStr("en = 'Can not change payment. Cancel or Revers it before.'", Lang));
+	Strings.Insert("POS_Error_OnClosePaymentAlreadyDone", NStr("en = 'Cancel or Revers %1 before close.'", Lang));
 	Strings.Insert("POS_Error_ReturnAmountLess", NStr(
 		"en = 'There are %2 of ""%1"", which is more than the available %3 for return in document ""%4"" .'", Lang));
 	

@@ -24,3 +24,7 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		Type = Enums.CashAccountTypes.Cash;
 	EndIf;
 EndProcedure
+
+Procedure OnCopy(CopiedObject)
+	Acquiring = Catalogs.Hardware.EmptyRef();
+EndProcedure

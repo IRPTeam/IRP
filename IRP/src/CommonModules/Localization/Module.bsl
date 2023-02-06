@@ -405,6 +405,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_035", NStr("en = 'Head'", Lang));
 	Strings.Insert("Form_036", NStr("en = 'Set as default'", Lang));
 	Strings.Insert("Form_037", NStr("en = 'Unset as default'", Lang));
+	Strings.Insert("Form_038", NStr("en = 'Employee'", Lang));
 #EndRegion
 
 #Region ErrorMessages

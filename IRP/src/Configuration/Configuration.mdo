@@ -117,6 +117,7 @@
   <subsystems>Subsystem.Reports</subsystems>
   <subsystems>Subsystem.Settings</subsystems>
   <subsystems>Subsystem.Technical</subsystems>
+  <subsystems>Subsystem.Salary</subsystems>
   <styles>Style.TestDataBase</styles>
   <commonPictures>CommonPicture.AccountingFlags</commonPictures>
   <commonPictures>CommonPicture.AddDataProc</commonPictures>
@@ -455,6 +456,11 @@
   <commonModules>CommonModule.DocEmployeeCashAdvanceClient</commonModules>
   <commonModules>CommonModule.DocProductionCostsAllocationClient</commonModules>
   <commonModules>CommonModule.DocProductionCostsAllocationServer</commonModules>
+  <commonModules>CommonModule.DocPayrollClient</commonModules>
+  <commonModules>CommonModule.DocPayrollServer</commonModules>
+  <commonModules>CommonModule.DocTimeSheetClient</commonModules>
+  <commonModules>CommonModule.DocTimeSheetServer</commonModules>
+  <commonModules>CommonModule.SalaryServerReuse</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -540,6 +546,7 @@
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseCommissionTrading</functionalOptions>
   <functionalOptions>FunctionalOption.UseRetailOrders</functionalOptions>
+  <functionalOptions>FunctionalOption.UseSalary</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -584,6 +591,7 @@
   <commonCommands>CommonCommand.OpenPartnersVendor</commonCommands>
   <commonCommands>CommonCommand.OpenVendorAgreements</commonCommands>
   <commonCommands>CommonCommand.UpdateAllUserRoles</commonCommands>
+  <commonCommands>CommonCommand.OpenPartnersEmployee</commonCommands>
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
   <constants>Constant.DefaultFilesStorageVolume</constants>
@@ -631,6 +639,7 @@
   <constants>Constant.UseWorkOrders</constants>
   <constants>Constant.UseCommissionTrading</constants>
   <constants>Constant.UseRetailOrders</constants>
+  <constants>Constant.UseSalary</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>
@@ -740,6 +749,8 @@
   <catalogs>Catalog.Users</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
   <catalogs>Catalog.SourceOfOrigins</catalogs>
+  <catalogs>Catalog.AccrualAndDeductionTypes</catalogs>
+  <catalogs>Catalog.EmployeePositions</catalogs>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalRevenueAllocation</documents>
   <documents>Document.BankPayment</documents>
@@ -805,6 +816,8 @@
   <documents>Document.SalesReportToConsignor</documents>
   <documents>Document.EmployeeCashAdvance</documents>
   <documents>Document.ProductionCostsAllocation</documents>
+  <documents>Document.Payroll</documents>
+  <documents>Document.TimeSheet</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>
@@ -874,6 +887,7 @@
   <enums>Enum.ReceiptPaymentMethods</enums>
   <enums>Enum.DocumentFiscalStatuses</enums>
   <enums>Enum.ExpenseTypes</enums>
+  <enums>Enum.AccrualAndDeductionPeriodicity</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>
@@ -963,6 +977,10 @@
   <informationRegisters>InformationRegister.T8010S_ConsignorBatches</informationRegisters>
   <informationRegisters>InformationRegister.DocumentFiscalStatus</informationRegisters>
   <informationRegisters>InformationRegister.T7051S_ProductionDurationDetails</informationRegisters>
+  <informationRegisters>InformationRegister.T9500S_AccrualAndDeductionValues</informationRegisters>
+  <informationRegisters>InformationRegister.T9510S_Staffing</informationRegisters>
+  <informationRegisters>InformationRegister.T9520S_TimeSheetInfo</informationRegisters>
+  <informationRegisters>InformationRegister.T9530S_WorkDays</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -1055,6 +1073,7 @@
   <accumulationRegisters>AccumulationRegister.R3026B_SalesOrdersCustomerAdvance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3027B_EmployeeCashAdvance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R7050T_ProductionDurations</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R9510B_SalaryPayment</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

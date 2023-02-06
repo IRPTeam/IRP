@@ -210,6 +210,8 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	DateIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "Date");
 	ChequeIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "Cheque");
 	InventoryOriginIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "InventoryOrigin");
+	EmployeeIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Employee");
+	PositionIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Position");
 	
 	If FillingValues.Property("Item") And ItemIsPresent Then
 		ControllerClientServer_V2.SetItemListItem(Parameters, PrepareValue(FillingValues.Item, Row.Key));
@@ -253,7 +255,16 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	
 	If FillingValues.Property("InventoryOrigin") And InventoryOriginIsPresent Then
 		ControllerClientServer_V2.SetItemListInventoryOrigin(Parameters, PrepareValue(FillingValues.InventoryOrigin, Row.Key));
-	EndIf;		
+	EndIf;	
+	
+	If TableName = "TimeSheetList" Then
+		If FillingValues.Property("Employee") And EmployeeIsPresent Then
+			ControllerClientServer_V2.SetTimeSheetListEmployee(Parameters, PrepareValue(FillingValues.Employee, Row.Key));
+		EndIf;
+		If FillingValues.Property("Position") And PositionIsPresent Then
+			ControllerClientServer_V2.SetTimeSheetListPosition(Parameters, PrepareValue(FillingValues.Position, Row.Key));
+		EndIf;		
+	EndIf;
 EndProcedure
 
 Function PrepareValue(Value, Key)

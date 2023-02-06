@@ -1235,6 +1235,7 @@ Procedure MultiSetTransactionType_BankPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("PaymentTerminal"          , BindPaymentListPaymentTerminal(Parameters));
 	ResourceToBinding.Insert("BankTerm"                 , BindPaymentListBankTerm(Parameters));
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
+	ResourceToBinding.Insert("Employee"                 , BindPaymentListEmployee(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1271,6 +1272,7 @@ Procedure MultiSetTransactionType_CashPayment(Parameters, Results) Export
 	ResourceToBinding.Insert("PlanningTransactionBasis" , BindPaymentListPlanningTransactionBasis(Parameters));
 	ResourceToBinding.Insert("Order"                    , BindPaymentListOrder(Parameters));
 	ResourceToBinding.Insert("RetailCustomer"           , BindPaymentListRetailCustomer(Parameters));
+	ResourceToBinding.Insert("Employee"                 , BindPaymentListEmployee(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1321,6 +1323,7 @@ Procedure StepClearByTransactionTypeBankPayment(Parameters, Chain) Export
 		Options.PaymentTerminal          = GetPaymentListPaymentTerminal(Parameters, Row.Key);
 		Options.BankTerm                 = GetPaymentListBankTerm(Parameters, Row.Key);
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
+		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankPayment";
 		Chain.ClearByTransactionTypeBankPayment.Options.Add(Options);
@@ -1371,6 +1374,7 @@ Procedure StepClearByTransactionTypeCashPayment(Parameters, Chain) Export
 		Options.Payee                    = GetPaymentListLegalName(Parameters, Row.Key);
 		Options.Order                    = GetPaymentListOrder(Parameters, Row.Key);
 		Options.RetailCustomer           = GetPaymentListRetailCustomer(Parameters, Row.Key);
+		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashPayment";
 		Chain.ClearByTransactionTypeCashPayment.Options.Add(Options);
@@ -2639,7 +2643,6 @@ Procedure StepChangeConsolidatedRetailSalesByWorkstation(Parameters, Chain) Expo
 	Chain.ChangeConsolidatedRetailSalesByWorkstation.Options.Add(Options);
 EndProcedure
 
-// TODO: Remove #1677
 // ConsolidatedRetailSales.ChangeConsolidatedRetailSalesByWorkstationForReturn.Step
 Procedure StepChangeConsolidatedRetailSalesByWorkstationForReturn(Parameters, Chain) Export
 	Chain.ChangeConsolidatedRetailSalesByWorkstationForReturn.Enable = True;
@@ -4789,6 +4792,34 @@ EndFunction
 // PaymentList.RetailCustomer.Bind
 Function BindPaymentListRetailCustomer(Parameters)
 	DataPath = "PaymentList.RetailCustomer";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region PAYMENT_LIST_EMPLOYEE
+
+// PaymentList.Employee.OnChange
+Procedure PaymentListEmployeeOnChange(Parameters) Export
+	Binding = BindPaymentListEmployee(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PaymentList.Employee.Set
+Procedure SetPaymentListEmployee(Parameters, Results) Export
+	Binding = BindPaymentListEmployee(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PaymentList.Employee.Get
+Function GetPaymentListEmployee(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPaymentListEmployee(Parameters).DataPath, _Key);
+EndFunction
+
+// PaymentList.Employee.Bind
+Function BindPaymentListEmployee(Parameters)
+	DataPath = "PaymentList.Employee";
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
 EndFunction
@@ -11757,6 +11788,132 @@ EndProcedure
 
 #EndRegion
 
+#Region PAYROLL_LIST
+
+#Region PAYROLL_LIST_LOAD_DATA
+
+// PayrollList.Load
+Procedure PayrollListLoad(Parameters) Export
+	Binding = BindPayrollListLoad(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PayrollList.Load.Set
+#If Server Then
+	
+Procedure ServerTableLoaderPayrollList(Parameters, Results) Export
+	Binding = BindPayrollListLoad(Parameters);
+	LoaderTable(Binding.DataPath, Parameters, Results);
+EndProcedure
+
+#EndIf
+
+// PayrollList.Load.Bind
+Function BindPayrollListLoad(Parameters)
+	DataPath = "PayrollList";
+	Binding = New Structure();
+	Return BindSteps("StepPayrollListLoadTable", DataPath, Binding, Parameters);
+EndFunction
+
+// PayrollList.LoadAtServer.Step
+Procedure StepPayrollListLoadTable(Parameters, Chain) Export
+	Chain.LoadTable.Enable = True;
+	Chain.LoadTable.Setter = "ServerTableLoaderPayrollList";
+	Options = ModelClientServer_V2.LoadTableOptions();
+	Options.TableAddress = Parameters.LoadData.Address;
+	Chain.LoadTable.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region TIME_SHEET_LIST
+
+#Region TIME_SHEET_LIST_EMPLOYEE
+
+// TimeSheetList.Employee.OnChange
+Procedure TimeSheetListEmployeeOnChange(Parameters) Export
+	Binding = BindTimeSheetListEmployee(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TimeSheetList.Employee.Set
+Procedure SetTimeSheetListEmployee(Parameters, Results) Export
+	Binding = BindTimeSheetListEmployee(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// TimeSheetList.Employee.Bind
+Function BindTimeSheetListEmployee(Parameters)
+	DataPath = "TimeSheetList.Employee";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region TIME_SHEET_LIST_POSITION
+
+// TimeSheetList.Position.OnChange
+Procedure TimeSheetListPositionOnChange(Parameters) Export
+	Binding = BindTimeSheetListPosition(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TimeSheetList.Position.Set
+Procedure SetTimeSheetListPosition(Parameters, Results) Export
+	Binding = BindTimeSheetListPosition(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// TimeSheetList.Position.Bind
+Function BindTimeSheetListPosition(Parameters)
+	DataPath = "TimeSheetList.Position";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region TIME_SHEET_LIST_LOAD_DATA
+
+// TimeSheetList.Load
+Procedure TimeSheetListLoad(Parameters) Export
+	Binding = BindTimeSheetListLoad(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TimeSheetList.Load.Set
+#If Server Then
+	
+Procedure ServerTableLoaderTimeSheetList(Parameters, Results) Export
+	Binding = BindTimeSheetListLoad(Parameters);
+	LoaderTable(Binding.DataPath, Parameters, Results);
+EndProcedure
+
+#EndIf
+
+// TimeSheetList.Load.Bind
+Function BindTimeSheetListLoad(Parameters)
+	DataPath = "TimeSheetList";
+	Binding = New Structure();
+	Return BindSteps("StepTimeSheetListLoadTable", DataPath, Binding, Parameters);
+EndFunction
+
+// TimeSheetList.LoadAtServer.Step
+Procedure StepTimeSheetListLoadTable(Parameters, Chain) Export
+	Chain.LoadTable.Enable = True;
+	Chain.LoadTable.Setter = "ServerTableLoaderTimeSheetList";
+	Options = ModelClientServer_V2.LoadTableOptions();
+	Options.TableAddress = Parameters.LoadData.Address;
+	Chain.LoadTable.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
 // called when all chain steps is complete
 Procedure OnChainComplete(Parameters) Export
 	#IF Client THEN
@@ -11891,6 +12048,14 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "ProductionDurationsListOnAddRowFormNotify"       Then ViewClient_V2.ProductionDurationsListOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "ProductionDurationsListOnCopyRowFormNotify"      Then ViewClient_V2.ProductionDurationsListOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "ProductionDurationsListAfterDeleteRowFormNotify" Then ViewClient_V2.ProductionDurationsListAfterDeleteRowFormNotify(Parameters);
+	
+	ElsIf ViewNotify = "PayrollListOnAddRowFormNotify"       Then ViewClient_V2.PayrollListOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "PayrollListOnCopyRowFormNotify"      Then ViewClient_V2.PayrollListOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "PayrollListAfterDeleteRowFormNotify" Then ViewClient_V2.PayrollListAfterDeleteRowFormNotify(Parameters);
+	
+	ElsIf ViewNotify = "TimeSheetListOnAddRowFormNotify"       Then ViewClient_V2.PayrollListOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "TimeSheetListOnCopyRowFormNotify"      Then ViewClient_V2.PayrollListOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "TimeSheetListAfterDeleteRowFormNotify" Then ViewClient_V2.PayrollListAfterDeleteRowFormNotify(Parameters);
 	
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);

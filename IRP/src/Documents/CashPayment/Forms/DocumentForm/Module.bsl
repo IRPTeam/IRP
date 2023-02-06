@@ -57,7 +57,8 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.LegalNameContract,
 	|PaymentList.Payee,
 	|PaymentList.Order,
-	|PaymentList.RetailCustomer";
+	|PaymentList.RetailCustomer,
+	|PaymentList.Employee";
 	
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -70,6 +71,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	ReturnToCustomer    = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
 	CustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance");
 	EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
+	SalaryPayment       = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
 
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
@@ -98,6 +100,9 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.Partner,
 		|PaymentList.PlaningTransactionBasis,
 		|PaymentList.BasisDocument";
+	ElsIf TransactionType = SalaryPayment Then
+		StrByType = "
+		|PaymentList.Employee";
 	EndIf;
 
 	ArrayOfVisibleAttributes = New Array();

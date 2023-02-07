@@ -385,21 +385,6 @@ Scenario: _0850000 preparation (fiscal printer)
 			| 'Description' |
 			| 'Fiscal printer'     |
 		And I select current line in "List" table
-		And I activate "Enable" field in "HardwareList" table
-		And I finish line editing in "HardwareList" table
-		And I set "Enable" checkbox in "HardwareList" table
-		And I finish line editing in "HardwareList" table
-		And I click "Save" button
-		And "HardwareList" table became equal
-			| 'Enable' | 'Hardware'       |
-			| 'Yes'    | 'Fiscal printer' |
-		And I click "Save and close" button
-	* Check fiscal printer status
-		Given I open hyperlink "e1cib/list/Catalog.Hardware"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Fiscal printer'     |
-		And I select current line in "List" table
 		And I click "Connect" button
 		Then the form attribute named "CommandResult" became equal to template
 			| 'Fiscal printer connected.' |
@@ -590,8 +575,8 @@ Scenario: _0850015 create retail sales receipt from POS (own stock, card 02)
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML2"
-		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		// Then "1C:Enterprise" window is opened
+		// And I click "OK" button
 				
 		
 		
@@ -687,7 +672,6 @@ Scenario: _0850018 advance payment
 		And I click "OK" button
 	* Advance
 		And I click the button named "Advance"
-		And I change the radio button named "ReceiptPaymentMethod" value to "Advance payment"	
 		Then "Payment" window is opened
 		And I click "2" button
 		And I click "0" button

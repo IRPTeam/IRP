@@ -2655,6 +2655,127 @@ EndProcedure
 
 #EndRegion
 
+#Region PAYROLL_LIST
+
+Procedure PayrollListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+Function PayrollListBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "PayrollList", Cancel, Clone, CurrentData,
+		"PayrollListOnAddRowFormNotify", "PayrollListOnCopyRowFormNotify");
+	Form.Items.PayrollList.CurrentRow = NewRow.GetID();
+	If Form.Items.PayrollList.CurrentRow <> Undefined Then
+		Form.Items.PayrollList.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure PayrollListOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure PayrollListOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure PayrollListAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "PayrollList", "PayrollListAfterDeleteRowFormNotify");
+EndProcedure
+
+Procedure PayrollListAfterDeleteRowFormNotify(Parameters) Export
+	Return;
+EndProcedure
+
+Procedure PayrollListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
+	Parameters = GetLoadParameters(Object, Form, "PayrollList", Address, GroupColumn, SumColumn);
+	Parameters.LoadData.ExecuteAllViewNotify = True;
+	NewRows = New Array();
+	For i = 1 To Parameters.LoadData.CountRows Do
+		NewRow = Object.PayrollList.Add();
+		NewRow.Key = String(New UUID());
+		NewRows.Add(NewRow);
+	EndDo;
+	WrappedRows = ControllerClientServer_V2.WrapRows(Parameters, NewRows);
+	If Parameters.Property("Rows") Then
+		For Each Row In WrappedRows Do
+			Parameters.Rows.Add(Row);
+		EndDo;
+	Else
+		Parameters.Insert("Rows", WrappedRows);
+	EndIf;
+	ControllerClientServer_V2.PayrollListLoad(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region TIME_SHEET_LIST
+
+Procedure TimeSheetListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+Function TimeSheetListBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "TimeSheetList", Cancel, Clone, CurrentData,
+		"TimeSheetListOnAddRowFormNotify", "TimeSheetListOnCopyRowFormNotify");
+	Form.Items.TimeSheetList.CurrentRow = NewRow.GetID();
+	If Form.Items.TimeSheetList.CurrentRow <> Undefined Then
+		Form.Items.TimeSheetList.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure TimeSheetListOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure TimeSheetListOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure TimeSheetListAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "TimeSheetList", "TimeSheetListAfterDeleteRowFormNotify");
+EndProcedure
+
+Procedure TimeSheetListAfterDeleteRowFormNotify(Parameters) Export
+	Return;
+EndProcedure
+
+Function TimeSheetListAddFilledRow(Object, Form,  FillingValues) Export
+	Cancel      = False;
+	Clone       = False;
+	CurrentData = Undefined;
+	NewRow = AddOrCopyRow(Object, Form, "TimeSheetList", Cancel, Clone, CurrentData,
+		"TimeSheetListOnAddRowFormNotify", "TimeSheetListOnCopyRowFormNotify", FillingValues);
+	Form.Items.TimeSheetList.CurrentRow = NewRow.GetID();
+	If Form.Items.TimeSheetList.CurrentRow <> Undefined Then
+		Form.Items.TimeSheetList.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure TimeSheetListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
+	Parameters = GetLoadParameters(Object, Form, "TimeSheetList", Address, GroupColumn, SumColumn);
+	Parameters.LoadData.ExecuteAllViewNotify = True;
+	NewRows = New Array();
+	For i = 1 To Parameters.LoadData.CountRows Do
+		NewRow = Object.TimeSheetList.Add();
+		NewRow.Key = String(New UUID());
+		NewRows.Add(NewRow);
+	EndDo;
+	WrappedRows = ControllerClientServer_V2.WrapRows(Parameters, NewRows);
+	If Parameters.Property("Rows") Then
+		For Each Row In WrappedRows Do
+			Parameters.Rows.Add(Row);
+		EndDo;
+	Else
+		Parameters.Insert("Rows", WrappedRows);
+	EndIf;
+	ControllerClientServer_V2.TimeSheetListLoad(Parameters);
+EndProcedure
+
+#EndRegion
+
 #Region ACCOUNT_SENDER
 
 Procedure AccountSenderOnChange(Object, Form) Export

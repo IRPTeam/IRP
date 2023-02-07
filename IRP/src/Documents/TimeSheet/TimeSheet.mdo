@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7524ec79-bbff-4ab2-a0de-258aceee5d39">
+  <producedTypes>
+    <objectType typeId="5ec00bda-3b47-421c-8ec3-8485e3049b4f" valueTypeId="7e6f4715-812f-46b6-aa2d-5f8853e5c564"/>
+    <refType typeId="b9ed95ea-09b3-44da-aa81-5dad0ce3ab44" valueTypeId="d72866d4-6cbf-404e-9f7e-976d3e32034b"/>
+    <selectionType typeId="1d5cc27b-509b-4b69-a09c-d516462ab06e" valueTypeId="772c30d9-0a35-40da-b295-dee1adfe4f86"/>
+    <listType typeId="2050b4a7-f6b8-4411-be21-49fae839eed4" valueTypeId="afefe421-5180-4e36-a93e-57a30bbb5108"/>
+    <managerType typeId="e48255c4-a2d1-4a6d-8933-67c9f44697a6" valueTypeId="dcf9915d-ac8e-4be3-be40-b0492ed2167a"/>
+  </producedTypes>
+  <name>TimeSheet</name>
+  <synonym>
+    <key>en</key>
+    <value>Time sheet</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.TimeSheet.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_TimeSheet</value>
+    </typesFilterValue>
+    <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</dataPathField>
+    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_TimeSheet</value>
+    </typesFilterValue>
+    <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</dataPathField>
+    <characteristicValues>Document.TimeSheet.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Document.TimeSheet.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Document.TimeSheet.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Document.TimeSheet.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <listPresentation>
+    <key>en</key>
+    <value>Time sheets</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.TimeSheet.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.TimeSheet.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.TimeSheet.Form.ChoiceForm</defaultChoiceForm>
+  <realTimePosting>Deny</realTimePosting>
+  <registerRecords>InformationRegister.T9520S_TimeSheetInfo</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="35610dbf-0e7b-4544-87e4-98c7d6b0cf6c">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="73243a9e-c13a-464c-bb69-95988c93a140">
+    <name>BeginDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Begin date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b65adc06-b4eb-4d39-a43e-361acd8e18cf">
+    <name>EndDate</name>
+    <synonym>
+      <key>en</key>
+      <value>End date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="493d8f96-8165-405e-a6d2-64f0d215d5f5">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="4aa87851-33a8-475f-985b-0f4d2dfa4c2f">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="54cc9dc1-a374-4cb6-aa3b-974e666a15e3">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="24e166f6-4ac5-4b05-b834-918ade356398">
+    <producedTypes>
+      <objectType typeId="c04df7c7-93e5-4ada-8265-53f9807aa66a" valueTypeId="161e20a0-8c83-4835-8e6b-ac7b3ca318aa"/>
+      <rowType typeId="4b33a894-9281-42b9-abc8-f446fee25daf" valueTypeId="c39598d4-1ab6-4bf3-b718-4a345b43c410"/>
+    </producedTypes>
+    <name>TimeSheetList</name>
+    <synonym>
+      <key>en</key>
+      <value>Time sheet list</value>
+    </synonym>
+    <attributes uuid="ef268511-a3cb-401c-8592-286ec850cf62">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="99ce874b-4946-49e8-a8c3-a460c9bc8dc5">
+      <name>Date</name>
+      <synonym>
+        <key>en</key>
+        <value>Date</value>
+      </synonym>
+      <type>
+        <types>Date</types>
+        <dateQualifiers>
+          <dateFractions>Date</dateFractions>
+        </dateQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="8859a28d-8ca6-4a86-85f8-fc6150aee639">
+      <name>Employee</name>
+      <synonym>
+        <key>en</key>
+        <value>Employee</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Partners</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <choiceParameters>
+        <name>Filter.Employee</name>
+        <value xsi:type="core:BooleanValue">
+          <value>true</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="8ca5bc10-7887-4923-b0e4-84a6b80f6e88">
+      <name>Position</name>
+      <synonym>
+        <key>en</key>
+        <value>Position</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.EmployeePositions</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7fb15f97-9364-4cf0-b0dc-1b6eeaf1e462">
+      <name>AccrualAndDeductionType</name>
+      <synonym>
+        <key>en</key>
+        <value>Accrual and deduction type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.AccrualAndDeductionTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="1686fd93-3183-4fe9-8ab8-7e6b15a4e241">
+    <producedTypes>
+      <objectType typeId="34232bd7-d89a-4af0-a19b-39f30b57eced" valueTypeId="a970486c-1b64-40ac-ad51-8ed62f980f85"/>
+      <rowType typeId="b408489c-128d-4815-a991-b634fe0d440f" valueTypeId="34df5b16-9caf-4759-88b5-e3cc9c47a30e"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="955a065e-e2a3-455f-9611-fe9c7786458e">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="b122f4b2-1cdd-4838-b3e2-93d4b6032320">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Document.TimeSheet.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+</mdclass:Document>

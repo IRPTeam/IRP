@@ -101,6 +101,13 @@ Function GetWorkstationHardwareByEquipmentType(Workstation, EquipmentType) Expor
 	Return HardwareList;
 EndFunction
 
+// Get all workstation hardware list.
+// 
+// Parameters:
+//  Workstation - CatalogRef.Workstations - Workstation
+// 
+// Returns:
+//  Array of CatalogRef.Hardware - Get all workstation hardware list
 Function GetAllWorkstationHardwareList(Workstation) Export
 	Query = New Query();
 	Query.Text =

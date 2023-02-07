@@ -320,7 +320,8 @@ Scenario: _034906 check price type discount + discount coupon in POS
 		And I finish line editing in "ItemList" table
 		And I click "Payment (+)" button
 		Then the form attribute named "SpecialOffer" became equal to "226,2"
-		Then the form attribute named "Amount" became equal to "1 333,8"		
+		Then the form attribute named "Amount" became equal to "1 333,8"
+		And I click the button named "Enter"		
 	And I close all client application windows
 	
 				

@@ -505,6 +505,11 @@ Scenario: Create catalog BankTerms 03 and PaymentType Card 03 objects (for Shop 
 		| 'Ref'                                                               | 'PaymentType'                                                          | 'Account'                                                              | 'Percent' |
 		| 'e1cib/data/Catalog.BankTerms?ref=b79392df2896a84411eda2cd071d605b' | 'e1cib/data/Catalog.PaymentTypes?ref=b79392df2896a84411eda2cd071d605a' | 'e1cib/data/Catalog.CashAccounts?ref=b79392df2896a84411eda2cd071d6059' | 1         |
 
+	And I check or create information register "BranchBankTerms" records:
+		| 'Branch'                                                                | 'BankTerm'                                                          |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' | 'e1cib/data/Catalog.BankTerms?ref=b79392df2896a84411eda2cd071d605b' |
+
+
 
 Scenario: Create catalog PaymentTypes objects
 	And I check or create catalog "PaymentTypes" objects:

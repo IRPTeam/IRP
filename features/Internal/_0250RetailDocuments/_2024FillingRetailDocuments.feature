@@ -889,7 +889,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "5" button
 			And I click "2" button
 			And I click "0" button
-			And I click "." button
+			And I click "•" button	
 			And I click "1" button
 			And I click "0" button
 			Then the form attribute named "Amount" became equal to "1 460"
@@ -903,7 +903,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "5" button
 			And I click "0" button
 			And I click "0" button
-			And I click "." button
+			And I click "•" button	
 			And I click "2" button
 			And I click "5" button
 			Then the form attribute named "Amount" became equal to "1 460"
@@ -917,7 +917,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "0" button
 			And I click "0" button
 			And I click "0" button
-			And I click "." button
+			And I click "•" button	
 			And I click "9" button
 			And I click "9" button
 			Then the form attribute named "Amount" became equal to "1 460"
@@ -932,7 +932,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "0" button
 			And I click "0" button
 			And I click "0" button
-			And I click "." button
+			And I click "•" button	
 			And I click "0" button
 			And I click "1" button
 			Then the form attribute named "Amount" became equal to "1 460"
@@ -948,7 +948,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "0" button
 			And I click "0" button
 			And I click "0" button
-			And I click "." button
+			And I click "•" button	
 			And I click "0" button
 			And I click "0" button
 			Then the form attribute named "Amount" became equal to "1 460"
@@ -964,7 +964,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "0" button
 			And I click "0" button
 			And I click "0" button
-			And I click "." button
+			And I click "•" button	
 			And I click "5" button
 			And I click "0" button
 			Then the form attribute named "Amount" became equal to "1 460"
@@ -980,7 +980,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "0" button
 			And I click "0" button
 			And I click "0" button
-			And I click "." button
+			And I click "•" button	
 			And I click "5" button
 			And I click "5" button
 			Then the form attribute named "Amount" became equal to "1 460"
@@ -1025,7 +1025,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "0" button
 			And I click "0" button
 			And I click "0" button
-			And I click "." button
+			And I click "•" button	
 			And I click "0" button
 			And I click "5" button
 			Then the form attribute named "Amount" became equal to "1 460"
@@ -1036,7 +1036,7 @@ Scenario: _0154139 check payments form in the Point of sale
 		* Cash 0.950076
 			And I click "C" button
 			And I click "0" button
-			And I click "." button
+			And I click "•" button	
 			And I click "9" button
 			And I click "5" button
 			And I click "0" button
@@ -1053,7 +1053,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "5" button
 			And I click "0" button
 			And I click "0" button
-			And I click "." button
+			And I click "•" button	
 			And I click "7" button
 			And I click "3" button
 			And "Payments" table became equal
@@ -1066,7 +1066,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "5" button
 			And I click "0" button
 			And I click "0" button
-			And I click "." button
+			And I click "•" button	
 			And I click "8" button
 			And I click "8" button
 			And I click "Card (*)" button
@@ -1074,7 +1074,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "1" button
 			And I click "0" button
 			And I click "0" button
-			And I click "." button
+			And I click "•" button	
 			And I click "1" button
 			And I click "2" button
 			And "Payments" table became equal
@@ -1088,7 +1088,7 @@ Scenario: _0154139 check payments form in the Point of sale
 				| 'Cash'         |
 			And I click "C" button
 			And I click "0" button
-			And I click "." button
+			And I click "•" button	
 			And I click "9" button
 			And I click "9" button
 			And I go to line in "Payments" table
@@ -1099,7 +1099,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "4" button
 			And I click "5" button
 			And I click "9" button
-			And I click "." button
+			And I click "•" button	
 			And I click "1" button
 			And "Payments" table became equal
 				| 'Payment type' | 'Amount'   |
@@ -1120,7 +1120,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "4" button
 			And I click "5" button
 			And I click "9" button
-			And I click "." button
+			And I click "•" button	
 			And I click "1" button
 			And "Payments" table became equal
 				| 'Payment type' | 'Amount'   |
@@ -1181,7 +1181,7 @@ Scenario: _0154139 check payments form in the Point of sale
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
-				And I click "." button
+				And I click "•" button	
 				And I click "1" button
 				And I click "2" button
 				And I click "Cash (/)" button
@@ -1204,7 +1204,7 @@ Scenario: _0154139 check payments form in the Point of sale
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
-				And I click "." button
+				And I click "•" button	
 				And I click "4" button
 				And I click "0" button
 				And I click "Cash (/)" button
@@ -1268,7 +1268,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "2" button
 			And I click "1" button
 			And I click "5" button
-			And I click "." button
+			And I click "•" button	
 			And I click "9" button
 			Then the form attribute named "Amount" became equal to "1 301 214,89"
 			And "Payments" table became equal
@@ -1284,7 +1284,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "2" button
 			And I click "1" button
 			And I click "4" button
-			And I click "." button
+			And I click "•" button	
 			And I click "9" button
 			Then the form attribute named "Amount" became equal to "1 301 214,89"
 			And "Payments" table became equal
@@ -1301,7 +1301,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "0" button
 			And I click "0" button
 			And I click "0" button
-			And I click "." button
+			And I click "•" button	
 			And I click "9" button
 			And I click "8" button
 			Then the form attribute named "Amount" became equal to "1 301 214,89"
@@ -1396,14 +1396,14 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "Payment (+)" button
 			And I click "Cash (/)" button
 			And I click "0" button
-			And I click "." button
+			And I click "•" button	
 			And I click "1" button
 			Then the form attribute named "Amount" became equal to "0,09"
 			And "Payments" table became equal
 				| 'Payment type' | 'Amount'   |
 				| 'Cash'         | '0,10' |
 			Then the form attribute named "Cashback" became equal to "0,01"
-			And I close "Payment" window
+			And I click "Enter" button
 		And I close all client application windows
 		
 Scenario: _0154140 check filling in retail customer from the POS (without partner)
@@ -4193,6 +4193,8 @@ Scenario: _0154195 set sales person from POS
 				| 'Item'  | 'Sales person'  | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
 				| 'Shirt' | 'Anna Petrova'  | '38/Black' | ''        | '350,00' | '1,000'    | ''       | '350,00' |
 				| 'Dress' | 'David Romanov' | 'L/Green'  | ''        | '550,00' | '1,000'    | ''       | '550,00' |
+			And I click "Payment (+)" button
+			And I click the button named "Enter"
 			And I close all client application windows
 
 Scenario: _0154196 check comission calculation in the Retail sales receipt
@@ -4353,6 +4355,7 @@ Scenario: _0154197 check comission calculation in the Retail return receipt
 		And "Payments" table became equal
 			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal'    | 'Postponed payment' | 'Bank term'    | 'Account'           | 'Percent' |
 			| '1' | '999,00' | '19,98'      | 'Card 02'      | 'Payment terminal 01' | 'No'                | 'Bank term 01' | 'Bank account, TRY' | '2,00'    |			
+		
 		And I close all client application windows				
 		
 					

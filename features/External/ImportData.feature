@@ -487,6 +487,24 @@ Scenario: Create catalog BankTerms objects (for Shop 02)
 		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' | 'e1cib/data/Catalog.BankTerms?ref=b784ae4f9cb08e5e11ed224e1ee0a7fc' |
 
 
+Scenario: Create catalog BankTerms 03 and PaymentType Card 03 objects (for Shop 02)
+
+	And I check or create catalog "CashAccounts" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'Currency'                                                           | 'Type'                      | 'BankName' | 'Company'                                                           | 'Number' | 'TransitAccount' | 'Branch'                                                                | 'CommissionIsSeparate' | 'ReceiptingAccount'                                                    | 'IntegrationSetting' | 'CashAccount' | 'FinancialMovementType' | 'Acquiring' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.CashAccounts?ref=b79392df2896a84411eda2cd071d6059' | 'False'        | 15     | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'Enum.CashAccountTypes.POS' | ''         | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''       | ''               | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' | 'False'                | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186b' | ''                   | ''            | ''                      | ''          | 'POS Terminal'   | ''                 | ''               | ''               |
+
+	And I check or create catalog "PaymentTypes" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Parent' | 'Code' | 'Type'                   | 'Icon'                                  | 'isIconSet' | 'Partner' | 'LegalName' | 'Agreement' | 'LegalNameContract' | 'Branch' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.PaymentTypes?ref=b79392df2896a84411eda2cd071d605a' | 'False'        | ''       | 16     | 'Enum.PaymentTypes.Card' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | ''        | ''          | ''          | ''                  | ''       | 'Card 03'        | ''                 | ''               | ''               |
+	
+	And I check or create catalog "BankTerms" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.BankTerms?ref=b79392df2896a84411eda2cd071d605b' | 'False'        | 3      | 'Bank term 03'   | ''                 | ''               | ''               |
+
+	And I refill object tabular section "PaymentTypes":
+		| 'Ref'                                                               | 'PaymentType'                                                          | 'Account'                                                              | 'Percent' |
+		| 'e1cib/data/Catalog.BankTerms?ref=b79392df2896a84411eda2cd071d605b' | 'e1cib/data/Catalog.PaymentTypes?ref=b79392df2896a84411eda2cd071d605a' | 'e1cib/data/Catalog.CashAccounts?ref=b79392df2896a84411eda2cd071d6059' | 1         |
+
 
 Scenario: Create catalog PaymentTypes objects
 	And I check or create catalog "PaymentTypes" objects:

@@ -299,7 +299,7 @@
             <editMode>Enter</editMode>
             <headerHorizontalAlign>Left</headerHorizontalAlign>
             <extInfo xsi:type="form:LabelFieldExtInfo">
-              <autoMaxWidth>true</autoMaxWidth>
+              <width>3</width>
               <autoMaxHeight>true</autoMaxHeight>
               <textColor xsi:type="core:ColorRef">
                 <color>Style.AccentColor</color>

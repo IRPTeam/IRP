@@ -181,9 +181,10 @@ Async Procedure Enter(Command)
 	If Not CheckFilling() Then
 		Return;
 	EndIf;
+	
 	Result = True;
 	For Each PaymentRow In Payments Do
-		If Not PaymentRow.Hardware.IsEmpty() Then
+		If Not PaymentRow.Hardware.IsEmpty() And PaymentRow.Amount > 0 Then
 			Result = Await DoPayment(PaymentRow);
 			PaymentRow.PaymentDone = Result;
 			If Not Result Then

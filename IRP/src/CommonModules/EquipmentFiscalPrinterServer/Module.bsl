@@ -139,12 +139,6 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 				Str.Insert("Cash", Str.Cash + Payment.Amount);
 			EndIf;
 		EndIf;
-		
-		If Not IsBlankString(Payment.PaymentInfo) Then
-			PaymentInfo = CommonFunctionsServer.DeserializeJSON(Payment.PaymentInfo);	// See EquipmentAcquiringClient.PayByPaymentCardSettings
-			TextStrings.Add(New Structure("Text", PaymentInfo.Out.Slip));
-		EndIf;
-		
 	EndDo;
 	
 	Str.Insert("TextStrings", TextStrings);

@@ -55,13 +55,13 @@ Function GetWorkDays(BeginDate, EndDate, AccrualAndDeductionType) Export
 	|FROM
 	|	InformationRegister.T9530S_WorkDays AS T9530S_WorkDays
 	|WHERE
-	|	T9530S_WorkDays.BeginDate <= BEGINOFPERIOD(&BeginDate, DAY)
-	|	AND T9530S_WorkDays.EndDate >= ENDOFPERIOD(&EndDate, DAY)
+	|	BEGINOFPERIOD(T9530S_WorkDays.BeginDate, DAY) <= BEGINOFPERIOD(&BeginDate, DAY)
+	|	AND ENDOFPERIOD(T9530S_WorkDays.EndDate, DAY) >= ENDOFPERIOD(&EndDate, DAY)
 	|	AND T9530S_WorkDays.AccrualAndDeductionType = &AccrualAndDeductionType";
 	Query.SetParameter("BeginDate"   , BeginDate);		
-	Query.SetParameter("EndDateDate" , EndDate);		
+	Query.SetParameter("EndDate" , EndDate);		
 	Query.SetParameter("AccrualAndDeductionType", AccrualAndDeductionType);	
-		QueryResult = Query.Execute();
+	QueryResult = Query.Execute();
 	
 	QuerySelection = QueryResult.Select();
 	
@@ -69,4 +69,34 @@ Function GetWorkDays(BeginDate, EndDate, AccrualAndDeductionType) Export
 		Return QuerySelection.CountDays;
 	EndIf;
 	Return 0;	
+EndFunction
+
+Function GetCountDays(Date, Company, Branch, Employee, Position, AccrualAndDeductionType) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	COUNT(T9520S_TimeSheetInfo.AccrualAndDeductionType) AS CountDays
+	|FROM
+	|	InformationRegister.T9520S_TimeSheetInfo AS T9520S_TimeSheetInfo
+	|WHERE
+	|	T9520S_TimeSheetInfo.Company = &Company
+	|	AND T9520S_TimeSheetInfo.Branch = &Branch
+	|	AND BEGINOFPERIOD(T9520S_TimeSheetInfo.Date, DAY) = &Date
+	|	AND T9520S_TimeSheetInfo.Employee = &Employee
+	|	AND T9520S_TimeSheetInfo.Position = &Position
+	|	AND T9520S_TimeSheetInfo.AccrualAndDeductionType = &AccrualAndDeductionType";
+	
+	Query.SetParameter("Date"     , BegOfDay(Date));		
+	Query.SetParameter("Company"  , Company);		
+	Query.SetParameter("Branch"   , Branch);		
+	Query.SetParameter("Employee" , Employee);		
+	Query.SetParameter("Position" , Position);		
+	Query.SetParameter("AccrualAndDeductionType", AccrualAndDeductionType);	
+	QueryResult = Query.Execute();
+	
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() And ValueIsFilled(QuerySelection.CountDays) Then
+		Return QuerySelection.CountDays;
+	EndIf;
+	Return 0;
 EndFunction

@@ -28,6 +28,8 @@ EndProcedure
 Procedure SetGroupItemsList(Object, Form)
 	AttributesArray = New Array();
 	AttributesArray.Add("Company");
+	AttributesArray.Add("BeginDate");
+	AttributesArray.Add("EndDate");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Attr In AttributesArray Do
 		Form.GroupItems.Add(Attr, ?(ValueIsFilled(Form.Items[Attr].Title), Form.Items[Attr].Title,
@@ -82,20 +84,53 @@ Function GetPayrolls(Parameters) Export
 	QuerySelection = QueryResult.Select();
 	
 	While QuerySelection.Next() Do
-		Value = SalaryServerReuse.GetAccualAndDeductionValue(QuerySelection.Date, 
-			QuerySelection.Employee,
-			QuerySelection.Position,
-			QuerySelection.AccrualAndDeductionType);
-		CountDays = SalaryServerReuse.GetWorkDays(Parameters.BeginDate,
-			Parameters.EndDate,
-			QuerySelection.AccrualAndDeductionType);
+		NewRow = ResultTable.Add();
+		FillPropertyValues(NewRow, QuerySelection);
+		
+		If Upper(QuerySelection.AccrualAndDeductionType.AlgorithmID) = Upper("_MonthlySalary") Then
+			NewRow.Amount = _MonthlySalary(Parameters, QuerySelection);
+		EndIf;
+		
 	EndDo;
-	
+	ResultTable.GroupBy("Employee, Position, AccrualAndDeductionType", "Amount");
+	ResultTable.Sort("Employee, Position, AccrualAndDeductionType");
 	Return ResultTable;
 EndFunction
 
-Function _MonthlySalary()
+Function _MonthlySalary(Parameters, QuerySelection)
+	Value = SalaryServerReuse.GetAccualAndDeductionValue(QuerySelection.Date, 
+			QuerySelection.Employee,
+			QuerySelection.Position,
+			QuerySelection.AccrualAndDeductionType);
 		
+	TotalDays = SalaryServerReuse.GetWorkDays(Parameters.BeginDate,
+			Parameters.EndDate,
+			QuerySelection.AccrualAndDeductionType);
+		
+	CountDays = SalaryServerReuse.GetCountDays(QuerySelection.Date,
+			Parameters.Company,
+			Parameters.Branch,
+			QuerySelection.Employee,
+			QuerySelection.Position,
+			QuerySelection.AccrualAndDeductionType);
+	
+	If Not ValueIsFilled(Value) Then
+		Return 0;
+	EndIf;
+	
+	If Not ValueIsFilled(TotalDays) Then
+		Return 0;
+	EndIf;
+	
+	If Not ValueIsFilled(CountDays) Then
+		Return 0;
+	EndIf;
+	
+	Return (Value / TotalDays) * CountDays;
 EndFunction
 
-
+//Function GetAlgorithmID() Export
+//	List = New ValueList();
+//	List.Add("_MonthlySalary", "Monthly salary");
+//	Return List;
+//EndFunction

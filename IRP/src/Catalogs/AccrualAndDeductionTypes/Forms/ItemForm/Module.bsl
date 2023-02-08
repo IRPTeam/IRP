@@ -8,6 +8,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
+	
+//	For Each ListItem In DocPayrollServer.GetAlgorithmID() Do
+//		Items.AlgorithmID.ChoiceList.Add(ListItem.Value, ListItem.Presentation);
+//	EndDo;
 EndProcedure
 
 &AtServer

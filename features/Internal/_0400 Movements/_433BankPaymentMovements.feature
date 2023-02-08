@@ -169,6 +169,9 @@ Scenario: _043300 preparation (Bank payment)
 		When Create document BankPayment objects (return retail customer advance)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(311).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document BankPayment objects (salary payment)
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(329).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		When Create document SalesReturn objects (check movements)
 		And I execute 1C:Enterprise script at server
@@ -703,6 +706,57 @@ Scenario: _0433294 check Bank payment movements by the Register  "R5022 Expenses
 			| ''                                           | '18.01.2023 12:02:58' | '0,17'      | '0,17'              | ''            | 'Main Company' | ''       | ''                   | ''             | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''                          |
 			| ''                                           | '18.01.2023 12:02:58' | '1'         | '1'                 | ''            | 'Main Company' | ''       | ''                   | ''             | ''         | 'TRY'      | ''                    | 'Local currency'               | ''                          |
 			| ''                                           | '18.01.2023 12:02:58' | '1'         | '1'                 | ''            | 'Main Company' | ''       | ''                   | ''             | ''         | 'TRY'      | ''                    | 'en description is empty'      | ''                          |		
+		And I close all client application windows
+	
+
+Scenario: _0433295 check Bank payment movements by the Register  "R3010 Cash on hand" (return retail customer advance)
+		And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'|
+			| '329'   |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 329 dated 08.02.2023 13:10:49' | ''            | ''                    | ''          | ''             | ''             | ''                  | ''         | ''                             | ''                     |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''                  | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'             | ''            | ''                    | ''          | ''             | ''             | ''                  | ''         | ''                             | ''                     |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                  | ''         | ''                             | 'Attributes'           |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '171,2'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '256,8'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 000'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 000'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 500'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 500'     | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |		
+		And I close all client application windows
+
+Scenario: _0433296 check Bank payment movements by the Register  "R9510 Salary payment" (return retail customer advance)
+		And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'|
+			| '329'   |
+	* Check movements by the Register  "R9510 Salary payment" 
+		And I click "Registrations report" button
+		And I select "R9510 Salary payment" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 329 dated 08.02.2023 13:10:49' | ''            | ''                    | ''          | ''             | ''             | ''                | ''         | ''                             |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''                | ''         | ''                             |
+			| 'Register  "R9510 Salary payment"'           | ''            | ''                    | ''          | ''             | ''             | ''                | ''         | ''                             |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                | ''         | ''                             |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Employee'        | 'Currency' | 'Multi currency movement type' |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '171,2'     | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'USD'      | 'Reporting currency'           |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '256,8'     | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'USD'      | 'Reporting currency'           |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 000'     | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'TRY'      | 'Local currency'               |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 000'     | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'TRY'      | 'en description is empty'      |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 500'     | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'TRY'      | 'Local currency'               |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 500'     | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'TRY'      | 'en description is empty'      |		
 		And I close all client application windows
 
 Scenario: _043330 Bank payment clear posting/mark for deletion

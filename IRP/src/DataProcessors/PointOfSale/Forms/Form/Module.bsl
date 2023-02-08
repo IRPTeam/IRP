@@ -947,7 +947,7 @@ Function WriteTransaction(Result)
 				CashbackAmount = CashbackAmount + PaymentsItem.Amount * (-1);
 			EndIf;
 		EndDo;
-		PaymentsTable.GroupBy("Account,BankTerm,PaymentType,PaymentTypeEnum", "Amount,Commission");
+//		PaymentsTable.GroupBy("Account,BankTerm,PaymentType,PaymentTypeEnum, RRNCode, PaymentInfo", "Amount,Commission");
 		
 		If ThisObject.RetailBasis.IsEmpty() Then
 			CreateReturnWithoutBase(PaymentsTable);

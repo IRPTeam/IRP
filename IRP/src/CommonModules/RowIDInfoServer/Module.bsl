@@ -4111,7 +4111,9 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Payments.Percent,
 	|	Payments.Commission,
 	|	Payments.BankTerm,
-	|	Payments.Key
+	|	Payments.Key,
+	|	CAST("""" AS String(30)) AS RRNCode,
+	|	CAST("""" AS String(1024)) AS PaymentInfo
 	|FROM
 	|	Document.RetailSalesReceipt.Payments AS Payments
 	|		INNER JOIN BasisesTable AS BasisesTable
@@ -9963,7 +9965,7 @@ EndFunction
 #Region EmptyTables_Payments
 
 Function GetColumnNames_Payments()
-	Return "Key, Ref, PaymentType, PaymentTerminal, Account, Percent, BankTerm";
+	Return "Key, Ref, PaymentType, PaymentTerminal, Account, Percent, BankTerm, RRNCode, PaymentInfo";
 EndFunction
 
 Function GetColumnNamesSum_Payments()

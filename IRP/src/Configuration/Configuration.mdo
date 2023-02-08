@@ -895,7 +895,6 @@
   <enums>Enum.ReceiptPaymentMethods</enums>
   <enums>Enum.DocumentFiscalStatuses</enums>
   <enums>Enum.ExpenseTypes</enums>
-  <enums>Enum.AcquiringPaymentStatus</enums>
   <enums>Enum.AccrualAndDeductionPeriodicity</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>

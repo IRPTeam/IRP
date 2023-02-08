@@ -92,7 +92,7 @@ Async Function ReturnPaymentByPaymentCard(Hardware, Settings) Export
 			Settings.InOut.CardNumber,
 			Settings.InOut.ReceiptNumber,
 			Settings.InOut.RRNCode,
-			Settings.Out.AuthorizationCode,
+			Settings.In.AuthorizationCode,
 			Settings.Out.Slip
 		); // Boolean
 		
@@ -118,14 +118,14 @@ Async Function CancelPaymentByPaymentCard(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
 	//@skip-check dynamic-access-method-not-found
-	Result = ConnectParameters.DriverObject.ReturnPaymentByPaymentCard(
+	Result = ConnectParameters.DriverObject.CancelPaymentByPaymentCard(
 		ConnectParameters.ID,
 		Settings.In.MerchantNumber,
 		Settings.In.Amount,
 		Settings.InOut.CardNumber,
 		Settings.InOut.ReceiptNumber,
-		Settings.Out.RRNCode,
-		Settings.Out.AuthorizationCode,
+		Settings.In.RRNCode,
+		Settings.In.AuthorizationCode,
 		Settings.Out.Slip
 	); // Boolean
 	
@@ -216,7 +216,7 @@ EndFunction
 // ** Name - String - Settings name
 // * Form - Structure - Lock and unlock form elements:
 // ** ElementToLock - ClientApplicationForm - Element or form. Will be locked until payment end
-// ** ElementToHideAndShow - FormDecoration - Element or form. Will be showed until payment end
+// ** ElementToHideAndShow - FormDecoration, FormGroup - Element or form. Will be showed until payment end
 // * In - Structure:
 // ** DeviceID - String - Идентификатор устройства
 // ** MerchantNumber - Number - Номер мерчанта, доступного для данного эквайрингового терминала.
@@ -263,17 +263,17 @@ EndFunction
 // ** Name - String - Settings name
 // * Form - Structure - Lock and unlock form elements:
 // ** ElementToLock - ClientApplicationForm - Element or form. Will be locked until payment end
-// ** ElementToHideAndShow - FormDecoration - Element or form. Will be showed until payment end
+// ** ElementToHideAndShow - FormDecoration, FormGroup - Element or form. Will be showed until payment end
 // * In - Structure:
 // ** DeviceID - String - Идентификатор устройства
 // ** MerchantNumber - Number - Номер мерчанта, доступного для данного эквайрингового терминала.
 // ** Amount - Number - Сумма операции по карте
+// ** AuthorizationCode - String - Код авторизации транзакции
 // * InOut - Structure:
 // ** CardNumber - String - Номер Карты / Данные карты / Маскированный номер карты
 // ** ReceiptNumber - String - Номер чека 
 // ** RRNCode - String - Уникальный код транзакции RRN 
 // * Out - Structure:
-// ** AuthorizationCode - String - Код авторизации транзакции
 // ** Slip - String - Текст квитанции по операции сформированный эквайринговым ПО. В случае отказа по операции возвращается текст квитанции отказа.
 Function ReturnPaymentByPaymentCardSettings() Export
 	Str = New Structure;
@@ -289,6 +289,7 @@ Function ReturnPaymentByPaymentCardSettings() Export
 	Str.In.Insert("DeviceID", "");
 	Str.In.Insert("MerchantNumber", Undefined);
 	Str.In.Insert("Amount", Undefined);
+	Str.In.Insert("AuthorizationCode", "");
 	
 	Str.Insert("InOut", New Structure);
 	Str.InOut.Insert("CardNumber", Undefined);
@@ -296,8 +297,7 @@ Function ReturnPaymentByPaymentCardSettings() Export
 	Str.InOut.Insert("RRNCode", "");
 	
 	Str.Insert("Out", New Structure);
-	Str.Out.Insert("AuthorizationCode", "");
-	Str.Out.Insert("Slip", "");
+		Str.Out.Insert("Slip", "");
 	
 	Return Str;
 EndFunction
@@ -312,12 +312,12 @@ EndFunction
 // ** DeviceID - String - Идентификатор устройства
 // ** MerchantNumber - Number - Номер мерчанта, доступного для данного эквайрингового терминала.
 // ** Amount - Number - Сумма операции по карте
+// ** RRNCode - String - Уникальный код транзакции RRN 
+// ** AuthorizationCode - String - Код авторизации транзакции
 // * InOut - Structure:
 // ** CardNumber - String - Номер Карты / Данные карты / Маскированный номер карты
 // ** ReceiptNumber - String - Номер чека 
 // * Out - Structure:
-// ** RRNCode - String - Уникальный код транзакции RRN 
-// ** AuthorizationCode - String - Код авторизации транзакции
 // ** Slip - String - Текст квитанции по операции сформированный эквайринговым ПО. В случае отказа по операции возвращается текст квитанции отказа.
 Function CancelPaymentByPaymentCardSettings() Export
 	Str = New Structure;
@@ -329,14 +329,14 @@ Function CancelPaymentByPaymentCardSettings() Export
 	Str.In.Insert("DeviceID", "");
 	Str.In.Insert("MerchantNumber", Undefined);
 	Str.In.Insert("Amount", Undefined);
+	Str.In.Insert("AuthorizationCode", "");
+	Str.In.Insert("RRNCode", "");
 	
 	Str.Insert("InOut", New Structure);
 	Str.InOut.Insert("CardNumber", Undefined);
 	Str.InOut.Insert("ReceiptNumber", Undefined);
 	
 	Str.Insert("Out", New Structure);
-	Str.Out.Insert("RRNCode", "");
-	Str.Out.Insert("AuthorizationCode", "");
 	Str.Out.Insert("Slip", "");
 	
 	Return Str;

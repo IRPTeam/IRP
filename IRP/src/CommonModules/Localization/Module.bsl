@@ -318,9 +318,10 @@ Function Strings(Lang) Export
 	Strings.Insert("POS_s5", NStr("en = 'Select sales person'", Lang));
 	Strings.Insert("POS_s6", NStr("en = 'Clear all Items before closing POS'", Lang));
 	
-	Strings.Insert("POS_Error_CheckPaymentsbyCard", NStr("en = 'Check payment %1'", Lang));
-	Strings.Insert("POS_Error_PaymentAlreadyDone", NStr("en = 'Can not change payment. Cancel or Revers it before.'", Lang));
-	Strings.Insert("POS_Error_OnClosePaymentAlreadyDone", NStr("en = 'Cancel or Revers %1 before close.'", Lang));
+	Strings.Insert("POS_Error_ErrorOnPayment", NStr("en = 'There some problem to do payment with %1. Retry?'", Lang));
+	Strings.Insert("POS_Error_CancelPayment", NStr("en = 'Operation with %1 by amount: %2 will be canceled.'", Lang));
+	Strings.Insert("POS_Error_CancelPaymentProblem", NStr("en = 'Cancle payment problem [%1: %2]. Payment not canceled.
+																|Copy message and send it to administrator'", Lang));
 	Strings.Insert("POS_Error_ReturnAmountLess", NStr(
 		"en = 'There are %2 of ""%1"", which is more than the available %3 for return in document ""%4"" .'", Lang));
 	

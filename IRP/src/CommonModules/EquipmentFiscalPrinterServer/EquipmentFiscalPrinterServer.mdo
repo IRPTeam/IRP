@@ -14,5 +14,6 @@
   <value>Donanım yazar kasa</value>
  </synonym>
  <server>true</server>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
  <serverCall>true</serverCall>
 </mdclass:CommonModule>

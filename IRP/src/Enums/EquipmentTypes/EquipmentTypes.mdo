@@ -65,4 +65,11 @@
    <value>Yazar kasa</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="769abb42-7ae6-40e7-8967-b0ed4002e81a">
+  <name>Acquiring</name>
+  <synonym>
+   <key>en</key>
+   <value>Acquiring</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

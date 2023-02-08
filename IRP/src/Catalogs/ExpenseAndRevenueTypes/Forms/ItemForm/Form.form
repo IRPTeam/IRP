@@ -94,6 +94,10 @@
       <segments>Object.IsExpense</segments>
     </dataPath>
     <titleLocation>Right</titleLocation>
+    <handlers>
+      <event>OnChange</event>
+      <name>IsExpenseOnChange</name>
+    </handlers>
     <extendedTooltip>
       <name>IsExpenseExtendedTooltip</name>
       <id>17</id>
@@ -127,6 +131,56 @@
     <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
   </items>
   <items xsi:type="form:FormField">
+    <name>ExpenseType</name>
+    <id>24</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+      <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.ExpenseType</segments>
+    </dataPath>
+    <extendedTooltip>
+      <name>ExpenseTypeExtendedTooltip</name>
+      <id>26</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+      <name>ExpenseTypeContextMenu</name>
+      <id>25</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+    </contextMenu>
+    <type>InputField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+    </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
     <name>IsRevenue</name>
     <id>18</id>
     <visible>true</visible>
@@ -138,6 +192,10 @@
       <segments>Object.IsRevenue</segments>
     </dataPath>
     <titleLocation>Right</titleLocation>
+    <handlers>
+      <event>OnChange</event>
+      <name>IsRevenueOnChange</name>
+    </handlers>
     <extendedTooltip>
       <name>IsRevenueExtendedTooltip</name>
       <id>20</id>
@@ -182,6 +240,10 @@
       <segments>Object.IsFinancialMovementType</segments>
     </dataPath>
     <titleLocation>Right</titleLocation>
+    <handlers>
+      <event>OnChange</event>
+      <name>IsFinancialMovementTypeOnChange</name>
+    </handlers>
     <extendedTooltip>
       <name>IsFinancialMovementTypeExtendedTooltip</name>
       <id>23</id>
@@ -361,6 +423,14 @@
     <handlers>
       <event>BeforeWriteAtServer</event>
       <name>BeforeWriteAtServer</name>
+    </handlers>
+    <handlers>
+      <event>OnReadAtServer</event>
+      <name>OnReadAtServer</name>
+    </handlers>
+    <handlers>
+      <event>AfterWriteAtServer</event>
+      <name>AfterWriteAtServer</name>
     </handlers>
   </extInfo>
 </form:Form>

@@ -30,4 +30,6 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		ChoiceData.Add(PaymentToVendor);
 		ChoiceData.Add(EmployeeCashAdvance);			
 	EndIf;
+	
+	ChoiceData.Add(SalaryPayment);
 EndProcedure

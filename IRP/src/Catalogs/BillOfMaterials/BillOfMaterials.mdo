@@ -271,6 +271,25 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="19808b7b-7fe8-4c32-bc97-bc380604b92e">
+  <name>DurationOfProduction</name>
+  <synonym>
+   <key>en</key>
+   <value>Duration of production</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>5</precision>
+    <scale>2</scale>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <tabularSections uuid="dde04875-4896-4358-8eb2-3468c9999f2f">
   <producedTypes>
    <objectType typeId="f1571f06-5b6a-43c3-ad4f-ad152a788602" valueTypeId="b6cd4d33-e9d9-40b8-8494-9bcfc98e204f"/>

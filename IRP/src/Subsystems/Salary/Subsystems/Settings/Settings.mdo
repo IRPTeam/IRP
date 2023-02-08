@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="acf9a018-d7b5-430f-b36e-cb01bdf2f1b8">
+ <name>Settings</name>
+ <synonym>
+  <key>en</key>
+  <value>Settings</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>InformationRegister.T9500S_AccrualAndDeductionValues</content>
+ <content>InformationRegister.T9510S_Staffing</content>
+ <content>InformationRegister.T9530S_WorkDays</content>
+ <parentSubsystem>Subsystem.Salary</parentSubsystem>
+</mdclass:Subsystem>

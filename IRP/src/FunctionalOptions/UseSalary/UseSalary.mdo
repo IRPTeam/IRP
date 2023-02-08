@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="296a53fb-9def-44f1-b253-0f698e83f08d">
+ <name>UseSalary</name>
+ <synonym>
+  <key>en</key>
+  <value>Use salary</value>
+ </synonym>
+ <location>Constant.UseSalary</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Document.Payroll</content>
+ <content>Catalog.AccrualAndDeductionTypes</content>
+ <content>Catalog.EmployeePositions</content>
+ <content>Enum.AccrualAndDeductionPeriodicity</content>
+ <content>Document.TimeSheet</content>
+ <content>InformationRegister.T9530S_WorkDays</content>
+ <content>Subsystem.Salary</content>
+</mdclass:FunctionalOption>

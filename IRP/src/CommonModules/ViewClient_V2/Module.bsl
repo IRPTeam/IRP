@@ -4,7 +4,7 @@
 Function GetSimpleParameters(Object, Form, TableName, Rows = Undefined)
 	FormParameters   = GetFormParameters(Form);
 	ServerParameters = GetServerParameters(Object);
-	ServerParameters.TableName = TableName;
+	ServerParameters.TableName = TrimAll(TableName);
 	ServerParameters.Rows      = Rows;
 	Return GetParameters(ServerParameters, FormParameters);
 EndFunction
@@ -12,7 +12,7 @@ EndFunction
 Function GetLoadParameters(Object, Form, TableName, Address, GroupColumns = "", SumColumns = "")
 	FormParameters   = GetFormParameters(Form);
 	ServerParameters = GetServerParameters(Object);
-	ServerParameters.TableName = TableName;
+	ServerParameters.TableName = TrimAll(TableName);
 	LoadParameters   = ControllerClientServer_V2.GetLoadParameters(Address, GroupColumns, SumColumns);
 	Return GetParameters(ServerParameters, FormParameters, LoadParameters);	
 EndFunction
@@ -190,7 +190,7 @@ EndFunction
 
 // returns list of Table attributes for get value before the change
 Function GetListPropertyNamesBeforeChange()
-	Return "ItemList.Store, ItemList.DeliveryDate, ItemList.ItemKey, Inventory.ItemKey, ShipmentToTradeAgent.ItemKey, ReceiptFromConsignor.ItemKey";
+	Return "ItemList.Store, ItemList.DeliveryDate, ItemList.ItemKey, Inventory.ItemKey, ShipmentToTradeAgent.ItemKey, ReceiptFromConsignor.ItemKey, ProductionDurationsList.ItemKey";
 EndFunction
 
 // returns list of Form attributes for get value before the change
@@ -1601,6 +1601,210 @@ EndProcedure
 
 #EndRegion
 
+#Region PRODUCTION_DURATIONS_LIST
+
+Procedure ProductionDurationsListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+Function ProductionDurationsListBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "ProductionDurationsList", Cancel, Clone, CurrentData,
+		"ProductionDurationsListOnAddRowFormNotify", "ProductionDurationsListOnCopyRowFormNotify");
+	Form.Items.ProductionDurationsList.CurrentRow = NewRow.GetID();
+	If Form.Items.ProductionDurationsList.CurrentRow <> Undefined Then
+		Form.Items.ProductionDurationsList.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure ProductionDurationsListOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure ProductionDurationsListOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure ProductionDurationsListAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "ProductionDurationsList", "ProductionDurationsListAfterDeleteRowFormNotify");
+EndProcedure
+
+Procedure ProductionDurationsListAfterDeleteRowFormNotify(Parameters) Export
+	Return;
+EndProcedure
+
+Function ProductionDurationsListAddFilledRow(Object, Form,  FillingValues) Export
+	Cancel      = False;
+	Clone       = False;
+	CurrentData = Undefined;
+	NewRow = AddOrCopyRow(Object, Form, "ProductionDurationsList", Cancel, Clone, CurrentData,
+		"ProductionDurationsListOnAddRowFormNotify", "ProductionDurationsListOnCopyRowFormNotify", FillingValues);
+	Form.Items.ProductionDurationsList.CurrentRow = NewRow.GetID();
+	If Form.Items.ProductionDurationsList.CurrentRow <> Undefined Then
+		Form.Items.ProductionDurationsList.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure ProductionDurationsListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
+	Parameters = GetLoadParameters(Object, Form, "ProductionDurationsList", Address, GroupColumn, SumColumn);
+	Parameters.LoadData.ExecuteAllViewNotify = True;
+	NewRows = New Array();
+	For i = 1 To Parameters.LoadData.CountRows Do
+		NewRow = Object.ProductionDurationsList.Add();
+		NewRow.Key = String(New UUID());
+		NewRows.Add(NewRow);
+	EndDo;
+	WrappedRows = ControllerClientServer_V2.WrapRows(Parameters, NewRows);
+	If Parameters.Property("Rows") Then
+		For Each Row In WrappedRows Do
+			Parameters.Rows.Add(Row);
+		EndDo;
+	Else
+		Parameters.Insert("Rows", WrappedRows);
+	EndIf;
+	ControllerClientServer_V2.ProductionDurationsListLoad(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTION_DURATIONS_LIST_COLUMNS
+
+#Region PRODUCTION_DURATIONS_LIST_ITEM
+
+// ProductionDurationsList.Item
+Procedure ProductionDurationsListItemOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ProductionDurationsList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ProductionDurationsList", Rows);
+	ControllerClientServer_V2.ProductionDurationsListItemOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTION_DURATIONS_LIST_ITEM_KEY
+
+// ProductionDurationsList.ItemKey
+Procedure ProductionDurationsListItemKeyOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ProductionDurationsList", CurrentData);
+	FormParameters = GetFormParameters(Form);
+	FetchFromCacheBeforeChange_List("ProductionDurationsList.ItemKey", FormParameters, Rows);
+	
+	ServerParameters = GetServerParameters(Object);
+	ServerParameters.Rows      = Rows;
+	ServerParameters.TableName = "ProductionDurationsList";
+	
+	Parameters = GetParameters(ServerParameters, FormParameters);
+	ControllerClientServer_V2.ProductionDurationsListItemKeyOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTION_DURATIONS_LIST_DURATION
+
+// ProductionDurationsList.Duration
+Procedure ProductionDurationsListDurationOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ProductionDurationsList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ProductionDurationsList", Rows);
+	ControllerClientServer_V2.ProductionDurationsListDurationOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTION_DURATIONS_LIST_AMOUNT
+
+// ProductionDurationsList.Amount
+Procedure ProductionDurationsListAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ProductionDurationsList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ProductionDurationsList", Rows);
+	ControllerClientServer_V2.ProductionDurationsListAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region PRODUCTION_COSTS_LIST
+
+Procedure ProductionCostsListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+Function ProductionCostsListBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "ProductionCostsList", Cancel, Clone, CurrentData,
+		"ProductionCostsListOnAddRowFormNotify", "ProductionCostsListOnCopyRowFormNotify");
+	Form.Items.ProductionCostsList.CurrentRow = NewRow.GetID();
+	If Form.Items.ProductionCostsList.CurrentRow <> Undefined Then
+		Form.Items.ProductionCostsList.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure ProductionCostsListOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure ProductionCostsListOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure ProductionCostsListAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "ProductionCostsList", "ProductionCostsListAfterDeleteRowFormNotify");
+EndProcedure
+
+Procedure ProductionCostsListAfterDeleteRowFormNotify(Parameters) Export
+	Return;
+EndProcedure
+
+Function ProductionCostsListAddFilledRow(Object, Form,  FillingValues) Export
+	Cancel      = False;
+	Clone       = False;
+	CurrentData = Undefined;
+	NewRow = AddOrCopyRow(Object, Form, "ProductionCostsList", Cancel, Clone, CurrentData,
+		"ProductionCostsListOnAddRowFormNotify", "ProductionCostsListOnCopyRowFormNotify", FillingValues);
+	Form.Items.ProductionCostsList.CurrentRow = NewRow.GetID();
+	If Form.Items.ProductionCostsList.CurrentRow <> Undefined Then
+		Form.Items.ProductionCostsList.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure ProductionCostsListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
+	Parameters = GetLoadParameters(Object, Form, "ProductionCostsList", Address, GroupColumn, SumColumn);
+	Parameters.LoadData.ExecuteAllViewNotify = True;
+	NewRows = New Array();
+	For i = 1 To Parameters.LoadData.CountRows Do
+		NewRow = Object.ProductionCostsList.Add();
+		NewRow.Key = String(New UUID());
+		NewRows.Add(NewRow);
+	EndDo;
+	WrappedRows = ControllerClientServer_V2.WrapRows(Parameters, NewRows);
+	If Parameters.Property("Rows") Then
+		For Each Row In WrappedRows Do
+			Parameters.Rows.Add(Row);
+		EndDo;
+	Else
+		Parameters.Insert("Rows", WrappedRows);
+	EndIf;
+	ControllerClientServer_V2.ProductionCostsListLoad(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region PRODUCTION_COSTS_LIST_COLUMNS
+
+#Region PRODUCTION_COSTS_LIST_AMOUNT
+
+// ProductionCostsList.Amount
+Procedure ProductionCostsListAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ProductionCostsList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ProductionCostsList", Rows);
+	ControllerClientServer_V2.ProductionCostsListAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
 #Region _ITEM_LIST_
 
 Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
@@ -2451,6 +2655,127 @@ EndProcedure
 
 #EndRegion
 
+#Region PAYROLL_LIST
+
+Procedure PayrollListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+Function PayrollListBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "PayrollList", Cancel, Clone, CurrentData,
+		"PayrollListOnAddRowFormNotify", "PayrollListOnCopyRowFormNotify");
+	Form.Items.PayrollList.CurrentRow = NewRow.GetID();
+	If Form.Items.PayrollList.CurrentRow <> Undefined Then
+		Form.Items.PayrollList.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure PayrollListOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure PayrollListOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure PayrollListAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "PayrollList", "PayrollListAfterDeleteRowFormNotify");
+EndProcedure
+
+Procedure PayrollListAfterDeleteRowFormNotify(Parameters) Export
+	Return;
+EndProcedure
+
+Procedure PayrollListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
+	Parameters = GetLoadParameters(Object, Form, "PayrollList", Address, GroupColumn, SumColumn);
+	Parameters.LoadData.ExecuteAllViewNotify = True;
+	NewRows = New Array();
+	For i = 1 To Parameters.LoadData.CountRows Do
+		NewRow = Object.PayrollList.Add();
+		NewRow.Key = String(New UUID());
+		NewRows.Add(NewRow);
+	EndDo;
+	WrappedRows = ControllerClientServer_V2.WrapRows(Parameters, NewRows);
+	If Parameters.Property("Rows") Then
+		For Each Row In WrappedRows Do
+			Parameters.Rows.Add(Row);
+		EndDo;
+	Else
+		Parameters.Insert("Rows", WrappedRows);
+	EndIf;
+	ControllerClientServer_V2.PayrollListLoad(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region TIME_SHEET_LIST
+
+Procedure TimeSheetListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+Function TimeSheetListBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "TimeSheetList", Cancel, Clone, CurrentData,
+		"TimeSheetListOnAddRowFormNotify", "TimeSheetListOnCopyRowFormNotify");
+	Form.Items.TimeSheetList.CurrentRow = NewRow.GetID();
+	If Form.Items.TimeSheetList.CurrentRow <> Undefined Then
+		Form.Items.TimeSheetList.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure TimeSheetListOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure TimeSheetListOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure TimeSheetListAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "TimeSheetList", "TimeSheetListAfterDeleteRowFormNotify");
+EndProcedure
+
+Procedure TimeSheetListAfterDeleteRowFormNotify(Parameters) Export
+	Return;
+EndProcedure
+
+Function TimeSheetListAddFilledRow(Object, Form,  FillingValues) Export
+	Cancel      = False;
+	Clone       = False;
+	CurrentData = Undefined;
+	NewRow = AddOrCopyRow(Object, Form, "TimeSheetList", Cancel, Clone, CurrentData,
+		"TimeSheetListOnAddRowFormNotify", "TimeSheetListOnCopyRowFormNotify", FillingValues);
+	Form.Items.TimeSheetList.CurrentRow = NewRow.GetID();
+	If Form.Items.TimeSheetList.CurrentRow <> Undefined Then
+		Form.Items.TimeSheetList.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure TimeSheetListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
+	Parameters = GetLoadParameters(Object, Form, "TimeSheetList", Address, GroupColumn, SumColumn);
+	Parameters.LoadData.ExecuteAllViewNotify = True;
+	NewRows = New Array();
+	For i = 1 To Parameters.LoadData.CountRows Do
+		NewRow = Object.TimeSheetList.Add();
+		NewRow.Key = String(New UUID());
+		NewRows.Add(NewRow);
+	EndDo;
+	WrappedRows = ControllerClientServer_V2.WrapRows(Parameters, NewRows);
+	If Parameters.Property("Rows") Then
+		For Each Row In WrappedRows Do
+			Parameters.Rows.Add(Row);
+		EndDo;
+	Else
+		Parameters.Insert("Rows", WrappedRows);
+	EndIf;
+	ControllerClientServer_V2.TimeSheetListLoad(Parameters);
+EndProcedure
+
+#EndRegion
+
 #Region ACCOUNT_SENDER
 
 Procedure AccountSenderOnChange(Object, Form) Export
@@ -3140,6 +3465,36 @@ Procedure StatusOnChange(Object, Form, TableNames) Export
 EndProcedure
 
 Procedure OnSetStatusNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region BEGIN_DATE
+
+Procedure BeginDateOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.BeginDateOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetBeginDateNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region END_DATE
+
+Procedure EndDateOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.EndDateOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetEndDateNotify(Parameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
 EndProcedure
 

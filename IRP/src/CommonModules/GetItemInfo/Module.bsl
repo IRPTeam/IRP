@@ -904,3 +904,127 @@ Function GetCodeTable() Export
 EndFunction
 
 #EndRegion
+
+// Get package dimensions.
+// 
+// Parameters:
+//  PackageItem - CatalogRef.ItemKeys - Package item
+// 
+// Returns:
+//  Structure - Get package dimensions:
+// * Weight - Number -
+// * Volume - Number -
+// * Height - Number -
+// * Width - Number -
+// * Length - Number -
+Function GetPackageDimensions(PackageItem) Export
+	
+	Result = New Structure;
+	Result.Insert("Weight", 0);
+	Result.Insert("Volume", 0);
+	Result.Insert("Height", 0);
+	Result.Insert("Width", 0);
+	Result.Insert("Length", 0);
+	
+	Query = New Query;
+	Query.Text =
+	"SELECT
+	|	ItemKeys.Ref AS ItemKey,
+	|	ItemKeys.Item,
+	|	ItemKeys.Unit AS ItemKeyUnit,
+	|	ItemKeys.Item.PackageUnit,
+	|	ItemKeys.Item.Unit
+	|INTO tmpItem
+	|FROM
+	|	Catalog.ItemKeys AS ItemKeys
+	|WHERE
+	|	ItemKeys.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemKeys.Weight,
+	|	ItemKeys.Volume,
+	|	ItemKeys.Height,
+	|	ItemKeys.Width,
+	|	ItemKeys.Length,
+	|	1 AS Priority
+	|FROM
+	|	tmpItem AS tmpItem
+	|		LEFT JOIN Catalog.ItemKeys AS ItemKeys
+	|		ON tmpItem.ItemKey = ItemKeys.Ref
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	IsNull(Items.Weight, 0) AS Weight,
+	|	IsNull(Items.Volume, 0) AS Volume,
+	|	IsNull(Items.Height, 0) AS Height,
+	|	IsNull(Items.Width, 0) AS Width,
+	|	IsNull(Items.Length, 0) AS Length,
+	|	2 AS Priority
+	|FROM
+	|	tmpItem AS tmpItem
+	|		LEFT JOIN Catalog.Items AS Items
+	|		ON tmpItem.Item = Items.Ref
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	IsNull(Units.Weight, 0) AS Weight,
+	|	IsNull(Units.Volume, 0) AS Volume,
+	|	IsNull(Units.Height, 0) AS Height,
+	|	IsNull(Units.Width, 0) AS Width,
+	|	IsNull(Units.Length, 0) AS Length,
+	|	3 AS Priority
+	|FROM
+	|	tmpItem AS tmpItem
+	|		LEFT JOIN Catalog.Units AS Units
+	|		ON tmpItem.ItemKeyUnit = Units.Ref
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	IsNull(Units.Weight, 0) AS Weight,
+	|	IsNull(Units.Volume, 0) AS Volume,
+	|	IsNull(Units.Height, 0) AS Height,
+	|	IsNull(Units.Width, 0) AS Width,
+	|	IsNull(Units.Length, 0) AS Length,
+	|	4 AS Priority
+	|FROM
+	|	tmpItem AS tmpItem
+	|		LEFT JOIN Catalog.Units AS Units
+	|		ON tmpItem.ItemPackageUnit = Units.Ref
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	IsNull(Units.Weight, 0) AS Weight,
+	|	IsNull(Units.Volume, 0) AS Volume,
+	|	IsNull(Units.Height, 0) AS Height,
+	|	IsNull(Units.Width, 0) AS Width,
+	|	IsNull(Units.Length, 0) AS Length,
+	|	5 AS Priority
+	|FROM
+	|	tmpItem AS tmpItem
+	|		LEFT JOIN Catalog.Units AS Units
+	|		ON tmpItem.ItemUnit = Units.Ref
+	|
+	|ORDER BY
+	|	Priority";
+	
+	Query.SetParameter("Ref", PackageItem);
+	Selection = Query.Execute().Select();
+	
+	While Selection.Next() Do
+		If Selection.Length = 0 And Selection.Width = 0 And Selection.Height = 0 And
+				Selection.Weight = 0 And Selection.Volume = 0 Then
+			Continue;
+		EndIf;
+		FillPropertyValues(Result, Selection);
+		Break;
+	EndDo;
+	
+	Return Result;
+	
+EndFunction

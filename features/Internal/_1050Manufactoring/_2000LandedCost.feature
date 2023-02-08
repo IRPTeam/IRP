@@ -24,6 +24,7 @@ Scenario: _2000 preparation (landed cost)
 	When Create catalog Companies objects (partners company)
 	When Create information register PartnerSegments records
 	When Create catalog Agreements objects
+	When Create catalog ExpenseAndRevenueTypes objects
 	When Create catalog TaxRates objects
 	When Create catalog Taxes objects	
 	When Create information register TaxSettings records
@@ -91,7 +92,7 @@ Scenario: _2000 preparation (landed cost)
 		Then the form attribute named "LandedCostCurrencyMovementType" became equal to "Local currency"
 		And I click "Save and close" button
 	When Create document SalesInvoice objects (MF)
-	When Create catalog ReportOptions objects
+	When Create catalog ReportOptions objects (manufactoring)
 	When Create catalog MFBillOfMaterials objects
 	When Create catalog PlanningPeriods objects (MF)
 	When Create catalog BillOfMaterials objects (semiproducts)
@@ -118,6 +119,94 @@ Scenario: _2000 preparation (landed cost)
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesInvoice.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I close all client application windows
+
+
+Scenario: _2008 create production cost allocation (not direct cost)
+	And I close all client application windows
+	* Create Production cost allocation
+		Given I open hyperlink "e1cib/list/Document.ProductionCostsAllocation"
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I input current date in "Begin date" field
+		And I input current date in "End date" field
+	* Fill duration
+		And in the table "ProductionDurationsList" I click "Fill durations" button
+	* Check filling
+		And "ProductionDurationsList" table became equal
+			| '#' | 'Business unit'       | 'Amount' | 'Item'                                    | 'Duration' | 'Item key'                                |
+			| '1' | 'Production store 05' | ''       | 'Копыта на стремянки Класс 20х20, черный' | '40,00'    | 'Копыта на стремянки Класс 20х20, черный' |
+			| '2' | 'Production store 05' | ''       | 'Стремянка номер 6 ступенчатая'           | '250,00'   | 'Стремянка номер 6 ступенчатая'           |
+			| '3' | 'Production store 05' | ''       | 'Стремянка номер 8'                       | '18,00'    | 'Стремянка номер 8'                       |
+	* Add cost
+		And in the table "ProductionCostsList" I click the button named "ProductionCostsListAdd"
+		And I activate "Profit loss center" field in "ProductionCostsList" table
+		And I select current line in "ProductionCostsList" table
+		And I click choice button of "Profit loss center" attribute in "ProductionCostsList" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Manufactory 06' |
+		And I select current line in "List" table
+		And I activate "Expense type" field in "ProductionCostsList" table
+		And I click choice button of "Expense type" attribute in "ProductionCostsList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Expense'     |
+		And I select current line in "List" table
+		And I activate "Currency" field in "ProductionCostsList" table
+		And I click choice button of "Currency" attribute in "ProductionCostsList" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Turkish lira' |
+		And I select current line in "List" table
+		And I finish line editing in "ProductionCostsList" table
+		And I activate field named "ProductionCostsListAmount" in "ProductionCostsList" table
+		And I select current line in "ProductionCostsList" table
+		And I input "1 000,00" text in the field named "ProductionCostsListAmount" of "ProductionCostsList" table
+		And I finish line editing in "ProductionCostsList" table
+		And in the table "ProductionCostsList" I click the button named "ProductionCostsListAdd"
+		And I activate "Profit loss center" field in "ProductionCostsList" table
+		And I click choice button of "Profit loss center" attribute in "ProductionCostsList" table
+		Then "Business units" window is opened
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Manufactory 07' |
+		And I select current line in "List" table
+		And I activate "Expense type" field in "ProductionCostsList" table
+		And I click choice button of "Expense type" attribute in "ProductionCostsList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Delivery'    |
+		And I select current line in "List" table
+		And I click choice button of "Currency" attribute in "ProductionCostsList" table
+		And I select current line in "List" table
+		And I activate field named "ProductionCostsListAmount" in "ProductionCostsList" table
+		And I input "2 000,00" text in the field named "ProductionCostsListAmount" of "ProductionCostsList" table
+		And I finish line editing in "ProductionCostsList" table
+		And I move to "Durations" tab
+	* Allocate amount
+		And in the table "ProductionDurationsList" I click "Allocate amounts" button
+		And "ProductionDurationsList" table became equal
+			| '#' | 'Business unit'       | 'Amount'   | 'Item'                                    | 'Duration' | 'Item key'                                |
+			| '1' | 'Production store 05' | '389,60'   | 'Копыта на стремянки Класс 20х20, черный' | '40,00'    | 'Копыта на стремянки Класс 20х20, черный' |
+			| '2' | 'Production store 05' | '2 435,08' | 'Стремянка номер 6 ступенчатая'           | '250,00'   | 'Стремянка номер 6 ступенчатая'           |
+			| '3' | 'Production store 05' | '175,32'   | 'Стремянка номер 8'                       | '18,00'    | 'Стремянка номер 8'                       |
+	* Post
+		And I click the button named "FormPost"
+		And I delete "$$NumberProductionCostsAllocation1$$" variable
+		And I delete "$$ProductionCostsAllocation1$$" variable
+		And I save the value of the field named "Number" as "$$NumberProductionCostsAllocation1$$"
+		And I save the window as "$$ProductionCostsAllocation1$$"	
+		And I click the button named "FormPostAndClose"
+		And "List" table contains lines
+			| 'Number'                               |
+			| '$$NumberProductionCostsAllocation1$$' |
+		And I close all client application windows									
+				
+									
 
 
 Scenario: _2010 create Calculation movement costs (batch realocate)
@@ -186,10 +275,7 @@ Scenario: _2013 check batch calculation (one semiproduct consists of another sem
 		And I select current line in "List" table
 		And I click "Generate" button
 		Given "Result" spreadsheet document is equal to "LandedCost2" by template
-
-
-
-		
+	
 				
 		
 				

@@ -1378,7 +1378,9 @@ Function GetFormItemNames()
 				|ConsignorBatches,
 				|ShipmentToTradeAgentKey, ShipmentToTradeAgentUseSerialLotNumber,
 				|ReceiptFromConsignorKey, ReceiptFromConsignorUseSerialLotNumber,
-				|SourceOfOrigins";
+				|SourceOfOrigins,
+				|ProductionDurationsListKey, ProductionCostsListKey,
+				|PayrollListKey, TimeSheetListKey, TimeSheetListVisible, TimeSheetListLineNumber, TimeSheetListEmployee, TimeSheetListPosition";
 	Return ItemNames;
 EndFunction	
 

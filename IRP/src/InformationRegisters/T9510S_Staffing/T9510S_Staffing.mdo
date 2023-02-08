@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="27988788-18ec-40ad-bc57-f2bf50cf19ec">
+ <producedTypes>
+  <selectionType typeId="6edcf040-f693-40fe-b8aa-ab8330252f5a" valueTypeId="20d8c4be-1fa7-4321-adf3-07a7a4ccad01"/>
+  <listType typeId="56905de3-d7bf-4883-9556-aef49b41b2ed" valueTypeId="3c0e8483-e751-47fd-9e35-e696fff55fc3"/>
+  <managerType typeId="9daa458b-a05a-49df-9510-b6c83c49c193" valueTypeId="e3c76370-ebed-488e-bacb-d96a04ced907"/>
+  <recordSetType typeId="65af7864-5c8b-4149-963d-1bb4b67a0038" valueTypeId="d6b9f9de-aa00-4d5b-bc46-52b24925b12d"/>
+  <recordKeyType typeId="c9b2f8c7-c237-41c4-b20b-e1f6ad5d33f5" valueTypeId="94512eb5-8cc6-48a1-8a9a-3ac26f9ca4a3"/>
+  <recordType typeId="e25eeb85-cb61-49e2-91b4-f35b67f33331" valueTypeId="b4a2f26a-ca50-4613-b279-49782fc5367e"/>
+  <recordManagerType typeId="0025cda0-ecbf-4cb3-8bc2-e6a6d14781c4" valueTypeId="d1d6324a-b186-423c-a636-135bc9cbb30e"/>
+ </producedTypes>
+ <name>T9510S_Staffing</name>
+ <synonym>
+  <key>en</key>
+  <value>T9510 Staffing</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <defaultRecordForm>InformationRegister.T9510S_Staffing.Form.RecordForm</defaultRecordForm>
+ <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="9cb6e57a-70d6-4fc2-9027-a2450ac5952d">
+  <name>Fired</name>
+  <synonym>
+   <key>en</key>
+   <value>Fired</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="27f9eed6-634d-4fa4-b27a-a73dbea4fdb3">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="95ea41d9-90e9-4cb1-944b-92fab3f71fdd">
+  <name>Branch</name>
+  <synonym>
+   <key>en</key>
+   <value>Branch</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="08cf0f3d-9c8f-4400-b832-1ed4370c50e5">
+  <name>Position</name>
+  <synonym>
+   <key>en</key>
+   <value>Position</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.EmployeePositions</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="2e192fcd-665c-480f-b747-f730bbad1bff">
+  <name>Employee</name>
+  <synonym>
+   <key>en</key>
+   <value>Employee</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.Employee</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="8b006af9-f25d-4cdc-b68c-3d51833cc0bd">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Record form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+</mdclass:InformationRegister>

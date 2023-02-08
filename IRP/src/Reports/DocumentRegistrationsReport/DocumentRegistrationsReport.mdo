@@ -127,6 +127,9 @@
    <types>DocumentRef.ProductionPlanningClosing</types>
    <types>DocumentRef.CashExpense</types>
    <types>DocumentRef.EmployeeCashAdvance</types>
+   <types>DocumentRef.ProductionCostsAllocation</types>
+   <types>DocumentRef.Payroll</types>
+   <types>DocumentRef.TimeSheet</types>
   </commandParameterType>
   <representation>Auto</representation>
  </commands>

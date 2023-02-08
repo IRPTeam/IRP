@@ -840,14 +840,21 @@ Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = 
 		Parameters.Insert("TempTablesManager" , New TempTablesManager());
 		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 		If CheckResult.IsOk Then
-			ExpensesCheckResult = CheckAllExpenses(Parameters);
+			ExpensesCheckResult = CheckAllExpenses(Parameters, AddInfo);
 			Return ExpensesCheckResult.IsOk;
 		EndIf;
 	EndIf;
 	Return False;
 EndFunction
 
-Function GetExpenseRecorders(Parameters)
+Function GetOriginalDocumentDate(DocObject) Export
+	If Not ValueIsFilled(DocObject.Ref) Then
+		Return DocObject.Date;
+	EndIf;
+	Return DocObject.Ref.Date;
+EndFunction
+
+Function GetExpenseRecorders(Parameters, AddInfo = Undefined)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
@@ -860,32 +867,34 @@ Function GetExpenseRecorders(Parameters)
 	|		ON Records_All_Grouped.Store = BalanceRegister.Store
 	|		AND Records_All_Grouped.ItemKey = BalanceRegister.ItemKey
 	|		AND BalanceRegister.RecordType = VALUE(AccumulationRecordType.Expense)
+	|		AND BalanceRegister.Period >= &ReceiptDate
 	|GROUP BY
 	|	BalanceRegister.Recorder,
 	|	BalanceRegister.Recorder.PointInTime
 	|ORDER BY
 	|	BalanceRegister.Recorder.PointInTime DESC";
 	Query.Text = StrTemplate(Query.Text, Parameters.RegisterName);
+	
+	ReceiptDate = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "OriginalDocumentDate", CurrentSessionDate());
+	Query.SetParameter("ReceiptDate", ReceiptDate);
+	
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	Return QueryTable;
 EndFunction
 
-Function CheckAllExpenses(Parameters)
+Function CheckAllExpenses(Parameters, AddInfo = Undefined)
 	Result = New Structure("IsOk", True);
-	TableOfExpenseRecorders = GetExpenseRecorders(Parameters);
+	TableOfExpenseRecorders = GetExpenseRecorders(Parameters, AddInfo);
 	For Each RowExpenseRecorders In TableOfExpenseRecorders Do
 		CheckAddInfo = New Structure("CheckExpenseRecorders", True);
-		PostingParameters = GetPostingParameters(RowExpenseRecorders.Recorder.GetObject(),
-			DocumentPostingMode.Regular, CheckAddInfo);
+		PostingParameters = GetPostingParameters(RowExpenseRecorders.Recorder.GetObject(), DocumentPostingMode.Regular, CheckAddInfo);
 		Cancel = False;
-		PostingParameters.Module.CheckAfterWrite_R4010B_R4011B(RowExpenseRecorders.Recorder,
-			Cancel, PostingParameters, CheckAddInfo);
+		PostingParameters.Module.CheckAfterWrite_R4010B_R4011B(RowExpenseRecorders.Recorder, Cancel, PostingParameters, CheckAddInfo);
 		If Cancel Then
 			// Message with error
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_104, String(RowExpenseRecorders.Recorder)));
-			ArrayOfPostingErrorMessages = CommonFunctionsClientServer.GetFromAddInfo(CheckAddInfo,
-				"ArrayOfPostingErrorMessages", New Array());
+			ArrayOfPostingErrorMessages = CommonFunctionsClientServer.GetFromAddInfo(CheckAddInfo, "ArrayOfPostingErrorMessages", New Array());
 			If ArrayOfPostingErrorMessages.Count() Then
 				For Each PostingErrorMessage In ArrayOfPostingErrorMessages Do
 					CommonFunctionsClientServer.ShowUsersMessage(PostingErrorMessage);

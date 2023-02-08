@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="18463f64-9568-49a0-bfe6-c18609256c05">
+ <name>EquipmentAcquiringClient</name>
+ <synonym>
+  <key>en</key>
+  <value>Equipment acquiring client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

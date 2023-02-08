@@ -95,7 +95,7 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load RetailSalesReceipt
-		When Create document Retail sales receipt (payment type - bank credit)
+		When Create document Retail sales receipt and Retail return receipt (payment type - bank credit)
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(110).GetObject().Write(DocumentWriteMode.Posting);" |
 		When Create document RetailSalesReceipt and RetailReturnReceipt (consignor)

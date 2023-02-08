@@ -825,6 +825,41 @@
     <value>118</value>
    </code>
   </items>
+  <items id="abe7fd0a-27f3-4cb2-9b6d-e4d5eeb1072c">
+   <name>Document_ProductionCostsAllocation</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>119</value>
+   </code>
+  </items>
+  <items id="6bb99093-8340-46b5-871d-675a1b579919">
+   <name>Document_Payroll</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>120</value>
+   </code>
+  </items>
+  <items id="99d19723-f46b-4b6a-89b8-99ede58b1afb">
+   <name>Catalog_AccrualAndDeductionTypes</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>121</value>
+   </code>
+  </items>
+  <items id="141aa39d-1a81-4f0d-b299-70ceaf78baa5">
+   <name>Catalog_EmployeePositions</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>122</value>
+   </code>
+  </items>
+  <items id="c21a0ef0-f003-4e10-9060-1f5378b59705">
+   <name>Document_TimeSheet</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>123</value>
+   </code>
+  </items>
  </predefined>
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>

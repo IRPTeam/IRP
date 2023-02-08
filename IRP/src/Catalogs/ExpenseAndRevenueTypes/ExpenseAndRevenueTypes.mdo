@@ -244,6 +244,21 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="150b98fa-3304-4d04-a48a-2e796b195054">
+  <name>ExpenseType</name>
+  <synonym>
+   <key>en</key>
+   <value>Expense type</value>
+  </synonym>
+  <type>
+   <types>EnumRef.ExpenseTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <tabularSections uuid="4ebde56c-bdca-4050-baf0-8ddbd1a35358">
   <producedTypes>
    <objectType typeId="3ccd12e7-2bda-4a44-9879-14bd1bd3f919" valueTypeId="78c72c13-febf-40c4-8a1e-c9ca03ce577c"/>

@@ -95,6 +95,21 @@
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
  </resources>
+ <resources uuid="af568842-eeb7-4593-92ab-ba131f1f0663">
+  <name>NotDirectCosts</name>
+  <synonym>
+   <key>en</key>
+   <value>Not direct costs</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
  <dimensions uuid="b1bd2da2-6475-48f4-9251-06994812e2ff">
   <name>Document</name>
   <synonym>

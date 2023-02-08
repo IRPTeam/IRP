@@ -161,6 +161,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(R4050B_StockInventory());
+	QueryArray.Add(R7050T_ProductionDurations());
+	QueryArray.Add(T7051S_ProductionDurationDetails());
 	Return QueryArray;
 EndFunction
 
@@ -196,6 +198,7 @@ Function Header()
 	"SELECT
 	|	Production.Date AS Period,
 	|	Production.ProductionType AS ProductionType,
+	|	Production.DurationOfProduction AS Duration,
 	|	Production.Company,
 	|	Production.BusinessUnit,
 	|	Production.BillOfMaterials,
@@ -235,6 +238,40 @@ Function IncomingStocksReal()
 	|	Header.MainProductionFinishedDate,
 	|	Header.ProductionPlanning,
 	|	Header.StoreProduction";
+EndFunction
+
+Function R7050T_ProductionDurations()
+	Return
+	"SELECT
+	|	Header.MainProductionFinishedDate AS Period,
+	|	Header.Company,
+	|	Header.BusinessUnit,
+	|	Header.ItemKey,
+	|	Header.Duration
+	|INTO R7050T_ProductionDurations
+	|FROM
+	|	Header AS Header
+	|WHERE
+	|	Header.MainProductionIsFinished
+	|	AND Header.Duration <> 0";
+EndFunction
+
+Function T7051S_ProductionDurationDetails()
+	Return
+	"SELECT
+	|	Header.MainProductionFinishedDate AS Period,
+	|	Header.Company,
+	|	Header.BusinessUnit,
+	|	Header.ItemKey,
+	|	Header.ProductionRef AS Document,
+	|	Header.StoreProduction AS Store,
+	|	Header.Duration
+	|INTO T7051S_ProductionDurationDetails
+	|FROM
+	|	Header AS Header
+	|WHERE
+	|	Header.MainProductionIsFinished
+	|	AND Header.Duration <> 0";
 EndFunction
 
 Function R7030T_ProductionPlanning()

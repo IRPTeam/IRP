@@ -179,6 +179,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R2023B_AdvancesFromRetailCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R9510B_SalaryPayment.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -262,6 +263,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3050T_PosCashBalances());
 	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
 	QueryArray.Add(R3027B_EmployeeCashAdvance());
+	QueryArray.Add(R9510B_SalaryPayment());
 	Return QueryArray;
 EndFunction
 
@@ -338,17 +340,37 @@ Function PaymentList()
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS) AS IsReturnToCustomerByPOS,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CustomerAdvance) AS IsCustomerAdvance,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance) AS IsEmployeeCashAdvance,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.SalaryPayment) AS IsSalaryPayment,
 	|	PaymentList.RetailCustomer AS RetailCustomer,
 	|	PaymentList.Ref.Branch AS Branch,
 	|	PaymentList.LegalNameContract AS LegalNameContract,
 	|	PaymentList.Order,
 	|	PaymentList.PaymentType,
-	|	PaymentList.PaymentTerminal
+	|	PaymentList.PaymentTerminal,
+	|	PaymentList.Employee
 	|INTO PaymentList
 	|FROM
 	|	Document.BankPayment.PaymentList AS PaymentList
 	|WHERE
 	|	PaymentList.Ref = &Ref";
+EndFunction
+
+Function R9510B_SalaryPayment()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.Key,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Employee,
+		|	PaymentList.Currency,
+		|	PaymentList.TotalAmount - PaymentList.Commission AS Amount
+		|INTO R9510B_SalaryPayment
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsSalaryPayment";
 EndFunction
 
 Function R3027B_EmployeeCashAdvance()

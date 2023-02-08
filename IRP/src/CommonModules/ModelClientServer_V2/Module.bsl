@@ -282,7 +282,8 @@ Function GetChain()
 	Chain.Insert("ChangeExpenseTypeByBillOfMaterials"           , GetChainLink("ChangeExpenseTypeByBillOfMaterialsExecute"));
 	
 	Chain.Insert("ChangeBillOfMaterialsByItemKey" , GetChainLink("ChangeBillOfMaterialsByItemKeyExecute"));
-	Chain.Insert("ChangeCostMultiplierRatioByBillOfMaterials" , GetChainLink("ChangeCostMultiplierRatioByBillOfMaterialsExecute"));
+	Chain.Insert("ChangeCostMultiplierRatioByBillOfMaterials"  , GetChainLink("ChangeCostMultiplierRatioByBillOfMaterialsExecute"));
+	Chain.Insert("ChangeDurationOfProductionByBillOfMaterials" , GetChainLink("ChangeDurationOfProductionByBillOfMaterialsExecute"));
 	
 	Chain.Insert("ChangePlanningPeriodByDateAndBusinessUnit" , GetChainLink("ChangePlanningPeriodByDateAndBusinessUnitExecute"));
 	Chain.Insert("ChangeProductionPlanningByPlanningPeriod"  , GetChainLink("ChangeProductionPlanningByPlanningPeriodExecute"));
@@ -1450,6 +1451,22 @@ Function ChangeCostMultiplierRatioByBillOfMaterialsExecute(Options) Export
 	EndIf;
 	
 	Return CommonFunctionsServer.GetRefAttribute(Options.BillOfMaterials, "CostMultiplierRatio");
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_DURATION_OF_PRODUCTION_BY_BILL_OF_MATERIALS		
+
+Function ChangeDurationOfProductionByBillOfMaterialsOptions() Export
+	Return GetChainLinkOptions("BillOfMaterials, ItemKey, Unit, Quantity, CurrentDurationOfProduction");
+EndFunction
+
+Function ChangeDurationOfProductionByBillOfMaterialsExecute(Options) Export
+	Return ManufacturingServer.GetDurationOfProductionByBillOfMaterials(Options.BillOfMaterials, 
+		Options.ItemKey, 
+		Options.Unit,
+		Options.Quantity,
+		Options.CurrentDurationOfProduction);
 EndFunction
 
 #EndRegion
@@ -2815,7 +2832,8 @@ Function ClearByTransactionTypeBankPaymentOptions() Export
 		|PaymentType,
 		|PaymentTerminal,
 		|BankTerm,
-		|RetailCustomer");
+		|RetailCustomer,
+		|Employee");
 EndFunction
 
 Function ClearByTransactionTypeBankPaymentExecute(Options) Export
@@ -2832,6 +2850,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Result.Insert("PaymentTerminal"          , Options.PaymentTerminal);
 	Result.Insert("BankTerm"                 , Options.BankTerm);
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
+	Result.Insert("Employee"                 , Options.Employee);
 	
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
@@ -2841,6 +2860,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Outgoing_PaymentByCheque     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentByCheque");
 	Outgoing_CustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance");
 	Outgoing_EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
+	Outgoing_SalaryPayment       = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
@@ -2875,7 +2895,10 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 		|BankTerm";
 	ElsIf Options.TransactionType = Outgoing_EmployeeCashAdvance Then
 		StrByType = "
-		|Partner"; 		
+		|Partner"; 	
+	ElsIf Options.TransactionType = Outgoing_SalaryPayment Then
+		StrByType = "
+		|Employee"; 				
 	EndIf;
 	
 	ArrayOfAttributes = New Array();
@@ -3014,7 +3037,8 @@ Function ClearByTransactionTypeCashPaymentOptions() Export
 		|LegalNameContract,
 		|Payee,
 		|Order,
-		|RetailCustomer");
+		|RetailCustomer,
+		|Employee");
 EndFunction
 
 Function ClearByTransactionTypeCashPaymentExecute(Options) Export
@@ -3027,6 +3051,7 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	Result.Insert("Payee"                    , Options.Payee);
 	Result.Insert("Order"                    , Options.Order);
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
+	Result.Insert("Employee"                 , Options.Employee);
 
 	Outgoing_CashTransferOrder = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder");
 	Outgoing_CurrencyExchange  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange");
@@ -3034,6 +3059,7 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	Outgoing_ReturnToCustomer  = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer");
 	Outgoing_CustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance");
 	Outgoing_EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
+	Outgoing_SalaryPayment       = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
 
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
@@ -3051,6 +3077,9 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 		|Agreement,
 		|Payee,
 		|LegalNameContract";
+	ElsIf Options.TransactionType = Outgoing_SalaryPayment Then
+		StrByType = "
+		|Employee";
 	EndIf;
 	
 	ArrayOfAttributes = New Array();

@@ -572,3 +572,47 @@ Procedure ShowHiddenTables(Command)
 EndProcedure
 
 #EndRegion
+
+#Region ACQUIRING
+
+&AtClient
+Procedure PayByCard(Command)
+	
+	If Not IsBlankString(Object.RRNCode) Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().EqAc_AlreadyhasTransaction, "Object.RRNCode", "RRNCode");
+		Return;
+	EndIf;
+		
+	Write();
+	
+	Hardware = CommonFunctionsServer.GetRefAttribute(Object.Account, "Acquiring");
+	
+	Settings = EquipmentAcquiringClient.OpenPaymentFormSettings();
+	Settings.Amount = Object.DocumentAmount;
+	Settings.Hardware = Hardware;
+	
+	NotifyOnClose = New NotifyDescription("PayByCardEnd", ThisObject);
+	
+	OpenForm("CommonForm.PaymentByAcquiring", New Structure("OpenSettings", Settings), ThisObject, , , , NotifyOnClose, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+// Pay by card end.
+// 
+// Parameters:
+//  Result - See EquipmentAcquiringClient.PayByPaymentCardSettings
+//  AddInfo - Undefined - Add info
+&AtClient
+Procedure PayByCardEnd(Result, AddInfo) Export
+	
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	Object.RRNCode = Result.Out.RRNCode;
+	Object.PaymentInfo = CommonFunctionsServer.SerializeJSON(Result);
+	
+	Write();
+	
+EndProcedure
+
+#EndRegion

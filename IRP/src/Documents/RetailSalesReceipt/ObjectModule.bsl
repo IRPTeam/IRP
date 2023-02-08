@@ -29,6 +29,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	ValuesBeforeWrite.Insert("DeletionMark", ThisObject.Ref.DeletionMark);
 	
 	ThisObject.AdditionalProperties.Insert("ValuesBeforeWrite", ValuesBeforeWrite);
+	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 EndProcedure
 
 Procedure OnWrite(Cancel)
@@ -81,6 +82,11 @@ Procedure OnCopy(CopiedObject)
 	LinkedTables.Add(Currencies);
 	LinkedTables.Add(SerialLotNumbers);
 	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);
+	
+	For Each Row In Payments Do
+		Row.RRNCode = "";
+		Row.PaymentInfo = "";
+	EndDo;
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

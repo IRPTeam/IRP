@@ -71,6 +71,7 @@
    <types>DocumentRef.SalesInvoice</types>
    <types>DocumentRef.SalesReportFromTradeAgent</types>
    <types>DocumentRef.SalesReportToConsignor</types>
+   <types>DocumentRef.ProductionCostsAllocation</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

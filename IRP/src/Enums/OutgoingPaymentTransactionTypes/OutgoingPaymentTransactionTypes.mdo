@@ -140,4 +140,11 @@
    <value>Personel iş avans kapaması</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="fd967bf1-f15a-470a-b9d2-375b845d2a65">
+  <name>SalaryPayment</name>
+  <synonym>
+   <key>en</key>
+   <value>Salary payment</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

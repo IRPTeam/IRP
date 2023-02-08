@@ -1,3 +1,4 @@
+
 #Region FormEventHandlers
 
 &AtServer
@@ -14,15 +15,6 @@ EndProcedure
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
-	EndIf;
-EndProcedure
-
-&AtClient
-Async Procedure OnOpen(Cancel)
-	If ValueIsFilled(Parameters.Key) And Not Object.Ref.IsEmpty() And Not Object.Driver.IsEmpty() Then
-		Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref);
-		Settings.Callback = New NotifyDescription("FillDriverParameters_End", ThisObject);
-		HardwareClient.FillDriverParameters(Settings);
 	EndIf;
 EndProcedure
 
@@ -196,6 +188,39 @@ Async Procedure Test(Command)
 		Settings.SetParameters.Insert(Row.Name, Row.Value);
 	EndDo;
 	HardwareClient.TestDevice(Settings);
+EndProcedure
+
+&AtClient
+Async Procedure Connect(Command)
+	Connections = Await HardwareClient.ConnectHardware(ThisObject.Object.Ref);
+	If Connections.Result Then
+		CommandResult = StrTemplate(R().Eq_004, Object.Ref);
+		CommandResult = CommandResult + Chars.LF + "ID:" + Connections.ConnectParameters.ID;
+	Else
+		CommandResult = StrTemplate(R().Eq_005, Object.Ref);
+	EndIf;
+EndProcedure
+
+
+&AtClient
+Async Procedure Disconnect(Command)
+	Connections = Await HardwareClient.DisconnectHardware(ThisObject.Object.Ref);
+	If Connections.Result Then
+		CommandResult = StrTemplate(R().Eq_008, Object.Ref);
+	Else
+		CommandResult = StrTemplate(R().Eq_009, Object.Ref);
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure UpdateStatus(Command)
+	Connections = globalEquipments.ConnectionSettings.Get(ThisObject.Object.Ref);
+	If Connections = Undefined Then
+		CommandResult = StrTemplate(R().Eq_005, Object.Ref);
+	Else
+		CommandResult = StrTemplate(R().Eq_004, Object.Ref);
+		CommandResult = CommandResult + Chars.LF + "ID:" + Connections.ID;
+	EndIf;
 EndProcedure
 
 #EndRegion

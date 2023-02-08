@@ -60,7 +60,8 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.PaymentType,
 	|PaymentList.PaymentTerminal,
 	|PaymentList.BankTerm,
-	|PaymentList.RetailCustomer";
+	|PaymentList.RetailCustomer,
+	|PaymentList.Employee";
 	
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -76,6 +77,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	PaymentByCheque     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.PaymentByCheque");
 	CustomerAdvance     = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance");
 	EmployeeCashAdvance = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
+	SalaryPayment       = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
 	
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
@@ -117,7 +119,10 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		StrByType = "
 		|PaymentList.Partner,
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.BasisDocument";		
+		|PaymentList.BasisDocument";
+	ElsIf TransactionType = SalaryPayment Then
+		StrByType = "
+		|PaymentList.Employee";
 	EndIf;
 	
 	ArrayOfVisibleAttributes = New Array();
@@ -569,6 +574,51 @@ EndProcedure
 &AtClient
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region ACQUIRING
+
+&AtClient
+Procedure ReturnToCard(Command)
+	
+	If Not IsBlankString(Object.RRNCode) Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().EqAc_AlreadyhasTransaction, "Object.RRNCode", "RRNCode");
+		Return;
+	EndIf;
+	
+	Write();
+	
+	Hardware = CommonFunctionsServer.GetRefAttribute(Object.Account, "Acquiring");
+	
+	Settings = EquipmentAcquiringClient.OpenPaymentFormSettings();
+	Settings.Amount = Object.DocumentAmount;
+	Settings.Hardware = Hardware;
+	Settings.Interactive = True;
+	Settings.isReturn = True;
+	NotifyOnClose = New NotifyDescription("PayByCardEnd", ThisObject);
+	
+	OpenForm("CommonForm.PaymentByAcquiring", New Structure("OpenSettings", Settings), ThisObject, , , , NotifyOnClose, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+// Pay by card end.
+// 
+// Parameters:
+//  Result - See EquipmentAcquiringClient.PayByPaymentCardSettings
+//  AddInfo - Undefined - Add info
+&AtClient
+Procedure PayByCardEnd(Result, AddInfo) Export
+	
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	Object.RRNCode = Result.InOut.RRNCode;
+	Object.PaymentInfo = CommonFunctionsServer.SerializeJSON(Result);
+	
+	Write();
+	
 EndProcedure
 
 #EndRegion

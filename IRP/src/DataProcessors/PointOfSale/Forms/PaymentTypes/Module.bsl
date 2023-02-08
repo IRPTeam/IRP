@@ -28,11 +28,11 @@ Procedure CreateFormElement(ButtonsArray)
 	
 	For Each ButtonSettings In ButtonsArray Do 
 		If ButtonSettings.PaymentType.Parent.IsEmpty() Then
-			ButtonsList = New Array;
+			ButtonsList = New Array; // Array of See POSClient.ButtonSettings
 			ButtonsList.Add(ButtonSettings);
 			PayButtonsParent.Insert(ButtonSettings.PaymentType, ButtonsList);
 		ElsIf PayButtonsParent.Get(ButtonSettings.PaymentType.Parent) = Undefined Then
-			ButtonsList = New Array;
+			ButtonsList = New Array; // Array of See POSClient.ButtonSettings
 			ButtonsList.Add(ButtonSettings);
 			PayButtonsParent.Insert(ButtonSettings.PaymentType.Parent, ButtonsList);
 		Else
@@ -109,7 +109,7 @@ EndProcedure
 &AtServer
 Procedure DrawButton(PaymentTypeGroup, ButtonName, Description, Page, Action)
 
-	NewAttributeArray = New Array;
+	NewAttributeArray = New Array; // Array Of FormAttribute
 	NewAttributeArray.Add(New FormAttribute(ButtonName, New TypeDescription("String")));
 	ChangeAttributes(NewAttributeArray);	
 	
@@ -130,7 +130,7 @@ EndProcedure
 
 &AtServer
 Procedure DrawLabel(LabelName, Page)
-	NewAttributeArray = New Array;
+	NewAttributeArray = New Array; // Array Of FormAttribute
 	NewAttributeArray.Add(New FormAttribute(LabelName, New TypeDescription("String")));
 	ChangeAttributes(NewAttributeArray);
 

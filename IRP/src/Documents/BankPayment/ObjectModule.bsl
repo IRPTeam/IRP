@@ -74,3 +74,8 @@ Procedure Filling_BasedOn(FillingData)
 	EndDo;
 	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("TotalAmount");
 EndProcedure
+
+Procedure OnCopy(CopiedObject)
+	RRNCode = "";
+	PaymentInfo = "";
+EndProcedure

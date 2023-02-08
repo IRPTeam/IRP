@@ -297,7 +297,12 @@ Function Strings(Lang) Export
 	Strings.Insert("Eq_007", NStr("en='Can not connect device %1';
 		|ru='Не получилось подключить оборудование %1';
 		|tr='Cihaz bağlanamadı %1'", Lang));
-
+	Strings.Insert("Eq_008", NStr("en='%1 disconnected.'", Lang));
+	Strings.Insert("Eq_009", NStr("en='%1 NOT disconnected.'", Lang));
+	Strings.Insert("Eq_010", NStr("en='Can not disconnect device %1'", Lang));
+	Strings.Insert("Eq_011", NStr("en='Already connected'", Lang));
+	Strings.Insert("Eq_012", NStr("en='Already disconnected'", Lang));
+	
 	Strings.Insert("EqError_001", NStr("en='The device is connected. The device must be disabled before the operation.';
 		|ru='Устройство подключено. Устройство должно быть отключено перед началом работы.';
 		|tr='Cihaz bağlandı. İşlemden önce cihaz devre dışı bırakılmalı.'", Lang));
@@ -333,6 +338,8 @@ Function Strings(Lang) Export
 		|ru='Документ уже пробит';
 		|tr='Evrak önceden yazdırılmıştı'", Lang));
 	
+	Strings.Insert("EqAc_AlreadyhasTransaction", NStr("en='The document is already has transaction code. Transaction already was done. Else clear RRN code.'", Lang));
+	
 #EndRegion
 
 #Region POS
@@ -352,6 +359,15 @@ Function Strings(Lang) Export
 	Strings.Insert("POS_s5", NStr("en='Select sales person';
 		|ru='Выбрать продавца';
 		|tr='Satış elemanı seç'", Lang));
+	Strings.Insert("POS_s6", NStr("en='Clear all Items before closing POS'", Lang));
+	
+	Strings.Insert("POS_Error_ErrorOnClosePayment", NStr("en='Cancel all payment before close form.'", Lang));
+	Strings.Insert("POS_Error_ErrorOnPayment", NStr("en='There some problem to do payment with %1. Retry?'", Lang));
+	Strings.Insert("POS_Error_CancelPayment", NStr("en='Operation with %1 by amount: %2 will be canceled.'", Lang));
+	Strings.Insert("POS_Error_CancelPaymentProblem", NStr("en='Cancle payment problem [%1: %2]. Payment not canceled.
+		|Copy message and send it to administrator'", Lang));
+	Strings.Insert("POS_Error_ReturnAmountLess", NStr("en='There are %2 of ""%1"", which is more than the available %3 for return in document ""%4"" .'", Lang));
+	
 #EndRegion
 
 #Region Service
@@ -544,6 +560,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_037", NStr("en='Unset as default';
 		|ru='Убрать как основной';
 		|tr='Varsayılan olarak kaldır'", Lang));
+	Strings.Insert("Form_038", NStr("en='Employee'", Lang));
 #EndRegion
 
 #Region ErrorMessages
@@ -1256,6 +1273,7 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_Payment", NStr("en='Payment (+)';
 		|ru='Оплата (+)';
 		|tr='Ödeme (+)'", Lang));
+	Strings.Insert("InfoMessage_PaymentReturn", NStr("en='Payment Return'", Lang));
 	Strings.Insert("InfoMessage_SessionIsClosed", NStr("en='Session is closed';
 		|ru='Смена закрыта';
 		|tr='Vardya kapandı'", Lang));
@@ -1265,6 +1283,8 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_Returns", NStr("en='Returns';
 		|ru='Возвраты';
 		|tr='İadeler'", Lang));
+	Strings.Insert("InfoMessage_ReturnTitle", NStr("en='Return'", Lang));
+	Strings.Insert("InfoMessage_POS_Title", NStr("en='Point of sales'", Lang));
 	
 #EndRegion
 

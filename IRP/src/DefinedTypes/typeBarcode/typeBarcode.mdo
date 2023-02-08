@@ -19,7 +19,7 @@
  <type>
   <types>String</types>
   <stringQualifiers>
-   <length>64</length>
+   <length>1024</length>
   </stringQualifiers>
  </type>
 </mdclass:DefinedType>

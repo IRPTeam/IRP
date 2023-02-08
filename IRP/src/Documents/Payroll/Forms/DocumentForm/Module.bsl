@@ -218,7 +218,7 @@ Function FillPayrollsAtServer()
 	
 	PayrollsTable = DocPayrollServer.GetPayrolls(QueryParameters);
 	Address = PutToTempStorage(PayrollsTable, ThisObject.UUID);
-	GroupColumn = "Date, Employee, Position, AccrualAndDeductionType";
+	GroupColumn = "Employee, Position, AccrualAndDeductionType";
 	SumColumn = "Amount";
 	Return New Structure("Address, GroupColumn, SumColumn", Address, GroupColumn, SumColumn);
 EndFunction

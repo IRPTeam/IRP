@@ -198,7 +198,8 @@ Scenario: _0850000 preparation (fiscal printer)
 	* Create PaymentTypes
 		When Create catalog PaymentTypes objects
 	* Bank terms
-		When Create catalog BankTerms objects (for Shop 02)		
+		When Create catalog BankTerms objects (for Shop 02)	
+		When Create catalog BankTerms 03 and PaymentType Card 03 objects (for Shop 02)	
 	* Workstation
 		When Create catalog Workstations objects
 		Given I open hyperlink "e1cib/list/Catalog.Workstations"
@@ -277,7 +278,21 @@ Scenario: _0850000 preparation (fiscal printer)
 		And I click "OK" button
 		And I click the button named "FormWriteAndClose"		
 		And I close all client application windows
-	* 	Fiscal settings
+	* Instal acquiring driver
+		Given I open hyperlink "e1cib/list/Catalog.EquipmentDrivers"
+		And I click the button named "FormCreate"
+		And I input "Acquiring" text in "Description" field
+		And I input "AddIn.Modul_Acquiring_3007" text in "AddIn ID" field
+		And I select external file "C:/AddComponents/Acquiring_3007.zip"
+		And I click "Add file" button	
+		And Delay 10
+		And I click the button named "FormWrite"	
+		And I click "Install" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I click the button named "FormWriteAndClose"		
+		And I close all client application windows
+	* Add fiscal printer to the Hardware
 		Given I open hyperlink "e1cib/list/Catalog.Hardware"
 		And I click the button named "FormCreate"
 		And I input "Fiscal printer" text in "Description" field
@@ -301,6 +316,30 @@ Scenario: _0850000 preparation (fiscal printer)
 		And I delete "$$LogPath$$" variable
 		And I save the value of "Value" field of "DriverParameter" table as "$$LogPath$$"	
 		And I click the button named "FormWriteAndClose"
+	* Add acquiring terminal to the Hardware
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"
+		And I click the button named "FormCreate"
+		And I input "Acquiring terminal" text in "Description" field
+		And I select "Acquiring" exact value from "Types of Equipment" drop-down list
+		And I click Select button of "Driver" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Acquiring_3007' |
+		And I select current line in "List" table
+		And I click "Save" button		
+		And I click "Save and close" button
+		Then "Hardware" window is opened
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Acquiring terminal' |
+		And I select current line in "List" table
+		And in the table "DriverParameter" I click "Reload settings" button		
+		And I go to line in "DriverParameter" table
+			| 'Name'    |
+			| 'LogFile' |
+		And I delete "$$LogPathAcquiring$$" variable
+		And I save the value of "Value" field of "DriverParameter" table as "$$LogPathAcquiring$$"	
+		And I click the button named "FormWriteAndClose"
 	* Add fiscal printer to the workstation
 		Given I open hyperlink "e1cib/list/Catalog.Workstations"
 		And I go to line in "List" table
@@ -308,20 +347,37 @@ Scenario: _0850000 preparation (fiscal printer)
 			| 'Workstation 01'     |
 		And I select current line in "List" table	
 	* Check add hardware
-		And in the table "HardwareList" I click the button named "HardwareListAdd"
-		And I click choice button of "Hardware" attribute in "HardwareList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Fiscal printer'     |
-		And I select current line in "List" table
-		And I activate "Enable" field in "HardwareList" table
-		And I finish line editing in "HardwareList" table
-		And I set "Enable" checkbox in "HardwareList" table
-		And I finish line editing in "HardwareList" table
-		And I click "Save" button
-		And "HardwareList" table became equal
-			| 'Enable' | 'Hardware'       |
-			| 'Yes'    | 'Fiscal printer' |
+		* Fiscal printer
+			And in the table "HardwareList" I click the button named "HardwareListAdd"
+			And I click choice button of "Hardware" attribute in "HardwareList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Fiscal printer'     |
+			And I select current line in "List" table
+			And I activate "Enable" field in "HardwareList" table
+			And I finish line editing in "HardwareList" table
+			And I set "Enable" checkbox in "HardwareList" table
+			And I finish line editing in "HardwareList" table
+			And I click "Save" button
+			And "HardwareList" table became equal
+				| 'Enable' | 'Hardware'       |
+				| 'Yes'    | 'Fiscal printer' |
+		*Acquiring terminal
+			And in the table "HardwareList" I click the button named "HardwareListAdd"
+			And I click choice button of "Hardware" attribute in "HardwareList" table
+			And I go to line in "List" table
+				| 'Description'        |
+				| 'Acquiring terminal' |
+			And I select current line in "List" table
+			And I activate "Enable" field in "HardwareList" table
+			And I finish line editing in "HardwareList" table
+			And I set "Enable" checkbox in "HardwareList" table
+			And I finish line editing in "HardwareList" table
+			And I click "Save" button
+			And "HardwareList" table became equal
+				| 'Enable' | 'Hardware'           |
+				| 'Yes'    | 'Fiscal printer'     |
+				| 'Yes'    | 'Acquiring terminal' |
 		And I click "Save and close" button
 	* Check fiscal printer status
 		Given I open hyperlink "e1cib/list/Catalog.Hardware"
@@ -344,6 +400,42 @@ Scenario: _0850000 preparation (fiscal printer)
 		And Delay 5	
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"	
 		And I check "$ParsingResult$" with "0" and method is "Open"
+		And I close all client application windows
+	* Check acquiring printer status
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Acquiring terminal' |
+		And I select current line in "List" table
+		And I click "Connect" button
+		Then the form attribute named "CommandResult" became equal to template
+			| 'Acquiring terminal connected.' |
+			| 'ID:Acquiring_3007*'            |
+		And I click "Disconnect" button
+		Then the form attribute named "CommandResult" became equal to "Acquiring terminal disconnected."
+		And I click the button named "UpdateStatus"
+		Then the form attribute named "CommandResult" became equal to "Acquiring terminal NOT connected."						
+	* Delete acquiring printer log file
+		Then I delete '$$LogPathAcquiring$$' file
+	* Check acquiring printer connection
+		And I click "Connect" button
+		And Delay 5	
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResultAcquiring"	
+		And I check "$ParsingResultAcquiring$" with "0" and method is "Open"
+	* Add acquiring printer to the POS account
+		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'POS Terminal' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Acquiring"
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Acquiring terminal' |
+		And I select current line in "List" table
+		And I click "Save and close" button
+		And I close all client application windows
+		
 
 Scenario: _0850001 check preparation
 	When check preparation
@@ -475,7 +567,7 @@ Scenario: _0850015 create retail sales receipt from POS (own stock, card 02)
 		Then "Payment" window is opened
 		And I click "Card (*)" button
 		Then "Payment types" window is opened
-		And I click "Page_0" hyperlink
+		And I click "Page_1" hyperlink
 		Then "Payment" window is opened
 		And I click the button named "Enter"
 		And I close all client application windows	
@@ -483,9 +575,12 @@ Scenario: _0850015 create retail sales receipt from POS (own stock, card 02)
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML2"
+		// Then "1C:Enterprise" window is opened
+		// And I click "OK" button
+				
 		
 		
-Scenario: _0850015 create retail sales receipt from POS (own stock, cash and card 02)
+Scenario: _0850016 create retail sales receipt from POS (own stock, cash and card 02)
 	And I close all client application windows
 	And In the command interface I select "Retail" "Point of sale"
 	* Select first item (scan by barcode, with serial lot number)
@@ -522,7 +617,7 @@ Scenario: _0850015 create retail sales receipt from POS (own stock, cash and car
 		Then "Payment" window is opened
 		And I click "Card (*)" button
 		Then "Payment types" window is opened
-		And I click "Page_0" hyperlink
+		And I click "Page_1" hyperlink
 		And I activate field named "PaymentsAmountString" in "Payments" table
 		And I select current line in "Payments" table
 		And I click "4" button
@@ -577,7 +672,6 @@ Scenario: _0850018 advance payment
 		And I click "OK" button
 	* Advance
 		And I click the button named "Advance"
-		And I change the radio button named "ReceiptPaymentMethod" value to "Advance payment"	
 		Then "Payment" window is opened
 		And I click "2" button
 		And I click "0" button
@@ -601,6 +695,48 @@ Scenario: _0850018 advance payment
 		And I move to the next attribute
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"		
+
+
+		
+Scenario: _0850019 create retail sales receipt from POS (own stock, card 03, use acquiring)
+	And I close all client application windows
+	And In the command interface I select "Retail" "Point of sale"
+	* Select first item (scan by barcode, with serial lot number)
+		And I click "Search by barcode (F7)" button
+		And I input "23455677788976667" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Select second item (scan by barcode, without serial lot number)
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I finish line editing in "ItemList" table
+	* Payment
+		And I click "Payment (+)" button
+		Then "Payment" window is opened
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_0"
+		Then "Payment" window is opened
+		And I click "Pay" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Then "Payment" window is opened
+		And I click the button named "Enter"
+		And I close all client application windows	
+	* Check fiscal log
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML2"
+	* Check acquiring log
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '620.00'
+		
+
 
 Scenario: _0850025 sales return (cash)
 	And I close all client application windows

@@ -100,8 +100,13 @@ Scenario: _034902 check discount price type calculation in POS
 			| 'Dress' | 'M/White'  | ''        | '1,000'    | '520,00' | '131,00' | '389,00'|
 			| 'Dress' | 'L/Green'  | ''        | '1,000'    | '550,00' | '137,00' | '413,00'|
 		Then the form attribute named "ItemListTotalOffersAmount" became equal to "399"
-		Then the form attribute named "ItemListTotalTotalAmount" became equal to "1 191"		
-		And I close all client application windows
+		Then the form attribute named "ItemListTotalTotalAmount" became equal to "1 191"
+		* Payment
+			And I click "Payment (+)" button
+			Then "Payment" window is opened
+			And I click the button named "Enter"
+			And I close all client application windows		
+		
 		
 Scenario: _034904 check two plus part of third discount in POS
 		And I close all client application windows
@@ -197,6 +202,10 @@ Scenario: _034904 check two plus part of third discount in POS
 			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'    |
 			| 'Dress' | ''             | 'M/White'  | ''        | '520,00' | '2,000'    | ''       | '1 040,00' |
 			| 'Bag'   | ''             | 'ODS'      | ''        | '100,00' | '2,000'    | '60,00'  | '140,00'   |
+	* Payment
+		And I click "Payment (+)" button
+		Then "Payment" window is opened
+		And I click the button named "Enter"
 		And I close all client application windows
 		
 				
@@ -254,6 +263,10 @@ Scenario: _034905 check price type discount + discount coupon in POS
 			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
 			| 'Dress' | ''             | 'XS/Blue'  | ''        | '520,00' | '1,000'    | '75,40'  | '444,60' |
 			| 'Dress' | ''             | 'M/White'  | ''        | '520,00' | '2,000'    | '150,80' | '889,20' |
+	* Payment
+		And I click "Payment (+)" button
+		Then "Payment" window is opened
+		And I click the button named "Enter"
 		And I close all client application windows
 		
 						
@@ -307,7 +320,8 @@ Scenario: _034906 check price type discount + discount coupon in POS
 		And I finish line editing in "ItemList" table
 		And I click "Payment (+)" button
 		Then the form attribute named "SpecialOffer" became equal to "226,2"
-		Then the form attribute named "Amount" became equal to "1 333,8"		
+		Then the form attribute named "Amount" became equal to "1 333,8"
+		And I click the button named "Enter"		
 	And I close all client application windows
 	
 				
@@ -359,6 +373,10 @@ Scenario: _034908 check return with discount from POS (first select basis docume
 			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers'   | 'Total'     |
 			| 'Dress' | ''             | 'M/White'  | ''        | '520,00' | '50,000'   | '6 760,00' | '19 240,00' |
 			| 'Dress' | ''             | 'L/Green'  | ''        | '550,00' | '11,000'   | '1 155,00' | '4 895,00'  |
+	* Payment
+		And I click "Payment (+)" button
+		Then "Payment" window is opened
+		And I click the button named "Enter"
 		And I close all client application windows
 		
 				

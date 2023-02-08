@@ -82,6 +82,11 @@ Procedure OnCopy(CopiedObject)
 	LinkedTables.Add(Currencies);
 	LinkedTables.Add(SerialLotNumbers);
 	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);
+	
+	For Each Row In Payments Do
+		Row.RRNCode = "";
+		Row.PaymentInfo = "";
+	EndDo;
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

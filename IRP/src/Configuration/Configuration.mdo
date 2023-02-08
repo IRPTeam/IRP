@@ -226,8 +226,8 @@
   <commonModules>CommonModule.AccountingServerReuse</commonModules>
   <commonModules>CommonModule.AddAttributesAndPropertiesClient</commonModules>
   <commonModules>CommonModule.AddAttributesAndPropertiesServer</commonModules>
-  <commonModules>CommonModule.AddDataProcServer</commonModules>
   <commonModules>CommonModule.AddDataProcClient</commonModules>
+  <commonModules>CommonModule.AddDataProcServer</commonModules>
   <commonModules>CommonModule.AdminFunctionsPrivileged</commonModules>
   <commonModules>CommonModule.AdvancesRelevanceServer</commonModules>
   <commonModules>CommonModule.BarcodeClient</commonModules>
@@ -247,6 +247,8 @@
   <commonModules>CommonModule.CatPartnersServer</commonModules>
   <commonModules>CommonModule.CatRetailCustomersClient</commonModules>
   <commonModules>CommonModule.CatRetailCustomersServer</commonModules>
+  <commonModules>CommonModule.CommissionTradePrivileged</commonModules>
+  <commonModules>CommonModule.CommissionTradeServer</commonModules>
   <commonModules>CommonModule.CommonFormActions</commonModules>
   <commonModules>CommonModule.CommonFormActionsServer</commonModules>
   <commonModules>CommonModule.CommonFunctionsClient</commonModules>
@@ -285,6 +287,8 @@
   <commonModules>CommonModule.DocConsolidatedRetailSalesServer</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteClient</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteServer</commonModules>
+  <commonModules>CommonModule.DocEmployeeCashAdvanceClient</commonModules>
+  <commonModules>CommonModule.DocEmployeeCashAdvanceServer</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptServer</commonModules>
   <commonModules>CommonModule.DocIncomingPaymentOrderClient</commonModules>
@@ -309,6 +313,8 @@
   <commonModules>CommonModule.DocOpeningEntryServer</commonModules>
   <commonModules>CommonModule.DocOutgoingPaymentOrderClient</commonModules>
   <commonModules>CommonModule.DocOutgoingPaymentOrderServer</commonModules>
+  <commonModules>CommonModule.DocPayrollClient</commonModules>
+  <commonModules>CommonModule.DocPayrollServer</commonModules>
   <commonModules>CommonModule.DocPhysicalCountByLocationClient</commonModules>
   <commonModules>CommonModule.DocPhysicalCountByLocationServer</commonModules>
   <commonModules>CommonModule.DocPhysicalInventoryClient</commonModules>
@@ -317,6 +323,8 @@
   <commonModules>CommonModule.DocPlannedReceiptReservationServer</commonModules>
   <commonModules>CommonModule.DocPriceListClient</commonModules>
   <commonModules>CommonModule.DocProductionClient</commonModules>
+  <commonModules>CommonModule.DocProductionCostsAllocationClient</commonModules>
+  <commonModules>CommonModule.DocProductionCostsAllocationServer</commonModules>
   <commonModules>CommonModule.DocProductionPlanningClient</commonModules>
   <commonModules>CommonModule.DocProductionPlanningClosingClient</commonModules>
   <commonModules>CommonModule.DocProductionPlanningClosingServer</commonModules>
@@ -346,6 +354,10 @@
   <commonModules>CommonModule.DocSalesOrderClosingClient</commonModules>
   <commonModules>CommonModule.DocSalesOrderClosingServer</commonModules>
   <commonModules>CommonModule.DocSalesOrderServer</commonModules>
+  <commonModules>CommonModule.DocSalesReportFromTradeAgentClient</commonModules>
+  <commonModules>CommonModule.DocSalesReportFromTradeAgentServer</commonModules>
+  <commonModules>CommonModule.DocSalesReportToConsignorClient</commonModules>
+  <commonModules>CommonModule.DocSalesReportToConsignorServer</commonModules>
   <commonModules>CommonModule.DocSalesReturnClient</commonModules>
   <commonModules>CommonModule.DocSalesReturnOrderClient</commonModules>
   <commonModules>CommonModule.DocSalesReturnOrderServer</commonModules>
@@ -356,6 +368,8 @@
   <commonModules>CommonModule.DocStockAdjustmentAsSurplusServer</commonModules>
   <commonModules>CommonModule.DocStockAdjustmentAsWriteOffClient</commonModules>
   <commonModules>CommonModule.DocStockAdjustmentAsWriteOffServer</commonModules>
+  <commonModules>CommonModule.DocTimeSheetClient</commonModules>
+  <commonModules>CommonModule.DocTimeSheetServer</commonModules>
   <commonModules>CommonModule.DocumentsClient</commonModules>
   <commonModules>CommonModule.DocumentsClientServer</commonModules>
   <commonModules>CommonModule.DocumentsGenerationServer</commonModules>
@@ -370,6 +384,10 @@
   <commonModules>CommonModule.DocWorkSheetServer</commonModules>
   <commonModules>CommonModule.DPPointOfSaleClient</commonModules>
   <commonModules>CommonModule.DPPointOfSaleServer</commonModules>
+  <commonModules>CommonModule.EquipmentAcquiringClient</commonModules>
+  <commonModules>CommonModule.EquipmentAcquiringServer</commonModules>
+  <commonModules>CommonModule.EquipmentFiscalPrinterClient</commonModules>
+  <commonModules>CommonModule.EquipmentFiscalPrinterServer</commonModules>
   <commonModules>CommonModule.ExtensionServer</commonModules>
   <commonModules>CommonModule.ExternalCommandsClient</commonModules>
   <commonModules>CommonModule.ExternalCommandsServer</commonModules>
@@ -425,12 +443,15 @@
   <commonModules>CommonModule.RowIDInfoServerReuse</commonModules>
   <commonModules>CommonModule.Saas</commonModules>
   <commonModules>CommonModule.SaasClient</commonModules>
+  <commonModules>CommonModule.SalaryServerReuse</commonModules>
   <commonModules>CommonModule.ScheduledJobsForExtentions</commonModules>
   <commonModules>CommonModule.SerialLotNumberClient</commonModules>
   <commonModules>CommonModule.SerialLotNumbersServer</commonModules>
   <commonModules>CommonModule.ServiceSystemClient</commonModules>
   <commonModules>CommonModule.ServiceSystemServer</commonModules>
   <commonModules>CommonModule.SessionParametersServer</commonModules>
+  <commonModules>CommonModule.SourceOfOriginClient</commonModules>
+  <commonModules>CommonModule.SourceOfOriginServer</commonModules>
   <commonModules>CommonModule.TaxesClient</commonModules>
   <commonModules>CommonModule.TaxesClientServer</commonModules>
   <commonModules>CommonModule.TaxesServer</commonModules>
@@ -447,27 +468,6 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.DocSalesReportFromTradeAgentClient</commonModules>
-  <commonModules>CommonModule.DocSalesReportToConsignorClient</commonModules>
-  <commonModules>CommonModule.DocSalesReportFromTradeAgentServer</commonModules>
-  <commonModules>CommonModule.DocSalesReportToConsignorServer</commonModules>
-  <commonModules>CommonModule.CommissionTradeServer</commonModules>
-  <commonModules>CommonModule.CommissionTradePrivileged</commonModules>
-  <commonModules>CommonModule.EquipmentFiscalPrinterClient</commonModules>
-  <commonModules>CommonModule.EquipmentFiscalPrinterServer</commonModules>
-  <commonModules>CommonModule.SourceOfOriginClient</commonModules>
-  <commonModules>CommonModule.SourceOfOriginServer</commonModules>
-  <commonModules>CommonModule.DocEmployeeCashAdvanceServer</commonModules>
-  <commonModules>CommonModule.DocEmployeeCashAdvanceClient</commonModules>
-  <commonModules>CommonModule.DocProductionCostsAllocationClient</commonModules>
-  <commonModules>CommonModule.DocProductionCostsAllocationServer</commonModules>
-  <commonModules>CommonModule.EquipmentAcquiringClient</commonModules>
-  <commonModules>CommonModule.EquipmentAcquiringServer</commonModules>
-  <commonModules>CommonModule.DocPayrollClient</commonModules>
-  <commonModules>CommonModule.DocPayrollServer</commonModules>
-  <commonModules>CommonModule.DocTimeSheetClient</commonModules>
-  <commonModules>CommonModule.DocTimeSheetServer</commonModules>
-  <commonModules>CommonModule.SalaryServerReuse</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -895,7 +895,6 @@
   <enums>Enum.ReceiptPaymentMethods</enums>
   <enums>Enum.DocumentFiscalStatuses</enums>
   <enums>Enum.ExpenseTypes</enums>
-  <enums>Enum.AcquiringPaymentStatus</enums>
   <enums>Enum.AccrualAndDeductionPeriodicity</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>

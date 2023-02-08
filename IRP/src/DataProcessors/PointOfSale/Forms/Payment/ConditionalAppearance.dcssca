@@ -3,80 +3,49 @@
 	<item>
 		<selection>
 			<item>
-				<field>Payments</field>
+				<field>PaymentsPaymentDone</field>
 			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Payments.AcquiringPaymentStatus</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="dcscor:DesignTimeValue">Enum.AcquiringPaymentStatus.New</right>
+				<left xsi:type="dcscor:Field">Payments.Hardware</left>
+				<comparisonType>Filled</comparisonType>
+				<right xsi:nil="true"/>
 			</item>
 		</filter>
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>BackColor</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Color">web:PowderBlue</dcscor:value>
+				<dcscor:parameter>Format</dcscor:parameter>
+				<dcscor:value xsi:type="v8:LocalStringType">
+					<v8:item>
+						<v8:lang>en</v8:lang>
+						<v8:content>BF=⚪; BT=✔</v8:content>
+					</v8:item>
+				</dcscor:value>
 			</dcscor:item>
 		</appearance>
 	</item>
 	<item>
 		<selection>
 			<item>
-				<field>Payments</field>
+				<field>PaymentsPaymentDone</field>
 			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Payments.AcquiringPaymentStatus</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="dcscor:DesignTimeValue">Enum.AcquiringPaymentStatus.Done</right>
+				<left xsi:type="dcscor:Field">Payments.Hardware</left>
+				<comparisonType>NotFilled</comparisonType>
 			</item>
 		</filter>
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>BackColor</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Color">web:MediumGreen</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
-				<field>Payments</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Payments.AcquiringPaymentStatus</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="dcscor:DesignTimeValue">Enum.AcquiringPaymentStatus.Error</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>BackColor</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Color">web:DarkSalmon</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
-				<field>Payments</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Payments.AcquiringPaymentStatus</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="dcscor:DesignTimeValue">Enum.AcquiringPaymentStatus.Canceled</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>BackColor</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Color">web:LemonChiffon</dcscor:value>
+				<dcscor:parameter>Text</dcscor:parameter>
+				<dcscor:value xsi:type="v8:LocalStringType">
+					<v8:item>
+						<v8:lang>en</v8:lang>
+						<v8:content> </v8:content>
+					</v8:item>
+				</dcscor:value>
 			</dcscor:item>
 		</appearance>
 	</item>

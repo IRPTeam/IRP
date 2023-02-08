@@ -740,7 +740,7 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	EndIf;
 	
 	CashbackAmount = WriteTransaction(Result);
-	ResultPrint = Await PrintFiscalReceipt();
+	ResultPrint = Await PrintFiscalReceipt(DocRef);
 	If Not ResultPrint Then
 		Return;
 	EndIf;
@@ -754,7 +754,7 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 EndProcedure
 
 &AtClient
-Procedure AdvanceFormClose(Result, AdditionalData) Export
+Async Procedure AdvanceFormClose(Result, AdditionalData) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
@@ -775,12 +775,19 @@ Procedure AdvanceFormClose(Result, AdditionalData) Export
 		FillPropertyValues(NewPayment, Row);
 		ArrayOfPayments.Add(NewPayment);
 	EndDo;
-	CreateDocumentsAtServer(ArrayOfPayments);
+	CreatedDocuments = CreateDocumentsAtServer(ArrayOfPayments);
+	
+	For Each CreatedDocument In CreatedDocuments Do
+		ResultPrint = Await PrintFiscalReceipt(CreatedDocument);
+	EndDo;
+	
 	Object.RetailCustomer = Undefined;
 EndProcedure
 
 &AtServer
-Procedure CreateDocumentsAtServer(ArrayOfPayments)
+Function CreateDocumentsAtServer(ArrayOfPayments)
+	ReturnData = New Array;
+	
 	// cash receipt
 	CashReceiptTable = New ValueTable();
 	CashReceiptTable.Columns.Add("Account");
@@ -810,7 +817,8 @@ Procedure CreateDocumentsAtServer(ArrayOfPayments)
 			BuilderAPI.SetRowProperty(CashReceipt, NewRow, "RetailCustomer", Object.RetailCustomer, "PaymentList");
 			BuilderAPI.SetRowProperty(CashReceipt, NewRow, "TotalAmount"   , RowList.Amount, "PaymentList");
 		EndDo;
-		BuilderAPI.Write(CashReceipt, DocumentWriteMode.Posting);
+		BuilderAPIWriteResult = BuilderAPI.Write(CashReceipt, DocumentWriteMode.Posting);
+		ReturnData.Add(BuilderAPIWriteResult.Ref);
 	EndDo;
 	
 	// bank receipt
@@ -850,10 +858,13 @@ Procedure CreateDocumentsAtServer(ArrayOfPayments)
 //			BuilderAPI.SetRowProperty(BankReceipt, NewRow, "PaymentTerminal"  , RowList.PaymentTerminal, "PaymentList");
 			BuilderAPI.SetRowProperty(BankReceipt, NewRow, "TotalAmount"      , RowList.Amount, "PaymentList");
 		EndDo;
-		BuilderAPI.Write(BankReceipt, DocumentWriteMode.Posting);
+		BuilderAPIWriteResult = BuilderAPI.Write(BankReceipt, DocumentWriteMode.Posting);
+		ReturnData.Add(BuilderAPIWriteResult.Ref);
 	EndDo;
 	
-EndProcedure	
+	Return ReturnData;
+	
+EndFunction	
 
 &AtClient
 Procedure NewTransaction()
@@ -870,12 +881,12 @@ Procedure NewTransaction()
 EndProcedure
 
 &AtClient
-Async Function PrintFiscalReceipt()
+Async Function PrintFiscalReceipt(DocumentRef)
 	If Object.ConsolidatedRetailSales.IsEmpty() Then
 		Return True;
 	EndIf;
 	
-	EquipmentPrintFiscalReceiptResult = Await EquipmentFiscalPrinterClient.ProcessCheck(Object.ConsolidatedRetailSales, DocRef);
+	EquipmentPrintFiscalReceiptResult = Await EquipmentFiscalPrinterClient.ProcessCheck(Object.ConsolidatedRetailSales, DocumentRef);
 	Return EquipmentPrintFiscalReceiptResult.Success;
 EndFunction
 
@@ -936,7 +947,7 @@ Function WriteTransaction(Result)
 				CashbackAmount = CashbackAmount + PaymentsItem.Amount * (-1);
 			EndIf;
 		EndDo;
-		PaymentsTable.GroupBy("Account,BankTerm,PaymentType,PaymentTypeEnum", "Amount,Commission");
+//		PaymentsTable.GroupBy("Account,BankTerm,PaymentType,PaymentTypeEnum, RRNCode, PaymentInfo", "Amount,Commission");
 		
 		If ThisObject.RetailBasis.IsEmpty() Then
 			CreateReturnWithoutBase(PaymentsTable);

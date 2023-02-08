@@ -34,6 +34,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	FillPaymentTypes();
 	FillPaymentMethods();
 	
+	Items.Payment_ReturnPaymentByPaymentCard.Visible = isReturn;
+	Items.Payment_PayByPaymentCard.Visible = Not isReturn;
+	
 	If Not ThisObject.IsAdvance And ValueIsFilled(Parameters.RetailCustomer) Then
 		AdvanceAmount = GetAdvanceByRetailCustomer(Parameters.Company, Parameters.Branch, Parameters.RetailCustomer);
 		If ValueIsFilled(AdvanceAmount) Then
@@ -139,6 +142,18 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	EndIf;
 EndProcedure
 
+&AtClient
+Procedure BeforeClose(Cancel, Exit, WarningText, StandardProcessing)
+	If Not FormCanBeClosed Then
+		For Each Payment In Payments Do
+			If Payment.PaymentDone Then
+				Cancel = True;
+				CommonFunctionsClientServer.ShowUsersMessage(R().POS_Error_ErrorOnClosePayment);
+			EndIf;
+		EndDo;
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 #Region FormTableItemsEventHandlers
@@ -156,11 +171,17 @@ Procedure PaymentsOnActivateRow(Item)
 	
 	CurrentData = Items.Payments.CurrentData;
 	If CurrentData = Undefined Then
+		Items.GroupPaymentByAcquiring.Visible = False;
 		Return;
 	EndIf;
 	
 	CurrentData.Edited = False;
 	CurrentData.AmountString = GetAmountString(CurrentData.Amount);
+	Items.GroupPaymentByAcquiring.Visible = Not CurrentData.Hardware.isEmpty();
+	
+	Items.Payment_PayByPaymentCard.Enabled = Not CurrentData.PaymentDone;
+	Items.Payment_ReturnPaymentByPaymentCard.Enabled = Not CurrentData.PaymentDone;
+	Items.Payment_CancelPaymentByPaymentCard.Enabled = CurrentData.PaymentDone;
 	
 EndProcedure
 
@@ -184,7 +205,9 @@ Async Procedure Enter(Command)
 	
 	Result = True;
 	For Each PaymentRow In Payments Do
-		If Not PaymentRow.Hardware.IsEmpty() And PaymentRow.Amount > 0 Then
+		If Not PaymentRow.Hardware.IsEmpty() 
+			And PaymentRow.Amount > 0 
+			And Not PaymentRow.PaymentDone Then
 			Result = Await DoPayment(PaymentRow);
 			PaymentRow.PaymentDone = Result;
 			If Not Result Then
@@ -228,19 +251,27 @@ Async Function DoPayment(PaymentRow)
 		If Await DoQueryBoxAsync(StrTemplate(R().POS_Error_ErrorOnPayment, PaymentRow.Description), QuestionDialogMode.RetryCancel, , , , ) = DialogReturnCode.Retry Then
 			Result = DoPayment(PaymentRow);
 		Else
-			For Each PaymentRow In Payments Do
-				If PaymentRow.PaymentDone Then
-					Await DoQueryBoxAsync(StrTemplate(R().POS_Error_CancelPayment, PaymentRow.Description, PaymentRow.Amount), QuestionDialogMode.OK);
-					CancelResult = Await Payment_CancelPaymentByPaymentCard(PaymentRow);
-					If Not CancelResult Then
-						CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().POS_Error_CancelPaymentProblem, PaymentRow.Description, PaymentRow.Amount) + Chars.LF + PaymentRow.PaymentInfo);
-						Await DoQueryBoxAsync(StrTemplate(R().POS_Error_CancelPaymentProblem, PaymentRow.Description, PaymentRow.Amount), QuestionDialogMode.OK);
-					EndIf;
-					PaymentRow.PaymentDone = False;
-				EndIf;
-			EndDo;
+			CancelAllDonePayment();
 		EndIf;
 	EndIf;
+	Return Result;
+EndFunction
+
+&AtClient
+Async Function CancelAllDonePayment()
+	Result = True;
+	For Each PaymentRow In Payments Do
+		If PaymentRow.PaymentDone Then
+			Await DoQueryBoxAsync(StrTemplate(R().POS_Error_CancelPayment, PaymentRow.Description, PaymentRow.Amount), QuestionDialogMode.OK);
+			CancelResult = Await Payment_CancelPaymentByPaymentCard(PaymentRow);
+			If Not CancelResult Then
+				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().POS_Error_CancelPaymentProblem, PaymentRow.Description, PaymentRow.Amount) + Chars.LF + PaymentRow.PaymentInfo);
+				Await DoQueryBoxAsync(StrTemplate(R().POS_Error_CancelPaymentProblem, PaymentRow.Description, PaymentRow.Amount), QuestionDialogMode.OK);
+				Return False;
+			EndIf;
+			PaymentRow.PaymentDone = False;
+		EndIf;
+	EndDo;
 	Return Result;
 EndFunction
 
@@ -280,7 +311,6 @@ Procedure NumPress(Command)
 		PaymentsCount = PaymentsCount + 1;
 	EndDo;
 	
-//	If Not Payments.Count() And CashPaymentTypes.Count() Then
 	If Not PaymentsCount And CashPaymentTypes.Count() Then
 		ButtonSettings = POSClient.ButtonSettings();
 		FillPropertyValues(ButtonSettings, CashPaymentTypes[0]);
@@ -366,6 +396,10 @@ Procedure NumButtonPress(CommandName)
 		Return;
 	EndIf;
 
+	If CurrentData.PaymentDone Then
+		Return;
+	EndIf;
+
 	If Not CurrentData.Edited Then
 		CurrentData.Amount = 0;
 		CurrentData.Edited = True;
@@ -400,6 +434,17 @@ Procedure NumButtonPress(CommandName)
 	CurrentData.AmountString = AmountString;
 	CalculatePaymentsAmountTotal();
 	
+EndProcedure
+
+&AtClient
+Procedure PaymentsBeforeDeleteRow(Item, Cancel)
+	CurrentData = Items.Payments.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	If CurrentData.PaymentDone Then
+		Cancel = True;
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -701,6 +746,16 @@ Async Function Payment_PayByPaymentCard(PaymentRow)
 EndFunction
 
 &AtClient
+Procedure Payment_PayByPaymentCardManual(Command)
+	PaymentRow = Items.Payments.CurrentData;
+	If PaymentRow = Undefined Then
+		Return;
+	EndIf;
+	Payment_PayByPaymentCard(PaymentRow);
+EndProcedure
+
+
+&AtClient
 Async Function Payment_ReturnPaymentByPaymentCard(PaymentRow)
 	
 	PaymentSettings = EquipmentAcquiringClient.ReturnPaymentByPaymentCardSettings();
@@ -716,6 +771,16 @@ Async Function Payment_ReturnPaymentByPaymentCard(PaymentRow)
 	EndIf;
 	Return Result;
 EndFunction
+
+&AtClient
+Procedure Payment_ReturnPaymentByPaymentCardManual(Command)
+	PaymentRow = Items.Payments.CurrentData;
+	If PaymentRow = Undefined Then
+		Return;
+	EndIf;
+	Payment_ReturnPaymentByPaymentCard(PaymentRow);
+EndProcedure
+
 
 &AtClient
 Async Function Payment_CancelPaymentByPaymentCard(PaymentRow)
@@ -735,6 +800,16 @@ Async Function Payment_CancelPaymentByPaymentCard(PaymentRow)
 	EndIf;
 	Return Result;
 EndFunction
+
+&AtClient
+Procedure Payment_CancelPaymentByPaymentCardManual(Command)
+	PaymentRow = Items.Payments.CurrentData;
+	If PaymentRow = Undefined Then
+		Return;
+	EndIf;
+	Payment_ReturnPaymentByPaymentCard(PaymentRow);
+EndProcedure
+
 
 // Get RRNCode.
 // 

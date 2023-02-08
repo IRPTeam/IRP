@@ -318,6 +318,7 @@ Function Strings(Lang) Export
 	Strings.Insert("POS_s5", NStr("en = 'Select sales person'", Lang));
 	Strings.Insert("POS_s6", NStr("en = 'Clear all Items before closing POS'", Lang));
 	
+	Strings.Insert("POS_Error_ErrorOnClosePayment", NStr("en = 'Cancel all payment before close form.'", Lang));
 	Strings.Insert("POS_Error_ErrorOnPayment", NStr("en = 'There some problem to do payment with %1. Retry?'", Lang));
 	Strings.Insert("POS_Error_CancelPayment", NStr("en = 'Operation with %1 by amount: %2 will be canceled.'", Lang));
 	Strings.Insert("POS_Error_CancelPaymentProblem", NStr("en = 'Cancle payment problem [%1: %2]. Payment not canceled.

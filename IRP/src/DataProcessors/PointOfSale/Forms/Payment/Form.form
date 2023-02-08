@@ -246,6 +246,225 @@
             </font>
           </extInfo>
         </items>
+        <items xsi:type="form:FormGroup">
+          <name>GroupPaymentByAcquiringTop</name>
+          <id>262</id>
+          <items xsi:type="form:FormGroup">
+            <name>GroupPaymentByAcquiring</name>
+            <id>254</id>
+            <items xsi:type="form:Button">
+              <name>Payment_PayByPaymentCard</name>
+              <id>258</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <extendedTooltip>
+                <name>Payment_PayByPaymentCardExtendedTooltip</name>
+                <id>259</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <type>UsualButton</type>
+              <commandName>Form.Command.Payment_PayByPaymentCard</commandName>
+              <representation>Auto</representation>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <placementArea>UserCmds</placementArea>
+              <representationInContextMenu>Auto</representationInContextMenu>
+              <shapeRepresentation>WhenActive</shapeRepresentation>
+            </items>
+            <items xsi:type="form:Button">
+              <name>Payment_ReturnPaymentByPaymentCard</name>
+              <id>260</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <extendedTooltip>
+                <name>Payment_ReturnPaymentByPaymentCardExtendedTooltip</name>
+                <id>261</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <type>UsualButton</type>
+              <commandName>Form.Command.Payment_ReturnPaymentByPaymentCard</commandName>
+              <representation>Auto</representation>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <placementArea>UserCmds</placementArea>
+              <representationInContextMenu>Auto</representationInContextMenu>
+              <shapeRepresentation>WhenActive</shapeRepresentation>
+            </items>
+            <items xsi:type="form:Button">
+              <name>Payment_CancelPaymentByPaymentCard</name>
+              <id>256</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <extendedTooltip>
+                <name>Payment_CancelPaymentByPaymentCardExtendedTooltip</name>
+                <id>257</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <type>UsualButton</type>
+              <commandName>Form.Command.Payment_CancelPaymentByPaymentCard</commandName>
+              <representation>Auto</representation>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <placementArea>UserCmds</placementArea>
+              <representationInContextMenu>Auto</representationInContextMenu>
+              <shapeRepresentation>WhenActive</shapeRepresentation>
+            </items>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <title>
+              <key>en</key>
+              <value>Group payment by acquiring</value>
+            </title>
+            <horizontalStretch>true</horizontalStretch>
+            <groupHorizontalAlign>Left</groupHorizontalAlign>
+            <extendedTooltip>
+              <name>GroupPaymentByAcquiringExtendedTooltip</name>
+              <id>255</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualGroup</type>
+            <extInfo xsi:type="form:UsualGroupExtInfo">
+              <group>AlwaysHorizontal</group>
+              <horizontalAlign>Left</horizontalAlign>
+              <behavior>Auto</behavior>
+              <showLeftMargin>true</showLeftMargin>
+              <united>true</united>
+              <throughAlign>Auto</throughAlign>
+              <currentRowUse>Auto</currentRowUse>
+            </extInfo>
+          </items>
+          <items xsi:type="form:Decoration">
+            <name>DecorationSpace</name>
+            <id>264</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>DecorationSpaceExtendedTooltip</name>
+              <id>266</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>DecorationSpaceContextMenu</name>
+              <id>265</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <height>3</height>
+            <maxHeight>3</maxHeight>
+            <horizontalStretch>false</horizontalStretch>
+            <verticalStretch>true</verticalStretch>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </items>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <title>
+            <key>en</key>
+            <value>Group payment by acquiring top</value>
+          </title>
+          <extendedTooltip>
+            <name>GroupPaymentByAcquiringTopExtendedTooltip</name>
+            <id>263</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <type>UsualGroup</type>
+          <extInfo xsi:type="form:UsualGroupExtInfo">
+            <group>AlwaysHorizontal</group>
+            <horizontalSpacing>None</horizontalSpacing>
+            <verticalSpacing>None</verticalSpacing>
+            <behavior>Auto</behavior>
+            <representation>StrongSeparation</representation>
+            <showLeftMargin>true</showLeftMargin>
+            <united>true</united>
+            <throughAlign>Auto</throughAlign>
+            <currentRowUse>Auto</currentRowUse>
+          </extInfo>
+        </items>
         <items xsi:type="form:Table">
           <name>Payments</name>
           <id>93</id>
@@ -617,6 +836,10 @@
           <handlers>
             <event>BeforeRowChange</event>
             <name>PaymentsBeforeRowChange</name>
+          </handlers>
+          <handlers>
+            <event>BeforeDeleteRow</event>
+            <name>PaymentsBeforeDeleteRow</name>
           </handlers>
           <searchStringAddition>
             <visible>true</visible>
@@ -2103,6 +2326,7 @@
       <currentRowUse>Auto</currentRowUse>
     </extInfo>
   </items>
+  <commandBarLocation>None</commandBarLocation>
   <autoCommandBar>
     <name>FormCommandBar</name>
     <id>-1</id>
@@ -2125,6 +2349,24 @@
     <event>OnOpen</event>
     <name>OnOpen</name>
   </handlers>
+  <handlers>
+    <event>BeforeClose</event>
+    <name>BeforeClose</name>
+  </handlers>
+  <excludedCommands>CustomizeForm</excludedCommands>
+  <excludedCommands>OK</excludedCommands>
+  <excludedCommands>Abort</excludedCommands>
+  <excludedCommands>Ignore</excludedCommands>
+  <excludedCommands>RestoreValues</excludedCommands>
+  <excludedCommands>No</excludedCommands>
+  <excludedCommands>SaveValues</excludedCommands>
+  <excludedCommands>Cancel</excludedCommands>
+  <excludedCommands>Retry</excludedCommands>
+  <excludedCommands>Yes</excludedCommands>
+  <excludedCommands>OpenFromStandaloneServer</excludedCommands>
+  <excludedCommands>Help</excludedCommands>
+  <excludedCommands>OpenFromMainServer</excludedCommands>
+  <excludedCommands>Close</excludedCommands>
   <windowOpeningMode>LockWholeInterface</windowOpeningMode>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -3086,6 +3328,69 @@
         <name>PaymentAgent</name>
       </handler>
     </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Payment_PayByPaymentCard</name>
+    <title>
+      <key>en</key>
+      <value>Pay</value>
+    </title>
+    <id>27</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>CommonPicture.Payment_PayByPaymentCard</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>Payment_PayByPaymentCardManual</name>
+      </handler>
+    </action>
+    <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Payment_ReturnPaymentByPaymentCard</name>
+    <title>
+      <key>en</key>
+      <value>Return</value>
+    </title>
+    <id>28</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>CommonPicture.Payment_ReturnPaymentByPaymentCard</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>Payment_ReturnPaymentByPaymentCardManual</name>
+      </handler>
+    </action>
+    <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>Payment_CancelPaymentByPaymentCard</name>
+    <title>
+      <key>en</key>
+      <value>Cancel</value>
+    </title>
+    <id>29</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>CommonPicture.Payment_CancelPaymentByPaymentCard</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>Payment_CancelPaymentByPaymentCardManual</name>
+      </handler>
+    </action>
+    <representation>TextPicture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <parameters>

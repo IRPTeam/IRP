@@ -12,4 +12,6 @@
   <content>Catalog.EmployeePositions</content>
   <content>Enum.AccrualAndDeductionPeriodicity</content>
   <content>Document.TimeSheet</content>
+  <content>InformationRegister.T9530S_WorkDays</content>
+  <content>Subsystem.Salary</content>
 </mdclass:FunctionalOption>

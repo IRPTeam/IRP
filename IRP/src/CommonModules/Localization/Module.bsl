@@ -467,7 +467,8 @@ Function Strings(Lang) Export
 	Strings.Insert("S_031", NStr("en='or';
 		|ru='или';
 		|tr='veya'", Lang));
-	Strings.Insert("S_032", NStr("en='Add code, ex: CommonFunctionsServer.GetCurrentSessionDate()'", Lang));
+	Strings.Insert("S_032", NStr("en='Add code, ex: CommonFunctionsServer.GetCurrentSessionDate()';
+		|ru='Добавить код, например: CommonFunctionsServer.GetCurrentSessionDate()'", Lang));
 #EndRegion
 
 #Region Service
@@ -1283,8 +1284,10 @@ Function Strings(Lang) Export
 		|ru='Вы действительно хотите остановить задание?';
 		|tr='Görev durdurmak istediğinizden emin misiniz?'", Lang));
 	
-	Strings.Insert("InfoMessage_034", NStr("en='Time zone not changed'", Lang));
-	Strings.Insert("InfoMessage_035", NStr("en='Time zone changed to %1'", Lang));
+	Strings.Insert("InfoMessage_034", NStr("en='Time zone not changed';
+		|ru='Часовой пояс не изменен'", Lang));
+	Strings.Insert("InfoMessage_035", NStr("en='Time zone changed to %1';
+		|ru='Часовой пояс изменен как %1'", Lang));
 	
 	Strings.Insert("InfoMessage_Payment", NStr("en='Payment (+)';
 		|ru='Оплата (+)';

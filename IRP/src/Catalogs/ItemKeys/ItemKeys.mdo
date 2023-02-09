@@ -375,6 +375,14 @@
    <key>en</key>
    <value>Package unit</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Ед. изм. упаковки</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Paketleme birimi</value>
+  </synonym>
   <type>
    <types>CatalogRef.Units</types>
   </type>

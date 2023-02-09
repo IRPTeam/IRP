@@ -317,6 +317,10 @@
    <key>en</key>
    <value>Time zone</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Часовой пояс</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers>

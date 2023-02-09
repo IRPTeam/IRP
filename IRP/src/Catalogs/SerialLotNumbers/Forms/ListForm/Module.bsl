@@ -16,11 +16,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			List.Parameters.SetParameterValue("ItemRef", Parameters.SerialLotNumberOwner.Item);
 			List.Parameters.SetParameterValue("ItemType", Parameters.SerialLotNumberOwner.Item.ItemType);
 		ElsIf TypeOf(Parameters.SerialLotNumberOwner) = Type("CatalogRef.Items") Then
-			List.Parameters.SetParameterValue("isItemKey", True);
+			List.Parameters.SetParameterValue("isItem", True);
 			List.Parameters.SetParameterValue("ItemRef", Parameters.SerialLotNumberOwner);
 			List.Parameters.SetParameterValue("ItemType", Parameters.SerialLotNumberOwner.ItemType);
 		ElsIf TypeOf(Parameters.SerialLotNumberOwner) = Type("CatalogRef.ItemTypes") Then
-			List.Parameters.SetParameterValue("isItemKey", True);
+			List.Parameters.SetParameterValue("isItemType", True);
 			List.Parameters.SetParameterValue("ItemType", Parameters.SerialLotNumberOwner);
 		EndIf;
 	EndIf;

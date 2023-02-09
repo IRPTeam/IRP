@@ -807,7 +807,7 @@ Function CreateDocumentsAtServer(ArrayOfPayments)
 		CashReceipt = BuilderAPI.Initialize("CashReceipt");
 		BuilderAPI.SetProperty(CashReceipt, "Company"     , Object.Company, "PaymentList");
 		BuilderAPI.SetProperty(CashReceipt, "Branch"      , Object.Branch, "PaymentList");
-		BuilderAPI.SetProperty(CashReceipt, "Date"        , CurrentSessionDate(), "PaymentList");
+		BuilderAPI.SetProperty(CashReceipt, "Date"        , CommonFunctionsServer.GetCurrentSessionDate(), "PaymentList");
 		BuilderAPI.SetProperty(CashReceipt, "TransactionType" , Enums.IncomingPaymentTransactionType.CustomerAdvance, "PaymentList");
 		BuilderAPI.SetProperty(CashReceipt, "CashAccount" , RowHeader.Account, "PaymentList");
 	
@@ -846,7 +846,7 @@ Function CreateDocumentsAtServer(ArrayOfPayments)
 		BankReceipt = BuilderAPI.Initialize("BankReceipt");
 		BuilderAPI.SetProperty(BankReceipt, "Company"     , Object.Company, "PaymentList");
 		BuilderAPI.SetProperty(BankReceipt, "Branch"      , Object.Branch, "PaymentList");
-		BuilderAPI.SetProperty(BankReceipt, "Date"        , CurrentSessionDate(), "PaymentList");
+		BuilderAPI.SetProperty(BankReceipt, "Date"        , CommonFunctionsServer.GetCurrentSessionDate(), "PaymentList");
 		BuilderAPI.SetProperty(BankReceipt, "TransactionType" , Enums.IncomingPaymentTransactionType.CustomerAdvance, "PaymentList");
 		BuilderAPI.SetProperty(BankReceipt, "Account" , RowHeader.Account, "PaymentList");
 	
@@ -1507,7 +1507,7 @@ Procedure CreateReturnOnBase(PaymentData)
 	NewDoc = Undefined;
 	For Each FillingValues In ArrayOfFillingValues Do
 		NewDoc = Documents.RetailReturnReceipt.CreateDocument();
-		NewDoc.Date = CurrentSessionDate();
+		NewDoc.Date = CommonFunctionsServer.GetCurrentSessionDate();
 		NewDoc.Fill(FillingValues);
 		NewDoc.ConsolidatedRetailSales = ThisObject.Object.ConsolidatedRetailSales;
 		NewDoc.Write();
@@ -1555,7 +1555,7 @@ Procedure CreateReturnWithoutBase(PaymentData)
 	EndIf;
 	
 	NewDoc = Documents.RetailReturnReceipt.CreateDocument();
-	NewDoc.Date = CurrentSessionDate();
+	NewDoc.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	NewDoc.Fill(FillingData);
 	NewDoc.Write(DocumentWriteMode.Posting);
 	

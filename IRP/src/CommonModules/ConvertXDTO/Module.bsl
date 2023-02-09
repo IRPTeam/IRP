@@ -300,11 +300,11 @@ Function ObjectXDTOStructure(XDTOType, Val ArrayList, WSName = Undefined, FillEm
 			ElsIf Property.Type.Name = "decimal" Then
 				XDTOStructure.Insert(Property.Name, 1.1);
 			ElsIf Property.Type.Name = "date" Then
-				XDTOStructure.Insert(Property.Name, CurrentDate());
+				XDTOStructure.Insert(Property.Name, CommonFunctionsServer.GetCurrentSessionDate());
 			ElsIf Property.Type.Name = "time" Then
-				XDTOStructure.Insert(Property.Name, CurrentDate());
+				XDTOStructure.Insert(Property.Name, CommonFunctionsServer.GetCurrentSessionDate());
 			ElsIf Property.Type.Name = "dateTime" Then
-				XDTOStructure.Insert(Property.Name, CurrentDate());
+				XDTOStructure.Insert(Property.Name, CommonFunctionsServer.GetCurrentSessionDate());
 			ElsIf Property.Type.Name = "anyType" Then
 				XDTOStructure.Insert(Property.Name, Property.Name);
 			Else

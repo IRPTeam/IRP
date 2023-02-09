@@ -28,7 +28,7 @@ EndFunction
 //  List - DynamicList - list to set the date
 //  ByDocumentDate - Boolean - By document date (otherwise by current date)
 Procedure SetPeriodInDynamicList(List, ByDocumentDate) Export
-	NewPeriod = EndOfDay(CurrentDate());
+	NewPeriod = EndOfDay(CommonFunctionsServer.GetCurrentSessionDate());
 	If ByDocumentDate Then
 		AdditionalParameters = Undefined; // Structure
 		If List.SettingsComposer.Settings.AdditionalProperties.Property("AdditionalParameters", AdditionalParameters) Then

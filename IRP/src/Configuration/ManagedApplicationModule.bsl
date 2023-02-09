@@ -44,6 +44,8 @@ EndProcedure
 //  Cancel - Boolean - Cancel
 Procedure BeforeStart(Cancel)
 	
+	SessionParametersServer.SetUserTimeZone();
+	
 	AreaStatus = SaasClient.CurrentAreaStatus();
 	If AreaStatus.isError Then
 		Cancel = True;

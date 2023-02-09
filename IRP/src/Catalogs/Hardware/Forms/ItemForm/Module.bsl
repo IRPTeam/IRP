@@ -121,12 +121,12 @@ EndProcedure
 
 &AtClient
 Procedure LoadSettings(Command)
-	Settings = HardwareClient.GetDefaultSettings(Object.EquipmentType);
-
-	For Each Param In Settings Do
-		Row = Object.ConnectParameters.Add();
-		Row.Name = Param.Key;
-		Row.Value = Param.Value;
+	For Each Row In DriverParameter Do
+		If Not Row.ReadOnly Then
+			NewRow = Object.ConnectParameters.Add();
+			NewRow.Name = Row.Name;
+			NewRow.Value = Row.Value;
+		EndIf;
 	EndDo;
 EndProcedure
 
@@ -150,10 +150,7 @@ Async Procedure WriteSettings(Command)
 	Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref);
 	Settings.ServiceCallback = New NotifyDescription("EndWriteSettings", ThisObject, Settings);
 	
-	For Each Row In DriverParameter Do
-		If Row.ReadOnly Then
-			Continue;
-		EndIf;
+	For Each Row In Object.ConnectParameters Do
 		Settings.SetParameters.Insert(Row.Name, Row.Value);
 	EndDo;
 	HardwareClient.SetParameter_End(, , Settings);
@@ -181,10 +178,7 @@ Async Procedure Test(Command)
 	Settings.Callback = New NotifyDescription("EndTestDevice", ThisObject, Settings);
 	Settings.AdditionalCommand = "CheckHealth";
 	
-	For Each Row In DriverParameter Do
-		If Row.ReadOnly Then
-			Continue;
-		EndIf;
+	For Each Row In Object.ConnectParameters Do
 		Settings.SetParameters.Insert(Row.Name, Row.Value);
 	EndDo;
 	HardwareClient.TestDevice(Settings);

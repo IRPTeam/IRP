@@ -9,7 +9,7 @@ Procedure SaveBarcode(Basis, Barcode, Quantity = 1) Export
 	NewBarcode = CreateRecordManager();
 
 	NewBarcode.InfoID = New UUID();
-	NewBarcode.Period = CurrentDate();
+	NewBarcode.Period = CommonFunctionsServer.GetCurrentSessionDate();
 	NewBarcode.User = SessionParameters.CurrentUser;
 	NewBarcode.Basis = Basis;
 	NewBarcode.Barcode = Barcode;

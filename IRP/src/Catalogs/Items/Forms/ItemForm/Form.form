@@ -1336,12 +1336,6 @@
         <userVisible/>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
-        <command>0</command>
-        <group>FormNavigationPanelGoTo</group>
-        <index>3</index>
-        <userVisible/>
-      </cmiFragmentRecord>
-      <cmiFragmentRecord>
         <command>InformationRegister.TaxSettings.StandardCommand.OpenByValue.Item</command>
         <group>FormNavigationPanelGoTo</group>
         <index>4</index>

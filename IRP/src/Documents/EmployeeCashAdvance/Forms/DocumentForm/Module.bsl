@@ -307,7 +307,7 @@ Function FillByAdvancesAtServer()
 	If ValueIsFilled(Object.Ref) Then
 		QueryParameters.Insert("BalancePeriod", New Boundary(Object.Ref.PointInTime(), BoundaryType.Excluding));	
 	Else
-		QueryParameters.Insert("BalancePeriod", CurrentSessionDate());
+		QueryParameters.Insert("BalancePeriod", CommonFunctionsServer.GetCurrentSessionDate());
 	EndIf;
 	
 	AdvancesTable = DocEmployeeCashAdvanceServer.GetAdvances(QueryParameters);

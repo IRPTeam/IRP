@@ -131,7 +131,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		FillPropertyValues(NewRow, Row);
 		NewRow.PhysCount = Row.Quantity;
 		NewRow.Barcode = Result.Barcodes[0];
-		NewRow.Date = CurrentDate();
+		NewRow.Date = CommonFunctionsServer.GetCurrentSessionDate();
 		
 		If Row.UseSerialLotNumber And NewRow.SerialLotNumber.IsEmpty() Then
 			BarcodeClient.CloseMobileScanner();		

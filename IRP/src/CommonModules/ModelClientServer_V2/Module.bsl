@@ -1402,7 +1402,7 @@ Function ChangePlanningPeriodByDateAndBusinessUnitOptions() Export
 EndFunction
 
 Function ChangePlanningPeriodByDateAndBusinessUnitExecute(Options) Export
-	_Date = ?(ValueIsFilled(Options.Date), Options.Date, CurrentDate());
+	_Date = ?(ValueIsFilled(Options.Date), Options.Date, CommonFunctionsServer.GetCurrentSessionDate());
 	PlanningPeriod = ModelServer_V2.GetPlanningPeriod(_Date, Options.BusinessUnit);
 	Return PlanningPeriod;
 EndFunction

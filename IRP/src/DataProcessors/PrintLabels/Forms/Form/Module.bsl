@@ -202,7 +202,7 @@ Procedure ItemListItemKeyOnChange(Item)
 	PriceParameters.Insert("ItemKey"      , CurrentData.ItemKey);
 	PriceParameters.Insert("RowPriceType" , CurrentData.PriceType);
 	PriceParameters.Insert("Unit"         , CurrentData.Unit);
-	PriceParameters.Insert("Period"       , CurrentDate());
+	PriceParameters.Insert("Period"       , CommonFunctionsServer.GetCurrentSessionDate());
 	PriceInfo = GetItemInfo.ItemPriceInfo(PriceParameters);
 	CurrentData.Price = PriceInfo.Price;
 	CurrentData.PriceType = PriceInfo.PriceType;
@@ -248,7 +248,7 @@ Procedure ItemListPriceTypeOnChange(Item)
 	PriceParameters.Insert("ItemKey"      , CurrentData.ItemKey);
 	PriceParameters.Insert("RowPriceType" , CurrentData.PriceType);
 	PriceParameters.Insert("Unit"         , CurrentData.Unit);
-	PriceParameters.Insert("Period"       , CurrentDate());
+	PriceParameters.Insert("Period"       , CommonFunctionsServer.GetCurrentSessionDate());
 	PriceInfo = GetItemInfo.ItemPriceInfo(PriceParameters);
 	CurrentData.Price = PriceInfo.Price;
 EndProcedure
@@ -280,7 +280,7 @@ Procedure ItemListItemOnChange(Item)
 	PriceParameters.Insert("ItemKey"      , CurrentData.ItemKey);
 	PriceParameters.Insert("RowPriceType" , CurrentData.PriceType);
 	PriceParameters.Insert("Unit"         , CurrentData.Unit);
-	PriceParameters.Insert("Period"       , CurrentDate());
+	PriceParameters.Insert("Period"       , CommonFunctionsServer.GetCurrentSessionDate());
 	PriceInfo = GetItemInfo.ItemPriceInfo(PriceParameters);
 	CurrentData.Price = PriceInfo.Price;
 	CurrentData.PriceType = PriceInfo.PriceType;
@@ -320,7 +320,7 @@ Procedure PriceTypeOnChangeAtServer()
 	For Each ItemInfo In ItemsInfo Do
 		 ItemInfo.Insert("PriceType", ThisObject.PriceType);
 	EndDo;
-	ItemPriceTable = GetItemInfo.ItemPriceInfoByTable(ItemsInfo, CurrentDate());
+	ItemPriceTable = GetItemInfo.ItemPriceInfoByTable(ItemsInfo, CommonFunctionsServer.GetCurrentSessionDate());
 	
 	Filter = New Structure("ItemKey, Unit, PriceType");
 	For Each Item In SelectedRows Do

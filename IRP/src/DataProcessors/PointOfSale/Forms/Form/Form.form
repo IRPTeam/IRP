@@ -3760,6 +3760,14 @@
         <key>en</key>
         <value>Return</value>
        </title>
+       <title>
+        <key>ru</key>
+        <value>Возврат</value>
+       </title>
+       <title>
+        <key>tr</key>
+        <value>İade</value>
+       </title>
        <extendedTooltip>
         <name>ReturnPageExtendedTooltip</name>
         <id>1181</id>
@@ -6296,6 +6304,10 @@
      <key>en</key>
      <value>Retail basis</value>
     </title>
+    <title>
+     <key>ru</key>
+     <value>Розничное основание</value>
+    </title>
     <id>190</id>
     <valueType>
      <types>DocumentRef.RetailSalesReceipt</types>
@@ -6312,6 +6324,10 @@
     <title>
      <key>en</key>
      <value>Retail basis quantity</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Розничное основание количество</value>
     </title>
     <id>195</id>
     <valueType>
@@ -7240,6 +7256,14 @@
    <key>en</key>
    <value>Is return</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Это возврат</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Bu iade</value>
+  </title>
   <id>189</id>
   <valueType>
    <types>Boolean</types>
@@ -7256,6 +7280,10 @@
   <title>
    <key>en</key>
    <value>Retail sales receipt (basis)</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Розничный чек - Продажа (основание)</value>
   </title>
   <id>191</id>
   <valueType>
@@ -7274,6 +7302,10 @@
    <key>en</key>
    <value>Basis payments</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Документы основания</value>
+  </title>
   <id>192</id>
   <valueType>
    <types>ValueTable</types>
@@ -7289,6 +7321,14 @@
    <title>
     <key>en</key>
     <value>Payment type</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Вид оплаты</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Ödeme tipi</value>
    </title>
    <id>193</id>
    <valueType>
@@ -7306,6 +7346,14 @@
    <title>
     <key>en</key>
     <value>Amount</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Сумма оплаты</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Tutar</value>
    </title>
    <id>194</id>
    <valueType>
@@ -7325,6 +7373,10 @@
    <key>en</key>
    <value>Retail basis special offers</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Розничное основание скидки</value>
+  </title>
   <id>198</id>
   <valueType>
    <types>ValueTable</types>
@@ -7340,6 +7392,14 @@
    <title>
     <key>en</key>
     <value>Key</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Ключ</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Anahtar</value>
    </title>
    <id>199</id>
    <valueType>
@@ -7358,6 +7418,14 @@
     <key>en</key>
     <value>Offer</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Специальное предложения</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Iskonto</value>
+   </title>
    <id>200</id>
    <valueType>
     <types>CatalogRef.SpecialOffers</types>
@@ -7375,6 +7443,14 @@
     <key>en</key>
     <value>Amount</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Сумма оплаты</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Tutar</value>
+   </title>
    <id>201</id>
    <valueType>
     <types>DefinedType.typeAmount</types>
@@ -7391,6 +7467,14 @@
    <title>
     <key>en</key>
     <value>Percent</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Процент</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Yüzde</value>
    </title>
    <id>202</id>
    <valueType>

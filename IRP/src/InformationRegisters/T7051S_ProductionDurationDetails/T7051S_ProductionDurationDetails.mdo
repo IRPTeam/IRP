@@ -14,6 +14,10 @@
   <key>en</key>
   <value>T7051 Production duration details</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>T7051 Детализация производственного тайминга</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
@@ -24,6 +28,10 @@
   <synonym>
    <key>en</key>
    <value>Duration</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Время</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -42,6 +50,14 @@
    <key>en</key>
    <value>Company</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
   <type>
    <types>CatalogRef.Companies</types>
   </type>
@@ -56,6 +72,14 @@
   <synonym>
    <key>en</key>
    <value>Business unit</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Подразделение</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Departman</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -78,6 +102,14 @@
    <key>en</key>
    <value>Item key</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
   </type>
@@ -91,6 +123,14 @@
   <synonym>
    <key>en</key>
    <value>Document</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Документ</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak</value>
   </synonym>
   <type>
    <types>DocumentRef.Production</types>
@@ -107,6 +147,14 @@
   <synonym>
    <key>en</key>
    <value>Store</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Склад</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Depo</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>

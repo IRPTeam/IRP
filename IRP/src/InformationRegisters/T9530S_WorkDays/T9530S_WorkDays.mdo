@@ -14,6 +14,10 @@
   <key>en</key>
   <value>T9530 Work days</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>T9530 Рабочие дни</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -22,6 +26,10 @@
   <synonym>
    <key>en</key>
    <value>Count days</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Количество дней</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -40,6 +48,14 @@
   <synonym>
    <key>en</key>
    <value>Begin date</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дата начала</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Başlangıç tarihi</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -60,6 +76,14 @@
    <key>en</key>
    <value>End date</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дата окончания</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bitiş tarihi</value>
+  </synonym>
   <type>
    <types>Date</types>
    <dateQualifiers>
@@ -78,6 +102,10 @@
   <synonym>
    <key>en</key>
    <value>Accrual and deduction type</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид начисления или удержания</value>
   </synonym>
   <type>
    <types>CatalogRef.AccrualAndDeductionTypes</types>

@@ -391,6 +391,14 @@
    <key>en</key>
    <value>Tax ID</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Код налога</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>VKN/TCKN</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers>

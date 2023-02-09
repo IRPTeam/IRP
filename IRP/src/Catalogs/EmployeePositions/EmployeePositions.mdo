@@ -12,6 +12,10 @@
   <key>en</key>
   <value>Employee positions</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Должности сотрудников</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
  <standardAttributes>
@@ -71,6 +75,14 @@
    <key>en</key>
    <value>Parent</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Родитель</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Üst öğe</value>
+  </synonym>
   <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
@@ -127,6 +139,14 @@
   <key>en</key>
   <value>Expense and revenue type</value>
  </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Статья доходов и расходов</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Gider ve gelir türü</value>
+ </objectPresentation>
  <hierarchyType>HierarchyOfItems</hierarchyType>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -151,11 +171,27 @@
    <key>en</key>
    <value>Additional attributes</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
   <attributes uuid="4eb541ab-299b-4931-90d7-9029399d7d94">
    <name>Property</name>
    <synonym>
     <key>en</key>
     <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Свойство</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -170,6 +206,14 @@
    <synonym>
     <key>en</key>
     <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -190,6 +234,14 @@
    <key>en</key>
    <value>Item form</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Öğe formu</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
@@ -199,6 +251,14 @@
    <key>en</key>
    <value>List form</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
@@ -207,6 +267,14 @@
   <synonym>
    <key>en</key>
    <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

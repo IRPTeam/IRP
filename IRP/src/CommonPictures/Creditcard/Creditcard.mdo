@@ -5,4 +5,8 @@
   <key>en</key>
   <value>Creditcard</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Кредитная карта</value>
+ </synonym>
 </mdclass:CommonPicture>

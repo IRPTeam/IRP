@@ -287,6 +287,10 @@
    <key>en</key>
    <value>RRN Code</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>RRN Код</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers>
@@ -303,6 +307,10 @@
   <synonym>
    <key>en</key>
    <value>Payment info</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Информация по оплате</value>
   </synonym>
   <type>
    <types>String</types>
@@ -857,6 +865,14 @@
    <synonym>
     <key>en</key>
     <value>Employee</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сотрудник</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Personel</value>
    </synonym>
    <type>
     <types>CatalogRef.Partners</types>

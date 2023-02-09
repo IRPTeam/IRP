@@ -5,6 +5,10 @@
   <key>en</key>
   <value>Doc payroll client</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ начисление зарплаты клиент</value>
+ </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

@@ -250,6 +250,14 @@
    <key>en</key>
    <value>Expense type</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Статьи затрат</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Gider tipi</value>
+  </synonym>
   <type>
    <types>EnumRef.ExpenseTypes</types>
   </type>

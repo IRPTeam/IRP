@@ -1550,6 +1550,10 @@ WHERE
 								<v8:lang>en</v8:lang>
 								<v8:content>Not-direct costs</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Косвенные расходы</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:placement>Horizontally</dcsset:placement>
@@ -1660,6 +1664,10 @@ WHERE
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Not-direct costs</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Косвенные расходы</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -1772,6 +1780,10 @@ WHERE
 								<v8:lang>en</v8:lang>
 								<v8:content>Not-direct costs</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Косвенные расходы</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:placement>Horizontally</dcsset:placement>
@@ -1882,6 +1894,10 @@ WHERE
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Not-direct costs</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Косвенные расходы</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>

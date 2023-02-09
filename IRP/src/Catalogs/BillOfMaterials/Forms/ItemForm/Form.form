@@ -2496,6 +2496,10 @@
    <key>en</key>
    <value>Unlock form</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Разблокировать форму</value>
+  </title>
   <id>3</id>
   <use>
    <common>true</common>

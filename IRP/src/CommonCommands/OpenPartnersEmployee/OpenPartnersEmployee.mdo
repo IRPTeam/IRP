@@ -5,6 +5,14 @@
   <key>en</key>
   <value>Employee</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Сотрудник</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Personel</value>
+ </synonym>
  <group>NavigationPanelImportant</group>
  <commandParameterType/>
  <representation>Auto</representation>

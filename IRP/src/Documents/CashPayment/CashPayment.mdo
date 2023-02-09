@@ -607,6 +607,14 @@
     <key>en</key>
     <value>Employee</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сотрудник</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Personel</value>
+   </synonym>
    <type>
     <types>CatalogRef.Partners</types>
    </type>

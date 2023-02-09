@@ -12,6 +12,10 @@
   <key>en</key>
   <value>Time sheet</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Зарплатный табель</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.TimeSheet.StandardAttribute.Number</inputByString>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -48,6 +52,10 @@
   <key>en</key>
   <value>Time sheets</value>
  </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Зарплатные табеля</value>
+ </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
  <checkUnique>true</checkUnique>
@@ -66,6 +74,14 @@
    <key>en</key>
    <value>Company</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
   <type>
    <types>CatalogRef.Companies</types>
   </type>
@@ -81,6 +97,14 @@
   <synonym>
    <key>en</key>
    <value>Begin date</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дата начала</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Başlangıç tarihi</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -101,6 +125,14 @@
    <key>en</key>
    <value>End date</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дата окончания</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bitiş tarihi</value>
+  </synonym>
   <type>
    <types>Date</types>
    <dateQualifiers>
@@ -120,6 +152,14 @@
    <key>en</key>
    <value>Document form</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма документа</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak formu</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
@@ -129,6 +169,14 @@
    <key>en</key>
    <value>List form</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
@@ -137,6 +185,14 @@
   <synonym>
    <key>en</key>
    <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -151,11 +207,23 @@
    <key>en</key>
    <value>Time sheet list</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Список зарплатных табелей</value>
+  </synonym>
   <attributes uuid="ef268511-a3cb-401c-8592-286ec850cf62">
    <name>Key</name>
    <synonym>
     <key>en</key>
     <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -170,6 +238,14 @@
    <synonym>
     <key>en</key>
     <value>Date</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Дата</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Tarih</value>
    </synonym>
    <type>
     <types>Date</types>
@@ -188,6 +264,14 @@
    <synonym>
     <key>en</key>
     <value>Employee</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сотрудник</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Personel</value>
    </synonym>
    <type>
     <types>CatalogRef.Partners</types>
@@ -210,6 +294,10 @@
     <key>en</key>
     <value>Position</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Должность</value>
+   </synonym>
    <type>
     <types>CatalogRef.EmployeePositions</types>
    </type>
@@ -224,6 +312,10 @@
    <synonym>
     <key>en</key>
     <value>Accrual and deduction type</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Вид начисления или удержания</value>
    </synonym>
    <type>
     <types>CatalogRef.AccrualAndDeductionTypes</types>
@@ -244,11 +336,27 @@
    <key>en</key>
    <value>Additional attributes</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
   <attributes uuid="955a065e-e2a3-455f-9611-fe9c7786458e">
    <name>Property</name>
    <synonym>
     <key>en</key>
     <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Свойство</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -262,6 +370,14 @@
    <synonym>
     <key>en</key>
     <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>

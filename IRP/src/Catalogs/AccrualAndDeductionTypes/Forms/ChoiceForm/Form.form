@@ -12,6 +12,14 @@
    <key>en</key>
    <value>User settings group</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Группа пользовательских настроек</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
+  </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
    <name>ListSettingsComposerUserSettingsExtendedTooltip</name>
@@ -107,6 +115,14 @@
    <title>
     <key>en</key>
     <value>Description</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Наименование</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Tanım</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -459,6 +475,14 @@ FROM
        <key>en</key>
        <value>Description</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Наименование</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Tanım</value>
+      </content>
      </localValue>
     </title>
    </fields>
@@ -505,6 +529,14 @@ FROM
   <title>
    <key>en</key>
    <value>Filling data</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Заполненные данные</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Veri doldurma</value>
   </title>
   <id>2</id>
   <valueType>

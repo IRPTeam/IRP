@@ -5,6 +5,10 @@
   <key>en</key>
   <value>Doc time sheet client</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ Зарплатный табель клиент</value>
+ </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

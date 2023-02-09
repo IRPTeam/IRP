@@ -5,6 +5,10 @@
   <key>en</key>
   <value>Doc payroll server</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ начисление зарплаты сервер</value>
+ </synonym>
  <server>true</server>
  <serverCall>true</serverCall>
 </mdclass:CommonModule>

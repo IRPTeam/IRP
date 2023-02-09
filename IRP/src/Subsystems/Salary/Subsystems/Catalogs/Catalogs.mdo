@@ -5,6 +5,14 @@
   <key>en</key>
   <value>Catalogs</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Справочники</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kart listeleri</value>
+ </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>
  <content>Catalog.AccrualAndDeductionTypes</content>

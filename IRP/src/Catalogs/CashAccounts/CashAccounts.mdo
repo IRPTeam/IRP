@@ -377,6 +377,10 @@
    <key>en</key>
    <value>Acquiring</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Эквайринг</value>
+  </synonym>
   <type>
    <types>CatalogRef.Hardware</types>
   </type>

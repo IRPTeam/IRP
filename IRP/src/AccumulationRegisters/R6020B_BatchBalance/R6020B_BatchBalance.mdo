@@ -135,6 +135,10 @@
    <key>en</key>
    <value>Not direct costs</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Косвенная себестоимость</value>
+  </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
   </type>

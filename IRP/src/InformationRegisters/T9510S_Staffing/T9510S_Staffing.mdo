@@ -14,6 +14,10 @@
   <key>en</key>
   <value>T9510 Staffing</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>T9510 Штатное расписание</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <defaultRecordForm>InformationRegister.T9510S_Staffing.Form.RecordForm</defaultRecordForm>
@@ -24,6 +28,10 @@
   <synonym>
    <key>en</key>
    <value>Fired</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Уволен</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -39,6 +47,14 @@
   <synonym>
    <key>en</key>
    <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -62,6 +78,14 @@
    <key>en</key>
    <value>Branch</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
   </type>
@@ -78,6 +102,10 @@
    <key>en</key>
    <value>Position</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Должность</value>
+  </synonym>
   <type>
    <types>CatalogRef.EmployeePositions</types>
   </type>
@@ -93,6 +121,14 @@
   <synonym>
    <key>en</key>
    <value>Employee</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сотрудник</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Personel</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -117,6 +153,14 @@
   <synonym>
    <key>en</key>
    <value>Record form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма записи</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kayıt formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

@@ -125,6 +125,10 @@
    <key>en</key>
    <value>Not direct costs</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Косвенная себестоимость</value>
+  </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
   </type>
@@ -560,6 +564,10 @@
   <synonym>
    <key>en</key>
    <value>Production document</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Производственный документ</value>
   </synonym>
   <type>
    <types>DocumentRef.Production</types>

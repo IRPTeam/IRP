@@ -5,6 +5,10 @@
   <key>en</key>
   <value>Salary server reuse</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Зарплата сервер переиспользование</value>
+ </synonym>
  <server>true</server>
  <serverCall>true</serverCall>
  <returnValuesReuse>DuringSession</returnValuesReuse>

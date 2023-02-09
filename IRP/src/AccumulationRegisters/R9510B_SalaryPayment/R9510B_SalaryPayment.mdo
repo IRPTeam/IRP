@@ -13,6 +13,10 @@
   <key>en</key>
   <value>R9510 Salary payment</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R9510 Оплата зарплаты</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <enableTotalsSplitting>true</enableTotalsSplitting>
@@ -21,6 +25,14 @@
   <synonym>
    <key>en</key>
    <value>Amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма оплаты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -34,6 +46,14 @@
   <synonym>
    <key>en</key>
    <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -49,6 +69,14 @@
    <key>en</key>
    <value>Branch</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
   </type>
@@ -62,6 +90,14 @@
   <synonym>
    <key>en</key>
    <value>Employee</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сотрудник</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Personel</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -77,6 +113,14 @@
    <key>en</key>
    <value>Currency</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
   </type>
@@ -90,6 +134,14 @@
   <synonym>
    <key>en</key>
    <value>Multi currency movement type</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид мультивалютной аналитики</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çoklu döviz hareket tipi</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>

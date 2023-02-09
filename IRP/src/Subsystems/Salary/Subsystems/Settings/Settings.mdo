@@ -5,6 +5,14 @@
   <key>en</key>
   <value>Settings</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Настройки</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ayarlar</value>
+ </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>
  <content>InformationRegister.T9500S_AccrualAndDeductionValues</content>

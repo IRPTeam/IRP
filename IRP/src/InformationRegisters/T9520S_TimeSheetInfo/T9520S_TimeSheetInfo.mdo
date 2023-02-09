@@ -14,6 +14,10 @@
   <key>en</key>
   <value>T9520 Time sheet info</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>T9520 Информация по зарплатным табелям</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <writeMode>RecorderSubordinate</writeMode>
@@ -23,6 +27,14 @@
   <synonym>
    <key>en</key>
    <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -40,6 +52,14 @@
    <key>en</key>
    <value>Branch</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
   </type>
@@ -55,6 +75,14 @@
   <synonym>
    <key>en</key>
    <value>Date</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дата</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tarih</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -75,6 +103,14 @@
    <key>en</key>
    <value>Employee</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сотрудник</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Personel</value>
+  </synonym>
   <type>
    <types>CatalogRef.Partners</types>
   </type>
@@ -91,6 +127,10 @@
    <key>en</key>
    <value>Position</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Должность</value>
+  </synonym>
   <type>
    <types>CatalogRef.EmployeePositions</types>
   </type>
@@ -106,6 +146,10 @@
   <synonym>
    <key>en</key>
    <value>Accrual and deduction type</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид начисления или удержания</value>
   </synonym>
   <type>
    <types>CatalogRef.AccrualAndDeductionTypes</types>

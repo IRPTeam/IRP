@@ -5,6 +5,10 @@
   <key>en</key>
   <value>Use salary</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать - Расчет зарплаты</value>
+ </synonym>
  <location>Constant.UseSalary</location>
  <privilegedGetMode>true</privilegedGetMode>
  <content>Document.Payroll</content>

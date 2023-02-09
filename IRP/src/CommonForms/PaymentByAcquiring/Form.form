@@ -96,6 +96,10 @@
    <key>en</key>
    <value>Transaction was canceled</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Транзакция отменена</value>
+  </title>
   <enabled>true</enabled>
   <userVisible>
    <common>true</common>
@@ -406,6 +410,14 @@
    <key>en</key>
    <value>Amount</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Сумма оплаты</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Tutar</value>
+  </title>
   <id>1</id>
   <valueType>
    <types>DefinedType.typeAmount</types>
@@ -422,6 +434,10 @@
   <title>
    <key>en</key>
    <value>RRNCode</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>RNN Код</value>
   </title>
   <id>2</id>
   <valueType>
@@ -441,6 +457,14 @@
    <key>en</key>
    <value>Hardware</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Оборудование</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Donanım</value>
+  </title>
   <id>3</id>
   <valueType>
    <types>CatalogRef.Hardware</types>
@@ -457,6 +481,14 @@
   <title>
    <key>en</key>
    <value>Is return</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Это возврат</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Bu iade</value>
   </title>
   <id>4</id>
   <valueType>
@@ -475,6 +507,14 @@
    <key>en</key>
    <value>Result</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Результат</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Sonuç</value>
+  </title>
   <id>5</id>
   <valueType>
    <types>Boolean</types>
@@ -492,6 +532,10 @@
    <key>en</key>
    <value>Interactive</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Интерактивно</value>
+  </title>
   <id>6</id>
   <valueType>
    <types>Boolean</types>
@@ -508,6 +552,14 @@
   <title>
    <key>en</key>
    <value>Cancel</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Отмена</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <id>1</id>
   <use>
@@ -530,6 +582,10 @@
    <key>en</key>
    <value>Revers</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Сторно</value>
+  </title>
   <id>2</id>
   <use>
    <common>true</common>
@@ -551,6 +607,10 @@
    <key>en</key>
    <value>Pay</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Оплатить</value>
+  </title>
   <id>3</id>
   <use>
    <common>true</common>
@@ -571,6 +631,14 @@
   <title>
    <key>en</key>
    <value>Return</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Возврат</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>İade</value>
   </title>
   <id>4</id>
   <use>

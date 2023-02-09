@@ -5,6 +5,10 @@
   <key>en</key>
   <value>Doc production costs allocation client</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ распределение производственных затрат клиент</value>
+ </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

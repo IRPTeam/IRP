@@ -14,6 +14,10 @@
   <key>en</key>
   <value>T9500 Accrual and deduction values</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>T9500 Значения начислений и удержаний</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
@@ -23,6 +27,14 @@
   <synonym>
    <key>en</key>
    <value>Value</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Значение</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Değer</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -38,6 +50,10 @@
   <synonym>
    <key>en</key>
    <value>Employee or position</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Должность сотрудника</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -55,6 +71,10 @@
   <synonym>
    <key>en</key>
    <value>Accual or deduction type</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Тип начисления или удержания</value>
   </synonym>
   <type>
    <types>CatalogRef.AccrualAndDeductionTypes</types>

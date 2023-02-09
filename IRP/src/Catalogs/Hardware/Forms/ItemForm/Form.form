@@ -215,6 +215,10 @@
     <key>en</key>
     <value>Group top left</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Группа верх лево</value>
+   </title>
    <extendedTooltip>
     <name>GroupTopLeftExtendedTooltip</name>
     <id>115</id>
@@ -432,6 +436,10 @@
      <key>en</key>
      <value>Group device command</value>
     </title>
+    <title>
+     <key>ru</key>
+     <value>Группа команда оборудований</value>
+    </title>
     <extendedTooltip>
      <name>GroupDeviceCommandExtendedTooltip</name>
      <id>129</id>
@@ -465,6 +473,10 @@
    <title>
     <key>en</key>
     <value>Group top right</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Группа верх право</value>
    </title>
    <extendedTooltip>
     <name>GroupTopRightExtendedTooltip</name>
@@ -502,6 +514,14 @@
   <title>
    <key>en</key>
    <value>Group top</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Группа верхние уровень</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Grup üst</value>
   </title>
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
@@ -1911,6 +1931,10 @@
    <key>en</key>
    <value>Command result</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Результат команды</value>
+  </title>
   <id>13</id>
   <valueType>
    <types>String</types>
@@ -2033,6 +2057,10 @@
    <key>en</key>
    <value>Connect</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Подключить</value>
+  </title>
   <id>5</id>
   <use>
    <common>true</common>
@@ -2054,6 +2082,10 @@
    <key>en</key>
    <value>Disconnect</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Отключить</value>
+  </title>
   <id>6</id>
   <use>
    <common>true</common>
@@ -2074,6 +2106,14 @@
   <title>
    <key>en</key>
    <value>Update status</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Обновить статус</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Statü güncelle</value>
   </title>
   <id>7</id>
   <use>

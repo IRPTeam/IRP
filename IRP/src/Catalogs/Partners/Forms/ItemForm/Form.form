@@ -1108,6 +1108,10 @@
     <key>en</key>
     <value>Staffing</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Штатное расписание</value>
+   </title>
    <extendedTooltip>
     <name>GroupStaffingExtendedTooltip</name>
     <id>98</id>
@@ -1340,6 +1344,10 @@ WHERE
   <title>
    <key>en</key>
    <value>Staffing</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Штатное расписание</value>
   </title>
   <id>4</id>
   <valueType>

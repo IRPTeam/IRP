@@ -177,6 +177,14 @@
    <key>en</key>
    <value>Header</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Заголовок</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Başlık</value>
+  </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
    <name>HeaderExtendedTooltip</name>
@@ -706,6 +714,14 @@
    <key>en</key>
    <value>Retail customer</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Розничный покупатель</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Perakende müşteri</value>
+  </title>
   <id>1</id>
   <valueType>
    <types>CatalogRef.RetailCustomers</types>
@@ -723,6 +739,14 @@
    <key>en</key>
    <value>Item key</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Varyant</value>
+  </title>
   <id>2</id>
   <valueType>
    <types>CatalogRef.ItemKeys</types>
@@ -739,6 +763,14 @@
   <title>
    <key>en</key>
    <value>List</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Список</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Liste</value>
   </title>
   <id>3</id>
   <valueType>
@@ -815,6 +847,14 @@ HAVING
        <key>en</key>
        <value>Date</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Дата</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Tarih</value>
+      </content>
      </localValue>
     </title>
    </fields>
@@ -830,6 +870,10 @@ HAVING
       <content>
        <key>en</key>
        <value>Fiscal data</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Фискальные данные</value>
       </content>
      </localValue>
     </title>
@@ -847,6 +891,10 @@ HAVING
         <key>en</key>
         <value>ND=15; NFD=2; NZ=</value>
        </content>
+       <content>
+        <key>ru</key>
+        <value>ND=15; NFD=2; NZ=</value>
+       </content>
       </values>
      </items>
     </appearance>
@@ -858,6 +906,14 @@ HAVING
       <content>
        <key>en</key>
        <value>Begin of period</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Начало периода</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Dönem başı</value>
       </content>
      </localValue>
     </title>
@@ -874,6 +930,14 @@ HAVING
        <key>en</key>
        <value>End of period</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Конец периода</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Dönem sonu</value>
+      </content>
      </localValue>
     </title>
     <valueType>
@@ -889,6 +953,10 @@ HAVING
   <title>
    <key>en</key>
    <value>Fiscal number</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Фискальный номер</value>
   </title>
   <id>4</id>
   <valueType>
@@ -907,6 +975,10 @@ HAVING
   <title>
    <key>en</key>
    <value>Choose</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Выбрать</value>
   </title>
   <id>1</id>
   <use>

@@ -3665,6 +3665,10 @@
    <key>en</key>
    <value>Return to card</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Вернуть на карту</value>
+  </title>
   <id>5</id>
   <use>
    <common>true</common>

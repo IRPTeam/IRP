@@ -3706,6 +3706,10 @@
    <key>en</key>
    <value>Pay by card</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Оплата по карте</value>
+  </title>
   <id>4</id>
   <use>
    <common>true</common>

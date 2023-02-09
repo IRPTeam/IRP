@@ -5,6 +5,10 @@
   <key>en</key>
   <value>Salary</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Зарплата</value>
+ </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>
  <content>Document.Payroll</content>

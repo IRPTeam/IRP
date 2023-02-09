@@ -5,4 +5,8 @@
   <key>en</key>
   <value>Payment pay by payment card</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Оплата оплатить по платежной карте</value>
+ </synonym>
 </mdclass:CommonPicture>

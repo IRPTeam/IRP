@@ -13,6 +13,10 @@
   <key>en</key>
   <value>R7050 Production durations</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R7050 Производственное время</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -22,6 +26,10 @@
   <synonym>
    <key>en</key>
    <value>Duration</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Время</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -40,6 +48,14 @@
    <key>en</key>
    <value>Company</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
   <type>
    <types>CatalogRef.Companies</types>
   </type>
@@ -53,6 +69,14 @@
   <synonym>
    <key>en</key>
    <value>Business unit</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Подразделение</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Departman</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -73,6 +97,14 @@
   <synonym>
    <key>en</key>
    <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>

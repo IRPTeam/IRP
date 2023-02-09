@@ -801,7 +801,7 @@ Function RetailReturn()
 	|					THEN 0
 	|				ELSE -tmpRetailReturn.Amount / tmpRetailReturn.Quantity * tmpRetailReturn.QuantityBySerialLtNumbers
 	|			END
-	|		ELSE tmpRetailReturn.Amount
+	|		ELSE -tmpRetailReturn.Amount
 	|	END AS Amount,
 	|	CASE
 	|		WHEN tmpRetailReturn.QuantityBySerialLtNumbers <> 0
@@ -810,7 +810,7 @@ Function RetailReturn()
 	|					THEN 0
 	|				ELSE -tmpRetailReturn.NetAmount / tmpRetailReturn.Quantity * tmpRetailReturn.QuantityBySerialLtNumbers
 	|			END
-	|		ELSE tmpRetailReturn.NetAmount
+	|		ELSE -tmpRetailReturn.NetAmount
 	|	END AS NetAmount,
 	|	CASE
 	|		WHEN tmpRetailReturn.QuantityBySerialLtNumbers <> 0
@@ -819,7 +819,7 @@ Function RetailReturn()
 	|					THEN 0
 	|				ELSE -tmpRetailReturn.OffersAmount / tmpRetailReturn.Quantity * tmpRetailReturn.QuantityBySerialLtNumbers
 	|			END
-	|		ELSE tmpRetailReturn.OffersAmount
+	|		ELSE -tmpRetailReturn.OffersAmount
 	|	END AS OffersAmount,
 	|	tmpRetailReturn.Store,
 	|	tmpRetailReturn.SalesPerson

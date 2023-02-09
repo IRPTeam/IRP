@@ -3,7 +3,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;	
 	If ThisObject.Status.Posting And Not ValueIsFilled(ThisObject.ApprovedDate) Then
-		ThisObject.ApprovedDate = CurrentSessionDate();
+		ThisObject.ApprovedDate = CommonFunctionsServer.GetCurrentSessionDate();
 	EndIf;
 EndProcedure
 

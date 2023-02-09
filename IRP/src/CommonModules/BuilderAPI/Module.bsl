@@ -261,7 +261,7 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined) Export
 	FillPropertyValues(Doc, Wrapper.Object, , "Number");
 	
 	If Not ValueIsFilled(Doc.Date) Then
-		Doc.Date = CurrentSessionDate();
+		Doc.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	EndIf;
 	For Each Table In DocMetadata.TabularSections Do
 		DocTable = Doc[Table.Name]; // TabularSection

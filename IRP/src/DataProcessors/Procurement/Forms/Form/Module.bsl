@@ -680,7 +680,7 @@ Function Create_InventoryTransferOrder(DataTable)
 	For Each RowFilter In DataTableFilter Do
 
 		NewTransferOrder = Documents.InventoryTransferOrder.CreateDocument();
-		NewTransferOrder.Date = CurrentSessionDate();
+		NewTransferOrder.Date = CommonFunctionsServer.GetCurrentSessionDate();
 		NewTransferOrder.Company = ThisObject.Company;
 		NewTransferOrder.StoreReceiver = ThisObject.Store;
 		NewTransferOrder.StoreSender = RowFilter.StoreSender;
@@ -833,7 +833,7 @@ Function Create_PurchaseOrder(DataTable)
 		AgreementInfo = CatAgreementsServer.GetAgreementInfo(RowFilter.Agreement);
 
 		NewPurchaseOrder = Documents.PurchaseOrder.CreateDocument();
-		NewPurchaseOrder.Date = CurrentSessionDate();
+		NewPurchaseOrder.Date = CommonFunctionsServer.GetCurrentSessionDate();
 		NewPurchaseOrder.Company = ThisObject.Company;
 		NewPurchaseOrder.Agreement = RowFilter.Agreement;
 		NewPurchaseOrder.Currency = AgreementInfo.Currency;

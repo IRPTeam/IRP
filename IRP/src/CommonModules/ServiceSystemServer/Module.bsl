@@ -335,7 +335,7 @@ Procedure RunExternalFunctions() Export
 		
 		Job = GetJobRecordInQueue(JobStructure);
 		JobRecord = Job[0];
-		JobRecord.Start = CurrentSessionDate();
+		JobRecord.Start = CommonFunctionsServer.GetCurrentSessionDate();
 		JobRecord.Status = Enums.JobStatus.Active;
 		
 		ParamArray = New Array;
@@ -373,7 +373,7 @@ Procedure RunJobExternalFunctions(JobStructure) Export
 	JobRecord = Job[0];
 	
 	JobRecord.Result = New ValueStorage(ResultInfo.Result, New Deflation(9));
-	JobRecord.Finish = CurrentSessionDate();
+	JobRecord.Finish = CommonFunctionsServer.GetCurrentSessionDate();
 	JobRecord.Status = ?(ResultInfo.isError, Enums.JobStatus.Failed, Enums.JobStatus.Completed);
 	
 	If ResultInfo.isError Then
@@ -404,7 +404,7 @@ Procedure AddExternalFunctionsToJobQueue(ExternalFunction) Export
 		Return;
 	EndIf;
 	
-	Period = CurrentSessionDate();
+	Period = CommonFunctionsServer.GetCurrentSessionDate();
 	Job = InformationRegisters.JobQueue.CreateRecordSet();
 	Job.Filter.Job.Set(ExternalFunction);
 	Job.Filter.Period.Set(Period);

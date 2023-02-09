@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <items xsi:type="form:FormGroup">
   <name>ListSettingsComposerUserSettings</name>
   <id>1</id>
@@ -293,9 +293,7 @@
    <id>16</id>
    <visible>true</visible>
    <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
+   <userVisible/>
    <dataPath xsi:type="form:DataPath">
     <segments>List.Ref</segments>
    </dataPath>
@@ -586,17 +584,166 @@ WHERE
 		WHEN &amp;isItem
 			THEN SerialLotNumbers.SerialLotNumberOwner = &amp;ItemRef
 			OR SerialLotNumbers.SerialLotNumberOwner = &amp;ItemType
+			OR SerialLotNumbers.SerialLotNumberOwner IN
+				(SELECT
+					IK.Ref
+				FROM
+					Catalog.ItemKeys AS IK
+				WHERE
+					IK.Item = &amp;ItemRef)
 		WHEN &amp;isItemType
 			THEN SerialLotNumbers.SerialLotNumberOwner = &amp;ItemType
-			
 		ELSE TRUE
-	END OR SerialLotNumbers.SerialLotNumberOwner = Undefined</queryText>
+	END
+	OR SerialLotNumbers.SerialLotNumberOwner = Undefined</queryText>
    <mainTable>Catalog.SerialLotNumbers</mainTable>
    <dynamicDataRead>true</dynamicDataRead>
    <autoFillAvailableFields>true</autoFillAvailableFields>
    <customQuery>true</customQuery>
    <autoSaveUserSettings>true</autoSaveUserSettings>
    <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Ref</dataPath>
+    <field>Ref</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DeletionMark</dataPath>
+    <field>DeletionMark</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Code</dataPath>
+    <field>Code</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description</dataPath>
+    <field>Description</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SerialLotNumberOwner</dataPath>
+    <field>SerialLotNumberOwner</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Inactive</dataPath>
+    <field>Inactive</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Predefined</dataPath>
+    <field>Predefined</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PredefinedDataName</dataPath>
+    <field>PredefinedDataName</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>StockBalanceDetail</dataPath>
+    <field>StockBalanceDetail</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>EachSerialLotNumberIsUnique</dataPath>
+    <field>EachSerialLotNumberIsUnique</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>BatchBalanceDetail</dataPath>
+    <field>BatchBalanceDetail</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>CodeString</dataPath>
+    <field>CodeString</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>AddAttributes</dataPath>
+    <field>AddAttributes</field>
+   </fields>
+   <parameters>
+    <name>ItemRef</name>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Item ref</value>
+      </content>
+     </localValue>
+    </title>
+    <valueType>
+     <types>CatalogRef.Items</types>
+     <types>CatalogRef.ItemKeys</types>
+     <types>CatalogRef.ItemTypes</types>
+    </valueType>
+    <useRestriction>true</useRestriction>
+   </parameters>
+   <parameters>
+    <name>ItemType</name>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Item type</value>
+      </content>
+     </localValue>
+    </title>
+    <valueType>
+     <types>CatalogRef.Items</types>
+     <types>CatalogRef.ItemKeys</types>
+     <types>CatalogRef.ItemTypes</types>
+    </valueType>
+    <useRestriction>true</useRestriction>
+   </parameters>
+   <parameters>
+    <name>isItemKey</name>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Is item key</value>
+      </content>
+     </localValue>
+    </title>
+    <valueType/>
+    <useRestriction>true</useRestriction>
+   </parameters>
+   <parameters>
+    <name>ItemKeyRef</name>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Item key ref</value>
+      </content>
+     </localValue>
+    </title>
+    <valueType>
+     <types>CatalogRef.Items</types>
+     <types>CatalogRef.ItemKeys</types>
+     <types>CatalogRef.ItemTypes</types>
+    </valueType>
+    <useRestriction>true</useRestriction>
+   </parameters>
+   <parameters>
+    <name>isItemType</name>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Is item type</value>
+      </content>
+     </localValue>
+    </title>
+    <valueType/>
+    <useRestriction>true</useRestriction>
+   </parameters>
+   <parameters>
+    <name>isItem</name>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Is item</value>
+      </content>
+     </localValue>
+    </title>
+    <valueType/>
+    <useRestriction>true</useRestriction>
+   </parameters>
   </extInfo>
  </attributes>
  <attributes>
@@ -615,9 +762,9 @@ WHERE
   </title>
   <id>2</id>
   <valueType>
-   <types>CatalogRef.Items</types>
    <types>CatalogRef.ItemKeys</types>
    <types>CatalogRef.ItemTypes</types>
+   <types>CatalogRef.Items</types>
   </valueType>
   <view>
    <common>true</common>

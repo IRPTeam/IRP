@@ -254,7 +254,7 @@
 //  * S_029 - String - Not supporting web client
 //  * S_030 - String - Cashback
 //  * S_031 - String - or
-//  * S_032 - String - Add code, ex: CurrentSessionDate()
+//  * S_032 - String - Add code, ex: CommonFunctionsServer.GetCurrentSessionDate()
 //  * Saas_001 - String - Area %1 not found.
 //  * Saas_002 - String - Area status: %1.
 //  * Saas_003 - String - Localization %1 of the company is not available.
@@ -467,9 +467,7 @@ Function Strings(Lang) Export
 	Strings.Insert("S_031", NStr("en='or';
 		|ru='или';
 		|tr='veya'", Lang));
-	Strings.Insert("S_032", NStr("en='Add code, ex: CurrentSessionDate()';
-		|ru='Добавить код, например: ТекущаяДатаСеанса ()';
-		|tr='Kod ekle, örneğin: CurrentSessionDate()'", Lang));
+	Strings.Insert("S_032", NStr("en='Add code, ex: CommonFunctionsServer.GetCurrentSessionDate()'", Lang));
 #EndRegion
 
 #Region Service
@@ -1284,6 +1282,9 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_033", NStr("en='Do you want to stop job?';
 		|ru='Вы действительно хотите остановить задание?';
 		|tr='Görev durdurmak istediğinizden emin misiniz?'", Lang));
+	
+	Strings.Insert("InfoMessage_034", NStr("en='Time zone not changed'", Lang));
+	Strings.Insert("InfoMessage_035", NStr("en='Time zone changed to %1'", Lang));
 	
 	Strings.Insert("InfoMessage_Payment", NStr("en='Payment (+)';
 		|ru='Оплата (+)';

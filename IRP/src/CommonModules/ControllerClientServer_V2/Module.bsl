@@ -4285,7 +4285,7 @@ Procedure StepChangePaymentTermsByAgreement(Parameters, Chain) Export
 	Options.Agreement = GetAgreement(Parameters);
 	Options.Date      = GetDate(Parameters);
 	If Options.Date = Date(1,1,1) Then
-		Options.Date = BegOfDay(CurrentDate());
+		Options.Date = BegOfDay(CommonFunctionsServer.GetCurrentSessionDate());
 	EndIf;
 	Options.ArrayOfPaymentTerms = GetPaymentTerms(Parameters);
 	TotalAmount = 0;

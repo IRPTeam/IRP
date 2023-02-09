@@ -875,7 +875,7 @@ Function GetExpenseRecorders(Parameters, AddInfo = Undefined)
 	|	BalanceRegister.Recorder.PointInTime DESC";
 	Query.Text = StrTemplate(Query.Text, Parameters.RegisterName);
 	
-	ReceiptDate = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "OriginalDocumentDate", CurrentSessionDate());
+	ReceiptDate = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "OriginalDocumentDate", CommonFunctionsServer.GetCurrentSessionDate());
 	Query.SetParameter("ReceiptDate", ReceiptDate);
 	
 	QueryResult = Query.Execute();

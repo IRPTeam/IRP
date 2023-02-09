@@ -8,7 +8,7 @@ Function Unit_SendRequestClientServer(ConnectionSetting, ResourceParameters, Req
 	
 	If isNeedingToSaveExchange Then 
 		ServiceExchangeData = Unit_GetServiceExchangeDataTemplate();
-		ServiceExchangeData.StartTime = CurrentDate();
+		ServiceExchangeData.StartTime = CommonFunctionsServer.GetCurrentSessionDate();
 		ServiceExchangeData.Headers = ConnectionSetting.Headers;
 		ServiceExchangeData.RequestType = ConnectionSetting.QueryType;
 		ServiceExchangeData.RequestBody = RequestBody;
@@ -20,7 +20,7 @@ Function Unit_SendRequestClientServer(ConnectionSetting, ResourceParameters, Req
 		Return ServerResponse;
 	EndIf;
 		
-	ServiceExchangeData.EndTime = CurrentDate();
+	ServiceExchangeData.EndTime = CommonFunctionsServer.GetCurrentSessionDate();
 	ServiceExchangeData.ServerResponse = ServerResponse;
 	
 	If Not ValueIsFilled(EndPoint) Then

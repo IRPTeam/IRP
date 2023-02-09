@@ -84,3 +84,10 @@ Function OurCompanies()
 	OurCompanies = QueryUnload.UnloadColumn("Ref");
 	Return New FixedArray(OurCompanies);
 EndFunction
+
+Procedure SetUserTimeZone() Export
+	TimeZone = SessionParameters.CurrentUser.TimeZone;
+	If Not IsBlankString(TimeZone) Then
+		SetSessionTimeZone(TimeZone);
+	EndIf;
+EndProcedure

@@ -807,7 +807,7 @@ Procedure Payment_CancelPaymentByPaymentCardManual(Command)
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
-	Payment_ReturnPaymentByPaymentCard(PaymentRow);
+	Payment_CancelPaymentByPaymentCard(PaymentRow);
 EndProcedure
 
 

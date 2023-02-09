@@ -133,5 +133,8 @@
   <types>DocumentRef.EmployeeCashAdvance</types>
   <types>DocumentRef.ProductionCostsAllocation</types>
   <types>DocumentRef.Payroll</types>
+  <types>CatalogRef.EmployeePositions</types>
+  <types>CatalogRef.AccrualAndDeductionTypes</types>
+  <types>DocumentRef.TimeSheet</types>
  </type>
 </mdclass:DefinedType>

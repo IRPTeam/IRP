@@ -837,6 +837,9 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_032", NStr("en = 'Do you want to pause job?'", Lang));
 	Strings.Insert("InfoMessage_033", NStr("en = 'Do you want to stop job?'", Lang));
 	
+	Strings.Insert("InfoMessage_034", NStr("en = 'Time zone not changed'", Lang));
+	Strings.Insert("InfoMessage_035", NStr("en = 'Time zone changed to %1'", Lang));
+	
 	Strings.Insert("InfoMessage_Payment", NStr("en = 'Payment (+)'", Lang));
 	Strings.Insert("InfoMessage_PaymentReturn", NStr("en = 'Payment Return'", Lang));
 	Strings.Insert("InfoMessage_SessionIsClosed", NStr("en = 'Session is closed'", Lang));

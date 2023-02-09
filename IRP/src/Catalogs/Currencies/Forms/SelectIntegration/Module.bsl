@@ -22,7 +22,7 @@ EndProcedure
 &AtClient
 Procedure ReturnSelectedIntegrationSettings()
 	CurrentRow = Items.IntegrationTable.CurrentData;
-	If CurrentDate() = Undefined Then
+	If CommonFunctionsServer.GetCurrentSessionDate() = Undefined Then
 		Close(Undefined);
 	Else
 		Close(New Structure("IntegrationSettings", CurrentRow.IntegrationSettings));

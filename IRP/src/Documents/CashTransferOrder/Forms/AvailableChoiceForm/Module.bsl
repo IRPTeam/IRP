@@ -20,7 +20,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If ValueIsFilled(Parameters.OwnerRef) Then
 		Query.SetParameter("EndOfDate", New Boundary(Parameters.OwnerRef.PointInTime(), BoundaryType.Excluding));
 	Else
-		Query.SetParameter("EndOfDate", CurrentDate());
+		Query.SetParameter("EndOfDate", CommonFunctionsServer.GetCurrentSessionDate());
 	EndIf;
 
 	Query.Execute();

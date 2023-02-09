@@ -24,7 +24,7 @@ Procedure CreateSCAtServer()
 	// Через совойство Attr объекта Doc будут доступны все реквизиты документа
 	// 3 параметр значение реквизита, 
 	// LegalName не устанавливаем - будет заполнено из Partner
-	Builder.SetProperty(Doc, Doc.Attr.Date           , CurrentSessionDate());
+	Builder.SetProperty(Doc, Doc.Attr.Date           , CommonFunctionsServer.GetCurrentSessionDate());
 	Builder.SetProperty(Doc, Doc.Attr.TransactionType, Enums.ShipmentConfirmationTransactionTypes.Sales);
 	Builder.SetProperty(Doc, Doc.Attr.Partner        , RefPartner);
 	

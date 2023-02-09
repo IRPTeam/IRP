@@ -19,7 +19,7 @@ Procedure SetMockState(Mock, Key, Value) Export
 	EndIf;
 	
 	RecordManager = CreateRecordManager();
-	RecordManager.Period = CurrentDate();
+	RecordManager.Period = CommonFunctionsServer.GetCurrentSessionDate();
 	RecordManager.Mock = Mock;
 	RecordManager.Key = Key;
 	RecordManager.Value = ValueString;

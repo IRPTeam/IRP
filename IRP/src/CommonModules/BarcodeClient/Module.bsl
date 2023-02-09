@@ -31,7 +31,7 @@ Function GetBarcodeSettings() Export
 	
 	ServerSettings = New Structure;
 	ServerSettings.Insert("PriceType", Undefined);
-	ServerSettings.Insert("PricePeriod", CurrentDate());
+	ServerSettings.Insert("PricePeriod", CommonFunctionsServer.GetCurrentSessionDate());
 	Settings.Insert("ServerSettings", ServerSettings);
 	
 	Result = New Structure;

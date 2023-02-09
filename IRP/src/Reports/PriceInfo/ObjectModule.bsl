@@ -5,7 +5,7 @@ Procedure OnComposeResult(ResultDocument, DetailsData, StandardProcessing)
 	Settings = SettingsComposer.GetSettings();
 
 	Settings.DataParameters.SetParameterValue("PricePeriod", ?(ValueIsFilled(PricePeriod), EndOfDay(PricePeriod),
-		EndOfDay(CurrentDate())));
+		EndOfDay(CommonFunctionsServer.GetCurrentSessionDate())));
 
 	ItemKeysArray = New Array();
 	If TypeOf(PriceOwner) = Type("CatalogRef.ItemKeys") Then
@@ -64,7 +64,7 @@ Procedure OnComposeResult(ResultDocument, DetailsData, StandardProcessing)
 					  |	0 AS Priority,
 					  |	"""" AS PriceTypeDefinition");
 	Query.TempTablesManager = New TempTablesManager();
-	Query.SetParameter("PricePeriod", ?(ValueIsFilled(PricePeriod), EndOfDay(PricePeriod), EndOfDay(CurrentDate())));
+	Query.SetParameter("PricePeriod", ?(ValueIsFilled(PricePeriod), EndOfDay(PricePeriod), EndOfDay(CommonFunctionsServer.GetCurrentSessionDate())));
 
 	Query.SetParameter("PriceOwner", PriceOwner);
 	Query.SetParameter("PriceOwnerIsItem", TypeOf(PriceOwner) = Type("CatalogRef.Items"));

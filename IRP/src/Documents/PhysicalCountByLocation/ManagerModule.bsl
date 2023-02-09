@@ -19,7 +19,7 @@ Procedure GeneratePhysicalCountByLocation(Parameters, AddInfo = Undefined) Expor
 			// try lock for modify
 			PhysicalCountByLocationObject.Lock();
 			PhysicalCountByLocationObject.Fill(Undefined);
-			PhysicalCountByLocationObject.Date = CurrentSessionDate();
+			PhysicalCountByLocationObject.Date = CommonFunctionsServer.GetCurrentSessionDate();
 			PhysicalCountByLocationObject.PhysicalInventory = Parameters.PhysicalInventory;
 			PhysicalCountByLocationObject.Store = Parameters.Store;
 			PhysicalCountByLocationObject.UseSerialLot = Parameters.PhysicalInventory.UseSerialLot;

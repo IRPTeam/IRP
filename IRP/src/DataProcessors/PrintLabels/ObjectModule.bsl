@@ -37,7 +37,7 @@ Procedure FillAtServer(Object, Form) Export
 		Return;
 	EndIf;
 
-	ItemsInfo = GetItemInfo.ItemPriceInfoByTable(ItemPriceTable, CurrentDate());
+	ItemsInfo = GetItemInfo.ItemPriceInfoByTable(ItemPriceTable, CommonFunctionsServer.GetCurrentSessionDate());
 
 	PriceQuery = New Query();
 	PriceQuery.Text = 

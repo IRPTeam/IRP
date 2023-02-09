@@ -1,5 +1,5 @@
 Procedure WriteStatusToRegister(DocumentRef, Status, AddInfo = Undefined) Export
-	Date = CurrentSessionDate();
+	Date = CommonFunctionsServer.GetCurrentSessionDate();
 	LastStatusInfo = GetLastStatusInfo(DocumentRef);
 	If LastStatusInfo.Status = Status Then
 		Return;

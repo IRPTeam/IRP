@@ -191,7 +191,7 @@ EndProcedure
 Procedure CreateDocuments(Val StructureRow, CreateGoodsReceipt, CreateInventoryTransfer)
 
 	BeginTransaction();
-	CreationDate = CurrentSessionDate();
+	CreationDate = CommonFunctionsServer.GetCurrentSessionDate();
 	If CreateGoodsReceipt Then
 		
 		

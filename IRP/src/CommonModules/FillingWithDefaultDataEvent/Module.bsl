@@ -164,7 +164,7 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 				AgreementParameters = New Structure();
 				AgreementParameters.Insert("Partner"        , Source.Partner);
 				AgreementParameters.Insert("Agreement"      , Source.Agreement);
-				AgreementParameters.Insert("CurrentDate"    , CurrentDate());
+				AgreementParameters.Insert("CurrentDate"    , CommonFunctionsServer.GetCurrentSessionDate());
 				AgreementParameters.Insert("ArrayOfFilters" , New Array());
 				AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark",
 					True, ComparisonType.NotEqual));

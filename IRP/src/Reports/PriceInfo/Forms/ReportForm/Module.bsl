@@ -6,7 +6,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 
 	Parameters.Property("PricePeriod", Report.PricePeriod);
 	If Not ValueIsFilled(Report.PricePeriod) Then
-		Report.PricePeriod = CurrentDate();
+		Report.PricePeriod = CommonFunctionsServer.GetCurrentSessionDate();
 	EndIf;
 EndProcedure
 

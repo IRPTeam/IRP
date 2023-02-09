@@ -5,7 +5,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.Item = Parameters.Item;
 	ThisObject.ItemKey = Parameters.ItemKey;
 	ThisObject.Unit = Parameters.Unit;
-	ThisObject.DateOfRelevance = CurrentSessionDate();
+	ThisObject.DateOfRelevance = CommonFunctionsServer.GetCurrentSessionDate();
 	ThisObject.VisibleSelectionTables = Parameters.VisibleSelectionTables;
 	ThisObject.ShowPrecision = Parameters.ShowPrecision;
 

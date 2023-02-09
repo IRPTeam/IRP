@@ -254,7 +254,7 @@
 //  * S_029 - String - Not supporting web client
 //  * S_030 - String - Cashback
 //  * S_031 - String - or
-//  * S_032 - String - Add code, ex: CurrentSessionDate()
+//  * S_032 - String - Add code, ex: CommonFunctionsServer.GetCurrentSessionDate()
 //  * Saas_001 - String - Area %1 not found.
 //  * Saas_002 - String - Area status: %1.
 //  * Saas_003 - String - Localization %1 of the company is not available.
@@ -374,7 +374,7 @@ Function Strings(Lang) Export
 	Strings.Insert("S_029", NStr("en = 'Not supporting web client'", Lang));
 	Strings.Insert("S_030", NStr("en = 'Cashback'", Lang));
 	Strings.Insert("S_031", NStr("en = 'or'", Lang));
-	Strings.Insert("S_032", NStr("en = 'Add code, ex: CurrentSessionDate()'", Lang));
+	Strings.Insert("S_032", NStr("en = 'Add code, ex: CommonFunctionsServer.GetCurrentSessionDate()'", Lang));
 #EndRegion
 
 #Region Service

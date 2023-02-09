@@ -438,7 +438,7 @@ Function ShiftResultStructure()
 	ReturnValue.Insert("CountersOperationType2", GetCountersOperationType());
 	ReturnValue.Insert("CountersOperationType3", GetCountersOperationType());
 	ReturnValue.Insert("CountersOperationType4", GetCountersOperationType());
-	ReturnValue.Insert("DateTime", CurrentDate());
+	ReturnValue.Insert("DateTime", CommonFunctionsServer.GetCurrentSessionDate());
 	ReturnValue.Insert("FNError", False);
 	ReturnValue.Insert("FNFail", False);
 	ReturnValue.Insert("FNOverflow", False);
@@ -458,7 +458,7 @@ Function ReceiptResultStructure()
 	
 	ReturnValue.Insert("AddressSiteInspections", "");
 	ReturnValue.Insert("CheckNumber", 0);
-	ReturnValue.Insert("DateTime", CurrentDate());
+	ReturnValue.Insert("DateTime", CommonFunctionsServer.GetCurrentSessionDate());
 	ReturnValue.Insert("FiscalSign", "");
 	ReturnValue.Insert("ShiftClosingCheckNumber", 0);
 	ReturnValue.Insert("ShiftNumber", 0);

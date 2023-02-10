@@ -131,9 +131,9 @@ EndFunction
 Function GetSliceLastDateByRefAndDate(Ref, Date) Export
 	If Not ValueIsFilled(Ref) Then
 		If Not ValueIsFilled(Date) Then
-			Return CurrentDate();
+			Return CommonFunctionsServer.GetCurrentSessionDate();
 		EndIf;
-		If BegOfDay(Date) = BegOfDay(CurrentDate()) Then
+		If BegOfDay(Date) = BegOfDay(CommonFunctionsServer.GetCurrentSessionDate()) Then
 			Return EndOfDay(Date);
 		Else
 			Return Date;

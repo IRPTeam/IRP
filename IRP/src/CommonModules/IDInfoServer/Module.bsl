@@ -357,7 +357,7 @@ EndFunction
 
 Procedure SaveIDInfoTypeValues(Ref, ValueTable, AddInfo = Undefined) Export
 
-	_Period = CurrentSessionDate();
+	_Period = CommonFunctionsServer.GetCurrentSessionDate();
 	RecordSet = InformationRegisters.IDInfo.CreateRecordSet();
 	RecordSet.Filter.Object.Set(Ref);
 	RecordSet.Filter.Period.Set(_Period);

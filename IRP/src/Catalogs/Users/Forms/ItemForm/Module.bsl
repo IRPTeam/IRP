@@ -34,6 +34,19 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		Object.InfobaseUserID = Undefined;
 		Object.Description = "";
 	EndIf;
+	
+	Items.TimeZone.ChoiceList.Clear();
+	For Each Zone In GetAvailableTimeZones() Do
+		Items.TimeZone.ChoiceList.Add(String(Zone));
+	EndDo;
+	
+	If SessionParameters.CurrentUser = Object.Ref Then
+		TimeZone = SessionTimeZone();
+		If Not IsBlankString(TimeZone) And Not TimeZone = Object.TimeZone Then
+			Object.TimeZone = TimeZone;
+		EndIf;
+	EndIf;
+	
 EndProcedure
 
 &AtServer
@@ -44,6 +57,11 @@ EndProcedure
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	UpdateRolesInfo(CurrentObject);
+	
+	If SessionParameters.CurrentUser = Object.Ref 
+		And Not Object.TimeZone = SessionTimeZone() Then
+		SetSessionTimeZone(Object.TimeZone);
+	EndIf;
 EndProcedure
 
 #EndRegion

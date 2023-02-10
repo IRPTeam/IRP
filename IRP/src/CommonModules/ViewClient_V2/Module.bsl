@@ -950,7 +950,7 @@ Procedure OnOpenFormNotify(Parameters) Export
 	EndIf;
 	 
 	If Parameters.Form.IsCopyingInteractive Then
-		SetDate(Parameters.Object, Parameters.Form, Parameters.TableName, CurrentDate());
+		SetDate(Parameters.Object, Parameters.Form, Parameters.TableName, CommonFunctionsServer.GetCurrentSessionDate());
 	EndIf;
 	
 	DocumentsClient.SetTextOfDescriptionAtForm(Parameters.Object, Parameters.Form);

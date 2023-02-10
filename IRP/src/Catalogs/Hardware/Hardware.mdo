@@ -58,7 +58,7 @@
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
   <codeLength>12</codeLength>
-  <descriptionLength>25</descriptionLength>
+  <descriptionLength>150</descriptionLength>
   <codeAllowedLength>Variable</codeAllowedLength>
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>

@@ -365,7 +365,7 @@ Procedure CreateDocuments(Parameters_Production = Undefined, Parameters_Inventor
 	NewInventoryTransfer = Undefined;
 	
 	BeginTransaction();
-	CreationDate = CurrentSessionDate();
+	CreationDate = CommonFunctionsServer.GetCurrentSessionDate();
 	If Parameters_Production <> Undefined Then
 		NewProduction = Documents.Production.CreateDocument();
 		NewProduction.Date = CreationDate;

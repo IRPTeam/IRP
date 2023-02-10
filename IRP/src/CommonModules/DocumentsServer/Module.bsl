@@ -211,7 +211,7 @@ Function GetAgreementByPartner(AgreementParameters) Export
 	If AgreementParameters.Property("CurrentDate") Then
 		CurrentDate = AgreementParameters.CurrentDate;
 	Else
-		CurrentDate = CurrentDate();
+		CurrentDate = CommonFunctionsServer.GetCurrentSessionDate();
 	EndIf;
 
 	AdditionalParameters.Insert("EndOfUseDate", CurrentDate);

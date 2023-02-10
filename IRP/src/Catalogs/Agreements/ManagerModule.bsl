@@ -196,7 +196,7 @@ Function GetAgreementInfo(Agreement) Export
 	|WHERE
 	|	Table.Ref = &Ref";
 	Query.SetParameter("Ref", Agreement);
-	Query.SetParameter("CurrentDate", CurrentSessionDate());
+	Query.SetParameter("CurrentDate", CommonFunctionsServer.GetCurrentSessionDate());
 	QueryResult = Query.Execute();
 
 	Result = New Structure();

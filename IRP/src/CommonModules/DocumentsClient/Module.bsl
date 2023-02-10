@@ -642,7 +642,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			FillingValues.Insert("Quantity" , ResultElement.Quantity);
 			FillingValues.Insert("SerialLotNumber" , ResultElement.SerialLotNumber);
 			FillingValues.Insert("Barcode" , ?(ResultElement.Property("Barcode"), ResultElement.Barcode, ""));
-			FillingValues.Insert("Date" , CurrentDate());
+			FillingValues.Insert("Date" , CommonFunctionsServer.GetCurrentSessionDate());
 			
 			If ResultElement.Property("Price") Then
 				FillingValues.Insert("Price", ResultElement.Price);

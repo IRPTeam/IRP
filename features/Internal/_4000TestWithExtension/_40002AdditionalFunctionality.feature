@@ -74,38 +74,31 @@ Scenario: _4000202 hardware
 	And I click the button named "FormCreate"
 	And I input "Test input device" text in "Description" field
 	And I select "Input device" exact value from "Types of Equipment" drop-down list
-	And in the table "ConnectParameters" I click "Load settings" button
-	And "ConnectParameters" table contains lines
-		| 'Name'                | 'Value' |
-		| 'COMEncoding'         | 'UTF-8' |
-		| 'DataBits'            | '8'     |
-		| 'GSSymbolKey'         | '-1'    |
-		| 'IgnoreKeyboardState' | 'Yes'   |
-		| 'OutputDataType'      | ''      |
-		| 'Port'                | '3'     |
-		| 'Prefix'              | '-1'    |
-		| 'Speed'               | '9 600' |
-		| 'StopBit'             | ''      |
-		| 'Suffix'              | '13'    |
-		| 'Timeout'             | '75'    |
-		| 'TimeoutCOM'          | '5'     |
-		| 'COMEncoding'         | 'UTF-8' |
-		| 'DataBits'            | '8'     |
-		| 'GSSymbolKey'         | '-1'    |
-		| 'IgnoreKeyboardState' | 'Yes'   |
-		| 'OutputDataType'      | ''      |
-		| 'Port'                | '3'     |
-		| 'Prefix'              | '-1'    |
-		| 'Speed'               | '9 600' |
-		| 'StopBit'             | ''      |
-		| 'Suffix'              | '13'    |
-		| 'Timeout'             | '75'    |
-		| 'TimeoutCOM'          | '5'     |
 	And I click Select button of "Driver" field
 	And I go to line in "List" table
 		| 'Description' |
 		| 'barcode'     |
 	And I select current line in "List" table
+	And I click "Save" button
+	And I move to "Driver settings" tab
+	And in the table "DriverParameter" I click "Reload settings" button
+	And I move to "Predefined settings" tab
+	And in the table "ConnectParameters" I click "Load settings" button
+	And "ConnectParameters" table contains lines
+		| '#'  | 'Name'           | 'Value'                 |
+		| '1'  | 'Port'           | '0'                     |
+		| '2'  | 'Prefix'         | '-1'                    |
+		| '3'  | 'Suffix'         | '3 338'                 |
+		| '4'  | 'OutputDataType' | ''                      |
+		| '5'  | 'GSSymbolKey'    | '7'                     |
+		| '6'  | 'Timeout'        | '35'                    |
+		| '7'  | 'DataBits'       | '8'                     |
+		| '8'  | 'StopBits'       | ''                      |
+		| '9'  | 'Parity'         | ''                      |
+		| '10' | 'Speed'          | '9 600'                 |
+		| '11' | 'COMEncoding'    | 'UTF-8'                 |
+		| '12' | 'LogType'        | '-1'                    |
+		| '13' | 'LogFilePath'    | 'C:\temp\scan_opos.txt' |
 	And I click "Save" button		
 	And I click the button named "FormWriteAndClose"
 

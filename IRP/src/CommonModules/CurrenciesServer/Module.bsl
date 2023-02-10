@@ -364,6 +364,23 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	Query.SetParameter("UseCurrencyJoin", UseCurrencyJoin);
 	QueryResults = Query.ExecuteBatch();
 	QueryTable = QueryResults[1].Unload();
+	
+	If QueryTable.Columns.Find("TransactionCurrency") <> Undefined Then
+		TransactionRows = QueryTable.FindRows(New Structure("CurrencyMovementType", 
+			ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency));
+			
+		For Each TransactionRow In TransactionRows Do
+			For Each Row In QueryTable Do
+				If UseKey And ValueIsFilled(TransactionRow.Key) And 
+					Row.Key = TransactionRow.Key Then
+					Row.TransactionCurrency = TransactionRow.Currency;
+				Else
+					Row.TransactionCurrency = TransactionRow.Currency;
+				EndIf;
+			EndDo;
+		EndDo;
+	EndIf;
+	
 	Return QueryTable;
 EndFunction
 

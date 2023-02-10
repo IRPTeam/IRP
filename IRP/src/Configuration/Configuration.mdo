@@ -826,6 +826,7 @@
   <documents>Document.ProductionCostsAllocation</documents>
   <documents>Document.Payroll</documents>
   <documents>Document.TimeSheet</documents>
+  <documents>Document.ForeignCurrencyRevaluation</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>

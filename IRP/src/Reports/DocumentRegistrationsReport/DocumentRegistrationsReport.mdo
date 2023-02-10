@@ -98,6 +98,7 @@
       <types>DocumentRef.ProductionCostsAllocation</types>
       <types>DocumentRef.Payroll</types>
       <types>DocumentRef.TimeSheet</types>
+      <types>DocumentRef.ForeignCurrencyRevaluation</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

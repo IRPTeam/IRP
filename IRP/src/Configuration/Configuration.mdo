@@ -113,11 +113,11 @@
   <subsystems>Subsystem.Treasury</subsystems>
   <subsystems>Subsystem.Manufacturing</subsystems>
   <subsystems>Subsystem.Accounting</subsystems>
+  <subsystems>Subsystem.Salary</subsystems>
   <subsystems>Subsystem.MasterData</subsystems>
   <subsystems>Subsystem.Reports</subsystems>
   <subsystems>Subsystem.Settings</subsystems>
   <subsystems>Subsystem.Technical</subsystems>
-  <subsystems>Subsystem.Salary</subsystems>
   <styles>Style.TestDataBase</styles>
   <commonPictures>CommonPicture.AccountingFlags</commonPictures>
   <commonPictures>CommonPicture.AddDataProc</commonPictures>
@@ -170,6 +170,7 @@
   <commonPictures>CommonPicture.Recalculations</commonPictures>
   <commonPictures>CommonPicture.Reports</commonPictures>
   <commonPictures>CommonPicture.Retail</commonPictures>
+  <commonPictures>CommonPicture.Salary</commonPictures>
   <commonPictures>CommonPicture.Sales</commonPictures>
   <commonPictures>CommonPicture.SerialNumber</commonPictures>
   <commonPictures>CommonPicture.SessionParameter</commonPictures>

@@ -14,7 +14,6 @@
     <key>en</key>
     <value>Scanned barcode</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <defaultRecordForm>InformationRegister.T1010S_ScannedBarcode.Form.RecordForm</defaultRecordForm>
   <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>

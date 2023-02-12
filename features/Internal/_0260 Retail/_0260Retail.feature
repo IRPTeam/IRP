@@ -945,7 +945,7 @@ Scenario: _0260139 create RRR from POS (first select basis document, different w
 		
 		And "Payments" table became equal
 			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Postponed payment' | 'Bank term'    | 'Account'      | 'Percent' |
-			| '1' | '750,00' | ''           | 'Card 01'      | ''                 | 'No'                | 'Bank term 02' | 'Transit Main' | ''        |
+			| '1' | '750,00' | ''           | 'Card 01'      | ''                 | 'No'                | 'Bank term 02' | 'Transit Main' | '1,00'    |
 		
 		And "SerialLotNumbersTree" table became equal
 			| 'Item'               | 'Item key' | 'Serial lot number' | 'Item key quantity' | 'Quantity' |
@@ -1019,7 +1019,7 @@ Scenario: _0260140 create RRR from POS (add items than select basis document)
 		Then the number of "SpecialOffers" table lines is "равно" 0
 		And "Payments" table became equal
 			| '#' | 'Amount'   | 'Commission' | 'Payment type' | 'Payment terminal' | 'Postponed payment' | 'Bank term'    | 'Account'      | 'Percent' |
-			| '1' | '1 040,00' | ''           | 'Card 01'      | ''                 | 'No'                | 'Bank term 02' | 'Transit Main' | ''        |
+			| '1' | '1 040,00' | ''           | 'Card 01'      | ''                 | 'No'                | 'Bank term 02' | 'Transit Main' | '1,00'    |
 		Then the form attribute named "Workstation" became equal to "Workstation 01"
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		Then the form attribute named "Currency" became equal to "TRY"
@@ -1083,7 +1083,7 @@ Scenario: _0260141 return from POS (without basis document)
 		Then the number of "SpecialOffers" table lines is "равно" 0
 		And "Payments" table became equal
 			| '#' | 'Amount'   | 'Commission' | 'Payment type' | 'Payment terminal' | 'Postponed payment' | 'Bank term'    | 'Account'            | 'Percent' |
-			| '1' | '1 000,00' | ''           | 'Card 01'      | ''                 | 'No'                | 'Bank term 02' | 'Transit Main'       | ''        |
+			| '1' | '1 000,00' | ''           | 'Card 01'      | ''                 | 'No'                | 'Bank term 02' | 'Transit Main'       | '1,00'    |
 			| '2' | '70,00'    | ''           | 'Cash'         | ''                 | 'No'                | ''             | 'Pos cash account 1' | ''        |
 		
 		Then the form attribute named "Workstation" became equal to "Workstation 01"

@@ -1,6 +1,5 @@
 #Region Public
 
-//
 Function GetDriverSettings(AddInID) Export
 	Query = New Query();
 	Query.Text =
@@ -28,7 +27,6 @@ Function GetDriverSettings(AddInID) Export
 	EndIf;
 	Return Settings;
 EndFunction
-
 
 // Get connection settings.
 // 
@@ -77,7 +75,6 @@ Function GetConnectionSettings(HardwareRef) Export
 	Return Settings;
 EndFunction
 
-//
 Function GetWorkstationHardwareByEquipmentType(Workstation, EquipmentType) Export
 	Query = New Query();
 	Query.Text =
@@ -127,6 +124,23 @@ Function GetAllWorkstationHardwareList(Workstation) Export
 		HardwareList.Add(SelectionDetailRecords.Hardware);
 	EndDo;
 	Return HardwareList;
+EndFunction
+
+// Get connection settings.
+// 
+// Parameters:
+//  Hardware - CatalogRef.Hardware - Hardware ref
+// 
+// Returns:
+//  Array Of KeyAndValue - Connection parameters:
+//  * Key - String
+//  * Value - String
+Function GetConnectionParameters(Hardware) Export
+	Str = New Structure;
+	For Each Row In Hardware.ConnectParameters Do
+		Str.Insert(Row.Name, Row.Value);
+	EndDo;
+	Return Str;
 EndFunction
 
 #EndRegion

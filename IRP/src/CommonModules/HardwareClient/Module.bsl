@@ -106,6 +106,10 @@ Async Function ConnectHardware(Hardware) Export
 			ResultSetParameter = Device_SetParameter(Settings.ConnectedDriver.DriverObject, "EquipmentType", Settings.ConnectedDriver.DriverEquipmentType);
 			Result = Device_Open(Settings.ConnectedDriver.DriverObject, Settings.ConnectedDriver.ID); // Boolean
 			globalEquipment_SetHardwareID(Settings.Hardware, Settings.ConnectedDriver.ID);
+			
+			For Each ParamRow In HardwareServer.GetConnectionParameters(Hardware) Do
+				Device_SetParameter(Settings.ConnectedDriver.DriverObject, ParamRow.Key, ParamRow.Value)
+			EndDo;
 			If Settings.ConnectedDriver.DriverObject <> Undefined Then
 				// @skip-check property-return-type, invocation-parameter-type-intersect
 				ErrorDescription = String(R().Eq_003);

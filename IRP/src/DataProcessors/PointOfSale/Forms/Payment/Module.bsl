@@ -675,7 +675,7 @@ Procedure FillPayments(Result, AdditionalParameters) Export
 			Row.Account = DefaultPayment[0].Account;
 			
 			If isReturn Then
-				Row.RRNCode = GetRRNCode(Row.PaymentType, True); // String
+				Row.RRNCode = GetRRNCode(Row.PaymentType); // String
 			EndIf;
 			
 		ElsIf Result.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.PaymentAgent") Then
@@ -818,18 +818,14 @@ EndProcedure
 //  OnlyFirst - Boolean - Only first
 // 
 // Returns:
-//  Array, String - Get RRNCode
+//  String - Get RRNCode
 &AtServer
-Function GetRRNCode(PaymentType, OnlyFirst = False)
+Function GetRRNCode(PaymentType)
 	Rows = RetailBasis.Payments.FindRows(New Structure("PaymentType", PaymentType));
-	Array = New Array;
 	For Each Row In Rows Do
-		If OnlyFirst Then
-			Return Row.RRNCode;
-		EndIf;
-		Array.Add(Row.RRNCode);
+		Return Row.RRNCode;
 	EndDo;
-	Return Array;
+	Return "";
 EndFunction
 
 #EndRegion

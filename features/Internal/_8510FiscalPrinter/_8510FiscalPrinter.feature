@@ -861,9 +861,6 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 		And I click the button named "Enter"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		And I activate "Item" field in "ItemsPickup" table
-		And I move to the next attribute	
-		And I click the button named "Enter"
 	* Check acquiring log
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
@@ -901,7 +898,7 @@ Scenario: _0850024 return by card without basis document (without RRN)
 		And I click the hyperlink named "Page_1"
 		And "Payments" table became equal
 			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode' |
-			| '⚪'            | 'Card 03'      | '200,00' | 'Array'   |
+			| '⚪'            | 'Card 03'      | '200,00' | ''        |
 		Then "Payment" window is opened
 		And I click "Return" button
 		Then "1C:Enterprise" window is opened
@@ -916,7 +913,7 @@ Scenario: _0850024 return by card without basis document (without RRN)
 		And I move to "Payments" tab
 		And "Payments" table became equal
 			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Postponed payment' | 'Bank term'    | 'Account'      | 'Percent' | 'RRN Code' |
-			| '1' | '200,00' | ''           | 'Card 03'      | ''                 | 'No'                | 'Bank term 03' | 'POS Terminal' | '1,00'    | 'Array'    |
+			| '1' | '200,00' | ''           | 'Card 03'      | ''                 | 'No'                | 'Bank term 03' | 'POS Terminal' | '1,00'    | ''         |
 		And I close all client application windows
 	* Check acquiring log
 		And Delay 5
@@ -924,7 +921,7 @@ Scenario: _0850024 return by card without basis document (without RRN)
 		And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '200.00'
-		And I check "$ParsingResult1$" with "1" and data in "In.Parameter6" contains 'Array'								
+		And I check "$ParsingResult1$" with "1" and data in "In.Parameter6" contains ''								
 	
 // Scenario: _08500241 return by card without basis document (with RRN)
 // 	And I close all client application windows
@@ -979,9 +976,7 @@ Scenario: _0850020 check auto card payment cancellation (acquiring)
 			And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
 			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
 			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '90.00'
-		Then "1C:Enterprise" window is opened
-		And I click "Cancel" button
-		Then "Payment" window is opened
+		And I click "Enter" button
 		Then "1C:Enterprise" window is opened
 		And I click "Cancel" button
 		Then "1C:Enterprise" window is opened
@@ -995,7 +990,7 @@ Scenario: _0850020 check auto card payment cancellation (acquiring)
 	* Check acquiring log
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
-		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and method is "CancelPaymentByPaymentCard"
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОТМЕНА ПЛАТЕЖА'
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '90.00'	
 	* Close payment form
@@ -1065,17 +1060,8 @@ Scenario: _0850021 check the form of payment by card
 		And I click "Cancel" button
 		Then "1C:Enterprise" window is opened
 		And I click "Retry" button
-		Then "Payment" window is opened
-		And I move to the tab named "GroupAmountsRight"
-		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then "Payment" window is opened
-		And I move to the tab named "GroupAmountsRight"
-		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then "Payment" window is opened
-		And I move to the tab named "GroupAmountsRight"
-		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 	* Check acquiring log
 		And Delay 10

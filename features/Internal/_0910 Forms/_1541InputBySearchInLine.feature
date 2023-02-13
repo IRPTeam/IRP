@@ -500,6 +500,7 @@ Scenario: _015406404 check item and item key input by search in line in a docume
 
 Scenario: _015406405 check item and item key input by search in line in a document ItemStockAdjustment (in english)
 	And I close all client application windows
+	And Delay 10
 	* Open a creation form ItemStockAdjustment
 		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
 		And I click the button named "FormCreate"

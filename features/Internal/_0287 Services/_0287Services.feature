@@ -685,11 +685,11 @@ Scenario: _029150 create Retail return receipt for service and product
 		And I select "R2050 Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''                             | ''                             | ''         | ''                  | ''        |
-			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''        | ''         | ''                             | ''                             | ''         | ''                  | ''        |
-			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'  | 'Store'    | 'Sales person'                 | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key' |
-			| ''                               | '*'      | '-1'        | '50'     | '42,37'      | ''              | 'Main Company' | '*'       | ''         | ''                             | '$$RetailSalesReceipt029130$$' | 'Interner' | ''                  | '*'       |
-			| ''                               | '*'      | '-1'        | '200'    | '169,49'     | ''              | 'Main Company' | '*'       | 'Store 01' | ''                             | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*'       |
+			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''             | ''                             | ''         | ''                  | ''        |
+			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''       | ''         | ''             | ''                             | ''         | ''                  | ''        |
+			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch' | 'Store'    | 'Sales person' | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key' |
+			| ''                               | '*'      | '-1'        | '-50'    | '-42,37'     | ''              | 'Main Company' | '*'      | ''         | ''             | '$$RetailSalesReceipt029130$$' | 'Interner' | ''                  | '*'       |
+			| ''                               | '*'      | '-1'        | '-200'   | '-169,49'    | ''              | 'Main Company' | '*'      | 'Store 01' | ''             | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*'       |
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

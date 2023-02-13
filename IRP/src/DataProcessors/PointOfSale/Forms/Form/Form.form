@@ -4611,6 +4611,58 @@
                           <representationInContextMenu>Auto</representationInContextMenu>
                           <shapeRepresentation>WhenActive</shapeRepresentation>
                         </items>
+                        <items xsi:type="form:Button">
+                          <name>ReturnAdvance</name>
+                          <id>1203</id>
+                          <visible>true</visible>
+                          <enabled>true</enabled>
+                          <userVisible>
+                            <common>true</common>
+                          </userVisible>
+                          <skipOnInput>true</skipOnInput>
+                          <extendedTooltip>
+                            <name>ReturnAdvanceExtendedTooltip</name>
+                            <id>1204</id>
+                            <visible>true</visible>
+                            <enabled>true</enabled>
+                            <userVisible>
+                              <common>true</common>
+                            </userVisible>
+                            <type>Label</type>
+                            <autoMaxWidth>true</autoMaxWidth>
+                            <autoMaxHeight>true</autoMaxHeight>
+                            <extInfo xsi:type="form:LabelDecorationExtInfo">
+                              <horizontalAlign>Left</horizontalAlign>
+                            </extInfo>
+                          </extendedTooltip>
+                          <commandName>Form.Command.ReturnAdvance</commandName>
+                          <representation>Auto</representation>
+                          <autoMaxWidth>true</autoMaxWidth>
+                          <maxHeight>3</maxHeight>
+                          <horizontalStretch>true</horizontalStretch>
+                          <verticalStretch>true</verticalStretch>
+                          <groupVerticalAlign>Bottom</groupVerticalAlign>
+                          <placementArea>UserCmds</placementArea>
+                          <textColor xsi:type="core:ColorRef">
+                            <color>Style.AccentColor</color>
+                          </textColor>
+                          <backColor xsi:type="core:ColorRef">
+                            <color>Web.HoneyDew</color>
+                          </backColor>
+                          <borderColor xsi:type="core:ColorRef">
+                            <color>Style.AccentColor</color>
+                          </borderColor>
+                          <font xsi:type="core:FontRef">
+                            <font>Style.LargeTextFont</font>
+                            <bold>true</bold>
+                            <italic>false</italic>
+                            <underline>false</underline>
+                            <strikeout>false</strikeout>
+                            <scale>100</scale>
+                          </font>
+                          <representationInContextMenu>Auto</representationInContextMenu>
+                          <shapeRepresentation>WhenActive</shapeRepresentation>
+                        </items>
                         <visible>true</visible>
                         <enabled>true</enabled>
                         <userVisible>
@@ -7128,6 +7180,23 @@ person</value>
       </handler>
     </action>
     <functionalOptions>FunctionalOption.UseConsolidatedRetailSales</functionalOptions>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>ReturnAdvance</name>
+    <title>
+      <key>en</key>
+      <value>Return advance</value>
+    </title>
+    <id>32</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>ReturnAdvance</name>
+      </handler>
+    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

@@ -487,33 +487,16 @@ Procedure Advance(Command)
 	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
 	ObjectParameters.Insert("Branch", Object.Branch);
 	ObjectParameters.Insert("Workstation", Workstation);
-	ObjectParameters.Insert("IsAdvance", True);
+	If ThisObject.isReturn Then
+		ObjectParameters.Insert("IsReturnAdvance", True);
+	Else
+		ObjectParameters.Insert("IsAdvance", True);
+	EndIf;
 	ObjectParameters.Insert("RetailCustomer", Object.RetailCustomer);
 	ObjectParameters.Insert("Company", Object.Company);
 	
 	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
 		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);
-EndProcedure
-
-&AtClient
-Procedure ReturnAdvance(Command)
-	If Not ValueIsFilled(Object.RetailCustomer) Then
-		// "Error. Retail customer is not filled
-		CommonFunctionsClientServer.ShowUsersMessage(R().Error_123);
-		Return;
-	EndIf;
-	
-	OpenFormNotifyDescription = New NotifyDescription("ReturnAdvanceFormClose", ThisObject);
-	ObjectParameters = New Structure();
-	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
-	ObjectParameters.Insert("Branch", Object.Branch);
-	ObjectParameters.Insert("Workstation", Workstation);
-	ObjectParameters.Insert("IsReturnAdvance", True);
-	ObjectParameters.Insert("RetailCustomer", Object.RetailCustomer);
-	ObjectParameters.Insert("Company", Object.Company);
-	
-	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
-		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);	
 EndProcedure
 
 &AtClient
@@ -779,23 +762,17 @@ Async Procedure AdvanceFormClose(Result, AdditionalData) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
-	DocumentParameters = GetAdvanceDocumentParameters(Result.Payments, "Incoming");
-	CreatedDocuments = CreateAdvanceDocumentsAtServer(DocumentParameters);
+	If ThisObject.isReturn Then
+		DocumentParameters = GetAdvanceDocumentParameters(Result.Payments, "Outgoing");
+		CreatedDocuments = CreateAdvanceDocumentsAtServer(DocumentParameters);
+	Else	
+		DocumentParameters = GetAdvanceDocumentParameters(Result.Payments, "Incoming");
+		CreatedDocuments = CreateAdvanceDocumentsAtServer(DocumentParameters);
 	
-	For Each CreatedDocument In CreatedDocuments Do
-		ResultPrint = Await PrintFiscalReceipt(CreatedDocument);
-	EndDo;
-	
-	Object.RetailCustomer = Undefined;
-EndProcedure
-
-&AtClient
-Async Procedure ReturnAdvanceFormClose(Result, AdditionalData) Export
-	If Result = Undefined Then
-		Return;
+		For Each CreatedDocument In CreatedDocuments Do
+			ResultPrint = Await PrintFiscalReceipt(CreatedDocument);
+		EndDo;
 	EndIf;
-	DocumentParameters = GetAdvanceDocumentParameters(Result.Payments, "Outgoing");
-	CreatedDocuments = CreateAdvanceDocumentsAtServer(DocumentParameters);
 	
 	Object.RetailCustomer = Undefined;
 EndProcedure

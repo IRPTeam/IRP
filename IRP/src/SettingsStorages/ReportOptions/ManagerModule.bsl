@@ -58,7 +58,7 @@ Procedure GetDescriptionProcessing(ObjectKey, SettingsKey, SettingsDescription, 
 			ReportOptionObj = QuerySelection.Ref.GetObject();
 		EndIf;
 	Else
-		ReportOptionObj = CreateItem();
+		ReportOptionObj = Catalogs.ReportOptions.CreateItem();
 		ReportOptionObj.ObjectKey = SettingsDescription.ObjectKey;
 		ReportOptionObj.SetNewCode();
 		SettingsDescription.SettingsKey = ReportOptionObj.Code;
@@ -71,7 +71,7 @@ Procedure GetDescriptionProcessing(ObjectKey, SettingsKey, SettingsDescription, 
 EndProcedure
 
 Procedure LoadProcessing(ObjectKey, SettingsKey, Settings, SettingsDescription, User)
-	ReportOption = FindByCode(SettingsKey);
+	ReportOption = Catalogs.ReportOptions.FindByCode(SettingsKey);
 	Settings = ReportOption.Option.Get();
 	If SettingsDescription <> Undefined Then
 		SettingsDescription.Presentation = ReportOption.Description;

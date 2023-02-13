@@ -980,8 +980,9 @@ Scenario: _0850020 check auto card payment cancellation (acquiring)
 		Then "1C:Enterprise" window is opened
 		And I click "Cancel" button
 		Then "1C:Enterprise" window is opened
-		And I click "OK" button
+		And I click "Cancel" button
 		Then "1C:Enterprise" window is opened
+		And I click "OK" button
 		And I click "OK" button
 		And "Payments" table became equal
 			| 'Payment done' | 'Payment type' | 'Amount' |

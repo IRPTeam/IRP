@@ -2413,14 +2413,14 @@ Scenario:  _0154149 create Cash statement
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$CashStatement01541491$$'      | ''            | ''                              | ''          | ''             | ''        | ''             | ''         | ''                             | ''                     |
-			| 'Document registrations records' | ''            | ''                              | ''          | ''             |  ''       |''             | ''         | ''                             | ''                     |
-			| 'Register  "R3010 Cash on hand"' | ''            | ''                              | ''          | ''             | ''        | ''             | ''         | ''                             | ''                     |
-			| ''                               | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''        | ''             | ''         | ''                             | 'Attributes'           |
-			| ''                               | ''            | ''                              | 'Amount'    | 'Company'      | 'Branch'  | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                               | 'Expense'     | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | 'Shop 01' | 'Transit Main' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                               | 'Expense'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | 'Transit Main' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                               | 'Expense'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | 'Transit Main' | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| '$$CashStatement01541491$$'      | ''            | ''                              | ''          | ''             | ''        | ''             | ''         | ''                     | ''                             | ''                     |
+			| 'Document registrations records' | ''            | ''                              | ''          | ''             |  ''       |''              | ''         | ''                     | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"' | ''            | ''                              | ''          | ''             | ''        | ''             | ''         | ''                     | ''                             | ''                     |
+			| ''                               | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''        | ''             | ''         | ''                     | ''                             | 'Attributes'           |
+			| ''                               | ''            | ''                              | 'Amount'    | 'Company'      | 'Branch'  | 'Account'      | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                               | 'Expense'     | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | 'Shop 01' | 'Transit Main' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                               | 'Expense'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | 'Transit Main' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                               | 'Expense'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | 'Transit Main' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |
 		And I select "R3021 Cash in transit (incoming)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal

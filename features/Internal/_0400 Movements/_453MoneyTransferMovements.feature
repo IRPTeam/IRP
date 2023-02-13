@@ -126,17 +126,17 @@ Scenario: _045302 check Money transfer movements by the Register "R3010 Cash on 
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Money transfer 4 dated 19.02.2022 11:18:33' | ''            | ''                    | ''          | ''             | ''             | ''                  | ''         | ''                             | ''                     |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''                  | ''         | ''                             | ''                     |
-			| 'Register  "R3010 Cash on hand"'             | ''            | ''                    | ''          | ''             | ''             | ''                  | ''         | ''                             | ''                     |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                  | ''         | ''                             | 'Attributes'           |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                           | 'Receipt'     | '19.02.2022 11:18:33' | '170'       | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'EUR'      | 'en description is empty'      | 'No'                   |
-			| ''                                           | 'Receipt'     | '19.02.2022 11:18:33' | '178,5'     | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                           | 'Receipt'     | '19.02.2022 11:18:33' | '900'       | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                           | 'Expense'     | '19.02.2022 11:18:33' | '154,08'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                           | 'Expense'     | '19.02.2022 11:18:33' | '900'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                           | 'Expense'     | '19.02.2022 11:18:33' | '900'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |		
+			| 'Money transfer 4 dated 19.02.2022 11:18:33' | ''            | ''                    | ''          | ''             | ''             | ''                  | ''         | ''                     | ''                             | ''                     |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''                  | ''         | ''                     | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'             | ''            | ''                    | ''          | ''             | ''             | ''                  | ''         | ''                     | ''                             | ''                     |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                  | ''         | ''                     | ''                             | 'Attributes'           |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'           | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | 'Receipt'     | '19.02.2022 11:18:33' | '170'       | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'EUR'      | 'EUR'                  | 'en description is empty'      | 'No'                   |
+			| ''                                           | 'Receipt'     | '19.02.2022 11:18:33' | '178,5'     | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'USD'      | 'EUR'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                           | 'Receipt'     | '19.02.2022 11:18:33' | '900'       | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'TRY'      | 'EUR'                  | 'Local currency'               | 'No'                   |
+			| ''                                           | 'Expense'     | '19.02.2022 11:18:33' | '154,08'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                           | 'Expense'     | '19.02.2022 11:18:33' | '900'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                           | 'Expense'     | '19.02.2022 11:18:33' | '900'       | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |		
 	And I close all client application windows
 
 Scenario: _045303 check Money transfer movements by the Register "R3010 Cash on hand" (cash)
@@ -151,17 +151,17 @@ Scenario: _045303 check Money transfer movements by the Register "R3010 Cash on 
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Money transfer 1 dated 19.02.2022 10:35:21' | ''            | ''                    | ''          | ''             | ''                        | ''             | ''         | ''                             | ''                     |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''             | ''         | ''                             | ''                     |
-			| 'Register  "R3010 Cash on hand"'             | ''            | ''                    | ''          | ''             | ''                        | ''             | ''         | ''                             | ''                     |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''             | ''         | ''                             | 'Attributes'           |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                           | 'Receipt'     | '19.02.2022 10:35:21' | '500'       | 'Main Company' | 'Distribution department' | 'Cash desk №2' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                           | 'Receipt'     | '19.02.2022 10:35:21' | '500'       | 'Main Company' | 'Distribution department' | 'Cash desk №2' | 'USD'      | 'en description is empty'      | 'No'                   |
-			| ''                                           | 'Receipt'     | '19.02.2022 10:35:21' | '2 813,75'  | 'Main Company' | 'Distribution department' | 'Cash desk №2' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                           | 'Expense'     | '19.02.2022 10:35:21' | '500'       | 'Main Company' | 'Distribution department' | 'Cash desk №1' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                           | 'Expense'     | '19.02.2022 10:35:21' | '500'       | 'Main Company' | 'Distribution department' | 'Cash desk №1' | 'USD'      | 'en description is empty'      | 'No'                   |
-			| ''                                           | 'Expense'     | '19.02.2022 10:35:21' | '2 813,75'  | 'Main Company' | 'Distribution department' | 'Cash desk №1' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| 'Money transfer 1 dated 19.02.2022 10:35:21' | ''            | ''                    | ''          | ''             | ''                        | ''             | ''         | ''                     | ''                             | ''                     |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''             | ''         | ''                     | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'             | ''            | ''                    | ''          | ''             | ''                        | ''             | ''         | ''                     | ''                             | ''                     |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''             | ''         | ''                     | ''                             | 'Attributes'           |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Account'      | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | 'Receipt'     | '19.02.2022 10:35:21' | '500'       | 'Main Company' | 'Distribution department' | 'Cash desk №2' | 'USD'      | 'USD'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                           | 'Receipt'     | '19.02.2022 10:35:21' | '500'       | 'Main Company' | 'Distribution department' | 'Cash desk №2' | 'USD'      | 'USD'                  | 'en description is empty'      | 'No'                   |
+			| ''                                           | 'Receipt'     | '19.02.2022 10:35:21' | '2 813,75'  | 'Main Company' | 'Distribution department' | 'Cash desk №2' | 'TRY'      | 'USD'                  | 'Local currency'               | 'No'                   |
+			| ''                                           | 'Expense'     | '19.02.2022 10:35:21' | '500'       | 'Main Company' | 'Distribution department' | 'Cash desk №1' | 'USD'      | 'USD'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                           | 'Expense'     | '19.02.2022 10:35:21' | '500'       | 'Main Company' | 'Distribution department' | 'Cash desk №1' | 'USD'      | 'USD'                  | 'en description is empty'      | 'No'                   |
+			| ''                                           | 'Expense'     | '19.02.2022 10:35:21' | '2 813,75'  | 'Main Company' | 'Distribution department' | 'Cash desk №1' | 'TRY'      | 'USD'                  | 'Local currency'               | 'No'                   |
 		And I close all client application windows
 
 
@@ -257,14 +257,14 @@ Scenario: _045306 check Money transfer movements by the Register "R3010 Cash on 
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Money transfer 11 dated 25.08.2022 16:45:16' | ''            | ''                    | ''          | ''             | ''        | ''             | ''         | ''                             | ''                     |
-			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''        | ''             | ''         | ''                             | ''                     |
-			| 'Register  "R3010 Cash on hand"'              | ''            | ''                    | ''          | ''             | ''        | ''             | ''         | ''                             | ''                     |
-			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''             | ''         | ''                             | 'Attributes'           |
-			| ''                                            | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                            | 'Expense'     | '25.08.2022 16:45:16' | '171,2'     | 'Main Company' | 'Shop 02' | 'Cash desk №2' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                            | 'Expense'     | '25.08.2022 16:45:16' | '1 000'     | 'Main Company' | 'Shop 02' | 'Cash desk №2' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                            | 'Expense'     | '25.08.2022 16:45:16' | '1 000'     | 'Main Company' | 'Shop 02' | 'Cash desk №2' | 'TRY'      | 'en description is empty'      | 'No'                   |			
+			| 'Money transfer 11 dated 25.08.2022 16:45:16' | ''            | ''                    | ''          | ''             | ''        | ''             | ''         | ''                     | ''                             | ''                     |
+			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''        | ''             | ''         | ''                     | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'              | ''            | ''                    | ''          | ''             | ''        | ''             | ''         | ''                     | ''                             | ''                     |
+			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''             | ''         | ''                     | ''                             | 'Attributes'           |
+			| ''                                            | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'      | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                            | 'Expense'     | '25.08.2022 16:45:16' | '171,2'     | 'Main Company' | 'Shop 02' | 'Cash desk №2' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                            | 'Expense'     | '25.08.2022 16:45:16' | '1 000'     | 'Main Company' | 'Shop 02' | 'Cash desk №2' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                            | 'Expense'     | '25.08.2022 16:45:16' | '1 000'     | 'Main Company' | 'Shop 02' | 'Cash desk №2' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |			
 		And I close all client application windows
 
 Scenario: _045307 check Money transfer movements by the Register "R3021 Cash in transit (incoming)" (cash in)
@@ -302,14 +302,14 @@ Scenario: _045308 check Money transfer movements by the Register "R3010 Cash on 
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Money transfer 13 dated 25.08.2022 16:46:25' | ''            | ''                    | ''          | ''             | ''        | ''                   | ''         | ''                             | ''                     |
-			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''        | ''                   | ''         | ''                             | ''                     |
-			| 'Register  "R3010 Cash on hand"'              | ''            | ''                    | ''          | ''             | ''        | ''                   | ''         | ''                             | ''                     |
-			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                   | ''         | ''                             | 'Attributes'           |
-			| ''                                            | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'            | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                            | 'Expense'     | '25.08.2022 16:46:25' | '171,2'     | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                            | 'Expense'     | '25.08.2022 16:46:25' | '1 000'     | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                            | 'Expense'     | '25.08.2022 16:46:25' | '1 000'     | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| 'Money transfer 13 dated 25.08.2022 16:46:25' | ''            | ''                    | ''          | ''             | ''        | ''                   | ''         | ''                     | ''                             | ''                     |
+			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''        | ''                   | ''         | ''                     | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'              | ''            | ''                    | ''          | ''             | ''        | ''                   | ''         | ''                     | ''                             | ''                     |
+			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                   | ''         | ''                     | ''                             | 'Attributes'           |
+			| ''                                            | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'            | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                            | 'Expense'     | '25.08.2022 16:46:25' | '171,2'     | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                            | 'Expense'     | '25.08.2022 16:46:25' | '1 000'     | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                            | 'Expense'     | '25.08.2022 16:46:25' | '1 000'     | 'Main Company' | 'Shop 02' | 'Pos cash account 1' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |
 		And I close all client application windows
 
 Scenario: _045309 check Money transfer movements by the Register "R3021 Cash in transit (incoming)" (cash out)

@@ -88,14 +88,14 @@ Scenario: _044001 check Cash expense movements by the Register "R3010 Cash on ha
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash expense 1 dated 07.09.2020 19:25:17' | ''            | ''                    | ''          | ''             | ''        | ''                  | ''         | ''                             | ''                     |
-			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''        | ''                  | ''         | ''                             | ''                     |
-			| 'Register  "R3010 Cash on hand"'           | ''            | ''                    | ''          | ''             | ''        | ''                  | ''         | ''                             | ''                     |
-			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                  | ''         | ''                             | 'Attributes'           |
-			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '20,2'      | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '118'       | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '118'       | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| 'Cash expense 1 dated 07.09.2020 19:25:17' | ''            | ''                    | ''          | ''             | ''        | ''                  | ''         | ''                     | ''                             | ''                     |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''        | ''                  | ''         | ''                     | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'           | ''            | ''                    | ''          | ''             | ''        | ''                  | ''         | ''                     | ''                             | ''                     |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                  | ''         | ''                     | ''                             | 'Attributes'           |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'           | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '20,2'      | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '118'       | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '118'       | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |
 	And I close all client application windows
 
 

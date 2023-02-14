@@ -25,6 +25,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Object.Workstation = Parameters.Workstation;
 	Object.Discount = Parameters.Discount;
 	ThisObject.IsAdvance = Parameters.IsAdvance;
+	ThisObject.IsReturnAdvance = Parameters.IsReturnAdvance;
 	
 	isReturn = Parameters.isReturn;
 	RetailBasis = Parameters.RetailBasis;
@@ -37,7 +38,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Items.Payment_ReturnPaymentByPaymentCard.Visible = isReturn;
 	Items.Payment_PayByPaymentCard.Visible = Not isReturn;
 	
-	If Not ThisObject.IsAdvance And ValueIsFilled(Parameters.RetailCustomer) Then
+	Items.Cashback.Visible = Not ThisObject.IsReturnAdvance;
+	Items.Advance.Visible = ThisObject.IsReturnAdvance;
+	
+	If Not ThisObject.IsAdvance And Not ThisObject.IsReturnAdvance And ValueIsFilled(Parameters.RetailCustomer) Then
 		AdvanceAmount = GetAdvanceByRetailCustomer(Parameters.Company, Parameters.Branch, Parameters.RetailCustomer);
 		If ValueIsFilled(AdvanceAmount) Then
 			AdvancePaymentType = GetAdvancePaymentType();
@@ -49,6 +53,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 				AdvancePayment.PaymentTypeEnum = AdvancePaymentType.Type;
 			EndIf;
 		EndIf;
+	EndIf;
+	
+	If ThisObject.IsReturnAdvance And ValueIsFilled(Parameters.RetailCustomer) Then
+		ThisObject.AdvanceBalance = GetAdvanceByRetailCustomer(Parameters.Company, Parameters.Branch, Parameters.RetailCustomer);
 	EndIf;
 EndProcedure
 
@@ -101,8 +109,10 @@ EndFunction
 &AtServer
 Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	ErrorMessages = New Array();
-
-	If Not ThisObject.IsAdvance Then
+	
+	IsIncomingOutgoingAdvance = ThisObject.IsAdvance Or ThisObject.IsReturnAdvance;
+	
+	If Not IsIncomingOutgoingAdvance Then
 		If ThisObject.PaymentsAmountTotal < Object.Amount Then
 			ErrorMessages.Add(R().POS_s1);
 		EndIf;
@@ -120,7 +130,7 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	CardAmounts = PaymentsValue.Copy(CardPaymentFilter, "Amount");
 	CardAmount = CardAmounts.Total("Amount");
 	
-	If Not ThisObject.IsAdvance Then
+	If Not IsIncomingOutgoingAdvance Then
 		If CardAmount > Object.Amount Then
 			ErrorMessages.Add(R().POS_s2);
 		EndIf;
@@ -539,7 +549,9 @@ Procedure FillPaymentsAtServer()
 	BankPaymentTypesValue = GetBankPaymentTypesValue(Object.Branch);
 	ValueToFormAttribute(BankPaymentTypesValue, "BankPaymentTypes");
 
-	If Not ThisObject.IsAdvance Then
+	IsIncomingOutgoingAdvance = ThisObject.IsAdvance Or ThisObject.IsReturnAdvance;
+	
+	If Not IsIncomingOutgoingAdvance Then
 		PaymentAgentValue = GetPaymentAgentTypesValue(Object.Branch);
 		ValueToFormAttribute(PaymentAgentValue, "PaymentAgentTypes");
 	EndIf;
@@ -675,7 +687,7 @@ Procedure FillPayments(Result, AdditionalParameters) Export
 			Row.Account = DefaultPayment[0].Account;
 			
 			If isReturn Then
-				Row.RRNCode = GetRRNCode(Row.PaymentType, True); // String
+				Row.RRNCode = GetRRNCode(Row.PaymentType); // String
 			EndIf;
 			
 		ElsIf Result.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.PaymentAgent") Then
@@ -818,18 +830,14 @@ EndProcedure
 //  OnlyFirst - Boolean - Only first
 // 
 // Returns:
-//  Array, String - Get RRNCode
+//  String - Get RRNCode
 &AtServer
-Function GetRRNCode(PaymentType, OnlyFirst = False)
+Function GetRRNCode(PaymentType)
 	Rows = RetailBasis.Payments.FindRows(New Structure("PaymentType", PaymentType));
-	Array = New Array;
 	For Each Row In Rows Do
-		If OnlyFirst Then
-			Return Row.RRNCode;
-		EndIf;
-		Array.Add(Row.RRNCode);
+		Return Row.RRNCode;
 	EndDo;
-	Return Array;
+	Return "";
 EndFunction
 
 #EndRegion

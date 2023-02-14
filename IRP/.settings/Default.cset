@@ -172,6 +172,9 @@
     "common-module-name-cached": {
       "enabled": false
     },
+    "common-module-name-full-access": {
+      "enabled": false
+    },
     "right-view-event-log": {
       "enabled": false
     },
@@ -188,6 +191,9 @@
       "enabled": false
     },
     "form-module-pragma": {
+      "enabled": false
+    },
+    "common-module-name-global-client": {
       "enabled": false
     },
     "right-interactive-delete-marked-predefined-data": {

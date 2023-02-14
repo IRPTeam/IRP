@@ -154,6 +154,20 @@
   <fullTextSearch>Use</fullTextSearch>
   <useInTotals>true</useInTotals>
  </dimensions>
+ <dimensions uuid="2922c774-6f7a-4e69-9bab-26997d519c63">
+  <name>TransactionCurrency</name>
+  <synonym>
+   <key>en</key>
+   <value>Transaction currency</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
  <dimensions uuid="04ae0cdf-e083-4fd0-8082-67a3cb0569f6">
   <name>Partner</name>
   <synonym>

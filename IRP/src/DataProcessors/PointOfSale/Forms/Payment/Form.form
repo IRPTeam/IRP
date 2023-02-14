@@ -845,8 +845,6 @@
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
        <wrap>true</wrap>
-       <clearButton>true</clearButton>
-       <listChoiceMode>true</listChoiceMode>
        <chooseType>true</chooseType>
        <typeDomainEnabled>true</typeDomainEnabled>
        <textEdit>true</textEdit>
@@ -1088,6 +1086,65 @@
      <contextMenu>
       <name>CashbackContextMenu</name>
       <id>155</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>LabelField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:LabelFieldExtInfo">
+      <autoMaxHeight>true</autoMaxHeight>
+      <horizontalStretch>true</horizontalStretch>
+      <font xsi:type="core:FontRef">
+       <font>Style.ExtraLargeTextFont</font>
+       <bold>true</bold>
+       <italic>false</italic>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>Advance</name>
+     <id>267</id>
+     <titleFont xsi:type="core:FontRef">
+      <font>Style.ExtraLargeTextFont</font>
+      <bold>true</bold>
+      <italic>false</italic>
+      <underline>false</underline>
+      <strikeout>false</strikeout>
+     </titleFont>
+     <visible>true</visible>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>AdvanceBalance</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AdvanceExtendedTooltip</name>
+      <id>269</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AdvanceContextMenu</name>
+      <id>268</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -3525,6 +3582,40 @@
    <common>true</common>
   </edit>
  </attributes>
+ <attributes>
+  <name>IsReturnAdvance</name>
+  <title>
+   <key>en</key>
+   <value>Is return advance</value>
+  </title>
+  <id>45</id>
+  <valueType>
+   <types>Boolean</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>AdvanceBalance</name>
+  <title>
+   <key>en</key>
+   <value>Advance</value>
+  </title>
+  <id>46</id>
+  <valueType>
+   <types>DefinedType.typeAmount</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>Card</name>
   <title>
@@ -4170,6 +4261,12 @@
  </parameters>
  <parameters>
   <name>isReturn</name>
+  <valueType>
+   <types>Boolean</types>
+  </valueType>
+ </parameters>
+ <parameters>
+  <name>IsReturnAdvance</name>
   <valueType>
    <types>Boolean</types>
   </valueType>

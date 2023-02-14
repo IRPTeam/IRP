@@ -374,7 +374,7 @@ Scenario: _034908 check return with discount from POS (first select basis docume
 			| 'Dress' | ''             | 'M/White'  | ''        | '520,00' | '50,000'   | '6 760,00' | '19 240,00' |
 			| 'Dress' | ''             | 'L/Green'  | ''        | '550,00' | '11,000'   | '1 155,00' | '4 895,00'  |
 	* Payment
-		And I click "Payment (+)" button
+		And I click "Payment Return" button
 		Then "Payment" window is opened
 		And I click the button named "Enter"
 		And I close all client application windows

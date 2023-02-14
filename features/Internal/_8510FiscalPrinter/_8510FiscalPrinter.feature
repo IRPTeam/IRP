@@ -434,6 +434,17 @@ Scenario: _0850000 preparation (fiscal printer)
 			| 'Acquiring terminal' |
 		And I select current line in "List" table
 		And I click "Save and close" button
+		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'POS Terminal 2' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Acquiring"
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Acquiring terminal' |
+		And I select current line in "List" table
+		And I click "Save and close" button
 		And I close all client application windows
 		
 
@@ -567,7 +578,7 @@ Scenario: _0850015 create retail sales receipt from POS (own stock, card 02)
 		Then "Payment" window is opened
 		And I click "Card (*)" button
 		Then "Payment types" window is opened
-		And I click "Page_1" hyperlink
+		And I click "Page_2" hyperlink
 		Then "Payment" window is opened
 		And I click the button named "Enter"
 		And I close all client application windows	
@@ -617,7 +628,7 @@ Scenario: _0850016 create retail sales receipt from POS (own stock, cash and car
 		Then "Payment" window is opened
 		And I click "Card (*)" button
 		Then "Payment types" window is opened
-		And I click "Page_1" hyperlink
+		And I click "Page_2" hyperlink
 		And I activate field named "PaymentsAmountString" in "Payments" table
 		And I select current line in "Payments" table
 		And I click "4" button
@@ -736,7 +747,446 @@ Scenario: _0850019 create retail sales receipt from POS (own stock, card 03, use
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '620.00'
 		
+Scenario: _0850020 check auto payment form by acquiring (Enter)
+	And I close all client application windows
+	And In the command interface I select "Retail" "Point of sale"
+	* Select item
+		And I click "Search by barcode (F7)" button
+		And I input "23455677788976667" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check auto payment by card
+		And I click "Payment (+)" button
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_0"
+		And I click "5" button
+		And I click "0" button
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_1"
+		And I click the button named "Enter"
+		And I click "OK" button
+		And I click "OK" button
+		And Delay 10
+	* Check fiscal log	
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="100"'
+	* Check acquiring log
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '50.00'	
+		And I check "$ParsingResult1$" with "6" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "6" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "6" and data in "Out.Parameter8" contains '50.00'	
+	* Check RRN
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Σ'      |
+			| '100,00' |
+		And I select current line in "List" table
+		And I move to "Payments" tab
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term'    | 'Account'        | 'Percent' | 'RRN Code' |
+			| '1' | '50,00'  | '0,50'       | 'Card 04'      | ''                 | 'Bank term 03' | 'POS Terminal 2' | '1,00'    | '*'        |
+			| '2' | '50,00'  | '0,50'       | 'Card 03'      | ''                 | 'Bank term 03' | 'POS Terminal'   | '1,00'    | '*'        |
+		And I go to the first line in "Payments" table
+		And I delete "$$RRN1$$" variable
+		And I delete "$$RRN2$$" variable
+		And I save the value of "RRN Code" field of "Payments" table as "$$RRN1$$"
+		And I go to the last line in "Payments" table
+		And I save the value of "RRN Code" field of "Payments" table as "$$RRN2$$"
+		And I delete "$$NumberRetailSalesReceipt5$$" variable
+		And I delete "$$RetailSalesReceipt5$$" variable
+		And I save the value of "Number" field as "$$NumberRetailSalesReceipt5$$"
+		And I save the window as "$$RetailSalesReceipt5$$"
+	And I close all client application windows
+	
+Scenario: _0850022 check than RRN not copy
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	And I go to line in "List" table
+		| 'Number'                        |
+		| '$$NumberRetailSalesReceipt5$$' |
+	And in the table "List" I click the button named "ListContextMenuCopy"
+	And I click "OK" button
+	Then "Retail sales receipt (create)" window is opened
+	And I move to "Payments" tab
+	And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term'    | 'Account'        | 'Percent' | 'RRN Code' |
+			| '1' | '50,00'  | '0,50'       | 'Card 04'      | ''                 | 'Bank term 03' | 'POS Terminal 2' | '1,00'    | ''         |
+			| '2' | '50,00'  | '0,50'       | 'Card 03'      | ''                 | 'Bank term 03' | 'POS Terminal'   | '1,00'    | ''         |
+	And I close all client application windows
+	
+Scenario: _0850023 check return payment by card and cash (sales by card)
+	And I close all client application windows
+	And In the command interface I select "Retail" "Point of sale"
+	* Select basis document
+		And I click the button named "Return"
+		And I click Select button of "Retail sales receipt (basis)" field
+		And I go to line in "List" table
+			| 'Retail sales receipt'    |
+			| '$$RetailSalesReceipt5$$' |
+		And I select current line in "List" table
+	* Payment return
+		And I click "Payment Return" button
+		Then "Payment" window is opened
+		And I click "Card (*)" button
+		Then "Payment types" window is opened
+		And I click the hyperlink named "Page_0"
+		Then "Payment" window is opened
+		And I click "5" button
+		And I click "0" button
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_1"
+		Then "Payment" window is opened
+		And I click "4" button
+		And I click "0" button
+		And I click "Cash (/)" button
+		And "Payments" table became equal
+			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode'  |
+			| '⚪'            | 'Card 04'      | '50,00'  | '$$RRN1$$' |
+			| '⚪'            | 'Card 03'      | '40,00'  | '$$RRN2$$' |
+			| ' '            | 'Cash'         | '10,00'  | ''         |
+		And I go to line in "Payments" table
+			| 'Amount' | 'Payment done' | 'Payment type' | 'RRNCode'  |
+			| '50,00'  | '⚪'            | 'Card 04'      | '$$RRN1$$' |
+		And I activate "Payment type" field in "Payments" table
+		And I click "Return" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I click the button named "Enter"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+	* Check acquiring log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '40.00'
+		And I check "$ParsingResult1$" with "1" and data in "In.Parameter6" contains '$$RRN2$$'	
+		And I check "$ParsingResult1$" with "6" and method is "ReturnPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "6" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+		And I check "$ParsingResult1$" with "6" and data in "Out.Parameter8" contains '50.00'
+		And I check "$ParsingResult1$" with "6" and data in "In.Parameter6" contains '$$RRN1$$'		
+	* Check fiscal log
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="90"'
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'Cash="10"'	
+	And I close all client application windows
+			
+Scenario: _0850024 return by card without basis document (without RRN)
+	And I close all client application windows
+	And In the command interface I select "Retail" "Point of sale"
+	* Select item
+		And I click "Search by barcode (F7)" button
+		And I input "23455677788976667" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Return
+		And I click the button named "Return"
+		And I click "Payment Return" button
+		And I click "Card (*)" button
+		Then "Payment types" window is opened
+		And I click the hyperlink named "Page_1"
+		And "Payments" table became equal
+			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode' |
+			| '⚪'            | 'Card 03'      | '200,00' | ''        |
+		Then "Payment" window is opened
+		And I click "Return" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I click "Enter" button
+	* Check
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Amount' |
+			| '200,00' |
+		And I select current line in "List" table
+		And I move to "Payments" tab
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Postponed payment' | 'Bank term'    | 'Account'      | 'Percent' | 'RRN Code' |
+			| '1' | '200,00' | ''           | 'Card 03'      | ''                 | 'No'                | 'Bank term 03' | 'POS Terminal' | '1,00'    | ''         |
+		And I close all client application windows
+	* Check acquiring log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '200.00'
+		And I check "$ParsingResult1$" with "1" and data in "In.Parameter6" contains ''								
+	
+// Scenario: _08500241 return by card without basis document (with RRN)
+// 	And I close all client application windows
+// 	And In the command interface I select "Retail" "Point of sale"
+// 	* Select item
+// 		And I click "Search by barcode (F7)" button
+// 		And I input "23455677788976667" text in the field named "InputFld"
+// 		And I click the button named "OK"
+// 		And I activate "Price" field in "ItemList" table
+// 		And I select current line in "ItemList" table
+// 		And I input "200,00" text in "Price" field of "ItemList" table
+// 		And I finish line editing in "ItemList" table
+// 	* Return
+// 		And I click the button named "Return"
+// 		And I click "Payment Return" button
+// 		And I click "Card (*)" button
+// 		Then "Payment types" window is opened
+// 		And I click the hyperlink named "Page_1"
+// 		And "Payments" table became equal
+// 			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode' |
+// 			| '⚪'            | 'Card 03'      | '200,00' | 'Array'   |
+		
+		
 
+Scenario: _0850020 check auto card payment cancellation (acquiring)
+	And I close all client application windows
+	And In the command interface I select "Retail" "Point of sale"
+	* Select item
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I finish line editing in "ItemList" table
+	* Card payment
+		And I click "Payment (+)" button
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_0"
+		And I click "9" button
+		And I click "0" button
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_1"
+		And I go to line in "Payments" table
+			| 'Amount' | 'Payment done' | 'Payment type' |
+			| '90,00'  | '⚪'            | 'Card 04'      |
+		And I activate "Payment type" field in "Payments" table
+	* Check auto card cancellation
+		And I click "Pay" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		* Check acquiring log
+			And Delay 5
+			And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+			And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
+			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
+			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '90.00'
+		And I click "Enter" button
+		Then "1C:Enterprise" window is opened
+		And I click "Cancel" button
+		Then "1C:Enterprise" window is opened
+		And I click "Cancel" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I click "OK" button
+		And "Payments" table became equal
+			| 'Payment done' | 'Payment type' | 'Amount' |
+			| '⚪'            | 'Card 04'      | '90,00'  |
+			| '⚪'            | 'Card 03'      | '430,00' |
+	* Check acquiring log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "CancelPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОТМЕНА ПЛАТЕЖА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '90.00'	
+	* Close payment form
+		Then "Payment" window is opened
+		And I click "X" button
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I close all client application windows
+						
+Scenario: _0850021 check the form of payment by card
+	And I close all client application windows
+	And In the command interface I select "Retail" "Point of sale"
+	* Select item
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I finish line editing in "ItemList" table
+	* Card payment
+		And I click "Payment (+)" button
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_0"
+		And I click "9" button
+		And I click "0" button
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_1"
+	* Close payment window
+		And I click "X" button
+		Then I wait "Payment" window closing in "5" seconds
+	* Add card payment
+		And I click "Payment (+)" button
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_0"
+		And I click "5" button
+		And I click "0" button
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_0"
+		And I click "4" button
+		And I click "0" button
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_1"
+	* Payment by first card
+		And I go to line in "Payments" table
+			| 'Amount' | 'Payment done' | 'Payment type' |
+			| '50,00'  | '⚪'            | 'Card 04'      |
+		And I activate "Payment type" field in "Payments" table
+		And I click "Pay" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+	* Check that the payment window will not close
+		And I click "X" button	
+		Then there are lines in TestClient message log
+			|'Cancel all payment before close form.'|		
+	* Cancel payment
+		And I go to line in "Payments" table
+			| 'Amount' | 'Payment type' |
+			| '50,00'  | 'Card 04'      |
+		And I click "Cancel" button
+		And I click "OK" button
+	* Check acquiring log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "CancelPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОТМЕНА ПЛАТЕЖА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '50.00'	
+	* Repayment in case of failure to pass
+		And I click the button named "Enter"
+		Then "1C:Enterprise" window is opened
+		And I click "Cancel" button
+		Then "1C:Enterprise" window is opened
+		And I click "Retry" button
+		And I click "OK" button
+		And I click "OK" button
+		And I click "OK" button
+	* Check acquiring log
+		And Delay 10
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '430.00'	
+		And I check "$ParsingResult1$" with "6" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "6" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "6" and data in "Out.Parameter8" contains '40.00'
+		And I check "$ParsingResult1$" with "11" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "11" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "11" and data in "Out.Parameter8" contains '50.00'				
+	* Check fiscal log	
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="520"'
+	And I close all client application windows
+	
+								
+Scenario: _0850027 check acquiring in BP
+	And I close all client application windows
+	* Create BP
+		Given I open hyperlink "e1cib/list/Document.BankPayment"	
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "Return to customer by POS" exact value from "Transaction type" drop-down list
+		And I click Choice button of the field named "Account"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'POS Terminal 2' |
+		And I select current line in "List" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Lomaniti'    |
+		And I select current line in "List" table
+		And I activate "Payment terminal" field in "PaymentList" table
+		And I click choice button of "Payment terminal" attribute in "PaymentList" table
+		And I select current line in "List" table
+		And I activate "Payment type" field in "PaymentList" table
+		And I click choice button of "Payment type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 03'     |
+		And I select current line in "List" table
+		And I finish line editing in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I click "Post" button
+		And I click "Return to card" button
+		Then "Payment by acquiring" window is opened
+		And I input "9876655775" text in the field named "RRNCode"
+		And I click "Return" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+	* Check acquiring log
+		And Delay 10
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '100.00'
+		And I check "$ParsingResult1$" with "1" and data in "In.Parameter6" contains '9876655775'	
+				
+
+					
+Scenario: _0850028 check acquiring in BR
+	And I close all client application windows
+	* Create BR
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"	
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "Payment from customer by POS" exact value from "Transaction type" drop-down list
+		And I click Choice button of the field named "Account"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'POS Terminal 2' |
+		And I select current line in "List" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Lomaniti'    |
+		And I select current line in "List" table
+		And I activate "Payment terminal" field in "PaymentList" table
+		And I click choice button of "Payment terminal" attribute in "PaymentList" table
+		And I select current line in "List" table
+		And I activate "Payment type" field in "PaymentList" table
+		And I click choice button of "Payment type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Card 03'     |
+		And I select current line in "List" table
+		And I finish line editing in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I click "Post" button
+		And I click "Pay by card" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I move to "Other" tab
+		And I save the value of "RRN Code" field as "RRNBankReceipt2"		
+	* Check acquiring log
+		And Delay 10
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '100.00'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter6" contains '$RRNBankReceipt2$'		
+				
+				
 
 Scenario: _0850025 sales return (cash)
 	And I close all client application windows
@@ -757,7 +1207,7 @@ Scenario: _0850025 sales return (cash)
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML6"
 				
-Scenario: _0850025 sales return (bank credit)
+Scenario: _08500251 sales return (bank credit)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
 	* Select Retail sales receipt
@@ -887,3 +1337,49 @@ Scenario: _0260152 close sessiion
 		And I check "$ParsingResult$" with "0" and method is "CloseShift"	
 				
 
+Scenario: _0260153 check hardware parameter saving
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.Hardware"
+	* Create hardware
+		And I click "Create" button
+		And I input "Test" text in the field named "Description"
+		And I select "Fiscal printer" exact value from "Types of Equipment" drop-down list
+		And I click Choice button of the field named "Driver"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'KKT_3004'    |
+		And I select current line in "List" table
+		And I click "Save" button
+		And I move to "Driver settings" tab
+		And in the table "DriverParameter" I click "Reload settings" button
+		And I move to "Predefined settings" tab
+		And in the table "ConnectParameters" I click "Load settings" button
+		And "ConnectParameters" table became equal
+			| '#' | 'Name' | 'Value'  |
+			| '1' | 'Show' | 'Yes'    |		
+	* Check parameter saving
+		And I activate field named "ConnectParametersValue" in "ConnectParameters" table
+		And I select current line in "ConnectParameters" table
+		And I go to line in "" table
+			| ''        |
+			| 'Boolean' |
+		And I select current line in "" table
+		And I click choice button of the attribute named "ConnectParametersValue" in "ConnectParameters" table
+		And I select current line in "" table
+		And I select "No" exact value from the drop-down list named "ConnectParametersValue" in "ConnectParameters" table
+		And I activate field named "ConnectParametersName" in "ConnectParameters" table
+		And I finish line editing in "ConnectParameters" table
+		And I click "Save" button
+		And in the table "ConnectParameters" I click "Write settings" button
+		And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test'        |
+		And I select current line in "List" table
+		And "ConnectParameters" table became equal
+			| '#' | 'Name' | 'Value'  |
+			| '1' | 'Show' | 'No'     |	
+		And I close all client application windows
+			
+				
+			

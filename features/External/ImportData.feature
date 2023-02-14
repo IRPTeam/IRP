@@ -492,11 +492,13 @@ Scenario: Create catalog BankTerms 03 and PaymentType Card 03 objects (for Shop 
 	And I check or create catalog "CashAccounts" objects:
 		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'Currency'                                                           | 'Type'                      | 'BankName' | 'Company'                                                           | 'Number' | 'TransitAccount' | 'Branch'                                                                | 'CommissionIsSeparate' | 'ReceiptingAccount'                                                    | 'IntegrationSetting' | 'CashAccount' | 'FinancialMovementType' | 'Acquiring' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
 		| 'e1cib/data/Catalog.CashAccounts?ref=b79392df2896a84411eda2cd071d6059' | 'False'        | 15     | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'Enum.CashAccountTypes.POS' | ''         | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''       | ''               | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' | 'False'                | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186b' | ''                   | ''            | ''                      | ''          | 'POS Terminal'   | ''                 | ''               | ''               |
-
+		| 'e1cib/data/Catalog.CashAccounts?ref=b794e3cbd36876e811eda866939f00ce' | 'False'        | 16     | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'Enum.CashAccountTypes.POS'     | ''         | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''             | ''                                                                     | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd4' | 'False'                | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186b' | ''                   | ''            | ''                      | ''                                                                 | 'POS Terminal 2'    | ''                 | ''               | ''                     |
+		
 	And I check or create catalog "PaymentTypes" objects:
 		| 'Ref'                                                                  | 'DeletionMark' | 'Parent' | 'Code' | 'Type'                   | 'Icon'                                  | 'isIconSet' | 'Partner' | 'LegalName' | 'Agreement' | 'LegalNameContract' | 'Branch' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
 		| 'e1cib/data/Catalog.PaymentTypes?ref=b79392df2896a84411eda2cd071d605a' | 'False'        | ''       | 16     | 'Enum.PaymentTypes.Card' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | ''        | ''          | ''          | ''                  | ''       | 'Card 03'        | ''                 | ''               | ''               |
-	
+		| 'e1cib/data/Catalog.PaymentTypes?ref=b794e3cbd36876e811eda866939f00cd' | 'False'        | ''       | 17     | 'Enum.PaymentTypes.Card' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | ''        | ''          | ''          | ''                  | ''       | 'Card 04'        | ''                 | ''               | ''               |
+
 	And I check or create catalog "BankTerms" objects:
 		| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
 		| 'e1cib/data/Catalog.BankTerms?ref=b79392df2896a84411eda2cd071d605b' | 'False'        | 3      | 'Bank term 03'   | ''                 | ''               | ''               |
@@ -504,6 +506,7 @@ Scenario: Create catalog BankTerms 03 and PaymentType Card 03 objects (for Shop 
 	And I refill object tabular section "PaymentTypes":
 		| 'Ref'                                                               | 'PaymentType'                                                          | 'Account'                                                              | 'Percent' |
 		| 'e1cib/data/Catalog.BankTerms?ref=b79392df2896a84411eda2cd071d605b' | 'e1cib/data/Catalog.PaymentTypes?ref=b79392df2896a84411eda2cd071d605a' | 'e1cib/data/Catalog.CashAccounts?ref=b79392df2896a84411eda2cd071d6059' | 1         |
+		| 'e1cib/data/Catalog.BankTerms?ref=b79392df2896a84411eda2cd071d605b' | 'e1cib/data/Catalog.PaymentTypes?ref=b794e3cbd36876e811eda866939f00cd' | 'e1cib/data/Catalog.CashAccounts?ref=b794e3cbd36876e811eda866939f00ce' | 1         |
 
 	And I check or create information register "BranchBankTerms" records:
 		| 'Branch'                                                                | 'BankTerm'                                                          |
@@ -1605,6 +1608,36 @@ Scenario: Create information register ItemSegments records (discount)
 		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade822' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf1277d18ed8c' |
 		| 'e1cib/data/Catalog.ItemSegments?ref=b790eb46b44093f611ed86e848ade822' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf1277d18ed8d' |
 
+
+Scenario: Create catalog EmployeePositions objects
+
+	And I check or create catalog "EmployeePositions" objects:
+		| 'Ref'                                                                       | 'DeletionMark' | 'Code' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ab' | 'False'        | 1      | 'Manager'        | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' | 'False'        | 2      | 'Sales person'   | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ad' | 'False'        | 3      | 'Accountant'     | ''                 | ''               | ''               |
+
+Scenario: Create information register T9510S_Staffing records
+
+	And I check or create information register "T9510S_Staffing" records:
+		| 'Period'             | 'Employee'                                                         | 'Fired' | 'Company'                                                           | 'Branch'                                                                | 'Position'                                                                  |
+		| '01.01.2023 0:00:00' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf115bcc9c610' | 'False' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ab' |
+		| '01.01.2023 0:00:00' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf115bcc9c612' | 'False' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' |
+		| '05.01.2023 0:00:00' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf115bcc9c611' | 'False' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ab' |
+		| '10.01.2023 0:00:00' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf115bcc9c612' | 'False' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' | 'e1cib/data/Catalog.EmployeePositions?ref=b794e3cbd36876e811eda861f577c0ac' |
+		| '20.01.2023 0:00:00' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf115bcc9c610' | 'True'  | ''                                                                  | ''                                                                      | ''                                                                          |
+
+Scenario: Create information register T9530S_WorkDays records
+
+	And I check or create information register "T9530S_WorkDays" records:
+		| 'BeginDate'          | 'EndDate'            | 'AccrualAndDeductionType'                                                          | 'CountDays' |
+		| '01.01.2023 0:00:00' | '31.01.2023 0:00:00' | 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 20          |
+
+Scenario: Create catalog AccrualAndDeductionTypes objects
+
+	And I check or create catalog "AccrualAndDeductionTypes" objects:
+		| 'Ref'                                                                              | 'DeletionMark' | 'Code' | 'AlgorithmID'    | 'Priority' | 'Periodicity'                                  | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.AccrualAndDeductionTypes?ref=b794e3cbd36876e811eda864ba51300b' | 'False'        | 1      | '_MonthlySalary' |            | 'Enum.AccrualAndDeductionPeriodicity.ByPeriod' | 'Salary'         | ''                 | ''               | ''               |
 
 Scenario: Create catalog IntegrationSettings objects
 

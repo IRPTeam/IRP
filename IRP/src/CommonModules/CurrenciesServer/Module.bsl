@@ -371,9 +371,12 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 			
 		For Each TransactionRow In TransactionRows Do
 			For Each Row In QueryTable Do
-				If UseKey And ValueIsFilled(TransactionRow.Key) And 
-					Row.Key = TransactionRow.Key Then
-					Row.TransactionCurrency = TransactionRow.Currency;
+				If UseKey And ValueIsFilled(TransactionRow.Key) Then 
+					If Row.Key = TransactionRow.Key Then
+						Row.TransactionCurrency = TransactionRow.Currency;
+					Else
+						Continue;
+					EndIf;
 				Else
 					Row.TransactionCurrency = TransactionRow.Currency;
 				EndIf;

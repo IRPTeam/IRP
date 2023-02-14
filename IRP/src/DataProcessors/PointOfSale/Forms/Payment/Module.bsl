@@ -37,7 +37,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Items.Payment_ReturnPaymentByPaymentCard.Visible = isReturn;
 	Items.Payment_PayByPaymentCard.Visible = Not isReturn;
 	
-	Items.Cashback.Visible = ThisObject.IsAdvance And isReturn;
+	Items.Cashback.Visible = Not(ThisObject.IsAdvance And isReturn);
 	Items.Advance.Visible = ThisObject.IsAdvance And Not isReturn;
 	
 	If Not ThisObject.IsAdvance And ValueIsFilled(Parameters.RetailCustomer) Then

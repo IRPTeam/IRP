@@ -79,6 +79,13 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ReturnPage.Visible =	Form.isReturn;
 	
 	Form.Title = R().InfoMessage_POS_Title + ?(Form.isReturn, ": " + R().InfoMessage_ReturnTitle, "");
+	
+	// Additional settings
+	Form.Items.Return.Enabled = UserSettingsServer.PointOfSale_AdditionalSettings_CreateReturn(Form.AdminUser);
+	
+	ChangePrice = UserSettingsServer.PointOfSale_AdditionalSettings_ChangePrice(Form.AdminUser);
+	Form.Items.ItemListPrice.Enabled = ChangePrice;
+	Form.Items.ItemListTotalAmount.Enabled = ChangePrice;
 EndProcedure
 
 #Region AGREEMENT
@@ -393,7 +400,9 @@ Procedure SearchByBarcode(Command, Barcode = "")
 		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
 		PriceType = AgreementInfo.PriceType;
 	EndIf;
-	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject, PriceType);
+	Settings = BarcodeClient.GetBarcodeSettings();
+	Settings.ServerSettings.SearchUserByBarcode = True;
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject, PriceType, Settings);
 EndProcedure
 
 &AtClient

@@ -67,11 +67,6 @@ Procedure MetadataTreeValueOnChange(Item)
 	CurrentRow.Use = ValueIsFilled(CurrentRow.Value);
 EndProcedure
 
-&AtClient
-Procedure FilterByAttributeName(Command)
-	Return;
-EndProcedure
-
 &AtServer
 Procedure SaveMetadataTree()
 	ArrayOfSavedAttributes = GetArrayOfSavedAttributes();
@@ -102,11 +97,6 @@ Procedure CollectSettingsFromTree(TreeRows, TableOfSettings, ArrayOfSavedAttribu
 EndProcedure
 
 &AtClient
-Procedure OnlyUsedRows(Command)
-	Return;
-EndProcedure
-
-&AtClient
 Procedure Cancel(Command)
 	Close();
 EndProcedure
@@ -117,6 +107,18 @@ Procedure CreateMetadataTree()
 	TableOfSettings = GetEmptyTableOfSettings();
 	ArrayOfSavedAttributes = GetArrayOfSavedAttributes();
 	ExistPredefinedDataNames = GetExistPredefinedDataNames();
+	
+	// POS
+	NewRow = New Structure();
+	NewRow.Insert("GroupName", R().Add_Setiings_001);
+	NewRow.Insert("PictureIndex", 10);
+	NewRow.Insert("Rows", New Array());
+	ArrayOfRows = New Array();
+	ArrayOfRows.Add(NewRow);
+	If GetAdditionalSettings(NewRow, TableOfSettings) Then
+		PutMetadataToTree(ArrayOfRows, ThisObject.MetadataTree.GetItems());
+	EndIf;
+	
 	// Documents
 	NewRow = New Structure();
 	NewRow.Insert("GroupName", "Documents");
@@ -124,8 +126,7 @@ Procedure CreateMetadataTree()
 	NewRow.Insert("Rows", New Array());
 	ArrayOfRows = New Array();
 	ArrayOfRows.Add(NewRow);
-	If ExtractMetadata(Metadata.Documents, TableOfSettings, ArrayOfSavedAttributes, NewRow, 1,
-		ExistPredefinedDataNames) Then
+	If ExtractMetadata(Metadata.Documents, TableOfSettings, ArrayOfSavedAttributes, NewRow, 1, ExistPredefinedDataNames) Then
 		PutMetadataToTree(ArrayOfRows, ThisObject.MetadataTree.GetItems());
 	EndIf;
 	
@@ -170,17 +171,16 @@ Procedure PutMetadataToTree(Source, TreeRow)
 EndProcedure
 
 &AtServer
-Function ExtractMetadata(MetadataCollection, TableOfSettings, ArrayOfSavedAttributes, RowOwner, PictureIndex,
-	ExistPredefinedDataNames)
+Function ExtractMetadata(MetadataCollection, TableOfSettings, ArrayOfSavedAttributes, RowOwner, PictureIndex, ExistPredefinedDataNames)
 	Show = False;
 	For Each MetadataObject In MetadataCollection Do
 
 		NewRow = New Structure();
-		NewRow.Insert("FullName", MetadataObject.FullName());
-		NewRow.Insert("Name", MetadataObject.Name);
-		NewRow.Insert("Synonym", MetadataObject.Synonym);
-		NewRow.Insert("PictureIndex", PictureIndex);
-		NewRow.Insert("Rows", New Array());
+		NewRow.Insert("FullName"     , MetadataObject.FullName());
+		NewRow.Insert("Name"         , MetadataObject.Name);
+		NewRow.Insert("Synonym"      , MetadataObject.Synonym);
+		NewRow.Insert("PictureIndex" , PictureIndex);
+		NewRow.Insert("Rows"         , New Array());
 
 		If ArrayOfSavedAttributes.Find(Enums.KindsOfAttributes.Standard) <> Undefined Then
 			If GetStandardAttributes(MetadataObject, NewRow, TableOfSettings) Then
@@ -298,6 +298,7 @@ Function GetArrayOfSavedAttributes()
 	ArrayOfSavedAttributes.Add(Enums.KindsOfAttributes.Additional);
 	ArrayOfSavedAttributes.Add(Enums.KindsOfAttributes.Column);
 	ArrayOfSavedAttributes.Add(Enums.KindsOfAttributes.Custom);
+	ArrayOfSavedAttributes.Add(Enums.KindsOfAttributes.AdditionalSetting);
 	Return ArrayOfSavedAttributes;
 EndFunction
 
@@ -571,7 +572,45 @@ Function GetCustomCommonSettings(RowOwner, TableOfSettings)
 	Return RowOwner.Rows.Count() > 0;
 EndFunction
 
-#Region FormCommandsEventHandlers
+&AtServer
+Function GetAdditionalSettings(RowOwner, TableOfSettings)	
+	// Additional settings for Point of sale
+	FullName = "DataProcessor.PointOfSale.AdditionalSettings";
+	
+	NewRow = New Structure();
+	NewRow.Insert("FullName"     , FullName);
+	NewRow.Insert("Name"         , "PointOfSale");
+	NewRow.Insert("Synonym"      , R().Add_Setiings_002);
+	NewRow.Insert("PictureIndex" , 11);
+	NewRow.Insert("Rows"         , New Array());
+	
+	// change price
+	NewSetting = New Structure();
+	NewSetting.Insert("Name", "ChangePrice");
+	NewSetting.Insert("FullName", FullName + ".ChangePrice");
+	NewSetting.Insert("Synonym" , R().Add_Setiings_003);
+	NewSetting.Insert("KindOfAttribute", Enums.KindsOfAttributes.AdditionalSetting);
+	NewSetting.Insert("TypeRestriction", New TypeDescription("Boolean"));
+	NewSetting.Insert("SettingID"      , New UUID());
+	NewSetting.Insert("PictureIndex"   , 12);
+	NewRow.Rows.Add(NewSetting);
+	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
+	
+	// create return
+	NewSetting = New Structure();
+	NewSetting.Insert("Name", "CreateReturn");
+	NewSetting.Insert("FullName", FullName + ".CreateReturn");
+	NewSetting.Insert("Synonym" , R().Add_Setiings_004);
+	NewSetting.Insert("KindOfAttribute", Enums.KindsOfAttributes.AdditionalSetting);
+	NewSetting.Insert("TypeRestriction", New TypeDescription("Boolean"));
+	NewSetting.Insert("SettingID"      , New UUID());
+	NewSetting.Insert("PictureIndex"   , 12);
+	NewRow.Rows.Add(NewSetting);
+	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
+	
+	RowOwner.Rows.Add(NewRow);
+	Return True;
+EndFunction
 
 &AtClient
 Procedure MetadataTreeCollapseAll(Command)
@@ -585,10 +624,6 @@ Procedure MetadataTreeExpandAll(Command)
 	EndDo;
 EndProcedure
 
-#EndRegion
-
-#Region Private
-
 &AtClient
 Procedure CollapseTreeRows(Row)
 	ChildRows = Row.GetItems();
@@ -597,5 +632,3 @@ Procedure CollapseTreeRows(Row)
 		Items.MetadataTree.Collapse(ChildRow.GetID());
 	EndDo;
 EndProcedure
-
-#EndRegion

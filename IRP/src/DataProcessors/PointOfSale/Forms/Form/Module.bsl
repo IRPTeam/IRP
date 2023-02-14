@@ -492,6 +492,7 @@ Procedure Advance(Command)
 	Else
 		ObjectParameters.Insert("IsAdvance", True);
 	EndIf;
+	ObjectParameters.Insert("isReturn", ThisObject.isReturn);
 	ObjectParameters.Insert("RetailCustomer", Object.RetailCustomer);
 	ObjectParameters.Insert("Company", Object.Company);
 	

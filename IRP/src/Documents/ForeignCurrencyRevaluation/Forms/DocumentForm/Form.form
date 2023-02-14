@@ -315,6 +315,14 @@
     <key>en</key>
     <value>Expense</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Расход</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Gider</value>
+   </title>
    <extendedTooltip>
     <name>GroupExpenseExtendedTooltip</name>
     <id>13</id>
@@ -504,6 +512,10 @@
     <key>en</key>
     <value>Revenue</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Доход</value>
+   </title>
    <extendedTooltip>
     <name>GroupRevenueExtendedTooltip</name>
     <id>15</id>
@@ -539,6 +551,14 @@
   <title>
    <key>en</key>
    <value>Analytics</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Аналитика учета</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Detaylar</value>
   </title>
   <extendedTooltip>
    <name>GroupAnalyticsExtendedTooltip</name>

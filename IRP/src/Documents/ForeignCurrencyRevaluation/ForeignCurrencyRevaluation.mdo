@@ -12,6 +12,10 @@
   <key>en</key>
   <value>Foreign currency revaluation</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Переоценка валютных остатков</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.ForeignCurrencyRevaluation.StandardAttribute.Number</inputByString>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -22,9 +26,17 @@
   <key>en</key>
   <value>Foreign currency revaluation</value>
  </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Переоценка валютных остатков</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Foreign currency revaluations</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Переоценка валютных остатков</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -58,6 +70,14 @@
    <key>en</key>
    <value>Company</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
   <type>
    <types>CatalogRef.Companies</types>
   </type>
@@ -80,6 +100,10 @@
    <key>en</key>
    <value>(Revenue) Type</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>(Доход) Статья доходов</value>
+  </synonym>
   <type>
    <types>CatalogRef.ExpenseAndRevenueTypes</types>
   </type>
@@ -101,6 +125,10 @@
    <key>en</key>
    <value>(Revenue) Profit loss center</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>(Доход) Центр прибылей/убытков</value>
+  </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
   </type>
@@ -116,6 +144,10 @@
    <key>en</key>
    <value>(Revenue) Additional analytic</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>(Доход) Дополнительная аналитика</value>
+  </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
   </type>
@@ -130,6 +162,10 @@
   <synonym>
    <key>en</key>
    <value>(Expense) Type</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>(Убыток) Статья затрат</value>
   </synonym>
   <type>
    <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -152,6 +188,10 @@
    <key>en</key>
    <value>(Expense) Profit loss center</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>(Убыток) Центр прибылей/убытков</value>
+  </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
   </type>
@@ -166,6 +206,10 @@
   <synonym>
    <key>en</key>
    <value>(Expense) Additional analytic</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>(Убыток) Дополнительная аналитика</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -182,6 +226,14 @@
    <key>en</key>
    <value>Document form</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма документа</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak formu</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
@@ -191,6 +243,14 @@
    <key>en</key>
    <value>List form</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
@@ -199,6 +259,14 @@
   <synonym>
    <key>en</key>
    <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

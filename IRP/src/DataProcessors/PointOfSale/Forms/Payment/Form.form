@@ -3588,6 +3588,10 @@
    <key>en</key>
    <value>Is return advance</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Возврат аванса</value>
+  </title>
   <id>45</id>
   <valueType>
    <types>Boolean</types>
@@ -3604,6 +3608,14 @@
   <title>
    <key>en</key>
    <value>Advance</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Аванс</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Avans</value>
   </title>
   <id>46</id>
   <valueType>

@@ -181,6 +181,10 @@
    <key>en</key>
    <value>Transaction currency</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта транзакции</value>
+  </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
   </type>

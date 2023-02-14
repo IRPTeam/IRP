@@ -21,7 +21,11 @@
 // * UseSerialLotNumber - Boolean -
 // * AlwaysAddNewRowAfterScan - Boolean -
 // * EachSerialLotNumberIsUnique - Boolean -
-Function SearchByBarcodes(Val Barcodes, Settings) Export	
+Function SearchByBarcodes(Val Barcodes, Settings) Export
+	If Settings.SearchUserByBarcode Then
+		Return GetUsersByBarcode(Barcodes);
+	EndIf;
+
 	Query = New Query();
 	Query.Text = 
 		"SELECT
@@ -49,11 +53,7 @@ Function SearchByBarcodes(Val Barcodes, Settings) Export
 	QueryTable = QueryResult.Unload();
 	
 	If Not QueryTable.Count() Then
-		If Settings.SearchUserByBarcode Then
-			Return GetUsersByBarcode(Barcodes);
-		Else
-			Return New Array();
-		EndIf;
+		Return New Array();
 	EndIf;
 	
 	// TODO: Refact by query

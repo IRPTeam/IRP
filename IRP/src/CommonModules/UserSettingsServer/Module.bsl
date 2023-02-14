@@ -1,7 +1,7 @@
 
 #Region ADDITIONAL_SETTINGS
 
-Function PointOfSale_AdditionalSettings_ChangePrice(User) Export
+Function PointOfSale_AdditionalSettings_ChangePrice(val User) Export
 	Value = GetUserSettings(User, New Structure("MetadataObject",
 		"DataProcessor.PointOfSale.AdditionalSettings.ChangePrice"));
 	If Value.Count() Then
@@ -10,7 +10,7 @@ Function PointOfSale_AdditionalSettings_ChangePrice(User) Export
 	Return False;
 EndFunction
 
-Function PointOfSale_AdditionalSettings_CreateReturn(User) Export
+Function PointOfSale_AdditionalSettings_CreateReturn(val User) Export
 	Value = GetUserSettings(User, New Structure("MetadataObject",
 		"DataProcessor.PointOfSale.AdditionalSettings.CreateReturn"));
 	If Value.Count() Then

@@ -519,15 +519,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 
 	Object 	= AddInfo.Object;
 	Form 	= AddInfo.Form;
-	
-	If Result[0].Property("User") Then
-		If CommonFunctionsClientServer.ObjectHasProperty(Form,"AdminUser") Then
-			Form.AdminUser = Result[0].User;
-			Form.FormSetVisibilityAvailability();
-		EndIf;
-		Return;
-	EndIf;
-	
+		
 	UseSerialLotNumbers = Object.Property("SerialLotNumbers");
 	UseSourceOfOrigins  = Object.Property("SourceOfOrigins");
 	

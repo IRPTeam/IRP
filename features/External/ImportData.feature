@@ -1131,9 +1131,9 @@ Scenario: Create catalog Users objects
 		| 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b3270997' | 'False'        | 'SBorisova'   | ''               | ''                                                                 | 'tr'               | 'True'       | ''                                                                   | 'tr'                        | ''                 | 'Sofia Borisova (Manager 3)'           | ''                 | ''               | 'Sofia Borisova (Manager 3) TR'           | ''       |
 
 	And I check or create information register "UserSettings" records:
-		| 'UserOrGroup'                                                   | 'MetadataObject'                                            | 'AttributeName' | 'KindOfAttribute'                          | 'Value' |
-		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'DataProcessor.PointOfSale.AdditionalSettings.ChangePrice'  | 'ChangePrice'   | 'Enum.KindsOfAttributes.AdditionalSetting' | 'True'  |
-		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'DataProcessor.PointOfSale.AdditionalSettings.CreateReturn' | 'CreateReturn'  | 'Enum.KindsOfAttributes.AdditionalSetting' | 'True'  |
+		| 'UserOrGroup' | 'MetadataObject'                                            | 'AttributeName' | 'KindOfAttribute'                          | 'Value' |
+		| '$$IdCI$$'    | 'DataProcessor.PointOfSale.AdditionalSettings.ChangePrice'  | 'ChangePrice'   | 'Enum.KindsOfAttributes.AdditionalSetting' | 'True'  |
+		| '$$IdCI$$'    | 'DataProcessor.PointOfSale.AdditionalSettings.CreateReturn' | 'CreateReturn'  | 'Enum.KindsOfAttributes.AdditionalSetting' | 'True'  |
 
 
 Scenario: Create chart of characteristic types AddAttributeAndProperty objects

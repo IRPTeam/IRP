@@ -496,7 +496,11 @@ Procedure Advance(Command)
 	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
 	ObjectParameters.Insert("Branch", Object.Branch);
 	ObjectParameters.Insert("Workstation", Workstation);
-	ObjectParameters.Insert("IsAdvance", True);
+	If ThisObject.isReturn Then
+		ObjectParameters.Insert("IsReturnAdvance", True);
+	Else
+		ObjectParameters.Insert("IsAdvance", True);
+	EndIf;
 	ObjectParameters.Insert("RetailCustomer", Object.RetailCustomer);
 	ObjectParameters.Insert("Company", Object.Company);
 	
@@ -767,9 +771,25 @@ Async Procedure AdvanceFormClose(Result, AdditionalData) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
+	If ThisObject.isReturn Then
+		DocumentParameters = GetAdvanceDocumentParameters(Result.Payments, "Outgoing");
+		CreatedDocuments = CreateAdvanceDocumentsAtServer(DocumentParameters);
+	Else	
+		DocumentParameters = GetAdvanceDocumentParameters(Result.Payments, "Incoming");
+		CreatedDocuments = CreateAdvanceDocumentsAtServer(DocumentParameters);
 	
+		For Each CreatedDocument In CreatedDocuments Do
+			ResultPrint = Await PrintFiscalReceipt(CreatedDocument);
+		EndDo;
+	EndIf;
+	
+	Object.RetailCustomer = Undefined;
+EndProcedure
+
+&AtClient
+Function GetAdvanceDocumentParameters(_Payments, AdvanceDirection)
 	ArrayOfPayments = New Array();
-	For Each Row In Result.Payments Do
+	For Each Row In _Payments Do
 		If Row.Amount < 0 Then
 			Continue;
 		EndIf;
@@ -784,95 +804,110 @@ Async Procedure AdvanceFormClose(Result, AdditionalData) Export
 		FillPropertyValues(NewPayment, Row);
 		ArrayOfPayments.Add(NewPayment);
 	EndDo;
-	CreatedDocuments = CreateDocumentsAtServer(ArrayOfPayments);
 	
-	For Each CreatedDocument In CreatedDocuments Do
-		ResultPrint = Await PrintFiscalReceipt(CreatedDocument);
-	EndDo;
+	DocumentParameters = New Structure();
+	DocumentParameters.Insert("ArrayOfPayments", ArrayOfPayments);
 	
-	Object.RetailCustomer = Undefined;
-EndProcedure
+	If AdvanceDirection = "Incoming" Then // receipt advance
+		DocumentParameters.Insert("CashDocumentName", "CashReceipt");
+		DocumentParameters.Insert("CashDocumentTransactionType", 
+			PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance"));
+	
+		DocumentParameters.Insert("BankDocumentName", "BankReceipt");
+		DocumentParameters.Insert("BankDocumentTransactionType", 
+			PredefinedValue("Enum.IncomingPaymentTransactionType.CustomerAdvance"));
+	ElsIf AdvanceDirection = "Outgoing" Then // return advance
+		DocumentParameters.Insert("CashDocumentName", "CashPayment");
+		DocumentParameters.Insert("CashDocumentTransactionType", 
+			PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance"));
+	
+		DocumentParameters.Insert("BankDocumentName", "BankPayment");
+		DocumentParameters.Insert("BankDocumentTransactionType", 
+			PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CustomerAdvance"));
+	Else
+		Raise "Wrong advance direction";
+	EndIf;
+	
+	Return DocumentParameters;
+EndFunction
 
 &AtServer
-Function CreateDocumentsAtServer(ArrayOfPayments)
+Function CreateAdvanceDocumentsAtServer(DocumentParameters)
 	ReturnData = New Array;
 	
-	// cash receipt
-	CashReceiptTable = New ValueTable();
-	CashReceiptTable.Columns.Add("Account");
-	CashReceiptTable.Columns.Add("Amount");
+	// cash receipt / cash payment
+	CashtTable = New ValueTable();
+	CashtTable.Columns.Add("Account");
+	CashtTable.Columns.Add("Amount");
 	
-	For Each Row In ArrayOfPayments Do
+	For Each Row In DocumentParameters.ArrayOfPayments Do
 		If Row.PaymentTypeEnum = Enums.PaymentTypes.Cash Then
-			NewRow = CashReceiptTable.Add();
+			NewRow = CashtTable.Add();
 			NewRow.Account = Row.Account;
 			NewRow.Amount  = Row.Amount;
 		EndIf;
 	EndDo;
 	
-	CashReceiptTableGrouped = CashReceiptTable.Copy();
-	CashReceiptTableGrouped.GroupBy("Account");
-	For Each RowHeader In CashReceiptTableGrouped Do
-		CashReceipt = BuilderAPI.Initialize("CashReceipt");
-		BuilderAPI.SetProperty(CashReceipt, "Company"     , Object.Company, "PaymentList");
-		BuilderAPI.SetProperty(CashReceipt, "Branch"      , Object.Branch, "PaymentList");
-		BuilderAPI.SetProperty(CashReceipt, "Date"        , CommonFunctionsServer.GetCurrentSessionDate(), "PaymentList");
-		BuilderAPI.SetProperty(CashReceipt, "TransactionType" , Enums.IncomingPaymentTransactionType.CustomerAdvance, "PaymentList");
-		BuilderAPI.SetProperty(CashReceipt, "CashAccount" , RowHeader.Account, "PaymentList");
+	CashTableGrouped = CashtTable.Copy();
+	CashTableGrouped.GroupBy("Account");
+	For Each RowHeader In CashTableGrouped Do
+		CashDocument = BuilderAPI.Initialize(DocumentParameters.CashDocumentName);
+		BuilderAPI.SetProperty(CashDocument, "Company"     , Object.Company, "PaymentList");
+		BuilderAPI.SetProperty(CashDocument, "Branch"      , Object.Branch, "PaymentList");
+		BuilderAPI.SetProperty(CashDocument, "Date"        , CommonFunctionsServer.GetCurrentSessionDate(), "PaymentList");
+		BuilderAPI.SetProperty(CashDocument, "TransactionType" , DocumentParameters.CashDocumentTransactionType, "PaymentList");
+		BuilderAPI.SetProperty(CashDocument, "CashAccount" , RowHeader.Account, "PaymentList");
 	
 		
-		For Each RowList In CashReceiptTable.FindRows(New Structure("Account", RowHeader.Account)) Do	
-			NewRow = BuilderAPI.AddRow(CashReceipt, "PaymentList");
-			BuilderAPI.SetRowProperty(CashReceipt, NewRow, "RetailCustomer", Object.RetailCustomer, "PaymentList");
-			BuilderAPI.SetRowProperty(CashReceipt, NewRow, "TotalAmount"   , RowList.Amount, "PaymentList");
+		For Each RowList In CashtTable.FindRows(New Structure("Account", RowHeader.Account)) Do	
+			NewRow = BuilderAPI.AddRow(CashDocument, "PaymentList");
+			BuilderAPI.SetRowProperty(CashDocument, NewRow, "RetailCustomer", Object.RetailCustomer, "PaymentList");
+			BuilderAPI.SetRowProperty(CashDocument, NewRow, "TotalAmount"   , RowList.Amount, "PaymentList");
 		EndDo;
-		BuilderAPIWriteResult = BuilderAPI.Write(CashReceipt, DocumentWriteMode.Posting);
+		BuilderAPIWriteResult = BuilderAPI.Write(CashDocument, DocumentWriteMode.Posting);
 		ReturnData.Add(BuilderAPIWriteResult.Ref);
 	EndDo;
 	
-	// bank receipt
-	BankReceiptTable = New ValueTable();
-	BankReceiptTable.Columns.Add("Account");
-	BankReceiptTable.Columns.Add("PaymentType");
-	BankReceiptTable.Columns.Add("PaymentTerminal");
-	BankReceiptTable.Columns.Add("BankTerm");
-	BankReceiptTable.Columns.Add("Amount");
+	// bank receipt / bank payment
+	BankTable = New ValueTable();
+	BankTable.Columns.Add("Account");
+	BankTable.Columns.Add("PaymentType");
+	BankTable.Columns.Add("PaymentTerminal");
+	BankTable.Columns.Add("BankTerm");
+	BankTable.Columns.Add("Amount");
 	
-	For Each Row In ArrayOfPayments Do
+	For Each Row In DocumentParameters.ArrayOfPayments Do
 		If Row.PaymentTypeEnum = Enums.PaymentTypes.Card Then
-			NewRow = BankReceiptTable.Add();
+			NewRow = BankTable.Add();
 			NewRow.Account         = Row.Account;
 			NewRow.PaymentType     = Row.PaymentType;
-//			NewRow.PaymentTerminal = Row.PaymentTerminal;
 			NewRow.BankTerm        = Row.BankTerm;
 			NewRow.Amount          = Row.Amount;
 		EndIf;
 	EndDo;
 	
-	BankReceiptTableGrouped = BankReceiptTable.Copy();
-	BankReceiptTableGrouped.GroupBy("Account");
-	For Each RowHeader In BankReceiptTableGrouped Do
-		BankReceipt = BuilderAPI.Initialize("BankReceipt");
-		BuilderAPI.SetProperty(BankReceipt, "Company"     , Object.Company, "PaymentList");
-		BuilderAPI.SetProperty(BankReceipt, "Branch"      , Object.Branch, "PaymentList");
-		BuilderAPI.SetProperty(BankReceipt, "Date"        , CommonFunctionsServer.GetCurrentSessionDate(), "PaymentList");
-		BuilderAPI.SetProperty(BankReceipt, "TransactionType" , Enums.IncomingPaymentTransactionType.CustomerAdvance, "PaymentList");
-		BuilderAPI.SetProperty(BankReceipt, "Account" , RowHeader.Account, "PaymentList");
+	BankTableGrouped = BankTable.Copy();
+	BankTableGrouped.GroupBy("Account");
+	For Each RowHeader In BankTableGrouped Do
+		BankDocument = BuilderAPI.Initialize(DocumentParameters.BankDocumentName);
+		BuilderAPI.SetProperty(BankDocument, "Company"     , Object.Company, "PaymentList");
+		BuilderAPI.SetProperty(BankDocument, "Branch"      , Object.Branch, "PaymentList");
+		BuilderAPI.SetProperty(BankDocument, "Date"        , CommonFunctionsServer.GetCurrentSessionDate(), "PaymentList");
+		BuilderAPI.SetProperty(BankDocument, "TransactionType" , DocumentParameters.BankDocumentTransactionType, "PaymentList");
+		BuilderAPI.SetProperty(BankDocument, "Account" , RowHeader.Account, "PaymentList");
 	
-		For Each RowList In BankReceiptTable.FindRows(New Structure("Account", RowHeader.Account)) Do	
-			NewRow = BuilderAPI.AddRow(BankReceipt, "PaymentList");
-			BuilderAPI.SetRowProperty(BankReceipt, NewRow, "RetailCustomer"   , Object.RetailCustomer, "PaymentList");
-			BuilderAPI.SetRowProperty(BankReceipt, NewRow, "PaymentType"      , RowList.PaymentType, "PaymentList");
-			BuilderAPI.SetRowProperty(BankReceipt, NewRow, "BankTerm"         , RowList.BankTerm, "PaymentList");
-//			BuilderAPI.SetRowProperty(BankReceipt, NewRow, "PaymentTerminal"  , RowList.PaymentTerminal, "PaymentList");
-			BuilderAPI.SetRowProperty(BankReceipt, NewRow, "TotalAmount"      , RowList.Amount, "PaymentList");
+		For Each RowList In BankTable.FindRows(New Structure("Account", RowHeader.Account)) Do	
+			NewRow = BuilderAPI.AddRow(BankDocument, "PaymentList");
+			BuilderAPI.SetRowProperty(BankDocument, NewRow, "RetailCustomer"   , Object.RetailCustomer, "PaymentList");
+			BuilderAPI.SetRowProperty(BankDocument, NewRow, "PaymentType"      , RowList.PaymentType, "PaymentList");
+			BuilderAPI.SetRowProperty(BankDocument, NewRow, "BankTerm"         , RowList.BankTerm, "PaymentList");
+			BuilderAPI.SetRowProperty(BankDocument, NewRow, "TotalAmount"      , RowList.Amount, "PaymentList");
 		EndDo;
-		BuilderAPIWriteResult = BuilderAPI.Write(BankReceipt, DocumentWriteMode.Posting);
+		BuilderAPIWriteResult = BuilderAPI.Write(BankDocument, DocumentWriteMode.Posting);
 		ReturnData.Add(BuilderAPIWriteResult.Ref);
 	EndDo;
 	
 	Return ReturnData;
-	
 EndFunction	
 
 &AtClient

@@ -39,7 +39,7 @@ EndProcedure
 &AtClient
 Procedure InputBarcode(Command)
 	Barcode = 0;
-	ShowInputNumber(New NotifyDescription("AddBarcodeAfterEnd", ThisForm), Barcode, R().SuggestionToUser_2);
+	ShowInputNumber(New NotifyDescription("AddBarcodeAfterEnd", ThisObject), Barcode, R().SuggestionToUser_2);
 EndProcedure
 
 &AtClient

@@ -487,8 +487,11 @@ Procedure Advance(Command)
 	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
 	ObjectParameters.Insert("Branch", Object.Branch);
 	ObjectParameters.Insert("Workstation", Workstation);
-	ObjectParameters.Insert("IsAdvance", True);
-	ObjectParameters.Insert("isReturn", ThisObject.isReturn);
+	If ThisObject.isReturn Then
+		ObjectParameters.Insert("IsReturnAdvance", True);
+	Else
+		ObjectParameters.Insert("IsAdvance", True);
+	EndIf;
 	ObjectParameters.Insert("RetailCustomer", Object.RetailCustomer);
 	ObjectParameters.Insert("Company", Object.Company);
 	

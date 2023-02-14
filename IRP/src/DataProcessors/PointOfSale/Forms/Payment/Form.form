@@ -3047,6 +3047,23 @@
     </edit>
   </attributes>
   <attributes>
+    <name>IsReturnAdvance</name>
+    <title>
+      <key>en</key>
+      <value>Is return advance</value>
+    </title>
+    <id>45</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
     <name>AdvanceBalance</name>
     <title>
       <key>en</key>
@@ -3528,6 +3545,12 @@
   </parameters>
   <parameters>
     <name>isReturn</name>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+  </parameters>
+  <parameters>
+    <name>IsReturnAdvance</name>
     <valueType>
       <types>Boolean</types>
     </valueType>

@@ -25,6 +25,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Object.Workstation = Parameters.Workstation;
 	Object.Discount = Parameters.Discount;
 	ThisObject.IsAdvance = Parameters.IsAdvance;
+	ThisObject.IsReturnAdvance = Parameters.IsReturnAdvance;
 	
 	isReturn = Parameters.isReturn;
 	RetailBasis = Parameters.RetailBasis;
@@ -37,10 +38,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Items.Payment_ReturnPaymentByPaymentCard.Visible = isReturn;
 	Items.Payment_PayByPaymentCard.Visible = Not isReturn;
 	
-	Items.Cashback.Visible = ThisObject.IsAdvance And isReturn;
-	Items.Advance.Visible = ThisObject.IsAdvance And Not isReturn;
+	Items.Cashback.Visible = Not ThisObject.IsReturnAdvance;
+	Items.Advance.Visible = ThisObject.IsReturnAdvance;
 	
-	If Not ThisObject.IsAdvance And ValueIsFilled(Parameters.RetailCustomer) Then
+	If Not ThisObject.IsAdvance And Not ThisObject.IsReturnAdvance And ValueIsFilled(Parameters.RetailCustomer) Then
 		AdvanceAmount = GetAdvanceByRetailCustomer(Parameters.Company, Parameters.Branch, Parameters.RetailCustomer);
 		If ValueIsFilled(AdvanceAmount) Then
 			AdvancePaymentType = GetAdvancePaymentType();
@@ -54,7 +55,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		EndIf;
 	EndIf;
 	
-	If ThisObject.IsAdvance And isReturn And ValueIsFilled(Parameters.RetailCustomer) Then
+	If ThisObject.IsReturnAdvance And ValueIsFilled(Parameters.RetailCustomer) Then
 		ThisObject.AdvanceBalance = GetAdvanceByRetailCustomer(Parameters.Company, Parameters.Branch, Parameters.RetailCustomer);
 	EndIf;
 EndProcedure
@@ -109,7 +110,7 @@ EndFunction
 Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	ErrorMessages = New Array();
 	
-	IsIncomingOutgoingAdvance = ThisObject.IsAdvance;
+	IsIncomingOutgoingAdvance = ThisObject.IsAdvance Or ThisObject.IsReturnAdvance;
 	
 	If Not IsIncomingOutgoingAdvance Then
 		If ThisObject.PaymentsAmountTotal < Object.Amount Then
@@ -548,7 +549,7 @@ Procedure FillPaymentsAtServer()
 	BankPaymentTypesValue = GetBankPaymentTypesValue(Object.Branch);
 	ValueToFormAttribute(BankPaymentTypesValue, "BankPaymentTypes");
 
-	IsIncomingOutgoingAdvance = ThisObject.IsAdvance;
+	IsIncomingOutgoingAdvance = ThisObject.IsAdvance Or ThisObject.IsReturnAdvance;
 	
 	If Not IsIncomingOutgoingAdvance Then
 		PaymentAgentValue = GetPaymentAgentTypesValue(Object.Branch);

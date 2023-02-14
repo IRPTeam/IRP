@@ -746,17 +746,17 @@ Scenario: _0433296 check Bank payment movements by the Register  "R9510 Salary p
 		And I select "R9510 Salary payment" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank payment 329 dated 08.02.2023 13:10:49' | ''            | ''                    | ''          | ''             | ''             | ''                | ''         | ''                             |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''                | ''         | ''                             |
-			| 'Register  "R9510 Salary payment"'           | ''            | ''                    | ''          | ''             | ''             | ''                | ''         | ''                             |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                | ''         | ''                             |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Employee'        | 'Currency' | 'Multi currency movement type' |
-			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '171,2'     | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'USD'      | 'Reporting currency'           |
-			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '256,8'     | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'USD'      | 'Reporting currency'           |
-			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 000'     | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'TRY'      | 'Local currency'               |
-			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 000'     | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'TRY'      | 'en description is empty'      |
-			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 500'     | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'TRY'      | 'Local currency'               |
-			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 500'     | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'TRY'      | 'en description is empty'      |		
+			| 'Bank payment 329 dated 08.02.2023 13:10:49' | ''            | ''                    | ''          | ''             | ''             | ''                | ''         | ''                     | ''                             |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''                | ''         | ''                     | ''                             |
+			| 'Register  "R9510 Salary payment"'           | ''            | ''                    | ''          | ''             | ''             | ''                | ''         | ''                     | ''                             |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                | ''         | ''                     | ''                             |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Employee'        | 'Currency' | 'Transaction currency' | 'Multi currency movement type' |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '171,2'     | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'USD'      | 'TRY'                  | 'Reporting currency'           |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '256,8'     | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'USD'      | 'TRY'                  | 'Reporting currency'           |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 000'     | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'TRY'      | 'TRY'                  | 'Local currency'               |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 000'     | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'TRY'      | 'TRY'                  | 'en description is empty'      |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 500'     | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'TRY'      | 'TRY'                  | 'Local currency'               |
+			| ''                                           | 'Expense'     | '08.02.2023 13:10:49' | '1 500'     | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'TRY'      | 'TRY'                  | 'en description is empty'      |
 		And I close all client application windows
 
 Scenario: _043330 Bank payment clear posting/mark for deletion

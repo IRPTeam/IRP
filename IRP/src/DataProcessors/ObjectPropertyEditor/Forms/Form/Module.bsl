@@ -50,6 +50,10 @@ EndProcedure
 &AtClient
 Procedure ObjectTableOnChange(Item)
 	SetNewTable();
+	If GetFormCash(ThisObject).ColumnsData.Count() = 0 Then
+		//@skip-warning
+		ShowMessageBox(, R().IM_Warning_NotProperty);
+	EndIf;
 EndProcedure
 
 // Properties table selection.
@@ -156,11 +160,21 @@ EndProcedure
 
 &AtClient
 Procedure FieldSettings(Command)
+	
+	FormCash = GetFormCash(ThisObject);
+	
+	FormParameters = New Structure;
+	FormParameters.Insert("ColumnsData", FormCash.ColumnsData);
+	FormParameters.Insert("ShowServiceAttributes", FormCash.ShowServiceAttributes);
+	FormParameters.Insert("UpdateRelatedFieldsWhenWriting", FormCash.UpdateRelatedFieldsWhenWriting);
+	FormParameters.Insert("ForcedWriting", FormCash.ForcedWriting);
+	
 	OpenForm("DataProcessor.ObjectPropertyEditor.Form.FieldSettings", 
-		New Structure("ColumnsData", GetFormCash(ThisObject).ColumnsData), 
+		FormParameters, 
 		ThisObject, , , ,
 		New NotifyDescription("FieldSettingsEnd", ThisObject),
 		FormWindowOpeningMode.LockOwnerWindow);
+		
 EndProcedure
 
 &AtClient
@@ -181,7 +195,7 @@ EndProcedure
 Procedure MarkSelectedRows(Command)
 	For Each RowIndex In Items.PropertiesTable.SelectedRows Do
 		RowIndex = RowIndex; // Number
-		Row = ThisObject.PropertiesTable.Get(RowIndex);
+		Row = ThisObject.PropertiesTable.FindByID(RowIndex);
 		Row.Marked = True; 
 	EndDo;
 EndProcedure
@@ -463,6 +477,9 @@ EndProcedure
 // * PropertyConstraints - Map - Set properties constraints:
 //	** Key - CatalogRef - Ref of properties constraint
 //	** Value - Array of ChartOfCharacteristicTypesRef - Array of available properties 
+// * ShowServiceAttributes - Boolean - Show service attributes
+// * UpdateRelatedFieldsWhenWriting - Boolean - Update related fields when objects writing
+// * ForcedWriting - Boolean - Forced writing (DataExchange.Load = True)
 &AtClientAtServerNoContext
 Function GetFormCash(Form)
 	FormCash = Form["FormDataCash"]; // Structure, Undefined
@@ -478,6 +495,9 @@ Function GetFormCash(Form)
 	FormCash.Insert("CountNewConditionalAppearance", 0);
 	FormCash.Insert("ConstraintName", "");
 	FormCash.Insert("PropertyConstraints", New Map);
+	FormCash.Insert("ShowServiceAttributes", False);
+	FormCash.Insert("UpdateRelatedFieldsWhenWriting", False);
+	FormCash.Insert("ForcedWriting", False);
 	
 	Form["FormDataCash"] = FormCash;
 	
@@ -617,9 +637,14 @@ EndProcedure
 // 
 &AtServer
 Procedure SetNewTable()
-	SetPropertiesConstraint(ThisObject);
-	SetSourceSettings(ThisObject);
-	SetTableSettings(ThisObject);
+	If GetObjectTable(ThisObject) = "Ref" Then
+		SetTableSettingsByRef(ThisObject);
+		SetSourceSettings(ThisObject);
+	Else
+		SetPropertiesConstraint(ThisObject);
+		SetSourceSettings(ThisObject);
+		SetTableSettings(ThisObject);
+	EndIf;
 EndProcedure
 
 &AtServerNoContext
@@ -677,6 +702,10 @@ EndProcedure
 &AtServerNoContext
 Function GetDCSchema(Form)
 
+	If GetObjectTable(Form) = "Ref" Then
+		Return GetDCSchemaByRef(Form);
+	EndIf;
+	
 	TS_String = "TabularSections";
 	Table_String = GetObjectTable(Form); // String
 	
@@ -930,6 +959,322 @@ Procedure CreateConditionalAppearance(Form, NewFormItem, isCollection)
 	
 EndProcedure
 
+// Set table settings by ref.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+&AtServerNoContext
+Procedure SetTableSettingsByRef(Form)
+	
+	FormCash = GetFormCash(Form);
+	FormCash.ShowServiceAttributes = False;
+	
+	ColumnsData = GetColumnsDataByRef(Form);
+	FormCash.ColumnsData = ColumnsData;
+	
+	PrimaryCount = GetFormCash(Form).CountConditionalAppearance;
+	While Form.ConditionalAppearance.Items.Count() > PrimaryCount Do
+		LastItem = Form.ConditionalAppearance.Items.Get(Form.ConditionalAppearance.Items.Count() - 1);
+		Form.ConditionalAppearance.Items.Delete(LastItem);
+	EndDo;
+	
+	Form.PropertiesTable.Clear();
+	
+	Oldfields = New Array; // Array of FormField
+	For Each FieldItem In Form.Items.PropertiesFields.ChildItems Do
+		Oldfields.Add(FieldItem);
+	EndDo;
+	For Each FieldItem In Oldfields Do
+		Form.Items.Delete(FieldItem);
+	EndDo;
+	
+	PT_String = "PropertiesTable";
+	
+	OldAttributes = New Array; // Array of String
+	CurrentColumns = Form.GetAttributes(PT_String);
+	For Each ColumnItem In CurrentColumns Do
+		If ColumnItem.Name = "Object" 
+				Or ColumnItem.Name = "Constraint"
+				Or ColumnItem.Name = "Marked"
+				Or ColumnItem.Name = "isModified" Then
+			Continue;
+		EndIf;
+		OldAttributes.Add(StrTemplate("%1.%2", ColumnItem.Path, ColumnItem.Name));
+	EndDo;
+	Form.ChangeAttributes(, OldAttributes);
+	
+	NewAttributes = New Array; // Array of FormAttribute
+	For Each ColumnItem In ColumnsData Do
+		ColumnDescription = ColumnItem.Value; // See GetFieldDescription
+		FormAttribute = New FormAttribute(
+			ColumnItem.Key, 
+			New TypeDescription(ColumnDescription.CollectionValueType, "Undefined"), 
+			PT_String, 
+			ColumnDescription.Presentation);
+		NewAttributes.Add(FormAttribute);
+		FormAttribute = New FormAttribute(
+			ColumnItem.Key + "_old", 
+			FormAttribute.ValueType, 
+			PT_String, 
+			ColumnDescription.Presentation + " (~)");
+		NewAttributes.Add(FormAttribute);
+		If ColumnDescription.isCollection Then
+			FormAttribute = New FormAttribute(
+				ColumnItem.Key + "_modified", 
+				New TypeDescription("Number"), 
+				PT_String, 
+				ColumnDescription.Presentation + " (*)");
+			NewAttributes.Add(FormAttribute);
+		EndIf;
+	EndDo;
+	Form.ChangeAttributes(NewAttributes);
+	
+	For Each ColumnItem In ColumnsData Do
+		ColumnKey = ColumnItem.Key; // String
+		ColumnDescription = ColumnItem.Value; // See GetFieldDescription
+		
+		NewFormItem = Form.Items.Add(ColumnKey, Type("FormField"), Form.Items.PropertiesFields);
+		NewFormItem.Type = FormFieldType.InputField;
+		NewFormItem.DataPath = PT_String + "." + ColumnKey;
+		NewFormItem.ChooseType = False;
+		ParametersArray = New Array; // Array of ChoiceParameter
+		ParametersArray.Add(New ChoiceParameter("Filter.Owner", ColumnDescription.Ref));
+		NewFormItem.ChoiceParameters = New FixedArray(ParametersArray);
+		NewFormItem.SetAction("OnChange", "PropertiesTableValueOnChange");
+		NewFormItem.SetAction("StartChoice", "PropertiesTableValueStartChoice");
+		
+		AddFormItemProperties(NewFormItem, ColumnDescription);
+		If Not FormCash.ShowServiceAttributes Then
+			NewFormItem.Visible = Not ColumnDescription.isServiceAttribute;
+		EndIf;
+		
+		CreateConditionalAppearance(Form, NewFormItem, ColumnDescription.isCollection);
+	EndDo;
+	
+	GetFormCash(Form).CountNewConditionalAppearance = Form.ConditionalAppearance.Items.Count();
+	
+EndProcedure
+
+&AtServerNoContext
+Function GetColumnsDataByRef(Form)
+	
+	ColumnsData = New Structure;
+	
+	MetaObject = Metadata.FindByType(GetObjectType(Form)); // MetadataObjectCatalog,  MetadataObjectDocument
+	
+	If Metadata.Catalogs.Contains(MetaObject) Then
+		If MetaObject.CodeLength > 0 Then
+			ItemRef = "Code";
+			ItemKey = GetFieldKeyFromRef(ItemRef);
+			//@skip-warning
+			ItemPresentation = R().Str_Code; // String
+			ValueType = MetaObject.StandardAttributes.Code.Type;
+			ColumnsData.Insert(ItemKey, GetFieldDescription(
+				ItemRef, ItemPresentation, ValueType, True, True, False, True));
+		EndIf;
+		If MetaObject.DescriptionLength > 0 Then
+			ItemRef = "Description";
+			ItemKey = GetFieldKeyFromRef(ItemRef);
+			//@skip-warning
+			ItemPresentation = R().Str_Description; // String
+			ValueType = MetaObject.StandardAttributes.Description.Type;
+			ColumnsData.Insert(ItemKey, GetFieldDescription(
+				ItemRef, ItemPresentation, ValueType, True, True, False, True));
+		EndIf;
+		If MetaObject.Hierarchical Then
+			ItemRef = "Parent";
+			ItemKey = GetFieldKeyFromRef(ItemRef);
+			//@skip-warning
+			ItemPresentation = R().Str_Parent; // String
+			ValueType = MetaObject.StandardAttributes.Parent.Type;
+			ColumnsData.Insert(ItemKey, GetFieldDescription(
+				ItemRef, ItemPresentation, ValueType, True, True, False, True));
+		EndIf;
+		If MetaObject.Owners.Count() > 0 Then
+			ItemRef = "Owner";
+			ItemKey = GetFieldKeyFromRef(ItemRef);
+			//@skip-warning
+			ItemPresentation = R().Str_Owner; // String
+			ValueType = MetaObject.StandardAttributes.Owner.Type;
+			ColumnsData.Insert(ItemKey, GetFieldDescription(
+				ItemRef, ItemPresentation, ValueType, True, True, False, True));
+		EndIf;
+		
+		ItemRef = "DeletionMark";
+		ItemKey = GetFieldKeyFromRef(ItemRef);
+		//@skip-warning
+		ItemPresentation = R().Str_DeletionMark; // String
+		ValueType = MetaObject.StandardAttributes.DeletionMark.Type;
+		ColumnsData.Insert(ItemKey, GetFieldDescription(
+			ItemRef, ItemPresentation, ValueType, True, True, False, True));
+		
+	ElsIf Metadata.Documents.Contains(MetaObject) Then
+		If MetaObject.NumberLength > 0 Then
+			ItemRef = "Number";
+			ItemKey = GetFieldKeyFromRef(ItemRef);
+			//@skip-warning
+			ItemPresentation = R().Str_Number; // String
+			ValueType = MetaObject.StandardAttributes.Number.Type;
+			ColumnsData.Insert(ItemKey, GetFieldDescription(
+				ItemRef, ItemPresentation, ValueType, True, True, False, True));
+		EndIf;
+		
+		ItemRef = "Date";
+		ItemKey = GetFieldKeyFromRef(ItemRef);
+		//@skip-warning
+		ItemPresentation = R().Str_Date; // String
+		ValueType = MetaObject.StandardAttributes.Date.Type;
+		ColumnsData.Insert(ItemKey, GetFieldDescription(
+			ItemRef, ItemPresentation, ValueType, True, True, False, True));
+		
+		If MetaObject.Posting = Metadata.ObjectProperties.Posting.Allow Then
+			ItemRef = "Posted";
+			ItemKey = GetFieldKeyFromRef(ItemRef);
+			//@skip-warning
+			ItemPresentation = R().Str_Posted; // String
+			ValueType = MetaObject.StandardAttributes.Posted.Type;
+			ColumnsData.Insert(ItemKey, GetFieldDescription(
+				ItemRef, ItemPresentation, ValueType, True, True, False, True));
+		EndIf;
+		
+		ItemRef = "DeletionMark";
+		ItemKey = GetFieldKeyFromRef(ItemRef);
+		//@skip-warning
+		ItemPresentation = R().Str_DeletionMark; // String
+		ValueType = MetaObject.StandardAttributes.DeletionMark.Type;
+		ColumnsData.Insert(ItemKey, GetFieldDescription(
+			ItemRef, ItemPresentation, ValueType, True, True, False, True));
+		
+	EndIf;
+	
+	For Each AttributItem In Metadata.CommonAttributes Do
+		If Not CommonFunctionsServer.isCommonAttributeUseForMetadata(AttributItem.Name, MetaObject) Then
+			Continue;
+		EndIf;
+		ItemRef = AttributItem.Name;
+		ItemKey = GetFieldKeyFromRef(AttributItem.Name);
+		ItemPresentation = AttributItem.Synonym;
+		If IsBlankString(ItemPresentation) Then
+			ItemPresentation = String(AttributItem);
+		EndIf;
+		ValueType = AttributItem.Type;
+		ColumnsData.Insert(ItemKey, 
+			GetFieldDescription(
+				ItemRef, ItemPresentation, ValueType, 
+				True, True, False, True));
+	EndDo;
+	
+	For Each AttributItem In MetaObject.Attributes Do
+		ValueType = AttributItem.Type;
+		If ValueType.ContainsType(Type("ValueStorage")) Then
+			Continue;
+		EndIf;
+		ItemRef = AttributItem.Name;
+		ItemKey = GetFieldKeyFromRef(AttributItem.Name);
+		ItemPresentation = AttributItem.Synonym;
+		isServiceAttribute = False;
+		ColumnsData.Insert(ItemKey, 
+			GetFieldDescription(
+				ItemRef, ItemPresentation, ValueType, 
+				True, True, False, isServiceAttribute));
+	EndDo;
+	
+	Return ColumnsData;
+	
+EndFunction
+
+// Get DCSchema by ref.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+// 
+// Returns:
+//  DataCompositionSchema
+&AtServerNoContext
+Function GetDCSchemaByRef(Form)
+
+	DCSchema = New DataCompositionSchema;
+
+	DS = DCSchema.DataSources.Add();
+	DS.Name = "DataSources";
+	DS.DataSourceType = "Local";
+	
+	DataSet = DCSchema.DataSets.Add(Type("DataCompositionSchemaDataSetQuery"));
+	DataSet.Name = "DataSet";
+	DataSet.DataSource = "DataSources";
+	
+	FormCash = GetFormCash(Form);
+	MetaObject = Metadata.FindByType(GetObjectType(Form));
+	ObjectName = MetaObject.FullName();
+	
+	If FormCash.ColumnsData.Count() = 0 Then
+		DataSet.Query = StrTemplate(
+		"SELECT
+		|	Table.Ref,
+		|	UNDEFINED As Constraint,
+		|	"""" As Property,
+		|	UNDEFINED As Value
+		|FROM
+		|	%1 AS Table
+		|WHERE
+		|	FALSE", 
+		ObjectName);
+	Else
+		PropertyRows = New Array; // Array of String
+		For Each ColumnKeyValue In FormCash.ColumnsData Do
+			FieldDescription = ColumnKeyValue.Value; // See GetFieldDescription
+			PropertyRow = StrTemplate(
+			"SELECT
+			|	Table.Ref As Ref,
+			|	UNDEFINED As Constraint,
+			|	""%2"" As Property,
+			|	Table.%2 As Value
+			|FROM
+			|	%1 AS Table",
+			ObjectName,
+			FieldDescription.Ref);
+			PropertyRows.Add(PropertyRow);
+		EndDo;
+		InnerText = StrConcat(PropertyRows, "
+		|	UNION ALL
+		|");
+		
+		DataSet.Query = 
+		"SELECT
+		|	Properties.Ref,
+		|	Properties.Constraint,
+		|	Properties.Property,
+		|	Properties.Value
+		|FROM
+		|	(" + InnerText + ") AS Properties";
+	EndIf;
+	
+	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
+	DataField.Field = "Ref";
+	DataField.DataPath = "Ref";
+	DataField.Title = "Ref";
+		
+	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
+	DataField.Field = "Property";
+	DataField.DataPath = "Property";
+	DataField.UseRestriction.Condition = True;
+	DataField.AttributeUseRestriction.Condition = True;
+		
+	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
+	DataField.Field = "Value";
+	DataField.DataPath = "Value";
+	DataField.UseRestriction.Condition = True;
+	DataField.AttributeUseRestriction.Condition = True;
+	
+	DataField = DataSet.Fields.Add(Type("DataCompositionSchemaDataSetField"));
+	DataField.Field = "Constraint";
+	DataField.DataPath = "Constraint";
+	DataField.UseRestriction.Condition = True;
+	DataField.AttributeUseRestriction.Condition = True;
+		
+	Return DCSchema;
+EndFunction
+
 #EndRegion
 
 #Region LoadData
@@ -949,41 +1294,49 @@ Procedure LoadMetadata(FormCash)
 	TypeChoiceList.Clear();
 	FormCash.ObjectTables.Clear();
 	
-	AvailableTypes = GetAvailableTypes();
-	For Each AvailableType In AvailableTypes Do
+	For Each TypeItem In Catalogs.AllRefsType().Types() Do
+		//@skip-warning
+		ItemPreffics = StrTemplate("(" + R().Str_Catalog + ") ");
+		ItemPicture = PictureLib.Catalog;
+		TypeChoiceList.Add(TypeItem, ItemPreffics + TypeItem, , ItemPicture);
+	EndDo;
+	
+	For Each TypeItem In Documents.AllRefsType().Types() Do
+		//@skip-warning
+		ItemPreffics = StrTemplate("(" + R().Str_Document + ") ");
+		ItemPicture = PictureLib.DocumentJournal;
+		TypeChoiceList.Add(TypeItem, ItemPreffics + TypeItem, , ItemPicture);
+	EndDo;
+	
+	TypesWithProperties = GetTypesWithProperties();
 		
-		ItemPreffics = "";
-		ItemPicture = Undefined;
-		If Catalogs.AllRefsType().ContainsType(AvailableType) Then
-			//@skip-warning
-			ItemPreffics = StrTemplate("(" + R().Str_Catalog + ") ");
-			ItemPicture = PictureLib.Catalog;
-		ElsIf Documents.AllRefsType().ContainsType(AvailableType) Then
-			//@skip-warning
-			ItemPreffics = StrTemplate("(" + R().Str_Document + ") ");
-			ItemPicture = PictureLib.DocumentJournal;
-		EndIf;
-		TypeChoiceList.Add(AvailableType, ItemPreffics + AvailableType, , ItemPicture);
+	For Each TypeItem In TypeChoiceList Do
 		
 		PropertyTables = New Structure;
-		MetaObject = Metadata.FindByType(AvailableType);
-		If TypeOf(MetaObject) = Type("MetadataObject") Then
-			Try
-				TabularSections = MetaObject[TS_String]; // MetadataObjectCollection
-				For Each TabularSection In TabularSections Do
-					TabularSectionAttributes = TabularSection[A_String]; // MetadataObjectCollection
-					AttributeProperty = TabularSectionAttributes.Find(P_String); // MetadataObjectAttribute
-					If Not AttributeProperty = Undefined And isChartOfCharacteristicTypes(AttributeProperty.Type) Then
-						PropertyTables.Insert(TabularSection.Name, TabularSection.Synonym);
-					EndIf;
-				EndDo;
-			Except
-				//@skip-check module-unused-local-variable
-				ErrorDescription = ErrorDescription(); 
-			EndTry;
-		EndIf;
-		FormCash.ObjectTables.Insert(AvailableType, PropertyTables);
+		PropertyTables.Insert("Ref", "Main attributes");
 		
+		AvailableType = TypeItem.Value;
+		If Not TypesWithProperties.Find(AvailableType) = Undefined Then
+			MetaObject = Metadata.FindByType(AvailableType);
+			If TypeOf(MetaObject) = Type("MetadataObject") Then
+				Try
+					TabularSections = MetaObject[TS_String]; // MetadataObjectCollection
+					For Each TabularSection In TabularSections Do
+						TabularSectionAttributes = TabularSection[A_String]; // MetadataObjectCollection
+						AttributeProperty = TabularSectionAttributes.Find(P_String); // MetadataObjectAttribute
+						If Not AttributeProperty = Undefined And isChartOfCharacteristicTypes(AttributeProperty.Type) Then
+							PropertyTables.Insert(TabularSection.Name, TabularSection.Synonym);
+						EndIf;
+					EndDo;
+				Except
+					//@skip-check module-unused-local-variable
+					ErrorDescription = ErrorDescription(); 
+				EndTry;
+			EndIf;
+		EndIf;
+		
+		FormCash.ObjectTables.Insert(AvailableType, PropertyTables);
+
 	EndDo;
 	
 	TypeChoiceList.SortByPresentation();
@@ -1120,8 +1473,10 @@ Procedure LoadNewColumns(Form)
 		ValueType = QuerySelection.ValueType; // TypeDescription
 		isAvailable = QuerySelection.isAvailable; // Boolean
 		isExisting = QuerySelection.isExisting; // Boolean
-		ColumnsData.Insert(ItemKey, GetFieldDescription(
-			ItemRef, ItemPresentation, ValueType, isAvailable, isExisting, ContainsValuesCollection(ItemRef, Form)));
+		ColumnsData.Insert(ItemKey, 
+			GetFieldDescription(
+				ItemRef, ItemPresentation, ValueType, 
+				isAvailable, isExisting, ContainsValuesCollection(ItemRef, Form), False));
 	EndDo;
 	
 	FormCash = GetFormCash(Form);
@@ -1329,32 +1684,71 @@ EndFunction
 &AtServer
 Procedure SaveAtServer()
 	
+	FormCash = GetFormCash(ThisObject);
+	
 	ModifiedRows = ThisObject.PropertiesTable.FindRows(New Structure("isModified", True));
 	For Each Row In ModifiedRows Do
 		
-		ModifiedObject = Row.Object.GetObject();
-		ModifiedTable = ModifiedObject[ThisObject.ObjectTable]; // TabularSection
-		ModifiedTable.Clear();
-		
-		For Each ColumndKeyValue In GetFormCash(ThisObject).ColumnsData Do
-			ColumnKey = ColumndKeyValue.Key; // String
-			ColumnDescription = ColumndKeyValue.Value; // See GetFieldDescription
+		If GetObjectTable(ThisObject) = "Ref" Then
 			
-			ColumnValue = Row[ColumnKey]; // Arbitrary, Undefined
-			If TypeOf(ColumnValue) = Type("ValueList") And ColumnValue.Count() = 0 Then
-				ColumnValue = Undefined;
-			EndIf;
-
-			If TypeOf(ColumnValue) = Type("ValueList") Then
-				For Each CollectionItem In ColumnValue Do
-					WritePropertyValue(ModifiedTable, ColumnDescription.Ref, CollectionItem.Value);
+			If FormCash.UpdateRelatedFieldsWhenWriting Then
+				
+				ModifiedObj = BuilderAPI.Initialize(Row.Object);
+				
+				For Each ColumndKeyValue In FormCash.ColumnsData Do
+					ColumnDescription = ColumndKeyValue.Value; // See GetFieldDescription
+					If ColumnDescription.isVisible Then
+						BuilderAPI.SetProperty(ModifiedObj, ColumnDescription.Ref, Row[ColumndKeyValue.Key]);
+					EndIf;
 				EndDo;
-			ElsIf Not ColumnValue = Undefined Then
-				WritePropertyValue(ModifiedTable, ColumnDescription.Ref, ColumnValue);
+				
+				BuilderAPI.Write(ModifiedObj);
+				
+			Else
+				
+				ModifiedObject = Row.Object.GetObject();
+				
+				For Each ColumndKeyValue In FormCash.ColumnsData Do
+					ColumnDescription = ColumndKeyValue.Value; // See GetFieldDescription
+					If ColumnDescription.isVisible Then
+						ModifiedObject[ColumnDescription.Ref] = Row[ColumndKeyValue.Key]; 
+					EndIf;
+				EndDo;
+				
+				ModifiedObject.DataExchange.Load = FormCash.ForcedWriting;
+				ModifiedObject.Write();
+				
 			EndIf;
-		EndDo;
+			
+		Else
+
+			ModifiedObject = Row.Object.GetObject();
+			ModifiedTable = ModifiedObject[ThisObject.ObjectTable]; // TabularSection
+			ModifiedTable.Clear();
+			
+			For Each ColumndKeyValue In FormCash.ColumnsData Do
+				ColumnKey = ColumndKeyValue.Key; // String
+				ColumnDescription = ColumndKeyValue.Value; // See GetFieldDescription
+				
+				ColumnValue = Row[ColumnKey]; // Arbitrary, Undefined
+				If TypeOf(ColumnValue) = Type("ValueList") And ColumnValue.Count() = 0 Then
+					ColumnValue = Undefined;
+				EndIf;
+	
+				If TypeOf(ColumnValue) = Type("ValueList") Then
+					For Each CollectionItem In ColumnValue Do
+						WritePropertyValue(ModifiedTable, ColumnDescription.Ref, CollectionItem.Value);
+					EndDo;
+				ElsIf Not ColumnValue = Undefined Then
+					WritePropertyValue(ModifiedTable, ColumnDescription.Ref, ColumnValue);
+				EndIf;
+			EndDo;
+			
+			ModifiedObject.DataExchange.Load = FormCash.ForcedWriting;
+			ModifiedObject.Write();
+
+		EndIf;
 		
-		ModifiedObject.Write();
 	EndDo;
 	
 EndProcedure
@@ -1379,37 +1773,41 @@ EndProcedure
 // Get field description.
 // 
 // Parameters:
-//  Ref - AnyRef - Ref
+//  Ref - AnyRef, String - Ref
 //  Presentation - String - Presentation
 //  isAvailable - Boolean - Is available
 //  isExisting - Boolean - Is existing
+//  isCollection - Boolean - Is collection
+//  isServiceAttribute - Boolean - Is service attribute
 // 
 // Returns:
 //  Structure - Get field description:
-// * Ref - AnyRef, Arbitrary -
+// * Ref - AnyRef, String, Arbitrary -
 // * Presentation - String, Arbitrary -
 // * ValueType - TypeDescription, Arbitrary -
 // * isAvailable - Boolean, Arbitrary -
 // * isExisting - Boolean, Arbitrary -
 // * isVisible - Boolean, Arbitrary -
 // * isCollection - Boolean -
+// * isServiceAttribute - Boolean -
 // * CollectionValueType - TypeDescription -
 // * ValueChoiceForm - String -
 &AtServerNoContext
-Function GetFieldDescription(Ref, Presentation, ValueType, isAvailable, isExisting, isCollection)
+Function GetFieldDescription(Ref, Presentation, ValueType, isAvailable, isExisting, isCollection, isServiceAttribute)
 	Result = New Structure;
 	Result.Insert("Ref", Ref);
 	Result.Insert("Presentation", Presentation);
 	Result.Insert("ValueType", ValueType);
 	Result.Insert("isAvailable", isAvailable);
 	Result.Insert("isExisting", isExisting);
-	Result.Insert("isVisible", True);
+	Result.Insert("isVisible", Not isServiceAttribute);
 	Result.Insert("isCollection", isCollection);
+	Result.Insert("isServiceAttribute", isServiceAttribute);
 	Result.Insert("CollectionValueType", New TypeDescription(ValueType, "ValueList"));
 	Result.Insert("ValueChoiceForm", "");
 	
 	EmptyValue = ValueType.AdjustValue(); // CatalogRef
-	If Catalogs.AllRefsType().ContainsType(TypeOf(EmptyValue)) Then
+	If Not EmptyValue = Undefined And Catalogs.AllRefsType().ContainsType(TypeOf(EmptyValue)) Then
 		ValueMetadata = EmptyValue.Metadata();
 		If Not ValueMetadata.DefaultChoiceForm = Undefined And ValueMetadata.Owners.Count() > 0 Then
 			Result.Insert("ValueChoiceForm", ValueMetadata.DefaultChoiceForm.FullName());
@@ -1428,7 +1826,7 @@ EndFunction
 // Returns:
 //  Array of Type - Get available types
 &AtServerNoContext
-Function GetAvailableTypes()
+Function GetTypesWithProperties()
 	Return Metadata.DefinedTypes.typeAddPropertyOwners.Type.Types();
 EndFunction
 
@@ -1508,13 +1906,17 @@ EndFunction
 // Get field key from ref.
 // 
 // Parameters:
-//  Ref - AnyRef - Ref
+//  Ref - AnyRef, String - Ref
 // 
 // Returns:
 //  String - Get field key from ref
 &AtClientAtServerNoContext
 Function GetFieldKeyFromRef(Ref)
-	Return StrReplace("Field_" + Ref.UUID(), "-", "");
+	If TypeOf(Ref) = Type("String") Then
+		Return "Field_" + Ref;
+	Else
+		Return StrReplace("Field_" + Ref.UUID(), "-", "");
+	EndIf;
 EndFunction
 
 // Contains values collection.

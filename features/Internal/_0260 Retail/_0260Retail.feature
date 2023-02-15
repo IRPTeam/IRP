@@ -1173,6 +1173,8 @@ Scenario: _0260142 filters in the Retail sales receipt (basis) form (POS)
 			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
 			| 'Dress' | ''             | 'XS/Blue'  | ''        | '520,00' | '1,000'    | ''       | '520,00' |
 			| 'Shirt' | ''             | '38/Black' | ''        | '350,00' | '1,000'    | ''       | '350,00' |
+		And I delete a line in "ItemList" table
+		And I delete a line in "ItemList" table
 		And I close all client application windows
 		
 							
@@ -1231,9 +1233,9 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			Then the form attribute named "CurrencyBalanceBeginning" became equal to "TRY"
 			And the editing text of form attribute named "BalanceIncoming" became equal to "8 950,00"
 			Then the form attribute named "CurrencyBalanceIncoming" became equal to "TRY"
-			And the editing text of form attribute named "BalanceOutcoming" became equal to "6 380,00"
+			And the editing text of form attribute named "BalanceOutcoming" became equal to "6 413,00"
 			Then the form attribute named "CurrencyBalanceOutcoming" became equal to "TRY"
-			And the editing text of form attribute named "BalanceEnd" became equal to "4 010,00"
+			And the editing text of form attribute named "BalanceEnd" became equal to "3 977,00"
 			Then the form attribute named "CurrencyBalanceEnd" became equal to "TRY"
 			And the editing text of form attribute named "BalanceReal" became equal to "0,00"
 			Then the form attribute named "Company" became equal to "Main Company"
@@ -1271,7 +1273,7 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			| '*'                          | 'Main Company' | '-1 070' | 'Shop 02' | 'TRY'      | 'CI'     |
 		Then the number of "Documents" table lines is "equal" "15"
 		Then the form attribute named "Branch" became equal to "Shop 02"
-		And the editing text of form attribute named "BalanceEnd" became equal to "4 010,00"
+		And the editing text of form attribute named "BalanceEnd" became equal to "3 977,00"
 		And the editing text of form attribute named "BalanceReal" became equal to "4 000,00"
 		And "PaymentList" table became equal
 			| '#' | 'Amount'   | 'Is return' | 'Payment type' | 'Payment terminal' | 'Real amount' |

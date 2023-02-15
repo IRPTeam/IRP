@@ -37,6 +37,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Items.Payment_ReturnPaymentByPaymentCard.Visible = isReturn;
 	Items.Payment_PayByPaymentCard.Visible = Not isReturn;
 	
+	Items.Cashback.Visible = Not (ThisObject.IsAdvance And isReturn);
+	Items.Advance.Visible = ThisObject.IsAdvance And isReturn;
+	
 	If Not ThisObject.IsAdvance And ValueIsFilled(Parameters.RetailCustomer) Then
 		AdvanceAmount = GetAdvanceByRetailCustomer(Parameters.Company, Parameters.Branch, Parameters.RetailCustomer);
 		If ValueIsFilled(AdvanceAmount) Then
@@ -49,6 +52,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 				AdvancePayment.PaymentTypeEnum = AdvancePaymentType.Type;
 			EndIf;
 		EndIf;
+	EndIf;
+	
+	If ThisObject.IsAdvance And isReturn And ValueIsFilled(Parameters.RetailCustomer) Then
+		ThisObject.AdvanceBalance = GetAdvanceByRetailCustomer(Parameters.Company, Parameters.Branch, Parameters.RetailCustomer);
 	EndIf;
 EndProcedure
 
@@ -101,8 +108,10 @@ EndFunction
 &AtServer
 Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	ErrorMessages = New Array();
-
-	If Not ThisObject.IsAdvance Then
+	
+	IsIncomingOutgoingAdvance = ThisObject.IsAdvance;
+	
+	If Not IsIncomingOutgoingAdvance Then
 		If ThisObject.PaymentsAmountTotal < Object.Amount Then
 			ErrorMessages.Add(R().POS_s1);
 		EndIf;
@@ -120,7 +129,7 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	CardAmounts = PaymentsValue.Copy(CardPaymentFilter, "Amount");
 	CardAmount = CardAmounts.Total("Amount");
 	
-	If Not ThisObject.IsAdvance Then
+	If Not IsIncomingOutgoingAdvance Then
 		If CardAmount > Object.Amount Then
 			ErrorMessages.Add(R().POS_s2);
 		EndIf;
@@ -539,7 +548,9 @@ Procedure FillPaymentsAtServer()
 	BankPaymentTypesValue = GetBankPaymentTypesValue(Object.Branch);
 	ValueToFormAttribute(BankPaymentTypesValue, "BankPaymentTypes");
 
-	If Not ThisObject.IsAdvance Then
+	IsIncomingOutgoingAdvance = ThisObject.IsAdvance;
+	
+	If Not IsIncomingOutgoingAdvance Then
 		PaymentAgentValue = GetPaymentAgentTypesValue(Object.Branch);
 		ValueToFormAttribute(PaymentAgentValue, "PaymentAgentTypes");
 	EndIf;

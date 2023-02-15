@@ -98,6 +98,20 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
+  <dimensions uuid="b0487f55-0aa6-417e-8849-4410d78bb422">
+    <name>TransactionCurrency</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
   <dimensions uuid="1b814b84-e0d1-4ba7-a080-7dd9438b1e28">
     <name>Cheque</name>
     <synonym>

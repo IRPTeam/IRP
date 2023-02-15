@@ -11,6 +11,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 
 		For Each Info In Path.Value Do
 			InfoRow = Row.GetItems().Add();
+			SetSafeMode(True);
 			Ref = Eval(Info.Type + ".EmptyRef()");
 
 			InfoRow.Info = TypeOf(Ref);

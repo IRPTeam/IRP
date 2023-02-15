@@ -885,7 +885,7 @@
         </items>
         <items xsi:type="form:FormField">
           <name>PaymentListEmployee</name>
-          <id>359</id>
+          <id>369</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -896,7 +896,7 @@
           </dataPath>
           <extendedTooltip>
             <name>PaymentListEmployeeExtendedTooltip</name>
-            <id>361</id>
+            <id>370</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -911,7 +911,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>PaymentListEmployeeContextMenu</name>
-            <id>360</id>
+            <id>371</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>

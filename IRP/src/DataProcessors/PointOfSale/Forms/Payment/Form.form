@@ -1062,6 +1062,65 @@
             </font>
           </extInfo>
         </items>
+        <items xsi:type="form:FormField">
+          <name>Advance</name>
+          <id>267</id>
+          <titleFont xsi:type="core:FontRef">
+            <font>Style.ExtraLargeTextFont</font>
+            <bold>true</bold>
+            <italic>false</italic>
+            <underline>false</underline>
+            <strikeout>false</strikeout>
+          </titleFont>
+          <visible>true</visible>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>AdvanceBalance</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>AdvanceExtendedTooltip</name>
+            <id>269</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>AdvanceContextMenu</name>
+            <id>268</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>LabelField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:LabelFieldExtInfo">
+            <autoMaxHeight>true</autoMaxHeight>
+            <horizontalStretch>true</horizontalStretch>
+            <font xsi:type="core:FontRef">
+              <font>Style.ExtraLargeTextFont</font>
+              <bold>true</bold>
+              <italic>false</italic>
+              <underline>false</underline>
+              <strikeout>false</strikeout>
+            </font>
+          </extInfo>
+        </items>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -2979,6 +3038,23 @@
     <id>42</id>
     <valueType>
       <types>DocumentRef.RetailSalesReceipt</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>AdvanceBalance</name>
+    <title>
+      <key>en</key>
+      <value>Advance</value>
+    </title>
+    <id>46</id>
+    <valueType>
+      <types>DefinedType.typeAmount</types>
     </valueType>
     <view>
       <common>true</common>

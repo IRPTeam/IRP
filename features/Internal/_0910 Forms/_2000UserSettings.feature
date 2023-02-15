@@ -1527,7 +1527,23 @@ Scenario: _0154200 check user settings priority
 		And I click the button named "FormCreate"
 		Then the form attribute named "Branch" became equal to "Logistics department"
 						
-
+Scenario: _200045 check time zone for user settings
+	And I close all client application windows
+	* Select time zone for CI
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login' |
+			| 'CI'          |
+		And I select current line in "List" table
+		And I select "Europe/London" exact value from "Time zone" drop-down list
+		And I click "Save and close" button
+	* Check
+		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+		Then the form attribute named "CurrentSessionTimeZone" became equal to "Europe/London"
+		And I save the value of "Current database time zone" field as "CurrentDataBaseTime"
+		And I save the value of "Current session time" field as "CurrentSessionTime"
+		And I save the value of "Current user PC time" field as "CurrentUserPCTime"
+		// And I save "{$CurrentSessionTime$ = $CurrentUserPCTime$}" in "DateIsCorrect" variable
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

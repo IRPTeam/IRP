@@ -4185,6 +4185,7 @@ Function ExtractData_FromWO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.Company AS Company,
 	|	ItemList.ItemKey AS ItemKey,
 	|	ItemList.ItemKey.Item AS Item,
+	|	Value(Enum.InventoryOrigingTypes.OwnStocks) AS InventoryOrigin,
 	|	ItemList.PriceType AS PriceType,
 	|	ItemList.DontCalculateRow AS DontCalculateRow,
 	|	ItemList.Ref.Branch AS Branch,

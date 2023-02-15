@@ -65,6 +65,9 @@ Procedure SessionParametersSetting(RequiredParameters) Export
 	If RequiredParameters.Find("IgnoreLockModificationData") <> Undefined Then
 		SessionParameters.IgnoreLockModificationData = False;
 	EndIf;
+	If RequiredParameters.Find("Buffer") <> Undefined Then
+		SessionParameters.Buffer = New ValueStorage(New Array);;
+	EndIf;
 EndProcedure
 
 Function GetSessionParameter(ParameterName) Export

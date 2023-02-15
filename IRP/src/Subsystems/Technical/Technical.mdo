@@ -10,4 +10,5 @@
   <subsystems>Marketing</subsystems>
   <subsystems>Mobile</subsystems>
   <subsystems>UniqueID</subsystems>
+  <subsystems>CopyPaste</subsystems>
 </mdclass:Subsystem>

@@ -89,9 +89,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.GroupHeaderTopUserAdmin.Visible = ValueIsFilled(Form.UserAdmin);
 	
 	// Additional settings
-	Form.Items.Return.Enabled = UserSettingsServer.PointOfSale_AdditionalSettings_CreateReturn(Form.UserAdmin);
+	Form.Items.Return.Enabled = UserSettingsServer.PointOfSale_AdditionalSettings_DisableCreateReturn(Form.UserAdmin);
 	
-	ChangePrice = UserSettingsServer.PointOfSale_AdditionalSettings_ChangePrice(Form.UserAdmin);
+	ChangePrice = UserSettingsServer.PointOfSale_AdditionalSettings_DisableChangePrice(Form.UserAdmin);
 	Form.Items.ItemListPrice.Enabled = ChangePrice;
 	Form.Items.ItemListTotalAmount.Enabled = ChangePrice;
 EndProcedure

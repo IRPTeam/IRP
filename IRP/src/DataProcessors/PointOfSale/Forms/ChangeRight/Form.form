@@ -164,7 +164,58 @@
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
-        <common>true</common>
+        <for>
+          <role>Role.BasicRole</role>
+        </for>
+        <for>
+          <role>Role.CreateOrModifyUsers</role>
+        </for>
+        <for>
+          <role>Role.FilterForUserSettings</role>
+        </for>
+        <for>
+          <value>true</value>
+          <role>Role.FullAccess</role>
+        </for>
+        <for>
+          <role>Role.FullAccessInArea</role>
+        </for>
+        <for>
+          <role>Role.FullAccessOnlyRead</role>
+        </for>
+        <for>
+          <role>Role.RunMobileClient</role>
+        </for>
+        <for>
+          <role>Role.RunThickClient</role>
+        </for>
+        <for>
+          <role>Role.RunThinClient</role>
+        </for>
+        <for>
+          <role>Role.RunWebClient</role>
+        </for>
+        <for>
+          <role>Role.SaveUserData</role>
+        </for>
+        <for>
+          <role>Role.SystemAdministrator</role>
+        </for>
+        <for>
+          <role>Role.UseAllFunctionsMode</role>
+        </for>
+        <for>
+          <role>Role.UseEventLog</role>
+        </for>
+        <for>
+          <role>Role.UseExternalDataProcessors</role>
+        </for>
+        <for>
+          <role>Role.UseExternalReports</role>
+        </for>
+        <for>
+          <role>Role.UseOutput</role>
+        </for>
       </userVisible>
       <extendedTooltip>
         <name>FormSearchByBarcodeExtendedTooltip</name>

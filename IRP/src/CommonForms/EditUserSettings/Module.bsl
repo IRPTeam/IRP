@@ -586,8 +586,8 @@ Function GetAdditionalSettings(RowOwner, TableOfSettings)
 	
 	// change price
 	NewSetting = New Structure();
-	NewSetting.Insert("Name", "ChangePrice");
-	NewSetting.Insert("FullName", FullName + ".ChangePrice");
+	NewSetting.Insert("Name", "DisableChangePrice");
+	NewSetting.Insert("FullName", FullName + ".DisableChangePrice");
 	NewSetting.Insert("Synonym" , R().Add_Setiings_003);
 	NewSetting.Insert("KindOfAttribute", Enums.KindsOfAttributes.AdditionalSetting);
 	NewSetting.Insert("TypeRestriction", New TypeDescription("Boolean"));
@@ -598,8 +598,8 @@ Function GetAdditionalSettings(RowOwner, TableOfSettings)
 	
 	// create return
 	NewSetting = New Structure();
-	NewSetting.Insert("Name", "CreateReturn");
-	NewSetting.Insert("FullName", FullName + ".CreateReturn");
+	NewSetting.Insert("Name", "DisableCreateReturn");
+	NewSetting.Insert("FullName", FullName + ".DisableCreateReturn");
 	NewSetting.Insert("Synonym" , R().Add_Setiings_004);
 	NewSetting.Insert("KindOfAttribute", Enums.KindsOfAttributes.AdditionalSetting);
 	NewSetting.Insert("TypeRestriction", New TypeDescription("Boolean"));

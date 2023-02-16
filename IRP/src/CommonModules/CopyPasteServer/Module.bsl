@@ -1,5 +1,7 @@
 // @strict-types
 
+#Region FORM
+
 // Create commands.
 // 
 // Parameters:
@@ -20,6 +22,9 @@ Procedure CreateCommands(Form, ObjectFullName, FormType, AddInfo = Undefined) Ex
 	CommandButton.CommandName = "CopyToClipboard";
 EndProcedure
 
+#EndRegion
+
+#Region COPY
 
 // Copy to clipboard.
 // 
@@ -67,6 +72,59 @@ Function CopySelectedRows(Object, Form, CopySettings) Export
 	Return Result;
 EndFunction
 
+#EndRegion
+
+#Region PASTE
+
+// Copy to clipboard.
+// 
+// Parameters:
+//  Object - DocumentObjectDocumentName - Object
+//  Form - ClientApplicationForm - Form
+//  CopySettings - See CopyPasteClient.CopySettings
+// 
+// Returns:
+//  See BufferSettings
+Function PasteClipboard(Object, Form, CopySettings) Export
+	Result = Undefined;
+	If CopySettings.CopySelectedRows Then
+		Result = PasteSelectedRows(Object, Form, CopySettings); 
+	EndIf;
+	
+	If Result = Undefined Then
+		Result = BufferSettings();
+		Result.isError = True;
+		Return Result;
+	EndIf;
+	
+	If Result.isError Then
+		Return Result;
+	EndIf;
+
+	Data = SessionParameters.Buffer.Get(); // Array Of See BufferSettings
+	Data.Add(Result);
+	SessionParameters.Buffer = New ValueStorage(Data, New Deflation(9));
+	Result.Data = Undefined;
+	
+	Return Result;
+EndFunction
+
+Function PasteSelectedRows(Object, Form, CopySettings) Export
+	Result = BufferSettings();
+	If Not Form.CurrentItem.DataPath = "Object.ItemList" Then
+		Result.isError = True;
+		Result.Message = StrTemplate(R().CP_003, Object.Ref.Metadata().TabularSections.ItemList.Synonym);
+		Return Result;
+	EndIf;
+	
+	Result.Message = StrTemplate(R().CP_006, Form.CurrentItem.SelectedRows.Count());	
+	
+	Return Result;
+EndFunction
+
+#EndRegion
+
+#Region SERVICE
 
 // Buffer settings.
 // 
@@ -86,3 +144,5 @@ Function BufferSettings() Export
 	Str.Insert("Message", "");
 	Return Str;
 EndFunction
+
+#EndRegion

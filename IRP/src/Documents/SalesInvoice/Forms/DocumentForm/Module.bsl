@@ -567,14 +567,29 @@ EndProcedure
 
 &AtClient
 Procedure CopyToClipboard(Command) Export
+	
 	CopySettings = CopyPasteClient.CopyToClipboard(Object, ThisObject);
-	CopyPastResult = CopyToClipboardServer(CopySettings);
-	CopyPasteClient.AfterCopy(CopyPastResult);
+	
+	CopyPasteResult = CopyToClipboardServer(CopySettings);
+	CopyPasteClient.AfterCopy(CopyPasteResult);
+	
 EndProcedure
 
 &AtServer
 Function CopyToClipboardServer(CopySettings) Export
 	Return CopyPasteServer.CopyToClipboard(Object, ThisObject, CopySettings);
+EndFunction
+
+&AtClient
+Procedure PasteFromClipboard(Command) Export
+	PasteSettings = CopyPasteClient.PasteFromClipboard(Object, ThisObject);
+	CopyPasteResult = PasteFromClipboardServer(PasteSettings);
+	CopyPasteClient.AfterPaste(CopyPasteResult);
+EndProcedure
+
+&AtServer
+Function PasteFromClipboardServer(CopySettings) Export
+	Return CopyPasteServer.PasteFromClipboard(Object, ThisObject, CopySettings);
 EndFunction
 
 #EndRegion

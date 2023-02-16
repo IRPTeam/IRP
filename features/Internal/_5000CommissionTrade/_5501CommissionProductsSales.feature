@@ -925,7 +925,7 @@ Scenario: _050025 create Sales report co consignor
 			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 			Then the form attribute named "Currency" became equal to "TRY"
 			Then the form attribute named "Branch" became equal to ""
-			Then the form attribute named "Author" became equal to "en description is empty"
+			Then the form attribute named "Author" became equal to "CI"
 			Then the form attribute named "ItemListTotalTradeAgentFeeAmount" became equal to "-0,78"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "-6,60"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "0,00"

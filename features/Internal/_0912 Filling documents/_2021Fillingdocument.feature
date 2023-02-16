@@ -3779,6 +3779,23 @@ Scenario: _0154116 check filling in and refilling Cash expence
 		And "PaymentList" table contains lines
 			| 'Net amount' | 'Profit loss center' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'       | 'Software'     | 'USD'      | '8%'  | '16,00'      | '216,00'       |
+	* Check question about tax when change date
+		And I input "01.01.2021 00:00:00" text in the field named "Date"
+		And I move to the next attribute
+		Then "1C:Enterprise" window is opened
+		And I click "No" button
+		And "PaymentList" table became equal
+			| 'Profit loss center' | 'Expense type' | 'Currency' | 'Tax amount' | 'VAT' | 'Net amount' | 'Total amount' |
+			| 'Front office'       | 'Software'     | 'USD'      | '16,00'      | '8%'  | '200,00'     | '216,00'       |
+			| 'Accountants office' | 'Software'     | 'USD'      | ''           | '0%'  | '100,00'     | '100,00'       |
+		And I input "02.01.2021 00:00:00" text in the field named "Date"
+		And I move to the next attribute
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And "PaymentList" table became equal
+			| 'Profit loss center' | 'Expense type' | 'Currency' | 'Tax amount' | 'VAT' | 'Net amount' | 'Total amount' |
+			| 'Front office'       | 'Software'     | 'USD'      | '36,00'      | '18%' | '200,00'     | '236,00'       |
+			| 'Accountants office' | 'Software'     | 'USD'      | '18,00'      | '18%' | '100,00'     | '118,00'       |
 	And I close all client application windows
 
 
@@ -3948,7 +3965,23 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 		And "PaymentList" table contains lines
 			| 'Net amount' | 'Revenue type' | 'Total amount' | 'Currency' | 'VAT' | 'Tax amount' |
 			| '200,00'     | 'Software'     | '216,00'       | 'TRY'      | '8%'  | '16,00'      |
+	* Check question about tax when change date
+		And I input "01.01.2021 00:00:00" text in the field named "Date"
+		And I move to the next attribute
+		Then "1C:Enterprise" window is opened
+		And I click "No" button
+		And "PaymentList" table contains lines
+			| 'Net amount' | 'Revenue type' | 'Total amount' | 'Currency' | 'VAT' | 'Tax amount' |
+			| '200,00'     | 'Software'     | '216,00'       | 'TRY'      | '8%'  | '16,00'      |
+		And I input "02.01.2021 00:00:00" text in the field named "Date"
+		And I move to the next attribute
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		And "PaymentList" table became equal
+			| 'Profit loss center' | 'Revenue type' | 'Currency' | 'Tax amount' | 'VAT' | 'Net amount' | 'Total amount' |
+			| 'Front office'       | 'Software'     | 'TRY'      | '36,00'      | '18%' | '200,00'     | '236,00'       |
 		And I close all client application windows
+
 
 Scenario: _0154118 check the details cleaning on the form Cash receipt 
 	* Open form CashReceipt

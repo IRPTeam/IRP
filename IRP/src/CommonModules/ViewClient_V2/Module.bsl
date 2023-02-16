@@ -580,6 +580,8 @@ Procedure __tmp_CashExpenseRevenue_DateOnUserChangeContinue(Answer, NotifyParame
 	If Answer = DialogReturnCode.Yes Then
 		__tmp_CashExpenseRevenue_CommitChanges(NotifyParameters.Parameters);
 	Else
+		DataPaths = "PaymentList.NetAmount, PaymentList.TaxAmount, PaymentList.TotalAmount";
+		RemoveFromCache(DataPaths, NotifyParameters.Parameters, False);
 		// remove tax rate from cache
 		DynamicDataPaths = New Array();
 		For Each TaxInfo In NotifyParameters.Parameters.ArrayOfTaxInfo Do

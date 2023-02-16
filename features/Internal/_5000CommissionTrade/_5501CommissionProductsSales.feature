@@ -34,6 +34,7 @@ Scenario: _05502 preparation (commission products sales)
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
 		When Create catalog Items objects
+		When Create catalog Users objects
 		When Create catalog Countries objects
 		When Create catalog SourceOfOrigins objects
 		When Create catalog PriceTypes objects

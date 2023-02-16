@@ -13,6 +13,7 @@ Background:
 	
 Scenario: _034901 preparation (discounts in POS)
 	When Create catalog BusinessUnits objects
+	When Create catalog Users objects
 	When Create catalog PaymentTypes objects
 	When Create information register UserSettings records (Retail document)
 	* Launch Two plus part of third

@@ -128,4 +128,13 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="d37d69d3-2cdb-425d-bf0b-061752ef7871">
+    <name>ChangeRight</name>
+    <synonym>
+      <key>en</key>
+      <value>Change right</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:DataProcessor>

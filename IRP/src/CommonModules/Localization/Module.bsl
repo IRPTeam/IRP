@@ -902,6 +902,8 @@ Function Strings(Lang) Export
 	Strings.Insert("I_4", NStr("en = 'Find %1 rows in table by key %2'", Lang));
 	Strings.Insert("I_5", NStr("en = 'Not supported table'", Lang));
 	Strings.Insert("I_6", NStr("en = 'Ordered without ISR'", Lang));
+	Strings.Insert("I_7", NStr("en = 'Change rights'", Lang));
+	Strings.Insert("I_8", NStr("en = 'Rollback rights'", Lang));
 
 #EndRegion
 
@@ -982,6 +984,13 @@ Function Strings(Lang) Export
 	Strings.Insert("Str_Catalogs", NStr("en = 'Catalogs'", Lang));
 	Strings.Insert("Str_Document", NStr("en = 'Document'", Lang));
 	Strings.Insert("Str_Documents", NStr("en = 'Documents'", Lang));
+#EndRegion
+
+#Region AdditionalSettings
+	Strings.Insert("Add_Setiings_001", NStr("en = 'Additional settings'", Lang));
+	Strings.Insert("Add_Setiings_002", NStr("en = 'Point of sale'", Lang));
+	Strings.Insert("Add_Setiings_003", NStr("en = 'Disable - Change price'", Lang));
+	Strings.Insert("Add_Setiings_004", NStr("en = 'Disable - Create return'", Lang));
 #EndRegion
 
 #Region Mobile

@@ -82,6 +82,7 @@ Scenario: _604702 check filling additional attribute and filters in the ObjectPr
 		Given I open hyperlink "e1cib/app/DataProcessor.ObjectPropertyEditor"
 	* Select catalog items
 		And I select "(Catalog) Item" exact value from "Object type" drop-down list
+		And I select "Additional attributes" exact value from "Table" drop-down list		
 	* Check filling additional attribute
 		And I click the button named "Refresh"
 		And "PropertiesTable" table contains lines
@@ -128,13 +129,13 @@ Scenario: _604702 check filling additional attribute and filters in the ObjectPr
 			| 'No'     | 'No'          | 'Boots'      | ''      | ''         | ''        | ''                       |
 			| 'No'     | 'No'          | 'High shoes' | ''      | ''         | ''        | ''                       |
 	* Select fields
-		And I click "Fields" button
+		And I click "Settings" button
 		And I go to line in "FieldsTable" table
 			| 'Field name' | 'Is visible' | 'Type'                       |
 			| 'Article'    | 'Yes'        | 'Additional attribute value' |
 		And I remove "Is visible" checkbox in "FieldsTable" table
 		And I finish line editing in "FieldsTable" table
-		And in the table "FieldsTable" I click "Apply setting" button
+		And I click "Apply setting" button
 		And I click the button named "Refresh"
 	
 
@@ -145,6 +146,7 @@ Scenario: _604703 check filling additional attribute and filters in the ObjectPr
 	* Select catalog items
 		And I select "(Document) Inventory transfer order" exact value from "Object type" drop-down list
 	* Check filling additional attribute
+		And I select "Additional attributes" exact value from "Table" drop-down list
 		And I click the button named "Refresh"
 		And "PropertiesTable" table became equal
 			| 'Marked' | 'Is modified' | 'Object'                                                 | 'Brand' | 'Producer' |
@@ -177,6 +179,7 @@ Scenario: _604706 edit selected elements (ObjectPropertyEditor)
 		Given I open hyperlink "e1cib/app/DataProcessor.ObjectPropertyEditor"			
 	* Select catalog items
 		And I select "(Catalog) Item" exact value from "Object type" drop-down list
+		And I select "Additional attributes" exact value from "Table" drop-down list
 		And I click the button named "Refresh"	
 	* Edit selected elements
 		And I go to line in "PropertiesTable" table
@@ -282,6 +285,7 @@ Scenario: _604710 delete value from element (ObjectPropertyEditor)
 		Given I open hyperlink "e1cib/app/DataProcessor.ObjectPropertyEditor"			
 	* Select catalog items
 		And I select "(Catalog) Item" exact value from "Object type" drop-down list
+		And I select "Additional attributes" exact value from "Table" drop-down list
 		And I click the button named "Refresh"
 	* Delete value from element
 		And I activate "Brand" field in "PropertiesTable" table
@@ -301,6 +305,7 @@ Scenario: _604714 copy value to marked row (ObjectPropertyEditor)
 		Given I open hyperlink "e1cib/app/DataProcessor.ObjectPropertyEditor"			
 	* Select catalog items
 		And I select "(Catalog) Item" exact value from "Object type" drop-down list
+		And I select "Additional attributes" exact value from "Table" drop-down list
 		And I click the button named "Refresh"
 	* Select row
 		And I go to line in "PropertiesTable" table
@@ -328,6 +333,53 @@ Scenario: _604714 copy value to marked row (ObjectPropertyEditor)
 		And I close all client application windows
 		
 
+Scenario: _604717 change main attributes (ObjectPropertyEditor)				
+	And I close all client application windows
+	* Open Object property editor
+		Given I open hyperlink "e1cib/app/DataProcessor.ObjectPropertyEditor"			
+	* Select catalog items
+		And I select "(Catalog) Item" exact value from "Object type" drop-down list
+		And I select "Main attributes" exact value from "Table" drop-down list
+		And I click the button named "Refresh"
+	* Change unit and Vendor
+		And I go to line in "PropertiesTable" table
+			| 'Is modified' | 'Item ID' | 'Item type' | 'Marked' | 'Object'   | 'Unit' |
+			| 'No'          | '10002'   | 'Clothes'   | 'No'     | 'Trousers' | 'pcs'  |
+		And I activate "Unit" field in "PropertiesTable" table
+		And I select current line in "PropertiesTable" table
+		And I click choice button of "Unit" attribute in "PropertiesTable" table
+		And I go to line in "List" table
+			| 'Code' | 'Description' | 'Reference'   |
+			| '4'    | 'box (8 pcs)' | 'box (8 pcs)' |
+		And I select current line in "List" table
+		And I finish line editing in "PropertiesTable" table
+		And I go to line in "PropertiesTable" table
+			| 'Is modified' | 'Item ID' | 'Item type' | 'Marked' | 'Object' | 'Unit' |
+			| 'No'          | '10003'   | 'Clothes'   | 'No'     | 'Shirt'  | 'pcs'  |
+		And I activate "Vendor" field in "PropertiesTable" table
+		And I select current line in "PropertiesTable" table
+		And I click choice button of "Vendor" attribute in "PropertiesTable" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I finish line editing in "PropertiesTable" table
+		And I click the button named "Save"
+	* Check
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shirt'       |
+		And I select current line in "List" table
+		Then the form attribute named "Vendor" became equal to "Kalipso"
+		And I close current window
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Trousers'     |
+		And I select current line in "List" table	
+		Then the form attribute named "Unit" became equal to "box (8 pcs)"
+	And I close all client application windows
+						
 				
 
 		

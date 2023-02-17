@@ -174,7 +174,7 @@ Scenario: _008004 filling in the "Users" catalog
 		Then I check for the "Users" catalog element with the "Description_en" "Olivia Williams (Manager 1)"  
 		Then I check for the "Users" catalog element with the "Description_en" "Emily Jones (Manager 2)"
 		Then I check for the "Users" catalog element with the "Description_en" "Sofia Borisova (Manager 3)"
-		
+
 
 
 
@@ -417,3 +417,57 @@ Scenario: _008007 adding employees to the Region 1 and to the Region 2 segment f
 				| 'Region 1' | 'Sofia Borisova' |
 
 
+Scenario: _008008 create employee positions
+	And I close all client application windows
+	When set True value to the constant Use salary
+	* Create first element
+		Given I open hyperlink "e1cib/list/Catalog.EmployeePositions"		
+		And I click the button named "FormCreate"
+		And I input "Manager" text in "ENG" field
+		And I click Open button of "ENG" field
+		Then "Edit descriptions" window is opened
+		And I input "Manager TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+	* Create first element
+		Then "Employee positions" window is opened
+		And I click the button named "FormCreate"
+		And I input "Sales representative" text in "ENG" field
+		And I click "Save and close" button
+		And I wait "Expense and revenue type (create) *" window closing in 20 seconds
+	* Check creation
+		And "List" table contains lines
+			| 'Description'          |
+			| 'Manager'              |
+			| 'Sales representative' |
+		
+Scenario: _008009 create accrual and deduction types
+	And I close all client application windows
+	* Create first element
+		Given I open hyperlink "e1cib/list/Catalog.AccrualAndDeductionTypes"		
+		And I click the button named "FormCreate"
+		And I input "Salary by day" text in "ENG" field
+		And I click Open button of "ENG" field
+		Then "Edit descriptions" window is opened
+		And I input "Salary by day TR" text in "TR" field
+		And I click "Ok" button
+		And I select "By day" exact value from the drop-down list named "Periodicity"
+		And I select "Monthly salary" exact value from "Algorithm ID" drop-down list		
+		And I click "Save and close" button	
+	* Create second element	
+		And I click the button named "FormCreate"
+		And I input "Monthly salary" text in "ENG" field
+		And I click Open button of "ENG" field
+		Then "Edit descriptions" window is opened
+		And I input "Monthly salary TR" text in "TR" field
+		And I click "Ok" button
+		And I select "By period" exact value from the drop-down list named "Periodicity"
+		And I select "Monthly salary" exact value from "Algorithm ID" drop-down list		
+		And I click "Save and close" button		
+	* Check creation
+		And "List" table contains lines
+			| 'Description'    |
+			| 'Salary by day'  |
+			| 'Monthly salary' |
+		And I close all client application windows
+		

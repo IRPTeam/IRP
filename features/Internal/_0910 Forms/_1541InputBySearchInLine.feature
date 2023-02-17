@@ -16,6 +16,7 @@ Background:
 Scenario: _0154000 preparation
 	When set True value to the constant
 	When set True value to the constant Use commission trading
+	When set True value to the constant Use salary
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -72,6 +73,11 @@ Scenario: _0154000 preparation
 		When Create catalog PaymentTypes objects
 		When Create catalog CancelReturnReasons objects
 		When update ItemKeys
+	* Data for salary
+		When Create catalog EmployeePositions objects
+		When Create information register T9510S_Staffing records
+		When Create information register T9530S_WorkDays records
+		When Create catalog AccrualAndDeductionTypes objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -2019,3 +2025,89 @@ Scenario: _0154091 check company, account, currency input by search in line in C
 		| 'Second Company Ferron BP' | 'Ferron BP' |
 		And I close all client application windows
 
+Scenario: _0154092 check company, employee, currency, position, branch input by search in line in Payroll (in english)
+	And I close all client application windows
+	* Open a creation form Payroll
+		Given I open hyperlink "e1cib/list/Document.Payroll"
+		And I click the button named "FormCreate"
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Currency input by search in line
+		And I select from "Currency" drop-down list by "lir" string
+	* Branch input by search in line
+		And I select from "Branch" drop-down list by "front" string
+	* Filling the tabular part by searching the value by line employee and position)
+		And I move to "Payroll" tab
+		And in the table "PayrollList" I click the button named "PayrollListAdd"
+		And I activate "Employee" field in "PayrollList" table
+		And I select current line in "PayrollList" table
+		And I select "bro" from "Employee" drop-down list by string in "PayrollList" table
+		And I activate "Position" field in "PayrollList" table
+		And I select "mana" from "Position" drop-down list by string in "PayrollList" table
+		And I activate "Accrual and deduction type" field in "PayrollList" table
+		And I select "sa" from "Accrual and deduction type" drop-down list by string in "PayrollList" table
+	* Check filling in
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "Branch" became equal to "Front office"
+		And "PayrollList" table contains lines
+			| 'Employee'    | 'Position' | 'Accrual and deduction type' |
+			| 'Arina Brown' | 'Manager'  | 'Salary'                     |
+		And I close all client application windows
+
+Scenario: _0154092 check company, branch input by search in line in TimeSheet (in english)
+	And I close all client application windows
+	* Open a creation form TimeSheet
+		Given I open hyperlink "e1cib/list/Document.TimeSheet"
+		And I click the button named "FormCreate"
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Branch input by search in line
+		And I select from "Branch" drop-down list by "front" string
+	* Check filling in
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Branch" became equal to "Front office"
+		And I close all client application windows
+
+
+Scenario: _0154092 check company, branch input by search in line in Staffing (in english)
+	And I close all client application windows
+	* Open a creation form Staffing
+		Given I open hyperlink "e1cib/list/InformationRegister.T9510S_Staffing"
+		And I click the button named "FormCreate"
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Branch input by search in line
+		And I select from "Branch" drop-down list by "front" string
+	* Employee input by search in line
+		And I select from "Employee" drop-down list by "brow" string
+	* Position input by search in line
+		And I select from "Position" drop-down list by "manag" string
+	* Check filling in
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Branch" became equal to "Front office"
+		Then the form attribute named "Employee" became equal to "Arina Brown"
+		Then the form attribute named "Position" became equal to "Manager"
+		And I close all client application windows
+
+Scenario: _0154093 check company, expense and revenue type input by search in line in ForeignCurrencyRevaluation (in english)
+	And I close all client application windows
+	* Open a creation form Staffing
+		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
+		And I click the button named "FormCreate"
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Expense input by search in line
+		And I select from "(Expense) Type" drop-down list by "exp" string
+	* Revenue input by search in line
+		And I select from "(Revenue) Type" drop-down list by "rev" string
+	* Profit loss center in line
+		And I select from "(Expense) Profit loss center" drop-down list by "fron" string
+		And I select from "(Revenue) Profit loss center" drop-down list by "fron" string		
+	* Check filling in
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "ExpenseType" became equal to "Expense"
+		Then the form attribute named "ExpenseProfitLossCenter" became equal to "Front office"
+		Then the form attribute named "RevenueType" became equal to "Revenue"
+		Then the form attribute named "RevenueProfitLossCenter" became equal to "Front office"
+		And I close all client application windows

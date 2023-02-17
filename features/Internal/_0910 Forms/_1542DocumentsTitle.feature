@@ -528,5 +528,28 @@ Scenario: _023127 check the display of the header of the collapsible group in Sa
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
 
+Scenario: _023128 check the display of the header of the collapsible group in TimeSheet
+	Given I open hyperlink "e1cib/list/Document.TimeSheet"
+	* Check the display of the header of the collapsible group
+		When check the display of the header of the collapsible group in OpeningEntry
+		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
+	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
+	When I Check the steps for Exception
+        |'And I click Select button of  "Company" field'|
+	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+	And I close all client application windows
+
+Scenario: _023129 check the display of the header of the collapsible group in Payroll
+	Given I open hyperlink "e1cib/list/Document.Payroll"
+	* Check the display of the header of the collapsible group
+		When check the display of the header of the collapsible group in OpeningEntry
+		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
+	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
+	When I Check the steps for Exception
+        |'And I click Select button of  "Company" field'|
+	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+	And I close all client application windows
+
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session

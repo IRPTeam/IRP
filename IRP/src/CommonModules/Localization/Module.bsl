@@ -879,6 +879,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_022", NStr("en = 'Do you want to upload this files'", Lang) + ": " + Chars.LF + "%1");
 	Strings.Insert("QuestionToUser_023", NStr("en = 'Do you want to fill according to cash transfer order?'", Lang));
 	Strings.Insert("QuestionToUser_024", NStr("en = 'Change planning period?'", Lang));
+	Strings.Insert("QuestionToUser_025", NStr("en = 'Do you want to update filled tax rates?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser

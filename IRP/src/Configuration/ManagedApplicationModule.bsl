@@ -64,8 +64,17 @@ EndProcedure
 
 Procedure ExternEventProcessing(Source, Event, Data)
 	If Data <> Undefined Then
-		If Event = "NewBarcode" Or Event = "Штрихкод" Then
-			Notify("NewBarcode", Data);
+		If Event = "NewBarcode" 
+			Or Event = "Barcode" Then
+			If StrStartsWith(Source, "InputDevice") Then 	
+				For Each Settings In globalEquipments.ConnectionSettings Do
+					If Settings.Value.ID = Source Then
+						Notify("NewBarcode", Data);
+					EndIf;
+				EndDo;
+			Else
+				Notify("NewBarcode", Data);
+			EndIf;
 		EndIf;
 	EndIf;
 EndProcedure

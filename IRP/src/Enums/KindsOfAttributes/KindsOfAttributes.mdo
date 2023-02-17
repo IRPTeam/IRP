@@ -61,4 +61,11 @@
       <value>Custom</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="87bebf5c-8776-4781-a991-ae6f311a1850">
+    <name>AdditionalSetting</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional setting</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

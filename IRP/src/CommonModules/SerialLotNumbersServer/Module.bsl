@@ -1,4 +1,42 @@
 
+// Fill settings add new serial.
+// 
+// Parameters:
+//  Str - Structure:
+// * RowKey - String -
+// * Item - CatalogRef.Items -
+// * ItemKey - CatalogRef.ItemKeys -
+// * SerialLotNumbers - Array of Structure:
+// ** SerialLotNumber - CatalogRef.SerialLotNumbers -
+// ** Quantity - Number -
+// 
+// Returns:
+//  Structure - Fill settings add new serial:
+// * RowKey - String -
+// * Item - CatalogRef.Items -
+// * ItemKey - CatalogRef.ItemKeys -
+// * SerialLotNumbers - Array of Structure:
+// ** SerialLotNumber - CatalogRef.SerialLotNumbers -
+// ** Quantity - Number -
+Function FillSettingsAddNewSerial(Str = Undefined) Export
+	Result = New Structure();
+	Result.Insert("RowKey", "");
+	Result.Insert("Item", Catalogs.Items.EmptyRef());
+	Result.Insert("ItemKey", Catalogs.ItemKeys.EmptyRef());
+	Result.Insert("SerialLotNumbers", New Array());
+	
+	If Not Str = Undefined Then
+		Result.RowKey = Str.RowKey;
+		Result.Item = Str.Item;
+		Result.ItemKey = Str.ItemKey;
+		For Each Row In Str.SerialLotNumbers Do
+			Result.SerialLotNumbers.Add(
+					New Structure("SerialLotNumber, Quantity", Row.SerialLotNumber, Row.Quantity));
+		EndDo;
+	EndIf;
+	Return Result;
+EndFunction
+
 // Check serial lot number name.
 // 
 // Parameters:

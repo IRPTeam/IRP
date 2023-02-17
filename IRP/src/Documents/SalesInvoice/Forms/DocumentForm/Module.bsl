@@ -584,7 +584,7 @@ EndFunction
 Procedure PasteFromClipboard(Command) Export
 	PasteSettings = CopyPasteClient.PasteFromClipboard(Object, ThisObject);
 	CopyPasteResult = PasteFromClipboardServer(PasteSettings);
-	CopyPasteClient.AfterPaste(CopyPasteResult);
+	CopyPasteClient.AfterPaste(Object, ThisObject,CopyPasteResult);
 EndProcedure
 
 &AtServer

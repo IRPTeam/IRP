@@ -76,17 +76,12 @@ EndFunction
 // After paste.
 // 
 // Parameters:
-//  CopyPastResult - See CopyPasteServer.BufferSettings
-Procedure AfterPaste(CopyPastResult) Export
-//	If CopyPastResult.isError And IsBlankString(CopyPastResult.Message) Then
-//		Return;
-//	EndIf;
-//	
-//	If Not CopyPastResult.isError Then
-//		Status(R().CP_004, , CopyPastResult.Message, PictureLib.AppearanceFlagGreen);
-//	Else
-//		Status(R().CP_005, , CopyPastResult.Message, PictureLib.AppearanceFlagRed);
-//	EndIf;
+//  Object - DocumentObjectDocumentName - Object
+//  Form - ClientApplicationForm - Form
+//  CopyPastResult - See CopyPasteServer.PasteResult
+Procedure AfterPaste(Object, Form, CopyPastResult) Export
+	OpeningParameter = New Structure("Object, Form, AddInfo", Object, Form, Undefined);
+	SerialLotNumberClient.OnFinishEditSerialLotNumbers(CopyPastResult.SerialLotNumbers, OpeningParameter);
 EndProcedure
 
 #EndRegion

@@ -11,8 +11,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	SerialLotNumberStatus = R().InfoMessage_018;
 	Items.DecorationLegendInfo.Title = R().InfoMessage_029;
 	SerialLotNumbersServer.SetUnique(ThisObject);
-	
-	
 EndProcedure
 
 &AtServer
@@ -115,15 +113,15 @@ Procedure CloseThisForm()
 		Return;
 	EndIf;
 
-	Result = New Structure();
-	Result.Insert("RowKey", ThisObject.RowKey);
-	Result.Insert("Item", ThisObject.Item);
-	Result.Insert("ItemKey", ThisObject.ItemKey);
-	Result.Insert("SerialLotNumbers", New Array());
+	Result = SerialLotNumbersServer.FillSettingsAddNewSerial();
+	Result.RowKey = ThisObject.RowKey;
+	Result.Item = ThisObject.Item;
+	Result.ItemKey = ThisObject.ItemKey;
 	For Each Row In ThisObject.SerialLotNumbers Do
 		Result.SerialLotNumbers.Add(
 				New Structure("SerialLotNumber, Quantity", Row.SerialLotNumber, Row.Quantity));
 	EndDo;
+
 	Close(Result);
 EndProcedure
 

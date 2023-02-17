@@ -59,6 +59,7 @@ Function CopyToClipboard(Object, Form, CopySettings) Export
 	EndIf;
 
 	Data = SessionParameters.Buffer.Get(); // Array Of See BufferSettings
+	Data.Clear();
 	Data.Add(Result);
 	SessionParameters.Buffer = New ValueStorage(Data, New Deflation(9));
 	Result.Data = Undefined;
@@ -89,7 +90,7 @@ Function CopySelectedRows(Object, Form, CopySettings) Export
 		
 		For Each Table In Result.Data Do
 			
-			For Each TableRow In Object.ItemList.FindRows(New Structure("Key", RowKey)) Do
+			For Each TableRow In Object[Table.Key].FindRows(New Structure("Key", RowKey)) Do
 				FillPropertyValues(Table.Value.Add(), TableRow);
 			EndDo;
 		EndDo;
@@ -112,33 +113,40 @@ EndFunction
 //  PasteSettings - See CopyPasteClient.PasteSettings
 // 
 // Returns:
-//  See BufferSettings
+//  See PasteResult
 Function PasteFromClipboard(Object, Form, PasteSettings) Export
+	
+	PasteResult = PasteResult();
+	
 	Data = SessionParameters.Buffer.Get(); // Array Of See BufferSettings
 	If Data.Count() = 0 Then
-		Return False;
+		Return PasteResult;
 	EndIf;
 	Index = Data.UBound();
 	BufferData = Data[Index]; // See BufferSettings
-	Data.Delete(Index);
 	
 	If BufferData.CopySettings.CopySelectedRows Then
-		PasteSelectedRows(Object, Form, BufferData, PasteSettings);
+		PasteResult = PasteSelectedRows(Object, Form, BufferData, PasteSettings);
 	EndIf;
+	Data.Clear();
 	
 	SessionParameters.Buffer = New ValueStorage(Data, New Deflation(9));
 	
-	Return True;
+	Form.Modified = True;
+	
+	Return PasteResult;
 EndFunction
 
 Function PasteSelectedRows(Object, Form, BufferData, PasteSettings) Export
-	CurrentObject = Form.FormAttributeToValue("Object"); // DocumentObjectDocumentName
+	CurrentObject = Form.FormAttributeToValue("Object"); // DocumentObjectDocumentName, DocumentObject.SalesInvoice
 	DocInfo = New Structure;
 	DocInfo.Insert("DocMetadata", Object.Ref.Metadata());
 	DocInfo.Insert("DocObject", CurrentObject);
 	Wrapper = BuilderAPI.Initialize(, , , , DocInfo);
 	
-	For Each ItemRow In BufferData.Data.ItemList Do
+	ItemList = BufferData.Data.ItemList;
+	Result = PasteResult();
+	For Each ItemRow In ItemList Do
 		
 		NewItemRow = BuilderAPI.AddRow(Wrapper, "ItemList");
 		
@@ -146,16 +154,47 @@ Function PasteSelectedRows(Object, Form, BufferData, PasteSettings) Export
 			BuilderAPI.SetRowProperty(Wrapper, NewItemRow, Property, ItemRow[Property], "ItemList");
 		EndDo;
 		
+		If Not Wrapper.Tables.Property("SerialLotNumbers") Then
+			Result.SerialLotNumbers = Undefined; 
+		ElsIf BufferData.Data.Property("SerialLotNumbers") Then
+			SerialLotNumbers = BufferData.Data.SerialLotNumbers;
+			Serials = SerialLotNumbers.FindRows(New Structure("Key", ItemRow.Key));
+			
+			If Serials.Count() Then
+				SerialSetting = SerialLotNumbersServer.FillSettingsAddNewSerial();
+				SerialSetting.Item = ItemRow.Item;
+				SerialSetting.ItemKey = ItemRow.ItemKey;
+				SerialSetting.RowKey = NewItemRow.Key;
+				For Each Serial In Serials Do
+					NewSerial = New Structure;
+					NewSerial.Insert("SerialLotNumber", Serial.SerialLotNumber);
+					NewSerial.Insert("Quantity", Serial.Quantity);
+					SerialSetting.SerialLotNumbers.Add(NewSerial);
+				EndDo;
+				Result.SerialLotNumbers.Add(SerialSetting);
+			EndIf;
+		EndIf;
 	EndDo;
 	BuilderAPI.Write(Wrapper, , , CurrentObject);
 	Form.ValueToFormAttribute(CurrentObject, "Object");
 	
-	Return True;
+	Return Result;
 EndFunction
 
 #EndRegion
 
 #Region SERVICE
+
+// Paste result.
+// 
+// Returns:
+//  Structure - Paste result:
+// * SerialLotNumbers - Array of See SerialLotNumbersServer.FillSettingsAddNewSerial
+Function PasteResult() Export
+	Str = New Structure;
+	Str.Insert("SerialLotNumbers", New Array);
+	Return Str;
+EndFunction
 
 Function ColumnNameToPaste()
 	Array = New Array; // Array of String
@@ -175,7 +214,8 @@ EndFunction
 // * SourceName - String -
 // * SourceRef - Undefined, DocumentRefDocumentName -
 // * Data - Structure:
-// ** ItemList - ValueTable
+// ** ItemList - See Document.SalesInvoice.ItemList
+// ** SerialLotNumbers - See Document.SalesInvoice.SerialLotNumbers
 // * CopySettings - See CopyPasteClient.CopySettings
 // * isError - Boolean -
 // * Message - String -

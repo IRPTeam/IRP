@@ -110,7 +110,9 @@ EndFunction
 //  InitialData - Structure - First initial data
 //  FillingData - Structure - Filling data
 //  DefaultTable - String - Default table name
-//  DocInfo - Structure - doc info
+//  DocInfo - Structure:
+//   * DocMetadata - MetadataObjectDocument
+//   * DocObject - DocumentObjectDocumentName
 // 
 // Returns:
 //  See CreateWrapper
@@ -197,7 +199,7 @@ EndFunction
 // 
 // Parameters:
 //  Wrapper - See CreateWrapper
-//  Row - Structure, String, Number - Row or Row key or Row index
+//  Row - Structure, String, Number, ValueTableRow - Row or Row key or Row index
 //  ColumnName - String - Column name
 //  Value - Arbitrary - Value
 //  TableName - Undefined, String - Table name. If empty - get from wrapper as defaul table
@@ -213,7 +215,7 @@ Function SetRowProperty(Wrapper, Row, ColumnName, Value, TableName = Undefined) 
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object); // Structure
 	ServerParameters.TableName = TableName;
 	
-	Rows = New Array();
+	Rows = New Array(); // Array Of ValueTableRow
 	If TypeOf(Row) = Type("Number") Then
 		Rows.Add(Wrapper.Object[TableName][0]);
 	ElsIf TypeOf(Row) = Type("String") Then
@@ -244,15 +246,19 @@ EndFunction
 //  Wrapper - See CreateWrapper
 //  WriteMode - DocumentWriteMode - Write mode
 //  PostingMode - DocumentPostingMode - Posting mode
+//  Object - DocumentObjectDocumentName - Update current object
 // 
 // Returns:
 //  Structure - Write:
 // * Context - See CreateWrapper
 // * Ref - DocumentRefDocumentName -
-Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined) Export
+// * Object - DocumentObjectDocumentName - If set Object at parameter then returned updated object
+Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object = Undefined) Export
 	DocMetadata = Wrapper.Object.Ref.Metadata();
 	
-	If ValueIsFilled(Wrapper.Object.Ref) Then
+	If Not Object = Undefined Then
+		Doc = Object;
+	ElsIf ValueIsFilled(Wrapper.Object.Ref) Then
 		Doc = Wrapper.Object.Ref.GetObject();
 	Else
 		Doc = Documents[DocMetadata.Name].CreateDocument();
@@ -268,13 +274,19 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined) Export
 		LoadTable = Wrapper.Object[Table.Name]; // ValueTable
 		DocTable.Load(LoadTable);
 	EndDo;
-	Doc.Write(?(WriteMode = Undefined, DocumentWriteMode.Write, WriteMode),
-		?(PostingMode = Undefined , DocumentPostingMode.Regular , PostingMode));
-	Wrapper.Object.Ref = Doc.Ref;
-	
+
 	Result = New Structure();
 	Result.Insert("Context", Wrapper);
+	Result.Insert("Object", Undefined);
+	If Object = Undefined Then
+		Doc.Write(?(WriteMode = Undefined, DocumentWriteMode.Write, WriteMode),
+			?(PostingMode = Undefined , DocumentPostingMode.Regular , PostingMode));
+		Wrapper.Object.Ref = Doc.Ref;
+	Else
+		Result.Insert("Object", Doc);
+	EndIf;
 	Result.Insert("Ref", Doc.Ref);
+	
 	//@skip-check constructor-function-return-section
 	Return Result;
 EndFunction
@@ -287,7 +299,7 @@ EndFunction
 //  ReturnRowKey - Boolean -
 // 
 // Returns:
-//  ValueTableRow
+//  ValueTableRow, String
 Function AddRow(Wrapper, TableName = Undefined, ReturnRowKey = False) Export
 	If TableName = Undefined Then
 		TableName = Wrapper.DefaultTable;

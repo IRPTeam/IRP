@@ -78,15 +78,15 @@ EndFunction
 // Parameters:
 //  CopyPastResult - See CopyPasteServer.BufferSettings
 Procedure AfterPaste(CopyPastResult) Export
-	If CopyPastResult.isError And IsBlankString(CopyPastResult.Message) Then
-		Return;
-	EndIf;
-	
-	If Not CopyPastResult.isError Then
-		Status(R().CP_004, , CopyPastResult.Message, PictureLib.AppearanceFlagGreen);
-	Else
-		Status(R().CP_005, , CopyPastResult.Message, PictureLib.AppearanceFlagRed);
-	EndIf;
+//	If CopyPastResult.isError And IsBlankString(CopyPastResult.Message) Then
+//		Return;
+//	EndIf;
+//	
+//	If Not CopyPastResult.isError Then
+//		Status(R().CP_004, , CopyPastResult.Message, PictureLib.AppearanceFlagGreen);
+//	Else
+//		Status(R().CP_005, , CopyPastResult.Message, PictureLib.AppearanceFlagRed);
+//	EndIf;
 EndProcedure
 
 #EndRegion

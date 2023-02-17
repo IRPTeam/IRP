@@ -21,10 +21,7 @@ EndProcedure
 #Region Barcode
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	Settings = BarcodeClient.GetBarcodeSettings();
-	//@skip-warning
-	Settings.MobileBarcodeModule = ThisObject;
-	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject, , Settings);
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject);
 EndProcedure
 
 &AtClient
@@ -84,7 +81,7 @@ Procedure ManualInputBarcode(Barcode)
 EndProcedure
 
 &AtClient
-Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
+Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	Info = "";          
 	
 	If Object.Ref.IsEmpty() Then
@@ -381,4 +378,3 @@ Function FillSoundList()
 	Sounds.Insert("SameItemKeyBarcode", DataProcessors.MobileInvent.GetTemplate("SameItemKeyBarcode"));
 	Return Sounds;
 EndFunction
-

@@ -295,6 +295,31 @@ Procedure CopyThisRowValueToMarkedRows(Command)
 	
 EndProcedure
 
+&AtClient
+Procedure RunACodeForMarkedRows(Command)
+	
+	ObjectArray = New Array; // Array of CatalogRef, DocumentRef
+	TableRows = ThisObject.PropertiesTable.FindRows(New Structure("Marked", True));
+	For Each TableRow In TableRows Do
+		ObjectRef = TableRow.Object;
+		If ObjectArray.Find(ObjectRef) = Undefined Then
+			ObjectArray.Add(ObjectRef);
+		EndIf;
+	EndDo;
+	If ObjectArray.Count() = 0 Then
+		Return;
+	EndIf; 
+	
+	FormParameters = New Structure;
+	FormParameters.Insert("ObjectArray", ObjectArray);
+	
+	OpenForm("DataProcessor.ObjectPropertyEditor.Form.RunCodeForm", 
+		FormParameters, 
+		ThisObject, , , , ,
+		FormWindowOpeningMode.LockOwnerWindow);
+		
+EndProcedure
+
 #EndRegion
 
 #Region NotifyDescriptions
@@ -360,6 +385,7 @@ EndProcedure
 &AtClient
 Procedure FieldSettingsEnd(Result, AddInfo) Export
 	If Result = True Then
+		SetTablesList(ThisObject);
 		SetPropertyAvailability();
 	EndIf;
 EndProcedure	

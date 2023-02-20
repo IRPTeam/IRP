@@ -1304,6 +1304,7 @@
                         </font>
                       </extInfo>
                     </items>
+                    <commandBarLocation>None</commandBarLocation>
                     <autoCommandBar>
                       <name>ItemListCommandBar</name>
                       <id>608</id>

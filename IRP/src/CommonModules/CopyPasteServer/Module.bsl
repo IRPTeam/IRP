@@ -11,7 +11,8 @@
 //  AddInfo - Undefined - Add info
 Procedure CreateCommands(Form, ObjectFullName, FormType, AddInfo = Undefined) Export
 	ItemListForm = Form.Items.Find("ItemList");
-	If ItemListForm = Undefined Then
+	If ItemListForm = Undefined 
+		Or Not Form.Items.Find("CopyPasteGroup") = Undefined Then // When recal create on server, ex. POS
 		Return;
 	EndIf;
 	

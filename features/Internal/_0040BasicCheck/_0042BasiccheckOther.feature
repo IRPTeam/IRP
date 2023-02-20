@@ -734,21 +734,21 @@ Scenario: Open object form "R2022B_CustomersPaymentPlanning"
 
 Scenario: Open object form "T9500S_AccrualAndDeductionValues"
 
-	Given I open "T9500S_AccrualAndDeductionValues" accumulation register default form
+	Given I open "T9500S_AccrualAndDeductionValues" information register default form
 	If the warning is displayed then
 		Then I raise "Failed to open information register form T9500S_AccrualAndDeductionValues" exception
 	And I close current window
 
 Scenario: Open object form "T9510S_Staffing"
 
-	Given I open "T9510S_Staffing" accumulation register default form
+	Given I open "T9510S_Staffing" information register default form
 	If the warning is displayed then
 		Then I raise "Failed to open information register form T9510S_Staffing" exception
 	And I close current window
 
 Scenario: Open object form "T9530S_WorkDays"
 
-	Given I open "T9530S_WorkDays" accumulation register default form
+	Given I open "T9530S_WorkDays" information register default form
 	If the warning is displayed then
 		Then I raise "Failed to open information register form T9530S_WorkDays" exception
 	And I close current window

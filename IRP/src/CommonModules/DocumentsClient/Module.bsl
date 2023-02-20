@@ -519,7 +519,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 
 	Object 	= AddInfo.Object;
 	Form 	= AddInfo.Form;
-	
+		
 	UseSerialLotNumbers = Object.Property("SerialLotNumbers");
 	UseSourceOfOrigins  = Object.Property("SourceOfOrigins");
 	
@@ -931,8 +931,7 @@ EndProcedure
 //  ReturnCallToModule - Undefined - Document client module
 //  PriceType - Undefined, CatalogRef.PriceKeys - Price type
 //  Settings - See BarcodeClient.GetBarcodeSettings
-Procedure SearchByBarcode(Barcode, Object, Form, ReturnCallToModule = Undefined, PriceType = Undefined,
-	Settings = Undefined) Export
+Procedure SearchByBarcode(Barcode, Object, Form, ReturnCallToModule = Undefined, PriceType = Undefined, Settings = Undefined) Export
 	If Not Form.Items.Find("ItemList") = Undefined Then
 		Form.CurrentItem = Form.Items.ItemList;
 	EndIf;

@@ -36,6 +36,7 @@ Scenario: _05002 preparation (consignment)
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
 		When Create catalog Items objects
+		When Create catalog Users objects
 		When Create catalog PriceTypes objects
 		When Create catalog Specifications objects
 		When Create catalog Partners objects (trade agent and consignor)

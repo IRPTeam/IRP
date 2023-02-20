@@ -12,6 +12,7 @@
 // * ServerSettings - Structure:
 // ** PriceType - CatalogRef.PriceTypes, Undefined -
 // ** PricePeriod - Date -
+// ** SearchUserByBarcode - Boolean -
 // * Result - Structure:
 // ** FoundedItems - See BarcodeServer.SearchByBarcodes
 // ** Barcodes - Array of String
@@ -32,6 +33,7 @@ Function GetBarcodeSettings() Export
 	ServerSettings = New Structure;
 	ServerSettings.Insert("PriceType", Undefined);
 	ServerSettings.Insert("PricePeriod", CommonFunctionsServer.GetCurrentSessionDate());
+	ServerSettings.Insert("SearchUserByBarcode", False);
 	Settings.Insert("ServerSettings", ServerSettings);
 	
 	Result = New Structure;

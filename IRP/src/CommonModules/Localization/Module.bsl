@@ -848,6 +848,8 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_ReturnTitle", NStr("en = 'Return'", Lang));
 	Strings.Insert("InfoMessage_POS_Title", NStr("en = 'Point of sales'", Lang));
 	
+	Strings.Insert("InfoMessage_NotProperty", NStr("en = 'The object has no properties for editing'", Lang));
+	
 #EndRegion
 
 #Region QuestionToUser

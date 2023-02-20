@@ -9,8 +9,14 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndIf;
 	
 	ThisObject.ShowServiceAttributes = Parameters.ShowServiceAttributes;
-	ThisObject.UpdateRelatedFieldsWhenWriting = Parameters.UpdateRelatedFieldsWhenWriting;
-	ThisObject.ForcedWriting = Parameters.ForcedWriting;
+	ThisObject.ShowServiceTables = Parameters.ShowServiceTables;
+	
+	ThisObject.WritingMode = 0;
+	If Parameters.UpdateRelatedFieldsWhenWriting Then
+		ThisObject.WritingMode = 1;
+	ElsIf Parameters.ForcedWriting Then
+		ThisObject.WritingMode = 2;
+	EndIf;
 	
 	For Each FieldData In ColumnsData Do
 		FieldRow = ThisObject.FieldsTable.Add();
@@ -20,12 +26,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		FieldRow.isVisible = FieldData.Value.isVisible;
 		FieldRow.isServiceAttribute = FieldData.Value.isServiceAttribute;
 	EndDo;
-
-EndProcedure
-
-&AtClient
-Procedure SaveSettings(Command)
-	Items.GroupOfSaveSettings.Visible = Not Items.GroupOfSaveSettings.Visible;
+	
 EndProcedure
 
 &AtClient
@@ -46,8 +47,10 @@ EndProcedure
 Procedure ApplySetting(Command)
 		
 	ThisObject.FormOwner.FormDataCash.ShowServiceAttributes = ThisObject.ShowServiceAttributes;
-	ThisObject.FormOwner.FormDataCash.UpdateRelatedFieldsWhenWriting = ThisObject.UpdateRelatedFieldsWhenWriting;
-	ThisObject.FormOwner.FormDataCash.ForcedWriting = ThisObject.ForcedWriting;
+	ThisObject.FormOwner.FormDataCash.ShowServiceTables = ThisObject.ShowServiceTables;
+	
+	ThisObject.FormOwner.FormDataCash.UpdateRelatedFieldsWhenWriting = (ThisObject.WritingMode = 1);
+	ThisObject.FormOwner.FormDataCash.ForcedWriting = (ThisObject.WritingMode = 2);
 	
 	ColumnsData = ThisObject.FormOwner.FormDataCash.ColumnsData;
 	
@@ -61,18 +64,3 @@ Procedure ApplySetting(Command)
 	Close(True);
 
 EndProcedure
-
-&AtClient
-Procedure UpdateRelatedFieldsWhenWritingOnChange(Item)
-	If ThisObject.UpdateRelatedFieldsWhenWriting Then
-		ThisObject.ForcedWriting = False;
-	EndIf;
-EndProcedure
-
-&AtClient
-Procedure ForcedWritingOnChange(Item)
-	If ThisObject.ForcedWriting Then
-		ThisObject.UpdateRelatedFieldsWhenWriting = False;
-	EndIf;
-EndProcedure
-

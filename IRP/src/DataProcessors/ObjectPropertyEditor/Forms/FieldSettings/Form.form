@@ -5,13 +5,125 @@
     <value>Settings</value>
   </title>
   <items xsi:type="form:FormField">
+    <name>WritingMode</name>
+    <id>57</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible/>
+    <dataPath xsi:type="form:DataPath">
+      <segments>WritingMode</segments>
+    </dataPath>
+    <titleLocation>None</titleLocation>
+    <extendedTooltip>
+      <name>WritingModeExtendedTooltip</name>
+      <id>59</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+      <name>WritingModeContextMenu</name>
+      <id>58</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+    </contextMenu>
+    <type>RadioButtonField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
+      <radioButtonsType>RadioButtons</radioButtonsType>
+      <columnsCount>1</columnsCount>
+      <choiceList>
+        <presentation>
+          <key>en</key>
+          <value>Normal writing</value>
+        </presentation>
+        <value xsi:type="core:NumberValue">
+          <value>0</value>
+        </value>
+      </choiceList>
+      <choiceList>
+        <presentation>
+          <key>en</key>
+          <value>Update related fields</value>
+        </presentation>
+        <value xsi:type="core:NumberValue">
+          <value>1</value>
+        </value>
+      </choiceList>
+      <choiceList>
+        <presentation>
+          <key>en</key>
+          <value>Forced writing (dangerous)</value>
+        </presentation>
+        <value xsi:type="core:NumberValue">
+          <value>2</value>
+        </value>
+      </choiceList>
+    </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
+    <name>ShowServiceTables</name>
+    <id>52</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible/>
+    <dataPath xsi:type="form:DataPath">
+      <segments>ShowServiceTables</segments>
+    </dataPath>
+    <titleLocation>Right</titleLocation>
+    <extendedTooltip>
+      <name>ShowServiceTablesExtendedTooltip</name>
+      <id>54</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+      <name>ShowServiceTablesContextMenu</name>
+      <id>53</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+    </contextMenu>
+    <type>CheckBoxField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+  </items>
+  <items xsi:type="form:FormField">
     <name>ShowServiceAttributes</name>
     <id>35</id>
     <visible>true</visible>
     <enabled>true</enabled>
-    <userVisible>
-      <common>true</common>
-    </userVisible>
+    <userVisible/>
     <dataPath xsi:type="form:DataPath">
       <segments>ShowServiceAttributes</segments>
     </dataPath>
@@ -47,138 +159,6 @@
     <headerHorizontalAlign>Left</headerHorizontalAlign>
     <showInFooter>true</showInFooter>
     <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
-  </items>
-  <items xsi:type="form:FormGroup">
-    <name>GroupOfSaveSettings</name>
-    <id>42</id>
-    <items xsi:type="form:FormField">
-      <name>UpdateRelatedFieldsWhenWriting</name>
-      <id>47</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>UpdateRelatedFieldsWhenWriting</segments>
-      </dataPath>
-      <titleLocation>Right</titleLocation>
-      <handlers>
-        <event>OnChange</event>
-        <name>UpdateRelatedFieldsWhenWritingOnChange</name>
-      </handlers>
-      <extendedTooltip>
-        <name>UpdateRelatedFieldsWhenWritingExtendedTooltip</name>
-        <id>49</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>UpdateRelatedFieldsWhenWritingContextMenu</name>
-        <id>48</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>CheckBoxField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
-    </items>
-    <items xsi:type="form:FormField">
-      <name>ForcedWriting</name>
-      <id>44</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>ForcedWriting</segments>
-      </dataPath>
-      <titleLocation>Right</titleLocation>
-      <handlers>
-        <event>OnChange</event>
-        <name>ForcedWritingOnChange</name>
-      </handlers>
-      <extendedTooltip>
-        <name>ForcedWritingExtendedTooltip</name>
-        <id>46</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>ForcedWritingContextMenu</name>
-        <id>45</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>CheckBoxField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
-    </items>
-    <enabled>true</enabled>
-    <userVisible>
-      <common>true</common>
-    </userVisible>
-    <title>
-      <key>en</key>
-      <value>Group of save settings</value>
-    </title>
-    <extendedTooltip>
-      <name>GroupOfSaveSettingsExtendedTooltip</name>
-      <id>43</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-    </extendedTooltip>
-    <type>UsualGroup</type>
-    <extInfo xsi:type="form:UsualGroupExtInfo">
-      <group>Vertical</group>
-      <behavior>Auto</behavior>
-      <showLeftMargin>true</showLeftMargin>
-      <united>true</united>
-      <throughAlign>Auto</throughAlign>
-      <currentRowUse>Auto</currentRowUse>
-    </extInfo>
   </items>
   <items xsi:type="form:Table">
     <name>FieldsTable</name>
@@ -624,16 +604,16 @@
       <extInfo xsi:type="form:ButtonGroupExtInfo"/>
     </items>
     <items xsi:type="form:Button">
-      <name>FormSaveSettings</name>
-      <id>38</id>
+      <name>FormCustomizeForm</name>
+      <id>50</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
       <extendedTooltip>
-        <name>FormSaveSettingsExtendedTooltip</name>
-        <id>39</id>
+        <name>FormCustomizeFormExtendedTooltip</name>
+        <id>51</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -646,12 +626,43 @@
           <horizontalAlign>Left</horizontalAlign>
         </extInfo>
       </extendedTooltip>
-      <commandName>Form.Command.SaveSettings</commandName>
+      <commandName>Form.StandardCommand.CustomizeForm</commandName>
       <representation>Auto</representation>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
       <representationInContextMenu>Auto</representationInContextMenu>
+    </items>
+    <items xsi:type="form:Button">
+      <name>FormClose</name>
+      <id>55</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+        <name>FormCloseExtendedTooltip</name>
+        <id>56</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <commandName>Form.StandardCommand.Close</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+      <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
     </items>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -794,12 +805,12 @@
     </edit>
   </attributes>
   <attributes>
-    <name>UpdateRelatedFieldsWhenWriting</name>
+    <name>ShowServiceTables</name>
     <title>
       <key>en</key>
-      <value>Update related fields when writing</value>
+      <value>Show service tables</value>
     </title>
-    <id>8</id>
+    <id>10</id>
     <valueType>
       <types>Boolean</types>
     </valueType>
@@ -811,14 +822,18 @@
     </edit>
   </attributes>
   <attributes>
-    <name>ForcedWriting</name>
+    <name>WritingMode</name>
     <title>
       <key>en</key>
-      <value>Forced writing (dangerous)</value>
+      <value>Writing mode</value>
     </title>
-    <id>9</id>
+    <id>11</id>
     <valueType>
-      <types>Boolean</types>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>1</precision>
+        <nonNegative>true</nonNegative>
+      </numberQualifiers>
     </valueType>
     <view>
       <common>true</common>
@@ -886,27 +901,6 @@
       </handler>
     </action>
     <representation>TextPicture</representation>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>SaveSettings</name>
-    <title>
-      <key>en</key>
-      <value>Save settings</value>
-    </title>
-    <id>4</id>
-    <use>
-      <common>true</common>
-    </use>
-    <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.SaveReportSettings</picture>
-    </picture>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>SaveSettings</name>
-      </handler>
-    </action>
-    <representation>Picture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <parameters>

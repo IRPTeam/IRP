@@ -10,22 +10,33 @@
 //  FormType - EnumRef.FormTypes - Form type
 //  AddInfo - Undefined - Add info
 Procedure CreateCommands(Form, ObjectFullName, FormType, AddInfo = Undefined) Export
-	
-	If Form.Items.Find("ItemList") = Undefined Then
+	ItemListForm = Form.Items.Find("ItemList");
+	If ItemListForm = Undefined Then
 		Return;
 	EndIf;
 	
+	CommandGroup = Form.Items.Add("CopyPasteGroup", Type("FormGroup"), ItemListForm.CommandBar); // FormGroupExtensionForAButtonGroup
+	CommandGroup.Type = FormGroupType.ButtonGroup;
+	CommandGroup.Representation = ButtonGroupRepresentation.Compact;
+	
 	CommandForm = Form.Commands.Add("CopyToClipboard");
 	CommandForm.Title = R().CP_001;
+	CommandForm.ToolTip = R().CP_001;
+	CommandForm.Representation = ButtonRepresentation.Picture;
+	CommandForm.Picture = PictureLib.CopyRowsToClipboard;
 	CommandForm.Action = "CopyToClipboard";
-	CommandButton = Form.Items.Add("CopyToClipboard", Type("FormButton"), Form.CommandBar);
+	CommandButton = Form.Items.Add("CopyToClipboard", Type("FormButton"), CommandGroup); // FormButton
 	CommandButton.CommandName = "CopyToClipboard";
 	
 	CommandForm = Form.Commands.Add("PasteFromClipboard");
 	CommandForm.Title = R().CP_002;
+	CommandForm.ToolTip = R().CP_002;
+	CommandForm.Representation = ButtonRepresentation.Picture;
+	CommandForm.Picture = PictureLib.PasteRowsFromClipboard;
 	CommandForm.Action = "PasteFromClipboard";
-	CommandButton = Form.Items.Add("PasteFromClipboard", Type("FormButton"), Form.CommandBar);
+	CommandButton = Form.Items.Add("PasteFromClipboard", Type("FormButton"), CommandGroup);
 	CommandButton.CommandName = "PasteFromClipboard";
+	CommandButton.Title = R().CP_002;
 	
 EndProcedure
 

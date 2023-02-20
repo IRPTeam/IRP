@@ -685,6 +685,7 @@
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.SelectionRetailBasisForReturn</commonForms>
   <commonForms>CommonForm.PaymentByAcquiring</commonForms>
+  <commonForms>CommonForm.CopyToClipboardSettings</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>

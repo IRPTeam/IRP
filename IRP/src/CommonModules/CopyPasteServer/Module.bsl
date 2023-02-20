@@ -131,6 +131,7 @@ Function PasteFromClipboard(Object, Form, PasteSettings) Export
 	
 	Data = SessionParameters.Buffer.Get(); // Array Of See BufferSettings
 	If Data.Count() = 0 Then
+		PasteResult.SerialLotNumbers = Undefined;
 		Return PasteResult;
 	EndIf;
 	Index = Data.UBound();
@@ -159,31 +160,11 @@ Function PasteSelectedRows(Object, Form, BufferData, PasteSettings) Export
 	Result = PasteResult();
 	For Each ItemRow In ItemList Do
 		
-		NewItemRow = BuilderAPI.AddRow(Wrapper, "ItemList");
-		
-		For Each Property In ColumnNameToPaste() Do
-			BuilderAPI.SetRowProperty(Wrapper, NewItemRow, Property, ItemRow[Property], "ItemList");
-		EndDo;
-		
 		If Not Wrapper.Tables.Property("SerialLotNumbers") Then
-			Result.SerialLotNumbers = Undefined; 
+			Result.SerialLotNumbers = Undefined;
+			IfWrapperHasNoTableSerialLotNumbers(BufferData, ItemRow, Wrapper);
 		ElsIf BufferData.Data.Property("SerialLotNumbers") Then
-			SerialLotNumbers = BufferData.Data.SerialLotNumbers;
-			Serials = SerialLotNumbers.FindRows(New Structure("Key", ItemRow.Key));
-			
-			If Serials.Count() Then
-				SerialSetting = SerialLotNumbersServer.FillSettingsAddNewSerial();
-				SerialSetting.Item = ItemRow.Item;
-				SerialSetting.ItemKey = ItemRow.ItemKey;
-				SerialSetting.RowKey = NewItemRow.Key;
-				For Each Serial In Serials Do
-					NewSerial = New Structure;
-					NewSerial.Insert("SerialLotNumber", Serial.SerialLotNumber);
-					NewSerial.Insert("Quantity", Serial.Quantity);
-					SerialSetting.SerialLotNumbers.Add(NewSerial);
-				EndDo;
-				Result.SerialLotNumbers.Add(SerialSetting);
-			EndIf;
+			IfWrapperHasTableSerialLotNumbers(BufferData, Wrapper, Result, ItemRow);
 		EndIf;
 	EndDo;
 	BuilderAPI.Write(Wrapper, , , CurrentObject);
@@ -191,6 +172,61 @@ Function PasteSelectedRows(Object, Form, BufferData, PasteSettings) Export
 	
 	Return Result;
 EndFunction
+
+Procedure IfWrapperHasTableSerialLotNumbers(BufferData, Wrapper, Result, ItemRow)
+	NewItemRow = BuilderAPI.AddRow(Wrapper, "ItemList");
+	
+	For Each Property In ColumnNameToPaste() Do
+		BuilderAPI.SetRowProperty(Wrapper, NewItemRow, Property, ItemRow[Property], "ItemList");
+	EndDo;
+	
+	SerialLotNumbers = BufferData.Data.SerialLotNumbers;
+	Serials = SerialLotNumbers.FindRows(New Structure("Key", ItemRow.Key));
+	
+	If Serials.Count() Then
+		SerialSetting = SerialLotNumbersServer.FillSettingsAddNewSerial();
+		SerialSetting.Item = ItemRow.Item;
+		SerialSetting.ItemKey = ItemRow.ItemKey;
+		SerialSetting.RowKey = NewItemRow.Key;
+		For Each Serial In Serials Do
+			NewSerial = New Structure;
+			NewSerial.Insert("SerialLotNumber", Serial.SerialLotNumber);
+			NewSerial.Insert("Quantity", Serial.Quantity);
+			SerialSetting.SerialLotNumbers.Add(NewSerial);
+		EndDo;
+		Result.SerialLotNumbers.Add(SerialSetting);
+	EndIf;
+EndProcedure
+
+Procedure IfWrapperHasNoTableSerialLotNumbers(BufferData, ItemRow, Wrapper)
+	If Not Wrapper.Tables.ItemList.Property("SerialLotNumber") Then
+		NewItemRow = BuilderAPI.AddRow(Wrapper, "ItemList");
+		
+		For Each Property In ColumnNameToPaste() Do
+			BuilderAPI.SetRowProperty(Wrapper, NewItemRow, Property, ItemRow[Property], "ItemList");
+		EndDo;
+	Else // If SerialLotNumber in ItemList Row
+		If BufferData.Data.Property("SerialLotNumbers") Then
+			SerialLotNumbers = BufferData.Data.SerialLotNumbers;
+			Serials = SerialLotNumbers.FindRows(New Structure("Key", ItemRow.Key));
+			If Serials.Count() Then	
+				For Each Serial In Serials Do
+					NewItemRow = BuilderAPI.AddRow(Wrapper, "ItemList");
+					For Each Property In ColumnNameToPaste() Do
+						BuilderAPI.SetRowProperty(Wrapper, NewItemRow, Property, ItemRow[Property], "ItemList");
+					EndDo;
+					BuilderAPI.SetRowProperty(Wrapper, NewItemRow, "SerialLotNumber", Serial.SerialLotNumber, "ItemList");
+					BuilderAPI.SetRowProperty(Wrapper, NewItemRow, "Quantity", Serial.Quantity, "ItemList");
+				EndDo;
+			Else
+				NewItemRow = BuilderAPI.AddRow(Wrapper, "ItemList");
+				For Each Property In ColumnNameToPaste() Do
+					BuilderAPI.SetRowProperty(Wrapper, NewItemRow, Property, ItemRow[Property], "ItemList");
+				EndDo;
+			EndIf;
+		EndIf;
+	EndIf;
+EndProcedure
 
 #EndRegion
 

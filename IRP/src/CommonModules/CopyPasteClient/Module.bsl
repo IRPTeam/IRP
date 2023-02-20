@@ -11,7 +11,6 @@
 // Returns:
 //  See CopySettings
 Function CopyToClipboard(Object, Form) Export
-
 	Return CopySettings();
 EndFunction
 

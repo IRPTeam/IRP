@@ -1878,6 +1878,8 @@ Procedure SaveAtServer()
 	ObjectsTable = ThisObject.PropertiesTable.Unload(ModifiedRows, "Object");
 	ObjectsTable.Total("Object");
 	
+	DataVersioningServer.SaveDataPackage(ObjectsTable.UnloadColumn(0));
+	
 	For Each ObjectRow In ObjectsTable Do
 		
 		If GetObjectTable(ThisObject) = "Ref" And FormCash.UpdateRelatedFieldsWhenWriting Then

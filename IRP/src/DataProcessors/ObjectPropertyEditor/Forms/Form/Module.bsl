@@ -384,10 +384,16 @@ EndProcedure
 //  AddInfo - Undefined - Add info
 &AtClient
 Procedure FieldSettingsEnd(Result, AddInfo) Export
+	
 	If Result = True Then
-		SetTablesList(ThisObject);
+		OldTable = GetObjectTable(ThisObject);
+		SetTablesList(ThisObject, True);
+		If Not OldTable = GetObjectTable(ThisObject) Then
+			SetNewTable();
+		EndIf;
 		SetPropertyAvailability();
 	EndIf;
+	
 EndProcedure	
 
 #EndRegion
@@ -688,8 +694,9 @@ EndProcedure
 // 
 // Parameters:
 //  Form - ClientApplicationForm - Form
+//	NotChangeTable - Boolean - NotChangeTable
 &AtClientAtServerNoContext
-Procedure SetTablesList(Form)
+Procedure SetTablesList(Form, NotChangeTable = False)
 	CL_String = "ChoiceList";
 	OT_String = "ObjectTable";
 	
@@ -710,9 +717,15 @@ Procedure SetTablesList(Form)
 		EndDo;
 	EndIf;
 	
+	NewCurrentTable = "";
 	If TablesChoiceList.Count() > 0 Then
-		Form.ObjectTable = TablesChoiceList[0].Value;
+		If NotChangeTable And Not TablesChoiceList.FindByValue(Form.ObjectTable) = Undefined Then
+			NewCurrentTable = Form.ObjectTable;
+		Else
+			NewCurrentTable = TablesChoiceList[0].Value;
+		EndIf;
 	EndIf;
+	Form.ObjectTable = NewCurrentTable;
 	
 	Form.Items[OT_String].Enabled = TablesChoiceList.Count() > 1;
 EndProcedure

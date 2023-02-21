@@ -6,5 +6,7 @@
     <value>Copy paste</value>
   </synonym>
   <content>SessionParameter.Buffer</content>
+  <content>CommonForm.CopyToClipboardSettings</content>
+  <content>CommonForm.PasteFromClipboardSettings</content>
   <parentSubsystem>Subsystem.Technical</parentSubsystem>
 </mdclass:Subsystem>

@@ -686,6 +686,7 @@
   <commonForms>CommonForm.SelectionRetailBasisForReturn</commonForms>
   <commonForms>CommonForm.PaymentByAcquiring</commonForms>
   <commonForms>CommonForm.CopyToClipboardSettings</commonForms>
+  <commonForms>CommonForm.PasteFromClipboardSettings</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>

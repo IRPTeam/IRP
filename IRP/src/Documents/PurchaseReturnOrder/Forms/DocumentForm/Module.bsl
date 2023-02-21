@@ -499,12 +499,17 @@ EndProcedure
 
 &AtClient
 Procedure CopyToClipboard(Command)
-	
-	CopySettings = CopyPasteClient.CopyToClipboard(Object, ThisObject);
+	CopyPasteClient.CopyToClipboard(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure CopyToClipboardAfterSetSettings(CopySettings, AddInfo) Export
+	If CopySettings = Undefined Then
+		Return;
+	EndIf;
 	
 	CopyPasteResult = CopyToClipboardServer(CopySettings);
 	CopyPasteClient.AfterCopy(CopyPasteResult);
-	
 EndProcedure
 
 &AtServer
@@ -514,7 +519,15 @@ EndFunction
 
 &AtClient
 Procedure PasteFromClipboard(Command)
-	PasteSettings = CopyPasteClient.PasteFromClipboard(Object, ThisObject);
+	CopyPasteClient.PasteFromClipboard(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure PasteFromClipboardAfterSetSettings(PasteSettings, AddInfo) Export
+	If PasteSettings = Undefined Then
+		Return;
+	EndIf;
+	
 	CopyPasteResult = PasteFromClipboardServer(PasteSettings);
 	CopyPasteClient.AfterPaste(Object, ThisObject,CopyPasteResult);
 EndProcedure

@@ -7,23 +7,25 @@
 // Parameters:
 //  Object - DocumentObjectDocumentName - Object
 //  Form - ClientApplicationForm - Form
-// 
-// Returns:
-//  See CopySettings
-Function CopyToClipboard(Object, Form) Export
-	Return CopySettings();
-EndFunction
+Procedure CopyToClipboard(Object, Form) Export
+	Notify = New NotifyDescription("CopyToClipboardAfterSetSettings", Form);
+	OpenSettings = New Structure;
+	OpenSettings.Insert("Ref", Object.Ref);
+	OpenSettings.Insert("CopySettings", CopySettings());
+	OpenForm("CommonForm.CopyToClipboardSettings", OpenSettings, Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
 
 // Copy settings.
 // 
 // Returns:
 //  Structure - Copy settings:
 // * CopySelectedRows - Boolean -
+// * CopyQuantityAs - String -
 Function CopySettings() Export
 	
 	Str = New Structure;
 	Str.Insert("CopySelectedRows", True);
-	
+	Str.Insert("CopyQuantityAs", "Quantity");
 	Return Str;
 EndFunction
 
@@ -52,22 +54,23 @@ EndProcedure
 // Parameters:
 //  Object - DocumentObjectDocumentName - Object
 //  Form - ClientApplicationForm - Form
-// 
-// Returns:
-//  See PasteSettings
-Function PasteFromClipboard(Object, Form) Export
-
-	Return PasteSettings();
-EndFunction
+Procedure PasteFromClipboard(Object, Form) Export
+	Notify = New NotifyDescription("PasteFromClipboardAfterSetSettings", Form);
+	OpenSettings = New Structure;
+	OpenSettings.Insert("Ref", Object.Ref);
+	OpenSettings.Insert("PasteSettings", PasteSettings());
+	OpenForm("CommonForm.PasteFromClipboardSettings", OpenSettings, Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
 
 // Paste settings.
 // 
 // Returns:
-//  Structure
+//  Structure:
+//  * PasteQuantityAs - String -
 Function PasteSettings() Export
 	
 	Str = New Structure;
-	
+	Str.Insert("PasteQuantityAs", "Quantity");
 	Return Str;
 	
 EndFunction

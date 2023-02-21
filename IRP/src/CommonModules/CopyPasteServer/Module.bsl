@@ -108,6 +108,9 @@ Function CopySelectedRows(Object, Form, CopySettings) Export
 		EndDo;
 	EndDo;
 	
+	// Rename Quantity column
+	Result.Data.ItemList.Columns[CopySettings.CopyQuantityAs].Name = "Quantity";
+	
 	Result.Message = StrTemplate(R().CP_006, Form.CurrentItem.SelectedRows.Count());	
 	
 	Return Result;
@@ -159,22 +162,56 @@ Function PasteSelectedRows(Object, Form, BufferData, PasteSettings) Export
 	
 	ItemList = BufferData.Data.ItemList;
 	Result = PasteResult();
+	
+	SourceHasTableSLN = BufferData.Data.Property("SerialLotNumbers");
+	TargetHasTableSLN = Wrapper.Tables.Property("SerialLotNumbers");
+	
+	SourceHasSLNInItemList = Not BufferData.Data.ItemList.Columns.Find("SerialLotNumber") = Undefined;
+	TargetHasSLNInItemList = Wrapper.Tables.ItemList.Property("SerialLotNumber"); // Boolean
+	
 	For Each ItemRow In ItemList Do
-		
-		If Not Wrapper.Tables.Property("SerialLotNumbers") Then
-			Result.SerialLotNumbers = Undefined;
-			IfWrapperHasNoTableSerialLotNumbers(BufferData, ItemRow, Wrapper);
-		ElsIf BufferData.Data.Property("SerialLotNumbers") Then
-			IfWrapperHasTableSerialLotNumbers(BufferData, Wrapper, Result, ItemRow);
+		If SourceHasTableSLN And TargetHasTableSLN Then
+			SourceAndTargetHasTableSLN(BufferData, ItemRow, Wrapper, Result, PasteSettings);
+		ElsIf SourceHasTableSLN And TargetHasSLNInItemList Then
+			SourceHasSLNTableAndTargetHasSLNInItemList(BufferData, ItemRow, Wrapper, PasteSettings);
+		ElsIf SourceHasSLNInItemList And TargetHasTableSLN Then
+			SourceHasSLNInItemListAndTargetHasTableSLN(BufferData, ItemRow, Wrapper, Result);
+		Else
+			CopyAsIsItemList(BufferData, ItemRow, Wrapper, PasteSettings);
 		EndIf;
 	EndDo;
+	
+	If Not TargetHasTableSLN Then
+		Result.SerialLotNumbers = Undefined;
+	EndIf;
+	
 	BuilderAPI.Write(Wrapper, , , CurrentObject);
 	Form.ValueToFormAttribute(CurrentObject, "Object");
 	
 	Return Result;
 EndFunction
 
-Procedure IfWrapperHasTableSerialLotNumbers(BufferData, Wrapper, Result, ItemRow)
+Procedure SourceHasSLNInItemListAndTargetHasTableSLN(BufferData, ItemRow, Wrapper, Result)
+	NewItemRow = BuilderAPI.AddRow(Wrapper, "ItemList");
+	
+	For Each Property In ColumnNameToPaste() Do
+		BuilderAPI.SetRowProperty(Wrapper, NewItemRow, Property, ItemRow[Property], "ItemList");
+	EndDo;
+	
+	If Not ItemRow.SerialLotNumber.isEmpty() Then
+		SerialSetting = SerialLotNumbersServer.FillSettingsAddNewSerial();
+		SerialSetting.Item = ItemRow.Item;
+		SerialSetting.ItemKey = ItemRow.ItemKey;
+		SerialSetting.RowKey = NewItemRow.Key;
+		NewSerial = New Structure;
+		NewSerial.Insert("SerialLotNumber", ItemRow.SerialLotNumber);
+		NewSerial.Insert("Quantity", ItemRow.Quantity);
+		SerialSetting.SerialLotNumbers.Add(NewSerial);
+		Result.SerialLotNumbers.Add(SerialSetting);
+	EndIf;
+EndProcedure
+
+Procedure SourceAndTargetHasTableSLN(BufferData, ItemRow, Wrapper, Result, PasteSettings)
 	NewItemRow = BuilderAPI.AddRow(Wrapper, "ItemList");
 	
 	For Each Property In ColumnNameToPaste() Do
@@ -199,33 +236,32 @@ Procedure IfWrapperHasTableSerialLotNumbers(BufferData, Wrapper, Result, ItemRow
 	EndIf;
 EndProcedure
 
-Procedure IfWrapperHasNoTableSerialLotNumbers(BufferData, ItemRow, Wrapper)
-	If Not Wrapper.Tables.ItemList.Property("SerialLotNumber") Then
+Procedure CopyAsIsItemList(BufferData, ItemRow, Wrapper, PasteSettings)
+	NewItemRow = BuilderAPI.AddRow(Wrapper, "ItemList");
+	
+	For Each Property In ColumnNameToPaste() Do
+		BuilderAPI.SetRowProperty(Wrapper, NewItemRow, Property, ItemRow[Property], "ItemList");
+	EndDo;
+EndProcedure
+
+Procedure SourceHasSLNTableAndTargetHasSLNInItemList(BufferData, ItemRow, Wrapper, PasteSettings)
+	SerialLotNumbers = BufferData.Data.SerialLotNumbers;
+	Serials = SerialLotNumbers.FindRows(New Structure("Key", ItemRow.Key));
+	If Serials.Count() Then	
+		For Each Serial In Serials Do
+			NewItemRow = BuilderAPI.AddRow(Wrapper, "ItemList");
+			For Each Property In ColumnNameToPaste() Do
+				BuilderAPI.SetRowProperty(Wrapper, NewItemRow, Property, ItemRow[Property], "ItemList");
+			EndDo;
+			BuilderAPI.SetRowProperty(Wrapper, NewItemRow, "SerialLotNumber", Serial.SerialLotNumber, "ItemList");
+			BuilderAPI.SetRowProperty(Wrapper, NewItemRow, PasteSettings.PasteQuantityAs, Serial.Quantity, "ItemList");
+		EndDo;
+	Else
 		NewItemRow = BuilderAPI.AddRow(Wrapper, "ItemList");
-		
 		For Each Property In ColumnNameToPaste() Do
 			BuilderAPI.SetRowProperty(Wrapper, NewItemRow, Property, ItemRow[Property], "ItemList");
 		EndDo;
-	Else // If SerialLotNumber in ItemList Row
-		If BufferData.Data.Property("SerialLotNumbers") Then
-			SerialLotNumbers = BufferData.Data.SerialLotNumbers;
-			Serials = SerialLotNumbers.FindRows(New Structure("Key", ItemRow.Key));
-			If Serials.Count() Then	
-				For Each Serial In Serials Do
-					NewItemRow = BuilderAPI.AddRow(Wrapper, "ItemList");
-					For Each Property In ColumnNameToPaste() Do
-						BuilderAPI.SetRowProperty(Wrapper, NewItemRow, Property, ItemRow[Property], "ItemList");
-					EndDo;
-					BuilderAPI.SetRowProperty(Wrapper, NewItemRow, "SerialLotNumber", Serial.SerialLotNumber, "ItemList");
-					BuilderAPI.SetRowProperty(Wrapper, NewItemRow, "Quantity", Serial.Quantity, "ItemList");
-				EndDo;
-			Else
-				NewItemRow = BuilderAPI.AddRow(Wrapper, "ItemList");
-				For Each Property In ColumnNameToPaste() Do
-					BuilderAPI.SetRowProperty(Wrapper, NewItemRow, Property, ItemRow[Property], "ItemList");
-				EndDo;
-			EndIf;
-		EndIf;
+		BuilderAPI.SetRowProperty(Wrapper, NewItemRow, PasteSettings.PasteQuantityAs, ItemRow.Quantity, "ItemList");
 	EndIf;
 EndProcedure
 

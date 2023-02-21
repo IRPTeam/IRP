@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:FormField">
-    <name>CopyQuantityAs</name>
+    <name>PasteQuantityAs</name>
     <id>1</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -9,10 +9,10 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>CopyQuantityAs</segments>
+      <segments>PasteQuantityAs</segments>
     </dataPath>
     <extendedTooltip>
-      <name>CopyQuantityAsExtendedTooltip</name>
+      <name>PasteQuantityAsExtendedTooltip</name>
       <id>3</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -27,7 +27,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>CopyQuantityAsContextMenu</name>
+      <name>PasteQuantityAsContextMenu</name>
       <id>2</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -61,51 +61,6 @@
           <value>PhysCount</value>
         </value>
       </choiceList>
-    </extInfo>
-  </items>
-  <items xsi:type="form:FormField">
-    <name>CopyOnlySelectedRows</name>
-    <id>4</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-      <common>true</common>
-    </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>CopySelectedRows</segments>
-    </dataPath>
-    <extendedTooltip>
-      <name>CopyOnlySelectedRowsExtendedTooltip</name>
-      <id>6</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-    </extendedTooltip>
-    <contextMenu>
-      <name>CopyOnlySelectedRowsContextMenu</name>
-      <id>5</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-    </contextMenu>
-    <type>CheckBoxField</type>
-    <editMode>Enter</editMode>
-    <showInHeader>true</showInHeader>
-    <headerHorizontalAlign>Left</headerHorizontalAlign>
-    <showInFooter>true</showInFooter>
-    <extInfo xsi:type="form:CheckBoxFieldExtInfo">
-      <checkBoxType>Switcher</checkBoxType>
     </extInfo>
   </items>
   <autoCommandBar>
@@ -171,32 +126,15 @@
   <showTitle>true</showTitle>
   <showCloseButton>true</showCloseButton>
   <attributes>
-    <name>CopyQuantityAs</name>
+    <name>PasteQuantityAs</name>
     <title>
       <key>en</key>
-      <value>Copy quantity as</value>
+      <value>Paste quantity as</value>
     </title>
     <id>1</id>
     <valueType>
       <types>String</types>
       <stringQualifiers/>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-  </attributes>
-  <attributes>
-    <name>CopySelectedRows</name>
-    <title>
-      <key>en</key>
-      <value>Copy selected rows</value>
-    </title>
-    <id>2</id>
-    <valueType>
-      <types>Boolean</types>
     </valueType>
     <view>
       <common>true</common>

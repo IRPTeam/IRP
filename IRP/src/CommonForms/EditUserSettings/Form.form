@@ -426,64 +426,6 @@
   <autoCommandBar>
    <name>MetadataTreeCommandBar</name>
    <id>2</id>
-   <items xsi:type="form:Button">
-    <name>MetadataTreeFilterByAttributeName</name>
-    <id>59</id>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <extendedTooltip>
-     <name>MetadataTreeFilterByAttributeNameExtendedTooltip</name>
-     <id>60</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <type>Label</type>
-     <autoMaxWidth>true</autoMaxWidth>
-     <autoMaxHeight>true</autoMaxHeight>
-     <extInfo xsi:type="form:LabelDecorationExtInfo">
-      <horizontalAlign>Left</horizontalAlign>
-     </extInfo>
-    </extendedTooltip>
-    <commandName>Form.Command.FilterByAttributeName</commandName>
-    <representation>Auto</representation>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <placementArea>UserCmds</placementArea>
-    <representationInContextMenu>Auto</representationInContextMenu>
-   </items>
-   <items xsi:type="form:Button">
-    <name>MetadataTreeOnlyUsedRows</name>
-    <id>61</id>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <extendedTooltip>
-     <name>MetadataTreeOnlyUsedRowsExtendedTooltip</name>
-     <id>62</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <type>Label</type>
-     <autoMaxWidth>true</autoMaxWidth>
-     <autoMaxHeight>true</autoMaxHeight>
-     <extInfo xsi:type="form:LabelDecorationExtInfo">
-      <horizontalAlign>Left</horizontalAlign>
-     </extInfo>
-    </extendedTooltip>
-    <commandName>Form.Command.OnlyUsedRows</commandName>
-    <representation>Auto</representation>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <placementArea>UserCmds</placementArea>
-    <representationInContextMenu>Auto</representationInContextMenu>
-   </items>
    <items xsi:type="form:FormGroup">
     <name>MetadataTreeGroupManage</name>
     <id>65</id>
@@ -1324,60 +1266,6 @@
   <action xsi:type="form:FormCommandHandlerContainer">
    <handler>
     <name>Cancel</name>
-   </handler>
-  </action>
-  <currentRowUse>Auto</currentRowUse>
- </formCommands>
- <formCommands>
-  <name>FilterByAttributeName</name>
-  <title>
-   <key>en</key>
-   <value>Filter by attribute name</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Фильтр по наименованию реквизита</value>
-  </title>
-  <title>
-   <key>tr</key>
-   <value>Öznitellik ismine göre filtrele</value>
-  </title>
-  <id>3</id>
-  <use>
-   <common>true</common>
-  </use>
-  <picture xsi:type="core:PictureRef">
-   <picture>StdPicture.CustomizeList</picture>
-  </picture>
-  <action xsi:type="form:FormCommandHandlerContainer">
-   <handler>
-    <name>FilterByAttributeName</name>
-   </handler>
-  </action>
-  <representation>Picture</representation>
-  <currentRowUse>Auto</currentRowUse>
- </formCommands>
- <formCommands>
-  <name>OnlyUsedRows</name>
-  <title>
-   <key>en</key>
-   <value>Only used rows</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Только используемые строки</value>
-  </title>
-  <title>
-   <key>tr</key>
-   <value>Sadece kullanılan satırlar</value>
-  </title>
-  <id>4</id>
-  <use>
-   <common>true</common>
-  </use>
-  <action xsi:type="form:FormCommandHandlerContainer">
-   <handler>
-    <name>OnlyUsedRows</name>
    </handler>
   </action>
   <currentRowUse>Auto</currentRowUse>

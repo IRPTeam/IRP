@@ -59,6 +59,17 @@ Scenario: _029200 preparation (work order)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
+	* Add work order in tax settings
+		Given I open hyperlink "e1cib/list/Catalog.Taxes"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'VAT'         |
+		And I select current line in "List" table
+		And I move to "Use documents" tab
+		And in the table "UseDocuments" I click "Add" button
+		And I select "Work order" exact value from "Document name" drop-down list in "UseDocuments" table
+		And I finish line editing in "UseDocuments" table
+		And I click "Save and close" button	
 	* Price list
 		When Create document PriceList objects (for works)
 		And I execute 1C:Enterprise script at server
@@ -392,10 +403,10 @@ Scenario: _029208 create SI based on Work order (without SO)
 		Then the form attribute named "Company" became equal to "Main Company"
 		And "ItemList" table became equal
 			| '#' | 'Price type'              | 'Item'         | 'Item key'     | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Additional analytic' | 'Store' | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Work order'     | 'Revenue type' | 'Sales person' |
-			| '1' | 'en description is empty' | 'Assembly'     | 'Assembly'     | ''                   | 'No'                 | '30,51'      | 'pcs'  | ''                   | '1,000'    | '200,00' | '18%' | ''              | '200,00'     | '200,00'       | 'No'                         | ''                    | ''      | ''              | 'No'                        | ''       | ''            | '$$WorkOrder1$$' | ''             | ''             |
-			| '2' | 'en description is empty' | 'Installation' | 'Installation' | ''                   | 'No'                 | '15,25'      | 'pcs'  | ''                   | '1,000'    | '100,00' | '18%' | ''              | '100,00'     | '100,00'       | 'No'                         | ''                    | ''      | ''              | 'No'                        | ''       | ''            | '$$WorkOrder1$$' | ''             | ''             |
+			| '1' | 'en description is empty' | 'Assembly'     | 'Assembly'     | ''                   | 'No'                 | '30,51'      | 'pcs'  | ''                   | '1,000'    | '200,00' | '18%' | ''              | '169,49'     | '200,00'       | 'No'                         | ''                    | ''      | ''              | 'No'                        | ''       | ''            | '$$WorkOrder1$$' | ''             | ''             |
+			| '2' | 'en description is empty' | 'Installation' | 'Installation' | ''                   | 'No'                 | '15,25'      | 'pcs'  | ''                   | '1,000'    | '100,00' | '18%' | ''              | '84,75'      | '100,00'       | 'No'                         | ''                    | ''      | ''              | 'No'                        | ''       | ''            | '$$WorkOrder1$$' | ''             | ''             |
 		Then the form attribute named "Branch" became equal to "Workshop 1"
-		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "300,00"
+		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "254,24"
 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "45,76"
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "300,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"

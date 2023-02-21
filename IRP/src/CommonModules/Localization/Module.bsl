@@ -1385,6 +1385,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_024", NStr("en='Change planning period?';
 		|ru='Поменять период планирования?';
 		|tr='Planlama dönemi değiştirmek ister misiniz?'", Lang));
+	Strings.Insert("QuestionToUser_025", NStr("en='Do you want to update filled tax rates?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser
@@ -1432,6 +1433,8 @@ Function Strings(Lang) Export
 	Strings.Insert("I_6", NStr("en='Ordered without ISR';
 		|ru='Заказано без ЗОТ';
 		|tr='Normal sipariş'", Lang));
+	Strings.Insert("I_7", NStr("en='Change rights'", Lang));
+	Strings.Insert("I_8", NStr("en='Rollback rights'", Lang));
 
 #EndRegion
 
@@ -1600,6 +1603,13 @@ Function Strings(Lang) Export
 	Strings.Insert("Str_Documents", NStr("en='Documents';
 		|ru='Документы';
 		|tr='Evraklar'", Lang));
+#EndRegion
+
+#Region AdditionalSettings
+	Strings.Insert("Add_Setiings_001", NStr("en='Additional settings'", Lang));
+	Strings.Insert("Add_Setiings_002", NStr("en='Point of sale'", Lang));
+	Strings.Insert("Add_Setiings_003", NStr("en='Disable - Change price'", Lang));
+	Strings.Insert("Add_Setiings_004", NStr("en='Disable - Create return'", Lang));
 #EndRegion
 
 #Region Mobile

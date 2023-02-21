@@ -537,26 +537,57 @@ EndProcedure
 Procedure __tmp_CashExpenseRevenue_OnChainComplete(Parameters)
 	ArrayOfEventCallers = New Array();
 	ArrayOfEventCallers.Add("AccountOnUserChange");
+	ArrayOfEventCallers.Add("DateOnUserChange");
 	
 	If ArrayOfEventCallers.Find(Parameters.EventCaller) = Undefined Then
 		__tmp_CashExpenseRevenue_CommitChanges(Parameters);
 		Return;
 	EndIf;
 	
-	// refill question PaymentList.Currency
-	If IsChangedProperty(Parameters, "PaymentList.Currency").IsChanged 
-		And Parameters.Object.PaymentList.Count() Then
-		NotifyParameters = New Structure("Parameters", Parameters);
-		ShowQueryBox(New NotifyDescription("__tmp_CashExpenseRevenue_AccountOnUserChangeContinue", ThisObject, NotifyParameters), 
-					R().QuestionToUser_006, QuestionDialogMode.YesNo);
+	If Parameters.EventCaller = "AccountOnUserChange" Then
+		// refill question PaymentList.Currency
+		If IsChangedProperty(Parameters, "PaymentList.Currency").IsChanged 
+			And Parameters.Object.PaymentList.Count() Then
+			NotifyParameters = New Structure("Parameters", Parameters);
+			ShowQueryBox(New NotifyDescription("__tmp_CashExpenseRevenue_AccountOnUserChangeContinue", ThisObject, NotifyParameters), 
+						R().QuestionToUser_006, QuestionDialogMode.YesNo);
+		Else
+			__tmp_CashExpenseRevenue_CommitChanges(Parameters);
+		EndIf;
+
+		ElsIf Parameters.EventCaller = "DateOnUserChange" Then
+		// refill question tax rate
+		If IsChangedTaxRates(Parameters).IsChanged 
+			And Parameters.Object.PaymentList.Count() Then
+			NotifyParameters = New Structure("Parameters", Parameters);
+			ShowQueryBox(New NotifyDescription("__tmp_CashExpenseRevenue_DateOnUserChangeContinue", ThisObject, NotifyParameters), 
+						R().QuestionToUser_025, QuestionDialogMode.YesNo);
+		Else
+			__tmp_CashExpenseRevenue_CommitChanges(Parameters);
+		EndIf;
 	Else
 		__tmp_CashExpenseRevenue_CommitChanges(Parameters);
 	EndIf;
-
 EndProcedure
 
 Procedure __tmp_CashExpenseRevenue_AccountOnUserChangeContinue(Answer, NotifyParameters) Export
 	If Answer = DialogReturnCode.Yes Then
+		__tmp_CashExpenseRevenue_CommitChanges(NotifyParameters.Parameters);
+	EndIf;
+EndProcedure
+
+Procedure __tmp_CashExpenseRevenue_DateOnUserChangeContinue(Answer, NotifyParameters) Export
+	If Answer = DialogReturnCode.Yes Then
+		__tmp_CashExpenseRevenue_CommitChanges(NotifyParameters.Parameters);
+	Else
+		DataPaths = "PaymentList.NetAmount, PaymentList.TaxAmount, PaymentList.TotalAmount";
+		RemoveFromCache(DataPaths, NotifyParameters.Parameters, False);
+		// remove tax rate from cache
+		DynamicDataPaths = New Array();
+		For Each TaxInfo In NotifyParameters.Parameters.ArrayOfTaxInfo Do
+			DynamicDataPaths.Add(NotifyParameters.Parameters.TableName + "." + TaxInfo.Name);
+		EndDo;
+		RemoveFromCache(StrConcat(DynamicDataPaths, ","), NotifyParameters.Parameters);
 		__tmp_CashExpenseRevenue_CommitChanges(NotifyParameters.Parameters);
 	EndIf;
 EndProcedure
@@ -742,7 +773,8 @@ EndProcedure
 
 Function IsChangedTaxRates(Parameters)
 	For Each TaxInfo In Parameters.ArrayOfTaxInfo Do
-		Result = IsChangedProperty(Parameters, "ItemList." + TaxInfo.Name);
+//		Result = IsChangedProperty(Parameters, "ItemList." + TaxInfo.Name);
+		Result = IsChangedProperty(Parameters, Parameters.TableName+ "." + TaxInfo.Name);
 		If Result.IsChanged Then
 			Return Result;
 		EndIf;

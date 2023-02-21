@@ -361,6 +361,155 @@
        </extInfo>
       </items>
       <items xsi:type="form:FormGroup">
+       <name>GroupHeaderTopUserAdmin</name>
+       <id>1215</id>
+       <items xsi:type="form:FormField">
+        <name>UserAdminByDefault</name>
+        <id>1217</id>
+        <title>
+         <key>en</key>
+         <value>Rights applied</value>
+        </title>
+        <titleTextColor xsi:type="core:ColorRef">
+         <color>Style.SpecialTextColor</color>
+        </titleTextColor>
+        <titleFont xsi:type="core:FontRef">
+         <font>Style.LargeTextFont</font>
+        </titleFont>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <dataPath xsi:type="form:DataPath">
+         <segments>UserAdminByDefault</segments>
+        </dataPath>
+        <extendedTooltip>
+         <name>UserAdminByDefaultExtendedTooltip</name>
+         <id>1219</id>
+         <visible>true</visible>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <type>Label</type>
+         <autoMaxWidth>true</autoMaxWidth>
+         <autoMaxHeight>true</autoMaxHeight>
+         <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+         </extInfo>
+        </extendedTooltip>
+        <contextMenu>
+         <name>UserAdminByDefaultContextMenu</name>
+         <id>1218</id>
+         <visible>true</visible>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <autoFill>true</autoFill>
+        </contextMenu>
+        <type>LabelField</type>
+        <editMode>Enter</editMode>
+        <showInHeader>true</showInHeader>
+        <headerHorizontalAlign>Left</headerHorizontalAlign>
+        <showInFooter>true</showInFooter>
+        <extInfo xsi:type="form:LabelFieldExtInfo">
+         <autoMaxWidth>true</autoMaxWidth>
+         <autoMaxHeight>true</autoMaxHeight>
+        </extInfo>
+       </items>
+       <items xsi:type="form:FormField">
+        <name>UserAdmin</name>
+        <id>1230</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <dataPath xsi:type="form:DataPath">
+         <segments>UserAdmin</segments>
+        </dataPath>
+        <titleLocation>None</titleLocation>
+        <extendedTooltip>
+         <name>UserAdminExtendedTooltip</name>
+         <id>1232</id>
+         <visible>true</visible>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <type>Label</type>
+         <autoMaxWidth>true</autoMaxWidth>
+         <autoMaxHeight>true</autoMaxHeight>
+         <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+         </extInfo>
+        </extendedTooltip>
+        <contextMenu>
+         <name>UserAdminContextMenu</name>
+         <id>1231</id>
+         <visible>true</visible>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <autoFill>true</autoFill>
+        </contextMenu>
+        <type>LabelField</type>
+        <horizontalAlign>Right</horizontalAlign>
+        <editMode>Enter</editMode>
+        <showInHeader>true</showInHeader>
+        <headerHorizontalAlign>Left</headerHorizontalAlign>
+        <showInFooter>true</showInFooter>
+        <extInfo xsi:type="form:LabelFieldExtInfo">
+         <autoMaxHeight>true</autoMaxHeight>
+         <horizontalStretch>true</horizontalStretch>
+         <textColor xsi:type="core:ColorRef">
+          <color>Style.FieldSelectionBackColor</color>
+         </textColor>
+         <font xsi:type="core:FontRef">
+          <font>Style.LargeTextFont</font>
+         </font>
+        </extInfo>
+       </items>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <title>
+        <key>en</key>
+        <value>Group header top</value>
+       </title>
+       <extendedTooltip>
+        <name>GroupHeaderTopUserAdminExtendedTooltip</name>
+        <id>1216</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+         <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+       </extendedTooltip>
+       <type>UsualGroup</type>
+       <extInfo xsi:type="form:UsualGroupExtInfo">
+        <group>AlwaysHorizontal</group>
+        <showLeftMargin>true</showLeftMargin>
+        <united>true</united>
+        <backColor xsi:type="core:ColorRef">
+         <color>Style.ToolTipBackColor</color>
+        </backColor>
+        <throughAlign>Auto</throughAlign>
+        <currentRowUse>Auto</currentRowUse>
+       </extInfo>
+      </items>
+      <items xsi:type="form:FormGroup">
        <name>MainPages</name>
        <id>657</id>
        <items xsi:type="form:FormGroup">
@@ -4434,6 +4583,37 @@
          <textEdit>true</textEdit>
         </extInfo>
        </items>
+       <items xsi:type="form:Button">
+        <name>ChangeRollbackRight</name>
+        <id>1210</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <extendedTooltip>
+         <name>ChangeRollbackRightExtendedTooltip</name>
+         <id>1211</id>
+         <visible>true</visible>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <type>Label</type>
+         <autoMaxWidth>true</autoMaxWidth>
+         <autoMaxHeight>true</autoMaxHeight>
+         <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+         </extInfo>
+        </extendedTooltip>
+        <type>UsualButton</type>
+        <commandName>Form.Command.ChangeRollbackRight</commandName>
+        <representation>Auto</representation>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <placementArea>UserCmds</placementArea>
+        <representationInContextMenu>Auto</representationInContextMenu>
+       </items>
        <visible>true</visible>
        <enabled>true</enabled>
        <userVisible>
@@ -7488,6 +7668,58 @@
    </edit>
   </columns>
  </attributes>
+ <attributes>
+  <name>UserAdmin</name>
+  <title>
+   <key>en</key>
+   <value>User admin</value>
+  </title>
+  <id>203</id>
+  <valueType>
+   <types>CatalogRef.Users</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>KeepRights</name>
+  <title>
+   <key>en</key>
+   <value>Keep rights</value>
+  </title>
+  <id>204</id>
+  <valueType>
+   <types>Boolean</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>UserAdminByDefault</name>
+  <title>
+   <key>en</key>
+   <value>User admin by default</value>
+  </title>
+  <id>205</id>
+  <valueType>
+   <types>String</types>
+   <stringQualifiers/>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>qPayment</name>
   <title>
@@ -8232,6 +8464,23 @@ elemanı seç</value>
    </handler>
   </action>
   <functionalOptions>FunctionalOption.UseConsolidatedRetailSales</functionalOptions>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>ChangeRollbackRight</name>
+  <title>
+   <key>en</key>
+   <value>Change / Rollback right</value>
+  </title>
+  <id>32</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>ChangeRollbackRight</name>
+   </handler>
+  </action>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <commandInterface>

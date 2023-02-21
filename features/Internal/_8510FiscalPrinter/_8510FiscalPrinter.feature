@@ -923,28 +923,49 @@ Scenario: _0850024 return by card without basis document (without RRN)
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '200.00'
 		And I check "$ParsingResult1$" with "1" and data in "In.Parameter6" contains ''								
 	
-// Scenario: _08500241 return by card without basis document (with RRN)
-// 	And I close all client application windows
-// 	And In the command interface I select "Retail" "Point of sale"
-// 	* Select item
-// 		And I click "Search by barcode (F7)" button
-// 		And I input "23455677788976667" text in the field named "InputFld"
-// 		And I click the button named "OK"
-// 		And I activate "Price" field in "ItemList" table
-// 		And I select current line in "ItemList" table
-// 		And I input "200,00" text in "Price" field of "ItemList" table
-// 		And I finish line editing in "ItemList" table
-// 	* Return
-// 		And I click the button named "Return"
-// 		And I click "Payment Return" button
-// 		And I click "Card (*)" button
-// 		Then "Payment types" window is opened
-// 		And I click the hyperlink named "Page_1"
-// 		And "Payments" table became equal
-// 			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode' |
-// 			| '⚪'            | 'Card 03'      | '200,00' | 'Array'   |
-		
-		
+Scenario: _08500241 return by card without basis document (with RRN)
+	And I close all client application windows
+	And In the command interface I select "Retail" "Point of sale"
+	* Select item
+		And I click "Search by barcode (F7)" button
+		And I input "23455677788976667" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "111,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Return
+		And I click the button named "Return"
+		And I click "Payment Return" button
+		And I click "Card (*)" button
+		Then "Payment types" window is opened
+		And I click the hyperlink named "Page_1"
+		And "Payments" table became equal
+			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode' |
+			| '⚪'            | 'Card 03'      | '111,00' | ''        |
+		And I activate "RRNCode" field in "Payments" table
+		And I select current line in "Payments" table
+		And I input "23457" text in "RRNCode" field of "Payments" table
+		And I finish line editing in "Payments" table
+		And I click "Enter" button		
+		And I click "OK" button
+	* Check
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Amount' |
+			| '111,00' |
+		And I select current line in "List" table
+		And I move to "Payments" tab
+		And "Payments" table became equal
+			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Postponed payment' | 'Bank term'    | 'Account'      | 'Percent' | 'RRN Code'      |
+			| '1' | '111,00' | ''           | 'Card 03'      | ''                 | 'No'                | 'Bank term 03' | 'POS Terminal' | '1,00'    | '23457'         |
+		And I close all client application windows
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '111.00'
+		And I check "$ParsingResult1$" with "1" and data in "In.Parameter6" contains '23457'	
 
 Scenario: _0850020 check auto card payment cancellation (acquiring)
 	And I close all client application windows
@@ -1186,7 +1207,31 @@ Scenario: _0850028 check acquiring in BR
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '100.00'
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter6" contains '$RRNBankReceipt2$'		
 				
-				
+Scenario: _0850029 return retail customer advanve from POS (card)
+		And I close all client application windows
+		And In the command interface I select "Retail" "Point of sale"
+		* Select retail customer
+			And I click "Search customer" button
+			And I input "005" text in "ID" field
+			And I move to the next attribute
+			And I click "OK" button
+		* Return advance
+			And I click the button named "Return"
+			And I click the button named "Advance"
+			And I click "Card (*)" button
+			And I click the hyperlink named "Page_0"			
+			And I click "2" button
+			And I click "0" button
+			And I click "0" button
+			And I click the button named "Enter"
+			And I click "OK" button			
+		* Check acquiring log
+			And Delay 10
+			And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+			And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
+			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '200.00'
+
 
 Scenario: _0850025 sales return (cash)
 	And I close all client application windows

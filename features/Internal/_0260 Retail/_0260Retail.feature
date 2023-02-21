@@ -807,7 +807,12 @@ Scenario: _0260138 return advance payment (card)
 			| 'Description' |
 			| 'Bank term 02'     |
 		And I select current line in "List" table
-		And I finish line editing in "PaymentList" table		
+		And I finish line editing in "PaymentList" table	
+		And I click Select button of "Branch" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shop 02'     |
+		And I select current line in "List" table	
 		And I click "Post" button
 	* Check creation
 		And I delete "$$NumberBankPayment1$$" variable
@@ -821,6 +826,42 @@ Scenario: _0260138 return advance payment (card)
 			| '$$NumberBankPayment1$$' |
 		And I close all client application windows				
 						
+Scenario: _02601381 create advance return from POS
+	And I close all client application windows
+	* Open POS
+		And In the command interface I select "Retail" "Point of sale"
+	* Select retail customer (cash advance)
+		And I move to the tab named "ButtonPage"
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Sam Jons'    |
+		And I select current line in "List" table
+		And I click "OK" button	
+	* Return advance payment
+		And I click the button named "Return"
+		And I click the button named "Advance"
+		Then the form attribute named "Advance" became equal to "400"
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_0"
+		And I click "7" button
+		And I click "7" button
+		And I click "Cash (/)" button
+		And I click "3" button
+		And I click "3" button
+		And I click the button named "Enter"
+	* Check
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And "List" table contains lines
+			| 'Amount' |
+			| '77,00'  |
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And "List" table contains lines
+			| 'Amount' |
+			| '33,00'  |
+		And I close all client application windows
+		
+				
 
 Scenario: _0260139 create RRR from POS (first select basis document)
 	And I close all client application windows
@@ -898,7 +939,7 @@ Scenario: _0260139 create RRR from POS (first select basis document)
 	And I close all client application windows
 	
 			
-Scenario: _0260139 create RRR from POS (first select basis document, different workstation)	
+Scenario: _02601391 create RRR from POS (first select basis document, different workstation)	
 	And I close all client application windows
 	* Open POS
 		And In the command interface I select "Retail" "Point of sale"
@@ -1132,6 +1173,8 @@ Scenario: _0260142 filters in the Retail sales receipt (basis) form (POS)
 			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
 			| 'Dress' | ''             | 'XS/Blue'  | ''        | '520,00' | '1,000'    | ''       | '520,00' |
 			| 'Shirt' | ''             | '38/Black' | ''        | '350,00' | '1,000'    | ''       | '350,00' |
+		And I delete a line in "ItemList" table
+		And I delete a line in "ItemList" table
 		And I close all client application windows
 		
 							
@@ -1190,9 +1233,9 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			Then the form attribute named "CurrencyBalanceBeginning" became equal to "TRY"
 			And the editing text of form attribute named "BalanceIncoming" became equal to "8 950,00"
 			Then the form attribute named "CurrencyBalanceIncoming" became equal to "TRY"
-			And the editing text of form attribute named "BalanceOutcoming" became equal to "6 380,00"
+			And the editing text of form attribute named "BalanceOutcoming" became equal to "6 413,00"
 			Then the form attribute named "CurrencyBalanceOutcoming" became equal to "TRY"
-			And the editing text of form attribute named "BalanceEnd" became equal to "4 010,00"
+			And the editing text of form attribute named "BalanceEnd" became equal to "3 977,00"
 			Then the form attribute named "CurrencyBalanceEnd" became equal to "TRY"
 			And the editing text of form attribute named "BalanceReal" became equal to "0,00"
 			Then the form attribute named "Company" became equal to "Main Company"
@@ -1230,7 +1273,7 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			| '*'                          | 'Main Company' | '-1 070' | 'Shop 02' | 'TRY'      | 'CI'     |
 		Then the number of "Documents" table lines is "equal" "15"
 		Then the form attribute named "Branch" became equal to "Shop 02"
-		And the editing text of form attribute named "BalanceEnd" became equal to "4 010,00"
+		And the editing text of form attribute named "BalanceEnd" became equal to "3 977,00"
 		And the editing text of form attribute named "BalanceReal" became equal to "4 000,00"
 		And "PaymentList" table became equal
 			| '#' | 'Amount'   | 'Is return' | 'Payment type' | 'Payment terminal' | 'Real amount' |

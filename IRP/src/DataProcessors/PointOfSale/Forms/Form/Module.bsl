@@ -79,6 +79,21 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ReturnPage.Visible =	Form.isReturn;
 	
 	Form.Title = R().InfoMessage_POS_Title + ?(Form.isReturn, ": " + R().InfoMessage_ReturnTitle, "");
+	
+	If Form.Items.ChangeRollbackRight.Check Then
+		Form.Items.ChangeRollbackRight.Title = R().I_8;
+	Else
+		Form.Items.ChangeRollbackRight.Title = R().I_7;
+	EndIf;	
+	
+	Form.Items.GroupHeaderTopUserAdmin.Visible = ValueIsFilled(Form.UserAdmin);
+	
+	// Additional settings
+	Form.Items.Return.Enabled = UserSettingsServer.PointOfSale_AdditionalSettings_DisableCreateReturn(Form.UserAdmin);
+	
+	ChangePrice = UserSettingsServer.PointOfSale_AdditionalSettings_DisableChangePrice(Form.UserAdmin);
+	Form.Items.ItemListPrice.Enabled = ChangePrice;
+	Form.Items.ItemListTotalAmount.Enabled = ChangePrice;
 EndProcedure
 
 #Region AGREEMENT
@@ -422,6 +437,31 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 EndProcedure
 
 &AtClient
+Procedure ChangeRollbackRight(Command)
+	If Not Items.ChangeRollbackRight.Check Then
+		OpenForm("DataProcessor.PointOfSale.Form.ChangeRight", , ThisObject, , , , 
+		New NotifyDescription("ChangeRightEnd", ThisObject ) , FormWindowOpeningMode.LockOwnerWindow);
+	Else
+		Items.ChangeRollbackRight.Check = False;
+		ThisObject.KeepRights = False;
+		ThisObject.UserAdmin = Undefined;
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure ChangeRightEnd(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Items.ChangeRollbackRight.Check = False;
+	Else
+		Items.ChangeRollbackRight.Check = True;
+		ThisObject.KeepRights = Result.KeepRights;
+		ThisObject.UserAdmin = Result.UserAdmin;
+	EndIf;
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
 Procedure qPayment(Command)
 
 	Object.Date = CommonFunctionsServer.GetCurrentSessionDate();
@@ -487,11 +527,8 @@ Procedure Advance(Command)
 	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
 	ObjectParameters.Insert("Branch", Object.Branch);
 	ObjectParameters.Insert("Workstation", Workstation);
-	If ThisObject.isReturn Then
-		ObjectParameters.Insert("IsReturnAdvance", True);
-	Else
-		ObjectParameters.Insert("IsAdvance", True);
-	EndIf;
+	ObjectParameters.Insert("IsAdvance", True);
+	ObjectParameters.Insert("isReturn", ThisObject.isReturn);
 	ObjectParameters.Insert("RetailCustomer", Object.RetailCustomer);
 	ObjectParameters.Insert("Company", Object.Company);
 	
@@ -909,6 +946,11 @@ Procedure NewTransaction()
 	
 	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
 		DocRetailSalesReceiptClient.ConsolidatedRetailSalesOnChange(Object, ThisObject, Undefined);
+	EndIf;
+	
+	If Not ThisObject.KeepRights Then
+		Items.ChangeRollbackRight.Check = False;
+		ThisObject.UserAdmin = Undefined;
 	EndIf;
 	
 	EnabledPaymentButton();

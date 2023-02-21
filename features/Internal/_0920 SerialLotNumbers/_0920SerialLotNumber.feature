@@ -465,6 +465,47 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button
+		* Link/Unlink line with serial lot number
+			And in the table "ItemList" I click "Link unlink basis documents" button
+			And I change checkbox "Linked documents"
+			And I go to line in "ResultsTree" table
+				| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'     | 'Unit' |
+				| 'TRY'      | '400,00' | '1,000'    | 'Trousers (38/Yellow)' | 'pcs'  |
+			And in the table "ResultsTree" I click the button named "Unlink"
+			And I click "Ok" button
+			And in the table "ItemList" I click "Link unlink basis documents" button
+			And I go to line in "BasisesTree" table
+				| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'     | 'Unit' |
+				| 'TRY'      | '400,00' | '3,000'    | 'Trousers (38/Yellow)' | 'pcs'  |
+			And in the table "BasisesTree" I click the button named "Link"
+			And I click "Ok" button
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+			And "SerialLotNumbers" table became equal
+				| 'Serial lot number' | 'Quantity' |
+				| '99098809009998'    | '1,000'    |
+			And I click "Ok" button
+			And in the table "ItemList" I click "Link unlink basis documents" button
+			And I change checkbox "Linked documents"
+			And I go to line in "ResultsTree" table
+				| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'     | 'Unit' |
+				| 'TRY'      | '400,00' | '1,000'    | 'Trousers (38/Yellow)' | 'pcs'  |
+			And in the table "ResultsTree" I click the button named "Unlink"
+			And I click "Ok" button
+			And in the table "ItemList" I click "Link unlink basis documents" button
+			Then "Link / unlink document row" window is opened
+			And in the table "BasisesTree" I click "Auto link" button
+			And I click "Ok" button
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  |
+				| 'Trousers' | '38/Yellow' |
+			And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+			And "SerialLotNumbers" table became equal
+				| 'Serial lot number' | 'Quantity' |
+				| '99098809009998'    | '1,000'    |
+			And I click "Ok" button			
 			And I move to "Payments" tab
 			And I activate "Amount" field in "Payments" table
 			And I select current line in "Payments" table

@@ -502,6 +502,21 @@ Scenario: create purchase invoice without order (Vendor Ferron, USD, store 01)
 		And I click the button named "FormPostAndClose"
 
 
+Scenario: Create document PhysicalInventory objects (for copy lines)
+
+	And I check or create document "PhysicalInventory" objects:
+		| 'Ref'                                                                        | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'RuleEditQuantity' | 'Status'                                                                 | 'Store'                                                          | 'UseSerialLot' | 'Author'                                                        | 'Description' |
+		| 'e1cib/data/Document.PhysicalInventory?ref=b79597b9cc8778aa11edb1f937094eda' | 'False'        | 1024     | '21.02.2023 17:37:59' | 'False'  | 'False'            | 'e1cib/data/Catalog.ObjectStatuses?ref=aa78120ed92fbced11eaf13c5c2df447' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c' | 'True'         | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''            |
+
+	And I refill object tabular section "ItemList":
+		| 'Ref'                                                                        | 'Key'                                  | 'Item'                                                          | 'ItemKey'                                                          | 'SerialLotNumber'                                                          | 'Unit'                                                          | 'ExpCount' | 'PhysCount' | 'ManualFixedCount' | 'Difference' | 'Description' | 'UseSerialLotNumber' |
+		| 'e1cib/data/Document.PhysicalInventory?ref=b79597b9cc8778aa11edb1f937094eda' | '60af177f-9071-4600-8562-68713b189fc5' | 'e1cib/data/Catalog.Items?ref=b780c87413d4c65f11ecd519fda7206f' | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72070' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a015' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |            | 3           |                    | 3            | ''            | 'True'               |
+		| 'e1cib/data/Document.PhysicalInventory?ref=b79597b9cc8778aa11edb1f937094eda' | 'c9e543c8-4897-4bfc-be4f-e01bdc298b0d' | 'e1cib/data/Catalog.Items?ref=b780c87413d4c65f11ecd519fda7206f' | 'e1cib/data/Catalog.ItemKeys?ref=b780c87413d4c65f11ecd519fda72070' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b76197e183b782dc11eb6e1d5573a016' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |            | 2           |                    | 2            | ''            | 'True'               |
+		| 'e1cib/data/Document.PhysicalInventory?ref=b79597b9cc8778aa11edb1f937094eda' | '0571391f-10d4-4e54-b05b-38777a637d19' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | ''                                                                         | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |            | 3           |                    | 3            | ''            | 'False'              |
+		| 'e1cib/data/Document.PhysicalInventory?ref=b79597b9cc8778aa11edb1f937094eda' | '234d590e-c22e-4212-a827-51f3a19e34e5' | 'e1cib/data/Catalog.Items?ref=b781cf3f5e36b25611ecd69f89585359' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958535c' | ''                                                                         | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |            | 4           |                    | 4            | ''            | 'True'               |
+
+
+
 Scenario: Create document SalesInvoice objects (for copy lines)
 
 	And I check or create document "SalesInvoice" objects:

@@ -76,6 +76,7 @@ Scenario: _0155100 preparation ( filling documents)
 		When add sales tax settings 
 		When Create catalog CancelReturnReasons objects
 		When Create document SalesInvoice objects (for copy lines)
+		When Create document PhysicalInventory objects (for copy lines)
 
 
 Scenario: _0154192 copy lines from SI to IT
@@ -175,11 +176,12 @@ Scenario: _0154194 copy lines from SI to ItemStockAdjustment
 		And I click the button named "FormCreate"
 		And I click "Paste from clipboard" button
 		And "ItemList" table became equal
-			| 'Item'               | 'Item key (surplus)' | 'Unit'              | 'Quantity' |
-			| 'Product 1 with SLN' | 'PZU'                | 'pcs'               | '3,000'    |
-			| 'Dress'              | 'XS/Blue'            | 'box Dress (8 pcs)' | '2,000'    |
-			| 'Product 3 with SLN' | 'UNIQ'               | 'pcs'               | '2,000'    |
-			| 'Product 3 with SLN' | 'PZU'                | 'pcs'               | '8,000'    |
+			| '#' | 'Item'               | 'Unit'              | 'Quantity' | 'Item key (write off)' | 'Item key (surplus)' | 'Serial lot number (surplus)' | 'Serial lot number (write off)' |
+			| '1' | 'Product 1 with SLN' | 'pcs'               | '2,000'    | ''                     | 'PZU'                | '0512'                        | ''                              |
+			| '2' | 'Product 1 with SLN' | 'pcs'               | '1,000'    | ''                     | 'PZU'                | '0514'                        | ''                              |
+			| '3' | 'Dress'              | 'box Dress (8 pcs)' | '2,000'    | ''                     | 'XS/Blue'            | ''                            | ''                              |
+			| '4' | 'Product 3 with SLN' | 'pcs'               | '2,000'    | ''                     | 'UNIQ'               | '0514'                        | ''                              |
+			| '5' | 'Product 3 with SLN' | 'pcs'               | '8,000'    | ''                     | 'PZU'                | ''                            | ''                              |
 		And I close all client application windows
 
 Scenario: _0154195 copy lines from SI to PlannedReceiptReservation
@@ -363,6 +365,7 @@ Scenario: _01541992 copy lines from SI to SalesOrder
 			| 'Product 3 with SLN' | 'UNIQ'     | 'pcs'               | '2,000'    |
 			| 'Product 3 with SLN' | 'PZU'      | 'pcs'               | '8,000'    |
 	* Copy from SO to new SI
+		Then I go to the first line in "ItemList" table
 		Then I select all lines of "ItemList" table
 		And I click "Copy to clipboard" button
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -687,4 +690,133 @@ Scenario: _01541982 copy lines from SI to Bundling
 			| 'Dress'              | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
 			| 'Product 3 with SLN' | 'UNIQ'     | 'pcs'               | '2,000'    |
 			| 'Product 3 with SLN' | 'PZU'      | 'pcs'               | '8,000'    |
+		And I close all client application windows
+
+Scenario: _01541983 copy lines from Physical inventory to Sales invoice
+	And I close all client application windows
+	* Select Physical inventory and copy lines
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1 024'  |
+		And I select current line in "List" table
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' |
+			| 'Product 1 with SLN' | 'ODS'      |
+		Then I select all lines of "ItemList" table
+		And I click "Copy to clipboard" button
+		And I change "Copy quantity as" radio button value to "Phys. count"
+		And I click "OK" button	
+	* Open Sales invoice and check copy lines
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'               | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Quantity' |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '0512'               | '3,000'    |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '0514'               | '2,000'    |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | ''                   | '3,000'    |
+			| 'Product 4 with SLN' | 'UNIQ'     | 'pcs'  | ''                   | '4,000'    |
+		And I close all client application windows
+
+Scenario: _01541984 copy lines from Physical inventory to Sales order
+	And I close all client application windows
+	* Select Physical inventory and copy lines
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1 024'  |
+		And I select current line in "List" table
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' |
+			| 'Product 1 with SLN' | 'ODS'      |
+		Then I select all lines of "ItemList" table
+		And I click "Copy to clipboard" button
+		And I change "Copy quantity as" radio button value to "Phys. count"
+		And I click "OK" button	
+	* Open Sales order and check copy lines
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '3,000'    |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '3,000'    |
+			| 'Product 4 with SLN' | 'UNIQ'     | 'pcs'  | '4,000'    |
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And I click "Copy to clipboard" button
+	* Paste to Physical inventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I click the button named "FormCreate"
+		And I click "Paste from clipboard" button
+		And I change "Paste quantity as" radio button value to "Phys. count"
+		And I click "OK" button
+		And "ItemList" table became equal
+			| 'Item'               | 'Item key' | 'Unit' | 'Phys. count'      |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '3,000'            |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'            |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '3,000'            |
+			| 'Product 4 with SLN' | 'UNIQ'     | 'pcs'  | '4,000'            |	
+		And I close all client application windows
+
+Scenario: _01541985 copy lines from Physical inventory to Physical count by location
+	And I close all client application windows
+	* Select Physical inventory and copy lines
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1 024'  |
+		And I select current line in "List" table
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' |
+			| 'Product 1 with SLN' | 'ODS'      |
+		Then I select all lines of "ItemList" table
+		And I click "Copy to clipboard" button
+		And I change "Copy quantity as" radio button value to "Phys. count"
+		And I click "OK" button	
+	* Open PhysicalCountByLocation and check copy lines
+		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+		And I click the button named "FormCreate"
+		And I set checkbox "Use serial lot"
+		And I click "Paste from clipboard" button
+		And I change "Paste quantity as" radio button value to "Phys. count"
+		And I click "OK" button
+		And "ItemList" table became equal
+			| 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Phys. count' |
+			| 'Product 1 with SLN' | 'ODS'      | '0512'              | 'pcs'  | '3,000'       |
+			| 'Product 1 with SLN' | 'ODS'      | '0514'              | 'pcs'  | '2,000'       |
+			| 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '3,000'       |
+			| 'Product 4 with SLN' | 'UNIQ'     | ''                  | 'pcs'  | '4,000'       |
+		And I close all client application windows
+
+Scenario: _01541986 copy lines from SI to Physical inventory
+	And I close all client application windows
+	* Select SI and copy lines
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1 290'  |
+		And I select current line in "List" table
+		And I click "Copy to clipboard" button
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' |
+			| 'Product 1 with SLN' | 'PZU'      |
+		Then I select all lines of "ItemList" table
+		And I click "Copy to clipboard" button
+	* Open Physical inventory and check copy lines
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I click the button named "FormCreate"
+		And I set checkbox "Use serial lot"
+		And I click "Paste from clipboard" button
+		And I change "Paste quantity as" radio button value to "Phys. count"
+		And I click "OK" button
+		And "ItemList" table became equal
+			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit'              | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
+			| '1' | ''           | 'Product 1 with SLN' | 'PZU'      | '0512'              | 'pcs'               | '2,000'      | '2,000'       | ''                   | ''            |
+			| '2' | ''           | 'Product 1 with SLN' | 'PZU'      | '0514'              | 'pcs'               | '1,000'      | '1,000'       | ''                   | ''            |
+			| '3' | ''           | 'Dress'              | 'XS/Blue'  | ''                  | 'box Dress (8 pcs)' | '2,000'      | '2,000'       | ''                   | ''            |
+			| '4' | ''           | 'Product 3 with SLN' | 'UNIQ'     | '0514'              | 'pcs'               | '2,000'      | '2,000'       | ''                   | ''            |
+			| '5' | ''           | 'Product 3 with SLN' | 'PZU'      | ''                  | 'pcs'               | '8,000'      | '8,000'       | ''                   | ''            |	
 		And I close all client application windows

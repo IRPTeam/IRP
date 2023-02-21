@@ -421,9 +421,6 @@ Scenario: _604718 change agreement in the PO (ObjectPropertyEditor), Update rela
 		And I activate "Quantity" field in "PropertiesTable" table
 		And I select current line in "PropertiesTable" table
 		And I go to line in "PropertiesTable" table
-			| 'Description' |
-			| 'Veritas'    |
-		And I go to line in "PropertiesTable" table
 			| '#' | 'Cancel' | 'Delivery date' | 'Dont calculate row' | 'Is modified' | 'Is service' | 'Item'  | 'Item key' | 'Key'                                  | 'Marked' | 'Net amount' | 'Object'                                       | 'Price' | 'Price type'              | 'Quantity' | 'Quantity in base unit' | 'Store'    | 'Tax amount' | 'Total amount' | 'Unit' |
 			| '1' | 'No'     | '12.02.2021'    | 'No'                 | 'No'          | 'No'         | 'Dress' | 'S/Yellow' | 'baf60337-67a7-4627-8518-6881217d1593' | 'No'     | '847,46'     | 'Purchase order 116 dated 12.02.2021 12:44:59' | '100'   | 'en description is empty' | '10'       | '10'                    | 'Store 02' | '152,54'     | '1 000'        | 'pcs'  |
 		And I input "2" text in "Quantity" field of "PropertiesTable" table

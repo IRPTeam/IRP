@@ -849,6 +849,9 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_POS_Title", NStr("en = 'Point of sales'", Lang));
 	
 	Strings.Insert("InfoMessage_NotProperty", NStr("en = 'The object has no properties for editing'", Lang));
+	Strings.Insert("InfoMessage_DataUpdated", NStr("en = 'The data has been updated'", Lang));
+	Strings.Insert("InfoMessage_DataSaved", NStr("en = 'The data has been saved'", Lang));
+	Strings.Insert("InfoMessage_SettingsApplied", NStr("en = 'The settings have been applied'", Lang));
 	
 #EndRegion
 

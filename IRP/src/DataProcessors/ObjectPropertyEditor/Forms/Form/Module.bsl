@@ -149,13 +149,22 @@ EndProcedure
 
 &AtClient
 Procedure Refresh(Command)
-	LoadTableData();
+	If Not GetObjectType(ThisObject) = Undefined And Not IsBlankString(GetObjectTable(ThisObject)) Then
+		LoadTableData();
+	EndIf;
+	//@skip-warning
+	ShowUserNotification(R().InfoMessage_005, , R().InfoMessage_DataUpdated, PictureLib.Refresh);
 EndProcedure
 
 &AtClient
 Procedure Save(Command)
-	SaveAtServer();
-	LoadTableData();
+	If Not GetObjectType(ThisObject) = Undefined And Not IsBlankString(GetObjectTable(ThisObject)) Then
+		SaveAtServer();
+		LoadTableData();
+		NotifyChanged(GetObjectType(ThisObject));
+	EndIf;
+	//@skip-warning
+	ShowUserNotification(R().InfoMessage_005, , R().InfoMessage_DataSaved, PictureLib.SaveFile);
 EndProcedure
 
 &AtClient
@@ -392,6 +401,8 @@ Procedure FieldSettingsEnd(Result, AddInfo) Export
 			SetNewTable();
 		EndIf;
 		SetPropertyAvailability();
+		//@skip-warning
+		ShowUserNotification(R().InfoMessage_005, , R().InfoMessage_SettingsApplied, PictureLib.SaveReportSettings);
 	EndIf;
 	
 EndProcedure	
@@ -734,6 +745,7 @@ EndProcedure
 // 
 &AtServer
 Procedure SetNewTable()
+	SetPropertiesConstraint(ThisObject);
 	If GetObjectTable(ThisObject) = "Ref" Then
 		ThisObject.isTableMode = False;
 		SetTableSettings(ThisObject);
@@ -744,7 +756,6 @@ Procedure SetNewTable()
 		SetSourceSettingsForTable(ThisObject);
 	Else
 		ThisObject.isTableMode = False;
-		SetPropertiesConstraint(ThisObject);
 		SetSourceSettings(ThisObject);
 		SetTableSettings(ThisObject);
 	EndIf;
@@ -1512,7 +1523,7 @@ Procedure LoadMetadata(FormCash)
 	For Each TypeItem In Documents.AllRefsType().Types() Do
 		//@skip-warning
 		ItemPreffics = StrTemplate("(" + R().Str_Document + ") ");
-		ItemPicture = PictureLib.DocumentJournal;
+		ItemPicture = PictureLib.Document;
 		TypeChoiceList.Add(TypeItem, ItemPreffics + TypeItem, , ItemPicture);
 	EndDo;
 	
@@ -1802,7 +1813,7 @@ Procedure SetPropertyAvailability()
 	
 	FormCash = GetFormCash(ThisObject);
 	
-	Items.PropertiesTableLineNumber.Visible = ThisForm.isTableMode;
+	Items.PropertiesTableLineNumber.Visible = ThisObject.isTableMode;
 	
 	For Each ColumndKeyValue In FormCash.ColumnsData Do
 		ColumnName = ColumndKeyValue.Key; // String
@@ -1810,65 +1821,75 @@ Procedure SetPropertyAvailability()
 		Items.Find(ColumnName).Visible = ColumnDescription.isVisible;
 	EndDo;
 	
-	If FormCash.ConstraintName = "" Then
-		Return;
+	If Not IsBlankString(FormCash.ConstraintName) Then
+		
+		ConstraintTable = ThisObject.PropertiesTable.Unload(, "Constraint");
+		ConstraintTable.GroupBy("Constraint");
+		
+		AllAvailableProperty = New Array; // Array of AnyRef
+		For Each ConstraintRecord In ConstraintTable Do
+			ConstraintValues = FormCash.PropertyConstraints.Get(ConstraintRecord.Constraint); // Array of AnyRef
+			If TypeOf(ConstraintValues) = Type("Array") Then
+				For Each Constraint In ConstraintValues Do
+					If AllAvailableProperty.Find(Constraint) = Undefined Then
+						AllAvailableProperty.Add(Constraint);
+					EndIf;
+				EndDo;
+			EndIf;
+		EndDo;
+		
+		PropertyNames = New Map;
+		For Each ColumndKeyValue In FormCash.ColumnsData Do
+			ColumnName = ColumndKeyValue.Key; // String
+			ColumnDescription = ColumndKeyValue.Value; // See GetFieldDescription
+			Items.Find(ColumnName).Visible =  
+				Items.Find(ColumnName).Visible And Not (AllAvailableProperty.Find(ColumnDescription.Ref) = Undefined);
+			PropertyNames.Insert(ColumnDescription.Ref, ColumnName);
+		EndDo;
+	
+		ConditionalAppearanceCount = FormCash.CountNewConditionalAppearance;
+		While ThisObject.ConditionalAppearance.Items.Count() > ConditionalAppearanceCount Do
+			LastItem = ThisObject.ConditionalAppearance.Items.Get(ThisObject.ConditionalAppearance.Items.Count() - 1);
+			ThisObject.ConditionalAppearance.Items.Delete(LastItem);
+		EndDo;
+		
+		For Each ConstraintRecord In ConstraintTable Do
+			If Not ValueIsFilled(ConstraintRecord.Constraint) Then
+				Continue;
+			EndIf;
+			ConstraintValues = FormCash.PropertyConstraints.Get(ConstraintRecord.Constraint); // Array of AnyRef
+			If ConstraintValues.Count() < PropertyNames.Count() Then
+				ConditionalAppearanceItem = ThisObject.ConditionalAppearance.Items.Add();
+				ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightGray);
+				ConditionalAppearanceItem.Appearance.SetParameterValue("ReadOnly", True);
+				FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
+				FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
+				FilterItem.LeftValue = New DataCompositionField("PropertiesTable.Constraint");
+				//@skip-warning
+				FilterItem.RightValue = ConstraintRecord.Constraint;
+				FilterItem.Use = True;
+				For Each PropertyKeyValue In PropertyNames Do
+					If ConstraintValues.Find(PropertyKeyValue.Key) = Undefined Then
+						AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
+						AppearanceField.Field = New DataCompositionField(PropertyKeyValue.Value);
+						AppearanceField.Use = True;
+					EndIf;
+				EndDo;
+			EndIf;
+		EndDo;
+		
 	EndIf;
 	
-	ConstraintTable = ThisObject.PropertiesTable.Unload(, "Constraint");
-	ConstraintTable.GroupBy("Constraint");
-	
-	AllAvailableProperty = New Array; // Array of AnyRef
-	For Each ConstraintRecord In ConstraintTable Do
-		ConstraintValues = FormCash.PropertyConstraints.Get(ConstraintRecord.Constraint); // Array of AnyRef
-		If TypeOf(ConstraintValues) = Type("Array") Then
-			For Each Constraint In ConstraintValues Do
-				If AllAvailableProperty.Find(Constraint) = Undefined Then
-					AllAvailableProperty.Add(Constraint);
-				EndIf;
-			EndDo;
-		EndIf;
-	EndDo;
-	
-	PropertyNames = New Map;
+	ColumnVisibleCount = 0;
 	For Each ColumndKeyValue In FormCash.ColumnsData Do
-		ColumnName = ColumndKeyValue.Key; // String
 		ColumnDescription = ColumndKeyValue.Value; // See GetFieldDescription
-		Items.Find(ColumnName).Visible =  
-			Items.Find(ColumnName).Visible And Not (AllAvailableProperty.Find(ColumnDescription.Ref) = Undefined);
-		PropertyNames.Insert(ColumnDescription.Ref, ColumnName);
+		If ColumnDescription.isVisible Then
+			ColumnVisibleCount = ColumnVisibleCount + 1;
+		EndIf;
 	EndDo;
-
-	ConditionalAppearanceCount = FormCash.CountNewConditionalAppearance;
-	While ThisObject.ConditionalAppearance.Items.Count() > ConditionalAppearanceCount Do
-		LastItem = ThisObject.ConditionalAppearance.Items.Get(ThisObject.ConditionalAppearance.Items.Count() - 1);
-		ThisObject.ConditionalAppearance.Items.Delete(LastItem);
-	EndDo;
+	FixingLeftGroup = ?(ColumnVisibleCount > 2, FixingInTable.Left, FixingInTable.None); // FixingInTable
+	Items.PropertiesTableLeftGroup.FixingInTable = FixingLeftGroup; 
 	
-	For Each ConstraintRecord In ConstraintTable Do
-		If Not ValueIsFilled(ConstraintRecord.Constraint) Then
-			Continue;
-		EndIf;
-		ConstraintValues = FormCash.PropertyConstraints.Get(ConstraintRecord.Constraint); // Array of AnyRef
-		If ConstraintValues.Count() < PropertyNames.Count() Then
-			ConditionalAppearanceItem = ThisObject.ConditionalAppearance.Items.Add();
-			ConditionalAppearanceItem.Appearance.SetParameterValue("BackColor", WebColors.LightGray);
-			ConditionalAppearanceItem.Appearance.SetParameterValue("ReadOnly", True);
-			FilterItem = ConditionalAppearanceItem.Filter.Items.Add(Type("DataCompositionFilterItem"));
-			FilterItem.ComparisonType = DataCompositionComparisonType.Equal;
-			FilterItem.LeftValue = New DataCompositionField("PropertiesTable.Constraint");
-			//@skip-warning
-			FilterItem.RightValue = ConstraintRecord.Constraint;
-			FilterItem.Use = True;
-			For Each PropertyKeyValue In PropertyNames Do
-				If ConstraintValues.Find(PropertyKeyValue.Key) = Undefined Then
-					AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
-					AppearanceField.Field = New DataCompositionField(PropertyKeyValue.Value);
-					AppearanceField.Use = True;
-				EndIf;
-			EndDo;
-		EndIf;
-	EndDo;
-
 EndProcedure
 
 // Read property from Tree Row.
@@ -1916,13 +1937,14 @@ Procedure SaveAtServer()
 	
 	ObjectsTable = ThisObject.PropertiesTable.Unload(ModifiedRows, "Object");
 	ObjectsTable.Total("Object");
+	ObjectsArray = ObjectsTable.UnloadColumn(0); // Array of AnyRef
 	
-	DataVersioningServer.SaveDataPackage(ObjectsTable.UnloadColumn(0));
+	DataVersioningServer.SaveDataPackage(ObjectsArray);
 	
-	For Each ObjectRow In ObjectsTable Do
+	For Each ObjectItem In ObjectsArray Do
 		
 		If GetObjectTable(ThisObject) = "Ref" And FormCash.UpdateRelatedFieldsWhenWriting Then
-			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectRow.Object));
+			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectItem));
 			ObjectLineRow = LineNumberRows[0];
 			
 			ModifiedObj = BuilderAPI.Initialize(ObjectLineRow.Object, , , CurrentTable);
@@ -1939,7 +1961,7 @@ Procedure SaveAtServer()
 			BuilderAPI.Write(ModifiedObj);
 				
 		ElsIf GetObjectTable(ThisObject) = "Ref" And Not FormCash.UpdateRelatedFieldsWhenWriting Then
-			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectRow.Object));
+			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectItem));
 			ObjectLineRow = LineNumberRows[0];
 			
 			ModifiedObject = ObjectLineRow.Object.GetObject();
@@ -1958,10 +1980,10 @@ Procedure SaveAtServer()
 				
 		ElsIf StrStartsWith(GetObjectTable(ThisObject), "TS_") And FormCash.UpdateRelatedFieldsWhenWriting Then
 			
-			ModifiedObj = BuilderAPI.Initialize(ObjectRow.Object, , , CurrentTable);
+			ModifiedObj = BuilderAPI.Initialize(ObjectItem, , , CurrentTable);
 			ModifiedTable = ModifiedObj.Object[CurrentTable]; // TabularSection
 			
-			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectRow.Object));
+			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectItem));
 			For Each LineRow In LineNumberRows Do
 				ModifiedTableRow = ModifiedTable[LineRow.LineNumber - 1]; // Structure
 				For Each ColumndKeyValue In FormCash.ColumnsData Do
@@ -1977,10 +1999,10 @@ Procedure SaveAtServer()
 			BuilderAPI.Write(ModifiedObj);
 				
 		ElsIf StrStartsWith(GetObjectTable(ThisObject), "TS_") And Not FormCash.UpdateRelatedFieldsWhenWriting Then
-			ModifiedObject = ObjectRow.Object.GetObject();
+			ModifiedObject = ObjectItem.GetObject();
 			ModifiedTable  = ModifiedObject[CurrentTable]; // TabularSection
 			
-			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectRow.Object));
+			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectItem));
 			For Each LineRow In LineNumberRows Do
 				ModifiedTableRow = ModifiedTable[LineRow.LineNumber - 1];
 				For Each ColumndKeyValue In FormCash.ColumnsData Do
@@ -1998,7 +2020,7 @@ Procedure SaveAtServer()
 				
 		Else
 
-			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectRow.Object));
+			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectItem));
 			ObjectLineRow = LineNumberRows[0];
 			
 			ModifiedObject = ObjectLineRow.Object.GetObject();

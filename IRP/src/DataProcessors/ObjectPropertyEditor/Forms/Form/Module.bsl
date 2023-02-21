@@ -1909,27 +1909,37 @@ Procedure SaveAtServer()
 	For Each ObjectRow In ObjectsTable Do
 		
 		If GetObjectTable(ThisObject) = "Ref" And FormCash.UpdateRelatedFieldsWhenWriting Then
-			ModifiedObj = BuilderAPI.Initialize(ObjectRow.Object, , , CurrentTable);
+			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectRow.Object));
+			ObjectLineRow = LineNumberRows[0];
+			
+			ModifiedObj = BuilderAPI.Initialize(ObjectLineRow.Object, , , CurrentTable);
+			
 			For Each ColumndKeyValue In FormCash.ColumnsData Do
 				ColumnDescription = ColumndKeyValue.Value; // See GetFieldDescription
-				NewValue = ObjectRow[ColumndKeyValue.Key];
-				OldValue = ObjectRow[ColumndKeyValue.Key + "_old"];
+				NewValue = ObjectLineRow[ColumndKeyValue.Key]; // Arbitrary
+				OldValue = ObjectLineRow[ColumndKeyValue.Key + "_old"]; // Arbitrary
 				If ColumnDescription.isVisible And Not NewValue = OldValue Then
 					BuilderAPI.SetProperty(ModifiedObj, ColumnDescription.Ref, NewValue);
 				EndIf;
 			EndDo;
+			
 			BuilderAPI.Write(ModifiedObj);
 				
 		ElsIf GetObjectTable(ThisObject) = "Ref" And Not FormCash.UpdateRelatedFieldsWhenWriting Then
-			ModifiedObject = ObjectRow.Object.GetObject();
+			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectRow.Object));
+			ObjectLineRow = LineNumberRows[0];
+			
+			ModifiedObject = ObjectLineRow.Object.GetObject();
+			
 			For Each ColumndKeyValue In FormCash.ColumnsData Do
 				ColumnDescription = ColumndKeyValue.Value; // See GetFieldDescription
-				NewValue = ObjectRow[ColumndKeyValue.Key];
-				OldValue = ObjectRow[ColumndKeyValue.Key + "_old"];
+				NewValue = ObjectLineRow[ColumndKeyValue.Key]; // Arbitrary
+				OldValue = ObjectLineRow[ColumndKeyValue.Key + "_old"]; // Arbitrary
 				If ColumnDescription.isVisible And Not NewValue = OldValue Then
 					ModifiedObject[ColumnDescription.Ref] = NewValue; 
 				EndIf;
 			EndDo;
+			
 			ModifiedObject.DataExchange.Load = FormCash.ForcedWriting;
 			ModifiedObject.Write();
 				
@@ -1975,7 +1985,10 @@ Procedure SaveAtServer()
 				
 		Else
 
-			ModifiedObject = ObjectRow.Object.GetObject();
+			LineNumberRows = ThisObject.PropertiesTable.FindRows(New Structure("Object", ObjectRow.Object));
+			ObjectLineRow = LineNumberRows[0];
+			
+			ModifiedObject = ObjectLineRow.Object.GetObject();
 			ModifiedTable = ModifiedObject[ThisObject.ObjectTable]; // TabularSection
 			ModifiedTable.Clear();
 			
@@ -1983,7 +1996,7 @@ Procedure SaveAtServer()
 				ColumnKey = ColumndKeyValue.Key; // String
 				ColumnDescription = ColumndKeyValue.Value; // See GetFieldDescription
 				
-				ColumnValue = ObjectRow[ColumnKey]; // Arbitrary, Undefined
+				ColumnValue = ObjectLineRow[ColumnKey]; // Arbitrary
 				If TypeOf(ColumnValue) = Type("ValueList") And ColumnValue.Count() = 0 Then
 					ColumnValue = Undefined;
 				EndIf;
@@ -2001,7 +2014,7 @@ Procedure SaveAtServer()
 			ModifiedObject.Write();
 
 		EndIf;
-		
+			
 	EndDo;
 	
 EndProcedure

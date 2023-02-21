@@ -1429,7 +1429,7 @@ Function GetRetailBasisData()
 	
 	If ExtractedData.Count() > 0 Then
 		DocumentData = ExtractedData[0];
-		
+		DocumentData.Payments.GroupBy("PaymentType", "Amount");
 		For Each TableItem In DocumentData.Payments Do
 			ItemStructure = New Structure;
 			ItemStructure.Insert("PaymentType", TableItem.PaymentType);

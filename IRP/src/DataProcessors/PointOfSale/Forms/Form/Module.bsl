@@ -75,7 +75,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	Form.Items.GroupCashCommands.Visible = 
 		CommonFunctionsServer.GetRefAttribute(Form.Workstation, "UseCashInAndCashOut");
-		
+	Form.Items.GroupCashCommands.Enabled = SessionIsCreated;
+	Form.Items.GroupReports.Enabled = SessionIsCreated;
+	
 	Form.Items.ReturnPage.Visible =	Form.isReturn;
 	
 	Form.Title = R().InfoMessage_POS_Title + ?(Form.isReturn, ": " + R().InfoMessage_ReturnTitle, "");

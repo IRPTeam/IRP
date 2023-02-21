@@ -994,12 +994,56 @@ Scenario: Open object form "BillOfMaterials"
 		Then I raise "Failed to open catalog form BillOfMaterials" exception
 	And I close current window
 
+Scenario: Open list form "AccrualAndDeductionTypes" 
+
+	Given I open "AccrualAndDeductionTypes" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form AccrualAndDeductionTypes" exception
+	And I close current window
+
+Scenario: Open object form "AccrualAndDeductionTypes"
+	And I close all client application windows
+	Given I open "AccrualAndDeductionTypes" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form AccrualAndDeductionTypes" exception
+	And I close current window
+
+Scenario: Open list form "EmployeePositions" 
+
+	Given I open "EmployeePositions" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form EmployeePositions" exception
+	And I close current window
+
+Scenario: Open object form "EmployeePositions"
+	And I close all client application windows
+	Given I open "EmployeePositions" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form EmployeePositions" exception
+	And I close current window
+
+Scenario: Open choise form "EmployeePositions"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.EmployeePositions.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form EmployeePositions" exception
+	And I close current window
+
+Scenario: Open choise form "AccrualAndDeductionTypes"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.AccrualAndDeductionTypes.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form AccrualAndDeductionTypes" exception
+	And I close current window
+
 Scenario: Open choise form "BillOfMaterials"
 	And I close all client application windows
 	And I execute the built-in language code (Extension)
 		| 'OpenForm("Catalog.BillOfMaterials.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
 	If the warning is displayed then
-		Then I raise "Failed to open catalog form PartnerItems" exception
+		Then I raise "Failed to open catalog form BillOfMaterials" exception
 	And I close current window
 
 Scenario: Open choise form "SpecialOffers"
@@ -1007,7 +1051,7 @@ Scenario: Open choise form "SpecialOffers"
 	And I execute the built-in language code (Extension)
 		| 'OpenForm("Catalog.SpecialOffers.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
 	If the warning is displayed then
-		Then I raise "Failed to open catalog form PartnerItems" exception
+		Then I raise "Failed to open catalog form SpecialOffers" exception
 	And I close current window
 
 Scenario: Open choise form "AddAttributeAndPropertySets"

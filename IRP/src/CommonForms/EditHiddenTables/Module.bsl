@@ -91,21 +91,12 @@ Procedure UpdateTables()
 	EndDo;
 EndProcedure
 
-DocumentTables = New Structure();
+#Region Initialize
 
-DocumentTables.Insert("RowIDInfo"               , False);
-DocumentTables.Insert("Currencies"              , False);
-DocumentTables.Insert("TaxList"                 , False);
-DocumentTables.Insert("SpecialOffers"           , False);
-DocumentTables.Insert("SerialLotNumbers"        , False);
-DocumentTables.Insert("ShipmentConfirmations"   , False);
-DocumentTables.Insert("GoodsReceipts"           , False);
-DocumentTables.Insert("PaymentTerms"            , False);
-DocumentTables.Insert("AddAttributes"           , False);
-DocumentTables.Insert("DataSet"                 , False);
-DocumentTables.Insert("DataPrice"               , False);
-DocumentTables.Insert("AccountingRowAnalytics"  , False);
-DocumentTables.Insert("AccountingExtDimensions" , False);
-DocumentTables.Insert("CostList"                , False);
-DocumentTables.Insert("RevenueList"             , False);
-DocumentTables.Insert("AllocationList"          , False);
+DocumentTables = New Structure();
+HiddenTables = DocumentsClientServer.GetHiddenTables();
+For Each HiddenTable In HiddenTables Do
+	DocumentTables.Insert(HiddenTable, False);
+EndDo;
+
+#EndRegion

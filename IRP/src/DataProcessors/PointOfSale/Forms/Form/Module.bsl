@@ -811,7 +811,8 @@ Async Procedure AdvanceFormClose(Result, AdditionalData) Export
 		EndDo;
 	EndIf;
 	
-	Object.RetailCustomer = Undefined;
+	NewTransaction();
+	Modified = False;
 EndProcedure
 
 &AtClient

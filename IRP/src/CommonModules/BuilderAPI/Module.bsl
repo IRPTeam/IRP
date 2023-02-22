@@ -251,41 +251,72 @@ EndFunction
 // Returns:
 //  Structure - Write:
 // * Context - See CreateWrapper
-// * Ref - DocumentRefDocumentName -
-// * Object - DocumentObjectDocumentName - If set Object at parameter then returned updated object
+// * Ref - DocumentRefDocumentName, CatalogRefCatalogName -
+// * Object - DocumentObjectDocumentName, CatalogObjectCatalogName - If set Object at parameter then returned updated object
 Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object = Undefined) Export
-	DocMetadata = Wrapper.Object.Ref.Metadata();
-	
-	If Not Object = Undefined Then
-		Doc = Object;
-	ElsIf ValueIsFilled(Wrapper.Object.Ref) Then
-		Doc = Wrapper.Object.Ref.GetObject();
-	Else
-		Doc = Documents[DocMetadata.Name].CreateDocument();
-	EndIf;
-	
-	FillPropertyValues(Doc, Wrapper.Object, , "Number");
-	
-	If Not ValueIsFilled(Doc.Date) Then
-		Doc.Date = CommonFunctionsServer.GetCurrentSessionDate();
-	EndIf;
-	For Each Table In DocMetadata.TabularSections Do
-		DocTable = Doc[Table.Name]; // TabularSection
-		LoadTable = Wrapper.Object[Table.Name]; // ValueTable
-		DocTable.Load(LoadTable);
-	EndDo;
-
+	ObjMetadata = Wrapper.Object.Ref.Metadata(); // MetadataObjectCatalog, MetadataObjectDocument 
 	Result = New Structure();
 	Result.Insert("Context", Wrapper);
 	Result.Insert("Object", Undefined);
-	If Object = Undefined Then
-		Doc.Write(?(WriteMode = Undefined, DocumentWriteMode.Write, WriteMode),
-			?(PostingMode = Undefined , DocumentPostingMode.Regular , PostingMode));
-		Wrapper.Object.Ref = Doc.Ref;
+	If Metadata.Documents.Contains(ObjMetadata) Then
+		If Not Object = Undefined Then
+			Doc = Object;
+		ElsIf ValueIsFilled(Wrapper.Object.Ref) Then
+			Doc = Wrapper.Object.Ref.GetObject();
+		Else
+			Doc = Documents[ObjMetadata.Name].CreateDocument();
+		EndIf;
+		
+		FillPropertyValues(Doc, Wrapper.Object, , "Number");
+		If Not ValueIsFilled(Doc.Date) Then
+			Doc.Date = CommonFunctionsServer.GetCurrentSessionDate();
+		EndIf;
+		For Each Table In ObjMetadata.TabularSections Do
+			DocTable = Doc[Table.Name]; // TabularSection
+			LoadTable = Wrapper.Object[Table.Name]; // ValueTable
+			DocTable.Load(LoadTable);
+		EndDo;
+		
+		If Object = Undefined Then
+			Doc.Write(?(WriteMode = Undefined, DocumentWriteMode.Write, WriteMode),
+				?(PostingMode = Undefined , DocumentPostingMode.Regular , PostingMode));
+			Wrapper.Object.Ref = Doc.Ref;
+		Else
+			Result.Insert("Object", Doc);
+		EndIf;
+	
+	ElsIf Metadata.Catalogs.Contains(ObjMetadata) Then
+		WrapperObject = Wrapper.Object; // CatalogObject
+		If Not Object = Undefined Then
+			Ctlg = Object;
+		ElsIf ValueIsFilled(WrapperObject.Ref) Then
+			Ctlg = WrapperObject.Ref.GetObject();
+			If ObjMetadata.CodeLength > 0 Then
+				Ctlg.Code = WrapperObject.Code;
+			EndIf;
+		ElsIf WrapperObject.IsFolder Then
+			Ctlg = Catalogs[ObjMetadata.Name].CreateFolder();
+		Else
+			Ctlg = Catalogs[ObjMetadata.Name].CreateItem();
+		EndIf;
+		
+		FillPropertyValues(Ctlg, WrapperObject, , "Code");
+		For Each Table In ObjMetadata.TabularSections Do
+			CtlgTable = Ctlg[Table.Name]; // TabularSection
+			LoadTable = WrapperObject[Table.Name]; // ValueTable
+			CtlgTable.Load(LoadTable);
+		EndDo;
+		
+		If Object = Undefined Then
+			Ctlg.Write();
+			WrapperObject.Ref = Ctlg.Ref;
+		Else
+			Result.Insert("Object", Ctlg);
+		EndIf;
 	Else
-		Result.Insert("Object", Doc);
+		//@skip-warning
+		Raise StrTemplate(R().Exc_010, ObjMetadata.FullName());
 	EndIf;
-	Result.Insert("Ref", Doc.Ref);
 	
 	//@skip-check constructor-function-return-section
 	Return Result;

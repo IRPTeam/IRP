@@ -244,3 +244,27 @@ Function GetSalesReturnData(Object) Export
 	Return SalesReturnData;
 EndFunction
 
+Function GetHiddenTables() Export
+	
+	HiddenTables = New Array;
+	
+	HiddenTables.Add("RowIDInfo");
+	HiddenTables.Add("Currencies");
+	HiddenTables.Add("TaxList");
+	HiddenTables.Add("SpecialOffers");
+	HiddenTables.Add("SerialLotNumbers");
+	HiddenTables.Add("ShipmentConfirmations");
+	HiddenTables.Add("GoodsReceipts");
+	HiddenTables.Add("PaymentTerms");
+	HiddenTables.Add("AddAttributes");
+	HiddenTables.Add("DataSet");
+	HiddenTables.Add("DataPrice");
+	HiddenTables.Add("AccountingRowAnalytics");
+	HiddenTables.Add("AccountingExtDimensions");
+	HiddenTables.Add("CostList");
+	HiddenTables.Add("RevenueList");
+	HiddenTables.Add("AllocationList");
+	
+	Return HiddenTables;
+	
+EndFunction

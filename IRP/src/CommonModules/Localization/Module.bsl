@@ -848,6 +848,11 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_ReturnTitle", NStr("en = 'Return'", Lang));
 	Strings.Insert("InfoMessage_POS_Title", NStr("en = 'Point of sales'", Lang));
 	
+	Strings.Insert("InfoMessage_NotProperty", NStr("en = 'The object has no properties for editing'", Lang));
+	Strings.Insert("InfoMessage_DataUpdated", NStr("en = 'The data has been updated'", Lang));
+	Strings.Insert("InfoMessage_DataSaved", NStr("en = 'The data has been saved'", Lang));
+	Strings.Insert("InfoMessage_SettingsApplied", NStr("en = 'The settings have been applied'", Lang));
+	
 #EndRegion
 
 #Region QuestionToUser
@@ -918,6 +923,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Exc_007", NStr("en = 'Not applicable for library version %1.'", Lang));
 	Strings.Insert("Exc_008", NStr("en = 'Unknown row key.'", Lang));
 	Strings.Insert("Exc_009", NStr("en = 'Error: %1'", Lang));
+	Strings.Insert("Exc_010", NStr("en = 'Unknown metadata type: %1'", Lang));
 #EndRegion
 
 #Region Saas
@@ -980,11 +986,19 @@ Function Strings(Lang) Export
 	Strings.Insert("Default_012", NStr("en = 'My Store'", Lang));
 #EndRegion
 
-#Region OtherString
+#Region MetadataString
 	Strings.Insert("Str_Catalog", NStr("en = 'Catalog'", Lang));
 	Strings.Insert("Str_Catalogs", NStr("en = 'Catalogs'", Lang));
 	Strings.Insert("Str_Document", NStr("en = 'Document'", Lang));
 	Strings.Insert("Str_Documents", NStr("en = 'Documents'", Lang));
+	Strings.Insert("Str_Code", NStr("en = 'Code'", Lang));
+	Strings.Insert("Str_Description", NStr("en = 'Description'", Lang));
+	Strings.Insert("Str_Parent", NStr("en = 'Parent'", Lang));
+	Strings.Insert("Str_Owner", NStr("en = 'Owner'", Lang));
+	Strings.Insert("Str_DeletionMark", NStr("en = 'Deletion mark'", Lang));
+	Strings.Insert("Str_Number", NStr("en = 'Number'", Lang));
+	Strings.Insert("Str_Date", NStr("en = 'Date'", Lang));
+	Strings.Insert("Str_Posted", NStr("en = 'Posted'", Lang));
 #EndRegion
 
 #Region AdditionalSettings

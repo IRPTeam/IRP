@@ -258,6 +258,7 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 	Result = New Structure();
 	Result.Insert("Context", Wrapper);
 	Result.Insert("Object", Undefined);
+	Result.Insert("Ref", Undefined);
 	If Metadata.Documents.Contains(ObjMetadata) Then
 		If Not Object = Undefined Then
 			Doc = Object;
@@ -284,7 +285,7 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 		Else
 			Result.Insert("Object", Doc);
 		EndIf;
-	
+		Result.Ref = Doc.Ref;
 	ElsIf Metadata.Catalogs.Contains(ObjMetadata) Then
 		WrapperObject = Wrapper.Object; // CatalogObject
 		If Not Object = Undefined Then
@@ -313,6 +314,7 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 		Else
 			Result.Insert("Object", Ctlg);
 		EndIf;
+		Result.Ref = Ctlg.Ref;
 	Else
 		//@skip-warning
 		Raise StrTemplate(R().Exc_010, ObjMetadata.FullName());

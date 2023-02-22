@@ -1014,5 +1014,15 @@ Function Strings(Lang) Export
 	Strings.Insert("Mob_001", NStr("en = 'Current barcode used in %1
 					|But before you scan for %2'", Lang));
 #EndRegion
+	
+#Region CopyPaste
+	Strings.Insert("CP_001", NStr("en = 'Copy to clipboard'", Lang));
+	Strings.Insert("CP_002", NStr("en = 'Paste from clipboard'", Lang));
+	Strings.Insert("CP_003", NStr("en = 'Can be copy only [%1]'", Lang));
+	Strings.Insert("CP_004", NStr("en = 'Copied'", Lang));
+	Strings.Insert("CP_005", NStr("en = 'NOT copied'", Lang));
+	Strings.Insert("CP_006", NStr("en = 'Copied %1 rows'", Lang));
+#EndRegion	
+	
 	Return Strings;
 EndFunction

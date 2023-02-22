@@ -110,7 +110,9 @@ EndFunction
 //  InitialData - Structure - First initial data
 //  FillingData - Structure - Filling data
 //  DefaultTable - String - Default table name
-//  DocInfo - Structure - doc info
+//  DocInfo - Structure:
+//   * DocMetadata - MetadataObjectDocument
+//   * DocObject - DocumentObjectDocumentName
 // 
 // Returns:
 //  See CreateWrapper
@@ -197,7 +199,7 @@ EndFunction
 // 
 // Parameters:
 //  Wrapper - See CreateWrapper
-//  Row - Structure, String, Number - Row or Row key or Row index
+//  Row - Structure, String, Number, ValueTableRow - Row or Row key or Row index
 //  ColumnName - String - Column name
 //  Value - Arbitrary - Value
 //  TableName - Undefined, String - Table name. If empty - get from wrapper as defaul table
@@ -213,7 +215,7 @@ Function SetRowProperty(Wrapper, Row, ColumnName, Value, TableName = Undefined) 
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object); // Structure
 	ServerParameters.TableName = TableName;
 	
-	Rows = New Array();
+	Rows = New Array(); // Array Of ValueTableRow
 	If TypeOf(Row) = Type("Number") Then
 		Rows.Add(Wrapper.Object[TableName][0]);
 	ElsIf TypeOf(Row) = Type("String") Then
@@ -244,16 +246,22 @@ EndFunction
 //  Wrapper - See CreateWrapper
 //  WriteMode - DocumentWriteMode - Write mode
 //  PostingMode - DocumentPostingMode - Posting mode
+//  Object - DocumentObjectDocumentName - Update current object
 // 
 // Returns:
 //  Structure - Write:
 // * Context - See CreateWrapper
 // * Ref - DocumentRefDocumentName, CatalogRefCatalogName -
-Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined) Export
+// * Object - DocumentObjectDocumentName, CatalogObjectCatalogName - If set Object at parameter then returned updated object
+Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object = Undefined) Export
 	ObjMetadata = Wrapper.Object.Ref.Metadata(); // MetadataObjectCatalog, MetadataObjectDocument 
-	
+	Result = New Structure();
+	Result.Insert("Context", Wrapper);
+	Result.Insert("Object", Undefined);
 	If Metadata.Documents.Contains(ObjMetadata) Then
-		If ValueIsFilled(Wrapper.Object.Ref) Then
+		If Not Object = Undefined Then
+			Doc = Object;
+		ElsIf ValueIsFilled(Wrapper.Object.Ref) Then
 			Doc = Wrapper.Object.Ref.GetObject();
 		Else
 			Doc = Documents[ObjMetadata.Name].CreateDocument();
@@ -269,13 +277,19 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined) Export
 			DocTable.Load(LoadTable);
 		EndDo;
 		
-		Doc.Write(?(WriteMode = Undefined, DocumentWriteMode.Write, WriteMode),
-			?(PostingMode = Undefined , DocumentPostingMode.Regular , PostingMode));
-		Wrapper.Object.Ref = Doc.Ref;
+		If Object = Undefined Then
+			Doc.Write(?(WriteMode = Undefined, DocumentWriteMode.Write, WriteMode),
+				?(PostingMode = Undefined , DocumentPostingMode.Regular , PostingMode));
+			Wrapper.Object.Ref = Doc.Ref;
+		Else
+			Result.Insert("Object", Doc);
+		EndIf;
 	
 	ElsIf Metadata.Catalogs.Contains(ObjMetadata) Then
 		WrapperObject = Wrapper.Object; // CatalogObject
-		If ValueIsFilled(WrapperObject.Ref) Then
+		If Not Object = Undefined Then
+			Ctlg = Object;
+		ElsIf ValueIsFilled(WrapperObject.Ref) Then
 			Ctlg = WrapperObject.Ref.GetObject();
 			If ObjMetadata.CodeLength > 0 Then
 				Ctlg.Code = WrapperObject.Code;
@@ -293,17 +307,17 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined) Export
 			CtlgTable.Load(LoadTable);
 		EndDo;
 		
-		Ctlg.Write();
-		WrapperObject.Ref = Ctlg.Ref;
-		
+		If Object = Undefined Then
+			Ctlg.Write();
+			WrapperObject.Ref = Ctlg.Ref;
+		Else
+			Result.Insert("Object", Ctlg);
+		EndIf;
 	Else
 		//@skip-warning
 		Raise StrTemplate(R().Exc_010, ObjMetadata.FullName());
 	EndIf;
 	
-	Result = New Structure();
-	Result.Insert("Context", Wrapper);
-	Result.Insert("Ref", Wrapper.Object.Ref);
 	//@skip-check constructor-function-return-section
 	Return Result;
 EndFunction
@@ -316,7 +330,7 @@ EndFunction
 //  ReturnRowKey - Boolean -
 // 
 // Returns:
-//  ValueTableRow
+//  ValueTableRow, String
 Function AddRow(Wrapper, TableName = Undefined, ReturnRowKey = False) Export
 	If TableName = Undefined Then
 		TableName = Wrapper.DefaultTable;

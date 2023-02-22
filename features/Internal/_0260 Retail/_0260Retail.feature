@@ -142,6 +142,20 @@ Scenario: _0260100 preparation (retail)
 Scenario: _0260101 check preparation
 	When check preparation
 
+Scenario: _0260102 сheck that the buttons in POS are inactive if session closed
+	And I close all client application windows
+	And In the command interface I select "Retail" "Point of sale"
+	When I Check the steps for Exception
+		|'And I click "Close session" button'|
+	When I Check the steps for Exception
+		|'And I click "Cancel session" button'|
+	When I Check the steps for Exception
+		|'And I click "Create cash in" button'|
+	When I Check the steps for Exception
+		|'And I click "Create cash out" button'|
+	When I Check the steps for Exception
+		|'And I click "Print X Report" button'|
+
 Scenario: _0260105 open session
 	And I close all client application windows
 	And In the command interface I select "Retail" "Point of sale"

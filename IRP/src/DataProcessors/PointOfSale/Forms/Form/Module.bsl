@@ -69,13 +69,15 @@ Procedure SetVisibilityAvailability(Object, Form)
 			Form.Items.CloseSession.Enabled = SessionIsCreated;
 			Form.Items.CancelSession.Enabled = SessionIsCreated;
 		EndIf;
+		Form.Items.GroupCashCommands.Enabled = SessionIsCreated;
+		Form.Items.GroupReports.Enabled = SessionIsCreated;
 	Else
 		Form.Items.GroupCommonCommands.Visible = False;
 	EndIf;
 	
 	Form.Items.GroupCashCommands.Visible = 
 		CommonFunctionsServer.GetRefAttribute(Form.Workstation, "UseCashInAndCashOut");
-		
+	
 	Form.Items.ReturnPage.Visible =	Form.isReturn;
 	
 	Form.Title = R().InfoMessage_POS_Title + ?(Form.isReturn, ": " + R().InfoMessage_ReturnTitle, "");
@@ -810,7 +812,8 @@ Async Procedure AdvanceFormClose(Result, AdditionalData) Export
 		ResultPrint = Await PrintFiscalReceipt(CreatedDocument);
 	EndDo;
 	
-	Object.RetailCustomer = Undefined;
+	NewTransaction();
+	Modified = False;
 EndProcedure
 
 &AtClient
@@ -1429,7 +1432,7 @@ Function GetRetailBasisData()
 	
 	If ExtractedData.Count() > 0 Then
 		DocumentData = ExtractedData[0];
-		
+		DocumentData.Payments.GroupBy("PaymentType", "Amount");
 		For Each TableItem In DocumentData.Payments Do
 			ItemStructure = New Structure;
 			ItemStructure.Insert("PaymentType", TableItem.PaymentType);

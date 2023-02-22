@@ -69,14 +69,14 @@ Procedure SetVisibilityAvailability(Object, Form)
 			Form.Items.CloseSession.Enabled = SessionIsCreated;
 			Form.Items.CancelSession.Enabled = SessionIsCreated;
 		EndIf;
+		Form.Items.GroupCashCommands.Enabled = SessionIsCreated;
+		Form.Items.GroupReports.Enabled = SessionIsCreated;
 	Else
 		Form.Items.GroupCommonCommands.Visible = False;
 	EndIf;
 	
 	Form.Items.GroupCashCommands.Visible = 
 		CommonFunctionsServer.GetRefAttribute(Form.Workstation, "UseCashInAndCashOut");
-	Form.Items.GroupCashCommands.Enabled = SessionIsCreated;
-	Form.Items.GroupReports.Enabled = SessionIsCreated;
 	
 	Form.Items.ReturnPage.Visible =	Form.isReturn;
 	

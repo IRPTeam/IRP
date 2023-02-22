@@ -176,6 +176,8 @@ Function PasteSelectedRows(Object, Form, BufferData, PasteSettings) Export
 			SourceHasSLNTableAndTargetHasSLNInItemList(BufferData, ItemRow, Wrapper, PasteSettings);
 		ElsIf SourceHasSLNInItemList And TargetHasTableSLN Then
 			SourceHasSLNInItemListAndTargetHasTableSLN(BufferData, ItemRow, Wrapper, Result);
+		ElsIf SourceHasSLNInItemList And TargetHasSLNInItemList Then
+			CopyAsIsItemListWithSLN(BufferData, ItemRow, Wrapper, PasteSettings);
 		Else
 			CopyAsIsItemList(BufferData, ItemRow, Wrapper, PasteSettings);
 		EndIf;
@@ -236,12 +238,23 @@ Procedure SourceAndTargetHasTableSLN(BufferData, ItemRow, Wrapper, Result, Paste
 	EndIf;
 EndProcedure
 
+Procedure CopyAsIsItemListWithSLN(BufferData, ItemRow, Wrapper, PasteSettings)
+	NewItemRow = BuilderAPI.AddRow(Wrapper, "ItemList");
+	
+	For Each Property In ColumnNameToPaste() Do
+		BuilderAPI.SetRowProperty(Wrapper, NewItemRow, Property, ItemRow[Property], "ItemList");
+	EndDo;
+	BuilderAPI.SetRowProperty(Wrapper, NewItemRow, PasteSettings.PasteQuantityAs, ItemRow.Quantity, "ItemList");
+	BuilderAPI.SetRowProperty(Wrapper, NewItemRow, "SerialLotNumber", ItemRow.SerialLotNumber, "ItemList");
+EndProcedure
+
 Procedure CopyAsIsItemList(BufferData, ItemRow, Wrapper, PasteSettings)
 	NewItemRow = BuilderAPI.AddRow(Wrapper, "ItemList");
 	
 	For Each Property In ColumnNameToPaste() Do
 		BuilderAPI.SetRowProperty(Wrapper, NewItemRow, Property, ItemRow[Property], "ItemList");
 	EndDo;
+	BuilderAPI.SetRowProperty(Wrapper, NewItemRow, PasteSettings.PasteQuantityAs, ItemRow.Quantity, "ItemList");
 EndProcedure
 
 Procedure SourceHasSLNTableAndTargetHasSLNInItemList(BufferData, ItemRow, Wrapper, PasteSettings)

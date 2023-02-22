@@ -469,6 +469,7 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
+  <commonModules>CommonModule.DataVersioningServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -991,6 +992,7 @@
   <informationRegisters>InformationRegister.T9510S_Staffing</informationRegisters>
   <informationRegisters>InformationRegister.T9520S_TimeSheetInfo</informationRegisters>
   <informationRegisters>InformationRegister.T9530S_WorkDays</informationRegisters>
+  <informationRegisters>InformationRegister.DataVersions</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

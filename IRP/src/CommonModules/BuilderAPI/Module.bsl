@@ -248,33 +248,62 @@ EndFunction
 // Returns:
 //  Structure - Write:
 // * Context - See CreateWrapper
-// * Ref - DocumentRefDocumentName -
+// * Ref - DocumentRefDocumentName, CatalogRefCatalogName -
 Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined) Export
-	DocMetadata = Wrapper.Object.Ref.Metadata();
+	ObjMetadata = Wrapper.Object.Ref.Metadata(); // MetadataObjectCatalog, MetadataObjectDocument 
 	
-	If ValueIsFilled(Wrapper.Object.Ref) Then
-		Doc = Wrapper.Object.Ref.GetObject();
+	If Metadata.Documents.Contains(ObjMetadata) Then
+		If ValueIsFilled(Wrapper.Object.Ref) Then
+			Doc = Wrapper.Object.Ref.GetObject();
+		Else
+			Doc = Documents[ObjMetadata.Name].CreateDocument();
+		EndIf;
+		
+		FillPropertyValues(Doc, Wrapper.Object, , "Number");
+		If Not ValueIsFilled(Doc.Date) Then
+			Doc.Date = CommonFunctionsServer.GetCurrentSessionDate();
+		EndIf;
+		For Each Table In ObjMetadata.TabularSections Do
+			DocTable = Doc[Table.Name]; // TabularSection
+			LoadTable = Wrapper.Object[Table.Name]; // ValueTable
+			DocTable.Load(LoadTable);
+		EndDo;
+		
+		Doc.Write(?(WriteMode = Undefined, DocumentWriteMode.Write, WriteMode),
+			?(PostingMode = Undefined , DocumentPostingMode.Regular , PostingMode));
+		Wrapper.Object.Ref = Doc.Ref;
+	
+	ElsIf Metadata.Catalogs.Contains(ObjMetadata) Then
+		WrapperObject = Wrapper.Object; // CatalogObject
+		If ValueIsFilled(WrapperObject.Ref) Then
+			Ctlg = WrapperObject.Ref.GetObject();
+			If ObjMetadata.CodeLength > 0 Then
+				Ctlg.Code = WrapperObject.Code;
+			EndIf;
+		ElsIf WrapperObject.IsFolder Then
+			Ctlg = Catalogs[ObjMetadata.Name].CreateFolder();
+		Else
+			Ctlg = Catalogs[ObjMetadata.Name].CreateItem();
+		EndIf;
+		
+		FillPropertyValues(Ctlg, WrapperObject, , "Code");
+		For Each Table In ObjMetadata.TabularSections Do
+			CtlgTable = Ctlg[Table.Name]; // TabularSection
+			LoadTable = WrapperObject[Table.Name]; // ValueTable
+			CtlgTable.Load(LoadTable);
+		EndDo;
+		
+		Ctlg.Write();
+		WrapperObject.Ref = Ctlg.Ref;
+		
 	Else
-		Doc = Documents[DocMetadata.Name].CreateDocument();
+		//@skip-warning
+		Raise StrTemplate(R().Exc_010, ObjMetadata.FullName());
 	EndIf;
-	
-	FillPropertyValues(Doc, Wrapper.Object, , "Number");
-	
-	If Not ValueIsFilled(Doc.Date) Then
-		Doc.Date = CommonFunctionsServer.GetCurrentSessionDate();
-	EndIf;
-	For Each Table In DocMetadata.TabularSections Do
-		DocTable = Doc[Table.Name]; // TabularSection
-		LoadTable = Wrapper.Object[Table.Name]; // ValueTable
-		DocTable.Load(LoadTable);
-	EndDo;
-	Doc.Write(?(WriteMode = Undefined, DocumentWriteMode.Write, WriteMode),
-		?(PostingMode = Undefined , DocumentPostingMode.Regular , PostingMode));
-	Wrapper.Object.Ref = Doc.Ref;
 	
 	Result = New Structure();
 	Result.Insert("Context", Wrapper);
-	Result.Insert("Ref", Doc.Ref);
+	Result.Insert("Ref", Wrapper.Object.Ref);
 	//@skip-check constructor-function-return-section
 	Return Result;
 EndFunction

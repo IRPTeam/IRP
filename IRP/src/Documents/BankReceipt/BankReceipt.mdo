@@ -254,6 +254,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="1a3a5286-5a93-44d4-baae-fb249b50f307">
+    <name>ConsolidatedRetailSales</name>
+    <synonym>
+      <key>en</key>
+      <value>Consolidated retail sales</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.ConsolidatedRetailSales</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="9f0aa7e8-1192-491e-87a3-06ea43fbc1f8">
     <name>DocumentForm</name>
     <synonym>

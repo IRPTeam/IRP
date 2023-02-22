@@ -9,6 +9,10 @@ Function PrepareReceiptData(SourceData) Export
 		ReturnData = PrepareReceiptDataByCashReceipt(SourceData);
 	ElsIf TypeOf(SourceData.Ref) = Type("DocumentRef.CashPayment") Then
 		ReturnData = PrepareReceiptDataByCashPayment(SourceData);
+	ElsIf TypeOf(SourceData.Ref) = Type("DocumentRef.BankReceipt") Then
+		ReturnData = PrepareReceiptDataByBankReceipt(SourceData);
+	ElsIf TypeOf(SourceData.Ref) = Type("DocumentRef.BankPayment") Then
+		ReturnData = PrepareReceiptDataByBankPayment(SourceData);
 	EndIf;
 	Return ReturnData;
 EndFunction
@@ -124,12 +128,6 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 			Else
 				Str.Insert("Cash", Str.Cash + Payment.Amount);
 			EndIf;
-//		ElsIf RetailSalesReceipt.PaymentMethod = Enums.ReceiptPaymentMethods.PartialSettlementAndCredit Then
-//			Str.Insert("PrePayment", Str.PrePayment + Payment.Amount);
-//		ElsIf RetailSalesReceipt.PaymentMethod = Enums.ReceiptPaymentMethods.TransferOnCredit Then
-//			Str.Insert("PrePayment", Str.PrePayment + Payment.Amount);
-//		ElsIf RetailSalesReceipt.PaymentMethod = Enums.ReceiptPaymentMethods.LoanPayment Then
-//			Str.Insert("PrePayment", Str.PrePayment + Payment.Amount);
 		Else
 			If Payment.PaymentType.Type = Enums.PaymentTypes.Cash Then
 				Str.Insert("Cash", Str.Cash + Payment.Amount);
@@ -265,6 +263,130 @@ Function PrepareReceiptDataByCashPayment(SourceData) Export
 	
 	Str.Insert("Cash", SourceData.PaymentList.Total("TotalAmount"));
 	Str.Insert("ElectronicPayment", 0);
+	Str.Insert("PrePayment", 0);
+	Str.Insert("PostPayment", 0);
+	Str.Insert("Barter", 0);
+	
+	Return Str;
+EndFunction
+
+Function PrepareReceiptDataByBankReceipt(SourceData) Export
+	
+	Str = New Structure;
+	Str.Insert("CashierName", String(SourceData.Author));
+	Str.Insert("OperationType", 1);
+	Str.Insert("TaxationSystem", 0);	//TODO: TaxSystem choice
+	
+	
+	If SourceData.TransactionType = Enums.IncomingPaymentTransactionType.CustomerAdvance Then
+		PaymentListData = SourceData.PaymentList.Unload();
+		PaymentListData.GroupBy("RetailCustomer");
+		If PaymentListData.Count() > 1 Then
+			Raise("A few retail customer found!");
+		EndIf;
+		CustomerDetail = New Structure;
+		CustomerDetail.Insert("Info", String(SourceData.PaymentList[0].RetailCustomer));
+		CustomerDetail.Insert("INN", PaymentListData[0].RetailCustomer.TaxID);
+		Str.Insert("CustomerDetail", CustomerDetail);	
+	
+		FiscalStrings = New Array;
+		For Each Item In SourceData.PaymentList Do
+			RowFilter = New Structure();
+			RowFilter.Insert("Key", Item.Key);
+			TaxRows = SourceData.TaxList.FindRows(RowFilter);
+			FiscalStringData = New Structure();
+			FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
+			FiscalStringData.Insert("DiscountAmount", 0);
+			FiscalStringData.Insert("CalculationSubject", "10");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+			FiscalStringData.Insert("MeasureOfQuantity", "255");
+			FiscalStringData.Insert("Name", "Аванс от: " + String(SourceData.PaymentList[0].RetailCustomer));
+			FiscalStringData.Insert("Quantity", 1);
+			FiscalStringData.Insert("PaymentMethod", 3);
+			FiscalStringData.Insert("PriceWithDiscount", Item.TotalAmount);
+			If TaxRows.Count() > 0 Then
+				If TaxRows[0].TaxRate.NoRate Then
+					FiscalStringData.Insert("VATRate", "none");
+					FiscalStringData.Insert("VATAmount", 0);  
+				Else
+					FiscalStringData.Insert("VATRate", Format(TaxRows[0].TaxRate.Rate, "NZ=0; NG=0;"));
+					FiscalStringData.Insert("VATAmount", TaxRows[0].Amount);
+				EndIf;
+			Else
+				//Raise("Tax isn't found!");
+				FiscalStringData.Insert("VATRate", "none");
+				FiscalStringData.Insert("VATAmount", 0);
+			EndIf;
+			FiscalStrings.Add(FiscalStringData);
+		EndDo;
+	EndIf; 
+	
+	Str.Insert("FiscalStrings", FiscalStrings);
+	Str.Insert("TextStrings", New Array);
+	
+	Str.Insert("Cash", 0);
+	Str.Insert("ElectronicPayment", SourceData.PaymentList.Total("TotalAmount"));
+	Str.Insert("PrePayment", 0);
+	Str.Insert("PostPayment", 0);
+	Str.Insert("Barter", 0);
+	
+	Return Str;
+EndFunction
+
+Function PrepareReceiptDataByBankPayment(SourceData) Export
+	
+	Str = New Structure;
+	Str.Insert("CashierName", String(SourceData.Author));
+	Str.Insert("OperationType", 2);
+	Str.Insert("TaxationSystem", 0);	//TODO: TaxSystem choice
+	
+	
+	If SourceData.TransactionType = Enums.OutgoingPaymentTransactionTypes.CustomerAdvance Then
+		PaymentListData = SourceData.PaymentList.Unload();
+		PaymentListData.GroupBy("RetailCustomer");
+		If PaymentListData.Count() > 1 Then
+			Raise("A few retail customer found!");
+		EndIf;
+		CustomerDetail = New Structure;
+		CustomerDetail.Insert("Info", String(SourceData.PaymentList[0].RetailCustomer));
+		CustomerDetail.Insert("INN", PaymentListData[0].RetailCustomer.TaxID);
+		Str.Insert("CustomerDetail", CustomerDetail);	
+	
+		FiscalStrings = New Array;
+		For Each Item In SourceData.PaymentList Do
+			RowFilter = New Structure();
+			RowFilter.Insert("Key", Item.Key);
+			TaxRows = SourceData.TaxList.FindRows(RowFilter);
+			FiscalStringData = New Structure();
+			FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
+			FiscalStringData.Insert("DiscountAmount", 0);
+			FiscalStringData.Insert("CalculationSubject", "10");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
+			FiscalStringData.Insert("MeasureOfQuantity", "255");
+			FiscalStringData.Insert("Name", "Аванс от: " + String(SourceData.PaymentList[0].RetailCustomer));
+			FiscalStringData.Insert("Quantity", 1);
+			FiscalStringData.Insert("PaymentMethod", 3);
+			FiscalStringData.Insert("PriceWithDiscount", Item.TotalAmount);
+			If TaxRows.Count() > 0 Then
+				If TaxRows[0].TaxRate.NoRate Then
+					FiscalStringData.Insert("VATRate", "none");
+					FiscalStringData.Insert("VATAmount", 0);  
+				Else
+					FiscalStringData.Insert("VATRate", Format(TaxRows[0].TaxRate.Rate, "NZ=0; NG=0;"));
+					FiscalStringData.Insert("VATAmount", TaxRows[0].Amount);
+				EndIf;
+			Else
+				//Raise("Tax isn't found!");
+				FiscalStringData.Insert("VATRate", "none");
+				FiscalStringData.Insert("VATAmount", 0);
+			EndIf;
+			FiscalStrings.Add(FiscalStringData);
+		EndDo;
+	EndIf; 
+	
+	Str.Insert("FiscalStrings", FiscalStrings);
+	Str.Insert("TextStrings", New Array);
+	
+	Str.Insert("Cash", 0);
+	Str.Insert("ElectronicPayment", SourceData.PaymentList.Total("TotalAmount"));
 	Str.Insert("PrePayment", 0);
 	Str.Insert("PostPayment", 0);
 	Str.Insert("Barter", 0);

@@ -922,6 +922,7 @@ Function CreateAdvanceDocumentsAtServer(DocumentParameters)
 		BuilderAPI.SetProperty(BankDocument, "Date"        , CommonFunctionsServer.GetCurrentSessionDate(), "PaymentList");
 		BuilderAPI.SetProperty(BankDocument, "TransactionType" , DocumentParameters.BankDocumentTransactionType, "PaymentList");
 		BuilderAPI.SetProperty(BankDocument, "Account" , RowHeader.Account, "PaymentList");
+		BuilderAPI.SetProperty(BankDocument, "ConsolidatedRetailSales" , Object.ConsolidatedRetailSales, "PaymentList");
 	
 		For Each RowList In BankTable.FindRows(New Structure("Account", RowHeader.Account)) Do	
 			NewRow = BuilderAPI.AddRow(BankDocument, "PaymentList");

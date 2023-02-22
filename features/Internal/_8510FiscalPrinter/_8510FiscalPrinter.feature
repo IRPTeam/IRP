@@ -1231,7 +1231,40 @@ Scenario: _0850029 return retail customer advanve from POS (card)
 			And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
 			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
 			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '200.00'
+		* Check fiscal log	
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+			And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="200"'
+			And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'PaymentMethod="3"'
+			And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'OperationType="2"'
 
+Scenario: _0850030 return retail customer advanve from POS (cash)
+		And I close all client application windows
+		And In the command interface I select "Retail" "Point of sale"
+		* Select retail customer
+			And I click "Search customer" button
+			And I input "005" text in "ID" field
+			And I move to the next attribute
+			And I click "OK" button
+		* Return advance
+			And I click the button named "Return"
+			And I click the button named "Advance"		
+			And I click "2" button
+			And I click "0" button
+			And I click "0" button
+			And I click the button named "Enter"		
+		* Check acquiring log
+			And Delay 10
+			And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+			And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
+			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '200.00'
+		* Check fiscal log	
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+			And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'Cash="200"'
+			And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'PaymentMethod="3"'
+			And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'OperationType="2"'
 
 Scenario: _0850025 sales return (cash)
 	And I close all client application windows

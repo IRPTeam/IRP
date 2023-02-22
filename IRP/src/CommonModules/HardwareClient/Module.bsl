@@ -357,6 +357,7 @@ Procedure GetDescription_End(Result, Parameters, Settings) Export
 	ParametersDriver = Settings.ParametersDriver;
 	Data = Parameters[0];
 	If Not IsBlankString(Parameters[0]) Then
+#If Not WebClient Then
 		XMLReader = New XMLReader(); 
 		XMLReader.SetString(Data);
 		XMLReader.MoveToContent();
@@ -373,6 +374,7 @@ Procedure GetDescription_End(Result, Parameters, Settings) Export
 			ParametersDriver.LogPath = XMLReader.AttributeValue("LogPath");
 			ParametersDriver.IsEmulator = StrCompare(XMLReader.AttributeValue("IsEmulator"), "TRUE") = 0;
 		EndIf;
+#EndIf
 	EndIf;
 	Settings.ParametersDriver = ParametersDriver;
 	

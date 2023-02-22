@@ -803,15 +803,14 @@ Async Procedure AdvanceFormClose(Result, AdditionalData) Export
 	EndIf;
 	If ThisObject.isReturn Then
 		DocumentParameters = GetAdvanceDocumentParameters(Result.Payments, "Outgoing");
-		CreatedDocuments = CreateAdvanceDocumentsAtServer(DocumentParameters);
 	Else	
 		DocumentParameters = GetAdvanceDocumentParameters(Result.Payments, "Incoming");
-		CreatedDocuments = CreateAdvanceDocumentsAtServer(DocumentParameters);
-	
-		For Each CreatedDocument In CreatedDocuments Do
-			ResultPrint = Await PrintFiscalReceipt(CreatedDocument);
-		EndDo;
 	EndIf;
+	
+	CreatedDocuments = CreateAdvanceDocumentsAtServer(DocumentParameters);
+	For Each CreatedDocument In CreatedDocuments Do
+		ResultPrint = Await PrintFiscalReceipt(CreatedDocument);
+	EndDo;
 	
 	NewTransaction();
 	Modified = False;
@@ -888,7 +887,7 @@ Function CreateAdvanceDocumentsAtServer(DocumentParameters)
 		BuilderAPI.SetProperty(CashDocument, "Date"        , CommonFunctionsServer.GetCurrentSessionDate(), "PaymentList");
 		BuilderAPI.SetProperty(CashDocument, "TransactionType" , DocumentParameters.CashDocumentTransactionType, "PaymentList");
 		BuilderAPI.SetProperty(CashDocument, "CashAccount" , RowHeader.Account, "PaymentList");
-	
+		BuilderAPI.SetProperty(CashDocument, "ConsolidatedRetailSales" , Object.ConsolidatedRetailSales, "PaymentList");
 		
 		For Each RowList In CashtTable.FindRows(New Structure("Account", RowHeader.Account)) Do	
 			NewRow = BuilderAPI.AddRow(CashDocument, "PaymentList");
@@ -926,6 +925,7 @@ Function CreateAdvanceDocumentsAtServer(DocumentParameters)
 		BuilderAPI.SetProperty(BankDocument, "Date"        , CommonFunctionsServer.GetCurrentSessionDate(), "PaymentList");
 		BuilderAPI.SetProperty(BankDocument, "TransactionType" , DocumentParameters.BankDocumentTransactionType, "PaymentList");
 		BuilderAPI.SetProperty(BankDocument, "Account" , RowHeader.Account, "PaymentList");
+		BuilderAPI.SetProperty(BankDocument, "ConsolidatedRetailSales" , Object.ConsolidatedRetailSales, "PaymentList");
 	
 		For Each RowList In BankTable.FindRows(New Structure("Account", RowHeader.Account)) Do	
 			NewRow = BuilderAPI.AddRow(BankDocument, "PaymentList");

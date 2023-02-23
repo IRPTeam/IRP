@@ -1024,5 +1024,10 @@ Function Strings(Lang) Export
 	Strings.Insert("CP_006", NStr("en = 'Copied %1 rows'", Lang));
 #EndRegion	
 	
+#Region LoadDataFromTable
+	Strings.Insert("LDT_Button_Title", NStr("en = 'Load data from table'", Lang));
+	Strings.Insert("LDT_Button_ToolTip", NStr("en = 'Load data from table'", Lang));
+#EndRegion	
+	
 	Return Strings;
 EndFunction

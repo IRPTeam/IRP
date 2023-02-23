@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="521d272d-c3a6-4b0b-b5cd-77a87745418a">
+  <name>LoadDataFromTableServer</name>
+  <synonym>
+    <key>en</key>
+    <value>Load data from table server</value>
+  </synonym>
+  <server>true</server>
+  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+  <serverCall>true</serverCall>
+</mdclass:CommonModule>

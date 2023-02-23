@@ -411,6 +411,15 @@ EndProcedure
 
 #EndRegion
 
+#Region LOAD_DATA_FROM_TABLE
+
+&AtClient
+Procedure LoadDataFromTable(Command)
+	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object);
+EndProcedure
+
+#EndRegion
+
 #Region COMMANDS
 
 &AtClient

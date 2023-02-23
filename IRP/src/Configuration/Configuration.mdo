@@ -475,6 +475,8 @@
   <commonModules>CommonModule.CopyPasteServer</commonModules>
   <commonModules>CommonModule.CopyPasteClient</commonModules>
   <commonModules>CommonModule.DataVersioningServer</commonModules>
+  <commonModules>CommonModule.LoadDataFromTableServer</commonModules>
+  <commonModules>CommonModule.LoadDataFromTableClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

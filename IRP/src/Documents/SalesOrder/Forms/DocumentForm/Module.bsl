@@ -1,5 +1,4 @@
 
-
 #Region FORM
 
 &AtServer
@@ -657,6 +656,15 @@ EndProcedure
 Function PasteFromClipboardServer(CopySettings)
 	Return CopyPasteServer.PasteFromClipboard(Object, ThisObject, CopySettings);
 EndFunction
+
+#EndRegion
+
+#Region LOAD_DATA_FROM_TABLE
+
+&AtClient
+Procedure LoadDataFromTable(Command)
+	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object);
+EndProcedure
 
 #EndRegion
 

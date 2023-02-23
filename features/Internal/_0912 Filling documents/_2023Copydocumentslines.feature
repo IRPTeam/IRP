@@ -820,3 +820,615 @@ Scenario: _01541986 copy lines from SI to Physical inventory
 			| '4' | ''           | 'Product 3 with SLN' | 'UNIQ'     | '0514'              | 'pcs'               | '2,000'      | '2,000'       | ''                   | ''            |
 			| '5' | ''           | 'Product 3 with SLN' | 'PZU'      | ''                  | 'pcs'               | '8,000'      | '8,000'       | ''                   | ''            |	
 		And I close all client application windows
+
+Scenario: _01541987 copy lines from SI to GR
+	And I close all client application windows
+	* Select SI and copy lines
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1 290'  |
+		And I select current line in "List" table
+		And I click "Copy to clipboard" button
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' |
+			| 'Product 1 with SLN' | 'PZU'      |
+		Then I select all lines of "ItemList" table
+		And I click "Copy to clipboard" button
+	* Open GR and check copy lines
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click the button named "FormCreate"
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Unit'              | 'Quantity' |
+			| '1' | 'Product 1 with SLN' | 'PZU'      | '0512; 0514'         | 'pcs'               | '3,000'    |
+			| '2' | 'Dress'              | 'XS/Blue'  | ''                   | 'box Dress (8 pcs)' | '2,000'    |
+			| '3' | 'Product 3 with SLN' | 'UNIQ'     | '0514'               | 'pcs'               | '2,000'    |
+			| '4' | 'Product 3 with SLN' | 'PZU'      | ''                   | 'pcs'               | '8,000'    |
+		And I close all client application windows
+
+
+Scenario: _01541988 copy lines from SI to RetailReturnReceipt
+	And I close all client application windows
+	* Select SI and copy lines
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1 290'  |
+		And I select current line in "List" table
+		And I click "Copy to clipboard" button
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' |
+			| 'Product 1 with SLN' | 'PZU'      |
+		Then I select all lines of "ItemList" table
+		And I click "Copy to clipboard" button
+	* Open RetailReturnReceipt and check copy lines
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I click the button named "FormCreate"
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Unit'              | 'Quantity' |
+			| '1' | 'Product 1 with SLN' | 'PZU'      | '0512; 0514'         | 'pcs'               | '3,000'    |
+			| '2' | 'Dress'              | 'XS/Blue'  | ''                   | 'box Dress (8 pcs)' | '2,000'    |
+			| '3' | 'Product 3 with SLN' | 'UNIQ'     | '0514'               | 'pcs'               | '2,000'    |
+			| '4' | 'Product 3 with SLN' | 'PZU'      | ''                   | 'pcs'               | '8,000'    |
+		And I close all client application windows
+
+
+Scenario: _01541989 copy lines from SI to Purchase order closing
+	And I close all client application windows
+	* Select SI and copy lines
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1 290'  |
+		And I select current line in "List" table
+		And I click "Copy to clipboard" button
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' |
+			| 'Product 1 with SLN' | 'PZU'      |
+		Then I select all lines of "ItemList" table
+		And I click "Copy to clipboard" button
+	* Open Purchase order closing and check copy lines
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
+		And I click the button named "FormCreate"
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| '#' | 'Item'               | 'Item key' | 'Unit'              | 'Quantity' |
+			| '1' | 'Product 1 with SLN' | 'PZU'      | 'pcs'               | '3,000'    |
+			| '2' | 'Dress'              | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+			| '3' | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'               | '2,000'    |
+			| '4' | 'Product 3 with SLN' | 'PZU'      | 'pcs'               | '8,000'    |
+		And I close all client application windows
+
+Scenario: _01541961 check copy lines from RetailSalesReceipt
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+		
+Scenario: _01541962 check copy lines from PurchaseReturn
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541963 check copy lines from GoodsReceipt
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541963 check copy lines from RetailReturnReceipt
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+						
+Scenario: _01541964 check copy lines from PurchaseOrderClosing
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541965 check copy lines from PurchaseOrder
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541966 check copy lines from SalesReturnOrder
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541967 check copy lines from ShipmentConfirmation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541968 check copy lines from InternalSupplyRequest
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541969 check copy lines from PurchaseInvoice
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541970 check copy lines from StockAdjustmentAsWriteOff
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541971 check copy lines from Inventory transfer
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541972 check copy lines from Stock adjustment as surplus
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541973 check copy lines from Sales return
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541974 check copy lines from Purchase return order
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541975 check copy lines from Bundling
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.Bundling"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541976 check copy lines from Inventory transfer order
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541977 check copy lines from Unbundling
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.Unbundling"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541978 check copy lines from Item stock adjustment
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key (surplus)' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'                | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'            | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key (surplus)' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'                | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'            | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541979 check copy lines from Sales order closing
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541950 check copy lines from Planned receipt reservation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541951 check copy lines from Sales report to consignor
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541952 check copy lines from Sales report from trade agent
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
+		And I close all client application windows
+
+Scenario: _01541953 check copy lines from Physical count by location
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+	And I click the button named "FormCreate"
+	* Add items
+		And I fill "ItemList" table with data
+			| 'Item'  | 'Item key' | 'Unit'              | 'Phys. count' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'       |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'       |
+	* Copy lines
+		And I go to the first line in "ItemList" table
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click "Copy to clipboard" button
+		And I change "Copy quantity as" radio button value to "Phys. count"
+		And I click "OK" button	
+		And I delete all lines of "ItemList" table
+	* Past lines
+		And I click "Paste from clipboard" button
+		And I change "Paste quantity as" radio button value to "Phys. count"
+		And I click "OK" button	
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Unit'              | 'Phys. count' |
+			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'       |
+			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'       |
+		And I close all client application windows

@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Movements
+@Movements2
 @MovementsOpeningEntry
 
 Feature: check Opening entry movements

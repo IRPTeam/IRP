@@ -728,12 +728,13 @@ Scenario: _08500181 advance payment (card)
 	* Check fiscal log
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML2"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="10"'
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'PaymentMethod="3"'
 	* Check acquiring log
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
 		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '620.00'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '10.00'
 		
 Scenario: _0850019 create retail sales receipt from POS (own stock, card 03, use acquiring)
 	And I close all client application windows
@@ -767,13 +768,12 @@ Scenario: _0850019 create retail sales receipt from POS (own stock, card 03, use
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="10"'
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'PaymentMethod="3"'
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML2"
 	* Check acquiring log
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
 		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '10.00'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '620.00'
 		
 Scenario: _0850020 check auto payment form by acquiring (Enter)
 	And I close all client application windows

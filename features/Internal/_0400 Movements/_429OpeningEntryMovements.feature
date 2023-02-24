@@ -50,6 +50,7 @@ Scenario: _042900 preparation (Opening entry)
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
 		When Create information register TaxSettings records
+		When Create catalog Stores (trade agent)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records

@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Movements
+@Movements2
 @MovementsCashRevenue
 
 Feature: check Cash revenue movements

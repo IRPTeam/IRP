@@ -76,6 +76,92 @@ Scenario: _097700 preparation (Сheck payroll)
 		When filling in Tax settings for company
 
 
+Scenario: _097705 create accrual and deduction values
+	And I close all client application windows
+	* Open new form element accrual and deduction values
+		Given I open hyperlink "e1cib/list/InformationRegister.T9500S_AccrualAndDeductionValues"
+		And I click the button named "FormCreate"
+	* Filling details
+		And I click Select button of "Employee or position" field
+		Then "Select data type" window is opened
+		And I go to line in "" table
+			| ''        |
+			| 'Partner' |
+		And I select current line in "" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Arina Brown'  |
+		And I select current line in "List" table
+		And I click Select button of "Accual or deduction type" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Salary'       |
+		And I select current line in "List" table
+		And I input "1 000,00" text in the field named "Value"
+		And I click "Save and close" button
+	* Check creation
+		And "List" table contains lines
+			| 'Employee or position' | 'Value'    |
+			| 'Arina Brown'          | '1 000,00' |
+		And I close all client application windows
+		
+
+Scenario: _097706 create staffing
+	And I close all client application windows
+	* Open new form element staffing
+		Given I open hyperlink "e1cib/list/InformationRegister.T9510S_Staffing"
+		And I click the button named "FormCreate"
+	* Filling details
+		And I input "01.01.2021" text in the field named "Period"
+		And I click Choice button of the field named "Employee"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Arina Brown' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Second Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shop 01'     |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Position"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Accountant'  |
+		And I select current line in "List" table
+		And I click "Save and close" button		
+	* Check creation
+		And "List" table contains lines
+			| 'Employee'    | 'Company'        |
+			| 'Arina Brown' | 'Second Company' |
+		And I close all client application windows
+		
+
+Scenario: _097707 create work days
+	And I close all client application windows
+	* Open new form work days
+		Given I open hyperlink "e1cib/list/InformationRegister.T9530S_WorkDays"
+		And I click the button named "FormCreate"
+	* Filling details
+		And I input "01.01.2022" text in "Begin date" field
+		And I input "31.01.2022" text in "End date" field
+		And I click Select button of "Accrual and deduction type" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Salary'  |
+		And I select current line in "List" table
+		And I input "20" text in "Count days" field
+		And I click "Save and close" button
+	* Check creation
+		And "List" table contains lines
+			| 'Begin date' | 'End date'   | 'Accrual and deduction type' | 'Count days' |
+			| '01.01.2022' | '31.01.2022' | 'Salary'                     | '20'         |
+		And I close all client application windows
+					
 Scenario: _097710 create time sheet
 	And I close all client application windows
 	* Open new time sheet
@@ -230,16 +316,4 @@ Scenario: _097712 check payroll
 		And "List" table contains lines
 			| 'Number'             |
 			| '$$NumberPL050003$$' |
-				
-
-						
-
-				
 		
-		
-				
-				
-		
-				
-					
-			

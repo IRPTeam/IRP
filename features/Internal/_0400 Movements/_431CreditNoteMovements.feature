@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Movements
+@Movements2
 @MovementsCreditNote
 
 Feature: check Credit note movements

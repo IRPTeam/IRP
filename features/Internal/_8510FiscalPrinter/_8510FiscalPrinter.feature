@@ -726,6 +726,7 @@ Scenario: _08500181 advance payment (card)
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 	* Check fiscal log
+		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="10"'

@@ -80,6 +80,7 @@ Scenario: _042900 preparation (Opening entry)
 	* Tax settings
 		When filling in Tax settings for company
 	When Create Document discount
+	When settings for Main Company (commission trade)
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then

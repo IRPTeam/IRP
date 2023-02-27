@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Movements
+@Movements2
 @MovementsRetailReturnReceipt
 
 
@@ -136,6 +136,7 @@ Scenario: _0425001 check preparation
 	When check preparation
 
 Scenario: _042501 check Retail return receipt movements by the Register  "R4010 Actual stocks"
+		And I close all client application windows
 	* Select Retail return receipt
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I go to line in "List" table

@@ -904,6 +904,49 @@ Scenario: Open object form "ForeignCurrencyRevaluation"
 		Then I raise "Failed to open document form ForeignCurrencyRevaluation" exception
 	And I close current window
 
+Scenario: Open list form "EmployeeCashAdvance" 
+	And I close all client application windows
+	Given I open "EmployeeCashAdvance" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form EmployeeCashAdvance" exception
+	And I close current window
+
+Scenario: Open object form "EmployeeCashAdvance"
+	And I close all client application windows
+	Given I open "EmployeeCashAdvance" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form EmployeeCashAdvance" exception
+	And I close current window
+
+Scenario: Open list form "ProductionCostsAllocation" 
+	And I close all client application windows
+	Given I open "ProductionCostsAllocation" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ProductionCostsAllocation" exception
+	And I close current window
+
+Scenario: Open object form "ProductionCostsAllocation"
+	And I close all client application windows
+	Given I open "ProductionCostsAllocation" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form ProductionCostsAllocation" exception
+	And I close current window
+
+Scenario: Open choise form "ProductionCostsAllocation"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.ProductionCostsAllocation.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form ProductionCostsAllocation" exception
+	And I close current window
+
+Scenario: Open choise form "EmployeeCashAdvance"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Document.EmployeeCashAdvance.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open document choise form EmployeeCashAdvance" exception
+	And I close current window
 
 Scenario: Open choise form "ForeignCurrencyRevaluation"
 	And I close all client application windows

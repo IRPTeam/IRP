@@ -40,6 +40,7 @@ EndFunction
 // * AddInID - String -
 // * Driver - CatalogRef.EquipmentDrivers -
 // * ConnectParameters - Structure -
+// * OldRevision - Boolean - Revision less then 3000
 Function GetConnectionSettings(HardwareRef) Export
 	Query = New Query();
 	Query.Text =
@@ -47,7 +48,8 @@ Function GetConnectionSettings(HardwareRef) Export
 	|	Hardware.Ref,
 	|	Hardware.EquipmentType,
 	|	Hardware.Driver,
-	|	Hardware.Driver.AddInID AS AddInID
+	|	Hardware.Driver.AddInID AS AddInID,
+	|	Hardware.Driver.RevisionNumber < 3000 AS OldRevision
 	|FROM
 	|	Catalog.Hardware AS Hardware
 	|WHERE
@@ -63,6 +65,7 @@ Function GetConnectionSettings(HardwareRef) Export
 		Settings.Insert("DriverEquipmentType", GetDriverEquipmentType(SelectionDetailRecords.EquipmentType));
 		Settings.Insert("AddInID", SelectionDetailRecords.AddInID);
 		Settings.Insert("Driver", SelectionDetailRecords.Driver);
+		Settings.Insert("OldRevision", SelectionDetailRecords.OldRevision);
 		Settings.Insert("ID", "");
 
 		ConnectParameters = New Structure();

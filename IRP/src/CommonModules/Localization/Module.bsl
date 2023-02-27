@@ -1025,8 +1025,9 @@ Function Strings(Lang) Export
 #EndRegion	
 	
 #Region LoadDataFromTable
-	Strings.Insert("LDT_Button_Title", NStr("en = 'Load data from table'", Lang));
+	Strings.Insert("LDT_Button_Title",   NStr("en = 'Load data from table'", Lang));
 	Strings.Insert("LDT_Button_ToolTip", NStr("en = 'Load data from table'", Lang));
+	Strings.Insert("LDT_Button_FailReading", NStr("en = 'Failed to read the value: [%1]'", Lang));
 #EndRegion	
 	
 	Return Strings;

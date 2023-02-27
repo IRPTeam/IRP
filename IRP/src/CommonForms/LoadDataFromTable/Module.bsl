@@ -1,20 +1,53 @@
 // @strict-types
 
+#Region FormEvents
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	LoadType = "Barcode";
-	
 	HeadersRows = 2;
+	
+	InputFieldsForLoadData = Undefined;
+	Parameters.Property("FieldsForLoadData", InputFieldsForLoadData);
+	
+	FieldsForLoadData = New Structure;
+	If TypeOf(InputFieldsForLoadData) = Type("Structure") Then
+		For Each InputField In InputFieldsForLoadData Do
+			If InputField.Key = "Item" 
+					Or InputField.Key = "ItemKey" 
+					Or InputField.Key = "Quantity" Then
+				Continue;
+			EndIf;
+			
+			InputFieldDescription = InputField.Value; // Structure
+			FieldType = InputFieldDescription["Type"]; // TypeDescription
+			FieldTypes = FieldType.Types();
+			
+			If FieldTypes.Count() = 1 And (FieldTypes[0] = Type("String") 
+					Or FieldTypes[0] = Type("Number")
+					Or FieldTypes[0] = Type("Boolean")
+					Or FieldTypes[0] = Type("Date")) Then
+				FieldDescription = GetAddFieldDescription();
+				FillPropertyValues(FieldDescription, InputFieldDescription);
+				FieldsForLoadData.Insert("Field_" + FieldDescription.Name, FieldDescription);
+			EndIf;
+		EndDo;
+	EndIf;
+	ThisObject["AdditionalFields"] = FieldsForLoadData;
+	
+	CreateAdditionalFields();
+	
 	FillColumns();
 	
 EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
-	SetSettings();
 	OwnerUUID = FormOwner.UUID;
 EndProcedure
+
+#EndRegion
 
 #Region ItemsHandler
 
@@ -36,30 +69,58 @@ Procedure ResultSelection(Item, Area, StandardProcessing)
 	Area.Protection = True;
 EndProcedure
 
-&AtClient
-Procedure ShowImages(Command)
-	ShowOrHideImage = Not ShowOrHideImage;
-	If ShowOrHideImage Then
-		//@skip-warning
-		Items.FormShowImages.BackColor = CommonFunctionsServer.GetStyleByName("ActivityColor");
-	Else
-		//@skip-warning
-		Items.FormShowImages.BackColor = CommonFunctionsServer.GetStyleByName("ButtonBackColor");
-	EndIf;
-EndProcedure
-
 #EndRegion
 
 #Region Commands
 
 &AtClient
 Procedure Next(Command)
-	SetPage(1);
+	
+	If Items.PagesMain.CurrentPage = Items.PageTemplate Then
+		
+		FillResult();
+		
+	Else
+		
+		LoadDataDescription = LoadDataFromTableClient.GetLoadDataDescription();
+		LoadDataDescription.Address = ResultStore;
+		
+		AdditionalFieldsArray = New Array; // Array of String
+		FieldsForLoadData = ThisObject["AdditionalFields"]; // Structure
+		For Each FieldForLoad In FieldsForLoadData Do
+			FieldDescription = FieldForLoad.Value; // See GetAddFieldDescription
+			If FieldDescription.toShow Then
+				AdditionalFieldsArray.Add(FieldDescription.Name);
+			EndIf;
+		EndDo;
+		If AdditionalFieldsArray.Count() > 0 Then
+			LoadDataDescription.GroupColumns =
+				LoadDataDescription.GroupColumns + ", " +
+				StrConcat(AdditionalFieldsArray, ", "); 
+		EndIf;
+		
+		Close(LoadDataDescription);
+		
+	EndIf;
+	
 EndProcedure
 
 &AtClient
 Procedure Back(Command)
-	SetPage(-1);
+	ChangePage(Items);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure ChangePage(Items)
+	If Items.PagesMain.CurrentPage = Items.PageTemplate Then
+		Items.FormBack.Enabled = True;
+		Items.ClearTemplate.Enabled = False;
+		Items.PagesMain.CurrentPage = Items.PageResult;
+	Else
+		Items.FormBack.Enabled = False;
+		Items.ClearTemplate.Enabled = True;
+		Items.PagesMain.CurrentPage = Items.PageTemplate;
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -73,56 +134,99 @@ EndProcedure
 
 &AtClient
 Procedure LoadTypeOnChange(Item)
-	SetSettings();
 	FillColumns();
-EndProcedure
-
-&AtClient
-Procedure SetSettings()
-	If Not StrCompare("Barcode", LoadType) Then
-		SearchType = "";
-		Items.SearchType.Visible = False;
-	Else
-		If IsBlankString(SearchType) Then
-			SearchType = "Code";
-		EndIf;
-	EndIf; 
 EndProcedure
 
 #EndRegion
 
 #Region Service
 
+#Region AdditionalFields
+
+&AtServer
+Procedure CreateAdditionalFields()
+	
+	FieldsForLoadData = ThisObject["AdditionalFields"]; // Structure
+	BooleanType = New TypeDescription("Boolean");
+	
+	NewAttributes = New Array; // Array of FormAttribute
+	For Each ColumnItem In FieldsForLoadData Do
+		ColumnDescription = ColumnItem.Value; // See GetAddFieldDescription
+		FormAttribute = New FormAttribute(
+			ColumnItem.Key, 
+			BooleanType,	, 
+			ColumnDescription.Synonym);
+		NewAttributes.Add(FormAttribute);
+	EndDo;
+	
+	ThisObject.ChangeAttributes(NewAttributes);
+	
+	For Each ColumnItem In FieldsForLoadData Do
+		ColumnDescription = ColumnItem.Value; // See GetAddFieldDescription
+		ThisObject[ColumnItem.Key] = ColumnDescription.toShow;
+	EndDo;
+	
+	For Each ColumnItem In FieldsForLoadData Do
+		ColumnKey = ColumnItem.Key; // String
+		ColumnDescription = ColumnItem.Value; // See GetAddFieldDescription
+		
+		NewFormItem = Items.Add(ColumnKey, Type("FormField"), Items.GroupAdditionalFields);
+		NewFormItem.Type = FormFieldType.CheckBoxField;
+		NewFormItem.TitleLocation = FormItemTitleLocation.Right;
+		NewFormItem.DataPath = ColumnKey;
+		NewFormItem.SetAction("OnChange", "AdditionalFieldOnChange");
+	EndDo;
+	
+EndProcedure
+
+// Additional field on change.
+// 
+// Parameters:
+//  Item - FormField - Item
+&AtClient
+Procedure AdditionalFieldOnChange(Item)
+	
+	FieldsForLoadData = ThisObject["AdditionalFields"]; // Structure
+	ColumnDescription = FieldsForLoadData[Item.Name]; // See GetAddFieldDescription
+	
+	CurrentData = ThisObject[Item.Name]; // Boolean
+	ColumnDescription.toShow = CurrentData; 
+	
+	FillColumns();
+	
+EndProcedure
+
+#EndRegion
+
 #Region FillTemplate
+
 &AtServer
 Procedure FillColumns()
 	
-	Columns = GetColumnList();
-	Template = New SpreadsheetDocument();		
+	TemplateSpreadsheet = New SpreadsheetDocument();		
+	
 	Index = 0;
+	Columns = GetColumnList();
 	For Each Column In Columns Do
 		Index = Index + 1;
-
 		ColumnInfo = Column.Value; // See GetColumnInfo
 
-		//@skip-check invocation-parameter-type-intersect
-		Area = Template.Area(1, Index);
+		Area = TemplateSpreadsheet.Area(1, Index);
 		Area.ContainsValue = True;
 		Area.ValueType = New TypeDescription("String");
 		Area.Value = String(Column.Key);
 		
-		//@skip-check invocation-parameter-type-intersect
-		Area = Template.Area(2, Index);
+		Area = TemplateSpreadsheet.Area(2, Index);
 		Area.Text = ColumnInfo.Name; 
 		Area.ColumnWidth = ColumnInfo.Size;
 		Area.BackColor = WebColors.Beige;
 		Area.Font = StyleFonts.LargeTextFont;
 		Area.HorizontalAlign = HorizontalAlign.Center;
 		Area.Protection = True;
-
 	EndDo;
-	Template.Area("R1").Visible = False;
-	Template.FixedTop = HeadersRows;
+	
+	TemplateSpreadsheet.Area("R1").Visible = False;
+	TemplateSpreadsheet.FixedTop = HeadersRows;
 	
 EndProcedure
 
@@ -134,25 +238,35 @@ EndProcedure
 // * Value - see GetColumnInfo
 &AtServer
 Function GetColumnList()
+	
 	Columns = New Structure;
-	If Not StrCompare("Item", LoadType) Then
-		Item = GetColumnInfo();
-		Item.Type = New TypeDescription("String");
-		Item.Name = Metadata.Catalogs.Items.Synonym;
-		Item.Size = 20;
-		Columns.Insert("Item", Item);
-	ElsIf Not StrCompare("ItemKey", LoadType) Then
-		ItemKey = GetColumnInfo();
-		ItemKey.Type = New TypeDescription("String");
-		ItemKey.Name = Metadata.Catalogs.ItemKeys.Synonym;
-		ItemKey.Size = 20;
-		Columns.Insert("ItemKey", ItemKey);
-	ElsIf Not StrCompare("Barcode", LoadType) Then
+	
+	If "Barcode" = LoadType Then
 		Barcode = GetColumnInfo();
 		Barcode.Type = New TypeDescription(Metadata.DefinedTypes.typeBarcode.Type);
 		Barcode.Name = Metadata.InformationRegisters.Barcodes.Dimensions.Barcode.Synonym;
 		Barcode.Size = 20;
 		Columns.Insert("Barcode", Barcode);
+		
+	ElsIf "SerialLotNumber" = LoadType Then
+		Item = GetColumnInfo();
+		Item.Type = New TypeDescription("String");
+		Item.Name = Metadata.Catalogs.SerialLotNumbers.Synonym;
+		Item.Size = 30;
+		Columns.Insert("SerialLotNumber", Item);
+		
+	ElsIf "ItemKey" = LoadType Then
+		Item = GetColumnInfo();
+		Item.Type = New TypeDescription("String");
+		Item.Name = Metadata.Catalogs.Items.Synonym;
+		Item.Size = 20;
+		Columns.Insert("Item", Item);
+		
+		ItemKey = GetColumnInfo();
+		ItemKey.Type = New TypeDescription("String");
+		ItemKey.Name = Metadata.Catalogs.ItemKeys.Synonym;
+		ItemKey.Size = 20;
+		Columns.Insert("ItemKey", ItemKey);
 	EndIf;
 	
 	Quantity = GetColumnInfo();
@@ -160,8 +274,21 @@ Function GetColumnList()
 	Quantity.Name = Metadata.Documents.SalesInvoice.TabularSections.ItemList.Attributes.Quantity.Synonym;
 	Quantity.Size = 20;
 	Columns.Insert("Quantity", Quantity);
+	
+	FieldsForLoadData = ThisObject["AdditionalFields"]; // Structure
+	For Each FieldForLoad In FieldsForLoadData Do
+		FieldDescription = FieldForLoad.Value; // See GetAddFieldDescription
+		If FieldDescription.toShow Then
+			NewField = GetColumnInfo();
+			NewField.Type = FieldDescription.Type;
+			NewField.Name = FieldDescription.Synonym;
+			NewField.Size = 20;
+			Columns.Insert(FieldDescription.Name, NewField);
+		EndIf;
+	EndDo;
 		
-	Return Columns
+	Return Columns;
+	
 EndFunction
 
 // Get column info.
@@ -180,6 +307,59 @@ Function GetColumnInfo()
 	Return Info;
 EndFunction
 
+// Get add field description.
+// 
+// Returns:
+//  Structure - Get additional field description:
+//	* Name - String -
+//	* Synonym - String -
+//	* Type - TypeDescription, Undefined -
+//	* toShow - Boolean -
+&AtClientAtServerNoContext
+Function GetAddFieldDescription()
+	
+	Result = New Structure;
+	
+	Result.Insert("Name", "");
+	Result.Insert("Synonym", "");
+	Result.Insert("Type", Undefined);
+	Result.Insert("toShow", False);
+	
+	Return Result; 
+	
+EndFunction
+
+&AtServer
+Function GetTemplateData() 
+	
+	Result = New Array(); // Array of Structure
+	Columns = GetColumnList();
+	
+	MainColumn = ?(LoadType = "ItemKey", 2, 1);
+	
+	For RowIndex = 3 To ThisObject.TemplateSpreadsheet.TableHeight Do
+		If IsBlankString(GetAreaText(ThisObject.TemplateSpreadsheet, RowIndex, MainColumn)) Then
+			ErrorTemplate = "";
+			R().Property("Error_010", ErrorTemplate);
+			ErrorText = StrTemplate(ErrorTemplate, GetAreaText(ThisObject.TemplateSpreadsheet, 2, MainColumn));
+			FillError(RowIndex, MainColumn, ErrorText);
+			Continue;
+		EndIf;
+		NewRecord = New Structure;
+		NewRecord.Insert("Index", RowIndex - 2);
+		For ColumnIndex = 1 To ThisObject.TemplateSpreadsheet.TableWidth Do
+			ColumnKey = GetAreaText(ThisObject.TemplateSpreadsheet, 1, ColumnIndex); // String
+			ColumnInfo = Columns[ColumnKey]; // See GetColumnInfo
+			CellValue = GetCellValue(ColumnInfo.Type, ThisObject.TemplateSpreadsheet, RowIndex, ColumnIndex);
+			NewRecord.Insert(ColumnKey, CellValue); 
+		EndDo;
+		Result.Add(NewRecord);
+	EndDo;
+	
+	Return Result;
+	
+EndFunction
+
 #EndRegion
 
 #Region FillResult
@@ -189,42 +369,46 @@ Procedure FillResult()
 	If Not isTemplateChanged Then
 		Return;
 	EndIf;
-	ErrorList.Clear();
 	FillResultTable();
-	
+	isTemplateChanged = False;
 EndProcedure
 
 &AtServer
 Procedure FillResultTable()
 	
+	ClearAllErrors();
+	
 	ItemTable = GetItemTable();
-	ResultStore = PutToTempStorage(ItemTable, OwnerUUID);	
+	If ErrorList.Count() > 0 Then
+		Return;
+	EndIf;
+	ResultStore = PutToTempStorage(ItemTable, OwnerUUID);
+	
+	ChangePage(Items);
+	ResultSpreadsheet = New SpreadsheetDocument();
+	
 	Index = 0;
-	
-	Result = New SpreadsheetDocument();
-	
 	For Each Column In ItemTable.Columns Do
 		Index = Index + 1;
-		//@skip-check invocation-parameter-type-intersect
-		Area = Result.Area(1, Index);
+		
+		Area = ResultSpreadsheet.Area(1, Index);
 		Area.ContainsValue = True;
 		Area.ValueType = New TypeDescription("String");
 		Area.Value = Column.Name;
 		
-		//@skip-check invocation-parameter-type-intersect
-		Area = Result.Area(2, Index);
+		Area = ResultSpreadsheet.Area(2, Index);
 		Area.Text = Column.Title;
 		Area.ColumnWidth = Column.Width;
 		Area.BackColor = WebColors.Beige;
 		Area.Font = StyleFonts.LargeTextFont;
 		Area.HorizontalAlign = HorizontalAlign.Center;
 		Area.Protection = True;
-		
 	EndDo;
-	Result.Area("R1").Visible = False;
-	Result.FixedTop = HeadersRows;
+	
+	ResultSpreadsheet.Area("R1").Visible = False;
+	ResultSpreadsheet.FixedTop = HeadersRows;
 
-	ImageNumber = GetColumnNumber("Image", Result);
+	ImageNumber = GetColumnNumber("Image", ResultSpreadsheet);
 
 	AreaToFill = GetResultRow(ItemTable);
 	PictureMap = New Map;
@@ -243,13 +427,11 @@ Procedure FillResultTable()
 				PictureMap.Insert(Row.Image, PictureData);
 			EndIf;
 			
-			//@skip-check invocation-parameter-type-intersect
 			AreaToFill.Area(1, ImageNumber).Picture = PictureData;
-			//@skip-check invocation-parameter-type-intersect
 			AreaToFill.Area(1, ImageNumber).PictureSize = PictureSize.Proportionally;
 		EndIf;
 		
-		Result.Put(AreaToFill);
+		ResultSpreadsheet.Put(AreaToFill);
 	EndDo;
 	
 	HideResultColumn(ItemTable);
@@ -260,25 +442,58 @@ EndProcedure
 
 &AtServer
 Function GetItemTable()
-	If Not StrCompare("Barcode", LoadType) Then
-		BarcodeNumber = GetColumnNumber("Barcode", Template);
-		BarcodeArray = GetColumnArray(BarcodeNumber, Template); // Array of String
-		
-		QuantityNumber = GetColumnNumber("Quantity", Template);
-		QuantityArray = GetColumnArray(QuantityNumber, Template); // Array of String
-		
+	
+	ItemTable = New ValueTable();
+	
+	TemplateData = GetTemplateData();
+	If ErrorList.Count() > 0 Then
+		Return ItemTable;
+	EndIf;
+	
+	If LoadType = "Barcode" Then
 		BarcodeTable = BarcodeServer.GetBarcodeTable();
-		For Index = 0 To BarcodeArray.UBound() Do
+		For Each TableRow In TemplateData Do
 			NewRow = BarcodeTable.Add();
-			NewRow.Key = String(Index);
-			NewRow.Barcode = BarcodeArray[Index];
-			Quantity = QuantityArray[Index];
-			NewRow.Quantity = ?(IsBlankString(Quantity), 1, Number(Quantity));
+			TableRow = TableRow; // Structure
+			NewRow.Key = String(TableRow["Index"]);
+			FillPropertyValues(NewRow, TableRow);
+			NewRow.Quantity = ?(NewRow.Quantity = 0, 1, NewRow.Quantity);
 		EndDo;
 		ItemTable = GetItemInfo.ByBarcodeTable(BarcodeTable);
+	
+	ElsIf LoadType = "SerialLotNumber" Then
+		
+		
+	ElsIf LoadType = "ItemKey" Then
+		
+		
+	EndIf;
+	
+	NewFields = New Array; // Array of String
+	ThereAreAdditionalFields = False;
+	FieldsForLoadData = ThisObject["AdditionalFields"]; // Structure
+	For Each FieldForLoad In FieldsForLoadData Do
+		FieldDescription = FieldForLoad.Value; // See GetAddFieldDescription
+		If FieldDescription.toShow Then
+			ItemTable.Columns.Add(FieldDescription.Name, FieldDescription.Type, FieldDescription.Synonym, 20);
+			ThereAreAdditionalFields = True;
+			NewFields.Add(FieldDescription.Name);
+		EndIf;
+	EndDo;
+	
+	If ThereAreAdditionalFields Then
+		NewFieldsString = StrConcat(NewFields, ",");
+		For Each TableRow In TemplateData Do
+			RowKey = String(TableRow["Index"]);
+			ItemTableRows = ItemTable.FindRows(New Structure("Key", RowKey));
+			For Each ItemTableRow In ItemTableRows Do
+				FillPropertyValues(ItemTableRow, TableRow, NewFieldsString);
+			EndDo;
+		EndDo;
 	EndIf;
 	
 	Return ItemTable;
+	
 EndFunction
 
 &AtServer
@@ -287,79 +502,74 @@ Procedure HideResultColumn(ItemTable)
 	Index = 0;
 	For Each Column In ItemTable.Columns Do
 		Index = Index + 1;
-		//@skip-check invocation-parameter-type-intersect
 		If Column.Name = "Key" Then
-			Result.Area("C" + Index).Visible = False;
+			ResultSpreadsheet.Area("C" + Index).Visible = False;
 		ElsIf Column.Name = "hasSpecification" Then
-			Result.Area("C" + Index).Visible = False;
+			ResultSpreadsheet.Area("C" + Index).Visible = False;
 		ElsIf Column.Name = "UseSerialLotNumber" Then
-			Result.Area("C" + Index).Visible = False;
+			ResultSpreadsheet.Area("C" + Index).Visible = False;
 		ElsIf Column.Name = "SerialLotNumber" Then
 			Table = ItemTable.Copy(, "UseSerialLotNumber");
 			Table.GroupBy("UseSerialLotNumber");
 			If Table.Count() = 1 And Not Table[0].UseSerialLotNumber Then
-				Result.Area("C" + Index).Visible = False;
+				ResultSpreadsheet.Area("C" + Index).Visible = False;
 			Else	
-				Result.Area("C" + Index).Visible = True;
+				ResultSpreadsheet.Area("C" + Index).Visible = True;
 			EndIf;
 		ElsIf Column.Name = "Barcode" Then
-			Result.Area("C" + Index).HorizontalAlign = HorizontalAlign.Center;
+			ResultSpreadsheet.Area("C" + Index).HorizontalAlign = HorizontalAlign.Center;
 		EndIf;
 	EndDo;
-	
 	
 EndProcedure
 
 &AtServer
 Procedure CheckResultTable(Row = 0)
 	
-	BarcodeNumber = GetColumnNumber("Barcode", Result);
-	ItemNumber = GetColumnNumber("Item", Result);
-	ItemKeyNumber = GetColumnNumber("ItemKey", Result);
+	BarcodeNumber = GetColumnNumber("Barcode", ResultSpreadsheet);
+	ItemNumber = GetColumnNumber("Item", ResultSpreadsheet);
+	ItemKeyNumber = GetColumnNumber("ItemKey", ResultSpreadsheet);
 	
-	UseSerialLotNumber = GetColumnNumber("UseSerialLotNumber", Result);
-	SerialLotNumber = GetColumnNumber("SerialLotNumber", Result);
+	UseSerialLotNumber = GetColumnNumber("UseSerialLotNumber", ResultSpreadsheet);
+	SerialLotNumber = GetColumnNumber("SerialLotNumber", ResultSpreadsheet);
 	
-	For Index = HeadersRows + 1 To Result.TableHeight Do
+	ErrorNotFilled = "";
+	R().Property("S_027", ErrorNotFilled);
+	
+	ErrorWrongFilled = "";
+	R().Property("Error_108", ErrorWrongFilled);
+	
+	For Index = HeadersRows + 1 To ResultSpreadsheet.TableHeight Do
 		If Row Then
 			Index = Row;
 			ClearRowError(Row);
 		EndIf;
 		
-		Barcode = GetArea(Result, Index, BarcodeNumber).Value; // String
+		Barcode = GetArea(ResultSpreadsheet, Index, BarcodeNumber).Value; // String
 		If Not IsBlankString(Barcode) Then
-			Item = GetArea(Result, Index, ItemNumber).Value; // CatalogRef.Items
+			Item = GetArea(ResultSpreadsheet, Index, ItemNumber).Value; // CatalogRef.Items
 			If Item.IsEmpty() Then
-				//@skip-check statement-type-change
-				GetArea(Result, Index, ItemNumber).Comment.Text = R().S_027;
-				FillError(Index, ItemNumber, R().S_027);
+				FillError(Index, ItemNumber, ErrorNotFilled);
 			EndIf;
 			
-			ItemKey = GetArea(Result, Index, ItemKeyNumber).Value; // CatalogRef.ItemKeys
+			ItemKey = GetArea(ResultSpreadsheet, Index, ItemKeyNumber).Value; // CatalogRef.ItemKeys
 			If ItemKey.IsEmpty() Then
-				//@skip-check statement-type-change
-				GetArea(Result, Index, ItemKeyNumber).Comment.Text = R().S_027;
-				FillError(Index, ItemKeyNumber, R().S_027);
+				FillError(Index, ItemKeyNumber, ErrorNotFilled);
 			EndIf;
 		EndIf;
 		
-		UseSerialLot = GetArea(Result, Index, UseSerialLotNumber).Value; // Boolean
-		SerialLot = GetArea(Result, Index, SerialLotNumber).Value; // CatalogRef.SerialLotNumbers
+		UseSerialLot = GetArea(ResultSpreadsheet, Index, UseSerialLotNumber).Value; // Boolean
+		SerialLot = GetArea(ResultSpreadsheet, Index, SerialLotNumber).Value; // CatalogRef.SerialLotNumbers
 		If UseSerialLot And SerialLot.IsEmpty() Then
-			//@skip-check statement-type-change
-			GetArea(Result, Index, SerialLotNumber).Comment.Text = R().S_027;
-			FillError(Index, SerialLotNumber, R().S_027);
+			FillError(Index, SerialLotNumber, ErrorNotFilled);
 		ElsIf Not UseSerialLot And Not SerialLot.IsEmpty() Then
-			//@skip-check statement-type-change
-			GetArea(Result, Index, SerialLotNumber).Comment.Text = R().Error_108;
-			FillError(Index, SerialLotNumber, R().Error_108);
+			FillError(Index, SerialLotNumber, ErrorWrongFilled);
 		EndIf;
 		
 		If Row Then
 			Break;
 		EndIf;
 	EndDo;
-	
 	
 EndProcedure
 
@@ -370,11 +580,21 @@ Procedure ErrorListOnActivateRow(Item)
 		Return;
 	EndIf;
 	
-	Array = New Array;
-	//@skip-check invocation-parameter-type-intersect
-	Array.Add(Result.Area(Items.ErrorList.CurrentData.Row, Items.ErrorList.CurrentData.Column));
-	Items.Result.SetSelectedAreas(Array);
-	CurrentItem = Items.Result;
+	If Items.PagesMain.CurrentPage = Items.PageTemplate Then
+		CurrentSpreadsheet = ThisObject.TemplateSpreadsheet;
+		CurrentSpreadsheetItem = Items.Template;
+	Else
+		CurrentSpreadsheet = ThisObject.ResultSpreadsheet;
+		CurrentSpreadsheetItem = Items.Result;
+	EndIf;
+	
+	Array = New Array; // Array of SpreadsheetDocumentRange
+	ResultArea = CurrentSpreadsheet.Area(Items.ErrorList.CurrentData.Row, Items.ErrorList.CurrentData.Column);
+	Array.Add(ResultArea);
+	
+	CurrentSpreadsheetItem.SetSelectedAreas(Array);
+	CurrentItem = CurrentSpreadsheetItem;
+	
 EndProcedure
 
 // Fill error.
@@ -382,16 +602,19 @@ EndProcedure
 // Parameters:
 //  Row - Number - Row
 //  Column - Number - Column
-//  Text - String - Text
+//  ErrorText - String - Text
 &AtServer
-Procedure FillError(Row, Column, Text)
+Procedure FillError(Row, Column, ErrorText)
+	
+	CurrentSpreadsheet = ?(Items.PagesMain.CurrentPage = Items.PageTemplate, TemplateSpreadsheet, ResultSpreadsheet);
+	GetArea(CurrentSpreadsheet, Row, Column).Comment.Text = ErrorText;	
 	
 	NewRow = ErrorList.Add();
 	NewRow.Row = Row;
 	NewRow.Column = Column;
-	NewRow.ErrorText = Text;
-	
+	NewRow.ErrorText = ErrorText;
 	ErrorList.Sort("Row, Column");
+	
 EndProcedure
 
 &AtServer
@@ -402,8 +625,27 @@ Procedure ClearRowError(Row)
 		ErrorList.Delete(RowInList);
 	EndDo;
 	
-	For Index = 1 To Result.TableWidth Do
-		GetArea(Result, Row, Index).Comment.Text = "";
+	For Index = 1 To ResultSpreadsheet.TableWidth Do
+		GetArea(ResultSpreadsheet, Row, Index).Comment.Text = "";
+	EndDo;
+	
+EndProcedure
+
+&AtServer
+Procedure ClearAllErrors()
+	
+	ErrorList.Clear();
+	
+	For IndexRow = 1 To TemplateSpreadsheet.TableHeight Do
+		For IndexColumn = 1 To TemplateSpreadsheet.TableWidth Do
+			GetArea(TemplateSpreadsheet, IndexRow, IndexColumn).Comment.Text = "";
+		EndDo;
+	EndDo;
+	
+	For IndexRow = 1 To ResultSpreadsheet.TableHeight Do
+		For IndexColumn = 1 To ResultSpreadsheet.TableWidth Do
+			GetArea(ResultSpreadsheet, IndexRow, IndexColumn).Comment.Text = "";
+		EndDo;
 	EndDo;
 	
 EndProcedure
@@ -422,10 +664,52 @@ EndProcedure
 // 
 // Returns:
 //  SpreadsheetDocumentRange - Get area
-&AtServer
+&AtClientAtServerNoContext
 Function GetArea(SprSheet, Row, Column)
-	//@skip-check invocation-parameter-type-intersect		
 	Return SprSheet.Area(Row, Column);
+EndFunction
+
+// Get area text.
+// 
+// Parameters:
+//  SprSheet - SpreadsheetDocument - Spr sheet
+//  Row - Number - Row
+//  Column - Number - Column
+//  FullText - Boolean - Full text
+// 
+// Returns:
+//  String - Get area text
+&AtClientAtServerNoContext
+Function GetAreaText(SprSheet, Row, Column, FullText = False)
+	SheetArea = GetArea(SprSheet, Row, Column);
+	If FullText Then
+		Return SheetArea.Text;
+	EndIf;
+	Return TrimAll(SheetArea.Text);
+EndFunction
+
+// Get cell value.
+// 
+// Parameters:
+//  TypeValue - TypeDescription - Type value
+//  SprSheet - SpreadsheetDocument - Spreadsheet
+//  RowIndex - Number - Row index
+//  ColumnIndex - Number - Column index
+// 
+// Returns:
+//  Arbitrary - Get cell value
+&AtServer
+Function GetCellValue(TypeValue, SprSheet, RowIndex, ColumnIndex)
+	CellText = GetAreaText(SprSheet, RowIndex, ColumnIndex); // String
+	Try
+		Return TypeValue.AdjustValue(CellText);
+	Except
+		ErrorTemplate = "";
+		R().Property("LDT_Button_FailReading", ErrorTemplate);
+		ErrorText = StrTemplate(ErrorTemplate, CellText);
+		FillError(RowIndex, ColumnIndex, ErrorText);
+		Return TypeValue.AdjustValue();
+	EndTry;
 EndFunction
 
 &AtServer
@@ -435,7 +719,6 @@ Function GetResultRow(ItemTable)
 	Index = 0;
 	For Each Column In ItemTable.Columns Do
 		Index = Index + 1;
-		//@skip-check invocation-parameter-type-intersect
 		Area = TmpSP.Area(1, Index);
 		Area.ContainsValue = True;
 		Area.ValueType = Column.ValueType;
@@ -444,7 +727,6 @@ Function GetResultRow(ItemTable)
 		Area.Indent = 1;
 	EndDo;
 	
-	//@skip-check invocation-parameter-type-intersect
 	Area = TmpSP.Area(1, 1, 1, ItemTable.Columns.Count());
 	Area.Name = "Row";
 	Return TmpSP.GetArea("Row");
@@ -453,42 +735,19 @@ EndFunction
 
 #EndRegion
 
-#Region ChangePages
-
-&AtClient
-Procedure SetPage(Index)
-	
-	StepNumber = StepNumber + Index;
-	
-	Items.FormBack.Visible = StepNumber > 0;
-	Items.ClearTemplate.Visible = StepNumber = 0;
-	
-	PageLimit = 2;
-	If StepNumber > PageLimit Then
-		StepNumber = PageLimit;
-	EndIf;
-	
-	If StepNumber = 0 Then
-		Items.PagesMain.CurrentPage = Items.PageTemplate;
-	ElsIf StepNumber = 1 Then
-		Items.PagesMain.CurrentPage = Items.PageResult;
-		
-		FillResult();
-		isTemplateChanged = False;		
-	ElsIf StepNumber = 2 Then
-		Close(ResultStore);
-	EndIf;
-	
-EndProcedure
-
-#EndRegion
-
 #Region SpreadSheet
 
+// Get column number.
+// 
+// Parameters:
+//  Name - String - Name
+//  SprSheet - SpreadsheetDocument - Spr sheet
+// 
+// Returns:
+//  Number - Get column number
 &AtServer
 Function GetColumnNumber(Name, SprSheet)
 	For Index = 1 To SprSheet.TableWidth Do
-		//@skip-check invocation-parameter-type-intersect
 		Area = SprSheet.Area(1, Index);
 		If Area.Text = Name Then
 			Return Index;
@@ -497,17 +756,6 @@ Function GetColumnNumber(Name, SprSheet)
 	Return 0;
 EndFunction
 
-&AtServer
-Function GetColumnArray(ColumnNumber, SprSheet)
-	Array = New Array;
-	For Index = HeadersRows + 1 To SprSheet.TableHeight Do
-		//@skip-check invocation-parameter-type-intersect
-		Area = SprSheet.Area(Index, ColumnNumber);
-		Text = Area.Text;
-		Array.Add(TrimAll(Text));
-	EndDo;
-	Return Array;
-EndFunction
 #EndRegion
 
 #EndRegion

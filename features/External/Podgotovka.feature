@@ -191,8 +191,7 @@ Scenario: check load data form in the document
 	* Open load date form	
 		And in the table "ItemList" I click "Load data from table" button
 		Then "Load data from table" window is opened
-		And I click "Show images" button
-		Then "Load data from table" window is opened
+		And I set checkbox "Show or hide image"
 	* Add barcodes
 		And in "Template" spreadsheet document I move to "R3C1" cell
 		And in "Template" spreadsheet document I double-click the current cell
@@ -234,7 +233,6 @@ Scenario: check load data form in the document
 		And in "Template" spreadsheet document I move to "R7C2" cell
 		And in "Template" spreadsheet document I input text "5"
 	* Check
-		And I click "Show images" button
 		And I click "Next" button
 		Then "Template" spreadsheet document is equal
 			| 'Barcode'           | 'Quantity' |
@@ -248,11 +246,11 @@ Scenario: check load data form in the document
 		Then "Result" spreadsheet document is equal by template
 			| 'Key' | 'Image'                                    | 'ItemType'                                    | 'Item'               | 'ItemKey'   | 'SerialLotNumber'         | 'Unit'       | 'hasSpecification' | 'UseSerialLotNumber'    | 'Quantity' | 'Barcode'           |
 			| 'Key' | ''                                         | 'Item types'                                  | 'Items'              | 'Item keys' | 'Item serial/lot numbers' | 'Item units' | 'Item types'       | 'Use serial lot number' | 'Quantity' | 'Barcode'           |
-			| '0'   | 'f82457a7c91f5d12beec5826930cb235blue.jpg' | 'Clothes'                                     | 'Dress'              | 'XS/Blue'   | ''                        | 'pcs'        | '*'                | '*'                     | '1,000'    | '2202283705'        |
-			| '1'   | ''                                         | 'With serial lot numbers (use stock control)' | 'Product 1 with SLN' | 'ODS'       | ''                        | 'pcs'        | '*'                | '*'                     | '2,000'    | '67789997777801'    |
-			| '2'   | ''                                         | 'With serial lot numbers (use stock control)' | 'Product 1 with SLN' | 'PZU'       | '8908899877'              | 'pcs'        | '*'                | '*'                     | '1,000'    | '23455677788976667' |
-			| '3'   | ''                                         | ''                                            | ''                   | ''          | ''                        | ''           | '*'                | '*'                     | '1,000'    | '234500000'         |
-			| '4'   | 'f82457a7c91f5d12beec5826930cb235blue.jpg' | 'Clothes'                                     | 'Dress'              | 'XS/Blue'   | ''                        | 'pcs'        | '*'                | '*'                     | '5,000'    | '2202283705'        |
+			| '1'   | 'f82457a7c91f5d12beec5826930cb235blue.jpg' | 'Clothes'                                     | 'Dress'              | 'XS/Blue'   | ''                        | 'pcs'        | '*'                | '*'                     | '1,000'    | '2202283705'        |
+			| '2'   | ''                                         | 'With serial lot numbers (use stock control)' | 'Product 1 with SLN' | 'ODS'       | ''                        | 'pcs'        | '*'                | '*'                     | '2,000'    | '67789997777801'    |
+			| '3'   | ''                                         | 'With serial lot numbers (use stock control)' | 'Product 1 with SLN' | 'PZU'       | '8908899877'              | 'pcs'        | '*'                | '*'                     | '1,000'    | '23455677788976667' |
+			| '4'   | ''                                         | ''                                            | ''                   | ''          | ''                        | ''           | '*'                | '*'                     | '1,000'    | '234500000'         |
+			| '5'   | 'f82457a7c91f5d12beec5826930cb235blue.jpg' | 'Clothes'                                     | 'Dress'              | 'XS/Blue'   | ''                        | 'pcs'        | '*'                | '*'                     | '5,000'    | '2202283705'        |
 		And "ErrorList" table became equal
 			| 'Row' | 'Column' | 'Error text'   |
 			| '4'   | '6'      | '[Not filled]' |

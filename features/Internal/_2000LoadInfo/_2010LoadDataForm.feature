@@ -99,6 +99,22 @@ Scenario: _020110 load data in the SI
 			| '2' | 'Basic Price Types' | 'Product 1 with SLN' | 'ODS'      | ''                   | 'No'                 | ''           | 'pcs'  | ''                             | '2,000'    | ''       | '18%' | ''              | ''           | ''             | 'No'                         | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            | ''             | ''             |
 			| '3' | 'Basic Price Types' | 'Product 1 with SLN' | 'PZU'      | ''                   | 'No'                 | ''           | 'pcs'  | '8908899877'                   | '1,000'    | ''       | '18%' | ''              | ''           | ''             | 'No'                         | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            | ''             | ''             |
 			| '4' | 'Basic Price Types' | 'Dress'              | 'S/Yellow' | ''                   | 'No'                 | '251,69'     | 'pcs'  | ''                             | '3,000'    | '550,00' | '18%' | ''              | '1 398,31'   | '1 650,00'     | 'No'                         | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            | ''             | ''             |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Delivery date"
+		And I set checkbox "Detail"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "ShowOrHideImage" became equal to "No"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		Then the form attribute named "Field_DeliveryDate" became equal to "Yes"
+		Then the form attribute named "Field_Detail" became equal to "Yes"			
 		And I close all client application windows
 		
 		
@@ -124,6 +140,17 @@ Scenario: _020112 load data in the Physical inventory
 			| '2' | ''           | 'Product 1 with SLN' | 'ODS'      | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
 			| '3' | ''           | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
 			| '4' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |		
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Manual fixed count"
+		And I set checkbox "Exp. count"
+		And I click "Next" button	
+		Then the form attribute named "Field_ExpCount" became equal to "Yes"
+		Then the form attribute named "Field_PhysCount" became equal to "No"
+		Then the form attribute named "Field_ManualFixedCount" became equal to "Yes"
+		Then the form attribute named "Field_Difference" became equal to "No"
+		Then the form attribute named "Field_Description" became equal to "No"
 		And I close all client application windows	
 
 Scenario: _020113 load data in the Bundling
@@ -237,6 +264,13 @@ Scenario: _020118 load data in the Physical count by location
 			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'       |
 			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'       |
 			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'       |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Date"
+		And I click "Next" button	
+		Then the form attribute named "Field_Date" became equal to "Yes"
+		Then the form attribute named "Field_PhysCount" became equal to "No"
 		And I close all client application windows			
 
 Scenario: _020119 load data in the Purchase invoice
@@ -253,6 +287,21 @@ Scenario: _020119 load data in the Purchase invoice
 			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
 			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
 			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Delivery date"
+		And I set checkbox "Detail"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		Then the form attribute named "Field_DeliveryDate" became equal to "Yes"
+		Then the form attribute named "Field_Detail" became equal to "Yes"
 		And I close all client application windows
 
 Scenario: _020120 load data in the Purchase order
@@ -269,6 +318,21 @@ Scenario: _020120 load data in the Purchase order
 			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
 			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
 			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Delivery date"
+		And I set checkbox "Detail"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		Then the form attribute named "Field_DeliveryDate" became equal to "Yes"
+		Then the form attribute named "Field_Detail" became equal to "Yes"
 		And I close all client application windows
 						
 Scenario: _020121 load data in the Purchase order closing
@@ -285,6 +349,20 @@ Scenario: _020121 load data in the Purchase order closing
 			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
 			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
 			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Detail"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		Then the form attribute named "Field_DeliveryDate" became equal to "No"
+		Then the form attribute named "Field_Detail" became equal to "Yes"
 		And I close all client application windows
 
 Scenario: _020122 load data in the Purchase return
@@ -301,6 +379,19 @@ Scenario: _020122 load data in the Purchase return
 			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
 			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
 			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Detail"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		Then the form attribute named "Field_Detail" became equal to "Yes"
 		And I close all client application windows
 
 Scenario: _020123 load data in the Purchase return order
@@ -317,6 +408,17 @@ Scenario: _020123 load data in the Purchase return order
 			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
 			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
 			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
 		And I close all client application windows
 
 Scenario: _020124 load data in the Retail return receipt
@@ -333,6 +435,19 @@ Scenario: _020124 load data in the Retail return receipt
 			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
 			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
 			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Total amount"
+		And I set checkbox "Detail"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "No"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "Yes"
+		Then the form attribute named "Field_Detail" became equal to "Yes"
 		And I close all client application windows
 		
 Scenario: _020125 load data in the Retail sales receipt
@@ -349,6 +464,19 @@ Scenario: _020125 load data in the Retail sales receipt
 			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
 			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
 			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Detail"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		Then the form attribute named "Field_Detail" became equal to "Yes"
 		And I close all client application windows	
 
 Scenario: _020126 load data in the Sales order
@@ -365,6 +493,21 @@ Scenario: _020126 load data in the Sales order
 			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
 			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
 			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Detail"
+		And I set checkbox "Total amount"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "Yes"
+		Then the form attribute named "Field_DeliveryDate" became equal to "No"
+		Then the form attribute named "Field_Detail" became equal to "Yes"
 		And I close all client application windows		
 
 Scenario: _020127 load data in the Sales order closing
@@ -381,6 +524,20 @@ Scenario: _020127 load data in the Sales order closing
 			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
 			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
 			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Detail"
+		And I set checkbox "Total amount"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "Yes"
+		Then the form attribute named "Field_Detail" became equal to "Yes"
 		And I close all client application windows		
 
 Scenario: _020128 load data in the Sales report from trade agent
@@ -397,6 +554,20 @@ Scenario: _020128 load data in the Sales report from trade agent
 			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
 			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
 			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Consignor price"
+		And I set checkbox "Price"
+		Then the form attribute named "Field_ConsignorPrice" became equal to "Yes"
+		Then the form attribute named "Field_TradeAgentFeePercent" became equal to "No"
+		Then the form attribute named "Field_TradeAgentFeeAmount" became equal to "No"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		Then the form attribute named "Field_Detail" became equal to "No"	
+		And I click "Next" button
 		And I close all client application windows	
 
 Scenario: _020129 load data in the Sales report to consignor
@@ -413,12 +584,26 @@ Scenario: _020129 load data in the Sales report to consignor
 			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
 			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
 			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Consignor price"
+		And I set checkbox "Price"
+		And I set checkbox "Total amount"
+		Then the form attribute named "ShowOrHideImage" became equal to "No"
+		Then the form attribute named "Field_ConsignorPrice" became equal to "Yes"
+		Then the form attribute named "Field_TradeAgentFeePercent" became equal to "No"
+		Then the form attribute named "Field_TradeAgentFeeAmount" became equal to "No"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "Yes"			
 		And I close all client application windows	
 
 Scenario: _020130 load data in the Sales return
 		And I close all client application windows
-	* Open Sales report to consignor
-		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
+	* Open Sales return
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I click the button named "FormCreate"
 	* Check load data form
 		When check load data form in the document
@@ -429,7 +614,18 @@ Scenario: _020130 load data in the Sales return
 			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
 			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
 			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
-		And I close all client application windows	
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		And I close all client application windows
 	
 Scenario: _020132 load data in the Sales return order
 		And I close all client application windows
@@ -445,6 +641,17 @@ Scenario: _020132 load data in the Sales return order
 			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
 			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
 			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
 		And I close all client application windows
 
 Scenario: _020133 load data in the Shipment confirmation
@@ -477,6 +684,14 @@ Scenario: _020134 load data in the Stock adjustment as surplus
 			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
 			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
 			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I click "Next" button
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_Amount" became equal to "No"
+		Then the form attribute named "Field_AmountTax" became equal to "No"		
 		And I close all client application windows
 
 Scenario: _020135 load data in the Stock adjustment as write off
@@ -526,6 +741,17 @@ Scenario: _020137 load data in the Work order
 			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
 			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
 			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
 		And I close all client application windows
 
 Scenario: _020138 load data in the Work sheet

@@ -232,7 +232,7 @@
       </extendedTooltip>
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
-        <group>HorizontalIfPossible</group>
+        <group>Vertical</group>
         <behavior>Auto</behavior>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>

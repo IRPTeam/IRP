@@ -414,16 +414,13 @@ Async Function PrintTextDocument(ConsolidatedRetailSales, DataSource) Export
 	
 	Parameters = ReceiptSettings();	
 	XMLOperationSettings = PrintTextGetXMLOperationSettings(DataSource);
-	If Not XMLOperationSettings.FiscalStrings.Count() Then
+	If Not XMLOperationSettings.TextStrings.Count() Then
 		Result.Success = True;
 		Return Result;
 	EndIf;
 	
 	Parameters.ParametersXML = PrintTextGetXMLOperation(XMLOperationSettings);
 	
-	ResultInfo = Settings.ConnectedDriver.DriverObject.PrintTextDocument(Settings.ConnectedDriver.ID
-																	, Parameters.ParametersXML);
-																	
 	ResultInfo = Settings.ConnectedDriver.DriverObject.PrintTextDocument(Settings.ConnectedDriver.ID
 																	, Parameters.ParametersXML);
 																	

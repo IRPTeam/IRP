@@ -787,6 +787,8 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	If Not ResultPrint Then
 		Return;
 	EndIf;
+	ResultPrint = Await PrintTextDocument(DocRef);
+	ResultPrint = Await PrintTextDocument(DocRef);
 	DetailedInformation = R().S_030 + ": " + Format(CashbackAmount, "NFD=2; NZ=0;");
 	SetDetailedInfo(DetailedInformation);
 	
@@ -968,6 +970,16 @@ Async Function PrintFiscalReceipt(DocumentRef)
 	
 	EquipmentPrintFiscalReceiptResult = Await EquipmentFiscalPrinterClient.ProcessCheck(Object.ConsolidatedRetailSales, DocumentRef);
 	Return EquipmentPrintFiscalReceiptResult.Success;
+EndFunction
+
+&AtClient
+Async Function PrintTextDocument(DocumentRef)
+	If Object.ConsolidatedRetailSales.IsEmpty() Then
+		Return True;
+	EndIf;
+	
+	EquipmentPrintResult = Await EquipmentFiscalPrinterClient.PrintTextDocument(Object.ConsolidatedRetailSales, DocumentRef);
+	Return EquipmentPrintResult.Success;
 EndFunction
 
 &AtServer

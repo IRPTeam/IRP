@@ -187,6 +187,93 @@ Scenario: filling in Tax settings for company
 	And I click "Save and close" button
 	And I close all client application windows
 
+Scenario: check load data form in the document
+	* Open load date form	
+		And in the table "ItemList" I click "Load data from table" button
+		Then "Load data from table" window is opened
+		And I set checkbox "Show or hide image"
+	* Add barcodes
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2202283705"
+		And in "Template" spreadsheet document I move to "R4C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "67789997777801"
+		And in "Template" spreadsheet document I move to "R4C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2"
+		And I click "Next" button
+	* Check
+		// Given in "Result" Spreadsheet document and "LoadDataWithPicture" template contain the same pictures
+		Given "Result" spreadsheet document is equal to "LoadDataWithPicture" by template
+	* Add barcode with serial lot number
+		And I click "Back" button
+		And Delay 5
+		And in "Template" spreadsheet document I move to "R5C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "23455677788976667"
+		And Delay 5
+		And in "Template" spreadsheet document I move to "R5C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "23455677788976667"
+	* Add wrong barcode
+		And Delay 5
+		And in "Template" spreadsheet document I move to "R6C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "234500000"
+		And Delay 5
+		And in "Template" spreadsheet document I move to "R6C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "234500000"
+		And Delay 5
+	* Add the same barcode
+		And in "Template" spreadsheet document I move to "R7C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2202283705"
+		And in "Template" spreadsheet document I move to "R7C2" cell
+		And in "Template" spreadsheet document I input text "5"
+	* Check
+		And I click "Next" button
+		Then "Template" spreadsheet document is equal
+			| 'Barcode'           | 'Quantity' |
+			| 'Barcode'           | 'Quantity' |
+			| '2202283705'        | ''         |
+			| '67789997777801'    | '2'        |
+			| '23455677788976667' | ''         |
+			| '234500000'         | ''         |
+			| '2202283705'        | '5'        |
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then "Result" spreadsheet document is equal by template
+			| 'Key' | 'Image'                                    | 'ItemType'                                    | 'Item'               | 'ItemKey'   | 'SerialLotNumber'         | 'Unit'       | 'hasSpecification' | 'UseSerialLotNumber'    | 'Quantity' | 'Barcode'           |
+			| 'Key' | ''                                         | 'Item types'                                  | 'Items'              | 'Item keys' | 'Item serial/lot numbers' | 'Item units' | 'Item types'       | 'Use serial lot number' | 'Quantity' | 'Barcode'           |
+			| '1'   | 'f82457a7c91f5d12beec5826930cb235blue.jpg' | 'Clothes'                                     | 'Dress'              | 'XS/Blue'   | ''                        | 'pcs'        | '*'                | '*'                     | '1,000'    | '2202283705'        |
+			| '2'   | ''                                         | 'With serial lot numbers (use stock control)' | 'Product 1 with SLN' | 'ODS'       | ''                        | 'pcs'        | '*'                | '*'                     | '2,000'    | '67789997777801'    |
+			| '3'   | ''                                         | 'With serial lot numbers (use stock control)' | 'Product 1 with SLN' | 'PZU'       | '8908899877'              | 'pcs'        | '*'                | '*'                     | '1,000'    | '23455677788976667' |
+			| '4'   | ''                                         | ''                                            | ''                   | ''          | ''                        | ''           | '*'                | '*'                     | '1,000'    | '234500000'         |
+			| '5'   | 'f82457a7c91f5d12beec5826930cb235blue.jpg' | 'Clothes'                                     | 'Dress'              | 'XS/Blue'   | ''                        | 'pcs'        | '*'                | '*'                     | '5,000'    | '2202283705'        |
+		And "ErrorList" table became equal
+			| 'Row' | 'Column' | 'Error text'   |
+			| '4'   | '6'      | '[Not filled]' |
+			| '6'   | '4'      | '[Not filled]' |
+			| '6'   | '5'      | '[Not filled]' |
+	* Fix barcode and check loading
+		And I click "Back" button
+		And Delay 5
+		And in "Template" spreadsheet document I move to "R6C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2202283713"
+		And Delay 5
+		And in "Template" spreadsheet document I move to "R6C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2202283713"
+		And in "Template" spreadsheet document I move to "R6C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "3"
+		And I click "Next" button
+		And I click "Next" button
+
+
+
 Scenario: add Plugin for tax calculation
 		* Opening a form to add Plugin sessing
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"

@@ -903,6 +903,346 @@ Function GetCodeTable() Export
 	Return Table;
 EndFunction
 
+// By serial lot number (string).
+// 
+// Parameters:
+//  SerialLotNumbers - See SerialLotNumbersServer.GetSerialLotNumberTable
+// 
+// Returns:
+//  ValueTable - See GetStandardItemTable
+Function BySerialLotNumberStringTable(SerialLotNumbers) Export
+	StandardItemTable = GetStandardItemTable();
+	
+	Result = SerialLotNumbersServer.SearchBySerialLotNumber_WithKey(SerialLotNumbers);
+	
+	For Each Row In Result Do
+		NewRow = StandardItemTable.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+	
+	Return StandardItemTable;
+EndFunction
+
+// By Item and ItemKeys descriptions.
+// 
+// Parameters:
+//  ItemAndItemKeysDescriptions - See GetItemAndItemKeysDescriptions
+// 
+// Returns:
+//  ValueTable - See GetStandardItemTable
+Function ByItemAndItemKeysDescriptionsTable(ItemAndItemKeysDescriptions) Export
+	StandardItemTable = GetStandardItemTable();
+	
+	Result = SearchByItemAndItemKeysDescriptions_WithKey(ItemAndItemKeysDescriptions);
+	
+	For Each Row In Result Do
+		NewRow = StandardItemTable.Add();
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+	
+	Return StandardItemTable;
+EndFunction
+
+// Get standard item table.
+// 
+// Returns:
+//  ValueTable - Get standard item table:
+// * Key - String -
+// * Quantity - DefinedType.typeQuantity
+// * Item  - CatalogRef.Items -
+// * ItemKey  - CatalogRef.ItemKeys -
+Function GetItemAndItemKeysInputTable() Export
+	
+	Table = New ValueTable();
+	
+	Table.Columns.Add(
+		"Key", 
+		Metadata.DefinedTypes.typeDescription.Type, 
+		"Key", 
+		15);
+		
+	Table.Columns.Add(
+		"Quantity", 
+		Metadata.DefinedTypes.typeQuantity.Type, 
+		Metadata.Documents.SalesInvoice.TabularSections.ItemList.Attributes.Quantity.Synonym, 
+		15);
+		
+	Table.Columns.Add(
+		"Item", 
+		New TypeDescription("CatalogRef.Items"), 
+		Metadata.Catalogs.Items.Synonym, 
+		30);
+		
+	Table.Columns.Add(
+		"ItemKey", 
+		New TypeDescription("CatalogRef.ItemKeys"), 
+		Metadata.Catalogs.ItemKeys.Synonym, 
+		30);
+		
+	Return Table;
+	
+EndFunction
+
+// Search by Item and ItemKeys Code/Description.
+// 
+// Parameters:
+//  GetItemAndItemKeysInputTable - See GetItemAndItemKeysInputTable
+//  AddInfo - Structure
+// 
+// Returns:
+//  ValueTable:
+// * Key - String
+// * Quantity - DefinedType.typeQuantity
+// * Item - CatalogRef.Items -
+// * ItemKey - CatalogRef.ItemKeys -
+// * Unit - CatalogRef.Units -
+// * ItemKeyUnit - CatalogRef.Units -
+// * ItemUnit - CatalogRef.Units -
+// * UseSerialLotNumber - Boolean -
+// * SerialLotNumber - CatalogRef.SerialLotNumbers -
+// * ItemType - CatalogRef.ItemTypes -
+// * hasSpecification - Boolean -
+// * Image - CatalogRef.Files -
+Function SearchByItemAndItemKeysDescriptions_WithKey(GetItemAndItemKeysInputTable, AddInfo = Undefined) Export
+
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ItemAndItemKeysDescriptions.Key AS Key,
+	|	Cast(ItemAndItemKeysDescriptions.ItemKey AS Catalog.ItemKeys) AS ItemKey,
+	|	ItemAndItemKeysDescriptions.Quantity AS Quantity
+	|INTO tmpInput
+	|FROM
+	|	&ItemAndItemKeysDescriptions AS ItemAndItemKeysDescriptions
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpInput.Key AS Key,
+	|	tmpInput.Quantity AS Quantity,
+	|	tmpInput.ItemKey AS ItemKeyRef,
+	|	tmpInput.ItemKey.Item AS ItemRef
+	|INTO tmpMain
+	|FROM
+	|	tmpInput AS tmpInput
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpMain.Key AS Key,
+	|	tmpMain.Quantity AS Quantity,
+	|	tmpMain.ItemRef AS Item,
+	|	tmpMain.ItemKeyRef AS ItemKey,
+	|	CASE
+	|		WHEN tmpMain.ItemKeyRef.Unit = VALUE(Catalog.Units.EmptyRef)
+	|			THEN tmpMain.ItemKeyRef.Item.Unit
+	|		ELSE tmpMain.ItemKeyRef.Unit
+	|	END AS Unit,
+	|	tmpMain.ItemKeyRef.Unit AS ItemKeyUnit,
+	|	tmpMain.ItemRef.Unit AS ItemUnit,
+	|	NOT tmpMain.ItemKeyRef.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
+	|	tmpMain.ItemRef.ItemType AS ItemType,
+	|	tmpMain.ItemRef.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
+	|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber
+	|INTO tmpFullData
+	|FROM
+	|	tmpMain AS tmpMain
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	AttachedFiles.Owner AS Item,
+	|	VALUE(Catalog.ItemKeys.EmptyRef) AS ItemKey,
+	|	MAX(AttachedFiles.File) AS File,
+	|	MIN(AttachedFiles.Priority) AS Priority
+	|INTO Images
+	|FROM
+	|	InformationRegister.AttachedFiles AS AttachedFiles
+	|		INNER JOIN tmpFullData AS MainData
+	|		ON MainData.Item = AttachedFiles.Owner
+	|WHERE
+	|	AttachedFiles.Priority = 0
+	|GROUP BY
+	|	AttachedFiles.Owner,
+	|	VALUE(Catalog.ItemKeys.EmptyRef)
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	AttachedFiles.Owner.Item,
+	|	AttachedFiles.Owner,
+	|	MAX(AttachedFiles.File),
+	|	MIN(AttachedFiles.Priority)
+	|FROM
+	|	InformationRegister.AttachedFiles AS AttachedFiles
+	|		INNER JOIN tmpFullData AS MainData
+	|		ON MainData.ItemKey = AttachedFiles.Owner
+	|WHERE
+	|	AttachedFiles.Priority = 0
+	|GROUP BY
+	|	AttachedFiles.Owner.Item,
+	|	AttachedFiles.Owner
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	MainData.ItemKey AS ItemKey,
+	|	MainData.Item AS Item,
+	|	MainData.SerialLotNumber AS SerialLotNumber,
+	|	MainData.Unit AS Unit,
+	|	MainData.ItemKeyUnit AS ItemKeyUnit,
+	|	MainData.ItemUnit AS ItemUnit,
+	|	MainData.hasSpecification AS hasSpecification,
+	|	MainData.ItemType AS ItemType,
+	|	MainData.UseSerialLotNumber AS UseSerialLotNumber,
+	|	MainData.Key AS Key,
+	|	MainData.Quantity AS Quantity,
+	|	Images.File AS Image
+	|FROM
+	|	tmpFullData AS MainData
+	|		LEFT JOIN Images AS Images
+	|		ON CASE
+	|			WHEN Images.ItemKey = VALUE(Catalog.ItemKeys.EmptyRef)
+	|				THEN MainData.Item = Images.Item
+	|			ELSE MainData.ItemKey = Images.ItemKey
+	|		END";
+	
+	DescriptionLocal = "Description_" + LocalizationReuse.GetLocalizationCode();
+	If Not DescriptionLocal = "Description_en" Then
+		Query.Text = StrReplace(Query.Text, "Description_en", DescriptionLocal);
+	EndIf;
+	
+	Query.SetParameter("ItemAndItemKeysDescriptions", GetItemAndItemKeysInputTable);
+	QueryExecution = Query.Execute();
+	QueryUnload = QueryExecution.Unload();
+	
+	Return QueryUnload;
+
+EndFunction
+
+// Search item by string.
+// 
+// Parameters:
+//  ItemString - String - Item
+// 
+// Returns:
+//  Array of CatalogRef.Items - Search item by string
+Function SearchItemByString(ItemString) Export
+	
+	If IsBlankString(ItemString) Then
+		Return New Array;
+	EndIf;
+	
+	ItemNumber = CommonFunctionsClientServer.GetSearchStringNumber(StrReplace(ItemString, " ", ""));
+	
+	Query = New Query;
+	Query.SetParameter("ItemNumber", ItemNumber);
+	Query.SetParameter("Item", ItemString);
+	
+	Query.Text =
+	"SELECT
+	|	Items.Ref
+	|FROM
+	|	Catalog.Items AS Items
+	|WHERE
+	|	NOT Items.DeletionMark
+	|	AND Items.ItemID = &Item
+	|
+	|UNION
+	|
+	|SELECT
+	|	Items.Ref
+	|FROM
+	|	Catalog.Items AS Items
+	|WHERE
+	|	NOT Items.DeletionMark
+	|	AND Items.Code = &ItemNumber
+	|
+	|UNION
+	|
+	|SELECT
+	|	Items.Ref
+	|FROM
+	|	Catalog.Items AS Items
+	|WHERE
+	|	NOT Items.DeletionMark
+	|	AND Items.Description_en = &Item";
+	
+	DescriptionLocal = "Description_" + LocalizationReuse.GetLocalizationCode();
+	If Not DescriptionLocal = "Description_en" Then
+		Query.Text = StrReplace(Query.Text, "Description_en", DescriptionLocal);
+	EndIf;
+	
+	Return Query.Execute().Unload().UnloadColumn(0);
+	
+EndFunction
+
+// Search item key by string.
+// 
+// Parameters:
+//  ItemKeyString - String - Item key 
+//  ItemRef - CatalogRef.Items - Item
+// 
+// Returns:
+//  Array of CatalogRef.ItemKeys - Search item key by string
+Function SearchItemKeyByString(ItemKeyString, ItemRef) Export
+	
+	ItemKeyNumber = CommonFunctionsClientServer.GetSearchStringNumber(StrReplace(ItemKeyString, " ", ""));
+	
+	Query = New Query;
+	Query.SetParameter("Item", ItemRef);
+	Query.SetParameter("ItemKeyNumber", ItemKeyNumber);
+	Query.SetParameter("ItemKey", ItemKeyString);
+	
+	Query.Text =
+	"SELECT
+	|	ItemKeys.Ref
+	|INTO tmpRefs
+	|FROM
+	|	Catalog.ItemKeys AS ItemKeys
+	|WHERE
+	|	NOT ItemKeys.DeletionMark
+	|	AND ItemKeys.ItemKeyID = &ItemKey
+	|
+	|UNION
+	|
+	|SELECT
+	|	ItemKeys.Ref
+	|FROM
+	|	Catalog.ItemKeys AS ItemKeys
+	|WHERE
+	|	NOT ItemKeys.DeletionMark
+	|	AND ItemKeys.Code = &ItemKeyNumber
+	|
+	|UNION
+	|
+	|SELECT
+	|	ItemKeys.Ref
+	|FROM
+	|	Catalog.ItemKeys AS ItemKeys
+	|WHERE
+	|	NOT ItemKeys.DeletionMark
+	|	AND ItemKeys.Description_en = &ItemKey
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	tmpRefs.Ref
+	|FROM
+	|	tmpRefs AS tmpRefs
+	|WHERE
+	|	&Item = VALUE(Catalog.Items.EmptyRef)
+	|	OR tmpRefs.Ref.Item = &Item";
+	
+	DescriptionLocal = "Description_" + LocalizationReuse.GetLocalizationCode();
+	If Not DescriptionLocal = "Description_en" Then
+		Query.Text = StrReplace(Query.Text, "Description_en", DescriptionLocal);
+	EndIf;
+	
+	Return Query.Execute().Unload().UnloadColumn(0);
+	
+EndFunction
+
 #EndRegion
 
 // Get package dimensions.

@@ -1024,5 +1024,13 @@ Function Strings(Lang) Export
 	Strings.Insert("CP_006", NStr("en = 'Copied %1 rows'", Lang));
 #EndRegion	
 	
+#Region LoadDataFromTable
+	Strings.Insert("LDT_Button_Title",   NStr("en = 'Load data from table'", Lang));
+	Strings.Insert("LDT_Button_ToolTip", NStr("en = 'Load data from table'", Lang));
+	Strings.Insert("LDT_FailReading", NStr("en = 'Failed to read the value: [%1]'", Lang));
+	Strings.Insert("LDT_ValueNotFound", NStr("en = 'Nothing was found for [%1]'", Lang));
+	Strings.Insert("LDT_TooMuchFound", NStr("en = 'Several variants were found for [%1]'", Lang));
+#EndRegion	
+	
 	Return Strings;
 EndFunction

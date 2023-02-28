@@ -394,6 +394,25 @@ Function PrepareReceiptDataByBankPayment(SourceData) Export
 	Return Str;
 EndFunction
 
+Function PreparePrintTextData(SourceData) Export
+	Str = New Structure;
+	
+	TextStrings = New Array;
+	
+	For Each Item In SourceData.Payments Do
+		If IsBlankString(Item.PaymentInfo) Then
+			Continue;
+		EndIf;
+		TextStringData = New Structure();
+		TextStringData.Insert("Text", Item.PaymentInfo);
+		TextStrings.Add(TextStringData);
+	EndDo;
+	
+	Str.Insert("TextStrings", TextStrings);
+	
+	Return Str;
+EndFunction
+
 Procedure SetFiscalStatus(DocumentRef, Status = "Prepaired", FiscalResponse = "", DataPresentation = "") Export
 	If Status = "Prepaired" Then
 		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef

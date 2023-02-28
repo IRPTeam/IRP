@@ -450,6 +450,12 @@ Function GetItemTable()
 		Return ItemTable;
 	EndIf;
 	
+	ErrorValueNotFound = "";
+	R().Property("LDT_ValueNotFound", ErrorValueNotFound);
+	
+	ErrorTooMuchFound = "";
+	R().Property("LDT_TooMuchFound", ErrorTooMuchFound);
+	
 	If LoadType = "Barcode" Then
 		BarcodeTable = BarcodeServer.GetBarcodeTable();
 		For Each TableRow In TemplateData Do
@@ -462,10 +468,52 @@ Function GetItemTable()
 		ItemTable = GetItemInfo.ByBarcodeTable(BarcodeTable);
 	
 	ElsIf LoadType = "SerialLotNumber" Then
-		
+		SerialLotNumberTable = SerialLotNumbersServer.GetSerialLotNumberTable();
+		For Each TableRow In TemplateData Do
+			NewRow = SerialLotNumberTable.Add();
+			TableRow = TableRow; // Structure
+			NewRow.Key = String(TableRow["Index"]);
+			FillPropertyValues(NewRow, TableRow);
+			NewRow.Quantity = ?(NewRow.Quantity = 0, 1, NewRow.Quantity);
+		EndDo;
+		ItemTable = GetItemInfo.BySerialLotNumberStringTable(SerialLotNumberTable);
 		
 	ElsIf LoadType = "ItemKey" Then
-		
+		ItemKeyTable = GetItemInfo.GetItemAndItemKeysInputTable();
+		RowIndex = 2;
+		For Each TableRow In TemplateData Do
+			TableRow = TableRow; // Structure
+			RowIndex = RowIndex + 1;
+			
+			NewRow = ItemKeyTable.Add();
+			NewRow.Key = String(TableRow["Index"]);
+			
+			RowQuantity = TableRow["Quantity"]; // DefinedType.typeQuantity
+			NewRow.Quantity = ?(RowQuantity = 0, 1, RowQuantity);
+			
+			ItemString = TableRow["Item"]; // String
+			If not IsBlankString(ItemString) Then
+				ItemArray = GetItemInfo.SearchItemByString(ItemString); // Array of CatalogRef.Items
+				If ItemArray.Count() = 0 Then
+					FillError(RowIndex, 1, StrTemplate(ErrorValueNotFound, ItemString));
+				ElsIf ItemArray.Count() > 1 Then
+					FillError(RowIndex, 1, StrTemplate(ErrorTooMuchFound, ItemString));
+				Else
+					NewRow.Item = ItemArray[0];
+				EndIf;
+			EndIf;
+			
+			ItemKeyString = TableRow["ItemKey"]; // String
+			ItemKeyArray = GetItemInfo.SearchItemKeyByString(ItemKeyString, NewRow.Item); // Array of CatalogRef.ItemKeys
+			If ItemKeyArray.Count() = 0 Then
+				FillError(RowIndex, 2, StrTemplate(ErrorValueNotFound, ItemKeyString));
+			ElsIf ItemKeyArray.Count() > 1 Then
+				FillError(RowIndex, 2, StrTemplate(ErrorTooMuchFound, ItemKeyString));
+			Else
+				NewRow.ItemKey = ItemKeyArray[0];
+			EndIf;
+		EndDo;
+		ItemTable = GetItemInfo.ByItemAndItemKeysDescriptionsTable(ItemKeyTable);
 		
 	EndIf;
 	
@@ -526,7 +574,6 @@ EndProcedure
 &AtServer
 Procedure CheckResultTable(Row = 0)
 	
-	BarcodeNumber = GetColumnNumber("Barcode", ResultSpreadsheet);
 	ItemNumber = GetColumnNumber("Item", ResultSpreadsheet);
 	ItemKeyNumber = GetColumnNumber("ItemKey", ResultSpreadsheet);
 	
@@ -545,17 +592,14 @@ Procedure CheckResultTable(Row = 0)
 			ClearRowError(Row);
 		EndIf;
 		
-		Barcode = GetArea(ResultSpreadsheet, Index, BarcodeNumber).Value; // String
-		If Not IsBlankString(Barcode) Then
-			Item = GetArea(ResultSpreadsheet, Index, ItemNumber).Value; // CatalogRef.Items
-			If Item.IsEmpty() Then
-				FillError(Index, ItemNumber, ErrorNotFilled);
-			EndIf;
-			
-			ItemKey = GetArea(ResultSpreadsheet, Index, ItemKeyNumber).Value; // CatalogRef.ItemKeys
-			If ItemKey.IsEmpty() Then
-				FillError(Index, ItemKeyNumber, ErrorNotFilled);
-			EndIf;
+		Item = GetArea(ResultSpreadsheet, Index, ItemNumber).Value; // CatalogRef.Items
+		If Item.IsEmpty() Then
+			FillError(Index, ItemNumber, ErrorNotFilled);
+		EndIf;
+		
+		ItemKey = GetArea(ResultSpreadsheet, Index, ItemKeyNumber).Value; // CatalogRef.ItemKeys
+		If ItemKey.IsEmpty() Then
+			FillError(Index, ItemKeyNumber, ErrorNotFilled);
 		EndIf;
 		
 		UseSerialLot = GetArea(ResultSpreadsheet, Index, UseSerialLotNumber).Value; // Boolean
@@ -705,7 +749,7 @@ Function GetCellValue(TypeValue, SprSheet, RowIndex, ColumnIndex)
 		Return TypeValue.AdjustValue(CellText);
 	Except
 		ErrorTemplate = "";
-		R().Property("LDT_Button_FailReading", ErrorTemplate);
+		R().Property("LDT_FailReading", ErrorTemplate);
 		ErrorText = StrTemplate(ErrorTemplate, CellText);
 		FillError(RowIndex, ColumnIndex, ErrorText);
 		Return TypeValue.AdjustValue();

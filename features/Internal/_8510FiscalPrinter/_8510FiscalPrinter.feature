@@ -804,13 +804,14 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="100"'
 	* Check acquiring log
+		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
 		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '50.00'	
-		And I check "$ParsingResult1$" with "6" and method is "PayByPaymentCard"
-		And I check "$ParsingResult1$" with "6" and data in "Out.Parameter8" contains 'ОПЛАТА'
-		And I check "$ParsingResult1$" with "6" and data in "Out.Parameter8" contains '50.00'	
+		And I check "$ParsingResult1$" with "5" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains '50.00'	
 	* Check RRN
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
@@ -897,10 +898,10 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '40.00'
 		And I check "$ParsingResult1$" with "1" and data in "In.Parameter6" contains '$$RRN2$$'	
-		And I check "$ParsingResult1$" with "6" and method is "ReturnPaymentByPaymentCard"
-		And I check "$ParsingResult1$" with "6" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
-		And I check "$ParsingResult1$" with "6" and data in "Out.Parameter8" contains '50.00'
-		And I check "$ParsingResult1$" with "6" and data in "In.Parameter6" contains '$$RRN1$$'		
+		And I check "$ParsingResult1$" with "5" and method is "ReturnPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains '50.00'
+		And I check "$ParsingResult1$" with "5" and data in "In.Parameter6" contains '$$RRN1$$'		
 	* Check fiscal log
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
@@ -1120,12 +1121,12 @@ Scenario: _0850021 check the form of payment by card
 		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '430.00'	
-		And I check "$ParsingResult1$" with "6" and method is "PayByPaymentCard"
-		And I check "$ParsingResult1$" with "6" and data in "Out.Parameter8" contains 'ОПЛАТА'
-		And I check "$ParsingResult1$" with "6" and data in "Out.Parameter8" contains '40.00'
-		And I check "$ParsingResult1$" with "11" and method is "PayByPaymentCard"
-		And I check "$ParsingResult1$" with "11" and data in "Out.Parameter8" contains 'ОПЛАТА'
-		And I check "$ParsingResult1$" with "11" and data in "Out.Parameter8" contains '50.00'				
+		And I check "$ParsingResult1$" with "5" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains '40.00'
+		And I check "$ParsingResult1$" with "9" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "9" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "9" and data in "Out.Parameter8" contains '50.00'				
 	* Check fiscal log	
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"

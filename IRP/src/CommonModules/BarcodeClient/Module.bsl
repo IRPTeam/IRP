@@ -1,5 +1,4 @@
 
-
 // Get barcode settings.
 // 
 // Returns:
@@ -170,3 +169,6 @@ Function GetBarcodesByItemKey(ItemKey) Export
 	Return BarcodeServer.GetBarcodesByItemKey(ItemKey);
 EndFunction
 
+Function isBarcodeScanned(Event) Export
+	Return Event = "NewBarcode" Or Event = "Barcode" Or Event = "Штрихкод";
+EndFunction

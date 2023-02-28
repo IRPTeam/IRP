@@ -1450,6 +1450,120 @@ Scenario: _0260150 create cash out
 		And I close all client application windows		
 		
 
+Scenario: _0260150 check print cash in from Cash receipt form
+	And I close all client application windows
+	* Create cash receipt (cash in)
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click the button named "FormCreate" 
+		And I select "Cash in" exact value from "Transaction type" drop-down list
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
+			| 'Currency' | 'Description'  |
+			| 'TRY'      | 'Cash desk №4' |
+		And I select current line in "List" table
+		And I click Select button of "Consolidated retail sales" field
+		And I go to line in "List" table
+			| 'Status' |
+			| 'Open'   |
+		And I select current line in "List" table
+		And in the table "PaymentList" I click "Add" button
+		And I activate "Total amount" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "10,00" text in "Total amount" field of "PaymentList" table
+		And I activate "Financial movement type" field in "PaymentList" table
+		And I click choice button of "Financial movement type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Movement type 1' |
+		And I select current line in "List" table
+		And I finish line editing in "PaymentList" table
+		And I click "Post" button
+	* Check Print cash in
+		And I click "Print cash in" button
+	* Check fiscal log
+		And Delay 2
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "CashInOutcome"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "10"
+	* Check double click Print cash in
+		And I click "Print cash in" button
+		Then there are lines in TestClient message log
+			|'The document is already printed.'|
+		And I close all client application windows
+		
+
+Scenario: _0260151 check print cash out from Money transfer form
+	And I close all client application windows
+	* Create money transfer (cash out)
+		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
+		And I click the button named "FormCreate" 
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Select button of "Sender" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №3' |
+		And I select current line in "List" table
+		And I click Select button of "Send financial movement type" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Movement type 1' |
+		And I select current line in "List" table
+		And I click Select button of "Send currency" field
+		And I go to line in "List" table
+			| 'Code' |
+			| 'TRY'  |
+		And I select current line in "List" table
+		And I input "11,00" text in "Send amount" field		
+		And I click Select button of "Receiver" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №2' |
+		And I select current line in "List" table
+		And I click Select button of "Receive financial movement type" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Movement type 1' |
+		And I select current line in "List" table
+		And I click Select button of "Receive currency" field
+		And I go to line in "List" table
+			| 'Code' |
+			| 'TRY'  |
+		And I select current line in "List" table
+		And I input "11,00" text in "Receive amount" field	
+		And I click Select button of "Branch" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shop 02'     |
+		And I select current line in "List" table
+		And I click Select button of "Consolidated retail sales" field
+		And I go to line in "List" table
+			| 'Status' |
+			| 'Open'   |
+		And I select current line in "List" table
+		And I click "Post" button
+	* Check Print cash out
+		And I click "Print cash out" button
+	* Check fiscal log
+		And Delay 2
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "CashInOutcome"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "11"
+	* Check double click Print cash in
+		And I click "Print cash out" button
+		Then there are lines in TestClient message log
+			|'The document is already printed.'|
+		And I close all client application windows
+	
+
 Scenario: _0260152 close sessiion
 	And I close all client application windows
 	* Open POS		

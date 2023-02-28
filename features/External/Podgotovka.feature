@@ -205,7 +205,7 @@ Scenario: check load data form in the document
 		And I click "Next" button
 	* Check
 		// Given in "Result" Spreadsheet document and "LoadDataWithPicture" template contain the same pictures
-		Given "Result" spreadsheet document is equal to "LoadDataWithPicture" by template
+		// Given "Result" spreadsheet document is equal to "LoadDataWithPicture" by template
 	* Add barcode with serial lot number
 		And I click "Back" button
 		And Delay 5

@@ -114,7 +114,99 @@ Scenario: _020110 load data in the SI
 		Then the form attribute named "Field_NetAmount" became equal to "No"
 		Then the form attribute named "Field_TotalAmount" became equal to "No"
 		Then the form attribute named "Field_DeliveryDate" became equal to "Yes"
-		Then the form attribute named "Field_Detail" became equal to "Yes"			
+		Then the form attribute named "Field_Detail" became equal to "Yes"
+		And I close all client application windows
+			
+
+Scenario: _020111 load data in the SI by serial lot number
+	And I close all client application windows
+	* Open SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling SI
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'     |
+		And I select current line in "List" table
+	* Load type by serial lot number
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Delivery date"
+		And I set checkbox "Detail"
+		And I click "Next" button
+		And I change "Load type" radio button value to "Serial lot number"
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I input text "09987897977889"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2"
+		And in "Template" spreadsheet document I move to "R3C3" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "200"
+		And in "Template" spreadsheet document I move to "R3C4" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "20250312"
+		And in "Template" spreadsheet document I move to "R3C5" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "test"
+		And I click "Next" button
+		And I click "Next" button
+		And "ItemList" table became equal
+			| '#' | 'Inventory origin' | 'Price type'        | 'Item'               | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Store'    | 'Delivery date' | 'Detail' |
+			| '1' | 'Own stocks'       | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | 'No'                 | '61,02'      | 'pcs'  | '09987897977889'     | ''                  | '2,000'    | '200,00' | '18%' | ''              | '338,98'     | '400,00'       | 'No'                         | 'Store 01' | '12.03.2025'    | 'test'   |
+		And I close all client application windows
+		
+Scenario: _020111 load data in the SI by item and item key
+	And I close all client application windows
+	* Open SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling SI
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'     |
+		And I select current line in "List" table
+	* Load type by serial lot number
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Detail"
+		And I click "Next" button
+		And I change "Load type" radio button value to "Item / Item key"
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I input text "Product 1 with SLN"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "ODS"
+		And in "Template" spreadsheet document I move to "R3C3" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2"
+		And in "Template" spreadsheet document I move to "R3C4" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "200"
+		And in "Template" spreadsheet document I move to "R3C5" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "test"
+		And I click "Next" button
+		And I click "Next" button
+		And "ItemList" table became equal
+			| '#' | 'Inventory origin' | 'Price type'        | 'Item'               | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Store'    | 'Delivery date' | 'Detail' |
+			| '1' | 'Own stocks'       | 'Basic Price Types' | 'Product 1 with SLN' | 'ODS'      | 'No'                 | '61,02'      | 'pcs'  | ''                   | ''                  | '2,000'    | '200,00' | '18%' | ''              | '338,98'     | '400,00'       | 'No'                         | 'Store 01' | ''              | 'test'   |
 		And I close all client application windows
 		
 		

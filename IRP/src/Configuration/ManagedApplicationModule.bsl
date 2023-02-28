@@ -64,8 +64,7 @@ EndProcedure
 
 Procedure ExternEventProcessing(Source, Event, Data)
 	If Data <> Undefined Then
-		If Event = "NewBarcode" 
-			Or Event = "Barcode" Then
+		If BarcodeClient.isBarcodeScanned(Event)  Then
 			If StrStartsWith(Source, "InputDevice") Then 	
 				For Each Settings In globalEquipments.ConnectionSettings Do
 					If Settings.Value.ID = Source Then

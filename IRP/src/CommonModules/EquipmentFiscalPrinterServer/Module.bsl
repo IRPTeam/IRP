@@ -394,6 +394,33 @@ Function PrepareReceiptDataByBankPayment(SourceData) Export
 	Return Str;
 EndFunction
 
+Function PreparePrintTextData(SourceData) Export
+	Str = New Structure;
+	
+	TextStrings = New Array;
+	
+	For Each Payment In SourceData.Payments Do
+		If IsBlankString(Payment.PaymentInfo) Then
+			Continue;
+		EndIf;
+		TextString = "";
+		PaymentInfo = CommonFunctionsServer.DeserializeJSON(Payment.PaymentInfo);
+		If PaymentInfo.Property("Out")
+			And	PaymentInfo.Out.Property("Slip") Then			
+			TextString = PaymentInfo.Out.Slip;
+		Else
+			Continue;
+		EndIf;
+		TextStringData = New Structure();
+		TextStringData.Insert("Text", TextString);
+		TextStrings.Add(TextStringData);
+	EndDo;
+	
+	Str.Insert("TextStrings", TextStrings);
+	
+	Return Str;
+EndFunction
+
 Procedure SetFiscalStatus(DocumentRef, Status = "Prepaired", FiscalResponse = "", DataPresentation = "") Export
 	If Status = "Prepaired" Then
 		InformationRegisters.DocumentFiscalStatus.SetStatus(DocumentRef

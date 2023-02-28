@@ -93,7 +93,7 @@ Async Function ConnectHardware(Hardware) Export
 	ConnectedDevice = globalEquipment_GetConnectionSettings(Device);
 	If Not ConnectedDevice.Connected Then
 
-		Settings = Await FillDriverParametersSettings(Hardware);
+		Settings = Await FillDriverParametersSettings(Hardware, False);
 		
 		If Settings.ConnectedDriver = Undefined Then
 			// @skip-check property-return-type, invocation-parameter-type-intersect
@@ -103,6 +103,10 @@ Async Function ConnectHardware(Hardware) Export
 		Else
 			//@skip-check module-unused-local-variable
 			ResultSetParameter = Device_SetParameter(Settings.ConnectedDriver.DriverObject, "EquipmentType", Settings.ConnectedDriver.DriverEquipmentType);
+			For Each Param In Device.ConnectParameters Do
+				Device_SetParameter(Settings.ConnectedDriver.DriverObject, Param.Key, Param.Value);
+			EndDo;
+			
 			Result = Device_Open(Settings.ConnectedDriver.DriverObject, Settings.ConnectedDriver.ID); // Boolean
 			
 			globalEquipment_SetHardwareID(Settings.Hardware, Settings.ConnectedDriver.ID);

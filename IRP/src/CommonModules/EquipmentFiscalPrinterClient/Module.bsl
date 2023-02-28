@@ -403,6 +403,38 @@ Async Function CashOutCome(ConsolidatedRetailSales, PrintDocument, Summ) Export
 	Return Result;
 EndFunction
 
+Async Function PrintTextDocument(ConsolidatedRetailSales, DataSource) Export
+	Result = PrintTextResultStructure();
+	CRS = CommonFunctionsServer.GetAttributesFromRef(ConsolidatedRetailSales, "FiscalPrinter");
+	If CRS.FiscalPrinter.isEmpty() Then
+		Result.Success = True;
+		Return Result;
+	EndIf;
+	Settings = Await HardwareClient.FillDriverParametersSettings(CRS.FiscalPrinter);
+	
+	Parameters = ReceiptSettings();	
+	XMLOperationSettings = PrintTextGetXMLOperationSettings(DataSource);
+	If Not XMLOperationSettings.TextStrings.Count() Then
+		Result.Success = True;
+		Return Result;
+	EndIf;
+	
+	Parameters.ParametersXML = PrintTextGetXMLOperation(XMLOperationSettings);
+	
+	ResultInfo = Settings.ConnectedDriver.DriverObject.PrintTextDocument(Settings.ConnectedDriver.ID
+																	, Parameters.ParametersXML);
+																	
+	If ResultInfo Then
+		Result.Success = True;		
+	Else
+		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
+		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
+		Return Result;
+	EndIf;
+	
+	Return Result;
+EndFunction
+
 #EndRegion
 
 #Region Private
@@ -473,8 +505,22 @@ Function ReceiptSettings() Export
 	Return Str;	
 EndFunction
 
+Function PrintTextResultStructure()
+	ReturnValue = New Structure;
+	ReturnValue.Insert("Success", False);
+	ReturnValue.Insert("ErrorDescription", "");
+	ReturnValue.Insert("Status", "");
+	ReturnValue.Insert("FiscalResponse", "");
+	ReturnValue.Insert("DataPresentation", "");	
+	Return ReturnValue;
+EndFunction
+
 Function ReceiptGetXMLOperationSettings(RSR)
 	Return EquipmentFiscalPrinterServer.PrepareReceiptData(RSR);
+EndFunction
+
+Function PrintTextGetXMLOperationSettings(RSR)
+	Return EquipmentFiscalPrinterServer.PreparePrintTextData(RSR);
 EndFunction
 
 Function GetCountersOperationType()
@@ -601,6 +647,27 @@ Function ReceiptGetXMLOperation(CommonParameters) Export
 	XMLWriter.WriteAttribute("PrePayment", ToXMLString(CommonParameters.PrePayment));
 	XMLWriter.WriteAttribute("PostPayment", ToXMLString(CommonParameters.PostPayment));
 	XMLWriter.WriteAttribute("Barter", ToXMLString(CommonParameters.Barter));
+	XMLWriter.WriteEndElement();
+	
+	XMLWriter.WriteEndElement();
+	
+	Return XMLWriter.Close();
+	
+EndFunction
+
+Function PrintTextGetXMLOperation(CommonParameters) Export
+	
+	XMLWriter = New XMLWriter();
+	XMLWriter.SetString("UTF-8");
+	XMLWriter.WriteXMLDeclaration();
+	XMLWriter.WriteStartElement("Document");
+	
+	XMLWriter.WriteStartElement("Positions");
+	For Each Item In CommonParameters.TextStrings Do
+		XMLWriter.WriteStartElement("TextString");
+		XMLWriter.WriteAttribute("Text", ToXMLString(Item.Text));
+		XMLWriter.WriteEndElement();
+	EndDo;
 	XMLWriter.WriteEndElement();
 	
 	XMLWriter.WriteEndElement();

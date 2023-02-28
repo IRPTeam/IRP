@@ -12,6 +12,7 @@
     <items xsi:type="form:FormField">
      <name>DocumentRef</name>
      <id>48</id>
+     <displayImportance>VeryHigh</displayImportance>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -81,6 +82,7 @@
     <items xsi:type="form:Button">
      <name>InputBarcode</name>
      <id>122</id>
+     <displayImportance>VeryHigh</displayImportance>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -144,7 +146,7 @@
     </extendedTooltip>
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
-     <group>HorizontalIfPossible</group>
+     <group>AlwaysHorizontal</group>
      <showLeftMargin>true</showLeftMargin>
      <united>true</united>
      <throughAlign>Auto</throughAlign>
@@ -157,6 +159,7 @@
     <items xsi:type="form:FormField">
      <name>BarcodeInput</name>
      <id>95</id>
+     <displayImportance>VeryHigh</displayImportance>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -238,6 +241,7 @@
     <items xsi:type="form:FormField">
      <name>Info</name>
      <id>119</id>
+     <displayImportance>VeryHigh</displayImportance>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>

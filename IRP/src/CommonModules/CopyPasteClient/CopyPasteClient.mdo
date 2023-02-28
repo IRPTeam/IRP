@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ed2e8c26-4b05-44fa-8481-da1387d36e97">
+ <name>CopyPasteClient</name>
+ <synonym>
+  <key>en</key>
+  <value>Copy paste client</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Скопировать вставить клиент</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

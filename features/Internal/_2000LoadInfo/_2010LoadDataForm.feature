@@ -15,6 +15,7 @@ Background:
 
 Scenario: _020100 preparation (LoadDataForm)
 	When set True value to the constant
+	When set True value to the constant Use commission trading 
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -89,98 +90,123 @@ Scenario: _020110 load data in the SI
 			| 'Description' |
 			| 'Basic Partner terms, TRY'     |
 		And I select current line in "List" table
-	* Open load date form	
-		And in the table "ItemList" I click "LoadDataFromTable" button
-		Then "Load data from table" window is opened
-		And I click "Show images" button
-		Then "Load data from table" window is opened
-	* Add barcodes
-		And in "Template" spreadsheet document I move to "R3C1" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "2202283705"
-		And in "Template" spreadsheet document I move to "R4C1" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "67789997777801"
-		And in "Template" spreadsheet document I move to "R4C2" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "2"
-		And I click "Next" button
-	* Check
-		// Given in "Result" Spreadsheet document and "LoadDataWithPicture" template contain the same pictures
-		Given "Result" spreadsheet document is equal to "LoadDataWithPicture" by template
-	* Add barcode with serial lot number
-		And I click "Back" button
-		And Delay 5
-		And in "Template" spreadsheet document I move to "R5C1" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "23455677788976667"
-		And Delay 5
-		And in "Template" spreadsheet document I move to "R5C1" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "23455677788976667"
-	* Add wrong barcode
-		And Delay 5
-		And in "Template" spreadsheet document I move to "R6C1" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "234500000"
-		And Delay 5
-		And in "Template" spreadsheet document I move to "R6C1" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "234500000"
-		And Delay 5
-	* Add the same barcode
-		And in "Template" spreadsheet document I move to "R7C1" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "2202283705"
-		And in "Template" spreadsheet document I move to "R7C2" cell
-		And in "Template" spreadsheet document I input text "5"
-	* Check
-		And I click "Show images" button
-		And I click "Next" button
-		Then "Template" spreadsheet document is equal
-			| 'Barcode'           | 'Quantity' |
-			| 'Barcode'           | 'Quantity' |
-			| '2202283705'        | ''         |
-			| '67789997777801'    | '2'        |
-			| '23455677788976667' | ''         |
-			| '234500000'         | ''         |
-			| '2202283705'        | '5'        |
-		Then the form attribute named "LoadType" became equal to "Barcode"
-		Then "Result" spreadsheet document is equal by template
-			| 'Key' | 'Image'                                    | 'ItemType'                                    | 'Item'               | 'ItemKey'   | 'SerialLotNumber'         | 'Unit'       | 'hasSpecification' | 'UseSerialLotNumber'    | 'Quantity' | 'Barcode'           |
-			| 'Key' | ''                                         | 'Item types'                                  | 'Items'              | 'Item keys' | 'Item serial/lot numbers' | 'Item units' | 'Item types'       | 'Use serial lot number' | 'Quantity' | 'Barcode'           |
-			| '0'   | 'f82457a7c91f5d12beec5826930cb235blue.jpg' | 'Clothes'                                     | 'Dress'              | 'XS/Blue'   | ''                        | 'pcs'        | '*'                | '*'                     | '1,000'    | '2202283705'        |
-			| '1'   | ''                                         | 'With serial lot numbers (use stock control)' | 'Product 1 with SLN' | 'ODS'       | ''                        | 'pcs'        | '*'                | '*'                     | '2,000'    | '67789997777801'    |
-			| '2'   | ''                                         | 'With serial lot numbers (use stock control)' | 'Product 1 with SLN' | 'PZU'       | '8908899877'              | 'pcs'        | '*'                | '*'                     | '1,000'    | '23455677788976667' |
-			| '3'   | ''                                         | ''                                            | ''                   | ''          | ''                        | ''           | '*'                | '*'                     | '1,000'    | '234500000'         |
-			| '4'   | 'f82457a7c91f5d12beec5826930cb235blue.jpg' | 'Clothes'                                     | 'Dress'              | 'XS/Blue'   | ''                        | 'pcs'        | '*'                | '*'                     | '5,000'    | '2202283705'        |
-		And "ErrorList" table became equal
-			| 'Row' | 'Column' | 'Error text'   |
-			| '4'   | '6'      | '[Not filled]' |
-			| '6'   | '4'      | '[Not filled]' |
-			| '6'   | '5'      | '[Not filled]' |
-	* Fix barcode and check loading
-		And I click "Back" button
-		And Delay 5
-		And in "Template" spreadsheet document I move to "R6C1" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "2202283713"
-		And Delay 5
-		And in "Template" spreadsheet document I move to "R6C1" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "2202283713"
-		And in "Template" spreadsheet document I move to "R6C2" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "3"
-		And I click "Next" button
-		And I click "Next" button
-	* Check
+	* Check load data form
+		When check load data form in the document
+	* Check document
 		And "ItemList" table contains lines
 			| '#' | 'Price type'        | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'           | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' | 'Sales person' |
 			| '1' | 'Basic Price Types' | 'Dress'              | 'XS/Blue'  | ''                   | 'No'                 | '475,93'     | 'pcs'  | ''                             | '6,000'    | '520,00' | '18%' | ''              | '2 644,07'   | '3 120,00'     | 'No'                         | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            | ''             | ''             |
 			| '2' | 'Basic Price Types' | 'Product 1 with SLN' | 'ODS'      | ''                   | 'No'                 | ''           | 'pcs'  | ''                             | '2,000'    | ''       | '18%' | ''              | ''           | ''             | 'No'                         | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            | ''             | ''             |
 			| '3' | 'Basic Price Types' | 'Product 1 with SLN' | 'PZU'      | ''                   | 'No'                 | ''           | 'pcs'  | '8908899877'                   | '1,000'    | ''       | '18%' | ''              | ''           | ''             | 'No'                         | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            | ''             | ''             |
 			| '4' | 'Basic Price Types' | 'Dress'              | 'S/Yellow' | ''                   | 'No'                 | '251,69'     | 'pcs'  | ''                             | '3,000'    | '550,00' | '18%' | ''              | '1 398,31'   | '1 650,00'     | 'No'                         | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            | ''             | ''             |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Delivery date"
+		And I set checkbox "Detail"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "ShowOrHideImage" became equal to "No"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		Then the form attribute named "Field_DeliveryDate" became equal to "Yes"
+		Then the form attribute named "Field_Detail" became equal to "Yes"
+		And I close all client application windows
+			
+
+Scenario: _020111 load data in the SI by serial lot number
+	And I close all client application windows
+	* Open SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling SI
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'     |
+		And I select current line in "List" table
+	* Load type by serial lot number
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Delivery date"
+		And I set checkbox "Detail"
+		And I click "Next" button
+		And I change "Load type" radio button value to "Serial lot number"
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I input text "09987897977889"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2"
+		And in "Template" spreadsheet document I move to "R3C3" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "200"
+		And in "Template" spreadsheet document I move to "R3C4" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "20250312"
+		And in "Template" spreadsheet document I move to "R3C5" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "test"
+		And I click "Next" button
+		And I click "Next" button
+		And "ItemList" table became equal
+			| '#' | 'Inventory origin' | 'Price type'        | 'Item'               | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Store'    | 'Delivery date' | 'Detail' |
+			| '1' | 'Own stocks'       | 'Basic Price Types' | 'Product 3 with SLN' | 'UNIQ'     | 'No'                 | '61,02'      | 'pcs'  | '09987897977889'     | ''                  | '2,000'    | '200,00' | '18%' | ''              | '338,98'     | '400,00'       | 'No'                         | 'Store 01' | '12.03.2025'    | 'test'   |
+		And I close all client application windows
+		
+Scenario: _020111 load data in the SI by item and item key
+	And I close all client application windows
+	* Open SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling SI
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'     |
+		And I select current line in "List" table
+	* Load type by serial lot number
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Detail"
+		And I click "Next" button
+		And I change "Load type" radio button value to "Item / Item key"
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I input text "Product 1 with SLN"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "ODS"
+		And in "Template" spreadsheet document I move to "R3C3" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2"
+		And in "Template" spreadsheet document I move to "R3C4" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "200"
+		And in "Template" spreadsheet document I move to "R3C5" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "test"
+		And I click "Next" button
+		And I click "Next" button
+		And "ItemList" table became equal
+			| '#' | 'Inventory origin' | 'Price type'        | 'Item'               | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Source of origins' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Store'    | 'Delivery date' | 'Detail' |
+			| '1' | 'Own stocks'       | 'Basic Price Types' | 'Product 1 with SLN' | 'ODS'      | 'No'                 | '61,02'      | 'pcs'  | ''                   | ''                  | '2,000'    | '200,00' | '18%' | ''              | '338,98'     | '400,00'       | 'No'                         | 'Store 01' | ''              | 'test'   |
 		And I close all client application windows
 		
 		
@@ -197,101 +223,644 @@ Scenario: _020112 load data in the Physical inventory
 			| 'Store 01'     |
 		And I select current line in "List" table
 		And I set checkbox "Use serial lot"	
-	* Open load date form	
-		And in the table "ItemList" I click "LoadDataFromTable" button
-		Then "Load data from table" window is opened
-		And I click "Show images" button
-		Then "Load data from table" window is opened
-	* Add barcodes
-		And in "Template" spreadsheet document I move to "R3C1" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "2202283705"
-		And in "Template" spreadsheet document I move to "R4C1" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "67789997777801"
-		And in "Template" spreadsheet document I move to "R4C2" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "2"
-		And I click "Next" button
-	* Check
-		// Given in "Result" Spreadsheet document and "LoadDataWithPicture" template contain the same pictures
-		Given "Result" spreadsheet document is equal to "LoadDataWithPicture" by template
-	* Add barcode with serial lot number
-		And I click "Back" button
-		And Delay 5
-		And in "Template" spreadsheet document I move to "R5C1" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "23455677788976667"
-		And in "Template" spreadsheet document I move to "R5C1" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "23455677788976667"
-	* Add wrong barcode
-		And in "Template" spreadsheet document I move to "R6C1" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "234500000"
-	* Add the same barcode
-		And in "Template" spreadsheet document I move to "R7C1" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "2202283705"
-		And in "Template" spreadsheet document I move to "R7C2" cell
-		And in "Template" spreadsheet document I input text "5"
-	* Check
-		And I click "Show images" button
-		And I click "Next" button
-		Then "Template" spreadsheet document is equal
-			| 'Barcode'           | 'Quantity' |
-			| 'Barcode'           | 'Quantity' |
-			| '2202283705'        | ''         |
-			| '67789997777801'    | '2'        |
-			| '23455677788976667' | ''         |
-			| '234500000'         | ''         |
-			| '2202283705'        | '5'        |
-		Then the form attribute named "LoadType" became equal to "Barcode"
-		Then "Result" spreadsheet document is equal
-			| 'Key' | 'Image'                                    | 'ItemType'                                    | 'Item'               | 'ItemKey'   | 'SerialLotNumber'         | 'Unit'       | 'hasSpecification' | 'UseSerialLotNumber'    | 'Quantity' | 'Barcode'           |
-			| 'Key' | ''                                         | 'Item types'                                  | 'Items'              | 'Item keys' | 'Item serial/lot numbers' | 'Item units' | 'Item types'       | 'Use serial lot number' | 'Quantity' | 'Barcode'           |
-			| '0'   | 'f82457a7c91f5d12beec5826930cb235blue.jpg' | 'Clothes'                                     | 'Dress'              | 'XS/Blue'   | ''                        | 'pcs'        | 'No'               | 'No'                    | '1,000'    | '2202283705'        |
-			| '1'   | ''                                         | 'With serial lot numbers (use stock control)' | 'Product 1 with SLN' | 'ODS'       | ''                        | 'pcs'        | 'No'               | 'Yes'                   | '2,000'    | '67789997777801'    |
-			| '2'   | ''                                         | 'With serial lot numbers (use stock control)' | 'Product 1 with SLN' | 'PZU'       | '8908899877'              | 'pcs'        | 'No'               | 'Yes'                   | '1,000'    | '23455677788976667' |
-			| '3'   | ''                                         | ''                                            | ''                   | ''          | ''                        | ''           | 'No'               | 'No'                    | '1,000'    | '234500000'         |
-			| '4'   | 'f82457a7c91f5d12beec5826930cb235blue.jpg' | 'Clothes'                                     | 'Dress'              | 'XS/Blue'   | ''                        | 'pcs'        | 'No'               | 'No'                    | '5,000'    | '2202283705'        |
-		And "ErrorList" table became equal
-			| 'Row' | 'Column' | 'Error text'   |
-			| '4'   | '6'      | '[Not filled]' |
-			| '6'   | '4'      | '[Not filled]' |
-			| '6'   | '5'      | '[Not filled]' |
-	* Fix barcode and check loading
-		And I click "Back" button
-		And Delay 5
-		And in "Template" spreadsheet document I move to "R6C1" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "2202283713"
-		And in "Template" spreadsheet document I move to "R6C1" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "2202283713"
-		And in "Template" spreadsheet document I move to "R6C2" cell
-		And in "Template" spreadsheet document I double-click the current cell
-		And in "Template" spreadsheet document I input text "3"
-		And I click "Next" button
-		And I click "Next" button
-	* Check
+	* Check load data form
+		When check load data form in the document
+	* Check document
 		And "ItemList" table became equal
 			| '#' | 'Exp. count' | 'Item'               | 'Item key' | 'Serial lot number' | 'Unit' | 'Difference' | 'Phys. count' | 'Manual fixed count' | 'Description' |
 			| '1' | ''           | 'Dress'              | 'XS/Blue'  | ''                  | 'pcs'  | '6,000'      | '6,000'       | ''                   | ''            |
 			| '2' | ''           | 'Product 1 with SLN' | 'ODS'      | ''                  | 'pcs'  | '2,000'      | '2,000'       | ''                   | ''            |
 			| '3' | ''           | 'Product 1 with SLN' | 'PZU'      | '8908899877'        | 'pcs'  | '1,000'      | '1,000'       | ''                   | ''            |
 			| '4' | ''           | 'Dress'              | 'S/Yellow' | ''                  | 'pcs'  | '3,000'      | '3,000'       | ''                   | ''            |		
-		And I close all client application windows				
-		
-				
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Manual fixed count"
+		And I set checkbox "Exp. count"
+		And I click "Next" button	
+		Then the form attribute named "Field_ExpCount" became equal to "Yes"
+		Then the form attribute named "Field_PhysCount" became equal to "No"
+		Then the form attribute named "Field_ManualFixedCount" became equal to "Yes"
+		Then the form attribute named "Field_Difference" became equal to "No"
+		Then the form attribute named "Field_Description" became equal to "No"
+		And I close all client application windows	
 
+Scenario: _020113 load data in the Bundling
+		And I close all client application windows
+	* Open Bundling
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+		And I close all client application windows	
+
+
+Scenario: _020113 load data in the GoodsReceipt
+		And I close all client application windows
+	* Open GoodsReceipt
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' | 'Serial lot numbers'|
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    | ''                  |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+		And I close all client application windows		
+
+Scenario: _020114 load data in the Internal supply request
+		And I close all client application windows
+	* Open InternalSupplyRequest
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+		And I close all client application windows
+
+Scenario: _020115 load data in the Inventory transfer
+		And I close all client application windows
+	* Open InventoryTransfer
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' | 'Serial lot numbers'|
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    | ''                  |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+		And I close all client application windows	
+
+Scenario: _020116 load data in the Inventory transfer order
+		And I close all client application windows
+	* Open InventoryTransferOrder
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+		And I close all client application windows
+
+Scenario: _020117 load data in the Item stock adjustment
+		And I close all client application windows
+	* Open ItemStockAdjustment
+		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key (surplus)' | 'Unit' | 'Quantity' |
+			| 'Dress'              | 'XS/Blue'            | 'pcs'  | '6,000'    |
+			| 'Product 1 with SLN' | 'ODS'                | 'pcs'  | '2,000'    |
+			| 'Product 1 with SLN' | 'PZU'                | 'pcs'  | '1,000'    |
+			| 'Dress'              | 'S/Yellow'           | 'pcs'  | '3,000'    |
+		And I close all client application windows
 		
-				
+Scenario: _020118 load data in the Physical count by location
+		And I close all client application windows
+	* Open PhysicalCountByLocation
+		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Phys. count' |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'       |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'       |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'       |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'       |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Date"
+		And I click "Next" button	
+		Then the form attribute named "Field_Date" became equal to "Yes"
+		Then the form attribute named "Field_PhysCount" became equal to "No"
+		And I close all client application windows			
+
+Scenario: _020119 load data in the Purchase invoice
+		And I close all client application windows
+	* Open PurchaseInvoice
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' | 'Serial lot numbers'|
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    | ''                  |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Delivery date"
+		And I set checkbox "Detail"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		Then the form attribute named "Field_DeliveryDate" became equal to "Yes"
+		Then the form attribute named "Field_Detail" became equal to "Yes"
+		And I close all client application windows
+
+Scenario: _020120 load data in the Purchase order
+		And I close all client application windows
+	* Open Purchase order
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Delivery date"
+		And I set checkbox "Detail"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		Then the form attribute named "Field_DeliveryDate" became equal to "Yes"
+		Then the form attribute named "Field_Detail" became equal to "Yes"
+		And I close all client application windows
+						
+Scenario: _020121 load data in the Purchase order closing
+		And I close all client application windows
+	* Open Purchase order closing
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Detail"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		Then the form attribute named "Field_DeliveryDate" became equal to "No"
+		Then the form attribute named "Field_Detail" became equal to "Yes"
+		And I close all client application windows
+
+Scenario: _020122 load data in the Purchase return
+		And I close all client application windows
+	* Open Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' | 'Serial lot numbers'|
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    | ''                  |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Detail"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		Then the form attribute named "Field_Detail" became equal to "Yes"
+		And I close all client application windows
+
+Scenario: _020123 load data in the Purchase return order
+		And I close all client application windows
+	* Open Purchase return order
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		And I close all client application windows
+
+Scenario: _020124 load data in the Retail return receipt
+		And I close all client application windows
+	* Open Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' | 'Serial lot numbers'|
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    | ''                  |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Total amount"
+		And I set checkbox "Detail"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "No"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "Yes"
+		Then the form attribute named "Field_Detail" became equal to "Yes"
+		And I close all client application windows
 		
-		
-				
-		
-		
+Scenario: _020125 load data in the Retail sales receipt
+		And I close all client application windows
+	* Open Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' | 'Serial lot numbers'|
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    | ''                  |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Detail"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		Then the form attribute named "Field_Detail" became equal to "Yes"
+		And I close all client application windows	
+
+Scenario: _020126 load data in the Sales order
+		And I close all client application windows
+	* Open Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Detail"
+		And I set checkbox "Total amount"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "Yes"
+		Then the form attribute named "Field_DeliveryDate" became equal to "No"
+		Then the form attribute named "Field_Detail" became equal to "Yes"
+		And I close all client application windows		
+
+Scenario: _020127 load data in the Sales order closing
+		And I close all client application windows
+	* Open Sales order closing
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I set checkbox "Detail"
+		And I set checkbox "Total amount"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "Yes"
+		Then the form attribute named "Field_Detail" became equal to "Yes"
+		And I close all client application windows		
+
+Scenario: _020128 load data in the Sales report from trade agent
+		And I close all client application windows
+	* Open Sales report from trade agent
+		Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' | 'Serial lot numbers'|
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    | ''                  |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Consignor price"
+		And I set checkbox "Price"
+		Then the form attribute named "Field_ConsignorPrice" became equal to "Yes"
+		Then the form attribute named "Field_TradeAgentFeePercent" became equal to "No"
+		Then the form attribute named "Field_TradeAgentFeeAmount" became equal to "No"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		Then the form attribute named "Field_Detail" became equal to "No"	
+		And I click "Next" button
+		And I close all client application windows	
+
+Scenario: _020129 load data in the Sales report to consignor
+		And I close all client application windows
+	* Open Sales report to consignor
+		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' | 'Serial lot numbers'|
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    | ''                  |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Consignor price"
+		And I set checkbox "Price"
+		And I set checkbox "Total amount"
+		Then the form attribute named "ShowOrHideImage" became equal to "No"
+		Then the form attribute named "Field_ConsignorPrice" became equal to "Yes"
+		Then the form attribute named "Field_TradeAgentFeePercent" became equal to "No"
+		Then the form attribute named "Field_TradeAgentFeeAmount" became equal to "No"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "Yes"			
+		And I close all client application windows	
+
+Scenario: _020130 load data in the Sales return
+		And I close all client application windows
+	* Open Sales return
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' | 'Serial lot numbers'|
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    | ''                  |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    | ''                  |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    | '8908899877'        |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    | ''                  |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		And I close all client application windows
+	
+Scenario: _020132 load data in the Sales return order
+		And I close all client application windows
+	* Open Sales return order
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		And I close all client application windows
+
+Scenario: _020133 load data in the Shipment confirmation
+		And I close all client application windows
+	* Open Shipment confirmation
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+		And I close all client application windows
+
+Scenario: _020134 load data in the Stock adjustment as surplus
+		And I close all client application windows
+	* Open Stock adjustment as surplus
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I click "Next" button
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_Amount" became equal to "No"
+		Then the form attribute named "Field_AmountTax" became equal to "No"		
+		And I close all client application windows
+
+Scenario: _020135 load data in the Stock adjustment as write off
+		And I close all client application windows
+	* Open Stock adjustment as write off
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+		And I close all client application windows
+
+Scenario: _020136 load data in the Unbundling
+		And I close all client application windows
+	* Open Unbundling
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+		And I close all client application windows
+
+
+Scenario: _020137 load data in the Work order
+		And I close all client application windows
+	* Open Work order
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+	* Check additional fields for load data
+		And in the table "ItemList" I click "Load data from table" button
+		And I move to "Additional fields" tab
+		And I set checkbox "Price"
+		And I click "Next" button
+		Then the form attribute named "LoadType" became equal to "Barcode"
+		Then the form attribute named "Field_Price" became equal to "Yes"
+		Then the form attribute named "Field_OffersAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"
+		Then the form attribute named "Field_NetAmount" became equal to "No"
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		And I close all client application windows
+
+Scenario: _020138 load data in the Work sheet
+		And I close all client application windows
+	* Open Work sheet
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		And I click the button named "FormCreate"
+	* Check load data form
+		When check load data form in the document
+	* Check document
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
+			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
+			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
+			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
+		And I close all client application windows
 				
 		
 				

@@ -230,6 +230,10 @@
    <key>en</key>
    <value>Change right</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Замена прав</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>

@@ -268,6 +268,10 @@
    <key>en</key>
    <value>User admin</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Пользователь администратор</value>
+  </title>
   <id>1</id>
   <valueType>
    <types>CatalogRef.Users</types>
@@ -284,6 +288,10 @@
   <title>
    <key>en</key>
    <value>Keep rights</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Оставить права</value>
   </title>
   <id>2</id>
   <valueType>
@@ -302,6 +310,14 @@
    <key>en</key>
    <value>Ok</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Ок</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Tamam</value>
+  </title>
   <id>1</id>
   <use>
    <common>true</common>
@@ -318,6 +334,14 @@
   <title>
    <key>en</key>
    <value>Cancel</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Отмена</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <id>2</id>
   <use>

@@ -673,7 +673,7 @@ Scenario: _0850017 payment by payment agent from POS
 
 
 	
-Scenario: _0850018 advance payment
+Scenario: _0850018 advance payment (cash)
 	And I close all client application windows
 	And In the command interface I select "Retail" "Point of sale"
 	* Select retail customer
@@ -708,6 +708,34 @@ Scenario: _0850018 advance payment
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"		
 
 
+Scenario: _08500181 advance payment (card)
+	And I close all client application windows
+	And In the command interface I select "Retail" "Point of sale"
+	* Select retail customer
+		And I click "Search customer" button
+		And I input "005" text in "ID" field
+		And I move to the next attribute
+		And I click "OK" button
+	* Advance
+		And I click the button named "Advance"
+		And I click "Card (*)" button
+		And I click the hyperlink named "Page_1"
+		And I click "1" button
+		And I click "0" button
+		And I click the button named "Enter"
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+	* Check fiscal log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="10"'
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'PaymentMethod="3"'
+	* Check acquiring log
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '10.00'
 		
 Scenario: _0850019 create retail sales receipt from POS (own stock, card 03, use acquiring)
 	And I close all client application windows
@@ -738,9 +766,16 @@ Scenario: _0850019 create retail sales receipt from POS (own stock, card 03, use
 		And I click the button named "Enter"
 		And I close all client application windows	
 	* Check fiscal log
+		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML2"
+		And I check "$ParsingResult$" with "2" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter3" the same as "SalesReceiptXML2"
+		And I check "$ParsingResult$" with "0" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains '620.00'
+		And I check "$ParsingResult$" with "1" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
+		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains '620.00'
 	* Check acquiring log
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
 		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
@@ -772,16 +807,23 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 		And Delay 10
 	* Check fiscal log	
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="100"'
+		And I check "$ParsingResult$" with "2" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter3" contains 'ElectronicPayment="100"'
+		And I check "$ParsingResult$" with "0" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains '50.00'
+		And I check "$ParsingResult$" with "1" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
+		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains '50.00'
 	* Check acquiring log
+		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
 		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '50.00'	
-		And I check "$ParsingResult1$" with "6" and method is "PayByPaymentCard"
-		And I check "$ParsingResult1$" with "6" and data in "Out.Parameter8" contains 'ОПЛАТА'
-		And I check "$ParsingResult1$" with "6" and data in "Out.Parameter8" contains '50.00'	
+		And I check "$ParsingResult1$" with "5" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains '50.00'	
 	* Check RRN
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
@@ -868,15 +910,21 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '40.00'
 		And I check "$ParsingResult1$" with "1" and data in "In.Parameter6" contains '$$RRN2$$'	
-		And I check "$ParsingResult1$" with "6" and method is "ReturnPaymentByPaymentCard"
-		And I check "$ParsingResult1$" with "6" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
-		And I check "$ParsingResult1$" with "6" and data in "Out.Parameter8" contains '50.00'
-		And I check "$ParsingResult1$" with "6" and data in "In.Parameter6" contains '$$RRN1$$'		
+		And I check "$ParsingResult1$" with "5" and method is "ReturnPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains '50.00'
+		And I check "$ParsingResult1$" with "5" and data in "In.Parameter6" contains '$$RRN1$$'		
 	* Check fiscal log
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="90"'
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'Cash="10"'	
+		And I check "$ParsingResult$" with "2" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter3" contains 'ElectronicPayment="90"'
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter3" contains 'Cash="10"'	
+		And I check "$ParsingResult$" with "0" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains 'TextString Text="ВОЗВРАТ'
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains '40.00'
+		And I check "$ParsingResult$" with "1" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains 'TextString Text="ВОЗВРАТ'
+		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains '50.00'
 	And I close all client application windows
 			
 Scenario: _0850024 return by card without basis document (without RRN)
@@ -1091,16 +1139,21 @@ Scenario: _0850021 check the form of payment by card
 		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '430.00'	
-		And I check "$ParsingResult1$" with "6" and method is "PayByPaymentCard"
-		And I check "$ParsingResult1$" with "6" and data in "Out.Parameter8" contains 'ОПЛАТА'
-		And I check "$ParsingResult1$" with "6" and data in "Out.Parameter8" contains '40.00'
-		And I check "$ParsingResult1$" with "11" and method is "PayByPaymentCard"
-		And I check "$ParsingResult1$" with "11" and data in "Out.Parameter8" contains 'ОПЛАТА'
-		And I check "$ParsingResult1$" with "11" and data in "Out.Parameter8" contains '50.00'				
+		And I check "$ParsingResult1$" with "5" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains '40.00'
+		And I check "$ParsingResult1$" with "9" and method is "PayByPaymentCard"
+		And I check "$ParsingResult1$" with "9" and data in "Out.Parameter8" contains 'ОПЛАТА'
+		And I check "$ParsingResult1$" with "9" and data in "Out.Parameter8" contains '50.00'				
 	* Check fiscal log	
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="520"'
+		And I check "$ParsingResult$" with "2" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter3" contains 'ElectronicPayment="520"'
+		And I check "$ParsingResult$" with "1" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
+		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains '50.00'
+		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains '40.00'
+		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains '430.00'
 	And I close all client application windows
 	
 								
@@ -1231,7 +1284,40 @@ Scenario: _0850029 return retail customer advanve from POS (card)
 			And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
 			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
 			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '200.00'
+		* Check fiscal log	
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+			And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="200"'
+			And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'PaymentMethod="3"'
+			And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'OperationType="2"'
 
+Scenario: _0850030 return retail customer advanve from POS (cash)
+		And I close all client application windows
+		And In the command interface I select "Retail" "Point of sale"
+		* Select retail customer
+			And I click "Search customer" button
+			And I input "005" text in "ID" field
+			And I move to the next attribute
+			And I click "OK" button
+		* Return advance
+			And I click the button named "Return"
+			And I click the button named "Advance"		
+			And I click "2" button
+			And I click "0" button
+			And I click "0" button
+			And I click the button named "Enter"		
+		* Check acquiring log
+			And Delay 10
+			And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+			And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
+			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '200.00'
+		* Check fiscal log	
+			And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+			And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+			And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'Cash="200"'
+			And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'PaymentMethod="3"'
+			And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'OperationType="2"'
 
 Scenario: _0850025 sales return (cash)
 	And I close all client application windows
@@ -1364,6 +1450,120 @@ Scenario: _0260150 create cash out
 			| '$$NumberCashReceipt2$$' | '1 000,00' | 'Main Company' | 'Cash desk №2' | '$$CashReceipt2$$' | 'TRY'      | 'Cash in'          | 'CI'     |
 		And I close all client application windows		
 		
+
+Scenario: _0260150 check print cash in from Cash receipt form
+	And I close all client application windows
+	* Create cash receipt (cash in)
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click the button named "FormCreate" 
+		And I select "Cash in" exact value from "Transaction type" drop-down list
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
+			| 'Currency' | 'Description'  |
+			| 'TRY'      | 'Cash desk №4' |
+		And I select current line in "List" table
+		And I click Select button of "Consolidated retail sales" field
+		And I go to line in "List" table
+			| 'Status' |
+			| 'Open'   |
+		And I select current line in "List" table
+		And in the table "PaymentList" I click "Add" button
+		And I activate "Total amount" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "10,00" text in "Total amount" field of "PaymentList" table
+		And I activate "Financial movement type" field in "PaymentList" table
+		And I click choice button of "Financial movement type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Movement type 1' |
+		And I select current line in "List" table
+		And I finish line editing in "PaymentList" table
+		And I click "Post" button
+	* Check Print cash in
+		And I click "Print cash in" button
+	* Check fiscal log
+		And Delay 2
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "CashInOutcome"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "10"
+	* Check double click Print cash in
+		And I click "Print cash in" button
+		Then there are lines in TestClient message log
+			|'The document is already printed.'|
+		And I close all client application windows
+		
+
+Scenario: _0260151 check print cash out from Money transfer form
+	And I close all client application windows
+	* Create money transfer (cash out)
+		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
+		And I click the button named "FormCreate" 
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Select button of "Sender" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №3' |
+		And I select current line in "List" table
+		And I click Select button of "Send financial movement type" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Movement type 1' |
+		And I select current line in "List" table
+		And I click Select button of "Send currency" field
+		And I go to line in "List" table
+			| 'Code' |
+			| 'TRY'  |
+		And I select current line in "List" table
+		And I input "11,00" text in "Send amount" field		
+		And I click Select button of "Receiver" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №2' |
+		And I select current line in "List" table
+		And I click Select button of "Receive financial movement type" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Movement type 1' |
+		And I select current line in "List" table
+		And I click Select button of "Receive currency" field
+		And I go to line in "List" table
+			| 'Code' |
+			| 'TRY'  |
+		And I select current line in "List" table
+		And I input "11,00" text in "Receive amount" field	
+		And I click Select button of "Branch" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shop 02'     |
+		And I select current line in "List" table
+		And I click Select button of "Consolidated retail sales" field
+		And I go to line in "List" table
+			| 'Status' |
+			| 'Open'   |
+		And I select current line in "List" table
+		And I click "Post" button
+	* Check Print cash out
+		And I click "Print cash out" button
+	* Check fiscal log
+		And Delay 2
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "CashInOutcome"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "11"
+	* Check double click Print cash in
+		And I click "Print cash out" button
+		Then there are lines in TestClient message log
+			|'The document is already printed.'|
+		And I close all client application windows
+	
 
 Scenario: _0260152 close sessiion
 	And I close all client application windows

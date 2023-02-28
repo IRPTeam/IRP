@@ -131,5 +131,9 @@
    <key>en</key>
    <value>Additional setting</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные настройки</value>
+  </synonym>
  </enumValues>
 </mdclass:Enum>

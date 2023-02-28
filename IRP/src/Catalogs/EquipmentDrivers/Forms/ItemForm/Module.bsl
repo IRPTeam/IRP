@@ -101,37 +101,49 @@ Procedure BeginGetDriverEnd(DriverObject, Params) Export
 	If IsBlankString(DriverObject) Then
 		CurrentStatus = R().Eq_002 + ": " + Chars.NBSp + Object.AddInID;
 	Else
+		
 		Try
-			Notify = New NotifyDescription("BeginGetDriverEndAfter", ThisObject);
-			DriverObject.НачатьВызовПолучитьОписание(Notify, "");
+			Settings = HardwareClient.Device_GetDescription_2000(DriverObject);
+			If Not Object.RevisionNumber = Settings.InterfaceRevision Then
+				Object.RevisionNumber = Settings.InterfaceRevision;
+				ThisObject.Modified = True;
+			EndIf;
+			Array = New Array;
+			Array.Add(Settings);
+			BeginGetDriverEndAfter(True, Array, Undefined);
 		Except
-			Raise "Old drive revision."
+			InterfaceRevision = HardwareClient.Device_GetInterfaceRevision(DriverObject);
+			If Not Object.RevisionNumber = InterfaceRevision Then
+				Object.RevisionNumber = InterfaceRevision;
+				ThisObject.Modified = True;
+			EndIf;
+			Notify = New NotifyDescription("BeginGetDriverEndAfter", ThisObject);
+			HardwareClient.Device_GetDescription_Begin(DriverObject, Notify);
 		EndTry;
-
 	EndIf;
 EndProcedure
 
 &AtClient
 Procedure BeginGetDriverEndAfter(Result, Params, AddInfo) Export
-	
-	If Result Then
-		FillDriverInfo(Params);
-		UpdateCurrentStatusDriver();
-	EndIf;
-	
+	FillDriverInfo(Params);
+	CurrentStatus = R().Eq_006;
 EndProcedure
 
 &AtServer
 Procedure FillDriverInfo(Val Params)
 	Array = New Array;
 	For Each Param In Params Do
-		DriverInfoObj = CommonFunctionsServer.DeserializeXMLUseXDTOFactory(Param); // XDTODataObject
-		CurrentVersion = DriverInfoObj.DriverVersion;
-		
-		For Each KeyRow In DriverInfoObj.Properties() Do
-			Array.Add(KeyRow.Name + ": " + DriverInfoObj[KeyRow.Name]);
-		EndDo;
-		
+		If TypeOf(Param) = Type("String") Then
+			DriverInfoObj = CommonFunctionsServer.DeserializeXMLUseXDTOFactory(Param); // XDTODataObject
+			For Each KeyRow In DriverInfoObj.Properties() Do
+				Array.Add(KeyRow.Name + ": " + DriverInfoObj[KeyRow.Name]);
+			EndDo;
+		Else
+			DriverInfoObj = Param;
+			For Each KeyRow In DriverInfoObj Do
+				Array.Add(KeyRow.Key + ": " + KeyRow.Value);
+			EndDo;
+		EndIf;
 	EndDo;
 	DriverInfo = StrConcat(Array, Chars.LF);
 EndProcedure
@@ -175,17 +187,6 @@ Procedure UpdateDriverStatus()
 EndProcedure
 
 &AtClient
-Procedure UpdateCurrentStatusDriver()
-	CurrentStatus = R().Eq_006;
-
-	If Not IsBlankString(CurrentVersion) Then
-		Items.CurrentStatus.Visible = True;
-	Else
-		Items.CurrentStatus.Visible = False;
-	EndIf;
-EndProcedure
-
-&AtClient
 Procedure InstallDriver()
 	ClearMessages();
 
@@ -195,7 +196,7 @@ Procedure InstallDriver()
 
 	Notify = New NotifyDescription("InstallDriverFromZIPEnd", ThisObject);
 
-	HardwareClient.InstallDriver(Object.AddInID, Notify);
+	HardwareClient.InstallDriver(Object.Ref, Notify);
 EndProcedure
 
 &AtClient

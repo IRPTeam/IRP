@@ -25,4 +25,5 @@
  <content>DataProcessor.ProductionWorkspace</content>
  <content>Catalog.BusinessUnits.Attribute.Workshop</content>
  <content>Document.ProductionCostsAllocation</content>
+ <content>Catalog.BillOfMaterials</content>
 </mdclass:FunctionalOption>

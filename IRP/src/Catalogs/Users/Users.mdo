@@ -339,6 +339,10 @@
    <key>en</key>
    <value>User ID</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>ID пользователя</value>
+  </synonym>
   <type>
    <types>DefinedType.typeBarcode</types>
   </type>

@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Movements
+@Movements2
 @MovementsOpeningEntry
 
 Feature: check Opening entry movements
@@ -50,6 +50,7 @@ Scenario: _042900 preparation (Opening entry)
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
 		When Create information register TaxSettings records
+		When Create catalog Stores (trade agent)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
@@ -79,6 +80,7 @@ Scenario: _042900 preparation (Opening entry)
 	* Tax settings
 		When filling in Tax settings for company
 	When Create Document discount
+	When settings for Main Company (commission trade)
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then

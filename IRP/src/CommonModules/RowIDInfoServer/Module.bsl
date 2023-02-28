@@ -9171,7 +9171,7 @@ Function LinkUnlinkDocumentRows(Object, FillingValues) Export
 	
 	// Refreshable tables on unlink documents
 	TableNames_Refreshable = GetTableNames_Refreshable("SerialLotNumbers");
-	
+
 	UpdatedProperties = New Array();
 	UpdatedRows = New Array();
 
@@ -10079,7 +10079,7 @@ Procedure CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, Basises
 		NewBasisesTreeRow.Picture = 1;
 		NewBasisesTreeRow.RowPresentation = String(RowBasis.Basis);
 		
-		If NewBasisesTreeRow.Property("DocRef") Then
+		If CommonFunctionsClientServer.ObjectHasProperty(NewBasisesTreeRow, "DocRef") Then
 			NewBasisesTreeRow.DocRef = RowBasis.Basis;
 		EndIf;
 		
@@ -10102,7 +10102,15 @@ Procedure CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, Basises
 					// deep level
 					NewBasisesTreeRow.Picture = 2;
 					NewBasisesTreeRow.IsMainDocument = True;
-					DeepLevelRow = NewBasisesTreeRow.GetItems().Add();
+					
+					_BasisesTreeRow = Undefined;
+					If TypeOf(NewBasisesTreeRow) = Type("ValueTreeRow") Then
+						_BasisesTreeRow = NewBasisesTreeRow.Rows;
+					Else
+						_BasisesTreeRow = NewBasisesTreeRow.GetItems();
+					EndIf;
+					DeepLevelRow = _BasisesTreeRow.Add();
+					
 					DeepLevelRow.Picture = 0;
 					DeepLevelRow.RowPresentation = String(TableRow.Item) + " (" + String(TableRow.ItemKey) + ")";
 
@@ -10135,13 +10143,19 @@ Procedure CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, Basises
 			EndIf; // ParentRows.Count()
 
 		EndDo; // FilterTable
-
-		CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, NewBasisesTreeRow.GetItems());
-
+		
+		_BasisesTreeRow = Undefined;
+		If TypeOf(NewBasisesTreeRow) = Type("ValueTreeRow") Then
+			_BasisesTreeRow = NewBasisesTreeRow.Rows;
+		Else
+			_BasisesTreeRow = NewBasisesTreeRow.GetItems();
+		EndIf;
+		CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, _BasisesTreeRow);
+		
 	EndDo; // BasisTable
 EndProcedure
 
-Function CreateBasisesTreeReverse(BasisesTable) Export
+Function CreateBasisesTreeReverse(BasisesTable, ErrorInfo = Undefined) Export
 	Tree = New ValueTree();
 	Tree.Columns.Add("Key");
 	Tree.Columns.Add("Basis");
@@ -10160,6 +10174,15 @@ Function CreateBasisesTreeReverse(BasisesTable) Export
 
 		BasisesInfo = GetBasisesInfo(TableRow.Basis, TableRow.BasisKey, TableRow.RowID);
 			
+		If ErrorInfo <> Undefined And Not ValueIsFilled(BasisesInfo.Basis) Then
+			ErrorInfo.IsError = True;
+			ErrorInfo.Code = 2;
+			ErrorInfo.Description = "Wrong value in BasisKey Or Basis";
+			ErrorInfo.Detail = "Not ValueIsFilled(BasisesInfo.Basis)";
+			ErrorInfo.Guess = "<?>";
+			Return Undefined;
+		EndIf;
+		
 		//top level
 		Level = 1;
 		NewTreeRow = Tree.Rows.Add();
@@ -10167,7 +10190,7 @@ Function CreateBasisesTreeReverse(BasisesTable) Export
 
 		FillPropertyValues(NewTreeRow, BasisesInfo);
 
-		CreateBasisesTreeReverseRecursive(BasisesInfo, NewTreeRow.Rows, Level);
+		CreateBasisesTreeReverseRecursive(BasisesInfo, NewTreeRow.Rows, Level, ErrorInfo);
 
 		If Not NewTreeRow.Rows.Count() Then
 			NewTreeRow.LastRow = True;
@@ -10189,16 +10212,38 @@ Function CreateBasisesTreeReverse(BasisesTable) Export
 	Return New Structure("Tree, BasisesInfoTable", Tree, BasisesInfoTable);
 EndFunction
 
-Procedure CreateBasisesTreeReverseRecursive(BasisesInfo, TreeRows, Level)
+Procedure CreateBasisesTreeReverseRecursive(BasisesInfo, TreeRows, Level, ErrorInfo = Undefined)
 	If BasisesInfo.Basis <> BasisesInfo.RowRef.Basis Then
-		ParentBasisInfo = GetBasisesInfo(BasisesInfo.ParentBasis, BasisesInfo.BasisKey, BasisesInfo.RowID);
+		
+		If ErrorInfo <> Undefined And ErrorInfo.IsError Then
+			Return;
+		EndIf;
+		If ErrorInfo <> Undefined And Not ValueIsFilled(BasisesInfo.ParentBasis) Then
+			ErrorInfo.IsError = True;
+			ErrorInfo.Code = 1;
+			ErrorInfo.Description = "Wrong RowRef.Basis";
+			ErrorInfo.Detail = "BasisesInfo.Basis <> BasisesInfo.RowRef.Basis And Not ValueIsFilled(BasisesInfo.ParentBasis)";
+			ErrorInfo.Guess = New Structure("RealBasis", BasisesInfo.Basis);
+			Return;
+		EndIf;
+		
+		ParentBasisInfo = GetBasisesInfo(BasisesInfo.ParentBasis, BasisesInfo.BasisKey, BasisesInfo.RowID, ErrorInfo);
+		If ErrorInfo <> Undefined And Not ValueIsFilled(ParentBasisInfo.Basis) Then
+			ErrorInfo.IsError = True;
+			ErrorInfo.Code = 3;
+			ErrorInfo.Description = "Wrong value in BasisKey Or Basis (ParentBasisInfo)";
+			ErrorInfo.Detail = "Not ValueIsFilled(BasisesInfo.Basis)";
+			ErrorInfo.Guess = "<?>";
+			Return;
+		EndIf;
+		
 		Level = Level + 1;
 		NewTreeRow = TreeRows.Add();
 		NewTreeRow.Level = Level;
 
 		FillPropertyValues(NewTreeRow, ParentBasisInfo);
 
-		CreateBasisesTreeReverseRecursive(ParentBasisInfo, NewTreeRow.Rows, Level);
+		CreateBasisesTreeReverseRecursive(ParentBasisInfo, NewTreeRow.Rows, Level, ErrorInfo);
 
 		If Not NewTreeRow.Rows.Count() Then
 			NewTreeRow.LastRow = True;
@@ -10206,7 +10251,7 @@ Procedure CreateBasisesTreeReverseRecursive(BasisesInfo, TreeRows, Level)
 	EndIf;
 EndProcedure
 
-Function GetBasisesInfo(Basis, BasisKey, RowID) Export
+Function GetBasisesInfo(Basis, BasisKey, RowID, ErrorInfo = Undefined) Export
 	Query = New Query();
 	Query.Text = 
 		"SELECT
@@ -10232,7 +10277,7 @@ Function GetBasisesInfo(Basis, BasisKey, RowID) Export
 	QuerySelection = QueryResult.Select();
 	BasisInfo = New Structure("Key, Basis, RowRef, RowID, ParentBasis, BasisKey, Price, Currency, Unit");
 	If QuerySelection.Next() Then
-		FillPropertyValues(BasisInfo, QuerySelection);
+		FillPropertyValues(BasisInfo, QuerySelection); 
 	EndIf;
 	Return BasisInfo;
 EndFunction
@@ -10243,11 +10288,18 @@ Procedure CreateChildrenTree(Basis, BasisKey, RowID, ChildrenTreeRows) Export
 		NewChildrenTreeRow = ChildrenTreeRows.Add();
 		NewChildrenTreeRow.Picture = 1;
 		NewChildrenTreeRow.RowPresentation = String(ChildrenInfo.Children);
-		If NewChildrenTreeRow.Property("DocRef") Then
+		
+		If CommonFunctionsClientServer.ObjectHasProperty(NewChildrenTreeRow, "DocRef") Then
 			NewChildrenTreeRow.DocRef = ChildrenInfo.Children;
 		EndIf;
-		CreateChildrenTree(ChildrenInfo.Children, ChildrenInfo.BasisKey, ChildrenInfo.RowID, 
-			NewChildrenTreeRow.GetItems());
+		_ChildrenTreeRow = Undefined;
+		If TypeOf(NewChildrenTreeRow) = Type("ValueTreeRow") Then
+			_ChildrenTreeRow = NewChildrenTreeRow.Rows;
+		Else
+			_ChildrenTreeRow = NewChildrenTreeRow.GetItems();
+		EndIf;
+			
+		CreateChildrenTree(ChildrenInfo.Children, ChildrenInfo.BasisKey, ChildrenInfo.RowID, _ChildrenTreeRow);
 	EndDo;
 EndProcedure
 
@@ -10683,10 +10735,6 @@ Procedure GetBasisInfoRecursive(Basis, BasisKey, RowID, ResultTable, Key)
 		Return;
 	EndIf;
 	
-	If ResultTable.FindRows(New Structure("Recorder", BasisInfo.Basis)).Count() Then
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_122, RowID) + StrConcat(ResultTable.UnloadColumn("Recorder"), Chars.LF));
-	EndIf;
-	
 	NewRow = ResultTable.Add();
 	NewRow.Key = Key;
 	NewRow.Recorder = BasisInfo.Basis;
@@ -10699,7 +10747,7 @@ Procedure GetBasisInfoRecursive(Basis, BasisKey, RowID, ResultTable, Key)
 	EndIf;
 EndProcedure
 
-Function GetExternalLinkedKeys(RowIDInfoTable, Ref)
+Function GetExternalLinkedKeys(RowIDInfoTable, Ref) Export
 	ResultTable = New ValueTable();
 	ResultTable.Columns.Add("Key");
 	ResultTable.Columns.Add("Recorder");

@@ -1,4 +1,42 @@
 
+// Fill settings add new serial.
+// 
+// Parameters:
+//  Str - Structure:
+// * RowKey - String -
+// * Item - CatalogRef.Items -
+// * ItemKey - CatalogRef.ItemKeys -
+// * SerialLotNumbers - Array of Structure:
+// ** SerialLotNumber - CatalogRef.SerialLotNumbers -
+// ** Quantity - Number -
+// 
+// Returns:
+//  Structure - Fill settings add new serial:
+// * RowKey - String -
+// * Item - CatalogRef.Items -
+// * ItemKey - CatalogRef.ItemKeys -
+// * SerialLotNumbers - Array of Structure:
+// ** SerialLotNumber - CatalogRef.SerialLotNumbers -
+// ** Quantity - Number -
+Function FillSettingsAddNewSerial(Str = Undefined) Export
+	Result = New Structure();
+	Result.Insert("RowKey", "");
+	Result.Insert("Item", Catalogs.Items.EmptyRef());
+	Result.Insert("ItemKey", Catalogs.ItemKeys.EmptyRef());
+	Result.Insert("SerialLotNumbers", New Array());
+	
+	If Not Str = Undefined Then
+		Result.RowKey = Str.RowKey;
+		Result.Item = Str.Item;
+		Result.ItemKey = Str.ItemKey;
+		For Each Row In Str.SerialLotNumbers Do
+			Result.SerialLotNumbers.Add(
+					New Structure("SerialLotNumber, Quantity", Row.SerialLotNumber, Row.Quantity));
+		EndDo;
+	EndIf;
+	Return Result;
+EndFunction
+
 // Check serial lot number name.
 // 
 // Parameters:
@@ -329,3 +367,170 @@ Procedure UpdateSerialLotNumbersPresentation(Object) Export
 		EndIf;
 	EndDo;
 EndProcedure
+
+// Get Serial lot number table.
+// 
+// Returns:
+//  ValueTable - Get standard item table:
+// * Key - String -
+// * Quantity - DefinedType.typeQuantity
+// * Barcode  - DefinedType.typeBarcode
+Function GetSerialLotNumberTable() Export
+	
+	Table = New ValueTable();
+	
+	Table.Columns.Add(
+		"Key", 
+		New TypeDescription("String"), 
+		"Key", 
+		15);
+		
+	Table.Columns.Add(
+		"Quantity", 
+		Metadata.DefinedTypes.typeQuantity.Type, 
+		Metadata.Documents.SalesInvoice.TabularSections.ItemList.Attributes.Quantity.Synonym, 
+		15);
+		
+	Table.Columns.Add(
+		"SerialLotNumber", 
+		New TypeDescription("String", , New StringQualifiers(Metadata.Catalogs.SerialLotNumbers.DescriptionLength)), 
+		Metadata.InformationRegisters.Barcodes.Resources.SerialLotNumber.Synonym, 
+		30);
+		
+	Return Table;
+	
+EndFunction
+
+// Search by barcodes.
+// 
+// Parameters:
+//  SerialLotNumberTable - See GetSerialLotNumberTable
+//  AddInfo - Structure
+// 
+// Returns:
+//  ValueTable:
+// * Key - String
+// * SerialLotNumber - CatalogRef.SerialLotNumbers -
+// * Quantity - DefinedType.typeQuantity
+// * Item - CatalogRef.Items -
+// * ItemKey - CatalogRef.ItemKeys -
+// * Unit - CatalogRef.Units -
+// * ItemKeyUnit - CatalogRef.Units -
+// * ItemUnit - CatalogRef.Units -
+// * hasSpecification - Boolean -
+// * ItemType - CatalogRef.ItemTypes -
+// * UseSerialLotNumber - Boolean - Always TRUE
+// * Image - CatalogRef.Files -
+Function SearchBySerialLotNumber_WithKey(SerialLotNumberTable, AddInfo = Undefined) Export
+
+	Query = New Query();
+	Query.Text = "SELECT
+	|	SerialLotNumberTable.Key,
+	|	SerialLotNumberTable.SerialLotNumber,
+	|	SerialLotNumberTable.Quantity
+	|INTO tmpSerialTable
+	|FROM
+	|	&SerialLotNumberTable AS SerialLotNumberTable
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpSerialTable.Key,
+	|	SerialLotNumbersCatalog.Ref AS SerialLotNumber,
+	|	tmpSerialTable.Quantity,
+	|	CAST(SerialLotNumbersCatalog.SerialLotNumberOwner AS Catalog.ItemKeys) AS ItemKey
+	|INTO tmpMain
+	|FROM
+	|	tmpSerialTable AS tmpSerialTable
+	|		INNER JOIN Catalog.SerialLotNumbers AS SerialLotNumbersCatalog
+	|		ON tmpSerialTable.SerialLotNumber = SerialLotNumbersCatalog.Description
+	|WHERE
+	|	SerialLotNumbersCatalog.SerialLotNumberOwner REFS Catalog.ItemKeys
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpMain.Key,
+	|	tmpMain.SerialLotNumber,
+	|	tmpMain.Quantity,
+	|	tmpMain.ItemKey.Item AS Item,
+	|	tmpMain.ItemKey,
+	|	CASE
+	|		WHEN tmpMain.ItemKey.Unit = Value(Catalog.Units.EmptyRef)
+	|			THEN tmpMain.ItemKey.Item.Unit
+	|		ELSE tmpMain.ItemKey.Unit
+	|	END AS Unit,
+	|	tmpMain.ItemKey.Unit AS ItemKeyUnit,
+	|	tmpMain.ItemKey.Item.Unit AS ItemUnit,
+	|	NOT tmpMain.ItemKey.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
+	|	tmpMain.ItemKey.Item.ItemType AS ItemType,
+	|	TRUE AS UseSerialLotNumber
+	|INTO tmpFullData
+	|FROM
+	|	tmpMain AS tmpMain
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	AttachedFiles.Owner AS Item,
+	|	VALUE(Catalog.ItemKeys.EmptyRef) AS ItemKey,
+	|	MAX(AttachedFiles.File) AS File,
+	|	MIN(AttachedFiles.Priority) AS Priority
+	|INTO Images
+	|FROM
+	|	InformationRegister.AttachedFiles AS AttachedFiles
+	|		INNER JOIN tmpFullData AS MainData
+	|		ON MainData.Item = AttachedFiles.Owner
+	|WHERE
+	|	AttachedFiles.Priority = 0
+	|GROUP BY
+	|	AttachedFiles.Owner,
+	|	VALUE(Catalog.ItemKeys.EmptyRef)
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	AttachedFiles.Owner.Item,
+	|	AttachedFiles.Owner AS Item,
+	|	MAX(AttachedFiles.File) AS File,
+	|	MIN(AttachedFiles.Priority) AS Priority
+	|FROM
+	|	InformationRegister.AttachedFiles AS AttachedFiles
+	|		INNER JOIN tmpFullData AS MainData
+	|		ON MainData.ItemKey = AttachedFiles.Owner
+	|WHERE
+	|	AttachedFiles.Priority = 0
+	|GROUP BY
+	|	AttachedFiles.Owner.Item,
+	|	AttachedFiles.Owner
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	MainData.ItemKey,
+	|	MainData.Item,
+	|	MainData.SerialLotNumber,
+	|	MainData.Unit,
+	|	MainData.ItemKeyUnit,
+	|	MainData.ItemUnit,
+	|	MainData.hasSpecification,
+	|	MainData.ItemType,
+	|	MainData.UseSerialLotNumber,
+	|	MainData.Key,
+	|	MainData.Quantity,
+	|	Images.File AS Image
+	|FROM
+	|	tmpFullData AS MainData
+	|		LEFT JOIN Images AS Images
+	|		ON CASE
+	|			WHEN Images.ItemKey = VALUE(Catalog.ItemKeys.EmptyRef)
+	|				THEN MainData.Item = Images.Item
+	|			ELSE MainData.ItemKey = Images.ItemKey
+	|		END";
+	Query.SetParameter("SerialLotNumberTable", SerialLotNumberTable);
+	QueryExecution = Query.Execute();
+	QueryUnload = QueryExecution.Unload();
+	
+	Return QueryUnload;
+
+EndFunction

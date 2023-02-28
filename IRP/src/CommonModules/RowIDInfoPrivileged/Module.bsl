@@ -3,8 +3,8 @@ Procedure FillVisibleFields(BasisesTree, VisibleFields) Export
 	RowIDInfoClientServer.FillVisibleFields(BasisesTree, VisibleFields);
 EndProcedure
 
-Function CreateBasisesTreeReverse(BasisesTable) Export
-	Return RowIDInfoServer.CreateBasisesTreeReverse(BasisesTable);
+Function CreateBasisesTreeReverse(BasisesTable, ErrorInfo = Undefined) Export
+	Return RowIDInfoServer.CreateBasisesTreeReverse(BasisesTable, ErrorInfo);
 EndFunction
 
 Procedure CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, ResultsTree) Export

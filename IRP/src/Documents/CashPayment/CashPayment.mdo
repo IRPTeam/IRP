@@ -245,6 +245,29 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="593dcc21-570b-44e0-abb5-2324e60be734">
+  <name>ConsolidatedRetailSales</name>
+  <synonym>
+   <key>en</key>
+   <value>Consolidated retail sales</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Отчеты о розничных продажах</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Konsolide perakende satış fişleri</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.ConsolidatedRetailSales</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="0f3f280f-b462-4225-8b95-573629f94132">
   <name>DocumentForm</name>
   <synonym>
@@ -1110,6 +1133,27 @@
    <types>DocumentRef.EmployeeCashAdvance</types>
   </commandParameterType>
   <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
+ <commands uuid="48d6158f-f6c8-4f6f-b629-fcf0adfc0e72">
+  <name>PrintCashOut</name>
+  <synonym>
+   <key>en</key>
+   <value>Print cash out</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Изъятие ДС</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nakit çıkışı yazdır</value>
+  </synonym>
+  <group>FormCommandBarImportant</group>
+  <commandParameterType>
+   <types>DocumentRef.CashPayment</types>
+  </commandParameterType>
+  <modifiesData>true</modifiesData>
   <representation>Auto</representation>
  </commands>
 </mdclass:Document>

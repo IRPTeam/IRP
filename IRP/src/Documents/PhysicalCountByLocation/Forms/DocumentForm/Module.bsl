@@ -252,19 +252,60 @@ EndProcedure
 
 #EndRegion
 
-#Region COMMANDS
+#Region COPY_PASTE
+
+&AtClient
+Procedure CopyToClipboard(Command)
+	CopyPasteClient.CopyToClipboard(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure CopyToClipboardAfterSetSettings(CopySettings, AddInfo) Export
+	If CopySettings = Undefined Then
+		Return;
+	EndIf;
+	
+	CopyPasteResult = CopyToClipboardServer(CopySettings);
+	CopyPasteClient.AfterCopy(CopyPasteResult);
+EndProcedure
+
+&AtServer
+Function CopyToClipboardServer(CopySettings)
+	Return CopyPasteServer.CopyToClipboard(Object, ThisObject, CopySettings);
+EndFunction
+
+&AtClient
+Procedure PasteFromClipboard(Command)
+	CopyPasteClient.PasteFromClipboard(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure PasteFromClipboardAfterSetSettings(PasteSettings, AddInfo) Export
+	If PasteSettings = Undefined Then
+		Return;
+	EndIf;
+	
+	CopyPasteResult = PasteFromClipboardServer(PasteSettings);
+	CopyPasteClient.AfterPaste(Object, ThisObject,CopyPasteResult);
+EndProcedure
+
+&AtServer
+Function PasteFromClipboardServer(CopySettings)
+	Return CopyPasteServer.PasteFromClipboard(Object, ThisObject, CopySettings);
+EndFunction
+
+#EndRegion
+
+#Region LOAD_DATA_FROM_TABLE
 
 &AtClient
 Procedure LoadDataFromTable(Command)
-	OpenForm("CommonForm.LoadDataFromTable", , ThisObject, , , , New NotifyDescription("LoadDataFromTableEnd", ThisObject));
+	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object);
 EndProcedure
 
-&AtClient
-Procedure LoadDataFromTableEnd(Result, AdditionalParameters) Export
-	If Result <> Undefined And Not IsBlankString(Result) Then
-		ViewClient_V2.ItemListLoad(Object, ThisObject, Result);
-	EndIf;
-EndProcedure
+#EndRegion
+
+#Region COMMANDS
 
 &AtClient
 Procedure DecorationStatusHistoryClick(Item)

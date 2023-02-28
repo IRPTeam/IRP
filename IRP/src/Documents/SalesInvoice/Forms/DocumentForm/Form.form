@@ -3029,36 +3029,6 @@
       <placementArea>UserCmds</placementArea>
       <representationInContextMenu>Auto</representationInContextMenu>
      </items>
-     <items xsi:type="form:Button">
-      <name>ItemListLoadDataFromTable</name>
-      <id>1280</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <extendedTooltip>
-       <name>ItemListLoadDataFromTableExtendedTooltip</name>
-       <id>1281</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <type>Label</type>
-       <autoMaxWidth>true</autoMaxWidth>
-       <autoMaxHeight>true</autoMaxHeight>
-       <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-       </extInfo>
-      </extendedTooltip>
-      <commandName>Form.Command.LoadDataFromTable</commandName>
-      <representation>Auto</representation>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <placementArea>UserCmds</placementArea>
-      <representationInContextMenu>Auto</representationInContextMenu>
-     </items>
      <items xsi:type="form:FormGroup">
       <name>LinkedDocuments</name>
       <id>1327</id>
@@ -9143,34 +9113,6 @@
   <action xsi:type="form:FormCommandHandlerContainer">
    <handler>
     <name>ShowHiddenTables</name>
-   </handler>
-  </action>
-  <currentRowUse>Auto</currentRowUse>
- </formCommands>
- <formCommands>
-  <name>LoadDataFromTable</name>
-  <title>
-   <key>en</key>
-   <value>LoadDataFromTable</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Загрузить из таблицы</value>
-  </title>
-  <title>
-   <key>tr</key>
-   <value>Tablodan veri yükle</value>
-  </title>
-  <id>16</id>
-  <use>
-   <common>true</common>
-  </use>
-  <picture xsi:type="core:PictureRef">
-   <picture>StdPicture.SpreadsheetShowGrid</picture>
-  </picture>
-  <action xsi:type="form:FormCommandHandlerContainer">
-   <handler>
-    <name>LoadDataFromTable</name>
    </handler>
   </action>
   <currentRowUse>Auto</currentRowUse>

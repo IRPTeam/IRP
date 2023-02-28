@@ -69,13 +69,15 @@ Procedure SetVisibilityAvailability(Object, Form)
 			Form.Items.CloseSession.Enabled = SessionIsCreated;
 			Form.Items.CancelSession.Enabled = SessionIsCreated;
 		EndIf;
+		Form.Items.GroupCashCommands.Enabled = SessionIsCreated;
+		Form.Items.GroupReports.Enabled = SessionIsCreated;
 	Else
 		Form.Items.GroupCommonCommands.Visible = False;
 	EndIf;
 	
 	Form.Items.GroupCashCommands.Visible = 
 		CommonFunctionsServer.GetRefAttribute(Form.Workstation, "UseCashInAndCashOut");
-		
+	
 	Form.Items.ReturnPage.Visible =	Form.isReturn;
 	
 	Form.Title = R().InfoMessage_POS_Title + ?(Form.isReturn, ": " + R().InfoMessage_ReturnTitle, "");
@@ -785,6 +787,8 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	If Not ResultPrint Then
 		Return;
 	EndIf;
+	ResultPrint = Await PrintTextDocument(DocRef);
+	ResultPrint = Await PrintTextDocument(DocRef);
 	DetailedInformation = R().S_030 + ": " + Format(CashbackAmount, "NFD=2; NZ=0;");
 	SetDetailedInfo(DetailedInformation);
 	
@@ -801,17 +805,17 @@ Async Procedure AdvanceFormClose(Result, AdditionalData) Export
 	EndIf;
 	If ThisObject.isReturn Then
 		DocumentParameters = GetAdvanceDocumentParameters(Result.Payments, "Outgoing");
-		CreatedDocuments = CreateAdvanceDocumentsAtServer(DocumentParameters);
 	Else	
 		DocumentParameters = GetAdvanceDocumentParameters(Result.Payments, "Incoming");
-		CreatedDocuments = CreateAdvanceDocumentsAtServer(DocumentParameters);
-	
-		For Each CreatedDocument In CreatedDocuments Do
-			ResultPrint = Await PrintFiscalReceipt(CreatedDocument);
-		EndDo;
 	EndIf;
 	
-	Object.RetailCustomer = Undefined;
+	CreatedDocuments = CreateAdvanceDocumentsAtServer(DocumentParameters);
+	For Each CreatedDocument In CreatedDocuments Do
+		ResultPrint = Await PrintFiscalReceipt(CreatedDocument);
+	EndDo;
+	
+	NewTransaction();
+	Modified = False;
 EndProcedure
 
 &AtClient
@@ -885,7 +889,7 @@ Function CreateAdvanceDocumentsAtServer(DocumentParameters)
 		BuilderAPI.SetProperty(CashDocument, "Date"        , CommonFunctionsServer.GetCurrentSessionDate(), "PaymentList");
 		BuilderAPI.SetProperty(CashDocument, "TransactionType" , DocumentParameters.CashDocumentTransactionType, "PaymentList");
 		BuilderAPI.SetProperty(CashDocument, "CashAccount" , RowHeader.Account, "PaymentList");
-	
+		BuilderAPI.SetProperty(CashDocument, "ConsolidatedRetailSales" , Object.ConsolidatedRetailSales, "PaymentList");
 		
 		For Each RowList In CashtTable.FindRows(New Structure("Account", RowHeader.Account)) Do	
 			NewRow = BuilderAPI.AddRow(CashDocument, "PaymentList");
@@ -923,6 +927,7 @@ Function CreateAdvanceDocumentsAtServer(DocumentParameters)
 		BuilderAPI.SetProperty(BankDocument, "Date"        , CommonFunctionsServer.GetCurrentSessionDate(), "PaymentList");
 		BuilderAPI.SetProperty(BankDocument, "TransactionType" , DocumentParameters.BankDocumentTransactionType, "PaymentList");
 		BuilderAPI.SetProperty(BankDocument, "Account" , RowHeader.Account, "PaymentList");
+		BuilderAPI.SetProperty(BankDocument, "ConsolidatedRetailSales" , Object.ConsolidatedRetailSales, "PaymentList");
 	
 		For Each RowList In BankTable.FindRows(New Structure("Account", RowHeader.Account)) Do	
 			NewRow = BuilderAPI.AddRow(BankDocument, "PaymentList");
@@ -965,6 +970,16 @@ Async Function PrintFiscalReceipt(DocumentRef)
 	
 	EquipmentPrintFiscalReceiptResult = Await EquipmentFiscalPrinterClient.ProcessCheck(Object.ConsolidatedRetailSales, DocumentRef);
 	Return EquipmentPrintFiscalReceiptResult.Success;
+EndFunction
+
+&AtClient
+Async Function PrintTextDocument(DocumentRef)
+	If Object.ConsolidatedRetailSales.IsEmpty() Then
+		Return True;
+	EndIf;
+	
+	EquipmentPrintResult = Await EquipmentFiscalPrinterClient.PrintTextDocument(Object.ConsolidatedRetailSales, DocumentRef);
+	Return EquipmentPrintResult.Success;
 EndFunction
 
 &AtServer
@@ -1429,7 +1444,7 @@ Function GetRetailBasisData()
 	
 	If ExtractedData.Count() > 0 Then
 		DocumentData = ExtractedData[0];
-		
+		DocumentData.Payments.GroupBy("PaymentType", "Amount");
 		For Each TableItem In DocumentData.Payments Do
 			ItemStructure = New Structure;
 			ItemStructure.Insert("PaymentType", TableItem.PaymentType);

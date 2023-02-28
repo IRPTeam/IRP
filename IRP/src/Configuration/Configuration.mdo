@@ -263,6 +263,8 @@
  <commonPictures>CommonPicture.Unlock</commonPictures>
  <commonPictures>CommonPicture.Waiting</commonPictures>
  <commonPictures>CommonPicture.Work</commonPictures>
+ <commonPictures>CommonPicture.CopyRowsToClipboard</commonPictures>
+ <commonPictures>CommonPicture.PasteRowsFromClipboard</commonPictures>
  <sessionParameters>SessionParameter.ClientType</sessionParameters>
  <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
  <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
@@ -277,6 +279,7 @@
  <sessionParameters>SessionParameter.OurCompanies</sessionParameters>
  <sessionParameters>SessionParameter.RunBackgroundJobInDebugMode</sessionParameters>
  <sessionParameters>SessionParameter.Workstation</sessionParameters>
+ <sessionParameters>SessionParameter.Buffer</sessionParameters>
  <roles>Role.BasicRole</roles>
  <roles>Role.CreateOrModifyUsers</roles>
  <roles>Role.FilterForUserSettings</roles>
@@ -549,6 +552,11 @@
  <commonModules>CommonModule.ViewServer_V2</commonModules>
  <commonModules>CommonModule.WorkstationClient</commonModules>
  <commonModules>CommonModule.WorkstationServer</commonModules>
+ <commonModules>CommonModule.CopyPasteServer</commonModules>
+ <commonModules>CommonModule.CopyPasteClient</commonModules>
+ <commonModules>CommonModule.DataVersioningServer</commonModules>
+ <commonModules>CommonModule.LoadDataFromTableServer</commonModules>
+ <commonModules>CommonModule.LoadDataFromTableClient</commonModules>
  <commonAttributes>CommonAttribute.Author</commonAttributes>
  <commonAttributes>CommonAttribute.Branch</commonAttributes>
  <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -760,6 +768,8 @@
  <commonForms>CommonForm.UpdateItemListInfo</commonForms>
  <commonForms>CommonForm.SelectionRetailBasisForReturn</commonForms>
  <commonForms>CommonForm.PaymentByAcquiring</commonForms>
+ <commonForms>CommonForm.CopyToClipboardSettings</commonForms>
+ <commonForms>CommonForm.PasteFromClipboardSettings</commonForms>
  <catalogs>Catalog.AccessGroups</catalogs>
  <catalogs>Catalog.AccessProfiles</catalogs>
  <catalogs>Catalog.AccountingOperations</catalogs>
@@ -860,6 +870,8 @@
  <documents>Document.CreditNote</documents>
  <documents>Document.CustomersAdvancesClosing</documents>
  <documents>Document.DebitNote</documents>
+ <documents>Document.EmployeeCashAdvance</documents>
+ <documents>Document.ForeignCurrencyRevaluation</documents>
  <documents>Document.GoodsReceipt</documents>
  <documents>Document.IncomingPaymentOrder</documents>
  <documents>Document.InternalSupplyRequest</documents>
@@ -872,11 +884,13 @@
  <documents>Document.MoneyTransfer</documents>
  <documents>Document.OpeningEntry</documents>
  <documents>Document.OutgoingPaymentOrder</documents>
+ <documents>Document.Payroll</documents>
  <documents>Document.PhysicalCountByLocation</documents>
  <documents>Document.PhysicalInventory</documents>
  <documents>Document.PlannedReceiptReservation</documents>
  <documents>Document.PriceList</documents>
  <documents>Document.Production</documents>
+ <documents>Document.ProductionCostsAllocation</documents>
  <documents>Document.ProductionPlanning</documents>
  <documents>Document.ProductionPlanningClosing</documents>
  <documents>Document.ProductionPlanningCorrection</documents>
@@ -891,23 +905,19 @@
  <documents>Document.SalesInvoice</documents>
  <documents>Document.SalesOrder</documents>
  <documents>Document.SalesOrderClosing</documents>
+ <documents>Document.SalesReportFromTradeAgent</documents>
+ <documents>Document.SalesReportToConsignor</documents>
  <documents>Document.SalesReturn</documents>
  <documents>Document.SalesReturnOrder</documents>
  <documents>Document.ShipmentConfirmation</documents>
  <documents>Document.StockAdjustmentAsSurplus</documents>
  <documents>Document.StockAdjustmentAsWriteOff</documents>
+ <documents>Document.TimeSheet</documents>
  <documents>Document.Unbundling</documents>
  <documents>Document.VendorsAdvancesClosing</documents>
  <documents>Document.WorkOrder</documents>
  <documents>Document.WorkOrderClosing</documents>
  <documents>Document.WorkSheet</documents>
- <documents>Document.SalesReportFromTradeAgent</documents>
- <documents>Document.SalesReportToConsignor</documents>
- <documents>Document.EmployeeCashAdvance</documents>
- <documents>Document.ProductionCostsAllocation</documents>
- <documents>Document.Payroll</documents>
- <documents>Document.TimeSheet</documents>
- <documents>Document.ForeignCurrencyRevaluation</documents>
  <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
  <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
  <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1071,6 +1081,7 @@
  <informationRegisters>InformationRegister.T9510S_Staffing</informationRegisters>
  <informationRegisters>InformationRegister.T9520S_TimeSheetInfo</informationRegisters>
  <informationRegisters>InformationRegister.T9530S_WorkDays</informationRegisters>
+ <informationRegisters>InformationRegister.DataVersions</informationRegisters>
  <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

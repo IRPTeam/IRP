@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Movements
+@Movements2
 @MovementsDebitNote
 
 Feature: check Debit note movements

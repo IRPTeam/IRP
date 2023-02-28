@@ -1310,6 +1310,15 @@ Function Strings(Lang) Export
 		|ru='Рабочее место кассира';
 		|tr='Satış ekranı'", Lang));
 	
+	Strings.Insert("InfoMessage_NotProperty", NStr("en='The object has no properties for editing';
+		|ru='У объекта нет свойств для редактирования'", Lang));
+	Strings.Insert("InfoMessage_DataUpdated", NStr("en='The data has been updated';
+		|ru='Данные были обновлены'", Lang));
+	Strings.Insert("InfoMessage_DataSaved", NStr("en='The data has been saved';
+		|ru='Данные были сохранены'", Lang));
+	Strings.Insert("InfoMessage_SettingsApplied", NStr("en='The settings have been applied';
+		|ru='Настройки применены'", Lang));
+	
 #EndRegion
 
 #Region QuestionToUser
@@ -1385,7 +1394,8 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_024", NStr("en='Change planning period?';
 		|ru='Поменять период планирования?';
 		|tr='Planlama dönemi değiştirmek ister misiniz?'", Lang));
-	Strings.Insert("QuestionToUser_025", NStr("en='Do you want to update filled tax rates?'", Lang));
+	Strings.Insert("QuestionToUser_025", NStr("en='Do you want to update filled tax rates?';
+		|ru='Вы действительно хотите обновить заполненные налоговые ставки?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser
@@ -1433,8 +1443,10 @@ Function Strings(Lang) Export
 	Strings.Insert("I_6", NStr("en='Ordered without ISR';
 		|ru='Заказано без ЗОТ';
 		|tr='Normal sipariş'", Lang));
-	Strings.Insert("I_7", NStr("en='Change rights'", Lang));
-	Strings.Insert("I_8", NStr("en='Rollback rights'", Lang));
+	Strings.Insert("I_7", NStr("en='Change rights';
+		|ru='Замена прав'", Lang));
+	Strings.Insert("I_8", NStr("en='Rollback rights';
+		|ru='Отменить замену прав'", Lang));
 
 #EndRegion
 
@@ -1466,6 +1478,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Exc_009", NStr("en='Error: %1';
 		|ru='Ошибка: %1';
 		|tr='Hata: %1'", Lang));
+	Strings.Insert("Exc_010", NStr("en='Unknown metadata type: %1';
+		|ru='Неизвестный тип метаданных: %1'", Lang));
 #EndRegion
 
 #Region Saas
@@ -1590,7 +1604,7 @@ Function Strings(Lang) Export
 		|tr='Benim depom'", Lang));
 #EndRegion
 
-#Region OtherString
+#Region MetadataString
 	Strings.Insert("Str_Catalog", NStr("en='Catalog';
 		|ru='Справочник';
 		|tr='Kart listesi'", Lang));
@@ -1603,13 +1617,42 @@ Function Strings(Lang) Export
 	Strings.Insert("Str_Documents", NStr("en='Documents';
 		|ru='Документы';
 		|tr='Evraklar'", Lang));
+	Strings.Insert("Str_Code", NStr("en='Code';
+		|ru='Код';
+		|tr='Kod'", Lang));
+	Strings.Insert("Str_Description", NStr("en='Description';
+		|ru='Наименование';
+		|tr='Tanım'", Lang));
+	Strings.Insert("Str_Parent", NStr("en='Parent';
+		|ru='Родитель';
+		|tr='Üst öğe'", Lang));
+	Strings.Insert("Str_Owner", NStr("en='Owner';
+		|ru='Владелец';
+		|tr='Sahip'", Lang));
+	Strings.Insert("Str_DeletionMark", NStr("en='Deletion mark';
+		|ru='Пометить на удаление';
+		|tr='Silmek için işaret'", Lang));
+	Strings.Insert("Str_Number", NStr("en='Number';
+		|ru='Номер';
+		|tr='Numara'", Lang));
+	Strings.Insert("Str_Date", NStr("en='Date';
+		|ru='Дата';
+		|tr='Tarih'", Lang));
+	Strings.Insert("Str_Posted", NStr("en='Posted';
+		|ru='Провести';
+		|tr='Kaydedildi'", Lang));
 #EndRegion
 
 #Region AdditionalSettings
-	Strings.Insert("Add_Setiings_001", NStr("en='Additional settings'", Lang));
-	Strings.Insert("Add_Setiings_002", NStr("en='Point of sale'", Lang));
-	Strings.Insert("Add_Setiings_003", NStr("en='Disable - Change price'", Lang));
-	Strings.Insert("Add_Setiings_004", NStr("en='Disable - Create return'", Lang));
+	Strings.Insert("Add_Setiings_001", NStr("en='Additional settings';
+		|ru='Дополнительные настройки'", Lang));
+	Strings.Insert("Add_Setiings_002", NStr("en='Point of sale';
+		|ru='Рабочее место кассира';
+		|tr='Satış ekranı'", Lang));
+	Strings.Insert("Add_Setiings_003", NStr("en='Disable - Change price';
+		|ru='Запретить - Замена цены'", Lang));
+	Strings.Insert("Add_Setiings_004", NStr("en='Disable - Create return';
+		|ru='Запретить - Создание возврата'", Lang));
 #EndRegion
 
 #Region Mobile
@@ -1620,5 +1663,36 @@ Function Strings(Lang) Export
 		|ru='Текущий штрихкод использован в %1
 		|Но перед этим был просканирован %2'", Lang));
 #EndRegion
+	
+#Region CopyPaste
+	Strings.Insert("CP_001", NStr("en='Copy to clipboard';
+		|ru='Скопировано в буфер'", Lang));
+	Strings.Insert("CP_002", NStr("en='Paste from clipboard';
+		|ru='Вставить из буфера'", Lang));
+	Strings.Insert("CP_003", NStr("en='Can be copy only [%1]';
+		|ru='Может быть скопирован только [%1]'", Lang));
+	Strings.Insert("CP_004", NStr("en='Copied';
+		|ru='Скопировано'", Lang));
+	Strings.Insert("CP_005", NStr("en='NOT copied';
+		|ru='НЕ скопирован'", Lang));
+	Strings.Insert("CP_006", NStr("en='Copied %1 rows';
+		|ru='Скопировано %1 строк'", Lang));
+#EndRegion	
+	
+#Region LoadDataFromTable
+	Strings.Insert("LDT_Button_Title",   NStr("en='Load data from table';
+		|ru='Загрузить данные из таблицы';
+		|tr='Tablodan veriyi yükle'", Lang));
+	Strings.Insert("LDT_Button_ToolTip", NStr("en='Load data from table';
+		|ru='Загрузить данные из таблицы';
+		|tr='Tablodan veriyi yükle'", Lang));
+	Strings.Insert("LDT_FailReading", NStr("en='Failed to read the value: [%1]';
+		|ru='Не удалось прочитать значение: [%1]'", Lang));
+	Strings.Insert("LDT_ValueNotFound", NStr("en='Nothing was found for [%1]';
+		|ru='Ничего не было найдено для [%1]'", Lang));
+	Strings.Insert("LDT_TooMuchFound", NStr("en='Several variants were found for [%1]';
+		|ru='Несколько вариантов было найдено для [%1]'", Lang));
+#EndRegion	
+	
 	Return Strings;
 EndFunction

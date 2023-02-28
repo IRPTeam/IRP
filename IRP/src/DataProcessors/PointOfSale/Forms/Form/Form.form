@@ -370,6 +370,10 @@
          <key>en</key>
          <value>Rights applied</value>
         </title>
+        <title>
+         <key>ru</key>
+         <value>Права применены</value>
+        </title>
         <titleTextColor xsi:type="core:ColorRef">
          <color>Style.SpecialTextColor</color>
         </titleTextColor>
@@ -481,6 +485,14 @@
        <title>
         <key>en</key>
         <value>Group header top</value>
+       </title>
+       <title>
+        <key>ru</key>
+        <value>Группа шапка верх</value>
+       </title>
+       <title>
+        <key>tr</key>
+        <value>Grup başlık üst</value>
        </title>
        <extendedTooltip>
         <name>GroupHeaderTopUserAdminExtendedTooltip</name>
@@ -716,7 +728,7 @@
            </title>
            <title>
             <key>ru</key>
-            <value>Серийные номера</value>
+            <value>Серии</value>
            </title>
            <title>
             <key>tr</key>
@@ -1384,6 +1396,7 @@
             </font>
            </extInfo>
           </items>
+          <commandBarLocation>None</commandBarLocation>
           <autoCommandBar>
            <name>ItemListCommandBar</name>
            <id>608</id>
@@ -7674,6 +7687,10 @@
    <key>en</key>
    <value>User admin</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Пользователь администратор</value>
+  </title>
   <id>203</id>
   <valueType>
    <types>CatalogRef.Users</types>
@@ -7691,6 +7708,10 @@
    <key>en</key>
    <value>Keep rights</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Оставить права</value>
+  </title>
   <id>204</id>
   <valueType>
    <types>Boolean</types>
@@ -7707,6 +7728,10 @@
   <title>
    <key>en</key>
    <value>User admin by default</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Пользователь администратор по умолчанию</value>
   </title>
   <id>205</id>
   <valueType>
@@ -8471,6 +8496,10 @@ elemanı seç</value>
   <title>
    <key>en</key>
    <value>Change / Rollback right</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Заменить/Вернуть права</value>
   </title>
   <id>32</id>
   <use>

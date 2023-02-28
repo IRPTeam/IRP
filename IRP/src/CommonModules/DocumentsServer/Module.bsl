@@ -18,6 +18,8 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	EndIf;
 
 	ExternalCommandsServer.CreateCommands(Form, Object.Ref.Metadata().FullName(), Enums.FormTypes.ObjectForm);
+	CopyPasteServer.CreateCommands(Form, Object.Ref.Metadata().FullName(), Enums.FormTypes.ObjectForm);
+	LoadDataFromTableServer.CreateCommands(Form, Object.Ref.Metadata(), Enums.FormTypes.ObjectForm);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export

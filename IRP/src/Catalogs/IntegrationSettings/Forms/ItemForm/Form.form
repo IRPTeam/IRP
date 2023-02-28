@@ -586,7 +586,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Тестовые параметры</value>
+       <value>Тест</value>
       </title>
       <title>
        <key>tr</key>
@@ -1268,7 +1268,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Настройки тестирования</value>
+    <value>Тестовые настройки</value>
    </title>
    <title>
     <key>tr</key>
@@ -1485,7 +1485,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Логин</value>
+   <value>Авторизация</value>
   </title>
   <title>
    <key>tr</key>
@@ -1510,7 +1510,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Скопировать из рабочей</value>
+   <value>Скопировать основные настройки</value>
   </title>
   <title>
    <key>tr</key>

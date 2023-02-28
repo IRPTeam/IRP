@@ -992,7 +992,7 @@ GROUP BY
       </content>
       <content>
        <key>ru</key>
-       <value>Закрытая</value>
+       <value>Заказ закрыт</value>
       </content>
       <content>
        <key>tr</key>

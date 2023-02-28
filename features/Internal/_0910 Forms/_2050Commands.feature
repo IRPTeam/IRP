@@ -18,6 +18,7 @@ Background:
 Scenario: _0205001 preparation (commands)
 	When set True value to the constant
 	When set True value to the constant Use accounting
+	When set True value to the constant Use salary
 	When set True value to the constant Use commission trading
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
@@ -4585,6 +4586,186 @@ Scenario: _010035 add test command to the list of documents SalesReportToConsign
 		* Check that the command is displayed in the choice form
 			And I execute the built-in language code (Extension)
 				| 'OpenForm("Document.SalesReportToConsignor.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+		And I close all client application windows
+
+
+Scenario: _010036 add test command to the list of documents Payrolls
+	And I close all client application windows
+	* Open Command register
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And I click the button named "FormCreate"
+	* Filling test command data for Payrolls
+		* Create metadata for Payrolls and select it for the command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Payroll'    |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			Then "Plugins" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "List form" exact value from "Form type" drop-down list
+	* Save command
+		And I click "Save and close" button
+	* Check command save
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And "List" table contains lines
+		| 'Configuration metadata'    | 'Plugins'      |
+		| 'Payroll'                   | 'Test command' |
+	* Check the command from the document Payrolls
+		Given I open hyperlink "e1cib/list/Document.Payroll"
+		And I go to the last line in "List" table
+		And I click "Test command" button
+		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+	* Check that the command is not displayed in the document
+		And I click "Create" button
+		When I Check the steps for Exception
+			|'And I click "Test command" button'|
+		And I close all client application windows
+	* Connect a command to a document form
+		* Open Command register
+			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+			And I click the button named "FormCreate"
+		* Filling in command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Payroll'    |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "Object form" exact value from "Form type" drop-down list
+			And I click "Save and close" button
+	* Check that the command is displayed in the document
+		Given I open hyperlink "e1cib/list/Document.Payroll"
+		And I click "Create" button
+		And I click "Test command" button
+		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+		And I close all client application windows
+	* Connect the command to the document selection form
+		* Open Command register
+			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+			And I click the button named "FormCreate"
+		* Filling in command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description'|
+				| 'Payroll'   |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "Choice form" exact value from "Form type" drop-down list
+			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.Payroll.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
+			And I click "Test command" button
+			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+			Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+		And I close all client application windows
+
+
+Scenario: _010037 add test command to the list of documents TimeSheet
+	And I close all client application windows
+	* Open Command register
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And I click the button named "FormCreate"
+	* Filling test command data for TimeSheet
+		* Create metadata for TimeSheet and select it for the command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button	
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Time sheet'    |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			Then "Plugins" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "List form" exact value from "Form type" drop-down list
+	* Save command
+		And I click "Save and close" button
+	* Check command save
+		Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+		And "List" table contains lines
+		| 'Configuration metadata'       | 'Plugins'      |
+		| 'Time sheet'                   | 'Test command' |
+	* Check the command from the document Time sheet
+		Given I open hyperlink "e1cib/list/Document.TimeSheet"
+		And I go to the last line in "List" table
+		And I click "Test command" button
+		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+	* Check that the command is not displayed in the document
+		And I click "Create" button
+		When I Check the steps for Exception
+			|'And I click "Test command" button'|
+		And I close all client application windows
+	* Connect a command to a document form
+		* Open Command register
+			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+			And I click the button named "FormCreate"
+		* Filling in command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Time sheet'    |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "Object form" exact value from "Form type" drop-down list
+			And I click "Save and close" button
+	* Check that the command is displayed in the document
+		Given I open hyperlink "e1cib/list/Document.TimeSheet"
+		And I click "Create" button
+		And I click "Test command" button
+		Then I wait that in user messages the "Success client" substring will appear in 10 seconds
+		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
+		And I close all client application windows
+	* Connect the command to the document selection form
+		* Open Command register
+			Given I open hyperlink "e1cib/list/InformationRegister.ExternalCommands"
+			And I click the button named "FormCreate"
+		* Filling in command
+			And I click Select button of "Configuration metadata" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description'|
+				| 'Time sheet'   |
+			And I select current line in "List" table
+			And I click Select button of "Plugins" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Test command' |
+			And I select current line in "List" table
+			And I select "Choice form" exact value from "Form type" drop-down list
+			And I click "Save and close" button
+		* Check that the command is displayed in the choice form
+			And I execute the built-in language code (Extension)
+				| 'OpenForm("Document.TimeSheet.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |	
 			And I click "Test command" button
 			Then I wait that in user messages the "Success client" substring will appear in 10 seconds
 			Then I wait that in user messages the "Success server" substring will appear in 10 seconds

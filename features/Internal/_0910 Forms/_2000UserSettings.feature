@@ -1543,7 +1543,18 @@ Scenario: _200045 check time zone for user settings
 		And I save the value of "Current database time zone" field as "CurrentDataBaseTime"
 		And I save the value of "Current session time" field as "CurrentSessionTime"
 		And I save the value of "Current user PC time" field as "CurrentUserPCTime"
-		// And I save "{$CurrentSessionTime$ = $CurrentUserPCTime$}" in "DateIsCorrect" variable
+	* Change time zone
+		And I select "Europe/Oslo" exact value from "Session time zone" drop-down list
+		And I click "Update time info" button
+		When I Check the steps for Exception
+			|'And "Current session time" field is equal to "$CurrentSessionTime$" variable'|
+	* Check the time zone when re-opening the base
+		And I close TestClient session
+		Given I open new TestClient session or connect the existing one
+		Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
+		Then the form attribute named "CurrentSessionTimeZone" became equal to "Europe/London"
+		And I close all client application windows
+		
 
-Scenario: _999999 close TestClient session
-	And I close TestClient session
+				
+

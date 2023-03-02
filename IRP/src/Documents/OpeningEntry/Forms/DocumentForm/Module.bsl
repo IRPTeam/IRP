@@ -77,6 +77,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrenciesAccountPayableByAgreements.Enabled    = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesAccountPayableByDocuments.Enabled     = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesReceiptFromConsignor.Enabled          = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesEmployeeCashAdvance.Enabled           = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAdvanceFromRetailCustomers.Enabled    = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesSalaryPayment.Enabled                 = Not Form.ReadOnly;
 	
 	UseCommissionTrading = FOServer.IsUseCommissionTrading();
 	
@@ -93,6 +96,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.LegalNameConsignor.Visible   = UseCommissionTrading;
 	Form.Items.AgreementConsignor.Visible   = UseCommissionTrading;
 	Form.Items.ReceiptFromConsignor.Visible = UseCommissionTrading;
+	
+	Form.Items.SalaryPayment.Visible              = FOServer.IsUseSalary();
+	Form.Items.AdvanceFromRetailCustomers.Visible = FOServer.IsUseRetail();
 EndProcedure
 
 &AtClientAtServerNoContext
@@ -312,6 +318,61 @@ EndProcedure
 #EndRegion
 
 #EndRegion
+
+#EndRegion
+
+#Region EMPLOYEE_CASH_ADVANCE
+
+&AtClient
+Procedure EmployeeCashAdvanceBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocOpeningEntryClient.EmployeeCashAdvanceBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure EmployeeCashAdvanceAfterDeleteRow(Item)
+	DocOpeningEntryClient.EmployeeCashAdvanceAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+#Region EMPLOYEE_CASH_ADVANCE_COLUMNS
+
+#Region ACCOUNT
+
+&AtClient
+Procedure EmployeeCashAdvanceAccountOnChange(Item)
+	DocOpeningEntryClient.EmployeeCashAdvanceAccountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region ADVANCE_FROM_RETAIL_CUSTOMER
+
+&AtClient
+Procedure AdvanceFromRetailCustomersBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocOpeningEntryClient.AdvanceFromRetailCustomersBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure AdvanceFromRetailCustomersAfterDeleteRow(Item)
+	DocOpeningEntryClient.AdvanceFromRetailCustomersAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region SALARY_PAYMENT
+
+&AtClient
+Procedure SalaryPaymentBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocOpeningEntryClient.SalaryPaymentBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure SalaryPaymentAfterDeleteRow(Item)
+	DocOpeningEntryClient.SalaryPaymentAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
 
 #EndRegion
 
@@ -794,6 +855,48 @@ EndProcedure
 &AtClient
 Procedure EditCurrenciesAccountBalance(Command)
 	CurrentData = ThisObject.Items.AccountBalance.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V6(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditCurrenciesEmployeeCashAdvance(Command)
+	CurrentData = ThisObject.Items.EmployeeCashAdvance.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V6(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditCurrenciesAdvanceFromRetailCustomers(Command)
+	CurrentData = ThisObject.Items.AdvanceFromRetailCustomers.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V6(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditCurrenciesSalaryPayment(Command)
+	CurrentData = ThisObject.Items.SalaryPayment.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -1313,5 +1416,6 @@ MainTables = "AccountBalance, AdvanceFromCustomers, AdvanceToSuppliers,
 		|AccountPayableByAgreements, AccountPayableByDocuments,
 		|AccountReceivableByDocuments, AccountReceivableByAgreements,
 		|Inventory,
-		|ShipmentToTradeAgent, ReceiptFromConsignor";
+		|ShipmentToTradeAgent, ReceiptFromConsignor,
+		|EmployeeCashAdvance, AdvanceFromRetailCustomers, SalaryPayment";
 

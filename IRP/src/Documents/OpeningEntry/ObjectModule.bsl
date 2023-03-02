@@ -4,34 +4,26 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;
 	TotalTable = New ValueTable();
 	TotalTable.Columns.Add("Key");
-	For Each Row In ThisObject.AccountBalance Do
-		TotalTable.Add().Key = Row.Key;
-	EndDo;
-	For Each Row In ThisObject.AdvanceFromCustomers Do
-		TotalTable.Add().Key = Row.Key;
-	EndDo;
-	For Each Row In ThisObject.AdvanceToSuppliers Do
-		TotalTable.Add().Key = Row.Key;
-	EndDo;
-	For Each Row In ThisObject.AccountReceivableByAgreements Do
-		TotalTable.Add().Key = Row.Key;
-	EndDo;
-	For Each Row In ThisObject.AccountReceivableByDocuments Do
-		TotalTable.Add().Key = Row.Key;
-	EndDo;
-	For Each Row In ThisObject.AccountPayableByAgreements Do
-		TotalTable.Add().Key = Row.Key;
-	EndDo;
-	For Each Row In ThisObject.AccountPayableByDocuments Do
-		TotalTable.Add().Key = Row.Key;
-	EndDo;
-	For Each Row In ThisObject.ShipmentToTradeAgent Do
-		TotalTable.Add().Key = Row.Key;
-	EndDo;
-	For Each Row In ThisObject.ReceiptFromConsignor Do
-		TotalTable.Add().Key = Row.Key;
-	EndDo;
+	ArrayOfTableNames = New Array();
+	ArrayOfTableNames.Add("AccountBalance");
+	ArrayOfTableNames.Add("AdvanceFromCustomers");
+	ArrayOfTableNames.Add("AdvanceToSuppliers");
+	ArrayOfTableNames.Add("AccountReceivableByAgreements");
+	ArrayOfTableNames.Add("AccountReceivableByDocuments");
+	ArrayOfTableNames.Add("AccountPayableByAgreements");
+	ArrayOfTableNames.Add("AccountPayableByDocuments");
+	ArrayOfTableNames.Add("ShipmentToTradeAgent");
+	ArrayOfTableNames.Add("ReceiptFromConsignor");
+	ArrayOfTableNames.Add("EmployeeCashAdvance");
+	ArrayOfTableNames.Add("AdvanceFromRetailCustomers");
+	ArrayOfTableNames.Add("SalaryPayment");
 	
+	For Each TableName In ArrayOfTableNames Do
+		For Each Row In ThisObject[TableName] Do
+			TotalTable.Add().Key = Row.Key;
+		EndDo;
+	EndDo;
+		
 	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, TotalTable);
 	
 	For Each Row In ThisObject.AccountBalance Do
@@ -74,6 +66,22 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;
+	For Each Row In ThisObject.EmployeeCashAdvance Do
+		Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
+	For Each Row In ThisObject.AdvanceFromRetailCustomers Do
+		Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
+	For Each Row In ThisObject.SalaryPayment Do
+		Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
+	
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 EndProcedure
 

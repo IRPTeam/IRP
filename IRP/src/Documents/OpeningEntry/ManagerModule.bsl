@@ -126,6 +126,8 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R2020B_AdvancesFromCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R2021B_CustomersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R8015T_ConsignorPrices.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3027B_EmployeeCashAdvance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R9510B_SalaryPayment.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
@@ -222,6 +224,9 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(VendorsAging());
 	QueryArray.Add(ShipmentToTradeAgent());
 	QueryArray.Add(ReceiptFromConsignor());
+	QueryArray.Add(EmployeeCashAdvance());
+	QueryArray.Add(AdvanceFromRetailCustomers());
+	QueryArray.Add(SalaryPayment());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
@@ -252,6 +257,9 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R8013B_ConsignorBatchWiseBalance());
 	QueryArray.Add(R8015T_ConsignorPrices());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
+	QueryArray.Add(R3027B_EmployeeCashAdvance());
+	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
+	QueryArray.Add(R9510B_SalaryPayment());
 	Return QueryArray;
 EndFunction
 
@@ -538,6 +546,56 @@ Function ReceiptFromConsignor()
 		|	Document.OpeningEntry.ReceiptFromConsignor AS ReceiptFromConsignor
 		|WHERE
 		|	ReceiptFromConsignor.Ref = &Ref";
+EndFunction
+
+Function EmployeeCashAdvance()
+	Return 
+		"SELECT
+		|	EmployeeCashAdvance.Ref.Company AS Company,
+		|	EmployeeCashAdvance.Ref.Branch AS Branch,
+		|	EmployeeCashAdvance.Account,
+		|	EmployeeCashAdvance.Currency,
+		|	EmployeeCashAdvance.Employee AS Partner,
+		|	EmployeeCashAdvance.Amount AS Amount,
+		|	EmployeeCashAdvance.Ref.Date AS Period,
+		|	EmployeeCashAdvance.Key
+		|INTO EmployeeCashAdvance
+		|FROM
+		|	Document.OpeningEntry.EmployeeCashAdvance AS EmployeeCashAdvance
+		|WHERE
+		|	EmployeeCashAdvance.Ref = &Ref";
+EndFunction
+
+Function AdvanceFromRetailCustomers()
+	Return 
+		"SELECT
+		|	AdvanceFromRetailCustomers.Ref.Company AS Company,
+		|	AdvanceFromRetailCustomers.Ref.Branch AS Branch,
+		|	AdvanceFromRetailCustomers.RetailCustomer,
+		|	AdvanceFromRetailCustomers.Amount AS Amount,
+		|	AdvanceFromRetailCustomers.Ref.Date AS Period
+		|INTO AdvanceFromRetailCustomers
+		|FROM
+		|	Document.OpeningEntry.AdvanceFromRetailCustomers AS AdvanceFromRetailCustomers
+		|WHERE
+		|	AdvanceFromRetailCustomers.Ref = &Ref";	
+EndFunction
+
+Function SalaryPayment()
+	Return 
+		"SELECT
+		|	SalaryPayment.Ref.Company AS Company,
+		|	SalaryPayment.Ref.Branch AS Branch,
+		|	SalaryPayment.Currency,
+		|	SalaryPayment.Employee,
+		|	SalaryPayment.Amount AS Amount,
+		|	SalaryPayment.Ref.Date AS Period,
+		|	SalaryPayment.Key
+		|INTO SalaryPayment
+		|FROM
+		|	Document.OpeningEntry.SalaryPayment AS SalaryPayment
+		|WHERE
+		|	SalaryPayment.Ref = &Ref";
 EndFunction
 
 Function R1020B_AdvancesToVendors()
@@ -1385,6 +1443,42 @@ Function R9010B_SourceOfOriginStock()
 		|		ELSE VALUE(Catalog.SerialLotNumbers.EmptyRef)
 		|	END";
 EndFunction
+
+Function R3027B_EmployeeCashAdvance()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R3027B_EmployeeCashAdvance
+		|FROM
+		|	EmployeeCashAdvance
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R2023B_AdvancesFromRetailCustomers()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R2023B_AdvancesFromRetailCustomers
+		|FROM
+		|	AdvanceFromRetailCustomers
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R9510B_SalaryPayment()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R9510B_SalaryPayment
+		|FROM
+		|	SalaryPayment
+		|WHERE
+		|	TRUE";	
+EndFunction	
 
 #EndRegion
 

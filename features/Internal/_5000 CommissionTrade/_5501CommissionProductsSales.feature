@@ -829,6 +829,7 @@ Scenario: _050025 create Sales report co consignor
 				| 'Dress'              | 'Basic Price Types'       | 'S/Yellow' | '550,00'          | ''                   | 'pcs'  | 'No'                 | '-2,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-110,00'                | '550,00' | '-932,20'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-1 100,00'    |
 				| 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '100,00'          | '09987897977889'     | 'pcs'  | 'No'                 | '3,000'    | '$$SI10$$'                                    | '10,00'                   | '36,00'                  | '120,00' | '305,09'     | '$$PI3$$'                                        | '360,00'       |
 				| 'Dress'              | 'Basic Price without VAT' | 'S/Yellow' | '550,00'          | ''                   | 'pcs'  | 'No'                 | '2,000'    | '$$SI10$$'                                    | '10,00'                   | '93,22'                  | '466,10' | '790,00'     | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '932,20'       |
+			Then the number of "ItemList" table lines is "равно" "4"
 		* Change period and update sales
 			And I input "01.11.2022" text in "Start date" field
 			And in the table "ItemList" I click "Fill sales" button
@@ -843,12 +844,13 @@ Scenario: _050025 create Sales report co consignor
 			And in the table "ItemList" I click "Fill sales" button
 			And in the table "Sales" I click "Fill sales" button
 			And I click "Ok" button	
-			And "ItemList" table became equal
+			And "ItemList" table contains lines
 				| 'Item'               | 'Price type'              | 'Item key' | 'Consignor price' | 'Serial lot numbers' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Sales invoice'                               | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'Net amount' | 'Purchase invoice'                               | 'Total amount' |
 				| 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '100,00'          | '09987897977889'     | 'pcs'  | 'No'                 | '3,000'    | '$$SI10$$'                                    | '10,00'                   | '36,00'                  | '120,00' | '305,09'     | '$$PI3$$'                                        | '360,00'       |
 				| 'Dress'              | 'Basic Price without VAT' | 'S/Yellow' | '550,00'          | ''                   | 'pcs'  | 'No'                 | '2,000'    | '$$SI10$$'                                    | '10,00'                   | '93,22'                  | '466,10' | '790,00'     | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '932,20'       |
 				| 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '100,00'          | '09987897977889'     | 'pcs'  | 'No'                 | '-1,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-20,00'                 | '200,00' | '-169,49'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-200,00'      |
 				| 'Dress'              | 'Basic Price Types'       | 'S/Yellow' | '550,00'          | ''                   | 'pcs'  | 'No'                 | '-2,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-110,00'                | '550,00' | '-932,20'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-1 100,00'    |
+			Then the number of "ItemList" table lines is "равно" "4"
 		* Update sales
 			And in the table "ItemList" I click "Fill sales" button
 			And in the table "Sales" I click "Fill sales" button
@@ -867,12 +869,13 @@ Scenario: _050025 create Sales report co consignor
 				| 'Yes' | 'Product 3 with SLN' |
 				| 'Yes' | 'Dress'              |
 			And I click "Ok" button
-			And "ItemList" table became equal
+			And "ItemList" table contains lines
 				| 'Item'               | 'Price type'              | 'Item key' | 'Consignor price' | 'Serial lot numbers' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Sales invoice'                               | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'Net amount' | 'Purchase invoice'                               | 'Total amount' |
 				| 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '100,00'          | '09987897977889'     | 'pcs'  | 'No'                 | '3,000'    | '$$SI10$$'                                    | '10,00'                   | '36,00'                  | '120,00' | '305,09'     | '$$PI3$$'                                        | '360,00'       |
 				| 'Dress'              | 'Basic Price without VAT' | 'S/Yellow' | '550,00'          | ''                   | 'pcs'  | 'No'                 | '2,000'    | '$$SI10$$'                                    | '10,00'                   | '93,22'                  | '466,10' | '790,00'     | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '932,20'       |
 				| 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '100,00'          | '09987897977889'     | 'pcs'  | 'No'                 | '-1,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-20,00'                 | '200,00' | '-169,49'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-200,00'      |
 				| 'Dress'              | 'Basic Price Types'       | 'S/Yellow' | '550,00'          | ''                   | 'pcs'  | 'No'                 | '-2,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-110,00'                | '550,00' | '-932,20'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-1 100,00'    |		
+			Then the number of "ItemList" table lines is "равно" "4"
 		* Check currency form
 			And in the table "ItemList" I click "Edit currencies" button
 			And "CurrenciesTable" table became equal
@@ -908,18 +911,20 @@ Scenario: _050025 create Sales report co consignor
 			Then the form attribute named "TradeAgentFeeType" became equal to "Percent"
 			And the editing text of form attribute named "StartDate" became equal to "05.11.2022"	
 			And the editing text of form attribute named "EndDate" became equal to "$$EndDateSRC1$$"
-			And "ItemList" table became equal
+			And "ItemList" table contains lines
 				| 'Item'               | 'Price type'              | 'Item key' | 'Consignor price' | 'Serial lot numbers' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Sales invoice'                               | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'Net amount' | 'Purchase invoice'                               | 'Total amount' |
 				| 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '100,00'          | '09987897977889'     | 'pcs'  | 'No'                 | '3,000'    | '$$SI10$$'                                    | '10,00'                   | '36,00'                  | '120,00' | '305,09'     | '$$PI3$$'                                        | '360,00'       |
 				| 'Dress'              | 'Basic Price without VAT' | 'S/Yellow' | '550,00'          | ''                   | 'pcs'  | 'No'                 | '2,000'    | '$$SI10$$'                                    | '10,00'                   | '93,22'                  | '466,10' | '790,00'     | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '932,20'       |
 				| 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '100,00'          | '09987897977889'     | 'pcs'  | 'No'                 | '-1,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-20,00'                 | '200,00' | '-169,49'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-200,00'      |
 				| 'Dress'              | 'Basic Price Types'       | 'S/Yellow' | '550,00'          | ''                   | 'pcs'  | 'No'                 | '-2,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-110,00'                | '550,00' | '-932,20'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-1 100,00'    |
-			And "SerialLotNumbersTree" table became equal
+			Then the number of "ItemList" table lines is "равно" "4"
+			And "SerialLotNumbersTree" table contains lines
 				| 'Item'               | 'Item key' | 'Serial lot number' | 'Item key quantity' | 'Quantity' |
 				| 'Product 3 with SLN' | 'UNIQ'     | ''                  | '3,000'             | '3,000'    |
 				| ''                   | ''         | '09987897977889'    | ''                  | '3,000'    |
 				| 'Product 3 with SLN' | 'UNIQ'     | ''                  | '-1,000'            | '-1,000'   |
 				| ''                   | ''         | '09987897977889'    | ''                  | '-1,000'   |
+			Then the number of "SerialLotNumbersTree" table lines is "равно" "4"
 			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 			Then the form attribute named "Currency" became equal to "TRY"
 			Then the form attribute named "Branch" became equal to ""

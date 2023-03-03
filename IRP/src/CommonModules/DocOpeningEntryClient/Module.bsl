@@ -129,3 +129,55 @@ EndProcedure
 #EndRegion
 
 #EndRegion
+
+#Region EMPLOYEE_CASH_ADVANCE
+
+Procedure EmployeeCashAdvanceBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.EmployeeCashAdvanceBeforeAddRow(Object, Form, Cancel, Clone);
+EndProcedure
+
+Procedure EmployeeCashAdvanceAfterDeleteRow(Object, Form, Item) Export
+	ViewClient_V2.EmployeeCashAdvanceAfterDeleteRow(Object, Form);
+EndProcedure
+
+#Region EMPLOYEE_CASH_ADVANCE_COLUMNS
+
+#Region ACCOUNT
+
+Procedure EmployeeCashAdvanceAccountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.EmployeeCashAdvanceAccountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region ADVANCE_FROM_RETAIL_CUSTOMERS
+
+Procedure AdvanceFromRetailCustomersBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.AdvanceFromRetailCustomersBeforeAddRow(Object, Form, Cancel, Clone);
+EndProcedure
+
+Procedure AdvanceFromRetailCustomersAfterDeleteRow(Object, Form, Item) Export
+	ViewClient_V2.AdvanceFromRetailCustomersAfterDeleteRow(Object, Form);
+EndProcedure
+
+#EndRegion
+
+#Region SALARY_PAYMENT
+
+Procedure SalaryPaymentBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.SalaryPaymentBeforeAddRow(Object, Form, Cancel, Clone);
+EndProcedure
+
+Procedure SalaryPaymentAfterDeleteRow(Object, Form, Item) Export
+	ViewClient_V2.SalaryPaymentAfterDeleteRow(Object, Form);
+EndProcedure
+
+#EndRegion
+
+
+
+

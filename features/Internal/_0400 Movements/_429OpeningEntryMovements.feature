@@ -17,6 +17,7 @@ Background:
 Scenario: _042900 preparation (Opening entry)
 	When set True value to the constant
 	When set True value to the constant Use commission trading
+	When set True value to the constant Use salary 
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -51,6 +52,7 @@ Scenario: _042900 preparation (Opening entry)
 		When Create catalog Taxes objects	
 		When Create information register TaxSettings records
 		When Create catalog Stores (trade agent)
+		When Create catalog RetailCustomers objects (check POS)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
@@ -107,6 +109,9 @@ Scenario: _042900 preparation (Opening entry)
 		When Create document OpeningEntry objects (stock control serial lot numbers)
 		When Create document OpeningEntry objects (commission trade)
 		When Create document OpeningEntry objects (with source of origin)
+		When Create document OpeningEntry objects (salary payment)
+		When Create document OpeningEntry objects (employee cash advance)
+		When Create document OpeningEntry objects (advance from retail customers)
 		And I execute 1C:Enterprise script at server
 			| "Documents.OpeningEntry.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
@@ -133,6 +138,12 @@ Scenario: _042900 preparation (Opening entry)
 			| "Documents.OpeningEntry.FindByNumber(111).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.OpeningEntry.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.OpeningEntry.FindByNumber(312).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.OpeningEntry.FindByNumber(313).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.OpeningEntry.FindByNumber(315).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		
 Scenario: _0429001 check preparation
@@ -852,6 +863,77 @@ Scenario: _042931 check Opening entry movements by the Register  "R9010 Source o
 			| ''                                            | 'Receipt'     | '08.12.2022 15:48:28' | '2'         | 'Main Company' | 'Distribution department' | 'Store 01' | 'XS/Blue'  | 'Source of origin 5' | ''                  |
 			| ''                                            | 'Receipt'     | '08.12.2022 15:48:28' | '2'         | 'Main Company' | 'Distribution department' | 'Store 01' | 'M/White'  | 'Source of origin 6' | ''                  |
 			| ''                                            | 'Receipt'     | '08.12.2022 15:48:28' | '2'         | 'Main Company' | 'Distribution department' | 'Store 01' | 'UNIQ'     | 'Source of origin 4' | '09987897977893'    |				
+		And I close all client application windows
+
+Scenario: _042932 check Opening entry movements by the Register  "R9510 Salary payment"
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '312' |
+	* Check movements by the Register  "R9510 Salary payment" 
+		And I click "Registrations report" button
+		And I select "R9510 Salary payment" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 312 dated 03.03.2023 11:46:31' | ''            | ''                    | ''          | ''             | ''       | ''                | ''         | ''                     | ''                             |
+			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''       | ''                | ''         | ''                     | ''                             |
+			| 'Register  "R9510 Salary payment"'            | ''            | ''                    | ''          | ''             | ''       | ''                | ''         | ''                     | ''                             |
+			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                | ''         | ''                     | ''                             |
+			| ''                                            | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Employee'        | 'Currency' | 'Transaction currency' | 'Multi currency movement type' |
+			| ''                                            | 'Receipt'     | '03.03.2023 11:46:31' | '17,12'     | 'Main Company' | ''       | 'Alexander Orlov' | 'USD'      | 'TRY'                  | 'Reporting currency'           |
+			| ''                                            | 'Receipt'     | '03.03.2023 11:46:31' | '34,24'     | 'Main Company' | ''       | 'Anna Petrova'    | 'USD'      | 'TRY'                  | 'Reporting currency'           |
+			| ''                                            | 'Receipt'     | '03.03.2023 11:46:31' | '100'       | 'Main Company' | ''       | 'Alexander Orlov' | 'TRY'      | 'TRY'                  | 'Local currency'               |
+			| ''                                            | 'Receipt'     | '03.03.2023 11:46:31' | '100'       | 'Main Company' | ''       | 'Alexander Orlov' | 'TRY'      | 'TRY'                  | 'en description is empty'      |
+			| ''                                            | 'Receipt'     | '03.03.2023 11:46:31' | '200'       | 'Main Company' | ''       | 'Anna Petrova'    | 'TRY'      | 'TRY'                  | 'Local currency'               |
+			| ''                                            | 'Receipt'     | '03.03.2023 11:46:31' | '200'       | 'Main Company' | ''       | 'Anna Petrova'    | 'TRY'      | 'TRY'                  | 'en description is empty'      |	
+		And I close all client application windows
+
+Scenario: _042933 check Opening entry movements by the Register  "R3027 Employee cash advance"
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '313' |
+	* Check movements by the Register  "R3027 Employee cash advance" 
+		And I click "Registrations report" button
+		And I select "R3027 Employee cash advance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 313 dated 03.03.2023 16:56:36' | ''            | ''                    | ''          | ''             | ''       | ''                  | ''         | ''                     | ''              | ''                             | ''                        | ''                          | ''                     |
+			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''       | ''                  | ''         | ''                     | ''              | ''                             | ''                        | ''                          | ''                     |
+			| 'Register  "R3027 Employee cash advance"'     | ''            | ''                    | ''          | ''             | ''       | ''                  | ''         | ''                     | ''              | ''                             | ''                        | ''                          | ''                     |
+			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                  | ''         | ''                     | ''              | ''                             | ''                        | ''                          | 'Attributes'           |
+			| ''                                            | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Account'           | 'Currency' | 'Transaction currency' | 'Partner'       | 'Multi currency movement type' | 'Financial movement type' | 'Planing transaction basis' | 'Deferred calculation' |
+			| ''                                            | 'Receipt'     | '03.03.2023 16:56:36' | '100'       | 'Main Company' | ''       | 'Bank account, USD' | 'USD'      | 'USD'                  | 'David Romanov' | 'Reporting currency'           | ''                        | ''                          | 'No'                   |
+			| ''                                            | 'Receipt'     | '03.03.2023 16:56:36' | '100'       | 'Main Company' | ''       | 'Bank account, USD' | 'USD'      | 'USD'                  | 'David Romanov' | 'en description is empty'      | ''                        | ''                          | 'No'                   |
+			| ''                                            | 'Receipt'     | '03.03.2023 16:56:36' | '171,2'     | 'Main Company' | ''       | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Arina Brown'   | 'Reporting currency'           | ''                        | ''                          | 'No'                   |
+			| ''                                            | 'Receipt'     | '03.03.2023 16:56:36' | '562,75'    | 'Main Company' | ''       | 'Bank account, USD' | 'TRY'      | 'USD'                  | 'David Romanov' | 'Local currency'               | ''                        | ''                          | 'No'                   |
+			| ''                                            | 'Receipt'     | '03.03.2023 16:56:36' | '1 000'     | 'Main Company' | ''       | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'Arina Brown'   | 'Local currency'               | ''                        | ''                          | 'No'                   |
+			| ''                                            | 'Receipt'     | '03.03.2023 16:56:36' | '1 000'     | 'Main Company' | ''       | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'Arina Brown'   | 'en description is empty'      | ''                        | ''                          | 'No'                   |		
+		And I close all client application windows
+
+Scenario: _042934 check Opening entry movements by the Register  "R2023 Advances from retail customers"
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '315' |
+	* Check movements by the Register  "R2023 Advances from retail customers" 
+		And I click "Registrations report" button
+		And I select "R2023 Advances from retail customers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 315 dated 03.03.2023 17:09:42'      | ''            | ''                    | ''          | ''             | ''       | ''                |
+			| 'Document registrations records'                   | ''            | ''                    | ''          | ''             | ''       | ''                |
+			| 'Register  "R2023 Advances from retail customers"' | ''            | ''                    | ''          | ''             | ''       | ''                |
+			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                |
+			| ''                                                 | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Retail customer' |
+			| ''                                                 | 'Receipt'     | '03.03.2023 17:09:42' | '1 000'     | 'Main Company' | ''       | 'Daniel Smith'    |
+			| ''                                                 | 'Receipt'     | '03.03.2023 17:09:42' | '1 000'     | 'Main Company' | ''       | 'Sam Jons'        |	
 		And I close all client application windows
 
 Scenario: _042930 Opening entry clear posting/mark for deletion

@@ -61,6 +61,14 @@ Function IsUseRetailOrders() Export
 	Return GetFunctionalOption("UseRetailOrders");
 EndFunction
 
+Function IsUseSalary() Export
+	Return GetFunctionalOption("UseSalary");
+EndFunction
+
+Function IsUseRetail() Export
+	Return GetFunctionalOption("UseRetail");
+EndFunction
+
 #EndRegion
 
 Procedure UpdateDefaults() Export

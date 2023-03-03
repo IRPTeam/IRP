@@ -2791,11 +2791,27 @@
    <key>en</key>
    <value>Employee cash advance</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Выдача подотчетнику</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Personel iş avans kapaması</value>
+  </synonym>
   <attributes uuid="332f2be9-3c89-4393-875e-bdcc8617885d">
    <name>Key</name>
    <synonym>
     <key>en</key>
     <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -2810,6 +2826,14 @@
    <synonym>
     <key>en</key>
     <value>Employee</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сотрудник</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Personel</value>
    </synonym>
    <type>
     <types>CatalogRef.Partners</types>
@@ -2831,6 +2855,14 @@
     <key>en</key>
     <value>Account</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Касса/банк</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Hesap</value>
+   </synonym>
    <type>
     <types>CatalogRef.CashAccounts</types>
    </type>
@@ -2845,6 +2877,14 @@
     <key>en</key>
     <value>Currency</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Валюты</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Döviz</value>
+   </synonym>
    <type>
     <types>CatalogRef.Currencies</types>
    </type>
@@ -2858,6 +2898,14 @@
    <synonym>
     <key>en</key>
     <value>Financial movement type</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Статья движений денежных средств</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Finans hareket tipi</value>
    </synonym>
    <type>
     <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -2879,6 +2927,14 @@
     <key>en</key>
     <value>Amount</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма оплаты</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
+   </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
    </type>
@@ -2893,6 +2949,14 @@
    <synonym>
     <key>en</key>
     <value>Is fixed currency</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Фиксированная валюта</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Döviz sabittir</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -2913,11 +2977,23 @@
    <key>en</key>
    <value>Advance from retail customers</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Авансы розничных покупателей</value>
+  </synonym>
   <attributes uuid="ecd696cc-4931-40e1-bb27-dea0270c2760">
    <name>Key</name>
    <synonym>
     <key>en</key>
     <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -2933,6 +3009,14 @@
     <key>en</key>
     <value>Retail customer</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Розничный покупатель</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Perakende müşteri</value>
+   </synonym>
    <type>
     <types>CatalogRef.RetailCustomers</types>
    </type>
@@ -2947,6 +3031,14 @@
     <key>en</key>
     <value>Currency</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Валюты</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Döviz</value>
+   </synonym>
    <type>
     <types>CatalogRef.Currencies</types>
    </type>
@@ -2960,6 +3052,14 @@
    <synonym>
     <key>en</key>
     <value>Amount</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма оплаты</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -2981,11 +3081,23 @@
    <key>en</key>
    <value>Salary payment</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Выплата зарплаты</value>
+  </synonym>
   <attributes uuid="6ecb84ef-eb5f-4c58-a81e-294fe8e59fbe">
    <name>Key</name>
    <synonym>
     <key>en</key>
     <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
    </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
@@ -3000,6 +3112,14 @@
    <synonym>
     <key>en</key>
     <value>Employee</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сотрудник</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Personel</value>
    </synonym>
    <type>
     <types>CatalogRef.Partners</types>
@@ -3021,6 +3141,14 @@
     <key>en</key>
     <value>Currency</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Валюты</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Döviz</value>
+   </synonym>
    <type>
     <types>CatalogRef.Currencies</types>
    </type>
@@ -3034,6 +3162,14 @@
    <synonym>
     <key>en</key>
     <value>Amount</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма оплаты</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>

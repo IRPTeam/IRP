@@ -11788,6 +11788,108 @@ EndProcedure
 
 #EndRegion
 
+#Region EMPLOYEE_CASH_ADVANCE
+
+#Region EMPLOYEE_CASH_ADVANCE_ACCOUNT
+
+// EmployeeCashAdvance.Account.OnChange
+Procedure EmployeeCashAdvanceAccountOnChange(Parameters) Export
+	Binding = BindEmployeeCashAdvanceAccount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// EmployeeCashAdvance.Account.Set
+Procedure SetEmployeeCashAdvanceAccount(Parameters, Results) Export
+	Binding = BindEmployeeCashAdvanceAccount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// EmployeeCashAdvance.Account.Get
+Function GetEmployeeCashAdvanceAccount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindEmployeeCashAdvanceAccount(Parameters).DataPath, _Key);
+EndFunction
+
+// EmployeeCashAdvance.Account.Bind
+Function BindEmployeeCashAdvanceAccount(Parameters)
+	DataPath = "EmployeeCashAdvance.Account";
+	Binding = New Structure();
+	Binding.Insert("OpeningEntry", 
+		"StepEmployeeCashAdvanceChangeCurrencyByAccount,
+		|StepEmployeeCashAdvanceChangeIsFixedCurrencyByAccount");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region EMPLOYEE_CASH_ADVANCE_CURRENCY
+
+// EmployeeCashAdvance.Currency.Set
+Procedure SetEmployeeCashAdvanceCurrency(Parameters, Results) Export
+	Binding = BindEmployeeCashAdvanceCurrency(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// EmployeeCashAdvance.Currency.Get
+Function GetEmployeeCashAdvanceCurrency(Parameters, _Key)
+	Binding = BindEmployeeCashAdvanceCurrency(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// EmployeeCashAdvance.Currency.Bind
+Function BindEmployeeCashAdvanceCurrency(Parameters)
+	DataPath = "EmployeeCashAdvance.Currency";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// EmployeeCashAdvance.Currency.ChangeCurrencyByAccount.Step
+Procedure StepEmployeeCashAdvanceChangeCurrencyByAccount(Parameters, Chain) Export
+	Chain.ChangeCurrencyByAccount.Enable = True;
+	Chain.ChangeCurrencyByAccount.Setter = "SetEmployeeCashAdvanceCurrency";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeCurrencyByAccountOptions();
+		Options.Account         = GetEmployeeCashAdvanceAccount(Parameters, Row.Key);
+		Options.CurrentCurrency = GetEmployeeCashAdvanceCurrency(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepEmployeeCashAdvanceChangeCurrencyByAccount";
+		Chain.ChangeCurrencyByAccount.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region EMPLOYEE_CASH_ADVANCE_IS_FIXED_CURRENCY
+
+// EmployeeCashAdvance.IsFixedCurrency.Set
+Procedure SetEmployeeCashAdvanceIsFixedCurrency(Parameters, Results) Export
+	Binding = BindEmployeeCashAdvanceIsFixedCurrency(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// EmployeeCashAdvance.IsFixedCurrency.Bind
+Function BindEmployeeCashAdvanceIsFixedCurrency(Parameters)
+	DataPath = "EmployeeCashAdvance.IsFixedCurrency";
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+// EmployeeCashAdvance.IsFixedCurrency.ChangeIsFixedCurrencyByAccount.Step
+Procedure StepEmployeeCashAdvanceChangeIsFixedCurrencyByAccount(Parameters, Chain) Export
+	Chain.ChangeIsFixedCurrencyByAccount.Enable = True;
+	Chain.ChangeIsFixedCurrencyByAccount.Setter = "SetEmployeeCashAdvanceIsFixedCurrency";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeIsFixedCurrencyByAccountOptions();
+		Options.Account         = GetEmployeeCashAdvanceAccount(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepEmployeeCashAdvanceChangeIsFixedCurrencyByAccount";
+		Chain.ChangeIsFixedCurrencyByAccount.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
 #Region PAYROLL_LIST
 
 #Region PAYROLL_LIST_LOAD_DATA
@@ -12056,6 +12158,13 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "TimeSheetListOnAddRowFormNotify"       Then ViewClient_V2.PayrollListOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "TimeSheetListOnCopyRowFormNotify"      Then ViewClient_V2.PayrollListOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "TimeSheetListAfterDeleteRowFormNotify" Then ViewClient_V2.PayrollListAfterDeleteRowFormNotify(Parameters);
+	
+	ElsIf ViewNotify = "EmployeeCashAdvanceOnAddRowFormNotify"         Then ViewClient_V2.EmployeeCashAdvanceOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "EmployeeCashAdvanceOnCopyRowFormNotify"        Then ViewClient_V2.EmployeeCashAdvanceOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "AdvanceFromRetailCustomersOnAddRowFormNotify"  Then ViewClient_V2.AdvanceFromRetailCustomersOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "AdvanceFromRetailCustomersOnCopyRowFormNotify" Then ViewClient_V2.AdvanceFromRetailCustomersOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "SalaryPaymentOnAddRowFormNotify"               Then ViewClient_V2.SalaryPaymentOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "SalaryPaymentOnCopyRowFormNotify"              Then ViewClient_V2.SalaryPaymentOnCopyRowFormNotify(Parameters);
 	
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);

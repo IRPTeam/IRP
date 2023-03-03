@@ -1379,7 +1379,8 @@ Function GetFormItemNames()
 				|ReceiptFromConsignorKey, ReceiptFromConsignorUseSerialLotNumber,
 				|SourceOfOrigins,
 				|ProductionDurationsListKey, ProductionCostsListKey,
-				|PayrollListKey, TimeSheetListKey, TimeSheetListVisible, TimeSheetListLineNumber, TimeSheetListEmployee, TimeSheetListPosition";
+				|PayrollListKey, TimeSheetListKey, TimeSheetListVisible, TimeSheetListLineNumber, TimeSheetListEmployee, TimeSheetListPosition,
+				|EmployeeCashAdvanceKey, AdvanceFromRetailCustomersKey, SalaryPaymentKey, EmployeeCashAdvanceIsFixedCurrency";
 	Return ItemNames;
 EndFunction	
 

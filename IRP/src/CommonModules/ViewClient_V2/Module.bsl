@@ -1090,6 +1090,99 @@ EndProcedure
 
 #EndRegion
 
+#Region EMPLOYEE_CASH_ADVANCE
+
+Function EmployeeCashAdvanceBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "EmployeeCashAdvance", Cancel, Clone, CurrentData,
+		"EmployeeCashAdvanceOnAddRowFormNotify", "EmployeeCashAdvanceOnCopyRowFormNotify");
+	Form.Items.EmployeeCashAdvance.CurrentRow = NewRow.GetID();
+	If Form.Items.EmployeeCashAdvance.CurrentRow <> Undefined Then
+		Form.Items.EmployeeCashAdvance.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure EmployeeCashAdvanceOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure EmployeeCashAdvanceOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure EmployeeCashAdvanceAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "EmployeeCashAdvance");
+EndProcedure
+
+#EndRegion
+
+#Region EMPLOYEE_CASH_ADVANCE_COLUMNS
+
+#Region EMPLOYEE_CASH_ADVANCE_ACCOUNT
+
+// EmployeeCashAdvance.Account
+Procedure EmployeeCashAdvanceAccountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "EmployeeCashAdvance", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "EmployeeCashAdvance", Rows);
+	ControllerClientServer_V2.EmployeeCashAdvanceAccountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region ADVANCE_FROM_RETAIL_CUSTOMERS
+
+Function AdvanceFromRetailCustomersBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "AdvanceFromRetailCustomers", Cancel, Clone, CurrentData,
+		"AdvanceFromRetailCustomersOnAddRowFormNotify", "AdvanceFromRetailCustomersOnCopyRowFormNotify");
+	Form.Items.AdvanceFromRetailCustomers.CurrentRow = NewRow.GetID();
+	If Form.Items.AdvanceFromRetailCustomers.CurrentRow <> Undefined Then
+		Form.Items.AdvanceFromRetailCustomers.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure AdvanceFromRetailCustomersOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure AdvanceFromRetailCustomersOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure AdvanceFromRetailCustomersAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "AdvanceFromRetailCustomers");
+EndProcedure
+
+#EndRegion
+
+#Region SALARY_PAYMENT
+
+Function SalaryPaymentBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "SalaryPayment", Cancel, Clone, CurrentData,
+		"SalaryPaymentOnAddRowFormNotify", "SalaryPaymentOnCopyRowFormNotify");
+	Form.Items.SalaryPayment.CurrentRow = NewRow.GetID();
+	If Form.Items.SalaryPayment.CurrentRow <> Undefined Then
+		Form.Items.SalaryPayment.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure SalaryPaymentOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure SalaryPaymentOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure SalaryPaymentAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "SalaryPayment");
+EndProcedure
+
+#EndRegion
+
 #Region SHIPMENT_TO_TRADE_AGENT
 
 Function ShipmentToTradeAgentBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export

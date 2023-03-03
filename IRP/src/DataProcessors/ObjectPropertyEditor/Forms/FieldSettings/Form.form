@@ -93,7 +93,7 @@
      </presentation>
      <presentation>
       <key>ru</key>
-      <value>Принужденная запись (опасно)</value>
+      <value>Непосредственная запись (опасно)</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>2</value>

@@ -52,6 +52,14 @@ EndProcedure
 
 #EndRegion
 
+#Region TRANSACTION_TYPE
+
+Procedure TransactionTypeOnChange(Object, Form, Item) Export
+	ViewClient_V2.TransactionTypeOnChange(Object, Form, "PaymentList");
+EndProcedure
+
+#EndRegion
+
 #Region PAYMENT_LIST
 
 Procedure PaymentListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export

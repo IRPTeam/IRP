@@ -908,6 +908,8 @@
   <enums>Enum.DocumentFiscalStatuses</enums>
   <enums>Enum.ExpenseTypes</enums>
   <enums>Enum.AccrualAndDeductionPeriodicity</enums>
+  <enums>Enum.CashExpenseTransactionTypes</enums>
+  <enums>Enum.CashRevenueTransactionTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

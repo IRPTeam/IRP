@@ -20,6 +20,7 @@ Background:
 # it's necessary to add tests to start the remainder of the documents
 Scenario: _400000 preparation (Opening entries)
 	When set True value to the constant
+	When set True value to the constant Use salary 
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -51,6 +52,8 @@ Scenario: _400000 preparation (Opening entries)
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
+		When Create catalog ExpenseAndRevenueTypes objects
+		When Create catalog RetailCustomers objects (check POS)
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -1184,8 +1187,206 @@ Scenario: _400010 check filling price and sum in the OpeningEntry
 			| 'Amount'    | 'Item'  | 'Item key' | 'Store'    | 'Quantity' | 'Price' | 'Amount tax' |
 			| '12 100,00' | 'Dress' | 'XS/Blue'  | 'Store 01' | '550,000'  | '22,00' | ''           |	
 		And I close all client application windows
-		
+
+
+Scenario: _400012 create OpeningEntry (employee cash advance)
+	And I close all client application windows
+	* Open document form opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I click the button named "FormCreate"
+	* Filling in company info
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company |
+		And I select current line in "List" table
+	* Filling Employee cash advance tab
+		And I move to "Employee cash advance" tab
+		* Add first line
+			And in the table "EmployeeCashAdvance" I click "Add" button
+			And I activate "Employee" field in "EmployeeCashAdvance" table
+			And I select current line in "EmployeeCashAdvance" table
+			And I click choice button of "Employee" attribute in "EmployeeCashAdvance" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Arina Brown' |
+			And I select current line in "List" table
+			And I activate "Account" field in "EmployeeCashAdvance" table
+			And I click choice button of "Account" attribute in "EmployeeCashAdvance" table
+			And I go to line in "List" table
+				| 'Currency' | 'Description'       |
+				| 'TRY'      | 'Bank account, TRY' |
+			And I select current line in "List" table
+			And I activate "Financial movement type" field in "EmployeeCashAdvance" table
+			And I click choice button of "Financial movement type" attribute in "EmployeeCashAdvance" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Movement type 1' |
+			And I select current line in "List" table
+			And I activate "Amount" field in "EmployeeCashAdvance" table
+			And I input "1 000,00" text in "Amount" field of "EmployeeCashAdvance" table
+			And I finish line editing in "EmployeeCashAdvance" table
+		* Add second line
+			And in the table "EmployeeCashAdvance" I click "Add" button
+			And I activate "Employee" field in "EmployeeCashAdvance" table
+			And I select current line in "EmployeeCashAdvance" table
+			And I click choice button of "Employee" attribute in "EmployeeCashAdvance" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'David Romanov' |
+			And I select current line in "List" table
+			And I activate "Account" field in "EmployeeCashAdvance" table
+			And I click choice button of "Account" attribute in "EmployeeCashAdvance" table
+			And I go to line in "List" table
+				| 'Currency' | 'Description'       |
+				| 'USD'      | 'Bank account, USD' |
+			And I select current line in "List" table
+			And I activate "Financial movement type" field in "EmployeeCashAdvance" table
+			And I click choice button of "Financial movement type" attribute in "EmployeeCashAdvance" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Movement type 1' |
+			And I select current line in "List" table
+			And I activate "Amount" field in "EmployeeCashAdvance" table
+			And I input "100,00" text in "Amount" field of "EmployeeCashAdvance" table
+			And I finish line editing in "EmployeeCashAdvance" table
+		And I click the button named "FormPost"
+		And I delete "$$NumberOpeningEntry400012$$" variable
+		And I delete "$$OpeningEntry400012$$" variable
+		And I save the value of "Number" field as "$$NumberOpeningEntry400012$$"
+		And I save the window as "$$OpeningEntry400012$$"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And "List" table contains lines
+			| 'Number' |
+			|  '$$NumberOpeningEntry400012$$'    |
+		And I close all client application windows
+				
+
+Scenario: _400013 create OpeningEntry (salary payment)
+	And I close all client application windows
+	* Open document form opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I click the button named "FormCreate"
+	* Filling in company info
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company |
+		And I select current line in "List" table
+	* Filling Salary payment
+		And I move to "Salary payment" tab
+		* Add first line
+			And in the table "SalaryPayment" I click "Add" button
+			And I activate "Employee" field in "SalaryPayment" table
+			And I select current line in "SalaryPayment" table
+			And I click choice button of "Employee" attribute in "SalaryPayment" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Arina Brown' |
+			And I select current line in "List" table
+			And I activate "Currency" field in "SalaryPayment" table
+			And I click choice button of "Currency" attribute in "SalaryPayment" table
+			And I go to line in "List" table
+				| 'Code' |
+				| 'TRY'  |
+			And I select current line in "List" table
+			And I activate "Amount" field in "SalaryPayment" table
+			And I input "1 000,00" text in "Amount" field of "SalaryPayment" table
+			And I finish line editing in "SalaryPayment" table
+		* Add second line
+			And in the table "SalaryPayment" I click "Add" button
+			And I activate "Employee" field in "SalaryPayment" table
+			And I select current line in "SalaryPayment" table
+			And I click choice button of "Employee" attribute in "SalaryPayment" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'David Romanov' |
+			And I select current line in "List" table
+			And I activate "Currency" field in "SalaryPayment" table
+			And I click choice button of "Currency" attribute in "SalaryPayment" table
+			And I go to line in "List" table
+				| 'Code' |
+				| 'TRY'  |
+			And I select current line in "List" table
+			And I activate "Amount" field in "SalaryPayment" table
+			And I input "2 000,00" text in "Amount" field of "SalaryPayment" table
+			And I finish line editing in "SalaryPayment" table
+		And I click the button named "FormPost"
+		And I delete "$$NumberOpeningEntry400013$$" variable
+		And I delete "$$OpeningEntry400013$$" variable
+		And I save the value of "Number" field as "$$NumberOpeningEntry400013$$"
+		And I save the window as "$$OpeningEntry400013$$"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And "List" table contains lines
+			| 'Number' |
+			|  '$$NumberOpeningEntry400013$$'    |
+		And I close all client application windows
 			
-	
+
+Scenario: _400014 create OpeningEntry (advance from retail customer)
+	And I close all client application windows
+	* Open document form opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I click the button named "FormCreate"
+	* Filling in company info
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company |
+		And I select current line in "List" table
+	* Filling advance from retail customer
+		And I move to "Advance from retail customers" tab
+		* Add first line
+			And in the table "AdvanceFromRetailCustomers" I click "Add" button
+			And I activate "Retail customer" field in "AdvanceFromRetailCustomers" table
+			And I select current line in "AdvanceFromRetailCustomers" table
+			And I click choice button of "Retail customer" attribute in "AdvanceFromRetailCustomers" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Daniel Smith' |
+			And I select current line in "List" table
+			And I activate "Currency" field in "AdvanceFromRetailCustomers" table
+			And I click choice button of "Currency" attribute in "AdvanceFromRetailCustomers" table
+			And I go to line in "List" table
+				| 'Code' |
+				| 'TRY'  |
+			And I select current line in "List" table
+			And I activate "Amount" field in "AdvanceFromRetailCustomers" table
+			And I input "1 000,00" text in "Amount" field of "AdvanceFromRetailCustomers" table
+			And I finish line editing in "AdvanceFromRetailCustomers" table
+		* Add second line
+			And in the table "AdvanceFromRetailCustomers" I click "Add" button
+			And I activate "Retail customer" field in "AdvanceFromRetailCustomers" table
+			And I select current line in "AdvanceFromRetailCustomers" table
+			And I click choice button of "Retail customer" attribute in "AdvanceFromRetailCustomers" table
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Sam Jons'     |
+			And I select current line in "List" table
+			And I activate "Currency" field in "AdvanceFromRetailCustomers" table
+			And I click choice button of "Currency" attribute in "AdvanceFromRetailCustomers" table
+			And I go to line in "List" table
+				| 'Code' |
+				| 'TRY'  |
+			And I select current line in "List" table
+			And I activate "Amount" field in "AdvanceFromRetailCustomers" table
+			And I input "1 000,00" text in "Amount" field of "AdvanceFromRetailCustomers" table
+			And I finish line editing in "AdvanceFromRetailCustomers" table
+		And I click the button named "FormPost"
+		And I delete "$$NumberOpeningEntry400014$$" variable
+		And I delete "$$OpeningEntry400014$$" variable
+		And I save the value of "Number" field as "$$NumberOpeningEntry400014$$"
+		And I save the window as "$$OpeningEntry400014$$"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And "List" table contains lines
+			| 'Number' |
+			|  '$$NumberOpeningEntry400014$$'    |
+		And I close all client application windows
+
+
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session

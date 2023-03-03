@@ -1,10 +1,9 @@
 ﻿#language: en
 @tree
 @Positive
-@Movements
-@MovementsPurchaseInvoice
+@MultiCurrencyRevaluation
 
-Functionality: check Purchase invoice movements
+Functionality: foreign currency revaluation
 
 Variables:
 import "Variables.feature"
@@ -12,7 +11,7 @@ import "Variables.feature"
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
-Scenario: _0978001 preparation (Purchase invoice)
+Scenario: _0978001 preparation (foreign currency revaluation)
 	When set True value to the constant
 	When set True value to the constant Use commission trading
 	And I close TestClient session

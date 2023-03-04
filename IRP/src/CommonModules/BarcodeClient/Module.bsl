@@ -8,10 +8,7 @@
 // * AddInfo - Structure -
 // * ReturnCallToModule - See CommonModule.DocumentsClient
 // * MobileBarcodeModule - See CommonModule.BarcodeClient
-// * ServerSettings - Structure:
-// ** PriceType - CatalogRef.PriceTypes, Undefined -
-// ** PricePeriod - Date -
-// ** SearchUserByBarcode - Boolean -
+// * ServerSettings - See GetBarcodeServerSettings
 // * Result - Structure:
 // ** FoundedItems - See BarcodeServer.SearchByBarcodes
 // ** Barcodes - Array of String
@@ -29,11 +26,7 @@ Function GetBarcodeSettings() Export
 	Filter.Insert("DisableIfIsService", False);
 	Settings.Insert("Filter", Filter);
 	
-	ServerSettings = New Structure;
-	ServerSettings.Insert("PriceType", Undefined);
-	ServerSettings.Insert("PricePeriod", CommonFunctionsServer.GetCurrentSessionDate());
-	ServerSettings.Insert("SearchUserByBarcode", False);
-	Settings.Insert("ServerSettings", ServerSettings);
+	Settings.Insert("ServerSettings", GetBarcodeServerSettings());
 	
 	Result = New Structure;
 	Result.Insert("FoundedItems", New Array);
@@ -42,6 +35,29 @@ Function GetBarcodeSettings() Export
 	Settings.Insert("Result", Result);
 	
 	Return Settings;
+EndFunction
+
+// Get barcode settings.
+// 
+// Returns:
+//  Structure - Get barcode server settings:
+// * PriceType - Undefined -
+// * PricePeriod - Date -
+// * SearchUserByBarcode - Boolean -
+// * SaveScannedBarcode - Boolean -
+// * BarcodeBasis - DocumentRef, Undefined -
+Function GetBarcodeServerSettings() Export
+	
+	ServerSettings = New Structure;
+	ServerSettings.Insert("PriceType", Undefined);
+	ServerSettings.Insert("PricePeriod", CommonFunctionsServer.GetCurrentSessionDate());
+	ServerSettings.Insert("SearchUserByBarcode", False);
+	
+	ServerSettings.Insert("SaveScannedBarcode", False);
+	ServerSettings.Insert("BarcodeBasis", Undefined);
+	
+	Return ServerSettings;
+	
 EndFunction
 
 // Search by barcode.

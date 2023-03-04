@@ -4,7 +4,7 @@
 // 
 // Parameters:
 //  Barcodes - Array of DefinedType.typeBarcode - Barcodes
-//  Settings - See BarcodeClient.GetBarcodeSettings
+//  Settings - See BarcodeClient.GetBarcodeServerSettings
 // 
 // Returns:
 //  Array of Structure:
@@ -22,6 +22,14 @@
 // * AlwaysAddNewRowAfterScan - Boolean -
 // * EachSerialLotNumberIsUnique - Boolean -
 Function SearchByBarcodes(Val Barcodes, Settings) Export
+	If Settings.SaveScannedBarcode Then
+		For Each Barcode In Barcodes Do
+			If Not IsBlankString(Barcode) Then
+				InformationRegisters.T1010S_ScannedBarcode.SaveBarcode(Settings.BarcodeBasis, Barcode);
+			EndIf;
+		EndDo;
+	EndIf;
+	
 	If Settings.SearchUserByBarcode Then
 		Return GetUsersByBarcode(Barcodes);
 	EndIf;

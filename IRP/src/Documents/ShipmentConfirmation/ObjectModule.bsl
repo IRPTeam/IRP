@@ -8,6 +8,10 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		LegalName = Undefined;
 	EndIf;
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
+	
+	If isPackage And IsBlankString(PackageID) Then
+		SetPackageID();
+	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)
@@ -114,4 +118,11 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			EndIf;
 		EndDo;
 	EndIf;
+EndProcedure
+
+Procedure SetPackageID()
+	If ThisObject.Number = 0 Then
+		SetNewNumber();
+	EndIf;
+	PackageID = "SC" + ThisObject.Number;
 EndProcedure

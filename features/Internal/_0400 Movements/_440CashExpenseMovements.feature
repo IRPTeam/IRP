@@ -51,6 +51,7 @@ Scenario: _044000 preparation (Cash expense)
 		When update ItemKeys
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
+		When Create catalog CashAccounts objects (Second Company)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -70,8 +71,11 @@ Scenario: _044000 preparation (Cash expense)
 			When Create catalog CancelReturnReasons objects
 	* Load documents
 		When Create document CashExpense objects
+		When Create document CashExpense objects (OtherCompanyExpense)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashExpense.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashExpense.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		
 Scenario: _0440001 check preparation
@@ -119,6 +123,95 @@ Scenario: _044002 check Cash expense movements by the Register "R5022 Expenses"
 			| ''                                         | '07.09.2020 19:25:17' | '17,12'     | '20,2'              | ''            | 'Main Company' | 'Shop 01' | 'Front office'       | 'Fuel'         | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''                          |
 			| ''                                         | '07.09.2020 19:25:17' | '100'       | '118'               | ''            | 'Main Company' | 'Shop 01' | 'Front office'       | 'Fuel'         | ''         | 'TRY'      | ''                    | 'Local currency'               | ''                          |
 			| ''                                         | '07.09.2020 19:25:17' | '100'       | '118'               | ''            | 'Main Company' | 'Shop 01' | 'Front office'       | 'Fuel'         | ''         | 'TRY'      | ''                    | 'en description is empty'      | ''                          |
+	And I close all client application windows
+
+Scenario: _044003 check Cash expense movements by the Register "R3010 Cash on hand" (Other company expense)
+		And I close all client application windows
+	* Select Cash expense
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '15' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash expense 15 dated 04.03.2023 10:57:29' | ''            | ''                    | ''          | ''               | ''       | ''             | ''         | ''                     | ''                             | ''                     |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''               | ''       | ''             | ''         | ''                     | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'            | ''            | ''                    | ''          | ''               | ''       | ''             | ''         | ''                     | ''                             | ''                     |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'     | ''       | ''             | ''         | ''                     | ''                             | 'Attributes'           |
+			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'        | 'Branch' | 'Account'      | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                          | 'Receipt'     | '04.03.2023 10:57:29' | '171,2'     | 'Second Company' | ''       | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 10:57:29' | '342,4'     | 'Second Company' | ''       | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 10:57:29' | '1 000'     | 'Second Company' | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 10:57:29' | '1 000'     | 'Second Company' | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 10:57:29' | '2 000'     | 'Second Company' | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 10:57:29' | '2 000'     | 'Second Company' | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 10:57:29' | '171,2'     | 'Main Company'   | ''       | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 10:57:29' | '342,4'     | 'Main Company'   | ''       | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 10:57:29' | '1 000'     | 'Main Company'   | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 10:57:29' | '1 000'     | 'Main Company'   | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 10:57:29' | '2 000'     | 'Main Company'   | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 10:57:29' | '2 000'     | 'Main Company'   | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |	
+	And I close all client application windows
+
+
+Scenario: _044004 check Cash expense movements by the Register "R3027 Employee cash advance" (Other company expense)
+		And I close all client application windows
+	* Select Cash expense
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '15' |
+	* Check movements by the Register  "R3027 Employee cash advance" 
+		And I click "Registrations report" button
+		And I select "R3027 Employee cash advance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash expense 15 dated 04.03.2023 10:57:29' | ''            | ''                    | ''          | ''               | ''       | ''             | ''         | ''                     | ''             | ''                             | ''                        | ''                          | ''                     |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''               | ''       | ''             | ''         | ''                     | ''             | ''                             | ''                        | ''                          | ''                     |
+			| 'Register  "R3027 Employee cash advance"'   | ''            | ''                    | ''          | ''               | ''       | ''             | ''         | ''                     | ''             | ''                             | ''                        | ''                          | ''                     |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'     | ''       | ''             | ''         | ''                     | ''             | ''                             | ''                        | ''                          | 'Attributes'           |
+			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'        | 'Branch' | 'Account'      | 'Currency' | 'Transaction currency' | 'Partner'      | 'Multi currency movement type' | 'Financial movement type' | 'Planing transaction basis' | 'Deferred calculation' |
+			| ''                                          | 'Receipt'     | '04.03.2023 10:57:29' | '171,2'     | 'Main Company'   | ''       | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Anna Petrova' | 'Reporting currency'           | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 10:57:29' | '342,4'     | 'Main Company'   | ''       | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Arina Brown'  | 'Reporting currency'           | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 10:57:29' | '1 000'     | 'Main Company'   | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Anna Petrova' | 'Local currency'               | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 10:57:29' | '1 000'     | 'Main Company'   | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Anna Petrova' | 'en description is empty'      | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 10:57:29' | '2 000'     | 'Main Company'   | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Arina Brown'  | 'Local currency'               | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 10:57:29' | '2 000'     | 'Main Company'   | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Arina Brown'  | 'en description is empty'      | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 10:57:29' | '171,2'     | 'Second Company' | ''       | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Anna Petrova' | 'Reporting currency'           | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 10:57:29' | '342,4'     | 'Second Company' | ''       | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Arina Brown'  | 'Reporting currency'           | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 10:57:29' | '1 000'     | 'Second Company' | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Anna Petrova' | 'Local currency'               | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 10:57:29' | '1 000'     | 'Second Company' | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Anna Petrova' | 'en description is empty'      | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 10:57:29' | '2 000'     | 'Second Company' | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Arina Brown'  | 'Local currency'               | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 10:57:29' | '2 000'     | 'Second Company' | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Arina Brown'  | 'en description is empty'      | ''                        | ''                          | 'No'                   |	
+	And I close all client application windows
+
+
+Scenario: _044005 check Cash expense movements by the Register "R5022 Expenses" (Other company expense)
+		And I close all client application windows
+	* Select Cash expense
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '15' |
+	* Check movements by the Register  "R5022 Expenses" 
+		And I click "Registrations report" button
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash expense 15 dated 04.03.2023 10:57:29' | ''                    | ''          | ''                  | ''            | ''               | ''       | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                          |
+			| 'Document registrations records'            | ''                    | ''          | ''                  | ''            | ''               | ''       | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                          |
+			| 'Register  "R5022 Expenses"'                | ''                    | ''          | ''                  | ''            | ''               | ''       | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''                          |
+			| ''                                          | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'     | ''       | ''                        | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'                |
+			| ''                                          | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'        | 'Branch' | 'Profit loss center'      | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Calculation movement cost' |
+			| ''                                          | '04.03.2023 10:57:29' | '171,2'     | '171,2'             | ''            | 'Second Company' | ''       | 'Distribution department' | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''                          |
+			| ''                                          | '04.03.2023 10:57:29' | '342,4'     | '342,4'             | ''            | 'Second Company' | ''       | 'Logistics department'    | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''                          |
+			| ''                                          | '04.03.2023 10:57:29' | '1 000'     | '1 000'             | ''            | 'Second Company' | ''       | 'Distribution department' | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''                          |
+			| ''                                          | '04.03.2023 10:57:29' | '1 000'     | '1 000'             | ''            | 'Second Company' | ''       | 'Distribution department' | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      | ''                          |
+			| ''                                          | '04.03.2023 10:57:29' | '2 000'     | '2 000'             | ''            | 'Second Company' | ''       | 'Logistics department'    | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''                          |
+			| ''                                          | '04.03.2023 10:57:29' | '2 000'     | '2 000'             | ''            | 'Second Company' | ''       | 'Logistics department'    | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      | ''                          |	
 	And I close all client application windows
 
 Scenario: _044030 Cash expense clear posting/mark for deletion

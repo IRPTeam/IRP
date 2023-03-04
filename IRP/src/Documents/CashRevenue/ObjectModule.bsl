@@ -30,3 +30,12 @@ EndProcedure
 Procedure UndoPosting(Cancel)
 	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
 EndProcedure
+
+Procedure Filling(FillingData, FillingText, StandardProcessing)
+	If FillingData = Undefined Then
+		FillingData = New Structure();
+		FillingData.Insert("TransactionType", Enums.CashRevenueTransactionTypes.CurrentCompanyRevenue);
+		FillPropertyValues(ThisObject, FillingData);
+		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+	EndIf;
+EndProcedure

@@ -49,6 +49,11 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
+	IsOtherCompanyExpense = (Object.TransactionType = PredefinedValue("Enum.CashRevenueTransactionTypes.OtherCompanyRevenue"));
+	
+	Form.Items.OtherCompany.Visible       = IsOtherCompanyExpense;
+	Form.Items.PaymentListPartner.Visible = IsOtherCompanyExpense;
+	
 	Form.Items.PaymentListCurrency.ReadOnly = ValueIsFilled(Form.Currency);
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure
@@ -98,6 +103,15 @@ EndProcedure
 &AtClient
 Procedure AccountEditTextChange(Item, Text, StandardProcessing)
 	DocCashExpenseRevenueClient.AccountEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TRANSACTION_TYPE
+
+&AtClient
+Procedure TransactionTypeOnChange(Item)
+	DocCashExpenseRevenueClient.TransactionTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

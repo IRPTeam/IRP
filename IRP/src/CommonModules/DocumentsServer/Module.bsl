@@ -586,3 +586,57 @@ Function GetArrayOfSalesOrdersBySalesInvoice(SalesInvoice) Export
 	Return ArrayOfOrders;
 EndFunction
 
+// Additional table control.
+// 
+// Parameters:
+//  Object - DocumentObjectDocumentName, DocumentObject.SalesInvoice -
+Procedure AdditionalTableControl(Object) Export
+	
+	TotalAmountInTaxList = Object.TaxList.Total("ManualAmount");
+	TotalAmountInItemList = Object.ItemList.Total("TaxAmount");
+	If Not TotalAmountInTaxList = TotalAmountInItemList Then
+		ErrorMsg = "Total tax in Item list %1 and Tax list %2 has differance %3"; 
+		Raise StrTemplate(ErrorMsg, TotalAmountInTaxList, TotalAmountInItemList, TotalAmountInTaxList - TotalAmountInItemList);
+	EndIf;
+
+	For Each Row In Object.ItemList Do
+		
+		If Row.Price < 0 Then
+			ErrorMsg = "In row [%1] price [%2] less then 0"; 
+			Raise StrTemplate(ErrorMsg, Row.LineNumber, Row.Price);
+		EndIf;
+	
+		If Row.NetAmount < 0 Then
+			ErrorMsg = "In row [%1] net amount [%2] less then 0"; 
+			Raise StrTemplate(ErrorMsg, Row.LineNumber, Row.NetAmount);
+		EndIf;
+		
+		If Row.NetAmount > Row.TotalAmount Then
+			ErrorMsg = "In row [%1] net amount [%2] greater then total amount [%3]"; 
+			Raise StrTemplate(ErrorMsg, Row.LineNumber, Row.NetAmount, Row.TotalAmount);
+		EndIf;
+		
+		If Not Row.TotalAmount - Row.NetAmount = Row.TaxAmount Then
+			ErrorMsg = "In row [%1] total amount [%2] - net amount [%3] not equal tax amount [%4]"; 
+			Raise StrTemplate(ErrorMsg, Row.LineNumber, Row.TotalAmount, Row.NetAmount, Row.TaxAmount);
+		EndIf;
+		
+		If Not Row.Item = Row.ItemKey.Item Then
+			ErrorMsg = "In row [%1] item [%2(%3)] not equal item key owner [%4(%5)]"; 
+			Raise StrTemplate(ErrorMsg, Row.LineNumber, Row.Item, Row.Item.Code, Row.ItemKey.Item, Row.ItemKey.Item.Code);
+		EndIf;
+		
+		If Row.NetAmount <= Row.TaxAmount Then
+			ErrorMsg = "In row [%1] net amount [%2] less or equal tax amount [%3]"; 
+			Raise StrTemplate(ErrorMsg, Row.LineNumber, Row.NetAmount);
+		EndIf;
+		
+		If Row.TaxAmount > 0 And Object.TaxList.FindRows(New Structure("Key", Row.Key)).Count() = 0 Then
+			ErrorMsg = "In row [%1] tax is set, but not found in tax list"; 
+			Raise StrTemplate(ErrorMsg, Row.LineNumber, Row.NetAmount);
+		EndIf;
+		
+	EndDo;
+	
+EndProcedure
+

@@ -3403,7 +3403,9 @@ Procedure OnSetTransactionTypeNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"    
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"          
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "OutgoingPaymentOrder" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "OutgoingPaymentOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashExpense"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue" Then
 	
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;

@@ -53,6 +53,7 @@ Scenario: _044100 preparation (Cash revenue)
 		When update ItemKeys
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
+		When Create catalog CashAccounts objects (Second Company)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -72,8 +73,11 @@ Scenario: _044100 preparation (Cash revenue)
 			When Create catalog CancelReturnReasons objects
 	* Load documents
 		When Create document CashRevenue objects
+		When Create document CashRevenue objects (OtherCompanyRevenue)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashRevenue.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashRevenue.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 
 Scenario: _0441001 check preparation
@@ -124,6 +128,93 @@ Scenario: _044102 check Cash revenue movements by the Register "R5021 Revenues"
 	And I close all client application windows
 
 
+Scenario: _044105 check Cash revenue movements by the Register "R5021 Revenues" (Other company revenue)
+		And I close all client application windows
+	* Select Cash revenue
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '14' |
+	* Check movements by the Register  "R5021 Revenues" 
+		And I click "Registrations report" button
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash revenue 14 dated 04.03.2023 11:03:03' | ''                    | ''          | ''                  | ''               | ''       | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'            | ''                    | ''          | ''                  | ''               | ''       | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5021 Revenues"'                | ''                    | ''          | ''                  | ''               | ''       | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                          | 'Period'              | 'Resources' | ''                  | 'Dimensions'     | ''       | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                          | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'        | 'Branch' | 'Profit loss center'      | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                          | '04.03.2023 11:03:03' | '85,6'      | '85,6'              | 'Second Company' | ''       | 'Distribution department' | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                          | '04.03.2023 11:03:03' | '171,2'     | '171,2'             | 'Second Company' | ''       | 'Logistics department'    | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                          | '04.03.2023 11:03:03' | '500'       | '500'               | 'Second Company' | ''       | 'Distribution department' | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                          | '04.03.2023 11:03:03' | '500'       | '500'               | 'Second Company' | ''       | 'Distribution department' | 'Revenue'      | ''         | 'TRY'      | ''                    | 'en description is empty'      |
+			| ''                                          | '04.03.2023 11:03:03' | '1 000'     | '1 000'             | 'Second Company' | ''       | 'Logistics department'    | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                          | '04.03.2023 11:03:03' | '1 000'     | '1 000'             | 'Second Company' | ''       | 'Logistics department'    | 'Revenue'      | ''         | 'TRY'      | ''                    | 'en description is empty'      |
+	And I close all client application windows
+
+Scenario: _044106 check Cash revenue movements by the Register "R3010 Cash on hand" (Other company revenue)
+		And I close all client application windows
+	* Select Cash revenue
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '14' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash revenue 14 dated 04.03.2023 11:03:03' | ''            | ''                    | ''          | ''               | ''       | ''             | ''         | ''                     | ''                             | ''                     |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''               | ''       | ''             | ''         | ''                     | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'            | ''            | ''                    | ''          | ''               | ''       | ''             | ''         | ''                     | ''                             | ''                     |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'     | ''       | ''             | ''         | ''                     | ''                             | 'Attributes'           |
+			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'        | 'Branch' | 'Account'      | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                          | 'Receipt'     | '04.03.2023 11:03:03' | '85,6'      | 'Main Company'   | ''       | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 11:03:03' | '171,2'     | 'Main Company'   | ''       | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 11:03:03' | '500'       | 'Main Company'   | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 11:03:03' | '500'       | 'Main Company'   | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 11:03:03' | '1 000'     | 'Main Company'   | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 11:03:03' | '1 000'     | 'Main Company'   | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 11:03:03' | '85,6'      | 'Second Company' | ''       | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 11:03:03' | '171,2'     | 'Second Company' | ''       | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 11:03:03' | '500'       | 'Second Company' | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 11:03:03' | '500'       | 'Second Company' | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 11:03:03' | '1 000'     | 'Second Company' | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 11:03:03' | '1 000'     | 'Second Company' | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |	
+	And I close all client application windows
+
+
+Scenario: _044107 check Cash revenue movements by the Register "R3027 Employee cash advance" (Other company revenue)
+		And I close all client application windows
+	* Select Cash revenue
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '14' |
+	* Check movements by the Register  "R3027 Employee cash advance" 
+		And I click "Registrations report" button
+		And I select "R3027 Employee cash advance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash revenue 14 dated 04.03.2023 11:03:03' | ''            | ''                    | ''          | ''               | ''       | ''             | ''         | ''                     | ''             | ''                             | ''                        | ''                          | ''                     |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''               | ''       | ''             | ''         | ''                     | ''             | ''                             | ''                        | ''                          | ''                     |
+			| 'Register  "R3027 Employee cash advance"'   | ''            | ''                    | ''          | ''               | ''       | ''             | ''         | ''                     | ''             | ''                             | ''                        | ''                          | ''                     |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'     | ''       | ''             | ''         | ''                     | ''             | ''                             | ''                        | ''                          | 'Attributes'           |
+			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'        | 'Branch' | 'Account'      | 'Currency' | 'Transaction currency' | 'Partner'      | 'Multi currency movement type' | 'Financial movement type' | 'Planing transaction basis' | 'Deferred calculation' |
+			| ''                                          | 'Receipt'     | '04.03.2023 11:03:03' | '85,6'      | 'Second Company' | ''       | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Anna Petrova' | 'Reporting currency'           | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 11:03:03' | '171,2'     | 'Second Company' | ''       | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Arina Brown'  | 'Reporting currency'           | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 11:03:03' | '500'       | 'Second Company' | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Anna Petrova' | 'Local currency'               | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 11:03:03' | '500'       | 'Second Company' | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Anna Petrova' | 'en description is empty'      | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 11:03:03' | '1 000'     | 'Second Company' | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Arina Brown'  | 'Local currency'               | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Receipt'     | '04.03.2023 11:03:03' | '1 000'     | 'Second Company' | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Arina Brown'  | 'en description is empty'      | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 11:03:03' | '85,6'      | 'Main Company'   | ''       | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Anna Petrova' | 'Reporting currency'           | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 11:03:03' | '171,2'     | 'Main Company'   | ''       | 'Cash desk №4' | 'USD'      | 'TRY'                  | 'Arina Brown'  | 'Reporting currency'           | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 11:03:03' | '500'       | 'Main Company'   | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Anna Petrova' | 'Local currency'               | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 11:03:03' | '500'       | 'Main Company'   | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Anna Petrova' | 'en description is empty'      | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 11:03:03' | '1 000'     | 'Main Company'   | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Arina Brown'  | 'Local currency'               | ''                        | ''                          | 'No'                   |
+			| ''                                          | 'Expense'     | '04.03.2023 11:03:03' | '1 000'     | 'Main Company'   | ''       | 'Cash desk №4' | 'TRY'      | 'TRY'                  | 'Arina Brown'  | 'en description is empty'      | ''                        | ''                          | 'No'                   |		
+	And I close all client application windows
 
 Scenario: _044130 Cash revenue clear posting/mark for deletion
 	And I close all client application windows

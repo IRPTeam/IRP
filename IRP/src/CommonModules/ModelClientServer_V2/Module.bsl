@@ -173,6 +173,7 @@ Function GetChain()
 	Chain.Insert("ClearByTransactionTypeCashPayment", GetChainLink("ClearByTransactionTypeCashPaymentExecute"));
 	Chain.Insert("ClearByTransactionTypeCashReceipt", GetChainLink("ClearByTransactionTypeCashReceiptExecute"));
 	Chain.Insert("ClearByTransactionTypeOutgoingPaymentOrder", GetChainLink("ClearByTransactionTypeOutgoingPaymentOrderExecute"));
+	Chain.Insert("ClearByTransactionTypeCashExpenseRevenue"  , GetChainLink("ClearByTransactionTypeCashExpenseRevenueExecute"));
 	
 	// Changes
 	Chain.Insert("ChangeManagerSegmentByPartner", GetChainLink("ChangeManagerSegmentByPartnerExecute"));
@@ -3208,6 +3209,44 @@ Function ClearByTransactionTypeOutgoingPaymentOrderExecute(Options) Export
 		|PaymentList.Partner,
 		|PaymentList.PartnerBankAccount,
 		|PaymentList.Payee";
+	EndIf;
+		
+	ArrayOfAttributes = New Array();
+	For Each ArrayItem In StrSplit(StrByType, ",") Do
+		ArrayOfAttributes.Add(StrReplace(TrimAll(ArrayItem), Chars.NBSp, ""));
+	EndDo;
+	
+	For Each KeyValue In Result Do
+		AttrName = TrimAll(KeyValue.Key);
+		If Not ValueIsFilled(AttrName) Then
+			Continue;
+		EndIf;
+		If ArrayOfAttributes.Find(AttrName) = Undefined Then
+			Result[AttrName] = Undefined;
+		EndIf;
+	EndDo;
+	Return Result;
+EndFunction
+
+// Cash Expense-Revenue
+Function ClearByTransactionTypeCashExpenseRevenueOptions() Export
+	Return GetChainLinkOptions("TransactionType,
+		|Partner,
+		|OtherCompany");
+EndFunction
+
+Function ClearByTransactionTypeCashExpenseRevenueExecute(Options) Export
+	Result = New Structure();
+	Result.Insert("Partner"      , Options.Partner);
+	Result.Insert("OtherCompany" , Options.OtherCompany);
+
+	Other_CashExpense = PredefinedValue("Enum.CashExpenseTransactionTypes.OtherCompanyExpense");
+	Other_CashRevenue = PredefinedValue("Enum.CashRevenueTransactionTypes.OtherCompanyRevenue");
+
+	If Options.TransactionType = Other_CashExpense Or Options.TransactionType = Other_CashRevenue Then
+		StrByType = "
+		|Partner,
+		|OtherCompany";
 	EndIf;
 		
 	ArrayOfAttributes = New Array();

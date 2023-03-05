@@ -1201,6 +1201,12 @@ Function BindTransactionType(Parameters)
 		"StepClearByTransactionTypeCashReceipt,
 		|StepChangeCashAccountByTransactionType");
 	
+	Binding.Insert("CashExpense", 
+		"StepClearByTransactionTypeCashExpenseRevenue");
+		
+	Binding.Insert("CashRevenue", 
+		"StepClearByTransactionTypeCashExpenseRevenue");
+	
 	Binding.Insert("OutgoingPaymentOrder",
 		"StepClearByTransactionTypeOutgoingPaymentOrder");
 	
@@ -1301,6 +1307,14 @@ Procedure MultiSetTransactionType_OutgoingPaymentOrder(Parameters, Results) Expo
 	ResourceToBinding.Insert("Payee"              , BindPaymentListLegalName(Parameters));
 	ResourceToBinding.Insert("BasisDocument"      , BindPaymentListBasisDocument(Parameters));
 	
+	MultiSetterObject(Parameters, Results, ResourceToBinding);
+EndProcedure
+
+// TransactionType.CashExpenseRevenue.MultiSet
+Procedure MultiSetTransactionType_CashExpenseRevenue(Parameters, Results) Export
+	ResourceToBinding = New Map();
+	ResourceToBinding.Insert("Partner"       , BindPaymentListPartner(Parameters));
+	ResourceToBinding.Insert("OtherCompany"  , BindOtherCompany(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1421,6 +1435,21 @@ Procedure StepClearByTransactionTypeOutgoingPaymentOrder(Parameters, Chain) Expo
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeOutgoingPaymentOrder";
 		Chain.ClearByTransactionTypeOutgoingPaymentOrder.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+// TransactionType.ClearByTransactionTypeCashExpenseRevenue.Step
+Procedure StepClearByTransactionTypeCashExpenseRevenue(Parameters, Chain) Export
+	Chain.ClearByTransactionTypeCashExpenseRevenue.Enable = True;
+	Chain.ClearByTransactionTypeCashExpenseRevenue.Setter = "MultiSetTransactionType_CashExpenseRevenue";
+	For Each Row In GetRows(Parameters, "PaymentList") Do
+		Options = ModelClientServer_V2.ClearByTransactionTypeCashExpenseRevenueOptions();
+		Options.TransactionType          = GetTransactionType(Parameters);
+		Options.OtherCompany             = GetOtherCompany(Parameters);
+		Options.Partner                  = GetPaymentListPartner(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepClearByTransactionTypeCashExpenseRevenue";
+		Chain.ClearByTransactionTypeCashExpenseRevenue.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -2214,6 +2243,29 @@ Procedure StepChangeCompanyByAgreement(Parameters, Chain) Export
 EndProcedure
 
 #EndRegion
+
+#Region OTHER_COMPANY
+
+// OtherCompany.Set
+Procedure SetOtherCompany(Parameters, Results) Export
+	Binding = BindOtherCompany(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// OtherCompany.Get
+Function GetOtherCompany(Parameters)
+	Return GetPropertyObject(Parameters, BindOtherCompany(Parameters).DataPath);
+EndFunction
+
+// OtherCompany.Bind
+Function BindOtherCompany(Parameters)
+	DataPath = "OtherCompany";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
 
 #Region BRANCH
 
@@ -4750,6 +4802,10 @@ Function BindPaymentListPartner(Parameters)
 	Binding.Insert("CashReceipt",
 		"StepPaymentListChangeLegalNameByPartner,
 		|StepPaymentListChangeAgreementByPartner");
+	
+	Binding.Insert("CashExpense", "BindVoid");
+	
+	Binding.Insert("CashRevenue", "BindVoid");
 	
 	Return BindSteps(Undefined, DataPath, Binding, Parameters);
 EndFunction

@@ -80,6 +80,7 @@
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
+ <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -102,6 +103,7 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -125,6 +127,44 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="8bb92357-2d2a-4b83-81d7-3dc6bce70daf">
+  <name>TransactionType</name>
+  <synonym>
+   <key>en</key>
+   <value>Transaction type</value>
+  </synonym>
+  <type>
+   <types>EnumRef.CashRevenueTransactionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="ae6a8289-7793-445a-b57d-457527890891">
+  <name>OtherCompany</name>
+  <synonym>
+   <key>en</key>
+   <value>Other company</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -217,6 +257,26 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="6d3bd415-06fa-4371-843b-94a81033f045">
+   <name>Partner</name>
+   <synonym>
+    <key>en</key>
+    <value>Partner</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Partners</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameters>
+    <name>Filter.Employee</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>

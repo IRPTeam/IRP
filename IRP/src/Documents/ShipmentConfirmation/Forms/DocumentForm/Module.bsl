@@ -381,7 +381,12 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
-	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject);
+	If Object.SaveScannedBarcode And Not ValueIsFilled(Object.Ref) Then
+		QuestionToUserNotify = New NotifyDescription("SaveAndSearch", ThisObject, Barcode);
+		ShowQueryBox(QuestionToUserNotify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
+		Return;
+	EndIf;
+	RunSearchByBarcode(Barcode);
 EndProcedure
 
 &AtClient
@@ -392,6 +397,11 @@ EndProcedure
 &AtClient
 Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure ShowHiddenTables(Command)
+	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -470,8 +480,19 @@ EndProcedure
 #EndRegion
 
 &AtClient
-Procedure ShowHiddenTables(Command)
-	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+Procedure RunSearchByBarcode(Barcode)
+	BarcodeSettings = BarcodeClient.GetBarcodeSettings();
+	BarcodeSettings.ServerSettings.BarcodeBasis = Object.Ref; 
+	BarcodeSettings.ServerSettings.SaveScannedBarcode = Object.SaveScannedBarcode; 
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, , , BarcodeSettings);
+EndProcedure
+
+&AtClient
+Procedure SaveAndSearch(Result, Barcode = "") Export
+	Если Result = DialogReturnCode.Yes Then
+		Write();
+		RunSearchByBarcode(Barcode);
+	EndIf;
 EndProcedure
 
 #EndRegion

@@ -27,6 +27,7 @@ Scenario: _085000 preparation (Cash expence and Cash revenue)
 		When Create catalog ObjectStatuses objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog Companies objects (own Second company)
 		When Create catalog Partners objects (Kalipso)
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
@@ -41,6 +42,8 @@ Scenario: _085000 preparation (Cash expence and Cash revenue)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create document CashExpense objects
 		When Create document CashRevenue objects
+		When Create catalog Partners objects
+		When Create catalog CashAccounts objects (Second Company)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -280,7 +283,7 @@ Scenario: _085006 check Cash expense creation
 		And I save the value of "Number" field as "$$NumberCashExpense1$$"
 		And I save the window as "$$CashExpense1$$"
 	* Check creation
-		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And "List" table contains lines
 			| 'Number'        |
 			| '$$NumberCashExpense1$$' |
@@ -360,5 +363,207 @@ Scenario: _085010 copy Cash revenue and change date
 		
 				
 
+Scenario: _085015 check Cash expense (Other company expense)
+		And I close all client application windows
+	* Open document form
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I click the button named "FormCreate"
+	* Filling in company and account
+		And I select "Other company expense" exact value from "Transaction type" drop-down list
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Select button of "Other company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Second Company' |
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
+			| 'Currency' | 'Description'       |
+			| 'TRY'      | 'Cash desk №4' |
+		And I select current line in "List" table
+	* Filling in the tabular part by cost
+		* First line
+			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click choice button of "Partner" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Anna Petrova' |
+			And I select current line in "List" table
+			And I activate "Profit loss center" field in "PaymentList" table
+			And I click choice button of "Profit loss center" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Description'             |
+				| 'Distribution department' |
+			And I select current line in "List" table
+			And I activate "Expense type" field in "PaymentList" table
+			And I click choice button of "Expense type" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Expense'     |
+			And I select current line in "List" table
+			And I activate "Financial movement type" field in "PaymentList" table
+			And I click choice button of "Financial movement type" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Movement type 1'     |
+			And I select current line in "List" table
+			And I activate "VAT" field in "PaymentList" table
+			And I select "0%" exact value from "VAT" drop-down list in "PaymentList" table
+			And I finish line editing in "PaymentList" table
+			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+			And I select current line in "PaymentList" table
+			And I input "1 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+			And I finish line editing in "PaymentList" table
+		* Second line
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I finish line editing in "PaymentList" table
+		And I activate "Partner" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Arina Brown' |
+		And I select current line in "List" table
+		And I activate "Profit loss center" field in "PaymentList" table
+		And I click choice button of "Profit loss center" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'          |
+			| 'Logistics department' |
+		And I select current line in "List" table
+		And I activate "Expense type" field in "PaymentList" table
+		And I click choice button of "Expense type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Expense'     |
+		And I select current line in "List" table
+		And I activate "Financial movement type" field in "PaymentList" table
+		And I click choice button of "Financial movement type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Movement type 1'     |
+		And I select current line in "List" table
+		And I finish line editing in "PaymentList" table
+		And I activate "VAT" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I select "0%" exact value from "VAT" drop-down list in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "2 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I click the button named "FormPost"
+		And I delete "$$NumberCashExpense2$$" variable
+		And I delete "$$CashExpense2$$" variable
+		And I save the value of "Number" field as "$$NumberCashExpense2$$"
+		And I save the window as "$$CashExpense2$$"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And "List" table contains lines
+			| 'Number'        |
+			| '$$NumberCashExpense2$$' |
+		And I close all client application windows
 		
 
+Scenario: _085016 check Cash revenue (Other company revenue)
+		And I close all client application windows
+	* Open document form
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I click the button named "FormCreate"
+	* Filling in company and account
+		And I select "Other company revenue" exact value from "Transaction type" drop-down list
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Select button of "Other company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Second Company' |
+		And I select current line in "List" table
+		And I click Select button of "Account" field
+		And I go to line in "List" table
+			| 'Currency' | 'Description'  |
+			| 'TRY'      | 'Cash desk №4' |
+		And I select current line in "List" table
+	* Filling in the tabular part by cost
+		* First line
+			And in the table "PaymentList" I click the button named "PaymentListAdd"
+			And I click choice button of "Partner" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Anna Petrova' |
+			And I select current line in "List" table
+			And I activate "Profit loss center" field in "PaymentList" table
+			And I click choice button of "Profit loss center" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Description'             |
+				| 'Distribution department' |
+			And I select current line in "List" table
+			And I activate "Revenue type" field in "PaymentList" table
+			And I click choice button of "Revenue type" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Revenue'     |
+			And I select current line in "List" table
+			And I activate "Financial movement type" field in "PaymentList" table
+			And I click choice button of "Financial movement type" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Movement type 1'     |
+			And I select current line in "List" table
+			And I activate "VAT" field in "PaymentList" table
+			And I select "0%" exact value from "VAT" drop-down list in "PaymentList" table
+			And I finish line editing in "PaymentList" table
+			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+			And I select current line in "PaymentList" table
+			And I input "500,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+			And I finish line editing in "PaymentList" table
+		* Second line
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I finish line editing in "PaymentList" table
+		And I activate "Partner" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Arina Brown' |
+		And I select current line in "List" table
+		And I activate "Profit loss center" field in "PaymentList" table
+		And I click choice button of "Profit loss center" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'          |
+			| 'Logistics department' |
+		And I select current line in "List" table
+		And I activate "Revenue type" field in "PaymentList" table
+		And I click choice button of "Revenue type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Revenue'     |
+		And I select current line in "List" table
+		And I activate "Financial movement type" field in "PaymentList" table
+		And I click choice button of "Financial movement type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Movement type 1'     |
+		And I select current line in "List" table
+		And I finish line editing in "PaymentList" table
+		And I activate "VAT" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I select "0%" exact value from "VAT" drop-down list in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "1 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I click the button named "FormPost"
+		And I delete "$$NumberCashRevenue2$$" variable
+		And I delete "$$CashRevenue2$$" variable
+		And I save the value of "Number" field as "$$NumberCashRevenue2$$"
+		And I save the window as "$$CashRevenue2$$"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And "List" table contains lines
+			| 'Number'        |
+			| '$$NumberCashRevenue2$$' |
+		And I close all client application windows

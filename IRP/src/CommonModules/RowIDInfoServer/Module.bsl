@@ -1551,18 +1551,18 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 	
 	If Is.RRR Or Is.SR Then
 		FillPropertyValues(RowRefObject, Source, , "Company, Branch");
+		
+		RowRefObject.CompanyReturn = Source.Company;
+		RowRefObject.BranchReturn  = Source.Branch;
+	ElsIf Is.GR And Source.TransactionType = Enums.GoodsReceiptTransactionTypes.InventoryTransfer Then
+		FillPropertyValues(RowRefObject, Source, , "Branch");
 	Else
 		FillPropertyValues(RowRefObject, Source);
 	EndIf;
 	
 	RowRefObject.RowID       = Row.RowID;
 	RowRefObject.Description = Row.RowID;
-	
-	If Is.RRR Or Is.SR Then
-		RowRefObject.CompanyReturn = Source.Company;
-		RowRefObject.BranchReturn = Source.Branch;
-	EndIf;
-	
+		
 	If Is.ITO Or Is.IT Then
 		RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.InventoryTransfer;
 		RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.InventoryTransfer;
@@ -6945,12 +6945,16 @@ Function GetFieldsToLock_InternalLink_GR(InternalDocAliase, Aliases)
 		Or InternalDocAliase = Aliases.PI 
 		Or InternalDocAliase = Aliases.SR
 		Or InternalDocAliase = Aliases.SRO
-		Or InternalDocAliase = Aliases.IT
 		Or InternalDocAliase = Aliases.ITO Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, ReceiptBasis, SalesOrder, PurchaseOrder, PurchaseInvoice, 
 			|InternalSupplyRequest, InventoryTransferOrder, SalesReturn, SalesReturnOrder,
 			|InventoryTransfer, SalesInvoice";
+	ElsIf InternalDocAliase = Aliases.IT Then
+		Result.Header   = "Company, Store, Partner, LegalName, TransactionType";
+		Result.ItemList = "Item, ItemKey, Store, ReceiptBasis, SalesOrder, PurchaseOrder, PurchaseInvoice, 
+			|InternalSupplyRequest, InventoryTransferOrder, SalesReturn, SalesReturnOrder,
+			|InventoryTransfer, SalesInvoice";		
 	Else
 		Raise StrTemplate("Not supported Internal link for [GR] to [%1]", InternalDocAliase);
 	EndIf;
@@ -7687,11 +7691,10 @@ Function GetFieldsToLock_ExternalLink_IT(ExternalDocAliase, Aliases)
 							  |TransactionTypeSC , ,
 							  |ItemKey           , ItemList.ItemKey";
 	ElsIf ExternalDocAliase = Aliases.GR Then
-		Result.Header   = "Company, Branch, StoreReceiver, UseGoodsReceipt";
+		Result.Header   = "Company, StoreReceiver, UseGoodsReceipt";
 		Result.ItemList = "Item, ItemKey, InventoryTransferOrder";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
-							  |Branch            , Branch,
 							  |StoreReceiver     , StoreReceiver,
 							  |TransactionTypeGR , ,
 							  |ItemKey           , ItemList.ItemKey";
@@ -7771,11 +7774,6 @@ Procedure ApplyFilterSet_IT_ForGR(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Branch
-	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE

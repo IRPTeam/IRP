@@ -2391,3 +2391,16 @@ Scenario: Create document SO-WO-WS-SI
 		| 'e1cib/data/Document.WorkSheet?ref=b785989306affb7a11ed3a75abaa4e3f' | '400f5011-7637-4e38-a8cb-37b2e5a5025e' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 0.1712 | 5.8411        | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e' |          | 'False'   |
 
 
+
+Scenario: Create document InventoryTransfer objects (SC and GR different branch)
+
+	And I check or create document "InventoryTransfer" objects:
+		| 'Ref'                                                                        | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'StoreReceiver'                                                  | 'StoreSender'                                                    | 'StoreTransit' | 'UseGoodsReceipt' | 'UseShipmentConfirmation' | 'Author'                                                        | 'Branch'                                                                | 'Description' |
+		| 'e1cib/data/Document.InventoryTransfer?ref=b762b13668d0905011eb832c02e0c9f2' | 'False'        | 252      | '12.03.2021 15:25:54' | 'False'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c' | ''             | 'True'            | 'True'                    | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+
+	And I refill object tabular section "ItemList":
+		| 'Ref'                                                                        | 'Key'                                  | 'Item'                                                          | 'ItemKey'                                                          | 'Unit'                                                          | 'Quantity' | 'InventoryTransferOrder'                                                          | 'QuantityInBaseUnit' | 'UseSerialLotNumber' | 'ProductionPlanning' | 'InventoryOrigin'                      |
+		| 'e1cib/data/Document.InventoryTransfer?ref=b762b13668d0905011eb832c02e0c9f2' | '170de7a2-ac61-4b5b-831a-f7848d7a9dba' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf1277d18ed8b' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf1277d18ed8c' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 20         | ''                                                                                | 20                   | 'False'              | ''                   | ''                                     |
+		| 'e1cib/data/Document.InventoryTransfer?ref=b762b13668d0905011eb832c02e0c9f2' | '5a2da38d-5730-4c82-b224-f46bc3a0c4d7' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f7' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c608' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf115bcc9c60a' | 10         | ''                                                                                | 80                   | 'False'              | ''                   | ''                                     |
+
+	

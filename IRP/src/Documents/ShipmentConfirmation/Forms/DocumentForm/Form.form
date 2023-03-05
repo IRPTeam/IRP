@@ -3182,6 +3182,10 @@
      <key>en</key>
      <value>Group of package</value>
     </title>
+    <title>
+     <key>ru</key>
+     <value>Группа коробов</value>
+    </title>
     <extendedTooltip>
      <name>GroupOfPackageExtendedTooltip</name>
      <id>283</id>

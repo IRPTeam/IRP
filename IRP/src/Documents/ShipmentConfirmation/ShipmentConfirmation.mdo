@@ -193,6 +193,10 @@
    <key>en</key>
    <value>Save scanned barcode</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сохранять просканированные штрихкоды</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>
@@ -208,6 +212,10 @@
    <key>en</key>
    <value>Is package</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Это короб</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>
@@ -222,6 +230,10 @@
   <synonym>
    <key>en</key>
    <value>Package ID</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>ID Пакета</value>
   </synonym>
   <type>
    <types>String</types>
@@ -240,6 +252,10 @@
   <synonym>
    <key>en</key>
    <value>External package ID</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Внешний ID короба</value>
   </synonym>
   <type>
    <types>String</types>

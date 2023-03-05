@@ -138,6 +138,14 @@
    <key>en</key>
    <value>Transaction type</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид операции</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İşlem tipi</value>
+  </synonym>
   <type>
    <types>EnumRef.CashRevenueTransactionTypes</types>
   </type>
@@ -153,6 +161,10 @@
   <synonym>
    <key>en</key>
    <value>Other company</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Другая компания</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -265,6 +277,14 @@
    <synonym>
     <key>en</key>
     <value>Partner</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Партнер</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Cari hesap</value>
    </synonym>
    <type>
     <types>CatalogRef.Partners</types>

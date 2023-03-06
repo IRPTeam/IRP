@@ -275,6 +275,22 @@ Function Strings(Lang) Export
 
 	Strings = New Structure();
 
+#Region AdditionalTableControl
+	Strings.Insert("ATC_001", NStr("en = 'Unknown document type: %1'", Lang));
+	Strings.Insert("ATC_ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList", NStr("en = 'Row: %1. Tax amount in item list is not equal to tax amount in tax list'", Lang));
+	Strings.Insert("ATC_ErrorNetAmountGreaterTotalAmount", NStr("en = 'Row: %1. Net amount is greater than total amount'", Lang));
+	Strings.Insert("ATC_ErrorQuantityIsZero", NStr("en = 'Row: %1. Quantity is zero'", Lang));
+	Strings.Insert("ATC_ErrorQuantityInBaseUnitIsZero", NStr("en = 'Row: %1. Quantity in base unit is zero'", Lang));
+	Strings.Insert("ATC_ErrorOffersAmountInItemListNotEqualOffersAmountInOffersList", NStr("en = 'Row: %1. Offers amount in item list is not equal to offers amount in offers list'", Lang));
+	Strings.Insert("ATC_ErrorItemTypeIsNotService", NStr("en = 'Row: %1. Item type is not service'", Lang));
+	Strings.Insert("ATC_ErrorItemTypeUseSerialNumbers", NStr("en = 'Row: %1. Item type uses serial numbers'", Lang));
+	Strings.Insert("ATC_ErrorUseSerialButSerialNotSet", NStr("en = 'Row: %1. Serial is not set but is required'", Lang));
+	Strings.Insert("ATC_ErrorNotTheSameQuantityInSerialListTableAndInItemList", NStr("en = 'Row: %1. Quantity in serial list table is not the same as quantity in item list'", Lang));
+	Strings.Insert("ATC_ErrorItemNotEqualItemInItemKey", NStr("en = 'Row: %1. Item is not equal to item in item key'", Lang));
+	Strings.Insert("ATC_ErrorTotalAmountMinusNetAmountNotEqualTaxAmount", NStr("en = 'Row: %1. Total amount minus net amount is not equal to tax amount'", Lang));
+	Strings.Insert("ATC_ErrorQuantityInItemListNotEqualQuantityInRowID", NStr("en = 'Row: %1. Quantity in item list is not equal to quantity in row ID'", Lang));
+#EndRegion
+
 #Region Equipment
 	Strings.Insert("Eq_001", NStr("en = 'Installed'", Lang));
 	Strings.Insert("Eq_002", NStr("en = 'Not installed'", Lang));

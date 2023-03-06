@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5a580ffd-31fd-43f9-8bc1-dcb03c231d14">
+  <producedTypes>
+    <containerType typeId="badda667-ccc9-4292-87e5-850e32416c10" valueTypeId="a3caa6bb-74c5-4813-8e46-ea9ce7a60ada"/>
+  </producedTypes>
+  <name>AdditionalTableControlDocObject</name>
+  <synonym>
+    <key>en</key>
+    <value>Additional table control doc object</value>
+  </synonym>
+  <type>
+    <types>DocumentObject.RetailSalesReceipt</types>
+    <types>DocumentRef.GoodsReceipt</types>
+  </type>
+</mdclass:DefinedType>

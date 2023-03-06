@@ -1453,3 +1453,20 @@ EndFunction
 #EndRegion
 
 #EndRegion
+
+#Region AdditionalCheckTables
+
+// Set tables for additional check.
+// 
+// Parameters:
+//  Str - See AdditionalDocumentTableControl.TablesStructure
+//  Object - DocumentRef.RetailSalesReceipt, DocumentObject.RetailSalesReceipt -
+Procedure SetTablesForAdditionalCheck(Str, Object) Export
+	Str.Insert("ItemList", Object.ItemList.Unload());
+	Str.Insert("SpecialOffers", Object.SpecialOffers.Unload());
+	Str.Insert("TaxList", Object.TaxList.Unload());
+	Str.Insert("SerialLotNumbers", Object.SerialLotNumbers.Unload());
+	Str.Insert("RowIDInfo", Object.RowIDInfo.Unload());
+EndProcedure
+
+#EndRegion

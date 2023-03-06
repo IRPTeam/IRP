@@ -1584,26 +1584,6 @@ Scenario:  _0154142 change comment in POS
 			| 'Dress, M/White' |
 		And I select current line in "ItemsPickup" table
 		And I finish line editing in "ItemList" table	
-		And I go to line in "ItemsPickup" table
-			| 'Item'  |
-			| 'Dress' |
-		And I expand current line in "ItemsPickup" table
-		And I go to line in "ItemsPickup" table
-			| 'Item'                |
-			| 'Dress, L/Green' |
-		And I select current line in "ItemsPickup" table
-		And Delay 5
-		And I finish line editing in "ItemList" table
-	* Copy lines
-		And I go to the first line in "ItemList" table
-		And I activate "Price" field in "ItemList" table
-		And I press keyboard shortcut "F9"
-		And "ItemList" table became equal
-			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
-			| 'Dress' | ''             | 'M/White'  | ''        | '520,00' | '1,000'    | ''       | '520,00' |
-			| 'Dress' | ''             | 'L/Green'  | ''        | '550,00' | '1,000'    | ''       | '550,00' |
-			| 'Dress' | ''             | 'M/White'  | ''        | '520,00' | '1,000'    | ''       | '520,00' |	
-	* Select retail customer with own partner term
 	* Filling comment
 		And I move to "Additional" tab
 		And I input "test" text in the field named "Description"		

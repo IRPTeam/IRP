@@ -56,20 +56,14 @@ Procedure Done(Command)
 	For Each Row In Object.ItemList Do
 		If Row.Quantity = Row.ScannedQuantity Then
 			Continue; 
-		ElsIf Row.Quantity = 0 Then             
 			
-			FillingValues = New Structure();
-			FillingValues.Insert("Item"           , Row.Item);
-			FillingValues.Insert("ItemKey"        , Row.ItemKey);
-			FillingValues.Insert("SerialLotNumber", Row.SerialLotNumber);
-			FillingValues.Insert("Unit"           , Row.Unit);
-			FillingValues.Insert("Quantity"       , Row.ScannedQuantity);
-			NewRow = ViewClient_V2.ItemListAddFilledRow(FormOwner.Object, FormOwner, FillingValues);
+		ElsIf Row.Quantity = 0 Then             
+			AddItemAndSerialLotNumber(Row);
 						
 		ElsIf Row.ScannedQuantity = 0 Then
 			
 			If ValueIsFilled(Row.SerialLotNumber) Then
-				// TODO
+				DeleteSerialLotNumber(Row.SerialLotNumber, ClientModule);
 			Else
 				RowsToDelete = FormOwner.Object.ItemList.FindRows(New Structure("ItemKey", Row.ItemKey));
 				For Each RowToDelete In RowsToDelete Do
@@ -81,7 +75,8 @@ Procedure Done(Command)
 		ElsIf Not Row.Quantity = Row.ScannedQuantity Then
 			
 			If ValueIsFilled(Row.SerialLotNumber) Then
-				// TODO
+				DeleteSerialLotNumber(Row.SerialLotNumber, ClientModule);
+				AddItemAndSerialLotNumber(Row);
 			Else
 				RowWithDiff = FormOwner.Object.ItemList.FindRows(New Structure("ItemKey", Row.ItemKey))[0];
 				ViewClient_V2.SetItemListQuantity(FormOwner.Object, FormOwner, RowWithDiff, Row.ScannedQuantity);
@@ -94,6 +89,80 @@ Procedure Done(Command)
 	
 	FormOwner.Modified = True;
 	Close();
+	
+EndProcedure
+
+&AtClient
+Procedure AddItemAndSerialLotNumber(Row)
+	
+	FillingValues = New Structure();
+	FillingValues.Insert("Item"           , Row.Item);
+	FillingValues.Insert("ItemKey"        , Row.ItemKey);
+	FillingValues.Insert("SerialLotNumber", Row.SerialLotNumber);
+	FillingValues.Insert("Unit"           , Row.Unit);
+	FillingValues.Insert("Quantity"       , Row.ScannedQuantity);
+	NewRow = ViewClient_V2.ItemListAddFilledRow(FormOwner.Object, FormOwner, FillingValues);
+	
+	SerialLotNumberInfo = New Structure;
+	SerialLotNumberInfo.Insert("RowKey", NewRow.Key);
+	SerialLotNumberInfo.Insert("SerialLotNumbers", New Array);
+	
+	SerialLotNumberData = New Structure;
+	SerialLotNumberData.Insert("SerialLotNumber", Row.SerialLotNumber);
+	SerialLotNumberData.Insert("Quantity", Row.ScannedQuantity);
+	SerialLotNumberInfo.SerialLotNumbers.Add(SerialLotNumberData);
+	
+	FormParameters = New Structure;
+	FormParameters.Insert("Form", FormOwner);
+	FormParameters.Insert("Object", FormOwner.Object);
+	
+	SerialLotNumberClient.AddNewSerialLotNumbers(SerialLotNumberInfo, FormParameters);
+	
+EndProcedure
+
+&AtClient
+Procedure DeleteSerialLotNumber(SerialLotNumber, ClientModule)
+
+	If FormOwner.Object.Property("SerialLotNumbers") Then
+		
+		SerialLotMap = New Map;
+		
+		RowsToDelete = FormOwner.Object.SerialLotNumbers.FindRows(New Structure("SerialLotNumber", SerialLotNumber));
+		For Each RowToDelete In RowsToDelete Do
+			If SerialLotMap.Get(RowToDelete.Key) = Undefined Then
+				SerialLotMap.Insert(RowToDelete.Key, RowToDelete.Quantity);
+			Else
+				SerialLotMap.Insert(RowToDelete.Key, SerialLotMap.Get(RowToDelete.Key) + RowToDelete.Quantity);
+			EndIf;
+			FormOwner.Object.SerialLotNumbers.Delete(RowToDelete);
+		EndDo;
+		
+		For Each SerialLotKeyValue In SerialLotMap Do
+			LineKey = SerialLotKeyValue.Key; // String
+			LineQuantity = SerialLotKeyValue.Value; // Number
+			ItemRows = FormOwner.Object.ItemList.FindRows(New Structure("Key", LineKey));
+			If ItemRows.Count() Then
+				ItemRow = ItemRows[0];
+				If ItemRow.Quantity > LineQuantity Then
+					ViewClient_V2.SetItemListQuantity(
+						FormOwner.Object, FormOwner, ItemRow, (ItemRow.Quantity - LineQuantity));
+				Else
+					FormOwner.Object.ItemList.Delete(ItemRow);
+					ClientModule.ItemListAfterDeleteRow(FormOwner.Object, FormOwner, FormOwner.Items.ItemList);
+				EndIf;
+			EndIf;
+		EndDo;
+		
+	Else
+		
+		RowsToDelete = FormOwner.Object.ItemList.FindRows(New Structure("SerialLotNumber", SerialLotNumber));
+		For Each RowToDelete In RowsToDelete Do
+			FormOwner.Object.ItemList.Delete(RowToDelete);
+		EndDo;   
+		ClientModule.ItemListAfterDeleteRow(FormOwner.Object, FormOwner, FormOwner.Items.ItemList);
+		
+	EndIf;
+	
 EndProcedure
 
 &AtClient

@@ -72,16 +72,18 @@ EndFunction
 // Parameters:
 //  Basis - DocumentRef - Any basis document ref
 //  CurrentOwnnerItemList - ValueTable - Current item list at form owner
+//  CurrentOwnnerSerialLotNumbers - ValueTable - Current item list at form owner
 // 
 // Returns:
 //  ValueTable - All scanned barcode with Item key and Items
-Function GetCommonTable(Basis, CurrentOwnnerItemList) Export
+Function GetCommonTable(Basis, CurrentOwnnerItemList, CurrentOwnnerSerialLotNumbers) Export
 
 	Query = New Query();
 	Query.Text =
 	"SELECT
 	|	Barcodes.ItemKey,
 	|	Barcodes.Unit,
+	|	Barcodes.SerialLotNumber,
 	|	SUM(T1010S_ScannedBarcode.Count) AS ScannedQuantity
 	|INTO ScannedInfo
 	|FROM
@@ -92,22 +94,48 @@ Function GetCommonTable(Basis, CurrentOwnnerItemList) Export
 	|	T1010S_ScannedBarcode.Basis = &Basis
 	|GROUP BY
 	|	Barcodes.ItemKey,
-	|	Barcodes.Unit
+	|	Barcodes.Unit,
+	|	Barcodes.SerialLotNumber
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	DocumentData.ItemKey,
-	|	DocumentData.Quantity AS Quantity,
-	|	DocumentData.Unit
+	|	ItemsList.Key,
+	|	ItemsList.ItemKey,
+	|	ItemsList.Quantity AS Quantity,
+	|	ItemsList.Unit
+	|INTO ItemsList
+	|FROM
+	|	&DocumentItemList AS ItemsList
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SerialLotNumbers.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.Quantity AS Quantity
+	|INTO SerialLotNumbers
+	|FROM
+	|	&DocumentISerialLotNumbers AS SerialLotNumbers
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemsList.ItemKey,
+	|	ISNULL(SerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
+	|	ISNULL(SerialLotNumbers.Quantity, ItemsList.Quantity) AS Quantity,
+	|	ItemsList.Unit
 	|INTO DocumentData
 	|FROM
-	|	&DocumentItemList AS DocumentData
+	|	ItemsList AS ItemsList
+	|		LEFT JOIN SerialLotNumbers AS SerialLotNumbers
+	|		ON ItemsList.Key = SerialLotNumbers.Key
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	DocumentData.ItemKey,
+	|	DocumentData.SerialLotNumber,
 	|	DocumentData.Quantity,
 	|	DocumentData.Unit,
 	|	0 AS ScannedQuantity
@@ -119,6 +147,7 @@ Function GetCommonTable(Basis, CurrentOwnnerItemList) Export
 	|
 	|SELECT
 	|	ScannedInfo.ItemKey,
+	|	ScannedInfo.SerialLotNumber,
 	|	0,
 	|	ScannedInfo.Unit,
 	|	ScannedInfo.ScannedQuantity
@@ -130,6 +159,7 @@ Function GetCommonTable(Basis, CurrentOwnnerItemList) Export
 	|SELECT
 	|	VTAll.ItemKey.Item AS Item,
 	|	VTAll.ItemKey,
+	|	VTAll.SerialLotNumber,
 	|	SUM(VTAll.Quantity) AS Quantity,
 	|	VTAll.Unit,
 	|	SUM(VTAll.ScannedQuantity) AS ScannedQuantity
@@ -138,10 +168,12 @@ Function GetCommonTable(Basis, CurrentOwnnerItemList) Export
 	|GROUP BY
 	|	VTAll.ItemKey.Item,
 	|	VTAll.ItemKey,
+	|	VTAll.SerialLotNumber,
 	|	VTAll.Unit";
 
 	Query.SetParameter("Basis", Basis);
 	Query.SetParameter("DocumentItemList", CurrentOwnnerItemList);
+	Query.SetParameter("DocumentISerialLotNumbers", CurrentOwnnerSerialLotNumbers);
 
 	QueryResult = Query.Execute().Unload();
 

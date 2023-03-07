@@ -12,6 +12,11 @@
 				<comparisonType>Greater</comparisonType>
 				<right xsi:type="dcscor:Field">Object.ItemList.ScannedQuantity</right>
 			</item>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">HideDecoration</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:boolean">false</right>
+			</item>
 		</filter>
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
@@ -32,6 +37,11 @@
 				<comparisonType>Equal</comparisonType>
 				<right xsi:type="dcscor:Field">Object.ItemList.ScannedQuantity</right>
 			</item>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">HideDecoration</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:boolean">false</right>
+			</item>
 		</filter>
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
@@ -51,6 +61,11 @@
 				<left xsi:type="dcscor:Field">Object.ItemList.Quantity</left>
 				<comparisonType>Less</comparisonType>
 				<right xsi:type="dcscor:Field">Object.ItemList.ScannedQuantity</right>
+			</item>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">HideDecoration</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:boolean">false</right>
 			</item>
 		</filter>
 		<appearance>

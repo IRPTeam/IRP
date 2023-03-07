@@ -20,8 +20,22 @@ EndProcedure
 
 &AtServer
 Procedure FillItemList(Val Owner)
-	VT = Owner.ItemList.Unload();
-	Object.ItemList.Load(InformationRegisters.T1010S_ScannedBarcode.GetCommonTable(Object.Basis, VT));
+	vtItemList = Owner.ItemList.Unload();
+	HideDecoration = vtItemList.Count() = 0; 
+	
+	If TypeOf(Owner) = Type("FormDataStructure") Then
+		If Owner.Property("SerialLotNumbers") Then
+			vtSerialLotNumbers = Owner.SerialLotNumbers.Unload();
+		Else
+			vtSerialLotNumbers = Owner.ItemList.Unload();
+		EndIf;
+	Else
+		vtSerialLotNumbers = Owner.SerialLotNumbers.Unload();
+	EndIf;
+	
+	Object.ItemList.Load(
+		InformationRegisters.T1010S_ScannedBarcode.GetCommonTable(
+			Object.Basis, vtItemList, vtSerialLotNumbers));
 EndProcedure
 
 &AtClient
@@ -45,30 +59,34 @@ Procedure Done(Command)
 		ElsIf Row.Quantity = 0 Then             
 			
 			FillingValues = New Structure();
-			FillingValues.Insert("Item"     , Row.Item);
-			FillingValues.Insert("ItemKey"  , Row.ItemKey);
-			FillingValues.Insert("Unit"     , Row.Unit);
-			FillingValues.Insert("Quantity" , Row.ScannedQuantity);
+			FillingValues.Insert("Item"           , Row.Item);
+			FillingValues.Insert("ItemKey"        , Row.ItemKey);
+			FillingValues.Insert("SerialLotNumber", Row.SerialLotNumber);
+			FillingValues.Insert("Unit"           , Row.Unit);
+			FillingValues.Insert("Quantity"       , Row.ScannedQuantity);
 			NewRow = ViewClient_V2.ItemListAddFilledRow(FormOwner.Object, FormOwner, FillingValues);
 						
 		ElsIf Row.ScannedQuantity = 0 Then
-			RowsToDelete = FormOwner.Object.ItemList.FindRows(New Structure("ItemKey", Row.ItemKey));
-			For Each RowToDelete In RowsToDelete Do
-				FormOwner.Object.ItemList.Delete(RowToDelete);
-			EndDo;   
-			ClientModule.ItemListAfterDeleteRow(FormOwner.Object, FormOwner, FormOwner.Items.ItemList);
-		ElsIf Row.Quantity > Row.ScannedQuantity Then
 			
-			Diff = Row.Quantity - Row.ScannedQuantity;
-			RowWithDiff = FormOwner.Object.ItemList.FindRows(New Structure("ItemKey", Row.ItemKey))[0];
-			ViewClient_V2.SetItemListQuantity(FormOwner.Object, FormOwner, RowWithDiff, Diff);
+			If ValueIsFilled(Row.SerialLotNumber) Then
+				// TODO
+			Else
+				RowsToDelete = FormOwner.Object.ItemList.FindRows(New Structure("ItemKey", Row.ItemKey));
+				For Each RowToDelete In RowsToDelete Do
+					FormOwner.Object.ItemList.Delete(RowToDelete);
+				EndDo;   
+				ClientModule.ItemListAfterDeleteRow(FormOwner.Object, FormOwner, FormOwner.Items.ItemList);
+			EndIf;
+			
+		ElsIf Not Row.Quantity = Row.ScannedQuantity Then
+			
+			If ValueIsFilled(Row.SerialLotNumber) Then
+				// TODO
+			Else
+				RowWithDiff = FormOwner.Object.ItemList.FindRows(New Structure("ItemKey", Row.ItemKey))[0];
+				ViewClient_V2.SetItemListQuantity(FormOwner.Object, FormOwner, RowWithDiff, Row.ScannedQuantity);
+			EndIf;
 					
-		ElsIf Row.Quantity < Row.ScannedQuantity Then  
-			
-			Diff = Row.ScannedQuantity - Row.Quantity;
-			RowWithDiff = FormOwner.Object.ItemList.FindRows(New Structure("ItemKey", Row.ItemKey))[0];
-			ViewClient_V2.SetItemListQuantity(FormOwner.Object, FormOwner, RowWithDiff, Diff);
-			
 		Else
 			Continue;
 		EndIf;
@@ -118,6 +136,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		If Not ByOneScan Then
 			Filter = New Structure();
 			Filter.Insert("ItemKey", Row.ItemKey);
+			Filter.Insert("SerialLotNumber", Row.SerialLotNumber);
 			Filter.Insert("Unit", Row.Unit);
 			SearchInItemList = Object.ItemList.FindRows(Filter);
 			Row.Insert("CurrentQuantity", 0);
@@ -149,6 +168,7 @@ Procedure OnEditQuantityEnd(Row, AddInfo = Undefined) Export
 		
 	Filter = New Structure();
 	Filter.Insert("ItemKey", Row.ItemKey);
+	Filter.Insert("SerialLotNumber", Row.SerialLotNumber);
 	Filter.Insert("Unit", Row.Unit);
 	SearchInItemList = Object.ItemList.FindRows(Filter);
 	If SearchInItemList.Count() Then
@@ -158,6 +178,7 @@ Procedure OnEditQuantityEnd(Row, AddInfo = Undefined) Export
 		ItemListRow = Object.ItemList.Add();
 		ItemListRow.Item = Row.Item;
 		ItemListRow.ItemKey = Row.ItemKey;
+		ItemListRow.SerialLotNumber = Row.SerialLotNumber;
 		ItemListRow.Unit = Row.Unit;
 		ItemListRow.ScannedQuantity = Row.Quantity;
 	EndIf;

@@ -60,6 +60,18 @@
       <fillChecking>ShowError</fillChecking>
       <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
+    <attributes uuid="8cb14662-8fad-4911-ad43-0085ecdac8a5">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </attributes>
     <attributes uuid="0c940dc0-1154-421d-8778-2981c9b2e3d3">
       <name>Unit</name>
       <synonym>

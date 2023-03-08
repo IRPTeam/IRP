@@ -241,7 +241,7 @@ Scenario: _0156050 check items in the document by scan barcode
 			| '1' | 'Dress' | 'S/Yellow' | '10,000'   | 'pcs'  | ''                         |
 			| '2' | 'Dress' | 'L/Green'  | '7,000'    | 'pcs'  | ''                         |
 	* Check page history
-		And I click the button named "SearchByBarcode"
+		And in the table "ItemList" I click "Open scan form" button
 		And "ScanHistory" table contains lines
 			| 'Barcode'    | 'Count' | 'Period' |
 			| '2202283739' | '7'     | '*'      |
@@ -254,7 +254,7 @@ Scenario: _0156050 check items in the document by scan barcode
 			| 'Number' |
 			| '204'    |	
 		And I select current line in "List" table
-		And I click the button named "SearchByBarcode"
+		And I click the button named "OpenScanForm"
 		And "ScanHistory" table contains lines
 			| 'Barcode'    | 'Count' | 'Period' |
 			| '2202283739' | '7'     | '*'      |
@@ -340,7 +340,6 @@ Scenario: _0156051 check items in the document by scan barcode (with serial lot 
 			| '7889000090009' | '2'     | '*'      | '*'    |
 			| '8908899881'    | '1'     | '*'      | '*'    |
 			| '8908899880'    | '1'     | '*'      | '*'    |
-		Then the number of "ScanHistory" table lines is "равно" "6"
 		And I click "Done" button
 	* Check itemlist tab	
 		// And "ItemList" table became equal

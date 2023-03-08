@@ -227,7 +227,10 @@ EndProcedure
 Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	If ThisObject.isReturn And Not ThisObject.RetailBasis.IsEmpty() Then
 		Cancel = True;
+		Return;
 	EndIf;
+	
+	DocRetailSalesReceiptClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);	
 EndProcedure
 
 &AtClient
@@ -248,7 +251,6 @@ Procedure BeforeClose(Cancel, Exit, WarningText, StandardProcessing)
 		CommonFunctionsClientServer.ShowUsersMessage(R().POS_s6, "Object.ItemList[0].Item", "Object.ItemList");
 	EndIf;
 EndProcedure
-
 
 &AtClient
 Procedure ItemListOnStartEdit(Item, NewRow, Clone)

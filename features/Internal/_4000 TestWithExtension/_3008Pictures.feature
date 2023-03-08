@@ -216,7 +216,7 @@ Scenario:_300110 add pictures to additional details and additional properties
 		| 'Description' |
 		| 'Brand'     |
 		And I select current line in "List" table
-		And I select external file "$Path$/features/Internal/_4000TestWithExtension/16466.png"
+		And I select external file "$Path$/features/Internal/_4000 TestWithExtension/16466.png"
 		And I click "Icon" hyperlink
 	* Check adding a picture to an additional attribute
 		Then If dialog box is visible I click "Change" button		
@@ -245,7 +245,7 @@ Scenario: _300111 cleaning up the added picture to the additional details and ad
 		| 'Description' |
 		| 'Brand'     |
 		And I select current line in "List" table
-		And I select external file "$Path$/features/Internal/_4000TestWithExtension/16466.png"
+		And I select external file "$Path$/features/Internal/_4000 TestWithExtension/16466.png"
 		And I click "Icon" hyperlink
 	* Check adding a picture to an additional attribute
 		Then the field named "Icon" value contains "e1cib/tempstorage/" text
@@ -261,7 +261,7 @@ Scenario: _300103 item pictures upload
 			| 'Dress'     |
 		And I select current line in "List" table
 	* Add picture
-		And I select external file "$Path$/features/Internal/_4000TestWithExtension/reddress.png"
+		And I select external file "$Path$/features/Internal/_4000 TestWithExtension/reddress.png"
 		And I click "add_picture" button
 		And Delay 10
 	* Check adding picture 
@@ -272,7 +272,7 @@ Scenario: _300103 item pictures upload
 		And I close current window
 	* Add one more picture
 		And In this window I click command interface button "Main"
-		And I select external file "$Path$/features/Internal/_4000TestWithExtension/dressblue.jpg"
+		And I select external file "$Path$/features/Internal/_4000 TestWithExtension/dressblue.jpg"
 		And I click "add_picture" button
 		And I click "update_slider" button
 		Then system warning window does not appear	
@@ -301,7 +301,7 @@ Scenario: _300107 item key pictures upload
 			| 'M/White' |
 		And I select current line in "List" table
 	* Add picture
-		And I select external file "$Path$/features/Internal/_4000TestWithExtension/dresswhite.jpg"
+		And I select external file "$Path$/features/Internal/_4000 TestWithExtension/dresswhite.jpg"
 		And I click "add_picture" button
 	* Check adding picture
 		And I click "Attached files" button	
@@ -424,14 +424,14 @@ Scenario: _300116 check download pictures from Item
 		And I select current line in "List" table	
 	* Download picture
 		// And I input "$Path$/features/Internal" text in the field named "dragFile"	
-		And I input "$Path$/features/Internal/_4000TestWithExtension\dresswhite.jpg" text in the field named "dragFile"	
+		And I input "$Path$/features/Internal/_4000 TestWithExtension\dresswhite.jpg" text in the field named "dragFile"	
 		And I click the button named "dragFileBtn"	
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "FileList" table became equal
 			| 'File'           |
 			| 'dresswhite.jpg' |
-		And I input "$Path$/features/Internal/_4000TestWithExtension\dresswhite12.jpg" text in the field named "saveFile"	
+		And I input "$Path$/features/Internal/_4000 TestWithExtension\dresswhite12.jpg" text in the field named "saveFile"	
 		And I click "Download file" button
 		// And I wait for "resswhite12" file existence in "20" seconds
 		Then user message window does not contain messages

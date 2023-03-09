@@ -11,30 +11,25 @@ Function CheckDocument(Document) Export
 	DocType = TypeOf(Document);
 	DocName = Document.Metadata().Name;
 	If Metadata.DefinedTypes.AdditionalTableControlDocRef.Type.ContainsType(DocType) Then
-		DocManager = Documents[Document.Metadata().Name]; // DocumentManagerDocumentName
 	ElsIf Metadata.DefinedTypes.AdditionalTableControlDocObject.Type.ContainsType(DocType) Then
-		DocManager = Document; // DocumentManagerDocumentName
 	Else
 		Raise StrTemplate(R().ATC_001, DocType);
 	EndIf;
 	
-	Tables = TablesStructure();
-	// @skip-check dynamic-access-method-not-found, unknown-method-property
-	DocManager.SetTablesForAdditionalCheck(Tables, Document);
-	Return AdditionalTableControl(Tables, DocName);
+	Return AdditionalTableControl(Document, DocName);
 EndFunction
 
 // Additional table control.
 // 
 // Parameters:
-//  Tables - See TablesStructure
+//  Document - DefinedType.AdditionalTableControlDocObject, DefinedType.AdditionalTableControlDocRef -
 //  DocName - String -
 //   
 // Returns:
 //  Array of String
-Function AdditionalTableControl(Tables, DocName)
+Function AdditionalTableControl(Document, DocName)
 	
-	Result = CheckDocumentsResult(Tables, DocName);
+	Result = CheckDocumentsResult(Document, DocName);
 	Errors = New Array; // Array of String
 
 	For Each Row In Result Do
@@ -53,49 +48,36 @@ EndFunction
 // Check documents result.
 // 
 // Parameters:
-//  Tables - See TablesStructure
+//  Document - DefinedType.AdditionalTableControlDocObject, DefinedType.AdditionalTableControlDocRef -
 //  DocName - String -
 //
 // // Returns:
 //  ValueTable - Check documents result:
 //	* Key - String
 //	* LineNumber - Number
-Function CheckDocumentsResult(Tables, DocName)
+Function CheckDocumentsResult(Document, DocName)
+	Result = AdditionalDocumentTableControlReuse.GetQuery(DocName);
 	
-	Query = AdditionalDocumentTableControlReuse.GetQuery(DocName);
-	Query.SetParameter("ItemList", Tables.ItemList);
-	Query.SetParameter("RowIDInfo", Tables.RowIDInfo);
+	Query = New Query(Result.Query);
+	Query.SetParameter("ItemList", Document.ItemList.Unload());
+	Query.SetParameter("RowIDInfo", Document.RowIDInfo.Unload());
 	
-	If Not Tables.TaxList = Undefined Then
-		Query.SetParameter("TaxList", Tables.TaxList);
+	If Result.Tables.TaxList = Undefined Then
+		Query.SetParameter("TaxList", Document.TaxList.Unload());
+	Else
+		Query.SetParameter("TaxList", Result.Tables.TaxList);
 	EndIf;
 	
-	If Not Tables.SpecialOffers = Undefined Then
-		Query.SetParameter("SpecialOffers", Tables.SpecialOffers);
+	If Result.Tables.SpecialOffers = Undefined Then
+		Query.SetParameter("SpecialOffers", Document.SpecialOffers.Unload());
+	Else
+		Query.SetParameter("SpecialOffers", Result.Tables.SpecialOffers);
 	EndIf;
 		
-	If Not Tables.SerialLotNumbers = Undefined Then
-		Query.SetParameter("SerialLotNumbers", Tables.SerialLotNumbers);
+	If Result.Tables.SerialLotNumbers = Undefined Then
+		Query.SetParameter("SerialLotNumbers", Document.SerialLotNumbers.Unload());
+	Else
+		Query.SetParameter("SerialLotNumbers", Result.Tables.SerialLotNumbers);
 	EndIf;
 	Return Query.Execute().Unload();
-EndFunction
-
-// Tables structure.
-// 
-// Returns:
-//  Structure - Tables structure:
-// * ItemList - ValueTable -
-// * SpecialOffers - ValueTable -
-// * TaxList - ValueTable -
-// * SerialLotNumbers - ValueTable -
-// * RowIDInfo - ValueTable -
-Function TablesStructure() Export
-	
-	Str = New Structure;
-	Str.Insert("ItemList", Undefined);
-	Str.Insert("SpecialOffers", Undefined);
-	Str.Insert("TaxList", Undefined);
-	Str.Insert("SerialLotNumbers", Undefined);
-	Str.Insert("RowIDInfo", Undefined);
-	Return Str;
 EndFunction

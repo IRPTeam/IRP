@@ -1,43 +1,46 @@
+
 // Get query.
 // 
 // Parameters:
-//  DocName - String -
+//  DocName - String - Doc name
 // 
 // Returns:
-//  Query
+//  Structure - Get query:
+// * Query - String -
+// * Tables - Structure:
+// ** TaxList - Undefined
+// ** SpecialOffers - Undefined
+// ** SerialLotNumbers - Undefined
 Function GetQuery(DocName) Export
 	
-	DocManager = Documents[DocName]; // DocumentManagerDocumentName
-	Tables = AdditionalDocumentTableControl.TablesStructure();
-	DocManager.SetTablesForAdditionalCheck(Tables, DocManager.EmptyRef());
+	Result = New Structure;
+	Result.Insert("Query", "");
+	Result.Insert("Tables", New Structure);
+	MetaDoc = Metadata.Documents[DocName];
 	
-	Query = New Query;
 	ErrorsArray = New Array; // Array of Structure
 	TmplDoc = Documents.SalesInvoice.EmptyRef();
 	
-	Query.SetParameter("ItemList", Tables.ItemList);
-	Query.SetParameter("RowIDInfo", Tables.RowIDInfo);
-	
 	ErrorsArray.Add(ErrorItemList());
 	
-	If Tables.TaxList = Undefined Then
-		Query.SetParameter("TaxList", TmplDoc.TaxList.Unload());
+	If MetaDoc.TabularSections.Find("TaxList") = Undefined Then
+		Result.Tables.Insert("TaxList", TmplDoc.TaxList.Unload());
 	Else
-		Query.SetParameter("TaxList", Tables.TaxList);
+		Result.Tables.Insert("TaxList", Undefined);
 		ErrorsArray.Add(ErrorWithTax());
 	EndIf;
 	
-	If Tables.SpecialOffers = Undefined Then
-		Query.SetParameter("SpecialOffers", TmplDoc.SpecialOffers.Unload());
+	If MetaDoc.TabularSections.Find("SpecialOffers") = Undefined Then
+		Result.Tables.Insert("SpecialOffers", TmplDoc.SpecialOffers.Unload());
 	Else
-		Query.SetParameter("SpecialOffers", Tables.SpecialOffers);
+		Result.Tables.Insert("SpecialOffers", Undefined);
 		ErrorsArray.Add(ErrorWithOffers());
 	EndIf;
 		
-	If Tables.SerialLotNumbers = Undefined Then
-		Query.SetParameter("SerialLotNumbers", TmplDoc.SerialLotNumbers.Unload());
+	If MetaDoc.TabularSections.Find("SerialLotNumbers") = Undefined Then
+		Result.Tables.Insert("SerialLotNumbers", TmplDoc.SerialLotNumbers.Unload());
 	Else
-		Query.SetParameter("SerialLotNumbers", Tables.SerialLotNumbers);
+		Result.Tables.Insert("SerialLotNumbers", Undefined);
 		ErrorsArray.Add(ErrorWithSerialInTable());
 	EndIf;
 	
@@ -49,7 +52,7 @@ Function GetQuery(DocName) Export
 			Skip = False;
 			// @skip-check invocation-parameter-type-intersect, property-return-type
 			For Each Field In StrSplit(Filter.Value.Fields, " ,", False) Do
-				If Tables.ItemList.Columns.Find(Field) = Undefined Then
+				If MetaDoc.TabularSections.ItemList.Attributes.Find(Field) = Undefined Then
 					Skip = True;
 				EndIf;  
 			EndDo;
@@ -63,8 +66,8 @@ Function GetQuery(DocName) Export
 		EndDo;
 	EndDo;
 	
-	Query.Text = StrTemplate(CheckDocumentsQuery(), StrConcat(ArrayOfFields, "," + Chars.LF + Chars.Tab), StrConcat(ArrayOfFilter, Chars.LF + "	OR	"));
-	Return Query;
+	Result.Query = StrTemplate(CheckDocumentsQuery(), StrConcat(ArrayOfFields, "," + Chars.LF + Chars.Tab), StrConcat(ArrayOfFilter, Chars.LF + "	OR	"));
+	Return Result;
 EndFunction
 
 

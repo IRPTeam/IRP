@@ -859,6 +859,12 @@
     <valueType/>
     <keyParameter>true</keyParameter>
   </parameters>
+  <parameters>
+    <name>UseSerialLot</name>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+  </parameters>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>

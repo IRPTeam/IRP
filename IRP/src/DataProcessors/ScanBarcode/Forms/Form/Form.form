@@ -285,6 +285,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>InputField</type>
+            <readOnly>true</readOnly>
             <editMode>EnterOnInput</editMode>
             <autoCellHeight>true</autoCellHeight>
             <showInHeader>true</showInHeader>
@@ -343,6 +344,7 @@
                   <autoFill>true</autoFill>
                 </contextMenu>
                 <type>LabelField</type>
+                <readOnly>true</readOnly>
                 <horizontalAlign>Center</horizontalAlign>
                 <editMode>EnterOnInput</editMode>
                 <showInHeader>true</showInHeader>
@@ -392,6 +394,7 @@
                   <autoFill>true</autoFill>
                 </contextMenu>
                 <type>InputField</type>
+                <readOnly>true</readOnly>
                 <editMode>EnterOnInput</editMode>
                 <showInHeader>true</showInHeader>
                 <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -444,6 +447,7 @@
                   <autoFill>true</autoFill>
                 </contextMenu>
                 <type>InputField</type>
+                <readOnly>true</readOnly>
                 <horizontalAlign>Right</horizontalAlign>
                 <editMode>EnterOnInput</editMode>
                 <showInHeader>true</showInHeader>
@@ -526,7 +530,7 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.ItemList.SerialLotNumber</segments>
+                <segments>Object.ItemList.ScannedSerialLotNumber</segments>
               </dataPath>
               <extendedTooltip>
                 <name>ItemListSerialLotNumberExtendedTooltip</name>
@@ -554,6 +558,7 @@
                 <autoFill>true</autoFill>
               </contextMenu>
               <type>InputField</type>
+              <readOnly>true</readOnly>
               <editMode>Enter</editMode>
               <showInHeader>true</showInHeader>
               <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -790,6 +795,10 @@
         <handlers>
           <event>RefreshRequestProcessing</event>
           <name>ItemListRefreshRequestProcessing</name>
+        </handlers>
+        <handlers>
+          <event>BeforeDeleteRow</event>
+          <name>ItemListBeforeDeleteRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -1777,6 +1786,23 @@ WHERE
       <value>Hide decoration</value>
     </title>
     <id>5</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>UseSerialLot</name>
+    <title>
+      <key>en</key>
+      <value>Use serial lot</value>
+    </title>
+    <id>6</id>
     <valueType>
       <types>Boolean</types>
     </valueType>

@@ -4,14 +4,22 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	FillPropertyValues(ThisObject, Parameters.FillingData);
 	ParamsData = Parameters.FillingData;
 	
-	NeedSerialLotNumber = Not ValueIsFilled(ThisObject.SerialLotNumber) And ThisObject.Item.ItemType.UseSerialLotNumber;
-	Items.GroupSerialLotNumber.Visible = NeedSerialLotNumber;
-	Items.SerialLotNumberLabel.Visible = Not NeedSerialLotNumber;
+	If Parameters.UseSerialLot Then
+		NeedSerialLotNumber = Not ValueIsFilled(ThisObject.SerialLotNumber);
+		Items.GroupSerialLotNumber.Visible = NeedSerialLotNumber;
+		Items.SerialLotNumberLabel.Visible = Not NeedSerialLotNumber;
+	Else
+		Items.GroupSerialLotNumber.Visible = False;
+		Items.SerialLotNumberLabel.Visible = False;
+	EndIf;
 EndProcedure
 
 &AtClient
 Procedure OK()
 	ParamsData.Quantity = ScannedQuantity;
+	If NeedSerialLotNumber Then
+		ParamsData.SerialLotNumber = SerialLotNumber;
+	EndIf;
 	Close(ParamsData);
 EndProcedure
 

@@ -382,7 +382,88 @@ Scenario: _034908 check return with discount from POS (first select basis docume
 		
 				
 				
-				
+Scenario: _034910 check price type discount + sum in POS (Consequentially)
+		And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+		And I go to line in "List" table
+			| 'Description'         |
+			| 'Discount coupon 10%' |
+		And I select current line in "List" table
+		And I remove checkbox named "Launch"
+		And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Document discount' |
+		And in the table "List" I click the button named "ListContextMenuMoveItem"
+		And I go to line in "List" table
+			| 'Special offer type' |
+			| 'Сonsistently'       |
+		And I click the button named "FormChoose"
+	* Open POS and add items
+		And In the command interface I select "Retail" "Point of sale"
+		Then "Point of sales" window is opened
+		And I click "Show items" button
+		And I go to line in "ItemsPickup" table
+			| 'Item'  |
+			| 'Dress' |
+		And I expand current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| 'Item'                |
+			| 'Dress, XS/Blue' |
+		And I select current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| 'Item'  |
+			| 'Dress' |
+		And I expand current line in "ItemsPickup" table
+		And I go to line in "ItemsPickup" table
+			| 'Item'                |
+			| 'Dress, M/White' |
+		And I select current line in "ItemsPickup" table
+		And I input "3,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table		
+	* Check discounts
+		And I click "Discount document" button
+		Then "Pickup special offers" window is opened
+		And I go to line in "Offers" table
+			| 'Is select' | 'Presentation'     |
+			| '☐'         | 'Discount Price 1' |
+		And I activate "Is select" field in "Offers" table
+		And I select current line in "Offers" table
+		And I go to line in "Offers" table
+			| 'Is select' | 'Presentation'        |
+			| '☐'         | 'Document discount' |
+		And I activate "%" field in "Offers" table
+		And I select current line in "Offers" table
+		And I change the radio button named "Type" value to "Amount"
+		And I input "1 000,00" text in the field named "Amount"
+		And I click the button named "Ok"
+		Then "Pickup special offers" window is opened
+		And in the table "Offers" I click "OK" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Dress' | ''             | 'XS/Blue'  | ''        | '520,00' | '1,000'    | '276,00' | '244,00' |
+			| 'Dress' | ''             | 'M/White'  | ''        | '520,00' | '3,000'    | '828,00' | '732,00' |			
+	* Change quantity and check discounts
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "ItemList" table
+		And I input "4,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Discount document" button
+		Then "Pickup special offers" window is opened
+		And in the table "Offers" I click "OK" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Sales person' | 'Item key' | 'Serials' | 'Price'  | 'Quantity' | 'Offers' | 'Total'    |
+			| 'Dress' | ''             | 'XS/Blue'  | ''        | '520,00' | '1,000'    | '226,00' | '294,00'   |
+			| 'Dress' | ''             | 'M/White'  | ''        | '520,00' | '4,000'    | '904,00' | '1 176,00' |				
+	* Payment
+		And I click "Payment (+)" button
+		Then "Payment" window is opened
+		And I click the button named "Enter"
+		And I close all client application windows			
 				
 				
 				

@@ -342,12 +342,24 @@ Scenario: _0156051 check items in the document by scan barcode (with serial lot 
 			| '8908899880'    | '1'     | '*'      | '*'    |
 		And I click "Done" button
 	* Check itemlist tab	
-		// And "ItemList" table became equal
-		// 	| '#' | 'Item'               | 'Item key' | 'Serial lot numbers'     | 'Unit' | 'Source of origins' | 'Quantity' | 'Inventory transfer order' | 'Production planning' |
-		// 	| '1' | 'Dress'              | 'S/Yellow' | ''                       | 'pcs'  | ''                  | '10,000'   | ''                         | ''                    |
-		// 	| '2' | 'Product 1 with SLN' | 'PZU'      | '8908899880; 8908899881' | 'pcs'  | ''                  | '2,000'    | ''                         | ''                    |
-		// 	| '3' | 'Dress'              | 'L/Green'  | ''                       | 'pcs'  | ''                  | '7,000'    | ''                         | ''                    |
-		// 	| '4' | 'Product 3 with SLN' | 'PZU'      | '12345'                  | 'pcs'  | ''                  | '2,000'    | ''                         | ''                    |		
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Serial lot numbers'     | 'Unit' | 'Source of origins' | 'Quantity' | 'Inventory transfer order' | 'Production planning' |
+			| 'Dress'              | 'S/Yellow' | ''                       | 'pcs'  | ''                  | '10,000'   | ''                         | ''                    |
+			| 'Product 1 with SLN' | 'PZU'      | '8908899880; 8908899881' | 'pcs'  | ''                  | '2,000'    | ''                         | ''                    |
+			| 'Dress'              | 'L/Green'  | ''                       | 'pcs'  | ''                  | '7,000'    | ''                         | ''                    |
+			| 'Product 3 with SLN' | 'PZU'      | '12345'                  | 'pcs'  | ''                  | '2,000'    | ''                         | ''                    |
+		Then the number of "ItemList" table lines is "равно" "4"
+		And I click "Post and close" button
+		And I go to line in "List" table
+			| 'Number' |
+			| '204'    |	
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Serial lot numbers'     | 'Unit' | 'Source of origins' | 'Quantity' | 'Inventory transfer order' | 'Production planning' |
+			| 'Dress'              | 'S/Yellow' | ''                       | 'pcs'  | ''                  | '10,000'   | ''                         | ''                    |
+			| 'Product 1 with SLN' | 'PZU'      | '8908899880; 8908899881' | 'pcs'  | ''                  | '2,000'    | ''                         | ''                    |
+			| 'Dress'              | 'L/Green'  | ''                       | 'pcs'  | ''                  | '7,000'    | ''                         | ''                    |
+			| 'Product 3 with SLN' | 'PZU'      | '12345'                  | 'pcs'  | ''                  | '2,000'    | ''                         | ''                    |
 		And I close all client application windows
 		
 

@@ -1,3 +1,6 @@
+&AtClient
+Var Sound Export; // See FillSoundList
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Object.Basis = Parameters.Basis;
@@ -16,6 +19,7 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	FillItemList(FormOwner.Object);
+	Sound = FillSoundList();
 EndProcedure
 
 &AtServer
@@ -286,9 +290,9 @@ EndProcedure
 &AtClient
 Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 
-	If Not Result.FoundedItems.Count()
-		And Result.Barcodes.Count() Then
+	If Not Result.FoundedItems.Count() And Result.Barcodes.Count() Then
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, Result.Barcodes[0]));
+		MobileSubsystem.Play(Sound.Error);
 		Return;
 	EndIf;
 
@@ -315,6 +319,9 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			FormParameters = New Structure("FillingData, UseSerialLot", 
 				Row, ThisObject.UseSerialLot And Row.UseSerialLotNumber);
 			OpenForm("DataProcessor.ScanBarcode.Form.RowForm", FormParameters, ThisObject, , , , NotifyOnClosing);
+			If ThisObject.UseSerialLot And Row.UseSerialLotNumber And Not ValueIsFilled(Row.SerialLotNumber) Then
+				MobileSubsystem.Play(Sound.NeedSerialLot);
+			EndIf;
 		Else
 			OnEditQuantityEnd(Row);
 		EndIf;
@@ -357,6 +364,7 @@ Procedure OnEditQuantityEnd(Row, AddInfo = Undefined) Export
 		Items.ItemList.CurrentRow = ItemListRow.GetID();
 	EndIf;
 	
+	MobileSubsystem.Play(Sound.Done);
 EndProcedure
 
 &AtClient
@@ -378,3 +386,12 @@ EndProcedure
 Procedure SetParameters(Name, Value)
 	ScanHistory.Parameters.SetParameterValue(Name, Value);
 EndProcedure
+
+&AtServer
+Function FillSoundList()
+	Sounds = New Structure;
+	Sounds.Insert("Error", DataProcessors.MobileInvent.GetTemplate("ErrorSound"));
+	Sounds.Insert("Done", DataProcessors.MobileInvent.GetTemplate("Done"));
+	Sounds.Insert("NeedSerialLot", DataProcessors.MobileInvent.GetTemplate("SameItemKeyBarcode"));
+	Return Sounds;
+EndFunction

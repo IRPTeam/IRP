@@ -3,16 +3,14 @@
 // Check document.
 // 
 // Parameters:
-//  Document - DefinedType.AdditionalTableControlDocObject, DefinedType.AdditionalTableControlDocRef -
+//  Document - DefinedType.AdditionalTableControlDocument -
 // 
 // Returns:
 //  Array of String
 Function CheckDocument(Document) Export
 	DocType = TypeOf(Document);
 	DocName = Document.Metadata().Name;
-	If Metadata.DefinedTypes.AdditionalTableControlDocRef.Type.ContainsType(DocType) Then
-	ElsIf Metadata.DefinedTypes.AdditionalTableControlDocObject.Type.ContainsType(DocType) Then
-	Else
+	If Not Metadata.DefinedTypes.AdditionalTableControlDocument.Type.ContainsType(DocType) Then
 		Raise StrTemplate(R().ATC_001, DocType);
 	EndIf;
 	
@@ -22,7 +20,7 @@ EndFunction
 // Additional table control.
 // 
 // Parameters:
-//  Document - DefinedType.AdditionalTableControlDocObject, DefinedType.AdditionalTableControlDocRef -
+//  Document - DefinedType.AdditionalTableControlDocument -
 //  DocName - String -
 //   
 // Returns:
@@ -48,7 +46,7 @@ EndFunction
 // Check documents result.
 // 
 // Parameters:
-//  Document - DefinedType.AdditionalTableControlDocObject, DefinedType.AdditionalTableControlDocRef -
+//  Document - DefinedType.AdditionalTableControlDocument -
 //  DocName - String -
 //
 // // Returns:

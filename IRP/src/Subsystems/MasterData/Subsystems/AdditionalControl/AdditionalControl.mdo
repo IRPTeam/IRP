@@ -7,8 +7,7 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
-  <content>DefinedType.AdditionalTableControlDocRef</content>
-  <content>DefinedType.AdditionalTableControlDocObject</content>
+  <content>DefinedType.AdditionalTableControlDocument</content>
   <content>CommonModule.AdditionalDocumentTableControl</content>
   <content>Report.AdditionalDocumentTablesCheck</content>
   <parentSubsystem>Subsystem.MasterData</parentSubsystem>

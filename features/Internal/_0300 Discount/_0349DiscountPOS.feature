@@ -387,6 +387,12 @@ Scenario: _034910 check price type discount + sum in POS (Consequentially)
 	* Preparation
 		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
 		And I go to line in "List" table
+			| 'Description'     |
+			| 'Consequentially' |
+		And I select current line in "List" table
+		And I remove checkbox "Sequential calculation for each row in document"
+		And I click "Save and close" button	
+		And I go to line in "List" table
 			| 'Description'         |
 			| 'Discount coupon 10%' |
 		And I select current line in "List" table

@@ -5,6 +5,10 @@
   <key>en</key>
   <value>Additional document table control</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Дополнительный контроль таблиц документа</value>
+ </synonym>
  <server>true</server>
  <externalConnection>true</externalConnection>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

@@ -132,6 +132,10 @@
       <key>en</key>
       <value>Additional buttons</value>
      </title>
+     <title>
+      <key>ru</key>
+      <value>Дополнительные кнопки</value>
+     </title>
      <horizontalStretch>true</horizontalStretch>
      <extendedTooltip>
       <name>AdditionalButtonsExtendedTooltip</name>
@@ -206,6 +210,10 @@
     <title>
      <key>en</key>
      <value>Top Group</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Шапка группа</value>
     </title>
     <extendedTooltip>
      <name>TopGroupExtendedTooltip</name>
@@ -588,6 +596,10 @@
       <title>
        <key>en</key>
        <value>The third line of the ItemList group</value>
+      </title>
+      <title>
+       <key>ru</key>
+       <value>Третяя линия группа Товаров</value>
       </title>
       <extendedTooltip>
        <name>ItemListGroupThirdRowExtendedTooltip</name>
@@ -1873,6 +1885,10 @@ WHERE
    <key>en</key>
    <value>Hide decoration</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Спрятать картинку</value>
+  </title>
   <id>5</id>
   <valueType>
    <types>Boolean</types>
@@ -1889,6 +1905,14 @@ WHERE
   <title>
    <key>en</key>
    <value>Use serial lot</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Использовать серийный номер</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Seri lot kullan</value>
   </title>
   <id>6</id>
   <valueType>

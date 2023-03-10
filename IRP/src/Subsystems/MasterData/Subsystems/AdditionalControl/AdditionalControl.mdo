@@ -5,6 +5,10 @@
   <key>en</key>
   <value>Additional control</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Дополнительный контроль</value>
+ </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>
  <content>DefinedType.AdditionalTableControlDocument</content>

@@ -169,6 +169,14 @@
     <key>en</key>
     <value>Use serial lot number</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ведется учет по сериям номенклатуры</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Seri/lot numaraları kullan</value>
+   </synonym>
    <type>
     <types>Boolean</types>
    </type>
@@ -181,6 +189,14 @@
     <key>en</key>
     <value>Serial lot number</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Серия номенклатуры</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
+   </synonym>
    <type>
     <types>CatalogRef.SerialLotNumbers</types>
    </type>
@@ -192,6 +208,10 @@
    <synonym>
     <key>en</key>
     <value>Scanned serial lot number</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Просканированный серийный номер</value>
    </synonym>
    <type>
     <types>CatalogRef.SerialLotNumbers</types>

@@ -18,6 +18,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Document type</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Тип документа</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Evrak tipi</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<dataSource>DataSource1</dataSource>
@@ -220,6 +228,14 @@ FROM
 				<v8:lang>en</v8:lang>
 				<v8:content>Status</v8:content>
 			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Статус</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Statü</v8:content>
+			</v8:item>
 		</title>
 	</calculatedField>
 	<settingsVariant>
@@ -301,6 +317,14 @@ FROM
 										<v8:item>
 											<v8:lang>en</v8:lang>
 											<v8:content>OK</v8:content>
+										</v8:item>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>ОК</v8:content>
+										</v8:item>
+										<v8:item>
+											<v8:lang>tr</v8:lang>
+											<v8:content>Tamam</v8:content>
 										</v8:item>
 									</dcscor:value>
 								</dcscor:item>

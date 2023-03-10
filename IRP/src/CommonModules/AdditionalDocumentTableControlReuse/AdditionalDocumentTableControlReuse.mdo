@@ -5,6 +5,10 @@
   <key>en</key>
   <value>Additional document table control reuse</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Дополнительный контроль таблиц документа переиспользование</value>
+ </synonym>
  <server>true</server>
  <externalConnection>true</externalConnection>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

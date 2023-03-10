@@ -276,20 +276,34 @@ Function Strings(Lang) Export
 	Strings = New Structure();
 
 #Region AdditionalTableControl
-	Strings.Insert("ATC_001", NStr("en='Unknown document type: %1'", Lang));
-	Strings.Insert("ATC_ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList", NStr("en='Row: %1. Tax amount in item list is not equal to tax amount in tax list'", Lang));
-	Strings.Insert("ATC_ErrorNetAmountGreaterTotalAmount", NStr("en='Row: %1. Net amount is greater than total amount'", Lang));
-	Strings.Insert("ATC_ErrorQuantityIsZero", NStr("en='Row: %1. Quantity is zero'", Lang));
-	Strings.Insert("ATC_ErrorQuantityInBaseUnitIsZero", NStr("en='Row: %1. Quantity in base unit is zero'", Lang));
-	Strings.Insert("ATC_ErrorOffersAmountInItemListNotEqualOffersAmountInOffersList", NStr("en='Row: %1. Offers amount in item list is not equal to offers amount in offers list'", Lang));
-	Strings.Insert("ATC_ErrorItemTypeIsNotService", NStr("en='Row: %1. Item type is not service'", Lang));
-	Strings.Insert("ATC_ErrorItemTypeUseSerialNumbers", NStr("en='Row: %1. Item type uses serial numbers'", Lang));
-	Strings.Insert("ATC_ErrorUseSerialButSerialNotSet", NStr("en='Row: %1. Serial is not set but is required'", Lang));
-	Strings.Insert("ATC_ErrorNotTheSameQuantityInSerialListTableAndInItemList", NStr("en='Row: %1. Quantity in serial list table is not the same as quantity in item list'", Lang));
-	Strings.Insert("ATC_ErrorItemNotEqualItemInItemKey", NStr("en='Row: %1. Item is not equal to item in item key'", Lang));
-	Strings.Insert("ATC_ErrorTotalAmountMinusNetAmountNotEqualTaxAmount", NStr("en='Row: %1. Total amount minus net amount is not equal to tax amount'", Lang));
-	Strings.Insert("ATC_ErrorQuantityInItemListNotEqualQuantityInRowID", NStr("en='Row: %1. Quantity in item list is not equal to quantity in row ID'", Lang));
-	Strings.Insert("ATC_ErrorQuantityNotEqualQuantityInBaseUnit", NStr("en='Row: %1. Quantity not equal quantity in base unit when unit quantity equal 1'", Lang));
+	Strings.Insert("ATC_001", NStr("en='Unknown document type: %1';
+		|ru='Неизвестный тип документа: %1'", Lang));
+	Strings.Insert("ATC_ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList", NStr("en='Row: %1. Tax amount in item list is not equal to tax amount in tax list';
+		|ru='Строка: %1. Сумма налогов не равна общей сумме налогов в табличной части налогов'", Lang));
+	Strings.Insert("ATC_ErrorNetAmountGreaterTotalAmount", NStr("en='Row: %1. Net amount is greater than total amount';
+		|ru='Строка: %1. Сумма без налогов больше суммы документа'", Lang));
+	Strings.Insert("ATC_ErrorQuantityIsZero", NStr("en='Row: %1. Quantity is zero';
+		|ru='Строка: %1. Количество равно 0'", Lang));
+	Strings.Insert("ATC_ErrorQuantityInBaseUnitIsZero", NStr("en='Row: %1. Quantity in base unit is zero';
+		|ru='Строка: %1. Коеффициент в основной ед. изм. равно 0'", Lang));
+	Strings.Insert("ATC_ErrorOffersAmountInItemListNotEqualOffersAmountInOffersList", NStr("en='Row: %1. Offers amount in item list is not equal to offers amount in offers list';
+		|ru='Строка: %1. Суммы скидок в табличной части товаров не равна общей сумме скидок в табличной части скидок'", Lang));
+	Strings.Insert("ATC_ErrorItemTypeIsNotService", NStr("en='Row: %1. Item type is not service';
+		|ru='Строка: %1. Вид номенклатуры не является услугой'", Lang));
+	Strings.Insert("ATC_ErrorItemTypeUseSerialNumbers", NStr("en='Row: %1. Item type uses serial numbers';
+		|ru='Строка: %1. Вид номенклатуры использует серийные номера'", Lang));
+	Strings.Insert("ATC_ErrorUseSerialButSerialNotSet", NStr("en='Row: %1. Serial is not set but is required';
+		|ru='Строка: %1. Серийные номера отсутствуют, но они обязательны к заполнению'", Lang));
+	Strings.Insert("ATC_ErrorNotTheSameQuantityInSerialListTableAndInItemList", NStr("en='Row: %1. Quantity in serial list table is not the same as quantity in item list';
+		|ru='Строка: %1. Количество в серийных номерах не соответствует количеству в товарах'", Lang));
+	Strings.Insert("ATC_ErrorItemNotEqualItemInItemKey", NStr("en='Row: %1. Item is not equal to item in item key';
+		|ru='Строка: %1. Номенклатура в строке не соответствует номенклатуре в характеристике'", Lang));
+	Strings.Insert("ATC_ErrorTotalAmountMinusNetAmountNotEqualTaxAmount", NStr("en='Row: %1. Total amount minus net amount is not equal to tax amount';
+		|ru='Строка: %1. Сумма документа за вычетом налогов не равна сумме без налогов'", Lang));
+	Strings.Insert("ATC_ErrorQuantityInItemListNotEqualQuantityInRowID", NStr("en='Row: %1. Quantity in item list is not equal to quantity in row ID';
+		|ru='Строка: %1. Количество в табличной части Товары не соответствует количеству в Row ID'", Lang));
+	Strings.Insert("ATC_ErrorQuantityNotEqualQuantityInBaseUnit", NStr("en='Row: %1. Quantity not equal quantity in base unit when unit quantity equal 1';
+		|ru='Строка: %1. Количество не равняется количеству в основной ед. изм. не смотря на то, что коефф. ед. изм равен 1'", Lang));
 	
 #EndRegion
 

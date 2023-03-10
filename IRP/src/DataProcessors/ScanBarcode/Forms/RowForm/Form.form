@@ -228,6 +228,10 @@
    <key>en</key>
    <value>Group of SerialLot Number</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Группа Серии номенклатуры</value>
+  </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
    <name>GroupSerialLotNumberExtendedTooltip</name>
@@ -906,6 +910,14 @@
    <key>en</key>
    <value>Serial lot number</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Серия номенклатуры</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Seri lot numaraları</value>
+  </title>
   <id>10</id>
   <valueType>
    <types>CatalogRef.SerialLotNumbers</types>
@@ -922,6 +934,10 @@
   <title>
    <key>en</key>
    <value>Need serial lot number</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Необходима серия номенклатуры</value>
   </title>
   <id>11</id>
   <valueType>

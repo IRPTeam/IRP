@@ -9,6 +9,10 @@
   <key>en</key>
   <value>Additional document tables check</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Статус дополнительных проверок документов</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.AdditionalDocumentTablesCheck.Template.Template</mainDataCompositionSchema>
  <templates uuid="09f46506-854c-46ed-b3d7-131fa4456e11">
@@ -16,6 +20,14 @@
   <synonym>
    <key>en</key>
    <value>Template</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Шаблон</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şablon</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

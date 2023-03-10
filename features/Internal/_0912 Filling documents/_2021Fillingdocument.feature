@@ -30,6 +30,7 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create catalog PriceTypes objects
 		When Create catalog Specifications objects
 		When Create chart of characteristic types AddAttributeAndProperty objects
+		When Create catalog PaymentTypes objects
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Currencies objects

@@ -477,6 +477,8 @@
   <commonModules>CommonModule.DataVersioningServer</commonModules>
   <commonModules>CommonModule.LoadDataFromTableServer</commonModules>
   <commonModules>CommonModule.LoadDataFromTableClient</commonModules>
+  <commonModules>CommonModule.AdditionalDocumentTableControl</commonModules>
+  <commonModules>CommonModule.AdditionalDocumentTableControlReuse</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -597,6 +599,7 @@
   <definedTypes>DefinedType.typeStockAdjustmentAsSurplusBasises</definedTypes>
   <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
   <definedTypes>DefinedType.UseUniqueID</definedTypes>
+  <definedTypes>DefinedType.AdditionalTableControlDocument</definedTypes>
   <commonCommands>CommonCommand.AddProperties</commonCommands>
   <commonCommands>CommonCommand.AttachedFiles</commonCommands>
   <commonCommands>CommonCommand.EditConstants</commonCommands>
@@ -924,6 +927,7 @@
   <reports>Report.PriceInfo</reports>
   <reports>Report.DetailingSupplies</reports>
   <reports>Report.ProductionPlanning</reports>
+  <reports>Report.AdditionalDocumentTablesCheck</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
   <dataProcessors>DataProcessor.BuilderExample</dataProcessors>

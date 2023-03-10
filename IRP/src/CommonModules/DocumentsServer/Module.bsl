@@ -585,4 +585,3 @@ Function GetArrayOfSalesOrdersBySalesInvoice(SalesInvoice) Export
 	ArrayOfOrders = QueryTable.UnloadColumn("SalesOrder");
 	Return ArrayOfOrders;
 EndFunction
-

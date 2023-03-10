@@ -1321,8 +1321,16 @@ Function R8012B_ConsignorInventory()
 		|	ConsignorBatches.Company,
 		|	ConsignorBatches.ItemKey,
 		|	ConsignorBatches.SerialLotNumber,
-		|	ConsignorBatches.Batch.Partner AS Partner,
-		|	ConsignorBatches.Batch.Agreement AS Agreement,
+		|	CASE
+		|		WHEN ConsignorBatches.Batch REFS Document.OpeningEntry
+		|			THEN ConsignorBatches.Batch.PartnerConsignor
+		|		ELSE ConsignorBatches.Batch.Partner
+		|	END AS Partner,
+		|	CASE
+		|		WHEN ConsignorBatches.Batch REFS Document.OpeningEntry
+		|			THEN ConsignorBatches.Batch.AgreementConsignor
+		|		ELSE ConsignorBatches.Batch.Agreement
+		|	END AS Agreement,
 		|	CASE
 		|		WHEN ConsignorBatches.Batch REFS Document.OpeningEntry
 		|			THEN ConsignorBatches.Batch.LegalNameConsignor
@@ -1339,8 +1347,16 @@ Function R8012B_ConsignorInventory()
 		|	ConsignorBatches.Company,
 		|	ConsignorBatches.ItemKey,
 		|	ConsignorBatches.SerialLotNumber,
-		|	ConsignorBatches.Batch.Partner,
-		|	ConsignorBatches.Batch.Agreement,
+		|	CASE
+		|		WHEN ConsignorBatches.Batch REFS Document.OpeningEntry
+		|			THEN ConsignorBatches.Batch.PartnerConsignor
+		|		ELSE ConsignorBatches.Batch.Partner
+		|	END,
+		|	CASE
+		|		WHEN ConsignorBatches.Batch REFS Document.OpeningEntry
+		|			THEN ConsignorBatches.Batch.AgreementConsignor
+		|		ELSE ConsignorBatches.Batch.Agreement
+		|	END,
 		|	CASE
 		|		WHEN ConsignorBatches.Batch REFS Document.OpeningEntry
 		|			THEN ConsignorBatches.Batch.LegalNameConsignor

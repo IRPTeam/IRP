@@ -99,6 +99,42 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
+    <attributes uuid="8c500f5a-d6de-4abb-95a5-7735a09062f0">
+      <name>UseSerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Use serial lot number</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="8cb14662-8fad-4911-ad43-0085ecdac8a5">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="73436e19-6c37-471b-9620-83e674c9fbfa">
+      <name>ScannedSerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Scanned serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </attributes>
   </tabularSections>
   <forms uuid="2c533795-bfcc-4d37-b4c7-055e4d38192e">
     <name>Form</name>

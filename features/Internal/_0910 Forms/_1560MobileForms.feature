@@ -68,6 +68,13 @@ Scenario: _0156000 preparation
 		When Create catalog ItemSegments objects
 		When Create information register Barcodes records
 		When Create catalog PaymentTypes objects
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -189,7 +196,7 @@ Scenario: _0156050 check items in the document by scan barcode
 			| 'Trousers' | '3' | '36/Yellow' | 'pcs'  | '2,000'    | ''        |
 			| 'Shirt'    | '4' | '36/Red'    | 'pcs'  | '15,000'   | ''        |
 	* Scan Items
-		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I click the button named "SearchByBarcode"	
 		And I input "2202283713" text in the field named "InputFld"
 		And I click the button named "OK"
 		Then "Row form" window is opened
@@ -201,7 +208,7 @@ Scenario: _0156050 check items in the document by scan barcode
 			| 'Dress'    | '2' | 'XS/Blue'   | 'pcs'  | '10,000'   | ''        |
 			| 'Trousers' | '3' | '36/Yellow' | 'pcs'  | '2,000'    | ''        |
 			| 'Shirt'    | '4' | '36/Red'    | 'pcs'  | '15,000'   | ''        |
-		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I click the button named "SearchByBarcode"	
 		And I input "2202283739" text in the field named "InputFld"
 		And I click the button named "OK"
 		Then "Row form" window is opened
@@ -214,7 +221,7 @@ Scenario: _0156050 check items in the document by scan barcode
 			| 'Trousers' | '3' | '36/Yellow' | 'pcs'  | '2,000'    | ''        |
 			| 'Shirt'    | '4' | '36/Red'    | 'pcs'  | '15,000'   | ''        |
 			| 'Dress'    | '5' | 'L/Green'   | 'pcs'  | ''         | '7,000'   |
-		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I click the button named "SearchByBarcode"	
 		And I input "2202283713" text in the field named "InputFld"
 		And I click the button named "OK"
 		Then "Row form" window is opened
@@ -233,9 +240,201 @@ Scenario: _0156050 check items in the document by scan barcode
 			| '#' | 'Item'  | 'Item key' | 'Quantity' | 'Unit' | 'Inventory transfer order' |
 			| '1' | 'Dress' | 'S/Yellow' | '10,000'   | 'pcs'  | ''                         |
 			| '2' | 'Dress' | 'L/Green'  | '7,000'    | 'pcs'  | ''                         |
+	* Check page history
+		And in the table "ItemList" I click "Open scan form" button
+		And "ScanHistory" table contains lines
+			| 'Barcode'    | 'Count' | 'Period' |
+			| '2202283739' | '7'     | '*'      |
+			| '2202283713' | '9'     | '*'      |
+			| '2202283713' | '1'     | '*'      |
+		Then the number of "ScanHistory" table lines is "равно" "3"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number' |
+			| '204'    |	
+		And I select current line in "List" table
+		And I click the button named "OpenScanForm"
+		And "ScanHistory" table contains lines
+			| 'Barcode'    | 'Count' | 'Period' |
+			| '2202283739' | '7'     | '*'      |
+			| '2202283713' | '9'     | '*'      |
+			| '2202283713' | '1'     | '*'      |
+		Then the number of "ScanHistory" table lines is "равно" "3"
+		And I close all client application windows
+		
+Scenario: _0156051 check items in the document by scan barcode (with serial lot number)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+	* Select IT
+		And I go to line in "List" table
+			| 'Number' |
+			| '204'    |	
+		And I select current line in "List" table
+	* Add item with serial lot number
+		And in the table "ItemList" I click "Add" button
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Product 1 with SLN' |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'               | 'Item key' |
+			| 'Product 1 with SLN' | 'PZU'      |
+		And I activate field named "ItemKey" in "List" table
+		And I select current line in "List" table
+		And I activate "Serial lot numbers" field in "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I activate field named "Owner" in "List" table
+		And I go to line in "List" table
+			| 'Owner' | 'Serial number' |
+			| 'PZU'   | '8908899880'    |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I activate field named "Owner" in "List" table
+		And I go to line in "List" table
+			| 'Owner' | 'Serial number' |
+			| 'PZU'   | '8908899881'    |
+		And I activate "Serial number" field in "List" table
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table
+	* Check scan form
+		And in the table "ItemList" I click "Open scan form" button
+		And I click the button named "SearchByBarcode"	
+		And I input "8908899880" text in the field named "InputFld"
+		And I click the button named "OK"		
+		And I input "1,000" text in "You scan" field
+		And I move to the next attribute
+		And I click the button named "SearchByBarcode"	
+		And I input "8908899881" text in the field named "InputFld"
+		And I click the button named "OK"		
+		And I input "1,000" text in "You scan" field
+		And I move to the next attribute
+		And I click the button named "SearchByBarcode"	
+		And I input "7889000090009" text in the field named "InputFld"
+		And I click the button named "OK"	
+		And I click Select button of "Serial lot number" field
+		And I click the button named "FormCreate"
+		And I input "12345" text in "Serial number" field
+		And I click "Save and close" button
+		And I go to line in "List" table
+			| 'Serial number' |
+			| '12345'         |
+		And I select current line in "List" table	
+		And I input "2,000" text in "You scan" field
+		And I move to the next attribute	
+		And "ScanHistory" table contains lines
+			| 'Barcode'       | 'Count' | 'Period' | 'User' |
+			| '7889000090009' | '2'     | '*'      | '*'    |
+			| '8908899881'    | '1'     | '*'      | '*'    |
+			| '8908899880'    | '1'     | '*'      | '*'    |
+		And I click "Done" button
+	* Check itemlist tab	
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Serial lot numbers'     | 'Unit' | 'Source of origins' | 'Quantity' | 'Inventory transfer order' | 'Production planning' |
+			| 'Dress'              | 'S/Yellow' | ''                       | 'pcs'  | ''                  | '10,000'   | ''                         | ''                    |
+			| 'Product 1 with SLN' | 'PZU'      | '8908899880; 8908899881' | 'pcs'  | ''                  | '2,000'    | ''                         | ''                    |
+			| 'Dress'              | 'L/Green'  | ''                       | 'pcs'  | ''                  | '7,000'    | ''                         | ''                    |
+			| 'Product 3 with SLN' | 'PZU'      | '12345'                  | 'pcs'  | ''                  | '2,000'    | ''                         | ''                    |
+		Then the number of "ItemList" table lines is "равно" "4"
+		And I click "Post and close" button
+		And I go to line in "List" table
+			| 'Number' |
+			| '204'    |	
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Serial lot numbers'     | 'Unit' | 'Source of origins' | 'Quantity' | 'Inventory transfer order' | 'Production planning' |
+			| 'Dress'              | 'S/Yellow' | ''                       | 'pcs'  | ''                  | '10,000'   | ''                         | ''                    |
+			| 'Product 1 with SLN' | 'PZU'      | '8908899880; 8908899881' | 'pcs'  | ''                  | '2,000'    | ''                         | ''                    |
+			| 'Dress'              | 'L/Green'  | ''                       | 'pcs'  | ''                  | '7,000'    | ''                         | ''                    |
+			| 'Product 3 with SLN' | 'PZU'      | '12345'                  | 'pcs'  | ''                  | '2,000'    | ''                         | ''                    |
+		And I close all client application windows
+		
+
+Scenario: _0156052 check items in the document by scan barcode (document without serial lot number)		
+	And I close all client application windows
+	* Create SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Nicoletta'   |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'L/Green'  |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+	* Check scan form
+		And in the table "ItemList" I click "Open scan form" button
+		And I click the button named "SearchByBarcode"	
+		And I input "8908899880" text in the field named "InputFld"
+		And I click the button named "OK"		
+		And I input "1,000" text in "You scan" field
+		And I move to the next attribute
+		And I click the button named "SearchByBarcode"	
+		And I input "8908899881" text in the field named "InputFld"
+		And I click the button named "OK"		
+		And I input "1,000" text in "You scan" field
+		And I move to the next attribute
+		And I click the button named "SearchByBarcode"	
+		And I input "2202283739" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I input "2,000" text in "You scan" field
+		And I move to the next attribute
+		And "ItemList" table became equal
+			| 'Item'               | 'Item key' | 'Unit' | 'Scanned serial lot number' | 'Quantity' | 'Scanned' |
+			| 'Dress'              | 'L/Green'  | 'pcs'  | ''                          | '2,000'    | '2,000'   |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | ''                          | ''         | '2,000'   |
+		And "ScanHistory" table contains lines
+			| 'Barcode'    | 'Count' | 'Period' |
+			| '2202283739' | '2'     | '*'      |
+			| '8908899881' | '1'     | '*'      |
+			| '8908899880' | '1'     | '*'      |
+		Then the number of "ScanHistory" table lines is "равно" "3"
+		And I click "Done" button
+	* Check itemlist tab
+		And "ItemList" table became equal
+			| 'Item key' | 'Item'               | 'Quantity' | 'Unit' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' |
+			| 'L/Green'  | 'Dress'              | '2,000'    | 'pcs'  | '550,00' | '18%' | '932,20'     | '1 100,00'     |
+			| 'PZU'      | 'Product 1 with SLN' | '2,000'    | 'pcs'  | ''       | '18%' | ''           | ''             |
 		And I close all client application windows
 		
 		
+				
+		
+						
+				
+
+				
+
+				
 		
 						
 		

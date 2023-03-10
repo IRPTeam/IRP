@@ -363,8 +363,77 @@ Scenario: _0156051 check items in the document by scan barcode (with serial lot 
 		And I close all client application windows
 		
 
+Scenario: _0156052 check items in the document by scan barcode (document without serial lot number)		
+	And I close all client application windows
+	* Create SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Nicoletta'   |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'L/Green'  |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+	* Check scan form
+		And in the table "ItemList" I click "Open scan form" button
+		And I click the button named "SearchByBarcode"	
+		And I input "8908899880" text in the field named "InputFld"
+		And I click the button named "OK"		
+		And I input "1,000" text in "You scan" field
+		And I move to the next attribute
+		And I click the button named "SearchByBarcode"	
+		And I input "8908899881" text in the field named "InputFld"
+		And I click the button named "OK"		
+		And I input "1,000" text in "You scan" field
+		And I move to the next attribute
+		And I click the button named "SearchByBarcode"	
+		And I input "2202283739" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I input "2,000" text in "You scan" field
+		And I move to the next attribute
+		And "ItemList" table became equal
+			| 'Item'               | 'Item key' | 'Unit' | 'Scanned serial lot number' | 'Quantity' | 'Scanned' |
+			| 'Dress'              | 'L/Green'  | 'pcs'  | ''                          | '2,000'    | '2,000'   |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | ''                          | ''         | '2,000'   |
+		And "ScanHistory" table became equal
+			| 'Barcode'    | 'Count' | 'Period' |
+			| '2202283739' | '2'     | '*'      |
+			| '8908899881' | '1'     | '*'      |
+			| '8908899880' | '1'     | '*'      |
+		And I click "Done" button
+	* Check itemlist tab
+		And "ItemList" table became equal
+			| 'Item key' | 'Item'               | 'Quantity' | 'Unit' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' |
+			| 'L/Green'  | 'Dress'              | '2,000'    | 'pcs'  | '550,00' | '18%' | '932,20'     | '1 100,00'     |
+			| 'PZU'      | 'Product 1 with SLN' | '2,000'    | 'pcs'  | ''       | '18%' | ''           | ''             |
+		And I close all client application windows
 		
 		
+				
+		
+						
+				
+
+				
+
+				
 		
 						
 		

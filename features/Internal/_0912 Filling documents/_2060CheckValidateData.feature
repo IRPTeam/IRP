@@ -83,15 +83,20 @@ Scenario: _0206000 preparation (checks data)
 		When filling in Tax settings for company
 		When Create catalog CancelReturnReasons objects
 		When Create catalog Users objects
-		When Create document RetailSalesReceipt objects (checks, different amount)
+		When Create document RetailSalesReceipt objects (wrong data)
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(8811).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document GoodsReceipt objects (wrong data)
+		When Create document InventoryTransfer (wrong data)
+		When Create document InventoryTransferOrder objects (wrong data)
+		When Create document InternalSupplyRequest objects (wrong data)
+		When Create document SalesOrder objects (wrong data)
 		And I close all client application windows
 
 Scenario: _0260601 check preparation
 	When check preparation	
 
-Scenario: _0206002 check AdditionalDocumentTablesCheck report
+Scenario: _0206002 сheck data verification in Retail sales receipt
 	And I close all client application windows
 	* Open report
 		Given I open hyperlink "e1cib/app/Report.AdditionalDocumentTablesCheck"
@@ -109,8 +114,142 @@ Scenario: _0206002 check AdditionalDocumentTablesCheck report
 		And I click "Generate" button
 	* Check report
 		Then "Result" spreadsheet document is equal
-			| 'Filter:'                                              | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Retail sales receipt"'                                                                                                                                                                                 |
-			| ''                                                     | ''                                                                                                                                                                                                                                                                                      |
-			| 'Reference'                                            | 'Status'                                                                                                                                                                                                                                                                                |
-			| 'Retail sales receipt 8 811 dated 07.03.2023 16:47:01' | 'Row: 1. Offers amount in item list is not equal to offers amount in offers listRow: 1. Total amount minus net amount is not equal to tax amountRow: 2. Tax amount in item list is not equal to tax amount in tax listRow: 2. Total amount minus net amount is not equal to tax amount' |
+			| 'Filter:'                                              | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Retail sales receipt"'                                                                                                                                                                                       |
+			| ''                                                     | ''                                                                                                                                                                                                                                                                                            |
+			| 'Document type'                                        | ''                                                                                                                                                                                                                                                                                            |
+			| 'Reference'                                            | 'Status'                                                                                                                                                                                                                                                                                      |
+			| 'Retail sales receipt'                                 | ''                                                                                                                                                                                                                                                                                            |
+			| 'Retail sales receipt 8 811 dated 07.03.2023 16:47:01' | 'Row: 1. Total amount minus net amount is not equal to tax amount\nRow: 1. Offers amount in item list is not equal to offers amount in offers list\nRow: 2. Tax amount in item list is not equal to tax amount in tax list\nRow: 2. Total amount minus net amount is not equal to tax amount' |	
 		And I close all client application windows
+
+Scenario: _0206003 сheck data verification in Goods receipt
+	And I close all client application windows
+	* Open report
+		Given I open hyperlink "e1cib/app/Report.AdditionalDocumentTablesCheck"
+		And I click "Change option..." button
+		And I move to the tab named "FilterPage"
+		And I go to line in "SettingsComposerSettingsFilterFilterAvailableFields" table
+			| 'Available fields' |
+			| 'Document type'    |
+		And I select current line in "SettingsComposerSettingsFilterFilterAvailableFields" table
+		And I activate field named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
+		And I select current line in "SettingsComposerSettingsFilter" table
+		And I select "Goods receipt" exact value from the drop-down list named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
+		And I finish line editing in "SettingsComposerSettingsFilter" table
+		And I click "Finish editing" button
+		And I click "Generate" button
+	* Check report
+		Then "Result" spreadsheet document is equal
+			| 'Filter:'                                       | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Goods receipt"'                                                |
+			| ''                                              | ''                                                                                                                                              |
+			| 'Document type'                                 | ''                                                                                                                                              |
+			| 'Reference'                                     | 'Status'                                                                                                                                        |
+			| 'Goods receipt'                                 | ''                                                                                                                                              |
+			| 'Goods receipt 8 811 dated 10.03.2023 15:43:56' | 'Row: 1. Quantity not equal quantity in base unit when unit quantity equal 1\nRow: 1. Quantity in item list is not equal to quantity in row ID' |
+	And I close all client application windows	
+
+Scenario: _0206004 сheck data verification in Inventory transfer
+	And I close all client application windows
+	* Open report
+		Given I open hyperlink "e1cib/app/Report.AdditionalDocumentTablesCheck"
+		And I click "Change option..." button
+		And I move to the tab named "FilterPage"
+		And I go to line in "SettingsComposerSettingsFilterFilterAvailableFields" table
+			| 'Available fields' |
+			| 'Document type'    |
+		And I select current line in "SettingsComposerSettingsFilterFilterAvailableFields" table
+		And I activate field named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
+		And I select current line in "SettingsComposerSettingsFilter" table
+		And I select "Inventory transfer" exact value from the drop-down list named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
+		And I finish line editing in "SettingsComposerSettingsFilter" table
+		And I click "Finish editing" button
+		And I click "Generate" button
+	* Check report
+		Then "Result" spreadsheet document is equal
+			| 'Filter:'                                            | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Inventory transfer"'                                                                                                                                                                                                                                                                                                                 |
+			| ''                                                   | ''                                                                                                                                                                                                                                                                                                                                                                                                                    |
+			| 'Document type'                                      | ''                                                                                                                                                                                                                                                                                                                                                                                                                    |
+			| 'Reference'                                          | 'Status'                                                                                                                                                                                                                                                                                                                                                                                                              |
+			| 'Inventory transfer'                                 | ''                                                                                                                                                                                                                                                                                                                                                                                                                    |
+			| 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | 'Row: 1. Quantity is zero\nRow: 1. Quantity not equal quantity in base unit when unit quantity equal 1\nRow: 1. Item is not equal to item in item key\nRow: 2. Quantity in item list is not equal to quantity in row ID\nRow: 2. Serial is not set but is required\nRow: 2. Quantity in serial list table is not the same as quantity in item list\nRow: 3. Quantity in item list is not equal to quantity in row ID' |		
+	And I close all client application windows	
+				
+Scenario: _0206005 сheck data verification in Inventory transfer order
+	And I close all client application windows
+	* Open report
+		Given I open hyperlink "e1cib/app/Report.AdditionalDocumentTablesCheck"
+		And I click "Change option..." button
+		And I move to the tab named "FilterPage"
+		And I go to line in "SettingsComposerSettingsFilterFilterAvailableFields" table
+			| 'Available fields' |
+			| 'Document type'    |
+		And I select current line in "SettingsComposerSettingsFilterFilterAvailableFields" table
+		And I activate field named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
+		And I select current line in "SettingsComposerSettingsFilter" table
+		And I select "Inventory transfer order" exact value from the drop-down list named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
+		And I finish line editing in "SettingsComposerSettingsFilter" table
+		And I click "Finish editing" button
+		And I click "Generate" button
+	* Check report
+		Then "Result" spreadsheet document is equal
+			| 'Filter:'                                                  | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Inventory transfer order"'                                                                                                                              |
+			| ''                                                         | ''                                                                                                                                                                                                                                       |
+			| 'Document type'                                            | ''                                                                                                                                                                                                                                       |
+			| 'Reference'                                                | 'Status'                                                                                                                                                                                                                                 |
+			| 'Inventory transfer order'                                 | ''                                                                                                                                                                                                                                       |
+			| 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12' | 'Row: 1. Quantity in base unit is zero\nRow: 1. Quantity not equal quantity in base unit when unit quantity equal 1\nRow: 2. Quantity in base unit is zero\nRow: 2. Quantity not equal quantity in base unit when unit quantity equal 1' |	
+	And I close all client application windows	
+
+Scenario: _0206006 сheck data verification in Internal supply request
+	And I close all client application windows
+	* Open report
+		Given I open hyperlink "e1cib/app/Report.AdditionalDocumentTablesCheck"
+		And I click "Change option..." button
+		And I move to the tab named "FilterPage"
+		And I go to line in "SettingsComposerSettingsFilterFilterAvailableFields" table
+			| 'Available fields' |
+			| 'Document type'    |
+		And I select current line in "SettingsComposerSettingsFilterFilterAvailableFields" table
+		And I activate field named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
+		And I select current line in "SettingsComposerSettingsFilter" table
+		And I select "Internal supply request" exact value from the drop-down list named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
+		And I finish line editing in "SettingsComposerSettingsFilter" table
+		And I click "Finish editing" button
+		And I click "Generate" button
+	* Check report
+		Then "Result" spreadsheet document is equal
+			| 'Filter:'                                                 | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Internal supply request"'                          |
+			| ''                                                        | ''                                                                                                                                  |
+			| 'Document type'                                           | ''                                                                                                                                  |
+			| 'Reference'                                               | 'Status'                                                                                                                            |
+			| 'Internal supply request'                                 | ''                                                                                                                                  |
+			| 'Internal supply request 8 811 dated 10.03.2023 17:24:29' | 'Row: 1. Quantity is zero\nRow: 1. Quantity in base unit is zero\nRow: 1. Quantity in item list is not equal to quantity in row ID' |	
+	And I close all client application windows
+
+
+Scenario: _0206007 сheck data verification in Sales order
+	And I close all client application windows
+	* Open report
+		Given I open hyperlink "e1cib/app/Report.AdditionalDocumentTablesCheck"
+		And I click "Change option..." button
+		And I move to the tab named "FilterPage"
+		And I go to line in "SettingsComposerSettingsFilterFilterAvailableFields" table
+			| 'Available fields' |
+			| 'Document type'    |
+		And I select current line in "SettingsComposerSettingsFilterFilterAvailableFields" table
+		And I activate field named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
+		And I select current line in "SettingsComposerSettingsFilter" table
+		And I select "Sales order" exact value from the drop-down list named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
+		And I finish line editing in "SettingsComposerSettingsFilter" table
+		And I click "Finish editing" button
+		And I click "Generate" button
+	* Check report
+		Then "Result" spreadsheet document is equal
+			| 'Filter:'                                     | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Sales order"'                      |
+			| ''                                            | ''                                                                                                                  |
+			| 'Document type'                               | ''                                                                                                                  |
+			| 'Reference'                                   | 'Status'                                                                                                            |
+			| 'Sales order'                                 | ''                                                                                                                  |
+			| 'Sales order 8 811 dated 10.03.2023 17:32:00' | 'Row: 1. Net amount is greater than total amount\nRow: 1. Total amount minus net amount is not equal to tax amount' |	
+	And I close all client application windows	
+

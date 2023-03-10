@@ -827,43 +827,60 @@ EndProcedure
 
 Procedure FillRowID_PI(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
-		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		// not linked
+		ArrayForDelete = New Array();
+		For Each Row In IDInfoRows Do
+			If Not ValueIsFilled(Row.Basis) Then
+				ArrayForDelete.Add(Row);
+			EndIf;
+		EndDo;
+		
+		For Each ItemForDelete In ArrayForDelete Do
+			Source.RowIDInfo.Delete(ItemForDelete);
+		EndDo;
+		
+		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
 			FillRowID(Row, RowItemList);
 			Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
 		Else
+			// linked
+			ArrayForDelete = New Array();
 			For Each Row In IDInfoRows Do
-				If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
-					Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
-					Continue;
+				If ValueIsFilled(Row.Basis) And Not ValueIsFilled(Row.CurrentStep) Then
+					ArrayForDelete.Add(Row);
 				EndIf;
-				FillRowID(Row, RowItemList);
-				Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
 			EndDo;
-		EndIf;
-	EndDo;
-
-	NewRows = New Map();
-
-	For Each Row In Source.RowIDInfo Do
-		If Not ValueIsFilled(Row.CurrentStep) Then
-			Continue;
-		EndIf;
-		For Each RowItemList In Source.ItemList.FindRows(New Structure("Key", Row.Key)) Do
-			If ValueIsFilled(RowItemList.SalesOrder) And Not RowItemList.UseGoodsReceipt Then
-				NewRows.Insert(Row, RowItemList.QuantityInBaseUnit);
+		
+			For Each ItemForDelete In ArrayForDelete Do
+				Source.RowIDInfo.Delete(ItemForDelete);
+			EndDo;
+			
+			IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+			If IDInfoRows.Count() <> 1 Then
+				Raise "FillRowID_PI() -> for linked row -> IDInfoRows.Count() <> 1";
 			EndIf;
-		EndDo;
-	EndDo;
-
-	For Each Row In NewRows Do
-		NewRow = Source.RowIDInfo.Add();
-		FillPropertyValues(NewRow, Row.Key);
-		NewRow.CurrentStep = Undefined;
-		NewRow.NextStep    = Catalogs.MovementRules.SI_SC;
-		NewRow.Quantity    = Row.Value;
+			
+			Row = IDInfoRows[0];
+			Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
+			
+			If ValueIsFilled(RowItemList.SalesOrder) Then
+				
+				NewRow = Source.RowIDInfo.Add();
+				FillPropertyValues(NewRow, Row);
+				NewRow.CurrentStep = Undefined;
+				If RowItemList.IsService Then
+					NewRow.NextStep = Catalogs.MovementRules.SI
+				Else // is product
+					NewRow.NextStep = Catalogs.MovementRules.SI_SC
+				EndIf;
+				
+			EndIf;
+			
+		EndIf;
 	EndDo;
 EndProcedure
 
@@ -7456,7 +7473,7 @@ Procedure ApplyFilterSet_PI_ForSI_ForSC(Query)
 	|INTO RowIDMovements_PI_ForSI_ForSC
 	|FROM
 	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
-	|	AND Basis IN (&Basises)
+	|	AND (Basis IN (&Basises)
 	|	OR RowRef.Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -7478,7 +7495,7 @@ Procedure ApplyFilterSet_PI_ForSI_ForSC(Query)
 	|				WHEN &Filter_Store
 	|					THEN RowRef.Store = &Store
 	|				ELSE TRUE
-	|			END)) AS RowIDMovements";
+	|			END))) AS RowIDMovements";
 	Query.Execute();
 EndProcedure
 
@@ -10327,12 +10344,17 @@ Function GetChildrenInfo(Basis, BasisKey, RowID) Export
 		|	RowIDInfo.RowRef AS RowRef,
 		|	RowIDInfo.RowID AS RowID,
 		|	RowIDInfo.Key AS BasisKey
-		|FROM 
+		|FROM
 		|	InformationRegister.T3010S_RowIDInfo AS RowIDInfo
 		|WHERE
 		|	RowIDInfo.Basis = &Basis
 		|	AND RowIDInfo.BasisKey = &BasisKey
-		|	AND RowIDInfo.RowID = &RowID";
+		|	AND RowIDInfo.RowID = &RowID
+		|GROUP BY
+		|	RowIDInfo.Recorder,
+		|	RowIDInfo.RowRef,
+		|	RowIDInfo.RowID,
+		|	RowIDInfo.Key";
 	Query.SetParameter("Basis"    , Basis);
 	Query.SetParameter("BasisKey" , BasisKey);
 	Query.SetParameter("RowID"    , RowID);

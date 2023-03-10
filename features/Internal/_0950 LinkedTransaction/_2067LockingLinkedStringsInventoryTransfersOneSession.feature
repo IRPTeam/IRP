@@ -74,6 +74,10 @@ Scenario: _2067001 preparation (locking linked strings)
 		| "Documents.ShipmentConfirmation.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
 		| "Documents.GoodsReceipt.FindByNumber(51).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create document InventoryTransfer objects (SC and GR different branch)
+	And I execute 1C:Enterprise script at server
+		| "Documents.InventoryTransfer.FindByNumber(252).GetObject().Write(DocumentWriteMode.Posting);" |
+
 
 Scenario: _20670011 check preparation
 	When check preparation
@@ -729,3 +733,185 @@ Scenario: _2067038 delete IT with linked strings (one session)
 			|'Line No. [6] [Boots 38/18SD] RowID movements remaining: 144 . Required: 0 . Lacking: 144 .'|
 			|'Line No. [7] [Trousers 38/Yellow] RowID movements remaining: 10 . Required: 0 . Lacking: 10 .'|		
 	And I close all client application windows	
+
+Scenario: _2067039 check SC and GR based on IT with different sender and receiver branches
+	And I close all client application windows
+	* Create SC
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I select "Inventory transfer" exact value from "Transaction type" drop-down list
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'    |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Front office'    |
+		And I select current line in "List" table
+		* Add items
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate field named "ItemListItem" in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Bag'         |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item' | 'Item key' |
+				| 'Bag'  | 'ODS'      |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate field named "ItemListItem" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'High shoes'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'       | 'Item key' |
+				| 'High shoes' | '39/19SD'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I activate "Unit" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of "Unit" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'            |
+				| 'High shoes box (8 pcs)' |
+			And I select current line in "List" table
+		* Link
+			And I go to line in "ItemList" table
+				| '#' | 'Item' | 'Item key' | 'Quantity' | 'Store'    | 'Unit' |
+				| '1' | 'Bag'  | 'ODS'      | '2,000'    | 'Store 02' | 'pcs'  |
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And in the table "ItemList" I click "Link unlink basis documents" button
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' |
+				| '20,000'   | 'Bag (ODS)'        | 'pcs'  |
+			And in the table "BasisesTree" I click the button named "Link"
+			And I go to line in "ItemListRows" table
+				| '#' | 'Quantity' | 'Row presentation'     | 'Store'    | 'Unit'                   |
+				| '2' | '2,000'    | 'High shoes (39/19SD)' | 'Store 02' | 'High shoes box (8 pcs)' |
+			And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation'     | 'Unit'                   |
+				| '10,000'   | 'High shoes (39/19SD)' | 'High shoes box (8 pcs)' |
+			And in the table "BasisesTree" I click the button named "Link"
+			And I click "Ok" button
+		* Try to change branch
+			When I Check the steps for Exception
+       			|'And I click Choice button of the field named "Branch"'|
+			And I click the button named "FormPostAndClose"
+			And I wait "Shipment confirmation (create) *" window closing in 5 seconds
+	* Create GR
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I select "Inventory transfer" exact value from "Transaction type" drop-down list
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 03'    |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Shop 01'     |
+		And I select current line in "List" table
+		* Add items
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate field named "ItemListItem" in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Bag'         |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item' | 'Item key' |
+				| 'Bag'  | 'ODS'      |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate field named "ItemListItem" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'High shoes'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'       | 'Item key' |
+				| 'High shoes' | '39/19SD'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I activate "Unit" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of "Unit" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'            |
+				| 'High shoes box (8 pcs)' |
+			And I select current line in "List" table
+		* Link
+			And I go to line in "ItemList" table
+				| '#' | 'Item' | 'Item key' | 'Quantity' | 'Store'    | 'Unit' |
+				| '1' | 'Bag'  | 'ODS'      | '2,000'    | 'Store 03' | 'pcs'  |
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And in the table "ItemList" I click "Link unlink basis documents" button
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' |
+				| '20,000'   | 'Bag (ODS)'        | 'pcs'  |
+			And in the table "BasisesTree" I click the button named "Link"
+			And I go to line in "ItemListRows" table
+				| '#' | 'Quantity' | 'Row presentation'     | 'Store'    | 'Unit'                   |
+				| '2' | '2,000'    | 'High shoes (39/19SD)' | 'Store 03' | 'High shoes box (8 pcs)' |
+			And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation'     | 'Unit'                   |
+				| '10,000'   | 'High shoes (39/19SD)' | 'High shoes box (8 pcs)' |
+			And in the table "BasisesTree" I click the button named "Link"
+			And I click "Ok" button
+		And I click the button named "FormPostAndClose"
+		And I wait "Goods receipt (create) *" window closing in 5 seconds
+	
+						
+
+
+				
+						
+	
+				
+				
+

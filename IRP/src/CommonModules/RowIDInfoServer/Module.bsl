@@ -1551,18 +1551,18 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 	
 	If Is.RRR Or Is.SR Then
 		FillPropertyValues(RowRefObject, Source, , "Company, Branch");
+		
+		RowRefObject.CompanyReturn = Source.Company;
+		RowRefObject.BranchReturn  = Source.Branch;
+	ElsIf Is.GR And Source.TransactionType = Enums.GoodsReceiptTransactionTypes.InventoryTransfer Then
+		FillPropertyValues(RowRefObject, Source, , "Branch");
 	Else
 		FillPropertyValues(RowRefObject, Source);
 	EndIf;
 	
 	RowRefObject.RowID       = Row.RowID;
 	RowRefObject.Description = Row.RowID;
-	
-	If Is.RRR Or Is.SR Then
-		RowRefObject.CompanyReturn = Source.Company;
-		RowRefObject.BranchReturn = Source.Branch;
-	EndIf;
-	
+		
 	If Is.ITO Or Is.IT Then
 		RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.InventoryTransfer;
 		RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.InventoryTransfer;
@@ -1571,14 +1571,14 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		
 		If Source.TransactionType = Enums.SalesTransactionTypes.Sales Then
 			
-			RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.Sales;
-			RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
-			RowRefObject.TransactionTypeSR = Enums.SalesReturnTransactionTypes.ReturnFromCustomer;
+			RowRefObject.TransactionTypeSC       = Enums.ShipmentConfirmationTransactionTypes.Sales;
+			RowRefObject.TransactionTypeGRReturn = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
+			RowRefObject.TransactionTypeSR       = Enums.SalesReturnTransactionTypes.ReturnFromCustomer;
 		
 		ElsIf Source.TransactionType = Enums.SalesTransactionTypes.ShipmentToTradeAgent Then
 			
 			RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent;
-			RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent;
+			RowRefObject.TransactionTypeGRReturn = Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent;
 			RowRefObject.TransactionTypeSR = Enums.SalesReturnTransactionTypes.ReturnFromTradeAgent;
 			
 		EndIf;
@@ -1590,36 +1590,54 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		If Source.TransactionType = Enums.PurchaseTransactionTypes.Purchase Then
 			
 			RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.Purchase;
-			RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor;
+			RowRefObject.TransactionTypeSCReturn = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor;
 			RowRefObject.TransactionTypePR = Enums.PurchaseReturnTransactionTypes.ReturnToVendor;
 			
 		ElsIf Source.TransactionType = Enums.PurchaseTransactionTypes.ReceiptFromConsignor Then
 			
 			RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReceiptFromConsignor;
-			RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor;
+			RowRefObject.TransactionTypeSCReturn = Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor;
 			RowRefObject.TransactionTypePR = Enums.PurchaseReturnTransactionTypes.ReturnToConsignor;
 			
 		EndIf;
 		
 	ElsIf Is.SC Then
-		RowRefObject.TransactionTypeSC = Source.TransactionType;
+		If Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor
+			Or Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor Then
+			RowRefObject.TransactionTypeSCReturn = Source.TransactionType;
+		Else
+			RowRefObject.TransactionTypeSC = Source.TransactionType;
+		EndIf;
 	ElsIf Is.GR Then
-		RowRefObject.TransactionTypeGR = Source.TransactionType;
+		If Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent
+			Or Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer Then
+			RowRefObject.TransactionTypeGRReturn = Source.TransactionType;
+		Else
+			RowRefObject.TransactionTypeGR = Source.TransactionType;
+		EndIf;
 	ElsIf Is.PR Or Is.PRO Then
 		RowRefObject.TransactionTypePR = Source.TransactionType;
 		
 		If Source.TransactionType = Enums.PurchaseReturnTransactionTypes.ReturnToVendor Then
-			RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor;
+			
+			RowRefObject.TransactionTypeSCReturn = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor;
+		
 		ElsIf Source.TransactionType = Enums.PurchaseReturnTransactionTypes.ReturnToConsignor Then
-			RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor;
+			
+			RowRefObject.TransactionTypeSCReturn = Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor;
+
 		EndIf;
 	ElsIf Is.SR Or Is.SRO Then
 		RowRefObject.TransactionTypeSR = Source.TransactionType;
 		
 		If Source.TransactionType = Enums.SalesReturnTransactionTypes.ReturnFromCustomer Then
-			RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
+			
+			RowRefObject.TransactionTypeGRReturn = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
+
 		ElsIf Source.TransactionType = Enums.SalesReturnTransactionTypes.ReturnFromTradeAgent Then
-			RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent;
+			
+			RowRefObject.TransactionTypeGRReturn = Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent;
+
 		EndIf;
 	ElsIf Is.WO Or Is.WS Then
 		
@@ -6372,7 +6390,7 @@ Function GetFieldsToLock_ExternalLink_SC(ExternalDocAliase, Aliases)
 							  |Branch             , Branch,
 							  |PartnerPurchases   , Partner,
 							  |LegalNamePurchases , LegalName,
-							  |TransactionTypeSC  , TransactionType,
+							  |TransactionTypeSCReturn  , TransactionType,
 							  |ItemKey            , ItemList.ItemKey,
 							  |Store              , ItemList.Store";
 	
@@ -6482,9 +6500,9 @@ Procedure ApplyFilterSet_SC_ForPR(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_TransactionType
-	|					THEN RowRef.TransactionTypeSC = &TransactionType
+	|					THEN RowRef.TransactionTypeSCReturn = &TransactionType
 	|				ELSE FALSE
-	|			END
+	|			END  
 	|			AND CASE
 	|				WHEN &Filter_ItemKey
 	|					THEN RowRef.ItemKey = &ItemKey
@@ -6945,12 +6963,16 @@ Function GetFieldsToLock_InternalLink_GR(InternalDocAliase, Aliases)
 		Or InternalDocAliase = Aliases.PI 
 		Or InternalDocAliase = Aliases.SR
 		Or InternalDocAliase = Aliases.SRO
-		Or InternalDocAliase = Aliases.IT
 		Or InternalDocAliase = Aliases.ITO Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, ReceiptBasis, SalesOrder, PurchaseOrder, PurchaseInvoice, 
 			|InternalSupplyRequest, InventoryTransferOrder, SalesReturn, SalesReturnOrder,
 			|InventoryTransfer, SalesInvoice";
+	ElsIf InternalDocAliase = Aliases.IT Then
+		Result.Header   = "Company, Store, Partner, LegalName, TransactionType";
+		Result.ItemList = "Item, ItemKey, Store, ReceiptBasis, SalesOrder, PurchaseOrder, PurchaseInvoice, 
+			|InternalSupplyRequest, InventoryTransferOrder, SalesReturn, SalesReturnOrder,
+			|InventoryTransfer, SalesInvoice";		
 	Else
 		Raise StrTemplate("Not supported Internal link for [GR] to [%1]", InternalDocAliase);
 	EndIf;
@@ -6982,7 +7004,7 @@ Function GetFieldsToLock_ExternalLink_GR(ExternalDocAliase, Aliases)
 						  |Branch            , Branch,
 						  |PartnerSales      , Partner,
 						  |LegalNameSales    , LegalName,
-						  |TransactionTypeGR , TransactionType,
+						  |TransactionTypeGRReturn , TransactionType,
 						  |ItemKey           , ItemList.ItemKey,
 						  |Store             , ItemList.Store";
 	Else
@@ -7129,9 +7151,9 @@ Procedure ApplyFilterSet_GR_ForSR(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_TransactionType
-	|					THEN RowRef.TransactionTypeGR = &TransactionType
+	|					THEN RowRef.TransactionTypeGRReturn = &TransactionType
 	|				ELSE FALSE
-	|			END
+	|			END      
 	|			AND CASE
 	|				WHEN &Filter_ItemKey
 	|					THEN RowRef.ItemKey = &ItemKey
@@ -7687,11 +7709,10 @@ Function GetFieldsToLock_ExternalLink_IT(ExternalDocAliase, Aliases)
 							  |TransactionTypeSC , ,
 							  |ItemKey           , ItemList.ItemKey";
 	ElsIf ExternalDocAliase = Aliases.GR Then
-		Result.Header   = "Company, Branch, StoreReceiver, UseGoodsReceipt";
+		Result.Header   = "Company, StoreReceiver, UseGoodsReceipt";
 		Result.ItemList = "Item, ItemKey, InventoryTransferOrder";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
-							  |Branch            , Branch,
 							  |StoreReceiver     , StoreReceiver,
 							  |TransactionTypeGR , ,
 							  |ItemKey           , ItemList.ItemKey";
@@ -7771,11 +7792,6 @@ Procedure ApplyFilterSet_IT_ForGR(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Branch
-	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -7976,7 +7992,7 @@ Function GetFieldsToLock_ExternalLink_PR(ExternalDocAliase, Aliases)
 							  |Branch             , Branch,
 							  |PartnerPurchases   , Partner,
 							  |LegalNamePurchases , LegalName,
-							  |TransactionTypeSC  , TransactionType,
+							  |TransactionTypeSCReturn  , TransactionType,
 							  |ItemKey            , ItemList.ItemKey,
 							  |Store              , ItemList.Store";
 	
@@ -8028,7 +8044,7 @@ Procedure ApplyFilterSet_PR_ForSC(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_TransactionType
-	|					THEN RowRef.TransactionTypeSC = &TransactionType
+	|					THEN RowRef.TransactionTypeSCReturn = &TransactionType
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -8104,7 +8120,7 @@ Function GetFieldsToLock_ExternalLink_SR(ExternalDocAliase, Aliases)
 							  |Branch            , Branch,
 							  |PartnerSales      , Partner,
 							  |LegalNameSales    , LegalName,
-							  |TransactionTypeGR , TransactionType,
+							  |TransactionTypeGRReturn , TransactionType,
 							  |ItemKey           , ItemList.ItemKey,
 							  |Store             , ItemList.Store";
 	Else
@@ -8155,9 +8171,9 @@ Procedure ApplyFilterSet_SR_ForGR(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_TransactionType
-	|					THEN RowRef.TransactionTypeGR = &TransactionType
+	|					THEN RowRef.TransactionTypeGRReturn = &TransactionType
 	|				ELSE FALSE
-	|			END
+	|			END  
 	|			AND CASE
 	|				WHEN &Filter_ItemKey
 	|					THEN RowRef.ItemKey = &ItemKey

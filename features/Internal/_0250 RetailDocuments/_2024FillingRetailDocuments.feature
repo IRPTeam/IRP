@@ -1565,6 +1565,8 @@ Scenario: _0154141 manual price adjustment in the POS
 			| 'Trousers' | '38/Yellow' | '1,000'    | '200,00' | ''       | '200,00' |
 			| 'Dress'    | 'S/Yellow'  | '1,000'    | '550,00' | ''       | '550,00' |
 			| 'Trousers' | '36/Yellow' | '1,000'    | '400,00' | ''       | '400,00' |
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I close all client application windows
 
 Scenario:  _0154142 change comment in POS
@@ -1581,7 +1583,7 @@ Scenario:  _0154142 change comment in POS
 			| 'Item'                |
 			| 'Dress, M/White' |
 		And I select current line in "ItemsPickup" table
-	* Select retail customer with own partner term
+		And I finish line editing in "ItemList" table	
 	* Filling comment
 		And I move to "Additional" tab
 		And I input "test" text in the field named "Description"		

@@ -651,6 +651,38 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="e8f9d9f8-f98b-4edf-ad00-657916dc2021">
+    <name>TransactionTypeGRReturn</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction type GR Return</value>
+    </synonym>
+    <type>
+      <types>EnumRef.GoodsReceiptTransactionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="325e52e9-a697-4ec2-9d3f-a1ebbcde8a59">
+    <name>TransactionTypeSCReturn</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction type SC Return</value>
+    </synonym>
+    <type>
+      <types>EnumRef.ShipmentConfirmationTransactionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="651805ba-bc1e-443a-8ae5-b2b855347771">
     <name>ItemForm</name>
     <synonym>

@@ -213,7 +213,8 @@ FROM
 	</dataSet>
 	<calculatedField>
 		<dataPath>Status</dataPath>
-		<expression>StrConcat(AdditionalDocumentTableControl.CheckDocument(Ref), "")</expression>
+		<expression>StrConcat(AdditionalDocumentTableControl.CheckDocument(Ref), "
+")</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>

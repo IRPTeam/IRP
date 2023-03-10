@@ -66,7 +66,10 @@ Function GetQuery(DocName) Export
 		EndDo;
 	EndDo;
 	
-	Result.Query = StrTemplate(CheckDocumentsQuery(), StrConcat(ArrayOfFields, "," + Chars.LF + Chars.Tab), StrConcat(ArrayOfFilter, Chars.LF + "	OR	"));
+	Result.Query = StrTemplate(CheckDocumentsQuery(), 
+		StrConcat(ArrayOfFields, "," + Chars.LF + Chars.Tab), 
+		StrConcat(ArrayOfFilter, Chars.LF + "	OR	"),
+		"Result." + StrConcat(ArrayOfFilter, "," + Chars.LF + "	Result."));
 	Return Result;
 EndFunction
 
@@ -84,6 +87,11 @@ Function ErrorItemList()
 		"QuantityInBaseUnit"
 	));
 	
+	Str.Insert("ErrorQuantityNotEqualQuantityInBaseUnit",	New Structure("Query, Fields", 
+		"Unit.Quantity = 1 AND Not ItemList.QuantityInBaseUnit = ItemList.Quantity", 
+		"Quantity, QuantityInBaseUnit, Unit"
+	));
+	
 	Str.Insert("ErrorItemTypeIsNotService",	New Structure("Query, Fields",
 		"Not ItemList.IsService = (ItemList.Item.ItemType.Type = VAlUE(Enum.ItemTypes.Service))", 
 		"IsService, Item"
@@ -95,7 +103,7 @@ Function ErrorItemList()
 	));
 	
 	Str.Insert("ErrorQuantityInItemListNotEqualQuantityInRowID", New Structure("Query, Fields",
-		"Not ItemList.Quantity = RowIDInfo.Quantity",
+		"Not ItemList.Quantity = isNull(RowIDInfo.Quantity, 0)",
 		"Quantity"
 	));
 	
@@ -106,7 +114,7 @@ Function ErrorWithTax()
 	Str = New Structure;
 	
 	Str.Insert("ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList", New Structure("Query, Fields", 
-		"Not ItemList.TaxAmount = TaxList.Amount",
+		"Not ItemList.TaxAmount = isNull(TaxList.Amount, 0)",
 		"TaxAmount"
 	));
 	
@@ -127,7 +135,7 @@ Function ErrorWithOffers()
 	Str = New Structure;
 	
 	Str.Insert("ErrorOffersAmountInItemListNotEqualOffersAmountInOffersList", New Structure("Query, Fields", 
-		"Not ItemList.OffersAmount = SpecialOffers.Amount",
+		"Not ItemList.OffersAmount = isNull(SpecialOffers.Amount, 0)",
 		"OffersAmount"
 	));
 	
@@ -143,12 +151,12 @@ Function ErrorWithSerialInTable()
 	));
 	
 	Str.Insert("ErrorUseSerialButSerialNotSet", New Structure("Query, Fields", 
-		"ItemList.UseSerialLotNumber And SerialLotNumbers.Quantity = 0",
+		"ItemList.UseSerialLotNumber And isNull(SerialLotNumbers.Quantity, 0) = 0",
 		"UseSerialLotNumber"
 	));
 	
 	Str.Insert("ErrorNotTheSameQuantityInSerialListTableAndInItemList", New Structure("Query, Fields", 
-		"ItemList.UseSerialLotNumber AND Not SerialLotNumbers.Quantity = ItemList.Quantity",
+		"ItemList.UseSerialLotNumber AND Not isNull(SerialLotNumbers.Quantity, 0) = ItemList.Quantity",
 		"UseSerialLotNumber, Quantity"
 	));
 	Return Str;
@@ -267,7 +275,8 @@ Function CheckDocumentsQuery()
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	Result.Key,
-	|	Result.LineNumber
+	|	Result.LineNumber,
+	|	%3
 	|FROM
 	|	Result AS Result
 	|WHERE %2";

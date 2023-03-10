@@ -1198,6 +1198,10 @@
      <dataPath xsi:type="form:DataPath">
       <segments>Object.ItemList.InventoryOrigin</segments>
      </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>ItemListInventoryOriginOnChange</name>
+     </handlers>
      <extendedTooltip>
       <name>ItemListInventoryOriginExtendedTooltip</name>
       <id>325</id>

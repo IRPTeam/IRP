@@ -377,6 +377,16 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	SettersMap.Insert("Command_UpdateConsignorBatches"  , "StepConsignorBatchesFillBatches");
 	SettersMap.Insert("Command_UpdateConsignorBatches_StoreSender" , "StepConsignorBatchesFillBatches_StoreSender");
 	
+	// ReceiptFromConsignor
+	SettersMap.Insert("ReceiptFromConsignor.Price"    , "SetReceiptFromConsignorPrice");
+	SettersMap.Insert("ReceiptFromConsignor.Quantity" , "SetReceiptFromConsignorQuantity");
+	SettersMap.Insert("ReceiptFromConsignor.ItemKey"  , "SetReceiptFromConsignorItemKey");
+	
+	// Inventory
+	SettersMap.Insert("Inventory.Price"    , "SetInventoryPrice");
+	SettersMap.Insert("Inventory.Quantity" , "SetInventoryQuantity");
+	SettersMap.Insert("Inventory.ItemKey"  , "SetInventoryItemKey");
+	
 	Return SettersMap.Get(DataPath);
 EndFunction
 

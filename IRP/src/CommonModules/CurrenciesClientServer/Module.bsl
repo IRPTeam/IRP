@@ -122,15 +122,24 @@ EndFunction
 
 Function GetCurrenciesTable(Currencies, RowKey = Undefined) Export
 	ArrayOfCurrenciesRows = New Array();
-	For Each Row In Currencies Do
-		If RowKey <> Undefined And Row.Key <> RowKey Then
-			Continue;
-		EndIf;
-		CurrenciesRow = New Structure("Key, IsFixed, CurrencyFrom, Rate, ReverseRate,
-			|ShowReverseRate, Multiplicity, MovementType, Amount");
-		FillPropertyValues(CurrenciesRow, Row);
-		ArrayOfCurrenciesRows.Add(CurrenciesRow);
-	EndDo;
+	RowColumns = "Key, IsFixed, CurrencyFrom, Rate, ReverseRate,
+				|ShowReverseRate, Multiplicity, MovementType, Amount";
+	
+	If RowKey = Undefined Then
+		For Each Row In Currencies Do
+			CurrenciesRow = New Structure(RowColumns);
+			FillPropertyValues(CurrenciesRow, Row);
+			ArrayOfCurrenciesRows.Add(CurrenciesRow);
+		EndDo;
+	Else
+		FilteredCurrencies = Currencies.FindRows(New Structure("Key", RowKey));
+		For Each Row In FilteredCurrencies Do
+			CurrenciesRow = New Structure(RowColumns);
+			FillPropertyValues(CurrenciesRow, Row);
+			ArrayOfCurrenciesRows.Add(CurrenciesRow);			
+		EndDo;
+	EndIf;
+	
 	Return ArrayOfCurrenciesRows;
 EndFunction
 
@@ -148,11 +157,16 @@ EndProcedure
 
 Procedure DeleteRowsByKeyFromCurrenciesTable(Currencies, RowKey = Undefined) Export
 	ArrayForDelete = New Array();
-	For Each Row In Currencies Do
-		If Row.Key = RowKey Or Not ValueIsFilled(RowKey) Then
+	If Not ValueIsFilled(RowKey) Then
+		For Each Row In Currencies Do
 			ArrayForDelete.Add(Row);
-		EndIf;
-	EndDo;
+		EndDo;
+	Else
+		FilteredCurrencies = Currencies.FindRows(New Structure("Key", RowKey));
+		For Each Row In FilteredCurrencies Do
+			ArrayForDelete.Add(Row);
+		EndDo;
+	EndIf;
 	For Each ItemForDelete In ArrayForDelete Do
 		Currencies.Delete(ItemForDelete);
 	EndDo;

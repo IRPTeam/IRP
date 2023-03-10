@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4be43e8c-8e6d-435b-a691-7e9af7bd9d5e">
+ <producedTypes>
+  <containerType typeId="589c657f-1420-45fe-9663-e607ef5796d0" valueTypeId="66a17037-8e26-4021-a4e4-67f97d91f238"/>
+ </producedTypes>
+ <name>AdditionalTableControlDocument</name>
+ <synonym>
+  <key>en</key>
+  <value>Additional table control document</value>
+ </synonym>
+ <type>
+  <types>DocumentRef.RetailSalesReceipt</types>
+  <types>DocumentRef.GoodsReceipt</types>
+  <types>DocumentRef.Bundling</types>
+  <types>DocumentRef.InternalSupplyRequest</types>
+  <types>DocumentRef.InventoryTransfer</types>
+  <types>DocumentRef.InventoryTransferOrder</types>
+  <types>DocumentRef.ItemStockAdjustment</types>
+  <types>DocumentRef.PhysicalCountByLocation</types>
+  <types>DocumentRef.PhysicalInventory</types>
+  <types>DocumentRef.PurchaseInvoice</types>
+  <types>DocumentRef.PurchaseOrder</types>
+  <types>DocumentRef.PurchaseReturn</types>
+  <types>DocumentRef.PurchaseReturnOrder</types>
+  <types>DocumentRef.RetailReturnReceipt</types>
+  <types>DocumentRef.SalesInvoice</types>
+  <types>DocumentRef.SalesOrder</types>
+  <types>DocumentRef.SalesReportFromTradeAgent</types>
+  <types>DocumentRef.SalesReportToConsignor</types>
+  <types>DocumentRef.SalesReturn</types>
+  <types>DocumentRef.SalesReturnOrder</types>
+  <types>DocumentRef.ShipmentConfirmation</types>
+  <types>DocumentRef.StockAdjustmentAsSurplus</types>
+  <types>DocumentRef.StockAdjustmentAsWriteOff</types>
+  <types>DocumentRef.Unbundling</types>
+  <types>DocumentObject.RetailSalesReceipt</types>
+  <types>DocumentObject.GoodsReceipt</types>
+  <types>DocumentObject.Bundling</types>
+  <types>DocumentObject.InternalSupplyRequest</types>
+  <types>DocumentObject.InventoryTransfer</types>
+  <types>DocumentObject.InventoryTransferOrder</types>
+  <types>DocumentObject.ItemStockAdjustment</types>
+  <types>DocumentObject.PhysicalCountByLocation</types>
+  <types>DocumentObject.PhysicalInventory</types>
+  <types>DocumentObject.PurchaseInvoice</types>
+  <types>DocumentObject.PurchaseOrder</types>
+  <types>DocumentObject.PurchaseReturn</types>
+  <types>DocumentObject.PurchaseReturnOrder</types>
+  <types>DocumentObject.RetailReturnReceipt</types>
+  <types>DocumentObject.SalesInvoice</types>
+  <types>DocumentObject.SalesOrder</types>
+  <types>DocumentObject.SalesReportFromTradeAgent</types>
+  <types>DocumentObject.SalesReportToConsignor</types>
+  <types>DocumentObject.SalesReturn</types>
+  <types>DocumentObject.SalesReturnOrder</types>
+  <types>DocumentObject.ShipmentConfirmation</types>
+  <types>DocumentObject.StockAdjustmentAsSurplus</types>
+  <types>DocumentObject.StockAdjustmentAsWriteOff</types>
+  <types>DocumentObject.Unbundling</types>
+  <types>DocumentObject.Bundling</types>
+ </type>
+</mdclass:DefinedType>

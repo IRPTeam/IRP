@@ -1258,8 +1258,24 @@ Scenario: _400012 create OpeningEntry (employee cash advance)
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And "List" table contains lines
-			| 'Number' |
-			|  '$$NumberOpeningEntry400012$$'    |
+			| 'Number'                       |
+			| '$$NumberOpeningEntry400012$$' |
+		And I go to line in "List" table
+			| 'Number'                       |
+			| '$$NumberOpeningEntry400012$$' |
+		And I select current line in "List" table
+	* Check change sum
+		And I go to line in "EmployeeCashAdvance" table
+			| 'Amount'   | 'Currency' | 'Employee'    | 'Financial movement type' |
+			| '1 000,00' | 'TRY'      | 'Arina Brown' | 'Movement type 1'         |
+		And I select current line in "EmployeeCashAdvance" table
+		And I input "1 200,00" text in "Amount" field of "EmployeeCashAdvance" table
+		And I finish line editing in "EmployeeCashAdvance" table
+		And I click "Save" button
+		And "EmployeeCashAdvance" table contains lines
+			| '#' | 'Amount'   | 'Employee'      | 'Currency' | 'Account'           | 'Financial movement type' |
+			| '1' | '1 200,00' | 'Arina Brown'   | 'TRY'      | 'Bank account, TRY' | 'Movement type 1'         |
+			| '2' | '100,00'   | 'David Romanov' | 'USD'      | 'Bank account, USD' | 'Movement type 1'         |			
 		And I close all client application windows
 				
 
@@ -1320,8 +1336,24 @@ Scenario: _400013 create OpeningEntry (salary payment)
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And "List" table contains lines
-			| 'Number' |
-			|  '$$NumberOpeningEntry400013$$'    |
+			| 'Number'                       |
+			| '$$NumberOpeningEntry400013$$' |
+		And I go to line in "List" table
+			| 'Number'                       |
+			| '$$NumberOpeningEntry400013$$' |
+		And I select current line in "List" table
+	* Check change sum
+		And I go to line in "SalaryPayment" table
+			| 'Amount'   | 'Currency' | 'Employee'    |
+			| '1 000,00' | 'TRY'      | 'Arina Brown' |
+		And I select current line in "SalaryPayment" table
+		And I input "1 200,00" text in "Amount" field of "SalaryPayment" table
+		And I finish line editing in "SalaryPayment" table
+		And I click "Save" button
+		And "SalaryPayment" table contains lines
+			| '#' | 'Amount'   | 'Employee'      | 'Currency' | 
+			| '1' | '1 200,00' | 'Arina Brown'   | 'TRY'      |
+			| '2' | '2 000,00' | 'David Romanov' | 'TRY'      |		
 		And I close all client application windows
 			
 
@@ -1382,8 +1414,23 @@ Scenario: _400014 create OpeningEntry (advance from retail customer)
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And "List" table contains lines
-			| 'Number' |
-			|  '$$NumberOpeningEntry400014$$'    |
+			| 'Number'                       |
+			| '$$NumberOpeningEntry400014$$' |
+		And I go to line in "List" table
+			| 'Number'                       |
+			| '$$NumberOpeningEntry400014$$' |
+		And I select current line in "List" table
+	* Check change sum
+		And I go to line in "AdvanceFromRetailCustomers" table
+			| 'Amount'   | 'Currency' | 'Retail customer' |
+			| '1 000,00' | 'TRY'      | 'Sam Jons'        |
+		And I select current line in "AdvanceFromRetailCustomers" table
+		And I input "1 200,00" text in "Amount" field of "AdvanceFromRetailCustomers" table
+		And I finish line editing in "AdvanceFromRetailCustomers" table
+		And I click "Save" button
+		And "AdvanceFromRetailCustomers" table contains lines
+			| 'Amount'   | 'Retail customer' | 'Currency' |
+			| '1 200,00' | 'Sam Jons'        | 'TRY'      |
 		And I close all client application windows
 
 

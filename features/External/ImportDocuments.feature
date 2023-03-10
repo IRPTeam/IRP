@@ -6199,3 +6199,6 @@ Scenario: Create document Retail sales receipt and Retail return receipt (paymen
 		| 'e1cib/data/Document.RetailReturnReceipt?ref=b79392df2896a84411eda20a5f1be015' | '7bb36579-ce08-4209-9e5c-da76a067e634' | 'f0d6d2f9-9bcb-4bb7-b9fd-6ca1974a5ac0' | 10         | 'e1cib/data/Document.RetailSalesReceipt?ref=b790eb46b44093f611ed877301bc694f' | 'e1cib/data/Catalog.MovementRules?refName=RRR' | ''         | 'e1cib/data/Catalog.RowIDs?ref=b79392df2896a84411eda208098abbdd' | 'f0d6d2f9-9bcb-4bb7-b9fd-6ca1974a5ac0' |
 		| 'e1cib/data/Document.RetailReturnReceipt?ref=b79392df2896a84411eda20a5f1be015' | '916d8bff-4e7d-42a8-a473-daac15c7c0f6' | 'd5ec9894-77d7-44f6-a74b-c7868ebdf6c6' | 1          | 'e1cib/data/Document.RetailSalesReceipt?ref=b790eb46b44093f611ed877301bc694f' | 'e1cib/data/Catalog.MovementRules?refName=RRR' | ''         | 'e1cib/data/Catalog.RowIDs?ref=b79392df2896a84411eda208098abbde' | 'd5ec9894-77d7-44f6-a74b-c7868ebdf6c6' |
 
+
+
+	

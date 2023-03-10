@@ -123,10 +123,10 @@ Scenario: _034001 check the Document discount in Purchase order
 		And in the table "Offers" I click "OK" button
 	* Check the discount calculation
 		And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Quantity'       | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
-		| 'Dress'    | '200,00' | 'M/White'   | '100,000' | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |
-		| 'Dress'    | '210,00' | 'L/Green'   | '200,000' | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
-		| 'Trousers' | '250,00' | '36/Yellow' | '300,000' | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
+		| 'Item'     | 'Price'  | 'Item key'  | 'Quantity' | 'Offers amount' | 'Unit' | 'Total amount' | 'Store'    |
+		| 'Dress'    | '200,00' | 'M/White'   | '100,000'  | '2 000,00'      | 'pcs'  | '18 000,00'    | 'Store 01' |
+		| 'Dress'    | '210,00' | 'L/Green'   | '200,000'  | '4 200,00'      | 'pcs'  | '37 800,00'    | 'Store 01' |
+		| 'Trousers' | '250,00' | '36/Yellow' | '300,000'  | '7 500,00'      | 'pcs'  | '67 500,00'    | 'Store 01' |
 	* Check the transfer of the discount value from Purchase order to Purchase invoice when creating based on
 		And I click the button named "FormPost"
 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"

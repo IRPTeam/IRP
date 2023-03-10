@@ -28,4 +28,5 @@
  <subsystems>KeysCatalogs</subsystems>
  <subsystems>Retail</subsystems>
  <subsystems>Production</subsystems>
+ <subsystems>AdditionalControl</subsystems>
 </mdclass:Subsystem>

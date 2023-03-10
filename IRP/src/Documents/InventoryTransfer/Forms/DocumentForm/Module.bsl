@@ -1,3 +1,4 @@
+
 #Region FORM
 
 &AtServer
@@ -229,6 +230,15 @@ EndProcedure
 &AtClient
 Procedure ItemListSourceOfOriginsPresentationClearing(Item, StandardProcessing)
 	SourceOfOriginClient.PresentationClearing(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region INVENTORY_ORIGIN
+
+&AtClient
+Procedure ItemListInventoryOriginOnChange(Item)
+	DocInventoryTransferClient.ItemListInventoryOriginOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

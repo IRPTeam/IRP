@@ -412,11 +412,12 @@ Scenario: _0156052 check items in the document by scan barcode (document without
 			| 'Item'               | 'Item key' | 'Unit' | 'Scanned serial lot number' | 'Quantity' | 'Scanned' |
 			| 'Dress'              | 'L/Green'  | 'pcs'  | ''                          | '2,000'    | '2,000'   |
 			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | ''                          | ''         | '2,000'   |
-		And "ScanHistory" table became equal
+		And "ScanHistory" table contains lines
 			| 'Barcode'    | 'Count' | 'Period' |
 			| '2202283739' | '2'     | '*'      |
 			| '8908899881' | '1'     | '*'      |
 			| '8908899880' | '1'     | '*'      |
+		Then the number of "ScanHistory" table lines is "равно" "3"
 		And I click "Done" button
 	* Check itemlist tab
 		And "ItemList" table became equal

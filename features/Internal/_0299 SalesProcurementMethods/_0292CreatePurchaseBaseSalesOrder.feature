@@ -932,6 +932,23 @@ Scenario: _029210 SO - PO - GR - SC - PI - SI
 			| 'Trousers' | '38/Yellow' | '$$SalesOrder029210$$' | '$$PurchaseOrder029210$$' |
 			| 'Shirt'    | '38/Black'  | '$$SalesOrder029210$$' | '$$PurchaseOrder029210$$' |
 			| 'Dress'    | 'M/White'   | '$$SalesOrder029210$$' | '$$PurchaseOrder029210$$' |
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key' |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
 		And I click "Post" button
 		And I delete "$$NumberPurchaseInvoice029210$$" variable
 		And I delete "$$PurchaseInvoice029210$$" variable
@@ -1116,6 +1133,23 @@ Scenario: _029212 SO - PO - GR - PI - SC - SI
 			| 'Trousers' | '38/Yellow' | '$$SalesOrder029212$$' | '$$PurchaseOrder029212$$' |
 			| 'Shirt'    | '38/Black'  | '$$SalesOrder029212$$' | '$$PurchaseOrder029212$$' |
 			| 'Dress'    | 'M/White'   | '$$SalesOrder029212$$' | '$$PurchaseOrder029212$$' |
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key' |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
 		And I click "Post" button
 		And I delete "$$NumberPurchaseInvoice029212$$" variable
 		And I delete "$$PurchaseInvoice029212$$" variable
@@ -1304,6 +1338,23 @@ Scenario: _029216 SO - PO - PI - SI
 			| 'Trousers' | '38/Yellow' | '$$SalesOrder029216$$' | '$$PurchaseOrder029216$$' |
 			| 'Shirt'    | '38/Black'  | '$$SalesOrder029216$$' | '$$PurchaseOrder029216$$' |
 			| 'Dress'    | 'M/White'   | '$$SalesOrder029216$$' | '$$PurchaseOrder029216$$' |
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key' |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
 		And I click "Post" button
 		And I delete "$$NumberPurchaseInvoice029216$$" variable
 		And I delete "$$PurchaseInvoice029216$$" variable
@@ -1454,6 +1505,23 @@ Scenario: _029218 SO - PO - PI - SI - SC
 			| 'Trousers' | '38/Yellow' | '$$SalesOrder029218$$' | '$$PurchaseOrder029218$$' |
 			| 'Shirt'    | '38/Black'  | '$$SalesOrder029218$$' | '$$PurchaseOrder029218$$' |
 			| 'Dress'    | 'M/White'   | '$$SalesOrder029218$$' | '$$PurchaseOrder029218$$' |
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key' |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
 		And I click "Post" button
 		And I delete "$$NumberPurchaseInvoice029218$$" variable
 		And I delete "$$PurchaseInvoice029218$$" variable
@@ -1643,6 +1711,23 @@ Scenario: _029220 SO - PO - PI - GR - SI
 			| 'Dress'    | 'M/White'   | '$$SalesOrder029220$$' | '$$PurchaseOrder029220$$' |
 		And for each line of "ItemList" table I do
 			And I set "Use goods receipt" checkbox in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key' |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
 		And I click "Post" button
 		And I delete "$$NumberPurchaseInvoice029220$$" variable
 		And I delete "$$PurchaseInvoice029220$$" variable
@@ -1830,6 +1915,23 @@ Scenario: _029222 SO - PO - PI - SC - SI
 			| 'Trousers' | '38/Yellow' | '$$SalesOrder029222$$' | '$$PurchaseOrder029222$$' |
 			| 'Shirt'    | '38/Black'  | '$$SalesOrder029222$$' | '$$PurchaseOrder029222$$' |
 			| 'Dress'    | 'M/White'   | '$$SalesOrder029222$$' | '$$PurchaseOrder029222$$' |
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key' |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
 		And I click "Post" button
 		And I delete "$$NumberPurchaseInvoice029222$$" variable
 		And I delete "$$PurchaseInvoice029222$$" variable
@@ -2017,6 +2119,23 @@ Scenario: _029224 SO - PO - PI  - GR - SI - SC
 			| 'Dress'    | 'M/White'   | '$$SalesOrder029224$$' | '$$PurchaseOrder029224$$' |
 		And for each line of "ItemList" table I do
 			And I set "Use goods receipt" checkbox in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key' |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
 		And I click "Post" button
 		And I delete "$$NumberPurchaseInvoice029224$$" variable
 		And I delete "$$PurchaseInvoice029224$$" variable
@@ -2242,6 +2361,23 @@ Scenario: _029226 SO - PO - PI  - GR - SC - SI
 			| 'Dress'    | 'M/White'   | '$$SalesOrder029226$$' | '$$PurchaseOrder029226$$' |
 		And for each line of "ItemList" table I do
 			And I set "Use goods receipt" checkbox in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key' |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
 		And I click "Post" button
 		And I delete "$$NumberPurchaseInvoice029226$$" variable
 		And I delete "$$PurchaseInvoice029226$$" variable
@@ -2463,6 +2599,23 @@ Scenario: _029214 SO - PO - PI - SI - GR - SC
 			| 'Trousers' | '38/Yellow' | '$$SalesOrder029214$$' | '$$PurchaseOrder029214$$' |
 			| 'Shirt'    | '38/Black'  | '$$SalesOrder029214$$' | '$$PurchaseOrder029214$$' |
 			| 'Dress'    | 'M/White'   | '$$SalesOrder029214$$' | '$$PurchaseOrder029214$$' |
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key' |
+			| 'Trousers' | '38/Yellow' |
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I select current line in "ItemList" table
+		And I input "300,00" text in "Price" field of "ItemList" table
 		And for each line of "ItemList" table I do
 			And I set "Use goods receipt" checkbox in "ItemList" table
 		And I click "Post" button

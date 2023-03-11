@@ -860,25 +860,22 @@ Procedure FillRowID_PI(Source, Cancel)
 			EndDo;
 			
 			IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
-			If IDInfoRows.Count() <> 1 Then
-				Raise "FillRowID_PI() -> for linked row -> IDInfoRows.Count() <> 1";
-			EndIf;
+			For Each Row In IDInfoRows Do
+				Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
 			
-			Row = IDInfoRows[0];
-			Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
-			
-			If ValueIsFilled(RowItemList.SalesOrder) Then
+				If ValueIsFilled(RowItemList.SalesOrder) Then
 				
-				NewRow = Source.RowIDInfo.Add();
-				FillPropertyValues(NewRow, Row);
-				NewRow.CurrentStep = Undefined;
-				If RowItemList.IsService Then
-					NewRow.NextStep = Catalogs.MovementRules.SI
-				Else // is product
-					NewRow.NextStep = Catalogs.MovementRules.SI_SC
+					NewRow = Source.RowIDInfo.Add();
+					FillPropertyValues(NewRow, Row);
+					NewRow.CurrentStep = Undefined;
+					If RowItemList.IsService Then
+						NewRow.NextStep = Catalogs.MovementRules.SI
+					Else // is product
+						NewRow.NextStep = Catalogs.MovementRules.SI_SC
+					EndIf;
+				
 				EndIf;
-				
-			EndIf;
+			EndDo;
 			
 		EndIf;
 	EndDo;

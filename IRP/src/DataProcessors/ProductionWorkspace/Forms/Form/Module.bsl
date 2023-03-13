@@ -39,9 +39,7 @@ Procedure PlanningRefreshRequestProcessingAtServer()
 	|FROM
 	|	Catalog.PlanningPeriods AS PlanningPeriods
 	|WHERE
-	|	PlanningPeriods.BeginDate <= &CurrentDate
-	|	AND PlanningPeriods.EndDate >= &CurrentDate
-	|	AND PlanningPeriods.Type = VALUE(Enum.PlanningPeriodTypes.Manufacturing)
+	|	PlanningPeriods.Type = VALUE(Enum.PlanningPeriodTypes.Manufacturing)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -109,6 +107,27 @@ Procedure PlanningRefreshRequestProcessingAtServer()
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
+	|	Closing.Company AS Company,
+	|	Closing.BusinessUnit AS BusinessUnit,
+	|	Closing.ItemKey AS ItemKey,
+	|	Closing.PlanningType AS PlanningType,
+	|	Closing.PlanningPeriod AS PlanningPeriod,
+	|	Closing.BillOfMaterials AS BillOfMaterials,
+	|	Closing.PlanningDocument AS PlanningDocument,
+	|	Closing.QuantityTurnover AS Quantity
+	|INTO Closing
+	|FROM
+	|	AccumulationRegister.R7030T_ProductionPlanning.Turnovers(,,, PlanningPeriod IN
+	|		(SELECT
+	|			PlanningPeriods.PlanningPeriod
+	|		FROM
+	|			PlanningPeriods AS PlanningPeriods)
+	|	AND PlanningType = VALUE(Enum.ProductionPlanningTypes.Closing)
+	|	AND ItemKey = &ItemKey) AS Closing
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
 	|	Planned.Company AS Company,
 	|	Planned.BusinessUnit AS BusinessUnit,
 	|	Planned.ItemKey.Item AS Item,
@@ -117,7 +136,7 @@ Procedure PlanningRefreshRequestProcessingAtServer()
 	|	Planned.BillOfMaterials AS BillOfMaterials,
 	|	Planned.PlanningDocument AS PlanningDocument,
 	|	Planned.Quantity - ISNULL(Produced.Quantity, 0) AS BasisQuantity
-	|INTO PlannedProduced
+	|INTO PlannedProducedTmp
 	|FROM
 	|	Planned AS Planned
 	|		LEFT JOIN Produced AS Produced
@@ -127,6 +146,28 @@ Procedure PlanningRefreshRequestProcessingAtServer()
 	|		AND Planned.PlanningPeriod = Produced.PlanningPeriod
 	|		AND Planned.BillOfMaterials = Produced.BillOfMaterials
 	|		AND Planned.PlanningDocument = Produced.PlanningDocument
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	PlannedProducedTmp.Company AS Company,
+	|	PlannedProducedTmp.BusinessUnit AS BusinessUnit,
+	|	PlannedProducedTmp.ItemKey.Item AS Item,
+	|	PlannedProducedTmp.ItemKey AS ItemKey,
+	|	PlannedProducedTmp.PlanningPeriod AS PlanningPeriod,
+	|	PlannedProducedTmp.BillOfMaterials AS BillOfMaterials,
+	|	PlannedProducedTmp.PlanningDocument AS PlanningDocument,
+	|	PlannedProducedTmp.BasisQuantity + ISNULL(Closing.Quantity, 0) AS BasisQuantity
+	|INTO PlannedProduced
+	|FROM
+	|	PlannedProducedTmp AS PlannedProducedTmp
+	|		LEFT JOIN Closing AS Closing
+	|		ON PlannedProducedTmp.Company = Closing.Company
+	|		AND PlannedProducedTmp.BusinessUnit = Closing.BusinessUnit
+	|		AND PlannedProducedTmp.ItemKey = Closing.ItemKey
+	|		AND PlannedProducedTmp.PlanningPeriod = Closing.PlanningPeriod
+	|		AND PlannedProducedTmp.BillOfMaterials = Closing.BillOfMaterials
+	|		AND PlannedProducedTmp.PlanningDocument = Closing.PlanningDocument
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////

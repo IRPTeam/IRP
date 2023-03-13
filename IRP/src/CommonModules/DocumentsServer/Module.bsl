@@ -16,6 +16,8 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 			DocumentsClientServer.ChangeTitleCollapse(Object, Form, Not ValueIsFilled(Object.Ref));
 		EndIf;
 	EndIf;
+	
+	SetMarkNegativesItemList(Object, Form);
 
 	ExternalCommandsServer.CreateCommands(Form, Object.Ref.Metadata().FullName(), Enums.FormTypes.ObjectForm);
 	CopyPasteServer.CreateCommands(Form, Object.Ref.Metadata().FullName(), Enums.FormTypes.ObjectForm);
@@ -101,6 +103,46 @@ Function CheckItemListStores(Object) Export
 
 	Return True;
 EndFunction
+
+// Set mark negatives item list.
+// 
+// Parameters:
+//  Object - FormDataStructure - Object
+//  Form - ClientApplicationForm - Form
+Procedure SetMarkNegativesItemList(Object, Form) Export
+	
+	If Object.Property("ItemList") Then
+		FormItemList = Form.Items.Find("ItemList");
+		If FormItemList = Undefined Then
+			For Each FormItem In Form.Items Do
+				If StrEndsWith(FormItem.DataPath, ".ItemList") Then
+					FormItemList = FormItem;
+					Break;
+				EndIf;
+			EndDo; 
+		EndIf;
+		If FormItemList = Undefined Then
+			Return;
+		EndIf;
+		
+		ConditionalAppearanceItem = Form.ConditionalAppearance.Items.Add();
+		ConditionalAppearanceItem.Appearance.SetParameterValue("MarkNegatives", True);
+		For Each FormItem In FormItemList.ChildItems Do
+			If FormItem.Type = FormGroupType.ColumnGroup Then
+				For Each FormChildItem In FormItem.ChildItems Do
+					AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
+					AppearanceField.Field = New DataCompositionField(FormChildItem.Name);
+					AppearanceField.Use = True;
+				EndDo;
+			Else
+				AppearanceField = ConditionalAppearanceItem.Fields.Items.Add();
+				AppearanceField.Field = New DataCompositionField(FormItem.Name);
+				AppearanceField.Use = True;
+			EndIf;
+		EndDo;
+	EndIf;
+	
+EndProcedure
 
 #EndRegion
 

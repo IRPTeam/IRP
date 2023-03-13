@@ -343,6 +343,7 @@ EndFunction
 
 Procedure CreateAndLinkFileToObject(Volume, FileInfo, OwnerRef) Export
 	NewFileRef = CreateFile(Volume, FileInfo);
+	FileInfo.Insert("Ref", NewFileRef);
 	LinkFileToObject(NewFileRef, OwnerRef);
 EndProcedure
 

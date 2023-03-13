@@ -80,15 +80,17 @@ Scenario: _5003 create IT + PR from Production Workspace (product)
 		Then the form attribute named "Item" became equal to "Стремянка номер 6 ступенчатая"
 		Then the form attribute named "ItemKey" became equal to "Стремянка номер 6 ступенчатая"
 		And "Planning" table became equal
-			| 'Planning period' | 'Left to produce' | 'Production planning'                             |
-			| 'First month'     | '80,000'          | 'Production planning 1 dated 29.04.2022 09:40:47' |
+			| 'Production planning'                             | 'Planning period' | 'Left to produce' |
+			| 'Production planning 1 dated 29.04.2022 09:40:47' | 'First month'     | '80,000'          |
+			| 'Production planning 2 dated 29.04.2022 09:42:27' | 'Second month'    | '122,000'         |		
 		Then the form attribute named "Unit" became equal to "pcs"
 	* Create IT + PR
 		And I input "2,000" text in the field named "Quantity"
 		And I move to the next attribute
 		And "Planning" table became equal
-			| 'Planning period' | 'Left to produce' | 'Production planning'                             |
-			| 'First month'     | '80,000'          | 'Production planning 1 dated 29.04.2022 09:40:47' |	
+			| 'Production planning'                             | 'Planning period' | 'Left to produce' |
+			| 'Production planning 1 dated 29.04.2022 09:40:47' | 'First month'     | '80,000'          |
+			| 'Production planning 2 dated 29.04.2022 09:42:27' | 'Second month'    | '122,000'         |		
 		And I click "PR+IT" button
 		And field "DocProduction" is filled
 		And field "DocInventoryTransfer" is filled
@@ -155,8 +157,9 @@ Scenario: _5004 create IT from Production Workspace (product)
 		And I select from the drop-down list named "Unit" by "pcs" string
 		And I move to the tab named "GroupInventoryTransfer"
 		And "Planning" table became equal
-			| 'Planning period' | 'Left to produce' | 'Production planning'                             |
-			| 'First month'     | '78,000'          | 'Production planning 1 dated 29.04.2022 09:40:47' |	
+			| 'Production planning'                             | 'Planning period' | 'Left to produce' |
+			| 'Production planning 1 dated 29.04.2022 09:40:47' | 'First month'     | '78,000'          |
+			| 'Production planning 2 dated 29.04.2022 09:42:27' | 'Second month'    | '122,000'         |		
 		And I click "IT" button
 	* Check creation
 		When I Check the steps for Exception

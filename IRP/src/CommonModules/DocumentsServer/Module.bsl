@@ -115,7 +115,7 @@ Procedure SetMarkNegativesItemList(Object, Form) Export
 		FormItemList = Form.Items.Find("ItemList");
 		If FormItemList = Undefined Then
 			For Each FormItem In Form.Items Do
-				If StrEndsWith(FormItem.DataPath, ".ItemList") Then
+				If TypeOf(FormItem) = Type("FormTable") And StrEndsWith(FormItem.DataPath, ".ItemList") Then
 					FormItemList = FormItem;
 					Break;
 				EndIf;

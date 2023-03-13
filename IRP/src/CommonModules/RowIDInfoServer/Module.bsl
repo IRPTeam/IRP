@@ -10146,7 +10146,9 @@ Procedure CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, Basises
 					ResultsFilter.Insert("BasisKey", DeepLevelRow.Key);
 					ResultsFilter.Insert("Basis", DeepLevelRow.Basis);
 					If ResultsTable.FindRows(ResultsFilter).Count() Then
-						DeepLevelRow.Use = True;
+						If CommonFunctionsClientServer.ObjectHasProperty(DeepLevelRow, "Use") Then
+							DeepLevelRow.Use = True;
+						EndIf;
 						DeepLevelRow.Linked = True;
 					EndIf;
 
@@ -10759,7 +10761,7 @@ Procedure GetBasisInfoRecursive(Basis, BasisKey, RowID, ResultTable, Key)
 		NewRow = ResultTable.Add();
 		NewRow.Key = Key;
 		NewRow.Recorder = BasisInfo.ParentBasis;
-		GetBasisInfoRecursive(BasisInfo.Basis, BasisInfo.BasisKey, RowID, ResultTable, Key)
+		GetBasisInfoRecursive(BasisInfo.ParentBasis, BasisInfo.BasisKey, RowID, ResultTable, Key)
 	EndIf;
 EndProcedure
 

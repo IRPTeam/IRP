@@ -191,13 +191,13 @@ Scenario: _0206005 сheck data verification in Inventory transfer order
 		And I click "Finish editing" button
 		And I click "Generate" button
 	* Check report
-		Then "Result" spreadsheet document is equal
-			| 'Filter:'                                                  | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Inventory transfer order"'                                                                                                                              |
-			| ''                                                         | ''                                                                                                                                                                                                                                       |
-			| 'Document type'                                            | ''                                                                                                                                                                                                                                       |
-			| 'Reference'                                                | 'Status'                                                                                                                                                                                                                                 |
-			| 'Inventory transfer order'                                 | ''                                                                                                                                                                                                                                       |
-			| 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12' | 'Row: 1. Quantity in base unit is zero\nRow: 1. Quantity not equal quantity in base unit when unit quantity equal 1\nRow: 2. Quantity in base unit is zero\nRow: 2. Quantity not equal quantity in base unit when unit quantity equal 1' |	
+		Then "Result" spreadsheet document is equal by template
+			| 'Filter:'                                                  | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Inventory transfer order"'                                                                                                                                                                                                                                                                  |
+			| ''                                                         | ''                                                                                                                                                                                                                                                                                                                                                                           |
+			| 'Document type'                                            | ''                                                                                                                                                                                                                                                                                                                                                                           |
+			| 'Reference'                                                | 'Status'                                                                                                                                                                                                                                                                                                                                                                     |
+			| 'Inventory transfer order'                                 | ''                                                                                                                                                                                                                                                                                                                                                                           |
+			| 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12' | 'Row: 1. Quantity in base unit is zero\nRow: 1. Quantity not equal quantity in base unit when unit quantity equal 1\nRow: 1. Quantity in item list is not equal to quantity in row ID\nRow: 2. Quantity in base unit is zero\nRow: 2. Quantity not equal quantity in base unit when unit quantity equal 1\nRow: 2. Quantity in item list is not equal to quantity in row ID' |		
 	And I close all client application windows	
 
 Scenario: _0206006 сheck data verification in Internal supply request
@@ -218,12 +218,12 @@ Scenario: _0206006 сheck data verification in Internal supply request
 		And I click "Generate" button
 	* Check report
 		Then "Result" spreadsheet document is equal
-			| 'Filter:'                                                 | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Internal supply request"'                          |
-			| ''                                                        | ''                                                                                                                                  |
-			| 'Document type'                                           | ''                                                                                                                                  |
-			| 'Reference'                                               | 'Status'                                                                                                                            |
-			| 'Internal supply request'                                 | ''                                                                                                                                  |
-			| 'Internal supply request 8 811 dated 10.03.2023 17:24:29' | 'Row: 1. Quantity is zero\nRow: 1. Quantity in base unit is zero\nRow: 1. Quantity in item list is not equal to quantity in row ID' |	
+			| 'Filter:'                                                 | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Internal supply request"' |
+			| ''                                                        | ''                                                                                                         |
+			| 'Document type'                                           | ''                                                                                                         |
+			| 'Reference'                                               | 'Status'                                                                                                   |
+			| 'Internal supply request'                                 | ''                                                                                                         |
+			| 'Internal supply request 8 811 dated 10.03.2023 17:24:29' | 'Row: 1. Quantity is zero\nRow: 1. Quantity in base unit is zero'                                          |		
 	And I close all client application windows
 
 
@@ -245,11 +245,11 @@ Scenario: _0206007 сheck data verification in Sales order
 		And I click "Generate" button
 	* Check report
 		Then "Result" spreadsheet document is equal
-			| 'Filter:'                                     | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Sales order"'                      |
-			| ''                                            | ''                                                                                                                  |
-			| 'Document type'                               | ''                                                                                                                  |
-			| 'Reference'                                   | 'Status'                                                                                                            |
-			| 'Sales order'                                 | ''                                                                                                                  |
-			| 'Sales order 8 811 dated 10.03.2023 17:32:00' | 'Row: 1. Net amount is greater than total amount\nRow: 1. Total amount minus net amount is not equal to tax amount' |	
+			| 'Filter:'                                     | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Sales order"'                                                                                                                                                          |
+			| ''                                            | ''                                                                                                                                                                                                                                                      |
+			| 'Document type'                               | ''                                                                                                                                                                                                                                                      |
+			| 'Reference'                                   | 'Status'                                                                                                                                                                                                                                                |
+			| 'Sales order'                                 | ''                                                                                                                                                                                                                                                      |
+			| 'Sales order 8 811 dated 10.03.2023 17:32:00' | 'Row: 1. Quantity in item list is not equal to quantity in row ID\nRow: 1. Net amount is greater than total amount\nRow: 1. Total amount minus net amount is not equal to tax amount\nRow: 2. Quantity in item list is not equal to quantity in row ID' |	
 	And I close all client application windows	
 

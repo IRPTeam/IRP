@@ -826,9 +826,10 @@ Procedure FillRowID_PO(Source, Cancel)
 EndProcedure
 
 Procedure FillRowID_PI(Source, Cancel)
+	
 	For Each RowItemList In Source.ItemList Do
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
-		// not linked
+		// remove not linked
 		ArrayForDelete = New Array();
 		For Each Row In IDInfoRows Do
 			If Not ValueIsFilled(Row.Basis) Then
@@ -842,12 +843,14 @@ Procedure FillRowID_PI(Source, Cancel)
 		
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		
-		If IDInfoRows.Count() = 0 Then
+		If IDInfoRows.Count() = 0 Then // not linked
+			
 			Row = Source.RowIDInfo.Add();
 			FillRowID(Row, RowItemList);
 			Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
-		Else
-			// linked
+		
+		Else // linked
+		
 			ArrayForDelete = New Array();
 			For Each Row In IDInfoRows Do
 				If ValueIsFilled(Row.Basis) And Not ValueIsFilled(Row.CurrentStep) Then
@@ -863,17 +866,16 @@ Procedure FillRowID_PI(Source, Cancel)
 			For Each Row In IDInfoRows Do
 				Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
 			
-				If ValueIsFilled(RowItemList.SalesOrder) Then
+				If ValueIsFilled(RowItemList.SalesOrder) And Not RowItemList.IsService Then
 				
-					NewRow = Source.RowIDInfo.Add();
-					FillPropertyValues(NewRow, Row);
-					NewRow.CurrentStep = Undefined;
-					If RowItemList.IsService Then
-						NewRow.NextStep = Catalogs.MovementRules.SI
-					Else // is product
-						NewRow.NextStep = Catalogs.MovementRules.SI_SC
+					NextStep = GetNextStep_PI(Source, RowItemList, Row, True);
+					If ValueIsFilled(NextStep) Then
+						NewRow = Source.RowIDInfo.Add();
+						FillPropertyValues(NewRow, Row);
+						NewRow.CurrentStep = Undefined;					
+						NewRow.NextStep = NextStep;
 					EndIf;
-				
+
 				EndIf;
 			EndDo;
 			
@@ -883,14 +885,29 @@ EndProcedure
 
 Procedure FillRowID_GR(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
-		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
-		If IDInfoRows.Count() = 0 Then
+		// remove not linked
+		ArrayForDelete = New Array();
+		For Each Row In IDInfoRows Do
+			If Not ValueIsFilled(Row.Basis) Then
+				ArrayForDelete.Add(Row);
+			EndIf;
+		EndDo;
+		
+		For Each ItemForDelete In ArrayForDelete Do
+			Source.RowIDInfo.Delete(ItemForDelete);
+		EndDo;
+		
+		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		
+		If IDInfoRows.Count() = 0 Then // not linked
+			
 			Row = Source.RowIDInfo.Add();
 			FillRowID(Row, RowItemList);
 			Row.NextStep = GetNextStep_GR(Source, RowItemList, Row);
-		Else
-
+		
+		Else // linked
+		
 			IDInfoRowsTable = Source.RowIDInfo.Unload().Copy(New Structure("Key", RowItemList.Key));
 			CurrentStep = Undefined;
 			For Each Row In IDInfoRowsTable Do
@@ -901,9 +918,11 @@ Procedure FillRowID_GR(Source, Cancel)
 			EndDo;
 			IDInfoRowsTable.FillValues(CurrentStep, "CurrentStep");
 			IDInfoRowsTable.GroupBy("Key, RowID, Basis, CurrentStep, RowRef, BasisKey");
+			
 			For Each Row In IDInfoRows Do
 				Source.RowIDInfo.Delete(Row);
 			EndDo;
+			
 			TotalQuantity = 0;
 			For Each Row In IDInfoRowsTable Do
 				NewRow = Source.RowIDInfo.Add();
@@ -922,32 +941,27 @@ Procedure FillRowID_GR(Source, Cancel)
 					NewRow = Source.RowIDInfo.Add();
 					FillPropertyValues(NewRow, Row);
 					NewRow.CurrentStep = Undefined;
-					NewRow.NextStep = Catalogs.MovementRules.PI;
+					NewRow.NextStep = GetNextStep_GR(Source, RowItemList, NewRow);
 					NewRow.Quantity = RowItemList.QuantityInBaseUnit - TotalQuantity;
 				EndDo;
 			EndIf;
+			
+			IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+			For Each Row In IDInfoRows Do
+				If ValueIsFilled(RowItemList.SalesOrder) Then
+					NextStep = GetNextStep_GR(Source, RowItemList, Row, True);
+					
+					If ValueIsFilled(NextStep) Then
+						NewRow = Source.RowIDInfo.Add();
+						FillPropertyValues(NewRow, Row);
+						NewRow.CurrentStep = Undefined;
+						NewRow.NextStep = NextStep;
+					EndIf;
+					
+				EndIf;
+			EndDo;
+
 		EndIf;
-	EndDo;
-
-	NewRows = New Map();
-
-	For Each Row In Source.RowIDInfo Do
-		If Not ValueIsFilled(Row.CurrentStep) Then
-			Continue;
-		EndIf;
-		For Each RowItemList In Source.ItemList.FindRows(New Structure("Key", Row.Key)) Do
-			If ValueIsFilled(RowItemList.SalesOrder) Then
-				NewRows.Insert(Row, RowItemList.QuantityInBaseUnit);
-			EndIf;
-		EndDo;
-	EndDo;
-
-	For Each Row In NewRows Do
-		NewRow = Source.RowIDInfo.Add();
-		FillPropertyValues(NewRow, Row.Key);
-		NewRow.CurrentStep = Undefined;
-		NewRow.NextStep    = Catalogs.MovementRules.SI_SC;
-		NewRow.Quantity    = Row.Value;
 	EndDo;
 EndProcedure
 
@@ -1323,32 +1337,41 @@ Function GetNextStep_SO(Source, RowItemList, Row)
 EndFunction
 
 Function GetNextStep_SI(Source, RowItemList, Row)
-	ItemType_Type = RowItemList.ItemKey.Item.ItemType.Type;
+	NextStep = Catalogs.MovementRules.EmptyRef();
+	
+	If Is(Row.Basis).PI Then
+		Return NextStep;
+	EndIf;
 	
 	If RowItemList.UseShipmentConfirmation 
-		And ItemType_Type = Enums.ItemTypes.Product
+		And Not RowItemList.IsService
 		And Not Source.ShipmentConfirmations.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
 		Return Catalogs.MovementRules.SC;
 	EndIf;
 	
 	If RowItemList.UseWorkSheet
-		And ItemType_Type = Enums.ItemTypes.Service
+		And RowItemList.IsService
 		And Not Source.WorkSheets.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
 		Return Catalogs.MovementRules.WS;
 	EndIf;
 	
-	Return Catalogs.MovementRules.EmptyRef();
+	Return NextStep;
 EndFunction
 
-Function GetNextStep_SC(Source, ItemList, Row)
+Function GetNextStep_SC(Source, RowItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
+	
+	If Is(Row.Basis).GR Then
+		Return NextStep;
+	EndIf;
+	
 	If (Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.Sales
 			Or Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent)
-		And Not ValueIsFilled(ItemList.SalesInvoice) Then
+		And Not ValueIsFilled(RowItemList.SalesInvoice) Then
 		NextStep = Catalogs.MovementRules.SI;
 	ElsIf (Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor
 			Or Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor)
-	 	And Not ValueIsFilled(ItemList.PurchaseReturn) Then
+	 	And Not ValueIsFilled(RowItemList.PurchaseReturn) Then
 		NextStep = Catalogs.MovementRules.PR;
 	EndIf;
 	Return NextStep;
@@ -1364,25 +1387,45 @@ Function GetNextStep_PO(Source, RowItemList, Row)
 	Return NextStep;
 EndFunction
 
-Function GetNextStep_PI(Source, RowItemList, Row)
-	NextStep = Catalogs.MovementRules.EmptyRef();
-	If RowItemList.UseGoodsReceipt And Not RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service
-		And Not Source.GoodsReceipts.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
-		NextStep = Catalogs.MovementRules.GR;
+Function GetNextStep_PI(Source, RowItemList, Row, IsForSO = False)
+	NextStep = Undefined;
+	GoodsReceiptIsEmpty = (Source.GoodsReceipts.FindRows(New Structure("Key", RowItemList.Key)).Count() = 0);
+	
+	If IsForSO And ValueIsFilled(RowItemList.SalesOrder) Then
+		If Not RowItemList.IsService Then
+			If RowItemList.UseGoodsReceipt Then
+				NextStep = Catalogs.MovementRules.SI;
+			ELse
+				NextStep = Catalogs.MovementRules.SI_SC;
+			EndIf;
+		EndIf;
+	Else
+		If Not RowItemList.IsService Then
+			If RowItemList.UseGoodsReceipt And GoodsReceiptIsEmpty Then
+				NextStep = Catalogs.MovementRules.GR;
+			EndIf;
+		EndIf;	
 	EndIf;
+	
 	Return NextStep;
 EndFunction
 
-Function GetNextStep_GR(Source, ItemList, Row)
-	NextStep = Catalogs.MovementRules.EmptyRef();
+Function GetNextStep_GR(Source, RowItemList, Row, IsForSO = False)
+	NextStep = Undefined;
+	
+	If IsForSO And ValueIsFilled(RowItemList.SalesOrder) Then
+		NextStep = Catalogs.MovementRules.SC;
+	Else	
+	
 	If (Source.TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase
 			Or Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReceiptFromConsignor) 
-		And Not ValueIsFilled(ItemList.PurchaseInvoice) Then
+		And Not ValueIsFilled(RowItemList.PurchaseInvoice) Then
 		NextStep = Catalogs.MovementRules.PI;
 	ElsIf (Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer
 	 		Or Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent)
-		And Not ValueIsFilled(ItemList.SalesReturn) Then
+		And Not ValueIsFilled(RowItemList.SalesReturn) Then
 		NextStep = Catalogs.MovementRules.SR;
+	EndIf;
 	EndIf;
 	Return NextStep;
 EndFunction
@@ -6040,7 +6083,7 @@ EndFunction
 
 Function GetFieldsToLock_InternalLink_SI(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
-	If InternalDocAliase = Aliases.SO Then
+	If InternalDocAliase = Aliases.SO Or InternalDocAliase = Aliases.PI Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, SalesOrder, WorkOrder";
 	ElsIf InternalDocAliase = Aliases.SC Or InternalDocAliase = Aliases.WS Then
@@ -6371,7 +6414,8 @@ Function GetFieldsToLock_InternalLink_SC(InternalDocAliase, Aliases)
 		Or InternalDocAliase = Aliases.PR
 		Or InternalDocAliase = Aliases.PRO
 		Or InternalDocAliase = Aliases.IT
-		Or InternalDocAliase = Aliases.ITO Then
+		Or InternalDocAliase = Aliases.ITO
+		Or InternalDocAliase = Aliases.GR Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder, SalesInvoice, InventoryTransferOrder,
 			|InventoryTransfer, PurchaseReturnOrder, PurchaseReturn";
@@ -11073,6 +11117,7 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.SO);
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.SC);
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.WS);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.PI);
 	EndIf;
 	
 	If Is.SC Then 
@@ -11080,6 +11125,7 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.PR);
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.SI);
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.SO);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.GR);
 	EndIf;
 	
 	If Is.PO Then

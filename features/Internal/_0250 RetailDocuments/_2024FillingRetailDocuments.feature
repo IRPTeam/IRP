@@ -683,11 +683,11 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		And I click "Show items" button
 		And I go to line in "ItemsPickup" table
 			| 'Item'     |
-			| 'Trousers' |
+			| '(10002) Trousers' |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                |
-			| 'Trousers, 38/Yellow' |
+			| '(10002) Trousers, (899) 38/Yellow' |
 		And I select current line in "ItemsPickup" table		
 		And "ItemList" table became equal
 			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
@@ -779,12 +779,12 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 	* Add product (pick up)
 		And I click "Show items" button
 		And I go to line in "ItemsPickup" table
-			| 'Item'     |
-			| 'Trousers' |
+			| 'Item'             |
+			| '(10002) Trousers' |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'                |
-			| 'Trousers, 38/Yellow' |
+			| 'Item'                        |
+			| '(10002) Trousers, (899) 38/Yellow' |
 		And I select current line in "ItemsPickup" table
 		And "ItemList" table became equal
 			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
@@ -854,28 +854,28 @@ Scenario: _0154139 check payments form in the Point of sale
 	* Add products
 		And I click "Show items" button
 		And I go to line in "ItemsPickup" table
-			| 'Item'  |
-			| 'Dress' |
+			| 'Item'          |
+			| '(10001) Dress' |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'                |
-			| 'Dress, M/White' |
+			| 'Item'                   |
+			| '(10001) Dress, (BN898) M/White' |
 		And I select current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'     |
-			| 'Trousers' |
+			| 'Item'             |
+			| '(10002) Trousers' |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'                |
-			| 'Trousers, 38/Yellow' |
+			| 'Item'                        |
+			| '(10002) Trousers, (899) 38/Yellow' |
 		And I select current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'       |
-			| 'High shoes' |
+			| 'Item'               |
+			| '(10005) High shoes' |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'                |
-			| 'High shoes, 37/19SD' |
+			| 'Item'                        |
+			| '(10005) High shoes, 37/19SD' |
 		And I select current line in "ItemsPickup" table
 	* Check amount calculation
 		Then the form attribute named "Store" became equal to "Store 01"
@@ -1231,11 +1231,11 @@ Scenario: _0154139 check payments form in the Point of sale
 	* New retail sales receipt with amount 1 299 754,89
 		And I go to line in "ItemsPickup" table
 			| 'Item'  |
-			| 'Dress' |
+			| '(10001) Dress' |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                |
-			| 'Dress, XS/Blue' |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And I select current line in "ItemList" table
 		And I input "2 499,000" text in the field named "ItemListQuantity" of "ItemList" table
@@ -1328,11 +1328,11 @@ Scenario: _0154139 check payments form in the Point of sale
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I go to line in "ItemsPickup" table
 			| 'Item'  |
-			| 'Dress' |
+			| '(10001) Dress' |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                |
-			| 'Dress, XS/Blue' |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And I select current line in "ItemList" table
 		And I activate "Price" field in "ItemList" table
@@ -1354,11 +1354,11 @@ Scenario: _0154139 check payments form in the Point of sale
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I go to line in "ItemsPickup" table
 			| 'Item'  |
-			| 'Dress' |
+			| '(10001) Dress' |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                |
-			| 'Dress, XS/Blue' |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And I select current line in "ItemList" table
 		And I activate "Price" field in "ItemList" table
@@ -1379,12 +1379,12 @@ Scenario: _0154139 check payments form in the Point of sale
 	* New retail sales receipt with amount 0,09
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I go to line in "ItemsPickup" table
-			| 'Item'  |
-			| 'Dress' |
+			| 'Item'          |
+			| '(10001) Dress' |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'                |
-			| 'Dress, XS/Blue' |
+			| 'Item'                   |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And I select current line in "ItemList" table
 		And I activate "Price" field in "ItemList" table
@@ -1413,12 +1413,12 @@ Scenario: _0154140 check filling in retail customer from the POS (without partne
 	* Add products
 		And I click "Show items" button
 		And I go to line in "ItemsPickup" table
-				| 'Item'  |
-				| 'Dress' |
+			| 'Item'          |
+			| '(10001) Dress' |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'                |
-			| 'Dress, M/White' |
+			| 'Item'                   |
+			| '(10001) Dress, (BN898) M/White' |
 		And I select current line in "ItemsPickup" table
 	* Create Retail customer
 		And I click "Search customer" button
@@ -1455,12 +1455,12 @@ Scenario: _0154188 check customer on change in POS
 	* Add items and payment
 		And I click "Show items" button
 		And I go to line in "ItemsPickup" table
-			| 'Item'  |
-			| 'Dress' |
+			| 'Item'          |
+			| '(10001) Dress' |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'                |
-			| 'Dress, M/White' |
+			| 'Item'                   |
+			| '(10001) Dress, (BN898) M/White' |
 		And I select current line in "ItemsPickup" table
 	* Select retail customer with own partner term
 		And I click "Search customer" button
@@ -1521,13 +1521,12 @@ Scenario: _0154141 manual price adjustment in the POS
 			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
 		And I click "Show items" button
 		And I go to line in "ItemsPickup" table
-			| 'Item'     |
-			| 'Trousers' |
-		And I activate field named "ItemsPickupItem" in "ItemsPickup" table
+			| 'Item'             |
+			| '(10002) Trousers' |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'                |
-			| 'Trousers, 38/Yellow' |
+			| 'Item'                        |
+			| '(10002) Trousers, (899) 38/Yellow' |
 		And I select current line in "ItemsPickup" table
 	* Select retail customer with own partner term
 		And "ItemList" table contains lines
@@ -1551,12 +1550,12 @@ Scenario: _0154141 manual price adjustment in the POS
 			| 'Dress'    | 'S/Yellow'  | '1,000'    | '550,00' | ''       | '550,00' |
 		And I go to line in "ItemsPickup" table
 			| 'Item'     |
-			| 'Trousers' |
+			| '(10002) Trousers' |
 		And I activate field named "ItemsPickupItem" in "ItemsPickup" table
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'                |
-			| 'Trousers, 36/Yellow' |
+			| '(10002) Trousers, 36/Yellow' |
 		And I select current line in "ItemsPickup" table
 	* Select retail customer with own partner term
 		And "ItemList" table contains lines
@@ -1576,12 +1575,12 @@ Scenario:  _0154142 change comment in POS
 	* Add products
 		And I click "Show items" button
 		And I go to line in "ItemsPickup" table
-				| 'Item'  |
-				| 'Dress' |
+			| 'Item'          |
+			| '(10001) Dress' |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'                |
-			| 'Dress, M/White' |
+			| 'Item'                   |
+			| '(10001) Dress, (BN898) M/White' |
 		And I select current line in "ItemsPickup" table
 		And I finish line editing in "ItemList" table	
 	* Filling comment
@@ -1616,12 +1615,12 @@ Scenario:  _0154143 change payment term in POS
 	* Add products
 		And I click "Show items" button
 		And I go to line in "ItemsPickup" table
-				| 'Item'  |
-				| 'Dress' |
+			| 'Item'          |
+			| '(10001) Dress' |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'                |
-			| 'Dress, M/White' |
+			| 'Item'                   |
+			| '(10001) Dress, (BN898) M/White' |
 		And I select current line in "ItemsPickup" table
 	* Select retail customer with own partner term
 	* Change partner term
@@ -3881,12 +3880,12 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 	* Add items and payment
 		And I click "Show items" button
 		And I go to line in "ItemsPickup" table
-			| 'Item'  |
-			| 'Dress' |
+			| 'Item'          |
+			| '(10001) Dress' |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'                |
-			| 'Dress, M/White' |
+			| 'Item'                   |
+			| '(10001) Dress, (BN898) M/White' |
 		And I select current line in "ItemsPickup" table
 	* Select retail customer with own partner term
 	* Select retail customer
@@ -4062,13 +4061,12 @@ Scenario: _0154192 create document Retail Sales Receipt from Point of sale (paym
 	* Add product (pick up)
 		And I click "Show items" button
 		And I go to line in "ItemsPickup" table
-			| 'Item'     |
-			| 'Trousers' |
-		And I activate field named "ItemsPickupItem" in "ItemsPickup" table
+			| 'Item'             |
+			| '(10002) Trousers' |
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
-			| 'Item'                |
-			| 'Trousers, 38/Yellow' |
+			| 'Item'                        |
+			| '(10002) Trousers, (899) 38/Yellow' |
 		And I select current line in "ItemsPickup" table
 	* Select retail customer with own partner term
 		And "ItemList" table became equal
@@ -4169,10 +4167,10 @@ Scenario: _0154195 set sales person from POS
 		* Add item and select Retail person
 			And I expand a line in "ItemsPickup" table
 				| 'Item'  |
-				| 'Shirt' |
+				| '(10003) Shirt' |
 			And I go to line in "ItemsPickup" table
 				| 'Item'            |
-				| 'Shirt, 38/Black' |
+				| '(10003) Shirt, 38/Black' |
 			And I select current line in "ItemsPickup" table
 			And "Table1" table became equal
 				| 'Column1'       |

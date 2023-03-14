@@ -39,6 +39,16 @@
       "CommonModuleMissingAPI": false,
       "PublicMethodsDescription": {
         "checkAllRegion": false
+      },
+      "allowShortDescriptionReturnValues": false,
+      "DuplicateStringLiteral": {
+        "allowedNumberCopies": 50,
+        "analyzeFile": false,
+        "caseSensitive": false,
+        "minTextLength": 50
+      },
+      "UsingServiceTag": {
+        "serviceTags": "todo|fixme"
       }
     }
   }

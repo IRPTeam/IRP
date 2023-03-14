@@ -108,7 +108,7 @@ Scenario: _0260209 check that change price and Return in POS is not available fo
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, XS/Blue' |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
 		When I Check the steps for Exception
@@ -127,7 +127,7 @@ Scenario: _0260210 one-time change of access rights (POS)
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, XS/Blue' |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I click "Change rights" button
@@ -149,7 +149,7 @@ Scenario: _0260210 one-time change of access rights (POS)
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, XS/Blue' |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
 		When I Check the steps for Exception
@@ -168,7 +168,7 @@ Scenario: _0260212 keep rights when change access rights (POS)
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, XS/Blue' |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I click "Change rights" button
@@ -191,7 +191,7 @@ Scenario: _0260212 keep rights when change access rights (POS)
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, XS/Blue' |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table
 		And "ItemList" table became equal
@@ -206,7 +206,7 @@ Scenario: _0260212 keep rights when change access rights (POS)
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, XS/Blue' |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
 		When I Check the steps for Exception
@@ -252,7 +252,7 @@ Scenario: _0260214 settings of access rights from user group
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, XS/Blue' |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
 		When I Check the steps for Exception

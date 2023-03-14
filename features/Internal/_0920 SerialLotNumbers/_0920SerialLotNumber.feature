@@ -3896,7 +3896,7 @@ Scenario: _092081 switch on scan emulator in the Create serial lot numbers data 
 		Then the number of "SerialLotNumberList" table lines is "равно" 0
 		Then the form attribute named "Item" became equal to "Dress"
 		Then the form attribute named "ItemKey" became equal to "S/Yellow"
-		And the editing text of form attribute named "BarcodeInput" became equal to "2202283713""
+		And the editing text of form attribute named "BarcodeInput" became equal to "2202283713"
 		Then the form attribute named "ScanEmulator" became equal to "Yes"		
 		And I close all client application windows
 
@@ -3908,7 +3908,7 @@ Scenario: _092083 check serial lot numbers in the POS
 	* Add items with serial lot numbers
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, XS/Blue' |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
 		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="db0a36f4-da16-4830-b562-88c41864e587">
+  <producedTypes>
+    <objectType typeId="e334200f-c894-4a04-a3ce-0d5758cbd969" valueTypeId="7bc1776f-ef81-4d45-aa20-23a925a9cc91"/>
+    <refType typeId="12ea6cc4-6ec8-418c-802a-ee45605d3e0a" valueTypeId="ff464b31-d7e8-42a8-aef0-37b561f50dec"/>
+    <selectionType typeId="3a1dddd0-82a9-492b-8294-a351195b516c" valueTypeId="f662191f-dedc-4906-a5a0-5c2c60c42825"/>
+    <listType typeId="c9762cde-5b8f-4891-a3d0-c0ddc1df30fe" valueTypeId="9131f772-5baa-4b24-953b-15d4cf918d95"/>
+    <managerType typeId="78ccce67-b2bd-4bbd-8fba-d1959764f41a" valueTypeId="cf1bf3a7-1142-4000-94b2-9362921d50d5"/>
+  </producedTypes>
+  <name>Items</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:CatalogExtension"/>
+  <attributes uuid="5afbd10b-fbc9-467b-9bd4-ea28b3166f1c">
+    <name>ItemType</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:BasicFeatureExtension">
+      <typeExtension>
+        <types>
+          <state>Checked</state>
+          <type>CatalogRef.ItemTypes</type>
+        </types>
+      </typeExtension>
+    </extension>
+  </attributes>
+  <attributes uuid="3be45037-ee1c-4e18-af04-6b9849623124">
+    <name>Unit</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:BasicFeatureExtension">
+      <typeExtension>
+        <types>
+          <state>Checked</state>
+          <type>CatalogRef.Units</type>
+        </types>
+      </typeExtension>
+    </extension>
+  </attributes>
+  <attributes uuid="7c02c364-48a6-4604-9fdd-d2d33044251c">
+    <name>MainPricture</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:BasicFeatureExtension">
+      <typeExtension>
+        <types>
+          <state>Checked</state>
+          <type>ValueStorage</type>
+        </types>
+      </typeExtension>
+    </extension>
+  </attributes>
+  <attributes uuid="651cb065-89df-49a5-8608-12a787180423">
+    <name>Vendor</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:BasicFeatureExtension">
+      <typeExtension>
+        <types>
+          <state>Checked</state>
+          <type>CatalogRef.Partners</type>
+        </types>
+      </typeExtension>
+    </extension>
+  </attributes>
+  <attributes uuid="ac6a45d9-c3fe-4248-ab89-f1a5e3766773">
+    <name>ItemID</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:BasicFeatureExtension">
+      <typeExtension>
+        <types>
+          <state>Checked</state>
+          <type>String</type>
+        </types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </typeExtension>
+    </extension>
+  </attributes>
+  <attributes uuid="ed0b00c6-4424-43f1-b95b-77dec93d7442">
+    <name>PackageUnit</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:BasicFeatureExtension">
+      <typeExtension>
+        <types>
+          <state>Checked</state>
+          <type>CatalogRef.Units</type>
+        </types>
+      </typeExtension>
+    </extension>
+  </attributes>
+  <forms uuid="ad5f8d87-4851-4e38-bcf9-14ec004c5a5f">
+    <name>ItemForm</name>
+    <objectBelonging>Adopted</objectBelonging>
+    <extension xsi:type="mdclassExtension:BasicFormExtension">
+      <form>Extended</form>
+    </extension>
+  </forms>
+</mdclass:Catalog>

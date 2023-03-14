@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8462b29a-6029-4976-9686-2556de798edb">
+  <name>DocInventoryTransferOrderClient</name>
+  <synonym>
+    <key>en</key>
+    <value>Doc inventory transfer order client</value>
+  </synonym>
+  <clientManagedApplication>true</clientManagedApplication>
+</mdclass:CommonModule>

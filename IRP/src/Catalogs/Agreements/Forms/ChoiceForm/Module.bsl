@@ -1,0 +1,10 @@
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	CatAgreementsServer.OnCreateAtServer(Cancel, StandardProcessing, ThisObject, Parameters);
+	ThisObject.List.QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(ThisObject.List.QueryText);
+EndProcedure
+
+&AtClient
+Procedure ListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	CommonFormActions.DynamicListBeforeAddRow(ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter, "Catalog.Agreements.ObjectForm");
+EndProcedure

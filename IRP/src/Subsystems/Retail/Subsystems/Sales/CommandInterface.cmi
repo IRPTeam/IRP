@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
+  <commandsOrder>
+    <orderFragments>
+      <group>NavigationPanelOrdinary</group>
+      <commands>Document.RetailSalesReceipt.StandardCommand.OpenList</commands>
+      <commands>Document.RetailReturnReceipt.StandardCommand.OpenList</commands>
+      <commands>Document.ConsolidatedRetailSales.StandardCommand.OpenList</commands>
+    </orderFragments>
+    <orderFragments>
+      <group>ActionsPanelCreate</group>
+      <commands>Document.RetailSalesReceipt.StandardCommand.Create</commands>
+      <commands>Document.RetailReturnReceipt.StandardCommand.Create</commands>
+      <commands>Document.ConsolidatedRetailSales.StandardCommand.Create</commands>
+    </orderFragments>
+  </commandsOrder>
+</cmi:CommandInterface>

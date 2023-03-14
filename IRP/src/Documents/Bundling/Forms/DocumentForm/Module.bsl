@@ -1,0 +1,338 @@
+#Region FORM
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	DocBundlingServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+EndProcedure
+
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	DocBundlingServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	DocBundlingServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	DocBundlingClient.OnOpen(Object, ThisObject, Cancel);
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControl();
+	EndIf;
+
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region COMPANY
+
+&AtClient
+Procedure CompanyOnChange(Item)
+	DocBundlingClient.CompanyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
+	DocBundlingClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
+	DocBundlingClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_BUNDLE
+
+&AtClient
+Procedure ItemBundleOnChange(Item)
+	DocBundlingClient.ItemBundleOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemBundleStartChoice(Item, ChoiceData, StandardProcessing)
+	DocBundlingClient.ItemBundleStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemBundleEditTextChange(Item, Text, StandardProcessing)
+	DocBundlingClient.ItemBundleEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region _DATE
+
+&AtClient
+Procedure DateOnChange(Item)
+	DocBundlingClient.DateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region STORE
+
+&AtClient
+Procedure StoreOnChange(Item)
+	DocBundlingClient.StoreOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY
+
+&AtClient
+Procedure QuantityOnChange(Item)
+	DocBundlingClient.QuantityOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region UNIT
+
+&AtClient
+Procedure UnitOnChange(Item)
+	DocBundlingClient.UnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST
+
+&AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocBundlingClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure ItemListAfterDeleteRow(Item)
+	DocBundlingClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+#Region ITEM_LIST_COLUMNS
+
+#Region _ITEM
+
+&AtClient
+Procedure ItemListItemOnChange(Item)
+	DocBundlingClient.ItemListItemOnChange(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
+	DocBundlingClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
+	DocBundlingClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY
+
+&AtClient
+Procedure ItemListItemKeyOnChange(Item)
+	DocBundlingClient.ItemListItemKeyOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region QUANTITY
+
+&AtClient
+Procedure ItemListQuantityOnChange(Item)
+	DocBundlingClient.ItemListQuantityOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region UNIT
+
+&AtClient
+Procedure ItemListUnitOnChange(Item)
+	DocBundlingClient.ItemListUnitOnChange(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#EndRegion
+
+#Region SERVICE
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocBundlingClient);
+	Str.Insert("Server", DocBundlingServer);
+	Return Str;
+EndFunction
+
+#Region DESCRIPTION
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TITLE_DECORATIONS
+
+&AtClient
+Procedure DecorationGroupTitleCollapsedPictureClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleCollapsedLabelClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
+EndProcedure
+
+#EndRegion
+
+#Region ADD_ATTRIBUTES
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControl()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+#EndRegion
+
+#Region EXTERNAL_COMMANDS
+
+&AtClient
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+#EndRegion
+
+#Region COPY_PASTE
+
+&AtClient
+Procedure CopyToClipboard(Command)
+	CopyPasteClient.CopyToClipboard(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure CopyToClipboardAfterSetSettings(CopySettings, AddInfo) Export
+	If CopySettings = Undefined Then
+		Return;
+	EndIf;
+	
+	CopyPasteResult = CopyToClipboardServer(CopySettings);
+	CopyPasteClient.AfterCopy(CopyPasteResult);
+EndProcedure
+
+&AtServer
+Function CopyToClipboardServer(CopySettings)
+	Return CopyPasteServer.CopyToClipboard(Object, ThisObject, CopySettings);
+EndFunction
+
+&AtClient
+Procedure PasteFromClipboard(Command)
+	CopyPasteClient.PasteFromClipboard(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure PasteFromClipboardAfterSetSettings(PasteSettings, AddInfo) Export
+	If PasteSettings = Undefined Then
+		Return;
+	EndIf;
+	
+	CopyPasteResult = PasteFromClipboardServer(PasteSettings);
+	CopyPasteClient.AfterPaste(Object, ThisObject,CopyPasteResult);
+EndProcedure
+
+&AtServer
+Function PasteFromClipboardServer(CopySettings)
+	Return CopyPasteServer.PasteFromClipboard(Object, ThisObject, CopySettings);
+EndFunction
+
+#EndRegion
+
+#Region LOAD_DATA_FROM_TABLE
+
+&AtClient
+Procedure LoadDataFromTable(Command)
+	LoadDataFromTableClient.OpenFormForLoadData(ThisObject, ThisObject.Object);
+EndProcedure
+
+#EndRegion
+
+#Region COMMANDS
+
+&AtClient
+Procedure SearchByBarcode(Command, Barcode = "")
+	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure OpenScanForm(Command)
+	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
+Procedure OpenPickupItems(Command)
+	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
+#EndRegion
+
+&AtClient
+Procedure ShowHiddenTables(Command)
+	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+EndProcedure
+
+#EndRegion

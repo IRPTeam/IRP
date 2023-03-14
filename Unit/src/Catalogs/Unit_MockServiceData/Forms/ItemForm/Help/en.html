@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><link rel="stylesheet" type="text/css" href="v8help://service_book/service_style"></link></head><body>
+<h2>Part "Body variables"</h2>
+<div>
+Here it is possible to describe variables calculated on the basis of the request body.</div><div><br></div><div>
+If the value of a variable is explicitly specified, then it can be used to filter mock elements.<br>
+If there is no "Path to value", then the specified value is simply copied to the final variable.</div><div><br></div><div>
+In the path to the body, operations or names of attributes of previously obtained objects are indicated through the "/" symbol.</div><div><br></div><div>
+Available operations:</div>
+<ul><li>[file] - previously received string should be considered as the file contents</li>
+<li>[text] - previously received file contents should be considered as a string</li>
+<li>[zip] - previously received file contents should be considered as such as taken from a ZIP archive that needs to be unpacked. 
+The next segment is interpreted as the filename from the archive to read the content</li>
+<li>[0] - If earlier there was ZIP, in which there is only one file, then this is a command to read that file without specifying a name</li>
+<li>[xml] - If earlier there was TEXT, then it must be interpreted as an XML object</li>
+<li>[json] - If earlier there was TEXT, then it must be interpreted as an JSON object</li>
+<li>[csv] - If there was a TEXT before, then it must be interpreted as an array of substrings delimited by "," (coma). 
+But you can specify another separator, for example, a dash: "[csv=-]" or a semicolon: "[csv=;]".</li>
+</ul><div>
+If an array was obtained earlier, then at the current step you can refer to its element by number (numbering from zero). For example, [text]/[cvs]/0</div>
+</body></html>

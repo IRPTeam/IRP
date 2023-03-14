@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ecd50774-0515-413c-91f5-4f3429c5f40c">
+  <name>DocSalesOrderServer</name>
+  <synonym>
+    <key>en</key>
+    <value>Doc sales order server</value>
+  </synonym>
+  <server>true</server>
+  <serverCall>true</serverCall>
+</mdclass:CommonModule>

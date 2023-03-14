@@ -1,0 +1,18 @@
+
+Scenario: _040#FeatureNumber# check #DocumentSynonym# movements by the Register  "#RegisterSynonym#"
+	* Select #DocumentSynonym#
+		Given I open hyperlink "e1cib/list/Document.#DocumentName#"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "#RegisterSynonym#" (Receipt, Expense)
+		And I click "Registrations report" button
+		And I select "#RegisterSynonym#" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '#DocumentSynonym# 1 dated *'					 	  | ''            | ''                    | ''          | ''           | ''          |
+			| 'Document registrations records'                    | ''            | ''                    | ''          | ''           | ''          |
+			| 'Register  "#RegisterSynonym#"'                     | ''            | ''                    | ''          | ''           | ''          |
+			
+		And I close all client application windows
+		

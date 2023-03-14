@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="7c59871c-7b33-488a-93e0-d014ac182d82">
+  <producedTypes>
+    <objectType typeId="bf95a470-8702-4cc4-ba18-ed543077c4ca" valueTypeId="4d0eed09-becc-4bbd-9ac0-b1d5dd0b2d68"/>
+    <refType typeId="fff182ff-437d-457e-a507-20996729f8c2" valueTypeId="9a61379b-49c0-4fb3-96b3-463e21983075"/>
+    <selectionType typeId="1e63f75d-daaf-4300-8751-7fda824b7670" valueTypeId="1e7f94f6-7dd0-469d-8cf2-f1b99dfd42e7"/>
+    <listType typeId="c15e7251-af40-4027-9cbf-6906c617f889" valueTypeId="b61b5d5a-4045-4f6f-9d74-c7e990c65633"/>
+    <managerType typeId="64f9f9da-b3cc-471b-82ac-069eb01648e3" valueTypeId="282c8a26-7145-4030-a312-4ee055b17963"/>
+  </producedTypes>
+  <name>FileStorageVolumes</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:CatalogExtension"/>
+</mdclass:Catalog>

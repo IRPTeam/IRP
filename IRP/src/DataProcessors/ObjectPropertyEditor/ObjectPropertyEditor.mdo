@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fb74ecea-9507-4258-b105-35f229f3ff5a">
+  <producedTypes>
+    <objectType typeId="1876b23b-555a-451d-9da2-7e12a1923d39" valueTypeId="39666d59-3520-4976-a29e-8bcaa12bc01f"/>
+    <managerType typeId="554ea4c0-d254-415e-bfdf-c54e42adefdd" valueTypeId="7241d4d9-5250-43d4-8547-314762504768"/>
+  </producedTypes>
+  <name>ObjectPropertyEditor</name>
+  <synonym>
+    <key>en</key>
+    <value>Object property editor</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.ObjectPropertyEditor.Form.Form</defaultForm>
+  <forms uuid="10223689-ce1e-4f26-a649-6812834b1b9d">
+    <name>Form</name>
+    <synonym>
+      <key>en</key>
+      <value>Form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="3d32ba2a-6daf-461d-8b97-5ae43b439838">
+    <name>EditMultilineText</name>
+    <synonym>
+      <key>en</key>
+      <value>Edit multiline text</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="3a8545c6-abee-442b-b6cc-f4653659d1e7">
+    <name>EditValueList</name>
+    <synonym>
+      <key>en</key>
+      <value>Edit value list</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="c26ffce1-9a8d-4ed1-8b5f-b2779d553898">
+    <name>PropertyPackEditor</name>
+    <synonym>
+      <key>en</key>
+      <value>Property pack editor</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="45342813-29ea-423e-a1a6-14db9e160002">
+    <name>FieldSettings</name>
+    <synonym>
+      <key>en</key>
+      <value>Field settings</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="c37d6fdd-3a9d-4301-8a7c-50ca000d36b6">
+    <name>RunCodeForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Run code form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:DataProcessor>

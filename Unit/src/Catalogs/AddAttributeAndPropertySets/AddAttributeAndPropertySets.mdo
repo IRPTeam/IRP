@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="fa271f16-dd27-4b5b-b307-c064645c640d">
+  <producedTypes>
+    <objectType typeId="9e5c666f-7e2d-4d27-bec4-e7711ae98cad" valueTypeId="54289e0e-8ec7-4e02-88d1-ee1e11812c48"/>
+    <refType typeId="723d6ac8-ce6f-47e4-b2af-ad19a76a91fd" valueTypeId="c2b628bf-8f51-485a-b6f7-5e7e7b1f3155"/>
+    <selectionType typeId="fb8075c4-503b-4071-a578-2e77ba6c9720" valueTypeId="c7e4ef27-1f40-4901-92ae-db35c85ca1c7"/>
+    <listType typeId="c2bf9007-4524-43f8-a967-81178fc0f61a" valueTypeId="5927f8f4-d0f2-4b86-b5ed-a44f219b7957"/>
+    <managerType typeId="378ba487-1cfd-45bb-9f95-42e308c7554b" valueTypeId="ed6c0f04-179c-4dc2-920f-b7001a586aa7"/>
+  </producedTypes>
+  <name>AddAttributeAndPropertySets</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:CatalogExtension"/>
+</mdclass:Catalog>

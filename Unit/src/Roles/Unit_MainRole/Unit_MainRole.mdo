@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="55b1974f-56fe-4a07-bb7d-cffd1066c40b">
+  <name>Unit_MainRole</name>
+  <synonym>
+    <key>en</key>
+    <value>Main role</value>
+  </synonym>
+</mdclass:Role>

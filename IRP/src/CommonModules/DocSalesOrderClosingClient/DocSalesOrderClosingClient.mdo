@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1ca427a9-7354-40e2-8a9a-ff491d2f73ff">
+  <name>DocSalesOrderClosingClient</name>
+  <synonym>
+    <key>en</key>
+    <value>Doc sales order closing client</value>
+  </synonym>
+  <clientManagedApplication>true</clientManagedApplication>
+  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

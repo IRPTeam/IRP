@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonAttribute xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="2e0fc5c7-b8a5-4e0a-b6a0-53ea2370f575">
+  <name>Description_tr</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:CommonAttributeExtension">
+    <typeExtension>
+      <types>
+        <state>Checked</state>
+        <type>DefinedType.typeDescription</type>
+      </types>
+    </typeExtension>
+  </extension>
+</mdclass:CommonAttribute>

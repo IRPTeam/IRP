@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="584956f3-cbcc-45f7-a9f8-4ff3be1aca12">
+  <producedTypes>
+    <objectType typeId="d0ec915f-375b-4db2-a6c5-207391974fe3" valueTypeId="474de949-966d-44ba-9d04-d793d0ad7dcc"/>
+    <refType typeId="85f38fc0-614b-41a0-8e95-fb70f217dca9" valueTypeId="f41282c0-f221-46a2-a916-13b968e04e51"/>
+    <selectionType typeId="e44b461c-819e-40db-8fcb-ee73cced1f0d" valueTypeId="bcfceb04-c339-497b-b662-d4508f3d1229"/>
+    <listType typeId="eb463219-347f-42c0-829b-27879bb71bcc" valueTypeId="ce585940-6129-4db7-bc99-c7518e4df1b4"/>
+    <managerType typeId="eee4d26f-9c8c-4661-bf46-a4f7d7c418c0" valueTypeId="13996715-5cbc-4063-83e1-c990b4c9eef4"/>
+  </producedTypes>
+  <name>Currencies</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:CatalogExtension"/>
+  <attributes uuid="3fa1d6c6-c489-4cc6-a573-5ea154be6b08">
+    <name>REP_Attribute1</name>
+    <synonym>
+      <key>en</key>
+      <value>REP_Attribute1</value>
+    </synonym>
+    <extension xsi:type="mdclassExtension:BasicFeatureExtension"/>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>10</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+</mdclass:Catalog>

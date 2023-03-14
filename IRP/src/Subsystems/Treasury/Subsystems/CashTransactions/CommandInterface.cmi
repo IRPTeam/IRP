@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
+  <commandsVisibility>
+    <visibilityFragments>
+      <command>Document.ReconciliationStatement.StandardCommand.OpenList</command>
+      <visible>
+        <common>true</common>
+      </visible>
+    </visibilityFragments>
+  </commandsVisibility>
+  <commandsPlacement>
+    <placementFragments>
+      <group>NavigationPanelImportant</group>
+      <commands>Document.ReconciliationStatement.StandardCommand.OpenList</commands>
+    </placementFragments>
+  </commandsPlacement>
+  <commandsOrder>
+    <orderFragments>
+      <group>NavigationPanelImportant</group>
+      <commands>Document.ReconciliationStatement.StandardCommand.OpenList</commands>
+    </orderFragments>
+    <orderFragments>
+      <group>NavigationPanelOrdinary</group>
+      <commands>Document.CashExpense.StandardCommand.OpenList</commands>
+      <commands>Document.CashRevenue.StandardCommand.OpenList</commands>
+      <commands>Document.DebitNote.StandardCommand.OpenList</commands>
+      <commands>Document.CreditNote.StandardCommand.OpenList</commands>
+      <commands>Document.CustomersAdvancesClosing.StandardCommand.OpenList</commands>
+      <commands>Document.VendorsAdvancesClosing.StandardCommand.OpenList</commands>
+    </orderFragments>
+  </commandsOrder>
+</cmi:CommandInterface>

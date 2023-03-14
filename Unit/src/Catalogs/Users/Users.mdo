@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="e824a3d7-65d0-4725-9342-e84e76da594a">
+  <producedTypes>
+    <objectType typeId="8a2489bf-05ed-45a9-8624-4ff410769f1a" valueTypeId="876e45a9-9c32-48ac-a456-95fbe965f753"/>
+    <refType typeId="787713d9-29a4-415f-ba82-8757be283af8" valueTypeId="ad21415a-5ab6-4d23-9598-2d52aff9d734"/>
+    <selectionType typeId="e1d127a0-f5d8-4ce5-97c7-c06be9e31256" valueTypeId="b4e80011-7722-401c-adb9-b874c4a02c18"/>
+    <listType typeId="d419de55-37b2-4325-8c88-186302e09936" valueTypeId="30508a04-3861-42a5-bff1-6e31db01dc75"/>
+    <managerType typeId="10185209-d0cd-4cc3-b947-e7e2964569ca" valueTypeId="f28ddc07-021d-41bd-b8c3-ef4cebca2d31"/>
+  </producedTypes>
+  <name>Users</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:CatalogExtension"/>
+</mdclass:Catalog>

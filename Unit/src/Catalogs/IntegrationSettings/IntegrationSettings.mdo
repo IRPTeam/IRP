@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="e06edf23-c5fa-4507-84aa-6a51022a1e0f">
+  <producedTypes>
+    <objectType typeId="b85457ee-0637-4eaf-8d1e-e37728de0fc5" valueTypeId="b35c923d-af49-4cfa-8d01-e2206b94a53a"/>
+    <refType typeId="4e1f2670-c4d2-4e17-b23a-dc2ddb4ce2db" valueTypeId="c0e3bcac-27a4-43fd-9d58-4a3f5418c887"/>
+    <selectionType typeId="f58e5b74-c6a7-4532-98c3-2466aabd4a8e" valueTypeId="4c588f91-5dc7-4de9-94b2-0da336b44425"/>
+    <listType typeId="be50b7bb-a968-433a-9467-54db04562616" valueTypeId="5b80e55d-994b-42cc-827b-5611b0271505"/>
+    <managerType typeId="2be62ca6-d163-4865-ba40-c6133acb4626" valueTypeId="0fc3380e-3f79-4d92-835e-6a2fd56ebb45"/>
+  </producedTypes>
+  <name>IntegrationSettings</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:CatalogExtension"/>
+  <attributes uuid="8af168ac-c8e5-4e54-8611-a75686d21a96">
+    <name>Unit_SaveExchangeHistory</name>
+    <synonym>
+      <key>en</key>
+      <value>Save exchange history</value>
+    </synonym>
+    <extension xsi:type="mdclassExtension:BasicFeatureExtension"/>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+</mdclass:Catalog>

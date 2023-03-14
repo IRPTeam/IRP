@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5ccc1632-8127-44d2-9807-ae8dcc0deea5">
+  <producedTypes>
+    <selectionType typeId="1dda8834-331b-45dd-9e84-cd40fe731a65" valueTypeId="79095196-3e60-4e87-b82d-c25b183a7667"/>
+    <listType typeId="dcbb740c-815d-4806-826f-39ec6fa0b32c" valueTypeId="8fd5fa7d-4013-49b4-aee5-606f0dbcb4a7"/>
+    <managerType typeId="0a7e395d-1e75-45d8-8ec7-dfb831bc920a" valueTypeId="7997c637-516e-4421-8aa0-92ca0001c1c7"/>
+    <recordSetType typeId="9f04d353-7f05-41bb-9ceb-c8d988964b0e" valueTypeId="0db9902c-a0b9-4a13-a9e2-d930ff075f95"/>
+    <recordKeyType typeId="8a87942a-744c-4d20-b653-c4c86109ff82" valueTypeId="398719da-b358-49b3-830f-a2f335716e29"/>
+    <recordType typeId="40db8a4e-6773-433b-8422-ec1bc698ff5f" valueTypeId="0673ecb4-c8e5-4c09-8d3e-0779ec30e7a1"/>
+    <recordManagerType typeId="3fd73c68-de08-4a77-8cc0-0a4a4bc44fd3" valueTypeId="4193966d-54bb-4f7a-a474-4c8d6a8f94e9"/>
+  </producedTypes>
+  <name>REP_ReportParameters</name>
+  <synonym>
+    <key>en</key>
+    <value>Report parameters</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Report parameter</value>
+  </recordPresentation>
+  <resources uuid="06957508-191b-4204-8046-5e0f9bf3df12">
+    <name>Value</name>
+    <synonym>
+      <key>en</key>
+      <value>Value</value>
+    </synonym>
+    <type>
+      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <dimensions uuid="490ab1cb-c965-496d-9e62-8ea727929fac">
+    <name>ParametrType</name>
+    <synonym>
+      <key>en</key>
+      <value>Parametr type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.REP_ReportParametrTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+</mdclass:InformationRegister>

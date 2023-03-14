@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
+  <commandsVisibility>
+    <visibilityFragments>
+      <command>Catalog.BillOfMaterials.StandardCommand.OpenList</command>
+      <visible>
+        <common>true</common>
+      </visible>
+    </visibilityFragments>
+    <visibilityFragments>
+      <command>Document.Production.StandardCommand.OpenList</command>
+      <visible>
+        <common>true</common>
+      </visible>
+    </visibilityFragments>
+  </commandsVisibility>
+  <commandsPlacement>
+    <placementFragments>
+      <group>NavigationPanelImportant</group>
+      <commands>Catalog.BillOfMaterials.StandardCommand.OpenList</commands>
+      <commands>Document.Production.StandardCommand.OpenList</commands>
+    </placementFragments>
+  </commandsPlacement>
+  <commandsOrder>
+    <orderFragments>
+      <group>NavigationPanelImportant</group>
+      <commands>Catalog.BillOfMaterials.StandardCommand.OpenList</commands>
+      <commands>Document.Production.StandardCommand.OpenList</commands>
+    </orderFragments>
+  </commandsOrder>
+  <subsystemsOrder>
+    <subsystems>Subsystem.Manufacturing.Subsystem.InventoryTransfer</subsystems>
+    <subsystems>Subsystem.Manufacturing.Subsystem.ManufacturingPurchase</subsystems>
+    <subsystems>Subsystem.Manufacturing.Subsystem.Planning</subsystems>
+    <subsystems>Subsystem.Manufacturing.Subsystem.Produce</subsystems>
+  </subsystemsOrder>
+</cmi:CommandInterface>

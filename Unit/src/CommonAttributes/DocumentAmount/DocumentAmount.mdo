@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonAttribute xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="8cc542fe-6e7d-42b1-b3ed-7b49dda46454">
+  <name>DocumentAmount</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:CommonAttributeExtension">
+    <typeExtension>
+      <types>
+        <state>Checked</state>
+        <type>DefinedType.typeAmount</type>
+      </types>
+    </typeExtension>
+  </extension>
+</mdclass:CommonAttribute>

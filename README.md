@@ -1,3 +1,4 @@
+**Current Release:** 
 [![Quality Gate Status](https://dev.irpteam.com/sq/api/project_badges/measure?branch=master&project=IRP&metric=alert_status&token=5fde3fd01b9bf29100e1fe179569d49633da6ee5)](https://dev.irpteam.com/sq/dashboard?id=IRP&branch=master)
 [![Coverage](https://dev.irpteam.com/sq/api/project_badges/measure?branch=master&project=IRP&metric=coverage&token=5fde3fd01b9bf29100e1fe179569d49633da6ee5)](https://dev.irpteam.com/sq/dashboard?id=IRP&branch=master)
 [![Code lines](https://dev.irpteam.com/sq/api/project_badges/measure?branch=master&project=IRP&metric=ncloc&token=5fde3fd01b9bf29100e1fe179569d49633da6ee5)](https://dev.irpteam.com/sq/dashboard?id=IRP&branch=master)

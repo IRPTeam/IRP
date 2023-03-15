@@ -1053,6 +1053,14 @@
        <key>en</key>
        <value>Only my</value>
       </title>
+      <title>
+       <key>ru</key>
+       <value>Только мое</value>
+      </title>
+      <title>
+       <key>tr</key>
+       <value>Sadece benim</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -1158,6 +1166,14 @@
     <title>
      <key>en</key>
      <value>Group top</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Группа верхние уровень</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Grup üst</value>
     </title>
     <extendedTooltip>
      <name>GroupTopExtendedTooltip</name>
@@ -2046,6 +2062,10 @@ WHERE
   <name>EnterCountOnScan</name>
   <title>
    <key>en</key>
+   <value> +1 </value>
+  </title>
+  <title>
+   <key>ru</key>
    <value> +1 </value>
   </title>
   <id>4</id>

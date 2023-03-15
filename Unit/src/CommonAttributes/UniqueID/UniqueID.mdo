@@ -13,4 +13,7 @@
       </stringQualifiers>
     </typeExtension>
   </extension>
+  <type/>
+  <autoUse>DontUse</autoUse>
+  <dataSeparation>DontUse</dataSeparation>
 </mdclass:CommonAttribute>

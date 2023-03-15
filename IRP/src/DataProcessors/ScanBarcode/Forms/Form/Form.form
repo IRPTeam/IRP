@@ -209,6 +209,21 @@
           <segments>Object.ItemList</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
+        <excludedCommands>MoveDown</excludedCommands>
+        <excludedCommands>SortListAsc</excludedCommands>
+        <excludedCommands>CopyToClipboard</excludedCommands>
+        <excludedCommands>Choose</excludedCommands>
+        <excludedCommands>FindByCurrentValue</excludedCommands>
+        <excludedCommands>MoveUp</excludedCommands>
+        <excludedCommands>ShowMultipleSelection</excludedCommands>
+        <excludedCommands>ShowRowRearrangement</excludedCommands>
+        <excludedCommands>EndEdit</excludedCommands>
+        <excludedCommands>Copy</excludedCommands>
+        <excludedCommands>SearchEverywhere</excludedCommands>
+        <excludedCommands>SortListDesc</excludedCommands>
+        <excludedCommands>SelectAll</excludedCommands>
+        <excludedCommands>Add</excludedCommands>
+        <excludedCommands>OutputList</excludedCommands>
         <items xsi:type="form:FormGroup">
           <name>ItemListGroupItem</name>
           <id>37</id>

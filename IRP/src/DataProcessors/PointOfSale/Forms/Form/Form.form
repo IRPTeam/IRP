@@ -6318,6 +6318,14 @@ End</presentationExpression>
        <key>en</key>
        <value>Item ID</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Артикул</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Malzeme ID</value>
+      </content>
      </localValue>
     </title>
    </fields>

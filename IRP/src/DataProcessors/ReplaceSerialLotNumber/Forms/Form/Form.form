@@ -483,7 +483,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>DocumentsDocmentName</name>
+      <name>DocumentsDocumentName</name>
       <id>46</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -491,10 +491,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>Documents.DocmentName</segments>
+        <segments>Documents.DocumentName</segments>
       </dataPath>
       <extendedTooltip>
-        <name>DocumentsDocmentNameExtendedTooltip</name>
+        <name>DocumentsDocumentNameExtendedTooltip</name>
         <id>48</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -509,7 +509,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>DocumentsDocmentNameContextMenu</name>
+        <name>DocumentsDocumentNameContextMenu</name>
         <id>47</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -3124,10 +3124,10 @@
       </edit>
     </columns>
     <columns>
-      <name>DocmentName</name>
+      <name>DocumentName</name>
       <title>
         <key>en</key>
-        <value>Docment name</value>
+        <value>Document name</value>
       </title>
       <id>13</id>
       <valueType>

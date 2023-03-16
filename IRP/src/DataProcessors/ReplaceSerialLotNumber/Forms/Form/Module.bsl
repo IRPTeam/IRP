@@ -1,11 +1,11 @@
 
 &AtClient
 Procedure SerialLotNumberOnChange(Item)
-	SerialLotNumberOnChageAtServer();
+	SerialLotNumberOnChangeAtServer();
 EndProcedure
 
 &AtServer
-Procedure SerialLotNumberOnChageAtServer()
+Procedure SerialLotNumberOnChangeAtServer()
 	If Not ValueIsFilled(ThisObject.SerialLotNumber) Then
 		ThisObject.ItemKey = Undefined;
 		ThisObject.Item    = Undefined;
@@ -35,7 +35,7 @@ Procedure Replace(Command)
 		Return;
 	EndIf;
 	If ReplaceAtServer() Then
-		SerialLotNumberOnChageAtServer();
+		SerialLotNumberOnChangeAtServer();
 		FindRefsAtServer();
 	EndIf;
 EndProcedure
@@ -130,13 +130,14 @@ Procedure FindRefsAtServer()
 	EndDo;
 EndProcedure
 
-Procedure AddDocument_SerialLotNumbers(Row, MetadataFullName);
+&AtServer
+Procedure AddDocument_SerialLotNumbers(Row, MetadataFullName)
 	DepRows = Row.Data.SerialLotNumbers.FindRows(New Structure("SerialLotNumber", ThisObject.SerialLotNumber));
 	
 	For Each DepRow In DepRows Do
 		NewRow = ThisObject.Documents.Add();
 		NewRow.Ref               = Row.Data;
-		NewRow.DocmentName       = MetadataFullName;
+		NewRow.DocumentName       = MetadataFullName;
 		NewRow.SerialLotNumber   = DepRow.SerialLotNumber;
 		NewRow.TabularSection    = "ItemList";
 		NewRow.DepTabularSection = "SerialLotNumbers";
@@ -221,10 +222,11 @@ Procedure AddDocument_SerialLotNumbers(Row, MetadataFullName);
 	EndDo;
 EndProcedure
 
-Procedure AddDocument_ItemList(Row, MetadataFullName, TabularSectionName);		
+&AtServer
+Procedure AddDocument_ItemList(Row, MetadataFullName, TabularSectionName)
 	NewRow = ThisObject.Documents.Add();
 	NewRow.Ref               = Row.Data;
-	NewRow.DocmentName       = MetadataFullName;
+	NewRow.DocumentName       = MetadataFullName;
 					
 	NewRow.TabularSection    = TabularSectionName;
 	NewRow.DepTabularSection = "";
@@ -267,6 +269,7 @@ Function ReplaceAtServer()
 	Return Not IsError;
 EndFunction
 
+&AtServer
 Procedure ReplaceRef()
 	SerialLotNumberObject = ThisObject.SerialLotNumber.GetObject();
 	SerialLotNumberObject.SerialLotNumberOwner = ThisObject.NewItemKey;

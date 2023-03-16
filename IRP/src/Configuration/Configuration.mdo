@@ -945,6 +945,7 @@
   <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
   <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
   <dataProcessors>DataProcessor.ObjectPropertyEditor</dataProcessors>
+  <dataProcessors>DataProcessor.ReplaceSerialLotNumber</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

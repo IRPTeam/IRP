@@ -2,7 +2,7 @@
 Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumber, Table_SourceOfOrigins, Table_ConsignorBatches, SilentMode = False) Export
 	tmpItemList = New ValueTable();
 	tmpItemList.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-	tmpItemList.Columns.Add("InventoryOrigin" , New TypeDescription("EnumRef.InventoryOrigingTypes"));
+	tmpItemList.Columns.Add("InventoryOrigin" , New TypeDescription("EnumRef.InventoryOriginTypes"));
 	tmpItemList.Columns.Add("Company"         , New TypeDescription("CatalogRef.Companies"));
 	tmpItemList.Columns.Add("ItemKey"         , New TypeDescription("CatalogRef.ItemKeys"));
 	tmpItemList.Columns.Add("Store"           , New TypeDescription("CatalogRef.Stores"));
@@ -166,7 +166,7 @@ Function GetRegistrateConsignorBatches(DocObject, ItemListTable, ConsignorBatche
 	
 	ArrayForDelete = New Array();
 	For Each Row In ItemListTable Do
-		If Row.InventoryOrigin <> Enums.InventoryOrigingTypes.ConsignorStocks Then
+		If Row.InventoryOrigin <> Enums.InventoryOriginTypes.ConsignorStocks Then
 			BatchRows = RegisterConsignorBatches.FindRows(New Structure("Key", Row.Key));
 			For Each BatchRow In BatchRows Do
 				RegisterConsignorBatches.Delete(BatchRow);
@@ -999,7 +999,7 @@ EndFunction
 Function GetExistingRows(Object, StoreInHeader, FilterStructure, FilterValues, FirstCall = True) Export
 	Result = New Structure();
 	Result.Insert("ArrayOfRowKeys", New Array());
-	Result.Insert("InventoryOrigin", Enums.InventoryOrigingTypes.OwnStocks);
+	Result.Insert("InventoryOrigin", Enums.InventoryOriginTypes.OwnStocks);
 	
 	DocMetadata = Object.Ref.Metadata();
 	DocObject = FormDataToValue(Object, Type("DocumentObject." + DocMetadata.Name));
@@ -1034,7 +1034,7 @@ Function GetExistingRows(Object, StoreInHeader, FilterStructure, FilterValues, F
 		NewRow_SourceOfOrigin.Quantity        = FilterValues.Quantity;
 	EndIf;
 	
-	BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "InventoryOrigin", Enums.InventoryOrigingTypes.ConsignorStocks);
+	BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "InventoryOrigin", Enums.InventoryOriginTypes.ConsignorStocks);
 	
 	ObjectRefType = TypeOf(Object.Ref);
 	If ObjectRefType = Type("DocumentRef.InventoryTransfer") Then
@@ -1124,7 +1124,7 @@ EndFunction
 
 Function AsOwnStocks(Object, Result, FilterStructure, FilterValues)
 	FillPropertyValues(FilterStructure, FilterValues);
-	FilterStructure.Insert("InventoryOrigin", Enums.InventoryOrigingTypes.OwnStocks);
+	FilterStructure.Insert("InventoryOrigin", Enums.InventoryOriginTypes.OwnStocks);
 
 	ItemListRows = Object.ItemList.FindRows(FilterStructure);
 	For Each Row In ItemListRows Do
@@ -1151,7 +1151,7 @@ EndFunction
 
 Function AsConsignorStocks(Object, Wrapper, NewRow_ItemList, Result, FilterStructure, FilterValues)
 	FillPropertyValues(FilterStructure, FilterValues);
-	FilterStructure.Insert("InventoryOrigin", Enums.InventoryOrigingTypes.ConsignorStocks);
+	FilterStructure.Insert("InventoryOrigin", Enums.InventoryOriginTypes.ConsignorStocks);
 	ItemListRows = Object.ItemList.FindRows(FilterStructure);
 	
 	ObjectRefType = TypeOf(Object.Ref);
@@ -1208,7 +1208,7 @@ Function AsConsignorStocks(Object, Wrapper, NewRow_ItemList, Result, FilterStruc
 		EndIf;
 	EndDo;
 	
-	Result.InventoryOrigin = Enums.InventoryOrigingTypes.ConsignorStocks;
+	Result.InventoryOrigin = Enums.InventoryOriginTypes.ConsignorStocks;
 	Return Result;
 EndFunction
 

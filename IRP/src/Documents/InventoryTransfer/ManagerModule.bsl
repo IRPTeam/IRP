@@ -322,8 +322,8 @@ Function ItemList()
 		|	InventoryTransferItemList.ProductionPlanning AS ProductionPlanning,
 		|	NOT InventoryTransferItemList.ProductionPlanning.Ref IS NULL AS UseProductionPlanning,
 		|	InventoryTransferItemList.Key AS Key,
-		|	InventoryTransferItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.OwnStocks) AS IsOwnStocks,
-		|	InventoryTransferItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.ConsignorStocks) AS IsConsignorStocks
+		|	InventoryTransferItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
+		|	InventoryTransferItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks
 		|INTO ItemList
 		|FROM
 		|	Document.InventoryTransfer.ItemList AS InventoryTransferItemList

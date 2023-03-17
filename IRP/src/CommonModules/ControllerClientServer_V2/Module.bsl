@@ -173,7 +173,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 			If Not CommonFunctionsClientServer.ObjectHasProperty(Row, "InventoryOrigin") Then
 				Continue;
 			EndIf;
-			If Row.InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
+			If Row.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then
 				ServerParameters.RowsConsignorStocks.Add(Row);
 			EndIf;
 		EndDo;
@@ -4513,16 +4513,9 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 	
 	TableRows =  GetRows(Parameters, Parameters.TableName);
 	If UseInventoryOrigin Then
-//		If TableRows.Count() 
-//			And TableRows[0].Property("InventoryOrigin") 
-//			And TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
-//			
-//			TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
-//			Parameters.RowsForRecalculate = TableRows;
-//		EndIf;
 		If TableRows.Count() = 1
 			And TableRows[0].Property("InventoryOrigin") Then
-			If TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then			
+			If TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then			
 				TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
 				Parameters.RowsForRecalculate = TableRows;
 			EndIf;
@@ -4530,7 +4523,7 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 			TableRows = New Array();
 			For Each Row In TableRows Do
 				If Row.Property("InventoryOrigin") 
-					And Row.InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
+					And Row.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then
 					TableRows.Add(Row);
 				EndIf;
 			EndDo;

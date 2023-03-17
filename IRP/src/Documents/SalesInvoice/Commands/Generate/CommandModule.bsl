@@ -130,7 +130,7 @@ Function GetDocumentTable_SalesReportToConsignor(ArrayOfBasisDocuments)
 	|	""SalesReportToConsignor"" AS BasedOn,
 	|	ItemList.Ref.Company AS Company,
 	|	VALUE(Enum.SalesTransactionTypes.Sales) AS TransactionType,
-	|	VALUE(Enum.InventoryOrigingTypes.OwnStocks) AS InventoryOrigin,
+	|	VALUE(Enum.InventoryOriginTypes.OwnStocks) AS InventoryOrigin,
 	|	ItemList.Ref.Partner AS Partner,
 	|	ItemList.Ref.Agreement AS Agreement,
 	|	ItemList.Ref.LegalName AS LegalName,
@@ -159,7 +159,7 @@ Function GetDocumentTable_SalesReportToConsignor(ArrayOfBasisDocuments)
 	|	ItemList.Ref.Agreement.TradeAgentFeeItem,
 	|	ItemList.Ref.Agreement.TradeAgentFeeItemKey,
 	|	VALUE(Enum.SalesTransactionTypes.Sales),
-	|	VALUE(Enum.InventoryOrigingTypes.OwnStocks),
+	|	VALUE(Enum.InventoryOriginTypes.OwnStocks),
 	|	ItemList.Ref.Agreement.TradeAgentFeeProfitLossCenter,
 	|	ItemList.Ref.Agreement.TradeAgentFeeExpenseRevenueType";
 	Query.SetParameter("ArrayOfBasisDocuments", ArrayOfBasisDocuments);

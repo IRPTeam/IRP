@@ -178,7 +178,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	
 	If ThisObject.TransactionType = Enums.SalesTransactionTypes.ShipmentToTradeAgent Then
 		For Each Row In ThisObject.ItemList Do
-			If Row.InventoryOrigin = Enums.InventoryOrigingTypes.ConsignorStocks Then
+			If Row.InventoryOrigin = Enums.InventoryOriginTypes.ConsignorStocks Then
 				CommonFunctionsClientServer.ShowUsersMessage(R().Error_121, 
 					"Object.ItemList[" + (QuerySelection.LineNumber - 1) + "].InventoryOrigin", 
 					"Object.ItemList");

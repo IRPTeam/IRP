@@ -47,15 +47,15 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|	case 
 	|	when R6010B_BatchWiseBalance.Batch.Document refs Document.PurchaseInvoice then
 	|		case when R6010B_BatchWiseBalance.Batch.Document.TransactionType = value(Enum.PurchaseTransactionTypes.ReceiptFromConsignor) then
-	|		value(Enum.InventoryOrigingTypes.ConsignorStocks)		
-	|		else value(Enum.InventoryOrigingTypes.OwnStocks) end
+	|		value(Enum.InventoryOriginTypes.ConsignorStocks)		
+	|		else value(Enum.InventoryOriginTypes.OwnStocks) end
 	|
 	|	when R6010B_BatchWiseBalance.Batch.Document refs Document.OpeningEntry then
 	|		case when Not R6010B_BatchWiseBalance.Batch.Document.PartnerConsignor.Ref is null then
-	|		value(Enum.InventoryOrigingTypes.ConsignorStocks)
-	|		else value(Enum.InventoryOrigingTypes.OwnStocks) end
+	|		value(Enum.InventoryOriginTypes.ConsignorStocks)
+	|		else value(Enum.InventoryOriginTypes.OwnStocks) end
 	|
-	|	else value(Enum.InventoryOrigingTypes.OwnStocks) 
+	|	else value(Enum.InventoryOriginTypes.OwnStocks) 
 	|	end as InventoryOrigin,
 	|
 	// Partner
@@ -70,7 +70,7 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|		R6010B_BatchWiseBalance.Batch.Document.PartnerConsignor
 	|		else Undefined end
 	|
-	|	else value(Enum.InventoryOrigingTypes.OwnStocks) 
+	|	else value(Enum.InventoryOriginTypes.OwnStocks) 
 	|	end as Partner,
 	// Agreement
 	|	case 
@@ -84,7 +84,7 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|		R6010B_BatchWiseBalance.Batch.Document.AgreementConsignor
 	|		else Undefined end
 	|
-	|	else value(Enum.InventoryOrigingTypes.OwnStocks) 
+	|	else value(Enum.InventoryOriginTypes.OwnStocks) 
 	|	end as Agreement,
 	// Legal name
 	|	case 
@@ -98,7 +98,7 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|		R6010B_BatchWiseBalance.Batch.Document.LegalNameConsignor
 	|		else Undefined end
 	|
-	|	else value(Enum.InventoryOrigingTypes.OwnStocks) 
+	|	else value(Enum.InventoryOriginTypes.OwnStocks) 
 	|	end as LegalName,
 	// Serial lot number, source of origin
 	|	R6010B_BatchWiseBalance.BatchKey.SerialLotNumber AS SerialLotNumber,
@@ -126,7 +126,7 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|	R6030T_BatchShortageOutgoing.BatchKey.ItemKey,
 	|	R6030T_BatchShortageOutgoing.BatchKey.Store,
 	|	R6030T_BatchShortageOutgoing.Company,
-	|	value(Enum.InventoryOrigingTypes.OwnStocks),
+	|	value(Enum.InventoryOriginTypes.OwnStocks),
 	|	Undefined,
 	|	Undefined,
 	|	Undefined,
@@ -154,7 +154,7 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|	R6040T_BatchShortageIncoming.BatchKey.ItemKey,
 	|	R6040T_BatchShortageIncoming.BatchKey.Store,
 	|	R6040T_BatchShortageIncoming.Company,
-	|	value(Enum.InventoryOrigingTypes.OwnStocks),
+	|	value(Enum.InventoryOriginTypes.OwnStocks),
 	|	Undefined,
 	|	Undefined,
 	|	Undefined,
@@ -232,15 +232,15 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	case 
 	|	when R6010B_BatchWiseBalance.Batch.Document refs Document.PurchaseInvoice then
 	|		case when R6010B_BatchWiseBalance.Batch.Document.TransactionType = value(Enum.PurchaseTransactionTypes.ReceiptFromConsignor) then
-	|		value(Enum.InventoryOrigingTypes.ConsignorStocks)		
-	|		else value(Enum.InventoryOrigingTypes.OwnStocks) end
+	|		value(Enum.InventoryOriginTypes.ConsignorStocks)		
+	|		else value(Enum.InventoryOriginTypes.OwnStocks) end
 	|
 	|	when R6010B_BatchWiseBalance.Batch.Document refs Document.OpeningEntry then
 	|		case when Not R6010B_BatchWiseBalance.Batch.Document.PartnerConsignor.Ref is null then
-	|		value(Enum.InventoryOrigingTypes.ConsignorStocks)
-	|		else value(Enum.InventoryOrigingTypes.OwnStocks) end
+	|		value(Enum.InventoryOriginTypes.ConsignorStocks)
+	|		else value(Enum.InventoryOriginTypes.OwnStocks) end
 	|
-	|	else value(Enum.InventoryOrigingTypes.OwnStocks) 
+	|	else value(Enum.InventoryOriginTypes.OwnStocks) 
 	|	end as InventoryOrigin,
 	|
 	// Partner
@@ -255,7 +255,7 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|		R6010B_BatchWiseBalance.Batch.Document.PartnerConsignor
 	|		else Undefined end
 	|
-	|	else value(Enum.InventoryOrigingTypes.OwnStocks) 
+	|	else value(Enum.InventoryOriginTypes.OwnStocks) 
 	|	end as Partner,
 	// Agreement
 	|	case 
@@ -269,7 +269,7 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|		R6010B_BatchWiseBalance.Batch.Document.AgreementConsignor
 	|		else Undefined end
 	|
-	|	else value(Enum.InventoryOrigingTypes.OwnStocks) 
+	|	else value(Enum.InventoryOriginTypes.OwnStocks) 
 	|	end as Agreement,
 	// Legal name
 	|	case 
@@ -283,7 +283,7 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|		R6010B_BatchWiseBalance.Batch.Document.LegalNameConsignor
 	|		else Undefined end
 	|
-	|	else value(Enum.InventoryOrigingTypes.OwnStocks) 
+	|	else value(Enum.InventoryOriginTypes.OwnStocks) 
 	|	end as LegalName,
 	// Serial lot number, source of origin
 	|	R6010B_BatchWiseBalance.BatchKey.SerialLotNumber AS SerialLotNumber,
@@ -314,7 +314,7 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	R6030T_BatchShortageOutgoing.BatchKey.ItemKey,
 	|	R6030T_BatchShortageOutgoing.BatchKey.Store,
 	|	R6030T_BatchShortageOutgoing.Company,
-	|	value(Enum.InventoryOrigingTypes.OwnStocks),
+	|	value(Enum.InventoryOriginTypes.OwnStocks),
 	|	Undefined,
 	|	Undefined,
 	|	Undefined,
@@ -343,7 +343,7 @@ Procedure BatchBalance_LoadRecords(CalculationMovementCostRef) Export
 	|	R6040T_BatchShortageIncoming.BatchKey.ItemKey,
 	|	R6040T_BatchShortageIncoming.BatchKey.Store,
 	|	R6040T_BatchShortageIncoming.Company,
-	|	value(Enum.InventoryOrigingTypes.OwnStocks),
+	|	value(Enum.InventoryOriginTypes.OwnStocks),
 	|	Undefined,
 	|	Undefined,
 	|	Undefined,

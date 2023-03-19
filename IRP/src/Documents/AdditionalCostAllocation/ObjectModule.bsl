@@ -40,7 +40,8 @@ Procedure FillTables_ByDocuments()
 	|	CostDocuments.Document AS Basis,
 	|	CostDocuments.Currency,
 	|	R6070T_OtherPeriodsExpensesBalance.ItemKey,
-	|	R6070T_OtherPeriodsExpensesBalance.AmountBalance AS Amount
+	|	R6070T_OtherPeriodsExpensesBalance.AmountBalance AS Amount,
+	|	R6070T_OtherPeriodsExpensesBalance.AmountTaxBalance AS TaxAmount
 	|FROM
 	|	CostDocuments AS CostDocuments
 	|		LEFT JOIN AccumulationRegister.R6070T_OtherPeriodsExpenses.Balance(&BalancePeriod, (Basis, Currency) IN
@@ -76,9 +77,9 @@ Procedure FillTables_ByDocuments()
 	|		AND T6020S_BatchKeysInfo.Direction = VALUE(Enum.BatchDirection.Receipt)
 	|		AND T6020S_BatchKeysInfo.RowID <> """"";
 	
-	Query.SetParameter("CostDocuments", ThisObject.CostDocuments.Unload());
-	Query.SetParameter("AllocationDocuments", ThisObject.AllocationDocuments.Unload());
-	Query.SetParameter("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
+	Query.SetParameter("CostDocuments"        , ThisObject.CostDocuments.Unload());
+	Query.SetParameter("AllocationDocuments"  , ThisObject.AllocationDocuments.Unload());
+	Query.SetParameter("CurrencyMovementType" , ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
 	BalancePeriod = Undefined;
 	If ValueIsFilled(ThisObject.Ref) And ThisObject.Ref.Posted Then
 		BalancePeriod = New Boundary(ThisObject.Ref.PointInTime(), BoundaryType.Excluding);
@@ -113,15 +114,24 @@ Procedure FillTables_ByDocuments()
 	
 	For Each RowCost In CostTable Do
 		FillPropertyValues(ThisObject.CostList.Add(), RowCost);
-		TotalAllocated = 0;
-		MaxRow = Undefined;
+		
+		TotalAllocated    = 0;
+		TotalAllocatedTax = 0;
+		
+		MaxRow    = Undefined;
+		MaxRowTax = Undefined;
+		
 		For Each RowAllocation In AllocationTable.Copy(New Structure("Key", RowCost.Key)) Do
 			NewRowAllocationList = ThisObject.AllocationList.Add();
 			FillPropertyValues(NewRowAllocationList, RowAllocation);
 			NewRowAllocationList.BasisRowID = RowCost.RowID;
-			NewRowAllocationList.Amount = (RowCost.Amount / Total) * RowAllocation[ColumnName];
 			
-			TotalAllocated = TotalAllocated + NewRowAllocationList.Amount;
+			NewRowAllocationList.Amount    = (RowCost.Amount   / Total)  * RowAllocation[ColumnName];
+			NewRowAllocationList.TaxAmount = (RowCost.TaxAmount / Total) * RowAllocation[ColumnName];
+			
+			TotalAllocated    = TotalAllocated    + NewRowAllocationList.Amount;
+			TotalAllocatedTax = TotalAllocatedTax + NewRowAllocationList.TaxAmount;
+			
 			If MaxRow = Undefined Then
 				MaxRow = NewRowAllocationList;
 			Else
@@ -129,11 +139,25 @@ Procedure FillTables_ByDocuments()
 					MaxRow = NewRowAllocationList;
 				EndIf;
 			EndIf;
+			
+			If MaxRowTax = Undefined Then
+				MaxRowTax = NewRowAllocationList;
+			Else
+				If MaxRowTax.TaxAmount < NewRowAllocationList.TaxAmount Then
+					MaxRowTax = NewRowAllocationList;
+				EndIf;
+			EndIf;
+			
 		EndDo;
 		
 		If RowCost.Amount <> TotalAllocated And MaxRow <> Undefined Then
 			MaxRow.Amount = MaxRow.Amount + (RowCost.Amount - TotalAllocated);
 		EndIf;
+		
+		If RowCost.TaxAmount <> TotalAllocatedTax And MaxRowTax <> Undefined Then
+			MaxRowTax.TaxAmount = MaxRowTax.TaxAmount + (RowCost.TaxAmount - TotalAllocatedTax);
+		EndIf;
+		
 	EndDo;
 	
 EndProcedure

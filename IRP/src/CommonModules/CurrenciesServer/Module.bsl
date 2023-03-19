@@ -221,13 +221,8 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	AddAmountsColumns(RecordSet, "AmountTax");
 	AddAmountsColumns(RecordSet, "Price");
 	AddAmountsColumns(RecordSet, "ConsignorPrice");
-
-	If RecordSet.Columns.Find("SalesAmount") = Undefined Then
-		RecordSet.Columns.Add("SalesAmount", New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
-	EndIf;
-	If RecordSet.Columns.Find("NetOfferAmount") = Undefined Then
-		RecordSet.Columns.Add("NetOfferAmount", New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
-	EndIf;
+	AddAmountsColumns(RecordSet, "SalesAmount");
+	AddAmountsColumns(RecordSet, "NetOfferAmount");
 
 	Query = New Query();
 	Query.TempTablesManager = TempTableManager;
@@ -506,24 +501,61 @@ Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 	EndDo;
 EndProcedure
 
-Function AddRowToCurrencyTable(RatePeriod, CurrenciesTable, RowKey, CurrencyFrom, CurrencyMovementType) Export
+Function AddRowToCurrencyTable(RatePeriod, CurrenciesTable, RowKey, CurrencyFrom, CurrencyMovementType, FixedRates = Undefined) Export
+	If FixedRates <> Undefined Then
+		TableOfFixedRates = New ValueTable();
+		TableOfFixedRates.Columns.Add("Key");
+		TableOfFixedRates.Columns.Add("CurrencyFrom");
+		TableOfFixedRates.Columns.Add("MovementType");
+		TableOfFixedRates.Columns.Add("Rate");
+		TableOfFixedRates.Columns.Add("ReverseRate");
+		TableOfFixedRates.Columns.Add("Multiplicity");
+		
+		For Each Row In FixedRates Do
+			FillPropertyValues(TableOfFixedRates.Add(), Row);
+		EndDo;
+	EndIf;
+	
 	NewRow = CurrenciesTable.Add();
 	NewRow.Key = RowKey;
 	NewRow.CurrencyFrom = CurrencyFrom;
 	NewRow.MovementType = CurrencyMovementType;
 	If Not CurrencyMovementType.DeferredCalculation Then
-		CurrencyInfo = Catalogs.Currencies.GetCurrencyInfo(RatePeriod, 
-			CurrencyFrom, 
-			CurrencyMovementType.Currency,
-			CurrencyMovementType.Source);
-		If Not ValueIsFilled(CurrencyInfo.Rate) Then
-			NewRow.Rate = 0;
-			NewRow.ReverseRate = 0;
-			NewRow.Multiplicity = 1;
-		Else
-			NewRow.Rate = CurrencyInfo.Rate;
-			NewRow.ReverseRate = 1 / CurrencyInfo.Rate;
-			NewRow.Multiplicity = CurrencyInfo.Multiplicity;
+		
+		UseFixedRates = False;
+		
+		// fixed rates from document
+		If FixedRates <> Undefined Then
+			Filter = New Structure();
+			//Filter.Insert("Key"          , NewRow.Key);
+			Filter.Insert("CurrencyFrom" , NewRow.CurrencyFrom);
+			Filter.Insert("MovementType" , NewRow.MovementType);
+			
+			RowsFixedRates = TableOfFixedRates.FindRows(Filter);
+			If RowsFixedRates.Count() Then
+				UseFixedRates = True;
+				
+				NewRow.Rate         = RowsFixedRates[0].Rate;
+				NewRow.ReverseRate  = RowsFixedRates[0].ReverseRate;
+				NewRow.Multiplicity = RowsFixedRates[0].Multiplicity;
+			EndIf;
+		EndIf;
+		
+		// rates from register	
+		If Not UseFixedRates Then
+			CurrencyInfo = Catalogs.Currencies.GetCurrencyInfo(RatePeriod, 
+				CurrencyFrom, 
+				CurrencyMovementType.Currency,
+				CurrencyMovementType.Source);
+			If Not ValueIsFilled(CurrencyInfo.Rate) Then
+				NewRow.Rate = 0;
+				NewRow.ReverseRate = 0;
+				NewRow.Multiplicity = 1;
+			Else
+				NewRow.Rate = CurrencyInfo.Rate;
+				NewRow.ReverseRate = 1 / CurrencyInfo.Rate;
+				NewRow.Multiplicity = CurrencyInfo.Multiplicity;
+			EndIf;
 		EndIf;
 	EndIf;
 	Return NewRow;

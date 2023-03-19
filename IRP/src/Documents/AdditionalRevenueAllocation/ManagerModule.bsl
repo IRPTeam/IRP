@@ -95,7 +95,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	
 	BatchRevenueAllocationInfoRecalculated = BatchRevenueAllocationInfoRecalculated.Copy(New Structure("CurrencyMovementType", CurrencyMovementType));
 	BatchRevenueAllocationInfoRecalculated.GroupBy("Period, Company, Document, Store, ItemKey, Currency, CurrencyMovementType", 
-	"Amount");	
+	"Amount, AmountTax");	
 	Tables.T6070S_BatchRevenueAllocationInfo = BatchRevenueAllocationInfoRecalculated;
 	
 	OtherPeriodsRevenuesMetadata    = Parameters.Object.RegisterRecords.R6080T_OtherPeriodsRevenues.Metadata();
@@ -194,6 +194,7 @@ Function RevenueList()
 	|	RevenueList.Basis.Currency AS Currency,
 	|	RevenueList.RowID AS Key,
 	|	SUM(ISNULL(AllocationList.Amount, 0)) AS Amount,
+	|	SUM(ISNULL(AllocationList.TaxAmount, 0)) AS AmountTax,
 	|	AllocationList.RowID
 	|INTO RevenueList
 	|FROM
@@ -225,6 +226,7 @@ Function AllocationList()
 	|	AllocationList.Store AS Store,
 	|	AllocationList.ItemKey AS ItemKey,
 	|	SUM(AllocationList.Amount) AS Amount,
+	|	SUM(AllocationList.TaxAmount) AS AmountTax,
 	|	RevenueList.Currency AS Currency,
 	|	RevenueList.Basis AS Basis,
 	|	AllocationList.RowID AS Key,

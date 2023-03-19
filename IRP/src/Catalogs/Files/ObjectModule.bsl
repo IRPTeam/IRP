@@ -2,6 +2,7 @@ Procedure BeforeWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
+	isPreviewSet = ValueIsFilled(Preview.Get());
 EndProcedure
 
 Procedure OnWrite(Cancel)

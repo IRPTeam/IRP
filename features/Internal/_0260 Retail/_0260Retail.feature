@@ -226,11 +226,11 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, XS/Blue' |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, L/Green' |
+			| '(10001) Dress, L/Green' |
 		And I select current line in "ItemsPickup" table
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Price'  | 'Quantity' | 'Total'  |
@@ -247,13 +247,13 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 	* Create second RSR (card)
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, XS/Blue' |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And I input "4,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'            |
-			| 'Dress, S/Yellow' |
+			| '(10001) Dress, S/Yellow' |
 		And I select current line in "ItemsPickup" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -267,13 +267,13 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 	* Create third RSR (card)
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, XS/Blue' |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And I input "4,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'            |
-			| 'Dress, S/Yellow' |
+			| '(10001) Dress, S/Yellow' |
 		And I select current line in "ItemsPickup" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -287,13 +287,13 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 	* Create first RSR (cash)
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, XS/Blue' |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And I input "3,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'            |
-			| 'Dress, S/Yellow' |
+			| '(10001) Dress, S/Yellow' |
 		And I select current line in "ItemsPickup" table
 		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -302,13 +302,13 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 	* Create second RSR (cash)
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, XS/Blue' |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'            |
-			| 'Dress, S/Yellow' |
+			| '(10001) Dress, S/Yellow' |
 		And I select current line in "ItemsPickup" table
 		And I input "8,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -588,11 +588,11 @@ Scenario: _0260132 create RSR (payment by bank credit)
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, XS/Blue' |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, L/Green' |
+			| '(10001) Dress, L/Green' |
 		And I select current line in "ItemsPickup" table
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Price'  | 'Quantity' | 'Total'  |
@@ -693,7 +693,7 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, XS/Blue' |
+			| '(10001) Dress, XS/Blue' |
 		And I select current line in "ItemsPickup" table
 		And I move to the tab named "ButtonPage"
 		And I click "Search customer" button
@@ -1032,7 +1032,7 @@ Scenario: _0260140 create RRR from POS (add items than select basis document)
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, L/Green' |
+			| '(10001) Dress, L/Green' |
 		And I select current line in "ItemsPickup" table
 		And I move to the tab named "ButtonPage"
 		And I click the button named "Return"		
@@ -1098,7 +1098,7 @@ Scenario: _0260141 return from POS (without basis document)
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
 			| 'Item'           |
-			| 'Dress, L/Green' |
+			| '(10001) Dress, L/Green' |
 		And I select current line in "ItemsPickup" table
 		And I move to the tab named "ButtonPage"
 		And I click the button named "Return"		

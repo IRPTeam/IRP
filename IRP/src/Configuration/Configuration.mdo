@@ -905,7 +905,7 @@
   <enums>Enum.PurchaseTransactionTypes</enums>
   <enums>Enum.SalesReturnTransactionTypes</enums>
   <enums>Enum.PurchaseReturnTransactionTypes</enums>
-  <enums>Enum.InventoryOrigingTypes</enums>
+  <enums>Enum.InventoryOriginTypes</enums>
   <enums>Enum.TradeAgentFeeTypes</enums>
   <enums>Enum.ReceiptPaymentMethods</enums>
   <enums>Enum.DocumentFiscalStatuses</enums>
@@ -945,6 +945,7 @@
   <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
   <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
   <dataProcessors>DataProcessor.ObjectPropertyEditor</dataProcessors>
+  <dataProcessors>DataProcessor.ReplaceSerialLotNumber</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

@@ -327,8 +327,8 @@ Function ItemList()
 	|	ItemList.Price,
 	|	ItemList.PriceType,
 	|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
-	|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.OwnStocks) AS IsOwnStocks,
-	|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.ConsignorStocks) AS IsConsignorStocks,
+	|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
+	|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks,
 	|	TableRowIDInfo.RowID AS RowID
 	|INTO ItemList
 	|FROM

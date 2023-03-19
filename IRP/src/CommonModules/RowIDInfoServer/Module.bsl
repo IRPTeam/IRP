@@ -2275,7 +2275,7 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.Currency AS Currency,
 	|	ItemList.Ref.Company AS Company,
 	|	ItemList.ItemKey AS ItemKey,
-	|	Value(Enum.InventoryOrigingTypes.OwnStocks) AS InventoryOrigin,
+	|	Value(Enum.InventoryOriginTypes.OwnStocks) AS InventoryOrigin,
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.Store AS Store,
 	|	ItemList.PriceType AS PriceType,
@@ -3443,7 +3443,7 @@ Function ExtractData_FromITO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.StoreReceiver AS StoreReceiver,
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.ItemKey AS ItemKey,
-	|	Value(Enum.InventoryOrigingTypes.OwnStocks) AS InventoryOrigin,
+	|	Value(Enum.InventoryOriginTypes.OwnStocks) AS InventoryOrigin,
 	|	0 AS Quantity,
 	|	BasisesTable.Key,
 	|	BasisesTable.Unit AS Unit,
@@ -4260,7 +4260,7 @@ Function ExtractData_FromWO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.Company AS Company,
 	|	ItemList.ItemKey AS ItemKey,
 	|	ItemList.ItemKey.Item AS Item,
-	|	Value(Enum.InventoryOrigingTypes.OwnStocks) AS InventoryOrigin,
+	|	Value(Enum.InventoryOriginTypes.OwnStocks) AS InventoryOrigin,
 	|	ItemList.PriceType AS PriceType,
 	|	ItemList.DontCalculateRow AS DontCalculateRow,
 	|	ItemList.Ref.Branch AS Branch,
@@ -10204,7 +10204,9 @@ Procedure CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, Basises
 					ResultsFilter.Insert("BasisKey", DeepLevelRow.Key);
 					ResultsFilter.Insert("Basis", DeepLevelRow.Basis);
 					If ResultsTable.FindRows(ResultsFilter).Count() Then
-						DeepLevelRow.Use = True;
+						If CommonFunctionsClientServer.ObjectHasProperty(DeepLevelRow, "Use") Then
+							DeepLevelRow.Use = True;
+						EndIf;
 						DeepLevelRow.Linked = True;
 					EndIf;
 
@@ -10822,7 +10824,7 @@ Procedure GetBasisInfoRecursive(Basis, BasisKey, RowID, ResultTable, Key)
 		NewRow = ResultTable.Add();
 		NewRow.Key = Key;
 		NewRow.Recorder = BasisInfo.ParentBasis;
-		GetBasisInfoRecursive(BasisInfo.Basis, BasisInfo.BasisKey, RowID, ResultTable, Key)
+		GetBasisInfoRecursive(BasisInfo.ParentBasis, BasisInfo.BasisKey, RowID, ResultTable, Key)
 	EndIf;
 EndProcedure
 

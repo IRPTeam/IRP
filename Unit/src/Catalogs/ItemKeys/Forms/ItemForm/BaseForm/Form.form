@@ -14,9 +14,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Code</segments>
-        </dataPath>
         <extendedTooltip>
           <name>CodeExtendedTooltip</name>
           <id>103</id>
@@ -64,9 +61,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Item</segments>
-        </dataPath>
         <extendedTooltip>
           <name>ItemExtendedTooltip</name>
           <id>3</id>
@@ -114,9 +108,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>ItemType</segments>
-        </dataPath>
         <extendedTooltip>
           <name>ItemTypeExtendedTooltip</name>
           <id>11</id>
@@ -161,9 +152,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.ItemKeyID</segments>
-        </dataPath>
         <extendedTooltip>
           <name>ExtendedTooltip</name>
           <id>97</id>
@@ -216,9 +204,6 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>InheritUnit</segments>
-            </dataPath>
             <extendedTooltip>
               <name>InheritUnitExtendedTooltip</name>
               <id>20</id>
@@ -263,9 +248,6 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.Unit</segments>
-            </dataPath>
             <extendedTooltip>
               <name>OwnUnitExtendedTooltip</name>
               <id>8</id>
@@ -321,9 +303,6 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>UnitMode</segments>
-            </dataPath>
             <titleLocation>None</titleLocation>
             <extendedTooltip>
               <name>UnitModeExtendedTooltip</name>
@@ -406,6 +385,53 @@
             <currentRowUse>Auto</currentRowUse>
           </extInfo>
         </items>
+        <items xsi:type="form:FormField">
+          <name>PackageUnit</name>
+          <id>126</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <extendedTooltip>
+            <name>PackageUnitExtendedTooltip</name>
+            <id>128</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>PackageUnitContextMenu</name>
+            <id>127</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
         <items xsi:type="form:FormGroup">
           <name>GroupSpecification</name>
           <id>45</id>
@@ -417,9 +443,6 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>SpecificationMode</segments>
-            </dataPath>
             <extendedTooltip>
               <name>SpecificationModeExtendedTooltip</name>
               <id>49</id>
@@ -462,9 +485,6 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.Specification</segments>
-            </dataPath>
             <titleLocation>None</titleLocation>
             <extendedTooltip>
               <name>SpecificationExtendedTooltip</name>
@@ -506,7 +526,7 @@
               <choiceParameterLinks>
                 <name>Filter.CustomFilterByItem</name>
                 <datapath xsi:type="form:DataPath">
-                  <segments>Object.Item</segments>
+                  <segments>0</segments>
                 </datapath>
               </choiceParameterLinks>
             </extInfo>
@@ -577,9 +597,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.UseIncomingStockReservation</segments>
-        </dataPath>
         <extendedTooltip>
           <name>UseIncomingStockReservationExtendedTooltip</name>
           <id>125</id>
@@ -623,9 +640,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Length</segments>
-          </dataPath>
           <extendedTooltip>
             <name>LengthExtendedTooltip</name>
             <id>108</id>
@@ -673,9 +687,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Width</segments>
-          </dataPath>
           <extendedTooltip>
             <name>WidthExtendedTooltip</name>
             <id>111</id>
@@ -723,9 +734,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Height</segments>
-          </dataPath>
           <extendedTooltip>
             <name>HeightExtendedTooltip</name>
             <id>114</id>
@@ -773,9 +781,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Volume</segments>
-          </dataPath>
           <extendedTooltip>
             <name>VolumeExtendedTooltip</name>
             <id>122</id>
@@ -867,9 +872,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Weight</segments>
-          </dataPath>
           <extendedTooltip>
             <name>WeightExtendedTooltip</name>
             <id>119</id>
@@ -1033,9 +1035,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.UniqueMD5</segments>
-          </dataPath>
           <extendedTooltip>
             <name>UniqueMD5ExtendedTooltip</name>
             <id>94</id>
@@ -1084,9 +1083,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.AffectPricingMD5</segments>
-          </dataPath>
           <extendedTooltip>
             <name>AffectPricingMD5ExtendedTooltip</name>
             <id>55</id>
@@ -1135,9 +1131,6 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.SpecificationAffectPricingMD5</segments>
-          </dataPath>
           <titleLocation>None</titleLocation>
           <items xsi:type="form:FormField">
             <name>SpecificationAffectPricingMD5LineNumber</name>
@@ -1147,9 +1140,6 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.SpecificationAffectPricingMD5.LineNumber</segments>
-            </dataPath>
             <extendedTooltip>
               <name>SpecificationAffectPricingMD5LineNumberExtendedTooltip</name>
               <id>71</id>
@@ -1197,9 +1187,6 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.SpecificationAffectPricingMD5.Key</segments>
-            </dataPath>
             <extendedTooltip>
               <name>SpecificationAffectPricingMD5KeyExtendedTooltip</name>
               <id>74</id>
@@ -1243,9 +1230,6 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.SpecificationAffectPricingMD5.AffectPricingMD5</segments>
-            </dataPath>
             <extendedTooltip>
               <name>SpecificationAffectPricingMD5AffectPricingMD5ExtendedTooltip</name>
               <id>77</id>
@@ -1536,9 +1520,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>PictureViewHTML</segments>
-        </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
           <name>PictureViewHTMLExtendedTooltip</name>
@@ -1590,9 +1571,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>AddAttributeViewHTML</segments>
-        </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
           <name>AddAttributeViewHTMLExtendedTooltip</name>
@@ -1720,5 +1698,4 @@
     <navigationPanel/>
     <commandBar/>
   </commandInterface>
-  <extInfo xsi:type="form:CatalogFormExtInfo"/>
 </form:Form>

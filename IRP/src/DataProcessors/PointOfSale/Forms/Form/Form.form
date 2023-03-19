@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema">
   <title>
     <key>en</key>
     <value>Point of sales</value>
@@ -5712,36 +5712,195 @@
       <common>true</common>
     </edit>
     <extInfo xsi:type="form:DynamicListExtInfo">
-      <queryText>SELECT 
-       ItemKeys.Ref, 
-       ItemKeys.DeletionMark, 
-       ItemKeys.Code, 
-       ItemKeys.Item, 
-       ItemKeys.Unit, 
-       ItemKeys.Specification, 
-       ItemKeys.AffectPricingMD5, 
-       ItemKeys.UniqueMD5, 
-       ItemKeys.ItemKeyID, 
-       ItemKeys.Description_en, 
-       ItemKeys.Description_hash, 
-       ItemKeys.Description_ru, 
-       ItemKeys.Description_tr, 
-       ItemKeys.Height, 
-       ItemKeys.Length, 
-       ItemKeys.Volume, 
-       ItemKeys.Weight, 
-       ItemKeys.Width, 
-       ItemKeys.AddAttributes.*, 
-       ItemKeys.SpecificationAffectPricingMD5.*, 
-       ItemKeys.Predefined, 
-       ItemKeys.PredefinedDataName
- FROM 
-       Catalog.ItemKeys
- AS 
-       ItemKeys</queryText>
+      <queryText>SELECT
+	ItemKeys.Ref,
+	ItemKeys.DeletionMark,
+	ItemKeys.Code,
+	ItemKeys.Item,
+	ItemKeys.Unit,
+	ItemKeys.Specification,
+	ItemKeys.AffectPricingMD5,
+	ItemKeys.UniqueMD5,
+	ItemKeys.ItemKeyID,
+	ItemKeys.DefaultBillOfMaterials,
+	ItemKeys.UseIncomingStockReservation,
+	ItemKeys.PackageUnit,
+	ItemKeys.Description_en,
+	ItemKeys.Description_hash,
+	ItemKeys.Description_ru,
+	ItemKeys.Description_tr,
+	ItemKeys.Height,
+	ItemKeys.Length,
+	ItemKeys.Volume,
+	ItemKeys.Weight,
+	ItemKeys.Width,
+	ItemKeys.AddAttributes.*,
+	ItemKeys.SpecificationAffectPricingMD5.*,
+	ItemKeys.Predefined,
+	ItemKeys.PredefinedDataName,
+	ISNULL(ItemKeys.Item.ItemID, &quot;&quot;) AS ItemID
+FROM
+	Catalog.ItemKeys AS ItemKeys</queryText>
       <mainTable>Catalog.ItemKeys</mainTable>
       <autoFillAvailableFields>true</autoFillAvailableFields>
+      <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
+      <fields xsi:type="schema:DataCompositionSchemaNestedDataSet">
+        <dataPath>AddAttributes</dataPath>
+        <field>AddAttributes</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaNestedDataSet">
+        <dataPath>SpecificationAffectPricingMD5</dataPath>
+        <field>SpecificationAffectPricingMD5</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Ref</dataPath>
+        <field>Ref</field>
+        <presentationExpression>Case
+When ItemKeyID = &quot;&quot; Then String(Ref)
+Else &quot;(&quot; + ItemKeyID + &quot;) &quot; + String(Ref)
+End</presentationExpression>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>DeletionMark</dataPath>
+        <field>DeletionMark</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Code</dataPath>
+        <field>Code</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Item</dataPath>
+        <field>Item</field>
+        <presentationExpression>Case
+When ItemID = &quot;&quot; Then String(Item)
+Else &quot;(&quot; + ItemID + &quot;) &quot; + String(Item)
+End</presentationExpression>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Unit</dataPath>
+        <field>Unit</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Specification</dataPath>
+        <field>Specification</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>AffectPricingMD5</dataPath>
+        <field>AffectPricingMD5</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>UniqueMD5</dataPath>
+        <field>UniqueMD5</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ItemKeyID</dataPath>
+        <field>ItemKeyID</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>DefaultBillOfMaterials</dataPath>
+        <field>DefaultBillOfMaterials</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>UseIncomingStockReservation</dataPath>
+        <field>UseIncomingStockReservation</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PackageUnit</dataPath>
+        <field>PackageUnit</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description_en</dataPath>
+        <field>Description_en</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description_hash</dataPath>
+        <field>Description_hash</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description_ru</dataPath>
+        <field>Description_ru</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description_tr</dataPath>
+        <field>Description_tr</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Height</dataPath>
+        <field>Height</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Length</dataPath>
+        <field>Length</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Volume</dataPath>
+        <field>Volume</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Weight</dataPath>
+        <field>Weight</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Width</dataPath>
+        <field>Width</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>AddAttributes.Ref</dataPath>
+        <field>AddAttributes.Ref</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>AddAttributes.LineNumber</dataPath>
+        <field>AddAttributes.LineNumber</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>AddAttributes.Property</dataPath>
+        <field>AddAttributes.Property</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>AddAttributes.Value</dataPath>
+        <field>AddAttributes.Value</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>AddAttributes.SearchLiteral</dataPath>
+        <field>AddAttributes.SearchLiteral</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>SpecificationAffectPricingMD5.Ref</dataPath>
+        <field>SpecificationAffectPricingMD5.Ref</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>SpecificationAffectPricingMD5.LineNumber</dataPath>
+        <field>SpecificationAffectPricingMD5.LineNumber</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>SpecificationAffectPricingMD5.Key</dataPath>
+        <field>SpecificationAffectPricingMD5.Key</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>SpecificationAffectPricingMD5.AffectPricingMD5</dataPath>
+        <field>SpecificationAffectPricingMD5.AffectPricingMD5</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Predefined</dataPath>
+        <field>Predefined</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PredefinedDataName</dataPath>
+        <field>PredefinedDataName</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ItemID</dataPath>
+        <field>ItemID</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Item ID</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
     </extInfo>
   </attributes>
   <attributes>

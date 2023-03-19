@@ -30,6 +30,15 @@
     <types>String</types>
     <types>Date</types>
     <types>Number</types>
+    <types>CatalogRef.Countries</types>
+    <types>CatalogRef.Companies</types>
+    <types>CatalogRef.ItemTypes</types>
+    <types>CatalogRef.LegalNameContracts</types>
+    <types>CatalogRef.Partners</types>
+    <types>CatalogRef.PriceTypes</types>
+    <types>CatalogRef.Stores</types>
+    <types>CatalogRef.BusinessUnits</types>
+    <types>CatalogRef.Agreements</types>
     <numberQualifiers>
       <precision>15</precision>
       <scale>4</scale>

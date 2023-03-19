@@ -451,15 +451,15 @@ Scenario: _0402425 check Inventory transfer movements by the Register  "R4021 Re
 		And I select "R4021 Receipt of stock transfer orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 201 dated 01.03.2021 09:55:16'   | ''            | ''       | ''          | ''           | ''      | ''          | ''                                     |
-			| 'Document registrations records'                     | ''            | ''       | ''          | ''           | ''      | ''          | ''                                     |
-			| 'Register  "R4021 Receipt of stock transfer orders"' | ''            | ''       | ''          | ''           | ''      | ''          | ''                                     |
-			| ''                                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''      | ''          | ''                                     |
-			| ''                                                   | ''            | ''       | 'Quantity'  | 'Store'      | 'Order' | 'Item key'  | 'Row key'                              |
-			| ''                                                   | 'Expense'     | '*'      | '2'         | 'Store 03'   | ''      | '36/Yellow' | '                                    ' |
-			| ''                                                   | 'Expense'     | '*'      | '10'        | 'Store 03'   | ''      | 'S/Yellow'  | '                                    ' |
-			| ''                                                   | 'Expense'     | '*'      | '10'        | 'Store 03'   | ''      | 'XS/Blue'   | '                                    ' |
-			| ''                                                   | 'Expense'     | '*'      | '15'        | 'Store 03'   | ''      | '36/Red'    | '                                    ' |
+			| 'Inventory transfer 201 dated 01.03.2021 09:55:16'   | ''            | ''       | ''          | ''           | ''                                                       | ''          | ''                                     |
+			| 'Document registrations records'                     | ''            | ''       | ''          | ''           | ''                                                       | ''          | ''                                     |
+			| 'Register  "R4021 Receipt of stock transfer orders"' | ''            | ''       | ''          | ''           | ''                                                       | ''          | ''                                     |
+			| ''                                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                                                       | ''          | ''                                     |
+			| ''                                                   | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                                                  | 'Item key'  | 'Row key'                              |
+			| ''                                                   | 'Expense'     | '*'      | '2'         | 'Store 03'   | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | '36/Yellow' | '                                    ' |
+			| ''                                                   | 'Expense'     | '*'      | '10'        | 'Store 03'   | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | 'S/Yellow'  | '                                    ' |
+			| ''                                                   | 'Expense'     | '*'      | '10'        | 'Store 03'   | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | 'XS/Blue'   | '                                    ' |
+			| ''                                                   | 'Expense'     | '*'      | '15'        | 'Store 03'   | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | '36/Red'    | '                                    ' |
 		And I close all client application windows
 
 Scenario: _0402426 check Inventory transfer movements by the Register  "R4021 Receipt of stock transfer orders" (not Use SC not use GR without ITO)
@@ -489,15 +489,15 @@ Scenario: _0402430 check Inventory transfer movements by the Register  "R4022 Sh
 		And I select "R4022 Shipment of stock transfer orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 201 dated 01.03.2021 09:55:16'    | ''            | ''       | ''          | ''           | ''      | ''          | ''                                     |
-			| 'Document registrations records'                      | ''            | ''       | ''          | ''           | ''      | ''          | ''                                     |
-			| 'Register  "R4022 Shipment of stock transfer orders"' | ''            | ''       | ''          | ''           | ''      | ''          | ''                                     |
-			| ''                                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''      | ''          | ''                                     |
-			| ''                                                    | ''            | ''       | 'Quantity'  | 'Store'      | 'Order' | 'Item key'  | 'Row key'                              |
-			| ''                                                    | 'Expense'     | '*'      | '2'         | 'Store 02'   | ''      | '36/Yellow' | '                                    ' |
-			| ''                                                    | 'Expense'     | '*'      | '10'        | 'Store 02'   | ''      | 'S/Yellow'  | '                                    ' |
-			| ''                                                    | 'Expense'     | '*'      | '10'        | 'Store 02'   | ''      | 'XS/Blue'   | '                                    ' |
-			| ''                                                    | 'Expense'     | '*'      | '15'        | 'Store 02'   | ''      | '36/Red'    | '                                    ' |		
+			| 'Inventory transfer 201 dated 01.03.2021 09:55:16'    | ''            | ''       | ''          | ''           | ''                                                       | ''          | ''                                     |
+			| 'Document registrations records'                      | ''            | ''       | ''          | ''           | ''                                                       | ''          | ''                                     |
+			| 'Register  "R4022 Shipment of stock transfer orders"' | ''            | ''       | ''          | ''           | ''                                                       | ''          | ''                                     |
+			| ''                                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                                                       | ''          | ''                                     |
+			| ''                                                    | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                                                  | 'Item key'  | 'Row key'                              |
+			| ''                                                    | 'Expense'     | '*'      | '2'         | 'Store 02'   | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | '36/Yellow' | '                                    ' |
+			| ''                                                    | 'Expense'     | '*'      | '10'        | 'Store 02'   | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | 'S/Yellow'  | '                                    ' |
+			| ''                                                    | 'Expense'     | '*'      | '10'        | 'Store 02'   | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | 'XS/Blue'   | '                                    ' |
+			| ''                                                    | 'Expense'     | '*'      | '15'        | 'Store 02'   | 'Inventory transfer order 201 dated 28.02.2021 20:17:48' | '36/Red'    | '                                    ' |
 		And I close all client application windows
 
 Scenario: _0402426 check Inventory transfer movements by the Register  "R4022 Shipment of stock transfer orders" (not Use SC not use GR without ITO)

@@ -3024,7 +3024,6 @@
         <items xsi:type="form:Table">
           <name>CostList</name>
           <id>460</id>
-          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
@@ -3603,7 +3602,6 @@
         <items xsi:type="form:Table">
           <name>AllocationList</name>
           <id>491</id>
-          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>

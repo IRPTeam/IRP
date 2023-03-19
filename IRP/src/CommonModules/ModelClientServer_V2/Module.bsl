@@ -322,7 +322,7 @@ EndFUnction
 
 Function DefaultInventoryOriginExecute(Options) Export
 	InventoryOrigin = ?(ValueIsFilled(Options.CurrentInventoryOrigin), Options.CurrentInventoryOrigin, 
-		PredefinedValue("Enum.InventoryOrigingTypes.OwnStocks"));
+		PredefinedValue("Enum.InventoryOriginTypes.OwnStocks"));
 	Return InventoryOrigin;
 EndFunction	
 
@@ -1910,7 +1910,7 @@ Function ChangeTaxRateExecute(Options) Export
 		
 		// Tax rate from consignor batch
 		If ValueIsFilled(Options.InventoryOrigin) 
-			And Options.InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
+			And Options.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then
 			
 			Parameters = New Structure();
 			Parameters = New Structure();

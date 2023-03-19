@@ -4604,7 +4604,7 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Unde
 	If Tables.ItemList.Columns.Find("Item") <> Undefined Then
 		NotGroupArray = New Array();
 		For Each Row In Tables.ItemList Do
-			If Not Row.Item.ItemType.UseLineGrouping Then
+			If Row.Item.ItemType.NotUseLineGrouping Then
 				NotGroupArray.Add(Row);
 			EndIf;
 		EndDo;

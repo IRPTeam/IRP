@@ -62,8 +62,7 @@ EndProcedure
 Procedure SingleRowOnChange(Item)
 	If Object.SingleRow Then
 		Object.AlwaysAddNewRowAfterScan = True;
-		Object.UseLineGrouping = False;
-		Object.UseQuantityLimit = False;
+		Object.NotUseLineGrouping = True;
 	EndIf; 
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
@@ -71,17 +70,9 @@ EndProcedure
 &AtClient
 Procedure AlwaysAddNewRowAfterScanOnChange(Item)
 	If Object.AlwaysAddNewRowAfterScan Then
-		Object.UseLineGrouping = False;
+		Object.NotUseLineGrouping = True;
 	EndIf;
 	SetVisibilityAvailability(Object, ThisObject);	
-EndProcedure
-
-&AtClient
-Procedure UseQuantityLimitOnChange(Item)
-	If Object.UseQuantityLimit Then
-		Object.UseLineGrouping = False;
-	EndIf;
-	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClientAtServerNoContext
@@ -92,12 +83,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.StockBalanceDetail.ReadOnly = Not Object.UseSerialLotNumber;
 	Form.Items.AlwaysAddNewRowAfterScan.ReadOnly = IsProduct And Object.UseSerialLotNumber And Object.SingleRow;
 	
-	Form.Items.UseQuantityLimit.ReadOnly = Object.SingleRow;
-	Form.Items.QuantityLimit.Visible = Object.UseQuantityLimit And Not Object.SingleRow;
-	
-	Form.Items.UseLineGrouping.ReadOnly = Object.SingleRow 
-		Or Object.AlwaysAddNewRowAfterScan
-		Or Object.UseQuantityLimit;
+	Form.Items.NotUseLineGrouping.ReadOnly = Object.SingleRow 
+		Or Object.AlwaysAddNewRowAfterScan;
 EndProcedure
 
 #EndRegion

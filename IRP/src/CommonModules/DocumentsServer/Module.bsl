@@ -103,47 +103,6 @@ Function CheckItemListStores(Object) Export
 	Return True;
 EndFunction
 
-Function CheckQuantityLimit(Object) Export
-	Query = New Query();
-	Query.Text =
-	"SELECT
-	|	Table.LineNumber,
-	|	Table.Item,
-	|	Table.ItemKey,
-	|	Table.Quantity AS Quantity
-	|INTO ItemList
-	|FROM
-	|	&ItemList AS Table
-	|;
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	ItemList.LineNumber,
-	|	ItemList.ItemKey,
-	|	ItemList.Quantity,
-	|	ItemList.Item.ItemType.QuantityLimit AS QuantityLimit
-	|FROM
-	|	ItemList AS ItemList
-	|WHERE
-	|	ItemList.Item.ItemType.UseQuantityLimit
-	|	AND  ItemList.Quantity > ItemList.Item.ItemType.QuantityLimit";
-
-	Query.SetParameter("ItemList", Object.ItemList.Unload());
-	QueryResult = Query.Execute();
-
-	If QueryResult.IsEmpty() Then
-		Return False;
-	EndIf;
-
-	QuerySelection = QueryResult.Select();
-	While QuerySelection.Next() Do
-		// Quantity limit exceeded. line number: [%1] quantity: [%2] limit: [%3]
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_124, QuerySelection.LineNumber, QuerySelection.Quantity, QuerySelection.QuantityLimit),
-			"ItemList[" + Format((QuerySelection.LineNumber - 1), "NZ=0; NG=0;") + "].Quantity", Object);
-	EndDo;
-
-	Return True;
-EndFunction
-
 // Set mark negatives item list.
 // 
 // Parameters:

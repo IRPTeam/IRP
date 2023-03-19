@@ -291,145 +291,6 @@
       <textEdit>true</textEdit>
     </extInfo>
   </items>
-  <items xsi:type="form:FormGroup">
-    <name>GroupQuantityLimit</name>
-    <id>95</id>
-    <items xsi:type="form:FormField">
-      <name>UseQuantityLimit</name>
-      <id>92</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>Object.UseQuantityLimit</segments>
-      </dataPath>
-      <handlers>
-        <event>OnChange</event>
-        <name>UseQuantityLimitOnChange</name>
-      </handlers>
-      <extendedTooltip>
-        <name>UseQuantityLimitExtendedTooltip</name>
-        <id>94</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>UseQuantityLimitContextMenu</name>
-        <id>93</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>CheckBoxField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:CheckBoxFieldExtInfo">
-        <checkBoxType>Switcher</checkBoxType>
-      </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
-      <name>QuantityLimit</name>
-      <id>97</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>Object.QuantityLimit</segments>
-      </dataPath>
-      <titleLocation>None</titleLocation>
-      <extendedTooltip>
-        <name>QuantityLimitExtendedTooltip</name>
-        <id>99</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>QuantityLimitContextMenu</name>
-        <id>98</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-        <maxWidth>6</maxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <wrap>true</wrap>
-        <choiceButton>false</choiceButton>
-        <spinButton>true</spinButton>
-        <chooseType>true</chooseType>
-        <typeDomainEnabled>true</typeDomainEnabled>
-        <textEdit>true</textEdit>
-      </extInfo>
-    </items>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-      <common>true</common>
-    </userVisible>
-    <title>
-      <key>en</key>
-      <value>Quantity limit</value>
-    </title>
-    <extendedTooltip>
-      <name>GroupQuantityLimitExtendedTooltip</name>
-      <id>96</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-    </extendedTooltip>
-    <type>UsualGroup</type>
-    <extInfo xsi:type="form:UsualGroupExtInfo">
-      <group>AlwaysHorizontal</group>
-      <behavior>Auto</behavior>
-      <showLeftMargin>true</showLeftMargin>
-      <united>true</united>
-      <throughAlign>Auto</throughAlign>
-      <currentRowUse>Auto</currentRowUse>
-    </extInfo>
-  </items>
   <items xsi:type="form:FormField">
     <name>AlwaysAddNewRowAfterScan</name>
     <id>86</id>
@@ -480,7 +341,7 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
-    <name>UseLineGrouping</name>
+    <name>NotUseLineGrouping</name>
     <id>100</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -488,10 +349,10 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Object.UseLineGrouping</segments>
+      <segments>Object.NotUseLineGrouping</segments>
     </dataPath>
     <extendedTooltip>
-      <name>UseLineGroupingExtendedTooltip</name>
+      <name>NotUseLineGroupingExtendedTooltip</name>
       <id>102</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -506,7 +367,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>UseLineGroupingContextMenu</name>
+      <name>NotUseLineGroupingContextMenu</name>
       <id>101</id>
       <visible>true</visible>
       <enabled>true</enabled>

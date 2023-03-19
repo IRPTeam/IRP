@@ -97,11 +97,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
 		Cancel = True;
 	EndIf;
-	
-	If DocumentsServer.CheckQuantityLimit(ThisObject) Then
-		Cancel = True;
-	EndIf;
-	
+		
 	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(ThisObject.Branch) 
 		And Not ValueIsFilled(ThisObject.ConsolidatedRetailSales) Then
 		Cancel = True;

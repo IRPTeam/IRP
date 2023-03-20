@@ -232,6 +232,8 @@
   <commonModules>CommonModule.AddAttributesAndPropertiesServer</commonModules>
   <commonModules>CommonModule.AddDataProcClient</commonModules>
   <commonModules>CommonModule.AddDataProcServer</commonModules>
+  <commonModules>CommonModule.AdditionalDocumentTableControl</commonModules>
+  <commonModules>CommonModule.AdditionalDocumentTableControlReuse</commonModules>
   <commonModules>CommonModule.AdminFunctionsPrivileged</commonModules>
   <commonModules>CommonModule.AdvancesRelevanceServer</commonModules>
   <commonModules>CommonModule.BarcodeClient</commonModules>
@@ -261,10 +263,13 @@
   <commonModules>CommonModule.ControllerClientServer_V2</commonModules>
   <commonModules>CommonModule.ControllerServer_V2</commonModules>
   <commonModules>CommonModule.ConvertXDTO</commonModules>
+  <commonModules>CommonModule.CopyPasteClient</commonModules>
+  <commonModules>CommonModule.CopyPasteServer</commonModules>
   <commonModules>CommonModule.CreditLimitsServer</commonModules>
   <commonModules>CommonModule.CurrenciesClient</commonModules>
   <commonModules>CommonModule.CurrenciesClientServer</commonModules>
   <commonModules>CommonModule.CurrenciesServer</commonModules>
+  <commonModules>CommonModule.DataVersioningServer</commonModules>
   <commonModules>CommonModule.DocAdditionalCostAllocationClient</commonModules>
   <commonModules>CommonModule.DocAdditionalCostAllocationServer</commonModules>
   <commonModules>CommonModule.DocAdditionalRevenueAllocationClient</commonModules>
@@ -414,6 +419,8 @@
   <commonModules>CommonModule.JorDocumentsClientServer</commonModules>
   <commonModules>CommonModule.JorDocumentsServer</commonModules>
   <commonModules>CommonModule.LandedCostServer</commonModules>
+  <commonModules>CommonModule.LoadDataFromTableClient</commonModules>
+  <commonModules>CommonModule.LoadDataFromTableServer</commonModules>
   <commonModules>CommonModule.Localization</commonModules>
   <commonModules>CommonModule.LocalizationClient</commonModules>
   <commonModules>CommonModule.LocalizationClientServer</commonModules>
@@ -472,13 +479,6 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.CopyPasteServer</commonModules>
-  <commonModules>CommonModule.CopyPasteClient</commonModules>
-  <commonModules>CommonModule.DataVersioningServer</commonModules>
-  <commonModules>CommonModule.LoadDataFromTableServer</commonModules>
-  <commonModules>CommonModule.LoadDataFromTableClient</commonModules>
-  <commonModules>CommonModule.AdditionalDocumentTableControl</commonModules>
-  <commonModules>CommonModule.AdditionalDocumentTableControlReuse</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

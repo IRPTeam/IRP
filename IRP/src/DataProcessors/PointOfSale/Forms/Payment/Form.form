@@ -832,10 +832,6 @@
             <name>PaymentsOnChange</name>
           </handlers>
           <handlers>
-            <event>BeforeRowChange</event>
-            <name>PaymentsBeforeRowChange</name>
-          </handlers>
-          <handlers>
             <event>BeforeDeleteRow</event>
             <name>PaymentsBeforeDeleteRow</name>
           </handlers>

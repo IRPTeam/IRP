@@ -101,6 +101,7 @@ EndProcedure
 //  Form - ClientApplicationForm - Form
 &AtClientAtServerNoContext
 Procedure ChangePage(Page, Form)
+	//@skip-check property-return-type
 	Form.Items.ClosingPages.CurrentPage = Page;
 	Form.Title = Page.Title;
 EndProcedure
@@ -122,7 +123,7 @@ Procedure CloseSession(Command)
 	
 	ClosingData.Insert("AutoCreateMoneyTransfer", ThisObject.AutoCreateMoneyTransfer);
 	
-	PaymentList = New Array();
+	PaymentList = New Array(); // Array of Structure
 	For Each TableItem In ThisObject.CashTable Do
 		ItemStructure = New Structure;
 		ItemStructure.Insert("isReturn", TableItem.isReturn);
@@ -224,6 +225,28 @@ EndProcedure
 Procedure ReadCashOperations()
 	CashTable.Clear();
 	
+	QuerySelection = GetCurrentCashOperations();
+	While QuerySelection.Next() Do
+		Record = CashTable.Add();
+		Record.isReturn = QuerySelection.isReturn;
+		//@skip-check statement-type-change
+		//@skip-check property-return-type
+		Record.Operation = ?(QuerySelection.isReturn, R().InfoMessage_Returns, R().InfoMessage_Sales);
+		Record.PaymentType = QuerySelection.PaymentType;
+		Record.AmountInBase = QuerySelection.Amount; 
+	EndDo;
+	
+EndProcedure
+
+// Get current cash operations.
+// 
+// Returns:
+//  QueryResultSelection - Get current cash operations:
+//  * isReturn - Boolean
+//  * PaymentType - CatalogRef.PaymentTypes
+//  * Amount - Number
+&AtServer
+Function GetCurrentCashOperations()
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -288,15 +311,8 @@ Procedure ReadCashOperations()
 	Query.SetParameter("ConsolidatedRetailSales", ThisObject.ConsolidatedRetailSales);
 	
 	QuerySelection = Query.Execute().Select();
-	While QuerySelection.Next() Do
-		Record = CashTable.Add();
-		Record.isReturn = QuerySelection.isReturn;
-		Record.Operation = ?(QuerySelection.isReturn, R().InfoMessage_Returns, R().InfoMessage_Sales);
-		Record.PaymentType = QuerySelection.PaymentType;
-		Record.AmountInBase = QuerySelection.Amount; 
-	EndDo;
-	
-EndProcedure
+	Return QuerySelection
+EndFunction
 
 &AtClient
 Procedure CashTableAmountInRegisterOnChange(Item)
@@ -315,6 +331,29 @@ EndProcedure
 Procedure ReadTerminalOperations()
 	TerminalTable.Clear();
 	
+	QuerySelection = GetCurrentTerminalOperations();
+	While QuerySelection.Next() Do
+		Record = TerminalTable.Add();
+		Record.isReturn = QuerySelection.isReturn;
+		//@skip-check statement-type-change
+		//@skip-check property-return-type
+		Record.Operation = ?(QuerySelection.isReturn, R().InfoMessage_Returns, R().InfoMessage_Sales);
+		Record.PaymentType = QuerySelection.PaymentType;
+		Record.PaymentTerminal = QuerySelection.PaymentTerminals;
+		Record.AmountInBase = QuerySelection.Amount; 
+	EndDo;
+	
+EndProcedure
+
+// Get current terminal operations.
+// 
+// Returns:
+//  QueryResultSelection - Get current terminal operations:
+//  * isReturn - Boolean
+//  * PaymentType - CatalogRef.PaymentTypes
+//  * PaymentTerminals - CatalogRef.PaymentTerminals
+//  * Amount - Number
+Function GetCurrentTerminalOperations()
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -382,16 +421,8 @@ Procedure ReadTerminalOperations()
 	Query.SetParameter("ConsolidatedRetailSales", ThisObject.ConsolidatedRetailSales);
 	
 	QuerySelection = Query.Execute().Select();
-	While QuerySelection.Next() Do
-		Record = TerminalTable.Add();
-		Record.isReturn = QuerySelection.isReturn;
-		Record.Operation = ?(QuerySelection.isReturn, R().InfoMessage_Returns, R().InfoMessage_Sales);
-		Record.PaymentType = QuerySelection.PaymentType;
-		Record.PaymentTerminal = QuerySelection.PaymentType;
-		Record.AmountInBase = QuerySelection.Amount; 
-	EndDo;
-	
-EndProcedure
+	Return QuerySelection
+EndFunction
 
 &AtClient
 Procedure TerminalTableAmountInTerminalOnChange(Item)
@@ -410,6 +441,26 @@ EndProcedure
 &AtServer
 Procedure ReadBalanceData()
 
+	QuerySelection = GetCurrentbalance();
+	If QuerySelection.Next() Then
+		ThisObject.BalanceBegin = QuerySelection.AmountOpeningBalance;
+		ThisObject.BalanceCashIn = QuerySelection.AmountReceipt;
+		ThisObject.BalanceCashOut = QuerySelection.AmountExpense;
+		ThisObject.BalanceEnd = QuerySelection.AmountClosingBalance; 
+	EndIf;
+	
+EndProcedure	
+
+// Get currentbalance.
+// 
+// Returns:
+//  QueryResultSelection - Get currentbalance:
+//  * AmountOpeningBalance - Number
+//  * AmountReceipt - Number
+//  * AmountExpense - Number
+//  * AmountClosingBalance - Number
+&AtServer
+Function GetCurrentbalance()
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -433,14 +484,8 @@ Procedure ReadBalanceData()
 	Query.SetParameter("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
 	
 	QuerySelection = Query.Execute().Select();
-	If QuerySelection.Next() Then
-		ThisObject.BalanceBegin = QuerySelection.AmountOpeningBalance;
-		ThisObject.BalanceCashIn = QuerySelection.AmountReceipt;
-		ThisObject.BalanceCashOut = QuerySelection.AmountExpense;
-		ThisObject.BalanceEnd = QuerySelection.AmountClosingBalance; 
-	EndIf;
-	
-EndProcedure	
+	Return QuerySelection
+EndFunction
 
 &AtClient
 Procedure BalanceRealOnChange(Item)

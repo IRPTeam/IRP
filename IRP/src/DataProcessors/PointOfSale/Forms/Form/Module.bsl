@@ -610,6 +610,11 @@ Procedure ItemListDrag(Item, DragParameters, StandardProcessing, Row, Field)
 	EndIf;
 EndProcedure
 
+&AtClient
+Procedure AcquiringSlipInfo(Command)
+	OpenForm("DataProcessor.PointOfSale.Form.AcquiringSlipInfo", , ThisObject, , , , , FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
 #Region SpecialOffers
 
 #Region Offers_for_document
@@ -651,6 +656,7 @@ EndProcedure
 #EndRegion
 
 #EndRegion
+
 #EndRegion
 
 #EndRegion

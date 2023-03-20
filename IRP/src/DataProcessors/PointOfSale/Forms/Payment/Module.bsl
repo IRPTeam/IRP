@@ -542,16 +542,16 @@ EndProcedure
 
 &AtServer
 Procedure FillPaymentsAtServer()
-	CashPaymentTypesValue = GetCashPaymentTypesValue();
+	CashPaymentTypesValue = POSServer.GetCashPaymentTypesValue(Object.Workstation.CashAccount);
 	ValueToFormAttribute(CashPaymentTypesValue, "CashPaymentTypes");
 
-	BankPaymentTypesValue = GetBankPaymentTypesValue(Object.Branch);
+	BankPaymentTypesValue = POSServer.GetBankPaymentTypesValue(Object.Branch);
 	ValueToFormAttribute(BankPaymentTypesValue, "BankPaymentTypes");
 
 	IsIncomingOutgoingAdvance = ThisObject.IsAdvance;
 	
 	If Not IsIncomingOutgoingAdvance Then
-		PaymentAgentValue = GetPaymentAgentTypesValue(Object.Branch);
+		PaymentAgentValue = POSServer.GetPaymentAgentTypesValue(Object.Branch);
 		ValueToFormAttribute(PaymentAgentValue, "PaymentAgentTypes");
 	EndIf;
 	
@@ -566,94 +566,6 @@ Procedure FillPaymentMethods()
 	ReceiptPaymentMethod = Enums.ReceiptPaymentMethods.FullCalculation;
 	
 EndProcedure
-
-// Get bank payment types value.
-// 
-// Parameters:
-//  Branch - CatalogRef.BusinessUnits - Branch
-// 
-// Returns:
-//  ValueTable - Get bank payment types value:
-// * PaymentType - CatalogRef.PaymentTypes -
-// * Description - DefinedType.typeDescription -
-// * BankTerm - CatalogRef.BankTerms -
-// * Account - CatalogRef.CashAccounts -
-// * Percent - Number -
-// * PaymentTypeParent - CatalogRef.PaymentTypes -
-// * ParentDescription - DefinedType.typeDescription -
-&AtServer
-Function GetBankPaymentTypesValue(Branch)
-
-	Query = New Query();
-	Query.Text = "SELECT
-				 |	BranchBankTerms.BankTerm
-				 |FROM
-				 |	InformationRegister.BranchBankTerms AS BranchBankTerms
-				 |WHERE
-				 |	BranchBankTerms.Branch = &Branch";
-	Query.SetParameter("Branch", Branch);
-	QueryUnload = Query.Execute().Unload();
-	BankTerms = QueryUnload.UnloadColumn("BankTerm");
-
-	Query = New Query();
-	Query.Text = "SELECT
-				 |	PaymentTypes.PaymentType,
-				 |	PaymentTypes.PaymentType.Presentation AS Description,
-				 |	PaymentTypes.Ref AS BankTerm,
-				 |	PaymentTypes.Account,
-				 |	PaymentTypes.Percent,
-				 |	PaymentTypes.PaymentType.Parent AS PaymentTypeParent,
-				 |	PaymentTypes.PaymentType.Parent.Presentation AS ParentDescription
-				 |FROM
-				 |	Catalog.BankTerms.PaymentTypes AS PaymentTypes
-				 |WHERE
-				 |	PaymentTypes.Ref In (&BankTerms)";
-	Query.SetParameter("BankTerms", BankTerms);
-	BankPaymentTypesValue = Query.Execute().Unload();
-	Return BankPaymentTypesValue
-	
-EndFunction
-
-// Get cash payment types value.
-// 
-// Returns:
-//  ValueTable - Get cash payment types value:
-//  	*PaymentType - CatalogRef.PaymentTypes
-//  	*Description - DefinedType.typeDescription
-//  	*Account - CatalogRef.CashAccounts
-&AtServer
-Function GetCashPaymentTypesValue()
-	Query = New Query();
-	Query.Text = "SELECT
-	|	PaymentTypes.Ref AS PaymentType,
-	|	PaymentTypes.Description_en AS Description,
-	|	&CashAccount AS Account,
-	|	VALUE(Enum.PaymentTypes.Cash) AS PaymentTypeEnum
-	|FROM
-	|	Catalog.PaymentTypes AS PaymentTypes
-	|WHERE
-	|	PaymentTypes.Type = VALUE(Enum.PaymentTypes.Cash)
-	|	AND NOT PaymentTypes.DeletionMark";
-	Query.SetParameter("CashAccount", Object.Workstation.CashAccount);
-	Return Query.Execute().Unload();
-EndFunction
-
-&AtServer
-Function GetPaymentAgentTypesValue(Branch)
-	Query = New Query();
-	Query.Text = 
-		"SELECT
-		|	PaymentTypes.Ref AS PaymentType,
-		|	PaymentTypes.Description_en AS Description
-		|FROM
-		|	Catalog.PaymentTypes AS PaymentTypes
-		|WHERE
-		|	PaymentTypes.Type = VALUE(Enum.PaymentTypes.PaymentAgent)
-		|	AND NOT PaymentTypes.DeletionMark
-		|	AND PaymentTypes.Branch = &Branch";
-	Query.SetParameter("Branch", Branch);
-	Return Query.Execute().Unload();
-EndFunction
 
 // Fill payments
 // 

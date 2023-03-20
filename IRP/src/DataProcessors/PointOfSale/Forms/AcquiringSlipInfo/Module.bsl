@@ -1,26 +1,40 @@
 // @strict-types
 
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	BankPaymentTypesValue = POSServer.GetBankPaymentTypesValue(Parameters.Branch);
+	
+	For Each Row In BankPaymentTypesValue Do
+		
+		If Row.Account.Acquiring.IsEmpty() Then
+			Continue;
+		EndIf;
+		
+		NewRow = AccountList.Add();
+		NewRow.Account = Row.Account;
+		NewRow.Hardware = Row.Account.Acquiring;
+	EndDo;
+	
+EndProcedure
 
 &AtClient
 Procedure Update(Command)
-	Settings = EquipmentAcquiringServer.GetAcquiringHardwareSettings();
-	Settings.Account = Row.Account;
-	Row.Hardware = EquipmentAcquiringServer.GetAcquiringHardware(Settings);
+	For Each RowID In Items.AccountList.SelectedRows Do
+		//@skip-check invocation-parameter-type-intersect
+		CurrentRow = AccountList.FindByID(RowID);
+		Payment_Settlement(CurrentRow);
+	EndDo;
 EndProcedure
 
 &AtClient
 Async Function Payment_Settlement(PaymentRow)
 	
-	PaymentSettings = EquipmentAcquiringClient.SettlementSettings();
-	PaymentSettings.In.DeviceID = PaymentRow.Amount;
-	PaymentSettings.InOut.RRNCode = PaymentRow.RRNCode;
-	PaymentSettings.Form.ElementToLock = ThisObject;
-	PaymentSettings.Form.ElementToHideAndShow = Items.GroupWait;
-	Result = Await EquipmentAcquiringClient.ReturnPaymentByPaymentCard(PaymentRow.Hardware, PaymentSettings);
+	SettlementSettings = EquipmentAcquiringClient.SettlementSettings();
+	Result = Await EquipmentAcquiringClient.Settlement(PaymentRow.Hardware, SettlementSettings);
 	
 	If Result Then
-		PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
-		PaymentRow.PaymentDone = True;
+		PaymentRow.SlipInfo = SettlementSettings.Out.Slip;
 	EndIf;
 	Return Result;
+	
 EndFunction

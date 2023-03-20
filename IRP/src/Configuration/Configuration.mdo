@@ -446,6 +446,7 @@
   <commonModules>CommonModule.PictureViewerClientServer</commonModules>
   <commonModules>CommonModule.PictureViewerServer</commonModules>
   <commonModules>CommonModule.POSClient</commonModules>
+  <commonModules>CommonModule.POSServer</commonModules>
   <commonModules>CommonModule.PostingServer</commonModules>
   <commonModules>CommonModule.RowIDInfoClient</commonModules>
   <commonModules>CommonModule.RowIDInfoClientServer</commonModules>

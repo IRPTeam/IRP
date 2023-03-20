@@ -612,7 +612,9 @@ EndProcedure
 
 &AtClient
 Procedure AcquiringSlipInfo(Command)
-	OpenForm("DataProcessor.PointOfSale.Form.AcquiringSlipInfo", , ThisObject, , , , , FormWindowOpeningMode.LockOwnerWindow);
+	OpenParameters = New Structure();
+	OpenParameters.Insert("Branch", Object.Branch);
+	OpenForm("DataProcessor.PointOfSale.Form.AcquiringSlipInfo", OpenParameters, ThisObject, , , , , FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 #Region SpecialOffers

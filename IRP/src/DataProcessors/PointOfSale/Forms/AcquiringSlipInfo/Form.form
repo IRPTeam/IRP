@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://g5.1c.ru/v8/dt/form">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:Table">
-    <name>TerminalList</name>
+    <name>AccountList</name>
     <id>1</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -9,11 +9,11 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>TerminalList</segments>
+      <segments>AccountList</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
     <items xsi:type="form:FormField">
-      <name>TerminalListTerminal</name>
+      <name>AccountListAccount</name>
       <id>14</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -21,10 +21,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>TerminalList.Terminal</segments>
+        <segments>AccountList.Account</segments>
       </dataPath>
       <extendedTooltip>
-        <name>TerminalListTerminalExtendedTooltip</name>
+        <name>AccountListAccountExtendedTooltip</name>
         <id>16</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -39,7 +39,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>TerminalListTerminalContextMenu</name>
+        <name>AccountListAccountContextMenu</name>
         <id>15</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -63,7 +63,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>TerminalListSlipInfo</name>
+      <name>AccountListSlipInfo</name>
       <id>17</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -71,10 +71,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>TerminalList.SlipInfo</segments>
+        <segments>AccountList.SlipInfo</segments>
       </dataPath>
       <extendedTooltip>
-        <name>TerminalListSlipInfoExtendedTooltip</name>
+        <name>AccountListSlipInfoExtendedTooltip</name>
         <id>19</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -89,7 +89,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>TerminalListSlipInfoContextMenu</name>
+        <name>AccountListSlipInfoContextMenu</name>
         <id>18</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -113,8 +113,38 @@
       </extInfo>
     </items>
     <autoCommandBar>
-      <name>TerminalListCommandBar</name>
+      <name>AccountListCommandBar</name>
       <id>2</id>
+      <items xsi:type="form:Button">
+        <name>TerminalListUpdate</name>
+        <id>23</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <extendedTooltip>
+          <name>TerminalListUpdateExtendedTooltip</name>
+          <id>24</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <commandName>Form.Command.Update</commandName>
+        <representation>Auto</representation>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <placementArea>UserCmds</placementArea>
+        <representationInContextMenu>Auto</representationInContextMenu>
+      </items>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -128,10 +158,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>TerminalListSearchString</name>
+      <name>AccountListSearchString</name>
       <id>5</id>
       <extendedTooltip>
-        <name>TerminalListSearchStringExtendedTooltip</name>
+        <name>AccountListSearchStringExtendedTooltip</name>
         <id>7</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -146,7 +176,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>TerminalListSearchStringContextMenu</name>
+        <name>AccountListSearchStringContextMenu</name>
         <id>6</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -165,10 +195,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>TerminalListViewStatus</name>
+      <name>AccountListViewStatus</name>
       <id>11</id>
       <extendedTooltip>
-        <name>TerminalListViewStatusExtendedTooltip</name>
+        <name>AccountListViewStatusExtendedTooltip</name>
         <id>13</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -183,7 +213,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>TerminalListViewStatusContextMenu</name>
+        <name>AccountListViewStatusContextMenu</name>
         <id>12</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -203,10 +233,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>TerminalListSearchControl</name>
+      <name>AccountListSearchControl</name>
       <id>8</id>
       <extendedTooltip>
-        <name>TerminalListSearchControlExtendedTooltip</name>
+        <name>AccountListSearchControlExtendedTooltip</name>
         <id>10</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -221,7 +251,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>TerminalListSearchControlContextMenu</name>
+        <name>AccountListSearchControlContextMenu</name>
         <id>9</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -236,7 +266,7 @@
       </extInfo>
     </searchControlAddition>
     <extendedTooltip>
-      <name>TerminalListExtendedTooltip</name>
+      <name>AccountListExtendedTooltip</name>
       <id>4</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -251,7 +281,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>TerminalListContextMenu</name>
+      <name>AccountListContextMenu</name>
       <id>3</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -281,7 +311,7 @@
     <fileDragMode>AsFileRef</fileDragMode>
   </items>
   <items xsi:type="form:FormField">
-    <name>TerminalListSlipInfoFull</name>
+    <name>AccountListSlipInfoFull</name>
     <id>20</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -289,11 +319,11 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Items.TerminalList.CurrentData.SlipInfo</segments>
+      <segments>Items.AccountList.CurrentData.SlipInfo</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
     <extendedTooltip>
-      <name>TerminalListSlipInfoFullExtendedTooltip</name>
+      <name>AccountListSlipInfoFullExtendedTooltip</name>
       <id>22</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -308,7 +338,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>TerminalListSlipInfoFullContextMenu</name>
+      <name>AccountListSlipInfoFullContextMenu</name>
       <id>21</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -342,6 +372,10 @@
     </userVisible>
     <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
+  </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -351,10 +385,10 @@
   <showTitle>true</showTitle>
   <showCloseButton>true</showCloseButton>
   <attributes>
-    <name>TerminalList</name>
+    <name>AccountList</name>
     <title>
       <key>en</key>
-      <value>Terminal list</value>
+      <value>Account list</value>
     </title>
     <id>1</id>
     <valueType>
@@ -367,14 +401,14 @@
       <common>true</common>
     </edit>
     <columns>
-      <name>Terminal</name>
+      <name>Account</name>
       <title>
         <key>en</key>
-        <value>Terminal</value>
+        <value>Account</value>
       </title>
       <id>2</id>
       <valueType>
-        <types>CatalogRef.PaymentTerminals</types>
+        <types>CatalogRef.CashAccounts</types>
       </valueType>
       <view>
         <common>true</common>
@@ -401,6 +435,23 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>Hardware</name>
+      <title>
+        <key>en</key>
+        <value>Hardware</value>
+      </title>
+      <id>4</id>
+      <valueType>
+        <types>CatalogRef.Hardware</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <formCommands>
     <name>Update</name>
@@ -412,6 +463,9 @@
     <use>
       <common>true</common>
     </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.Refresh</picture>
+    </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>Update</name>
@@ -419,6 +473,12 @@
     </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
+  <parameters>
+    <name>Branch</name>
+    <valueType>
+      <types>CatalogRef.BusinessUnits</types>
+    </valueType>
+  </parameters>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>

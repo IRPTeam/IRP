@@ -4101,13 +4101,15 @@ Scenario: _092088 check sln as single row
 		And I select current line in "List" table
 		And I finish line editing in "Payments" table
 		And I click "Post" button
+		And I delete "$$RetailSalesReceipt092088$$" variable
+		And I save the window as "$$RetailSalesReceipt092088$$"
 	* Check creation  based on
 		And I click "Sales return" button
 		Then "Add linked document rows" window is opened
 		And I expand current line in "BasisesTree" table
 		And "BasisesTree" table became equal
 			| 'Row presentation'                                 | 'Use' | 'Quantity' | 'Unit' | 'Price' | 'Currency' |
-			| 'Retail sales receipt 3 dated 20.03.2023 12:43:26' | 'Yes' | ''         | ''     | ''      | ''         |
+			| '$$RetailSalesReceipt092088$$'                     | 'Yes' | ''         | ''     | ''      | ''         |
 			| 'Product 1 with SLN (PZU)'                         | 'Yes' | '1,000'    | 'pcs'  | '10,00' | 'TRY'      |
 			| 'Product 1 with SLN (PZU)'                         | 'Yes' | '1,000'    | 'pcs'  | '10,00' | 'TRY'      |
 			| 'Product 1 with SLN (PZU)'                         | 'Yes' | '1,000'    | 'pcs'  | '10,00' | 'TRY'      |
@@ -4124,12 +4126,12 @@ Scenario: _092088 check sln as single row
 		And I click the button named "OK"
 		And I finish line editing in "ItemList" table
 		And "ItemList" table became equal
-			| 'Retail sales receipt'                             | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price' | 'Net amount' | 'Total amount' | 'Store'    | 'VAT' |
-			| 'Retail sales receipt 3 dated 20.03.2023 12:43:26' | 'Product 1 with SLN' | 'PZU'      | '8908899877'         | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '8,47'       | '10,00'        | 'Store 01' | '18%' |
-			| 'Retail sales receipt 3 dated 20.03.2023 12:43:26' | 'Product 1 with SLN' | 'PZU'      | '456789'             | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '8,47'       | '10,00'        | 'Store 01' | '18%' |
-			| 'Retail sales receipt 3 dated 20.03.2023 12:43:26' | 'Product 1 with SLN' | 'PZU'      | '8908899880'         | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '8,47'       | '10,00'        | 'Store 01' | '18%' |
-			| 'Retail sales receipt 3 dated 20.03.2023 12:43:26' | 'Product 1 with SLN' | 'ODS'      | '908'                | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '8,47'       | '10,00'        | 'Store 01' | '18%' |
-			| ''                                                 | 'Product 1 with SLN' | 'PZU'      | '8908899877'         | 'pcs'  | ''           | '1,000'    | ''      | ''           | ''             | 'Store 01' | '18%' |
+			| 'Retail sales receipt'         | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price' | 'Net amount' | 'Total amount' | 'Store'    | 'VAT' |
+			| '$$RetailSalesReceipt092088$$' | 'Product 1 with SLN' | 'PZU'      | '8908899877'         | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '8,47'       | '10,00'        | 'Store 01' | '18%' |
+			| '$$RetailSalesReceipt092088$$' | 'Product 1 with SLN' | 'PZU'      | '456789'             | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '8,47'       | '10,00'        | 'Store 01' | '18%' |
+			| '$$RetailSalesReceipt092088$$' | 'Product 1 with SLN' | 'PZU'      | '8908899880'         | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '8,47'       | '10,00'        | 'Store 01' | '18%' |
+			| '$$RetailSalesReceipt092088$$' | 'Product 1 with SLN' | 'ODS'      | '908'                | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '8,47'       | '10,00'        | 'Store 01' | '18%' |
+			| ''                             | 'Product 1 with SLN' | 'PZU'      | '8908899877'         | 'pcs'  | ''           | '1,000'    | ''      | ''           | ''             | 'Store 01' | '18%' |
 		And I close all client application windows
 				
 

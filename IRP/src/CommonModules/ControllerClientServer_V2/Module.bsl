@@ -12428,7 +12428,7 @@ Procedure ExecuteNextSteps(Parameters, IsChanged, StepNames, DataPath)
 	// or property is ReadInly, call next steps
 	If IsChanged Then
 		ModelClientServer_V2.EntryPoint(StepNames, Parameters);
-	ElsIf Parameters.ReadOnlyPropertiesMap.Get(Upper(DataPath)) = True Then
+	ElsIf GetReadOnlyProperties(DataPath, Parameters) Then
 		If Parameters.ProcessedReadOnlyPropertiesMap.Get(Upper(DataPath)) = Undefined Then
 			Parameters.ProcessedReadOnlyPropertiesMap.Insert(Upper(DataPath), True);
 			ModelClientServer_V2.EntryPoint(StepNames, Parameters);
@@ -12510,7 +12510,7 @@ EndFunction
 
 Function SetPropertyObject(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache = False)
 	// if property is ReadOnly and filled then do not change
-	If Parameters.ReadOnlyPropertiesMap.Get(Upper(DataPath)) <> Undefined Then
+	If GetReadOnlyProperties(DataPath, Parameters, _Key, _Value) Then
 		Segments = StrSplit(DataPath, ".");
 		If Segments.Count() = 1 Then
 			If ValueIsFilled(Parameters.Object[DataPath]) Then
@@ -12710,6 +12710,47 @@ Function IsUserChange(Parameters)
 		Return Parameters.ModelEnvironment.StepNamesCounter.Count() = 1;
 	EndIf;
 	Return False;
+EndFunction
+
+Function GetReadOnlyProperties(DataPath, Parameters, _Key = Undefined, _Value = Undefined)
+	IsReadOnly = (Parameters.ReadOnlyPropertiesMap.Get(Upper(DataPath)) = True);
+
+	If Not IsReadOnly Then
+		Return IsReadOnly;
+	EndIf;
+		
+	// Excludes, columns
+	If ValueIsFilled(_Key) Then
+		Segments = StrSplit(DataPath, ".");
+		If Segments.Count() = 2 Then
+			TableName = TrimAll(Segments[0]);
+			PropertyName = TrimAll(Segments[1]);
+			IsRowPresent = False;
+			If Upper(TableName) = Upper(Parameters.TableName) Then
+				For Each Row In GetRows(Parameters, TableName) Do
+					If Row.Key = _Key Then
+						IsRowPresent = True;
+						Break;
+					EndIf;
+				EndDo;
+			EndIf;
+			
+			If IsRowPresent Then
+				// Excludes conditions
+				If Upper(PropertyName) = Upper("TaxAmount") 
+					And CommonFunctionsClientServer.ObjectHasProperty(Row, "DontCalculateRow")
+					And Not Row.DontCalculateRow And ValueIsFilled(_Value) Then
+						Return False; // is not read only
+				EndIf;
+				
+			Else
+				Raise StrTemplate("Row is not present [%1] [%2]", DataPath, _Key);
+			EndIf;
+		Else
+			Raise StrTemplate("Wrong data path for read only property [%1]", DataPath);
+		EndIf;
+	EndIf;
+	Return IsReadOnly;
 EndFunction
 
 #IF Server THEN

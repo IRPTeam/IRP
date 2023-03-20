@@ -56,6 +56,8 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create information register CurrencyRates records
 		When Create catalog ItemKeys objects (serial lot numbers)
 		When Create catalog ItemTypes objects (serial lot numbers)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create catalog Items objects (serial lot numbers)
 		When update ItemKeys
 		When Create document PurchaseInvoice objects (for stock remaining control)
@@ -3937,6 +3939,9 @@ Scenario: _092083 check serial lot numbers in the POS
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Serials'    | 'Quantity' |
 			| 'Dress' | 'XS/Blue'  | '0512; 0514' | '2,000'    |
+		Then I select all lines of "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListContextMenuSelectAll"
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"	
 		And I close all client application windows
 							
 Scenario: _092087 check cleaning serial lot number in documents
@@ -4036,10 +4041,99 @@ Scenario: _092087 check cleaning serial lot number in documents
 
 				 
 		
+Scenario: _092088 check sln as single row
+		And I close all client application windows
+	* Settings for item type
+		Given I open hyperlink "e1cib/list/Catalog.ItemTypes"
+		And I go to line in "List" table
+			| 'Description'               |
+			| 'With serial lot numbers (use stock control)' |
+		And I select current line in "List" table
+		And I set checkbox "Always add new row after scan"
+		Then the form attribute named "AlwaysAddNewRowAfterScan" became equal to "Yes"
+		Then the form attribute named "NotUseLineGrouping" became equal to "Yes"
+		Then the form attribute named "UseSerialLotNumber" became equal to "Yes"
+		And I click "Save and close" button		
+	* Open Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
+		And I click "Create" button		
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Retail customer' |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "23455677788976667" text in the field named "InputFld"
+		And I click the button named "OK"
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "456789" text in the field named "InputFld"
+		And I click the button named "OK"
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "8908899880" text in the field named "InputFld"
+		And I click the button named "OK"
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "908" text in the field named "InputFld"
+		And I click the button named "OK"
+		And for each line of "ItemList" table I do
+			And I input "10,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+	* Check
+		And "ItemList" table became equal
+			| 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | 'No'                 | '8908899877'         | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '18%' | '8,47'       | '10,00'        | 'Store 01' |
+			| 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | 'No'                 | '456789'             | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '18%' | '8,47'       | '10,00'        | 'Store 01' |
+			| 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | 'No'                 | '8908899880'         | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '18%' | '8,47'       | '10,00'        | 'Store 01' |
+			| 'en description is empty' | 'Product 1 with SLN' | 'ODS'      | 'No'                 | '908'                | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '18%' | '8,47'       | '10,00'        | 'Store 01' |
+		And I move to "Payments" tab
+		And in the table "Payments" I click "Add" button
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Cash'        |
+		And I select current line in "List" table
+		And I activate "Amount" field in "Payments" table
+		And I input "40,00" text in "Amount" field of "Payments" table
+		And I finish line editing in "Payments" table
+		And I click choice button of "Account" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №4' |
+		And I select current line in "List" table
+		And I finish line editing in "Payments" table
+		And I click "Post" button
+		And I delete "$$RetailSalesReceipt092088$$" variable
+		And I save the window as "$$RetailSalesReceipt092088$$"
+	* Check creation  based on
+		And I click "Sales return" button
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And "BasisesTree" table became equal
+			| 'Row presentation'                                 | 'Use' | 'Quantity' | 'Unit' | 'Price' | 'Currency' |
+			| '$$RetailSalesReceipt092088$$'                     | 'Yes' | ''         | ''     | ''      | ''         |
+			| 'Product 1 with SLN (PZU)'                         | 'Yes' | '1,000'    | 'pcs'  | '10,00' | 'TRY'      |
+			| 'Product 1 with SLN (PZU)'                         | 'Yes' | '1,000'    | 'pcs'  | '10,00' | 'TRY'      |
+			| 'Product 1 with SLN (PZU)'                         | 'Yes' | '1,000'    | 'pcs'  | '10,00' | 'TRY'      |
+			| 'Product 1 with SLN (ODS)'                         | 'Yes' | '1,000'    | 'pcs'  | '10,00' | 'TRY'      |
+		And I click "Ok" button
+		And "ItemList" table became equal
+			| 'Item'               | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Product 1 with SLN' | 'PZU'      | 'No'                 | '8908899877'         | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '18%' | '8,47'       | '10,00'        | 'Store 01' |
+			| 'Product 1 with SLN' | 'PZU'      | 'No'                 | '456789'             | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '18%' | '8,47'       | '10,00'        | 'Store 01' |
+			| 'Product 1 with SLN' | 'PZU'      | 'No'                 | '8908899880'         | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '18%' | '8,47'       | '10,00'        | 'Store 01' |
+			| 'Product 1 with SLN' | 'ODS'      | 'No'                 | '908'                | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '18%' | '8,47'       | '10,00'        | 'Store 01' |
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "23455677788976667" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I finish line editing in "ItemList" table
+		And "ItemList" table became equal
+			| 'Retail sales receipt'         | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price' | 'Net amount' | 'Total amount' | 'Store'    | 'VAT' |
+			| '$$RetailSalesReceipt092088$$' | 'Product 1 with SLN' | 'PZU'      | '8908899877'         | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '8,47'       | '10,00'        | 'Store 01' | '18%' |
+			| '$$RetailSalesReceipt092088$$' | 'Product 1 with SLN' | 'PZU'      | '456789'             | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '8,47'       | '10,00'        | 'Store 01' | '18%' |
+			| '$$RetailSalesReceipt092088$$' | 'Product 1 with SLN' | 'PZU'      | '8908899880'         | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '8,47'       | '10,00'        | 'Store 01' | '18%' |
+			| '$$RetailSalesReceipt092088$$' | 'Product 1 with SLN' | 'ODS'      | '908'                | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '8,47'       | '10,00'        | 'Store 01' | '18%' |
+			| ''                             | 'Product 1 with SLN' | 'PZU'      | '8908899877'         | 'pcs'  | ''           | '1,000'    | ''      | ''           | ''             | 'Store 01' | '18%' |
+		And I close all client application windows
 				
-				
-						
-
 
 
 

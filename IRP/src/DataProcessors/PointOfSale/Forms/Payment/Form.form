@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema">
   <title>
     <key>en</key>
     <value>Payment</value>
@@ -122,6 +122,328 @@
   <items xsi:type="form:FormGroup">
     <name>GroupForm</name>
     <id>35</id>
+    <items xsi:type="form:FormGroup">
+      <name>GroupBankTypeList</name>
+      <id>270</id>
+      <items xsi:type="form:Button">
+        <name>BankPaymentTypeListChoose</name>
+        <id>293</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <extendedTooltip>
+          <name>BankPaymentTypeListChooseExtendedTooltip</name>
+          <id>294</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <type>UsualButton</type>
+        <commandName>Form.Item.BankPaymentTypeList.StandardCommand.Choose</commandName>
+        <representation>PictureAndText</representation>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <groupHorizontalAlign>Left</groupHorizontalAlign>
+        <placementArea>UserCmds</placementArea>
+        <representationInContextMenu>Auto</representationInContextMenu>
+      </items>
+      <items xsi:type="form:Table">
+        <name>BankPaymentTypeList</name>
+        <id>272</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>BankPaymentTypeList</segments>
+        </dataPath>
+        <titleLocation>None</titleLocation>
+        <items xsi:type="form:FormField">
+          <name>BankPaymentTypeListRef</name>
+          <id>290</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>BankPaymentTypeList.Ref</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>BankPaymentTypeListRefExtendedTooltip</name>
+            <id>292</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>BankPaymentTypeListRefContextMenu</name>
+            <id>291</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <autoCommandBar>
+          <name>BankPaymentTypeListCommandBar</name>
+          <id>273</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <horizontalAlign>Left</horizontalAlign>
+          <autoFill>true</autoFill>
+        </autoCommandBar>
+        <handlers>
+          <event>DragStart</event>
+          <name>BankPaymentTypeListDragStart</name>
+        </handlers>
+        <handlers>
+          <event>OnActivateRow</event>
+          <name>BankPaymentTypeListOnActivateRow</name>
+        </handlers>
+        <handlers>
+          <event>ValueChoice</event>
+          <name>BankPaymentTypeListValueChoice</name>
+        </handlers>
+        <searchStringAddition>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <name>BankPaymentTypeListSearchString</name>
+          <id>276</id>
+          <extendedTooltip>
+            <name>BankPaymentTypeListSearchStringExtendedTooltip</name>
+            <id>278</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>BankPaymentTypeListSearchStringContextMenu</name>
+            <id>277</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <extInfo xsi:type="form:SearchStringAdditionExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+          </extInfo>
+        </searchStringAddition>
+        <viewStatusAddition>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <name>BankPaymentTypeListViewStatus</name>
+          <id>282</id>
+          <extendedTooltip>
+            <name>BankPaymentTypeListViewStatusExtendedTooltip</name>
+            <id>284</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>BankPaymentTypeListViewStatusContextMenu</name>
+            <id>283</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>ViewStatusAddition</type>
+          <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+          </extInfo>
+        </viewStatusAddition>
+        <searchControlAddition>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <name>BankPaymentTypeListSearchControl</name>
+          <id>279</id>
+          <extendedTooltip>
+            <name>BankPaymentTypeListSearchControlExtendedTooltip</name>
+            <id>281</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>BankPaymentTypeListSearchControlContextMenu</name>
+            <id>280</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>SearchControlAddition</type>
+          <extInfo xsi:type="form:SearchControlAdditionExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+          </extInfo>
+        </searchControlAddition>
+        <extendedTooltip>
+          <name>BankPaymentTypeListExtendedTooltip</name>
+          <id>275</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <contextMenu>
+          <name>BankPaymentTypeListContextMenu</name>
+          <id>274</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <autoFill>true</autoFill>
+        </contextMenu>
+        <representation>HierarchicalList</representation>
+        <changeRowSet>true</changeRowSet>
+        <changeRowOrder>true</changeRowOrder>
+        <autoMaxWidth>true</autoMaxWidth>
+        <height>10</height>
+        <choiceMode>true</choiceMode>
+        <headerHeight>1</headerHeight>
+        <footerHeight>1</footerHeight>
+        <horizontalScrollBar>AutoUse</horizontalScrollBar>
+        <verticalScrollBar>AutoUse</verticalScrollBar>
+        <horizontalLines>true</horizontalLines>
+        <verticalLines>true</verticalLines>
+        <useAlternationRowColor>true</useAlternationRowColor>
+        <searchOnInput>Auto</searchOnInput>
+        <initialListView>Auto</initialListView>
+        <enableStartDrag>true</enableStartDrag>
+        <fileDragMode>AsFileRef</fileDragMode>
+        <borderColor xsi:type="core:ColorRef">
+          <color>Style.FormBackColor</color>
+        </borderColor>
+        <extInfo xsi:type="form:DynamicListTableExtInfo">
+          <autoRefreshPeriod>60</autoRefreshPeriod>
+          <period>
+            <startDate>0001-01-01T00:00:00</startDate>
+            <endDate>0001-01-01T00:00:00</endDate>
+          </period>
+          <choiceFoldersAndItems>FoldersAndItems</choiceFoldersAndItems>
+          <topLevelParent xsi:type="core:UndefinedValue"/>
+        </extInfo>
+      </items>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <title>
+        <key>en</key>
+        <value>Group bank type list</value>
+      </title>
+      <width>20</width>
+      <extendedTooltip>
+        <name>GroupBankTypeListExtendedTooltip</name>
+        <id>271</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <type>UsualGroup</type>
+      <extInfo xsi:type="form:UsualGroupExtInfo">
+        <group>HorizontalIfPossible</group>
+        <behavior>Auto</behavior>
+        <showLeftMargin>true</showLeftMargin>
+        <united>true</united>
+        <throughAlign>Auto</throughAlign>
+        <currentRowUse>Auto</currentRowUse>
+      </extInfo>
+    </items>
     <items xsi:type="form:FormGroup">
       <name>GroupAmounts</name>
       <id>17</id>
@@ -835,6 +1157,10 @@
             <event>BeforeDeleteRow</event>
             <name>PaymentsBeforeDeleteRow</name>
           </handlers>
+          <handlers>
+            <event>Drag</event>
+            <name>PaymentsDrag</name>
+          </handlers>
           <searchStringAddition>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -993,9 +1319,10 @@
           <initialListView>Auto</initialListView>
           <horizontalStretch>true</horizontalStretch>
           <verticalStretch>true</verticalStretch>
+          <enableDrag>true</enableDrag>
           <fileDragMode>AsFileRef</fileDragMode>
           <borderColor xsi:type="core:ColorRef">
-            <color>Style.FormBackColor</color>
+            <color>Web.LightGray</color>
           </borderColor>
           <rowFilter xsi:type="core:UndefinedValue"/>
         </items>
@@ -1355,7 +1682,7 @@
               <horizontalStretch>true</horizontalStretch>
               <placementArea>UserCmds</placementArea>
               <font xsi:type="core:FontRef">
-                <font>Style.ExtraLargeTextFont</font>
+                <font>Style.LargeTextFont</font>
               </font>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
@@ -1395,7 +1722,7 @@
                 <color>Web.Cream</color>
               </backColor>
               <font xsi:type="core:FontRef">
-                <font>Style.ExtraLargeTextFont</font>
+                <font>Style.LargeTextFont</font>
               </font>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
@@ -1435,7 +1762,7 @@
                 <color>Web.AliceBlue</color>
               </backColor>
               <font xsi:type="core:FontRef">
-                <font>Style.ExtraLargeTextFont</font>
+                <font>Style.LargeTextFont</font>
               </font>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
@@ -1652,6 +1979,7 @@
                 <key>en</key>
                 <value>Group one</value>
               </title>
+              <width>10</width>
               <extendedTooltip>
                 <name>GroupOneExtendedTooltip</name>
                 <id>58</id>
@@ -1857,6 +2185,7 @@
                 <key>en</key>
                 <value>Group two</value>
               </title>
+              <width>10</width>
               <extendedTooltip>
                 <name>GroupTwoExtendedTooltip</name>
                 <id>70</id>
@@ -2062,6 +2391,7 @@
                 <key>en</key>
                 <value>Group three</value>
               </title>
+              <width>10</width>
               <extendedTooltip>
                 <name>GroupThreeExtendedTooltip</name>
                 <id>82</id>
@@ -2133,7 +2463,7 @@
                 <id>147</id>
                 <title>
                   <key>en</key>
-                  <value>Enter</value>
+                  <value>OK</value>
                 </title>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -2180,6 +2510,7 @@
                 <key>en</key>
                 <value>Group enter</value>
               </title>
+              <width>10</width>
               <extendedTooltip>
                 <name>GroupEnterExtendedTooltip</name>
                 <id>135</id>
@@ -2371,7 +2702,7 @@
     </extendedTooltip>
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
-      <group>Vertical</group>
+      <group>AlwaysHorizontal</group>
       <horizontalAlign>Center</horizontalAlign>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
@@ -3058,6 +3389,147 @@
     <edit>
       <common>true</common>
     </edit>
+  </attributes>
+  <attributes>
+    <name>BankPaymentTypeList</name>
+    <title>
+      <key>en</key>
+      <value>Bank payment type list</value>
+    </title>
+    <id>48</id>
+    <valueType>
+      <types>DynamicList</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+      <segments>BankPaymentTypeList.Ref</segments>
+    </notDefaultUseAlwaysAttributes>
+    <extInfo xsi:type="form:DynamicListExtInfo">
+      <queryText>SELECT
+	PaymentTypesData.PaymentType,
+	PaymentTypesData.PaymentType.Parent AS Parent
+INTO PaymentTypesData
+FROM
+	Catalog.BankTerms.PaymentTypes AS PaymentTypesData
+WHERE
+	PaymentTypesData.Ref IN
+		(SELECT
+			BranchBankTerms.BankTerm
+		FROM
+			InformationRegister.BranchBankTerms AS BranchBankTerms
+		WHERE
+			BranchBankTerms.Branch = &amp;Branch)
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT
+	PaymentTypes.Ref
+FROM
+	Catalog.PaymentTypes AS PaymentTypes
+		INNER JOIN PaymentTypesData AS PaymentTypesData
+		ON PaymentTypes.Ref = PaymentTypesData.PaymentType</queryText>
+      <mainTable>Catalog.PaymentTypes</mainTable>
+      <dynamicDataRead>true</dynamicDataRead>
+      <autoFillAvailableFields>true</autoFillAvailableFields>
+      <customQuery>true</customQuery>
+      <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Code</dataPath>
+        <field>Code</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Type</dataPath>
+        <field>Type</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Icon</dataPath>
+        <field>Icon</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>isIconSet</dataPath>
+        <field>isIconSet</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Partner</dataPath>
+        <field>Partner</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>LegalName</dataPath>
+        <field>LegalName</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Agreement</dataPath>
+        <field>Agreement</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>LegalNameContract</dataPath>
+        <field>LegalNameContract</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Branch</dataPath>
+        <field>Branch</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description_en</dataPath>
+        <field>Description_en</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description_hash</dataPath>
+        <field>Description_hash</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description_ru</dataPath>
+        <field>Description_ru</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description_tr</dataPath>
+        <field>Description_tr</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>AddAttributes</dataPath>
+        <field>AddAttributes</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Predefined</dataPath>
+        <field>Predefined</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PredefinedDataName</dataPath>
+        <field>PredefinedDataName</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>DeletionMark</dataPath>
+        <field>DeletionMark</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Parent</dataPath>
+        <field>Parent</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Ref</dataPath>
+        <field>Ref</field>
+      </fields>
+      <parameters>
+        <name>Branch</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Branch</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>CatalogRef.BusinessUnits</types>
+        </valueType>
+        <useRestriction>true</useRestriction>
+      </parameters>
+    </extInfo>
   </attributes>
   <formCommands>
     <name>Card</name>

@@ -339,7 +339,7 @@ Procedure ReadTerminalOperations()
 		//@skip-check property-return-type
 		Record.Operation = ?(QuerySelection.isReturn, R().InfoMessage_Returns, R().InfoMessage_Sales);
 		Record.PaymentType = QuerySelection.PaymentType;
-		Record.PaymentTerminal = QuerySelection.PaymentTerminals;
+		Record.PaymentTerminal = QuerySelection.PaymentTerminal;
 		Record.AmountInBase = QuerySelection.Amount; 
 	EndDo;
 	
@@ -351,7 +351,7 @@ EndProcedure
 //  QueryResultSelection - Get current terminal operations:
 //  * isReturn - Boolean
 //  * PaymentType - CatalogRef.PaymentTypes
-//  * PaymentTerminals - CatalogRef.PaymentTerminals
+//  * PaymentTerminal - CatalogRef.PaymentTerminals
 //  * Amount - Number
 Function GetCurrentTerminalOperations()
 	Query = New Query;

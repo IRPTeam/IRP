@@ -296,7 +296,13 @@ EndProcedure
 
 &AtClient
 Procedure Card(Command)
-	OpenPaymentForm(ThisObject.BankPaymentTypes, PredefinedValue("Enum.PaymentTypes.Card"));
+	OpenNewForm = False;
+	If OpenNewForm Then
+		OpenPaymentForm(ThisObject.BankPaymentTypes, PredefinedValue("Enum.PaymentTypes.Card"));
+	Else
+		Items.GroupBankTypeList.Visible = Not Items.GroupBankTypeList.Visible;
+		Items.Card.Check = Items.GroupBankTypeList.Visible;
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -555,6 +561,7 @@ Procedure FillPaymentsAtServer()
 		ValueToFormAttribute(PaymentAgentValue, "PaymentAgentTypes");
 	EndIf;
 	
+	BankPaymentTypeList.Parameters.SetParameterValue("Branch", Object.Branch);
 	Items.Cash.Enabled = ThisObject.CashPaymentTypes.Count();
 	Items.Card.Enabled = ThisObject.BankPaymentTypes.Count();
 	Items.PaymentAgent.Enabled = ThisObject.PaymentAgentTypes.Count();
@@ -647,6 +654,47 @@ Function GetFractionDigitsMaxCount()
 	Return Metadata.DefinedTypes.typeAmount.Type.NumberQualifiers.FractionDigits;
 	
 EndFunction
+
+#EndRegion
+
+#Region BankPaymentList
+
+&AtClient
+Procedure PaymentsDrag(Item, DragParameters, StandardProcessing, Row, Field)
+	StandardProcessing = False;
+	PaymentRef = DragParameters.Value;
+	PaymentRows = BankPaymentTypes.FindRows(New Structure("PaymentType", PaymentRef));
+	If PaymentRows.Count() = 0 Then
+		Return;
+	EndIf;
+	Result = POSClient.ButtonSettings();
+	FillPropertyValues(Result, PaymentRows[0]);
+	Result.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Card");
+	FillPayments(Result, Undefined);
+EndProcedure
+
+&AtClient
+Procedure BankPaymentTypeListDragStart(Item, DragParameters, Perform)
+	PaymentRow = DragParameters.Value;
+	Perform = Not BankPaymentTypes.FindRows(New Structure("PaymentType", PaymentRow)).Count() = 0
+EndProcedure
+
+&AtClient
+Procedure BankPaymentTypeListOnActivateRow(Item)
+	Items.BankPaymentTypeList.Expand(Items.BankPaymentTypeList.CurrentRow);
+EndProcedure
+
+&AtClient
+Procedure BankPaymentTypeListValueChoice(Item, Value, StandardProcessing)
+	PaymentRows = BankPaymentTypes.FindRows(New Structure("PaymentType", Value));
+	If PaymentRows.Count() = 0 Then
+		Return;
+	EndIf;
+	Result = POSClient.ButtonSettings();
+	FillPropertyValues(Result, PaymentRows[0]);
+	Result.PaymentTypeEnum = PredefinedValue("Enum.PaymentTypes.Card");
+	FillPayments(Result, Undefined);
+EndProcedure
 
 #EndRegion
 

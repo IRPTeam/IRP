@@ -12796,8 +12796,19 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 	If Result.Count() <> 1 Then
 		Raise "load more than one table not implemented";
 	EndIf;
-	SourceTable = GetFromTempStorage(Result[0].Value);
 	
+	SourceTable       = New ValueTable();
+	SourceTableBuffer = New ValueTable();
+	TempStorageData = GetFromTempStorage(Result[0].Value);
+	If TypeOf(TempStorageData) = Type("ValueTable") Then
+		SourceTable = TempStorageData;
+	ElsIf TypeOf(TempStorageData) = Type("Structure") Then
+		SourceTable = TempStorageData.SourceTable;
+		SourceTableBuffer = TempStorageData.SourceTableBuffer;
+	Else
+		Raise "not supported temp storage data type";
+	EndIf;
+		
 	SourceTableExpanded = Undefined;
 	If Parameters.SerialLotNumbersExists Then
 		SourceTableExpanded = SourceTable.Copy();
@@ -12807,6 +12818,13 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 	SourceColumnsSumBy   = Parameters.LoadData.SourceColumnsSumBy;
 	
 	SourceTable.GroupBy(SourceColumnsGroupBy, SourceColumnsSumBy);
+	
+	For Each Row In SourceTableBuffer Do
+		FillPropertyValues(SourceTable.Add(), Row);
+		If SourceTableExpanded <> Undefined Then
+			FillPropertyValues(SourceTableExpanded.Add(), Row);
+		EndIf;
+	EndDo;
 	
 	// only for physical inventory
 	If Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory"

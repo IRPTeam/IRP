@@ -694,6 +694,7 @@
   <commonForms>CommonForm.PaymentByAcquiring</commonForms>
   <commonForms>CommonForm.CopyToClipboardSettings</commonForms>
   <commonForms>CommonForm.PasteFromClipboardSettings</commonForms>
+  <commonForms>CommonForm.InputBarcode</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>

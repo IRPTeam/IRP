@@ -78,7 +78,8 @@ Procedure SearchByBarcode(Barcode, Settings) Export
 			MultimediaTools.ShowBarcodeScanning(DescriptionField, NotifyScan, NotifyScanCancel, BarcodeType.All);
 		EndIf;
 #Else
-		ShowInputString(NotifyDescription, "", DescriptionField);
+		OpenForm("CommonForm.InputBarcode", , , , , , NotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
+//		ShowInputString(NotifyDescription, "", DescriptionField);
 #EndIf
 	Else
 #If MobileClient Then
@@ -141,13 +142,21 @@ EndProcedure
 // Process barcode.
 // 
 // Parameters:
-//  Barcode - String - Barcode
+//  Barcode - String, Array of String - Barcode
 //  Settings - See GetBarcodeSettings
 // Returns:
 //  Boolean - Process barcode
 Function ProcessBarcode(Barcode, Settings) Export
-	BarcodeArray = New Array();
-	BarcodeArray.Add(TrimAll(Barcode));
+	If TypeOf(Barcode) = Type("String") Then 
+		BarcodeArray = New Array();
+		BarcodeArray.Add(Barcode);
+	Else
+		BarcodeArray = Barcode;
+	EndIf;
+	
+	For Each Row In BarcodeArray Do
+		Row = TrimAll(Row);
+	EndDo;
 	Return ProcessBarcodes(BarcodeArray, Settings);
 EndFunction
 
@@ -161,6 +170,16 @@ Function ProcessBarcodes(Barcodes, Settings)
 	If FoundedItems = Undefined Then
 		Return False;
 	EndIf;
+
+	For Each FoundedItem In FoundedItems Do
+		While True Do 
+			Index = Barcodes.Find(FoundedItem.Barcode);
+			If Index = Undefined Then
+				Break;
+			EndIf;
+			Barcodes.Delete(Index);
+		EndDo;
+	EndDo;
 	
 	Settings.Result.FoundedItems = FoundedItems;
 	Settings.Result.Barcodes = Barcodes;

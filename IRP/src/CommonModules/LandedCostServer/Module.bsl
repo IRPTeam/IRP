@@ -671,7 +671,8 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|	T6060S_BatchCostAllocationInfo.ItemKey AS ItemKey,
 	|	T6060S_BatchCostAllocationInfo.CurrencyMovementType AS CurrencyMovementType,
 	|	T6060S_BatchCostAllocationInfo.Currency AS Currency,
-	|	SUM(T6060S_BatchCostAllocationInfo.Amount) AS Amount
+	|	SUM(T6060S_BatchCostAllocationInfo.Amount) AS Amount,
+	|	SUM(T6060S_BatchCostAllocationInfo.AmountTax) AS AmountTax
 	|INTO CostAllocationInfo
 	|FROM
 	|	InformationRegister.T6060S_BatchCostAllocationInfo AS T6060S_BatchCostAllocationInfo
@@ -695,7 +696,8 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|	T6060S_BatchCostAllocationInfo.ItemKey AS ItemKey,
 	|	T6060S_BatchCostAllocationInfo.CurrencyMovementType AS CurrencyMovementType,
 	|	T6060S_BatchCostAllocationInfo.Currency AS Currency,
-	|	SUM(T6060S_BatchCostAllocationInfo.Amount) AS Amount
+	|	SUM(T6060S_BatchCostAllocationInfo.Amount) AS Amount,
+	|	SUM(T6060S_BatchCostAllocationInfo.AmountTax) AS AmountTax
 	|INTO CostAllocationInfo_PastPeriod
 	|FROM
 	|	InformationRegister.T6060S_BatchCostAllocationInfo AS T6060S_BatchCostAllocationInfo
@@ -718,7 +720,8 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|	T6020S_BatchKeysInfo.Store AS Store,
 	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey,
 	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
-	|	MAX(CostAllocationInfo.Amount) AS Amount
+	|	MAX(CostAllocationInfo.Amount) AS Amount,
+	|	MAX(CostAllocationInfo.AmountTax) AS AmountTax
 	|INTO CostAmounts_tmp
 	|FROM
 	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
@@ -743,7 +746,8 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|	T6020S_BatchKeysInfo.Store AS Store,
 	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey,
 	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
-	|	MAX(CostAllocationInfo_PastPeriod.Amount) AS Amount
+	|	MAX(CostAllocationInfo_PastPeriod.Amount) AS Amount,
+	|	MAX(CostAllocationInfo_PastPeriod.AmountTax) AS AmountTax
 	|INTO CostAmounts_tmp_PastPeriod
 	|FROM
 	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
@@ -769,11 +773,17 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|	CostAmounts_tmp.ItemKey AS ItemKey,
 	|	CostAmounts_tmp.Quantity AS Quantity,
 	|	CostAmounts_tmp.Amount AS Amount,
+	|	CostAmounts_tmp.AmountTax AS AmountTax,
 	|	CASE
 	|		WHEN CostAmounts_tmp.Quantity = 0
 	|			THEN 0
 	|		ELSE CostAmounts_tmp.Amount / CostAmounts_tmp.Quantity
-	|	END AS AmountPerOneUnit
+	|	END AS AmountPerOneUnit,
+	|	CASE
+	|		WHEN CostAmounts_tmp.Quantity = 0
+	|			THEN 0
+	|		ELSE CostAmounts_tmp.AmountTax / CostAmounts_tmp.Quantity
+	|	END AS AmountTaxPerOneUnit
 	|INTO CostAmounts
 	|FROM
 	|	CostAmounts_tmp AS CostAmounts_tmp
@@ -791,7 +801,12 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|		WHEN CostAmounts_tmp_PastPeriod.Quantity = 0
 	|			THEN 0
 	|		ELSE CostAmounts_tmp_PastPeriod.Amount / CostAmounts_tmp_PastPeriod.Quantity
-	|	END AS AmountPerOneUnit
+	|	END AS AmountPerOneUnit,
+	|	CASE
+	|		WHEN CostAmounts_tmp_PastPeriod.Quantity = 0
+	|			THEN 0
+	|		ELSE CostAmounts_tmp_PastPeriod.AmountTax / CostAmounts_tmp_PastPeriod.Quantity
+	|	END AS AmountTaxPerOneUnit
 	|INTO CostAmounts_PastPeriod
 	|FROM
 	|	CostAmounts_tmp_PastPeriod AS CostAmounts_tmp_PastPeriod
@@ -812,7 +827,8 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|	R6010B_BatchWiseBalance.Document AS Document,
 	|	0 AS Quantity,
 	|	0 AS Amount,
-	|	CostAmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity AS AmountCost
+	|	CostAmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity AS AmountCost,
+	|	CostAmounts.AmountTaxPerOneUnit * R6010B_BatchWiseBalance.Quantity AS AmountTax
 	|INTO BatchWiseBalance
 	|FROM
 	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
@@ -822,7 +838,8 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|		AND R6010B_BatchWiseBalance.BatchKey.ItemKey = CostAmounts.ItemKey
 	|		AND (R6010B_BatchWiseBalance.Document.Date <= ENDOFPERIOD(&EndPeriod, DAY))
 	|WHERE
-	|	CostAmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0
+	|	(CostAmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0)
+	|	OR (CostAmounts.AmountTaxPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -840,7 +857,8 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|	R6010B_BatchWiseBalance.Document AS Document,
 	|	0 AS Quantity,
 	|	0 AS Amount,
-	|	CostAmounts_PastPeriod.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity AS AmountCost
+	|	CostAmounts_PastPeriod.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity AS AmountCost,
+	|	CostAmounts_PastPeriod.AmountTaxPerOneUnit * R6010B_BatchWiseBalance.Quantity AS AmountTax
 	|INTO BatchWiseBalance_PastPeriod
 	|FROM
 	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
@@ -851,7 +869,8 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|		AND (R6010B_BatchWiseBalance.Document.Date BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod,
 	|			DAY))
 	|WHERE
-	|	CostAmounts_PastPeriod.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0
+	|	(CostAmounts_PastPeriod.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0)
+	|	OR (CostAmounts_PastPeriod.AmountTaxPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -869,7 +888,8 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|	BatchWiseBalance.Document AS Document,
 	|	BatchWiseBalance.Quantity AS Quantity,
 	|	BatchWiseBalance.Amount AS Amount,
-	|	BatchWiseBalance.AmountCost AS AmountCost
+	|	BatchWiseBalance.AmountCost AS AmountCost,
+	|	BatchWiseBalance.AmountTax AS AmountTax
 	|INTO BatchWiseBalance_All
 	|FROM
 	|	BatchWiseBalance AS BatchWiseBalance
@@ -890,7 +910,8 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|	BatchWiseBalance_PastPeriod.Document,
 	|	BatchWiseBalance_PastPeriod.Quantity,
 	|	BatchWiseBalance_PastPeriod.Amount,
-	|	BatchWiseBalance_PastPeriod.AmountCost
+	|	BatchWiseBalance_PastPeriod.AmountCost,
+	|	BatchWiseBalance_PastPeriod.AmountTax
 	|FROM
 	|	BatchWiseBalance_PastPeriod AS BatchWiseBalance_PastPeriod
 	|;
@@ -900,7 +921,8 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|	BatchWiseBalance_ALL.Batch AS Batch,
 	|	BatchWiseBalance_ALL.BatchKey AS BatchKey,
 	|	BatchWiseBalance_ALL.Document AS Document,
-	|	SUM(BatchWiseBalance_ALL.AmountCost) AS AmountCost
+	|	SUM(BatchWiseBalance_ALL.AmountCost) AS AmountCost,
+	|	SUM(BatchWiseBalance_ALL.AmountTax) AS AmountTax
 	|INTO BatchWiseBalance_ALL_GROUPED
 	|FROM
 	|	BatchWiseBalance_All AS BatchWiseBalance_ALL
@@ -921,7 +943,8 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|	R6050T_SalesBatches.SalesInvoice AS SalesInvoice,
 	|	SUM(0) AS Quantity,
 	|	SUM(0) AS Amount,
-	|	SUM(BatchWiseBalance_ALL_GROUPED.AmountCost) AS AmountCost
+	|	SUM(BatchWiseBalance_ALL_GROUPED.AmountCost) AS AmountCost,
+	|	SUM(BatchWiseBalance_ALL_GROUPED.AmountTax) AS AmountTax
 	|INTO SalesBatches
 	|FROM
 	|	AccumulationRegister.R6050T_SalesBatches AS R6050T_SalesBatches
@@ -939,7 +962,8 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|	R6050T_SalesBatches.BatchKey,
 	|	R6050T_SalesBatches.SalesInvoice
 	|HAVING
-	|	SUM(BatchWiseBalance_ALL_GROUPED.AmountCost) <> 0
+	|	(SUM(BatchWiseBalance_ALL_GROUPED.AmountCost) <> 0)
+	|	OR (SUM(BatchWiseBalance_ALL_GROUPED.AmountTax) <> 0)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -957,7 +981,8 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|	BatchWiseBalance_All.Document AS Document,
 	|	BatchWiseBalance_All.Quantity AS Quantity,
 	|	BatchWiseBalance_All.Amount AS Amount,
-	|	BatchWiseBalance_All.AmountCost AS AmountCost
+	|	BatchWiseBalance_All.AmountCost AS AmountCost,
+	|	BatchWiseBalance_All.AmountTax AS AmountTax
 	|FROM
 	|	BatchWiseBalance_All AS BatchWiseBalance_All
 	|;
@@ -973,7 +998,8 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|	SalesBatches.SalesInvoice AS SalesInvoice,
 	|	SalesBatches.Quantity AS Quantity,
 	|	SalesBatches.Amount AS Amount,
-	|	SalesBatches.AmountCost AS AmountCost
+	|	SalesBatches.AmountCost AS AmountCost,
+	|	SalesBatches.AmountTax AS AmountTax
 	|FROM
 	|	SalesBatches AS SalesBatches";
 

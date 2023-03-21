@@ -12742,10 +12742,8 @@ Function GetReadOnlyProperties(DataPath, Parameters, _Key = Undefined, _Value = 
 					And Not Row.DontCalculateRow And ValueIsFilled(_Value) Then
 						Return False; // is not read only
 				EndIf;
-				
-			Else
-				Raise StrTemplate("Row is not present [%1] [%2]", DataPath, _Key);
 			EndIf;
+
 		Else
 			Raise StrTemplate("Wrong data path for read only property [%1]", DataPath);
 		EndIf;

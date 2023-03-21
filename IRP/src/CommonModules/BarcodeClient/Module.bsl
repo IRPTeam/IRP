@@ -154,10 +154,14 @@ Function ProcessBarcode(Barcode, Settings) Export
 		BarcodeArray = Barcode;
 	EndIf;
 	
-	For Each Row In BarcodeArray Do
-		Row = TrimAll(Row);
+	For Index = 0 To BarcodeArray.UBound() Do
+		BarcodeArray[Index] = CheckBarcode(BarcodeArray[Index]);
 	EndDo;
 	Return ProcessBarcodes(BarcodeArray, Settings);
+EndFunction
+
+Function CheckBarcode(Val Barcode)
+	Return TrimAll(Barcode);
 EndFunction
 
 Function ProcessBarcodes(Barcodes, Settings)

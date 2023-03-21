@@ -18,7 +18,12 @@
       <dataPath xsi:type="form:DataPath">
         <segments>Barcode</segments>
       </dataPath>
+      <defaultItem>true</defaultItem>
       <titleLocation>None</titleLocation>
+      <handlers>
+        <event>OnChange</event>
+        <name>BarcodeOnChange</name>
+      </handlers>
       <extendedTooltip>
         <name>BarcodeExtendedTooltip</name>
         <id>3</id>
@@ -66,7 +71,6 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <defaultItem>true</defaultItem>
       <extendedTooltip>
         <name>OKExtendedTooltip</name>
         <id>13</id>

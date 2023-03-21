@@ -16,8 +16,8 @@ Procedure Done()
 	If Delimiter = "" Then
 		Delimiter = Chars.LF;
 	EndIf;
-	BarcodesStr = StrReplace(Barcode, Delimiter, "💠");
-	Barcodes = StrSplit(BarcodesStr, "💠", False);
+	BarcodesStr = StrReplace(Barcode, Delimiter, "`");
+	Barcodes = StrSplit(BarcodesStr, "`", False);
 	Close(Barcodes);
 EndProcedure
 

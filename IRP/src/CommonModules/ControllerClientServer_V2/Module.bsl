@@ -12809,7 +12809,7 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 		Raise "not supported temp storage data type";
 	EndIf;
 		
-	SourceTableExpanded = Undefined;
+	SourceTableExpanded = New ValueTable();;
 	If Parameters.SerialLotNumbersExists Then
 		SourceTableExpanded = SourceTable.Copy();
 	EndIf;
@@ -12829,7 +12829,7 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 		FillPropertyValues(NewRowSourceTable, Row);
 		NewRowSourceTable.UniqueBufferKey = UniqueBufferKey;
 		
-		If SourceTableExpanded <> Undefined Then
+		If Parameters.SerialLotNumbersExists Then
 			NewRowSourceTableExpanded = SourceTableExpanded.Add();
 			FillPropertyValues(NewRowSourceTableExpanded, Row);
 			NewRowSourceTableExpanded.UniqueBufferKey = UniqueBufferKey;

@@ -659,238 +659,234 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationSet
 	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Restore(CalculationSettings.Company, CalculationSettings.EndPeriod);	
 EndProcedure
 
-Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, CalculationSettings)	
-	Query = New Query();
-	TempTablesManager = New TempTablesManager();
-	Query.TempTablesManager = TempTablesManager;
-	Query.Text =
+Function GetQueryText_AdditionalItem_CostRevenue()
+	Return
 	"SELECT
-	|	T6060S_BatchCostAllocationInfo.Company AS Company,
-	|	T6060S_BatchCostAllocationInfo.Document AS Document,
-	|	T6060S_BatchCostAllocationInfo.Store AS Store,
-	|	T6060S_BatchCostAllocationInfo.ItemKey AS ItemKey,
-	|	T6060S_BatchCostAllocationInfo.CurrencyMovementType AS CurrencyMovementType,
-	|	T6060S_BatchCostAllocationInfo.Currency AS Currency,
-	|	SUM(T6060S_BatchCostAllocationInfo.Amount) AS Amount,
-	|	SUM(T6060S_BatchCostAllocationInfo.AmountTax) AS AmountTax
-	|INTO CostAllocationInfo
+	|	AllocationInfo.Company,
+	|	AllocationInfo.Document,
+	|	AllocationInfo.Store,
+	|	AllocationInfo.ItemKey,
+	|	AllocationInfo.CurrencyMovementType,
+	|	AllocationInfo.Currency,
+	|	SUM(AllocationInfo.Amount) AS Amount,
+	|	SUM(AllocationInfo.AmountTax) AS AmountTax
+	|INTO AllocationInfo
 	|FROM
-	|	InformationRegister.T6060S_BatchCostAllocationInfo AS T6060S_BatchCostAllocationInfo
+	|	InformationRegister.T6060S_BatchCostAllocationInfo AS AllocationInfo
 	|WHERE
-	|	T6060S_BatchCostAllocationInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
-	|	AND T6060S_BatchCostAllocationInfo.Company = &Company
+	|	AllocationInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
+	|	AND AllocationInfo.Company = &Company
 	|GROUP BY
-	|	T6060S_BatchCostAllocationInfo.Company,
-	|	T6060S_BatchCostAllocationInfo.Document,
-	|	T6060S_BatchCostAllocationInfo.Store,
-	|	T6060S_BatchCostAllocationInfo.ItemKey,
-	|	T6060S_BatchCostAllocationInfo.CurrencyMovementType,
-	|	T6060S_BatchCostAllocationInfo.Currency
+	|	AllocationInfo.Company,
+	|	AllocationInfo.Document,
+	|	AllocationInfo.Store,
+	|	AllocationInfo.ItemKey,
+	|	AllocationInfo.CurrencyMovementType,
+	|	AllocationInfo.Currency
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	T6060S_BatchCostAllocationInfo.Company AS Company,
-	|	T6060S_BatchCostAllocationInfo.Document AS Document,
-	|	T6060S_BatchCostAllocationInfo.Store AS Store,
-	|	T6060S_BatchCostAllocationInfo.ItemKey AS ItemKey,
-	|	T6060S_BatchCostAllocationInfo.CurrencyMovementType AS CurrencyMovementType,
-	|	T6060S_BatchCostAllocationInfo.Currency AS Currency,
-	|	SUM(T6060S_BatchCostAllocationInfo.Amount) AS Amount,
-	|	SUM(T6060S_BatchCostAllocationInfo.AmountTax) AS AmountTax
-	|INTO CostAllocationInfo_PastPeriod
+	|	AllocationInfo.Company,
+	|	AllocationInfo.Document,
+	|	AllocationInfo.Store,
+	|	AllocationInfo.ItemKey,
+	|	AllocationInfo.CurrencyMovementType,
+	|	AllocationInfo.Currency,
+	|	SUM(AllocationInfo.Amount) AS Amount,
+	|	SUM(0) AS AmountTax               
+	|INTO AllocationInfo_PastPeriod
 	|FROM
-	|	InformationRegister.T6060S_BatchCostAllocationInfo AS T6060S_BatchCostAllocationInfo
+	|	InformationRegister.T6060S_BatchCostAllocationInfo AS AllocationInfo
 	|WHERE
-	|	T6060S_BatchCostAllocationInfo.Period < BEGINOFPERIOD(&BeginPeriod, DAY)
-	|	AND T6060S_BatchCostAllocationInfo.Company = &Company
+	|	AllocationInfo.Period < BEGINOFPERIOD(&BeginPeriod, DAY)
+	|	AND AllocationInfo.Company = &Company
 	|GROUP BY
-	|	T6060S_BatchCostAllocationInfo.Company,
-	|	T6060S_BatchCostAllocationInfo.Document,
-	|	T6060S_BatchCostAllocationInfo.Store,
-	|	T6060S_BatchCostAllocationInfo.ItemKey,
-	|	T6060S_BatchCostAllocationInfo.CurrencyMovementType,
-	|	T6060S_BatchCostAllocationInfo.Currency
+	|	AllocationInfo.Company,
+	|	AllocationInfo.Document,
+	|	AllocationInfo.Store,
+	|	AllocationInfo.ItemKey,
+	|	AllocationInfo.CurrencyMovementType,
+	|	AllocationInfo.Currency
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	T6020S_BatchKeysInfo.Company AS Company,
-	|	T6020S_BatchKeysInfo.Recorder AS Document,
-	|	T6020S_BatchKeysInfo.Store AS Store,
-	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey,
-	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
-	|	MAX(CostAllocationInfo.Amount) AS Amount,
-	|	MAX(CostAllocationInfo.AmountTax) AS AmountTax
-	|INTO CostAmounts_tmp
+	|	BatchKeysInfo.Company,
+	|	BatchKeysInfo.Recorder AS Document,
+	|	BatchKeysInfo.Store,
+	|	BatchKeysInfo.ItemKey,
+	|	SUM(BatchKeysInfo.Quantity) AS Quantity,
+	|	MAX(AllocationInfo.Amount) AS Amount,
+	|	MAX(AllocationInfo.AmountTax) AS AmountTax
+	|INTO AmountsInfo
 	|FROM
-	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
-	|		INNER JOIN CostAllocationInfo AS CostAllocationInfo
-	|		ON T6020S_BatchKeysInfo.Company = CostAllocationInfo.Company
-	|		AND T6020S_BatchKeysInfo.Recorder = CostAllocationInfo.Document
-	|		AND T6020S_BatchKeysInfo.ItemKey = CostAllocationInfo.ItemKey
-	|		AND T6020S_BatchKeysInfo.Currency = CostAllocationInfo.Currency
-	|		AND T6020S_BatchKeysInfo.CurrencyMovementType = CostAllocationInfo.CurrencyMovementType
-	|		AND (T6020S_BatchKeysInfo.Direction = VALUE(Enum.BatchDirection.Receipt))
+	|	InformationRegister.T6020S_BatchKeysInfo AS BatchKeysInfo
+	|		INNER JOIN AllocationInfo AS AllocationInfo
+	|		ON BatchKeysInfo.Company = AllocationInfo.Company
+	|		AND BatchKeysInfo.Recorder = AllocationInfo.Document
+	|		AND BatchKeysInfo.ItemKey = AllocationInfo.ItemKey
+	|		AND BatchKeysInfo.Currency = AllocationInfo.Currency
+	|		AND BatchKeysInfo.CurrencyMovementType = AllocationInfo.CurrencyMovementType
+	|		AND (BatchKeysInfo.Direction = VALUE(Enum.BatchDirection.Receipt))
 	|GROUP BY
-	|	T6020S_BatchKeysInfo.Company,
-	|	T6020S_BatchKeysInfo.Recorder,
-	|	T6020S_BatchKeysInfo.Store,
-	|	T6020S_BatchKeysInfo.ItemKey
+	|	BatchKeysInfo.Company,
+	|	BatchKeysInfo.Recorder,
+	|	BatchKeysInfo.Store,
+	|	BatchKeysInfo.ItemKey
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	T6020S_BatchKeysInfo.Company AS Company,
-	|	T6020S_BatchKeysInfo.Recorder AS Document,
-	|	T6020S_BatchKeysInfo.Store AS Store,
-	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey,
-	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
-	|	MAX(CostAllocationInfo_PastPeriod.Amount) AS Amount,
-	|	MAX(CostAllocationInfo_PastPeriod.AmountTax) AS AmountTax
-	|INTO CostAmounts_tmp_PastPeriod
+	|	BatchKeysInfo.Company,
+	|	BatchKeysInfo.Recorder AS Document,
+	|	BatchKeysInfo.Store,
+	|	BatchKeysInfo.ItemKey,
+	|	SUM(BatchKeysInfo.Quantity) AS Quantity,
+	|	MAX(AllocationInfo_PastPeriod.Amount) AS Amount,
+	|	MAX(AllocationInfo_PastPeriod.AmountTax) AS AmountTax
+	|INTO AmountsInfo_PastPeriod
 	|FROM
-	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
-	|		INNER JOIN CostAllocationInfo_PastPeriod AS CostAllocationInfo_PastPeriod
-	|		ON T6020S_BatchKeysInfo.Company = CostAllocationInfo_PastPeriod.Company
-	|		AND T6020S_BatchKeysInfo.Recorder = CostAllocationInfo_PastPeriod.Document
-	|		AND T6020S_BatchKeysInfo.ItemKey = CostAllocationInfo_PastPeriod.ItemKey
-	|		AND T6020S_BatchKeysInfo.Currency = CostAllocationInfo_PastPeriod.Currency
-	|		AND T6020S_BatchKeysInfo.CurrencyMovementType = CostAllocationInfo_PastPeriod.CurrencyMovementType
-	|		AND (T6020S_BatchKeysInfo.Direction = VALUE(Enum.BatchDirection.Receipt))
+	|	InformationRegister.T6020S_BatchKeysInfo AS BatchKeysInfo
+	|		INNER JOIN AllocationInfo_PastPeriod AS AllocationInfo_PastPeriod
+	|		ON BatchKeysInfo.Company = AllocationInfo_PastPeriod.Company
+	|		AND BatchKeysInfo.Recorder = AllocationInfo_PastPeriod.Document
+	|		AND BatchKeysInfo.ItemKey = AllocationInfo_PastPeriod.ItemKey
+	|		AND BatchKeysInfo.Currency = AllocationInfo_PastPeriod.Currency
+	|		AND BatchKeysInfo.CurrencyMovementType = AllocationInfo_PastPeriod.CurrencyMovementType
+	|		AND (BatchKeysInfo.Direction = VALUE(Enum.BatchDirection.Receipt))
 	|GROUP BY
-	|	T6020S_BatchKeysInfo.Company,
-	|	T6020S_BatchKeysInfo.Recorder,
-	|	T6020S_BatchKeysInfo.Store,
-	|	T6020S_BatchKeysInfo.ItemKey
+	|	BatchKeysInfo.Company,
+	|	BatchKeysInfo.Recorder,
+	|	BatchKeysInfo.Store,
+	|	BatchKeysInfo.ItemKey
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	CostAmounts_tmp.Company AS Company,
-	|	CostAmounts_tmp.Document AS Document,
-	|	CostAmounts_tmp.Store AS Store,
-	|	CostAmounts_tmp.ItemKey AS ItemKey,
-	|	CostAmounts_tmp.Quantity AS Quantity,
-	|	CostAmounts_tmp.Amount AS Amount,
-	|	CostAmounts_tmp.AmountTax AS AmountTax,
+	|	AmountsInfo.Company,
+	|	AmountsInfo.Document,
+	|	AmountsInfo.Store,
+	|	AmountsInfo.ItemKey,
+	|	AmountsInfo.Quantity,
+	|	AmountsInfo.Amount,
+	|	AmountsInfo.AmountTax,
 	|	CASE
-	|		WHEN CostAmounts_tmp.Quantity = 0
+	|		WHEN AmountsInfo.Quantity = 0
 	|			THEN 0
-	|		ELSE CostAmounts_tmp.Amount / CostAmounts_tmp.Quantity
+	|		ELSE AmountsInfo.Amount / AmountsInfo.Quantity
 	|	END AS AmountPerOneUnit,
 	|	CASE
-	|		WHEN CostAmounts_tmp.Quantity = 0
+	|		WHEN AmountsInfo.Quantity = 0
 	|			THEN 0
-	|		ELSE CostAmounts_tmp.AmountTax / CostAmounts_tmp.Quantity
+	|		ELSE AmountsInfo.AmountTax / AmountsInfo.Quantity
 	|	END AS AmountTaxPerOneUnit
-	|INTO CostAmounts
+	|INTO AmountsInfoPerOneUnit
 	|FROM
-	|	CostAmounts_tmp AS CostAmounts_tmp
+	|	AmountsInfo AS AmountsInfo
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	CostAmounts_tmp_PastPeriod.Company AS Company,
-	|	CostAmounts_tmp_PastPeriod.Document AS Document,
-	|	CostAmounts_tmp_PastPeriod.Store AS Store,
-	|	CostAmounts_tmp_PastPeriod.ItemKey AS ItemKey,
-	|	CostAmounts_tmp_PastPeriod.Quantity AS Quantity,
-	|	CostAmounts_tmp_PastPeriod.Amount AS Amount,
+	|	AmountsInfo_PastPeriod.Company,
+	|	AmountsInfo_PastPeriod.Document,
+	|	AmountsInfo_PastPeriod.Store,
+	|	AmountsInfo_PastPeriod.ItemKey,
+	|	AmountsInfo_PastPeriod.Quantity,
+	|	AmountsInfo_PastPeriod.Amount,
 	|	CASE
-	|		WHEN CostAmounts_tmp_PastPeriod.Quantity = 0
+	|		WHEN AmountsInfo_PastPeriod.Quantity = 0
 	|			THEN 0
-	|		ELSE CostAmounts_tmp_PastPeriod.Amount / CostAmounts_tmp_PastPeriod.Quantity
+	|		ELSE AmountsInfo_PastPeriod.Amount / AmountsInfo_PastPeriod.Quantity
 	|	END AS AmountPerOneUnit,
 	|	CASE
-	|		WHEN CostAmounts_tmp_PastPeriod.Quantity = 0
+	|		WHEN AmountsInfo_PastPeriod.Quantity = 0
 	|			THEN 0
-	|		ELSE CostAmounts_tmp_PastPeriod.AmountTax / CostAmounts_tmp_PastPeriod.Quantity
+	|		ELSE AmountsInfo_PastPeriod.AmountTax / AmountsInfo_PastPeriod.Quantity
 	|	END AS AmountTaxPerOneUnit
-	|INTO CostAmounts_PastPeriod
+	|INTO AmountsInfoPerOneUnit_PastPeriod
 	|FROM
-	|	CostAmounts_tmp_PastPeriod AS CostAmounts_tmp_PastPeriod
+	|	AmountsInfo_PastPeriod AS AmountsInfo_PastPeriod
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	R6010B_BatchWiseBalance.Period AS Period,
-	|	R6010B_BatchWiseBalance.Recorder AS Recorder,
-	|	R6010B_BatchWiseBalance.LineNumber AS LineNumber,
-	|	R6010B_BatchWiseBalance.Active AS Active,
-	|	R6010B_BatchWiseBalance.RecordType AS RecordType,
-	|	R6010B_BatchWiseBalance.Batch AS Batch,
-	|	R6010B_BatchWiseBalance.BatchKey AS BatchKey,
-	|	R6010B_BatchWiseBalance.Quantity AS Quantity1,
-	|	R6010B_BatchWiseBalance.Amount AS Amount1,
-	|	R6010B_BatchWiseBalance.AmountCost AS AmountCost1,
-	|	R6010B_BatchWiseBalance.Document AS Document,
+	|	BatchWiseBalance.Period,
+	|	BatchWiseBalance.Recorder,
+	|	BatchWiseBalance.LineNumber,
+	|	BatchWiseBalance.Active,
+	|	BatchWiseBalance.RecordType,
+	|	BatchWiseBalance.Batch,
+	|	BatchWiseBalance.BatchKey,
+	|	BatchWiseBalance.Quantity AS Quantity_debug,
+	|	BatchWiseBalance.Amount AS Amount_debug,
+	|	BatchWiseBalance.AmountCost AS AmountCost_debug,
+	|	BatchWiseBalance.Document,
 	|	0 AS Quantity,
 	|	0 AS Amount,
-	|	CostAmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity AS AmountCost,
-	|	CostAmounts.AmountTaxPerOneUnit * R6010B_BatchWiseBalance.Quantity AS AmountTax
+	|	AmountsInfoPerOneUnit.AmountPerOneUnit * BatchWiseBalance.Quantity AS AmountCost,
+	|	AmountsInfoPerOneUnit.AmountTaxPerOneUnit * BatchWiseBalance.Quantity AS AmountTax
 	|INTO BatchWiseBalance
 	|FROM
-	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
-	|		INNER JOIN CostAmounts AS CostAmounts
-	|		ON R6010B_BatchWiseBalance.Batch.Document = CostAmounts.Document
-	|		AND R6010B_BatchWiseBalance.Batch.Company = CostAmounts.Company
-	|		AND R6010B_BatchWiseBalance.BatchKey.ItemKey = CostAmounts.ItemKey
-	|		AND (R6010B_BatchWiseBalance.Document.Date <= ENDOFPERIOD(&EndPeriod, DAY))
+	|	AccumulationRegister.R6010B_BatchWiseBalance AS BatchWiseBalance
+	|		INNER JOIN AmountsInfoPerOneUnit AS AmountsInfoPerOneUnit
+	|		ON BatchWiseBalance.Batch.Document = AmountsInfoPerOneUnit.Document
+	|		AND BatchWiseBalance.Batch.Company = AmountsInfoPerOneUnit.Company
+	|		AND BatchWiseBalance.BatchKey.ItemKey = AmountsInfoPerOneUnit.ItemKey
+	|		AND (BatchWiseBalance.Document.Date <= ENDOFPERIOD(&EndPeriod, DAY))
 	|WHERE
-	|	(CostAmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0)
-	|	OR (CostAmounts.AmountTaxPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0)
+	|	(AmountsInfoPerOneUnit.AmountPerOneUnit * BatchWiseBalance.Quantity <> 0)
+	|	OR (AmountsInfoPerOneUnit.AmountTaxPerOneUnit * BatchWiseBalance.Quantity <> 0)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	R6010B_BatchWiseBalance.Period AS Period,
-	|	R6010B_BatchWiseBalance.Recorder AS Recorder,
-	|	R6010B_BatchWiseBalance.LineNumber AS LineNumber,
-	|	R6010B_BatchWiseBalance.Active AS Active,
-	|	R6010B_BatchWiseBalance.RecordType AS RecordType,
-	|	R6010B_BatchWiseBalance.Batch AS Batch,
-	|	R6010B_BatchWiseBalance.BatchKey AS BatchKey,
-	|	R6010B_BatchWiseBalance.Quantity AS Quantity1,
-	|	R6010B_BatchWiseBalance.Amount AS Amount1,
-	|	R6010B_BatchWiseBalance.AmountCost AS AmountCost1,
-	|	R6010B_BatchWiseBalance.Document AS Document,
+	|	BatchWiseBalance.Period,
+	|	BatchWiseBalance.Recorder,
+	|	BatchWiseBalance.LineNumber,
+	|	BatchWiseBalance.Active,
+	|	BatchWiseBalance.RecordType,
+	|	BatchWiseBalance.Batch,
+	|	BatchWiseBalance.BatchKey,
+	|	BatchWiseBalance.Quantity AS Quantity_debug,
+	|	BatchWiseBalance.Amount AS Amount_debug,
+	|	BatchWiseBalance.AmountCost AS AmountCost_debug,
+	|	BatchWiseBalance.Document,
 	|	0 AS Quantity,
 	|	0 AS Amount,
-	|	CostAmounts_PastPeriod.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity AS AmountCost,
-	|	CostAmounts_PastPeriod.AmountTaxPerOneUnit * R6010B_BatchWiseBalance.Quantity AS AmountTax
+	|	AmountsInfoPerOneUnit_PastPeriod.AmountPerOneUnit * BatchWiseBalance.Quantity AS AmountCost,
+	|	AmountsInfoPerOneUnit_PastPeriod.AmountTaxPerOneUnit * BatchWiseBalance.Quantity AS AmountTax
 	|INTO BatchWiseBalance_PastPeriod
 	|FROM
-	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
-	|		INNER JOIN CostAmounts_PastPeriod AS CostAmounts_PastPeriod
-	|		ON R6010B_BatchWiseBalance.Batch.Document = CostAmounts_PastPeriod.Document
-	|		AND R6010B_BatchWiseBalance.Batch.Company = CostAmounts_PastPeriod.Company
-	|		AND R6010B_BatchWiseBalance.BatchKey.ItemKey = CostAmounts_PastPeriod.ItemKey
-	|		AND (R6010B_BatchWiseBalance.Document.Date BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod,
-	|			DAY))
+	|	AccumulationRegister.R6010B_BatchWiseBalance AS BatchWiseBalance
+	|		INNER JOIN AmountsInfoPerOneUnit_PastPeriod AS AmountsInfoPerOneUnit_PastPeriod
+	|		ON BatchWiseBalance.Batch.Document = AmountsInfoPerOneUnit_PastPeriod.Document
+	|		AND BatchWiseBalance.Batch.Company = AmountsInfoPerOneUnit_PastPeriod.Company
+	|		AND BatchWiseBalance.BatchKey.ItemKey = AmountsInfoPerOneUnit_PastPeriod.ItemKey
+	|		AND (BatchWiseBalance.Document.Date BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY))
 	|WHERE
-	|	(CostAmounts_PastPeriod.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0)
-	|	OR (CostAmounts_PastPeriod.AmountTaxPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0)
+	|	(AmountsInfoPerOneUnit_PastPeriod.AmountPerOneUnit * BatchWiseBalance.Quantity <> 0)
+	|	OR (AmountsInfoPerOneUnit_PastPeriod.AmountTaxPerOneUnit * BatchWiseBalance.Quantity <> 0)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	BatchWiseBalance.Period AS Period,
-	|	BatchWiseBalance.Recorder AS Recorder,
-	|	BatchWiseBalance.LineNumber AS LineNumber,
-	|	BatchWiseBalance.Active AS Active,
-	|	BatchWiseBalance.RecordType AS RecordType,
-	|	BatchWiseBalance.Batch AS Batch,
-	|	BatchWiseBalance.BatchKey AS BatchKey,
-	|	BatchWiseBalance.Quantity1 AS Quantity1,
-	|	BatchWiseBalance.Amount1 AS Amount1,
-	|	BatchWiseBalance.AmountCost1 AS AmountCost1,
-	|	BatchWiseBalance.Document AS Document,
-	|	BatchWiseBalance.Quantity AS Quantity,
-	|	BatchWiseBalance.Amount AS Amount,
-	|	BatchWiseBalance.AmountCost AS AmountCost,
-	|	BatchWiseBalance.AmountTax AS AmountTax
-	|INTO BatchWiseBalance_All
+	|	BatchWiseBalance.Period,
+	|	BatchWiseBalance.Recorder,
+	|	BatchWiseBalance.LineNumber,
+	|	BatchWiseBalance.Active,
+	|	BatchWiseBalance.RecordType,
+	|	BatchWiseBalance.Batch,
+	|	BatchWiseBalance.BatchKey,
+	|	BatchWiseBalance.Quantity_debug,
+	|	BatchWiseBalance.Amount_debug,
+	|	BatchWiseBalance.AmountCost_debug,
+	|	BatchWiseBalance.Document,
+	|	BatchWiseBalance.Quantity,
+	|	BatchWiseBalance.Amount,
+	|	BatchWiseBalance.AmountCost,
+	|	BatchWiseBalance.AmountTax
+	|INTO BatchWiseBalance_ALL
 	|FROM
 	|	BatchWiseBalance AS BatchWiseBalance
 	|
@@ -904,9 +900,9 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|	BatchWiseBalance_PastPeriod.RecordType,
 	|	BatchWiseBalance_PastPeriod.Batch,
 	|	BatchWiseBalance_PastPeriod.BatchKey,
-	|	BatchWiseBalance_PastPeriod.Quantity1,
-	|	BatchWiseBalance_PastPeriod.Amount1,
-	|	BatchWiseBalance_PastPeriod.AmountCost1,
+	|	BatchWiseBalance_PastPeriod.Quantity_debug,
+	|	BatchWiseBalance_PastPeriod.Amount_debug,
+	|	BatchWiseBalance_PastPeriod.AmountCost_debug,
 	|	BatchWiseBalance_PastPeriod.Document,
 	|	BatchWiseBalance_PastPeriod.Quantity,
 	|	BatchWiseBalance_PastPeriod.Amount,
@@ -918,9 +914,9 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	BatchWiseBalance_ALL.Batch AS Batch,
-	|	BatchWiseBalance_ALL.BatchKey AS BatchKey,
-	|	BatchWiseBalance_ALL.Document AS Document,
+	|	BatchWiseBalance_ALL.Batch,
+	|	BatchWiseBalance_ALL.BatchKey,
+	|	BatchWiseBalance_ALL.Document,
 	|	SUM(BatchWiseBalance_ALL.AmountCost) AS AmountCost,
 	|	SUM(BatchWiseBalance_ALL.AmountTax) AS AmountTax
 	|INTO BatchWiseBalance_ALL_GROUPED
@@ -934,33 +930,33 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	R6050T_SalesBatches.Period AS Period,
-	|	R6050T_SalesBatches.Recorder AS Recorder,
-	|	R6050T_SalesBatches.LineNumber AS LineNumber,
-	|	R6050T_SalesBatches.Active AS Active,
-	|	R6050T_SalesBatches.Batch AS Batch,
-	|	R6050T_SalesBatches.BatchKey AS BatchKey,
-	|	R6050T_SalesBatches.SalesInvoice AS SalesInvoice,
+	|	SalesBatches.Period,
+	|	SalesBatches.Recorder,
+	|	SalesBatches.LineNumber,
+	|	SalesBatches.Active,
+	|	SalesBatches.Batch,
+	|	SalesBatches.BatchKey,
+	|	SalesBatches.SalesInvoice,
 	|	SUM(0) AS Quantity,
 	|	SUM(0) AS Amount,
 	|	SUM(BatchWiseBalance_ALL_GROUPED.AmountCost) AS AmountCost,
 	|	SUM(BatchWiseBalance_ALL_GROUPED.AmountTax) AS AmountTax
 	|INTO SalesBatches
 	|FROM
-	|	AccumulationRegister.R6050T_SalesBatches AS R6050T_SalesBatches
+	|	AccumulationRegister.R6050T_SalesBatches AS SalesBatches
 	|		INNER JOIN BatchWiseBalance_ALL_GROUPED AS BatchWiseBalance_ALL_GROUPED
-	|		ON R6050T_SalesBatches.Batch = BatchWiseBalance_ALL_GROUPED.Batch
-	|		AND R6050T_SalesBatches.BatchKey = BatchWiseBalance_ALL_GROUPED.BatchKey
-	|		AND R6050T_SalesBatches.SalesInvoice = BatchWiseBalance_ALL_GROUPED.Document
-	|		AND (R6050T_SalesBatches.Amount <> 0)
+	|		ON SalesBatches.Batch = BatchWiseBalance_ALL_GROUPED.Batch
+	|		AND SalesBatches.BatchKey = BatchWiseBalance_ALL_GROUPED.BatchKey
+	|		AND SalesBatches.SalesInvoice = BatchWiseBalance_ALL_GROUPED.Document
+	|		AND (SalesBatches.Amount <> 0)
 	|GROUP BY
-	|	R6050T_SalesBatches.Period,
-	|	R6050T_SalesBatches.Recorder,
-	|	R6050T_SalesBatches.LineNumber,
-	|	R6050T_SalesBatches.Active,
-	|	R6050T_SalesBatches.Batch,
-	|	R6050T_SalesBatches.BatchKey,
-	|	R6050T_SalesBatches.SalesInvoice
+	|	SalesBatches.Period,
+	|	SalesBatches.Recorder,
+	|	SalesBatches.LineNumber,
+	|	SalesBatches.Active,
+	|	SalesBatches.Batch,
+	|	SalesBatches.BatchKey,
+	|	SalesBatches.SalesInvoice
 	|HAVING
 	|	(SUM(BatchWiseBalance_ALL_GROUPED.AmountCost) <> 0)
 	|	OR (SUM(BatchWiseBalance_ALL_GROUPED.AmountTax) <> 0)
@@ -968,45 +964,119 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	BatchWiseBalance_All.Period AS Period,
-	|	BatchWiseBalance_All.Recorder AS Recorder,
-	|	BatchWiseBalance_All.LineNumber AS LineNumber,
-	|	BatchWiseBalance_All.Active AS Active,
-	|	BatchWiseBalance_All.RecordType AS RecordType,
-	|	BatchWiseBalance_All.Batch AS Batch,
-	|	BatchWiseBalance_All.BatchKey AS BatchKey,
-	|	BatchWiseBalance_All.Quantity1 AS Quantity1,
-	|	BatchWiseBalance_All.Amount1 AS Amount1,
-	|	BatchWiseBalance_All.AmountCost1 AS AmountCost1,
-	|	BatchWiseBalance_All.Document AS Document,
-	|	BatchWiseBalance_All.Quantity AS Quantity,
-	|	BatchWiseBalance_All.Amount AS Amount,
-	|	BatchWiseBalance_All.AmountCost AS AmountCost,
-	|	BatchWiseBalance_All.AmountTax AS AmountTax
+	|	BatchWiseBalance_ALL.Period,
+	|	BatchWiseBalance_ALL.Recorder,
+	|	BatchWiseBalance_ALL.LineNumber,
+	|	BatchWiseBalance_ALL.Active,
+	|	BatchWiseBalance_ALL.RecordType,
+	|	BatchWiseBalance_ALL.Batch,
+	|	BatchWiseBalance_ALL.BatchKey,
+	|	BatchWiseBalance_ALL.Quantity_debug AS Quantity_debug,
+	|	BatchWiseBalance_ALL.Amount_debug AS Amount_debug,
+	|	BatchWiseBalance_ALL.AmountCost_debug AS AmountCost_debug,
+	|	BatchWiseBalance_ALL.Document,
+	|	BatchWiseBalance_ALL.Quantity,
+	|	BatchWiseBalance_ALL.Amount,
+	|	BatchWiseBalance_ALL.AmountCost,
+	|	BatchWiseBalance_ALL.AmountTax
 	|FROM
-	|	BatchWiseBalance_All AS BatchWiseBalance_All
+	|	BatchWiseBalance_ALL AS BatchWiseBalance_ALL
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	SalesBatches.Period AS Period,
-	|	SalesBatches.Recorder AS Recorder,
-	|	SalesBatches.LineNumber AS LineNumber,
-	|	SalesBatches.Active AS Active,
-	|	SalesBatches.Batch AS Batch,
-	|	SalesBatches.BatchKey AS BatchKey,
-	|	SalesBatches.SalesInvoice AS SalesInvoice,
-	|	SalesBatches.Quantity AS Quantity,
-	|	SalesBatches.Amount AS Amount,
-	|	SalesBatches.AmountCost AS AmountCost,
-	|	SalesBatches.AmountTax AS AmountTax
+	|	SalesBatches.Period,
+	|	SalesBatches.Recorder,
+	|	SalesBatches.LineNumber,
+	|	SalesBatches.Active,
+	|	SalesBatches.Batch,
+	|	SalesBatches.BatchKey,
+	|	SalesBatches.SalesInvoice,
+	|	SalesBatches.Quantity,
+	|	SalesBatches.Amount,
+	|	SalesBatches.AmountCost,
+	|	SalesBatches.AmountTax
 	|FROM
 	|	SalesBatches AS SalesBatches";
+EndFunction
 
+Function GetQueryText_AdditionalItem_CostRevenue_WrongAmounts()
+	Return
+	"SELECT
+	|	Batches.Recorder,
+	|	Batches.RecordType,
+	|	Batches.Document,
+	|	Batches.Batch,
+	|	Batches.BatchKey
+	|INTO Batches_ALL
+	|FROM
+	|	&BatchWiseBalanceTable AS Batches
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Batches_ALL.Batch,
+	|	Batches_ALL.BatchKey
+	|INTO Batches_GROUPED
+	|FROM
+	|	Batches_ALL AS Batches_ALL
+	|
+	|GROUP BY
+	|	Batches_ALL.Batch,
+	|	Batches_ALL.BatchKey
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	MAX(Batches_ALL.RecordType) AS RecordType,
+	|	MAX(Batches_ALL.Document) AS Document,
+	|	BatchWiseBalanceBalance.Batch,
+	|	BatchWiseBalanceBalance.BatchKey,
+	|	MAX(BatchWiseBalanceBalance.AmountCostBalance ) AS AmountCost,
+	|	MAX(BatchWiseBalanceBalance.AmountTaxBalance ) AS AmountTax
+	|INTO WrongAmounts
+	|FROM
+	|	AccumulationRegister.R6010B_BatchWiseBalance.Balance(
+	|			ENDOFPERIOD(&EndPeriod, DAY),
+	|			(Batch, BatchKey) IN
+	|				(SELECT
+	|					Batches_GROUPED.Batch,
+	|					Batches_GROUPED.BatchKey
+	|				FROM
+	|					Batches_GROUPED AS Batches_GROUPED)) AS BatchWiseBalanceBalance
+	|		INNER JOIN Batches_ALL AS Batches_ALL
+	|		ON BatchWiseBalanceBalance.Batch = Batches_ALL.Batch
+	|    	AND BatchWiseBalanceBalance.BatchKey = Batches_ALL.BatchKey
+	|       AND Batches_ALL.RecordType = VALUE(AccumulationRecordType.Expense)
+	|WHERE
+	|	BatchWiseBalanceBalance.QuantityBalance = 0
+	|	AND (BatchWiseBalanceBalance.AmountTaxBalance <> 0
+	|			OR BatchWiseBalanceBalance.AmountCostBalance <> 0)
+	|
+	|GROUP BY
+	|	BatchWiseBalanceBalance.Batch,
+	|	BatchWiseBalanceBalance.BatchKey
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT    
+	|	WrongAmounts.Document.Date AS Period,
+	|	WrongAmounts.RecordType,
+	|	WrongAmounts.Document,
+	|	WrongAmounts.Batch,
+	|	WrongAmounts.BatchKey,
+	|	WrongAmounts.AmountCost,
+	|	WrongAmounts.AmountTax
+	|FROM
+	|	WrongAmounts AS WrongAmounts";
+EndFunction
+
+Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, CalculationSettings)	
+	Query = New Query();
+	Query.Text = GetQueryText_AdditionalItem_CostRevenue();
 	Query.SetParameter("Company"       , CalculationSettings.Company);
 	Query.SetParameter("BeginPeriod"   , CalculationSettings.BeginPeriod);
-	Query.SetParameter("EndPeriod"     , CalculationSettings.EndPeriod);
-	
+	Query.SetParameter("EndPeriod"     , CalculationSettings.EndPeriod);	
 	QueryResults = Query.ExecuteBatch();
 
 	RecordSetR6010B = AccumulationRegisters.R6010B_BatchWiseBalance.CreateRecordSet();
@@ -1015,6 +1085,21 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	//Batch wise balance
 	BatchWiseBalanceTable = QueryResults[11].Unload();	
 	For Each Row In BatchWiseBalanceTable Do
+		NewRecordR6010B = RecordSetR6010B.Add();
+		FillPropertyValues(NewRecordR6010B, Row);
+		NewRecordR6010B.Recorder = CalculationSettings.CalculationMovementCostRef;
+	EndDo;
+	RecordSetR6010B.Write();
+
+	Query = New Query();
+	Query.Text = GetQueryText_AdditionalItem_CostRevenue_WrongAmounts();
+	Query.SetParameter("BatchWiseBalanceTable", BatchWiseBalanceTable);
+	Query.SetParameter("EndPeriod", CalculationSettings.EndPeriod);
+	QueryResults_WrongAmounts = Query.ExecuteBatch();
+
+	//Batch wise balance (wrong amounts)
+	BatchWiseBalanceTable_WrongAmounts = QueryResults_WrongAmounts[3].Unload();	
+	For Each Row In BatchWiseBalanceTable_WrongAmounts Do
 		NewRecordR6010B = RecordSetR6010B.Add();
 		FillPropertyValues(NewRecordR6010B, Row);
 		NewRecordR6010B.Recorder = CalculationSettings.CalculationMovementCostRef;
@@ -1041,139 +1126,7 @@ EndProcedure
 
 Procedure DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, CalculationSettings)
 	Query = New Query();
-	Query.Text =
-	"SELECT
-	|	T6070S_BatchRevenueAllocationInfo.Company AS Company,
-	|	T6070S_BatchRevenueAllocationInfo.Document AS Document,
-	|	T6070S_BatchRevenueAllocationInfo.Store AS Store,
-	|	T6070S_BatchRevenueAllocationInfo.ItemKey AS ItemKey,
-	|	T6070S_BatchRevenueAllocationInfo.CurrencyMovementType AS CurrencyMovementType,
-	|	T6070S_BatchRevenueAllocationInfo.Currency AS Currency,
-	|	SUM(T6070S_BatchRevenueAllocationInfo.Amount) AS Amount,
-	|	SUM(T6070S_BatchRevenueAllocationInfo.AmountTax) AS AmountTax
-	|INTO RevenueAllocationInfo
-	|FROM
-	|	InformationRegister.T6070S_BatchRevenueAllocationInfo AS T6070S_BatchRevenueAllocationInfo
-	|WHERE
-	|	T6070S_BatchRevenueAllocationInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
-	|	AND T6070S_BatchRevenueAllocationInfo.Company = &Company
-	|GROUP BY
-	|	T6070S_BatchRevenueAllocationInfo.Company,
-	|	T6070S_BatchRevenueAllocationInfo.Document,
-	|	T6070S_BatchRevenueAllocationInfo.Store,
-	|	T6070S_BatchRevenueAllocationInfo.ItemKey,
-	|	T6070S_BatchRevenueAllocationInfo.CurrencyMovementType,
-	|	T6070S_BatchRevenueAllocationInfo.Currency
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	T6020S_BatchKeysInfo.Company AS Company,
-	|	T6020S_BatchKeysInfo.Recorder AS Document,
-	|	T6020S_BatchKeysInfo.Store AS Store,
-	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey,
-	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
-	|	MAX(RevenueAllocationInfo.Amount) AS Amount,
-	|	MAX(RevenueAllocationInfo.AmountTax) AS AmountTax
-	|INTO RevenueAmounts_tmp
-	|FROM
-	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
-	|		INNER JOIN RevenueAllocationInfo AS RevenueAllocationInfo
-	|		ON T6020S_BatchKeysInfo.Company = RevenueAllocationInfo.Company
-	|		AND T6020S_BatchKeysInfo.Recorder = RevenueAllocationInfo.Document
-	|		AND T6020S_BatchKeysInfo.ItemKey = RevenueAllocationInfo.ItemKey
-	|		AND T6020S_BatchKeysInfo.Currency = RevenueAllocationInfo.Currency
-	|		AND T6020S_BatchKeysInfo.CurrencyMovementType = RevenueAllocationInfo.CurrencyMovementType
-	|		AND T6020S_BatchKeysInfo.Direction = VALUE(Enum.BatchDirection.Receipt)
-	|GROUP BY
-	|	T6020S_BatchKeysInfo.Company,
-	|	T6020S_BatchKeysInfo.Recorder,
-	|	T6020S_BatchKeysInfo.Store,
-	|	T6020S_BatchKeysInfo.ItemKey
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	RevenueAmounts_tmp.Company AS Company,
-	|	RevenueAmounts_tmp.Document AS Document,
-	|	RevenueAmounts_tmp.Store AS Store,
-	|	RevenueAmounts_tmp.ItemKey AS ItemKey,
-	|	RevenueAmounts_tmp.Quantity AS Quantity,
-	|	RevenueAmounts_tmp.Amount AS Amount,
-	|	RevenueAmounts_tmp.AmountTax AS AmountTax,
-	|	CASE
-	|		WHEN RevenueAmounts_tmp.Quantity = 0
-	|			THEN 0
-	|		ELSE RevenueAmounts_tmp.Amount / RevenueAmounts_tmp.Quantity
-	|	END AS AmountPerOneUnit,
-	|	CASE
-	|		WHEN RevenueAmounts_tmp.Quantity = 0
-	|			THEN 0
-	|		ELSE RevenueAmounts_tmp.AmountTax / RevenueAmounts_tmp.Quantity
-	|	END AS AmountTaxPerOneUnit
-	|INTO RevenueAmounts
-	|FROM
-	|	RevenueAmounts_tmp AS RevenueAmounts_tmp
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	R6010B_BatchWiseBalance.Period AS Period,
-	|	R6010B_BatchWiseBalance.Recorder AS Recorder,
-	|	R6010B_BatchWiseBalance.LineNumber AS LineNumber,
-	|	R6010B_BatchWiseBalance.Active AS Active,
-	|	R6010B_BatchWiseBalance.RecordType AS RecordType,
-	|	R6010B_BatchWiseBalance.Batch AS Batch,
-	|	R6010B_BatchWiseBalance.BatchKey AS BatchKey,
-	|	R6010B_BatchWiseBalance.Quantity AS Quantity1,
-	|	R6010B_BatchWiseBalance.Amount AS Amount1,
-	|	R6010B_BatchWiseBalance.AmountCost AS AmountCost1,
-	|	R6010B_BatchWiseBalance.AmountTax AS AmountTax1,
-	|	R6010B_BatchWiseBalance.Document AS Document,
-	|	0 AS Quantity,
-	|	0 AS Amount,
-	|	-(RevenueAmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity) AS AmountCost,
-	|	-(RevenueAmounts.AmountTaxPerOneUnit * R6010B_BatchWiseBalance.Quantity) AS AmountTax
-	|FROM
-	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
-	|		INNER JOIN RevenueAmounts AS RevenueAmounts
-	|		ON R6010B_BatchWiseBalance.Batch.Document = RevenueAmounts.Document
-	|		AND R6010B_BatchWiseBalance.Batch.Company = RevenueAmounts.Company
-	|		AND R6010B_BatchWiseBalance.BatchKey.ItemKey = RevenueAmounts.ItemKey
-	|		AND R6010B_BatchWiseBalance.Document.Date <= ENDOFPERIOD(&EndPeriod, DAY)
-	|WHERE
-	|	(RevenueAmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0)
-	|	OR (RevenueAmounts.AmountTaxPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0)
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	R6050T_SalesBatches.Period AS Period,
-	|	R6050T_SalesBatches.Recorder AS Recorder,
-	|	R6050T_SalesBatches.LineNumber AS LineNumber,
-	|	R6050T_SalesBatches.Active AS Active,
-	|	R6050T_SalesBatches.Batch AS Batch,
-	|	R6050T_SalesBatches.BatchKey AS BatchKey,
-	|	R6050T_SalesBatches.SalesInvoice AS SalesInvoice,
-	|	R6050T_SalesBatches.Quantity AS Quantity1,
-	|	R6050T_SalesBatches.Amount AS Amount1,
-	|	R6050T_SalesBatches.AmountCost AS AmountCost1,
-	|	R6050T_SalesBatches.AmountTax AS AmountTax1,
-	|	0 AS Quantity,
-	|	0 AS Amount,
-	|	-(RevenueAmounts.AmountPerOneUnit * R6050T_SalesBatches.Quantity) AS AmountCost,
-	|	-(RevenueAmounts.AmountTaxPerOneUnit * R6050T_SalesBatches.Quantity) AS AmountTax
-	|FROM
-	|	AccumulationRegister.R6050T_SalesBatches AS R6050T_SalesBatches
-	|		INNER JOIN RevenueAmounts AS RevenueAmounts
-	|		ON R6050T_SalesBatches.Batch.Document = RevenueAmounts.Document
-	|		AND R6050T_SalesBatches.Batch.Company = RevenueAmounts.Company
-	|		AND R6050T_SalesBatches.BatchKey.ItemKey = RevenueAmounts.ItemKey
-	|		AND R6050T_SalesBatches.SalesInvoice.Date <= ENDOFPERIOD(&EndPeriod, DAY)
-	|WHERE
-	|	(RevenueAmounts.AmountPerOneUnit * R6050T_SalesBatches.Quantity <> 0)
-	|	OR (RevenueAmounts.AmountTaxPerOneUnit * R6050T_SalesBatches.Quantity <> 0)";
-
+	Query.Text = StrReplace(GetQueryText_AdditionalItem_CostRevenue(), "T6060S_BatchCostAllocationInfo", "T6070S_BatchRevenueAllocationInfo");
 	Query.SetParameter("Company"       , CalculationSettings.Company);
 	Query.SetParameter("BeginPeriod"   , CalculationSettings.BeginPeriod);
 	Query.SetParameter("EndPeriod"     , CalculationSettings.EndPeriod);
@@ -1184,7 +1137,25 @@ Procedure DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, Cal
 	RecordSetR6010B.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 
 	// Batch wise balance
-	For Each Row In QueryResults[3].Unload() Do
+	BatchWiseBalanceTable = QueryResults[11].Unload();
+	For Each Row In BatchWiseBalanceTable Do
+		NewRecordR6010B = RecordSetR6010B.Add();
+		FillPropertyValues(NewRecordR6010B, Row);
+		NewRecordR6010B.AmountCost = - NewRecordR6010B.AmountCost;
+		NewRecordR6010B.AmountTax  = - NewRecordR6010B.AmountTax;
+		NewRecordR6010B.Recorder = CalculationSettings.CalculationMovementCostRef;
+	EndDo;
+	RecordSetR6010B.Write();
+	
+	Query = New Query();
+	Query.Text = GetQueryText_AdditionalItem_CostRevenue_WrongAmounts();
+	Query.SetParameter("BatchWiseBalanceTable", BatchWiseBalanceTable);
+	Query.SetParameter("EndPeriod", CalculationSettings.EndPeriod);
+	QueryResults_WrongAmounts = Query.ExecuteBatch();
+
+	//Batch wise balance (wrong amounts)
+	BatchWiseBalanceTable_WrongAmounts = QueryResults_WrongAmounts[3].Unload();	
+	For Each Row In BatchWiseBalanceTable_WrongAmounts Do
 		NewRecordR6010B = RecordSetR6010B.Add();
 		FillPropertyValues(NewRecordR6010B, Row);
 		NewRecordR6010B.Recorder = CalculationSettings.CalculationMovementCostRef;
@@ -1195,7 +1166,7 @@ Procedure DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, Cal
 	RecordSetR6050T = AccumulationRegisters.R6050T_SalesBatches.CreateRecordSet();
 	RecordSetR6050T.Filter.Recorder.Set(CalculationSettings.CalculationMovementCostRef);
 
-	For Each Row In QueryResults[4].Unload() Do
+	For Each Row In QueryResults[12].Unload() Do
 		NewRecordR6050T = RecordSetR6050T.Add();
 		FillPropertyValues(NewRecordR6050T, Row);
 		NewRecordR6050T.Recorder = CalculationSettings.CalculationMovementCostRef;

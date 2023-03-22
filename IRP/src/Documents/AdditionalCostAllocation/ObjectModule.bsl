@@ -105,13 +105,7 @@ Procedure FillTables_ByDocuments()
 	ElsIf ThisObject.AllocationMethod = Enums.AllocationMethod.ByWeight Then
 		ColumnName = "Weight";
 	EndIf;
-	
-	Total = AllocationTable.Total(ColumnName);
-	
-	If Total = 0 Then
-		Return;
-	EndIf;
-	
+		
 	For Each RowCost In CostTable Do
 		FillPropertyValues(ThisObject.CostList.Add(), RowCost);
 		
@@ -121,7 +115,15 @@ Procedure FillTables_ByDocuments()
 		MaxRow    = Undefined;
 		MaxRowTax = Undefined;
 		
-		For Each RowAllocation In AllocationTable.Copy(New Structure("Key", RowCost.Key)) Do
+		AllocationTableCopy = AllocationTable.Copy(New Structure("Key", RowCost.Key));
+		
+		For Each RowAllocation In AllocationTableCopy Do
+			Total = AllocationTableCopy.Total(ColumnName);
+	
+			If Total = 0 Then
+				Continue;
+			EndIf;
+	
 			NewRowAllocationList = ThisObject.AllocationList.Add();
 			FillPropertyValues(NewRowAllocationList, RowAllocation);
 			NewRowAllocationList.BasisRowID = RowCost.RowID;

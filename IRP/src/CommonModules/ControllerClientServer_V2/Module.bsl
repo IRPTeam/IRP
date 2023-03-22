@@ -12819,10 +12819,20 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 	
 	SourceTable.GroupBy(SourceColumnsGroupBy, SourceColumnsSumBy);
 	
+	SourceTable.Columns.Add("UniqueBufferKey");
+	SourceTableExpanded.Columns.Add("UniqueBufferKey");
+	
 	For Each Row In SourceTableBuffer Do
-		FillPropertyValues(SourceTable.Add(), Row);
+		UniqueBufferKey = New UUID();
+		
+		NewRowSourceTable = SourceTable.Add(); 
+		FillPropertyValues(NewRowSourceTable, Row);
+		NewRowSourceTable.UniqueBufferKey = UniqueBufferKey;
+		
 		If SourceTableExpanded <> Undefined Then
-			FillPropertyValues(SourceTableExpanded.Add(), Row);
+			NewRowSourceTableExpanded = SourceTableExpanded.Add();
+			FillPropertyValues(NewRowSourceTableExpanded, Row);
+			NewRowSourceTableExpanded.UniqueBufferKey = UniqueBufferKey;
 		EndIf;
 	EndDo;
 	
@@ -12865,7 +12875,7 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 		
 		// add serial lot number to separated table
 		If Parameters.SerialLotNumbersExists Then
-			Filter = New Structure(SourceColumnsGroupBy);
+			Filter = New Structure(SourceColumnsGroupBy + ", UniqueBufferKey");
 			FillPropertyValues(Filter, SourceRow);
 			For Each RowSN In SourceTableExpanded.FindRows(Filter) Do
 				If Not ValueIsFilled(RowSN.SerialLotNumber) Then

@@ -112,7 +112,15 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 		For Each TableName In ArrayOfMainTables Do
 			ProcessProperties(Info, Source, IsBasedOn, TableName, ArrayOfBasisDocumentProperties);
 			
-			If Source.Metadata().TabularSections.Find(TableName).Attributes.Find("DontCalculateRow") <> Undefined Then
+			ColumnIsPresent = False;
+			If ValueIsFilled(TableName) Then				
+				MetadataTabularSection = Source.Metadata().TabularSections.Find(TableName);
+				If MetadataTabularSection <> Undefined Then
+					ColumnIsPresent = MetadataTabularSection.Attributes.Find("DontCalculateRow") <> Undefined;
+				EndIf;
+			EndIf;
+			
+			If ColumnIsPresent  Then
 				PropertyName = TableName + ".DontCalculateRow";
 				ArrayOfProperties = New Array();
 				ArrayOfProperties.Add(PropertyName);

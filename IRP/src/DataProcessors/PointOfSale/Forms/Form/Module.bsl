@@ -467,16 +467,48 @@ EndProcedure
 
 &AtClient
 Procedure qPayment(Command)
+	Cancel = False;
+	OffersRecalculated = False;
+	FillqPaymentAtServer(Cancel, OffersRecalculated);
+	
+	If OffersRecalculated Then
+		ViewClient_V2.OffersOnChange(Object, ThisObject);
+				
+		ThisObject.Modified = True;
+		ThisObject.TaxAndOffersCalculated = True;
+	EndIf;
 
+	DPPointOfSaleClient.BeforePayment(ThisObject, Cancel);
+	
+	If Cancel Then
+		Return;
+	EndIf;
+	
+	OpenFormNotifyDescription = New NotifyDescription("PaymentFormClose", ThisObject);
+	ObjectParameters = New Structure();
+	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
+	ObjectParameters.Insert("Branch", Object.Branch);
+	ObjectParameters.Insert("Workstation", Workstation);
+	ObjectParameters.Insert("IsAdvance", False);
+	ObjectParameters.Insert("RetailCustomer", Object.RetailCustomer);
+	ObjectParameters.Insert("Company", Object.Company);
+	ObjectParameters.Insert("isReturn", ThisObject.isReturn);
+	ObjectParameters.Insert("RetailBasis", ThisObject.RetailBasis);
+	ObjectParameters.Insert("Discount", Object.ItemList.Total("OffersAmount"));
+	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
+		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+EndProcedure
+
+&AtServer
+Procedure FillqPaymentAtServer(Cancel, OffersRecalculated)
 	Object.Date = CommonFunctionsServer.GetCurrentSessionDate();
 
 	If Not CheckFilling() Then
 		Cancel = True;
 		Return;
 	EndIf;
-
-	Cancel = False;
-	DPPointOfSaleClient.BeforePayment(ThisObject, Cancel);
+	
+	DPPointOfSaleServer.BeforePayment(ThisObject, Cancel);
 	
 	If ThisObject.isReturn Then
 		If Not ThisObject.RetailBasis.IsEmpty() Then
@@ -494,28 +526,12 @@ Procedure qPayment(Command)
 			EndIf;
 		EndIf;
 	EndIf;
-
-	If Cancel Then
-		Return;
-	EndIf;
-
+		
 	If Not ThisObject.isReturn Then
-		OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object, ThisObject, "SpecialOffersEditFinish_ForDocument", Undefined, True);
+		OffersInfo = OffersServer.RecalculateOffers(Object, ThisObject);
+		OffersServer.ClearAutoCalculatedOffers(Object);
+		OffersServer.CalculateOffersAfterSet(Object, OffersInfo);
 	EndIf;
-
-	OpenFormNotifyDescription = New NotifyDescription("PaymentFormClose", ThisObject);
-	ObjectParameters = New Structure();
-	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
-	ObjectParameters.Insert("Branch", Object.Branch);
-	ObjectParameters.Insert("Workstation", Workstation);
-	ObjectParameters.Insert("IsAdvance", False);
-	ObjectParameters.Insert("RetailCustomer", Object.RetailCustomer);
-	ObjectParameters.Insert("Company", Object.Company);
-	ObjectParameters.Insert("isReturn", ThisObject.isReturn);
-	ObjectParameters.Insert("RetailBasis", ThisObject.RetailBasis);
-	ObjectParameters.Insert("Discount", Object.ItemList.Total("OffersAmount"));
-	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
-		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
 &AtClient

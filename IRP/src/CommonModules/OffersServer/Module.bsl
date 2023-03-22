@@ -1,4 +1,36 @@
 
+#Region API
+
+Function RecalculateOffers(Object, Form, AddInfo = Undefined) Export
+	OpenFormArgs = OffersClientServer.GetOpenFormArgsPickupSpecialOffers_ForDocument(Object);
+	
+	FormType = "Offers_ForDocument";
+	OffersTree = CreateOffersTree(
+			OpenFormArgs.Object, 
+			OpenFormArgs.Object.ItemList,
+			OpenFormArgs.Object.SpecialOffers, 
+			OpenFormArgs.ArrayOfOffers
+	);
+
+	FillOffersTreeStatuses(
+		OpenFormArgs.Object, 
+		OffersTree,
+		FormType, 
+		OpenFormArgs.ItemListRowKey
+	);
+	
+	Result = New Structure();
+	Result.Insert("OffersAddress", PutToTempStorage(OffersTree));
+	If ValueIsFilled(OpenFormArgs.ItemListRowKey) Then
+		Result.Insert("ItemListRowKey", OpenFormArgs.ItemListRowKey);
+	EndIf;
+	
+	Return Result;
+	
+EndFunction
+
+#EndRegion
+
 #Region Settings
 Function isSaleDoc(Ref)
 	Return TypeOf(Ref) = Type("DocumentRef.SalesOrder") 
@@ -133,6 +165,14 @@ EndFunction
 
 #EndRegion
 
+Function OfferHaveManualInputValue(OfferRef) Export
+	If OfferRef.IsFolder Then
+		Return False;
+	Else
+		Return OfferRef.ManualInputValue;
+	EndIf;
+EndFunction
+
 Function SetIsSelectForAppliedOffers(OffersTreeAddress, ArrayOfAppliedOffers) Export
 	OffersTree = GetFromTempStorage(OffersTreeAddress);
 	For Each Row In ArrayOfAppliedOffers Do
@@ -171,19 +211,21 @@ Function CreateOffersTree(Val Object, Val ItemList, Val SpecialOffers, ArrayOfOf
 	|	0 AS TotalPercent,
 	|	0 AS TotalAmount,
 	|	UNDEFINED AS Rule,
-	|	UNDEFINED AS Presentation
+	|	UNDEFINED AS Presentation,
+	|	0 AS RuleStatus, // Rule status: 1 - Not success; 2 - success; 3 - all rules is success
+	|	ISNULL(SpecialOffers.ManualInputValue, False) AS ManualInputValue
 	|FROM
 	|	Catalog.SpecialOffers AS SpecialOffers
 	|WHERE
-	|	SpecialOffers.Ref IN(&ArrayOfOffers)
+	|	SpecialOffers.Ref IN (&ArrayOfOffers)
 	|
 	|ORDER BY
 	|	Priority
+	|AUTOORDER
 	|TOTALS
 	|	SUM(isSelect)
 	|BY
-	|	Offer HIERARCHY
-	|AUTOORDER";
+	|	Offer HIERARCHY";
 
 	Query.SetParameter("ArrayOfOffers", ArrayOfOffers);
 	QueryResult = Query.Execute();
@@ -198,8 +240,41 @@ Function CreateOffersTree(Val Object, Val ItemList, Val SpecialOffers, ArrayOfOf
 		CalculateOfferAmount(OffersTree, ItemList.Unload(), SpecialOffers.Unload(), ItemListRowKey);
 	EndIf;
 
+	For Each Row In SpecialOffers Do
+		SearchFilter = New Structure("Offer", Row.Offer);
+		ArrayOfSearch = OffersTree.Rows.FindRows(SearchFilter, True);
+		For Each ItemArrayOfSearch In ArrayOfSearch Do
+			ItemArrayOfSearch.isSelect = True;
+		EndDo;
+	EndDo;
+	
 	Return OffersTree;
 EndFunction
+
+Procedure FillOffersTreeStatuses(Val Object, OffersTree, FormType, ItemListRowKey) Export
+	ArrayOfOffers = GetAllOffersInTreeAsArray(OffersTree, True);
+	For Each ItemArrayOfOffers In ArrayOfOffers Do
+		AllRuleIsOk = True;
+		RowWithRules = False;
+		For Each RowOfferRules In ItemArrayOfOffers.Offer.Rules Do
+			RuleIsOk = False;
+			If FormType = "Offers_ForDocument" Then
+				RuleIsOk = CheckOfferRule_ForDocument(Object, ItemArrayOfOffers, RowOfferRules.Rule);
+			ElsIf FormType = "Offers_ForRow" Then
+				RuleIsOk = CheckOfferRule_ForRow(Object, ItemArrayOfOffers,	RowOfferRules.Rule, ItemListRowKey);
+			EndIf;
+			If Not RuleIsOk Then
+				AllRuleIsOk = False;
+			EndIf;
+			RowWithRules = True;
+		EndDo;
+
+		If AllRuleIsOk And RowWithRules Then
+			ItemArrayOfOffers.RuleStatus = 3;
+		EndIf;
+
+	EndDo;
+EndProcedure
 
 Procedure DeleteDoublesGroups(OffersTree)
 	For Each Str In OffersTree.Rows Do
@@ -534,14 +609,6 @@ Function GetAllOffersInTreeAsArray(OffersTree, IncludeFolders = False) Export
 	Return ArrayOfResults;
 EndFunction
 
-Function OfferHaveManualInputValue(OfferRef) Export
-	If OfferRef.IsFolder Then
-		Return False;
-	Else
-		Return OfferRef.ManualInputValue;
-	EndIf;
-EndFunction
-
 Function IsOfferForRow(OfferRef) Export
 	Return OfferRef.Type = Enums.SpecialOfferTypes.ForRow;
 EndFunction
@@ -563,7 +630,7 @@ Function GetArrayOfAllOffers_ForRow(Val Object, OffersAddress, ItemListRowKey) E
 	Return ArrayOfRows;
 EndFunction
 
-Function ClearAmountInRows(Row)
+Procedure ClearAmountInRows(Row)
 
 	Row.Amount = 0;
 	Row.TotalInGroupOffers = 0;
@@ -574,9 +641,9 @@ Function ClearAmountInRows(Row)
 		EndDo;
 	EndIf;
 
-EndFunction
+EndProcedure
 
-Function RestoreAmountInRows(Row, Object)
+Procedure RestoreAmountInRows(Row, Object)
 
 	If Row.isFolder Then
 		For Each ChildRow In Row.Rows Do
@@ -589,4 +656,81 @@ Function RestoreAmountInRows(Row, Object)
 		CalculateOfferGroup(Object, Row, Row.Offer.SpecialOfferType);
 	EndIf;
 
-EndFunction // RestoreAmountInRows()
+EndProcedure // RestoreAmountInRows()
+
+Procedure RecalculateAppliedOffers_ForRow(Object, AddInfo = Undefined) Export
+	For Each Row In Object.SpecialOffers Do
+		
+		isOfferRow = ValueIsFilled(Row.Offer) 
+			And IsOfferForRow(Row.Offer) 
+			And ValueIsFilled(Row.Percent)
+			And ValueIsFilled(Row.Key);
+			
+		If isOfferRow Then
+
+			ArrayOfOffers = New Array();
+			ArrayOfOffers.Add(Row.Offer);
+
+			TreeByOneOfferAddress = CreateOffersTreeAndPutToTmpStorage(
+				Object, 
+				Object.ItemList,
+				Object.SpecialOffers,
+				ArrayOfOffers,
+				Row.Key
+			);
+
+			CalculateAndLoadOffers_ForRow(Object, TreeByOneOfferAddress, Row.Key);
+
+		EndIf;
+	EndDo;
+EndProcedure
+
+Procedure CalculateAndLoadOffers_ForRow(Object, OffersAddress, ItemListRowKey) Export
+	OffersInfo = New Structure();
+	OffersInfo.Insert("OffersAddress"  , OffersAddress);
+	OffersInfo.Insert("ItemListRowKey" , ItemListRowKey);
+	
+	TreeByOneOfferAddress = CalculateOffersTreeAndPutToTmpStorage_ForRow(Object, OffersInfo);
+	
+	ArrayOfOffers = GetArrayOfAllOffers_ForRow(Object, TreeByOneOfferAddress, ItemListRowKey);
+	
+	Object.SpecialOffers.Clear();
+	For Each Row In ArrayOfOffers Do
+		FillPropertyValues(Object.SpecialOffers.Add(), Row);
+	EndDo;
+EndProcedure
+
+Procedure CalculateAndLoadOffers_ForDocument(Object, OffersAddress) Export
+	OffersInfo = New Structure();
+	OffersInfo.Insert("OffersAddress", OffersAddress);
+	
+	OffersAddress = CalculateOffersTreeAndPutToTmpStorage_ForDocument(Object, OffersInfo);
+	
+	ArrayOfOffers = GetArrayOfAllOffers_ForDocument(Object, OffersAddress);
+	
+	Object.SpecialOffers.Clear();
+	For Each Row In ArrayOfOffers Do
+		FillPropertyValues(Object.SpecialOffers.Add(), Row);
+	EndDo;
+EndProcedure
+
+Procedure ClearAutoCalculatedOffers(Object) Export
+	ArrayForDelete = New Array();
+	For Each Row In Object.SpecialOffers Do
+		If ValueIsFilled(Row.Offer) And OfferHaveManualInputValue(Row.Offer)
+			And Object.ItemList.FindRows(New Structure("Key", Row.Key)).Count() Then
+			Continue;
+		EndIf;
+		ArrayForDelete.Add(Row);
+	EndDo;
+	For Each Row In ArrayForDelete Do
+		Object.SpecialOffers.Delete(Row);
+	EndDo;
+EndProcedure
+
+Procedure CalculateOffersAfterSet(Val Object, OffersInfo) Export
+	ClearAutoCalculatedOffers(Object);
+	CalculateAndLoadOffers_ForDocument(Object, OffersInfo.OffersAddress);
+	RecalculateAppliedOffers_ForRow(Object);
+EndProcedure
+

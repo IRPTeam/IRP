@@ -8,6 +8,9 @@
 			<item>
 				<field>RevenueRowsAmount</field>
 			</item>
+			<item>
+				<field>RevenueRowsTaxAmount</field>
+			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
@@ -27,6 +30,9 @@
 		<selection>
 			<item>
 				<field>AllocationRowsAmount</field>
+			</item>
+			<item>
+				<field>AllocationRowsTaxAmount</field>
 			</item>
 		</selection>
 		<filter>
@@ -56,6 +62,9 @@
 			</item>
 			<item>
 				<field>AllocationRowsAmount</field>
+			</item>
+			<item>
+				<field>AllocationRowsTaxAmount</field>
 			</item>
 		</selection>
 		<filter>

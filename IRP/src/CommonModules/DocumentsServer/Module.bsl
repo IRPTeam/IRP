@@ -65,7 +65,6 @@ Procedure SetNewTableUUID(Table, LinkedTables) Export
 EndProcedure
 
 Function CheckItemListStores(Object) Export
-
 	Query = New Query();
 	Query.Text =
 	"SELECT

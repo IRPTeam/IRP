@@ -4,20 +4,28 @@ Procedure PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProces
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-
+	
 	Notify = New NotifyDescription("OnFinishEditSerialLotNumbers", ThisObject, 
 		New Structure("Object, Form, AddInfo", Object, Form, AddInfo));
 	OpeningParameters = New Structure();
-	OpeningParameters.Insert("Item", CurrentData.Item);
-	OpeningParameters.Insert("ItemKey", CurrentData.ItemKey);
-	OpeningParameters.Insert("RowKey", CurrentData.Key);
+	OpeningParameters.Insert("Item"            , CurrentData.Item);
+	OpeningParameters.Insert("ItemKey"         , CurrentData.ItemKey);
+	OpeningParameters.Insert("RowKey"          , CurrentData.Key);
 	OpeningParameters.Insert("SerialLotNumbers", New Array());
-	OpeningParameters.Insert("Quantity", CurrentData.Quantity);
+	OpeningParameters.Insert("Quantity"        , CurrentData.Quantity);
 	ArrayOfSelectedSerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", CurrentData.Key));
 	For Each Row In ArrayOfSelectedSerialLotNumbers Do
 		OpeningParameters.SerialLotNumbers.Add(New Structure("SerialLotNumber, Quantity", Row.SerialLotNumber, Row.Quantity));
 	EndDo;
-
+	
+	If ValueIsFilled(CurrentData.Item)
+		And CommonFunctionsServer.GetRefAttribute(CurrentData.Item, "ItemType.SingleRow")
+		And OpeningParameters.SerialLotNumbers.Count() <= 1 Then
+		
+		OpeningParameters.Insert("Single", True);
+			
+	EndIf;
+	
 	OpenForm("Catalog.SerialLotNumbers.Form.EditListOfSerialLotNumbers", OpeningParameters, ThisObject, , , , Notify,
 		FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure

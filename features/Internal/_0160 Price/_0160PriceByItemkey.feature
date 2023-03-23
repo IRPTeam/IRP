@@ -1133,10 +1133,10 @@ Scenario: _016014 check price calculation in the documents (price by unit, scan 
 			And I activate field named "ItemListLineNumber" in "ItemList" table
 		* Add item by barcode
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "4820024700016" text in the field named "InputFld"
+			And I input "4820024700016" text in the field named "Barcode"
 			And I click the button named "OK"
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "89089988989989" text in the field named "InputFld"
+			And I input "89089988989989" text in the field named "Barcode"
 			And I click the button named "OK"
 		* Check
 			And "ItemList" table became equal

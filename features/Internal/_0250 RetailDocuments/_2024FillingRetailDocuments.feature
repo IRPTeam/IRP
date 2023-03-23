@@ -673,7 +673,7 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 	* Add product (scan)
 		And I click "Search by barcode (F7)" button
 		And I input "2202283739" text in the field named "Barcode"
-		And I click "OK" button
+		And I move to the next attribute
 		And "ItemList" table became equal
 			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
@@ -770,7 +770,7 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 	* Add product (scan)
 		And I click "Search by barcode (F7)" button
 		And I input "2202283739" text in the field named "Barcode"
-		And I click "OK" button
+		And I move to the next attribute
 		And "ItemList" table became equal
 			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
@@ -1513,7 +1513,7 @@ Scenario: _0154141 manual price adjustment in the POS
 	* Add product
 		And I click "Search by barcode (F7)" button
 		And I input "2202283739" text in the field named "Barcode"
-		And I click "OK" button
+		And I move to the next attribute
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
@@ -1540,7 +1540,7 @@ Scenario: _0154141 manual price adjustment in the POS
 	* Add one more items and check price filling
 		And I click "Search by barcode (F7)" button
 		And I input "2202283713" text in the field named "Barcode"
-		And I click "OK" button
+		And I move to the next attribute
 		And "ItemList" table contains lines
 			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''       | '550,00' |
@@ -3818,13 +3818,13 @@ Scenario: _0154175 check change amount in POS
 	* Add product (scan)
 		And I click "Search by barcode (F7)" button
 		And I input "2202283739" text in the field named "Barcode"
-		And I click "OK" button
+		And I move to the next attribute
 		And "ItemList" table became equal
 			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
 		And I click "Search by barcode (F7)" button
 		And I input "2202283713" text in the field named "Barcode"
-		And I click "OK" button
+		And I move to the next attribute
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
@@ -4175,8 +4175,8 @@ Scenario: _0154195 set sales person from POS
 				| 'Anna Petrova' |
 			And I select current line in "" table
 			And I click "Search by barcode (F7)" button
-			And I input "2202283739" text in the field named "InputFld"
-			And I click the button named "OK"
+			And I input "2202283739" text in the field named "Barcode"
+			And I move to the next attribute
 			And I click "Set sales person" button
 			And I go to line in "" table
 				| 'Column1'       |

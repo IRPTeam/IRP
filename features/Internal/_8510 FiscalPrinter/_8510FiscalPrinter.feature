@@ -532,16 +532,16 @@ Scenario: _0850011 create retail sales receipt from POS (consignor, cash)
 	And In the command interface I select "Retail" "Point of sale"
 	* Select first item (scan by barcode, with serial lot number)
 		And I click "Search by barcode (F7)" button
-		And I input "57897909799" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Select second item (scan by barcode, with serial lot number)
 		And I click "Search by barcode (F7)" button
-		And I input "09987897977893" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "09987897977893" text in the field named "Barcode"
+		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "200,00" text in "Price" field of "ItemList" table
@@ -562,16 +562,16 @@ Scenario: _0850015 create retail sales receipt from POS (own stock, card 02)
 	And In the command interface I select "Retail" "Point of sale"
 	* Select first item (scan by barcode, with serial lot number)
 		And I click "Search by barcode (F7)" button
-		And I input "23455677788976667" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "23455677788976667" text in the field named "Barcode"
+		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Select second item (scan by barcode, without serial lot number)
 		And I click "Search by barcode (F7)" button
-		And I input "2202283705" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
 		And I finish line editing in "ItemList" table
 	* Payment
 		And I click "Payment (+)" button
@@ -596,29 +596,29 @@ Scenario: _0850016 create retail sales receipt from POS (own stock, cash and car
 	And In the command interface I select "Retail" "Point of sale"
 	* Select first item (scan by barcode, with serial lot number)
 		And I click "Search by barcode (F7)" button
-		And I input "57897909799" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Select second item (scan by barcode, without serial lot number)
 		And I click "Search by barcode (F7)" button
-		And I input "2202283705" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
 		And I finish line editing in "ItemList" table
 	* Select third item
 		And I click "Search by barcode (F7)" button
-		And I input "23455677788976667" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "23455677788976667" text in the field named "Barcode"
+		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Select fourth item
 		And I click "Search by barcode (F7)" button
-		And I input "19987897977" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "19987897977" text in the field named "Barcode"
+		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "120,00" text in "Price" field of "ItemList" table
@@ -653,8 +653,8 @@ Scenario: _0850017 payment by payment agent from POS
 		And I click "OK" button
 	* Select first item (scan by barcode, with serial lot number)
 		And I click "Search by barcode (F7)" button
-		And I input "57897909799" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
@@ -694,8 +694,8 @@ Scenario: _0850018 advance payment (cash)
 		And I move to the next attribute
 		And I click "OK" button
 		And I click "Search by barcode (F7)" button
-		And I input "57897909799" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "210,00" text in "Price" field of "ItemList" table
@@ -742,16 +742,16 @@ Scenario: _0850019 create retail sales receipt from POS (own stock, card 03, use
 	And In the command interface I select "Retail" "Point of sale"
 	* Select first item (scan by barcode, with serial lot number)
 		And I click "Search by barcode (F7)" button
-		And I input "23455677788976667" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "23455677788976667" text in the field named "Barcode"
+		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Select second item (scan by barcode, without serial lot number)
 		And I click "Search by barcode (F7)" button
-		And I input "2202283705" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
 		And I finish line editing in "ItemList" table
 	* Payment
 		And I click "Payment (+)" button
@@ -787,8 +787,8 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 	And In the command interface I select "Retail" "Point of sale"
 	* Select item
 		And I click "Search by barcode (F7)" button
-		And I input "23455677788976667" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "23455677788976667" text in the field named "Barcode"
+		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
@@ -932,8 +932,8 @@ Scenario: _0850024 return by card without basis document (without RRN)
 	And In the command interface I select "Retail" "Point of sale"
 	* Select item
 		And I click "Search by barcode (F7)" button
-		And I input "23455677788976667" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "23455677788976667" text in the field named "Barcode"
+		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "200,00" text in "Price" field of "ItemList" table
@@ -976,8 +976,8 @@ Scenario: _08500241 return by card without basis document (with RRN)
 	And In the command interface I select "Retail" "Point of sale"
 	* Select item
 		And I click "Search by barcode (F7)" button
-		And I input "23455677788976667" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "23455677788976667" text in the field named "Barcode"
+		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "111,00" text in "Price" field of "ItemList" table
@@ -1020,8 +1020,8 @@ Scenario: _0850020 check auto card payment cancellation (acquiring)
 	And In the command interface I select "Retail" "Point of sale"
 	* Select item
 		And I click "Search by barcode (F7)" button
-		And I input "2202283705" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
 		And I finish line editing in "ItemList" table
 	* Card payment
 		And I click "Payment (+)" button
@@ -1074,8 +1074,8 @@ Scenario: _0850021 check the form of payment by card
 	And In the command interface I select "Retail" "Point of sale"
 	* Select item
 		And I click "Search by barcode (F7)" button
-		And I input "2202283705" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
 		And I finish line editing in "ItemList" table
 	* Card payment
 		And I click "Payment (+)" button

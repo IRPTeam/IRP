@@ -728,7 +728,7 @@ Procedure ClearAutoCalculatedOffers(Object) Export
 	EndDo;
 EndProcedure
 
-Procedure CalculateOffersAfterSet(Val Object, OffersInfo) Export
+Procedure CalculateOffersAfterSet(OffersInfo, Object) Export
 	ClearAutoCalculatedOffers(Object);
 	CalculateAndLoadOffers_ForDocument(Object, OffersInfo.OffersAddress);
 	RecalculateAppliedOffers_ForRow(Object);

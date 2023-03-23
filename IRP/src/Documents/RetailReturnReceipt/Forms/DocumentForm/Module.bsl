@@ -452,7 +452,16 @@ EndProcedure
 
 &AtClient
 Procedure SpecialOffersEditFinish_ForDocument(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	CalculateOffersAfterSet(Result);
 	OffersClient.SpecialOffersEditFinish_ForDocument(Result, Object, ThisObject, AdditionalParameters);
+EndProcedure
+
+&AtServer
+Procedure CalculateOffersAfterSet(Result)
+	OffersServer.CalculateOffersAfterSet(Result, Object);
 EndProcedure
 
 #EndRegion
@@ -467,7 +476,16 @@ EndProcedure
 
 &AtClient
 Procedure SpecialOffersEditFinish_ForRow(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	CalculateAndLoadOffers_ForRow(Result);
 	OffersClient.SpecialOffersEditFinish_ForRow(Result, Object, ThisObject, AdditionalParameters);
+EndProcedure
+
+&AtServer
+Procedure CalculateAndLoadOffers_ForRow(Result)
+	OffersServer.CalculateAndLoadOffers_ForRow(Object, Result.OffersAddress, Result.ItemListRowKey);
 EndProcedure
 
 #EndRegion

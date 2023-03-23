@@ -6,20 +6,14 @@ Procedure OpenFormPickupSpecialOffers_ForDocument(Object, Form, NotifyEditFinish
 EndProcedure
 
 Procedure SpecialOffersEditFinish_ForDocument(OffersInfo, Object, Form, AddInfo = Undefined) Export
-	If OffersInfo = Undefined Then
-		Return;
-	EndIf;
 	If Form.TaxAndOffersCalculated Then
 		Form.TaxAndOffersCalculated = False;
 	EndIf;
-	OffersServer.CalculateOffersAfterSet(Object, OffersInfo);
 	
 	ViewClient_V2.OffersOnChange(Object, Form);
 	
 	Form.Modified = True;
 	Form.TaxAndOffersCalculated = True;
-	
-	ExecuteCallback(AddInfo);
 EndProcedure
 
 Procedure OpenFormPickupSpecialOffers_ForRow(Object, CurrentRow, Form, NotifyEditFinish, AddInfo = Undefined) Export
@@ -41,19 +35,6 @@ Procedure SpecialOffersEditFinish_ForRow(OffersInfo, Object, Form, AddInfo = Und
 	If OffersInfo = Undefined Then
 		Return;
 	EndIf;
-	
-	OffersServer.CalculateAndLoadOffers_ForRow(Object, OffersInfo.OffersAddress, OffersInfo.ItemListRowKey);
-	
 	ViewClient_V2.OffersOnChange(Object, Form);
-	
 	Form.Modified = True;
-	ExecuteCallback(AddInfo);
-EndProcedure
-
-Procedure ExecuteCallback(Args)
-	If Args <> Undefined And TypeOf(Args) = Type("Structure") And Args.Property("Callback") Then
-
-		Execute StrTemplate("Args.Callback.Module.%1();", Args.Callback.Method);
-
-	EndIf;
 EndProcedure

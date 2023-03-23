@@ -640,6 +640,10 @@ GROUP BY
        <key>en</key>
        <value>TaxAmount</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Сумма налогов</value>
+      </content>
      </localValue>
     </title>
    </fields>
@@ -671,6 +675,14 @@ GROUP BY
       <content>
        <key>en</key>
        <value>Icon</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Иконка</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Simge</value>
       </content>
      </localValue>
     </title>

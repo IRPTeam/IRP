@@ -374,6 +374,14 @@
     <key>en</key>
     <value>Tax amount</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма налогов</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Vergi tutarı</value>
+   </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
    </type>
@@ -539,6 +547,14 @@
     <key>en</key>
     <value>Tax amount</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма налогов</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Vergi tutarı</value>
+   </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
    </type>
@@ -661,6 +677,14 @@
    <synonym>
     <key>en</key>
     <value>Tax amount</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма налогов</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Vergi tutarı</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>

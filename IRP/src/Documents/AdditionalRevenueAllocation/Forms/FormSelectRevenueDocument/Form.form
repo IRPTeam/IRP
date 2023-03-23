@@ -660,6 +660,14 @@ GROUP BY
        <key>en</key>
        <value>Icon</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Иконка</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Simge</value>
+      </content>
      </localValue>
     </title>
    </fields>
@@ -671,6 +679,14 @@ GROUP BY
       <content>
        <key>en</key>
        <value>Tax amount</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Сумма налогов</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Vergi tutarı</value>
       </content>
      </localValue>
     </title>

@@ -963,6 +963,14 @@
     <key>en</key>
     <value>Tax amount</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Сумма налогов</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Vergi tutarı</value>
+   </title>
    <id>11</id>
    <valueType>
     <types>DefinedType.typeAmount</types>

@@ -295,6 +295,10 @@
    <key>en</key>
    <value>Single row</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Одна строка</value>
+  </synonym>
   <type>
    <types>Boolean</types>
   </type>
@@ -309,6 +313,10 @@
   <synonym>
    <key>en</key>
    <value>Not use line grouping</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Не использовать группировку строк</value>
   </synonym>
   <type>
    <types>Boolean</types>

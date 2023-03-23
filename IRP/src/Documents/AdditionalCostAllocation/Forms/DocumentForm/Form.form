@@ -3657,6 +3657,14 @@
      <key>en</key>
      <value>Cost list</value>
     </title>
+    <title>
+     <key>ru</key>
+     <value>Список себестоимости</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Maliyet listesi</value>
+    </title>
     <extendedTooltip>
      <name>GroupCostListExtendedTooltip</name>
      <id>706</id>
@@ -4285,6 +4293,14 @@
      <key>en</key>
      <value>Allocation list</value>
     </title>
+    <title>
+     <key>ru</key>
+     <value>Список распределения</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Dağıtım listesi</value>
+    </title>
     <extendedTooltip>
      <name>GroupAllocationListExtendedTooltip</name>
      <id>708</id>
@@ -4820,6 +4836,14 @@
     <key>en</key>
     <value>Tax amount</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Сумма налогов</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Vergi tutarı</value>
+   </title>
    <id>35</id>
    <valueType>
     <types>DefinedType.typeAmount</types>
@@ -5118,6 +5142,14 @@
    <title>
     <key>en</key>
     <value>Tax amount</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Сумма налогов</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Vergi tutarı</value>
    </title>
    <id>36</id>
    <valueType>

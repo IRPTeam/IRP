@@ -1111,7 +1111,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_123", NStr("en='Error. Retail customer is not filled';
 		|ru='Ошибка. Не заполнен розничный покупатель';
 		|tr='Hata. Perakende müşteri boştur'", Lang) + Chars.LF);
-	Strings.Insert("Error_124", NStr("en='Quantity limit exceeded. line number: [%1] quantity: [%2] limit: [%3]'", Lang));
+	Strings.Insert("Error_124", NStr("en='Quantity limit exceeded. line number: [%1] quantity: [%2] limit: [%3]';
+		|ru='Превышение лимита количества. Номер строки: [%1] количество: [%2] лимит: [%3]'", Lang));
 	
 	// manufacturing errors
 	Strings.Insert("MF_Error_001", NStr("en='Repetitive materials [%1]';

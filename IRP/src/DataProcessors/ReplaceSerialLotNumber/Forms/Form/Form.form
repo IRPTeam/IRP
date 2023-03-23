@@ -171,6 +171,10 @@
     <key>en</key>
     <value>Current owner</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Текущий владелец</value>
+   </title>
    <extendedTooltip>
     <name>Group5ExtendedTooltip</name>
     <id>142</id>
@@ -315,6 +319,10 @@
     <key>en</key>
     <value>New owner</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Новый владелец</value>
+   </title>
    <extendedTooltip>
     <name>Group6ExtendedTooltip</name>
     <id>144</id>
@@ -349,6 +357,10 @@
   <title>
    <key>en</key>
    <value>Group4</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Группа 4</value>
   </title>
   <extendedTooltip>
    <name>Group4ExtendedTooltip</name>
@@ -2312,6 +2324,14 @@
       <key>en</key>
       <value>Dimensions</value>
      </title>
+     <title>
+      <key>ru</key>
+      <value>Измерения</value>
+     </title>
+     <title>
+      <key>tr</key>
+      <value>Boyutlar</value>
+     </title>
      <extendedTooltip>
       <name>Group7ExtendedTooltip</name>
       <id>172</id>
@@ -2732,6 +2752,10 @@
       <key>en</key>
       <value>Resources</value>
      </title>
+     <title>
+      <key>ru</key>
+      <value>Ресурсы</value>
+     </title>
      <extendedTooltip>
       <name>Group8ExtendedTooltip</name>
       <id>174</id>
@@ -2762,6 +2786,14 @@
      <key>en</key>
      <value>Group1</value>
     </title>
+    <title>
+     <key>ru</key>
+     <value>Группа 1</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Grup 1</value>
+    </title>
     <extendedTooltip>
      <name>Group1ExtendedTooltip</name>
      <id>170</id>
@@ -2791,6 +2823,10 @@
    <title>
     <key>en</key>
     <value>Group3</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Группа3</value>
    </title>
    <extendedTooltip>
     <name>Group3ExtendedTooltip</name>
@@ -2825,6 +2861,14 @@
   <title>
    <key>en</key>
    <value>Group2</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Группа 2</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Grup 2</value>
   </title>
   <extendedTooltip>
    <name>Group2ExtendedTooltip</name>
@@ -2950,6 +2994,14 @@
    <key>en</key>
    <value>Serial lot number</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Серия номенклатуры</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Seri lot numaraları</value>
+  </title>
   <id>2</id>
   <valueType>
    <types>CatalogRef.SerialLotNumbers</types>
@@ -2968,6 +3020,14 @@
    <key>en</key>
    <value>Documents</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Документы</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Evraklar</value>
+  </title>
   <id>4</id>
   <valueType>
    <types>ValueTable</types>
@@ -2982,6 +3042,14 @@
    <name>Ref</name>
    <title>
     <key>en</key>
+    <value>Ref</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Ссылка</value>
+   </title>
+   <title>
+    <key>tr</key>
     <value>Ref</value>
    </title>
    <id>5</id>
@@ -3001,6 +3069,14 @@
     <key>en</key>
     <value>Tabular section</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Таблица секции</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Tablo bölümü</value>
+   </title>
    <id>6</id>
    <valueType>
     <types>String</types>
@@ -3019,6 +3095,14 @@
     <key>en</key>
     <value>Key</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Ключ</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </title>
    <id>7</id>
    <valueType>
     <types>String</types>
@@ -3036,6 +3120,14 @@
    <title>
     <key>en</key>
     <value>Line number</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Номер строки</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Satır numarası</value>
    </title>
    <id>8</id>
    <valueType>
@@ -3057,6 +3149,10 @@
     <key>en</key>
     <value>Dep tabular section</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Док табличная часть</value>
+   </title>
    <id>9</id>
    <valueType>
     <types>String</types>
@@ -3074,6 +3170,10 @@
    <title>
     <key>en</key>
     <value>Dep line number</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Номер строки документа</value>
    </title>
    <id>10</id>
    <valueType>
@@ -3095,6 +3195,14 @@
     <key>en</key>
     <value>Serial lot number</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Серия номенклатуры</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
+   </title>
    <id>11</id>
    <valueType>
     <types>CatalogRef.SerialLotNumbers</types>
@@ -3112,6 +3220,10 @@
     <key>en</key>
     <value>Is ok</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Все ок</value>
+   </title>
    <id>12</id>
    <valueType>
     <types>Boolean</types>
@@ -3128,6 +3240,14 @@
    <title>
     <key>en</key>
     <value>Document name</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Наименование документа</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Evrak ismi</value>
    </title>
    <id>13</id>
    <valueType>
@@ -3147,6 +3267,14 @@
     <key>en</key>
     <value>Item key</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Varyant</value>
+   </title>
    <id>14</id>
    <valueType>
     <types>CatalogRef.ItemKeys</types>
@@ -3164,6 +3292,14 @@
     <key>en</key>
     <value>Item</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Номенклатура</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Malzeme</value>
+   </title>
    <id>15</id>
    <valueType>
     <types>CatalogRef.Items</types>
@@ -3180,6 +3316,10 @@
    <title>
     <key>en</key>
     <value>Repeating lines</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Повторяющиеся строки</value>
    </title>
    <id>27</id>
    <valueType>
@@ -3201,6 +3341,14 @@
     <key>en</key>
     <value>Current price type</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Текущий вид цены</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Geçerli fiyat tipi</value>
+   </title>
    <id>32</id>
    <valueType>
     <types>CatalogRef.PriceTypes</types>
@@ -3217,6 +3365,10 @@
    <title>
     <key>en</key>
     <value>Current price</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Текущая цена</value>
    </title>
    <id>33</id>
    <valueType>
@@ -3235,6 +3387,10 @@
     <key>en</key>
     <value>New price</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Новая цена</value>
+   </title>
    <id>34</id>
    <valueType>
     <types>DefinedType.typePrice</types>
@@ -3251,6 +3407,10 @@
    <title>
     <key>en</key>
     <value>Result price type</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Итоговый тип цен</value>
    </title>
    <id>35</id>
    <valueType>
@@ -3269,6 +3429,10 @@
     <key>en</key>
     <value>Result price</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Итоговая цена</value>
+   </title>
    <id>36</id>
    <valueType>
     <types>DefinedType.typePrice</types>
@@ -3286,6 +3450,10 @@
     <key>en</key>
     <value>Change price</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Изменить цену</value>
+   </title>
    <id>37</id>
    <valueType>
     <types>Boolean</types>
@@ -3302,6 +3470,10 @@
    <title>
     <key>en</key>
     <value>With price</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>С ценой</value>
    </title>
    <id>40</id>
    <valueType>
@@ -3321,6 +3493,10 @@
    <key>en</key>
    <value>Registers</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Регистры</value>
+  </title>
   <id>16</id>
   <valueType>
    <types>ValueTable</types>
@@ -3336,6 +3512,14 @@
    <title>
     <key>en</key>
     <value>Register name</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Наименование регистра</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Kayıt tablo tanımı</value>
    </title>
    <id>17</id>
    <valueType>
@@ -3355,6 +3539,10 @@
     <key>en</key>
     <value>Record UUID</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>UUID записи</value>
+   </title>
    <id>18</id>
    <valueType>
     <types>String</types>
@@ -3373,6 +3561,14 @@
     <key>en</key>
     <value>Dimensions</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Измерения</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Boyutlar</value>
+   </title>
    <id>19</id>
    <valueType>
     <types>String</types>
@@ -3390,6 +3586,10 @@
    <title>
     <key>en</key>
     <value>Resources</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Ресурсы</value>
    </title>
    <id>20</id>
    <valueType>
@@ -3410,6 +3610,14 @@
    <key>en</key>
    <value>Dimensions</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Измерения</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Boyutlar</value>
+  </title>
   <id>21</id>
   <valueType>
    <types>ValueTable</types>
@@ -3425,6 +3633,14 @@
    <title>
     <key>en</key>
     <value>Name</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Имя</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Ad</value>
    </title>
    <id>22</id>
    <valueType>
@@ -3444,6 +3660,10 @@
     <key>en</key>
     <value>Record UUID</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>UUID записи</value>
+   </title>
    <id>23</id>
    <valueType>
     <types>String</types>
@@ -3462,6 +3682,14 @@
     <key>en</key>
     <value>Value</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Значение</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Değer</value>
+   </title>
    <id>25</id>
    <valueType/>
    <view>
@@ -3476,6 +3704,10 @@
    <title>
     <key>en</key>
     <value>New value</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Новое значение</value>
    </title>
    <id>38</id>
    <valueType/>
@@ -3493,6 +3725,14 @@
    <key>en</key>
    <value>Dimensions</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Измерения</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Boyutlar</value>
+  </title>
   <id>26</id>
   <valueType>
    <types>ValueTable</types>
@@ -3508,6 +3748,14 @@
    <title>
     <key>en</key>
     <value>Name</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Имя</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Ad</value>
    </title>
    <id>22</id>
    <valueType>
@@ -3527,6 +3775,10 @@
     <key>en</key>
     <value>Record UUID</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>UUID записи</value>
+   </title>
    <id>23</id>
    <valueType>
     <types>String</types>
@@ -3545,6 +3797,14 @@
     <key>en</key>
     <value>Value</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Значение</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Değer</value>
+   </title>
    <id>25</id>
    <valueType/>
    <view>
@@ -3559,6 +3819,10 @@
    <title>
     <key>en</key>
     <value>New value</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Новое значение</value>
    </title>
    <id>39</id>
    <valueType/>
@@ -3575,6 +3839,10 @@
   <title>
    <key>en</key>
    <value>New item key</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Новая характеристика</value>
   </title>
   <id>28</id>
   <valueType>
@@ -3594,6 +3862,14 @@
    <key>en</key>
    <value>Item</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Номенклатура</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Malzeme</value>
+  </title>
   <id>29</id>
   <valueType>
    <types>CatalogRef.Items</types>
@@ -3611,6 +3887,14 @@
    <key>en</key>
    <value>Item key</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Varyant</value>
+  </title>
   <id>30</id>
   <valueType>
    <types>CatalogRef.ItemKeys</types>
@@ -3627,6 +3911,10 @@
   <title>
    <key>en</key>
    <value>New item</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Новая номенклатура</value>
   </title>
   <id>31</id>
   <valueType>
@@ -3646,6 +3934,10 @@
    <key>en</key>
    <value>Find refs</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Найти ссылки</value>
+  </title>
   <id>1</id>
   <use>
    <common>true</common>
@@ -3662,6 +3954,10 @@
   <title>
    <key>en</key>
    <value>Replace</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Заменить</value>
   </title>
   <id>2</id>
   <use>

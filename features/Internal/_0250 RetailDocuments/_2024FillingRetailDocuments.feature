@@ -268,7 +268,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 	* Check filling in prices and calculate taxes when adding items via barcode search
 		* Add item via barcodes
 			And in the table "ItemList" I click "SearchByBarcode" button
-			And I input "2202283739" text in "InputFld" field
+			And I input "2202283739" text in the field named "Barcode"
 			And Delay 4
 			And I click "OK" button
 			And Delay 4
@@ -674,7 +674,7 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		And In the command interface I select "Retail" "Point of sale"
 	* Add product (scan)
 		And I click "Search by barcode (F7)" button
-		And I input "2202283739" text in "InputFld" field
+		And I input "2202283739" text in the field named "Barcode"
 		And I click "OK" button
 		And "ItemList" table became equal
 			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
@@ -771,7 +771,7 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 		And In the command interface I select "Retail" "Point of sale"
 	* Add product (scan)
 		And I click "Search by barcode (F7)" button
-		And I input "2202283739" text in "InputFld" field
+		And I input "2202283739" text in the field named "Barcode"
 		And I click "OK" button
 		And "ItemList" table became equal
 			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
@@ -1514,7 +1514,7 @@ Scenario: _0154141 manual price adjustment in the POS
 		And In the command interface I select "Retail" "Point of sale"
 	* Add product
 		And I click "Search by barcode (F7)" button
-		And I input "2202283739" text in "InputFld" field
+		And I input "2202283739" text in the field named "Barcode"
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
@@ -1541,7 +1541,7 @@ Scenario: _0154141 manual price adjustment in the POS
 		And I finish line editing in "ItemList" table
 	* Add one more items and check price filling
 		And I click "Search by barcode (F7)" button
-		And I input "2202283713" text in "InputFld" field
+		And I input "2202283713" text in the field named "Barcode"
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
@@ -2603,7 +2603,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 	* Check filling in prices and calculate taxes when adding items via barcode search
 		* Add item via barcodes
 			And I click "SearchByBarcode" button
-			And I input "2202283739" text in "InputFld" field
+			And I input "2202283739" text in the field named "Barcode"
 			And Delay 4
 			And I click "OK" button
 			And Delay 4
@@ -2927,7 +2927,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 	* Check filling in prices and calculate taxes when adding items via barcode search
 		* Add item via barcodes
 			And in the table "ItemList" I click "SearchByBarcode" button
-			And I input "2202283739" text in "InputFld" field
+			And I input "2202283739" text in the field named "Barcode"
 			And Delay 4
 			And I click "OK" button
 			And Delay 4
@@ -3823,13 +3823,13 @@ Scenario: _0154175 check change amount in POS
 		And In the command interface I select "Retail" "Point of sale"
 	* Add product (scan)
 		And I click "Search by barcode (F7)" button
-		And I input "2202283739" text in "InputFld" field
+		And I input "2202283739" text in the field named "Barcode"
 		And I click "OK" button
 		And "ItemList" table became equal
 			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
 		And I click "Search by barcode (F7)" button
-		And I input "2202283713" text in "InputFld" field
+		And I input "2202283713" text in the field named "Barcode"
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |

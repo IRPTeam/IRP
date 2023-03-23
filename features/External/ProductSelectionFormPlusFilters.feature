@@ -1644,7 +1644,7 @@ Scenario: check the barcode search in the sales documents + price and tax fillin
 		| 'Basic Partner terms, TRY'     |
 	And I select current line in "List" table
 	And in the table "ItemList" I click "SearchByBarcode" button
-	And I input "2202283705" text in "InputFld" field
+	And I input "2202283705" text in the field named "Barcode"
 	And I click "OK" button
 	* Check adding an items and filling in the price in the tabular part
 		And I click "Show row key" button		
@@ -1652,7 +1652,7 @@ Scenario: check the barcode search in the sales documents + price and tax fillin
 			| 'Item'  | 'Price'  | 'Item key' | 'Quantity'     | 'Unit' | 'Total amount' | 'Quantity in base unit' |
 			| 'Dress' | '520,00' | 'XS/Blue'  | '1,000' | 'pcs'  | '520,00'       | '1,000'                |
 		And in the table "ItemList" I click "SearchByBarcode" button
-		And I input "2202283705" text in "InputFld" field
+		And I input "2202283705" text in the field named "Barcode"
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Price'  | 'Item key' | 'Quantity'     | 'Unit' | 'Total amount' | 'Quantity in base unit' |
@@ -1673,7 +1673,7 @@ Scenario: check the barcode search in the sales report from trade agent + price 
 		| 'Trade agent partner term 1' |
 	And I select current line in "List" table
 	And in the table "ItemList" I click "SearchByBarcode" button
-	And I input "2202283705" text in "InputFld" field
+	And I input "2202283705" text in the field named "Barcode"
 	And I click "OK" button
 	* Check adding an items and filling in the price in the tabular part
 		And I click "Show row key" button		
@@ -1681,7 +1681,7 @@ Scenario: check the barcode search in the sales report from trade agent + price 
 			| 'Item'  | 'Price'  | 'Item key' | 'Quantity' | 'Unit' | 'Total amount' | 'Quantity in base unit' |
 			| 'Dress' | '520,00' | 'XS/Blue'  | '1,000'    | 'pcs'  | '520,00'       | '1,000'                 |
 		And in the table "ItemList" I click "SearchByBarcode" button
-		And I input "2202283705" text in "InputFld" field
+		And I input "2202283705" text in the field named "Barcode"
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Price'  | 'Item key' | 'Quantity' | 'Unit' | 'Total amount' | 'Quantity in base unit' |
@@ -1701,7 +1701,7 @@ Scenario: check the barcode search in the sales report to consignor + price and 
 		| 'Consignor partner term 1' |
 	And I select current line in "List" table
 	And in the table "ItemList" I click "SearchByBarcode" button
-	And I input "2202283705" text in "InputFld" field
+	And I input "2202283705" text in the field named "Barcode"
 	And I click "OK" button
 	* Check adding an items and filling in the price in the tabular part
 		And I click "Show row key" button		
@@ -1709,7 +1709,7 @@ Scenario: check the barcode search in the sales report to consignor + price and 
 			| 'Item'  | 'Price'  | 'Item key' | 'Quantity' | 'Unit' | 'Total amount' | 'Quantity in base unit' |
 			| 'Dress' | '520,00' | 'XS/Blue'  | '1,000'    | 'pcs'  | '520,00'       | '1,000'                 |
 		And in the table "ItemList" I click "SearchByBarcode" button
-		And I input "2202283705" text in "InputFld" field
+		And I input "2202283705" text in the field named "Barcode"
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Price'  | 'Item key' | 'Quantity' | 'Unit' | 'Total amount' | 'Quantity in base unit' |
@@ -1724,7 +1724,7 @@ Scenario: check the barcode search on the return documents
 		| Kalipso     |
 	And I select current line in "List" table
 	And I click "SearchByBarcode" button
-	And I input "2202283705" text in "InputFld" field
+	And I input "2202283705" text in the field named "Barcode"
 	And I click "OK" button
 	* Check the items adding
 		And I click "Show row key" button
@@ -1732,7 +1732,7 @@ Scenario: check the barcode search on the return documents
 			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit' | 'Quantity in base unit' |
 			| 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  | '1,000'                 |
 		And I click "SearchByBarcode" button
-		And I input "2202283705" text in "InputFld" field
+		And I input "2202283705" text in the field named "Barcode"
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit' | 'Quantity in base unit' |
@@ -1748,7 +1748,7 @@ Scenario: check the barcode search in the purchase/purchase returns
 		| Ferron BP     |
 	And I select current line in "List" table
 	And I click the button named "SearchByBarcode"
-	And I input "2202283713" text in "InputFld" field
+	And I input "2202283713" text in the field named "Barcode"
 	And I click "OK" button
 	* Check adding an items and filling in the price in the tabular part
 		And I click "Show row key" button
@@ -1756,7 +1756,7 @@ Scenario: check the barcode search in the purchase/purchase returns
 			| 'Item'  |'Item key' |'Quantity'     | 'Unit' | 'Quantity in base unit' |
 			|'Dress' |'S/Yellow'  |'1,000' | 'pcs'  | '1,000'                 |
 		And I click the button named "SearchByBarcode"
-		And I input "2202283713" text in "InputFld" field
+		And I input "2202283713" text in the field named "Barcode"
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  |'Item key' |'Quantity'     | 'Unit' | 'Quantity in base unit' |
@@ -1766,7 +1766,7 @@ Scenario: check the barcode search in the purchase/purchase returns
 Scenario: check the barcode search in storage operations documents	
 	And I click the button named "FormCreate"
 	And in the table "ItemList" I click the button named "SearchByBarcode"
-	And I input "2202283713" text in "InputFld" field
+	And I input "2202283713" text in the field named "Barcode"
 	And I click "OK" button
 	* Check adding an items and filling in the price in the tabular part
 		And I click "Show row key" button
@@ -1774,7 +1774,7 @@ Scenario: check the barcode search in storage operations documents
 			| 'Item'  | 'Item key' | 'Unit' | 'Quantity' | 'Quantity in base unit' |
 			| 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'    | '1,000'                 |
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		And I input "2202283713" text in "InputFld" field
+		And I input "2202283713" text in the field named "Barcode"
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Unit' | 'Quantity' | 'Quantity in base unit' |
@@ -1788,7 +1788,7 @@ Scenario: check the barcode search in the product bundling documents
 	And I click the button named "FormCreate"
 	And I move to "Item list" tab
 	And in the table "ItemList" I click "SearchByBarcode" button
-	And I input "2202283713" text in "InputFld" field
+	And I input "2202283713" text in the field named "Barcode"
 	And I click "OK" button
 	* Check adding an items and filling in the price in the tabular part
 		And I click "Show row key" button
@@ -1796,7 +1796,7 @@ Scenario: check the barcode search in the product bundling documents
 			| 'Item'  | 'Item key' | 'Quantity' | 'Unit' | 'Quantity in base unit' |
 			| 'Dress' | 'S/Yellow' | '1,000'    | 'pcs'  | '1,000'                 |
 		And in the table "ItemList" I click "SearchByBarcode" button
-		And I input "2202283713" text in "InputFld" field
+		And I input "2202283713" text in the field named "Barcode"
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Quantity' | 'Unit' | 'Quantity in base unit' |
@@ -1806,7 +1806,7 @@ Scenario: check the barcode search in the product bundling documents
 Scenario: check the barcode search in the PhysicalInventory documents
 	And I click the button named "FormCreate"
 	And I click "SearchByBarcode" button
-	And I input "2202283713" text in "InputFld" field
+	And I input "2202283713" text in the field named "Barcode"
 	And I click "OK" button
 	* Check adding an items and filling in tabular part
 		And I click "Show row key" button
@@ -1814,7 +1814,7 @@ Scenario: check the barcode search in the PhysicalInventory documents
 			| 'Item'  | 'Item key' | 'Unit' | 'Phys. count' | 
 			| 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'       |
 		And I click "SearchByBarcode" button
-		And I input "2202283713" text in "InputFld" field
+		And I input "2202283713" text in the field named "Barcode"
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Unit' | 'Phys. count' |
@@ -1824,7 +1824,7 @@ Scenario: check the barcode search in the PhysicalInventory documents
 Scenario: check the barcode search in the Item stock adjustment
 	And I click the button named "FormCreate"
 	And I click "SearchByBarcode" button
-	And I input "2202283713" text in "InputFld" field
+	And I input "2202283713" text in the field named "Barcode"
 	And I click "OK" button
 	* Check adding an items and filling in the price in the tabular part
 		And I click "Show row key" button
@@ -1832,7 +1832,7 @@ Scenario: check the barcode search in the Item stock adjustment
 			| 'Item' |'Item key (surplus)'     | 'Unit' | 'Quantity' | 'Quantity in base unit' |
 			|'Dress' |'S/Yellow'               | 'pcs'  | '1,000'    | '1,000'                 |
 		And I click "SearchByBarcode" button
-		And I input "2202283713" text in "InputFld" field
+		And I input "2202283713" text in the field named "Barcode"
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item' |'Item key (surplus)'     | 'Unit' | 'Quantity' | 'Quantity in base unit' |

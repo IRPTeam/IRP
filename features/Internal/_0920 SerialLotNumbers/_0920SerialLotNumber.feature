@@ -3179,20 +3179,20 @@ Scenario: _092035 product scanning with and without serial lot number
 	* Check product scanning with serial lot number
 		And In the command interface I select "Retail" "Point of sale"
 		And I click "Search by barcode (F7)" button
-		And I input "590876909358" text in "InputFld" field
+		And I input "590876909358" text in the field named "Barcode"
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Serials' | 'Quantity' |
 			| 'Dress' | 'M/White'  | '89999'   | '1,000'    |
 		And I click "Search by barcode (F7)" button
-		And I input "590876909358" text in "InputFld" field
+		And I input "590876909358" text in the field named "Barcode"
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Serials'      | 'Quantity' |
 			| 'Dress' | 'M/White'  | '89999'        | '2,000'    |
 	* Check product scanning without own serial lot number
 		And I click "Search by barcode (F7)" button
-		And I input "2202283705" text in "InputFld" field
+		And I input "2202283705" text in the field named "Barcode"
 		And I click "OK" button
 		Then "Select serial lot numbers" window is opened
 		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
@@ -3213,7 +3213,7 @@ Scenario: _092035 product scanning with and without serial lot number
 			| 'Dress' | 'XS/Blue'  | '10'           | '1,000'    |
 	* Check product scanning without own serial lot number (input  serial lot number by string)
 		And I click "Search by barcode (F7)" button
-		And I input "2202283739" text in "InputFld" field
+		And I input "2202283739" text in the field named "Barcode"
 		And I click "OK" button
 		Then "Select serial lot numbers" window is opened
 		And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
@@ -3231,11 +3231,11 @@ Scenario: _092035 product scanning with and without serial lot number
 			| 'Dress' | 'L/Green'  | '10'           | '1,000'    |
 	* Check message if user scan new serial lot number
 		And I click "Search by barcode (F7)" button
-		And I input "2202283739" text in "InputFld" field
+		And I input "2202283739" text in the field named "Barcode"
 		And I click "OK" button
 		Then "Select serial lot numbers" window is opened
 		And I click "Search by barcode (F7)" button
-		And I input "5908769093878" text in "InputFld" field
+		And I input "5908769093878" text in the field named "Barcode"
 		And I click "OK" button
 		Then the form attribute named "SerialLotNumberStatus" became equal to "Serial lot 5908769093878 was not found. Create new?"
 		And I close all client application windows
@@ -3250,7 +3250,7 @@ Scenario: _092045 product scanning with serial lot number in the document withou
 		And in the table "ItemList" I click "SearchByBarcode" button
 	* Product scanning with serial lot number
 		Then "Enter a barcode" window is opened
-		And I input "590876909359" text in "InputFld" field
+		And I input "590876909359" text in the field named "Barcode"
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'     | 'Item key'  |

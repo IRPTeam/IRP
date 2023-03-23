@@ -269,9 +269,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 		* Add item via barcodes
 			And in the table "ItemList" I click "SearchByBarcode" button
 			And I input "2202283739" text in the field named "Barcode"
-			And Delay 4
-			And I click "OK" button
-			And Delay 4
+			And I move to the next attribute		
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -2604,9 +2602,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 		* Add item via barcodes
 			And I click "SearchByBarcode" button
 			And I input "2202283739" text in the field named "Barcode"
-			And Delay 4
-			And I click "OK" button
-			And Delay 4
+			And I move to the next attribute
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -2928,9 +2924,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 		* Add item via barcodes
 			And in the table "ItemList" I click "SearchByBarcode" button
 			And I input "2202283739" text in the field named "Barcode"
-			And Delay 4
-			And I click "OK" button
-			And Delay 4
+			And I move to the next attribute
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |

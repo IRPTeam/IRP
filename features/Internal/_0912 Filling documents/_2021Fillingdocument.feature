@@ -615,9 +615,7 @@ Scenario: _0154101 check filling in and refilling Sales order
 		* Add item via barcodes
 			And in the table "ItemList" I click "SearchByBarcode" button
 			And I input "2202283739" text in the field named "Barcode"
-			And Delay 4
-			And I click "OK" button
-			And Delay 4
+			And I move to the next attribute
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Procurement method' | 'Tax amount' | 'SalesTax' | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -1059,9 +1057,7 @@ Scenario: _0154102 check filling in and refilling Sales invoice
 		* Add item via barcodes
 			And in the table "ItemList" I click "SearchByBarcode" button
 			And I input "2202283739" text in the field named "Barcode"
-			And Delay 2
-			And I click "OK" button
-			And Delay 4
+			And I move to the next attribute
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'SalesTax' | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -1549,9 +1545,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 		* Add item via barcodes
 			And I click "SearchByBarcode" button
 			And I input "2202283739" text in the field named "Barcode"
-			And Delay 2
-			And I click "OK" button
-			And Delay 4
+			And I move to the next attribute
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -1939,9 +1933,7 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 		* Add item via barcodes
 			And I click "SearchByBarcode" button
 			And I input "2202283739" text in the field named "Barcode"
-			And Delay 2
-			And I click "OK" button
-			And Delay 4
+			And I move to the next attribute
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -5363,9 +5355,7 @@ Scenario: _0154140 check filling in and refilling Sales order closing
 		* Add item via barcodes
 			And in the table "ItemList" I click "SearchByBarcode" button
 			And I input "2202283739" text in the field named "Barcode"
-			And Delay 4
-			And I click "OK" button
-			And Delay 4
+			And I move to the next attribute
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Procurement method' | 'Tax amount' | 'SalesTax' | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -5745,8 +5735,7 @@ Scenario: _0154141 check filling in and refilling Purchase order closing
 		* Add item via barcodes
 			And I click "SearchByBarcode" button
 			And I input "2202283739" text in the field named "Barcode"
-			And Delay 2
-			And I click "OK" button
+			And I move to the next attribute
 			And Delay 4
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines

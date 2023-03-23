@@ -920,14 +920,14 @@ Scenario: _2990016 filling Physical count by location (mobile form without scan 
 	* Scan item without serial lot number
 		And I click "SearchByBarcode" button
 		And I input "4820024700016" text in the field named "Barcode"
-		And I click "OK" button
+		And I move to the next attribute
 		And I click "SearchByBarcode" button
 		And I input "4820024700016" text in the field named "Barcode"
-		And I click "OK" button
+		And I move to the next attribute
 	* Scan item with serial lot number and change quantity
 		And I click "SearchByBarcode" button
 		And I input "23455677788976667" text in the field named "Barcode"
-		And I click "OK" button
+		And I move to the next attribute
 		And I go to line in "ItemList" table
 			| 'Item'               | 'Item key' | 'Phys. count' | 'Serial lot number' |
 			| 'Product 1 with SLN' | 'PZU'      | '1,000'       | '8908899877'        |
@@ -939,7 +939,7 @@ Scenario: _2990016 filling Physical count by location (mobile form without scan 
 	* Scan service
 		And I click "SearchByBarcode" button
 		And I input "89908" text in the field named "Barcode"
-		And I click "OK" button
+		And I move to the next attribute
 		Given Recent TestClient message contains "Can not add Service item type:*" string by template
 	* Check item tab
 		And "ItemList" table became equal

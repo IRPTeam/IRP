@@ -3251,7 +3251,7 @@ Scenario: _092045 product scanning with serial lot number in the document withou
 	* Product scanning with serial lot number
 		Then "Enter a barcode" window is opened
 		And I input "590876909359" text in the field named "Barcode"
-		And I click "OK" button
+		And I move to the next attribute
 		And "ItemList" table contains lines
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |

@@ -2218,7 +2218,7 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.Currency AS Currency,
 	|	ItemList.Ref.Company AS Company,
 	|	ItemList.ItemKey AS ItemKey,
-	|	Value(Enum.InventoryOrigingTypes.OwnStocks) AS InventoryOrigin,
+	|	Value(Enum.InventoryOriginTypes.OwnStocks) AS InventoryOrigin,
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.Store AS Store,
 	|	ItemList.PriceType AS PriceType,
@@ -3386,7 +3386,7 @@ Function ExtractData_FromITO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.StoreReceiver AS StoreReceiver,
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.ItemKey AS ItemKey,
-	|	Value(Enum.InventoryOrigingTypes.OwnStocks) AS InventoryOrigin,
+	|	Value(Enum.InventoryOriginTypes.OwnStocks) AS InventoryOrigin,
 	|	0 AS Quantity,
 	|	BasisesTable.Key,
 	|	BasisesTable.Unit AS Unit,
@@ -3603,7 +3603,7 @@ Function ExtractData_FromPhysicalInventory(BasisesTable, DataReceiver, AddInfo =
 
 	AddTables(Tables);
 
-	Return Tables;
+	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit", AddInfo);
 EndFunction
 
 Function ExtractData_FromPR(BasisesTable, DataReceiver, AddInfo = Undefined)
@@ -4203,7 +4203,7 @@ Function ExtractData_FromWO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref.Company AS Company,
 	|	ItemList.ItemKey AS ItemKey,
 	|	ItemList.ItemKey.Item AS Item,
-	|	Value(Enum.InventoryOrigingTypes.OwnStocks) AS InventoryOrigin,
+	|	Value(Enum.InventoryOriginTypes.OwnStocks) AS InventoryOrigin,
 	|	ItemList.PriceType AS PriceType,
 	|	ItemList.DontCalculateRow AS DontCalculateRow,
 	|	ItemList.Ref.Branch AS Branch,
@@ -4434,7 +4434,6 @@ EndFunction
 Function ExtractData_FromWS_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text + 
-	//------------------------------------------------------------
 	"SELECT DISTINCT ALLOWED
 	|	BasisesTable.Key,
 	|	RowIDInfo.BasisKey AS BasisKey,
@@ -4601,6 +4600,24 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Unde
 	If IsLinkRows <> Undefined And IsLinkRows Then
 		UniqueColumnNames = UniqueColumnNames + ", Key";
 	EndIf;
+	
+	If Tables.ItemList.Columns.Find("Item") <> Undefined Then
+		NotGroupArray = New Array();
+		For Each Row In Tables.ItemList Do
+			If Row.Item.ItemType.NotUseLineGrouping Then
+				NotGroupArray.Add(Row);
+			EndIf;
+		EndDo;
+		
+		If NotGroupArray.Count() Then
+			UniqueColumnNames = UniqueColumnNames + ", UniqueColumn";
+			Tables.ItemList.Columns.Add("UniqueColumn");
+			For Each Row In NotGroupArray Do
+				Row.UniqueColumn = New UUID();
+			EndDo;
+		EndIf;
+	EndIf;
+	
 	ColumnNamesSum_ItemList = GetColumnNamesSum_ItemList();
 	ItemListGrouped = Tables.ItemList.Copy();
 	ItemListGrouped.GroupBy(UniqueColumnNames, ColumnNamesSum_ItemList);
@@ -4657,6 +4674,14 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Unde
 			For Each Row In Tables.WorkSheets.FindRows(Filter) Do
 				Row.Key = NewKey;
 			EndDo;
+			
+			For Each Row In Tables.SerialLotNumbers.FindRows(Filter) Do
+				Row.Key = NewKey;
+			EndDo;
+			
+			For Each Row In Tables.SourceOfOrigins.FindRows(Filter) Do
+				Row.Key = NewKey;
+			EndDo;
 		EndDo;
 
 		NewRow = ItemListResult.Add();
@@ -4670,6 +4695,8 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Unde
 	Tables.ShipmentConfirmations.GroupBy(GetColumnNames_ShipmentConfirmations() , GetColumnNamesSum_ShipmentConfirmations());
 	Tables.GoodsReceipts.GroupBy(GetColumnNames_GoodsReceipts()                 , GetColumnNamesSum_GoodsReceipts());
 	Tables.WorkSheets.GroupBy(GetColumnNames_WorkSheets()                       , GetColumnNamesSum_WorkSheets());
+	Tables.SerialLotNumbers.GroupBy(GetColumnNames_SerialLotNumbers()           , GetColumnNamesSum_SerialLotNumbers());
+	Tables.SourceOfOrigins.GroupBy(GetColumnNames_SourceOfOrigins()             , GetColumnNamesSum_SourceOfOrigins());
 
 	Tables.ItemList = ItemListResult;
 	Return Tables;

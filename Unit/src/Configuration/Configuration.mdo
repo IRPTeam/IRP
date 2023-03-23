@@ -74,6 +74,7 @@
   <commonAttributes>CommonAttribute.Weight</commonAttributes>
   <commonAttributes>CommonAttribute.Width</commonAttributes>
   <httpServices>HTTPService.MockService</httpServices>
+  <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
   <definedTypes>DefinedType.typeDescription</definedTypes>
   <definedTypes>DefinedType.typeFilesOwner</definedTypes>
@@ -101,6 +102,7 @@
   <reports>Report.REP_Barcodes</reports>
   <dataProcessors>DataProcessor.Unit_RunTest</dataProcessors>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
+  <informationRegisters>InformationRegister.ExpenseRevenueTypeSettings</informationRegisters>
   <informationRegisters>InformationRegister.REP_ReportParameters</informationRegisters>
   <informationRegisters>InformationRegister.Unit_MockStates</informationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>

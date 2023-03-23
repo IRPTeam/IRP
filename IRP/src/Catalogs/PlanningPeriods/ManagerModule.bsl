@@ -8,8 +8,8 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		"SELECT
 		|	Table.Ref AS Ref
 		|FROM
-		|	Catalog.MF_PlanningPeriods.BusinessUnits AS TableBusinessUnits
-		|		INNER JOIN Catalog.MF_PlanningPeriods AS Table
+		|	Catalog.PlanningPeriods.BusinessUnits AS TableBusinessUnits
+		|		INNER JOIN Catalog.PlanningPeriods AS Table
 		|		ON Table.Ref = TableBusinessUnits.Ref
 		|		AND NOT Table.DeletionMark
 		|		AND TableBusinessUnits.BusinessUnit = &BusinessUnit

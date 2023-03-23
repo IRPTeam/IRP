@@ -46,8 +46,50 @@ Function GetServerData(Object, ArrayOfTableNames, FormTaxColumnsExists, TaxesCac
 		ServerData.LoadData.SourceColumnsGroupBy = GroupColumns;
 		ServerData.LoadData.SourceColumnsSumBy   = SumColumns;
 		
-		SourceTableCopy.GroupBy(GroupColumns);
-		ServerData.LoadData.CountRows = SourceTableCopy.Count();
+		ColumnItemKeyIsGroupColumn = False;
+		For Each ColumnName In StrSplit(GroupColumns, ",") Do
+			If Upper(TrimAll(ColumnName)) = Upper("ItemKey") Then
+				ColumnItemKeyIsGroupColumn = True;
+				Break;
+			EndIf;
+		EndDo;
+		
+		If ColumnItemKeyIsGroupColumn Then
+			SourceTableBuffer = SourceTable.CopyColumns();
+			ArrayForDelete = New Array();
+		
+			ItemKeyTable = SourceTable.Copy();
+			ItemKeyTable.GroupBy("ItemKey");
+		
+			For Each RowItemKey In ItemKeyTable Do
+				If RowItemKey.ItemKey.Item.ItemType.NotUseLineGrouping Then
+					SourceTableRows = SourceTable.FindRows(New Structure("ItemKey", RowItemKey.ItemKey));
+					For Each Row In SourceTableRows Do
+						FillPropertyValues(SourceTableBuffer.Add(), Row);
+						ArrayForDelete.Add(Row);
+					EndDo;
+				EndIf;
+			EndDo;
+		
+			For Each ItemForDelete In ArrayForDelete Do
+				SourceTable.Delete(ItemForDelete);
+			EndDo;
+			
+			TempStorageData = New Structure();
+			TempStorageData.Insert("SourceTable"       , SourceTable);
+			TempStorageData.Insert("SourceTableBuffer" , SourceTableBuffer);
+			
+			LoadParameters.Address = PutToTempStorage(TempStorageData, LoadParameters.Address);
+			
+			SourceTableCopy = SourceTable.Copy();
+			SourceTableCopy.GroupBy(GroupColumns);
+			ServerData.LoadData.CountRows = SourceTableCopy.Count() + SourceTableBuffer.Count();
+		Else	
+			
+			SourceTableCopy.GroupBy(GroupColumns);
+			ServerData.LoadData.CountRows = SourceTableCopy.Count();
+			
+		EndIf;
 	EndIf;
 	Return ServerData;
 EndFunction

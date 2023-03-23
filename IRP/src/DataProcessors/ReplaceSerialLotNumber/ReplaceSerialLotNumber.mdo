@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0a69bfec-feac-492c-8d66-6a42dfcc91d1">
+ <producedTypes>
+  <objectType typeId="c68206b0-b2b4-4373-b109-3e9861b148a2" valueTypeId="c0533a0c-6989-4c0c-aa0a-9b83d831801b"/>
+  <managerType typeId="9ed379c9-f76b-49ec-ab8a-45e6ab13122e" valueTypeId="ee318bec-d5be-491b-93cd-d7eb18841f8f"/>
+ </producedTypes>
+ <name>ReplaceSerialLotNumber</name>
+ <synonym>
+  <key>en</key>
+  <value>Replace serial lot number</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.ReplaceSerialLotNumber.Form.Form</defaultForm>
+ <forms uuid="d016ff4c-c04d-4767-b212-296e3df2ee78">
+  <name>Form</name>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+</mdclass:DataProcessor>

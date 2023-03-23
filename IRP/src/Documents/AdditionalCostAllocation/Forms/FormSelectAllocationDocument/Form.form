@@ -13,6 +13,60 @@
   </dataPath>
   <titleLocation>None</titleLocation>
   <items xsi:type="form:FormField">
+   <name>ListIcon</name>
+   <id>31</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>List.Icon</segments>
+   </dataPath>
+   <titleLocation>None</titleLocation>
+   <extendedTooltip>
+    <name>ListIconExtendedTooltip</name>
+    <id>33</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>ListIconContextMenu</name>
+    <id>32</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>PictureField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:ImageFieldExtInfo">
+    <width>1</width>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <horizontalStretch>true</horizontalStretch>
+    <verticalStretch>true</verticalStretch>
+    <valuesPicture xsi:type="core:PictureRef">
+     <picture>CommonPicture.IconCollection8</picture>
+    </valuesPicture>
+    <fileDragMode>AsFileRef</fileDragMode>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
    <name>ListBasis</name>
    <id>23</id>
    <visible>true</visible>
@@ -115,6 +169,37 @@
   <autoCommandBar>
    <name>ListCommandBar</name>
    <id>2</id>
+   <items xsi:type="form:Button">
+    <name>FormSelect</name>
+    <id>29</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <extendedTooltip>
+     <name>FormSelectExtendedTooltip</name>
+     <id>30</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <commandName>Form.Command.Select</commandName>
+    <representation>Auto</representation>
+    <defaultButton>true</defaultButton>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <placementArea>UserCmds</placementArea>
+    <representationInContextMenu>Auto</representationInContextMenu>
+   </items>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
@@ -301,44 +386,12 @@
  <autoCommandBar>
   <name>FormCommandBar</name>
   <id>-1</id>
-  <items xsi:type="form:Button">
-   <name>FormSelect</name>
-   <id>29</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <extendedTooltip>
-    <name>FormSelectExtendedTooltip</name>
-    <id>30</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <type>Label</type>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:LabelDecorationExtInfo">
-     <horizontalAlign>Left</horizontalAlign>
-    </extInfo>
-   </extendedTooltip>
-   <commandName>Form.Command.Select</commandName>
-   <representation>Auto</representation>
-   <defaultButton>true</defaultButton>
-   <autoMaxWidth>true</autoMaxWidth>
-   <autoMaxHeight>true</autoMaxHeight>
-   <placementArea>UserCmds</placementArea>
-   <representationInContextMenu>Auto</representationInContextMenu>
-  </items>
   <visible>true</visible>
   <enabled>true</enabled>
   <userVisible>
    <common>true</common>
   </userVisible>
   <horizontalAlign>Left</horizontalAlign>
-  <autoFill>true</autoFill>
  </autoCommandBar>
  <handlers>
   <event>OnCreateAtServer</event>
@@ -378,6 +431,7 @@
   </edit>
   <extInfo xsi:type="form:DynamicListExtInfo">
    <queryText>SELECT
+	1 AS Icon,
 	T6010S_BatchesInfo.Company,
 	T6010S_BatchesInfo.Document AS Basis
 FROM
@@ -412,6 +466,18 @@ WHERE
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>Company</dataPath>
     <field>Company</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Icon</dataPath>
+    <field>Icon</field>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Icon</value>
+      </content>
+     </localValue>
+    </title>
    </fields>
    <parameters>
     <name>Company</name>

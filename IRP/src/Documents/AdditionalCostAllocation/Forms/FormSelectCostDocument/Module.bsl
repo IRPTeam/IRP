@@ -20,9 +20,10 @@ Function GetSelectedData()
 		Return Undefined;
 	EndIf;
 	SelectedData = New Structure();
-	SelectedData.Insert("Document" , CurrentData.Basis);
-	SelectedData.Insert("Currency" , CurrentData.Currency);
-	SelectedData.Insert("Amount"   , CurrentData.Amount);
+	SelectedData.Insert("Document"  , CurrentData.Basis);
+	SelectedData.Insert("Currency"  , CurrentData.Currency);
+	SelectedData.Insert("Amount"    , CurrentData.Amount);
+	SelectedData.Insert("TaxAmount" , CurrentData.TaxAmount);
 	Return SelectedData;	
 EndFunction
 

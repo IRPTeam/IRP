@@ -13,6 +13,60 @@
   </dataPath>
   <titleLocation>None</titleLocation>
   <items xsi:type="form:FormField">
+   <name>ListIcon</name>
+   <id>34</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>List.Icon</segments>
+   </dataPath>
+   <titleLocation>None</titleLocation>
+   <extendedTooltip>
+    <name>ListIconExtendedTooltip</name>
+    <id>36</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>ListIconContextMenu</name>
+    <id>35</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>PictureField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:ImageFieldExtInfo">
+    <width>1</width>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <horizontalStretch>true</horizontalStretch>
+    <verticalStretch>true</verticalStretch>
+    <valuesPicture xsi:type="core:PictureRef">
+     <picture>CommonPicture.IconCollection8</picture>
+    </valuesPicture>
+    <fileDragMode>AsFileRef</fileDragMode>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
    <name>ListBasis</name>
    <id>23</id>
    <visible>true</visible>
@@ -212,9 +266,90 @@
     <textEdit>true</textEdit>
    </extInfo>
   </items>
+  <items xsi:type="form:FormField">
+   <name>ListTaxAmount</name>
+   <id>31</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>List.TaxAmount</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>ListTaxAmountExtendedTooltip</name>
+    <id>33</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>ListTaxAmountContextMenu</name>
+    <id>32</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>InputField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+   </extInfo>
+  </items>
   <autoCommandBar>
    <name>ListCommandBar</name>
    <id>2</id>
+   <items xsi:type="form:Button">
+    <name>FormSelect</name>
+    <id>29</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <extendedTooltip>
+     <name>FormSelectExtendedTooltip</name>
+     <id>30</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <commandName>Form.Command.Select</commandName>
+    <representation>Auto</representation>
+    <defaultButton>true</defaultButton>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <placementArea>UserCmds</placementArea>
+    <representationInContextMenu>Auto</representationInContextMenu>
+   </items>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
@@ -401,44 +536,12 @@
  <autoCommandBar>
   <name>FormCommandBar</name>
   <id>-1</id>
-  <items xsi:type="form:Button">
-   <name>FormSelect</name>
-   <id>29</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <extendedTooltip>
-    <name>FormSelectExtendedTooltip</name>
-    <id>30</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <type>Label</type>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:LabelDecorationExtInfo">
-     <horizontalAlign>Left</horizontalAlign>
-    </extInfo>
-   </extendedTooltip>
-   <commandName>Form.Command.Select</commandName>
-   <representation>Auto</representation>
-   <defaultButton>true</defaultButton>
-   <autoMaxWidth>true</autoMaxWidth>
-   <autoMaxHeight>true</autoMaxHeight>
-   <placementArea>UserCmds</placementArea>
-   <representationInContextMenu>Auto</representationInContextMenu>
-  </items>
   <visible>true</visible>
   <enabled>true</enabled>
   <userVisible>
    <common>true</common>
   </userVisible>
   <horizontalAlign>Left</horizontalAlign>
-  <autoFill>true</autoFill>
  </autoCommandBar>
  <handlers>
   <event>OnCreateAtServer</event>
@@ -478,10 +581,12 @@
   </edit>
   <extInfo xsi:type="form:DynamicListExtInfo">
    <queryText>SELECT
+	1 AS Icon,
 	R6080T_OtherPeriodsRevenues.Basis,
 	R6080T_OtherPeriodsRevenues.Company,
 	R6080T_OtherPeriodsRevenues.Currency,
-	SUM(R6080T_OtherPeriodsRevenues.AmountBalance) AS Amount
+	SUM(R6080T_OtherPeriodsRevenues.AmountBalance) AS Amount,
+	SUM(R6080T_OtherPeriodsRevenues.AmountTaxBalance) AS TaxAmount
 FROM
 	AccumulationRegister.R6080T_OtherPeriodsRevenues.Balance(&amp;BalancePeriod, Company = &amp;Company
 	AND CurrencyMovementType = &amp;CurrencyMovementType
@@ -541,6 +646,34 @@ GROUP BY
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>CurrencyMovementType</dataPath>
     <field>CurrencyMovementType</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>TransactionCurrency</dataPath>
+    <field>TransactionCurrency</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Icon</dataPath>
+    <field>Icon</field>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Icon</value>
+      </content>
+     </localValue>
+    </title>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>TaxAmount</dataPath>
+    <field>TaxAmount</field>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Tax amount</value>
+      </content>
+     </localValue>
+    </title>
    </fields>
    <parameters>
     <name>BalancePeriod</name>

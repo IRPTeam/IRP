@@ -5,18 +5,10 @@
   <listType typeId="c4895461-8815-4b34-a701-9afc7adad8ca" valueTypeId="cc8585d7-1cc2-4b80-87cd-fefe8b2c185d"/>
   <managerType typeId="c7bec0fa-4d62-48f4-b23c-70edb403ba50" valueTypeId="0f7d8b6d-46b1-4d31-9f60-4b87fce6ad0d"/>
  </producedTypes>
- <name>InventoryOrigingTypes</name>
+ <name>InventoryOriginTypes</name>
  <synonym>
   <key>en</key>
-  <value>Inventory origing types</value>
- </synonym>
- <synonym>
-  <key>ru</key>
-  <value>Виды источников происхождения</value>
- </synonym>
- <synonym>
-  <key>tr</key>
-  <value>Envanter menşei tipleri</value>
+  <value>Inventory origin types</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -26,28 +18,12 @@
    <key>en</key>
    <value>Own stocks</value>
   </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Наши остатки</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Kendi stoklar</value>
-  </synonym>
  </enumValues>
  <enumValues uuid="10251ca8-1774-461c-b5ca-cb919cfa3357">
   <name>ConsignorStocks</name>
   <synonym>
    <key>en</key>
    <value>Consignor stocks</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Товары комитента</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Konsinye stoklar</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

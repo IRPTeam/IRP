@@ -1132,7 +1132,7 @@
     <value>Envanter menşei</value>
    </synonym>
    <type>
-    <types>EnumRef.InventoryOrigingTypes</types>
+    <types>EnumRef.InventoryOriginTypes</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

@@ -53,18 +53,38 @@ EndProcedure
 Procedure UseSerialLotNumberOnChange(Item)
 	If Not Object.UseSerialLotNumber Then
 		Object.StockBalanceDetail = PredefinedValue("Enum.StockBalanceDetail.ByItemKey");
+		Object.SingleRow = False;
 	EndIf;
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure SingleRowOnChange(Item)
+	If Object.SingleRow Then
+		Object.AlwaysAddNewRowAfterScan = True;
+		Object.NotUseLineGrouping = True;
+	EndIf; 
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure AlwaysAddNewRowAfterScanOnChange(Item)
+	If Object.AlwaysAddNewRowAfterScan Then
+		Object.NotUseLineGrouping = True;
+	EndIf;
+	SetVisibilityAvailability(Object, ThisObject);	
+EndProcedure
+
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	VisibleOfSerialLotNumber = (Object.Type = PredefinedValue("Enum.ItemTypes.Product"));
-	Form.Items.UseSerialLotNumber.Visible  = VisibleOfSerialLotNumber;
-	Form.Items.StockBalanceDetail.Visible = VisibleOfSerialLotNumber;
-	If VisibleOfSerialLotNumber Then
-		Form.Items.StockBalanceDetail.ReadOnly = Not Object.UseSerialLotNumber;
-	EndIf;
+	IsProduct = (Object.Type = PredefinedValue("Enum.ItemTypes.Product"));
+	Form.Items.UseSerialLotNumber.ReadOnly = Not IsProduct;
+	Form.Items.PageSerialLotNumbersSettings.Visible = IsProduct And Object.UseSerialLotNumber;
+	Form.Items.StockBalanceDetail.ReadOnly = Not Object.UseSerialLotNumber;
+	Form.Items.AlwaysAddNewRowAfterScan.ReadOnly = IsProduct And Object.UseSerialLotNumber And Object.SingleRow;
+	
+	Form.Items.NotUseLineGrouping.ReadOnly = Object.SingleRow 
+		Or Object.AlwaysAddNewRowAfterScan;
 EndProcedure
 
 #EndRegion

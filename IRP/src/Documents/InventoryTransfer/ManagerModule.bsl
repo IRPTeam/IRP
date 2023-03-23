@@ -310,8 +310,6 @@ Function ItemList()
 		|		ELSE InventoryTransferItemList.ProductionPlanning
 		|	END AS InventoryTransferOrder,
 		|	CASE
-		|		WHEN NOT InventoryTransferItemList.ProductionPlanning.Ref IS NULL
-		|			THEN TRUE
 		|		WHEN NOT InventoryTransferItemList.InventoryTransferOrder.Ref IS NULL
 		|			THEN TRUE
 		|		ELSE FALSE
@@ -324,8 +322,8 @@ Function ItemList()
 		|	InventoryTransferItemList.ProductionPlanning AS ProductionPlanning,
 		|	NOT InventoryTransferItemList.ProductionPlanning.Ref IS NULL AS UseProductionPlanning,
 		|	InventoryTransferItemList.Key AS Key,
-		|	InventoryTransferItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.OwnStocks) AS IsOwnStocks,
-		|	InventoryTransferItemList.InventoryOrigin = VALUE(Enum.InventoryOrigingTypes.ConsignorStocks) AS IsConsignorStocks
+		|	InventoryTransferItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
+		|	InventoryTransferItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks
 		|INTO ItemList
 		|FROM
 		|	Document.InventoryTransfer.ItemList AS InventoryTransferItemList
@@ -695,7 +693,7 @@ Function R4021B_StockTransferOrdersReceipt()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		   |	ItemList.StoreReceiver AS Store,
-		   |	ItemList.InventoryTransferOrderExists AS Order,
+		   |	ItemList.InventoryTransferOrder AS Order,
 		   |	*
 		   |INTO R4021B_StockTransferOrdersReceipt
 		   |FROM
@@ -709,7 +707,7 @@ Function R4022B_StockTransferOrdersShipment()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		   |	ItemList.StoreSender AS Store,
-		   |	ItemList.InventoryTransferOrderExists AS Order,
+		   |	ItemList.InventoryTransferOrder AS Order,
 		   |	*
 		   |INTO R4022B_StockTransferOrdersShipment
 		   |FROM

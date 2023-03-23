@@ -173,7 +173,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 			If Not CommonFunctionsClientServer.ObjectHasProperty(Row, "InventoryOrigin") Then
 				Continue;
 			EndIf;
-			If Row.InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
+			If Row.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then
 				ServerParameters.RowsConsignorStocks.Add(Row);
 			EndIf;
 		EndDo;
@@ -4513,16 +4513,9 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 	
 	TableRows =  GetRows(Parameters, Parameters.TableName);
 	If UseInventoryOrigin Then
-//		If TableRows.Count() 
-//			And TableRows[0].Property("InventoryOrigin") 
-//			And TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
-//			
-//			TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
-//			Parameters.RowsForRecalculate = TableRows;
-//		EndIf;
 		If TableRows.Count() = 1
 			And TableRows[0].Property("InventoryOrigin") Then
-			If TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then			
+			If TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then			
 				TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
 				Parameters.RowsForRecalculate = TableRows;
 			EndIf;
@@ -4530,7 +4523,7 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 			TableRows = New Array();
 			For Each Row In TableRows Do
 				If Row.Property("InventoryOrigin") 
-					And Row.InventoryOrigin = PredefinedValue("Enum.InventoryOrigingTypes.ConsignorStocks") Then
+					And Row.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then
 					TableRows.Add(Row);
 				EndIf;
 			EndDo;
@@ -12803,9 +12796,20 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 	If Result.Count() <> 1 Then
 		Raise "load more than one table not implemented";
 	EndIf;
-	SourceTable = GetFromTempStorage(Result[0].Value);
 	
-	SourceTableExpanded = Undefined;
+	SourceTable       = New ValueTable();
+	SourceTableBuffer = New ValueTable();
+	TempStorageData = GetFromTempStorage(Result[0].Value);
+	If TypeOf(TempStorageData) = Type("ValueTable") Then
+		SourceTable = TempStorageData;
+	ElsIf TypeOf(TempStorageData) = Type("Structure") Then
+		SourceTable = TempStorageData.SourceTable;
+		SourceTableBuffer = TempStorageData.SourceTableBuffer;
+	Else
+		Raise "not supported temp storage data type";
+	EndIf;
+		
+	SourceTableExpanded = New ValueTable();;
 	If Parameters.SerialLotNumbersExists Then
 		SourceTableExpanded = SourceTable.Copy();
 	EndIf;
@@ -12814,6 +12818,23 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 	SourceColumnsSumBy   = Parameters.LoadData.SourceColumnsSumBy;
 	
 	SourceTable.GroupBy(SourceColumnsGroupBy, SourceColumnsSumBy);
+	
+	SourceTable.Columns.Add("UniqueBufferKey");
+	SourceTableExpanded.Columns.Add("UniqueBufferKey");
+	
+	For Each Row In SourceTableBuffer Do
+		UniqueBufferKey = New UUID();
+		
+		NewRowSourceTable = SourceTable.Add(); 
+		FillPropertyValues(NewRowSourceTable, Row);
+		NewRowSourceTable.UniqueBufferKey = UniqueBufferKey;
+		
+		If Parameters.SerialLotNumbersExists Then
+			NewRowSourceTableExpanded = SourceTableExpanded.Add();
+			FillPropertyValues(NewRowSourceTableExpanded, Row);
+			NewRowSourceTableExpanded.UniqueBufferKey = UniqueBufferKey;
+		EndIf;
+	EndDo;
 	
 	// only for physical inventory
 	If Parameters.ObjectMetadataInfo.MetadataName = "PhysicalInventory"
@@ -12854,7 +12875,7 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 		
 		// add serial lot number to separated table
 		If Parameters.SerialLotNumbersExists Then
-			Filter = New Structure(SourceColumnsGroupBy);
+			Filter = New Structure(SourceColumnsGroupBy + ", UniqueBufferKey");
 			FillPropertyValues(Filter, SourceRow);
 			For Each RowSN In SourceTableExpanded.FindRows(Filter) Do
 				If Not ValueIsFilled(RowSN.SerialLotNumber) Then

@@ -1134,10 +1134,10 @@ Scenario: _016014 check price calculation in the documents (price by unit, scan 
 		* Add item by barcode
 			And in the table "ItemList" I click the button named "SearchByBarcode"
 			And I input "4820024700016" text in the field named "Barcode"
-			And I click the button named "OK"
+			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
 			And I input "89089988989989" text in the field named "Barcode"
-			And I click the button named "OK"
+			And I move to the next attribute
 		* Check
 			And "ItemList" table became equal
 				| 'Item key' | 'Price type'        | 'Item'  | 'Quantity' | 'Unit'           | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' |

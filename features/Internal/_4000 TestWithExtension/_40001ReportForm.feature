@@ -86,7 +86,7 @@ Scenario: _4000120 check reports option save
 		And I click "Save option..." button
 		And I click "Save as..." button
 		Then "Enter a new option name" window is opened
-		And I input "test1" text in "InputFld" field
+		And I input "test1" text in the field named "Barcode"
 		And I click "OK" button
 	* Check one more option save 
 		And I click "Change option..." button
@@ -123,7 +123,7 @@ Scenario: _4000120 check reports option save
 		And I click "Save option..." button
 		And I click "Save as..." button
 		Then "Enter a new option name" window is opened
-		And I input "test2" text in "InputFld" field
+		And I input "test2" text in the field named "Barcode"
 		And I click "OK" button
 		And I click "Save option..." button
 		And "OptionsList" table became equal

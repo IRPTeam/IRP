@@ -577,9 +577,10 @@ Scenario: _0850015 create retail sales receipt from POS (own stock, card 02)
 		And I click "Payment (+)" button
 		Then "Payment" window is opened
 		And I click "Card (*)" button
-		Then "Payment types" window is opened
-		And I click "Page_2" hyperlink
-		Then "Payment" window is opened
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 02'   |
+		And I select current line in "BankPaymentTypeList" table
 		And I click the button named "Enter"
 		And I close all client application windows	
 	* Check fiscal log
@@ -627,8 +628,10 @@ Scenario: _0850016 create retail sales receipt from POS (own stock, cash and car
 		And I click "Payment (+)" button
 		Then "Payment" window is opened
 		And I click "Card (*)" button
-		Then "Payment types" window is opened
-		And I click "Page_2" hyperlink
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 02'   |
+		And I select current line in "BankPaymentTypeList" table
 		And I activate field named "PaymentsAmountString" in "Payments" table
 		And I select current line in "Payments" table
 		And I click "4" button
@@ -719,7 +722,10 @@ Scenario: _08500181 advance payment (card)
 	* Advance
 		And I click the button named "Advance"
 		And I click "Card (*)" button
-		And I click the hyperlink named "Page_1"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 04'   |
+		And I select current line in "BankPaymentTypeList" table
 		And I click "1" button
 		And I click "0" button
 		And I click the button named "Enter"
@@ -757,8 +763,10 @@ Scenario: _0850019 create retail sales receipt from POS (own stock, card 03, use
 		And I click "Payment (+)" button
 		Then "Payment" window is opened
 		And I click "Card (*)" button
-		And I click the hyperlink named "Page_0"
-		Then "Payment" window is opened
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 03'   |
+		And I select current line in "BankPaymentTypeList" table
 		And I click "Pay" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
@@ -796,11 +804,16 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 	* Check auto payment by card
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
-		And I click the hyperlink named "Page_0"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 04'   |
+		And I select current line in "BankPaymentTypeList" table
 		And I click "5" button
 		And I click "0" button
-		And I click "Card (*)" button
-		And I click the hyperlink named "Page_1"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 03'   |
+		And I select current line in "BankPaymentTypeList" table
 		And I click the button named "Enter"
 		And I click "OK" button
 		And I click "OK" button
@@ -877,13 +890,17 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 		And I click "Payment Return" button
 		Then "Payment" window is opened
 		And I click "Card (*)" button
-		Then "Payment types" window is opened
-		And I click the hyperlink named "Page_0"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 04'   |
+		And I select current line in "BankPaymentTypeList" table
 		Then "Payment" window is opened
 		And I click "5" button
 		And I click "0" button
-		And I click "Card (*)" button
-		And I click the hyperlink named "Page_1"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 03'   |
+		And I select current line in "BankPaymentTypeList" table
 		Then "Payment" window is opened
 		And I click "4" button
 		And I click "0" button
@@ -942,8 +959,10 @@ Scenario: _0850024 return by card without basis document (without RRN)
 		And I click the button named "Return"
 		And I click "Payment Return" button
 		And I click "Card (*)" button
-		Then "Payment types" window is opened
-		And I click the hyperlink named "Page_1"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 03'   |
+		And I select current line in "BankPaymentTypeList" table
 		And "Payments" table became equal
 			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode' |
 			| '⚪'            | 'Card 03'      | '200,00' | ''        |
@@ -951,7 +970,7 @@ Scenario: _0850024 return by card without basis document (without RRN)
 		And I click "Return" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		And I click "Enter" button
+		And I click the button named "Enter" 
 	* Check
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And I go to line in "List" table
@@ -986,8 +1005,10 @@ Scenario: _08500241 return by card without basis document (with RRN)
 		And I click the button named "Return"
 		And I click "Payment Return" button
 		And I click "Card (*)" button
-		Then "Payment types" window is opened
-		And I click the hyperlink named "Page_1"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 03'   |
+		And I select current line in "BankPaymentTypeList" table
 		And "Payments" table became equal
 			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode' |
 			| '⚪'            | 'Card 03'      | '111,00' | ''        |
@@ -995,7 +1016,7 @@ Scenario: _08500241 return by card without basis document (with RRN)
 		And I select current line in "Payments" table
 		And I input "23457" text in "RRNCode" field of "Payments" table
 		And I finish line editing in "Payments" table
-		And I click "Enter" button		
+		And I click the button named "Enter"		
 		And I click "OK" button
 	* Check
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
@@ -1026,11 +1047,16 @@ Scenario: _0850020 check auto card payment cancellation (acquiring)
 	* Card payment
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
-		And I click the hyperlink named "Page_0"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 04'   |
+		And I select current line in "BankPaymentTypeList" table
 		And I click "9" button
 		And I click "0" button
-		And I click "Card (*)" button
-		And I click the hyperlink named "Page_1"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 03'   |
+		And I select current line in "BankPaymentTypeList" table
 		And I go to line in "Payments" table
 			| 'Amount' | 'Payment done' | 'Payment type' |
 			| '90,00'  | '⚪'            | 'Card 04'      |
@@ -1045,7 +1071,7 @@ Scenario: _0850020 check auto card payment cancellation (acquiring)
 			And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
 			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОПЛАТА'
 			And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '90.00'
-		And I click "Enter" button
+		And I click the button named "Enter"
 		Then "1C:Enterprise" window is opened
 		And I click "Cancel" button
 		Then "1C:Enterprise" window is opened
@@ -1080,26 +1106,38 @@ Scenario: _0850021 check the form of payment by card
 	* Card payment
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
-		And I click the hyperlink named "Page_0"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 03'   |
+		And I select current line in "BankPaymentTypeList" table
 		And I click "9" button
 		And I click "0" button
-		And I click "Card (*)" button
-		And I click the hyperlink named "Page_1"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 04'   |
+		And I select current line in "BankPaymentTypeList" table
 	* Close payment window
 		And I click "X" button
 		Then I wait "Payment" window closing in "5" seconds
 	* Add card payment
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
-		And I click the hyperlink named "Page_0"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 04'   |
+		And I select current line in "BankPaymentTypeList" table
 		And I click "5" button
 		And I click "0" button
-		And I click "Card (*)" button
-		And I click the hyperlink named "Page_0"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 03'   |
+		And I select current line in "BankPaymentTypeList" table
 		And I click "4" button
 		And I click "0" button
-		And I click "Card (*)" button
-		And I click the hyperlink named "Page_1"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 04'   |
+		And I select current line in "BankPaymentTypeList" table
 	* Payment by first card
 		And I go to line in "Payments" table
 			| 'Amount' | 'Payment done' | 'Payment type' |
@@ -1272,7 +1310,10 @@ Scenario: _0850029 return retail customer advanve from POS (card)
 			And I click the button named "Return"
 			And I click the button named "Advance"
 			And I click "Card (*)" button
-			And I click the hyperlink named "Page_0"			
+			And I go to line in "BankPaymentTypeList" table
+				| 'Reference' |
+				| 'Card 03'   |
+			And I select current line in "BankPaymentTypeList" table		
 			And I click "2" button
 			And I click "0" button
 			And I click "0" button

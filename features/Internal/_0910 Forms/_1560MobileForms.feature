@@ -116,7 +116,7 @@ Scenario: _0156010 Store keeper workspace (create GR)
 		And I click "SearchByBarcode" button
 		Then "Enter a barcode" window is opened
 		And I input "2202283713" text in the field named "Barcode"
-		And I click the button named "OK"
+		And I move to the next attribute
 		And "GoodsInTransitIncoming" table became equal
 			| 'Number' | 'Date'       | 'Quantity' |
 			| '21'     | '01.03.2021' | '10,000'   |
@@ -166,7 +166,7 @@ Scenario: _0156012 Store keeper workspace (try create GR without IT)
 	* Scan item
 		And I click "Input barcode" button
 		And I input "2202283739" text in the field named "Barcode"
-		And I click the button named "OK"	
+		And I move to the next attribute	
 		And I input "5,000" text in the field named "Quantity"
 		And the editing text of form attribute named "Quantity" became equal to "5,000"
 		Then the form attribute named "Unit" became equal to "pcs"
@@ -198,7 +198,7 @@ Scenario: _0156050 check items in the document by scan barcode
 	* Scan Items
 		And I click the button named "SearchByBarcode"	
 		And I input "2202283713" text in the field named "Barcode"
-		And I click the button named "OK"
+		And I move to the next attribute
 		Then "Row form" window is opened
 		And I input "9,000" text in "You scan" field
 		And I move to the next attribute	
@@ -210,7 +210,7 @@ Scenario: _0156050 check items in the document by scan barcode
 			| 'Shirt'    | '4' | '36/Red'    | 'pcs'  | '15,000'   | ''        |
 		And I click the button named "SearchByBarcode"	
 		And I input "2202283739" text in the field named "Barcode"
-		And I click the button named "OK"
+		And I move to the next attribute
 		Then "Row form" window is opened
 		And I input "7,000" text in "You scan" field
 		And I move to the next attribute
@@ -223,7 +223,7 @@ Scenario: _0156050 check items in the document by scan barcode
 			| 'Dress'    | '5' | 'L/Green'   | 'pcs'  | ''         | '7,000'   |
 		And I click the button named "SearchByBarcode"	
 		And I input "2202283713" text in the field named "Barcode"
-		And I click the button named "OK"
+		And I move to the next attribute
 		Then "Row form" window is opened
 		And I input "1,000" text in "You scan" field
 		And I move to the next attribute	
@@ -314,17 +314,17 @@ Scenario: _0156051 check items in the document by scan barcode (with serial lot 
 		And in the table "ItemList" I click "Open scan form" button
 		And I click the button named "SearchByBarcode"	
 		And I input "8908899880" text in the field named "Barcode"
-		And I click the button named "OK"		
+		And I move to the next attribute		
 		And I input "1,000" text in "You scan" field
 		And I move to the next attribute
 		And I click the button named "SearchByBarcode"	
 		And I input "8908899881" text in the field named "Barcode"
-		And I click the button named "OK"		
+		And I move to the next attribute		
 		And I input "1,000" text in "You scan" field
 		And I move to the next attribute
 		And I click the button named "SearchByBarcode"	
 		And I input "7889000090009" text in the field named "Barcode"
-		And I click the button named "OK"	
+		And I move to the next attribute	
 		And I click Select button of "Serial lot number" field
 		And I click the button named "FormCreate"
 		And I input "12345" text in "Serial number" field
@@ -395,17 +395,17 @@ Scenario: _0156052 check items in the document by scan barcode (document without
 		And in the table "ItemList" I click "Open scan form" button
 		And I click the button named "SearchByBarcode"	
 		And I input "8908899880" text in the field named "Barcode"
-		And I click the button named "OK"		
+		And I move to the next attribute	
 		And I input "1,000" text in "You scan" field
 		And I move to the next attribute
 		And I click the button named "SearchByBarcode"	
 		And I input "8908899881" text in the field named "Barcode"
-		And I click the button named "OK"		
+		And I move to the next attribute		
 		And I input "1,000" text in "You scan" field
 		And I move to the next attribute
 		And I click the button named "SearchByBarcode"	
 		And I input "2202283739" text in the field named "Barcode"
-		And I click the button named "OK"
+		And I move to the next attribute
 		And I input "2,000" text in "You scan" field
 		And I move to the next attribute
 		And "ItemList" table became equal

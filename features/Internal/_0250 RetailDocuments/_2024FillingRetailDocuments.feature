@@ -714,7 +714,7 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 			| 'Payment type' | 'Amount'   |
 			| 'Cash'         | '2 051,00' |
 		Then the form attribute named "Cashback" became equal to "1"
-		And I click "Enter" button
+		And I click "OK" button
 		And "ItemList" table does not contain lines
 			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''       | '550,00' |
@@ -805,7 +805,10 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
 		// And I click "[2] Card 01" button	
-		And I click the hyperlink named "Page_1"			
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 01'   |
+		And I select current line in "BankPaymentTypeList" table		
 		And I click "2" button
 		And I click "0" button
 		And I click "5" button
@@ -814,7 +817,7 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 		And "Payments" table became equal
 			| 'Payment type'    | 'Amount'   |
 			| 'Card 01'         | '2 050,00' |
-		And I click "Enter" button
+		And I click "OK" button
 		And Delay 4
 		And "ItemList" table does not contain lines
 			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
@@ -1068,7 +1071,10 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "8" button
 			And I click "8" button
 			And I click "Card (*)" button
-			And I click the hyperlink named "Page_1"
+			And I go to line in "BankPaymentTypeList" table
+				| 'Reference' |
+				| 'Card 01'   |
+			And I select current line in "BankPaymentTypeList" table
 			And I click "1" button
 			And I click "0" button
 			And I click "0" button
@@ -1154,8 +1160,10 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Payment type' |
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
-				And I click "Card (*)" button
-				And I click the hyperlink named "Page_1"
+				And I go to line in "BankPaymentTypeList" table
+					| 'Reference' |
+					| 'Card 01'   |
+				And I select current line in "BankPaymentTypeList" table
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
@@ -1174,8 +1182,10 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Payment type' |
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
-				And I click "Card (*)" button
-				And I click the hyperlink named "Page_1"
+				And I go to line in "BankPaymentTypeList" table
+					| 'Reference' |
+					| 'Card 01'   |
+				And I select current line in "BankPaymentTypeList" table
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
@@ -1197,8 +1207,10 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Payment type' |
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
-				And I click "Card (*)" button
-				And I click the hyperlink named "Page_1"
+				And I go to line in "BankPaymentTypeList" table
+					| 'Reference' |
+					| 'Card 01'   |
+				And I select current line in "BankPaymentTypeList" table
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
@@ -1401,7 +1413,7 @@ Scenario: _0154139 check payments form in the Point of sale
 				| 'Payment type' | 'Amount'   |
 				| 'Cash'         | '0,10' |
 			Then the form attribute named "Cashback" became equal to "0,01"
-			And I click "Enter" button
+			And I click "OK" button
 		And I close all client application windows
 		
 Scenario: _0154140 check filling in retail customer from the POS (without partner)
@@ -1427,7 +1439,7 @@ Scenario: _0154140 check filling in retail customer from the POS (without partne
 	* Payment
 		And I click "Payment (+)" button
 		And I click "Cash (/)" button
-		And I click "Enter" button
+		And I click "OK" button
 	* Check Retail Sales Receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to the last line in "List" table
@@ -1587,7 +1599,7 @@ Scenario:  _0154142 change comment in POS
 	* Payment
 		And I click "Payment (+)" button
 		And I click "Cash (/)" button
-		And I click "Enter" button
+		And I click "OK" button
 	* Check Retail Sales Receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to the last line in "List" table
@@ -1652,7 +1664,7 @@ Scenario:  _0154143 change payment term in POS
 	* Payment
 		And I click "Payment (+)" button
 		And I click "Cash (/)" button
-		And I click "Enter" button
+		And I click "OK" button
 	* Check Retail Sales Receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to the last line in "List" table
@@ -3844,7 +3856,7 @@ Scenario: _0154175 check change amount in POS
 		And I click "0" button
 		And I click "5" button
 		And I click "0" button
-		And I click "Enter" button
+		And I click "OK" button
 		And I close current window
 		And Delay 2
 	* Check Retail Sales Receipt
@@ -3897,7 +3909,7 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 	* Payment
 		And I click "Payment (+)" button
 		And I click "Cash (/)" button
-		And I click "Enter" button
+		And I click "OK" button
 	* Check Retail Sales Receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to the last line in "List" table
@@ -4070,25 +4082,23 @@ Scenario: _0154192 create document Retail Sales Receipt from Point of sale (paym
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
 	* Select payment type from group					
-		Then "Payment types" window is opened
-		And I click the hyperlink named "Page_0"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 01'   |
+		And I select current line in "BankPaymentTypeList" table
+		And I click "2" button
+		And I click "0" button
+		And I click "0" button
 		And I move to the next attribute		
-		And I click "[0]" button
-		And I click "[Esc]" button
-		And I click "Card (*)" button
-		And I click the hyperlink named "Page_0"	
-		And I click the hyperlink named "PayButton_0_0"
-		Then "Payment" window is opened
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 02'   |
+		And I select current line in "BankPaymentTypeList" table	
 		And I click "2" button
 		And I click "0" button
 		And I click "0" button
-		And I click "Card (*)" button
-		And I click the hyperlink named "Page_1"	
-		Then "Payment" window is opened
-		And I click "2" button
-		And I click "0" button
-		And I click "0" button
-		And I click the button named "Enter"
+		And I move to the next attribute
+		And I click "OK" button
 		And I close all client application windows
 		
 Scenario: _0154193 check print last receipt from POS

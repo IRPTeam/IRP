@@ -75,7 +75,7 @@ Scenario: _5003 create IT + PR from Production Workspace (product)
 	* Add item info (product, add by barcode)
 		And I click "Input barcode" button
 		And I input "5678900009900990" text in the field named "Barcode"
-		And I click the button named "OK"
+		And I move to the next attribute
 	* Check filling item info
 		Then the form attribute named "Item" became equal to "Стремянка номер 6 ступенчатая"
 		Then the form attribute named "ItemKey" became equal to "Стремянка номер 6 ступенчатая"

@@ -12,6 +12,10 @@ EndProcedure
 
 #Region Public
 
+Procedure BeforePayment(Object, Cancel, AddInfo = Undefined) Export
+	Return;
+EndProcedure
+
 Function GetLastRetailSalesReceiptDoc(AddInfo = Undefined) Export
 	Query = New Query();
 	Query.Text =

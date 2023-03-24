@@ -8,7 +8,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|	R6080T_OtherPeriodsRevenues.RowID,
 	|	R6080T_OtherPeriodsRevenues.ItemKey,
 	|	R6080T_OtherPeriodsRevenues.Currency,
-	|	R6080T_OtherPeriodsRevenues.AmountBalance AS Amount
+	|	R6080T_OtherPeriodsRevenues.AmountBalance AS Amount,
+	|	R6080T_OtherPeriodsRevenues.AmountTaxBalance AS TaxAmount
 	|FROM
 	|	AccumulationRegister.R6080T_OtherPeriodsRevenues.Balance(&BalancePeriod, Company = &Company
 	|	AND CurrencyMovementType = &CurrencyMovementType) AS R6080T_OtherPeriodsRevenues
@@ -35,8 +36,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		NewRow_TopLevel.Document = QuerySelection_Document.Document;
 		NewRow_TopLevel.Presentation = String(QuerySelection_Document.Document);
 		QuerySelection_Details = QuerySelection_Document.Select();
-		TotalAmount = 0;
-		TotalCurrency = Undefined;
+		TotalAmount    = 0;
+		TotalTaxAmount = 0;
+		TotalCurrency  = Undefined;
 		While QuerySelection_Details.Next() Do
 			NewRow_SecondLevel = NewRow_TopLevel.GetItems().Add();
 			NewRow_SecondLevel.Level = 2;
@@ -47,11 +49,13 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 				QuerySelection_Details.RowID, QuerySelection_Details.Document) <> Undefined Then
 				NewRow_SecondLevel.Use = True;
 			EndIf;
-			TotalAmount = TotalAmount + NewRow_SecondLevel.Amount;
-			TotalCurrency = NewRow_SecondLevel.Currency;
+			TotalAmount    = TotalAmount    + NewRow_SecondLevel.Amount;
+			TotalTaxAmount = TotalTaxAmount + NewRow_SecondLevel.TaxAmount;
+			TotalCurrency  = NewRow_SecondLevel.Currency;
 		EndDo;
-		NewRow_TopLevel.Amount = TotalAmount;
-		NewRow_TopLevel.Currency = TotalCurrency;
+		NewRow_TopLevel.Amount    = TotalAmount;
+		NewRow_TopLevel.TaxAmount = TotalTaxAmount;
+		NewRow_TopLevel.Currency  = TotalCurrency;
 	EndDo;
 EndProcedure
 
@@ -79,6 +83,7 @@ Procedure Ok(Command)
 			SelectedRow.Insert("ItemKey"  , Row_SecondLevel.ItemKey);
 			SelectedRow.Insert("Currency" , Row_SecondLevel.Currency);
 			SelectedRow.Insert("Amount"   , Row_SecondLevel.Amount);
+			SelectedRow.Insert("TaxAmount", Row_SecondLevel.TaxAmount);
 			Result.SelectedRows.Add(SelectedRow);
 		EndDo;
 	EndDo;

@@ -862,9 +862,81 @@ Scenario: _020138 load data in the Work sheet
 			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
 		And I close all client application windows
 				
+
+Scenario: _020139 load data in the SI (each sln new row, load by sln)
+		And I close all client application windows
+	* Open Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Check load data form
+		And in the table "ItemList" I click "Load data from table" button
+		And I change "Load type" radio button value to "Serial lot number"		
+	* Add barcodes
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009098"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2"
+		And in "Template" spreadsheet document I move to "R4C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009099"
+		And in "Template" spreadsheet document I move to "R4C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "1"
+		And in "Template" spreadsheet document I move to "R5C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009100"
+		And in "Template" spreadsheet document I move to "R5C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "1"
+		And I click "Next" button
+		And I click "Next" button
+	* Check document
+		And "ItemList" table became equal
+			| 'Inventory origin' | 'Item'                         | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Quantity' |
+			| 'Own stocks'       | 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | '9009098'            | '2,000'    |
+			| 'Own stocks'       | 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | '9009099'            | '1,000'    |
+			| 'Own stocks'       | 'Product 7 with SLN (new row)' | 'ODS'      | 'pcs'  | '9009100'            | '1,000'    |		
+		And I close all client application windows
 		
 				
-	
+
+Scenario: _020140 load data in the SI (each sln new row, load by barcode)
+		And I close all client application windows
+	* Open Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Check load data form
+		And in the table "ItemList" I click "Load data from table" button	
+	* Add barcodes
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009098"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2"
+		And in "Template" spreadsheet document I move to "R4C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009099"
+		And in "Template" spreadsheet document I move to "R4C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "1"
+		And in "Template" spreadsheet document I move to "R5C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009100"
+		And in "Template" spreadsheet document I move to "R5C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "1"
+		And I click "Next" button
+		And I click "Next" button
+	* Check document
+		And "ItemList" table became equal
+			| 'Inventory origin' | 'Item'                         | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Quantity' |
+			| 'Own stocks'       | 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | '9009098'            | '2,000'    |
+			| 'Own stocks'       | 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | '9009099'            | '1,000'    |
+			| 'Own stocks'       | 'Product 7 with SLN (new row)' | 'ODS'      | 'pcs'  | '9009100'            | '1,000'    |		
+		And I close all client application windows	
 				
 		
 				

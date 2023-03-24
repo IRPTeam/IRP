@@ -483,7 +483,7 @@ Procedure SpecialOffersEditFinish_ForDocument(Result, AdditionalParameters) Expo
 		Return;
 	EndIf;
 	CalculateOffersAfterSet(Result);
-	OffersClient.SpecialOffersEditFinish_ForDocument(Result, Object, ThisObject, AdditionalParameters);
+	OffersClient.SpecialOffersEditFinish_ForDocument(Object, ThisObject, AdditionalParameters);
 EndProcedure
 
 &AtServer

@@ -5,7 +5,7 @@ Procedure OpenFormPickupSpecialOffers_ForDocument(Object, Form, NotifyEditFinish
 			 FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
-Procedure SpecialOffersEditFinish_ForDocument(OffersInfo, Object, Form, AddInfo = Undefined) Export
+Procedure SpecialOffersEditFinish_ForDocument(Object, Form, AddInfo = Undefined) Export
 	If Form.TaxAndOffersCalculated Then
 		Form.TaxAndOffersCalculated = False;
 	EndIf;

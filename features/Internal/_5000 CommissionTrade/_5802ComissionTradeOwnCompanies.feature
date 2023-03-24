@@ -1577,11 +1577,9 @@ Scenario: _05830 сheck recognition of own and commission goods when scanning a 
 	* Scan item (Dress M/Brown)
 		* Own stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
@@ -1589,11 +1587,9 @@ Scenario: _05830 сheck recognition of own and commission goods when scanning a 
 				| '1' | 'Own stocks'       | 'Basic Price Types' | 'Dress' | 'M/Brown'  | ''                   | 'No'                 | '152,54'     | 'pcs'  | ''                   | '2,000'    | '500,00' | '18%' | ''              | '847,46'     | '1 000,00'     | 'Store 01' |
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute	
 			And "ItemList" table became equal
@@ -1602,7 +1598,6 @@ Scenario: _05830 сheck recognition of own and commission goods when scanning a 
 				| 'Consignor stocks' | 'Basic Price Types' | 'Dress' | 'M/Brown'  | ''                   | 'No'                 | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'No'             | 'Store 01' |
 		* Over stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute				
 			And "ItemList" table became equal
@@ -1612,11 +1607,9 @@ Scenario: _05830 сheck recognition of own and commission goods when scanning a 
 	* Scan item (Dress S/Yellow)		
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283713" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283713" text in the field named "Barcode"
 			And I move to the next attribute	
 			And "ItemList" table became equal
@@ -1627,25 +1620,20 @@ Scenario: _05830 сheck recognition of own and commission goods when scanning a 
 	* Scan item with serial lot number (with stock balance detail, own and consignor stock)
 		* Own stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977893" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977893" text in the field named "Barcode"
 			And I move to the next attribute
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977893" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977893" text in the field named "Barcode"
 			And I move to the next attribute
 		* Over stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977893" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
@@ -1658,16 +1646,13 @@ Scenario: _05830 сheck recognition of own and commission goods when scanning a 
 	* Scan item with serial lot number (with stock balance detail, only consignor stock)
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977894" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977894" text in the field named "Barcode"
 			And I move to the next attribute
 		* Over stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977894" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
@@ -1680,16 +1665,13 @@ Scenario: _05830 сheck recognition of own and commission goods when scanning a 
 	* Scan item with serial lot number (with stock balance detail, only own stock)
 		* Own stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977895" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977895" text in the field named "Barcode"
 			And I move to the next attribute
 		* Over stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977895" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
@@ -1767,11 +1749,9 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 	* Scan item (Dress M/Brown)
 		* Own stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
@@ -1779,11 +1759,9 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 				| 'Own stocks'       | 'Dress' | 'M/Brown'  | 'pcs'  | ''                   | '2,000'    |
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
@@ -1792,7 +1770,6 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 				| 'Consignor stocks' | 'Dress' | 'M/Brown'  | 'pcs'  | ''                   | '2,000'    |
 		* Over stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute				
 			And "ItemList" table became equal
@@ -1802,11 +1779,9 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 	* Scan item (Dress S/Yellow)		
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283713" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283713" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
@@ -1817,25 +1792,20 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 	* Scan item with serial lot number (with stock balance detail, own and consignor stock)
 		* Own stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977893" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977893" text in the field named "Barcode"
 			And I move to the next attribute
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977893" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977893" text in the field named "Barcode"
 			And I move to the next attribute
 		* Over stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977893" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
@@ -1848,16 +1818,13 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 	* Scan item with serial lot number (with stock balance detail, only consignor stock)
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977894" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977894" text in the field named "Barcode"
 			And I move to the next attribute
 		* Over stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977894" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
@@ -1870,16 +1837,13 @@ Scenario: _05831 сheck recognition of own and commission goods when scanning a 
 	* Scan item with serial lot number (with stock balance detail, only own stock)
 		* Own stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977895" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977895" text in the field named "Barcode"
 			And I move to the next attribute
 		* Over stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977895" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
@@ -1932,11 +1896,9 @@ Scenario: _05832 сheck recognition of own and commission goods when scanning a 
 	* Scan item (Dress M/Brown)
 		* Own stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
@@ -1944,11 +1906,9 @@ Scenario: _05832 сheck recognition of own and commission goods when scanning a 
 				| '1' | 'Own stocks'       | 'Basic Price Types' | 'Dress' | 'M/Brown'  | 'Shop 02'            | 'No'                 | '152,54'     | 'pcs'  | ''                   | '2,000'    | '500,00' | '18%' | ''              | '847,46'     | '1 000,00'     | 'Store 01' |
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute	
 			And "ItemList" table became equal
@@ -1957,7 +1917,6 @@ Scenario: _05832 сheck recognition of own and commission goods when scanning a 
 				| 'Consignor stocks' | 'Basic Price Types' | 'Dress' | 'M/Brown'  | 'Shop 02'            | 'No'                 | ''           | 'pcs'  | ''                   | '2,000'    | '500,00' | 'Without VAT' | ''              | '1 000,00'   | '1 000,00'     | 'Store 01' |
 		* Over stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute				
 			And "ItemList" table became equal
@@ -1967,11 +1926,9 @@ Scenario: _05832 сheck recognition of own and commission goods when scanning a 
 	* Scan item (Dress S/Yellow)		
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283713" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283713" text in the field named "Barcode"
 			And I move to the next attribute	
 			And "ItemList" table became equal
@@ -1982,25 +1939,20 @@ Scenario: _05832 сheck recognition of own and commission goods when scanning a 
 	* Scan item with serial lot number (with stock balance detail, own and consignor stock)
 		* Own stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977893" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977893" text in the field named "Barcode"
 			And I move to the next attribute
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977893" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977893" text in the field named "Barcode"
 			And I move to the next attribute
 		* Over stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977893" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
@@ -2013,16 +1965,13 @@ Scenario: _05832 сheck recognition of own and commission goods when scanning a 
 	* Scan item with serial lot number (with stock balance detail, only consignor stock)
 		* Consignor stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977894" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977894" text in the field named "Barcode"
 			And I move to the next attribute
 		* Over stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977894" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal
@@ -2035,16 +1984,13 @@ Scenario: _05832 сheck recognition of own and commission goods when scanning a 
 	* Scan item with serial lot number (with stock balance detail, only own stock)
 		* Own stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977895" text in the field named "Barcode"
 			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977895" text in the field named "Barcode"
 			And I move to the next attribute
 		* Over stock
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "09987897977895" text in the field named "Barcode"
 			And I move to the next attribute
 			And "ItemList" table became equal

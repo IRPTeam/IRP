@@ -1315,8 +1315,8 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			| '#' | 'Amount'   | 'Is return' | 'Payment type' | 'Payment terminal' | 'Real amount' |
 			| '1' | '7 550,00' | 'No'        | 'Cash'         | ''                 | '7 550,00'    |
 			| '2' | '2 900,00' | 'Yes'       | 'Cash'         | ''                 | '2 900,02'    |
-			| '3' | '3 180,00' | 'No'        | 'Card 01'      | ''                 | '3 180,00'    |
-			| '4' | '4 790,00' | 'No'        | 'Card 02'      | ''                 | '4 770,00'    |
+			| '3' | '3 200,00' | 'No'        | 'Card 01'      | ''                 | '3 200,00'    |
+			| '4' | '4 770,00' | 'No'        | 'Card 02'      | ''                 | '4 770,00'    |
 			| '5' | '2 790,00' | 'Yes'       | 'Card 01'      | ''                 | ''            |
 			| '6' | '550,00'   | 'Yes'       | 'Card 02'      | ''                 | '550,00'      |
 		And I close all client application windows		

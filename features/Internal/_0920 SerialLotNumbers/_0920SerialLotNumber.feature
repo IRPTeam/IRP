@@ -3249,7 +3249,6 @@ Scenario: _092045 product scanning with serial lot number in the document withou
 		And I click the button named "FormCreate"
 		And in the table "ItemList" I click "SearchByBarcode" button
 	* Product scanning with serial lot number
-		Then "Enter a barcode" window is opened
 		And I input "590876909359" text in the field named "Barcode"
 		And I move to the next attribute
 		And "ItemList" table contains lines
@@ -3817,7 +3816,6 @@ Scenario: _092080 create serial lot number from Create serial lot numbers data p
 		And the editing text of form attribute named "BarcodeInput" became equal to "2202283713"
 	* Create SLN
 		And I click the button named "FormSearchByBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "56789" text in the field named "Barcode"
 		And I click the button named "OK"
 		And "SerialLotNumberList" table became equal
@@ -3826,7 +3824,6 @@ Scenario: _092080 create serial lot number from Create serial lot numbers data p
 		Then the form attribute named "Info" became equal to "New serial [ 56789 ] created for item key [ S/Yellow ]"
 	* Try to recreate SLN
 		And I click the button named "FormSearchByBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "56789" text in the field named "Barcode"
 		And I click the button named "OK"
 		And "SerialLotNumberList" table became equal
@@ -3835,7 +3832,6 @@ Scenario: _092080 create serial lot number from Create serial lot numbers data p
 		Then the form attribute named "Info" became equal to "Barcode [56789] is exists for item: Dress [S/Yellow] 56789"
 	* Create one more SLN
 		And I click the button named "FormSearchByBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "567890" text in the field named "Barcode"
 		And I click the button named "OK"
 		And "SerialLotNumberList" table became equal

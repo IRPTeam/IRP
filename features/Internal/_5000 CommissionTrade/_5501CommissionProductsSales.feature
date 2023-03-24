@@ -1153,19 +1153,15 @@ Scenario: _050041 check filling source of origin in the SI (consignors products)
 	* Add items	
 		And I move to "Item list" tab
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "57897909799" text in the field named "Barcode"
 		And I move to the next attribute
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "57897909799" text in the field named "Barcode"
 		And I move to the next attribute
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "890086768" text in the field named "Barcode"
 		And I move to the next attribute
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "57897909799" text in the field named "Barcode"
 		And I move to the next attribute
 	* Check filling
@@ -1176,7 +1172,6 @@ Scenario: _050041 check filling source of origin in the SI (consignors products)
 			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | 'pcs'  | '57897909799'        | 'Source of origin 10' | '1,000'    | ''      | '18%' | ''             | 'No'             | 'No'                         | ''                    | 'Store 02' | ''              | ''       |
 	* Add one more item and check filling
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "89088088989" text in the field named "Barcode"
 		And I move to the next attribute
 		And "ItemList" table became equal
@@ -1215,19 +1210,15 @@ Scenario: _050042 check filling source of origin in the RSR (consignors products
 	* Add items	
 		And I move to "Item list" tab
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "57897909799" text in the field named "Barcode"
 		And I move to the next attribute
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "57897909799" text in the field named "Barcode"
 		And I move to the next attribute
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "890086768" text in the field named "Barcode"
 		And I move to the next attribute
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "57897909799" text in the field named "Barcode"
 		And I move to the next attribute
 	* Check filling
@@ -1238,7 +1229,6 @@ Scenario: _050042 check filling source of origin in the RSR (consignors products
 			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | 'pcs'  | '57897909799'        | 'Source of origin 10' | '1,000'    | ''      | '18%' | ''             | ''                    | 'Store 02' | ''       |
 	* Add one more item and check filling
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "89088088989" text in the field named "Barcode"
 		And I move to the next attribute
 		And "ItemList" table became equal

@@ -168,10 +168,10 @@ Scenario: _300721 barcode check in PhysicalCountByLocation
 	And I click the button named "FormCreate"
 	And in the table "ItemList" I click the button named "SearchByBarcode"
 	And I input "2202283713" text in the field named "Barcode"
-	And I click "OK" button
+	And I move to the next attribute
 	And in the table "ItemList" I click the button named "SearchByBarcode"
 	And I input "2202283713" text in the field named "Barcode"
-	And I click "OK" button
+	And I move to the next attribute
 	And "ItemList" table became equal
 		| '#' | 'Item'  | 'Item key' | 'Unit' | 'Phys. count' | 'Date'|
 		| '1' | 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'       |  '*'  |
@@ -191,14 +191,14 @@ Scenario: _300723 barcode check in Price list
 			And I change "Set price" radio button value to "By item keys"
 			And I click the button named "SearchByBarcode"
 			And I input "2202283713" text in the field named "Barcode"
-			And I click "OK" button
+			And I move to the next attribute
 			And "ItemKeyList" table contains lines
 				| 'Item'  | 'Item key' | 'Price' | 'Input unit' |
 				| 'Dress' | 'S/Yellow' | ''      | 'pcs'      |
 		* Add second string
 			And I click the button named "SearchByBarcode"
 			And I input "978020137962" text in the field named "Barcode"
-			And I click "OK" button
+			And I move to the next attribute
 			And "ItemKeyList" table contains lines
 				| 'Item'  | 'Item key' | 'Price' | 'Input unit' |
 				| 'Dress' | 'S/Yellow' | ''      | 'pcs'      |
@@ -209,7 +209,7 @@ Scenario: _300723 barcode check in Price list
 				| 'Boots' | '37/18SD'  |			
 			And I click the button named "SearchByBarcode"
 			And I input "2202283713" text in the field named "Barcode"
-			And I click "OK" button
+			And I move to the next attribute
 			And the current line of "ItemKeyList" table is equal to
 				| 'Item'  | 'Item key' | 'Price' | 'Input unit' |
 				| 'Dress' | 'S/Yellow' | ''      | 'pcs'      |
@@ -221,14 +221,14 @@ Scenario: _300723 barcode check in Price list
 			And I change "Set price" radio button value to "By items"
 			And I click the button named "SearchByBarcodeItem"			
 			And I input "2202283713" text in the field named "Barcode"
-			And I click "OK" button
+			And I move to the next attribute
 			And "ItemList" table contains lines
 				| 'Item'  | 'Price' | 'Input unit' |
 				| 'Dress' | ''      | 'pcs'      |
 		* Add second string
 			And I click the button named "SearchByBarcodeItem"
 			And I input "978020137962" text in the field named "Barcode"
-			And I click "OK" button
+			And I move to the next attribute
 			And "ItemList" table contains lines
 				| 'Item'  | 'Price' | 'Input unit' |
 				| 'Dress' | ''      | 'pcs'      |
@@ -239,7 +239,7 @@ Scenario: _300723 barcode check in Price list
 				| 'Boots' |
 			And I click the button named "SearchByBarcodeItem"	
 			And I input "2202283713" text in the field named "Barcode"
-			And I click "OK" button
+			And I move to the next attribute
 			And the current line of "ItemList" table is equal to
 				| 'Item'  | 'Price' | 'Input unit' |
 				| 'Dress' | ''      | 'pcs'      |

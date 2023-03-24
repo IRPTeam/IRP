@@ -441,7 +441,6 @@ Scenario: _2990005 try to add Service to the Physical inventory
 		When in opened panel I select "Physical inventory (create) *"
 		Then "Physical inventory (create) *" window is opened
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "89908" text in the field named "Barcode"
 		And I move to the next attribute
 	* Check
@@ -746,7 +745,6 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 		And I select current line in "PhysicalCountByLocationList" table
 		* Scan item without serial lot number
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
 			And I input "2202283705" text in the field named "Barcode"
 			And I move to the next attribute
 			And I activate "Phys. count" field in "ItemList" table
@@ -784,7 +782,6 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 			And I input "67789997777899" text in the field named "Barcode"
 			And I move to the next attribute
 			And I click "Search by barcode (F7)" button
-			Then "Enter a barcode" window is opened
 			And I input "677899" text in the field named "Barcode"
 			And I move to the next attribute
 			And I click "Create" button
@@ -853,7 +850,6 @@ Scenario: _2990016 check Physical count by location (mobile form)
 		Then "DocumentRef" form attribute became equal to ""
 	* Select Location count by scan barcode (without scan emulator)
 		And I click the button named "InputBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "2" text in the field named "Barcode"
 		And I move to the next attribute
 		Then "DocumentRef" form attribute became equal to "Location count 2*" template
@@ -886,7 +882,6 @@ Scenario: _2990016 check Physical count by location (mobile form)
 	* Scan barcode with serial lot number (without scan emulator)
 		And I remove checkbox "Scan emulator"
 		And I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "23455677788976667" text in the field named "Barcode"
 		And I move to the next attribute
 		And I input "1,000" text in the field named "Quantity"
@@ -950,7 +945,6 @@ Scenario: _2990016 filling Physical count by location (mobile form without scan 
 		Then the number of "ItemList" table lines is "равно" 3
 	* Add product without Serial lot number (item type use Serial lot numbers)
 		And I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "899007788" text in the field named "Barcode"
 		And I move to the next attribute
 		Then "Row form" window is opened
@@ -1022,7 +1016,6 @@ Scenario: _2990018 check the document Location count fixation for the user
 	* Check fixation
 		And In the command interface I select "Inventory" "Mobile invent"
 		And I click the button named "InputBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "2" text in the field named "Barcode"
 		And I click the button named "OK"
 		Given Recent TestClient message contains "Current location #2 was started by another user. User: Anna Petrova (Commercial Agent 3)" string by template
@@ -1032,7 +1025,6 @@ Scenario: _2990019 rescan a previously created document Physical count by locati
 	And I close all client application windows
 	And In the command interface I select "Inventory" "Mobile invent"
 	And I click the button named "InputBarcode"
-	Then "Enter a barcode" window is opened
 	And I input "1" text in the field named "Barcode"
 	And I click the button named "OK"
 	And "ItemList" table became equal

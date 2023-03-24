@@ -114,7 +114,6 @@ Scenario: _0156010 Store keeper workspace (create GR)
 	Given I open hyperlink "e1cib/app/DataProcessor.StoreKeeperWorkspace"
 	* Scan first Item
 		And I click "SearchByBarcode" button
-		Then "Enter a barcode" window is opened
 		And I input "2202283713" text in the field named "Barcode"
 		And I move to the next attribute
 		And "GoodsInTransitIncoming" table became equal
@@ -165,8 +164,8 @@ Scenario: _0156012 Store keeper workspace (try create GR without IT)
 	Given I open hyperlink "e1cib/app/DataProcessor.StoreKeeperWorkspace"
 	* Scan item
 		And I click "Input barcode" button
-		And I input "2202283739" text in the field named "Barcode"
-		And I move to the next attribute	
+		And I input "2202283739" text in the field named "InputFld"
+		And I click "OK" button			
 		And I input "5,000" text in the field named "Quantity"
 		And the editing text of form attribute named "Quantity" became equal to "5,000"
 		Then the form attribute named "Unit" became equal to "pcs"

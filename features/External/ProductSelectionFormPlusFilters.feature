@@ -1749,7 +1749,7 @@ Scenario: check the barcode search in the purchase/purchase returns
 	And I select current line in "List" table
 	And I click the button named "SearchByBarcode"
 	And I input "2202283713" text in the field named "Barcode"
-	And I click "OK" button
+	And I move to the next attribute
 	* Check adding an items and filling in the price in the tabular part
 		And I click "Show row key" button
 		And "ItemList" table contains lines
@@ -1757,7 +1757,7 @@ Scenario: check the barcode search in the purchase/purchase returns
 			|'Dress' |'S/Yellow'  |'1,000' | 'pcs'  | '1,000'                 |
 		And I click the button named "SearchByBarcode"
 		And I input "2202283713" text in the field named "Barcode"
-		And I click "OK" button
+		And I move to the next attribute
 		And "ItemList" table contains lines
 			| 'Item'  |'Item key' |'Quantity'     | 'Unit' | 'Quantity in base unit' |
 			|'Dress' |'S/Yellow'  |'2,000' | 'pcs'  | '2,000'                 |
@@ -1767,7 +1767,7 @@ Scenario: check the barcode search in storage operations documents
 	And I click the button named "FormCreate"
 	And in the table "ItemList" I click the button named "SearchByBarcode"
 	And I input "2202283713" text in the field named "Barcode"
-	And I click "OK" button
+	And I move to the next attribute
 	* Check adding an items and filling in the price in the tabular part
 		And I click "Show row key" button
 		And "ItemList" table contains lines
@@ -1775,7 +1775,7 @@ Scenario: check the barcode search in storage operations documents
 			| 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'    | '1,000'                 |
 		And in the table "ItemList" I click the button named "SearchByBarcode"
 		And I input "2202283713" text in the field named "Barcode"
-		And I click "OK" button
+		And I move to the next attribute
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Unit' | 'Quantity' | 'Quantity in base unit' |
 			| 'Dress' | 'S/Yellow' | 'pcs'  | '2,000'    | '2,000'                 |

@@ -150,7 +150,7 @@ Procedure UpdateCacheBeforeChange(Object, Form)
 		ColumnNames = KeyValue.Value;
 		
 		CacheList.Insert(TableName, New Array());
-		// #optimization3
+		
 		Object_Table = Object[TableName];
 		For Each Row In Object_Table Do
 		//For Each Row In Object[TableName] Do
@@ -773,7 +773,6 @@ EndProcedure
 
 Function IsChangedTaxRates(Parameters)
 	For Each TaxInfo In Parameters.ArrayOfTaxInfo Do
-//		Result = IsChangedProperty(Parameters, "ItemList." + TaxInfo.Name);
 		Result = IsChangedProperty(Parameters, Parameters.TableName+ "." + TaxInfo.Name);
 		If Result.IsChanged Then
 			Return Result;
@@ -1774,20 +1773,7 @@ EndFunction
 Procedure ProductionDurationsListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
 	Parameters = GetLoadParameters(Object, Form, "ProductionDurationsList", Address, GroupColumn, SumColumn);
 	Parameters.LoadData.ExecuteAllViewNotify = True;
-	NewRows = New Array();
-	For i = 1 To Parameters.LoadData.CountRows Do
-		NewRow = Object.ProductionDurationsList.Add();
-		NewRow.Key = String(New UUID());
-		NewRows.Add(NewRow);
-	EndDo;
-	WrappedRows = ControllerClientServer_V2.WrapRows(Parameters, NewRows);
-	If Parameters.Property("Rows") Then
-		For Each Row In WrappedRows Do
-			Parameters.Rows.Add(Row);
-		EndDo;
-	Else
-		Parameters.Insert("Rows", WrappedRows);
-	EndIf;
+	ControllerClientServer_V2.AddEmptyRowsForLoad(Parameters);
 	ControllerClientServer_V2.ProductionDurationsListLoad(Parameters);
 EndProcedure
 
@@ -1896,20 +1882,7 @@ EndFunction
 Procedure ProductionCostsListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
 	Parameters = GetLoadParameters(Object, Form, "ProductionCostsList", Address, GroupColumn, SumColumn);
 	Parameters.LoadData.ExecuteAllViewNotify = True;
-	NewRows = New Array();
-	For i = 1 To Parameters.LoadData.CountRows Do
-		NewRow = Object.ProductionCostsList.Add();
-		NewRow.Key = String(New UUID());
-		NewRows.Add(NewRow);
-	EndDo;
-	WrappedRows = ControllerClientServer_V2.WrapRows(Parameters, NewRows);
-	If Parameters.Property("Rows") Then
-		For Each Row In WrappedRows Do
-			Parameters.Rows.Add(Row);
-		EndDo;
-	Else
-		Parameters.Insert("Rows", WrappedRows);
-	EndIf;
+	ControllerClientServer_V2.AddEmptyRowsForLoad(Parameters);
 	ControllerClientServer_V2.ProductionCostsListLoad(Parameters);
 EndProcedure
 
@@ -1992,23 +1965,13 @@ Function ItemListAddFilledRow(Object, Form,  FillingValues) Export
 EndFunction
 
 Procedure ItemListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
+//	start = CurrentDate();
 	Parameters = GetLoadParameters(Object, Form, "ItemList", Address, GroupColumn, SumColumn);
 	Parameters.LoadData.ExecuteAllViewNotify = True;
-	NewRows = New Array();
-	For i = 1 To Parameters.LoadData.CountRows Do
-		NewRow = Object.ItemList.Add();
-		NewRow.Key = String(New UUID());
-		NewRows.Add(NewRow);
-	EndDo;
-	WrappedRows = ControllerClientServer_V2.WrapRows(Parameters, NewRows);
-	If Parameters.Property("Rows") Then
-		For Each Row In WrappedRows Do
-			Parameters.Rows.Add(Row);
-		EndDo;
-	Else
-		Parameters.Insert("Rows", WrappedRows);
-	EndIf;
+	ControllerClientServer_V2.AddEmptyRowsForLoad(Parameters);
 	ControllerClientServer_V2.ItemListLoad(Parameters);
+//	enddate = CurrentDate();
+//	Message(enddate-start);
 EndProcedure
 
 #EndRegion
@@ -2551,20 +2514,7 @@ EndProcedure
 Procedure PaymentListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
 	Parameters = GetLoadParameters(Object, Form, "PaymentList", Address, GroupColumn, SumColumn);
 	Parameters.LoadData.ExecuteAllViewNotify = True;
-	NewRows = New Array();
-	For i = 1 To Parameters.LoadData.CountRows Do
-		NewRow = Object.PaymentList.Add();
-		NewRow.Key = String(New UUID());
-		NewRows.Add(NewRow);
-	EndDo;
-	WrappedRows = ControllerClientServer_V2.WrapRows(Parameters, NewRows);
-	If Parameters.Property("Rows") Then
-		For Each Row In WrappedRows Do
-			Parameters.Rows.Add(Row);
-		EndDo;
-	Else
-		Parameters.Insert("Rows", WrappedRows);
-	EndIf;
+	ControllerClientServer_V2.AddEmptyRowsForLoad(Parameters);
 	ControllerClientServer_V2.PaymentListLoad(Parameters);
 EndProcedure
 
@@ -2815,20 +2765,7 @@ EndProcedure
 Procedure PayrollListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
 	Parameters = GetLoadParameters(Object, Form, "PayrollList", Address, GroupColumn, SumColumn);
 	Parameters.LoadData.ExecuteAllViewNotify = True;
-	NewRows = New Array();
-	For i = 1 To Parameters.LoadData.CountRows Do
-		NewRow = Object.PayrollList.Add();
-		NewRow.Key = String(New UUID());
-		NewRows.Add(NewRow);
-	EndDo;
-	WrappedRows = ControllerClientServer_V2.WrapRows(Parameters, NewRows);
-	If Parameters.Property("Rows") Then
-		For Each Row In WrappedRows Do
-			Parameters.Rows.Add(Row);
-		EndDo;
-	Else
-		Parameters.Insert("Rows", WrappedRows);
-	EndIf;
+	ControllerClientServer_V2.AddEmptyRowsForLoad(Parameters);
 	ControllerClientServer_V2.PayrollListLoad(Parameters);
 EndProcedure
 
@@ -2882,20 +2819,7 @@ EndFunction
 Procedure TimeSheetListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
 	Parameters = GetLoadParameters(Object, Form, "TimeSheetList", Address, GroupColumn, SumColumn);
 	Parameters.LoadData.ExecuteAllViewNotify = True;
-	NewRows = New Array();
-	For i = 1 To Parameters.LoadData.CountRows Do
-		NewRow = Object.TimeSheetList.Add();
-		NewRow.Key = String(New UUID());
-		NewRows.Add(NewRow);
-	EndDo;
-	WrappedRows = ControllerClientServer_V2.WrapRows(Parameters, NewRows);
-	If Parameters.Property("Rows") Then
-		For Each Row In WrappedRows Do
-			Parameters.Rows.Add(Row);
-		EndDo;
-	Else
-		Parameters.Insert("Rows", WrappedRows);
-	EndIf;
+	ControllerClientServer_V2.AddEmptyRowsForLoad(Parameters);
 	ControllerClientServer_V2.TimeSheetListLoad(Parameters);
 EndProcedure
 

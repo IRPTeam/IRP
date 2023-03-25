@@ -20,7 +20,7 @@ Procedure OnCreateAtServer(Object, Form, TableNames) Export
 		ServerParameters.TableName = TrimAll(TableName);
 		Parameters = ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
 		ControllerClientServer_V2.FormOnCreateAtServer(Parameters);
-		// #optimization 2
+		
 		// is context call
 		If Form <> Undefined And TypeOf(Form) = Type("ClientApplicationForm") Then
 			ArrayOfAttributes = New Array();
@@ -196,8 +196,19 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	If FillingValues = Undefined Then
 		Return;
 	EndIf;
-	Row = Parameters.Rows[0];
 	
+	FilledColumns = New Array();
+	For Each KeyValue In FillingValues Do
+		ColumnName = KeyValue.Key;
+		If ValueIsFilled(FillingValues[ColumnName]) Then
+			FullColumnName = Parameters.TableName + "." + ColumnName;
+			FilledColumns.Add(FullColumnName);
+			Parameters.ReadOnlyPropertiesMap.Insert(Upper(FullColumnName), True);
+		EndIf;
+	EndDo;
+	Parameters.ReadOnlyProperties = StrConcat(FilledColumns, ",");
+	
+	Row = Parameters.Rows[0];
 	
 	ItemIsPresent      = CommonFunctionsClientServer.ObjectHasProperty(Row, "Item");
 	ItemKeyIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "ItemKey");
@@ -265,6 +276,7 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 			ControllerClientServer_V2.SetTimeSheetListPosition(Parameters, PrepareValue(FillingValues.Position, Row.Key));
 		EndIf;		
 	EndIf;
+	ControllerClientServer_V2.LaunchNextSteps(Parameters);
 EndProcedure
 
 Function PrepareValue(Value, Key)

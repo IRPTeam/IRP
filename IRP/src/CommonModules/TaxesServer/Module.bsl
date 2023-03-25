@@ -1,4 +1,10 @@
+
+// Tax rates
 Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
+	Return ServerReuse.GetTaxRatesForItemKey(Parameters.Date, Parameters.Company, Parameters.Tax, Parameters.ItemKey);
+EndFunction
+
+Function _GetTaxRatesForItemKey(Date, Company, Tax, ItemKey) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -241,12 +247,12 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 	ItemKeys.Columns.Add("Tax"     , New TypeDescription("CatalogRef.Taxes"));
 	
 	NewRow = ItemKeys.Add();
-	NewRow.Company = Parameters.Company;
-	NewRow.ItemKey = Parameters.ItemKey;
-	NewRow.Tax = Parameters.Tax;
+	NewRow.Company = Company;
+	NewRow.ItemKey = ItemKey;
+	NewRow.Tax = Tax;
 	
 	Query.SetParameter("ItemKeys" , ItemKeys);
-	Query.SetParameter("Date"     , Parameters.Date);
+	Query.SetParameter("Date"     , Date);
 	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -268,6 +274,10 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 EndFunction
 
 Function GetTaxRatesForAgreement(Parameters, AddInfo = Undefined) Export
+	Return ServerReuse.GetTaxRatesForAgreement(Parameters.Date, Parameters.Company, Parameters.Tax, Parameters.Agreement);
+EndFunction
+
+Function _GetTaxRatesForAgreement(Date, Company, Tax, Agreement) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -281,10 +291,10 @@ Function GetTaxRatesForAgreement(Parameters, AddInfo = Undefined) Export
 	|	AND Tax = &Tax
 	|	AND Agreement = &Agreement) AS TaxRatesSliceLast";
 
-	Query.SetParameter("Date"      , Parameters.Date);
-	Query.SetParameter("Company"   , Parameters.Company);
-	Query.SetParameter("Agreement" , Parameters.Agreement);
-	Query.SetParameter("Tax"       , Parameters.Tax);
+	Query.SetParameter("Date"      , Date);
+	Query.SetParameter("Company"   , Company);
+	Query.SetParameter("Agreement" , Agreement);
+	Query.SetParameter("Tax"       , Tax);
 	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -298,6 +308,46 @@ Function GetTaxRatesForAgreement(Parameters, AddInfo = Undefined) Export
 		Result.Insert("Agreement" , QuerySelection.Agreement);
 		Result.Insert("TaxRate"   , QuerySelection.TaxRate);
 		Result.Insert("Rate"      , QuerySelection.Rate);
+		ArrayOfTaxes.Add(Result);
+	EndDo;
+	Return ArrayOfTaxes;
+EndFunction
+
+Function GetTaxRatesForCompany(Parameters, AddInfo = Undefined) Export
+	Return ServerReuse.GetTaxRatesForCompany(Parameters.Date, Parameters.Company, Parameters.Tax);
+EndFunction
+
+Function _GetTaxRatesForCompany(Date, Company, Tax) Export
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	TaxRatesSliceLast.Company,
+	|	TaxRatesSliceLast.Tax,
+	|	TaxRatesSliceLast.TaxRate,
+	|	TaxRatesSliceLast.TaxRate.Rate AS Rate
+	|FROM
+	|	InformationRegister.TaxSettings.SliceLast(&Date, Company = &Company
+	|	AND Tax = &Tax
+	|	AND ItemKey = VALUE(Catalog.ItemKeys.EmptyRef)
+	|	AND Item = VALUE(Catalog.Items.EmptyRef)
+	|	AND ItemType = VALUE(Catalog.ItemTypes.EmptyRef)
+	|	AND Agreement = VALUE(Catalog.Agreements.EmptyRef)) AS TaxRatesSliceLast";
+
+	Query.SetParameter("Date"    , Date);
+	Query.SetParameter("Company" , Company);
+	Query.SetParameter("Tax"     , Tax);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+
+	ArrayOfTaxes = New Array();
+
+	While QuerySelection.Next() Do
+		Result = New Structure();
+		Result.Insert("Company" , QuerySelection.Company);
+		Result.Insert("Tax"     , QuerySelection.Tax);
+		Result.Insert("TaxRate" , QuerySelection.TaxRate);
+		Result.Insert("Rate"    , QuerySelection.Rate);
 		ArrayOfTaxes.Add(Result);
 	EndDo;
 	Return ArrayOfTaxes;
@@ -320,9 +370,9 @@ Function GetTaxRatesForConsignorBatches(Parameters) Export
 	
 	For Each ItemOfCompany In ArrayOfCompany Do
 		QueryParameters = New Structure();
-		QueryParameters.Insert("Date", Parameters.Date);
-		QueryParameters.Insert("Tax", Parameters.Tax);
-		QueryParameters.Insert("Company", ItemOfCompany);
+		QueryParameters.Insert("Date"    , Parameters.Date);
+		QueryParameters.Insert("Tax"     , Parameters.Tax);
+		QueryParameters.Insert("Company" , ItemOfCompany);
 		ArrayOfTaxes = GetTaxRatesForCompany(QueryParameters);
 		For Each ItemOfTaxes In ArrayOfTaxes Do
 			TotalArrayOfTaxes.Add(ItemOfTaxes);
@@ -332,73 +382,12 @@ Function GetTaxRatesForConsignorBatches(Parameters) Export
 	Return TotalArrayOfTaxes;
 EndFunction
 
-Function GetTaxRatesForCompany(Parameters, AddInfo = Undefined) Export
-	Query = New Query();
-	Query.Text =
-	"SELECT
-	|	TaxRatesSliceLast.Company,
-	|	TaxRatesSliceLast.Tax,
-	|	TaxRatesSliceLast.TaxRate,
-	|	TaxRatesSliceLast.TaxRate.Rate AS Rate
-	|FROM
-	|	InformationRegister.TaxSettings.SliceLast(&Date, Company = &Company
-	|	AND Tax = &Tax
-	|	AND ItemKey = VALUE(Catalog.ItemKeys.EmptyRef)
-	|	AND Item = VALUE(Catalog.Items.EmptyRef)
-	|	AND ItemType = VALUE(Catalog.ItemTypes.EmptyRef)
-	|	AND Agreement = VALUE(Catalog.Agreements.EmptyRef)) AS TaxRatesSliceLast";
-
-	Query.SetParameter("Date"    , Parameters.Date);
-	Query.SetParameter("Company" , Parameters.Company);
-	Query.SetParameter("Tax"     , Parameters.Tax);
-	
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-
-	ArrayOfTaxes = New Array();
-
-	While QuerySelection.Next() Do
-		Result = New Structure();
-		Result.Insert("Company" , QuerySelection.Company);
-		Result.Insert("Tax"     , QuerySelection.Tax);
-		Result.Insert("TaxRate" , QuerySelection.TaxRate);
-		Result.Insert("Rate"    , QuerySelection.Rate);
-		ArrayOfTaxes.Add(Result);
-	EndDo;
-	Return ArrayOfTaxes;
-EndFunction
-
-Function CalculateTax(Parameters, AddInfo = Undefined) Export
-	Result = New Array();
-	If Parameters.Tax.Type = Enums.TaxType.Rate Then
-		Info = AddDataProcServer.AddDataProcInfo(Parameters.Tax.ExternalDataProc);
-		Info.Create = True;
-		AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
-		If Not AddDataProc = Undefined Then
-			Result = AddDataProc.CalculateTax(Parameters);
-		EndIf;
-	Else
-		Result.Add(New Structure("Amount", Parameters.TaxRateOrAmount));
-	EndIf;
-
-	For Each Row In Result Do
-		If Not Row.Property("Tax") Then
-			Row.Insert("Tax", Parameters.Tax);
-		EndIf;
-		If Not Row.Property("TaxRate") Then
-			Row.Insert("TaxRate", Parameters.TaxRateOrAmount);
-		EndIf;
-		If Not Row.Property("IncludeToTotalAmount") Then
-			Row.Insert("IncludeToTotalAmount", True);
-		EndIf;
-		If Not Row.Property("Analytics") Then
-			Row.Insert("Analytics", Undefined);
-		EndIf;
-	EndDo;
-	Return Result;
-EndFunction
-
+// Taxes
 Function GetTaxesByCompany(Date, Company) Export
+	Return ServerReuse.GetTaxesByCompany(Date, Company);
+EndFunction
+
+Function _GetTaxesByCompany(Date, Company) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -430,6 +419,10 @@ Function GetTaxesByCompany(Date, Company) Export
 EndFunction
 
 Function GetTaxRatesByTax(Tax) Export
+	Return ServerReuse.GetTaxRatesByTax(Tax);
+EndFunction
+
+Function _GetTaxRatesByTax(Tax) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -440,6 +433,36 @@ Function GetTaxRatesByTax(Tax) Export
 	|	TaxesTaxRates.Ref = &Ref";
 	Query.SetParameter("Ref", Tax);
 	Return Query.Execute().Unload().UnloadColumn("TaxRate");
+EndFunction
+
+Function CalculateTax(Parameters, AddInfo = Undefined) Export
+	Result = New Array();
+	If Parameters.Tax.Type = Enums.TaxType.Rate Then
+		Info = AddDataProcServer.AddDataProcInfo(Parameters.Tax.ExternalDataProc);
+		Info.Create = True;
+		AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
+		If Not AddDataProc = Undefined Then
+			Result = AddDataProc.CalculateTax(Parameters);
+		EndIf;
+	Else
+		Result.Add(New Structure("Amount", Parameters.TaxRateOrAmount));
+	EndIf;
+
+	For Each Row In Result Do
+		If Not Row.Property("Tax") Then
+			Row.Insert("Tax", Parameters.Tax);
+		EndIf;
+		If Not Row.Property("TaxRate") Then
+			Row.Insert("TaxRate", Parameters.TaxRateOrAmount);
+		EndIf;
+		If Not Row.Property("IncludeToTotalAmount") Then
+			Row.Insert("IncludeToTotalAmount", True);
+		EndIf;
+		If Not Row.Property("Analytics") Then
+			Row.Insert("Analytics", Undefined);
+		EndIf;
+	EndDo;
+	Return Result;
 EndFunction
 
 Procedure PutToTaxTable(Form, Key, Tax, Value)

@@ -181,10 +181,15 @@ EndProcedure
 // * ItemKey - CatalogRef.ItemKeys -
 // * PriceType - CatalogRef.PriceTypes -
 Function ItemPriceInfo(Parameters, AddInfo = Undefined) Export
+	PriceType = ?(Parameters.Property("RowPriceType"), Parameters.RowPriceType, Parameters.PriceType);
+	Return ServerReuse.ItemPriceInfo(Parameters.Period, Parameters.ItemKey, Parameters.Unit, PriceType);
+EndFunction
+
+Function _ItemPriceInfo(Parameter_Period, Parameter_ItemKey, Parameter_Unit, Parameter_PriceType) Export
 	Result = New Structure("ItemKey, PriceType, Price");
 	
-	ItemKeyUnit = Parameters.ItemKey.Unit;
-	ItemUnit = Parameters.ItemKey.Item.Unit;
+	ItemKeyUnit = Parameter_ItemKey.Unit;
+	ItemUnit = Parameter_ItemKey.Item.Unit;
 	BasisUnit = ?(ValueIsFilled(ItemKeyUnit), ItemKeyUnit, ItemUnit);
 	
 	ItemTable = New ValueTable();
@@ -192,25 +197,25 @@ Function ItemPriceInfo(Parameters, AddInfo = Undefined) Export
 	ItemTable.Columns.Add("PriceType" , New TypeDescription("CatalogRef.PriceTypes"));
 	
 	ItemTableRow = ItemTable.Add();
-	ItemTableRow.ItemKey   = Parameters.ItemKey;
-	ItemTableRow.PriceType = ?(Parameters.Property("RowPriceType"), Parameters.RowPriceType, Parameters.PriceType);
+	ItemTableRow.ItemKey   = Parameter_ItemKey;
+	ItemTableRow.PriceType = Parameter_PriceType;
 	
 	Result.ItemKey   = ItemTableRow.ItemKey;
 	Result.PriceType = ItemTableRow.PriceType;
 	Result.Price     = 0;
 	
-	If ValueIsFilled(Parameters.ItemKey.Specification) Then
-		QuerySelection = QueryByItemPriceInfo_Specification(ItemTable, Parameters.Period);
+	If ValueIsFilled(Parameter_ItemKey.Specification) Then
+		QuerySelection = QueryByItemPriceInfo_Specification(ItemTable, Parameter_Period);
 		If QuerySelection.Next() Then
 			FillPropertyValues(Result, QuerySelection);
-			Return MultiplyPriceByUnitFactor(Result, Parameters.Unit, BasisUnit);
+			Return MultiplyPriceByUnitFactor(Result, Parameter_Unit, BasisUnit);
 		EndIf;
 	EndIf;
 
 	ItemTable.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
-	ItemTable[0].Unit = Parameters.Unit;
+	ItemTable[0].Unit = Parameter_Unit;
 		
-	QuerySelection = QueryByItemPriceInfo(ItemTable, Parameters.Period);
+	QuerySelection = QueryByItemPriceInfo(ItemTable, Parameter_Period);
 	
 	If QuerySelection.Next() Then
 		FillPropertyValues(Result, QuerySelection);
@@ -220,10 +225,10 @@ Function ItemPriceInfo(Parameters, AddInfo = Undefined) Export
 	EndIf;	
 			
 	ItemTable[0].Unit = BasisUnit;
-	QuerySelection = QueryByItemPriceInfo(ItemTable, Parameters.Period);
+	QuerySelection = QueryByItemPriceInfo(ItemTable, Parameter_Period);
 	If QuerySelection.Next() Then
 		FillPropertyValues(Result, QuerySelection);
-		Return MultiplyPriceByUnitFactor(Result, Parameters.Unit, BasisUnit);
+		Return MultiplyPriceByUnitFactor(Result, Parameter_Unit, BasisUnit);
 	EndIf;
 	
 	Return Result;

@@ -479,6 +479,7 @@
   <commonModules>CommonModule.LoadDataFromTableClient</commonModules>
   <commonModules>CommonModule.AdditionalDocumentTableControl</commonModules>
   <commonModules>CommonModule.AdditionalDocumentTableControlReuse</commonModules>
+  <commonModules>CommonModule.ServerReuse</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

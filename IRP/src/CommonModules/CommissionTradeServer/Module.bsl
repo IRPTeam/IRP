@@ -57,32 +57,41 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	|INTO tmpItemList
 	|FROM
 	|	&tmpItemList AS ItemList
+	|
+	|INDEX BY
+	|	Key
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	SerialLotNumbers.Key,
+	|	SerialLotNumbers.Key AS Key,
 	|	SerialLotNumbers.SerialLotNumber,
 	|	SerialLotNumbers.Quantity
 	|INTO tmpSerialLotNumbers
 	|FROM
 	|	&tmpSerialLotNumbers AS SerialLotNumbers
+	|
+	|INDEX BY
+	|	Key
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	tmpSourceOfOrigins.Key,
+	|	tmpSourceOfOrigins.Key AS Key,
 	|	tmpSourceOfOrigins.SerialLotNumber,
 	|	tmpSourceOfOrigins.SourceOfOrigin,
 	|	tmpSourceOfOrigins.Quantity
 	|INTO tmpSourceOfOrigins
 	|FROM
 	|	&tmpSourceOfOrigins AS tmpSourceOfOrigins
+	|
+	|INDEX BY
+	|	Key
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	tmpItemList.Key,
+	|	tmpItemList.Key AS Key,
 	|	tmpItemList.InventoryOrigin,
 	|	tmpItemList.Company,
 	|	tmpItemList.ItemKey,
@@ -98,6 +107,10 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	|	tmpItemList AS tmpItemList
 	|		LEFT JOIN tmpSerialLotNumbers AS tmpSerialLotNumbers
 	|		ON tmpItemList.Key = tmpSerialLotNumbers.Key
+	|
+	|INDEX BY
+	|	Key,
+	|	SerialLotNumber
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -926,7 +939,9 @@ Procedure UpdateRegisterConsignorBatches(DocObject, ConsignorBatchesTable)
 		FillPropertyValues(Record, Row);
 		Record.Document = DocObject.Ref;
 	EndDo;
-	RecordSet.Write();
+	If RecordSet.Count() Then
+		RecordSet.Write();
+	EndIf;
 EndProcedure
 
 Function GetSalesReportToConsignorList() Export

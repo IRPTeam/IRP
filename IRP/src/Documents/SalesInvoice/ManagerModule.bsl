@@ -409,6 +409,7 @@ Function ItemListLandedCost()
 		|	ItemList.ItemKey,
 		|	ItemList.AdditionalAnalytic,
 		|	ItemList.NetAmount,
+		|	ItemList.TaxAmount,
 		|	ItemList.IsAdditionalItemRevenue,
 		|	ItemList.IsService AS IsService,
 		|	TableRowIDInfo.RowID AS RowID
@@ -1256,7 +1257,8 @@ Function R6080T_OtherPeriodsRevenues()
 		"SELECT
 		|	*,
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	ItemList.NetAmount AS Amount
+		|	ItemList.NetAmount AS Amount,
+		|	ItemList.TaxAmount AS AmountTax
 		|INTO R6080T_OtherPeriodsRevenues
 		|FROM
 		|	ItemListLandedCost AS ItemList

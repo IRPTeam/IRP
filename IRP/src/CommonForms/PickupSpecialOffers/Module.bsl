@@ -4,52 +4,32 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.FormType = Parameters.Info.Type;
 
 	If ThisObject.FormType = "Offers_ForDocument" Then
-		OffersTree = OffersServer.CreateOffersTree(Parameters.Info.Object, Parameters.Info.Object.ItemList,
-			Parameters.Info.Object.SpecialOffers, Parameters.Info.ArrayOfOffers);
-
-		For Each Row In Parameters.Info.Object.SpecialOffers Do
-			SearchFilter = New Structure("Offer", Row.Offer);
-			ArrayOfSearch = OffersTree.Rows.FindRows(SearchFilter, True);
-			For Each ItemArrayOfSearch In ArrayOfSearch Do
-				ItemArrayOfSearch.isSelect = True;
-			EndDo;
-		EndDo;
+		OffersTree = OffersServer.CreateOffersTree(
+			Parameters.Info.Object, 
+			Parameters.Info.Object.ItemList,
+			Parameters.Info.Object.SpecialOffers, 
+			Parameters.Info.ArrayOfOffers
+		);
 
 	ElsIf ThisObject.FormType = "Offers_ForRow" Then
 
 		ThisObject.ItemListRowKey = Parameters.Info.ItemListRowKey;
 
-		OffersTree = OffersServer.CreateOffersTree(Parameters.Info.Object, Parameters.Info.Object.ItemList,
-			Parameters.Info.Object.SpecialOffers, Parameters.Info.ArrayOfOffers, ThisObject.ItemListRowKey);
+		OffersTree = OffersServer.CreateOffersTree(
+			Parameters.Info.Object,
+			Parameters.Info.Object.ItemList,
+			Parameters.Info.Object.SpecialOffers,
+			Parameters.Info.ArrayOfOffers,
+			ThisObject.ItemListRowKey
+		);
 	EndIf;
+	OffersServer.FillOffersTreeStatuses(
+		Parameters.Info.Object, 
+		OffersTree,
+		ThisObject.FormType, 
+		ThisObject.ItemListRowKey
+	);
 	
-	// Rule status: 1 - Not success; 2 - success; 3 - all rules is success
-	OffersTree.Columns.Add("RuleStatus");
-
-	ArrayOfOffers = OffersServer.GetAllOffersInTreeAsArray(OffersTree, True);
-	For Each ItemArrayOfOffers In ArrayOfOffers Do
-		AllRuleIsOk = True;
-		RowWithRules = False;
-		For Each RowOfferRules In ItemArrayOfOffers.Offer.Rules Do
-			RuleIsOk = False;
-			If ThisObject.FormType = "Offers_ForDocument" Then
-				RuleIsOk = OffersServer.CheckOfferRule_ForDocument(Parameters.Info.Object, ItemArrayOfOffers,
-					RowOfferRules.Rule);
-			ElsIf ThisObject.FormType = "Offers_ForRow" Then
-				RuleIsOk = OffersServer.CheckOfferRule_ForRow(Parameters.Info.Object, ItemArrayOfOffers,
-					RowOfferRules.Rule, ThisObject.ItemListRowKey);
-			EndIf;
-			If Not RuleIsOk Then
-				AllRuleIsOk = False;
-			EndIf;
-			RowWithRules = True;
-		EndDo;
-
-		If AllRuleIsOk And RowWithRules Then
-			ItemArrayOfOffers.RuleStatus = 3;
-		EndIf;
-
-	EndDo;
 	FillOffersTreePresentation(OffersTree.Rows);
 	ValueToFormAttribute(OffersTree, "Offers");
 
@@ -226,7 +206,7 @@ Procedure OK(Command)
 EndProcedure
 
 &AtClient
-Function PutOffersTreeToTempStorageOnClient() Export
+Function PutOffersTreeToTempStorageOnClient()
 	Result = PutOffersTreeToTempStorage();
 	Return Result;
 EndFunction

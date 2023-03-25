@@ -731,8 +731,8 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 		And I move to "Physical count by location" tab
 		And I click "Physical count by location" button
 		Then "How many documents to create?" window is opened
-		And I input "3" text in the field named "Barcode"
-		And I move to the next attribute
+		And I input "3" text in the field named "InputFld"	
+		And I click "OK" button
 		* Check
 			And "PhysicalCountByLocationList" table contains lines
 				| 'Reference'         | 'Status'   | 'Count rows' | 'Phys. count' |
@@ -850,7 +850,8 @@ Scenario: _2990016 check Physical count by location (mobile form)
 		Then "DocumentRef" form attribute became equal to ""
 	* Select Location count by scan barcode (without scan emulator)
 		And I click the button named "InputBarcode"
-		And I input "2" text in the field named "Barcode"
+		And I input "2" text in the field named "InputFld"	
+		And I click "OK" button
 		And I move to the next attribute
 		Then "DocumentRef" form attribute became equal to "Location count 2*" template
 	* Scan barcode without serial lot number (with scan emulator)
@@ -1016,7 +1017,7 @@ Scenario: _2990018 check the document Location count fixation for the user
 	* Check fixation
 		And In the command interface I select "Inventory" "Mobile invent"
 		And I click the button named "InputBarcode"
-		And I input "2" text in the field named "Barcode"
+		And I input "2" text in the field named "InputFld"
 		And I click the button named "OK"
 		Given Recent TestClient message contains "Current location #2 was started by another user. User: Anna Petrova (Commercial Agent 3)" string by template
 		And I close all client application windows
@@ -1025,7 +1026,7 @@ Scenario: _2990019 rescan a previously created document Physical count by locati
 	And I close all client application windows
 	And In the command interface I select "Inventory" "Mobile invent"
 	And I click the button named "InputBarcode"
-	And I input "1" text in the field named "Barcode"
+	And I input "1" text in the field named "InputFld"
 	And I click the button named "OK"
 	And "ItemList" table became equal
 		| 'Item'               | 'Item key' | 'Serial lot number' | 'Phys. count' |

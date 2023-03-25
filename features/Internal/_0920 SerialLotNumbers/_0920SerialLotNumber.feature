@@ -3443,10 +3443,10 @@ Scenario: _092062 create new serial lot number from Serial lot number form selec
 		And I set checkbox "Auto create"
 		And in the table "SerialLotNumbers" I click "Search by barcode (F7)" button
 		And I input "456789" text in the field named "Barcode"
-		And I click the button named "OK"
+		And I move to the next attribute
 		And in the table "SerialLotNumbers" I click "Search by barcode (F7)" button
 		And I input "456789" text in the field named "Barcode"
-		And I click the button named "OK"
+		And I move to the next attribute
 	* Check form filling
 		And "SerialLotNumbers" table became equal
 			| 'Serial lot number' | 'Quantity' |
@@ -3456,7 +3456,7 @@ Scenario: _092062 create new serial lot number from Serial lot number form selec
 		Then the form attribute named "Item" became equal to "Product 1 with SLN"
 		Then the form attribute named "ItemKey" became equal to "PZU"
 		Then the form attribute named "DecorationSelected" became equal to "Items quantity"
-		And the editing text of form attribute named "ItemQuantity" became equal to "1,000"
+		And the editing text of form attribute named "ItemQuantity" became equal to "0,000"
 		Then the form attribute named "DecorationFrom" became equal to "Serials set for"
 		And the editing text of form attribute named "SelectedCount" became equal to "2,000"
 		Then the form attribute named "AutoCreateNewSerialLotNumbers" became equal to "Yes"
@@ -3498,7 +3498,7 @@ Scenario: _092062 create new serial lot number from Serial lot number form selec
 		And I change checkbox "Auto create"
 		And in the table "SerialLotNumbers" I click "Search by barcode (F7)" button
 		And I input "789" text in the field named "Barcode"
-		And I click the button named "OK"
+		And I move to the next attribute
 		And I select current line in "SerialLotNumbers" table
 		And I click Open button of "Serial lot number" field
 		Then the form attribute named "Owner" became equal to "UNIQ"
@@ -3531,7 +3531,7 @@ Scenario: _092062 create new serial lot number from Serial lot number form selec
 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And in the table "SerialLotNumbers" I click "Search by barcode (F7)" button
 		And I input "908" text in the field named "Barcode"
-		And I click the button named "OK"
+		And I move to the next attribute
 		And I click "Create" button
 		And I select current line in "SerialLotNumbers" table
 		And I click Open button of "Serial lot number" field
@@ -3638,7 +3638,7 @@ Scenario: _092064 check unique serial lot number settings
 			And I set checkbox "Auto create"
 			And in the table "SerialLotNumbers" I click "Search by barcode (F7)" button
 			And I input "00989789" text in the field named "Barcode"
-			And I click the button named "OK"
+			And I move to the next attribute
 			And "SerialLotNumbers" table became equal
 				| 'Serial lot number' | 'Quantity' |
 				| '00989789'          | '1,000'    |
@@ -3690,7 +3690,7 @@ Scenario: _092064 check unique serial lot number settings
 			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 			And in the table "SerialLotNumbers" I click "Search by barcode (F7)" button
 			And I input "00989789" text in the field named "Barcode"
-			And I click the button named "OK"
+			And I move to the next attribute
 			And I click "Ok" button
 			And I click "Post" button
 			Then I wait that in user messages the "Serial lot number [ 00989789 ] has to be unique at the document" substring will appear in "30" seconds
@@ -3817,7 +3817,7 @@ Scenario: _092080 create serial lot number from Create serial lot numbers data p
 	* Create SLN
 		And I click the button named "FormSearchByBarcode"
 		And I input "56789" text in the field named "Barcode"
-		And I click the button named "OK"
+		And I move to the next attribute
 		And "SerialLotNumberList" table became equal
 			| 'Serial lot number' |
 			| '56789'             |
@@ -3825,7 +3825,7 @@ Scenario: _092080 create serial lot number from Create serial lot numbers data p
 	* Try to recreate SLN
 		And I click the button named "FormSearchByBarcode"
 		And I input "56789" text in the field named "Barcode"
-		And I click the button named "OK"
+		And I move to the next attribute
 		And "SerialLotNumberList" table became equal
 			| 'Serial lot number' |
 			| '56789'             |
@@ -3833,7 +3833,7 @@ Scenario: _092080 create serial lot number from Create serial lot numbers data p
 	* Create one more SLN
 		And I click the button named "FormSearchByBarcode"
 		And I input "567890" text in the field named "Barcode"
-		And I click the button named "OK"
+		And I move to the next attribute
 		And "SerialLotNumberList" table became equal
 			| 'Serial lot number' |
 			| '567890'            |
@@ -4060,16 +4060,16 @@ Scenario: _092088 check sln as single row
 		And I select current line in "List" table
 		And in the table "ItemList" I click the button named "SearchByBarcode"
 		And I input "23455677788976667" text in the field named "Barcode"
-		And I click the button named "OK"
+		And I move to the next attribute
 		And in the table "ItemList" I click the button named "SearchByBarcode"
 		And I input "456789" text in the field named "Barcode"
-		And I click the button named "OK"
+		And I move to the next attribute
 		And in the table "ItemList" I click the button named "SearchByBarcode"
 		And I input "8908899880" text in the field named "Barcode"
-		And I click the button named "OK"
+		And I move to the next attribute
 		And in the table "ItemList" I click the button named "SearchByBarcode"
 		And I input "908" text in the field named "Barcode"
-		And I click the button named "OK"
+		And I move to the next attribute
 		And for each line of "ItemList" table I do
 			And I input "10,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
@@ -4119,7 +4119,7 @@ Scenario: _092088 check sln as single row
 			| 'Product 1 with SLN' | 'ODS'      | 'No'                 | '908'                | 'pcs'  | '1,53'       | '1,000'    | '10,00' | '18%' | '8,47'       | '10,00'        | 'Store 01' |
 		And in the table "ItemList" I click the button named "SearchByBarcode"
 		And I input "23455677788976667" text in the field named "Barcode"
-		And I click the button named "OK"
+		And I move to the next attribute
 		And I finish line editing in "ItemList" table
 		And "ItemList" table became equal
 			| 'Retail sales receipt'         | 'Item'               | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Tax amount' | 'Quantity' | 'Price' | 'Net amount' | 'Total amount' | 'Store'    | 'VAT' |

@@ -13566,7 +13566,7 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 	EndIf;
 	
 	TableName = Parameters.TableName;
-	Columns = Parameters.ObjectMetadataInfo.Tables[TableName].Columns;
+	//Columns = Parameters.ObjectMetadataInfo.Tables[TableName].Columns;
 		
 	//AllColumns = StrSplit(Columns, ",", False);
 	
@@ -13676,7 +13676,7 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 		//For Each Column In AllColumns Do
 		For Each Column In StrSplit(SourceColumnsGroupBy, ",") Do
 			Column = TrimAll(Column);
-			If Not CommonFunctionsClientServer.ObjectHasProperty(SourceRow, Column) Then
+			If Not CommonFunctionsClientServer.ObjectHasProperty(NewRow, Column) Then
 				Continue;
 			EndIf;
 			//If ?(TypeOf(NewRow[Column]) = Type("Boolean"), NewRow[Column], ValueIsFilled(NewRow[Column])) Then

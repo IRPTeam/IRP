@@ -431,12 +431,12 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			FillSalesPersonInItemList();
 		EndIf;
 		
-	Else
-		
+	EndIf;
+
+	If Result.Barcodes.Count() Then		
 		DetailedInformation = "<span style=""color:red;"">" + StrTemplate(R().S_019, StrConcat(
 			Result.Barcodes, ",")) + "</span>";
 		SetDetailedInfo(DetailedInformation);
-		
 	EndIf;
 EndProcedure
 

@@ -110,9 +110,9 @@ EndProcedure
 //  Barcode - String - Barcode
 //  Result - Boolean - Result
 //  Message - String - Message
-//  Parameters - See GetBarcodeSettings
-Procedure ScanBarcodeEndMobile(Barcode, Result, Message, Parameters) Export
-	ProcessBarcodeResult = ProcessBarcode(Barcode, Parameters);
+//  Settings - See GetBarcodeSettings
+Procedure ScanBarcodeEndMobile(Barcode, Result, Message, Settings) Export
+	ProcessBarcodeResult = ProcessBarcode(Barcode, Settings);
 	If ProcessBarcodeResult Then
 		Message = R().S_018;
 	Else
@@ -153,11 +153,16 @@ Function ProcessBarcode(Barcode, Settings) Export
 	Else
 		BarcodeArray = Barcode;
 	EndIf;
-	
+	BarcodeReadyArray = New Array;
 	For Index = 0 To BarcodeArray.UBound() Do
-		BarcodeArray[Index] = CheckBarcode(BarcodeArray[Index]);
+		ReadyBarcode = CheckBarcode(BarcodeArray[Index]);
+		
+		If Not IsBlankString(BarcodeReadyArray) Then
+			BarcodeReadyArray.Add(ReadyBarcode);
+		EndIf;
 	EndDo;
-	Return ProcessBarcodes(BarcodeArray, Settings);
+	
+	Return ProcessBarcodes(BarcodeReadyArray, Settings);
 EndFunction
 
 Function CheckBarcode(Val Barcode)
@@ -169,29 +174,15 @@ Function ProcessBarcodes(Barcodes, Settings)
 	ReturnCallToModule = Settings.ReturnCallToModule;
 	ServerSettings = Settings.ServerSettings;
 	
-	FoundedItems = BarcodeServer.SearchByBarcodes(Barcodes, ServerSettings);
+	BarcodeResult = BarcodeServer.SearchByBarcodes(Barcodes, ServerSettings);
 
-	If FoundedItems = Undefined Then
-		Return False;
-	EndIf;
-
-	For Each FoundedItem In FoundedItems Do
-		While True Do 
-			Index = Barcodes.Find(FoundedItem.Barcode);
-			If Index = Undefined Then
-				Break;
-			EndIf;
-			Barcodes.Delete(Index);
-		EndDo;
-	EndDo;
-	
-	Settings.Result.FoundedItems = FoundedItems;
-	Settings.Result.Barcodes = Barcodes;
+	Settings.Result.FoundedItems = BarcodeResult.FoundedItems;
+	Settings.Result.Barcodes = BarcodeResult.Barcodes;
 
 	//@skip-warning
 	NotifyDescription = New NotifyDescription("SearchByBarcodeEnd", ReturnCallToModule, Settings);
 	ExecuteNotifyProcessing(NotifyDescription, Settings.Result);
-	If FoundedItems.Count() Then
+	If Settings.Result.FoundedItems.Count() Then
 		ReturnResult = True;
 	EndIf;
 	Return ReturnResult;

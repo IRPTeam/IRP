@@ -29,6 +29,19 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <resources uuid="faa1efba-1dd9-4b9b-b92f-b16b45b0c8a4">
+    <name>AmountTax</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount tax</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
   <dimensions uuid="fb42321e-d943-4006-adc1-84d3c1fba0a4">
     <name>Company</name>
     <synonym>

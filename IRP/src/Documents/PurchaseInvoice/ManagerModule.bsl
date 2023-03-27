@@ -226,8 +226,18 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	CurrencyTable = Ref.Currencies.UnloadColumns();
 	CurrencyMovementType = Ref.Company.LandedCostCurrencyMovementType;
+	
+	ArrayOfFixedRates = New Array();
+	For Each Row In Ref.Currencies Do
+		If Row.IsFixed Then
+			FixedRates = New Structure("Key, CurrencyFrom, MovementType, Rate, ReverseRate, Multiplicity");
+			FillPropertyValues(FixedRates, Row);
+			ArrayOfFixedRates.Add(FixedRates);
+		EndIf;
+	EndDo;
+	
 	For Each Row In BatchKeysInfo Do
-		CurrenciesServer.AddRowToCurrencyTable(Ref.Date, CurrencyTable, Row.Key, Row.Currency, CurrencyMovementType);
+		CurrenciesServer.AddRowToCurrencyTable(Ref.Date, CurrencyTable, Row.Key, Row.Currency, CurrencyMovementType, ArrayOfFixedRates);
 	EndDo;
 	
 	PostingDataTables = New Map();
@@ -596,8 +606,9 @@ Function ItemListLandedCost()
 	|	ItemList.ItemKey,
 	|	ItemList.AdditionalAnalytic,
 	|	ItemList.NetAmount,
+	|	ItemList.TaxAmount,
 	|	ItemList.IsAdditionalItemCost,
-	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+	|	ItemList.IsService,
 	|	TableRowIDInfo.RowID AS RowID
 	|INTO ItemListLandedCost
 	|FROM
@@ -1289,7 +1300,8 @@ Function R6070T_OtherPeriodsExpenses()
 	"SELECT
 	|	*,
 	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-	|	ItemList.NetAmount AS Amount
+	|	ItemList.NetAmount AS Amount,
+	|	ItemList.TaxAmount AS AmountTax
 	|INTO R6070T_OtherPeriodsExpenses
 	|FROM
 	|	ItemListLandedCost AS ItemList

@@ -95,7 +95,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	
 	BatchCostAllocationInfoRecalculated = BatchCostAllocationInfoRecalculated.Copy(New Structure("CurrencyMovementType", CurrencyMovementType));
 	BatchCostAllocationInfoRecalculated.GroupBy("Period, Company, Document, Store, ItemKey, Currency, CurrencyMovementType", 
-	"Amount");	
+	"Amount, AmountTax");	
 	Tables.T6060S_BatchCostAllocationInfo = BatchCostAllocationInfoRecalculated;
 	
 	OtherPeriodsExpensesMetadata    = Parameters.Object.RegisterRecords.R6070T_OtherPeriodsExpenses.Metadata();
@@ -194,6 +194,7 @@ Function CostList()
 	|	CostList.Basis.Currency AS Currency,
 	|	CostList.RowID AS Key,
 	|	SUM(ISNULL(AllocationList.Amount, 0)) AS Amount,
+	|	SUM(ISNULL(AllocationList.TaxAmount, 0)) AS AmountTax,
 	|	AllocationList.RowID
 	|INTO CostList
 	|FROM
@@ -225,6 +226,7 @@ Function AllocationList()
 	|	AllocationList.Store AS Store,
 	|	AllocationList.ItemKey AS ItemKey,
 	|	SUM(AllocationList.Amount) AS Amount,
+	|	SUM(AllocationList.TaxAmount) AS AmountTax,
 	|	CostList.Currency AS Currency,
 	|	CostList.Basis AS Basis,
 	|	AllocationList.RowID AS Key,

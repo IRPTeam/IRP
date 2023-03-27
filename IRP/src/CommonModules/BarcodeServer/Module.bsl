@@ -81,7 +81,7 @@ Function SearchByBarcodes(Val Barcodes, Settings) Export
 		EndDo;
 	EndIf;
 
-	Result = New Array();
+	Result = New Array(); // Array of Structure
 	For Each Row In QueryTable Do
 		ItemStructure = New Structure();
 		For Each Column In QueryTable.Columns Do
@@ -99,12 +99,32 @@ EndFunction
 // 
 // Returns:
 //  Array of Structure:
-// * User - CatalogRef.Users -
+//  * User - CatalogRef.Users -
+//  * Barcode - DefinedType.typeBarcode -
 Function GetUsersByBarcode(Barcodes)
+	QueryTable = GetUsersDataByBarcode(Barcodes);
+	Result = New Array(); // Array of Structure
+	For Each Row In QueryTable Do
+		Result.Add(New Structure("User, Barcode", Row.User, Row.Barcode));
+	EndDo;
+	Return Result;
+EndFunction
+
+// Get users data by barcode.
+// 
+// Parameters:
+//  Barcodes - Array of DefinedType.typeBarcode - Barcodes
+// 
+// Returns:
+//  ValueTable - Get users data by barcode:
+//  * User - CatalogRef.Users -
+//  * Barcode - DefinedType.typeBarcode -
+Function GetUsersDataByBarcode(Barcodes)
 	Query = New Query();
 	Query.Text = 
 		"SELECT
-		|	Users.Ref
+		|	Users.Ref AS User,
+		|	Users.UserID AS Barcode
 		|FROM
 		|	Catalog.Users AS Users
 		|WHERE
@@ -113,11 +133,7 @@ Function GetUsersByBarcode(Barcodes)
 	Query.SetParameter("Barcodes", Barcodes);
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
-	Result = New Array();
-	For Each Row In QueryTable Do
-		Result.Add(New Structure("User", Row.Ref));
-	EndDo;
-	Return Result;
+	Return QueryTable
 EndFunction
 
 // Search by barcodes.

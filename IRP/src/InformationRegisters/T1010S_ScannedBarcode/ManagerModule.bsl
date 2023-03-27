@@ -3,19 +3,21 @@
 // 
 // Parameters:
 //  Basis - DocumentRef - Any basis document ref
-//  Barcode - DefinedType.typeBarcode, Array - Array or single barcode to save 
+//  Barcode - Array of DefinedType.typeBarcode - Array or single barcode to save 
 Procedure SaveBarcode(Basis, Barcode, Quantity = 1) Export
 
-	NewBarcode = CreateRecordManager();
-
-	NewBarcode.InfoID = New UUID();
-	NewBarcode.Period = CommonFunctionsServer.GetCurrentSessionDate();
-	NewBarcode.User = SessionParameters.CurrentUser;
-	NewBarcode.Basis = Basis;
-	NewBarcode.Barcode = Barcode;
-	NewBarcode.Count = Quantity;
-
-	NewBarcode.Write();
+	For Each Row In Barcode Do
+		NewBarcode = CreateRecordManager();
+	
+		NewBarcode.InfoID = New UUID();
+		NewBarcode.Period = CommonFunctionsServer.GetCurrentSessionDate();
+		NewBarcode.User = SessionParameters.CurrentUser;
+		NewBarcode.Basis = Basis;
+		NewBarcode.Barcode = Row;
+		NewBarcode.Count = Quantity;
+	
+		NewBarcode.Write();
+	EndDo;
 
 EndProcedure
 

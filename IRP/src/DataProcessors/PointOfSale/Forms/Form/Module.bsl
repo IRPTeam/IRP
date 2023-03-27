@@ -444,7 +444,7 @@ EndProcedure
 Procedure ChangeRollbackRight(Command)
 	If Not Items.ChangeRollbackRight.Check Then
 		OpenForm("DataProcessor.PointOfSale.Form.ChangeRight", , ThisObject, , , , 
-		New NotifyDescription("ChangeRightEnd", ThisObject ) , FormWindowOpeningMode.LockOwnerWindow);
+			New NotifyDescription("ChangeRightEnd", ThisObject ) , FormWindowOpeningMode.LockOwnerWindow);
 	Else
 		Items.ChangeRollbackRight.Check = False;
 		ThisObject.KeepRights = False;

@@ -893,6 +893,23 @@
     <common>true</common>
    </edit>
   </columns>
+  <columns>
+   <name>ManualInputValue</name>
+   <title>
+    <key>en</key>
+    <value>Manual input value</value>
+   </title>
+   <id>22</id>
+   <valueType>
+    <types>Boolean</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
  </attributes>
  <attributes>
   <name>Percent</name>

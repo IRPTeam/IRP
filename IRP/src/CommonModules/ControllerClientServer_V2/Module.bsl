@@ -13236,6 +13236,7 @@ Function SetPropertyForm(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache =
 EndFunction
 
 Function ReadOnlyPropertyIsFilled(Parameters, Row, PropertyName, TableName)
+	// when IsLoadData all values of ReadOnlyProperty in cache
 	If Parameters.IsLoadData Then
 		CacheRow = GetRowFromTableCache(Parameters, TableName, Row.Key);
 		If CacheRow <> Undefined Then
@@ -13566,9 +13567,6 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 	EndIf;
 	
 	TableName = Parameters.TableName;
-	//Columns = Parameters.ObjectMetadataInfo.Tables[TableName].Columns;
-		
-	//AllColumns = StrSplit(Columns, ",", False);
 	
 	// initialize cache
 	If Not Parameters.Cache.Property(TableName) Then
@@ -13581,12 +13579,6 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 		AddTableToCache(Parameters, "SourceOfOrigins");
 	EndIf;
 	
-//	ArrayOfIgnoreDataPaths = New Array();
-//	ArrayOfIgnoreDataPaths.Add(Parameters.TableName + ".LineNumber");
-//	ArrayOfIgnoreDataPaths.Add(Parameters.TableName + ".Key");
-	
-	
-	//ProcessedKeys = New Array();
 	AllExtractedData = New Structure();
 	
 	AllRows = New Array();
@@ -13604,7 +13596,6 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 	RowIndex = Parameters.Rows.Count() - Parameters.LoadData.CountRows;
 	For Each SourceRow In SourceTable Do
 		NewRow =  AllRows[RowIndex];
-		//AddRowToTableCache(Parameters, TableName, New Structure("Key", NewRow.Key));
 		Parameters.Rows.Clear();
 		Parameters.Rows.Add(NewRow);
 		
@@ -13637,6 +13628,7 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 			
 		// fill new row default values from user settings
 		tmpRow = New Structure("Key", NewRow.Key);
+		
 		If IsFirstRow Then
 			IsFirstRow = False;
 			AddNewRow(TableName, Parameters, , False);
@@ -13649,23 +13641,22 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 					DefaultFilledRow.Insert(KeyValue.Key, KeyValue.Value);
 				EndDo;
 			Else
-				AddRowToTableCache(Parameters, Parameters.TableName, tmpRow);
+				AddRowToTableCache(Parameters, TableName, tmpRow);
 			EndIf;
 		Else
+			//For Each KeyValue In DefaultFilledRow Do
+			//	tmpRow.Insert(KeyValue.Key, KeyValue.Value);
+			//EndDo;
+			AddRowToTableCache(Parameters, TableName, tmpRow);
+			
 			For Each KeyValue In DefaultFilledRow Do
-				tmpRow.Insert(KeyValue.Key, KeyValue.Value);
+				DataPath = TrimAll(StrTemplate("%1.%2", TableName, KeyValue.Key));
+				Property = New Structure("DataPath", DataPath);
+				API_SetProperty(Parameters, Property, KeyValue.Value, , API_Settings);
 			EndDo;
-			AddRowToTableCache(Parameters, Parameters.TableName, tmpRow);
 		EndIf;
-		// fill new row from source table
-		//FillPropertyValues(NewRow, SourceRow);
-		// put to cache
-		//For Each Column In AllColumns Do
-		//	If ?(TypeOf(NewRow[Column]) = Type("Boolean"), NewRow[Column], ValueIsFilled(NewRow[Column])) Then
-		//		TopIndex = Parameters.Cache[TableName].Count() - 1;
-		//		Parameters.Cache[TableName][TopIndex].Insert(Column, NewRow[Column]);
-		//	EndIf;
-		//EndDo;
+		
+		CacheRow = GetRowFromTableCache(Parameters, TableName, NewRow.Key);
 		
 		// initialize read only parameters for each row
 		Parameters.ReadOnlyPropertiesMap.Clear();
@@ -13673,53 +13664,33 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 		
 		ReadOnlyDataPaths = New Array();
 		FilledColumns = New Array();
-		//For Each Column In AllColumns Do
-		For Each Column In StrSplit(SourceColumnsGroupBy, ",") Do
-			Column = TrimAll(Column);
-			If Not CommonFunctionsClientServer.ObjectHasProperty(NewRow, Column) Then
+		
+		// data from source row
+		For Each Column In SourceTable.Columns Do
+			If Not CommonFunctionsClientServer.ObjectHasProperty(NewRow, Column.Name) Then
 				Continue;
 			EndIf;
-			//If ?(TypeOf(NewRow[Column]) = Type("Boolean"), NewRow[Column], ValueIsFilled(NewRow[Column])) Then
-			If ?(TypeOf(SourceRow[Column]) = Type("Boolean"), SourceRow[Column], ValueIsFilled(SourceRow[Column])) Then
-				DataPath = TrimAll(StrTemplate("%1.%2", TableName, Column));
+			SourceRowValue = SourceRow[Column.Name];
+			
+			If ?(TypeOf(SourceRowValue) = Type("Boolean"), SourceRowValue, ValueIsFilled(SourceRowValue)) Then
+				DataPath = TrimAll(StrTemplate("%1.%2", TableName, Column.Name));
 				
 				FilledColumns.Add(New Structure("DataPath, Column, Value", 
-					DataPath, Column, SourceRow[Column]));
+					DataPath, Column.Name, SourceRowValue));
 					
 				ReadOnlyDataPaths.Add(DataPath);
-				Parameters.ReadOnlyPropertiesMap.Insert(Upper(DataPath), True);
-				
-				
-				// put to cache
-				//TopIndex = Parameters.Cache[TableName].Count() - 1;
-				//Parameters.Cache[TableName][TopIndex].Insert(Column, SourceRow[Column]);
+				Parameters.ReadOnlyPropertiesMap.Insert(Upper(DataPath), True);				
 			EndIf;
 		EndDo;
-		
-		// reset steps counter, infinity loop between different rows will not
-//		If Parameters.Property("ModelEnvironment") 
-//			And Parameters.ModelEnvironment.Property("AlreadyExecutedSteps") Then
-//				ValidSteps = New Map();
-//				For Each Step In Parameters.ModelEnvironment.AlreadyExecutedSteps Do
-//					If Step.Value.Key = Undefined Or ProcessedKeys.Find(Step.Value.Key) <> Undefined Then
-//						ValidSteps.Insert(Step.Value.Name + ":" + Step.Value.Key, Step.Value);
-//					EndIf;
-//				EndDo;
-//				Parameters.ModelEnvironment.AlreadyExecutedSteps = ValidSteps;
-//		EndIf;
-		
+				
 		// if columns filled from source, do not change value, even is wrong value
 		Parameters.ReadOnlyProperties = StrConcat(ReadOnlyDataPaths, ",");
 		For Each FilledColumn In FilledColumns Do
-//			If ArrayOfIgnoreDataPaths.Find(DataPath) <> Undefined Then
-//				Continue;
-//			EndIf;
 			Property = New Structure("DataPath", FilledColumn.DataPath);
-			
 			API_SetProperty(Parameters, Property, FilledColumn.Value, , API_Settings);
+			CacheRow[FilledColumn.Column] = FilledColumn.Value;
 		EndDo;
 		RowIndex = RowIndex + 1;
-		//ProcessedKeys.Add(NewRow.Key);
 		
 		LaunchNextSteps(Parameters);
 		

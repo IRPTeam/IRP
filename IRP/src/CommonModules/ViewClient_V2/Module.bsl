@@ -682,6 +682,7 @@ Procedure __tmp_GoodsShipmentReceipt_CommitChanges(Parameters)
 EndProcedure
 
 Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
+//	start = CurrentDate();
 	If Answer = Undefined Then
 		Return; // is Cancel pressed
 	EndIf;
@@ -769,6 +770,7 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
 		Parameters.Form.UpdateTotalAmounts();
 	EndIf;
+//	Message(CurrentDate()-start);
 EndProcedure
 
 Function IsChangedTaxRates(Parameters)

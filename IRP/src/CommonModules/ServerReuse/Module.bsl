@@ -21,6 +21,10 @@ Function GetTaxRatesByTax(Tax) Export
 	Return TaxesServer._GetTaxRatesByTax(Tax);
 EndFunction
 
+Function CalculateTax(Tax, TaxRateOrAmount, PriceIncludeTax, _Key, TotalAmount, NetAmount, Ref, Reverse) Export
+	Return TaxesServer._CalculateTax(Tax, TaxRateOrAmount, PriceIncludeTax, _Key, TotalAmount, NetAmount, Ref, Reverse);
+EndFunction
+
 // Get item info
 
 Function ItemPriceInfo(Parameter_Period, Parameter_ItemKey, Parameter_Unit, Parameter_PriceType) Export

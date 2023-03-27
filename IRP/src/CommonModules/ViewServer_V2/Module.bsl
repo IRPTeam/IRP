@@ -129,8 +129,19 @@ Procedure API_CallbackAtServer(Object, Form, TableName, ArrayOfDataPaths) Export
 EndProcedure
 
 Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
+	ObjectMetadata = Object.Ref.Metadata();
 	Result = New Structure();
-	Result.Insert("MetadataName", Object.Ref.Metadata().Name);
+	Result.Insert("MetadataName", ObjectMetadata.Name);
+	
+	ArrayOfAttributes = New Array();
+	For Each Attr In ObjectMetadata.StandardAttributes Do
+		ArrayOfAttributes.Add(Attr.Name);
+	EndDo;
+	
+	For Each Attr In ObjectMetadata.Attributes Do
+		ArrayOfAttributes.Add(Attr.Name);
+	EndDo;
+	Result.Insert("Attributes", StrConcat(ArrayOfAttributes, ","));
 	
 	Tables = New Structure();
 	For Each TableName In StrSplit(ArrayOfTableNames, ",") Do

@@ -11,9 +11,24 @@ If ValueIsFilled(StepNames) And StepNames <> "BindVoid" Then
 	Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
 	TransferFormToStructure(Transfer, Parameters);
 #ENDIF
+
+// TEST	
+//#IF Client THEN
+//	__Object = Parameters.Object;
+//	
+//	ObjectInfo = New Structure(Parameters.ObjectMetadataInfo.Attributes);
+//	FillPropertyValues(ObjectInfo, __Object);
+//	
+//	Parameters.Object = ObjectInfo;
+//#ENDIF
 	
 	ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
-	
+
+// TEST
+//#IF Client THEN
+//	Parameters.Object = __Object;
+//#ENDIF
+
 #IF Client THEN
 	TransferStructureToForm(Transfer, Parameters);
 #ENDIF

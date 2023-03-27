@@ -1,6 +1,6 @@
 
 // Tax rates
-Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
+Function GetTaxRatesForItemKey(Parameters) Export
 	Return ServerReuse.GetTaxRatesForItemKey(Parameters.Date, Parameters.Company, Parameters.Tax, Parameters.ItemKey);
 EndFunction
 
@@ -273,7 +273,7 @@ Function _GetTaxRatesForItemKey(Date, Company, Tax, ItemKey) Export
 	Return ArrayOfTaxes;
 EndFunction
 
-Function GetTaxRatesForAgreement(Parameters, AddInfo = Undefined) Export
+Function GetTaxRatesForAgreement(Parameters) Export
 	Return ServerReuse.GetTaxRatesForAgreement(Parameters.Date, Parameters.Company, Parameters.Tax, Parameters.Agreement);
 EndFunction
 
@@ -313,7 +313,7 @@ Function _GetTaxRatesForAgreement(Date, Company, Tax, Agreement) Export
 	Return ArrayOfTaxes;
 EndFunction
 
-Function GetTaxRatesForCompany(Parameters, AddInfo = Undefined) Export
+Function GetTaxRatesForCompany(Parameters) Export
 	Return ServerReuse.GetTaxRatesForCompany(Parameters.Date, Parameters.Company, Parameters.Tax);
 EndFunction
 
@@ -434,26 +434,47 @@ Function _GetTaxRatesByTax(Tax) Export
 	Query.SetParameter("Ref", Tax);
 	Return Query.Execute().Unload().UnloadColumn("TaxRate");
 EndFunction
+		
+Function CalculateTax(Parameters) Export
+	Return ServerReuse.CalculateTax(Parameters.Tax, 
+		Parameters.TaxRateOrAmount, 
+		Parameters.PriceIncludeTax, 
+		Parameters.Key, 
+		Parameters.TotalAmount, 
+		Parameters.NetAmount, 
+		Parameters.Ref, 
+		Parameters.Reverse);
+EndFunction
 
-Function CalculateTax(Parameters, AddInfo = Undefined) Export
+Function _CalculateTax(Tax, TaxRateOrAmount, PriceIncludeTax, _Key, TotalAmount, NetAmount, Ref, Reverse) Export
 	Result = New Array();
-	If Parameters.Tax.Type = Enums.TaxType.Rate Then
-		Info = AddDataProcServer.AddDataProcInfo(Parameters.Tax.ExternalDataProc);
+	If Tax.Type = Enums.TaxType.Rate Then
+		Info = AddDataProcServer.AddDataProcInfo(Tax.ExternalDataProc);
 		Info.Create = True;
 		AddDataProc = AddDataProcServer.CallMethodAddDataProc(Info);
 		If Not AddDataProc = Undefined Then
-			Result = AddDataProc.CalculateTax(Parameters);
+			DataProcParameters = New Structure();
+			DataProcParameters.Insert("Tax"             , Tax);
+			DataProcParameters.Insert("TaxRateOrAmount" , TaxRateOrAmount);
+			DataProcParameters.Insert("PriceIncludeTax" , PriceIncludeTax);
+			DataProcParameters.Insert("Key"             , _Key);
+			DataProcParameters.Insert("TotalAmount"     , TotalAmount);
+			DataProcParameters.Insert("NetAmount"       , NetAmount);
+			DataProcParameters.Insert("Ref"             , Ref);
+			DataProcParameters.Insert("Reverse"         , Reverse);
+			
+			Result = AddDataProc.CalculateTax(DataProcParameters);
 		EndIf;
 	Else
-		Result.Add(New Structure("Amount", Parameters.TaxRateOrAmount));
+		Result.Add(New Structure("Amount", TaxRateOrAmount));
 	EndIf;
 
 	For Each Row In Result Do
 		If Not Row.Property("Tax") Then
-			Row.Insert("Tax", Parameters.Tax);
+			Row.Insert("Tax", Tax);
 		EndIf;
 		If Not Row.Property("TaxRate") Then
-			Row.Insert("TaxRate", Parameters.TaxRateOrAmount);
+			Row.Insert("TaxRate", TaxRateOrAmount);
 		EndIf;
 		If Not Row.Property("IncludeToTotalAmount") Then
 			Row.Insert("IncludeToTotalAmount", True);

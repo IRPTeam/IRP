@@ -389,7 +389,7 @@ EndProcedure
 &AtClient
 Procedure AddItemKeyToItemList(ItemKey)
 	
-	Result = New Structure("FoundedItems", GetItemInfo.GetInfoByItemsKey(ItemKey));
+	Result = New Structure("FoundedItems, Barcodes", GetItemInfo.GetInfoByItemsKey(ItemKey), New Array);
 	SearchByBarcodeEnd(Result, New Structure());
 	
 EndProcedure

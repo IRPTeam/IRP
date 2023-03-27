@@ -199,17 +199,18 @@ Procedure ScanBarcodeEndMobile(Barcode, Result, Message, Parameters) Export
 			BarcodeClient.CloseMobileScanner();
 		EndIf;
 	Else
-		ProcessBarcodeResult = Barcodeclient.ProcessBarcode(Barcode, Parameters);
-		If ProcessBarcodeResult Then
-			If Parameters.Result.FoundedItems[0].isService And Parameters.Filter.DisableIfIsService Then
-				Message = StrTemplate(R().InfoMessage_026, Parameters.Result.FoundedItems[0].Item);
+		BarcodeClient.ProcessBarcode(Barcode, Parameters);
+		For Each FoundedItem In Parameters.Result.FoundedItems Do
+			If FoundedItem.isService And Parameters.Filter.DisableIfIsService Then
+				Message = StrTemplate(R().InfoMessage_026, FoundedItem.Item);
 				Result = False;
 			Else
 				Message = R().S_018;
 			EndIf;
-		Else
+		EndDo;
+		If Parameters.Result.Barcodes.Count() Then
 			Result = False;
-			Message = StrTemplate(R().S_019, Barcode);
+			Message = StrTemplate(R().S_019, StrConcat(Parameters.Result.Barcodes, Chars.LF));
 		EndIf;
 	EndIf;
 EndProcedure

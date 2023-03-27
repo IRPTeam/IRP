@@ -455,7 +455,7 @@ EndProcedure
 
 &AtClient
 Procedure ChangeRightEnd(Result, AdditionalParameters) Export
-	If Result = Undefined Then
+	If Result = Undefined OR Result.UserAdmin.isEmpty() Then
 		Items.ChangeRollbackRight.Check = False;
 	Else
 		Items.ChangeRollbackRight.Check = True;

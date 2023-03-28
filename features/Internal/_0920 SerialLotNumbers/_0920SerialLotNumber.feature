@@ -3456,7 +3456,7 @@ Scenario: _092062 create new serial lot number from Serial lot number form selec
 		Then the form attribute named "Item" became equal to "Product 1 with SLN"
 		Then the form attribute named "ItemKey" became equal to "PZU"
 		Then the form attribute named "DecorationSelected" became equal to "Items quantity"
-		And the editing text of form attribute named "ItemQuantity" became equal to "0,000"
+		And the editing text of form attribute named "ItemQuantity" became equal to "1,000"
 		Then the form attribute named "DecorationFrom" became equal to "Serials set for"
 		And the editing text of form attribute named "SelectedCount" became equal to "2,000"
 		Then the form attribute named "AutoCreateNewSerialLotNumbers" became equal to "Yes"

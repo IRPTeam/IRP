@@ -73,6 +73,7 @@ Function SearchByBarcodes(Val Barcodes, Settings) Export
 		|	Barcodes.Unit AS Unit,
 		|	1 AS Quantity,
 		|	&PriceType AS PriceType,
+		|	&Date AS Date,
 		//|	Barcodes.ItemKey.Unit AS ItemKeyUnit,
 		//|	Barcodes.ItemKey.Item.Unit AS ItemUnit,
 		|	NOT Barcodes.ItemKey.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
@@ -88,6 +89,7 @@ Function SearchByBarcodes(Val Barcodes, Settings) Export
 		|		ON VTBarcode.Barcode = Barcodes.Barcode";
 	Query.SetParameter("BarcodeList", BarcodeVT);
 	Query.SetParameter("PriceType", Settings.PriceType);
+	Query.SetParameter("Date", CommonFunctionsServer.GetCurrentSessionDate());
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	

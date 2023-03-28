@@ -12993,6 +12993,8 @@ Procedure RollbackPropertyToValueBeforeChange_List(Parameters)
 		For Each OriginRow In Parameters.Object[TableName] Do
 			If Row.Key = OriginRow.Key Then
 			 	OriginRow[ColumnName] = Row[ColumnName];
+			 	SourceRow = Parameters.SourceTableMap.Get(TableName + ":" + Row.Key);
+			 	SourceRow[ColumnName] = Row[ColumnName];
 				SetPropertyObject(Parameters, DataPath, Row.Key, CurrentValue);
 				Break;
 			EndIf;

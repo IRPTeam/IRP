@@ -531,7 +531,8 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation");
 	
 	If Object.Property("Agreement") Then
-		FilterString = "Item, ItemKey, Unit, Price, PriceType";
+		//FilterString = "Item, ItemKey, Unit, Price, PriceType";
+		FilterString = "Item, ItemKey, Unit, PriceType";
 	ElsIf isSerialLotNumberAtRow Then
 		FilterString = "Item, ItemKey, Unit, SerialLotNumber";
 	Else
@@ -644,9 +645,9 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			FillingValues.Insert("Barcode" , ?(ResultElement.Property("Barcode"), ResultElement.Barcode, ""));
 			FillingValues.Insert("Date" , CommonFunctionsServer.GetCurrentSessionDate());
 			
-			If ResultElement.Property("Price") Then
-				FillingValues.Insert("Price", ResultElement.Price);
-			EndIf;
+			//If ResultElement.Property("Price") Then
+			//	FillingValues.Insert("Price", ResultElement.Price);
+			//EndIf;
 			
 			If ResultElement.Property("PriceType") Then
 				FillingValues.Insert("PriceType", ResultElement.PriceType);

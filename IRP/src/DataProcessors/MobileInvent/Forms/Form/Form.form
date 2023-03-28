@@ -1693,10 +1693,6 @@
     <event>OnOpen</event>
     <name>OnOpen</name>
   </handlers>
-  <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
   <excludedCommands>Abort</excludedCommands>
   <excludedCommands>Cancel</excludedCommands>
   <excludedCommands>ChangeHistory</excludedCommands>

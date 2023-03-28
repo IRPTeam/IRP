@@ -967,9 +967,10 @@ EndProcedure
 Procedure SearchByBarcodeEnd(Result, Parameters) Export
 	If Result.FoundedItems.Count() Then
 		Parameters.ReturnCallToModule.PickupItemsEnd(Result.FoundedItems, Parameters);
-	Else
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, StrConcat(Result.Barcodes, ",")));
 	EndIf;
+	For Each BarcodeEmpty In Result.Barcodes Do
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, BarcodeEmpty));
+	EndDo;
 EndProcedure
 
 Async Procedure OpenScanForm(Object, Form, Module) Export

@@ -367,11 +367,14 @@ Procedure FillAttribute(XDTO, Object, Val AttrName, DocAttr, ID = 0) Export
 			For Each Row In DataTag Do
 				DocRow = Object[NameSlaveTable].Add();
 				DocRow.Key = ID;
-				For Each Column In Object.Metadata().TabularSections[NameSlaveTable].Attributes Do
+				For Each Column In Object.Ref.Metadata().TabularSections[NameSlaveTable].Attributes Do
 					FillAttribute(Row, Object, Column.Name, DocRow, ID);
 				EndDo;
 			EndDo;
 			
+			Return;
+		ElsIf Names[0] = "C" Then	
+			DocAttr[AttrName] = GetFirstElementInList(XDTO, "__content");
 			Return;
 		Else	
 			Return;

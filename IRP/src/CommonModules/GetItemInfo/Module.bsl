@@ -17,9 +17,9 @@
 Function ItemPriceInfoByTable(TableItemKeys, Period, AddInfo = Undefined) Export
 
 	TableOfResults = GetTableOfResults();
-	TableWithSpecification = TableOfResults.CopyColumns();
+	TableWithSpecification = TableOfResults.CopyColumns(); // See GetTableOfResults
 
-	TableWithOutSpecification = TableOfResults.CopyColumns();
+	TableWithOutSpecification = TableOfResults.CopyColumns(); // See GetTableOfResults
 
 	For Each Row In TableItemKeys Do
 		If Row.hasSpecification Then
@@ -45,13 +45,13 @@ Function ItemPriceInfoByTable(TableItemKeys, Period, AddInfo = Undefined) Export
 	FillTableOfResults(QuerySelection, TableWithSpecification, TableOfResults);
 
 	TableWithOutSpecification.GroupBy("ItemKey, PriceType, Unit, ItemUnit, ItemKeyUnit");
-	TableWithOutSpecification.Columns.Add("ToUnit");
+	TableWithOutSpecification.Columns.Add("ToUnit", New TypeDescription("CatalogRef.Units"));
 	
 	TableWithOutSpecificationCopy = TableWithOutSpecification.Copy();
 	TableWithOutSpecificationCopy.GroupBy("ItemKey, PriceType, Unit");
 	QuerySelection = QueryByItemPriceInfo(TableWithOutSpecificationCopy, Period);
     QuerySelection.Reset();
-    ArrayForDelete = New Array();
+    ArrayForDelete = New Array(); // Array of ValueTableRow
     For Each Row In TableWithOutSpecification Do
     	Filter = New Structure();
     	Filter.Insert("ItemKey"   , Row.ItemKey);
@@ -99,6 +99,7 @@ EndFunction
 // * ItemUnit - CatalogRef.Units -
 // * Price - DefinedType.typePrice -
 // * hasSpecification - Boolean -
+// * ToUnit - CatalogRef.Units -
 Function GetTableOfResults()
 	TableOfResults = New ValueTable();
 	TableOfResults.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
@@ -484,6 +485,28 @@ Function QueryByItemPriceInfo_Specification(ItemList, Period, AddInfo = Undefine
 	Return QuerySelection;
 EndFunction
 
+// Query by item price info.
+// 
+// Parameters:
+//  ItemList - ValueTable - Item list:
+// * ItemKey - CatalogRef.ItemKeys -
+// * PriceType - CatalogRef.PriceTypes -
+// * Unit - CatalogRef.Units -
+//  Period - Date - Period
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  QueryResultSelection - Query by item price info:
+//	* ItemKey - CatalogRef.ItemKeys -
+//	* Specification - CatalogRef.ItemKeys -
+//	* AffectPricingMD5 - String -
+//	* Item - CatalogRef.ItemKeys -
+//	* Unit - CatalogRef.ItemKeys -
+//	* PriceType - CatalogRef.ItemKeys -
+//	* PriceByItemKeys - DefinedType.typePrice
+//	* PriceByProperties - DefinedType.typePrice
+//	* PriceByItems - DefinedType.typePrice
+//	* Price - DefinedType.typePrice
 Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 
 	Query = New Query();

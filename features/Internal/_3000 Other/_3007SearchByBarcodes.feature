@@ -90,16 +90,16 @@ Scenario: _300706 barcode check in Purchase invoice
 		| 'Ferron BP'     |
 	And I select current line in "List" table
 	And I click "SearchByBarcode" button
-	And I input "2202283713" text in "InputFld" field
-	And I click "OK" button
+	And I input "2202283713" text in the field named "Barcode"
+	And I move to the next attribute
 	* Check adding an items and filling in the price in the tabular part
 		And I click "Show row key" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit' | 'Quantity in base unit' |
 			| 'Dress' | 'S/Yellow' | '1,000' | 'pcs'  | '1,000'                 |
 		And I click "SearchByBarcode" button
-		And I input "2202283713" text in "InputFld" field
-		And I click "OK" button
+		And I input "2202283713" text in the field named "Barcode"
+		And I move to the next attribute
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Quantity'     | 'Unit' | 'Quantity in base unit' |
 			| 'Dress' | 'S/Yellow' | '2,000' | 'pcs'  | '2,000'                 |
@@ -167,11 +167,11 @@ Scenario: _300721 barcode check in PhysicalCountByLocation
 	Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 	And I click the button named "FormCreate"
 	And in the table "ItemList" I click the button named "SearchByBarcode"
-	And I input "2202283713" text in "InputFld" field
-	And I click "OK" button
+	And I input "2202283713" text in the field named "Barcode"
+	And I move to the next attribute
 	And in the table "ItemList" I click the button named "SearchByBarcode"
-	And I input "2202283713" text in "InputFld" field
-	And I click "OK" button
+	And I input "2202283713" text in the field named "Barcode"
+	And I move to the next attribute
 	And "ItemList" table became equal
 		| '#' | 'Item'  | 'Item key' | 'Unit' | 'Phys. count' | 'Date'|
 		| '1' | 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'       |  '*'  |
@@ -190,15 +190,15 @@ Scenario: _300723 barcode check in Price list
 		* Add first string
 			And I change "Set price" radio button value to "By item keys"
 			And I click the button named "SearchByBarcode"
-			And I input "2202283713" text in "InputFld" field
-			And I click "OK" button
+			And I input "2202283713" text in the field named "Barcode"
+			And I move to the next attribute
 			And "ItemKeyList" table contains lines
 				| 'Item'  | 'Item key' | 'Price' | 'Input unit' |
 				| 'Dress' | 'S/Yellow' | ''      | 'pcs'      |
 		* Add second string
 			And I click the button named "SearchByBarcode"
-			And I input "978020137962" text in "InputFld" field
-			And I click "OK" button
+			And I input "978020137962" text in the field named "Barcode"
+			And I move to the next attribute
 			And "ItemKeyList" table contains lines
 				| 'Item'  | 'Item key' | 'Price' | 'Input unit' |
 				| 'Dress' | 'S/Yellow' | ''      | 'pcs'      |
@@ -208,8 +208,8 @@ Scenario: _300723 barcode check in Price list
 				| 'Item'  | 'Item key' |
 				| 'Boots' | '37/18SD'  |			
 			And I click the button named "SearchByBarcode"
-			And I input "2202283713" text in "InputFld" field
-			And I click "OK" button
+			And I input "2202283713" text in the field named "Barcode"
+			And I move to the next attribute
 			And the current line of "ItemKeyList" table is equal to
 				| 'Item'  | 'Item key' | 'Price' | 'Input unit' |
 				| 'Dress' | 'S/Yellow' | ''      | 'pcs'      |
@@ -220,15 +220,15 @@ Scenario: _300723 barcode check in Price list
 		* Add first string
 			And I change "Set price" radio button value to "By items"
 			And I click the button named "SearchByBarcodeItem"			
-			And I input "2202283713" text in "InputFld" field
-			And I click "OK" button
+			And I input "2202283713" text in the field named "Barcode"
+			And I move to the next attribute
 			And "ItemList" table contains lines
 				| 'Item'  | 'Price' | 'Input unit' |
 				| 'Dress' | ''      | 'pcs'      |
 		* Add second string
 			And I click the button named "SearchByBarcodeItem"
-			And I input "978020137962" text in "InputFld" field
-			And I click "OK" button
+			And I input "978020137962" text in the field named "Barcode"
+			And I move to the next attribute
 			And "ItemList" table contains lines
 				| 'Item'  | 'Price' | 'Input unit' |
 				| 'Dress' | ''      | 'pcs'      |
@@ -238,8 +238,8 @@ Scenario: _300723 barcode check in Price list
 				| 'Item'  |
 				| 'Boots' |
 			And I click the button named "SearchByBarcodeItem"	
-			And I input "2202283713" text in "InputFld" field
-			And I click "OK" button
+			And I input "2202283713" text in the field named "Barcode"
+			And I move to the next attribute
 			And the current line of "ItemList" table is equal to
 				| 'Item'  | 'Price' | 'Input unit' |
 				| 'Dress' | ''      | 'pcs'      |
@@ -259,11 +259,11 @@ Scenario: _300725 check function Always add new row after scan
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
 		And I click "SearchByBarcode" button
-		And I input "2202283713" text in "InputFld" field
-		And I click "OK" button
+		And I input "2202283713" text in the field named "Barcode"
+		And I move to the next attribute
 		And I click "SearchByBarcode" button
-		And I input "2202283713" text in "InputFld" field
-		And I click "OK" button
+		And I input "2202283713" text in the field named "Barcode"
+		And I move to the next attribute
 		And "ItemList" table became equal
 			| '#' | 'Item'  | 'Item key' | 'Unit' | 'Quantity' |
 			| '1' | 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'    |

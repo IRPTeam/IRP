@@ -179,27 +179,30 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	LastBarcode = "";
 	SerialLotNumberStatus = "";
 	Items.CreateSerialLotNumber.Visible = False;
-	If Result.FoundedItems.Count() Then
-		ScannedInfo = Result.FoundedItems[0];
-		Barcode = Result.Barcodes[0];
+	
+	For Each ScannedInfo In Result.FoundedItems Do
 		If Not ValueIsFilled(ScannedInfo.SerialLotNumber) Then
-			CalculateStatus(StrTemplate(R().InfoMessage_017, Result.Barcodes[0]));
+			CalculateStatus(StrTemplate(R().InfoMessage_017, ScannedInfo.Barcode));
 		ElsIf Not ScannedInfo.ItemKey.IsEmpty() And Not ScannedInfo.ItemKey = ItemKey Then
 			StrTemp = "" + ScannedInfo.Item + " [ " + ScannedInfo.ItemKey + " ]";
-			CalculateStatus(StrTemplate(R().InfoMessage_016, Barcode, StrTemp));
+			CalculateStatus(StrTemplate(R().InfoMessage_016, ScannedInfo.Barcode, StrTemp));
 		ElsIf Not ScannedInfo.Item.IsEmpty() And Not ScannedInfo.Item = Item Then
-			CalculateStatus(StrTemplate(R().InfoMessage_016, Barcode, ScannedInfo.Item));
+			CalculateStatus(StrTemplate(R().InfoMessage_016, ScannedInfo.Barcode, ScannedInfo.Item));
 		ElsIf Not ScannedInfo.ItemType.IsEmpty() And Not ScannedInfo.ItemType = ItemType Then
-			CalculateStatus(StrTemplate(R().InfoMessage_016, Barcode, ScannedInfo.ItemType));
+			CalculateStatus(StrTemplate(R().InfoMessage_016, ScannedInfo.Barcode, ScannedInfo.ItemType));
 		Else
 			AddNewSerialLotNumberRow(ScannedInfo.SerialLotNumber);
 		EndIf;
-	Else
+	EndDo;
+	
+	If Result.Barcodes.Count() Then
 		If AutoCreateNewSerialLotNumbers Then
-			SerialLotNumber = SerialLotNumbersServer.GetNewSerialLotNumber(Result.Barcodes[0], ItemKey);
-			AddNewSerialLotNumberRow(SerialLotNumber);
+			For Each NewBarcode In Result.Barcodes Do
+				SerialLotNumber = SerialLotNumbersServer.GetNewSerialLotNumber(NewBarcode, ItemKey);
+				AddNewSerialLotNumberRow(SerialLotNumber);
+			EndDo;
 		Else
-			LastBarcode = Result.Barcodes[0];
+			LastBarcode = StrConcat(Result.Barcodes, ";");
 			CalculateStatus(StrTemplate(R().InfoMessage_015, LastBarcode));
 			Items.CreateSerialLotNumber.Visible = True;
 		EndIf;

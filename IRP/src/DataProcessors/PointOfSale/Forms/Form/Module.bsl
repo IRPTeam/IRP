@@ -389,7 +389,7 @@ EndProcedure
 &AtClient
 Procedure AddItemKeyToItemList(ItemKey)
 	
-	Result = New Structure("FoundedItems", GetItemInfo.GetInfoByItemsKey(ItemKey));
+	Result = New Structure("FoundedItems, Barcodes", GetItemInfo.GetInfoByItemsKey(ItemKey), New Array);
 	SearchByBarcodeEnd(Result, New Structure());
 	
 EndProcedure
@@ -431,12 +431,12 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			FillSalesPersonInItemList();
 		EndIf;
 		
-	Else
-		
+	EndIf;
+
+	If Result.Barcodes.Count() Then		
 		DetailedInformation = "<span style=""color:red;"">" + StrTemplate(R().S_019, StrConcat(
 			Result.Barcodes, ",")) + "</span>";
 		SetDetailedInfo(DetailedInformation);
-		
 	EndIf;
 EndProcedure
 
@@ -444,7 +444,7 @@ EndProcedure
 Procedure ChangeRollbackRight(Command)
 	If Not Items.ChangeRollbackRight.Check Then
 		OpenForm("DataProcessor.PointOfSale.Form.ChangeRight", , ThisObject, , , , 
-		New NotifyDescription("ChangeRightEnd", ThisObject ) , FormWindowOpeningMode.LockOwnerWindow);
+			New NotifyDescription("ChangeRightEnd", ThisObject ) , FormWindowOpeningMode.LockOwnerWindow);
 	Else
 		Items.ChangeRollbackRight.Check = False;
 		ThisObject.KeepRights = False;
@@ -455,7 +455,7 @@ EndProcedure
 
 &AtClient
 Procedure ChangeRightEnd(Result, AdditionalParameters) Export
-	If Result = Undefined Then
+	If Result = Undefined OR Result.UserAdmin.isEmpty() Then
 		Items.ChangeRollbackRight.Check = False;
 	Else
 		Items.ChangeRollbackRight.Check = True;
@@ -622,6 +622,13 @@ Procedure ItemListDrag(Item, DragParameters, StandardProcessing, Row, Field)
 	EndIf;
 EndProcedure
 
+&AtClient
+Procedure AcquiringSlipInfo(Command)
+	OpenParameters = New Structure();
+	OpenParameters.Insert("Branch", Object.Branch);
+	OpenForm("DataProcessor.PointOfSale.Form.AcquiringSlipInfo", OpenParameters, ThisObject, , , , , FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
 #Region SpecialOffers
 
 #Region Offers_for_document
@@ -681,6 +688,7 @@ EndProcedure
 #EndRegion
 
 #EndRegion
+
 #EndRegion
 
 #EndRegion

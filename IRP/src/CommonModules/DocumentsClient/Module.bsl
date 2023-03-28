@@ -581,8 +581,14 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			EndDo;
 			
 		Else
-			FillPropertyValues(FilterStructure, ResultElement);
-			ExistingRows = Object.ItemList.FindRows(FilterStructure);	
+			FilledFilter = New Structure();
+			For Each KeyValue In FilterStructure Do
+				If ValueIsFilled(ResultElement[KeyValue.Key]) Then
+					FilledFilter.Insert(KeyValue.Key, ResultElement[KeyValue.Key]);
+				EndIf;
+			EndDo;
+			//FillPropertyValues(FilterStructure, ResultElement);
+			ExistingRows = Object.ItemList.FindRows(FilledFilter);	
 		EndIf;
 		
 		If ExistingRows.Count() And Not ResultElement.AlwaysAddNewRowAfterScan Then // increment Quantity in existing row

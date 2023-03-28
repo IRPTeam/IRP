@@ -1023,14 +1023,35 @@ Function GetExistingRows(Object, StoreInHeader, FilterStructure, FilterValues, F
 	Wrapper = BuilderAPI.Initialize(Object, , ,"ItemList", DocInfo);
 	
 	NewRow_ItemList = BuilderAPI.AddRow(Wrapper, "ItemList");
-	BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "Item"     , FilterValues.Item);
-	BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "ItemKey"  , FilterValues.ItemKey);
-	BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "Unit"     , FilterValues.Unit);
-	BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "Quantity" , FilterValues.Quantity);
+	If ValueIsFilled(FilterValues.Item) Then
+		BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "Item"     , FilterValues.Item);
+	EndIf;
+	
+	If ValueIsFilled(FilterValues.ItemKey) Then
+		BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "ItemKey"  , FilterValues.ItemKey);
+	EndIf;
+	
+	If ValueIsFilled(FilterValues.PriceType) Then
+		BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "PriceType", FilterValues.PriceType);
+	EndIf;
+	
+	If ValueIsFilled(FilterValues.Unit) Then
+		BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "Unit"     , FilterValues.Unit);
+	EndIf;
+	
+	If ValueIsFilled(FilterValues.Quantity) Then
+		BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "Quantity" , FilterValues.Quantity);
+	EndIf;
 	
 	If ValueIsFilled(StoreInHeader) Then
 		BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "Store", StoreInHeader);
 	EndIf;
+	
+	For Each KeyValue In FilterStructure Do
+		If Not ValueIsFilled(FilterValues[KeyValue.Key]) Then
+			FilterValues[KeyValue.Key] = NewRow_ItemList[KeyValue.Key];
+		EndIf;
+	EndDo;
 	
 	If ValueIsFilled(FilterValues.SerialLotNumber) Then
 		NewRow_SerialLotNumber = Wrapper.Object.SerialLotNumbers.Add();

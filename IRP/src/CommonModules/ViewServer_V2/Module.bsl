@@ -208,17 +208,17 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 		Return;
 	EndIf;
 	
-	FilledColumns = New Array();
-	For Each KeyValue In FillingValues Do
-		ColumnName = KeyValue.Key;
-		If ValueIsFilled(FillingValues[ColumnName]) Then
-			DataPath = Parameters.TableName + "." + ColumnName;
-			FilledColumns.Add(DataPath);
-			Parameters.ReadOnlyPropertiesMap.Insert(Upper(DataPath), True);
-		EndIf;
-	EndDo;
-	Parameters.ReadOnlyProperties = StrConcat(FilledColumns, ",");
-	Parameters.IsAddFilledRow = True;
+//	FilledColumns = New Array();
+//	For Each KeyValue In FillingValues Do
+//		ColumnName = KeyValue.Key;
+//		If ValueIsFilled(FillingValues[ColumnName]) Then
+//			DataPath = Parameters.TableName + "." + ColumnName;
+//			FilledColumns.Add(DataPath);
+//			Parameters.ReadOnlyPropertiesMap.Insert(Upper(DataPath), True);
+//		EndIf;
+//	EndDo;
+//	Parameters.ReadOnlyProperties = StrConcat(FilledColumns, ",");
+//	Parameters.IsAddFilledRow = True;
 	
 	Row = Parameters.Rows[0];
 	
@@ -293,6 +293,19 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 			ControllerClientServer_V2.SetTimeSheetListPosition(Parameters, PrepareValue(FillingValues.Position, Row.Key));
 		EndIf;		
 	EndIf;
+	
+	FilledColumns = New Array();
+	For Each KeyValue In FillingValues Do
+		ColumnName = KeyValue.Key;
+		If ValueIsFilled(FillingValues[ColumnName]) Then
+			DataPath = Parameters.TableName + "." + ColumnName;
+			FilledColumns.Add(DataPath);
+			Parameters.ReadOnlyPropertiesMap.Insert(Upper(DataPath), True);
+		EndIf;
+	EndDo;
+	Parameters.ReadOnlyProperties = StrConcat(FilledColumns, ",");
+	Parameters.IsAddFilledRow = True;
+	
 	ControllerClientServer_V2.LaunchNextSteps(Parameters);
 EndProcedure
 

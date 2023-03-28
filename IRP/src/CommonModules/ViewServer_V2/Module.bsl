@@ -212,12 +212,13 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	For Each KeyValue In FillingValues Do
 		ColumnName = KeyValue.Key;
 		If ValueIsFilled(FillingValues[ColumnName]) Then
-			FullColumnName = Parameters.TableName + "." + ColumnName;
-			FilledColumns.Add(FullColumnName);
-			Parameters.ReadOnlyPropertiesMap.Insert(Upper(FullColumnName), True);
+			DataPath = Parameters.TableName + "." + ColumnName;
+			FilledColumns.Add(DataPath);
+			Parameters.ReadOnlyPropertiesMap.Insert(Upper(DataPath), True);
 		EndIf;
 	EndDo;
 	Parameters.ReadOnlyProperties = StrConcat(FilledColumns, ",");
+	Parameters.IsAddFilledRow = True;
 	
 	Row = Parameters.Rows[0];
 	
@@ -226,6 +227,7 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	UnitIsPresent      = CommonFunctionsClientServer.ObjectHasProperty(Row, "Unit");
 	QuantityIsPresent  = CommonFunctionsClientServer.ObjectHasProperty(Row, "Quantity");
 	PriceIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "Price");
+	PriceTypeIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "PriceType");
 	PhysCountIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "PhysCount");
 	SerialLotNumberIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "SerialLotNumber");
 	BarcodeIsPresent  = CommonFunctionsClientServer.ObjectHasProperty(Row, "Barcode");
@@ -254,9 +256,13 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	If FillingValues.Property("Quantity") And PhysCountIsPresent Then
 		ControllerClientServer_V2.SetItemListPhysCount(Parameters, PrepareValue(FillingValues.Quantity, Row.Key));
 	EndIf;
-	
+		
 	If FillingValues.Property("Price") And PriceIsPresent Then
 		ControllerClientServer_V2.SetItemListPrice(Parameters, PrepareValue(FillingValues.Price, Row.Key));
+	EndIf;
+	
+	If FillingValues.Property("PriceType") And PriceTypeIsPresent Then
+		ControllerClientServer_V2.SetItemListPriceType(Parameters, PrepareValue(FillingValues.PriceType, Row.Key));
 	EndIf;
 	
 	If FillingValues.Property("SerialLotNumber") And SerialLotNumberIsPresent Then

@@ -67,6 +67,8 @@ Function SearchByBarcodes(Val Barcodes, Settings) Export
 	// TODO: Refact by query
 	If Not Settings.PriceType = Undefined Then
 		QueryTable.Columns.Add("Price", Metadata.DefinedTypes.typePrice.Type);
+		QueryTable.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
+		
 		PreviousPriceTable = QueryTable.Copy( , "ItemKey, Unit, ItemKeyUnit, ItemUnit, hasSpecification");
 		PreviousPriceTable.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
 		PreviousPriceTable.FillValues(Settings.PriceType, "PriceType");
@@ -77,6 +79,7 @@ Function SearchByBarcodes(Val Barcodes, Settings) Export
 			FoundedRows = QueryTable.FindRows(Filter);
 			For Each FoundedRow In FoundedRows Do
 				FoundedRow.Price = Row.Price;
+				FoundedRow.PriceType = Row.PriceType;
 			EndDo;
 		EndDo;
 	EndIf;

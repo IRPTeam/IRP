@@ -531,7 +531,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation");
 	
 	If Object.Property("Agreement") Then
-		FilterString = "Item, ItemKey, Unit, Price";
+		FilterString = "Item, ItemKey, Unit, Price, PriceType";
 	ElsIf isSerialLotNumberAtRow Then
 		FilterString = "Item, ItemKey, Unit, SerialLotNumber";
 	Else
@@ -646,6 +646,10 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			
 			If ResultElement.Property("Price") Then
 				FillingValues.Insert("Price", ResultElement.Price);
+			EndIf;
+			
+			If ResultElement.Property("PriceType") Then
+				FillingValues.Insert("PriceType", ResultElement.PriceType);
 			EndIf;
 			
 			Row = ViewClient_V2.ItemListAddFilledRow(Object, Form, FillingValues);

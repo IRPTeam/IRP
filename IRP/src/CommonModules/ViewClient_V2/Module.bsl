@@ -1967,13 +1967,10 @@ Function ItemListAddFilledRow(Object, Form,  FillingValues) Export
 EndFunction
 
 Procedure ItemListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
-//	start = CurrentDate();
 	Parameters = GetLoadParameters(Object, Form, "ItemList", Address, GroupColumn, SumColumn);
 	Parameters.LoadData.ExecuteAllViewNotify = True;
 	ControllerClientServer_V2.AddEmptyRowsForLoad(Parameters);
 	ControllerClientServer_V2.ItemListLoad(Parameters);
-//	enddate = CurrentDate();
-//	Message(enddate-start);
 EndProcedure
 
 #EndRegion

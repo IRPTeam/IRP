@@ -185,6 +185,8 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	Parameters.LoadData.SourceColumnsSumBy        = ServerData.LoadData.SourceColumnsSumBy;
 	Parameters.Insert("IsLoadData", Parameters.LoadData.CountRows > 0);
 	
+	Parameters.Insert("IsAddFilledRow", False);
+	
 	// if specific rows are not passed, then we use everything that is in the table with the name TableName
 	If ServerParameters.Rows = Undefined Then 
 		If ValueIsFilled(ServerParameters.TableName) Then
@@ -3683,6 +3685,7 @@ Function BindAgreement(Parameters)
 		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
 		|StepChangePaymentTermsByAgreement,
+		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 	
 	Binding.Insert("WorkOrder",
@@ -3690,6 +3693,7 @@ Function BindAgreement(Parameters)
 		|StepChangeCurrencyByAgreement,
 		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
+		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 		
 	Binding.Insert("SalesOrderClosing",
@@ -3699,6 +3703,7 @@ Function BindAgreement(Parameters)
 		|StepChangeDeliveryDateByAgreement,
 		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
+		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 	
 	Binding.Insert("SalesInvoice",
@@ -3709,6 +3714,7 @@ Function BindAgreement(Parameters)
 		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
 		|StepChangePaymentTermsByAgreement,
+		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("RetailSalesReceipt",
@@ -3717,6 +3723,7 @@ Function BindAgreement(Parameters)
 		|StepChangeStoreByAgreement,
 		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
+		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("RetailReturnReceipt",
@@ -3725,6 +3732,7 @@ Function BindAgreement(Parameters)
 		|StepChangeStoreByAgreement,
 		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
+		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("PurchaseReturnOrder",
@@ -3733,6 +3741,7 @@ Function BindAgreement(Parameters)
 		|StepChangeStoreByAgreement,
 		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
+		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("PurchaseReturn",
@@ -3741,6 +3750,7 @@ Function BindAgreement(Parameters)
 		|StepChangeStoreByAgreement,
 		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
+		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("SalesReturnOrder",
@@ -3749,6 +3759,7 @@ Function BindAgreement(Parameters)
 		|StepChangeStoreByAgreement,
 		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
+		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("SalesReturn",
@@ -3757,6 +3768,7 @@ Function BindAgreement(Parameters)
 		|StepChangeStoreByAgreement,
 		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
+		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 
 	Binding.Insert("PurchaseOrder",
@@ -3767,6 +3779,7 @@ Function BindAgreement(Parameters)
 		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
 		|StepChangePaymentTermsByAgreement,
+		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 	
 	Binding.Insert("PurchaseOrderClosing",
@@ -3776,6 +3789,7 @@ Function BindAgreement(Parameters)
 		|StepChangeDeliveryDateByAgreement,
 		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
+		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 	
 	Binding.Insert("PurchaseInvoice",
@@ -3786,6 +3800,7 @@ Function BindAgreement(Parameters)
 		|StepItemListChangePriceTypeByAgreement,
 		|StepChangePriceIncludeTaxByAgreement,
 		|StepChangePaymentTermsByAgreement,
+		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
 		
 	Binding.Insert("SalesReportFromTradeAgent",
@@ -13237,7 +13252,7 @@ EndFunction
 
 Function ReadOnlyPropertyIsFilled(Parameters, Row, PropertyName, TableName)
 	// when IsLoadData all values of ReadOnlyProperty in cache
-	If Parameters.IsLoadData Then
+	If Parameters.IsLoadData Or Parameters.IsAddFilledRow Then
 		CacheRow = GetRowFromTableCache(Parameters, TableName, Row.Key);
 		If CacheRow <> Undefined Then
 			If CacheRow.Property(PropertyName) And ValueIsFilled(CacheRow[PropertyName]) Then

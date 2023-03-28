@@ -12137,7 +12137,7 @@ Function BindReceiptFromConsignorItemKey(Parameters)
 		"StepReceiptFromConsignorChangeUseSerialLotNumberByItemKey,
 		|StepReceiptFromConsignorClearSerialLotNumberByItemKey");
 		
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindReceiptFromConsignorItem");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindReceiptFromConsignorItemKey");
 EndFunction
 
 // ReceiptFromConsignor.ItemKey.ChangeItemKeyByItem.Step

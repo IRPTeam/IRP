@@ -734,7 +734,7 @@ EndFunction
 // * Barcode  - DefinedType.typeBarcode
 // * ItemType - CatalogRef.ItemTypes -
 // * UseSerialLotNumber - Boolean -
-Function GetInfoByItemsKey(ItemsKey, AddInfo = Undefined) Export
+Function GetInfoByItemsKey(ItemsKey, Agreement = Undefined) Export
 	ItemKeyArray = New Array;
 	If TypeOf(ItemsKey) = Type("Array") Then
 		ItemKeyArray = ItemsKey;
@@ -747,6 +747,7 @@ Function GetInfoByItemsKey(ItemsKey, AddInfo = Undefined) Export
 	Query.Text = "SELECT
 	|	ItemKey.Ref AS ItemKey,
 	|	ItemKey.Item AS Item,
+	|	&PriceType AS PriceType,
 	|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
 	|	VALUE(Catalog.SourceOfOrigins.EmptyRef) AS SourceOfOrigin,
 	|	CASE WHEN ItemKey.Unit = VALUE(Catalog.Units.EmptyRef) THEN
@@ -767,6 +768,9 @@ Function GetInfoByItemsKey(ItemsKey, AddInfo = Undefined) Export
 	|WHERE
 	|	ItemKey.Ref In (&ItemKeyArray)";
 	Query.SetParameter("ItemKeyArray", ItemKeyArray);
+	PriceType = ?(ValueIsFilled(Agreement), Agreement.PriceType, Undefined);
+	Query.SetParameter("PriceType", PriceType);
+	
 	QueryExecution = Query.Execute();
 	If QueryExecution.IsEmpty() Then
 		Return ReturnValue;

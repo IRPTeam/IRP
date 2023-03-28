@@ -583,7 +583,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 		Else
 			FilledFilter = New Structure();
 			For Each KeyValue In FilterStructure Do
-				If ValueIsFilled(ResultElement[KeyValue.Key]) Then
+				If ResultElement.Property(KeyValue.Key) And ValueIsFilled(ResultElement[KeyValue.Key]) Then
 					FilledFilter.Insert(KeyValue.Key, ResultElement[KeyValue.Key]);
 				EndIf;
 			EndDo;

@@ -441,9 +441,8 @@ Scenario: _2990005 try to add Service to the Physical inventory
 		When in opened panel I select "Physical inventory (create) *"
 		Then "Physical inventory (create) *" window is opened
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
-		And I input "89908" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "89908" text in the field named "Barcode"
+		And I move to the next attribute
 	* Check
 		And "ItemList" table does not contain lines
 			| 'Item'    |
@@ -732,8 +731,8 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 		And I move to "Physical count by location" tab
 		And I click "Physical count by location" button
 		Then "How many documents to create?" window is opened
-		And I input "3" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "3" text in the field named "InputFld"	
+		And I click "OK" button
 		* Check
 			And "PhysicalCountByLocationList" table contains lines
 				| 'Reference'         | 'Status'   | 'Count rows' | 'Phys. count' |
@@ -746,17 +745,16 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 		And I select current line in "PhysicalCountByLocationList" table
 		* Scan item without serial lot number
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			Then "Enter a barcode" window is opened
-			And I input "2202283705" text in the field named "InputFld"
-			And I click the button named "OK"
+			And I input "2202283705" text in the field named "Barcode"
+			And I move to the next attribute
 			And I activate "Phys. count" field in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "53,000" text in "Phys. count" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Scan item with serial lot number (with barcode)
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "23455677788976667" text in the field named "InputFld"
-			And I click the button named "OK"
+			And I input "23455677788976667" text in the field named "Barcode"
+			And I move to the next attribute
 			And I input "5,000" text in "Phys. count" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			* Create new serial lot number
@@ -781,12 +779,11 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 					| 'Product 1 with SLN' | 'PZU'      | '8908899877'        |					
 		* Scan item without serial lot number (need to select serial lot number)
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "67789997777899" text in the field named "InputFld"
-			And I click the button named "OK"
+			And I input "67789997777899" text in the field named "Barcode"
+			And I move to the next attribute
 			And I click "Search by barcode (F7)" button
-			Then "Enter a barcode" window is opened
-			And I input "677899" text in the field named "InputFld"
-			And I click the button named "OK"
+			And I input "677899" text in the field named "Barcode"
+			And I move to the next attribute
 			And I click "Create" button
 			And I finish line editing in "ItemList" table
 			And I go to line in "ItemList" table
@@ -853,9 +850,9 @@ Scenario: _2990016 check Physical count by location (mobile form)
 		Then "DocumentRef" form attribute became equal to ""
 	* Select Location count by scan barcode (without scan emulator)
 		And I click the button named "InputBarcode"
-		Then "Enter a barcode" window is opened
-		And I input "2" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "2" text in the field named "InputFld"	
+		And I click "OK" button
+		And I move to the next attribute
 		Then "DocumentRef" form attribute became equal to "Location count 2*" template
 	* Scan barcode without serial lot number (with scan emulator)
 		And I set checkbox "Scan emulator"	
@@ -886,9 +883,8 @@ Scenario: _2990016 check Physical count by location (mobile form)
 	* Scan barcode with serial lot number (without scan emulator)
 		And I remove checkbox "Scan emulator"
 		And I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
-		And I input "23455677788976667" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "23455677788976667" text in the field named "Barcode"
+		And I move to the next attribute
 		And I input "1,000" text in the field named "Quantity"
 		And I click the button named "OK"
 		And "ItemList" table became equal
@@ -919,15 +915,15 @@ Scenario: _2990016 filling Physical count by location (mobile form without scan 
 	* Select location number by scan
 	* Scan item without serial lot number
 		And I click "SearchByBarcode" button
-		And I input "4820024700016" text in "InputFld" field
-		And I click "OK" button
+		And I input "4820024700016" text in the field named "Barcode"
+		And I move to the next attribute
 		And I click "SearchByBarcode" button
-		And I input "4820024700016" text in "InputFld" field
-		And I click "OK" button
+		And I input "4820024700016" text in the field named "Barcode"
+		And I move to the next attribute
 	* Scan item with serial lot number and change quantity
 		And I click "SearchByBarcode" button
-		And I input "23455677788976667" text in "InputFld" field
-		And I click "OK" button
+		And I input "23455677788976667" text in the field named "Barcode"
+		And I move to the next attribute
 		And I go to line in "ItemList" table
 			| 'Item'               | 'Item key' | 'Phys. count' | 'Serial lot number' |
 			| 'Product 1 with SLN' | 'PZU'      | '1,000'       | '8908899877'        |
@@ -938,8 +934,8 @@ Scenario: _2990016 filling Physical count by location (mobile form without scan 
 		And I click the button named "OK"
 	* Scan service
 		And I click "SearchByBarcode" button
-		And I input "89908" text in "InputFld" field
-		And I click "OK" button
+		And I input "89908" text in the field named "Barcode"
+		And I move to the next attribute
 		Given Recent TestClient message contains "Can not add Service item type:*" string by template
 	* Check item tab
 		And "ItemList" table became equal
@@ -950,9 +946,8 @@ Scenario: _2990016 filling Physical count by location (mobile form without scan 
 		Then the number of "ItemList" table lines is "равно" 3
 	* Add product without Serial lot number (item type use Serial lot numbers)
 		And I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
-		And I input "899007788" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "899007788" text in the field named "Barcode"
+		And I move to the next attribute
 		Then "Row form" window is opened
 		And I click Choice button of the field named "SerialLotNumber"
 		Then the number of "List" table lines is "равно" 0
@@ -1022,7 +1017,6 @@ Scenario: _2990018 check the document Location count fixation for the user
 	* Check fixation
 		And In the command interface I select "Inventory" "Mobile invent"
 		And I click the button named "InputBarcode"
-		Then "Enter a barcode" window is opened
 		And I input "2" text in the field named "InputFld"
 		And I click the button named "OK"
 		Given Recent TestClient message contains "Current location #2 was started by another user. User: Anna Petrova (Commercial Agent 3)" string by template
@@ -1032,7 +1026,6 @@ Scenario: _2990019 rescan a previously created document Physical count by locati
 	And I close all client application windows
 	And In the command interface I select "Inventory" "Mobile invent"
 	And I click the button named "InputBarcode"
-	Then "Enter a barcode" window is opened
 	And I input "1" text in the field named "InputFld"
 	And I click the button named "OK"
 	And "ItemList" table became equal

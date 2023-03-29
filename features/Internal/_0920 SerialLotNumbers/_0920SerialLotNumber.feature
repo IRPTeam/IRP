@@ -3238,6 +3238,9 @@ Scenario: _092035 product scanning with and without serial lot number
 		And I input "5908769093878" text in the field named "Barcode"
 		And I move to the next attribute
 		Then the form attribute named "SerialLotNumberStatus" became equal to "Serial lot 5908769093878 was not found. Create new?"
+		And I close current window
+		And in the table "ItemList" I click the button named "ItemListContextMenuSelectAll"
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I close all client application windows
 		
 		
@@ -3895,7 +3898,7 @@ Scenario: _092081 switch on scan emulator in the Create serial lot numbers data 
 		Then the form attribute named "Item" became equal to "Dress"
 		Then the form attribute named "ItemKey" became equal to "S/Yellow"
 		And the editing text of form attribute named "BarcodeInput" became equal to "2202283713"
-		Then the form attribute named "ScanEmulator" became equal to "Yes"		
+		Then the form attribute named "ScanEmulator" became equal to "Yes"	
 		And I close all client application windows
 
 Scenario: _092083 check serial lot numbers in the POS

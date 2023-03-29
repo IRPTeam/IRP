@@ -4728,34 +4728,26 @@ EndFunction
 
 // TaxList.Set
 Procedure SetTaxList(Parameters, Results)
-	// for tabular part TaxList needed full transfer from cache to object
+		// for tabular part TaxList needed full transfer from cache to object
 	For Each Result In Results Do
 		If Result.Value.TaxList.Count() Then
 			If Not Parameters.Cache.Property("TaxList") Then
-				AddTableToCache(Parameters, "TaxList");
+				Parameters.Cache.Insert("TaxList", New Array());
 			EndIf;
 			
 			// remove from cache old rows
-//			Count = Parameters.Cache.TaxList.Count();
-//			For i = 1 To Count Do
-//				Index = Count - i;
-//				ArrayItem = Parameters.Cache.TaxList[Index];
-//				If ArrayItem.Key = Result.Options.Key Then
-//					Parameters.Cache.TaxList.Delete(Index);
-//				EndIf;
-//			EndDo;
-//			
-			Row = GetRowFromTableCache(Parameters, "TaxList", Result.Options.Key);
-			If Row <> Undefined Then
-				Index = Parameters.Cache.TaxList.Find(Row);
-				If Index <> Undefined Then
+			Count = Parameters.Cache.TaxList.Count();
+			For i = 1 To Count Do
+				Index = Count - i;
+				ArrayItem = Parameters.Cache.TaxList[Index];
+				If ArrayItem.Key = Result.Options.Key Then
 					Parameters.Cache.TaxList.Delete(Index);
 				EndIf;
-			EndIf;
+			EndDo;
 			
 			// add new rows
 			For Each Row In Result.Value.TaxList Do
-				AddRowToTableCache(Parameters, "TaxList", Row);
+				Parameters.Cache.TaxList.Add(Row);
 			EndDo;
 		EndIf;
 	EndDo;

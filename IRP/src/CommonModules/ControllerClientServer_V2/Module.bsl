@@ -365,7 +365,7 @@ EndProcedure
 #Region API
 
 // attributes that available through API
-Function GetSetterNameByDataPath(DataPath, IsBuilder)
+Function GetSetterNameByDataPath(Parameters, DataPath, IsBuilder)
 	SettersMap = New Map();
 	SettersMap.Insert("Sender"          , "SetAccountSender");
 	SettersMap.Insert("SendCurrency"    , "SetSendCurrency");
@@ -411,8 +411,15 @@ Function GetSetterNameByDataPath(DataPath, IsBuilder)
 	SettersMap.Insert("ItemList.ExpCount"           , "SetItemListExpCount");
 	SettersMap.Insert("ItemList.SalesInvoice"       , "SetItemListSalesDocument");
 	SettersMap.Insert("ItemList.RetailSalesReceipt" , "SetItemListSalesDocument");
-	SettersMap.Insert("ItemList.TotalAmount"        , "StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
-													  |StepItemListCalculations_IsTotalAmountChanged");
+	
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesReportToConsignor" Then
+		SettersMap.Insert("ItemList.TotalAmount", "StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
+													|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers");
+	Else
+		SettersMap.Insert("ItemList.TotalAmount", "StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
+													|StepItemListCalculations_IsTotalAmountChanged");
+	EndIf;
+	
 	SettersMap.Insert("ItemList.<tax_rate>"         , "StepChangeTaxRate_AgreementInHeader");
 	SettersMap.Insert("ItemList."                   , "StepItemListCalculations_IsTaxRateChanged");
 	If IsBuilder Then
@@ -462,7 +469,7 @@ Procedure API_SetProperty(Parameters, Property, Value, IsBuilder = False, Settin
 		Settings = API_GetSettings(); // default settings
 	EndIf;
 	
-	SetterNameOrStepsEnabler = GetSetterNameByDataPath(Property.DataPath, IsBuilder);
+	SetterNameOrStepsEnabler = GetSetterNameByDataPath(Parameters, Property.DataPath, IsBuilder);
 	IsColumn = StrSplit(Property.DataPath, ".").Count() = 2;
 	If SetterNameOrStepsEnabler <> Undefined Then
 		If IsColumn Then

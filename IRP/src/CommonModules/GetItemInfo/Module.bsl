@@ -750,10 +750,10 @@ Function GetInfoByItemsKey(ItemsKey, Agreement = Undefined) Export
 	|	&PriceType AS PriceType,
 	|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
 	|	VALUE(Catalog.SourceOfOrigins.EmptyRef) AS SourceOfOrigin,
-	|	CASE WHEN ItemKey.Unit = VALUE(Catalog.Units.EmptyRef) THEN
-	|		ItemKey.Item.Unit
-	|	ELSE
-	|		ItemKey.Unit
+	|	CASE
+	|		WHEN ItemKey.Unit = VALUE(Catalog.Units.EmptyRef)
+	|			THEN ItemKey.Item.Unit
+	|		ELSE ItemKey.Unit
 	|	END AS Unit,
 	|	1 AS Quantity,
 	|	ItemKey.Unit AS ItemKeyUnit,
@@ -762,7 +762,8 @@ Function GetInfoByItemsKey(ItemsKey, Agreement = Undefined) Export
 	|	"""" AS Barcode,
 	|	ItemKey.Item.ItemType AS ItemType,
 	|	ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
-	|	ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService
+	|	ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
+	|	ItemKey.Item.ItemType.AlwaysAddNewRowAfterScan AS AlwaysAddNewRowAfterScan
 	|FROM
 	|	Catalog.ItemKeys AS ItemKey
 	|WHERE

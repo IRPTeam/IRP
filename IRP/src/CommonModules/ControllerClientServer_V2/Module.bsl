@@ -2328,11 +2328,13 @@ Function BindCompany(Parameters)
 	
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_AgreementInHeader");
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
 	
 	Binding.Insert("SalesReportToConsignor",
 		"StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_AgreementInHeader");
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
 	
 	Binding.Insert("SalesReturnOrder",
 		"StepRequireCallCreateTaxesFormControls,
@@ -10563,6 +10565,7 @@ EndFunction
 
 // ItemList.TaxAmount.OnChange
 Procedure ItemListTaxAmountOnChange(Parameters) Export
+	AddViewNotify("OnSetItemListTaxAmountNotify", Parameters);
 	Binding = BindItemListTaxAmount(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -10570,7 +10573,7 @@ EndProcedure
 // ItemList.TaxAmount.Set
 Procedure SetItemListTaxAmount(Parameters, Results) Export
 	Binding = BindItemListTaxAmount(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetItemListTaxAmountNotify");
 EndProcedure
 
 // ItemList.TaxAmount.Get
@@ -10667,6 +10670,7 @@ EndProcedure
 
 // ItemList.TaxAmountUserForm.OnChange
 Procedure ItemListTaxAmountUserFormOnChange(Parameters) Export
+	AddViewNotify("OnSetItemListTaxAmountNotify", Parameters);
 	Binding = BindItemListTaxAmountUserForm(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -12798,6 +12802,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "ItemListAfterDeleteRowFormNotify"      Then ViewClient_V2.ItemListAfterDeleteRowFormNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListCancelNotify"             Then ViewClient_V2.OnSetItemListCancelNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListNetAmountNotify"          Then ViewClient_V2.OnSetItemListNetAmountNotify(Parameters);
+	ElsIf ViewNotify = "OnSetItemListTaxAmountNotify"          Then ViewClient_V2.OnSetItemListTaxAmountNotify(Parameters);	
 	ElsIf ViewNotify = "OnSetItemListQuantityNotify"           Then ViewClient_V2.OnSetItemListQuantityNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListQuantityInBaseUnitNotify" Then ViewClient_V2.OnSetItemListQuantityInBaseUnitNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListPhysCountNotify"          Then ViewClient_V2.OnSetItemListPhysCountNotify(Parameters);

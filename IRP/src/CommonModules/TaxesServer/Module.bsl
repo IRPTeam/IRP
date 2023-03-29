@@ -436,7 +436,7 @@ Function _GetTaxRatesByTax(Tax) Export
 EndFunction
 		
 Function CalculateTax(Parameters) Export
-	Return _CalculateTax(Parameters.Tax, 
+	Return ServerReuse.CalculateTax(Parameters.Tax, 
 		Parameters.TaxRateOrAmount, 
 		Parameters.PriceIncludeTax, 
 		Parameters.Key, 

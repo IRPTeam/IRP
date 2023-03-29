@@ -763,14 +763,7 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 		Parameters.Form.API_Callback(Parameters.TableName, ArrayOfDataPaths);
 	EndIf;
 	
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
-		Parameters.Form.UpdateTotalAmounts();
-	EndIf;
-//	Message(CurrentDate()-start);
+	UpdateTotalAmounts(Parameters);
 EndProcedure
 
 Function IsChangedTaxRates(Parameters)
@@ -973,15 +966,9 @@ Procedure OnOpenFormNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "EmployeeCashAdvance" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
-	
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
-		Parameters.Form.UpdateTotalAmounts();
-	EndIf;
 	 
+	UpdateTotalAmounts(Parameters);
+	
 	If Parameters.Form.IsCopyingInteractive Then
 		SetDate(Parameters.Object, Parameters.Form, Parameters.TableName, CommonFunctionsServer.GetCurrentSessionDate());
 	EndIf;
@@ -1944,13 +1931,7 @@ Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
 		SourceOfOriginClient.DeleteUnusedSourceOfOrigins(Parameters.Object, Parameters.Form);
 	EndIf;
 	
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
-		Parameters.Form.UpdateTotalAmounts();
-	EndIf;
+	UpdateTotalAmounts(Parameters);
 EndProcedure
 
 Function ItemListAddFilledRow(Object, Form,  FillingValues) Export
@@ -2125,12 +2106,7 @@ Procedure ItemListCancelOnChange(Object, Form, CurrentData = Undefined) Export
 EndProcedure
 
 Procedure OnSetItemListCancelNotify(Parameters) Export
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
-		Parameters.Form.UpdateTotalAmounts();
-	EndIf;
+	UpdateTotalAmounts(Parameters);
 EndProcedure
 
 #EndRegion
@@ -2229,6 +2205,10 @@ Procedure ItemListTaxAmountUserFormOnChange(Object, Form, CurrentData = Undefine
 	ControllerClientServer_V2.ItemListTaxAmountUserFormOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetItemListTaxAmountNotify(Parameters) Export
+	UpdateTotalAmounts(Parameters);
+EndProcedure
+
 #EndRegion
 
 #Region ITEM_LIST_OFFERS_AMOUNT
@@ -2252,13 +2232,7 @@ Procedure ItemListNetAmountOnChange(Object, Form, CurrentData = Undefined) Expor
 EndProcedure
 
 Procedure OnSetItemListNetAmountNotify(Parameters) Export
-	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
-		Parameters.Form.UpdateTotalAmounts();
-	EndIf;
+	UpdateTotalAmounts(Parameters);
 EndProcedure
 
 #EndRegion
@@ -2472,13 +2446,17 @@ EndProcedure
 #EndRegion
 
 Procedure OnSetCalculationsNotify(Parameters) Export
+	UpdateTotalAmounts(Parameters);
+EndProcedure
+
+Procedure UpdateTotalAmounts(Parameters)
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
 		Parameters.Form.UpdateTotalAmounts();
-	EndIf;
+	EndIf;	
 EndProcedure
 
 #EndRegion

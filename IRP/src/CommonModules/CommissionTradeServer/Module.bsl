@@ -7,9 +7,14 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	tmpItemList.Columns.Add("ItemKey"         , New TypeDescription("CatalogRef.ItemKeys"));
 	tmpItemList.Columns.Add("Store"           , New TypeDescription("CatalogRef.Stores"));
 	tmpItemList.Columns.Add("Quantity"        , Metadata.DefinedTypes.typeQuantity.Type);
+	tmpItemList.Columns.Add("LineNumber"      , Metadata.DefinedTypes.typeQuantity.Type);
 	
+	LineNumber = 1;
 	For Each Row In Table_ItemList Do
-		FillPropertyValues(tmpItemList.Add(), Row);
+		NewRow = tmpItemList.Add();
+		FillPropertyValues(NewRow, Row);
+		NewRow.LineNumber = LineNumber;
+		LineNumber = LineNumber + 1;
 	EndDo;
 	
 	tmpSerialLotNumbers = New ValueTable();
@@ -53,7 +58,8 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	|	ItemList.Company AS Company,
 	|	ItemList.ItemKey AS ItemKey,
 	|	ItemList.Store AS Store,
-	|	ItemList.Quantity AS Quantity
+	|	ItemList.Quantity AS Quantity,
+	|	ItemList.LineNumber AS LineNumber
 	|INTO tmpItemList
 	|FROM
 	|	&tmpItemList AS ItemList
@@ -96,6 +102,7 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	|	tmpItemList.Company,
 	|	tmpItemList.ItemKey,
 	|	tmpItemList.Store,
+	|	tmpItemList.LineNumber,
 	|	CASE
 	|		WHEN tmpSerialLotNumbers.SerialLotNumber.Ref IS NULL
 	|			THEN tmpItemList.Quantity
@@ -131,7 +138,10 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	|	tmpItemList_1 AS tmpItemList_1
 	|		LEFT JOIN tmpSourceOfOrigins AS tmpSourceOfOrigins
 	|		ON tmpItemList_1.Key = tmpSourceOfOrigins.Key
-	|		AND tmpItemList_1.SerialLotNumber = tmpSourceOfOrigins.SerialLotNumber";
+	|		AND tmpItemList_1.SerialLotNumber = tmpSourceOfOrigins.SerialLotNumber
+	|
+	|ORDER BY
+	|	tmpItemList_1.LineNumber";
 	Query.SetParameter("tmpItemList", tmpItemList);
 	Query.SetParameter("tmpSerialLotNumbers", tmpSerialLotNumbers);
 	Query.SetParameter("tmpSourceOfOrigins", tmpSourceOfOrigins);

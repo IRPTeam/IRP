@@ -948,6 +948,7 @@
   <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
   <dataProcessors>DataProcessor.ObjectPropertyEditor</dataProcessors>
   <dataProcessors>DataProcessor.ReplaceSerialLotNumber</dataProcessors>
+  <dataProcessors>DataProcessor.LoadAndUnloadData</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

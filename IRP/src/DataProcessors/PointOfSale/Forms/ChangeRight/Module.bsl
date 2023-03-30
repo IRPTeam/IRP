@@ -17,6 +17,10 @@ EndProcedure
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	If Result.FoundedItems.Count() Then
 		ThisObject.UserAdmin = Result.FoundedItems[0].User;
+	Else
+		For Each BarcodeRow In Result.Barcodes Do
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().POS_Error_CannotFindUser, BarcodeRow));
+		EndDo;
 	EndIf;
 EndProcedure
 

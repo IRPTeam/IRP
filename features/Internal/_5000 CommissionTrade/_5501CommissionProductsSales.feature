@@ -1153,21 +1153,17 @@ Scenario: _050041 check filling source of origin in the SI (consignors products)
 	* Add items	
 		And I move to "Item list" tab
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
-		And I input "57897909799" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
-		And I input "57897909799" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
-		And I input "890086768" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "890086768" text in the field named "Barcode"
+		And I move to the next attribute
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
-		And I input "57897909799" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
 	* Check filling
 		And "ItemList" table became equal
 			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Unit' | 'Serial lot numbers' | 'Source of origins'   | 'Quantity' | 'Price' | 'VAT' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Detail' |
@@ -1176,9 +1172,8 @@ Scenario: _050041 check filling source of origin in the SI (consignors products)
 			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | 'pcs'  | '57897909799'        | 'Source of origin 10' | '1,000'    | ''      | '18%' | ''             | 'No'             | 'No'                         | ''                    | 'Store 02' | ''              | ''       |
 	* Add one more item and check filling
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
-		And I input "89088088989" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "89088088989" text in the field named "Barcode"
+		And I move to the next attribute
 		And "ItemList" table became equal
 			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'       | 'Source of origins'                      | 'Quantity' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Store'    |
 			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | ''           | 'pcs'  | '57897909799; 89088088989' | 'Source of origin 9; Source of origin 9' | '3,000'    | ''      | '18%' | ''              | ''           | ''             | 'No'                         | 'Store 02' |
@@ -1215,21 +1210,17 @@ Scenario: _050042 check filling source of origin in the RSR (consignors products
 	* Add items	
 		And I move to "Item list" tab
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
-		And I input "57897909799" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
-		And I input "57897909799" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
-		And I input "890086768" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "890086768" text in the field named "Barcode"
+		And I move to the next attribute
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
-		And I input "57897909799" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
 	* Check filling
 		And "ItemList" table became equal
 			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Unit' | 'Serial lot numbers' | 'Source of origins'   | 'Quantity' | 'Price' | 'VAT' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' |
@@ -1238,9 +1229,8 @@ Scenario: _050042 check filling source of origin in the RSR (consignors products
 			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | 'pcs'  | '57897909799'        | 'Source of origin 10' | '1,000'    | ''      | '18%' | ''             | ''                    | 'Store 02' | ''       |
 	* Add one more item and check filling
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		Then "Enter a barcode" window is opened
-		And I input "89088088989" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "89088088989" text in the field named "Barcode"
+		And I move to the next attribute
 		And "ItemList" table became equal
 			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'       | 'Source of origins'                      | 'Quantity' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
 			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | ''           | 'pcs'  | '57897909799; 89088088989' | 'Source of origin 9; Source of origin 9' | '3,000'    | ''      | '18%' | ''              | ''           | ''             | 'Store 02' |
@@ -1260,14 +1250,14 @@ Scenario: _050043 check filling source of origin in the RSR POS (consignors prod
 		Then "Point of sales" window is opened
 	* Scan items
 		And I click "Search by barcode (F7)" button
-		And I input "57897909799" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
 		And I click "Search by barcode (F7)" button
-		And I input "89088088989" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "89088088989" text in the field named "Barcode"
+		And I move to the next attribute
 		And I click "Search by barcode (F7)" button
-		And I input "890086768" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "890086768" text in the field named "Barcode"
+		And I move to the next attribute
 		And I go to line in "ItemList" table
 			| 'Item'               | 'Item key' | 'Quantity' | 'Serials'                  |
 			| 'Product 6 with SLN' | 'PZU'      | '2,000'    | '57897909799; 89088088989' |

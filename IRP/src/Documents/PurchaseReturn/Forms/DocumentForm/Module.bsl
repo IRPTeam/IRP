@@ -600,6 +600,11 @@ Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
 
+&AtClient
+Procedure OpenSerialLotNumbersTree(Command)
+	SerialLotNumberClient.OpenSerialLotNumbersTree(Object, ThisObject);
+EndProcedure
+
 #EndRegion
 
 #Region LINKED_DOCUMENTS

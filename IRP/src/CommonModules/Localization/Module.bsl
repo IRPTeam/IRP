@@ -1051,6 +1051,11 @@ Function Strings(Lang) Export
 	Strings.Insert("LDT_ValueNotFound", NStr("en = 'Nothing was found for [%1]'", Lang));
 	Strings.Insert("LDT_TooMuchFound", NStr("en = 'Several variants were found for [%1]'", Lang));
 #EndRegion	
+
+#Region OpenSerialLotNumberTree
+	Strings.Insert("OpenSLNTree_Button_Title",   NStr("en = 'Open serial lot number tree'", Lang));
+	Strings.Insert("OpenSLNTree_Button_ToolTip", NStr("en = 'Open serial lot number tree'", Lang));
+#EndRegion	
 	
 	Return Strings;
 EndFunction

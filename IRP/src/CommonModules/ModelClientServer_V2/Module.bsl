@@ -3395,6 +3395,10 @@ Function CalculatePercentByAmountOptions() Export
 EndFunction
 
 Function CalculatePercentByAmountExecute(Options) Export
+	If Options.Amount = 0 Then
+		Return 0;
+	EndIf;
+		
 	Return 100 * Options.Commission / Options.Amount;
 EndFunction
 
@@ -3407,6 +3411,11 @@ Function CalculateCommissionPercentByAmountOptions() Export
 EndFunction
 
 Function CalculateCommissionPercentByAmountExecute(Options) Export
+	
+	If Options.TotalAmount = 0 Then
+		Return 0;
+	EndIf;
+	
 	Return 100 * Options.Commission / Options.TotalAmount;
 EndFunction
 

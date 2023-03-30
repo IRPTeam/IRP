@@ -682,7 +682,6 @@ Procedure __tmp_GoodsShipmentReceipt_CommitChanges(Parameters)
 EndProcedure
 
 Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
-//	start = CurrentDate();
 	If Answer = Undefined Then
 		Return; // is Cancel pressed
 	EndIf;

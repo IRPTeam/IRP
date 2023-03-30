@@ -719,7 +719,7 @@ EndFunction
 // Get info by Items key.
 // Parameters:
 //	ItemsKey - CatalogRef.ItemKeys, Array of CatalogRef.ItemKeys -
-//	AddInfo - Structure -
+//	Agreement - CatalogRef.Agreements -
 // 
 // Returns:
 //  Array of Structure:

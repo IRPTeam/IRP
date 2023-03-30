@@ -173,9 +173,7 @@ EndProcedure
 
 &AtClient
 Procedure AgreementOnChange(Item)
-//	start = CurrentDate();
 	DocSalesInvoiceClient.AgreementOnChange(Object, ThisObject, Item);
-//	Message(CurrentDate()-start);
 EndProcedure
 
 &AtClient

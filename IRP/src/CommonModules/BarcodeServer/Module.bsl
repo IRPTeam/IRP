@@ -74,8 +74,6 @@ Function SearchByBarcodes(Val Barcodes, Settings) Export
 		|	1 AS Quantity,
 		|	&PriceType AS PriceType,
 		|	&Date AS Date,
-		//|	Barcodes.ItemKey.Unit AS ItemKeyUnit,
-		//|	Barcodes.ItemKey.Item.Unit AS ItemUnit,
 		|	NOT Barcodes.ItemKey.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
 		|	VTBarcode.Barcode AS Barcode,
 		|	Barcodes.ItemKey.Item.ItemType AS ItemType,
@@ -93,26 +91,6 @@ Function SearchByBarcodes(Val Barcodes, Settings) Export
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	
-//	// TODO: Refact by query
-//	If Not Settings.PriceType = Undefined Then
-//		QueryTable.Columns.Add("Price", Metadata.DefinedTypes.typePrice.Type);
-//		QueryTable.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
-//		PreviousPriceTableTmp = QueryTable.Copy(New Structure("BarcodeEmpty", False));
-//		PreviousPriceTable = PreviousPriceTableTmp.Copy( , "ItemKey, Unit, ItemKeyUnit, ItemUnit, hasSpecification");
-//		PreviousPriceTable.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
-//		PreviousPriceTable.FillValues(Settings.PriceType, "PriceType");
-//		ItemsInfo = GetItemInfo.ItemPriceInfoByTable(PreviousPriceTable, Settings.PricePeriod);
-//		For Each Row In ItemsInfo Do
-//			Filter = New Structure();
-//			Filter.Insert("ItemKey", Row.ItemKey);
-//			FoundedRows = QueryTable.FindRows(Filter);
-//			For Each FoundedRow In FoundedRows Do
-//				FoundedRow.Price = Row.Price;
-//				FoundedRow.PriceType = Row.PriceType;
-//			EndDo;
-//		EndDo;
-//	EndIf;
-
 	For Each Row In QueryTable Do
 		If Row.BarcodeEmpty Then
 			Result.Barcodes.Add(Row.Barcode);

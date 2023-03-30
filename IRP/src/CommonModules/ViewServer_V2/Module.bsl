@@ -207,19 +207,7 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	If FillingValues = Undefined Then
 		Return;
 	EndIf;
-	
-//	FilledColumns = New Array();
-//	For Each KeyValue In FillingValues Do
-//		ColumnName = KeyValue.Key;
-//		If ValueIsFilled(FillingValues[ColumnName]) Then
-//			DataPath = Parameters.TableName + "." + ColumnName;
-//			FilledColumns.Add(DataPath);
-//			Parameters.ReadOnlyPropertiesMap.Insert(Upper(DataPath), True);
-//		EndIf;
-//	EndDo;
-//	Parameters.ReadOnlyProperties = StrConcat(FilledColumns, ",");
-//	Parameters.IsAddFilledRow = True;
-	
+		
 	Row = Parameters.Rows[0];
 	
 	ItemIsPresent      = CommonFunctionsClientServer.ObjectHasProperty(Row, "Item");

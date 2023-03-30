@@ -727,7 +727,7 @@ Procedure AddNewRow(TableName, Parameters, ViewNotify = Undefined, LaunchSteps =
 		EndIf;
 		Default = Defaults.Get(DataPath);
 		If Default <> Undefined Then
-			//ModelClientServer_V2.EntryPoint(Default.StepsEnabler, Parameters);
+	
 			RegisterNextSteps(Parameters, True , Default.StepsEnabler, DataPath);
 			
 		// if column is filled  and has its own handler .OnChage call it
@@ -735,8 +735,9 @@ Procedure AddNewRow(TableName, Parameters, ViewNotify = Undefined, LaunchSteps =
 			SetPropertyObject(Parameters, DataPath, NewRow.Key, NewRow[ColumnName]);
 			Binding = Bindings.Get(DataPath);
 			If Binding <> Undefined Then
-				//ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+				
 				RegisterNextSteps(Parameters, True, Binding.StepsEnabler, DataPath);
+			
 			EndIf;
 		EndIf;
 		
@@ -2486,7 +2487,7 @@ Function BindBranch(Parameters)
 	Binding = New Structure();
 	Binding.Insert("RetailSalesReceipt", "StepChangeConsolidatedRetailSalesByWorkstation");
 	Binding.Insert("RetailReturnReceipt", "StepChangeConsolidatedRetailSalesByWorkstation");
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters,"BindBranch");
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindBranch");
 EndFunction
 
 #EndRegion
@@ -13084,7 +13085,6 @@ Procedure RegisterNextSteps(Parameters, IsChanged, StepNames, DataPath)
 	NeedRegister = False;
 	If IsChanged Then
 		NeedRegister = True;
-		//ModelClientServer_V2.EntryPoint(StepNames, Parameters);
 	ElsIf Parameters.ReadOnlyPropertiesMap.Get(Upper(DataPath)) = True Then
 		If Parameters.ProcessedReadOnlyPropertiesMap.Get(Upper(DataPath)) = Undefined Then
 			Parameters.ProcessedReadOnlyPropertiesMap.Insert(Upper(DataPath), True);
@@ -13166,12 +13166,6 @@ Function GetProperty(Parameters, Cache, Source, DataPath, Key, ReadOnlyFromCache
 				Raise StrTemplate("Not found row in SourceTableMap [%1] [%2]", TableName, Key);
 			EndIf;
 			
-			//ArrayRowsByKey = Source[TableName].FindRows(New Structure("Key", Key));
-			//
-			//If ArrayRowsByKey.Count() <> 1 Then
-			//	Raise StrTemplate("Found [%1] row by key [%2]", ArrayRowsByKey.Count(), Key);
-			//EndIf;
-			//RowByKey = ArrayRowsByKey[0];
 		EndIf;
 		Return RowByKey[ColumnName];
 	Else
@@ -13202,7 +13196,6 @@ Function SetPropertyObject(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache
 					Row = Parameters.TableRowsMap.Get(TableName + ":" + _Key);
 					If Row <> Undefined Then
 						RowInMap = True;
-						//If ValueIsFilled(Row[PropertyName]) Then
 						If ReadOnlyPropertyIsFilled(Parameters, Row, PropertyName, TableName) Then
 							Return False;
 						EndIf;
@@ -13216,7 +13209,6 @@ Function SetPropertyObject(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache
 							If UseMap Then
 								Parameters.TableRowsMap.Insert(TableName + ":" + _Key, Row);
 							EndIf;
-							//If ValueIsFilled(Row[PropertyName]) Then
 							If ReadOnlyPropertyIsFilled(Parameters, Row, PropertyName, TableName) Then
 								Return False; // property is ReadOnly and filled, do not change
 							EndIf;
@@ -13402,7 +13394,7 @@ Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters, BindName)
 		MetadataName = KeyValue.Key;
 		MetadataBinding.Insert(MetadataName + "." + DataPath, Binding[MetadataName]);
 	EndDo;
-	//FullDataPath = StrTemplate("%1.%2", Parameters.ObjectMetadataInfo.MetadataName, DataPath);
+	
 	FullDataPath = Parameters.ObjectMetadataInfo.MetadataName + "." + DataPath;
 	StepsEnabler = MetadataBinding.Get(FullDataPath);
 	StepsEnabler = ?(StepsEnabler = Undefined, DefaulStepsEnabler, StepsEnabler);
@@ -13665,9 +13657,6 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 				AddRowToTableCache(Parameters, TableName, tmpRow);
 			EndIf;
 		Else
-			//For Each KeyValue In DefaultFilledRow Do
-			//	tmpRow.Insert(KeyValue.Key, KeyValue.Value);
-			//EndDo;
 			AddRowToTableCache(Parameters, TableName, tmpRow);
 			
 			For Each KeyValue In DefaultFilledRow Do
@@ -13714,26 +13703,7 @@ Procedure LoaderTable(DataPath, Parameters, Result) Export
 		RowIndex = RowIndex + 1;
 		
 		LaunchNextSteps(Parameters);
-		
-		// legacy capability
-//		For Each KeyValue In Parameters.ExtractedData Do
-//			ExtractedDataName = KeyValue.Key;
-//			If Not AllExtractedData.Property(ExtractedDataName) Then
-//				AllExtractedData.Insert(ExtractedDataName, New Array());
-//			EndIf;
-//			For Each ExtractedPart In Parameters.ExtractedData[ExtractedDataName] Do
-//				PutToAll = True;
-//				If TypeOf(ExtractedPart) = Type("Structure") 
-//					And ExtractedPart.Property("Key") 
-//					And ExtractedPart.Key <> NewRow.Key Then
-//					PutToAll = False;
-//				EndIf;
-//				If PutToAll Then
-//					AllExtractedData[ExtractedDataName].Add(ExtractedPart);
-//				EndIf;
-//			EndDo;
-//		EndDo;
-		
+				
 	EndDo;
 	Parameters.ExtractedData = AllExtractedData;
 EndProcedure

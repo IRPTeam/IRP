@@ -414,6 +414,9 @@
           <userVisible>
             <common>true</common>
           </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.PackageUnit</segments>
+          </dataPath>
           <extendedTooltip>
             <name>PackageUnitExtendedTooltip</name>
             <id>128</id>
@@ -624,6 +627,9 @@
         <userVisible>
           <common>true</common>
         </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.UseIncomingStockReservation</segments>
+        </dataPath>
         <extendedTooltip>
           <name>UseIncomingStockReservationExtendedTooltip</name>
           <id>125</id>
@@ -667,6 +673,9 @@
           <userVisible>
             <common>true</common>
           </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Length</segments>
+          </dataPath>
           <extendedTooltip>
             <name>LengthExtendedTooltip</name>
             <id>108</id>
@@ -714,6 +723,9 @@
           <userVisible>
             <common>true</common>
           </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Width</segments>
+          </dataPath>
           <extendedTooltip>
             <name>WidthExtendedTooltip</name>
             <id>111</id>
@@ -761,6 +773,9 @@
           <userVisible>
             <common>true</common>
           </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Height</segments>
+          </dataPath>
           <extendedTooltip>
             <name>HeightExtendedTooltip</name>
             <id>114</id>
@@ -808,6 +823,9 @@
           <userVisible>
             <common>true</common>
           </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Volume</segments>
+          </dataPath>
           <extendedTooltip>
             <name>VolumeExtendedTooltip</name>
             <id>122</id>
@@ -899,6 +917,9 @@
           <userVisible>
             <common>true</common>
           </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Weight</segments>
+          </dataPath>
           <extendedTooltip>
             <name>WeightExtendedTooltip</name>
             <id>119</id>
@@ -1226,6 +1247,9 @@
             <userVisible>
               <common>true</common>
             </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.SpecificationAffectPricingMD5.Key</segments>
+            </dataPath>
             <extendedTooltip>
               <name>SpecificationAffectPricingMD5KeyExtendedTooltip</name>
               <id>74</id>

@@ -11,9 +11,9 @@ If ValueIsFilled(StepNames) And StepNames <> "BindVoid" Then
 	Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
 	TransferFormToStructure(Transfer, Parameters);
 #ENDIF
-	
+
 	ModelServer_V2.ServerEntryPoint(StepNames, Parameters, ExecuteLazySteps);
-	
+
 #IF Client THEN
 	TransferStructureToForm(Transfer, Parameters);
 #ENDIF
@@ -72,6 +72,7 @@ Function GetChainLink(ExecutorName)
 	ChainLink.Insert("ExecutorName", ExecutorName);
 	ChainLink.Insert("IsLazyStep"  , False);
 	ChainLink.Insert("LazyStepName", "");
+	ChainLink.Insert("StepName", "");
 	Return ChainLink; 
 EndFunction
 
@@ -98,45 +99,101 @@ Function GetChainLinkResult(Options, Value)
 EndFunction
 
 Procedure ExecuteChain(Parameters, Chain, ExecuteLazySteps)
-	For Each ChainLink in Chain Do
+	For Each ChainLink In Chain Do
 		Name = ChainLink.Key;
-		If Chain[Name].Enable Then
-				
-			Results = New Array();
-			For Each Options In Chain[Name].Options Do	
-				If Options.DontExecuteIfExecutedBefore 
-					And Not Parameters.ModelEnvironment.AlreadyExecutedSteps.Get(Name + ":" + Options.Key) = Undefined Then
-						Continue;
-				EndIf;
-				
-				If Not ExecuteLazySteps And Chain[Name].IsLazyStep Then
-					StepName = Chain[Name].LazyStepName;
-					If Parameters.ModelEnvironment.ArrayOfLazySteps.Find(StepName) = Undefined Then
-						Parameters.ModelEnvironment.ArrayOfLazySteps.Add(StepName);
-					EndIf;
-					AddToAlreadyExecutedSteps(Parameters, Options, Name);
-					Continue; // is lazy step, dont execute, maybe later
-				EndIf;
-			
-				Result = Undefined;
-				ExecutorName = Chain[Name].ExecutorName;
-				// procedure with prefix XX_ placed in extension
-				If Mid(ExecutorName, 3, 1) = "_" Then
-					ExecuteInExtension(Result, Options, ExecutorName);
-				Else
-					//@skip-warning
-					Execute StrTemplate("Result = %1(Options)", ExecutorName);
-				EndIf;
-				Results.Add(GetChainLinkResult(Options, Result));
-				AddToAlreadyExecutedSteps(Parameters, Options, Name);
-			EndDo;
-			// set result to property
-			If Not Chain[Name].IsLazyStep Or (Chain[Name].IsLazyStep And ExecuteLazySteps) Then
-				//@skip-warning
-				Execute StrTemplate("%1.%2(Parameters, Results);", Parameters.ControllerModuleName, Chain[Name].Setter);
-			EndIf;
+		If Name = "Idle" Then
+			Continue;
 		EndIf;
+		ChainItem = Chain[Name]; 
+		If Not ChainItem.Enable Then
+			Continue;
+		EndIf;
+		
+		ChainItem_Options = ChainItem.Options;
+		
+		If ValueIsFilled(ChainItem.StepName) Then
+			BufferChain = GetChain();
+			//@skip-warning
+			Execute StrTemplate("%1.%2(Parameters, BufferChain);", Parameters.ControllerModuleName, ChainItem.StepName);
+			For Each KeyValue In BufferChain Do
+				If KeyValue.Key = "Idle" Then
+					Continue;
+				EndIf;
+				BufferChainItem = BufferChain[KeyValue.Key];
+				If BufferChainItem.Enable Then
+					ChainItem_Options = BufferChainItem.Options;
+					ChainItem.Setter = BufferChainItem.Setter;
+					Break;
+				EndIf;
+			EndDo;	
+		EndIf;
+			
+		Results = New Array();
+		For Each Options In ChainItem_Options Do	
+			If Options.DontExecuteIfExecutedBefore 
+				And Not Parameters.ModelEnvironment.AlreadyExecutedSteps.Get(Name + ":" + Options.Key) = Undefined Then
+					Continue;
+			EndIf;
+				
+			If Not ExecuteLazySteps And ChainItem.IsLazyStep Then
+				StepName = ChainItem.LazyStepName;
+				If Parameters.ModelEnvironment.ArrayOfLazySteps.Find(StepName) = Undefined Then
+					Parameters.ModelEnvironment.ArrayOfLazySteps.Add(StepName);
+				EndIf;
+				AddToAlreadyExecutedSteps(Parameters, Options, Name);
+				Continue; // dont execute
+			EndIf;
+			
+			Result = Undefined;
+			ExecutorName = ChainItem.ExecutorName;
+			// procedure with prefix XX_ placed in extension
+			If Mid(ExecutorName, 3, 1) = "_" Then
+				ExecuteInExtension(Result, Options, ExecutorName);
+			Else
+				//@skip-warning
+				Execute StrTemplate("Result = %1(Options)", ExecutorName);
+			EndIf;
+			Results.Add(GetChainLinkResult(Options, Result));
+			AddToAlreadyExecutedSteps(Parameters, Options, Name);
+		EndDo;
+		// set result to property
+		If Not ChainItem.IsLazyStep Or (ChainItem.IsLazyStep And ExecuteLazySteps) Then
+			//@skip-warning
+			Execute StrTemplate("%1.%2(Parameters, Results);", Parameters.ControllerModuleName, ChainItem.Setter);
+		EndIf;
+		
+		ChainItem.Enable = False;
+		ChainItem.Options.Clear();
+		
 	EndDo;
+	
+	ArrayOfNextSteps = New Array();
+	For Each StepName In Parameters.NextSteps Do
+		ArrayOfNextSteps.Add(StepName);
+	EndDo;
+	
+	Parameters.NextSteps.Clear();
+	NewChain = New Structure();
+	For Each StepName In ArrayOfNextSteps Do
+		IdleChain = GetChain();
+		IdleChain.Idle = True;
+		//@skip-warning
+		Execute StrTemplate("%1.%2(Parameters, IdleChain);", Parameters.ControllerModuleName, StepName);
+		For Each KeyValue In IdleChain Do
+			If KeyValue.Key = "Idle" Then
+				Continue;
+			EndIf;
+			IdleChainItem = IdleChain[KeyValue.Key];
+			If IdleChainItem.Enable Then
+				NewChainName = KeyValue.Key + "_" + StepName;
+				NewChain.Insert(NewChainName, KeyValue.Value);
+				NewChain[NewChainName].StepName = StepName;
+			EndIf;
+		EndDo;
+	EndDo;
+	If ArrayOfNextSteps.Count() Then
+		ExecuteChain(Parameters, NewChain, ExecuteLazySteps);
+	EndIf;
 EndProcedure
 
 Procedure AddToAlreadyExecutedSteps(Parameters, Options, Name)
@@ -149,7 +206,7 @@ Procedure ExecuteInExtension(Result, Options, ExecutorName)
 EndProcedure
 
 Function GetChain()
-	Chain = New Structure();
+	Chain = New Structure("Idle", False);
 	// Default.List
 	Chain.Insert("DefaultStoreInList"        , GetChainLink("DefaultStoreInListExecute"));
 	Chain.Insert("DefaultDeliveryDateInList" , GetChainLink("DefaultDeliveryDateInListExecute"));

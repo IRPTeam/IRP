@@ -169,6 +169,7 @@ Scenario: _300721 barcode check in PhysicalCountByLocation
 	And in the table "ItemList" I click the button named "SearchByBarcode"
 	And I input "2202283713" text in the field named "Barcode"
 	And I move to the next attribute
+	And Delay 4
 	And in the table "ItemList" I click the button named "SearchByBarcode"
 	And I input "2202283713" text in the field named "Barcode"
 	And I move to the next attribute

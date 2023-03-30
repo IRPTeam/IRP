@@ -20,7 +20,7 @@ Procedure OnCreateAtServer(Object, Form, TableNames) Export
 		ServerParameters.TableName = TrimAll(TableName);
 		Parameters = ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
 		ControllerClientServer_V2.FormOnCreateAtServer(Parameters);
-		// #optimization 2
+		
 		// is context call
 		If Form <> Undefined And TypeOf(Form) = Type("ClientApplicationForm") Then
 			ArrayOfAttributes = New Array();
@@ -129,8 +129,19 @@ Procedure API_CallbackAtServer(Object, Form, TableName, ArrayOfDataPaths) Export
 EndProcedure
 
 Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
+	ObjectMetadata = Object.Ref.Metadata();
 	Result = New Structure();
-	Result.Insert("MetadataName", Object.Ref.Metadata().Name);
+	Result.Insert("MetadataName", ObjectMetadata.Name);
+	
+	ArrayOfAttributes = New Array();
+	For Each Attr In ObjectMetadata.StandardAttributes Do
+		ArrayOfAttributes.Add(Attr.Name);
+	EndDo;
+	
+	For Each Attr In ObjectMetadata.Attributes Do
+		ArrayOfAttributes.Add(Attr.Name);
+	EndDo;
+	Result.Insert("Attributes", StrConcat(ArrayOfAttributes, ","));
 	
 	Tables = New Structure();
 	For Each TableName In StrSplit(ArrayOfTableNames, ",") Do
@@ -196,14 +207,15 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	If FillingValues = Undefined Then
 		Return;
 	EndIf;
+		
 	Row = Parameters.Rows[0];
-	
 	
 	ItemIsPresent      = CommonFunctionsClientServer.ObjectHasProperty(Row, "Item");
 	ItemKeyIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "ItemKey");
 	UnitIsPresent      = CommonFunctionsClientServer.ObjectHasProperty(Row, "Unit");
 	QuantityIsPresent  = CommonFunctionsClientServer.ObjectHasProperty(Row, "Quantity");
 	PriceIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "Price");
+	PriceTypeIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "PriceType");
 	PhysCountIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "PhysCount");
 	SerialLotNumberIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "SerialLotNumber");
 	BarcodeIsPresent  = CommonFunctionsClientServer.ObjectHasProperty(Row, "Barcode");
@@ -232,9 +244,13 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	If FillingValues.Property("Quantity") And PhysCountIsPresent Then
 		ControllerClientServer_V2.SetItemListPhysCount(Parameters, PrepareValue(FillingValues.Quantity, Row.Key));
 	EndIf;
-	
+		
 	If FillingValues.Property("Price") And PriceIsPresent Then
 		ControllerClientServer_V2.SetItemListPrice(Parameters, PrepareValue(FillingValues.Price, Row.Key));
+	EndIf;
+	
+	If FillingValues.Property("PriceType") And PriceTypeIsPresent Then
+		ControllerClientServer_V2.SetItemListPriceType(Parameters, PrepareValue(FillingValues.PriceType, Row.Key));
 	EndIf;
 	
 	If FillingValues.Property("SerialLotNumber") And SerialLotNumberIsPresent Then
@@ -265,6 +281,20 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 			ControllerClientServer_V2.SetTimeSheetListPosition(Parameters, PrepareValue(FillingValues.Position, Row.Key));
 		EndIf;		
 	EndIf;
+	
+	FilledColumns = New Array();
+	For Each KeyValue In FillingValues Do
+		ColumnName = KeyValue.Key;
+		If ValueIsFilled(FillingValues[ColumnName]) Then
+			DataPath = Parameters.TableName + "." + ColumnName;
+			FilledColumns.Add(DataPath);
+			Parameters.ReadOnlyPropertiesMap.Insert(Upper(DataPath), True);
+		EndIf;
+	EndDo;
+	Parameters.ReadOnlyProperties = StrConcat(FilledColumns, ",");
+	Parameters.IsAddFilledRow = True;
+	
+	ControllerClientServer_V2.LaunchNextSteps(Parameters);
 EndProcedure
 
 Function PrepareValue(Value, Key)

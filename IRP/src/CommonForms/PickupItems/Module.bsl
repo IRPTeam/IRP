@@ -435,7 +435,14 @@ EndProcedure
 
 &AtClient
 Procedure CommandSaveAndClose(Command)
-	Close(ThisObject.ItemTableValue);
+	ArrayOfResults = New Array();
+	For Each Row In ThisObject.ItemTableValue Do
+		Result = New Structure("Item, ItemKey, Quantity, Unit, SerialLotNumber, UseSerialLotNumber, IsService, SourceOfOrigin");
+		FillPropertyValues(Result, Row);
+		Result.Insert("PriceType", ThisObject.PriceType);
+		ArrayOfResults.Add(Result);
+	EndDo;
+	Close(ArrayOfResults);
 EndProcedure
 
 &AtClient

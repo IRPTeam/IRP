@@ -531,7 +531,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation");
 	
 	If Object.Property("Agreement") Then
-		FilterString = "Item, ItemKey, Unit, Price";
+		FilterString = "Item, ItemKey, Unit, PriceType";
 	ElsIf isSerialLotNumberAtRow Then
 		FilterString = "Item, ItemKey, Unit, SerialLotNumber";
 	Else
@@ -580,8 +580,13 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			EndDo;
 			
 		Else
-			FillPropertyValues(FilterStructure, ResultElement);
-			ExistingRows = Object.ItemList.FindRows(FilterStructure);	
+			FilledFilter = New Structure();
+			For Each KeyValue In FilterStructure Do
+				If ResultElement.Property(KeyValue.Key) And ValueIsFilled(ResultElement[KeyValue.Key]) Then
+					FilledFilter.Insert(KeyValue.Key, ResultElement[KeyValue.Key]);
+				EndIf;
+			EndDo;
+			ExistingRows = Object.ItemList.FindRows(FilledFilter);	
 		EndIf;
 		
 		If ExistingRows.Count() And Not ResultElement.AlwaysAddNewRowAfterScan Then // increment Quantity in existing row
@@ -644,8 +649,8 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 			FillingValues.Insert("Barcode" , ?(ResultElement.Property("Barcode"), ResultElement.Barcode, ""));
 			FillingValues.Insert("Date" , CommonFunctionsServer.GetCurrentSessionDate());
 			
-			If ResultElement.Property("Price") Then
-				FillingValues.Insert("Price", ResultElement.Price);
+			If ResultElement.Property("PriceType") Then
+				FillingValues.Insert("PriceType", ResultElement.PriceType);
 			EndIf;
 			
 			Row = ViewClient_V2.ItemListAddFilledRow(Object, Form, FillingValues);
@@ -727,10 +732,8 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 
 					SourceOfOriginClient.AddNewSourceOfOrigins(SourceOfOriginsStructure, AddInfo);
 				EndIf;
-			//ElsIf ResultElement.UseSourceOfOrigin Then
-				// need open form for choice source of origin
+		
 			EndIf;
-		// ElsIf <> for document without tabular section SourceOfOrigins
 		EndIf;
 		
 	EndDo; // Result

@@ -7,9 +7,14 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	tmpItemList.Columns.Add("ItemKey"         , New TypeDescription("CatalogRef.ItemKeys"));
 	tmpItemList.Columns.Add("Store"           , New TypeDescription("CatalogRef.Stores"));
 	tmpItemList.Columns.Add("Quantity"        , Metadata.DefinedTypes.typeQuantity.Type);
+	tmpItemList.Columns.Add("LineNumber"      , Metadata.DefinedTypes.typeQuantity.Type);
 	
+	LineNumber = 1;
 	For Each Row In Table_ItemList Do
-		FillPropertyValues(tmpItemList.Add(), Row);
+		NewRow = tmpItemList.Add();
+		FillPropertyValues(NewRow, Row);
+		NewRow.LineNumber = LineNumber;
+		LineNumber = LineNumber + 1;
 	EndDo;
 	
 	tmpSerialLotNumbers = New ValueTable();
@@ -53,40 +58,51 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	|	ItemList.Company AS Company,
 	|	ItemList.ItemKey AS ItemKey,
 	|	ItemList.Store AS Store,
-	|	ItemList.Quantity AS Quantity
+	|	ItemList.Quantity AS Quantity,
+	|	ItemList.LineNumber AS LineNumber
 	|INTO tmpItemList
 	|FROM
 	|	&tmpItemList AS ItemList
+	|
+	|INDEX BY
+	|	Key
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	SerialLotNumbers.Key,
+	|	SerialLotNumbers.Key AS Key,
 	|	SerialLotNumbers.SerialLotNumber,
 	|	SerialLotNumbers.Quantity
 	|INTO tmpSerialLotNumbers
 	|FROM
 	|	&tmpSerialLotNumbers AS SerialLotNumbers
+	|
+	|INDEX BY
+	|	Key
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	tmpSourceOfOrigins.Key,
+	|	tmpSourceOfOrigins.Key AS Key,
 	|	tmpSourceOfOrigins.SerialLotNumber,
 	|	tmpSourceOfOrigins.SourceOfOrigin,
 	|	tmpSourceOfOrigins.Quantity
 	|INTO tmpSourceOfOrigins
 	|FROM
 	|	&tmpSourceOfOrigins AS tmpSourceOfOrigins
+	|
+	|INDEX BY
+	|	Key
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	tmpItemList.Key,
+	|	tmpItemList.Key AS Key,
 	|	tmpItemList.InventoryOrigin,
 	|	tmpItemList.Company,
 	|	tmpItemList.ItemKey,
 	|	tmpItemList.Store,
+	|	tmpItemList.LineNumber,
 	|	CASE
 	|		WHEN tmpSerialLotNumbers.SerialLotNumber.Ref IS NULL
 	|			THEN tmpItemList.Quantity
@@ -98,6 +114,10 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	|	tmpItemList AS tmpItemList
 	|		LEFT JOIN tmpSerialLotNumbers AS tmpSerialLotNumbers
 	|		ON tmpItemList.Key = tmpSerialLotNumbers.Key
+	|
+	|INDEX BY
+	|	Key,
+	|	SerialLotNumber
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -118,7 +138,10 @@ Function GetConsignorBatchesTable(DocObject, Table_ItemList, Table_SerialLotNumb
 	|	tmpItemList_1 AS tmpItemList_1
 	|		LEFT JOIN tmpSourceOfOrigins AS tmpSourceOfOrigins
 	|		ON tmpItemList_1.Key = tmpSourceOfOrigins.Key
-	|		AND tmpItemList_1.SerialLotNumber = tmpSourceOfOrigins.SerialLotNumber";
+	|		AND tmpItemList_1.SerialLotNumber = tmpSourceOfOrigins.SerialLotNumber
+	|
+	|ORDER BY
+	|	tmpItemList_1.LineNumber";
 	Query.SetParameter("tmpItemList", tmpItemList);
 	Query.SetParameter("tmpSerialLotNumbers", tmpSerialLotNumbers);
 	Query.SetParameter("tmpSourceOfOrigins", tmpSourceOfOrigins);
@@ -926,7 +949,9 @@ Procedure UpdateRegisterConsignorBatches(DocObject, ConsignorBatchesTable)
 		FillPropertyValues(Record, Row);
 		Record.Document = DocObject.Ref;
 	EndDo;
-	RecordSet.Write();
+	If RecordSet.Count() Then
+		RecordSet.Write();
+	EndIf;
 EndProcedure
 
 Function GetSalesReportToConsignorList() Export
@@ -1008,14 +1033,35 @@ Function GetExistingRows(Object, StoreInHeader, FilterStructure, FilterValues, F
 	Wrapper = BuilderAPI.Initialize(Object, , ,"ItemList", DocInfo);
 	
 	NewRow_ItemList = BuilderAPI.AddRow(Wrapper, "ItemList");
-	BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "Item"     , FilterValues.Item);
-	BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "ItemKey"  , FilterValues.ItemKey);
-	BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "Unit"     , FilterValues.Unit);
-	BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "Quantity" , FilterValues.Quantity);
+	If ValueIsFilled(FilterValues.Item) Then
+		BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "Item"     , FilterValues.Item);
+	EndIf;
+	
+	If ValueIsFilled(FilterValues.ItemKey) Then
+		BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "ItemKey"  , FilterValues.ItemKey);
+	EndIf;
+	
+	If ValueIsFilled(FilterValues.PriceType) Then
+		BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "PriceType", FilterValues.PriceType);
+	EndIf;
+	
+	If ValueIsFilled(FilterValues.Unit) Then
+		BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "Unit"     , FilterValues.Unit);
+	EndIf;
+	
+	If ValueIsFilled(FilterValues.Quantity) Then
+		BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "Quantity" , FilterValues.Quantity);
+	EndIf;
 	
 	If ValueIsFilled(StoreInHeader) Then
 		BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "Store", StoreInHeader);
 	EndIf;
+	
+	For Each KeyValue In FilterStructure Do
+		If Not ValueIsFilled(FilterValues[KeyValue.Key]) Then
+			FilterValues[KeyValue.Key] = NewRow_ItemList[KeyValue.Key];
+		EndIf;
+	EndDo;
 	
 	If ValueIsFilled(FilterValues.SerialLotNumber) Then
 		NewRow_SerialLotNumber = Wrapper.Object.SerialLotNumbers.Add();

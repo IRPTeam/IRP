@@ -15,7 +15,6 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocAdditionalRevenueAllocationServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
-		Object.AllocationMode = Enums.AllocationMode.ByRows;
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 EndProcedure
@@ -202,6 +201,81 @@ Procedure RevenueDocumentsDocumentStartChoice(Item, ChoiceData, StandardProcessi
 		Notify,
 		FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
+
+&AtClient
+Procedure RevenueDocumentsDocumentStartChoiceEnd(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+
+	CurrentData = ThisObject.Items.RevenueDocuments.CurrentData;
+	If CurrentData <> Undefined Then
+		CurrentData.Document  = Result.Document;
+		CurrentData.Currency  = Result.Currency;
+		CurrentData.Amount    = Result.Amount;
+		CurrentData.TaxAmount = Result.TaxAmount;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure RevenueDocumentsDocumentOnChange(Item)
+	CurrentData = Items.CostDocuments.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	If Not ValueIsFilled(CurrentData.Document) Then
+		CurrentData.Currency  = Undefined;
+		CurrentData.Amount    = Undefined;
+		CurrentData.TaxAmount = Undefined;
+		Return;
+	EndIf;
+	
+	DocData = GetDataFromDocument(CurrentData.Document);
+	CurrentData.Currency  = DocData.Currency;
+	CurrentData.Amount    = DocData.Amount;
+	CurrentData.TaxAmount = DOcData.TaxAmount;	
+EndProcedure
+
+&AtServer
+Function GetDataFromDocument(DocumentRef)
+	Query = New Query();
+	Query.Text = 	
+	"SELECT
+	|	R6080T_OtherPeriodsRevenues.Basis AS Document,
+	|	R6080T_OtherPeriodsRevenues.Company,
+	|	R6080T_OtherPeriodsRevenues.Currency,
+	|	SUM(R6080T_OtherPeriodsRevenues.AmountBalance) AS Amount,
+	|	SUM(R6080T_OtherPeriodsRevenues.AmountTaxBalance) AS TaxAmount
+	|FROM
+	|	AccumulationRegister.R6080T_OtherPeriodsRevenues.Balance(&BalancePeriod, CurrencyMovementType = &CurrencyMovementType
+	|	AND Basis = &DocumentRef) AS R6080T_OtherPeriodsRevenues
+	|GROUP BY
+	|	R6080T_OtherPeriodsRevenues.Basis,
+	|	R6080T_OtherPeriodsRevenues.Company,
+	|	R6080T_OtherPeriodsRevenues.Currency";	
+	Query.SetParameter("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
+	If ValueIsFilled(Object.Ref) And Object.Posted Then
+		BalancePeriod = New Boundary(DocumentRef.PointInTime(), BoundaryType.Excluding);
+	Else
+		BalancePeriod = CommonFunctionsServer.GetCurrentSessionDate();
+	EndIf;
+	Query.SetParameter("BalancePeriod", BalancePeriod);
+	Query.SetParameter("DocumentRef", DocumentRef);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	Result = New Structure();
+	Result.Insert("Document"  , Undefined);
+	Result.Insert("Currency"  , Undefined);
+	Result.Insert("Amount"    , Undefined);
+	Result.Insert("TaxAmount" , Undefined);
+	
+	If QuerySelection.Next() Then
+		FillPropertyValues(Result, QuerySelection);
+	EndIf;
+	Return Result;
+EndFunction
 
 &AtClient
 Procedure RevenueRowsBeforeDeleteRow(Item, Cancel)
@@ -621,21 +695,6 @@ Function GetBatchKeyInfo(FilterTable)
 	QueryTable = QueryResult.Unload();
 	Return QueryTable;
 EndFunction
-
-&AtClient
-Procedure RevenueDocumentsDocumentStartChoiceEnd(Result, AdditionalParameters) Export
-	If Result = Undefined Then
-		Return;
-	EndIf;
-
-	CurrentData = ThisObject.Items.RevenueDocuments.CurrentData;
-	If CurrentData <> Undefined Then
-		CurrentData.Document  = Result.Document;
-		CurrentData.Currency  = Result.Currency;
-		CurrentData.Amount    = Result.Amount;
-		CurrentData.TaxAmount = Result.TaxAmount;
-	EndIf;
-EndProcedure
 
 &AtClient
 Procedure RevenueDocumentsAfterDeleteRow(Item)

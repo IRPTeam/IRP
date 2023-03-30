@@ -226,6 +226,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	Parameters.Insert("CacheRowsMap" , New Map());
 	Parameters.Insert("TableRowsMap" , New Map());
 	Parameters.Insert("BindingMap"   , New Map());
+	Parameters.Insert("CacheRowsRemovable", New Structure());
 	
 	Return Parameters;
 EndFunction
@@ -4692,28 +4693,12 @@ EndProcedure
 
 // Offers.Set
 Procedure SetSpecialOffers(Parameters, Results)
-	For Each Result In Results Do
-		If Result.Value.SpecialOffers.Count() Then
-			If Not Parameters.Cache.Property("SpecialOffers") Then
-				AddTableToCache(Parameters, "SpecialOffers");
-			EndIf;
-			
-			// remove from cache old rows
-			Count = Parameters.Cache.SpecialOffers.Count();
-			For i = 1 To Count Do
-				Index = Count - i;
-				ArrayItem = Parameters.Cache.SpecialOffers[Index];
-				If ArrayItem.Key = Result.Options.Key Then
-					Parameters.Cache.SpecialOffers.Delete(Index);
-				EndIf;
-			EndDo;
-			
-			// add new rows
-			For Each Row In Result.Value.SpecialOffers Do
-				AddRowToTableCache(Parameters, "SpecialOffers", Row);
-			EndDo;
-		EndIf;
-	EndDo;
+	TableName = "SpecialOffers";
+	If Not Parameters.Cache.Property(TableName) Then
+		AddTableToCacheRemovable(Parameters, TableName);
+	EndIf;
+	
+	UpdateTableCacheRemovable(Parameters, TableName, Results);	
 EndProcedure
 
 // Offers.Bind
@@ -4729,29 +4714,12 @@ EndFunction
 
 // TaxList.Set
 Procedure SetTaxList(Parameters, Results)
-		// for tabular part TaxList needed full transfer from cache to object
-	For Each Result In Results Do
-		If Result.Value.TaxList.Count() Then
-			If Not Parameters.Cache.Property("TaxList") Then
-				Parameters.Cache.Insert("TaxList", New Array());
-			EndIf;
-			
-			// remove from cache old rows
-			Count = Parameters.Cache.TaxList.Count();
-			For i = 1 To Count Do
-				Index = Count - i;
-				ArrayItem = Parameters.Cache.TaxList[Index];
-				If ArrayItem.Key = Result.Options.Key Then
-					Parameters.Cache.TaxList.Delete(Index);
-				EndIf;
-			EndDo;
-			
-			// add new rows
-			For Each Row In Result.Value.TaxList Do
-				Parameters.Cache.TaxList.Add(Row);
-			EndDo;
-		EndIf;
-	EndDo;
+	TableName = "TaxList";
+	If Not Parameters.Cache.Property(TableName) Then
+		AddTableToCacheRemovable(Parameters, TableName);
+	EndIf;
+	
+	UpdateTableCacheRemovable(Parameters, TableName, Results);
 EndProcedure
 
 #EndRegion
@@ -7254,28 +7222,12 @@ EndProcedure
 
 // BillOfMaterialsList.Set
 Procedure SetBillOfMaterialsList(Parameters, Results) Export
-	For Each Result In Results Do
-		If Result.Value.BillOfMaterialsList.Count() Then
-			If Not Parameters.Cache.Property("BillOfMaterialsList") Then
-				AddTableToCache(Parameters, "BillOfMaterialsList");
-			EndIf;
-			
-			// remove from cache old rows
-			Count = Parameters.Cache.BillOfMaterialsList.Count();
-			For i = 1 To Count Do
-				Index = Count - i;
-				ArrayItem = Parameters.Cache.BillOfMaterialsList[Index];
-				If ArrayItem.Key = Result.Options.Key Then
-					Parameters.Cache.BillOfMaterialsList.Delete(Index);
-				EndIf;
-			EndDo;
-			
-			// add new rows
-			For Each Row In Result.Value.BillOfMaterialsList Do
-				AddRowToTableCache(Parameters, "BillOfMaterialsList", Row);
-			EndDo;
-		EndIf;
-	EndDo;
+	TableName = "BillOfMaterialsList";
+	If Not Parameters.Cache.Property(TableName) Then
+		AddTableToCacheRemovable(Parameters, TableName);
+	EndIf;
+	
+	UpdateTableCacheRemovable(Parameters, TableName, Results);	
 EndProcedure
 
 // Step.BillOfMaterialsList.Calculations
@@ -13448,6 +13400,39 @@ EndProcedure
 Function GetRowFromTableCache(Parameters, TableName, _Key)
 	Return Parameters.CacheRowsMap.Get(TableName + ":" + _Key);
 EndFunction
+
+Procedure UpdateTableCacheRemovable(Parameters, TableName, ArrayOfRows)
+	For Each Result In ArrayOfRows Do
+		If Not Result.Value[TableName].Count() Then
+			Continue;
+		EndIf;
+		
+		DeleteRowFromTableCacheRemovable(Parameters, TableName, Result.Options.Key);
+		
+		For Each NewRow In Result.Value[TableName] Do
+			AddRowToTableCacheRemovable(Parameters, TableName, NewRow);
+		EndDo;
+	EndDo;
+EndProcedure
+
+Procedure AddTableToCacheRemovable(Parameters, TableName)
+	Parameters.Cache.Insert(TableName, New Array());
+	Parameters.CacheRowsRemovable.Insert(TableName, New Array());
+EndProcedure
+
+Procedure AddRowToTableCacheRemovable(Parameters, TableName, Row)
+	Parameters.Cache[TableName].Add(Row);
+	Parameters.CacheRowsRemovable[TableName].Add(Row.Key);
+EndProcedure
+
+Procedure DeleteRowFromTableCacheRemovable(Parameters, TableName, Key)
+	Index = Parameters.CacheRowsRemovable[TableName].Find(Key);
+	While Index <> Undefined Do
+		Parameters.CacheRowsRemovable[TableName].Delete(Index);
+		Parameters.Cache[TableName].Delete(Index);
+		Index = Parameters.CacheRowsRemovable[TableName].Find(Key);
+	EndDo;
+EndProcedure
 
 #IF Server THEN
 

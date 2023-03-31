@@ -938,6 +938,7 @@ Scenario: _05807 create sales report to consignor (Second Company partner) and s
 			| 'en description is empty' | 'Product 3 with SLN' | 'UNIQ'     | '520,00'          | '09987897977891'     | 'pcs'  | '1,000'    | '10,00'                   | '20,00'                  | '200,00' | 'Without VAT' | '200,00'     | '200,00'       |
 			| 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | '200,00'          | ''                   | 'pcs'  | '2,000'    | '10,00'                   | '100,00'                 | '500,00' | 'Without VAT' | '1 000,00'   | '1 000,00'     |
 			| 'Basic Price Types'       | 'Dress'              | 'M/Brown'  | '200,00'          | ''                   | 'pcs'  | '2,000'    | '10,00'                   | '100,00'                 | '500,00' | 'Without VAT' | '1 000,00'   | '1 000,00'     |
+		And in the table "ItemList" I click "Open serial lot number tree" button
 		And "SerialLotNumbersTree" table became equal
 			| 'Item'               | 'Item key' | 'Serial lot number' | 'Item key quantity' | 'Quantity' |
 			| 'Product 1 with SLN' | 'PZU'      | ''                  | '1,000'             | '1,000'    |
@@ -946,6 +947,7 @@ Scenario: _05807 create sales report to consignor (Second Company partner) and s
 			| ''                   | ''         | '09987897977891'    | ''                  | '5,000'    |
 			| 'Product 3 with SLN' | 'UNIQ'     | ''                  | '1,000'             | '1,000'    |
 			| ''                   | ''         | '09987897977891'    | ''                  | '1,000'    |
+		And I close "Serial lot numbers tree" window
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "3 400,00"
 		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "0,00"

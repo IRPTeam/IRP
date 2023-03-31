@@ -941,7 +941,6 @@ EndProcedure
 Procedure OnOpenFormNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") Then
 		SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
-		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);	
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
@@ -1923,7 +1922,6 @@ Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
 	
 	If Parameters.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") Then
 		SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Parameters.Object);
-		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
@@ -2017,7 +2015,6 @@ Procedure OnSetItemListItemKey(Parameters) Export
 	If Parameters.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") Then
 		SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Parameters.Object);
 		SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
-		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
@@ -2331,12 +2328,7 @@ Procedure OnSetItemListQuantityNotify(Parameters) Export
 	Return;
 EndProcedure
 
-Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
-	// Update -> SrialLotNubersTree
-	If Parameters.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") Then
-		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
-	EndIf;
-	
+Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export	
 	If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
 		SourceOfOriginClient.UpdateSourceOfOriginsQuantity(Parameters.Object, Parameters.Form);
 	EndIf;
@@ -3005,7 +2997,6 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 		
 		If Parameters.ObjectMetadataInfo.Tables.Property("SerialLotNumbers") Then
 			SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
-			SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 		EndIf;
 		
 		If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then

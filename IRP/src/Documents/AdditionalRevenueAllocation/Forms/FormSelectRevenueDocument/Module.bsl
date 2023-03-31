@@ -8,7 +8,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If ValueIsFilled(Parameters.Ref) And Parameters.Ref.Posted Then
 		BalancePeriod = New Boundary(Parameters.Ref.PointInTime(), BoundaryType.Excluding);
 	Else
-		BalancePeriod = EndOfDay(Parameters.Date);
+		BalancePeriod = CommonFunctionsServer.GetCurrentSessionDate();
 	EndIf;
 	List.Parameters.SetParameterValue("BalancePeriod", BalancePeriod);
 EndProcedure

@@ -394,11 +394,13 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			| '99098809009999; 99098809009998' | '400,00' | 'Trousers' | '38/Yellow' | '3,000' | 'pcs'  | '$$RetailSalesReceipt092002$$' |
 			| ''                               | '650,00' | 'Boots'    | '38/18SD'   | '1,000' | 'pcs'  | '$$RetailSalesReceipt092002$$' |
 			| ''                               | '700,00' | 'Boots'    | '37/18SD'   | '1,000' | 'pcs'  | '$$RetailSalesReceipt092002$$' |
-		And "SerialLotNumbersTree" table contains lines
-			| 'Item'     | 'Quantity' | 'Item key'  | 'Serial lot number' | 'Item key quantity' |
-			| 'Trousers' | '3,000'    | '38/Yellow' | ''                  | '3,000'             |
-			| ''         | '1,000'    | ''          | '99098809009999'    | ''                  |
-			| ''         | '2,000'    | ''          | '99098809009998'    | ''                  |
+		And in the table "ItemList" I click "Open serial lot number tree" button
+		And "SerialLotNumbersTree" table became equal
+			| 'Item'     | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Item key quantity' |
+			| 'Trousers' | '38/Yellow' | ''                  | '3,000'    | '3,000'             |
+			| ''         | ''          | '99098809009999'    | '1,000'    | ''                  |
+			| ''         | ''          | '99098809009998'    | '2,000'    | ''                  |
+		And I close "Serial lot numbers tree" window		
 	* Check that the field Serial lot number is inactive in the second string
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  | 'Quantity'     |
@@ -847,11 +849,13 @@ Scenario: _092005 check serial lot number in the Sales return
 			| '99098809009910; 99098809009911' | '400,00' | 'Trousers' | '38/Yellow' | '3,000' | 'pcs'  | '$$SalesInvoice092004$$' |
 			| ''                               | '650,00' | 'Boots'    | '38/18SD'   | '1,000' | 'pcs'  | '$$SalesInvoice092004$$' |
 			| ''                               | '700,00' | 'Boots'    | '37/18SD'   | '1,000' | 'pcs'  | '$$SalesInvoice092004$$' |
+		And in the table "ItemList" I click "Open serial lot number tree" button
 		And "SerialLotNumbersTree" table contains lines
 			| 'Item'     | 'Quantity' | 'Item key'  | 'Serial lot number' | 'Item key quantity' |
 			| 'Trousers' | '3,000'    | '38/Yellow' | ''                  | '3,000'             |
 			| ''         | '1,000'    | ''          | '99098809009910'    | ''                  |
 			| ''         | '2,000'    | ''          | '99098809009911'    | ''                  |
+		And I close "Serial lot numbers tree" window
 	* Check that the field Serial lot number is inactive in the second string
 		And I go to line in "ItemList" table
 			| 'Item'     | 'Item key'  | 'Quantity'     |
@@ -3493,9 +3497,6 @@ Scenario: _092062 create new serial lot number from Serial lot number form selec
 			| '38'   | 'Product 3 with SLN' | 'UNIQ'     |
 		And I activate field named "ItemKey" in "List" table
 		And I select current line in "List" table
-		And I expand a line in "SerialLotNumbersTree" table
-			| 'Item'               | 'Item key' | 'Item key quantity' | 'Quantity' |
-			| 'Product 1 with SLN' | 'PZU'      | '2,000'             | '2,000'    |
 		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And I change checkbox "Auto create"
@@ -3527,9 +3528,6 @@ Scenario: _092062 create new serial lot number from Serial lot number form selec
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I activate field named "ItemKey" in "List" table
 		And I select current line in "List" table
-		And I expand a line in "SerialLotNumbersTree" table
-			| 'Item'               | 'Item key' | 'Item key quantity' | 'Quantity' |
-			| 'Product 3 with SLN' | 'UNIQ'     | '1,000'             | '1,000'    |
 		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And in the table "SerialLotNumbers" I click "Search by barcode (F7)" button
@@ -3656,17 +3654,11 @@ Scenario: _092064 check unique serial lot number settings
 			And I click "Ok" button
 			And I activate field named "ItemListQuantity" in "ItemList" table
 			And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
-			And I expand a line in "SerialLotNumbersTree" table
-				| 'Item'     | 'Item key'  | 'Item key quantity' | 'Quantity' |
-				| 'Trousers' | '38/Yellow' | '2,000'             | '2,000'    |
 			And I finish line editing in "ItemList" table
 			And I click "Post" button
 			Then I wait that in user messages the "Serial lot number [ 00989789 ] has to be unique at the document" substring will appear in "30" seconds
 			And I activate field named "ItemListQuantity" in "ItemList" table
 			And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
-			And I expand a line in "SerialLotNumbersTree" table
-				| 'Item'     | 'Item key'  | 'Item key quantity' | 'Quantity' |
-				| 'Trousers' | '38/Yellow' | '1,000'             | '2,000'    |
 			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 			And I activate "Quantity" field in "SerialLotNumbers" table

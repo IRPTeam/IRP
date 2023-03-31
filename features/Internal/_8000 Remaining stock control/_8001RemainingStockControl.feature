@@ -543,9 +543,6 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 		And I close "Select serial lot numbers" window
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I input "26,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I expand a line in "SerialLotNumbersTree" table
-			| 'Item'               | 'Item key' | 'Item key quantity' | 'Quantity' |
-			| 'Product 1 with SLN' | 'PZU'      | '26,000'            | '26,000'   |
 		And I finish line editing in "ItemList" table
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -563,9 +560,6 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "13,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I expand a line in "SerialLotNumbersTree" table
-			| 'Item'               | 'Item key' | 'Item key quantity' | 'Quantity' |
-			| 'Product 1 with SLN' | 'PZU'      | '13,000'            | '26,000'   |
 		And I finish line editing in "ItemList" table
 		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -1216,9 +1210,6 @@ Scenario:_800018 check remaining stock control serial lot number in the Stock ad
 			And I click "Ok" button
 			And I activate field named "ItemListQuantity" in "ItemList" table
 			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
-			And I expand a line in "SerialLotNumbersTree" table
-				| 'Item'               | 'Item key' | 'Item key quantity' | 'Quantity' |
-				| 'Product 1 with SLN' | 'PZU'      | '10,000'            | '10,000'   |
 			And I activate "Profit loss center" field in "ItemList" table
 			And I click choice button of "Profit loss center" attribute in "ItemList" table
 			And I go to line in "List" table

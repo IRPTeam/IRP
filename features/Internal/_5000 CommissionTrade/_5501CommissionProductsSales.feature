@@ -349,9 +349,6 @@ Scenario: _050006 creare PR (Return to consignor)
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I expand a line in "SerialLotNumbersTree" table
-			| 'Item'               | 'Item key' | 'Item key quantity' | 'Quantity' |
-			| 'Product 4 with SLN' | 'ODS'      | '1,000'             | '2,000'    |
 		And I finish line editing in "ItemList" table
 		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -918,6 +915,7 @@ Scenario: _050025 create Sales report co consignor
 				| 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '100,00'          | '09987897977889'     | 'pcs'  | 'No'                 | '-1,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-20,00'                 | '200,00' | '-169,49'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-200,00'      |
 				| 'Dress'              | 'Basic Price Types'       | 'S/Yellow' | '550,00'          | ''                   | 'pcs'  | 'No'                 | '-2,000'   | 'Sales invoice 194 dated 04.11.2022 16:33:38' | '10,00'                   | '-110,00'                | '550,00' | '-932,20'    | 'Purchase invoice 195 dated 02.11.2022 16:31:38' | '-1 100,00'    |
 			Then the number of "ItemList" table lines is "равно" "4"
+			And in the table "ItemList" I click "Open serial lot number tree" button
 			And "SerialLotNumbersTree" table contains lines
 				| 'Item'               | 'Item key' | 'Serial lot number' | 'Item key quantity' | 'Quantity' |
 				| 'Product 3 with SLN' | 'UNIQ'     | ''                  | '3,000'             | '3,000'    |
@@ -925,6 +923,7 @@ Scenario: _050025 create Sales report co consignor
 				| 'Product 3 with SLN' | 'UNIQ'     | ''                  | '-1,000'            | '-1,000'   |
 				| ''                   | ''         | '09987897977889'    | ''                  | '-1,000'   |
 			Then the number of "SerialLotNumbersTree" table lines is "равно" "4"
+			And I close "Serial lot numbers tree" window
 			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 			Then the form attribute named "Currency" became equal to "TRY"
 			Then the form attribute named "Branch" became equal to ""

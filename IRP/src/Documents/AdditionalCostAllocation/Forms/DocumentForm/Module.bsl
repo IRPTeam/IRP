@@ -15,7 +15,6 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocAdditionalCostAllocationServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
-		Object.AllocationMode = Enums.AllocationMode.ByRows;
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 EndProcedure
@@ -207,6 +206,81 @@ Procedure CostDocumentsDocumentStartChoice(Item, ChoiceData, StandardProcessing)
 		Notify,
 		FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
+
+&AtClient
+Procedure CostDocumentsDocumentStartChoiceEnd(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+
+	CurrentData = ThisObject.Items.CostDocuments.CurrentData;
+	If CurrentData <> Undefined Then
+		CurrentData.Document  = Result.Document;
+		CurrentData.Currency  = Result.Currency;
+		CurrentData.Amount    = Result.Amount;
+		CurrentData.TaxAmount = Result.TaxAmount;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure CostDocumentsDocumentOnChange(Item)
+	CurrentData = Items.CostDocuments.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	If Not ValueIsFilled(CurrentData.Document) Then
+		CurrentData.Currency  = Undefined;
+		CurrentData.Amount    = Undefined;
+		CurrentData.TaxAmount = Undefined;
+		Return;
+	EndIf;
+	
+	DocData = GetDataFromDocument(CurrentData.Document);
+	CurrentData.Currency  = DocData.Currency;
+	CurrentData.Amount    = DocData.Amount;
+	CurrentData.TaxAmount = DOcData.TaxAmount;	
+EndProcedure
+
+&AtServer
+Function GetDataFromDocument(DocumentRef)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	R6070T_OtherPeriodsExpenses.Basis AS Document,
+	|	R6070T_OtherPeriodsExpenses.Company,
+	|	R6070T_OtherPeriodsExpenses.Currency,
+	|	SUM(R6070T_OtherPeriodsExpenses.AmountBalance) AS Amount,
+	|	SUM(R6070T_OtherPeriodsExpenses.AmountTaxBalance) AS TaxAmount
+	|FROM
+	|	AccumulationRegister.R6070T_OtherPeriodsExpenses.Balance(&BalancePeriod, CurrencyMovementType = &CurrencyMovementType
+	|	AND Basis = &DocumentRef) AS R6070T_OtherPeriodsExpenses
+	|GROUP BY
+	|	R6070T_OtherPeriodsExpenses.Basis,
+	|	R6070T_OtherPeriodsExpenses.Company,
+	|	R6070T_OtherPeriodsExpenses.Currency";	
+	Query.SetParameter("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
+	If ValueIsFilled(Object.Ref) And Object.Posted Then
+		BalancePeriod = New Boundary(DocumentRef.PointInTime(), BoundaryType.Excluding);
+	Else
+		BalancePeriod = CommonFunctionsServer.GetCurrentSessionDate();
+	EndIf;
+	Query.SetParameter("BalancePeriod", BalancePeriod);
+	Query.SetParameter("DocumentRef", DocumentRef);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	Result = New Structure();
+	Result.Insert("Document"  , Undefined);
+	Result.Insert("Currency"  , Undefined);
+	Result.Insert("Amount"    , Undefined);
+	Result.Insert("TaxAmount" , Undefined);
+	
+	If QuerySelection.Next() Then
+		FillPropertyValues(Result, QuerySelection);
+	EndIf;
+	Return Result;
+EndFunction
 
 &AtClient
 Procedure CostRowsBeforeDeleteRow(Item, Cancel)
@@ -626,21 +700,6 @@ Function GetBatchKeyInfo(FilterTable)
 	QueryTable = QueryResult.Unload();
 	Return QueryTable;
 EndFunction
-
-&AtClient
-Procedure CostDocumentsDocumentStartChoiceEnd(Result, AdditionalParameters) Export
-	If Result = Undefined Then
-		Return;
-	EndIf;
-
-	CurrentData = ThisObject.Items.CostDocuments.CurrentData;
-	If CurrentData <> Undefined Then
-		CurrentData.Document  = Result.Document;
-		CurrentData.Currency  = Result.Currency;
-		CurrentData.Amount    = Result.Amount;
-		CurrentData.TaxAmount = Result.TaxAmount;
-	EndIf;
-EndProcedure
 
 &AtClient
 Procedure CostDocumentsAfterDeleteRow(Item)

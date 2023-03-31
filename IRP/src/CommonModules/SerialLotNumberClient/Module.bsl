@@ -102,7 +102,6 @@ Procedure AddNewSerialLotNumbers(DataResults, Parameters, AddNewLot = False, Add
 	EndDo;
 
 	UpdateSerialLotNumbersPresentation(Parameters.Object);
-	UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
 	SourceOfOriginClient.UpdateSourceOfOriginsQuantity(Parameters.Object, Parameters.Form);
 EndProcedure
 
@@ -135,7 +134,6 @@ Procedure PresentationClearing(Object, Form, Item, AddInfo = Undefined) Export
 	EndIf;
 	CurrentData.SerialLotNumberIsFilling = False;
 	DeleteUnusedSerialLotNumbers(Object, CurrentData.Key);
-	UpdateSerialLotNumbersTree(Object, Form);
 	SourceOfOriginClient.UpdateSourceOfOriginsQuantity(Object, Form);
 EndProcedure
 
@@ -161,36 +159,6 @@ Procedure UpdateSerialLotNumbersPresentation(Object) Export
 			RowItemList.SerialLotNumberIsFilling = SerialCount > 0;
 		EndIf;
 	EndDo;
-EndProcedure
-
-Procedure UpdateSerialLotNumbersTree(Object, Form) Export
-	Form.SerialLotNumbersTree.GetItems().Clear();
-	For Each RowItemList In Object.ItemList Do
-		ArrayOfSerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", RowItemList.Key));
-		If ArrayOfSerialLotNumbers.Count() Then
-			NewRow0 = Form.SerialLotNumbersTree.GetItems().Add();
-			NewRow0.Level = 1;
-			NewRow0.Key = RowItemList.Key;
-			NewRow0.Item = RowItemList.Item;
-			NewRow0.ItemKey = RowItemList.ItemKey;
-			NewRow0.ItemKeyQuantity = RowItemList.Quantity;
-
-			For Each RowSerialLotNumber In ArrayOfSerialLotNumbers Do
-				NewRow1 = NewRow0.GetItems().Add();
-				NewRow1.Level = 2;
-				NewRow1.Key = RowItemList.Key;
-				NewRow1.SerialLotNumber = RowSerialLotNumber.SerialLotNumber;
-				NewRow1.Quantity = RowSerialLotNumber.Quantity;
-				NewRow0.Quantity = NewRow0.Quantity + RowSerialLotNumber.Quantity;
-			EndDo;
-		EndIf;
-	EndDo;
-
-	If Form.Items.SerialLotNumbersTree.Visible Then
-		For Each ItemTreeRows In Form.SerialLotNumbersTree.GetItems() Do
-			Form.Items.SerialLotNumbersTree.Expand(ItemTreeRows.GetID());
-		EndDo;
-	EndIf;
 EndProcedure
 
 Procedure DeleteUnusedSerialLotNumbers(Object, KeyForDelete = Undefined) Export
@@ -296,4 +264,15 @@ Procedure EditTextChange(Item, Text, StandardProcessing, Object, Params) Export
 
 	DocumentsClient.SerialLotNumbersEditTextChange(Undefined, Object, Item, Text, StandardProcessing,
 		ArrayOfFilters, AdditionalParameters);
+EndProcedure
+
+// Open serial lot number tree.
+// 
+// Parameters:
+//  Object - FormDataStructure - Document object
+//  Form - ClientApplicationForm - Form
+Procedure OpenSerialLotNumbersTree(Object, Form) Export
+	FormParameters = New Structure();
+	FormParameters.Insert("Object", Object);
+	OpenForm("CommonForm.SerialLotNumbersTree", FormParameters, Form, , , , , FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure

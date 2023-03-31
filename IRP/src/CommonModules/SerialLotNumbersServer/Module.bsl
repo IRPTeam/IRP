@@ -534,3 +534,40 @@ Function SearchBySerialLotNumber_WithKey(SerialLotNumberTable, AddInfo = Undefin
 	Return QueryUnload;
 
 EndFunction
+
+// Create commands.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+//  ObjectMetadata - MetadataObject - Object Metadata
+//  FormType - EnumRef.FormTypes - Form type
+Procedure CreateCommands(Form, ObjectMetadata, FormType) Export
+	If Not FormType = Enums.FormTypes.ObjectForm 
+			Or Not Form.Commands.Find("OpenSerialLotNumbersTree") = Undefined 
+			Or Not Form.Items.Find("ItemListOpenSerialLotNumbersTree") = Undefined Then
+		Return;
+	EndIf;
+		
+	If ObjectMetadata.TabularSections.Find("SerialLotNumbers") = Undefined Then
+		Return;
+	EndIf;
+		
+	ItemListForm = Form.Items.Find("ItemList"); // FormTable
+	If ItemListForm = Undefined Then
+		Return;
+	EndIf;
+	
+	If Form.Commands.Find("OpenSerialLotNumbersTree") = Undefined Then
+		CommandForm = Form.Commands.Add("OpenSerialLotNumbersTree");
+		CommandForm.Representation = ButtonRepresentation.Picture;
+		CommandForm.Picture = PictureLib.ListViewModeTree;
+		CommandForm.Action = "OpenSerialLotNumbersTree";
+		R().Property("OpenSLNTree_Button_Title",   CommandForm.Title);
+		R().Property("OpenSLNTree_Button_ToolTip", CommandForm.ToolTip);
+	EndIf;
+	
+	If Form.Items.Find("ItemListOpenSerialLotNumbersTree") = Undefined Then
+		CommandButton = Form.Items.Add("ItemListOpenSerialLotNumbersTree", Type("FormButton"), ItemListForm.CommandBar); // FormButton
+		CommandButton.CommandName = "OpenSerialLotNumbersTree";
+	EndIf;	
+EndProcedure

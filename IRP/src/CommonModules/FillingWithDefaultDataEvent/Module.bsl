@@ -194,7 +194,12 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 EndProcedure
 
 Procedure ClearDocumentBasisesOnCopy(Source, CopiedObject) Export
-	If TypeOf(Source) = Type("DocumentObject.PriceList") Then
+	TypeOfSource = TypeOf(Source);
+	ArrayOfExclude = New Array();
+	ArrayOfExclude.Add(Type("DocumentObject.PriceList"));
+	ArrayOfExclude.Add(Type("DocumentObject.AdditionalCostAllocation"));
+	ArrayOfExclude.Add(Type("DocumentObject.AdditionalRevenueAllocation"));
+	If ArrayOfExclude.Find(TypeOfSource) <> Undefined Then
 		Return;
 	EndIf;
 	

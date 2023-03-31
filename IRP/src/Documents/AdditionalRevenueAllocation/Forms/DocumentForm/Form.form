@@ -2114,6 +2114,10 @@
       <dataPath xsi:type="form:DataPath">
        <segments>Object.RevenueDocuments.Document</segments>
       </dataPath>
+      <handlers>
+       <event>OnChange</event>
+       <name>RevenueDocumentsDocumentOnChange</name>
+      </handlers>
       <extendedTooltip>
        <name>RevenueDocumentsDocumentExtendedTooltip</name>
        <id>423</id>

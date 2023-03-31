@@ -250,10 +250,6 @@
   <event>NotificationProcessing</event>
   <name>NotificationProcessing</name>
  </handlers>
- <handlers>
-  <event>NavigationProcessing</event>
-  <name>NavigationProcessing</name>
- </handlers>
  <autoTitle>true</autoTitle>
  <autoUrl>true</autoUrl>
  <group>Vertical</group>

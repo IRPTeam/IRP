@@ -78,7 +78,8 @@ Procedure SearchByBarcode(Barcode, Settings) Export
 			MultimediaTools.ShowBarcodeScanning(DescriptionField, NotifyScan, NotifyScanCancel, BarcodeType.All);
 		EndIf;
 #Else
-		ShowInputString(NotifyDescription, "", DescriptionField);
+		OpenForm("CommonForm.InputBarcode", , , , , , NotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
+//		ShowInputString(NotifyDescription, "", DescriptionField);
 #EndIf
 	Else
 #If MobileClient Then
@@ -109,9 +110,9 @@ EndProcedure
 //  Barcode - String - Barcode
 //  Result - Boolean - Result
 //  Message - String - Message
-//  Parameters - See GetBarcodeSettings
-Procedure ScanBarcodeEndMobile(Barcode, Result, Message, Parameters) Export
-	ProcessBarcodeResult = ProcessBarcode(Barcode, Parameters);
+//  Settings - See GetBarcodeSettings
+Procedure ScanBarcodeEndMobile(Barcode, Result, Message, Settings) Export
+	ProcessBarcodeResult = ProcessBarcode(Barcode, Settings);
 	If ProcessBarcodeResult Then
 		Message = R().S_018;
 	Else
@@ -141,14 +142,31 @@ EndProcedure
 // Process barcode.
 // 
 // Parameters:
-//  Barcode - String - Barcode
+//  Barcode - String, Array of String - Barcode
 //  Settings - See GetBarcodeSettings
 // Returns:
 //  Boolean - Process barcode
 Function ProcessBarcode(Barcode, Settings) Export
-	BarcodeArray = New Array();
-	BarcodeArray.Add(TrimAll(Barcode));
-	Return ProcessBarcodes(BarcodeArray, Settings);
+	If TypeOf(Barcode) = Type("String") Then 
+		BarcodeArray = New Array();
+		BarcodeArray.Add(Barcode);
+	Else
+		BarcodeArray = Barcode;
+	EndIf;
+	BarcodeReadyArray = New Array;
+	For Index = 0 To BarcodeArray.UBound() Do
+		ReadyBarcode = CheckBarcode(BarcodeArray[Index]);
+		
+		If Not IsBlankString(BarcodeReadyArray) Then
+			BarcodeReadyArray.Add(ReadyBarcode);
+		EndIf;
+	EndDo;
+	
+	Return ProcessBarcodes(BarcodeReadyArray, Settings);
+EndFunction
+
+Function CheckBarcode(Val Barcode)
+	Return TrimAll(Barcode);
 EndFunction
 
 Function ProcessBarcodes(Barcodes, Settings)
@@ -156,19 +174,15 @@ Function ProcessBarcodes(Barcodes, Settings)
 	ReturnCallToModule = Settings.ReturnCallToModule;
 	ServerSettings = Settings.ServerSettings;
 	
-	FoundedItems = BarcodeServer.SearchByBarcodes(Barcodes, ServerSettings);
+	BarcodeResult = BarcodeServer.SearchByBarcodes(Barcodes, ServerSettings);
 
-	If FoundedItems = Undefined Then
-		Return False;
-	EndIf;
-	
-	Settings.Result.FoundedItems = FoundedItems;
-	Settings.Result.Barcodes = Barcodes;
+	Settings.Result.FoundedItems = BarcodeResult.FoundedItems;
+	Settings.Result.Barcodes = BarcodeResult.Barcodes;
 
 	//@skip-warning
 	NotifyDescription = New NotifyDescription("SearchByBarcodeEnd", ReturnCallToModule, Settings);
 	ExecuteNotifyProcessing(NotifyDescription, Settings.Result);
-	If FoundedItems.Count() Then
+	If Settings.Result.FoundedItems.Count() Then
 		ReturnResult = True;
 	EndIf;
 	Return ReturnResult;

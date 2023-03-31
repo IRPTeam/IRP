@@ -165,6 +165,10 @@ Function GetDefaultChoiceRef(Parameters) Export
 EndFunction
 
 Function GetAgreementInfo(Agreement) Export
+	Return ServerReuse.GetAgreementInfo(Agreement);
+EndFunction
+
+Function _GetAgreementInfo(Agreement) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT ALLOWED TOP 1

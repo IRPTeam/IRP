@@ -899,6 +899,14 @@
     <key>en</key>
     <value>Manual input value</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Ручной выбор значения</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Manuel girilen değer</value>
+   </title>
    <id>22</id>
    <valueType>
     <types>Boolean</types>

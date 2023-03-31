@@ -36,7 +36,7 @@ Function IsLockFormAttribute(Ref) Export
 		Return True;
 	EndIf;
 
-	Array = New Array();
+	Array = New Array(); // Array of DocumentRefDocumentName
 	Array.Add(Ref);
 	IncludeObjects = Catalogs.Units.GetListLockedAttributes_IncludeObjects();
 	ExcludeObjects = Catalogs.Units.GetListLockedAttributes_ExcludeObjects();

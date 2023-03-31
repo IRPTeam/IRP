@@ -2110,6 +2110,10 @@
       <dataPath xsi:type="form:DataPath">
        <segments>Object.CostDocuments.Document</segments>
       </dataPath>
+      <handlers>
+       <event>OnChange</event>
+       <name>CostDocumentsDocumentOnChange</name>
+      </handlers>
       <extendedTooltip>
        <name>CostDocumentsDocumentExtendedTooltip</name>
        <id>423</id>

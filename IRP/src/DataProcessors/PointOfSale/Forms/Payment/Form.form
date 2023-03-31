@@ -450,6 +450,10 @@
     <key>en</key>
     <value>Group bank type list</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Группа список типов банков</value>
+   </title>
    <width>20</width>
    <extendedTooltip>
     <name>GroupBankTypeListExtendedTooltip</name>
@@ -2665,6 +2669,14 @@
          <key>en</key>
          <value>OK</value>
         </title>
+        <title>
+         <key>ru</key>
+         <value>ОК</value>
+        </title>
+        <title>
+         <key>tr</key>
+         <value>Tamam</value>
+        </title>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -3932,6 +3944,10 @@
    <key>en</key>
    <value>Bank payment type list</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Список вида оплат по банку</value>
+  </title>
   <id>48</id>
   <valueType>
    <types>DynamicList</types>
@@ -4057,6 +4073,14 @@ FROM
       <content>
        <key>en</key>
        <value>Branch</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Структурное подразделение</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Şube</value>
       </content>
      </localValue>
     </title>

@@ -565,6 +565,14 @@
    <key>en</key>
    <value>Serial lot numbers tree</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Дерево серий номенклатуры</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Seri lot numara ağacı</value>
+  </title>
   <id>2</id>
   <valueType>
    <types>ValueTree</types>
@@ -581,6 +589,14 @@
    <title>
     <key>en</key>
     <value>Key</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Ключ</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Anahtar</value>
    </title>
    <id>157</id>
    <valueType>
@@ -599,6 +615,14 @@
     <key>en</key>
     <value>Item</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Номенклатура</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Malzeme</value>
+   </title>
    <id>158</id>
    <valueType>
     <types>CatalogRef.Items</types>
@@ -615,6 +639,14 @@
    <title>
     <key>en</key>
     <value>Item key</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Varyant</value>
    </title>
    <id>159</id>
    <valueType>
@@ -633,6 +665,14 @@
     <key>en</key>
     <value>Serial lot number</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Серия номенклатуры</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
+   </title>
    <id>160</id>
    <valueType>
     <types>CatalogRef.SerialLotNumbers</types>
@@ -650,6 +690,14 @@
     <key>en</key>
     <value>Quantity</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Количество</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Miktar</value>
+   </title>
    <id>161</id>
    <valueType>
     <types>DefinedType.typeQuantity</types>
@@ -666,6 +714,14 @@
    <title>
     <key>en</key>
     <value>Level</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Уровень</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Seviye</value>
    </title>
    <id>162</id>
    <valueType>
@@ -686,6 +742,14 @@
    <title>
     <key>en</key>
     <value>Item key quantity</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Количество характеристики</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Varyant adet</value>
    </title>
    <id>165</id>
    <valueType>

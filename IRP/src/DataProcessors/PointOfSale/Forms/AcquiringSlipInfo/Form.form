@@ -390,6 +390,10 @@
    <key>en</key>
    <value>Account list</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Список счетов</value>
+  </title>
   <id>1</id>
   <valueType>
    <types>ValueTable</types>
@@ -405,6 +409,14 @@
    <title>
     <key>en</key>
     <value>Account</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Касса/банк</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Hesap</value>
    </title>
    <id>2</id>
    <valueType>
@@ -422,6 +434,10 @@
    <title>
     <key>en</key>
     <value>Slip info</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Информация чека</value>
    </title>
    <id>3</id>
    <valueType>
@@ -441,6 +457,14 @@
     <key>en</key>
     <value>Hardware</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Оборудование</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Donanım</value>
+   </title>
    <id>4</id>
    <valueType>
     <types>CatalogRef.Hardware</types>
@@ -457,6 +481,14 @@
   <name>Update</name>
   <title>
    <key>en</key>
+   <value>Update</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Изменение</value>
+  </title>
+  <title>
+   <key>tr</key>
    <value>Update</value>
   </title>
   <id>1</id>

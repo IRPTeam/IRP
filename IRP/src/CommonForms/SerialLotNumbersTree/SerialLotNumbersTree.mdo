@@ -5,6 +5,14 @@
   <key>en</key>
   <value>Serial lot numbers tree</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Дерево серий номенклатуры</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Seri lot numara ağacı</value>
+ </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

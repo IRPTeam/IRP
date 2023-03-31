@@ -8041,6 +8041,10 @@ elemanı seç</value>
    <key>en</key>
    <value>Acquiring slip info</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Информация чека эквайринга</value>
+  </title>
   <id>33</id>
   <use>
    <common>true</common>

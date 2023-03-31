@@ -243,6 +243,10 @@
    <key>en</key>
    <value>Acquiring slip info</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Информация чека эквайринга</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>

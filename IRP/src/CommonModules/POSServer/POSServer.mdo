@@ -5,6 +5,10 @@
   <key>en</key>
   <value>POS Server</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>РМК Сервер</value>
+ </synonym>
  <server>true</server>
  <externalConnection>true</externalConnection>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

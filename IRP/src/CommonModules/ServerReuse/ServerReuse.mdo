@@ -5,6 +5,10 @@
   <key>en</key>
   <value>Server reuse</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Сервер переиспользование</value>
+ </synonym>
  <server>true</server>
  <serverCall>true</serverCall>
  <returnValuesReuse>DuringRequest</returnValuesReuse>

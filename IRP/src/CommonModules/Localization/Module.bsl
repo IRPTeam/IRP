@@ -412,7 +412,8 @@ Function Strings(Lang) Export
 		|Сообщение необходимо скопировать и передать системному администратору.'", Lang));
 	Strings.Insert("POS_Error_ReturnAmountLess", NStr("en='There are %2 of ""%1"", which is more than the available %3 for return in document ""%4"" .';
 		|ru='Для документа возврата ""%4"" есть более подходящяя позиция %3, чем %2 из %1.'", Lang));
-	Strings.Insert("POS_Error_CannotFindUser", NStr("en='Can not find user with barcode [%1]'", Lang));
+	Strings.Insert("POS_Error_CannotFindUser", NStr("en='Can not find user with barcode [%1]';
+		|ru='Не найден пользователь для штрихкода [%1]'", Lang));
 	
 #EndRegion
 
@@ -1114,7 +1115,8 @@ Function Strings(Lang) Export
 		|tr='Hata. Perakende müşteri boştur'", Lang) + Chars.LF);
 	Strings.Insert("Error_124", NStr("en='Quantity limit exceeded. line number: [%1] quantity: [%2] limit: [%3]';
 		|ru='Превышение лимита количества. Номер строки: [%1] количество: [%2] лимит: [%3]'", Lang));
-	Strings.Insert("Error_125", NStr("en='Invoice for document: [%1] is empty'", Lang));
+	Strings.Insert("Error_125", NStr("en='Invoice for document: [%1] is empty';
+		|ru='Инвойс для документа [%1] пуст'", Lang));
 	
 	// manufacturing errors
 	Strings.Insert("MF_Error_001", NStr("en='Repetitive materials [%1]';
@@ -1731,8 +1733,10 @@ Function Strings(Lang) Export
 #EndRegion	
 
 #Region OpenSerialLotNumberTree
-	Strings.Insert("OpenSLNTree_Button_Title",   NStr("en='Open serial lot number tree'", Lang));
-	Strings.Insert("OpenSLNTree_Button_ToolTip", NStr("en='Open serial lot number tree'", Lang));
+	Strings.Insert("OpenSLNTree_Button_Title",   NStr("en='Open serial lot number tree';
+		|ru='Открыть дерево серийных номеров'", Lang));
+	Strings.Insert("OpenSLNTree_Button_ToolTip", NStr("en='Open serial lot number tree';
+		|ru='Открыть дерево серийных номеров'", Lang));
 #EndRegion	
 	
 	Return Strings;

@@ -4,6 +4,14 @@
   <key>en</key>
   <value>Barcode</value>
  </title>
+ <title>
+  <key>ru</key>
+  <value>Штрихкод</value>
+ </title>
+ <title>
+  <key>tr</key>
+  <value>Barkod</value>
+ </title>
  <items xsi:type="form:FormGroup">
   <name>GroupTop</name>
   <id>7</id>
@@ -148,6 +156,10 @@
      <key>en</key>
      <value>BF=Single; BT=Multi</value>
     </editFormat>
+    <editFormat>
+     <key>ru</key>
+     <value>BF=Single; BT=Multi</value>
+    </editFormat>
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
@@ -206,6 +218,14 @@
      <key>en</key>
      <value>Enter</value>
     </inputHint>
+    <inputHint>
+     <key>ru</key>
+     <value>Enter</value>
+    </inputHint>
+    <inputHint>
+     <key>tr</key>
+     <value>Giriş</value>
+    </inputHint>
    </extInfo>
   </items>
   <visible>true</visible>
@@ -216,6 +236,14 @@
   <title>
    <key>en</key>
    <value>Group top</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Группа верхние уровень</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Grup üst</value>
   </title>
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
@@ -265,6 +293,14 @@
    <key>en</key>
    <value>Barcode</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Штрихкод</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Barkod</value>
+  </title>
   <id>1</id>
   <valueType>
    <types>String</types>
@@ -283,6 +319,10 @@
    <key>en</key>
    <value>Multiline</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Мультистрока</value>
+  </title>
   <id>2</id>
   <valueType>
    <types>Boolean</types>
@@ -299,6 +339,10 @@
   <title>
    <key>en</key>
    <value>Delimiter</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Разделитель</value>
   </title>
   <id>3</id>
   <valueType>
@@ -317,6 +361,14 @@
   <title>
    <key>en</key>
    <value>OK</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>ОК</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <id>1</id>
   <use>

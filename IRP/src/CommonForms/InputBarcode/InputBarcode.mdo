@@ -5,6 +5,14 @@
   <key>en</key>
   <value>Input barcode</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Ввести штрихкод</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Barkod giriniz</value>
+ </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

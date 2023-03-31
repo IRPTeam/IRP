@@ -219,7 +219,7 @@ EndProcedure
 
 &AtClient
 Procedure RevenueDocumentsDocumentOnChange(Item)
-	CurrentData = Items.CostDocuments.CurrentData;
+	CurrentData = Items.RevenueDocuments.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;

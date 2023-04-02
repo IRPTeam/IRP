@@ -123,6 +123,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	ArrayOfTableNames.Add("BillOfMaterialsList");
 	ArrayOfTableNames.Add("Materials");
 	ArrayOfTableNames.Add("SourceOfOrigins");
+	ArrayOfTableNames.Add("RowIDInfo");
 		
 	// MetadataName
 	// Tables.TableName.Columns
@@ -149,6 +150,8 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 		ServerData.ObjectMetadataInfo.Tables.Property("BillOfMaterialsList") And IsProductionsList);	
 	Parameters.Insert("SourceOfOriginsExists" , 
 		ServerData.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") And IsItemList);	
+	Parameters.Insert("RowIDInfoExists" ,
+		ServerData.ObjectMetadataInfo.Tables.Property("RowIDInfo") And IsItemList);
 	
 	Parameters.Insert("ArrayOfTaxInfo"         , ServerData.ArrayOfTaxInfo);
 	
@@ -261,13 +264,14 @@ Function WrapRows(Parameters, Rows) Export
 		NewRow = New Structure(Parameters.ObjectMetadataInfo.Tables[Parameters.TableName].Columns);
 		FillPropertyValues(NewRow, Row);
 		ArrayOfRows.Add(NewRow);
-		
+
+		FilterByKey = New Structure("Key", Row.Key);
+
 		ArrayOfRowsTaxList = New Array();
 		TaxRates = New Structure();
-		
 		If Parameters.TaxListIsExists Then
 			// TaxList
-			For Each TaxRow In Parameters.Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
+			For Each TaxRow In Parameters.Object.TaxList.FindRows(FilterByKey) Do
 				NewRowTaxList = New Structure(Parameters.ObjectMetadataInfo.Tables.TaxList.Columns);
 				FillPropertyValues(NewRowTaxList, TaxRow);
 				ArrayOfRowsTaxList.Add(NewRowTaxList);
@@ -299,7 +303,7 @@ Function WrapRows(Parameters, Rows) Export
 		// SpecialOffers
 		ArrayOfRowsSpecialOffers = New Array();
 		If Parameters.SpecialOffersIsExists Then
-			For Each SpecialOfferRow In Parameters.Object.SpecialOffers.FindRows(New Structure("Key", Row.Key)) Do
+			For Each SpecialOfferRow In Parameters.Object.SpecialOffers.FindRows(FilterByKey) Do
 				NewRowSpecialOffer = New Structure(Parameters.ObjectMetadataInfo.Tables.SpecialOffers.Columns);
 				FillPropertyValues(NewRowSpecialOffer, SpecialOfferRow);
 				ArrayOfRowsSpecialOffers.Add(NewRowSpecialOffer);
@@ -309,28 +313,40 @@ Function WrapRows(Parameters, Rows) Export
 		// SpecialOffersCache
 		ArrayOfRowsSpecialOffersCache = New Array();
 		If Parameters.FormIsExists And CommonFunctionsClientServer.ObjectHasProperty(Parameters.Form, "SpecialOffersCache") Then
-			For Each SpecialOfferRow In Parameters.Form.SpecialOffersCache.FindRows(New Structure("Key", Row.Key)) Do
+			For Each SpecialOfferRow In Parameters.Form.SpecialOffersCache.FindRows(FilterByKey) Do
 				NewRowSpecialOffer = New Structure("Key, Offer, Amount, Quantity");
 				FillPropertyValues(NewRowSpecialOffer, SpecialOfferRow);
 				ArrayOfRowsSpecialOffersCache.Add(NewRowSpecialOffer);
 			EndDo;
 		EndIf; // SpecialOffersCache
 		
+		// BillOfMaterials
 		ArrayOfRowsBillOfMaterialsList = New Array();
 		If Parameters.BillOfMaterialsListExists Then
-			For Each RowBillOfMaterials In Parameters.Object.BillOfMaterialsList.FindRows(New Structure("Key", Row.Key)) Do
+			For Each RowBillOfMaterials In Parameters.Object.BillOfMaterialsList.FindRows(FilterByKey) Do
 				NewRowBillOfMaterials = New Structure(Parameters.ObjectMetadataInfo.Tables.BillOfMaterialsList.Columns);
 				FillPropertyValues(NewRowBillOfMaterials, RowBillOfMaterials);
 				ArrayOfRowsBillOfMaterialsList.Add(NewRowBillOfMaterials);
 			EndDo;
 		EndIf; // BillOfMaterialsListExists
 		
+		// RowIDInfo
+		ArrayOfRowsRowIDInfo = New Array();
+		If Parameters.RowIDInfoExists Then
+			For Each RowRowIDInfo In Parameters.Object.RowIDInfo.FindRows(FilterByKey) Do
+				NewRowRowIDInfo = New Structure(Parameters.ObjectMetadataInfo.Tables.RowIDInfo.Columns);
+				FillPropertyValues(NewRowRowIDInfo, RowRowIDInfo);
+				ArrayOfRowsRowIDInfo.Add(NewRowRowIDInfo);
+			EndDo;
+		EndIf; // RowIDInfoExeists
+
 		NewRow.Insert("TaxIsAlreadyCalculated" , Parameters.IsBasedOn And ArrayOfRowsTaxList.Count());
 		NewRow.Insert("TaxRates"               , TaxRates);
 		NewRow.Insert("TaxList"                , ArrayOfRowsTaxList);
 		NewRow.Insert("SpecialOffers"          , ArrayOfRowsSpecialOffers);
 		NewRow.Insert("SpecialOffersCache"     , ArrayOfRowsSpecialOffersCache);
 		NewRow.Insert("BillOfMaterialsList"    , ArrayOfRowsBillOfMaterialsList);
+		NewRow.Insert("RowIDInfo"              , ArrayOfRowsRowIDInfo);
 	EndDo;
 	Return ArrayOfRows;
 EndFunction	
@@ -366,96 +382,98 @@ EndProcedure
 #Region API
 
 // attributes that available through API
-Function GetSetterNameByDataPath(Parameters, DataPath, IsBuilder)
-	SettersMap = New Map();
-	SettersMap.Insert("Sender"          , "SetAccountSender");
-	SettersMap.Insert("SendCurrency"    , "SetSendCurrency");
-	SettersMap.Insert("Receiver"        , "SetAccountReceiver");
-	SettersMap.Insert("ReceiveCurrency" , "SetReceiveCurrency");
-	SettersMap.Insert("Account"         , "SetAccount");
-	SettersMap.Insert("CashAccount"     , "SetAccount");
-	SettersMap.Insert("Currency"        , "SetCurrency");
-	SettersMap.Insert("Date"            , "SetDate");
-	SettersMap.Insert("Company"         , "SetCompany");
-	SettersMap.Insert("Branch"          , "SetBranch");
-	SettersMap.Insert("Partner"         , "SetPartner");
-	SettersMap.Insert("LegalName"       , "SetLegalName");
-	SettersMap.Insert("Agreement"       , "SetAgreement");
-	SettersMap.Insert("ManagerSegment"  , "SetManagerSegment");
-	SettersMap.Insert("PriceIncludeTax" , "SetPriceIncludeTax");
-	SettersMap.Insert("StoreSender"     , "SetStoreSender");
-	SettersMap.Insert("StoreReceiver"   , "SetStoreReceiver");
-	SettersMap.Insert("Workstation"     , "SetWorkstation");
-	SettersMap.Insert("BusinessUnit"    , "SetBusinessUnit");
+Function GetEventHandlersByDataPath(Parameters, DataPath, IsBuilder)
+	EventHandlerMap = New Map();
+	EventHandlerMap.Insert("Sender"          , "SetAccountSender");
+	EventHandlerMap.Insert("SendCurrency"    , "SetSendCurrency");
+	EventHandlerMap.Insert("Receiver"        , "SetAccountReceiver");
+	EventHandlerMap.Insert("ReceiveCurrency" , "SetReceiveCurrency");
+	EventHandlerMap.Insert("Account"         , "SetAccount");
+	EventHandlerMap.Insert("CashAccount"     , "SetAccount");
+	EventHandlerMap.Insert("Currency"        , "SetCurrency");
+	EventHandlerMap.Insert("Date"            , "SetDate");
+	EventHandlerMap.Insert("Company"         , "SetCompany");
+	EventHandlerMap.Insert("Branch"          , "SetBranch");
+	EventHandlerMap.Insert("Partner"         , "SetPartner");
+	EventHandlerMap.Insert("LegalName"       , "SetLegalName");
+	EventHandlerMap.Insert("Agreement"       , "SetAgreement");
+	EventHandlerMap.Insert("ManagerSegment"  , "SetManagerSegment");
+	EventHandlerMap.Insert("PriceIncludeTax" , "SetPriceIncludeTax");
+	EventHandlerMap.Insert("StoreSender"     , "SetStoreSender");
+	EventHandlerMap.Insert("StoreReceiver"   , "SetStoreReceiver");
+	EventHandlerMap.Insert("Workstation"     , "SetWorkstation");
+	EventHandlerMap.Insert("BusinessUnit"    , "SetBusinessUnit");
 	
 	// PaymentList
-	SettersMap.Insert("PaymentList.Partner" , "SetPaymentListPartner");
-	SettersMap.Insert("PaymentList.Payer"   , "SetPaymentListLegalName");
-	SettersMap.Insert("PaymentList.Payee"   , "SetPaymentListLegalName");
-	SettersMap.Insert("PaymentList.Account" , "SetPaymentListAccount");
+	EventHandlerMap.Insert("PaymentList.Partner" , "SetPaymentListPartner");
+	EventHandlerMap.Insert("PaymentList.Payer"   , "SetPaymentListLegalName");
+	EventHandlerMap.Insert("PaymentList.Payee"   , "SetPaymentListLegalName");
+	EventHandlerMap.Insert("PaymentList.Account" , "SetPaymentListAccount");
 	
 	// ItemList
-	SettersMap.Insert("ItemList.Item"               , "SetItemListItem");
-	SettersMap.Insert("ItemList.ItemKey"            , "SetItemListItemKey");
-	SettersMap.Insert("ItemList.Unit"               , "SetItemListUnit");
-	SettersMap.Insert("ItemList.PriceType"          , "SetItemListPriceType");
-	SettersMap.Insert("ItemList.Price"              , "SetItemListPrice");
-	SettersMap.Insert("ItemList.ConsignorPrice"     , "SetItemListConsignorPrice");
-	SettersMap.Insert("ItemList.TradeAgentFeePercent", "SetItemListTradeAgentFeePercent");
-	SettersMap.Insert("ItemList.DontCalculateRow"   , "SetItemListDontCalculateRow");
-	SettersMap.Insert("ItemList.Quantity"           , "SetItemListQuantity");
-	SettersMap.Insert("ItemList.Store"              , "SetItemListStore");
-	SettersMap.Insert("ItemList.DeliveryDate"       , "SetItemListDeliveryDate");
-	SettersMap.Insert("ItemList.QuantityInBaseUnit" , "SetItemListQuantityInBaseUnit");
-	SettersMap.Insert("ItemList.PhysCount"          , "SetItemListPhysCount");
-	SettersMap.Insert("ItemList.ManualFixedCount"   , "SetItemListManualFixedCount");
-	SettersMap.Insert("ItemList.ExpCount"           , "SetItemListExpCount");
-	SettersMap.Insert("ItemList.SalesInvoice"       , "SetItemListSalesDocument");
-	SettersMap.Insert("ItemList.RetailSalesReceipt" , "SetItemListSalesDocument");
+	EventHandlerMap.Insert("ItemList.Item"               , "SetItemListItem");
+	EventHandlerMap.Insert("ItemList.ItemKey"            , "SetItemListItemKey");
+	EventHandlerMap.Insert("ItemList.Unit"               , "SetItemListUnit");
+	EventHandlerMap.Insert("ItemList.PriceType"          , "SetItemListPriceType");
+	EventHandlerMap.Insert("ItemList.Price"              , "SetItemListPrice");
+	EventHandlerMap.Insert("ItemList.ConsignorPrice"     , "SetItemListConsignorPrice");
+	EventHandlerMap.Insert("ItemList.TradeAgentFeePercent", "SetItemListTradeAgentFeePercent");
+	EventHandlerMap.Insert("ItemList.DontCalculateRow"   , "SetItemListDontCalculateRow");
+	EventHandlerMap.Insert("ItemList.Quantity"           , "SetItemListQuantity");
+	EventHandlerMap.Insert("ItemList.Store"              , "SetItemListStore");
+	EventHandlerMap.Insert("ItemList.DeliveryDate"       , "SetItemListDeliveryDate");
+	EventHandlerMap.Insert("ItemList.QuantityInBaseUnit" , "SetItemListQuantityInBaseUnit");
+	EventHandlerMap.Insert("ItemList.PhysCount"          , "SetItemListPhysCount");
+	EventHandlerMap.Insert("ItemList.ManualFixedCount"   , "SetItemListManualFixedCount");
+	EventHandlerMap.Insert("ItemList.ExpCount"           , "SetItemListExpCount");
+	EventHandlerMap.Insert("ItemList.SalesInvoice"       , "SetItemListSalesDocument");
+	EventHandlerMap.Insert("ItemList.RetailSalesReceipt" , "SetItemListSalesDocument");
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesReportToConsignor" Then
-		SettersMap.Insert("ItemList.TotalAmount", "StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
+		EventHandlerMap.Insert("ItemList.TotalAmount", "StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
 													|StepItemListCalculations_IsTotalAmountChanged_Without_SpecialOffers");
 	Else
-		SettersMap.Insert("ItemList.TotalAmount", "StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
+		EventHandlerMap.Insert("ItemList.TotalAmount", "StepItemListChangePriceTypeAsManual_IsTotalAmountChange,
 													|StepItemListCalculations_IsTotalAmountChanged");
 	EndIf;
 	
-	SettersMap.Insert("ItemList.<tax_rate>"         , "StepChangeTaxRate_AgreementInHeader");
-	SettersMap.Insert("ItemList."                   , "StepItemListCalculations_IsTaxRateChanged");
+	EventHandlerMap.Insert("ItemList.<tax_rate>"         , "StepChangeTaxRate_AgreementInHeader");
+	EventHandlerMap.Insert("ItemList."                   , "StepItemListCalculations_IsTaxRateChanged");
 	If IsBuilder Then
-		SettersMap.Insert("ItemList.TaxAmount"          , "SetItemListTaxAmount");
+		EventHandlerMap.Insert("ItemList.TaxAmount"          , "SetItemListTaxAmount");
 	EndIf;
-	SettersMap.Insert("ItemList.InventoryOrigin"        , "SetItemListInventoryOrigin");
+	EventHandlerMap.Insert("ItemList.InventoryOrigin"        , "SetItemListInventoryOrigin");
 	
 	// Materials
-	SettersMap.Insert("Materials.BillOfMaterials"    , "SetMaterialsBillOfMaterials");
-	SettersMap.Insert("Materials.Item"               , "SetMaterialsItem");
-	SettersMap.Insert("Materials.ItemKey"            , "SetMaterialsItemKey");
-	SettersMap.Insert("Materials.ItemKeyBOM"         , "SetMaterialsItemKeyBOM");
-	SettersMap.Insert("Materials.Unit"               , "SetMaterialsUnit");
-	SettersMap.Insert("Materials.Quantity"           , "SetMaterialsQuantity");
-	SettersMap.Insert("Materials.QuantityBOM"        , "SetMaterialsQuantityBOM");
+	EventHandlerMap.Insert("Materials.BillOfMaterials"    , "SetMaterialsBillOfMaterials");
+	EventHandlerMap.Insert("Materials.Item"               , "SetMaterialsItem");
+	EventHandlerMap.Insert("Materials.ItemKey"            , "SetMaterialsItemKey");
+	EventHandlerMap.Insert("Materials.ItemKeyBOM"         , "SetMaterialsItemKeyBOM");
+	EventHandlerMap.Insert("Materials.Unit"               , "SetMaterialsUnit");
+	EventHandlerMap.Insert("Materials.Quantity"           , "SetMaterialsQuantity");
+	EventHandlerMap.Insert("Materials.QuantityBOM"        , "SetMaterialsQuantityBOM");
 	
 	// Manufacturing calculations
-	SettersMap.Insert("Command_UpdateCurrentQuantity"  , "StepChangeCurrentQuantityInProductions");
-	SettersMap.Insert("Command_UpdateByBillOfMaterials", "StepMaterialsCalculations");
+	EventHandlerMap.Insert("Command_UpdateCurrentQuantity"  , "CommandUpdateCurrentQuantity");
+	EventHandlerMap.Insert("Command_UpdateByBillOfMaterials", "CommandUpdateByBillOfMaterials");
 	
 	// Source of origins
-	SettersMap.Insert("Command_UpdateConsignorBatches"  , "StepConsignorBatchesFillBatches");
-	SettersMap.Insert("Command_UpdateConsignorBatches_StoreSender" , "StepConsignorBatchesFillBatches_StoreSender");
+	EventHandlerMap.Insert("Command_UpdateConsignorBatches"  , "CommandUpdateConsignorBatches");
+
+	// Recalculations
+	EventHandlerMap.Insert("Command_RecalculationWhenBasedOn", "CommandRecalculationWhenBasedOn");
 	
 	// ReceiptFromConsignor
-	SettersMap.Insert("ReceiptFromConsignor.Price"    , "SetReceiptFromConsignorPrice");
-	SettersMap.Insert("ReceiptFromConsignor.Quantity" , "SetReceiptFromConsignorQuantity");
-	SettersMap.Insert("ReceiptFromConsignor.ItemKey"  , "SetReceiptFromConsignorItemKey");
+	EventHandlerMap.Insert("ReceiptFromConsignor.Price"    , "SetReceiptFromConsignorPrice");
+	EventHandlerMap.Insert("ReceiptFromConsignor.Quantity" , "SetReceiptFromConsignorQuantity");
+	EventHandlerMap.Insert("ReceiptFromConsignor.ItemKey"  , "SetReceiptFromConsignorItemKey");
 	
 	// Inventory
-	SettersMap.Insert("Inventory.Price"    , "SetInventoryPrice");
-	SettersMap.Insert("Inventory.Quantity" , "SetInventoryQuantity");
-	SettersMap.Insert("Inventory.ItemKey"  , "SetInventoryItemKey");
+	EventHandlerMap.Insert("Inventory.Price"    , "SetInventoryPrice");
+	EventHandlerMap.Insert("Inventory.Quantity" , "SetInventoryQuantity");
+	EventHandlerMap.Insert("Inventory.ItemKey"  , "SetInventoryItemKey");
 	
-	Return SettersMap.Get(DataPath);
+	Return EventHandlerMap.Get(DataPath);
 EndFunction
 
 Function API_GetSettings() Export
@@ -470,56 +488,9 @@ Procedure API_SetProperty(Parameters, Property, Value, IsBuilder = False, Settin
 		Settings = API_GetSettings(); // default settings
 	EndIf;
 	
-	SetterNameOrStepsEnabler = GetSetterNameByDataPath(Parameters, Property.DataPath, IsBuilder);
+	ArrayOfEventHandlers = GetEventHandlersByDataPath(Parameters, Property.DataPath, IsBuilder);
 	IsColumn = StrSplit(Property.DataPath, ".").Count() = 2;
-	If SetterNameOrStepsEnabler <> Undefined Then
-		If IsColumn Then
-			
-			For Each _SetterNameOrStepsEnabler In StrSplit(SetterNameOrStepsEnabler, ",") Do
-				_SetterNameOrStepsEnabler = TrimAll(_SetterNameOrStepsEnabler);
-				If StrStartsWith(_SetterNameOrStepsEnabler, "Step") Then // step
-					// ItemList.TotalAmount does not have setter
-					If Upper(Property.DataPath) <> Upper("ItemList.TotalAmount") Then
-						ModelClientServer_V2.EntryPoint(_SetterNameOrStepsEnabler, Parameters);
-					EndIf;
-				EndIf;
-			EndDo;
-			
-			For Each Row In GetRows(Parameters, Parameters.TableName) Do
-				For Each _SetterNameOrStepsEnabler In StrSplit(SetterNameOrStepsEnabler, ",") Do
-					_SetterNameOrStepsEnabler = TrimAll(_SetterNameOrStepsEnabler);
-					If StrStartsWith(_SetterNameOrStepsEnabler, "Step") Then // step
-						
-						If Upper(Property.DataPath) = Upper("ItemList.TotalAmount") Then
-							If Value <> Undefined Then
-								SetterObject("BindVoid", Property.DataPath, Parameters, ResultArray(Row.Key, Value));
-								ModelClientServer_V2.EntryPoint(_SetterNameOrStepsEnabler, Parameters);
-							EndIf;
-						EndIf;
-					
-					ElsIf StrStartsWith(_SetterNameOrStepsEnabler, "Set") Then // set
-						
-						Results = ResultArray(Row.Key, Value);
-						ExecuteSetterByName(Parameters, Results, _SetterNameOrStepsEnabler);
-					
-					EndIf;
-					
-				EndDo;
-			EndDo;
-			
-		Else // not IsColumn
-		
-			For Each _SetterNameOrStepsEnabler In StrSplit(SetterNameOrStepsEnabler, ",") Do
-				_SetterNameOrStepsEnabler = TrimAll(_SetterNameOrStepsEnabler);
-				If StrStartsWith(_SetterNameOrStepsEnabler, "Step") Then // step
-					ModelClientServer_V2.EntryPoint(_SetterNameOrStepsEnabler, Parameters);
-				Else // setter
-					Results = ResultArray(Undefined, Value);
-					ExecuteSetterByName(Parameters, Results, SetterNameOrStepsEnabler);
-				EndIf;
-			EndDo;
-		EndIf;
-	Else // no steps no setter
+	If ArrayOfEventHandlers = Undefined Then // no steps, no setter, no commands
 		If IsColumn Then
 			For Each Row In GetRows(Parameters, Parameters.TableName) Do
 				SetterObject("BindVoid", Property.DataPath, Parameters, ResultArray(Row.Key, Value));
@@ -530,7 +501,59 @@ Procedure API_SetProperty(Parameters, Property, Value, IsBuilder = False, Settin
 		If Settings.CommitPropertyWithoutSetter Then
 			CommitChainChanges(Parameters);
 		EndIf;
+	Else
+		If IsColumn Then
+			
+			For Each EventHandler In StrSplit(ArrayOfEventHandlers, ",") Do
+				EventHandler = TrimAll(EventHandler);
+				If StrStartsWith(EventHandler, "Step") Then // step
+					// ItemList.TotalAmount does not have setter
+					If Upper(Property.DataPath) <> Upper("ItemList.TotalAmount") Then
+						ModelClientServer_V2.EntryPoint(EventHandler, Parameters);
+					EndIf;
+				EndIf;
+			EndDo;
+			
+			For Each Row In GetRows(Parameters, Parameters.TableName) Do
+				For Each EventHandler In StrSplit(ArrayOfEventHandlers, ",") Do
+					EventHandler = TrimAll(EventHandler);
+					If StrStartsWith(EventHandler, "Step") Then // step
+						
+						If Upper(Property.DataPath) = Upper("ItemList.TotalAmount") Then
+							If Value <> Undefined Then
+								SetterObject("BindVoid", Property.DataPath, Parameters, ResultArray(Row.Key, Value));
+								ModelClientServer_V2.EntryPoint(EventHandler, Parameters);
+							EndIf;
+						EndIf;
+					
+					ElsIf StrStartsWith(EventHandler, "Set") Then // set
+						
+						Results = ResultArray(Row.Key, Value);
+						ExecuteSetterByName(Parameters, Results, EventHandler);
+					
+					EndIf;
+
+				EndDo;
+			EndDo;
+
+		Else // not IsColumn
+		
+			For Each EventHandler In StrSplit(ArrayOfEventHandlers, ",") Do
+				EventHandler = TrimAll(EventHandler);
+				If StrStartsWith(EventHandler, "Step") Then // step
+					ModelClientServer_V2.EntryPoint(EventHandler, Parameters);
+				ElsIf StrStartsWith(EventHandler, "Command") Then // command
+					ExecuteCommandByName(Parameters, EventHandler);
+				Else // setter
+					Results = ResultArray(Undefined, Value);
+					ExecuteSetterByName(Parameters, Results, EventHandler);
+				EndIf;
+			EndDo;
+
+		EndIf;
+
 	EndIf;
+
 	If Settings.LaunchStepsImmediately Then
 		LaunchNextSteps(Parameters);
 	EndIf;
@@ -539,6 +562,11 @@ EndProcedure
 Procedure ExecuteSetterByName(Parameters, Results, SetterName)
 	//@skip-warning
 	Execute StrTemplate("%1(Parameters, Results);", SetterName);
+EndProcedure
+
+Procedure ExecuteCommandByName(Parameters, CommandName)
+	//@skip-warning
+	Execute StrTemplate("%1(Parameters);", CommandName);
 EndProcedure
 
 Function ResultArray(_Key, Value)
@@ -965,6 +993,75 @@ Procedure StepExtractDataCurrencyFromAccount(Parameters, Chain) Export
 	Options.StepName = "StepExtractDataCurrencyFromAccount";
 	Chain.ExtractDataCurrencyFromAccount.Options.Add(Options);
 EndProcedure
+
+#EndRegion
+
+#Region COMMANDS
+
+// UpdateByBillOfMaterials.Command
+Procedure CommandUpdateByBillOfMaterials(Parameters) Export
+	Binding = BindCommandUpdateByBillOfMaterials(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// UpdateByBillOfMaterials.Bind
+Function BindCommandUpdateByBillOfMaterials(Parameters)
+	Binding = New Structure();
+	Return BindSteps("StepMaterialsCalculations", "", Binding, Parameters, "BindCommandUpdateByBillOfMaterials");
+EndFunction
+
+// UpdateCurrentQuantity.Command
+Procedure CommandUpdateCurrentQuantity(Parameters) Export
+	Binding = BindCommandUpdateCurrentQuantity(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// UpdateCurrentQuantity.Bind
+Function BindCommandUpdateCurrentQuantity(Parameters)
+	Binding = New Structure();
+	Return BindSteps("StepChangeCurrentQuantityInProductions", "", Binding, Parameters, "BindCommandUpdateCurrentQuantity");
+EndFunction
+
+// UpdateConsignorBatches.Command
+Procedure CommandUpdateConsignorBatches(Parameters) Export
+	Binding = BindCommandUpdateConsignorBatches(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// UpdateConsignorBatches.Bind
+Function BindCommandUpdateConsignorBatches(Parameters)
+	Binding = New Structure();
+	Binding.Insert("InventoryTransfer", "StepConsignorBatchesFillBatches_StoreSender");
+	Return BindSteps("StepConsignorBatchesFillBatches", "", Binding, Parameters, "BindCommandUpdateConsignorBatches");
+EndFunction
+
+// RecalculationWhenBasedOn.Command
+Procedure CommandRecalculationWhenBasedOn(Parameters) Export
+	Binding = BindCommandRecalculationWhenBasedOn(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// RecalculationWhenBasedOn.Bind
+Function BindCommandRecalculationWhenBasedOn(Parameters)
+	Binding = New Structure();
+	Binding.Insert("SalesReportFromTradeAgent" , "StepItemListCalculations_IsRecalculationWhenBasedOn_Without_SpecialOffers");
+	Binding.Insert("SalesReportToConsignor"    , "StepItemListCalculations_IsRecalculationWhenBasedOn_Without_SpecialOffers");
+
+	Binding.Insert("PurchaseInvoice"      , "StepItemListCalculations_IsRecalculationWhenBasedOn");
+	Binding.Insert("PurchaseOrder"        , "StepItemListCalculations_IsRecalculationWhenBasedOn");
+	Binding.Insert("PurchaseOrderClosing" , "StepItemListCalculations_IsRecalculationWhenBasedOn");
+	Binding.Insert("PurchaseReturn"       , "StepItemListCalculations_IsRecalculationWhenBasedOn");
+	Binding.Insert("PurchaseReturnOrder"  , "StepItemListCalculations_IsRecalculationWhenBasedOn");
+	Binding.Insert("RetailReturnReceipt"  , "StepItemListCalculations_IsRecalculationWhenBasedOn");
+	Binding.Insert("RetailSalesReceipt"   , "StepItemListCalculations_IsRecalculationWhenBasedOn");
+	Binding.Insert("SalesInvoice"         , "StepItemListCalculations_IsRecalculationWhenBasedOn");
+	Binding.Insert("SalesOrder"           , "StepItemListCalculations_IsRecalculationWhenBasedOn");
+	Binding.Insert("SalesOrderClosing"    , "StepItemListCalculations_IsRecalculationWhenBasedOn");
+	Binding.Insert("SalesReturn"          , "StepItemListCalculations_IsRecalculationWhenBasedOn");
+	Binding.Insert("SalesReturnOrder"     , "StepItemListCalculations_IsRecalculationWhenBasedOn");
+	Binding.Insert("WorkOrder"            , "StepItemListCalculations_IsRecalculationWhenBasedOn");
+	Return BindSteps("BindVoid", "", Binding, Parameters, "BindCommandRecalculationWhenBasedOn");
+EndFunction
 
 #EndRegion
 
@@ -9905,6 +10002,7 @@ Procedure StepItemListChangePriceByPriceType(Parameters, Chain) Export
 	If Chain.Idle Then
 		Return;
 	EndIf;
+
 	Chain.ChangePriceByPriceType.Setter = "SetItemListPrice";
 	For Each Row In GetRows(Parameters, Parameters.TableName) Do
 		Options = ModelClientServer_V2.ChangePriceByPriceTypeOptions();
@@ -9914,7 +10012,8 @@ Procedure StepItemListChangePriceByPriceType(Parameters, Chain) Export
 		Options.PriceType    = GetItemListPriceType(Parameters, Row.Key);
 		Options.ItemKey      = GetItemListItemKey(Parameters, Row.Key);
 		Options.Unit         = GetItemListUnit(Parameters, Row.Key);
-		Options.Currency     = GetCurrency(Parameters);		
+		Options.Currency     = GetCurrency(Parameters);
+		Options.RowIDInfo    = Row.RowIDInfo;
 		Options.Key          = Row.Key;
 		Options.StepName = "StepItemListChangePriceByPriceType";
 		Options.DontExecuteIfExecutedBefore = True;
@@ -10919,6 +11018,11 @@ Procedure StepItemListCalculations_IsQuantityInBaseUnitChanged_Without_SpecialOf
 	StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, "IsQuantityInBaseUnitChanged");
 EndProcedure
 
+// ItemList.Calculations.[IsRecalculationWhenBasedOn_Without_SpecialOffers].Step
+Procedure StepItemListCalculations_IsRecalculationWhenBasedOn_Without_SpecialOffers(Parameters, Chain) Export
+	StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, "IsRecalculationWhenBasedOn");
+EndProcedure
+
 // ItemList.Calculations.[IsTaxRateChanged].Step
 Procedure StepItemListCalculations_IsTaxRateChanged(Parameters, Chain) Export
 	StepItemListCalculations(Parameters, Chain, "IsTaxRateChanged");
@@ -10944,6 +11048,11 @@ Procedure StepItemListCalculations_IsTaxAmountUserFormChanged(Parameters, Chain)
 	StepItemListCalculations(Parameters, Chain, "IsTaxAmountUserFormChanged");
 EndProcedure
 
+// ItemList.Calculations.[IsRecalculationWhenBasedOn].Step
+Procedure StepItemListCalculations_IsRecalculationWhenBasedOn(Parameters, Chain) Export
+	StepItemListCalculations(Parameters, Chain, "IsRecalculationWhenBasedOn");
+EndProcedure
+
 Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 	Chain.Calculations.Enable = True;
 	If Chain.Idle Then
@@ -10960,7 +11069,6 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 	EndIf;
 	
 	For Each Row In TableRows Do
-		
 		Options     = ModelClientServer_V2.CalculationsOptions();
 		Options.Ref = Parameters.Object.Ref;
 		
@@ -10969,11 +11077,11 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 			Or WhoIsChanged = "IsDontCalculateRowChanged" Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
 			Or WhoIsChanged = "IsTaxRateChanged"          Or WhoIsChanged = "IsOffersChanged"
 			Or WhoIsChanged = "IsCopyRow"                 Or WhoIsChanged = "IsTaxAmountUserFormChanged"
-			Or WhoIsChanged = "RecalculationsOnCopy" Then
-			Options.CalculateNetAmount.Enable     = True;
-			Options.CalculateTotalAmount.Enable   = True;
-			Options.CalculateTaxAmount.Enable     = True;
-			Options.CalculateSpecialOffers.Enable = True;
+			Or WhoIsChanged = "RecalculationsOnCopy"      Or WhoIsChanged = "IsRecalculationWhenBasedOn" Then
+			Options.CalculateNetAmount.Enable       = True;
+			Options.CalculateTotalAmount.Enable     = True;
+			Options.CalculateTaxAmount.Enable       = True;
+			Options.CalculateSpecialOffers.Enable   = True;
 			Options.RecalculateSpecialOffers.Enable = True;
 		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
 		// when TotalAmount is changed taxes need recalculate reverse, will be changed NetAmount and Price
@@ -11024,7 +11132,7 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 			
 		Options.OffersOptions.SpecialOffers      = Row.SpecialOffers;
 		Options.OffersOptions.SpecialOffersCache = Row.SpecialOffersCache;
-		
+
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListCalculations";
 		Chain.Calculations.Options.Add(Options);
@@ -11048,9 +11156,9 @@ Procedure StepItemListCalculations_Without_SpecialOffers(Parameters, Chain, WhoI
 		// need recalculate NetAmount, TotalAmount, TaxAmount, OffersAmount
 		If     WhoIsChanged = "IsPriceChanged"            Or WhoIsChanged = "IsPriceIncludeTaxChanged"
 			Or WhoIsChanged = "IsDontCalculateRowChanged" Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
-			Or WhoIsChanged = "IsTaxRateChanged"          //Or WhoIsChanged = "IsOffersChanged"
+			Or WhoIsChanged = "IsTaxRateChanged"
 			Or WhoIsChanged = "IsCopyRow"                 Or WhoIsChanged = "IsTaxAmountUserFormChanged"
-			Or WhoIsChanged = "RecalculationsOnCopy" Then
+			Or WhoIsChanged = "RecalculationsOnCopy"      Or WhoIsChanged = "IsRecalculationWhenBasedOn" Then
 			Options.CalculateNetAmount.Enable     = True;
 			Options.CalculateTotalAmount.Enable   = True;
 			Options.CalculateTaxAmount.Enable     = True;
@@ -13455,20 +13563,19 @@ Function AddLinkedDocumentRows(Object, Form, LinkedResult, TableName) Export
 		EndIf;
 	EndDo;
 	
-	If Object.Ref.Metadata().TabularSections.Find(TableName).Attributes.Find("DontCalculateRow") <> Undefined Then
-		PropertyName = TableName + ".DontCalculateRow";
-		Property = New Structure("DataPath", TrimAll(PropertyName));
-		
-		FormParameters = GetFormParameters(Form);
-		ServerParameters = GetServerParameters(Object);
-		ServerParameters.TableName = TableName;
-		ServerParameters.IsBasedOn = False;
-		ServerParameters.ReadOnlyProperties = PropertyName;
-		ServerParameters.Rows = LinkedResult.Rows;
-		Parameters = GetParameters(ServerParameters, FormParameters);
-		API_SetProperty(Parameters, Property, Undefined);
-	EndIf;			
-	
+//	If Object.Ref.Metadata().TabularSections.Find(TableName).Attributes.Find("DontCalculateRow") <> Undefined Then
+//		PropertyName = TableName + ".DontCalculateRow";
+//		Property = New Structure("DataPath", TrimAll(PropertyName));
+//		FormParameters = GetFormParameters(Form);
+//		ServerParameters = GetServerParameters(Object);
+//		ServerParameters.TableName = TableName;
+//		ServerParameters.IsBasedOn = False;
+//		ServerParameters.ReadOnlyProperties = PropertyName;
+//		ServerParameters.Rows = LinkedResult.Rows;
+//		Parameters = GetParameters(ServerParameters, FormParameters);
+//		API_SetProperty(Parameters, Property, Undefined);
+//	EndIf;
+
 	Return Parameters.ExtractedData;
 EndFunction
 

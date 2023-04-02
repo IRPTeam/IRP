@@ -10377,6 +10377,70 @@ Function GetChildrenInfo(Basis, BasisKey, RowID) Export
 	Return ArrayOfChildrenInfo;
 EndFunction
 
+Function GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, ProportionalScaling = Undefined) Export
+	If Not ValueIsFilled(Basis) Then
+		Return Undefined; // no basis
+	EndIf;
+
+	Is = Is(DocRef);
+
+	BasisesInfo = GetBasisesInfo(Basis, BasisKey, RowID);
+
+	ArrayOfBasises = New Array();
+	While True Do
+		BasisIs = Is(BasisesInfo.Basis);
+
+		If Is.SI And BasisIs.SO Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromSO");
+		EndIf;
+
+		If BasisesInfo.Basis = BasisesInfo.RowRef.Basis Then
+			Break; // is root basis, top level
+		EndIf;
+		If ArrayOfBasises.Find(BasisesInfo.Basis) <> Undefined Then
+			Break; // infinity loop
+		EndIf;
+		ArrayOfBasises.Add(BasisesInfo.Basis);
+
+		// up to level
+		BasisesInfo = GetBasisesInfo(BasisesInfo.ParentBasis, BasisesInfo.BasisKey, BasisesInfo.RowID);
+	EndDo;
+	Return Undefined;
+EndFunction
+
+Function ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, FunctionName)
+	InfoReg = Metadata.InformationRegisters.T3010S_RowIDInfo;
+	BasisesTable = New ValueTable();
+	BasisesTable.Columns.Add("Key"                , InfoReg.Dimensions.Key.Type);
+	BasisesTable.Columns.Add("BasisKey"           , InfoReg.Dimensions.BasisKey.Type);
+	BasisesTable.Columns.Add("RowID"              , InfoReg.Dimensions.RowID.Type);
+	BasisesTable.Columns.Add("RowRef"             , InfoReg.Resources.RowRef.Type);
+	BasisesTable.Columns.Add("Basis"              , InfoReg.StandardAttributes.Recorder.Type);
+	BasisesTable.Columns.Add("ParentBasis"        , InfoReg.StandardAttributes.Recorder.Type);
+	BasisesTable.Columns.Add("CurrentStep"        , New TypeDescription("CatalogRef.MovementRules"));
+
+	// propertional scaling
+	BasisesTable.Columns.Add("Unit"               , InfoReg.Resources.Unit.Type);
+	BasisesTable.Columns.Add("BasisUnit"          , InfoReg.Resources.Unit.Type);
+	BasisesTable.Columns.Add("QuantityInBaseUnit" , Metadata.DefinedTypes.typeQuantity.Type);
+
+	NewRowBasisesTable = BasisesTable.Add();
+	If ProportionalScaling <> Undefined Then
+		NewRowBasisesTable.Unit               = ProportionalScaling.Unit;
+		NewRowBasisesTable.BasisUnit          = ProportionalScaling.BasisUnit;
+		NewRowBasisesTable.QuantityInBaseUnit = ProportionalScaling.QuantityInBaseUnit;
+	EndIf;
+
+	FillPropertyValues(NewRowBasisesTable, BasisesInfo);
+	NewRowBasisesTable.BasisKey = BasisesInfo.Key;
+	//@skip-warning
+	ExtractedData =  Eval(FunctionName + "(BasisesTable, DocRef)");
+	ArrayOfExtractedData = New Array();
+	ArrayOfExtractedData.Add(ExtractedData);
+	BasisesData = ConvertDataToFillingValues(DocRef.Metadata(), ArrayOfExtractedData);
+	Return BasisesData;
+EndFunction
+
 #EndRegion
 
 #Region Service

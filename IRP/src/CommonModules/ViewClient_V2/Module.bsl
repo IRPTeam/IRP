@@ -984,6 +984,18 @@ EndProcedure
 
 #EndRegion
 
+#Region COMMANDS
+
+Procedure ExecuteCommand(Object, Form, TableName, CommandName) Export
+	FormParameters = ControllerClientServer_V2.GetFormParameters(Form);
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
+	ServerParameters.TableName = TableName;
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
+	ControllerClientServer_V2.API_SetProperty(Parameters, New Structure("DataPath", CommandName), Undefined);
+EndProcedure
+
+#EndRegion
+
 #Region INVENTORY
 
 Function InventoryBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export

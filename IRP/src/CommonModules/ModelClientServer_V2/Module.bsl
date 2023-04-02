@@ -72,7 +72,7 @@ Function GetChainLink(ExecutorName)
 	ChainLink.Insert("ExecutorName", ExecutorName);
 	ChainLink.Insert("IsLazyStep"  , False);
 	ChainLink.Insert("LazyStepName", "");
-	ChainLink.Insert("StepName", "");
+	ChainLink.Insert("StepName"    , "");
 	Return ChainLink; 
 EndFunction
 
@@ -1063,13 +1063,25 @@ EndFunction
 #Region CHANGE_PRICE_BY_PRICE_TYPE
 
 Function ChangePriceByPriceTypeOptions() Export
-	Return GetChainLinkOptions("Ref, Date, PriceType, CurrentPrice, ItemKey, Unit, Currency");
+	Return GetChainLinkOptions("Ref, Date, PriceType, CurrentPrice, ItemKey, Unit, Currency, RowIDInfo");
 EndFunction
 
 Function ChangePriceByPriceTypeExecute(Options) Export
 	If Options.PriceType = PredefinedValue("Catalog.PriceTypes.ManualPriceType") Then
 		Return Options.CurrentPrice;
 	EndIf;
+
+// tmp disable		
+//	For Each Row In Options.RowIDInfo Do
+//		DataFromBasis = RowIDInfoServer.GetAllDataFromBasis(Options.Ref, Row.Basis, Row.BasisKey, Row.RowID, Row.CurrentStep);
+//		If DataFromBasis <> Undefined And DataFromBasis.Count() And DataFromBasis[0].ItemList.Count() Then
+//			BasisRow = DataFromBasis[0].ItemList[0];
+//			PriceFromBasis = BasisRow.Price;
+//			UnitFactor = ModelServer_V2.GetUnitFactor(Options.Unit, BasisRow.Unit);
+//			Return PriceFromBasis * UnitFactor;
+//		EndIf;
+//	EndDo;
+	
 	Period = CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(Options.Ref, Options.Date);
 	PriceParameters = New Structure();
 	PriceParameters.Insert("Period"       , Period);

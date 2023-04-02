@@ -65,12 +65,7 @@ EndProcedure
 #Region UPDATE_CURRENT_QUANTITY
 
 Procedure UpdateCurrentQuantity(Object, Form) Export
-	FormParameters = ControllerClientServer_V2.GetFormParameters(Form);
-	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
-	ServerParameters.TableName = "Productions";		
-	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
-	Property = New Structure("DataPath", "Command_UpdateCurrentQuantity");
-	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+	ViewClient_V2.ExecuteCommand(Object, Form, "Productions", "Command_UpdateCurrentQuantity");
 EndProcedure
 	
 #EndRegion

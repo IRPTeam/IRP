@@ -527,8 +527,10 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	
 	ObjectRefType = TypeOf(Object.Ref);
 	
-	isSerialLotNumberAtRow = ObjectRefType = Type("DocumentRef.PhysicalInventory")
-			Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation");
+	If ObjectRefType = Type("DocumentRef.PhysicalInventory")
+		Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
+		isSerialLotNumberAtRow = Object.UseSerialLot;
+	EndIf;
 	
 	If Object.Property("Agreement") Then
 		FilterString = "Item, ItemKey, Unit, PriceType";
@@ -590,7 +592,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 		EndIf;
 		
 		AddToExistsRow = ExistingRows.Count() > 0;
-		If UseSerialLotNumbers Then
+		If UseSerialLotNumbers Or isSerialLotNumberAtRow Then
 			If ResultElement.AlwaysAddNewRowAfterScan Then
 				AddToExistsRow = False;
 			EndIf;

@@ -21,6 +21,15 @@ Function GetServerData(Object, ArrayOfTableNames, FormTaxColumnsExists, TaxesCac
 	
 	SerialLotNumberExists = ServerData.ObjectMetadataInfo.Tables.Property("SerialLotNumbers");
 	
+	If Not SerialLotNumberExists Then
+		ObjectRefType = TypeOf(Object.Ref);
+	
+		If ObjectRefType = Type("DocumentRef.PhysicalInventory")
+			Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
+			SerialLotNumberExists = Object.UseSerialLot;
+		EndIf;
+	EndIf;
+	
 	If  ValueIsFilled(LoadParameters.Address) Then
 		SourceTable = GetFromTempStorage(LoadParameters.Address);
 		SourceTableCopy = SourceTable.Copy();
@@ -32,7 +41,7 @@ Function GetServerData(Object, ArrayOfTableNames, FormTaxColumnsExists, TaxesCac
 			GroupColumns = "Item, ItemKey, Unit"; // all defined columns in GetItemInfo.GetTableOfResults
 		EndIf;
 		
-		If Not SerialLotNumberExists And SourceTableCopy.Columns.Find("SerialLotNumber") <> Undefined Then
+		If SerialLotNumberExists And SourceTableCopy.Columns.Find("SerialLotNumber") <> Undefined Then
 			GroupColumns = GroupColumns + ", SerialLotNumber";
 		EndIf;
 		
@@ -62,7 +71,7 @@ Function GetServerData(Object, ArrayOfTableNames, FormTaxColumnsExists, TaxesCac
 			ItemKeyTable.GroupBy("ItemKey");
 		
 			For Each RowItemKey In ItemKeyTable Do
-				If RowItemKey.ItemKey.Item.ItemType.NotUseLineGrouping Then
+				If RowItemKey.ItemKey.Item.ItemType.NotUseLineGrouping And SerialLotNumberExists Then
 					SourceTableRows = SourceTable.FindRows(New Structure("ItemKey", RowItemKey.ItemKey));
 					For Each Row In SourceTableRows Do
 						FillPropertyValues(SourceTableBuffer.Add(), Row);

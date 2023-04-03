@@ -882,7 +882,7 @@ Scenario: _2066019 unpost PO with linked strings (one session)
 			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
 			|'Line No. [3] [Shirt 36/Red] RowID movements remaining: 11 . Required: 0 . Lacking: 11 .'|
 			|'Line No. [4] [Boots 37/18SD] RowID movements remaining: 36 . Required: 0 . Lacking: 36 .'|
-			|'Line No. [5] [Service Interner] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
+			|'Line No. [5] [Service Internet] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
 		And I close all client application windows
 
 Scenario: _2066020 unpost PI with linked strings (one session)
@@ -964,7 +964,7 @@ Scenario: _2066023 delete PO with linked strings (one session)
 			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
 			|'Line No. [3] [Shirt 36/Red] RowID movements remaining: 11 . Required: 0 . Lacking: 11 .'|
 			|'Line No. [4] [Boots 37/18SD] RowID movements remaining: 36 . Required: 0 . Lacking: 36 .'|
-			|'Line No. [5] [Service Interner] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
+			|'Line No. [5] [Service Internet] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
 		And I close all client application windows
 
 Scenario: _2066024 delete PI with linked strings (one session)

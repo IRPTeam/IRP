@@ -472,22 +472,7 @@ Scenario: Create catalog ItemKeys objects (LC)
 		| 'e1cib/data/Catalog.ItemKeys?ref=b76e892a86cabee011ec00be81c3c124' | '1a647dc1-8a5a-44c8-9b4b-1ca174a64100' | ''                                                |
 		| 'e1cib/data/Catalog.ItemKeys?ref=b76e892a86cabee011ec00be81c3c124' | '1f4b938f-080b-4914-87a3-cae5607eddab' | ''                                                |
 
-	// Document.CalculationMovementCosts
-
-	And I check or create document "CalculationMovementCosts" objects:
-		| 'Ref'                                                                               | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'BeginDate'          | 'EndDate'            | 'CalculationMode'                         | 'RaiseOnCalculationError' |
-		| 'e1cib/data/Document.CalculationMovementCosts?ref=b798d684e43e460511edd1f17d50cc81' | 'False'        | 21       | '01.04.2023 12:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | '01.04.2023 0:00:00' | '01.04.2023 0:00:00' | 'Enum.CalculationMode.LandedCost'         | 'False'                   |
-		| 'e1cib/data/Document.CalculationMovementCosts?ref=b798d684e43e460511edd1f17d50cc82' | 'False'        | 22       | '02.04.2023 12:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | '02.04.2023 0:00:00' | '02.04.2023 0:00:00' | 'Enum.CalculationMode.LandedCost'         | 'False'                   |
-		| 'e1cib/data/Document.CalculationMovementCosts?ref=b798d684e43e460511edd1f17d50cc84' | 'False'        | 23       | '03.04.2023 12:37:27' | 'True'   | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | '03.04.2023 0:00:00' | '03.04.2023 0:00:00' | 'Enum.CalculationMode.LandedCost'         | 'False'                   |
-		| 'e1cib/data/Document.CalculationMovementCosts?ref=b798d684e43e460511edd1f17d50cc8f' | 'False'        | 24       | '01.04.2023 12:00:01' | 'True'   | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | '01.04.2023 0:00:00' | '01.04.2023 0:00:00' | 'Enum.CalculationMode.AdditionalItemCost' | 'False'                   |
-		| 'e1cib/data/Document.CalculationMovementCosts?ref=b798d684e43e460511edd1f17d50cc90' | 'False'        | 25       | '02.04.2023 12:00:01' | 'True'   | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | '02.04.2023 0:00:00' | '02.04.2023 0:00:00' | 'Enum.CalculationMode.AdditionalItemCost' | 'False'                   |
-		| 'e1cib/data/Document.CalculationMovementCosts?ref=b798d684e43e460511edd1f17d50cc91' | 'False'        | 26       | '03.04.2023 12:49:53' | 'True'   | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | '03.04.2023 0:00:00' | '03.04.2023 0:00:00' | 'Enum.CalculationMode.AdditionalItemCost' | 'False'                   |
-		| 'e1cib/data/Document.CalculationMovementCosts?ref=b798d684e43e460511edd1f17d50cc92' | 'False'        | 27       | '04.04.2023 12:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | '04.04.2023 0:00:00' | '04.04.2023 0:00:00' | 'Enum.CalculationMode.LandedCost'         | 'False'                   |
-		| 'e1cib/data/Document.CalculationMovementCosts?ref=b798d684e43e460511edd1f17d50cc94' | 'False'        | 28       | '04.04.2023 12:00:01' | 'True'   | 'e1cib/data/Catalog.Companies?ref=86ffd69b4676df1211ea9f63a205948c' | '04.04.2023 0:00:00' | '04.04.2023 0:00:00' | 'Enum.CalculationMode.AdditionalItemCost' | 'False'                   |
-
-
-
-
+	
 Scenario: Create catalog ItemSegments objects (LC)
 
 	And I check or create catalog "ItemSegments" objects:

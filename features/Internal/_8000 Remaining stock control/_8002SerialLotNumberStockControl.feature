@@ -150,9 +150,6 @@ Scenario:_800021 check serial lot number control in the Sales invoice
 			And I click "Ok" button
 			And I activate field named "ItemListQuantity" in "ItemList" table
 			And I input "6,000" text in the field named "ItemListQuantity" of "ItemList" table
-			And I expand a line in "SerialLotNumbersTree" table
-				| 'Item'    | 'Item key' | 'Item key quantity' | 'Quantity' |
-				| 'Phone A' | 'Brown'    | '6,000'             | '6,000'    |
 			And I finish line editing in "ItemList" table
 			And I activate "Price" field in "ItemList" table
 			And I select current line in "ItemList" table
@@ -166,9 +163,6 @@ Scenario:_800021 check serial lot number control in the Sales invoice
 			And I activate field named "ItemListQuantity" in "ItemList" table
 			And I select current line in "ItemList" table
 			And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
-			And I expand a line in "SerialLotNumbersTree" table
-				| 'Item'    | 'Item key' | 'Item key quantity' | 'Quantity' |
-				| 'Phone A' | 'Brown'    | '5,000'             | '6,000'    |
 			And I finish line editing in "ItemList" table
 			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 			And I select current line in "ItemList" table

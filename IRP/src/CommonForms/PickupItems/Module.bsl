@@ -138,7 +138,8 @@ Procedure ItemTypeAfterSelection()
 				|	&PriceType AS PriceType,
 				|	0 AS Price,
 				|	Items.Item.Description_en AS ItemPresentation,
-				|	Items.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService
+				|	Items.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
+				|	Items.Item.ItemType.AlwaysAddNewRowAfterScan AS AlwaysAddNewRowAfterScan
 				|FROM
 				|	Items AS Items
 				|		LEFT JOIN ItemBalance AS ItemBalance
@@ -364,7 +365,8 @@ Function ItemListSelectionAfter(ParametersStructure)
 				 |	ItemKeyTempTable.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
 				 |	NULL AS SerialLotNumber,
 				 |	PricesResult.Price,
-				 |	ItemKeyTempTable.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService
+				 |	ItemKeyTempTable.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
+				 |	ItemKeyTempTable.ItemKey.Item.ItemType.AlwaysAddNewRowAfterScan AS AlwaysAddNewRowAfterScan
 				 |FROM
 				 |	ItemKeyTempTable AS ItemKeyTempTable
 				 |		LEFT JOIN AccumulationRegister.R4011B_FreeStocks.Balance(&EndPeriod, Store IN (&Stores)
@@ -400,6 +402,7 @@ Function ItemListSelectionAfter(ParametersStructure)
 			TransferParameters.Insert("UseSerialLotNumber", QuerySelection.UseSerialLotNumber);
 			TransferParameters.Insert("SerialLotNumber", QuerySelection.SerialLotNumber);
 			TransferParameters.Insert("isService", QuerySelection.isService);
+			TransferParameters.Insert("AlwaysAddNewRowAfterScan", QuerySelection.AlwaysAddNewRowAfterScan);
 			ItemKeyListSelectionAfter(TransferParameters);
 		Else
 			While QuerySelection.Next() Do
@@ -414,6 +417,7 @@ Function ItemListSelectionAfter(ParametersStructure)
 				NewRow.UseSerialLotNumber = QuerySelection.UseSerialLotNumber;
 				NewRow.SerialLotNumber = QuerySelection.SerialLotNumber;
 				NewRow.isService = QuerySelection.isService;
+				NewRow.AlwaysAddNewRowAfterScan = QuerySelection.AlwaysAddNewRowAfterScan;
 			EndDo;
 		EndIf;
 	EndIf;
@@ -435,7 +439,14 @@ EndProcedure
 
 &AtClient
 Procedure CommandSaveAndClose(Command)
-	Close(ThisObject.ItemTableValue);
+	ArrayOfResults = New Array();
+	For Each Row In ThisObject.ItemTableValue Do
+		Result = New Structure("Item, ItemKey, Quantity, Unit, SerialLotNumber, UseSerialLotNumber, IsService, SourceOfOrigin, AlwaysAddNewRowAfterScan");
+		FillPropertyValues(Result, Row);
+		Result.Insert("PriceType", ThisObject.PriceType);
+		ArrayOfResults.Add(Result);
+	EndDo;
+	Close(ArrayOfResults);
 EndProcedure
 
 &AtClient

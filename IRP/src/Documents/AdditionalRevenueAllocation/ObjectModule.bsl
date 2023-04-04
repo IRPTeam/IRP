@@ -4,9 +4,49 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;
 	If Not Cancel And WriteMode = DocumentWriteMode.Posting Then
 		If ThisObject.AllocationMode = Enums.AllocationMode.ByDocuments Then
+			UpdateAmounts();
 			FillTables_ByDocuments();
 		EndIf;
 	EndIf;
+EndProcedure
+
+Procedure UpdateAmounts()
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	R6080T_OtherPeriodsRevenues.Basis AS Document,
+	|	R6080T_OtherPeriodsRevenues.Company,
+	|	R6080T_OtherPeriodsRevenues.Currency,
+	|	SUM(R6080T_OtherPeriodsRevenues.AmountBalance) AS Amount,
+	|	SUM(R6080T_OtherPeriodsRevenues.AmountTaxBalance) AS TaxAmount
+	|FROM
+	|	AccumulationRegister.R6080T_OtherPeriodsRevenues.Balance(&BalancePeriod, CurrencyMovementType = &CurrencyMovementType
+	|	AND Basis IN (&ArrayOfDocuments)) AS R6080T_OtherPeriodsRevenues
+	|GROUP BY
+	|	R6080T_OtherPeriodsRevenues.Basis,
+	|	R6080T_OtherPeriodsRevenues.Company,
+	|	R6080T_OtherPeriodsRevenues.Currency";	
+	Query.SetParameter("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
+	BalancePeriod = New Boundary(ThisObject.PointInTime(), BoundaryType.Excluding);
+	Query.SetParameter("BalancePeriod", BalancePeriod);
+	
+	ArrayOfDocuments = New Array();
+	For Each Row In ThisObject.RevenueDocuments Do
+		ArrayOfDocuments.Add(Row.Document);
+	EndDo;
+	
+	Query.SetParameter("ArrayOfDocuments", ArrayOfDocuments);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	For Each Row In ThisObject.RevenueDocuments Do
+		If QuerySelection.FindNext(New Structure("Document", Row.Document)) Then
+			Row.Currency = QuerySelection.Currency;
+			Row.Amount = QuerySelection.Amount;
+			Row.TaxAmount = QuerySelection.TaxAmount;
+		EndIf;
+		QuerySelection.Reset();
+	EndDo;
 EndProcedure
 
 Procedure FillTables_ByDocuments()
@@ -176,6 +216,12 @@ Procedure BeforeDelete(Cancel)
 	EndIf;
 EndProcedure
 
+Procedure Filling(FillingData, FillingText, StandardProcessing)
+	If FillingData = Undefined Then
+		ThisObject.AllocationMode = Enums.AllocationMode.ByRows;
+	EndIf;
+EndProcedure
+
 Procedure Posting(Cancel, PostingMode)
 	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
 EndProcedure
@@ -184,3 +230,19 @@ Procedure UndoPosting(Cancel)
 	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
 EndProcedure
 
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	If ThisObject.AllocationMode = Enums.AllocationMode.ByDocuments Then
+		
+		For Each Row In ThisObject.RevenueDocuments Do
+			ArrayOfAllocationDocuments = ThisObject.AllocationDocuments.FindRows(New Structure("Key", Row.Key));
+			If Not ArrayOfAllocationDocuments.Count() Then
+				CommonFunctionsClientServer.ShowUsersMessage(
+						StrTemplate(R().Error_125, Row.Document), 
+						"Object.RevenueDocuments[" + (Row.LineNumber - 1) + "].Document", 
+						"Object.RevenueDocuments");
+				Cancel = True;
+			EndIf;
+		EndDo;
+		
+	EndIf;
+EndProcedure

@@ -177,7 +177,6 @@ Procedure DeleteSerialLotNumber(Row, ClientModule)
 				EndIf;
 			EndDo;
 			SerialLotNumberClient.UpdateSerialLotNumbersPresentation(FormOwner.Object);
-			SerialLotNumberClient.UpdateSerialLotNumbersTree(FormOwner.Object, FormOwner);
 			SourceOfOriginClient.UpdateSourceOfOriginsQuantity(FormOwner.Object, FormOwner);
 		Else
 			RowsToDelete = FormOwner.Object.ItemList.FindRows(New Structure("ItemKey", Row.ItemKey));
@@ -243,7 +242,6 @@ Procedure ChangeSerialLotNumber(Row, ClientModule)
 		EndDo;
 		
 		SerialLotNumberClient.UpdateSerialLotNumbersPresentation(FormOwner.Object);
-		SerialLotNumberClient.UpdateSerialLotNumbersTree(FormOwner.Object, FormOwner);
 		SourceOfOriginClient.UpdateSourceOfOriginsQuantity(FormOwner.Object, FormOwner);
 		
 	Else

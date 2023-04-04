@@ -1259,18 +1259,12 @@ Scenario: _150056 check filling source of origin in the PR
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I expand a line in "SerialLotNumbersTree" table
-			| 'Item'               | 'Item key' | 'Item key quantity' | 'Quantity' |
-			| 'Product 3 with SLN' | 'UNIQ'     | '10,000'            | '10,000'   |
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| '#' | 'Dont calculate row' | 'Item'               | 'Item key' | 'Net amount' | 'Price'  | 'Purchase invoice'                               | 'Quantity' | 'Serial lot numbers' | 'Source of origins'  | 'Store'    | 'Tax amount' | 'Total amount' | 'Unit' | 'Use shipment confirmation' | 'VAT' |
 			| '2' | 'No'                 | 'Product 3 with SLN' | 'UNIQ'     | '847,46'     | '100,00' | 'Purchase invoice 192 dated 30.10.2022 12:00:00' | '10,000'   | '09987897977889'     | 'Source of origin 4' | 'Store 01' | '152,54'     | '1 000,00'     | 'pcs'  | 'No'                        | '18%' |
 		And I select current line in "ItemList" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I expand a line in "SerialLotNumbersTree" table
-			| 'Item'               | 'Item key' | 'Item key quantity' | 'Quantity' |
-			| 'Product 3 with SLN' | 'UNIQ'     | '2,000'             | '10,000'   |
 		And I finish line editing in "ItemList" table
 		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -1350,9 +1344,6 @@ Scenario: _150057 check filling source of origin in the SR
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I expand a line in "SerialLotNumbersTree" table
-			| 'Item'               | 'Item key' | 'Item key quantity' | 'Quantity' |
-			| 'Product 3 with SLN' | 'UNIQ'     | '4,000'             | '4,000'    |
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| 'Item'               | 'Item key' | 'Quantity' |

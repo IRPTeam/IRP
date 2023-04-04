@@ -950,12 +950,12 @@ Scenario: _0260139 create RRR from POS (first select basis document)
 		And "Payments" table became equal
 			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Postponed payment' | 'Bank term' | 'Account'            | 'Percent' |
 			| '1' | '720,00' | ''           | 'Cash'         | ''                 | 'No'                | ''          | 'Pos cash account 1' | ''        |
-		
+		And in the table "ItemList" I click "Open serial lot number tree" button
 		And "SerialLotNumbersTree" table became equal
 			| 'Item'               | 'Item key' | 'Serial lot number' | 'Item key quantity' | 'Quantity' |
 			| 'Product 1 with SLN' | 'ODS'      | ''                  | '2,000'             | '2,000'    |
 			| ''                   | ''         | '9090098908'        | ''                  | '2,000'    |
-		
+		And I close "Serial lot numbers tree" window	
 		Then the form attribute named "Workstation" became equal to "Workstation 01"
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		Then the form attribute named "Currency" became equal to "TRY"
@@ -1017,14 +1017,14 @@ Scenario: _02601391 create RRR from POS (first select basis document, different 
 		And "Payments" table became equal
 			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Postponed payment' | 'Bank term'    | 'Account'      | 'Percent' |
 			| '1' | '750,00' | ''           | 'Card 01'      | ''                 | 'No'                | 'Bank term 02' | 'Transit Main' | '1,00'    |
-		
+		And in the table "ItemList" I click "Open serial lot number tree" button
 		And "SerialLotNumbersTree" table became equal
 			| 'Item'               | 'Item key' | 'Serial lot number' | 'Item key quantity' | 'Quantity' |
 			| 'Product 1 with SLN' | 'ODS'      | ''                  | '2,000'             | '2,000'    |
 			| ''                   | ''         | '9090098908'        | ''                  | '2,000'    |
 			| 'Product 3 with SLN' | 'UNIQ'     | ''                  | '1,000'             | '1,000'    |
 			| ''                   | ''         | '09987897977891'    | ''                  | '1,000'    |
-		
+		And I close "Serial lot numbers tree" window	
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "Workstation" became equal to "Workstation 01"
 		Then the form attribute named "Branch" became equal to "Shop 02"

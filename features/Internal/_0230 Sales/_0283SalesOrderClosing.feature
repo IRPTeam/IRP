@@ -85,7 +85,7 @@ Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 			| 'Basic Price Types'       | 'Dress'   | 'No'                 | '1,000'  | 'pcs'  | '79,32'      | '520,00'   | ''              | '440,68'     | '520,00'       | 'Store 02' | 'Revenue'      | ''       | 'XS/Blue'  | 'Stock'              | 'Yes'    | '09.02.2021'    | ''              | 'Alexander Orlov' |
 			| 'Basic Price Types'       | 'Shirt'   | 'No'                 | '10,000' | 'pcs'  | '533,90'     | '350,00'   | ''              | '2 966,10'   | '3 500,00'     | 'Store 02' | 'Revenue'      | ''       | '36/Red'   | 'No reserve'         | 'Yes'    | '09.02.2021'    | ''              | ''                |
 			| 'Basic Price Types'       | 'Boots'   | 'No'                 | '24,000' | 'pcs'  | '2 562,71'   | '8 400,00' | ''              | '14 237,29'  | '16 800,00'    | 'Store 02' | 'Revenue'      | ''       | '37/18SD'  | 'Purchase'           | 'Yes'    | '09.02.2021'    | ''              | ''                |
-			| 'en description is empty' | 'Service' | 'No'                 | '1,000'  | 'pcs'  | '15,25'      | '100,00'   | ''              | '84,75'      | '100,00'       | 'Store 02' | 'Revenue'      | ''       | 'Interner' | ''                   | 'Yes'    | '09.02.2021'    | ''              | ''                |
+			| 'en description is empty' | 'Service' | 'No'                 | '1,000'  | 'pcs'  | '15,25'      | '100,00'   | ''              | '84,75'      | '100,00'       | 'Store 02' | 'Revenue'      | ''       | 'Internet' | ''                   | 'Yes'    | '09.02.2021'    | ''              | ''                |
 		Then the number of "ItemList" table lines is "equal" "4"
 		Then the form attribute named "Currency" became equal to "TRY"
 	* Try to post document without filling in cancel reason
@@ -115,7 +115,7 @@ Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key' |
-			| 'Service' | 'Interner' |
+			| 'Service' | 'Internet' |
 		And I select current line in "ItemList" table
 		And I select "not available" exact value from "Cancel reason" drop-down list in "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -170,7 +170,7 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 			| 'Profit loss center'      | 'Price type'              | 'Item'    | 'Dont calculate row' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'    | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Revenue type' | 'Detail' | 'Item key' | 'Procurement method' | 'Cancel' | 'Delivery date' | 'Cancel reason' |
 			| 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | 'No'                 | '1,000'  | 'pcs'  | '53,39'      | '350,00'   | ''              | '296,61'     | '350,00'       | 'Store 02' | 'Revenue'      | ''       | '36/Red'   | 'No reserve'         | 'Yes'    | '09.02.2021'    | ''              |
 			| 'Distribution department' | 'Basic Price Types'       | 'Boots'   | 'No'                 | '24,000' | 'pcs'  | '2 562,71'   | '8 400,00' | ''              | '14 237,29'  | '16 800,00'    | 'Store 02' | 'Revenue'      | ''       | '37/18SD'  | 'Purchase'           | 'Yes'    | '09.02.2021'    | ''              |
-			| 'Front office'            | 'en description is empty' | 'Service' | 'No'                 | '1,000'  | 'pcs'  | '15,25'      | '100,00'   | ''              | '84,75'      | '100,00'       | 'Store 02' | 'Revenue'      | ''       | 'Interner' | ''                   | 'Yes'    | '09.02.2021'    | ''              |
+			| 'Front office'            | 'en description is empty' | 'Service' | 'No'                 | '1,000'  | 'pcs'  | '15,25'      | '100,00'   | ''              | '84,75'      | '100,00'       | 'Store 02' | 'Revenue'      | ''       | 'Internet' | ''                   | 'Yes'    | '09.02.2021'    | ''              |
 		Then the number of "ItemList" table lines is "equal" "3"
 		And I go to line in "ItemList" table
 			| '#' |
@@ -253,7 +253,7 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 # 			| 'Profit loss center'           | 'Price type'              | 'Item'    | 'Dont calculate row' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'    | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Revenue type' | 'Detail' | 'Item key' | 'Procurement method' | 'Cancel' | 'Delivery date' | 'Cancel reason' |
 # 			| 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | 'No'                 | '1,000'  | 'pcs'  | '53,39'      | '350,00'   | ''              | '296,61'     | '350,00'       | 'Store 02' | 'Revenue'      | ''       | '36/Red'   | 'No reserve'         | 'Yes'    | '09.02.2021'    | ''              |
 # 			| 'Distribution department' | 'Basic Price Types'       | 'Boots'   | 'No'                 | '24,000' | 'pcs'  | '2 562,71'   | '8 400,00' | ''              | '14 237,29'  | '16 800,00'    | 'Store 02' | 'Revenue'      | ''       | '37/18SD'  | 'Purchase'           | 'Yes'    | '09.02.2021'    | ''              |
-# 			| 'Front office'            | 'en description is empty' | 'Service' | 'No'                 | '1,000'  | 'pcs'  | '15,25'      | '100,00'   | ''              | '84,75'      | '100,00'       | 'Store 02' | 'Revenue'      | ''       | 'Interner' | ''                   | 'Yes'    | '09.02.2021'    | ''              |
+# 			| 'Front office'            | 'en description is empty' | 'Service' | 'No'                 | '1,000'  | 'pcs'  | '15,25'      | '100,00'   | ''              | '84,75'      | '100,00'       | 'Store 02' | 'Revenue'      | ''       | 'Internet' | ''                   | 'Yes'    | '09.02.2021'    | ''              |
 # 		Then the number of "ItemList" table lines is "equal" "3"
 # 		And I close all client application windows
 			

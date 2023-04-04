@@ -1065,7 +1065,7 @@ Scenario: _2065019 unpost SO with linked strings (one session)
 			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
 			|'Line No. [3] [Shirt 36/Red] RowID movements remaining: 11 . Required: 0 . Lacking: 11 .'|
 			|'Line No. [4] [Boots 37/18SD] RowID movements remaining: 24 . Required: 0 . Lacking: 24 .'|
-			|'Line No. [5] [Service Interner] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
+			|'Line No. [5] [Service Internet] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
 		And I close all client application windows
 
 Scenario: _2065020 unpost SI with linked strings (one session)
@@ -1158,7 +1158,7 @@ Scenario: _2065023 delete SO with linked strings (one session)
 			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
 			|'Line No. [3] [Shirt 36/Red] RowID movements remaining: 11 . Required: 0 . Lacking: 11 .'|
 			|'Line No. [4] [Boots 37/18SD] RowID movements remaining: 24 . Required: 0 . Lacking: 24 .'|
-			|'Line No. [5] [Service Interner] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
+			|'Line No. [5] [Service Internet] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
 		And I close all client application windows
 
 Scenario: _2065024 delete SI with linked strings (one session)

@@ -435,7 +435,7 @@ Scenario: _2060003 check auto link button in the SI
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
 				| 'Item'    | 'Item key' |
-				| 'Service' | 'Interner' |
+				| 'Service' | 'Internet' |
 			And I select current line in "List" table
 			And I activate field named "ItemListQuantity" in "ItemList" table
 			And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
@@ -466,7 +466,7 @@ Scenario: _2060003 check auto link button in the SI
 			| '#' | 'SalesTax' | 'Revenue type' | 'Price type'              | 'Item'    | 'Item key' | 'Profit loss center'      | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                             |
 			| '1' | ''         | 'Revenue'      | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'Distribution department' | 'No'                 | ''                   | '2,000'  | 'pcs'  | '150,72'     | '520,00'   | '18%' | '52,00'         | '837,28'     | '988,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
 			| '2' | ''         | 'Revenue'      | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'Distribution department' | 'No'                 | ''                   | '10,000' | 'pcs'  | '507,20'     | '350,00'   | '18%' | '175,00'        | '2 817,80'   | '3 325,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
-			| '3' | ''         | 'Revenue'      | 'en description is empty' | 'Service' | 'Interner' | 'Front office'            | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00'   | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
+			| '3' | ''         | 'Revenue'      | 'en description is empty' | 'Service' | 'Internet' | 'Front office'            | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00'   | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
 			| '4' | ''         | 'Revenue'      | 'Basic Price Types'       | 'Boots'   | '36/18SD'  | 'Front office'            | 'No'                 | ''                   | '65,000' | 'pcs'  | '6 940,68'   | '8 400,00' | '18%' | ''              | '38 559,32'  | '45 500,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
 		Then the number of "ItemList" table lines is "равно" "4"
 		And I close all client application windows

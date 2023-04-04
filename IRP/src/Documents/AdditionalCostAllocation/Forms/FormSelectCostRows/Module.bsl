@@ -8,7 +8,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|	R6070T_OtherPeriodsExpenses.RowID,
 	|	R6070T_OtherPeriodsExpenses.ItemKey,
 	|	R6070T_OtherPeriodsExpenses.Currency,
-	|	R6070T_OtherPeriodsExpenses.AmountBalance AS Amount
+	|	R6070T_OtherPeriodsExpenses.AmountBalance AS Amount,
+	|	R6070T_OtherPeriodsExpenses.AmountTaxBalance AS TaxAmount
 	|FROM
 	|	AccumulationRegister.R6070T_OtherPeriodsExpenses.Balance(&BalancePeriod, Company = &Company
 	|	AND CurrencyMovementType = &CurrencyMovementType) AS R6070T_OtherPeriodsExpenses
@@ -23,7 +24,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If ValueIsFilled(Parameters.Ref) And Parameters.Ref.Posted Then
 		BalancePeriod = New Boundary(Parameters.Ref.PointInTime(), BoundaryType.Excluding);
 	Else
-		BalancePeriod = EndOfDay(Parameters.Date);
+		BalancePeriod = CommonFunctionsServer.GetCurrentSessionDate();
 	EndIf;
 	Query.SetParameter("BalancePeriod", BalancePeriod);
 	QueryResult = Query.Execute();
@@ -35,8 +36,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		NewRow_TopLevel.Document = QuerySelection_Document.Document;
 		NewRow_TopLevel.Presentation = String(QuerySelection_Document.Document);
 		QuerySelection_Details = QuerySelection_Document.Select();
-		TotalAmount = 0;
-		TotalCurrency = Undefined;
+		TotalAmount    = 0;
+		TotalTaxAmount = 0;
+		TotalCurrency  = Undefined;
 		While QuerySelection_Details.Next() Do
 			NewRow_SecondLevel = NewRow_TopLevel.GetItems().Add();
 			NewRow_SecondLevel.Level = 2;
@@ -47,11 +49,13 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 				QuerySelection_Details.RowID, QuerySelection_Details.Document) <> Undefined Then
 				NewRow_SecondLevel.Use = True;
 			EndIf;
-			TotalAmount = TotalAmount + NewRow_SecondLevel.Amount;
-			TotalCurrency = NewRow_SecondLevel.Currency;
+			TotalAmount    = TotalAmount + NewRow_SecondLevel.Amount;
+			TotalTaxAmount = TotalTaxAmount + NewRow_SecondLevel.TaxAmount;
+			TotalCurrency  = NewRow_SecondLevel.Currency;
 		EndDo;
-		NewRow_TopLevel.Amount = TotalAmount;
-		NewRow_TopLevel.Currency = TotalCurrency;
+		NewRow_TopLevel.Amount    = TotalAmount;
+		NewRow_TopLevel.TaxAmount = TotalTaxAmount;
+		NewRow_TopLevel.Currency  = TotalCurrency;
 	EndDo;
 EndProcedure
 
@@ -74,11 +78,12 @@ Procedure Ok(Command)
 				Continue;
 			EndIf;
 			SelectedRow = New Structure();
-			SelectedRow.Insert("RowID"    , Row_SecondLevel.RowID);
-			SelectedRow.Insert("Basis"    , Row_TopLevel.Document);
-			SelectedRow.Insert("ItemKey"  , Row_SecondLevel.ItemKey);
-			SelectedRow.Insert("Currency" , Row_SecondLevel.Currency);
-			SelectedRow.Insert("Amount"   , Row_SecondLevel.Amount);
+			SelectedRow.Insert("RowID"     , Row_SecondLevel.RowID);
+			SelectedRow.Insert("Basis"     , Row_TopLevel.Document);
+			SelectedRow.Insert("ItemKey"   , Row_SecondLevel.ItemKey);
+			SelectedRow.Insert("Currency"  , Row_SecondLevel.Currency);
+			SelectedRow.Insert("Amount"    , Row_SecondLevel.Amount);
+			SelectedRow.Insert("TaxAmount" , Row_SecondLevel.TaxAmount);
 			Result.SelectedRows.Add(SelectedRow);
 		EndDo;
 	EndDo;

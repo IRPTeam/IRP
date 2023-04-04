@@ -4809,19 +4809,19 @@ Scenario: _010037 add test command to the list of documents TimeSheet
 # 		And I click "Compare quantity" button
 # 	* Check of adding goods by barcode search
 # 		And in the table "PhysItemList" I click the button named "PhysItemListSearchByBarcode"
-# 		And I input "978020137962" text in "InputFld" field
+# 		And I input "978020137962" text in the field named "Barcode"
 # 		And I click "OK" button
 # 		And in the table "PhysItemList" I click the button named "PhysItemListSearchByBarcode"
-# 		And I input "978020137962" text in "InputFld" field
+# 		And I input "978020137962" text in the field named "Barcode"
 # 		And I click "OK" button
 # 		And in the table "PhysItemList" I click the button named "PhysItemListSearchByBarcode"
-# 		And I input "2202283739" text in "InputFld" field
+# 		And I input "2202283739" text in the field named "Barcode"
 # 		And I click "OK" button
 # 		And in the table "PhysItemList" I click the button named "PhysItemListSearchByBarcode"
-# 		And I input "2202283739" text in "InputFld" field
+# 		And I input "2202283739" text in the field named "Barcode"
 # 		And I click "OK" button
 # 		And in the table "PhysItemList" I click the button named "PhysItemListSearchByBarcode"
-# 		And I input "2202283739" text in "InputFld" field
+# 		And I input "2202283739" text in the field named "Barcode"
 # 		And I click "OK" button
 # 		And "PhysItemList" table contains lines
 # 			| 'Item'  | 'Item key' | 'Unit' | 'Quantity'     |
@@ -4923,7 +4923,7 @@ Scenario: _010037 add test command to the list of documents TimeSheet
 # 	* Add items by scanning on the tab "CompareItemList"
 # 		And in the table "PhysItemList" I click the button named "PhysItemListSwitchItemLists"
 # 		And in the table "CompareItemList" I click the button named "CompareItemListSearchByBarcode"
-# 		And I input "978020137962" text in "InputFld" field
+# 		And I input "978020137962" text in the field named "Barcode"
 # 		And I click "OK" button
 # 		And "CompareItemList" table contains lines
 # 			| 'Item'  | 'Quantity' | 'Difference' | 'Item key' | 'Unit' | 'Count' |

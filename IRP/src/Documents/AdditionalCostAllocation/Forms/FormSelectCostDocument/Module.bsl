@@ -8,7 +8,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If ValueIsFilled(Parameters.Ref) And Parameters.Ref.Posted Then
 		BalancePeriod = New Boundary(Parameters.Ref.PointInTime(), BoundaryType.Excluding);
 	Else
-		BalancePeriod = EndOfDay(Parameters.Date);
+		BalancePeriod = CommonFunctionsServer.GetCurrentSessionDate();
 	EndIf;
 	List.Parameters.SetParameterValue("BalancePeriod", BalancePeriod);
 EndProcedure
@@ -20,9 +20,10 @@ Function GetSelectedData()
 		Return Undefined;
 	EndIf;
 	SelectedData = New Structure();
-	SelectedData.Insert("Document" , CurrentData.Basis);
-	SelectedData.Insert("Currency" , CurrentData.Currency);
-	SelectedData.Insert("Amount"   , CurrentData.Amount);
+	SelectedData.Insert("Document"  , CurrentData.Basis);
+	SelectedData.Insert("Currency"  , CurrentData.Currency);
+	SelectedData.Insert("Amount"    , CurrentData.Amount);
+	SelectedData.Insert("TaxAmount" , CurrentData.TaxAmount);
 	Return SelectedData;	
 EndFunction
 

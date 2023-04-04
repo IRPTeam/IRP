@@ -446,17 +446,17 @@ Scenario: _150047 check filling source of origin in the PI
 		And I select current line in "List" table	
 	* Filling source of origin from barcode
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		And I input "09987897977893" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "09987897977893" text in the field named "Barcode"
+		And I move to the next attribute
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		And I input "09987897977894" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "09987897977894" text in the field named "Barcode"
+		And I move to the next attribute
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		And I input "2202283705" text in the field named "InputFld"
-		And I click the button named "OK"	
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute	
 		And in the table "ItemList" I click the button named "SearchByBarcode"
-		And I input "2202283714" text in the field named "InputFld"
-		And I click the button named "OK"		
+		And I input "2202283714" text in the field named "Barcode"
+		And I move to the next attribute		
 		And "ItemList" table contains lines
 			| '#'  | 'Price type'              | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'             | 'Source of origins'                      | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Quantity' | 'Is additional item cost' | 'Expense type' | 'Purchase order' | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
 			| '1'  | 'en description is empty' | 'Product 1 with SLN' | 'PZU'      | ''                   | 'No'                 | '213,56'     | 'pcs'  | '8908899877; 8908899879'         | ''                                       | '70,00'  | '18%' | ''              | '1 400,00'     | ''                    | ''                        | 'Store 01' | ''              | '20,000'   | 'No'                      | ''             | ''               | ''       | ''            | '1 186,44'   | 'No'                |
@@ -613,8 +613,8 @@ Scenario: _150049 check filling source of origin in the StockAdjustmentAsSurplus
 			And I select current line in "List" table
 		* Filling source of origin from barcode
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "2202283714" text in the field named "InputFld"
-			And I click the button named "OK"		
+			And I input "2202283714" text in the field named "Barcode"
+			And I move to the next attribute		
 			And "ItemList" table contains lines
 				| 'Revenue type' | 'Amount' | 'Item'               | 'Item key' | 'Profit loss center'      | 'Serial lot numbers' | 'Unit' | 'Source of origins'  | 'Quantity' | 'Price' | 'Amount tax' |
 				| 'Revenue'      | '50,00'  | 'Dress'              | 'XS/Blue'  | 'Distribution department' | ''                   | 'pcs'  | 'Source of origin 5' | '2,000'    | '25,00' | '10,00'      |
@@ -757,16 +757,16 @@ Scenario: _150052 check filling source of origin in the SI
 			And I select current line in "List" table
 		* Filling source of origin from barcode
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "09987897977893" text in the field named "InputFld"
-			And I click the button named "OK"
+			And I input "09987897977893" text in the field named "Barcode"
+			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "09987897977894" text in the field named "InputFld"
-			And I click the button named "OK"
+			And I input "09987897977894" text in the field named "Barcode"
+			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "2202283705" text in the field named "InputFld"
-			And I click the button named "OK"	
+			And I input "2202283705" text in the field named "Barcode"
+			And I move to the next attribute	
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "2202283714" text in the field named "InputFld"
+			And I input "2202283714" text in the field named "Barcode"
 			// And I click the button named "OK"		
 			// And "ItemList" table contains lines
 			// 	| 'Price type'              | 'Item'               | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'             | 'Source of origins'                      | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Work order' | 'Revenue type' | 'Sales person' |
@@ -1259,18 +1259,12 @@ Scenario: _150056 check filling source of origin in the PR
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I expand a line in "SerialLotNumbersTree" table
-			| 'Item'               | 'Item key' | 'Item key quantity' | 'Quantity' |
-			| 'Product 3 with SLN' | 'UNIQ'     | '10,000'            | '10,000'   |
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| '#' | 'Dont calculate row' | 'Item'               | 'Item key' | 'Net amount' | 'Price'  | 'Purchase invoice'                               | 'Quantity' | 'Serial lot numbers' | 'Source of origins'  | 'Store'    | 'Tax amount' | 'Total amount' | 'Unit' | 'Use shipment confirmation' | 'VAT' |
 			| '2' | 'No'                 | 'Product 3 with SLN' | 'UNIQ'     | '847,46'     | '100,00' | 'Purchase invoice 192 dated 30.10.2022 12:00:00' | '10,000'   | '09987897977889'     | 'Source of origin 4' | 'Store 01' | '152,54'     | '1 000,00'     | 'pcs'  | 'No'                        | '18%' |
 		And I select current line in "ItemList" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I expand a line in "SerialLotNumbersTree" table
-			| 'Item'               | 'Item key' | 'Item key quantity' | 'Quantity' |
-			| 'Product 3 with SLN' | 'UNIQ'     | '2,000'             | '10,000'   |
 		And I finish line editing in "ItemList" table
 		And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -1350,9 +1344,6 @@ Scenario: _150057 check filling source of origin in the SR
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
-		And I expand a line in "SerialLotNumbersTree" table
-			| 'Item'               | 'Item key' | 'Item key quantity' | 'Quantity' |
-			| 'Product 3 with SLN' | 'UNIQ'     | '4,000'             | '4,000'    |
 		And I finish line editing in "ItemList" table
 		And I go to line in "ItemList" table
 			| 'Item'               | 'Item key' | 'Quantity' |

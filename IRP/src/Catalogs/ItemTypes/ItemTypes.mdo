@@ -225,6 +225,36 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="de584746-6db9-45d9-a808-a16463aa775c">
+    <name>SingleRow</name>
+    <synonym>
+      <key>en</key>
+      <value>Single row</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="204ed4ad-0e8a-4462-8e9d-29b41741eb4a">
+    <name>NotUseLineGrouping</name>
+    <synonym>
+      <key>en</key>
+      <value>Not use line grouping</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="a261a912-5869-49b5-8ab6-76ad86abeaba">
     <producedTypes>
       <objectType typeId="192f1da3-6058-4b27-b623-41f7c6cafedb" valueTypeId="dff3d6ac-2e62-4190-bda0-9908ffbe49bc"/>

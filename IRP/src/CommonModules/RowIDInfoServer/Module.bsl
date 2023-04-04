@@ -3660,7 +3660,7 @@ Function ExtractData_FromPhysicalInventory(BasisesTable, DataReceiver, AddInfo =
 
 	AddTables(Tables);
 
-	Return Tables;
+	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit", AddInfo);
 EndFunction
 
 Function ExtractData_FromPR(BasisesTable, DataReceiver, AddInfo = Undefined)
@@ -4491,7 +4491,6 @@ EndFunction
 Function ExtractData_FromWS_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text + 
-	//------------------------------------------------------------
 	"SELECT DISTINCT ALLOWED
 	|	BasisesTable.Key,
 	|	RowIDInfo.BasisKey AS BasisKey,
@@ -4658,6 +4657,24 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Unde
 	If IsLinkRows <> Undefined And IsLinkRows Then
 		UniqueColumnNames = UniqueColumnNames + ", Key";
 	EndIf;
+	
+	If Tables.ItemList.Columns.Find("Item") <> Undefined Then
+		NotGroupArray = New Array();
+		For Each Row In Tables.ItemList Do
+			If Row.Item.ItemType.NotUseLineGrouping Then
+				NotGroupArray.Add(Row);
+			EndIf;
+		EndDo;
+		
+		If NotGroupArray.Count() Then
+			UniqueColumnNames = UniqueColumnNames + ", UniqueColumn";
+			Tables.ItemList.Columns.Add("UniqueColumn");
+			For Each Row In NotGroupArray Do
+				Row.UniqueColumn = New UUID();
+			EndDo;
+		EndIf;
+	EndIf;
+	
 	ColumnNamesSum_ItemList = GetColumnNamesSum_ItemList();
 	ItemListGrouped = Tables.ItemList.Copy();
 	ItemListGrouped.GroupBy(UniqueColumnNames, ColumnNamesSum_ItemList);
@@ -4714,6 +4731,14 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Unde
 			For Each Row In Tables.WorkSheets.FindRows(Filter) Do
 				Row.Key = NewKey;
 			EndDo;
+			
+			For Each Row In Tables.SerialLotNumbers.FindRows(Filter) Do
+				Row.Key = NewKey;
+			EndDo;
+			
+			For Each Row In Tables.SourceOfOrigins.FindRows(Filter) Do
+				Row.Key = NewKey;
+			EndDo;
 		EndDo;
 
 		NewRow = ItemListResult.Add();
@@ -4727,6 +4752,8 @@ Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Unde
 	Tables.ShipmentConfirmations.GroupBy(GetColumnNames_ShipmentConfirmations() , GetColumnNamesSum_ShipmentConfirmations());
 	Tables.GoodsReceipts.GroupBy(GetColumnNames_GoodsReceipts()                 , GetColumnNamesSum_GoodsReceipts());
 	Tables.WorkSheets.GroupBy(GetColumnNames_WorkSheets()                       , GetColumnNamesSum_WorkSheets());
+	Tables.SerialLotNumbers.GroupBy(GetColumnNames_SerialLotNumbers()           , GetColumnNamesSum_SerialLotNumbers());
+	Tables.SourceOfOrigins.GroupBy(GetColumnNames_SourceOfOrigins()             , GetColumnNamesSum_SourceOfOrigins());
 
 	Tables.ItemList = ItemListResult;
 	Return Tables;

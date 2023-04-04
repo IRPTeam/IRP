@@ -133,8 +133,8 @@ Scenario: _0260210 one-time change of access rights (POS)
 		And I click "Change rights" button
 		Then "Change right" window is opened
 		And I click "SearchByBarcode" button
-		And I input "12345" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "12345" text in the field named "Barcode"
+		And I move to the next attribute
 		And I click "Ok" button	
 		Then the form attribute named "UserAdmin" became equal to "Arina Brown (Financier 3)"
 		And I input "100,00" text in the field named "ItemListPrice" of "ItemList" table
@@ -174,8 +174,8 @@ Scenario: _0260212 keep rights when change access rights (POS)
 		And I click "Change rights" button
 		Then "Change right" window is opened
 		And I click "SearchByBarcode" button
-		And I input "12345" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "12345" text in the field named "Barcode"
+		And I move to the next attribute
 		And I set checkbox "Keep rights"
 		And I click "Ok" button	
 		Then the form attribute named "UserAdmin" became equal to "Arina Brown (Financier 3)"

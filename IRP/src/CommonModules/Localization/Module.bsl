@@ -343,6 +343,7 @@ Function Strings(Lang) Export
 																|Copy message and send it to administrator'", Lang));
 	Strings.Insert("POS_Error_ReturnAmountLess", NStr(
 		"en = 'There are %2 of ""%1"", which is more than the available %3 for return in document ""%4"" .'", Lang));
+	Strings.Insert("POS_Error_CannotFindUser", NStr("en = 'Can not find user with barcode [%1]'", Lang));
 	
 #EndRegion
 
@@ -748,6 +749,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_121", NStr("en = 'Goods received from consignor cannot be shipped to trade agent'", Lang) + Chars.LF);
 	Strings.Insert("Error_122", NStr("en = 'Error. Find recursive basis by RowID: %1. Basis list:'", Lang) + Chars.LF);
 	Strings.Insert("Error_123", NStr("en = 'Error. Retail customer is not filled'", Lang) + Chars.LF);
+	Strings.Insert("Error_124", NStr("en = 'Quantity limit exceeded. line number: [%1] quantity: [%2] limit: [%3]'", Lang));
+	Strings.Insert("Error_125", NStr("en = 'Invoice for document: [%1] is empty'", Lang));
 	
 	// manufacturing errors
 	Strings.Insert("MF_Error_001", NStr("en = 'Repetitive materials [%1]'", Lang));
@@ -1048,6 +1051,11 @@ Function Strings(Lang) Export
 	Strings.Insert("LDT_FailReading", NStr("en = 'Failed to read the value: [%1]'", Lang));
 	Strings.Insert("LDT_ValueNotFound", NStr("en = 'Nothing was found for [%1]'", Lang));
 	Strings.Insert("LDT_TooMuchFound", NStr("en = 'Several variants were found for [%1]'", Lang));
+#EndRegion	
+
+#Region OpenSerialLotNumberTree
+	Strings.Insert("OpenSLNTree_Button_Title",   NStr("en = 'Open serial lot number tree'", Lang));
+	Strings.Insert("OpenSLNTree_Button_ToolTip", NStr("en = 'Open serial lot number tree'", Lang));
 #EndRegion	
 	
 	Return Strings;

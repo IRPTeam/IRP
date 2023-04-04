@@ -22,6 +22,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	ExternalCommandsServer.CreateCommands(Form, Object.Ref.Metadata().FullName(), Enums.FormTypes.ObjectForm);
 	CopyPasteServer.CreateCommands(Form, Object.Ref.Metadata().FullName(), Enums.FormTypes.ObjectForm);
 	LoadDataFromTableServer.CreateCommands(Form, Object.Ref.Metadata(), Enums.FormTypes.ObjectForm);
+	SerialLotNumbersServer.CreateCommands(Form, Object.Ref.Metadata(), Enums.FormTypes.ObjectForm);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -65,7 +66,6 @@ Procedure SetNewTableUUID(Table, LinkedTables) Export
 EndProcedure
 
 Function CheckItemListStores(Object) Export
-
 	Query = New Query();
 	Query.Text =
 	"SELECT

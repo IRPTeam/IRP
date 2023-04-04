@@ -1570,470 +1570,6 @@
                     <showTitle>true</showTitle>
                   </extInfo>
                 </items>
-                <items xsi:type="form:FormGroup">
-                  <name>SerialNumbersPage</name>
-                  <id>977</id>
-                  <items xsi:type="form:Table">
-                    <name>SerialLotNumbersTree</name>
-                    <id>979</id>
-                    <enabled>true</enabled>
-                    <userVisible>
-                      <common>true</common>
-                    </userVisible>
-                    <dataPath xsi:type="form:DataPath">
-                      <segments>SerialLotNumbersTree</segments>
-                    </dataPath>
-                    <titleLocation>None</titleLocation>
-                    <items xsi:type="form:FormField">
-                      <name>SerialLotNumbersTreeItem</name>
-                      <id>995</id>
-                      <visible>true</visible>
-                      <enabled>true</enabled>
-                      <userVisible>
-                        <common>true</common>
-                      </userVisible>
-                      <dataPath xsi:type="form:DataPath">
-                        <segments>SerialLotNumbersTree.Item</segments>
-                      </dataPath>
-                      <extendedTooltip>
-                        <name>SerialLotNumbersTreeItemExtendedTooltip</name>
-                        <id>997</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <type>Label</type>
-                        <autoMaxWidth>true</autoMaxWidth>
-                        <autoMaxHeight>true</autoMaxHeight>
-                        <extInfo xsi:type="form:LabelDecorationExtInfo">
-                          <horizontalAlign>Left</horizontalAlign>
-                        </extInfo>
-                      </extendedTooltip>
-                      <contextMenu>
-                        <name>SerialLotNumbersTreeItemContextMenu</name>
-                        <id>996</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <autoFill>true</autoFill>
-                      </contextMenu>
-                      <type>InputField</type>
-                      <editMode>Enter</editMode>
-                      <showInHeader>true</showInHeader>
-                      <headerHorizontalAlign>Left</headerHorizontalAlign>
-                      <showInFooter>true</showInFooter>
-                      <extInfo xsi:type="form:InputFieldExtInfo">
-                        <autoMaxWidth>true</autoMaxWidth>
-                        <autoMaxHeight>true</autoMaxHeight>
-                        <wrap>true</wrap>
-                        <chooseType>true</chooseType>
-                        <typeDomainEnabled>true</typeDomainEnabled>
-                        <textEdit>true</textEdit>
-                      </extInfo>
-                    </items>
-                    <items xsi:type="form:FormField">
-                      <name>SerialLotNumbersTreeItemKey</name>
-                      <id>998</id>
-                      <visible>true</visible>
-                      <enabled>true</enabled>
-                      <userVisible>
-                        <common>true</common>
-                      </userVisible>
-                      <dataPath xsi:type="form:DataPath">
-                        <segments>SerialLotNumbersTree.ItemKey</segments>
-                      </dataPath>
-                      <extendedTooltip>
-                        <name>SerialLotNumbersTreeItemKeyExtendedTooltip</name>
-                        <id>1000</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <type>Label</type>
-                        <autoMaxWidth>true</autoMaxWidth>
-                        <autoMaxHeight>true</autoMaxHeight>
-                        <extInfo xsi:type="form:LabelDecorationExtInfo">
-                          <horizontalAlign>Left</horizontalAlign>
-                        </extInfo>
-                      </extendedTooltip>
-                      <contextMenu>
-                        <name>SerialLotNumbersTreeItemKeyContextMenu</name>
-                        <id>999</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <autoFill>true</autoFill>
-                      </contextMenu>
-                      <type>InputField</type>
-                      <editMode>Enter</editMode>
-                      <showInHeader>true</showInHeader>
-                      <headerHorizontalAlign>Left</headerHorizontalAlign>
-                      <showInFooter>true</showInFooter>
-                      <extInfo xsi:type="form:InputFieldExtInfo">
-                        <autoMaxWidth>true</autoMaxWidth>
-                        <autoMaxHeight>true</autoMaxHeight>
-                        <wrap>true</wrap>
-                        <chooseType>true</chooseType>
-                        <typeDomainEnabled>true</typeDomainEnabled>
-                        <textEdit>true</textEdit>
-                      </extInfo>
-                    </items>
-                    <items xsi:type="form:FormField">
-                      <name>SerialLotNumbersTreeSerialLotNumber</name>
-                      <id>1001</id>
-                      <visible>true</visible>
-                      <enabled>true</enabled>
-                      <userVisible>
-                        <common>true</common>
-                      </userVisible>
-                      <dataPath xsi:type="form:DataPath">
-                        <segments>SerialLotNumbersTree.SerialLotNumber</segments>
-                      </dataPath>
-                      <extendedTooltip>
-                        <name>SerialLotNumbersTreeSerialLotNumberExtendedTooltip</name>
-                        <id>1003</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <type>Label</type>
-                        <autoMaxWidth>true</autoMaxWidth>
-                        <autoMaxHeight>true</autoMaxHeight>
-                        <extInfo xsi:type="form:LabelDecorationExtInfo">
-                          <horizontalAlign>Left</horizontalAlign>
-                        </extInfo>
-                      </extendedTooltip>
-                      <contextMenu>
-                        <name>SerialLotNumbersTreeSerialLotNumberContextMenu</name>
-                        <id>1002</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <autoFill>true</autoFill>
-                      </contextMenu>
-                      <type>InputField</type>
-                      <editMode>Enter</editMode>
-                      <showInHeader>true</showInHeader>
-                      <headerHorizontalAlign>Left</headerHorizontalAlign>
-                      <showInFooter>true</showInFooter>
-                      <extInfo xsi:type="form:InputFieldExtInfo">
-                        <autoMaxWidth>true</autoMaxWidth>
-                        <autoMaxHeight>true</autoMaxHeight>
-                        <wrap>true</wrap>
-                        <chooseType>true</chooseType>
-                        <typeDomainEnabled>true</typeDomainEnabled>
-                        <textEdit>true</textEdit>
-                      </extInfo>
-                    </items>
-                    <items xsi:type="form:FormField">
-                      <name>SerialLotNumbersTreeQuantity</name>
-                      <id>1004</id>
-                      <visible>true</visible>
-                      <enabled>true</enabled>
-                      <userVisible>
-                        <common>true</common>
-                      </userVisible>
-                      <dataPath xsi:type="form:DataPath">
-                        <segments>SerialLotNumbersTree.Quantity</segments>
-                      </dataPath>
-                      <extendedTooltip>
-                        <name>SerialLotNumbersTreeQuantityExtendedTooltip</name>
-                        <id>1006</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <type>Label</type>
-                        <autoMaxWidth>true</autoMaxWidth>
-                        <autoMaxHeight>true</autoMaxHeight>
-                        <extInfo xsi:type="form:LabelDecorationExtInfo">
-                          <horizontalAlign>Left</horizontalAlign>
-                        </extInfo>
-                      </extendedTooltip>
-                      <contextMenu>
-                        <name>SerialLotNumbersTreeQuantityContextMenu</name>
-                        <id>1005</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <autoFill>true</autoFill>
-                      </contextMenu>
-                      <type>InputField</type>
-                      <editMode>Enter</editMode>
-                      <showInHeader>true</showInHeader>
-                      <headerHorizontalAlign>Left</headerHorizontalAlign>
-                      <showInFooter>true</showInFooter>
-                      <extInfo xsi:type="form:InputFieldExtInfo">
-                        <autoMaxWidth>true</autoMaxWidth>
-                        <autoMaxHeight>true</autoMaxHeight>
-                        <wrap>true</wrap>
-                        <chooseType>true</chooseType>
-                        <typeDomainEnabled>true</typeDomainEnabled>
-                        <textEdit>true</textEdit>
-                      </extInfo>
-                    </items>
-                    <items xsi:type="form:FormField">
-                      <name>SerialLotNumbersTreeItemKeyQuantity</name>
-                      <id>1010</id>
-                      <visible>true</visible>
-                      <enabled>true</enabled>
-                      <userVisible>
-                        <common>true</common>
-                      </userVisible>
-                      <dataPath xsi:type="form:DataPath">
-                        <segments>SerialLotNumbersTree.ItemKeyQuantity</segments>
-                      </dataPath>
-                      <extendedTooltip>
-                        <name>SerialLotNumbersTreeItemKeyQuantityExtendedTooltip</name>
-                        <id>1012</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <type>Label</type>
-                        <autoMaxWidth>true</autoMaxWidth>
-                        <autoMaxHeight>true</autoMaxHeight>
-                        <extInfo xsi:type="form:LabelDecorationExtInfo">
-                          <horizontalAlign>Left</horizontalAlign>
-                        </extInfo>
-                      </extendedTooltip>
-                      <contextMenu>
-                        <name>SerialLotNumbersTreeItemKeyQuantityContextMenu</name>
-                        <id>1011</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <autoFill>true</autoFill>
-                      </contextMenu>
-                      <type>InputField</type>
-                      <editMode>Enter</editMode>
-                      <showInHeader>true</showInHeader>
-                      <headerHorizontalAlign>Left</headerHorizontalAlign>
-                      <showInFooter>true</showInFooter>
-                      <extInfo xsi:type="form:InputFieldExtInfo">
-                        <autoMaxWidth>true</autoMaxWidth>
-                        <autoMaxHeight>true</autoMaxHeight>
-                        <wrap>true</wrap>
-                        <chooseType>true</chooseType>
-                        <typeDomainEnabled>true</typeDomainEnabled>
-                        <textEdit>true</textEdit>
-                      </extInfo>
-                    </items>
-                    <autoCommandBar>
-                      <name>SerialLotNumbersTreeCommandBar</name>
-                      <id>980</id>
-                      <visible>true</visible>
-                      <enabled>true</enabled>
-                      <userVisible>
-                        <common>true</common>
-                      </userVisible>
-                      <horizontalAlign>Left</horizontalAlign>
-                    </autoCommandBar>
-                    <searchStringAddition>
-                      <visible>true</visible>
-                      <enabled>true</enabled>
-                      <userVisible>
-                        <common>true</common>
-                      </userVisible>
-                      <name>SerialLotNumbersTreeSearchString</name>
-                      <id>983</id>
-                      <extendedTooltip>
-                        <name>SerialLotNumbersTreeSearchStringExtendedTooltip</name>
-                        <id>985</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <type>Label</type>
-                        <autoMaxWidth>true</autoMaxWidth>
-                        <autoMaxHeight>true</autoMaxHeight>
-                        <extInfo xsi:type="form:LabelDecorationExtInfo">
-                          <horizontalAlign>Left</horizontalAlign>
-                        </extInfo>
-                      </extendedTooltip>
-                      <contextMenu>
-                        <name>SerialLotNumbersTreeSearchStringContextMenu</name>
-                        <id>984</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <autoFill>true</autoFill>
-                      </contextMenu>
-                      <source>SerialLotNumbersTreeSearchString</source>
-                      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
-                        <autoMaxWidth>true</autoMaxWidth>
-                      </extInfo>
-                    </searchStringAddition>
-                    <viewStatusAddition>
-                      <visible>true</visible>
-                      <enabled>true</enabled>
-                      <userVisible>
-                        <common>true</common>
-                      </userVisible>
-                      <name>SerialLotNumbersTreeViewStatus</name>
-                      <id>989</id>
-                      <extendedTooltip>
-                        <name>SerialLotNumbersTreeViewStatusExtendedTooltip</name>
-                        <id>991</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <type>Label</type>
-                        <autoMaxWidth>true</autoMaxWidth>
-                        <autoMaxHeight>true</autoMaxHeight>
-                        <extInfo xsi:type="form:LabelDecorationExtInfo">
-                          <horizontalAlign>Left</horizontalAlign>
-                        </extInfo>
-                      </extendedTooltip>
-                      <contextMenu>
-                        <name>SerialLotNumbersTreeViewStatusContextMenu</name>
-                        <id>990</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <autoFill>true</autoFill>
-                      </contextMenu>
-                      <type>ViewStatusAddition</type>
-                      <source>SerialLotNumbersTreeViewStatus</source>
-                      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
-                        <autoMaxWidth>true</autoMaxWidth>
-                      </extInfo>
-                    </viewStatusAddition>
-                    <searchControlAddition>
-                      <visible>true</visible>
-                      <enabled>true</enabled>
-                      <userVisible>
-                        <common>true</common>
-                      </userVisible>
-                      <name>SerialLotNumbersTreeSearchControl</name>
-                      <id>986</id>
-                      <extendedTooltip>
-                        <name>SerialLotNumbersTreeSearchControlExtendedTooltip</name>
-                        <id>988</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <type>Label</type>
-                        <autoMaxWidth>true</autoMaxWidth>
-                        <autoMaxHeight>true</autoMaxHeight>
-                        <extInfo xsi:type="form:LabelDecorationExtInfo">
-                          <horizontalAlign>Left</horizontalAlign>
-                        </extInfo>
-                      </extendedTooltip>
-                      <contextMenu>
-                        <name>SerialLotNumbersTreeSearchControlContextMenu</name>
-                        <id>987</id>
-                        <visible>true</visible>
-                        <enabled>true</enabled>
-                        <userVisible>
-                          <common>true</common>
-                        </userVisible>
-                        <autoFill>true</autoFill>
-                      </contextMenu>
-                      <type>SearchControlAddition</type>
-                      <source>SerialLotNumbersTreeSearchControl</source>
-                      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
-                        <autoMaxWidth>true</autoMaxWidth>
-                      </extInfo>
-                    </searchControlAddition>
-                    <extendedTooltip>
-                      <name>SerialLotNumbersTreeExtendedTooltip</name>
-                      <id>982</id>
-                      <visible>true</visible>
-                      <enabled>true</enabled>
-                      <userVisible>
-                        <common>true</common>
-                      </userVisible>
-                      <type>Label</type>
-                      <autoMaxWidth>true</autoMaxWidth>
-                      <autoMaxHeight>true</autoMaxHeight>
-                      <extInfo xsi:type="form:LabelDecorationExtInfo">
-                        <horizontalAlign>Left</horizontalAlign>
-                      </extInfo>
-                    </extendedTooltip>
-                    <contextMenu>
-                      <name>SerialLotNumbersTreeContextMenu</name>
-                      <id>981</id>
-                      <visible>true</visible>
-                      <enabled>true</enabled>
-                      <userVisible>
-                        <common>true</common>
-                      </userVisible>
-                      <autoFill>true</autoFill>
-                    </contextMenu>
-                    <representation>Tree</representation>
-                    <readOnly>true</readOnly>
-                    <changeRowSet>true</changeRowSet>
-                    <changeRowOrder>true</changeRowOrder>
-                    <autoMaxWidth>true</autoMaxWidth>
-                    <autoMaxHeight>true</autoMaxHeight>
-                    <autoMaxRowsCount>true</autoMaxRowsCount>
-                    <selectionMode>MultiRow</selectionMode>
-                    <headerHeight>1</headerHeight>
-                    <footerHeight>1</footerHeight>
-                    <horizontalScrollBar>AutoUse</horizontalScrollBar>
-                    <verticalScrollBar>AutoUse</verticalScrollBar>
-                    <horizontalLines>true</horizontalLines>
-                    <verticalLines>true</verticalLines>
-                    <searchOnInput>Auto</searchOnInput>
-                    <initialListView>Auto</initialListView>
-                    <horizontalStretch>true</horizontalStretch>
-                    <verticalStretch>true</verticalStretch>
-                    <fileDragMode>AsFileRef</fileDragMode>
-                  </items>
-                  <enabled>true</enabled>
-                  <userVisible>
-                    <common>true</common>
-                  </userVisible>
-                  <title>
-                    <key>en</key>
-                    <value>Serial numbers page</value>
-                  </title>
-                  <extendedTooltip>
-                    <name>SerialNumbersPageExtendedTooltip</name>
-                    <id>978</id>
-                    <visible>true</visible>
-                    <enabled>true</enabled>
-                    <userVisible>
-                      <common>true</common>
-                    </userVisible>
-                    <type>Label</type>
-                    <autoMaxWidth>true</autoMaxWidth>
-                    <autoMaxHeight>true</autoMaxHeight>
-                    <extInfo xsi:type="form:LabelDecorationExtInfo">
-                      <horizontalAlign>Left</horizontalAlign>
-                    </extInfo>
-                  </extendedTooltip>
-                  <type>Page</type>
-                  <extInfo xsi:type="form:PageGroupExtInfo">
-                    <group>Vertical</group>
-                    <showTitle>true</showTitle>
-                  </extInfo>
-                </items>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -2572,6 +2108,36 @@
                       </extInfo>
                     </extendedTooltip>
                     <commandName>Form.Command.PrintXReport</commandName>
+                    <representation>Auto</representation>
+                    <autoMaxWidth>true</autoMaxWidth>
+                    <autoMaxHeight>true</autoMaxHeight>
+                    <placementArea>UserCmds</placementArea>
+                    <representationInContextMenu>Auto</representationInContextMenu>
+                  </items>
+                  <items xsi:type="form:Button">
+                    <name>AcquiringSlipInfo</name>
+                    <id>1233</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <extendedTooltip>
+                      <name>AcquiringSlipInfoExtendedTooltip</name>
+                      <id>1234</id>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <type>Label</type>
+                      <autoMaxWidth>true</autoMaxWidth>
+                      <autoMaxHeight>true</autoMaxHeight>
+                      <extInfo xsi:type="form:LabelDecorationExtInfo">
+                        <horizontalAlign>Left</horizontalAlign>
+                      </extInfo>
+                    </extendedTooltip>
+                    <commandName>Form.Command.AcquiringSlipInfo</commandName>
                     <representation>Auto</representation>
                     <autoMaxWidth>true</autoMaxWidth>
                     <autoMaxHeight>true</autoMaxHeight>
@@ -4163,6 +3729,39 @@
             <items xsi:type="form:FormGroup">
               <name>AdditionalPage</name>
               <id>1038</id>
+              <items xsi:type="form:Button">
+                <name>ChangeRollbackRight</name>
+                <id>1210</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <extendedTooltip>
+                  <name>ChangeRollbackRightExtendedTooltip</name>
+                  <id>1211</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <type>UsualButton</type>
+                <commandName>Form.Command.ChangeRollbackRight</commandName>
+                <representation>Auto</representation>
+                <autoMaxWidth>true</autoMaxWidth>
+                <height>2</height>
+                <autoMaxHeight>true</autoMaxHeight>
+                <horizontalStretch>true</horizontalStretch>
+                <placementArea>UserCmds</placementArea>
+                <representationInContextMenu>Auto</representationInContextMenu>
+              </items>
               <items xsi:type="form:FormField">
                 <name>Description</name>
                 <id>1043</id>
@@ -4343,37 +3942,6 @@
                   <typeDomainEnabled>true</typeDomainEnabled>
                   <textEdit>true</textEdit>
                 </extInfo>
-              </items>
-              <items xsi:type="form:Button">
-                <name>ChangeRollbackRight</name>
-                <id>1210</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <extendedTooltip>
-                  <name>ChangeRollbackRightExtendedTooltip</name>
-                  <id>1211</id>
-                  <visible>true</visible>
-                  <enabled>true</enabled>
-                  <userVisible>
-                    <common>true</common>
-                  </userVisible>
-                  <type>Label</type>
-                  <autoMaxWidth>true</autoMaxWidth>
-                  <autoMaxHeight>true</autoMaxHeight>
-                  <extInfo xsi:type="form:LabelDecorationExtInfo">
-                    <horizontalAlign>Left</horizontalAlign>
-                  </extInfo>
-                </extendedTooltip>
-                <type>UsualButton</type>
-                <commandName>Form.Command.ChangeRollbackRight</commandName>
-                <representation>Auto</representation>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <placementArea>UserCmds</placementArea>
-                <representationInContextMenu>Auto</representationInContextMenu>
               </items>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -6443,146 +6011,6 @@ End</presentationExpression>
     </edit>
   </attributes>
   <attributes>
-    <name>SerialLotNumbersTree</name>
-    <title>
-      <key>en</key>
-      <value>Serial lot numbers tree</value>
-    </title>
-    <id>39</id>
-    <valueType>
-      <types>ValueTree</types>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-    <functionalOptions>FunctionalOption.UseSerialLotNumbers</functionalOptions>
-    <columns>
-      <name>Key</name>
-      <title>
-        <key>en</key>
-        <value>Key</value>
-      </title>
-      <id>157</id>
-      <valueType>
-        <types>DefinedType.typeRowID</types>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>Item</name>
-      <title>
-        <key>en</key>
-        <value>Item</value>
-      </title>
-      <id>158</id>
-      <valueType>
-        <types>CatalogRef.Items</types>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>ItemKey</name>
-      <title>
-        <key>en</key>
-        <value>Item key</value>
-      </title>
-      <id>159</id>
-      <valueType>
-        <types>CatalogRef.ItemKeys</types>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>SerialLotNumber</name>
-      <title>
-        <key>en</key>
-        <value>Serial lot number</value>
-      </title>
-      <id>160</id>
-      <valueType>
-        <types>CatalogRef.SerialLotNumbers</types>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>Quantity</name>
-      <title>
-        <key>en</key>
-        <value>Quantity</value>
-      </title>
-      <id>161</id>
-      <valueType>
-        <types>DefinedType.typeQuantity</types>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>Level</name>
-      <title>
-        <key>en</key>
-        <value>Level</value>
-      </title>
-      <id>162</id>
-      <valueType>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>ItemKeyQuantity</name>
-      <title>
-        <key>en</key>
-        <value>Item key quantity</value>
-      </title>
-      <id>165</id>
-      <valueType>
-        <types>DefinedType.typeQuantity</types>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-  </attributes>
-  <attributes>
     <name>Workstation</name>
     <title>
       <key>en</key>
@@ -7535,6 +6963,26 @@ person</value>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>ChangeRollbackRight</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>AcquiringSlipInfo</name>
+    <title>
+      <key>en</key>
+      <value>Acquiring slip info</value>
+    </title>
+    <id>33</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>CommonPicture.Payment</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>AcquiringSlipInfo</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

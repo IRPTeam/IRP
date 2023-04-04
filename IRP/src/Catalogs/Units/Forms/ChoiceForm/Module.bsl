@@ -2,8 +2,13 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.List.QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(ThisObject.List.QueryText);
 	If Parameters.Filter.Property("Item") Then
-		List.Parameters.SetParameterValue("Item", Parameters.Filter.Item);
-		List.Parameters.SetParameterValue("Unit", Parameters.Filter.Item.Unit);
+		If TypeOf(Parameters.Filter.Item) = Type("CatalogRef.Items") Then
+			Item = Parameters.Filter.Item;
+		Else
+			Item = Parameters.Filter.Item.Item;
+		EndIf;
+		List.Parameters.SetParameterValue("Item", Item);
+		List.Parameters.SetParameterValue("Unit", Item.Unit);
 		List.Parameters.SetParameterValue("Filter", True);
 	Else
 		List.Parameters.SetParameterValue("Filter", False);

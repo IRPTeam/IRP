@@ -15,7 +15,6 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocAdditionalRevenueAllocationServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
-		Object.AllocationMode = Enums.AllocationMode.ByRows;
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 EndProcedure
@@ -104,55 +103,70 @@ Procedure RefreshRowsAllocationTreesAtServer()
 	
 	BasisTable = Object.RevenueList.Unload();
 	BasisTable.GroupBy("Basis");
-	FooterTotalAmount = 0;
+	FooterTotalAmount    = 0;
+	FooterTotalTaxAmount = 0;
 	For Each RowBasis In BasisTable Do
 		NewRow_TopLevel = ThisObject.RevenueRows.GetItems().Add();
 		NewRow_TopLevel.Level = 1;
 		NewRow_TopLevel.Icon = 1;
 		NewRow_TopLevel.Document = RowBasis.Basis;
 		NewRow_TopLevel.Presentation = String(RowBasis.Basis);
-		TotalAmount = 0;
-		TotalCurrency = Undefined;
+		TotalAmount    = 0;
+		TotalTaxAmount = 0;
+		TotalCurrency  = Undefined;
 		For Each RowDetail In Object.RevenueList.FindRows(New Structure("Basis", RowBasis.Basis)) Do
 			NewRow_SecondLevel = NewRow_TopLevel.GetItems().Add();
 			NewRow_SecondLevel.Level = 2;
 			NewRow_SecondLevel.Icon = 0;
 			FillPropertyValues(NewRow_SecondLevel, RowDetail);
 			NewRow_SecondLevel.Presentation = String(RowDetail.ItemKey.Item) + ", " + String(RowDetail.ItemKey);
-			TotalAmount = TotalAmount + NewRow_SecondLevel.Amount;
+			
+			TotalAmount    = TotalAmount    + NewRow_SecondLevel.Amount;
+			TotalTaxAmount = TotalTaxAmount + NewRow_SecondLevel.TaxAmount;
+			
 			TotalCurrency = NewRow_SecondLevel.Currency;
-			FooterTotalAmount = FooterTotalAmount + NewRow_SecondLevel.Amount;
+			
+			FooterTotalAmount    = FooterTotalAmount + NewRow_SecondLevel.Amount;
+			FooterTotalTaxAmount = FooterTotalTaxAmount + NewRow_SecondLevel.TaxAmount;
 		EndDo;
-		NewRow_TopLevel.Amount = TotalAmount;
-		NewRow_TopLevel.Currency = TotalCurrency;
+		NewRow_TopLevel.Amount    = TotalAmount;
+		NewRow_TopLevel.TaxAmount = TotalTaxAmount;
+		NewRow_TopLevel.Currency  = TotalCurrency;
 	EndDo;
-	Items.RevenueRowsAmount.FooterText = Format(FooterTotalAmount, "NFD=2;");
+	Items.RevenueRowsAmount.FooterText    = Format(FooterTotalAmount    , "NFD=2;");
+	Items.RevenueRowsTaxAmount.FooterText = Format(FooterTotalTaxAmount , "NFD=2;");
 	
 	// Allocation rows
 	ThisObject.AllocationRows.GetItems().Clear();
 	
 	BasisTable = Object.AllocationList.Unload();
 	BasisTable.GroupBy("Document");
-	FooterTotalAmount = 0;
+	FooterTotalAmount    = 0;
+	FooterTotalTaxAmount = 0;
 	For Each RowBasis In BasisTable Do
 		NewRow_TopLevel = ThisObject.AllocationRows.GetItems().Add();
 		NewRow_TopLevel.Level = 1;
 		NewRow_TopLevel.Icon = 1;
 		NewRow_TopLevel.Document = RowBasis.Document;
 		NewRow_TopLevel.Presentation = String(RowBasis.Document);
-		TotalAmount = 0;
+		TotalAmount    = 0;
+		TotalTaxAmount = 0;
 		For Each RowDetail In Object.AllocationList.FindRows(New Structure("Document", RowBasis.Document)) Do
 			NewRow_SecondLevel = NewRow_TopLevel.GetItems().Add();
 			NewRow_SecondLevel.Level = 2;
 			NewRow_SecondLevel.Icon = 0;
 			FillPropertyValues(NewRow_SecondLevel, RowDetail);
 			NewRow_SecondLevel.Presentation = String(NewRow_SecondLevel.ItemKey.Item) + ", " + String(NewRow_SecondLevel.ItemKey);
-			TotalAmount = TotalAmount + NewRow_SecondLevel.Amount;
-			FooterTotalAmount = FooterTotalAmount + NewRow_SecondLevel.Amount;
+			TotalAmount    = TotalAmount    + NewRow_SecondLevel.Amount;
+			TotalTaxAmount = TotalTaxAmount + NewRow_SecondLevel.TaxAmount;
+			FooterTotalAmount    = FooterTotalAmount    + NewRow_SecondLevel.Amount;
+			FooterTotalTaxAmount = FooterTotalTaxAmount + NewRow_SecondLevel.TaxAmount;
 		EndDo;
-		NewRow_TopLevel.Amount = TotalAmount;
+		NewRow_TopLevel.Amount    = TotalAmount;
+		NewRow_TopLevel.TaxAmount = TotalTaxAmount;
 	EndDo;
-	Items.AllocationRowsAmount.FooterText = Format(FooterTotalAmount, "NFD=2;");
+	Items.AllocationRowsAmount.FooterText    = Format(FooterTotalAmount    , "NFD=2;");
+	Items.AllocationRowsTaxAmount.FooterText = Format(FooterTotalTaxAmount , "NFD=2;");
 EndProcedure
 
 &AtClient
@@ -187,6 +201,81 @@ Procedure RevenueDocumentsDocumentStartChoice(Item, ChoiceData, StandardProcessi
 		Notify,
 		FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
+
+&AtClient
+Procedure RevenueDocumentsDocumentStartChoiceEnd(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+
+	CurrentData = ThisObject.Items.RevenueDocuments.CurrentData;
+	If CurrentData <> Undefined Then
+		CurrentData.Document  = Result.Document;
+		CurrentData.Currency  = Result.Currency;
+		CurrentData.Amount    = Result.Amount;
+		CurrentData.TaxAmount = Result.TaxAmount;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure RevenueDocumentsDocumentOnChange(Item)
+	CurrentData = Items.RevenueDocuments.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	If Not ValueIsFilled(CurrentData.Document) Then
+		CurrentData.Currency  = Undefined;
+		CurrentData.Amount    = Undefined;
+		CurrentData.TaxAmount = Undefined;
+		Return;
+	EndIf;
+	
+	DocData = GetDataFromDocument(CurrentData.Document);
+	CurrentData.Currency  = DocData.Currency;
+	CurrentData.Amount    = DocData.Amount;
+	CurrentData.TaxAmount = DOcData.TaxAmount;	
+EndProcedure
+
+&AtServer
+Function GetDataFromDocument(DocumentRef)
+	Query = New Query();
+	Query.Text = 	
+	"SELECT
+	|	R6080T_OtherPeriodsRevenues.Basis AS Document,
+	|	R6080T_OtherPeriodsRevenues.Company,
+	|	R6080T_OtherPeriodsRevenues.Currency,
+	|	SUM(R6080T_OtherPeriodsRevenues.AmountBalance) AS Amount,
+	|	SUM(R6080T_OtherPeriodsRevenues.AmountTaxBalance) AS TaxAmount
+	|FROM
+	|	AccumulationRegister.R6080T_OtherPeriodsRevenues.Balance(&BalancePeriod, CurrencyMovementType = &CurrencyMovementType
+	|	AND Basis = &DocumentRef) AS R6080T_OtherPeriodsRevenues
+	|GROUP BY
+	|	R6080T_OtherPeriodsRevenues.Basis,
+	|	R6080T_OtherPeriodsRevenues.Company,
+	|	R6080T_OtherPeriodsRevenues.Currency";	
+	Query.SetParameter("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
+	If ValueIsFilled(Object.Ref) And Object.Posted Then
+		BalancePeriod = New Boundary(DocumentRef.PointInTime(), BoundaryType.Excluding);
+	Else
+		BalancePeriod = CommonFunctionsServer.GetCurrentSessionDate();
+	EndIf;
+	Query.SetParameter("BalancePeriod", BalancePeriod);
+	Query.SetParameter("DocumentRef", DocumentRef);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	Result = New Structure();
+	Result.Insert("Document"  , Undefined);
+	Result.Insert("Currency"  , Undefined);
+	Result.Insert("Amount"    , Undefined);
+	Result.Insert("TaxAmount" , Undefined);
+	
+	If QuerySelection.Next() Then
+		FillPropertyValues(Result, QuerySelection);
+	EndIf;
+	Return Result;
+EndFunction
 
 &AtClient
 Procedure RevenueRowsBeforeDeleteRow(Item, Cancel)
@@ -248,23 +337,28 @@ Procedure RevenueRowsOnActivateRow(Item)
 	Items.AllocationRowsAdd.Enabled = IsSecondLevel;
 	
 	// Set visible and recalculate totals  amount
-	FooterTotalAmount = 0;
+	FooterTotalAmount    = 0;
+	FooterTotalTaxAmount = 0;
 	CurrentRowID = Undefined;
 	For Each Row_TopLevel In ThisObject.AllocationRows.GetItems() Do
-		TotalAmount = 0;
+		TotalAmount    = 0;
+		TotalTaxAmount = 0;
 		SecondLevelIsVisible = False;
 		For Each Row_SecondLevel In Row_TopLevel.GetItems() Do
 			If Row_SecondLevel.BasisRowID = CurrentData.RowID Then
 				SecondLevelIsVisible = True;
 				Row_SecondLevel.Visible = True;
-				TotalAmount = TotalAmount + Row_SecondLevel.Amount;
-				FooterTotalAmount = FooterTotalAmount + Row_SecondLevel.Amount;
+				TotalAmount    = TotalAmount    + Row_SecondLevel.Amount;
+				TotalTaxAmount = TotalTaxAmount + Row_SecondLevel.TaxAmount;
+				FooterTotalAmount    = FooterTotalAmount    + Row_SecondLevel.Amount;
+				FooterTotalTaxAmount = FooterTotalTaxAmount + Row_SecondLevel.TaxAmount;
 			Else
 				Row_SecondLevel.Visible = False;
 			EndIf;
 		EndDo;
 		Row_TopLevel.Visible = SecondLevelIsVisible;
-		Row_TopLevel.Amount = TotalAmount;
+		Row_TopLevel.Amount    = TotalAmount;
+		Row_TopLevel.TaxAmount = TotalTaxAmount;
 		If CurrentRowID = Undefined And Row_TopLevel.Visible Then
 			CurrentRowID = Row_TopLevel.GetID();
 		EndIf;
@@ -272,7 +366,8 @@ Procedure RevenueRowsOnActivateRow(Item)
 	If CurrentRowID <> Undefined Then
 		Items.AllocationRows.CurrentRow = CurrentRowID;
 	EndIf;
-	Items.AllocationRowsAmount.FooterText = Format(FooterTotalAmount, "NFD=2;");
+	Items.AllocationRowsAmount.FooterText    = Format(FooterTotalAmount   , "NFD=2;");
+	Items.AllocationRowsTaxAmount.FooterText = Format(FooterTotalTaxAmount, "NFD=2;");
 EndProcedure
 
 &AtClient
@@ -404,30 +499,37 @@ Procedure AllocateRevenueAmount(Command)
 		Return;
 	EndIf;
 	Result = AllocateRevenueAmountAtServer();
-	FooterTotalAmount = 0;
+	FooterTotalAmount    = 0;
+	FooterTotalTaxAmount = 0;
 	CurrentRowID = Undefined;
 	For Each Row_TopLevel In ThisObject.AllocationRows.GetItems() Do
 		If CurrentRowID = Undefined And Row_TopLevel.Visible Then
 			CurrentRowID = Row_TopLevel.GetID();
 		EndIf;
-		TotalAmount = 0;
+		TotalAmount    = 0;
+		TotalTaxAmount = 0;
 		For Each Row_SecondLevel In Row_TopLevel.GetItems() Do
 			For Each Row In Result.ArrayOfAllocatedAmounts Do
 				If Row_SecondLevel.BasisRowID = Row.BasisRowID
 				 	And Row_SecondLevel.RowID = Row.RowID Then
-						Row_SecondLevel.Amount = Row.Amount;
-						TotalAmount = TotalAmount + Row.Amount;
-						FooterTotalAmount = FooterTotalAmount + Row.Amount;
+						Row_SecondLevel.Amount    = Row.Amount;
+						Row_SecondLevel.TaxAmount = Row.TaxAmount;
+						TotalAmount    = TotalAmount    + Row.Amount;
+						TotalTaxAmount = TotalTaxAmount + Row.TaxAmount;
+						FooterTotalAmount    = FooterTotalAmount    + Row.Amount;
+						FooterTotalTaxAmount = FooterTotalTaxAmount + Row.TaxAmount;
 					Break;
 				EndIf;
 			EndDo;
 		EndDo; // Second level
-		Row_TopLevel.Amount = TotalAmount;
+		Row_TopLevel.Amount    = TotalAmount;
+		Row_TopLevel.TaxAmount = TotalTaxAmount;
 	EndDo; // Top level
 	If CurrentRowID <> Undefined Then
 		Items.AllocationRows.CurrentRow = CurrentRowID;
 	EndIf;
-	Items.AllocationRowsAmount.FooterText = Format(FooterTotalAmount, "NFD=2;");
+	Items.AllocationRowsAmount.FooterText    = Format(FooterTotalAmount, "NFD=2;");
+	Items.AllocationRowsTaxAmount.FooterText = Format(FooterTotalTaxAmount, "NFD=2;");
 	UpdateAllocatedStatus();
 EndProcedure
 
@@ -436,16 +538,20 @@ Procedure UpdateAllocatedStatus()
 	For Each RowLevel1 In ThisObject.RevenueRows.GetItems() Do
 		For Each RowLevel2 In RowLevel1.GetItems() Do
 			
-			AmountByRows = 0;
+			AmountByRows    = 0;
+			TaxAmountByRows = 0;
+			
 			For Each RowAlloclv1 In ThisObject.AllocationRows.GetItems() Do
 				For Each RowAlloclv2 In RowAlloclv1.GetItems() Do
 					If RowLevel2.RowID = RowAlloclv2.BasisRowID Then
-						AmountByRows = AmountByRows + RowAlloclv2.Amount;
+						AmountByRows    = AmountByRows    + RowAlloclv2.Amount;
+						TaxAmountByRows = TaxAmountByRows + RowAlloclv2.TaxAmount;
 					EndIf;
 				EndDo;	
 			EndDo;
 			
-			If AmountByRows = RowLevel2.Amount Then
+			If AmountByRows = RowLevel2.Amount
+				And TaxAmountByRows = RowLevel2.TaxAmount Then
 				RowLevel2.Icon = 2;
 			EndIf;
 			
@@ -475,27 +581,46 @@ Function AllocateRevenueAmountAtServer()
 			Continue;
 		EndIf;
 		
-		TotalAllocated = 0;
-		MaxRow = Undefined;
+		TotalAllocated    = 0;
+		TotalTaxAllocated = 0;
+		MaxRow    = Undefined;
+		MaxRowTax = Undefined;
 	
 		For Each Row_BatchKeyInfo In BatchKeyInfoTable Do
 			Amount = (Row_RevenueList.Amount / Total) * Row_BatchKeyInfo[ColumnName];
 			Amount = Round(Amount, 2 , RoundMode.Round15as10);
-			TotalAllocated = TotalAllocated + Amount;
 			
-			AllocatedAmount = New Structure("BasisRowID, RowID, Amount", Row_RevenueList.RowID, Row_BatchKeyInfo.RowID, Amount);
+			TaxAmount = (Row_RevenueList.TaxAmount / Total) * Row_BatchKeyInfo[ColumnName];
+			TaxAmount = Round(TaxAmount, 2 , RoundMode.Round15as10);
+			
+			TotalAllocated    = TotalAllocated    + Amount;
+			TotalTaxAllocated = TotalTaxAllocated + TaxAmount;
+			
+			AllocatedAmount = New Structure("BasisRowID, RowID, Amount, TaxAmount", 
+				Row_RevenueList.RowID, Row_BatchKeyInfo.RowID, Amount, TaxAmount);
+			
 			Result.ArrayOfAllocatedAmounts.Add(AllocatedAmount);
 			
-			AllocationListRows = Object.AllocationList.FindRows(New Structure("BasisRowID, RowID", Row_RevenueList.RowID, Row_BatchKeyInfo.RowID));
+			AllocationListRows = Object.AllocationList.FindRows(New Structure("BasisRowID, RowID",
+				Row_RevenueList.RowID, Row_BatchKeyInfo.RowID));
 			
 			If AllocationListRows.Count() Then
-				AllocationListRows[0].Amount = Amount;
+				AllocationListRows[0].Amount    = Amount;
+				AllocationListRows[0].TaxAmount = TaxAmount;
 			
 				If MaxRow = Undefined Then
 					MaxRow = AllocationListRows[0];
 				Else
 					If MaxRow.Amount < AllocationListRows[0].Amount Then
 						MaxRow = AllocationListRows[0];
+					EndIf;
+				EndIf;
+				
+				If MaxRowTax = Undefined Then
+					MaxRowTax = AllocationListRows[0];
+				Else
+					If MaxRowTax.TaxAmount < AllocationListRows[0].TaxAmount Then
+						MaxRowTax = AllocationListRows[0];
 					EndIf;
 				EndIf;
 				
@@ -508,6 +633,16 @@ Function AllocateRevenueAmountAtServer()
 			For Each Row In Result.ArrayOfAllocatedAmounts Do
 				If Row.BasisRowID = MaxRow.BasisRowID And Row.RowID = MaxRow.RowID Then
 					Row.Amount = MaxRow.Amount;
+					Break;
+				EndIf;
+			EndDo;
+		EndIf;
+		
+		If Row_RevenueList.TaxAmount <> TotalTaxAllocated And MaxRowTax <> Undefined Then
+			MaxRowTax.TaxAmount = MaxRowTax.TaxAmount + (Row_RevenueList.TaxAmount - TotalTaxAllocated);
+			For Each Row In Result.ArrayOfAllocatedAmounts Do
+				If Row.BasisRowID = MaxRow.BasisRowID And Row.RowID = MaxRow.RowID Then
+					Row.TaxAmount = MaxRow.TaxAmount;
 					Break;
 				EndIf;
 			EndDo;
@@ -560,20 +695,6 @@ Function GetBatchKeyInfo(FilterTable)
 	QueryTable = QueryResult.Unload();
 	Return QueryTable;
 EndFunction
-
-&AtClient
-Procedure RevenueDocumentsDocumentStartChoiceEnd(Result, AdditionalParameters) Export
-	If Result = Undefined Then
-		Return;
-	EndIf;
-
-	CurrentData = ThisObject.Items.RevenueDocuments.CurrentData;
-	If CurrentData <> Undefined Then
-		CurrentData.Document = Result.Document;
-		CurrentData.Currency = Result.Currency;
-		CurrentData.Amount   = Result.Amount;
-	EndIf;
-EndProcedure
 
 &AtClient
 Procedure RevenueDocumentsAfterDeleteRow(Item)

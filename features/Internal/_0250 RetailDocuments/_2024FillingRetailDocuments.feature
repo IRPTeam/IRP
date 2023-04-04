@@ -268,10 +268,8 @@ Scenario: _0154135 create document Retail Sales Receipt
 	* Check filling in prices and calculate taxes when adding items via barcode search
 		* Add item via barcodes
 			And in the table "ItemList" I click "SearchByBarcode" button
-			And I input "2202283739" text in "InputFld" field
-			And Delay 4
-			And I click "OK" button
-			And Delay 4
+			And I input "2202283739" text in the field named "Barcode"
+			And I move to the next attribute		
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Tax amount' | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -674,8 +672,8 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		And In the command interface I select "Retail" "Point of sale"
 	* Add product (scan)
 		And I click "Search by barcode (F7)" button
-		And I input "2202283739" text in "InputFld" field
-		And I click "OK" button
+		And I input "2202283739" text in the field named "Barcode"
+		And I move to the next attribute
 		And "ItemList" table became equal
 			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
@@ -716,7 +714,7 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 			| 'Payment type' | 'Amount'   |
 			| 'Cash'         | '2 051,00' |
 		Then the form attribute named "Cashback" became equal to "1"
-		And I click "Enter" button
+		And I click "OK" button
 		And "ItemList" table does not contain lines
 			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''       | '550,00' |
@@ -771,8 +769,8 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 		And In the command interface I select "Retail" "Point of sale"
 	* Add product (scan)
 		And I click "Search by barcode (F7)" button
-		And I input "2202283739" text in "InputFld" field
-		And I click "OK" button
+		And I input "2202283739" text in the field named "Barcode"
+		And I move to the next attribute
 		And "ItemList" table became equal
 			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
@@ -807,7 +805,10 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
 		// And I click "[2] Card 01" button	
-		And I click the hyperlink named "Page_1"			
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 01'   |
+		And I select current line in "BankPaymentTypeList" table		
 		And I click "2" button
 		And I click "0" button
 		And I click "5" button
@@ -816,7 +817,7 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 		And "Payments" table became equal
 			| 'Payment type'    | 'Amount'   |
 			| 'Card 01'         | '2 050,00' |
-		And I click "Enter" button
+		And I click "OK" button
 		And Delay 4
 		And "ItemList" table does not contain lines
 			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
@@ -1070,7 +1071,10 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I click "8" button
 			And I click "8" button
 			And I click "Card (*)" button
-			And I click the hyperlink named "Page_1"
+			And I go to line in "BankPaymentTypeList" table
+				| 'Reference' |
+				| 'Card 01'   |
+			And I select current line in "BankPaymentTypeList" table
 			And I click "1" button
 			And I click "0" button
 			And I click "0" button
@@ -1156,8 +1160,10 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Payment type' |
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
-				And I click "Card (*)" button
-				And I click the hyperlink named "Page_1"
+				And I go to line in "BankPaymentTypeList" table
+					| 'Reference' |
+					| 'Card 01'   |
+				And I select current line in "BankPaymentTypeList" table
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
@@ -1176,8 +1182,10 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Payment type' |
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
-				And I click "Card (*)" button
-				And I click the hyperlink named "Page_1"
+				And I go to line in "BankPaymentTypeList" table
+					| 'Reference' |
+					| 'Card 01'   |
+				And I select current line in "BankPaymentTypeList" table
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
@@ -1199,8 +1207,10 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Payment type' |
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
-				And I click "Card (*)" button
-				And I click the hyperlink named "Page_1"
+				And I go to line in "BankPaymentTypeList" table
+					| 'Reference' |
+					| 'Card 01'   |
+				And I select current line in "BankPaymentTypeList" table
 				And I click "5" button
 				And I click "6" button
 				And I click "0" button
@@ -1403,7 +1413,7 @@ Scenario: _0154139 check payments form in the Point of sale
 				| 'Payment type' | 'Amount'   |
 				| 'Cash'         | '0,10' |
 			Then the form attribute named "Cashback" became equal to "0,01"
-			And I click "Enter" button
+			And I click "OK" button
 		And I close all client application windows
 		
 Scenario: _0154140 check filling in retail customer from the POS (without partner)
@@ -1429,7 +1439,7 @@ Scenario: _0154140 check filling in retail customer from the POS (without partne
 	* Payment
 		And I click "Payment (+)" button
 		And I click "Cash (/)" button
-		And I click "Enter" button
+		And I click "OK" button
 	* Check Retail Sales Receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to the last line in "List" table
@@ -1514,8 +1524,8 @@ Scenario: _0154141 manual price adjustment in the POS
 		And In the command interface I select "Retail" "Point of sale"
 	* Add product
 		And I click "Search by barcode (F7)" button
-		And I input "2202283739" text in "InputFld" field
-		And I click "OK" button
+		And I input "2202283739" text in the field named "Barcode"
+		And I move to the next attribute
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
@@ -1541,8 +1551,8 @@ Scenario: _0154141 manual price adjustment in the POS
 		And I finish line editing in "ItemList" table
 	* Add one more items and check price filling
 		And I click "Search by barcode (F7)" button
-		And I input "2202283713" text in "InputFld" field
-		And I click "OK" button
+		And I input "2202283713" text in the field named "Barcode"
+		And I move to the next attribute
 		And "ItemList" table contains lines
 			| 'Item'     | 'Item key'  | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress'    | 'L/Green'   | '1,000'    | '550,00' | ''       | '550,00' |
@@ -1589,7 +1599,7 @@ Scenario:  _0154142 change comment in POS
 	* Payment
 		And I click "Payment (+)" button
 		And I click "Cash (/)" button
-		And I click "Enter" button
+		And I click "OK" button
 	* Check Retail Sales Receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to the last line in "List" table
@@ -1654,7 +1664,7 @@ Scenario:  _0154143 change payment term in POS
 	* Payment
 		And I click "Payment (+)" button
 		And I click "Cash (/)" button
-		And I click "Enter" button
+		And I click "OK" button
 	* Check Retail Sales Receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to the last line in "List" table
@@ -2603,10 +2613,8 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 	* Check filling in prices and calculate taxes when adding items via barcode search
 		* Add item via barcodes
 			And I click "SearchByBarcode" button
-			And I input "2202283739" text in "InputFld" field
-			And Delay 4
-			And I click "OK" button
-			And Delay 4
+			And I input "2202283739" text in the field named "Barcode"
+			And I move to the next attribute
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -2927,10 +2935,8 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 	* Check filling in prices and calculate taxes when adding items via barcode search
 		* Add item via barcodes
 			And in the table "ItemList" I click "SearchByBarcode" button
-			And I input "2202283739" text in "InputFld" field
-			And Delay 4
-			And I click "OK" button
-			And Delay 4
+			And I input "2202283739" text in the field named "Barcode"
+			And I move to the next attribute
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
@@ -3823,14 +3829,14 @@ Scenario: _0154175 check change amount in POS
 		And In the command interface I select "Retail" "Point of sale"
 	* Add product (scan)
 		And I click "Search by barcode (F7)" button
-		And I input "2202283739" text in "InputFld" field
-		And I click "OK" button
+		And I input "2202283739" text in the field named "Barcode"
+		And I move to the next attribute
 		And "ItemList" table became equal
 			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
 		And I click "Search by barcode (F7)" button
-		And I input "2202283713" text in "InputFld" field
-		And I click "OK" button
+		And I input "2202283713" text in the field named "Barcode"
+		And I move to the next attribute
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Offers' | 'Total'  |
 			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | ''       | '550,00' |
@@ -3850,7 +3856,7 @@ Scenario: _0154175 check change amount in POS
 		And I click "0" button
 		And I click "5" button
 		And I click "0" button
-		And I click "Enter" button
+		And I click "OK" button
 		And I close current window
 		And Delay 2
 	* Check Retail Sales Receipt
@@ -3903,7 +3909,7 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 	* Payment
 		And I click "Payment (+)" button
 		And I click "Cash (/)" button
-		And I click "Enter" button
+		And I click "OK" button
 	* Check Retail Sales Receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to the last line in "List" table
@@ -4076,25 +4082,23 @@ Scenario: _0154192 create document Retail Sales Receipt from Point of sale (paym
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
 	* Select payment type from group					
-		Then "Payment types" window is opened
-		And I click the hyperlink named "Page_0"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 01'   |
+		And I select current line in "BankPaymentTypeList" table
+		And I click "2" button
+		And I click "0" button
+		And I click "0" button
 		And I move to the next attribute		
-		And I click "[0]" button
-		And I click "[Esc]" button
-		And I click "Card (*)" button
-		And I click the hyperlink named "Page_0"	
-		And I click the hyperlink named "PayButton_0_0"
-		Then "Payment" window is opened
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 02'   |
+		And I select current line in "BankPaymentTypeList" table	
 		And I click "2" button
 		And I click "0" button
 		And I click "0" button
-		And I click "Card (*)" button
-		And I click the hyperlink named "Page_1"	
-		Then "Payment" window is opened
-		And I click "2" button
-		And I click "0" button
-		And I click "0" button
-		And I click the button named "Enter"
+		And I move to the next attribute
+		And I click "OK" button
 		And I close all client application windows
 		
 Scenario: _0154193 check print last receipt from POS
@@ -4181,8 +4185,8 @@ Scenario: _0154195 set sales person from POS
 				| 'Anna Petrova' |
 			And I select current line in "" table
 			And I click "Search by barcode (F7)" button
-			And I input "2202283739" text in the field named "InputFld"
-			And I click the button named "OK"
+			And I input "2202283739" text in the field named "Barcode"
+			And I move to the next attribute
 			And I click "Set sales person" button
 			And I go to line in "" table
 				| 'Column1'       |

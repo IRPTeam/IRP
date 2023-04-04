@@ -17,9 +17,9 @@
 Function ItemPriceInfoByTable(TableItemKeys, Period, AddInfo = Undefined) Export
 
 	TableOfResults = GetTableOfResults();
-	TableWithSpecification = TableOfResults.CopyColumns();
+	TableWithSpecification = TableOfResults.CopyColumns(); // See GetTableOfResults
 
-	TableWithOutSpecification = TableOfResults.CopyColumns();
+	TableWithOutSpecification = TableOfResults.CopyColumns(); // See GetTableOfResults
 
 	For Each Row In TableItemKeys Do
 		If Row.hasSpecification Then
@@ -45,13 +45,13 @@ Function ItemPriceInfoByTable(TableItemKeys, Period, AddInfo = Undefined) Export
 	FillTableOfResults(QuerySelection, TableWithSpecification, TableOfResults);
 
 	TableWithOutSpecification.GroupBy("ItemKey, PriceType, Unit, ItemUnit, ItemKeyUnit");
-	TableWithOutSpecification.Columns.Add("ToUnit");
+	TableWithOutSpecification.Columns.Add("ToUnit", New TypeDescription("CatalogRef.Units"));
 	
 	TableWithOutSpecificationCopy = TableWithOutSpecification.Copy();
 	TableWithOutSpecificationCopy.GroupBy("ItemKey, PriceType, Unit");
 	QuerySelection = QueryByItemPriceInfo(TableWithOutSpecificationCopy, Period);
     QuerySelection.Reset();
-    ArrayForDelete = New Array();
+    ArrayForDelete = New Array(); // Array of ValueTableRow
     For Each Row In TableWithOutSpecification Do
     	Filter = New Structure();
     	Filter.Insert("ItemKey"   , Row.ItemKey);
@@ -99,6 +99,7 @@ EndFunction
 // * ItemUnit - CatalogRef.Units -
 // * Price - DefinedType.typePrice -
 // * hasSpecification - Boolean -
+// * ToUnit - CatalogRef.Units -
 Function GetTableOfResults()
 	TableOfResults = New ValueTable();
 	TableOfResults.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
@@ -181,10 +182,15 @@ EndProcedure
 // * ItemKey - CatalogRef.ItemKeys -
 // * PriceType - CatalogRef.PriceTypes -
 Function ItemPriceInfo(Parameters, AddInfo = Undefined) Export
+	PriceType = ?(Parameters.Property("RowPriceType"), Parameters.RowPriceType, Parameters.PriceType);
+	Return ServerReuse.ItemPriceInfo(Parameters.Period, Parameters.ItemKey, Parameters.Unit, PriceType);
+EndFunction
+
+Function _ItemPriceInfo(Parameter_Period, Parameter_ItemKey, Parameter_Unit, Parameter_PriceType) Export
 	Result = New Structure("ItemKey, PriceType, Price");
 	
-	ItemKeyUnit = Parameters.ItemKey.Unit;
-	ItemUnit = Parameters.ItemKey.Item.Unit;
+	ItemKeyUnit = Parameter_ItemKey.Unit;
+	ItemUnit = Parameter_ItemKey.Item.Unit;
 	BasisUnit = ?(ValueIsFilled(ItemKeyUnit), ItemKeyUnit, ItemUnit);
 	
 	ItemTable = New ValueTable();
@@ -192,25 +198,25 @@ Function ItemPriceInfo(Parameters, AddInfo = Undefined) Export
 	ItemTable.Columns.Add("PriceType" , New TypeDescription("CatalogRef.PriceTypes"));
 	
 	ItemTableRow = ItemTable.Add();
-	ItemTableRow.ItemKey   = Parameters.ItemKey;
-	ItemTableRow.PriceType = ?(Parameters.Property("RowPriceType"), Parameters.RowPriceType, Parameters.PriceType);
+	ItemTableRow.ItemKey   = Parameter_ItemKey;
+	ItemTableRow.PriceType = Parameter_PriceType;
 	
 	Result.ItemKey   = ItemTableRow.ItemKey;
 	Result.PriceType = ItemTableRow.PriceType;
 	Result.Price     = 0;
 	
-	If ValueIsFilled(Parameters.ItemKey.Specification) Then
-		QuerySelection = QueryByItemPriceInfo_Specification(ItemTable, Parameters.Period);
+	If ValueIsFilled(Parameter_ItemKey.Specification) Then
+		QuerySelection = QueryByItemPriceInfo_Specification(ItemTable, Parameter_Period);
 		If QuerySelection.Next() Then
 			FillPropertyValues(Result, QuerySelection);
-			Return MultiplyPriceByUnitFactor(Result, Parameters.Unit, BasisUnit);
+			Return MultiplyPriceByUnitFactor(Result, Parameter_Unit, BasisUnit);
 		EndIf;
 	EndIf;
 
 	ItemTable.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
-	ItemTable[0].Unit = Parameters.Unit;
+	ItemTable[0].Unit = Parameter_Unit;
 		
-	QuerySelection = QueryByItemPriceInfo(ItemTable, Parameters.Period);
+	QuerySelection = QueryByItemPriceInfo(ItemTable, Parameter_Period);
 	
 	If QuerySelection.Next() Then
 		FillPropertyValues(Result, QuerySelection);
@@ -220,10 +226,10 @@ Function ItemPriceInfo(Parameters, AddInfo = Undefined) Export
 	EndIf;	
 			
 	ItemTable[0].Unit = BasisUnit;
-	QuerySelection = QueryByItemPriceInfo(ItemTable, Parameters.Period);
+	QuerySelection = QueryByItemPriceInfo(ItemTable, Parameter_Period);
 	If QuerySelection.Next() Then
 		FillPropertyValues(Result, QuerySelection);
-		Return MultiplyPriceByUnitFactor(Result, Parameters.Unit, BasisUnit);
+		Return MultiplyPriceByUnitFactor(Result, Parameter_Unit, BasisUnit);
 	EndIf;
 	
 	Return Result;
@@ -479,6 +485,28 @@ Function QueryByItemPriceInfo_Specification(ItemList, Period, AddInfo = Undefine
 	Return QuerySelection;
 EndFunction
 
+// Query by item price info.
+// 
+// Parameters:
+//  ItemList - ValueTable - Item list:
+// * ItemKey - CatalogRef.ItemKeys -
+// * PriceType - CatalogRef.PriceTypes -
+// * Unit - CatalogRef.Units -
+//  Period - Date - Period
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  QueryResultSelection - Query by item price info:
+//	* ItemKey - CatalogRef.ItemKeys -
+//	* Specification - CatalogRef.ItemKeys -
+//	* AffectPricingMD5 - String -
+//	* Item - CatalogRef.ItemKeys -
+//	* Unit - CatalogRef.ItemKeys -
+//	* PriceType - CatalogRef.ItemKeys -
+//	* PriceByItemKeys - DefinedType.typePrice
+//	* PriceByProperties - DefinedType.typePrice
+//	* PriceByItems - DefinedType.typePrice
+//	* Price - DefinedType.typePrice
 Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 
 	Query = New Query();
@@ -691,7 +719,7 @@ EndFunction
 // Get info by Items key.
 // Parameters:
 //	ItemsKey - CatalogRef.ItemKeys, Array of CatalogRef.ItemKeys -
-//	AddInfo - Structure -
+//	Agreement - CatalogRef.Agreements -
 // 
 // Returns:
 //  Array of Structure:
@@ -706,7 +734,7 @@ EndFunction
 // * Barcode  - DefinedType.typeBarcode
 // * ItemType - CatalogRef.ItemTypes -
 // * UseSerialLotNumber - Boolean -
-Function GetInfoByItemsKey(ItemsKey, AddInfo = Undefined) Export
+Function GetInfoByItemsKey(ItemsKey, Agreement = Undefined) Export
 	ItemKeyArray = New Array;
 	If TypeOf(ItemsKey) = Type("Array") Then
 		ItemKeyArray = ItemsKey;
@@ -719,12 +747,13 @@ Function GetInfoByItemsKey(ItemsKey, AddInfo = Undefined) Export
 	Query.Text = "SELECT
 	|	ItemKey.Ref AS ItemKey,
 	|	ItemKey.Item AS Item,
+	|	&PriceType AS PriceType,
 	|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
 	|	VALUE(Catalog.SourceOfOrigins.EmptyRef) AS SourceOfOrigin,
-	|	CASE WHEN ItemKey.Unit = VALUE(Catalog.Units.EmptyRef) THEN
-	|		ItemKey.Item.Unit
-	|	ELSE
-	|		ItemKey.Unit
+	|	CASE
+	|		WHEN ItemKey.Unit = VALUE(Catalog.Units.EmptyRef)
+	|			THEN ItemKey.Item.Unit
+	|		ELSE ItemKey.Unit
 	|	END AS Unit,
 	|	1 AS Quantity,
 	|	ItemKey.Unit AS ItemKeyUnit,
@@ -733,12 +762,16 @@ Function GetInfoByItemsKey(ItemsKey, AddInfo = Undefined) Export
 	|	"""" AS Barcode,
 	|	ItemKey.Item.ItemType AS ItemType,
 	|	ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
-	|	ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService
+	|	ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
+	|	ItemKey.Item.ItemType.AlwaysAddNewRowAfterScan AS AlwaysAddNewRowAfterScan
 	|FROM
 	|	Catalog.ItemKeys AS ItemKey
 	|WHERE
 	|	ItemKey.Ref In (&ItemKeyArray)";
 	Query.SetParameter("ItemKeyArray", ItemKeyArray);
+	PriceType = ?(ValueIsFilled(Agreement), Agreement.PriceType, Undefined);
+	Query.SetParameter("PriceType", PriceType);
+	
 	QueryExecution = Query.Execute();
 	If QueryExecution.IsEmpty() Then
 		Return ReturnValue;

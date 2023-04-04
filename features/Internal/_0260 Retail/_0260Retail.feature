@@ -241,8 +241,10 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 		And I finish line editing in "ItemList" table
 		And I click "Payment (+)" button
 		And I click "Card (*)" button
-		Then "Payment types" window is opened
-		And I click the hyperlink named "Page_0"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 02'   |
+		And I select current line in "BankPaymentTypeList" table	
 		And I click the button named "Enter"
 	* Create second RSR (card)
 		And I go to line in "ItemsPickup" table
@@ -260,8 +262,10 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 		And I click "Payment (+)" button
 		Then "Payment" window is opened
 		And I click "Card (*)" button
-		Then "Payment types" window is opened
-		And I click the hyperlink named "Page_0"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 01'   |
+		And I select current line in "BankPaymentTypeList" table	
 		Then "Payment" window is opened
 		And I click the button named "Enter"
 	* Create third RSR (card)
@@ -280,9 +284,10 @@ Scenario: _0260107 create RSR and check Consolidated retail sales filling
 		And I click "Payment (+)" button
 		Then "Payment" window is opened
 		And I click "Card (*)" button
-		Then "Payment types" window is opened
-		And I click the hyperlink named "Page_1"
-		Then "Payment" window is opened
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 02'   |
+		And I select current line in "BankPaymentTypeList" table	
 		And I click the button named "Enter"
 	* Create first RSR (cash)
 		And I go to line in "ItemsPickup" table
@@ -653,7 +658,10 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 		And I click the button named "Advance"
 		Then "Payment" window is opened
 		And I click "Card (*)" button
-		And I click the hyperlink named "Page_1"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 01'   |
+		And I select current line in "BankPaymentTypeList" table	
 		And I click "1" button
 		And I click "0" button
 		And I click "0" button
@@ -708,12 +716,14 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 			| 'Advance'      | '500,00' |
 		Then "Payment" window is opened
 		And I click "Card (*)" button
-		Then "Payment types" window is opened
-		And I click the hyperlink named "Page_0"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 01'   |
+		And I select current line in "BankPaymentTypeList" table	
 		And "Payments" table became equal
 			| 'Payment type' | 'Amount' |
 			| 'Advance'      | '500,00' |
-			| 'Card 02'      | '20,00'  |
+			| 'Card 01'      | '20,00'  |
 		And I click the button named "Enter"
 		And Delay 2
 	* Check RSR
@@ -726,7 +736,7 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 		And "Payments" table became equal
 			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term'    | 'Account'        | 'Percent' |
 			| '1' | '500,00' | ''           | 'Advance'      | ''                 | ''             | ''               | ''        |
-			| '2' | '20,00'  | '0,40'       | 'Card 02'      | ''                 | 'Bank term 02' | 'Transit Second' | '2,00'    |
+			| '2' | '20,00'  | '0,20'       | 'Card 01'      | ''                 | 'Bank term 02' | 'Transit Main'   | '1,00'    |
 		And I close all client application windows
 		
 				
@@ -857,7 +867,10 @@ Scenario: _02601381 create advance return from POS
 		And I click the button named "Advance"
 		Then the form attribute named "Advance" became equal to "400"
 		And I click "Card (*)" button
-		And I click the hyperlink named "Page_0"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 01'   |
+		And I select current line in "BankPaymentTypeList" table	
 		And I click "7" button
 		And I click "7" button
 		And I click "Cash (/)" button
@@ -937,12 +950,12 @@ Scenario: _0260139 create RRR from POS (first select basis document)
 		And "Payments" table became equal
 			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Postponed payment' | 'Bank term' | 'Account'            | 'Percent' |
 			| '1' | '720,00' | ''           | 'Cash'         | ''                 | 'No'                | ''          | 'Pos cash account 1' | ''        |
-		
+		And in the table "ItemList" I click "Open serial lot number tree" button
 		And "SerialLotNumbersTree" table became equal
 			| 'Item'               | 'Item key' | 'Serial lot number' | 'Item key quantity' | 'Quantity' |
 			| 'Product 1 with SLN' | 'ODS'      | ''                  | '2,000'             | '2,000'    |
 			| ''                   | ''         | '9090098908'        | ''                  | '2,000'    |
-		
+		And I close "Serial lot numbers tree" window	
 		Then the form attribute named "Workstation" became equal to "Workstation 01"
 		Then the form attribute named "Branch" became equal to "Shop 02"
 		Then the form attribute named "Currency" became equal to "TRY"
@@ -977,7 +990,10 @@ Scenario: _02601391 create RRR from POS (first select basis document, different 
 	* Post return
 		And I click "Payment Return" button		
 		And I click "Card (*)" button
-		And I click the hyperlink named "Page_1"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 01'   |
+		And I select current line in "BankPaymentTypeList" table	
 		And I click the button named "Enter"
 	* Check return document
 		And I close current window
@@ -1001,14 +1017,14 @@ Scenario: _02601391 create RRR from POS (first select basis document, different 
 		And "Payments" table became equal
 			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Postponed payment' | 'Bank term'    | 'Account'      | 'Percent' |
 			| '1' | '750,00' | ''           | 'Card 01'      | ''                 | 'No'                | 'Bank term 02' | 'Transit Main' | '1,00'    |
-		
+		And in the table "ItemList" I click "Open serial lot number tree" button
 		And "SerialLotNumbersTree" table became equal
 			| 'Item'               | 'Item key' | 'Serial lot number' | 'Item key quantity' | 'Quantity' |
 			| 'Product 1 with SLN' | 'ODS'      | ''                  | '2,000'             | '2,000'    |
 			| ''                   | ''         | '9090098908'        | ''                  | '2,000'    |
 			| 'Product 3 with SLN' | 'UNIQ'     | ''                  | '1,000'             | '1,000'    |
 			| ''                   | ''         | '09987897977891'    | ''                  | '1,000'    |
-		
+		And I close "Serial lot numbers tree" window	
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "Workstation" became equal to "Workstation 01"
 		Then the form attribute named "Branch" became equal to "Shop 02"
@@ -1026,8 +1042,8 @@ Scenario: _0260140 create RRR from POS (add items than select basis document)
 	* Select items
 		And I move to the tab named "ButtonPage"
 		And I click "Search by barcode (F7)" button
-		And I input "2202283705" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
 		And I click "Show items" button
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
@@ -1052,7 +1068,10 @@ Scenario: _0260140 create RRR from POS (add items than select basis document)
 	* Post return
 		And I click "Payment Return" button		
 		And I click "Card (*)" button
-		And I click the hyperlink named "Page_1"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 01'   |
+		And I select current line in "BankPaymentTypeList" table	
 		And I click the button named "Enter"
 	* Check return document
 		And I close current window
@@ -1092,8 +1111,8 @@ Scenario: _0260141 return from POS (without basis document)
 	* Select items
 		And I move to the tab named "ButtonPage"
 		And I click "Search by barcode (F7)" button
-		And I input "2202283705" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
 		And I click "Show items" button
 		And I expand current line in "ItemsPickup" table
 		And I go to line in "ItemsPickup" table
@@ -1105,7 +1124,10 @@ Scenario: _0260141 return from POS (without basis document)
 	* Post return
 		And I click "Payment Return" button
 		And I click "Card (*)" button
-		And I click the hyperlink named "Page_1"
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 01'   |
+		And I select current line in "BankPaymentTypeList" table	
 		Then "Payment" window is opened
 		And I click "1" button
 		And I click "0" button
@@ -1223,16 +1245,16 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			Then "Terminals: Session closing" window is opened
 			And I go to line in "TerminalTable" table
 				| 'In Base'  | 'Operation' | 'Payment type' |
-				| '4 790,00' | 'Sales'     | 'Card 02'      |
+				| '4 770,00' | 'Sales'     | 'Card 02'      |
 			And I activate "In Terminal" field in "TerminalTable" table
 			And I select current line in "TerminalTable" table
 			And I input "4 770,00" text in "In Terminal" field of "TerminalTable" table
 			And I finish line editing in "TerminalTable" table
 			And I go to line in "TerminalTable" table
 				| 'In Base'  | 'Operation' | 'Payment type' |
-				| '3 180,00' | 'Sales'     | 'Card 01'      |
+				| '3 200,00' | 'Sales'     | 'Card 01'      |
 			And I select current line in "TerminalTable" table
-			And I input "3 180,00" text in "In Terminal" field of "TerminalTable" table
+			And I input "3 200,00" text in "In Terminal" field of "TerminalTable" table
 			And I finish line editing in "TerminalTable" table
 			And I go to line in "TerminalTable" table
 				| 'In Base' | 'Operation' | 'Payment type' |
@@ -1293,8 +1315,8 @@ Scenario: _0260135 close session and check Consolidated retail sales filling
 			| '#' | 'Amount'   | 'Is return' | 'Payment type' | 'Payment terminal' | 'Real amount' |
 			| '1' | '7 550,00' | 'No'        | 'Cash'         | ''                 | '7 550,00'    |
 			| '2' | '2 900,00' | 'Yes'       | 'Cash'         | ''                 | '2 900,02'    |
-			| '3' | '3 180,00' | 'No'        | 'Card 01'      | ''                 | '3 180,00'    |
-			| '4' | '4 790,00' | 'No'        | 'Card 02'      | ''                 | '4 770,00'    |
+			| '3' | '3 200,00' | 'No'        | 'Card 01'      | ''                 | '3 200,00'    |
+			| '4' | '4 770,00' | 'No'        | 'Card 02'      | ''                 | '4 770,00'    |
 			| '5' | '2 790,00' | 'Yes'       | 'Card 01'      | ''                 | ''            |
 			| '6' | '550,00'   | 'Yes'       | 'Card 02'      | ''                 | '550,00'      |
 		And I close all client application windows		

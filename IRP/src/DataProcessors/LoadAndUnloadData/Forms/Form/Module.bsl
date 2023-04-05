@@ -13,10 +13,32 @@ Procedure FindRefAtServer()
 	FoundRefList.Clear();
 	For Each Row In RefList Do
 		NewRow = FoundRefList.Add();
-		NewRow.Ref = Row.Data;
-		NewRow.MetadataName = String(Row.Metadata);
+		
+		NewRow.MetadataName = String(Row.Metadata.FullName());
+		
+		If Not MetadataInfo.hasRef(NewRow.MetadataName) Then
+			NewRow.Filter = CommonFunctionsServer.SerializeJSONUseXDTO(Row.Data);
+		Else
+			//@skip-check statement-type-change
+			NewRow.Ref = Row.Data;
+		EndIf;
+		
 	EndDo;
 EndProcedure
+
+&AtClient
+Procedure OpenRef(Command)
+	CurrentData = Items.FoundRefList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	If Not IsBlankString(CurrentData.Filter) Then
+		FilterData = CommonFunctionsServer.DeserializeJSONUseXDTO(CurrentData.Filter); // InformationRegisterRecordKeyInformationRegisterName
+		OpenForm(CurrentData.MetadataName + ".RecordForm", New Structure("Key", FilterData));
+	EndIf;
+EndProcedure
+
 
 &AtClient
 Function GetAllWindows()
@@ -100,14 +122,8 @@ EndProcedure
 &AtServerNoContext
 Function SerializeAtServer(ArrayRef)
 	ArrayOfObjects = New Array; // Array of Arbitrary
-	isRef = False;
 	MetadataData = ArrayRef[0].Metadata(); // MetadataObject
-	For Each Attr In MetadataData.StandardAttributes Do
-		If Attr.Name = "Ref" Then
-			isRef = True;
-		EndIf;
-	EndDo;
-	
+	isRef = MetadataInfo.hasRef(MetadataData.FullName());
 	For Each Row In ArrayRef Do
 		If isRef Then
 			ArrayOfObjects.Add(Row.GetObject());

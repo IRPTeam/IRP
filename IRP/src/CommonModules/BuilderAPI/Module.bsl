@@ -396,18 +396,9 @@ Function SetRowTaxRate(Wrapper, Row, Tax, TaxRate, TableName) Export
 	EndIf;
 	
 	//@skip-check property-return-type
-	Parameters.Rows[0][TaxInfo.Name] = TaxRate;
-	Parameters.FormTaxColumnsExists = True;
-	
-	Parameters.Cache.Insert(TableName, New Array());
-		
-	NewCacheRow = New Structure();
-	NewCacheRow.Insert("Key", Row.Key);
-	//@skip-check property-return-type
-	//@skip-check invocation-parameter-type-intersect
-	NewCacheRow.Insert(TaxInfo.Name, TaxRate);
-	ArrayOfRows = Parameters.Cache[TableName]; // Array Of Structure
-	ArrayOfRows.Add(NewCacheRow);
+	Parameters.Rows[0].TaxRates[TaxInfo.Name] = TaxRate;
+
+	//Parameters.FormTaxColumnsExists = True;
 	
 	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined, True);
 	Result = New Structure();

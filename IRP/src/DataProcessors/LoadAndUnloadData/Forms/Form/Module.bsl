@@ -1,6 +1,24 @@
 // @strict-types
 
 &AtClient
+Procedure FindRef(Command)
+	FindRefAtServer();
+EndProcedure
+
+&AtServer
+Procedure FindRefAtServer()
+	SearchRefArray = New Array; // Array Of AnyRef
+	SearchRefArray.Add(SearchRef);
+	RefList = FindByRef(SearchRefArray);
+	FoundRefList.Clear();
+	For Each Row In RefList Do
+		NewRow = FoundRefList.Add();
+		NewRow.Ref = Row.Data;
+		NewRow.MetadataName = String(Row.Metadata);
+	EndDo;
+EndProcedure
+
+&AtClient
 Function GetAllWindows()
 	WindowsForWork = New Array; // Array Of ClientApplicationWindow
 	
@@ -113,14 +131,14 @@ EndFunction
 &AtClient
 Procedure Import(Command)
 	Log = "";
-	Log = DeserializeAtServer(Object.DeserializedInfo, ImportDataToPoductDataBaseIsGranted);
+	Log = DeserializeAtServer(Object.DeserializedInfo, ImportDataToProductDataBaseIsGranted);
 EndProcedure
 
 // Deserialize at server.
 // 
 // Parameters:
 //  Data - String - Data
-// 	ImportDataToPoductDataBaseIsGranted - Boolean -
+// 	ImportDataToProductDataBaseIsGranted - Boolean -
 // Returns:
 //  String
 &AtServerNoContext

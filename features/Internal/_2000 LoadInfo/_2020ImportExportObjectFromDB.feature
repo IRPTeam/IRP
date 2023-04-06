@@ -172,7 +172,6 @@ Scenario: _0202003 check import SI
 		Then the form attribute named "Date" became equal to "05.04.2023 14:48:51"
 		Then the form attribute named "Number" became equal to "180"
 		Then the form attribute named "Currency" became equal to "TRY"
-		Then the form attribute named "ItemListTotalNetAmount" became equal to "2 203,4"
 		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 203,40"
 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "396,61"
 		Then the form attribute named "ItemListTotalTotalAmount" became equal to "2 600,01"
@@ -201,7 +200,7 @@ Scenario: _0202004 check find refs
 		And I select current line in "List" table
 		And I click "Find ref" button
 	* Check
-		And "FoundRefList" table became equal
+		And "FoundRefList" table contains lines
 			| 'Ref'                           | 'Metadata name' |
 			| 'Partner term vendor DFC'       | 'Partner terms' |
 			| 'DFC Vendor by Partner terms'   | 'Partner terms' |

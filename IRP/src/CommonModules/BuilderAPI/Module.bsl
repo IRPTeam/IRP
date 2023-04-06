@@ -149,6 +149,7 @@ Function Initialize(Doc, InitialData = Undefined, FillingData = Undefined, Defau
 		Wrapper.Object.Insert(Table.Name, New ValueTable());
 		Wrapper.Tables.Insert(Table.Name, New Structure("_TableName_", Table.Name));
 		For Each Column In Table.StandardAttributes Do
+			//@skip-check invocation-parameter-type-intersect
 			FillColumnInfo(Wrapper, DocObject, Table, Column);
 		EndDo;
 		For Each Column In Table.Attributes Do
@@ -217,8 +218,10 @@ Function SetRowProperty(Wrapper, Row, ColumnName, Value, TableName = Undefined) 
 	
 	Rows = New Array(); // Array Of ValueTableRow
 	If TypeOf(Row) = Type("Number") Then
+		//@skip-check invocation-parameter-type-intersect
 		Rows.Add(Wrapper.Object[TableName][0]);
 	ElsIf TypeOf(Row) = Type("String") Then
+		//@skip-check invocation-parameter-type-intersect, dynamic-access-method-not-found
 		Rows.Add(Wrapper.Object[TableName].FindRows(New Structure("Key", Row))[0]);
 	Else
 		Rows.Add(Row);
@@ -227,6 +230,7 @@ Function SetRowProperty(Wrapper, Row, ColumnName, Value, TableName = Undefined) 
 	ServerParameters.Rows = Rows;
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
 	
+	//@skip-check dynamic-access-method-not-found
 	isPropertyExists = Wrapper.Tables[TableName].Property(ColumnName); // Boolean
 	If isPropertyExists Then
 		Property = Wrapper.Tables[TableName][ColumnName]; // Structure
@@ -337,12 +341,12 @@ Function AddRow(Wrapper, TableName = Undefined, ReturnRowKey = False) Export
 	If TableName = Undefined Then
 		TableName = Wrapper.DefaultTable;
 	EndIf;
-	WrapperTable = Wrapper.Object[TableName]; // ValueTable
+	WrapperTable = Wrapper.Object[TableName]; // See Document.SalesInvoice.ItemList
 	NewRow = WrapperTable.Add();
 	NewRow.Key = String(New UUID());
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object);
 	ServerParameters.TableName = TableName;
-	Rows = New Array();
+	Rows = New Array(); // Array Of DocumentTabularSectionRow.SalesInvoice.ItemList
 	Rows.Add(NewRow);
 	ServerParameters.Rows = Rows;
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
@@ -366,8 +370,9 @@ EndFunction
 // 
 // Returns:
 //  Structure - Set row tax rate:
-// * Context - See CreateWrapper
-// * Cache - Structure -
+// 		* Context - See CreateWrapper
+// 		* Cache - Structure -
+// @skip-check method-param-value-type
 Function SetRowTaxRate(Wrapper, Row, Tax, TaxRate, TableName) Export
 	If TableName = Undefined Then
 		TableName = Wrapper.DefaultTable;
@@ -377,7 +382,8 @@ Function SetRowTaxRate(Wrapper, Row, Tax, TaxRate, TableName) Export
 	Property.Insert("_TableName_", TableName);
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object);
 	ServerParameters.TableName = String(Property._TableName_);
-	Rows = New Array();
+	Rows = New Array(); // Array Of ValueTableRow
+	//@skip-check invocation-parameter-type-intersect
 	Rows.Add(Row);
 	ServerParameters.Rows = Rows;
 	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
@@ -416,6 +422,36 @@ Function SetRowTaxRate(Wrapper, Row, Tax, TaxRate, TableName) Export
 	Return Result;
 EndFunction
 
+// Delete row.
+// 
+// Parameters:
+//  Wrapper - See CreateWrapper
+//  Row - Structure, String, Number, ValueTableRow - Row or Row key or Row index
+//  TableName - Undefined, String - Table name. If empty - get from wrapper as defaul table
+Procedure DeleteRow(Wrapper, Row, TableName = Undefined) Export
+	If TableName = Undefined Then
+		TableName = Wrapper.DefaultTable;
+	EndIf;
+
+	Rows = New Array(); // Array Of ValueTableRow
+	If TypeOf(Row) = Type("Number") Then
+		//@skip-check invocation-parameter-type-intersect
+		Rows.Add(Wrapper.Object[TableName][0]);
+	ElsIf TypeOf(Row) = Type("String") Then
+		//@skip-check invocation-parameter-type-intersect, dynamic-access-method-not-found
+		Rows.Add(Wrapper.Object[TableName].FindRows(New Structure("Key", Row))[0]);
+	Else
+		Rows.Add(Row);
+	EndIf;
+	
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object); // Structure
+	ServerParameters.TableName = TableName;
+	ServerParameters.Rows = Rows;
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+	
+	ControllerClientServer_V2.DeleteRows(TableName, Parameters);
+	
+EndProcedure
 #EndRegion
 
 #Region Filling
@@ -503,7 +539,7 @@ EndProcedure
 //  Wrapper - See CreateWrapper
 //  DocObject - DocumentObjectDocumentName - Doc object
 //  Table - MetadataObjectTabularSection - Table
-//  Column - StandardAttributeDescription, MetadataObjectAttribute - Column
+//  Column - StandardAttributeDescriptions, MetadataObjectAttribute - Column
 Procedure FillColumnInfo(Wrapper, DocObject, Table, Column)
 	WrapperTable = Wrapper.Object[Table.Name]; // ValueTable
 	WrapperTable.Columns.Add(Column.Name, Column.Type);

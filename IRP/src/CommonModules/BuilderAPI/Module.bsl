@@ -116,7 +116,7 @@ EndFunction
 // 
 // Returns:
 //  See CreateWrapper
-Function Initialize(Doc, InitialData = Undefined, FillingData = Undefined, DefaultTable = Undefined, DocInfo = Undefined) Export
+Function Initialize(Doc = Undefined, InitialData = Undefined, FillingData = Undefined, DefaultTable = Undefined, DocInfo = Undefined) Export
 	
 	If DocInfo = Undefined Then
 		If TypeOf(Doc) = Type("String") Then
@@ -424,16 +424,28 @@ Procedure DeleteRow(Wrapper, Row, TableName = Undefined) Export
 		TableName = Wrapper.DefaultTable;
 	EndIf;
 
-	Rows = New Array(); // Array Of ValueTableRow
+	RowToRemove = Undefined;
 	If TypeOf(Row) = Type("Number") Then
-		//@skip-check invocation-parameter-type-intersect
-		Rows.Add(Wrapper.Object[TableName][0]);
+		//@skip-check statement-type-change
+		RowToRemove = Wrapper.Object[TableName][0];
 	ElsIf TypeOf(Row) = Type("String") Then
-		//@skip-check invocation-parameter-type-intersect, dynamic-access-method-not-found
-		Rows.Add(Wrapper.Object[TableName].FindRows(New Structure("Key", Row))[0]);
+		//@skip-check statement-type-change, dynamic-access-method-not-found
+		RowToRemove = Wrapper.Object[TableName].FindRows(New Structure("Key", Row))[0];
 	Else
-		Rows.Add(Row);
+		RowToRemove = Row;
 	EndIf;
+	
+	//@skip-check dynamic-access-method-not-found
+	Wrapper.Object[TableName].Delete(RowToRemove);
+	
+	Rows = New Array(); // Array Of ValueTableRow
+	For Each Row In Wrapper.Object[TableName] Do
+		Rows.Add(Row);
+	EndDo;
+	
+	Property = New Structure();
+	Property.Insert("DataPath", StrTemplate("%1.%2", TableName, ""));
+	Property.Insert("_TableName_", TableName);
 	
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object); // Structure
 	ServerParameters.TableName = TableName;

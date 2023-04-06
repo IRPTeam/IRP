@@ -99,9 +99,6 @@ Scenario: _0202002 check import item
 			| "Контекст.SerializedInfo=StrReplace(Контекст.SerializedInfo, "16", "178")" |
 		And I input "$SerializedInfo$" variable value in "Deserialized info" field
 		And I click the button named "Import"
-		And I click the button named "OK"
-		And I set checkbox "Import data to product data base is granted"
-		And I click the button named "Import"
 		Then the form attribute named "Log" became equal to "Scarf + Dress New"
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I click "Refresh" button

@@ -99,9 +99,7 @@ Scenario: _0202002 check import item
 			| "Контекст.SerializedInfo=StrReplace(Контекст.SerializedInfo, "16", "178")" |
 		And I input "$SerializedInfo$" variable value in "Deserialized info" field
 		And I click the button named "Import"
-		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
-		Then "Load and unload data" window is opened
 		And I set checkbox "Import data to product data base is granted"
 		And I click the button named "Import"
 		Then the form attribute named "Log" became equal to "Scarf + Dress New"
@@ -201,10 +199,10 @@ Scenario: _0202004 check find refs
 		And I click "Find ref" button
 	* Check
 		And "FoundRefList" table contains lines
-			| 'Ref'                           | 'Metadata name' |
-			| 'Partner term vendor DFC'       | 'Partner terms' |
-			| 'DFC Vendor by Partner terms'   | 'Partner terms' |
-			| 'DFC Customer by Partner terms' | 'Partner terms' |
+			| 'Ref'                           | 'Metadata name'      |
+			| 'Partner term vendor DFC'       | 'Catalog.Agreements' |
+			| 'DFC Vendor by Partner terms'   | 'Catalog.Agreements' |
+			| 'DFC Customer by Partner terms' | 'Catalog.Agreements' |
 	And I close all client application windows
 	
 				

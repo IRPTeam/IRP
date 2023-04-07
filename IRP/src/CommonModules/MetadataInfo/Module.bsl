@@ -86,4 +86,26 @@ Function hasTabularSections(MetaName) Export
 	Return NOT Array.Find(MetaName) = Undefined;
 EndFunction
 
+// Has ref.
+// 
+// Parameters:
+//  MetadataFullName - String -
+// 
+// Returns:
+//  Boolean - Has ref
+Function hasRef(MetadataFullName) Export
+	MetadataType = Enums.MetadataTypes[StrSplit(MetadataFullName, ".")[0]];
+	If Not hasStandardAttributes(MetadataType) Then
+		Return False;
+	EndIf;
+	
+	isRef = False;
+	MetaObject = Metadata.FindByFullName(MetadataFullName);
+	For Each Attr In MetaObject.StandardAttributes Do
+		If Attr.Name = "Ref" Then
+			isRef = True;
+		EndIf;
+	EndDo;
+	Return isRef;
+EndFunction
 #EndRegion

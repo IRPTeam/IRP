@@ -939,9 +939,191 @@ Scenario: _020140 load data in the SI (each sln new row, load by barcode)
 		And I close all client application windows	
 				
 		
-				
+
+Scenario: _020141 load data in the SO (each sln new row, load by barcode)
+		And I close all client application windows
+	* Open Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+	* Check load data form
+		And in the table "ItemList" I click "Load data from table" button	
+	* Add barcodes
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009098"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2"
+		And in "Template" spreadsheet document I move to "R4C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009099"
+		And in "Template" spreadsheet document I move to "R4C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "1"
+		And in "Template" spreadsheet document I move to "R5C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009100"
+		And in "Template" spreadsheet document I move to "R5C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "1"
+		And I click "Next" button
+		And I click "Next" button
+	* Check document
+		And "ItemList" table became equal
+			| 'Procurement method' | 'Item key' | 'Quantity' | 'Unit' | 'Item'                         |
+			| 'Stock'              | 'PZU'      | '3,000'    | 'pcs'  | 'Product 7 with SLN (new row)' |
+			| 'Stock'              | 'ODS'      | '1,000'    | 'pcs'  | 'Product 7 with SLN (new row)' |
+		And I close all client application windows
 		
 		
+
+Scenario: _020142 load data in the PhysicalInventory (each sln new row, use serial lot)
+		And I close all client application windows
+	* Open Physical inventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I click the button named "FormCreate"
+		And I set checkbox "Use serial lot"
+	* Check load data form
+		And in the table "ItemList" I click "Load data from table" button	
+	* Add barcodes
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009098"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2"
+		And in "Template" spreadsheet document I move to "R4C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009099"
+		And in "Template" spreadsheet document I move to "R4C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "1"
+		And in "Template" spreadsheet document I move to "R5C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009100"
+		And in "Template" spreadsheet document I move to "R5C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "1"
+		And I click "Next" button
+		And I click "Next" button
+	* Check document
+		And "ItemList" table became equal
+			| 'Item'                         | 'Item key' | 'Unit' | 'Serial lot number'  | 'Phys. count'|
+			| 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | '9009098'            | '2,000'      |
+			| 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | '9009099'            | '1,000'      |
+			| 'Product 7 with SLN (new row)' | 'ODS'      | 'pcs'  | '9009100'            | '1,000'      |
+		And I close all client application windows	
+
+
+Scenario: _020143 load data in the PhysicalInventory (each sln new row, not use serial lot)
+		And I close all client application windows
+	* Open Physical inventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I click the button named "FormCreate"
+	* Check load data form
+		And in the table "ItemList" I click "Load data from table" button	
+	* Add barcodes
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009098"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2"
+		And in "Template" spreadsheet document I move to "R4C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009099"
+		And in "Template" spreadsheet document I move to "R4C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "1"
+		And in "Template" spreadsheet document I move to "R5C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009100"
+		And in "Template" spreadsheet document I move to "R5C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "1"
+		And I click "Next" button
+		And I click "Next" button
+	* Check document
+		And "ItemList" table became equal
+			| 'Item'                         | 'Item key' | 'Unit' | 'Serial lot number' | 'Phys. count' |
+			| 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | ''                  | '3,000'       |
+			| 'Product 7 with SLN (new row)' | 'ODS'      | 'pcs'  | ''                  | '1,000'       |
+		And I close all client application windows				
+								
+		
+
+Scenario: _020144 load data in the PhysicalCountByLocation (each sln new row, use serial lot)
+		And I close all client application windows
+	* Open PhysicalCountByLocation
+		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+		And I click the button named "FormCreate"
+		And I set checkbox "Use serial lot"
+	* Check load data form
+		And in the table "ItemList" I click "Load data from table" button	
+	* Add barcodes
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009098"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2"
+		And in "Template" spreadsheet document I move to "R4C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009099"
+		And in "Template" spreadsheet document I move to "R4C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "1"
+		And in "Template" spreadsheet document I move to "R5C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009100"
+		And in "Template" spreadsheet document I move to "R5C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "1"
+		And I click "Next" button
+		And I click "Next" button
+	* Check document
+		And "ItemList" table became equal
+			| 'Item'                         | 'Item key' | 'Unit' | 'Serial lot number'  | 'Phys. count'|
+			| 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | '9009098'            | '2,000'      |
+			| 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | '9009099'            | '1,000'      |
+			| 'Product 7 with SLN (new row)' | 'ODS'      | 'pcs'  | '9009100'            | '1,000'      |
+		And I close all client application windows	
+
+
+Scenario: _020145 load data in the PhysicalCountByLocation (each sln new row, not use serial lot)
+		And I close all client application windows
+	* Open PhysicalCountByLocation
+		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+		And I click the button named "FormCreate"
+	* Check load data form
+		And in the table "ItemList" I click "Load data from table" button	
+	* Add barcodes
+		And in "Template" spreadsheet document I move to "R3C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009098"
+		And in "Template" spreadsheet document I move to "R3C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "2"
+		And in "Template" spreadsheet document I move to "R4C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009099"
+		And in "Template" spreadsheet document I move to "R4C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "1"
+		And in "Template" spreadsheet document I move to "R5C1" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "9009100"
+		And in "Template" spreadsheet document I move to "R5C2" cell
+		And in "Template" spreadsheet document I double-click the current cell
+		And in "Template" spreadsheet document I input text "1"
+		And I click "Next" button
+		And I click "Next" button
+	* Check document
+		And "ItemList" table became equal
+			| 'Item'                         | 'Item key' | 'Unit' | 'Serial lot number' | 'Phys. count' |
+			| 'Product 7 with SLN (new row)' | 'PZU'      | 'pcs'  | ''                  | '3,000'       |
+			| 'Product 7 with SLN (new row)' | 'ODS'      | 'pcs'  | ''                  | '1,000'       |
+		And I close all client application windows						
 				
 		
 				

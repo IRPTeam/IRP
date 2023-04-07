@@ -109,9 +109,9 @@ Scenario: _029102 create Item - Service
 		And I click the button named "FormCreate"
 		And I click Select button of "Service type" field
 		And I click the button named "FormCreate"
-		And I input "Interner" text in the field named "Description_en"
+		And I input "Internet" text in the field named "Description_en"
 		And I click Open button of "ENG" field
-		And I input "Interner TR" text in the field named "Description_tr"
+		And I input "Internet TR" text in the field named "Description_tr"
 		And I click "Ok" button
 		And I click "Save and close" button
 		And I click the button named "FormChoose"
@@ -211,7 +211,7 @@ Scenario: _029104 create a Purchase invoice for service
 	* Check the filling of the tabular part
 		And "ItemList" table contains lines
 		| 'Price'    | 'Item'    | 'VAT' | 'Item key' | 'Quantity'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Expense type'             | 'Profit loss center' | 'Purchase order'      |
-		| '1 000,00' | 'Service' | '18%' | 'Interner' | '1,000' | '152,54'     | 'pcs'  | '847,46'     | '1 000,00'     | 'Telephone communications' | 'Front office'  | '$$PurchaseOrder029103$$' |
+		| '1 000,00' | 'Service' | '18%' | 'Internet' | '1,000' | '152,54'     | 'pcs'  | '847,46'     | '1 000,00'     | 'Telephone communications' | 'Front office'  | '$$PurchaseOrder029103$$' |
 	And I click the button named "FormPost"
 	And I delete "$$NumberPurchaseInvoice029104$$" variable
 	And I delete "$$PurchaseInvoice029104$$" variable
@@ -500,7 +500,7 @@ Scenario: _029130 create Retail sales receipt for service and product
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
 			| 'Item'    | 'Item key' |
-			| 'Service' | 'Interner' |
+			| 'Service' | 'Internet' |
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemList" table
 		And I input "50,00" text in "Price" field of "ItemList" table
@@ -535,7 +535,7 @@ Scenario: _029130 create Retail sales receipt for service and product
 			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''                             | ''         | ''                  | ''                                     |
 			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''       | ''         | ''                             | ''                             | ''         | ''                  | ''                                     |
 			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch' | 'Store'    | 'Sales person'                 | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key'                              |
-			| ''                               | '*'      | '1'         | '50'     | '42,37'      | ''              | 'Main Company' | ''       | ''         | ''                             | '$$RetailSalesReceipt029130$$' | 'Interner' | ''                  | '*' |
+			| ''                               | '*'      | '1'         | '50'     | '42,37'      | ''              | 'Main Company' | ''       | ''         | ''                             | '$$RetailSalesReceipt029130$$' | 'Internet' | ''                  | '*' |
 			| ''                               | '*'      | '1'         | '200'    | '169,49'     | ''              | 'Main Company' | ''       | 'Store 01' | ''                             | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*' |
 			| ''                               | '*'      | '1'         | '200'    | '169,49'     | ''              | 'Main Company' | ''       | 'Store 01' | ''                             | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*' |
 		And I close all client application windows
@@ -648,7 +648,7 @@ Scenario: _029142 create Purchase return for service and product without Purchas
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 		And I go to line in "List" table
 			| 'Item'    | 'Item key' |
-			| 'Service' | 'Interner' |
+			| 'Service' | 'Internet' |
 		And I select current line in "List" table
 		And I activate "Price" field in "ItemList" table
 		And I input "50,00" text in "Price" field of "ItemList" table
@@ -688,7 +688,7 @@ Scenario: _029150 create Retail return receipt for service and product
 			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''             | ''                             | ''         | ''                  | ''        |
 			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''       | ''         | ''             | ''                             | ''         | ''                  | ''        |
 			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch' | 'Store'    | 'Sales person' | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key' |
-			| ''                               | '*'      | '-1'        | '-50'    | '-42,37'     | ''              | 'Main Company' | '*'      | ''         | ''             | '$$RetailSalesReceipt029130$$' | 'Interner' | ''                  | '*'       |
+			| ''                               | '*'      | '-1'        | '-50'    | '-42,37'     | ''              | 'Main Company' | '*'      | ''         | ''             | '$$RetailSalesReceipt029130$$' | 'Internet' | ''                  | '*'       |
 			| ''                               | '*'      | '-1'        | '-200'   | '-169,49'    | ''              | 'Main Company' | '*'      | 'Store 01' | ''             | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*'       |
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -737,7 +737,7 @@ Scenario: _029150 create Retail return receipt for service and product
 			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 			And I go to line in "List" table
 				| 'Item'    | 'Item key' |
-				| 'Service' | 'Interner' |
+				| 'Service' | 'Internet' |
 			And I select current line in "List" table
 			And I activate "Price" field in "ItemList" table
 			And I input "50,00" text in "Price" field of "ItemList" table

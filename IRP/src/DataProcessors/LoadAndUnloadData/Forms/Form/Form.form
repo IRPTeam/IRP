@@ -381,6 +381,10 @@
       <key>en</key>
       <value>Serialized</value>
      </title>
+     <title>
+      <key>ru</key>
+      <value>Сериализовано</value>
+     </title>
      <extendedTooltip>
       <name>PageSerializedInfoExtendedTooltip</name>
       <id>34</id>
@@ -464,6 +468,10 @@
       <key>en</key>
       <value>Archived</value>
      </title>
+     <title>
+      <key>ru</key>
+      <value>В архиве</value>
+     </title>
      <extendedTooltip>
       <name>PageArchivedInfoExtendedTooltip</name>
       <id>36</id>
@@ -494,6 +502,14 @@
      <key>en</key>
      <value>Info</value>
     </title>
+    <title>
+     <key>ru</key>
+     <value>Контактная информация</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Bilgi</value>
+    </title>
     <extendedTooltip>
      <name>PagesInfoExtendedTooltip</name>
      <id>32</id>
@@ -523,6 +539,14 @@
    <title>
     <key>en</key>
     <value>Export</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Экспорт</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>eFatura - İhracat</value>
    </title>
    <extendedTooltip>
     <name>PageExportExtendedTooltip</name>
@@ -689,6 +713,10 @@
     <key>en</key>
     <value>Import</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Импорт</value>
+   </title>
    <extendedTooltip>
     <name>PageImportExtendedTooltip</name>
     <id>41</id>
@@ -805,6 +833,10 @@
     <title>
      <key>en</key>
      <value>Group Find Ref</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Группа найденных ссылок</value>
     </title>
     <extendedTooltip>
      <name>GroupFindRefExtendedTooltip</name>
@@ -1263,6 +1295,10 @@
     <key>en</key>
     <value>Find refs</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Найти ссылки</value>
+   </title>
    <extendedTooltip>
     <name>PageFindRefExtendedTooltip</name>
     <id>56</id>
@@ -1339,6 +1375,14 @@
     <key>en</key>
     <value>Settings</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Настройки</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Ayarlar</value>
+   </title>
    <extendedTooltip>
     <name>PageSettingsExtendedTooltip</name>
     <id>51</id>
@@ -1368,6 +1412,14 @@
   <title>
    <key>en</key>
    <value>Main</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Основное</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Ana</value>
   </title>
   <extendedTooltip>
    <name>PagesMainExtendedTooltip</name>
@@ -1428,6 +1480,10 @@
    <key>en</key>
    <value>Form items</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Форма элементов</value>
+  </title>
   <id>2</id>
   <valueType>
    <types>ValueTable</types>
@@ -1443,6 +1499,14 @@
    <title>
     <key>en</key>
     <value>Description</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Наименование</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Tanım</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1460,6 +1524,10 @@
    <name>URL</name>
    <title>
     <key>en</key>
+    <value>URL</value>
+   </title>
+   <title>
+    <key>ru</key>
     <value>URL</value>
    </title>
    <id>4</id>
@@ -1481,6 +1549,14 @@
    <key>en</key>
    <value>Log</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Логи</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Log</value>
+  </title>
   <id>6</id>
   <valueType>
    <types>String</types>
@@ -1499,6 +1575,10 @@
    <key>en</key>
    <value>Import data to product data base is granted</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Разрежить импорт в рабочую базу</value>
+  </title>
   <id>7</id>
   <valueType>
    <types>Boolean</types>
@@ -1515,6 +1595,10 @@
   <title>
    <key>en</key>
    <value>Search ref</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Ссылка для поиска</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1533,6 +1617,10 @@
    <key>en</key>
    <value>Found ref list</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Найденные ссылки</value>
+  </title>
   <id>9</id>
   <valueType>
    <types>ValueTable</types>
@@ -1547,6 +1635,14 @@
    <name>Ref</name>
    <title>
     <key>en</key>
+    <value>Ref</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Ссылка</value>
+   </title>
+   <title>
+    <key>tr</key>
     <value>Ref</value>
    </title>
    <id>10</id>
@@ -1566,6 +1662,10 @@
     <key>en</key>
     <value>Metadata name</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Имя метаданных</value>
+   </title>
    <id>11</id>
    <valueType>
     <types>String</types>
@@ -1584,6 +1684,10 @@
     <key>en</key>
     <value>Filter</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Отбор</value>
+   </title>
    <id>12</id>
    <valueType>
     <types>String</types>
@@ -1601,6 +1705,14 @@
   <name>Update</name>
   <title>
    <key>en</key>
+   <value>Update</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Изменение</value>
+  </title>
+  <title>
+   <key>tr</key>
    <value>Update</value>
   </title>
   <id>1</id>
@@ -1623,10 +1735,18 @@
    <key>en</key>
    <value>Serialize</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Сериализовать</value>
+  </title>
   <id>2</id>
   <toolTip>
    <key>en</key>
    <value>Serialize all selected rows in selected form</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Сериализовать все выделенные строки в выбранной форме</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -1643,6 +1763,10 @@
   <title>
    <key>en</key>
    <value>Import</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Импорт</value>
   </title>
   <id>3</id>
   <use>
@@ -1661,6 +1785,10 @@
    <key>en</key>
    <value>Find ref</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Поиск ссылок</value>
+  </title>
   <id>4</id>
   <use>
    <common>true</common>
@@ -1677,6 +1805,14 @@
   <title>
    <key>en</key>
    <value>Open</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Открыт</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Açık</value>
   </title>
   <id>5</id>
   <use>

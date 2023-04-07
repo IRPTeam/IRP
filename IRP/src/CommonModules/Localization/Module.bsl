@@ -1356,7 +1356,8 @@ Function Strings(Lang) Export
 		|ru='Данные были сохранены'", Lang));
 	Strings.Insert("InfoMessage_SettingsApplied", NStr("en='The settings have been applied';
 		|ru='Настройки применены'", Lang));
-	Strings.Insert("InfoMessage_ImportError", NStr("en='Import data to product database is locked. Go to Settings page'", Lang));
+	Strings.Insert("InfoMessage_ImportError", NStr("en='Import data to product database is locked. Go to Settings page';
+		|ru='Импорт данных в рабочую базу заблокирован. Перейдите на вкладку настроек.'", Lang));
 	
 #EndRegion
 

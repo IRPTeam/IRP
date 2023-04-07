@@ -2219,6 +2219,14 @@
     <key>en</key>
     <value>Always add new row after scan</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Всегда добавлять новую строку при сканировании</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Okutulduğunda hep yeni satır ekle</value>
+   </title>
    <id>41</id>
    <valueType>
     <types>Boolean</types>
@@ -2826,6 +2834,14 @@
    <title>
     <key>en</key>
     <value>Always add new row after scan</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Всегда добавлять новую строку при сканировании</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Okutulduğunda hep yeni satır ekle</value>
    </title>
    <id>42</id>
    <valueType>

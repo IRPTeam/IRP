@@ -9,6 +9,10 @@
   <key>en</key>
   <value>Load and unload data</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Загрузка и выгрузка данных</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.LoadAndUnloadData.Form.Form</defaultForm>
  <attributes uuid="9886e7f4-2eb0-4e75-a0f5-fd103bbcf3e0">
@@ -16,6 +20,10 @@
   <synonym>
    <key>en</key>
    <value>Serialized info</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сериализовано инфо</value>
   </synonym>
   <type>
    <types>String</types>
@@ -30,6 +38,10 @@
    <key>en</key>
    <value>Archived info</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Информация об архиве</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers/>
@@ -43,6 +55,10 @@
    <key>en</key>
    <value>Deserialized info</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сериализован</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers/>
@@ -54,6 +70,14 @@
   <name>Form</name>
   <synonym>
    <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>

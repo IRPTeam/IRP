@@ -137,4 +137,13 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="5a0ed32c-af1d-48be-a713-00507d58adab">
+    <name>AcquiringSlipInfo</name>
+    <synonym>
+      <key>en</key>
+      <value>Acquiring slip info</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:DataProcessor>

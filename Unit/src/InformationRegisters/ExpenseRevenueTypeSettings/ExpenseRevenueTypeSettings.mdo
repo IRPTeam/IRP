@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="48104a9b-0f7d-446d-abb3-268f8a0de220" extendedConfigurationObject="34f8a190-42d6-4acb-bcb4-8f6676c78086">
+  <producedTypes>
+    <selectionType typeId="d07cf4f9-6fb6-424d-b46f-df25eeed1bba" valueTypeId="ce0c1c90-2d46-4378-bbc3-3844e925d173"/>
+    <listType typeId="6f3fd95b-3aad-45e4-805c-dcf70831d2ad" valueTypeId="18b415d0-cdb2-49a6-b5de-53f2ed7db446"/>
+    <managerType typeId="191d23ca-3d64-4b68-864e-8f6b4256940c" valueTypeId="5b9b26cf-0da6-4ab3-a677-a1aa96dcf9e7"/>
+    <recordSetType typeId="ffeab9a5-b165-45f0-88d6-be47eff195ae" valueTypeId="89789fab-562b-491c-9df6-89a3dca3bdfb"/>
+    <recordKeyType typeId="743bd302-d8f8-48ab-918b-b84edb968190" valueTypeId="2a611066-6ac6-46c2-885c-7fbf0246d7b5"/>
+    <recordType typeId="991330cc-431d-4d3c-8fec-9bc9c429da82" valueTypeId="2aee12db-6458-4311-a704-fb8cf51eb8e7"/>
+    <recordManagerType typeId="6a2ccde1-aaac-4f82-9132-39f01c9b1f18" valueTypeId="683d67c5-8fa9-4a5b-95f2-fa0b19a4eb33"/>
+  </producedTypes>
+  <name>ExpenseRevenueTypeSettings</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:InformationRegisterExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+    <informationRegisterPeriodicity>Checked</informationRegisterPeriodicity>
+    <writeMode>Checked</writeMode>
+  </extension>
+</mdclass:InformationRegister>

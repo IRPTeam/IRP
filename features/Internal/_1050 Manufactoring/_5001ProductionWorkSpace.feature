@@ -74,8 +74,8 @@ Scenario: _5003 create IT + PR from Production Workspace (product)
 		Given I open hyperlink "e1cib/app/DataProcessor.ProductionWorkspace"
 	* Add item info (product, add by barcode)
 		And I click "Input barcode" button
-		And I input "5678900009900990" text in the field named "InputFld"
-		And I click the button named "OK"
+		And I input "5678900009900990" text in the field named "InputFld"	
+		And I click "OK" button
 	* Check filling item info
 		Then the form attribute named "Item" became equal to "Стремянка номер 6 ступенчатая"
 		Then the form attribute named "ItemKey" became equal to "Стремянка номер 6 ступенчатая"
@@ -139,7 +139,9 @@ Scenario: _5003 create IT + PR from Production Workspace (product)
 		And "ItemList" table became equal
 			| '#' | 'Item'                          | 'Item key'                      | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Inventory transfer order' | 'Production planning'                             |
 			| '1' | 'Стремянка номер 6 ступенчатая' | 'Стремянка номер 6 ступенчатая' | ''                   | 'pcs'  | '2,000'    | ''                         | 'Production planning 1 dated 29.04.2022 09:40:47' |
+		And in the table "ItemList" I click "Open serial lot number tree" button
 		Then the number of "SerialLotNumbersTree" table lines is "равно" 0
+		And I close "Serial lot numbers tree" window
 		Then the form attribute named "UseShipmentConfirmation" became equal to "No"
 		Then the form attribute named "UseGoodsReceipt" became equal to "No"
 		Then the form attribute named "Branch" became equal to "Production store 05"
@@ -174,7 +176,9 @@ Scenario: _5004 create IT from Production Workspace (product)
 		And "ItemList" table became equal
 			| '#' | 'Item'                          | 'Item key'                      | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Inventory transfer order' | 'Production planning'                             |
 			| '1' | 'Стремянка номер 6 ступенчатая' | 'Стремянка номер 6 ступенчатая' | ''                   | 'pcs'  | '2,000'    | ''                         | 'Production planning 1 dated 29.04.2022 09:40:47' |
+		And in the table "ItemList" I click "Open serial lot number tree" button
 		Then the number of "SerialLotNumbersTree" table lines is "равно" 0
+		And I close "Serial lot numbers tree" window
 		Then the form attribute named "UseShipmentConfirmation" became equal to "No"
 		Then the form attribute named "UseGoodsReceipt" became equal to "No"
 		Then the form attribute named "Branch" became equal to "Production store 05"

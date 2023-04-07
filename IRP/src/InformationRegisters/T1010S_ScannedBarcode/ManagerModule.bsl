@@ -3,7 +3,7 @@
 // 
 // Parameters:
 //  Basis - DocumentRef - Any basis document ref
-//  Barcode - DefinedType.typeBarcode, Array - Array or single barcode to save 
+//  Barcode - DefinedType.typeBarcode - Array or single barcode to save 
 Procedure SaveBarcode(Basis, Barcode, Quantity = 1) Export
 
 	NewBarcode = CreateRecordManager();

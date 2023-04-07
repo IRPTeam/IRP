@@ -11,11 +11,6 @@ Procedure OnOpen(Cancel)
 	BarcodeHasAnyCharactersOnChange(Undefined);
 EndProcedure
 
-&AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	ErrorSound = DataProcessors.MobileInvent.GetTemplate("ErrorSound");
-EndProcedure
-
 #EndRegion
 
 #Region Barcode
@@ -84,7 +79,7 @@ EndProcedure
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	Info = "";          
 	
-	If Object.Ref.IsEmpty() Then
+	If Object.Ref.IsEmpty() And Result.Barcodes.Count() Then
 		DocumentIsSet = False;
 		Message = FindAndSetDocument(Result.Barcodes[0], DocumentIsSet);
 		If Not DocumentIsSet Then
@@ -127,7 +122,7 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		NewRow.Key = New UUID;
 		FillPropertyValues(NewRow, Row);
 		NewRow.PhysCount = Row.Quantity;
-		NewRow.Barcode = Result.Barcodes[0];
+		NewRow.Barcode = Result.FoundedItems[0].Barcode;
 		NewRow.Date = CommonFunctionsServer.GetCurrentSessionDate();
 		
 		If Row.UseSerialLotNumber And NewRow.SerialLotNumber.IsEmpty() Then
@@ -151,16 +146,18 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		If ScanEmulator Then
 			AttachIdleHandler("BeginEditBarcode", 0.1, True);
 		EndIf;
-	Else           
+	EndIf;
+	           
+	For Each BarcodeEmpty In Result.Barcodes Do
 		MobileSubsystem.Play(Sound.Error);
 		If ScanEmulator Then
-			Info = StrTemplate(R().S_019, Result.Barcodes[0]);
+			Info = StrTemplate(R().S_019, BarcodeEmpty);
 			BarcodeInput = "";
 			AttachIdleHandler("BeginEditBarcode", 0.1, True);
 		Else
-			DoMessageBoxAsync(StrTemplate(R().S_019, Result.Barcodes[0]));
+			DoMessageBoxAsync(StrTemplate(R().S_019, BarcodeEmpty));
 		EndIf;                                               
-	EndIf;
+	EndDo;
 
 EndProcedure
 
@@ -202,17 +199,18 @@ Procedure ScanBarcodeEndMobile(Barcode, Result, Message, Parameters) Export
 			BarcodeClient.CloseMobileScanner();
 		EndIf;
 	Else
-		ProcessBarcodeResult = Barcodeclient.ProcessBarcode(Barcode, Parameters);
-		If ProcessBarcodeResult Then
-			If Parameters.Result.FoundedItems[0].isService And Parameters.Filter.DisableIfIsService Then
-				Message = StrTemplate(R().InfoMessage_026, Parameters.Result.FoundedItems[0].Item);
+		BarcodeClient.ProcessBarcode(Barcode, Parameters);
+		For Each FoundedItem In Parameters.Result.FoundedItems Do
+			If FoundedItem.isService And Parameters.Filter.DisableIfIsService Then
+				Message = StrTemplate(R().InfoMessage_026, FoundedItem.Item);
 				Result = False;
 			Else
 				Message = R().S_018;
 			EndIf;
-		Else
+		EndDo;
+		If Parameters.Result.Barcodes.Count() Then
 			Result = False;
-			Message = StrTemplate(R().S_019, Barcode);
+			Message = StrTemplate(R().S_019, StrConcat(Parameters.Result.Barcodes, Chars.LF));
 		EndIf;
 	EndIf;
 EndProcedure

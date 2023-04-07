@@ -4,9 +4,49 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;
 	If Not Cancel And WriteMode = DocumentWriteMode.Posting Then
 		If ThisObject.AllocationMode = Enums.AllocationMode.ByDocuments Then
+			UpdateAmounts();
 			FillTables_ByDocuments();
 		EndIf;
 	EndIf;
+EndProcedure
+
+Procedure UpdateAmounts()
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	R6080T_OtherPeriodsRevenues.Basis AS Document,
+	|	R6080T_OtherPeriodsRevenues.Company,
+	|	R6080T_OtherPeriodsRevenues.Currency,
+	|	SUM(R6080T_OtherPeriodsRevenues.AmountBalance) AS Amount,
+	|	SUM(R6080T_OtherPeriodsRevenues.AmountTaxBalance) AS TaxAmount
+	|FROM
+	|	AccumulationRegister.R6080T_OtherPeriodsRevenues.Balance(&BalancePeriod, CurrencyMovementType = &CurrencyMovementType
+	|	AND Basis IN (&ArrayOfDocuments)) AS R6080T_OtherPeriodsRevenues
+	|GROUP BY
+	|	R6080T_OtherPeriodsRevenues.Basis,
+	|	R6080T_OtherPeriodsRevenues.Company,
+	|	R6080T_OtherPeriodsRevenues.Currency";	
+	Query.SetParameter("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
+	BalancePeriod = New Boundary(ThisObject.PointInTime(), BoundaryType.Excluding);
+	Query.SetParameter("BalancePeriod", BalancePeriod);
+	
+	ArrayOfDocuments = New Array();
+	For Each Row In ThisObject.RevenueDocuments Do
+		ArrayOfDocuments.Add(Row.Document);
+	EndDo;
+	
+	Query.SetParameter("ArrayOfDocuments", ArrayOfDocuments);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	For Each Row In ThisObject.RevenueDocuments Do
+		If QuerySelection.FindNext(New Structure("Document", Row.Document)) Then
+			Row.Currency = QuerySelection.Currency;
+			Row.Amount = QuerySelection.Amount;
+			Row.TaxAmount = QuerySelection.TaxAmount;
+		EndIf;
+		QuerySelection.Reset();
+	EndDo;
 EndProcedure
 
 Procedure FillTables_ByDocuments()
@@ -40,7 +80,8 @@ Procedure FillTables_ByDocuments()
 	|	RevenueDocuments.Document AS Basis,
 	|	RevenueDocuments.Currency,
 	|	R6080T_OtherPeriodsRevenuesBalance.ItemKey,
-	|	R6080T_OtherPeriodsRevenuesBalance.AmountBalance AS Amount
+	|	R6080T_OtherPeriodsRevenuesBalance.AmountBalance AS Amount,
+	|	R6080T_OtherPeriodsRevenuesBalance.AmountTaxBalance AS TaxAmount
 	|FROM
 	|	RevenueDocuments AS RevenueDocuments
 	|		LEFT JOIN AccumulationRegister.R6080T_OtherPeriodsRevenues.Balance(&BalancePeriod, (Basis, Currency) IN
@@ -76,9 +117,9 @@ Procedure FillTables_ByDocuments()
 	|		AND T6020S_BatchKeysInfo.Direction = VALUE(Enum.BatchDirection.Receipt)
 	|		AND T6020S_BatchKeysInfo.RowID <> """"";
 	
-	Query.SetParameter("RevenueDocuments", ThisObject.RevenueDocuments.Unload());
-	Query.SetParameter("AllocationDocuments", ThisObject.AllocationDocuments.Unload());
-	Query.SetParameter("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
+	Query.SetParameter("RevenueDocuments"     , ThisObject.RevenueDocuments.Unload());
+	Query.SetParameter("AllocationDocuments"  , ThisObject.AllocationDocuments.Unload());
+	Query.SetParameter("CurrencyMovementType" , ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
 	BalancePeriod = Undefined;
 	If ValueIsFilled(ThisObject.Ref) And ThisObject.Ref.Posted Then
 		BalancePeriod = New Boundary(ThisObject.Ref.PointInTime(), BoundaryType.Excluding);
@@ -104,24 +145,35 @@ Procedure FillTables_ByDocuments()
 	ElsIf ThisObject.AllocationMethod = Enums.AllocationMethod.ByWeight Then
 		ColumnName = "Weight";
 	EndIf;
-	
-	Total = AllocationTable.Total(ColumnName);
-	
-	If Total = 0 Then
-		Return;
-	EndIf;
-	
+		
 	For Each RowRevenue In RevenueTable Do
 		FillPropertyValues(ThisObject.RevenueList.Add(), RowRevenue);
-		TotalAllocated = 0;
-		MaxRow = Undefined;
-		For Each RowAllocation In AllocationTable.Copy(New Structure("Key", RowRevenue.Key)) Do
+		
+		TotalAllocated    = 0;
+		TotalAllocatedTax = 0;
+		
+		MaxRow    = Undefined;
+		MaxRowTax = Undefined;
+		
+		AllocationTableCopy = AllocationTable.Copy(New Structure("Key", RowRevenue.Key));
+		
+		For Each RowAllocation In AllocationTableCopy Do
+			Total = AllocationTableCopy.Total(ColumnName);
+	
+			If Total = 0 Then
+				Continue;
+			EndIf;
+	
 			NewRowAllocationList = ThisObject.AllocationList.Add();
 			FillPropertyValues(NewRowAllocationList, RowAllocation);
 			NewRowAllocationList.BasisRowID = RowRevenue.RowID;
-			NewRowAllocationList.Amount = (RowRevenue.Amount / Total) * RowAllocation[ColumnName];
 			
-			TotalAllocated = TotalAllocated + NewRowAllocationList.Amount;
+			NewRowAllocationList.Amount    = (RowRevenue.Amount    / Total) * RowAllocation[ColumnName];
+			NewRowAllocationList.TaxAmount = (RowRevenue.TaxAmount / Total) * RowAllocation[ColumnName];
+			
+			TotalAllocated    = TotalAllocated    + NewRowAllocationList.Amount;
+			TotalAllocatedTax = TotalAllocatedTax + NewRowAllocationList.TaxAmount;
+			
 			If MaxRow = Undefined Then
 				MaxRow = NewRowAllocationList;
 			Else
@@ -129,11 +181,25 @@ Procedure FillTables_ByDocuments()
 					MaxRow = NewRowAllocationList;
 				EndIf;
 			EndIf;
+			
+			If MaxRowTax = Undefined Then
+				MaxRowTax = NewRowAllocationList;
+			Else
+				If MaxRowTax.Amount < NewRowAllocationList.TaxAmount Then
+					MaxRowTax = NewRowAllocationList;
+				EndIf;
+			EndIf;
+			
 		EndDo;
 		
 		If RowRevenue.Amount <> TotalAllocated And MaxRow <> Undefined Then
 			MaxRow.Amount = MaxRow.Amount + (RowRevenue.Amount - TotalAllocated);
 		EndIf;
+		
+		If RowRevenue.TaxAmount <> TotalAllocatedTax And MaxRowTax <> Undefined Then
+			MaxRowTax.TaxAmount = MaxRowTax.TaxAmount + (RowRevenue.TaxAmount - TotalAllocatedTax);
+		EndIf;
+		
 	EndDo;
 	
 EndProcedure
@@ -150,6 +216,12 @@ Procedure BeforeDelete(Cancel)
 	EndIf;
 EndProcedure
 
+Procedure Filling(FillingData, FillingText, StandardProcessing)
+	If FillingData = Undefined Then
+		ThisObject.AllocationMode = Enums.AllocationMode.ByRows;
+	EndIf;
+EndProcedure
+
 Procedure Posting(Cancel, PostingMode)
 	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
 EndProcedure
@@ -158,3 +230,19 @@ Procedure UndoPosting(Cancel)
 	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
 EndProcedure
 
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	If ThisObject.AllocationMode = Enums.AllocationMode.ByDocuments Then
+		
+		For Each Row In ThisObject.RevenueDocuments Do
+			ArrayOfAllocationDocuments = ThisObject.AllocationDocuments.FindRows(New Structure("Key", Row.Key));
+			If Not ArrayOfAllocationDocuments.Count() Then
+				CommonFunctionsClientServer.ShowUsersMessage(
+						StrTemplate(R().Error_125, Row.Document), 
+						"Object.RevenueDocuments[" + (Row.LineNumber - 1) + "].Document", 
+						"Object.RevenueDocuments");
+				Cancel = True;
+			EndIf;
+		EndDo;
+		
+	EndIf;
+EndProcedure

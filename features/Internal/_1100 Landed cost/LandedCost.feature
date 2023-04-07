@@ -2252,6 +2252,7 @@ Scenario: _012 checking batches calculation for Retail sales receipt/ Retail ret
 			And I select current line in "ItemList" table
 			And I input "1 000,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table	
+			And I remove checkbox "Price includes tax"				
 			When in opened panel I select "Retail return receipt (create) *"
 			Then "Retail return receipt (create) *" window is opened
 			And I move to "Other" tab			
@@ -2339,7 +2340,7 @@ Scenario: _027 check calculation movements cost for ItemStockAdjustment
 			| 'Number' |
 			| '1'      |	
 		And in the table "List" I click the button named "ListContextMenuPost"
-	* Create Calculetion movement cost
+	* Create Calculation movement cost
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		And I click the button named "FormCreate"
 		And I input "18.09.2022 00:00:00" text in the field named "Date"

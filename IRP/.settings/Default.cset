@@ -187,6 +187,9 @@
     "right-interactive-delete-predefined-data": {
       "enabled": false
     },
+    "module-structure-init-code-in-region": {
+      "enabled": false
+    },
     "right-start-external-connection": {
       "enabled": false
     },
@@ -221,6 +224,9 @@
       "enabled": false
     },
     "module-self-reference": {
+      "enabled": false
+    },
+    "form-commands-single-action-handler": {
       "enabled": false
     },
     "right-save-user-data": {

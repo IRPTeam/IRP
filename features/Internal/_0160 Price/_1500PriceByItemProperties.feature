@@ -552,11 +552,11 @@ Scenario: _1500042 check price calculation in the documents (price by item, unit
 			And I activate field named "ItemListLineNumber" in "ItemList" table
 		* Add item by barcode
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "4820024700016" text in the field named "InputFld"
-			And I click the button named "OK"
+			And I input "4820024700016" text in the field named "Barcode"
+			And I move to the next attribute
 			And in the table "ItemList" I click the button named "SearchByBarcode"
-			And I input "89089988989989" text in the field named "InputFld"
-			And I click the button named "OK"
+			And I input "89089988989989" text in the field named "Barcode"
+			And I move to the next attribute
 		* Check
 			And "ItemList" table became equal
 				| 'Item key' | 'Price type'        | 'Item'  | 'Quantity' | 'Unit'           | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' |

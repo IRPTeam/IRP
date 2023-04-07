@@ -5,10 +5,10 @@
     <listType typeId="c4895461-8815-4b34-a701-9afc7adad8ca" valueTypeId="cc8585d7-1cc2-4b80-87cd-fefe8b2c185d"/>
     <managerType typeId="c7bec0fa-4d62-48f4-b23c-70edb403ba50" valueTypeId="0f7d8b6d-46b1-4d31-9f60-4b87fce6ad0d"/>
   </producedTypes>
-  <name>InventoryOrigingTypes</name>
+  <name>InventoryOriginTypes</name>
   <synonym>
     <key>en</key>
-    <value>Inventory origing types</value>
+    <value>Inventory origin types</value>
   </synonym>
   <quickChoice>true</quickChoice>
   <choiceMode>BothWays</choiceMode>

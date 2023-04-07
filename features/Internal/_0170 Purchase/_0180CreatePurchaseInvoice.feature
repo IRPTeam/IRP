@@ -92,13 +92,13 @@ Scenario: _018001 create document Purchase Invoice based on order (partial quant
 			| 'Row presentation'                             | 'Use' | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
 			| 'Purchase order 217 dated 12.02.2021 12:45:05' | 'Yes' | ''         | ''               | ''       | ''         |
 			| 'Dress (S/Yellow)'                             | 'Yes' | '10,000'   | 'pcs'            | '100,00' | 'TRY'      |
-			| 'Service (Interner)'                           | 'Yes' | '2,000'    | 'pcs'            | '150,00' | 'TRY'      |
+			| 'Service (Internet)'                           | 'Yes' | '2,000'    | 'pcs'            | '150,00' | 'TRY'      |
 			| 'Trousers (36/Yellow)'                         | 'Yes' | '5,000'    | 'pcs'            | '200,00' | 'TRY'      |
 			| 'Trousers (36/Yellow)'                         | 'Yes' | '8,000'    | 'pcs'            | '210,00' | 'TRY'      |
 			| 'Boots (36/18SD)'                              | 'Yes' | '5,000'    | 'Boots (12 pcs)' | '200,00' | 'TRY'      |
 		And I go to line in "BasisesTree" table
 			| 'Row presentation'  |
-			| 'Service (Interner)' |
+			| 'Service (Internet)' |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -631,7 +631,7 @@ Scenario: _018013 create PI using form link/unlink
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'  | 'Unit' | 'Use' |
-			| 'TRY'      | '150,00' | '2,000'    | 'Service (Interner)' | 'pcs'  | 'No'  |
+			| 'TRY'      | '150,00' | '2,000'    | 'Service (Internet)' | 'pcs'  | 'No'  |
 		And I set "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -647,7 +647,7 @@ Scenario: _018013 create PI using form link/unlink
 		Then "Link / unlink document row" window is opened
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
-			| '2' | '2,000'    | 'Service (Interner)'   | 'Store 02' | 'pcs'  |
+			| '2' | '2,000'    | 'Service (Internet)'   | 'Store 02' | 'pcs'  |
 		And I set checkbox "Linked documents"
 		And I click "Unlink" button
 		And I click "Ok" button
@@ -660,16 +660,16 @@ Scenario: _018013 create PI using form link/unlink
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key' | 'Sales order'                              | 'Purchase order'                               |
 			| 'Dress'   | 'S/Yellow' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
-			| 'Service' | 'Interner' | ''                                         | ''                                             |
+			| 'Service' | 'Internet' | ''                                         | ''                                             |
 	* Link line
 		And I click the button named "LinkUnlinkBasisDocuments"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation'  | 'Store'    | 'Unit' |
-			| '2' | '2,000'    | 'Service (Interner)' | 'Store 02' | 'pcs'  |
+			| '2' | '2,000'    | 'Service (Internet)' | 'Store 02' | 'pcs'  |
 		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'  | 'Unit' |
-			| 'TRY'      | '150,00' | '2,000'    | 'Service (Interner)' | 'pcs'  |
+			| 'TRY'      | '150,00' | '2,000'    | 'Service (Internet)' | 'pcs'  |
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
@@ -680,7 +680,7 @@ Scenario: _018013 create PI using form link/unlink
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key' | 'Sales order'                              | 'Purchase order'                               |
 			| 'Dress'   | 'S/Yellow' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
-			| 'Service' | 'Interner' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
+			| 'Service' | 'Internet' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
 	* Delete string, add it again, change unit
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key' | 'Sales order'                              | 'Purchase order'                               |
@@ -696,7 +696,7 @@ Scenario: _018013 create PI using form link/unlink
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key' | 'Sales order'                              | 'Purchase order'                               |
 			| 'Dress'   | 'S/Yellow' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
-			| 'Service' | 'Interner' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
+			| 'Service' | 'Internet' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' | 'Quantity'      | 'Store'    |
 			| 'Dress' | 'S/Yellow'  | '5,000' | 'Store 02' |
@@ -724,7 +724,7 @@ Scenario: _018015 cancel line in the PO and create PI
 		And I select current line in "List" table
 		And I go to line in "ItemList" table
 			| '#' | 'Item'    | 'Item key' | 'Quantity'     |
-			| '2' | 'Service' | 'Interner' | '2,000' |
+			| '2' | 'Service' | 'Internet' | '2,000' |
 		And I activate "Cancel" field in "ItemList" table
 		And I set "Cancel" checkbox in "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -742,7 +742,7 @@ Scenario: _018015 cancel line in the PO and create PI
 		Then "Add linked document rows" window is opened
 		And "BasisesTree" table does not contain lines
 			| 'Row presentation'   | 'Quantity' | 'Unit' |
-			| 'Service (Interner)' | '2,000'    | 'pcs'  |
+			| 'Service (Internet)' | '2,000'    | 'pcs'  |
 		And I close all client application windows
 
 Scenario: _018016 create PI based on GR with two same items (creation based on)

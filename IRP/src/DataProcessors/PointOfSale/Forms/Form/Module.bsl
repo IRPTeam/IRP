@@ -389,7 +389,7 @@ EndProcedure
 &AtClient
 Procedure AddItemKeyToItemList(ItemKey)
 	
-	Result = New Structure("FoundedItems", GetItemInfo.GetInfoByItemsKey(ItemKey));
+	Result = New Structure("FoundedItems, Barcodes", GetItemInfo.GetInfoByItemsKey(ItemKey, Object.Agreement), New Array);
 	SearchByBarcodeEnd(Result, New Structure());
 	
 EndProcedure
@@ -431,12 +431,12 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			FillSalesPersonInItemList();
 		EndIf;
 		
-	Else
-		
+	EndIf;
+
+	If Result.Barcodes.Count() Then		
 		DetailedInformation = "<span style=""color:red;"">" + StrTemplate(R().S_019, StrConcat(
 			Result.Barcodes, ",")) + "</span>";
 		SetDetailedInfo(DetailedInformation);
-		
 	EndIf;
 EndProcedure
 
@@ -444,7 +444,7 @@ EndProcedure
 Procedure ChangeRollbackRight(Command)
 	If Not Items.ChangeRollbackRight.Check Then
 		OpenForm("DataProcessor.PointOfSale.Form.ChangeRight", , ThisObject, , , , 
-		New NotifyDescription("ChangeRightEnd", ThisObject ) , FormWindowOpeningMode.LockOwnerWindow);
+			New NotifyDescription("ChangeRightEnd", ThisObject ) , FormWindowOpeningMode.LockOwnerWindow);
 	Else
 		Items.ChangeRollbackRight.Check = False;
 		ThisObject.KeepRights = False;
@@ -455,7 +455,7 @@ EndProcedure
 
 &AtClient
 Procedure ChangeRightEnd(Result, AdditionalParameters) Export
-	If Result = Undefined Then
+	If Result = Undefined OR Result.UserAdmin.isEmpty() Then
 		Items.ChangeRollbackRight.Check = False;
 	Else
 		Items.ChangeRollbackRight.Check = True;
@@ -467,16 +467,45 @@ EndProcedure
 
 &AtClient
 Procedure qPayment(Command)
+	Cancel = False;
+	OffersRecalculated = False;
+	FillqPaymentAtServer(Cancel, OffersRecalculated);
+	
+	If Not ThisObject.isReturn Then
+		OffersClient.SpecialOffersEditFinish_ForDocument(Object, ThisObject);
+	EndIf;
 
+	DPPointOfSaleClient.BeforePayment(ThisObject, Cancel);
+	
+	If Cancel Then
+		Return;
+	EndIf;
+	
+	OpenFormNotifyDescription = New NotifyDescription("PaymentFormClose", ThisObject);
+	ObjectParameters = New Structure();
+	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
+	ObjectParameters.Insert("Branch", Object.Branch);
+	ObjectParameters.Insert("Workstation", Workstation);
+	ObjectParameters.Insert("IsAdvance", False);
+	ObjectParameters.Insert("RetailCustomer", Object.RetailCustomer);
+	ObjectParameters.Insert("Company", Object.Company);
+	ObjectParameters.Insert("isReturn", ThisObject.isReturn);
+	ObjectParameters.Insert("RetailBasis", ThisObject.RetailBasis);
+	ObjectParameters.Insert("Discount", Object.ItemList.Total("OffersAmount"));
+	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
+		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);
+EndProcedure
+
+&AtServer
+Procedure FillqPaymentAtServer(Cancel, OffersRecalculated)
 	Object.Date = CommonFunctionsServer.GetCurrentSessionDate();
 
 	If Not CheckFilling() Then
 		Cancel = True;
 		Return;
 	EndIf;
-
-	Cancel = False;
-	DPPointOfSaleClient.BeforePayment(ThisObject, Cancel);
+	
+	DPPointOfSaleServer.BeforePayment(ThisObject, Cancel);
 	
 	If ThisObject.isReturn Then
 		If Not ThisObject.RetailBasis.IsEmpty() Then
@@ -494,28 +523,11 @@ Procedure qPayment(Command)
 			EndIf;
 		EndIf;
 	EndIf;
-
-	If Cancel Then
-		Return;
-	EndIf;
-
+		
 	If Not ThisObject.isReturn Then
-		OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object, ThisObject, "SpecialOffersEditFinish_ForDocument", Undefined, True);
+		OffersInfo = OffersServer.RecalculateOffers(Object, ThisObject);
+		OffersServer.CalculateOffersAfterSet(OffersInfo, Object);
 	EndIf;
-
-	OpenFormNotifyDescription = New NotifyDescription("PaymentFormClose", ThisObject);
-	ObjectParameters = New Structure();
-	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
-	ObjectParameters.Insert("Branch", Object.Branch);
-	ObjectParameters.Insert("Workstation", Workstation);
-	ObjectParameters.Insert("IsAdvance", False);
-	ObjectParameters.Insert("RetailCustomer", Object.RetailCustomer);
-	ObjectParameters.Insert("Company", Object.Company);
-	ObjectParameters.Insert("isReturn", ThisObject.isReturn);
-	ObjectParameters.Insert("RetailBasis", ThisObject.RetailBasis);
-	ObjectParameters.Insert("Discount", Object.ItemList.Total("OffersAmount"));
-	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
-		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
 &AtClient
@@ -610,6 +622,13 @@ Procedure ItemListDrag(Item, DragParameters, StandardProcessing, Row, Field)
 	EndIf;
 EndProcedure
 
+&AtClient
+Procedure AcquiringSlipInfo(Command)
+	OpenParameters = New Structure();
+	OpenParameters.Insert("Branch", Object.Branch);
+	OpenForm("DataProcessor.PointOfSale.Form.AcquiringSlipInfo", OpenParameters, ThisObject, , , , , FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
 #Region SpecialOffers
 
 #Region Offers_for_document
@@ -624,7 +643,16 @@ EndProcedure
 
 &AtClient
 Procedure SpecialOffersEditFinish_ForDocument(Result, AdditionalParameters) Export
-	OffersClient.SpecialOffersEditFinish_ForDocument(Result, Object, ThisObject, AdditionalParameters);
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	CalculateOffersAfterSet(Result);
+	OffersClient.SpecialOffersEditFinish_ForDocument(Object, ThisObject, AdditionalParameters);
+EndProcedure
+
+&AtServer
+Procedure CalculateOffersAfterSet(Result)
+	OffersServer.CalculateOffersAfterSet(Result, Object);
 EndProcedure
 
 #EndRegion
@@ -645,12 +673,22 @@ EndProcedure
 
 &AtClient
 Procedure SpecialOffersEditFinish_ForRow(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	CalculateAndLoadOffers_ForRow(Result);
 	OffersClient.SpecialOffersEditFinish_ForRow(Result, Object, ThisObject, AdditionalParameters);
+EndProcedure
+
+&AtServer
+Procedure CalculateAndLoadOffers_ForRow(Result)
+	OffersServer.CalculateAndLoadOffers_ForRow(Object, Result.OffersAddress, Result.ItemListRowKey);
 EndProcedure
 
 #EndRegion
 
 #EndRegion
+
 #EndRegion
 
 #EndRegion

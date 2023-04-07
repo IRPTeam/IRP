@@ -33,6 +33,9 @@
 			<item>
 				<field>RevenueRowsTreeAmount</field>
 			</item>
+			<item>
+				<field>RevenueRowsTreeTaxAmount</field>
+			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">

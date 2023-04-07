@@ -660,12 +660,12 @@ Scenario: _051 create additional cost allocation (row, by amount)
 				| 'Presentation'                                     | 'Use'                                              | 'Amount' | 'Currency' |
 				| 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | '350,00' | 'TRY'      |
 				| 'Service, Rent'                                    | 'No'                                               | '150,00' | 'TRY'      |
-				| 'Service, Interner'                                | 'No'                                               | '200,00' | 'TRY'      |
+				| 'Service, Internet'                                | 'No'                                               | '200,00' | 'TRY'      |
 				| 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | 'Purchase invoice 9 020 dated 09.06.2022 13:56:22' | '650,00' | 'TRY'      |
 				| 'Service, Rent'                                    | 'No'                                               | '250,00' | 'TRY'      |
-				| 'Service, Interner'                                | 'No'                                               | '400,00' | 'TRY'      |
+				| 'Service, Internet'                                | 'No'                                               | '400,00' | 'TRY'      |
 				| 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | 'Purchase invoice 9 019 dated 09.06.2022 13:56:11' | '550,00' | 'TRY'      |
-				| 'Service, Interner'                                | 'No'                                               | '400,00' | 'TRY'      |
+				| 'Service, Internet'                                | 'No'                                               | '400,00' | 'TRY'      |
 				| 'Service, Rent'                                    | 'No'                                               | '150,00' | 'TRY'      |			
 			And I go to line in "CostRowsTree" table
 				| 'Presentation'                                     | 'Use'                                              | 'Amount' | 'Currency' |
@@ -998,7 +998,7 @@ Scenario: _071 create additional revenue allocation (row, by amount)
 				| 'Sales invoice 9 020 dated 09.06.2022 16:15:03' | 'Sales invoice 9 020 dated 09.06.2022 16:15:03' | '1 000,00' | 'TRY'      |
 				| 'Service, Rent'                                 | 'No'                                            | '1 000,00' | 'TRY'      |
 				| 'Sales invoice 9 014 dated 09.06.2022 16:13:33' | 'Sales invoice 9 014 dated 09.06.2022 16:13:33' | '400,00'   | 'TRY'      |
-				| 'Service, Interner'                             | 'No'                                            | '100,00'   | 'TRY'      |
+				| 'Service, Internet'                             | 'No'                                            | '100,00'   | 'TRY'      |
 				| 'Service, Rent'                                 | 'No'                                            | '300,00'   | 'TRY'      |
 				| 'Sales invoice 9 018 dated 09.06.2022 16:14:23' | 'Sales invoice 9 018 dated 09.06.2022 16:14:23' | '300,00'   | 'TRY'      |
 				| 'Service, Rent'                                 | 'No'                                            | '300,00'   | 'TRY'      |		
@@ -1156,33 +1156,268 @@ Scenario: _080 allocation of the additional cost to the invoice of the previous 
 		And I close all client application windows
 		
 		
-						
-						
-			
-						
-						
-			
-			
-						
-			
-							
-			
-						
+Scenario: _090 allocation of the additional cost to the invoice of the previous period (item is already sold)
+	And I close all client application windows
+	* Preparation
+		When allocation of the additional cost to the invoice of the previous period (item is already sold)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(9023).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(9023).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(9024).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.AdditionalCostAllocation.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(9025).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.AdditionalCostAllocation.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(17).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(18).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(9026).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(9024).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.AdditionalCostAllocation.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(19).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(20).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Check
+		Given I open hyperlink "e1cib/app/Report.BatchBalance"	
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I activate field named "OptionsListReportOption" in "OptionsList" table
+		And I select current line in "OptionsList" table
+		And I set checkbox named "SettingsComposerUserSettingsItem2Use"
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 07'    |
+		And I select current line in "List" table
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		Then "Select period" window is opened
+		And I input "01.03.2023" text in the field named "DateBegin"
+		And I input "05.03.2023" text in the field named "DateEnd"
+		And I click the button named "Select"		
+		And I click "Generate" button
+	* Check landed cost
+		And "Result" spreadsheet document contains "BathBalance_071_3" template lines by template	
+		And I close all client application windows
 
-		
 				
 		
+Scenario: _092 copy additional cost allocation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+	* Select document
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuCopy"
+	* Check copy
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "AllocationMode" became equal to "By documents"
+		Then the form attribute named "AllocationMethod" became equal to "By quantity"
+	And I close all client application windows
+	
+Scenario: _093 copy additional revenue allocation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
+	* Select document
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuCopy"
+	* Check copy
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "AllocationMode" became equal to "By documents"
+		Then the form attribute named "AllocationMethod" became equal to "By quantity"
+	And I close all client application windows				
+
+
+Scenario: _094 select invoice by line in the additional cost allocation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+	* Create new 
+		And I click "Create" button
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "By documents" exact value from "Allocation mode" drop-down list
+		And I select "By quantity" exact value from "Allocation method" drop-down list
+		And in the table "CostDocuments" I click the button named "CostDocumentsAdd"
+		And I select "9018" by string from the drop-down list named "CostDocumentsDocument" in "CostDocuments" table
+		And I finish line editing in "CostDocuments" table
+		And in the table "AllocationDocuments" I click the button named "AllocationDocumentsAdd"
+		And I select current line in "AllocationDocuments" table
+		And I select "1" by string from the drop-down list named "AllocationDocumentsDocument" in "AllocationDocuments" table
+		And I finish line editing in "AllocationDocuments" table
+	* Check
+		And "CostDocuments" table became equal
+			| '#' | 'Document'                                         | 'Amount' | 'Currency' | 'Tax amount' |
+			| '1' | 'Purchase invoice 9 018 dated 09.06.2022 13:56:02' | '350,00' | 'TRY'      | '63,00'      |
+		And "AllocationDocuments" table became equal
+			| 'Document'                                     |
+			| 'Purchase invoice 1 dated 13.08.2021 16:48:58' |
+	And I close all client application windows
+
+
+Scenario: _095 select invoice by line in the additional revenue allocation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
+	* Create new 
+		And I click "Create" button
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I select "By documents" exact value from "Allocation mode" drop-down list
+		And I select "By quantity" exact value from "Allocation method" drop-down list
+		And in the table "RevenueDocuments" I click the button named "RevenueDocumentsAdd"
+		And I select "9024" by string from the drop-down list named "RevenueDocumentsDocument" in "RevenueDocuments" table
+		And I finish line editing in "RevenueDocuments" table
+		And in the table "AllocationDocuments" I click the button named "AllocationDocumentsAdd"
+		And I select current line in "AllocationDocuments" table
+		And I select "1" by string from the drop-down list named "AllocationDocumentsDocument" in "AllocationDocuments" table
+		And I finish line editing in "AllocationDocuments" table
+	* Check
+		And "RevenueDocuments" table became equal
+			| '#' | 'Document'                                      | 'Amount'   | 'Currency' | 'Tax amount'   |
+			| '1' | 'Sales invoice 9 024 dated 05.03.2023 12:00:00' | '6 481,50' | 'TRY'      | '1 231,49'     |
+		And "AllocationDocuments" table became equal
+			| 'Document'                                     |
+			| 'Purchase invoice 1 dated 13.08.2021 16:48:58' |
+	And I close all client application windows
+	
+		
+Scenario: _096 check message if invoice is empty in the additional cost allocation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
+	* Select document
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And I select current line in "List" table
+	* Add new invoice
+		And in the table "CostDocuments" I click "Add" button
+		And I click choice button of "Document" attribute in "CostDocuments" table
+		And I go to line in "List" table
+			| 'Basis'                                            |
+			| 'Purchase invoice 9 012 dated 17.08.2021 09:44:45' |
+		And I select current line in "List" table
+		And I finish line editing in "CostDocuments" table
+		And I click "Post" button
+	* Check message
+		Then there are lines in TestClient message log
+			|'Invoice for document: [Purchase invoice 9 012 dated 17.08.2021 09:44:45] is empty'|
+	And I close all client application windows
+		
+Scenario: _097 check message if invoice is empty in the additional revenue allocation
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
+	* Select document
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And I select current line in "List" table
+	* Add new invoice
+		And in the table "RevenueDocuments" I click "Add" button
+		And I click choice button of "Document" attribute in "RevenueDocuments" table
+		And I go to line in "List" table
+			| 'Basis'                                         |
+			| 'Sales invoice 9 020 dated 09.06.2022 16:15:03' |
+		And I select current line in "List" table
+		And I finish line editing in "RevenueDocuments" table
+		And I click "Post" button
+	* Check message
+		Then there are lines in TestClient message log
+			|'Invoice for document: [Sales invoice 9 020 dated 09.06.2022 16:15:03] is empty'|
+	And I close all client application windows				
 				
 		
-				
 		
-					
-				
-		
-				
-		
-		
-				
+Scenario: _098 allocation of the additional cost (tax) (item is already sold)
+	And I close all client application windows
+	* Preparation	
+		When allocation of the additional cost (tax) (item is already sold)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(9027).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(9028).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(9030).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(24).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(9025).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.AdditionalCostAllocation.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(22).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(25).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(9029).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.AdditionalCostAllocation.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(23).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(26).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(9026).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(27).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(28).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Check
+		Given I open hyperlink "e1cib/app/Report.BatchBalance"	
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I activate field named "OptionsListReportOption" in "OptionsList" table
+		And I select current line in "OptionsList" table
+		And I set checkbox named "SettingsComposerUserSettingsItem2Use"
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 07'    |
+		And I select current line in "List" table
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		Then "Select period" window is opened
+		And I input "01.04.2023" text in the field named "DateBegin"
+		And I input "05.04.2023" text in the field named "DateEnd"
+		And I click the button named "Select"		
+		And I click "Generate" button
+	* Check landed cost
+		And "Result" spreadsheet document contains "BathBalance_072_3" template lines by template	
+		And I close all client application windows
+
+
 		
 				
 		

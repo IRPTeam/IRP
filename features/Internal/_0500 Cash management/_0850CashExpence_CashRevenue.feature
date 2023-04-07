@@ -28,6 +28,7 @@ Scenario: _085000 preparation (Cash expence and Cash revenue)
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Companies objects (own Second company)
+		When Create catalog Countries objects
 		When Create catalog Partners objects (Kalipso)
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects

@@ -51,6 +51,7 @@ Scenario: _045000 preparation (Outgoing payment order)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
+		When Create catalog Countries objects
 		When Create catalog PartnersBankAccounts objects
 		When update ItemKeys
 		When Create catalog SerialLotNumbers objects

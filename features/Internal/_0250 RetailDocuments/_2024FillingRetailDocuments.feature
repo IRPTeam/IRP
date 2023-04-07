@@ -37,6 +37,7 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog Countries objects
 		When Create catalog Stores objects
 		When Create catalog Partners objects
 		When Create catalog Partners and Payment type (Bank)

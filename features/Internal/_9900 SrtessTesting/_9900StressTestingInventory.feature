@@ -27,6 +27,7 @@ Scenario: _043400 preparation (StressTesting)
 		When Create catalog PriceTypes objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog Countries objects
 		When Create catalog Stores objects
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)

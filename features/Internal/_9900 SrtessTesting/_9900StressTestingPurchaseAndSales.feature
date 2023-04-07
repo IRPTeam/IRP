@@ -42,6 +42,7 @@ Scenario: _043400 preparation (StressTesting)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
+		When Create catalog Countries objects
 		When Create catalog PartnersBankAccounts objects
 		When Create catalog Items objects (stress testing)
 		When Create catalog ItemKeys objects (stress testing)

@@ -56,6 +56,7 @@ Scenario:_800000 preparation (remaining stock control)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
+		When Create catalog Countries objects
 		When Create information register Barcodes records
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)

@@ -39,6 +39,7 @@ Scenario:_800020 preparation (remaining stock control)
 		When Create catalog Stores objects (with remaining stock control)
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
+		When Create catalog Countries objects
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create chart of characteristic types CurrencyMovementType objects

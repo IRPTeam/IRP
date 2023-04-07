@@ -48,6 +48,7 @@ Scenario: _05602 preparation (consignment landed cost)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Companies objects (partners company)
 		When Create catalog Companies objects (own Second company)
+		When Create catalog Countries objects
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects

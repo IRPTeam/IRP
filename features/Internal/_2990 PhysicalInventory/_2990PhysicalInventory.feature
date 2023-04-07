@@ -50,6 +50,7 @@ Scenario: _2990000 preparation (product inventory)
 		When Create catalog Users objects
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
+		When Create catalog Countries objects
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create information register PartnerSegments records

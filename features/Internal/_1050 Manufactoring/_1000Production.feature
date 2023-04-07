@@ -29,6 +29,7 @@ Scenario: _1001 preparation
 	When Create chart of characteristic types AddAttributeAndProperty objects (MF)
 	When Create catalog Stores objects
 	When Create catalog Companies objects (Main company)
+	When Create catalog Countries objects
 	When Create chart of characteristic types CurrencyMovementType objects
 	When Create catalog Currencies objects
 	When Create catalog BusinessUnits objects (MF)

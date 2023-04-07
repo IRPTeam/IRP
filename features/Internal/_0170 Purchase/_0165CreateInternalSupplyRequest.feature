@@ -35,6 +35,7 @@ Scenario: _016500 preparation
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog Countries objects
 		When Create catalog Stores objects
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Companies objects (partners company)

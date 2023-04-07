@@ -39,6 +39,7 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 		When Create catalog Stores objects
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
+		When Create catalog Countries objects
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create chart of characteristic types CurrencyMovementType objects

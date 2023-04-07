@@ -32,6 +32,7 @@ Scenario: _0230000 preparation (Sales order closing)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog BusinessUnits objects
 		When Create catalog Companies objects (partners company)
+		When Create catalog Countries objects
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects

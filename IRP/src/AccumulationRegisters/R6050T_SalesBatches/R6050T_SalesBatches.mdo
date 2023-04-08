@@ -95,6 +95,19 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <resources uuid="b3d25239-c51d-4546-9768-7b1e6167e502">
+    <name>AmountCostTax</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount cost tax</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
   <dimensions uuid="c728c832-7cdd-417e-b575-31112913b75b">
     <name>Batch</name>
     <synonym>

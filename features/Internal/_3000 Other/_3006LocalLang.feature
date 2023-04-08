@@ -36,6 +36,7 @@ Scenario: _300600 preparation (data multi-language)
 		When Create catalog BusinessUnits objects
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Companies objects (partners company)
+		When Create catalog Countries objects
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects

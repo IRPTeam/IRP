@@ -32,6 +32,7 @@ Scenario: _3510000 preparation (check the cleaning of fields in forms)
                 When Create catalog AddAttributeAndPropertyValues objects
                 When Create catalog Currencies objects
                 When Create catalog Companies objects (Main company)
+                When Create catalog Countries objects
                 When Create catalog Stores objects
                 When Create catalog Partners objects (Ferron BP)
                 When Create catalog Partners objects (Kalipso)

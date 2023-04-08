@@ -23,6 +23,7 @@ Scenario: _8000 preparation (filling in from user settings)
 	Given I open new TestClient session or connect the existing one
 	Then I connect launched Test client "Этот клиент"
 	When Create catalog Companies objects (Main company)
+	When Create catalog Countries objects
 	When Create catalog BusinessUnits objects (MF)
 	When Create catalog Stores objects
 	When filling in user settings (manufactoring)

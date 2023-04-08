@@ -19,6 +19,7 @@ Scenario: _0978001 preparation (foreign currency revaluation)
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
+		When Create catalog Countries objects
 		When Create catalog Agreements objects
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects

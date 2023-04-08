@@ -43,6 +43,7 @@ Scenario: _047000 preparation (sales report to consignors movements)
 		When Create catalog Stores (trade agent)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Companies objects (partners company)
+		When Create catalog Countries objects
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects

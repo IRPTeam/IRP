@@ -39,6 +39,7 @@ Scenario: _080000 preparation (Incoming payment order and Outgoing payment order
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
 		When Create catalog Companies objects (partners company)
+		When Create catalog Countries objects
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
 		When Create catalog PlanningPeriods objects

@@ -36,6 +36,7 @@ Scenario: _090500 preparation (create PI and SI based on Goods receipt and Shipm
 		When Create catalog Stores objects
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
+		When Create catalog Countries objects
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create information register PartnerSegments records

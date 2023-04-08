@@ -29,6 +29,7 @@ Scenario: _203000 preparation (List forms)
 		When Create catalog Items objects
 		When Create catalog PriceTypes objects
 		When Create catalog Specifications objects
+		When Create catalog Countries objects
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects

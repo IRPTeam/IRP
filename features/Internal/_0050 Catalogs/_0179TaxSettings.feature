@@ -44,6 +44,7 @@ Scenario: _017902 filling in catalog 'Tax types'
 	* Preparation
 		When Create catalog TaxRates objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog Countries objects
 	* Opening a tax creation form
 		Given I open hyperlink "e1cib/list/Catalog.Taxes"
 		And I click the button named "FormCreate"

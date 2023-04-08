@@ -36,6 +36,7 @@ Scenario: _042900 preparation (Opening entry)
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog Countries objects
 		When Create catalog ItemTypes objects (serial lot numbers)
 		When Create catalog Items objects (serial lot numbers)
 		When Create catalog ItemKeys objects (serial lot numbers)

@@ -21,6 +21,7 @@ Scenario: _097700 preparation (Сheck payroll)
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
+		When Create catalog Countries objects
 		When Create catalog PlanningPeriods objects
 		When Create catalog Agreements objects
 		When Create catalog ObjectStatuses objects

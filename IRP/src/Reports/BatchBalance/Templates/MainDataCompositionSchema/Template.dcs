@@ -1681,6 +1681,10 @@ WHERE
 								<v8:lang>en</v8:lang>
 								<v8:content>Tax (cost)</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Налоги (стоимость)</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -1804,6 +1808,10 @@ WHERE
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Tax (cost)</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Налоги (стоимость)</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -1929,6 +1937,10 @@ WHERE
 								<v8:lang>en</v8:lang>
 								<v8:content>Tax (cost)</v8:content>
 							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Налоги (стоимость)</v8:content>
+							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -2052,6 +2064,10 @@ WHERE
 							<v8:item>
 								<v8:lang>en</v8:lang>
 								<v8:content>Tax (cost)</v8:content>
+							</v8:item>
+							<v8:item>
+								<v8:lang>ru</v8:lang>
+								<v8:content>Налоги (стоимость)</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>

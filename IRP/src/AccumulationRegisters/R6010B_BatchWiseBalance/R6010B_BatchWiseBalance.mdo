@@ -152,6 +152,10 @@
    <key>en</key>
    <value>Amount cost tax</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Стоимость - Налоги</value>
+  </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
   </type>

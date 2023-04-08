@@ -265,11 +265,11 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 	Result.Insert("Ref", Undefined);
 	If Metadata.Documents.Contains(ObjMetadata) Then
 		If Not Object = Undefined Then
-			Doc = Object;
+			Doc = Object; // DocumentObjectDocumentName
 		ElsIf ValueIsFilled(Wrapper.Object.Ref) Then
-			Doc = Wrapper.Object.Ref.GetObject();
+			Doc = Wrapper.Object.Ref.GetObject(); // DocumentObjectDocumentName
 		Else
-			Doc = Documents[ObjMetadata.Name].CreateDocument();
+			Doc = Documents[ObjMetadata.Name].CreateDocument(); // DocumentObjectDocumentName
 		EndIf;
 		
 		FillPropertyValues(Doc, Wrapper.Object, , "Number");
@@ -283,8 +283,14 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 		EndDo;
 		
 		If Object = Undefined Then
-			Doc.Write(?(WriteMode = Undefined, DocumentWriteMode.Write, WriteMode),
-				?(PostingMode = Undefined , DocumentPostingMode.Regular , PostingMode));
+			Doc.Write(
+				?(
+					WriteMode = Undefined, 
+					?(Doc.Posted, DocumentWriteMode.Posting, DocumentWriteMode.Write), 
+					WriteMode
+				),
+				?(PostingMode = Undefined , DocumentPostingMode.Regular , PostingMode)
+			);
 			Wrapper.Object.Ref = Doc.Ref;
 		Else
 			Result.Insert("Object", Doc);

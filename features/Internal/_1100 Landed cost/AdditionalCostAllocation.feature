@@ -126,7 +126,7 @@ Scenario: _041 test data
 		When Create document PurchaseOrder objects (LC)
 		When Create document PurchaseReturn objects (LC)
 		When Create document PurchaseReturnOrder objects (LC)
-		When Create catalog ReportOptions objects
+		When Create catalog ReportOptions objects (landed cost)
 		When Create document SalesInvoice objects (Revenue cost allocation)
 		When Create document SalesInvoice objects (LC)
 		When Create document SalesReturn objects (LC)
@@ -1144,7 +1144,6 @@ Scenario: _080 allocation of the additional cost to the invoice of the previous 
 			| 'Description' |
 			| 'Store 03'    |
 		And I select current line in "List" table
-		Then "Batch balance (Test)" window is opened
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
 		Then "Select period" window is opened
 		And I input "01.12.2022" text in the field named "DateBegin"

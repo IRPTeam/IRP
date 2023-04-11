@@ -11220,22 +11220,35 @@ EndProcedure
 Function GetSerialLotNumber_SingleRowInfo(val Object, FilterKey = Undefined) Export
 	SingleRowInfo = New Map();
 	
-	DocType = TypeOf(Object.Ref);
-	AvailableTypes = New Array();
-	AvailableTypes.Add(Type("DocumentRef.SalesInvoice"));
-	AvailableTypes.Add(Type("DocumentRef.ShipmentConfirmation"));
-	
-	If AvailableTypes.Find(DocType) <> Undefined Then
+	SerialLotNumberInTable = CommonFunctionsClientServer.ObjectHasProperty(Object, "SerialLotNumbers");
+	SerialLotNumberInRow = False;
+	If Object.ItemList.Count() Then
+		SerialLotNumberInRow = CommonFunctionsClientServer.ObjectHasProperty(Object.ItemList[0], "SerialLotNumber");
+	EndIf;
+		
+	If SerialLotNumberInTable Or SerialLotNumberInRow Then
 		For Each Row In Object.ItemList Do
 			If ValueIsFilled(FilterKey) And Row.Key <> FilterKey Then
 				Continue;
 			EndIf;
 			
-			If Row.Item.ItemType.SingleRow Then
+			If Not Row.Item.ItemType.SingleRow Then
+				Continue;
+			EndIf;
+			
+			If SerialLotNumberInTable Then
 				SerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", Row.Key));
 				If SerialLotNumbers.Count() Then
-					SingleRowInfo.Insert(Row.Key, SerialLotNumbers[0].SerialLotNumber);
+					SerialLotNumberRef = SerialLotNumbers[0].SerialLotNumber;
 				EndIf;
+			EndIf;
+				
+			If SerialLotNumberInRow Then
+				SerialLotNumberRef = Row.SerialLotNumber;
+			EndIf;
+				
+			If ValueIsFilled(SerialLotNumberRef) Then
+				SingleRowInfo.Insert(Row.Key, SerialLotNumberRef);
 			EndIf;
 		EndDo;
 	EndIf;

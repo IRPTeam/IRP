@@ -10155,7 +10155,16 @@ Procedure CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, Basises
 					DeepLevelRow = _BasisesTreeRow.Add();
 					
 					DeepLevelRow.Picture = 0;
-					DeepLevelRow.RowPresentation = String(TableRow.Item) + " (" + String(TableRow.ItemKey) + ")";
+					
+					SerialLotNumberPresentation = "";
+					If CommonFunctionsClientServer.ObjectHasProperty(DeepLevelRow, "SerialLotNumber") Then
+						SingleRowInfo = GetSerialLotNumber_SingleRowInfo(TableRow.Basis, TableRow.BasisKey);
+						DeepLevelRow.SerialLotNumber = SingleRowInfo.Get(TableRow.BasisKey);
+						If ValueIsFilled(DeepLevelRow.SerialLotNumber) Then
+							SerialLotNumberPresentation = " (" + DeepLevelRow.SerialLotNumber + ")";
+						EndIf;
+					EndIf;
+					DeepLevelRow.RowPresentation = String(TableRow.Item) + " (" + String(TableRow.ItemKey) + ")" + SerialLotNumberPresentation;
 
 					DeepLevelRow.DeepLevel = True;
 					FillPropertyValues(DeepLevelRow, TableRow);
@@ -10178,7 +10187,7 @@ Procedure CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, Basises
 						EndIf;
 						DeepLevelRow.Linked = True;
 					EndIf;
-
+					
 				EndDo;
 			Else
 				For Each ParentRow In ParentRows Do
@@ -11208,3 +11217,28 @@ EndProcedure
 
 #EndRegion
 
+Function GetSerialLotNumber_SingleRowInfo(val Object, FilterKey = Undefined) Export
+	SingleRowInfo = New Map();
+	
+	DocType = TypeOf(Object.Ref);
+	AvailableTypes = New Array();
+	AvailableTypes.Add(Type("DocumentRef.SalesInvoice"));
+	AvailableTypes.Add(Type("DocumentRef.ShipmentConfirmation"));
+	
+	If AvailableTypes.Find(DocType) <> Undefined Then
+		For Each Row In Object.ItemList Do
+			If ValueIsFilled(FilterKey) And Row.Key <> FilterKey Then
+				Continue;
+			EndIf;
+			
+			If Row.Item.ItemType.SingleRow Then
+				SerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", Row.Key));
+				If SerialLotNumbers.Count() Then
+					SingleRowInfo.Insert(Row.Key, SerialLotNumbers[0].SerialLotNumber);
+				EndIf;
+			EndIf;
+		EndDo;
+	EndIf;
+	
+	Return SingleRowInfo;
+EndFunction

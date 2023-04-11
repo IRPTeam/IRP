@@ -67,6 +67,12 @@ Function GetSelectedRowInfo(CurrentData, ArrayOfFilterExcludeFields = Undefined)
 	If CommonFunctionsClientServer.ObjectHasProperty(CurrentData, "Store") Then
 		Store = CurrentData.Store;
 	EndIf;
+	
+	SerialLotNumber = Undefined;
+	If CommonFunctionsClientServer.ObjectHasProperty(CurrentData, "SerialLotNumber") Then
+		SerialLotNumber = CurrentData.SerialLotNumber;
+	EndIf;
+	
 	Result.SelectedRow = New Structure();
 	Result.SelectedRow.Insert("Key"        , CurrentData.Key);
 	Result.SelectedRow.Insert("Item"       , CurrentData.Item);
@@ -75,7 +81,8 @@ Function GetSelectedRowInfo(CurrentData, ArrayOfFilterExcludeFields = Undefined)
 	Result.SelectedRow.Insert("Unit"       , CurrentData.Unit);
 	Result.SelectedRow.Insert("Quantity"   , CurrentData.Quantity);
 	Result.SelectedRow.Insert("LineNumber" , CurrentData.LineNumber);
-
+	Result.SelectedRow.Insert("SerialLotNumber" , SerialLotNumber);
+		
 	Result.SelectedRow.Insert("QuantityInBaseUnit", 0);
 	Result.SelectedRow.Insert("BasisUnit", Undefined);
 
@@ -119,6 +126,9 @@ Function GetTablesInfo(Object = Undefined, FilterKey = Undefined) Export
 EndFunction
 
 Function GetItemListRows(ItemList, Object, FilterKey = Undefined) Export
+	
+	SerialLotNumber_SingleRowInfo = RowIDInfoServer.GetSerialLotNumber_SingleRowInfo(Object);
+	
 	ItemListRows = New Array();
 	For Each Row In ItemList Do
 		If FilterKey <> Undefined And Row.Key <> FilterKey Then
@@ -143,6 +153,9 @@ Function GetItemListRows(ItemList, Object, FilterKey = Undefined) Export
 		Else
 			NewRow.Insert("IsExternalLinked", False);
 		EndIf;
+		
+		NewRow.Insert("SerialLotNumber", SerialLotNumber_SingleRowInfo.Get(Row.Key));	
+		
 		ItemListRows.Add(NewRow);
 	EndDo;
 	Return ItemListRows;

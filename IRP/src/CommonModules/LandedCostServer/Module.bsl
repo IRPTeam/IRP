@@ -755,7 +755,7 @@ Function GetQueryText_CurrentPeriod()
 	 |	AllocationInfo.ItemKey
 	 |
 	 |HAVING
-	 |	SUM(AllocationInfo.Amount) > 0
+	 |	SUM(AllocationInfo.%1) > 0
 	 |;
 	 |
 	 |////////////////////////////////////////////////////////////////////////////////

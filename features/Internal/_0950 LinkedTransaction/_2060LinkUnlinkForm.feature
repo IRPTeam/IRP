@@ -114,21 +114,21 @@ Scenario: _2060001 preparation
 			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 	When create Sales invoice and Sales order object (sln, autolink)
 	And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(1054).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
-			| "Documents.SalesOrder.FindByNumber(1054).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesOrder.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
 	When create Inventory transfer and Inventory transfer object (sln, autolink)
 	And I execute 1C:Enterprise script at server
-			| "Documents.InventoryTransferOrder.FindByNumber(1054).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.InventoryTransferOrder.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
-			| "Documents.InventoryTransfer.FindByNumber(1054).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.InventoryTransfer.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
 	When create SalesOrder and ShipmentConfirmation object (sln, autolink)
 	And I execute 1C:Enterprise script at server
-			| "Documents.SalesOrder.FindByNumber(1055).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesOrder.FindByNumber(2055).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
-			| "Documents.ShipmentConfirmation.FindByNumber(1054).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.ShipmentConfirmation.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
-			| "Documents.ShipmentConfirmation.FindByNumber(1055).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.ShipmentConfirmation.FindByNumber(2055).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Save SI numbers
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
@@ -2341,7 +2341,7 @@ Scenario: _2060023 check auto form in the SC - SO (with sln)
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
 			| 'Number' |
-			| '1 054'  |
+			| '2 054'  |
 		And I select current line in "List" table
 	* Auto link
 		And in the table "ItemList" I click "Link unlink basis documents" button
@@ -2349,56 +2349,56 @@ Scenario: _2060023 check auto form in the SC - SO (with sln)
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| '#' | 'Item'                         | 'Inventory transfer' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Sales invoice' | 'Store'    | 'Shipment basis'                              | 'Sales order'                                 | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
-			| '1' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009099'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
-			| '2' | 'Dress'                        | ''                   | 'XS/Blue'  | ''                   | 'pcs'  | '2,000'    | ''              | 'Store 01' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
-			| '3' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '1' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009099'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '2' | 'Dress'                        | ''                   | 'XS/Blue'  | ''                   | 'pcs'  | '2,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '3' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
 			| '4' | 'Product 7 with SLN (new row)' | ''                   | 'ODS'      | '9009100'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | ''                                            | ''                                            | ''                         | ''                      | ''                |
-			| '5' | 'Product 1 with SLN'           | ''                   | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '5' | 'Product 1 with SLN'           | ''                   | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
 		Then the number of "ItemList" table lines is "равно" "5"
 		And I click "Post and close" button
 		And I go to line in "List" table
 			| 'Number' |
-			| '1 054'  |
+			| '2 054'  |
 		And I select current line in "List" table
 		And "ItemList" table contains lines
 			| '#' | 'Item'                         | 'Inventory transfer' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Sales invoice' | 'Store'    | 'Shipment basis'                              | 'Sales order'                                 | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
-			| '1' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009099'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
-			| '2' | 'Dress'                        | ''                   | 'XS/Blue'  | ''                   | 'pcs'  | '2,000'    | ''              | 'Store 01' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
-			| '3' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '1' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009099'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '2' | 'Dress'                        | ''                   | 'XS/Blue'  | ''                   | 'pcs'  | '2,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '3' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
 			| '4' | 'Product 7 with SLN (new row)' | ''                   | 'ODS'      | '9009100'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | ''                                            | ''                                            | ''                         | ''                      | ''                |
-			| '5' | 'Product 1 with SLN'           | ''                   | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '5' | 'Product 1 with SLN'           | ''                   | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
 		And I close current window
 	* Select second SC	
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table
 			| 'Number' |
-			| '1 055'  |
+			| '2 055'  |
 		And I select current line in "List" table	
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And in the table "BasisesTree" I click "Auto link" button
 		And I click "Ok" button	
 		And "ItemList" table became equal
 			| '#' | 'Item'                         | 'Inventory transfer' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Sales invoice' | 'Store'    | 'Shipment basis'                              | 'Sales order'                                 | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
-			| '1' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
-			| '2' | 'Product 1 with SLN'           | ''                   | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '1' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '2' | 'Product 1 with SLN'           | ''                   | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
 		Then the number of "ItemList" table lines is "равно" "2"
 		And I click "Post and close" button
 		And I go to line in "List" table
 			| 'Number' |
-			| '1 055'  |
+			| '2 055'  |
 		And I select current line in "List" table
 		And "ItemList" table contains lines
 			| '#' | 'Item'                         | 'Inventory transfer' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Sales invoice' | 'Store'    | 'Shipment basis'                              | 'Sales order'                                 | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
-			| '1' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
-			| '2' | 'Product 1 with SLN'           | ''                   | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '1' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '2' | 'Product 1 with SLN'           | ''                   | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
 		And I close all client application windows
 	* Unpost documents
 		And I execute 1C:Enterprise script at server
-			| "Documents.ShipmentConfirmation.FindByNumber(1054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+			| "Documents.ShipmentConfirmation.FindByNumber(2054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
 		And I execute 1C:Enterprise script at server
-			| "Documents.ShipmentConfirmation.FindByNumber(1055).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+			| "Documents.ShipmentConfirmation.FindByNumber(2055).GetObject().Write(DocumentWriteMode.UndoPosting);" |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesOrder.FindByNumber(1055).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+			| "Documents.SalesOrder.FindByNumber(2055).GetObject().Write(DocumentWriteMode.UndoPosting);" |
 		
 			
 				
@@ -2408,7 +2408,7 @@ Scenario: _2060024 check auto form in the SI - SO (with sln)
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
 			| 'Number' |
-			| '1 054'  |
+			| '2 054'  |
 		And I select current line in "List" table	
 	* Auto link
 		And in the table "ItemList" I click "Link unlink basis documents" button
@@ -2416,32 +2416,32 @@ Scenario: _2060024 check auto form in the SI - SO (with sln)
 		And I click "Ok" button	
 		And "ItemList" table contains lines
 			| '#' | 'SalesTax' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Store'    | 'Use shipment confirmation' | 'Sales order'                                 |
-			| '1' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009098'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 1 054 dated 11.04.2023 15:25:22' |
-			| '2' | '1%'       | 'Basic Price Types'       | 'Dress'                        | 'XS/Blue'  | 'No'                 | '168,94'     | 'pcs'  | ''                   | '2,000'    | '520,00' | '18%' | ''              | '871,06'     | '1 040,00'     | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 1 054 dated 11.04.2023 15:25:22' |
-			| '3' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009099'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 1 054 dated 11.04.2023 15:25:22' |
-			| '4' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009098'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 1 054 dated 11.04.2023 15:25:22' |
+			| '1' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009098'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
+			| '2' | '1%'       | 'Basic Price Types'       | 'Dress'                        | 'XS/Blue'  | 'No'                 | '168,94'     | 'pcs'  | ''                   | '2,000'    | '520,00' | '18%' | ''              | '871,06'     | '1 040,00'     | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
+			| '3' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009099'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
+			| '4' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009098'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
 			| '5' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'                 | '16,24'      | 'pcs'  | '9009100'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | ''                                            |
-			| '6' | '1%'       | 'en description is empty' | 'Product 1 with SLN'           | 'ODS'      | 'No'                 | '16,24'      | 'pcs'  | '9090098908'         | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 1 054 dated 11.04.2023 15:25:22' |
+			| '6' | '1%'       | 'en description is empty' | 'Product 1 with SLN'           | 'ODS'      | 'No'                 | '16,24'      | 'pcs'  | '9090098908'         | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
 		Then the number of "ItemList" table lines is "равно" "6"
 		And I click "Post and close" button
 		And I go to line in "List" table
 			| 'Number' |
-			| '1 054'  |
+			| '2 054'  |
 		And I select current line in "List" table
 		And "ItemList" table contains lines
 			| '#' | 'SalesTax' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Store'    | 'Use shipment confirmation' | 'Sales order'                                 |
-			| '1' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009098'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 1 054 dated 11.04.2023 15:25:22' |
-			| '2' | '1%'       | 'Basic Price Types'       | 'Dress'                        | 'XS/Blue'  | 'No'                 | '168,94'     | 'pcs'  | ''                   | '2,000'    | '520,00' | '18%' | ''              | '871,06'     | '1 040,00'     | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 1 054 dated 11.04.2023 15:25:22' |
-			| '3' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009099'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 1 054 dated 11.04.2023 15:25:22' |
-			| '4' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009098'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 1 054 dated 11.04.2023 15:25:22' |
+			| '1' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009098'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
+			| '2' | '1%'       | 'Basic Price Types'       | 'Dress'                        | 'XS/Blue'  | 'No'                 | '168,94'     | 'pcs'  | ''                   | '2,000'    | '520,00' | '18%' | ''              | '871,06'     | '1 040,00'     | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
+			| '3' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009099'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
+			| '4' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009098'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
 			| '5' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'                 | '16,24'      | 'pcs'  | '9009100'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | ''                                            |
-			| '6' | '1%'       | 'en description is empty' | 'Product 1 with SLN'           | 'ODS'      | 'No'                 | '16,24'      | 'pcs'  | '9090098908'         | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 1 054 dated 11.04.2023 15:25:22' |
+			| '6' | '1%'       | 'en description is empty' | 'Product 1 with SLN'           | 'ODS'      | 'No'                 | '16,24'      | 'pcs'  | '9090098908'         | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
 		And I close all client application windows
 	* Unpost documents
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesInvoice.FindByNumber(1054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+			| "Documents.SalesInvoice.FindByNumber(2054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
 		And I execute 1C:Enterprise script at server
-			| "Documents.SalesOrder.FindByNumber(1054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+			| "Documents.SalesOrder.FindByNumber(2054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
 		
 		
 Scenario: _2060025 check auto form in the IT - ITO (with sln)
@@ -2450,7 +2450,7 @@ Scenario: _2060025 check auto form in the IT - ITO (with sln)
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
 			| 'Number' |
-			| '1 054'  |
+			| '2 054'  |
 		And I select current line in "List" table	
 	* Auto link
 		And in the table "ItemList" I click "Link unlink basis documents" button
@@ -2458,32 +2458,32 @@ Scenario: _2060025 check auto form in the IT - ITO (with sln)
 		And I click "Ok" button	
 		And "ItemList" table became equal
 			| '#' | 'Item'                         | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Inventory transfer order'                                 |
-			| '1' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | 'Inventory transfer order 1 054 dated 11.04.2023 15:35:41' |
-			| '2' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | 'Inventory transfer order 1 054 dated 11.04.2023 15:35:41' |
-			| '3' | 'Dress'                        | 'XS/Blue'  | ''                   | 'pcs'  | '2,000'    | 'Inventory transfer order 1 054 dated 11.04.2023 15:35:41' |
-			| '4' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009099'            | 'pcs'  | '1,000'    | 'Inventory transfer order 1 054 dated 11.04.2023 15:35:41' |
+			| '1' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
+			| '2' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
+			| '3' | 'Dress'                        | 'XS/Blue'  | ''                   | 'pcs'  | '2,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
+			| '4' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009099'            | 'pcs'  | '1,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
 			| '5' | 'Product 7 with SLN (new row)' | 'ODS'      | '9009100'            | 'pcs'  | '1,000'    | ''                                                         |
-			| '6' | 'Product 1 with SLN'           | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | 'Inventory transfer order 1 054 dated 11.04.2023 15:35:41' |
+			| '6' | 'Product 1 with SLN'           | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
 		Then the number of "ItemList" table lines is "равно" "6"
 		And I click "Post and close" button
 		And I go to line in "List" table
 			| 'Number' |
-			| '1 054'  |
+			| '2 054'  |
 		And I select current line in "List" table
 		And "ItemList" table contains lines
 			| '#' | 'Item'                         | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Inventory transfer order'                                 |
-			| '1' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | 'Inventory transfer order 1 054 dated 11.04.2023 15:35:41' |
-			| '2' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | 'Inventory transfer order 1 054 dated 11.04.2023 15:35:41' |
-			| '3' | 'Dress'                        | 'XS/Blue'  | ''                   | 'pcs'  | '2,000'    | 'Inventory transfer order 1 054 dated 11.04.2023 15:35:41' |
-			| '4' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009099'            | 'pcs'  | '1,000'    | 'Inventory transfer order 1 054 dated 11.04.2023 15:35:41' |
+			| '1' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
+			| '2' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
+			| '3' | 'Dress'                        | 'XS/Blue'  | ''                   | 'pcs'  | '2,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
+			| '4' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009099'            | 'pcs'  | '1,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
 			| '5' | 'Product 7 with SLN (new row)' | 'ODS'      | '9009100'            | 'pcs'  | '1,000'    | ''                                                         |
-			| '6' | 'Product 1 with SLN'           | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | 'Inventory transfer order 1 054 dated 11.04.2023 15:35:41' |
+			| '6' | 'Product 1 with SLN'           | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
 		And I close all client application windows
 	* Unpost documents
 		And I execute 1C:Enterprise script at server
-			| "Documents.InventoryTransfer.FindByNumber(1054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+			| "Documents.InventoryTransfer.FindByNumber(2054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
 		And I execute 1C:Enterprise script at server
-			| "Documents.InventoryTransferOrder.FindByNumber(1054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+			| "Documents.InventoryTransferOrder.FindByNumber(2054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
 		
 										
 			

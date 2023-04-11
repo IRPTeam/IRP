@@ -106,7 +106,11 @@ Procedure FillItemListRows(ItemListRows)
 	For Each Row In ItemListRows Do
 		NewRow = ThisObject.ItemListRows.Add();
 		FillPropertyValues(NewRow, Row);
-		NewRow.RowPresentation = "" + Row.Item + " (" + Row.ItemKey + ")";
+		SerialLotNumberPresentation = "";
+		If ValueIsFilled(Row.SerialLotNumber) Then
+			SerialLotNumberPresentation = " (" + Row.SerialLotNumber + ")";
+		EndIf;
+		NewRow.RowPresentation = "" + Row.Item + " (" + Row.ItemKey + ")" + SerialLotNumberPresentation;
 		NewRow.Picture = 0;
 
 		If ValueIsFilled(NewRow.ItemKey) And ValueIsFilled(NewRow.Unit) And ValueIsFilled(NewRow.Quantity) Then
@@ -479,6 +483,27 @@ Function CreateBasisesTable(SelectedRowInfo)
 	For Each ItemArray In ArrayForDelete Do
 		BasisesTable.Delete(ItemArray);
 	EndDo;
+	
+	// filter by serial lot number
+	ArrayForDelete = New Array();
+	If SelectedRowInfo.SelectedRow.Property("SerialLotNumber") Then
+		SerialLotNumber = SelectedRowInfo.SelectedRow.SerialLotNumber;
+		If ValueIsFilled(SerialLotNumber) Then
+			For Each Row In BasisesTable Do
+				SingleRowInfo = RowIDInfoServer.GetSerialLotNumber_SingleRowInfo(Row.Basis, Row.BasisKey);
+				BasisSerialLotNumber = SingleRowInfo.Get(Row.BasisKey);
+				If ValueIsFilled(BasisSerialLotNumber) 
+					And BasisSerialLotNumber <> SerialLotNumber Then
+						ArrayForDelete.Add(Row);
+				EndIf;
+			EndDo;
+		EndIf;
+	EndIf;
+	
+	For Each ItemArray In ArrayForDelete Do
+		BasisesTable.Delete(ItemArray);
+	EndDo;
+		
 	Return BasisesTable;
 EndFunction
 

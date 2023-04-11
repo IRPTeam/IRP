@@ -10155,7 +10155,16 @@ Procedure CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, Basises
 					DeepLevelRow = _BasisesTreeRow.Add();
 					
 					DeepLevelRow.Picture = 0;
-					DeepLevelRow.RowPresentation = String(TableRow.Item) + " (" + String(TableRow.ItemKey) + ")";
+					
+					SerialLotNumberPresentation = "";
+					If CommonFunctionsClientServer.ObjectHasProperty(DeepLevelRow, "SerialLotNumber") Then
+						SingleRowInfo = GetSerialLotNumber_SingleRowInfo(TableRow.Basis, TableRow.BasisKey);
+						DeepLevelRow.SerialLotNumber = SingleRowInfo.Get(TableRow.BasisKey);
+						If ValueIsFilled(DeepLevelRow.SerialLotNumber) Then
+							SerialLotNumberPresentation = " (" + DeepLevelRow.SerialLotNumber + ")";
+						EndIf;
+					EndIf;
+					DeepLevelRow.RowPresentation = String(TableRow.Item) + " (" + String(TableRow.ItemKey) + ")" + SerialLotNumberPresentation;
 
 					DeepLevelRow.DeepLevel = True;
 					FillPropertyValues(DeepLevelRow, TableRow);
@@ -10178,7 +10187,7 @@ Procedure CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, Basises
 						EndIf;
 						DeepLevelRow.Linked = True;
 					EndIf;
-
+					
 				EndDo;
 			Else
 				For Each ParentRow In ParentRows Do
@@ -11208,3 +11217,41 @@ EndProcedure
 
 #EndRegion
 
+Function GetSerialLotNumber_SingleRowInfo(val Object, FilterKey = Undefined) Export
+	SingleRowInfo = New Map();
+	
+	SerialLotNumberInTable = CommonFunctionsClientServer.ObjectHasProperty(Object, "SerialLotNumbers");
+	SerialLotNumberInRow = False;
+	If Object.ItemList.Count() Then
+		SerialLotNumberInRow = CommonFunctionsClientServer.ObjectHasProperty(Object.ItemList[0], "SerialLotNumber");
+	EndIf;
+		
+	If SerialLotNumberInTable Or SerialLotNumberInRow Then
+		For Each Row In Object.ItemList Do
+			If ValueIsFilled(FilterKey) And Row.Key <> FilterKey Then
+				Continue;
+			EndIf;
+			
+			If Not Row.Item.ItemType.SingleRow Then
+				Continue;
+			EndIf;
+			
+			If SerialLotNumberInTable Then
+				SerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", Row.Key));
+				If SerialLotNumbers.Count() Then
+					SerialLotNumberRef = SerialLotNumbers[0].SerialLotNumber;
+				EndIf;
+			EndIf;
+				
+			If SerialLotNumberInRow Then
+				SerialLotNumberRef = Row.SerialLotNumber;
+			EndIf;
+				
+			If ValueIsFilled(SerialLotNumberRef) Then
+				SingleRowInfo.Insert(Row.Key, SerialLotNumberRef);
+			EndIf;
+		EndDo;
+	EndIf;
+	
+	Return SingleRowInfo;
+EndFunction

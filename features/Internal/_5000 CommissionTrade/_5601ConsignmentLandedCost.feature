@@ -53,7 +53,7 @@ Scenario: _05602 preparation (consignment landed cost)
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects
 		When Create chart of characteristic types CurrencyMovementType objects
-		When Create catalog ReportOptions objects
+		When Create catalog ReportOptions objects (landed cost)
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
 		When Create information register TaxSettings records

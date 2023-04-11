@@ -2392,8 +2392,15 @@ Scenario: _2060023 check auto form in the SC - SO (with sln)
 			| '1' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
 			| '2' | 'Product 1 with SLN'           | ''                   | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | 'Sales order 1 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
 		And I close all client application windows
+	* Unpost documents
+		And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(1054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(1055).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(1055).GetObject().Write(DocumentWriteMode.UndoPosting);" |
 		
-				
+			
 				
 Scenario: _2060024 check auto form in the SI - SO (with sln)
 		And I close all client application windows
@@ -2430,6 +2437,12 @@ Scenario: _2060024 check auto form in the SI - SO (with sln)
 			| '5' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'                 | '16,24'      | 'pcs'  | '9009100'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | ''                                            |
 			| '6' | '1%'       | 'en description is empty' | 'Product 1 with SLN'           | 'ODS'      | 'No'                 | '16,24'      | 'pcs'  | '9090098908'         | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 1 054 dated 11.04.2023 15:25:22' |
 		And I close all client application windows
+	* Unpost documents
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(1054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(1054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+		
 		
 Scenario: _2060025 check auto form in the IT - ITO (with sln)
 		And I close all client application windows
@@ -2466,6 +2479,12 @@ Scenario: _2060025 check auto form in the IT - ITO (with sln)
 			| '5' | 'Product 7 with SLN (new row)' | 'ODS'      | '9009100'            | 'pcs'  | '1,000'    | ''                                                         |
 			| '6' | 'Product 1 with SLN'           | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | 'Inventory transfer order 1 054 dated 11.04.2023 15:35:41' |
 		And I close all client application windows
+	* Unpost documents
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(1054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransferOrder.FindByNumber(1054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+		
 										
 			
 				

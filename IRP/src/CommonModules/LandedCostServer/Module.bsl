@@ -755,7 +755,7 @@ Function GetQueryText_CurrentPeriod()
 	 |	AllocationInfo.ItemKey
 	 |
 	 |HAVING
-	 |	SUM(AllocationInfo.Amount) > 0
+	 |	SUM(AllocationInfo.%1) > 0
 	 |;
 	 |
 	 |////////////////////////////////////////////////////////////////////////////////
@@ -764,7 +764,8 @@ Function GetQueryText_CurrentPeriod()
 	 |	R6010B_BatchWiseBalance.Batch AS Batch,
 	 |	R6010B_BatchWiseBalance.BatchKey AS BatchKey,
 	 |	R6010B_BatchWiseBalance.Document AS Document,
-	 |	SUM(AllocationInfo.Amount) AS Amount
+	 |	SUM(AllocationInfo.Amount) AS Amount,
+	 |	0  AS TotalQuantity
 	 |FROM
 	 |	AllocationInfo AS AllocationInfo
 	 |		LEFT JOIN AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
@@ -780,7 +781,28 @@ Function GetQueryText_CurrentPeriod()
 	 |	R6010B_BatchWiseBalance.Period,
 	 |	R6010B_BatchWiseBalance.Batch,
 	 |	R6010B_BatchWiseBalance.BatchKey,
-	 |	R6010B_BatchWiseBalance.Document";
+	 |	R6010B_BatchWiseBalance.Document
+	 | UNION ALL
+	 |SELECT
+	 |	R6010B_BatchWiseBalance.Period,
+	 |	R6010B_BatchWiseBalance.Batch,
+	 |	R6010B_BatchWiseBalance.BatchKey,
+	 |	R6010B_BatchWiseBalance.Document,
+	 |	0,
+	 |	SUM(R6010B_BatchWiseBalance.Quantity)
+	 |FROM
+	 |	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
+	 |WHERE
+	 |	R6010B_BatchWiseBalance.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
+	 |	AND (R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
+	 |		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt)
+	 |	AND R6010B_BatchWiseBalance.RecordType = VALUE(AccumulationRecordType.Receipt)
+     |
+	 |GROUP BY
+	 |	R6010B_BatchWiseBalance.Period,
+	 |	R6010B_BatchWiseBalance.Batch,
+	 |	R6010B_BatchWiseBalance.BatchKey,
+	 |	R6010B_BatchWiseBalance.Document";	 
  EndFunction
  
 Function GetQueryText_PastPeriod()
@@ -873,7 +895,7 @@ Function CreateTotalTable()
 	Return TotalTable;
 EndFunction	
 
-Procedure DistrReceipt(Table, TotalTable, BeginDate, EndDate, IsBalanceData = False)
+Procedure DistrReceipt(Table, TotalTable, BeginDate, EndDate, IsBalanceData, ResourceName)
 		
 	AllReceiptTable = Table.CopyColumns();
 		
@@ -882,7 +904,15 @@ Procedure DistrReceipt(Table, TotalTable, BeginDate, EndDate, IsBalanceData = Fa
 		If IsBalanceData Then
 			TotalQuantity = Row.TotalQuantity;
 		Else
-			TotalQuantity = GetTotalQuantityReceipt(Row.Batch, Row.BatchKey, Row.Document);
+			If Not ValueIsFilled(Row.Amount) Then
+				Row.Amount = GetTotalAmountReceipt(Row.Batch, Row.BatchKey, Row.Document, ResourceName);
+				TotalQuantity = GetTotalQuantityReceipt(Row.Batch, Row.BatchKey, Row.Batch.Document);
+				If TotalQuantity <> Row.TotalQuantity And ValueIsFilled(TotalQuantity) Then
+					Row.Amount = (Row.Amount / TotalQuantity) * Row.TotalQuantity;
+				EndIf;
+			Else
+				TotalQuantity = GetTotalQuantityReceipt(Row.Batch, Row.BatchKey, Row.Document);
+			EndIf;	
 		EndIf;
 		
 		If TotalQuantity = 0 Then
@@ -966,10 +996,34 @@ Procedure DistrReceipt(Table, TotalTable, BeginDate, EndDate, IsBalanceData = Fa
 	
     AllReceiptTable.GroupBy("Period, Batch, BatchKey, Document, RecordType, ReceiptDocument", "Amount");
 	If AllReceiptTable.Count() Then
-		DistrReceipt(AllReceiptTable, TotalTable, BeginDate, EndDate);
+		DistrReceipt(AllReceiptTable, TotalTable, BeginDate, EndDate, False, ResourceName);
 	EndIf;
 EndProcedure
 	
+Function GetTotalAmountReceipt(Batch, BatchKey, Document, ResourceName)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ISNULL(SUM(R6010B_BatchWiseBalance.%1), 0) AS Amount
+	|FROM
+	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
+	|WHERE
+	|	R6010B_BatchWiseBalance.Batch = &Batch
+	|	AND R6010B_BatchWiseBalance.BatchKey = &BatchKey
+	|	AND R6010B_BatchWiseBalance.Document = &Document
+	|	AND R6010B_BatchWiseBalance.RecordType = VALUE(AccumulationRecordType.Receipt)";
+	Query.Text = StrTemplate(Query.Text, ResourceName);
+	Query.SetParameter("Batch", Batch);
+	Query.SetParameter("BatchKey", BatchKey);
+	Query.SetParameter("Document", Batch.Document);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		Return QuerySelection.Amount;
+	EndIf;
+	Return 0;
+EndFunction	
+
 Function GetTotalQuantityReceipt(Batch, BatchKey, Document)
 	Query = New Query();
 	Query.Text = 
@@ -1235,14 +1289,14 @@ Procedure CalculateAdditionalCostRevenue(CalculationSettings, RegisterType)
 		CalculationSettings.EndPeriod, 
 		CalculationSettings.Company, 
 		CalculationSettings.CalculationMovementCostRef, "COST", RegisterType);
-	DistrReceipt(QueryTable, TotalTableCost, CalculationSettings.BeginPeriod, CalculationSettings.EndPeriod, True);
+	DistrReceipt(QueryTable, TotalTableCost, CalculationSettings.BeginPeriod, CalculationSettings.EndPeriod, True, "AmountCost");
 	
 	// Current period Cost
 	QueryTable = GetQueryTable_CurrentPeriod(CalculationSettings.BeginPeriod, 
 		CalculationSettings.EndPeriod, 
 		CalculationSettings.Company, 
 		CalculationSettings.CalculationMovementCostRef, "COST", RegisterType);
-	DistrReceipt(QueryTable, TotalTableCost, Date(1,1,1), CalculationSettings.EndPeriod);
+	DistrReceipt(QueryTable, TotalTableCost, Date(1,1,1), CalculationSettings.EndPeriod, False, "AmountCost");
 	
 	TotalTableCost.Columns.Amount.Name = "AmountCost";
 	
@@ -1259,14 +1313,14 @@ Procedure CalculateAdditionalCostRevenue(CalculationSettings, RegisterType)
 		CalculationSettings.EndPeriod, 
 		CalculationSettings.Company, 
 		CalculationSettings.CalculationMovementCostRef, "TAX", RegisterType);
-	DistrReceipt(QueryTable, TotalTableTax, CalculationSettings.BeginPeriod, CalculationSettings.EndPeriod, True);
+	DistrReceipt(QueryTable, TotalTableTax, CalculationSettings.BeginPeriod, CalculationSettings.EndPeriod, True, "AmountCostTax");
 	
 	// Current period Cost
 	QueryTable = GetQueryTable_CurrentPeriod(CalculationSettings.BeginPeriod, 
 		CalculationSettings.EndPeriod, 
 		CalculationSettings.Company, 
 		CalculationSettings.CalculationMovementCostRef, "TAX", RegisterType);
-	DistrReceipt(QueryTable, TotalTableTax, Date(1,1,1), CalculationSettings.EndPeriod);
+	DistrReceipt(QueryTable, TotalTableTax, Date(1,1,1), CalculationSettings.EndPeriod, False, "AmountCostTax");
 	
 	TotalTableTax.Columns.Amount.Name = "AmountCostTax";
 	

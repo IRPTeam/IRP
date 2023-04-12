@@ -994,7 +994,7 @@ Procedure DistrReceipt(Table, TotalTable, BeginDate, EndDate, IsBalanceData, Res
 		EndDo; // Expense table
 	EndDo; // Tbale
 	
-    AllReceiptTable.GroupBy("Period, Batch, BatchKey, Document, RecordType, ReceiptDocument", "Amount");
+    AllReceiptTable.GroupBy("Period, Batch, BatchKey, Document, RecordType, ReceiptDocument", "Amount, TotalQuantity");
 	If AllReceiptTable.Count() Then
 		DistrReceipt(AllReceiptTable, TotalTable, BeginDate, EndDate, False, ResourceName);
 	EndIf;

@@ -777,6 +777,22 @@ Scenario: Create catalog ItemTypes objects (serial lot numbers)
 		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb48ef' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef032' | 'False'         | 'False'    | 'False'      |
 
 
+Scenario: Create catalog ItemTypes objects (serial lot numbers, single row)
+
+	And I check or create catalog "ItemTypes" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Type'                   | 'UseSerialLotNumber' | 'StockBalanceDetail'                        | 'EachSerialLotNumberIsUnique' | 'AlwaysAddNewRowAfterScan' | 'SingleRow' | 'NotUseLineGrouping' | 'Description_en'                                  | 'Description_hash' | 'Description_ru' | 'Description_tr'                                     | 'UniqueID'                          |
+		| 'e1cib/data/Catalog.ItemTypes?ref=b798d684e43e460511edc7cd0d4d1c08' | 'False'        | ''       | 'False'    | 'Enum.ItemTypes.Product' | 'True'               | 'Enum.StockBalanceDetail.BySerialLotNumber' | 'False'                       | 'True'                     | 'True'      | 'True'               | 'With SLN (add new row)'                          | ''                 | ''               | 'With serial lot numbers TR'                         | '_22c1497949df4a46916fd4eb8e679344' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb49ef' | 'False'        | ''       | 'False'    | 'Enum.ItemTypes.Product' | 'True'               | 'Enum.StockBalanceDetail.ByItemKey'         | 'False'                       | 'False'                    | 'False'     | 'False'              | 'With serial lot numbers (without stock control)' | ''                 | ''               | 'With serial lot numbers (without stock control) TR' | '_a89189722e124d23bbcdca289485beb8' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb48ef' | 'False'        | ''       | 'False'    | 'Enum.ItemTypes.Product' | 'True'               | 'Enum.StockBalanceDetail.BySerialLotNumber' | 'False'                       | 'False'                    | 'False'     | 'False'              | 'With serial lot numbers (use stock control)'     | ''                 | ''               | 'With serial lot numbers TR'                         | '_a89189722e124d23bbcdca289485beb7' |
+
+	And I refill object tabular section "AvailableAttributes":
+		| 'Ref'                                                               | 'Attribute'                                                                                          | 'AffectPricing' | 'Required' | 'ShowInHTML' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=b798d684e43e460511edc7cd0d4d1c08' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef032' | 'False'         | 'False'    | 'False'      |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb49ef' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef032' | 'False'         | 'False'    | 'False'      |
+		| 'e1cib/data/Catalog.ItemTypes?ref=aa78120ed92fbced11eaf13dc8cb48ef' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef032' | 'False'         | 'False'    | 'False'      |
+
+
+
 Scenario: Create catalog ItemTypes objects (Furniture)
 
 	And I check or create for catalog "ItemTypes" objects with Data Exchange Load parameter set to true:

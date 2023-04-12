@@ -155,7 +155,9 @@ Scenario: _0052 create Calculation movements cost (batch reallocate)
 		And I input "30.05.2022" text in "End date" field
 		And I click "Post and close" button
 		And I wait "Calculation movement costs (create) *" window closing in 20 seconds
-		Then the number of "List" table lines is "равно" "1"
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		Then the number of "List" table lines is "равно" "2"
 	* Check batch balance calculation
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click "Select option..." button

@@ -21,6 +21,7 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 	* Preparation
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog Countries objects
 	* Opening the form for filling in Accounts
 		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
 		And Delay 2

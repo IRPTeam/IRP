@@ -94,6 +94,19 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <resources uuid="c2f86bc2-55f2-4f3a-ac3b-4683da1de7e1">
+    <name>AmountCostTax</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount cost tax</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
   <attributes uuid="828b931a-610f-45d5-a460-f22bae3a326d">
     <name>CalculationMovementCost</name>
     <synonym>

@@ -4496,6 +4496,23 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>SerialLotNumber</name>
+      <title>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </title>
+      <id>89</id>
+      <valueType>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>MainFilter</name>
@@ -5177,6 +5194,23 @@
       <valueType>
         <types>String</types>
         <stringQualifiers/>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>SerialLotNumber</name>
+      <title>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </title>
+      <id>91</id>
+      <valueType>
+        <types>CatalogRef.SerialLotNumbers</types>
       </valueType>
       <view>
         <common>true</common>

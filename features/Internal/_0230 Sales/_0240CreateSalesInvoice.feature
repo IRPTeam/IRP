@@ -39,6 +39,7 @@ Scenario: _024000 preparation (Sales invoice)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Companies objects (partners company)
+		When Create catalog Countries objects
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects
@@ -104,11 +105,11 @@ Scenario: _024001 create document Sales Invoice based on sales order (partial qu
 			| 'Sales order 3 dated 27.01.2021 19:50:45' | 'Yes' | ''         | ''               | ''         | ''         |
 			| 'Dress (XS/Blue)'                          | 'Yes' | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
 			| 'Shirt (36/Red)'                           | 'Yes' | '10,000'   | 'pcs'            | '350,00'   | 'TRY'      |
-			| 'Service (Interner)'                       | 'Yes' | '1,000'    | 'pcs'            | '100,00'   | 'TRY'      |
+			| 'Service (Internet)'                       | 'Yes' | '1,000'    | 'pcs'            | '100,00'   | 'TRY'      |
 			| 'Boots (36/18SD)'                          | 'Yes' | '5,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
 		And I go to line in "BasisesTree" table
 			| 'Row presentation'            |
-			| 'Service (Interner)' |
+			| 'Service (Internet)' |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -499,7 +500,7 @@ Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string f
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 			| 'Sales order 15 dated 01.02.2021 19:50:45'           | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Service (Interner)'                                  | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
+			| 'Service (Internet)'                                  | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
 			| 'Dress (XS/Blue)'                                     | 'Yes' | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
 			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | 'Yes' | ''         | ''     | ''       | ''         |
 			| 'Dress (XS/Blue)'                                     | 'Yes' | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
@@ -521,7 +522,7 @@ Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string f
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table contains lines
 			| '#' | 'Profit loss center'      | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' | 'Sales person'    |
-			| '1' | 'Front office'            | 'en description is empty' | 'Service' | 'Interner' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      | 'Alexander Orlov' |
+			| '1' | 'Front office'            | 'en description is empty' | 'Service' | 'Internet' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      | 'Alexander Orlov' |
 			| '2' | 'Distribution department' | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '75,36'      | '520,00' | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      | 'Anna Petrova'    |
 			| '3' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '10,000' | 'pcs'  | '507,20'     | '350,00' | '18%' | '175,00'        | '2 817,80'   | '3 325,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      | 'Alexander Orlov' |
 			| '4' | 'Distribution department' | 'en description is empty' | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '2,000'  | 'pcs'  | '152,54'     | '500,00' | '18%' | ''              | '847,46'     | '1 000,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      | 'Alexander Orlov' |
@@ -535,7 +536,7 @@ Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string f
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| '#' | 'Profit loss center'      | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' | 'Sales person'    |
-			| '1' | 'Front office'            | 'en description is empty' | 'Service' | 'Interner' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      | 'Alexander Orlov' |
+			| '1' | 'Front office'            | 'en description is empty' | 'Service' | 'Internet' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      | 'Alexander Orlov' |
 			| '2' | ''                        | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '10,000' | 'pcs'  | '793,22'     | '520,00' | '18%' | ''              | '4 406,78'   | '5 200,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | ''             | ''                |
 			| '3' | 'Distribution department' | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '75,36'      | '520,00' | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      | 'Anna Petrova'    |
 			| '4' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '10,000' | 'pcs'  | '507,20'     | '350,00' | '18%' | '175,00'        | '2 817,80'   | '3 325,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      | 'Alexander Orlov' |
@@ -557,9 +558,9 @@ Scenario: _024006 create SI based on 2 SO with SC
 			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 			| 'Sales order 3 dated 27.01.2021 19:50:45'            | 'Yes' | ''         | ''     | ''       | ''         |
 			| 'Shirt (36/Red)'                                     | 'Yes' | '5,000'    | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Service (Interner)'                                 | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
+			| 'Service (Internet)'                                 | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
 			| 'Sales order 15 dated 01.02.2021 19:50:45'           | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Service (Interner)'                                 | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
+			| 'Service (Internet)'                                 | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
 			| 'Dress (XS/Blue)'                                    | 'Yes' | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
 			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | 'Yes' | ''         | ''     | ''       | ''         |
 			| 'Dress (XS/Blue)'                                    | 'Yes' | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
@@ -573,8 +574,8 @@ Scenario: _024006 create SI based on 2 SO with SC
 		And "ItemList" table contains lines
 			| '#' | 'Profit loss center'      | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' |
 			| '1' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '5,000'  | 'pcs'  | '253,60'     | '350,00' | '18%' | '87,50'         | '1 408,90'   | '1 662,50'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'Revenue'      |
-			| '2' | 'Front office'            | 'en description is empty' | 'Service' | 'Interner' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'Revenue'      |
-			| '3' | 'Front office'            | 'en description is empty' | 'Service' | 'Interner' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
+			| '2' | 'Front office'            | 'en description is empty' | 'Service' | 'Internet' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'Revenue'      |
+			| '3' | 'Front office'            | 'en description is empty' | 'Service' | 'Internet' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00' | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
 			| '4' | ''                        | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '10,000' | 'pcs'  | '793,22'     | '520,00' | '18%' | ''              | '4 406,78'   | '5 200,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | ''             |
 			| '5' | 'Distribution department' | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '75,36'      | '520,00' | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
 			| '6' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '10,000' | 'pcs'  | '507,20'     | '350,00' | '18%' | '175,00'        | '2 817,80'   | '3 325,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |

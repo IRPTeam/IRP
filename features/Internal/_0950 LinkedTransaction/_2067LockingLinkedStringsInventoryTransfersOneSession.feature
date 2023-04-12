@@ -34,6 +34,7 @@ Scenario: _2067001 preparation (locking linked strings)
 		When Create catalog Stores objects
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
+		When Create catalog Countries objects
 		When Create Document discount
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects

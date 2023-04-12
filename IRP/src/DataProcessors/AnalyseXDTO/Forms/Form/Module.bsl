@@ -4,6 +4,9 @@ Procedure ReadStructureAtServer()
 	
 	ArrayList = New Array;
 	XDTOType = CommonFunctionsServer.XDTOFactoryObject(Object.WSName).Type(Object.URI, Object.TypeName);
+	If XDTOType = Undefined Then
+		Raise "Type not found " + Object.TypeName;
+	EndIf;
 	Obj = ConvertXDTO.ObjectXDTOStructure(XDTOType, ArrayList, Object.WSName, Not EmptyValues); 
 	TreeData.GetItems().Clear();
 	NewRow = TreeData.GetItems().Add();
@@ -188,14 +191,23 @@ Procedure SetObject(XDTO, Type, Property, Val Value = Undefined, NewRow)
 		Return;	
 	EndIf; 
 
-	XDTO[Property] = Value;
+	Try
+		XDTO[Property] = Value;
+	Except
+		CommonFunctionsClientServer.ShowUsersMessage(
+			StrTemplate("Can not set value to XDTO. Property %1 Value %2 Type %3", Property, Value, Type)
+		);
+	EndTry;
 
 EndProcedure
 
 &AtServer
 Procedure ValidateXMLAtServer()
 	TypeXDTO = CommonFunctionsServer.XDTOFactoryObject(Object.WSName).Type(Object.URI, Object.TypeName);
-	XDTOObj = CommonFunctionsServer.DeserializeXMLUseXDTOFactory(XMLToValidate, TypeXDTO);
+	If TypeXDTO = Undefined Then
+		Raise "Type not found " + Object.TypeName;
+	EndIf;
+	XDTOObj = CommonFunctionsServer.DeserializeXMLUseXDTOFactory(XMLToValidate, TypeXDTO, , Object.WSName);
 	XDTOObj.Validate();
 EndProcedure
 

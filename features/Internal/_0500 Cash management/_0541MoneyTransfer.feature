@@ -28,6 +28,7 @@ Scenario: _054100 preparation (Money transfer)
 		When Create catalog Units objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog Countries objects
 		When Create catalog Partners objects (Kalipso)
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects

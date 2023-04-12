@@ -38,6 +38,7 @@ Scenario: _028900 preparation (Goods receipt)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Companies objects (partners company)
+		When Create catalog Countries objects
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects
@@ -558,7 +559,7 @@ Scenario: _028932 cancel line in the PO and create GR
 		And I select current line in "List" table
 		And I go to line in "ItemList" table
 			| '#' | 'Item'    | 'Item key' | 'Quantity'     |
-			| '2' | 'Service' | 'Interner' | '2,000' |
+			| '2' | 'Service' | 'Internet' | '2,000' |
 		And I activate "Cancel" field in "ItemList" table
 		And I set "Cancel" checkbox in "ItemList" table
 		And I finish line editing in "ItemList" table
@@ -576,7 +577,7 @@ Scenario: _028932 cancel line in the PO and create GR
 		Then "Add linked document rows" window is opened
 		And "BasisesTree" table does not contain lines
 			| 'Row presentation'   | 'Quantity' | 'Unit' |
-			| 'Service (Interner)' | '2,000'    | 'pcs'  |
+			| 'Service (Internet)' | '2,000'    | 'pcs'  |
 		And I close all client application windows	
 				
 

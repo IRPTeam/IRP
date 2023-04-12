@@ -25,7 +25,7 @@ Scenario: _0050 preparation
 	* Load data
 		When Create catalog AddAttributeAndPropertySets objects (LC)
 		When Create catalog CancelReturnReasons objects (LC)
-		When Create catalog ReportOptions objects
+		When Create catalog ReportOptions objects (landed cost) 
 		When Create catalog AddAttributeAndPropertyValues objects (LC)
 		When Create catalog IDInfoAddresses objects (LC)
 		When Create catalog BusinessUnits objects (LC)
@@ -128,6 +128,13 @@ Scenario: _0050 preparation
 			| "Documents.RetailSalesReceipt.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailReturnReceipt.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document AdditionalCostAllocation, CalculationMovementCosts, PurchaseInvoice (additional cost, batch realocate)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(1012).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.AdditionalCostAllocation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 	
 Scenario: _00501 check preparation

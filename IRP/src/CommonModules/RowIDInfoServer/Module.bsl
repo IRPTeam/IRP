@@ -10401,6 +10401,14 @@ Function GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, Propor
 
 		If Is.SI And BasisIs.SO Then
 			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromSO");
+		ElsIf Is.SR And BasisIs.SI Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromSI");
+		ElsIf Is.PI And BasisIs.PO Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromPO");
+		ElsIf Is.PR And BasisIs.PI Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromPI");
+		ElsIf Is.RRR And BasisIs.RSR Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromRSR");				
 		EndIf;
 
 		If BasisesInfo.Basis = BasisesInfo.RowRef.Basis Then
@@ -10435,8 +10443,12 @@ Function ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, Function
 
 	NewRowBasisesTable = BasisesTable.Add();
 	If ProportionalScaling <> Undefined Then
-		NewRowBasisesTable.Unit               = ProportionalScaling.Unit;
-		NewRowBasisesTable.BasisUnit          = ProportionalScaling.BasisUnit;
+		NewRowBasisesTable.Unit = ProportionalScaling.Unit;
+		If ProportionalScaling.Property("BasisUnit") Then
+			NewRowBasisesTable.BasisUnit = ProportionalScaling.BasisUnit;
+		Else
+			NewRowBasisesTable.BasisUnit = Catalogs.Units.GetBasisUnit(ProportionalScaling.ItemKey);
+		EndIf;
 		NewRowBasisesTable.QuantityInBaseUnit = ProportionalScaling.QuantityInBaseUnit;
 	EndIf;
 

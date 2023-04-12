@@ -11071,6 +11071,8 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 	For Each Row In TableRows Do
 		Options     = ModelClientServer_V2.CalculationsOptions();
 		Options.Ref = Parameters.Object.Ref;
+		Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
+		Options.Unit    = GetItemListUnit(Parameters, Row.Key);
 		
 		// need recalculate NetAmount, TotalAmount, TaxAmount, OffersAmount
 		If     WhoIsChanged = "IsPriceChanged"            Or WhoIsChanged = "IsPriceIncludeTaxChanged"
@@ -11133,6 +11135,8 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 		Options.OffersOptions.SpecialOffers      = Row.SpecialOffers;
 		Options.OffersOptions.SpecialOffersCache = Row.SpecialOffersCache;
 
+		Options.RowIDInfo = Row.RowIdInfo;
+		
 		Options.Key = Row.Key;
 		Options.StepName = "StepItemListCalculations";
 		Chain.Calculations.Options.Add(Options);

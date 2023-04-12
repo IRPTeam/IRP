@@ -1070,17 +1070,16 @@ Function ChangePriceByPriceTypeExecute(Options) Export
 	If Options.PriceType = PredefinedValue("Catalog.PriceTypes.ManualPriceType") Then
 		Return Options.CurrentPrice;
 	EndIf;
-
-// tmp disable		
-//	For Each Row In Options.RowIDInfo Do
-//		DataFromBasis = RowIDInfoServer.GetAllDataFromBasis(Options.Ref, Row.Basis, Row.BasisKey, Row.RowID, Row.CurrentStep);
-//		If DataFromBasis <> Undefined And DataFromBasis.Count() And DataFromBasis[0].ItemList.Count() Then
-//			BasisRow = DataFromBasis[0].ItemList[0];
-//			PriceFromBasis = BasisRow.Price;
-//			UnitFactor = ModelServer_V2.GetUnitFactor(Options.Unit, BasisRow.Unit);
-//			Return PriceFromBasis * UnitFactor;
-//		EndIf;
-//	EndDo;
+		
+	For Each Row In Options.RowIDInfo Do
+		DataFromBasis = RowIDInfoServer.GetAllDataFromBasis(Options.Ref, Row.Basis, Row.BasisKey, Row.RowID, Row.CurrentStep);
+		If DataFromBasis <> Undefined And DataFromBasis.Count() And DataFromBasis[0].ItemList.Count() Then
+			BasisRow = DataFromBasis[0].ItemList[0];
+			PriceFromBasis = BasisRow.Price;
+			UnitFactor = ModelServer_V2.GetUnitFactor(Options.Unit, BasisRow.Unit);
+			Return PriceFromBasis * UnitFactor;
+		EndIf;
+	EndDo;
 	
 	Period = CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(Options.Ref, Options.Date);
 	PriceParameters = New Structure();
@@ -2203,7 +2202,7 @@ EndFunction
 #Region CALCULATIONS
 
 Function CalculationsOptions() Export
-	Options = GetChainLinkOptions("Ref");
+	Options = GetChainLinkOptions("Ref, ItemKey, Unit");
 	
 	AmountOptions = New Structure();
 	AmountOptions.Insert("DontCalculateRow", False);
@@ -2255,6 +2254,8 @@ Function CalculationsOptions() Export
 	Options.Insert("CalculateSpecialOffers"   , New Structure("Enable", False));
 	Options.Insert("RecalculateSpecialOffers" , New Structure("Enable", False));
 	
+	Options.Insert("RowIDInfo", New Array());
+	
 	Return Options;
 EndFunction
 
@@ -2282,8 +2283,34 @@ Function CalculationsExecute(Options) Export
 		Result.SpecialOffers.Add(NewOfferRow);
 	EndDo;
 	
+	IsLinkedRow = False;
+	If Options.RecalculateSpecialOffers.Enable Or Options.CalculateSpecialOffers.Enable Then
+		For Each Row In Options.RowIDInfo Do
+			Scaling = New Structure();
+			Scaling.Insert("QuantityInBaseUnit", Options.PriceOptions.QuantityInBaseUnit);
+			Scaling.Insert("ItemKey" , Options.ItemKey);
+			Scaling.Insert("Unit"    , Options.Unit);
+			DataFromBasis = RowIDInfoServer.GetAllDataFromBasis(Options.Ref, Row.Basis, Row.BasisKey, Row.RowID, Row.CurrentStep, Scaling);
+			If DataFromBasis <> Undefined And DataFromBasis.Count() And DataFromBasis[0].SpecialOffers.Count() Then
+				
+				TotalOffers = 0;
+				For Each OfferRow In Result.SpecialOffers Do
+					For Each BasisRow In DataFromBasis[0].SpecialOffers Do
+						If OfferRow.Offer = BasisRow.Offer Then 
+							TotalOffers = TotalOffers + BasisRow.Amount;
+							OfferRow.Amount = BasisRow.Amount;
+						EndIf;
+					EndDo;
+				EndDo;
+				
+				Result.OffersAmount = TotalOffers;
+				IsLinkedRow = True;
+			EndIf;
+		EndDo;
+	EndIf;
+	
 	// RecalculateSpecialOffers
-	If Options.RecalculateSpecialOffers.Enable Then
+	If Options.RecalculateSpecialOffers.Enable And Not IsLinkedRow Then
 		For Each OfferRow In Options.OffersOptions.SpecialOffersCache Do
 			Amount = 0;
 			If Options.PriceOptions.Quantity = OfferRow.Quantity Then
@@ -2300,7 +2327,7 @@ Function CalculationsExecute(Options) Export
 	EndIf;
 	
 	// CalculateSpecialOffers
-	If Options.CalculateSpecialOffers.Enable Then
+	If Options.CalculateSpecialOffers.Enable And Not IsLinkedRow Then
 		TotalOffers = 0;
 		For Each OfferRow In Result.SpecialOffers Do
 			TotalOffers = TotalOffers + OfferRow.Amount;

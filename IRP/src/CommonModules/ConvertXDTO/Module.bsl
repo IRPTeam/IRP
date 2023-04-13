@@ -122,8 +122,9 @@ Function PrepareObjectXDTO(ObjectStructure, TypeName, URI, WSName) Export
 					If Str.Value = Undefined OR TypeOf(Str.Value) = Type("Map") Then
 						Continue;
 					EndIf; 
-
-					XDTOPropertyStructure = GetXDTOProperty(XDTOTypeRow.Properties, Str.Key);
+					If Not TypeOf(XDTOTypeRow) = Type("XDTOValueType") Then
+						XDTOPropertyStructure = GetXDTOProperty(XDTOTypeRow.Properties, Str.Key);
+					EndIf;
 					XDTOTypeStructure = XDTOPropertyStructure.Type;
 					
 					If TypeOf(XDTOTypeRow) = Type("XDTOValueType") Then

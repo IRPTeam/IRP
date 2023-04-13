@@ -8301,10 +8301,13 @@ EndFunction
 Procedure SetConsignorBatches(Parameters, Results) Export
 	IsChanged = False;	
 	For Each Result In Results Do
-		IsChanged = True;
-		
 		If Not Parameters.Cache.Property("ConsignorBatches") Then
 			AddTableToCache(Parameters, "ConsignorBatches");
+		EndIf;
+		
+		If Parameters.Cache.ConsignorBatches.Count() > 0
+			Or Result.Value.ConsignorBatches.Count() > 0 Then
+				IsChanged = True;
 		EndIf;
 		
 		// remove from cache all rows

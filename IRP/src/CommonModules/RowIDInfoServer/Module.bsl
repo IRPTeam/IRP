@@ -10387,6 +10387,10 @@ Function GetChildrenInfo(Basis, BasisKey, RowID) Export
 EndFunction
 
 Function GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, ProportionalScaling = Undefined) Export
+	Return ServerReuse.GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, ProportionalScaling);
+EndFunction
+
+Function _GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, ProportionalScaling) Export
 	If Not ValueIsFilled(Basis) Then
 		Return Undefined; // no basis
 	EndIf;
@@ -10401,15 +10405,26 @@ Function GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, Propor
 
 		If Is.SI And BasisIs.SO Then
 			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromSO");
+		ElsIf Is.SRO And BasisIs.SI Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromSI");
 		ElsIf Is.SR And BasisIs.SI Then
 			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromSI");
+		ElsIf Is.SR And BasisIs.SRO Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromSRO");
 		ElsIf Is.PI And BasisIs.PO Then
 			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromPO");
+		ElsIf Is.PRO And BasisIs.PI Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromPI");
 		ElsIf Is.PR And BasisIs.PI Then
 			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromPI");
+		ElsIf Is.PR And BasisIs.PRO Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromPRO");
 		ElsIf Is.RRR And BasisIs.RSR Then
-			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromRSR");				
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromRSR");
+		ElsIf Is.WO And BasisIs.SO Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromSO");
 		EndIf;
+		
 
 		If BasisesInfo.Basis = BasisesInfo.RowRef.Basis Then
 			Break; // is root basis, top level

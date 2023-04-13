@@ -131,7 +131,8 @@ EndFunction
 
 Function ItemList()
 
-	Return "SELECT
+	Return 
+	"SELECT
 	|	SalesOrderItemList.Ref.Date AS Period,
 	|	SalesOrderItemList.Ref.Company AS Company,
 	|	SalesOrderItemList.Store AS Store,
@@ -167,6 +168,7 @@ Function ItemList()
 	|	SalesOrderItemList.Ref = &Ref";
 EndFunction
 
+//--
 Function R2010T_SalesOrders()
 	Return "SELECT 
 		   |	- QueryTable.Quantity AS Quantity,
@@ -194,32 +196,34 @@ Function R2010T_SalesOrders()
 EndFunction
 
 Function R2011B_SalesOrdersShipment()
-	Return "SELECT
-		   |	&Period AS Period,
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	- R2011B_SalesOrdersShipmentBalance.QuantityBalance AS Quantity,
-		   |	*
-		   |INTO R2011B_SalesOrdersShipment
-		   |FROM
-		   |	AccumulationRegister.R2011B_SalesOrdersShipment.Balance(&BalancePeriod, Order = &SalesOrder) AS R2011B_SalesOrdersShipmentBalance";
-
+	Return 
+		"SELECT
+		|	&Period AS Period,
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	-R2011B_SalesOrdersShipmentBalance.QuantityBalance AS Quantity,
+		|	*
+		|INTO R2011B_SalesOrdersShipment
+		|FROM
+		|	AccumulationRegister.R2011B_SalesOrdersShipment.Balance(&BalancePeriod, Order = &SalesOrder) AS
+		|		R2011B_SalesOrdersShipmentBalance";
 EndFunction
 
 Function R2012B_SalesOrdersInvoiceClosing()
-	Return "SELECT
-		   |	&Period AS Period,
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	- R2012B_SalesOrdersInvoiceClosingBalance.QuantityBalance AS Quantity,
-		   |	- R2012B_SalesOrdersInvoiceClosingBalance.AmountBalance AS Amount,
-		   |	- R2012B_SalesOrdersInvoiceClosingBalance.NetAmountBalance AS NetAmount,
-		   |	*
-		   |INTO R2012B_SalesOrdersInvoiceClosing
-		   |FROM
-		   |	AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Balance(&BalancePeriod, Order = &SalesOrder) AS
-		   |		R2012B_SalesOrdersInvoiceClosingBalance";
-
+	Return 
+		"SELECT
+		|	&Period AS Period,
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	-R2012B_SalesOrdersInvoiceClosingBalance.QuantityBalance AS Quantity,
+		|	-R2012B_SalesOrdersInvoiceClosingBalance.AmountBalance AS Amount,
+		|	-R2012B_SalesOrdersInvoiceClosingBalance.NetAmountBalance AS NetAmount,
+		|	*
+		|INTO R2012B_SalesOrdersInvoiceClosing
+		|FROM
+		|	AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Balance(&BalancePeriod, Order = &SalesOrder) AS
+		|		R2012B_SalesOrdersInvoiceClosingBalance";
 EndFunction
 
+//--
 Function R2013T_SalesOrdersProcurement()
 	Return "SELECT
 		   |	- QueryTable.Quantity AS OrderedQuantity,
@@ -235,6 +239,7 @@ Function R2013T_SalesOrdersProcurement()
 
 EndFunction
 
+//--
 Function R2014T_CanceledSalesOrders()
 	Return "SELECT 
 		   |	*
@@ -246,70 +251,71 @@ Function R2014T_CanceledSalesOrders()
 EndFunction
 
 Function R4011B_FreeStocks()
-	Return "SELECT
-		   |	&Period AS Period,
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	StockReservation.Store AS Store,
-		   |	StockReservation.ItemKey AS ItemKey,
-		   |	StockReservation.Order AS Order,
-		   |	- StockReservation.QuantityBalance AS Quantity
-		   |INTO R4011B_FreeStocks
-		   |FROM
-		   |	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, Order = &SalesOrder) AS StockReservation";
-
+	Return 
+		"SELECT
+		|	&Period AS Period,
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	StockReservation.Store AS Store,
+		|	StockReservation.ItemKey AS ItemKey,
+		|	StockReservation.Order AS Order,
+		|	-StockReservation.QuantityBalance AS Quantity
+		|INTO R4011B_FreeStocks
+		|FROM
+		|	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, Order = &SalesOrder) AS StockReservation";
 EndFunction
 
 Function R4012B_StockReservation()
-	Return "SELECT
-		   |	&Period AS Period,
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	StockReservation.Store AS Store,
-		   |	StockReservation.ItemKey AS ItemKey,
-		   |	StockReservation.Order AS Order,
-		   |	- StockReservation.QuantityBalance AS Quantity
-		   |INTO R4012B_StockReservation
-		   |FROM
-		   |	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, Order = &SalesOrder) AS StockReservation";
-
+	Return 
+		"SELECT
+		|	&Period AS Period,
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	StockReservation.Store AS Store,
+		|	StockReservation.ItemKey AS ItemKey,
+		|	StockReservation.Order AS Order,
+		|	-StockReservation.QuantityBalance AS Quantity
+		|INTO R4012B_StockReservation
+		|FROM
+		|	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, Order = &SalesOrder) AS StockReservation";
 EndFunction
 
 Function R4034B_GoodsShipmentSchedule()
-	Return "SELECT
-		   |	&Period AS Period,
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	- R4034B_GoodsShipmentScheduleBalance.QuantityBalance AS Quantity,
-		   |	*
-		   |INTO R4034B_GoodsShipmentSchedule
-		   |FROM
-		   |	AccumulationRegister.R4034B_GoodsShipmentSchedule.Balance(&BalancePeriod, Basis = &SalesOrder) AS
-		   |		R4034B_GoodsShipmentScheduleBalance";
-
+	Return 
+		"SELECT
+		|	&Period AS Period,
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	-R4034B_GoodsShipmentScheduleBalance.QuantityBalance AS Quantity,
+		|	*
+		|INTO R4034B_GoodsShipmentSchedule
+		|FROM
+		|	AccumulationRegister.R4034B_GoodsShipmentSchedule.Balance(&BalancePeriod, Basis = &SalesOrder) AS
+		|		R4034B_GoodsShipmentScheduleBalance";
 EndFunction
 
 Function R3024B_SalesOrdersToBePaid()
 	Return 
-	"SELECT
-	|	&Period AS Period,
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	Balance.AmountBalance AS Amount,
-	|	*
-	|INTO R3024B_SalesOrdersToBePaid
-	|FROM
-	|	AccumulationRegister.R3024B_SalesOrdersToBePaid.Balance(&BalancePeriod, Order = &SalesOrder) AS Balance";
+		"SELECT
+		|	&Period AS Period,
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	Balance.AmountBalance AS Amount,
+		|	*
+		|INTO R3024B_SalesOrdersToBePaid
+		|FROM
+		|	AccumulationRegister.R3024B_SalesOrdersToBePaid.Balance(&BalancePeriod, Order = &SalesOrder) AS Balance";
 EndFunction
 
 Function R3026B_SalesOrdersCustomerAdvance()
 	Return 
-	"SELECT
-	|	&Period AS Period,
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	Balance.AmountBalance AS Amount,
-	|	*
-	|INTO R3026B_SalesOrdersCustomerAdvance
-	|FROM
-	|	AccumulationRegister.R3026B_SalesOrdersCustomerAdvance.Balance(&BalancePeriod, Order = &SalesOrder) AS Balance";
+		"SELECT
+		|	&Period AS Period,
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	Balance.AmountBalance AS Amount,
+		|	*
+		|INTO R3026B_SalesOrdersCustomerAdvance
+		|FROM
+		|	AccumulationRegister.R3026B_SalesOrdersCustomerAdvance.Balance(&BalancePeriod, Order = &SalesOrder) AS Balance";
 EndFunction
 
+//--
 Function T2014S_AdvancesInfo()
 	Return 
 	"SELECT
@@ -331,66 +337,66 @@ EndFunction
 
 Function R2020B_AdvancesFromCustomers()
 	Return
-	"SELECT
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	OffsetOfAdvances.Period,
-	|	OffsetOfAdvances.Company,
-	|	OffsetOfAdvances.Branch,
-	|	OffsetOfAdvances.Partner,
-	|	OffsetOfAdvances.LegalName,
-	|	OffsetOfAdvances.Currency,
-	|	OffsetOfAdvances.AdvancesOrder AS Order,
-	|	OffsetOfAdvances.Amount,
-	|	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing
-	|INTO R2020B_AdvancesFromCustomers
-	|FROM
-	|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-	|WHERE
-	|	OffsetOfAdvances.Document = &Ref";
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.AdvancesOrder AS Order,
+		|	OffsetOfAdvances.Amount,
+		|	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing
+		|INTO R2020B_AdvancesFromCustomers
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
 Function R2021B_CustomersTransactions()
 	Return 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	OffsetOfAdvances.Period,
-	|	OffsetOfAdvances.Company,
-	|	OffsetOfAdvances.Branch,
-	|	OffsetOfAdvances.Partner,
-	|	OffsetOfAdvances.LegalName,
-	|	OffsetOfAdvances.Currency,
-	|	OffsetOfAdvances.Agreement,
-	|	OffsetOfAdvances.TransactionDocument AS Basis,
-	|	OffsetOfAdvances.TransactionOrder AS Order,
-	|	OffsetOfAdvances.Amount,
-	|	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing
-	|INTO R2021B_CustomersTransactions
-	|FROM
-	|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-	|WHERE
-	|	OffsetOfAdvances.Document = &Ref
-	|	AND NOT OffsetOfAdvances.IsAdvanceRelease";
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.Agreement,
+		|	OffsetOfAdvances.TransactionDocument AS Basis,
+		|	OffsetOfAdvances.TransactionOrder AS Order,
+		|	OffsetOfAdvances.Amount,
+		|	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing
+		|INTO R2021B_CustomersTransactions
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref
+		|	AND NOT OffsetOfAdvances.IsAdvanceRelease";
 EndFunction
 
 Function R5011B_CustomersAging()
 	Return 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	OffsetOfAging.Period,
-	|	OffsetOfAging.Company,
-	|	OffsetOfAging.Branch,
-	|	OffsetOfAging.Partner,
-	|	OffsetOfAging.Agreement,
-	|	OffsetOfAging.Currency,
-	|	OffsetOfAging.Invoice,
-	|	OffsetOfAging.PaymentDate,
-	|	OffsetOfAging.Amount,
-	|	OffsetOfAging.Recorder AS AgingClosing
-	|INTO R5011B_CustomersAging
-	|FROM
-	|	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
-	|WHERE
-	|	OffsetOfAging.Document = &Ref";
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAging.Period,
+		|	OffsetOfAging.Company,
+		|	OffsetOfAging.Branch,
+		|	OffsetOfAging.Partner,
+		|	OffsetOfAging.Agreement,
+		|	OffsetOfAging.Currency,
+		|	OffsetOfAging.Invoice,
+		|	OffsetOfAging.PaymentDate,
+		|	OffsetOfAging.Amount,
+		|	OffsetOfAging.Recorder AS AgingClosing
+		|INTO R5011B_CustomersAging
+		|FROM
+		|	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
+		|WHERE
+		|	OffsetOfAging.Document = &Ref";
 EndFunction
 
 #EndRegion

@@ -221,9 +221,7 @@ Procedure OnChainComplete(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailReturnReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportFromTradeAgent"
@@ -2455,9 +2453,7 @@ EndProcedure
 Procedure UpdateTotalAmounts(Parameters)
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder" Then
 		Parameters.Form.UpdateTotalAmounts();
 	EndIf;	
 EndProcedure
@@ -3298,12 +3294,10 @@ Procedure OnSetTransactionTypeNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"	
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"      
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"       
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"  
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"         
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"           
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"    
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"              
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"          
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "OutgoingPaymentOrder"
@@ -3363,9 +3357,7 @@ Procedure OnSetPartnerNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkSheet"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesOrderClosing"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrderClosing"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportFromTradeAgent"

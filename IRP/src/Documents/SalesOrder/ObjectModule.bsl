@@ -29,7 +29,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	EndIf;
 	
 	If Not IsNew() And Modified() Then
-		ClosingOrder = DocSalesOrderClosingServer.GetLastSalesOrderClosingBySalesOrder(Ref);
+		ClosingOrder = DocOrderClosingServer.GetLastSalesOrderClosingBySalesOrder(Ref);
 		If Not ClosingOrder.IsEmpty() Then
 			Cancel = True;
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_022, ClosingOrder));

@@ -18,11 +18,19 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	EndIf;
 	
 	SetMarkNegativesItemList(Object, Form);
-
-	ExternalCommandsServer.CreateCommands(Form, Object.Ref.Metadata().FullName(), Enums.FormTypes.ObjectForm);
-	CopyPasteServer.CreateCommands(Form, Object.Ref.Metadata().FullName(), Enums.FormTypes.ObjectForm);
-	LoadDataFromTableServer.CreateCommands(Form, Object.Ref.Metadata(), Enums.FormTypes.ObjectForm);
-	SerialLotNumbersServer.CreateCommands(Form, Object.Ref.Metadata(), Enums.FormTypes.ObjectForm);
+	
+	ArrayOfExcludingDocuments = New Array();
+	ArrayOfExcludingDocuments.Add(Metadata.Documents.SalesOrderClosing);
+	ArrayOfExcludingDocuments.Add(Metadata.Documents.PurchaseOrderClosing);
+	
+	ObjectMetdata = Object.Ref.Metadata();
+	
+	ExternalCommandsServer.CreateCommands(Form, ObjectMetdata.FullName(), Enums.FormTypes.ObjectForm);
+	If ArrayOfExcludingDocuments.Find(ObjectMetdata) = Undefined Then
+		CopyPasteServer.CreateCommands(Form, ObjectMetdata.FullName(), Enums.FormTypes.ObjectForm);
+		LoadDataFromTableServer.CreateCommands(Form, ObjectMetdata, Enums.FormTypes.ObjectForm);
+	EndIf;
+	SerialLotNumbersServer.CreateCommands(Form, ObjectMetdata, Enums.FormTypes.ObjectForm);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export

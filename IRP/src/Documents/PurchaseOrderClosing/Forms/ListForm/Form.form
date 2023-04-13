@@ -245,106 +245,6 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>DocumentAmount</name>
-      <id>34</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.DocumentAmount</segments>
-      </dataPath>
-      <extendedTooltip>
-        <name>DocumentAmountExtendedTooltip</name>
-        <id>36</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>DocumentAmountContextMenu</name>
-        <id>35</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <wrap>true</wrap>
-        <chooseType>true</chooseType>
-        <typeDomainEnabled>true</typeDomainEnabled>
-        <textEdit>true</textEdit>
-      </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
-      <name>Currency</name>
-      <id>31</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Currency</segments>
-      </dataPath>
-      <extendedTooltip>
-        <name>CurrencyExtendedTooltip</name>
-        <id>33</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>CurrencyContextMenu</name>
-        <id>32</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <wrap>true</wrap>
-        <chooseType>true</chooseType>
-        <typeDomainEnabled>true</typeDomainEnabled>
-        <textEdit>true</textEdit>
-      </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
       <name>Company</name>
       <id>46</id>
       <visible>true</visible>
@@ -829,21 +729,18 @@
 	PurchaseOrderClosing.Agreement,
 	PurchaseOrderClosing.Company,
 	PurchaseOrderClosing.TransactionType,
-	PurchaseOrderClosing.Currency,
 	PurchaseOrderClosing.LegalName,
 	PurchaseOrderClosing.Partner,
-	PurchaseOrderClosing.PriceIncludeTax,
-	PurchaseOrderClosing.PartnerBankAccount,
-	PurchaseOrderClosing.UseItemsReceiptScheduling,
-	PurchaseOrderClosing.CloseOrder,
 	PurchaseOrderClosing.PurchaseOrder,
 	PurchaseOrderClosing.Author,
 	PurchaseOrderClosing.Branch,
 	PurchaseOrderClosing.Description,
 	PurchaseOrderClosing.DocumentAmount,
-	CASE WHEN COUNT(DISTINCT PurchaseOrderClosingItemList.Store) = 1 THEN
-		MAX(PurchaseOrderClosingItemList.Store)
-	ELSE UNDEFINED END AS Store
+	CASE
+		WHEN COUNT(DISTINCT PurchaseOrderClosingItemList.Store) = 1
+			THEN MAX(PurchaseOrderClosingItemList.Store)
+		ELSE UNDEFINED
+	END AS Store
 FROM
 	Document.PurchaseOrderClosing AS PurchaseOrderClosing
 		LEFT JOIN Document.PurchaseOrderClosing.ItemList AS PurchaseOrderClosingItemList
@@ -857,13 +754,8 @@ GROUP BY
 	PurchaseOrderClosing.Agreement,
 	PurchaseOrderClosing.Company,
 	PurchaseOrderClosing.TransactionType,
-	PurchaseOrderClosing.Currency,
 	PurchaseOrderClosing.LegalName,
 	PurchaseOrderClosing.Partner,
-	PurchaseOrderClosing.PriceIncludeTax,
-	PurchaseOrderClosing.PartnerBankAccount,
-	PurchaseOrderClosing.UseItemsReceiptScheduling,
-	PurchaseOrderClosing.CloseOrder,
 	PurchaseOrderClosing.PurchaseOrder,
 	PurchaseOrderClosing.Author,
 	PurchaseOrderClosing.Branch,
@@ -886,6 +778,78 @@ GROUP BY
             </content>
           </localValue>
         </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Ref</dataPath>
+        <field>Ref</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>DeletionMark</dataPath>
+        <field>DeletionMark</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Number</dataPath>
+        <field>Number</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Date</dataPath>
+        <field>Date</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Posted</dataPath>
+        <field>Posted</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Agreement</dataPath>
+        <field>Agreement</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Company</dataPath>
+        <field>Company</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>TransactionType</dataPath>
+        <field>TransactionType</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>LegalName</dataPath>
+        <field>LegalName</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Partner</dataPath>
+        <field>Partner</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PurchaseOrder</dataPath>
+        <field>PurchaseOrder</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Author</dataPath>
+        <field>Author</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Branch</dataPath>
+        <field>Branch</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Description</dataPath>
+        <field>Description</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>DocumentAmount</dataPath>
+        <field>DocumentAmount</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ItemList</dataPath>
+        <field>ItemList</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>AddAttributes</dataPath>
+        <field>AddAttributes</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>PointInTime</dataPath>
+        <field>PointInTime</field>
       </fields>
     </extInfo>
   </attributes>

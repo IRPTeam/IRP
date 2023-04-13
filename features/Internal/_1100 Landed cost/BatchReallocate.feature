@@ -25,7 +25,7 @@ Scenario: _0050 preparation
 	* Load data
 		When Create catalog AddAttributeAndPropertySets objects (LC)
 		When Create catalog CancelReturnReasons objects (LC)
-		When Create catalog ReportOptions objects
+		When Create catalog ReportOptions objects (landed cost) 
 		When Create catalog AddAttributeAndPropertyValues objects (LC)
 		When Create catalog IDInfoAddresses objects (LC)
 		When Create catalog BusinessUnits objects (LC)
@@ -112,6 +112,7 @@ Scenario: _0050 preparation
 		And I wait "Second Company (Company) *" window closing in 20 seconds
 	* Load documents
 		When Create documents Batch relocation (LC)
+		When Create document AdditionalCostAllocation, CalculationMovementCosts, PurchaseInvoice (additional cost, batch realocate)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
@@ -128,6 +129,12 @@ Scenario: _0050 preparation
 			| "Documents.RetailSalesReceipt.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailReturnReceipt.FindByNumber(1011).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(1012).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.AdditionalCostAllocation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 	
 Scenario: _00501 check preparation
@@ -148,7 +155,9 @@ Scenario: _0052 create Calculation movements cost (batch reallocate)
 		And I input "30.05.2022" text in "End date" field
 		And I click "Post and close" button
 		And I wait "Calculation movement costs (create) *" window closing in 20 seconds
-		Then the number of "List" table lines is "равно" "1"
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		Then the number of "List" table lines is "равно" "2"
 	* Check batch balance calculation
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click "Select option..." button
@@ -164,7 +173,7 @@ Scenario: _0053 clear posting CalculationMovementCosts and check BatchReallocate
 	* Unpost CalculationMovementCosts
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
-		And I go to the first line in "List" table
+		And I go to the last line in "List" table
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Check unpost BatchReallocateIncoming and BatchReallocateOutgoing
 		Given I open hyperlink "e1cib/list/Document.BatchReallocateIncoming"
@@ -182,25 +191,25 @@ Scenario: _0053 clear posting CalculationMovementCosts and check BatchReallocate
 	* Post CalculationMovementCosts
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
-		And I go to the first line in "List" table
+		And I go to the last line in "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Check post BatchReallocateIncoming and BatchReallocateOutgoing
 		Given I open hyperlink "e1cib/list/Document.BatchReallocateIncoming"
 		And "List" table contains lines
 			| 'Number' | 'Batch reallocate'              | 'Date' | 'Company'        | 'Document'                   | 'Outgoing'                     |
-			| '1'      | 'Calculation movement costs 1*' | '*'    | 'Second Company' | 'Item stock adjustment 161*' | 'Batch reallocate outgoing 1*' |
-			| '2'      | 'Calculation movement costs 1*' | '*'    | 'Second Company' | 'Sales invoice 1 011*'       | 'Batch reallocate outgoing 2*' |
-			| '3'      | 'Calculation movement costs 1*' | '*'    | 'Second Company' | 'Sales invoice 1 012*'       | 'Batch reallocate outgoing 3*' |
+			| '1'      | 'Calculation movement costs 3*' | '*'    | 'Second Company' | 'Item stock adjustment 161*' | 'Batch reallocate outgoing 1*' |
+			| '2'      | 'Calculation movement costs 3*' | '*'    | 'Second Company' | 'Sales invoice 1 011*'       | 'Batch reallocate outgoing 2*' |
+			| '3'      | 'Calculation movement costs 3*' | '*'    | 'Second Company' | 'Sales invoice 1 012*'       | 'Batch reallocate outgoing 3*' |
 		Given I open hyperlink "e1cib/list/Document.BatchReallocateOutgoing"
 		And "List" table contains lines
 			| 'Number' | 'Batch reallocate'              | 'Date' | 'Company'      | 'Document'                   | 'Incoming'                     |
-			| '1'      | 'Calculation movement costs 1*' | '*'    | 'Main Company' | 'Item stock adjustment 161*' | 'Batch reallocate incoming 1*' |
-			| '2'      | 'Calculation movement costs 1*' | '*'    | 'Main Company' | 'Sales invoice 1 011*'       | 'Batch reallocate incoming 2*' |
-			| '3'      | 'Calculation movement costs 1*' | '*'    | 'Main Company' | 'Sales invoice 1 012*'       | 'Batch reallocate incoming 3*' |
+			| '1'      | 'Calculation movement costs 3*' | '*'    | 'Main Company' | 'Item stock adjustment 161*' | 'Batch reallocate incoming 1*' |
+			| '2'      | 'Calculation movement costs 3*' | '*'    | 'Main Company' | 'Sales invoice 1 011*'       | 'Batch reallocate incoming 2*' |
+			| '3'      | 'Calculation movement costs 3*' | '*'    | 'Main Company' | 'Sales invoice 1 012*'       | 'Batch reallocate incoming 3*' |
 	* Mark for daletion CalculationMovementCosts
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
-		And I go to the first line in "List" table
+		And I go to the last line in "List" table
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button

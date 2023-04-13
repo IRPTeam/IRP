@@ -105,6 +105,10 @@ Scenario: _05602 preparation (consignment landed cost)
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And Delay "3"
+		* Posting Purchase return
+			Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
 		* Posting AdditionalCostAllocation
 			Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
 			Then I select all lines of "List" table

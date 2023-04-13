@@ -4678,6 +4678,14 @@
     <key>en</key>
     <value>Serial lot number</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Серия номенклатуры</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
+   </title>
    <id>89</id>
    <valueType>
     <types>CatalogRef.SerialLotNumbers</types>
@@ -5703,6 +5711,14 @@
    <title>
     <key>en</key>
     <value>Serial lot number</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Серия номенклатуры</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
    </title>
    <id>91</id>
    <valueType>

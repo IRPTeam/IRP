@@ -90,13 +90,13 @@ Scenario: _018001 create document Purchase Invoice based on order (partial quant
 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		Then "Add linked document rows" window is opened
 		And "BasisesTree" table became equal
-			| 'Row presentation'                             | 'Use' | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
-			| 'Purchase order 217 dated 12.02.2021 12:45:05' | 'Yes' | ''         | ''               | ''       | ''         |
-			| 'Dress (S/Yellow)'                             | 'Yes' | '10,000'   | 'pcs'            | '100,00' | 'TRY'      |
-			| 'Service (Internet)'                           | 'Yes' | '2,000'    | 'pcs'            | '150,00' | 'TRY'      |
-			| 'Trousers (36/Yellow)'                         | 'Yes' | '5,000'    | 'pcs'            | '200,00' | 'TRY'      |
-			| 'Trousers (36/Yellow)'                         | 'Yes' | '8,000'    | 'pcs'            | '210,00' | 'TRY'      |
-			| 'Boots (36/18SD)'                              | 'Yes' | '5,000'    | 'Boots (12 pcs)' | '200,00' | 'TRY'      |
+			| 'Row presentation'                             | 'Use' | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
+			| 'Purchase order 217 dated 12.02.2021 12:45:05' | 'Yes' | ''         | ''               | ''         | ''         |
+			| 'Dress (S/Yellow)'                             | 'Yes' | '10,000'   | 'pcs'            | '100,00'   | 'TRY'      |
+			| 'Service (Internet)'                           | 'Yes' | '2,000'    | 'pcs'            | '150,00'   | 'TRY'      |
+			| 'Trousers (36/Yellow)'                         | 'Yes' | '5,000'    | 'pcs'            | '200,00'   | 'TRY'      |
+			| 'Trousers (36/Yellow)'                         | 'Yes' | '8,000'    | 'pcs'            | '210,00'   | 'TRY'      |
+			| 'Boots (36/18SD)'                              | 'Yes' | '5,000'    | 'Boots (12 pcs)' | '2 400,00' | 'TRY'      |
 		And I go to line in "BasisesTree" table
 			| 'Row presentation'  |
 			| 'Service (Internet)' |
@@ -110,11 +110,11 @@ Scenario: _018001 create document Purchase Invoice based on order (partial quant
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table became equal
-			| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Quantity'      | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                               | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
-			| '1' | 'Front office'       | 'en description is empty' | 'Dress'    | 'S/Yellow'  | 'No'                 | '137,29'     | 'pcs'            | ''                   | '10,000' | '100,00' | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '762,71'     | 'Yes'               |
-			| '2' | 'Front office'       | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '137,29'     | 'pcs'            | ''                   | '5,000'  | '200,00' | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '762,71'     | 'Yes'               |
-			| '3' | 'Front office'       | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '256,27'     | 'pcs'            | ''                   | '8,000'  | '210,00' | '18%' | ''              | '1 680,00'     | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '1 423,73'   | 'Yes'               |
-			| '4' | ''                   | 'en description is empty' | 'Boots'    | '36/18SD'   | 'No'                 | '1 830,51'   | 'Boots (12 pcs)' | ''                   | '5,000'  | '200,00' | '18%' | ''              | '12 000,00'    | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '10 169,49'  | 'Yes'               |
+			| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Quantity' | 'Price'    | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                               | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '1' | 'Front office'       | 'en description is empty' | 'Dress'    | 'S/Yellow'  | 'No'                 | '137,29'     | 'pcs'            | ''                   | '10,000'   | '100,00'   | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '762,71'     | 'Yes'               |
+			| '2' | 'Front office'       | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '137,29'     | 'pcs'            | ''                   | '5,000'    | '200,00'   | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '762,71'     | 'Yes'               |
+			| '3' | 'Front office'       | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '256,27'     | 'pcs'            | ''                   | '8,000'    | '210,00'   | '18%' | ''              | '1 680,00'     | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '1 423,73'   | 'Yes'               |
+			| '4' | ''                   | 'en description is empty' | 'Boots'    | '36/18SD'   | 'No'                 | '1 830,51'   | 'Boots (12 pcs)' | ''                   | '5,000'    | '2 400,00' | '18%' | ''              | '12 000,00'    | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '10 169,49'  | 'Yes'               |
 		And "SpecialOffers" table contains lines
 			| '#' | 'Amount' |
 			| '1' | '100,00' |
@@ -292,36 +292,36 @@ Scenario: _018003 copy PI (based on PO) and check filling in Row Id info table (
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table became equal
-			| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Quantity'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order' | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
-			| '1' | 'Front office'  | 'en description is empty' | 'Dress'    | 'S/Yellow'  | 'No'                 | '61,02'      | 'pcs'            | ''                   | '5,000' | '100,00' | '18%' | '100,00'        | '400,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '338,98'     | 'Yes'               |
-			| '2' | 'Front office'  | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '137,29'     | 'pcs'            | ''                   | '5,000' | '200,00' | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '762,71'     | 'Yes'               |
-			| '3' | 'Front office'  | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '256,27'     | 'pcs'            | ''                   | '8,000' | '210,00' | '18%' | ''              | '1 680,00'     | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '1 423,73'   | 'Yes'               |
-			| '4' | ''              | 'en description is empty' | 'Boots'    | '36/18SD'   | 'No'                 | '1 830,51'   | 'Boots (12 pcs)' | ''                   | '5,000' | '200,00' | '18%' | ''              | '12 000,00'    | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '10 169,49'  | 'No'                |
+			| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Quantity' | 'Price'    | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order' | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '1' | 'Front office'       | 'en description is empty' | 'Dress'    | 'S/Yellow'  | 'No'                 | '68,64'      | 'pcs'            | ''                   | '5,000'    | '100,00'   | '18%' | '50,00'         | '450,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '381,36'     | 'Yes'               |
+			| '2' | 'Front office'       | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '137,29'     | 'pcs'            | ''                   | '5,000'    | '200,00'   | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '762,71'     | 'Yes'               |
+			| '3' | 'Front office'       | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '256,27'     | 'pcs'            | ''                   | '8,000'    | '210,00'   | '18%' | ''              | '1 680,00'     | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '1 423,73'   | 'Yes'               |
+			| '4' | ''                   | 'en description is empty' | 'Boots'    | '36/18SD'   | 'No'                 | '1 830,51'   | 'Boots (12 pcs)' | ''                   | '5,000'    | '2 400,00' | '18%' | ''              | '12 000,00'    | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '10 169,49'  | 'No'                |
 		And in the table "ItemList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
 			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount'   |
-			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '2 564,58' |
-			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '14 980'   |
-			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '14 980'   |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '2 573,14' |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '15 030'   |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '15 030'   |
 		And I close current window
 		Then the form attribute named "Branch" became equal to "Front office"
 		Then the form attribute named "Author" became equal to "en description is empty"
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "Currency" became equal to "TRY"
-		Then the form attribute named "ItemListTotalNetAmount" became equal to "12 694,91"
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "2 285,09"
-		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "14 980,00"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "12 737,29"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "2 292,71"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "15 030,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Post PI and check Row ID Info tab
 		And I click "Show row key" button
 		And I click the button named "FormPost"
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table does not contain lines
-			| 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Quantity'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
-			| '$$Rov1PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'GR'        | '5,000'  | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'PI&GR'        | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' |
-			| '$$Rov2PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'GR'        | '5,000'  | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'PI&GR'        | '923e7825-c20f-4a3e-a983-3b85d80e475a' |
-			| '$$Rov3PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'GR'        | '8,000'  | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'PI&GR'        | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' |
-			| '$$Rov4PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '8d544e62-9a68-43c3-8399-b4ef451d9770' | ''          | '60,000' | '8d544e62-9a68-43c3-8399-b4ef451d9770' | 'PI&GR'        | '8d544e62-9a68-43c3-8399-b4ef451d9770' |
+			| 'Key'                           | 'Basis'                                        | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '$$Rov1PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'GR'        | '5,000'    | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' | 'PI&GR'        | '4fcbb4cf-3824-47fb-89b5-50d151215d4d' |
+			| '$$Rov2PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'GR'        | '5,000'    | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'PI&GR'        | '923e7825-c20f-4a3e-a983-3b85d80e475a' |
+			| '$$Rov3PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'GR'        | '8,000'    | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'PI&GR'        | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' |
+			| '$$Rov4PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '8d544e62-9a68-43c3-8399-b4ef451d9770' | ''          | '60,000'   | '8d544e62-9a68-43c3-8399-b4ef451d9770' | 'PI&GR'        | '8d544e62-9a68-43c3-8399-b4ef451d9770' |
 		Then the number of "RowIDInfo" table lines is "равно" "4"
 		And I close all client application windows		
 

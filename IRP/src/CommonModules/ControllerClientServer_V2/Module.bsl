@@ -9395,6 +9395,9 @@ Function BindItemListStore(Parameters)
 		"StepItemListChangeUseGoodsReceiptByStore,
 		|StepChangeStoreInHeaderByStoresInList");
 	
+	Binding.Insert("SalesOrderClosing", "BindVoid");
+	Binding.Insert("PurchaseOrderClosing", "BindVoid");
+	
 	Return BindSteps(Undefined, DataPath, Binding, Parameters, "BindItemListStore");
 EndFunction
 

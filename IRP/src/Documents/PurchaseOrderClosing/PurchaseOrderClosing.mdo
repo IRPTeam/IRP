@@ -320,6 +320,19 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
     </attributes>
+    <attributes uuid="381ec536-8305-4816-8f8b-c6047989f75c">
+      <name>QuantityInBaseUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity in base unit</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
     <attributes uuid="ec51f63f-9000-4b59-907f-31deca83ad95">
       <name>Unit</name>
       <synonym>

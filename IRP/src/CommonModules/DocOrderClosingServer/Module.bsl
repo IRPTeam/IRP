@@ -61,7 +61,7 @@ EndProcedure
 
 #Region SalesOrderClosing
 
-Function GetLastSalesOrderClosingBySalesOrder(SalesOrder) Export
+Function GetClosingBySalesOrder(SalesOrder) Export
 	SalesOrderClosing = Documents.SalesOrderClosing.EmptyRef();
 
 	Query = New Query();
@@ -86,7 +86,7 @@ Function GetLastSalesOrderClosingBySalesOrder(SalesOrder) Export
 	Return SalesOrderClosing;
 EndFunction
 
-Function GetSalesOrderForClosing(SalesOrder) Export
+Function GetDataFormSalesOrder(SalesOrder, Object = Undefined) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -125,12 +125,23 @@ Function GetSalesOrderForClosing(SalesOrder) Export
 	|	ItemList.IsService
 	|FROM
 	|	Document.SalesOrder.ItemList AS ItemList
-	|		INNER JOIN AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Balance(, Order = &SalesOrder) AS
+	|		INNER JOIN AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Balance(&Boundary, Order = &SalesOrder) AS
 	|			SalesOrdersInvoiceClosing
 	|		ON ItemList.Key = SalesOrdersInvoiceClosing.RowKey
 	|WHERE
-	|	ItemList.Ref = &SalesOrder";
+	|	ItemList.Ref = &SalesOrder
+	|
+	|ORDER BY
+	|	ItemList.LineNumber";
 	Query.SetParameter("SalesOrder", SalesOrder);
+	
+	Boundary = Undefined;
+	If Object <> Undefined Then
+		PointInTime = New PointInTime(Object.Date, Object.Ref);
+		Boundary = New Boundary(PointInTime, BoundaryType.Excluding);
+	EndIf;
+	Query.SetParameter("Boundary", Boundary);
+		
 	QueryResults = Query.ExecuteBatch();
 	
 	Header              = QueryResults[0].Unload()[0];
@@ -164,11 +175,17 @@ Function GetSalesOrderForClosing(SalesOrder) Export
 	Return FillingValues;
 EndFunction
 
+Procedure RefreshSalesOrderClosing(Object) Export
+	FillingData = GetDataFormSalesOrder(Object.SalesOrder, Object);
+	RefreshClosing(Object, FillingData, "SalesOrderKey", 
+		"Agreement, Company, LegalName, Partner, SalesOrder, TransactionType");
+EndProcedure
+
 #EndRegion
 
 #Region PurchaseOrderClosing
 
-Function GetLastPurchaseOrderClosingByPurchaseOrder(PurchaseOrder) Export
+Function GetClosingByPurchaseOrder(PurchaseOrder) Export
 	PurchaseOrderClosing = Documents.PurchaseOrderClosing.EmptyRef();
 
 	Query = New Query();
@@ -194,7 +211,7 @@ Function GetLastPurchaseOrderClosingByPurchaseOrder(PurchaseOrder) Export
 	Return PurchaseOrderClosing;
 EndFunction
 
-Function GetPurchaseOrderForClosing(PurchaseOrder) Export
+Function GetDataFromPurchaseOrder(PurchaseOrder, Object = Undefined) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -231,13 +248,21 @@ Function GetPurchaseOrderForClosing(PurchaseOrder) Export
 	|	ItemList.IsService
 	|FROM
 	|	Document.PurchaseOrder.ItemList AS ItemList
-	|		INNER JOIN AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing.Balance(, Order = &PurchaseOrder) AS
+	|		INNER JOIN AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing.Balance(&Boundary, Order = &PurchaseOrder) AS
 	|			PurchaseOrdersInvoiceClosing
 	|		ON ItemList.Key = PurchaseOrdersInvoiceClosing.RowKey
 	|WHERE
-	|	ItemList.Ref = &PurchaseOrder";
-	
+	|	ItemList.Ref = &PurchaseOrder
+	|
+	|ORDER BY
+	|	ItemList.LineNumber";
 	Query.SetParameter("PurchaseOrder", PurchaseOrder);
+	Boundary = Undefined;
+	If Object <> Undefined Then
+		PointInTime = New PointInTime(Object.Date, Object.Ref);
+		Boundary = New Boundary(PointInTime, BoundaryType.Excluding);
+	EndIf;
+	Query.SetParameter("Boundary", Boundary);
 	
 	QueryResults = Query.ExecuteBatch();
 	
@@ -272,4 +297,55 @@ Function GetPurchaseOrderForClosing(PurchaseOrder) Export
 	Return FillingValues;
 EndFunction
 
+Procedure RefreshPurchaseOrderClosing(Object) Export
+	FillingData = GetDataFromPurchaseOrder(Object.PurchaseOrder, Object);
+	RefreshClosing(Object, FillingData, "PurchaseOrderKey",
+		"Agreement, Company, LegalName, Partner, PurchaseOrder, TransactionType");
+EndProcedure
+
 #EndRegion
+
+Procedure RefreshClosing(Object, FillingData, BasisRowKeyColumnName, HeaderAttributeNames)
+	FillPropertyValues(Object, FillingData, HeaderAttributeNames);
+	
+	// Add or refresh
+	For Each Row In FillingData.ItemList Do
+		ClosingRows = Object.ItemList.FindRows(New Structure(BasisRowKeyColumnName, Row[BasisRowKeyColumnName]));
+		_Cancel       = Undefined;
+		_CancelReason = Undefined;
+		If ClosingRows.Count() Then
+			ClosingRow    = ClosingRows[0];
+			_Cancel       = ClosingRow.Cancel;
+			_CancelReason = ClosingRow.CancelReason;
+		Else
+			ClosingRow     = Object.ItemList.Add();
+			ClosingRow.Key = New UUID();
+		EndIf;
+		FillPropertyValues(ClosingRow, Row);
+		If ValueIsFilled(_Cancel) Then
+			ClosingRow.Cancel = _Cancel;
+		EndIf;
+		If ValueIsFilled(_CancelReason) Then
+			ClosingRow.CancelReason = _CancelReason;
+		EndIf;
+	EndDo;
+	
+	// delete
+	ArrayForDelete = New Array();
+	For Each Row In Object.ItemList Do
+		RowExists = False;
+		For Each RowFillingData In FillingData.ItemList Do
+			If Row[BasisRowKeyColumnName] = RowFillingData[BasisRowKeyColumnName] Then
+				RowExists = True;
+				Break;
+			EndIf;
+		EndDo;
+		If Not RowExists Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	
+	For Each Item In ArrayForDelete Do
+		Object.ItemList.Delete(Item);
+	EndDo;
+EndProcedure

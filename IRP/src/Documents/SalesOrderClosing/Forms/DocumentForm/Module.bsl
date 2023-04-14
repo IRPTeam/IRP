@@ -135,6 +135,17 @@ EndProcedure
 #EndRegion
 
 &AtClient
+Procedure Refresh(Command)
+	RefreshAtServer();
+	ThisObject.Modified = True;
+EndProcedure
+
+&AtServer
+Procedure RefreshAtServer()
+	DocOrderClosingServer.RefreshSalesOrderClosing(Object);
+EndProcedure
+
+&AtClient
 Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure

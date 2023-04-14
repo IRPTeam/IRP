@@ -3,7 +3,28 @@
 	<item>
 		<selection>
 			<item>
-				<field>ItemList</field>
+				<field>ItemListItem</field>
+			</item>
+			<item>
+				<field>ItemListItemKey</field>
+			</item>
+			<item>
+				<field>ItemListProcurementMethod</field>
+			</item>
+			<item>
+				<field>ItemListQuantity</field>
+			</item>
+			<item>
+				<field>ItemListUnit</field>
+			</item>
+			<item>
+				<field>ItemListStore</field>
+			</item>
+			<item>
+				<field>ItemListDeliveryDate</field>
+			</item>
+			<item>
+				<field>ItemListSalesPerson</field>
 			</item>
 		</selection>
 		<filter>

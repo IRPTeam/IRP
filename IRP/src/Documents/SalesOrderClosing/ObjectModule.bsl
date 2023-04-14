@@ -2,7 +2,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-
+	DocOrderClosingServer.RefreshSalesOrderClosing(ThisObject);
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 EndProcedure
 

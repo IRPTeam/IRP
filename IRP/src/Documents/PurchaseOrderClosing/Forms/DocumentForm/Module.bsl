@@ -57,6 +57,16 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 EndProcedure
 
+&AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	Cancel = True;
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeDeleteRow(Item, Cancel)
+	Cancel = True;
+EndProcedure
+
 #EndRegion
 
 #Region SERVICE
@@ -122,6 +132,17 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure Refresh(Command)
+	RefreshAtServer();
+	ThisObject.Modified = True;
+EndProcedure
+
+&AtServer
+Procedure RefreshAtServer()
+	DocOrderClosingServer.RefreshPurchaseOrderClosing(Object);	
+EndProcedure
 
 &AtClient
 Procedure ShowRowKey(Command)

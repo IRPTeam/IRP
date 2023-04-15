@@ -213,7 +213,7 @@ FROM
 	</dataSet>
 	<calculatedField>
 		<dataPath>Status</dataPath>
-		<expression>StrConcat(AdditionalDocumentTableControl.CheckDocument(Ref), "
+		<expression>StrConcat(AdditionalDocumentTableControl.CheckDocument(Ref, &amp;ErrorList), "
 ")</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
@@ -222,6 +222,25 @@ FROM
 			</v8:item>
 		</title>
 	</calculatedField>
+	<parameter>
+		<name>ErrorList</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>Error list</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:string</v8:Type>
+			<v8:StringQualifiers>
+				<v8:Length>0</v8:Length>
+				<v8:AllowedLength>Variable</v8:AllowedLength>
+			</v8:StringQualifiers>
+		</valueType>
+		<value xsi:nil="true"/>
+		<useRestriction>false</useRestriction>
+		<valueListAllowed>true</valueListAllowed>
+	</parameter>
 	<settingsVariant>
 		<dcsset:name>Default</dcsset:name>
 		<dcsset:presentation xsi:type="xs:string">Default</dcsset:presentation>
@@ -238,6 +257,11 @@ FROM
 					<dcsset:right xsi:type="xs:string"/>
 				</dcsset:item>
 			</dcsset:filter>
+			<dcsset:dataParameters>
+				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+					<dcscor:parameter>ErrorList</dcscor:parameter>
+				</dcscor:item>
+			</dcsset:dataParameters>
 			<dcsset:item xsi:type="dcsset:StructureItemGroup">
 				<dcsset:groupItems>
 					<dcsset:item xsi:type="dcsset:GroupItemField">

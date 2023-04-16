@@ -276,6 +276,7 @@ Function Strings(Lang) Export
 	Strings = New Structure();
 
 #Region AdditionalTableControl
+
 	Strings.Insert("ATC_001", NStr("en = 'Unknown document type: %1'", Lang));
 	Strings.Insert("ATC_ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList", NStr("en = 'Row: %1. Tax amount in item list is not equal to tax amount in tax list'", Lang));
 	Strings.Insert("ATC_ErrorNetAmountGreaterTotalAmount", NStr("en = 'Row: %1. Net amount is greater than total amount'", Lang));
@@ -292,6 +293,7 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_ErrorQuantityNotEqualQuantityInBaseUnit", NStr("en = 'Row: %1. Quantity not equal quantity in base unit when unit quantity equal 1'", Lang));
 	Strings.Insert("ATC_ErrorNotFilledQuantityInSourceOfOrigins", NStr("en = 'Row: %1. Not filled quantity in source of origins'", Lang));
 	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInSerialLotNumber", NStr("en = 'Row: %1. Quantity in source of origins diff quantity in serial lot number'", Lang));
+	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInItemList", NStr("en = 'Row: %1. Quantity in source of origins diff quantity in item list'", Lang));
 	
 #EndRegion
 

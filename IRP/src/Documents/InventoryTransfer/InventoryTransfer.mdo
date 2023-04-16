@@ -192,6 +192,108 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="52458405-1bc5-42c7-939d-9d4a0dc8b9db">
+    <name>ShipFrom</name>
+    <synonym>
+      <key>en</key>
+      <value>Ship from</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b84a2f8a-c094-48a6-bf28-7293c78936f2">
+    <name>ShipFromAddress</name>
+    <synonym>
+      <key>en</key>
+      <value>Ship from address</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Addresses</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="601842c3-9272-47cd-aad6-a9396f451ec9">
+    <name>ShipTo</name>
+    <synonym>
+      <key>en</key>
+      <value>Ship to</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="6f00cb0c-d1ba-42f9-a780-9c6282da9b55">
+    <name>ShipToAddress</name>
+    <synonym>
+      <key>en</key>
+      <value>Ship to address</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Addresses</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5e1f1504-16b0-48a2-9dc5-0cbb55f77651">
+    <name>Carrier</name>
+    <synonym>
+      <key>en</key>
+      <value>Carrier</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="39b1c4e0-d2be-4035-837e-ffb7e55005b7">
+    <name>VehicleDriver</name>
+    <synonym>
+      <key>en</key>
+      <value>Driver</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a193824d-f0be-46f1-82e8-d333e37768e5">
+    <name>Vehicle</name>
+    <synonym>
+      <key>en</key>
+      <value>Vehicle</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Vehicles</types>
+    </type>
+    <createOnInput>Use</createOnInput>
+    <fullTextSearch>Use</fullTextSearch>
+  </attributes>
   <forms uuid="7a5be0d3-3151-4fcc-999d-14fc15ce18bc">
     <name>DocumentForm</name>
     <synonym>

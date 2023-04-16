@@ -304,6 +304,8 @@ Function Strings(Lang) Export
 		|ru='Строка: %1. Количество в табличной части Товары не соответствует количеству в Row ID'", Lang));
 	Strings.Insert("ATC_ErrorQuantityNotEqualQuantityInBaseUnit", NStr("en='Row: %1. Quantity not equal quantity in base unit when unit quantity equal 1';
 		|ru='Строка: %1. Количество не равняется количеству в основной ед. изм. не смотря на то, что коефф. ед. изм равен 1'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledQuantityInSourceOfOrigins", NStr("en='Row: %1. Not filled quantity in source of origins'", Lang));
+	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInSerialLotNumber", NStr("en='Row: %1. Quantity in source of origins diff quantity in serial lot number'", Lang));
 	
 #EndRegion
 

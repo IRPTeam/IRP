@@ -276,6 +276,7 @@ Function Strings(Lang) Export
 	Strings = New Structure();
 
 #Region AdditionalTableControl
+
 	Strings.Insert("ATC_001", NStr("en='Unknown document type: %1';
 		|ru='Неизвестный тип документа: %1'", Lang));
 	Strings.Insert("ATC_ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList", NStr("en='Row: %1. Tax amount in item list is not equal to tax amount in tax list';
@@ -308,6 +309,7 @@ Function Strings(Lang) Export
 		|ru='Строка: %1. Не заполнено количество в источниках происхождения'", Lang));
 	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInSerialLotNumber", NStr("en='Row: %1. Quantity in source of origins diff quantity in serial lot number';
 		|ru='Строка: %1. Количество в источниках происхождения отличается от количества в серийных номерах'", Lang));
+	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInItemList", NStr("en='Row: %1. Quantity in source of origins diff quantity in item list'", Lang));
 	
 #EndRegion
 

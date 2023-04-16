@@ -12,6 +12,7 @@
 // ** SpecialOffers - Undefined
 // ** SerialLotNumbers - Undefined
 // ** SourceOfOrigins - Undefined
+// ** RowIDInfo - Undefined
 Function GetQuery(DocName) Export
 	
 	Result = New Structure;
@@ -29,6 +30,12 @@ Function GetQuery(DocName) Export
 	Else
 		Result.Tables.Insert("TaxList", Undefined);
 		ErrorsArray.Add(ErrorWithTax());
+	EndIf;
+	
+	If MetaDoc.TabularSections.Find("RowIDInfo") = Undefined Then
+		Result.Tables.Insert("RowIDInfo", TmplDoc.RowIDInfo.Unload());
+	Else
+		Result.Tables.Insert("RowIDInfo", Undefined);
 	EndIf;
 	
 	If MetaDoc.TabularSections.Find("SpecialOffers") = Undefined Then
@@ -123,9 +130,19 @@ Function GetFilterAndFields(Val ErrorsArray, MetaDoc, QueryNumber)
 	EndDo;
 	
 	Str = New Structure;
-	Str.Insert("Fields", StrConcat(ArrayOfFields, "," + Chars.LF + Chars.Tab));
-	Str.Insert("Filters", StrConcat(ArrayOfFilter, Chars.LF + "	OR	"));
-	Str.Insert("Results", "Result." + StrConcat(ArrayOfFilter, "," + Chars.LF + "	Result."));
+	If ArrayOfFields.Count() = 0 Then
+		Str.Insert("Fields", "FALSE");
+	Else
+		Str.Insert("Fields", StrConcat(ArrayOfFields, "," + Chars.LF + Chars.Tab));
+	EndIf;
+	
+	If ArrayOfFilter.Count() = 0 Then
+		Str.Insert("Filters", "FALSE");
+		Str.Insert("Results", "FALSE");
+	Else
+		Str.Insert("Filters", StrConcat(ArrayOfFilter, Chars.LF + "	OR	"));
+		Str.Insert("Results", "Result." + StrConcat(ArrayOfFilter, "," + Chars.LF + "	Result."));
+	EndIf;
 	
 	Return Str;
 EndFunction
@@ -166,6 +183,12 @@ Function ErrorItemList()
 	Str.Insert("ErrorQuantityInItemListNotEqualQuantityInRowID", New Structure("Query, Fields, QueryNumber",
 		"Not ItemList.Quantity = isNull(RowIDInfo.Quantity, 0)",
 		"Quantity",
+		0
+	));
+	
+	Str.Insert("ErrorQuantityInItemListNotEqualQuantityInRowID", New Structure("Query, Fields, QueryNumber",
+		"Not Cancel AND Not ItemList.Quantity = isNull(RowIDInfo.Quantity, 0)",
+		"Quantity, Cancel",
 		0
 	));
 	
@@ -235,20 +258,31 @@ Function SourceOfOrigins()
 	Str = New Structure;
 	
 	Str.Insert("ErrorNotFilledQuantityInSourceOfOrigins", New Structure("Query, Fields, QueryNumber", 
-		"SourceOfOrigins.Quantity IS NULL AND NOT SerialLotNumbers.Quantity IS NULL",
+		"SourceOfOrigins.Quantity IS NULL",
 		"Quantity",
 		1
+	));
+	
+	Str.Insert("ErrorNotFilledQuantityInSourceOfOrigins", New Structure("Query, Fields, QueryNumber", 
+		"SourceOfOrigins.Quantity IS NULL",
+		"Quantity",
+		0
 	));
 	
 	Str.Insert("ErrorQuantityInSourceOfOriginsDiffQuantityInSerialLotNumber", New Structure("Query, Fields, QueryNumber", 
-		"Not SerialLotNumbers.Quantity = SourceOfOrigins.Quantity",
-		"Quantity",
+		"ItemList.UseSerialLotNumber AND Not SerialLotNumbers.Quantity = SourceOfOrigins.Quantity",
+		"Quantity, UseSerialLotNumber",
 		1
 	));
-	
+
+	Str.Insert("ErrorQuantityInSourceOfOriginsDiffQuantityInItemList", New Structure("Query, Fields, QueryNumber", 
+		"ItemList.UseSerialLotNumber AND Not ItemList.Quantity = SourceOfOrigins.Quantity",
+		"Quantity, UseSerialLotNumber",
+		0
+	));
+		
 	Return Str;
 EndFunction
-
 
 Function CheckDocumentsQuery()
 	Return 
@@ -320,13 +354,22 @@ Function CheckDocumentsQuery()
 	|FROM
 	|	&SourceOfOrigins AS SourceOfOrigins
 	|;
-	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SourceOfOrigins.Key,
+	|	SUM(SourceOfOrigins.Quantity) AS Quantity
+	|INTO SourceOfOrigins
+	|FROM
+	|	SourceOfOriginsTmp AS SourceOfOrigins
+	|GROUP BY
+	|	SourceOfOrigins.Key
+	|;
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	SourceOfOrigins.Key,
 	|	SourceOfOrigins.SerialLotNumber,
 	|	SourceOfOrigins.Quantity AS Quantity
-	|INTO SourceOfOrigins
+	|INTO SourceOfOriginsForSourceOfOrigins
 	|FROM
 	|	SourceOfOriginsTmp AS SourceOfOrigins
 	|;
@@ -388,7 +431,7 @@ Function CheckDocumentsQuery()
 	|		LEFT JOIN TaxList AS TaxList
 	|		ON ItemList.Key = TaxList.Key
 	|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
-	|		ON False
+	|		ON ItemList.Key = SourceOfOrigins.Key
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -401,7 +444,7 @@ Function CheckDocumentsQuery()
 	|	ItemList AS ItemList
 	|		LEFT JOIN SerialLotNumbersForSourceOfOrigins AS SerialLotNumbers
 	|		ON ItemList.Key = SerialLotNumbers.Key
-	|		LEFT JOIN SourceOfOrigins AS SourceOfOrigins
+	|		LEFT JOIN SourceOfOriginsForSourceOfOrigins AS SourceOfOrigins
 	|		ON SerialLotNumbers.Key = SourceOfOrigins.Key 
 	|		AND SerialLotNumbers.SerialLotNumber = SourceOfOrigins.SerialLotNumber
 	|;

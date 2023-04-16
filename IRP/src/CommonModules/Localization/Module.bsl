@@ -309,7 +309,8 @@ Function Strings(Lang) Export
 		|ru='Строка: %1. Не заполнено количество в источниках происхождения'", Lang));
 	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInSerialLotNumber", NStr("en='Row: %1. Quantity in source of origins diff quantity in serial lot number';
 		|ru='Строка: %1. Количество в источниках происхождения отличается от количества в серийных номерах'", Lang));
-	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInItemList", NStr("en='Row: %1. Quantity in source of origins diff quantity in item list'", Lang));
+	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInItemList", NStr("en='Row: %1. Quantity in source of origins diff quantity in item list';
+		|ru='Строка: %1. Количество в источниках происхождения отличается от количества в товарах'", Lang));
 	
 #EndRegion
 

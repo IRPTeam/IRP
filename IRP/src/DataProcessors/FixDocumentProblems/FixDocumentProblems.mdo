@@ -9,12 +9,24 @@
   <key>en</key>
   <value>Fix document problems</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Исправить проблемы документов</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.FixDocumentProblems.Form.Form</defaultForm>
  <forms uuid="f3078997-4eff-466c-98bf-d2f3b0ad823f">
   <name>Form</name>
   <synonym>
    <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>

@@ -36,6 +36,14 @@
 					<v8:lang>en</v8:lang>
 					<v8:content>Date</v8:content>
 				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Дата</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Tarih</v8:content>
+				</v8:item>
 			</title>
 		</field>
 		<dataSource>DataSource1</dataSource>

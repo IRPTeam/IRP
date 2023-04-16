@@ -68,6 +68,10 @@
      <key>en</key>
      <value>Group filter documents</value>
     </title>
+    <title>
+     <key>ru</key>
+     <value>Группа отбор документов</value>
+    </title>
     <extendedTooltip>
      <name>GroupFilterDocumentsExtendedTooltip</name>
      <id>23</id>
@@ -491,6 +495,10 @@
    <title>
     <key>en</key>
     <value>Filter</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Отбор</value>
    </title>
    <extendedTooltip>
     <name>PageFilterExtendedTooltip</name>
@@ -1088,6 +1096,14 @@
     <key>en</key>
     <value>Check</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Проверка</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Kontrol</value>
+   </title>
    <extendedTooltip>
     <name>PageCheckExtendedTooltip</name>
     <id>41</id>
@@ -1120,6 +1136,14 @@
   <title>
    <key>en</key>
    <value>Documents</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Документы</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Evraklar</value>
   </title>
   <extendedTooltip>
    <name>PagesDocumentsExtendedTooltip</name>
@@ -1182,6 +1206,10 @@
    <key>en</key>
    <value>Document list</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Список документов</value>
+  </title>
   <id>3</id>
   <valueType>
    <types>ValueTable</types>
@@ -1201,6 +1229,14 @@
     <key>en</key>
     <value>Ref</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Ссылка</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Ref</value>
+   </title>
    <id>4</id>
    <valueType>
     <types>DocumentRef</types>
@@ -1217,6 +1253,14 @@
    <title>
     <key>en</key>
     <value>Document type</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Тип документа</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Evrak tipi</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1236,6 +1280,14 @@
     <key>en</key>
     <value>Date</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Дата</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Tarih</value>
+   </title>
    <id>17</id>
    <valueType>
     <types>Date</types>
@@ -1254,6 +1306,14 @@
   <title>
    <key>en</key>
    <value>Period</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Период</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Dönem</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1275,6 +1335,10 @@
    <key>en</key>
    <value>Check list</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Список проверки</value>
+  </title>
   <id>7</id>
   <valueType>
    <types>ValueTree</types>
@@ -1294,6 +1358,14 @@
     <key>en</key>
     <value>Ref</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Ссылка</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Ref</value>
+   </title>
    <id>10</id>
    <valueType>
     <types>DocumentRef</types>
@@ -1310,6 +1382,10 @@
    <title>
     <key>en</key>
     <value>Error ID</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>ID Ошибки</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1329,6 +1405,14 @@
     <key>en</key>
     <value>Row key</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Ключ строки</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Satır anahtarı</value>
+   </title>
    <id>12</id>
    <valueType>
     <types>DefinedType.typeRowID</types>
@@ -1345,6 +1429,14 @@
    <title>
     <key>en</key>
     <value>Line number</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Номер строки</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Satır numarası</value>
    </title>
    <id>13</id>
    <valueType>
@@ -1366,6 +1458,14 @@
     <key>en</key>
     <value>Fixed</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Фиксированная</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Düzeltildi</value>
+   </title>
    <id>14</id>
    <valueType>
     <types>Boolean</types>
@@ -1382,6 +1482,10 @@
    <title>
     <key>en</key>
     <value>Problem while quick fix</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Проблемы при быстром исправлении</value>
    </title>
    <id>15</id>
    <valueType>
@@ -1400,6 +1504,14 @@
    <title>
     <key>en</key>
     <value>Date</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Дата</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Tarih</value>
    </title>
    <id>16</id>
    <valueType>
@@ -1420,6 +1532,10 @@
    <key>en</key>
    <value>Fill documents</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Заполнить документы</value>
+  </title>
   <id>1</id>
   <use>
    <common>true</common>
@@ -1437,6 +1553,10 @@
    <key>en</key>
    <value>Check documents</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Проверить документы</value>
+  </title>
   <id>4</id>
   <use>
    <common>true</common>
@@ -1453,6 +1573,10 @@
   <title>
    <key>en</key>
    <value>Quick fix (selected rows)</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Исправить (выбранные строки)</value>
   </title>
   <id>5</id>
   <use>

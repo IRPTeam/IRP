@@ -892,10 +892,11 @@ Function CreateTotalTable()
 	TotalTable.Columns.Add("Document");
 	TotalTable.Columns.Add("Amount");
 	TotalTable.Columns.Add("ReceiptDocument");
+	TotalTable.Columns.Add("PeriodType");
 	Return TotalTable;
 EndFunction	
 
-Procedure DistrReceipt(Table, TotalTable, BeginDate, EndDate, IsBalanceData, ResourceName)
+Procedure DistrReceipt(Table, TotalTable, BeginDate, EndDate, IsBalanceData, ResourceName, PeriodType)
 		
 	AllReceiptTable = Table.CopyColumns();
 		
@@ -906,6 +907,14 @@ Procedure DistrReceipt(Table, TotalTable, BeginDate, EndDate, IsBalanceData, Res
 		Else
 			If Not ValueIsFilled(Row.Amount) Then
 				Row.Amount = GetTotalAmountReceipt(Row.Batch, Row.BatchKey, Row.Document, ResourceName);
+				
+				Filter = New Structure("Batch, BatchKey, Document, RecordType", 
+				Row.Batch, Row.BatchKey, Row.Batch.Document, AccumulationRecordType.Receipt);
+				AlredyCalculatedRows = TotalTable.FindRows(Filter);
+				For Each Row_TotalTable In AlredyCalculatedRows Do
+					Row.Amount = Row.Amount + Row_TotalTable.Amount;
+				EndDo;
+				
 				TotalQuantity = GetTotalQuantityReceipt(Row.Batch, Row.BatchKey, Row.Batch.Document);
 				If TotalQuantity <> Row.TotalQuantity And ValueIsFilled(TotalQuantity) Then
 					Row.Amount = (Row.Amount / TotalQuantity) * Row.TotalQuantity;
@@ -920,12 +929,13 @@ Procedure DistrReceipt(Table, TotalTable, BeginDate, EndDate, IsBalanceData, Res
 		EndIf;
 		
 		If IsBalanceData Then 
-			ExpenseTable = GetExpenseTable(TotalTable, Row.Batch, Row.BatchKey, Undefined, BeginDate, EndDate);
+			ExpenseTable = GetExpenseTable(TotalTable, Row.Batch, Row.BatchKey, Undefined, BeginDate, EndDate, PeriodType);
 		Else
 			N = TotalTable.Add();
 			FillPropertyValues(N, Row);
 			N.RecordType = AccumulationRecordType.Receipt;
-			ExpenseTable = GetExpenseTable(TotalTable, Row.Batch, Row.BatchKey, Row.Document, BeginDate, EndDate);	
+			N.PeriodType = PeriodType;
+			ExpenseTable = GetExpenseTable(TotalTable, Row.Batch, Row.BatchKey, Row.Document, BeginDate, EndDate, PeriodType);	
 		EndIf;
 		
 		ExpenseTable.Columns.Add("Amount");
@@ -949,7 +959,8 @@ Procedure DistrReceipt(Table, TotalTable, BeginDate, EndDate, IsBalanceData, Res
 			
 			N = TotalTable.Add();
 			FillPropertyValues(N, Expense);
-			N.RecordType = AccumulationRecordType.Expense; 
+			N.RecordType = AccumulationRecordType.Expense;
+			N.PeriodType = PeriodType; 
 			// debug      
 			If Not IsBalanceData Then
 				N.ReceiptDocument = Row.Document;
@@ -994,9 +1005,9 @@ Procedure DistrReceipt(Table, TotalTable, BeginDate, EndDate, IsBalanceData, Res
 		EndDo; // Expense table
 	EndDo; // Tbale
 	
-    AllReceiptTable.GroupBy("Period, Batch, BatchKey, Document, RecordType, ReceiptDocument", "Amount");
+    AllReceiptTable.GroupBy("Period, Batch, BatchKey, Document, RecordType, ReceiptDocument", "Amount, TotalQuantity");
 	If AllReceiptTable.Count() Then
-		DistrReceipt(AllReceiptTable, TotalTable, BeginDate, EndDate, False, ResourceName);
+		DistrReceipt(AllReceiptTable, TotalTable, BeginDate, EndDate, False, ResourceName, PeriodType);
 	EndIf;
 EndProcedure
 	
@@ -1047,7 +1058,7 @@ Function GetTotalQuantityReceipt(Batch, BatchKey, Document)
 	Return 0;
 EndFunction			
 
-Function GetExpenseTable(TotalTable, Batch, BatchKey, Document, BeginDate, EndDate)
+Function GetExpenseTable(TotalTable, Batch, BatchKey, Document, BeginDate, EndDate, PeriodType)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -1116,9 +1127,10 @@ Function GetExpenseTable(TotalTable, Batch, BatchKey, Document, BeginDate, EndDa
 	If TypeOf(Document) = Type("DocumentRef.InventoryTransfer") Then
 		ArrayForDelete = New Array();
 		For Each Row In QueryTable Do
-			Filter = New Structure("Batch, BatchKey, Document, RecordType");
+			Filter = New Structure("Batch, BatchKey, Document, RecordType, PeriodType");
 			FillPropertyValues(Filter, Row);
 			Filter.RecordType = AccumulationRecordType.Expense;
+			Filter.PeriodType = PeriodType;
 			ArrayOfRows = TotalTable.FindRows(Filter);
 			
 			If ArrayOfRows.Count() Then
@@ -1142,8 +1154,56 @@ Function GetReceiptTable(Batch, BatchKey, Document, BeginDate, EndDate)
 		Return GetReceiptTable_Production(Batch, BatchKey, Document, BeginDate, EndDate);
 	ElsIf DocType = Type("DocumentRef.BatchReallocateOutgoing") Then
 		Return GetReceiptTable_BatchReallocate(Batch, BatchKey, Document, BeginDate, EndDate);
+	ElsIf DocType = Type("DocumentRef.SalesInvoice") And Document.TransactionType = Enums.SalesTransactionTypes.ShipmentToTradeAgent Then
+		Return GetReceiptTable_SalesInvoice_ShipmentToTradeAgent(Batch, BatchKey, Document, BeginDate, EndDate);
 	EndIf;
 	Return New ValueTable();
+EndFunction
+
+Function GetReceiptTable_SalesInvoice_ShipmentToTradeAgent(Batch, BatchKey, Document, BeginDate, EndDate)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	R6010B_BatchWiseBalance.Period AS Period,
+	|	R6010B_BatchWiseBalance.Batch AS Batch,
+	|	R6010B_BatchWiseBalance.BatchKey AS BatchKey,
+	|	R6010B_BatchWiseBalance.Document AS Document,
+	|	SUM(R6010B_BatchWiseBalance.Quantity) AS QuantityReceipt
+	|FROM
+	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
+	|WHERE
+	|	R6010B_BatchWiseBalance.RecordType = VALUE(Accumulationrecordtype.Receipt)
+	|	AND R6010B_BatchWiseBalance.Batch = &Batch
+	|	AND R6010B_BatchWiseBalance.BatchKey.ItemKey = &BatchKey_ItemKey
+	|	AND R6010B_BatchWiseBalance.Document = &Document
+	|	AND CASE
+	|			WHEN &Filter_BeginDate
+	|				THEN R6010B_BatchWiseBalance.Period >= BEGINOFPERIOD(&BeginDate, DAY)
+	|			ELSE TRUE
+	|		END
+	|	AND CASE
+	|			WHEN &Filter_EndDate
+	|				THEN R6010B_BatchWiseBalance.Period <= ENDOFPERIOD(&EndDate, DAY)
+	|			ELSE TRUE
+	|		END
+	|
+	|GROUP BY
+	|	R6010B_BatchWiseBalance.Period,
+	|	R6010B_BatchWiseBalance.Batch,
+	|	R6010B_BatchWiseBalance.BatchKey,
+	|	R6010B_BatchWiseBalance.Document";
+
+	Query.SetParameter("Batch", Batch);
+	Query.SetParameter("BatchKey_ItemKey", BatchKey.ItemKey);
+	Query.SetParameter("Document", Document);
+	Query.SetParameter("Filter_BeginDate", ValueIsFilled(BeginDate));
+	Query.SetParameter("BeginDate", BeginDate);
+	Query.SetParameter("Filter_EndDate", ValueIsFilled(EndDate));
+	Query.SetParameter("EndDate", EndDate);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;		
 EndFunction
 
 Function GetReceiptTable_InventoryTransfer(Batch, BatchKey, Document, BeginDate, EndDate)
@@ -1289,14 +1349,14 @@ Procedure CalculateAdditionalCostRevenue(CalculationSettings, RegisterType)
 		CalculationSettings.EndPeriod, 
 		CalculationSettings.Company, 
 		CalculationSettings.CalculationMovementCostRef, "COST", RegisterType);
-	DistrReceipt(QueryTable, TotalTableCost, CalculationSettings.BeginPeriod, CalculationSettings.EndPeriod, True, "AmountCost");
+	DistrReceipt(QueryTable, TotalTableCost, CalculationSettings.BeginPeriod, CalculationSettings.EndPeriod, True, "AmountCost", "PAST_PERIOD");
 	
 	// Current period Cost
 	QueryTable = GetQueryTable_CurrentPeriod(CalculationSettings.BeginPeriod, 
 		CalculationSettings.EndPeriod, 
 		CalculationSettings.Company, 
 		CalculationSettings.CalculationMovementCostRef, "COST", RegisterType);
-	DistrReceipt(QueryTable, TotalTableCost, Date(1,1,1), CalculationSettings.EndPeriod, False, "AmountCost");
+	DistrReceipt(QueryTable, TotalTableCost, Date(1,1,1), CalculationSettings.EndPeriod, False, "AmountCost", "CURRENT_PERIOD");
 	
 	TotalTableCost.Columns.Amount.Name = "AmountCost";
 	
@@ -1313,14 +1373,14 @@ Procedure CalculateAdditionalCostRevenue(CalculationSettings, RegisterType)
 		CalculationSettings.EndPeriod, 
 		CalculationSettings.Company, 
 		CalculationSettings.CalculationMovementCostRef, "TAX", RegisterType);
-	DistrReceipt(QueryTable, TotalTableTax, CalculationSettings.BeginPeriod, CalculationSettings.EndPeriod, True, "AmountCostTax");
+	DistrReceipt(QueryTable, TotalTableTax, CalculationSettings.BeginPeriod, CalculationSettings.EndPeriod, True, "AmountCostTax", "PAST_PERIOD");
 	
 	// Current period Cost
 	QueryTable = GetQueryTable_CurrentPeriod(CalculationSettings.BeginPeriod, 
 		CalculationSettings.EndPeriod, 
 		CalculationSettings.Company, 
 		CalculationSettings.CalculationMovementCostRef, "TAX", RegisterType);
-	DistrReceipt(QueryTable, TotalTableTax, Date(1,1,1), CalculationSettings.EndPeriod, False, "AmountCostTax");
+	DistrReceipt(QueryTable, TotalTableTax, Date(1,1,1), CalculationSettings.EndPeriod, False, "AmountCostTax", "CURRENT_PERIOD");
 	
 	TotalTableTax.Columns.Amount.Name = "AmountCostTax";
 	

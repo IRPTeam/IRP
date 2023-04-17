@@ -2443,6 +2443,11 @@ Scenario: _028 check landed cost by materials
 		And I click "Post and close" button
 	* Check calculation
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I move to "Standard" tab
+		And I click "Load setting" button
+		And I click "Generate" button	
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description' |
@@ -2480,6 +2485,13 @@ Scenario: _030 check landed cost (double return)
 			| "Documents.CalculationMovementCosts.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Check movement cost calculation
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I go to line in "OptionsList" table
+			| 'Report option' |
+			| 'Test'          |
+		And I click "Load setting" button
+		And I click "Generate" button	
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
 			| 'Description' |

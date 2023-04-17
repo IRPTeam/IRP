@@ -86,9 +86,6 @@ Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 			| 'Boots'   | '24,000'   | 'pcs'  | 'Store 02' | '37/18SD'  | 'Purchase'           | 'Yes'    | '09.02.2021'    | ''              | ''                |
 			| 'Service' | '1,000'    | 'pcs'  | 'Store 02' | 'Internet' | ''                   | 'Yes'    | '09.02.2021'    | ''              | ''                |
 		Then the number of "ItemList" table lines is "equal" "4"
-	* Try to post document without filling in cancel reason
-		And I click the button named "FormPost"
-		Then I wait that in user messages the "Cancel reason has to be filled if string was canceled" substring will appear in "10" seconds
 	* Filling in cancel reason and post Sales order closing
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |

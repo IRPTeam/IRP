@@ -972,3 +972,62 @@ Scenario: _010019 check edit contact information from the Edit contact info form
 		And I move to "Contact information" tab
 		Then the form attribute named "_Adr_1" became equal to "Odessa, Bunina, 2, №33"
 	And I close all client application windows
+
+
+Scenario: _010022 create Addresses
+	And I close all client application windows
+	* Create address
+		Given I open hyperlink "e1cib/list/Catalog.Addresses"
+		And I click the button named "FormCreate"
+		And I input "Test addrres 1" text in "ENG" field
+		And I click Open button of "ENG" field
+		And I input "Test addrres 1 TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Description'    |
+			| 'Test addrres 1' |
+	And I close all client application windows
+	
+
+Scenario: _010024 create Vehicle type and Vehicle
+	And I close all client application windows
+	* Create Vehicle type
+		Given I open hyperlink "e1cib/list/Catalog.VehicleTypes"
+		And I click the button named "FormCreate"
+		And I input "Vehicle type 1" text in "ENG" field
+		And I click Open button of "ENG" field
+		And I input "Vehicle type 1 TR" text in "TR" field
+		And I click "Ok" button
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Description'    |
+			| 'Vehicle type 1' |
+		And I close all client application windows	
+	* Create Vehicle
+		Given I open hyperlink "e1cib/list/Catalog.Vehicles"
+		And I click the button named "FormCreate"
+		And I input "Vehicle 1" text in "Description" field
+		And I input "908900" text in "ID (plate)" field
+		And I click Choice button of the field named "Type"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Vehicle type 1' |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	* Check
+		And "List" table contains lines
+			| 'Description' |'ID (plate)' |
+			| 'Vehicle 1'   |'908900'     |
+		And I close all client application windows
+
+
+				
+
+
+				
+				
+
+		

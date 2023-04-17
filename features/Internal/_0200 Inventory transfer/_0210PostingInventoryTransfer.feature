@@ -27,6 +27,8 @@ Scenario: _0201000 preparation
 		When Create catalog ItemKeys objects
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
+		When Create catalog Partners objects
+		When Create catalog Companies objects (partners company)
 		When Create catalog Items objects
 		When Create catalog Specifications objects
 		When Create chart of characteristic types AddAttributeAndProperty objects
@@ -36,11 +38,13 @@ Scenario: _0201000 preparation
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Countries objects
+		When Create catalog Addresses objects
 		When Create catalog Stores objects
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
 		When Create information register TaxSettings records
+		When Create catalog Vehicles objects
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -349,7 +353,38 @@ Scenario: _021024 create document Inventory Transfer (without ITO)
 	And I activate "Quantity" field in "ItemList" table
 	And I input "7,000" text in "Quantity" field of "ItemList" table
 	And I finish line editing in "ItemList" table
-	And I click the button named "FormPost"
+* Filling Shipment info
+	And I click Select button of "Ship from" field
+	And I go to line in "List" table
+		| 'Description' |
+		| 'Nicoletta'   |
+	And I select current line in "List" table
+	And I click Select button of "Ship to" field
+	And I go to line in "List" table
+		| 'Description' |
+		| 'Maxim'       |
+	And I select current line in "List" table
+	And I click Choice button of the field named "Vehicle"
+	And I select from the drop-down list named "Vehicle" by "1" string
+	And I select from the drop-down list named "Carrier" by "ndb" string
+	And I click Select button of "Ship from address" field
+	And I go to line in "List" table
+		| 'Description'              |
+		| 'Country 1, Street 2, B.2' |
+	And I select current line in "List" table
+	And I click Select button of "Ship to address" field
+	And I go to line in "List" table
+		| 'Description'              |
+		| 'Country 1, Street 1, B.1' |
+	And I select current line in "List" table
+	And I select from "Driver" drop-down list by "Alexander Orlov" string
+	Then the form attribute named "ShipFrom" became equal to "Nicoletta"
+	Then the form attribute named "ShipTo" became equal to "Maxim"
+	Then the form attribute named "Vehicle" became equal to "Vehicles 1"
+	Then the form attribute named "Carrier" became equal to "NDB"
+	Then the form attribute named "ShipFromAddress" became equal to "Country 1, Street 2, B.2"
+	Then the form attribute named "ShipToAddress" became equal to "Country 1, Street 1, B.1"
+	Then the form attribute named "VehicleDriver" became equal to "Alexander Orlov"
 	And I delete "$$NumberInventoryTransfer021024$$" variable
 	And I delete "$$InventoryTransfer021024$$" variable
 	And I save the value of "Number" field as "$$NumberInventoryTransfer021024$$"

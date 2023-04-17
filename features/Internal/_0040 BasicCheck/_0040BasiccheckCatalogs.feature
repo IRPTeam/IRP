@@ -1172,3 +1172,69 @@ Scenario: Open choise form "ChequeBonds"
 		Then I raise "Failed to open catalog choise form IChequeBonds" exception
 	And I close current window
 
+Scenario: Open list form "Addresses" 
+	And I close all client application windows
+	Given I open "Addresses" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Addresses" exception
+	And I close current window
+
+Scenario: Open object form "Addresses"
+	And I close all client application windows
+	Given I open "Addresses" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Addresses" exception
+	And I close current window
+
+Scenario: Open choise form "Addresses"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.Addresses.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form Addresses" exception
+	And I close current window
+
+Scenario: Open list form "Vehicles" 
+	And I close all client application windows
+	Given I open "Vehicles" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Vehicles" exception
+	And I close current window
+
+Scenario: Open object form "Vehicles"
+	And I close all client application windows
+	Given I open "Vehicles" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form Vehicles" exception
+	And I close current window
+
+Scenario: Open choise form "Vehicles"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.Vehicles.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form Vehicles" exception
+	And I close current window
+
+Scenario: Open list form "VehicleTypes" 
+	And I close all client application windows
+	Given I open "VehicleTypes" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form VehicleTypes" exception
+	And I close current window
+
+Scenario: Open object form "VehicleTypes"
+	And I close all client application windows
+	Given I open "VehicleTypes" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form VehicleTypes" exception
+	And I close current window
+
+Scenario: Open choise form "VehicleTypes"
+	And I close all client application windows
+	And I execute the built-in language code (Extension)
+		| 'OpenForm("Catalog.VehicleTypes.ChoiceForm", , Undefined, , , , , FormWindowOpeningMode.Independent)' |
+	If the warning is displayed then
+		Then I raise "Failed to open catalog choise form VehicleTypes" exception
+	And I close current window
+

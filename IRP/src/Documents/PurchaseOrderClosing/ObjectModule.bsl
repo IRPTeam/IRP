@@ -2,7 +2,9 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-	DocOrderClosingServer.RefreshPurchaseOrderClosing(ThisObject);
+	If ValueIsFilled(ThisObject.PurchaseOrder) Then
+		DocOrderClosingServer.RefreshPurchaseOrderClosing(ThisObject);
+	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)

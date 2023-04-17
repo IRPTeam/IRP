@@ -364,7 +364,6 @@ Scenario: _021024 create document Inventory Transfer (without ITO)
 		| 'Description' |
 		| 'Maxim'       |
 	And I select current line in "List" table
-	And I click Choice button of the field named "Vehicle"
 	And I select from the drop-down list named "Vehicle" by "1" string
 	And I select from the drop-down list named "Carrier" by "ndb" string
 	And I click Select button of "Ship from address" field

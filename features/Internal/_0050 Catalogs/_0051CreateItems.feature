@@ -1270,7 +1270,6 @@ Scenario: _005135 fill default description for catalog AddAttributeAndPropertySe
 			| 'Partner terms'                  | 'Catalog_Agreements'                    |
 			| 'Cash/Bank accounts'             | 'Catalog_CashAccounts'                  |
 			| 'Companies'                      | 'Catalog_Companies'                     |
-			| 'Company types'                  | 'Catalog_CompanyTypes'                  |
 			| 'Countries'                      | 'Catalog_Countries'                     |
 			| 'Currencies'                     | 'Catalog_Currencies'                    |
 			| 'Price types'                    | 'Catalog_PriceTypes'                    |

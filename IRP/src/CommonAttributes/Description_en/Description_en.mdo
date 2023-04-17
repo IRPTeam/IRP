@@ -260,6 +260,14 @@
     <metadata>Catalog.EmployeePositions</metadata>
     <use>Use</use>
   </content>
+  <content>
+    <metadata>Catalog.VehicleTypes</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.Addresses</metadata>
+    <use>Use</use>
+  </content>
   <autoUse>DontUse</autoUse>
   <dataSeparation>DontUse</dataSeparation>
   <usersSeparation>DontUse</usersSeparation>

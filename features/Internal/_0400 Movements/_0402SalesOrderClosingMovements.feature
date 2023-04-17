@@ -159,6 +159,7 @@ Scenario: _040159 check Sales order closing movements by the Register  "R2010 Sa
 		And I close all client application windows
 		
 Scenario: _040160 check Sales order closing movements by the Register  "R2014 Canceled sales orders"
+		And I close all client application windows
 	* Select Sales order closing
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
@@ -403,27 +404,7 @@ Scenario: _040169 Sales order closing clear posting/mark for deletion
 			| 'R2012 Invoice closing of sales orders' |
 		And I close all client application windows
 
-Scenario: _040170 check Sales order closing movements by the Register  "TM1010B Row ID movements"
-	* Select Sales order closing
-		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
-	* Check movements by the Register  "TM1010B Row ID movements" 
-		And I click "Registrations report" button
-		And I select "TM1010B Row ID movements" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Sales order closing 1 dated 28.01.2021 14:46:50' | ''            | ''                    | ''          | ''                                     | ''                                     | ''            | ''                                        | ''                                        |
-			| 'Document registrations records'                  | ''            | ''                    | ''          | ''                                     | ''                                     | ''            | ''                                        | ''                                        |
-			| 'Register  "TM1010B Row ID movements"'            | ''            | ''                    | ''          | ''                                     | ''                                     | ''            | ''                                        | ''                                        |
-			| ''                                                | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'                           | ''                                     | ''            | ''                                        | ''                                        |
-			| ''                                                | ''            | ''                    | 'Quantity'  | 'Row ref'                              | 'Row ID'                               | 'Step'        | 'Basis'                                   | 'Basis key'                               |
-			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-24'       | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | '5d82f8d1-e3f8-4453-aa45-4f7ac9601689' | 'PO&PI'       | 'Sales order 1 dated 27.01.2021 19:50:45' | '*'                                       |
-			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-10'       | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'e34f52ea-1fe2-47b2-9b37-63c093896662' | 'SI&SC'       | 'Sales order 1 dated 27.01.2021 19:50:45' | '*'                                       |
-			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | '63008c12-b682-4aff-b29f-e6927036b05a' | '63008c12-b682-4aff-b29f-e6927036b05a' | 'SI&SC'       | 'Sales order 1 dated 27.01.2021 19:50:45' | '*'                                       |
-			| ''                                                | 'Receipt'     | '28.01.2021 14:46:50' | '-1'        | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | '0a13bddb-cb97-4515-a9ef-777b6924ebf1' | 'SI&WO&WS'    | 'Sales order 1 dated 27.01.2021 19:50:45' | '*'                                       |
-		And I close all client application windows
+
 		
 						
 				

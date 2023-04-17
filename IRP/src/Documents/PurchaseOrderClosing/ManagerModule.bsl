@@ -198,9 +198,9 @@ Function R1010T_PurchaseOrders()
 		|	ItemList.Order,
 		|	ItemList.ItemKey,
 		|	ItemList.RowKey,
-		|	-ItemList.Quantity AS Quantity,
-		|	-ItemList.TotalAmount AS Amount,
-		|	-ItemList.NetAmount AS NetAmount
+		|	ItemList.Quantity AS Quantity,
+		|	ItemList.TotalAmount AS Amount,
+		|	ItemList.NetAmount AS NetAmount
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE

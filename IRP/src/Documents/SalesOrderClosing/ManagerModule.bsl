@@ -216,10 +216,10 @@ Function R2010T_SalesOrders()
 		|	ItemList.RowKey,
 		|	ItemList.ProcurementMethod,
 		|	ItemList.SalesPerson,
-		|	-ItemList.Quantity AS Quantity,
-		|	-ItemList.TotalAmount AS Amount,
-		|	-ItemList.NetAmount AS NetAmount,
-		|	-ItemList.OffersAmount AS OffersAmount
+		|	ItemList.Quantity AS Quantity,
+		|	ItemList.TotalAmount AS Amount,
+		|	ItemList.NetAmount AS NetAmount,
+		|	ItemList.OffersAmount AS OffersAmount
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE

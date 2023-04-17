@@ -141,7 +141,9 @@ EndProcedure
 
 &AtServer
 Procedure RefreshAtServer()
-	DocOrderClosingServer.RefreshPurchaseOrderClosing(Object);	
+	If ValueIsFilled(Object.PurchaseOrder) Then
+		DocOrderClosingServer.RefreshPurchaseOrderClosing(Object);
+	EndIf;	
 EndProcedure
 
 &AtClient

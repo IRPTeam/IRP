@@ -121,11 +121,17 @@ Function QuerySearchInputByString(Settings) Export
 		NumberSearch = "Table.Ref.Code = &SearchStringNumber";
 	EndIf;
 	
-	If Not Settings.MetadataObject.DescriptionLength Then
-		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter, "_" + "en", IDSearch, NumberSearch);
-		QueryField = "CASE WHEN %1.Description%2 = """" THEN %1.Description_en ELSE %1.Description%2 END ";
-		QueryField = StrTemplate(QueryField, "Table", "_" + LocalizationReuse.GetLocalizationCode());
-		QueryText = StrReplace(QueryText, StrTemplate("%1.Description_en", "Table"), QueryField);
+	If Settings.MetadataObject.DescriptionLength = 0 Then
+		If CommonFunctionsServer.isCommonAttributeUseForMetadata("Description_en", Settings.MetadataObject) Then
+			QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter, "_" + "en", IDSearch, NumberSearch);
+			QueryField = "CASE WHEN %1.Description%2 = """" THEN %1.Description_en ELSE %1.Description%2 END ";
+			QueryField = StrTemplate(QueryField, "Table", "_" + LocalizationReuse.GetLocalizationCode());
+			QueryText = StrReplace(QueryText, StrTemplate("%1.Description_en", "Table"), QueryField);
+		Else
+			QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter, "", IDSearch, NumberSearch);
+			QueryText = StrReplace(QueryText, "Table.Description LIKE &SearchString + ""%""", " FALSE ");
+			QueryText = StrReplace(QueryText, "Table.Description LIKE ""%"" + &SearchString + ""%""", " FALSE ");
+		EndIf;
 	Else
 		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter, "", IDSearch, NumberSearch);
 	EndIf;

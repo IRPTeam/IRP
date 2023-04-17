@@ -1365,6 +1365,8 @@ Scenario: _098 allocation of the additional cost (tax) (item is already sold)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(9030).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseReturn.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(24).GetObject().Write(DocumentWriteMode.Posting);" |

@@ -121,6 +121,11 @@ Function GetDataFormSalesOrder(SalesOrder, Object = Undefined) Export
 	|			THEN SalesOrdersInvoiceClosing.QuantityBalance
 	|		ELSE -1 * SalesOrdersInvoiceClosing.QuantityBalance
 	|	END AS Quantity,
+	|	CASE
+	|		WHEN SalesOrdersInvoiceClosing.QuantityBalance > 0
+	|			THEN SalesOrdersInvoiceClosing.QuantityBalance
+	|		ELSE -1 * SalesOrdersInvoiceClosing.QuantityBalance
+	|	END AS QuantityInBaseUnit,
 	|	ItemList.SalesPerson,
 	|	ItemList.IsService
 	|FROM
@@ -245,6 +250,11 @@ Function GetDataFromPurchaseOrder(PurchaseOrder, Object = Undefined) Export
 	|			THEN PurchaseOrdersInvoiceClosing.QuantityBalance
 	|		ELSE -1 * PurchaseOrdersInvoiceClosing.QuantityBalance
 	|	END AS Quantity,
+	|	CASE
+	|		WHEN PurchaseOrdersInvoiceClosing.QuantityBalance > 0
+	|			THEN PurchaseOrdersInvoiceClosing.QuantityBalance
+	|		ELSE -1 * PurchaseOrdersInvoiceClosing.QuantityBalance
+	|	END AS QuantityInBaseUnit,
 	|	ItemList.IsService
 	|FROM
 	|	Document.PurchaseOrder.ItemList AS ItemList

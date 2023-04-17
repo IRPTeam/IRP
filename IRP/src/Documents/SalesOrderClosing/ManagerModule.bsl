@@ -224,30 +224,6 @@ Function R2010T_SalesOrders()
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.Cancel";
-	
-//	|
-//		   |	- QueryTable.Quantity AS Quantity,
-//		   |	- QueryTable.OffersAmount AS OffersAmount,
-//		   |	- QueryTable.NetAmount AS NetAmount,
-//		   |	- QueryTable.Amount AS Amount,
-//		   |	*
-//		   |INTO R2010T_SalesOrders
-//		   |FROM
-//		   |	ItemList AS QueryTable
-//		   |WHERE QueryTable.isCanceled
-//		   |
-//		   |UNION ALL
-//		   |
-//		   |SELECT 
-//		   |	QueryTable.Quantity AS Quantity,
-//		   |	QueryTable.OffersAmount AS OffersAmount,
-//		   |	QueryTable.NetAmount AS NetAmount,
-//		   |	QueryTable.Amount AS Amount,
-//		   |	*
-//		   |FROM
-//		   |	ItemList AS QueryTable
-//		   |WHERE NOT QueryTable.isCanceled";
-
 EndFunction
 
 Function R2011B_SalesOrdersShipment()
@@ -386,7 +362,7 @@ EndFunction
 Function T2014S_AdvancesInfo()
 	Return 
 		"SELECT
-		|	Doc.Date,
+		|	&Period AS Date,
 		|	Doc.Company,
 		|	Doc.Branch,
 		|	Doc.Currency,

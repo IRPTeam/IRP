@@ -781,10 +781,10 @@ Scenario: _2060004 check link/unlink form in the SRO
 			| 'Boots (37/18SD)'                             | '1,000'    | 'pcs'  | '700,00' | 'TRY'      |		
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Store'    | 'Quantity in base unit' | 'Item'  | 'Quantity'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' | 'Cancel' | 'Cancel reason' |
-			| 'Store 01' | '1,000'                 | 'Boots' | '1,000' | 'pcs'            | '113,71'     | '700,00'   | '18%' | '586,29'     | '700,00'       | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
-			| 'Store 01' | '4,000'                 | 'Dress' | '4,000' | 'pcs'            | '337,88'     | '520,00'   | '18%' | '1 742,12'   | '2 080,00'     | ''              | 'Revenue'      | 'M/White'  | 'No'     | ''              |
-			| 'Store 01' | '24,000'                | 'Boots' | '2,000' | 'Boots (12 pcs)' | '2 562,71'   | '8 400,00' | '18%' | '14 237,29'  | '16 800,00'    | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
+			| 'Store'    | 'Quantity in base unit' | 'Item'  | 'Quantity' | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' | 'Cancel' | 'Cancel reason' |
+			| 'Store 01' | '1,000'                 | 'Boots' | '1,000'    | 'pcs'            | '106,78'     | '700,00'   | '18%' | '593,22'     | '700,00'       | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
+			| 'Store 01' | '4,000'                 | 'Dress' | '4,000'    | 'pcs'            | '317,29'     | '520,00'   | '18%' | '1 762,71'   | '2 080,00'     | ''              | 'Revenue'      | 'M/White'  | 'No'     | ''              |
+			| 'Store 01' | '24,000'                | 'Boots' | '2,000'    | 'Boots (12 pcs)' | '2 562,71'   | '8 400,00' | '18%' | '14 237,29'  | '16 800,00'    | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
 		Then the number of "ItemList" table lines is "равно" "3"					
 		And I close all client application windows
 		
@@ -941,10 +941,10 @@ Scenario: _2060005 check link/unlink form in the SR
 			| 'Boots (37/18SD)'                             | '1,000'    | 'pcs'  | '700,00' | 'TRY'      |		
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Store'    | 'Quantity in base unit' | 'Item'  | 'Quantity'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' |
-			| 'Store 01' | '1,000'                 | 'Boots' | '1,000' | 'pcs'            | '113,71'     | '700,00'   | '18%' | '586,29'     | '700,00'       | ''              | 'Revenue'      | '37/18SD'  |
-			| 'Store 01' | '4,000'                 | 'Dress' | '4,000' | 'pcs'            | '337,88'     | '520,00'   | '18%' | '1 742,12'   | '2 080,00'     | ''              | 'Revenue'      | 'M/White'  |
-			| 'Store 01' | '24,000'                | 'Boots' | '2,000' | 'Boots (12 pcs)' | '2 562,71'   | '8 400,00' | '18%' | '14 237,29'  | '16 800,00'    | ''              | 'Revenue'      | '37/18SD'  |
+			| 'Store'    | 'Quantity in base unit' | 'Item'  | 'Quantity' | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' |
+			| 'Store 01' | '1,000'                 | 'Boots' | '1,000'    | 'pcs'            | '106,78'     | '700,00'   | '18%' | '593,22'     | '700,00'       | ''              | 'Revenue'      | '37/18SD'  |
+			| 'Store 01' | '4,000'                 | 'Dress' | '4,000'    | 'pcs'            | '317,29'     | '520,00'   | '18%' | '1 762,71'   | '2 080,00'     | ''              | 'Revenue'      | 'M/White'  |
+			| 'Store 01' | '24,000'                | 'Boots' | '2,000'    | 'Boots (12 pcs)' | '2 562,71'   | '8 400,00' | '18%' | '14 237,29'  | '16 800,00'    | ''              | 'Revenue'      | '37/18SD'  |
 		Then the number of "ItemList" table lines is "равно" "3"					
 		And I close all client application windows
 
@@ -1273,10 +1273,10 @@ Scenario: _2060008 check link/unlink form in the PRO
 			| 'Dress (M/White)'                                | '3,000'    | 'pcs'  | '520,00' | 'TRY'      |			
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Store'    | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Cancel' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Purchase invoice' | 'Net amount' | 'Total amount' | 'Expense type' |
-			| 'Store 02' | '10,000'                | '1' | 'Dress' | 'M/White'  | 'No'     | '10,000' | 'pcs'  | '936,00'     | '520,00' | '18%' | ''                 | '5 200,00'   | '6 136,00'     | ''             |
-			| 'Store 02' | '2,000'                 | '2' | 'Boots' | '36/18SD'  | 'No'     | '2,000'  | 'pcs'  | '252,00'     | '700,00' | '18%' | ''                 | '1 400,00'   | '1 652,00'     | ''             |
-			| 'Store 02' | '3,000'                 | '3' | 'Dress' | 'M/White'  | 'No'     | '3,000'  | 'pcs'  | '280,80'     | '520,00' | '18%' | ''                 | '1 560,00'   | '1 840,80'     | ''             |		
+			| 'Store'    | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Cancel' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Purchase invoice' | 'Net amount' | 'Total amount' | 'Expense type' |
+			| 'Store 02' | '10,000'                | '1' | 'Dress' | 'M/White'  | 'No'     | '10,000'   | 'pcs'  | '936,00'     | '520,00' | '18%' | ''                 | '5 200,00'   | '6 136,00'     | ''             |
+			| 'Store 02' | '2,000'                 | '2' | 'Boots' | '36/18SD'  | 'No'     | '2,000'    | 'pcs'  | '252,00'     | '700,00' | '18%' | ''                 | '1 400,00'   | '1 652,00'     | ''             |
+			| 'Store 02' | '3,000'                 | '3' | 'Dress' | 'M/White'  | 'No'     | '3,000'    | 'pcs'  | '280,80'     | '520,00' | '18%' | ''                 | '1 560,00'   | '1 840,80'     | ''             |
 		Then the number of "ItemList" table lines is "равно" "3"					
 		And I close all client application windows
 

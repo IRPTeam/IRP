@@ -6273,16 +6273,16 @@ Scenario: _0154155 check function DontCalculateRow in the Sales invoice
 		And I click the button named "FormDocumentSalesReturnGenerate"
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'              	| '129,00'     | '671,00'     | '800,50'       |
-			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '522,50'     | '2 750,00'   | '3 272,50'     |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000'    | 'pcs'  | 'Yes'                | '129,00'     | '671,00'     | '800,50'       |
+			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000'    | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		And I close current window
 		And I click the button named "FormDocumentSalesReturnOrderGenerate"
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
-			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'              	| '129,00'     | '671,00'     | '800,50'       |
-			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '522,50'     | '2 750,00'   | '3 272,50'     |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Quantity' | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
+			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000'    | 'pcs'  | 'Yes'                | '129,00'     | '671,00'     | '800,50'       |
+			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000'    | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
 		And I close all client application windows
 		
 	

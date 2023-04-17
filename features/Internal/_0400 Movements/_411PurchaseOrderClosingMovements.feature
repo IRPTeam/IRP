@@ -89,7 +89,7 @@ Scenario: _041158 preparation (Purchase order closing)
 		And I go to line in "List" table
 			| 'Number' |
 			| '37'      |
-		And I click the button named "FormDocumentPurchaseOrderClosingGeneratePurchaseOrderClosing"
+		And I click the button named "FormDocumentPurchaseOrderClosingGenerate"
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Shirt' | '38/Black' |

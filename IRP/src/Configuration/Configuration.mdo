@@ -344,8 +344,6 @@
   <commonModules>CommonModule.DocPurchaseInvoiceClient</commonModules>
   <commonModules>CommonModule.DocPurchaseInvoiceServer</commonModules>
   <commonModules>CommonModule.DocPurchaseOrderClient</commonModules>
-  <commonModules>CommonModule.DocPurchaseOrderClosingClient</commonModules>
-  <commonModules>CommonModule.DocPurchaseOrderClosingServer</commonModules>
   <commonModules>CommonModule.DocPurchaseOrderServer</commonModules>
   <commonModules>CommonModule.DocPurchaseReturnClient</commonModules>
   <commonModules>CommonModule.DocPurchaseReturnOrderClient</commonModules>
@@ -360,8 +358,7 @@
   <commonModules>CommonModule.DocSalesInvoiceClient</commonModules>
   <commonModules>CommonModule.DocSalesInvoiceServer</commonModules>
   <commonModules>CommonModule.DocSalesOrderClient</commonModules>
-  <commonModules>CommonModule.DocSalesOrderClosingClient</commonModules>
-  <commonModules>CommonModule.DocSalesOrderClosingServer</commonModules>
+  <commonModules>CommonModule.DocOrderClosingServer</commonModules>
   <commonModules>CommonModule.DocSalesOrderServer</commonModules>
   <commonModules>CommonModule.DocSalesReportFromTradeAgentClient</commonModules>
   <commonModules>CommonModule.DocSalesReportFromTradeAgentServer</commonModules>

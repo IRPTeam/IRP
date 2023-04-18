@@ -8,7 +8,6 @@
   <location>Constant.UseBankDocuments</location>
   <privilegedGetMode>true</privilegedGetMode>
   <content>Catalog.LegalNameContracts.Attribute.PartnerBankAccount</content>
-  <content>Document.PurchaseOrderClosing.Attribute.PartnerBankAccount</content>
   <content>Document.OutgoingPaymentOrder.TabularSection.PaymentList.Attribute.PartnerBankAccount</content>
   <content>Catalog.PartnersBankAccounts</content>
   <content>Document.PurchaseOrder.Attribute.PartnerBankAccount</content>

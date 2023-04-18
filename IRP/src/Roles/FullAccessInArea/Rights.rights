@@ -3434,7 +3434,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.PurchaseOrderClosing.Command.GeneratePurchaseOrderClosing</name>
+		<name>Document.PurchaseOrderClosing.Command.Generate</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -9303,7 +9303,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.SalesOrderClosing.Command.GenerateSalesOrderClosing</name>
+		<name>Document.SalesOrderClosing.Command.Generate</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

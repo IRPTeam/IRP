@@ -1393,7 +1393,8 @@ Function GetFormItemNames()
 				|SourceOfOrigins,
 				|ProductionDurationsListKey, ProductionCostsListKey,
 				|PayrollListKey, TimeSheetListKey, TimeSheetListVisible, TimeSheetListLineNumber, TimeSheetListEmployee, TimeSheetListPosition,
-				|EmployeeCashAdvanceKey, AdvanceFromRetailCustomersKey, SalaryPaymentKey, EmployeeCashAdvanceIsFixedCurrency";
+				|EmployeeCashAdvanceKey, AdvanceFromRetailCustomersKey, SalaryPaymentKey, EmployeeCashAdvanceIsFixedCurrency,
+				|ItemListPurchaseOrderKey, ItemListSalesOrderKey";
 	Return ItemNames;
 EndFunction	
 

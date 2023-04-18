@@ -97,6 +97,17 @@ EndProcedure
 
 #EndRegion
 
+#Region COMMANDS
+
+Procedure ExecuteCommandAtServer(Object, TableName, CommandName) Export
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
+	ServerParameters.TableName = TableName;
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+	ControllerClientServer_V2.API_SetProperty(Parameters, New Structure("DataPath", CommandName), Undefined);
+EndProcedure
+
+#EndRegion
+
 Procedure API_CallbackAtServer(Object, Form, TableName, ArrayOfDataPaths) Export
 	FormParameters = ControllerClientServer_V2.GetFormParameters(Form);
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);

@@ -2469,7 +2469,20 @@ Scenario: Create Document discount
 
 	And I check or create catalog "SpecialOffers" objects:
 		| 'Ref'                                                                   | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Code' | 'Settings'     | 'SpecialOfferType'                                                          | 'Priority' | 'Manually' | 'StartOf'             | 'EndOf'               | 'Launch' | 'ManualInputValue' | 'Type'                               | 'DocumentType'                               | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr' |
-		| 'e1cib/data/Catalog.SpecialOffers?ref=b76197e183b782dc11eb60c82e154a51' | 'False'           | ''       | 'False'       | '1'    | 'ValueStorage' | 'e1cib/data/Catalog.SpecialOfferTypes?ref=b76197e183b782dc11eb60c82e154a50' | '5'        | 'True'      | '01.01.0001 00:00:00' | '01.01.0001 00:00:00' | 'True'    | 'True'              | 'Enum.SpecialOfferTypes.ForDocument' | 'Enum.OffersDocumentTypes.PurchasesAndSales' | 'DocumentDiscount' | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.SpecialOffers?ref=b76197e183b782dc11eb60c82e154a51' | 'False'        | ''       | 'False'    | '1'    | 'ValueStorage' | 'e1cib/data/Catalog.SpecialOfferTypes?ref=b76197e183b782dc11eb60c82e154a50' | '5'        | 'True'     | '01.01.0001 00:00:00' | '01.01.0001 00:00:00' | 'True'   | 'True'             | 'Enum.SpecialOfferTypes.ForDocument' | 'Enum.OffersDocumentTypes.PurchasesAndSales' | 'DocumentDiscount' | ''                 | ''               | ''               |
+
+Scenario: Create Document discount (for row)
+
+
+	And I check or create catalog "SpecialOfferTypes" objects:
+		| 'Ref'                                                                       | 'DeletionMark' | 'Code' | 'Settings'     | 'ExternalDataProc' | 'TermsOfDiscountCalculation' | 'GroupTypes' | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.SpecialOfferTypes?ref=b76197e183b782dc11eb60c82e154a50' | 'False'        | '1'    | 'ValueStorage' | ''                 | 'False'                      | 'False'      | 'DocumentDiscount' | ''                 | ''               | ''               |
+
+
+	And I check or create catalog "SpecialOffers" objects:
+		| 'Ref'                                                                   | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Code' | 'Settings'     | 'SpecialOfferType'                                                          | 'Priority' | 'Manually' | 'StartOf'             | 'EndOf'               | 'Launch' | 'ManualInputValue' | 'Type'                          | 'DocumentType'                               | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.SpecialOffers?ref=b76197e183b782dc11eb60c82e154a51' | 'False'        | ''       | 'False'    | '1'    | 'ValueStorage' | 'e1cib/data/Catalog.SpecialOfferTypes?ref=b76197e183b782dc11eb60c82e154a50' | '5'        | 'True'     | '01.01.0001 00:00:00' | '01.01.0001 00:00:00' | 'True'   | 'True'             | 'Enum.SpecialOfferTypes.ForRow' | 'Enum.OffersDocumentTypes.PurchasesAndSales' | 'DocumentDiscount' | ''                 | ''               | ''               |
+
 
 Scenario: Create catalog CancelReturnReasons objects
 

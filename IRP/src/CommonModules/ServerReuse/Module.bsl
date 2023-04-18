@@ -36,3 +36,11 @@ EndFunction
 Function GetAgreementInfo(Agreement) Export
 	Return Catalogs.Agreements._GetAgreementInfo(Agreement);
 EndFunction
+
+// RowIDInfo
+
+Function GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, ProportionalScaling) Export
+	Return RowIDInfoServer._GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, ProportionalScaling);
+EndFunction
+
+

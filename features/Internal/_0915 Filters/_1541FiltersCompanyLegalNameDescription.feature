@@ -670,12 +670,6 @@ Scenario: _028069 check filter by own companies in the document PlannedReceiptRe
 		When check the filter by my own company in Opening entry/Item stock adjustment
 
 
-Scenario: _028070 check filter by own companies in the document SalesOrderClosing
-	* Open document form
-		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
-	* Check the filter for Own Company
-		When check the filter by my own company in Opening entry/Item stock adjustment
-
 
 Scenario: _028071 check Description in the document SalesOrderClosing
 	And I close all client application windows

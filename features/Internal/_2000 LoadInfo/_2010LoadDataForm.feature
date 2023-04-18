@@ -428,35 +428,6 @@ Scenario: _020120 load data in the Purchase order
 		Then the form attribute named "Field_Detail" became equal to "Yes"
 		And I close all client application windows
 						
-Scenario: _020121 load data in the Purchase order closing
-		And I close all client application windows
-	* Open Purchase order closing
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
-		And I click the button named "FormCreate"
-	* Check load data form
-		When check load data form in the document
-	* Check document
-		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
-	* Check additional fields for load data
-		And in the table "ItemList" I click "Load data from table" button
-		And I move to "Additional fields" tab
-		And I set checkbox "Price"
-		And I set checkbox "Detail"
-		And I click "Next" button
-		Then the form attribute named "LoadType" became equal to "Barcode"
-		Then the form attribute named "Field_Price" became equal to "Yes"
-		Then the form attribute named "Field_OffersAmount" became equal to "No"
-		Then the form attribute named "Field_TaxAmount" became equal to "No"
-		Then the form attribute named "Field_NetAmount" became equal to "No"
-		Then the form attribute named "Field_TotalAmount" became equal to "No"
-		Then the form attribute named "Field_DeliveryDate" became equal to "No"
-		Then the form attribute named "Field_Detail" became equal to "Yes"
-		And I close all client application windows
 
 Scenario: _020122 load data in the Purchase return
 		And I close all client application windows
@@ -602,36 +573,7 @@ Scenario: _020126 load data in the Sales order
 		Then the form attribute named "Field_DeliveryDate" became equal to "No"
 		Then the form attribute named "Field_Detail" became equal to "Yes"
 		And I close all client application windows		
-
-Scenario: _020127 load data in the Sales order closing
-		And I close all client application windows
-	* Open Sales order closing
-		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
-		And I click the button named "FormCreate"
-	* Check load data form
-		When check load data form in the document
-	* Check document
-		And "ItemList" table contains lines
-			| 'Item'               | 'Item key' | 'Unit' | 'Quantity' |
-			| 'Dress'              | 'XS/Blue'  | 'pcs'  | '6,000'    |
-			| 'Product 1 with SLN' | 'ODS'      | 'pcs'  | '2,000'    |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '1,000'    |
-			| 'Dress'              | 'S/Yellow' | 'pcs'  | '3,000'    |
-	* Check additional fields for load data
-		And in the table "ItemList" I click "Load data from table" button
-		And I move to "Additional fields" tab
-		And I set checkbox "Price"
-		And I set checkbox "Detail"
-		And I set checkbox "Total amount"
-		And I click "Next" button
-		Then the form attribute named "LoadType" became equal to "Barcode"
-		Then the form attribute named "Field_Price" became equal to "Yes"
-		Then the form attribute named "Field_OffersAmount" became equal to "No"
-		Then the form attribute named "Field_TaxAmount" became equal to "No"
-		Then the form attribute named "Field_NetAmount" became equal to "No"
-		Then the form attribute named "Field_TotalAmount" became equal to "Yes"
-		Then the form attribute named "Field_Detail" became equal to "Yes"
-		And I close all client application windows		
+	
 
 Scenario: _020128 load data in the Sales report from trade agent
 		And I close all client application windows

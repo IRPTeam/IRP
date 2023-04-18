@@ -10,7 +10,8 @@ I want to create a Sales return document
 To track a product that returned from customer
 
 Variables:
-import "Variables.feature"
+Path = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path"), "#workingDir#")}"
+
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
@@ -61,6 +62,13 @@ Scenario: _028500 preparation (create document Sales return)
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create catalog BusinessUnits objects
+	* Add plugin for discount
+		When Create Document discount (for row)
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "DocumentDiscount" |
+			When add Plugin for document discount
 	* Tax settings
 		When filling in Tax settings for company
 		When Create document SalesInvoice objects (linked)
@@ -109,11 +117,11 @@ Scenario: _028501 create document Sales return based on SI (without SRO)
 		// Then the form attribute named "Branch" became equal to "Distribution department"
 	* Check items tab
 		And "ItemList" table contains lines
-		| '#' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales return order' | 'Sales invoice'                               | 'Revenue type' |'Sales person'   |
-		| '1' | 'Shirt' | '38/Black' | 'No'                 | ''                   | '2,000' | 'pcs'            | '113,71'     | '350,00'   | '18%' | ''              | '586,29'     | 'No'                | '700,00'       | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |'Alexander Orlov'|
-		| '2' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '2,000' | 'Boots (12 pcs)' | '2 729,05'   | '8 400,00' | '18%' | ''              | '14 070,95'  | 'No'                | '16 800,00'    | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |'Alexander Orlov'|
-		| '3' | 'Boots' | '37/18SD'  | 'No'                 | ''                   | '2,000' | 'pcs'            | '227,42'     | '700,00'   | '18%' | ''              | '1 172,58'   | 'No'                | '1 400,00'     | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |''               |
-		| '4' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '4,000' | 'pcs'            | '337,88'     | '520,00'   | '18%' | ''              | '1 742,12'   | 'No'                | '2 080,00'     | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |''               |
+		| '#' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Quantity' | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales return order' | 'Sales invoice'                               | 'Revenue type' | 'Sales person'    |
+		| '1' | 'Shirt' | '38/Black' | 'No'                 | ''                   | '2,000'    | 'pcs'            | '106,78'     | '350,00'   | '18%' | ''              | '593,22'     | 'No'                | '700,00'       | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      | 'Alexander Orlov' |
+		| '2' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '2,000'    | 'Boots (12 pcs)' | '2 562,71'   | '8 400,00' | '18%' | ''              | '14 237,29'  | 'No'                | '16 800,00'    | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      | 'Alexander Orlov' |
+		| '3' | 'Boots' | '37/18SD'  | 'No'                 | ''                   | '2,000'    | 'pcs'            | '213,56'     | '700,00'   | '18%' | ''              | '1 186,44'   | 'No'                | '1 400,00'     | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      | ''                |
+		| '4' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '4,000'    | 'pcs'            | '317,29'     | '520,00'   | '18%' | ''              | '1 762,71'   | 'No'                | '2 080,00'     | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      | ''                |
 	And I click the button named "FormPost"
 	And I delete "$$NumberSalesReturn028501$$" variable
 	And I delete "$$SalesReturn028501$$" variable
@@ -308,7 +316,7 @@ Scenario: _028503 create SR based on SI (different company, branch, store)
 	* Check
 		And "ItemList" table became equal
 			| '#' | 'Item'  | 'Profit loss center'      | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Dont calculate row' | 'Quantity' | 'Sales invoice'                               | 'Price'  | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales return order' | 'Return reason' | 'Revenue type' | 'Offers amount' | 'Landed cost' | 'Sales person' |
-			| '1' | 'Dress' | 'Distribution department' | 'M/White'  | 'pcs'  | ''                   | 'No'                 | '2,000'    | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '520,00' | '871,06'     | 'No'                | '1 040,00'     | ''                    | 'Store 01' | ''                   | ''              | 'Revenue'      | ''              | ''            | ''             |
+			| '1' | 'Dress' | 'Distribution department' | 'M/White'  | 'pcs'  | ''                   | 'No'                 | '2,000'    | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '520,00' | '881,36'     | 'No'                | '1 040,00'     | ''                    | 'Store 01' | ''                   | ''              | 'Revenue'      | ''              | ''            | ''             |
 	* Show row key
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab

@@ -1255,6 +1255,13 @@ Scenario: _2060008 check link/unlink form in the PRO
 			| 'Description'    |
 			| 'pcs' |
 		And I select current line in "List" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
+			| 'Boots' | '36/18SD'  | '2,000'    | 'Store 02' |
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "700,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table	
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                          | 'Next step' | 'Quantity'      | 'Current step' |
@@ -1406,6 +1413,13 @@ Scenario: _2060008 check link/unlink form in the PR
 			| 'Description'    |
 			| 'pcs' |
 		And I select current line in "List" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
+			| 'Boots' | '36/18SD'  | '2,000'    | 'Store 02' |
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "700,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table	
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                          | 'Next step' | 'Quantity'      | 'Current step' |

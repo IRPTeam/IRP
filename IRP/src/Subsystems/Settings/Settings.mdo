@@ -34,4 +34,5 @@
  <subsystems>Saas</subsystems>
  <subsystems>AdminFunctions</subsystems>
  <subsystems>Taxes</subsystems>
+ <subsystems>ContactInfo</subsystems>
 </mdclass:Subsystem>

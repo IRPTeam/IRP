@@ -136,5 +136,8 @@
   <types>CatalogRef.EmployeePositions</types>
   <types>CatalogRef.AccrualAndDeductionTypes</types>
   <types>DocumentRef.TimeSheet</types>
+  <types>CatalogRef.VehicleTypes</types>
+  <types>CatalogRef.Vehicles</types>
+  <types>CatalogRef.Addresses</types>
  </type>
 </mdclass:DefinedType>

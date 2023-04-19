@@ -10,7 +10,7 @@ I want to create a Sales invoice document
 To sell a product to a customer
 
 Variables:
-import "Variables.feature"
+Path = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path"), "#workingDir#")}"
 
 
 Background:
@@ -55,6 +55,7 @@ Scenario: _024000 preparation (Sales invoice)
 		When Create catalog CancelReturnReasons objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Partners objects
+		When Create Document discount
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -62,6 +63,12 @@ Scenario: _024000 preparation (Sales invoice)
 				| "TaxCalculateVAT_TR" |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
+	* Add plugin for discount
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "DocumentDiscount" |
+			When add Plugin for document discount	
 	* Tax settings
 		When filling in Tax settings for company
 	When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
@@ -174,7 +181,7 @@ Scenario: _024001 create document Sales Invoice based on sales order (partial qu
 		And "ItemList" table contains lines
 			| '#' | 'Inventory origin' | 'Sales person' | 'Price type'        | 'Item'  | 'Item key' | 'Profit loss center'      | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Quantity' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                             | 'Work order' | 'Revenue type' |
 			| '1' | 'Own stocks'       | ''             | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'Distribution department' | 'No'                 | '75,36'      | 'pcs'            | ''                   | '1,000'    | '520,00'   | '18%' | '26,00'         | '418,64'     | '494,00'       | 'No'             | 'No'                         | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | ''           | 'Revenue'      |
-			| '2' | 'Own stocks'       | ''             | 'Basic Price Types' | 'Shirt' | '36/Red'   | 'Distribution department' | 'No'                 | '240,25'     | 'pcs'            | ''                   | '5,000'    | '350,00'   | '18%' | '175,00'        | '1 334,75'   | '1 575,00'     | 'No'             | 'No'                         | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | ''           | 'Revenue'      |
+			| '2' | 'Own stocks'       | ''             | 'Basic Price Types' | 'Shirt' | '36/Red'   | 'Distribution department' | 'No'                 | '253,60'     | 'pcs'            | ''                   | '5,000'    | '350,00'   | '18%' | '87,50'         | '1 408,90'   | '1 662,50'     | 'No'             | 'No'                         | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | ''           | 'Revenue'      |
 			| '3' | 'Own stocks'       | ''             | 'Basic Price Types' | 'Boots' | '36/18SD'  | 'Front office'            | 'No'                 | '6 406,78'   | 'Boots (12 pcs)' | ''                   | '5,000'    | '8 400,00' | '18%' | ''              | '35 593,22'  | '42 000,00'    | 'No'             | 'No'                         | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | ''           | 'Revenue'      |
 		And I close all client application windows	
 		When set False value to the constant Use commission trading

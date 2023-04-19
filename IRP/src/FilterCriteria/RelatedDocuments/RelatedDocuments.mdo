@@ -58,9 +58,6 @@
  <content>Document.SalesReturn.TabularSection.GoodsReceipts.Attribute.GoodsReceipt</content>
  <content>Document.PurchaseReturn.TabularSection.ShipmentConfirmations.Attribute.ShipmentConfirmation</content>
  <content>Document.PurchaseOrderClosing.Attribute.PurchaseOrder</content>
- <content>Document.PurchaseOrderClosing.TabularSection.ItemList.Attribute.PurchaseBasis</content>
- <content>Document.PurchaseOrderClosing.TabularSection.ItemList.Attribute.SalesOrder</content>
- <content>Document.PurchaseOrderClosing.TabularSection.ItemList.Attribute.InternalSupplyRequest</content>
  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.SalesInvoice</content>
  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.InventoryTransferOrder</content>
  <content>Document.ShipmentConfirmation.TabularSection.ItemList.Attribute.InventoryTransfer</content>

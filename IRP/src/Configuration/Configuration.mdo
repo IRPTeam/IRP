@@ -424,8 +424,6 @@
  <commonModules>CommonModule.DocPurchaseInvoiceClient</commonModules>
  <commonModules>CommonModule.DocPurchaseInvoiceServer</commonModules>
  <commonModules>CommonModule.DocPurchaseOrderClient</commonModules>
- <commonModules>CommonModule.DocPurchaseOrderClosingClient</commonModules>
- <commonModules>CommonModule.DocPurchaseOrderClosingServer</commonModules>
  <commonModules>CommonModule.DocPurchaseOrderServer</commonModules>
  <commonModules>CommonModule.DocPurchaseReturnClient</commonModules>
  <commonModules>CommonModule.DocPurchaseReturnOrderClient</commonModules>
@@ -440,8 +438,7 @@
  <commonModules>CommonModule.DocSalesInvoiceClient</commonModules>
  <commonModules>CommonModule.DocSalesInvoiceServer</commonModules>
  <commonModules>CommonModule.DocSalesOrderClient</commonModules>
- <commonModules>CommonModule.DocSalesOrderClosingClient</commonModules>
- <commonModules>CommonModule.DocSalesOrderClosingServer</commonModules>
+ <commonModules>CommonModule.DocOrderClosingServer</commonModules>
  <commonModules>CommonModule.DocSalesOrderServer</commonModules>
  <commonModules>CommonModule.DocSalesReportFromTradeAgentClient</commonModules>
  <commonModules>CommonModule.DocSalesReportFromTradeAgentServer</commonModules>
@@ -780,8 +777,10 @@
  <catalogs>Catalog.AccessGroups</catalogs>
  <catalogs>Catalog.AccessProfiles</catalogs>
  <catalogs>Catalog.AccountingOperations</catalogs>
+ <catalogs>Catalog.AccrualAndDeductionTypes</catalogs>
  <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
  <catalogs>Catalog.AddAttributeAndPropertyValues</catalogs>
+ <catalogs>Catalog.Addresses</catalogs>
  <catalogs>Catalog.AdvancesKeys</catalogs>
  <catalogs>Catalog.Agreements</catalogs>
  <catalogs>Catalog.BankTerms</catalogs>
@@ -801,6 +800,7 @@
  <catalogs>Catalog.DataAreas</catalogs>
  <catalogs>Catalog.DataBaseStatus</catalogs>
  <catalogs>Catalog.DataMappingItems</catalogs>
+ <catalogs>Catalog.EmployeePositions</catalogs>
  <catalogs>Catalog.EquipmentDrivers</catalogs>
  <catalogs>Catalog.ExpenseAndRevenueTypes</catalogs>
  <catalogs>Catalog.Extensions</catalogs>
@@ -840,6 +840,7 @@
  <catalogs>Catalog.RetailCustomers</catalogs>
  <catalogs>Catalog.RowIDs</catalogs>
  <catalogs>Catalog.SerialLotNumbers</catalogs>
+ <catalogs>Catalog.SourceOfOrigins</catalogs>
  <catalogs>Catalog.SpecialOfferRules</catalogs>
  <catalogs>Catalog.SpecialOffers</catalogs>
  <catalogs>Catalog.SpecialOfferTypes</catalogs>
@@ -853,10 +854,9 @@
  <catalogs>Catalog.UnitsOfMeasurement</catalogs>
  <catalogs>Catalog.UserGroups</catalogs>
  <catalogs>Catalog.Users</catalogs>
+ <catalogs>Catalog.Vehicles</catalogs>
+ <catalogs>Catalog.VehicleTypes</catalogs>
  <catalogs>Catalog.Workstations</catalogs>
- <catalogs>Catalog.SourceOfOrigins</catalogs>
- <catalogs>Catalog.AccrualAndDeductionTypes</catalogs>
- <catalogs>Catalog.EmployeePositions</catalogs>
  <documents>Document.AdditionalCostAllocation</documents>
  <documents>Document.AdditionalRevenueAllocation</documents>
  <documents>Document.BankPayment</documents>
@@ -928,6 +928,8 @@
  <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
  <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
  <enums>Enum.AccountingAnalyticTypes</enums>
+ <enums>Enum.AccrualAndDeductionPeriodicity</enums>
+ <enums>Enum.AddressTypes</enums>
  <enums>Enum.AgreementKinds</enums>
  <enums>Enum.AgreementTypes</enums>
  <enums>Enum.AllocationMethod</enums>
@@ -939,14 +941,18 @@
  <enums>Enum.CalculationMode</enums>
  <enums>Enum.CalculationTypes</enums>
  <enums>Enum.CashAccountTypes</enums>
+ <enums>Enum.CashExpenseTransactionTypes</enums>
  <enums>Enum.CashFlowDirections</enums>
+ <enums>Enum.CashRevenueTransactionTypes</enums>
  <enums>Enum.ChequeBondTypes</enums>
  <enums>Enum.CompanyLegalType</enums>
  <enums>Enum.ConsolidatedRetailSalesStatuses</enums>
  <enums>Enum.CurrencyType</enums>
  <enums>Enum.DataAreaStatus</enums>
+ <enums>Enum.DocumentFiscalStatuses</enums>
  <enums>Enum.DocumentPostingTypes</enums>
  <enums>Enum.EquipmentTypes</enums>
+ <enums>Enum.ExpenseTypes</enums>
  <enums>Enum.ExternalFunctionType</enums>
  <enums>Enum.FileTypes</enums>
  <enums>Enum.FormTypes</enums>
@@ -955,6 +961,7 @@
  <enums>Enum.IntegrationType</enums>
  <enums>Enum.InterfaceGroupBehaviors</enums>
  <enums>Enum.InterfaceGroupChildFormItemsGroups</enums>
+ <enums>Enum.InventoryOriginTypes</enums>
  <enums>Enum.InvoicingStatuses</enums>
  <enums>Enum.ItemTypes</enums>
  <enums>Enum.JobStatus</enums>
@@ -973,7 +980,12 @@
  <enums>Enum.ProcurementMethods</enums>
  <enums>Enum.ProductionPlanningTypes</enums>
  <enums>Enum.ProductionTypes</enums>
+ <enums>Enum.PurchaseReturnTransactionTypes</enums>
+ <enums>Enum.PurchaseTransactionTypes</enums>
+ <enums>Enum.ReceiptPaymentMethods</enums>
  <enums>Enum.Rights</enums>
+ <enums>Enum.SalesReturnTransactionTypes</enums>
+ <enums>Enum.SalesTransactionTypes</enums>
  <enums>Enum.SerialNumbersOwner</enums>
  <enums>Enum.SerialNumberTypes</enums>
  <enums>Enum.ShipmentConfirmationTransactionTypes</enums>
@@ -983,20 +995,9 @@
  <enums>Enum.StockBalanceDetail</enums>
  <enums>Enum.SystemClientType</enums>
  <enums>Enum.TaxType</enums>
+ <enums>Enum.TradeAgentFeeTypes</enums>
  <enums>Enum.TypeEquipment</enums>
  <enums>Enum.TypeExternalObject</enums>
- <enums>Enum.SalesTransactionTypes</enums>
- <enums>Enum.PurchaseTransactionTypes</enums>
- <enums>Enum.SalesReturnTransactionTypes</enums>
- <enums>Enum.PurchaseReturnTransactionTypes</enums>
- <enums>Enum.InventoryOriginTypes</enums>
- <enums>Enum.TradeAgentFeeTypes</enums>
- <enums>Enum.ReceiptPaymentMethods</enums>
- <enums>Enum.DocumentFiscalStatuses</enums>
- <enums>Enum.ExpenseTypes</enums>
- <enums>Enum.AccrualAndDeductionPeriodicity</enums>
- <enums>Enum.CashExpenseTransactionTypes</enums>
- <enums>Enum.CashRevenueTransactionTypes</enums>
  <reports>Report.AllRegistersMovement</reports>
  <reports>Report.BatchBalance</reports>
  <reports>Report.BatchBalanceSimple</reports>

@@ -123,12 +123,7 @@ EndProcedure
 #Region UPDATE_BY_BILL_OF_MATERIALS
 
 Procedure UpdateByBillOfMaterials(Object, Form) Export
-	FormParameters = ControllerClientServer_V2.GetFormParameters(Form);
-	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
-	ServerParameters.TableName = "Materials";		
-	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
-	Property = New Structure("DataPath", "Command_UpdateByBillOfMaterials");
-	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);
+	ViewClient_V2.ExecuteCommand(Object, Form, "Materials", "Command_UpdateByBillOfMaterials");
 EndProcedure
 	
 #EndRegion

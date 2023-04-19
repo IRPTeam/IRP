@@ -18,5 +18,7 @@
  <content>Document.InventoryTransfer</content>
  <content>Document.InventoryTransferOrder</content>
  <content>Document.InternalSupplyRequest</content>
+ <content>Catalog.Vehicles</content>
+ <content>Catalog.VehicleTypes</content>
  <parentSubsystem>Subsystem.Inventory</parentSubsystem>
 </mdclass:Subsystem>

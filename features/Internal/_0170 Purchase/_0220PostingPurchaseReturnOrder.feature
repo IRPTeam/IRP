@@ -446,17 +446,17 @@ Scenario: _022015 create PRO using form link/unlink
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
-			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '200,00' | '5,000'    | 'Boots (36/18SD)'  | 'Boots (12 pcs)'  | 'No'  |
+			| 'Currency' | 'Price'    | 'Quantity' | 'Row presentation' | 'Unit'           | 'Use' |
+			| 'TRY'      | '2 400,00' | '5,000'    | 'Boots (36/18SD)'  | 'Boots (12 pcs)' | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 		And I click "Show row key" button
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
-		| '#' | 'Basis'                         | 'Next step' | 'Quantity'      | 'Current step'  |
-		| '1' | '$$PurchaseInvoice018001$$'     | ''          | '5,000'  | 'PRO&PR'        |
-		| '2' | '$$PurchaseInvoice018001$$'     | ''          | '60,000' | 'PRO&PR'        |
+		| '#' | 'Basis'                     | 'Next step' | 'Quantity' | 'Current step' |
+		| '1' | '$$PurchaseInvoice018001$$' | ''          | '5,000'    | 'PRO&PR'       |
+		| '2' | '$$PurchaseInvoice018001$$' | ''          | '60,000'   | 'PRO&PR'       |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 	* Unlink line
 		And I click the button named "LinkUnlinkBasisDocuments"
@@ -469,9 +469,9 @@ Scenario: _022015 create PRO using form link/unlink
 		And I click "Ok" button
 		And I click "Save" button	
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                     | 'Next step' | 'Quantity'      | 'Current step' |
-			| '1' | '$$PurchaseInvoice018001$$' | 'PR'        | '5,000'  | 'PRO&PR'       |
-			| '2' | ''                          | 'PR'        | '60,000' | ''             |
+			| '#' | 'Basis'                     | 'Next step' | 'Quantity' | 'Current step' |
+			| '1' | '$$PurchaseInvoice018001$$' | 'PR'        | '5,000'    | 'PRO&PR'       |
+			| '2' | ''                          | 'PR'        | '60,000'   | ''             |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Purchase invoice'          |
@@ -480,18 +480,18 @@ Scenario: _022015 create PRO using form link/unlink
 	* Link line
 		And I click the button named "LinkUnlinkBasisDocuments"
 		And I go to line in "ItemListRows" table
-			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
-			| '2' | '5,000'    | 'Boots (36/18SD)'   | 'Store 02' | 'Boots (12 pcs)'  |
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit'           |
+			| '2' | '5,000'    | 'Boots (36/18SD)'  | 'Store 02' | 'Boots (12 pcs)' |
 		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 		And I go to line in "BasisesTree" table
-			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '200,00' | '5,000'    | 'Boots (36/18SD)'    | 'Boots (12 pcs)'  |
+			| 'Currency' | 'Price'    | 'Quantity' | 'Row presentation' | 'Unit'           |
+			| 'TRY'      | '2 400,00' | '5,000'    | 'Boots (36/18SD)'  | 'Boots (12 pcs)' |
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                         | 'Next step' | 'Quantity'      | 'Current step'  |
-			| '1' | '$$PurchaseInvoice018001$$'     | ''          | '5,000'  | 'PRO&PR'        |
-			| '2' | '$$PurchaseInvoice018001$$'     | ''          | '60,000' | 'PRO&PR'        |
+			| '#' | 'Basis'                     | 'Next step' | 'Quantity' | 'Current step' |
+			| '1' | '$$PurchaseInvoice018001$$' | ''          | '5,000'    | 'PRO&PR'       |
+			| '2' | '$$PurchaseInvoice018001$$' | ''          | '60,000'   | 'PRO&PR'       |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Purchase invoice'          |
@@ -504,8 +504,8 @@ Scenario: _022015 create PRO using form link/unlink
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I click the button named "AddBasisDocuments"
 		And I go to line in "BasisesTree" table
-			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '200,00' | '5,000'    | 'Boots (36/18SD)'  | 'Boots (12 pcs)'  | 'No'  |
+			| 'Currency' | 'Price'    | 'Quantity' | 'Row presentation' | 'Unit'           | 'Use' |
+			| 'TRY'      | '2 400,00' | '5,000'    | 'Boots (36/18SD)'  | 'Boots (12 pcs)' | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -514,8 +514,8 @@ Scenario: _022015 create PRO using form link/unlink
 			| 'Boots' | '36/18SD'  | '$$PurchaseInvoice018001$$' |
 			| 'Dress' | 'S/Yellow' | '$$PurchaseInvoice018001$$' |
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Quantity'      | 'Store'    |
-			| 'Dress' | 'S/Yellow'  | '5,000' | 'Store 02' |
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
+			| 'Dress' | 'S/Yellow' | '5,000'    | 'Store 02' |
 		And I activate "Unit" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I click choice button of "Unit" attribute in "ItemList" table
@@ -525,9 +525,9 @@ Scenario: _022015 create PRO using form link/unlink
 		And I select current line in "List" table
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                     | 'Next step' | 'Quantity'      | 'Current step' |
-			| '1' | '$$PurchaseInvoice018001$$' | 'PR'        | '40,000' | 'PRO&PR'       |
-			| '2' | '$$PurchaseInvoice018001$$' | 'PR'        | '60,000' | 'PRO&PR'       |
+			| '#' | 'Basis'                     | 'Next step' | 'Quantity' | 'Current step' |
+			| '1' | '$$PurchaseInvoice018001$$' | 'PR'        | '40,000'   | 'PRO&PR'       |
+			| '2' | '$$PurchaseInvoice018001$$' | 'PR'        | '60,000'   | 'PRO&PR'       |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And I close all client application windows
 

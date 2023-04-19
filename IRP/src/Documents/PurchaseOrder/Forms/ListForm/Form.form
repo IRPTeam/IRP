@@ -943,15 +943,16 @@
 	PurchaseOrderList.DocumentAmount,
 	Not PurchaseOrderClosing.Ref IS NULL AS Closed,
 	PurchaseOrderClosing.Ref AS ClosingOrder,
-	CASE WHEN COUNT(DISTINCT PurchaseOrderItemList.Store) = 1 THEN
-		MAX(PurchaseOrderItemList.Store)
-	ELSE UNDEFINED END AS Store
+	CASE
+		WHEN COUNT(DISTINCT PurchaseOrderItemList.Store) = 1
+			THEN MAX(PurchaseOrderItemList.Store)
+		ELSE UNDEFINED
+	END AS Store
 FROM
 	Document.PurchaseOrder AS PurchaseOrderList
 		LEFT JOIN Document.PurchaseOrderClosing AS PurchaseOrderClosing
 		ON PurchaseOrderClosing.PurchaseOrder = PurchaseOrderList.Ref
 		AND PurchaseOrderClosing.Posted
-		AND PurchaseOrderClosing.CloseOrder
 		LEFT JOIN Document.PurchaseOrder.ItemList AS PurchaseOrderItemList
 		ON PurchaseOrderItemList.Ref = PurchaseOrderList.Ref
 GROUP BY
@@ -1020,6 +1021,126 @@ GROUP BY
       </content>
      </localValue>
     </title>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Ref</dataPath>
+    <field>Ref</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DeletionMark</dataPath>
+    <field>DeletionMark</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Number</dataPath>
+    <field>Number</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Date</dataPath>
+    <field>Date</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Posted</dataPath>
+    <field>Posted</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Agreement</dataPath>
+    <field>Agreement</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Company</dataPath>
+    <field>Company</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>TransactionType</dataPath>
+    <field>TransactionType</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Currency</dataPath>
+    <field>Currency</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LegalName</dataPath>
+    <field>LegalName</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Partner</dataPath>
+    <field>Partner</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PriceIncludeTax</dataPath>
+    <field>PriceIncludeTax</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Status</dataPath>
+    <field>Status</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PartnerBankAccount</dataPath>
+    <field>PartnerBankAccount</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>UseItemsReceiptScheduling</dataPath>
+    <field>UseItemsReceiptScheduling</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Author</dataPath>
+    <field>Author</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Branch</dataPath>
+    <field>Branch</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description</dataPath>
+    <field>Description</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DocumentAmount</dataPath>
+    <field>DocumentAmount</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ClosingOrder</dataPath>
+    <field>ClosingOrder</field>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Closing order</value>
+      </content>
+     </localValue>
+    </title>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ItemList</dataPath>
+    <field>ItemList</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SpecialOffers</dataPath>
+    <field>SpecialOffers</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>TaxList</dataPath>
+    <field>TaxList</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Currencies</dataPath>
+    <field>Currencies</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>AddAttributes</dataPath>
+    <field>AddAttributes</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PaymentTerms</dataPath>
+    <field>PaymentTerms</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>RowIDInfo</dataPath>
+    <field>RowIDInfo</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PointInTime</dataPath>
+    <field>PointInTime</field>
    </fields>
   </extInfo>
  </attributes>

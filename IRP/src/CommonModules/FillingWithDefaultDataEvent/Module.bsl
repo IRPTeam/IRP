@@ -111,6 +111,7 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 		
 		For Each TableName In ArrayOfMainTables Do
 			ProcessProperties(Info, Source, IsBasedOn, TableName, ArrayOfBasisDocumentProperties);
+			ViewServer_V2.ExecuteCommandAtServer(Source, TableName, "Command_RecalculationWhenBasedOn");
 		EndDo;
 		
 		For Each TableName In ArrayOfSubordinateTables Do

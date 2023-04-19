@@ -3,7 +3,7 @@
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocPurchaseOrderServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	ThisObject.ClosingOrder = DocPurchaseOrderServer.GetLastPurchaseOrderClosingByPurchaseOrder(Object.Ref);
+	ThisObject.ClosingOrder = DocOrderClosingServer.GetClosingByPurchaseOrder(Object.Ref);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 

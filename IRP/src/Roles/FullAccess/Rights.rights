@@ -1705,6 +1705,10 @@
 			<name>InteractiveDeletePredefinedData</name>
 			<value>false</value>
 		</right>
+		<right>
+			<name>InteractiveDeleteMarkedPredefinedData</name>
+			<value>false</value>
+		</right>
 	</object>
 	<object>
 		<name>Catalog.FillingTemplates</name>
@@ -1716,6 +1720,10 @@
 			<name>InteractiveDeletePredefinedData</name>
 			<value>false</value>
 		</right>
+		<right>
+			<name>InteractiveDeleteMarkedPredefinedData</name>
+			<value>false</value>
+		</right>
 	</object>
 	<object>
 		<name>Catalog.SourceOfOrigins</name>
@@ -1725,6 +1733,10 @@
 		</right>
 		<right>
 			<name>InteractiveDeletePredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeleteMarkedPredefinedData</name>
 			<value>false</value>
 		</right>
 	</object>
@@ -1758,6 +1770,36 @@
 	</object>
 	<object>
 		<name>Document.TimeSheet</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.Vehicles</name>
+		<right>
+			<name>InteractiveDeleteMarkedPredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeletePredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.VehicleTypes</name>
+		<right>
+			<name>InteractiveDeleteMarkedPredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeletePredefinedData</name>
+			<value>false</value>
+		</right>
 		<right>
 			<name>InteractiveDelete</name>
 			<value>false</value>

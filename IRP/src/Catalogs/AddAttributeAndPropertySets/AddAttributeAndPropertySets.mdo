@@ -860,6 +860,27 @@
     <value>123</value>
    </code>
   </items>
+  <items id="fbf136ef-7dd0-4b0b-a22b-43a1e65ab1fc">
+   <name>Catalog_Addresses</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>124</value>
+   </code>
+  </items>
+  <items id="5595d81c-1d8c-432c-8415-3066f667cef7">
+   <name>Catalog_Vehicles</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>125</value>
+   </code>
+  </items>
+  <items id="c7a1815a-c664-4cc0-8444-9788f9a71532">
+   <name>Catalog_VehicleTypes</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>126</value>
+   </code>
+  </items>
  </predefined>
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>

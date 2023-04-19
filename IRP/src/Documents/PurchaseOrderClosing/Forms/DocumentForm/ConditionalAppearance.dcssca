@@ -3,97 +3,22 @@
 	<item>
 		<selection>
 			<item>
-				<field>ObjectCurrenciesMovementType</field>
+				<field>ItemListItem</field>
 			</item>
 			<item>
-				<field>ObjectCurrenciesMovementTypeType</field>
+				<field>ItemListItemKey</field>
 			</item>
 			<item>
-				<field>ObjectCurrenciesCurrencyFrom</field>
+				<field>ItemListQuantity</field>
 			</item>
 			<item>
-				<field>ObjectCurrenciesMovementTypeCurrency</field>
+				<field>ItemListUnit</field>
 			</item>
 			<item>
-				<field>ObjectCurrenciesShowReverseRate</field>
+				<field>ItemListStore</field>
 			</item>
 			<item>
-				<field>ObjectCurrenciesRatePresentation</field>
-			</item>
-			<item>
-				<field>ObjectCurrenciesMultiplicity</field>
-			</item>
-			<item>
-				<field>ObjectCurrenciesAmount</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.Currencies.IsVisible</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:boolean">false</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>Visible</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
-				<field>ItemListTaxAmount</field>
-			</item>
-			<item>
-				<field>ItemListNetAmount</field>
-			</item>
-			<item>
-				<field>ItemListTotalAmount</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.ItemList.DontCalculateRow</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:boolean">true</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>BackColor</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Color">#CCFFCC</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
-				<field>ItemListNetAmount</field>
-			</item>
-			<item>
-				<field>ItemListTotalAmount</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.ItemList.DontCalculateRow</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:boolean">true</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>ReadOnly</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
-				<field>ItemList</field>
+				<field>ItemListDeliveryDate</field>
 			</item>
 		</selection>
 		<filter>
@@ -111,50 +36,6 @@
 			<dcscor:item xsi:type="SettingsParameterValue">
 				<dcscor:parameter>Font</dcscor:parameter>
 				<dcscor:value xsi:type="v8ui:Font" ref="sys:DefaultGUIFont" bold="false" italic="false" underline="false" strikeout="true" kind="WindowsFont"/>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
-				<field>ItemListStore</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.ItemList.Store</left>
-				<comparisonType>NotFilled</comparisonType>
-			</item>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.ItemList.IsService</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:boolean">false</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>MarkIncomplete</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
-				<field>ItemListStore</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.ItemList.IsService</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:boolean">true</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>ReadOnly</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
 			</dcscor:item>
 		</appearance>
 	</item>

@@ -609,6 +609,25 @@ Scenario: Create catalog Currencies objects
 		| 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1858' | 'False'        | 'UAH'  | '₴'      | ''            | 'Ukraine Hryvnia' | ''                 | ''               | 'Ukraine Hryvnia' |
 		| 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856' | 'False'        | 'USD'  | '$'      | ''            | 'American dollar' | ''                 | ''               | 'American dollar' |
 
+Scenario: Create catalog Addresses objects
+
+	And I check or create catalog "Addresses" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Addresses?ref=b79996ebf0bd544411eddd0787cad6f9' | 'False'        | 1      | 'Country 1, Street 1, B.1' | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.Addresses?ref=b79996ebf0bd544411eddd0787cad6fa' | 'False'        | 2      | 'Country 1, Street 2, B.2' | ''                 | ''               | ''               |
+
+Scenario: Create catalog Vehicles objects
+	
+	And I check or create catalog "VehicleTypes" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.VehicleTypes?ref=b79996ebf0bd544411eddd0787cad6fb' | 'False'        | 1      | 'Vehicles types 1' | ''                 | ''               | ''               |
+
+	And I check or create catalog "Vehicles" objects:
+		| 'Ref'                                                              | 'DeletionMark' | 'Code' | 'Description' | 'VehicleID' | 'Type'                                                                 |
+		| 'e1cib/data/Catalog.Vehicles?ref=b79996ebf0bd544411eddd0787cad6fc' | 'False'        | 1      | 'Vehicles 1'  | '7889900'   | 'e1cib/data/Catalog.VehicleTypes?ref=b79996ebf0bd544411eddd0787cad6fb' |
+		| 'e1cib/data/Catalog.Vehicles?ref=b79996ebf0bd544411eddd0787cad6fd' | 'False'        | 2      | 'Vehicles 2'  | '7889900'   | 'e1cib/data/Catalog.VehicleTypes?ref=b79996ebf0bd544411eddd0787cad6fb' |
+
+
 Scenario: Create catalog ItemKeys objects
 
 	And I check or create for catalog "ItemKeys" objects with Data Exchange Load parameter set to true:
@@ -2450,7 +2469,20 @@ Scenario: Create Document discount
 
 	And I check or create catalog "SpecialOffers" objects:
 		| 'Ref'                                                                   | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Code' | 'Settings'     | 'SpecialOfferType'                                                          | 'Priority' | 'Manually' | 'StartOf'             | 'EndOf'               | 'Launch' | 'ManualInputValue' | 'Type'                               | 'DocumentType'                               | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr' |
-		| 'e1cib/data/Catalog.SpecialOffers?ref=b76197e183b782dc11eb60c82e154a51' | 'False'           | ''       | 'False'       | '1'    | 'ValueStorage' | 'e1cib/data/Catalog.SpecialOfferTypes?ref=b76197e183b782dc11eb60c82e154a50' | '5'        | 'True'      | '01.01.0001 00:00:00' | '01.01.0001 00:00:00' | 'True'    | 'True'              | 'Enum.SpecialOfferTypes.ForDocument' | 'Enum.OffersDocumentTypes.PurchasesAndSales' | 'DocumentDiscount' | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.SpecialOffers?ref=b76197e183b782dc11eb60c82e154a51' | 'False'        | ''       | 'False'    | '1'    | 'ValueStorage' | 'e1cib/data/Catalog.SpecialOfferTypes?ref=b76197e183b782dc11eb60c82e154a50' | '5'        | 'True'     | '01.01.0001 00:00:00' | '01.01.0001 00:00:00' | 'True'   | 'True'             | 'Enum.SpecialOfferTypes.ForDocument' | 'Enum.OffersDocumentTypes.PurchasesAndSales' | 'DocumentDiscount' | ''                 | ''               | ''               |
+
+Scenario: Create Document discount (for row)
+
+
+	And I check or create catalog "SpecialOfferTypes" objects:
+		| 'Ref'                                                                       | 'DeletionMark' | 'Code' | 'Settings'     | 'ExternalDataProc' | 'TermsOfDiscountCalculation' | 'GroupTypes' | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.SpecialOfferTypes?ref=b76197e183b782dc11eb60c82e154a50' | 'False'        | '1'    | 'ValueStorage' | ''                 | 'False'                      | 'False'      | 'DocumentDiscount' | ''                 | ''               | ''               |
+
+
+	And I check or create catalog "SpecialOffers" objects:
+		| 'Ref'                                                                   | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Code' | 'Settings'     | 'SpecialOfferType'                                                          | 'Priority' | 'Manually' | 'StartOf'             | 'EndOf'               | 'Launch' | 'ManualInputValue' | 'Type'                          | 'DocumentType'                               | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.SpecialOffers?ref=b76197e183b782dc11eb60c82e154a51' | 'False'        | ''       | 'False'    | '1'    | 'ValueStorage' | 'e1cib/data/Catalog.SpecialOfferTypes?ref=b76197e183b782dc11eb60c82e154a50' | '5'        | 'True'     | '01.01.0001 00:00:00' | '01.01.0001 00:00:00' | 'True'   | 'True'             | 'Enum.SpecialOfferTypes.ForRow' | 'Enum.OffersDocumentTypes.PurchasesAndSales' | 'DocumentDiscount' | ''                 | ''               | ''               |
+
 
 Scenario: Create catalog CancelReturnReasons objects
 

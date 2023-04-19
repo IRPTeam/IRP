@@ -4,26 +4,7 @@ Function GetTaxRatesForItemKey(Parameters) Export
 	Return ServerReuse.GetTaxRatesForItemKey(Parameters.Date, Parameters.Company, Parameters.Tax, Parameters.ItemKey);
 EndFunction
 
-Function _GetTaxRatesForItemKey(Date, Company, Tax, ItemKey) Export
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	TaxSettingsSliceLast.TaxRate
-	|FROM
-	|	InformationRegister.TaxSettings.SliceLast(&Date, Company = &Company
-	|	AND Tax = &Tax
-	|	AND (NOT ItemKey.Ref IS NULL
-	|	OR NOT Item.Ref IS NULL
-	|	OR NOT ItemType.Ref IS NULL)) AS TaxSettingsSliceLast";
-	Query.SetParameter("Date"    , Date);
-	Query.SetParameter("Company" , Company);
-	Query.SetParameter("Tax"     , Tax);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	If Not QuerySelection.Next() Then
-		Return New Array();
-	EndIf;
-	
+Function _GetTaxRatesForItemKey(Date, Company, Tax, ItemKey) Export	
 	Query = New Query();
 	Query.Text =
 	"SELECT

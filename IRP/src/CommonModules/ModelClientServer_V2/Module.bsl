@@ -1965,11 +1965,7 @@ Function ChangeTaxRateExecute(Options) Export
 			Result.Insert(ItemOfTaxInfo.Name, Undefined);
 			Continue;
 		EndIf;
-		
-		If Result.Property(ItemOfTaxInfo.Name) And ValueIsFilled(Result[ItemOfTaxInfo.Name]) Then
-			Continue;
-		EndIf;
-		
+				
 		// Tax rate from consignor batch
 		If ValueIsFilled(Options.InventoryOrigin) 
 			And Options.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then
@@ -2010,6 +2006,7 @@ Function ChangeTaxRateExecute(Options) Export
 			EndIf;
 			ArrayOfTaxRates = TaxesServer.GetTaxRatesForItemKey(Parameters);
 		EndIf;
+		
 		If ArrayOfTaxRates.Count() Then
 			Result.Insert(ItemOfTaxInfo.Name, ArrayOfTaxRates[0].TaxRate);
 		EndIf;

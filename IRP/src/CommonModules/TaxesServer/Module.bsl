@@ -763,7 +763,11 @@ Procedure CreateFormControls_ItemList(Object, Form, CustomParameters = Undefined
 	CreateFormControls(Object, Form, TaxesParameters);
 EndProcedure
 
-Procedure CreateFormControls_PaymentList(Object, Form, CustomParameters) Export
+Procedure CreateFormControls_PaymentList(Object, Form, CustomParameters = Undefined) Export
+	If CustomParameters = Undefined Then
+		CustomParameters = New Structure();
+	EndIf;
+	
 	TaxesParameters = GetCreateFormControlsParameters(Object, CustomParameters);
 	TaxesParameters.PathToTable   = "Object.PaymentList";
 	TaxesParameters.ItemParent    = Form.Items.PaymentList;

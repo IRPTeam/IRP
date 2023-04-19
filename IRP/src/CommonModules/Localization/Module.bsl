@@ -985,6 +985,7 @@ Function Strings(Lang) Export
 
 #Region ChoiceListValues
 	Strings.Insert("CLV_1", NStr("en = 'All'", Lang));
+	Strings.Insert("CLV_2", NStr("en = 'Transaction type'", Lang));
 #EndRegion
 
 #Region SalesOrderStatusReport

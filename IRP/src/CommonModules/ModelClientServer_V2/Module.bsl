@@ -1993,7 +1993,16 @@ Function ChangeTaxRateExecute(Options) Export
 			Parameters.Insert("Agreement" , Options.Agreement);
 			ArrayOfTaxRates = TaxesServer.GetTaxRatesForAgreement(Parameters);
 		EndIf;
-
+		
+		If ValueIsFilled(Options.TransactionType) And Not ArrayOfTaxRates.Count() Then
+			Parameters = New Structure();
+			Parameters.Insert("Date"      , Options.Date);
+			Parameters.Insert("Company"   , Options.Company);
+			Parameters.Insert("Tax"       , ItemOfTaxInfo.Tax);
+			Parameters.Insert("TransactionType" , Options.TransactionType);
+			ArrayOfTaxRates = TaxesServer.GetTaxRatesForTransactionType(Parameters);			
+		EndIf;
+		
 		If Not ArrayOfTaxRates.Count() Then
 			Parameters = New Structure();
 			Parameters.Insert("Date"    , Options.Date);

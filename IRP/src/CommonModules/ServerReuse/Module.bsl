@@ -9,6 +9,10 @@ Function GetTaxRatesForAgreement(Date, Company, Tax, Agreement) Export
 	Return TaxesServer._GetTaxRatesForAgreement(Date, Company, Tax, Agreement);
 EndFunction
 
+Function GetTaxRatesForTransactionType(Date, Company, Tax, TransactionType) Export
+	Return TaxesServer._GetTaxRatesForTransactionType(Date, Company, Tax, TransactionType);
+EndFunction
+
 Function GetTaxRatesForCompany(Date, Company, Tax) Export
 	Return TaxesServer._GetTaxRatesForCompany(Date, Company, Tax);
 EndFunction

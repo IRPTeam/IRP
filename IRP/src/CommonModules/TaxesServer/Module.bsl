@@ -6,6 +6,25 @@ EndFunction
 
 Function _GetTaxRatesForItemKey(Date, Company, Tax, ItemKey) Export
 	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	TaxSettingsSliceLast.TaxRate
+	|FROM
+	|	InformationRegister.TaxSettings.SliceLast(&Date, Company = &Company
+	|	AND Tax = &Tax
+	|	AND (NOT ItemKey.Ref IS NULL
+	|	OR NOT Item.Ref IS NULL
+	|	OR NOT ItemType.Ref IS NULL)) AS TaxSettingsSliceLast";
+	Query.SetParameter("Date"    , Date);
+	Query.SetParameter("Company" , Company);
+	Query.SetParameter("Tax"     , Tax);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If Not QuerySelection.Next() Then
+		Return New Array();
+	EndIf;
+	
+	Query = New Query();
 	Query.Text =
 	"SELECT
 	|	tmp.ItemKey AS ItemKey,
@@ -308,6 +327,46 @@ Function _GetTaxRatesForAgreement(Date, Company, Tax, Agreement) Export
 		Result.Insert("Agreement" , QuerySelection.Agreement);
 		Result.Insert("TaxRate"   , QuerySelection.TaxRate);
 		Result.Insert("Rate"      , QuerySelection.Rate);
+		ArrayOfTaxes.Add(Result);
+	EndDo;
+	Return ArrayOfTaxes;
+EndFunction
+
+Function GetTaxRatesForTransactionType(Parameters) Export
+	Return ServerReuse.GetTaxRatesForTransactionType(Parameters.Date, Parameters.Company, Parameters.Tax, Parameters.TransactionType);
+EndFunction
+
+Function _GetTaxRatesForTransactionType(Date, Company, Tax, TransactionType) Export
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	TaxRatesSliceLast.Company,
+	|	TaxRatesSliceLast.Tax,
+	|	TaxRatesSliceLast.TransactionType,
+	|	TaxRatesSliceLast.TaxRate,
+	|	TaxRatesSliceLast.TaxRate.Rate AS Rate
+	|FROM
+	|	InformationRegister.TaxSettings.SliceLast(&Date, Company = &Company
+	|	AND Tax = &Tax
+	|	AND TransactionType = &TransactionType) AS TaxRatesSliceLast";
+
+	Query.SetParameter("Date"      , Date);
+	Query.SetParameter("Company"   , Company);
+	Query.SetParameter("TransactionType" , TransactionType);
+	Query.SetParameter("Tax"       , Tax);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+
+	ArrayOfTaxes = New Array();
+
+	While QuerySelection.Next() Do
+		Result = New Structure();
+		Result.Insert("Company"         , QuerySelection.Company);
+		Result.Insert("Tax"             , QuerySelection.Tax);
+		Result.Insert("TransactionType" , QuerySelection.TransactionType);
+		Result.Insert("TaxRate"         , QuerySelection.TaxRate);
+		Result.Insert("Rate"            , QuerySelection.Rate);
 		ArrayOfTaxes.Add(Result);
 	EndDo;
 	Return ArrayOfTaxes;

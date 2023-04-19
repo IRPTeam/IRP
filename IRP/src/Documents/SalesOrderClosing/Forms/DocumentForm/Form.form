@@ -2459,6 +2459,14 @@
    <key>en</key>
    <value>Refresh</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Обновить</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Yenile</value>
+  </title>
   <id>11</id>
   <use>
    <common>true</common>

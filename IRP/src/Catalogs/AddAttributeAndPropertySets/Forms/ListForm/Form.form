@@ -562,6 +562,10 @@ FROM
    <key>en</key>
    <value>Fill default descriptions</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Заполнить наименования по умолчанию</value>
+  </title>
   <id>1</id>
   <use>
    <common>true</common>

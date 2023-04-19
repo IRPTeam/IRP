@@ -1107,6 +1107,14 @@ GROUP BY
        <key>en</key>
        <value>Closing order</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Закрытие заказа</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Sipariş kapatma</value>
+      </content>
      </localValue>
     </title>
    </fields>

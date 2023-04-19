@@ -550,6 +550,10 @@
     <key>en</key>
     <value>Purchase order key</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ заказа поставщика</value>
+   </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
    </type>
@@ -651,6 +655,14 @@
   <synonym>
    <key>en</key>
    <value>Close order</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Закрыть заказ</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sipariş kapat</value>
   </synonym>
   <group>FormCommandBarCreateBasedOn</group>
   <commandParameterType>

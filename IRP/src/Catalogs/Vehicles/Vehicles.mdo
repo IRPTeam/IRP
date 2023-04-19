@@ -12,6 +12,10 @@
   <key>en</key>
   <value>Vehicles</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Транспортные средства</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.Vehicles.StandardAttribute.Code</inputByString>
  <inputByString>Catalog.Vehicles.StandardAttribute.Description</inputByString>
@@ -47,9 +51,17 @@
   <key>en</key>
   <value>Vehicle</value>
  </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Транспорт</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Vehicles</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Транспортные средства</value>
  </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -68,6 +80,10 @@
    <key>en</key>
    <value>ID (plate)</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>ID (номер машины)</value>
+  </synonym>
   <type>
    <types>String</types>
    <stringQualifiers>
@@ -85,6 +101,14 @@
   <synonym>
    <key>en</key>
    <value>Type</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tip</value>
   </synonym>
   <type>
    <types>CatalogRef.VehicleTypes</types>
@@ -105,11 +129,27 @@
    <key>en</key>
    <value>Additional attributes</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
   <attributes uuid="c0c632a1-4758-4056-beb8-480bef6e3ce5">
    <name>Property</name>
    <synonym>
     <key>en</key>
     <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Свойство</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -124,6 +164,14 @@
    <synonym>
     <key>en</key>
     <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -143,6 +191,14 @@
     <key>en</key>
     <value>Search literal</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Текстовая строка</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Arama metni</value>
+   </synonym>
    <type>
     <types>String</types>
     <stringQualifiers>
@@ -160,6 +216,14 @@
   <synonym>
    <key>en</key>
    <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

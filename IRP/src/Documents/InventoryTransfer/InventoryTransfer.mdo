@@ -262,6 +262,10 @@
    <key>en</key>
    <value>Ship from</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Грузоотправитель</value>
+  </synonym>
   <type>
    <types>CatalogRef.Partners</types>
   </type>
@@ -276,6 +280,10 @@
   <synonym>
    <key>en</key>
    <value>Ship from address</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Адрес грузоотправителя</value>
   </synonym>
   <type>
    <types>CatalogRef.Addresses</types>
@@ -292,6 +300,10 @@
    <key>en</key>
    <value>Ship to</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Грузополучатель</value>
+  </synonym>
   <type>
    <types>CatalogRef.Partners</types>
   </type>
@@ -306,6 +318,10 @@
   <synonym>
    <key>en</key>
    <value>Ship to address</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Адрес получателя</value>
   </synonym>
   <type>
    <types>CatalogRef.Addresses</types>
@@ -322,6 +338,10 @@
    <key>en</key>
    <value>Carrier</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Перевозчик</value>
+  </synonym>
   <type>
    <types>CatalogRef.Partners</types>
   </type>
@@ -337,6 +357,14 @@
    <key>en</key>
    <value>Driver</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Водитель</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sürücü</value>
+  </synonym>
   <type>
    <types>CatalogRef.Partners</types>
   </type>
@@ -351,6 +379,10 @@
   <synonym>
    <key>en</key>
    <value>Vehicle</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Транспорт</value>
   </synonym>
   <type>
    <types>CatalogRef.Vehicles</types>

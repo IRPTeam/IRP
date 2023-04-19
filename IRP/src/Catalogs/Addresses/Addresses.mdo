@@ -12,6 +12,10 @@
   <key>en</key>
   <value>Addresses</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Адреса</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.Addresses.StandardAttribute.Code</inputByString>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -64,11 +68,27 @@
    <key>en</key>
    <value>Additional attributes</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
   <attributes uuid="addeee71-79c1-469b-91c4-df681458c086">
    <name>Property</name>
    <synonym>
     <key>en</key>
     <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Свойство</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -83,6 +103,14 @@
    <synonym>
     <key>en</key>
     <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -102,6 +130,14 @@
     <key>en</key>
     <value>Search literal</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Текстовая строка</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Arama metni</value>
+   </synonym>
    <type>
     <types>String</types>
     <stringQualifiers>
@@ -120,6 +156,14 @@
    <key>en</key>
    <value>Item form</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Öğe formu</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
@@ -129,6 +173,14 @@
    <key>en</key>
    <value>List form</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
@@ -137,6 +189,14 @@
   <synonym>
    <key>en</key>
    <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

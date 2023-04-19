@@ -5,6 +5,14 @@
   <key>en</key>
   <value>Contact info</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Контактная информация</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>İletişim bilgi</value>
+ </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <help>
   <pages>

@@ -10,6 +10,10 @@
   <key>en</key>
   <value>Address types</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Типы адресов</value>
+ </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="a960cfb0-07be-4eba-9f46-1684987974b1">
@@ -18,12 +22,24 @@
    <key>en</key>
    <value>Legal</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Локальная валюта</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Yerel</value>
+  </synonym>
  </enumValues>
  <enumValues uuid="f48c81e6-5d52-4111-a35d-ec457f98e943">
   <name>Phisical</name>
   <synonym>
    <key>en</key>
    <value>Phisical</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Физический</value>
   </synonym>
  </enumValues>
  <enumValues uuid="a235c31b-ad9d-4431-b583-95f2933b5e06">
@@ -32,12 +48,24 @@
    <key>en</key>
    <value>Shipment</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Транспортировка</value>
+  </synonym>
  </enumValues>
  <enumValues uuid="0270931a-aa87-484f-b087-5b4c3b906721">
   <name>Other</name>
   <synonym>
    <key>en</key>
    <value>Other</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительно</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Diğer</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

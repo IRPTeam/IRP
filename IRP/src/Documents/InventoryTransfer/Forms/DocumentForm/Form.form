@@ -4020,6 +4020,10 @@
       <key>en</key>
       <value>Group top left</value>
      </title>
+     <title>
+      <key>ru</key>
+      <value>Группа верх лево</value>
+     </title>
      <extendedTooltip>
       <name>GroupTopLeftExtendedTooltip</name>
       <id>430</id>
@@ -4156,6 +4160,10 @@
      <title>
       <key>en</key>
       <value>Group to middle</value>
+     </title>
+     <title>
+      <key>ru</key>
+      <value>Группа центр</value>
      </title>
      <extendedTooltip>
       <name>GroupTopMiddleExtendedTooltip</name>
@@ -4294,6 +4302,10 @@
       <key>en</key>
       <value>Group top right</value>
      </title>
+     <title>
+      <key>ru</key>
+      <value>Группа верх право</value>
+     </title>
      <extendedTooltip>
       <name>GroupTopRightExtendedTooltip</name>
       <id>432</id>
@@ -4327,6 +4339,14 @@
     <title>
      <key>en</key>
      <value>Top</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Верх</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Üst</value>
     </title>
     <extendedTooltip>
      <name>GroupTopExtendedTooltip</name>
@@ -4571,6 +4591,10 @@
        <key>en</key>
        <value>Group shipment left</value>
       </title>
+      <title>
+       <key>ru</key>
+       <value>Группа доставка лево</value>
+      </title>
       <extendedTooltip>
        <name>GroupShipmentLeftExtendedTooltip</name>
        <id>436</id>
@@ -4605,6 +4629,10 @@
        <title>
         <key>en</key>
         <value>Ship from address</value>
+       </title>
+       <title>
+        <key>ru</key>
+        <value>Адрес грузоотправителя</value>
        </title>
        <visible>true</visible>
        <enabled>true</enabled>
@@ -4659,6 +4687,10 @@
        <title>
         <key>en</key>
         <value>Ship to address</value>
+       </title>
+       <title>
+        <key>ru</key>
+        <value>Адрес получателя</value>
        </title>
        <visible>true</visible>
        <enabled>true</enabled>
@@ -4766,6 +4798,10 @@
        <key>en</key>
        <value>Group shipment right</value>
       </title>
+      <title>
+       <key>ru</key>
+       <value>Группа доставка право</value>
+      </title>
       <extendedTooltip>
        <name>GroupShipmentRightExtendedTooltip</name>
        <id>438</id>
@@ -4800,6 +4836,10 @@
       <key>en</key>
       <value>Group shipment top</value>
      </title>
+     <title>
+      <key>ru</key>
+      <value>Группа поставка верх</value>
+     </title>
      <extendedTooltip>
       <name>GroupShipmentTopExtendedTooltip</name>
       <id>440</id>
@@ -4833,6 +4873,10 @@
     <title>
      <key>en</key>
      <value>Shipment</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Транспортировка</value>
     </title>
     <horizontalStretch>true</horizontalStretch>
     <extendedTooltip>

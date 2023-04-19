@@ -135,6 +135,14 @@
    <key>en</key>
    <value>Address type</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид адреса</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Вид адреса</value>
+  </synonym>
   <type>
    <types>EnumRef.AddressTypes</types>
   </type>

@@ -718,6 +718,14 @@
    <key>en</key>
    <value>Close order</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Закрыть заказ</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sipariş kapat</value>
+  </synonym>
   <group>FormCommandBarCreateBasedOn</group>
   <commandParameterType>
    <types>DocumentRef.SalesOrder</types>

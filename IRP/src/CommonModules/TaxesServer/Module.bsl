@@ -749,7 +749,11 @@ Procedure CreateFormControls_ItemList(Object, Form, CustomParameters = Undefined
 	If CustomParameters.Property("ColumnOffser") Then
 		TaxesParameters.ColumnOffset = CustomParameters.ColumnOffset;
 	Else
-		TaxesParameters.ColumnOffset = Form.Items.ItemListOffersAmount;
+		If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, "ItemListOffersAmount") Then
+			TaxesParameters.ColumnOffset = Form.Items.ItemListOffersAmount;
+		Else
+			TaxesParameters.ColumnOffset = Form.Items.ItemListNetAmount;
+		EndIf;
 	EndIf;
 	
 	DefaultParameters = New Structure();

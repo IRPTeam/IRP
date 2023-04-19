@@ -1879,7 +1879,7 @@ EndFunction
 
 // TaxesCache - XML string from form attribute
 Function RequireCallCreateTaxesFormControlsOptions() Export
-	Return GetChainLinkOptions("Ref, Date, Company, ArrayOfTaxInfo, FormTaxColumnsExists");
+	Return GetChainLinkOptions("Ref, Date, Company, TransactionType, ArrayOfTaxInfo, FormTaxColumnsExists");
 EndFunction
 
 // return true if need create form controls for taxes
@@ -1895,14 +1895,10 @@ Function RequireCallCreateTaxesFormControlsExecute(Options) Export
 	For Each TaxInfo In Options.ArrayOfTaxInfo Do
 		TaxesInCache.Add(TaxInfo.Tax);
 	EndDo;
-	RequiredTaxes = New Array();
+	
 	DocumentName = Options.Ref.Metadata().Name;
-	AllTaxes = TaxesServer.GetTaxesByCompany(Options.Date, Options.Company);
-	For Each ItemOfAllTaxes In AllTaxes Do
-		If ItemOfAllTaxes.UseDocuments.FindRows(New Structure("DocumentName", DocumentName)).Count() Then
-			RequiredTaxes.Add(ItemOfAllTaxes.Tax);
-		EndIf;
-	EndDo;
+	RequiredTaxes = TaxesServer.GetRequiredTaxesForDocument(Options.Date, Options.Company, DocumentName, Options.TransactionType);
+	
 	For Each Tax In RequiredTaxes Do
 		If TaxesInCache.Find(Tax) = Undefined Then
 			Return True; // not all required taxes in cache
@@ -1917,7 +1913,7 @@ Function RequireCallCreateTaxesFormControlsExecute(Options) Export
 EndFunction
 
 Function ChangeTaxRateOptions() Export
-	Return GetChainLinkOptions("Date, Company, Agreement, ItemKey, InventoryOrigin, ConsignorBatches, TaxRates, ArrayOfTaxInfo, Ref, IsBasedOn, TaxList");
+	Return GetChainLinkOptions("Date, Company, TransactionType, Agreement, ItemKey, InventoryOrigin, ConsignorBatches, TaxRates, ArrayOfTaxInfo, Ref, IsBasedOn, TaxList");
 EndFunction
 
 Function ChangeTaxRateExecute(Options) Export
@@ -1955,13 +1951,7 @@ Function ChangeTaxRateExecute(Options) Export
 		
 	// taxes when have in company by document date
 	DocumentName = Options.Ref.Metadata().Name;
-	AllTaxes = TaxesServer.GetTaxesByCompany(Options.Date, Options.Company);
-	RequiredTaxes = New Array();
-	For Each ItemOfAllTaxes In AllTaxes Do
-		If ItemOfAllTaxes.UseDocuments.FindRows(New Structure("DocumentName", DocumentName)).Count() Then
-			RequiredTaxes.Add(ItemOfAllTaxes.Tax);
-		EndIf;
-	EndDo;
+	RequiredTaxes = TaxesServer.GetRequiredTaxesForDocument(Options.Date, Options.Company, DocumentName, Options.TransactionType);
 	
 	For Each ItemOfTaxInfo In Options.ArrayOfTaxInfo Do
 		If ItemOfTaxInfo.Type <> PredefinedValue("Enum.TaxType.Rate") Then
@@ -1973,6 +1963,10 @@ Function ChangeTaxRateExecute(Options) Export
 		// If tax is not taken into account by company, then clear tax rate TaxRate = Undefined
 		If RequiredTaxes.Find(ItemOfTaxInfo.Tax) = Undefined Then
 			Result.Insert(ItemOfTaxInfo.Name, Undefined);
+			Continue;
+		EndIf;
+		
+		If Result.Property(ItemOfTaxInfo.Name) And ValueIsFilled(Result[ItemOfTaxInfo.Name]) Then
 			Continue;
 		EndIf;
 		

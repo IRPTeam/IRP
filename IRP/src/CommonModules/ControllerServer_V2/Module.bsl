@@ -10,7 +10,11 @@ Function GetServerData(Object, ArrayOfTableNames, FormTaxColumnsExists, TaxesCac
 			DeserializedCache = CommonFunctionsServer.DeserializeXMLUseXDTO(TaxesCache);
 			ServerData.ArrayOfTaxInfo = DeserializedCache.ArrayOfTaxInfo;
 		Else
-			ServerData.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(Object, Object.Date, Object.Company);
+			TransactionType = Undefined;
+			If CommonFunctionsClientServer.ObjectHasProperty(Object, "TransactionType") Then
+				TransactionType = Object.TransactionType;
+			EndIf;
+			ServerData.ArrayOfTaxInfo = TaxesServer.GetArrayOfTaxInfo(Object, Object.Date, Object.Company, TransactionType);
 		EndIf;
 	EndIf;
 	

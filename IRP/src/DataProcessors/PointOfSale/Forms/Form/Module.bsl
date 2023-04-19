@@ -1223,37 +1223,17 @@ EndProcedure
 #EndRegion
 
 #Region Taxes
+
 &AtClient
 Procedure TaxValueOnChange(Item) Export
 	Return;
 EndProcedure
 
 &AtServer
-Procedure PutToTaxTable_(ItemName, Key, Value) Export
-	Return;
-EndProcedure
-
-&AtServer
 Procedure Taxes_CreateFormControls() Export
-	ColumnFieldParameters = New Structure();
-	ColumnFieldParameters.Insert("Visible", False);
-
-	TaxesParameters = TaxesServer.GetCreateFormControlsParameters();
-	TaxesParameters.Date = Object.Date;
-	TaxesParameters.Company = Object.Company;
-	TaxesParameters.PathToTable = "Object.ItemList";
-	TaxesParameters.ItemParent = ThisObject.Items.ItemList;
-	TaxesParameters.ColumnOffset = ThisObject.Items.ItemListOffersAmount;
-	TaxesParameters.ItemListName = "ItemList";
-	TaxesParameters.TaxListName = "TaxList";
-	TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";
-	TaxesParameters.ColumnFieldParameters = ColumnFieldParameters;
-	TaxesServer.CreateFormControls(Object, ThisObject, TaxesParameters);
-EndProcedure
-
-&AtServer
-Procedure Taxes_CreateTaxTree() Export
-	Return;
+	FieldProperty = New Structure("Visible", False);
+	CustomTaxParameters = New Structure("FieldProperty, InvisibleColumnsIfNotTaxes", FieldProperty, "");
+	TaxesServer.CreateFormControls_ItemList(Object, ThisObject, CustomTaxParameters);
 EndProcedure
 
 #EndRegion

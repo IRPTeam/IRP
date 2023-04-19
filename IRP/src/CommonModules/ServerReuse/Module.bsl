@@ -13,8 +13,8 @@ Function GetTaxRatesForCompany(Date, Company, Tax) Export
 	Return TaxesServer._GetTaxRatesForCompany(Date, Company, Tax);
 EndFunction
 
-Function GetTaxesByCompany(Date, Company) Export
-	Return TaxesServer._GetTaxesByCompany(Date, Company);
+Function GetTaxesInfo(Date, Company, DocumentName, TransactionType) Export
+	Return TaxesServer._GetTaxesInfo(Date, Company, DocumentName, TransactionType);
 EndFunction
 
 Function GetTaxRatesByTax(Tax) Export

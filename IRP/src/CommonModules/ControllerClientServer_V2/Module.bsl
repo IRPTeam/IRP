@@ -704,6 +704,7 @@ Procedure StepRequireCallCreateTaxesFormControls(Parameters, Chain) Export
 	Options.Ref            = Parameters.Object.Ref;
 	Options.Date           = GetDate(Parameters);
 	Options.Company        = GetCompany(Parameters);
+	Options.TransactionType = GetTransactionType(Parameters);
 	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
 	Options.FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
 	Options.StepName = "StepRequireCallCreateTaxesFormControls";
@@ -1412,47 +1413,116 @@ EndProcedure
 
 // TransactionType.Get
 Function GetTransactionType(Parameters)
-	Return GetPropertyObject(Parameters, BindTransactionType(Parameters).DataPath);
+	Binding = BindTransactionType(Parameters);
+	If Not ValueIsFilled(Binding.DataPath) Then
+		Return Undefined; // default value
+	EndIf;
+	Return GetPropertyObject(Parameters, Binding.DataPath);
 EndFunction
 
 // TransactionType.Bind
 Function BindTransactionType(Parameters)
-	DataPath = "TransactionType";
+	DataPath = New Map();
+	DataPath.Insert("BankPayment",          "TransactionType");
+	DataPath.Insert("BankReceipt",          "TransactionType");
+	DataPath.Insert("CashExpense",          "TransactionType");
+	DataPath.Insert("CashPayment",          "TransactionType");
+	DataPath.Insert("CashReceipt",          "TransactionType");
+	DataPath.Insert("CashRevenue",          "TransactionType");
+	DataPath.Insert("GoodsReceipt",         "TransactionType");
+	DataPath.Insert("IncomingPaymentOrder", "TransactionType");
+	DataPath.Insert("OutgoingPaymentOrder", "TransactionType");
+	DataPath.Insert("PurchaseInvoice",      "TransactionType");
+	DataPath.Insert("PurchaseOrder",        "TransactionType");
+	DataPath.Insert("PurchaseOrderClosing", "TransactionType");
+	DataPath.Insert("PurchaseReturn",       "TransactionType");
+	DataPath.Insert("PurchaseReturnOrder",  "TransactionType");
+	DataPath.Insert("SalesInvoice",         "TransactionType");
+	DataPath.Insert("SalesOrder",           "TransactionType");
+	DataPath.Insert("SalesOrderClosing",    "TransactionType");
+	DataPath.Insert("SalesReturn",          "TransactionType");
+	DataPath.Insert("SalesReturnOrder",     "TransactionType");
+	DataPath.Insert("ShipmentConfirmation", "TransactionType");
+		
 	Binding = New Structure();
 	Binding.Insert("BankPayment",
 		"StepChangeTransitAccountByAccount,
-		|StepClearByTransactionTypeBankPayment");
-
+		|StepClearByTransactionTypeBankPayment,
+		|StepRequireCallCreateTaxesFormControls, 
+		|StepChangeTaxRate_AgreementInList");
+		
 	Binding.Insert("BankReceipt",
 		"StepChangeTransitAccountByAccount,
-		|StepClearByTransactionTypeBankReceipt");
-	
+		|StepClearByTransactionTypeBankReceipt,
+		|StepRequireCallCreateTaxesFormControls, 
+		|StepChangeTaxRate_AgreementInList");
+		
 	Binding.Insert("CashPayment", 
-		"StepClearByTransactionTypeCashPayment");
+		"StepClearByTransactionTypeCashPayment,
+		|StepRequireCallCreateTaxesFormControls, 
+		|StepChangeTaxRate_AgreementInList");
 		
 	Binding.Insert("CashReceipt", 
 		"StepClearByTransactionTypeCashReceipt,
-		|StepChangeCashAccountByTransactionType");
-	
+		|StepChangeCashAccountByTransactionType,
+		|StepRequireCallCreateTaxesFormControls, 
+		|StepChangeTaxRate_AgreementInList");
+		
 	Binding.Insert("CashExpense", 
-		"StepClearByTransactionTypeCashExpenseRevenue");
+		"StepClearByTransactionTypeCashExpenseRevenue,
+		|StepRequireCallCreateTaxesFormControls, 
+		|StepChangeTaxRate_WithoutAgreement");
 		
 	Binding.Insert("CashRevenue", 
-		"StepClearByTransactionTypeCashExpenseRevenue");
-	
+		"StepClearByTransactionTypeCashExpenseRevenue,
+		|StepRequireCallCreateTaxesFormControls, 
+		|StepChangeTaxRate_WithoutAgreement");
+		
 	Binding.Insert("OutgoingPaymentOrder",
 		"StepClearByTransactionTypeOutgoingPaymentOrder");
 	
 	Binding.Insert("ShipmentConfirmation"  , "StepChangePartnerByTransactionType");
 	Binding.Insert("GoodsReceipt"          , "StepChangePartnerByTransactionType");
-	Binding.Insert("PurchaseInvoice"       , "StepChangePartnerByTransactionType");
-	Binding.Insert("PurchaseOrder"         , "StepChangePartnerByTransactionType");
-	Binding.Insert("PurchaseReturn"        , "StepChangePartnerByTransactionType");
-	Binding.Insert("PurchaseReturnOrder"   , "StepChangePartnerByTransactionType");
-	Binding.Insert("SalesInvoice"          , "StepChangePartnerByTransactionType");
-	Binding.Insert("SalesOrder"            , "StepChangePartnerByTransactionType");
-	Binding.Insert("SalesReturn"           , "StepChangePartnerByTransactionType");
-	Binding.Insert("SalesReturnOrder"      , "StepChangePartnerByTransactionType");
+	
+	Binding.Insert("PurchaseInvoice", 
+		"StepChangePartnerByTransactionType,
+		|StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_AgreementInHeader");
+	
+	Binding.Insert("PurchaseOrder", 
+		"StepChangePartnerByTransactionType,
+		|StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_AgreementInHeader");
+	
+	Binding.Insert("PurchaseReturn", 
+		"StepChangePartnerByTransactionType,
+		|StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_AgreementInHeader");
+	
+	Binding.Insert("PurchaseReturnOrder", 
+		"StepChangePartnerByTransactionType,
+		|StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_AgreementInHeader");
+	
+	Binding.Insert("SalesInvoice", 
+		"StepChangePartnerByTransactionType,
+		|StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_AgreementInHeader");
+	
+	Binding.Insert("SalesOrder", 
+		"StepChangePartnerByTransactionType,
+		|StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_AgreementInHeader");
+	
+	Binding.Insert("SalesReturn", 
+		"StepChangePartnerByTransactionType,
+		|StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_AgreementInHeader");
+	
+	Binding.Insert("SalesReturnOrder", 
+		"StepChangePartnerByTransactionType,
+		|StepRequireCallCreateTaxesFormControls,
+		|StepChangeTaxRate_AgreementInHeader");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindTransactionType");
 EndFunction
@@ -4754,8 +4824,7 @@ Function GetTaxRate(Parameters, Row)
 		If ReadOnlyFromCache And ValueIsFilled(TaxRate.Value) Then
 			TaxRates.Insert(TaxRate.Key, TaxRate.Value);
 		Else
-			TaxRates.Insert(TaxRate.Key, 
-				GetPropertyObject(Parameters, Parameters.TableName + "." + TaxRate.Key, Row.Key, ReadOnlyFromCache));
+			TaxRates.Insert(TaxRate.Key, GetPropertyObject(Parameters, Parameters.TableName + "." + TaxRate.Key, Row.Key, ReadOnlyFromCache));
 		EndIf;
 	EndDo;
 	Return TaxRates;
@@ -4789,17 +4858,11 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 	EndIf;
 	Chain.ChangeTaxRate.Setter = "Set" + Parameters.TableName + "TaxRate";
 	
-	Options_Date      = GetDate(Parameters);
-	Options_Company   = GetCompany(Parameters);
-	
-	TaxRates = Undefined;
-	If Not (Parameters.FormTaxColumnsExists And Parameters.ArrayOfTaxInfo.Count()) Then
-		Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(Parameters.Object, Options_Date, Options_Company);
-		TaxRates = New Structure();
-		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-			TaxRates.Insert(ItemOfTaxInfo.Name, Undefined);
-		EndDo;
-	EndIf;
+	Options_Date            = GetDate(Parameters);
+	Options_Company         = GetCompany(Parameters);
+	Options_TransactionType = GetTransactionType(Parameters);
+		
+	Parameters.ArrayOfTaxInfo = TaxesServer.GetArrayOfTaxInfo(Parameters.Object, Options_Date, Options_Company, Options_TransactionType);
 	
 	TableRows =  GetRows(Parameters, Parameters.TableName);
 	If UseInventoryOrigin Then
@@ -4837,22 +4900,25 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 			Options.ConsignorBatches = GetConsignorBatches(Parameters, Row.Key);
 		EndIf;
 		
-		Options.Date           = Options_Date;
-		Options.Company        = Options_Company;
-		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
-		Options.IsBasedOn      = Parameters.IsBasedOn;
-		Options.Ref            = Parameters.Object.Ref;
+		Options.Date            = Options_Date;
+		Options.Company         = Options_Company;
+		Options.TransactionType = Options_TransactionType;		
+		
+		Options.ArrayOfTaxInfo  = Parameters.ArrayOfTaxInfo;
+		Options.IsBasedOn       = Parameters.IsBasedOn;
+		Options.Ref             = Parameters.Object.Ref;
 		If Row.Property("ItemKey") Then
 			Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
 		EndIf;
 		
-		If TaxRates <> Undefined Then
-			For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-				SetProperty(Parameters, Parameters.Cache, Parameters.TableName + "." + ItemOfTaxInfo.Name, Row.Key, Undefined);
-			EndDo;
-			Row.Insert("TaxRates", TaxRates);
-		EndIf;
-		
+		// update Tax rates
+		For Each TaxInfoItem In Parameters.ArrayOfTaxInfo Do
+			If Not Row.TaxRates.Property(TaxInfoItem.Name) Then
+				Row.TaxRates.Insert(TaxInfoItem.Name);
+				SetProperty(Parameters, Parameters.Cache, Parameters.TableName + "." + TaxInfoItem.Name, Row.Key, Undefined);
+			EndIf;
+		EndDo;
+				
 		Options.TaxRates = GetTaxRate(Parameters, Row);
 		Options.TaxList  = Row.TaxList;
 		Options.Key = Row.Key;

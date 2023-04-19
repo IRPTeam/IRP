@@ -383,38 +383,78 @@ Function GetTaxRatesForConsignorBatches(Parameters) Export
 EndFunction
 
 // Taxes
-Function GetTaxesByCompany(Date, Company) Export
-	Return ServerReuse.GetTaxesByCompany(Date, Company);
+
+Function GetRequiredTaxesForDocument(Date, Company, DocumentName, TransactionType) Export
+	RequiredTaxes = New Array();
+	AllTaxes = GetTaxesInfo(Date, Company, DocumentName, TransactionType);
+	For Each Item In AllTaxes Do
+		RequiredTaxes.Add(Item.Tax);
+	EndDo;
+	Return RequiredTaxes;
 EndFunction
 
-Function _GetTaxesByCompany(Date, Company) Export
+Function GetTaxesInfo(Date, Company, DocumentName, TransactionType)
+	Return ServerReuse.GetTaxesInfo(Date, Company, DocumentName, TransactionType);
+EndFunction
+
+Function _GetTaxesInfo(Date, Company, DocumentName, TransactionType) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT
-	|	TaxesSliceLast.Tax,
-	|	TaxesSliceLast.Tax.Type AS Type,
-	|	TaxesSliceLast.Tax.UseDocuments.(
-	|		DocumentName) AS UseDocuments
+	|	TaxesSliceLast.Tax AS Tax,
+	|	TaxesSliceLast.Tax.Type AS Type
+	|INTO AllTaxes
 	|FROM
 	|	InformationRegister.Taxes.SliceLast(&Date, Company = &Company) AS TaxesSliceLast
-	|WHERE
-	|	TaxesSliceLast.Use
-	|ORDER BY
-	|	TaxesSliceLast.Priority";
-	Query.SetParameter("Date"    , Date);
-	Query.SetParameter("Company" , Company);
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	AllTaxes.Tax AS Tax,
+	|	AllTaxes.Type AS Type,
+	|	TaxesUseDocuments.DocumentName AS DocumentName
+	|FROM
+	|	AllTaxes AS AllTaxes
+	|		INNER JOIN Catalog.Taxes.UseDocuments AS TaxesUseDocuments
+	|		ON (AllTaxes.Tax = TaxesUseDocuments.Ref)
+	|		AND (TaxesUseDocuments.DocumentName = &DocumentName)
+	|GROUP BY
+	|	AllTaxes.Tax,
+	|	AllTaxes.Type,
+	|	TaxesUseDocuments.DocumentName";
+	
+	Query.SetParameter("Date"         , Date);
+	Query.SetParameter("Company"      , Company);	
+	Query.SetParameter("DocumentName" , DocumentName);
 	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	
 	ArrayOfResults = New Array();
 	While QuerySelection.Next() Do
-		TaxInfo = New Structure();
-		TaxInfo.Insert("Tax"          , QuerySelection.Tax);
-		TaxInfo.Insert("Type"         , QuerySelection.Type);
-		TaxInfo.Insert("UseDocuments" , QuerySelection.UseDocuments.Unload());
-		ArrayOfResults.Add(TaxInfo);
+		// for tax set silter by transaction type
+		
+		AvailableTax = False;	
+		TransactionTypes = QuerySelection.Tax.TransactionTypes.FindRows(New Structure("DocumentName", DocumentName));
+		If TransactionTypes.Count() And ValueIsFilled(TransactionType) Then
+			For Each Row In TransactionTypes Do
+				If Row.TransactionType = TransactionType Then
+					AvailableTax = True;
+					Break;
+				EndIf;
+			EndDo;
+		Else
+			AvailableTax = True;
+		EndIf;
+		
+		If AvailableTax Then
+			TaxInfo = New Structure();
+			TaxInfo.Insert("Tax"  , QuerySelection.Tax);
+			TaxInfo.Insert("Type" , QuerySelection.Type);
+			ArrayOfResults.Add(TaxInfo);
+		EndIf;
 	EndDo;
+	
 	Return ArrayOfResults;
 EndFunction
 
@@ -515,25 +555,16 @@ Function GetFromTaxTable(Form, Key, Tax)
 	Return Undefined;
 EndFunction
 
-// Template date for testing
-Function _GetArrayOfTaxInfo(Object, Date, Company) Export
-	
-	ArrayOfTaxes = New Array();
+Function GetArrayOfTaxInfo(Object, Date, Company, TransactionType) Export	
 	DocumentName = Object.Ref.Metadata().Name;
-	ArrayOfAllTaxes = GetTaxesByCompany(Date, Company);
-	For Each ItemOfAllTaxes In ArrayOfAllTaxes Do
-		If ItemOfAllTaxes.UseDocuments.FindRows(New Structure("DocumentName", DocumentName)).Count() Then
-			ArrayOfTaxes.Add(ItemOfAllTaxes);
-		EndIf;
-	EndDo;
-	
+	ArrayOfTaxes = GetTaxesInfo(Date, Company, DocumentName, TransactionType);
 	ArrayOfTaxInfo = New Array();
 	ArrayOfActualTax = New Array();
 	For Each ItemOfTaxes In ArrayOfTaxes Do
 		ColumnInfo = New Structure();
-		ColumnInfo.Insert("Name", "_" + StrReplace(String(New UUID()), "-", ""));
-		ColumnInfo.Insert("Tax", ItemOfTaxes.Tax);
-		ColumnInfo.Insert("Type", ItemOfTaxes.Type);
+		ColumnInfo.Insert("Name" , "_" + StrReplace(String(ItemOfTaxes.Tax.UUID()), "-", ""));
+		ColumnInfo.Insert("Tax"  , ItemOfTaxes.Tax);
+		ColumnInfo.Insert("Type" , ItemOfTaxes.Type);
 		ArrayOfTaxInfo.Add(ColumnInfo);
 		ArrayOfActualTax.Add(ItemOfTaxes.Tax);
 	EndDo;
@@ -551,7 +582,7 @@ Function _GetArrayOfTaxInfo(Object, Date, Company) Export
 	Return ArrayOfTaxInfo;
 EndFunction
 
-Procedure CreateFormControls(Object, Form, Parameters) Export
+Procedure CreateFormControls(Object, Form, Parameters)
 	If Not CommonFunctionsServer.FormHaveAttribute(Form, "TaxesCache") Then
 		ArrayOfNewAttribute = New Array();
 		ArrayOfNewAttribute.Add(New FormAttribute("TaxesCache", New TypeDescription("String")));
@@ -609,14 +640,7 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 	EndIf;
 	
 	// Create columns
-	ArrayOfTaxes = New Array();
-	DocumentName = Object.Ref.Metadata().Name;
-	ArrayOfAllTaxes = GetTaxesByCompany(Parameters.Date, Parameters.Company);
-	For Each ItemOfAllTaxes In ArrayOfAllTaxes Do
-		If ItemOfAllTaxes.UseDocuments.FindRows(New Structure("DocumentName", DocumentName)).Count() Then
-			ArrayOfTaxes.Add(ItemOfAllTaxes);
-		EndIf;
-	EndDo;
+	ArrayOfTaxes = GetTaxesInfo(Parameters.Date, Parameters.Company, Parameters.DocumentName, Parameters.TransactionType);
 	
 	If ValueIsFilled(Parameters.TotalAmountColumnName) And ArrayOfTaxes.Count() Then
 		Form.Items[Parameters.TotalAmountColumnName].ReadOnly = ArrayOfTaxes.Count() <> 1;
@@ -634,16 +658,15 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 	ArrayOfActualTax = New Array();
 	For Each ItemOfTaxes In ArrayOfTaxes Do
 		ColumnInfo = New Structure();
-		ColumnInfo.Insert("Name", "_" + StrReplace(String(New UUID()), "-", ""));
-		ColumnInfo.Insert("Tax", ItemOfTaxes.Tax);
-		ColumnInfo.Insert("Type", ItemOfTaxes.Type);
+		ColumnInfo.Insert("Name" , "_" + StrReplace(String(ItemOfTaxes.Tax.UUID()), "-", ""));
+		ColumnInfo.Insert("Tax"  , ItemOfTaxes.Tax);
+		ColumnInfo.Insert("Type" , ItemOfTaxes.Type);
 		If ItemOfTaxes.Type = Enums.TaxType.Rate Then
 			ColumnType = New TypeDescription("CatalogRef.TaxRates");
 		Else
 			ColumnType = Metadata.DefinedTypes.typeAmount.Type;
 		EndIf;
-		ArrayOfColumns.Add(New FormAttribute(ColumnInfo.Name, ColumnType, Parameters.PathToTable, String(
-			ItemOfTaxes.Tax), True));
+		ArrayOfColumns.Add(New FormAttribute(ColumnInfo.Name, ColumnType, Parameters.PathToTable, String(ItemOfTaxes.Tax), True));
 		ArrayOfTaxInfo.Add(ColumnInfo);
 		ArrayOfActualTax.Add(ItemOfTaxes.Tax);
 	EndDo;
@@ -670,9 +693,9 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 			NewColumn.ChoiceList.LoadValues(GetTaxRatesByTax(ItemOfTaxInfo.Tax));
 		EndIf;
 		NewColumn.SetAction("OnChange", "TaxValueOnChange");
-		If ValueIsFilled(Parameters.ColumnFieldParameters) Then
-			For Each FieldParameter In Parameters.ColumnFieldParameters Do
-				NewColumn[FieldParameter.Key] = FieldParameter.Value;
+		If ValueIsFilled(Parameters.FieldProperty) Then
+			For Each FieldProperty In Parameters.FieldProperty Do
+				NewColumn[FieldProperty.Key] = FieldProperty.Value;
 			EndDo;
 		EndIf;
 	EndDo;
@@ -686,112 +709,91 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 	Form.TaxesCache = CommonFunctionsServer.SerializeXMLUseXDTO(New Structure("ArrayOfTaxInfo", ArrayOfTaxInfo));
 EndProcedure
 
-Function CreateFormControls_ItemList(Object, Form, ColumnOffset = Undefined) Export
-	TaxesParameters = GetCreateFormControlsParameters();
-	TaxesParameters.Date                  = Object.Date;
-	TaxesParameters.Company               = Object.Company;
-	TaxesParameters.PathToTable           = "Object.ItemList";
-	TaxesParameters.ItemParent            = Form.Items.ItemList;
-	
-	If ColumnOffset = Undefined Then
-		TaxesParameters.ColumnOffset = Form.Items.ItemListOffersAmount;
-	Else
-		TaxesParameters.ColumnOffset = ColumnOffset;
-	EndIf;
-	
-	TaxesParameters.ItemListName          = "ItemList";
-	TaxesParameters.TaxListName           = "TaxList";
-	TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";
-	TaxesParameters.InvisibleColumnsIfNotTaxes = "ItemListTaxAmount";
-	CreateFormControls(Object, Form, TaxesParameters);
-	
-	Return GetArrayOfTaxInfo(Object, Form);
-EndFunction
-
-Function CreateFormControls_PaymentList(Object, Form, AddInfo = Undefined) Export
-	TaxesParameters = GetCreateFormControlsParameters();
-	TaxesParameters.Date                  = Object.Date;
-	TaxesParameters.Company               = Object.Company;
-	TaxesParameters.PathToTable           = "Object.PaymentList";
-	TaxesParameters.ItemParent            = Form.Items.PaymentList;
-	TaxesParameters.ColumnOffset          = Form.Items.PaymentListNetAmount;
-	TaxesParameters.ItemListName          = "PaymentList";
-	TaxesParameters.TaxListName           = "TaxList";
-	TaxesParameters.TotalAmountColumnName = "PaymentListTotalAmount";
-	TaxesParameters.InvisibleColumnsIfNotTaxes = "PaymentListTaxAmount, PaymentListNetAmount";
-	CreateFormControls(Object, Form, TaxesParameters);
-	
-	Return GetArrayOfTaxInfo(Object, Form);
-EndFunction
-
-Function GetArrayOfTaxInfo(Object, Form)
-	// update tax cache after rebuild form controls
-	TaxesCache = New Structure();
-	TaxesCache.Insert("Cache"   , Form.TaxesCache);
-	TaxesCache.Insert("Ref"     , Object.Ref);
-	TaxesCache.Insert("Date"    , Object.Date);
-	TaxesCache.Insert("Company" , Object.Company);
-
-	Parameters = New Structure("TaxesCache", TaxesCache);
-	Result = GetFromTaxesCache(Parameters);
-	
-	Return Result.ArrayOfTaxInfo;
-EndFunction
-
-Function GetFromTaxesCache(Parameters)
-	Result = New Structure();
-	ArrayOfTaxInfo = New Array();
-
-	If ValueIsFilled(Parameters.TaxesCache.Cache) Then
-
-		ArrayOfTaxesInCache = New Array();
-
-		ArrayOfTaxes = New Array();
-
-		DocumentName = Parameters.TaxesCache.Ref.Metadata().Name;
-		ArrayOfAllTaxes = GetTaxesByCompany(Parameters.TaxesCache.Date, Parameters.TaxesCache.Company);
-		For Each ItemOfAllTaxes In ArrayOfAllTaxes Do
-			If ItemOfAllTaxes.UseDocuments.FindRows(New Structure("DocumentName", DocumentName)).Count() Then
-				ArrayOfTaxes.Add(ItemOfAllTaxes.Tax);
-			EndIf;
-		EndDo;
-
-		AllTaxesInCache = True;
-		For Each ItemOfTaxes In ArrayOfTaxes Do
-			If ArrayOfTaxesInCache.Find(ItemOfTaxes) = Undefined Then
-				AllTaxesInCache = False;
-				Break;
-			EndIf;
-		EndDo;
-		If AllTaxesInCache Then
-			For Each ItemOfTaxesInCache In ArrayOfTaxesInCache Do
-				If ArrayOfTaxes.Find(ItemOfTaxesInCache) = Undefined Then
-					AllTaxesInCache = False;
-					Break;
-				EndIf;
-			EndDo;
-		EndIf;
-
-	EndIf;
-
-	Result.Insert("ArrayOfTaxInfo", ArrayOfTaxInfo);
-	Return Result;
-EndFunction
-
-Function GetCreateFormControlsParameters() Export
+Function GetCreateFormControlsParameters(Object, CustomParameters)
 	Parameters = New Structure();
-	Parameters.Insert("Date");
-	Parameters.Insert("Company");
+	Parameters.Insert("Date"          , Object.Date);
+	Parameters.Insert("Company"       , Object.Company);
+	Parameters.Insert("DocumentName"  , Object.Ref.Metadata().Name);
+	
+	FieldProperty = Undefined;
+	If CustomParameters.Property("FieldProperty") Then
+		FieldProperty = CustomParameters.FieldProperty;
+	EndIf;	
+	Parameters.Insert("FieldProperty" , FieldProperty);
+	
+	TransactionType = Undefined;
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "TransactionType") Then
+		TransactionType = Object.TransactionType;
+	EndIf;
+	Parameters.Insert("TransactionType", TransactionType);
+	
 	Parameters.Insert("PathToTable");
 	Parameters.Insert("ItemParent");
 	Parameters.Insert("ColumnOffset");
 	Parameters.Insert("ItemListName");
 	Parameters.Insert("TaxListName");
 	Parameters.Insert("TotalAmountColumnName");
-	Parameters.Insert("ColumnFieldParameters");
 	Parameters.Insert("InvisibleColumnsIfNotTaxes");
 	Return Parameters;
 EndFunction
+
+Procedure CreateFormControls_ItemList(Object, Form, CustomParameters = Undefined) Export
+	If CustomParameters = Undefined Then
+		CustomParameters = New Structure();
+	EndIf;
+	
+	TaxesParameters = GetCreateFormControlsParameters(Object, CustomParameters);
+	TaxesParameters.PathToTable   = "Object.ItemList";
+	TaxesParameters.ItemParent    = Form.Items.ItemList;
+	
+	If CustomParameters.Property("ColumnOffser") Then
+		TaxesParameters.ColumnOffset = CustomParameters.ColumnOffset;
+	Else
+		TaxesParameters.ColumnOffset = Form.Items.ItemListOffersAmount;
+	EndIf;
+	
+	DefaultParameters = New Structure();
+	DefaultParameters.Insert("ItemListName"              , "ItemList");
+	DefaultParameters.Insert("TaxListName"               , "TaxList");
+	DefaultParameters.Insert("TotalAmountColumnName"     , "ItemListTotalAmount");
+	DefaultParameters.Insert("InvisibleColumnsIfNotTaxes", "ItemListTaxAmount");
+	
+	ReplaceDefaultParameters(CustomParameters, DefaultParameters, TaxesParameters);
+	
+	CreateFormControls(Object, Form, TaxesParameters);
+EndProcedure
+
+Procedure CreateFormControls_PaymentList(Object, Form, CustomParameters) Export
+	TaxesParameters = GetCreateFormControlsParameters(Object, CustomParameters);
+	TaxesParameters.PathToTable   = "Object.PaymentList";
+	TaxesParameters.ItemParent    = Form.Items.PaymentList;
+	
+	If CustomParameters.Property("ColumnOffser")Then
+		TaxesParameters.ColumnOffset = CustomParameters.ColumnOffset;
+	Else
+		TaxesParameters.ColumnOffset = Form.Items.PaymentListNetAmount;
+	EndIf;
+	
+	DefaultParameters = New Structure();
+	DefaultParameters.Insert("ItemListName"               , "PaymentList");
+	DefaultParameters.Insert("TaxListName"                , "TaxList");
+	DefaultParameters.Insert("TotalAmountColumnName"      , "PaymentListTotalAmount");
+	DefaultParameters.Insert("InvisibleColumnsIfNotTaxes" , "PaymentListTaxAmount, PaymentListNetAmount");
+	
+	ReplaceDefaultParameters(CustomParameters, DefaultParameters, TaxesParameters);
+	
+	CreateFormControls(Object, Form, TaxesParameters);
+EndProcedure
+
+Procedure ReplaceDefaultParameters(Parameters, DefaultParameters, TaxesParameters)
+	For Each DefaultParametr In DefaultParameters Do
+		If Parameters.Property(DefaultParametr.Key) Then
+			TaxesParameters[DefaultParametr.Key] = Parameters[DefaultParametr.Key];
+		Else
+			TaxesParameters[DefaultParametr.Key] = DefaultParametr.Value;
+		EndIf;
+	EndDo;
+EndProcedure
 
 Function GetDocumentsWithTax() Export
 	List = New ValueList();

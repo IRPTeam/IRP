@@ -252,18 +252,24 @@ Function R1014T_CanceledPurchaseOrders()
 EndFunction
 
 Function R2013T_SalesOrdersProcurement()
-	Return "SELECT
-		   |	QueryTable.Quantity AS ReOrderedQuantity,
-		   |	QueryTable.SalesOrder AS Order,
-		   |	*
-		   |INTO R2013T_SalesOrdersProcurement
-		   |FROM
-		   |	ItemList AS QueryTable
-		   |WHERE
-		   |	NOT QueryTable.isCanceled
-		   |	AND NOT QueryTable.IsService
-		   |	AND NOT QueryTable.SalesOrder = Value(Document.SalesOrder.EmptyRef)";
-
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.SalesOrder AS Order,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.Quantity AS ReOrderedQuantity,
+		|	ItemList.NetAmount AS ReOrderedNetAmount,
+		|	ItemList.Amount AS ReOrderedTotalAmount
+		|INTO R2013T_SalesOrdersProcurement
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.isCanceled
+		|	AND NOT ItemList.IsService
+		|	AND NOT ItemList.SalesOrder = Value(Document.SalesOrder.EmptyRef)";
 EndFunction
 
 Function R4016B_InternalSupplyRequestOrdering()

@@ -51,13 +51,11 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	For Each Row In Form.Object.UseDocuments Do
 		ArrayOfTransactionTypes = Object.TransactionTypes.FindRows(New Structure("DocumentName", Row.DocumentName));
-		If ArrayOfTransactionTypes.Count() Then
-			Presentations = New Array();
-			For Each Item In ArrayOfTransactionTypes Do
-				Presentations.Add(String(Item.TransactionType));
-			EndDo;
-			Row.TransactionTypes = StrConcat(Presentations, " ,");
-		EndIf;
+		Presentations = New Array();
+		For Each Item In ArrayOfTransactionTypes Do
+			Presentations.Add(String(Item.TransactionType));
+		EndDo;
+		Row.TransactionTypes = StrConcat(Presentations, " ,");
 	EndDo;
 EndProcedure
 

@@ -1,5 +1,9 @@
 
 Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
+	If Not Parameters.Filter.Count() Then
+		Return;
+	EndIf;
+	
 	StandardProcessing = False;
 	ChoiceData = New ValueList();
 	ChoiceData.Add(Sales);

@@ -97,8 +97,10 @@ EndProcedure
 Function GetTransactionTypeEnumTypes()
 	ArrayOfTypes = New Array();
 	For Each DocMetadata In Metadata.Documents Do
-		Attr = DocMetadata.Attributes.Find("TransactionType");
-		If Attr = Undefined Then
+		Attr    = DocMetadata.Attributes.Find("TransactionType");
+		TaxList = DocMetadata.TabularSections.Find("TaxList");
+		
+		If Attr = Undefined Or TaxList = Undefined Then
 			Continue;
 		EndIf;
 		

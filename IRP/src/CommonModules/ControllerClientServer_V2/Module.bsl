@@ -10521,6 +10521,13 @@ Procedure SetItemListTaxRate(Parameters, Results) Export
 			TaxRateResult.Add(New Structure("Value, Options", TaxRate.Value, Result.Options));
 			SetterObject(Binding.StepsEnabler, Binding.DataPath + TaxRate.Key,
 				Parameters, TaxRateResult, , , , ReadOnlyFromCache);
+				
+			For Each Row In Parameters.Rows Do
+				If Row.Key = Result.Options.Key Then
+					Row.TaxRates[TaxRate.Key] = TaxRate.Value;
+				EndIf;
+			EndDo;
+
 		EndDo;
 	EndDo;
 EndProcedure

@@ -686,10 +686,14 @@ Procedure CreateFormControls(Object, Form, Parameters)
 		Form.Items[Parameters.TotalAmountColumnName].ReadOnly = ArrayOfTaxes.Count() <> 1;
 	EndIf;
 	
-	If ValueIsFilled(Parameters.InvisibleColumnsIfNotTaxes) Then
-		ArrayOfAmountColumns = StrSplit(Parameters.InvisibleColumnsIfNotTaxes, ",");
-		For Each AmountColumn In ArrayOfAmountColumns Do
-			Form.Items[TrimAll(AmountColumn)].Visible = ArrayOfTaxes.Count();
+	If ValueIsFilled(Parameters.HiddenFormItemsIfNotTaxes) Then
+		FormItemNames = StrSplit(Parameters.HiddenFormItemsIfNotTaxes, ",");
+		IsVisible = ArrayOfTaxes.Count();
+		For Each FormItemName In FormItemNames Do
+			FormItemName = TrimAll(FormItemName);
+			If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, FormItemName) Then
+				Form.Items[FormItemName].Visible = IsVisible;
+			EndIf;
 		EndDo;
 	EndIf;
 	
@@ -773,7 +777,7 @@ Function GetCreateFormControlsParameters(Object, CustomParameters)
 	Parameters.Insert("ItemListName");
 	Parameters.Insert("TaxListName");
 	Parameters.Insert("TotalAmountColumnName");
-	Parameters.Insert("InvisibleColumnsIfNotTaxes");
+	Parameters.Insert("HiddenFormItemsIfNotTaxes");
 	Return Parameters;
 EndFunction
 
@@ -800,7 +804,8 @@ Procedure CreateFormControls_ItemList(Object, Form, CustomParameters = Undefined
 	DefaultParameters.Insert("ItemListName"              , "ItemList");
 	DefaultParameters.Insert("TaxListName"               , "TaxList");
 	DefaultParameters.Insert("TotalAmountColumnName"     , "ItemListTotalAmount");
-	DefaultParameters.Insert("InvisibleColumnsIfNotTaxes", "ItemListTaxAmount");
+	DefaultParameters.Insert("HiddenFormItemsIfNotTaxes", 
+		"ItemListTaxAmount, ItemListNetAmount, ItemListTotalTaxAmount, ItemListTotalNetAmount");
 	
 	ReplaceDefaultParameters(CustomParameters, DefaultParameters, TaxesParameters);
 	
@@ -826,7 +831,8 @@ Procedure CreateFormControls_PaymentList(Object, Form, CustomParameters = Undefi
 	DefaultParameters.Insert("ItemListName"               , "PaymentList");
 	DefaultParameters.Insert("TaxListName"                , "TaxList");
 	DefaultParameters.Insert("TotalAmountColumnName"      , "PaymentListTotalAmount");
-	DefaultParameters.Insert("InvisibleColumnsIfNotTaxes" , "PaymentListTaxAmount, PaymentListNetAmount");
+	DefaultParameters.Insert("HiddenFormItemsIfNotTaxes" , 
+		"PaymentListTaxAmount, PaymentListNetAmount, PaymentListTotalTaxAmount, PaymentListTotalNetAmount");
 	
 	ReplaceDefaultParameters(CustomParameters, DefaultParameters, TaxesParameters);
 	

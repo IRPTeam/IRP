@@ -1232,7 +1232,7 @@ EndProcedure
 &AtServer
 Procedure Taxes_CreateFormControls() Export
 	FieldProperty = New Structure("Visible", False);
-	CustomTaxParameters = New Structure("FieldProperty, InvisibleColumnsIfNotTaxes", FieldProperty, "");
+	CustomTaxParameters = New Structure("FieldProperty, HiddenFormItemsIfNotTaxes", FieldProperty, "");
 	TaxesServer.CreateFormControls_ItemList(Object, ThisObject, CustomTaxParameters);
 EndProcedure
 

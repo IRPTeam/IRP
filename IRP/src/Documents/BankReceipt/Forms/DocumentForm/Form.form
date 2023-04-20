@@ -2981,48 +2981,16 @@
     <id>114</id>
     <items xsi:type="form:FormGroup">
       <name>GroupTotal</name>
-      <id>116</id>
+      <id>357</id>
       <items xsi:type="form:FormGroup">
-        <name>GroupTotalLeft</name>
-        <id>118</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <extendedTooltip>
-          <name>GroupTotalLeftExtendedTooltip</name>
-          <id>119</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <type>UsualGroup</type>
-        <extInfo xsi:type="form:UsualGroupExtInfo">
-          <group>Vertical</group>
-          <showLeftMargin>true</showLeftMargin>
-          <united>true</united>
-          <throughAlign>Auto</throughAlign>
-          <currentRowUse>Auto</currentRowUse>
-        </extInfo>
-      </items>
-      <items xsi:type="form:FormGroup">
-        <name>GroupTotalRight</name>
-        <id>120</id>
+        <name>GroupTotalNetAmount</name>
+        <id>359</id>
         <items xsi:type="form:FormField">
-          <name>DocumentAmount</name>
-          <id>122</id>
+          <name>PaymentListTotalNetAmount</name>
+          <id>361</id>
           <title>
             <key>en</key>
-            <value>Total amount</value>
+            <value>Net amount</value>
           </title>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -3030,11 +2998,11 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.PaymentList.TotalTotalAmount</segments>
+            <segments>Object.PaymentList.TotalNetAmount</segments>
           </dataPath>
           <extendedTooltip>
-            <name>DocumentAmountExtendedTooltip</name>
-            <id>124</id>
+            <name>PaymentListTotalNetAmountExtendedTooltip</name>
+            <id>363</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -3048,8 +3016,8 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>DocumentAmountContextMenu</name>
-            <id>123</id>
+            <name>PaymentListTotalNetAmountContextMenu</name>
+            <id>362</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -3073,9 +3041,188 @@
             <textEdit>true</textEdit>
           </extInfo>
         </items>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <extendedTooltip>
+          <name>GroupTotalNetAmountExtendedTooltip</name>
+          <id>360</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <type>UsualGroup</type>
+        <extInfo xsi:type="form:UsualGroupExtInfo">
+          <group>HorizontalIfPossible</group>
+          <showLeftMargin>true</showLeftMargin>
+          <united>true</united>
+          <throughAlign>Auto</throughAlign>
+          <currentRowUse>Auto</currentRowUse>
+        </extInfo>
+      </items>
+      <items xsi:type="form:FormGroup">
+        <name>GroupTotalTax</name>
+        <id>364</id>
+        <items xsi:type="form:FormField">
+          <name>PaymentListTotalTaxAmount</name>
+          <id>366</id>
+          <title>
+            <key>en</key>
+            <value>Tax amount</value>
+          </title>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.PaymentList.TotalTaxAmount</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>PaymentListTotalTaxAmountExtendedTooltip</name>
+            <id>368</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>PaymentListTotalTaxAmountContextMenu</name>
+            <id>367</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <readOnly>true</readOnly>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <maxWidth>20</maxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <choiceButton>false</choiceButton>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <extendedTooltip>
+          <name>GroupTotalTaxExtendedTooltip</name>
+          <id>365</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <type>UsualGroup</type>
+        <extInfo xsi:type="form:UsualGroupExtInfo">
+          <group>HorizontalIfPossible</group>
+          <showLeftMargin>true</showLeftMargin>
+          <united>true</united>
+          <throughAlign>Auto</throughAlign>
+          <currentRowUse>Auto</currentRowUse>
+        </extInfo>
+      </items>
+      <items xsi:type="form:FormGroup">
+        <name>GroupTotalAmount</name>
+        <id>369</id>
+        <items xsi:type="form:FormField">
+          <name>PaymentListTotalTotalAmount</name>
+          <id>371</id>
+          <title>
+            <key>en</key>
+            <value>Total amount</value>
+          </title>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.PaymentList.TotalTotalAmount</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>PaymentListTotalTotalAmountExtendedTooltip</name>
+            <id>373</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>PaymentListTotalTotalAmountContextMenu</name>
+            <id>372</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <readOnly>true</readOnly>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <maxWidth>20</maxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <choiceButton>false</choiceButton>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+            <borderColor xsi:type="core:ColorRef">
+              <color>Style.BorderColor</color>
+            </borderColor>
+          </extInfo>
+        </items>
         <items xsi:type="form:FormField">
           <name>CurrencyTotalAmount</name>
-          <id>153</id>
+          <id>374</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -3087,7 +3234,7 @@
           <titleLocation>None</titleLocation>
           <extendedTooltip>
             <name>CurrencyTotalAmountExtendedTooltip</name>
-            <id>155</id>
+            <id>376</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -3102,7 +3249,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>CurrencyTotalAmountContextMenu</name>
-            <id>154</id>
+            <id>375</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -3126,8 +3273,8 @@
           <common>true</common>
         </userVisible>
         <extendedTooltip>
-          <name>GroupTotalRightExtendedTooltip</name>
-          <id>121</id>
+          <name>GroupTotalAmountExtendedTooltip</name>
+          <id>370</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -3142,14 +3289,9 @@
         </extendedTooltip>
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
-          <group>HorizontalIfPossible</group>
+          <group>AlwaysHorizontal</group>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
-          <backColor xsi:type="core:ColorDef">
-            <red>242</red>
-            <green>242</green>
-            <blue>242</blue>
-          </backColor>
           <throughAlign>Auto</throughAlign>
           <currentRowUse>Auto</currentRowUse>
         </extInfo>
@@ -3162,7 +3304,7 @@
       <groupHorizontalAlign>Right</groupHorizontalAlign>
       <extendedTooltip>
         <name>GroupTotalExtendedTooltip</name>
-        <id>117</id>
+        <id>358</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -3177,9 +3319,14 @@
       </extendedTooltip>
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
-        <group>HorizontalIfPossible</group>
+        <group>AlwaysHorizontal</group>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
+        <backColor xsi:type="core:ColorDef">
+          <red>242</red>
+          <green>242</green>
+          <blue>242</blue>
+        </backColor>
         <throughAlign>Auto</throughAlign>
         <currentRowUse>Auto</currentRowUse>
       </extInfo>
@@ -3207,7 +3354,7 @@
     </extendedTooltip>
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
-      <group>HorizontalIfPossible</group>
+      <group>AlwaysHorizontal</group>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>

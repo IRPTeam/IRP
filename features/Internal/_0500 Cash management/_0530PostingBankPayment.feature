@@ -136,7 +136,7 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '136 000'   |
 		And I close current window
 	* Check calculation Document amount
-		Then the form attribute named "DocumentAmount" became equal to "136 000,00"
+		Then the form attribute named "PaymentListTotalTotalAmount" became equal to "136 000,00"
 	* Change in basis document
 		And I select current line in "PaymentList" table
 		And I click choice button of "Basis document" attribute in "PaymentList" table
@@ -419,7 +419,7 @@ Scenario: _053009 create Bank payment based on Sales return
 			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | ''                    | 'Sales return 12 dated 27.01.2021 19:50:46' | '500,00'       | ''                        | ''                           |
 		
 		Then the form attribute named "Branch" became equal to "Distribution department"
-		And the editing text of form attribute named "DocumentAmount" became equal to "500,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "500,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	And I close all client application windows
 

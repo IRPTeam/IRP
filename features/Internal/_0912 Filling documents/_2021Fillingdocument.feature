@@ -1291,9 +1291,10 @@ Scenario: _0154103 check Sales order when changing date
 		Then the form attribute named "Prices" became equal to "Yes"
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key' | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000' | 'pcs'  | '1 000,00'     | '1 000,00'     | 'Store 01' |
+			| 'Item'  | 'Price'    | 'Item key' | 'Quantity' | 'Unit' | 'Total amount' | 'Store'    |
+			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000'    | 'pcs'  | '1 000,00'     | 'Store 01' |
 		If "ItemList" table does not contain "Tax amount" column Then
+		If "ItemList" table does not contain "Net amount" column Then
 	* Check the list of partner terms
 		And I click Select button of "Partner term" field
 		And "List" table contains lines
@@ -1358,9 +1359,10 @@ Scenario: _0154104 check Sales invoice when changing date
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key' | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000' | 'pcs'  | '1 000,00'     | '1 000,00'     | 'Store 01' |
+			| 'Item'  | 'Price'    | 'Item key' | 'Quantity' | 'Unit' | 'Total amount' | 'Store'    |
+			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000'    | 'pcs'  | '1 000,00'     | 'Store 01' |
 		If "ItemList" table does not contain "Tax amount" column Then
+		If "ItemList" table does not contain "Net amount" column Then
 	* Check the list of partner terms
 		And I click Select button of "Partner term" field
 		And "List" table contains lines
@@ -2336,7 +2338,7 @@ Scenario: _0154108 total amount calculation in Cash receipt
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "180,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "430,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "430,00"		
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -2355,26 +2357,26 @@ Scenario: _0154108 total amount calculation in Cash receipt
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click "Select" button	
-		And the editing text of form attribute named "DocumentAmount" became equal to "984,66"		
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "984,66"		
 	* Check the Total amount re-calculation when deleting rows
 		And I go to line in "PaymentList" table
 			| 'Total amount' |
 			| '50,00'  |
 		And I delete a line in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "934,66"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "934,66"
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "80,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "1 014,66"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 014,66"
 	* Copy line and check Total amount calculation
 		And I go to line in "PaymentList" table
 			| 'Total amount' | 'Partner' | 'Partner term'                     | 'Payer'           |
 			| '554,66'       | 'Kalipso' | 'Basic Partner terms, without VAT' | 'Company Kalipso' |
 		And I activate "Partner term" field in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListContextMenuCopy"
-		And the editing text of form attribute named "DocumentAmount" became equal to "1 569,32"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 569,32"
 		And I close all client application windows
 
 
@@ -2611,7 +2613,7 @@ Scenario: _0154110 total amount calculation in Bank receipt
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "180,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "430,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "430,00"
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -2630,26 +2632,26 @@ Scenario: _0154110 total amount calculation in Bank receipt
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click "Select" button	
-		And the editing text of form attribute named "DocumentAmount" became equal to "984,66"		
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "984,66"		
 	* Check the Total amount re-calculation when deleting rows
 		And I go to line in "PaymentList" table
 		| 'Total amount' |
 		| '50,00'  |
 		And I delete a line in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "934,66"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "934,66"
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "80,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "1 014,66"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 014,66"
 	* Copy line and check Total amount calculation
 		And I go to line in "PaymentList" table
 			| 'Total amount' | 'Partner' | 'Partner term'                     | 'Payer'           |
 			| '554,66'       | 'Kalipso' | 'Basic Partner terms, without VAT' | 'Company Kalipso' |
 		And I activate "Partner term" field in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListContextMenuCopy"
-		And the editing text of form attribute named "DocumentAmount" became equal to "1 569,32"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 569,32"
 		And I close all client application windows
 		
 		
@@ -2898,7 +2900,7 @@ Scenario: _0154112 total amount calculation in Cash payment
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "180,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "430,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "430,00"
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I finish line editing in "PaymentList" table
 		And I activate "Partner" field in "PaymentList" table
@@ -2924,26 +2926,26 @@ Scenario: _0154112 total amount calculation in Cash payment
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click "Select" button
-		And the editing text of form attribute named "DocumentAmount" became equal to "13 430,00"		
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "13 430,00"		
 	* Check the Total amount re-calculation when deleting rows
 		And I go to line in "PaymentList" table
 		| 'Total amount' |
 		| '50,00'  |
 		And I delete a line in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "13 380,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "13 380,00"
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "80,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "13 460,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "13 460,00"
 	* Copy line and check Total amount calculation
 		And I go to line in "PaymentList" table
 			| 'Total amount' | 'Partner'   | 'Partner term'       | 'Payee'             |
 			| '13 000,00'    | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' |
 		And I activate "Partner term" field in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListContextMenuCopy"
-		And the editing text of form attribute named "DocumentAmount" became equal to "26 460,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "26 460,00"
 		And I close all client application windows
 
 
@@ -3176,7 +3178,7 @@ Scenario: _0154114 total amount calculation in Bank payment
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "180,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "430,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "430,00"
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I finish line editing in "PaymentList" table
 		And I activate "Partner" field in "PaymentList" table
@@ -3202,26 +3204,26 @@ Scenario: _0154114 total amount calculation in Bank payment
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I click "Select" button
-		And the editing text of form attribute named "DocumentAmount" became equal to "13 430,00"		
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "13 430,00"		
 	* Check the Total amount re-calculation when deleting rows
 		And I go to line in "PaymentList" table
 		| 'Total amount' |
 		| '50,00'  |
 		And I delete a line in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "13 380,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "13 380,00"
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "80,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "13 460,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "13 460,00"
 	* Copy line and check Total amount calculation
 		And I go to line in "PaymentList" table
 			| 'Total amount'    | 'Partner'   | 'Partner term'       | 'Payee'             |
 			| '13 000,00' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' |
 		And I activate "Partner term" field in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListContextMenuCopy"
-		And the editing text of form attribute named "DocumentAmount" became equal to "26 460,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "26 460,00"
 		And I close all client application windows
 
 Scenario: _01541140 total amount calculation in Incoming payment order
@@ -5375,6 +5377,7 @@ Scenario: _0154150 check function DontCalculateRow in the Purchase order
 					
 
 Scenario: _0154151 check function DontCalculateRow in the Purchase invoice
+		And I close all client application windows
 	* Open the Purchase invoice creation form
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
@@ -5556,6 +5559,7 @@ Scenario: _0154151 check function DontCalculateRow in the Purchase invoice
 			
 	
 Scenario: _0154152 check function DontCalculateRow in the Purchase return
+		And I close all client application windows
 	* Open the Purchase return creation form
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I click the button named "FormCreate"
@@ -7728,9 +7732,9 @@ Scenario: _0154182 check price recalculaton in the PO (depend of currency)
 		And I move to "Item list" tab
 		And I click "OK" button
 		And "ItemList" table became equal
-			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Price'  | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '104,00' | '104,00'     | '104,00'       | 'Store 03' |
-			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '80,00'  | '80,00'      | '80,00'        | 'Store 03' |
+			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Price'  | 'Total amount' | 'Store'    |
+			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '104,00' | '104,00'       | 'Store 03' |
+			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '80,00'  | '80,00'        | 'Store 03' |
 		And I close all client application windows
 		
 Scenario: _0154183 check price recalculaton in the PI (depend of currency)
@@ -7810,9 +7814,9 @@ Scenario: _0154183 check price recalculaton in the PI (depend of currency)
 		And I move to "Item list" tab
 		And I click "OK" button
 		And "ItemList" table became equal
-			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Price'  | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '104,00' | '104,00'     | '104,00'       | 'Store 03' |
-			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '80,00'  | '80,00'      | '80,00'        | 'Store 03' |
+			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Price'  | 'Total amount' | 'Store'    |
+			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '104,00' | '104,00'       | 'Store 03' |
+			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '80,00'  | '80,00'        | 'Store 03' |
 		And I close all client application windows	
 				
 	
@@ -7893,9 +7897,9 @@ Scenario: _0154184 check price recalculaton in the SO (depend of currency)
 		And I move to "Item list" tab
 		And I click "OK" button
 		And "ItemList" table became equal
-			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Price'  | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '104,00' | '104,00'     | '104,00'       | 'Store 01' |
-			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '80,00'  | '80,00'      | '80,00'        | 'Store 01' |
+			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Price'  | 'Total amount' | 'Store'    |
+			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '104,00' | '104,00'       | 'Store 01' |
+			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '80,00'  | '80,00'        | 'Store 01' |
 		And I close all client application windows		
 					
 	
@@ -7976,9 +7980,9 @@ Scenario: _0154185 check price recalculaton in the SI (depend of currency)
 		And I move to "Item list" tab
 		And I click "OK" button
 		And "ItemList" table became equal
-			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Price'  | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '104,00' | '104,00'     | '104,00'       | 'Store 01' |
-			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '80,00'  | '80,00'      | '80,00'        | 'Store 01' |
+			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Price'  | 'Total amount' | 'Store'    |
+			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '104,00' | '104,00'       | 'Store 01' |
+			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '80,00'  | '80,00'        | 'Store 01' |
 		And I close all client application windows						
 		
 
@@ -8059,9 +8063,9 @@ Scenario: _0154186 check price recalculaton in the RSR (depend of currency)
 		And I move to "Item list" tab
 		And I click "OK" button
 		And "ItemList" table became equal
-			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Price'  | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '104,00' | '104,00'     | '104,00'       | 'Store 01' |
-			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '80,00'  | '80,00'      | '80,00'        | 'Store 01' |
+			| 'Item key'  | 'Price type'        | 'Item'     | 'Quantity' | 'Unit' | 'Price'  | 'Total amount' | 'Store'    |
+			| 'XS/Blue'   | 'Basic Price Types' | 'Dress'    | '1,000'    | 'pcs'  | '104,00' | '104,00'       | 'Store 01' |
+			| '38/Yellow' | 'Basic Price Types' | 'Trousers' | '1,000'    | 'pcs'  | '80,00'  | '80,00'        | 'Store 01' |
 		And I close all client application windows					
 		
 				

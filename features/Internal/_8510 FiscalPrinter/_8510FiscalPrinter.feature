@@ -501,7 +501,7 @@ Scenario: _0850010 create cash in
 			| '1' | '1 000,00'     | 'Movement type 1'         | '$$MoneyTransfer11$$' |
 		
 		Then the form attribute named "Branch" became equal to "Shop 02"
-		And the editing text of form attribute named "DocumentAmount" became equal to "1 000,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 000,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Post Cash receipt
 		And I click "Post" button
@@ -1477,7 +1477,7 @@ Scenario: _0260150 create cash out
 			| '#' | 'Total amount' | 'Financial movement type' | 'Money transfer'     |
 			| '1' | '1 000,00'     | 'Movement type 1'         | '$$MoneyTransfer3$$' |
 		Then the form attribute named "Branch" became equal to "Shop 02"
-		And the editing text of form attribute named "DocumentAmount" became equal to "1 000,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 000,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		And I click "Post" button
 		And I delete "$$NumberCashReceipt2$$" variable

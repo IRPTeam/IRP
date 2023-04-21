@@ -524,9 +524,9 @@ Scenario: _050019 check consignment fee calculation
 		And I select current line in "List" table
 	* Check filling concignment fee
 		And "ItemList" table became equal
-			| '#' | 'Revenue type' | 'Item'               | 'Price type'              | 'Consignor price' | 'Item key' | 'Profit loss center' | 'Serial lot numbers' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'Net amount' | 'Total amount' | 'Detail' | 'Additional analytic' |
-			| '1' | ''             | 'Dress'              | 'Basic Price Types'       | '520,00'          | 'XS/Blue'  | ''                   | ''                   | 'pcs'  | 'No'                 | '2,000'    | '10,00'                   | '104,00'                 | '520,00' | '1 040,00'   | '1 040,00'     | ''       | ''                    |
-			| '2' | ''             | 'Product 4 with SLN' | 'en description is empty' | '220,00'          | 'UNIQ'     | ''                   | '899007790088'       | 'pcs'  | 'No'                 | '2,000'    | '10,00'                   | '42,00'                  | '210,00' | '420,00'     | '420,00'       | ''       | ''                    |		
+			| '#' | 'Revenue type' | 'Item'               | 'Price type'              | 'Consignor price' | 'Item key' | 'Profit loss center' | 'Serial lot numbers' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'Total amount' | 'Detail' | 'Additional analytic' |
+			| '1' | ''             | 'Dress'              | 'Basic Price Types'       | '520,00'          | 'XS/Blue'  | ''                   | ''                   | 'pcs'  | 'No'                 | '2,000'    | '10,00'                   | '104,00'                 | '520,00' | '1 040,00'     | ''       | ''                    |
+			| '2' | ''             | 'Product 4 with SLN' | 'en description is empty' | '220,00'          | 'UNIQ'     | ''                   | '899007790088'       | 'pcs'  | 'No'                 | '2,000'    | '10,00'                   | '42,00'                  | '210,00' | '420,00'       | ''       | ''                    |
 	* Change price
 		And I activate "Price" field in "ItemList" table
 		And I go to line in "ItemList" table

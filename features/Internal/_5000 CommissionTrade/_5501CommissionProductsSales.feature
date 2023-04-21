@@ -930,7 +930,7 @@ Scenario: _050025 create Sales report co consignor
 			Then the form attribute named "Author" became equal to "CI"
 			Then the form attribute named "ItemListTotalTradeAgentFeeAmount" became equal to "-0,78"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "-6,60"
-			Then the form attribute named "ItemListTotalTaxAmount" became equal to "0,00"
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "-1,19"
 			Then the form attribute named "ItemListTotalTotalAmount" became equal to "-7,80"
 			Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 			And I close all client application windows
@@ -1022,8 +1022,8 @@ Scenario: _050026 check trade agent fee calculation
 	* Check filling trade agent fee
 		And "ItemList" table became equal
 			| '#' | 'Item'               | 'Price type'              | 'Item key' | 'Consignor price' | 'Serial lot numbers' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Sales invoice' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'Net amount' | 'Purchase invoice' | 'Total amount' |
-			| '1' | 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '190,00'          | '09987897977889'     | 'pcs'  | 'No'                 | '2,000'    | ''              | '10,00'                   | '40,00'                  | '200,00' | '400,00'     | ''                 | '400,00'       |
-			| '2' | 'Dress'              | 'Basic Price Types'       | 'S/Yellow' | '400,00'          | ''                   | 'pcs'  | 'No'                 | '1,000'    | ''              | '10,00'                   | '55,00'                  | '550,00' | '550,00'     | ''                 | '550,00'       |
+			| '1' | 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '190,00'          | '09987897977889'     | 'pcs'  | 'No'                 | '2,000'    | ''              | '10,00'                   | '40,00'                  | '200,00' | '338,98'     | ''                 | '400,00'       |
+			| '2' | 'Dress'              | 'Basic Price Types'       | 'S/Yellow' | '400,00'          | ''                   | 'pcs'  | 'No'                 | '1,000'    | ''              | '10,00'                   | '55,00'                  | '550,00' | '466,10'     | ''                 | '550,00'       |
 	* Change price
 		And I activate "Price" field in "ItemList" table
 		And I go to line in "ItemList" table

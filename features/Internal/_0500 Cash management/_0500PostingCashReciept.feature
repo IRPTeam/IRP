@@ -136,7 +136,7 @@ Scenario: _050001 create Cash receipt based on Sales invoice
 			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '4 350'  |
 			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '4 350'  |
 		And I close current window		
-		Then the form attribute named "DocumentAmount" became equal to "4 350,00"
+		Then the form attribute named "PaymentListTotalTotalAmount" became equal to "4 350,00"
 	* Change of Partner term and basis document
 		And I select current line in "PaymentList" table
 		And I activate "Partner term" field in "PaymentList" table
@@ -511,7 +511,7 @@ Scenario: _050009 create Cash receipt based on Purchase return
 			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | 'Purchase return 351 dated 24.03.2021 16:08:15' | '5 710,00'     | ''                        | ''                           |
 		
 		Then the form attribute named "Branch" became equal to ""
-		And the editing text of form attribute named "DocumentAmount" became equal to "5 710,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "5 710,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	And I close all client application windows
 		

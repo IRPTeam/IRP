@@ -648,9 +648,9 @@ Scenario: _01541362 create RSR using form link/unlink (different company, store,
 		And I click "Ok" button				
 	* Check filling
 		And "ItemList" table became equal
-			| '#' | 'Retail sales receipt'                               | 'Revenue type' | 'Item'     | 'Sales person' | 'Item key'  | 'Profit loss center' | 'Serial lot numbers' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Price'  | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Return reason' | 'Detail' | 'Offers amount' | 'Landed cost' |
-			| '1' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'Revenue'      | 'Dress'    | ''             | 'XS/Blue'   | 'Shop 01'            | ''                   | 'pcs'  | 'No'                 | '1,000'    | '520,00' | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''              | ''       | ''              | ''            |
-			| '2' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'Revenue'      | 'Trousers' | ''             | '38/Yellow' | 'Shop 01'            | ''                   | 'pcs'  | 'No'                 | '2,000'    | '400,00' | '677,97'     | '800,00'       | ''                    | 'Store 01' | ''              | ''       | ''              | ''            |
+			| '#' | 'Retail sales receipt'                               | 'Revenue type' | 'Item'     | 'Sales person' | 'Item key'  | 'Profit loss center' | 'Serial lot numbers' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Price'  | 'Total amount' | 'Additional analytic' | 'Store'    | 'Return reason' | 'Detail' | 'Offers amount' | 'Landed cost' |
+			| '1' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'Revenue'      | 'Dress'    | ''             | 'XS/Blue'   | 'Shop 01'            | ''                   | 'pcs'  | 'No'                 | '1,000'    | '520,00' | '520,00'       | ''                    | 'Store 01' | ''              | ''       | ''              | ''            |
+			| '2' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'Revenue'      | 'Trousers' | ''             | '38/Yellow' | 'Shop 01'            | ''                   | 'pcs'  | 'No'                 | '2,000'    | '400,00' | '800,00'       | ''                    | 'Store 01' | ''              | ''       | ''              | ''            |
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
@@ -3187,8 +3187,8 @@ Scenario: _0154156 check Retail sales receipt when changing date
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key' | 'Quantity'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000' | 'pcs'  | '1 000,00'   | '1 000,00'     | 'Store 01' |
+			| 'Item'  | 'Price'    | 'Item key' | 'Quantity' | 'Unit' | 'Total amount' | 'Store'    |
+			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000'    | 'pcs'  | '1 000,00'     | 'Store 01' |
 	* Check the list of partner terms
 		And I click Select button of "Partner term" field
 		And "List" table contains lines

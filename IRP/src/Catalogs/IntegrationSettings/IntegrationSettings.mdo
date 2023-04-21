@@ -148,6 +148,7 @@
         <types>Boolean</types>
         <types>String</types>
         <types>Number</types>
+        <types>CatalogRef.IntegrationSettings</types>
         <numberQualifiers>
           <precision>10</precision>
         </numberQualifiers>
@@ -158,6 +159,20 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="ac5e9b31-f12f-4ce4-bfac-20fdd74292bc">
+      <name>Hide</name>
+      <synonym>
+        <key>en</key>
+        <value>Hide</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
   <tabularSections uuid="350a3939-a316-4034-a9f0-715663067e98">
@@ -196,6 +211,7 @@
         <types>Boolean</types>
         <types>String</types>
         <types>Number</types>
+        <types>CatalogRef.IntegrationSettings</types>
         <numberQualifiers>
           <precision>10</precision>
         </numberQualifiers>
@@ -206,6 +222,20 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="5eb863bf-66ca-428f-b9d7-2349bfba70a8">
+      <name>Hide</name>
+      <synonym>
+        <key>en</key>
+        <value>Hide</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
   <tabularSections uuid="7736caec-d90f-4ab3-bba1-96052a560c1f">

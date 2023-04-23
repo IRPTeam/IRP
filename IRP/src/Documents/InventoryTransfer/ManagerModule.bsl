@@ -115,7 +115,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResult = Query.Execute();
 	ConsignorBatches = QueryResult.Unload();
 	
-	ConsignorBatches = CommissionTradeServer.GetRegistrateConsignorBatches(Parameters.Object, ItemListTable);
+	ConsignorBatches = CommissionTradeServer.GetRegistrateConsignorBatches(Parameters.Object, ItemListTable, ConsignorBatches);
 	
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;

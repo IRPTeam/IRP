@@ -478,6 +478,8 @@
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.ServerReuse</commonModules>
+  <commonModules>CommonModule.SerialLotNumberClientServer</commonModules>
+  <commonModules>CommonModule.SourceOfOriginClientServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

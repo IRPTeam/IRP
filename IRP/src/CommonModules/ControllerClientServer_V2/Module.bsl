@@ -7,7 +7,6 @@ Function GetServerParameters(Object) Export
 	Result.Insert("ControllerModuleName", "ControllerClientServer_V2");
 	Result.Insert("TableName", "");
 	Result.Insert("Rows", Undefined);
-	Result.Insert("RowsConsignorStocks", New Array());
 	Result.Insert("ReadOnlyProperties", "");
 	Result.Insert("IsBasedOn", False);
 	
@@ -198,31 +197,11 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 			ServerParameters.Rows = New Array();
 		EndIf;
 	EndIf;
-	
-	If ValueIsFilled(ServerParameters.TableName) 
-		And (Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-			Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt") Then
-			
-		For Each Row In ServerParameters.Object[ServerParameters.TableName] Do
-			If Not CommonFunctionsClientServer.ObjectHasProperty(Row, "InventoryOrigin") Then
-				Continue;
-			EndIf;
-			If Row.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then
-				ServerParameters.RowsConsignorStocks.Add(Row);
-			EndIf;
-		EndDo;
-			
-	EndIf;
-	
+		
 	// the table row cannot be transferred to the server, so we put the data in an array of structures
 	WrappedRows = WrapRows(Parameters, ServerParameters.Rows);
 	If WrappedRows.Count() Then
 		Parameters.Insert("Rows", WrappedRows);
-	EndIf;
-	
-	WrappedRows = WrapRows(Parameters, ServerParameters.RowsConsignorStocks);
-	If WrappedRows.Count() Then
-		Parameters.Insert("RowsConsignorStocks", WrappedRows);
 	EndIf;
 	
 	Parameters.Insert("NextSteps"    , New Array());
@@ -4866,22 +4845,13 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 	
 	TableRows =  GetRows(Parameters, Parameters.TableName);
 	If UseInventoryOrigin Then
-		If TableRows.Count() = 1
-			And TableRows[0].Property("InventoryOrigin") Then
-			If TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then			
-				TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
-				Parameters.RowsForRecalculate = TableRows;
+		RowsForRecalculate = New Array();
+		For Each Row In TableRows Do
+			If Row.Property("InventoryOrigin") And Row.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then
+				RowsForRecalculate.Add(Row);
 			EndIf;
-		Else
-			TableRows = New Array();
-			For Each Row In TableRows Do
-				If Row.Property("InventoryOrigin") 
-					And Row.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then
-					TableRows.Add(Row);
-				EndIf;
-			EndDo;
-			Parameters.RowsForRecalculate = TableRows;
-		EndIf;
+		EndDo;
+		Parameters.RowsForRecalculate = RowsForRecalculate;		
 	EndIf;
 	
 	For Each Row In TableRows Do
@@ -12728,7 +12698,7 @@ Procedure OnChainComplete(Parameters) Export
 	#ENDIF
 EndProcedure
 
-Procedure CommitChainChanges(Parameters) Export
+Procedure CommitChainChanges(Parameters, OnChangesNotifyView = True) Export
 		
 	_CommitChainChanges(Parameters.Cache, Parameters.Object, Parameters);
 	
@@ -12752,20 +12722,27 @@ Procedure CommitChainChanges(Parameters) Export
 		_CommitChainChanges(Parameters.CacheForm, Parameters.Form, Parameters);
 	
 	#IF Client THEN
-		UniqueViewNotify = New Array();
-		For Each ViewNotify In Parameters.ViewNotify Do
-			If UniqueViewNotify.Find(ViewNotify) = Undefined Then
-				UniqueViewNotify.Add(ViewNotify);
-			EndIf;
-		EndDo;
-		For Each ViewNotify In UniqueViewNotify Do
-			ExecuteViewNotify(Parameters, ViewNotify);
-		EndDo;
+		If OnChangesNotifyView Then
+			OnChangesNotifyView(Parameters);
+		EndIf;
 	#ENDIF
 	EndIf;
 EndProcedure
 
 #IF Client Then
+	
+Procedure OnChangesNotifyView(Parameters) Export	
+	UniqueViewNotify = New Array();
+	For Each ViewNotify In Parameters.ViewNotify Do
+		If UniqueViewNotify.Find(ViewNotify) = Undefined Then
+			UniqueViewNotify.Add(ViewNotify);
+		EndIf;
+	EndDo;
+	For Each ViewNotify In UniqueViewNotify Do
+		ExecuteViewNotify(Parameters, ViewNotify);
+	EndDo;	
+EndProcedure
+
 Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	If ViewNotify = "OnOpenFormNotify"                         Then ViewClient_V2.OnOpenFormNotify(Parameters);
 	ElsIf ViewNotify = "InventoryOnAddRowFormNotify"           Then ViewClient_V2.InventoryOnAddRowFormNotify(Parameters);
@@ -12998,13 +12975,6 @@ Function GetRows(Parameters, TableName)
 		Return Parameters.Rows;
 	EndIf;
 	Return Parameters.Object[TableName];
-EndFunction
-
-Function GetRowsConsignorStocks(Parameters, TableName)
-	If Parameters.Property("RowsConsignorStocks") Then
-		Return Parameters.RowsConsignorStocks;
-	EndIf;
-	Return New Array();
 EndFunction
 
 Procedure SetterForm(StepNames, DataPath, Parameters, Results, 

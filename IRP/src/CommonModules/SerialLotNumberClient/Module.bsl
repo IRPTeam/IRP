@@ -65,33 +65,8 @@ Procedure AddNewSerialLotNumbers(DataResults, Parameters, AddNewLot = False, Add
 		Return;
 	EndIf;
 	
-	For Each Result In ArrayOfResults Do
-		If Not AddNewLot Then
-			ArrayOfSerialLotNumbers = Parameters.Object.SerialLotNumbers.FindRows(New Structure("Key", Result.RowKey));
-			For Each Row In ArrayOfSerialLotNumbers Do
-				Parameters.Object.SerialLotNumbers.Delete(Row);
-			EndDo;
-		EndIf;
-		
-		For Each Row In Result.SerialLotNumbers Do
-			FoundRows = Parameters.Object.SerialLotNumbers.FindRows(New Structure("Key, SerialLotNumber", Result.RowKey, Row.SerialLotNumber));
-			If FoundRows.Count() Then
-				NewRow = FoundRows[0];
-			Else
-				NewRow = Parameters.Object.SerialLotNumbers.Add();
-			EndIf;
-			NewRow.Key = Result.RowKey;
-			NewRow.SerialLotNumber = Row.SerialLotNumber;
-			NewRow.Quantity = NewRow.Quantity + Row.Quantity;
-		EndDo;
-		
-		TotalQuantity = 0;
-		For Each Row In Parameters.Object.SerialLotNumbers Do
-			If Row.Key = Result.RowKey Then
-				TotalQuantity = TotalQuantity + Row.Quantity;
-			EndIf;
-		EndDo;
-		
+	For Each Result In ArrayOfResults Do		
+		TotalQuantity = SerialLotNumberClientServer.AddNewSerialLotNumbers(Parameters.Object, Result.RowKey, Result.SerialLotNumbers, AddNewLot);
 		
 		If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "ItemList") Then
 			ArrayOfItemListRows = Parameters.Object.ItemList.FindRows(New Structure("Key", Result.RowKey));

@@ -126,132 +126,123 @@ Scenario: _0206002 сheck data verification in Retail sales receipt
 
 Scenario: _0206003 сheck data verification in Goods receipt
 	And I close all client application windows
-	* Open report
-		Given I open hyperlink "e1cib/app/Report.AdditionalDocumentTablesCheck"
-		And I click "Change option..." button
-		And I move to the tab named "FilterPage"
-		And I go to line in "SettingsComposerSettingsFilterFilterAvailableFields" table
-			| 'Available fields' |
-			| 'Document type'    |
-		And I select current line in "SettingsComposerSettingsFilterFilterAvailableFields" table
-		And I activate field named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
-		And I select current line in "SettingsComposerSettingsFilter" table
-		And I select "Goods receipt" exact value from the drop-down list named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
-		And I finish line editing in "SettingsComposerSettingsFilter" table
-		And I click "Finish editing" button
-		And I click "Generate" button
+	* Open data proc
+		Given I open hyperlink "e1cib/app/DataProcessor.FixDocumentProblems"
+		And I click Choice button of the field named "Period"
+		And I input "10.03.2023" text in the field named "DateBegin"
+		And I input "10.03.2023" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And in the table "DocumentList" I click "Fill documents" button
+		And in the table "DocumentList" I click "Check documents" button	
 	* Check report
-		Then "Result" spreadsheet document is equal
-			| 'Filter:'                                       | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Goods receipt"'                                                |
-			| ''                                              | ''                                                                                                                                              |
-			| 'Document type'                                 | ''                                                                                                                                              |
-			| 'Reference'                                     | 'Status'                                                                                                                                        |
-			| 'Goods receipt'                                 | ''                                                                                                                                              |
-			| 'Goods receipt 8 811 dated 10.03.2023 15:43:56' | 'Row: 1. Quantity not equal quantity in base unit when unit quantity equal 1\nRow: 1. Quantity in item list is not equal to quantity in row ID' |
+		Then "Fix document problems" window is opened
+		And I expand a line in "CheckList" table
+			| 'Date'                | 'Fixed' | 'Line number' | 'Ref'                                           |
+			| '10.03.2023 15:43:56' | 'No'    | '1'           | 'Goods receipt 8 811 dated 10.03.2023 15:43:56' |
+		And I go to line in "CheckList" table
+			| 'Date'                | 'Error ID'                                | 'Fixed' | 'Line number' | 'Ref'                                           |
+			| '10.03.2023 15:43:56' | 'ErrorQuantityNotEqualQuantityInBaseUnit' | 'No'    | '1'           | 'Goods receipt 8 811 dated 10.03.2023 15:43:56' |
+		And I activate "Error ID" field in "CheckList" table	
 	And I close all client application windows	
 
 Scenario: _0206004 сheck data verification in Inventory transfer
 	And I close all client application windows
-	* Open report
-		Given I open hyperlink "e1cib/app/Report.AdditionalDocumentTablesCheck"
-		And I click "Change option..." button
-		And I move to the tab named "FilterPage"
-		And I go to line in "SettingsComposerSettingsFilterFilterAvailableFields" table
-			| 'Available fields' |
-			| 'Document type'    |
-		And I select current line in "SettingsComposerSettingsFilterFilterAvailableFields" table
-		And I activate field named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
-		And I select current line in "SettingsComposerSettingsFilter" table
-		And I select "Inventory transfer" exact value from the drop-down list named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
-		And I finish line editing in "SettingsComposerSettingsFilter" table
-		And I click "Finish editing" button
-		And I click "Generate" button
+	* Open data proc
+		Given I open hyperlink "e1cib/app/DataProcessor.FixDocumentProblems"
+		And I click Choice button of the field named "Period"
+		And I input "10.03.2023" text in the field named "DateBegin"
+		And I input "10.03.2023" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And in the table "DocumentList" I click "Fill documents" button
+		And in the table "DocumentList" I click "Check documents" button
 	* Check report
-		Then "Result" spreadsheet document is equal
-			| 'Filter:'                                            | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Inventory transfer"'                                                                                                                                                                                                                                                                                                                 |
-			| ''                                                   | ''                                                                                                                                                                                                                                                                                                                                                                                                                    |
-			| 'Document type'                                      | ''                                                                                                                                                                                                                                                                                                                                                                                                                    |
-			| 'Reference'                                          | 'Status'                                                                                                                                                                                                                                                                                                                                                                                                              |
-			| 'Inventory transfer'                                 | ''                                                                                                                                                                                                                                                                                                                                                                                                                    |
-			| 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | 'Row: 1. Quantity is zero\nRow: 1. Quantity not equal quantity in base unit when unit quantity equal 1\nRow: 1. Item is not equal to item in item key\nRow: 2. Quantity in item list is not equal to quantity in row ID\nRow: 2. Serial is not set but is required\nRow: 2. Quantity in serial list table is not the same as quantity in item list\nRow: 3. Quantity in item list is not equal to quantity in row ID' |		
+		Then "Fix document problems" window is opened
+		And I expand a line in "CheckList" table
+			| 'Ref'                                           |
+			| 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' |
+		And "CheckList" table contains lines
+			| 'Fixed' | 'Date'                | 'Ref'                                                | 'Error ID'                                              | 'Line number' | 'Problem while quick fix' |
+			| 'No'    | '10.03.2023 17:06:48' | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | ''                                                      | '8'           | ''                        |
+			| 'No'    | '10.03.2023 17:06:48' | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | 'ErrorQuantityIsZero'                                   | '1'           | ''                        |
+			| 'No'    | '10.03.2023 17:06:48' | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | 'ErrorQuantityNotEqualQuantityInBaseUnit'               | '1'           | ''                        |
+			| 'No'    | '10.03.2023 17:06:48' | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | 'ErrorItemNotEqualItemInItemKey'                        | '1'           | ''                        |
+			| 'No'    | '10.03.2023 17:06:48' | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | 'ErrorNotFilledQuantityInSourceOfOrigins'               | '1'           | ''                        |
+			| 'No'    | '10.03.2023 17:06:48' | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | 'ErrorUseSerialButSerialNotSet'                         | '2'           | ''                        |
+			| 'No'    | '10.03.2023 17:06:48' | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | 'ErrorNotTheSameQuantityInSerialListTableAndInItemList' | '2'           | ''                        |
+			| 'No'    | '10.03.2023 17:06:48' | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | 'ErrorNotFilledQuantityInSourceOfOrigins'               | '2'           | ''                        |
+			| 'No'    | '10.03.2023 17:06:48' | 'Inventory transfer 8 811 dated 10.03.2023 17:06:48' | 'ErrorNotFilledQuantityInSourceOfOrigins'               | '3'           | ''                        |
 	And I close all client application windows	
 				
 Scenario: _0206005 сheck data verification in Inventory transfer order
-	And I close all client application windows
-	* Open report
-		Given I open hyperlink "e1cib/app/Report.AdditionalDocumentTablesCheck"
-		And I click "Change option..." button
-		And I move to the tab named "FilterPage"
-		And I go to line in "SettingsComposerSettingsFilterFilterAvailableFields" table
-			| 'Available fields' |
-			| 'Document type'    |
-		And I select current line in "SettingsComposerSettingsFilterFilterAvailableFields" table
-		And I activate field named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
-		And I select current line in "SettingsComposerSettingsFilter" table
-		And I select "Inventory transfer order" exact value from the drop-down list named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
-		And I finish line editing in "SettingsComposerSettingsFilter" table
-		And I click "Finish editing" button
-		And I click "Generate" button
+	* Open data proc
+		Given I open hyperlink "e1cib/app/DataProcessor.FixDocumentProblems"
+		And I click Choice button of the field named "Period"
+		And I input "10.03.2023" text in the field named "DateBegin"
+		And I input "10.03.2023" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And in the table "DocumentList" I click "Fill documents" button
+		And in the table "DocumentList" I click "Check documents" button
 	* Check report
-		Then "Result" spreadsheet document is equal by template
-			| 'Filter:'                                                  | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Inventory transfer order"'                                                                                                                                                                                                                                                                  |
-			| ''                                                         | ''                                                                                                                                                                                                                                                                                                                                                                           |
-			| 'Document type'                                            | ''                                                                                                                                                                                                                                                                                                                                                                           |
-			| 'Reference'                                                | 'Status'                                                                                                                                                                                                                                                                                                                                                                     |
-			| 'Inventory transfer order'                                 | ''                                                                                                                                                                                                                                                                                                                                                                           |
-			| 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12' | 'Row: 1. Quantity in base unit is zero\nRow: 1. Quantity not equal quantity in base unit when unit quantity equal 1\nRow: 1. Quantity in item list is not equal to quantity in row ID\nRow: 2. Quantity in base unit is zero\nRow: 2. Quantity not equal quantity in base unit when unit quantity equal 1\nRow: 2. Quantity in item list is not equal to quantity in row ID' |		
+		Then "Fix document problems" window is opened
+		And I expand a line in "CheckList" table
+			| 'Ref'                                           |
+			| 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12' |
+	* Check report
+		And "CheckList" table contains lines
+			| 'Fixed' | 'Date'                | 'Ref'                                                      | 'Error ID'                                | 'Line number' | 'Problem while quick fix' |
+			| 'No'    | '10.03.2023 17:20:12' | 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12' | ''                                        | '4'           | ''                        |
+			| 'No'    | '10.03.2023 17:20:12' | 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12' | 'ErrorQuantityInBaseUnitIsZero'           | '1'           | ''                        |
+			| 'No'    | '10.03.2023 17:20:12' | 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12' | 'ErrorQuantityNotEqualQuantityInBaseUnit' | '1'           | ''                        |
+			| 'No'    | '10.03.2023 17:20:12' | 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12' | 'ErrorQuantityInBaseUnitIsZero'           | '2'           | ''                        |
+			| 'No'    | '10.03.2023 17:20:12' | 'Inventory transfer order 8 811 dated 10.03.2023 17:20:12' | 'ErrorQuantityNotEqualQuantityInBaseUnit' | '2'           | ''                        |	
 	And I close all client application windows	
 
 Scenario: _0206006 сheck data verification in Internal supply request
 	And I close all client application windows
-	* Open report
-		Given I open hyperlink "e1cib/app/Report.AdditionalDocumentTablesCheck"
-		And I click "Change option..." button
-		And I move to the tab named "FilterPage"
-		And I go to line in "SettingsComposerSettingsFilterFilterAvailableFields" table
-			| 'Available fields' |
-			| 'Document type'    |
-		And I select current line in "SettingsComposerSettingsFilterFilterAvailableFields" table
-		And I activate field named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
-		And I select current line in "SettingsComposerSettingsFilter" table
-		And I select "Internal supply request" exact value from the drop-down list named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
-		And I finish line editing in "SettingsComposerSettingsFilter" table
-		And I click "Finish editing" button
-		And I click "Generate" button
+	* Open data proc
+		Given I open hyperlink "e1cib/app/DataProcessor.FixDocumentProblems"
+		And I click Choice button of the field named "Period"
+		And I input "10.03.2023" text in the field named "DateBegin"
+		And I input "10.03.2023" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And in the table "DocumentList" I click "Fill documents" button
+		And in the table "DocumentList" I click "Check documents" button
 	* Check report
-		Then "Result" spreadsheet document is equal
-			| 'Filter:'                                                 | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Internal supply request"' |
-			| ''                                                        | ''                                                                                                         |
-			| 'Document type'                                           | ''                                                                                                         |
-			| 'Reference'                                               | 'Status'                                                                                                   |
-			| 'Internal supply request'                                 | ''                                                                                                         |
-			| 'Internal supply request 8 811 dated 10.03.2023 17:24:29' | 'Row: 1. Quantity is zero\nRow: 1. Quantity in base unit is zero'                                          |		
+		Then "Fix document problems" window is opened
+		And I expand a line in "CheckList" table
+			| 'Ref'                                                     |
+			| 'Internal supply request 8 811 dated 10.03.2023 17:24:29' |
+	* Check report
+		And "CheckList" table contains lines
+			| 'Fixed' | 'Date'                | 'Ref'                                                     | 'Error ID'                      | 'Line number' | 'Problem while quick fix' |
+			| 'No'    | '10.03.2023 17:24:29' | 'Internal supply request 8 811 dated 10.03.2023 17:24:29' | ''                              | '2'           | ''                        |
+			| 'No'    | '10.03.2023 17:24:29' | 'Internal supply request 8 811 dated 10.03.2023 17:24:29' | 'ErrorQuantityIsZero'           | '1'           | ''                        |
+			| 'No'    | '10.03.2023 17:24:29' | 'Internal supply request 8 811 dated 10.03.2023 17:24:29' | 'ErrorQuantityInBaseUnitIsZero' | '1'           | ''                        |	
 	And I close all client application windows
 
 
 Scenario: _0206007 сheck data verification in Sales order
 	And I close all client application windows
-	* Open report
-		Given I open hyperlink "e1cib/app/Report.AdditionalDocumentTablesCheck"
-		And I click "Change option..." button
-		And I move to the tab named "FilterPage"
-		And I go to line in "SettingsComposerSettingsFilterFilterAvailableFields" table
-			| 'Available fields' |
-			| 'Document type'    |
-		And I select current line in "SettingsComposerSettingsFilterFilterAvailableFields" table
-		And I activate field named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
-		And I select current line in "SettingsComposerSettingsFilter" table
-		And I select "Sales order" exact value from the drop-down list named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
-		And I finish line editing in "SettingsComposerSettingsFilter" table
-		And I click "Finish editing" button
-		And I click "Generate" button
+	* Open data proc
+		Given I open hyperlink "e1cib/app/DataProcessor.FixDocumentProblems"
+		And I click Choice button of the field named "Period"
+		And I input "10.03.2023" text in the field named "DateBegin"
+		And I input "10.03.2023" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And in the table "DocumentList" I click "Fill documents" button
+		And in the table "DocumentList" I click "Check documents" button
 	* Check report
-		Then "Result" spreadsheet document is equal
-			| 'Filter:'                                     | 'Reference.Posted Equal to "Yes" AND\nStatus Filled AND\nDocument type Equal to "Sales order"'                                                                                                                                                          |
-			| ''                                            | ''                                                                                                                                                                                                                                                      |
-			| 'Document type'                               | ''                                                                                                                                                                                                                                                      |
-			| 'Reference'                                   | 'Status'                                                                                                                                                                                                                                                |
-			| 'Sales order'                                 | ''                                                                                                                                                                                                                                                      |
-			| 'Sales order 8 811 dated 10.03.2023 17:32:00' | 'Row: 1. Quantity in item list is not equal to quantity in row ID\nRow: 1. Net amount is greater than total amount\nRow: 1. Total amount minus net amount is not equal to tax amount\nRow: 2. Quantity in item list is not equal to quantity in row ID' |	
+		Then "Fix document problems" window is opened
+		And I expand a line in "CheckList" table
+			| 'Ref'                                         |
+			| 'Sales order 8 811 dated 10.03.2023 17:32:00' |
+	* Check report
+		And "CheckList" table contains lines
+			| 'Fixed' | 'Date'                | 'Ref'                                         | 'Error ID'                                        | 'Line number' | 'Problem while quick fix' |
+			| 'No'    | '10.03.2023 17:32:00' | 'Sales order 8 811 dated 10.03.2023 17:32:00' | ''                                                | '4'           | ''                        |
+			| 'No'    | '10.03.2023 17:32:00' | 'Sales order 8 811 dated 10.03.2023 17:32:00' | 'ErrorQuantityInItemListNotEqualQuantityInRowID'  | '1'           | ''                        |
+			| 'No'    | '10.03.2023 17:32:00' | 'Sales order 8 811 dated 10.03.2023 17:32:00' | 'ErrorNetAmountGreaterTotalAmount'                | '1'           | ''                        |
+			| 'No'    | '10.03.2023 17:32:00' | 'Sales order 8 811 dated 10.03.2023 17:32:00' | 'ErrorTotalAmountMinusNetAmountNotEqualTaxAmount' | '1'           | ''                        |
+			| 'No'    | '10.03.2023 17:32:00' | 'Sales order 8 811 dated 10.03.2023 17:32:00' | 'ErrorQuantityInItemListNotEqualQuantityInRowID'  | '2'           | ''                        |	
 	And I close all client application windows	
 

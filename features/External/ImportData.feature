@@ -1434,8 +1434,8 @@ Scenario: Create catalog SourceOfOrigins objects
 Scenario: Create catalog Taxes objects
 
 	And I check or create catalog "Taxes" objects:
-		| 'Ref'                                                           | 'DeletionMark' | 'ExternalDataProcSettings' | 'ExternalDataProc'                                                         | 'Type'              | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'False'           | 'ValueStorage'             | '' | 'Enum.TaxType.Rate' | 'VAT'            | ''                 | ''               | ''               |
+		| 'Ref'                                                           | 'DeletionMark' | 'ExternalDataProcSettings' | 'ExternalDataProc' | 'Type'              | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'False'        | 'ValueStorage'             | ''                 | 'Enum.TaxType.Rate' | 'VAT'            | ''                 | ''               | ''               |
 	
 
 	And I refill object tabular section "TaxRates":
@@ -1454,17 +1454,74 @@ Scenario: Create catalog Taxes objects
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseInvoice'     |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashExpense'         |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashRevenue'         |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashRevenue'         |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseReturn'      |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseReturnOrder' |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReturnOrder'    |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReturn'         |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailSalesReceipt'  |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailReturnReceipt' |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesOrderClosing'    |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseOrderClosing' |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReportToConsignor' |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReportFromTradeAgent' |
+
+
+Scenario: Create catalog Taxes objects (with transaction type)
+
+	And I check or create catalog "Taxes" objects:
+		| 'Ref'                                                           | 'DeletionMark' | 'Code' | 'ExternalDataProcSettings'              | 'ExternalDataProc' | 'Type'              | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'False'        | 1      | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''                 | 'Enum.TaxType.Rate' | 'VAT'            | ''                 | ''               | ''               |
+
+	And I refill object tabular section "TaxRates":
+		| 'Ref'                                                           | 'TaxRate'                                                          |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef00f' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef012' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef011' |
+
+	And I refill object tabular section "UseDocuments":
+		| 'Ref'                                                           | 'DocumentName'              |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesOrder'                |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesInvoice'              |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseOrder'             |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseInvoice'           |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashExpense'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashRevenue'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseReturn'            |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseReturnOrder'       |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReturnOrder'          |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReturn'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailSalesReceipt'        |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailReturnReceipt'       |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReportToConsignor'    |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReportFromTradeAgent' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'BankPayment'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'BankReceipt'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashPayment'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashReceipt'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'EmployeeCashAdvance'       |
+
+	And I refill object tabular section "TransactionTypes":
+		| 'Ref'                                                           | 'DocumentName'        | 'TransactionType'                                         |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesOrder'          | 'Enum.SalesTransactionTypes.Sales'                        |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesOrder'          | 'Enum.SalesTransactionTypes.RetailSales'                  |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesInvoice'        | 'Enum.SalesTransactionTypes.Sales'                        |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseOrder'       | 'Enum.PurchaseTransactionTypes.Purchase'                  |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseInvoice'     | 'Enum.PurchaseTransactionTypes.Purchase'                  |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashExpense'         | 'Enum.CashExpenseTransactionTypes.CurrentCompanyExpense'  |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashRevenue'         | 'Enum.CashRevenueTransactionTypes.CurrentCompanyRevenue'  |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseReturn'      | 'Enum.PurchaseReturnTransactionTypes.ReturnToVendor'      |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseReturnOrder' | 'Enum.PurchaseReturnTransactionTypes.ReturnToVendor'      |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReturnOrder'    | 'Enum.SalesReturnTransactionTypes.ReturnFromCustomer'     |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReturn'         | 'Enum.SalesReturnTransactionTypes.ReturnFromCustomer'     |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesOrderClosing'   | 'Enum.SalesTransactionTypes.Sales'                        |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'BankPayment'         | 'Enum.OutgoingPaymentTransactionTypes.PaymentToVendor'    |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'BankPayment'         | 'Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer'   |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'BankReceipt'         | 'Enum.IncomingPaymentTransactionType.PaymentFromCustomer' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'BankReceipt'         | 'Enum.IncomingPaymentTransactionType.ReturnFromVendor'    |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashPayment'         | 'Enum.OutgoingPaymentTransactionTypes.PaymentToVendor'    |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashPayment'         | 'Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer'   |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashReceipt'         | 'Enum.IncomingPaymentTransactionType.PaymentFromCustomer' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashReceipt'         | 'Enum.IncomingPaymentTransactionType.ReturnFromVendor'    |
+
 
 Scenario: Create catalog Taxes objects (for work order)
 
@@ -1534,6 +1591,27 @@ Scenario: Create information register TaxSettings records
 		| '01.10.2019 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''                                                                 | ''                                                              | ''                                                                  | ''          | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' |
 		| '01.10.2019 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5' | ''                                                                 | ''                                                              | ''                                                                  | ''          | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef013' |
 		| '01.01.2021 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''                                                                 | ''                                                              | ''         | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf134a6a4759f' | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef012'  |
+
+Scenario: Create information register TaxSettings records with transaction type
+
+	And I check or create information register "TaxSettings" records:
+		| 'Period'             | 'Company'                                                           | 'Tax'                                                           | 'ItemKey' | 'Item' | 'ItemType' | 'Agreement'                                                          | 'TransactionType'                                         | 'TaxRate'                                                          |
+		| '01.10.2019 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | ''                                                        | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' |
+		| '01.01.2021 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | 'Enum.CashExpenseTransactionTypes.OtherCompanyExpense'    | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef012' |
+		| '01.01.2021 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | 'Enum.CashRevenueTransactionTypes.OtherCompanyRevenue'    | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef012' |
+		| '01.01.2021 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | 'Enum.IncomingPaymentTransactionType.ReturnFromVendor'    | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef012' |
+		| '01.01.2021 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | 'Enum.IncomingPaymentTransactionType.PaymentFromCustomer' | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' |
+		| '01.01.2021 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | 'Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer'   | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' |
+		| '01.01.2021 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | 'Enum.OutgoingPaymentTransactionTypes.PaymentToVendor'    | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef00f' |
+		| '01.01.2021 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | 'Enum.PurchaseReturnTransactionTypes.ReturnToConsignor'   | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef012' |
+		| '01.01.2021 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | 'Enum.PurchaseReturnTransactionTypes.ReturnToVendor'      | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' |
+		| '01.01.2021 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | 'Enum.PurchaseTransactionTypes.ReceiptFromConsignor'      | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef012' |
+		| '01.01.2021 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | 'Enum.PurchaseTransactionTypes.Purchase'                  | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' |
+		| '01.01.2021 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | 'Enum.SalesReturnTransactionTypes.ReturnFromTradeAgent'   | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef012' |
+		| '01.01.2021 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | 'Enum.SalesReturnTransactionTypes.ReturnFromCustomer'     | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' |
+		| '01.01.2021 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | 'Enum.SalesTransactionTypes.Sales'                        | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' |
+		| '01.01.2021 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | ''                                                                   | 'Enum.SalesTransactionTypes.RetailSales'                  | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef00f' |
+		| '01.01.2021 0:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''        | ''     | ''         | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf134a6a4759f' | ''                                                        | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef012' |
 
 
 Scenario: Create information register TaxSettings records (Concignor 1)

@@ -1,20 +1,12 @@
 
 // Taxes server
 
-Function GetTaxRatesForItemKey(Date, Company, Tax, ItemKey) Export
-	Return TaxesServer._GetTaxRatesForItemKey(Date, Company, Tax, ItemKey);
-EndFunction
-	
-Function GetTaxRatesForAgreement(Date, Company, Tax, Agreement) Export
-	Return TaxesServer._GetTaxRatesForAgreement(Date, Company, Tax, Agreement);
+Function GetTaxRateByPriority(Parameters) Export
+	Return TaxesServer._GetTaxRateByPriority(Parameters);
 EndFunction
 
-Function GetTaxRatesForTransactionType(Date, Company, Tax, TransactionType) Export
-	Return TaxesServer._GetTaxRatesForTransactionType(Date, Company, Tax, TransactionType);
-EndFunction
-
-Function GetTaxRatesForCompany(Date, Company, Tax) Export
-	Return TaxesServer._GetTaxRatesForCompany(Date, Company, Tax);
+Function GetTaxRateByCompany(Parameters) Export
+	Return TaxesServer._GetTaxRateByCompany(Parameters);
 EndFunction
 
 Function GetTaxesInfo(Date, Company, DocumentName, TransactionType) Export

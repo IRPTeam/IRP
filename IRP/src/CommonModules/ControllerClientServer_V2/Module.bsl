@@ -403,6 +403,7 @@ Function GetEventHandlersByDataPath(Parameters, DataPath, IsBuilder)
 	EventHandlerMap.Insert("StoreReceiver"   , "SetStoreReceiver");
 	EventHandlerMap.Insert("Workstation"     , "SetWorkstation");
 	EventHandlerMap.Insert("BusinessUnit"    , "SetBusinessUnit");
+	EventHandlerMap.Insert("TransactionType" , "SetTransactionType");
 	
 	// PaymentList
 	EventHandlerMap.Insert("PaymentList.Partner" , "SetPaymentListPartner");
@@ -623,6 +624,12 @@ Function GetAllBindingsByDefault(Parameters)
 	Return Binding;
 EndFunction
 
+Function GetAllCommandsByDefault(Parameters)
+	ArrayOfCommands = New Array();
+	ArrayOfCommands.Add("CommandDefaultTaxRate");	
+	Return ArrayOfCommands;
+EndFunction
+
 #EndRegion
 
 #Region _FORM_
@@ -744,6 +751,7 @@ Procedure AddNewRow(TableName, Parameters, ViewNotify = Undefined, LaunchSteps =
 	
 	Bindings = GetAllBindings(Parameters);
 	Defaults = GetAllBindingsByDefault(Parameters);
+	DefaultsCommand = GetAllCommandsByDefault(Parameters);
 	
 	For Each ColumnName In StrSplit(Parameters.ObjectMetadataInfo.Tables[TableName].Columns, ",") Do
 		
@@ -770,6 +778,11 @@ Procedure AddNewRow(TableName, Parameters, ViewNotify = Undefined, LaunchSteps =
 		EndIf;
 		
 	EndDo;
+	
+	For Each CommandName In DefaultsCommand Do
+		ExecuteCommandByName(Parameters, CommandName);
+	EndDo;
+
 	If LaunchSteps Then
 		LaunchNextSteps(Parameters);
 	EndIf;
@@ -1050,6 +1063,34 @@ Function BindCommandRecalculationWhenBasedOn(Parameters)
 	Binding.Insert("SalesReturnOrder"     , "StepItemListCalculations_IsRecalculationWhenBasedOn");
 	Binding.Insert("WorkOrder"            , "StepItemListCalculations_IsRecalculationWhenBasedOn");
 	Return BindSteps("BindVoid", "", Binding, Parameters, "BindCommandRecalculationWhenBasedOn");
+EndFunction
+
+// DefaultTaxRate.Command
+Procedure CommandDefaultTaxRate(Parameters) Export
+	Binding = BindCommandDefaultTaxRate(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// DefaultTaxRate.Bind
+Function BindCommandDefaultTaxRate(Parameters)
+	Binding = New Structure();
+	
+	Binding.Insert("BankPayment", "StepChangeTaxRate_AgreementInList");
+	Binding.Insert("BankReceipt", "StepChangeTaxRate_AgreementInList");
+	Binding.Insert("CashPayment", "StepChangeTaxRate_AgreementInList");
+	Binding.Insert("CashReceipt", "StepChangeTaxRate_AgreementInList");
+	Binding.Insert("CashExpense", "StepChangeTaxRate_WithoutAgreement");
+	Binding.Insert("CashRevenue", "StepChangeTaxRate_WithoutAgreement");
+	Binding.Insert("PurchaseInvoice"     , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("PurchaseOrder"       , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("PurchaseReturn"      , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("PurchaseReturnOrder" , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("SalesInvoice"        , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("SalesOrder"          , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("SalesReturn"         , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("SalesReturnOrder"    , "StepChangeTaxRate_AgreementInHeader");
+
+	Return BindSteps("BindVoid", "", Binding, Parameters, "BindCommandDefaultTaxRate");
 EndFunction
 
 #EndRegion

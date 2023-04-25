@@ -1975,50 +1975,21 @@ Function ChangeTaxRateExecute(Options) Export
 			Parameters.Insert("Date"      , Options.Date);
 			Parameters.Insert("ConsignorBatches", Options.ConsignorBatches);
 			Parameters.Insert("Tax"       , ItemOfTaxInfo.Tax);
-			ArrayOfTaxRates = TaxesServer.GetTaxRatesForConsignorBatches(Parameters);
-			
-			If ArrayOfTaxRates.Count() Then
-				Result.Insert(ItemOfTaxInfo.Name, ArrayOfTaxRates[0].TaxRate);
-			EndIf;
-			
+			TaxRate = TaxesServer.GetTaxRateByConsignorBatch(Parameters);			
+			Result.Insert(ItemOfTaxInfo.Name, TaxRate);
 			Continue;
 		EndIf;
 		
-		ArrayOfTaxRates = New Array();
-		If ValueIsFilled(Options.Agreement) Then
-			Parameters = New Structure();
-			Parameters.Insert("Date"      , Options.Date);
-			Parameters.Insert("Company"   , Options.Company);
-			Parameters.Insert("Tax"       , ItemOfTaxInfo.Tax);
-			Parameters.Insert("Agreement" , Options.Agreement);
-			ArrayOfTaxRates = TaxesServer.GetTaxRatesForAgreement(Parameters);
-		EndIf;
-		
-		If ValueIsFilled(Options.TransactionType) And Not ArrayOfTaxRates.Count() Then
-			Parameters = New Structure();
-			Parameters.Insert("Date"      , Options.Date);
-			Parameters.Insert("Company"   , Options.Company);
-			Parameters.Insert("Tax"       , ItemOfTaxInfo.Tax);
-			Parameters.Insert("TransactionType" , Options.TransactionType);
-			ArrayOfTaxRates = TaxesServer.GetTaxRatesForTransactionType(Parameters);			
-		EndIf;
-		
-		If Not ArrayOfTaxRates.Count() Then
-			Parameters = New Structure();
-			Parameters.Insert("Date"    , Options.Date);
-			Parameters.Insert("Company" , Options.Company);
-			Parameters.Insert("Tax"     , ItemOfTaxInfo.Tax);
-			If ValueIsFilled(Options.ItemKey) Then
-				Parameters.Insert("ItemKey", Options.ItemKey);
-			Else
-				Parameters.Insert("ItemKey", PredefinedValue("Catalog.ItemKeys.EmptyRef"));
-			EndIf;
-			ArrayOfTaxRates = TaxesServer.GetTaxRatesForItemKey(Parameters);
-		EndIf;
-		
-		If ArrayOfTaxRates.Count() Then
-			Result.Insert(ItemOfTaxInfo.Name, ArrayOfTaxRates[0].TaxRate);
-		EndIf;
+		Parameters = New Structure();
+		Parameters.Insert("Date"    , Options.Date);
+		Parameters.Insert("Company" , Options.Company);
+		Parameters.Insert("Tax"     , ItemOfTaxInfo.Tax);
+		Parameters.Insert("ItemKey"         , Options.ItemKey);
+		Parameters.Insert("Agreement"       , Options.Agreement);
+		Parameters.Insert("TransactionType" , Options.TransactionType);
+			
+		TaxRate = TaxesServer.GetTaxRateByPriority(Parameters);
+		Result.Insert(ItemOfTaxInfo.Name, TaxRate);
 	EndDo;
 		
 	Return Result;

@@ -4976,9 +4976,17 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 			Options.Agreement = GetPropertyObject(Parameters, Parameters.TableName + "." + "Agreement", Row.Key);
 		EndIf;
 		
+		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+			_InventoryOrigin = GetItemListInventoryOrigin(Parameters, Row.Key);
+			_ConsignorBatches = GetConsignorBatches(Parameters, Row.Key);
+			If _ConsignorBatches.Count() And _InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then 
+				UseInventoryOrigin = True;
+			EndIf;			
+		EndIf;
+	    
 		If UseInventoryOrigin Then
-			Options.InventoryOrigin = GetItemListInventoryOrigin(Parameters, Row.Key);
-			Options.ConsignorBatches = GetConsignorBatches(Parameters, Row.Key);
+			Options.InventoryOrigin = _InventoryOrigin;//GetItemListInventoryOrigin(Parameters, Row.Key);
+			Options.ConsignorBatches = _ConsignorBatches;// GetConsignorBatches(Parameters, Row.Key);
 		EndIf;
 		
 		Options.Date            = Options_Date;
@@ -8356,7 +8364,7 @@ EndFunction
 
 // ConsignorBatches.Set
 Procedure SetConsignorBatches(Parameters, Results) Export
-	IsChanged = False;	
+	IsChanged = True;	
 	For Each Result In Results Do
 		If Not Parameters.Cache.Property("ConsignorBatches") Then
 			AddTableToCache(Parameters, "ConsignorBatches");
@@ -8370,13 +8378,13 @@ Procedure SetConsignorBatches(Parameters, Results) Export
 			AddRowToTableCache(Parameters, "ConsignorBatches", Row);
 		EndDo;
 		
-		If Parameters.Object.ConsignorBatches.Count() And Not Parameters.Cache.ConsignorBatches.Count() Then
-			// clear
-			IsChanged = True;
-		ElsIf Not Parameters.Object.ConsignorBatches.Count() And Parameters.Cache.ConsignorBatches.Count() Then
-			// add new
-			IsChanged = True;
-		EndIf;
+//		If Parameters.Object.ConsignorBatches.Count() And Not Parameters.Cache.ConsignorBatches.Count() Then
+//			// clear
+//			IsChanged = True;
+//		ElsIf Not Parameters.Object.ConsignorBatches.Count() And Parameters.Cache.ConsignorBatches.Count() Then
+//			// add new
+//			IsChanged = True;
+//		EndIf;
 		
 	EndDo;
 	

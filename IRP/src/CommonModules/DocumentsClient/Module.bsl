@@ -547,14 +547,14 @@ Function GetParametersPickupItems(Object, Form, AddInfo)
 		
 	StoreRef = Undefined;
 	StoreInItemList = True;
-	If UseInventoryOrigin Then
-		If ObjectRefType = Type("DocumentRef.InventoryTransfer") Then
-			StoreRef = Object.StoreSender;
-			StoreInItemList = False;
-		Else
-			StoreRef = Form.Store;
-		EndIf;
+	
+	If ObjectRefType = Type("DocumentRef.InventoryTransfer") Then
+		StoreRef = Object.StoreSender;
+		StoreInItemList = False;
+	Else
+		StoreRef = Form.Store;
 	EndIf;
+
 	Parameters.Insert("StoreRef", StoreRef);
 	Parameters.Insert("StoreInItemList", StoreInItemList);
 	

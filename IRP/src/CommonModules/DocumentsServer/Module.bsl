@@ -685,6 +685,10 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 				FillingValues.Insert("PriceType", ScanDataItem.PriceType);
 			EndIf;
 			
+			If ValueIsFilled(Parameters.StoreRef) Then
+				FillingValues.Insert("Store", Parameters.StoreRef);
+			EndIf;
+			
 			If ValueIsFilled(FoundedRows.InventoryOrigin) Then
 				FillingValues.Insert("InventoryOrigin", FoundedRows.InventoryOrigin);
 			EndIf;		

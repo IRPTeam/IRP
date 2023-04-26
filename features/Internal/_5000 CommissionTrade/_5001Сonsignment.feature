@@ -78,6 +78,7 @@ Scenario: _05002 preparation (consignment)
 		When Create catalog Partners objects (Kalipso)
 	* Tax settings
 		When filling in Tax settings for company
+		When Create information register TaxSettings records (Concignor 2)
 	* Post document
 		And I execute 1C:Enterprise script at server
  			| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);" |

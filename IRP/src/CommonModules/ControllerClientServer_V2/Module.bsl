@@ -4976,7 +4976,7 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 			Options.Agreement = GetPropertyObject(Parameters, Parameters.TableName + "." + "Agreement", Row.Key);
 		EndIf;
 		
-		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
 			_InventoryOrigin = GetItemListInventoryOrigin(Parameters, Row.Key);
 			_ConsignorBatches = GetConsignorBatches(Parameters, Row.Key);
 			If _ConsignorBatches.Count() And _InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then 

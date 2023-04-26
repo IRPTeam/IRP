@@ -59,26 +59,31 @@ Function GetPayrolls(Parameters) Export
 	ResultTable = New ValueTable();
 	ResultTable.Columns.Add("Employee");
 	ResultTable.Columns.Add("Position");
-	ResultTable.Columns.Add("AccrualAndDeductionType");
+	ResultTable.Columns.Add("ProfitLossCenter");
+	ResultTable.Columns.Add(Parameters.TypeColumnName);
 	ResultTable.Columns.Add("Amount");
 	
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	T9520S_TimeSheetInfo.Date AS Date,
-	|	T9520S_TimeSheetInfo.Employee AS Employee,
-	|	T9520S_TimeSheetInfo.Position AS Position,
-	|	T9520S_TimeSheetInfo.AccrualAndDeductionType AS AccrualAndDeductionType
+	|	T9520S_TimeSheetInfo.Date,
+	|	T9520S_TimeSheetInfo.Employee,
+	|	T9520S_TimeSheetInfo.Position,
+	|	T9520S_TimeSheetInfo.ProfitLossCenter,
+	|	T9520S_TimeSheetInfo.AccrualAndDeductionType
 	|FROM
 	|	InformationRegister.T9520S_TimeSheetInfo AS T9520S_TimeSheetInfo
 	|WHERE
 	|	T9520S_TimeSheetInfo.Date BETWEEN BEGINOFPERIOD(&BeginDate, DAY) AND ENDOFPERIOD(&EndDate, DAY)
 	|	AND T9520S_TimeSheetInfo.Company = &Company
-	|	AND T9520S_TimeSheetInfo.Branch = &Branch";
+	|	AND T9520S_TimeSheetInfo.Branch = &Branch
+	|	AND T9520S_TimeSheetInfo.AccrualAndDeductionType.Type = &_Type";
+	
 	Query.SetParameter("BeginDate", Parameters.BeginDate);
 	Query.SetParameter("EndDate"  , Parameters.EndDate);
 	Query.SetParameter("Company"  , Parameters.Company);
 	Query.SetParameter("Branch"   , Parameters.Branch);
+	Query.SetParameter("_Type"     , Parameters._Type);
 	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -86,15 +91,21 @@ Function GetPayrolls(Parameters) Export
 	While QuerySelection.Next() Do
 		NewRow = ResultTable.Add();
 		FillPropertyValues(NewRow, QuerySelection);
+		NewRow[Parameters.TypeColumnName] = QuerySelection.AccrualAndDeductionType;
 		
 		If Upper(QuerySelection.AccrualAndDeductionType.AlgorithmID) = Upper("_MonthlySalary") Then
 			NewRow.Amount = _MonthlySalary(Parameters, QuerySelection);
 		EndIf;
 		
 	EndDo;
-	ResultTable.GroupBy("Employee, Position, AccrualAndDeductionType", "Amount");
-	ResultTable.Sort("Employee, Position, AccrualAndDeductionType");
-	Return ResultTable;
+	
+	GroupColumn = "Employee, Position, ProfitLossCenter, " + Parameters.TypeColumnName;
+	SumColumn = "Amount";
+	
+	ResultTable.GroupBy(GroupColumn, SumColumn);
+	ResultTable.Sort("Employee, Position, " + Parameters.TypeColumnName);
+	
+	Return New Structure("Table, GroupColumn, SumColumn", ResultTable, GroupColumn, SumColumn);
 EndFunction
 
 Function _MonthlySalary(Parameters, QuerySelection)
@@ -128,9 +139,3 @@ Function _MonthlySalary(Parameters, QuerySelection)
 	
 	Return (Value / TotalDays) * CountDays;
 EndFunction
-
-//Function GetAlgorithmID() Export
-//	List = New ValueList();
-//	List.Add("_MonthlySalary", "Monthly salary");
-//	Return List;
-//EndFunction

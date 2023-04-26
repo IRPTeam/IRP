@@ -473,6 +473,13 @@ Function GetEventHandlersByDataPath(Parameters, DataPath, IsBuilder)
 	EventHandlerMap.Insert("Inventory.Quantity" , "SetInventoryQuantity");
 	EventHandlerMap.Insert("Inventory.ItemKey"  , "SetInventoryItemKey");
 	
+	// Payroll
+	EventHandlerMap.Insert("AccrualList.Amount"           , "SetPayrollListsAmount");
+	EventHandlerMap.Insert("AccrualList.AccrualType"      , "SetPayrollListsAccrualDeductionType");
+	EventHandlerMap.Insert("SeductionList.Amount"         , "SetPayrollListsAmount");
+	EventHandlerMap.Insert("SeductionList.DeductionType"  , "SetPayrollListsAccrualDeductionType");
+	EventHandlerMap.Insert("CashAdvanceDeduction.Amount"  , "SetPayrollListsAmount");
+	
 	Return EventHandlerMap.Get(DataPath);
 EndFunction
 
@@ -12509,40 +12516,132 @@ EndProcedure
 
 #EndRegion
 
-#Region PAYROLL_LIST
+#Region PAYROLL_LISTS
 
-#Region PAYROLL_LIST_LOAD_DATA
+#Region PAYROLL_LISTS_ACRUAL_DEDUCTION_TYPE
 
-// PayrollList.Load
-Procedure PayrollListLoad(Parameters) Export
-	Binding = BindPayrollListLoad(Parameters);
+// PayrollLists.AccrualDeductionType.OnChange
+Procedure PayrollListsAccrualDeductionTypeOnChange(Parameters) Export
+	Binding = BindPayrollListsAccrualDeductionType(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
 
-// PayrollList.Load.Set
+// PayrollLists.AccrualDeductionType.Set
+Procedure SetPayrollListsAccrualDeductionType(Parameters, Results) Export
+	Binding = BindPayrollListsAccrualDeductionType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PayrollLists.AccrualDeductionType.Get
+Function GetPayrollListsAccrualDeductionType(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPayrollListsAccrualDeductionType(Parameters).DataPath, _Key);
+EndFunction
+
+// PayrollLists.AccrualDeductionType.Bind
+Function BindPayrollListsAccrualDeductionType(Parameters)
+	DataPath = "AccrualList.AccrualType";
+	Binding = New Structure();
+	Return BindSteps("StepPayrollListsChangeExpenseTypeByAccrualDeductionType", 
+		DataPath, Binding, Parameters, "BindPayrollListsAccrualDeductionType");
+EndFunction
+
+// PayrollLists.ChangeExpenseTypeByAccrualDeductionType.Step
+Procedure StepPayrollListsChangeExpenseTypeByAccrualDeductionType(Parameters, Chain) Export
+	Chain.ChangeExpenseTypeByAccrualDeductionType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeExpenseTypeByAccrualDeductionType.Setter = "SetPayrollListsExpenseType";
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		Options = ModelClientServer_V2.ChangeExpenseTypeByAccrualDeductionTypeOptions();
+		Options.AccrualDeductionType = GetPayrollListsAccrualDeductionType(Parameters, Row.Key);
+		Options.ExpenseType          = GetPayrollListsExpenseType(Parameters, Row.Key);
+		Options.Key = Row.Key;
+		Options.StepName = "StepPayrollListsChangeExpenseTypeByAccrualDeductionType";
+		Chain.ChangeExpenseTypeByAccrualDeductionType.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region PAYROLL_LISTS_EXPENSE_TYPE
+
+// PayrollLists.ExpenseType.Set
+Procedure SetPayrollListsExpenseType(Parameters, Results) Export
+	Binding = BindPayrollListsExpenseType(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PayrollLists.ExpenseType.Get
+Function GetPayrollListsExpenseType(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindPayrollListsExpenseType(Parameters).DataPath, _Key);
+EndFunction
+
+// PayrollLists.ExpenseType.Bind
+Function BindPayrollListsExpenseType(Parameters)
+	DataPath = "AccrualList.ExpenseType";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPayrollListsExpenseType");
+EndFunction
+
+#EndRegion
+
+#Region PAYROLL_LISTS_AMOUNT
+
+// PayrollLists.Amount.OnChange
+Procedure PayrollListsAmountOnChange(Parameters) Export
+	AddViewNotify("OnSetPayrollListsAmountNotify", Parameters);
+	Binding = BindPayrollListsAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PayrollLists.Amount.Set
+Procedure SetPayrollListsAmount(Parameters, Results) Export
+	Binding = BindPayrollListsAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPayrollListsAmountNotify");
+EndProcedure
+
+// PayrollLists.Amount.Bind
+Function BindPayrollListsAmount(Parameters)
+	DataPath = "AccrualList.Amount";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPayrollListsAmount");
+EndFunction
+
+#EndRegion
+
+#Region PAYROLL_LISTS_LOAD_DATA
+
+// PayrollLists.Load
+Procedure PayrollListsLoad(Parameters) Export
+	Binding = BindPayrollListsLoad(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PayrollLists.Load.Set
 #If Server Then
 	
-Procedure ServerTableLoaderPayrollList(Parameters, Results) Export
-	Binding = BindPayrollListLoad(Parameters);
+Procedure ServerTableLoaderPayrollLists(Parameters, Results) Export
+	Binding = BindPayrollListsLoad(Parameters);
 	LoaderTable(Binding.DataPath, Parameters, Results);
 EndProcedure
 
 #EndIf
 
-// PayrollList.Load.Bind
-Function BindPayrollListLoad(Parameters)
-	DataPath = "PayrollList";
+// PayrollLists.Load.Bind
+Function BindPayrollListsLoad(Parameters)
+	DataPath = Parameters.TableName;
 	Binding = New Structure();
-	Return BindSteps("StepPayrollListLoadTable", DataPath, Binding, Parameters, "BindPayrollListLoad");
+	Return BindSteps("StepPayrollListsLoadTable", DataPath, Binding, Parameters, "BindPayrollListsLoad");
 EndFunction
 
-// PayrollList.LoadAtServer.Step
-Procedure StepPayrollListLoadTable(Parameters, Chain) Export
+// PayrollLists.LoadAtServer.Step
+Procedure StepPayrollListsLoadTable(Parameters, Chain) Export
 	Chain.LoadTable.Enable = True;
 	If Chain.Idle Then
 		Return;
 	EndIf;
-	Chain.LoadTable.Setter = "ServerTableLoaderPayrollList";
+	Chain.LoadTable.Setter = "ServerTableLoaderPayrollLists";
 	Options = ModelClientServer_V2.LoadTableOptions();
 	Options.TableAddress = Parameters.LoadData.Address;
 	Chain.LoadTable.Options.Add(Options);
@@ -12776,14 +12875,14 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "ProductionDurationsListOnAddRowFormNotify"       Then ViewClient_V2.ProductionDurationsListOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "ProductionDurationsListOnCopyRowFormNotify"      Then ViewClient_V2.ProductionDurationsListOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "ProductionDurationsListAfterDeleteRowFormNotify" Then ViewClient_V2.ProductionDurationsListAfterDeleteRowFormNotify(Parameters);
-	
-	ElsIf ViewNotify = "PayrollListOnAddRowFormNotify"       Then ViewClient_V2.PayrollListOnAddRowFormNotify(Parameters);
-	ElsIf ViewNotify = "PayrollListOnCopyRowFormNotify"      Then ViewClient_V2.PayrollListOnCopyRowFormNotify(Parameters);
-	ElsIf ViewNotify = "PayrollListAfterDeleteRowFormNotify" Then ViewClient_V2.PayrollListAfterDeleteRowFormNotify(Parameters);
-	
-	ElsIf ViewNotify = "TimeSheetListOnAddRowFormNotify"       Then ViewClient_V2.PayrollListOnAddRowFormNotify(Parameters);
-	ElsIf ViewNotify = "TimeSheetListOnCopyRowFormNotify"      Then ViewClient_V2.PayrollListOnCopyRowFormNotify(Parameters);
-	ElsIf ViewNotify = "TimeSheetListAfterDeleteRowFormNotify" Then ViewClient_V2.PayrollListAfterDeleteRowFormNotify(Parameters);
+		
+	ElsIf ViewNotify = "PayrollListsOnAddRowFormNotify"       Then ViewClient_V2.PayrollListsOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "PayrollListsOnCopyRowFormNotify"      Then ViewClient_V2.PayrollListsOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "PayrollListsAfterDeleteRowFormNotify" Then ViewClient_V2.PayrollListsAfterDeleteRowFormNotify(Parameters);
+		
+	ElsIf ViewNotify = "TimeSheetListOnAddRowFormNotify"       Then ViewClient_V2.TimeSheetListOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "TimeSheetListOnCopyRowFormNotify"      Then ViewClient_V2.TimeSheetListOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "TimeSheetListAfterDeleteRowFormNotify" Then ViewClient_V2.TimeSheetListAfterDeleteRowFormNotify(Parameters);
 	
 	ElsIf ViewNotify = "EmployeeCashAdvanceOnAddRowFormNotify"         Then ViewClient_V2.EmployeeCashAdvanceOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "EmployeeCashAdvanceOnCopyRowFormNotify"        Then ViewClient_V2.EmployeeCashAdvanceOnCopyRowFormNotify(Parameters);
@@ -12791,6 +12890,8 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "AdvanceFromRetailCustomersOnCopyRowFormNotify" Then ViewClient_V2.AdvanceFromRetailCustomersOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "SalaryPaymentOnAddRowFormNotify"               Then ViewClient_V2.SalaryPaymentOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "SalaryPaymentOnCopyRowFormNotify"              Then ViewClient_V2.SalaryPaymentOnCopyRowFormNotify(Parameters);
+	
+	ElsIf ViewNotify = "OnSetPayrollListsAmountNotify" Then ViewClient_V2.OnSetPayrollListsAmountNotify(Parameters);
 	
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);

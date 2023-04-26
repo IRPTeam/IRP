@@ -105,13 +105,14 @@ Function TimeSheet()
 		|	TimeSheetTimeSheetList.Date,
 		|	TimeSheetTimeSheetList.Employee,
 		|	TimeSheetTimeSheetList.Position,
-		|	TimeSheetTimeSheetList.AccrualAndDeductionType
+		|	TimeSheetTimeSheetList.AccrualAndDeductionType,
+		|	TimeSheetTimeSheetList.ProfitLossCenter
 		|INTO TimeSheet
 		|FROM
 		|	Document.TimeSheet.TimeSheetList AS TimeSheetTimeSheetList
 		|WHERE
-		|	TimeSheetTimeSheetList.Ref = &Ref
-		|	AND NOT TimeSheetTimeSheetList.AccrualAndDeductionType.Ref IS NULL"	
+		|	TimeSheetTimeSheetList.Ref = &Ref";
+//		|	AND NOT TimeSheetTimeSheetList.AccrualAndDeductionType.Ref IS NULL";
 EndFunction
 
 Function T9520S_TimeSheetInfo()
@@ -122,7 +123,8 @@ Function T9520S_TimeSheetInfo()
 		|	TimeSheet.Date,
 		|	TimeSheet.Employee,
 		|	TimeSheet.Position,
-		|	TimeSheet.AccrualAndDeductionType
+		|	TimeSheet.AccrualAndDeductionType,
+		|	TimeSheet.ProfitLossCenter
 		|INTO T9520S_TimeSheetInfo
 		|FROM
 		|	TimeSheet AS TimeSheet

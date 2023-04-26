@@ -71,6 +71,16 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <choiceParameters>
+      <name>Filter.OurCompany</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
+      </value>
+    </choiceParameters>
+    <choiceParameters>
+      <name>Filter.DeletionMark</name>
+      <value xsi:type="core:BooleanValue"/>
+    </choiceParameters>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -161,10 +171,10 @@
       <objectType typeId="5bea51a3-84ef-426d-bdb5-acddf42dab53" valueTypeId="de169bc1-84d9-4078-a5db-ac3c69e28431"/>
       <rowType typeId="7426fe49-5b20-4f58-ae9b-d6fa661315fb" valueTypeId="7731e137-bfce-49e8-8414-67f8a5fd5401"/>
     </producedTypes>
-    <name>PayrollList</name>
+    <name>AccrualList</name>
     <synonym>
       <key>en</key>
-      <value>Payroll list</value>
+      <value>Accrual list</value>
     </synonym>
     <attributes uuid="e200e073-c6f8-407b-aea8-b41878b6950b">
       <name>Key</name>
@@ -217,10 +227,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="d8945317-b62b-401c-998f-3c3dfefc7cf2">
-      <name>AccrualAndDeductionType</name>
+      <name>AccrualType</name>
       <synonym>
         <key>en</key>
-        <value>Accrual and deduction type</value>
+        <value>Accrual type</value>
       </synonym>
       <type>
         <types>CatalogRef.AccrualAndDeductionTypes</types>
@@ -228,6 +238,40 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
+      <choiceParameters>
+        <name>Filter.Type</name>
+        <value xsi:type="core:ReferenceValue">
+          <value>Enum.PayrollTypes.EnumValue.Accrual</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="03073d4c-ff35-4ee4-adca-f4a8c65eaac4">
+      <name>ExpenseType</name>
+      <synonym>
+        <key>en</key>
+        <value>Expense type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ExpenseAndRevenueTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="8b84c8d2-131c-4d55-813c-dd627074ec41">
+      <name>ProfitLossCenter</name>
+      <synonym>
+        <key>en</key>
+        <value>Profit loss center</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BusinessUnits</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -243,6 +287,227 @@
       <markNegatives>true</markNegatives>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="98112b54-d37e-4a9c-ac1e-a4bff099ba4f">
+    <producedTypes>
+      <objectType typeId="d068463c-0197-4ae9-8c0e-aca431b34fd2" valueTypeId="cd7fe306-9834-44cf-8462-a02af46bb790"/>
+      <rowType typeId="923cfd09-b9f7-4692-9d12-cad462588e50" valueTypeId="a7a93fa4-c3fb-415a-9f78-3ef93b6e741e"/>
+    </producedTypes>
+    <name>DeductionList</name>
+    <synonym>
+      <key>en</key>
+      <value>Deduction list</value>
+    </synonym>
+    <attributes uuid="037105e7-89d4-4782-96b5-97d710b723cc">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="1fde43e2-4985-4c1e-bbd0-793214e57215">
+      <name>Employee</name>
+      <synonym>
+        <key>en</key>
+        <value>Employee</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Partners</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <choiceParameters>
+        <name>Filter.Employee</name>
+        <value xsi:type="core:BooleanValue">
+          <value>true</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5537197b-3ca9-4f01-8676-4cbea3bdb01d">
+      <name>Position</name>
+      <synonym>
+        <key>en</key>
+        <value>Position</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.EmployeePositions</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="36ba1deb-989e-426f-ad16-9c5f3a176d48">
+      <name>DeductionType</name>
+      <synonym>
+        <key>en</key>
+        <value>Deduction type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.AccrualAndDeductionTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <choiceParameters>
+        <name>Filter.Type</name>
+        <value xsi:type="core:ReferenceValue">
+          <value>Enum.PayrollTypes.EnumValue.Deduction</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="45b4a893-dea6-4756-bef3-ebcdfe1a25ac">
+      <name>ExpenseType</name>
+      <synonym>
+        <key>en</key>
+        <value>Expense type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ExpenseAndRevenueTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9317431d-5278-4456-aafd-cff831d4044c">
+      <name>ProfitLossCenter</name>
+      <synonym>
+        <key>en</key>
+        <value>Profit loss center</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BusinessUnits</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a69bfbb2-9f72-4ff7-898f-932fadab68f7">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <markNegatives>true</markNegatives>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="44b0b978-8ddc-40ae-98c2-60bdacb0be71">
+    <producedTypes>
+      <objectType typeId="118dabc1-75de-438f-a191-e179185dcb4c" valueTypeId="6015a20f-b373-466a-abeb-fb134d19ed67"/>
+      <rowType typeId="3f5dc04e-acf9-41bf-859a-5736e535416e" valueTypeId="efb58da6-1170-4eea-9945-a0cfed641c98"/>
+    </producedTypes>
+    <name>CashAdvanceDeductionList</name>
+    <synonym>
+      <key>en</key>
+      <value>Cash advance deduction list</value>
+    </synonym>
+    <attributes uuid="d9978904-846e-46ef-b219-fbcfd38d4364">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="477e2e13-bca0-4668-b2f7-48a14a4629f9">
+      <name>Employee</name>
+      <synonym>
+        <key>en</key>
+        <value>Employee</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Partners</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <choiceParameters>
+        <name>Filter.Employee</name>
+        <value xsi:type="core:BooleanValue">
+          <value>true</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="1f95c5ed-9663-49ec-b9cf-0715eb552152">
+      <name>FinancialMovementType</name>
+      <synonym>
+        <key>en</key>
+        <value>Financial movement type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ExpenseAndRevenueTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameters>
+        <name>Filter.IsFinancialMovementType</name>
+        <value xsi:type="core:BooleanValue">
+          <value>true</value>
+        </value>
+      </choiceParameters>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="687f0846-7389-42ca-80f0-e4df90643bfa">
+      <name>Account</name>
+      <synonym>
+        <key>en</key>
+        <value>Account</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.CashAccounts</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="6ad7ab39-7411-4cd6-8d68-28e2d561b8fc">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <markNegatives>true</markNegatives>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

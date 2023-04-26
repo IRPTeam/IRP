@@ -46,7 +46,7 @@ Scenario: _0902000 preparation
 		When Create catalog Agreements objects
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog TaxRates objects
-		When Create catalog Taxes objects	
+		When Create catalog Taxes objects (with transaction type)	
 		When Create information register TaxSettings records with transaction type
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
@@ -1182,7 +1182,7 @@ Scenario: _090216 check tax in the BP (depend of transaction type)
 		And I click "OK" button
 		And "PaymentList" table became equal
 			| 'Retail customer' | 'Total amount' |
-			| ''                | '1 000,00'     |
+			| ''                | '925,93'       |
 		And I close all client application windows
 		
 
@@ -1223,7 +1223,7 @@ Scenario: _090217 check tax in the CP (depend of transaction type)
 		And I click "OK" button
 		And "PaymentList" table became equal
 			| 'Retail customer' | 'Total amount' |
-			| ''                | '1 000,00'     |
+			| ''                | '925,93'     |
 		And I close all client application windows	
 				
 
@@ -1257,14 +1257,14 @@ Scenario: _090218 check tax in the CR (depend of transaction type)
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
 			| 'Partner'   | 'Payer'             | 'Tax amount' | 'Total amount' | 'VAT' | 'Net amount' |
-			| 'Ferron BP' | 'Company Ferron BP' | '74,07'      | '1 000,00'     | '8%'  | '925,93'     |
+			| 'Ferron BP' | 'Company Ferron BP' | '152,54'     | '1 000,00'     | '18%' | '847,46'     |
 	* Change transaction type and check tax rate
 		And I select "Return from vendor" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table became equal
 			| 'Partner'   | 'Payer'             | 'Tax amount' | 'Total amount' | 'VAT' |
-			| 'Ferron BP' | 'Company Ferron BP' | ''           | '925,93'       | '0%'  |
+			| 'Ferron BP' | 'Company Ferron BP' | ''           | '847,46'       | '0%'  |
 		And I close all client application windows						
 
 
@@ -1338,7 +1338,7 @@ Scenario: _090220 check tax in the CE (depend of transaction type)
 		And I select "Other company expense" exact value from "Transaction type" drop-down list
 		And "PaymentList" table became equal
 			| 'Total amount' |
-			| '1 000,00'     |
+			| '847,46'     |
 		And I close all client application windows	
 
 
@@ -1371,7 +1371,7 @@ Scenario: _090221 check tax in the CR (depend of transaction type)
 		And I select "Other company revenue" exact value from "Transaction type" drop-down list
 		And "PaymentList" table became equal
 			| 'Total amount' |
-			| '1 000,00'     |
+			| '847,46'     |
 		And I close all client application windows	
 
 

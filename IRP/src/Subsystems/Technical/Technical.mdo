@@ -6,6 +6,7 @@
     <value>Technical</value>
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
+  <content>DataProcessor.GroupPhotoUploading</content>
   <subsystems>Localization</subsystems>
   <subsystems>Marketing</subsystems>
   <subsystems>Mobile</subsystems>

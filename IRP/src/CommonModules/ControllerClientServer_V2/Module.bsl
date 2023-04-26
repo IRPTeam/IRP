@@ -1054,26 +1054,26 @@ EndProcedure
 Function BindCommandDefaultTaxRate(Parameters)
 	Binding = New Structure();
 	
-	Binding.Insert("BankPayment", "StepChangeTaxRate_AgreementInList");
-	Binding.Insert("BankReceipt", "StepChangeTaxRate_AgreementInList");
-	Binding.Insert("CashExpense", "StepChangeTaxRate_WithoutAgreement");
-	Binding.Insert("CashPayment", "StepChangeTaxRate_AgreementInList");
-	Binding.Insert("CashReceipt", "StepChangeTaxRate_AgreementInList");
-	Binding.Insert("CashRevenue", "StepChangeTaxRate_WithoutAgreement");
-	Binding.Insert("EmployeeCashAdvance" , "StepChangeTaxRate_WithoutAgreement");
-	Binding.Insert("PurchaseInvoice"     , "StepChangeTaxRate_AgreementInHeader");
-	Binding.Insert("PurchaseOrder"       , "StepChangeTaxRate_AgreementInHeader");
-	Binding.Insert("PurchaseReturn"      , "StepChangeTaxRate_AgreementInHeader");
-	Binding.Insert("PurchaseReturnOrder" , "StepChangeTaxRate_AgreementInHeader");
-	Binding.Insert("RetailReturnReceipt" , "StepChangeTaxRate_AgreementInHeader");
-	Binding.Insert("RetailSalesReceipt"  , "StepChangeTaxRate_AgreementInHeader");
-	Binding.Insert("SalesInvoice"        , "StepChangeTaxRate_AgreementInHeader");
-	Binding.Insert("SalesOrder"          , "StepChangeTaxRate_AgreementInHeader");
-	Binding.Insert("SalesReportFromTradeAgent" , "StepChangeTaxRate_AgreementInHeader");
-	Binding.Insert("SalesReportToConsignor"    , "StepChangeTaxRate_AgreementInHeader");
-	Binding.Insert("SalesReturn"      , "StepChangeTaxRate_AgreementInHeader");
-	Binding.Insert("SalesReturnOrder" , "StepChangeTaxRate_AgreementInHeader");
-	Binding.Insert("WorkOrder"        , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("BankPayment__PaymentList", "StepChangeTaxRate_AgreementInList");
+	Binding.Insert("BankReceipt__PaymentList", "StepChangeTaxRate_AgreementInList");
+	Binding.Insert("CashExpense__PaymentList", "StepChangeTaxRate_WithoutAgreement");
+	Binding.Insert("CashPayment__PaymentList", "StepChangeTaxRate_AgreementInList");
+	Binding.Insert("CashReceipt__PaymentList", "StepChangeTaxRate_AgreementInList");
+	Binding.Insert("CashRevenue__PaymentList", "StepChangeTaxRate_WithoutAgreement");
+	Binding.Insert("EmployeeCashAdvance__PaymentList" , "StepChangeTaxRate_WithoutAgreement");
+	Binding.Insert("PurchaseInvoice__ItemList"     , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("PurchaseOrder__ItemList"       , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("PurchaseReturn__ItemList"      , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("PurchaseReturnOrder__ItemList" , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("RetailReturnReceipt__ItemList" , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("RetailSalesReceipt__ItemList"  , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("SalesInvoice__ItemList"        , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("SalesOrder__ItemList"          , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("SalesReportFromTradeAgent__ItemList" , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("SalesReportToConsignor__ItemList"    , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("SalesReturn__ItemList"      , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("SalesReturnOrder__ItemList" , "StepChangeTaxRate_AgreementInHeader");
+	Binding.Insert("WorkOrder__ItemList"        , "StepChangeTaxRate_AgreementInHeader");
 	
 	Return BindSteps("BindVoid", "", Binding, Parameters, "BindCommandDefaultTaxRate");
 EndFunction
@@ -1567,7 +1567,7 @@ Function BindTransactionType(Parameters)
 	Binding.Insert("SalesInvoice", 
 		"StepChangePartnerByTransactionType,
 		|StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_AgreementInHeader");
+		|StepChangeTaxRate_AgreementInHeader_InventoryOrigin");
 	
 	Binding.Insert("SalesOrder", 
 		"StepChangePartnerByTransactionType,
@@ -8331,12 +8331,7 @@ Procedure SetConsignorBatches(Parameters, Results) Export
 		If Not Parameters.Cache.Property("ConsignorBatches") Then
 			AddTableToCache(Parameters, "ConsignorBatches");
 		EndIf;
-		
-		If Parameters.Cache.ConsignorBatches.Count() > 0
-			Or Result.Value.ConsignorBatches.Count() > 0 Then
-				IsChanged = True;
-		EndIf;
-		
+				
 		// remove from cache all rows
 		Parameters.Cache.ConsignorBatches.Clear();
 		
@@ -8344,6 +8339,15 @@ Procedure SetConsignorBatches(Parameters, Results) Export
 		For Each Row In Result.Value.ConsignorBatches Do
 			AddRowToTableCache(Parameters, "ConsignorBatches", Row);
 		EndDo;
+		
+		If Parameters.Object.ConsignorBatches.Count() And Not Parameters.Cache.ConsignorBatches.Count() Then
+			// clear
+			IsChanged = True;
+		ElsIf Not Parameters.Object.ConsignorBatches.Count() And Parameters.Cache.ConsignorBatches.Count() Then
+			// add new
+			IsChanged = True;
+		EndIf;
+		
 	EndDo;
 	
 	Binding = BindConsignorBatches(Parameters);
@@ -13419,8 +13423,12 @@ Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters, BindName)
 	
 	MetadataBinding = New Map();
 	For Each KeyValue In Binding Do
-		MetadataName = KeyValue.Key;
-		MetadataBinding.Insert(MetadataName + "." + DataPath, Binding[MetadataName]);
+		ObjectName = KeyValue.Key;
+		ObjectNameSegments = StrSplit(ObjectName, "__", False);
+		If ObjectNameSegments.Count() = 2 And Parameters.TableName <> ObjectNameSegments[1] Then
+			Continue;
+		EndIf;
+		MetadataBinding.Insert(ObjectNameSegments[0] + "." + DataPath, Binding[ObjectName]);
 	EndDo;
 	
 	FullDataPath = Parameters.ObjectMetadataInfo.MetadataName + "." + DataPath;

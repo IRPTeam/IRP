@@ -1262,6 +1262,7 @@ Procedure CashInListSelection(Item, RowSelected, Field, StandardProcessing)
 	CashInData.Insert("MoneyTransfer"           , CurrentData.MoneyTransfer);
 	CashInData.Insert("Currency"                , CurrentData.Currency);
 	CashInData.Insert("Amount"                  , CurrentData.Amount);
+	CashInData.Insert("NetAmount"               , CurrentData.Amount);
 	CashInData.Insert("ConsolidatedRetailSales" , Object.ConsolidatedRetailSales);
 	
 	FillingData = GetFillingDataMoneyTransferForCashReceipt(CashInData);
@@ -1344,6 +1345,7 @@ Function GetFillingDataMoneyTransferForCashReceipt(CashInData)
 	FillingData.Insert("PaymentList"    , New Array());	
 	NewRow = New Structure();
 	NewRow.Insert("TotalAmount"           , CashInData.Amount);	
+	NewRow.Insert("NetAmount"             , CashInData.NetAmount);	
 	NewRow.Insert("MoneyTransfer"         , CashInData.MoneyTransfer);	
 	NewRow.Insert("FinancialMovementType" , CashInData.MoneyTransfer.ReceiveFinancialMovementType);
 	FillingData.PaymentList.Add(NewRow);

@@ -1588,7 +1588,7 @@ Function BindTransactionType(Parameters)
 	Binding.Insert("SalesInvoice", 
 		"StepChangePartnerByTransactionType,
 		|StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_AgreementInHeader");
+		|StepChangeTaxRate_AgreementInHeader_InventoryOrigin");
 	
 	Binding.Insert("SalesOrder", 
 		"StepChangePartnerByTransactionType,
@@ -8361,12 +8361,7 @@ Procedure SetConsignorBatches(Parameters, Results) Export
 		If Not Parameters.Cache.Property("ConsignorBatches") Then
 			AddTableToCache(Parameters, "ConsignorBatches");
 		EndIf;
-		
-		If Parameters.Cache.ConsignorBatches.Count() > 0
-			Or Result.Value.ConsignorBatches.Count() > 0 Then
-				IsChanged = True;
-		EndIf;
-		
+				
 		// remove from cache all rows
 		Parameters.Cache.ConsignorBatches.Clear();
 		
@@ -8374,6 +8369,15 @@ Procedure SetConsignorBatches(Parameters, Results) Export
 		For Each Row In Result.Value.ConsignorBatches Do
 			AddRowToTableCache(Parameters, "ConsignorBatches", Row);
 		EndDo;
+		
+		If Parameters.Object.ConsignorBatches.Count() And Not Parameters.Cache.ConsignorBatches.Count() Then
+			// clear
+			IsChanged = True;
+		ElsIf Not Parameters.Object.ConsignorBatches.Count() And Parameters.Cache.ConsignorBatches.Count() Then
+			// add new
+			IsChanged = True;
+		EndIf;
+		
 	EndDo;
 	
 	Binding = BindConsignorBatches(Parameters);

@@ -78,8 +78,6 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	Parameters.Insert("ExtractedData"    , New Structure());
 	Parameters.Insert("LoadData"         , New Structure());
 	
-	Parameters.Insert("RowsForRecalculate", New Array());
-	
 	Parameters.LoadData.Insert("Address"                   , LoadParameters.Address);
 	Parameters.LoadData.Insert("GroupColumns"              , LoadParameters.GroupColumns);
 	Parameters.LoadData.Insert("SumColumns"                , LoadParameters.SumColumns);
@@ -1588,7 +1586,7 @@ Function BindTransactionType(Parameters)
 	Binding.Insert("SalesInvoice", 
 		"StepChangePartnerByTransactionType,
 		|StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_AgreementInHeader_InventoryOrigin");
+		|StepChangeTaxRate_AgreementInHeader");
 	
 	Binding.Insert("SalesOrder", 
 		"StepChangePartnerByTransactionType,
@@ -4916,11 +4914,6 @@ Procedure StepChangeTaxRate_AgreementInHeader(Parameters, Chain) Export
 	StepChangeTaxRate(Parameters, Chain, True);
 EndProcedure
 
-// <List>.ChangeTaxRate.[AgreementInHeader_InventoryOrigin].Step
-Procedure StepChangeTaxRate_AgreementInHeader_InventoryOrigin(Parameters, Chain) Export
-	StepChangeTaxRate(Parameters, Chain, True, False, True);
-EndProcedure
-
 // <List>.ChangeTaxRate.[AgreementInList].Step
 Procedure StepChangeTaxRate_AgreementInList(Parameters, Chain) Export
 	StepChangeTaxRate(Parameters, Chain, , True);
@@ -4932,7 +4925,7 @@ Procedure StepChangeTaxRate_WithoutAgreement(Parameters, Chain) Export
 EndProcedure
 
 // <List>.ChangeTaxRate.Step
-Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, AgreementInList = False, UseInventoryOrigin = False)
+Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, AgreementInList = False)
 	Chain.ChangeTaxRate.Enable = True;
 	If Chain.Idle Then
 		Return;
@@ -4946,24 +4939,6 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 	Parameters.ArrayOfTaxInfo = TaxesServer.GetArrayOfTaxInfo(Parameters.Object, Options_Date, Options_Company, Options_TransactionType);
 	
 	TableRows =  GetRows(Parameters, Parameters.TableName);
-	If UseInventoryOrigin Then
-		If TableRows.Count() = 1
-			And TableRows[0].Property("InventoryOrigin") Then
-			If TableRows[0].InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then			
-				TableRows = GetRowsConsignorStocks(Parameters, Parameters.TableName);
-				Parameters.RowsForRecalculate = TableRows;
-			EndIf;
-		Else
-			TableRows = New Array();
-			For Each Row In TableRows Do
-				If Row.Property("InventoryOrigin") 
-					And Row.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then
-					TableRows.Add(Row);
-				EndIf;
-			EndDo;
-			Parameters.RowsForRecalculate = TableRows;
-		EndIf;
-	EndIf;
 	
 	For Each Row In TableRows Do
 		// ChangeTaxRate
@@ -4976,17 +4951,10 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 			Options.Agreement = GetPropertyObject(Parameters, Parameters.TableName + "." + "Agreement", Row.Key);
 		EndIf;
 		
-		If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt" Then
-			_InventoryOrigin = GetItemListInventoryOrigin(Parameters, Row.Key);
-			_ConsignorBatches = GetConsignorBatches(Parameters, Row.Key);
-			If _ConsignorBatches.Count() And _InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then 
-				UseInventoryOrigin = True;
-			EndIf;			
-		EndIf;
-	    
-		If UseInventoryOrigin Then
-			Options.InventoryOrigin = _InventoryOrigin;//GetItemListInventoryOrigin(Parameters, Row.Key);
-			Options.ConsignorBatches = _ConsignorBatches;// GetConsignorBatches(Parameters, Row.Key);
+		
+		If Row.Property("InventoryOrigin") Then
+			Options.InventoryOrigin  = GetItemListInventoryOrigin(Parameters, Row.Key);
+			Options.ConsignorBatches = GetConsignorBatches(Parameters, Row.Key);
 		EndIf;
 		
 		Options.Date            = Options_Date;
@@ -8417,10 +8385,10 @@ Function BindConsignorBatches(Parameters)
 	Binding = New Structure();
 			
 	Binding.Insert("SalesInvoice",
-		"StepChangeTaxRate_AgreementInHeader_InventoryOrigin");
+		"StepChangeTaxRate_AgreementInHeader");
 	
 	Binding.Insert("RetailSalesReceipt",
-		"StepChangeTaxRate_AgreementInHeader_InventoryOrigin");
+		"StepChangeTaxRate_AgreementInHeader");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindConsignorBatches");
 EndFunction
@@ -11068,11 +11036,7 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 	
 	PriceIncludeTax = GetPriceIncludeTax(Parameters);
 	
-	If Parameters.RowsForRecalculate.Count() Then
-		TableRows = Parameters.RowsForRecalculate;
-	Else
-		TableRows = GetRows(Parameters, Parameters.TableName);
-	EndIf;
+	TableRows = GetRows(Parameters, Parameters.TableName);
 	
 	For Each Row In TableRows Do
 		Options     = ModelClientServer_V2.CalculationsOptions();

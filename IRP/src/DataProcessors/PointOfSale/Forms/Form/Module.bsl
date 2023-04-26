@@ -935,6 +935,7 @@ Function CreateAdvanceDocumentsAtServer(DocumentParameters)
 			NewRow = BuilderAPI.AddRow(CashDocument, "PaymentList");
 			BuilderAPI.SetRowProperty(CashDocument, NewRow, "RetailCustomer", Object.RetailCustomer, "PaymentList");
 			BuilderAPI.SetRowProperty(CashDocument, NewRow, "TotalAmount"   , RowList.Amount, "PaymentList");
+			BuilderAPI.SetRowProperty(CashDocument, NewRow, "NetAmount"     , RowList.Amount, "PaymentList");
 		EndDo;
 		BuilderAPIWriteResult = BuilderAPI.Write(CashDocument, DocumentWriteMode.Posting);
 		ReturnData.Add(BuilderAPIWriteResult.Ref);
@@ -975,6 +976,7 @@ Function CreateAdvanceDocumentsAtServer(DocumentParameters)
 			BuilderAPI.SetRowProperty(BankDocument, NewRow, "PaymentType"      , RowList.PaymentType, "PaymentList");
 			BuilderAPI.SetRowProperty(BankDocument, NewRow, "BankTerm"         , RowList.BankTerm, "PaymentList");
 			BuilderAPI.SetRowProperty(BankDocument, NewRow, "TotalAmount"      , RowList.Amount, "PaymentList");
+			BuilderAPI.SetRowProperty(BankDocument, NewRow, "NetAmount"        , RowList.Amount, "PaymentList");
 		EndDo;
 		BuilderAPIWriteResult = BuilderAPI.Write(BankDocument, DocumentWriteMode.Posting);
 		ReturnData.Add(BuilderAPIWriteResult.Ref);

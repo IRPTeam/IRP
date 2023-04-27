@@ -189,6 +189,11 @@ Scenario: _2060001 preparation
 			| "Documents.PurchaseOrder.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);"|
 	And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |	
+	When Create Physical inventory and Stock adjustment as write-off for link
+	And I execute 1C:Enterprise script at server
+			| "Documents.PhysicalInventory.FindByNumber(152).GetObject().Write(DocumentWriteMode.Posting);"|
+	And I execute 1C:Enterprise script at server
+			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(152).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create catalog CancelReturnReasons objects
 		
 Scenario: _20600011 check preparation
@@ -2501,7 +2506,49 @@ Scenario: _2060025 check auto form in the IT - ITO (with sln)
 		
 										
 			
-				
+
+
+Scenario: _2060026 check auto form in the Physical inventory - Stock adjustment as write-off (with sln)
+		And I close all client application windows
+	* Select StockAdjustmentAsWriteOff
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I go to line in "List" table
+			| 'Number' |
+			| '152'  |
+		And I select current line in "List" table	
+	* Auto link
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Ok" button	
+		And "ItemList" table became equal
+			| '#' | 'Item'                         | 'Basis document'                                   | 'Item key' | 'Profit loss center' | 'Physical inventory'                               | 'Serial lot numbers' | 'Unit' | 'Source of origins' | 'Quantity' | 'Expense type' |
+			| '1' | 'Product 7 with SLN (new row)' | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'ODS'      | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | '9009100'            | 'pcs'  | ''                  | '1,000'    | 'Expense'      |
+			| '2' | 'Product 7 with SLN (new row)' | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'PZU'      | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | '9009098'            | 'pcs'  | ''                  | '1,000'    | 'Expense'      |
+			| '3' | 'Product 7 with SLN (new row)' | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'PZU'      | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | '9009098'            | 'pcs'  | ''                  | '1,000'    | 'Expense'      |
+			| '4' | 'Dress'                        | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'XS/Blue'  | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | ''                   | 'pcs'  | ''                  | '2,000'    | 'Expense'      |
+			| '5' | 'Product 7 with SLN (new row)' | ''                                                 | 'PZU'      | 'Front office'       | ''                                                 | '9009099'            | 'pcs'  | ''                  | '1,000'    | 'Expense'      |
+			| '6' | 'Product 1 with SLN'           | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'ODS'      | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | '9090098908'         | 'pcs'  | ''                  | '1,000'    | 'Expense'      |		
+		Then the number of "ItemList" table lines is "равно" "6"
+		And I click "Post and close" button
+		And I go to line in "List" table
+			| 'Number' |
+			| '152'  |
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| '#' | 'Item'                         | 'Basis document'                                   | 'Item key' | 'Profit loss center' | 'Physical inventory'                               | 'Serial lot numbers' | 'Unit' | 'Source of origins' | 'Quantity' | 'Expense type' |
+			| '1' | 'Product 7 with SLN (new row)' | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'ODS'      | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | '9009100'            | 'pcs'  | ''                  | '1,000'    | 'Expense'      |
+			| '2' | 'Product 7 with SLN (new row)' | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'PZU'      | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | '9009098'            | 'pcs'  | ''                  | '1,000'    | 'Expense'      |
+			| '3' | 'Product 7 with SLN (new row)' | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'PZU'      | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | '9009098'            | 'pcs'  | ''                  | '1,000'    | 'Expense'      |
+			| '4' | 'Dress'                        | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'XS/Blue'  | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | ''                   | 'pcs'  | ''                  | '2,000'    | 'Expense'      |
+			| '5' | 'Product 7 with SLN (new row)' | ''                                                 | 'PZU'      | 'Front office'       | ''                                                 | '9009099'            | 'pcs'  | ''                  | '1,000'    | 'Expense'      |
+			| '6' | 'Product 1 with SLN'           | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'ODS'      | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | '9090098908'         | 'pcs'  | ''                  | '1,000'    | 'Expense'      |		
+		And I close all client application windows
+	* Unpost documents
+		And I execute 1C:Enterprise script at server
+			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(152).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PhysicalInventory.FindByNumber(152).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+					
 		
 				
 		

@@ -91,6 +91,28 @@ Scenario: _092000 preparation (SerialLotNumbers)
 		When Create document InventoryTransfer objects (use serial lot number)
 		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransfer.FindByNumber(1029).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create Physical inventory and Stock adjustment as write-off for link
+		And I execute 1C:Enterprise script at server
+				| "Documents.PhysicalInventory.FindByNumber(152).GetObject().Write(DocumentWriteMode.Posting);"|
+		And I execute 1C:Enterprise script at server
+				| "Documents.StockAdjustmentAsWriteOff.FindByNumber(152).GetObject().Write(DocumentWriteMode.Posting);" |
+		When create Sales invoice and Sales order object (sln, autolink)
+		And I execute 1C:Enterprise script at server
+				| "Documents.SalesInvoice.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+				| "Documents.SalesOrder.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
+		When create Inventory transfer and Inventory transfer object (sln, autolink)
+		And I execute 1C:Enterprise script at server
+				| "Documents.InventoryTransferOrder.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+				| "Documents.InventoryTransfer.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
+		When create SalesOrder and ShipmentConfirmation object (sln, autolink)
+		And I execute 1C:Enterprise script at server
+				| "Documents.SalesOrder.FindByNumber(2055).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+				| "Documents.ShipmentConfirmation.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+				| "Documents.ShipmentConfirmation.FindByNumber(2055).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Add test extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
 		If "List" table does not contain lines Then
@@ -4162,13 +4184,114 @@ Scenario: _092090 uncheck checkbox Use serial lot number in the Item type
 
 
 
-
+Scenario: _092092 replace sln 
+	And I close all client application windows
+	* Open replace serial lot number data proc
+		Given I open hyperlink "e1cib/app/DataProcessor.ReplaceSerialLotNumber"
+	* Select sln (owner not item key)
+		And I select from the drop-down list named "SerialLotNumber" by "0514" string
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		Then the form attribute named "Item" became equal to ""
+	* Select sln (owner item key)
+		And I select from the drop-down list named "SerialLotNumber" by "9009099" string
+		And I click Select button of "New item" field
+		And I go to line in "List" table
+			| 'Description'                  |
+			| 'Product 7 with SLN (new row)' |
+		And I select current line in "List" table
+		And I click Select button of "New item key" field
+		And I go to line in "List" table
+			| 'Item'                         | 'Item key' |
+			| 'Product 7 with SLN (new row)' | 'ODS'      |
+		And I select current line in "List" table
+		And I click "Find refs" button
+	* Check refs
+		And "Documents" table became equal
+			| 'Is ok' | 'Repeating lines' | 'Document name'                      | 'Ref'                                                         | 'Tabular section' | 'Line number' | 'Key'                                  | 'Item'                         | 'Item key' | 'With price' | 'Current price type'      | 'Current price' | 'New price' | 'Change price' | 'Result price type'       | 'Result price' | 'Serial lot number' | 'Dep tabular section' | 'Dep line number' |
+			| 'Yes'   | '1'               | 'Document.InventoryTransfer'         | 'Inventory transfer 2 054 dated 11.04.2023 15:36:03'          | 'ItemList'        | '4'           | 'da35fdd5-7b12-43f1-b4d0-735ef5ce7257' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'         | ''                        | ''              | ''          | 'No'           | ''                        | ''             | '9009099'           | 'SerialLotNumbers'    | '3'               |
+			| 'Yes'   | '1'               | 'Document.SalesInvoice'              | 'Sales invoice 2 054 dated 11.04.2023 15:30:31'               | 'ItemList'        | '3'           | 'afee0020-c834-412e-9c63-fe4446236b06' | 'Product 7 with SLN (new row)' | 'PZU'      | 'Yes'        | 'en description is empty' | '100,00'        | '100,00'    | 'Yes'          | 'en description is empty' | '100,00'       | '9009099'           | 'SerialLotNumbers'    | '2'               |
+			| 'Yes'   | '1'               | 'Document.ShipmentConfirmation'      | 'Shipment confirmation 2 054 dated 11.04.2023 15:41:05'       | 'ItemList'        | '1'           | '695cf129-f778-445f-9c2d-6434ca352916' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'         | ''                        | ''              | ''          | 'No'           | ''                        | ''             | '9009099'           | 'SerialLotNumbers'    | '1'               |
+			| 'Yes'   | '1'               | 'Document.StockAdjustmentAsWriteOff' | 'Stock adjustment as write-off 152 dated 27.04.2023 13:34:31' | 'ItemList'        | '5'           | 'ec61a18c-fb83-4a53-85bc-a0c0c79f5d75' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'         | ''                        | ''              | ''          | 'No'           | ''                        | ''             | '9009099'           | 'SerialLotNumbers'    | '4'               |
+		And "Registers" table became equal
+			| 'Register name'                | 'Record UUID'                          | 'Dimensions' | 'Resources'                                   |
+			| 'InformationRegister.Barcodes' | '6c5e3e59-f2d6-4974-8cb4-5b1835c01c0c' | 'Barcode'    | 'ItemKey,SerialLotNumber,SourceOfOrigin,Unit' |
+		And "Dimensions" table became equal
+			| 'Name'    | 'Record UUID'                          | 'Value'   | 'New value' |
+			| 'Barcode' | '6c5e3e59-f2d6-4974-8cb4-5b1835c01c0c' | '9009099' | ''          |
+	* Replace
+		And I click the button named "Replace"
+		Then there are lines in TestClient message log
+			|'Done'|
+	* Check
+		And "Documents" table became equal
+			| 'Is ok' | 'Repeating lines' | 'Document name'                      | 'Ref'                                                         | 'Tabular section' | 'Line number' | 'Key'                                  | 'Item'                         | 'Item key' | 'With price' | 'Current price type'      | 'Current price' | 'New price' | 'Change price' | 'Result price type'       | 'Result price' | 'Serial lot number' | 'Dep tabular section' | 'Dep line number' |
+			| 'Yes'   | '1'               | 'Document.InventoryTransfer'         | 'Inventory transfer 2 054 dated 11.04.2023 15:36:03'          | 'ItemList'        | '4'           | 'da35fdd5-7b12-43f1-b4d0-735ef5ce7257' | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'         | ''                        | ''              | ''          | 'No'           | ''                        | ''             | '9009099'           | 'SerialLotNumbers'    | '3'               |
+			| 'Yes'   | '1'               | 'Document.SalesInvoice'              | 'Sales invoice 2 054 dated 11.04.2023 15:30:31'               | 'ItemList'        | '3'           | 'afee0020-c834-412e-9c63-fe4446236b06' | 'Product 7 with SLN (new row)' | 'ODS'      | 'Yes'        | 'en description is empty' | '100,00'        | '100,00'    | 'Yes'          | 'en description is empty' | '100,00'       | '9009099'           | 'SerialLotNumbers'    | '2'               |
+			| 'Yes'   | '1'               | 'Document.ShipmentConfirmation'      | 'Shipment confirmation 2 054 dated 11.04.2023 15:41:05'       | 'ItemList'        | '1'           | '695cf129-f778-445f-9c2d-6434ca352916' | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'         | ''                        | ''              | ''          | 'No'           | ''                        | ''             | '9009099'           | 'SerialLotNumbers'    | '1'               |
+			| 'Yes'   | '1'               | 'Document.StockAdjustmentAsWriteOff' | 'Stock adjustment as write-off 152 dated 27.04.2023 13:34:31' | 'ItemList'        | '5'           | 'ec61a18c-fb83-4a53-85bc-a0c0c79f5d75' | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'         | ''                        | ''              | ''          | 'No'           | ''                        | ''             | '9009099'           | 'SerialLotNumbers'    | '4'               |
+		Given I open hyperlink "e1cib/data/Document.SalesInvoice?ref=b79996ebf0bd544411edd85b627274f5"
+		And "ItemList" table became equal
+			| 'Item'                         | 'Item key' | 'Serial lot numbers' |
+			| 'Product 7 with SLN (new row)' | 'ODS'      | '9009099'            |
+		And I close all client application windows
 		
-
-
-
-
-
-
-
-	
+		
+Scenario: _092093 try replace sln (2 sln in one line)
+	And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/data/Document.SalesInvoice?ref=b79996ebf0bd544411edd85b627274f5"
+		And I go to line in "ItemList" table
+			| 'Item'                         | 'Item key' | 'Quantity' | 'Serial lot numbers' |
+			| 'Product 7 with SLN (new row)' | 'ODS'      | '1,000'    | '9009100'            |
+		And I select current line in "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I click choice button of the attribute named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I activate field named "Owner" in "List" table
+		And I go to line in "List" table
+			| 'Owner' | 'Reference' | 'Serial number' |
+			| 'ODS'   | '9009099'   | '9009099'       |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table
+		And I click "Post and close" button
+	* Open replace serial lot number data proc
+		Given I open hyperlink "e1cib/app/DataProcessor.ReplaceSerialLotNumber"
+	* Select sln (owner not item key)
+		And I select from the drop-down list named "SerialLotNumber" by "9009100" string
+		And I click Select button of "New item" field
+		And I go to line in "List" table
+			| 'Description'                  |
+			| 'Product 7 with SLN (new row)' |
+		And I select current line in "List" table
+		And I click Select button of "New item key" field
+		And I go to line in "List" table
+			| 'Item'                         | 'Item key' |
+			| 'Product 7 with SLN (new row)' | 'PZU'      |
+		And I select current line in "List" table
+		And I click "Find refs" button
+	* Check find documents
+		And "Documents" table became equal
+			| 'Is ok' | 'Repeating lines' | 'Document name'                      | 'Ref'                                                         | 'Tabular section' | 'Line number' | 'Key'                                  | 'Item'                         | 'Item key' | 'With price' | 'Current price type'      | 'Current price' | 'New price' | 'Change price' | 'Result price type'       | 'Result price' | 'Serial lot number' | 'Dep tabular section' | 'Dep line number' |
+			| 'Yes'   | '1'               | 'Document.InventoryTransfer'         | 'Inventory transfer 2 054 dated 11.04.2023 15:36:03'          | 'ItemList'        | '5'           | '62beaff5-0c7c-4ed2-b935-df570a2f5fe0' | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'         | ''                        | ''              | ''          | 'No'           | ''                        | ''             | '9009100'           | 'SerialLotNumbers'    | '4'               |
+			| 'Yes'   | '1'               | 'Document.PhysicalInventory'         | 'Physical inventory 152 dated 27.04.2023 13:32:16'            | 'ItemList'        | '1'           | '9c38dbc2-72fd-4c44-9577-9c69bad1f9fa' | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'         | ''                        | ''              | ''          | 'No'           | ''                        | ''             | '9009100'           | ''                    | ''                |
+			| 'No'    | '2'               | 'Document.SalesInvoice'              | 'Sales invoice 2 054 dated 11.04.2023 15:30:31'               | 'ItemList'        | '5'           | '3dec91b0-d529-4fe9-acc5-4dd217456246' | 'Product 7 with SLN (new row)' | 'ODS'      | 'Yes'        | 'en description is empty' | '100,00'        | '100,00'    | 'Yes'          | 'en description is empty' | '100,00'       | '9009100'           | 'SerialLotNumbers'    | '5'               |
+			| 'Yes'   | '1'               | 'Document.ShipmentConfirmation'      | 'Shipment confirmation 2 054 dated 11.04.2023 15:41:05'       | 'ItemList'        | '4'           | 'eb5672a4-10a7-42cd-8e73-cb5377ebff34' | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'         | ''                        | ''              | ''          | 'No'           | ''                        | ''             | '9009100'           | 'SerialLotNumbers'    | '3'               |
+			| 'Yes'   | '1'               | 'Document.StockAdjustmentAsWriteOff' | 'Stock adjustment as write-off 152 dated 27.04.2023 13:34:31' | 'ItemList'        | '1'           | '4b863b45-bd7d-4006-b3b1-637944924439' | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'         | ''                        | ''              | ''          | 'No'           | ''                        | ''             | '9009100'           | 'SerialLotNumbers'    | '1'               |
+	* Try replace
+		Then "Replace serial lot number" window is opened
+		And I click the button named "Replace"
+		Then "1C:Enterprise" window is opened
+		And I click the button named "OK"
+		And "Documents" table became equal
+			| 'Is ok' | 'Repeating lines' | 'Document name'                      | 'Ref'                                                         | 'Tabular section' | 'Line number' | 'Key'                                  | 'Item'                         | 'Item key' | 'With price' | 'Current price type'      | 'Current price' | 'New price' | 'Change price' | 'Result price type'       | 'Result price' | 'Serial lot number' | 'Dep tabular section' | 'Dep line number' |
+			| 'Yes'   | '1'               | 'Document.InventoryTransfer'         | 'Inventory transfer 2 054 dated 11.04.2023 15:36:03'          | 'ItemList'        | '5'           | '62beaff5-0c7c-4ed2-b935-df570a2f5fe0' | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'         | ''                        | ''              | ''          | 'No'           | ''                        | ''             | '9009100'           | 'SerialLotNumbers'    | '4'               |
+			| 'Yes'   | '1'               | 'Document.PhysicalInventory'         | 'Physical inventory 152 dated 27.04.2023 13:32:16'            | 'ItemList'        | '1'           | '9c38dbc2-72fd-4c44-9577-9c69bad1f9fa' | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'         | ''                        | ''              | ''          | 'No'           | ''                        | ''             | '9009100'           | ''                    | ''                |
+			| 'No'    | '2'               | 'Document.SalesInvoice'              | 'Sales invoice 2 054 dated 11.04.2023 15:30:31'               | 'ItemList'        | '5'           | '3dec91b0-d529-4fe9-acc5-4dd217456246' | 'Product 7 with SLN (new row)' | 'ODS'      | 'Yes'        | 'en description is empty' | '100,00'        | '100,00'    | 'Yes'          | 'en description is empty' | '100,00'       | '9009100'           | 'SerialLotNumbers'    | '5'               |
+			| 'Yes'   | '1'               | 'Document.ShipmentConfirmation'      | 'Shipment confirmation 2 054 dated 11.04.2023 15:41:05'       | 'ItemList'        | '4'           | 'eb5672a4-10a7-42cd-8e73-cb5377ebff34' | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'         | ''                        | ''              | ''          | 'No'           | ''                        | ''             | '9009100'           | 'SerialLotNumbers'    | '3'               |
+			| 'Yes'   | '1'               | 'Document.StockAdjustmentAsWriteOff' | 'Stock adjustment as write-off 152 dated 27.04.2023 13:34:31' | 'ItemList'        | '1'           | '4b863b45-bd7d-4006-b3b1-637944924439' | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'         | ''                        | ''              | ''          | 'No'           | ''                        | ''             | '9009100'           | 'SerialLotNumbers'    | '1'               |
+		And I close all client application windows

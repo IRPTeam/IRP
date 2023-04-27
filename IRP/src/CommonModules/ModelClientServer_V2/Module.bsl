@@ -1968,7 +1968,8 @@ Function ChangeTaxRateExecute(Options) Export
 				
 		// Tax rate from consignor batch
 		If ValueIsFilled(Options.InventoryOrigin) 
-			And Options.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then
+			And Options.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks")
+			And Options.ConsignorBatches.Count() Then
 			
 			Parameters = New Structure();
 			Parameters = New Structure();

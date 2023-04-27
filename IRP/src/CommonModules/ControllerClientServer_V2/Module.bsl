@@ -7,6 +7,7 @@ Function GetServerParameters(Object) Export
 	Result.Insert("ControllerModuleName", "ControllerClientServer_V2");
 	Result.Insert("TableName", "");
 	Result.Insert("Rows", Undefined);
+	Result.Insert("RowsConsignorStocks", New Array());
 	Result.Insert("ReadOnlyProperties", "");
 	Result.Insert("IsBasedOn", False);
 	
@@ -199,12 +200,29 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 		EndIf;
 	EndIf;
 		
+	If ValueIsFilled(ServerParameters.TableName) 
+		And (Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
+			Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt") Then
+			
+		For Each Row In ServerParameters.Object[ServerParameters.TableName] Do
+			If Not CommonFunctionsClientServer.ObjectHasProperty(Row, "InventoryOrigin") Then
+				Continue;
+			EndIf;
+			If Row.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then
+				ServerParameters.RowsConsignorStocks.Add(Row);
+			EndIf;
+		EndDo;		
+	EndIf;
+		
 	// the table row cannot be transferred to the server, so we put the data in an array of structures
 	WrappedRows = WrapRows(Parameters, ServerParameters.Rows);
 	If WrappedRows.Count() Then
 		Parameters.Insert("Rows", WrappedRows);
 	EndIf;
 		
+	WrappedRows = WrapRows(Parameters, ServerParameters.RowsConsignorStocks);
+	Parameters.Insert("RowsConsignorStocks", WrappedRows);
+	
 	Parameters.Insert("NextSteps"    , New Array());
 	Parameters.Insert("CacheRowsMap" , New Map());
 	Parameters.Insert("TableRowsMap" , New Map());
@@ -4928,7 +4946,7 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 	AllTableRows =  GetRows(Parameters, Parameters.TableName);
 	
 	If ConsignorBatches Then
-		For Each Row In AllTableRows Do
+		For Each Row In Parameters.RowsConsignorStocks Do
 			If Row.Property("InventoryOrigin") Then
 				Parameters.UseRowsForRecalculate = True;
 				If GetItemListInventoryOrigin(Parameters, Row.Key) = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then				
@@ -10585,6 +10603,12 @@ Procedure SetItemListTaxRate(Parameters, Results) Export
 				Parameters, TaxRateResult, , , , ReadOnlyFromCache);
 				
 			For Each Row In Parameters.Rows Do
+				If Row.Key = Result.Options.Key Then
+					Row.TaxRates[TaxRate.Key] = TaxRate.Value;
+				EndIf;
+			EndDo;
+
+			For Each Row In Parameters.RowsForRecalculate Do
 				If Row.Key = Result.Options.Key Then
 					Row.TaxRates[TaxRate.Key] = TaxRate.Value;
 				EndIf;

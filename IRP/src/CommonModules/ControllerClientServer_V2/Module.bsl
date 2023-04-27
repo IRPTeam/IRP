@@ -7,7 +7,6 @@ Function GetServerParameters(Object) Export
 	Result.Insert("ControllerModuleName", "ControllerClientServer_V2");
 	Result.Insert("TableName", "");
 	Result.Insert("Rows", Undefined);
-	Result.Insert("RowsConsignorStocks", New Array());
 	Result.Insert("ReadOnlyProperties", "");
 	Result.Insert("IsBasedOn", False);
 	
@@ -77,6 +76,9 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	Parameters.Insert("ChangedData"      , New Map());
 	Parameters.Insert("ExtractedData"    , New Structure());
 	Parameters.Insert("LoadData"         , New Structure());
+	
+	Parameters.Insert("RowsForRecalculate"   , New Array());
+	Parameters.Insert("UseRowsForRecalculate", False);
 	
 	Parameters.LoadData.Insert("Address"                   , LoadParameters.Address);
 	Parameters.LoadData.Insert("GroupColumns"              , LoadParameters.GroupColumns);
@@ -196,33 +198,13 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 			ServerParameters.Rows = New Array();
 		EndIf;
 	EndIf;
-	
-	If ValueIsFilled(ServerParameters.TableName) 
-		And (Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
-			Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt") Then
-			
-		For Each Row In ServerParameters.Object[ServerParameters.TableName] Do
-			If Not CommonFunctionsClientServer.ObjectHasProperty(Row, "InventoryOrigin") Then
-				Continue;
-			EndIf;
-			If Row.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then
-				ServerParameters.RowsConsignorStocks.Add(Row);
-			EndIf;
-		EndDo;
-			
-	EndIf;
-	
+		
 	// the table row cannot be transferred to the server, so we put the data in an array of structures
 	WrappedRows = WrapRows(Parameters, ServerParameters.Rows);
 	If WrappedRows.Count() Then
 		Parameters.Insert("Rows", WrappedRows);
 	EndIf;
-	
-	WrappedRows = WrapRows(Parameters, ServerParameters.RowsConsignorStocks);
-	If WrappedRows.Count() Then
-		Parameters.Insert("RowsConsignorStocks", WrappedRows);
-	EndIf;
-	
+		
 	Parameters.Insert("NextSteps"    , New Array());
 	Parameters.Insert("CacheRowsMap" , New Map());
 	Parameters.Insert("TableRowsMap" , New Map());
@@ -4924,8 +4906,13 @@ Procedure StepChangeTaxRate_WithoutAgreement(Parameters, Chain) Export
 	StepChangeTaxRate(Parameters, Chain);
 EndProcedure
 
+// <List>.ChangeTaxRate.[AgreementInHeader].Step
+Procedure StepChangeTaxRate_AgreementInHeader_ConsignorBatches(Parameters, Chain) Export
+	StepChangeTaxRate(Parameters, Chain, True, ,True);
+EndProcedure
+
 // <List>.ChangeTaxRate.Step
-Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, AgreementInList = False)
+Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, AgreementInList = False, ConsignorBatches = False)
 	Chain.ChangeTaxRate.Enable = True;
 	If Chain.Idle Then
 		Return;
@@ -4938,8 +4925,33 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 		
 	Parameters.ArrayOfTaxInfo = TaxesServer.GetArrayOfTaxInfo(Parameters.Object, Options_Date, Options_Company, Options_TransactionType);
 	
-	TableRows =  GetRows(Parameters, Parameters.TableName);
+	AllTableRows =  GetRows(Parameters, Parameters.TableName);
 	
+	If ConsignorBatches Then
+		For Each Row In AllTableRows Do
+			If Row.Property("InventoryOrigin") Then
+				Parameters.UseRowsForRecalculate = True;
+				If GetItemListInventoryOrigin(Parameters, Row.Key) = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then				
+					Parameters.RowsForRecalculate.Add(Row);
+				EndIf;
+			EndIf;
+		EndDo;
+	EndIf;
+	
+	TableRows = New Array();
+	
+	If Parameters.UseRowsForRecalculate Then
+		If Parameters.RowsForRecalculate.Count() Then
+			TableRows = Parameters.RowsForRecalculate;
+		Else
+			If AllTableRows.Count() = 1 Then
+				TableRows.Add(AllTableRows[0]);
+			EndIf;
+		EndIf;
+	Else
+		TableRows = AllTableRows;
+	EndIf;
+		
 	For Each Row In TableRows Do
 		// ChangeTaxRate
 		Options = ModelClientServer_V2.ChangeTaxRateOptions();
@@ -8332,7 +8344,7 @@ EndFunction
 
 // ConsignorBatches.Set
 Procedure SetConsignorBatches(Parameters, Results) Export
-	IsChanged = True;	
+	IsChanged = False;	
 	For Each Result In Results Do
 		If Not Parameters.Cache.Property("ConsignorBatches") Then
 			AddTableToCache(Parameters, "ConsignorBatches");
@@ -8346,13 +8358,10 @@ Procedure SetConsignorBatches(Parameters, Results) Export
 			AddRowToTableCache(Parameters, "ConsignorBatches", Row);
 		EndDo;
 		
-//		If Parameters.Object.ConsignorBatches.Count() And Not Parameters.Cache.ConsignorBatches.Count() Then
-//			// clear
-//			IsChanged = True;
-//		ElsIf Not Parameters.Object.ConsignorBatches.Count() And Parameters.Cache.ConsignorBatches.Count() Then
-//			// add new
-//			IsChanged = True;
-//		EndIf;
+		IsChanged = Not ControllerServer_V2.ArrayOfStructuresIsEqual(
+			Parameters.Object.ConsignorBatches, 
+			Parameters.Cache.ConsignorBatches, 
+			"Key, ItemKey, SerialLotNumber, SourceOfOrigin, Store, Batch, Quantity");
 		
 	EndDo;
 	
@@ -8385,10 +8394,10 @@ Function BindConsignorBatches(Parameters)
 	Binding = New Structure();
 			
 	Binding.Insert("SalesInvoice",
-		"StepChangeTaxRate_AgreementInHeader");
+		"StepChangeTaxRate_AgreementInHeader_ConsignorBatches");
 	
 	Binding.Insert("RetailSalesReceipt",
-		"StepChangeTaxRate_AgreementInHeader");
+		"StepChangeTaxRate_AgreementInHeader_ConsignorBatches");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindConsignorBatches");
 EndFunction
@@ -11038,6 +11047,13 @@ Procedure StepItemListCalculations(Parameters, Chain, WhoIsChanged)
 	
 	TableRows = GetRows(Parameters, Parameters.TableName);
 	
+	If Parameters.UseRowsForRecalculate Then
+		// Calculations when changed consignor batches
+		TableRows = Parameters.RowsForRecalculate;
+	Else
+		TableRows = GetRows(Parameters, Parameters.TableName);
+	EndIf;
+	
 	For Each Row In TableRows Do
 		Options     = ModelClientServer_V2.CalculationsOptions();
 		Options.Ref = Parameters.Object.Ref;
@@ -13046,13 +13062,6 @@ Function GetRows(Parameters, TableName)
 		Return Parameters.Rows;
 	EndIf;
 	Return Parameters.Object[TableName];
-EndFunction
-
-Function GetRowsConsignorStocks(Parameters, TableName)
-	If Parameters.Property("RowsConsignorStocks") Then
-		Return Parameters.RowsConsignorStocks;
-	EndIf;
-	Return New Array();
 EndFunction
 
 Procedure SetterForm(StepNames, DataPath, Parameters, Results, 

@@ -516,13 +516,15 @@ Function GetParametersPickupItems(Object, Form, AddInfo)
 	Parameters.Insert("UseSerialLotNumbers" , Object.Property("SerialLotNumbers"));
 	Parameters.Insert("UseSourceOfOrigins"  , Object.Property("SourceOfOrigins"));
 	
+	// isSerialLotNumberAtRow
 	isSerialLotNumberAtRow = False;
-	
 	If ObjectRefType = Type("DocumentRef.PhysicalInventory")
 		Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
 		isSerialLotNumberAtRow = Object.UseSerialLot;
 	EndIf;
+	Parameters.Insert("isSerialLotNumberAtRow", isSerialLotNumberAtRow);
 	
+	// FilterStructure
 	If Object.Property("Agreement") Then
 		FilterString = "Item, ItemKey, Unit, PriceType";
 	ElsIf isSerialLotNumberAtRow Then
@@ -534,30 +536,36 @@ Function GetParametersPickupItems(Object, Form, AddInfo)
 	If ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
 		FilterString = FilterString + ", Barcode, Date";
 	EndIf;
-	
 	FilterStructure = New Structure(FilterString);
 	Parameters.Insert("FilterStructure", FilterStructure);
-	Parameters.Insert("isSerialLotNumberAtRow", isSerialLotNumberAtRow);
 	
+	
+	// UseInventoryOrigin
 	UseInventoryOrigin = (ObjectRefType = Type("DocumentRef.RetailSalesReceipt") 
 			Or ObjectRefType = Type("DocumentRef.SalesInvoice")
 			Or ObjectRefType = Type("DocumentRef.InventoryTransfer")) 
 			And FOServer.IsUseCommissionTrading();
 	Parameters.Insert("UseInventoryOrigin", UseInventoryOrigin);
-		
-	StoreRef = Undefined;
+
+	// StoreInItemList
 	StoreInItemList = True;
-	
-	If ObjectRefType = Type("DocumentRef.InventoryTransfer") Then
-		StoreRef = Object.StoreSender;
+	If UseInventoryOrigin And ObjectRefType = Type("DocumentRef.InventoryTransfer") Then
 		StoreInItemList = False;
+	EndIf;	
+	Parameters.Insert("StoreInItemList", StoreInItemList);
+		
+	// StoreRef	
+	StoreRef = Undefined;
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Store") Then
+		StoreRef = Object.Store;
+	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Object, "StoreSender") Then
+		StoreRef = Object.StoreSender;
 	Else
 		StoreRef = Form.Store;
 	EndIf;
-
 	Parameters.Insert("StoreRef", StoreRef);
-	Parameters.Insert("StoreInItemList", StoreInItemList);
-	
+		
+	// QuantityColumnName	
 	QuantityColumnName = "Quantity";
 	If ObjectRefType = Type("DocumentRef.PhysicalInventory")
 		Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
@@ -565,6 +573,7 @@ Function GetParametersPickupItems(Object, Form, AddInfo)
 	EndIf;
 	Parameters.Insert("QuantityColumnName", QuantityColumnName);
 	
+	// SerialLotNumberInRow
 	SerialLotNumberInRow = False;
 	If ObjectRefType = Type("DocumentRef.PhysicalInventory")
 		Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then

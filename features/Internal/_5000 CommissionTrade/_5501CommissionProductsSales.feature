@@ -1281,9 +1281,9 @@ Scenario: _050043 check filling source of origin in the RSR POS (consignors prod
 			| '320,00' |
 		And I select current line in "List" table
 		And "ItemList" table became equal
-			| 'Store'    | 'Quantity in base unit' | 'Inventory origin' | 'Price type'              | 'Item'               | 'Serial lot numbers'       | 'Unit' | 'Profit loss center' | 'Item key' | 'Source of origins'                      | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' |
-			| 'Store 01' | '2,000'                 | 'Consignor stocks' | 'en description is empty' | 'Product 6 with SLN' | '57897909799; 89088088989' | 'pcs'  | 'Shop 02'            | 'PZU'      | 'Source of origin 9; Source of origin 9' | '2,000'    | '100,00' | 'Without VAT' | '200,00'     | '200,00'       |
-			| 'Store 01' | '1,000'                 | 'Consignor stocks' | 'en description is empty' | 'Bag'                | ''                         | 'pcs'  | 'Shop 02'            | 'ODS'      | 'Source of origin 11'                    | '1,000'    | '120,00' | 'Without VAT' | '120,00'     | '120,00'       |
+			| 'Store'    | 'Inventory origin' | 'Price type'              | 'Item'               | 'Serial lot numbers'       | 'Unit' | 'Profit loss center' | 'Item key' | 'Source of origins'                      | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' |
+			| 'Store 01' | 'Consignor stocks' | 'en description is empty' | 'Product 6 with SLN' | '57897909799; 89088088989' | 'pcs'  | 'Shop 02'            | 'PZU'      | 'Source of origin 9; Source of origin 9' | '2,000'    | '100,00' | 'Without VAT' | '200,00'     | '200,00'       |
+			| 'Store 01' | 'Consignor stocks' | 'en description is empty' | 'Bag'                | ''                         | 'pcs'  | 'Shop 02'            | 'ODS'      | 'Source of origin 11'                    | '1,000'    | '120,00' | 'Without VAT' | '120,00'     | '120,00'       |
 		And I close all client application windows
 		
 				

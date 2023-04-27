@@ -505,235 +505,6 @@ EndProcedure
 
 #EndRegion
 
-#Region PickUpItems
-
-Function GetParametersPickupItems(Object, Form, AddInfo)
-	Parameters = New Structure();
-	
-	ObjectRefType = TypeOf(Object.Ref);
-	
-	Parameters.Insert("ObjectRefType"       , ObjectRefType);
-	Parameters.Insert("UseSerialLotNumbers" , Object.Property("SerialLotNumbers"));
-	Parameters.Insert("UseSourceOfOrigins"  , Object.Property("SourceOfOrigins"));
-	
-	// isSerialLotNumberAtRow
-	isSerialLotNumberAtRow = False;
-	If ObjectRefType = Type("DocumentRef.PhysicalInventory")
-		Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
-		isSerialLotNumberAtRow = Object.UseSerialLot;
-	EndIf;
-	Parameters.Insert("isSerialLotNumberAtRow", isSerialLotNumberAtRow);
-	
-	// FilterStructure
-	If Object.Property("Agreement") Then
-		FilterString = "Item, ItemKey, Unit, PriceType";
-	ElsIf isSerialLotNumberAtRow Then
-		FilterString = "Item, ItemKey, Unit, SerialLotNumber";
-	Else
-		FilterString = "Item, ItemKey, Unit";
-	EndIf;
-
-	If ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
-		FilterString = FilterString + ", Barcode, Date";
-	EndIf;
-	FilterStructure = New Structure(FilterString);
-	Parameters.Insert("FilterStructure", FilterStructure);
-	
-	
-	// UseInventoryOrigin
-	UseInventoryOrigin = (ObjectRefType = Type("DocumentRef.RetailSalesReceipt") 
-			Or ObjectRefType = Type("DocumentRef.SalesInvoice")
-			Or ObjectRefType = Type("DocumentRef.InventoryTransfer")) 
-			And FOServer.IsUseCommissionTrading();
-	Parameters.Insert("UseInventoryOrigin", UseInventoryOrigin);
-
-	// StoreInItemList
-	StoreInItemList = True;
-	If UseInventoryOrigin And ObjectRefType = Type("DocumentRef.InventoryTransfer") Then
-		StoreInItemList = False;
-	EndIf;	
-	Parameters.Insert("StoreInItemList", StoreInItemList);
-		
-	// StoreRef	
-	StoreRef = Undefined;
-	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Store") Then
-		StoreRef = Object.Store;
-	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Object, "StoreSender") Then
-		StoreRef = Object.StoreSender;
-	Else
-		StoreRef = Form.Store;
-	EndIf;
-	Parameters.Insert("StoreRef", StoreRef);
-		
-	// QuantityColumnName	
-	QuantityColumnName = "Quantity";
-	If ObjectRefType = Type("DocumentRef.PhysicalInventory")
-		Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
-		QuantityColumnName = "PhysCount";
-	EndIf;
-	Parameters.Insert("QuantityColumnName", QuantityColumnName);
-	
-	// SerialLotNumberInRow
-	SerialLotNumberInRow = False;
-	If ObjectRefType = Type("DocumentRef.PhysicalInventory")
-		Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
-		SerialLotNumberInRow = True;
-	EndIf;
-	Parameters.Insert("SerialLotNumberInRow", SerialLotNumberInRow);
-	
-	
-	Parameters.Insert("Filter", AddInfo.Filter);
-		
-	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
-	ServerParameters.TableName = "ItemList";
-	FormParameters   = ControllerClientServer_V2.GetFormParameters(Form);
-	ServerSideParameters = New Structure();
-	ServerSideParameters.Insert("ServerParameters", ServerParameters);
-	ServerSideParameters.Insert("FormParameters"  , FormParameters);
-	Parameters.Insert("ServerSideParameters", ServerSideParameters);
-	Return Parameters;
-EndFunction
-
-// Pickup items end.
-// 
-// Parameters:
-//  Result - See BarcodeServer.SearchByBarcodes
-//  AddInfo - See BarcodeClient.GetBarcodeSettings
-Procedure PickupItemsEnd(ScanData, AddInfo) Export
-	If Not ValueIsFilled(ScanData) Or Not AddInfo.Property("Object") Or Not AddInfo.Property("Form") Then
-		Return;
-	EndIf;
-
-	Object 	= AddInfo.Object;
-	Form 	= AddInfo.Form;
-	
-	Parameters = GetParametersPickupItems(Object, Form, AddInfo);
-	
-	Parameters.ServerSideParameters.FormParameters.Form = Undefined;
-	
-	Result = DocumentsServer.PickupItemEnd(Parameters, ScanData);
-
-	Parameters.ServerSideParameters.FormParameters.Form = Form;
-
-	TmpParameters = ControllerClientServer_V2.GetParameters(
-		Parameters.ServerSideParameters.ServerParameters, 
-		Parameters.ServerSideParameters.FormParameters);
-	
-	ViewNotify = New Array();
-	
-	For Each RowInfo In Result.NewRows Do
-		NewRow = Object.ItemList.Add();
-		NewRow.Key = RowInfo.Key;
-		TmpParameters.Cache = RowInfo.Cache;
-		ControllerClientServer_V2.CommitChainChanges(TmpParameters, False);
-		For Each ViewNotifyItem In RowInfo.ViewNotify Do
-			ViewNotify.Add(ViewNotifyItem);
-		EndDo;
-	EndDo;
-		
-	For Each RowInfo In Result.UpdatedRows Do
-		TmpParameters.Cache = RowInfo.Cache;
-		ControllerClientServer_V2.CommitChainChanges(TmpParameters, False);
-		For Each ViewNotifyItem In RowInfo.ViewNotify Do
-			ViewNotify.Add(ViewNotifyItem);
-		EndDo;
-	EndDo;
-	
-	For Each TableName In Result.ArrayOfTableNames Do
-		TmpParameters.Cache = Result[TableName];
-		ControllerClientServer_V2.CommitChainChanges(TmpParameters, False);
-	EndDo;
-	
-	TmpParameters.ViewNotify = ViewNotify;
-	ControllerClientServer_V2.OnChangesNotifyView(TmpParameters);	
-	
-	If Result.ChoiceForms.PresentationStartChoice_Counter = 1 Then
-		Form.Items.ItemList.CurrentRow = Object.ItemList.FindRows(
-		New Structure("Key", Result.ChoiceForms.PresentationStartChoice_Key))[0].GetID();
-		Form.ItemListSerialLotNumbersPresentationStartChoice(Object.ItemList, Undefined, True);
-	EndIf;	
-	
-	If Result.ChoiceForms.StartChoice_Counter = 1 Then
-		Form.Items.ItemList.CurrentRow = Object.ItemList.FindRows(
-		New Structure("Key", Result.ChoiceForms.StartChoice_Key))[0].GetID();
-		Form.ItemListSerialLotNumberStartChoice(Object.ItemList, Undefined, True);
-	EndIf;	
-	
-	For Each Message In Result.UserMessages Do
-		CommonFunctionsClientServer.ShowUsersMessage(Message);
-	EndDo;	
-EndProcedure
-
-Procedure OpenPickupItems(Object, Form, Command) Export
-	NotifyParameters = New Structure();
-	NotifyParameters.Insert("Object", Object);
-	NotifyParameters.Insert("Form", Form);
-	NotifyParameters.Insert("Filter" , New Structure("DisableIfIsService", False));
-	NotifyDescription = New NotifyDescription("PickupItemsEnd", ThisObject, NotifyParameters);
-	OpenFormParameters = PickupItemsParameters(Object, Form);
-#If MobileClient Then
-
-#Else
-		If Command.AssociatedTable <> Undefined Then
-			OpenFormParameters.Insert("AssociatedTableName", Command.AssociatedTable.Name);
-			OpenFormParameters.Insert("Object", Object);
-		EndIf;
-
-		FormName = "CommonForm.PickUpItems";
-		OpenForm(FormName, OpenFormParameters, Form, , , , NotifyDescription);
-#EndIf
-
-EndProcedure
-
-Function PickupItemsParameters(Object, Form)
-	ReturnValue = New Structure();
-
-	StoreArray = New Array();
-	StoreInItemList = False;
-	For Each Row In Object.ItemList Do
-		If CommonFunctionsClientServer.ObjectHasProperty(Row, "Store") Then
-			StoreInItemList = True;
-			If ValueIsFilled(Row.Store) And StoreArray.Find(Row.Store) = Undefined Then
-				StoreArray.Add(Row.Store);
-			EndIf;
-		EndIf;
-	EndDo;
-	
-	If Not StoreInItemList And CommonFunctionsClientServer.ObjectHasProperty(Object, "Store") Then
-		If ValueIsFilled(Object.Store) Then
-			StoreArray.Add(Object.Store);
-		EndIf;
-	EndIf;
-	
-	If Not StoreInItemList And CommonFunctionsClientServer.ObjectHasProperty(Object, "StoreSender") Then
-		If ValueIsFilled(Object.StoreSender) Then
-			StoreArray.Add(Object.StoreSender);
-		EndIf;
-	EndIf;
-	
-	If CommonFunctionsClientServer.ObjectHasProperty(Object, "StoreReceiver") Then
-		ArrayOfReceiverStores = New Array();
-		ArrayOfReceiverStores.Add(Object.StoreReceiver);
-		ReturnValue.Insert("ReceiverStores", ArrayOfReceiverStores);
-	EndIf;
-	
-	EndPeriod = CommonFunctionsServer.GetCurrentSessionDate();
-	
-	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Agreement") Then
-		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
-		PriceType = AgreementInfo.PriceType;
-	Else
-		PriceType = PredefinedValue("Catalog.PriceTypes.EmptyRef");
-	EndIf;
-	ReturnValue.Insert("Stores", StoreArray);
-	ReturnValue.Insert("EndPeriod", EndPeriod);
-	ReturnValue.Insert("PriceType", PriceType);
-
-	Return ReturnValue;
-EndFunction
-
-#EndRegion
-
 #Region Item
 
 Function GetOpenSettingsForSelectItemWithoutServiceFilter(OpenSettings = Undefined, AddInfo = Undefined) Export
@@ -1542,3 +1313,236 @@ Procedure FinancialMovementTypeEditTextChange(Object, Form, Item, Text, Standard
 EndProcedure
 
 #EndRegion
+
+
+
+#Region PickUpItems
+
+Procedure OpenPickupItems(Object, Form, Command) Export
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", Form);
+	NotifyParameters.Insert("Filter" , New Structure("DisableIfIsService", False));
+	NotifyDescription = New NotifyDescription("PickupItemsEnd", ThisObject, NotifyParameters);
+	OpenFormParameters = PickupItemsParameters(Object, Form);
+#If MobileClient Then
+
+#Else
+		If Command.AssociatedTable <> Undefined Then
+			OpenFormParameters.Insert("AssociatedTableName", Command.AssociatedTable.Name);
+			OpenFormParameters.Insert("Object", Object);
+		EndIf;
+
+		FormName = "CommonForm.PickUpItems";
+		OpenForm(FormName, OpenFormParameters, Form, , , , NotifyDescription);
+#EndIf
+
+EndProcedure
+
+Function PickupItemsParameters(Object, Form)
+	ReturnValue = New Structure();
+
+	StoreArray = New Array();
+	StoreInItemList = False;
+	For Each Row In Object.ItemList Do
+		If CommonFunctionsClientServer.ObjectHasProperty(Row, "Store") Then
+			StoreInItemList = True;
+			If ValueIsFilled(Row.Store) And StoreArray.Find(Row.Store) = Undefined Then
+				StoreArray.Add(Row.Store);
+			EndIf;
+		EndIf;
+	EndDo;
+	
+	If Not StoreInItemList And CommonFunctionsClientServer.ObjectHasProperty(Object, "Store") Then
+		If ValueIsFilled(Object.Store) Then
+			StoreArray.Add(Object.Store);
+		EndIf;
+	EndIf;
+	
+	If Not StoreInItemList And CommonFunctionsClientServer.ObjectHasProperty(Object, "StoreSender") Then
+		If ValueIsFilled(Object.StoreSender) Then
+			StoreArray.Add(Object.StoreSender);
+		EndIf;
+	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "StoreReceiver") Then
+		ArrayOfReceiverStores = New Array();
+		ArrayOfReceiverStores.Add(Object.StoreReceiver);
+		ReturnValue.Insert("ReceiverStores", ArrayOfReceiverStores);
+	EndIf;
+	
+	EndPeriod = CommonFunctionsServer.GetCurrentSessionDate();
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Agreement") Then
+		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
+		PriceType = AgreementInfo.PriceType;
+	Else
+		PriceType = PredefinedValue("Catalog.PriceTypes.EmptyRef");
+	EndIf;
+	ReturnValue.Insert("Stores", StoreArray);
+	ReturnValue.Insert("EndPeriod", EndPeriod);
+	ReturnValue.Insert("PriceType", PriceType);
+
+	Return ReturnValue;
+EndFunction
+
+
+Function GetParametersPickupItems(Object, Form, AddInfo)
+	Parameters = New Structure();
+	
+	ObjectRefType = TypeOf(Object.Ref);
+	
+	Parameters.Insert("ObjectRefType"       , ObjectRefType);
+	Parameters.Insert("UseSerialLotNumbers" , Object.Property("SerialLotNumbers"));
+	Parameters.Insert("UseSourceOfOrigins"  , Object.Property("SourceOfOrigins"));
+	
+	// isSerialLotNumberAtRow
+	isSerialLotNumberAtRow = False;
+	If ObjectRefType = Type("DocumentRef.PhysicalInventory")
+		Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
+		isSerialLotNumberAtRow = Object.UseSerialLot;
+	EndIf;
+	Parameters.Insert("isSerialLotNumberAtRow", isSerialLotNumberAtRow);
+	
+	// FilterStructure
+	If Object.Property("Agreement") Then
+		FilterString = "Item, ItemKey, Unit, PriceType";
+	ElsIf isSerialLotNumberAtRow Then
+		FilterString = "Item, ItemKey, Unit, SerialLotNumber";
+	Else
+		FilterString = "Item, ItemKey, Unit";
+	EndIf;
+
+	If ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
+		FilterString = FilterString + ", Barcode, Date";
+	EndIf;
+	FilterStructure = New Structure(FilterString);
+	Parameters.Insert("FilterStructure", FilterStructure);
+	
+	
+	// UseInventoryOrigin
+	UseInventoryOrigin = (ObjectRefType = Type("DocumentRef.RetailSalesReceipt") 
+			Or ObjectRefType = Type("DocumentRef.SalesInvoice")
+			Or ObjectRefType = Type("DocumentRef.InventoryTransfer")) 
+			And FOServer.IsUseCommissionTrading();
+	Parameters.Insert("UseInventoryOrigin", UseInventoryOrigin);
+
+	// StoreInItemList
+	StoreInItemList = True;
+	If UseInventoryOrigin And ObjectRefType = Type("DocumentRef.InventoryTransfer") Then
+		StoreInItemList = False;
+	EndIf;	
+	Parameters.Insert("StoreInItemList", StoreInItemList);
+		
+	// StoreRef	
+	StoreRef = Undefined;
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Store") Then
+		StoreRef = Object.Store;
+	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Object, "StoreSender") Then
+		StoreRef = Object.StoreSender;
+	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Form, "Store") Then
+		StoreRef = Form.Store;
+	EndIf;
+	Parameters.Insert("StoreRef", StoreRef);
+		
+	// QuantityColumnName	
+	QuantityColumnName = "Quantity";
+	If ObjectRefType = Type("DocumentRef.PhysicalInventory")
+		Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
+		QuantityColumnName = "PhysCount";
+	EndIf;
+	Parameters.Insert("QuantityColumnName", QuantityColumnName);
+	
+	// SerialLotNumberInRow
+	SerialLotNumberInRow = False;
+	If ObjectRefType = Type("DocumentRef.PhysicalInventory")
+		Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
+		SerialLotNumberInRow = True;
+	EndIf;
+	Parameters.Insert("SerialLotNumberInRow", SerialLotNumberInRow);
+	
+	
+	Parameters.Insert("Filter", AddInfo.Filter);
+		
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
+	ServerParameters.TableName = "ItemList";
+	FormParameters   = ControllerClientServer_V2.GetFormParameters(Form);
+	ServerSideParameters = New Structure();
+	ServerSideParameters.Insert("ServerParameters", ServerParameters);
+	ServerSideParameters.Insert("FormParameters"  , FormParameters);
+	Parameters.Insert("ServerSideParameters", ServerSideParameters);
+	Return Parameters;
+EndFunction
+
+// Pickup items end.
+// 
+// Parameters:
+//  Result - See BarcodeServer.SearchByBarcodes
+//  AddInfo - See BarcodeClient.GetBarcodeSettings
+Procedure PickupItemsEnd(ScanData, AddInfo) Export
+	If Not ValueIsFilled(ScanData) Or Not AddInfo.Property("Object") Or Not AddInfo.Property("Form") Then
+		Return;
+	EndIf;
+
+	Object 	= AddInfo.Object;
+	Form 	= AddInfo.Form;
+	
+	Parameters = GetParametersPickupItems(Object, Form, AddInfo);
+	
+	Parameters.ServerSideParameters.FormParameters.Form = Undefined;
+	
+	Result = DocumentsServer.PickupItemEnd(Parameters, ScanData);
+
+	Parameters.ServerSideParameters.FormParameters.Form = Form;
+
+	TmpParameters = ControllerClientServer_V2.GetParameters(
+		Parameters.ServerSideParameters.ServerParameters, 
+		Parameters.ServerSideParameters.FormParameters);
+	
+	ViewNotify = New Array();
+	
+	For Each RowInfo In Result.NewRows Do
+		NewRow = Object.ItemList.Add();
+		NewRow.Key = RowInfo.Key;
+		TmpParameters.Cache = RowInfo.Cache;
+		ControllerClientServer_V2.CommitChainChanges(TmpParameters, False);
+		For Each ViewNotifyItem In RowInfo.ViewNotify Do
+			ViewNotify.Add(ViewNotifyItem);
+		EndDo;
+	EndDo;
+		
+	For Each RowInfo In Result.UpdatedRows Do
+		TmpParameters.Cache = RowInfo.Cache;
+		ControllerClientServer_V2.CommitChainChanges(TmpParameters, False);
+		For Each ViewNotifyItem In RowInfo.ViewNotify Do
+			ViewNotify.Add(ViewNotifyItem);
+		EndDo;
+	EndDo;
+	
+	For Each TableName In Result.ArrayOfTableNames Do
+		TmpParameters.Cache = Result[TableName];
+		ControllerClientServer_V2.CommitChainChanges(TmpParameters, False);
+	EndDo;
+	
+	TmpParameters.ViewNotify = ViewNotify;
+	ControllerClientServer_V2.OnChangesNotifyView(TmpParameters);	
+	
+	If Result.ChoiceForms.PresentationStartChoice_Counter = 1 Then
+		Form.Items.ItemList.CurrentRow = Object.ItemList.FindRows(
+		New Structure("Key", Result.ChoiceForms.PresentationStartChoice_Key))[0].GetID();
+		Form.ItemListSerialLotNumbersPresentationStartChoice(Object.ItemList, Undefined, True);
+	EndIf;	
+	
+	If Result.ChoiceForms.StartChoice_Counter = 1 Then
+		Form.Items.ItemList.CurrentRow = Object.ItemList.FindRows(
+		New Structure("Key", Result.ChoiceForms.StartChoice_Key))[0].GetID();
+		Form.ItemListSerialLotNumberStartChoice(Object.ItemList, Undefined, True);
+	EndIf;	
+	
+	For Each Message In Result.UserMessages Do
+		CommonFunctionsClientServer.ShowUsersMessage(Message);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+

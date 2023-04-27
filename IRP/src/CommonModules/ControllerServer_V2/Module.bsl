@@ -106,3 +106,56 @@ Function GetServerData(Object, ArrayOfTableNames, FormTaxColumnsExists, TaxesCac
 	EndIf;
 	Return ServerData;
 EndFunction
+
+Function ArrayOfStructuresIsEqual(Array0, Array1, StructureKeys) Export
+	If Array0.Count() = 0 And Array1.Count() = 0 Then
+		Return True;
+	EndIf;
+		
+	Table0 = New ValueTable();
+	Table1 = New ValueTable();
+	
+	ArrayOfColumns = New Array();
+	For Each ColumnsName In StrSplit(StructureKeys, ",") Do
+		ArrayOfColumns.Add(TrimAll(ColumnsName));
+	EndDo;
+	
+	For Each ColumnName In ArrayOfColumns Do
+		Table0.Columns.Add(ColumnName);
+		Table1.Columns.Add(ColumnName);
+	EndDo;
+	
+	For Each Row In Array0 Do
+		FillPropertyValues(Table0.Add(), Row, StructureKeys);
+	EndDo;
+	
+	For Each Row In Array1 Do
+		FillPropertyValues(Table1.Add(), Row, StructureKeys);
+	EndDo;
+	
+	Return ValueTablesIsEqual(Table0, Table1);
+EndFunction
+	
+Function ValueTablesIsEqual(Table0, Table1) Export
+	AllColumns = "";
+	For Each Column In Table0.Columns Do
+		AllColumns = AllColumns + ", " + Column.Name;
+	EndDo;
+	AllColumns = Mid(AllColumns, 2);
+	
+	Table = Table1.Copy();
+	Table.Columns.Add("Sign", New TypeDescription("Number"));
+	Table.FillValues(1, "Sign");
+	
+	For Each Row In Table0 Do
+		FillPropertyValues(Table.Add(), Row);
+	EndDo;
+	
+	Table.Columns.Add("Count");
+	Table.FillValues(1, "Count");
+	Table.GroupBy(AllColumns, "Sign, Count");
+	
+	Result = Table.Copy(New Structure("Count", 1), AllColumns + ", Sign");
+	Return Result.Count() = 0;
+EndFunction
+	

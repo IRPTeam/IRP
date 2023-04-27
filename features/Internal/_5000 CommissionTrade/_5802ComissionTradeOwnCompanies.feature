@@ -2178,8 +2178,7 @@ Scenario: _05834 сheck recognition of own and commission goods when scanning a 
 		And I close all client application windows
 		
 				
-Scenario: _05835 сheck recognition of own and commission goods when scanning a barcode in the IT
-		And I close all client application windows	
+
 
 					
 				

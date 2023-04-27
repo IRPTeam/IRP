@@ -4946,6 +4946,7 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 		Else
 			If AllTableRows.Count() = 1 Then
 				TableRows.Add(AllTableRows[0]);
+				Parameters.RowsForRecalculate.Add(AllTableRows[0]);
 			EndIf;
 		EndIf;
 	Else

@@ -107,6 +107,18 @@ Function GetServerData(Object, ArrayOfTableNames, FormTaxColumnsExists, TaxesCac
 	Return ServerData;
 EndFunction
 
+Procedure UpdateArrayOfStructures(ArrayFrom, ArrayTo) Export
+	For Each Row0 In ArrayFrom Do
+		For Each Row1 In ArrayTo Do
+			If Row0.Key = Row1.Key Then
+				For Each KeyValue In Row0 Do
+					Row1[KeyValue.Key] = KeyValue.Value;
+				EndDo;
+			EndIf;
+		EndDo;
+	EndDo;
+EndProcedure
+
 Function ArrayOfStructuresIsEqual(Array0, Array1, StructureKeys) Export
 	If Array0.Count() = 0 And Array1.Count() = 0 Then
 		Return True;

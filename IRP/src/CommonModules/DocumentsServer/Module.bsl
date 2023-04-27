@@ -637,7 +637,6 @@ Function GetArrayOfSalesOrdersBySalesInvoice(SalesInvoice) Export
 EndFunction
 
 Function PickupItemEnd(Val Parameters, Val ScanData) Export
-	
 	Result = New Structure();
 	Result.Insert("UserMessages" , New Array());
 	Result.Insert("NewRows"      , New Array());
@@ -705,17 +704,18 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 			EndIf;
 		EndIf;
 		
-		RowInfo = FillRow(Object, Parameters, ProcessRow, FillingValues);	
-		Result[ResultName].Add(New Structure("Key, Cache, ViewNotify", RowKey, 
+		RowInfo = FillRow(Object, Parameters, ProcessRow, FillingValues);
+		ResultRow = New Structure("Key, Cache, ViewNotify", RowKey, 
 			CleanCache(Object, RowInfo.Cache, ArrayOfTableNames), 
-			RowInfo.ViewNotify));
+			RowInfo.ViewNotify);
+		Result[ResultName].Add(ResultRow);
 		
 		If Parameters.UseSerialLotNumbers Then
 			If ValueIsFilled(ScanDataItem.SerialLotNumber) Then
 				AddNewSerialLotNumber(Object, RowKey, ScanDataItem);
 				If CommonFunctionsClientServer.ObjectHasProperty(Object, "ConsignorBatches") 
 					And FoundedRows.InventoryOrigin = Enums.InventoryOriginTypes.ConsignorStocks Then
-					UpdateConsignorBatches(Parameters, ProcessRow);
+					UpdateConsignorBatches(Parameters, ProcessRow, ResultRow);
 				EndIf;
 			ElsIf ScanDataItem.UseSerialLotNumber Then
 				Result.ChoiceForms.PresentationStartChoice_Counter = 
@@ -735,7 +735,7 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 				AddNewSourceOfOrigin(Object, RowKey, ScanDataItem);
 				If CommonFunctionsClientServer.ObjectHasProperty(Object, "ConsignorBatches") 
 					And FoundedRows.InventoryOrigin = Enums.InventoryOriginTypes.ConsignorStocks Then
-					UpdateConsignorBatches(Parameters, ProcessRow);
+					UpdateConsignorBatches(Parameters, ProcessRow, ResultRow);
 				EndIf;
 			EndIf;
 		EndIf;
@@ -860,6 +860,7 @@ Function FillCache(Object, ArrayOfTableNames, Result)
 			For Each Column In Object.Ref.Metadata().TabularSections.Find(TableName).Attributes Do
 				NewRow.Insert(Column.Name, Row[Column.Name]);
 			EndDo;
+						
 			Result[TableName][TableName].Add(NewRow);
 		EndDo;
 	EndDo;	
@@ -867,7 +868,7 @@ Function FillCache(Object, ArrayOfTableNames, Result)
 	Return Result;
 EndFunction
 
-Procedure UpdateConsignorBatches(Parameters, ProcessRow)
+Procedure UpdateConsignorBatches(Parameters, ProcessRow, ResultRow)
 	Parameters.ServerSideParameters.ServerParameters.Rows = New Array();
 	Parameters.ServerSideParameters.ServerParameters.Rows.Add(ProcessRow);
 			
@@ -876,6 +877,10 @@ Procedure UpdateConsignorBatches(Parameters, ProcessRow)
 		Parameters.ServerSideParameters.FormParameters);
 		
 	ControllerClientServer_V2.API_SetProperty(TmpParameters, New Structure("DataPath", "Command_UpdateConsignorBatches"), Undefined);
+	
+	If TmpParameters.Cache.Property("ItemList") And ResultRow.Cache.Property("ItemList") Then
+		ControllerServer_V2.UpdateArrayOfStructures(TmpParameters.Cache.ItemList, ResultRow.Cache.ItemList);
+	EndIf;
 EndProcedure
 
 Procedure AddNewSerialLotNumber(Object, RowKey, ScanDataItem)	

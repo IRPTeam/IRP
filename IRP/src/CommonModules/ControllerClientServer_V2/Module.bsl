@@ -7,7 +7,6 @@ Function GetServerParameters(Object) Export
 	Result.Insert("ControllerModuleName", "ControllerClientServer_V2");
 	Result.Insert("TableName", "");
 	Result.Insert("Rows", Undefined);
-	Result.Insert("RowsConsignorStocks", New Array());
 	Result.Insert("ReadOnlyProperties", "");
 	Result.Insert("IsBasedOn", False);
 	
@@ -80,6 +79,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	
 	Parameters.Insert("RowsForRecalculate"   , New Array());
 	Parameters.Insert("UseRowsForRecalculate", False);
+	Parameters.Insert("RowsConsignorStocks"  , New Array());
 	
 	Parameters.LoadData.Insert("Address"                   , LoadParameters.Address);
 	Parameters.LoadData.Insert("GroupColumns"              , LoadParameters.GroupColumns);
@@ -199,7 +199,8 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 			ServerParameters.Rows = New Array();
 		EndIf;
 	EndIf;
-		
+	
+	RowsConsignorStocks = New Array();	
 	If ValueIsFilled(ServerParameters.TableName) 
 		And (Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 			Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt") Then
@@ -209,7 +210,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 				Continue;
 			EndIf;
 			If Row.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then
-				ServerParameters.RowsConsignorStocks.Add(Row);
+				RowsConsignorStocks.Add(Row);
 			EndIf;
 		EndDo;		
 	EndIf;

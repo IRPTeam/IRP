@@ -713,10 +713,10 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 		If Parameters.UseSerialLotNumbers Then
 			If ValueIsFilled(ScanDataItem.SerialLotNumber) Then
 				AddNewSerialLotNumber(Object, RowKey, ScanDataItem);
-				If CommonFunctionsClientServer.ObjectHasProperty(Object, "ConsignorBatches") 
-					And FoundedRows.InventoryOrigin = Enums.InventoryOriginTypes.ConsignorStocks Then
-					UpdateConsignorBatches(Parameters, ProcessRow, ResultRow);
-				EndIf;
+				//If CommonFunctionsClientServer.ObjectHasProperty(Object, "ConsignorBatches") 
+				//	And FoundedRows.InventoryOrigin = Enums.InventoryOriginTypes.ConsignorStocks Then
+				//	UpdateConsignorBatches(Parameters, ProcessRow, ResultRow);
+				//EndIf;
 			ElsIf ScanDataItem.UseSerialLotNumber Then
 				Result.ChoiceForms.PresentationStartChoice_Counter = 
 				Result.ChoiceForms.PresentationStartChoice_Counter + 1;
@@ -733,13 +733,16 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 		If Parameters.UseSourceOfOrigins Then
 			If ValueIsFilled(ScanDataItem.SourceOfOrigin) Then
 				AddNewSourceOfOrigin(Object, RowKey, ScanDataItem);
-				If CommonFunctionsClientServer.ObjectHasProperty(Object, "ConsignorBatches") 
-					And FoundedRows.InventoryOrigin = Enums.InventoryOriginTypes.ConsignorStocks Then
-					UpdateConsignorBatches(Parameters, ProcessRow, ResultRow);
-				EndIf;
+				//If CommonFunctionsClientServer.ObjectHasProperty(Object, "ConsignorBatches") 
+				//	And FoundedRows.InventoryOrigin = Enums.InventoryOriginTypes.ConsignorStocks Then
+				//	UpdateConsignorBatches(Parameters, ProcessRow, ResultRow);
+				//EndIf;
 			EndIf;
 		EndIf;
 		
+		If CommonFunctionsClientServer.ObjectHasProperty(Object, "ConsignorBatches") Then
+			UpdateConsignorBatches(Parameters, ProcessRow, ResultRow);
+		EndIf;
 	EndDo; // ScanData
 	
 	Return FillCache(Object, ArrayOfTableNames, Result);

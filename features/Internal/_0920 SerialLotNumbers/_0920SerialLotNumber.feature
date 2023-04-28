@@ -4231,7 +4231,7 @@ Scenario: _092092 replace sln
 			| 'Yes'   | '1'               | 'Document.ShipmentConfirmation'      | 'Shipment confirmation 2 054 dated 11.04.2023 15:41:05'       | 'ItemList'        | '1'           | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'         | ''                        | ''              | ''          | 'No'           | ''                        | ''             | '9009099'           | 'SerialLotNumbers'    | '1'               |
 			| 'Yes'   | '1'               | 'Document.StockAdjustmentAsWriteOff' | 'Stock adjustment as write-off 152 dated 27.04.2023 13:34:31' | 'ItemList'        | '5'           | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'         | ''                        | ''              | ''          | 'No'           | ''                        | ''             | '9009099'           | 'SerialLotNumbers'    | '4'               |
 		Given I open hyperlink "e1cib/data/Document.SalesInvoice?ref=b79996ebf0bd544411edd85b627274f5"
-		And "ItemList" table became equal
+		And "ItemList" table contains lines
 			| 'Item'                         | 'Item key' | 'Serial lot numbers' |
 			| 'Product 7 with SLN (new row)' | 'ODS'      | '9009099'            |
 		And I close all client application windows

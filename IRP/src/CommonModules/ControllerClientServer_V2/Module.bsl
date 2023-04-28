@@ -221,7 +221,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 		Parameters.Insert("Rows", WrappedRows);
 	EndIf;
 	
-	WrappedRows = WrapRows(Parameters, ServerParameters.RowsConsignorStocks);
+	WrappedRows = WrapRows(Parameters, RowsConsignorStocks);
 	Parameters.Insert("RowsConsignorStocks", WrappedRows);
 	
 	Parameters.Insert("NextSteps"    , New Array());

@@ -2737,7 +2737,7 @@ Procedure PayrollListsAfterDeleteRow(Object, Form, TableName) Export
 EndProcedure
 
 Procedure PayrollListsAfterDeleteRowFormNotify(Parameters) Export
-	Return;
+	UpdateTotalAmounts(Parameters);
 EndProcedure
 
 Procedure PayrollListsLoad(Object, Form, Address, TableName, GroupColumn = "", SumColumn = "") Export

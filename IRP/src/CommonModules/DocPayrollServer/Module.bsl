@@ -55,6 +55,42 @@ EndProcedure
 
 #EndRegion
 
+Function GetCashAdvanceDeduction(Parameters) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	R3027B.Partner AS Employee,
+	|	R3027B.FinancialMovementType,
+	|	R3027B.Account,
+	|	R3027B.PlaningTransactionBasis,
+	|	R3027B.AmountBalance AS Amount
+	|FROM
+	|	AccumulationRegister.R3027B_EmployeeCashAdvance.Balance(&Boundary, Company = &Company
+	|	AND Branch = &Branch
+	|	AND Currency = &Currency
+	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS R3027B";
+	
+	Query.SetParameter("Company", Parameters.Company);
+	Query.SetParameter("Branch", Parameters.Branch);
+	Query.SetParameter("Currency", Parameters.Currency);
+	If ValueIsFilled(Parameters.Ref) Then
+		Query.SetParameter("Boundary", New Boundary(
+			New PointInTime(Parameters.EndDate, Parameters.Ref), BoundaryType.Excluding));
+	Else
+		Query.SetParameter("Boundary", Parameters.EndDate);
+	EndIf;
+	
+	ResultTable = Query.Execute().Unload();
+	
+	GroupColumn = "Employee, FinancialMovementType, Account, PlaningTransactionBasis";
+	SumColumn = "Amount";
+	
+	ResultTable.GroupBy(GroupColumn, SumColumn);
+	ResultTable.Sort("Employee");
+	
+	Return New Structure("Table, GroupColumn, SumColumn", ResultTable, GroupColumn, SumColumn);
+EndFunction
+
 Function GetPayrolls(Parameters) Export
 	ResultTable = New ValueTable();
 	ResultTable.Columns.Add("Employee");
@@ -97,6 +133,9 @@ Function GetPayrolls(Parameters) Export
 			NewRow.Amount = _MonthlySalary(Parameters, QuerySelection);
 		EndIf;
 		
+		If Not ValueIsFilled(NewRow.Amount) Then
+			NewRow.Amount = 0;
+		EndIf;
 	EndDo;
 	
 	GroupColumn = "Employee, Position, ProfitLossCenter, " + Parameters.TypeColumnName;
@@ -138,4 +177,23 @@ Function _MonthlySalary(Parameters, QuerySelection)
 	EndIf;
 	
 	Return (Value / TotalDays) * CountDays;
+EndFunction
+
+Function PutChoiceDataToServerStorage(ChoiceData, FormUUID) Export
+	ValueTable = New ValueTable();
+	ValueTable.Columns.Add("Employee");
+	ValueTable.Columns.Add("NetAmount");
+	ValueTable.Columns.Add("TotalAmount");
+	
+	For Each Row In ChoiceData Do
+		NewRow = ValueTable.Add();
+		FillPropertyValues(NewRow, Row);
+		NewRow.NetAmount  = Row.Amount;
+		NewRow.TotalAmount = Row.Amount;
+	EndDo;
+	GroupColumn = "Employee";
+	SumColumn = "NetAmount, TotalAmount";
+	ValueTable.GroupBy(GroupColumn, SumColumn);
+	Address = PutToTempStorage(ValueTable, FormUUID);
+	Return New Structure("Address, GroupColumn, SumColumn", Address, GroupColumn, SumColumn);
 EndFunction

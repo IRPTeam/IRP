@@ -283,9 +283,34 @@ Procedure FillDeduction(Command)
 EndProcedure
 
 &AtClient
-Procedure FillCashAdvanceDeduction(Command)
-	//FillPayrollLists();
+Async Procedure FillCashAdvanceDeduction(Command)
+	TableIsFilled = Object.CashAdvanceDeductionList.Count() > 0;
+	
+	If TableIsFilled Then
+		Answer = Await DoQueryBoxAsync(R().QuestionToUser_015, QuestionDialogMode.OKCancel);
+	EndIf;
+	
+	If Not TableIsFilled Or Answer = DialogReturnCode.OK Then
+		Result = FillCashAdvanceDeductionListAtServer();
+		Object.CashAdvanceDeductionList.Clear();		
+		ViewClient_V2.PayrollListsLoad(Object, ThisObject, Result.Address, 
+			"CashAdvanceDeductionList", Result.GroupColumn, Result.SumColumn);
+	EndIf;
 EndProcedure
+
+&AtServer
+Function FillCashAdvanceDeductionListAtServer()
+	FillingParameters = New Structure();
+	FillingParameters.Insert("Company"  , Object.Company);
+	FillingParameters.Insert("Branch"   , Object.Branch);
+	FillingParameters.Insert("Currency" , Object.Currency);
+	FillingParameters.Insert("Ref"      , Object.Ref);
+	FillingParameters.Insert("EndDate"  , Object.EndDate);
+	
+	Result = DocPayrollServer.GetCashAdvanceDeduction(FillingParameters);
+	Address = PutToTempStorage(Result.Table, ThisObject.UUID);
+	Return New Structure("Address, GroupColumn, SumColumn", Address, Result.GroupColumn, Result.SumColumn);
+EndFunction	
 
 &AtClient
 Async Procedure FillPayrollLists(TableName, TypeColumnName, _Type)

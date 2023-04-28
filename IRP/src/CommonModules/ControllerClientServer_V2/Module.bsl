@@ -474,11 +474,11 @@ Function GetEventHandlersByDataPath(Parameters, DataPath, IsBuilder)
 	EventHandlerMap.Insert("Inventory.ItemKey"  , "SetInventoryItemKey");
 	
 	// Payroll
-	EventHandlerMap.Insert("AccrualList.Amount"           , "SetPayrollListsAmount");
-	EventHandlerMap.Insert("AccrualList.AccrualType"      , "SetPayrollListsAccrualDeductionType");
-	EventHandlerMap.Insert("SeductionList.Amount"         , "SetPayrollListsAmount");
-	EventHandlerMap.Insert("SeductionList.DeductionType"  , "SetPayrollListsAccrualDeductionType");
-	EventHandlerMap.Insert("CashAdvanceDeduction.Amount"  , "SetPayrollListsAmount");
+	EventHandlerMap.Insert("AccrualList.Amount"              , "SetPayrollListsAmount");
+	EventHandlerMap.Insert("AccrualList.AccrualType"         , "SetPayrollListsAccrualDeductionType");
+	EventHandlerMap.Insert("DeductionList.Amount"            , "SetPayrollListsAmount");
+	EventHandlerMap.Insert("DeductionList.DeductionType"     , "SetPayrollListsAccrualDeductionType");
+	EventHandlerMap.Insert("CashAdvanceDeductionList.Amount" , "SetPayrollListsAmount");
 	
 	Return EventHandlerMap.Get(DataPath);
 EndFunction
@@ -12539,7 +12539,11 @@ EndFunction
 
 // PayrollLists.AccrualDeductionType.Bind
 Function BindPayrollListsAccrualDeductionType(Parameters)
-	DataPath = "AccrualList.AccrualType";
+	DataPathMap = New Map();
+	DataPathMap.Insert("AccrualList"   , "AccrualList.AccrualType");
+	DataPathMap.Insert("DeductionList" , "DeductionList.DeductionType");
+	DataPath = DataPathMap.Get(Parameters.TableName);
+	
 	Binding = New Structure();
 	Return BindSteps("StepPayrollListsChangeExpenseTypeByAccrualDeductionType", 
 		DataPath, Binding, Parameters, "BindPayrollListsAccrualDeductionType");
@@ -12579,7 +12583,11 @@ EndFunction
 
 // PayrollLists.ExpenseType.Bind
 Function BindPayrollListsExpenseType(Parameters)
-	DataPath = "AccrualList.ExpenseType";
+	DataPathMap = New Map();
+	DataPathMap.Insert("AccrualList"   , "AccrualList.ExpenseType");
+	DataPathMap.Insert("DeductionList" , "DeductionList.ExpenseType");
+	DataPath = DataPathMap.Get(Parameters.TableName);
+	
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPayrollListsExpenseType");
 EndFunction
@@ -12603,7 +12611,12 @@ EndProcedure
 
 // PayrollLists.Amount.Bind
 Function BindPayrollListsAmount(Parameters)
-	DataPath = "AccrualList.Amount";
+	DataPathMap = New Map();
+	DataPathMap.Insert("AccrualList"   , "AccrualList.Amount");
+	DataPathMap.Insert("DeductionList" , "DeductionList.Amount");
+	DataPathMap.Insert("CashAdvanceDeductionList" , "CashAdvanceDeductionList.Amount");
+	DataPath = DataPathMap.Get(Parameters.TableName);
+	
 	Binding = New Structure();
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPayrollListsAmount");
 EndFunction

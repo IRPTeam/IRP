@@ -77,3 +77,29 @@ EndProcedure
 #EndRegion
 
 #EndRegion
+
+Procedure ChoiceByAccrual(Object, Form) Export
+	OpenParameters = New Structure();
+	OpenParameters.Insert("Company"  , Object.Company);
+	OpenParameters.Insert("Branch"   , Object.Branch);
+	OpenParameters.Insert("Currency" , Object.Currency);
+	OpenParameters.Insert("Ref"      , Object.Ref);
+	
+	ArrayOfEmployee = New Array();
+	For Each Row In Object.PaymentList Do
+		ArrayOfEmployee.Add(Row.Employee);
+	EndDo;
+	OpenParameters.Insert("ArrayOfEmployee", ArrayOfEmployee);
+	
+	Notify = New NotifyDescription("ChoiceByAccrualEnd", ThisObject,New Structure("Object, Form", Object, Form));
+	OpenForm("Document.Payroll.Form.ChoiceByAccrualForm", OpenParameters, Form, New UUID(), , , 
+		Notify, FormWindowOpeningMode.LockOwnerWindow);	
+EndProcedure
+
+Procedure ChoiceByAccrualEnd(Result, Params) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	TableInfo = DocPayrollServer.PutChoiceDataToServerStorage(Result.ArrayOfDataRows, Params.Form.UUID);
+	ViewClient_V2.PaymentListLoad(Params.Object, Params.Form, TableInfo.Address, TableInfo.GroupColumn, TableInfo.SumColumn);
+EndProcedure	

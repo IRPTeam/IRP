@@ -56,6 +56,10 @@
   <defaultListForm>Document.Payroll.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.Payroll.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
+  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
+  <registerRecords>AccumulationRegister.R9510B_SalaryPayment</registerRecords>
+  <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -162,6 +166,15 @@
     <synonym>
       <key>en</key>
       <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="27f4c134-6c63-492a-b7ab-a10879643b43">
+    <name>ChoiceByAccrualForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice by accrual form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
@@ -401,6 +414,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="6e7e4490-25eb-4411-809e-a4539cb283ba">
+      <name>IsRevenue</name>
+      <synonym>
+        <key>en</key>
+        <value>Is revenue</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="a69bfbb2-9f72-4ff7-898f-932fadab68f7">
       <name>Amount</name>
       <synonym>
@@ -490,6 +517,19 @@
       </synonym>
       <type>
         <types>CatalogRef.CashAccounts</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a4e39745-c3f6-4c78-8e7f-a614f2d74605">
+      <name>PlaningTransactionBasis</name>
+      <synonym>
+        <key>en</key>
+        <value>Planing transaction basis</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.OutgoingPaymentOrder</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

@@ -109,7 +109,7 @@ EndFunction
 
 Function ArrayOfStructuresIsEqual(Array0, Array1, StructureKeys) Export
 	If Array0.Count() = 0 And Array1.Count() = 0 Then
-		Return True;
+		Return New Array();
 	EndIf;
 		
 	Table0 = New ValueTable();
@@ -156,6 +156,6 @@ Function ValueTablesIsEqual(Table0, Table1) Export
 	Table.GroupBy(AllColumns, "Sign, Count");
 	
 	Result = Table.Copy(New Structure("Count", 1), AllColumns + ", Sign");
-	Return Result.Count() = 0;
+	Return Result;
 EndFunction
 	

@@ -152,6 +152,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.ChoiceByAccrual.Visible = 
+		Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
 EndProcedure
 
 #EndRegion
@@ -448,6 +450,11 @@ EndProcedure
 
 #EndRegion
 
+&AtClient
+Procedure ChoiceByAccrual(Command)
+	DocPayrollClient.ChoiceByAccrual(Object, ThisObject);
+EndProcedure
+	
 &AtClient
 Procedure EditCurrencies(Command)
 	CurrentData = ThisObject.Items.PaymentList.CurrentData;

@@ -177,6 +177,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.TransitAccount.ReadOnly = ValueIsFilled(Object.TransitAccount);
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
+	Form.Items.ChoiceByAccrual.Visible = 
+		Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
 EndProcedure
 
 #EndRegion
@@ -536,6 +538,11 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure ChoiceByAccrual(Command)
+	DocPayrollClient.ChoiceByAccrual(Object, ThisObject);
+EndProcedure
 
 &AtClient
 Procedure EditCurrencies(Command)

@@ -359,6 +359,8 @@ Function GetChain()
 	
 	Chain.Insert("ConsignorBatchesFillBatches"                  , GetChainLink("ConsignorBatchesFillBatchesExecute"));
 	
+	Chain.Insert("ChangeExpenseTypeByAccrualDeductionType", GetChainLink("ChangeExpenseTypeByAccrualDeductionTypeExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -1562,6 +1564,24 @@ Function ChangeCurrentQuantityInProductionsExecute(Options) Export
 	EndIf;
 	Result.CurrentQuantity = CurrentQuantityInfo.BasisQuantity;
 	Return Result;	
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_EXPENSE_TYPE_BY_ACCRUAL_DEDUCTION_TYPE
+
+Function ChangeExpenseTypeByAccrualDeductionTypeOptions() Export
+	Return GetChainLinkOptions("AccrualDeductionType, ExpenseType");
+EndFunction
+
+Function ChangeExpenseTypeByAccrualDeductionTypeExecute(Options) Export
+	If ValueIsFilled(Options.AccrualDeductionType) Then
+		ExpenseType = CommonFunctionsServer.GetRefAttribute(Options.AccrualDeductionType, "ExpenseType");
+		If ValueIsFilled(ExpenseType) Then
+			Return ExpenseType;
+		EndIf;
+	EndIf;
+	Return Options.ExpenseType;
 EndFunction
 
 #EndRegion

@@ -55,8 +55,34 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
-	Form.Items.FillPayrolls.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAccrual.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesDeduction.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesCashAdvanceDeduction.Enabled = Not Form.ReadOnly;
+	
+	Form.Items.FillAccrual.Enabled = Not Form.ReadOnly;
+	Form.Items.FillDeduction.Enabled = Not Form.ReadOnly;	
+	Form.Items.FillCashAdvanceDeduction.Enabled = Not Form.ReadOnly;	
+EndProcedure
+
+&AtClient
+Procedure UpdateTotalAmounts() Export
+	_TotalAccrual   = 0;
+	_TotalDeduction = 0;
+	_TotalCashAdvanceDeduction = 0;
+	
+	For Each Row In Object.AccrualList Do
+		_TotalAccrual = _TotalAccrual + Row.Amount;
+	EndDo;
+	
+	For Each Row In Object.DeductionList Do
+		_TotalDeduction = _TotalDeduction + Row.Amount;
+	EndDo;
+	
+	For Each Row In Object.CashAdvanceDeductionList Do
+		_TotalCashAdvanceDeduction = _TotalCashAdvanceDeduction + Row.Amount;
+	EndDo;
+	
+	ThisObject.TotalPaymentAmount = _TotalAccrual - _TotalDeduction - _TotalCashAdvanceDeduction;
 EndProcedure
 
 #EndRegion
@@ -68,6 +94,16 @@ Procedure DateOnChange(Item)
 	DocPayrollClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure BeginDateOnChange(Item)
+	DocPayrollClient.BeginDateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure EndDateOnChange(Item)
+	DocPayrollClient.EndDateOnChange(Object, ThisObject, Item);
+EndProcedure
+
 #EndRegion
 
 #Region COMPANY
@@ -75,16 +111,6 @@ EndProcedure
 &AtClient
 Procedure CompanyOnChange(Item)
 	DocPayrollClient.CompanyOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPayrollClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
-	DocPayrollClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -98,30 +124,66 @@ EndProcedure
 	
 #EndRegion
 
-
-#Region PAYROLL_LIST
+#Region PAYROLL_LISTS_LIST
 
 &AtClient
-Procedure PayrollListSelection(Item, RowSelected, Field, StandardProcessing)
-	DocPayrollClient.PayrollListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+Procedure PayrollListsSelection(Item, RowSelected, Field, StandardProcessing)
+	DocPayrollClient.PayrollListsSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
 &AtClient
-Procedure PayrollListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	DocPayrollClient.PayrollListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter)
+Procedure PayrollListsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocPayrollClient.PayrollListsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure
 
 &AtClient
-Procedure PayrollListBeforeDeleteRow(Item, Cancel)
-	DocPayrollClient.PayrollListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+Procedure PayrollListsBeforeDeleteRow(Item, Cancel)
+	DocPayrollClient.PayrollListsBeforeDeleteRow(Object, ThisObject, Item, Cancel);
 EndProcedure
 
 &AtClient
-Procedure PayrollListAfterDeleteRow(Item)
-	DocPayrollClient.PayrollListAfterDeleteRow(Object, ThisObject, Item);
+Procedure PayrollListsAfterDeleteRow(Item)
+	DocPayrollClient.PayrollListsAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
-#Region PAYROLL_LIST_COLUMNS
+#Region PAYROLL_LISTS_COLUMNS
+
+#Region ACCRUAL_TYPE
+
+&AtClient
+Procedure PayrollListsAccrualTypeOnChange(Item)
+	DocPayrollClient.PayrollListsAccrualDeductionTypeOnChange(Object, ThisObject, Item, "AccrualList");
+EndProcedure
+
+#EndRegion
+
+#Region DEDUCTION_TYPE
+
+&AtClient
+Procedure PayrollListsDeductionTypeOnChange(Item)
+	DocPayrollClient.PayrollListsAccrualDeductionTypeOnChange(Object, ThisObject, Item, "DeductionList");
+EndProcedure
+
+#EndRegion
+
+#Region AMOUNT
+
+&AtClient
+Procedure AccrualListAmountOnChange(Item)
+	DocPayrollClient.PayrollListsAmountOnChange(Object, ThisObject, Item, "AccrualList");
+EndProcedure
+
+&AtClient
+Procedure DeductionListAmountOnChange(Item)
+	DocPayrollClient.PayrollListsAmountOnChange(Object, ThisObject, Item, "DeductionList");
+EndProcedure
+
+&AtClient
+Procedure CashAdvanceDeductionListAmountOnChange(Item)
+	DocPayrollClient.PayrollListsAmountOnChange(Object, ThisObject, Item, "CashAdvanceDeductionList");
+EndProcedure
+	
+#EndRegion
 
 #EndRegion
 
@@ -202,28 +264,6 @@ EndProcedure
 #Region COMMANDS
 
 &AtClient
-Procedure FillPayrolls(Command)
-	Result = FillPayrollsAtServer();
-	Object.PayrollList.Clear();	
-	ViewClient_V2.PayrollListLoad(Object, ThisObject, Result.Address, Result.GroupColumn, Result.SumColumn);
-EndProcedure
-
-&AtServer
-Function FillPayrollsAtServer()
-	QueryParameters = New Structure();
-	QueryParameters.Insert("Company"   , Object.Company);
-	QueryParameters.Insert("Branch"    , Object.Branch);
-	QueryParameters.Insert("BeginDate" , Object.BeginDate);
-	QueryParameters.Insert("EndDate"   , Object.EndDate);
-	
-	PayrollsTable = DocPayrollServer.GetPayrolls(QueryParameters);
-	Address = PutToTempStorage(PayrollsTable, ThisObject.UUID);
-	GroupColumn = "Employee, Position, AccrualAndDeductionType";
-	SumColumn = "Amount";
-	Return New Structure("Address, GroupColumn, SumColumn", Address, GroupColumn, SumColumn);
-EndFunction
-
-&AtClient
 Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
@@ -231,8 +271,99 @@ EndProcedure
 #EndRegion
 
 &AtClient
-Procedure EditCurrencies(Command)
-	FormParameters = CurrenciesClientServer.GetParameters_V3(Object);
+Procedure FillAccrual(Command)
+	FillPayrollLists("AccrualList", "AccrualType", 
+		PredefinedValue("Enum.PayrollTypes.Accrual"));
+EndProcedure
+
+&AtClient
+Procedure FillDeduction(Command)
+	FillPayrollLists("DeductionList", "DeductionType",  
+		PredefinedValue("Enum.PayrollTypes.Deduction"));
+EndProcedure
+
+&AtClient
+Async Procedure FillCashAdvanceDeduction(Command)
+	TableIsFilled = Object.CashAdvanceDeductionList.Count() > 0;
+	
+	If TableIsFilled Then
+		Answer = Await DoQueryBoxAsync(R().QuestionToUser_015, QuestionDialogMode.OKCancel);
+	EndIf;
+	
+	If Not TableIsFilled Or Answer = DialogReturnCode.OK Then
+		Result = FillCashAdvanceDeductionListAtServer();
+		Object.CashAdvanceDeductionList.Clear();		
+		ViewClient_V2.PayrollListsLoad(Object, ThisObject, Result.Address, 
+			"CashAdvanceDeductionList", Result.GroupColumn, Result.SumColumn);
+	EndIf;
+EndProcedure
+
+&AtServer
+Function FillCashAdvanceDeductionListAtServer()
+	FillingParameters = New Structure();
+	FillingParameters.Insert("Company"  , Object.Company);
+	FillingParameters.Insert("Branch"   , Object.Branch);
+	FillingParameters.Insert("Currency" , Object.Currency);
+	FillingParameters.Insert("Ref"      , Object.Ref);
+	FillingParameters.Insert("EndDate"  , Object.EndDate);
+	
+	Result = DocPayrollServer.GetCashAdvanceDeduction(FillingParameters);
+	Address = PutToTempStorage(Result.Table, ThisObject.UUID);
+	Return New Structure("Address, GroupColumn, SumColumn", Address, Result.GroupColumn, Result.SumColumn);
+EndFunction	
+
+&AtClient
+Async Procedure FillPayrollLists(TableName, TypeColumnName, _Type)
+	TableIsFilled = Object[TableName].Count() > 0;
+	
+	If TableIsFilled Then
+		Answer = Await DoQueryBoxAsync(R().QuestionToUser_015, QuestionDialogMode.OKCancel);
+	EndIf;
+	
+	If Not TableIsFilled Or Answer = DialogReturnCode.OK Then
+		Result = FillPayrollListsAtServer(TypeColumnName, _Type);
+		Object[TableName].Clear();		
+		ViewClient_V2.PayrollListsLoad(Object, ThisObject, Result.Address, TableName, Result.GroupColumn, Result.SumColumn);
+	EndIf;
+EndProcedure
+
+&AtServer
+Function FillPayrollListsAtServer(TypeColumnName, _Type)
+	FillingParameters = New Structure();
+	FillingParameters.Insert("Company"   , Object.Company);
+	FillingParameters.Insert("Branch"    , Object.Branch);
+	FillingParameters.Insert("BeginDate" , Object.BeginDate);
+	FillingParameters.Insert("EndDate"   , Object.EndDate);
+	FillingParameters.Insert("_Type"     , _Type);
+	FillingParameters.Insert("TypeColumnName" , TypeColumnName);
+	
+	Result = DocPayrollServer.GetPayrolls(FillingParameters);
+	Address = PutToTempStorage(Result.Table, ThisObject.UUID);
+	Return New Structure("Address, GroupColumn, SumColumn", Address, Result.GroupColumn, Result.SumColumn);
+EndFunction	
+
+&AtClient
+Procedure EditCurrenciesAccrual(Command)
+	EditCurrencies(Command, "AccrualList");
+EndProcedure
+
+&AtClient
+Procedure EditCurrenciesCashAdvanceDeduction(Command)
+	EditCurrencies(Command, "CashAdvanceDeductionList");
+EndProcedure
+
+&AtClient
+Procedure EditCurrenciesDeduction(Command)
+	EditCurrencies(Command, "DeductionList");
+EndProcedure
+
+&AtClient
+Procedure EditCurrencies(Command, TableName)
+	CurrentData = ThisObject.Items[TableName].CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;	
+	FormParameters = CurrenciesClientServer.GetParameters_V5(Object, CurrentData);
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
@@ -246,3 +377,5 @@ Procedure ShowHiddenTables(Command)
 EndProcedure
 
 #EndRegion
+
+ThisObject.MainTables = "AccrualList, DeductionList, CashAdvanceDeductionList";

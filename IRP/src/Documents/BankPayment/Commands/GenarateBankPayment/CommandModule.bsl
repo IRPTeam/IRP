@@ -110,6 +110,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	ValueTable.Columns.Add("Agreement"       , New TypeDescription("CatalogRef.Agreements"));
 	ValueTable.Columns.Add("Partner"         , New TypeDescription("CatalogRef.Partners"));
 	ValueTable.Columns.Add("Amount"          , New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
+	ValueTable.Columns.Add("NetAmount"       , New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
 	ValueTable.Columns.Add("Payee"           , New TypeDescription("CatalogRef.Companies"));
 	ValueTable.Columns.Add("PlaningTransactionBasis",
 		New TypeDescription(Metadata.DefinedTypes.typePlaningTransactionBasises.Type));
@@ -118,7 +119,11 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	
 	For Each Table In ArrayOfTables Do
 		For Each Row In Table Do
-			FillPropertyValues(ValueTable.Add(), Row);
+			NewRow = ValueTable.Add();
+			FillPropertyValues(NewRow, Row);
+			If Not ValueIsFilled(NewRow.NetAmount) Then
+				NewRow.NetAmount = NewRow.Amount;
+			EndIf;
 		EndDo;
 	EndDo;
 
@@ -154,6 +159,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			NewRow.Insert("Partner"                 , RowPaymentList.Partner);
 			NewRow.Insert("Payee"                   , RowPaymentList.Payee);
 			NewRow.Insert("TotalAmount"             , RowPaymentList.Amount);
+			NewRow.Insert("NetAmount"               , RowPaymentList.NetAmount);
 			NewRow.Insert("PlaningTransactionBasis" , RowPaymentList.PlaningTransactionBasis);
 			NewRow.Insert("FinancialMovementType"   , RowPaymentList.FinancialMovementType);
 			NewRow.Insert("Order"                   , RowPaymentList.Order);

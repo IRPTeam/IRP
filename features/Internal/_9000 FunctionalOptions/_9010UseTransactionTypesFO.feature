@@ -50,6 +50,7 @@ Scenario: _900103 check transaction types in the SO and SI (FO Use retail orders
 		And drop-down list named "TransactionType" is equal to:
 			| Sales                   |
 			| Shipment to trade agent |
+			| Retail sales            |
 		And I close all client application windows
 
 Scenario: _900104 check transaction types in the SO and SI (FO Use commission trading)

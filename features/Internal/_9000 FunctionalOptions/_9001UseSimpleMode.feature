@@ -289,9 +289,9 @@ Scenario: _900009 create SI
 		And I select "ser" from "Item" drop-down list by string in "ItemList" table
 	* Check filling
 		And "ItemList" table became equal
-			| '#' | 'Item'      | 'Price type'          | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Offers amount' | 'Net amount' | 'Total amount' |
-			| '1' | 'Product 1' | 'Customer price type' | '1,000'    | 'No'                 | '200,00' | ''              | '200,00'     | '200,00'       |
-			| '2' | 'Service 1' | 'Customer price type' | '1,000'    | 'No'                 | '100,00' | ''              | '100,00'     | '100,00'       |
+			| '#' | 'Item'      | 'Price type'          | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Offers amount' | 'Total amount' |
+			| '1' | 'Product 1' | 'Customer price type' | '1,000'    | 'No'                 | '200,00' | ''              | '200,00'       |
+			| '2' | 'Service 1' | 'Customer price type' | '1,000'    | 'No'                 | '100,00' | ''              | '100,00'       |
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice01$$" variable
 		And I delete "$$SalesInvoice01$$" variable
@@ -325,7 +325,7 @@ Scenario: _900010 create Cash receipt based on SI (Payment from customer)
 			| '#' | 'Partner'    | 'Total amount' |
 			| '1' | 'Customer 1' | '450,00'       |
 		Then the form attribute named "Branch" became equal to ""
-		And the editing text of form attribute named "DocumentAmount" became equal to "450,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "450,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
 	* Change amount
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
@@ -392,7 +392,7 @@ Scenario: _900015 create Cash payment based on PI (Payment to the vendor)
 			| '#' | 'Partner'             | 'Total amount' |
 			| '1' | 'Vendor and customer' | '590,00'       |
 		Then the form attribute named "Branch" became equal to ""
-		And the editing text of form attribute named "DocumentAmount" became equal to "590,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "590,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
 	* Change amount
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
@@ -470,12 +470,11 @@ Scenario: _900020 create Purchase return based on PI
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "Store" became equal to "My Store"
 		And "ItemList" table became equal
-			| '#' | 'Item'      | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Offers amount' | 'Net amount' | 'Purchase invoice'      | 'Total amount' | 'Detail' | 'Additional analytic' | 'Return reason' |
-			| '1' | 'Product 1' | '5,000'    | 'No'                 | '100,00' | ''              | '500,00'     | '$$PurchaseInvoice01$$' | '500,00'       | ''       | ''                    | ''              |
+			| '#' | 'Item'      | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Offers amount' | 'Purchase invoice'      | 'Total amount' | 'Detail' | 'Additional analytic' | 'Return reason' |
+			| '1' | 'Product 1' | '5,000'    | 'No'                 | '100,00' | ''              | '$$PurchaseInvoice01$$' | '500,00'       | ''       | ''                    | ''              |
 		Then the form attribute named "Currency" became equal to "USD"
 		Then the form attribute named "Branch" became equal to ""
 		Then the form attribute named "Author" became equal to "en description is empty"
-		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "500,00"
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "500,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
 	* Change quantity
@@ -527,11 +526,10 @@ Scenario: _900021 create Purchase return
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "Store" became equal to "My Store"
 		And "ItemList" table became equal
-			| '#' | 'Item'      | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Offers amount' | 'Net amount' | 'Purchase invoice'      | 'Total amount' | 'Detail' | 'Return reason' |
-			| '1' | 'Product 1' | '1,000'    | 'No'                 | '100,00' | ''              | '100,00'     | '$$PurchaseInvoice01$$' | '100,00'       | ''       | ''              |
+			| '#' | 'Item'      | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Offers amount' | 'Purchase invoice'      | 'Total amount' | 'Detail' | 'Return reason' |
+			| '1' | 'Product 1' | '1,000'    | 'No'                 | '100,00' | ''              | '$$PurchaseInvoice01$$' | '100,00'       | ''       | ''              |
 		Then the form attribute named "Currency" became equal to "USD"
 		Then the form attribute named "Branch" became equal to ""
-		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "100,00"
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "100,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
 		And I click the button named "FormPost"
@@ -577,11 +575,10 @@ Scenario: _900028 create Sales return based on SI
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "Store" became equal to "My Store"
 		And "ItemList" table became equal
-			| '#' | 'Item'      | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Offers amount' | 'Net amount' | 'Total amount' | 'Sales invoice'      | 'Return reason' |
-			| '1' | 'Service 1' | '1,000'    | 'No'                 | '100,00' | ''              | '100,00'     | '100,00'       | '$$SalesInvoice01$$' | ''              |
+			| '#' | 'Item'      | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Offers amount' | 'Total amount' | 'Sales invoice'      | 'Return reason' |
+			| '1' | 'Service 1' | '1,000'    | 'No'                 | '100,00' | ''              | '100,00'       | '$$SalesInvoice01$$' | ''              |
 		Then the form attribute named "PriceIncludeTax" became equal to "No"
 		Then the form attribute named "Currency" became equal to "USD"
-		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "100,00"
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "100,00"
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesReturn01$$" variable
@@ -629,11 +626,10 @@ Scenario: _900029 create Sales return
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "Store" became equal to "My Store"
 		And "ItemList" table became equal
-			| '#' | 'Item'      | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Offers amount' | 'Net amount' | 'Total amount' | 'Sales invoice'      | 'Return reason' | 'Additional analytic' |
-			| '1' | 'Product 1' | '1,000'    | 'No'                 | '200,00' | ''              | '200,00'     | '200,00'       | '$$SalesInvoice01$$' | ''              | ''                    |
+			| '#' | 'Item'      | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Offers amount' | 'Total amount' | 'Sales invoice'      | 'Return reason' | 'Additional analytic' |
+			| '1' | 'Product 1' | '1,000'    | 'No'                 | '200,00' | ''              | '200,00'       | '$$SalesInvoice01$$' | ''              | ''                    |
 		Then the form attribute named "PriceIncludeTax" became equal to "No"
 		Then the form attribute named "Branch" became equal to ""
-		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "200,00"
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "200,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
 		And I click the button named "FormPost"
@@ -666,13 +662,13 @@ Scenario: _900031 return money to customer based on Sales return
 			| '#' | 'Partner'    | 'Total amount' |
 			| '1' | 'Customer 1' | '150,00'       |
 		Then the form attribute named "Branch" became equal to ""
-		And the editing text of form attribute named "DocumentAmount" became equal to "150,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "150,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
 		And I activate "Total amount" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "100,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "100,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "100,00"
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashPayment03$$" variable
 		And I delete "$$CashPayment03$$" variable
@@ -706,7 +702,7 @@ Scenario: _900032 return money to customer
 			| '#' | 'Partner'    | 'Total amount' |
 			| '1' | 'Customer 1' | '50,00'        |
 		Then the form attribute named "Branch" became equal to ""
-		And the editing text of form attribute named "DocumentAmount" became equal to "50,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "50,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashPayment04$$" variable
@@ -745,7 +741,7 @@ Scenario: _900035 return money from vendor
 			| '#' | 'Partner'             | 'Total amount' |
 			| '1' | 'Vendor and customer' | '100,00'       |
 		Then the form attribute named "Branch" became equal to ""
-		And the editing text of form attribute named "DocumentAmount" became equal to "100,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "100,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashReceipt03$$" variable

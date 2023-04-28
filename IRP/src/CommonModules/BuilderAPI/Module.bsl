@@ -244,6 +244,48 @@ Function SetRowProperty(Wrapper, Row, ColumnName, Value, TableName = Undefined) 
 	Return Result;
 EndFunction
 
+// Execute command.
+// 
+// Parameters:
+//  Wrapper - See CreateWrapper
+//  Row - Structure, String, Number, ValueTableRow - Row or Row key or Row index
+//  CommandName - String - Command name
+//  TableName - Undefined, String - Table name. If empty - get from wrapper as defaul table
+// 
+// Returns:
+//  Structure - Set row property:
+// * Context - See CreateWrapper
+// * Cache - Structure -
+Function ExecuteCommand(Wrapper, Row, CommandName, TableName = Undefined) Export
+	If TableName = Undefined Then
+		TableName = Wrapper.DefaultTable;
+	EndIf;
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object); // Structure
+	ServerParameters.TableName = TableName;
+	
+	Rows = New Array(); // Array Of ValueTableRow
+	If TypeOf(Row) = Type("Number") Then
+		//@skip-check invocation-parameter-type-intersect
+		Rows.Add(Wrapper.Object[TableName][0]);
+	ElsIf TypeOf(Row) = Type("String") Then
+		//@skip-check invocation-parameter-type-intersect, dynamic-access-method-not-found
+		Rows.Add(Wrapper.Object[TableName].FindRows(New Structure("Key", Row))[0]);
+	Else
+		Rows.Add(Row);
+	EndIf;
+	
+	ServerParameters.Rows = Rows;
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+	
+	ControllerClientServer_V2.API_SetProperty(Parameters, New Structure("DataPath", CommandName), Undefined, True);
+	
+	Result = New Structure();
+	Result.Insert("Context", Wrapper);
+	Result.Insert("Cache", Parameters.Cache);
+	//@skip-check constructor-function-return-section
+	Return Result;
+EndFunction
+
 // Write.
 // 
 // Parameters:

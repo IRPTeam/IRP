@@ -1082,6 +1082,10 @@ Function GetExistingRows(Object, StoreInHeader, FilterStructure, FilterValues, F
 	
 	BuilderAPI.SetRowProperty(Wrapper, NewRow_ItemList, "InventoryOrigin", Enums.InventoryOriginTypes.ConsignorStocks);
 	
+	// final recalculte consignor batches
+	Wrapper.Object.ConsignorBatches.Clear();
+	BuilderAPI.ExecuteCommand(Wrapper, NewRow_ItemList, "Command_UpdateConsignorBatches");
+	
 	ObjectRefType = TypeOf(Object.Ref);
 	If ObjectRefType = Type("DocumentRef.InventoryTransfer") Then
 		StoreRef = Wrapper.Object.StoreSender;

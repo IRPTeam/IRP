@@ -8377,10 +8377,20 @@ Procedure SetConsignorBatches(Parameters, Results) Export
 			AddRowToTableCache(Parameters, "ConsignorBatches", Row);
 		EndDo;
 		
-		IsChanged = Not ControllerServer_V2.ArrayOfStructuresIsEqual(
+		Changes = ControllerServer_V2.ArrayOfStructuresIsEqual(
 			Parameters.Object.ConsignorBatches, 
 			Parameters.Cache.ConsignorBatches, 
 			"Key, ItemKey, SerialLotNumber, SourceOfOrigin, Store, Batch, Quantity");
+		
+		For Each Row0 In Changes Do
+			For Each Row1 In Parameters.Rows Do
+				If Row0.Key = Row1.Key Then
+					Parameters.RowsForRecalculate.Add(Row1);
+				EndIf;
+			EndDo;
+		EndDo;
+		
+		IsChanged = Changes.Count() > 0;
 		
 	EndDo;
 	

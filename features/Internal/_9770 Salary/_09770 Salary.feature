@@ -184,10 +184,10 @@ Scenario: _097710 create time sheet
 		And in the table "TimeSheetList" I click "Fill time sheet" button
 	* Check filling
 		And "Workers" table became equal
-			| 'Employee'        | 'Begin date' | 'End date'   | 'Position'     |
-			| 'Alexander Orlov' | '01.01.2023' | '19.01.2023' | 'Manager'      |
-			| 'Anna Petrova'    | '05.01.2023' | '31.01.2023' | 'Manager'      |
-			| 'David Romanov'   | '01.01.2023' | '31.01.2023' | 'Sales person' |
+			| 'Employee'        | 'Begin date' | 'End date'   | 'Position'     | 'Profit loss center'      |
+			| 'Alexander Orlov' | '01.01.2023' | '19.01.2023' | 'Manager'      | 'Accountants office'      |
+			| 'Anna Petrova'    | '05.01.2023' | '31.01.2023' | 'Manager'      | 'Distribution department' |
+			| 'David Romanov'   | '01.01.2023' | '31.01.2023' | 'Sales person' | 'Accountants office'      |
 		And I go to line in "Workers" table
 			| 'Begin date' | 'Employee'        | 'End date'   | 'Position' |
 			| '01.01.2023' | 'Alexander Orlov' | '19.01.2023' | 'Manager'  |
@@ -195,10 +195,11 @@ Scenario: _097710 create time sheet
 		And I input "01.01.2023" text in the field named "BeginDate"
 		And I input "04.01.2023" text in the field named "EndDate"
 		And in the table "TimeSheetList" I click "Fill time sheet" button
+		And I click "OK" button		
 		And "Workers" table became equal
-			| 'Employee'        | 'Begin date' | 'End date'   | 'Position'     |
-			| 'Alexander Orlov' | '01.01.2023' | '04.01.2023' | 'Manager'      |
-			| 'David Romanov'   | '01.01.2023' | '04.01.2023' | 'Sales person' |
+			| 'Employee'        | 'Begin date' | 'End date'   | 'Position'     |'Profit loss center'       |
+			| 'Alexander Orlov' | '01.01.2023' | '04.01.2023' | 'Manager'      | 'Accountants office'      |
+			| 'David Romanov'   | '01.01.2023' | '04.01.2023' | 'Sales person' | 'Accountants office'      |
 	* Filling accrual and deduction type
 		And I finish line editing in "TimeSheetList" table
 		And I go to line in "Workers" table
@@ -289,25 +290,87 @@ Scenario: _097712 check payroll
 		And I select current line in "List" table
 		And I input "01.01.2023" text in the field named "BeginDate"
 		And I input "04.01.2023" text in the field named "EndDate"
-		And in the table "PayrollList" I click "Fill payrolls" button	
+		And in the table "AccrualList" I click "Fill accrual" button	
 	* Check filling
-		And "PayrollList" table became equal
-			| '#' | 'Amount'   | 'Employee'        | 'Position'     | 'Accrual and deduction type' |
-			| '1' | '1 500,00' | 'Alexander Orlov' | 'Manager'      | 'Salary'                     |
-			| '2' | ''         | 'David Romanov'   | 'Sales person' | 'Salary'                     |
+		And "AccrualList" table became equal
+			| '#' | 'Amount'   | 'Employee'        | 'Position'     | 'Accrual type' | 'Expense type' | 'Profit loss center' |
+			| '1' | '1 500,00' | 'Alexander Orlov' | 'Manager'      | 'Salary'       | 'Expense'      | 'Accountants office' |
+			| '2' | ''         | 'David Romanov'   | 'Sales person' | 'Salary'       | 'Expense'      | 'Accountants office' |
 	* Fill salary for Sales person
-		And I go to line in "PayrollList" table
+		And I go to line in "AccrualList" table
 			| 'Employee'      |
 			| 'David Romanov' |
-		And I activate "Amount" field in "PayrollList" table
-		And I select current line in "PayrollList" table
-		And I input "800,00" text in "Amount" field of "PayrollList" table
-		And I finish line editing in "PayrollList" table
-		And "PayrollList" table became equal
-			| '#' | 'Amount'   | 'Employee'        | 'Position'     | 'Accrual and deduction type' |
-			| '1' | '1 500,00' | 'Alexander Orlov' | 'Manager'      | 'Salary'                     |
-			| '2' | '800,00'   | 'David Romanov'   | 'Sales person' | 'Salary'                     |
+		And I activate "Amount" field in "AccrualList" table
+		And I select current line in "AccrualList" table
+		And I input "800,00" text in "Amount" field of "AccrualList" table
+		And I finish line editing in "AccrualList" table
+		And "AccrualList" table became equal
+			| '#' | 'Amount'   | 'Employee'        | 'Position'     | 'Accrual type' | 'Expense type' | 'Profit loss center' |
+			| '1' | '1 500,00' | 'Alexander Orlov' | 'Manager'      | 'Salary'       | 'Expense'      | 'Accountants office' |
+			| '2' | '800,00'   | 'David Romanov'   | 'Sales person' | 'Salary'       | 'Expense'      | 'Accountants office' |
 		And I click "Post" button
+	* Fill deductions
+		And I move to "Deduction" tab
+		And in the table "DeductionList" I click "Fill deduction" button
+		And in the table "DeductionList" I click "Add" button
+		And I activate "Employee" field in "DeductionList" table
+		And I select current line in "DeductionList" table
+		And I click choice button of "Employee" attribute in "DeductionList" table
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'David Romanov' |
+		And I select current line in "List" table
+		And I activate "Position" field in "DeductionList" table
+		And I select "sales" from "Position" drop-down list by string in "DeductionList" table
+		And I activate "Deduction type" field in "DeductionList" table
+		And I select "Deduction" from "Deduction type" drop-down list by string in "DeductionList" table
+		And I activate "Is revenue" field in "DeductionList" table
+		And I set "Is revenue" checkbox in "DeductionList" table
+		And I finish line editing in "DeductionList" table
+		And I activate "Profit loss center" field in "DeductionList" table
+		And I select current line in "DeductionList" table
+		And I select "Logistics department" from "Profit loss center" drop-down list by string in "DeductionList" table
+		And I activate "Amount" field in "DeductionList" table
+		And I input "50,00" text in "Amount" field of "DeductionList" table
+		And I finish line editing in "DeductionList" table
+		And in the table "DeductionList" I click "Add" button
+		And I activate "Employee" field in "DeductionList" table
+		And I select "ale" from "Employee" drop-down list by string in "DeductionList" table
+		And I activate "Position" field in "DeductionList" table
+		And I select "Manager" from "Position" drop-down list by string in "DeductionList" table
+		And I activate "Deduction type" field in "DeductionList" table
+		And I select "Deduction" from "Deduction type" drop-down list by string in "DeductionList" table
+		And I activate "Profit loss center" field in "DeductionList" table
+		And I select "Accountants office" from "Profit loss center" drop-down list by string in "DeductionList" table
+		And I activate "Amount" field in "DeductionList" table
+		And I input "30,00" text in "Amount" field of "DeductionList" table
+		And I finish line editing in "DeductionList" table
+	* Check
+		And "DeductionList" table became equal
+			| '#' | 'Amount' | 'Employee'        | 'Position'     | 'Deduction type' | 'Profit loss center'   | 'Expense type' | 'Is revenue' |
+			| '1' | '50,00'  | 'David Romanov'   | 'Sales person' | 'Deduction'      | 'Logistics department' | 'Expense'      | 'Yes'        |
+			| '2' | '30,00'  | 'Alexander Orlov' | 'Manager'      | 'Deduction'      | 'Accountants office'   | 'Expense'      | 'No'         |
+	* Fill cash advance deductions
+		And in the table "CashAdvanceDeductionList" I click "Fill cash advance deduction" button
+		And in the table "CashAdvanceDeductionList" I click "Add" button
+		And I activate "Employee" field in "CashAdvanceDeductionList" table
+		And I select "david" from "Employee" drop-down list by string in "CashAdvanceDeductionList" table
+		And I activate "Financial movement type" field in "CashAdvanceDeductionList" table
+		And I select "1" from "Financial movement type" drop-down list by string in "CashAdvanceDeductionList" table
+		And I activate "Account" field in "CashAdvanceDeductionList" table
+		And I select "Cash desk №4" from "Account" drop-down list by string in "CashAdvanceDeductionList" table
+		And I activate "Amount" field in "CashAdvanceDeductionList" table
+		And I input "70,00" text in "Amount" field of "CashAdvanceDeductionList" table
+		And I finish line editing in "CashAdvanceDeductionList" table
+	* Check
+		And "CashAdvanceDeductionList" table became equal
+			| '#' | 'Amount' | 'Employee'      | 'Financial movement type' | 'Planing transaction basis' | 'Account'      |
+			| '1' | '70,00'  | 'David Romanov' | 'Movement type 1'         | ''                          | 'Cash desk №4' |
+	* Check totals
+		And the editing text of form attribute named "TotalAccrualAmount" became equal to "2 300,00"
+		And the editing text of form attribute named "TotalDeductionAmount" became equal to "80,00"
+		And the editing text of form attribute named "TotalCashAdvanceDeductionAmount" became equal to "70,00"
+		And the editing text of form attribute named "TotalPaymentAmount" became equal to "2 150,00"				
 	* Check creation
 		And I click "Post" button
 		And I delete "$$NumberPL050003$$" variable
@@ -317,4 +380,4 @@ Scenario: _097712 check payroll
 		And "List" table contains lines
 			| 'Number'             |
 			| '$$NumberPL050003$$' |
-		
+	

@@ -102,6 +102,8 @@ EndProcedure
 &AtClient
 Async Procedure Load(Command)
 	
+	ThisObject.Start = CurrentDate();
+	
 	ReadyRecord = New Array; // Array of FormDataCollectionItem
 	For Each FilesTableRecord In ThisObject.FilesTable Do
 		If IsBlankString(FilesTableRecord.UUID) Then
@@ -126,13 +128,16 @@ Async Procedure Load(Command)
     If FileDescriptionArray.Count() > 0 Then
     	PlacedFileDescriptions = Await PutFilesToServerAsync(, , FileDescriptionArray, UUID);
     	For Each PlacedFileDescription In PlacedFileDescriptions Do
-    		If Not PlacedFileDescription.FilePuttingCanceled Then
+    		//@skip-check property-return-type
+    		If Not PlacedFileDescription.PutFileCanceled Then
 		    	FileAdrresses.Insert(Lower(PlacedFileDescription.FileRef.File.FullName), PlacedFileDescription.Address);
     		EndIf;
     	EndDo;
     EndIf;	
 	
 	StartLoadingOnServer(FileAdrresses);
+	
+	ThisObject.Finish = CurrentDate();
 	
 EndProcedure
 
@@ -171,7 +176,7 @@ EndProcedure
 //  String - Calculate m d5
 &AtClient
 Function CalculateMD5(FileItem)
-	Return "";
+	Return ""; // calculation by component in extension
 EndFunction
 
 // Check files.

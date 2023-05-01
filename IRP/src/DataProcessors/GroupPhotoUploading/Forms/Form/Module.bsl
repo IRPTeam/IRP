@@ -72,7 +72,10 @@ Async Procedure AnalizeFolder(Command)
 		FilesTableRecord.FilePath = StrReplace(FileItem.FullName, ThisObject.FolderPath, "");
 		FilesTableRecord.Extension = FileItem.Extension;
 		FilesTableRecord.Size = (Await FileItem.SizeAsync()) / 1024 / 1024; // Size in Mb 
-		FilesTableRecord.MD5 = CalculateMD5(FileItem);
+	EndDo;
+	
+	For Each FileRecord In ThisObject.FilesTable Do
+		FilesTableRecord.MD5 = CalculateMD5(ThisObject.FolderPath + FileRecord.FilePath);
 		If Not IsBlankString(FilesTableRecord.MD5) Then
 			ArrayMD5.Add(FilesTableRecord.MD5);
 		EndIf;
@@ -170,14 +173,29 @@ EndProcedure
 // Calculate MD5.
 // 
 // Parameters:
-//  FileItem - File - File item
+//  FilePath - String - Full path to file
 // 
 // Returns:
 //  String - Calculate m d5
 &AtClient
-Function CalculateMD5(FileItem)
-	Return ""; // calculation by component in extension
+Function CalculateMD5(FilePath)
+	//Return ""; // calculation by component in extension
+	Return CalculateMD5_AtServer(New BinaryData(FilePath)); 
 EndFunction
+
+// Calculate MD5 at server.
+// 
+// Parameters:
+//  BinaryData - BinaryData - Binary data
+// 
+// Returns:
+//  String - Calculate MD55 at server
+&AtServerNoContext
+Function CalculateMD5_AtServer(BinaryData)
+	Hash = New DataHashing(HashFunction.MD5);
+	Hash.Append(BinaryData);
+	Return String(Hash.HashSum);
+EndFunction // CalculateMD5_AtServer()
 
 // Check files.
 // 

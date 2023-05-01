@@ -55,30 +55,71 @@ EndProcedure
 
 #EndRegion
 
+Function GetCashAdvanceDeduction(Parameters) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	R3027B.Partner AS Employee,
+	|	R3027B.FinancialMovementType,
+	|	R3027B.Account,
+	|	R3027B.PlaningTransactionBasis,
+	|	R3027B.AmountBalance AS Amount
+	|FROM
+	|	AccumulationRegister.R3027B_EmployeeCashAdvance.Balance(&Boundary, Company = &Company
+	|	AND Branch = &Branch
+	|	AND Currency = &Currency
+	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS R3027B";
+	
+	Query.SetParameter("Company", Parameters.Company);
+	Query.SetParameter("Branch", Parameters.Branch);
+	Query.SetParameter("Currency", Parameters.Currency);
+	If ValueIsFilled(Parameters.Ref) Then
+		Query.SetParameter("Boundary", New Boundary(
+			New PointInTime(Parameters.EndDate, Parameters.Ref), BoundaryType.Excluding));
+	Else
+		Query.SetParameter("Boundary", Parameters.EndDate);
+	EndIf;
+	
+	ResultTable = Query.Execute().Unload();
+	
+	GroupColumn = "Employee, FinancialMovementType, Account, PlaningTransactionBasis";
+	SumColumn = "Amount";
+	
+	ResultTable.GroupBy(GroupColumn, SumColumn);
+	ResultTable.Sort("Employee");
+	
+	Return New Structure("Table, GroupColumn, SumColumn", ResultTable, GroupColumn, SumColumn);
+EndFunction
+
 Function GetPayrolls(Parameters) Export
 	ResultTable = New ValueTable();
 	ResultTable.Columns.Add("Employee");
 	ResultTable.Columns.Add("Position");
-	ResultTable.Columns.Add("AccrualAndDeductionType");
+	ResultTable.Columns.Add("ProfitLossCenter");
+	ResultTable.Columns.Add(Parameters.TypeColumnName);
 	ResultTable.Columns.Add("Amount");
 	
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	T9520S_TimeSheetInfo.Date AS Date,
-	|	T9520S_TimeSheetInfo.Employee AS Employee,
-	|	T9520S_TimeSheetInfo.Position AS Position,
-	|	T9520S_TimeSheetInfo.AccrualAndDeductionType AS AccrualAndDeductionType
+	|	T9520S_TimeSheetInfo.Date,
+	|	T9520S_TimeSheetInfo.Employee,
+	|	T9520S_TimeSheetInfo.Position,
+	|	T9520S_TimeSheetInfo.ProfitLossCenter,
+	|	T9520S_TimeSheetInfo.AccrualAndDeductionType
 	|FROM
 	|	InformationRegister.T9520S_TimeSheetInfo AS T9520S_TimeSheetInfo
 	|WHERE
 	|	T9520S_TimeSheetInfo.Date BETWEEN BEGINOFPERIOD(&BeginDate, DAY) AND ENDOFPERIOD(&EndDate, DAY)
 	|	AND T9520S_TimeSheetInfo.Company = &Company
-	|	AND T9520S_TimeSheetInfo.Branch = &Branch";
+	|	AND T9520S_TimeSheetInfo.Branch = &Branch
+	|	AND T9520S_TimeSheetInfo.AccrualAndDeductionType.Type = &_Type";
+	
 	Query.SetParameter("BeginDate", Parameters.BeginDate);
 	Query.SetParameter("EndDate"  , Parameters.EndDate);
 	Query.SetParameter("Company"  , Parameters.Company);
 	Query.SetParameter("Branch"   , Parameters.Branch);
+	Query.SetParameter("_Type"     , Parameters._Type);
 	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -86,15 +127,24 @@ Function GetPayrolls(Parameters) Export
 	While QuerySelection.Next() Do
 		NewRow = ResultTable.Add();
 		FillPropertyValues(NewRow, QuerySelection);
+		NewRow[Parameters.TypeColumnName] = QuerySelection.AccrualAndDeductionType;
 		
 		If Upper(QuerySelection.AccrualAndDeductionType.AlgorithmID) = Upper("_MonthlySalary") Then
 			NewRow.Amount = _MonthlySalary(Parameters, QuerySelection);
 		EndIf;
 		
+		If Not ValueIsFilled(NewRow.Amount) Then
+			NewRow.Amount = 0;
+		EndIf;
 	EndDo;
-	ResultTable.GroupBy("Employee, Position, AccrualAndDeductionType", "Amount");
-	ResultTable.Sort("Employee, Position, AccrualAndDeductionType");
-	Return ResultTable;
+	
+	GroupColumn = "Employee, Position, ProfitLossCenter, " + Parameters.TypeColumnName;
+	SumColumn = "Amount";
+	
+	ResultTable.GroupBy(GroupColumn, SumColumn);
+	ResultTable.Sort("Employee, Position, " + Parameters.TypeColumnName);
+	
+	Return New Structure("Table, GroupColumn, SumColumn", ResultTable, GroupColumn, SumColumn);
 EndFunction
 
 Function _MonthlySalary(Parameters, QuerySelection)
@@ -129,8 +179,21 @@ Function _MonthlySalary(Parameters, QuerySelection)
 	Return (Value / TotalDays) * CountDays;
 EndFunction
 
-//Function GetAlgorithmID() Export
-//	List = New ValueList();
-//	List.Add("_MonthlySalary", "Monthly salary");
-//	Return List;
-//EndFunction
+Function PutChoiceDataToServerStorage(ChoiceData, FormUUID) Export
+	ValueTable = New ValueTable();
+	ValueTable.Columns.Add("Employee");
+	ValueTable.Columns.Add("NetAmount");
+	ValueTable.Columns.Add("TotalAmount");
+	
+	For Each Row In ChoiceData Do
+		NewRow = ValueTable.Add();
+		FillPropertyValues(NewRow, Row);
+		NewRow.NetAmount  = Row.Amount;
+		NewRow.TotalAmount = Row.Amount;
+	EndDo;
+	GroupColumn = "Employee";
+	SumColumn = "NetAmount, TotalAmount";
+	ValueTable.GroupBy(GroupColumn, SumColumn);
+	Address = PutToTempStorage(ValueTable, FormUUID);
+	Return New Structure("Address, GroupColumn, SumColumn", Address, GroupColumn, SumColumn);
+EndFunction

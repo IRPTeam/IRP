@@ -1928,22 +1928,22 @@ Scenario: _0154092 check company, employee, currency, position, branch input by 
 	* Branch input by search in line
 		And I select from "Branch" drop-down list by "front" string
 	* Filling the tabular part by searching the value by line employee and position)
-		And I move to "Payroll" tab
-		And in the table "PayrollList" I click the button named "PayrollListAdd"
-		And I activate "Employee" field in "PayrollList" table
-		And I select current line in "PayrollList" table
-		And I select "bro" from "Employee" drop-down list by string in "PayrollList" table
-		And I activate "Position" field in "PayrollList" table
-		And I select "mana" from "Position" drop-down list by string in "PayrollList" table
-		And I activate "Accrual and deduction type" field in "PayrollList" table
-		And I select "sa" from "Accrual and deduction type" drop-down list by string in "PayrollList" table
+		And in the table "AccrualList" I click the button named "AccrualListAdd"		
+		And in the table "AccrualList" I click the button named "AccrualListAdd"
+		And I activate "Employee" field in "AccrualList" table
+		And I select current line in "AccrualList" table
+		And I select "bro" from "Employee" drop-down list by string in "AccrualList" table
+		And I activate "Position" field in "AccrualList" table
+		And I select "mana" from "Position" drop-down list by string in "AccrualList" table
+		And I activate "Accrual type" field in "AccrualList" table
+		And I select "sa" from "Accrual type" drop-down list by string in "AccrualList" table
 	* Check filling in
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Currency" became equal to "TRY"
 		Then the form attribute named "Branch" became equal to "Front office"
-		And "PayrollList" table contains lines
-			| 'Employee'    | 'Position' | 'Accrual and deduction type' |
-			| 'Arina Brown' | 'Manager'  | 'Salary'                     |
+		And "AccrualList" table contains lines
+			| 'Employee'    | 'Position' | 'Accrual type' |
+			| 'Arina Brown' | 'Manager'  | 'Salary'       |
 		And I close all client application windows
 
 Scenario: _0154092 check company, branch input by search in line in TimeSheet (in english)

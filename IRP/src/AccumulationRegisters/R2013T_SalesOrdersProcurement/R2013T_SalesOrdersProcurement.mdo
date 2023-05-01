@@ -151,6 +151,110 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
  </resources>
+ <resources uuid="21b98157-0619-4260-b0a5-cdfc6c6458b6">
+  <name>OrderedNetAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Ordered net amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="7145f757-67c7-41a9-a881-e26a065bc24d">
+  <name>OrderedTotalAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Ordered total amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="2628ce02-9128-4ce8-a906-cc27eba15ddf">
+  <name>ReOrderedNetAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Re ordered net amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="716dd383-255c-416c-9e50-2cbec8084589">
+  <name>ReOrderedTotalAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Re ordered total amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="da1d22c6-fd7a-4412-9285-f31abf452468">
+  <name>PurchaseNetAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Purchase net amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="db90e10a-40c6-4dc0-b71c-9635a12fed18">
+  <name>PurchaseTotalAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Purchase total amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="35005212-af4f-48f9-88cb-217f0f4f6af6">
+  <name>SalesNetAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Sales net amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="82b0c866-72ca-4960-9bcd-a71d09c0434d">
+  <name>SalesTotalAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Sales total amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
  <dimensions uuid="9aca8103-0101-4934-adf6-7e3e3717d107">
   <name>Company</name>
   <synonym>
@@ -233,6 +337,20 @@
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="7810dc60-3019-4c27-970c-6c814b8631c1">
+  <name>RowKey</name>
+  <synonym>
+   <key>en</key>
+   <value>Row key</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

@@ -725,6 +725,60 @@
      </dataPath>
      <titleLocation>None</titleLocation>
      <items xsi:type="form:FormField">
+      <name>WorkersIcon</name>
+      <id>1359</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+       <segments>Workers.Icon</segments>
+      </dataPath>
+      <titleLocation>None</titleLocation>
+      <extendedTooltip>
+       <name>WorkersIconExtendedTooltip</name>
+       <id>1361</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+       <name>WorkersIconContextMenu</name>
+       <id>1360</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <autoFill>true</autoFill>
+      </contextMenu>
+      <type>PictureField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:ImageFieldExtInfo">
+       <width>1</width>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <horizontalStretch>true</horizontalStretch>
+       <verticalStretch>true</verticalStretch>
+       <valuesPicture xsi:type="core:PictureRef">
+        <picture>StdPicture.CollaborationSystemUser</picture>
+       </valuesPicture>
+       <fileDragMode>AsFileRef</fileDragMode>
+      </extInfo>
+     </items>
+     <items xsi:type="form:FormField">
       <name>WorkersEmployee</name>
       <id>1337</id>
       <visible>true</visible>
@@ -915,6 +969,56 @@
       </contextMenu>
       <type>InputField</type>
       <readOnly>true</readOnly>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <wrap>true</wrap>
+       <chooseType>true</chooseType>
+       <typeDomainEnabled>true</typeDomainEnabled>
+       <textEdit>true</textEdit>
+      </extInfo>
+     </items>
+     <items xsi:type="form:FormField">
+      <name>WorkersProfitLossCenter</name>
+      <id>1356</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+       <segments>Workers.ProfitLossCenter</segments>
+      </dataPath>
+      <extendedTooltip>
+       <name>WorkersProfitLossCenterExtendedTooltip</name>
+       <id>1358</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+       <name>WorkersProfitLossCenterContextMenu</name>
+       <id>1357</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
       <editMode>Enter</editMode>
       <showInHeader>true</showInHeader>
       <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -1160,6 +1264,60 @@
       <segments>Object.TimeSheetList</segments>
      </dataPath>
      <titleLocation>None</titleLocation>
+     <items xsi:type="form:FormField">
+      <name>TimeSheetListIcon</name>
+      <id>1362</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+       <segments>Object.TimeSheetList.Icon</segments>
+      </dataPath>
+      <titleLocation>None</titleLocation>
+      <extendedTooltip>
+       <name>TimeSheetListIconExtendedTooltip</name>
+       <id>1364</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+       <name>TimeSheetListIconContextMenu</name>
+       <id>1363</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <autoFill>true</autoFill>
+      </contextMenu>
+      <type>PictureField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:ImageFieldExtInfo">
+       <width>1</width>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <horizontalStretch>true</horizontalStretch>
+       <verticalStretch>true</verticalStretch>
+       <valuesPicture xsi:type="core:PictureRef">
+        <picture>StdPicture.Calendar</picture>
+       </valuesPicture>
+       <fileDragMode>AsFileRef</fileDragMode>
+      </extInfo>
+     </items>
      <items xsi:type="form:FormField">
       <name>TimeSheetListVisible</name>
       <id>1353</id>
@@ -2360,6 +2518,26 @@
      <common>true</common>
     </edit>
    </columns>
+   <columns>
+    <name>Icon</name>
+    <title>
+     <key>en</key>
+     <value>Icon</value>
+    </title>
+    <id>19</id>
+    <valueType>
+     <types>Number</types>
+     <numberQualifiers>
+      <precision>10</precision>
+     </numberQualifiers>
+    </valueType>
+    <view>
+     <common>true</common>
+    </view>
+    <edit>
+     <common>true</common>
+    </edit>
+   </columns>
   </additionalColumns>
  </attributes>
  <attributes>
@@ -2534,6 +2712,43 @@
    <id>15</id>
    <valueType>
     <types>CatalogRef.EmployeePositions</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>ProfitLossCenter</name>
+   <title>
+    <key>en</key>
+    <value>Profit loss center</value>
+   </title>
+   <id>17</id>
+   <valueType>
+    <types>CatalogRef.BusinessUnits</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>Icon</name>
+   <title>
+    <key>en</key>
+    <value>Icon</value>
+   </title>
+   <id>18</id>
+   <valueType>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+    </numberQualifiers>
    </valueType>
    <view>
     <common>true</common>

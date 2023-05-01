@@ -1124,6 +1124,7 @@ Function Strings(Lang) Export
 		|ru='Превышение лимита количества. Номер строки: [%1] количество: [%2] лимит: [%3]'", Lang));
 	Strings.Insert("Error_125", NStr("en='Invoice for document: [%1] is empty';
 		|ru='Инвойс для документа [%1] пуст'", Lang));
+	Strings.Insert("Error_126", NStr("en='Document does not have transaction types'", Lang));
 	
 	// manufacturing errors
 	Strings.Insert("MF_Error_001", NStr("en='Repetitive materials [%1]';
@@ -1589,6 +1590,7 @@ Function Strings(Lang) Export
 	Strings.Insert("CLV_1", NStr("en='All';
 		|ru='Все';
 		|tr='Tümü'", Lang));
+	Strings.Insert("CLV_2", NStr("en='Transaction type'", Lang));
 #EndRegion
 
 #Region SalesOrderStatusReport

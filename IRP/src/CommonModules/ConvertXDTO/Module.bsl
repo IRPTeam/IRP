@@ -377,6 +377,10 @@ Procedure FillAttribute(XDTO, Object, Val AttrName, DocAttr, ID = 0) Export
 				DataTag = XDTO[Names[1]];
 			EndIf;
 				
+			If DataTag = Undefined Then
+				Return;
+			EndIf;
+			
 			For Index = 2 To Names.UBound() Do
 				If Names[Index] = "M" Then
 					Break;

@@ -195,7 +195,7 @@ Scenario: _0260106 create cash in
 			| '1' | '1 000,00'     | 'Movement type 1'         | '$$MoneyTransfer11$$' |
 		Then the form attribute named "ConsolidatedRetailSales" became equal to "$$ConsolidatedRetailSales2$$"
 		Then the form attribute named "Branch" became equal to "Shop 02"
-		And the editing text of form attribute named "DocumentAmount" became equal to "1 000,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 000,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Post Cash receipt
 		And I click "Post" button
@@ -573,7 +573,7 @@ Scenario: _0260130 create cash out
 			| '#' | 'Total amount' | 'Financial movement type' | 'Money transfer'     |
 			| '1' | '3 480,00'     | 'Movement type 1'         | '$$MoneyTransfer3$$' |
 		Then the form attribute named "Branch" became equal to "Shop 02"
-		And the editing text of form attribute named "DocumentAmount" became equal to "3 480,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "3 480,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		And I click "Post" button
 		And I delete "$$NumberCashReceipt2$$" variable
@@ -680,7 +680,7 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 			| '#' | 'Retail customer' | 'Total amount' |
 			| '1' | 'Daniel Smith'    | '400,00'       |
 		Then the form attribute named "Branch" became equal to "Shop 02"
-		And the editing text of form attribute named "DocumentAmount" became equal to "400,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "400,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Check bank receipt  
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
@@ -695,7 +695,7 @@ Scenario: _0260133 create advance payment from POS (Cash, Card)
 			| '#' | 'Retail customer'     | 'Total amount' |
 			| '1' | 'Daniel Smith'        | '100,00'       |
 		Then the form attribute named "Branch" became equal to "Shop 02"
-		And the editing text of form attribute named "DocumentAmount" became equal to "100,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "100,00"
 		And I close all client application windows
 	* Create RSR and check using advance 
 		And In the command interface I select "Retail" "Point of sale"

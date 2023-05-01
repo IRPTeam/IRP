@@ -251,7 +251,12 @@ Function GetCashInTransitIncomingBalance(MoneyTransferRef, CashReceiptRef) Expor
 	|	AccumulationRegister.R3021B_CashInTransitIncoming.Balance(&Boundary, Basis = &Basis
 	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
 	|		R3021B_CashInTransitIncomingBalance";
-	Query.SetParameter("Boundary", New Boundary(CashReceiptRef.PointInTime(), BoundaryType.Excluding));
+	If Not ValueIsFilled(CashReceiptRef) Then
+		Query.SetParameter("Boundary",CommonFunctionsServer.GetCurrentSessionDate());
+	ELse
+		Query.SetParameter("Boundary", New Boundary(CashReceiptRef.PointInTime(), BoundaryType.Excluding));
+	EndIf;
+		
 	Query.SetParameter("Basis", MoneyTransferRef);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();

@@ -435,8 +435,15 @@ EndFunction
 Function R2013T_SalesOrdersProcurement()
 	Return 
 		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Order,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
 		|	ItemList.Quantity AS OrderedQuantity,
-		|	*
+		|	ItemList.NetAmount AS OrderedNetAmount,
+		|	ItemList.Amount AS OrderedTotalAmount
 		|INTO R2013T_SalesOrdersProcurement
 		|FROM
 		|	ItemList AS ItemList

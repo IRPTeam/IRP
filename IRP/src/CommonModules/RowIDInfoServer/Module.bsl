@@ -255,7 +255,7 @@ Procedure Posting_TM1010B_RowIDMovements_SOC(Source, Cancel, PostingMode)
 	"SELECT
 	|	SalesOrderItemList.Ref.Date AS Period,
 	|	SalesOrderItemList.Ref.SalesOrder AS Order,
-	|	SalesOrderItemList.Key AS RowKey,
+	|	SalesOrderItemList.SalesOrderKey AS RowKey,
 	|	SalesOrderItemList.Cancel AS IsCanceled
 	|INTO ItemList
 	|FROM
@@ -309,7 +309,7 @@ Procedure Posting_TM1010B_RowIDMovements_POC(Source, Cancel, PostingMode)
 	"SELECT
 	|	PurchaseOrderItems.Ref.Date AS Period,
 	|	PurchaseOrderItems.Ref.PurchaseOrder AS Order,
-	|	PurchaseOrderItems.Key AS RowKey,
+	|	PurchaseOrderItems.PurchaseOrderKey AS RowKey,
 	|	PurchaseOrderItems.Cancel AS IsCanceled
 	|INTO ItemList
 	|FROM

@@ -69,6 +69,7 @@ Scenario: _05502 preparation (commission products sales)
 		When Create catalog CashAccounts objects
 		When Create catalog PaymentTypes objects
 		When Create catalog Workstations objects
+		When Create information register TaxSettings records (Concignor 2)
 		Given I open hyperlink "e1cib/list/Catalog.Workstations"
 		And I go to line in "List" table
 			| 'Description'    |
@@ -930,7 +931,7 @@ Scenario: _050025 create Sales report co consignor
 			Then the form attribute named "Author" became equal to "CI"
 			Then the form attribute named "ItemListTotalTradeAgentFeeAmount" became equal to "-0,78"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "-6,60"
-			Then the form attribute named "ItemListTotalTaxAmount" became equal to "0,00"
+			Then the form attribute named "ItemListTotalTaxAmount" became equal to "-1,19"
 			Then the form attribute named "ItemListTotalTotalAmount" became equal to "-7,80"
 			Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 			And I close all client application windows
@@ -1022,8 +1023,8 @@ Scenario: _050026 check trade agent fee calculation
 	* Check filling trade agent fee
 		And "ItemList" table became equal
 			| '#' | 'Item'               | 'Price type'              | 'Item key' | 'Consignor price' | 'Serial lot numbers' | 'Unit' | 'Dont calculate row' | 'Quantity' | 'Sales invoice' | 'Trade agent fee percent' | 'Trade agent fee amount' | 'Price'  | 'Net amount' | 'Purchase invoice' | 'Total amount' |
-			| '1' | 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '190,00'          | '09987897977889'     | 'pcs'  | 'No'                 | '2,000'    | ''              | '10,00'                   | '40,00'                  | '200,00' | '400,00'     | ''                 | '400,00'       |
-			| '2' | 'Dress'              | 'Basic Price Types'       | 'S/Yellow' | '400,00'          | ''                   | 'pcs'  | 'No'                 | '1,000'    | ''              | '10,00'                   | '55,00'                  | '550,00' | '550,00'     | ''                 | '550,00'       |
+			| '1' | 'Product 3 with SLN' | 'en description is empty' | 'UNIQ'     | '190,00'          | '09987897977889'     | 'pcs'  | 'No'                 | '2,000'    | ''              | '10,00'                   | '40,00'                  | '200,00' | '338,98'     | ''                 | '400,00'       |
+			| '2' | 'Dress'              | 'Basic Price Types'       | 'S/Yellow' | '400,00'          | ''                   | 'pcs'  | 'No'                 | '1,000'    | ''              | '10,00'                   | '55,00'                  | '550,00' | '466,10'     | ''                 | '550,00'       |
 	* Change price
 		And I activate "Price" field in "ItemList" table
 		And I go to line in "ItemList" table
@@ -1165,19 +1166,19 @@ Scenario: _050041 check filling source of origin in the SI (consignors products)
 		And I move to the next attribute
 	* Check filling
 		And "ItemList" table became equal
-			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Unit' | 'Serial lot numbers' | 'Source of origins'   | 'Quantity' | 'Price' | 'VAT' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Detail' |
-			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | 'pcs'  | '57897909799'        | 'Source of origin 9'  | '2,000'    | ''      | '18%' | ''             | 'No'             | 'No'                         | ''                    | 'Store 02' | ''              | ''       |
-			| 'Consignor stocks' | 'Basic Price without VAT' | 'Bag'                | 'ODS'      | 'No'                 | 'pcs'  | ''                   | 'Source of origin 11'  | '1,000'    | ''      | '18%' | ''             | 'No'             | 'No'                         | ''                    | 'Store 02' | ''              | ''       |
-			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | 'pcs'  | '57897909799'        | 'Source of origin 10' | '1,000'    | ''      | '18%' | ''             | 'No'             | 'No'                         | ''                    | 'Store 02' | ''              | ''       |
+			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Unit' | 'Serial lot numbers' | 'Source of origins'   | 'Quantity' | 'Price' | 'VAT'         | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Detail' |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | 'pcs'  | '57897909799'        | 'Source of origin 9'  | '1,000'    | ''      | 'Without VAT' | ''             | 'No'             | 'No'                         | ''                    | 'Store 02' | ''              | ''       |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | 'pcs'  | '57897909799'        | 'Source of origin 10' | '2,000'    | ''      | 'Without VAT' | ''             | 'No'             | 'No'                         | ''                    | 'Store 02' | ''              | ''       |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Bag'                | 'ODS'      | 'No'                 | 'pcs'  | ''                   | 'Source of origin 11' | '1,000'    | ''      | 'Without VAT' | ''             | 'No'             | 'No'                         | ''                    | 'Store 02' | ''              | ''       |
 	* Add one more item and check filling
 		And in the table "ItemList" I click the button named "SearchByBarcode"
 		And I input "89088088989" text in the field named "Barcode"
 		And I move to the next attribute
 		And "ItemList" table became equal
-			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'       | 'Source of origins'                      | 'Quantity' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Store'    |
-			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | ''           | 'pcs'  | '57897909799; 89088088989' | 'Source of origin 9; Source of origin 9' | '3,000'    | ''      | '18%' | ''              | ''           | ''             | 'No'                         | 'Store 02' |
-			| 'Consignor stocks' | 'Basic Price without VAT' | 'Bag'                | 'ODS'      | 'No'                 | ''           | 'pcs'  | ''                         | 'Source of origin 11'                     | '1,000'    | ''      | '18%' | ''              | ''           | ''             | 'No'                         | 'Store 02' |
-			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | ''           | 'pcs'  | '57897909799'              | 'Source of origin 10'                    | '1,000'    | ''      | '18%' | ''              | ''           | ''             | 'No'                         | 'Store 02' |
+			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'       | 'Source of origins'                        | 'Quantity' | 'Price' | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Is additional item revenue' | 'Store'    |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | ''           | 'pcs'  | '57897909799'              | 'Source of origin 9'                       | '1,000'    | ''      | 'Without VAT' | ''              | ''           | ''             | 'No'                         | 'Store 02' |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | ''           | 'pcs'  | '57897909799; 89088088989' | 'Source of origin 10; Source of origin 10' | '3,000'    | ''      | 'Without VAT' | ''              | ''           | ''             | 'No'                         | 'Store 02' |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Bag'                | 'ODS'      | 'No'                 | ''           | 'pcs'  | ''                         | 'Source of origin 11'                      | '1,000'    | ''      | 'Without VAT' | ''              | ''           | ''             | 'No'                         | 'Store 02' |
 		And I close all client application windows
 		
 				
@@ -1222,19 +1223,19 @@ Scenario: _050042 check filling source of origin in the RSR (consignors products
 		And I move to the next attribute
 	* Check filling
 		And "ItemList" table became equal
-			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Unit' | 'Serial lot numbers' | 'Source of origins'   | 'Quantity' | 'Price' | 'VAT' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' |
-			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | 'pcs'  | '57897909799'        | 'Source of origin 9'  | '2,000'    | ''      | '18%' | ''             | ''                    | 'Store 02' | ''       |
-			| 'Consignor stocks' | 'Basic Price without VAT' | 'Bag'                | 'ODS'      | 'No'                 | 'pcs'  | ''                   | 'Source of origin 11'  | '1,000'    | ''      | '18%' | ''             | ''                    | 'Store 02' | ''       |
-			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | 'pcs'  | '57897909799'        | 'Source of origin 10' | '1,000'    | ''      | '18%' | ''             | ''                    | 'Store 02' | ''       |
+			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Unit' | 'Serial lot numbers' | 'Source of origins'   | 'Quantity' | 'Price' | 'VAT'         | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | 'pcs'  | '57897909799'        | 'Source of origin 9'  | '1,000'    | ''      | 'Without VAT' | ''             | ''                    | 'Store 02' | ''       |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | 'pcs'  | '57897909799'        | 'Source of origin 10' | '2,000'    | ''      | 'Without VAT' | ''             | ''                    | 'Store 02' | ''       |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Bag'                | 'ODS'      | 'No'                 | 'pcs'  | ''                   | 'Source of origin 11' | '1,000'    | ''      | 'Without VAT' | ''             | ''                    | 'Store 02' | ''       |	
 	* Add one more item and check filling
 		And in the table "ItemList" I click the button named "SearchByBarcode"
 		And I input "89088088989" text in the field named "Barcode"
 		And I move to the next attribute
 		And "ItemList" table became equal
-			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'       | 'Source of origins'                      | 'Quantity' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | ''           | 'pcs'  | '57897909799; 89088088989' | 'Source of origin 9; Source of origin 9' | '3,000'    | ''      | '18%' | ''              | ''           | ''             | 'Store 02' |
-			| 'Consignor stocks' | 'Basic Price without VAT' | 'Bag'                | 'ODS'      | 'No'                 | ''           | 'pcs'  | ''                         | 'Source of origin 11'                     | '1,000'    | ''      | '18%' | ''              | ''           | ''             | 'Store 02' |
-			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | ''           | 'pcs'  | '57897909799'              | 'Source of origin 10'                    | '1,000'    | ''      | '18%' | ''              | ''           | ''             | 'Store 02' |
+			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers'       | 'Source of origins'                        | 'Quantity' | 'Price' | 'VAT'         | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | ''           | 'pcs'  | '57897909799'              | 'Source of origin 9'                       | '1,000'    | ''      | 'Without VAT' | ''              | ''           | ''             | 'Store 02' |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | ''           | 'pcs'  | '57897909799; 89088088989' | 'Source of origin 10; Source of origin 10' | '3,000'    | ''      | 'Without VAT' | ''              | ''           | ''             | 'Store 02' |
+			| 'Consignor stocks' | 'Basic Price without VAT' | 'Bag'                | 'ODS'      | 'No'                 | ''           | 'pcs'  | ''                         | 'Source of origin 11'                      | '1,000'    | ''      | 'Without VAT' | ''              | ''           | ''             | 'Store 02' |
 		And I close all client application windows
 		
 				
@@ -1280,9 +1281,9 @@ Scenario: _050043 check filling source of origin in the RSR POS (consignors prod
 			| '320,00' |
 		And I select current line in "List" table
 		And "ItemList" table became equal
-			| 'Inventory origin' | 'Price type'              | 'Item'               | 'Item key' | 'Dont calculate row' | 'Serial lot numbers'       | 'Unit' | 'Tax amount' | 'Source of origins'                      | 'Quantity' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'Consignor stocks' | 'en description is empty' | 'Product 6 with SLN' | 'PZU'      | 'No'                 | '57897909799; 89088088989' | 'pcs'  | '30,51'      | 'Source of origin 9; Source of origin 9' | '2,000'    | '100,00' | '18%' | '169,49'     | '200,00'       | 'Store 01' |
-			| 'Consignor stocks' | 'en description is empty' | 'Bag'                | 'ODS'      | 'No'                 | ''                         | 'pcs'  | '18,31'      | 'Source of origin 11'                    | '1,000'    | '120,00' | '18%' | '101,69'     | '120,00'       | 'Store 01' |
+			| 'Store'    | 'Inventory origin' | 'Price type'              | 'Item'               | 'Serial lot numbers'       | 'Unit' | 'Profit loss center' | 'Item key' | 'Source of origins'                      | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' |
+			| 'Store 01' | 'Consignor stocks' | 'en description is empty' | 'Product 6 with SLN' | '57897909799; 89088088989' | 'pcs'  | 'Shop 02'            | 'PZU'      | 'Source of origin 9; Source of origin 9' | '2,000'    | '100,00' | 'Without VAT' | '200,00'     | '200,00'       |
+			| 'Store 01' | 'Consignor stocks' | 'en description is empty' | 'Bag'                | ''                         | 'pcs'  | 'Shop 02'            | 'ODS'      | 'Source of origin 11'                    | '1,000'    | '120,00' | 'Without VAT' | '120,00'     | '120,00'       |
 		And I close all client application windows
 		
 				

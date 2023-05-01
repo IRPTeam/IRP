@@ -235,6 +235,22 @@
   <master>true</master>
   <mainFilter>true</mainFilter>
  </dimensions>
+ <dimensions uuid="3e669262-8183-44d9-9f47-3dcf195f264e">
+  <name>TransactionType</name>
+  <synonym>
+   <key>en</key>
+   <value>Transaction type</value>
+  </synonym>
+  <type>
+   <types>EnumRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
  <forms uuid="0ea4f4dc-5141-44dd-9058-2c31c57de7ad">
   <name>RecordForm</name>
   <synonym>

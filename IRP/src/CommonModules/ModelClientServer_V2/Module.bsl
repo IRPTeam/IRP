@@ -359,6 +359,8 @@ Function GetChain()
 	
 	Chain.Insert("ConsignorBatchesFillBatches"                  , GetChainLink("ConsignorBatchesFillBatchesExecute"));
 	
+	Chain.Insert("ChangeExpenseTypeByAccrualDeductionType", GetChainLink("ChangeExpenseTypeByAccrualDeductionTypeExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -1566,6 +1568,24 @@ EndFunction
 
 #EndRegion
 
+#Region CHANGE_EXPENSE_TYPE_BY_ACCRUAL_DEDUCTION_TYPE
+
+Function ChangeExpenseTypeByAccrualDeductionTypeOptions() Export
+	Return GetChainLinkOptions("AccrualDeductionType, ExpenseType");
+EndFunction
+
+Function ChangeExpenseTypeByAccrualDeductionTypeExecute(Options) Export
+	If ValueIsFilled(Options.AccrualDeductionType) Then
+		ExpenseType = CommonFunctionsServer.GetRefAttribute(Options.AccrualDeductionType, "ExpenseType");
+		If ValueIsFilled(ExpenseType) Then
+			Return ExpenseType;
+		EndIf;
+	EndIf;
+	Return Options.ExpenseType;
+EndFunction
+
+#EndRegion
+
 #Region CALCULATE_DIFFERENCE
 
 Function CalculateDifferenceCountOptions() Export
@@ -1879,7 +1899,7 @@ EndFunction
 
 // TaxesCache - XML string from form attribute
 Function RequireCallCreateTaxesFormControlsOptions() Export
-	Return GetChainLinkOptions("Ref, Date, Company, ArrayOfTaxInfo, FormTaxColumnsExists");
+	Return GetChainLinkOptions("Ref, Date, Company, TransactionType, ArrayOfTaxInfo, FormTaxColumnsExists");
 EndFunction
 
 // return true if need create form controls for taxes
@@ -1895,14 +1915,10 @@ Function RequireCallCreateTaxesFormControlsExecute(Options) Export
 	For Each TaxInfo In Options.ArrayOfTaxInfo Do
 		TaxesInCache.Add(TaxInfo.Tax);
 	EndDo;
-	RequiredTaxes = New Array();
+	
 	DocumentName = Options.Ref.Metadata().Name;
-	AllTaxes = TaxesServer.GetTaxesByCompany(Options.Date, Options.Company);
-	For Each ItemOfAllTaxes In AllTaxes Do
-		If ItemOfAllTaxes.UseDocuments.FindRows(New Structure("DocumentName", DocumentName)).Count() Then
-			RequiredTaxes.Add(ItemOfAllTaxes.Tax);
-		EndIf;
-	EndDo;
+	RequiredTaxes = TaxesServer.GetRequiredTaxesForDocument(Options.Date, Options.Company, DocumentName, Options.TransactionType);
+	
 	For Each Tax In RequiredTaxes Do
 		If TaxesInCache.Find(Tax) = Undefined Then
 			Return True; // not all required taxes in cache
@@ -1917,7 +1933,7 @@ Function RequireCallCreateTaxesFormControlsExecute(Options) Export
 EndFunction
 
 Function ChangeTaxRateOptions() Export
-	Return GetChainLinkOptions("Date, Company, Agreement, ItemKey, InventoryOrigin, ConsignorBatches, TaxRates, ArrayOfTaxInfo, Ref, IsBasedOn, TaxList");
+	Return GetChainLinkOptions("Date, Company, TransactionType, Agreement, ItemKey, InventoryOrigin, ConsignorBatches, TaxRates, ArrayOfTaxInfo, Ref, IsBasedOn, TaxList");
 EndFunction
 
 Function ChangeTaxRateExecute(Options) Export
@@ -1955,13 +1971,7 @@ Function ChangeTaxRateExecute(Options) Export
 		
 	// taxes when have in company by document date
 	DocumentName = Options.Ref.Metadata().Name;
-	AllTaxes = TaxesServer.GetTaxesByCompany(Options.Date, Options.Company);
-	RequiredTaxes = New Array();
-	For Each ItemOfAllTaxes In AllTaxes Do
-		If ItemOfAllTaxes.UseDocuments.FindRows(New Structure("DocumentName", DocumentName)).Count() Then
-			RequiredTaxes.Add(ItemOfAllTaxes.Tax);
-		EndIf;
-	EndDo;
+	RequiredTaxes = TaxesServer.GetRequiredTaxesForDocument(Options.Date, Options.Company, DocumentName, Options.TransactionType);
 	
 	For Each ItemOfTaxInfo In Options.ArrayOfTaxInfo Do
 		If ItemOfTaxInfo.Type <> PredefinedValue("Enum.TaxType.Rate") Then
@@ -1975,50 +1985,32 @@ Function ChangeTaxRateExecute(Options) Export
 			Result.Insert(ItemOfTaxInfo.Name, Undefined);
 			Continue;
 		EndIf;
-		
+				
 		// Tax rate from consignor batch
 		If ValueIsFilled(Options.InventoryOrigin) 
-			And Options.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then
+			And Options.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks")
+			And Options.ConsignorBatches.Count() Then
 			
 			Parameters = New Structure();
 			Parameters = New Structure();
 			Parameters.Insert("Date"      , Options.Date);
 			Parameters.Insert("ConsignorBatches", Options.ConsignorBatches);
 			Parameters.Insert("Tax"       , ItemOfTaxInfo.Tax);
-			ArrayOfTaxRates = TaxesServer.GetTaxRatesForConsignorBatches(Parameters);
-			
-			If ArrayOfTaxRates.Count() Then
-				Result.Insert(ItemOfTaxInfo.Name, ArrayOfTaxRates[0].TaxRate);
-			EndIf;
-			
+			TaxRate = TaxesServer.GetTaxRateByConsignorBatch(Parameters);			
+			Result.Insert(ItemOfTaxInfo.Name, TaxRate);
 			Continue;
 		EndIf;
 		
-		ArrayOfTaxRates = New Array();
-		If ValueIsFilled(Options.Agreement) Then
-			Parameters = New Structure();
-			Parameters.Insert("Date"      , Options.Date);
-			Parameters.Insert("Company"   , Options.Company);
-			Parameters.Insert("Tax"       , ItemOfTaxInfo.Tax);
-			Parameters.Insert("Agreement" , Options.Agreement);
-			ArrayOfTaxRates = TaxesServer.GetTaxRatesForAgreement(Parameters);
-		EndIf;
-
-		If Not ArrayOfTaxRates.Count() Then
-			Parameters = New Structure();
-			Parameters.Insert("Date"    , Options.Date);
-			Parameters.Insert("Company" , Options.Company);
-			Parameters.Insert("Tax"     , ItemOfTaxInfo.Tax);
-			If ValueIsFilled(Options.ItemKey) Then
-				Parameters.Insert("ItemKey", Options.ItemKey);
-			Else
-				Parameters.Insert("ItemKey", PredefinedValue("Catalog.ItemKeys.EmptyRef"));
-			EndIf;
-			ArrayOfTaxRates = TaxesServer.GetTaxRatesForItemKey(Parameters);
-		EndIf;
-		If ArrayOfTaxRates.Count() Then
-			Result.Insert(ItemOfTaxInfo.Name, ArrayOfTaxRates[0].TaxRate);
-		EndIf;
+		Parameters = New Structure();
+		Parameters.Insert("Date"    , Options.Date);
+		Parameters.Insert("Company" , Options.Company);
+		Parameters.Insert("Tax"     , ItemOfTaxInfo.Tax);
+		Parameters.Insert("ItemKey"         , Options.ItemKey);
+		Parameters.Insert("Agreement"       , Options.Agreement);
+		Parameters.Insert("TransactionType" , Options.TransactionType);
+			
+		TaxRate = TaxesServer.GetTaxRateByPriority(Parameters);
+		Result.Insert(ItemOfTaxInfo.Name, TaxRate);
 	EndDo;
 		
 	Return Result;

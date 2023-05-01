@@ -945,17 +945,23 @@ Function R1040B_TaxesOutgoing()
 EndFunction
 
 Function R2013T_SalesOrdersProcurement()
-	Return "SELECT
-		   |	ItemList.Quantity AS PurchaseQuantity,
-		   |	ItemList.SalesOrder AS Order,
-		   |	*
-		   |INTO R2013T_SalesOrdersProcurement
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND ItemList.SalesOrderExists";
-
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.SalesOrder AS Order,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	ItemList.Quantity AS PurchaseQuantity,
+		|	ItemList.NetAmount AS PurchaseNetAmount,
+		|	ItemList.Amount AS PurchaseTotalAmount
+		|INTO R2013T_SalesOrdersProcurement
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.SalesOrderExists";
 EndFunction
 
 Function R4010B_ActualStocks()

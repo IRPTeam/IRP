@@ -38,9 +38,9 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 EndProcedure
 
 &AtServer
-Function Taxes_CreateFormControls() Export
-	Return TaxesServer.CreateFormControls_PaymentList(Object, ThisObject);
-EndFunction
+Procedure Taxes_CreateFormControls() Export
+	TaxesServer.CreateFormControls_PaymentList(Object, ThisObject);
+EndProcedure
 
 &AtClient
 Procedure FormSetVisibilityAvailability() Export
@@ -152,6 +152,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.ChoiceByAccrual.Visible = 
+		Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.SalaryPayment");
 EndProcedure
 
 #EndRegion
@@ -448,6 +450,11 @@ EndProcedure
 
 #EndRegion
 
+&AtClient
+Procedure ChoiceByAccrual(Command)
+	DocPayrollClient.ChoiceByAccrual(Object, ThisObject);
+EndProcedure
+	
 &AtClient
 Procedure EditCurrencies(Command)
 	CurrentData = ThisObject.Items.PaymentList.CurrentData;

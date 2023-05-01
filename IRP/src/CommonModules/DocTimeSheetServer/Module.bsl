@@ -60,6 +60,7 @@ Function GetTimeSheet(Parameters) Export
 	ResultTable.Columns.Add("Date");
 	ResultTable.Columns.Add("Employee");
 	ResultTable.Columns.Add("Position");
+	ResultTable.Columns.Add("ProfitLossCenter");
 	ResultTable.Columns.Add("AccrualAndDeductionType");
 	ResultTable.Columns.Add("SumColumn");
 	
@@ -78,9 +79,11 @@ Function GetTimeSheet(Parameters) Export
 		BeginDate = EndOfDay(BeginDate) + 1;
 	EndDo;
 	
-	ResultTable.Sort("Employee, Date");
+	GroupColumn = "Date, Employee, Position, ProfitLossCenter, AccrualAndDeductionType";
+	SumColumn = "SumColumn";
 	
-	Return ResultTable;
+	ResultTable.Sort("Employee, Date");
+	Return New Structure("Table, GroupColumn, SumColumn", ResultTable, GroupColumn, SumColumn);
 EndFunction
 
 Function GetStaffing(Company, Branch, _Day)
@@ -89,6 +92,7 @@ Function GetStaffing(Company, Branch, _Day)
 	"SELECT
 	|	StaffingSliceLast.Employee AS Employee,
 	|	StaffingSliceLast.Position AS Position,
+	|	StaffingSliceLast.ProfitLossCenter AS ProfitLossCenter,
 	|	StaffingSliceLast.Period AS Date
 	|FROM
 	|	InformationRegister.T9510S_Staffing.SliceLast(ENDOFPERIOD(&_Day, DAY), Company = &Company
@@ -106,9 +110,10 @@ Function GetStaffing(Company, Branch, _Day)
 	
 	ArrayOfResults = New Array();
 	While QuerySelection.Next() Do
-		ArrayOfResults.Add(New Structure("Employee, Position, Date", 
+		ArrayOfResults.Add(New Structure("Employee, Position, ProfitLossCenter, Date", 
 			QuerySelection.Employee,
 			QuerySelection.Position,
+			QuerySelection.ProfitLossCenter,
 			_Day));
 	EndDo;
 	

@@ -14,6 +14,39 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 &AtClient
+Procedure CheckAll(Command)
+	ChangeCheck(True);
+EndProcedure
+
+&AtClient
+Procedure UncheckAll(Command)
+	ChangeCheck(False);	
+EndProcedure
+
+&AtClient
+Procedure ChangeCheck(Value)
+	If Items.PaymentTerm.Enabled Then
+		ThisObject.PaymentTerm = Value;
+	EndIf;
+	
+	If Items.PriceTypes.Enabled Then
+		ThisObject.PriceTypes = Value;
+	EndIf;
+	
+	If Items.Prices.Enabled Then
+	ThisObject.Prices = Value;
+	EndIf;
+	
+	If Items.Stores.Enabled Then
+		ThisObject.Stores = Value;
+	EndIf;
+	
+	If Items.TaxRates.Enabled Then
+		ThisObject.TaxRates = Value;
+	EndIf;
+EndProcedure
+
+&AtClient
 Procedure OK(Command)
 	Actions = New Structure();
 

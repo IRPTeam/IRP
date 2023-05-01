@@ -115,4 +115,19 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </dimensions>
+  <dimensions uuid="406fb9c4-9419-4d32-ae61-2ce43bf858d9">
+    <name>ProfitLossCenter</name>
+    <synonym>
+      <key>en</key>
+      <value>Profit loss center</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </dimensions>
 </mdclass:InformationRegister>

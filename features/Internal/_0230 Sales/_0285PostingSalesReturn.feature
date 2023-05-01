@@ -315,8 +315,8 @@ Scenario: _028503 create SR based on SI (different company, branch, store)
 		And I click "Ok" button
 	* Check
 		And "ItemList" table became equal
-			| '#' | 'Item'  | 'Profit loss center'      | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Dont calculate row' | 'Quantity' | 'Sales invoice'                               | 'Price'  | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales return order' | 'Return reason' | 'Revenue type' | 'Offers amount' | 'Landed cost' | 'Sales person' |
-			| '1' | 'Dress' | 'Distribution department' | 'M/White'  | 'pcs'  | ''                   | 'No'                 | '2,000'    | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '520,00' | '881,36'     | 'No'                | '1 040,00'     | ''                    | 'Store 01' | ''                   | ''              | 'Revenue'      | ''              | ''            | ''             |
+			| '#' | 'Item'  | 'Profit loss center'      | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Dont calculate row' | 'Quantity' | 'Sales invoice'                               | 'Price'  | 'Use goods receipt' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales return order' | 'Return reason' | 'Revenue type' | 'Offers amount' | 'Landed cost' | 'Sales person' |
+			| '1' | 'Dress' | 'Distribution department' | 'M/White'  | 'pcs'  | ''                   | 'No'                 | '2,000'    | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '520,00' | 'No'                | '1 040,00'     | ''                    | 'Store 01' | ''                   | ''              | 'Revenue'      | ''              | ''            | ''             |		
 	* Show row key
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab
@@ -827,7 +827,6 @@ Scenario: _300512 check Use GR filling from store when create SR based on SI
 			| 'Boots' | '36/18SD'  | 'Yes'               |
 			| 'Boots' | '37/18SD'  | 'Yes'               |
 			| 'Dress' | 'S/Yellow' | 'Yes'               |
-		And I close all client application windows
 		
 
 Scenario: _999999 close TestClient session

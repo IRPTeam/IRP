@@ -935,6 +935,7 @@ Function CreateAdvanceDocumentsAtServer(DocumentParameters)
 			NewRow = BuilderAPI.AddRow(CashDocument, "PaymentList");
 			BuilderAPI.SetRowProperty(CashDocument, NewRow, "RetailCustomer", Object.RetailCustomer, "PaymentList");
 			BuilderAPI.SetRowProperty(CashDocument, NewRow, "TotalAmount"   , RowList.Amount, "PaymentList");
+			BuilderAPI.SetRowProperty(CashDocument, NewRow, "NetAmount"     , RowList.Amount, "PaymentList");
 		EndDo;
 		BuilderAPIWriteResult = BuilderAPI.Write(CashDocument, DocumentWriteMode.Posting);
 		ReturnData.Add(BuilderAPIWriteResult.Ref);
@@ -975,6 +976,7 @@ Function CreateAdvanceDocumentsAtServer(DocumentParameters)
 			BuilderAPI.SetRowProperty(BankDocument, NewRow, "PaymentType"      , RowList.PaymentType, "PaymentList");
 			BuilderAPI.SetRowProperty(BankDocument, NewRow, "BankTerm"         , RowList.BankTerm, "PaymentList");
 			BuilderAPI.SetRowProperty(BankDocument, NewRow, "TotalAmount"      , RowList.Amount, "PaymentList");
+			BuilderAPI.SetRowProperty(BankDocument, NewRow, "NetAmount"        , RowList.Amount, "PaymentList");
 		EndDo;
 		BuilderAPIWriteResult = BuilderAPI.Write(BankDocument, DocumentWriteMode.Posting);
 		ReturnData.Add(BuilderAPIWriteResult.Ref);
@@ -1223,37 +1225,17 @@ EndProcedure
 #EndRegion
 
 #Region Taxes
+
 &AtClient
 Procedure TaxValueOnChange(Item) Export
 	Return;
 EndProcedure
 
 &AtServer
-Procedure PutToTaxTable_(ItemName, Key, Value) Export
-	Return;
-EndProcedure
-
-&AtServer
 Procedure Taxes_CreateFormControls() Export
-	ColumnFieldParameters = New Structure();
-	ColumnFieldParameters.Insert("Visible", False);
-
-	TaxesParameters = TaxesServer.GetCreateFormControlsParameters();
-	TaxesParameters.Date = Object.Date;
-	TaxesParameters.Company = Object.Company;
-	TaxesParameters.PathToTable = "Object.ItemList";
-	TaxesParameters.ItemParent = ThisObject.Items.ItemList;
-	TaxesParameters.ColumnOffset = ThisObject.Items.ItemListOffersAmount;
-	TaxesParameters.ItemListName = "ItemList";
-	TaxesParameters.TaxListName = "TaxList";
-	TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";
-	TaxesParameters.ColumnFieldParameters = ColumnFieldParameters;
-	TaxesServer.CreateFormControls(Object, ThisObject, TaxesParameters);
-EndProcedure
-
-&AtServer
-Procedure Taxes_CreateTaxTree() Export
-	Return;
+	FieldProperty = New Structure("Visible", False);
+	CustomTaxParameters = New Structure("FieldProperty, HiddenFormItemsIfNotTaxes", FieldProperty, "");
+	TaxesServer.CreateFormControls_ItemList(Object, ThisObject, CustomTaxParameters);
 EndProcedure
 
 #EndRegion
@@ -1282,6 +1264,7 @@ Procedure CashInListSelection(Item, RowSelected, Field, StandardProcessing)
 	CashInData.Insert("MoneyTransfer"           , CurrentData.MoneyTransfer);
 	CashInData.Insert("Currency"                , CurrentData.Currency);
 	CashInData.Insert("Amount"                  , CurrentData.Amount);
+	CashInData.Insert("NetAmount"               , CurrentData.Amount);
 	CashInData.Insert("ConsolidatedRetailSales" , Object.ConsolidatedRetailSales);
 	
 	FillingData = GetFillingDataMoneyTransferForCashReceipt(CashInData);
@@ -1364,6 +1347,7 @@ Function GetFillingDataMoneyTransferForCashReceipt(CashInData)
 	FillingData.Insert("PaymentList"    , New Array());	
 	NewRow = New Structure();
 	NewRow.Insert("TotalAmount"           , CashInData.Amount);	
+	NewRow.Insert("NetAmount"             , CashInData.NetAmount);	
 	NewRow.Insert("MoneyTransfer"         , CashInData.MoneyTransfer);	
 	NewRow.Insert("FinancialMovementType" , CashInData.MoneyTransfer.ReceiveFinancialMovementType);
 	FillingData.PaymentList.Add(NewRow);

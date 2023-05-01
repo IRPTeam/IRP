@@ -3,13 +3,31 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
-	For Each Row In ThisObject.PayrollList Do
+	//CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, ThisObject.AccrualList);
+	For Each Row In ThisObject.AccrualList Do
 		Parameters = CurrenciesClientServer.GetParameters_V5(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;
 	
-	ThisObject.DocumentAmount = ThisObject.PayrollList.Total("Amount");
+	//CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, ThisObject.DeductionList);
+	For Each Row In ThisObject.DeductionList Do
+		Parameters = CurrenciesClientServer.GetParameters_V5(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
+	
+	//CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, ThisObject.CashAdvanceDeductionList);
+	For Each Row In ThisObject.CashAdvanceDeductionList Do
+		Parameters = CurrenciesClientServer.GetParameters_V5(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
+		
+	ThisObject.DocumentAmount = 
+	ThisObject.AccrualList.Total("Amount")
+	- ThisObject.DeductionList.Total("Amount") 
+	- ThisObject.CashAdvanceDeductionList.Total("Amount");
 EndProcedure
 
 Procedure OnWrite(Cancel)

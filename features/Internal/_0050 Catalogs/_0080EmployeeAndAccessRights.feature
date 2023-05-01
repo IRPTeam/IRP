@@ -452,8 +452,15 @@ Scenario: _008009 create accrual and deduction types
 		And I input "Salary by day TR" text in "TR" field
 		And I click "Ok" button
 		And I select "By day" exact value from the drop-down list named "Periodicity"
-		And I select "Monthly salary" exact value from "Algorithm ID" drop-down list		
-		And I click "Save and close" button	
+		And I select "Monthly salary" exact value from "Algorithm ID" drop-down list
+		And I select "Accrual" exact value from the drop-down list named "Type"
+		And I click Select button of "Expense type" field
+		And I click the button named "FormCreate"
+		And I input "test expense" text in "ENG" field
+		And I select "General expenses" exact value from "Expense type" drop-down list
+		And I click "Save and close" button
+		And I click the button named "FormChoose"
+		And I click "Save and close" button
 	* Create second element	
 		And I click the button named "FormCreate"
 		And I input "Monthly salary" text in "ENG" field
@@ -462,12 +469,35 @@ Scenario: _008009 create accrual and deduction types
 		And I input "Monthly salary TR" text in "TR" field
 		And I click "Ok" button
 		And I select "By period" exact value from the drop-down list named "Periodicity"
-		And I select "Monthly salary" exact value from "Algorithm ID" drop-down list		
+		And I select "Monthly salary" exact value from "Algorithm ID" drop-down list
+		And I select "Accrual" exact value from the drop-down list named "Type"		
+		And I click "Save and close" button	
+	* Create third element (deduction)
+		And I click the button named "FormCreate"
+		And I input "Deduction" text in "ENG" field
+		And I click Open button of "ENG" field
+		Then "Edit descriptions" window is opened
+		And I input "Deduction TR" text in "TR" field
+		And I click "Ok" button
+		And I select "By period" exact value from the drop-down list named "Periodicity"
+		And I select "Deduction" exact value from the drop-down list named "Type"		
+		And I click "Save and close" button	
+	* Create Cash advance deductions
+		And I click the button named "FormCreate"
+		And I input "Cash advance deductions" text in "ENG" field
+		And I click Open button of "ENG" field
+		Then "Edit descriptions" window is opened
+		And I input "Cash advance deductions TR" text in "TR" field
+		And I click "Ok" button
+		And I select "By period" exact value from the drop-down list named "Periodicity"
+		And I select "Deduction" exact value from the drop-down list named "Type"		
 		And I click "Save and close" button		
 	* Check creation
 		And "List" table contains lines
-			| 'Description'    |
-			| 'Salary by day'  |
-			| 'Monthly salary' |
+			| 'Description'             |
+			| 'Salary by day'           |
+			| 'Monthly salary'          |
+			| 'Deduction'               |
+			| 'Cash advance deductions' |
 		And I close all client application windows
 		

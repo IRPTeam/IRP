@@ -262,7 +262,9 @@ Function R2013T_SalesOrdersProcurement()
 		|	ItemList.Branch,
 		|	ItemList.Order,
 		|	ItemList.ItemKey,
-		|	-ItemList.Quantity AS OrderedQuantity
+		|	-ItemList.Quantity AS OrderedQuantity,
+		|	-ItemList.NetAmount AS OrderedNetAmount,
+		|	-ItemList.TotalAmount AS OrderedTotalAmount
 		|INTO R2013T_SalesOrdersProcurement
 		|FROM
 		|	ItemList AS ItemList

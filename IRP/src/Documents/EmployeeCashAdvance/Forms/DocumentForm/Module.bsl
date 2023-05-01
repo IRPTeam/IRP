@@ -38,9 +38,9 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 EndProcedure
 
 &AtServer
-Function Taxes_CreateFormControls() Export
-	Return TaxesServer.CreateFormControls_PaymentList(Object, ThisObject);
-EndFunction
+Procedure Taxes_CreateFormControls() Export
+	TaxesServer.CreateFormControls_PaymentList(Object, ThisObject);
+EndProcedure
 
 &AtClient
 Procedure FormSetVisibilityAvailability() Export

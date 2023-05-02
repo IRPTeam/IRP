@@ -2453,7 +2453,8 @@ EndProcedure
 Procedure UpdateTotalAmounts(Parameters)
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "WorkOrder"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "Payroll" Then
 		Parameters.Form.UpdateTotalAmounts();
 	EndIf;	
 EndProcedure
@@ -2706,44 +2707,75 @@ EndProcedure
 
 #EndRegion
 
-#Region PAYROLL_LIST
+#Region PAYROLL_LISTS
 
-Procedure PayrollListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+Procedure PayrollListsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
 	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
-Function PayrollListBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
-	NewRow = AddOrCopyRow(Object, Form, "PayrollList", Cancel, Clone, CurrentData,
-		"PayrollListOnAddRowFormNotify", "PayrollListOnCopyRowFormNotify");
-	Form.Items.PayrollList.CurrentRow = NewRow.GetID();
-	If Form.Items.PayrollList.CurrentRow <> Undefined Then
-		Form.Items.PayrollList.ChangeRow();
+Function PayrollListsBeforeAddRow(Object, Form, TableName, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, TableName, Cancel, Clone, CurrentData,
+		"PayrollListsOnAddRowFormNotify", "PayrollListsOnCopyRowFormNotify");
+
+	Form.Items[TableName].CurrentRow = NewRow.GetID();
+	If Form.Items[TableName].CurrentRow <> Undefined Then
+		Form.Items[TableName].ChangeRow();
 	EndIf;
 	Return NewRow;
 EndFunction
 
-Procedure PayrollListOnAddRowFormNotify(Parameters) Export
+Procedure PayrollListsOnAddRowFormNotify(Parameters) Export
 	Parameters.Form.Modified = True;
 EndProcedure
 
-Procedure PayrollListOnCopyRowFormNotify(Parameters) Export
+Procedure PayrollListsOnCopyRowFormNotify(Parameters) Export
 	Parameters.Form.Modified = True;
 EndProcedure
 
-Procedure PayrollListAfterDeleteRow(Object, Form) Export
-	DeleteRows(Object, Form, "PayrollList", "PayrollListAfterDeleteRowFormNotify");
+Procedure PayrollListsAfterDeleteRow(Object, Form, TableName) Export
+	DeleteRows(Object, Form, TableName, "PayrollListsAfterDeleteRowFormNotify");
 EndProcedure
 
-Procedure PayrollListAfterDeleteRowFormNotify(Parameters) Export
-	Return;
+Procedure PayrollListsAfterDeleteRowFormNotify(Parameters) Export
+	UpdateTotalAmounts(Parameters);
 EndProcedure
 
-Procedure PayrollListLoad(Object, Form, Address, GroupColumn = "", SumColumn = "") Export
-	Parameters = GetLoadParameters(Object, Form, "PayrollList", Address, GroupColumn, SumColumn);
+Procedure PayrollListsLoad(Object, Form, Address, TableName, GroupColumn = "", SumColumn = "") Export
+	Parameters = GetLoadParameters(Object, Form, TableName, Address, GroupColumn, SumColumn);
 	Parameters.LoadData.ExecuteAllViewNotify = True;
 	ControllerClientServer_V2.AddEmptyRowsForLoad(Parameters);
-	ControllerClientServer_V2.PayrollListLoad(Parameters);
+	ControllerClientServer_V2.PayrollListsLoad(Parameters);
 EndProcedure
+
+#EndRegion
+
+#Region PAYROLL_LISTS_COLUMNS
+
+#Region PAYROLL_LISTS_ACCRUAL_DEDUCTION_TYPE
+
+// PayrollLists.AccrualDeductionType
+Procedure PayrollListsAccrualDeductionTypeOnChange(Object, Form, TableName, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, TableName, CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
+	ControllerClientServer_V2.PayrollListsAccrualDeductionTypeOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region PAYROLL_LISTS_AMOUNT
+
+// PayrollLists.Amount
+Procedure PayrollListsAmountOnChange(Object, Form, TableName, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, TableName, CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
+	ControllerClientServer_V2.PayrollListsAmountOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetPayrollListsAmountNotify(Parameters) Export
+	UpdateTotalAmounts(Parameters);
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 

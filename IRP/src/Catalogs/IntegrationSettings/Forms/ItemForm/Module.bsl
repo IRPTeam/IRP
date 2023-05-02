@@ -115,6 +115,11 @@ EndProcedure
 Procedure FillByDefaultAtServer()
 	ConnectionSetting = GetConnectionSetting();
 	For Each Str In ConnectionSetting Do
+		
+		If Str.Key = "IntegrationSettingsRef" Then
+			Continue;
+		EndIf;
+		
 		Filter = New Structure("Key", Str.Key);
 		Rows = Object.ConnectionSetting.FindRows(Filter);
 		If Not Rows.Count() Then

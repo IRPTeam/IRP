@@ -138,7 +138,7 @@ Function UploadPicture(File, Volume) Export
 	Return FileInfo;
 EndFunction
 
-Function ExtensionCall_UploadPicture(FileInfo, Parameters)
+Function ExtensionCall_UploadPicture(FileInfo, Parameters) Export
 	Return False
 EndFunction
 

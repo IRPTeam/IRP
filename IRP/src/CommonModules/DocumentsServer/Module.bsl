@@ -722,7 +722,7 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 				Result.ChoiceForms.PresentationStartChoice_Counter + 1;
 				Result.ChoiceForms.PresentationStartChoice_Key = RowKey;
 			EndIf;
-		ElsIf Parameters.SerialLotNumberInRow Then
+		ElsIf Parameters.isSerialLotNumberAtRow Then
 			If Object.UseSerialLot And ScanDataItem.UseSerialLotNumber And Not ValueIsFilled(ScanDataItem.SerialLotNumber) Then
 				Result.ChoiceForms.StartChoice_Counter = 
 				Result.ChoiceForms.StartChoice_Counter + 1;

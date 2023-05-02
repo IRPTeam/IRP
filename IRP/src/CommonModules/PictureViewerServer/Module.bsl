@@ -244,6 +244,16 @@ Function IsFileRefBelongToOwner(FileRef, OwnerRef) Export
 	Return QuerySelection.Next();
 EndFunction
 
+// Get integration settings picture.
+// 
+// Parameters:
+//  FileStorageVolume - Undefined - File storage volume
+// 
+// Returns:
+//  Structure - Get integration settings picture:
+// * DefaultPictureStorageVolume - Arbitrary, CatalogRef.FileStorageVolumes, Undefined -
+// * POSTIntegrationSettings - CatalogRef.IntegrationSettings -
+// * GETIntegrationSettings - CatalogRef.IntegrationSettings -
 Function GetIntegrationSettingsPicture(Val FileStorageVolume = Undefined) Export
 	If Not ValueIsFilled(FileStorageVolume) Then
 		FileStorageVolume = Constants.DefaultPictureStorageVolume.Get();
@@ -326,8 +336,9 @@ Function ExtensionCall_GetVolumeURLByIntegrationSettings(FullURL, IntegrationSet
 	Return False;
 EndFunction
 
-Function isImage(Extensions) Export
-	Return Not PictureViewerClientServer.GetImageExtensions().Find(Lower(Extensions)) = Undefined; 
+Function isImage(Val Extensions) Export
+	Extensions = StrReplace(Extensions, ".", "");
+	Return Not PictureViewerClientServer.GetImageExtensions(0).Find(Lower(Extensions)) = Undefined; 
 EndFunction
 
 Function GetArrayOfFileIDAsURLParameter(OwnerRef) Export
@@ -605,8 +616,13 @@ EndFunction
 #EndRegion
 
 Function CreatePictureParameters(FileRef) Export
+	Ref = FileRef;
+	If TypeOf(FileRef) = Type("FormDataStructure") Then
+		Ref = FileRef.Ref;
+	EndIf;
+	
 	PictureParameters = New Structure();
-	PictureParameters.Insert("Ref", FileRef);
+	PictureParameters.Insert("Ref", Ref);
 	PictureParameters.Insert("Description", FileRef.Description);
 	PictureParameters.Insert("FileID", FileRef.FileID);
 	PictureParameters.Insert("isFilledVolume", FileRef.Volume <> Catalogs.IntegrationSettings.EmptyRef());

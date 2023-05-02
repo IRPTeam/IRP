@@ -23,6 +23,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		Items.SelectPath.Enabled = False;
 	EndTry;
 	
+	PreviewScaleSize = 200;
+	
 EndProcedure
 
 &AtClient
@@ -53,7 +55,7 @@ Async Procedure SelectPath(Command)
 EndProcedure
 
 &AtClient
-Async Procedure AnalizeFolder(Command)
+Procedure AnalizeFolder(Command)
 	
 	ThisObject.FilesTable.Clear();
 	If IsBlankString(ThisObject.FolderPath) Then
@@ -63,7 +65,7 @@ Async Procedure AnalizeFolder(Command)
 	ArrayMD5 = New Array(); // Array of String
 	
 	ImageExtensions = PictureViewerClientServer.GetImageExtensions();
-	FileArray = Await FindFilesAsync(ThisObject.FolderPath, "*.*", True);
+	FileArray = FindFiles(ThisObject.FolderPath, "*.*", True);
 	For Each FileItem In FileArray Do
 		If FileItem.IsDirectory() Or ImageExtensions.Find(FileItem.Extension) = Undefined Then
 			Continue;
@@ -71,11 +73,9 @@ Async Procedure AnalizeFolder(Command)
 		FilesTableRecord = ThisObject.FilesTable.Add();
 		FilesTableRecord.FilePath = StrReplace(FileItem.FullName, ThisObject.FolderPath, "");
 		FilesTableRecord.Extension = FileItem.Extension;
-		FilesTableRecord.Size = (Await FileItem.SizeAsync()) / 1024 / 1024; // Size in Mb 
-	EndDo;
-	
-	For Each FileRecord In ThisObject.FilesTable Do
-		FilesTableRecord.MD5 = CalculateMD5(ThisObject.FolderPath + FileRecord.FilePath);
+		FilesTableRecord.FileName = FileItem.Name;
+		FilesTableRecord.Size = (FileItem.Size()) / 1024 / 1024; // Size in Mb 
+		FilesTableRecord.MD5 = CalculateMD5(ThisObject.FolderPath + FilesTableRecord.FilePath);
 		If Not IsBlankString(FilesTableRecord.MD5) Then
 			ArrayMD5.Add(FilesTableRecord.MD5);
 		EndIf;
@@ -123,10 +123,8 @@ Async Procedure Load(Command)
 	
 	FileDescriptionArray = New Array; // Array of TransferableFileDescription
     For Each FilesTableRecord In ThisObject.FilesTable Do
-    	If IsBlankString(FilesTableRecord.MD5) Or IsBlankString(FilesTableRecord.URI) Then
-	        FileDescriptionArray.Add(
+        FileDescriptionArray.Add(
 	        	New TransferableFileDescription(ThisObject.FolderPath + FilesTableRecord.FilePath));
-    	EndIf;
     EndDo;
     If FileDescriptionArray.Count() > 0 Then
     	PlacedFileDescriptions = Await PutFilesToServerAsync(, , FileDescriptionArray, UUID);
@@ -311,7 +309,7 @@ EndProcedure
 &AtServer
 Procedure StartLoadingOnServer(FileAdrresses)
 	
-	Volume = PictureViewerServer.GetIntegrationSettingsPicture().DefaultPictureStorageVolume;
+	Volume = PictureViewerServer.GetIntegrationSettingsPicture().DefaultPictureStorageVolume; // CatalogRef.FileStorageVolumes
 	
 	IncompleteRecords = ThisObject.FilesTable.FindRows(New Structure("FileRef", Catalogs.Files.EmptyRef()));
 	For Each FilesTableRecord In IncompleteRecords Do
@@ -331,14 +329,16 @@ Procedure StartLoadingOnServer(FileAdrresses)
 		
 		ExistingFileRef = PictureViewerServer.GetFileRefByMD5(FilesTableRecord.MD5);
 		If ValueIsFilled(ExistingFileRef) Then
-			FilesTableRecord.FileRef = ExistingFileRef; 
+			FilesTableRecord.FileRef = ExistingFileRef;
+			FilesTableRecord.IsFileCreate = True; 
 			Continue;
 		EndIf;
 		
-		FileInfo = PictureViewerClientServer.FileInfo();
+		FileInfo = PictureViewerServer.UpdatePictureInfoAndGetPreview(FileBinaryData, ThisObject.PreviewScaleSize);
 		FileInfo.FileID = FilesTableRecord.UUID;
 		FileInfo.MD5 = FilesTableRecord.MD5;
 		FileInfo.Extension = FilesTableRecord.Extension;
+		FileInfo.FileName = FilesTableRecord.FileName;
 		
 		UploadPictureParameters = New Structure();
 		//@skip-check property-return-type
@@ -362,10 +362,13 @@ Procedure StartLoadingOnServer(FileAdrresses)
 					FileInfo.Success = False;
 				EndIf;
 			EndIf;
+		Else
+			FileInfo.Success = True;
 		EndIf;
 		
 		If FileInfo.Success = True Then
 			FilesTableRecord.FileRef = PictureViewerServer.CreateFile(Volume, FileInfo);
+			FilesTableRecord.IsFileCreate = True;
 		EndIf;
 	EndDo;
 	

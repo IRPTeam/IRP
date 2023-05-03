@@ -460,6 +460,10 @@ FROM
        <key>en</key>
        <value>Boundary</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Граница</value>
+      </content>
      </localValue>
     </title>
     <valueType>
@@ -567,6 +571,10 @@ FROM
       <content>
        <key>en</key>
        <value>Array of employee</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Массив сотрудников</value>
       </content>
      </localValue>
     </title>

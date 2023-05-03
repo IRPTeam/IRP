@@ -10,6 +10,10 @@
   <key>en</key>
   <value>Payroll types</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Типы заработной платы</value>
+ </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="cf1ad9c3-dfbd-4d72-bfe4-01866cbe8acf">
@@ -18,6 +22,10 @@
    <key>en</key>
    <value>Accrual</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Начисление</value>
+  </synonym>
  </enumValues>
  <enumValues uuid="fd46c290-1097-4a65-bc8e-1ace19f33252">
   <name>Deduction</name>
@@ -25,12 +33,20 @@
    <key>en</key>
    <value>Deduction</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Удержания</value>
+  </synonym>
  </enumValues>
  <enumValues uuid="bce661b5-d0cb-46b0-911d-892bf411a1cc">
   <name>CashAdvanceDeductions</name>
   <synonym>
    <key>en</key>
    <value>Cash advance deductions</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Отчисления аванса наличными</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

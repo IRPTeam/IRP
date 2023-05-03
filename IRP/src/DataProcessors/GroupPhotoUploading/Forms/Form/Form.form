@@ -293,6 +293,10 @@
    <key>en</key>
    <value>Group of path</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Группа Путь</value>
+  </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
    <name>GroupPathExtendedTooltip</name>
@@ -444,6 +448,10 @@
      <key>en</key>
      <value>S</value>
     </title>
+    <title>
+     <key>ru</key>
+     <value>С</value>
+    </title>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -499,6 +507,10 @@
     <title>
      <key>en</key>
      <value>F</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Ф</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -968,6 +980,10 @@
    <key>en</key>
    <value>Group of File Area</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Группа Файл область</value>
+  </title>
   <extendedTooltip>
    <name>GroupFileAreaExtendedTooltip</name>
    <id>46</id>
@@ -1039,6 +1055,10 @@
    <key>en</key>
    <value>Folder path</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Путь к каталогу</value>
+  </title>
   <id>2</id>
   <valueType>
    <types>String</types>
@@ -1057,6 +1077,10 @@
    <key>en</key>
    <value>Files table</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Таблица файлов</value>
+  </title>
   <id>3</id>
   <valueType>
    <types>ValueTable</types>
@@ -1072,6 +1096,10 @@
    <title>
     <key>en</key>
     <value>File path</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Путь к файлу</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1091,6 +1119,14 @@
     <key>en</key>
     <value>Owner</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Владелец</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Sahip</value>
+   </title>
    <id>5</id>
    <valueType>
     <types>DefinedType.typeFilesOwner</types>
@@ -1106,6 +1142,14 @@
    <name>MD5</name>
    <title>
     <key>en</key>
+    <value>MD5</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>MD5</value>
+   </title>
+   <title>
+    <key>tr</key>
     <value>MD5</value>
    </title>
    <id>6</id>
@@ -1128,6 +1172,10 @@
     <key>en</key>
     <value>Size (Mb)</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Размер (Мб)</value>
+   </title>
    <id>8</id>
    <valueType>
     <types>Number</types>
@@ -1147,6 +1195,14 @@
    <name>UUID</name>
    <title>
     <key>en</key>
+    <value>UUID</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>UUID</value>
+   </title>
+   <title>
+    <key>tr</key>
     <value>UUID</value>
    </title>
    <id>12</id>
@@ -1169,6 +1225,10 @@
     <key>en</key>
     <value>File ref</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Ссылка файла</value>
+   </title>
    <id>13</id>
    <valueType>
     <types>CatalogRef.Files</types>
@@ -1185,6 +1245,14 @@
    <title>
     <key>en</key>
     <value>Extension</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Расширение</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Uzantı</value>
    </title>
    <id>14</id>
    <valueType>
@@ -1206,6 +1274,14 @@
     <key>en</key>
     <value>URI</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>URI</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>URI</value>
+   </title>
    <id>16</id>
    <valueType>
     <types>String</types>
@@ -1224,6 +1300,10 @@
     <key>en</key>
     <value>Is saved</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Сохранен</value>
+   </title>
    <id>17</id>
    <valueType>
     <types>Boolean</types>
@@ -1241,6 +1321,10 @@
     <key>en</key>
     <value>Is file create</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Файл создан</value>
+   </title>
    <id>18</id>
    <valueType>
     <types>Boolean</types>
@@ -1257,6 +1341,14 @@
    <title>
     <key>en</key>
     <value>File name</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Имя файла</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Dosya ismi</value>
    </title>
    <id>21</id>
    <valueType>
@@ -1277,6 +1369,10 @@
    <key>en</key>
    <value>Picture integration settings</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Настройки интеграции изображений</value>
+  </title>
   <id>7</id>
   <valueType/>
   <view>
@@ -1291,6 +1387,14 @@
   <title>
    <key>en</key>
    <value>Preview</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Предварительный просмотр</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Ön izleme</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1308,6 +1412,14 @@
   <title>
    <key>en</key>
    <value>Picture view HTML</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Просмотр изображений HTML</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Resim HTML önizleme</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1327,6 +1439,10 @@
    <key>en</key>
    <value>Enable to load</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Включить загрузку</value>
+  </title>
   <id>11</id>
   <valueType>
    <types>Boolean</types>
@@ -1344,6 +1460,10 @@
    <key>en</key>
    <value>Picture connection setting</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Настройки подключения изображений</value>
+  </title>
   <id>15</id>
   <valueType/>
   <view>
@@ -1357,6 +1477,14 @@
   <name>Start</name>
   <title>
    <key>en</key>
+   <value>Start</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Старт</value>
+  </title>
+  <title>
+   <key>tr</key>
    <value>Start</value>
   </title>
   <id>19</id>
@@ -1377,6 +1505,14 @@
    <key>en</key>
    <value>Finish</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Закончить</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Bitiş</value>
+  </title>
   <id>20</id>
   <valueType>
    <types>Date</types>
@@ -1394,6 +1530,10 @@
   <title>
    <key>en</key>
    <value>Preview scale size</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Размер превью</value>
   </title>
   <id>22</id>
   <valueType>
@@ -1416,6 +1556,10 @@
    <key>en</key>
    <value>Select path</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Выбрать путь</value>
+  </title>
   <id>1</id>
   <use>
    <common>true</common>
@@ -1436,6 +1580,10 @@
   <title>
    <key>en</key>
    <value>Analize folder</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Анализировать каталог</value>
   </title>
   <id>2</id>
   <use>
@@ -1458,6 +1606,10 @@
    <key>en</key>
    <value>Find owner</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Найти владельца</value>
+  </title>
   <id>3</id>
   <use>
    <common>true</common>
@@ -1478,6 +1630,10 @@
   <title>
    <key>en</key>
    <value>Load</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Загрузить</value>
   </title>
   <id>4</id>
   <use>

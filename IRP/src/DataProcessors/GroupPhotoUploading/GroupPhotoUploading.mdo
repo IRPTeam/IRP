@@ -9,12 +9,24 @@
   <key>en</key>
   <value>Group photo uploading</value>
  </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Группа отправки фото</value>
+ </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.GroupPhotoUploading.Form.Form</defaultForm>
  <forms uuid="ae5f8cd1-ebdc-4a49-88ac-280762cac97e">
   <name>Form</name>
   <synonym>
    <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>

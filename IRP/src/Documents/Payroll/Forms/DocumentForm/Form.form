@@ -1381,6 +1381,10 @@
     <key>en</key>
     <value>Accrual</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Начисление</value>
+   </title>
    <extendedTooltip>
     <name>GroupAccrualExtendedTooltip</name>
     <id>1283</id>
@@ -2120,6 +2124,10 @@
     <key>en</key>
     <value>Deduction</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Удержания</value>
+   </title>
    <extendedTooltip>
     <name>GroupDeductionExtendedTooltip</name>
     <id>1327</id>
@@ -2762,6 +2770,10 @@
     <key>en</key>
     <value>Cash advance deduction</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Удержание аванса наличными</value>
+   </title>
    <extendedTooltip>
     <name>GroupCashAdvanceDeductionExtendedTooltip</name>
     <id>1329</id>
@@ -3224,6 +3236,10 @@
       <key>en</key>
       <value>Accrual</value>
      </title>
+     <title>
+      <key>ru</key>
+      <value>Начисление</value>
+     </title>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -3282,6 +3298,10 @@
      <key>en</key>
      <value>Group total accrual amount</value>
     </title>
+    <title>
+     <key>ru</key>
+     <value>Группа Итог Начисления</value>
+    </title>
     <extendedTooltip>
      <name>GroupTotalAccrualAmountExtendedTooltip</name>
      <id>1477</id>
@@ -3315,6 +3335,10 @@
      <title>
       <key>en</key>
       <value>Deduction</value>
+     </title>
+     <title>
+      <key>ru</key>
+      <value>Удержания</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -3374,6 +3398,10 @@
      <key>en</key>
      <value>Group deduction amount</value>
     </title>
+    <title>
+     <key>ru</key>
+     <value>Группа Сумма удержания</value>
+    </title>
     <extendedTooltip>
      <name>GroupDeductionAmountExtendedTooltip</name>
      <id>1482</id>
@@ -3407,6 +3435,10 @@
      <title>
       <key>en</key>
       <value>C/A Deduction</value>
+     </title>
+     <title>
+      <key>ru</key>
+      <value>Удержание аванса наличными</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -3465,6 +3497,10 @@
     <title>
      <key>en</key>
      <value>Group cash advance deduction amoun</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Группа Сумма удержания аванса</value>
     </title>
     <extendedTooltip>
      <name>GroupCashAdvanceDeductionAmounExtendedTooltip</name>
@@ -3612,6 +3648,10 @@
     <title>
      <key>en</key>
      <value>Group payment amount</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Группа Сумма платежа</value>
     </title>
     <extendedTooltip>
      <name>GroupPaymentAmountExtendedTooltip</name>
@@ -3873,6 +3913,10 @@
    <key>en</key>
    <value>Main tables</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Основная таблица</value>
+  </title>
   <id>11</id>
   <valueType>
    <types>String</types>
@@ -3890,6 +3934,10 @@
   <title>
    <key>en</key>
    <value>Total payment amount</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Итого к оплате</value>
   </title>
   <id>12</id>
   <valueType>
@@ -3964,6 +4012,10 @@
    <key>en</key>
    <value>Edit currencies accrual</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Редактировать валюты начисления</value>
+  </title>
   <id>17</id>
   <use>
    <common>true</common>
@@ -3983,6 +4035,10 @@
   <title>
    <key>en</key>
    <value>Edit currencies cash advance deduction</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Изменить валюту вычета аванса наличными</value>
   </title>
   <id>18</id>
   <use>
@@ -4004,6 +4060,10 @@
    <key>en</key>
    <value>Edit currencies deduction</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Изменить валютный вычет</value>
+  </title>
   <id>19</id>
   <use>
    <common>true</common>
@@ -4023,6 +4083,10 @@
   <title>
    <key>en</key>
    <value>Fill accrual</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Заполнить начисление</value>
   </title>
   <id>20</id>
   <use>
@@ -4045,6 +4109,10 @@
    <key>en</key>
    <value>Fill deduction</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Заполнить удержания</value>
+  </title>
   <id>21</id>
   <use>
    <common>true</common>
@@ -4065,6 +4133,10 @@
   <title>
    <key>en</key>
    <value>Fill cash advance deduction</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Заполнить вычет наличными авансом</value>
   </title>
   <id>22</id>
   <use>

@@ -1109,6 +1109,10 @@
      <key>en</key>
      <value>Transaction types</value>
     </title>
+    <title>
+     <key>ru</key>
+     <value>Тип транзакции</value>
+    </title>
     <id>3</id>
     <valueType>
      <types>String</types>
@@ -1179,6 +1183,10 @@
   <title>
    <key>en</key>
    <value>Set transaction types</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Установить тип транзакции</value>
   </title>
   <id>2</id>
   <use>

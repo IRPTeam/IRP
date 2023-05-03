@@ -240,6 +240,10 @@
    <key>en</key>
    <value>Choice by accrual form</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Выбор по форме начисления</value>
+  </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
@@ -252,6 +256,10 @@
   <synonym>
    <key>en</key>
    <value>Accrual list</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Список начислений</value>
   </synonym>
   <attributes uuid="e200e073-c6f8-407b-aea8-b41878b6950b">
    <name>Key</name>
@@ -328,6 +336,10 @@
    <synonym>
     <key>en</key>
     <value>Accrual type</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Тип начислений</value>
    </synonym>
    <type>
     <types>CatalogRef.AccrualAndDeductionTypes</types>
@@ -423,6 +435,10 @@
    <key>en</key>
    <value>Deduction list</value>
   </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Список удержаний</value>
+  </synonym>
   <attributes uuid="037105e7-89d4-4782-96b5-97d710b723cc">
    <name>Key</name>
    <synonym>
@@ -498,6 +514,10 @@
    <synonym>
     <key>en</key>
     <value>Deduction type</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Тип удержания</value>
    </synonym>
    <type>
     <types>CatalogRef.AccrualAndDeductionTypes</types>
@@ -614,6 +634,10 @@
   <synonym>
    <key>en</key>
    <value>Cash advance deduction list</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Удержание аванса наличными список</value>
   </synonym>
   <attributes uuid="d9978904-846e-46ef-b219-fbcfd38d4364">
    <name>Key</name>

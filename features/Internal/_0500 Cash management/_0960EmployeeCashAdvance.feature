@@ -22,6 +22,7 @@ Scenario: _096000 preparation (Employee cash advance)
 		When Create catalog Units objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog Countries objects
 		When Create catalog Partners objects (Kalipso)
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
@@ -205,7 +206,7 @@ Scenario: _0960010 create Bank payment with transaction type Employee cash advan
 		And "PaymentList" table became equal
 			| '#' | 'Partner'         | 'Commission' | 'Basis document' | 'Total amount' | 'Financial movement type' | 'Profit loss center' | 'Planning transaction basis'                          | 'Commission percent' | 'Additional analytic' | 'Expense type' |
 			| '1' | 'Olivia Williams' | ''           | ''               | '1 000,00'     | 'Movement type 1'         | ''                   | 'Outgoing payment order 16 dated 12.01.2023 16:34:39' | ''                   | ''                    | ''             |
-		And the editing text of form attribute named "DocumentAmount" became equal to "1 000,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 000,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Check creation
 		And I click the button named "FormPost"
@@ -240,7 +241,7 @@ Scenario: _0960011 create Cash payment with transaction type Employee cash advan
 			| '#' | 'Partner'         | 'Basis document' | 'Total amount' | 'Financial movement type' | 'Planning transaction basis'                          |
 			| '1' | 'Olivia Williams' | ''               | '1 000,00'     | 'Movement type 1'         | 'Outgoing payment order 15 dated 12.01.2023 16:34:17' |
 			| '2' | 'Emily Jones'     | ''               | '1 000,00'     | 'Movement type 1'         | 'Outgoing payment order 15 dated 12.01.2023 16:34:17' |
-		And the editing text of form attribute named "DocumentAmount" became equal to "2 000,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "2 000,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Check creation
 		And I click the button named "FormPost"

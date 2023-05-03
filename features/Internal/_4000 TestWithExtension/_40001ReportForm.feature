@@ -22,6 +22,7 @@ Scenario: _4000100 preparation
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog Countries objects
 		When Create information register Barcodes records
 		When Create catalog Users objects
 		When Create catalog AccessGroups objects

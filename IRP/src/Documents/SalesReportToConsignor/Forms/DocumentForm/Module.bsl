@@ -67,9 +67,9 @@ Procedure API_CallbackAtServer(TableName, ArrayOfDataPaths)
 EndProcedure
 
 &AtServer
-Function Taxes_CreateFormControls() Export
-	Return TaxesServer.CreateFormControls_ItemList(Object, ThisObject, Items.ItemListNetAmount);
-EndFunction
+Procedure Taxes_CreateFormControls() Export
+	TaxesServer.CreateFormControls_ItemList(Object, ThisObject);
+EndProcedure
 
 &AtClient
 Procedure FormSetVisibilityAvailability() Export

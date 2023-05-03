@@ -22,6 +22,7 @@ Scenario: _012000 preparation (partners term)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog PartnerSegments objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog Countries objects
 		When Create catalog Stores objects
 		When Create catalog PriceTypes objects
 		When Create chart of characteristic types CurrencyMovementType objects

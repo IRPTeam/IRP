@@ -22,6 +22,7 @@ Scenario: _2050001 preparation
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
+		When Create catalog Countries objects
 		When Create catalog CashAccounts objects
 		When Create catalog Agreements objects
 		When Create catalog ObjectStatuses objects
@@ -343,7 +344,7 @@ Scenario: 2050002 check filling in Reconcilation statement
 		| '*'    | '$$BankReceipt2050001$$*'     | '20 000,00' | ''          |
 		| '*'    | '$$SalesInvoice20400022$$'    | ''          | '20 980,00' |
 		| '*'    | '$$SalesInvoice2040002$$'     | ''          | '1 740,00'  |
-		| '*'    | '$$SalesInvoice20400021$$'    | ''          | '28 686,30' |
+		| '*'    | '$$SalesInvoice20400021$$'    | ''          | '28 445,24' |
 		| '*'    | '$$PurchaseInvoice2040005$$'  | '40 544,80' | ''          |
 	* Check document
 		And I click the button named "FormPost"

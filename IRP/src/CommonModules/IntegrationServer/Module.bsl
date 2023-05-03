@@ -24,10 +24,26 @@ Function ConnectionSetting(IntegrationSettingName, AddInfo = Undefined) Export
 	
 	// Customize setting with according IntegrationSettings catalog
 	FillPropertyValues(ConnectionSetting, IntegrationSettings.CustomizedSetting);
-	ConnectionSetting.Insert("Headers", New Map);
+
 	ConnectionSetting.Insert("IntegrationSettingsRef", IntegrationSettings.Ref);
 	ConnectionSetting.Insert("IntegrationType", IntegrationSettings.IntegrationType);
 	ConnectionSetting.Insert("AddData", GetAdditionalSettings(IntegrationSettings.Ref));
+	If Not ConnectionSetting.Property("Headers") Then
+		ConnectionSetting.Insert("Headers", New Map);
+	EndIf;
+	If Not ConnectionSetting.Property("User") Then
+		ConnectionSetting.Insert("User", "");
+	EndIf;
+	If Not ConnectionSetting.Property("Password") Then
+		ConnectionSetting.Insert("Password", "");
+	EndIf;
+	If Not ConnectionSetting.Property("Proxy") Then
+		ConnectionSetting.Insert("Proxy", Undefined);
+	EndIf;
+	If Not ConnectionSetting.Property("UseOSAuthentication") Then
+		ConnectionSetting.Insert("UseOSAuthentication", False);
+	EndIf;	
+	
 	Result.Success = True;
 	Result.Value = ConnectionSetting;
 	Return Result;

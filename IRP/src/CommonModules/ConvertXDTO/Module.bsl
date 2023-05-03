@@ -96,19 +96,21 @@ Function PrepareObjectXDTO(ObjectStructure, TypeName, URI, WSName) Export
 	For Each ObjectData In ObjectStructure Do
 		
 		If TypeOf(ObjectData) = Type("KeyAndValue") AND TypeOf(ObjectData.Value) = Type("Structure") Then //объект
-			XDTOTypeStructure = XDTOType.Properties.Get(ObjectData.Key).Type;
-			If TypeOf(DataXDTO[ObjectData.Key]) = Type("XDTOList") Then
-				DataXDTO[ObjectData.Key].Add(PrepareObjectXDTO(ObjectData.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName));
+			XDTOPropertyStructure = GetXDTOProperty(XDTOType.Properties, ObjectData.Key);
+			XDTOTypeStructure = XDTOPropertyStructure.Type;
+			XDTOValue = PrepareObjectXDTO(ObjectData.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName);
+			If TypeOf(DataXDTO[XDTOPropertyStructure.Name]) = Type("XDTOList") Then
+				DataXDTO[XDTOPropertyStructure.Name].Add(XDTOValue);
 			Else
-				DataXDTO[ObjectData.Key] = PrepareObjectXDTO(ObjectData.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName);
+				DataXDTO[XDTOPropertyStructure.Name] = XDTOValue;
 			EndIf;
 		ElsIf TypeOf(ObjectData) = Type("KeyAndValue") 
 			AND TypeOf(ObjectData.Value) = Type("Array") Then // List
-			
-			If XDTOType.Properties.Get(ObjectData.Key) = Undefined Then
+			XDTOPropertyStructure = GetXDTOProperty(XDTOType.Properties, ObjectData.Key);
+			If XDTOPropertyStructure = Undefined Then
 				XDTOTypeRow = XDTOType;
 			Else
- 				XDTOTypeRow = XDTOType.Properties.Get(ObjectData.Key).Type;
+ 				XDTOTypeRow = XDTOPropertyStructure.Type;
 			EndIf;
 			
 			For Each Row In ObjectData.Value Do
@@ -120,42 +122,32 @@ Function PrepareObjectXDTO(ObjectStructure, TypeName, URI, WSName) Export
 					If Str.Value = Undefined OR TypeOf(Str.Value) = Type("Map") Then
 						Continue;
 					EndIf; 
-					
-					// uyumsoft rename some tags like TaxTotal to TaxTotal1, and other
-					If Not TypeOf(XDTOTypeRow) = Type("XDTOValueType") And XDTOTypeRow.Properties.Get(Str.Key) = Undefined Then
-						If XDTOTypeRow.Properties.Get(Str.Key + "1") = Undefined Then
-							Continue;
-						Else
-							StrKey = Str.Key + "1"; 
-						EndIf;
-					Else
-						StrKey = Str.Key;
+					If Not TypeOf(XDTOTypeRow) = Type("XDTOValueType") Then
+						XDTOPropertyStructure = GetXDTOProperty(XDTOTypeRow.Properties, Str.Key);
 					EndIf;
-					// uyumsoft
+					XDTOTypeStructure = XDTOPropertyStructure.Type;
 					
 					If TypeOf(XDTOTypeRow) = Type("XDTOValueType") Then
-						If TypeOf(DataXDTO[StrKey]) =  Type("XDTOList") Then
-							DataXDTO[ObjectData.Key].Add(Row[ObjectData.Key]);
+						If TypeOf(DataXDTO[XDTOPropertyStructure.Name]) =  Type("XDTOList") Then
+							DataXDTO[XDTOPropertyStructure.Name].Add(Row[ObjectData.Key]);
 						Else
-							DataXDTO[ObjectData.Key] = Row[ObjectData.Key];
+							DataXDTO[XDTOPropertyStructure.Name] = Row[ObjectData.Key];
 						EndIf;
 					Else
-						XDTOTypeStructure = XDTOTypeRow.Properties.Get(StrKey).Type;
-						
-						If TypeOf(DataXDTORow[StrKey]) =  Type("XDTOList") Then
+						If TypeOf(DataXDTORow[XDTOPropertyStructure.Name]) =  Type("XDTOList") Then
 							If TypeOf(Str.Value) = Type("Array") Then
 								For Each StrArray In Str.Value Do
-									DataXDTORow[StrKey].Add(PrepareObjectXDTO(StrArray, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName));
+									DataXDTORow[XDTOPropertyStructure.Name].Add(PrepareObjectXDTO(StrArray, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName));
 								EndDo;
 							ElsIf TypeOf(Str.Value) = Type("String") Then
 								SetObject(DataXDTORow, XDTOTypeStructure, Str.Key, Str.Value, WSName);
 							Else
-								DataXDTORow[StrKey].Add(PrepareObjectXDTO(Str.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName));
+								DataXDTORow[XDTOPropertyStructure.Name].Add(PrepareObjectXDTO(Str.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName));
 							EndIf;
 						ElsIf TypeOf(Str.Value) = Type("Structure") Then
-							DataXDTORow[StrKey] = PrepareObjectXDTO(Str.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName);
+							DataXDTORow[XDTOPropertyStructure.Name] = PrepareObjectXDTO(Str.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName);
 						Else 
-							SetObject(DataXDTORow, XDTOTypeStructure, StrKey, Str.Value, WSName);
+							SetObject(DataXDTORow, XDTOTypeStructure, XDTOPropertyStructure.Name, Str.Value, WSName);
 						EndIf;
 					EndIf;
 				EndDo;
@@ -177,21 +169,20 @@ Function PrepareObjectXDTO(ObjectStructure, TypeName, URI, WSName) Export
 					Continue;
 				EndIf; 
 				
-				XDTOTypeStructure = XDTOType.Properties.Get(ObjectDataKeyValue.Key).Type;
-
-				
-				If TypeOf(DataXDTO[ObjectDataKeyValue.Key]) =  Type("XDTOList") Then
-										
-					DataXDTO[ObjectDataKeyValue.Key].Add(PrepareObjectXDTO(ObjectDataKeyValue.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName));
-				ElsIf TypeOf(ObjectDataKeyValue.Value) = Type("Structure") Then
-					DataXDTO[ObjectDataKeyValue.Key] = PrepareObjectXDTO(ObjectDataKeyValue.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName);
+				XDTOPropertyStructure = GetXDTOProperty(XDTOType.Properties, ObjectDataKeyValue.Key);
+				XDTOTypeStructure = XDTOPropertyStructure.Type;
+				XDTOValue = PrepareObjectXDTO(ObjectDataKeyValue.Value, XDTOTypeStructure.Name, XDTOTypeStructure.NamespaceURI, WSName);
+					
+				If TypeOf(DataXDTO[XDTOTypeStructure.Name]) =  Type("XDTOList") Then
+					DataXDTO[XDTOTypeStructure.Name].Add(XDTOValue);
+				ElsIf TypeOf(XDTOTypeStructure.Name) = Type("Structure") Then
+					DataXDTO[XDTOTypeStructure.Name] = XDTOValue;
 				Else 
-					SetObject(DataXDTO, XDTOTypeStructure, ObjectDataKeyValue.Key, ObjectDataKeyValue.Value, WSName);
+					SetObject(DataXDTO, XDTOTypeStructure, XDTOTypeStructure.Name, ObjectDataKeyValue.Value, WSName);
 				EndIf;
 
 			EndDo;
-		
-		Else                                               //уже сам реквизит
+		Else // set attribute value
 			SetObject(DataXDTO, XDTOType, ObjectData.Key, ObjectData.Value, WSName);
 		EndIf; 
 		
@@ -199,6 +190,28 @@ Function PrepareObjectXDTO(ObjectStructure, TypeName, URI, WSName) Export
 
 	Return DataXDTO;
 	
+EndFunction
+
+// Get XDTOType.
+// 
+// Parameters:
+//  Properties - XDTOPropertyCollection - Properties
+//  PropertyName - String - Property name
+// 
+// Returns:
+//  XDTOProperty
+Function GetXDTOProperty(Properties, PropertyName)
+	
+	PropertyInfo = Properties.Get(PropertyName);
+	
+	If PropertyInfo = Undefined Then
+		For Each Pr In Properties Do
+			If Pr.LocalName = PropertyName Then
+				Return Pr;
+			EndIf;
+		EndDo;
+	EndIf;
+	Return PropertyInfo;
 EndFunction
 
 Procedure SetObject(XDTO, Type, Property, Val Value = Undefined, WSName = Undefined) Export
@@ -288,7 +301,11 @@ Function ObjectXDTOStructure(XDTOType, Val ArrayList, WSName = Undefined, FillEm
 				XDTOStructure.Insert(Property.Name, Property.DefaultValue.Value);
 			ElsIf Not StrCompare(Property.Type.Name, "uuid") Then
 				XDTOStructure.Insert(Property.Name, String(New UUID));
-			ElsIf Property.Type.Name = "string" Then
+			ElsIf Property.Type.Name = "string"
+			 	Or Property.Type.Name = "normalizedString"
+			 	Or Property.Type.Name = "ID"
+			 	Or Property.Type.Name = "anyURI"
+			 	Or Property.Type.Name = "language" Then
 				XDTOStructure.Insert(Property.Name, Property.Name);
 			ElsIf Property.Type.Name = "boolean" Then
 				XDTOStructure.Insert(Property.Name, True);
@@ -307,6 +324,15 @@ Function ObjectXDTOStructure(XDTOType, Val ArrayList, WSName = Undefined, FillEm
 				XDTOStructure.Insert(Property.Name, CommonFunctionsServer.GetCurrentSessionDate());
 			ElsIf Property.Type.Name = "anyType" Then
 				XDTOStructure.Insert(Property.Name, Property.Name);
+			ElsIf Property.Type.Name = "base64Binary" Then
+				Body = New MemoryStream();
+				DataWriter = New DataWriter(Body, TextEncoding.UTF8);
+				DataWriter.WriteLine(Property.Name);
+				DataWriter.Close();
+				BD = Body.CloseAndGetBinaryData();
+				
+				Value = Base64String(BD);
+				XDTOStructure.Insert(Property.Name, Value);
 			Else
 				If Not Property.Type.Facets = Undefined And Not Property.Type.Facets.Enumerations = Undefined Then
 					XDTOStructure.Insert(Property.Name, Property.Type.Facets.Enumerations[0].Value);
@@ -351,6 +377,10 @@ Procedure FillAttribute(XDTO, Object, Val AttrName, DocAttr, ID = 0) Export
 				DataTag = XDTO[Names[1]];
 			EndIf;
 				
+			If DataTag = Undefined Then
+				Return;
+			EndIf;
+			
 			For Index = 2 To Names.UBound() Do
 				If Names[Index] = "M" Then
 					Break;

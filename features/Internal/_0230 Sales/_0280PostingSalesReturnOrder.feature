@@ -10,7 +10,7 @@ I want to create a Sales return order document
 To track a product that needs to be returned from customer
 
 Variables:
-import "Variables.feature"
+Path = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path"), "#workingDir#")}"
 
 
 Background:
@@ -38,6 +38,7 @@ Scenario: _028000 preparation (Sales return order)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Companies objects (partners company)
+		When Create catalog Countries objects
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects
@@ -59,6 +60,13 @@ Scenario: _028000 preparation (Sales return order)
 		When Create catalog Partners objects
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
+	When Create Document discount (for row)
+	* Add plugin for discount
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "DocumentDiscount" |
+			When add Plugin for document discount
 	* Tax settings
 		When filling in Tax settings for company
 	When Create document SalesOrder and SalesInvoice objects (creation based on, SI >SO)
@@ -82,8 +90,8 @@ Scenario: _028001 create document Sales return order based on SI (button Create)
 	* Create Sales return order
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-				| 'Number'                       | 'Partner'   |
-				| '32' | 'Ferron BP' |
+				| 'Number' | 'Partner'   |
+				| '32'     | 'Ferron BP' |
 		And I select current line in "List" table
 		And I click the button named "FormDocumentSalesReturnOrderGenerate"
 		And I click "Ok" button		
@@ -97,12 +105,12 @@ Scenario: _028001 create document Sales return order based on SI (button Create)
 		And I select "Approved" exact value from "Status" drop-down list
 	* Check items tab
 		And "ItemList" table became equal
-			| 'Profit loss center'      | '#' | 'Item'    | 'Dont calculate row' | 'Quantity'      | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales invoice'                              | 'Revenue type' | 'Item key' | 'Cancel' | 'Cancel reason' | 'Sales person' |
-			| 'Distribution department' | '1' | 'Dress'   | 'No'                 | '1,000'  | 'pcs'            | '75,36'      | '520,00'   | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | 'XS/Blue'  | 'No'     | ''              |'Alexander Orlov'|
-			| 'Distribution department' | '2' | 'Shirt'   | 'No'                 | '12,000' | 'pcs'            | '640,68'     | '350,00'   | '18%' | ''              | '3 559,32'   | '4 200,00'     | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | '36/Red'   | 'No'     | ''              |'Alexander Orlov'|
-			| 'Distribution department' | '3' | 'Boots'   | 'No'                 | '2,000'  | 'Boots (12 pcs)' | '2 434,58'   | '8 400,00' | '18%' | '840,00'        | '13 525,42'  | '15 960,00'    | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | '37/18SD'  | 'No'     | ''              |'Alexander Orlov'|
-			| 'Front office'            | '4' | 'Service' | 'No'                 | '1,000'  | 'pcs'            | '14,49'      | '100,00'   | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | 'Internet' | 'No'     | ''              |''|
-			| ''                        | '5' | 'Shirt'   | 'No'                 | '2,000'  | 'pcs'            | '106,78'     | '350,00'   | '18%' | ''              | '593,22'     | '700,00'       | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | ''             | '38/Black' | 'No'     | ''              |'Anna Petrova'|
+			| 'Profit loss center'      | '#' | 'Item'    | 'Dont calculate row' | 'Quantity' | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales invoice'                              | 'Revenue type' | 'Item key' | 'Cancel' | 'Cancel reason' | 'Sales person'    |
+			| 'Distribution department' | '1' | 'Dress'   | 'No'                 | '1,000'    | 'pcs'            | '75,36'      | '520,00'   | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | 'XS/Blue'  | 'No'     | ''              | 'Alexander Orlov' |
+			| 'Distribution department' | '2' | 'Shirt'   | 'No'                 | '12,000'   | 'pcs'            | '640,68'     | '350,00'   | '18%' | ''              | '3 559,32'   | '4 200,00'     | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | '36/Red'   | 'No'     | ''              | 'Alexander Orlov' |
+			| 'Distribution department' | '3' | 'Boots'   | 'No'                 | '2,000'    | 'Boots (12 pcs)' | '2 434,58'   | '8 400,00' | '18%' | '840,00'        | '13 525,42'  | '15 960,00'    | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | '37/18SD'  | 'No'     | ''              | 'Alexander Orlov' |
+			| 'Front office'            | '4' | 'Service' | 'No'                 | '1,000'    | 'pcs'            | '14,49'      | '100,00'   | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | 'Internet' | 'No'     | ''              | ''                |
+			| ''                        | '5' | 'Shirt'   | 'No'                 | '2,000'    | 'pcs'            | '106,78'     | '350,00'   | '18%' | ''              | '593,22'     | '700,00'       | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | ''             | '38/Black' | 'No'     | ''              | 'Anna Petrova'    |
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "871,00"
 		Then the form attribute named "ItemListTotalNetAmount" became equal to "18 177,11"

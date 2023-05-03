@@ -228,18 +228,7 @@ Procedure RecalculateConsignorBatches(Object, Form)
 		Return;
 	EndIf;
 	
-	FormParameters = ControllerClientServer_V2.GetFormParameters(Form);
-	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
-	ServerParameters.TableName = "ItemList";		
-	
-	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
-	
-	If TypeOf(Object.Ref) = Type("DocumentRef.InventoryTransfer") Then	
-		Property = New Structure("DataPath", "Command_UpdateConsignorBatches_StoreSender");
-	Else
-		Property = New Structure("DataPath", "Command_UpdateConsignorBatches");
-	EndIf;
-	ControllerClientServer_V2.API_SetProperty(Parameters, Property, Undefined);	
+	ViewClient_V2.ExecuteCommand(Object, Form, "ItemList", "Command_UpdateConsignorBatches");
 EndProcedure
 
 Procedure UpdateSourceOfOriginsPresentation(Object) Export

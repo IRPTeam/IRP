@@ -10,8 +10,9 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 				Continue;
 			EndIf;
 
-			If Metadata.AccumulationRegisters.Contains(RecordSetMetadata) Or Metadata.InformationRegisters.Contains(
-				RecordSetMetadata) Then
+			If Metadata.AccumulationRegisters.Contains(RecordSetMetadata) 
+				Or Metadata.InformationRegisters.Contains(RecordSetMetadata) Then
+					
 				Dimension = RecordSetMetadata.Dimensions.Find("CurrencyMovementType");
 				// Register supported multicurrency
 				If Dimension <> Undefined Then
@@ -21,7 +22,8 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 		EndDo;
 	EndIf;
 
-	If ArrayOfPostingInfo.Count() And Parameters.Object.Metadata().TabularSections.Find("Currencies") <> Undefined Then
+	If ArrayOfPostingInfo.Count() And
+	 (Parameters.Object.Metadata().TabularSections.Find("Currencies") <> Undefined Or CurrencyTable <> Undefined) Then
 		TempTableManager = New TempTablesManager();
 		Query = New Query();
 		Query.TempTablesManager = TempTableManager;
@@ -148,8 +150,11 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 			EndIf; // DocumentCondition
 			
 			Query.SetParameter("CurrencyTable", CurrencyTable);
-		Else
+		
+		Else // CurrencyTable <> Undefined
+		
 			Query.SetParameter("CurrencyTable", CurrencyTable);
+			
 		EndIf;
 		Query.Execute();
 		For Each ItemOfPostingInfo In ArrayOfPostingInfo Do

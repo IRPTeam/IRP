@@ -34,6 +34,7 @@ Scenario: _0155100 preparation ( filling documents)
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog Countries objects
 		When Create catalog Stores objects
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
@@ -379,31 +380,6 @@ Scenario: _01541992 copy lines from SI to SalesOrder
 			| 'Product 3 with SLN' | 'PZU'      | 'pcs'               | '8,000'    |
 		And I close all client application windows
 
-Scenario: _01541992 copy lines from SI to SalesOrderClosing
-	And I close all client application windows
-	* Select SI and copy lines
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-			| 'Number' |
-			| '1 290'  |
-		And I select current line in "List" table
-		And I click "Copy to clipboard" button
-		And I go to line in "ItemList" table
-			| 'Item'               | 'Item key' |
-			| 'Product 1 with SLN' | 'PZU'      |
-		Then I select all lines of "ItemList" table
-		And I click "Copy to clipboard" button
-	* Open SalesOrderClosing and check copy lines
-		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
-		And I click the button named "FormCreate"
-		And I click "Paste from clipboard" button
-		And "ItemList" table became equal
-			| 'Item'               | 'Item key' | 'Unit'              | 'Quantity' |
-			| 'Product 1 with SLN' | 'PZU'      | 'pcs'               | '3,000'    |
-			| 'Dress'              | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
-			| 'Product 3 with SLN' | 'UNIQ'     | 'pcs'               | '2,000'    |
-			| 'Product 3 with SLN' | 'PZU'      | 'pcs'               | '8,000'    |
-		And I close all client application windows
 
 Scenario: _01541993 copy lines from SI to SalesReportFromTradeAgent
 	And I close all client application windows
@@ -875,32 +851,6 @@ Scenario: _01541988 copy lines from SI to RetailReturnReceipt
 		And I close all client application windows
 
 
-Scenario: _01541989 copy lines from SI to Purchase order closing
-	And I close all client application windows
-	* Select SI and copy lines
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-			| 'Number' |
-			| '1 290'  |
-		And I select current line in "List" table
-		And I click "Copy to clipboard" button
-		And I go to line in "ItemList" table
-			| 'Item'               | 'Item key' |
-			| 'Product 1 with SLN' | 'PZU'      |
-		Then I select all lines of "ItemList" table
-		And I click "Copy to clipboard" button
-	* Open Purchase order closing and check copy lines
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
-		And I click the button named "FormCreate"
-		And I click "Paste from clipboard" button
-		And "ItemList" table became equal
-			| '#' | 'Item'               | 'Item key' | 'Unit'              | 'Quantity' |
-			| '1' | 'Product 1 with SLN' | 'PZU'      | 'pcs'               | '3,000'    |
-			| '2' | 'Dress'              | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
-			| '3' | 'Product 3 with SLN' | 'UNIQ'     | 'pcs'               | '2,000'    |
-			| '4' | 'Product 3 with SLN' | 'PZU'      | 'pcs'               | '8,000'    |
-		And I close all client application windows
-
 Scenario: _01541961 check copy lines from RetailSalesReceipt
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -989,27 +939,6 @@ Scenario: _01541963 check copy lines from RetailReturnReceipt
 			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
 		And I close all client application windows
 						
-Scenario: _01541964 check copy lines from PurchaseOrderClosing
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
-	And I click the button named "FormCreate"
-	* Add items
-		And I fill "ItemList" table with data
-			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
-			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
-			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
-	* Copy lines
-		And I go to the first line in "ItemList" table
-		Then I select all lines of "ItemList" table
-		And in the table "ItemList" I click "Copy to clipboard" button
-		And I delete all lines of "ItemList" table
-	* Past lines
-		And I click "Paste from clipboard" button
-		And "ItemList" table became equal
-			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
-			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
-			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
-		And I close all client application windows
 
 Scenario: _01541965 check copy lines from PurchaseOrder
 	And I close all client application windows
@@ -1319,27 +1248,6 @@ Scenario: _01541978 check copy lines from Item stock adjustment
 			| 'Dress' | 'XS/Blue'            | 'box Dress (8 pcs)' | '2,000'    |
 		And I close all client application windows
 
-Scenario: _01541979 check copy lines from Sales order closing
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
-	And I click the button named "FormCreate"
-	* Add items
-		And I fill "ItemList" table with data
-			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
-			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
-			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
-	* Copy lines
-		And I go to the first line in "ItemList" table
-		Then I select all lines of "ItemList" table
-		And in the table "ItemList" I click "Copy to clipboard" button
-		And I delete all lines of "ItemList" table
-	* Past lines
-		And I click "Paste from clipboard" button
-		And "ItemList" table became equal
-			| 'Item'  | 'Item key' | 'Unit'              | 'Quantity' |
-			| 'Bag'   | 'PZU'      | 'pcs'               | '3,000'    |
-			| 'Dress' | 'XS/Blue'  | 'box Dress (8 pcs)' | '2,000'    |
-		And I close all client application windows
 
 Scenario: _01541950 check copy lines from Planned receipt reservation
 	And I close all client application windows

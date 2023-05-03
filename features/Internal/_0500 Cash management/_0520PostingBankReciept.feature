@@ -42,6 +42,7 @@ Scenario:  _052001 preparation (Bank receipt)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Companies objects (partners company)
+		When Create catalog Countries objects
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects
@@ -149,7 +150,7 @@ Scenario: _052001 create Bank receipt based on Sales invoice
 			| 'Reporting currency' | 'Reporting'    | 'USD' | 'USD'  | '1'            | '1'      | '4 250'     |
 			| 'TRY'                | 'Partner term' | 'TRY' | 'USD'  | '1'            | '5,6275' | '23 916,88' |	
 		And I close current window	
-		Then the form attribute named "DocumentAmount" became equal to "4 250,00"
+		Then the form attribute named "PaymentListTotalTotalAmount" became equal to "4 250,00"
 	* Change of Partner term and basis document
 		And I select current line in "PaymentList" table
 		And I activate "Partner term" field in "PaymentList" table
@@ -446,7 +447,7 @@ Scenario: _050009 create Bank receipt based on Purchase return
 			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | 'Purchase return 351 dated 24.03.2021 16:08:15' | '5 710,00'     | ''                        | ''                           |
 		
 		Then the form attribute named "Branch" became equal to ""
-		And the editing text of form attribute named "DocumentAmount" became equal to "5 710,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "5 710,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	And I close all client application windows
 

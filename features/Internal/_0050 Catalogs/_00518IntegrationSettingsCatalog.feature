@@ -75,7 +75,7 @@ Scenario: _005012 filling in the "Integration settings" catalog
 		And I select "File storage" exact value from "Integration type" drop-down list
 		And in the table "ConnectionSetting" I click the button named "ConnectionSettingFillByDefault"
 		And I activate "Value" field in "ConnectionSetting" table
-		And I input "GET" text in "Value" field of "ConnectionSetting" table
+		And I input "POST" text in "Value" field of "ConnectionSetting" table
 		And I finish line editing in "ConnectionSetting" table
 		And I go to line in "ConnectionSetting" table
 			| 'Key'             |
@@ -91,9 +91,9 @@ Scenario: _005012 filling in the "Integration settings" catalog
 		And I finish line editing in "ConnectionSetting" table
 		And I go to line in "ConnectionSetting" table
 			| 'Key'  | 'Value' |
-			| 'Port' | '8 080' |
+			| 'Port' | '443' |
 		And I select current line in "ConnectionSetting" table
-		And I input "8 080" text in "Value" field of "ConnectionSetting" table
+		And I input "8080" text in "Value" field of "ConnectionSetting" table
 		And I finish line editing in "ConnectionSetting" table
 		And I go to line in "ConnectionSetting" table
 			| 'Key'  |
@@ -111,31 +111,27 @@ Scenario: _005012 filling in the "Integration settings" catalog
 			| 'Key'              |
 			| 'SecureConnection' |
 		And I select current line in "ConnectionSetting" table
-		And I click choice button of "Value" attribute in "ConnectionSetting" table
-		Then "Select data type" window is opened
 		And I go to line in "" table
 			| ''        |
 			| 'Boolean' |
 		And I select current line in "" table
-		Then "Integration setting (create) *" window is opened
-		And I select "Yes" exact value from "Value" drop-down list in "ConnectionSetting" table
+		And I select "Yes" exact value from the drop-down list named "ConnectionSettingValue" in "ConnectionSetting" table		
 		And I click "Save" button
 		Then the form attribute named "Description" became equal to "FILE STORAGE"
 		And I wait the field named "UniqueID" will be filled in "10" seconds
 		Then the form attribute named "IntegrationType" became equal to "File storage"
 		And "ConnectionSetting" table became equal
 			| '#'  | 'Key'                    | 'Value'            |
-			| '1'  | 'IntegrationSettingsRef' | 'GET'              |
-			| '2'  | 'QueryType'              | 'POST'             |
-			| '3'  | 'ResourceAddress'        | '/hs/filetransfer' |
-			| '4'  | 'Ip'                     | 'localhost'        |
-			| '5'  | 'Port'                   | '8 080'            |
-			| '6'  | 'User'                   | 'Admin'            |
-			| '7'  | 'Password'               | '123'              |
-			| '8'  | 'Proxy'                  | ''                 |
-			| '9'  | 'TimeOut'                | '60'               |
-			| '10' | 'SecureConnection'       | 'Yes'              |
-			| '11' | 'UseOSAuthentication'    | 'No'               |		
+			| '1'  | 'QueryType'              | 'POST'             |
+			| '2'  | 'ResourceAddress'        | '/hs/filetransfer' |
+			| '3'  | 'Ip'                     | 'localhost'        |
+			| '4'  | 'Port'                   | '8 080'            |
+			| '5'  | 'User'                   | 'Admin'            |
+			| '6'  | 'Password'               | '123'              |
+			| '7'  | 'Proxy'                  | ''                 |
+			| '8'  | 'TimeOut'                | '60'               |
+			| '9' | 'SecureConnection'       | 'Yes'              |
+			| '10' | 'UseOSAuthentication'    | 'No'               |		
 		Then the form attribute named "ExternalDataProc" became equal to ""
 		And I click "Save and close" button
 	* Create setting with integration type Other (without connection)

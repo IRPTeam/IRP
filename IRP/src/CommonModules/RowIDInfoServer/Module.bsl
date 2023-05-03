@@ -255,7 +255,7 @@ Procedure Posting_TM1010B_RowIDMovements_SOC(Source, Cancel, PostingMode)
 	"SELECT
 	|	SalesOrderItemList.Ref.Date AS Period,
 	|	SalesOrderItemList.Ref.SalesOrder AS Order,
-	|	SalesOrderItemList.Key AS RowKey,
+	|	SalesOrderItemList.SalesOrderKey AS RowKey,
 	|	SalesOrderItemList.Cancel AS IsCanceled
 	|INTO ItemList
 	|FROM
@@ -309,7 +309,7 @@ Procedure Posting_TM1010B_RowIDMovements_POC(Source, Cancel, PostingMode)
 	"SELECT
 	|	PurchaseOrderItems.Ref.Date AS Period,
 	|	PurchaseOrderItems.Ref.PurchaseOrder AS Order,
-	|	PurchaseOrderItems.Key AS RowKey,
+	|	PurchaseOrderItems.PurchaseOrderKey AS RowKey,
 	|	PurchaseOrderItems.Cancel AS IsCanceled
 	|INTO ItemList
 	|FROM
@@ -10155,7 +10155,16 @@ Procedure CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, Basises
 					DeepLevelRow = _BasisesTreeRow.Add();
 					
 					DeepLevelRow.Picture = 0;
-					DeepLevelRow.RowPresentation = String(TableRow.Item) + " (" + String(TableRow.ItemKey) + ")";
+					
+					SerialLotNumberPresentation = "";
+					If CommonFunctionsClientServer.ObjectHasProperty(DeepLevelRow, "SerialLotNumber") Then
+						SingleRowInfo = GetSerialLotNumber_SingleRowInfo(TableRow.Basis, TableRow.BasisKey);
+						DeepLevelRow.SerialLotNumber = SingleRowInfo.Get(TableRow.BasisKey);
+						If ValueIsFilled(DeepLevelRow.SerialLotNumber) Then
+							SerialLotNumberPresentation = " (" + DeepLevelRow.SerialLotNumber + ")";
+						EndIf;
+					EndIf;
+					DeepLevelRow.RowPresentation = String(TableRow.Item) + " (" + String(TableRow.ItemKey) + ")" + SerialLotNumberPresentation;
 
 					DeepLevelRow.DeepLevel = True;
 					FillPropertyValues(DeepLevelRow, TableRow);
@@ -10178,7 +10187,7 @@ Procedure CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, Basises
 						EndIf;
 						DeepLevelRow.Linked = True;
 					EndIf;
-
+					
 				EndDo;
 			Else
 				For Each ParentRow In ParentRows Do
@@ -10375,6 +10384,97 @@ Function GetChildrenInfo(Basis, BasisKey, RowID) Export
 		ArrayOfChildrenInfo.Add(ChildrenInfo);
 	EndDo;
 	Return ArrayOfChildrenInfo;
+EndFunction
+
+Function GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, ProportionalScaling = Undefined) Export
+	Return ServerReuse.GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, ProportionalScaling);
+EndFunction
+
+Function _GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, ProportionalScaling) Export
+	If Not ValueIsFilled(Basis) Then
+		Return Undefined; // no basis
+	EndIf;
+
+	Is = Is(DocRef);
+
+	BasisesInfo = GetBasisesInfo(Basis, BasisKey, RowID);
+
+	ArrayOfBasises = New Array();
+	While True Do
+		BasisIs = Is(BasisesInfo.Basis);
+
+		If Is.SI And BasisIs.SO Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromSO");
+		ElsIf Is.SRO And BasisIs.SI Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromSI");
+		ElsIf Is.SR And BasisIs.SI Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromSI");
+		ElsIf Is.SR And BasisIs.SRO Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromSRO");
+		ElsIf Is.PI And BasisIs.PO Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromPO");
+		ElsIf Is.PRO And BasisIs.PI Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromPI");
+		ElsIf Is.PR And BasisIs.PI Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromPI");
+		ElsIf Is.PR And BasisIs.PRO Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromPRO");
+		ElsIf Is.RRR And BasisIs.RSR Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromRSR");
+		ElsIf Is.WO And BasisIs.SO Then
+			Return ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, "ExtractData_FromSO");
+		EndIf;
+		
+
+		If BasisesInfo.Basis = BasisesInfo.RowRef.Basis Then
+			Break; // is root basis, top level
+		EndIf;
+		If ArrayOfBasises.Find(BasisesInfo.Basis) <> Undefined Then
+			Break; // infinity loop
+		EndIf;
+		ArrayOfBasises.Add(BasisesInfo.Basis);
+
+		// up to level
+		BasisesInfo = GetBasisesInfo(BasisesInfo.ParentBasis, BasisesInfo.BasisKey, BasisesInfo.RowID);
+	EndDo;
+	Return Undefined;
+EndFunction
+
+Function ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, FunctionName)
+	InfoReg = Metadata.InformationRegisters.T3010S_RowIDInfo;
+	BasisesTable = New ValueTable();
+	BasisesTable.Columns.Add("Key"                , InfoReg.Dimensions.Key.Type);
+	BasisesTable.Columns.Add("BasisKey"           , InfoReg.Dimensions.BasisKey.Type);
+	BasisesTable.Columns.Add("RowID"              , InfoReg.Dimensions.RowID.Type);
+	BasisesTable.Columns.Add("RowRef"             , InfoReg.Resources.RowRef.Type);
+	BasisesTable.Columns.Add("Basis"              , InfoReg.StandardAttributes.Recorder.Type);
+	BasisesTable.Columns.Add("ParentBasis"        , InfoReg.StandardAttributes.Recorder.Type);
+	BasisesTable.Columns.Add("CurrentStep"        , New TypeDescription("CatalogRef.MovementRules"));
+
+	// propertional scaling
+	BasisesTable.Columns.Add("Unit"               , InfoReg.Resources.Unit.Type);
+	BasisesTable.Columns.Add("BasisUnit"          , InfoReg.Resources.Unit.Type);
+	BasisesTable.Columns.Add("QuantityInBaseUnit" , Metadata.DefinedTypes.typeQuantity.Type);
+
+	NewRowBasisesTable = BasisesTable.Add();
+	If ProportionalScaling <> Undefined Then
+		NewRowBasisesTable.Unit = ProportionalScaling.Unit;
+		If ProportionalScaling.Property("BasisUnit") Then
+			NewRowBasisesTable.BasisUnit = ProportionalScaling.BasisUnit;
+		Else
+			NewRowBasisesTable.BasisUnit = Catalogs.Units.GetBasisUnit(ProportionalScaling.ItemKey);
+		EndIf;
+		NewRowBasisesTable.QuantityInBaseUnit = ProportionalScaling.QuantityInBaseUnit;
+	EndIf;
+
+	FillPropertyValues(NewRowBasisesTable, BasisesInfo);
+	NewRowBasisesTable.BasisKey = BasisesInfo.Key;
+	//@skip-warning
+	ExtractedData =  Eval(FunctionName + "(BasisesTable, DocRef)");
+	ArrayOfExtractedData = New Array();
+	ArrayOfExtractedData.Add(ExtractedData);
+	BasisesData = ConvertDataToFillingValues(DocRef.Metadata(), ArrayOfExtractedData);
+	Return BasisesData;
 EndFunction
 
 #EndRegion
@@ -11208,3 +11308,41 @@ EndProcedure
 
 #EndRegion
 
+Function GetSerialLotNumber_SingleRowInfo(val Object, FilterKey = Undefined) Export
+	SingleRowInfo = New Map();
+	
+	SerialLotNumberInTable = CommonFunctionsClientServer.ObjectHasProperty(Object, "SerialLotNumbers");
+	SerialLotNumberInRow = False;
+	If Object.ItemList.Count() Then
+		SerialLotNumberInRow = CommonFunctionsClientServer.ObjectHasProperty(Object.ItemList[0], "SerialLotNumber");
+	EndIf;
+		
+	If SerialLotNumberInTable Or SerialLotNumberInRow Then
+		For Each Row In Object.ItemList Do
+			If ValueIsFilled(FilterKey) And Row.Key <> FilterKey Then
+				Continue;
+			EndIf;
+			
+			If Not Row.Item.ItemType.SingleRow Then
+				Continue;
+			EndIf;
+			
+			If SerialLotNumberInTable Then
+				SerialLotNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", Row.Key));
+				If SerialLotNumbers.Count() Then
+					SerialLotNumberRef = SerialLotNumbers[0].SerialLotNumber;
+				EndIf;
+			EndIf;
+				
+			If SerialLotNumberInRow Then
+				SerialLotNumberRef = Row.SerialLotNumber;
+			EndIf;
+				
+			If ValueIsFilled(SerialLotNumberRef) Then
+				SingleRowInfo.Insert(Row.Key, SerialLotNumberRef);
+			EndIf;
+		EndDo;
+	EndIf;
+	
+	Return SingleRowInfo;
+EndFunction

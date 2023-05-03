@@ -26,6 +26,7 @@
   <type>
     <types>CatalogRef.IDInfoAddresses</types>
     <types>String</types>
+    <types>CatalogRef.Addresses</types>
     <stringQualifiers>
       <length>512</length>
     </stringQualifiers>
@@ -87,6 +88,20 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="893ed389-61ca-4062-8cfc-1bc36817ad3b">
+    <name>AddressType</name>
+    <synonym>
+      <key>en</key>
+      <value>Address type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.AddressTypes</types>
+    </type>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:ReferenceValue">
+      <value>Enum.AddressTypes.EnumValue.Other</value>
+    </fillValue>
   </attributes>
   <tabularSections uuid="060c9eed-e0be-44dc-acf0-47f055b5a6b5">
     <producedTypes>

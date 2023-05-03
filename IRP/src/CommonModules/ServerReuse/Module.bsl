@@ -1,20 +1,16 @@
 
 // Taxes server
 
-Function GetTaxRatesForItemKey(Date, Company, Tax, ItemKey) Export
-	Return TaxesServer._GetTaxRatesForItemKey(Date, Company, Tax, ItemKey);
-EndFunction
-	
-Function GetTaxRatesForAgreement(Date, Company, Tax, Agreement) Export
-	Return TaxesServer._GetTaxRatesForAgreement(Date, Company, Tax, Agreement);
+Function GetTaxRateByPriority(Parameters) Export
+	Return TaxesServer._GetTaxRateByPriority(Parameters);
 EndFunction
 
-Function GetTaxRatesForCompany(Date, Company, Tax) Export
-	Return TaxesServer._GetTaxRatesForCompany(Date, Company, Tax);
+Function GetTaxRateByCompany(Parameters) Export
+	Return TaxesServer._GetTaxRateByCompany(Parameters);
 EndFunction
 
-Function GetTaxesByCompany(Date, Company) Export
-	Return TaxesServer._GetTaxesByCompany(Date, Company);
+Function GetTaxesInfo(Date, Company, DocumentName, TransactionType) Export
+	Return TaxesServer._GetTaxesInfo(Date, Company, DocumentName, TransactionType);
 EndFunction
 
 Function GetTaxRatesByTax(Tax) Export
@@ -36,3 +32,11 @@ EndFunction
 Function GetAgreementInfo(Agreement) Export
 	Return Catalogs.Agreements._GetAgreementInfo(Agreement);
 EndFunction
+
+// RowIDInfo
+
+Function GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, ProportionalScaling) Export
+	Return RowIDInfoServer._GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, ProportionalScaling);
+EndFunction
+
+

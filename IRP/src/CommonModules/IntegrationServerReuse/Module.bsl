@@ -46,12 +46,12 @@ Function ConnectionSettingTemplate(IntegrationType = Undefined, Object = Undefin
 		ConnectionSetting.Insert("QueryType", "POST");
 		ConnectionSetting.Insert("ResourceAddress", "");
 		ConnectionSetting.Insert("Ip", "localhost");
-		ConnectionSetting.Insert("Port", 8080);
+		ConnectionSetting.Insert("Port", 443);
 		ConnectionSetting.Insert("User", "");
 		ConnectionSetting.Insert("Password", "");
 		ConnectionSetting.Insert("Proxy", Undefined);
 		ConnectionSetting.Insert("TimeOut", 60);
-		ConnectionSetting.Insert("SecureConnection", Undefined);
+		ConnectionSetting.Insert("SecureConnection", True);
 		ConnectionSetting.Insert("UseOSAuthentication", False);
 	EndIf;
 	Return ConnectionSetting;

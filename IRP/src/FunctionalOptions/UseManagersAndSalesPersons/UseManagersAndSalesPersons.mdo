@@ -19,7 +19,6 @@
   <content>Document.SalesReturnOrder.Attribute.ManagerSegment</content>
   <content>Catalog.Partners.Attribute.ManagerSegment</content>
   <content>Document.RetailSalesReceipt.Attribute.Manager</content>
-  <content>Document.SalesOrderClosing.Attribute.ManagerSegment</content>
   <content>Document.SalesReturn.Attribute.ManagerSegment</content>
   <content>Document.RetailReturnReceipt.TabularSection.ItemList.Attribute.SalesPerson</content>
   <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.SalesPerson</content>

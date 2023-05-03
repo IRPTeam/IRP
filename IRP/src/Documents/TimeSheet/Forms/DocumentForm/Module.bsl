@@ -243,27 +243,33 @@ EndProcedure
 #Region COMMANDS
 
 &AtClient
-Procedure FillTimeSheet(Command)	
-	Result = FillTimeSheetAtServer();
-	Object.TimeSheetList.Clear();	
-	ViewClient_V2.TimeSheetListLoad(Object, ThisObject, Result.Address, Result.GroupColumn, Result.SumColumn);
-	ThisObject.Modified = True;
-	FillWorkersAtClient();
+Async Procedure FillTimeSheet(Command)	
+	TableIsFilled = Object.TimeSheetList.Count() > 0;
+	
+	If TableIsFilled Then
+		Answer = Await DoQueryBoxAsync(R().QuestionToUser_015, QuestionDialogMode.OKCancel);
+	EndIf;
+	
+	If Not TableIsFilled Or Answer = DialogReturnCode.OK Then
+		Result = FillTimeSheetAtServer();
+		Object.TimeSheetList.Clear();	
+		ViewClient_V2.TimeSheetListLoad(Object, ThisObject, Result.Address, Result.GroupColumn, Result.SumColumn);
+		ThisObject.Modified = True;
+		FillWorkersAtClient();
+	EndIf;
 EndProcedure
 
 &AtServer
 Function FillTimeSheetAtServer()
-	QueryParameters = New Structure();
-	QueryParameters.Insert("Company"   , Object.Company);
-	QueryParameters.Insert("Branch"    , Object.Branch);
-	QueryParameters.Insert("BeginDate" , Object.BeginDate);
-	QueryParameters.Insert("EndDate"   , Object.EndDate);
+	FillingParameters = New Structure();
+	FillingParameters.Insert("Company"   , Object.Company);
+	FillingParameters.Insert("Branch"    , Object.Branch);
+	FillingParameters.Insert("BeginDate" , Object.BeginDate);
+	FillingParameters.Insert("EndDate"   , Object.EndDate);
 	
-	ResultTable = DocTimeSheetServer.GetTimeSheet(QueryParameters);
-	Address = PutToTempStorage(ResultTable, ThisObject.UUID);
-	GroupColumn = "Date, Employee, Position, AccrualAndDeductionType";
-	SumColumn = "SumColumn";
-	Return New Structure("Address, GroupColumn, SumColumn", Address, GroupColumn, SumColumn);
+	Result = DocTimeSheetServer.GetTimeSheet(FillingParameters);
+	Address = PutToTempStorage(Result.Table, ThisObject.UUID);
+	Return New Structure("Address, GroupColumn, SumColumn", Address, Result.GroupColumn, Result.SumColumn);
 EndFunction
 
 &AtClient
@@ -271,21 +277,26 @@ Procedure FillWorkersAtClient()
 	CurrentData = Items.Workers.CurrentData;
 	CurrentData_Employee = Undefined;
 	CurrentData_Position = Undefined;
+	CurrentData_ProfitLisCenter = Undefined;
 	If CurrentData <> Undefined Then
 		CurrentData_Employee = CurrentData.Employee;
 		CurrentData_Position = CurrentData.Position;
+		CurrentData_ProfitLisCenter = CurrentData.ProfitLossCenter;
 	EndIf;
-	FillWorkersAtServer(CurrentData_Employee, CurrentData_Position);
+	FillWorkersAtServer(CurrentData_Employee, CurrentData_Position, CurrentData_ProfitLisCenter);
 EndProcedure
 
 &AtServer
-Procedure FillWorkersAtServer(CurrentData_Employee = Undefined, CurrentData_Position = Undefined)
+Procedure FillWorkersAtServer(CurrentData_Employee = Undefined, 
+							  CurrentData_Position = Undefined, 
+							  CurrentData_ProfitLossCenter = Undefined)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	TimeSheetList.Employee AS Employee,
-	|	TimeSheetList.Position AS Position,
-	|	TimeSheetList.Date AS Date
+	|	TimeSheetList.Employee,
+	|	TimeSheetList.Position,
+	|	TimeSheetList.ProfitLossCenter,
+	|	TimeSheetList.Date
 	|into TimeSheetList
 	|From
 	|	&TimeSheetList AS TimeSheetList
@@ -293,15 +304,17 @@ Procedure FillWorkersAtServer(CurrentData_Employee = Undefined, CurrentData_Posi
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	TimeSheetList.Employee AS Employee,
-	|	TimeSheetList.Position AS Position,
+	|	TimeSheetList.Employee,
+	|	TimeSheetList.Position,
+	|	TimeSheetList.ProfitLossCenter,
 	|	MIN(TimeSheetList.Date) AS BeginDate,
 	|	MAX(TimeSheetList.Date) AS EndDate
 	|FROM
 	|	TimeSheetList AS TimeSheetList
 	|GROUP BY
 	|	TimeSheetList.Employee,
-	|	TimeSheetList.Position
+	|	TimeSheetList.Position,
+	|	TimeSheetList.ProfitLossCenter
 	|
 	|ORDER BY
 	|	Employee";
@@ -311,10 +324,14 @@ Procedure FillWorkersAtServer(CurrentData_Employee = Undefined, CurrentData_Posi
 	ThisObject.Workers.Load(QueryResult.Unload());
 	
 	CurrentRowIsSet = False;
-	If CurrentData_Employee <> Undefined And CurrentData_Position <> Undefined Then
+	If CurrentData_Employee <> Undefined 
+		And CurrentData_Position <> Undefined 
+		And CurrentData_ProfitLossCenter <> Undefined Then
+		
 		For Each Row In ThisObject.Workers Do
 			If Row.Employee = CurrentData_Employee
-				And Row.Position = CurrentData_Position Then
+				And Row.Position = CurrentData_Position
+				And Row.ProfitLossCenter = CurrentData_ProfitLossCenter Then
 				Items.Workers.CurrentRow = Row.GetID();
 				CurrentRowIsSet = True;
 				Break;

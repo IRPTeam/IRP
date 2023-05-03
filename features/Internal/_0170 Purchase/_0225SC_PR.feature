@@ -32,6 +32,7 @@ Scenario: _022500 preparation (SC-PR)
 		When Create catalog Stores objects
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Companies objects (partners company)
+		When Create catalog Countries objects
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects

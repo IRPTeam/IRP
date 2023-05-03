@@ -24,6 +24,7 @@ Scenario: _090300 preparation (creation mechanism based on for purchase document
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
+		When Create catalog Countries objects
 		When Create catalog CashAccounts objects
 		When Create catalog Agreements objects
 		When Create catalog ObjectStatuses objects
@@ -742,10 +743,10 @@ Scenario: _090307 create purchase invoice for several purchase order with differ
 			And I save the window as "$$PurchaseInvoice09030702$$"
 		If the field named "Company" is equal to "Second Company" Then
 			And "ItemList" table contains lines
-			| 'Item'     | 'Price'  | 'Item key'  |  'Store'     | 'Unit' | 'Quantity'      | 'Net amount' | 'Total amount' | 'Purchase order'     |
-			| 'Dress'    | '200,00' | 'M/White'   |  'Store 02'  | 'pcs'  | '20,000' | '4 000,00'   | '4 000,00'     | '$$PurchaseOrder09030701$$' |
-			| 'Dress'    | '210,00' | 'L/Green'   |  'Store 02'  | 'pcs'  | '20,000' | '4 200,00'   | '4 200,00'     | '$$PurchaseOrder09030701$$' |
-			| 'Trousers' | '210,00' | '36/Yellow' |  'Store 02'  | 'pcs'  | '30,000' | '6 300,00'   | '6 300,00'     | '$$PurchaseOrder09030701$$' |
+			| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Unit' | 'Quantity' | 'Total amount' | 'Purchase order'            |
+			| 'Dress'    | '200,00' | 'M/White'   | 'Store 02' | 'pcs'  | '20,000'   | '4 000,00'     | '$$PurchaseOrder09030701$$' |
+			| 'Dress'    | '210,00' | 'L/Green'   | 'Store 02' | 'pcs'  | '20,000'   | '4 200,00'     | '$$PurchaseOrder09030701$$' |
+			| 'Trousers' | '210,00' | '36/Yellow' | 'Store 02' | 'pcs'  | '30,000'   | '6 300,00'     | '$$PurchaseOrder09030701$$' |
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice09030701$$" variable
 			And I delete "$$PurchaseInvoice09030701$$" variable

@@ -51,6 +51,7 @@ Scenario: _045400 preparation (CashStatement)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
+		When Create catalog Countries objects
 		When Create catalog PartnersBankAccounts objects
 		When Create catalog ItemKeys objects (serial lot numbers)
 		When Create catalog ItemTypes objects (serial lot numbers)

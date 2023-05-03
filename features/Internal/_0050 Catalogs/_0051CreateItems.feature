@@ -1244,7 +1244,145 @@ Scenario: _005131 create specification with primitive type
 		
 				
 
+Scenario: _005135 fill default description for catalog AddAttributeAndPropertySets
+	And I close all client application windows
+	* Open catalog and fill default description
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I click "Fill default descriptions" button
+		And Delay 5
+	* Check
+		And I click "Refresh" button
+		And "List" table contains lines
+			| 'Description'                    | 'Predefined data name'                  |
+			| 'Item keys'                      | 'Catalog_ItemKeys'                      |
+			| 'Items'                          | 'Catalog_Items'                         |
+			| 'Item types'                     | 'Catalog_ItemTypes'                     |
+			| 'Sales invoice'                  | 'Document_SalesInvoice'                 |
+			| 'Partners'                       | 'Catalog_Partners'                      |
+			| 'Expense and revenue types'      | 'Catalog_ExpenseAndRevenueTypes'        |
+			| 'Business units'                 | 'Catalog_BusinessUnits'                 |
+			| 'Price keys'                     | 'Catalog_PriceKeys'                     |
+			| 'Sales order'                    | 'Document_SalesOrder'                   |
+			| 'Cheque bonds'                   | 'Catalog_ChequeBonds'                   |
+			| 'Specifications'                 | 'Catalog_Specifications'                |
+			| 'Purchase invoice'               | 'Document_PurchaseInvoice'              |
+			| 'Purchase order'                 | 'Document_PurchaseOrder'                |
+			| 'Partner terms'                  | 'Catalog_Agreements'                    |
+			| 'Cash/Bank accounts'             | 'Catalog_CashAccounts'                  |
+			| 'Companies'                      | 'Catalog_Companies'                     |
+			| 'Countries'                      | 'Catalog_Countries'                     |
+			| 'Currencies'                     | 'Catalog_Currencies'                    |
+			| 'Price types'                    | 'Catalog_PriceTypes'                    |
+			| 'Item serial/lot numbers'        | 'Catalog_SerialLotNumbers'              |
+			| 'Stores'                         | 'Catalog_Stores'                        |
+			| 'Tax types'                      | 'Catalog_Taxes'                         |
+			| 'Item units'                     | 'Catalog_Units'                         |
+			| 'Users'                          | 'Catalog_Users'                         |
+			| 'Bank payment'                   | 'Document_BankPayment'                  |
+			| 'Bank receipt'                   | 'Document_BankReceipt'                  |
+			| 'Bundling'                       | 'Document_Bundling'                     |
+			| 'Cash expense'                   | 'Document_CashExpense'                  |
+			| 'Cash payment'                   | 'Document_CashPayment'                  |
+			| 'Cash receipt'                   | 'Document_CashReceipt'                  |
+			| 'Cash revenue'                   | 'Document_CashRevenue'                  |
+			| 'Cash transfer order'            | 'Document_CashTransferOrder'            |
+			| 'Goods receipt'                  | 'Document_GoodsReceipt'                 |
+			| 'Incoming payment order'         | 'Document_IncomingPaymentOrder'         |
+			| 'Inventory transfer'             | 'Document_InventoryTransfer'            |
+			| 'Inventory transfer order'       | 'Document_InventoryTransferOrder'       |
+			| 'Labeling'                       | 'Document_Labeling'                     |
+			| 'Opening entry'                  | 'Document_OpeningEntry'                 |
+			| 'Outgoing payment order'         | 'Document_OutgoingPaymentOrder'         |
+			| 'Physical count by location'     | 'Document_PhysicalCountByLocation'      |
+			| 'Physical inventory'             | 'Document_PhysicalInventory'            |
+			| 'Price list'                     | 'Document_PriceList'                    |
+			| 'Purchase return'                | 'Document_PurchaseReturn'               |
+			| 'Purchase return order'          | 'Document_PurchaseReturnOrder'          |
+			| 'Reconciliation statement'       | 'Document_ReconciliationStatement'      |
+			| 'Sales return'                   | 'Document_SalesReturn'                  |
+			| 'Sales return order'             | 'Document_SalesReturnOrder'             |
+			| 'Shipment confirmation'          | 'Document_ShipmentConfirmation'         |
+			| 'Stock adjustment as surplus'    | 'Document_StockAdjustmentAsSurplus'     |
+			| 'Stock adjustment as write-off'  | 'Document_StockAdjustmentAsWriteOff'    |
+			| 'Unbundling'                     | 'Document_Unbundling'                   |
+			| 'Files'                          | 'Catalog_Files'                         |
+			| 'Retail sales receipt'           | 'Document_RetailSalesReceipt'           |
+			| 'Payment terminals'              | 'Catalog_PaymentTerminals'              |
+			| 'Retail return receipt'          | 'Document_RetailReturnReceipt'          |
+			| 'Bank terms'                     | 'Catalog_BankTerms'                     |
+			| 'Retail customers'               | 'Catalog_RetailCustomers'               |
+			| 'Cash statement'                 | 'Document_CashStatement'                |
+			| 'Cash statement statuses'        | 'Catalog_CashStatementStatuses'         |
+			| 'Credit note'                    | 'Document_CreditNote'                   |
+			| 'Debit note'                     | 'Document_DebitNote'                    |
+			| 'Workstations'                   | 'Catalog_Workstations'                  |
+			| 'Hardware'                       | 'Catalog_Hardware'                      |
+			| 'Item segments'                  | 'Catalog_ItemSegments'                  |
+			| 'Partner segments'               | 'Catalog_PartnerSegments'               |
+			| 'Payment types'                  | 'Catalog_PaymentTypes'                  |
+			| 'Special offer rules'            | 'Catalog_SpecialOfferRules'             |
+			| 'Special offers'                 | 'Catalog_SpecialOffers'                 |
+			| 'Special offer types'            | 'Catalog_SpecialOfferTypes'             |
+			| 'Tax rates'                      | 'Catalog_TaxRates'                      |
+			| 'User groups'                    | 'Catalog_UserGroups'                    |
+			| 'Internal supply request'        | 'Document_InternalSupplyRequest'        |
+			| 'Partners bank accounts'         | 'Catalog_PartnersBankAccounts'          |
+			| 'Lock data modification reasons' | 'Catalog_LockDataModificationReasons'   |
+			| 'Item stock adjustment'          | 'Document_ItemStockAdjustment'          |
+			| 'Manual register entry'          | 'Document_ManualRegisterEntry'          |
+			| 'Sales order closing'            | 'Document_SalesOrderClosing'            |
+			| 'Planned receipt reservation'    | 'Document_PlannedReceiptReservation'    |
+			| 'Purchase order closing'         | 'Document_PurchaseOrderClosing'         |
+			| 'Partner items'                  | 'Catalog_PartnerItems'                  |
+			| 'Journal entry'                  | 'Document_JournalEntry'                 |
+			| 'Ledger types'                   | 'Catalog_LedgerTypes'                   |
+			| 'Money transfer'                 | 'Document_MoneyTransfer'                |
+			| 'User access groups'             | 'Catalog_AccessGroups'                  |
+			| 'User access profiles'           | 'Catalog_AccessProfiles'                |
+			| 'Accounting operations'          | 'Catalog_AccountingOperations'          |
+			| 'Cancel/Return reasons'          | 'Catalog_CancelReturnReasons'           |
+			| 'Equipment drivers'              | 'Catalog_EquipmentDrivers'              |
+			| 'Plugins'                        | 'Catalog_ExternalDataProc'              |
+			| 'File storages info'             | 'Catalog_FileStoragesInfo'              |
+			| 'File storage volumes'           | 'Catalog_FileStorageVolumes'            |
+			| 'Integration settings'           | 'Catalog_IntegrationSettings'           |
+			| 'UI groups'                      | 'Catalog_InterfaceGroups'               |
+			| 'Legal name contracts'           | 'Catalog_LegalNameContracts'            |
+			| 'Objects statuses'               | 'Catalog_ObjectStatuses'                |
+			| 'Payment terms'                  | 'Catalog_PaymentSchedules'              |
+			| 'Planning periods'               | 'Catalog_PlanningPeriods'               |
+			| 'Tax additional analytics'       | 'Catalog_TaxAnalytics'                  |
+			| 'Units of measurement'           | 'Catalog_UnitsOfMeasurement'            |
+			| 'Ledger type variants'           | 'Catalog_LedgerTypeVariants'            |
+			| 'Cheque bond transaction'        | 'Document_ChequeBondTransaction'        |
+			| 'Consolidated retail sales'      | 'Document_ConsolidatedRetailSales'      |
+			| 'Work order'                     | 'Document_WorkOrder'                    |
+			| 'Work order closing'             | 'Document_WorkOrderClosing'             |
+			| 'Bill of materials'              | 'Catalog_BillOfMaterials'               |
+			| 'Work sheet'                     | 'Document_WorkSheet'                    |
+			| 'Filling templates'              | 'Catalog_FillingTemplates'              |
+			| 'Production planning'            | 'Document_ProductionPlanning'           |
+			| 'Production planning correction' | 'Document_ProductionPlanningCorrection' |
+			| 'Production planning closing'    | 'Document_ProductionPlanningClosing'    |
+			| 'Production'                     | 'Document_Production'                   |
+			| 'Sales report from trade agent'  | 'Document_SalesReportFromTradeAgent'    |
+			| 'Sales report to consignor'      | 'Document_SalesReportToConsignor'       |
+			| 'Source of origins'              | 'Catalog_SourceOfOrigins'               |
+			| 'Employee cash advance'          | 'Document_EmployeeCashAdvance'          |
+			| 'Production costs allocation'    | 'Document_ProductionCostsAllocation'    |
+			| 'Payroll'                        | 'Document_Payroll'                      |
+			| 'Accrual and deduction types'    | 'Catalog_AccrualAndDeductionTypes'      |
+			| 'Employee positions'             | 'Catalog_EmployeePositions'             |
+			| 'Time sheet'                     | 'Document_TimeSheet'                    |
+			| 'Addresses'                      | 'Catalog_Addresses'                     |
+			| 'Vehicles'                       | 'Catalog_Vehicles'                      |
+			| 'Vehicle types'                  | 'Catalog_VehicleTypes'                  |
+		And I close all client application windows
+		
+		
 				
+
+										
 
 
 

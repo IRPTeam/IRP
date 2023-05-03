@@ -34,6 +34,7 @@ Scenario: _2060001 preparation
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog Countries objects
 		When Create catalog Stores objects
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
@@ -49,6 +50,11 @@ Scenario: _2060001 preparation
 		When Create information register CurrencyRates records
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
+		When Create catalog ItemKeys objects (serial lot numbers)
+		When Create catalog ItemTypes objects (serial lot numbers, single row)
+		When Create information register Barcodes records (serial lot numbers)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
+		When Create catalog Items objects (serial lot numbers)
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -106,6 +112,23 @@ Scenario: _2060001 preparation
 	When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
 	And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+	When create Sales invoice and Sales order object (sln, autolink)
+	And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
+	When create Inventory transfer and Inventory transfer object (sln, autolink)
+	And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransferOrder.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
+	When create SalesOrder and ShipmentConfirmation object (sln, autolink)
+	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(2055).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(2054).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(2055).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Save SI numbers
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
@@ -166,6 +189,11 @@ Scenario: _2060001 preparation
 			| "Documents.PurchaseOrder.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);"|
 	And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |	
+	When Create Physical inventory and Stock adjustment as write-off for link
+	And I execute 1C:Enterprise script at server
+			| "Documents.PhysicalInventory.FindByNumber(152).GetObject().Write(DocumentWriteMode.Posting);"|
+	And I execute 1C:Enterprise script at server
+			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(152).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create catalog CancelReturnReasons objects
 		
 Scenario: _20600011 check preparation
@@ -758,10 +786,10 @@ Scenario: _2060004 check link/unlink form in the SRO
 			| 'Boots (37/18SD)'                             | '1,000'    | 'pcs'  | '700,00' | 'TRY'      |		
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Store'    | 'Quantity in base unit' | 'Item'  | 'Quantity'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' | 'Cancel' | 'Cancel reason' |
-			| 'Store 01' | '1,000'                 | 'Boots' | '1,000' | 'pcs'            | '113,71'     | '700,00'   | '18%' | '586,29'     | '700,00'       | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
-			| 'Store 01' | '4,000'                 | 'Dress' | '4,000' | 'pcs'            | '337,88'     | '520,00'   | '18%' | '1 742,12'   | '2 080,00'     | ''              | 'Revenue'      | 'M/White'  | 'No'     | ''              |
-			| 'Store 01' | '24,000'                | 'Boots' | '2,000' | 'Boots (12 pcs)' | '2 562,71'   | '8 400,00' | '18%' | '14 237,29'  | '16 800,00'    | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
+			| 'Store'    | 'Quantity in base unit' | 'Item'  | 'Quantity' | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' | 'Cancel' | 'Cancel reason' |
+			| 'Store 01' | '1,000'                 | 'Boots' | '1,000'    | 'pcs'            | '106,78'     | '700,00'   | '18%' | '593,22'     | '700,00'       | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
+			| 'Store 01' | '4,000'                 | 'Dress' | '4,000'    | 'pcs'            | '317,29'     | '520,00'   | '18%' | '1 762,71'   | '2 080,00'     | ''              | 'Revenue'      | 'M/White'  | 'No'     | ''              |
+			| 'Store 01' | '24,000'                | 'Boots' | '2,000'    | 'Boots (12 pcs)' | '2 562,71'   | '8 400,00' | '18%' | '14 237,29'  | '16 800,00'    | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
 		Then the number of "ItemList" table lines is "равно" "3"					
 		And I close all client application windows
 		
@@ -918,10 +946,10 @@ Scenario: _2060005 check link/unlink form in the SR
 			| 'Boots (37/18SD)'                             | '1,000'    | 'pcs'  | '700,00' | 'TRY'      |		
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Store'    | 'Quantity in base unit' | 'Item'  | 'Quantity'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' |
-			| 'Store 01' | '1,000'                 | 'Boots' | '1,000' | 'pcs'            | '113,71'     | '700,00'   | '18%' | '586,29'     | '700,00'       | ''              | 'Revenue'      | '37/18SD'  |
-			| 'Store 01' | '4,000'                 | 'Dress' | '4,000' | 'pcs'            | '337,88'     | '520,00'   | '18%' | '1 742,12'   | '2 080,00'     | ''              | 'Revenue'      | 'M/White'  |
-			| 'Store 01' | '24,000'                | 'Boots' | '2,000' | 'Boots (12 pcs)' | '2 562,71'   | '8 400,00' | '18%' | '14 237,29'  | '16 800,00'    | ''              | 'Revenue'      | '37/18SD'  |
+			| 'Store'    | 'Quantity in base unit' | 'Item'  | 'Quantity' | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' |
+			| 'Store 01' | '1,000'                 | 'Boots' | '1,000'    | 'pcs'            | '106,78'     | '700,00'   | '18%' | '593,22'     | '700,00'       | ''              | 'Revenue'      | '37/18SD'  |
+			| 'Store 01' | '4,000'                 | 'Dress' | '4,000'    | 'pcs'            | '317,29'     | '520,00'   | '18%' | '1 762,71'   | '2 080,00'     | ''              | 'Revenue'      | 'M/White'  |
+			| 'Store 01' | '24,000'                | 'Boots' | '2,000'    | 'Boots (12 pcs)' | '2 562,71'   | '8 400,00' | '18%' | '14 237,29'  | '16 800,00'    | ''              | 'Revenue'      | '37/18SD'  |
 		Then the number of "ItemList" table lines is "равно" "3"					
 		And I close all client application windows
 
@@ -1232,6 +1260,13 @@ Scenario: _2060008 check link/unlink form in the PRO
 			| 'Description'    |
 			| 'pcs' |
 		And I select current line in "List" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
+			| 'Boots' | '36/18SD'  | '2,000'    | 'Store 02' |
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "700,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table	
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                          | 'Next step' | 'Quantity'      | 'Current step' |
@@ -1250,10 +1285,10 @@ Scenario: _2060008 check link/unlink form in the PRO
 			| 'Dress (M/White)'                                | '3,000'    | 'pcs'  | '520,00' | 'TRY'      |			
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Store'    | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Cancel' | 'Quantity'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Purchase invoice' | 'Net amount' | 'Total amount' | 'Expense type' |
-			| 'Store 02' | '10,000'                | '1' | 'Dress' | 'M/White'  | 'No'     | '10,000' | 'pcs'  | '936,00'     | '520,00' | '18%' | ''                 | '5 200,00'   | '6 136,00'     | ''             |
-			| 'Store 02' | '2,000'                 | '2' | 'Boots' | '36/18SD'  | 'No'     | '2,000'  | 'pcs'  | '252,00'     | '700,00' | '18%' | ''                 | '1 400,00'   | '1 652,00'     | ''             |
-			| 'Store 02' | '3,000'                 | '3' | 'Dress' | 'M/White'  | 'No'     | '3,000'  | 'pcs'  | '280,80'     | '520,00' | '18%' | ''                 | '1 560,00'   | '1 840,80'     | ''             |		
+			| 'Store'    | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Cancel' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Purchase invoice' | 'Net amount' | 'Total amount' | 'Expense type' |
+			| 'Store 02' | '10,000'                | '1' | 'Dress' | 'M/White'  | 'No'     | '10,000'   | 'pcs'  | '936,00'     | '520,00' | '18%' | ''                 | '5 200,00'   | '6 136,00'     | ''             |
+			| 'Store 02' | '2,000'                 | '2' | 'Boots' | '36/18SD'  | 'No'     | '2,000'    | 'pcs'  | '252,00'     | '700,00' | '18%' | ''                 | '1 400,00'   | '1 652,00'     | ''             |
+			| 'Store 02' | '3,000'                 | '3' | 'Dress' | 'M/White'  | 'No'     | '3,000'    | 'pcs'  | '280,80'     | '520,00' | '18%' | ''                 | '1 560,00'   | '1 840,80'     | ''             |
 		Then the number of "ItemList" table lines is "равно" "3"					
 		And I close all client application windows
 
@@ -1383,6 +1418,13 @@ Scenario: _2060008 check link/unlink form in the PR
 			| 'Description'    |
 			| 'pcs' |
 		And I select current line in "List" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
+			| 'Boots' | '36/18SD'  | '2,000'    | 'Store 02' |
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "700,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table	
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                          | 'Next step' | 'Quantity'      | 'Current step' |
@@ -2312,8 +2354,201 @@ Scenario: _2060022 check button	Show row key in the Add linked documents rows
 		Then user message window does not contain messages
 		
 				
+Scenario: _2060023 check auto form in the SC - SO (with sln)
+		And I close all client application windows
+	* Select first SC
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number' |
+			| '2 054'  |
+		And I select current line in "List" table
+	* Auto link
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| '#' | 'Item'                         | 'Inventory transfer' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Sales invoice' | 'Store'    | 'Shipment basis'                              | 'Sales order'                                 | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009099'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '2' | 'Dress'                        | ''                   | 'XS/Blue'  | ''                   | 'pcs'  | '2,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '3' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '4' | 'Product 7 with SLN (new row)' | ''                   | 'ODS'      | '9009100'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | ''                                            | ''                                            | ''                         | ''                      | ''                |
+			| '5' | 'Product 1 with SLN'           | ''                   | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+		Then the number of "ItemList" table lines is "равно" "5"
+		And I click "Post and close" button
+		And I go to line in "List" table
+			| 'Number' |
+			| '2 054'  |
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| '#' | 'Item'                         | 'Inventory transfer' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Sales invoice' | 'Store'    | 'Shipment basis'                              | 'Sales order'                                 | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009099'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '2' | 'Dress'                        | ''                   | 'XS/Blue'  | ''                   | 'pcs'  | '2,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '3' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '4' | 'Product 7 with SLN (new row)' | ''                   | 'ODS'      | '9009100'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | ''                                            | ''                                            | ''                         | ''                      | ''                |
+			| '5' | 'Product 1 with SLN'           | ''                   | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+		And I close current window
+	* Select second SC	
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number' |
+			| '2 055'  |
+		And I select current line in "List" table	
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Ok" button	
+		And "ItemList" table became equal
+			| '#' | 'Item'                         | 'Inventory transfer' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Sales invoice' | 'Store'    | 'Shipment basis'                              | 'Sales order'                                 | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '2' | 'Product 1 with SLN'           | ''                   | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+		Then the number of "ItemList" table lines is "равно" "2"
+		And I click "Post and close" button
+		And I go to line in "List" table
+			| 'Number' |
+			| '2 055'  |
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| '#' | 'Item'                         | 'Inventory transfer' | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Sales invoice' | 'Store'    | 'Shipment basis'                              | 'Sales order'                                 | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Product 7 with SLN (new row)' | ''                   | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+			| '2' | 'Product 1 with SLN'           | ''                   | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | ''              | 'Store 01' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | 'Sales order 2 055 dated 11.04.2023 15:39:39' | ''                         | ''                      | ''                |
+		And I close all client application windows
+	* Unpost documents
+		And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(2054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(2055).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(2055).GetObject().Write(DocumentWriteMode.UndoPosting);" |
 		
+			
 				
+Scenario: _2060024 check auto form in the SI - SO (with sln)
+		And I close all client application windows
+	* Select SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '2 054'  |
+		And I select current line in "List" table	
+	* Auto link
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Ok" button	
+		And "ItemList" table contains lines
+			| '#' | 'SalesTax' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Store'    | 'Use shipment confirmation' | 'Sales order'                                 |
+			| '1' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009098'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
+			| '2' | '1%'       | 'Basic Price Types'       | 'Dress'                        | 'XS/Blue'  | 'No'                 | '168,94'     | 'pcs'  | ''                   | '2,000'    | '520,00' | '18%' | ''              | '871,06'     | '1 040,00'     | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
+			| '3' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009099'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
+			| '4' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009098'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
+			| '5' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'                 | '16,24'      | 'pcs'  | '9009100'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | ''                                            |
+			| '6' | '1%'       | 'en description is empty' | 'Product 1 with SLN'           | 'ODS'      | 'No'                 | '16,24'      | 'pcs'  | '9090098908'         | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
+		Then the number of "ItemList" table lines is "равно" "6"
+		And I click "Post and close" button
+		And I go to line in "List" table
+			| 'Number' |
+			| '2 054'  |
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| '#' | 'SalesTax' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Is additional item revenue' | 'Store'    | 'Use shipment confirmation' | 'Sales order'                                 |
+			| '1' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009098'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
+			| '2' | '1%'       | 'Basic Price Types'       | 'Dress'                        | 'XS/Blue'  | 'No'                 | '168,94'     | 'pcs'  | ''                   | '2,000'    | '520,00' | '18%' | ''              | '871,06'     | '1 040,00'     | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
+			| '3' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009099'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
+			| '4' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009098'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
+			| '5' | '1%'       | 'en description is empty' | 'Product 7 with SLN (new row)' | 'ODS'      | 'No'                 | '16,24'      | 'pcs'  | '9009100'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | ''                                            |
+			| '6' | '1%'       | 'en description is empty' | 'Product 1 with SLN'           | 'ODS'      | 'No'                 | '16,24'      | 'pcs'  | '9090098908'         | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | 'No'                         | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
+		And I close all client application windows
+	* Unpost documents
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(2054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(2054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+		
+		
+Scenario: _2060025 check auto form in the IT - ITO (with sln)
+		And I close all client application windows
+	* Select IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number' |
+			| '2 054'  |
+		And I select current line in "List" table	
+	* Auto link
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Ok" button	
+		And "ItemList" table became equal
+			| '#' | 'Item'                         | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Inventory transfer order'                                 |
+			| '1' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
+			| '2' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
+			| '3' | 'Dress'                        | 'XS/Blue'  | ''                   | 'pcs'  | '2,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
+			| '4' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009099'            | 'pcs'  | '1,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
+			| '5' | 'Product 7 with SLN (new row)' | 'ODS'      | '9009100'            | 'pcs'  | '1,000'    | ''                                                         |
+			| '6' | 'Product 1 with SLN'           | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
+		Then the number of "ItemList" table lines is "равно" "6"
+		And I click "Post and close" button
+		And I go to line in "List" table
+			| 'Number' |
+			| '2 054'  |
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| '#' | 'Item'                         | 'Item key' | 'Serial lot numbers' | 'Unit' | 'Quantity' | 'Inventory transfer order'                                 |
+			| '1' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
+			| '2' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009098'            | 'pcs'  | '1,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
+			| '3' | 'Dress'                        | 'XS/Blue'  | ''                   | 'pcs'  | '2,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
+			| '4' | 'Product 7 with SLN (new row)' | 'PZU'      | '9009099'            | 'pcs'  | '1,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
+			| '5' | 'Product 7 with SLN (new row)' | 'ODS'      | '9009100'            | 'pcs'  | '1,000'    | ''                                                         |
+			| '6' | 'Product 1 with SLN'           | 'ODS'      | '9090098908'         | 'pcs'  | '1,000'    | 'Inventory transfer order 2 054 dated 11.04.2023 15:35:41' |
+		And I close all client application windows
+	* Unpost documents
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(2054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransferOrder.FindByNumber(2054).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+		
+										
+			
+
+
+Scenario: _2060026 check auto form in the Physical inventory - Stock adjustment as write-off (with sln)
+		And I close all client application windows
+	* Select StockAdjustmentAsWriteOff
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I go to line in "List" table
+			| 'Number' |
+			| '152'  |
+		And I select current line in "List" table	
+	* Auto link
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Ok" button	
+		And "ItemList" table became equal
+			| '#' | 'Item'                         | 'Basis document'                                   | 'Item key' | 'Profit loss center' | 'Physical inventory'                               | 'Serial lot numbers' | 'Unit' | 'Source of origins' | 'Quantity' | 'Expense type' |
+			| '1' | 'Product 7 with SLN (new row)' | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'ODS'      | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | '9009100'            | 'pcs'  | ''                  | '1,000'    | 'Expense'      |
+			| '2' | 'Product 7 with SLN (new row)' | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'PZU'      | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | '9009098'            | 'pcs'  | ''                  | '1,000'    | 'Expense'      |
+			| '3' | 'Product 7 with SLN (new row)' | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'PZU'      | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | '9009098'            | 'pcs'  | ''                  | '1,000'    | 'Expense'      |
+			| '4' | 'Dress'                        | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'XS/Blue'  | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | ''                   | 'pcs'  | ''                  | '2,000'    | 'Expense'      |
+			| '5' | 'Product 7 with SLN (new row)' | ''                                                 | 'PZU'      | 'Front office'       | ''                                                 | '9009099'            | 'pcs'  | ''                  | '1,000'    | 'Expense'      |
+			| '6' | 'Product 1 with SLN'           | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'ODS'      | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | '9090098908'         | 'pcs'  | ''                  | '1,000'    | 'Expense'      |		
+		Then the number of "ItemList" table lines is "равно" "6"
+		And I click "Post and close" button
+		And I go to line in "List" table
+			| 'Number' |
+			| '152'  |
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| '#' | 'Item'                         | 'Basis document'                                   | 'Item key' | 'Profit loss center' | 'Physical inventory'                               | 'Serial lot numbers' | 'Unit' | 'Source of origins' | 'Quantity' | 'Expense type' |
+			| '1' | 'Product 7 with SLN (new row)' | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'ODS'      | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | '9009100'            | 'pcs'  | ''                  | '1,000'    | 'Expense'      |
+			| '2' | 'Product 7 with SLN (new row)' | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'PZU'      | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | '9009098'            | 'pcs'  | ''                  | '1,000'    | 'Expense'      |
+			| '3' | 'Product 7 with SLN (new row)' | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'PZU'      | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | '9009098'            | 'pcs'  | ''                  | '1,000'    | 'Expense'      |
+			| '4' | 'Dress'                        | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'XS/Blue'  | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | ''                   | 'pcs'  | ''                  | '2,000'    | 'Expense'      |
+			| '5' | 'Product 7 with SLN (new row)' | ''                                                 | 'PZU'      | 'Front office'       | ''                                                 | '9009099'            | 'pcs'  | ''                  | '1,000'    | 'Expense'      |
+			| '6' | 'Product 1 with SLN'           | 'Physical inventory 152 dated 27.04.2023 13:32:16' | 'ODS'      | 'Front office'       | 'Physical inventory 152 dated 27.04.2023 13:32:16' | '9090098908'         | 'pcs'  | ''                  | '1,000'    | 'Expense'      |		
+		And I close all client application windows
+	* Unpost documents
+		And I execute 1C:Enterprise script at server
+			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(152).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PhysicalInventory.FindByNumber(152).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+					
 		
 				
 		

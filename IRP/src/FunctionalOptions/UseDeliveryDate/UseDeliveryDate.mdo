@@ -14,7 +14,6 @@
   <content>Document.SalesOrder.TabularSection.ItemList.Attribute.DeliveryDate</content>
   <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.DeliveryDate</content>
   <content>Document.SalesInvoice.Attribute.DateOfShipment</content>
-  <content>Document.SalesOrderClosing.Attribute.DateOfShipment</content>
   <content>Document.SalesReturn.Attribute.DateOfShipment</content>
   <content>Document.PurchaseReturn.Attribute.DateOfShipment</content>
   <content>Document.RetailSalesReceipt.Attribute.DateOfShipment</content>

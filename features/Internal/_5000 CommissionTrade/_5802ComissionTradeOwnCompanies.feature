@@ -49,6 +49,7 @@ Scenario: _05802 preparation (commission own companies, different tax systems)
 		When Create catalog Stores (trade agent)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Companies objects (partners company)
+		When Create catalog Countries objects
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects
@@ -991,7 +992,7 @@ Scenario: _05818 create Bank payment based on Sales report to consignors
 		And "PaymentList" table became equal
 			| '#' | 'Partner'                | 'Commission' | 'Payee'          | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Order' | 'Total amount' | 'Financial movement type' | 'Planning transaction basis' |
 			| '1' | 'Second Company partner' | ''           | 'Second Company' | 'Consignor Second Company' | ''                    | '$$SRC3$$'       | ''      | '3 400,00'     | ''                        | ''                           |
-		And the editing text of form attribute named "DocumentAmount" became equal to "3 400,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "3 400,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Delete line and fill Bank payment manually
 		And I delete all lines of "PaymentList" table
@@ -1062,7 +1063,7 @@ Scenario: _05819 create Cash payment based on Sales report to consignors
 		And "PaymentList" table became equal
 			| '#' | 'Partner'                | 'Payee'          | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Order' | 'Total amount' | 'Financial movement type' | 'Planning transaction basis' |
 			| '1' | 'Second Company partner' | 'Second Company' | 'Consignor Second Company' | ''                    | '$$SRC3$$'       | ''      | '1 400,00'     | ''                        | ''                           |
-		And the editing text of form attribute named "DocumentAmount" became equal to "1 400,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 400,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Delete line and fill Cash payment manually
 		And I delete all lines of "PaymentList" table
@@ -1134,7 +1135,7 @@ Scenario: _05820 create Bank receipt based on Sales report from trade agent
 		And "PaymentList" table became equal
 			| '#' | 'Partner'              | 'Commission' | 'Payer'        | 'Partner term'             | 'Legal name contract' | 'Basis document'        | 'Order' | 'Total amount' | 'Financial movement type' | 'Planning transaction basis' |
 			| '1' | 'Main Company partner' | ''           | 'Main Company' | 'Trade agent Main Company' | ''                    | '$$SRFromTradeAgent3$$' | ''      | '3 400,00'     | ''                        | ''                           |
-		And the editing text of form attribute named "DocumentAmount" became equal to "3 400,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "3 400,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Delete line and fill Bank receipt manually
 		And I delete all lines of "PaymentList" table
@@ -1206,7 +1207,7 @@ Scenario: _05821 create Cash receipt based on Sales report from trade agent
 		And "PaymentList" table became equal
 			| '#' | 'Partner'              | 'Payer'        | 'Partner term'             | 'Legal name contract' | 'Basis document'        | 'Order' | 'Total amount' | 'Financial movement type' | 'Planning transaction basis' |
 			| '1' | 'Main Company partner' | 'Main Company' | 'Trade agent Main Company' | ''                    | '$$SRFromTradeAgent3$$' | ''      | '1 400,00'     | ''                        | ''                           |
-		And the editing text of form attribute named "DocumentAmount" became equal to "1 400,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 400,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Delete line and fill Cash receipt manually
 		And I delete all lines of "PaymentList" table
@@ -2177,8 +2178,7 @@ Scenario: _05834 сheck recognition of own and commission goods when scanning a 
 		And I close all client application windows
 		
 				
-Scenario: _05835 сheck recognition of own and commission goods when scanning a barcode in the IT
-		And I close all client application windows	
+
 
 					
 				

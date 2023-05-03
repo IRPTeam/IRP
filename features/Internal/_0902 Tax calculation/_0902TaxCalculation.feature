@@ -20,6 +20,7 @@ Background:
 	
 Scenario: _0902000 preparation
 	When set True value to the constant
+	When set True value to the constant Use commission trading
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -39,13 +40,14 @@ Scenario: _0902000 preparation
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Companies objects (partners company)
+		When Create catalog CashAccounts objects
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog TaxRates objects
-		When Create catalog Taxes objects	
-		When Create information register TaxSettings records
+		When Create catalog Taxes objects (with transaction type)	
+		When Create information register TaxSettings records with transaction type
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
@@ -624,6 +626,808 @@ Scenario: _090206 priority tax rate check on the example of Sales order
 			| 'Bag'  | '18%'  | 'PZU'      | '1,000' |
 	And I close all client application windows
 		
+
+Scenario: _090208 check tax in the SO (depend of transaction type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And I click the button named "FormCreate"
+	* Filling in the details of the document Sales order
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+	* Select transaction type
+		And I select "Retail sales" exact value from "Transaction type" drop-down list
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'L/Green'      |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'M/White'      |
+		And I select current line in "List" table
+	* Check tax rate
+		And "ItemList" table contains lines
+			| 'SalesTax' | 'Item key' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Item'  |
+			| '1%'       | 'L/Green'  | '1,000'    | 'pcs'  | '46,19'      | '550,00' | '8%'  | '503,81'     | '550,00'       | 'Dress' |
+			| '1%'       | 'M/White'  | '1,000'    | 'pcs'  | '43,67'      | '520,00' | '8%'  | '476,33'     | '520,00'       | 'Dress' |
+	* Change transaction type and check tax rate
+		And I select "Sales" exact value from "Transaction type" drop-down list
+		And "ItemList" table contains lines
+			| 'SalesTax' | 'Item key' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Price type'        | 'Item'  | 'Sales person' |
+			| '1%'       | 'L/Green'  | '1,000'    | 'pcs'  | '89,35'      | '550,00' | '18%' | '460,65'     | '550,00'       | 'Basic Price Types' | 'Dress' | ''             |
+			| '1%'       | 'M/White'  | '1,000'    | 'pcs'  | '84,47'      | '520,00' | '18%' | '435,53'     | '520,00'       | 'Basic Price Types' | 'Dress' | ''             |
+		And I select "Shipment to trade agent" exact value from "Transaction type" drop-down list
+		And "ItemList" table contains lines
+			| 'SalesTax' | 'Item key' | 'Quantity' | 'Dont calculate row' | 'Unit' | 'Tax amount' | 'Price'  | 'Net amount' | 'Total amount' | 'Store'    | 'Item'  | 'Price type'        |
+			| '1%'       | 'L/Green'  | '1,000'    | 'No'                 | 'pcs'  | '5,45'       | '550,00' | '544,55'     | '550,00'       | 'Store 01' | 'Dress' | 'Basic Price Types' |
+			| '1%'       | 'M/White'  | '1,000'    | 'No'                 | 'pcs'  | '5,15'       | '520,00' | '514,85'     | '520,00'       | 'Store 01' | 'Dress' | 'Basic Price Types' |
+		And I close all client application windows
+
+
+Scenario: _090209 check tax in the SI (depend of transaction type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I click the button named "FormCreate"
+	* Filling in the details of the document SI
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+	* Select transaction type
+		And I select "Sales" exact value from "Transaction type" drop-down list
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'L/Green'      |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'M/White'      |
+		And I select current line in "List" table
+	* Check tax rate
+		And "ItemList" table contains lines
+			| 'SalesTax' | 'Item key' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Price type'        | 'Item'  | 'Sales person' |
+			| '1%'       | 'L/Green'  | '1,000'    | 'pcs'  | '89,35'      | '550,00' | '18%' | '460,65'     | '550,00'       | 'Basic Price Types' | 'Dress' | ''             |
+			| '1%'       | 'M/White'  | '1,000'    | 'pcs'  | '84,47'      | '520,00' | '18%' | '435,53'     | '520,00'       | 'Basic Price Types' | 'Dress' | ''             |
+	* Change transaction type and check tax rate
+		And I select "Retail sales" exact value from "Transaction type" drop-down list
+		And "ItemList" table contains lines
+			| 'SalesTax' | 'Item key' | 'Quantity' | 'Dont calculate row' | 'Unit' | 'Tax amount' | 'Price'  | 'Net amount' | 'Total amount' | 'Store'    | 'Item'  | 'Price type'        |
+			| '1%'       | 'L/Green'  | '1,000'    | 'No'                 | 'pcs'  | '5,45'       | '550,00' | '544,55'     | '550,00'       | 'Store 01' | 'Dress' | 'Basic Price Types' |
+			| '1%'       | 'M/White'  | '1,000'    | 'No'                 | 'pcs'  | '5,15'       | '520,00' | '514,85'     | '520,00'       | 'Store 01' | 'Dress' | 'Basic Price Types' |
+		And I close all client application windows
+			
+					
+
+Scenario: _090210 check tax in the PI (depend of transaction type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I click the button named "FormCreate"
+	* Filling in the details of the document PI
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+	* Select transaction type
+		And I select "Purchase" exact value from "Transaction type" drop-down list
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'L/Green'      |
+		And I select current line in "List" table
+		And I select current line in "ItemList" table
+		And I input "550,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'M/White'      |
+		And I select current line in "List" table
+		And I select current line in "ItemList" table
+		And I input "520,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check tax rate
+		And "ItemList" table contains lines
+			| 'Item key' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Item'  |
+			| 'L/Green'  | '1,000'    | 'pcs'  | '83,90'      | '550,00' | '18%' | '466,10'     | '550,00'       | 'Dress' |
+			| 'M/White'  | '1,000'    | 'pcs'  | '79,32'      | '520,00' | '18%' | '440,68'     | '520,00'       | 'Dress' |
+	* Change transaction type and check tax rate
+		And I select "Receipt from consignor" exact value from "Transaction type" drop-down list
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Total amount' |
+			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | '550,00'       |
+			| 'Dress' | 'M/White'  | '1,000'    | '520,00' | '520,00'       |
+		And I close all client application windows				
+
+
+Scenario: _090211 check tax in the PO (depend of transaction type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+	And I click the button named "FormCreate"
+	* Filling in the details of the document PO
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+	* Select transaction type
+		And I select "Purchase" exact value from "Transaction type" drop-down list
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'L/Green'      |
+		And I select current line in "List" table
+		And I select current line in "ItemList" table
+		And I input "550,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'M/White'      |
+		And I select current line in "List" table
+		And I select current line in "ItemList" table
+		And I input "520,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check tax rate
+		And "ItemList" table contains lines
+			| 'Item key' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Item'  |
+			| 'L/Green'  | '1,000'    | 'pcs'  | '83,90'      | '550,00' | '18%' | '466,10'     | '550,00'       | 'Dress' |
+			| 'M/White'  | '1,000'    | 'pcs'  | '79,32'      | '520,00' | '18%' | '440,68'     | '520,00'       | 'Dress' |
+	* Change transaction type and check tax rate
+		And I select "Receipt from consignor" exact value from "Transaction type" drop-down list
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Total amount' |
+			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | '550,00'       |
+			| 'Dress' | 'M/White'  | '1,000'    | '520,00' | '520,00'       |
+		And I close all client application windows					
+	
+
+Scenario: _090212 check tax in the SRO(depend of transaction type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+	And I click the button named "FormCreate"
+	* Filling in the details of the document SRO
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+	* Select transaction type
+		And I select "Return from customer" exact value from "Transaction type" drop-down list
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'L/Green'      |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'M/White'      |
+		And I select current line in "List" table
+	* Check tax rate
+		And "ItemList" table contains lines
+			| 'Item key' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Item'  | 'Sales person' |
+			| 'L/Green'  | '1,000'    | 'pcs'  | '83,90'      | '550,00' | '18%' | '466,10'     | '550,00'       | 'Dress' | ''             |
+			| 'M/White'  | '1,000'    | 'pcs'  | '79,32'      | '520,00' | '18%' | '440,68'     | '520,00'       | 'Dress' | ''             |
+	* Change transaction type and check tax rate
+		And I select "Return from trade agent" exact value from "Transaction type" drop-down list
+		And "ItemList" table contains lines
+			| 'Item key' | 'Quantity' | 'Unit' | 'Price'  | 'Total amount' | 'Store'    | 'Item'  |
+			| 'L/Green'  | '1,000'    | 'pcs'  | '550,00' | '550,00'       | 'Store 01' | 'Dress' |
+			| 'M/White'  | '1,000'    | 'pcs'  | '520,00' | '520,00'       | 'Store 01' | 'Dress' |
+		And I close all client application windows
+
+
+Scenario: _090213 check tax in the SR (depend of transaction type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I click the button named "FormCreate"
+	* Filling in the details of the document SR
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+	* Select transaction type
+		And I select "Return from customer" exact value from "Transaction type" drop-down list
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'L/Green'      |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'M/White'      |
+		And I select current line in "List" table
+	* Check tax rate
+		And "ItemList" table contains lines
+			| 'Item key' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Item'  | 'Sales person' |
+			| 'L/Green'  | '1,000'    | 'pcs'  | '83,90'      | '550,00' | '18%' | '466,10'     | '550,00'       | 'Dress' | ''             |
+			| 'M/White'  | '1,000'    | 'pcs'  | '79,32'      | '520,00' | '18%' | '440,68'     | '520,00'       | 'Dress' | ''             |
+	* Change transaction type and check tax rate
+		And I select "Return from trade agent" exact value from "Transaction type" drop-down list
+		And "ItemList" table contains lines
+			| 'Item key' | 'Quantity' | 'Unit' | 'Price'  | 'Total amount' | 'Store'    | 'Item'  |
+			| 'L/Green'  | '1,000'    | 'pcs'  | '550,00' | '550,00'       | 'Store 01' | 'Dress' |
+			| 'M/White'  | '1,000'    | 'pcs'  | '520,00' | '520,00'       | 'Store 01' | 'Dress' |
+		And I close all client application windows
+
+
+Scenario: _090214 check tax in the PRO(depend of transaction type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+	And I click the button named "FormCreate"
+	* Filling in the details of the document PRO
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+	* Select transaction type
+		And I select "Return to vendor" exact value from "Transaction type" drop-down list
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'L/Green'      |
+		And I select current line in "List" table
+		And I select current line in "ItemList" table
+		And I input "550,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'M/White'      |
+		And I select current line in "List" table
+		And I select current line in "ItemList" table
+		And I input "520,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check tax rate
+		And "ItemList" table contains lines
+			| 'Item key' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Item'  |
+			| 'L/Green'  | '1,000'    | 'pcs'  | '83,90'      | '550,00' | '18%' | '466,10'     | '550,00'       | 'Dress' |
+			| 'M/White'  | '1,000'    | 'pcs'  | '79,32'      | '520,00' | '18%' | '440,68'     | '520,00'       | 'Dress' |
+	* Change transaction type and check tax rate
+		And I select "Return to consignor" exact value from "Transaction type" drop-down list
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Total amount' |
+			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | '550,00'       |
+			| 'Dress' | 'M/White'  | '1,000'    | '520,00' | '520,00'       |
+		And I close all client application windows
+
+
+Scenario: _090215 check tax in the PR (depend of transaction type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I click the button named "FormCreate"
+	* Filling in the details of the document PR
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+	* Select transaction type
+		And I select "Return to vendor" exact value from "Transaction type" drop-down list
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'L/Green'      |
+		And I select current line in "List" table
+		And I select current line in "ItemList" table
+		And I input "550,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'M/White'      |
+		And I select current line in "List" table
+		And I select current line in "ItemList" table
+		And I input "520,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Check tax rate
+		And "ItemList" table contains lines
+			| 'Item key' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Item'  |
+			| 'L/Green'  | '1,000'    | 'pcs'  | '83,90'      | '550,00' | '18%' | '466,10'     | '550,00'       | 'Dress' |
+			| 'M/White'  | '1,000'    | 'pcs'  | '79,32'      | '520,00' | '18%' | '440,68'     | '520,00'       | 'Dress' |
+	* Change transaction type and check tax rate
+		And I select "Return to consignor" exact value from "Transaction type" drop-down list
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Quantity' | 'Price'  | 'Total amount' |
+			| 'Dress' | 'L/Green'  | '1,000'    | '550,00' | '550,00'       |
+			| 'Dress' | 'M/White'  | '1,000'    | '520,00' | '520,00'       |
+		And I close all client application windows
+
+
+Scenario: _090216 check tax in the BP (depend of transaction type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.BankPayment"
+	And I click the button named "FormCreate"
+	* Filling main info
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Account"
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Bank account, TRY' |
+		And I select current line in "List" table
+	* Select partner
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I finish line editing in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "1 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+	* Check tax rate
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table became equal
+			| 'Partner'   | 'Payee'             | 'Tax amount' | 'Total amount' | 'VAT' | 'Net amount' |
+			| 'Ferron BP' | 'Company Ferron BP' | '74,07'      | '1 000,00'     | '8%'  | '925,93'     |
+	* Change transaction type and check tax rate
+		And I select "Customer advance" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table became equal
+			| 'Retail customer' | 'Total amount' |
+			| ''                | '925,93'       |
+		And I close all client application windows
+		
+
+Scenario: _090217 check tax in the CP (depend of transaction type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	And I click the button named "FormCreate"
+	* Filling main info
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "CashAccount"
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Cash desk №4' |
+		And I select current line in "List" table
+	* Select partner
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I finish line editing in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "1 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+	* Check tax rate
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table became equal
+			| 'Partner'   | 'Payee'             | 'Tax amount' | 'Total amount' | 'VAT' | 'Net amount' |
+			| 'Ferron BP' | 'Company Ferron BP' | '74,07'      | '1 000,00'     | '8%'  | '925,93'     |
+	* Change transaction type and check tax rate
+		And I select "Customer advance" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table became equal
+			| 'Retail customer' | 'Total amount' |
+			| ''                | '925,93'     |
+		And I close all client application windows	
+				
+
+Scenario: _090218 check tax in the CR (depend of transaction type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashReceipt"
+	And I click the button named "FormCreate"
+	* Filling main info
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "CashAccount"
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Cash desk №4' |
+		And I select current line in "List" table
+	* Select partner
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I finish line editing in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "1 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+	* Check tax rate
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table became equal
+			| 'Partner'   | 'Payer'             | 'Tax amount' | 'Total amount' | 'VAT' | 'Net amount' |
+			| 'Ferron BP' | 'Company Ferron BP' | '152,54'     | '1 000,00'     | '18%' | '847,46'     |
+	* Change transaction type and check tax rate
+		And I select "Return from vendor" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table became equal
+			| 'Partner'   | 'Payer'             | 'Tax amount' | 'Total amount' | 'VAT' |
+			| 'Ferron BP' | 'Company Ferron BP' | ''           | '847,46'       | '0%'  |
+		And I close all client application windows						
+
+
+Scenario: _090219 check tax in the BR (depend of transaction type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.BankReceipt"
+	And I click the button named "FormCreate"
+	* Filling main info
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Account"
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Bank account, TRY' |
+		And I select current line in "List" table
+	* Select partner
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I finish line editing in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "1 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+	* Check tax rate
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table became equal
+			| 'Partner'   | 'Payer'             | 'Tax amount' | 'Total amount' | 'VAT' | 'Net amount' |
+			| 'Ferron BP' | 'Company Ferron BP' | '152,54'     | '1 000,00'     | '18%' | '847,46'     |
+	* Change transaction type and check tax rate
+		And I select "Return from vendor" exact value from "Transaction type" drop-down list
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And "PaymentList" table became equal
+			| 'Partner'   | 'Payer'             | 'Tax amount' | 'Total amount' | 'VAT' |
+			| 'Ferron BP' | 'Company Ferron BP' | ''           | '847,46'       | '0%'  |
+		And I close all client application windows	
+
+
+Scenario: _090220 check tax in the CE (depend of transaction type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashExpense"
+	And I click the button named "FormCreate"
+	* Filling main info
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Account"
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Bank account, TRY' |
+		And I select current line in "List" table
+	* Add expense
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "1 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+	* Check tax rate
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table became equal
+			| 'Tax amount' | 'Total amount' | 'VAT' | 'Net amount' |
+			| '152,54'     | '1 000,00'     | '18%' | '847,46'     |
+	* Change transaction type and check tax rate
+		And I select "Other company expense" exact value from "Transaction type" drop-down list
+		And "PaymentList" table became equal
+			| 'Total amount' |
+			| '847,46'     |
+		And I close all client application windows	
+
+
+Scenario: _090221 check tax in the CR (depend of transaction type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashRevenue"
+	And I click the button named "FormCreate"
+	* Filling main info
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Account"
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Bank account, TRY' |
+		And I select current line in "List" table
+	* Add expense
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "1 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+	* Check tax rate
+		And I finish line editing in "PaymentList" table
+		And "PaymentList" table became equal
+			| 'Tax amount' | 'Total amount' | 'VAT' | 'Net amount' |
+			| '152,54'     | '1 000,00'     | '18%' | '847,46'     |
+	* Change transaction type and check tax rate
+		And I select "Other company revenue" exact value from "Transaction type" drop-down list
+		And "PaymentList" table became equal
+			| 'Total amount' |
+			| '847,46'     |
+		And I close all client application windows	
+
+
+
+Scenario: _090222 check tax in the RSR(without transaction type)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'L/Green'      |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'M/White'      |
+		And I select current line in "List" table
+	* Check tax rate
+		And "ItemList" table contains lines
+			| 'Item key' | 'Quantity' | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Price type'        | 'Item'  | 'Sales person' |
+			| 'L/Green'  | '1,000'    | 'pcs'  | '83,90'      | '550,00' | '18%' | '466,10'     | '550,00'       | 'Basic Price Types' | 'Dress' | ''             |
+			| 'M/White'  | '1,000'    | 'pcs'  | '79,32'      | '520,00' | '18%' | '440,68'     | '520,00'       | 'Basic Price Types' | 'Dress' | ''             |
+		And I close all client application windows
+
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

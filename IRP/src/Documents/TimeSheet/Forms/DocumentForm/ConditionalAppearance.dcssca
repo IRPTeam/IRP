@@ -8,6 +8,9 @@
 			<item>
 				<field>TimeSheetListAccrualAndDeductionType</field>
 			</item>
+			<item>
+				<field>TimeSheetListIcon</field>
+			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">

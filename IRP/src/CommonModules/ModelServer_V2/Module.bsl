@@ -32,6 +32,10 @@ Function ConvertQuantityToQuantityInBaseUnit(Bundle, Unit, Quantity) Export
 	EndIf;
 EndFunction
 
+Function GetUnitFactor(FromUnit, ToUnit) Export
+	Return Catalogs.Units.GetUnitFactor(FromUnit, ToUnit);
+EndFunction
+
 Function GetCommissionPercentExecute(Options) Export
 	Query = New Query;
 	Query.Text =

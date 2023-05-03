@@ -13,7 +13,8 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	EndIf;
 	
 	// Multi currency integration
-	CurrenciesServer.PreparePostingDataTables(Parameters, Undefined, AddInfo);
+	CurrencyTable = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CurrencyTable");	
+	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 
 	RegisteredRecords = RegisterRecords(DocObject, Parameters.PostingDataTables, Parameters.Object.RegisterRecords);
 	Parameters.Insert("RegisteredRecords", RegisteredRecords);

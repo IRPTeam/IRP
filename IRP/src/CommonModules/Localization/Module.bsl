@@ -276,6 +276,7 @@ Function Strings(Lang) Export
 	Strings = New Structure();
 
 #Region AdditionalTableControl
+
 	Strings.Insert("ATC_001", NStr("en = 'Unknown document type: %1'", Lang));
 	Strings.Insert("ATC_ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList", NStr("en = 'Row: %1. Tax amount in item list is not equal to tax amount in tax list'", Lang));
 	Strings.Insert("ATC_ErrorNetAmountGreaterTotalAmount", NStr("en = 'Row: %1. Net amount is greater than total amount'", Lang));
@@ -290,6 +291,9 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_ErrorTotalAmountMinusNetAmountNotEqualTaxAmount", NStr("en = 'Row: %1. Total amount minus net amount is not equal to tax amount'", Lang));
 	Strings.Insert("ATC_ErrorQuantityInItemListNotEqualQuantityInRowID", NStr("en = 'Row: %1. Quantity in item list is not equal to quantity in row ID'", Lang));
 	Strings.Insert("ATC_ErrorQuantityNotEqualQuantityInBaseUnit", NStr("en = 'Row: %1. Quantity not equal quantity in base unit when unit quantity equal 1'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledQuantityInSourceOfOrigins", NStr("en = 'Row: %1. Not filled quantity in source of origins'", Lang));
+	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInSerialLotNumber", NStr("en = 'Row: %1. Quantity in source of origins diff quantity in serial lot number'", Lang));
+	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInItemList", NStr("en = 'Row: %1. Quantity in source of origins diff quantity in item list'", Lang));
 	
 #EndRegion
 
@@ -751,6 +755,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_123", NStr("en = 'Error. Retail customer is not filled'", Lang) + Chars.LF);
 	Strings.Insert("Error_124", NStr("en = 'Quantity limit exceeded. line number: [%1] quantity: [%2] limit: [%3]'", Lang));
 	Strings.Insert("Error_125", NStr("en = 'Invoice for document: [%1] is empty'", Lang));
+	Strings.Insert("Error_126", NStr("en = 'Document does not have transaction types'", Lang));
 	
 	// manufacturing errors
 	Strings.Insert("MF_Error_001", NStr("en = 'Repetitive materials [%1]'", Lang));
@@ -980,6 +985,7 @@ Function Strings(Lang) Export
 
 #Region ChoiceListValues
 	Strings.Insert("CLV_1", NStr("en = 'All'", Lang));
+	Strings.Insert("CLV_2", NStr("en = 'Transaction type'", Lang));
 #EndRegion
 
 #Region SalesOrderStatusReport

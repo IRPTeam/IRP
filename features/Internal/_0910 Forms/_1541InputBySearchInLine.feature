@@ -1689,116 +1689,7 @@ Scenario: _01540108 check item and item key input by search in line in a documen
 		| 'Jacket J22001'    |
 		And I close all client application windows
 
-Scenario: _01540109 check partner, legal name, Partner term, company and store input by search in line in a document Sales order closing (in english)
-	And I close all client application windows
-	* Open a creation form Sales order closing
-		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
-		And I click the button named "FormCreate"
-	* Partner input by search in line
-		And I select from "Partner" drop-down list by "fer" string
-	* Legal name input by search in line
-		And I select from "Legal name" drop-down list by "com" string
-	* Partner term input by search in line
-		And I select from "Partner term" drop-down list by "TRY" string
-	* Company input by search in line
-		And I select from "Company" drop-down list by "main" string
-	* Store input by search in line
-		And I select from the drop-down list named "Store" by "re 01" string
-	* Check entered values
-		Then the form attribute named "Partner" became equal to "Ferron BP"
-		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "Store" became equal to "Store 01"
 
-
-Scenario: _01540110 check item and item key input by search in line in a document Sales order closing (in english)
-	And I close all client application windows
-	* Open a creation form Sales order closing
-		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
-		And I click the button named "FormCreate"
-	* Item and item key input by search in line
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I select "boo" from "Item" drop-down list by string in "ItemList" table
-		And I activate "Item key" field in "ItemList" table
-		And I select "36" from "Item key" drop-down list by string in "ItemList" table
-	* Check entered values
-		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I input "J22001" text in "Item" field of "ItemList" table		
-		And drop-down list "Item" is equal to:
-		| (J22001) Jacket J22001 |
-		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
-		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
-		And I close all client application windows
-
-Scenario: _01540111 check partner, legal name, Partner term, company and store input by search in line in a document Purchase order closing (in english)
-	And I close all client application windows
-	* Open a creation form Purchase order closing
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
-		And I click the button named "FormCreate"
-	* Partner input by search in line
-		And I select from "Partner" drop-down list by "fer" string
-	* Legal name input by search in line
-		And I select from "Legal name" drop-down list by "com" string
-	* Partner term input by search in line
-		And I select from "Partner term" drop-down list by "TRY" string
-	* Company input by search in line
-		And I select from "Company" drop-down list by "main" string
-	* Store input by search in line
-		And I select from the drop-down list named "Store" by "re 01" string
-	* Check entered values
-		Then the form attribute named "Partner" became equal to "Ferron BP"
-		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "Store" became equal to "Store 01"
-	* Expense type input by search in line
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Service'     |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I select "exp" from "Expense type" drop-down list by string in "ItemList" table
-		And "ItemList" table contains lines
-			| 'Expense type' |
-			| 'Expense'         |
-		And I select "sof" from "Expense type" drop-down list by string in "ItemList" table
-		And "ItemList" table contains lines
-			| 'Expense type' |
-			| 'Software'         |
-	And I close all client application windows
-
-
-Scenario: _01540112 check item and item key input by search in line in a document Purchase order closing (in english)
-	And I close all client application windows
-	* Open a creation form Purchase order closing
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
-		And I click the button named "FormCreate"
-	* Item and item key input by search in line
-		And in the table "ItemList" I click the button named "ItemListAdd"		
-		And I select "boo" from "Item" drop-down list by string in "ItemList" table
-		And I activate "Item key" field in "ItemList" table
-		And I select "36" from "Item key" drop-down list by string in "ItemList" table
-	* Check entered values
-		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  |
-		| 'Boots'    | '36/18SD' |
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I input "J22001" text in "Item" field of "ItemList" table		
-		And drop-down list "Item" is equal to:
-		| (J22001) Jacket J22001 |
-		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
-		And "ItemList" table contains lines
-		| 'Item'     |
-		| 'Jacket J22001'    |
-		And I close all client application windows
 
 Scenario: _01540113 check item input by search in line by code in a document Sales order
 	And I close all client application windows
@@ -2037,22 +1928,22 @@ Scenario: _0154092 check company, employee, currency, position, branch input by 
 	* Branch input by search in line
 		And I select from "Branch" drop-down list by "front" string
 	* Filling the tabular part by searching the value by line employee and position)
-		And I move to "Payroll" tab
-		And in the table "PayrollList" I click the button named "PayrollListAdd"
-		And I activate "Employee" field in "PayrollList" table
-		And I select current line in "PayrollList" table
-		And I select "bro" from "Employee" drop-down list by string in "PayrollList" table
-		And I activate "Position" field in "PayrollList" table
-		And I select "mana" from "Position" drop-down list by string in "PayrollList" table
-		And I activate "Accrual and deduction type" field in "PayrollList" table
-		And I select "sa" from "Accrual and deduction type" drop-down list by string in "PayrollList" table
+		And in the table "AccrualList" I click the button named "AccrualListAdd"		
+		And in the table "AccrualList" I click the button named "AccrualListAdd"
+		And I activate "Employee" field in "AccrualList" table
+		And I select current line in "AccrualList" table
+		And I select "bro" from "Employee" drop-down list by string in "AccrualList" table
+		And I activate "Position" field in "AccrualList" table
+		And I select "mana" from "Position" drop-down list by string in "AccrualList" table
+		And I activate "Accrual type" field in "AccrualList" table
+		And I select "sa" from "Accrual type" drop-down list by string in "AccrualList" table
 	* Check filling in
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Currency" became equal to "TRY"
 		Then the form attribute named "Branch" became equal to "Front office"
-		And "PayrollList" table contains lines
-			| 'Employee'    | 'Position' | 'Accrual and deduction type' |
-			| 'Arina Brown' | 'Manager'  | 'Salary'                     |
+		And "AccrualList" table contains lines
+			| 'Employee'    | 'Position' | 'Accrual type' |
+			| 'Arina Brown' | 'Manager'  | 'Salary'       |
 		And I close all client application windows
 
 Scenario: _0154092 check company, branch input by search in line in TimeSheet (in english)

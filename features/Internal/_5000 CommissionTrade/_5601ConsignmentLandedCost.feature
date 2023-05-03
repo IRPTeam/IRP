@@ -48,11 +48,12 @@ Scenario: _05602 preparation (consignment landed cost)
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Companies objects (partners company)
 		When Create catalog Companies objects (own Second company)
+		When Create catalog Countries objects
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects
 		When Create chart of characteristic types CurrencyMovementType objects
-		When Create catalog ReportOptions objects
+		When Create catalog ReportOptions objects (landed cost)
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
 		When Create information register TaxSettings records
@@ -104,6 +105,10 @@ Scenario: _05602 preparation (consignment landed cost)
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And Delay "3"
+		* Posting Purchase return
+			Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+			Then I select all lines of "List" table
+			And in the table "List" I click the button named "ListContextMenuPost"
 		* Posting AdditionalCostAllocation
 			Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
 			Then I select all lines of "List" table

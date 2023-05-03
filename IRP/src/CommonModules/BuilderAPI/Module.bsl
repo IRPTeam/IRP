@@ -244,6 +244,48 @@ Function SetRowProperty(Wrapper, Row, ColumnName, Value, TableName = Undefined) 
 	Return Result;
 EndFunction
 
+// Execute command.
+// 
+// Parameters:
+//  Wrapper - See CreateWrapper
+//  Row - Structure, String, Number, ValueTableRow - Row or Row key or Row index
+//  CommandName - String - Command name
+//  TableName - Undefined, String - Table name. If empty - get from wrapper as defaul table
+// 
+// Returns:
+//  Structure - Set row property:
+// * Context - See CreateWrapper
+// * Cache - Structure -
+Function ExecuteCommand(Wrapper, Row, CommandName, TableName = Undefined) Export
+	If TableName = Undefined Then
+		TableName = Wrapper.DefaultTable;
+	EndIf;
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Wrapper.Object); // Structure
+	ServerParameters.TableName = TableName;
+	
+	Rows = New Array(); // Array Of ValueTableRow
+	If TypeOf(Row) = Type("Number") Then
+		//@skip-check invocation-parameter-type-intersect
+		Rows.Add(Wrapper.Object[TableName][0]);
+	ElsIf TypeOf(Row) = Type("String") Then
+		//@skip-check invocation-parameter-type-intersect, dynamic-access-method-not-found
+		Rows.Add(Wrapper.Object[TableName].FindRows(New Structure("Key", Row))[0]);
+	Else
+		Rows.Add(Row);
+	EndIf;
+	
+	ServerParameters.Rows = Rows;
+	Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+	
+	ControllerClientServer_V2.API_SetProperty(Parameters, New Structure("DataPath", CommandName), Undefined, True);
+	
+	Result = New Structure();
+	Result.Insert("Context", Wrapper);
+	Result.Insert("Cache", Parameters.Cache);
+	//@skip-check constructor-function-return-section
+	Return Result;
+EndFunction
+
 // Write.
 // 
 // Parameters:
@@ -265,11 +307,11 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 	Result.Insert("Ref", Undefined);
 	If Metadata.Documents.Contains(ObjMetadata) Then
 		If Not Object = Undefined Then
-			Doc = Object;
+			Doc = Object; // DocumentObjectDocumentName
 		ElsIf ValueIsFilled(Wrapper.Object.Ref) Then
-			Doc = Wrapper.Object.Ref.GetObject();
+			Doc = Wrapper.Object.Ref.GetObject(); // DocumentObjectDocumentName
 		Else
-			Doc = Documents[ObjMetadata.Name].CreateDocument();
+			Doc = Documents[ObjMetadata.Name].CreateDocument(); // DocumentObjectDocumentName
 		EndIf;
 		
 		FillPropertyValues(Doc, Wrapper.Object, , "Number");
@@ -283,8 +325,14 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 		EndDo;
 		
 		If Object = Undefined Then
-			Doc.Write(?(WriteMode = Undefined, DocumentWriteMode.Write, WriteMode),
-				?(PostingMode = Undefined , DocumentPostingMode.Regular , PostingMode));
+			Doc.Write(
+				?(
+					WriteMode = Undefined, 
+					?(Doc.Posted, DocumentWriteMode.Posting, DocumentWriteMode.Write), 
+					WriteMode
+				),
+				?(PostingMode = Undefined , DocumentPostingMode.Regular , PostingMode)
+			);
 			Wrapper.Object.Ref = Doc.Ref;
 		Else
 			Result.Insert("Object", Doc);

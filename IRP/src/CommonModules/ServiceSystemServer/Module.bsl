@@ -278,7 +278,7 @@ Procedure RunExternalFunctions() Export
 			
 		//@skip-check invocation-parameter-type-intersect
 		JobInProgress = BackgroundJobs.FindByUUID(JobsQueue.JobID);
-		If JobInProgress.State = BackgroundJobState.Active Then
+		If Not JobInProgress = Undefined And JobInProgress.State = BackgroundJobState.Active Then
 			CurrentJobsLevel = CurrentJobsLevel + JobsQueue.DifficultLevel
 		Else
 			Job = InformationRegisters.JobQueue.CreateRecordSet();

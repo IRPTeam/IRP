@@ -230,6 +230,14 @@
     <key>en</key>
     <value>Hide</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Скрыть</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Sakla</value>
+   </synonym>
    <type>
     <types>Boolean</types>
    </type>
@@ -316,6 +324,14 @@
    <synonym>
     <key>en</key>
     <value>Hide</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Скрыть</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Sakla</value>
    </synonym>
    <type>
     <types>Boolean</types>

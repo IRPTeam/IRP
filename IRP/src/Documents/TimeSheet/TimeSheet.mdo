@@ -331,6 +331,14 @@
     <key>en</key>
     <value>Profit loss center</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Центр прибыли/убытков</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Kar/Zarar merkezi</value>
+   </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
    </type>

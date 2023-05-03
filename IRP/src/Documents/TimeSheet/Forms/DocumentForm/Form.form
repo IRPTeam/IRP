@@ -2524,6 +2524,14 @@
      <key>en</key>
      <value>Icon</value>
     </title>
+    <title>
+     <key>ru</key>
+     <value>Иконка</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Simge</value>
+    </title>
     <id>19</id>
     <valueType>
      <types>Number</types>
@@ -2726,6 +2734,14 @@
     <key>en</key>
     <value>Profit loss center</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Центр прибыли/убытков</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Kar/Zarar merkezi</value>
+   </title>
    <id>17</id>
    <valueType>
     <types>CatalogRef.BusinessUnits</types>
@@ -2742,6 +2758,14 @@
    <title>
     <key>en</key>
     <value>Icon</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Иконка</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Simge</value>
    </title>
    <id>18</id>
    <valueType>

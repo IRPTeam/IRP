@@ -2309,6 +2309,14 @@
       <key>en</key>
       <value>Net amount</value>
      </title>
+     <title>
+      <key>ru</key>
+      <value>Сумма без налогов</value>
+     </title>
+     <title>
+      <key>tr</key>
+      <value>Net tutar</value>
+     </title>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -2397,6 +2405,14 @@
       <key>en</key>
       <value>Tax amount</value>
      </title>
+     <title>
+      <key>ru</key>
+      <value>Сумма налогов</value>
+     </title>
+     <title>
+      <key>tr</key>
+      <value>Vergi tutarı</value>
+     </title>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -2484,6 +2500,14 @@
      <title>
       <key>en</key>
       <value>Total amount</value>
+     </title>
+     <title>
+      <key>ru</key>
+      <value>Общая сумма</value>
+     </title>
+     <title>
+      <key>tr</key>
+      <value>Toplam tutar</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>

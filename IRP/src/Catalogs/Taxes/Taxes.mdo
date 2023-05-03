@@ -345,6 +345,14 @@
     <key>en</key>
     <value>Document name</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Наименование документа</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Evrak ismi</value>
+   </synonym>
    <type>
     <types>String</types>
     <stringQualifiers>
@@ -361,6 +369,14 @@
    <synonym>
     <key>en</key>
     <value>Transaction type</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Вид операции</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>İşlem tipi</value>
    </synonym>
    <type>
     <types>EnumRef</types>

@@ -3500,6 +3500,14 @@
       <key>en</key>
       <value>Payment</value>
      </title>
+     <title>
+      <key>ru</key>
+      <value>Оплата</value>
+     </title>
+     <title>
+      <key>tr</key>
+      <value>Ödeme</value>
+     </title>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>

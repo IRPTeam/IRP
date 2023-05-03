@@ -724,6 +724,14 @@
    <key>en</key>
    <value>Check all</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Выбрать все</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Tümü işaretle</value>
+  </title>
   <id>3</id>
   <use>
    <common>true</common>
@@ -744,6 +752,14 @@
   <title>
    <key>en</key>
    <value>Uncheck all</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Отменить все</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Tümü kaldır</value>
   </title>
   <id>4</id>
   <use>

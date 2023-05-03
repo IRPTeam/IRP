@@ -1590,7 +1590,9 @@ Function Strings(Lang) Export
 	Strings.Insert("CLV_1", NStr("en='All';
 		|ru='Все';
 		|tr='Tümü'", Lang));
-	Strings.Insert("CLV_2", NStr("en='Transaction type'", Lang));
+	Strings.Insert("CLV_2", NStr("en='Transaction type';
+		|ru='Вид операции';
+		|tr='İşlem tipi'", Lang));
 #EndRegion
 
 #Region SalesOrderStatusReport

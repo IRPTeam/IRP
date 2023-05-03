@@ -352,6 +352,14 @@
    <key>en</key>
    <value>List</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Список</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Liste</value>
+  </title>
   <id>1</id>
   <valueType>
    <types>DynamicList</types>
@@ -393,6 +401,14 @@ FROM
        <key>en</key>
        <value>Employee</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Сотрудник</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Personel</value>
+      </content>
      </localValue>
     </title>
    </fields>
@@ -404,6 +420,14 @@ FROM
       <content>
        <key>en</key>
        <value>Amount</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Сумма оплаты</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Tutar</value>
       </content>
      </localValue>
     </title>
@@ -452,6 +476,14 @@ FROM
        <key>en</key>
        <value>Period</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Период</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Dönem</value>
+      </content>
      </localValue>
     </title>
     <valueType>
@@ -466,6 +498,14 @@ FROM
       <content>
        <key>en</key>
        <value>Company</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Организация</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Şirket</value>
       </content>
      </localValue>
     </title>
@@ -482,6 +522,14 @@ FROM
        <key>en</key>
        <value>Currency</value>
       </content>
+      <content>
+       <key>ru</key>
+       <value>Валюты</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Döviz</value>
+      </content>
      </localValue>
     </title>
     <valueType>
@@ -496,6 +544,14 @@ FROM
       <content>
        <key>en</key>
        <value>Branch</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Структурное подразделение</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Şube</value>
       </content>
      </localValue>
     </title>
@@ -525,6 +581,14 @@ FROM
   <title>
    <key>en</key>
    <value>Select</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Выбрать</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Seç</value>
   </title>
   <id>1</id>
   <use>

@@ -387,6 +387,14 @@
     <key>en</key>
     <value>Use</value>
    </title>
+   <title>
+    <key>ru</key>
+    <value>Использование</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Kullan</value>
+   </title>
    <id>2</id>
    <valueType>
     <types>Boolean</types>
@@ -403,6 +411,14 @@
    <title>
     <key>en</key>
     <value>Transaction type</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Вид операции</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>İşlem tipi</value>
    </title>
    <id>3</id>
    <valueType>
@@ -422,6 +438,14 @@
    <key>en</key>
    <value>Document name</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Наименование документа</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Evrak ismi</value>
+  </title>
   <id>4</id>
   <valueType>
    <types>String</types>
@@ -440,6 +464,14 @@
    <key>en</key>
    <value>Ok</value>
   </title>
+  <title>
+   <key>ru</key>
+   <value>Ок</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Tamam</value>
+  </title>
   <id>1</id>
   <use>
    <common>true</common>
@@ -456,6 +488,14 @@
   <title>
    <key>en</key>
    <value>Cancel</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Отмена</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <id>2</id>
   <use>

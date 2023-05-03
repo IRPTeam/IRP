@@ -51,17 +51,7 @@ EndProcedure
 
 &AtServer
 Function CreatePictureParameters()
-	PictureParameters = New Structure();
-	PictureParameters.Insert("Ref", Object.Ref);
-	PictureParameters.Insert("Description", Object.Description);
-	PictureParameters.Insert("FileID", Object.FileID);
-	PictureParameters.Insert("isFilledVolume", Object.Volume <> Catalogs.IntegrationSettings.EmptyRef());
-	PictureParameters.Insert("GETIntegrationSettings", Object.Volume.GETIntegrationSettings);
-	PictureParameters.Insert("isLocalPictureURL", Object.Volume.GETIntegrationSettings.IntegrationType
-		= Enums.IntegrationType.LocalFileStorage);
-	PictureParameters.Insert("URI", Object.URI);
-
-	Return PictureParameters;
+	Return PictureViewerServer.CreatePictureParameters(Object);
 EndFunction
 
 &AtClient

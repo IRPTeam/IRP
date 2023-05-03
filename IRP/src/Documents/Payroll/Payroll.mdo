@@ -259,6 +259,14 @@
     <key>en</key>
     <value>Key</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
    </type>
@@ -272,6 +280,14 @@
    <synonym>
     <key>en</key>
     <value>Employee</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сотрудник</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Personel</value>
    </synonym>
    <type>
     <types>CatalogRef.Partners</types>
@@ -293,6 +309,10 @@
    <synonym>
     <key>en</key>
     <value>Position</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Должность</value>
    </synonym>
    <type>
     <types>CatalogRef.EmployeePositions</types>
@@ -330,6 +350,14 @@
     <key>en</key>
     <value>Expense type</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Статьи затрат</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Gider tipi</value>
+   </synonym>
    <type>
     <types>CatalogRef.ExpenseAndRevenueTypes</types>
    </type>
@@ -344,6 +372,14 @@
     <key>en</key>
     <value>Profit loss center</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Центр прибыли/убытков</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Kar/Zarar merkezi</value>
+   </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
    </type>
@@ -357,6 +393,14 @@
    <synonym>
     <key>en</key>
     <value>Amount</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма оплаты</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -385,6 +429,14 @@
     <key>en</key>
     <value>Key</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
    </type>
@@ -398,6 +450,14 @@
    <synonym>
     <key>en</key>
     <value>Employee</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сотрудник</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Personel</value>
    </synonym>
    <type>
     <types>CatalogRef.Partners</types>
@@ -419,6 +479,10 @@
    <synonym>
     <key>en</key>
     <value>Position</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Должность</value>
    </synonym>
    <type>
     <types>CatalogRef.EmployeePositions</types>
@@ -456,6 +520,14 @@
     <key>en</key>
     <value>Expense type</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Статьи затрат</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Gider tipi</value>
+   </synonym>
    <type>
     <types>CatalogRef.ExpenseAndRevenueTypes</types>
    </type>
@@ -469,6 +541,14 @@
    <synonym>
     <key>en</key>
     <value>Profit loss center</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Центр прибыли/убытков</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Kar/Zarar merkezi</value>
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
@@ -484,6 +564,14 @@
     <key>en</key>
     <value>Is revenue</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Это статья доходов</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Gelir tipi</value>
+   </synonym>
    <type>
     <types>Boolean</types>
    </type>
@@ -497,6 +585,14 @@
    <synonym>
     <key>en</key>
     <value>Amount</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма оплаты</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -525,6 +621,14 @@
     <key>en</key>
     <value>Key</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
    <type>
     <types>DefinedType.typeRowID</types>
    </type>
@@ -538,6 +642,14 @@
    <synonym>
     <key>en</key>
     <value>Employee</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сотрудник</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Personel</value>
    </synonym>
    <type>
     <types>CatalogRef.Partners</types>
@@ -560,6 +672,14 @@
     <key>en</key>
     <value>Financial movement type</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Статья движений денежных средств</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Finans hareket tipi</value>
+   </synonym>
    <type>
     <types>CatalogRef.ExpenseAndRevenueTypes</types>
    </type>
@@ -579,6 +699,14 @@
     <key>en</key>
     <value>Account</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Касса/банк</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Hesap</value>
+   </synonym>
    <type>
     <types>CatalogRef.CashAccounts</types>
    </type>
@@ -592,6 +720,14 @@
     <key>en</key>
     <value>Planing transaction basis</value>
    </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Плановый документ-основания</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Planlama evrakı</value>
+   </synonym>
    <type>
     <types>DocumentRef.OutgoingPaymentOrder</types>
    </type>
@@ -604,6 +740,14 @@
    <synonym>
     <key>en</key>
     <value>Amount</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма оплаты</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>

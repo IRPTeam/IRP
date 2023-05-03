@@ -79,6 +79,66 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="24e069de-f27a-4474-ae9a-6a4dbaed9841">
+    <name>AmountCost</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount cost</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="2390ef03-a17c-4ca4-a7f7-396d49e755e4">
+    <name>AmountCostTax</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount cost tax</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="33b8d3b9-83b1-446f-8599-418b2dc48827">
+    <name>AmountRevenue</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount revenue</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="b522decc-4010-4a1c-be41-a83ca8c28827">
+    <name>AmountRevenueTax</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount revenue tax</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <dimensions uuid="0dbd6274-4133-43a0-85b8-ceba3406f732">
     <name>ItemKey</name>
     <synonym>

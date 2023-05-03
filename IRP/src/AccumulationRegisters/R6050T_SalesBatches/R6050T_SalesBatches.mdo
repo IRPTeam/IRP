@@ -108,6 +108,32 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <resources uuid="43980561-4c23-4d01-8fba-322788dd36c3">
+    <name>AmountRevenue</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount revenue</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="7953db63-9ffb-4d35-a1d7-fc2bdd7c2df4">
+    <name>AmountRevenueTax</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount revenue tax</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
   <dimensions uuid="c728c832-7cdd-417e-b575-31112913b75b">
     <name>Batch</name>
     <synonym>

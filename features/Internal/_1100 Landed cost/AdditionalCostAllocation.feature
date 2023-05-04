@@ -126,7 +126,7 @@ Scenario: _041 test data
 		When Create document PurchaseOrder objects (LC)
 		When Create document PurchaseReturn objects (LC)
 		When Create document PurchaseReturnOrder objects (LC)
-		When Create catalog ReportOptions objects (landed cost)
+		When Create catalog ReportOptions objects (with tax cost)
 		When Create document SalesInvoice objects (Revenue cost allocation)
 		When Create document SalesInvoice objects (LC)
 		When Create document SalesReturn objects (LC)
@@ -319,8 +319,8 @@ Scenario: _043 check additional cost allocation (documents, by amount)
 	And I select current line in "SettingsComposerSettingsFilter" table
 	And I finish line editing in "SettingsComposerSettingsFilter" table
 	And I go to line in "SettingsComposerSettingsFilter" table
-		| 'Application'  | 'Comparison type' | 'Display mode' | 'Left value' | 'Use' |
-		| 'No hierarchy' | 'Filled'          | 'Disabled'     | 'Recorder'   | 'Yes' |
+		| 'Left value' |
+		| 'Recorder'   |
 	And I activate "Comparison type" field in "SettingsComposerSettingsFilter" table
 	And I select current line in "SettingsComposerSettingsFilter" table
 	And I select "Equal to" exact value from "Comparison type" drop-down list in "SettingsComposerSettingsFilter" table
@@ -358,8 +358,8 @@ Scenario: _044 check additional cost allocation (documents, by weight)
 	And I move to "Fields" tab
 	And I move to the tab named "FilterPage"
 	And I go to line in "SettingsComposerSettingsFilter" table
-		| 'Application'  | 'Comparison type' | 'Display mode' | 'Left value' | 'Use' |
-		| 'No hierarchy' | 'Filled'          | 'Disabled'     | 'Recorder'   | 'Yes' |	
+		| 'Left value' |
+		| 'Recorder'   |
 	And I activate "Comparison type" field in "SettingsComposerSettingsFilter" table
 	And I select current line in "SettingsComposerSettingsFilter" table
 	And I select "Equal to" exact value from "Comparison type" drop-down list in "SettingsComposerSettingsFilter" table
@@ -397,8 +397,8 @@ Scenario: _045 check additional cost allocation (rows, by amount)
 	And I move to "Fields" tab
 	And I move to the tab named "FilterPage"
 	And I go to line in "SettingsComposerSettingsFilter" table
-		| 'Application'  | 'Comparison type' | 'Display mode' | 'Left value' | 'Use' |
-		| 'No hierarchy' | 'Filled'          | 'Disabled'     | 'Recorder'   | 'Yes' |	
+		| 'Left value' |
+		| 'Recorder'   |
 	And I activate "Comparison type" field in "SettingsComposerSettingsFilter" table
 	And I select current line in "SettingsComposerSettingsFilter" table
 	And I select "In list" exact value from "Comparison type" drop-down list in "SettingsComposerSettingsFilter" table

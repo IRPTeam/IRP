@@ -142,7 +142,7 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|	0,
 	|	0,
 	|	0,
-	|	0.
+	|	0,
 	|	0
 	|FROM
 	|	AccumulationRegister.R6030T_BatchShortageOutgoing AS R6030T_BatchShortageOutgoing
@@ -173,7 +173,7 @@ Procedure BatchBalance_CollectRecords(DocObject) Export
 	|	0,
 	|	0,
 	|	0,
-	|	0.
+	|	0,
 	|	0
 	|FROM
 	|	AccumulationRegister.R6040T_BatchShortageIncoming AS R6040T_BatchShortageIncoming

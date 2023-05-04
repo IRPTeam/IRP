@@ -19,20 +19,6 @@
       <value>Landed cost</value>
     </synonym>
   </enumValues>
-  <enumValues uuid="bc3e075a-555d-45fc-889f-3ca360c6662c">
-    <name>AdditionalItemCost</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional item cost</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="854f820a-12e7-4d31-a9e4-3759774e2b2b">
-    <name>AdditionalItemRevenue</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional item revenue</value>
-    </synonym>
-  </enumValues>
   <enumValues uuid="721900e9-3d68-49fc-8872-40ceb43b6ac1">
     <name>LandedCostBatchReallocate</name>
     <synonym>

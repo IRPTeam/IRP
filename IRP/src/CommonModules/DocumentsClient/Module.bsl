@@ -1528,6 +1528,15 @@ Procedure PickupItemsEnd(ScanData, AddInfo) Export
 	TmpParameters.ViewNotify = ViewNotify;
 	ControllerClientServer_V2.OnChangesNotifyView(TmpParameters);	
 	
+	// set current last added row
+	If Result.ChoiceForms.PresentationStartChoice_Counter <> 1 And Result.ChoiceForms.StartChoice_Counter <> 1 Then
+		If Result.NewRows.Count() Then
+			Form.Items.ItemList.CurrentRow = Object.ItemList.FindRows(
+				New Structure("Key", Result.NewRows[Result.NewRows.UBound()].Key))[0].GetID();
+		EndIf;
+	EndIf;
+	
+	// open serial lot numbers choice form
 	If Result.ChoiceForms.PresentationStartChoice_Counter = 1 Then
 		Form.Items.ItemList.CurrentRow = Object.ItemList.FindRows(
 		New Structure("Key", Result.ChoiceForms.PresentationStartChoice_Key))[0].GetID();

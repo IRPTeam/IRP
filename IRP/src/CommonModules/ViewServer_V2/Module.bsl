@@ -224,6 +224,7 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	ItemIsPresent      = CommonFunctionsClientServer.ObjectHasProperty(Row, "Item");
 	ItemKeyIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "ItemKey");
 	UnitIsPresent      = CommonFunctionsClientServer.ObjectHasProperty(Row, "Unit");
+	StoreIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "Store");
 	QuantityIsPresent  = CommonFunctionsClientServer.ObjectHasProperty(Row, "Quantity");
 	PriceIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "Price");
 	PriceTypeIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "PriceType");
@@ -246,6 +247,10 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	
 	If FillingValues.Property("Unit") And UnitIsPresent Then
 		ControllerClientServer_V2.SetItemListUnit(Parameters, PrepareValue(FillingValues.Unit, Row.Key));
+	EndIf;
+	
+	If FillingValues.Property("Store") And StoreIsPresent Then
+		ControllerClientServer_V2.SetItemListStore(Parameters, PrepareValue(FillingValues.Store, Row.Key));
 	EndIf;
 	
 	If FillingValues.Property("Quantity") And QuantityIsPresent Then

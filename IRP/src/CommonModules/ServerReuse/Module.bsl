@@ -39,4 +39,12 @@ Function GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, Propor
 	Return RowIDInfoServer._GetAllDataFromBasis(DocRef, Basis, BasisKey, RowID, CurrentStep, ProportionalScaling);
 EndFunction
 
+// Commission trade
 
+Function GetConsignorBatches_Sales_Transfer_ExecuteQuery(DocRef, DocDate, ItemListTableString) Export
+	Return CommissionTradeServer._GetConsignorBatches_Sales_Transfer_ExecuteQuery(DocRef, DocDate, ItemListTableString);
+EndFunction
+
+Function GetConsignorBatchesTable_ExecuteQuery(tmpItemListString, tmpSerialLotNumbersString, tmpSourceOfOriginsString) Export
+	Return CommissionTradeServer._GetConsignorBatchesTable_ExecuteQuery(tmpItemListString, tmpSerialLotNumbersString, tmpSourceOfOriginsString);
+EndFunction

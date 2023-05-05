@@ -1978,8 +1978,6 @@ Function ChangeTaxRateExecute(Options) Export
 			Continue;
 		EndIf;
 		
-		
-		
 		// If tax is not taken into account by company, then clear tax rate TaxRate = Undefined
 		If RequiredTaxes.Find(ItemOfTaxInfo.Tax) = Undefined Then
 			Result.Insert(ItemOfTaxInfo.Name, Undefined);

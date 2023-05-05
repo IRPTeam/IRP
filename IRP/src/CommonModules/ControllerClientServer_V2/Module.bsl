@@ -7,7 +7,6 @@ Function GetServerParameters(Object) Export
 	Result.Insert("ControllerModuleName", "ControllerClientServer_V2");
 	Result.Insert("TableName", "");
 	Result.Insert("Rows", Undefined);
-	Result.Insert("RowsConsignorStocks", New Array());
 	Result.Insert("ReadOnlyProperties", "");
 	Result.Insert("IsBasedOn", False);
 	
@@ -80,6 +79,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	
 	Parameters.Insert("RowsForRecalculate"   , New Array());
 	Parameters.Insert("UseRowsForRecalculate", False);
+	Parameters.Insert("RowsConsignorStocks"  , New Array());
 	
 	Parameters.LoadData.Insert("Address"                   , LoadParameters.Address);
 	Parameters.LoadData.Insert("GroupColumns"              , LoadParameters.GroupColumns);
@@ -199,7 +199,8 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 			ServerParameters.Rows = New Array();
 		EndIf;
 	EndIf;
-		
+	
+	RowsConsignorStocks = New Array();	
 	If ValueIsFilled(ServerParameters.TableName) 
 		And (Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 			Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt") Then
@@ -209,7 +210,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 				Continue;
 			EndIf;
 			If Row.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then
-				ServerParameters.RowsConsignorStocks.Add(Row);
+				RowsConsignorStocks.Add(Row);
 			EndIf;
 		EndDo;		
 	EndIf;
@@ -219,8 +220,8 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	If WrappedRows.Count() Then
 		Parameters.Insert("Rows", WrappedRows);
 	EndIf;
-		
-	WrappedRows = WrapRows(Parameters, ServerParameters.RowsConsignorStocks);
+	
+	WrappedRows = WrapRows(Parameters, RowsConsignorStocks);
 	Parameters.Insert("RowsConsignorStocks", WrappedRows);
 	
 	Parameters.Insert("NextSteps"    , New Array());
@@ -4989,10 +4990,13 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 			Options.Agreement = GetPropertyObject(Parameters, Parameters.TableName + "." + "Agreement", Row.Key);
 		EndIf;
 		
-		
 		If Row.Property("InventoryOrigin") Then
 			Options.InventoryOrigin  = GetItemListInventoryOrigin(Parameters, Row.Key);
 			Options.ConsignorBatches = GetConsignorBatches(Parameters, Row.Key);
+		EndIf;
+		
+		If Row.Property("ItemKey") Then
+			Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
 		EndIf;
 		
 		Options.Date            = Options_Date;
@@ -5002,9 +5006,6 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 		Options.ArrayOfTaxInfo  = Parameters.ArrayOfTaxInfo;
 		Options.IsBasedOn       = Parameters.IsBasedOn;
 		Options.Ref             = Parameters.Object.Ref;
-		If Row.Property("ItemKey") Then
-			Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
-		EndIf;
 		
 		// update Tax rates
 		For Each TaxInfoItem In Parameters.ArrayOfTaxInfo Do
@@ -12939,7 +12940,7 @@ Procedure OnChainComplete(Parameters) Export
 	#ENDIF
 EndProcedure
 
-Procedure CommitChainChanges(Parameters) Export
+Procedure CommitChainChanges(Parameters, OnChangesNotifyView = True) Export
 		
 	_CommitChainChanges(Parameters.Cache, Parameters.Object, Parameters);
 	
@@ -12963,20 +12964,27 @@ Procedure CommitChainChanges(Parameters) Export
 		_CommitChainChanges(Parameters.CacheForm, Parameters.Form, Parameters);
 	
 	#IF Client THEN
-		UniqueViewNotify = New Array();
-		For Each ViewNotify In Parameters.ViewNotify Do
-			If UniqueViewNotify.Find(ViewNotify) = Undefined Then
-				UniqueViewNotify.Add(ViewNotify);
-			EndIf;
-		EndDo;
-		For Each ViewNotify In UniqueViewNotify Do
-			ExecuteViewNotify(Parameters, ViewNotify);
-		EndDo;
+		If OnChangesNotifyView Then
+			OnChangesNotifyView(Parameters);
+		EndIf;
 	#ENDIF
 	EndIf;
 EndProcedure
 
 #IF Client Then
+	
+Procedure OnChangesNotifyView(Parameters) Export	
+	UniqueViewNotify = New Array();
+	For Each ViewNotify In Parameters.ViewNotify Do
+		If UniqueViewNotify.Find(ViewNotify) = Undefined Then
+			UniqueViewNotify.Add(ViewNotify);
+		EndIf;
+	EndDo;
+	For Each ViewNotify In UniqueViewNotify Do
+		ExecuteViewNotify(Parameters, ViewNotify);
+	EndDo;	
+EndProcedure
+
 Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	If ViewNotify = "OnOpenFormNotify"                         Then ViewClient_V2.OnOpenFormNotify(Parameters);
 	ElsIf ViewNotify = "InventoryOnAddRowFormNotify"           Then ViewClient_V2.InventoryOnAddRowFormNotify(Parameters);

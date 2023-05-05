@@ -421,8 +421,9 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		FillSalesPersonInItemList();
 		
 		NotifyParameters = New Structure();
-		NotifyParameters.Insert("Form", ThisObject);
-		NotifyParameters.Insert("Object", Object);
+		NotifyParameters.Insert("Form"   , ThisObject);
+		NotifyParameters.Insert("Object" , Object);
+		NotifyParameters.Insert("Filter" , New Structure("DisableIfIsService", False));
 		SetDetailedInfo("");
 		DocumentsClient.PickupItemsEnd(Result.FoundedItems, NotifyParameters);
 		EnabledPaymentButton();

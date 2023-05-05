@@ -1528,6 +1528,14 @@ Procedure PickupItemsEnd(ScanData, AddInfo) Export
 	TmpParameters.ViewNotify = ViewNotify;
 	ControllerClientServer_V2.OnChangesNotifyView(TmpParameters);	
 	
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "SerialLotNumbers") Then
+		SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
+	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "SourceOfOrigins") Then
+		SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
+	EndIf;
+	
 	// set current last added row
 	If Result.ChoiceForms.PresentationStartChoice_Counter <> 1 And Result.ChoiceForms.StartChoice_Counter <> 1 Then
 		If Result.NewRows.Count() Then

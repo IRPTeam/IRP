@@ -190,7 +190,7 @@ Procedure PaymentsOnActivateRow(Item)
 	
 	Items.Payment_PayByPaymentCard.Enabled = Not CurrentData.PaymentDone;
 	Items.Payment_ReturnPaymentByPaymentCard.Enabled = Not CurrentData.PaymentDone;
-	Items.Payment_CancelPaymentByPaymentCard.Enabled = CurrentData.PaymentDone;
+	//Items.Payment_CancelPaymentByPaymentCard.Enabled = CurrentData.PaymentDone;
 	
 EndProcedure
 
@@ -722,7 +722,8 @@ Procedure Payment_PayByPaymentCardManual(Command)
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
-	Payment_PayByPaymentCard(PaymentRow);
+	Payment_PayByPaymentCard(PaymentRow);      
+	PaymentsOnActivateRow(Undefined);
 EndProcedure
 
 
@@ -750,20 +751,26 @@ Procedure Payment_ReturnPaymentByPaymentCardManual(Command)
 		Return;
 	EndIf;
 	Payment_ReturnPaymentByPaymentCard(PaymentRow);
+	PaymentsOnActivateRow(Undefined);
 EndProcedure
 
 
 &AtClient
 Async Function Payment_CancelPaymentByPaymentCard(PaymentRow)
 	
-	PaymentInfo = CommonFunctionsServer.DeserializeJSON(PaymentRow.PaymentInfo); // Structure
-	
 	PaymentSettings = EquipmentAcquiringClient.CancelPaymentByPaymentCardSettings();
-	PaymentSettings.In.Amount = PaymentInfo.In.Amount;
-	If isReturn Then
-		PaymentSettings.In.RRNCode = PaymentInfo.InOut.RRNCode; // String
-	Else
-		PaymentSettings.In.RRNCode = PaymentInfo.Out.RRNCode; // String
+    If PaymentRow.PaymentDone Then
+		PaymentInfo = CommonFunctionsServer.DeserializeJSON(PaymentRow.PaymentInfo); // Structure
+		
+		PaymentSettings.In.Amount = PaymentInfo.In.Amount;
+		If isReturn Then
+			PaymentSettings.In.RRNCode = PaymentInfo.InOut.RRNCode; // String
+		Else
+			PaymentSettings.In.RRNCode = PaymentInfo.Out.RRNCode; // String
+		EndIf;         
+	Else                        
+		PaymentSettings.In.Amount = PaymentRow.Amount;
+	   	PaymentSettings.In.RRNCode = PaymentRow.RRNCode; // String
 	EndIf;
 	Result = Await EquipmentAcquiringClient.CancelPaymentByPaymentCard(PaymentRow.Hardware, PaymentSettings);
 	If Result Then
@@ -778,7 +785,8 @@ Procedure Payment_CancelPaymentByPaymentCardManual(Command)
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
-	Payment_CancelPaymentByPaymentCard(PaymentRow);
+	Payment_CancelPaymentByPaymentCard(PaymentRow);     
+	PaymentsOnActivateRow(Undefined);
 EndProcedure
 
 

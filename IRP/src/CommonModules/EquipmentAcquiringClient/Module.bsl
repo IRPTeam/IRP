@@ -47,17 +47,30 @@ Async Function PayByPaymentCard(Hardware, Settings) Export
 	Try
 		Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 		ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
-		//@skip-check dynamic-access-method-not-found
-		Result = ConnectParameters.DriverObject.PayByPaymentCard(
-			ConnectParameters.ID,
-			Settings.In.MerchantNumber,
-			Settings.In.Amount,
-			Settings.InOut.CardNumber,
-			Settings.InOut.ReceiptNumber,
-			Settings.Out.RRNCode,
-			Settings.Out.AuthorizationCode,
-			Settings.Out.Slip
-		); // Boolean
+		If Connections.ConnectParameters.OldRevision Then
+			// @skip-check dynamic-access-method-not-found
+			Result = ConnectParameters.DriverObject.PayByPaymentCard(
+				ConnectParameters.ID,
+				Settings.InOut.CardNumber,
+				Settings.In.Amount,
+				Settings.InOut.ReceiptNumber,
+				Settings.Out.RRNCode,
+				Settings.Out.AuthorizationCode,
+				Settings.Out.Slip
+			); // Boolean
+		Else
+			// @skip-check dynamic-access-method-not-found
+			Result = ConnectParameters.DriverObject.PayByPaymentCard(
+				ConnectParameters.ID,
+				Settings.In.MerchantNumber,
+				Settings.In.Amount,
+				Settings.InOut.CardNumber,
+				Settings.InOut.ReceiptNumber,
+				Settings.Out.RRNCode,
+				Settings.Out.AuthorizationCode,
+				Settings.Out.Slip
+			); // Boolean
+		EndIf;
 		
 		Connections = Await HardwareClient.DisconnectHardware(Hardware);
 		
@@ -84,17 +97,30 @@ Async Function ReturnPaymentByPaymentCard(Hardware, Settings) Export
 	Try
 		Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 		ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
-		//@skip-check dynamic-access-method-not-found
-		Result = ConnectParameters.DriverObject.ReturnPaymentByPaymentCard(
-			ConnectParameters.ID,
-			Settings.In.MerchantNumber,
-			Settings.In.Amount,
-			Settings.InOut.CardNumber,
-			Settings.InOut.ReceiptNumber,
-			Settings.InOut.RRNCode,
-			Settings.In.AuthorizationCode,
-			Settings.Out.Slip
-		); // Boolean
+		If Connections.ConnectParameters.OldRevision Then
+			//@skip-check dynamic-access-method-not-found
+			Result = ConnectParameters.DriverObject.ReturnPaymentByPaymentCard(
+				ConnectParameters.ID,
+				Settings.InOut.CardNumber,
+				Settings.In.Amount,
+				Settings.InOut.ReceiptNumber,
+				Settings.InOut.RRNCode,
+				Settings.In.AuthorizationCode,
+				Settings.Out.Slip
+			); // Boolean
+		Else
+			//@skip-check dynamic-access-method-not-found
+			Result = ConnectParameters.DriverObject.ReturnPaymentByPaymentCard(
+				ConnectParameters.ID,
+				Settings.In.MerchantNumber,
+				Settings.In.Amount,
+				Settings.InOut.CardNumber,
+				Settings.InOut.ReceiptNumber,
+				Settings.InOut.RRNCode,
+				Settings.In.AuthorizationCode,
+				Settings.Out.Slip
+			); // Boolean
+		EndIf;
 		
 		Connections = Await HardwareClient.DisconnectHardware(Hardware);
 	Except
@@ -117,18 +143,30 @@ EndFunction
 Async Function CancelPaymentByPaymentCard(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
-	//@skip-check dynamic-access-method-not-found
-	Result = ConnectParameters.DriverObject.CancelPaymentByPaymentCard(
-		ConnectParameters.ID,
-		Settings.In.MerchantNumber,
-		Settings.In.Amount,
-		Settings.InOut.CardNumber,
-		Settings.InOut.ReceiptNumber,
-		Settings.In.RRNCode,
-		Settings.In.AuthorizationCode,
-		Settings.Out.Slip
-	); // Boolean
-	
+	If Connections.ConnectParameters.OldRevision Then
+		//@skip-check dynamic-access-method-not-found
+		Result = ConnectParameters.DriverObject.CancelPaymentByPaymentCard(
+			ConnectParameters.ID,
+			Settings.InOut.CardNumber,
+			Settings.In.Amount,
+			Settings.InOut.ReceiptNumber,
+			Settings.In.RRNCode,
+			Settings.In.AuthorizationCode,
+			Settings.Out.Slip
+		); // Boolean
+	Else
+		//@skip-check dynamic-access-method-not-found
+		Result = ConnectParameters.DriverObject.CancelPaymentByPaymentCard(
+			ConnectParameters.ID,
+			Settings.In.MerchantNumber,
+			Settings.In.Amount,
+			Settings.InOut.CardNumber,
+			Settings.InOut.ReceiptNumber,
+			Settings.In.RRNCode,
+			Settings.In.AuthorizationCode,
+			Settings.Out.Slip
+		); // Boolean
+	EndIf;
 	Connections = Await HardwareClient.DisconnectHardware(Hardware);
 	Return Result;
 EndFunction

@@ -39,7 +39,8 @@ EndFunction
 // * EquipmentType - EnumRef.EquipmentTypes -
 // * AddInID - String -
 // * Driver - CatalogRef.EquipmentDrivers -
-// * ConnectParameters - Structure -
+// * ConnectParameters - Structure:
+// ** EquipmentType - String -
 // * OldRevision - Boolean - Revision less then 3000
 Function GetConnectionSettings(HardwareRef) Export
 	Query = New Query();
@@ -62,13 +63,13 @@ Function GetConnectionSettings(HardwareRef) Export
 	If SelectionDetailRecords.Next() Then
 		Settings.Insert("Hardware", SelectionDetailRecords.Ref);
 		Settings.Insert("EquipmentType", SelectionDetailRecords.EquipmentType);
-		Settings.Insert("DriverEquipmentType", GetDriverEquipmentType(SelectionDetailRecords.EquipmentType));
 		Settings.Insert("AddInID", SelectionDetailRecords.AddInID);
 		Settings.Insert("Driver", SelectionDetailRecords.Driver);
 		Settings.Insert("OldRevision", SelectionDetailRecords.OldRevision);
 		Settings.Insert("ID", "");
 
 		ConnectParameters = New Structure();
+		ConnectParameters.Insert("EquipmentType", GetDriverEquipmentType(SelectionDetailRecords.EquipmentType));
 		For Each Row In SelectionDetailRecords.Ref.ConnectParameters Do
 			ConnectParameters.Insert(Row.Name, Row.Value);
 		EndDo;
@@ -156,6 +157,8 @@ Function GetDriverEquipmentType(EquipmentType)
 		ReturnValue = "СканерШтрихкода";
 	ElsIf EquipmentType = Enums.EquipmentTypes.FiscalPrinter Then
 		ReturnValue = "ККТ";
+	ElsIf EquipmentType = Enums.EquipmentTypes.Acquiring Then
+		ReturnValue = "ЭквайринговыйТерминал";
 	EndIf;
 	Return ReturnValue;
 EndFunction

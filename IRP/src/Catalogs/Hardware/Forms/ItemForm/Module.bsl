@@ -55,8 +55,12 @@ Procedure FillDriverParametersAtServer(DriverParametersXML, Parameters)
 				Description  = XMLReader.AttributeValue("Description");
 				FieldFormat = XMLReader.AttributeValue("FieldFormat");
 				
-				If TypeValue = "NUMBER" Then 
-					DefaultValue = Number(DefaultValue);
+				If TypeValue = "NUMBER" Then
+					If DefaultValue = Undefined Then
+						DefaultValue = Undefined;	
+					Else
+						DefaultValue = Number(DefaultValue);
+					EndIf;
 				ElsIf TypeValue = "BOOLEAN" Then 
 					DefaultValue = Boolean(DefaultValue);
 				EndIf;
@@ -147,12 +151,8 @@ Async Procedure WriteSettings(Command)
 		Return;
 	EndIf;
 	
-	Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref);
+	Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref, False);
 	Settings.ServiceCallback = New NotifyDescription("EndWriteSettings", ThisObject, Settings);
-	
-	For Each Row In Object.ConnectParameters Do
-		Settings.SetParameters.Insert(Row.Name, Row.Value);
-	EndDo;
 	HardwareClient.SetParameter_End(, , Settings);
 EndProcedure
 
@@ -178,9 +178,6 @@ Async Procedure Test(Command)
 	Settings.Callback = New NotifyDescription("EndTestDevice", ThisObject, Settings);
 	Settings.AdditionalCommand = "CheckHealth";
 	
-	For Each Row In Object.ConnectParameters Do
-		Settings.SetParameters.Insert(Row.Name, Row.Value);
-	EndDo;
 	HardwareClient.TestDevice(Settings);
 EndProcedure
 
@@ -226,9 +223,12 @@ Procedure EndTestDevice(Result, OutParameters, AddInfo) Export
 	If TypeOf(OutParameters) = Type("Array") Then
 		OutParameter = StrConcat(OutParameters, Chars.LF); 
 		If Not Result Then
-			Status(OutParameter, , , PictureLib.Stop);
+			Status("Error", , OutParameter, PictureLib.Stop);
+			If Not IsBlankString(OutParameter) Then
+				CommonFunctionsClientServer.ShowUsersMessage(OutParameter);
+			EndIf;
 		Else
-			Status(OutParameter, , , PictureLib.AppearanceFlagGreen);
+			Status("OK", , OutParameter, PictureLib.AppearanceFlagGreen);
 		EndIf;
 	EndIf;
 EndProcedure

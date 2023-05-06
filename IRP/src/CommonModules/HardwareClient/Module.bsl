@@ -102,7 +102,6 @@ Async Function ConnectHardware(Hardware) Export
 			ResultData.ConnectParameters = Device.ConnectParameters;
 		Else
 			//@skip-check module-unused-local-variable
-			ResultSetParameter = Device_SetParameter(Settings.ConnectedDriver.DriverObject, "EquipmentType", Settings.ConnectedDriver.DriverEquipmentType);
 			For Each Param In Device.ConnectParameters Do
 				Device_SetParameter(Settings.ConnectedDriver.DriverObject, Param.Key, Param.Value);
 			EndDo;
@@ -180,7 +179,6 @@ EndFunction
 //  Structure - Get driver object:
 // * ID - String -
 // * DriverObject - Arbitrary -
-// * DriverEquipmentType - String -
 // * DriverRef - CatalogRef.EquipmentDrivers, Arbitrary -
 // * Hardware - CatalogRef.Hardware, Arbitrary -
 // * AddInID - String, Arbitrary -
@@ -209,7 +207,6 @@ Async Function GetDriverObject(DriverInfo) Export
 	DeviceConnection = New Structure;
 	DeviceConnection.Insert("ID", "");
 	DeviceConnection.Insert("DriverObject", DriverObject);
-	DeviceConnection.Insert("DriverEquipmentType", DriverInfo.DriverEquipmentType);
 	DeviceConnection.Insert("DriverRef", DriverInfo.Driver);
 	DeviceConnection.Insert("Hardware", DriverInfo.Hardware);
 	DeviceConnection.Insert("AddInID", DriverInfo.AddInID);
@@ -275,7 +272,7 @@ Async Function FillDriverParametersSettings(Hardware, AutoConnect = True) Export
 	Str.Insert("ConnectedDriver", ConnectedDriver);
 	Str.Insert("ParametersDriver", ParametersDriverDescription());
 	Str.Insert("AdditionalCommand", "");
-	Str.Insert("SetParameters", New Structure);
+	Str.Insert("SetParameters", Device.ConnectParameters);
 	Str.Insert("OutParameters", New Array);
 	Str.Insert("ServiceCallback", Undefined);
 	//@skip-check constructor-function-return-section

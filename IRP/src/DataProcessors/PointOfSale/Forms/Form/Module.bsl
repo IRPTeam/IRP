@@ -161,7 +161,18 @@ Async Procedure CloseSessionFinish(Result, AddInfo) Export
 	
 	If Result.AutoCreateMoneyTransfer Then
 		CreateCashOut(Commands.CreateCashOut, True);
-	EndIf;
+	EndIf;             
+	
+	AcquiringList = HardwareServer.GetWorkstationHardwareByEquipmentType(Object.Workstation, PredefinedValue("Enum.EquipmentTypes.Acquiring"));
+	For Each Acquiring In AcquiringList Do
+		SettlementSettings = EquipmentAcquiringClient.SettlementSettings();
+		ResultSettlement = Await EquipmentAcquiringClient.Settlement(Acquiring, SettlementSettings);
+		Str = New Structure("Payments", New Array);
+		Str.Payments.Add(New Structure("PaymentInfo", SettlementSettings));
+		If ResultSettlement Then  
+			Await EquipmentFiscalPrinterClient.PrintTextDocument(Object.ConsolidatedRetailSales, Str);
+		EndIf;
+	EndDo;               
 	
 	EquipmentCloseShiftResult = Await EquipmentFiscalPrinterClient.CloseShift(Object.ConsolidatedRetailSales);
 	If EquipmentCloseShiftResult.Success Then
@@ -493,6 +504,7 @@ Procedure qPayment(Command)
 	ObjectParameters.Insert("isReturn", ThisObject.isReturn);
 	ObjectParameters.Insert("RetailBasis", ThisObject.RetailBasis);
 	ObjectParameters.Insert("Discount", Object.ItemList.Total("OffersAmount"));
+	ObjectParameters.Insert("ConsolidatedRetailSales", ConsolidatedRetailSales);
 	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
 		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
@@ -548,7 +560,7 @@ Procedure Advance(Command)
 	ObjectParameters.Insert("isReturn", ThisObject.isReturn);
 	ObjectParameters.Insert("RetailCustomer", Object.RetailCustomer);
 	ObjectParameters.Insert("Company", Object.Company);
-	
+	ObjectParameters.Insert("ConsolidatedRetailSales", ConsolidatedRetailSales);
 	OpenForm("DataProcessor.PointOfSale.Form.Payment", ObjectParameters, ThisObject, UUID, , ,
 		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
@@ -621,13 +633,6 @@ Procedure ItemListDrag(Item, DragParameters, StandardProcessing, Row, Field)
 			AddItemKeyToItemList(Value);
 		EndIf;
 	EndIf;
-EndProcedure
-
-&AtClient
-Procedure AcquiringSlipInfo(Command)
-	OpenParameters = New Structure();
-	OpenParameters.Insert("Branch", Object.Branch);
-	OpenForm("DataProcessor.PointOfSale.Form.AcquiringSlipInfo", OpenParameters, ThisObject, , , , , FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 #Region SpecialOffers
@@ -828,8 +833,7 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	If Not ResultPrint Then
 		Return;
 	EndIf;
-	ResultPrint = Await PrintTextDocument(DocRef);
-	ResultPrint = Await PrintTextDocument(DocRef);
+
 	DetailedInformation = R().S_030 + ": " + Format(CashbackAmount, "NFD=2; NZ=0;");
 	SetDetailedInfo(DetailedInformation);
 	

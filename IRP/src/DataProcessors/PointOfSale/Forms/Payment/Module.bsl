@@ -25,7 +25,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Object.Workstation = Parameters.Workstation;
 	Object.Discount = Parameters.Discount;
 	ThisObject.IsAdvance = Parameters.IsAdvance;
-	
+	ConsolidatedRetailSales = Parameters.ConsolidatedRetailSales;
 	isReturn = Parameters.isReturn;
 	RetailBasis = Parameters.RetailBasis;
 	
@@ -190,7 +190,7 @@ Procedure PaymentsOnActivateRow(Item)
 	
 	Items.Payment_PayByPaymentCard.Enabled = Not CurrentData.PaymentDone;
 	Items.Payment_ReturnPaymentByPaymentCard.Enabled = Not CurrentData.PaymentDone;
-	Items.Payment_CancelPaymentByPaymentCard.Enabled = CurrentData.PaymentDone;
+	//Items.Payment_CancelPaymentByPaymentCard.Enabled = CurrentData.PaymentDone;
 	
 EndProcedure
 
@@ -711,6 +711,10 @@ Async Function Payment_PayByPaymentCard(PaymentRow)
 	If Result Then
 		PaymentRow.RRNCode = PaymentSettings.Out.RRNCode;
 		PaymentRow.PaymentDone = True;
+		
+		Str = New Structure("Payments", New Array);
+		Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));
+		Await EquipmentFiscalPrinterClient.PrintTextDocument(ConsolidatedRetailSales, Str);
 	EndIf;
 	
 	Return Result;
@@ -722,7 +726,8 @@ Procedure Payment_PayByPaymentCardManual(Command)
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
-	Payment_PayByPaymentCard(PaymentRow);
+	Payment_PayByPaymentCard(PaymentRow);      
+	PaymentsOnActivateRow(Undefined);
 EndProcedure
 
 
@@ -739,6 +744,10 @@ Async Function Payment_ReturnPaymentByPaymentCard(PaymentRow)
 	If Result Then
 		PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
 		PaymentRow.PaymentDone = True;
+		
+		Str = New Structure("Payments", New Array);
+		Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));
+		Await EquipmentFiscalPrinterClient.PrintTextDocument(ConsolidatedRetailSales, Str);
 	EndIf;
 	Return Result;
 EndFunction
@@ -750,25 +759,36 @@ Procedure Payment_ReturnPaymentByPaymentCardManual(Command)
 		Return;
 	EndIf;
 	Payment_ReturnPaymentByPaymentCard(PaymentRow);
+	PaymentsOnActivateRow(Undefined);
 EndProcedure
 
 
 &AtClient
 Async Function Payment_CancelPaymentByPaymentCard(PaymentRow)
 	
-	PaymentInfo = CommonFunctionsServer.DeserializeJSON(PaymentRow.PaymentInfo); // Structure
-	
 	PaymentSettings = EquipmentAcquiringClient.CancelPaymentByPaymentCardSettings();
-	PaymentSettings.In.Amount = PaymentInfo.In.Amount;
-	If isReturn Then
-		PaymentSettings.In.RRNCode = PaymentInfo.InOut.RRNCode; // String
-	Else
-		PaymentSettings.In.RRNCode = PaymentInfo.Out.RRNCode; // String
+    If PaymentRow.PaymentDone Then
+		PaymentInfo = CommonFunctionsServer.DeserializeJSON(PaymentRow.PaymentInfo); // Structure
+		
+		PaymentSettings.In.Amount = PaymentInfo.In.Amount;
+		If isReturn Then
+			PaymentSettings.In.RRNCode = PaymentInfo.InOut.RRNCode; // String
+		Else
+			PaymentSettings.In.RRNCode = PaymentInfo.Out.RRNCode; // String
+		EndIf;         
+	Else                        
+		PaymentSettings.In.Amount = PaymentRow.Amount;
+	   	PaymentSettings.In.RRNCode = PaymentRow.RRNCode; // String
 	EndIf;
 	Result = Await EquipmentAcquiringClient.CancelPaymentByPaymentCard(PaymentRow.Hardware, PaymentSettings);
 	If Result Then
 		PaymentRow.PaymentDone = False;
 	EndIf;
+	
+	Str = New Structure("Payments", New Array);
+	Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));
+	Await EquipmentFiscalPrinterClient.PrintTextDocument(ConsolidatedRetailSales, Str);
+		
 	Return Result;
 EndFunction
 
@@ -778,7 +798,8 @@ Procedure Payment_CancelPaymentByPaymentCardManual(Command)
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
-	Payment_CancelPaymentByPaymentCard(PaymentRow);
+	Payment_CancelPaymentByPaymentCard(PaymentRow);     
+	PaymentsOnActivateRow(Undefined);
 EndProcedure
 
 
@@ -798,6 +819,24 @@ Function GetRRNCode(PaymentType)
 	EndDo;
 	Return "";
 EndFunction
+
+&AtClient
+Procedure SetPaymentCheck(Command)
+	PaymentRow = Items.Payments.CurrentData;
+	If PaymentRow = Undefined Then
+		Return;
+	EndIf;
+	PaymentRow.PaymentDone = True;
+EndProcedure
+
+&AtClient
+Procedure SetPaymentUncheck(Command)
+	PaymentRow = Items.Payments.CurrentData;
+	If PaymentRow = Undefined Then
+		Return;
+	EndIf;
+	PaymentRow.PaymentDone = False;
+EndProcedure
 
 #EndRegion
 

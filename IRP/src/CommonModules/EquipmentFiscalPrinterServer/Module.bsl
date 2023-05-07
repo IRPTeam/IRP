@@ -112,6 +112,10 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 	Str.Insert("Barter", 0);
 	
 	For Each Payment In SourceData.Payments Do
+		If Payment.Amount < 0 Then
+			Continue;
+		EndIf;
+		
 		If SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullPrepayment Then
 			Str.Insert("PrePayment", Str.PrePayment + Payment.Amount);
 		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.PartialPrepayment Then
@@ -400,20 +404,31 @@ Function PreparePrintTextData(SourceData) Export
 	TextStrings = New Array;
 	
 	For Each Payment In SourceData.Payments Do
-		If IsBlankString(Payment.PaymentInfo) Then
-			Continue;
-		EndIf;
 		TextString = "";
-		PaymentInfo = CommonFunctionsServer.DeserializeJSON(Payment.PaymentInfo);
+		If TypeOf(Payment.PaymentInfo) = Type("String") Then
+			If IsBlankString(Payment.PaymentInfo) Then
+				Continue;
+			EndIf;
+			PaymentInfo = CommonFunctionsServer.DeserializeJSON(Payment.PaymentInfo);
+		Else 
+			PaymentInfo = Payment.PaymentInfo;
+		EndIf;
 		If PaymentInfo.Property("Out")
 			And	PaymentInfo.Out.Property("Slip") Then			
 			TextString = PaymentInfo.Out.Slip;
 		Else
 			Continue;
 		EndIf;
-		TextStringData = New Structure();
-		TextStringData.Insert("Text", TextString);
-		TextStrings.Add(TextStringData);
+		
+		If IsBlankString(TextString) Then
+			Continue;
+		EndIf;
+		
+		For Each Text In StrSplit(TextString, Chars.LF, True) Do
+			TextStringData = New Structure();
+			TextStringData.Insert("Text", Text);
+			TextStrings.Add(TextStringData);
+		EndDo;
 	EndDo;
 	
 	Str.Insert("TextStrings", TextStrings);

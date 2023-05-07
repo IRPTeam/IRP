@@ -807,6 +807,24 @@ Function GetRRNCode(PaymentType)
 	Return "";
 EndFunction
 
+&AtClient
+Procedure SetPaymentCheck(Command)
+	PaymentRow = Items.Payments.CurrentData;
+	If PaymentRow = Undefined Then
+		Return;
+	EndIf;
+	PaymentRow.PaymentDone = True;
+EndProcedure
+
+&AtClient
+Procedure SetPaymentUncheck(Command)
+	PaymentRow = Items.Payments.CurrentData;
+	If PaymentRow = Undefined Then
+		Return;
+	EndIf;
+	PaymentRow.PaymentDone = False;
+EndProcedure
+
 #EndRegion
 
 AmountFractionDigitsCount = 0;

@@ -7,49 +7,6 @@
   <items xsi:type="form:FormGroup">
     <name>GroupTitle</name>
     <id>33</id>
-    <items xsi:type="form:FormGroup">
-      <name>GroupAmount</name>
-      <id>43</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <title>
-        <key>en</key>
-        <value>Amount:</value>
-      </title>
-      <toolTip>
-        <key>en</key>
-        <value>Group amount</value>
-      </toolTip>
-      <horizontalStretch>true</horizontalStretch>
-      <extendedTooltip>
-        <name>GroupAmountExtendedTooltip</name>
-        <id>44</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <type>UsualGroup</type>
-      <extInfo xsi:type="form:UsualGroupExtInfo">
-        <group>HorizontalIfPossible</group>
-        <horizontalAlign>Left</horizontalAlign>
-        <representation>NormalSeparation</representation>
-        <showLeftMargin>true</showLeftMargin>
-        <united>true</united>
-        <throughAlign>Auto</throughAlign>
-        <currentRowUse>Auto</currentRowUse>
-      </extInfo>
-    </items>
     <items xsi:type="form:Button">
       <name>FormCloseButton</name>
       <id>31</id>
@@ -799,6 +756,24 @@
             <segments>Payments</segments>
           </dataPath>
           <titleLocation>None</titleLocation>
+          <excludedCommands>Copy</excludedCommands>
+          <excludedCommands>CopyToClipboard</excludedCommands>
+          <excludedCommands>EndEdit</excludedCommands>
+          <excludedCommands>Add</excludedCommands>
+          <excludedCommands>Change</excludedCommands>
+          <excludedCommands>ShowRowRearrangement</excludedCommands>
+          <excludedCommands>MoveDown</excludedCommands>
+          <excludedCommands>SelectAll</excludedCommands>
+          <excludedCommands>SearchEverywhere</excludedCommands>
+          <excludedCommands>CancelSearch</excludedCommands>
+          <excludedCommands>SortListDesc</excludedCommands>
+          <excludedCommands>OutputList</excludedCommands>
+          <excludedCommands>SortListAsc</excludedCommands>
+          <excludedCommands>ShowMultipleSelection</excludedCommands>
+          <excludedCommands>FindByCurrentValue</excludedCommands>
+          <excludedCommands>Find</excludedCommands>
+          <excludedCommands>SearchHistory</excludedCommands>
+          <excludedCommands>MoveUp</excludedCommands>
           <items xsi:type="form:FormField">
             <name>PaymentsPaymentDone</name>
             <id>244</id>
@@ -1296,6 +1271,98 @@
           <contextMenu>
             <name>PaymentsContextMenu</name>
             <id>95</id>
+            <items xsi:type="form:FormGroup">
+              <name>PaymentsContextMenuGroupAdmin</name>
+              <id>303</id>
+              <items xsi:type="form:Button">
+                <name>PaymentsContextMenuSetPaymentCheck</name>
+                <id>299</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <extendedTooltip>
+                  <name>PaymentsContextMenuSetPaymentCheckExtendedTooltip</name>
+                  <id>300</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <commandName>Form.Command.SetPaymentCheck</commandName>
+                <representation>Auto</representation>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <placementArea>UserCmds</placementArea>
+                <representationInContextMenu>Auto</representationInContextMenu>
+              </items>
+              <items xsi:type="form:Button">
+                <name>PaymentsContextMenuSetPaymentUncheck</name>
+                <id>301</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <extendedTooltip>
+                  <name>PaymentsContextMenuSetPaymentUncheckExtendedTooltip</name>
+                  <id>302</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <commandName>Form.Command.SetPaymentUncheck</commandName>
+                <representation>Auto</representation>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <placementArea>UserCmds</placementArea>
+                <representationInContextMenu>Auto</representationInContextMenu>
+              </items>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <title>
+                <key>en</key>
+                <value>Admin functions</value>
+              </title>
+              <extendedTooltip>
+                <name>PaymentsContextMenuGroupAdminExtendedTooltip</name>
+                <id>304</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <type>Popup</type>
+              <extInfo xsi:type="form:PopupGroupExtInfo">
+                <representation>Auto</representation>
+              </extInfo>
+            </items>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2710,7 +2777,7 @@
       <currentRowUse>Auto</currentRowUse>
     </extInfo>
   </items>
-  <commandBarLocation>None</commandBarLocation>
+  <commandBarLocation>Top</commandBarLocation>
   <autoCommandBar>
     <name>FormCommandBar</name>
     <id>-1</id>
@@ -2720,6 +2787,7 @@
       <common>true</common>
     </userVisible>
     <horizontalAlign>Right</horizontalAlign>
+    <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
     <event>OnCreateAtServer</event>
@@ -3933,6 +4001,40 @@ FROM
       </handler>
     </action>
     <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>SetPaymentCheck</name>
+    <title>
+      <key>en</key>
+      <value>Set payment check</value>
+    </title>
+    <id>31</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>SetPaymentCheck</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>SetPaymentUncheck</name>
+    <title>
+      <key>en</key>
+      <value>Set payment uncheck</value>
+    </title>
+    <id>32</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>SetPaymentUncheck</name>
+      </handler>
+    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <parameters>

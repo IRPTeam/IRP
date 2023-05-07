@@ -832,8 +832,7 @@ Async Procedure PaymentFormClose(Result, AdditionalData) Export
 	If Not ResultPrint Then
 		Return;
 	EndIf;
-	ResultPrint = Await PrintTextDocument(DocRef);
-	ResultPrint = Await PrintTextDocument(DocRef);
+
 	DetailedInformation = R().S_030 + ": " + Format(CashbackAmount, "NFD=2; NZ=0;");
 	SetDetailedInfo(DetailedInformation);
 	

@@ -26,17 +26,17 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	
 	LineLength = 0;
-	Settings.ConnectedDriver.DriverObject.GetLineLength(Settings.ConnectedDriver.ID
-																	, LineLength);
+	DriverObject = Settings.ConnectedDriver.DriverObject;
+	DriverObject.GetLineLength(Settings.ConnectedDriver.ID, LineLength);
 	
 	DataKKT = "";
-	DataKKTResult = Settings.ConnectedDriver.DriverObject.GetDataKKT(Settings.ConnectedDriver.ID
+	DataKKTResult = DriverObject.GetDataKKT(Settings.ConnectedDriver.ID
 																		, DataKKT);
 	If Not DataKKTResult Then
 		Raise "Can not get data KKT";
 	EndIf;
 
-	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
+	ResultInfo = DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
 																			, Parameters.ParametersXML
 																			, Parameters.ResultXML);
 	If ResultInfo Then
@@ -54,12 +54,12 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 			Return Result;
 		EndIf;
 	Else
-		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
+		DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
 	
-	ResultInfo = Settings.ConnectedDriver.DriverObject.OpenShift(Settings.ConnectedDriver.ID
+	ResultInfo = DriverObject.OpenShift(Settings.ConnectedDriver.ID
 																	, Parameters.ParametersXML
 																	, Parameters.ResultXML);
 	If ResultInfo Then
@@ -68,7 +68,7 @@ Async Function OpenShift(ConsolidatedRetailSales) Export
 		FillPropertyValues(Result, ShiftData);
 		Result.Success = True;
 	Else
-		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
+		DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -91,7 +91,8 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	
-	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
+	DriverObject = Settings.ConnectedDriver.DriverObject;
+	ResultInfo = DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
 																			, Parameters.ParametersXML
 																			, Parameters.ResultXML);
 	If ResultInfo Then
@@ -107,19 +108,19 @@ Async Function CloseShift(ConsolidatedRetailSales) Export
 			
 		EndIf;
 	Else
-		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
+		DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
 	
-	ResultInfo = Settings.ConnectedDriver.DriverObject.CloseShift(Settings.ConnectedDriver.ID, Parameters.ParametersXML, Parameters.ResultXML);
+	ResultInfo = DriverObject.CloseShift(Settings.ConnectedDriver.ID, Parameters.ParametersXML, Parameters.ResultXML);
 	If ResultInfo Then
 		ShiftData = ShiftResultStructure();
 		FillDataFromDeviceResponse(ShiftData, Parameters.ResultXML);
 		FillPropertyValues(Result, ShiftData);
 		Result.Success = True;
 	Else
-		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
+		DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -142,7 +143,8 @@ Async Function PrintXReport(ConsolidatedRetailSales) Export
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	
-	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
+	DriverObject = Settings.ConnectedDriver.DriverObject;
+	ResultInfo = DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
 																			, Parameters.ParametersXML
 																			, Parameters.ResultXML);
 	If ResultInfo Then
@@ -162,16 +164,16 @@ Async Function PrintXReport(ConsolidatedRetailSales) Export
 			Return Result;
 		EndIf;
 	Else
-		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
+		DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
 	
-	ResultInfo = Settings.ConnectedDriver.DriverObject.PrintXReport(Settings.ConnectedDriver.ID, Parameters.ParametersXML);
+	ResultInfo = DriverObject.PrintXReport(Settings.ConnectedDriver.ID, Parameters.ParametersXML);
 	If ResultInfo Then
 		Result.Success = True;
 	Else
-		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
+		DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
@@ -201,7 +203,8 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	XMLOperationSettings = ShiftGetXMLOperationSettings();
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(XMLOperationSettings);
-	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
+	DriverObject = Settings.ConnectedDriver.DriverObject;
+	ResultInfo = DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
 																			, Parameters.ParametersXML
 																			, Parameters.ResultXML);
 	If ResultInfo Then
@@ -221,7 +224,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 			Return Result;
 		EndIf;
 	Else
-		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
+		DriverObject.GetLastError(Result.ErrorDescription);
 		Result.Status = "FiscalReturnedError";
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
@@ -232,7 +235,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	
 	Parameters.ParametersXML = ReceiptGetXMLOperation(XMLOperationSettings);
 	
-	ResultInfo = Settings.ConnectedDriver.DriverObject.ProcessCheck(Settings.ConnectedDriver.ID
+	ResultInfo = DriverObject.ProcessCheck(Settings.ConnectedDriver.ID
 																	, False
 																	, Parameters.ParametersXML
 																	, Parameters.ResultXML);
@@ -250,7 +253,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 						, Result.FiscalResponse
 						, " " + Result.ShiftNumber + " " + Result.DateTime);
 	Else
-		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
+		DriverObject.GetLastError(Result.ErrorDescription);
 		Result.Status = "FiscalReturnedError";
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		
@@ -285,7 +288,8 @@ Async Function CashInCome(ConsolidatedRetailSales, PrintDocument, Summ) Export
 	ShiftGetXMLOperationSettings.CashierName = String(CRS.Author);
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
-	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
+	DriverObject = Settings.ConnectedDriver.DriverObject;
+	ResultInfo = DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
 																			, Parameters.ParametersXML
 																			, Parameters.ResultXML);
 	If ResultInfo Then
@@ -305,12 +309,12 @@ Async Function CashInCome(ConsolidatedRetailSales, PrintDocument, Summ) Export
 			Return Result;
 		EndIf;
 	Else
-		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
+		DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
 	
-	ResultInfo = Settings.ConnectedDriver.DriverObject.CashInOutcome(Settings.ConnectedDriver.ID
+	ResultInfo = DriverObject.CashInOutcome(Settings.ConnectedDriver.ID
 																		, Parameters.ParametersXML
 																		, Summ);
 	If ResultInfo Then
@@ -319,7 +323,7 @@ Async Function CashInCome(ConsolidatedRetailSales, PrintDocument, Summ) Export
 		EquipmentFiscalPrinterServer.SetFiscalStatus(PrintDocument
 						, Result.Status);
 	Else
-		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
+		DriverObject.GetLastError(Result.ErrorDescription);
 		Result.Status = "FiscalReturnedError";
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		
@@ -355,7 +359,8 @@ Async Function CashOutCome(ConsolidatedRetailSales, PrintDocument, Summ) Export
 	
 	Parameters.ParametersXML = ShiftGetXMLOperation(ShiftGetXMLOperationSettings);
 	
-	ResultInfo = Settings.ConnectedDriver.DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
+	DriverObject = Settings.ConnectedDriver.DriverObject;
+	ResultInfo = DriverObject.GetCurrentStatus(Settings.ConnectedDriver.ID
 																			, Parameters.ParametersXML
 																			, Parameters.ResultXML);
 	If ResultInfo Then
@@ -375,12 +380,12 @@ Async Function CashOutCome(ConsolidatedRetailSales, PrintDocument, Summ) Export
 			Return Result;
 		EndIf;
 	Else
-		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
+		DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;
 	
-	ResultInfo = Settings.ConnectedDriver.DriverObject.CashInOutcome(Settings.ConnectedDriver.ID
+	ResultInfo = DriverObject.CashInOutcome(Settings.ConnectedDriver.ID
 																		, Parameters.ParametersXML
 																		, -Summ);
 	If ResultInfo Then
@@ -389,7 +394,7 @@ Async Function CashOutCome(ConsolidatedRetailSales, PrintDocument, Summ) Export
 		EquipmentFiscalPrinterServer.SetFiscalStatus(PrintDocument
 						, Result.Status);
 	Else
-		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
+		DriverObject.GetLastError(Result.ErrorDescription);
 		Result.Status = "FiscalReturnedError";
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		
@@ -421,13 +426,14 @@ Async Function PrintTextDocument(ConsolidatedRetailSales, DataSource) Export
 	
 	Parameters.ParametersXML = PrintTextGetXMLOperation(XMLOperationSettings);
 	
-	ResultInfo = Settings.ConnectedDriver.DriverObject.PrintTextDocument(Settings.ConnectedDriver.ID
+	DriverObject = Settings.ConnectedDriver.DriverObject;
+	ResultInfo = DriverObject.PrintTextDocument(Settings.ConnectedDriver.ID
 																	, Parameters.ParametersXML);
 																	
 	If ResultInfo Then
 		Result.Success = True;		
 	Else
-		Settings.ConnectedDriver.DriverObject.GetLastError(Result.ErrorDescription);
+		DriverObject.GetLastError(Result.ErrorDescription);
 		CommonFunctionsClientServer.ShowUsersMessage(Result.ErrorDescription);
 		Return Result;
 	EndIf;

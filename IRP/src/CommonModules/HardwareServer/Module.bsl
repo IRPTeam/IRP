@@ -42,6 +42,7 @@ EndFunction
 // * ConnectParameters - Structure:
 // ** EquipmentType - String -
 // * OldRevision - Boolean - Revision less then 3000
+// * WriteLog - Boolean -
 Function GetConnectionSettings(HardwareRef) Export
 	Query = New Query();
 	Query.Text =
@@ -50,7 +51,8 @@ Function GetConnectionSettings(HardwareRef) Export
 	|	Hardware.EquipmentType,
 	|	Hardware.Driver,
 	|	Hardware.Driver.AddInID AS AddInID,
-	|	Hardware.Driver.RevisionNumber < 3000 AS OldRevision
+	|	Hardware.Driver.RevisionNumber < 3000 AS OldRevision,
+	|	Hardware.Log
 	|FROM
 	|	Catalog.Hardware AS Hardware
 	|WHERE
@@ -67,7 +69,8 @@ Function GetConnectionSettings(HardwareRef) Export
 		Settings.Insert("Driver", SelectionDetailRecords.Driver);
 		Settings.Insert("OldRevision", SelectionDetailRecords.OldRevision);
 		Settings.Insert("ID", "");
-
+		Settings.Insert("WriteLog", SelectionDetailRecords.Log);
+		
 		ConnectParameters = New Structure();
 		ConnectParameters.Insert("EquipmentType", GetDriverEquipmentType(SelectionDetailRecords.EquipmentType));
 		For Each Row In SelectionDetailRecords.Ref.ConnectParameters Do
@@ -147,7 +150,7 @@ Function GetConnectionParameters(Hardware) Export
 	Return Str;
 EndFunction
 
-Procedure WriteLog(Hardware, Method, isRequest, Data) Export
+Procedure WriteLog(Hardware, Val Method, Val isRequest, Val Data, Val Result = False) Export
 	Reg = InformationRegisters.HardwareLog.CreateRecordManager();
 	Reg.Date = CurrentUniversalDateInMilliseconds();
 	Reg.Hardware = Hardware;
@@ -156,6 +159,7 @@ Procedure WriteLog(Hardware, Method, isRequest, Data) Export
 	Reg.Method = Method;
 	Reg.Request = isRequest;
 	Reg.Data = CommonFunctionsServer.SerializeJSON(Data);
+	Reg.Result = Result;
 	Reg.Write(); 
 EndProcedure
 

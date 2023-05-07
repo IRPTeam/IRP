@@ -174,7 +174,7 @@ Async Procedure Test(Command)
 		Return;
 	EndIf;
 	
-	Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref);
+	Settings = Await HardwareClient.FillDriverParametersSettings(Object.Ref, False);
 	Settings.Callback = New NotifyDescription("EndTestDevice", ThisObject, Settings);
 	Settings.AdditionalCommand = "CheckHealth";
 	

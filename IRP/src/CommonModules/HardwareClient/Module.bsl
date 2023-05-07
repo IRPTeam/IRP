@@ -1,6 +1,5 @@
 // @strict-types
 
-
 #Region Internal
 
 // Begin get driver.
@@ -103,15 +102,16 @@ Async Function ConnectHardware(Hardware) Export
 		Else
 			//@skip-check module-unused-local-variable
 			For Each Param In Device.ConnectParameters Do
-				Device_SetParameter(Settings.ConnectedDriver.DriverObject, Param.Key, Param.Value);
+				//@skip-check invocation-parameter-type-intersect
+				Device_SetParameter(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, Param.Key, Param.Value);
 			EndDo;
 			
-			Result = Device_Open(Settings.ConnectedDriver.DriverObject, Settings.ConnectedDriver.ID); // Boolean
+			Result = Device_Open(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, Settings.ConnectedDriver.ID); // Boolean
 			
 			globalEquipment_SetHardwareID(Settings.Hardware, Settings.ConnectedDriver.ID);
 			
 			For Each ParamRow In HardwareServer.GetConnectionParameters(Hardware) Do
-				Device_SetParameter(Settings.ConnectedDriver.DriverObject, ParamRow.Key, ParamRow.Value)
+				Device_SetParameter(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, ParamRow.Key, ParamRow.Value)
 			EndDo;
 			If Settings.ConnectedDriver.DriverObject <> Undefined Then
 				// @skip-check property-return-type, invocation-parameter-type-intersect
@@ -151,7 +151,7 @@ Async Function DisconnectHardware(Hardware) Export
 	ConnectedDevice = globalEquipment_GetConnectionSettings(Device);
 	If ConnectedDevice.Connected Then
 
-		Result = Device_Close(ConnectedDevice.Settings.DriverObject, ConnectedDevice.Settings.ID); // Boolean
+		Result = Device_Close(ConnectedDevice.Settings, ConnectedDevice.Settings.DriverObject, ConnectedDevice.Settings.ID); // Boolean
 		ResultData.Result = Result;
 		If Result Then
 			// @skip-check property-return-type, invocation-parameter-type-intersect
@@ -183,6 +183,7 @@ EndFunction
 // * Hardware - CatalogRef.Hardware, Arbitrary -
 // * AddInID - String, Arbitrary -
 // * OldRevision - Boolean - Driver revision less then 3000
+// * WriteLog - Boolean - Write log
 Async Function GetDriverObject(DriverInfo) Export
 	ConnectionSettings = globalEquipment_GetConnectionSettings(DriverInfo);
 	If ConnectionSettings.Connected Then
@@ -211,6 +212,7 @@ Async Function GetDriverObject(DriverInfo) Export
 	DeviceConnection.Insert("Hardware", DriverInfo.Hardware);
 	DeviceConnection.Insert("AddInID", DriverInfo.AddInID);
 	DeviceConnection.Insert("OldRevision", DriverInfo.OldRevision);
+	DeviceConnection.Insert("WriteLog", DriverInfo.WriteLog);
 	globalEquipment_AddConnectionSettings(DriverInfo.Hardware, DeviceConnection);
 	Return DeviceConnection;
 
@@ -255,7 +257,7 @@ EndProcedure
 // * ParametersDriver - See ParametersDriverDescription
 // * AdditionalCommand - String -
 // * SetParameters - Structure -
-// * OutParameters - Array of Number -
+// * OutParameters - Array of String -
 // * ServiceCallback - NotifyDescription, Undefined -
 Async Function FillDriverParametersSettings(Hardware, AutoConnect = True) Export
 		
@@ -263,7 +265,7 @@ Async Function FillDriverParametersSettings(Hardware, AutoConnect = True) Export
 	ConnectedDriver = Await GetDriverObject(Device);
 	
 	If AutoConnect And IsBlankString(ConnectedDriver.ID) Then
-		Device_Open(ConnectedDriver.DriverObject, ConnectedDriver.ID);
+		Device_Open(ConnectedDriver, ConnectedDriver.DriverObject, ConnectedDriver.ID);
 	EndIf;
 	
 	Str = New Structure;
@@ -348,10 +350,11 @@ Procedure FillDriverParameters(Settings) Export
 	
 	Notify = New NotifyDescription("GetDescription_End", ThisObject, Settings);
 	If Settings.ConnectedDriver.OldRevision Then
-		Settings.ParametersDriver = Device_GetDescription_2000(Settings.ConnectedDriver.DriverObject);
+		Settings.ParametersDriver = Device_GetDescription_2000(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject);
+		//@skip-check invocation-parameter-type-intersect
 		GetDescription_End(True, Settings.ParametersDriver, Settings);
 	Else
-		Device_GetDescription_Begin(Settings.ConnectedDriver.DriverObject, Notify);
+		Device_GetDescription_Begin(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, Notify);
 	EndIf;
 EndProcedure
 
@@ -389,7 +392,7 @@ Procedure GetDescription_End(Result, Parameters, Settings) Export
 		EndIf;
 		Settings.ParametersDriver = ParametersDriver;
 		Notify = New NotifyDescription("GetInterfaceRevision_End", ThisObject, Settings);
-		Device_GetInterfaceRevision_Begin(Settings.ConnectedDriver.DriverObject, Notify);
+		Device_GetInterfaceRevision_Begin(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, Notify);
 	EndIf;
 	
 EndProcedure
@@ -405,11 +408,11 @@ Procedure GetInterfaceRevision_End(Result, Parameters, Settings) Export
 	
 	Params = "";
 	If Settings.ConnectedDriver.OldRevision Then
-		Params = Device_GetParameters_2000(Settings.ConnectedDriver.DriverObject);
+		Params = Device_GetParameters_2000(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject);
 		GetParameters_End(True, Params, Settings);
 	Else
 		Notify = New NotifyDescription("GetParameters_End", ThisObject, Settings);
-		Device_GetParameters_Begin(Settings.ConnectedDriver.DriverObject, Params, Notify);
+		Device_GetParameters_Begin(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, Params, Notify);
 	EndIf;
 EndProcedure
 
@@ -423,11 +426,11 @@ Procedure GetParameters_End(Result, Parameters, Settings) Export
 	Settings.ParametersDriver.DriverParametersXML = Parameters[0];
 	
 	If Settings.ConnectedDriver.OldRevision Then
-		Params = Device_GetAdditionalActions_2000(Settings.ConnectedDriver.DriverObject);
+		Params = Device_GetAdditionalActions_2000(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject);
 		GetAdditionalActions_End(True, Params, Settings);
 	Else
 		Notify = New NotifyDescription("GetAdditionalActions_End", ThisObject, Settings);
-		Device_GetAdditionalActions_Begin(Settings.ConnectedDriver.DriverObject, Notify);
+		Device_GetAdditionalActions_Begin(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, Notify);
 	EndIf;
 EndProcedure
 
@@ -462,11 +465,11 @@ Procedure SetParameter_End(Result = True, Parameters = Undefined, Settings) Expo
 	For Each Parameter In Settings.SetParameters Do
 		If Settings.ConnectedDriver.OldRevision Then
 			// @skip-check property-return-type, invocation-parameter-type-intersect
-			Device_SetParameter(Settings.ConnectedDriver.DriverObject, Parameter.Key, Parameter.Value);
+			Device_SetParameter(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, Parameter.Key, Parameter.Value);
 		Else
 			Notify = New NotifyDescription("SetParameter_End", ThisObject, Settings);
 			// @skip-check property-return-type, invocation-parameter-type-intersect
-			Device_SetParameter_Begin(Settings.ConnectedDriver.DriverObject, Parameter.Key, Parameter.Value, Notify);
+			Device_SetParameter_Begin(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, Parameter.Key, Parameter.Value, Notify);
 			// @skip-check property-return-type, invocation-parameter-type-intersect
 			Settings.SetParameters.Delete(Parameter.Key);
 			Return;
@@ -488,7 +491,7 @@ Procedure TestDevice_End(Result, Settings) Export
 	TestResult		= "";
 	DemoIsActivated = "";
 
-	Device_DeviceTest_Begin(Settings.ConnectedDriver.DriverObject, TestResult, DemoIsActivated, Settings.Callback);
+	Device_DeviceTest_Begin(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, TestResult, DemoIsActivated, Settings.Callback);
 	
 EndProcedure
 
@@ -499,6 +502,7 @@ EndProcedure
 // Device open.
 // 
 // Parameters:
+//  Settings - See GetDriverObject
 //  DriverObject - Arbitrary - Driver object
 //  ID - String - ID
 // 
@@ -506,17 +510,32 @@ EndProcedure
 //  Boolean
 //  
 // @skip-check dynamic-access-method-not-found
-Function Device_Open(DriverObject, ID)
-	Result = DriverObject.Open(ID); // Boolean
-	If Result And IsBlankString(ID) Then
-		ID = String(New UUID);
+Function Device_Open(Settings, DriverObject, ID)
+	Structure = New Structure("Out", New Structure("ID", ID));
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "Open", True, Structure);
 	EndIf;
+	
+	Result = DriverObject.Open(Structure.Out.ID); // Boolean
+	
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "Open", False, Structure, Result);
+	EndIf;
+	
+	If Result And IsBlankString(Structure.Out.ID) Then
+		Structure.Out.ID = String(New UUID);
+	EndIf;
+	
+	//@skip-check property-return-type, statement-type-change
+	ID = Structure.Out.ID;
+	
 	Return Result;
 EndFunction
 
 // Device close.
 // 
 // Parameters:
+//  Settings - See GetDriverObject
 //  DriverObject - Arbitrary - Driver object
 //  ID - String - ID
 // 
@@ -524,13 +543,25 @@ EndFunction
 //  Boolean
 //  
 // @skip-check dynamic-access-method-not-found
-Function Device_Close(DriverObject, ID)
-	Return DriverObject.Close(ID); // Boolean
+Function Device_Close(Settings, DriverObject, ID)
+	Structure = New Structure("In", New Structure("ID", ID));
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "Close", True, Structure);
+	EndIf;
+		
+	Result = DriverObject.Close(Structure.In.ID); // Boolean
+	
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "Close", False, Structure, Result);
+	EndIf;
+	
+	Return Result;
 EndFunction
 
 // Device get description begin.
 // 
 // Parameters:
+//  Settings - See GetDriverObject
 //  DriverObject - Arbitrary - Driver object
 //  Notify - NotifyDescription - Notify
 // 
@@ -538,13 +569,18 @@ EndFunction
 //  Boolean
 //  
 // @skip-check dynamic-access-method-not-found
-Function Device_GetDescription_Begin(DriverObject, Notify) Export
-	Return DriverObject.НачатьВызовПолучитьОписание(Notify, "");
+Function Device_GetDescription_Begin(Settings, DriverObject, Notify) Export
+	Structure = New Structure("Out", New Structure("DriverDescription", ""));
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "BeginCallingGetDescription", True, Structure);
+	EndIf;
+	Return DriverObject.BeginCallingGetDescription(Notify, Structure.Out.DriverDescription);
 EndFunction
 
 // Device get interface revision begin.
 // 
 // Parameters:
+//  Settings - See GetDriverObject
 //  DriverObject - Arbitrary - Driver object
 //  Notify - NotifyDescription - Notify
 // 
@@ -552,13 +588,18 @@ EndFunction
 //  Boolean
 //  
 // @skip-check dynamic-access-method-not-found
-Function Device_GetInterfaceRevision_Begin(DriverObject, Notify)
-	Return DriverObject.НачатьВызовПолучитьРевизиюИнтерфейса(Notify);
+Function Device_GetInterfaceRevision_Begin(Settings, DriverObject, Notify)
+	Structure = New Structure();
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "BeginCallingGetInterfaceRevision", True, Structure);
+	EndIf;
+	Return DriverObject.BeginCallingGetInterfaceRevision(Notify);
 EndFunction
 
 // Device get parameters begin.
 // 
 // Parameters:
+//  Settings - See GetDriverObject
 //  DriverObject - Arbitrary - Driver object
 //  Params - String - Output parameters
 //  Notify - NotifyDescription - Notify
@@ -566,13 +607,18 @@ EndFunction
 // Returns:
 //  Boolean
 // @skip-check dynamic-access-method-not-found
-Function Device_GetParameters_Begin(DriverObject, Params, Notify)
-	Return DriverObject.НачатьВызовПолучитьПараметры(Notify, Params);
+Function Device_GetParameters_Begin(Settings, DriverObject, Params, Notify)
+	Structure = New Structure();
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "BeginCallingGetParameters", True, Structure);
+	EndIf;
+	Return DriverObject.BeginCallingGetParameters(Notify, Params);
 EndFunction
 
 // Device get additional actions begin.
 // 
 // Parameters:
+//  Settings - See GetDriverObject
 //  DriverObject - Arbitrary - Driver object
 //  Notify - NotifyDescription - Notify
 //  Params - String - Output parameters
@@ -580,13 +626,18 @@ EndFunction
 // Returns:
 //  Boolean
 // @skip-check dynamic-access-method-not-found
-Function Device_GetAdditionalActions_Begin(DriverObject, Notify)
-	Return DriverObject.НачатьВызовПолучитьПараметры(Notify, "");
+Function Device_GetAdditionalActions_Begin(Settings, DriverObject, Notify)
+	Structure = New Structure("Out", New Structure("TableActions", ""));
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "BeginCallingGetAdditionalActions", True, Structure);
+	EndIf;
+	Return DriverObject.BeginCallingGetAdditionalActions(Notify, "");
 EndFunction
 
 // Device set parameter begin.
 // 
 // Parameters:
+//  Settings - See GetDriverObject
 //  DriverObject - Arbitrary - Driver object
 //  Name - String - Name
 //  Value - String, Number, Boolean, Date - Value
@@ -595,13 +646,18 @@ EndFunction
 // Returns:
 //  Boolean
 // @skip-check dynamic-access-method-not-found
-Function Device_SetParameter_Begin(DriverObject, Name, Value, Notify)
-	Return DriverObject.НачатьВызовУстановитьПараметр(Notify, Name, Value);
+Function Device_SetParameter_Begin(Settings, DriverObject, Name, Value, Notify)
+	Structure = New Structure("In", New Structure("Name, Value", Name, Value));
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "BeginCallingSetParameter", True, Structure);
+	EndIf;
+	Return DriverObject.BeginCallingSetParameter(Notify, Structure.In.Name, Structure.In.Value);
 EndFunction
 
 // Device device test begin.
 // 
 // Parameters:
+//  Settings - See GetDriverObject
 //  DriverObject - Arbitrary - Driver object
 //  TestResult - String - Test result
 //  DemoIsActivated - String - Demo is activated
@@ -610,13 +666,18 @@ EndFunction
 // Returns:
 //  Boolean
 // @skip-check dynamic-access-method-not-found
-Function Device_DeviceTest_Begin(DriverObject, TestResult, DemoIsActivated, Notify)
-	Return DriverObject.НачатьВызовТестУстройства(Notify, TestResult, DemoIsActivated);
+Function Device_DeviceTest_Begin(Settings, DriverObject, TestResult, DemoIsActivated, Notify)
+	Structure = New Structure("In", New Structure("TestResult, DemoIsActivated", TestResult, DemoIsActivated));
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "BeginCallingDeviceTest", True, Structure);
+	EndIf;
+	Return DriverObject.BeginCallingDeviceTest(Notify, Structure.In.TestResult, Structure.In.DemoIsActivated);
 EndFunction
 
 // Device set parameter.
 // 
 // Parameters:
+//  Settings - See GetDriverObject
 //  DriverObject - Arbitrary - Driver object
 //  Name - String - Parameter name
 //  Value - String - Parameter value
@@ -625,57 +686,90 @@ EndFunction
 //  Boolean
 //  
 // @skip-check dynamic-access-method-not-found
-Function Device_SetParameter(DriverObject, Name, Value)
-	Return DriverObject.SetParameter(Name, Value);
+Function Device_SetParameter(Settings, DriverObject, Name, Value)
+	Structure = New Structure("In", New Structure("Name, Value", Name, Value));
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "SetParameter", True, Structure);
+	EndIf;
+	
+	Result =  DriverObject.SetParameter(Structure.In.Name, Structure.In.Value); // Boolean
+	
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "SetParameter", False, Structure, Result);
+	EndIf;
+		
+	Return Result;
 EndFunction
 
 // Device get interface revision.
 // 
 // Parameters:
+//  Settings - See GetDriverObject
 //  DriverObject - Arbitrary - Driver object
 //  Notify - NotifyDescription - Notify
 // 
 // Returns:
-//  Boolean
+//  Number
 //  
 // @skip-check dynamic-access-method-not-found
-Function Device_GetInterfaceRevision(DriverObject) Export
+Function Device_GetInterfaceRevision(Settings, DriverObject) Export
+	Structure = New Structure();
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "GetInterfaceRevision", True, Structure);
+	EndIf;
 	Try
-		Return DriverObject.GetInterfaceRevision();
+		Result = DriverObject.GetInterfaceRevision(); // Number
 	Except
-		Return 2000;
+		Result = 2000;
 	EndTry;
+	
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "GetInterfaceRevision", False, Result, True);
+	EndIf;
+	
+	Return Result;
 EndFunction
 
 // Device get description 2000.
 // 
 // Parameters:
+//  Settings - See GetDriverObject
 //  DriverObject - Arbitrary - Driver object
 // 
 // Returns:
 //  See ParametersDriverDescription
 //
 // @skip-check dynamic-access-method-not-found
-Function Device_GetDescription_2000(DriverObject) Export
-	Settings = ParametersDriverDescription();
-	DriverObject.GetDescription(Settings.Name, Settings.Description, Settings.EquipmentType, 
-		Settings.InterfaceRevision, Settings.IntegrationComponent, 
-		Settings.MainDriverInstalled, Settings.DownloadURL);
-	Return Settings;
+Function Device_GetDescription_2000(Settings, DriverObject) Export
+	SettingsDescription = ParametersDriverDescription();
+	Result = DriverObject.GetDescription(SettingsDescription.Name, SettingsDescription.Description, SettingsDescription.EquipmentType, 
+		SettingsDescription.InterfaceRevision, SettingsDescription.IntegrationComponent, 
+		SettingsDescription.MainDriverInstalled, SettingsDescription.DownloadURL); // Boolean
+		
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "GetDescription", False, SettingsDescription, Result);
+	EndIf;	
+	Return SettingsDescription;
 EndFunction
 
 // Device get parameters 2000.
 // 
 // Parameters:
+//  Settings - See GetDriverObject
 //  DriverObject - Arbitrary - Driver object
 // 
 // Returns:
 //  String
 //
 // @skip-check dynamic-access-method-not-found
-Function Device_GetParameters_2000(DriverObject) Export
+Function Device_GetParameters_2000(Settings, DriverObject) Export
 	Parameters = "";
-	DriverObject.GetParameters(Parameters);
+	Result = DriverObject.GetParameters(Parameters); // Boolean
+	
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "GetParameters", False, Parameters, Result);
+	EndIf;	
+	
 	Array = New Array; // Array of String
 	Array.Add(Parameters);
 	Return Array;
@@ -684,15 +778,21 @@ EndFunction
 // Device get additional actions 2000.
 // 
 // Parameters:
+//  Settings - See GetDriverObject
 //  DriverObject - Arbitrary - Driver object
 // 
 // Returns:
 //  String
 //
 // @skip-check dynamic-access-method-not-found
-Function Device_GetAdditionalActions_2000(DriverObject) Export
+Function Device_GetAdditionalActions_2000(Settings, DriverObject) Export
 	Parameters = "";
-	DriverObject.GetAdditionalActions(Parameters);
+	Result = DriverObject.GetAdditionalActions(Parameters); // Boolean
+	
+	If Settings.WriteLog Then
+		HardwareServer.WriteLog(Settings.Hardware, "GetParameters", False, Parameters, Result);
+	EndIf;	
+	
 	Array = New Array; // Array of String
 	Array.Add(Parameters);
 	Return Array;

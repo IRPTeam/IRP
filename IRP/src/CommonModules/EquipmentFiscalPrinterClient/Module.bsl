@@ -677,7 +677,7 @@ Function PrintTextGetXMLOperation(CommonParameters) Export
 EndFunction
 
 Function ToXMLString(Data)
-	//@skip-check Undefined function
+	// @skip-check Undefined function
 	Return XMLString(Data);
 EndFunction
 

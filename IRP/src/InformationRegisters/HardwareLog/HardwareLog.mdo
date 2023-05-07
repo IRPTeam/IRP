@@ -77,6 +77,21 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="78e2874f-7e61-47f7-a99c-d1f01263f753">
+    <name>Result</name>
+    <synonym>
+      <key>en</key>
+      <value>Result</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <dimensions uuid="08be0c27-f6ba-4fd9-ad3b-b17d813e8e48">
     <name>Hardware</name>
     <synonym>

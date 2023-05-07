@@ -43,10 +43,15 @@ EndFunction
 //  Boolean - Метод осуществляет авторизацию оплаты по карте
 Async Function PayByPaymentCard(Hardware, Settings) Export
 	Result = False;
-	LockForm(Settings, True);
+	LockData = Settings.Form;
+	Settings.Delete("Form");
+	LockForm(LockData, True);
 	Try
 		Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 		ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+		If ConnectParameters.WriteLog Then
+			HardwareServer.WriteLog(Hardware, "PayByPaymentCard", True, Settings);
+		EndIf;
 		If Connections.ConnectParameters.OldRevision Then
 			// @skip-check dynamic-access-method-not-found
 			Result = ConnectParameters.DriverObject.PayByPaymentCard(
@@ -71,14 +76,16 @@ Async Function PayByPaymentCard(Hardware, Settings) Export
 				Settings.Out.Slip
 			); // Boolean
 		EndIf;
-		
+		If ConnectParameters.WriteLog Then
+			HardwareServer.WriteLog(Hardware, "PayByPaymentCard", False, Settings, Result);
+		EndIf;		
 		Connections = Await HardwareClient.DisconnectHardware(Hardware);
 		
 	Except
 		Error = ErrorInfo();
 		CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.DetailErrorDescription(Error));
 	EndTry;
-	LockForm(Settings, False);
+	LockForm(LockData, False);
 	
 	Return Result;
 EndFunction
@@ -93,10 +100,15 @@ EndFunction
 //  Boolean - Метод осуществляет возврат платежа по карте
 Async Function ReturnPaymentByPaymentCard(Hardware, Settings) Export
 	Result = False;
-	LockForm(Settings, True);
+	LockData = Settings.Form;
+	Settings.Delete("Form");
+	LockForm(LockData, True);
 	Try
 		Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 		ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+		If ConnectParameters.WriteLog Then
+			HardwareServer.WriteLog(Hardware, "ReturnPaymentByPaymentCard", True, Settings);
+		EndIf;
 		If Connections.ConnectParameters.OldRevision Then
 			//@skip-check dynamic-access-method-not-found
 			Result = ConnectParameters.DriverObject.ReturnPaymentByPaymentCard(
@@ -121,14 +133,16 @@ Async Function ReturnPaymentByPaymentCard(Hardware, Settings) Export
 				Settings.Out.Slip
 			); // Boolean
 		EndIf;
-		
+		If ConnectParameters.WriteLog Then
+			HardwareServer.WriteLog(Hardware, "ReturnPaymentByPaymentCard", False, Settings, Result);
+		EndIf;
 		Connections = Await HardwareClient.DisconnectHardware(Hardware);
 	Except
 		Error = ErrorInfo();
 		CommonFunctionsClientServer.ShowUsersMessage(ErrorProcessing.DetailErrorDescription(Error));
 	EndTry;
 	
-	LockForm(Settings, False);
+	LockForm(LockData, False);
 	Return Result;
 EndFunction
 
@@ -143,6 +157,9 @@ EndFunction
 Async Function CancelPaymentByPaymentCard(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+	If ConnectParameters.WriteLog Then
+		HardwareServer.WriteLog(Hardware, "CancelPaymentByPaymentCard", True, Settings);
+	EndIf;
 	If Connections.ConnectParameters.OldRevision Then
 		//@skip-check dynamic-access-method-not-found
 		Result = ConnectParameters.DriverObject.CancelPaymentByPaymentCard(
@@ -167,6 +184,9 @@ Async Function CancelPaymentByPaymentCard(Hardware, Settings) Export
 			Settings.Out.Slip
 		); // Boolean
 	EndIf;
+	If ConnectParameters.WriteLog Then
+		HardwareServer.WriteLog(Hardware, "CancelPaymentByPaymentCard", False, Settings, Result);
+	EndIf;
 	Connections = Await HardwareClient.DisconnectHardware(Hardware);
 	Return Result;
 EndFunction
@@ -182,11 +202,16 @@ EndFunction
 Async Function EmergencyReversal(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+	If ConnectParameters.WriteLog Then
+		HardwareServer.WriteLog(Hardware, "EmergencyReversal", True, Settings);
+	EndIf;
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.EmergencyReversal(
 		ConnectParameters.ID,
 	); // Boolean
-	
+	If ConnectParameters.WriteLog Then
+		HardwareServer.WriteLog(Hardware, "EmergencyReversal", False, Settings, Result);
+	EndIf;	
 	Connections = Await HardwareClient.DisconnectHardware(Hardware);
 	Return Result;
 EndFunction
@@ -202,12 +227,17 @@ EndFunction
 Async Function Settlement(Hardware, Settings) Export
 	Connections = Await HardwareClient.ConnectHardware(Hardware); // See HardwareClient.ConnectHardware
 	ConnectParameters = Connections.ConnectParameters; // See HardwareClient.GetDriverObject
+	If ConnectParameters.WriteLog Then
+		HardwareServer.WriteLog(Hardware, "Settlement", True, Settings);
+	EndIf;
 	//@skip-check dynamic-access-method-not-found
 	Result = ConnectParameters.DriverObject.Settlement(
 		ConnectParameters.ID,
 		Settings.Out.Slip
 	); // Boolean
-	
+	If ConnectParameters.WriteLog Then
+		HardwareServer.WriteLog(Hardware, "Settlement", False, Settings, Result);
+	EndIf;		
 	Connections = Await HardwareClient.DisconnectHardware(Hardware);
 	Return Result;
 EndFunction
@@ -453,16 +483,12 @@ EndFunction
 #Region Service
 
 Procedure LockForm(Settings, Lock)
-	If Not Settings.Form.ElementToLock = Undefined Then
-		Settings.Form.ElementToLock.ReadOnly = Lock;
+	If Not Settings.ElementToLock = Undefined Then
+		Settings.ElementToLock.ReadOnly = Lock;
 	EndIf;
 	
-	If Not Settings.Form.ElementToHideAndShow = Undefined Then
-		Settings.Form.ElementToHideAndShow.Visible = Lock;
-	EndIf;
-	
-	If Not Lock Then
-		Settings.Delete("Form");
+	If Not Settings.ElementToHideAndShow = Undefined Then
+		Settings.ElementToHideAndShow.Visible = Lock;
 	EndIf;
 EndProcedure
 

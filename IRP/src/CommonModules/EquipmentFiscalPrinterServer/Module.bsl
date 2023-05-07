@@ -400,17 +400,26 @@ Function PreparePrintTextData(SourceData) Export
 	TextStrings = New Array;
 	
 	For Each Payment In SourceData.Payments Do
-		If IsBlankString(Payment.PaymentInfo) Then
-			Continue;
-		EndIf;
 		TextString = "";
-		PaymentInfo = CommonFunctionsServer.DeserializeJSON(Payment.PaymentInfo);
+		If TypeOf(Payment.PaymentInfo) = Type("String") Then
+			If IsBlankString(Payment.PaymentInfo) Then
+				Continue;
+			EndIf;
+			PaymentInfo = CommonFunctionsServer.DeserializeJSON(Payment.PaymentInfo);
+		Else 
+			PaymentInfo = Payment.PaymentInfo;
+		EndIf;
 		If PaymentInfo.Property("Out")
 			And	PaymentInfo.Out.Property("Slip") Then			
 			TextString = PaymentInfo.Out.Slip;
 		Else
 			Continue;
 		EndIf;
+		
+		If IsBlankString(TextString) Then
+			Continue;
+		EndIf;
+		
 		TextStringData = New Structure();
 		TextStringData.Insert("Text", TextString);
 		TextStrings.Add(TextStringData);

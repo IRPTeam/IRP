@@ -161,7 +161,18 @@ Async Procedure CloseSessionFinish(Result, AddInfo) Export
 	
 	If Result.AutoCreateMoneyTransfer Then
 		CreateCashOut(Commands.CreateCashOut, True);
-	EndIf;
+	EndIf;             
+	
+	AcquiringList = HardwareServer.GetWorkstationHardwareByEquipmentType(Object.Workstation, PredefinedValue("Enum.EquipmentTypes.Acquiring"));
+	For Each Acquiring In AcquiringList Do
+		SettlementSettings = EquipmentAcquiringClient.SettlementSettings();
+		ResultSettlement = Await EquipmentAcquiringClient.Settlement(Acquiring, SettlementSettings);
+		Str = New Structure("Payments", New Array);
+		Str.Payments.Add(New Structure("PaymentInfo", SettlementSettings));
+		If ResultSettlement Then  
+			Await EquipmentFiscalPrinterClient.PrintTextDocument(Object.ConsolidatedRetailSales, Str);
+		EndIf;
+	EndDo;               
 	
 	EquipmentCloseShiftResult = Await EquipmentFiscalPrinterClient.CloseShift(Object.ConsolidatedRetailSales);
 	If EquipmentCloseShiftResult.Success Then
@@ -621,13 +632,6 @@ Procedure ItemListDrag(Item, DragParameters, StandardProcessing, Row, Field)
 			AddItemKeyToItemList(Value);
 		EndIf;
 	EndIf;
-EndProcedure
-
-&AtClient
-Procedure AcquiringSlipInfo(Command)
-	OpenParameters = New Structure();
-	OpenParameters.Insert("Branch", Object.Branch);
-	OpenForm("DataProcessor.PointOfSale.Form.AcquiringSlipInfo", OpenParameters, ThisObject, , , , , FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 #Region SpecialOffers

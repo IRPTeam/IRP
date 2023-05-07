@@ -147,6 +147,18 @@ Function GetConnectionParameters(Hardware) Export
 	Return Str;
 EndFunction
 
+Procedure WriteLog(Hardware, Method, isRequest, Data) Export
+	Reg = InformationRegisters.HardwareLog.CreateRecordManager();
+	Reg.Date = CurrentUniversalDateInMilliseconds();
+	Reg.Hardware = Hardware;
+	Reg.Period = CurrentDate();
+	Reg.User = SessionParameters.CurrentUser;
+	Reg.Method = Method;
+	Reg.Request = isRequest;
+	Reg.Data = CommonFunctionsServer.SerializeJSON(Data);
+	Reg.Write(); 
+EndProcedure
+
 #EndRegion
 
 #Region Private

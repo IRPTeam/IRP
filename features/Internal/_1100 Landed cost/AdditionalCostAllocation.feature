@@ -276,8 +276,8 @@ Scenario: _042 check additional cost allocation (documents, by quantity)
 	And I move to "Fields" tab
 	And I move to the tab named "FilterPage"
 	And I go to line in "SettingsComposerSettingsFilter" table
-		| 'Application'  | 'Comparison type' | 'Display mode' | 'Left value' | 'Use' |
-		| 'No hierarchy' | 'Filled'          | 'Disabled'     | 'Recorder'   | 'Yes' |
+		| 'Left value' |
+		| 'Recorder'   |
 	And I activate "Comparison type" field in "SettingsComposerSettingsFilter" table
 	And I select current line in "SettingsComposerSettingsFilter" table
 	And I select "Equal to" exact value from "Comparison type" drop-down list in "SettingsComposerSettingsFilter" table
@@ -399,6 +399,7 @@ Scenario: _045 check additional cost allocation (rows, by amount)
 	And I go to line in "SettingsComposerSettingsFilter" table
 		| 'Left value' |
 		| 'Recorder'   |
+	And I click Clear button of the attribute named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter"
 	And I activate "Comparison type" field in "SettingsComposerSettingsFilter" table
 	And I select current line in "SettingsComposerSettingsFilter" table
 	And I select "In list" exact value from "Comparison type" drop-down list in "SettingsComposerSettingsFilter" table
@@ -1125,19 +1126,25 @@ Scenario: _080 allocation of the additional cost to the invoice of the previous 
 		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
-			| "Documents.CalculationMovementCosts.FindByNumber(7).GetObject().Write(DocumentWriteMode.Posting);" |
-		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(9022).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
-		And I execute 1C:Enterprise script at server
-			| "Documents.CalculationMovementCosts.FindByNumber(9).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Check
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"	
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I activate field named "OptionsListReportOption" in "OptionsList" table
 		And I select current line in "OptionsList" table
+		And I click "Change option..." button
+		And I move to "Fields" tab
+		And I move to the tab named "FilterPage"
+		And I go to line in "SettingsComposerSettingsFilter" table
+			| 'Left value' |
+			| 'Recorder'   |
+		And I select current line in "SettingsComposerSettingsFilter" table
+		And I select "Filled" exact value from "Comparison type" drop-down list in "SettingsComposerSettingsFilter" table
+		And I finish line editing in "SettingsComposerSettingsFilter" table
+		And I click "Finish editing" button			
 		And I set checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
@@ -1162,15 +1169,11 @@ Scenario: _090 allocation of the additional cost to the invoice of the previous 
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(9023).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
-			| "Documents.CalculationMovementCosts.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);" |
-		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(9023).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
-		And I execute 1C:Enterprise script at server
-			| "Documents.CalculationMovementCosts.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(9024).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
@@ -1178,15 +1181,11 @@ Scenario: _090 allocation of the additional cost to the invoice of the previous 
 		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
-			| "Documents.CalculationMovementCosts.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
-		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(9025).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.AdditionalCostAllocation.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(17).GetObject().Write(DocumentWriteMode.Posting);" |
-		And I execute 1C:Enterprise script at server
-			| "Documents.CalculationMovementCosts.FindByNumber(18).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(9026).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
@@ -1195,14 +1194,22 @@ Scenario: _090 allocation of the additional cost to the invoice of the previous 
 			| "Documents.AdditionalCostAllocation.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(19).GetObject().Write(DocumentWriteMode.Posting);" |
-		And I execute 1C:Enterprise script at server
-			| "Documents.CalculationMovementCosts.FindByNumber(20).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Check
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"	
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I activate field named "OptionsListReportOption" in "OptionsList" table
 		And I select current line in "OptionsList" table
+		And I click "Change option..." button
+		And I move to "Fields" tab
+		And I move to the tab named "FilterPage"
+		And I go to line in "SettingsComposerSettingsFilter" table
+			| 'Left value' |
+			| 'Recorder'   |
+		And I select current line in "SettingsComposerSettingsFilter" table
+		And I select "Filled" exact value from "Comparison type" drop-down list in "SettingsComposerSettingsFilter" table
+		And I finish line editing in "SettingsComposerSettingsFilter" table
+		And I click "Finish editing" button			
 		And I set checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table
@@ -1369,23 +1376,17 @@ Scenario: _098 allocation of the additional cost (tax) (item is already sold)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
-			| "Documents.CalculationMovementCosts.FindByNumber(24).GetObject().Write(DocumentWriteMode.Posting);" |
-		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(9025).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.AdditionalCostAllocation.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(22).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
-			| "Documents.CalculationMovementCosts.FindByNumber(25).GetObject().Write(DocumentWriteMode.Posting);" |
-		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(9029).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.AdditionalCostAllocation.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(23).GetObject().Write(DocumentWriteMode.Posting);" |
-		And I execute 1C:Enterprise script at server
-			| "Documents.CalculationMovementCosts.FindByNumber(26).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(9026).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
@@ -1394,14 +1395,23 @@ Scenario: _098 allocation of the additional cost (tax) (item is already sold)
 			| "Documents.InventoryTransfer.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(27).GetObject().Write(DocumentWriteMode.Posting);" |
-		And I execute 1C:Enterprise script at server
-			| "Documents.CalculationMovementCosts.FindByNumber(28).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Check
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"	
 		And I click "Select option..." button
 		And I move to "Custom" tab
 		And I activate field named "OptionsListReportOption" in "OptionsList" table
 		And I select current line in "OptionsList" table
+		And I click "Change option..." button
+		And I move to "Fields" tab
+		And I move to the tab named "FilterPage"
+		And I go to line in "SettingsComposerSettingsFilter" table
+			| 'Left value' |
+			| 'Recorder'   |
+		And I select current line in "SettingsComposerSettingsFilter" table
+		And I select "Filled" exact value from "Comparison type" drop-down list in "SettingsComposerSettingsFilter" table
+		And I finish line editing in "SettingsComposerSettingsFilter" table
+		And I click "Finish editing" button			
+		And I set checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I set checkbox named "SettingsComposerUserSettingsItem2Use"
 		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
 		And I go to line in "List" table

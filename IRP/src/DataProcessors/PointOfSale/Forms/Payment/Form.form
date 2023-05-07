@@ -3599,6 +3599,23 @@ FROM
       </parameters>
     </extInfo>
   </attributes>
+  <attributes>
+    <name>ConsolidatedRetailSales</name>
+    <title>
+      <key>en</key>
+      <value>Consolidated retail sales</value>
+    </title>
+    <id>49</id>
+    <valueType>
+      <types>DocumentRef.ConsolidatedRetailSales</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>Card</name>
     <title>
@@ -4100,6 +4117,12 @@ FROM
     <name>isReturn</name>
     <valueType>
       <types>Boolean</types>
+    </valueType>
+  </parameters>
+  <parameters>
+    <name>ConsolidatedRetailSales</name>
+    <valueType>
+      <types>DocumentRef.ConsolidatedRetailSales</types>
     </valueType>
   </parameters>
   <commandInterface>

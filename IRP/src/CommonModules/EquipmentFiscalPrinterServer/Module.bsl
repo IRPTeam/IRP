@@ -112,6 +112,10 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 	Str.Insert("Barter", 0);
 	
 	For Each Payment In SourceData.Payments Do
+		If Payment.Amount < 0 Then
+			Continue;
+		EndIf;
+		
 		If SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullPrepayment Then
 			Str.Insert("PrePayment", Str.PrePayment + Payment.Amount);
 		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.PartialPrepayment Then
@@ -420,9 +424,11 @@ Function PreparePrintTextData(SourceData) Export
 			Continue;
 		EndIf;
 		
-		TextStringData = New Structure();
-		TextStringData.Insert("Text", TextString);
-		TextStrings.Add(TextStringData);
+		For Each Text In StrSplit(TextString, Chars.LF, True) Do
+			TextStringData = New Structure();
+			TextStringData.Insert("Text", Text);
+			TextStrings.Add(TextStringData);
+		EndDo;
 	EndDo;
 	
 	Str.Insert("TextStrings", TextStrings);

@@ -25,7 +25,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Object.Workstation = Parameters.Workstation;
 	Object.Discount = Parameters.Discount;
 	ThisObject.IsAdvance = Parameters.IsAdvance;
-	
+	ConsolidatedRetailSales = Parameters.ConsolidatedRetailSales;
 	isReturn = Parameters.isReturn;
 	RetailBasis = Parameters.RetailBasis;
 	
@@ -711,6 +711,10 @@ Async Function Payment_PayByPaymentCard(PaymentRow)
 	If Result Then
 		PaymentRow.RRNCode = PaymentSettings.Out.RRNCode;
 		PaymentRow.PaymentDone = True;
+		
+		Str = New Structure("Payments", New Array);
+		Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));
+		Await EquipmentFiscalPrinterClient.PrintTextDocument(ConsolidatedRetailSales, Str);
 	EndIf;
 	
 	Return Result;
@@ -740,6 +744,10 @@ Async Function Payment_ReturnPaymentByPaymentCard(PaymentRow)
 	If Result Then
 		PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
 		PaymentRow.PaymentDone = True;
+		
+		Str = New Structure("Payments", New Array);
+		Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));
+		Await EquipmentFiscalPrinterClient.PrintTextDocument(ConsolidatedRetailSales, Str);
 	EndIf;
 	Return Result;
 EndFunction
@@ -776,6 +784,11 @@ Async Function Payment_CancelPaymentByPaymentCard(PaymentRow)
 	If Result Then
 		PaymentRow.PaymentDone = False;
 	EndIf;
+	
+	Str = New Structure("Payments", New Array);
+	Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));
+	Await EquipmentFiscalPrinterClient.PrintTextDocument(ConsolidatedRetailSales, Str);
+		
 	Return Result;
 EndFunction
 

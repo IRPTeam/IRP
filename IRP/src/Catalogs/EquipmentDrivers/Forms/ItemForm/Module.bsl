@@ -97,13 +97,15 @@ EndProcedure
 #Region Driver
 
 &AtClient
-Procedure BeginGetDriverEnd(DriverObject, Params) Export
+Async Procedure BeginGetDriverEnd(DriverObject, Params) Export
 	If IsBlankString(DriverObject) Then
 		CurrentStatus = R().Eq_002 + ": " + Chars.NBSp + Object.AddInID;
 	Else
-		
+
+		Settings = New Structure();
+		Settings.Insert("WriteLog", False);
 		Try
-			Settings = HardwareClient.Device_GetDescription_2000(DriverObject);
+			Settings = HardwareClient.Device_GetDescription_2000(Settings, DriverObject);
 			If Not Object.RevisionNumber = Settings.InterfaceRevision Then
 				Object.RevisionNumber = Settings.InterfaceRevision;
 				ThisObject.Modified = True;
@@ -112,13 +114,13 @@ Procedure BeginGetDriverEnd(DriverObject, Params) Export
 			Array.Add(Settings);
 			BeginGetDriverEndAfter(True, Array, Undefined);
 		Except
-			InterfaceRevision = HardwareClient.Device_GetInterfaceRevision(DriverObject);
+			InterfaceRevision = HardwareClient.Device_GetInterfaceRevision(Settings, DriverObject);
 			If Not Object.RevisionNumber = InterfaceRevision Then
 				Object.RevisionNumber = InterfaceRevision;
 				ThisObject.Modified = True;
 			EndIf;
 			Notify = New NotifyDescription("BeginGetDriverEndAfter", ThisObject);
-			HardwareClient.Device_GetDescription_Begin(DriverObject, Notify);
+			HardwareClient.Device_GetDescription_Begin(Settings, DriverObject, Notify);
 		EndTry;
 	EndIf;
 EndProcedure

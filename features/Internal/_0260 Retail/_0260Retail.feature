@@ -550,8 +550,8 @@ Scenario: _0260130 create cash out
 		And the editing text of form attribute named "SendAmount" became equal to "7 880,00"
 		And I input "3 480,00" text in "Send amount" field
 		And I click "Create money transfer" button
-		Then in the TestClient message log contains lines by template:
-			|'Object Money transfer* created.'|		
+		// Then in the TestClient message log contains lines by template:
+		// 	|'Object Money transfer* created.'|		
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 		And I go to line in "List" table

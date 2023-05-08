@@ -2114,36 +2114,6 @@
                     <placementArea>UserCmds</placementArea>
                     <representationInContextMenu>Auto</representationInContextMenu>
                   </items>
-                  <items xsi:type="form:Button">
-                    <name>AcquiringSlipInfo</name>
-                    <id>1233</id>
-                    <visible>true</visible>
-                    <enabled>true</enabled>
-                    <userVisible>
-                      <common>true</common>
-                    </userVisible>
-                    <extendedTooltip>
-                      <name>AcquiringSlipInfoExtendedTooltip</name>
-                      <id>1234</id>
-                      <visible>true</visible>
-                      <enabled>true</enabled>
-                      <userVisible>
-                        <common>true</common>
-                      </userVisible>
-                      <type>Label</type>
-                      <autoMaxWidth>true</autoMaxWidth>
-                      <autoMaxHeight>true</autoMaxHeight>
-                      <extInfo xsi:type="form:LabelDecorationExtInfo">
-                        <horizontalAlign>Left</horizontalAlign>
-                      </extInfo>
-                    </extendedTooltip>
-                    <commandName>Form.Command.AcquiringSlipInfo</commandName>
-                    <representation>Auto</representation>
-                    <autoMaxWidth>true</autoMaxWidth>
-                    <autoMaxHeight>true</autoMaxHeight>
-                    <placementArea>UserCmds</placementArea>
-                    <representationInContextMenu>Auto</representationInContextMenu>
-                  </items>
                   <visible>true</visible>
                   <enabled>true</enabled>
                   <userVisible>
@@ -4982,6 +4952,36 @@
             <placementArea>UserCmds</placementArea>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
+          <items xsi:type="form:Button">
+            <name>CashInListCreateAndPostCashIn</name>
+            <id>1233</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>CashInListCreateAndPostCashInExtendedTooltip</name>
+              <id>1234</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <commandName>Form.Command.CreateAndPostCashIn</commandName>
+            <representation>Auto</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -6968,21 +6968,38 @@ person</value>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>AcquiringSlipInfo</name>
+    <name>CreateAndPostCashIn</name>
     <title>
       <key>en</key>
-      <value>Acquiring slip info</value>
+      <value>Create and post</value>
     </title>
     <id>33</id>
     <use>
       <common>true</common>
     </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>CreateAndPostCashIn</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>OpenPickupItems1</name>
+    <title>
+      <key>en</key>
+      <value>Pickup</value>
+    </title>
+    <id>34</id>
+    <use>
+      <common>true</common>
+    </use>
     <picture xsi:type="core:PictureRef">
-      <picture>CommonPicture.Payment</picture>
+      <picture>CommonPicture.ItemKeyPicture</picture>
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>AcquiringSlipInfo</name>
+        <name>OpenPickupItems</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

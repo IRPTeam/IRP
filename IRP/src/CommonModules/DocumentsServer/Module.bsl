@@ -635,3 +635,286 @@ Function GetArrayOfSalesOrdersBySalesInvoice(SalesInvoice) Export
 	ArrayOfOrders = QueryTable.UnloadColumn("SalesOrder");
 	Return ArrayOfOrders;
 EndFunction
+
+Function PickupItemEnd(Val Parameters, Val ScanData) Export
+	Result = New Structure();
+	Result.Insert("UserMessages" , New Array());
+	Result.Insert("NewRows"      , New Array());
+	Result.Insert("UpdatedRows"  , New Array());
+	
+	ArrayOfTableNames = New Array();
+	ArrayOfTableNames.Add("SerialLotNumbers");
+	ArrayOfTableNames.Add("SourceOfOrigins");
+	ArrayOfTableNames.Add("ConsignorBatches");
+	ArrayOfTableNames.Add("TaxList");
+	
+	Result.Insert("ChoiceForms",
+		New Structure("PresentationStartChoice_Counter, 
+					  |StartChoice_Counter, 
+					  |PresentationStartChoice_Key, 
+					  |StartChoice_Key", 0,0));
+	
+	Object = Parameters.ServerSideParameters.ServerParameters.Object;
+	
+	For Each ScanDataItem In ScanData Do
+		
+		If ScanDataItem.isService And Parameters.Filter.DisableIfIsService Then
+			Result.UserMessages.Add(StrTemplate(R().InfoMessage_026, ScanDataItem.Item));
+			Continue;
+		EndIf;
+		
+		FoundedRows = FindRows(Object, Parameters, ScanDataItem);
+				
+		If FoundedRows.AddNewRow Then
+			ResultName = "NewRows";
+			RowKey = String(New UUID());
+			ProcessRow = Object.ItemList.Add();
+			ProcessRow.Key = RowKey;
+			
+			FillingValues = New Structure();
+			FillingValues.Insert("Item"     , ScanDataItem.Item);
+			FillingValues.Insert("ItemKey"  , ScanDataItem.ItemKey);
+			FillingValues.Insert("Unit"     , ScanDataItem.Unit);
+			FillingValues.Insert("Quantity" , ScanDataItem.Quantity);
+			FillingValues.Insert("SerialLotNumber" , ScanDataItem.SerialLotNumber);
+			FillingValues.Insert("Barcode"  , ?(ScanDataItem.Property("Barcode"), ScanDataItem.Barcode, ""));
+			FillingValues.Insert("Date"     , CommonFunctionsServer.GetCurrentSessionDate());
+			
+			If ScanDataItem.Property("PriceType") Then
+				FillingValues.Insert("PriceType", ScanDataItem.PriceType);
+			EndIf;
+			
+			If ValueIsFilled(Parameters.StoreRef) Then
+				FillingValues.Insert("Store", Parameters.StoreRef);
+			EndIf;
+			
+			If ValueIsFilled(FoundedRows.InventoryOrigin) Then
+				FillingValues.Insert("InventoryOrigin", FoundedRows.InventoryOrigin);
+			EndIf;	
+				
+			If ValueIsFilled(FoundedRows.Consignor) Then
+				FillingValues.Insert("Consignor", FoundedRows.Consignor);
+			EndIf;	
+				
+		Else // Update row + Quantity
+			ResultName = "UpdatedRows";
+			RowKey = FoundedRows.Row.Key;
+			ProcessRow = FoundedRows.Row;
+			
+			FillingValues = New Structure();
+			If Parameters.QuantityColumnName = "PhysCount" Then
+				FillingValues.Insert("Quantity", ProcessRow.PhysCount + ScanDataItem.Quantity);
+			Else
+				FillingValues.Insert("Quantity", ProcessRow.Quantity + ScanDataItem.Quantity);
+			EndIf;
+		EndIf;
+		
+		RowInfo = FillRow(Object, Parameters, ProcessRow, FillingValues);
+		ResultRow = New Structure("Key, Cache, ViewNotify", RowKey, 
+			CleanCache(Object, RowInfo.Cache, ArrayOfTableNames), 
+			RowInfo.ViewNotify);
+		Result[ResultName].Add(ResultRow);
+		
+		If Parameters.UseSerialLotNumbers Then
+			If ValueIsFilled(ScanDataItem.SerialLotNumber) Then
+				AddNewSerialLotNumber(Object, RowKey, ScanDataItem);
+				//If CommonFunctionsClientServer.ObjectHasProperty(Object, "ConsignorBatches") 
+				//	And FoundedRows.InventoryOrigin = Enums.InventoryOriginTypes.ConsignorStocks Then
+				//	UpdateConsignorBatches(Parameters, ProcessRow, ResultRow);
+				//EndIf;
+			ElsIf ScanDataItem.UseSerialLotNumber Then
+				Result.ChoiceForms.PresentationStartChoice_Counter = 
+				Result.ChoiceForms.PresentationStartChoice_Counter + 1;
+				Result.ChoiceForms.PresentationStartChoice_Key = RowKey;
+			EndIf;
+		ElsIf Parameters.isSerialLotNumberAtRow Then
+			If Object.UseSerialLot And ScanDataItem.UseSerialLotNumber And Not ValueIsFilled(ScanDataItem.SerialLotNumber) Then
+				Result.ChoiceForms.StartChoice_Counter = 
+				Result.ChoiceForms.StartChoice_Counter + 1;
+				Result.ChoiceForms.StartChoice_Key = RowKey;
+			EndIf;
+		EndIf;
+
+		If Parameters.UseSourceOfOrigins Then
+			If ValueIsFilled(ScanDataItem.SourceOfOrigin) Then
+				AddNewSourceOfOrigin(Object, RowKey, ScanDataItem);
+				//If CommonFunctionsClientServer.ObjectHasProperty(Object, "ConsignorBatches") 
+				//	And FoundedRows.InventoryOrigin = Enums.InventoryOriginTypes.ConsignorStocks Then
+				//	UpdateConsignorBatches(Parameters, ProcessRow, ResultRow);
+				//EndIf;
+			EndIf;
+		EndIf;
+		
+		If CommonFunctionsClientServer.ObjectHasProperty(Object, "ConsignorBatches") Then
+			UpdateConsignorBatches(Parameters, ProcessRow, ResultRow);
+		EndIf;
+	EndDo; // ScanData
+	
+	Return FillCache(Object, ArrayOfTableNames, Result);
+EndFunction
+
+Function FindRows(Object, Parameters, ScanDataItem)
+	Result = New Structure("AddNewRow, Row, InventoryOrigin, Consignor", 
+		True, Undefined, Undefined, Undefined);
+	
+	AlwaysAddNew = False;
+	
+	If Parameters.UseSerialLotNumbers Or Parameters.isSerialLotNumberAtRow Then
+		If ScanDataItem.AlwaysAddNewRowAfterScan Then
+			AlwaysAddNew = True;
+		EndIf;
+	EndIf;
+	
+	If Parameters.UseInventoryOrigin Then
+		ExistingRowsInfo = GetExistingRows_UseInventoryOrigin(Object, Parameters, ScanDataItem);
+		Result.InventoryOrigin = ExistingRowsInfo.InventoryOrigin;
+		Result.Consignor = ExistingRowsInfo.Consignor;
+		
+		If AlwaysAddNew Then
+			Return Result;
+		EndIf;
+		
+	Else
+		
+		If AlwaysAddNew Then
+			Return Result;
+		EndIf;	
+		
+		ExistingRowsInfo = GetExistingRows_NotUseInventoryOrigin(Object, Parameters, ScanDataItem);
+	EndIf;
+	
+	// row exists increase quantity
+	If ExistingRowsInfo.ExistingRows.Count() Then
+		Result.AddNewRow = False;
+		Result.Row = ExistingRowsInfo.ExistingRows[0];
+	EndIf;
+	Return Result;
+EndFunction	
+
+Function GetExistingRows_UseInventoryOrigin(Val Object, Parameters, ScanDataItem)
+	Result = New Structure("ExistingRows, InventoryOrigin, Consignor", New Array(), Undefined, Undefined);
+	
+	FilterStructureCopy = New Structure();
+	For Each KeyValue In Parameters.FilterStructure Do
+		FilterStructureCopy.Insert(KeyValue.Key, KeyValue.Value);
+	EndDo;
+		
+	ResultExistingRows = CommissionTradeServer.GetExistingRows(Object,
+				Parameters.ServerSideParameters, 
+				Parameters.StoreRef,
+				Parameters.StoreInItemList, 
+				FilterStructureCopy,
+				ScanDataItem, 
+				True);
+	
+	Parameters.ServerSideParameters.ServerParameters.Object = Object;
+			
+	If ValueIsFilled(ResultExistingRows.InventoryOrigin) Then
+		Result.InventoryOrigin = ResultExistingRows.InventoryOrigin;
+	EndIf;
+
+	If ResultExistingRows.Property("Consignor") And ValueIsFilled(ResultExistingRows.Consignor) Then
+		Result.Consignor = ResultExistingRows.Consignor;
+	EndIf;
+
+	For Each Row In Object.ItemList Do
+		If ResultExistingRows.ArrayOfRowKeys.Find(Row.Key) <> Undefined Then
+			Result.ExistingRows.Add(Row);
+		EndIf;
+	EndDo;
+	Return Result;
+EndFunction
+
+Function GetExistingRows_NotUseInventoryOrigin(Object, Parameters, ScanDataItem)
+	Result = New Structure("ExistingRows", New Array());
+	FilledFilter = New Structure();
+	For Each KeyValue In Parameters.FilterStructure Do
+		If ScanDataItem.Property(KeyValue.Key) And ValueIsFilled(ScanDataItem[KeyValue.Key]) Then
+			FilledFilter.Insert(KeyValue.Key, ScanDataItem[KeyValue.Key]);
+		EndIf;
+	EndDo;
+	Result.ExistingRows = Object.ItemList.FindRows(FilledFilter);	
+	Return Result;
+EndFunction
+
+Function FillRow(Object, Parameters, Row, FillingValues)
+	Parameters.ServerSideParameters.ServerParameters.Rows = New Array();
+	Parameters.ServerSideParameters.ServerParameters.Rows.Add(Row);
+			
+	TmpParameters = ControllerClientServer_V2.GetParameters(
+		Parameters.ServerSideParameters.ServerParameters, 
+		Parameters.ServerSideParameters.FormParameters);
+			
+	ViewServer_V2.AddNewRowAtServer("ItemList", TmpParameters, ,FillingValues);
+	
+	Return New Structure("Cache, ViewNotify", TmpParameters.Cache, TmpParameters.ViewNotify);
+EndFunction	
+
+Function CleanCache(Object, Cache, ArrayOfTableNames)
+	For Each TableName In ArrayOfTableNames Do
+		If CommonFunctionsClientServer.ObjectHasProperty(Object, TableName) Then
+			Cache.Insert(TableName, New Array());
+		EndIf;
+	EndDo;
+	Return Cache;
+EndFunction
+	
+Function FillCache(Object, ArrayOfTableNames, Result)
+	ArrayOfExistsTables = New Array();
+	For Each TableName In ArrayOfTableNames Do
+		If Not CommonFunctionsClientServer.ObjectHasProperty(Object, TableName) Then
+			Continue;
+		EndIf;
+		ArrayOfExistsTables.Add(TableName);
+		
+		Result.Insert(TableName, New Structure(TableName, New Array()));
+		
+		For Each Row In Object[TableName] Do
+			NewRow = New Structure();
+			For Each Column In Object.Ref.Metadata().TabularSections.Find(TableName).Attributes Do
+				NewRow.Insert(Column.Name, Row[Column.Name]);
+			EndDo;
+						
+			Result[TableName][TableName].Add(NewRow);
+		EndDo;
+	EndDo;	
+	Result.Insert("ArrayOfTableNames", ArrayOfExistsTables);
+	Return Result;
+EndFunction
+
+Procedure UpdateConsignorBatches(Parameters, ProcessRow, ResultRow)
+	Parameters.ServerSideParameters.ServerParameters.Rows = New Array();
+	Parameters.ServerSideParameters.ServerParameters.Rows.Add(ProcessRow);
+			
+	TmpParameters = ControllerClientServer_V2.GetParameters(
+		Parameters.ServerSideParameters.ServerParameters, 
+		Parameters.ServerSideParameters.FormParameters);
+		
+	ControllerClientServer_V2.API_SetProperty(TmpParameters, New Structure("DataPath", "Command_UpdateConsignorBatches"), Undefined);
+	
+	If TmpParameters.Cache.Property("ItemList") And ResultRow.Cache.Property("ItemList") Then
+		ControllerServer_V2.UpdateArrayOfStructures(TmpParameters.Cache.ItemList, ResultRow.Cache.ItemList);
+	EndIf;
+EndProcedure
+
+Procedure AddNewSerialLotNumber(Object, RowKey, ScanDataItem)	
+	_SerialLotNumbers = New Array();
+	_SerialLotNumbers.Add(New Structure("SerialLotNumber, Quantity", 
+		ScanDataItem.SerialLotNumber, ScanDataItem.Quantity));
+	SerialLotNumberClientServer.AddNewSerialLotNumbers(Object, RowKey, _SerialLotNumbers, True);
+	
+	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
+	SourceOfOriginClientServer.DeleteUnusedSourceOfOrigins(Object);
+EndProcedure
+
+Procedure AddNewSourceOfOrigin(Object, RowKey, ScanDataItem)
+	_SourceOfOrigins = New Array();
+	SerialLotNumber = Catalogs.SerialLotNumbers.EmptyRef();
+	If ValueIsFilled(ScanDataItem.SerialLotNumber) Then
+		SerialLotNumber = ScanDataItem.SerialLotNumber;
+	EndIf;
+	_SourceOfOrigins.Add(New Structure("SourceOfOrigin, SerialLotNumber",
+		ScanDataItem.SourceOfOrigin, SerialLotNumber));
+	
+	SourceOfOriginClientServer.AddNewSourceOfOrigins(Object, RowKey, _SourceOfOrigins);
+EndProcedure

@@ -505,319 +505,6 @@ EndProcedure
 
 #EndRegion
 
-#Region PickUpItems
-
-// Pickup items end.
-// 
-// Parameters:
-//  Result - See BarcodeServer.SearchByBarcodes
-//  AddInfo - See BarcodeClient.GetBarcodeSettings
-Procedure PickupItemsEnd(Result, AddInfo) Export
-	If Not ValueIsFilled(Result) Or Not AddInfo.Property("Object") Or Not AddInfo.Property("Form") Then
-		Return;
-	EndIf;
-
-	Object 	= AddInfo.Object;
-	Form 	= AddInfo.Form;
-		
-	UseSerialLotNumbers = Object.Property("SerialLotNumbers");
-	UseSourceOfOrigins  = Object.Property("SourceOfOrigins");
-	
-	isSerialLotNumberAtRow = False;
-	
-	ObjectRefType = TypeOf(Object.Ref);
-	
-	If ObjectRefType = Type("DocumentRef.PhysicalInventory")
-		Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
-		isSerialLotNumberAtRow = Object.UseSerialLot;
-	EndIf;
-	
-	If Object.Property("Agreement") Then
-		FilterString = "Item, ItemKey, Unit, PriceType";
-	ElsIf isSerialLotNumberAtRow Then
-		FilterString = "Item, ItemKey, Unit, SerialLotNumber";
-	Else
-		FilterString = "Item, ItemKey, Unit";
-	EndIf;
-
-	If ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
-		FilterString = FilterString + ", Barcode, Date";
-	EndIf;
-	
-	FilterStructure = New Structure(FilterString);
-	
-	For Each ResultElement In Result Do
-		
-		If ResultElement.isService And AddInfo.Property("Filter") And AddInfo.Filter.DisableIfIsService Then
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_026, ResultElement.Item));
-			Continue;
-		EndIf;
-		
-		InventoryOrigin = Undefined;
-		
-		UseInventoryOrigin = (ObjectRefType = Type("DocumentRef.RetailSalesReceipt") 
-			Or ObjectRefType = Type("DocumentRef.SalesInvoice")
-			Or ObjectRefType = Type("DocumentRef.InventoryTransfer")) 
-			And FOServer.IsUseCommissionTrading();
-		
-		If UseInventoryOrigin Then
-			If ObjectRefType = Type("DocumentRef.InventoryTransfer") Then
-				StoreRef = Object.StoreSender;
-			Else
-				StoreRef = Form.Store;
-			EndIf;
-			
-			ResultExistingRows = CommissionTradeServer.GetExistingRows(Object, StoreRef, FilterStructure, ResultElement);
-			
-			If ValueIsFilled(ResultExistingRows.InventoryOrigin) Then
-				InventoryOrigin = ResultExistingRows.InventoryOrigin;
-			EndIf;
-			
-			Object = Form.Object;
-			ExistingRows = New Array();
-			For Each Row In Object.ItemList Do
-				If ResultExistingRows.ArrayOfRowKeys.Find(Row.Key) <> Undefined Then
-					ExistingRows.Add(Row);
-				EndIf;
-			EndDo;
-			
-		Else
-			FilledFilter = New Structure();
-			For Each KeyValue In FilterStructure Do
-				If ResultElement.Property(KeyValue.Key) And ValueIsFilled(ResultElement[KeyValue.Key]) Then
-					FilledFilter.Insert(KeyValue.Key, ResultElement[KeyValue.Key]);
-				EndIf;
-			EndDo;
-			ExistingRows = Object.ItemList.FindRows(FilledFilter);	
-		EndIf;
-		
-		AddToExistsRow = ExistingRows.Count() > 0;
-		If UseSerialLotNumbers Or isSerialLotNumberAtRow Then
-			If ResultElement.AlwaysAddNewRowAfterScan Then
-				AddToExistsRow = False;
-			EndIf;
-		EndIf;
-		
-		If AddToExistsRow Then // increment Quantity in existing row
-			Row = ExistingRows[0];
-			
-			_UpdateQuantity = True;
-			
-			If UseInventoryOrigin Then 
-				If UseSourceOfOrigins Then // with InventoryOrigin and SourceOfOrigins
-					If ValueIsFilled(ResultElement.SourceOfOrigin) Then
-						SourceOfOriginsArray = New Array();
-						SourceOfOrigins = New Structure("SerialLotNumber, SourceOfOrigin, Quantity");
-						If ValueIsFilled(ResultElement.SerialLotNumber) Then
-							SourceOfOrigins.SerialLotNumber = ResultElement.SerialLotNumber;
-						EndIf;
-						SourceOfOrigins.SourceOfOrigin = ResultElement.SourceOfOrigin;
-						SourceOfOrigins.Quantity = 1;
-						SourceOfOriginsArray.Add(SourceOfOrigins);
-						SourceOfOriginsStructure = New Structure("RowKey, SourceOfOrigins", Row.Key, SourceOfOriginsArray);
-
-						SourceOfOriginClient.AddNewSourceOfOrigins(SourceOfOriginsStructure, AddInfo);
-					EndIf;
-				EndIf;
-				
-				If UseSerialLotNumbers Then // with InventoryOrigin and SerialLotNumbers
-					If ValueIsFilled(ResultElement.SerialLotNumber) Then
-						SerialLotNumbersArray = New Array();
-						SerialLotNumbers = New Structure("SerialLotNumber, Quantity");
-						SerialLotNumbers.SerialLotNumber = ResultElement.SerialLotNumber;
-						SerialLotNumbers.Quantity = 1;
-						SerialLotNumbersArray.Add(SerialLotNumbers);
-						SerialLotNumbersStructure = New Structure("RowKey, SerialLotNumbers", Row.Key, SerialLotNumbersArray);
-
-						SerialLotNumberClient.AddNewSerialLotNumbers(SerialLotNumbersStructure, AddInfo, True, AddInfo);
-						_UpdateQuantity = False;
-					EndIf;
-				EndIf;
-				
-				If _UpdateQuantity Then
-					ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);
-				EndIf;
-				
-			Else // NOT UseInventoryOrigin
-			
-				If ObjectRefType = Type("DocumentRef.PhysicalInventory")
-					Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
-					ViewClient_V2.SetItemListPhysCount(Object, Form, Row, Row.PhysCount + ResultElement.Quantity);
-				Else
-					ViewClient_V2.SetItemListQuantity(Object, Form, Row, Row.Quantity + ResultElement.Quantity);
-				EndIf;
-				
-			EndIf;
-		Else // add new row to ItemList
-			FillingValues = New Structure();
-			FillingValues.Insert("Item"     , ResultElement.Item);
-			FillingValues.Insert("ItemKey"  , ResultElement.ItemKey);
-			FillingValues.Insert("Unit"     , ResultElement.Unit);
-			FillingValues.Insert("Quantity" , ResultElement.Quantity);
-			FillingValues.Insert("SerialLotNumber" , ResultElement.SerialLotNumber);
-			FillingValues.Insert("Barcode" , ?(ResultElement.Property("Barcode"), ResultElement.Barcode, ""));
-			FillingValues.Insert("Date" , CommonFunctionsServer.GetCurrentSessionDate());
-			
-			If ResultElement.Property("PriceType") Then
-				FillingValues.Insert("PriceType", ResultElement.PriceType);
-			EndIf;
-			
-			Row = ViewClient_V2.ItemListAddFilledRow(Object, Form, FillingValues);
-			
-			// SourceOfOrigin AND InventoryOrigin
-			If UseInventoryOrigin Then
-				If UseSourceOfOrigins And ValueIsFilled(ResultElement.SourceOfOrigin) Then
-					SourceOfOriginsArray = New Array();
-					SourceOfOrigins = New Structure("SerialLotNumber, SourceOfOrigin, Quantity");
-					If ValueIsFilled(ResultElement.SerialLotNumber) Then
-						SourceOfOrigins.SerialLotNumber = ResultElement.SerialLotNumber;
-					EndIf;
-					SourceOfOrigins.SourceOfOrigin = ResultElement.SourceOfOrigin;
-					SourceOfOrigins.Quantity = 1;
-					SourceOfOriginsArray.Add(SourceOfOrigins);
-					SourceOfOriginsStructure = New Structure("RowKey, SourceOfOrigins", Row.Key, SourceOfOriginsArray);
-
-					SourceOfOriginClient.AddNewSourceOfOrigins(SourceOfOriginsStructure, AddInfo);
-				EndIf;
-			EndIf;
-			
-			// SerialLotNumbers AND InventoryOrigin
-			If UseInventoryOrigin Then
-				If UseSerialLotNumbers And ValueIsFilled(ResultElement.SerialLotNumber) Then
-					SerialLotNumbersArray = New Array();
-					SerialLotNumbers = New Structure("SerialLotNumber, Quantity");
-					SerialLotNumbers.SerialLotNumber = ResultElement.SerialLotNumber;
-					SerialLotNumbers.Quantity = 1;
-					SerialLotNumbersArray.Add(SerialLotNumbers);
-					SerialLotNumbersStructure = New Structure("RowKey, SerialLotNumbers", Row.Key, SerialLotNumbersArray);
-
-					SerialLotNumberClient.AddNewSerialLotNumbers(SerialLotNumbersStructure, AddInfo, True, AddInfo);
-				EndIf;
-			EndIf;
-			
-			If ValueIsFilled(InventoryOrigin) Then
-				ViewClient_V2.SetItemListInventoryOrigin(Object, Form, Row, InventoryOrigin);
-			EndIf;
-			
-		EndIf;
-		
-		// SerialLotNumbers and NOT InventoryOrigin
-		If UseSerialLotNumbers Then
-			If ValueIsFilled(ResultElement.SerialLotNumber) Then
-				If Not UseInventoryOrigin Then // serial lot number for documents without inventory origin
-					SerialLotNumbersArray = New Array();
-					SerialLotNumbers = New Structure("SerialLotNumber, Quantity");
-					SerialLotNumbers.SerialLotNumber = ResultElement.SerialLotNumber;
-					SerialLotNumbers.Quantity = 1;
-					SerialLotNumbersArray.Add(SerialLotNumbers);
-					SerialLotNumbersStructure = New Structure("RowKey, SerialLotNumbers", Row.Key, SerialLotNumbersArray);
-
-					SerialLotNumberClient.AddNewSerialLotNumbers(SerialLotNumbersStructure, AddInfo, True, AddInfo);
-				EndIf;
-			ElsIf ResultElement.UseSerialLotNumber Then
-				Form.ItemListSerialLotNumbersPresentationStartChoice(Object.ItemList, Undefined, True);
-			EndIf;
-		ElsIf ObjectRefType = Type("DocumentRef.PhysicalInventory")
-				Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
-			
-			If Object.UseSerialLot And ResultElement.UseSerialLotNumber And Not ValueIsFilled(ResultElement.SerialLotNumber) Then
-				Form.ItemListSerialLotNumberStartChoice(Object.ItemList, Undefined, True);
-			EndIf;
-		EndIf;
-		
-		// SourceOfOrigins and NOT InventoryOrigin
-		If UseSourceOfOrigins Then
-			If ValueIsFilled(ResultElement.SourceOfOrigin) Then
-				If Not UseInventoryOrigin Then // source of origins for documents without inventory origin
-					SourceOfOriginsArray = New Array();
-					SourceOfOrigins = New Structure("SerialLotNumber, SourceOfOrigin, Quantity");
-					If ValueIsFilled(ResultElement.SerialLotNumber) Then
-						SourceOfOrigins.SerialLotNumber = ResultElement.SerialLotNumber;
-					EndIf;
-					SourceOfOrigins.SourceOfOrigin = ResultElement.SourceOfOrigin;
-					SourceOfOrigins.Quantity = 1;
-					SourceOfOriginsArray.Add(SourceOfOrigins);
-					SourceOfOriginsStructure = New Structure("RowKey, SourceOfOrigins", Row.Key, SourceOfOriginsArray);
-
-					SourceOfOriginClient.AddNewSourceOfOrigins(SourceOfOriginsStructure, AddInfo);
-				EndIf;
-		
-			EndIf;
-		EndIf;
-		
-	EndDo; // Result
-	
-EndProcedure
-
-Procedure OpenPickupItems(Object, Form, Command) Export
-	NotifyParameters = New Structure();
-	NotifyParameters.Insert("Object", Object);
-	NotifyParameters.Insert("Form", Form);
-	NotifyDescription = New NotifyDescription("PickupItemsEnd", ThisObject, NotifyParameters);
-	OpenFormParameters = PickupItemsParameters(Object, Form);
-#If MobileClient Then
-
-#Else
-		If Command.AssociatedTable <> Undefined Then
-			OpenFormParameters.Insert("AssociatedTableName", Command.AssociatedTable.Name);
-			OpenFormParameters.Insert("Object", Object);
-		EndIf;
-
-		FormName = "CommonForm.PickUpItems";
-		OpenForm(FormName, OpenFormParameters, Form, , , , NotifyDescription);
-#EndIf
-
-EndProcedure
-
-Function PickupItemsParameters(Object, Form)
-	ReturnValue = New Structure();
-
-	StoreArray = New Array();
-	StoreInItemList = False;
-	For Each Row In Object.ItemList Do
-		If CommonFunctionsClientServer.ObjectHasProperty(Row, "Store") Then
-			StoreInItemList = True;
-			If ValueIsFilled(Row.Store) And StoreArray.Find(Row.Store) = Undefined Then
-				StoreArray.Add(Row.Store);
-			EndIf;
-		EndIf;
-	EndDo;
-	
-	If Not StoreInItemList And CommonFunctionsClientServer.ObjectHasProperty(Object, "Store") Then
-		If ValueIsFilled(Object.Store) Then
-			StoreArray.Add(Object.Store);
-		EndIf;
-	EndIf;
-	
-	If Not StoreInItemList And CommonFunctionsClientServer.ObjectHasProperty(Object, "StoreSender") Then
-		If ValueIsFilled(Object.StoreSender) Then
-			StoreArray.Add(Object.StoreSender);
-		EndIf;
-	EndIf;
-	
-	If CommonFunctionsClientServer.ObjectHasProperty(Object, "StoreReceiver") Then
-		ArrayOfReceiverStores = New Array();
-		ArrayOfReceiverStores.Add(Object.StoreReceiver);
-		ReturnValue.Insert("ReceiverStores", ArrayOfReceiverStores);
-	EndIf;
-	
-	EndPeriod = CommonFunctionsServer.GetCurrentSessionDate();
-	
-	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Agreement") Then
-		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
-		PriceType = AgreementInfo.PriceType;
-	Else
-		PriceType = PredefinedValue("Catalog.PriceTypes.EmptyRef");
-	EndIf;
-	ReturnValue.Insert("Stores", StoreArray);
-	ReturnValue.Insert("EndPeriod", EndPeriod);
-	ReturnValue.Insert("PriceType", PriceType);
-
-	Return ReturnValue;
-EndFunction
-
-#EndRegion
-
 #Region Item
 
 Function GetOpenSettingsForSelectItemWithoutServiceFilter(OpenSettings = Undefined, AddInfo = Undefined) Export
@@ -1395,7 +1082,8 @@ Function GetFormItemNames()
 				|PayrollListKey, TimeSheetListKey, TimeSheetListVisible, TimeSheetListLineNumber, TimeSheetListEmployee, TimeSheetListPosition,
 				|EmployeeCashAdvanceKey, AdvanceFromRetailCustomersKey, SalaryPaymentKey, EmployeeCashAdvanceIsFixedCurrency,
 				|ItemListPurchaseOrderKey, ItemListSalesOrderKey,
-				|AccrualListKey, DeductionListKey, CashAdvanceDeductionListKey";
+				|AccrualListKey, DeductionListKey, CashAdvanceDeductionListKey,
+				|ItemListConsignor";
 	Return ItemNames;
 EndFunction	
 
@@ -1624,6 +1312,255 @@ Procedure FinancialMovementTypeEditTextChange(Object, Form, Item, Text, Standard
 	AdditionalParameters = New Structure();
 	ExpenseAndRevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
 		AdditionalParameters);
+EndProcedure
+
+#EndRegion
+
+
+
+#Region PickUpItems
+
+Procedure OpenPickupItems(Object, Form, Command) Export
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", Form);
+	NotifyParameters.Insert("Filter" , New Structure("DisableIfIsService", False));
+	NotifyDescription = New NotifyDescription("PickupItemsEnd", ThisObject, NotifyParameters);
+	OpenFormParameters = PickupItemsParameters(Object, Form);
+#If MobileClient Then
+
+#Else
+		If Command.AssociatedTable <> Undefined Then
+			OpenFormParameters.Insert("AssociatedTableName", Command.AssociatedTable.Name);
+			OpenFormParameters.Insert("Object", Object);
+		EndIf;
+
+		FormName = "CommonForm.PickUpItems";
+		OpenForm(FormName, OpenFormParameters, Form, , , , NotifyDescription);
+#EndIf
+
+EndProcedure
+
+Function PickupItemsParameters(Object, Form)
+	ReturnValue = New Structure();
+
+	StoreArray = New Array();
+	StoreInItemList = False;
+	For Each Row In Object.ItemList Do
+		If CommonFunctionsClientServer.ObjectHasProperty(Row, "Store") Then
+			StoreInItemList = True;
+			If ValueIsFilled(Row.Store) And StoreArray.Find(Row.Store) = Undefined Then
+				StoreArray.Add(Row.Store);
+			EndIf;
+		EndIf;
+	EndDo;
+	
+	If Not StoreInItemList And CommonFunctionsClientServer.ObjectHasProperty(Object, "Store") Then
+		If ValueIsFilled(Object.Store) Then
+			StoreArray.Add(Object.Store);
+		EndIf;
+	EndIf;
+	
+	If Not StoreInItemList And CommonFunctionsClientServer.ObjectHasProperty(Object, "StoreSender") Then
+		If ValueIsFilled(Object.StoreSender) Then
+			StoreArray.Add(Object.StoreSender);
+		EndIf;
+	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "StoreReceiver") Then
+		ArrayOfReceiverStores = New Array();
+		ArrayOfReceiverStores.Add(Object.StoreReceiver);
+		ReturnValue.Insert("ReceiverStores", ArrayOfReceiverStores);
+	EndIf;
+	
+	EndPeriod = CommonFunctionsServer.GetCurrentSessionDate();
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Agreement") Then
+		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
+		PriceType = AgreementInfo.PriceType;
+	Else
+		PriceType = PredefinedValue("Catalog.PriceTypes.EmptyRef");
+	EndIf;
+	ReturnValue.Insert("Stores", StoreArray);
+	ReturnValue.Insert("EndPeriod", EndPeriod);
+	ReturnValue.Insert("PriceType", PriceType);
+
+	Return ReturnValue;
+EndFunction
+
+
+Function GetParametersPickupItems(Object, Form, AddInfo)
+	Parameters = New Structure();
+	
+	ObjectRefType = TypeOf(Object.Ref);
+	
+	Parameters.Insert("ObjectRefType"       , ObjectRefType);
+	Parameters.Insert("UseSerialLotNumbers" , Object.Property("SerialLotNumbers"));
+	Parameters.Insert("UseSourceOfOrigins"  , Object.Property("SourceOfOrigins"));
+	
+	// isSerialLotNumberAtRow
+	isSerialLotNumberAtRow = False;
+	If ObjectRefType = Type("DocumentRef.PhysicalInventory")
+		Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
+		isSerialLotNumberAtRow = Object.UseSerialLot;
+	EndIf;
+	Parameters.Insert("isSerialLotNumberAtRow", isSerialLotNumberAtRow);
+	
+	// FilterStructure
+	If Object.Property("Agreement") Then
+		FilterString = "Item, ItemKey, Unit, PriceType";
+	ElsIf isSerialLotNumberAtRow Then
+		FilterString = "Item, ItemKey, Unit, SerialLotNumber";
+	Else
+		FilterString = "Item, ItemKey, Unit";
+	EndIf;
+
+	If ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
+		FilterString = FilterString + ", Barcode, Date";
+	EndIf;
+	FilterStructure = New Structure(FilterString);
+	Parameters.Insert("FilterStructure", FilterStructure);
+	
+	
+	// UseInventoryOrigin
+	UseInventoryOrigin = (ObjectRefType = Type("DocumentRef.RetailSalesReceipt") 
+			Or ObjectRefType = Type("DocumentRef.SalesInvoice")
+			Or ObjectRefType = Type("DocumentRef.InventoryTransfer")) 
+			And FOServer.IsUseCommissionTrading();
+	Parameters.Insert("UseInventoryOrigin", UseInventoryOrigin);
+
+	// StoreInItemList
+	StoreInItemList = True;
+	If UseInventoryOrigin And ObjectRefType = Type("DocumentRef.InventoryTransfer") Then
+		StoreInItemList = False;
+	EndIf;	
+	Parameters.Insert("StoreInItemList", StoreInItemList);
+		
+	// StoreRef	
+	StoreRef = Undefined;
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "Store") Then
+		StoreRef = Object.Store;
+	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Object, "StoreSender") Then
+		StoreRef = Object.StoreSender;
+	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Form, "Store") Then
+		StoreRef = Form.Store;
+	EndIf;
+	Parameters.Insert("StoreRef", StoreRef);
+		
+	// QuantityColumnName	
+	QuantityColumnName = "Quantity";
+	If ObjectRefType = Type("DocumentRef.PhysicalInventory")
+		Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
+		QuantityColumnName = "PhysCount";
+	EndIf;
+	Parameters.Insert("QuantityColumnName", QuantityColumnName);
+	
+//	// SerialLotNumberInRow
+//	SerialLotNumberInRow = False;
+//	If ObjectRefType = Type("DocumentRef.PhysicalInventory")
+//		Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
+//		SerialLotNumberInRow = True;
+//	EndIf;
+//	Parameters.Insert("SerialLotNumberInRow", SerialLotNumberInRow);
+	
+	
+	Parameters.Insert("Filter", AddInfo.Filter);
+		
+	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
+	ServerParameters.TableName = "ItemList";
+	FormParameters   = ControllerClientServer_V2.GetFormParameters(Form);
+	ServerSideParameters = New Structure();
+	ServerSideParameters.Insert("ServerParameters", ServerParameters);
+	ServerSideParameters.Insert("FormParameters"  , FormParameters);
+	Parameters.Insert("ServerSideParameters", ServerSideParameters);
+	Return Parameters;
+EndFunction
+
+// Pickup items end.
+// 
+// Parameters:
+//  Result - See BarcodeServer.SearchByBarcodes
+//  AddInfo - See BarcodeClient.GetBarcodeSettings
+Procedure PickupItemsEnd(ScanData, AddInfo) Export
+	If Not ValueIsFilled(ScanData) Or Not AddInfo.Property("Object") Or Not AddInfo.Property("Form") Then
+		Return;
+	EndIf;
+
+	Object 	= AddInfo.Object;
+	Form 	= AddInfo.Form;
+	
+	Parameters = GetParametersPickupItems(Object, Form, AddInfo);
+	
+	Parameters.ServerSideParameters.FormParameters.Form = Undefined;
+	
+	Result = DocumentsServer.PickupItemEnd(Parameters, ScanData);
+
+	Parameters.ServerSideParameters.FormParameters.Form = Form;
+
+	TmpParameters = ControllerClientServer_V2.GetParameters(
+		Parameters.ServerSideParameters.ServerParameters, 
+		Parameters.ServerSideParameters.FormParameters);
+	
+	ViewNotify = New Array();
+	
+	For Each RowInfo In Result.NewRows Do
+		NewRow = Object.ItemList.Add();
+		NewRow.Key = RowInfo.Key;
+		TmpParameters.Cache = RowInfo.Cache;
+		ControllerClientServer_V2.CommitChainChanges(TmpParameters, False);
+		For Each ViewNotifyItem In RowInfo.ViewNotify Do
+			ViewNotify.Add(ViewNotifyItem);
+		EndDo;
+	EndDo;
+		
+	For Each RowInfo In Result.UpdatedRows Do
+		TmpParameters.Cache = RowInfo.Cache;
+		ControllerClientServer_V2.CommitChainChanges(TmpParameters, False);
+		For Each ViewNotifyItem In RowInfo.ViewNotify Do
+			ViewNotify.Add(ViewNotifyItem);
+		EndDo;
+	EndDo;
+	
+	For Each TableName In Result.ArrayOfTableNames Do
+		TmpParameters.Cache = Result[TableName];
+		ControllerClientServer_V2.CommitChainChanges(TmpParameters, False);
+	EndDo;
+	
+	TmpParameters.ViewNotify = ViewNotify;
+	ControllerClientServer_V2.OnChangesNotifyView(TmpParameters);	
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "SerialLotNumbers") Then
+		SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
+	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "SourceOfOrigins") Then
+		SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
+	EndIf;
+	
+	// set current last added row
+	If Result.ChoiceForms.PresentationStartChoice_Counter <> 1 And Result.ChoiceForms.StartChoice_Counter <> 1 Then
+		If Result.NewRows.Count() Then
+			Form.Items.ItemList.CurrentRow = Object.ItemList.FindRows(
+				New Structure("Key", Result.NewRows[Result.NewRows.UBound()].Key))[0].GetID();
+		EndIf;
+	EndIf;
+	
+	// open serial lot numbers choice form
+	If Result.ChoiceForms.PresentationStartChoice_Counter = 1 Then
+		Form.Items.ItemList.CurrentRow = Object.ItemList.FindRows(
+		New Structure("Key", Result.ChoiceForms.PresentationStartChoice_Key))[0].GetID();
+		Form.ItemListSerialLotNumbersPresentationStartChoice(Object.ItemList, Undefined, True);
+	EndIf;	
+	
+	If Result.ChoiceForms.StartChoice_Counter = 1 Then
+		Form.Items.ItemList.CurrentRow = Object.ItemList.FindRows(
+		New Structure("Key", Result.ChoiceForms.StartChoice_Key))[0].GetID();
+		Form.ItemListSerialLotNumberStartChoice(Object.ItemList, Undefined, True);
+	EndIf;	
+	
+	For Each Message In Result.UserMessages Do
+		CommonFunctionsClientServer.ShowUsersMessage(Message);
+	EndDo;	
 EndProcedure
 
 #EndRegion

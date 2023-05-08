@@ -816,8 +816,8 @@ EndFunction
 // Returns:
 //  String - Get query text
 Function GetQueryText(ObjectName, QueryOptionsString, Fields) Export
-	QueryTextArray = New Array();
-	QueryTextArray.Add("SELECT " + QueryOptionsString);
+	QueryTextArray = New Array(); // Array of String
+	QueryTextArray.Add("SELECT ALLOWED " + QueryOptionsString);
 
 	QueryFieldsArray = New Array();
 	For Each Field In Fields Do

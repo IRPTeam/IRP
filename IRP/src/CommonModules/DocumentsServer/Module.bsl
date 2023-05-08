@@ -690,7 +690,12 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 			
 			If ValueIsFilled(FoundedRows.InventoryOrigin) Then
 				FillingValues.Insert("InventoryOrigin", FoundedRows.InventoryOrigin);
-			EndIf;		
+			EndIf;	
+				
+			If ValueIsFilled(FoundedRows.Consignor) Then
+				FillingValues.Insert("Consignor", FoundedRows.Consignor);
+			EndIf;	
+				
 		Else // Update row + Quantity
 			ResultName = "UpdatedRows";
 			RowKey = FoundedRows.Row.Key;
@@ -749,7 +754,8 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 EndFunction
 
 Function FindRows(Object, Parameters, ScanDataItem)
-	Result = New Structure("AddNewRow, Row, InventoryOrigin", True, Undefined, Undefined);
+	Result = New Structure("AddNewRow, Row, InventoryOrigin, Consignor", 
+		True, Undefined, Undefined, Undefined);
 	
 	AlwaysAddNew = False;
 	
@@ -762,6 +768,7 @@ Function FindRows(Object, Parameters, ScanDataItem)
 	If Parameters.UseInventoryOrigin Then
 		ExistingRowsInfo = GetExistingRows_UseInventoryOrigin(Object, Parameters, ScanDataItem);
 		Result.InventoryOrigin = ExistingRowsInfo.InventoryOrigin;
+		Result.Consignor = ExistingRowsInfo.Consignor;
 		
 		If AlwaysAddNew Then
 			Return Result;
@@ -785,7 +792,7 @@ Function FindRows(Object, Parameters, ScanDataItem)
 EndFunction	
 
 Function GetExistingRows_UseInventoryOrigin(Val Object, Parameters, ScanDataItem)
-	Result = New Structure("ExistingRows, InventoryOrigin", New Array(), Undefined);
+	Result = New Structure("ExistingRows, InventoryOrigin, Consignor", New Array(), Undefined, Undefined);
 	
 	FilterStructureCopy = New Structure();
 	For Each KeyValue In Parameters.FilterStructure Do
@@ -804,6 +811,10 @@ Function GetExistingRows_UseInventoryOrigin(Val Object, Parameters, ScanDataItem
 			
 	If ValueIsFilled(ResultExistingRows.InventoryOrigin) Then
 		Result.InventoryOrigin = ResultExistingRows.InventoryOrigin;
+	EndIf;
+
+	If ResultExistingRows.Property("Consignor") And ValueIsFilled(ResultExistingRows.Consignor) Then
+		Result.Consignor = ResultExistingRows.Consignor;
 	EndIf;
 
 	For Each Row In Object.ItemList Do

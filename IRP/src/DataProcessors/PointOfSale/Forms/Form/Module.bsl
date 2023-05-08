@@ -1304,7 +1304,7 @@ EndProcedure
 &AtClient
 Async Procedure PrintCashIn(CashIn)
 	ConsolidatedRetailSales = CommonFunctionsServer.GetRefAttribute(CashIn, "ConsolidatedRetailSales");
-	If Not Object.ConsolidatedRetailSales.IsEmpty() Then
+	If ValueIsFilled(ConsolidatedRetailSales) Then
 		EquipmentResult = Await EquipmentFiscalPrinterClient.CashInCome(ConsolidatedRetailSales
 				, CashIn
 				, GetSumm(CashIn));
@@ -1368,7 +1368,7 @@ EndProcedure
 //  AddInfo - Undefined - Add info
 &AtClient
 Procedure CreateCashOutFinish(CashOut, AddInfo) Export
-	If Not CashOut.IsEmpty() Then
+	If ValueIsFilled(CashOut) Then
 		PrintCashOut(CashOut);
 	EndIf; 
 EndProcedure

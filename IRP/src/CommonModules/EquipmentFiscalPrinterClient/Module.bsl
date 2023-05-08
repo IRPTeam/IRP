@@ -441,9 +441,195 @@ Async Function PrintTextDocument(ConsolidatedRetailSales, DataSource) Export
 	Return Result;
 EndFunction
 
+// Request KM.
+// 
+// Parameters:
+//  Hardware - CatalogRef.Hardware - 
+//  RequestKMSettings - See RequestKMSettings
+// 
+// Returns:
+//  See EquipmentFiscalPrinterClient.ProcessingKMResult
+Async Function CheckKM(Hardware, RequestKMSettings) Export
+	Settings = Await HardwareClient.FillDriverParametersSettings(Hardware); // See HardwareClient.FillDriverParametersSettings
+	Return Device_CheckKM(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, RequestKMSettings);
+EndFunction
+
+// Request KM settings.
+// 
+// Returns:
+//  Structure - Request KMSettings:
+// * GUID - UUID -
+// * WaitForResult - Boolean -
+// * MarkingCode - String -
+// * PlannedStatus - Number -
+// * Quantity - Number -
+Function RequestKMSettings() Export
+	Str = New Structure;
+	Str.Insert("GUID", String(New UUID()));
+	Str.Insert("WaitForResult", True);
+	Str.Insert("MarkingCode", "");
+	Str.Insert("PlannedStatus", 1);
+	Str.Insert("Quantity", 1);
+	Return Str;
+EndFunction
+
+// Request KMSettings result.
+// 
+// Returns:
+//  Structure - Request KMSettings result:
+// * Checking - Boolean -
+// * CheckingResult - Boolean -
+Function RequestKMSettingsResult() 
+	Str = New Structure;
+	Str.Insert("Checking", False);
+	Str.Insert("CheckingResult", False);
+	Return Str;
+EndFunction
+
+
+// Processing KMResult.
+// 
+// Returns:
+//  Structure - Processing KMResult:
+// * GUID - String -
+// * Result - Boolean -
+// * ResultCode - Number -
+// * StatusInfo - Number -
+// * HandleCode - Number -
+Function ProcessingKMResult() Export
+	Str = New Structure;
+	Str.Insert("GUID", "");
+	Str.Insert("Result", False);
+	Str.Insert("ResultCode", -1);
+	Str.Insert("StatusInfo", 0);
+	Str.Insert("HandleCode", -1);
+	Return Str;
+EndFunction
+
+#EndRegion
+
+#Region Device
+
+// Device request KM.
+// 
+// Parameters:
+//  Settings - See HardwareClient.GetDriverObject
+//  DriverObject - Arbitrary - Driver object
+//  RequestKMSettings - See RequestKMSettings
+// 
+// Returns:
+//  See ProcessingKMResult
+Function Device_CheckKM(Settings, DriverObject, RequestKMSettings)
+	
+	RequestXML = RequestXML(RequestKMSettings);
+	
+	ResultXML = "";
+	RequestStatus = 0;
+	ProcessingKMResultXML = "";
+	ProcessingKMResult = ProcessingKMResult();
+	If Not DriverObject.OpenSessionRegistrationKM(Settings.ID) = True Then
+		Raise R().EqFP_CanNotOpenSessionRegistrationKM;
+	EndIf;
+	
+	If Not DriverObject.RequestKM(Settings.ID, RequestXML, ResultXML) = True Then
+		DriverObject.CloseSessionRegistrationKM(Settings.ID);
+		Raise R().EqFP_CanNotRequestKM;
+	EndIf;
+
+	RequestKMResult = RequestXMLResponse(ResultXML);
+
+	ResultIsCorrect = False;
+	For Index = 0 To 5 Do
+	
+		If Not DriverObject.GetProcessingKMResult(Settings.ID, ProcessingKMResultXML, RequestStatus) = True Then
+			DriverObject.CloseSessionRegistrationKM(Settings.ID);
+			Raise R().EqFP_CanNotGetProcessingKMResult;
+		EndIf;
+		
+		ProcessingKMResult = ProcessingKMResultResponse(ProcessingKMResultXML);
+		
+		If RequestStatus = 1 Then
+			Continue;
+		EndIf; 
+
+		If Not ProcessingKMResult.GUID = RequestKMSettings.GUID Then
+			Continue;
+		EndIf;
+		
+		ResultIsCorrect = True;
+		Break;
+	EndDo;
+	
+	If Not DriverObject.CloseSessionRegistrationKM(Settings.ID) = True Then
+		Raise R().EqFP_CanNotCloseSessionRegistrationKM;
+	EndIf;
+	
+	
+	If Not ResultIsCorrect Then
+		Raise R().EqFP_GetWrongAnswerFromProcessingKM;
+	EndIf;
+	
+	Return ProcessingKMResult;
+	
+EndFunction
+
 #EndRegion
 
 #Region Private
+
+Function RequestXML(RequestKMSettings)
+	XMLWriter = New XMLWriter();
+	XMLWriter.SetString("UTF-8");
+	XMLWriter.WriteXMLDeclaration();
+	XMLWriter.WriteStartElement("RequestKM");
+	XMLWriter.WriteAttribute("GUID" , ToXMLString(RequestKMSettings.GUID));
+	XMLWriter.WriteAttribute("MarkingCode" , ToXMLString(RequestKMSettings.MarkingCode));
+	XMLWriter.WriteAttribute("PlannedStatus" , ToXMLString(RequestKMSettings.PlannedStatus));
+	XMLWriter.WriteAttribute("WaitForResult" , ToXMLString(RequestKMSettings.WaitForResult));
+	XMLWriter.WriteAttribute("Quantity" , ToXMLString(RequestKMSettings.Quantity));
+	XMLWriter.WriteEndElement();
+	
+	RequestXML = XMLWriter.Close();
+	Return RequestXML
+EndFunction
+
+Function RequestXMLResponse(ResultXML)
+	
+	Result = RequestKMSettingsResult();
+	
+	Reader = New XMLReader();
+	Reader.SetString(ResultXML);
+	XDTO = XDTOFactory.ReadXML(Reader);
+	Reader.Close();
+		
+	For Each DataItem In Result Do
+		If Not XDTO.Properties().Get(DataItem.Key) = Undefined Then
+			Result[DataItem.Key] = TransformToTypeBySource(XDTO[DataItem.Key], DataItem.Value);
+		EndIf;
+	EndDo;
+	
+	Return Result;
+	
+EndFunction
+
+Function ProcessingKMResultResponse(ResultXML)
+	
+	Result = ProcessingKMResult();
+	
+	Reader = New XMLReader();
+	Reader.SetString(ResultXML);
+	XDTO = XDTOFactory.ReadXML(Reader);
+	Reader.Close();
+		
+	For Each DataItem In Result Do
+		If Not XDTO.Properties().Get(DataItem.Key) = Undefined Then
+			Result[DataItem.Key] = TransformToTypeBySource(XDTO[DataItem.Key], DataItem.Value);
+		EndIf;
+	EndDo;
+	
+	Return Result;
+	
+EndFunction
 
 Function ShiftSettings() Export
 	Str = New Structure();

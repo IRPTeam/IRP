@@ -1282,6 +1282,64 @@ Procedure CashInListSelection(Item, RowSelected, Field, StandardProcessing)
 EndProcedure
 
 &AtClient
+Async Procedure CreateAndPostCashIn(Command)
+	CurrentData = Items.CashInList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CashInData = New Structure();
+	CashInData.Insert("MoneyTransfer"           , CurrentData.MoneyTransfer);
+	CashInData.Insert("Currency"                , CurrentData.Currency);
+	CashInData.Insert("Amount"                  , CurrentData.Amount);
+	CashInData.Insert("NetAmount"               , CurrentData.Amount);
+	CashInData.Insert("ConsolidatedRetailSales" , Object.ConsolidatedRetailSales);
+	
+	FillingData = GetFillingDataMoneyTransferForCashReceipt(CashInData);
+	CashIn = CreateAndPostCashInAtServer(FillingData);
+	Message(CashIn);
+	PrintCashIn(CashIn);
+	FillCashInList();
+EndProcedure
+
+&AtClient
+Async Procedure PrintCashIn(CashIn)
+	ConsolidatedRetailSales = CommonFunctionsServer.GetRefAttribute(CashIn, "ConsolidatedRetailSales");
+	If ValueIsFilled(ConsolidatedRetailSales) Then
+		EquipmentResult = Await EquipmentFiscalPrinterClient.CashInCome(ConsolidatedRetailSales
+				, CashIn
+				, GetSumm(CashIn));
+	EndIf;
+EndProcedure
+
+&AtServer
+Function GetSumm(CashIn)
+	Return CashIn.PaymentList.Total("TotalAmount");
+EndFunction
+
+// Create and post cash in at server.
+// 
+// Parameters:
+//  FillingData - Structure - Filling data:
+// * BasedOn - String -
+// * Date - Date -
+// * TransactionType - EnumRef.IncomingPaymentTransactionType -
+// * Company - CatalogRef.Companies -
+// * Branch - CatalogRef.BusinessUnits -
+// * CashAccount - CatalogRef.CashAccounts -
+// * Currency - CatalogRef.Currencies -
+// * ConsolidatedRetailSales - DocumentRef.ConsolidatedRetailSales -
+// * PaymentList - Array -
+// 
+// Returns:
+//  DocumentRef.CashReceipt
+&AtServer
+Function CreateAndPostCashInAtServer(FillingData)
+	Wrapper = BuilderAPI.Initialize("CashReceipt", , FillingData);
+	Doc = BuilderAPI.Write(Wrapper, DocumentWriteMode.Posting);
+	Return Doc.Ref;
+EndFunction
+
+&AtClient
 Procedure CreateCashInFinish(Result, AddInfo) Export
 	FillCashInList();
 EndProcedure
@@ -1303,10 +1361,25 @@ Procedure CreateCashOut(Command, AutoCreateMoneyTransfer = False)
 			FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
+// Create cash out finish.
+// 
+// Parameters:
+//  CashOut - DocumentRef.MoneyTransfer - Cash out
+//  AddInfo - Undefined - Add info
 &AtClient
-Procedure CreateCashOutFinish(Result, AddInfo) Export
-	If TypeOf(Result) = Type("String") Then
-		CommonFunctionsClientServer.ShowUsersMessage(Result);
+Procedure CreateCashOutFinish(CashOut, AddInfo) Export
+	If ValueIsFilled(CashOut) Then
+		PrintCashOut(CashOut);
+	EndIf; 
+EndProcedure
+
+&AtClient
+Async Procedure PrintCashOut(CashOut)
+	ConsolidatedRetailSales = CommonFunctionsServer.GetRefAttribute(CashOut, "ConsolidatedRetailSales");
+	If Not ConsolidatedRetailSales.IsEmpty() Then
+		EquipmentResult = Await EquipmentFiscalPrinterClient.CashOutCome(ConsolidatedRetailSales
+				, CashOut
+				, CommonFunctionsServer.GetRefAttribute(CashOut, "SendAmount"));
 	EndIf;
 EndProcedure
 

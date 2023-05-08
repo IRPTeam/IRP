@@ -84,6 +84,7 @@ Function CreateMoneyTransferAtServer()
 		Return ErrorDescription();
 	EndTry;
 	
-	Return StrTemplate(R().InfoMessage_002, NewDocument.Ref);
+	CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_002, NewDocument.Ref));
 	
+	Return NewDocument.Ref;
 EndFunction

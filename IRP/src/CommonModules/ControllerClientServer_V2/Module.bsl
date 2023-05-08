@@ -7,7 +7,6 @@ Function GetServerParameters(Object) Export
 	Result.Insert("ControllerModuleName", "ControllerClientServer_V2");
 	Result.Insert("TableName", "");
 	Result.Insert("Rows", Undefined);
-	Result.Insert("RowsConsignorStocks", New Array());
 	Result.Insert("ReadOnlyProperties", "");
 	Result.Insert("IsBasedOn", False);
 	
@@ -80,6 +79,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	
 	Parameters.Insert("RowsForRecalculate"   , New Array());
 	Parameters.Insert("UseRowsForRecalculate", False);
+	Parameters.Insert("RowsConsignorStocks"  , New Array());
 	
 	Parameters.LoadData.Insert("Address"                   , LoadParameters.Address);
 	Parameters.LoadData.Insert("GroupColumns"              , LoadParameters.GroupColumns);
@@ -199,7 +199,8 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 			ServerParameters.Rows = New Array();
 		EndIf;
 	EndIf;
-		
+	
+	RowsConsignorStocks = New Array();	
 	If ValueIsFilled(ServerParameters.TableName) 
 		And (Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 			Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt") Then
@@ -209,7 +210,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 				Continue;
 			EndIf;
 			If Row.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks") Then
-				ServerParameters.RowsConsignorStocks.Add(Row);
+				RowsConsignorStocks.Add(Row);
 			EndIf;
 		EndDo;		
 	EndIf;
@@ -219,8 +220,8 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	If WrappedRows.Count() Then
 		Parameters.Insert("Rows", WrappedRows);
 	EndIf;
-		
-	WrappedRows = WrapRows(Parameters, ServerParameters.RowsConsignorStocks);
+	
+	WrappedRows = WrapRows(Parameters, RowsConsignorStocks);
 	Parameters.Insert("RowsConsignorStocks", WrappedRows);
 	
 	Parameters.Insert("NextSteps"    , New Array());
@@ -4989,10 +4990,14 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 			Options.Agreement = GetPropertyObject(Parameters, Parameters.TableName + "." + "Agreement", Row.Key);
 		EndIf;
 		
-		
 		If Row.Property("InventoryOrigin") Then
 			Options.InventoryOrigin  = GetItemListInventoryOrigin(Parameters, Row.Key);
 			Options.ConsignorBatches = GetConsignorBatches(Parameters, Row.Key);
+			Options.Consignor = GetItemListConsignor(Parameters, Row.Key);
+		EndIf;
+		
+		If Row.Property("ItemKey") Then
+			Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
 		EndIf;
 		
 		Options.Date            = Options_Date;
@@ -5002,9 +5007,6 @@ Procedure StepChangeTaxRate(Parameters, Chain, AgreementInHeader = False, Agreem
 		Options.ArrayOfTaxInfo  = Parameters.ArrayOfTaxInfo;
 		Options.IsBasedOn       = Parameters.IsBasedOn;
 		Options.Ref             = Parameters.Object.Ref;
-		If Row.Property("ItemKey") Then
-			Options.ItemKey = GetItemListItemKey(Parameters, Row.Key);
-		EndIf;
 		
 		// update Tax rates
 		For Each TaxInfoItem In Parameters.ArrayOfTaxInfo Do
@@ -8372,6 +8374,15 @@ EndFunction
 Procedure SetConsignorBatches(Parameters, Results) Export
 	IsChanged = False;	
 	For Each Result In Results Do
+		
+		If Result.Value.DontFill = True Then
+			IsChanged = True;
+			If Parameters.Rows.Count() Then
+				Parameters.RowsForRecalculate.Add(Parameters.Rows[0]);
+			EndIf;
+			Continue;
+		EndIf;
+		
 		If Not Parameters.Cache.Property("ConsignorBatches") Then
 			AddTableToCache(Parameters, "ConsignorBatches");
 		EndIf;
@@ -8448,13 +8459,26 @@ Procedure StepConsignorBatchesFillBatches(Parameters, Chain) Export
 	Chain.ConsignorBatchesFillBatches.IsLazyStep = True;
 	Chain.ConsignorBatchesFillBatches.LazyStepName = "StepConsignorBatchesFillBatches";
 	
+	Rows = GetRows(Parameters, Parameters.TableName);
+	ItemListConsignor = Undefined;
+	If Rows.Count() = 1 Then
+		ItemListConsignor = GetItemListConsignor(Parameters, Rows[0].Key);
+	EndIf;
+	
 	Options = ModelClientServer_V2.ConsignorBatchesFillBatchesOptions();
-	Options.DocObject = Parameters.Object;
-	Options.Table_ItemList         = GetOption_Table_ItemList(Parameters);
-	Options.Table_SerialLotNumbers = GetOption_Table_SerialLotNumbers(Parameters);
-	Options.Table_SourceOfOrigins  = GetOption_Table_SourceOfOrigins(Parameters);
-	Options.Table_ConsignorBatches = GetConsignorBatches(Parameters);
-	Options.SilentMode = Not Parameters.FormIsExists;	
+	
+	If Not ValueIsFilled(ItemListConsignor) Then
+		Options.Consignor = ItemListConsignor;
+		Options.DocObject = Parameters.Object;
+		Options.Table_ItemList         = GetOption_Table_ItemList(Parameters);
+		Options.Table_SerialLotNumbers = GetOption_Table_SerialLotNumbers(Parameters);
+		Options.Table_SourceOfOrigins  = GetOption_Table_SourceOfOrigins(Parameters);
+		Options.Table_ConsignorBatches = GetConsignorBatches(Parameters);
+		Options.SilentMode = Not Parameters.FormIsExists;	
+	Else
+		Options.DontFill = True;
+		Options.Consignor = ItemListConsignor;
+	EndIf;
 	
 	Options.StepName = "StepConsignorBatchesFillBatches";
 	Chain.ConsignorBatchesFillBatches.Options.Add(Options);
@@ -10147,6 +10171,38 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_CONSIGNOR
+
+// ItemList.Consignor.Set
+Procedure SetItemListConsignor(Parameters, Results) Export
+	Binding = BindItemListConsignor(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.Consignor.Get
+Function GetItemListConsignor(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindItemListConsignor(Parameters).DataPath, _Key);
+EndFunction
+
+// ItemList.Consignor.Bind
+Function BindItemListConsignor(Parameters)
+	DataPath = "ItemList.Consignor";
+	Binding = New Structure();
+	
+	Binding.Insert("SalesInvoice",
+		"StepConsignorBatchesFillBatches");
+		
+	Binding.Insert("RetailSalesReceipt",
+		"StepConsignorBatchesFillBatches");
+	
+	Binding.Insert("InventoryTransfer",
+		"StepConsignorBatchesFillBatches_StoreSender");
+		
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListConsignor");
+EndFunction
+
+#EndRegion
+
 #Region ITEM_LIST_INVENTORY_ORIGIN
 
 // ItemList.InventoryOrigin.OnChange
@@ -10190,7 +10246,7 @@ Function BindItemListInventoryOrigin(Parameters)
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListInventoryOrigin");
 EndFunction
 
-// ItemList.Quantity.DefaultInventoryOrigin.Step
+// ItemList.DefaultInventoryOrigin.Step
 Procedure StepItemListDefaultInventoryOrigin(Parameters, Chain) Export
 	Chain.DefaultInventoryOrigin.Enable = True;
 	If Chain.Idle Then
@@ -12939,7 +12995,7 @@ Procedure OnChainComplete(Parameters) Export
 	#ENDIF
 EndProcedure
 
-Procedure CommitChainChanges(Parameters) Export
+Procedure CommitChainChanges(Parameters, OnChangesNotifyView = True) Export
 		
 	_CommitChainChanges(Parameters.Cache, Parameters.Object, Parameters);
 	
@@ -12963,20 +13019,27 @@ Procedure CommitChainChanges(Parameters) Export
 		_CommitChainChanges(Parameters.CacheForm, Parameters.Form, Parameters);
 	
 	#IF Client THEN
-		UniqueViewNotify = New Array();
-		For Each ViewNotify In Parameters.ViewNotify Do
-			If UniqueViewNotify.Find(ViewNotify) = Undefined Then
-				UniqueViewNotify.Add(ViewNotify);
-			EndIf;
-		EndDo;
-		For Each ViewNotify In UniqueViewNotify Do
-			ExecuteViewNotify(Parameters, ViewNotify);
-		EndDo;
+		If OnChangesNotifyView Then
+			OnChangesNotifyView(Parameters);
+		EndIf;
 	#ENDIF
 	EndIf;
 EndProcedure
 
 #IF Client Then
+	
+Procedure OnChangesNotifyView(Parameters) Export	
+	UniqueViewNotify = New Array();
+	For Each ViewNotify In Parameters.ViewNotify Do
+		If UniqueViewNotify.Find(ViewNotify) = Undefined Then
+			UniqueViewNotify.Add(ViewNotify);
+		EndIf;
+	EndDo;
+	For Each ViewNotify In UniqueViewNotify Do
+		ExecuteViewNotify(Parameters, ViewNotify);
+	EndDo;	
+EndProcedure
+
 Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	If ViewNotify = "OnOpenFormNotify"                         Then ViewClient_V2.OnOpenFormNotify(Parameters);
 	ElsIf ViewNotify = "InventoryOnAddRowFormNotify"           Then ViewClient_V2.InventoryOnAddRowFormNotify(Parameters);

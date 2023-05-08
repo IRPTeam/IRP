@@ -969,6 +969,54 @@
     <showTitle>true</showTitle>
    </extInfo>
   </items>
+  <items xsi:type="form:FormField">
+   <name>SerialLotNumbersCodeIsApproved</name>
+   <id>118</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>SerialLotNumbers.CodeIsApproved</segments>
+   </dataPath>
+   <titleLocation>None</titleLocation>
+   <extendedTooltip>
+    <name>SerialLotNumbersCodeIsApprovedExtendedTooltip</name>
+    <id>120</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>SerialLotNumbersCodeIsApprovedContextMenu</name>
+    <id>119</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>CheckBoxField</type>
+   <readOnly>true</readOnly>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerPicture xsi:type="core:PictureRef">
+    <picture>StdPicture.CheckSyntax</picture>
+   </headerPicture>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+  </items>
   <autoCommandBar>
    <name>SerialLotNumbersCommandBar</name>
    <id>8</id>
@@ -996,6 +1044,36 @@
      </extInfo>
     </extendedTooltip>
     <commandName>Form.Command.SearchByBarcode</commandName>
+    <representation>Auto</representation>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <placementArea>UserCmds</placementArea>
+    <representationInContextMenu>Auto</representationInContextMenu>
+   </items>
+   <items xsi:type="form:Button">
+    <name>SerialLotNumbersCheckKM</name>
+    <id>111</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <extendedTooltip>
+     <name>SerialLotNumbersCheckKMExtendedTooltip</name>
+     <id>112</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <commandName>Form.Command.CheckKM</commandName>
     <representation>Auto</representation>
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
@@ -1315,6 +1393,108 @@
    <backColor xsi:type="core:ColorRef">
     <color>Windows.ToolTip</color>
    </backColor>
+   <throughAlign>Auto</throughAlign>
+   <currentRowUse>Auto</currentRowUse>
+  </extInfo>
+ </items>
+ <items xsi:type="form:FormGroup">
+  <name>GroupAdditionalSettings</name>
+  <id>113</id>
+  <items xsi:type="form:FormField">
+   <name>Hardware</name>
+   <id>115</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>Hardware</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>HardwareExtendedTooltip</name>
+    <id>117</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>HardwareContextMenu</name>
+    <id>116</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>InputField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+    <choiceParameters>
+     <name>Filter.EquipmentType</name>
+     <value xsi:type="form:FormChoiceListDesTimeValue">
+      <value xsi:type="core:ReferenceValue">
+       <value>Enum.EquipmentTypes.EnumValue.FiscalPrinter</value>
+      </value>
+     </value>
+    </choiceParameters>
+   </extInfo>
+  </items>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <title>
+   <key>en</key>
+   <value>Additional settings</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Дополнительные настройки</value>
+  </title>
+  <extendedTooltip>
+   <name>GroupAdditionalSettingsExtendedTooltip</name>
+   <id>114</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <type>UsualGroup</type>
+  <extInfo xsi:type="form:UsualGroupExtInfo">
+   <group>HorizontalIfPossible</group>
+   <behavior>Collapsible</behavior>
+   <collapsed>true</collapsed>
+   <representation>WeakSeparation</representation>
+   <showLeftMargin>true</showLeftMargin>
+   <united>true</united>
+   <showTitle>true</showTitle>
    <throughAlign>Auto</throughAlign>
    <currentRowUse>Auto</currentRowUse>
   </extInfo>
@@ -1643,6 +1823,27 @@
     <common>true</common>
    </edit>
   </columns>
+  <columns>
+   <name>CodeIsApproved</name>
+   <title>
+    <key>en</key>
+    <value>Code is approved</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Код подтвержден</value>
+   </title>
+   <id>19</id>
+   <valueType>
+    <types>Boolean</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
  </attributes>
  <attributes>
   <name>ItemType</name>
@@ -1846,6 +2047,31 @@
    <common>true</common>
   </edit>
  </attributes>
+ <attributes>
+  <name>Hardware</name>
+  <title>
+   <key>en</key>
+   <value>Hardware</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Оборудование</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Donanım</value>
+  </title>
+  <id>18</id>
+  <valueType>
+   <types>CatalogRef.Hardware</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>Ok</name>
   <title>
@@ -1958,12 +2184,42 @@ bul (F7)</value>
   <representation>TextPicture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
+ <formCommands>
+  <name>CheckKM</name>
+  <title>
+   <key>en</key>
+   <value>Check KM</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Проверить коды</value>
+  </title>
+  <id>5</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.CheckSyntax</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>CheckKM</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
  <parameters>
   <name>Single</name>
   <valueType>
    <types>Boolean</types>
   </valueType>
   <keyParameter>true</keyParameter>
+ </parameters>
+ <parameters>
+  <name>Hardware</name>
+  <valueType>
+   <types>CatalogRef.Hardware</types>
+  </valueType>
  </parameters>
  <commandInterface>
   <navigationPanel/>

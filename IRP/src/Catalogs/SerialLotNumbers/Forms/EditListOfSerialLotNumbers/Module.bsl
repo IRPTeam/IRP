@@ -263,3 +263,18 @@ Procedure AfterCreateNewSerial(Result, AddInfo) Export
 	ThisObject.CurrentItem = Items.SerialLotNumbersQuantity;
 	
 EndProcedure
+
+&AtClient
+Async Procedure CheckKM(Command)
+	For Each SelectedID In Items.SerialLotNumbers.SelectedRows Do
+		Row = SerialLotNumbers.FindByID(SelectedID);
+		RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettings();
+		RequestKMSettings.Quantity = Row.Quantity;
+		RequestKMSettings.MarkingCode = CommonFunctionsServer.GetRefAttribute(Row.SerialLotNumber, "CodeString");
+		
+		Result = Await EquipmentFiscalPrinterClient.CheckKM(Hardware, RequestKMSettings); // See EquipmentFiscalPrinterClient.ProcessingKMResult
+		
+		Row.CodeIsApproved = Result.StatusInfo = 1;
+	EndDo;
+EndProcedure
+

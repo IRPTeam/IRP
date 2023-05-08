@@ -776,14 +776,11 @@ Scenario: _0850019 create retail sales receipt from POS (own stock, card 03, use
 	* Check fiscal log
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "2" and method is "ProcessCheck"
-		And I check "$ParsingResult$" with "2" and data in "In.Parameter3" the same as "SalesReceiptXML2"
-		And I check "$ParsingResult$" with "0" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains '620.00'
-		And I check "$ParsingResult$" with "1" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
-		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains '620.00'
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML2"
+		And I check "$ParsingResult$" with "2" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains '620.00'
 	* Check acquiring log
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
 		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
@@ -820,14 +817,14 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 		And Delay 10
 	* Check fiscal log	
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "2" and method is "ProcessCheck"
-		And I check "$ParsingResult$" with "2" and data in "In.Parameter3" contains 'ElectronicPayment="100"'
-		And I check "$ParsingResult$" with "0" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains '50.00'
-		And I check "$ParsingResult$" with "1" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
-		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains '50.00'
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="100"'
+		And I check "$ParsingResult$" with "2" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains '50.00'
+		And I check "$ParsingResult$" with "3" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "3" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
+		And I check "$ParsingResult$" with "3" and data in "In.Parameter2" contains '50.00'
 	* Check acquiring log
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
@@ -933,15 +930,15 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 		And I check "$ParsingResult1$" with "5" and data in "In.Parameter6" contains '$$RRN1$$'		
 	* Check fiscal log
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "2" and method is "ProcessCheck"
-		And I check "$ParsingResult$" with "2" and data in "In.Parameter3" contains 'ElectronicPayment="90"'
-		And I check "$ParsingResult$" with "2" and data in "In.Parameter3" contains 'Cash="10"'	
-		And I check "$ParsingResult$" with "0" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains 'TextString Text="ВОЗВРАТ'
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter2" contains '40.00'
-		And I check "$ParsingResult$" with "1" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains 'TextString Text="ВОЗВРАТ'
-		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains '50.00'
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="90"'
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'Cash="10"'	
+		And I check "$ParsingResult$" with "2" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains 'TextString Text="ВОЗВРАТ'
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains '40.00'
+		And I check "$ParsingResult$" with "3" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "3" and data in "In.Parameter2" contains 'TextString Text="ВОЗВРАТ'
+		And I check "$ParsingResult$" with "3" and data in "In.Parameter2" contains '50.00'
 	And I close all client application windows
 			
 Scenario: _0850024 return by card without basis document (without RRN)
@@ -1185,13 +1182,13 @@ Scenario: _0850021 check the form of payment by card
 		And I check "$ParsingResult1$" with "9" and data in "Out.Parameter8" contains '50.00'				
 	* Check fiscal log	
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-		And I check "$ParsingResult$" with "2" and method is "ProcessCheck"
-		And I check "$ParsingResult$" with "2" and data in "In.Parameter3" contains 'ElectronicPayment="520"'
-		And I check "$ParsingResult$" with "1" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
-		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains '50.00'
-		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains '40.00'
-		And I check "$ParsingResult$" with "1" and data in "In.Parameter2" contains '430.00'
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="520"'
+		And I check "$ParsingResult$" with "2" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
+		And I check "$ParsingResult$" with "4" and data in "In.Parameter2" contains '50.00'
+		And I check "$ParsingResult$" with "3" and data in "In.Parameter2" contains '40.00'
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains '430.00'
 	And I close all client application windows
 	
 								

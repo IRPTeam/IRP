@@ -1140,6 +1140,28 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="bebe6652-deeb-4288-93cf-e48ded775dd6">
+   <name>Consignor</name>
+   <synonym>
+    <key>en</key>
+    <value>Consignor</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Комитент</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Konsiyeye veren</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Companies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="eca9e13b-9cae-4ae4-bdea-a85980615377">
   <producedTypes>

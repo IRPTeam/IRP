@@ -18,5 +18,6 @@
  <content>Catalog.Hardware</content>
  <content>Catalog.EquipmentDrivers</content>
  <content>Catalog.Workstations</content>
+ <content>InformationRegister.HardwareLog</content>
  <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

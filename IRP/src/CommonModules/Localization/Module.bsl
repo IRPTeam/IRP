@@ -385,6 +385,17 @@ Function Strings(Lang) Export
 	Strings.Insert("EqAc_AlreadyhasTransaction", NStr("en='The document is already has transaction code. Transaction already was done. Else clear RRN code.';
 		|ru='В документе уже есть код транзакции. Транзакция уже проведена. При необходимости можно очистить ККИ код.'", Lang));
 	
+	Strings.Insert("EqFP_CanNotOpenSessionRegistrationKM", NStr("en='Can not open session registration KM.';
+		|ru='Не удалось открыть сессию регистрации кодов'", Lang));
+	Strings.Insert("EqFP_CanNotRequestKM", NStr("en='Can not request KM.';
+		|ru='Не удалось запросить состояние кодов'", Lang));
+	Strings.Insert("EqFP_CanNotGetProcessingKMResult", NStr("en='Can not get processing KM result.';
+		|ru='Не удалось получить данные о регистрации кодов'", Lang));
+	Strings.Insert("EqFP_CanNotCloseSessionRegistrationKM", NStr("en='Can not close session registration KM.';
+		|ru='Не удалось закрыть сессию регистрации кодов'", Lang));
+	Strings.Insert("EqFP_GetWrongAnswerFromProcessingKM", NStr("en='Get wrong answer from Processing KM.';
+		|ru='Получен ошибочный ответ при проверке кодов'", Lang));
+	
 #EndRegion
 
 #Region POS

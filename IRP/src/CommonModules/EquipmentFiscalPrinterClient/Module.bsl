@@ -546,12 +546,12 @@ Function Device_CheckKM(Settings, DriverObject, RequestKMSettings)
 			Raise R().EqFP_CanNotGetProcessingKMResult;
 		EndIf;
 		
-		ProcessingKMResult = ProcessingKMResultResponse(ProcessingKMResultXML);
-		
 		If RequestStatus = 1 Then
 			Continue;
 		EndIf; 
 
+		ProcessingKMResult = ProcessingKMResultResponse(ProcessingKMResultXML);
+		
 		If Not ProcessingKMResult.GUID = RequestKMSettings.GUID Then
 			Continue;
 		EndIf;
@@ -585,8 +585,8 @@ Function RequestXML(RequestKMSettings)
 	XMLWriter.WriteAttribute("GUID" , ToXMLString(RequestKMSettings.GUID));
 	XMLWriter.WriteAttribute("MarkingCode" , ToXMLString(RequestKMSettings.MarkingCode));
 	XMLWriter.WriteAttribute("PlannedStatus" , ToXMLString(RequestKMSettings.PlannedStatus));
-	XMLWriter.WriteAttribute("WaitForResult" , ToXMLString(RequestKMSettings.WaitForResult));
-	XMLWriter.WriteAttribute("Quantity" , ToXMLString(RequestKMSettings.Quantity));
+	//XMLWriter.WriteAttribute("WaitForResult" , ToXMLString(RequestKMSettings.WaitForResult));
+	//XMLWriter.WriteAttribute("Quantity" , ToXMLString(RequestKMSettings.Quantity));
 	XMLWriter.WriteEndElement();
 	
 	RequestXML = XMLWriter.Close();

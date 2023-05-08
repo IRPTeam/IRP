@@ -274,7 +274,7 @@ Async Procedure CheckKM(Command)
 		
 		Result = Await EquipmentFiscalPrinterClient.CheckKM(Hardware, RequestKMSettings); // See EquipmentFiscalPrinterClient.ProcessingKMResult
 		
-		Row.CodeIsApproved = Result.Result;
+		Row.CodeIsApproved = Result.StatusInfo = 1;
 	EndDo;
 EndProcedure
 

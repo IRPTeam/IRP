@@ -1933,7 +1933,7 @@ Function RequireCallCreateTaxesFormControlsExecute(Options) Export
 EndFunction
 
 Function ChangeTaxRateOptions() Export
-	Return GetChainLinkOptions("Date, Company, TransactionType, Agreement, ItemKey, InventoryOrigin, ConsignorBatches, TaxRates, ArrayOfTaxInfo, Ref, IsBasedOn, TaxList");
+	Return GetChainLinkOptions("Date, Company, Consignor, TransactionType, Agreement, ItemKey, InventoryOrigin, ConsignorBatches, TaxRates, ArrayOfTaxInfo, Ref, IsBasedOn, TaxList");
 EndFunction
 
 Function ChangeTaxRateExecute(Options) Export
@@ -1999,6 +1999,20 @@ Function ChangeTaxRateExecute(Options) Export
 			Continue;
 		EndIf;
 		
+		If ValueIsFilled(Options.InventoryOrigin) 
+			And Options.InventoryOrigin = PredefinedValue("Enum.InventoryOriginTypes.ConsignorStocks")
+			And ValueIsFilled(Options.Consignor) Then
+			
+			Parameters = New Structure();
+			Parameters = New Structure();
+			Parameters.Insert("Date"    , Options.Date);
+			Parameters.Insert("Company" , Options.Consignor);
+			Parameters.Insert("Tax"     , ItemOfTaxInfo.Tax);
+			TaxRate = TaxesServer.GetTaxRateByCompany(Parameters);			
+			Result.Insert(ItemOfTaxInfo.Name, TaxRate);
+			Continue;
+		EndIf;
+		
 		Parameters = New Structure();
 		Parameters.Insert("Date"    , Options.Date);
 		Parameters.Insert("Company" , Options.Company);
@@ -2019,10 +2033,15 @@ EndFunction
 #Region CONSIGNOR_BATCHES
 
 Function ConsignorBatchesFillBatchesOptions() Export
-	Return GetChainLinkOptions("DocObject, Table_ItemList, Table_SerialLotNumbers, Table_SourceOfOrigins, Table_ConsignorBatches, SilentMode");
+	Return GetChainLinkOptions("Consignor, DontFill, DocObject, Table_ItemList, Table_SerialLotNumbers, Table_SourceOfOrigins, Table_ConsignorBatches, SilentMode");
 EndFunction
 
 Function ConsignorBatchesFillBatchesExecute(Options) Export
+	If Options.DontFill = True Then
+		Return New Structure("ConsignorBatches, DontFill, Consignor", 
+		New Array(), True, Options.Consignor);
+	EndIf;
+	
 	SilentMode = False;
 	If Options.SilentMode = True Then
 		SilentMode = True;
@@ -2038,7 +2057,8 @@ Function ConsignorBatchesFillBatchesExecute(Options) Export
 		SourceOfOrigins, 
 		Options.Table_ConsignorBatches, 
 		SilentMode);
-	Return New Structure("ConsignorBatches", ConsignorBatches);	
+	Return New Structure("ConsignorBatches, DontFill, Consignor", 
+		ConsignorBatches, False, Undefined);	
 EndFunction
 
 #EndRegion

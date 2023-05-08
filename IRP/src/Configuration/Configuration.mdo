@@ -1021,6 +1021,7 @@
   <informationRegisters>InformationRegister.T9530S_WorkDays</informationRegisters>
   <informationRegisters>InformationRegister.DataVersions</informationRegisters>
   <informationRegisters>InformationRegister.HardwareLog</informationRegisters>
+  <informationRegisters>InformationRegister.ConsignorSerialLotNumbers</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

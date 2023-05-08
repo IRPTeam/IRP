@@ -1179,6 +1179,27 @@ Function GetExistingRows(Object,
 EndFunction
 
 Function AsOwnStocks(Object, Result, FilterStructure, ScanDataItem)
+	If ValueIsFilled(ScanDataItem.SerialLotNumber) Then
+		Query = New Query();
+		Query.Text = 
+		"SELECT
+		|	ConsignorSerialLotNumbersSliceLast.Consignor,
+		|	ConsignorSerialLotNumbersSliceLast.Tax,
+		|	ConsignorSerialLotNumbersSliceLast.TaxRate
+		|FROM
+		|	InformationRegister.ConsignorSerialLotNumbers.SliceLast(&Period, SerialLotNumber = &SerialLotNumber) AS
+		|		ConsignorSerialLotNumbersSliceLast
+		|WHERE
+		|	ConsignorSerialLotNumbersSliceLast.Use";
+		Query.SetParameter("Period", ScanDataItem.Date);
+		Query.SetParameter("SerialLotNumber", ScanDataItem.SerialLotNumber);
+		QuerySelection = Query.Execute().Select();
+		If QuerySelection.Next() Then
+			Return AsConsignorStocksWitoutBatch(Object, Result, FilterStructure, ScanDataItem, 
+				QuerySelection.Consignor, QuerySelection.Tax, QuerySelection.TaxRate);
+		EndIf;
+	EndIf;
+
 	FillPropertyValues(FilterStructure, ScanDataItem);
 	FilterStructure.Insert("InventoryOrigin", Enums.InventoryOriginTypes.OwnStocks);
 
@@ -1202,6 +1223,64 @@ Function AsOwnStocks(Object, Result, FilterStructure, ScanDataItem)
 			
 		Result.ArrayOfRowKeys.Add(Row.Key);
 	EndDo;
+	Return Result;
+EndFunction
+
+Function AsConsignorStocksWitoutBatch(Object, Result, FilterStructure, ScanDataItem, Consignor, Tax, TaxRate)
+	Result.Insert("Consignor", Consignor);
+	FillPropertyValues(FilterStructure, ScanDataItem);
+	FilterStructure.Insert("InventoryOrigin", Enums.InventoryOriginTypes.ConsignorStocks);
+	ItemListRows = Object.ItemList.FindRows(FilterStructure);
+	
+	ObjectRefType = TypeOf(Object.Ref);
+	CheckTaxes = ObjectRefType = Type("DocumentRef.RetailSalesReceipt") 
+			Or ObjectRefType = Type("DocumentRef.SalesInvoice");
+	
+	// check taxes
+	If CheckTaxes Then
+		ArrayOfTaxes = New Array();
+		ArrayOfTaxes.Add(New Structure("Tax, TaxRate", Tax, TaxRate));
+	EndIf;
+	
+	For Each Row In ItemListRows Do
+			
+		SkipItemListRow = False;
+		If CommonFunctionsClientServer.ObjectHasProperty(Object, "SourceOfOrigins") Then
+			_SourceOfOriginRef = ?(ValueIsFilled(ScanDataItem.SourceOfOrigin), ScanDataItem.SourceOfOrigin, Catalogs.SourceOfOrigins.EmptyRef());
+			For Each _Row In Object.SourceOfOrigins Do
+				If _Row.Key = Row.Key And _Row.SourceOfOrigin <> _SourceOfOriginRef Then
+					SkipItemListRow = True;
+					Break;
+				EndIf;
+			EndDo; 
+		EndIf;
+		If SkipItemListRow Then
+			Continue;
+		EndIf;
+		
+		If CheckTaxes Then	
+			TaxListRows = Object.TaxList.FindRows(New Structure("Key", Row.Key));
+			IsAllTaxesTheSame = False;
+			If ArrayOfTaxes.Count() = TaxListRows.Count() Then
+				IsTaxesTheSame = True;
+				For i = 0 To ArrayOfTaxes.Count() - 1 Do
+					If ArrayOfTaxes[i].Tax <> TaxListRows[i].Tax Or ArrayOfTaxes[i].TaxRate <> TaxListRows[i].TaxRate Then
+						IsTaxesTheSame = False;
+					EndIf;
+				EndDo;
+				If IsTaxesTheSame Then
+					IsAllTaxesTheSame = True;
+				EndIf;
+			EndIf;			
+			If IsAllTaxesTheSame Then
+				Result.ArrayOfRowKeys.Add(Row.Key);
+			EndIf;
+		Else
+			Result.ArrayOfRowKeys.Add(Row.Key);
+		EndIf;
+	EndDo;
+	
+	Result.InventoryOrigin = Enums.InventoryOriginTypes.ConsignorStocks;
 	Return Result;
 EndFunction
 

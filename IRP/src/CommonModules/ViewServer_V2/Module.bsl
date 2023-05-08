@@ -236,6 +236,7 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	InventoryOriginIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "InventoryOrigin");
 	EmployeeIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Employee");
 	PositionIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Position");
+	ConsignorIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Consignor");
 	
 	If FillingValues.Property("Item") And ItemIsPresent Then
 		ControllerClientServer_V2.SetItemListItem(Parameters, PrepareValue(FillingValues.Item, Row.Key));
@@ -287,6 +288,10 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	
 	If FillingValues.Property("InventoryOrigin") And InventoryOriginIsPresent Then
 		ControllerClientServer_V2.SetItemListInventoryOrigin(Parameters, PrepareValue(FillingValues.InventoryOrigin, Row.Key));
+	EndIf;	
+	
+	If FillingValues.Property("Consignor") And ConsignorIsPresent Then
+		ControllerClientServer_V2.SetItemListConsignor(Parameters, PrepareValue(FillingValues.Consignor, Row.Key));
 	EndIf;	
 	
 	If TableName = "TimeSheetList" Then

@@ -29,6 +29,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	isReturn = Parameters.isReturn;
 	RetailBasis = Parameters.RetailBasis;
 	
+	If Not ConsolidatedRetailSales.IsEmpty()
+		And ConsolidatedRetailSales = RetailBasis.ConsolidatedRetailSales Then
+		ReturnInTheSameConsolidateSales = True;
+	EndIf;
+	
 	Items.PaymentsRRNCode.Visible = isReturn;
 	
 	FillPaymentTypes();
@@ -189,8 +194,17 @@ Procedure PaymentsOnActivateRow(Item)
 	Items.GroupPaymentByAcquiring.Visible = Not CurrentData.Hardware.isEmpty();
 	
 	Items.Payment_PayByPaymentCard.Enabled = Not CurrentData.PaymentDone;
-	Items.Payment_ReturnPaymentByPaymentCard.Enabled = Not CurrentData.PaymentDone;
-	//Items.Payment_CancelPaymentByPaymentCard.Enabled = CurrentData.PaymentDone;
+	
+	If ReturnInTheSameConsolidateSales Then
+		Items.Payment_ReturnPaymentByPaymentCard.Enabled = False;
+	Else
+		Items.Payment_ReturnPaymentByPaymentCard.Enabled = Not CurrentData.PaymentDone;
+	EndIf;
+	If ReturnInTheSameConsolidateSales Then
+		Items.Payment_CancelPaymentByPaymentCard.Enabled = Not CurrentData.PaymentDone;
+	Else
+		Items.Payment_CancelPaymentByPaymentCard.Enabled = CurrentData.PaymentDone;
+	EndIf;
 	
 EndProcedure
 
@@ -712,25 +726,21 @@ Async Function Payment_PayByPaymentCard(PaymentRow)
 	If Result Then
 		PaymentRow.RRNCode = PaymentSettings.Out.RRNCode;
 		PaymentRow.PaymentDone = True;
-		
-		Str = New Structure("Payments", New Array);
-		Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));
-		Await EquipmentFiscalPrinterClient.PrintTextDocument(ConsolidatedRetailSales, Str);
+		PrintSlip(PaymentSettings);
 	EndIf;
 	
 	Return Result;
 EndFunction
 
 &AtClient
-Procedure Payment_PayByPaymentCardManual(Command)
+Async Procedure Payment_PayByPaymentCardManual(Command)
 	PaymentRow = Items.Payments.CurrentData;
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
-	Payment_PayByPaymentCard(PaymentRow);      
+	Await Payment_PayByPaymentCard(PaymentRow);      
 	PaymentsOnActivateRow(Undefined);
 EndProcedure
-
 
 &AtClient
 Async Function Payment_ReturnPaymentByPaymentCard(PaymentRow)
@@ -745,24 +755,20 @@ Async Function Payment_ReturnPaymentByPaymentCard(PaymentRow)
 	If Result Then
 		PaymentRow.PaymentInfo = CommonFunctionsServer.SerializeJSON(PaymentSettings);
 		PaymentRow.PaymentDone = True;
-		
-		Str = New Structure("Payments", New Array);
-		Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));
-		Await EquipmentFiscalPrinterClient.PrintTextDocument(ConsolidatedRetailSales, Str);
+		PrintSlip(PaymentSettings);
 	EndIf;
 	Return Result;
 EndFunction
 
 &AtClient
-Procedure Payment_ReturnPaymentByPaymentCardManual(Command)
+Async Procedure Payment_ReturnPaymentByPaymentCardManual(Command)
 	PaymentRow = Items.Payments.CurrentData;
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
-	Payment_ReturnPaymentByPaymentCard(PaymentRow);
+	Await Payment_ReturnPaymentByPaymentCard(PaymentRow);
 	PaymentsOnActivateRow(Undefined);
 EndProcedure
-
 
 &AtClient
 Async Function Payment_CancelPaymentByPaymentCard(PaymentRow)
@@ -783,26 +789,52 @@ Async Function Payment_CancelPaymentByPaymentCard(PaymentRow)
 	EndIf;
 	Result = Await EquipmentAcquiringClient.CancelPaymentByPaymentCard(PaymentRow.Hardware, PaymentSettings);
 	If Result Then
-		PaymentRow.PaymentDone = False;
+		If ReturnInTheSameConsolidateSales Then
+			PaymentRow.PaymentDone = True;
+		Else
+			PaymentRow.PaymentDone = False;
+		EndIf;
 	EndIf;
 	
-	Str = New Structure("Payments", New Array);
-	Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));
-	Await EquipmentFiscalPrinterClient.PrintTextDocument(ConsolidatedRetailSales, Str);
+	PrintSlip(PaymentSettings);
 		
 	Return Result;
 EndFunction
 
 &AtClient
-Procedure Payment_CancelPaymentByPaymentCardManual(Command)
+Async Procedure Payment_CancelPaymentByPaymentCardManual(Command)
 	PaymentRow = Items.Payments.CurrentData;
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
-	Payment_CancelPaymentByPaymentCard(PaymentRow);     
+	Await Payment_CancelPaymentByPaymentCard(PaymentRow);     
 	PaymentsOnActivateRow(Undefined);
 EndProcedure
 
+&AtClient
+Function Cutter()
+	Return Chars.CR + Chars.LF + Chars.CR + Chars.LF + Chars.CR + Chars.LF + Chars.CR + Chars.LF;
+EndFunction
+
+&AtClient
+Async Procedure PrintSlip(PaymentSettings)
+	Cutter = Cutter();
+	If StrFind(PaymentSettings.Out.Slip, Cutter) > 0 Then
+		SlipInfo = PaymentSettings.Out.Slip;
+		SlipInfoTmp = StrReplace(SlipInfo, Cutter, "⚪");
+		For Each SlipInfoPart In StrSplit(SlipInfoTmp, "⚪", False) Do
+			PaymentSettings.Out.Slip = SlipInfoPart;
+			Str = New Structure("Payments", New Array);
+			Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));
+			Await EquipmentFiscalPrinterClient.PrintTextDocument(ConsolidatedRetailSales, Str);
+		EndDo; 
+		PaymentSettings.Out.Slip = SlipInfo;
+	Else
+		Str = New Structure("Payments", New Array);
+		Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));
+		Await EquipmentFiscalPrinterClient.PrintTextDocument(ConsolidatedRetailSales, Str);
+	EndIf;
+EndProcedure
 
 // Get RRNCode.
 // 

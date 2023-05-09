@@ -3616,6 +3616,23 @@ FROM
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>ReturnInTheSameConsolidateSales</name>
+    <title>
+      <key>en</key>
+      <value>Return in the same consolidate sales</value>
+    </title>
+    <id>50</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>Card</name>
     <title>

@@ -4,6 +4,9 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;
 	If Not Cancel And WriteMode = DocumentWriteMode.Posting Then
 		If ThisObject.AllocationMode = Enums.AllocationMode.ByDocuments Then
+			ThisObject.RegisterRecords.R6070T_OtherPeriodsExpenses.Read();
+			ThisObject.RegisterRecords.R6070T_OtherPeriodsExpenses.Clear();
+			ThisObject.RegisterRecords.R6070T_OtherPeriodsExpenses.Write();
 			UpdateAmounts();
 			FillTables_ByDocuments();
 		EndIf;

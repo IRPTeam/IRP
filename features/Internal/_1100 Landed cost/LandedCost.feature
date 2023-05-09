@@ -2430,17 +2430,6 @@ Scenario: _028 check landed cost by materials
 		And I input "22.09.2022" text in "Begin date" field
 		And I input "26.09.2022" text in "End date" field
 		And I click "Post and close" button
-		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
-		And I click "Create" button
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
-		And I select "Additional item cost" exact value from "Calculation mode" drop-down list
-		And I input "22.09.2022" text in "Begin date" field
-		And I input "26.09.2022" text in "End date" field
-		And I click "Post and close" button
 	* Check calculation
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"
 		And I click "Select option..." button

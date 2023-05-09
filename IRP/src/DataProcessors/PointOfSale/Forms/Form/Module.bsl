@@ -29,6 +29,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 
 	EndIf;
 	
+	AutoCalculateOffers = Workstation.AutoCalculateDiscount;
+	
 	If DocConsolidatedRetailSalesServer.UseConsolidatedRetailSales(Object.Branch) Then
 		FillCashInList();
 	EndIf;
@@ -443,6 +445,11 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			FillSalesPersonInItemList();
 		EndIf;
 		
+		If AutoCalculateOffers And Not ThisObject.isReturn Then
+			RecalculateOffersAtServer();
+			OffersClient.SpecialOffersEditFinish_ForDocument(Object, ThisObject);
+		EndIf;
+		
 	EndIf;
 
 	If Result.Barcodes.Count() Then		
@@ -537,6 +544,11 @@ Procedure FillqPaymentAtServer(Cancel, OffersRecalculated)
 		EndIf;
 	EndIf;
 		
+	RecalculateOffersAtServer();
+EndProcedure
+
+&AtServer
+Procedure RecalculateOffersAtServer()
 	If Not ThisObject.isReturn Then
 		OffersInfo = OffersServer.RecalculateOffers(Object, ThisObject);
 		OffersServer.CalculateOffersAfterSet(OffersInfo, Object);

@@ -98,6 +98,16 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	"Amount, AmountTax");	
 	Tables.T6070S_BatchRevenueAllocationInfo = BatchRevenueAllocationInfoRecalculated;
 	
+	BatchKeysInfo = BatchRevenueAllocationInfoRecalculated.Copy();
+	BatchKeysInfo.GroupBy("Period, Company, Document, Store, ItemKey", 
+	"Amount, AmountTax");	
+	BatchKeysInfo.Columns.Document.Name  = "PurchaseInvoiceDocument";
+	BatchKeysInfo.Columns.Amount.Name    = "AmountCost";
+	BatchKeysInfo.Columns.AmountTax.Name = "AmountCostTax";
+	BatchKeysInfo.Columns.Add("Direction");
+	BatchKeysInfo.FillValues(Enums.BatchDirection.Receipt, "Direction");
+	Tables.T6020S_BatchKeysInfo = BatchKeysInfo;
+	
 	OtherPeriodsRevenuesMetadata    = Parameters.Object.RegisterRecords.R6080T_OtherPeriodsRevenues.Metadata();
 	BatchRevenueAllocationInfoMetadata = Parameters.Object.RegisterRecords.T6070S_BatchRevenueAllocationInfo.Metadata();
 	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
@@ -179,6 +189,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R6080T_OtherPeriodsRevenues());
 	QueryArray.Add(T6070S_BatchRevenueAllocationInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
 	Return QueryArray;
 EndFunction
 
@@ -275,4 +286,29 @@ Function T6070S_BatchRevenueAllocationInfo()
 	|	AllocationList AS AllocationList
 	|WHERE
 	|	TRUE";
+EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return
+	"SELECT
+	|	AllocationList.Period,
+	|	AllocationList.Company,
+	|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
+	|	AllocationList.Store AS Store,
+	|	AllocationList.ItemKey AS ItemKey,
+	|	AllocationList.Document AS PurchaseInvoiceDocument,
+	|	SUM(AllocationList.Amount) AS AmountCost,
+	|	SUM(AllocationList.AmountTax) AS AmountCostTax
+	|INTO T6020S_BatchKeysInfo
+	|FROM
+	|	AllocationList AS AllocationList
+	|WHERE
+	|	TRUE
+	|GROUP BY
+	|	AllocationList.Period,
+	|	AllocationList.Company,
+	|	VALUE(Enum.BatchDirection.Receipt),
+	|	AllocationList.Store,
+	|	AllocationList.ItemKey,
+	|	AllocationList.Document";
 EndFunction

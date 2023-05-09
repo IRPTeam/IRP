@@ -292,6 +292,7 @@ EndProcedure
 &AtClient
 Procedure Cash(Command)
 	OpenPaymentForm(ThisObject.CashPaymentTypes, PredefinedValue("Enum.PaymentTypes.Cash"));
+	Items.GroupBankTypeList.Visible = False;
 EndProcedure
 
 &AtClient

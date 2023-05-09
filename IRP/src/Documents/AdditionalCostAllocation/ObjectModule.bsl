@@ -4,6 +4,12 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;
 	If Not Cancel And WriteMode = DocumentWriteMode.Posting Then
 		If ThisObject.AllocationMode = Enums.AllocationMode.ByDocuments Then
+			// Remove me
+			ThisObject.RegisterRecords.R6070T_OtherPeriodsExpenses.Read();
+			If ThisObject.RegisterRecords.R6070T_OtherPeriodsExpenses.Count() Then
+				ThisObject.RegisterRecords.R6070T_OtherPeriodsExpenses.Clear();
+				ThisObject.RegisterRecords.R6070T_OtherPeriodsExpenses.Write();
+			EndIf;
 			UpdateAmounts();
 			FillTables_ByDocuments();
 		EndIf;
@@ -20,7 +26,7 @@ Procedure UpdateAmounts()
 	|	SUM(R6070T_OtherPeriodsExpenses.AmountBalance) AS Amount,
 	|	SUM(R6070T_OtherPeriodsExpenses.AmountTaxBalance) AS TaxAmount
 	|FROM
-	|	AccumulationRegister.R6070T_OtherPeriodsExpenses.Balance(&BalancePeriod, CurrencyMovementType = &CurrencyMovementType
+	|	AccumulationRegister.R6070T_OtherPeriodsExpenses.Balance(, CurrencyMovementType = &CurrencyMovementType
 	|	AND Basis IN (&ArrayOfDocuments)) AS R6070T_OtherPeriodsExpenses
 	|GROUP BY
 	|	R6070T_OtherPeriodsExpenses.Basis,
@@ -84,7 +90,7 @@ Procedure FillTables_ByDocuments()
 	|	R6070T_OtherPeriodsExpensesBalance.AmountTaxBalance AS TaxAmount
 	|FROM
 	|	CostDocuments AS CostDocuments
-	|		LEFT JOIN AccumulationRegister.R6070T_OtherPeriodsExpenses.Balance(&BalancePeriod, (Basis, Currency) IN
+	|		LEFT JOIN AccumulationRegister.R6070T_OtherPeriodsExpenses.Balance(, (Basis, Currency) IN
 	|			(SELECT
 	|				CostDocuments.Document,
 	|				CostDocuments.Currency
@@ -157,10 +163,25 @@ Procedure FillTables_ByDocuments()
 		
 		AllocationTableCopy = AllocationTable.Copy(New Structure("Key", RowCost.Key));
 		
+		_RowCost_Amount = RowCost.Amount;
+		If Not ValueIsFilled(RowCost.Amount) Then
+			_RowCost_Amount = 0;
+		EndIf;
+		
+		_RowCost_TaxAmount = RowCost.TaxAmount;
+		If Not ValueIsFilled(RowCost.TaxAmount) Then
+			_RowCost_TaxAmount = 0;
+		EndIf;
+		
 		For Each RowAllocation In AllocationTableCopy Do
 			Total = AllocationTableCopy.Total(ColumnName);
 	
-			If Total = 0 Then
+			_RowAllocation_ColumnName = RowAllocation[ColumnName];
+			If Not ValueIsFilled(RowAllocation[ColumnName]) Then
+				_RowAllocation_ColumnName = 0;
+			EndIf;
+			
+			If Not ValueIsFilled(Total) Then
 				Continue;
 			EndIf;
 	
@@ -168,8 +189,8 @@ Procedure FillTables_ByDocuments()
 			FillPropertyValues(NewRowAllocationList, RowAllocation);
 			NewRowAllocationList.BasisRowID = RowCost.RowID;
 			
-			NewRowAllocationList.Amount    = (RowCost.Amount   / Total)  * RowAllocation[ColumnName];
-			NewRowAllocationList.TaxAmount = (RowCost.TaxAmount / Total) * RowAllocation[ColumnName];
+			NewRowAllocationList.Amount    = (_RowCost_Amount   / Total)  * _RowAllocation_ColumnName;
+			NewRowAllocationList.TaxAmount = (_RowCost_TaxAmount / Total) * _RowAllocation_ColumnName;
 			
 			TotalAllocated    = TotalAllocated    + NewRowAllocationList.Amount;
 			TotalAllocatedTax = TotalAllocatedTax + NewRowAllocationList.TaxAmount;
@@ -192,12 +213,12 @@ Procedure FillTables_ByDocuments()
 			
 		EndDo;
 		
-		If RowCost.Amount <> TotalAllocated And MaxRow <> Undefined Then
-			MaxRow.Amount = MaxRow.Amount + (RowCost.Amount - TotalAllocated);
+		If _RowCost_Amount <> TotalAllocated And MaxRow <> Undefined Then
+			MaxRow.Amount = MaxRow.Amount + (_RowCost_Amount - TotalAllocated);
 		EndIf;
 		
-		If RowCost.TaxAmount <> TotalAllocatedTax And MaxRowTax <> Undefined Then
-			MaxRowTax.TaxAmount = MaxRowTax.TaxAmount + (RowCost.TaxAmount - TotalAllocatedTax);
+		If _RowCost_TaxAmount <> TotalAllocatedTax And MaxRowTax <> Undefined Then
+			MaxRowTax.TaxAmount = MaxRowTax.TaxAmount + (_RowCost_TaxAmount - TotalAllocatedTax);
 		EndIf;
 		
 	EndDo;

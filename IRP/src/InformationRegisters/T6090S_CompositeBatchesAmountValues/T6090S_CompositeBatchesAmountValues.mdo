@@ -138,6 +138,86 @@
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
  </resources>
+ <resources uuid="ad90ac51-70f2-45b0-a2df-c882545c3124">
+  <name>AmountCost</name>
+  <synonym>
+   <key>en</key>
+   <value>Amount cost</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма доп. расходов</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek maliyet tutarı</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="d004e65d-7fc0-464f-96d0-3fac308377c2">
+  <name>AmountCostTax</name>
+  <synonym>
+   <key>en</key>
+   <value>Amount cost tax</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Стоимость - Налоги</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="312135af-88f8-49b1-ba45-289868a61736">
+  <name>AmountRevenue</name>
+  <synonym>
+   <key>en</key>
+   <value>Amount revenue</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма доход</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="aec3d25f-c89e-4d86-ab29-c0d4310480ca">
+  <name>AmountRevenueTax</name>
+  <synonym>
+   <key>en</key>
+   <value>Amount revenue tax</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма доход налог</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
  <dimensions uuid="d5a9f86c-7983-4e38-b28e-10d344581d62">
   <name>Company</name>
   <synonym>

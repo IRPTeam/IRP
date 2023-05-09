@@ -164,6 +164,40 @@
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
  </resources>
+ <resources uuid="9a3a9598-cc8e-4838-a450-d7a31e8e55d7">
+  <name>AmountRevenue</name>
+  <synonym>
+   <key>en</key>
+   <value>Amount revenue</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма доход</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="72691861-9735-471b-b808-27a10f3d3b3c">
+  <name>AmountRevenueTax</name>
+  <synonym>
+   <key>en</key>
+   <value>Amount revenue tax</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма доход налог</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
  <attributes uuid="8c8f1709-0dba-4082-93ce-434a813d07a5">
   <name>CalculationMovementCost</name>
   <synonym>

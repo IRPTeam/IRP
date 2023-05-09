@@ -157,10 +157,25 @@ Procedure FillTables_ByDocuments()
 		
 		AllocationTableCopy = AllocationTable.Copy(New Structure("Key", RowRevenue.Key));
 		
+		_RowRevenue_Amount = RowRevenue.Amount;
+		If Not ValueIsFilled(RowRevenue.Amount) Then
+			_RowRevenue_Amount = 0;
+		EndIf;
+		
+		_RowRevenue_TaxAmount = RowRevenue.TaxAmount;
+		If Not ValueIsFilled(RowRevenue.TaxAmount) Then
+			_RowRevenue_TaxAmount = 0;
+		EndIf;
+		
 		For Each RowAllocation In AllocationTableCopy Do
 			Total = AllocationTableCopy.Total(ColumnName);
 	
-			If Total = 0 Then
+			_RowAllocation_ColumnName = RowAllocation[ColumnName];
+			If Not ValueIsFilled(RowAllocation[ColumnName]) Then
+				_RowAllocation_ColumnName = 0;
+			EndIf;
+			
+			If Not ValueIsFilled(Total) = 0 Then
 				Continue;
 			EndIf;
 	
@@ -168,8 +183,8 @@ Procedure FillTables_ByDocuments()
 			FillPropertyValues(NewRowAllocationList, RowAllocation);
 			NewRowAllocationList.BasisRowID = RowRevenue.RowID;
 			
-			NewRowAllocationList.Amount    = (RowRevenue.Amount    / Total) * RowAllocation[ColumnName];
-			NewRowAllocationList.TaxAmount = (RowRevenue.TaxAmount / Total) * RowAllocation[ColumnName];
+			NewRowAllocationList.Amount    = (_RowRevenue_Amount    / Total) * _RowAllocation_ColumnName;
+			NewRowAllocationList.TaxAmount = (_RowRevenue_TaxAmount / Total) * _RowAllocation_ColumnName;
 			
 			TotalAllocated    = TotalAllocated    + NewRowAllocationList.Amount;
 			TotalAllocatedTax = TotalAllocatedTax + NewRowAllocationList.TaxAmount;
@@ -192,12 +207,12 @@ Procedure FillTables_ByDocuments()
 			
 		EndDo;
 		
-		If RowRevenue.Amount <> TotalAllocated And MaxRow <> Undefined Then
-			MaxRow.Amount = MaxRow.Amount + (RowRevenue.Amount - TotalAllocated);
+		If _RowRevenue_Amount <> TotalAllocated And MaxRow <> Undefined Then
+			MaxRow.Amount = MaxRow.Amount + (_RowRevenue_Amount - TotalAllocated);
 		EndIf;
 		
-		If RowRevenue.TaxAmount <> TotalAllocatedTax And MaxRowTax <> Undefined Then
-			MaxRowTax.TaxAmount = MaxRowTax.TaxAmount + (RowRevenue.TaxAmount - TotalAllocatedTax);
+		If _RowRevenue_TaxAmount <> TotalAllocatedTax And MaxRowTax <> Undefined Then
+			MaxRowTax.TaxAmount = MaxRowTax.TaxAmount + (_RowRevenue_TaxAmount - TotalAllocatedTax);
 		EndIf;
 		
 	EndDo;

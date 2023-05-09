@@ -7268,6 +7268,27 @@ End</presentationExpression>
    <common>true</common>
   </edit>
  </attributes>
+ <attributes>
+  <name>AutoCalculateOffers</name>
+  <title>
+   <key>en</key>
+   <value>Auto calculate offers</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Авто рассчет скидок</value>
+  </title>
+  <id>206</id>
+  <valueType>
+   <types>Boolean</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>qPayment</name>
   <title>

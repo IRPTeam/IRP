@@ -100,6 +100,39 @@ Procedure CostOfGoodsSold_CollectRecords(DocObject) Export
 	|			THEN -R6010B_BatchWiseBalance.AmountCost
 	|		ELSE 0
 	|	END AS AmountCost,
+	|
+	|	CASE
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.SalesReportFromTradeAgent
+	|			THEN R6010B_BatchWiseBalance.AmountCostTax
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
+	|			THEN -R6010B_BatchWiseBalance.AmountCostTax
+	|		ELSE 0
+	|	END AS AmountCostTax,
+	|
+	|	CASE
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.SalesReportFromTradeAgent
+	|			THEN R6010B_BatchWiseBalance.AmountRevenue
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
+	|			THEN -R6010B_BatchWiseBalance.AmountRevenue
+	|		ELSE 0
+	|	END AS AmountRevenue,
+	|
+	|	CASE
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.SalesReportFromTradeAgent
+	|			THEN R6010B_BatchWiseBalance.AmountRevenueTax
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
+	|			THEN -R6010B_BatchWiseBalance.AmountRevenueTax
+	|		ELSE 0
+	|	END AS AmountRevenueTax,
 	|	R6010B_BatchWiseBalance.BatchKey.ItemKey AS ItemKey,
 	|	R6010B_BatchWiseBalance.Batch.Company AS Company,
 	|	R6010B_BatchWiseBalance.Recorder AS CalculationMovementCost
@@ -120,6 +153,11 @@ Procedure CostOfGoodsSold_CollectRecords(DocObject) Export
 	|	BatchWiseBalance.NotDirectCosts AS NotDirectCosts,
 	|	BatchWiseBalance.AmountCostRatio AS AmountCostRatio,
 	|	BatchWiseBalance.AmountCost AS AmountCost,
+	|
+	|	BatchWiseBalance.AmountCostTax AS AmountCostTax,
+	|	BatchWiseBalance.AmountRevenue AS AmountRevenue,
+	|	BatchWiseBalance.AmountRevenueTax AS AmountRevenueTax,
+	|
 	|	BatchWiseBalance.ItemKey AS ItemKey,
 	|	BatchWiseBalance.Company AS Company,
 	|	CASE
@@ -142,7 +180,10 @@ Procedure CostOfGoodsSold_CollectRecords(DocObject) Export
 	|	OR BatchWiseBalance.AmountTax <> 0
 	|	OR BatchWiseBalance.NotDirectCosts <> 0
 	|	OR BatchWiseBalance.AmountCostRatio <> 0
-	|	OR BatchWiseBalance.AmountCost <> 0)";
+	|	OR BatchWiseBalance.AmountCost <> 0
+	|	OR BatchWiseBalance.AmountCostTax <> 0
+	|	OR BatchWiseBalance.AmountRevenue <> 0
+	|	OR BatchWiseBalance.AmountRevenueTax <> 0)";
 	
 	Query.SetParameter("Document", DocObject.Ref);
 	QueryResult = Query.Execute();
@@ -252,6 +293,29 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|			THEN -R6010B_BatchWiseBalance.AmountCostTax
 	|		ELSE 0
 	|	END AS AmountCostTax,
+	|
+	|	CASE
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
+	|				OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|				OR R6010B_BatchWiseBalance.Document REFS Document.SalesReportFromTradeAgent
+	|			THEN R6010B_BatchWiseBalance.AmountRevenue
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
+	|				OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
+	|			THEN -R6010B_BatchWiseBalance.AmountRevenue
+	|		ELSE 0
+	|	END AS AmountRevenue,
+	|
+	|	CASE
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
+	|				OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|				OR R6010B_BatchWiseBalance.Document REFS Document.SalesReportFromTradeAgent
+	|			THEN R6010B_BatchWiseBalance.AmountRevenueTax
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
+	|				OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
+	|			THEN -R6010B_BatchWiseBalance.AmountRevenueTax
+	|		ELSE 0
+	|	END AS AmountRevenueTax,
+	|
 	|	R6010B_BatchWiseBalance.BatchKey.ItemKey AS ItemKey,
 	|	R6010B_BatchWiseBalance.Batch.Company AS Company
 	|INTO BatchWiseBalance
@@ -274,6 +338,8 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|	BatchWiseBalance.AmountCostRatio AS AmountCostRatio,
 	|	BatchWiseBalance.AmountCost AS AmountCost,
 	|	BatchWiseBalance.AmountCostTax AS AmountCostTax,
+	|	BatchWiseBalance.AmountRevenue AS AmountRevenue,
+	|	BatchWiseBalance.AmountRevenueTax AS AmountRevenueTax,
 	|	BatchWiseBalance.ItemKey AS ItemKey,
 	|	BatchWiseBalance.Company AS Company,
 	|	CASE
@@ -304,6 +370,8 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|	BatchWiseBalance_BatchKeysInfo.AmountCostRatio AS AmountCostRatio,
 	|	BatchWiseBalance_BatchKeysInfo.AmountCost AS AmountCost,
 	|	BatchWiseBalance_BatchKeysInfo.AmountCostTax AS AmountCostTax,
+	|	BatchWiseBalance_BatchKeysInfo.AmountRevenue AS AmountRevenue,
+	|	BatchWiseBalance_BatchKeysInfo.AmountRevenueTax AS AmountRevenueTax,
 	|	BatchWiseBalance_BatchKeysInfo.ItemKey AS ItemKey,
 	|	BatchWiseBalance_BatchKeysInfo.Company AS Company,
 	|	BatchWiseBalance_BatchKeysInfo.SalesInvoice AS SalesInvoice,

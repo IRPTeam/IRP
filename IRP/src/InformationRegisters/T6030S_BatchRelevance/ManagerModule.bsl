@@ -136,8 +136,8 @@ Procedure BatchRelevance_SetBound(DocObject, TableForLoad) Export
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
 		If ValueIsFilled(QuerySelection.DateOld) Then
-			If GetPointInTime(QuerySelection.DateOld, QuerySelection.CompanyOld, QuerySelection.StoreOld,
-				QuerySelection.ItemKeyOld).Compare(DocObject.PointInTime()) = 1 Then
+			PointInTime = GetPointInTime(QuerySelection.DateOld, QuerySelection.CompanyOld, QuerySelection.StoreOld, QuerySelection.ItemKeyOld);
+			If PointInTime.Compare(DocObject.PointInTime()) = 1 Then
 				ClearRecordSet(QuerySelection.DateOld, QuerySelection.CompanyOld, QuerySelection.StoreOld,
 					QuerySelection.ItemKeyOld);
 				WriteRecordSet(DocObject.Ref, QuerySelection.DateNew, QuerySelection.CompanyNew, QuerySelection.StoreNew,

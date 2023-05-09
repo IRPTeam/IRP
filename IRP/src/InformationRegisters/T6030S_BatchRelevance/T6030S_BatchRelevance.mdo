@@ -48,6 +48,8 @@
       <types>DocumentRef.SalesReportFromTradeAgent</types>
       <types>DocumentRef.SalesReportToConsignor</types>
       <types>DocumentRef.ProductionCostsAllocation</types>
+      <types>DocumentRef.AdditionalCostAllocation</types>
+      <types>DocumentRef.AdditionalRevenueAllocation</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

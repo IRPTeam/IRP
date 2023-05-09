@@ -17,6 +17,24 @@ Function PrepareReceiptData(SourceData) Export
 	Return ReturnData;
 EndFunction
 
+// Prepare receipt data by retail sales receipt.
+// 
+// Parameters:
+//  SourceData - DocumentRef.RetailSalesReceipt -
+// 
+// Returns:
+//  Structure - Prepare receipt data by retail sales receipt:
+// * CashierName - String -
+// * OperationType - Number -
+// * TaxationSystem - Number -
+// * FiscalStrings - Array -
+// * Cash - Number -
+// * ElectronicPayment - Number -
+// * PrePayment - Number -
+// * PostPayment - Number -
+// * Barter - Number -
+// * Cash - Number -
+// * TextStrings - Array -
 Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 	Str = New Structure;
 	Str.Insert("CashierName", String(SourceData.Author));
@@ -30,9 +48,9 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 	FiscalStrings = New Array;
 	TextStrings = New Array;
 	
-	For Each Item In SourceData.ItemList Do
+	For Each ItemRow In SourceData.ItemList Do
 		RowFilter = New Structure();
-		RowFilter.Insert("Key", Item.Key);
+		RowFilter.Insert("Key", ItemRow.Key);
 		SLNRows = SourceData.SerialLotNumbers.FindRows(RowFilter);
 		TaxRows = SourceData.TaxList.FindRows(RowFilter);
 		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
@@ -41,8 +59,8 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 			CBRows = New Array;
 		EndIf;
 		FiscalStringData = New Structure();
-		FiscalStringData.Insert("AmountWithDiscount", Item.TotalAmount);
-		FiscalStringData.Insert("DiscountAmount", Item.OffersAmount);
+		FiscalStringData.Insert("AmountWithDiscount", ItemRow.TotalAmount);
+		FiscalStringData.Insert("DiscountAmount", ItemRow.OffersAmount);
 		If SLNRows.Count() = 1 Then
 			If IsBlankString(SLNRows[0].SerialLotNumber.CodeString) Then
 				FiscalStringData.Insert("CalculationSubject", "32");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject	
@@ -54,8 +72,8 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 			Raise("A few SerialLotNumber found!");
 		EndIf;
 		FiscalStringData.Insert("MeasureOfQuantity", "255");
-		FiscalStringData.Insert("Name", String(Item.Item) + " " + String(Item.ItemKey));
-		FiscalStringData.Insert("Quantity", Item.Quantity);
+		FiscalStringData.Insert("Name", String(ItemRow.Item) + " " + String(ItemRow.ItemKey));
+		FiscalStringData.Insert("Quantity", ItemRow.Quantity);
 		If SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.FullPrepayment Then
 			FiscalStringData.Insert("PaymentMethod", 1);
 		ElsIf SourceData.PaymentMethod = Enums.ReceiptPaymentMethods.PartialPrepayment Then
@@ -73,7 +91,7 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 		Else
 			FiscalStringData.Insert("PaymentMethod", 4);
 		EndIf;
-		FiscalStringData.Insert("PriceWithDiscount", Round(Item.TotalAmount / Item.Quantity, 2));
+		FiscalStringData.Insert("PriceWithDiscount", Round(ItemRow.TotalAmount / ItemRow.Quantity, 2));
 		If TaxRows.Count() > 0 Then
 			If TaxRows[0].TaxRate.NoRate Then
 				FiscalStringData.Insert("VATRate", "none");
@@ -100,6 +118,18 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 			FiscalStringData.Insert("CalculationAgent", "5");
 			FiscalStringData.Insert("VendorData", VendorData);
 		EndIf;
+		
+		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
+			If Not ItemRow.Consignor.IsEmpty() Then
+				VendorData = New Structure;
+				VendorData.Insert("VendorINN", ItemRow.Consignor.TaxID);
+				VendorData.Insert("VendorName", String(ItemRow.Consignor));
+				VendorData.Insert("VendorPhone", "");
+				FiscalStringData.Insert("CalculationAgent", "5");
+				FiscalStringData.Insert("VendorData", VendorData);
+			EndIf;
+		EndIf; 
+		
 		FiscalStrings.Add(FiscalStringData);
 	EndDo;
 	

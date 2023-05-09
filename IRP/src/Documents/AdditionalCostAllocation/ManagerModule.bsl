@@ -98,6 +98,16 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	"Amount, AmountTax");	
 	Tables.T6060S_BatchCostAllocationInfo = BatchCostAllocationInfoRecalculated;
 	
+	BatchKeysInfo = BatchCostAllocationInfoRecalculated.Copy();
+	BatchKeysInfo.GroupBy("Period, Company, Document, Store, ItemKey", 
+	"Amount, AmountTax");	
+	BatchKeysInfo.Columns.Document.Name  = "PurchaseInvoiceDocument";
+	BatchKeysInfo.Columns.Amount.Name    = "AmountCost";
+	BatchKeysInfo.Columns.AmountTax.Name = "AmountCostTax";
+	BatchKeysInfo.Columns.Add("Direction");
+	BatchKeysInfo.FillValues(Enums.BatchDirection.Receipt, "Direction");
+	Tables.T6020S_BatchKeysInfo = BatchKeysInfo;
+	
 	OtherPeriodsExpensesMetadata    = Parameters.Object.RegisterRecords.R6070T_OtherPeriodsExpenses.Metadata();
 	BatchCostAllocationInfoMetadata = Parameters.Object.RegisterRecords.T6060S_BatchCostAllocationInfo.Metadata();
 	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
@@ -179,6 +189,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R6070T_OtherPeriodsExpenses());
 	QueryArray.Add(T6060S_BatchCostAllocationInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
 	Return QueryArray;
 EndFunction
 
@@ -275,4 +286,29 @@ Function T6060S_BatchCostAllocationInfo()
 	|	AllocationList AS AllocationList
 	|WHERE
 	|	TRUE";
+EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return
+	"SELECT
+	|	AllocationList.Period,
+	|	AllocationList.Company,
+	|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
+	|	AllocationList.Store AS Store,
+	|	AllocationList.ItemKey AS ItemKey,
+	|	AllocationList.Document AS PurchaseInvoiceDocument,
+	|	SUM(AllocationList.Amount) AS AmountCost,
+	|	SUM(AllocationList.AmountTax) AS AmountCostTax
+	|INTO T6020S_BatchKeysInfo
+	|FROM
+	|	AllocationList AS AllocationList
+	|WHERE
+	|	TRUE
+	|GROUP BY
+	|	AllocationList.Period,
+	|	AllocationList.Company,
+	|	VALUE(Enum.BatchDirection.Receipt),
+	|	AllocationList.Store,
+	|	AllocationList.ItemKey,
+	|	AllocationList.Document";
 EndFunction

@@ -329,6 +329,12 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("EqAc_AlreadyhasTransaction", NStr("en = 'The document is already has transaction code. Transaction already was done. Else clear RRN code.'", Lang));
 	
+	Strings.Insert("EqFP_CanNotOpenSessionRegistrationKM", NStr("en = 'Can not open session registration KM.'", Lang));
+	Strings.Insert("EqFP_CanNotRequestKM", NStr("en = 'Can not request KM.'", Lang));
+	Strings.Insert("EqFP_CanNotGetProcessingKMResult", NStr("en = 'Can not get processing KM result.'", Lang));
+	Strings.Insert("EqFP_CanNotCloseSessionRegistrationKM", NStr("en = 'Can not close session registration KM.'", Lang));
+	Strings.Insert("EqFP_GetWrongAnswerFromProcessingKM", NStr("en = 'Get wrong answer from Processing KM.'", Lang));
+	
 #EndRegion
 
 #Region POS

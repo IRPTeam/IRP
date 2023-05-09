@@ -224,6 +224,7 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	ItemIsPresent      = CommonFunctionsClientServer.ObjectHasProperty(Row, "Item");
 	ItemKeyIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "ItemKey");
 	UnitIsPresent      = CommonFunctionsClientServer.ObjectHasProperty(Row, "Unit");
+	StoreIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "Store");
 	QuantityIsPresent  = CommonFunctionsClientServer.ObjectHasProperty(Row, "Quantity");
 	PriceIsPresent     = CommonFunctionsClientServer.ObjectHasProperty(Row, "Price");
 	PriceTypeIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "PriceType");
@@ -235,6 +236,7 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	InventoryOriginIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "InventoryOrigin");
 	EmployeeIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Employee");
 	PositionIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Position");
+	ConsignorIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Consignor");
 	
 	If FillingValues.Property("Item") And ItemIsPresent Then
 		ControllerClientServer_V2.SetItemListItem(Parameters, PrepareValue(FillingValues.Item, Row.Key));
@@ -246,6 +248,10 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	
 	If FillingValues.Property("Unit") And UnitIsPresent Then
 		ControllerClientServer_V2.SetItemListUnit(Parameters, PrepareValue(FillingValues.Unit, Row.Key));
+	EndIf;
+	
+	If FillingValues.Property("Store") And StoreIsPresent Then
+		ControllerClientServer_V2.SetItemListStore(Parameters, PrepareValue(FillingValues.Store, Row.Key));
 	EndIf;
 	
 	If FillingValues.Property("Quantity") And QuantityIsPresent Then
@@ -282,6 +288,10 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	
 	If FillingValues.Property("InventoryOrigin") And InventoryOriginIsPresent Then
 		ControllerClientServer_V2.SetItemListInventoryOrigin(Parameters, PrepareValue(FillingValues.InventoryOrigin, Row.Key));
+	EndIf;	
+	
+	If FillingValues.Property("Consignor") And ConsignorIsPresent Then
+		ControllerClientServer_V2.SetItemListConsignor(Parameters, PrepareValue(FillingValues.Consignor, Row.Key));
 	EndIf;	
 	
 	If TableName = "TimeSheetList" Then

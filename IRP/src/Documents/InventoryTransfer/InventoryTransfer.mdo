@@ -478,6 +478,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="cf1f84da-9589-4b17-89f5-c7cfb57a4b51">
+      <name>Consignor</name>
+      <synonym>
+        <key>en</key>
+        <value>Consignor</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Companies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="c99d67d6-126b-41c7-a695-e2b052fbb9e1">
     <producedTypes>

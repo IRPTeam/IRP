@@ -1,0 +1,27 @@
+name: Create master
+on:
+  release:
+    types: [released]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Run a multi-line script
+        env:
+          REPO_NAME: ${{ github.event.repository.name }}
+          RELEASE_VERSION: ${{ env.RELEASE_VERSION }}
+        run: |
+          git config --global user.email "info@irpteam.com"
+          git config --global user.name "IRP Team"
+          git fetch
+          git checkout master
+          git rm . -r --force --quiet
+          git checkout origin/develop . 
+          sed -i "s/#yearNumber#.#weekNumber#.#BuildNumber#/$RELEASE_VERSION/" ./$REPO_NAME/src/Configuration/Configuration.mdo
+          git add .
+          git commit -m "$RELEASE_VERSION"
+          git push

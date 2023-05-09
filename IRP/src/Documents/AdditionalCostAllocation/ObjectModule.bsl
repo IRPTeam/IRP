@@ -4,9 +4,12 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;
 	If Not Cancel And WriteMode = DocumentWriteMode.Posting Then
 		If ThisObject.AllocationMode = Enums.AllocationMode.ByDocuments Then
+			// Remove me
 			ThisObject.RegisterRecords.R6070T_OtherPeriodsExpenses.Read();
-			ThisObject.RegisterRecords.R6070T_OtherPeriodsExpenses.Clear();
-			ThisObject.RegisterRecords.R6070T_OtherPeriodsExpenses.Write();
+			If ThisObject.RegisterRecords.R6070T_OtherPeriodsExpenses.Count() Then
+				ThisObject.RegisterRecords.R6070T_OtherPeriodsExpenses.Clear();
+				ThisObject.RegisterRecords.R6070T_OtherPeriodsExpenses.Write();
+			EndIf;
 			UpdateAmounts();
 			FillTables_ByDocuments();
 		EndIf;
@@ -23,7 +26,7 @@ Procedure UpdateAmounts()
 	|	SUM(R6070T_OtherPeriodsExpenses.AmountBalance) AS Amount,
 	|	SUM(R6070T_OtherPeriodsExpenses.AmountTaxBalance) AS TaxAmount
 	|FROM
-	|	AccumulationRegister.R6070T_OtherPeriodsExpenses.Balance(&BalancePeriod, CurrencyMovementType = &CurrencyMovementType
+	|	AccumulationRegister.R6070T_OtherPeriodsExpenses.Balance(, CurrencyMovementType = &CurrencyMovementType
 	|	AND Basis IN (&ArrayOfDocuments)) AS R6070T_OtherPeriodsExpenses
 	|GROUP BY
 	|	R6070T_OtherPeriodsExpenses.Basis,
@@ -87,7 +90,7 @@ Procedure FillTables_ByDocuments()
 	|	R6070T_OtherPeriodsExpensesBalance.AmountTaxBalance AS TaxAmount
 	|FROM
 	|	CostDocuments AS CostDocuments
-	|		LEFT JOIN AccumulationRegister.R6070T_OtherPeriodsExpenses.Balance(&BalancePeriod, (Basis, Currency) IN
+	|		LEFT JOIN AccumulationRegister.R6070T_OtherPeriodsExpenses.Balance(, (Basis, Currency) IN
 	|			(SELECT
 	|				CostDocuments.Document,
 	|				CostDocuments.Currency

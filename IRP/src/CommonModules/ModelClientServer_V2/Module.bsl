@@ -3527,7 +3527,11 @@ Function ChangeisControlCodeStringByItemOptions() Export
 EndFunction
 
 Function ChangeisControlCodeStringByItemExecute(Options) Export
-	Return CommonFunctionsServer.GetRefAttribute(Options.Item, "ControlCodeString");
+	If CommonFunctionsServer.GetRefAttribute(SessionParametersServer.GetSessionParameter("Workstation"), "IgnoreCodeStringControl") Then
+		Return False;
+	Else
+		Return CommonFunctionsServer.GetRefAttribute(Options.Item, "ControlCodeString");
+	EndIf;
 EndFunction
 
 #EndRegion

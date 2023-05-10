@@ -151,7 +151,11 @@ Function GetItemInfoByBarcode(Settings, BarcodeVT)
 		|	Barcodes.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
 		|	Barcodes.ItemKey.Item.ItemType.AlwaysAddNewRowAfterScan AS AlwaysAddNewRowAfterScan,
 		|	ISNULL(Barcodes.SerialLotNumber.EachSerialLotNumberIsUnique, False) AS EachSerialLotNumberIsUnique,
-		|	Barcodes.ItemKey.Item.ControlCodeString AS ControlCodeString,
+		|	CASE WHEN &IgnoreCodeStringControl THEN 
+		|		False 
+		|	ELSE 
+		|		Barcodes.ItemKey.Item.ControlCodeString 
+		|	END AS ControlCodeString,
 		|	Barcodes.SourceOfOrigin AS SourceOfOrigin
 		|FROM
 		|	VTBarcode AS VTBarcode
@@ -160,6 +164,7 @@ Function GetItemInfoByBarcode(Settings, BarcodeVT)
 	Query.SetParameter("BarcodeList", BarcodeVT);
 	Query.SetParameter("PriceType", Settings.PriceType);
 	Query.SetParameter("Date", CommonFunctionsServer.GetCurrentSessionDate());
+	Query.SetParameter("IgnoreCodeStringControl", SessionParameters.Workstation.IgnoreCodeStringControl);
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	Return QueryTable

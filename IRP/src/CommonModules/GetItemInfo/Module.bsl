@@ -794,7 +794,11 @@ Function GetInfoByItemsKey(ItemsKey, Agreement = Undefined) Export
 	|	ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
 	|	ItemKey.Item.ItemType.AlwaysAddNewRowAfterScan AS AlwaysAddNewRowAfterScan,
 	|	False AS EachSerialLotNumberIsUnique,
-	|	ItemKey.Item.ControlCodeString AS ControlCodeString,
+	|	CASE WHEN &IgnoreCodeStringControl THEN 
+	|		False 
+	|	ELSE 
+	|		ItemKey.Item.ControlCodeString 
+	|	END AS ControlCodeString,
 	|	VALUE(Catalog.SourceOfOrigins.EmptyRef) AS SourceOfOrigin
 	|FROM
 	|	Catalog.ItemKeys AS ItemKey
@@ -802,6 +806,7 @@ Function GetInfoByItemsKey(ItemsKey, Agreement = Undefined) Export
 	|	ItemKey.Ref In (&ItemKeyArray)";
 	Query.SetParameter("ItemKeyArray", ItemKeyArray);
 	Query.SetParameter("Date", CommonFunctionsServer.GetCurrentSessionDate());
+	Query.SetParameter("IgnoreCodeStringControl", SessionParameters.Workstation.IgnoreCodeStringControl);
 	PriceType = ?(ValueIsFilled(Agreement), Agreement.PriceType, Undefined);
 	Query.SetParameter("PriceType", PriceType);
 	

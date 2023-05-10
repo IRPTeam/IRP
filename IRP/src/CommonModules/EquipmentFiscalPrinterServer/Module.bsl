@@ -61,7 +61,7 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 		FiscalStringData = New Structure();
 		FiscalStringData.Insert("AmountWithDiscount", ItemRow.TotalAmount);
 		FiscalStringData.Insert("DiscountAmount", ItemRow.OffersAmount);
-		If ItemRow.Item.ControlCodeString Then
+		If ItemRow.isControlCodeString Then
 			If CCSRows.Count() = 0 Then
 				Raise "Control string code not filled. Row: " + ItemRow.LineNumber;
 			ElsIf CCSRows.Count() <> ItemRow.Quantity Then

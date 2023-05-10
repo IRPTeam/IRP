@@ -1313,6 +1313,58 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
+     <name>ItemListControlCodeStringState</name>
+     <id>711</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.ItemList.ControlCodeStringState</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>ItemListControlCodeStringStateExtendedTooltip</name>
+      <id>713</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>ItemListControlCodeStringStateContextMenu</name>
+      <id>712</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>PictureField</type>
+     <readOnly>true</readOnly>
+     <editMode>Enter</editMode>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <extInfo xsi:type="form:ImageFieldExtInfo">
+      <width>1</width>
+      <maxWidth>1</maxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <horizontalStretch>true</horizontalStretch>
+      <verticalStretch>true</verticalStretch>
+      <valuesPicture xsi:type="core:PictureRef">
+       <picture>CommonPicture.ControlCodeString</picture>
+      </valuesPicture>
+      <fileDragMode>AsFileRef</fileDragMode>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
      <name>ItemListItem</name>
      <id>44</id>
      <visible>true</visible>
@@ -2809,6 +2861,10 @@
     <handlers>
      <event>AfterDeleteRow</event>
      <name>ItemListAfterDeleteRow</name>
+    </handlers>
+    <handlers>
+     <event>OnStartEdit</event>
+     <name>ItemListOnStartEdit</name>
     </handlers>
     <searchStringAddition>
      <visible>true</visible>
@@ -6923,6 +6979,30 @@
     <id>174</id>
     <valueType>
      <types>ValueList</types>
+    </valueType>
+    <view>
+     <common>true</common>
+    </view>
+    <edit>
+     <common>true</common>
+    </edit>
+   </columns>
+   <columns>
+    <name>ControlCodeStringState</name>
+    <title>
+     <key>en</key>
+     <value>Control code string state</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Состояние контролируемых строк</value>
+    </title>
+    <id>175</id>
+    <valueType>
+     <types>Number</types>
+     <numberQualifiers>
+      <precision>1</precision>
+     </numberQualifiers>
     </valueType>
     <view>
      <common>true</common>

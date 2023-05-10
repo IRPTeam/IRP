@@ -941,6 +941,10 @@ Procedure OnOpenFormNotify(Parameters) Export
 		SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
 	EndIf;
 	
+	If Parameters.ObjectMetadataInfo.Tables.Property("ControlCodeStrings") Then
+		ControlCodeStringsClient.UpdateState(Parameters.Object);
+	EndIf;
+	
 	If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
 		SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Parameters.Object);
 	EndIf;
@@ -1994,6 +1998,15 @@ Procedure SetItemListItem(Object, Form, Row, Value) Export
 	ControllerClientServer_V2.ItemListItemOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetItemListItem(Parameters) Export
+	If Parameters.ObjectMetadataInfo.Tables.Property("ControlCodeStrings") Then
+		If Not Parameters.isRowsAddByScan Then 
+			ControlCodeStringsClient.ClearAllByRow(Parameters.Object, Parameters.Rows);
+			ControlCodeStringsClient.UpdateState(Parameters.Object);
+		EndIf;
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 #Region ITEM_LIST_ITEM_KEY
@@ -2030,6 +2043,13 @@ Procedure OnSetItemListItemKey(Parameters) Export
 	If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
 		SourceOfOriginClient.DeleteUnusedSourceOfOrigins(Parameters.Object, Parameters.Form);
 		SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Parameters.Object);
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.Tables.Property("ControlCodeStrings") Then
+		If Not Parameters.isRowsAddByScan Then 
+			ControlCodeStringsClient.ClearAllByRow(Parameters.Object, Parameters.Rows);
+			ControlCodeStringsClient.UpdateState(Parameters.Object);
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -2381,6 +2401,13 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 		VisibleRows = Parameters.Object.Materials.FindRows(New Structure("IsVisible", True));
 		If VisibleRows.Count() Then
 			Parameters.Form.Items.Materials.CurrentRow = VisibleRows[0].GetID();
+		EndIf;
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.Tables.Property("ControlCodeStrings") Then
+		If Not Parameters.isRowsAddByScan Then 
+			ControlCodeStringsClient.ClearAllByRow(Parameters.Object, Parameters.Rows);
+			ControlCodeStringsClient.UpdateState(Parameters.Object);
 		EndIf;
 	EndIf;
 EndProcedure
@@ -3039,6 +3066,10 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 			SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
 		EndIf;
 		
+		If Parameters.ObjectMetadataInfo.Tables.Property("ControlCodeStrings") Then
+			ControlCodeStringsClient.UpdateState(Parameters.Object);
+		EndIf;
+			
 		If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
 			SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
 		EndIf;

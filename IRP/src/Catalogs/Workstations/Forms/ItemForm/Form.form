@@ -53,94 +53,6 @@
     <textEdit>true</textEdit>
    </extInfo>
   </items>
-  <items xsi:type="form:FormField">
-   <name>UseCashInAndCashOut</name>
-   <id>48</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <dataPath xsi:type="form:DataPath">
-    <segments>Object.UseCashInAndCashOut</segments>
-   </dataPath>
-   <titleLocation>Right</titleLocation>
-   <extendedTooltip>
-    <name>UseCashInAndCashOutExtendedTooltip</name>
-    <id>50</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <type>Label</type>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:LabelDecorationExtInfo">
-     <horizontalAlign>Left</horizontalAlign>
-    </extInfo>
-   </extendedTooltip>
-   <contextMenu>
-    <name>UseCashInAndCashOutContextMenu</name>
-    <id>49</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <autoFill>true</autoFill>
-   </contextMenu>
-   <type>CheckBoxField</type>
-   <editMode>Enter</editMode>
-   <showInHeader>true</showInHeader>
-   <headerHorizontalAlign>Left</headerHorizontalAlign>
-   <showInFooter>true</showInFooter>
-   <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
-  </items>
-  <items xsi:type="form:FormField">
-   <name>AutoCreateMoneyTransferAtSessionClosing</name>
-   <id>53</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <dataPath xsi:type="form:DataPath">
-    <segments>Object.AutoCreateMoneyTransferAtSessionClosing</segments>
-   </dataPath>
-   <titleLocation>Right</titleLocation>
-   <extendedTooltip>
-    <name>AutoCreateMoneyTransferAtSessionClosingExtendedTooltip</name>
-    <id>55</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <type>Label</type>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:LabelDecorationExtInfo">
-     <horizontalAlign>Left</horizontalAlign>
-    </extInfo>
-   </extendedTooltip>
-   <contextMenu>
-    <name>AutoCreateMoneyTransferAtSessionClosingContextMenu</name>
-    <id>54</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <autoFill>true</autoFill>
-   </contextMenu>
-   <type>CheckBoxField</type>
-   <editMode>Enter</editMode>
-   <showInHeader>true</showInHeader>
-   <headerHorizontalAlign>Left</headerHorizontalAlign>
-   <showInFooter>true</showInFooter>
-   <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
-  </items>
   <visible>true</visible>
   <enabled>true</enabled>
   <userVisible>
@@ -380,20 +292,74 @@
    <textEdit>true</textEdit>
   </extInfo>
  </items>
- <items xsi:type="form:FormField">
-  <name>AutoCalculateDiscount</name>
-  <id>56</id>
+ <items xsi:type="form:FormGroup">
+  <name>GroupSystemSettings</name>
+  <id>64</id>
+  <items xsi:type="form:FormField">
+   <name>IgnoreCodeStringControl</name>
+   <id>66</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>Object.IgnoreCodeStringControl</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>IgnoreCodeStringControlExtendedTooltip</name>
+    <id>68</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>IgnoreCodeStringControlContextMenu</name>
+    <id>67</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>CheckBoxField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:CheckBoxFieldExtInfo">
+    <checkBoxType>Switcher</checkBoxType>
+   </extInfo>
+  </items>
   <visible>true</visible>
   <enabled>true</enabled>
   <userVisible>
    <common>true</common>
   </userVisible>
-  <dataPath xsi:type="form:DataPath">
-   <segments>Object.AutoCalculateDiscount</segments>
-  </dataPath>
+  <title>
+   <key>en</key>
+   <value>System settings</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Настройки системы</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Sistem ayarları</value>
+  </title>
   <extendedTooltip>
-   <name>AutoCalculateDiscountExtendedTooltip</name>
-   <id>58</id>
+   <name>GroupSystemSettingsExtendedTooltip</name>
+   <id>65</id>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
@@ -406,23 +372,194 @@
     <horizontalAlign>Left</horizontalAlign>
    </extInfo>
   </extendedTooltip>
-  <contextMenu>
-   <name>AutoCalculateDiscountContextMenu</name>
-   <id>57</id>
+  <type>UsualGroup</type>
+  <extInfo xsi:type="form:UsualGroupExtInfo">
+   <group>HorizontalIfPossible</group>
+   <behavior>Auto</behavior>
+   <representation>WeakSeparation</representation>
+   <showLeftMargin>true</showLeftMargin>
+   <united>true</united>
+   <showTitle>true</showTitle>
+   <throughAlign>Auto</throughAlign>
+   <currentRowUse>Auto</currentRowUse>
+  </extInfo>
+ </items>
+ <items xsi:type="form:FormGroup">
+  <name>GroupPOSSettings</name>
+  <id>59</id>
+  <items xsi:type="form:FormField">
+   <name>AutoCalculateDiscount</name>
+   <id>56</id>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
     <common>true</common>
    </userVisible>
-   <autoFill>true</autoFill>
-  </contextMenu>
-  <type>CheckBoxField</type>
-  <editMode>Enter</editMode>
-  <showInHeader>true</showInHeader>
-  <headerHorizontalAlign>Left</headerHorizontalAlign>
-  <showInFooter>true</showInFooter>
-  <extInfo xsi:type="form:CheckBoxFieldExtInfo">
-   <checkBoxType>Switcher</checkBoxType>
+   <dataPath xsi:type="form:DataPath">
+    <segments>Object.AutoCalculateDiscount</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>AutoCalculateDiscountExtendedTooltip</name>
+    <id>58</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>AutoCalculateDiscountContextMenu</name>
+    <id>57</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>CheckBoxField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:CheckBoxFieldExtInfo">
+    <checkBoxType>Switcher</checkBoxType>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
+   <name>AutoCreateMoneyTransferAtSessionClosing</name>
+   <id>53</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>Object.AutoCreateMoneyTransferAtSessionClosing</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>AutoCreateMoneyTransferAtSessionClosingExtendedTooltip</name>
+    <id>55</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>AutoCreateMoneyTransferAtSessionClosingContextMenu</name>
+    <id>54</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>CheckBoxField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:CheckBoxFieldExtInfo">
+    <checkBoxType>Switcher</checkBoxType>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
+   <name>UseCashInAndCashOut</name>
+   <id>48</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>Object.UseCashInAndCashOut</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>UseCashInAndCashOutExtendedTooltip</name>
+    <id>50</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>UseCashInAndCashOutContextMenu</name>
+    <id>49</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>CheckBoxField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:CheckBoxFieldExtInfo">
+    <checkBoxType>Switcher</checkBoxType>
+   </extInfo>
+  </items>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <title>
+   <key>en</key>
+   <value>POS settings</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Настройки РМК</value>
+  </title>
+  <extendedTooltip>
+   <name>GroupPOSSettingsExtendedTooltip</name>
+   <id>60</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <type>UsualGroup</type>
+  <extInfo xsi:type="form:UsualGroupExtInfo">
+   <group>Vertical</group>
+   <behavior>Auto</behavior>
+   <representation>WeakSeparation</representation>
+   <showLeftMargin>true</showLeftMargin>
+   <united>true</united>
+   <showTitle>true</showTitle>
+   <throughAlign>Auto</throughAlign>
+   <currentRowUse>Auto</currentRowUse>
   </extInfo>
  </items>
  <items xsi:type="form:FormGroup">

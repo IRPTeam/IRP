@@ -411,7 +411,90 @@ Scenario: Data preparation (comission stock)
 		| 'e1cib/data/Document.InventoryTransfer?ref=b78db8d3fd6dff8b11ed7fb111098db0' | 'cdc7f9f5-d718-4316-a91f-44df1826a042' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b78db8d3fd6dff8b11ed7f8d992046f1' | 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed7f8d992046f4' | 1          |
 		| 'e1cib/data/Document.InventoryTransfer?ref=b78db8d3fd6dff8b11ed7fb111098db0' | '8e3505f9-c422-4f3c-b377-7c19be8e5669' | ''                                                                         | 'e1cib/data/Catalog.SourceOfOrigins?ref=b78db8d3fd6dff8b11ed7faeea16b1dc' | 2          |
 
+Scenario: Data preparation (consignment from serial lot number)
 
+	// Catalog.SerialLotNumbers
+
+	And I check or create catalog "SerialLotNumbers" objects:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Description'        | 'SerialLotNumberOwner'                                             | 'Inactive' | 'StockBalanceDetail' | 'EachSerialLotNumberIsUnique' | 'BatchBalanceDetail' | 'CodeString' |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b79a9cd967c8e1f011edee3151c1804e' | 'False'        | '09999900989900'     | 'e1cib/data/Catalog.ItemKeys?ref=b78db8d3fd6dff8b11ed7f8d992048ef' | 'False'    | 'True'               | 'False'                       | 'True'               | ''           |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b79a9cd967c8e1f011edee3151c1804f' | 'False'        | '09999900989901'     | 'e1cib/data/Catalog.ItemKeys?ref=b78db8d3fd6dff8b11ed7f8d992048ef' | 'False'    | 'True'               | 'False'                       | 'True'               | ''           |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b79a9cd967c8e1f011edee3151c18050' | 'False'        | '090998897898979998' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958545c' | 'False'    | 'True'               | 'False'                       | 'True'               | ''           |
+
+	// InformationRegister.Barcodes
+
+	And I check or create information register "Barcodes" records:
+		| 'Barcode'            | 'ItemKey'                                                          | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Unit'                                                          | 'Presentation' |
+		| '09999900989900'     | 'e1cib/data/Catalog.ItemKeys?ref=b78db8d3fd6dff8b11ed7f8d992048ef' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b79a9cd967c8e1f011edee3151c1804e' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+		| '09999900989901'     | 'e1cib/data/Catalog.ItemKeys?ref=b78db8d3fd6dff8b11ed7f8d992048ef' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b79a9cd967c8e1f011edee3151c1804f' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+		| '090998897898979998' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958545c' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b79a9cd967c8e1f011edee3151c18050' | ''               | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | ''             |
+
+	// InformationRegister.ConsignorSerialLotNumbers
+
+	And I check or create information register "ConsignorSerialLotNumbers" records:
+		| 'Period'             | 'SerialLotNumber'                                                          | 'Consignor'                                                         | 'Tax'                                                           | 'TaxRate'                                                          | 'Use'  |
+		| '09.05.2023 9:35:10' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b79a9cd967c8e1f011edee3151c1804e' | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca79f' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' | 'True' |
+		| '09.05.2023 9:35:10' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b79a9cd967c8e1f011edee3151c1804f' | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca7a5' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef011' | 'True' |
+		| '{(CurrentDate())}'  | 'e1cib/data/Catalog.SerialLotNumbers?ref=b79a9cd967c8e1f011edee3151c18050' | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca7a5' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef011' | 'True' |
+
+	// Document.PurchaseInvoice
+
+	And I check or create document "PurchaseInvoice" objects:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Number' | 'Date'               | 'Posted'  | 'Agreement'                                                          | 'Company'                                                           | 'Currency'                                                           | 'DocDate'            | 'DocNumber' | 'LegalName'                                                         | 'Partner'                                                          | 'PriceIncludeTax' | 'LegalNameContract' | 'TransactionType'                                    | 'Author'                                                        | 'Branch' | 'Description' | 'DocumentAmount' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b79a9cd967c8e1f011edee3151c18053' | 'False'        |  200     | '09.05.2023 9:53:46' | 'False'   | 'e1cib/data/Catalog.Agreements?ref=b788b483d858e32911ed56c495eca7a0' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '01.01.0001 0:00:00' | ''          | 'e1cib/data/Catalog.Companies?ref=b788b483d858e32911ed56c495eca79f' | 'e1cib/data/Catalog.Partners?ref=b788b483d858e32911ed56c495eca79e' | 'True'            | ''                  | 'Enum.PurchaseTransactionTypes.ReceiptFromConsignor' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''            | 300              |
+
+	And I refill object tabular section "ItemList":
+		| 'Ref'                                                                      | 'Key'                                  | 'Item'                                                          | 'ItemKey'                                                          | 'Store'                                                          | 'PurchaseOrder' | 'Unit'                                                          | 'Quantity' | 'Price' | 'PriceType'                                             | 'TaxAmount' | 'TotalAmount' | 'NetAmount' | 'OffersAmount' | 'ProfitLossCenter' | 'ExpenseType' | 'DeliveryDate'       | 'SalesOrder' | 'Detail' | 'AdditionalAnalytic' | 'DontCalculateRow' | 'QuantityInBaseUnit' | 'UseGoodsReceipt' | 'InternalSupplyRequest' | 'IsAdditionalItemCost' | 'UseSerialLotNumber' | 'IsService' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b79a9cd967c8e1f011edee3151c18053' | 'b587bcce-1411-4f9b-9c92-1e5ab9019212' | 'e1cib/data/Catalog.Items?ref=b78db8d3fd6dff8b11ed7f8d992048ee' | 'e1cib/data/Catalog.ItemKeys?ref=b781cf3f5e36b25611ecd69f8958545c' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | ''              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 1          | 100     | 'e1cib/data/Catalog.PriceTypes?refName=ManualPriceType' | 15.25       | 100           | 84.75       |                | ''                 | ''            | '01.01.0001 0:00:00' | ''           | ''       | ''                   | 'False'            | 1                    | 'False'           | ''                      | 'False'                | 'True'               | 'False'     |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b79a9cd967c8e1f011edee3151c18053' | 'b9878111-f200-43ca-8a33-06f9a002b0eb' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf13dc8cb47d1' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf13dc8cb47d7' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00b' | ''              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 2          | 100     | 'e1cib/data/Catalog.PriceTypes?refName=ManualPriceType' | 30.51       | 200           | 169.49      |                | ''                 | ''            | '01.01.0001 0:00:00' | ''           | ''       | ''                   | 'False'            | 2                    | 'False'           | ''                      | 'False'                | 'False'              | 'False'     |
+
+	And I refill object tabular section "TaxList":
+		| 'Ref'                                                                      | 'Key'                                  | 'Tax'                                                           | 'Analytics' | 'TaxRate'                                                          | 'Amount' | 'IncludeToTotalAmount' | 'ManualAmount' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b79a9cd967c8e1f011edee3151c18053' | 'b587bcce-1411-4f9b-9c92-1e5ab9019212' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''          | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' | 15.25    | 'True'                 | 15.25          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b79a9cd967c8e1f011edee3151c18053' | 'b9878111-f200-43ca-8a33-06f9a002b0eb' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''          | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' | 30.51    | 'True'                 | 30.51          |
+
+	And I refill object tabular section "Currencies":
+		| 'Ref'                                                                      | 'Key'                                  | 'CurrencyFrom'                                                       | 'Rate' | 'ReverseRate' | 'ShowReverseRate' | 'Multiplicity' | 'MovementType'                                                                                    | 'Amount' | 'IsFixed' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b79a9cd967c8e1f011edee3151c18053' | '                                    ' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 1      | 1             | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | 300      | 'False'   |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b79a9cd967c8e1f011edee3151c18053' | '                                    ' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 1      | 1             | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d' | 300      | 'False'   |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b79a9cd967c8e1f011edee3151c18053' | '                                    ' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 0.1712 | 5.8411        | 'False'           | 1              | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e' | 51.36    | 'False'   |
+
+	And I refill object tabular section "SerialLotNumbers":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber'                                                          | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b79a9cd967c8e1f011edee3151c18053' | 'b587bcce-1411-4f9b-9c92-1e5ab9019212' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b79a9cd967c8e1f011edee3151c18050' | 1          |
+
+	
+	And I refill object tabular section "SourceOfOrigins":
+		| 'Ref'                                                                      | 'Key'                                  | 'SerialLotNumber'                                                          | 'SourceOfOrigin' | 'Quantity' |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b79a9cd967c8e1f011edee3151c18053' | 'b587bcce-1411-4f9b-9c92-1e5ab9019212' | 'e1cib/data/Catalog.SerialLotNumbers?ref=b79a9cd967c8e1f011edee3151c18050' | ''               | 1          |
+		| 'e1cib/data/Document.PurchaseInvoice?ref=b79a9cd967c8e1f011edee3151c18053' | 'b9878111-f200-43ca-8a33-06f9a002b0eb' | ''                                                                         | ''               | 2          |
+
+	// Document.PriceList
+
+	And I check or create document "PriceList" objects:
+		| 'Ref'                                                                | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'ItemType' | 'PriceListType'                    | 'PriceType'                                                          | 'Author'                                                        | 'Branch' | 'Description' |
+		| 'e1cib/data/Document.PriceList?ref=b79a9cd967c8e1f011edee3151c18054' | 'False'        | 27       | '09.05.2023 10:08:30' | 'True'   | ''         | 'Enum.PriceListTypes.PriceByItems' | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef002' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''            |
+
+	And I refill object tabular section "ItemList":
+		| 'Ref'                                                                | 'Item'                                                          | 'Price' | 'InputUnit'                                                     | 'InputPrice' | 'Unit'                                                          |
+		| 'e1cib/data/Document.PriceList?ref=b79a9cd967c8e1f011edee3151c18054' | 'e1cib/data/Catalog.Items?ref=b78db8d3fd6dff8b11ed7f8d992047ee' | 100     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b79a9cd967c8e1f011edee3151c18054' | 'e1cib/data/Catalog.Items?ref=b78db8d3fd6dff8b11ed7f8d992048ee' | 200     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+
+	And I execute 1C:Enterprise script at server
+		| "Documents.PriceList.FindByNumber(27).GetObject().Write(DocumentWriteMode.Posting);" |
+	
+	And I check or create document "PriceList" objects:
+		| 'Ref'                                                                | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'ItemType' | 'PriceListType'                    | 'PriceType'                                                          | 'Author'                                                        | 'Branch' | 'Description' |
+		| 'e1cib/data/Document.PriceList?ref=b79a9cd967c8e1f011edee3151c18061' | 'False'        | 28       | '09.05.2023 10:32:37' | 'True'   | ''         | 'Enum.PriceListTypes.PriceByItems' | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''       | ''            |
+
+	And I refill object tabular section "ItemList":
+		| 'Ref'                                                                | 'Item'                                                          | 'Price' | 'InputUnit'                                                     | 'InputPrice' | 'Unit'                                                          |
+		| 'e1cib/data/Document.PriceList?ref=b79a9cd967c8e1f011edee3151c18061' | 'e1cib/data/Catalog.Items?ref=b78db8d3fd6dff8b11ed7f8d992047ee' | 100     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b79a9cd967c8e1f011edee3151c18061' | 'e1cib/data/Catalog.Items?ref=b78db8d3fd6dff8b11ed7f8d992048ee' | 200     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+		| 'e1cib/data/Document.PriceList?ref=b79a9cd967c8e1f011edee3151c18061' | 'e1cib/data/Catalog.Items?ref=b781cf3f5e36b25611ecd69f89585359' | 120     | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |              | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' |
+
+	And I execute 1C:Enterprise script at server
+		| "Documents.PriceList.FindByNumber(28).GetObject().Write(DocumentWriteMode.Posting);" |
 
 Scenario: Create document PurchaseInvoice objects (with source of origin)
 

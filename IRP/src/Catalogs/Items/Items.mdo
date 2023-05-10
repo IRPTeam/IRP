@@ -237,6 +237,33 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="8d2cd136-2367-493f-af0c-497964dfb447">
+  <name>ControlCodeString</name>
+  <synonym>
+   <key>en</key>
+   <value>Control code string</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Контролировать коды</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <toolTip>
+   <key>en</key>
+   <value>Conrol code string before sale on POS</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Контроль кодов при продаже</value>
+  </toolTip>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <tabularSections uuid="e3609755-5008-429d-a577-246046f74702">
   <producedTypes>
    <objectType typeId="9654fef5-89da-4b6c-964f-8875a75a6d50" valueTypeId="15da890f-647a-418a-8809-add8417164e9"/>

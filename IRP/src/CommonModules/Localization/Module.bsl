@@ -395,7 +395,14 @@ Function Strings(Lang) Export
 		|ru='Не удалось закрыть сессию регистрации кодов'", Lang));
 	Strings.Insert("EqFP_GetWrongAnswerFromProcessingKM", NStr("en='Get wrong answer from Processing KM.';
 		|ru='Получен ошибочный ответ при проверке кодов'", Lang));
-	
+	Strings.Insert("EqFP_ScanedCodeStringAlreadyExists", NStr("en='Current barcode already use at document line: %1';
+		|ru='Текущий штрихкод уже используется в документе. Строка: %1'", Lang));
+
+	Strings.Insert("EqFP_ProblemWhileCheckCodeString", NStr("en='Problem while check code: %1';
+		|ru='Ошибка при проверке кода: %1'", Lang));
+
+	Strings.Insert("EqFP_ErrorWhileConfirmCode", NStr("en='Error while confirm code on request: %1';
+		|ru='Ошибка при попытке запроса подтверждения: %1'", Lang));
 #EndRegion
 
 #Region POS
@@ -432,6 +439,13 @@ Function Strings(Lang) Export
 		|ru='Для документа возврата ""%4"" есть более подходящяя позиция %3, чем %2 из %1.'", Lang));
 	Strings.Insert("POS_Error_CannotFindUser", NStr("en='Can not find user with barcode [%1]';
 		|ru='Не найден пользователь для штрихкода [%1]'", Lang));
+	
+	Strings.Insert("POS_Error_ThisBarcodeFromAnotherItem", NStr("en='This is barcode used for %1';
+		|ru='Этот код уже используется для %1'", Lang));
+	Strings.Insert("POS_Error_ThisIsNotControleStringBarcode", NStr("en='Scan control string barcode. Wrong barcode %1';
+		|ru='Просканируйте штрихкод маркировки. Не верный штрихкод: %1'", Lang));
+	Strings.Insert("POS_Error_CheckFillingForAllCodes", NStr("en='Scan control string for each item.';
+		|ru='Сканировать котнрольные коды для каждого элемента'", Lang));
 	
 #EndRegion
 

@@ -1137,6 +1137,24 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="108ae994-49a7-44be-8ee6-1277fe0c6dc2">
+   <name>isControlCodeString</name>
+   <synonym>
+    <key>en</key>
+    <value>Is control code string</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Есть котроль кодов</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="0d32dd7b-16e6-4c0b-a360-865e3d47dc78">
   <producedTypes>
@@ -2796,6 +2814,85 @@
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="d2a35e67-480a-4a54-8e1e-88e194e54a0c">
+  <producedTypes>
+   <objectType typeId="4ea3a36c-854d-490b-9c42-a8297a18ae64" valueTypeId="a649e56f-4c58-429c-9edc-11a05883acbd"/>
+   <rowType typeId="ddf418a9-d8fc-48b3-952f-1b5d3be2ca07" valueTypeId="a0610c74-554b-407c-a177-5406f1f7f9c7"/>
+  </producedTypes>
+  <name>ControlCodeStrings</name>
+  <synonym>
+   <key>en</key>
+   <value>Control code strings</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Контрольные коды</value>
+  </synonym>
+  <attributes uuid="130f37c6-6f58-4912-8e04-c5fabf6cf4cf">
+   <name>Key</name>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="fbe3c576-cd77-4de6-959c-6bfac398fcca">
+   <name>CodeString</name>
+   <synonym>
+    <key>en</key>
+    <value>Code string</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Код строкой</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Satır kodu</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>1024</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="fb9168f3-ce15-4cfa-b777-11246911b795">
+   <name>CodeIsApproved</name>
+   <synonym>
+    <key>en</key>
+    <value>Code is approved</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Код подтвержден</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

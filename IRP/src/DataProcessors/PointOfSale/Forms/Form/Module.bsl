@@ -662,7 +662,7 @@ Procedure ItemListDrag(Item, DragParameters, StandardProcessing, Row, Field)
 EndProcedure
 
 &AtClient
-Procedure ItemListControlCodeStringStateClick()
+Procedure ItemListControlCodeStringStateClick() Export
 	
 	CurrentData = Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then

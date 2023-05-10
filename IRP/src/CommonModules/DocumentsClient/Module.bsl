@@ -1394,7 +1394,8 @@ Function GetParametersPickupItems(Object, Form, AddInfo)
 	Parameters.Insert("ObjectRefType"       , ObjectRefType);
 	Parameters.Insert("UseSerialLotNumbers" , Object.Property("SerialLotNumbers"));
 	Parameters.Insert("UseSourceOfOrigins"  , Object.Property("SourceOfOrigins"));
-	
+	Parameters.Insert("UseControlString"  	, Object.Property("ControlCodeStrings"));
+
 	// isSerialLotNumberAtRow
 	isSerialLotNumberAtRow = False;
 	If ObjectRefType = Type("DocumentRef.PhysicalInventory")
@@ -1541,18 +1542,28 @@ Procedure PickupItemsEnd(ScanData, AddInfo) Export
 		EndIf;
 	EndIf;
 	
+	FormAlreadyOpened = False;
+	
 	// open serial lot numbers choice form
 	If Result.ChoiceForms.PresentationStartChoice_Counter = 1 Then
 		Form.Items.ItemList.CurrentRow = Object.ItemList.FindRows(
-		New Structure("Key", Result.ChoiceForms.PresentationStartChoice_Key))[0].GetID();
+			New Structure("Key", Result.ChoiceForms.PresentationStartChoice_Key))[0].GetID();
 		Form.ItemListSerialLotNumbersPresentationStartChoice(Object.ItemList, Undefined, True);
+		FormAlreadyOpened = True;
 	EndIf;	
 	
 	If Result.ChoiceForms.StartChoice_Counter = 1 Then
 		Form.Items.ItemList.CurrentRow = Object.ItemList.FindRows(
-		New Structure("Key", Result.ChoiceForms.StartChoice_Key))[0].GetID();
+			New Structure("Key", Result.ChoiceForms.StartChoice_Key))[0].GetID();
 		Form.ItemListSerialLotNumberStartChoice(Object.ItemList, Undefined, True);
+		FormAlreadyOpened = True;
 	EndIf;	
+
+	If Result.ChoiceForms.ControlStringStartChoice_Counter = 1 And Not FormAlreadyOpened Then
+		Form.Items.ItemList.CurrentRow = Object.ItemList.FindRows(
+			New Structure("Key", Result.ChoiceForms.ControlStringStartChoice_Key))[0].GetID();
+		Form.ItemListControlCodeStringStateClick();
+	EndIf;
 	
 	For Each Message In Result.UserMessages Do
 		CommonFunctionsClientServer.ShowUsersMessage(Message);

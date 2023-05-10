@@ -1385,19 +1385,21 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <type>InputField</type>
+          <type>PictureField</type>
           <editMode>Enter</editMode>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:InputFieldExtInfo">
+          <extInfo xsi:type="form:ImageFieldExtInfo">
             <width>1</width>
             <maxWidth>1</maxWidth>
             <autoMaxHeight>true</autoMaxHeight>
-            <horizontalStretch>false</horizontalStretch>
-            <wrap>true</wrap>
-            <chooseType>true</chooseType>
-            <typeDomainEnabled>true</typeDomainEnabled>
-            <textEdit>true</textEdit>
+            <horizontalStretch>true</horizontalStretch>
+            <verticalStretch>true</verticalStretch>
+            <hyperlink>true</hyperlink>
+            <valuesPicture xsi:type="core:PictureRef">
+              <picture>CommonPicture.ControlCodeString</picture>
+            </valuesPicture>
+            <fileDragMode>AsFileRef</fileDragMode>
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
@@ -3024,6 +3026,10 @@
         <handlers>
           <event>AfterDeleteRow</event>
           <name>ItemListAfterDeleteRow</name>
+        </handlers>
+        <handlers>
+          <event>OnStartEdit</event>
+          <name>ItemListOnStartEdit</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>

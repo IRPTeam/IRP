@@ -61,7 +61,7 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 		FiscalStringData = New Structure();
 		FiscalStringData.Insert("AmountWithDiscount", ItemRow.TotalAmount);
 		FiscalStringData.Insert("DiscountAmount", ItemRow.OffersAmount);
-		If ItemRow.Item.ItemType.ControlCodeString Then
+		If ItemRow.Item.ControlCodeString Then
 			If CCSRows.Count() = 0 Then
 				Raise "Control string code not filled. Row: " + ItemRow.LineNumber;
 			ElsIf CCSRows.Count() <> ItemRow.Quantity Then
@@ -69,7 +69,11 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 			ElsIf CCSRows.Count() > 1 Then // TODO: Fix this
 				Raise "Not suppoted send more then 1 control code by each row. Row: " + ItemRow.LineNumber;
 			Else
-				FiscalStringData.Insert("MarkingCode", CCSRows[0].CodeString);
+				CodeString = CCSRows[0].CodeString;
+				If Not CommonFunctionsClientServer.isBase64Value(CodeString) Then
+					CodeString = Base64String(GetBinaryDataFromString(CodeString, TextEncoding.UTF8, False));
+				EndIf;
+				FiscalStringData.Insert("MarkingCode", CodeString);
 				FiscalStringData.Insert("CalculationSubject", "33");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 			EndIf;
 		Else
@@ -492,6 +496,21 @@ EndProcedure
 Function GetStatusData(DocumentRef) Export
 	FiscalStatus = InformationRegisters.DocumentFiscalStatus.GetStatusData(DocumentRef);
 	Return FiscalStatus;
+EndFunction
+
+// Get string code.
+// 
+// Parameters:
+//  DocumentRef - DocumentRef.RetailReturnReceipt, DocumentRef.RetailSalesReceipt -
+// 
+// Returns:
+//  Array Of String
+Function GetStringCode(DocumentRef) Export
+	Array = New Array; // Array Of String
+	For Each Row In DocumentRef.ControlCodeStrings Do
+		Array.Add(Row.CodeString);
+	EndDo;
+	Return Array;
 EndFunction
 
 #EndRegion

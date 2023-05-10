@@ -941,6 +941,10 @@ Procedure OnOpenFormNotify(Parameters) Export
 		SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
 	EndIf;
 	
+	If Parameters.ObjectMetadataInfo.Tables.Property("ControlCodeStrings") Then
+		ControlCodeStringsClient.UpdateState(Parameters.Object);
+	EndIf;
+	
 	If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
 		SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Parameters.Object);
 	EndIf;
@@ -3062,6 +3066,10 @@ Procedure OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, Form, TableNames)
 			SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Parameters.Object);
 		EndIf;
 		
+		If Parameters.ObjectMetadataInfo.Tables.Property("ControlCodeStrings") Then
+			ControlCodeStringsClient.UpdateState(Parameters.Object);
+		EndIf;
+			
 		If Parameters.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") Then
 			SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
 		EndIf;

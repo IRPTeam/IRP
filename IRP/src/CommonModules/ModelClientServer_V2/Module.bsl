@@ -3527,7 +3527,7 @@ Function ChangeisControlCodeStringByItemOptions() Export
 EndFunction
 
 Function ChangeisControlCodeStringByItemExecute(Options) Export
-	Return CommonFunctionsServer.GetRefAttribute(Options.Item, "ItemType.ControlCodeString");
+	Return CommonFunctionsServer.GetRefAttribute(Options.Item, "ControlCodeString");
 EndFunction
 
 #EndRegion

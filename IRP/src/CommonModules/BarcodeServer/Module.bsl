@@ -151,7 +151,7 @@ Function GetItemInfoByBarcode(Settings, BarcodeVT)
 		|	Barcodes.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
 		|	Barcodes.ItemKey.Item.ItemType.AlwaysAddNewRowAfterScan AS AlwaysAddNewRowAfterScan,
 		|	ISNULL(Barcodes.SerialLotNumber.EachSerialLotNumberIsUnique, False) AS EachSerialLotNumberIsUnique,
-		|	Barcodes.ItemKey.Item.ItemType.ControlCodeString AS ControlCodeString,
+		|	Barcodes.ItemKey.Item.ControlCodeString AS ControlCodeString,
 		|	Barcodes.SourceOfOrigin AS SourceOfOrigin
 		|FROM
 		|	VTBarcode AS VTBarcode

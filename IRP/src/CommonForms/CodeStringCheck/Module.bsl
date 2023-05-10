@@ -42,7 +42,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 	ArrayOfApprovedCodeStrings = New Array; // Array Of String
 	For Each Row In Result.FoundedItems Do
 		
-		If Not Row.Item = Item Or Row.ItemKey = ItemKey Then
+		If Not Row.Item = Item Or Not Row.ItemKey = ItemKey Then
 			Descr = String(Row.Item) + "[" + Row.ItemKey + "]";
 			//@skip-check property-return-type, invocation-parameter-type-intersect
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().POS_Error_ThisBarcodeFromAnotherItem, Descr));
@@ -57,29 +57,54 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 	
 	For Each StrCode In ArrayOfCodeStrings Do
 		If CheckCodeString(StrCode) Then
+			
+			//@skip-check property-return-type, dynamic-access-method-not-found, variable-value-type
+			dblRows = FormOwner.Object.ControlCodeStrings.FindRows(New Structure("CodeString", StrCode));
+			For Each dblCode In dblRows Do
+				//@skip-check property-return-type, dynamic-access-method-not-found, variable-value-type, structure-consructor-value-type
+				dblData = FormOwner.Object.ItemList.FindRows(New Structure("Key", dblCode.Key));
+				//@skip-check property-return-type, invocation-parameter-type-intersect
+				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().EqFP_ScanedCodeStringAlreadyExists, dblData[0].LineNumber));
+			EndDo;
+			
+			//@skip-check dynamic-access-method-not-found
+			If dblRows.Count() > 0 Then
+				Continue;
+			EndIf;
+			
 			ArrayOfApprovedCodeStrings.Add(StrCode);
 		Else
+			//@skip-check property-return-type, invocation-parameter-type-intersect
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().POS_Error_ThisIsNotControleStringBarcode, StrCode));
 		EndIf;
 	EndDo;
 	
+	AllBarcodesIsOk = True;
 	For Each StringCode In ArrayOfApprovedCodeStrings Do // String
-		NewRow = CurrentCodes.Add();
-		NewRow.StringCode = StringCode;
-		
 		RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettings();
 		RequestKMSettings.Quantity = 1;
 		RequestKMSettings.MarkingCode = StringCode;
 		
 		Result = Await EquipmentFiscalPrinterClient.CheckKM(Hardware, RequestKMSettings); // See EquipmentFiscalPrinterClient.ProcessingKMResult
 		
+		If Not Result.Approved Then
+			AllBarcodesIsOk = False;
+			CommonFunctionsClientServer.ShowUsersMessage(CommonFunctionsServer.SerializeJSON(Result));	
+			Return;
+		EndIf;
+		NewRow = CurrentCodes.Add();
+		NewRow.StringCode = StringCode;	
 		NewRow.CodeIsApproved = Result.Approved;
 	EndDo;
+	
+	If AllBarcodesIsOk And ArrayOfApprovedCodeStrings.Count() > 0 Then
+		Done();
+	EndIf;
 	
 EndProcedure
 
 &AtClient
-Procedure Done(Command)
+Procedure Done(Command = Undefined)
 	Array = New Array; // Array Of Structure
 	For Each Row In CurrentCodes Do
 		Str = New Structure;
@@ -94,7 +119,7 @@ EndProcedure
 
 &AtClient
 Function CheckCodeString(StrCode)
-	If StrLen(StrCode) < 30 Then
+	If StrLen(StrCode) < 20 Then
 		Return False;
 	EndIf;
 	

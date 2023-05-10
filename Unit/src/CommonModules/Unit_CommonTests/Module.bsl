@@ -6,6 +6,7 @@ Function Tests() Export
 	TestList = New Array; // Array of String
 	TestList.Add("CommonFunctionsServer_GetAttributesFromRef");	
 	TestList.Add("GetItemInfo_GetPackageDimensions");	
+	TestList.Add("CommonFunctionsClientServer_isBase64Value");	
 	Return TestList;
 EndFunction
 
@@ -13,6 +14,7 @@ EndFunction
 
 #Region Test
 
+// @skip-check wrong-string-literal-content
 Function CommonFunctionsServer_GetAttributesFromRef() Export
 	ArrayOfErrors = New Array; // Array of String
 	
@@ -307,4 +309,23 @@ Function GetItemInfo_GetPackageDimensions() Export
 	Return Undefined;
 EndFunction
 
+Function CommonFunctionsClientServer_isBase64Value() Export
+	
+	TestString = "";
+	Unit_Service.isEqual(False, CommonFunctionsClientServer.isBase64Value(TestString));
+
+	TestString = "ASD/";
+	Unit_Service.isEqual(False, CommonFunctionsClientServer.isBase64Value(TestString));
+	
+	TestString = "====";
+	Unit_Service.isEqual(False, CommonFunctionsClientServer.isBase64Value(TestString));
+	
+	TestString = "12345678";
+	Unit_Service.isEqual(True, CommonFunctionsClientServer.isBase64Value(TestString));
+	
+	TestString = "VGVzdA==";
+	Unit_Service.isEqual(True, CommonFunctionsClientServer.isBase64Value(TestString));
+	
+	Return Undefined;
+EndFunction
 #EndRegion

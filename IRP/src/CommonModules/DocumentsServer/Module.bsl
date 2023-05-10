@@ -668,8 +668,11 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 	Result.Insert("ChoiceForms",
 		New Structure("PresentationStartChoice_Counter, 
 					  |StartChoice_Counter, 
+					  |ControlStringStartChoice_Counter,
 					  |PresentationStartChoice_Key, 
-					  |StartChoice_Key", 0,0));
+					  |StartChoice_Key,
+					  |ControlStringStartChoice_Key", 0, 0, 0));
+					  
 	
 	Object = Parameters.ServerSideParameters.ServerParameters.Object;
 	
@@ -737,16 +740,19 @@ Function PickupItemEnd(Val Parameters, Val ScanData) Export
 			If ValueIsFilled(ScanDataItem.SerialLotNumber) Then
 				AddNewSerialLotNumber(Object, RowKey, ScanDataItem);
 			ElsIf ScanDataItem.UseSerialLotNumber Then
-				Result.ChoiceForms.PresentationStartChoice_Counter = 
-				Result.ChoiceForms.PresentationStartChoice_Counter + 1;
+				Result.ChoiceForms.PresentationStartChoice_Counter = Result.ChoiceForms.PresentationStartChoice_Counter + 1;
 				Result.ChoiceForms.PresentationStartChoice_Key = RowKey;
 			EndIf;
 		ElsIf Parameters.isSerialLotNumberAtRow Then
 			If Object.UseSerialLot And ScanDataItem.UseSerialLotNumber And Not ValueIsFilled(ScanDataItem.SerialLotNumber) Then
-				Result.ChoiceForms.StartChoice_Counter = 
-				Result.ChoiceForms.StartChoice_Counter + 1;
+				Result.ChoiceForms.StartChoice_Counter = Result.ChoiceForms.StartChoice_Counter + 1;
 				Result.ChoiceForms.StartChoice_Key = RowKey;
 			EndIf;
+		EndIf;
+
+		If Parameters.UseControlString Then
+			Result.ChoiceForms.ControlStringStartChoice_Counter = Result.ChoiceForms.ControlStringStartChoice_Counter + 1;
+			Result.ChoiceForms.ControlStringStartChoice_Key = RowKey;
 		EndIf;
 
 		If Parameters.UseSourceOfOrigins Then

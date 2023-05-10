@@ -188,3 +188,36 @@ Procedure AddValueToArray(Array, Value) Export
 	EndIf;
 EndProcedure
 
+// Is base64 value.
+// 
+// Parameters:
+//  Value - String - Value
+// 
+// Returns:
+//  Boolean - Is base64 value
+Function isBase64Value(Value) Export
+	
+	// ^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$
+	
+	StrLen = StrLen(Value);
+	If Not StrLen / 4 = Int(StrLen / 4)  OR StrLen < 4 Then
+		Return False;
+	EndIf;
+	
+	For Index = 1 To StrLen Do
+		Code = CharCode(Mid(Value, Index, 1));
+		If Code >= 48 And Code <= 57 Then // Numbers
+		
+		ElsIf Code >= 65 And Code <= 90 Then // A-Z
+		
+		ElsIf Code >= 97 And Code <= 122 Then // a-z
+		
+		ElsIf Code = 61 And StrLen - Index <= 2 Then // =
+		
+		Else
+			Return False;		
+		EndIf;
+	EndDo;
+	
+	Return True;
+EndFunction

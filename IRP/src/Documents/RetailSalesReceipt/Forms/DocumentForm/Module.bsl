@@ -283,6 +283,13 @@ Procedure ItemListAfterDeleteRow(Item)
 	LockLinkedRows();
 EndProcedure
 
+&AtClient
+Procedure ItemListOnStartEdit(Item, NewRow, Clone)
+	If Item.CurrentItem.Name = "ItemListControlCodeStringState" Then
+		ItemListControlCodeStringStateClick();
+	EndIf;
+EndProcedure
+
 #Region ITEM_LIST_COLUMNS
 
 #Region _ITEM
@@ -798,6 +805,54 @@ EndProcedure
 &AtServer
 Procedure UpdateAccountingData()
 	AccountingClientServer.UpdateAccountingTables(Object, "ItemList");
+EndProcedure
+
+#EndRegion
+
+#Region CONTROL_STRINGS
+
+&AtClient
+Procedure ItemListControlCodeStringStateClick() Export
+	
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	If Not CurrentData.isControlCodeString Then
+		Return;
+	EndIf;
+	
+	Params = New Structure;
+	Params.Insert("Hardware", CommonFunctionsServer.GetRefAttribute(Object.ConsolidatedRetailSales, "FiscalPrinter"));
+	Params.Insert("RowKey", CurrentData.Key);
+	Params.Insert("Item", CurrentData.Item);
+	Params.Insert("ItemKey", CurrentData.ItemKey);
+	Params.Insert("LineNumber", CurrentData.LineNumber);
+	Notify = New NotifyDescription("ItemListControlCodeStringStateOpeningEnd", ThisObject, Params);
+	
+	OpenForm("CommonForm.CodeStringCheck", Params, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure ItemListControlCodeStringStateOpeningEnd(Result, AddInfo) Export
+	
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	Array = New Array;
+	Str = New Structure;
+	Str.Insert("Key", AddInfo.RowKey);
+	Array.Add(Str);
+	ControlCodeStringsClient.ClearAllByRow(Object, Array);
+	
+	For Each Row In Result Do
+		FillPropertyValues(Object.ControlCodeStrings.Add(), Row);
+	EndDo;
+	
+	ControlCodeStringsClient.UpdateState(Object);
+	
 EndProcedure
 
 #EndRegion

@@ -794,7 +794,7 @@ Function GetInfoByItemsKey(ItemsKey, Agreement = Undefined) Export
 	|	ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
 	|	ItemKey.Item.ItemType.AlwaysAddNewRowAfterScan AS AlwaysAddNewRowAfterScan,
 	|	False AS EachSerialLotNumberIsUnique,
-	|	ItemKey.Item.ItemType.ControlCodeString AS ControlCodeString,
+	|	ItemKey.Item.ControlCodeString AS ControlCodeString,
 	|	VALUE(Catalog.SourceOfOrigins.EmptyRef) AS SourceOfOrigin
 	|FROM
 	|	Catalog.ItemKeys AS ItemKey

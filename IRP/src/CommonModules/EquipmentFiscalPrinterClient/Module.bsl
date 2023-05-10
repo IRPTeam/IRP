@@ -230,6 +230,40 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 		Return Result;
 	EndIf;
 	
+	If TypeOf(DataSource) = Type("DocumentRef.RetailSalesReceipt")
+		Or TypeOf(DataSource) = Type("DocumentRef.RetailReturnReceipt") Then
+		
+		CodeStringList = EquipmentFiscalPrinterServer.GetStringCode(DataSource);
+		
+		If CodeStringList.Count() > 0 Then
+			If Not DriverObject.OpenSessionRegistrationKM(Settings.ConnectedDriver.ID) = True Then
+				Raise R().EqFP_CanNotOpenSessionRegistrationKM;
+			EndIf;
+			
+			ArrayForApprove = New Array; // Array Of String
+			For Each CodeString In EquipmentFiscalPrinterServer.GetStringCode(DataSource) Do
+				RequestKMSettings = RequestKMSettings();
+				RequestKMSettings.MarkingCode = CodeString;
+				RequestKMSettings.Quantity = 1;
+				CheckResult = Device_CheckKM(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, RequestKMSettings, False);
+				If Not CheckResult.Approved Then
+					Raise StrTemplate(R().EqFP_ProblemWhileCheckCodeString, GetStringFromBinaryData(Base64Value(RequestKMSettings.MarkingCode)));
+				EndIf;
+				ArrayForApprove.Add(RequestKMSettings.GUID);
+			EndDo;
+			
+			For Each ApproveUUID In ArrayForApprove Do
+				If Not DriverObject.ConfirmKM(Settings.ConnectedDriver.ID, ApproveUUID, 0) Then
+					Raise StrTemplate(R().EqFP_ErrorWhileConfirmCode, ApproveUUID);
+				EndIf;
+			EndDo;
+			
+			If Not DriverObject.CloseSessionRegistrationKM(Settings.ConnectedDriver.ID) = True Then
+				Raise R().EqFP_CanNotCloseSessionRegistrationKM;
+			EndIf;
+			
+		EndIf;
+	EndIf;
 	Parameters = ReceiptSettings();
 	XMLOperationSettings = ReceiptGetXMLOperationSettings(DataSource);
 	
@@ -486,7 +520,6 @@ Function RequestKMSettingsResult()
 	Return Str;
 EndFunction
 
-
 // Processing KMResult.
 // 
 // Returns:
@@ -519,10 +552,11 @@ EndFunction
 //  Settings - See HardwareClient.GetDriverObject
 //  DriverObject - Arbitrary - Driver object
 //  RequestKMSettings - See RequestKMSettings
+//  OpenAndClose - Boolean -
 // 
 // Returns:
 //  See ProcessingKMResult
-Function Device_CheckKM(Settings, DriverObject, RequestKMSettings)
+Function Device_CheckKM(Settings, DriverObject, RequestKMSettings, OpenAndClose = True)
 	
 	RequestXML = RequestXML(RequestKMSettings);
 	
@@ -530,8 +564,11 @@ Function Device_CheckKM(Settings, DriverObject, RequestKMSettings)
 	RequestStatus = 0;
 	ProcessingKMResultXML = "";
 	ProcessingKMResult = ProcessingKMResult();
-	If Not DriverObject.OpenSessionRegistrationKM(Settings.ID) = True Then
-		Raise R().EqFP_CanNotOpenSessionRegistrationKM;
+	
+	If OpenAndClose Then
+		If Not DriverObject.OpenSessionRegistrationKM(Settings.ID) = True Then
+			Raise R().EqFP_CanNotOpenSessionRegistrationKM;
+		EndIf;
 	EndIf;
 	
 	If Not DriverObject.RequestKM(Settings.ID, RequestXML, ResultXML) = True Then
@@ -543,16 +580,24 @@ Function Device_CheckKM(Settings, DriverObject, RequestKMSettings)
 
 	ResultIsCorrect = False;
 	For Index = 0 To 5 Do
-	
+		CommonFunctionsServer.Pause(2);
 		If Not DriverObject.GetProcessingKMResult(Settings.ID, ProcessingKMResultXML, RequestStatus) = True Then
 			DriverObject.CloseSessionRegistrationKM(Settings.ID);
 			Raise R().EqFP_CanNotGetProcessingKMResult;
+		EndIf;
+		
+		If RequestStatus = 2 Then
+			Raise R().EqFP_GetWrongAnswerFromProcessingKM;
 		EndIf;
 		
 		If RequestStatus = 1 Then
 			Continue;
 		EndIf; 
 
+		If IsBlankString(ProcessingKMResultXML) Then
+			Continue;	
+		EndIf;
+		
 		ProcessingKMResult = ProcessingKMResultResponse(ProcessingKMResultXML);
 		
 		If Not ProcessingKMResult.GUID = RequestKMSettings.GUID Then
@@ -563,10 +608,11 @@ Function Device_CheckKM(Settings, DriverObject, RequestKMSettings)
 		Break;
 	EndDo;
 	
-	If Not DriverObject.CloseSessionRegistrationKM(Settings.ID) = True Then
-		Raise R().EqFP_CanNotCloseSessionRegistrationKM;
+	If OpenAndClose Then
+		If Not DriverObject.CloseSessionRegistrationKM(Settings.ID) = True Then
+			Raise R().EqFP_CanNotCloseSessionRegistrationKM;
+		EndIf;
 	EndIf;
-	
 	
 	If Not ResultIsCorrect Then
 		Raise R().EqFP_GetWrongAnswerFromProcessingKM;
@@ -587,12 +633,17 @@ EndFunction
 #Region Private
 
 Function RequestXML(RequestKMSettings)
+	CodeString = RequestKMSettings.MarkingCode;
+	If Not CommonFunctionsClientServer.isBase64Value(CodeString) Then
+		CodeString = Base64String(GetBinaryDataFromString(CodeString, TextEncoding.UTF8, False));
+	EndIf;
+	
 	XMLWriter = New XMLWriter();
 	XMLWriter.SetString("UTF-8");
 	XMLWriter.WriteXMLDeclaration();
 	XMLWriter.WriteStartElement("RequestKM");
 	XMLWriter.WriteAttribute("GUID" , ToXMLString(RequestKMSettings.GUID));
-	XMLWriter.WriteAttribute("MarkingCode" , ToXMLString(RequestKMSettings.MarkingCode));
+	XMLWriter.WriteAttribute("MarkingCode" , ToXMLString(CodeString));
 	XMLWriter.WriteAttribute("PlannedStatus" , ToXMLString(RequestKMSettings.PlannedStatus));
 	//XMLWriter.WriteAttribute("WaitForResult" , ToXMLString(RequestKMSettings.WaitForResult));
 	//XMLWriter.WriteAttribute("Quantity" , ToXMLString(RequestKMSettings.Quantity));

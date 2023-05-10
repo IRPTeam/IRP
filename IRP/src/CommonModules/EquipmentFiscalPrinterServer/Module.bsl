@@ -51,7 +51,7 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 	For Each ItemRow In SourceData.ItemList Do
 		RowFilter = New Structure();
 		RowFilter.Insert("Key", ItemRow.Key);
-		SLNRows = SourceData.SerialLotNumbers.FindRows(RowFilter);
+		CCSRows = SourceData.ControlCodeStrings.FindRows(RowFilter);
 		TaxRows = SourceData.TaxList.FindRows(RowFilter);
 		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
 			CBRows = SourceData.ConsignorBatches.FindRows(RowFilter);
@@ -61,15 +61,19 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 		FiscalStringData = New Structure();
 		FiscalStringData.Insert("AmountWithDiscount", ItemRow.TotalAmount);
 		FiscalStringData.Insert("DiscountAmount", ItemRow.OffersAmount);
-		If SLNRows.Count() = 1 Then
-			If IsBlankString(SLNRows[0].SerialLotNumber.CodeString) Then
-				FiscalStringData.Insert("CalculationSubject", "32");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject	
+		If ItemRow.Item.ItemType.ControlCodeString Then
+			If CCSRows.Count() = 0 Then
+				Raise "Control string code not filled. Row: " + ItemRow.LineNumber;
+			ElsIf CCSRows.Count() <> ItemRow.Quantity Then
+				Raise "Control string code count not the same as item quantity. Row: " + ItemRow.LineNumber;
+			ElsIf CCSRows.Count() > 1 Then // TODO: Fix this
+				Raise "Not suppoted send more then 1 control code by each row. Row: " + ItemRow.LineNumber;
 			Else
-				FiscalStringData.Insert("MarkingCode", SLNRows[0].SerialLotNumber.CodeString);	//TODO: Marking defenition
+				FiscalStringData.Insert("MarkingCode", CCSRows[0].CodeString);
 				FiscalStringData.Insert("CalculationSubject", "33");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject
 			EndIf;
-		ElsIf SLNRows.Count() > 1 Then
-			Raise("A few SerialLotNumber found!");
+		Else
+			FiscalStringData.Insert("CalculationSubject", "32");	//https://its.1c.ru/db/metod8dev#content:4829:hdoc:signcalculationobject	
 		EndIf;
 		FiscalStringData.Insert("MeasureOfQuantity", "255");
 		FiscalStringData.Insert("Name", String(ItemRow.Item) + " " + String(ItemRow.ItemKey));

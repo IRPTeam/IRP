@@ -186,9 +186,25 @@ Function ItemPriceInfo(Parameters, AddInfo = Undefined) Export
 	Return ServerReuse.ItemPriceInfo(Parameters.Period, Parameters.ItemKey, Parameters.Unit, PriceType);
 EndFunction
 
+// Item price info.
+// 
+// Parameters:
+//  Parameter_Period - Date - Parameter period
+//  Parameter_ItemKey - CatalogRef.ItemKeys - Parameter item key
+//  Parameter_Unit - CatalogRef.Units - Parameter unit
+//  Parameter_PriceType - CatalogRef.PriceTypes - Parameter price type
+// 
+// Returns:
+//  Structure - Item price info:
+// 	* Price - DefinedType.typePrice, Number -
+// 	* ItemKey - CatalogRef.ItemKeys -
+// 	* PriceType - CatalogRef.PriceTypes -
 Function _ItemPriceInfo(Parameter_Period, Parameter_ItemKey, Parameter_Unit, Parameter_PriceType) Export
-	Result = New Structure("ItemKey, PriceType, Price");
-	
+	Result = New Structure;
+	Result.Insert("ItemKey", Catalogs.ItemKeys.EmptyRef());
+	Result.Insert("PriceType", Catalogs.PriceTypes.EmptyRef());
+	Result.Insert("Price", 0);
+	 
 	ItemKeyUnit = Parameter_ItemKey.Unit;
 	ItemUnit = Parameter_ItemKey.Item.Unit;
 	BasisUnit = ?(ValueIsFilled(ItemKeyUnit), ItemKeyUnit, ItemUnit);
@@ -717,58 +733,75 @@ EndFunction
 #Region GetInfo
 
 // Get info by Items key.
+// Has to be the same as See BarcodeServer.FillFoundedItems
+// 
 // Parameters:
 //	ItemsKey - CatalogRef.ItemKeys, Array of CatalogRef.ItemKeys -
 //	Agreement - CatalogRef.Agreements -
 // 
 // Returns:
 //  Array of Structure:
-// * Item - CatalogRef.Items -
-// * ItemKey - CatalogRef.ItemKeys -
-// * SerialLotNumber - CatalogRef.SerialLotNumbers -
-// * Unit - CatalogRef.Units -
-// * Quantity - DefinedType.typeQuantity
-// * ItemKeyUnit - CatalogRef.Units -
-// * ItemUnit - CatalogRef.Units -
-// * hasSpecification - Boolean -
-// * Barcode  - DefinedType.typeBarcode
-// * ItemType - CatalogRef.ItemTypes -
-// * UseSerialLotNumber - Boolean -
+//  * ItemType - CatalogRef.ItemTypes -
+//  * Item - CatalogRef.Items -
+//  * ItemKey - CatalogRef.ItemKeys -
+//  * SerialLotNumber - CatalogRef.SerialLotNumbers -
+//  * Unit - CatalogRef.Units -
+//  * ItemKeyUnit - CatalogRef.Units -
+//  * ItemUnit - CatalogRef.Units -
+//  * Quantity - DefinedType.typeQuantity
+//  * BarcodeEmpty - Boolean -
+//  * SourceOfOrigin - CatalogRef.SourceOfOrigins -
+//  * PriceType - CatalogRef.PriceTypes -
+//  * Date  - Date -
+//  * hasSpecification - Boolean -
+//  * Barcode - String -
+//  * UseSerialLotNumber - Boolean -
+//  * isService - Boolean -
+//  * AlwaysAddNewRowAfterScan - Boolean -
+//  * EachSerialLotNumberIsUnique - Boolean -
+//  * ControlCodeString - Boolean -
+//  * SourceOfOrigin - CatalogRef.SourceOfOrigins -
 Function GetInfoByItemsKey(ItemsKey, Agreement = Undefined) Export
-	ItemKeyArray = New Array;
+	ItemKeyArray = New Array; // Array Of CatalogRef.ItemKeys
 	If TypeOf(ItemsKey) = Type("Array") Then
 		ItemKeyArray = ItemsKey;
 	Else
+		//@skip-check invocation-parameter-type-intersect
 		ItemKeyArray.Add(ItemsKey);
 	EndIf;
 	
-	ReturnValue = New Array();
+	ReturnValue = New Array(); // Array Of Structure
 	Query = New Query();
 	Query.Text = "SELECT
-	|	ItemKey.Ref AS ItemKey,
+	|	ItemKey.Item.ItemType AS ItemType,
 	|	ItemKey.Item AS Item,
-	|	&PriceType AS PriceType,
+	|	ItemKey.Ref AS ItemKey,
 	|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
-	|	VALUE(Catalog.SourceOfOrigins.EmptyRef) AS SourceOfOrigin,
 	|	CASE
 	|		WHEN ItemKey.Unit = VALUE(Catalog.Units.EmptyRef)
 	|			THEN ItemKey.Item.Unit
 	|		ELSE ItemKey.Unit
 	|	END AS Unit,
-	|	1 AS Quantity,
 	|	ItemKey.Unit AS ItemKeyUnit,
 	|	ItemKey.Item.Unit AS ItemUnit,
+	|	1 AS Quantity,
+	|	True AS BarcodeEmpty,
+	|	&PriceType AS PriceType,
+	|	&Date AS Date,
 	|	NOT ItemKey.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
 	|	"""" AS Barcode,
-	|	ItemKey.Item.ItemType AS ItemType,
 	|	ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
 	|	ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
-	|	ItemKey.Item.ItemType.AlwaysAddNewRowAfterScan AS AlwaysAddNewRowAfterScan
+	|	ItemKey.Item.ItemType.AlwaysAddNewRowAfterScan AS AlwaysAddNewRowAfterScan,
+	|	False AS EachSerialLotNumberIsUnique,
+	|	ItemKey.Item.ItemType.ControlCodeString AS ControlCodeString,
+	|	VALUE(Catalog.SourceOfOrigins.EmptyRef) AS SourceOfOrigin
 	|FROM
 	|	Catalog.ItemKeys AS ItemKey
 	|WHERE
 	|	ItemKey.Ref In (&ItemKeyArray)";
 	Query.SetParameter("ItemKeyArray", ItemKeyArray);
+	Query.SetParameter("Date", CommonFunctionsServer.GetCurrentSessionDate());
 	PriceType = ?(ValueIsFilled(Agreement), Agreement.PriceType, Undefined);
 	Query.SetParameter("PriceType", PriceType);
 	

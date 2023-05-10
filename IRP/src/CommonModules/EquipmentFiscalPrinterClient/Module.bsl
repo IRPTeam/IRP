@@ -496,6 +496,7 @@ EndFunction
 // * ResultCode - Number -
 // * StatusInfo - Number -
 // * HandleCode - Number -
+// * Approved - Boolean -
 Function ProcessingKMResult() Export
 	Str = New Structure;
 	Str.Insert("GUID", "");
@@ -503,6 +504,8 @@ Function ProcessingKMResult() Export
 	Str.Insert("ResultCode", -1);
 	Str.Insert("StatusInfo", 0);
 	Str.Insert("HandleCode", -1);
+	Str.Insert("Approved", False);
+	
 	Return Str;
 EndFunction
 
@@ -569,8 +572,14 @@ Function Device_CheckKM(Settings, DriverObject, RequestKMSettings)
 		Raise R().EqFP_GetWrongAnswerFromProcessingKM;
 	EndIf;
 	
+	ProcessingKMResult.Approved = isApproved(ProcessingKMResult);
+	
 	Return ProcessingKMResult;
 	
+EndFunction
+
+Function isApproved(ProcessingKMResult)
+	Return ProcessingKMResult.ResultCode = 15;
 EndFunction
 
 #EndRegion

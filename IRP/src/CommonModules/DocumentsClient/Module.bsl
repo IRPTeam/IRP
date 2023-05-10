@@ -1027,7 +1027,7 @@ EndProcedure
 
 Procedure ShowHiddenTables(Object, Form) Export
 	FormParameters = New Structure("DocumentRef", Object.Ref);
-	OpenForm("CommonForm.EditHiddenTables", FormParameters, Form, , , , , FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("CommonForm.EditHiddenTables", FormParameters, Form, , , , , FormWindowOpeningMode.Independent);
 EndProcedure
 
 Function GetFormItemNames()
@@ -1083,7 +1083,7 @@ Function GetFormItemNames()
 				|EmployeeCashAdvanceKey, AdvanceFromRetailCustomersKey, SalaryPaymentKey, EmployeeCashAdvanceIsFixedCurrency,
 				|ItemListPurchaseOrderKey, ItemListSalesOrderKey,
 				|AccrualListKey, DeductionListKey, CashAdvanceDeductionListKey,
-				|ItemListConsignor";
+				|ItemListConsignor, isControlCodeString";
 	Return ItemNames;
 EndFunction	
 
@@ -1316,8 +1316,6 @@ EndProcedure
 
 #EndRegion
 
-
-
 #Region PickUpItems
 
 Procedure OpenPickupItems(Object, Form, Command) Export
@@ -1388,7 +1386,6 @@ Function PickupItemsParameters(Object, Form)
 	Return ReturnValue;
 EndFunction
 
-
 Function GetParametersPickupItems(Object, Form, AddInfo)
 	Parameters = New Structure();
 	
@@ -1455,15 +1452,6 @@ Function GetParametersPickupItems(Object, Form, AddInfo)
 	EndIf;
 	Parameters.Insert("QuantityColumnName", QuantityColumnName);
 	
-//	// SerialLotNumberInRow
-//	SerialLotNumberInRow = False;
-//	If ObjectRefType = Type("DocumentRef.PhysicalInventory")
-//		Or ObjectRefType = Type("DocumentRef.PhysicalCountByLocation") Then
-//		SerialLotNumberInRow = True;
-//	EndIf;
-//	Parameters.Insert("SerialLotNumberInRow", SerialLotNumberInRow);
-	
-	
 	Parameters.Insert("Filter", AddInfo.Filter);
 		
 	ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
@@ -1479,7 +1467,7 @@ EndFunction
 // Pickup items end.
 // 
 // Parameters:
-//  Result - See BarcodeServer.SearchByBarcodes
+//  ScanData - See BarcodeServer.FillFoundedItems
 //  AddInfo - See BarcodeClient.GetBarcodeSettings
 Procedure PickupItemsEnd(ScanData, AddInfo) Export
 	If Not ValueIsFilled(ScanData) Or Not AddInfo.Property("Object") Or Not AddInfo.Property("Form") Then
@@ -1526,6 +1514,10 @@ Procedure PickupItemsEnd(ScanData, AddInfo) Export
 		ControllerClientServer_V2.CommitChainChanges(TmpParameters, False);
 	EndDo;
 	
+	TmpParameters.isRowsAddByScan = Result.NewRows.Count() > 0;
+	TmpParameters.NewRowsByScan = Result.NewRows;
+	TmpParameters.UpdatedRowsByScan = Result.UpdatedRows;
+	
 	TmpParameters.ViewNotify = ViewNotify;
 	ControllerClientServer_V2.OnChangesNotifyView(TmpParameters);	
 	
@@ -1536,6 +1528,10 @@ Procedure PickupItemsEnd(ScanData, AddInfo) Export
 	If CommonFunctionsClientServer.ObjectHasProperty(Object, "SourceOfOrigins") Then
 		SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
 	EndIf;
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "ControlCodeStrings") Then
+		ControlCodeStringsClient.UpdateState(Object);
+	EndIf;	
 	
 	// set current last added row
 	If Result.ChoiceForms.PresentationStartChoice_Counter <> 1 And Result.ChoiceForms.StartChoice_Counter <> 1 Then

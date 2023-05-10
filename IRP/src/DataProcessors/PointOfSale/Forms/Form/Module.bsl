@@ -267,7 +267,9 @@ EndProcedure
 
 &AtClient
 Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	Return;
+	If Item.CurrentItem.Name = "ItemListControlCodeStringState" Then
+		ItemListControlCodeStringStateClick();
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -543,6 +545,18 @@ Procedure FillqPaymentAtServer(Cancel, OffersRecalculated)
 			EndIf;
 		EndIf;
 	EndIf;
+	
+	For Index = 0 To Object.ItemList.Count() - 1 Do
+		Row = Object.ItemList[Index];
+		If Row.isControlCodeString And Not Row.ControlCodeStringState = 3 Then
+			Cancel = True;
+			Message = R().POS_Error_CheckFillingForAllCodes;
+			Path = StrTemplate(
+				"Object.ItemList[%1].ControlCodeStringState", 
+				Format(Row.LineNumber - 1, "NZ=; NG=;"));
+			CommonFunctionsClientServer.ShowUsersMessage(Message, Path);
+		EndIf;
+	EndDo;
 		
 	RecalculateOffersAtServer();
 EndProcedure
@@ -645,6 +659,50 @@ Procedure ItemListDrag(Item, DragParameters, StandardProcessing, Row, Field)
 			AddItemKeyToItemList(Value);
 		EndIf;
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure ItemListControlCodeStringStateClick()
+	
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	If Not CurrentData.isControlCodeString Then
+		Return;
+	EndIf;
+	
+	Params = New Structure;
+	Params.Insert("Hardware", CommonFunctionsServer.GetRefAttribute(ConsolidatedRetailSales, "FiscalPrinter"));
+	Params.Insert("RowKey", CurrentData.Key);
+	Params.Insert("Item", CurrentData.Item);
+	Params.Insert("ItemKey", CurrentData.ItemKey);
+	Params.Insert("LineNumber", CurrentData.LineNumber);
+	Notify = New NotifyDescription("ItemListControlCodeStringStateOpeningEnd", ThisObject, Params);
+	
+	OpenForm("CommonForm.CodeStringCheck", Params, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure ItemListControlCodeStringStateOpeningEnd(Result, AddInfo) Export
+	
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	Array = New Array;
+	Str = New Structure;
+	Str.Insert("Key", AddInfo.RowKey);
+	Array.Add(Str);
+	ControlCodeStringsClient.ClearAllByRow(Object, Array);
+	
+	For Each Row In Result Do
+		FillPropertyValues(Object.ControlCodeStrings.Add(), Row);
+	EndDo;
+	
+	ControlCodeStringsClient.UpdateState(Object);
+	
 EndProcedure
 
 #Region SpecialOffers
@@ -1533,6 +1591,7 @@ Procedure FindRetailBasisFinish(Result, RowID) Export
 		Row.Quantity = SerialLotNumberItem.Quantity;
 	EndDo;
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(ThisObject.Object);
+	ControlCodeStringsClient.UpdateState(ThisObject.Object);
 	
 	EnabledPaymentButton();
 EndProcedure

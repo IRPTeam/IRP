@@ -334,7 +334,7 @@ Function Strings(Lang) Export
 	Strings.Insert("EqFP_CanNotGetProcessingKMResult", NStr("en = 'Can not get processing KM result.'", Lang));
 	Strings.Insert("EqFP_CanNotCloseSessionRegistrationKM", NStr("en = 'Can not close session registration KM.'", Lang));
 	Strings.Insert("EqFP_GetWrongAnswerFromProcessingKM", NStr("en = 'Get wrong answer from Processing KM.'", Lang));
-	
+
 #EndRegion
 
 #Region POS
@@ -354,6 +354,10 @@ Function Strings(Lang) Export
 	Strings.Insert("POS_Error_ReturnAmountLess", NStr(
 		"en = 'There are %2 of ""%1"", which is more than the available %3 for return in document ""%4"" .'", Lang));
 	Strings.Insert("POS_Error_CannotFindUser", NStr("en = 'Can not find user with barcode [%1]'", Lang));
+	
+	Strings.Insert("POS_Error_ThisBarcodeFromAnotherItem", NStr("en = 'This is barcode used for %1'", Lang));
+	Strings.Insert("POS_Error_ThisIsNotControleStringBarcode", NStr("en = 'Scan control string barcode. Wrong barcode %1'", Lang));
+	Strings.Insert("POS_Error_CheckFillingForAllCodes", NStr("en = 'Scan control string for each item.'", Lang));
 	
 #EndRegion
 

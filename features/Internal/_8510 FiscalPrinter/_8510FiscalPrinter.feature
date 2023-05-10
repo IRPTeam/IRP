@@ -276,6 +276,12 @@ Scenario: _0850000 preparation (fiscal printer)
 		And I delete "$$MoneyTransfer11$$" variable
 		And I save the window as "$$MoneyTransfer11$$" 
 		And I close all client application windows
+	* Consolidated retail sales
+		When create ConsolidatedRetailSales and RetailSalesReceipt
+		And I execute 1C:Enterprise script at server
+ 			| "Documents.RetailSalesReceipt.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
+ 			| "Documents.ConsolidatedRetailSales.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Setting for Company commission trade
 		When settings for Company (commission trade)
 	And I close all client application windows
@@ -912,7 +918,9 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 			| 'Amount' | 'Payment done' | 'Payment type' | 'RRNCode'  |
 			| '50,00'  | '⚪'            | 'Card 04'      | '$$RRN1$$' |
 		And I activate "Payment type" field in "Payments" table
-		And I click "Return" button
+		When I Check the steps for Exception
+			|'And I click "Return" button'|
+		And I click "Cancel" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I click the button named "Enter"
@@ -921,12 +929,12 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 	* Check acquiring log
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
-		And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+		And I check "$ParsingResult1$" with "1" and method is "CancelPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОТМЕНА ПЛАТЕЖА'
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '40.00'
 		And I check "$ParsingResult1$" with "1" and data in "In.Parameter6" contains '$$RRN2$$'	
-		And I check "$ParsingResult1$" with "5" and method is "ReturnPaymentByPaymentCard"
-		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+		And I check "$ParsingResult1$" with "5" and method is "CancelPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains 'ОТМЕНА ПЛАТЕЖА'
 		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains '50.00'
 		And I check "$ParsingResult1$" with "5" and data in "In.Parameter6" contains '$$RRN1$$'		
 	* Check fiscal log
@@ -935,10 +943,10 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="90"'
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'Cash="10"'	
 		And I check "$ParsingResult$" with "2" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains 'TextString Text="ВОЗВРАТ'
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains 'TextString Text="ОТМЕНА ПЛАТЕЖА'
 		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains '40.00'
 		And I check "$ParsingResult$" with "3" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "3" and data in "In.Parameter2" contains 'TextString Text="ВОЗВРАТ'
+		And I check "$ParsingResult$" with "3" and data in "In.Parameter2" contains 'TextString Text="ОТМЕНА ПЛАТЕЖА'
 		And I check "$ParsingResult$" with "3" and data in "In.Parameter2" contains '50.00'
 	And I close all client application windows
 			
@@ -965,6 +973,8 @@ Scenario: _0850024 return by card without basis document (without RRN)
 			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode' |
 			| '⚪'            | 'Card 03'      | '200,00' | ''        |
 		Then "Payment" window is opened
+		When I Check the steps for Exception
+			|'And I click "Cancel" button'|
 		And I click "Return" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
@@ -1654,6 +1664,48 @@ Scenario: _050055 check filling consignor from serial lot number in the RetailSa
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML9"
 
+
+
+Scenario: return from previous Consolidated retail sales
+	And I close all client application windows
+	And In the command interface I select "Retail" "Point of sale"
+	* Select basis document
+		And I click the button named "Return"
+		And I click Select button of "Retail sales receipt (basis)" field
+		And I go to line in "List" table
+			| 'Retail sales receipt'    |
+			| 'Retail sales receipt 8 dated 10.05.2023 10:59:44' |
+		And I select current line in "List" table
+	* Payment return
+		And I click "Payment Return" button
+		Then "Payment" window is opened
+		And I click "Card (*)" button
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 04'   |
+		And I select current line in "BankPaymentTypeList" table
+		When I Check the steps for Exception
+			|'And I click "Cancel" button'|
+		And I click "Return" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I click "OK" button
+	* Check acquiring log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '520.00'
+	* Check fiscal log
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="520"'
+		And I check "$ParsingResult$" with "2" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains 'TextString Text="ВОЗВРАТ'
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains '520.00'
+	And I close all client application windows	
+
+	
 
 Scenario: _0260152 close sessiion
 	And I close all client application windows

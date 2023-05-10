@@ -1183,6 +1183,7 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Payment type' |
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
+				And I click "Card (*)" button				
 				And I go to line in "BankPaymentTypeList" table
 					| 'Reference' |
 					| 'Card 01'   |
@@ -1208,6 +1209,7 @@ Scenario: _0154139 check payments form in the Point of sale
 					| 'Payment type' |
 					| 'Cash'      |
 				And I click the button named "PaymentsContextMenuDelete"
+				And I click "Card (*)" button
 				And I go to line in "BankPaymentTypeList" table
 					| 'Reference' |
 					| 'Card 01'   |

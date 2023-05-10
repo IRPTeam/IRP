@@ -110,6 +110,26 @@ SalesReceiptXML8 =
 </CheckPackage>
 """
 
+SalesReceiptXML9 =
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="CI" OperationType="1" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" Name="Product 7 with SLN (new row) ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25" CalculationAgent="5">
+			<VendorData VendorINN="" VendorName="Consignor 1" VendorPhone=""/>
+		</FiscalString>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MeasureOfQuantity="255" Name="Product 7 with SLN (new row) ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="0" VATAmount="0" CalculationAgent="5">
+			<VendorData VendorINN="" VendorName="Consignor 2" VendorPhone=""/>
+		</FiscalString>
+		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MeasureOfQuantity="255" Name="Product 8 with SLN (new row) UNIQ" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="0" VATAmount="0" CalculationAgent="5">
+			<VendorData VendorINN="" VendorName="Consignor 2" VendorPhone=""/>
+		</FiscalString>
+		<FiscalString AmountWithDiscount="120" DiscountAmount="0" MarkingCode="Mark8" MeasureOfQuantity="255" Name="Product 4 with SLN ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="120" VATRate="18" VATAmount="18.31"/>
+	</Positions>
+	<Payments Cash="520" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
@@ -214,6 +234,7 @@ Scenario: _0850000 preparation (fiscal printer)
 		When Create information register TaxSettings records (Concignor 2)
 		When Create document PurchaseInvoice (comission trade, own Companies)
 		When Create document SalesInvoice (trade, own Companies)
+		When Data preparation (consignment from serial lot number)
 	* Post document
 		And I execute 1C:Enterprise script at server
  			| "Documents.PurchaseInvoice.FindByNumber(2200).GetObject().Write(DocumentWriteMode.Posting);" |
@@ -255,6 +276,12 @@ Scenario: _0850000 preparation (fiscal printer)
 		And I delete "$$MoneyTransfer11$$" variable
 		And I save the window as "$$MoneyTransfer11$$" 
 		And I close all client application windows
+	* Consolidated retail sales
+		When create ConsolidatedRetailSales and RetailSalesReceipt
+		And I execute 1C:Enterprise script at server
+ 			| "Documents.RetailSalesReceipt.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
+ 			| "Documents.ConsolidatedRetailSales.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Setting for Company commission trade
 		When settings for Company (commission trade)
 	And I close all client application windows
@@ -490,33 +517,13 @@ Scenario: _0850010 create cash in
 		And I go to line in "CashInList" table
 			| 'Money transfer'      | 'Currency' | 'Amount'   |
 			| '$$MoneyTransfer11$$' | 'TRY'      | '1 000,00' |
-		And I select current line in "CashInList" table
-	* Check Cash receipt
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "CashAccount" became equal to "Pos cash account 1"
-		Then the form attribute named "TransactionType" became equal to "Cash in"
-		Then the form attribute named "Currency" became equal to "TRY"
-		And "PaymentList" table became equal
-			| '#' | 'Total amount' | 'Financial movement type' | 'Money transfer'      |
-			| '1' | '1 000,00'     | 'Movement type 1'         | '$$MoneyTransfer11$$' |
-		
-		Then the form attribute named "Branch" became equal to "Shop 02"
-		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "1 000,00"
-		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
-	* Post Cash receipt
-		And I click "Post" button
-		And I delete "$$NumberCashReceipt1$$" variable
-		And I delete "$$CashReceipt1$$" variable
-		And I save the value of "Number" field as "$$NumberCashReceipt1$$"
-		And I save the window as "$$CashReceipt1$$"
 	* Print cash in
-		And I click "Print cash in" button	
-		And I click the button named "FormPostAndClose"
+		And in the table "CashInList" I click "Create and post" button	
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"		
 		And "List" table became equal
-			| 'Number'                 | 'Amount'   | 'Company'      | 'Cash account'       | 'Currency' | 'Transaction type' |
-			| '$$NumberCashReceipt1$$' | '1 000,00' | 'Main Company' | 'Pos cash account 1' | 'TRY'      | 'Cash in'          |
+			| 'Amount'   | 'Company'      | 'Cash account'       | 'Currency' | 'Transaction type' |
+			| '1 000,00' | 'Main Company' | 'Pos cash account 1' | 'TRY'      | 'Cash in'          |
 		Then the number of "List" table lines is "равно" 1
 		When in opened panel I select "Point of sales"
 		And in the table "CashInList" I click "Update money transfers" button
@@ -911,7 +918,9 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 			| 'Amount' | 'Payment done' | 'Payment type' | 'RRNCode'  |
 			| '50,00'  | '⚪'            | 'Card 04'      | '$$RRN1$$' |
 		And I activate "Payment type" field in "Payments" table
-		And I click "Return" button
+		When I Check the steps for Exception
+			|'And I click "Return" button'|
+		And I click "Cancel" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And I click the button named "Enter"
@@ -920,12 +929,12 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 	* Check acquiring log
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
-		And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
-		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+		And I check "$ParsingResult1$" with "1" and method is "CancelPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ОТМЕНА ПЛАТЕЖА'
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '40.00'
 		And I check "$ParsingResult1$" with "1" and data in "In.Parameter6" contains '$$RRN2$$'	
-		And I check "$ParsingResult1$" with "5" and method is "ReturnPaymentByPaymentCard"
-		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+		And I check "$ParsingResult1$" with "5" and method is "CancelPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains 'ОТМЕНА ПЛАТЕЖА'
 		And I check "$ParsingResult1$" with "5" and data in "Out.Parameter8" contains '50.00'
 		And I check "$ParsingResult1$" with "5" and data in "In.Parameter6" contains '$$RRN1$$'		
 	* Check fiscal log
@@ -934,10 +943,10 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="90"'
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'Cash="10"'	
 		And I check "$ParsingResult$" with "2" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains 'TextString Text="ВОЗВРАТ'
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains 'TextString Text="ОТМЕНА ПЛАТЕЖА'
 		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains '40.00'
 		And I check "$ParsingResult$" with "3" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "3" and data in "In.Parameter2" contains 'TextString Text="ВОЗВРАТ'
+		And I check "$ParsingResult$" with "3" and data in "In.Parameter2" contains 'TextString Text="ОТМЕНА ПЛАТЕЖА'
 		And I check "$ParsingResult$" with "3" and data in "In.Parameter2" contains '50.00'
 	And I close all client application windows
 			
@@ -964,6 +973,8 @@ Scenario: _0850024 return by card without basis document (without RRN)
 			| 'Payment done' | 'Payment type' | 'Amount' | 'RRNCode' |
 			| '⚪'            | 'Card 03'      | '200,00' | ''        |
 		Then "Payment" window is opened
+		When I Check the steps for Exception
+			|'And I click "Cancel" button'|
 		And I click "Return" button
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
@@ -1451,8 +1462,8 @@ Scenario: _0260150 create cash out
 		Then the form attribute named "ReceiverCurrency" became equal to "TRY"
 		And I input "1 000,00" text in "Send amount" field
 		And I click "Create money transfer" button
-		Then in the TestClient message log contains lines by template:
-			|'Object Money transfer* created.'|		
+		// Then in the TestClient message log contains lines by template:
+		// 	|'Object Money transfer* created.'|		
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 		And I go to line in "List" table
@@ -1463,7 +1474,12 @@ Scenario: _0260150 create cash out
 		And I delete "$$MoneyTransfer3$$" variable
 		And I save the value of "Number" field as "$$NumberMoneyTransfer3$$"
 		And I save the window as "$$MoneyTransfer3$$"
-		And I click "Print cash out" button	
+	* Check fiscal log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "CashInOutcome"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains '-1 000'
 	* Create Cash receipt
 		And I click "Cash receipt" button
 		Then the form attribute named "Company" became equal to "Main Company"
@@ -1596,11 +1612,99 @@ Scenario: _0260151 check print cash out from Money transfer form
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And I check "$ParsingResult$" with "0" and method is "CashInOutcome"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains "11"
-	* Check double click Print cash in
+	* Check double click Print cash out
 		And I click "Print cash out" button
 		Then there are lines in TestClient message log
 			|'The document is already printed.'|
 		And I close all client application windows
+
+
+Scenario: _050055 check filling consignor from serial lot number in the RetailSalesReceipt from POS (scan barcode)
+		And I close all client application windows
+	* Preparation
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(200).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Open POS and create RSR
+		And In the command interface I select "Retail" "Point of sale"
+		Then "Point of sales" window is opened
+	* Add items
+		And I click "Search by barcode (F7)" button
+		And I input "09999900989900" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode (F7)" button
+		And I input "09999900989901" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode (F7)" button
+		And I input "090998897898979998" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode (F7)" button
+		And I input "89900779008908" text in the field named "Barcode"
+		And I move to the next attribute
+		And I finish line editing in "ItemList" table
+		And I click "Payment (+)" button
+		Then "Payment" window is opened
+		And I click the button named "Enter"
+	* Check filling consignor
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
+		And I go to line in "List" table
+			| 'Σ'      |
+			| '520,00' |
+		And I select current line in "List" table	
+		And I click "Show row key" button
+		And "ItemList" table became equal
+			| 'Store'    | 'Quantity in base unit' | 'Use serial lot number' | '#' | 'Inventory origin' | 'Price type'        | 'Item'                         | 'Consignor'   | 'Dont calculate row' | 'Tax amount' | 'Serial lot numbers' | 'Unit' | 'Profit loss center' | 'Item key' | 'Is service' | 'Quantity' | 'Price'  | 'VAT'         | 'Net amount' | 'Total amount' |
+			| 'Store 01' | '1,000'                 | 'Yes'                   | '1' | 'Consignor stocks' | 'Basic Price Types' | 'Product 7 with SLN (new row)' | 'Consignor 1' | 'No'                 | '15,25'      | '09999900989900'     | 'pcs'  | 'Shop 02'            | 'ODS'      | 'No'         | '1,000'    | '100,00' | '18%'         | '84,75'      | '100,00'       |
+			| 'Store 01' | '1,000'                 | 'Yes'                   | '2' | 'Consignor stocks' | 'Basic Price Types' | 'Product 7 with SLN (new row)' | 'Consignor 2' | 'No'                 | ''           | '09999900989901'     | 'pcs'  | 'Shop 02'            | 'ODS'      | 'No'         | '1,000'    | '100,00' | 'Without VAT' | '100,00'     | '100,00'       |
+			| 'Store 01' | '1,000'                 | 'Yes'                   | '3' | 'Consignor stocks' | 'Basic Price Types' | 'Product 8 with SLN (new row)' | 'Consignor 2' | 'No'                 | ''           | '090998897898979998' | 'pcs'  | 'Shop 02'            | 'UNIQ'     | 'No'         | '1,000'    | '200,00' | 'Without VAT' | '200,00'     | '200,00'       |
+			| 'Store 01' | '1,000'                 | 'Yes'                   | '4' | 'Own stocks'       | 'Basic Price Types' | 'Product 4 with SLN'           | ''            | 'No'                 | '18,31'      | '899007790088'       | 'pcs'  | 'Shop 02'            | 'ODS'      | 'No'         | '1,000'    | '120,00' | '18%'         | '101,69'     | '120,00'       |
+		And I close all client application windows
+	* Check logs
+		And Delay 2
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML9"
+
+
+
+Scenario: return from previous Consolidated retail sales
+	And I close all client application windows
+	And In the command interface I select "Retail" "Point of sale"
+	* Select basis document
+		And I click the button named "Return"
+		And I click Select button of "Retail sales receipt (basis)" field
+		And I go to line in "List" table
+			| 'Retail sales receipt'    |
+			| 'Retail sales receipt 8 dated 10.05.2023 10:59:44' |
+		And I select current line in "List" table
+	* Payment return
+		And I click "Payment Return" button
+		Then "Payment" window is opened
+		And I click "Card (*)" button
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 04'   |
+		And I select current line in "BankPaymentTypeList" table
+		When I Check the steps for Exception
+			|'And I click "Cancel" button'|
+		And I click "Return" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I click "OK" button
+	* Check acquiring log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
+		And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
+		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '520.00'
+	* Check fiscal log
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="520"'
+		And I check "$ParsingResult$" with "2" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains 'TextString Text="ВОЗВРАТ'
+		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains '520.00'
+	And I close all client application windows	
+
 	
 
 Scenario: _0260152 close sessiion

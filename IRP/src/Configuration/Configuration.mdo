@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2023.19.2136</version>
+  <version>2023.19.2144</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -185,6 +185,7 @@
   <commonPictures>CommonPicture.Work</commonPictures>
   <commonPictures>CommonPicture.CopyRowsToClipboard</commonPictures>
   <commonPictures>CommonPicture.PasteRowsFromClipboard</commonPictures>
+  <commonPictures>CommonPicture.ControlCodeString</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
@@ -480,6 +481,7 @@
   <commonModules>CommonModule.ServerReuse</commonModules>
   <commonModules>CommonModule.SerialLotNumberClientServer</commonModules>
   <commonModules>CommonModule.SourceOfOriginClientServer</commonModules>
+  <commonModules>CommonModule.ControlCodeStringsClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -696,6 +698,7 @@
   <commonForms>CommonForm.ShareToUsers</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.SerialLotNumbersTree</commonForms>
+  <commonForms>CommonForm.CodeStringCheck</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>

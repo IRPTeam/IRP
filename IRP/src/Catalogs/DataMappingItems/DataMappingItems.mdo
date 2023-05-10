@@ -212,6 +212,51 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="7e6cf07b-08f0-43b8-99ef-06cd31c6a392">
+    <name>DeletedFromSource</name>
+    <synonym>
+      <key>en</key>
+      <value>Deleted from source</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b739c551-6d71-49ab-a1d3-671ed3b70319">
+    <name>Incoming</name>
+    <synonym>
+      <key>en</key>
+      <value>Incoming</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5df1d9c1-6184-4b09-93fb-0d6be75fa26e">
+    <name>Outgoing</name>
+    <synonym>
+      <key>en</key>
+      <value>Outgoing</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="59e58566-32a6-446e-a7b2-d757dc24c8ff">
     <producedTypes>
       <objectType typeId="a11dfc9d-379d-4ccb-9312-c075cd794783" valueTypeId="03b04768-3944-416a-ba10-5f20fd9fcb3e"/>

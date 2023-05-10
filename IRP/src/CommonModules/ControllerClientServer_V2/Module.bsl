@@ -9,6 +9,9 @@ Function GetServerParameters(Object) Export
 	Result.Insert("Rows", Undefined);
 	Result.Insert("ReadOnlyProperties", "");
 	Result.Insert("IsBasedOn", False);
+	Result.Insert("NewRowsByScan", New Array);
+	Result.Insert("UpdatedRowsByScan", New Array);
+	Result.Insert("isRowsAddByScan", False);
 	
 	StepEnableFlags = New Structure();
 	StepEnableFlags.Insert("PriceChanged_AfterQuestionToUser", False);
@@ -125,6 +128,7 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	ArrayOfTableNames.Add("Materials");
 	ArrayOfTableNames.Add("SourceOfOrigins");
 	ArrayOfTableNames.Add("RowIDInfo");
+	ArrayOfTableNames.Add("ControlCodeStrings");
 		
 	// MetadataName
 	// Tables.TableName.Columns
@@ -134,6 +138,10 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 												   Parameters.FormTaxColumnsExists, 
 												   Parameters.TaxesCache,
 												   Parameters.LoadData);
+	
+	Parameters.Insert("NewRowsByScan", ServerParameters.NewRowsByScan);
+	Parameters.Insert("UpdatedRowsByScan", ServerParameters.UpdatedRowsByScan);
+	Parameters.Insert("isRowsAddByScan", ServerParameters.isRowsAddByScan);
 	
 	IsItemList        = Upper("ItemList")    = Upper(ServerParameters.TableName);
 	IsPaymentList     = Upper("PaymentList") = Upper(ServerParameters.TableName);
@@ -153,6 +161,8 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 		ServerData.ObjectMetadataInfo.Tables.Property("SourceOfOrigins") And IsItemList);	
 	Parameters.Insert("RowIDInfoExists" ,
 		ServerData.ObjectMetadataInfo.Tables.Property("RowIDInfo") And IsItemList);
+	Parameters.Insert("ControlCodeStringsExists" , 
+		ServerData.ObjectMetadataInfo.Tables.Property("ControlCodeStrings") And IsItemList);	
 	
 	Parameters.Insert("ArrayOfTaxInfo"         , ServerData.ArrayOfTaxInfo);
 	
@@ -2668,7 +2678,6 @@ Function BindOtherCompany(Parameters)
 EndFunction
 
 #EndRegion
-
 
 #Region BRANCH
 
@@ -8810,6 +8819,7 @@ EndFunction
 
 // ItemList.Item.OnChange
 Procedure ItemListItemOnChange(Parameters) Export
+	AddViewNotify("OnSetItemListItem", Parameters);
 	Binding = BindItemListItem(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -8817,7 +8827,7 @@ EndProcedure
 // ItemList.Item.Set
 Procedure SetItemListItem(Parameters, Results) Export
 	Binding = BindItemListItem(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetItemListItem");
 EndProcedure
 
 // ItemList.Item.Get
@@ -8837,10 +8847,10 @@ Function BindItemListItem(Parameters)
 	Binding.Insert("WorkOrder"                 , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("WorkSheet"                 , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("SalesInvoice"              , "StepItemListChangeItemKeyByItem");
-	Binding.Insert("RetailSalesReceipt"        , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("RetailSalesReceipt"        , "StepItemListChangeItemKeyByItem,StepChangeisControlCodeStringByItem");
 	Binding.Insert("PurchaseOrder"             , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("PurchaseInvoice"           , "StepItemListChangeItemKeyByItem");
-	Binding.Insert("RetailReturnReceipt"       , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("RetailReturnReceipt"       , "StepItemListChangeItemKeyByItem,StepChangeisControlCodeStringByItem");
 	Binding.Insert("PurchaseReturnOrder"       , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("PurchaseReturn"            , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("SalesReturnOrder"          , "StepItemListChangeItemKeyByItem");
@@ -11467,6 +11477,46 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_LIST_IS_CONTROL_CODE_STRING
+
+// ItemList.isControlCodeString.Set
+Procedure SetItemListisControlCodeString(Parameters, Results) Export
+	Binding = BindItemListisControlCodeString(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.isControlCodeString.Get
+Function GetItemListisControlCodeString(Parameters, _Key)
+	Binding = BindItemListisControlCodeString(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// ItemList.isControlCodeString.Bind
+Function BindItemListisControlCodeString(Parameters)
+	DataPath = "ItemList.isControlCodeString";
+	Binding = New Structure();
+	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListisControlCodeString");
+EndFunction
+
+// ItemList.isControlCode.ChangeisControlCodeStringByItem.Step
+Procedure StepChangeisControlCodeStringByItem(Parameters, Chain) Export
+	Chain.ChangeisControlCodeStringByItem.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeisControlCodeStringByItem.Setter = "SetItemListisControlCodeString";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ChangeisControlCodeStringByItemOptions();
+		Options.Item	 = GetItemListItem(Parameters, Row.Key);
+		Options.Key      = Row.Key;
+		Options.StepName = "StepChangeisControlCodeStringByItem";
+		Chain.ChangeisControlCodeStringByItem.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #Region PAYMENTS
@@ -13097,6 +13147,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "PaymentsOnAddRowFormNotify"            Then ViewClient_V2.PaymentsOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "PaymentsOnCopyRowFormNotify"           Then ViewClient_V2.PaymentsOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "OnSetItemListItemKey"                  Then ViewClient_V2.OnSetItemListItemKey(Parameters);
+	ElsIf ViewNotify = "OnSetItemListItem"                     Then ViewClient_V2.OnSetItemListItem(Parameters);
 	ElsIf ViewNotify = "WorkersOnCopyRowFormNotify"            Then ViewClient_V2.WorkersOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "WorkersOnAddRowFormNotify"             Then ViewClient_V2.WorkersOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "MaterialsOnAddRowFormNotify"           Then ViewClient_V2.MaterialsOnAddRowFormNotify(Parameters);

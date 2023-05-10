@@ -264,7 +264,9 @@ EndProcedure
 &AtClient
 Async Function DoPayment(PaymentRow)
 	Result = True;
-	If isReturn Then
+	If isReturn And ReturnInTheSameConsolidateSales Then
+		Result = Await Payment_CancelPaymentByPaymentCard(PaymentRow);
+	ElsIf isReturn And Not ReturnInTheSameConsolidateSales Then
 		Result = Await Payment_ReturnPaymentByPaymentCard(PaymentRow);
 	Else
 		Result = Await Payment_PayByPaymentCard(PaymentRow);

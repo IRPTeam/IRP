@@ -7,6 +7,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ItemKey = Parameters.ItemKey;
 	LineNumber = Parameters.LineNumber;
 	RowKey = Parameters.RowKey;
+	isReturn = Parameters.isReturn;
 EndProcedure
 
 &AtClient
@@ -81,7 +82,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 	
 	AllBarcodesIsOk = True;
 	For Each StringCode In ArrayOfApprovedCodeStrings Do // String
-		RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettings();
+		RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettings(isReturn);
 		RequestKMSettings.Quantity = 1;
 		RequestKMSettings.MarkingCode = StringCode;
 		
@@ -130,7 +131,7 @@ EndFunction
 Async Procedure CheckKM(Command)
 	For Each SelectedID In Items.CurrentCodes.SelectedRows Do // Number
 		Row = CurrentCodes.FindByID(SelectedID);
-		RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettings();
+		RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettings(isReturn);
 		RequestKMSettings.Quantity = 1;
 		RequestKMSettings.MarkingCode = Row.StringCode;
 		

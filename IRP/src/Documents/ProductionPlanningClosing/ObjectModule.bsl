@@ -60,7 +60,6 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 			ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
 			ThisObject.ProductionPlanning = FillingData.ProductionPlanning;
 			ThisObject.Company            = FillingData.Company;
-			ThisObject.Branch		      = FillingData.Branch;
 			ThisObject.BusinessUnit       = FillingData.BusinessUnit;
 		EndIf;
 	EndIf;

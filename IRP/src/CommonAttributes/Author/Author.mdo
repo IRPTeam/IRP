@@ -256,6 +256,14 @@
     <metadata>Document.TimeSheet</metadata>
     <use>Use</use>
   </content>
+  <content>
+    <metadata>Document.RetailShipmentConfirmation</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.RetailGoodsReceipt</metadata>
+    <use>Use</use>
+  </content>
   <autoUse>DontUse</autoUse>
   <dataSeparation>DontUse</dataSeparation>
   <usersSeparation>DontUse</usersSeparation>

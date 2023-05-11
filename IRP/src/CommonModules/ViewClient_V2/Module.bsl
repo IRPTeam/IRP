@@ -261,7 +261,9 @@ Procedure OnChainComplete(Parameters) Export
 	EndIf;
 	
 	If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailShipmentConfirmation"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailGoodsReceipt" Then
 		__tmp_GoodsShipmentReceipt_OnChainComplete(Parameters);
 		Return;
 	EndIf;
@@ -2347,7 +2349,9 @@ Procedure OnSetItemListQuantityInBaseUnitNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailShipmentConfirmation" 
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailGoodsReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsSurplus"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "StockAdjustmentAsWriteOff"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailSalesReceipt"
@@ -3323,7 +3327,9 @@ Procedure OnSetTransactionTypeNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashPayment"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "CashReceipt"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailShipmentConfirmation"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "GoodsReceipt"	
+		Or Parameters.ObjectMetadataInfo.MetadataName = "RetailGoodsReceipt"	
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseOrder"      
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturn"       
@@ -3420,6 +3426,21 @@ Procedure PartnerConsignorOnChange(Object, Form, TableNames) Export
 		Parameters = GetSimpleParameters(Object, Form, TableName);
 		ControllerClientServer_V2.PartnerConsignorOnChange(Parameters);
 	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region COURIER
+
+Procedure CourierOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.CourierOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetCourierNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
 EndProcedure
 
 #EndRegion

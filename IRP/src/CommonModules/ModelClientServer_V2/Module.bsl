@@ -360,6 +360,8 @@ Function GetChain()
 	Chain.Insert("ConsignorBatchesFillBatches"                  , GetChainLink("ConsignorBatchesFillBatchesExecute"));
 	
 	Chain.Insert("ChangeExpenseTypeByAccrualDeductionType", GetChainLink("ChangeExpenseTypeByAccrualDeductionTypeExecute"));
+	Chain.Insert("ChangeCourierByTransactionType"        , GetChainLink("ChangeCourierByTransactionTypeExecute"));
+	Chain.Insert("ChangeRetailCustomerByTransactionType" , GetChainLink("ChangeRetailCustomerByTransactionTypeExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -1582,6 +1584,38 @@ Function ChangeExpenseTypeByAccrualDeductionTypeExecute(Options) Export
 		EndIf;
 	EndIf;
 	Return Options.ExpenseType;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_COURIER_BY_TRANSACTION_TYPE
+
+Function ChangeCourierByTransactionTypeOptions() Export
+	Return GetChainLinkOptions("TransactionType, CurrentCourier");
+EndFunction
+
+Function ChangeCourierByTransactionTypeExecute(Options) Export
+	If Options.TransactionType = PredefinedValue("Enum.RetailShipmentConfirmationTransactionTypes.CourierDelivery")
+		Or Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.CourierDelivery") Then
+		Return Options.CurrentCourier;
+	EndIf;
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_RETAIL_CUSTOMER_BY_TRANSACTION_TYPE
+
+Function ChangeRetailCustomerByTransactionTypeOptions() Export
+	Return GetChainLinkOptions("TransactionType, CurrentRetailCustomer");
+EndFunction
+
+Function ChangeRetailCustomerByTransactionTypeExecute(Options) Export
+	If Options.TransactionType = PredefinedValue("Enum.RetailShipmentConfirmationTransactionTypes.Pickup")
+		Or Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.Pickup") Then
+		Return Options.CurrentRetailCustomer;
+	EndIf;
+	Return Undefined;
 EndFunction
 
 #EndRegion

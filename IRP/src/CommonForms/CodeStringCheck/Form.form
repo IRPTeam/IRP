@@ -153,6 +153,52 @@
    <textEdit>true</textEdit>
   </extInfo>
  </items>
+ <items xsi:type="form:FormField">
+  <name>isReturn</name>
+  <id>36</id>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <dataPath xsi:type="form:DataPath">
+   <segments>isReturn</segments>
+  </dataPath>
+  <extendedTooltip>
+   <name>isReturnExtendedTooltip</name>
+   <id>38</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <contextMenu>
+   <name>isReturnContextMenu</name>
+   <id>37</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <autoFill>true</autoFill>
+  </contextMenu>
+  <type>CheckBoxField</type>
+  <readOnly>true</readOnly>
+  <editMode>Enter</editMode>
+  <showInHeader>true</showInHeader>
+  <headerHorizontalAlign>Left</headerHorizontalAlign>
+  <showInFooter>true</showInFooter>
+  <extInfo xsi:type="form:CheckBoxFieldExtInfo">
+   <checkBoxType>CheckBox</checkBoxType>
+  </extInfo>
+ </items>
  <items xsi:type="form:Decoration">
   <name>DecorationInfo</name>
   <id>12</id>
@@ -794,6 +840,31 @@
    </edit>
   </columns>
  </attributes>
+ <attributes>
+  <name>isReturn</name>
+  <title>
+   <key>en</key>
+   <value>Is return</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Это возврат</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Bu iade</value>
+  </title>
+  <id>10</id>
+  <valueType>
+   <types>Boolean</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>SearchByBarcode</name>
   <title>
@@ -906,6 +977,12 @@
    <numberQualifiers>
     <precision>10</precision>
    </numberQualifiers>
+  </valueType>
+ </parameters>
+ <parameters>
+  <name>isReturn</name>
+  <valueType>
+   <types>Boolean</types>
   </valueType>
  </parameters>
  <commandInterface>

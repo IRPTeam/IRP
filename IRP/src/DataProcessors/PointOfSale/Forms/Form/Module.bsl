@@ -679,6 +679,7 @@ Procedure ItemListControlCodeStringStateClick() Export
 	Params.Insert("Item", CurrentData.Item);
 	Params.Insert("ItemKey", CurrentData.ItemKey);
 	Params.Insert("LineNumber", CurrentData.LineNumber);
+	Params.Insert("isReturn", isReturn);
 	Notify = New NotifyDescription("ItemListControlCodeStringStateOpeningEnd", ThisObject, Params);
 	
 	OpenForm("CommonForm.CodeStringCheck", Params, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
@@ -702,7 +703,7 @@ Procedure ItemListControlCodeStringStateOpeningEnd(Result, AddInfo) Export
 	EndDo;
 	
 	ControlCodeStringsClient.UpdateState(Object);
-	
+	Modified = True;
 EndProcedure
 
 #Region SpecialOffers

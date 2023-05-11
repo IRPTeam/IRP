@@ -90,7 +90,9 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 		
 		If Not Result.Approved Then
 			AllBarcodesIsOk = False;
-			CommonFunctionsClientServer.ShowUsersMessage(CommonFunctionsServer.SerializeJSON(Result));	
+			Log.Write("CodeStringCheck.CheckKM.Approved.False", Result, , , Hardware);
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().EqFP_ProblemWhileCheckCodeString, StringCode));	
+			Done();
 			Return;
 		EndIf;
 		NewRow = CurrentCodes.Add();
@@ -101,7 +103,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 	If AllBarcodesIsOk And ArrayOfApprovedCodeStrings.Count() > 0 Then
 		Done();
 	EndIf;
-	
+
 EndProcedure
 
 &AtClient

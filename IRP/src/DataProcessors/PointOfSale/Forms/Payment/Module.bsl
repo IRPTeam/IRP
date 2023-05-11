@@ -820,22 +820,17 @@ EndFunction
 
 &AtClient
 Async Procedure PrintSlip(PaymentSettings)
-	Cutter = Cutter();
-	If StrFind(PaymentSettings.Out.Slip, Cutter) > 0 Then
-		SlipInfo = PaymentSettings.Out.Slip;
-		SlipInfoTmp = StrReplace(SlipInfo, Cutter, "⚪");
-		For Each SlipInfoPart In StrSplit(SlipInfoTmp, "⚪", False) Do
-			PaymentSettings.Out.Slip = SlipInfoPart;
-			Str = New Structure("Payments", New Array);
-			Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));
-			Await EquipmentFiscalPrinterClient.PrintTextDocument(ConsolidatedRetailSales, Str);
-		EndDo; 
-		PaymentSettings.Out.Slip = SlipInfo;
-	Else
+	SlipInfo = PaymentSettings.Out.Slip;
+	SlipInfoTmp = StrReplace(SlipInfo, Cutter(), "⚪");       
+	SlipInfoTmp = StrReplace(SlipInfoTmp, "[cut]", "⚪");
+
+	For Each SlipInfoPart In StrSplit(SlipInfoTmp, "⚪", False) Do
+		PaymentSettings.Out.Slip = SlipInfoPart;
 		Str = New Structure("Payments", New Array);
 		Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));
 		Await EquipmentFiscalPrinterClient.PrintTextDocument(ConsolidatedRetailSales, Str);
-	EndIf;
+	EndDo; 
+	PaymentSettings.Out.Slip = SlipInfo;
 EndProcedure
 
 // Get RRNCode.

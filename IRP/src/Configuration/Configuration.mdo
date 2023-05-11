@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2023.19.2144</version>
+  <version>2023.19.2150</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -482,6 +482,7 @@
   <commonModules>CommonModule.SerialLotNumberClientServer</commonModules>
   <commonModules>CommonModule.SourceOfOriginClientServer</commonModules>
   <commonModules>CommonModule.ControlCodeStringsClient</commonModules>
+  <commonModules>CommonModule.Log</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

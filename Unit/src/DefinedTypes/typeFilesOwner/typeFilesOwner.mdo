@@ -8,5 +8,4 @@
   <extension xsi:type="mdclassExtension:DefinedTypeExtension">
     <typeExtension/>
   </extension>
-  <type/>
 </mdclass:DefinedType>

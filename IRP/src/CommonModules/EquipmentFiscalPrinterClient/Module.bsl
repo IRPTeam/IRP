@@ -232,7 +232,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 	
 	If TypeOf(DataSource) = Type("DocumentRef.RetailSalesReceipt")
 		Or TypeOf(DataSource) = Type("DocumentRef.RetailReturnReceipt") Then
-		
+		isReturn = TypeOf(DataSource) = Type("DocumentRef.RetailReturnReceipt");
 		CodeStringList = EquipmentFiscalPrinterServer.GetStringCode(DataSource);
 		
 		If CodeStringList.Count() > 0 Then
@@ -242,7 +242,7 @@ Async Function ProcessCheck(ConsolidatedRetailSales, DataSource) Export
 			
 			ArrayForApprove = New Array; // Array Of String
 			For Each CodeString In EquipmentFiscalPrinterServer.GetStringCode(DataSource) Do
-				RequestKMSettings = RequestKMSettings();
+				RequestKMSettings = RequestKMSettings(isReturn);
 				RequestKMSettings.MarkingCode = CodeString;
 				RequestKMSettings.Quantity = 1;
 				CheckResult = Device_CheckKM(Settings.ConnectedDriver, Settings.ConnectedDriver.DriverObject, RequestKMSettings, False);
@@ -497,12 +497,12 @@ EndFunction
 // * MarkingCode - String -
 // * PlannedStatus - Number -
 // * Quantity - Number -
-Function RequestKMSettings() Export
+Function RequestKMSettings(isReturn = False) Export
 	Str = New Structure;
 	Str.Insert("GUID", String(New UUID()));
 	Str.Insert("WaitForResult", True);
 	Str.Insert("MarkingCode", "");
-	Str.Insert("PlannedStatus", 1);
+	Str.Insert("PlannedStatus", ?(isReturn, 3, 1));
 	Str.Insert("Quantity", 1);
 	Return Str;
 EndFunction

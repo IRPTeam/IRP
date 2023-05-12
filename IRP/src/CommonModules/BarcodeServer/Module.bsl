@@ -8,20 +8,7 @@
 // 
 // Returns:
 //  Structure:
-//  * FoundedItems - Array of Structure:
-//  	** Item - CatalogRef.Items -
-//  	** ItemKey - CatalogRef.ItemKeys -
-//  	** SerialLotNumber - CatalogRef.SerialLotNumbers -
-//  	** Unit - CatalogRef.Units -
-//  	** Quantity - DefinedType.typeQuantity
-//  	** ItemKeyUnit - CatalogRef.Units -
-//  	** ItemUnit - CatalogRef.Units -
-//  	** hasSpecification - Boolean -
-//  	** Barcode  - DefinedType.typeBarcode
-//  	** ItemType - CatalogRef.ItemTypes -
-//  	** UseSerialLotNumber - Boolean -
-//  	** AlwaysAddNewRowAfterScan - Boolean -
-//  	** EachSerialLotNumberIsUnique - Boolean -
+//  * FoundedItems - Array of See FillFoundedItems
 //  * Barcodes - Array of DefinedType.typeBarcode -
 Function SearchByBarcodes(Val Barcodes, Settings) Export
 
@@ -51,9 +38,91 @@ Function SearchByBarcodes(Val Barcodes, Settings) Export
 
 	For Each Row In Barcodes Do
 		NewRow = BarcodeVT.Add();
+		//@skip-check property-return-type
 		NewRow.Barcode = Row;
 	EndDo;
 
+	QueryTable = GetItemInfoByBarcode(Settings, BarcodeVT);
+	
+	For Each Row In QueryTable Do
+		If Row.BarcodeEmpty Then
+			//@skip-check typed-value-adding-to-untyped-collection
+			Result.Barcodes.Add(Row.Barcode);
+		Else
+			ItemStructure = FillFoundedItems(Row, QueryTable);
+			//@skip-check typed-value-adding-to-untyped-collection
+			Result.FoundedItems.Add(ItemStructure);
+		EndIf;
+	EndDo;
+	Return Result;
+EndFunction
+
+// Fill founded items.
+// 
+// Parameters:
+//  Row - ValueTableRow Of See GetItemInfoByBarcode - 
+//  QueryTable - See GetItemInfoByBarcode
+// 
+// Returns:
+//  Structure:
+//   * ItemType - CatalogRef.ItemTypes -
+//   * Item - CatalogRef.Items -
+//   * ItemKey - CatalogRef.ItemKeys -
+//   * SerialLotNumber - CatalogRef.SerialLotNumbers -
+//   * Unit - CatalogRef.Units -
+//   * Quantity - DefinedType.typeQuantity
+//   * BarcodeEmpty - Boolean -
+//   * SourceOfOrigin - CatalogRef.SourceOfOrigins -
+//   * PriceType - CatalogRef.PriceTypes -
+//   * Date  - Date -
+//   * hasSpecification - Boolean -
+//   * Barcode - String -
+//   * UseSerialLotNumber - Boolean -
+//   * isService - Boolean -
+//   * AlwaysAddNewRowAfterScan - Boolean -
+//   * EachSerialLotNumberIsUnique - Boolean -
+//   * ControlCodeString - Boolean -
+//   * SourceOfOrigin - CatalogRef.SourceOfOrigins -
+Function FillFoundedItems(Val Row, QueryTable) Export
+	ItemStructure = New Structure();
+	For Each Column In QueryTable.Columns Do
+		ItemStructure.Insert(Column.Name, Row[Column.Name]);
+	EndDo;
+	//@skip-check constructor-function-return-section
+	Return ItemStructure
+EndFunction
+
+// Get item info by barcode.
+// Has to be the same as See GetItemInfo.GetInfoByItemsKey
+// 
+// 
+// Parameters:
+//  Settings - See BarcodeClient.GetBarcodeServerSettings
+//  BarcodeVT - ValueTable - Barcode VT:
+// * Barcode - String -
+// 
+// Returns:
+//  ValueTable - Get item info by barcode:
+//  * ItemType - CatalogRef.ItemTypes -
+//  * Item - CatalogRef.Items -
+//  * ItemKey - CatalogRef.ItemKeys -
+//  * SerialLotNumber - CatalogRef.SerialLotNumbers -
+//  * Unit - CatalogRef.Units -
+//  * ItemKeyUnit - CatalogRef.Units -
+//  * ItemUnit - CatalogRef.Units -
+//  * Quantity - DefinedType.typeQuantity
+//  * BarcodeEmpty - Boolean -
+//  * PriceType - CatalogRef.PriceTypes -
+//  * Date  - Date -
+//  * hasSpecification - Boolean -
+//  * Barcode - String -
+//  * UseSerialLotNumber - Boolean -
+//  * isService - Boolean -
+//  * AlwaysAddNewRowAfterScan - Boolean -
+//  * EachSerialLotNumberIsUnique - Boolean -
+//  * ControlCodeString - Boolean -
+//  * SourceOfOrigin - CatalogRef.SourceOfOrigins -
+Function GetItemInfoByBarcode(Settings, BarcodeVT)
 	Query = New Query();
 	Query.Text = 
 		"SELECT
@@ -65,22 +134,29 @@ Function SearchByBarcodes(Val Barcodes, Settings) Export
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	Barcodes.ItemKey IS NULL AS BarcodeEmpty,
-		|	Barcodes.ItemKey AS ItemKey,
+		|	Barcodes.ItemKey.Item.ItemType AS ItemType,
 		|	Barcodes.ItemKey.Item AS Item,
+		|	Barcodes.ItemKey AS ItemKey,
 		|	ISNULL(Barcodes.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
-		|	Barcodes.SourceOfOrigin AS SourceOfOrigin,
 		|	Barcodes.Unit AS Unit,
+		|	Barcodes.ItemKey.Unit AS ItemKeyUnit,
+		|	Barcodes.ItemKey.Item.Unit AS ItemUnit,
 		|	1 AS Quantity,
+		|	Barcodes.ItemKey IS NULL AS BarcodeEmpty,
 		|	&PriceType AS PriceType,
 		|	&Date AS Date,
 		|	NOT Barcodes.ItemKey.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
 		|	VTBarcode.Barcode AS Barcode,
-		|	Barcodes.ItemKey.Item.ItemType AS ItemType,
 		|	Barcodes.ItemKey.Item.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
 		|	Barcodes.ItemKey.Item.ItemType.Type = Value(Enum.ItemTypes.Service) AS isService,
 		|	Barcodes.ItemKey.Item.ItemType.AlwaysAddNewRowAfterScan AS AlwaysAddNewRowAfterScan,
-		|	ISNULL(Barcodes.SerialLotNumber.EachSerialLotNumberIsUnique, False) AS EachSerialLotNumberIsUnique
+		|	ISNULL(Barcodes.SerialLotNumber.EachSerialLotNumberIsUnique, False) AS EachSerialLotNumberIsUnique,
+		|	CASE WHEN &IgnoreCodeStringControl THEN 
+		|		False 
+		|	ELSE 
+		|		Barcodes.ItemKey.Item.ControlCodeString 
+		|	END AS ControlCodeString,
+		|	Barcodes.SourceOfOrigin AS SourceOfOrigin
 		|FROM
 		|	VTBarcode AS VTBarcode
 		|		LEFT JOIN InformationRegister.Barcodes AS Barcodes
@@ -88,23 +164,26 @@ Function SearchByBarcodes(Val Barcodes, Settings) Export
 	Query.SetParameter("BarcodeList", BarcodeVT);
 	Query.SetParameter("PriceType", Settings.PriceType);
 	Query.SetParameter("Date", CommonFunctionsServer.GetCurrentSessionDate());
+	Query.SetParameter("IgnoreCodeStringControl", SessionParameters.Workstation.IgnoreCodeStringControl);
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
-	
-	For Each Row In QueryTable Do
-		If Row.BarcodeEmpty Then
-			Result.Barcodes.Add(Row.Barcode);
-		Else
-			ItemStructure = New Structure();
-			For Each Column In QueryTable.Columns Do
-				ItemStructure.Insert(Column.Name, Row[Column.Name]);
-			EndDo;
-			Result.FoundedItems.Add(ItemStructure);
-		EndIf;
-	EndDo;
-	Return Result;
+	Return QueryTable
 EndFunction
 
+// Fill users by barcode.
+// 
+// Parameters:
+//  Barcodes - Array of DefinedType.typeBarcode - Barcodes
+//  Result - Structure - Result:
+// * FoundedItems - Array of Structure -
+// * Barcodes - Array of DefinedType.typeBarcode -
+// 
+// Returns:
+//  Structure - Fill users by barcode:
+// * FoundedItems - Array of Structure:
+// 	** User - CatalogRef.Users -
+// 	** Barcode - DefinedType.typeBarcode -
+// * Barcodes - Array of DefinedType.typeBarcode -
 Function FillUsersByBarcode(Barcodes, Result)
 	UsersDataByBarcode = GetUsersDataByBarcode(Barcodes);
 	If UsersDataByBarcode.Count() = 0 Then

@@ -356,6 +356,8 @@ Function GetChain()
 	Chain.Insert("ChangeTradeAgentFeePercentByAgreement"        , GetChainLink("ChangeTradeAgentFeePercentByAgreementExecute"));
 	Chain.Insert("ChangeTradeAgentFeePercentByAmount"           , GetChainLink("ChangeTradeAgentFeePercentByAmountExecute"));
 	Chain.Insert("ChangeTradeAgentFeeAmountByTradeAgentFeeType" , GetChainLink("ChangeTradeAgentFeeAmountByTradeAgentFeeTypeExecute"));
+
+	Chain.Insert("ChangeisControlCodeStringByItem" , GetChainLink("ChangeisControlCodeStringByItemExecute"));
 	
 	Chain.Insert("ConsignorBatchesFillBatches"                  , GetChainLink("ConsignorBatchesFillBatchesExecute"));
 	
@@ -369,6 +371,7 @@ Function GetChain()
 	
 	// Loaders
 	Chain.Insert("LoadTable", GetChainLink("LoadTableExecute"));
+
 	
 	Return Chain;
 EndFunction
@@ -3547,6 +3550,22 @@ Function CalculateCommissionPercentByAmountExecute(Options) Export
 	EndIf;
 	
 	Return 100 * Options.Commission / Options.TotalAmount;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_IS_CONTROL_CODE_STRING_BY_ITEM
+
+Function ChangeisControlCodeStringByItemOptions() Export
+	Return GetChainLinkOptions("Item");
+EndFunction
+
+Function ChangeisControlCodeStringByItemExecute(Options) Export
+	If CommonFunctionsServer.GetRefAttribute(SessionParametersServer.GetSessionParameter("Workstation"), "IgnoreCodeStringControl") Then
+		Return False;
+	Else
+		Return CommonFunctionsServer.GetRefAttribute(Options.Item, "ControlCodeString");
+	EndIf;
 EndFunction
 
 #EndRegion

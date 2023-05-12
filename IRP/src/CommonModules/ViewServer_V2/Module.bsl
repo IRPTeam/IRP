@@ -189,6 +189,7 @@ Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
 	AllDepTables.Add("BillOfMaterialsList");
 	AllDepTables.Add("ConsignorBatches");
 	AllDepTables.Add("SourceOfOrigins");
+	AllDepTables.Add("ControlCodeStrings");
 	
 	ArrayOfDepTables = New Array();
 	For Each TableName In AllDepTables Do
@@ -237,9 +238,14 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	EmployeeIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Employee");
 	PositionIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Position");
 	ConsignorIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "Consignor");
-	
+	isControlCodeStringIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "isControlCodeString");
+
 	If FillingValues.Property("Item") And ItemIsPresent Then
 		ControllerClientServer_V2.SetItemListItem(Parameters, PrepareValue(FillingValues.Item, Row.Key));
+	EndIf;
+
+	If FillingValues.Property("isControlCodeString") And isControlCodeStringIsPresent Then
+		ControllerClientServer_V2.SetItemListisControlCodeString(Parameters, PrepareValue(FillingValues.isControlCodeString, Row.Key));
 	EndIf;
 	
 	If FillingValues.Property("ItemKey") And ItemKeyIsPresent Then

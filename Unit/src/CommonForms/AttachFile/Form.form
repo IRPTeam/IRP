@@ -11,9 +11,6 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>FileList</segments>
-      </dataPath>
       <titleLocation>None</titleLocation>
       <items xsi:type="form:FormField">
         <name>FileListCreationDate</name>
@@ -349,9 +346,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>DefaultFilesStorageVolume</segments>
-        </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
           <name>DefaultFilesStorageVolumeExtendedTooltip</name>
@@ -400,9 +394,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Upload</segments>
-        </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
           <name>UploadExtendedTooltip</name>

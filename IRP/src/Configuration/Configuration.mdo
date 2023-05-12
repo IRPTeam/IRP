@@ -185,6 +185,7 @@
   <commonPictures>CommonPicture.Work</commonPictures>
   <commonPictures>CommonPicture.CopyRowsToClipboard</commonPictures>
   <commonPictures>CommonPicture.PasteRowsFromClipboard</commonPictures>
+  <commonPictures>CommonPicture.ControlCodeString</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
@@ -484,6 +485,8 @@
   <commonModules>CommonModule.DocRetailShipmentConfirmationServer</commonModules>
   <commonModules>CommonModule.DocRetailGoodsReceiptClient</commonModules>
   <commonModules>CommonModule.DocRetailGoodsReceiptServer</commonModules>
+  <commonModules>CommonModule.ControlCodeStringsClient</commonModules>
+  <commonModules>CommonModule.Log</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -700,6 +703,7 @@
   <commonForms>CommonForm.ShareToUsers</commonForms>
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.SerialLotNumbersTree</commonForms>
+  <commonForms>CommonForm.CodeStringCheck</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>

@@ -264,7 +264,9 @@ EndProcedure
 &AtClient
 Async Function DoPayment(PaymentRow)
 	Result = True;
-	If isReturn Then
+	If isReturn And ReturnInTheSameConsolidateSales Then
+		Result = Await Payment_CancelPaymentByPaymentCard(PaymentRow);
+	ElsIf isReturn And Not ReturnInTheSameConsolidateSales Then
 		Result = Await Payment_ReturnPaymentByPaymentCard(PaymentRow);
 	Else
 		Result = Await Payment_PayByPaymentCard(PaymentRow);
@@ -818,22 +820,17 @@ EndFunction
 
 &AtClient
 Async Procedure PrintSlip(PaymentSettings)
-	Cutter = Cutter();
-	If StrFind(PaymentSettings.Out.Slip, Cutter) > 0 Then
-		SlipInfo = PaymentSettings.Out.Slip;
-		SlipInfoTmp = StrReplace(SlipInfo, Cutter, "⚪");
-		For Each SlipInfoPart In StrSplit(SlipInfoTmp, "⚪", False) Do
-			PaymentSettings.Out.Slip = SlipInfoPart;
-			Str = New Structure("Payments", New Array);
-			Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));
-			Await EquipmentFiscalPrinterClient.PrintTextDocument(ConsolidatedRetailSales, Str);
-		EndDo; 
-		PaymentSettings.Out.Slip = SlipInfo;
-	Else
+	SlipInfo = PaymentSettings.Out.Slip;
+	SlipInfoTmp = StrReplace(SlipInfo, Cutter(), "⚪");       
+	SlipInfoTmp = StrReplace(SlipInfoTmp, "[cut]", "⚪");
+
+	For Each SlipInfoPart In StrSplit(SlipInfoTmp, "⚪", False) Do
+		PaymentSettings.Out.Slip = SlipInfoPart;
 		Str = New Structure("Payments", New Array);
 		Str.Payments.Add(New Structure("PaymentInfo", PaymentSettings));
 		Await EquipmentFiscalPrinterClient.PrintTextDocument(ConsolidatedRetailSales, Str);
-	EndIf;
+	EndDo; 
+	PaymentSettings.Out.Slip = SlipInfo;
 EndProcedure
 
 // Get RRNCode.

@@ -146,8 +146,8 @@ EndFunction
 
 &AtClient
 Procedure Import(Command)
-	Log = "";
-	Log = DeserializeAtServer(Object.DeserializedInfo, ImportDataToProductDataBaseIsGranted);
+	Logs = "";
+	Logs = DeserializeAtServer(Object.DeserializedInfo, ImportDataToProductDataBaseIsGranted);
 EndProcedure
 
 // Deserialize at server.
@@ -174,15 +174,15 @@ Function DeserializeAtServer(Val Data, Val ImportDataToPoductDataBaseIsGranted)
 	Else
 		InfoArray = Info;
 	EndIf;
-	Log = New Array; // Array Of String
+	Logs = New Array; // Array Of String
 	For Each Row In InfoArray Do
 		Try
 			Row.Write();
 		Except
-			Log.Add(ErrorProcessing.DetailErrorDescription(ErrorInfo()) + Chars.LF + CommonFunctionsServer.SerializeXMLUseXDTO(Row));
+			Logs.Add(ErrorProcessing.DetailErrorDescription(ErrorInfo()) + Chars.LF + CommonFunctionsServer.SerializeXMLUseXDTO(Row));
 		EndTry;
-		Log.Add(String(Row));
+		Logs.Add(String(Row));
 	EndDo;
 	
-	Return StrConcat(Log, Chars.LF + "-----------------------------" + Chars.LF);
+	Return StrConcat(Logs, Chars.LF + "-----------------------------" + Chars.LF);
 EndFunction

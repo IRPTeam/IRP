@@ -1494,6 +1494,42 @@ EndProcedure
 
 #EndRegion
 
+#Region SHIPMENT_MODE
+
+// ShipmentMode.Set
+Procedure SetShipmentMode(Parameters, Results) Export
+	Binding = BindShipmentMode(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ShipmentMode.Get
+Function GetShipmentMode(Parameters)
+	Return GetPropertyObject(Parameters, BindShipmentMode(Parameters).DataPath);
+EndFunction
+
+// ShipmentMode.Bind
+Function BindShipmentMode(Parameters)
+	DataPath = "ShipmentMode";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindShipmentMode");
+EndFunction
+
+// ShipmentMode.ChangeShipmentModeByTransactionType.Step
+Procedure StepChangeShipmentModeByTransactionType(Parameters, Chain) Export
+	Chain.ChangeShipmentModeByTransactionType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeShipmentModeByTransactionType.Setter = "SetShipmentMode";
+	Options = ModelClientServer_V2.ChangeShipmentModeByTransactionTypeOptions();
+	Options.TransactionType       = GetTransactionType(Parameters);
+	Options.CurrentShipmentMode   = GetShipmentMode(Parameters);
+	Options.StepName = "StepChangeShipmentModeByTransactionType";
+	Chain.ChangeShipmentModeByTransactionType.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
 #Region TRANSACTION_TYPE
 
 // TransactionType.OnChange
@@ -1621,7 +1657,8 @@ Function BindTransactionType(Parameters)
 	Binding.Insert("SalesOrder", 
 		"StepChangePartnerByTransactionType,
 		|StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_AgreementInHeader");
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepChangeShipmentModeByTransactionType");
 	
 	Binding.Insert("SalesReturn", 
 		"StepChangePartnerByTransactionType,

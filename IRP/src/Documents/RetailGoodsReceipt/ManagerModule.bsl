@@ -88,8 +88,6 @@ EndProcedure
 
 #EndRegion
 
-#Region NewRegistersPosting
-
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure();
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
@@ -285,4 +283,3 @@ Function T3010S_RowIDInfo()
 		|		AND RowIDInfo.Ref = ItemList.Ref";
 EndFunction
 
-#EndRegion

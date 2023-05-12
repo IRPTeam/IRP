@@ -5019,12 +5019,15 @@ Function GetBasisesFor_RRR(FilterValues)
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
 
+//#1889
 Function GetBasisesFor_RSR(FilterValues)
 	StepArray = New Array();
 	StepArray.Add(Catalogs.MovementRules.RSR);
+	StepArray.Add(Catalogs.MovementRules.RSR_RSC);//#1889
 
 	FilterSets = GetAvailableFilterSets();
 	FilterSets.SO_ForRSR = True;
+	FilterSets.SO_ForRSC = True;//#1889
 
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction

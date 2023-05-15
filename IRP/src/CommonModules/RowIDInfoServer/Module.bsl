@@ -4370,7 +4370,21 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Document.RetailSalesReceipt.SourceOfOrigins AS SourceOfOrigins
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
-	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key";
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|		
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	ControlCodeStrings.CodeString,
+	|	ControlCodeStrings.CodeIsApproved
+	|FROM
+	|	Document.RetailSalesReceipt.ControlCodeStrings AS ControlCodeStrings
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = ControlCodeStrings.Ref
+	|		AND BasisesTable.BasisKey = ControlCodeStrings.Key";
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -4382,6 +4396,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	TableSerialLotNumbers = QueryResults[5].Unload();
 	TablePayments         = QueryResults[6].Unload();
 	TableSourceOfOrigins  = QueryResults[7].Unload();
+	TableControlCodeStrings  = QueryResults[8].Unload();
 
 	Tables = New Structure();
 	Tables.Insert("ItemList"         , TableItemList);
@@ -4391,6 +4406,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Tables.Insert("SerialLotNumbers" , TableSerialLotNumbers);
 	Tables.Insert("Payments"         , TablePayments);
 	Tables.Insert("SourceOfOrigins"  , TableSourceOfOrigins);
+	Tables.Insert("ControlCodeStrings"  , TableControlCodeStrings);
 
 	AddTables(Tables);
 
@@ -10142,6 +10158,7 @@ Function JoinAllExtractedData(ArrayOfData)
 	Tables.Insert("Payments"              , GetEmptyTable_Payments());
 	Tables.Insert("Materials"             , GetEmptyTable_Materials());
 	Tables.Insert("SourceOfOrigins"       , GetEmptyTable_SourceOfOrigins());
+	Tables.Insert("ControlCodeStrings"    , GetEmptyTable_ControlCodeStrings());
 	
 	For Each Data In ArrayOfData Do
 		For Each Table In Tables Do
@@ -10165,6 +10182,7 @@ Function GetTableNames_Refreshable(Excludings = "")
 	NamesArray.Add("Payments");
 	NamesArray.Add("Materials");
 	NamesArray.Add("SourceOfOrigins");
+	NamesArray.Add("ControlCodeStrings");
 	
 	If ValueIsFilled(Excludings) Then
 		ExcludingsArray = StrSplit(Excludings, ",");
@@ -10486,6 +10504,21 @@ EndFunction
 
 #EndRegion
 
+#Region EmptyTables_ControlCodeStrings
+
+Function GetColumnNames_ControlCodeStrings()
+	Return "Ref, Key";
+EndFunction
+
+Function GetColumnNamesSum_ControlCodeStrings()
+	Return "CodeString";
+EndFunction
+
+Function GetEmptyTable_ControlCodeStrings()
+	Return GetEmptyTable(GetColumnNames_ControlCodeStrings() + ", " + GetColumnNamesSum_ControlCodeStrings());
+EndFunction
+
+#EndRegion
 
 #EndRegion
 

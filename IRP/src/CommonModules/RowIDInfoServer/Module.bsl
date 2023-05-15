@@ -1895,7 +1895,11 @@ Function CreateTablesForExtractData(EmptyTable)
 	Tables.Insert("FromSO", EmptyTable.Copy());
 	Tables.Insert("FromSI", EmptyTable.Copy());
 	Tables.Insert("FromSC", EmptyTable.Copy());
+	//#1889
+	Tables.Insert("FromRSC", EmptyTable.Copy());
 	Tables.Insert("FromSC_ThenFromSO", EmptyTable.Copy());
+	//#1889
+	Tables.Insert("FromRSC_ThenFromSO", EmptyTable.Copy());
 	Tables.Insert("FromSC_ThenFromSI", EmptyTable.Copy());
 	Tables.Insert("FromSC_ThenFromPIGR_ThenFromSO", EmptyTable.Copy());
 	Tables.Insert("FromPO", EmptyTable.Copy());
@@ -1936,9 +1940,19 @@ Function ExtractDataByTables(Tables, DataReceiver, AddInfo = Undefined)
 	If Tables.FromSC.Count() Then
 		ExtractedData.Add(ExtractData_FromSC(Tables.FromSC, DataReceiver, AddInfo));
 	EndIf;
-
+	
+	//#1889
+	If Tables.FromRSC.Count() Then
+		ExtractedData.Add(ExtractData_FromRSC(Tables.FromSC, DataReceiver, AddInfo));
+	EndIf;
+	
 	If Tables.FromSC_ThenFromSO.Count() Then
 		ExtractedData.Add(ExtractData_FromSC_ThenFromSO(Tables.FromSC_ThenFromSO, DataReceiver, AddInfo));
+	EndIf;
+
+	//#1889
+	If Tables.FromRSC_ThenFromSO.Count() Then
+		ExtractedData.Add(ExtractData_FromRSC_ThenFromSO(Tables.FromSC_ThenFromSO, DataReceiver, AddInfo));
 	EndIf;
 
 	If Tables.FromPIGR_ThenFromSO.Count() Then
@@ -2063,14 +2077,15 @@ Procedure FillTablesFrom_SC(Tables, DataReceiver, RowBasisesTable)
 	EndIf;
 EndProcedure
 
+//#1889
 Procedure FillTablesFrom_RSC(Tables, DataReceiver, RowBasisesTable)
 	BasisesInfo = GetBasisesInfo(RowBasisesTable.Basis, RowBasisesTable.BasisKey, RowBasisesTable.RowID);
-//	If Is(BasisesInfo.ParentBasis).SO Then
-//
-//		NewRow = Tables.FromSC_ThenFromSO.Add();
-//		FillPropertyValues(NewRow, RowBasisesTable);
-//		NewRow.ParentBasis = BasisesInfo.ParentBasis;
-//
+	If Is(BasisesInfo.ParentBasis).SO Then
+
+		NewRow = Tables.FromRSC_ThenFromSO.Add();
+		FillPropertyValues(NewRow, RowBasisesTable);
+		NewRow.ParentBasis = BasisesInfo.ParentBasis;
+
 //	ElsIf Is(BasisesInfo.ParentBasis).SI Then
 //
 //		NewRow = Tables.FromSC_ThenFromSI.Add();
@@ -2084,8 +2099,8 @@ Procedure FillTablesFrom_RSC(Tables, DataReceiver, RowBasisesTable)
 //		NewRow.ParentBasis = BasisesInfo.ParentBasis;
 //
 //	Else
-//		FillPropertyValues(Tables.FromSC.Add(), RowBasisesTable);
-//	EndIf;
+		FillPropertyValues(Tables.FromRSC.Add(), RowBasisesTable);
+	EndIf;
 EndProcedure
 
 Procedure FillTablesFrom_PO(Tables, DataReceiver, RowBasisesTable)
@@ -2268,11 +2283,16 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseShipmentConfirmation,
 	|	ItemList.Store.UseGoodsReceipt
 	|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseGoodsReceipt,
+	|
 	|	case 
 	|		when ItemList.Ref.TransactionType = value(Enum.SalesTransactionTypes.Sales)
 	|		then value(Enum.ShipmentConfirmationTransactionTypes.Sales)
 	|		when ItemList.Ref.TransactionType = value(Enum.SalesTransactionTypes.ShipmentToTradeAgent)
 	|		then value(Enum.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent)
+	|		
+	|		when ItemList.Ref.TransactionType = value(Enum.SalesTransactionTypes.RetailSales)
+	|		then ItemList.Ref.ShipmentMode
+	|
 	|	end as TransactionType,
 	|
 	|	ItemList.Ref.TransactionType as TransactionTypeSales,
@@ -2637,6 +2657,87 @@ Function ExtractData_FromSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit", AddInfo);
 EndFunction
 
+//#1889
+Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text + 
+	"SELECT ALLOWED
+	|	""RetailShipmentConfirmation"" AS BasedOn,
+	|	UNDEFINED AS Ref,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref.RetailCustomer AS RetailCustomer,
+	|	ItemList.Ref.Courier AS Courier,
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey.Item AS Item,
+	|	ItemList.ItemKey AS ItemKey,
+	|	0 AS Quantity,
+	|	BasisesTable.Key,
+	|	BasisesTable.Unit AS Unit,
+	|	BasisesTable.BasisUnit AS BasisUnit,
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.RetailShipmentConfirmation.ItemList AS ItemList
+	|		ON BasisesTable.Basis = ItemList.Ref
+	|		AND BasisesTable.BasisKey = ItemList.Key
+	|ORDER BY
+	|	ItemList.LineNumber
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey.Item AS Item,
+	|	ItemList.ItemKey AS ItemKey,
+	|	BasisesTable.Unit AS Unit,
+	|	BasisesTable.Key,
+	|	BasisesTable.BasisKey,
+	|	BasisesTable.Basis AS RetailShipmentConfirmation,
+	|	BasisesTable.QuantityInBaseUnit AS Quantity,
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInShipmentConfirmation
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.RetailShipmentConfirmation.ItemList AS ItemList
+	|		ON BasisesTable.Basis = ItemList.Ref
+	|		AND BasisesTable.BasisKey = ItemList.Key
+	|;
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.Quantity
+	|FROM
+	|	Document.RetailShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
+	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
+
+	Query.SetParameter("BasisesTable", BasisesTable);
+	QueryResults = Query.ExecuteBatch();
+
+	TableRowIDInfo             = QueryResults[1].Unload();
+	TableItemList              = QueryResults[2].Unload();
+	TableShipmentConfirmations = QueryResults[3].Unload();
+	TableSerialLotNumbers      = QueryResults[4].Unload();
+	
+	For Each RowItemList In TableItemList Do
+		RowItemList.Quantity = Catalogs.Units.Convert(RowItemList.BasisUnit, RowItemList.Unit, RowItemList.QuantityInBaseUnit);
+	EndDo;
+
+	Tables = New Structure();
+	Tables.Insert("ItemList"              , TableItemList);
+	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
+	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
+	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
+	
+	AddTables(Tables);
+
+	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit", AddInfo);
+EndFunction
+
 Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text + 
@@ -2685,6 +2786,81 @@ Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Und
 	|	SerialLotNumbers.Quantity
 	|FROM
 	|	Document.ShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
+	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
+
+	Query.SetParameter("BasisesTable", BasisesTable);
+	QueryResults = Query.ExecuteBatch();
+
+	TablesSO = ExtractData_FromSO(QueryResults[2].Unload(), DataReceiver);
+	TablesSO.ItemList.FillValues(True, "UseShipmentConfirmation");
+
+	TableRowIDInfo             = QueryResults[1].Unload();
+	TableShipmentConfirmations = QueryResults[3].Unload();
+	TableSerialLotNumbers      = QueryResults[4].Unload();
+	
+	Tables = New Structure();
+	Tables.Insert("ItemList"              , TablesSO.ItemList);
+	Tables.Insert("RowIDInfo"             , TableRowIDInfo);
+	Tables.Insert("TaxList"               , TablesSO.TaxList);
+	Tables.Insert("SpecialOffers"         , TablesSO.SpecialOffers);
+	Tables.Insert("ShipmentConfirmations" , TableShipmentConfirmations);
+	Tables.Insert("SerialLotNumbers"      , TableSerialLotNumbers);
+
+	AddTables(Tables);
+
+	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey", AddInfo);
+EndFunction
+
+Function ExtractData_FromRSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text + 
+	"SELECT DISTINCT ALLOWED
+	|	BasisesTable.Key,
+	|	RowIDInfo.BasisKey AS BasisKey,
+	|	BasisesTable.RowID,
+	|	BasisesTable.CurrentStep,
+	|	BasisesTable.RowRef,
+	|	VALUE(Document.SalesOrder.EmptyRef) AS ParentBasis,
+	|	BasisesTable.ParentBasis AS Basis,
+	|	BasisesTable.Unit,
+	|	BasisesTable.BasisUnit,
+	|	BasisesTable.QuantityInBaseUnit
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.RetailShipmentConfirmation.RowIDInfo AS RowIDInfo
+	|		ON BasisesTable.Basis = RowIDInfo.Ref
+	|		AND BasisesTable.BasisKey = RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey.Item AS Item,
+	|	ItemList.ItemKey AS ItemKey,
+	|	BasisesTable.Unit AS Unit,
+	|	BasisesTable.Key,
+	|	BasisesTable.BasisKey,
+	|	BasisesTable.Basis AS ShipmentConfirmation,
+	|	BasisesTable.QuantityInBaseUnit AS Quantity,
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInShipmentConfirmation
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.RetailShipmentConfirmation.ItemList AS ItemList
+	|		ON BasisesTable.Basis = ItemList.Ref
+	|		AND BasisesTable.BasisKey = ItemList.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.Quantity
+	|FROM
+	|	Document.RetailShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
 	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
@@ -9739,6 +9915,11 @@ Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False) Export
 				
 	ElsIf DocReceiverMetadata = Metadata.Documents.ShipmentConfirmation Then
 		Return "Company, Branch, Partner, LegalName, TransactionType";
+	
+	//#1889
+	ElsIf DocReceiverMetadata = Metadata.Documents.RetailShipmentConfirmation Then
+		Return "Company, Branch, RetailCustomer, Courier, TransactionType";
+		
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseOrder Then
 		Return "Company, Branch"
 		       + ?(NameAsAlias, ", TransactionTypePurchases", ", TransactionType");
@@ -9781,6 +9962,8 @@ Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False) Export
 		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, LegalName, Currency";
 	ElsIf DocReceiverMetadata = Metadata.Documents.WorkSheet Then
 		Return "Company, Branch, Partner, LegalName, Currency";
+	Else
+		Raise StrTemplate("GetSeparatorColumns( %1 ) not supported", String(DocReceiverMetadata));
 	EndIf;
 EndFunction
 
@@ -10103,6 +10286,7 @@ Function GetColumnNames_ItemList()
 		   |RetailSalesReceipt,
 		   |AdditionalAnalytic,
 		   |RetailCustomer,
+		   |Courier,
 		   |UsePartnerTransactions,
 		   |LegalNameContract,
 		   |SalesPerson,
@@ -10693,7 +10877,7 @@ Function ExtractDataFromBasis(DocRef, BasisesInfo, ProportionalScaling, Function
 
 	FillPropertyValues(NewRowBasisesTable, BasisesInfo);
 	NewRowBasisesTable.BasisKey = BasisesInfo.Key;
-	//@skip-warning
+	// @skip-warning
 	ExtractedData =  Eval(FunctionName + "(BasisesTable, DocRef)");
 	ArrayOfExtractedData = New Array();
 	ArrayOfExtractedData.Add(ExtractedData);
@@ -10728,6 +10912,8 @@ Function DocAliases()
 	Result.Insert("StockAdjustmentAsWriteOff" , "StockAdjustmentAsWriteOff");
 	Result.Insert("WO", "WorkOrder");
 	Result.Insert("WS", "WorkSheet");
+	Result.Insert("RSC" , "RetailShipmentConfirmation");
+	Result.Insert("RGR" , "RetailGoodsReceipt");
 	
 	Return Result;
 EndFunction

@@ -637,9 +637,7 @@ EndProcedure
 
 &AtClient
 Procedure SearchCustomer(Command)
-	Notify = New NotifyDescription("SetRetailCustomer", ThisObject);
-	OpenForm("Catalog.RetailCustomers.Form.QuickSearch", New Structure("RetailCustomer", Object.RetailCustomer), ThisObject, , ,
-		, Notify, FormWindowOpeningMode.LockOwnerWindow);
+	DPPointOfSaleClient.SearchCustomer(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -1756,6 +1754,7 @@ Procedure CreateReturnOnBase(PaymentData)
 	For Each ExtractedDataItem In ExtractedData Do
 		ExtractedDataItem.Payments.Clear();
 		ExtractedDataItem.SerialLotNumbers.Clear();
+		ExtractedDataItem.ControlCodeStrings.Clear();
 		If isFirst Then
 			isFirst = False;
 			For Each PaymentDataItem In PaymentData Do

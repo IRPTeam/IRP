@@ -47,6 +47,8 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 			Descr = String(Row.Item) + "[" + Row.ItemKey + "]";
 			//@skip-check property-return-type, invocation-parameter-type-intersect
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().POS_Error_ThisBarcodeFromAnotherItem, Descr));
+			Done();
+			Return;
 		EndIf;
 
 		ArrayOfCodeStrings.Add(Row.Barcode);

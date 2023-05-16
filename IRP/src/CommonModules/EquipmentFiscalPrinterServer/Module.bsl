@@ -53,11 +53,11 @@ Function PrepareReceiptDataByRetailSalesReceipt(SourceData) Export
 		RowFilter.Insert("Key", ItemRow.Key);
 		CCSRows = SourceData.ControlCodeStrings.FindRows(RowFilter);
 		TaxRows = SourceData.TaxList.FindRows(RowFilter);
-		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
-			CBRows = SourceData.ConsignorBatches.FindRows(RowFilter);
-		Else
-			CBRows = New Array;
-		EndIf;
+ 		If TypeOf(SourceData.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
+ 			CBRows = SourceData.ConsignorBatches.FindRows(RowFilter);
+ 		Else
+ 			CBRows = New Array;
+ 		EndIf;		
 		FiscalStringData = New Structure();
 		FiscalStringData.Insert("AmountWithDiscount", ItemRow.TotalAmount);
 		FiscalStringData.Insert("DiscountAmount", ItemRow.OffersAmount);

@@ -81,6 +81,16 @@ Procedure FillStructureDataByObject(StructureData, Val Object, Val Attr, Val Val
 
 EndProcedure
 
+// Prepare object XDTO.
+// 
+// Parameters:
+//  ObjectStructure - Arbitrary - Object structure
+//  TypeName - String - Type name
+//  URI - String - URI
+//  WSName - String, Undefined - WSName
+// 
+// Returns:
+//  XDTODataValue, XDTODataObject - Prepare object XDTO
 Function PrepareObjectXDTO(ObjectStructure, TypeName, URI, WSName) Export
 	
 	// In every list first line we pass by, and start with second one. First line is a template one.

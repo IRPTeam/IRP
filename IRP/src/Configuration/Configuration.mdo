@@ -482,6 +482,7 @@
   <commonModules>CommonModule.SerialLotNumberClientServer</commonModules>
   <commonModules>CommonModule.SourceOfOriginClientServer</commonModules>
   <commonModules>CommonModule.ControlCodeStringsClient</commonModules>
+  <commonModules>CommonModule.Log</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

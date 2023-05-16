@@ -640,7 +640,7 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Log</segments>
+      <segments>Logs</segments>
     </dataPath>
     <extendedTooltip>
       <name>LogExtendedTooltip</name>
@@ -844,7 +844,7 @@
     </edit>
   </attributes>
   <attributes>
-    <name>Log</name>
+    <name>Logs</name>
     <title>
       <key>en</key>
       <value>Log</value>

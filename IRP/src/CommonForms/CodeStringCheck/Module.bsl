@@ -7,6 +7,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ItemKey = Parameters.ItemKey;
 	LineNumber = Parameters.LineNumber;
 	RowKey = Parameters.RowKey;
+	isReturn = Parameters.isReturn;
 EndProcedure
 
 &AtClient
@@ -46,6 +47,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 			Descr = String(Row.Item) + "[" + Row.ItemKey + "]";
 			//@skip-check property-return-type, invocation-parameter-type-intersect
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().POS_Error_ThisBarcodeFromAnotherItem, Descr));
+			Return;
 		EndIf;
 
 		ArrayOfCodeStrings.Add(Row.Barcode);
@@ -81,7 +83,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 	
 	AllBarcodesIsOk = True;
 	For Each StringCode In ArrayOfApprovedCodeStrings Do // String
-		RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettings();
+		RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettings(isReturn);
 		RequestKMSettings.Quantity = 1;
 		RequestKMSettings.MarkingCode = StringCode;
 		
@@ -89,7 +91,8 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 		
 		If Not Result.Approved Then
 			AllBarcodesIsOk = False;
-			CommonFunctionsClientServer.ShowUsersMessage(CommonFunctionsServer.SerializeJSON(Result));	
+			Log.Write("CodeStringCheck.CheckKM.Approved.False", Result, , , Hardware);
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().EqFP_ProblemWhileCheckCodeString, StringCode));	
 			Return;
 		EndIf;
 		NewRow = CurrentCodes.Add();
@@ -100,7 +103,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 	If AllBarcodesIsOk And ArrayOfApprovedCodeStrings.Count() > 0 Then
 		Done();
 	EndIf;
-	
+
 EndProcedure
 
 &AtClient
@@ -130,7 +133,7 @@ EndFunction
 Async Procedure CheckKM(Command)
 	For Each SelectedID In Items.CurrentCodes.SelectedRows Do // Number
 		Row = CurrentCodes.FindByID(SelectedID);
-		RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettings();
+		RequestKMSettings = EquipmentFiscalPrinterClient.RequestKMSettings(isReturn);
 		RequestKMSettings.Quantity = 1;
 		RequestKMSettings.MarkingCode = Row.StringCode;
 		

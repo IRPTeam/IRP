@@ -14,7 +14,7 @@ SalesReceiptXML1 =
 <CheckPackage>
 	<Parameters CashierName="CI" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Mark1" MeasureOfQuantity="255" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="0" VATAmount="0" CalculationAgent="5">
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="0" VATAmount="0" CalculationAgent="5">
 			<VendorData VendorINN="" VendorName="Consignor 2" VendorPhone=""/>
 		</FiscalString>
 		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MeasureOfQuantity="255" Name="Product 3 with SLN UNIQ" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="18" VATAmount="30.51"/>
@@ -29,10 +29,11 @@ SalesReceiptXML2 =
 <CheckPackage>
 	<Parameters CashierName="CI" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Mark1" MeasureOfQuantity="255" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
 		<FiscalString AmountWithDiscount="520" DiscountAmount="0" MeasureOfQuantity="255" Name="Dress XS/Blue" Quantity="1" PaymentMethod="4" PriceWithDiscount="520" VATRate="18" VATAmount="79.32"/>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 1 with SLN ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
 	</Positions>
-	<Payments Cash="0" ElectronicPayment="620" PrePayment="0" PostPayment="0" Barter="0"/>
+	<Payments Cash="0" ElectronicPayment="720" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
 """
 
@@ -42,10 +43,10 @@ SalesReceiptXML3 =
 <CheckPackage>
 	<Parameters CashierName="CI" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Mark1" MeasureOfQuantity="255" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
 		<FiscalString AmountWithDiscount="520" DiscountAmount="0" MeasureOfQuantity="255" Name="Dress XS/Blue" Quantity="1" PaymentMethod="4" PriceWithDiscount="520" VATRate="18" VATAmount="79.32"/>
-		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Mark1" MeasureOfQuantity="255" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
-		<FiscalString AmountWithDiscount="120" DiscountAmount="0" MarkingCode="Mark8" MeasureOfQuantity="255" Name="Product 4 with SLN UNIQ" Quantity="1" PaymentMethod="4" PriceWithDiscount="120" VATRate="18" VATAmount="18.31"/>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
+		<FiscalString AmountWithDiscount="120" DiscountAmount="0" MeasureOfQuantity="255" Name="Product 4 with SLN UNIQ" Quantity="1" PaymentMethod="4" PriceWithDiscount="120" VATRate="18" VATAmount="18.31"/>
 	</Positions>
 	<Payments Cash="440" ElectronicPayment="400" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -57,7 +58,7 @@ SalesReceiptXML4 =
 <CheckPackage>
 	<Parameters CashierName="CI" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Mark1" MeasureOfQuantity="255" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
+		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="0" PrePayment="0" PostPayment="118" Barter="0"/>
 </CheckPackage>
@@ -68,7 +69,7 @@ SalesReceiptXML5 =
 <CheckPackage>
 	<Parameters CashierName="CI" OperationType="1" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Mark1" MeasureOfQuantity="255" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
+		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="0" PrePayment="0" PostPayment="118" Barter="0"/>
 </CheckPackage>
@@ -80,7 +81,7 @@ SalesReceiptXML6 =
 <CheckPackage>
 	<Parameters CashierName="CI" OperationType="2" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="210" DiscountAmount="0" MarkingCode="Mark1" MeasureOfQuantity="255" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="210" VATRate="18" VATAmount="32.03"/>
+		<FiscalString AmountWithDiscount="210" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="210" VATRate="18" VATAmount="32.03"/>
 	</Positions>
 	<Payments Cash="210" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
@@ -92,7 +93,7 @@ SalesReceiptXML7 =
 <CheckPackage>
 	<Parameters CashierName="CI" OperationType="2" TaxationSystem="0"/>
 	<Positions>
-		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Mark1" MeasureOfQuantity="255" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
+		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 6 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="0" PrePayment="0" PostPayment="118" Barter="0"/>
 </CheckPackage>
@@ -125,9 +126,34 @@ SalesReceiptXML9 =
 		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MeasureOfQuantity="255" Name="Product 8 with SLN (new row) UNIQ" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="0" VATAmount="0" CalculationAgent="5">
 			<VendorData VendorINN="" VendorName="Consignor 2" VendorPhone=""/>
 		</FiscalString>
-		<FiscalString AmountWithDiscount="120" DiscountAmount="0" MarkingCode="Mark8" MeasureOfQuantity="255" Name="Product 4 with SLN ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="120" VATRate="18" VATAmount="18.31"/>
+		<FiscalString AmountWithDiscount="120" DiscountAmount="0" MeasureOfQuantity="255" Name="Product 4 with SLN ODS" Quantity="1" PaymentMethod="4" PriceWithDiscount="120" VATRate="18" VATAmount="18.31"/>
 	</Positions>
 	<Payments Cash="520" ElectronicPayment="0" PrePayment="0" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+
+SalesReceiptXML10 = 
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="CI" OperationType="1" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="100" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="100" VATRate="18" VATAmount="15.25"/>
+		<FiscalString AmountWithDiscount="520" DiscountAmount="0" MeasureOfQuantity="255" Name="Dress XS/Blue" Quantity="1" PaymentMethod="4" PriceWithDiscount="520" VATRate="18" VATAmount="79.32"/>
+	</Positions>
+	<Payments Cash="0" ElectronicPayment="620" PrePayment="0" PostPayment="0" Barter="0"/>
+</CheckPackage>
+"""
+
+SalesReceiptXML11 = 
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+	<Parameters CashierName="CI" OperationType="2" TaxationSystem="0"/>
+	<Positions>
+		<FiscalString AmountWithDiscount="200" DiscountAmount="0" MarkingCode="11111111111111111111" MeasureOfQuantity="255" Name="Product 1 with SLN PZU" Quantity="1" PaymentMethod="4" PriceWithDiscount="200" VATRate="18" VATAmount="30.51"/>
+	</Positions>
+	<Payments Cash="0" ElectronicPayment="200" PrePayment="0" PostPayment="0" Barter="0"/>
 </CheckPackage>
 """
 
@@ -235,33 +261,34 @@ Scenario: _0850000 preparation (fiscal printer)
 		When Create document PurchaseInvoice (comission trade, own Companies)
 		When Create document SalesInvoice (trade, own Companies)
 		When Data preparation (consignment from serial lot number)
+		When Create information register Barcodes records (marking code)
 	* Post document
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(2200).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(2200).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(2201).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(2201).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(2202).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(2202).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(2203).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(2203).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(2206).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(2206).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(2209).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(2209).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.SalesInvoice.FindByNumber(2200).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(2200).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.SalesInvoice.FindByNumber(2201).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(2201).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseInvoice.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);" |	
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);" |	
 		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseInvoice.FindByNumber(196).GetObject().Write(DocumentWriteMode.Posting);" |	
 		And I execute 1C:Enterprise script at server
- 			| "Documents.InventoryTransfer.FindByNumber(598).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.InventoryTransfer.FindByNumber(598).GetObject().Write(DocumentWriteMode.Posting);" |	
 	* Money transfer
 		When Create document MoneyTransfer objects (for cash in)
 		And I execute 1C:Enterprise script at server
@@ -279,9 +306,9 @@ Scenario: _0850000 preparation (fiscal printer)
 	* Consolidated retail sales
 		When create ConsolidatedRetailSales and RetailSalesReceipt
 		And I execute 1C:Enterprise script at server
- 			| "Documents.RetailSalesReceipt.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.RetailSalesReceipt.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |	
 		And I execute 1C:Enterprise script at server
- 			| "Documents.ConsolidatedRetailSales.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.ConsolidatedRetailSales.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Setting for Company commission trade
 		When settings for Company (commission trade)
 	And I close all client application windows
@@ -473,8 +500,21 @@ Scenario: _0850000 preparation (fiscal printer)
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And I close all client application windows
+	* Enable control code string for Product 6 with SLN and Product 1 with SLN
+		Given I open hyperlink "e1cib/data/Catalog.Items?ref=b78db8d3fd6dff8b11ed7f8d992046ee"
+		And I expand "Accounting settings" group
+		And I move to "Accounting settings" tab
+		And I set checkbox "Control code string"
+		And I click "Save and close" button
+		And I wait "Product * with SLN (Item) *" window closing in 5 seconds
+		Given I open hyperlink "e1cib/data/Catalog.Items?ref=b780c87413d4c65f11ecd519fda7206f"
+		And I expand "Accounting settings" group
+		And I move to "Accounting settings" tab
+		And I set checkbox "Control code string"
+		And I click "Save and close" button
+		And I wait "Product * with SLN (Item) *" window closing in 5 seconds
+						
 		
-
 Scenario: _0850001 check preparation
 	When check preparation
 
@@ -541,6 +581,12 @@ Scenario: _0850011 create retail sales receipt from POS (consignor, cash)
 		And I click "Search by barcode (F7)" button
 		And I input "57897909799" text in the field named "Barcode"
 		And I move to the next attribute
+	* Scan control code
+		Then "Code string check" window is opened
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"	
+		And I move to the next attribute	
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
@@ -564,12 +610,18 @@ Scenario: _0850011 create retail sales receipt from POS (consignor, cash)
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML1"
 		
 				
-Scenario: _0850015 create retail sales receipt from POS (own stock, card 02)
+Scenario: _0850015 create retail sales receipt from POS (own stock, card 02, items with codes)
 	And I close all client application windows
 	And In the command interface I select "Retail" "Point of sale"
 	* Select first item (scan by barcode, with serial lot number)
 		And I click "Search by barcode (F7)" button
 		And I input "23455677788976667" text in the field named "Barcode"
+		And I move to the next attribute
+	* Scan control code
+		Then "Code string check" window is opened
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Current row will decode to base64" text in the field named "Barcode"
 		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -580,6 +632,79 @@ Scenario: _0850015 create retail sales receipt from POS (own stock, card 02)
 		And I input "2202283705" text in the field named "Barcode"
 		And I move to the next attribute
 		And I finish line editing in "ItemList" table
+	* Select third item	with sln and code control (create sln)
+		And I click "Search by barcode (F7)" button
+		And I input "67789997777801" text in the field named "Barcode"
+		And I move to the next attribute
+		* Create sln
+			Then "Select serial lot numbers" window is opened
+			And I change checkbox "Auto create"
+			And in the table "SerialLotNumbers" I click "Search by barcode (F7)" button
+			Then "Barcode" window is opened
+			And I input "345" text in the field named "Barcode"
+			And I move to the next attribute
+			And I click "Ok" button			
+			And I activate "Control code string state" field in "ItemList" table
+			And I select current line in "ItemList" table
+			Then "Code string check" window is opened
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table	
+	* Change quantity and check marking data clean
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' | 'Price'  | 'Quantity' | 'Serials'    | 'Total'  |
+			| 'Product 1 with SLN' | 'PZU'      | '100,00' | '1,000'    | '8908899877' | '100,00' |
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I click "Payment (+)" button
+		Then there are lines in TestClient message log
+			|'Quantity [2] does not match the quantity [1] by serial/lot numbers'|
+		And I activate "Serials" field in "ItemList" table
+		And I click choice button of "Serials" attribute in "ItemList" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I select current line in "SerialLotNumbers" table
+		And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I finish line editing in "ItemList" table
+		And I click "Payment (+)" button
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute
+		Then there are lines in TestClient message log
+			|'Current barcode already use at document line: 3'|
+			|'Current barcode already use at document line: 3'|
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Current row will decode to base64" text in the field named "Barcode"
+		And I move to the next attribute
+		And I go to line in "ItemList" table
+			| 'Item'               | 'Item key' |
+			| 'Product 1 with SLN' | 'PZU'      |
+		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I activate "Serials" field in "ItemList" table
+		And I click choice button of "Serials" attribute in "ItemList" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I select current line in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+		And I click "Payment (+)" button
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Current row will decode to base64" text in the field named "Barcode"
+		And I move to the next attribute											
 	* Payment
 		And I click "Payment (+)" button
 		Then "Payment" window is opened
@@ -606,6 +731,10 @@ Scenario: _0850016 create retail sales receipt from POS (own stock, cash and car
 		And I click "Search by barcode (F7)" button
 		And I input "57897909799" text in the field named "Barcode"
 		And I move to the next attribute
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
@@ -618,6 +747,10 @@ Scenario: _0850016 create retail sales receipt from POS (own stock, cash and car
 	* Select third item
 		And I click "Search by barcode (F7)" button
 		And I input "23455677788976667" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Current row will decode to base64" text in the field named "Barcode"
 		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -665,6 +798,10 @@ Scenario: _0850017 payment by payment agent from POS
 		And I click "Search by barcode (F7)" button
 		And I input "57897909799" text in the field named "Barcode"
 		And I move to the next attribute
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
@@ -705,6 +842,10 @@ Scenario: _0850018 advance payment (cash)
 		And I click "OK" button
 		And I click "Search by barcode (F7)" button
 		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
 		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -757,6 +898,10 @@ Scenario: _0850019 create retail sales receipt from POS (own stock, card 03, use
 		And I click "Search by barcode (F7)" button
 		And I input "23455677788976667" text in the field named "Barcode"
 		And I move to the next attribute
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Current row will decode to base64" text in the field named "Barcode"
+		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "100,00" text in "Price" field of "ItemList" table
@@ -784,10 +929,10 @@ Scenario: _0850019 create retail sales receipt from POS (own stock, card 03, use
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
-		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML2"
-		And I check "$ParsingResult$" with "2" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
-		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains '620.00'
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML10"
+		And I check "$ParsingResult$" with "7" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "7" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
+		And I check "$ParsingResult$" with "7" and data in "In.Parameter2" contains '620.00'
 	* Check acquiring log
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
 		And I check "$ParsingResult1$" with "1" and method is "PayByPaymentCard"
@@ -800,6 +945,11 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 	* Select item
 		And I click "Search by barcode (F7)" button
 		And I input "23455677788976667" text in the field named "Barcode"
+		And I move to the next attribute
+		Then the form attribute named "isReturn" became equal to "No"
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "11111111111111111111" text in the field named "Barcode"
 		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -826,12 +976,12 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="100"'
-		And I check "$ParsingResult$" with "2" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
-		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains '50.00'
-		And I check "$ParsingResult$" with "3" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "3" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
-		And I check "$ParsingResult$" with "3" and data in "In.Parameter2" contains '50.00'
+		And I check "$ParsingResult$" with "7" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "7" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
+		And I check "$ParsingResult$" with "7" and data in "In.Parameter2" contains '50.00'
+		And I check "$ParsingResult$" with "8" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "8" and data in "In.Parameter2" contains 'TextString Text="ОПЛАТА'
+		And I check "$ParsingResult$" with "8" and data in "In.Parameter2" contains '50.00'
 	* Check acquiring log
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPathAcquiring$$' into the variable "ParsingResult1"
@@ -862,6 +1012,15 @@ Scenario: _0850020 check auto payment form by acquiring (Enter)
 		And I delete "$$RetailSalesReceipt5$$" variable
 		And I save the value of "Number" field as "$$NumberRetailSalesReceipt5$$"
 		And I save the window as "$$RetailSalesReceipt5$$"
+	* Check control code string tab
+		And I click "Show hidden tables" button
+		Then "Edit hidden tables" window is opened
+		And I expand "ControlCodeStrings [1]" group
+		And I move to "ControlCodeStrings [1]" tab
+		And I activate "Code string" field in "ControlCodeStrings" table
+		And "ControlCodeStrings" table became equal
+			| 'Key' | 'Code string'          | 'Code is approved' |
+			| '*'   | '11111111111111111111' | 'Yes'              |
 	And I close all client application windows
 	
 Scenario: _0850022 check than RRN not copy
@@ -890,8 +1049,14 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 			| 'Retail sales receipt'    |
 			| '$$RetailSalesReceipt5$$' |
 		And I select current line in "List" table
-	* Payment return
+	* Code scan
 		And I click "Payment Return" button
+		Then the form attribute named "isReturn" became equal to "Yes"	
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "11111111111111111111" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Payment Return" button			
 		Then "Payment" window is opened
 		And I click "Card (*)" button
 		And I go to line in "BankPaymentTypeList" table
@@ -942,27 +1107,31 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'ElectronicPayment="90"'
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" contains 'Cash="10"'	
-		And I check "$ParsingResult$" with "2" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains 'TextString Text="ОТМЕНА ПЛАТЕЖА'
-		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains '40.00'
-		And I check "$ParsingResult$" with "3" and method is "PrintTextDocument"
-		And I check "$ParsingResult$" with "3" and data in "In.Parameter2" contains 'TextString Text="ОТМЕНА ПЛАТЕЖА'
-		And I check "$ParsingResult$" with "3" and data in "In.Parameter2" contains '50.00'
+		And I check "$ParsingResult$" with "7" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "7" and data in "In.Parameter2" contains 'TextString Text="ОТМЕНА ПЛАТЕЖА'
+		And I check "$ParsingResult$" with "7" and data in "In.Parameter2" contains '40.00'
+		And I check "$ParsingResult$" with "8" and method is "PrintTextDocument"
+		And I check "$ParsingResult$" with "8" and data in "In.Parameter2" contains 'TextString Text="ОТМЕНА ПЛАТЕЖА'
+		And I check "$ParsingResult$" with "8" and data in "In.Parameter2" contains '50.00'
 	And I close all client application windows
 			
 Scenario: _0850024 return by card without basis document (without RRN)
 	And I close all client application windows
 	And In the command interface I select "Retail" "Point of sale"
+	And I click the button named "Return"
 	* Select item
 		And I click "Search by barcode (F7)" button
 		And I input "23455677788976667" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "11111111111111111111" text in the field named "Barcode"
 		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "200,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Return
-		And I click the button named "Return"
 		And I click "Payment Return" button
 		And I click "Card (*)" button
 		And I go to line in "BankPaymentTypeList" table
@@ -989,6 +1158,13 @@ Scenario: _0850024 return by card without basis document (without RRN)
 		And "Payments" table became equal
 			| '#' | 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Postponed payment' | 'Bank term'    | 'Account'      | 'Percent' | 'RRN Code' |
 			| '1' | '200,00' | ''           | 'Card 03'      | ''                 | 'No'                | 'Bank term 03' | 'POS Terminal' | '1,00'    | ''         |
+		And I click "Show hidden tables" button
+		Then "Edit hidden tables" window is opened
+		And I expand "ControlCodeStrings [1]" group
+		And I move to "ControlCodeStrings [1]" tab
+		And "ControlCodeStrings" table became equal
+			| 'Key' | 'Code string'          | 'Code is approved' |
+			| '*'   | '11111111111111111111' | 'Yes'              |	
 		And I close all client application windows
 	* Check acquiring log
 		And Delay 5
@@ -996,21 +1172,29 @@ Scenario: _0850024 return by card without basis document (without RRN)
 		And I check "$ParsingResult1$" with "1" and method is "ReturnPaymentByPaymentCard"
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains 'ВОЗВРАТ'
 		And I check "$ParsingResult1$" with "1" and data in "Out.Parameter8" contains '200.00'
-		And I check "$ParsingResult1$" with "1" and data in "In.Parameter6" contains ''								
+		And I check "$ParsingResult1$" with "1" and data in "In.Parameter6" contains ''
+	* Check fiscal log
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML11"	
+
 	
 Scenario: _08500241 return by card without basis document (with RRN)
 	And I close all client application windows
 	And In the command interface I select "Retail" "Point of sale"
+	And I click the button named "Return"
 	* Select item
 		And I click "Search by barcode (F7)" button
 		And I input "23455677788976667" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "11111111111111111111" text in the field named "Barcode"
 		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "111,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Return
-		And I click the button named "Return"
 		And I click "Payment Return" button
 		And I click "Card (*)" button
 		And I go to line in "BankPaymentTypeList" table
@@ -1705,7 +1889,280 @@ Scenario: return from previous Consolidated retail sales
 		And I check "$ParsingResult$" with "2" and data in "In.Parameter2" contains '520.00'
 	And I close all client application windows	
 
+
+Scenario: _0260154 Checking restrictions on Control State values in POS	
+	And I close all client application windows
+	* Open POS		
+		And In the command interface I select "Retail" "Point of sale"
+	* Scan item with code
+		And I click "Search by barcode (F7)" button
+		And I input "89088088989" text in the field named "Barcode"
+		And I move to the next attribute
+		* Scan barcode instead of code 
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "89088088989" text in the field named "Barcode"
+			And I move to the next attribute
+			Then there are lines in TestClient message log
+				|'Scan control string barcode. Wrong barcode 89088088989'|			
+		* Scan a code that is different from the one in the series
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "111111111111111111111112" text in the field named "Barcode"
+			And I move to the next attribute
+		* Add one more item and scan the same code (code frome another serial lot number)
+			And I click "Search by barcode (F7)" button
+			And I input "8908899880" text in the field named "Barcode"
+			And I move to the next attribute
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "111111111111111111111112" text in the field named "Barcode"
+			And I move to the next attribute
+			Then there are lines in TestClient message log
+				|'Current barcode already use at document line: 1' |
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "111111111111111111111111" text in the field named "Barcode"
+			And I move to the next attribute
+			Then there are lines in TestClient message log
+				|'This is barcode used for Product 6 with SLN[PZU]'|
+		* Scan wrong code	
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "" text in the field named "Barcode"
+			And I move to the next attribute
+			Then the number of "CurrentCodes" table lines is "равно" 0
+		* Scan correct code
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "11111111111111111111113" text in the field named "Barcode"
+			And I move to the next attribute
+	* Check
+		And "ItemList" table became equal
+			| 'Item'               | 'Sales person' | 'Item key' | 'Serials'     | 'Price' | 'Quantity' | 'Offers' | 'Total' |
+			| 'Product 6 with SLN' | ''             | 'PZU'      | '89088088989' | ''      | '1,000'    | ''       | ''      |
+			| 'Product 1 with SLN' | ''             | 'PZU'      | '8908899880'  | ''      | '1,000'    | ''       | ''      |
+		And I delete all lines of "ItemList" table
+				
 	
+Scenario: _0260155 disabling marking check in the Workstation
+	And I close all client application windows
+	* Disabling marking check
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"		
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Workstation 01'    |
+		And I select current line in "List" table
+		And I set checkbox "Ignore code string control"
+		And I click "Save and close" button
+	* Check 
+		And In the command interface I select "Retail" "Point of sale"
+	* Scan item with code
+		And I click "Search by barcode (F7)" button
+		And I input "89088088989" text in the field named "Barcode"
+		And I move to the next attribute
+		When I Check the steps for Exception
+			|'Then the form attribute named "DecorationInfo" became equal to "Scan control code"'|
+		When I Check the steps for Exception
+			|'Then the number of "CurrentCodes" table lines is "равно" 0'|	
+		And I delete all lines of "ItemList" table
+	* Enabling marking check
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"		
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Workstation 01'    |
+		And I select current line in "List" table
+		And I remove checkbox "Ignore code string control"
+		And I click "Save and close" button
+	* Check
+		And In the command interface I select "Retail" "Point of sale"
+		And I click "Search by barcode (F7)" button
+		And I input "89088088989" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute
+		And I delete all lines of "ItemList" table
+		
+		
+Scenario: _0260156 check marking code in the Retail sales receipt and Retail return receipt
+	And I close all client application windows
+	* Create RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+		And in the table "ItemList" I click the button named "SearchByBarcode"	
+		And I input "89088088989" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute	
+		And I click "Show hidden tables" button
+		And I expand "ControlCodeStrings [1]" group
+		And I move to "ControlCodeStrings [1]" tab		
+		And "ControlCodeStrings" table became equal
+			| 'Key' | 'Code string'                                  | 'Code is approved' |
+			| '*'   | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'Yes'              |
+		And I close current window
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I move to "Payments" tab
+		And in the table "Payments" I click the button named "PaymentsAdd"
+		And I activate "Payment type" field in "Payments" table
+		And I select current line in "Payments" table
+		And I click choice button of "Payment type" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Cash'        |
+		And I select current line in "List" table
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I input "100,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table
+		And I activate "Account" field in "Payments" table
+		And I select current line in "Payments" table
+		And I click choice button of "Account" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Currency' | 'Description'  |
+			| 'TRY'      | 'Cash desk №4' |
+		And I select current line in "List" table
+		And I finish line editing in "Payments" table
+		And I click "Post" button
+	* Create RRR
+		And I click "Sales return" button
+		And I click "Ok" button
+		And I click "Show hidden tables" button
+		And I expand "ControlCodeStrings [1]" group
+		And I move to "ControlCodeStrings [1]" tab		
+		And "ControlCodeStrings" table became equal
+			| 'Key' | 'Code string'                                  | 'Code is approved' |
+			| '*'   | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'No'               |
+		And I close current window
+	* Add one more item in RRR and check code
+		And in the table "ItemList" I click the button named "SearchByBarcode"	
+		And I input "8908899880" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "11111111111111111111113" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Post" button
+	* Check 
+		And I click "Show hidden tables" button
+		And I expand "ControlCodeStrings [2]" group
+		And I move to "ControlCodeStrings [2]" tab		
+		And "ControlCodeStrings" table became equal
+			| 'Key' | 'Code string'                                  | 'Code is approved' |
+			| '*'   | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'No'               |
+			| '*'   | '11111111111111111111113'                      | 'Yes'              |
+		And I close all client application windows
+		
+
+Scenario: _0260157 check marking code clean when change item key in the RSR
+		And I close all client application windows
+	* Create RSR
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+		And in the table "ItemList" I click the button named "SearchByBarcode"	
+		And I input "8908899880" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute	
+	* Check marking code
+		And I click "Show hidden tables" button
+		And I expand "ControlCodeStrings [1]" group
+		And I move to "ControlCodeStrings [1]" tab		
+		And "ControlCodeStrings" table became equal
+			| 'Key' | 'Code string'                                  | 'Code is approved' |
+			| '*'   | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'Yes'              |
+		And I close current window
+	* Change item key and check clean marking code
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'ODS'      |
+		And I select current line in "List" table
+		And I click "Show hidden tables" button
+		And I expand "ControlCodeStrings [0]" group
+		And I move to "ControlCodeStrings [0]" tab		
+		Then the number of "ControlCodeStrings" table lines is "равно" 0
+		And I close current window
+	* Check clean marking code when change quantity
+		And I delete all lines of "ItemList" table
+		And in the table "ItemList" I click the button named "SearchByBarcode"	
+		And I input "8908899880" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute	
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Show hidden tables" button
+		And I expand "ControlCodeStrings [0]" group
+		And I move to "ControlCodeStrings [0]" tab		
+		Then the number of "ControlCodeStrings" table lines is "равно" 0
+		And I close current window
+				
+
+
+Scenario: _0260158 check marking code clean when change item key in the RRR
+		And I close all client application windows
+	* Create RRR
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I click the button named "FormCreate"
+		And in the table "ItemList" I click the button named "SearchByBarcode"	
+		And I input "8908899880" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute	
+	* Check marking code
+		And I click "Show hidden tables" button
+		And I expand "ControlCodeStrings [1]" group
+		And I move to "ControlCodeStrings [1]" tab		
+		And "ControlCodeStrings" table became equal
+			| 'Key' | 'Code string'                                  | 'Code is approved' |
+			| '*'   | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'Yes'              |
+		And I close current window
+	* Change item key and check clean marking code
+		And I select current line in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'ODS'      |
+		And I select current line in "List" table
+		And I click "Show hidden tables" button
+		And I expand "ControlCodeStrings [0]" group
+		And I move to "ControlCodeStrings [0]" tab		
+		Then the number of "ControlCodeStrings" table lines is "равно" 0
+		And I close current window
+	* Check clean marking code when change quantity
+		And I delete all lines of "ItemList" table
+		And in the table "ItemList" I click the button named "SearchByBarcode"	
+		And I input "8908899880" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute	
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Show hidden tables" button
+		And I expand "ControlCodeStrings [0]" group
+		And I move to "ControlCodeStrings [0]" tab		
+		Then the number of "ControlCodeStrings" table lines is "равно" 0
+		And I close current window	
+		And I close all client application windows	
 
 Scenario: _0260152 close sessiion
 	And I close all client application windows
@@ -1725,48 +2182,48 @@ Scenario: _0260152 close sessiion
 				
 
 Scenario: _0260153 check hardware parameter saving
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Catalog.Hardware"
-	* Create hardware
-		And I click "Create" button
-		And I input "Test" text in the field named "Description"
-		And I select "Fiscal printer" exact value from "Types of Equipment" drop-down list
-		And I click Choice button of the field named "Driver"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'KKT_3004'    |
-		And I select current line in "List" table
-		And I click "Save" button
-		And I move to "Driver settings" tab
-		And in the table "DriverParameter" I click "Reload settings" button
-		And I move to "Predefined settings" tab
-		And in the table "ConnectParameters" I click "Load settings" button
-		And "ConnectParameters" table became equal
-			| '#' | 'Name' | 'Value'  |
-			| '1' | 'Show' | 'Yes'    |		
-	* Check parameter saving
-		And I activate field named "ConnectParametersValue" in "ConnectParameters" table
-		And I select current line in "ConnectParameters" table
-		And I go to line in "" table
-			| ''        |
-			| 'Boolean' |
-		And I select current line in "" table
-		And I click choice button of the attribute named "ConnectParametersValue" in "ConnectParameters" table
-		And I select current line in "" table
-		And I select "No" exact value from the drop-down list named "ConnectParametersValue" in "ConnectParameters" table
-		And I activate field named "ConnectParametersName" in "ConnectParameters" table
-		And I finish line editing in "ConnectParameters" table
-		And I click "Save" button
-		And in the table "ConnectParameters" I click "Write settings" button
-		And I click "Save and close" button
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Test'        |
-		And I select current line in "List" table
-		And "ConnectParameters" table became equal
-			| '#' | 'Name' | 'Value'  |
-			| '1' | 'Show' | 'No'     |	
 		And I close all client application windows
-			
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"
+		* Create hardware
+			And I click "Create" button
+			And I input "Test" text in the field named "Description"
+			And I select "Fiscal printer" exact value from "Types of Equipment" drop-down list
+			And I click Choice button of the field named "Driver"
+			And I go to line in "List" table
+				| 'Description' |
+				| 'KKT_3004'    |
+			And I select current line in "List" table
+			And I click "Save" button
+			And I move to "Driver settings" tab
+			And in the table "DriverParameter" I click "Reload settings" button
+			And I move to "Predefined settings" tab
+			And in the table "ConnectParameters" I click "Load settings" button
+			And "ConnectParameters" table became equal
+				| '#' | 'Name' | 'Value'  |
+				| '1' | 'Show' | 'Yes'    |		
+		* Check parameter saving
+			And I activate field named "ConnectParametersValue" in "ConnectParameters" table
+			And I select current line in "ConnectParameters" table
+			And I go to line in "" table
+				| ''        |
+				| 'Boolean' |
+			And I select current line in "" table
+			And I click choice button of the attribute named "ConnectParametersValue" in "ConnectParameters" table
+			And I select current line in "" table
+			And I select "No" exact value from the drop-down list named "ConnectParametersValue" in "ConnectParameters" table
+			And I activate field named "ConnectParametersName" in "ConnectParameters" table
+			And I finish line editing in "ConnectParameters" table
+			And I click "Save" button
+			And in the table "ConnectParameters" I click "Write settings" button
+			And I click "Save and close" button
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Test'        |
+			And I select current line in "List" table
+			And "ConnectParameters" table became equal
+				| '#' | 'Name' | 'Value'  |
+				| '1' | 'Show' | 'No'     |	
+			And I close all client application windows
 				
-			
+					
+				

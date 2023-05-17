@@ -386,7 +386,8 @@ Function ItemList()
 		|	END AS ReservationDate,
 		|	SalesOrderItemList.SalesPerson,
 		|	SalesOrderItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
-		|	SalesOrderItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent
+		|	SalesOrderItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
+		|	NOT SalesOrderItemList.Ref.ShipmentMode.Ref IS NULL AS IsRetailShipment
 		|INTO ItemList
 		|FROM
 		|	Document.SalesOrder.ItemList AS SalesOrderItemList
@@ -417,7 +418,7 @@ Function R2011B_SalesOrdersShipment()
 		|WHERE
 		|	NOT ItemList.isCanceled
 		|	AND NOT ItemList.IsService
-		|	AND (ItemList.IsSales OR ItemList.IsShipmentToTradeAgent)";
+		|	AND (ItemList.IsSales OR ItemList.IsShipmentToTradeAgent OR ItemList.IsRetailShipment)";
 EndFunction
 
 Function R2012B_SalesOrdersInvoiceClosing()

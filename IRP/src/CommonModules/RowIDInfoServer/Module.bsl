@@ -5645,7 +5645,7 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 							  |Store             , ItemList.Store";
 	//#1889
 	ElsIf ExternalDocAliase = Aliases.RSC Then
-		Result.Header       = "Company, Branch, Store, Partner, LegalName, Status, ItemListSetProcurementMethods, TransactionType, RetailCustomer";
+		Result.Header       = "Company, Branch, ShipmentMode, Store, Partner, LegalName, Status, ItemListSetProcurementMethods, TransactionType, RetailCustomer";
 		
 		Result.ItemList     = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
 		// Attribute name, Data path (use for show user message)
@@ -5919,6 +5919,11 @@ Procedure ApplyFilterSet_SO_ForRSC(Query)
 	|			AND CASE
 	|				WHEN &Filter_RetailCustomer
 	|					THEN RowRef.RetailCustomer = &RetailCustomer
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_TransactionType
+	|					THEN RowRef.TransactionTypeRSC = &TransactionType
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -6960,7 +6965,7 @@ EndFunction
 
 Function GetFieldsToLock_InternalLink_RSC(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
-	If InternalDocAliase = Aliases.SO Then
+	If InternalDocAliase = Aliases.SO Or InternalDocAliase = Aliases.RSR Then
 		Result.Header   = "Company, Branch, Store, RetailCustomer, Courier, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, SalesOrder, RetailSalesReceipt";
 	Else
@@ -6971,7 +6976,7 @@ EndFunction
 
 Function GetFieldsToLock_ExternalLink_RSC(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
-	If ExternalDocAliase = Aliases.SI Then 
+	If ExternalDocAliase = Aliases.RSR Then 
 		Result.Header   = "Company, Branch, Store, RetailCustomer, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, SalesOrder, RetailSalesReceipt";
 		
@@ -11530,6 +11535,8 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.PO);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.SI);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.SC);
+		//#1889
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.RSC);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.WO);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.WS);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.RSR);
@@ -11545,6 +11552,11 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 	If Is.SC Then
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SC, DocAliases.PR);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SC, DocAliases.SI);
+	EndIf;
+	
+	//#1889
+	If Is.RSC Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSC, DocAliases.RSR);
 	EndIf;
 	
 	If Is.PO Then
@@ -11601,6 +11613,8 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 	
 	If Is.RSR Then
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSR, DocAliases.RRR);
+		//#1889
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSR, DocAliases.RSC);
 	EndIf;
 	
 	If Is.WO Then
@@ -11640,6 +11654,12 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.SI);
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.SO);
 	EndIf;
+	
+	//#1889
+	If Is.RSC Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RSC, DocAliases.RSR);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RSC, DocAliases.SO);
+	EndIf;	
 	
 	If Is.PO Then
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PO, DocAliases.ISR);
@@ -11698,6 +11718,8 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 	
 	If Is.RSR Then 
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RSR, DocAliases.SO);
+		//#1889
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RSR, DocAliases.RSC);
 	EndIf;
 	
 	If Is.RRR Then 

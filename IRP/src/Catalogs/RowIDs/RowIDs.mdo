@@ -687,7 +687,7 @@
     <name>TransactionTypeRSC</name>
     <synonym>
       <key>en</key>
-      <value>Transaction type RSC</value>
+      <value>Transaction type SC Retail</value>
     </synonym>
     <type>
       <types>EnumRef.RetailShipmentConfirmationTransactionTypes</types>

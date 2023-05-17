@@ -35,6 +35,19 @@ Function GetLinkedDocumentsFilter_SC(Object) Export
 	Return Filter;
 EndFunction
 
+//#1889
+Function GetLinkedDocumentsFilter_RSC(Object) Export
+	Filter = New Structure();
+	Filter.Insert("Company"            , Object.Company);
+	Filter.Insert("Branch"             , Object.Branch);
+	If Object.TransactionType = PredefinedValue("Enum.RetailShipmentConfirmationTransactionTypes.Pickup") Then
+		Filter.Insert("RetailCustomer"     , Object.RetailCustomer);
+	EndIf;
+	Filter.Insert("TransactionType"    , Object.TransactionType);
+	Filter.Insert("Ref"                , Object.Ref);
+	Return Filter;
+EndFunction
+
 Function GetLinkedDocumentsFilter_SRO(Object) Export
 	Filter = New Structure();
 	Filter.Insert("Company"              , Object.Company);

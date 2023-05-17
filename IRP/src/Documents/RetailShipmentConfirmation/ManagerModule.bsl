@@ -127,7 +127,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4012B_StockReservation());
 	QueryArray.Add(R4014B_SerialLotNumber());
-//	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
+	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
 	QueryArray.Add(T3010S_RowIDInfo());
 	Return QueryArray;
 EndFunction
@@ -153,7 +153,7 @@ Function ItemList()
 		|	ItemList.Ref.Company AS Company,
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey AS ItemKey,
-		|	ItemList.Ref AS ShipmentConfirmation,
+		|	ItemList.Ref AS RetailShipmentConfirmation,
 		|	ItemList.Quantity AS UnitQuantity,
 		|	ItemList.QuantityInBaseUnit AS Quantity,
 		|	ItemList.Unit,
@@ -161,6 +161,8 @@ Function ItemList()
 		|	TableRowIDInfo.RowID AS RowKey,
 		|	ItemList.SalesOrder AS SalesOrder,
 		|	NOT ItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
+		|	ItemList.RetailSalesReceipt AS RetailSalesReceipt,
+		|	NOT ItemList.RetailSalesReceipt.Ref IS NULL AS RetailSalesReceiptExists,
 		|	ItemList.Ref.Branch AS Branch,
 		|	ItemList.Key
 		|INTO ItemList
@@ -182,7 +184,8 @@ Function SerialLotNumbers()
 		|	SerialLotNumbers.SerialLotNumber,
 		|	SerialLotNumbers.SerialLotNumber.StockBalanceDetail AS StockBalanceDetail,
 		|	SerialLotNumbers.Quantity,
-		|	ItemList.ItemKey AS ItemKey
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Store AS Store
 		|INTO SerialLotNumbers
 		|FROM
 		|	Document.RetailShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
@@ -196,9 +199,13 @@ EndFunction
 Function R2011B_SalesOrdersShipment()
 	Return 
 		"SELECT
+		|	ItemList.Period,
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Company AS Company,
+		|	ItemList.Branch AS Branch,
 		|	ItemList.SalesOrder AS Order,
-		|	*
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Quantity AS Quantity
 		|INTO R2011B_SalesOrdersShipment
 		|FROM
 		|	ItemList AS ItemList
@@ -249,11 +256,9 @@ Function R4011B_FreeStocks()
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey AS ItemKey,
 		|	ItemList.SalesOrder AS SalesOrder,
-		|	ItemList.SalesInvoice AS SalesInvoice,
+		|	ItemList.RetailSalesReceipt AS RetailSalesReceipt,
 		|	ItemList.SalesOrderExists AS SalesOrderExists,
-		|	ItemList.SalesInvoiceExists AS SalesInvoiceExists,
-		|	ItemList.InventoryTransferOrder AS InventoryTransferOrder,
-		|	ItemList.InventoryTransferOrderExists AS InventoryTransferOrderExists,
+		|	ItemList.RetailSalesReceiptExists AS RetailSalesReceiptExists,
 		|	SUM(ItemList.Quantity) AS Quantity
 		|INTO ItemListGroup
 		|FROM
@@ -263,11 +268,9 @@ Function R4011B_FreeStocks()
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
 		|	ItemList.SalesOrder,
-		|	ItemList.SalesInvoice,
+		|	ItemList.RetailSalesReceipt,
 		|	ItemList.SalesOrderExists,
-		|	ItemList.SalesInvoiceExists,
-		|	ItemList.InventoryTransferOrder,
-		|	ItemList.InventoryTransferOrderExists
+		|	ItemList.RetailSalesReceiptExists
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -300,25 +303,7 @@ Function R4011B_FreeStocks()
 		|		(SELECT
 		|			ItemList.Store,
 		|			ItemList.ItemKey,
-		|			ItemList.SalesInvoice
-		|		FROM
-		|			ItemList AS ItemList)) AS StockReservation
-		|WHERE
-		|	StockReservation.QuantityBalance > 0
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	StockReservation.Store,
-		|	StockReservation.Order,
-		|	StockReservation.ItemKey,
-		|	StockReservation.QuantityBalance
-		|FROM
-		|	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
-		|		(SELECT
-		|			ItemList.Store,
-		|			ItemList.ItemKey,
-		|			ItemList.InventoryTransferOrder
+		|			ItemList.RetailSalesReceipt
 		|		FROM
 		|			ItemList AS ItemList)) AS StockReservation
 		|WHERE
@@ -339,8 +324,7 @@ Function R4011B_FreeStocks()
 		|		ON (ItemListGroup.Store = TmpStockReservation.Store)
 		|		AND (ItemListGroup.ItemKey = TmpStockReservation.ItemKey)
 		|		AND (TmpStockReservation.Basis = ItemListGroup.SalesOrder
-		|		OR TmpStockReservation.Basis = ItemListGroup.SalesInvoice
-		|		OR TmpStockReservation.Basis = ItemListGroup.InventoryTransferOrder)
+		|		OR TmpStockReservation.Basis = ItemListGroup.RetailSalesReceipt)
 		|WHERE
 		|	ItemListGroup.Quantity > ISNULL(TmpStockReservation.Quantity, 0)
 		|;
@@ -360,23 +344,20 @@ Function R4012B_StockReservation()
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
 		|	ItemList.SalesOrder,
-		|	ItemList.SalesInvoice,
-		|	ItemList.InventoryTransferOrder,
+		|	ItemList.RetailSalesReceipt,
 		|	SUM(ItemList.Quantity) AS Quantity
 		|INTO ItemListGroup
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
 		|	ItemList.SalesOrderExists
-		|	OR ItemList.SalesInvoiceExists
-		|	OR ItemList.InventoryTransferOrderExists
+		|	OR ItemList.RetailSalesReceiptExists
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
 		|	ItemList.SalesOrder,
-		|	ItemList.SalesInvoice,
-		|	ItemList.InventoryTransferOrder
+		|	ItemList.RetailSalesReceipt
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -401,24 +382,9 @@ Function R4012B_StockReservation()
 		|		(SELECT
 		|			ItemList.Store,
 		|			ItemList.ItemKey,
-		|			ItemList.SalesInvoice
+		|			ItemList.RetailSalesReceipt
 		|		FROM
 		|			ItemListGroup AS ItemList))
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	*
-		|FROM
-		|	AccumulationRegister.R4012B_StockReservation.Balance(&BalancePeriod, (Store, ItemKey, Order) IN
-		|		(SELECT
-		|			ItemList.Store,
-		|			ItemList.ItemKey,
-		|			ItemList.InventoryTransferOrder
-		|		FROM
-		|			ItemListGroup AS ItemList)) AS StockReservation
-		|WHERE
-		|	StockReservation.QuantityBalance > 0
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -438,8 +404,7 @@ Function R4012B_StockReservation()
 		|	ItemListGroup AS ItemList
 		|		INNER JOIN TmpStockReservation AS StockReservation
 		|		ON (ItemList.SalesOrder = StockReservation.Order
-		|		OR ItemList.SalesInvoice = StockReservation.Order
-		|		OR ItemList.InventoryTransferOrder = StockReservation.Order)
+		|		OR ItemList.RetailSalesReceipt = StockReservation.Order)
 		|		AND ItemList.ItemKey = StockReservation.ItemKey
 		|		AND ItemList.Store = StockReservation.Store
 		|;
@@ -455,36 +420,38 @@ EndFunction
 Function R4032B_GoodsInTransitOutgoing()
 	Return 
 		"SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |CASE
-		   |	When (ItemList.IsTransaction_Sales OR ItemList.IsTransaction_ShipmentToTradeAgent) AND ItemList.SalesInvoiceExists Then
-		   |		ItemList.SalesInvoice
-		   |	When ItemList.IsTransaction_InventoryTransfer AND ItemList.InventoryTransferExists Then
-		   |		ItemList.InventoryTransfer
-		   |	When ItemList.IsTransaction_ReturnToVendor AND ItemList.PurchaseReturnExists Then
-		   |		ItemList.PurchaseReturn
-		   |ELSE
-		   |		ItemList.ShipmentConfirmation
-		   |END AS Basis,
-		   |	*
-		   |INTO R4032B_GoodsInTransitOutgoing
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE";
-
+		|	ItemList.Period,
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	CASE
+		|		WHEN ItemList.RetailSalesReceiptExists
+		|			Then ItemList.RetailSalesReceipt
+		|		ELSE ItemList.RetailShipmentConfirmation
+		|	END AS Basis,
+		|	ItemList.Store AS Store,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Quantity AS Quantity
+		|INTO R4032B_GoodsInTransitOutgoing
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R4014B_SerialLotNumber()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |*
-		   |INTO R4014B_SerialLotNumber
-		   |FROM
-		   |	SerialLotNumbers AS SerialLotNumbers
-		   |WHERE
-		   |	FALSE";
-
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	SerialLotNumbers.Company,
+		|	SerialLotNumbers.Branch,
+		|	SerialLotNumbers.Store,
+		|	SerialLotNumbers.ItemKey,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity
+		|INTO R4014B_SerialLotNumber
+		|FROM
+		|	SerialLotNumbers AS SerialLotNumbers
+		|WHERE
+		|	FALSE";
 EndFunction
 
 Function T3010S_RowIDInfo()

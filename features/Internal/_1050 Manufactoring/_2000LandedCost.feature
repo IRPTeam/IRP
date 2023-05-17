@@ -105,6 +105,15 @@ Scenario: _2000 preparation (landed cost)
 		| "Documents.PurchaseInvoice.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseInvoice.FindByNumber(13).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create document PurchaseInvoice and AdditionalCostAllocation objects (production landed cost) (MF)
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I execute 1C:Enterprise script at server
+		| "Documents.AdditionalCostAllocation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document Production objects
 	When Create document Production objects (semiproducts)
 	And I execute 1C:Enterprise script at server
@@ -249,8 +258,6 @@ Scenario: _2013 check batch calculation (one semiproduct consists of another sem
 	And I close all client application windows
 	* Preparation
 		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);" |
-		And I execute 1C:Enterprise script at server
 			| "Documents.Production.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.Production.FindByNumber(14).GetObject().Write(DocumentWriteMode.Posting);" |
@@ -277,5 +284,278 @@ Scenario: _2013 check batch calculation (one semiproduct consists of another sem
 		Given "Result" spreadsheet document is equal to "LandedCost2" by template
 	
 				
-		
+Scenario: _2014 transfer of production (check landed cost)
+	And I close all client application windows
+	* Transfer Product
+		* Create first IT
+			Given I open hyperlink "e1cib/list/Document.InventoryTransfer"		
+			And I click the button named "FormCreate"
+			And I click Choice button of the field named "Company"
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' |
+			And I select current line in "List" table
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And I click Select button of "Store sender" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 02'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And I click Select button of "Store receiver" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 03'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate "Item" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Product'     |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post and close" button
+		* Create second IT
+			Given I open hyperlink "e1cib/list/Document.InventoryTransfer"		
+			And I click the button named "FormCreate"
+			And I click Choice button of the field named "Company"
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' |
+			And I select current line in "List" table
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And I click Select button of "Store sender" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 02'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And I click Select button of "Store receiver" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 03'    |
+			And I select current line in "List" table
+			And I activate field named "ItemListLineNumber" in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate "Item" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of "Item" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Product'     |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I click "Post and close" button	
+	* Calculate batches
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I go to line in "List" table
+			| 'Number'                              |
+			| '$$NumberCalculationMovementCosts1$$' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+	* Check batches calculation
+		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I move to "Standard" tab
+		And I select current line in "StandardOptions" table	
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
+		And I go to line in "List" table
+			| 'Item'    | 'Item key'    |
+			| 'Product' | 'Product' |
+		And I select current line in "List" table
+		And I click "Generate" button
+		Given "Result" spreadsheet document is equal to "LandedCost3" by template	
+				
+Scenario: _2015 sales, return and 2 sales production (check landed cost)
+	And I close all client application windows
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| Description |
+			| Store 03    |
+		And I select current line in "List" table		
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Product'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListPrice" in "ItemList" table
+		And I input "100" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+	* Create return
+		And I click "Sales return" button
+		Then "Add linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I click "Ok" button
+		And I click the button named "FormPostAndClose"
+	* Create SI (batch from return)
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| Description |
+			| Store 03    |
+		And I select current line in "List" table		
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Product'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListPrice" in "ItemList" table
+		And I input "100" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPostAndClose"
+	* Create SI (more than the balance of the batch)
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| Description |
+			| Store 03    |
+		And I select current line in "List" table		
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Product'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListPrice" in "ItemList" table
+		And I input "100" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPostAndClose"
+	* Calculate batches
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I go to line in "List" table
+			| 'Number'                              |
+			| '$$NumberCalculationMovementCosts1$$' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+	* Check batches calculation
+		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I move to "Standard" tab
+		And I select current line in "StandardOptions" table	
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
+		And I go to line in "List" table
+			| 'Item'    | 'Item key'    |
+			| 'Product' | 'Product' |
+		And I select current line in "List" table
+		And I click "Generate" button
+		Given "Result" spreadsheet document is equal to "LandedCost4" by template
+
+	
+Scenario: _2016 materials and production at one company, sales at another company
+	And I close all client application windows
+	* Preparation
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(17).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.AdditionalCostAllocation.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Create SI from Second Company
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'              |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'      |
+			| 'Second Company'   |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| Description |
+			| Store 02    |
+		And I select current line in "List" table		
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Стремянка номер 8' |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate field named "ItemListPrice" in "ItemList" table
+		And I input "100" text in the field named "ItemListPrice" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPostAndClose"
+	* Calculate batches
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		And I go to line in "List" table
+			| 'Number'                              |
+			| '$$NumberCalculationMovementCosts1$$' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+	* Check batches calculation
+		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I move to "Standard" tab
+		And I select current line in "StandardOptions" table	
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
+		And I go to line in "List" table
+			| 'Item'              | 'Item key'          |
+			| 'Стремянка номер 8' | 'Стремянка номер 8' |
+		And I select current line in "List" table
+		And I click "Generate" button
+		Given "Result" spreadsheet document is equal to "LandedCost5" by template
+
 				

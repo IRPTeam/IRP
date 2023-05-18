@@ -129,6 +129,25 @@ Function GetLinkedDocumentsFilter_GR(Object) Export
 	Return Filter;
 EndFunction
 
+//#1889
+Function GetLinkedDocumentsFilter_RGR(Object) Export
+	Map = New Map();
+	
+	Map.Insert(PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.CourierDelivery"),
+	PredefinedValue("Enum.RetailShipmentConfirmationTransactionTypes.CourierDelivery"));
+	
+	Map.Insert(PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.Pickup"),
+	PredefinedValue("Enum.RetailShipmentConfirmationTransactionTypes.Pickup"));
+	
+	Filter = New Structure();
+	Filter.Insert("Company"            , Object.Company);
+	Filter.Insert("Branch"             , Object.Branch);
+	Filter.Insert("RetailCustomer"     , Object.RetailCustomer);
+	Filter.Insert("TransactionType"    , Map.Get(Object.TransactionType));
+	Filter.Insert("Ref"                , Object.Ref);
+	Return Filter;
+EndFunction
+
 Function GetLinkedDocumentsFilter_PRO(Object) Export
 	Filter = New Structure();
 	Filter.Insert("Company"                  , Object.Company);

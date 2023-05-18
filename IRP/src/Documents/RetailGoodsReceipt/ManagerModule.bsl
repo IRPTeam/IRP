@@ -117,7 +117,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R4031B_GoodsInTransitIncoming());
+//	QueryArray.Add(R4031B_GoodsInTransitIncoming());
 	QueryArray.Add(T3010S_RowIDInfo());
 	Return QueryArray;
 EndFunction
@@ -247,19 +247,6 @@ Function R4014B_SerialLotNumber()
 		|	SerialLotNumbers AS SerialLotNumbers
 		|WHERE
 		|	FALSE";
-EndFunction
-
-Function R4031B_GoodsInTransitIncoming()
-	Return 
-		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	ItemList.RetailGoodsReceipt AS Basis,
-		|	*
-		|INTO R4031B_GoodsInTransitIncoming
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	TRUE";
 EndFunction
 
 Function T3010S_RowIDInfo()

@@ -292,20 +292,6 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="94454db2-ac67-41a8-9d14-edb7439c237e">
-      <name>RetailSalesReceipt</name>
-      <synonym>
-        <key>en</key>
-        <value>Retail sales receipt</value>
-      </synonym>
-      <type>
-        <types>DocumentRef.RetailSalesReceipt</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
     <attributes uuid="6a5f98cf-b49c-4138-94a3-63278061fcee">
       <name>SalesOrder</name>
       <synonym>

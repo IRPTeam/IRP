@@ -1578,7 +1578,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>ItemListRetailSalesReceipt</name>
+          <name>ItemListSalesOrder</name>
           <id>430</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1586,10 +1586,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.RetailSalesReceipt</segments>
+            <segments>Object.ItemList.SalesOrder</segments>
           </dataPath>
           <extendedTooltip>
-            <name>ItemListRetailSalesReceiptExtendedTooltip</name>
+            <name>ItemListSalesOrderExtendedTooltip</name>
             <id>432</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1604,7 +1604,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ItemListRetailSalesReceiptContextMenu</name>
+            <name>ItemListSalesOrderContextMenu</name>
             <id>431</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1781,6 +1781,68 @@
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
             <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:FormGroup">
+            <name>LinkedDocuments</name>
+            <id>436</id>
+            <items xsi:type="form:Button">
+              <name>ItemListLinkedDocuments_ShipmentConfirmations</name>
+              <id>438</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <extendedTooltip>
+                <name>ItemListLinkedDocuments_ShipmentConfirmationsExtendedTooltip</name>
+                <id>439</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <commandName>Form.Command.LinkedDocuments_ShipmentConfirmations</commandName>
+              <representation>Auto</representation>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <placementArea>UserCmds</placementArea>
+              <representationInContextMenu>Auto</representationInContextMenu>
+            </items>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <title>
+              <key>en</key>
+              <value>Linked documents</value>
+            </title>
+            <extendedTooltip>
+              <name>LinkedDocumentsExtendedTooltip</name>
+              <id>437</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>Popup</type>
+            <extInfo xsi:type="form:PopupGroupExtInfo">
+              <representation>Auto</representation>
+            </extInfo>
           </items>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -3652,6 +3714,23 @@
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>ShowHiddenTables</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>LinkedDocuments_ShipmentConfirmations</name>
+    <title>
+      <key>en</key>
+      <value>Shipment confirmations</value>
+    </title>
+    <id>15</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>LinkedDocuments_ShipmentConfirmations</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

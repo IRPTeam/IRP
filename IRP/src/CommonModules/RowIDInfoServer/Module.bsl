@@ -26,6 +26,9 @@ Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 		FillRowID_PI(Source, Cancel);
 	ElsIf Is.GR Then
 		FillRowID_GR(Source, Cancel);
+	//#1889
+	ElsIf Is.RGR Then
+		FillRowID_RGR(Source, Cancel);
 	ElsIf Is.ITO Then
 		FillRowID_ITO(Source, Cancel);
 	ElsIf Is.IT Then
@@ -990,6 +993,56 @@ Procedure FillRowID_GR(Source, Cancel)
 	EndDo;
 EndProcedure
 
+//#1889
+Procedure FillRowID_RGR(Source, Cancel)
+	For Each RowItemList In Source.ItemList Do
+		Row = Undefined;
+		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		If IDInfoRows.Count() = 0 Then
+			Row = Source.RowIDInfo.Add();
+			FillRowID(Row, RowItemList);
+			Row.NextStep = GetNextStep_RGR(Source, RowItemList, Row);
+		Else
+
+			IDInfoRowsTable = Source.RowIDInfo.Unload().Copy(New Structure("Key", RowItemList.Key));
+			CurrentStep = Undefined;
+			For Each Row In IDInfoRowsTable Do
+				If ValueIsFilled(Row.CurrentStep) Then
+					CurrentStep = Row.CurrentStep;
+					Break;
+				EndIf;
+			EndDo;
+			IDInfoRowsTable.FillValues(CurrentStep, "CurrentStep");
+			IDInfoRowsTable.GroupBy("Key, RowID, Basis, CurrentStep, RowRef, BasisKey");
+			For Each Row In IDInfoRows Do
+				Source.RowIDInfo.Delete(Row);
+			EndDo;
+			TotalQuantity = 0;
+			For Each Row In IDInfoRowsTable Do
+				NewRow = Source.RowIDInfo.Add();
+				FillPropertyValues(NewRow, Row);
+				NewRow.NextStep = GetNextStep_RGR(Source, RowItemList, NewRow);
+				If ValueIsFilled(Row.Basis) Then
+					BalanceQuantity = GetBalanceQuantity(Source, Row);
+					NewRow.Quantity = Min(BalanceQuantity, RowItemList.QuantityInBaseUnit);
+				Else
+					NewRow.Quantity = RowItemList.QuantityInBaseUnit;
+				EndIf;
+				TotalQuantity = TotalQuantity + NewRow.Quantity;
+			EndDo;
+			If RowItemList.QuantityInBaseUnit > TotalQuantity Then
+				For Each Row In IDInfoRowsTable Do
+					NewRow = Source.RowIDInfo.Add();
+					FillPropertyValues(NewRow, Row);
+					NewRow.CurrentStep = Undefined;
+					NewRow.NextStep = Catalogs.MovementRules.EmptyRef();
+					NewRow.Quantity = RowItemList.QuantityInBaseUnit - TotalQuantity;
+				EndDo;
+			EndIf;
+		EndIf;
+	EndDo;
+EndProcedure
+
 Procedure FillRowID_ITO(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
@@ -1399,11 +1452,7 @@ EndFunction
 
 // #1889
 Function GetNextStep_RSC(Source, ItemList, Row)
-	NextStep = Catalogs.MovementRules.EmptyRef();
-	If Not ValueIsFilled(ItemList.RetailSalesReceipt) Then
-		Return Catalogs.MovementRules.RSR_RGR;
-	EndIf;
-	Return NextStep;
+	Return Catalogs.MovementRules.RSR_RGR;
 EndFunction
 
 Function GetNextStep_PO(Source, RowItemList, Row)
@@ -1436,6 +1485,12 @@ Function GetNextStep_GR(Source, ItemList, Row)
 		And Not ValueIsFilled(ItemList.SalesReturn) Then
 		NextStep = Catalogs.MovementRules.SR;
 	EndIf;
+	Return NextStep;
+EndFunction
+
+//#1889
+Function GetNextStep_RGR(Source, ItemList, Row)
+	NextStep = Catalogs.MovementRules.EmptyRef();
 	Return NextStep;
 EndFunction
 
@@ -1767,6 +1822,22 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 	ElsIf Is.WS Then
 		RowRefObject.PartnerSales    = Source.Partner;
 		RowRefObject.LegalNameSales  = Source.LegalName;
+	EndIf;
+	
+	//#1889
+	If Is.RSC Then
+		RowRefObject.TransactionTypeRSC = Source.TransactionType;
+	EndIf;
+	
+	//#1889
+	If Is.RGR Then
+		If Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.CourierDelivery Then
+			RowRefObject.TransactionTypeRSC = Enums.RetailShipmentConfirmationTransactionTypes.CourierDelivery;
+		ElsIf Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.Pickup Then
+			RowRefObject.TransactionTypeRSC = Enums.RetailShipmentConfirmationTransactionTypes.Pickup;
+		Else
+			Raise StrTemplate("Unsapported transaction type [%1]", Source.TransactionType);
+		EndIf;
 	EndIf;
 	
 	ArrayOfDifferenceFields = New Array();
@@ -2358,6 +2429,13 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|
 	|	end as TransactionType,
 	|
+	|	case 
+	|		when ItemList.Ref.ShipmentMode = value(Enum.RetailShipmentConfirmationTransactionTypes.CourierDelivery) then
+	|			value(Enum.RetailGoodsReceiptTransactionTypes.CourierDelivery)
+	|		when ItemList.Ref.ShipmentMode = value(Enum.RetailShipmentConfirmationTransactionTypes.Pickup) then
+	|			value(Enum.RetailGoodsReceiptTransactionTypes.Pickup)
+	|		end as TransactionTypeRGR,
+	|
 	|	ItemList.Ref.TransactionType as TransactionTypeSales,
 	|	VALUE(Enum.PurchaseTransactionTypes.Purchase) AS TransactionTypePurchases,
 	|	0 AS Quantity,
@@ -2727,6 +2805,13 @@ Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	"SELECT ALLOWED
 	|	""RetailShipmentConfirmation"" AS BasedOn,
 	|	UNDEFINED AS Ref,
+	|	case 
+	|		when ItemList.Ref.TransactionType = value(Enum.RetailShipmentConfirmationTransactionTypes.CourierDelivery) then
+	|			value(Enum.RetailGoodsReceiptTransactionTypes.CourierDelivery)
+	|		when ItemList.Ref.TransactionType = value(Enum.RetailShipmentConfirmationTransactionTypes.Pickup) then
+	|			value(Enum.RetailGoodsReceiptTransactionTypes.Pickup)
+	|		end as TransactionTypeRGR,
+	|
 	|	ItemList.Ref.Company AS Company,
 	|	ItemList.Ref.Branch AS Branch,
 	|	ItemList.Ref.RetailCustomer AS RetailCustomer,
@@ -5056,6 +5141,8 @@ Function GetBasises(Ref, FilterValues) Export
 		Return GetBasisesFor_PI(FilterValues);
 	ElsIf Is.GR Then
 		Return GetBasisesFor_GR(FilterValues);
+	ElsIf Is.RGR Then //#1889
+		Return GetBasisesFor_RGR(FilterValues);
 	ElsIf Is.IT Then
 		Return GetBasisesFor_IT(FilterValues);
 	ElsIf Is.ITO Then
@@ -5082,6 +5169,8 @@ Function GetBasises(Ref, FilterValues) Export
 		Return GetBasisesFor_WO(FilterValues);
 	ElsIf Is.WS Then
 		Return GetBasisesFor_WS(FilterValues);
+	Else
+		Raise StrTemplate("GetBasises() not support [%1]", Ref);
 	EndIf;
 EndFunction
 
@@ -5177,6 +5266,18 @@ Function GetBasisesFor_GR(FilterValues)
 	FilterSets.SR_ForGR = True;
 
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
+EndFunction
+
+//#1889
+Function GetBasisesFor_RGR(FilterValues)
+	StepArray = New Array();
+	StepArray.Add(Catalogs.MovementRules.RSR_RGR);
+
+	FilterSets = GetAvailableFilterSets();
+	FilterSets.RSC_ForRGR = True;
+	
+	BaisisesTable = GetBasisesTable(StepArray, FilterValues, FilterSets);
+	Return BaisisesTable
 EndFunction
 
 Function GetBasisesFor_IT(FilterValues)
@@ -5341,6 +5442,7 @@ Function GetAvailableFilterSets()
 	Result.Insert("SI_ForSC", False);
 
 	Result.Insert("RSC_ForRSR", False);//#1889
+	Result.Insert("RSC_ForRGR", False);//#1889
 
 	Result.Insert("PO_ForPI", False);
 	Result.Insert("PO_ForGR", False);
@@ -5443,6 +5545,12 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 	If FilterSets.RSC_ForRSR Then
 		ApplyFilterSet_RSC_ForRSR(Query);
 		QueryArray.Add(GetDataByFilterSet_RSC_ForRSR());
+	EndIf;
+	
+	//#1889
+	If FilterSets.RSC_ForRGR Then
+		ApplyFilterSet_RSC_ForRGR(Query);
+		QueryArray.Add(GetDataByFilterSet_RSC_ForRGR());
 	EndIf;
 
 	If FilterSets.PO_ForPI Then
@@ -5572,7 +5680,10 @@ Function GetFieldsToLock_ExternalLink(DocAliase, ExternalDocAliase)
 		Return GetFieldsToLock_ExternalLink_SC(ExternalDocAliase, Aliases);
 	//#1889
 	ElsIf DocAliase = Aliases.RSC Then
-		Return GetFieldsToLock_ExternalLink_RSC(ExternalDocAliase, Aliases);
+		Return GetFieldsToLock_ExternalLink_RSC(ExternalDocAliase, Aliases);	
+	//#1889
+	ElsIf DocAliase = Aliases.RGR Then
+		Return GetFieldsToLock_ExternalLink_RGR(ExternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.PO Then
 		Return GetFieldsToLock_ExternalLink_PO(ExternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.PI Then
@@ -5614,6 +5725,7 @@ Function GetFieldsToLock_InternalLink(DocAliase, InternalDocAliase)
 		Return GetFieldsToLock_InternalLink_SI(InternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.SC Then
 		Return GetFieldsToLock_InternalLink_SC(InternalDocAliase, Aliases);
+	//#1889	
 	ElsIf DocAliase = Aliases.RSC Then
 		Return GetFieldsToLock_InternalLink_RSC(InternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.PO Then
@@ -5622,6 +5734,9 @@ Function GetFieldsToLock_InternalLink(DocAliase, InternalDocAliase)
 		Return GetFieldsToLock_InternalLink_PI(InternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.GR Then
 		Return GetFieldsToLock_InternalLink_GR(InternalDocAliase, Aliases);
+	//#1889
+	ElsIf DocAliase = Aliases.RGR Then
+		Return GetFieldsToLock_InternalLink_RGR(InternalDocAliase, Aliases);		
 	ElsIf DocAliase = Aliases.ITO Then
 		Return GetFieldsToLock_InternalLink_ITO(InternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.IT Then
@@ -7038,20 +7153,23 @@ EndFunction
 
 Function GetFieldsToLock_InternalLink_RSC(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
-	If InternalDocAliase = Aliases.SO Or InternalDocAliase = Aliases.RSR Then
+	If InternalDocAliase = Aliases.SO 
+		Or InternalDocAliase = Aliases.RSR
+		Or InternalDocAliase = Aliases.RGR Then
+
 		Result.Header   = "Company, Branch, Store, RetailCustomer, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, SalesOrder, RetailSalesReceipt";
+		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
 	Else
-		Raise StrTemplate("Not supported Internal link for [SC] to [%1]", InternalDocAliase);
+		Raise StrTemplate("Not supported Internal link for [RSC] to [%1]", InternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
 
 Function GetFieldsToLock_ExternalLink_RSC(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
-	If ExternalDocAliase = Aliases.RSR Then 
+	If ExternalDocAliase = Aliases.RSR Or ExternalDocAliase = Aliases.RGR Then 
 		Result.Header   = "Company, Branch, Store, RetailCustomer, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, SalesOrder, RetailSalesReceipt";
+		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
 		
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
@@ -7059,8 +7177,9 @@ Function GetFieldsToLock_ExternalLink_RSC(ExternalDocAliase, Aliases)
 							  |RetailCustomer    , RetailCustomer,
 							  |ItemKey           , ItemList.ItemKey,
 							  |Store             , ItemList.Store";
+	
 	Else
-		Raise StrTemplate("Not supported External link for [SC] to [%1]", ExternalDocAliase);
+		Raise StrTemplate("Not supported External link for [RSC] to [%1]", ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
@@ -7095,22 +7214,64 @@ Procedure ApplyFilterSet_RSC_ForRSR(Query)
 	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
-	//???????????????? RetailCustomer ????????????????
-//	|			AND CASE
-//	|				WHEN &Filter_PartnerSales
-//	|					THEN RowRef.PartnerSales = &PartnerSales
-//	|				ELSE FALSE
-//	|			END
-//	|			AND CASE
-//	|				WHEN &Filter_LegalNameSales
-//	|					THEN RowRef.LegalNameSales = &LegalNameSales
-//	|				ELSE FALSE
-//	|			END
-//	|			AND CASE
-//	|				WHEN &Filter_TransactionType
-//	|					THEN RowRef.TransactionTypeSC = &TransactionType
-//	|				ELSE FALSE
-//	|			END
+	|			AND CASE
+	|				WHEN &Filter_RetailCustomer
+	|					THEN RowRef.RetailCustomer = &RetailCustomer
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure
+
+Procedure ApplyFilterSet_RSC_ForRGR(Query)
+	Query.Text =
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.BasisKey,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_RSC_ForRGR
+	|FROM
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef.Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_RetailCustomer
+	|					THEN RowRef.RetailCustomer = &RetailCustomer
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_TransactionType
+	|					THEN RowRef.TransactionTypeRSC = &TransactionType
+	|				ELSE FALSE
+	|			END
 	|			AND CASE
 	|				WHEN &Filter_ItemKey
 	|					THEN RowRef.ItemKey = &ItemKey
@@ -7149,6 +7310,36 @@ Function GetDataByFilterSet_RSC_ForRSR()
 		|		ON Doc.Ref = RowIDInfo.Ref
 		|		AND Doc.Key = RowIDInfo.Key
 		|		INNER JOIN RowIDMovements_RSC_ForRSR AS RowIDMovements
+		|		ON RowIDMovements.RowID = RowIDInfo.RowID
+		|		AND RowIDMovements.Basis = RowIDInfo.Ref
+		|		AND RowIDMovements.BasisKey = RowIDInfo.Key";
+EndFunction
+
+Function GetDataByFilterSet_RSC_ForRGR()
+	Return 	
+		"SELECT
+		|	Doc.ItemKey,
+		|	Doc.ItemKey.Item,
+		|	Doc.Store,
+		|	Doc.Ref,
+		|	Doc.Key,
+		|	Doc.Key,
+		|	CASE
+		|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+		|			THEN Doc.ItemKey.Item.Unit
+		|		ELSE Doc.ItemKey.Unit
+		|	END,
+		|	RowIDMovements.Quantity,
+		|	RowIDMovements.RowRef,
+		|	RowIDMovements.RowID,
+		|	RowIDMovements.Step,
+		|	Doc.LineNumber
+		|FROM
+		|	Document.RetailShipmentConfirmation.ItemList AS Doc
+		|		INNER JOIN Document.RetailShipmentConfirmation.RowIDInfo AS RowIDInfo
+		|		ON Doc.Ref = RowIDInfo.Ref
+		|		AND Doc.Key = RowIDInfo.Key
+		|		INNER JOIN RowIDMovements_RSC_ForRGR AS RowIDMovements
 		|		ON RowIDMovements.RowID = RowIDInfo.RowID
 		|		AND RowIDMovements.Basis = RowIDInfo.Ref
 		|		AND RowIDMovements.BasisKey = RowIDInfo.Key";
@@ -7832,6 +8023,42 @@ Function GetDataByFilterSet_GR_ForSR()
 		   |		ON RowIDMovements.RowID = RowIDInfo.RowID
 		   |		AND RowIDMovements.Basis = RowIDInfo.Ref
 		   |		AND RowIDMovements.BasisKey = RowIDInfo.Key";
+EndFunction
+
+#EndRegion
+
+//#1889
+#Region Document_RGR
+
+Function GetFieldsToLock_InternalLink_RGR(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.RSC Then 
+
+		Result.Header   = "Company, Branch, Store, RetailCustomer, TransactionType";
+		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
+	Else
+		Raise StrTemplate("Not supported Internal link for [RGR] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_ExternalLink_RGR(ExternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList, RowRefFilter");
+	If ExternalDocAliase = Aliases.RSC Then 
+		Result.Header   = "Company, Branch, Store, RetailCustomer, TransactionType";
+		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
+		
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company           , Company,
+							  |Branch            , Branch,
+							  |RetailCustomer    , RetailCustomer,
+							  |ItemKey           , ItemList.ItemKey,
+							  |Store             , ItemList.Store";
+	
+	Else
+		Raise StrTemplate("Not supported External link for [RGR] to [%1]", ExternalDocAliase);
+	EndIf;
+	Return Result;
 EndFunction
 
 #EndRegion
@@ -10085,6 +10312,11 @@ Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False) Export
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailShipmentConfirmation Then
 		Return "Company, Branch, RetailCustomer, Courier, TransactionType";
 		
+	//#1889
+	ElsIf DocReceiverMetadata = Metadata.Documents.RetailGoodsReceipt Then
+		Return "Company, Branch, RetailCustomer, Courier"
+			+ ?(NameAsAlias, ", TransactionTypeRGR", ", TransactionType");
+		
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseOrder Then
 		Return "Company, Branch"
 		       + ?(NameAsAlias, ", TransactionTypePurchases", ", TransactionType");
@@ -10280,6 +10512,7 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 		ReplaceAliasToAttributeName(FillingValues, "TransactionTypeSR"        , "TransactionType");
 		ReplaceAliasToAttributeName(FillingValues, "TransactionTypePurchases" , "TransactionType");
 		ReplaceAliasToAttributeName(FillingValues, "TransactionTypePR"        , "TransactionType");
+		ReplaceAliasToAttributeName(FillingValues, "TransactionTypeRGR"       , "TransactionType");
 		
 		ArrayOfFillingValues.Add(FillingValues);
 	EndDo;
@@ -10467,7 +10700,8 @@ Function GetColumnNames_ItemList()
 		   |TransactionTypeSR,
 		   |TransactionTypePurchases,
 		   |TransactionTypePR,
-		   |InventoryOrigin";
+		   |InventoryOrigin,
+		   |TransactionTypeRGR";
 EndFunction
 
 Function GetEmptyTable_ItemList()
@@ -11701,6 +11935,7 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 	//#1889
 	If Is.RSC Then
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSC, DocAliases.RSR);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSC, DocAliases.RGR);
 	EndIf;
 	
 	If Is.PO Then
@@ -11717,6 +11952,11 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 	If Is.GR Then
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.GR, DocAliases.PI);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.GR, DocAliases.SR);
+	EndIf;
+	
+	//#1889
+	If Is.RGR Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RGR, DocAliases.RSC);
 	EndIf;
 	
 	If Is.ITO Then
@@ -11822,6 +12062,11 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.GR, DocAliases.PI);
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.GR, DocAliases.PO);
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.GR, DocAliases.SR);
+	EndIf;
+	
+	//#1889
+	If Is.RGR Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RGR, DocAliases.RSC);
 	EndIf;
 	
 	If Is.ITO Then

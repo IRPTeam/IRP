@@ -546,15 +546,6 @@ EndProcedure
 
 #EndRegion
 
-#Region LINKED_DOCUMENTS
-
-&AtClient
-Procedure LinkedDocuments_ShipmentConfirmations(Command)
-	DocumentsClient.OpenLinkedDocuments(Object, ThisObject, "ShipmentConfirmations", "ShipmentConfirmation", "QuantityInShipmentConfirmation");
-EndProcedure
-
-#EndRegion
-
 #Region SERVICE
 
 &AtClient
@@ -782,6 +773,11 @@ Procedure FromUnlockLinkedRows(Command)
 	Else
 		LockLinkedRows();
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure LinkedDocuments_ShipmentConfirmations(Command)
+	DocumentsClient.OpenLinkedDocuments(Object, ThisObject, "ShipmentConfirmations", "ShipmentConfirmation", "QuantityInShipmentConfirmation");
 EndProcedure
 
 #EndRegion

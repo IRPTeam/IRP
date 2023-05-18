@@ -161,8 +161,8 @@ Function ItemList()
 		|	TableRowIDInfo.RowID AS RowKey,
 		|	ItemList.SalesOrder AS SalesOrder,
 		|	NOT ItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
-		|	ItemList.RetailSalesReceipt AS RetailSalesReceipt,
-		|	NOT ItemList.RetailSalesReceipt.Ref IS NULL AS RetailSalesReceiptExists,
+		|	Value(Document.RetailSalesReceipt.EmptyRef) AS RetailSalesReceipt,
+		|	FALSE AS RetailSalesReceiptExists,
 		|	ItemList.Ref.Branch AS Branch,
 		|	ItemList.Key
 		|INTO ItemList

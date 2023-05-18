@@ -43,35 +43,9 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
 		Cancel = True;
 	EndIf;
-
-	Query = New Query();
-	Query.Text =
-	"SELECT
-	|	tmp.ReceiptBasis AS ReceiptBasis
-	|into tmp
-	|FROM
-	|	&ItemList AS tmp
-	|;
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmp.ReceiptBasis.Currency AS Currency,
-	|	SUM(1) AS CountCurrencies
-	|FROM
-	|	tmp AS tmp
-	|WHERE
-	|	NOT tmp.ReceiptBasis.Date IS NULL
-	|GROUP BY
-	|	tmp.ReceiptBasis.Currency";
-	Query.SetParameter("ItemList", ThisObject.ItemList.Unload());
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	If QuerySelection.Count() > 1 Then
-		CommonFunctionsClientServer.ShowUsersMessage(R().S_022);
-		Cancel = True;
-	EndIf;
 	
 	If Not Cancel = True Then
-		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_GR(ThisObject);
+		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_RGR(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
 		ItemListTable = ThisObject.ItemList.Unload(, "Key, LineNumber, ItemKey, Store");
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);

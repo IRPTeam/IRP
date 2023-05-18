@@ -817,6 +817,11 @@ Function GetBatchWiseBalance(CalculationSettings)
 					Raise "Not found batch for sales return";
 				EndIf;
 				For Each ItemOfTreeRows In ArrayOfTreeRows Do
+					If Tree.Rows.FindRows(New Structure("Batch, BatchKey, Company, Direction", 
+						RowReturnedBatches.Batch, RowReturnedBatches.BatchKey, RowReturnedBatches.Company, RowReturnedBatches.Direction),
+						True).Count() <> 0 Then
+						Continue;
+					EndIf;
 					FillPropertyValues(ItemOfTreeRows.Rows.Add(), RowReturnedBatches);
 				EndDo;
 			EndDo;

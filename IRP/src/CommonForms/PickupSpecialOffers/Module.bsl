@@ -99,6 +99,7 @@ Procedure OffersSelection(Item, SelectedRow, Field, StandardProcessing)
 		Info.Insert("FormParametersInfo", ThisObject.FormParametersInfo);
 		Info.Insert("SelectedRow", SelectedRow);
 		Info.Insert("RuleStatus", thisString.RuleStatus);
+		Info.Insert("SpecialOffer", thisString.Offer);
 
 		CallMethodAddDataProc(Info);
 
@@ -117,6 +118,7 @@ Procedure OffersSelection(Item, SelectedRow, Field, StandardProcessing)
 		Info.Insert("FormParametersInfo", ThisObject.FormParametersInfo);
 		Info.Insert("SelectedRow", SelectedRow);
 		Info.Insert("RuleStatus", thisString.RuleStatus);
+		Info.Insert("SpecialOffer", thisString.Offer);
 		
 		CallMethodAddDataProc(Info);
 

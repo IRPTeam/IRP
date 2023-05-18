@@ -702,6 +702,47 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
     </attributes>
+    <attributes uuid="25ec2f48-8ac2-4bda-a6d8-d8dae2eefcb1">
+      <name>Bonus</name>
+      <synonym>
+        <key>en</key>
+        <value>Bonus</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeSpecialOfferBonus</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="e227610c-5b63-49fc-9848-f0a38d4d2ff4">
+      <name>AddInfo</name>
+      <synonym>
+        <key>en</key>
+        <value>Add info</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <types>Date</types>
+        <types>Boolean</types>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>15</precision>
+          <scale>5</scale>
+        </numberQualifiers>
+        <stringQualifiers>
+          <length>512</length>
+        </stringQualifiers>
+        <dateQualifiers>
+          <dateFractions>Date</dateFractions>
+        </dateQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="e6a170c1-00fb-4bf0-9c4d-e3cb793f43c2">
     <producedTypes>

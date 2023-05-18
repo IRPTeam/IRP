@@ -88,8 +88,8 @@ Procedure OffersSelection(Item, SelectedRow, Field, StandardProcessing)
 		Return;
 	EndIf;
 
-	If Field.Name <> "OffersSelect" And OfferHaveManualInputValue(thisString.Offer) And ThisObject.FormType
-		= "Offers_ForRow" Then
+	If Field.Name <> "OffersSelect" And OfferHaveManualInputValue(thisString.Offer) 
+		And ThisObject.FormType = "Offers_ForRow" Then
 
 		Info = AddDataProcServer.AddDataProcInfo(GetExternalDataProcessorByOffer(thisString.Offer));
 		Info.Insert("Settings", GetSettingsForOffer(thisString.Offer));
@@ -98,6 +98,7 @@ Procedure OffersSelection(Item, SelectedRow, Field, StandardProcessing)
 		Info.Insert("ItemListRowKey", ThisObject.ItemListRowKey);
 		Info.Insert("FormParametersInfo", ThisObject.FormParametersInfo);
 		Info.Insert("SelectedRow", SelectedRow);
+		Info.Insert("RuleStatus", thisString.RuleStatus);
 
 		CallMethodAddDataProc(Info);
 
@@ -106,8 +107,8 @@ Procedure OffersSelection(Item, SelectedRow, Field, StandardProcessing)
 		AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "InputManualValue");
 	EndIf;
 
-	If Field.Name <> "OffersSelect" And OfferHaveManualInputValue(thisString.Offer) And ThisObject.FormType
-		= "Offers_ForDocument" Then
+	If Field.Name <> "OffersSelect" And OfferHaveManualInputValue(thisString.Offer) 
+		And ThisObject.FormType	= "Offers_ForDocument" Then
 
 		Info = AddDataProcServer.AddDataProcInfo(GetExternalDataProcessorByOffer(thisString.Offer));
 		Info.Insert("Settings", GetSettingsForOffer(thisString.Offer));
@@ -115,7 +116,8 @@ Procedure OffersSelection(Item, SelectedRow, Field, StandardProcessing)
 		Info.Insert("TotalPercent", thisString.TotalPercent);
 		Info.Insert("FormParametersInfo", ThisObject.FormParametersInfo);
 		Info.Insert("SelectedRow", SelectedRow);
-
+		Info.Insert("RuleStatus", thisString.RuleStatus);
+		
 		CallMethodAddDataProc(Info);
 
 		NotifyDescription = New NotifyDescription("InputManualValueForOfferEnd", ThisObject);

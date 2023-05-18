@@ -106,6 +106,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array();
 	QueryArray.Add(ItemList());
 	QueryArray.Add(SerialLotNumbers());
+	QueryArray.Add(ShipmentConfirmations());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
@@ -117,7 +118,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4014B_SerialLotNumber());
-//	QueryArray.Add(R4031B_GoodsInTransitIncoming());
+	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
 	QueryArray.Add(T3010S_RowIDInfo());
 	Return QueryArray;
 EndFunction
@@ -158,7 +159,7 @@ Function ItemList()
 		|	ItemList.Key
 		|INTO ItemList
 		|FROM
-		|	Document.GoodsReceipt.ItemList AS ItemList
+		|	Document.RetailGoodsReceipt.ItemList AS ItemList
 		|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
 		|		ON ItemList.Key = TableRowIDInfo.Key
 		|WHERE
@@ -184,6 +185,19 @@ Function SerialLotNumbers()
 	|		AND ItemList.Ref = &Ref
 	|WHERE
 	|	SerialLotNumbers.Ref = &Ref";
+EndFunction
+
+Function ShipmentConfirmations()
+	Return
+		"SELECT
+		|	ShipmentConfirmations.Key,
+		|	ShipmentConfirmations.ShipmentConfirmation,
+		|	ShipmentConfirmations.Quantity
+		|INTO ShipmentConfirmations
+		|FROM
+		|	Document.RetailGoodsReceipt.ShipmentConfirmations AS ShipmentConfirmations
+		|WHERE
+		|	ShipmentConfirmations.Ref = &Ref";
 EndFunction
 
 Function R4010B_ActualStocks()
@@ -247,6 +261,22 @@ Function R4014B_SerialLotNumber()
 		|	SerialLotNumbers AS SerialLotNumbers
 		|WHERE
 		|	FALSE";
+EndFunction
+
+Function R4032B_GoodsInTransitOutgoing()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ShipmentConfirmations.ShipmentConfirmation AS Basis,
+		|	-ShipmentConfirmations.Quantity AS Quantity
+		|INTO R4032B_GoodsInTransitOutgoing
+		|FROM
+		|	ItemList AS ItemList
+		|		INNER JOIN ShipmentConfirmations AS ShipmentConfirmations
+		|		ON ItemList.Key = ShipmentConfirmations.Key";
 EndFunction
 
 Function T3010S_RowIDInfo()

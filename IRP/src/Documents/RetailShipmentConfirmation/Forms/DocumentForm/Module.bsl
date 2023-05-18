@@ -71,7 +71,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	IsPickupDelivery = (Object.TransactionType = PredefinedValue("Enum.RetailShipmentConfirmationTransactionTypes.Pickup"));
 	
 	Form.Items.Courier.Visible = IsCourierDelivery;
-	Form.Items.RetailCustomer.Visible = IsPickupDelivery;
+	//#1889
+//	Form.Items.RetailCustomer.Visible = IsPickupDelivery;
 EndProcedure
 
 #EndRegion

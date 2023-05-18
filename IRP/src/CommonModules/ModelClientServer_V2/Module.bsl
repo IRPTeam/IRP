@@ -363,7 +363,8 @@ Function GetChain()
 	
 	Chain.Insert("ChangeExpenseTypeByAccrualDeductionType", GetChainLink("ChangeExpenseTypeByAccrualDeductionTypeExecute"));
 	Chain.Insert("ChangeCourierByTransactionType"        , GetChainLink("ChangeCourierByTransactionTypeExecute"));
-	Chain.Insert("ChangeRetailCustomerByTransactionType" , GetChainLink("ChangeRetailCustomerByTransactionTypeExecute"));
+	//#1889
+//	Chain.Insert("ChangeRetailCustomerByTransactionType" , GetChainLink("ChangeRetailCustomerByTransactionTypeExecute"));
 	Chain.Insert("ChangeShipmentModeByTransactionType"   , GetChainLink("ChangeShipmentModeByTransactionTypeExecute"));
 	
 	// Extractors
@@ -1608,21 +1609,22 @@ EndFunction
 
 #EndRegion
 
-#Region CHANGE_RETAIL_CUSTOMER_BY_TRANSACTION_TYPE
-
-Function ChangeRetailCustomerByTransactionTypeOptions() Export
-	Return GetChainLinkOptions("TransactionType, CurrentRetailCustomer");
-EndFunction
-
-Function ChangeRetailCustomerByTransactionTypeExecute(Options) Export
-	If Options.TransactionType = PredefinedValue("Enum.RetailShipmentConfirmationTransactionTypes.Pickup")
-		Or Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.Pickup") Then
-		Return Options.CurrentRetailCustomer;
-	EndIf;
-	Return Undefined;
-EndFunction
-
-#EndRegion
+//#1889
+//#Region CHANGE_RETAIL_CUSTOMER_BY_TRANSACTION_TYPE
+//
+//Function ChangeRetailCustomerByTransactionTypeOptions() Export
+//	Return GetChainLinkOptions("TransactionType, CurrentRetailCustomer");
+//EndFunction
+//
+//Function ChangeRetailCustomerByTransactionTypeExecute(Options) Export
+//	If Options.TransactionType = PredefinedValue("Enum.RetailShipmentConfirmationTransactionTypes.Pickup")
+//		Or Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.Pickup") Then
+//		Return Options.CurrentRetailCustomer;
+//	EndIf;
+//	Return Undefined;
+//EndFunction
+//
+//#EndRegion
 
 #Region CHANGE_SHIPMENT_MODE_BY_TRANSACTION_TYPE
 

@@ -2083,6 +2083,10 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 		EndDo;
 	
 		For Each Row In TableOfNewReceivedBatches Do
+			If Tree.Rows.FindRows(New Structure("Batch, BatchKey, Company, Direction", 
+				Row.Batch, Row.BatchKey, Row.Company, Row.Direction),True).Count() <> 0 Then
+				Continue;
+			EndIf;
 			FillPropertyValues(Rows.Add(), Row);
 		EndDo;
 		ArrayForDelete = New Array();

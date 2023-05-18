@@ -42,4 +42,9 @@ Procedure BeforeStartNewTransaction(Object, Form, DocRef) Export
 	Return;
 EndProcedure
 
+Procedure SearchCustomer(Object, Form) Export
+	Notify = New NotifyDescription("SetRetailCustomer", Form);
+	OpenForm("Catalog.RetailCustomers.Form.QuickSearch", New Structure("RetailCustomer", Object.RetailCustomer), Form, , ,
+		, Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
 #EndRegion

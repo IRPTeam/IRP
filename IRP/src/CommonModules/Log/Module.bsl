@@ -4,7 +4,7 @@
 // 
 // Parameters:
 //  Name - String - Event name. Ex. "Send to API"
-//  Log - Arbitrary, String - Log data. String, or serializeble object, ex. Structure, Map, Array
+//  Logs - Arbitrary, String - Logs data. String, or serializeble object, ex. Structure, Map, Array
 //  Level - Number - Level:
 //  	0 - Error
 //  	1 - Info
@@ -12,7 +12,7 @@
 //  	3 - Note
 //  Step - String - Add part to event name. "Name.Step"
 //  Ref - Undefined - Ref to db data
-Procedure Write(Name, Log, Level = 0, Step = "", Ref = Undefined) Export
+Procedure Write(Name, Logs, Level = 0, Step = "", Ref = Undefined) Export
 	
 	If Level = 0 Then
 		EventLevel = EventLogLevel.Error;
@@ -24,13 +24,13 @@ Procedure Write(Name, Log, Level = 0, Step = "", Ref = Undefined) Export
 		EventLevel = EventLogLevel.Note;
 	EndIf;
 	
-	If Not TypeOf(Log) = Type("String") Then
+	If Not TypeOf(Logs) = Type("String") Then
 		Try
-			Log = CommonFunctionsServer.SerializeJSON(Log);
+			Logs = CommonFunctionsServer.SerializeJSON(Logs);
 		Except
-			Log = String(Log);
+			Logs = String(Logs);
 		EndTry;
 	EndIf;
 	
-	WriteLogEvent(Name, EventLevel, , Ref, Log);
+	WriteLogEvent(Name, EventLevel, , Ref, Logs);
 EndProcedure

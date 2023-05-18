@@ -271,6 +271,8 @@ Procedure FillOffersTreeStatuses(Val Object, OffersTree, FormType, ItemListRowKe
 
 		If AllRuleIsOk And RowWithRules Then
 			ItemArrayOfOffers.RuleStatus = 3;
+		ElsIf Not AllRuleIsOk And RowWithRules Then
+			ItemArrayOfOffers.RuleStatus = 1;
 		EndIf;
 
 	EndDo;

@@ -1099,6 +1099,59 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="dcfb37ae-4480-45f5-ae5d-eac32ea9fe0d">
+   <name>Bonus</name>
+   <synonym>
+    <key>en</key>
+    <value>Bonus</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Бонус</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeSpecialOfferBonus</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="2325c52b-1025-4c86-8e97-988041a7ae15">
+   <name>AddInfo</name>
+   <synonym>
+    <key>en</key>
+    <value>Add info</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Дополнительная информация</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ek bilgi</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <types>Date</types>
+    <types>Boolean</types>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>15</precision>
+     <scale>5</scale>
+    </numberQualifiers>
+    <stringQualifiers>
+     <length>512</length>
+    </stringQualifiers>
+    <dateQualifiers>
+     <dateFractions>Date</dateFractions>
+    </dateQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="6b6424f7-8f6e-4e38-9f9e-f1af4a1efc8f">
   <producedTypes>

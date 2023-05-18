@@ -15,6 +15,7 @@ Scenario: _034901 preparation (discounts in POS)
 	When Create catalog BusinessUnits objects
 	When Create catalog Users objects
 	When Create catalog PaymentTypes objects
+	When Create information register Barcodes records
 	When Create information register UserSettings records (Retail document)
 	* Launch Two plus part of third
 		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
@@ -47,6 +48,16 @@ Scenario: _034901 preparation (discounts in POS)
 			| 'Special offer type' |
 			| 'Сonsistently'       |
 		And I click the button named "FormChoose"
+	* Workstation
+		When Create catalog Workstations objects
+		When Create POS cash account objects
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 01' |
+		And I click "Set current workstation" button
+		And I close TestClient session
+		Given I open new TestClient session or connect the existing one	
 
 Scenario: _0349011 check preparation
 	When check preparation
@@ -472,8 +483,52 @@ Scenario: _034910 check price type discount + sum in POS (Consequentially)
 		And I close all client application windows			
 				
 				
-				
+Scenario: _034912 check auto calculate discount
+	And I close all client application windows
+	* Select workstation 				
+		Given I open hyperlink "e1cib/list/Catalog.Workstations"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Workstation 01' |
+		And I select current line in "List" table
+		And I set checkbox "Auto calculate discount"
+		And I click "Save and close" button
+	* Launch Discount coupon 10%
+		Given I open hyperlink "e1cib/list/Catalog.SpecialOffers"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Discount coupon 10%' |
+		And I select current line in "List" table
+		And I change checkbox named "Launch"
+		And I click "Save and close" button
+	* Check auto calculate discount
+		And In the command interface I select "Retail" "Point of sale"
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Dress' | 'XS/Blue'  | '520,00' | '1,000'    | '52,00'  | '468,00' |
+		And I click "Search by barcode (F7)" button
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Dress' | 'XS/Blue'  | '520,00' | '2,000'    | '104,00' | '936,00' |
+		And I click "Search by barcode (F7)" button
+		And I input "2202283714" text in the field named "Barcode"
+		And I move to the next attribute
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Price'  | 'Quantity' | 'Offers' | 'Total'  |
+			| 'Dress' | 'XS/Blue'  | '520,00' | '2,000'    | '104,00' | '936,00' |
+			| 'Dress' | 'M/Brown'  | '500,00' | '1,000'    | '50,00'  | '450,00' |
+		And I delete all lines of "ItemList" table
+		
+		
+						
 
+				
+		
 				
 								
 

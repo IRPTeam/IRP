@@ -599,7 +599,8 @@ Procedure DocReturn(Command)
 		 ListItem.RetailBasis = Undefined;
 	EndDo;
 	ThisObject.BasisPayments.Clear();
-	
+	Object.ControlCodeStrings.Clear();
+	ControlCodeStringsClient.UpdateState(Object);
 	SetVisibilityAvailability(Object, ThisObject);
 	EnabledPaymentButton();
 	
@@ -636,9 +637,7 @@ EndProcedure
 
 &AtClient
 Procedure SearchCustomer(Command)
-	Notify = New NotifyDescription("SetRetailCustomer", ThisObject);
-	OpenForm("Catalog.RetailCustomers.Form.QuickSearch", New Structure("RetailCustomer", Object.RetailCustomer), ThisObject, , ,
-		, Notify, FormWindowOpeningMode.LockOwnerWindow);
+	DPPointOfSaleClient.SearchCustomer(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -1592,6 +1591,7 @@ Procedure FindRetailBasisFinish(Result, RowID) Export
 		Row.Quantity = SerialLotNumberItem.Quantity;
 	EndDo;
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(ThisObject.Object);
+	ThisObject.Object.ControlCodeStrings.Clear();
 	ControlCodeStringsClient.UpdateState(ThisObject.Object);
 	
 	EnabledPaymentButton();
@@ -1754,6 +1754,7 @@ Procedure CreateReturnOnBase(PaymentData)
 	For Each ExtractedDataItem In ExtractedData Do
 		ExtractedDataItem.Payments.Clear();
 		ExtractedDataItem.SerialLotNumbers.Clear();
+		ExtractedDataItem.ControlCodeStrings.Clear();
 		If isFirst Then
 			isFirst = False;
 			For Each PaymentDataItem In PaymentData Do
@@ -1761,6 +1762,9 @@ Procedure CreateReturnOnBase(PaymentData)
 			EndDo;
 			For Each SerialItem In ThisObject.Object.SerialLotNumbers Do
 				FillPropertyValues(ExtractedDataItem.SerialLotNumbers.Add(), SerialItem);
+			EndDo;
+			For Each ControlCode In Object.ControlCodeStrings Do
+				FillPropertyValues(ExtractedDataItem.ControlCodeStrings.Add(), ControlCode);
 			EndDo;
 		EndIf;
 		
@@ -1808,17 +1812,8 @@ Procedure CreateReturnWithoutBase(PaymentData)
 	FillingData.Insert("Payments"               , PaymentData);
 	FillingData.Insert("ItemList"               , GetItemListForReturn());
 	
-	If Object.SerialLotNumbers.Count() > 0 Then
-		SerialLotNumbersArray = New Array;
-		For Each SerialItem In Object.SerialLotNumbers Do
-			NewRecord = New Structure;
-			NewRecord.Insert("Key", SerialItem.Key);
-			NewRecord.Insert("SerialLotNumber", SerialItem.SerialLotNumber);
-			NewRecord.Insert("Quantity", SerialItem.Quantity);
-			SerialLotNumbersArray.Add(NewRecord);
-		EndDo;
-		FillingData.Insert("SerialLotNumbers", SerialLotNumbersArray);
-	EndIf;
+	FillingData.Insert("SerialLotNumbers", Object.SerialLotNumbers.Unload());
+	FillingData.Insert("ControlCodeStrings", Object.ControlCodeStrings.Unload());
 	
 	NewDoc = Documents.RetailReturnReceipt.CreateDocument();
 	NewDoc.Date = CommonFunctionsServer.GetCurrentSessionDate();

@@ -782,7 +782,7 @@
    <name>PageLog</name>
    <id>53</id>
    <items xsi:type="form:FormField">
-    <name>Log</name>
+    <name>Logs</name>
     <id>44</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -790,11 +790,11 @@
      <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-     <segments>Log</segments>
+     <segments>Logs</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
     <extendedTooltip>
-     <name>LogExtendedTooltip</name>
+     <name>LogsExtendedTooltip</name>
      <id>46</id>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -809,7 +809,7 @@
      </extInfo>
     </extendedTooltip>
     <contextMenu>
-     <name>LogContextMenu</name>
+     <name>LogsContextMenu</name>
      <id>45</id>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -1129,18 +1129,14 @@
   <savedData>true</savedData>
  </attributes>
  <attributes>
-  <name>Log</name>
+  <name>Logs</name>
   <title>
    <key>en</key>
-   <value>Log</value>
+   <value>Logs</value>
   </title>
   <title>
    <key>ru</key>
    <value>Логи</value>
-  </title>
-  <title>
-   <key>tr</key>
-   <value>Log</value>
   </title>
   <id>2</id>
   <valueType>

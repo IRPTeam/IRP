@@ -662,7 +662,7 @@
      <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-     <segments>Log</segments>
+     <segments>Logs</segments>
     </dataPath>
     <extendedTooltip>
      <name>LogExtendedTooltip</name>
@@ -1544,18 +1544,14 @@
   </columns>
  </attributes>
  <attributes>
-  <name>Log</name>
+  <name>Logs</name>
   <title>
    <key>en</key>
-   <value>Log</value>
+   <value>Logs</value>
   </title>
   <title>
    <key>ru</key>
    <value>Логи</value>
-  </title>
-  <title>
-   <key>tr</key>
-   <value>Log</value>
   </title>
   <id>6</id>
   <valueType>

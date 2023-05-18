@@ -105,6 +105,7 @@
   <registerRecords>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
   <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
+  <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

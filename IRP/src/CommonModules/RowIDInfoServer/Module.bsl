@@ -2757,7 +2757,7 @@ Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Unit AS Unit,
 	|	BasisesTable.Key,
 	|	BasisesTable.BasisKey,
-	|	BasisesTable.Basis AS RetailShipmentConfirmation,
+	|	BasisesTable.Basis AS ShipmentConfirmation,
 	|	BasisesTable.QuantityInBaseUnit AS Quantity,
 	|	BasisesTable.QuantityInBaseUnit AS QuantityInShipmentConfirmation
 	|FROM

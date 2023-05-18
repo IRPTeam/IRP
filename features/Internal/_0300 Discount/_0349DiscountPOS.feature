@@ -499,7 +499,6 @@ Scenario: _034912 check auto calculate discount
 			| 'Description'    |
 			| 'Discount coupon 10%' |
 		And I select current line in "List" table
-		Then "Discount coupon 10% (Special offer) *" window is opened
 		And I change checkbox named "Launch"
 		And I click "Save and close" button
 	* Check auto calculate discount

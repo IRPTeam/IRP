@@ -34,6 +34,7 @@ Scenario: _2000 preparation (landed cost)
 	When Create catalog Stores objects
 	When Create chart of characteristic types CurrencyMovementType objects
 	When Create catalog Currencies objects
+	When Create catalog PartnerSegments objects
 	When Create catalog BusinessUnits objects
 	When Create catalog BusinessUnits objects (MF)
 	When Create catalog Countries objects
@@ -537,6 +538,11 @@ Scenario: _2016 materials and production at one company, sales at another compan
 		And I activate field named "ItemListPrice" in "ItemList" table
 		And I input "100" text in the field named "ItemListPrice" of "ItemList" table
 		And I finish line editing in "ItemList" table
+		And I move to "Other" tab
+		And I input "{CurrentDate() + 240}" text in the field named "Date"
+		And I move to the next attribute
+		And I click "Uncheck all" button
+		And I click "OK" button	
 		And I click the button named "FormPostAndClose"
 	* Calculate batches
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"

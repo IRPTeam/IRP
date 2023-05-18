@@ -320,6 +320,9 @@ Scenario: _2014 transfer of production (check landed cost)
 			And I activate field named "ItemListQuantity" in "ItemList" table
 			And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I finish line editing in "ItemList" table
+			And I move to "Other" tab
+			And I input "{CurrentDate() + 240}" text in the field named "Date"
+			And I move to the next attribute
 			And I click "Post and close" button
 		* Create second IT
 			Given I open hyperlink "e1cib/list/Document.InventoryTransfer"		
@@ -353,6 +356,9 @@ Scenario: _2014 transfer of production (check landed cost)
 			And I activate field named "ItemListQuantity" in "ItemList" table
 			And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
 			And I finish line editing in "ItemList" table
+			And I move to "Other" tab
+			And I input "{CurrentDate() + 250}" text in the field named "Date"
+			And I move to the next attribute
 			And I click "Post and close" button	
 	* Calculate batches
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"

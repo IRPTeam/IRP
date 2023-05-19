@@ -806,22 +806,21 @@ Function GetBatchWiseBalance(CalculationSettings)
 	TableOfReturnedBatches.Columns.Add("AmountRevenueBalance"    , RegMetadata.Resources.AmountRevenue.Type);
 	TableOfReturnedBatches.Columns.Add("AmountRevenueTaxBalance" , RegMetadata.Resources.AmountRevenueTax.Type);
 	TableOfReturnedBatches.Columns.Add("BatchDocument"    , RegMetadata.Dimensions.BatchDocument.Type);
-	TableOfReturnedBatches.Columns.Add("SalesInvoice"     , RegMetadata.Dimensions.SalesInvoice.Type);
+	TableOfReturnedBatches.Columns.Add("SalesInvoice"     , RegMetadata.Dimensions.SalesInvoice.Type); 
+	TableOfReturnedBatches.Columns.Add("AlreadyReceived"  , New TypeDescription("Boolean"));
 	
 	For Each Row In Tree.Rows Do
 		CalculateBatch(Row.Document, Row.Rows, Tables, Tree, TableOfReturnedBatches, EmptyTable_BatchWiseBalance, CalculationSettings);
 		If TableOfReturnedBatches.Count() Then
-			For Each RowReturnedBatches In TableOfReturnedBatches Do
+			For Each RowReturnedBatches In TableOfReturnedBatches Do  
+				If RowReturnedBatches.AlreadyReceived = True Then
+					Continue;
+				EndIf;
 				ArrayOfTreeRows = Tree.Rows.FindRows(New Structure("Document", RowReturnedBatches.Document));
 				If Not ArrayOfTreeRows.Count() Then
 					Raise "Not found batch for sales return";
 				EndIf;
 				For Each ItemOfTreeRows In ArrayOfTreeRows Do
-					If Tree.Rows.FindRows(New Structure("Batch, BatchKey, Company, Direction", 
-						RowReturnedBatches.Batch, RowReturnedBatches.BatchKey, RowReturnedBatches.Company, RowReturnedBatches.Direction),
-						True).Count() <> 0 Then
-						Continue;
-					EndIf;
 					FillPropertyValues(ItemOfTreeRows.Rows.Add(), RowReturnedBatches);
 				EndDo;
 			EndDo;
@@ -2035,6 +2034,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 	TableOfNewReceivedBatches.Columns.Add("AmountRevenueTaxBalance");
 	TableOfNewReceivedBatches.Columns.Add("IsOpeningBalance");
 	TableOfNewReceivedBatches.Columns.Add("Direction");
+	TableOfNewReceivedBatches.Columns.Add("ReturnRow");
 	
 	If IsTransferDocument(Document) Or IsShipmentToTradeAgent(Document) Then
 		
@@ -2085,13 +2085,29 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches, E
 			
 			NewRowReceivedBatch.IsOpeningBalance = False;
 			NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
+			NewRowReceivedBatch.ReturnRow = Row;
 		EndDo;
 	
-		For Each Row In TableOfNewReceivedBatches Do
-			If Tree.Rows.FindRows(New Structure("Batch, BatchKey, Company, Direction", 
-				Row.Batch, Row.BatchKey, Row.Company, Row.Direction),True).Count() <> 0 Then
+		For Each Row In TableOfNewReceivedBatches Do 
+			Filter = New Structure();
+			Filter.Insert("Batch", Row.Batch);
+			Filter.Insert("BatchKey", Row.BatchKey);
+			Filter.Insert("Company", Row.Company);
+			Filter.Insert("Direction", Row.Direction);
+			
+			FoundedRows = Tree.Rows.FindRows(Filter, True);
+			QuantityBalanceIsFilled = False;
+			For Each FoundedRow In FoundedRows Do
+				If ValueIsFilled(FoundedRow.QuantityBalance) Then
+					QuantityBalanceIsFilled = True;
+					Break;
+				EndIf;
+			EndDo;
+			
+			If QuantityBalanceIsFilled Then
 				Continue;
 			EndIf;
+		    Row.ReturnRow.AlreadyReceived = True;
 			FillPropertyValues(Rows.Add(), Row);
 		EndDo;
 		ArrayForDelete = New Array();

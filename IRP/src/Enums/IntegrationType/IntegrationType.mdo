@@ -110,4 +110,15 @@
    <value>Banka entegrasyonu</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="6b85d29f-e2ba-4a50-bc04-be179628bb6e">
+  <name>SMSProvider</name>
+  <synonym>
+   <key>en</key>
+   <value>SMS provider</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Провайдер SMS</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

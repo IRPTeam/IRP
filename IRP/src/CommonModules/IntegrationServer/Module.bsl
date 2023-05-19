@@ -157,3 +157,14 @@ Procedure DeleteUnusedFiles(PathForSave, ArrayOfFilesID) Export
 		DeleteFiles(PathForSave + "\" + FileName);
 	EndDo;
 EndProcedure
+
+// Extension call test connection call.
+// 
+// Parameters:
+//  IntegrationSettings - CatalogRef.IntegrationSettings -
+// 
+// Returns:
+//  Undefined - Extension call test connection call
+Function ExtensionCall_TestConnectionCall(IntegrationSettings) Export
+	Return Undefined;
+EndFunction

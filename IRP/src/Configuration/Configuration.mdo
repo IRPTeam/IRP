@@ -605,6 +605,7 @@
   <definedTypes>DefinedType.UseUniqueID</definedTypes>
   <definedTypes>DefinedType.AdditionalTableControlDocument</definedTypes>
   <definedTypes>DefinedType.typeSpecialOfferBonus</definedTypes>
+  <definedTypes>DefinedType.typeSpecialOfferAddInfo</definedTypes>
   <commonCommands>CommonCommand.AddProperties</commonCommands>
   <commonCommands>CommonCommand.AttachedFiles</commonCommands>
   <commonCommands>CommonCommand.EditConstants</commonCommands>

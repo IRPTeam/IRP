@@ -367,11 +367,13 @@ Function CalculateOffersTree_Documents(Object, OffersInfo, AddInfo = Undefined)
 	OffersTree.Columns.Add("AllRuleIsOk", New TypeDescription("Boolean"));
 	OffersTree.Columns.Add("Manual", New TypeDescription("Boolean"));
 	OffersTree.Columns.Add("ReadyOffer", New TypeDescription("Boolean"));
+	OffersTree.Columns.Add("Bonus", New TypeDescription("Number"));
+	OffersTree.Columns.Add("AddInfo");
 
 	CalculateOffersRecursion(Object, OffersTree, OffersInfo);
 	
 	// Delete row with Amount=0	
-	ArrayForDelete = OffersTree.Rows.FindRows(New Structure("ReadyOffer, Amount", True, 0), True);
+	ArrayForDelete = OffersTree.Rows.FindRows(New Structure("ReadyOffer, Amount, Bonus", True, 0, 0), True);
 	For Each Row In ArrayForDelete Do
 		Row.Parent.Rows.Delete(Row);
 	EndDo;
@@ -479,9 +481,11 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 						KeyRows = StrOffers.Rows.FindRows(New Structure("Key", OffersInfo.ItemListRowKey));
 						For Each KeyRow In KeyRows Do
 							StrOffers.Amount = StrOffers.Amount + KeyRow.Amount;
+							StrOffers.Bonus = StrOffers.Bonus + KeyRow.Bonus;
 						EndDo;
 					Else
 						StrOffers.Amount = StrOffers.Rows.Total("Amount");
+						StrOffers.Bonus = StrOffers.Rows.Total("Bonus");
 					EndIf;
 				Else
 					OffersTree.Rows.Delete(StrOffers);
@@ -492,7 +496,7 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 
 		ElsIf StrOffers.isFolder Then
 			
-			If StrOffers.isSequential And Not OffersInfo.Property("ItemListRowKey") And Object.ItemList.Count() > 1 Then
+			If StrOffers.isSequential And Not OffersInfo.Property("ItemListRowKey") And Object.ItemList.Count() > 0 Then
 				
 				RowOffersInfo = New Structure;
 				RowOffersInfo.Insert("ItemListRowKey");
@@ -506,6 +510,7 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 					CalculateOffersRecursion(Object, StrOffers, RowOffersInfo, StrOffersIndex);
 
 					StrOffers.Amount = StrOffers.Rows.Total("Amount");
+					StrOffers.Bonus = StrOffers.Rows.Total("Bonus");
 					StrOffers.AllRuleIsOk = StrOffers.Rows.Total("AllRuleIsOk");
 
 					If StrOffers.AllRuleIsOk Then
@@ -522,6 +527,7 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 				CalculateOffersRecursion(Object, StrOffers, OffersInfo, StrOffersIndex);
 
 				StrOffers.Amount = StrOffers.Rows.Total("Amount");
+				StrOffers.Bonus = StrOffers.Rows.Total("Bonus");
 				StrOffers.AllRuleIsOk = StrOffers.Rows.Total("AllRuleIsOk");
 
 				If StrOffers.AllRuleIsOk Then
@@ -542,7 +548,7 @@ Function GetArrayOfAllOffers_ForDocument(Val Object, OffersAddress) Export
 	NewOffersTable = WriteOffersInObject_ForDocument(OffersTable, OffersTree);
 	ArrayOfRows = New Array();
 	For Each Row In NewOffersTable Do
-		RowForArrayItem = New Structure("Key, Offer, Amount, Percent");
+		RowForArrayItem = New Structure("Key, Offer, Amount, Percent, Bonus, AddInfo");
 		FillPropertyValues(RowForArrayItem, Row);
 		ArrayOfRows.Add(RowForArrayItem);
 	EndDo;
@@ -625,7 +631,7 @@ Function GetArrayOfAllOffers_ForRow(Val Object, OffersAddress, ItemListRowKey) E
 	NewOffersTable = WriteOffersInObject_ForRow(OffersTable, OffersTree, ItemListRowKey);
 	ArrayOfRows = New Array();
 	For Each Row In NewOffersTable Do
-		RowForArrayItem = New Structure("Key, Offer, Amount, Percent");
+		RowForArrayItem = New Structure("Key, Offer, Amount, Percent, Bonus, AddInfo");
 		FillPropertyValues(RowForArrayItem, Row);
 		ArrayOfRows.Add(RowForArrayItem);
 	EndDo;

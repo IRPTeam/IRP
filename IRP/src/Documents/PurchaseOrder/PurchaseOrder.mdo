@@ -1132,20 +1132,7 @@
     <value>Ek bilgi</value>
    </synonym>
    <type>
-    <types>String</types>
-    <types>Date</types>
-    <types>Boolean</types>
-    <types>Number</types>
-    <numberQualifiers>
-     <precision>15</precision>
-     <scale>5</scale>
-    </numberQualifiers>
-    <stringQualifiers>
-     <length>512</length>
-    </stringQualifiers>
-    <dateQualifiers>
-     <dateFractions>Date</dateFractions>
-    </dateQualifiers>
+    <types>DefinedType.typeSpecialOfferAddInfo</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

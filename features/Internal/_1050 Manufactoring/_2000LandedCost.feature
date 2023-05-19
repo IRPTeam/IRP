@@ -588,4 +588,3 @@ Scenario: _2016 materials and production at one company, sales at another compan
 		And I click "Generate" button
 		Given "Result" spreadsheet document is equal to "LandedCost5" by template
 
-				

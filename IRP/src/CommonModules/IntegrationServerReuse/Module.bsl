@@ -43,6 +43,8 @@ Function ConnectionSettingTemplate(IntegrationType = Undefined, Object = Undefin
 		ConnectionSetting.Insert("FromAddress", "noreply@irpteam.com");
 		ConnectionSetting.Insert("DisplayName", "IRP NO REPLY");
 	ElsIf IntegrationType = Enums.IntegrationType.SMSProvider Then
+		ConnectionSetting.Insert("TextOnApproveAction", "");
+		ConnectionSetting.Insert("TextOnRegistration", "");
 		ConnectionSetting.Insert("SenderName", "");
 		ConnectionSetting.Insert("PhoneNumberForTest", "");
 		ConnectionSetting.Insert("ApiKey", "");

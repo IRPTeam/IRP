@@ -13,7 +13,7 @@
 Function SMS(DataStructure, Method, IntegarationSettings = Undefined) Export
 	
 #Region CheckData
-	If IntegarationSettings = Undefined Then
+	If Not ValueIsFilled(IntegarationSettings) Then
 		IntegarationSettings = Constants.DefaultSMSProvider.Get();
 		If IntegarationSettings.IsEmpty() Then
 			Raise "Fill constant default SMS provider";
@@ -95,14 +95,29 @@ Function TestConnectionResult() Export
 	Return Str;
 EndFunction
 
+// Send SMSParams.
+// 
+// Returns:
+//  Structure - Send SMSParams:
+// * PhoneList - Array of String -
+// * Text - String -
+// * PredefinedText - String - Can be: TextOnApproveAction, TextOnRegistration
+// * Result - See SMSServer.SendSMSResult
 Function SendSMSParams() Export
 	Str = New Structure;
 	Str.Insert("PhoneList", New Array);
 	Str.Insert("Text", "");
+	Str.Insert("PredefinedText", "");
 	Str.Insert("Result", SendSMSResult());
 	Return Str;	
 EndFunction
 
+// Send SMSResult.
+// 
+// Returns:
+//  Structure - Send SMSResult:
+// * Success - Boolean -
+// * Msg - String -
 Function SendSMSResult() Export
 	Str = New Structure;
 	Str.Insert("Success", False);

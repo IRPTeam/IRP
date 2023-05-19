@@ -133,6 +133,9 @@ Scenario: _0050 preparation
 			| "Documents.PurchaseInvoice.FindByNumber(1012).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.AdditionalCostAllocation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.AdditionalCostAllocation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document StockAdjustmentAsSurplus, SalesInvoice, Sales return (batch realocate)
 		And I close all client application windows
 	
 Scenario: _00501 check preparation
@@ -191,16 +194,16 @@ Scenario: _0053 clear posting CalculationMovementCosts and check BatchReallocate
 	* Check post BatchReallocateIncoming and BatchReallocateOutgoing
 		Given I open hyperlink "e1cib/list/Document.BatchReallocateIncoming"
 		And "List" table contains lines
-			| 'Number' | 'Batch reallocate'              | 'Date' | 'Company'        | 'Document'                   | 'Outgoing'                     |
-			| '1'      | 'Calculation movement costs 1*' | '*'    | 'Second Company' | 'Item stock adjustment 161*' | 'Batch reallocate outgoing 1*' |
-			| '2'      | 'Calculation movement costs 1*' | '*'    | 'Second Company' | 'Sales invoice 1 011*'       | 'Batch reallocate outgoing 2*' |
-			| '3'      | 'Calculation movement costs 1*' | '*'    | 'Second Company' | 'Sales invoice 1 012*'       | 'Batch reallocate outgoing 3*' |
+			| 'Number' | 'Batch reallocate'               | 'Date' | 'Company'        | 'Document'                   | 'Outgoing'                     |
+			| '1'      | 'Calculation movement costs 22*' | '*'    | 'Second Company' | 'Item stock adjustment 161*' | 'Batch reallocate outgoing 1*' |
+			| '2'      | 'Calculation movement costs 22*' | '*'    | 'Second Company' | 'Sales invoice 1 011*'       | 'Batch reallocate outgoing 2*' |
+			| '3'      | 'Calculation movement costs 22*' | '*'    | 'Second Company' | 'Sales invoice 1 012*'       | 'Batch reallocate outgoing 3*' |
 		Given I open hyperlink "e1cib/list/Document.BatchReallocateOutgoing"
 		And "List" table contains lines
-			| 'Number' | 'Batch reallocate'              | 'Date' | 'Company'      | 'Document'                   | 'Incoming'                     |
-			| '1'      | 'Calculation movement costs 1*' | '*'    | 'Main Company' | 'Item stock adjustment 161*' | 'Batch reallocate incoming 1*' |
-			| '2'      | 'Calculation movement costs 1*' | '*'    | 'Main Company' | 'Sales invoice 1 011*'       | 'Batch reallocate incoming 2*' |
-			| '3'      | 'Calculation movement costs 1*' | '*'    | 'Main Company' | 'Sales invoice 1 012*'       | 'Batch reallocate incoming 3*' |
+			| 'Number' | 'Batch reallocate'               | 'Date' | 'Company'      | 'Document'                   | 'Incoming'                     |
+			| '1'      | 'Calculation movement costs 22*' | '*'    | 'Main Company' | 'Item stock adjustment 161*' | 'Batch reallocate incoming 1*' |
+			| '2'      | 'Calculation movement costs 22*' | '*'    | 'Main Company' | 'Sales invoice 1 011*'       | 'Batch reallocate incoming 2*' |
+			| '3'      | 'Calculation movement costs 22*' | '*'    | 'Main Company' | 'Sales invoice 1 012*'       | 'Batch reallocate incoming 3*' |
 	* Mark for daletion CalculationMovementCosts
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -224,7 +227,39 @@ Scenario: _0053 clear posting CalculationMovementCosts and check BatchReallocate
 		And I close all client application windows
 		
 		
-					
+Scenario: _0054 check batch realocate with return (batch StockAdjustmentAsSurplus)	
+	And I close all client application windows
+	* Preparation
+		And I execute 1C:Enterprise script at server
+			| "Documents.StockAdjustmentAsSurplus.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(1013).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(1014).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(1015).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(1016).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(1013).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |	
+	* Check batch balance calculation
+		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I activate field named "OptionsListReportOption" in "OptionsList" table
+		And I select current line in "OptionsList" table
+		Then "Batch balance (Test landed cost)" window is opened
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		Then "Select period" window is opened
+		And I input "19.05.2023" text in the field named "DateBegin"
+		And I input "19.05.2023" text in the field named "DateEnd"
+		And I click the button named "Select"
+		Then "Batch balance (Test landed cost)" window is opened
+		And I click "Generate" button
+		Given "Result" spreadsheet document is equal to "BatchReallocate2"
+		And I close all client application windows 		
 		
 				
 		

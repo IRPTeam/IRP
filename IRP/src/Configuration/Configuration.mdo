@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2023.20.2178</version>
+  <version>2023.20.2189</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -483,6 +483,7 @@
   <commonModules>CommonModule.SourceOfOriginClientServer</commonModules>
   <commonModules>CommonModule.ControlCodeStringsClient</commonModules>
   <commonModules>CommonModule.Log</commonModules>
+  <commonModules>CommonModule.SMSServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -665,6 +666,7 @@
   <constants>Constant.UseCommissionTrading</constants>
   <constants>Constant.UseRetailOrders</constants>
   <constants>Constant.UseSalary</constants>
+  <constants>Constant.DefaultSMSProvider</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>
@@ -702,6 +704,7 @@
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.SerialLotNumbersTree</commonForms>
   <commonForms>CommonForm.CodeStringCheck</commonForms>
+  <commonForms>CommonForm.CheckPhoneNumber</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>

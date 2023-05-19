@@ -483,6 +483,7 @@
   <commonModules>CommonModule.SourceOfOriginClientServer</commonModules>
   <commonModules>CommonModule.ControlCodeStringsClient</commonModules>
   <commonModules>CommonModule.Log</commonModules>
+  <commonModules>CommonModule.SMSServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -665,6 +666,7 @@
   <constants>Constant.UseCommissionTrading</constants>
   <constants>Constant.UseRetailOrders</constants>
   <constants>Constant.UseSalary</constants>
+  <constants>Constant.DefaultSMSProvider</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>

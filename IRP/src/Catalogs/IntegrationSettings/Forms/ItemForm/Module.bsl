@@ -68,7 +68,18 @@ Procedure TestConnectionCall()
 #Else
 			CommonFunctionsClientServer.ShowUsersMessage(R().S_029);
 #EndIf
-	ElsIf ExtensionCall_TestConnectionCall() = Undefined Then
+	ElsIf Object.IntegrationType = PredefinedValue("Enum.IntegrationType.SMSProvider") Then
+		Params = SMSServer.TestConnectionParams();
+		Result = SMSServer.SMS(Params, "TestConnection", Object.Ref); // See SMSServer.TestConnectionResult
+		
+		If Result.Success Then
+			CommonFunctionsClientServer.ShowUsersMessage(Result.Msg);
+			CommonFunctionsClientServer.ShowUsersMessage(R().S_028);
+		Else
+			CommonFunctionsClientServer.ShowUsersMessage(Result.Msg);
+		EndIf;
+		
+	ElsIf ExtensionCall_TestConnectionCall() = Undefined AND IntegrationServer.ExtensionCall_TestConnectionCall(Object.Ref) = Undefined Then
 		ConnectionSetting = GetConnectionSetting();
 
 		SettingsSource = Object.ConnectionSetting;

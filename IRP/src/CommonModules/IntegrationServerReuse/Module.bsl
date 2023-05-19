@@ -42,6 +42,20 @@ Function ConnectionSettingTemplate(IntegrationType = Undefined, Object = Undefin
 		ConnectionSetting.Insert("SenderName", "IRP Team");
 		ConnectionSetting.Insert("FromAddress", "noreply@irpteam.com");
 		ConnectionSetting.Insert("DisplayName", "IRP NO REPLY");
+	ElsIf IntegrationType = Enums.IntegrationType.SMSProvider Then
+		ConnectionSetting.Insert("SenderName", "");
+		ConnectionSetting.Insert("PhoneNumberForTest", "");
+		ConnectionSetting.Insert("ApiKey", "");
+		ConnectionSetting.Insert("QueryType", "POST");
+		ConnectionSetting.Insert("ResourceAddress", "");
+		ConnectionSetting.Insert("Ip", "localhost");
+		ConnectionSetting.Insert("Port", 443);
+		ConnectionSetting.Insert("User", "");
+		ConnectionSetting.Insert("Password", "");
+		ConnectionSetting.Insert("Proxy", Undefined);
+		ConnectionSetting.Insert("TimeOut", 60);
+		ConnectionSetting.Insert("SecureConnection", True);
+		ConnectionSetting.Insert("UseOSAuthentication", False);
 	ElsIf Not ExtensionCall_ConnectionSettingTemplate(IntegrationType, ConnectionSetting, Object) Then
 		ConnectionSetting.Insert("QueryType", "POST");
 		ConnectionSetting.Insert("ResourceAddress", "");

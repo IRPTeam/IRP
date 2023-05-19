@@ -133,6 +133,9 @@ Scenario: _0050 preparation
 			| "Documents.PurchaseInvoice.FindByNumber(1012).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.AdditionalCostAllocation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.AdditionalCostAllocation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document StockAdjustmentAsSurplus, SalesInvoice, Sales return (batch realocate)
 		And I close all client application windows
 	
 Scenario: _00501 check preparation
@@ -224,7 +227,39 @@ Scenario: _0053 clear posting CalculationMovementCosts and check BatchReallocate
 		And I close all client application windows
 		
 		
-					
+Scenario: _0054 check batch realocate with return (batch StockAdjustmentAsSurplus)	
+	And I close all client application windows
+	* Preparation
+		And I execute 1C:Enterprise script at server
+			| "Documents.StockAdjustmentAsSurplus.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(1013).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(1014).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(1015).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(1016).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(1013).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
+			| "Documents.CalculationMovementCosts.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |	
+	* Check batch balance calculation
+		Given I open hyperlink "e1cib/app/Report.BatchBalance"
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I activate field named "OptionsListReportOption" in "OptionsList" table
+		And I select current line in "OptionsList" table
+		Then "Batch balance (Test landed cost)" window is opened
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		Then "Select period" window is opened
+		And I input "19.05.2023" text in the field named "DateBegin"
+		And I input "19.05.2023" text in the field named "DateEnd"
+		And I click the button named "Select"
+		Then "Batch balance (Test landed cost)" window is opened
+		And I click "Generate" button
+		Given "Result" spreadsheet document is equal to "BatchReallocate2"
+		And I close all client application windows 		
 		
 				
 		

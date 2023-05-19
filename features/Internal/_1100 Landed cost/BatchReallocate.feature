@@ -194,16 +194,16 @@ Scenario: _0053 clear posting CalculationMovementCosts and check BatchReallocate
 	* Check post BatchReallocateIncoming and BatchReallocateOutgoing
 		Given I open hyperlink "e1cib/list/Document.BatchReallocateIncoming"
 		And "List" table contains lines
-			| 'Number' | 'Batch reallocate'              | 'Date' | 'Company'        | 'Document'                   | 'Outgoing'                     |
-			| '1'      | 'Calculation movement costs 1*' | '*'    | 'Second Company' | 'Item stock adjustment 161*' | 'Batch reallocate outgoing 1*' |
-			| '2'      | 'Calculation movement costs 1*' | '*'    | 'Second Company' | 'Sales invoice 1 011*'       | 'Batch reallocate outgoing 2*' |
-			| '3'      | 'Calculation movement costs 1*' | '*'    | 'Second Company' | 'Sales invoice 1 012*'       | 'Batch reallocate outgoing 3*' |
+			| 'Number' | 'Batch reallocate'               | 'Date' | 'Company'        | 'Document'                   | 'Outgoing'                     |
+			| '1'      | 'Calculation movement costs 22*' | '*'    | 'Second Company' | 'Item stock adjustment 161*' | 'Batch reallocate outgoing 1*' |
+			| '2'      | 'Calculation movement costs 22*' | '*'    | 'Second Company' | 'Sales invoice 1 011*'       | 'Batch reallocate outgoing 2*' |
+			| '3'      | 'Calculation movement costs 22*' | '*'    | 'Second Company' | 'Sales invoice 1 012*'       | 'Batch reallocate outgoing 3*' |
 		Given I open hyperlink "e1cib/list/Document.BatchReallocateOutgoing"
 		And "List" table contains lines
-			| 'Number' | 'Batch reallocate'              | 'Date' | 'Company'      | 'Document'                   | 'Incoming'                     |
-			| '1'      | 'Calculation movement costs 1*' | '*'    | 'Main Company' | 'Item stock adjustment 161*' | 'Batch reallocate incoming 1*' |
-			| '2'      | 'Calculation movement costs 1*' | '*'    | 'Main Company' | 'Sales invoice 1 011*'       | 'Batch reallocate incoming 2*' |
-			| '3'      | 'Calculation movement costs 1*' | '*'    | 'Main Company' | 'Sales invoice 1 012*'       | 'Batch reallocate incoming 3*' |
+			| 'Number' | 'Batch reallocate'               | 'Date' | 'Company'      | 'Document'                   | 'Incoming'                     |
+			| '1'      | 'Calculation movement costs 22*' | '*'    | 'Main Company' | 'Item stock adjustment 161*' | 'Batch reallocate incoming 1*' |
+			| '2'      | 'Calculation movement costs 22*' | '*'    | 'Main Company' | 'Sales invoice 1 011*'       | 'Batch reallocate incoming 2*' |
+			| '3'      | 'Calculation movement costs 22*' | '*'    | 'Main Company' | 'Sales invoice 1 012*'       | 'Batch reallocate incoming 3*' |
 	* Mark for daletion CalculationMovementCosts
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"

@@ -323,7 +323,7 @@ Function WrapRows(Parameters, Rows) Export
 		ArrayOfRowsSpecialOffersCache = New Array();
 		If Parameters.FormIsExists And CommonFunctionsClientServer.ObjectHasProperty(Parameters.Form, "SpecialOffersCache") Then
 			For Each SpecialOfferRow In Parameters.Form.SpecialOffersCache.FindRows(FilterByKey) Do
-				NewRowSpecialOffer = New Structure("Key, Offer, Amount, Quantity");
+				NewRowSpecialOffer = New Structure("Key, Offer, Amount, Quantity, Bonus, AddInfo");
 				FillPropertyValues(NewRowSpecialOffer, SpecialOfferRow);
 				ArrayOfRowsSpecialOffersCache.Add(NewRowSpecialOffer);
 			EndDo;

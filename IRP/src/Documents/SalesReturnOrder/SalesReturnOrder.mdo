@@ -714,6 +714,34 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
     </attributes>
+    <attributes uuid="98491fa6-f407-49e4-a263-5b47880294ff">
+      <name>Bonus</name>
+      <synonym>
+        <key>en</key>
+        <value>Bonus</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeSpecialOfferBonus</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9ec713bf-bf2e-43da-9e70-0afda488d8b0">
+      <name>AddInfo</name>
+      <synonym>
+        <key>en</key>
+        <value>Add info</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeSpecialOfferAddInfo</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="ff5afa5a-36ee-4906-bad9-c548801b589f">
     <producedTypes>

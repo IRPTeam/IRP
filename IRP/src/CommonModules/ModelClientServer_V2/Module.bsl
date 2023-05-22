@@ -2269,7 +2269,7 @@ Function CalculationsOptions() Export
 	QuantityOptions = New Structure("ItemKey, Unit, Quantity, QuantityInBaseUnit");
 	Options.Insert("QuantityOptions", QuantityOptions);
 	
-	// SpecialOffers columns: Key, Offer, Amount, Percent
+	// SpecialOffers columns: Key, Offer, Amount, Percent, Bonus, AddInfo
 	OffersOptions = New Structure();
 	OffersOptions.Insert("SpecialOffers"      , New Array());
 	OffersOptions.Insert("SpecialOffersCache" , New Array());
@@ -2324,7 +2324,7 @@ Function CalculationsExecute(Options) Export
 	Result.Insert("SpecialOffers", New Array());
 	
 	For Each OfferRow In Options.OffersOptions.SpecialOffers Do
-		NewOfferRow = New Structure("Key, Offer, Amount, Percent");
+		NewOfferRow = New Structure("Key, Offer, Amount, Percent, Bonus, AddInfo, Bonus, AddInfo");
 		FillPropertyValues(NewOfferRow, OfferRow);
 		Result.SpecialOffers.Add(NewOfferRow);
 	EndDo;

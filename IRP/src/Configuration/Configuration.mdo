@@ -487,6 +487,7 @@
   <commonModules>CommonModule.DocRetailGoodsReceiptServer</commonModules>
   <commonModules>CommonModule.ControlCodeStringsClient</commonModules>
   <commonModules>CommonModule.Log</commonModules>
+  <commonModules>CommonModule.SMSServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -608,6 +609,8 @@
   <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
   <definedTypes>DefinedType.UseUniqueID</definedTypes>
   <definedTypes>DefinedType.AdditionalTableControlDocument</definedTypes>
+  <definedTypes>DefinedType.typeSpecialOfferBonus</definedTypes>
+  <definedTypes>DefinedType.typeSpecialOfferAddInfo</definedTypes>
   <commonCommands>CommonCommand.AddProperties</commonCommands>
   <commonCommands>CommonCommand.AttachedFiles</commonCommands>
   <commonCommands>CommonCommand.EditConstants</commonCommands>
@@ -667,6 +670,7 @@
   <constants>Constant.UseCommissionTrading</constants>
   <constants>Constant.UseRetailOrders</constants>
   <constants>Constant.UseSalary</constants>
+  <constants>Constant.DefaultSMSProvider</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>
@@ -704,6 +708,7 @@
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.SerialLotNumbersTree</commonForms>
   <commonForms>CommonForm.CodeStringCheck</commonForms>
+  <commonForms>CommonForm.CheckPhoneNumber</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>

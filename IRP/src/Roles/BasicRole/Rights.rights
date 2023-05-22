@@ -1040,4 +1040,15 @@
 			</restrictionByCondition>
 		</right>
 	</object>
+	<object>
+		<name>Constant.DefaultSMSProvider</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

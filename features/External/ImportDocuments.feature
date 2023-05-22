@@ -4405,7 +4405,7 @@ Scenario: create RetailSalesOrder objects
 
 	And I refill object tabular section "Payments":
 		| 'Ref'                                                                 | 'Key'                                  | 'PaymentType'                                                          | 'PaymentTerminal' | 'Account'                                                              | 'Amount' | 'Percent' | 'Commission' | 'BankTerm'                                                          |
-		| 'e1cib/data/Document.SalesOrder?ref=b7928c6100ca962d11ed900a5b5902b2' | '35879836-bcfe-4ce6-9f6d-edd4a292588d' | 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd1' | ''                | ''                                                                     | 1000     | 2         | 20           | 'e1cib/data/Catalog.BankTerms?ref=aa7d120ed92fbced11eb096728fa8ee7' |
+		| 'e1cib/data/Document.SalesOrder?ref=b7928c6100ca962d11ed900a5b5902b2' | '35879836-bcfe-4ce6-9f6d-edd4a292588d' | 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd1' | ''                | ''                                                                     | 1000     | 2         | 20           | 'e1cib/data/Catalog.BankTerms?ref=b79caa5e6e0fe71811edf8705ad4acaf' |
 		| 'e1cib/data/Document.SalesOrder?ref=b7928c6100ca962d11ed900a5b5902b5' | '35879836-bcfe-4ce6-9f6d-edd4a292588d' | 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fcf' | ''                | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c1869' | 1000     |           |              | ''                                                                  |
 
 	And I refill object tabular section "RowIDInfo":

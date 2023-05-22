@@ -35,7 +35,6 @@ Function GetLinkedDocumentsFilter_SC(Object) Export
 	Return Filter;
 EndFunction
 
-//#1889
 Function GetLinkedDocumentsFilter_RSC(Object) Export
 	Filter = New Structure();
 	Filter.Insert("Company"            , Object.Company);
@@ -129,7 +128,6 @@ Function GetLinkedDocumentsFilter_GR(Object) Export
 	Return Filter;
 EndFunction
 
-//#1889
 Function GetLinkedDocumentsFilter_RGR(Object) Export
 	Map = New Map();
 	

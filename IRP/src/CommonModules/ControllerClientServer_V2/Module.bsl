@@ -1623,11 +1623,9 @@ Function BindTransactionType(Parameters)
 	
 	Binding.Insert("RetailShipmentConfirmation", 
 		"StepChangeCourierByTransactionType");
-//		|StepChangeRetailCustomerByTransactionType"); //#1889
 	
 	Binding.Insert("RetailGoodsReceipt", 
 		"StepChangeCourierByTransactionType");
-//		|StepChangeRetailCustomerByTransactionType"); //#1889
 	
 	Binding.Insert("PurchaseInvoice", 
 		"StepChangePartnerByTransactionType,
@@ -3406,21 +3404,6 @@ Function BindRetailCustomer(Parameters)
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindRetailCustomer");
 EndFunction
-
-//#1889
-// RetailCustomer.ChangeRetailCustomerByTransactionType.Step
-//Procedure StepChangeRetailCustomerByTransactionType(Parameters, Chain) Export
-//	Chain.ChangeRetailCustomerByTransactionType.Enable = True;
-//	If Chain.Idle Then
-//		Return;
-//	EndIf;
-//	Chain.ChangeRetailCustomerByTransactionType.Setter = "SetRetailCustomer";
-//	Options = ModelClientServer_V2.ChangeRetailCustomerByTransactionTypeOptions();
-//	Options.TransactionType       = GetTransactionType(Parameters);
-//	Options.CurrentRetailCustomer = GetRetailCustomer(Parameters);
-//	Options.StepName = "StepChangeRetailCustomerByTransactionType";
-//	Chain.ChangeRetailCustomerByTransactionType.Options.Add(Options);
-//EndProcedure
 
 #EndRegion
 

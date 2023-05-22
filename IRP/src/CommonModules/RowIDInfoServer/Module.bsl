@@ -17,7 +17,6 @@ Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 		FillRowID_SI(Source, Cancel);
 	ElsIf Is.SC Then
 		FillRowID_SC(Source, Cancel);
-	//#1889
 	ElsIf Is.RSC Then
 		FillRowID_RSC(Source, Cancel);
 	ElsIf Is.PO Then
@@ -26,7 +25,6 @@ Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 		FillRowID_PI(Source, Cancel);
 	ElsIf Is.GR Then
 		FillRowID_GR(Source, Cancel);
-	//#1889
 	ElsIf Is.RGR Then
 		FillRowID_RGR(Source, Cancel);
 	ElsIf Is.ITO Then
@@ -804,7 +802,6 @@ Procedure FillRowID_SC(Source, Cancel)
 	EndDo;
 EndProcedure
 
-//#1889
 Procedure FillRowID_RSC(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
@@ -993,7 +990,6 @@ Procedure FillRowID_GR(Source, Cancel)
 	EndDo;
 EndProcedure
 
-//#1889
 Procedure FillRowID_RGR(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
@@ -1450,7 +1446,6 @@ Function GetNextStep_SC(Source, ItemList, Row)
 	Return NextStep;
 EndFunction
 
-// #1889
 Function GetNextStep_RSC(Source, ItemList, Row)
 	Return Catalogs.MovementRules.RSR_RGR;
 EndFunction
@@ -1488,7 +1483,6 @@ Function GetNextStep_GR(Source, ItemList, Row)
 	Return NextStep;
 EndFunction
 
-//#1889
 Function GetNextStep_RGR(Source, ItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
 	Return NextStep;
@@ -1702,12 +1696,6 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 			RowRefObject.TransactionTypeGRReturn = Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent;
 			RowRefObject.TransactionTypeSR = Enums.SalesReturnTransactionTypes.ReturnFromTradeAgent;
 			
-		//#1889 +-
-		//ElsIf Is.SO And Source.TransactionType = Enums.SalesTransactionTypes.RetailSales Then
-		//	RowRefObject.TransactionTypeRSC = Source.ShipmentMode;
-			//If Source.ShipmentMode = Enums.RetailShipmentConfirmationTransactionTypes.Pickup Then
-		//		RowRefObject.RetailCustomer = Source.RetailCustomer;
-			//EndIf;
 		EndIf;
 		
 		RowRefObject.Requester = Source.Ref;
@@ -1784,7 +1772,7 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 	ElsIf Is.SO Then
 		If Source.TransactionType = Enums.SalesTransactionTypes.RetailSales Then
 			RowRefObject.RetailCustomer = Source.RetailCustomer;
-			RowRefObject.TransactionTypeRSC = Source.ShipmentMode; //#1889
+			RowRefObject.TransactionTypeRSC = Source.ShipmentMode;
 		Else
 			RowRefObject.PartnerSales   = Source.Partner;
 			RowRefObject.LegalNameSales = Source.LegalName;
@@ -1824,12 +1812,10 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		RowRefObject.LegalNameSales  = Source.LegalName;
 	EndIf;
 	
-	//#1889
 	If Is.RSC Then
 		RowRefObject.TransactionTypeRSC = Source.TransactionType;
 	EndIf;
 	
-	//#1889
 	If Is.RGR Then
 		If Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.CourierDelivery Then
 			RowRefObject.TransactionTypeRSC = Enums.RetailShipmentConfirmationTransactionTypes.CourierDelivery;
@@ -2017,7 +2003,6 @@ Function ExtractData(BasisesTable, DataReceiver, AddInfo = Undefined) Export
 			FillTablesFrom_WO(Tables, DataReceiver, Row);
 		ElsIf Is.WS Then
 			FillTablesFrom_WS(Tables, DataReceiver, Row);
-		//#1889
 		ElsIf Is.RSC Then
 			FillTablesFrom_RSC(Tables, DataReceiver, Row);
 		EndIf;
@@ -2031,9 +2016,9 @@ Function CreateTablesForExtractData(EmptyTable)
 	Tables.Insert("FromSO", EmptyTable.Copy());
 	Tables.Insert("FromSI", EmptyTable.Copy());
 	Tables.Insert("FromSC", EmptyTable.Copy());
-	Tables.Insert("FromRSC", EmptyTable.Copy()); //#1889
+	Tables.Insert("FromRSC", EmptyTable.Copy());
 	Tables.Insert("FromSC_ThenFromSO", EmptyTable.Copy());
-	Tables.Insert("FromRSC_ThenFromSO", EmptyTable.Copy()); //#1889
+	Tables.Insert("FromRSC_ThenFromSO", EmptyTable.Copy());
 	Tables.Insert("FromSC_ThenFromSI", EmptyTable.Copy());
 	Tables.Insert("FromSC_ThenFromPIGR_ThenFromSO", EmptyTable.Copy());
 	Tables.Insert("FromPO", EmptyTable.Copy());
@@ -2075,7 +2060,6 @@ Function ExtractDataByTables(Tables, DataReceiver, AddInfo = Undefined)
 		ExtractedData.Add(ExtractData_FromSC(Tables.FromSC, DataReceiver, AddInfo));
 	EndIf;
 	
-	//#1889
 	If Tables.FromRSC.Count() Then
 		ExtractedData.Add(ExtractData_FromRSC(Tables.FromRSC, DataReceiver, AddInfo));
 	EndIf;
@@ -2084,7 +2068,6 @@ Function ExtractDataByTables(Tables, DataReceiver, AddInfo = Undefined)
 		ExtractedData.Add(ExtractData_FromSC_ThenFromSO(Tables.FromSC_ThenFromSO, DataReceiver, AddInfo));
 	EndIf;
 
-	//#1889
 	If Tables.FromRSC_ThenFromSO.Count() Then
 		ExtractedData.Add(ExtractData_FromRSC_ThenFromSO(Tables.FromRSC_ThenFromSO, DataReceiver, AddInfo));
 	EndIf;
@@ -2211,7 +2194,6 @@ Procedure FillTablesFrom_SC(Tables, DataReceiver, RowBasisesTable)
 	EndIf;
 EndProcedure
 
-//#1889
 Procedure FillTablesFrom_RSC(Tables, DataReceiver, RowBasisesTable)
 	BasisesInfo = GetBasisesInfo(RowBasisesTable.Basis, RowBasisesTable.BasisKey, RowBasisesTable.RowID);
 	If Is(BasisesInfo.ParentBasis).SO Then
@@ -2220,18 +2202,6 @@ Procedure FillTablesFrom_RSC(Tables, DataReceiver, RowBasisesTable)
 		FillPropertyValues(NewRow, RowBasisesTable);
 		NewRow.ParentBasis = BasisesInfo.ParentBasis;
 
-//	ElsIf Is(BasisesInfo.ParentBasis).SI Then
-//
-//		NewRow = Tables.FromSC_ThenFromSI.Add();
-//		FillPropertyValues(NewRow, RowBasisesTable);
-//		NewRow.ParentBasis = BasisesInfo.ParentBasis;
-//
-//	ElsIf Is(BasisesInfo.RowRef.Basis).SO And (Is(BasisesInfo.ParentBasis).GR Or Is(BasisesInfo.ParentBasis).PI) Then
-//
-//		NewRow = Tables.FromSC_ThenFromPIGR_ThenFromSO.Add();
-//		FillPropertyValues(NewRow, RowBasisesTable);
-//		NewRow.ParentBasis = BasisesInfo.ParentBasis;
-//
 	Else
 		FillPropertyValues(Tables.FromRSC.Add(), RowBasisesTable);
 	EndIf;
@@ -2798,7 +2768,6 @@ Function ExtractData_FromSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit", AddInfo);
 EndFunction
 
-//#1889
 Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text + 
@@ -5126,14 +5095,14 @@ EndFunction
 #EndRegion
 
 #Region GetBasises
-//#1889
+
 Function GetBasises(Ref, FilterValues) Export
 	Is = Is(Ref);
 	If Is.SI Then
 		Return GetBasisesFor_SI(FilterValues);
 	ElsIf Is.SC Then
 		Return GetBasisesFor_SC(FilterValues);
-	ElsIf Is.RSC Then //#1889
+	ElsIf Is.RSC Then
 		Return GetBasisesFor_RSC(FilterValues);
 	ElsIf Is.PO Then
 		Return GetBasisesFor_PO(FilterValues);
@@ -5141,7 +5110,7 @@ Function GetBasises(Ref, FilterValues) Export
 		Return GetBasisesFor_PI(FilterValues);
 	ElsIf Is.GR Then
 		Return GetBasisesFor_GR(FilterValues);
-	ElsIf Is.RGR Then //#1889
+	ElsIf Is.RGR Then
 		Return GetBasisesFor_RGR(FilterValues);
 	ElsIf Is.IT Then
 		Return GetBasisesFor_IT(FilterValues);
@@ -5214,7 +5183,6 @@ Function GetBasisesFor_SC(FilterValues)
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
 
-//#1889
 Function GetBasisesFor_RSC(FilterValues)
 	StepArray = New Array();
 	StepArray.Add(Catalogs.MovementRules.RSR_RSC);
@@ -5268,7 +5236,6 @@ Function GetBasisesFor_GR(FilterValues)
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
 
-//#1889
 Function GetBasisesFor_RGR(FilterValues)
 	StepArray = New Array();
 	StepArray.Add(Catalogs.MovementRules.RSR_RGR);
@@ -5375,16 +5342,15 @@ Function GetBasisesFor_RRR(FilterValues)
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
 
-//#1889
 Function GetBasisesFor_RSR(FilterValues)
 	StepArray = New Array();
 	StepArray.Add(Catalogs.MovementRules.RSR);
-	StepArray.Add(Catalogs.MovementRules.RSR_RSC);//#1889
-	StepArray.Add(Catalogs.MovementRules.RSR_RGR);//#1889
+	StepArray.Add(Catalogs.MovementRules.RSR_RSC);
+	StepArray.Add(Catalogs.MovementRules.RSR_RGR);
 
 	FilterSets = GetAvailableFilterSets();
 	FilterSets.SO_ForRSR = True;
-	FilterSets.RSC_ForRSR = True;//#1889
+	FilterSets.RSC_ForRSR = True;
 	
 	BasisesTable = GetBasisesTable(StepArray, FilterValues, FilterSets);
 	Return BasisesTable
@@ -5428,7 +5394,6 @@ EndFunction
 
 #Region FilterSets
 
-//#1889
 Function GetAvailableFilterSets()
 	Result = New Structure();
 	Result.Insert("SO_ForSI", False);
@@ -5436,13 +5401,13 @@ Function GetAvailableFilterSets()
 	Result.Insert("SO_ForPO_ForPI", False);
 	Result.Insert("SO_ForPRR", False);
 	Result.Insert("SO_ForRSR", False);
-	Result.Insert("SO_ForRSC", False);//#1889
+	Result.Insert("SO_ForRSC", False);
 
 	Result.Insert("SC_ForSI", False);
 	Result.Insert("SI_ForSC", False);
 
-	Result.Insert("RSC_ForRSR", False);//#1889
-	Result.Insert("RSC_ForRGR", False);//#1889
+	Result.Insert("RSC_ForRSR", False);
+	Result.Insert("RSC_ForRGR", False);
 
 	Result.Insert("PO_ForPI", False);
 	Result.Insert("PO_ForGR", False);
@@ -5482,7 +5447,6 @@ Function GetAvailableFilterSets()
 	Return Result;
 EndFunction
 
-//#1889
 Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 
 	If FilterSets.SO_ForSI Then
@@ -5494,8 +5458,7 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 		ApplyFilterSet_SO_ForSC(Query);
 		QueryArray.Add(GetDataByFilterSet_SO_ForSC());
 	EndIf;
-	
-	//#1889
+
 	If FilterSets.SO_ForRSC Then
 		ApplyFilterSet_SO_ForRSC(Query);
 		QueryArray.Add(GetDataByFilterSet_SO_ForRSC());
@@ -5541,13 +5504,11 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 		QueryArray.Add(GetDataByFilterSet_SC_ForSI());
 	EndIf;
 
-	//#1889
 	If FilterSets.RSC_ForRSR Then
 		ApplyFilterSet_RSC_ForRSR(Query);
 		QueryArray.Add(GetDataByFilterSet_RSC_ForRSR());
 	EndIf;
 	
-	//#1889
 	If FilterSets.RSC_ForRGR Then
 		ApplyFilterSet_RSC_ForRGR(Query);
 		QueryArray.Add(GetDataByFilterSet_RSC_ForRGR());
@@ -5669,7 +5630,6 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 	EndIf;	
 EndProcedure
 
-//#1889
 Function GetFieldsToLock_ExternalLink(DocAliase, ExternalDocAliase)
 	Aliases = DocAliases();
 	If DocAliase = Aliases.SO Then
@@ -5678,10 +5638,8 @@ Function GetFieldsToLock_ExternalLink(DocAliase, ExternalDocAliase)
 		Return GetFieldsToLock_ExternalLink_SI(ExternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.SC Then
 		Return GetFieldsToLock_ExternalLink_SC(ExternalDocAliase, Aliases);
-	//#1889
 	ElsIf DocAliase = Aliases.RSC Then
 		Return GetFieldsToLock_ExternalLink_RSC(ExternalDocAliase, Aliases);	
-	//#1889
 	ElsIf DocAliase = Aliases.RGR Then
 		Return GetFieldsToLock_ExternalLink_RGR(ExternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.PO Then
@@ -5718,14 +5676,12 @@ Function GetFieldsToLock_ExternalLink(DocAliase, ExternalDocAliase)
 	Return Undefined;
 EndFunction
 
-//#1889
 Function GetFieldsToLock_InternalLink(DocAliase, InternalDocAliase)
 	Aliases = DocAliases();
 	If DocAliase = Aliases.SI Then
 		Return GetFieldsToLock_InternalLink_SI(InternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.SC Then
 		Return GetFieldsToLock_InternalLink_SC(InternalDocAliase, Aliases);
-	//#1889	
 	ElsIf DocAliase = Aliases.RSC Then
 		Return GetFieldsToLock_InternalLink_RSC(InternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.PO Then
@@ -5734,7 +5690,6 @@ Function GetFieldsToLock_InternalLink(DocAliase, InternalDocAliase)
 		Return GetFieldsToLock_InternalLink_PI(InternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.GR Then
 		Return GetFieldsToLock_InternalLink_GR(InternalDocAliase, Aliases);
-	//#1889
 	ElsIf DocAliase = Aliases.RGR Then
 		Return GetFieldsToLock_InternalLink_RGR(InternalDocAliase, Aliases);		
 	ElsIf DocAliase = Aliases.ITO Then
@@ -5771,7 +5726,6 @@ EndFunction
 
 #Region Document_SO
 
-//#1889
 Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SI Then
@@ -5831,7 +5785,7 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 							  |ProcurementMethod , ItemList.ProcurementMethod,
 							  |ItemKey           , ItemList.ItemKey,
 							  |Store             , ItemList.Store";
-	//#1889
+							  
 	ElsIf ExternalDocAliase = Aliases.RSC Then
 		Result.Header       = "Company, Branch, ShipmentMode, Store, Partner, LegalName, Status, ItemListSetProcurementMethods, TransactionType, RetailCustomer";
 		
@@ -6074,7 +6028,6 @@ Procedure ApplyFilterSet_SO_ForSC(Query)
 	Query.Execute();
 EndProcedure
 
-//#1889
 Procedure ApplyFilterSet_SO_ForRSC(Query)
 	Query.Text =
 	"SELECT
@@ -6446,7 +6399,6 @@ Function GetDataByFilterSet_SO_ForSC()
 		   |		AND RowIDMovements.Basis = RowIDInfo.Ref";
 EndFunction
 
-//#1889
 Function GetDataByFilterSet_SO_ForRSC()
 	Return 
 		"SELECT
@@ -7148,7 +7100,6 @@ EndFunction
 
 #EndRegion
 
-//#1889
 #Region Document_RSC
 
 Function GetFieldsToLock_InternalLink_RSC(InternalDocAliase, Aliases)
@@ -8027,7 +7978,6 @@ EndFunction
 
 #EndRegion
 
-//#1889
 #Region Document_RGR
 
 Function GetFieldsToLock_InternalLink_RGR(InternalDocAliase, Aliases)
@@ -10308,11 +10258,9 @@ Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False) Export
 	ElsIf DocReceiverMetadata = Metadata.Documents.ShipmentConfirmation Then
 		Return "Company, Branch, Partner, LegalName, TransactionType";
 	
-	//#1889
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailShipmentConfirmation Then
 		Return "Company, Branch, RetailCustomer, Courier, TransactionType";
 		
-	//#1889
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailGoodsReceipt Then
 		Return "Company, Branch, RetailCustomer, Courier"
 			+ ?(NameAsAlias, ", TransactionTypeRGR", ", TransactionType");
@@ -11913,7 +11861,6 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.PO);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.SI);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.SC);
-		//#1889
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.RSC);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.WO);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.WS);
@@ -11932,7 +11879,6 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SC, DocAliases.SI);
 	EndIf;
 	
-	//#1889
 	If Is.RSC Then
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSC, DocAliases.RSR);
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSC, DocAliases.RGR);
@@ -11954,7 +11900,6 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.GR, DocAliases.SR);
 	EndIf;
 	
-	//#1889
 	If Is.RGR Then
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RGR, DocAliases.RSC);
 	EndIf;
@@ -11997,7 +11942,6 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 	
 	If Is.RSR Then
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSR, DocAliases.RRR);
-		//#1889
 		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSR, DocAliases.RSC);
 	EndIf;
 	
@@ -12039,7 +11983,6 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.SO);
 	EndIf;
 	
-	//#1889
 	If Is.RSC Then
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RSC, DocAliases.RSR);
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RSC, DocAliases.SO);
@@ -12064,7 +12007,6 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.GR, DocAliases.SR);
 	EndIf;
 	
-	//#1889
 	If Is.RGR Then
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RGR, DocAliases.RSC);
 	EndIf;
@@ -12107,7 +12049,6 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 	
 	If Is.RSR Then 
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RSR, DocAliases.SO);
-		//#1889
 		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RSR, DocAliases.RSC);
 	EndIf;
 	

@@ -213,6 +213,9 @@ Function GetPartnerTypeByTransactionType(TransactionType) Export
 	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReceiptFromConsignor , "Consignor");
 	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent , "TradeAgent");
 	
+	Map.Insert(Enums.RetailGoodsReceiptTransactionTypes.CourierDelivery , "Vendor");
+	Map.Insert(Enums.RetailShipmentConfirmationTransactionTypes.CourierDelivery , "Vendor");
+	
 	Return Map.Get(TransactionType);
 EndFunction
 

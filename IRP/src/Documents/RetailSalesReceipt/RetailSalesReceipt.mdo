@@ -105,6 +105,7 @@
   <registerRecords>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
   <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
+  <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1916,6 +1917,85 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="823b2bab-3058-4d74-ac02-dcebfca479c0">
+    <producedTypes>
+      <objectType typeId="daa70ae8-e015-418c-ba00-fc3dc3803063" valueTypeId="d979dc09-cf0e-40f9-a064-ab6076add8ca"/>
+      <rowType typeId="36822b07-21b8-4655-97cf-af8d10db2885" valueTypeId="2465d54e-43f5-4d3d-9150-c1a53a829db6"/>
+    </producedTypes>
+    <name>ShipmentConfirmations</name>
+    <synonym>
+      <key>en</key>
+      <value>Shipment confirmations</value>
+    </synonym>
+    <attributes uuid="20997402-0be8-4257-8625-8af743431b33">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4db2a308-e95e-4194-b7ed-71a03b0b0730">
+      <name>ShipmentConfirmation</name>
+      <synonym>
+        <key>en</key>
+        <value>Shipment confirmation</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.RetailShipmentConfirmation</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="549c01fc-5c93-4dff-b49d-bb9a5c9a43b5">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="d8bf7729-dc16-4637-aeb4-db41a41647ac">
+      <name>QuantityInShipmentConfirmation</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity in shipment confirmation</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="03b4f97c-1b1e-4952-9745-0e90d0b5de59">
+      <name>BasisKey</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
   <commands uuid="fac0f0ce-cdcd-4e1f-ae4e-961fb1021bce">
     <name>Genarate</name>
     <synonym>
@@ -1925,6 +2005,7 @@
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
       <types>DocumentRef.SalesOrder</types>
+      <types>DocumentRef.RetailShipmentConfirmation</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

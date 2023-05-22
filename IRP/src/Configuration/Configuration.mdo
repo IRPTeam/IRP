@@ -481,6 +481,10 @@
   <commonModules>CommonModule.ServerReuse</commonModules>
   <commonModules>CommonModule.SerialLotNumberClientServer</commonModules>
   <commonModules>CommonModule.SourceOfOriginClientServer</commonModules>
+  <commonModules>CommonModule.DocRetailShipmentConfirmationClient</commonModules>
+  <commonModules>CommonModule.DocRetailShipmentConfirmationServer</commonModules>
+  <commonModules>CommonModule.DocRetailGoodsReceiptClient</commonModules>
+  <commonModules>CommonModule.DocRetailGoodsReceiptServer</commonModules>
   <commonModules>CommonModule.ControlCodeStringsClient</commonModules>
   <commonModules>CommonModule.Log</commonModules>
   <commonModules>CommonModule.SMSServer</commonModules>
@@ -856,6 +860,8 @@
   <documents>Document.WorkOrder</documents>
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
+  <documents>Document.RetailShipmentConfirmation</documents>
+  <documents>Document.RetailGoodsReceipt</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>
@@ -930,6 +936,8 @@
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
   <enums>Enum.PayrollTypes</enums>
+  <enums>Enum.RetailShipmentConfirmationTransactionTypes</enums>
+  <enums>Enum.RetailGoodsReceiptTransactionTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.BatchBalance</reports>
   <reports>Report.BatchBalanceSimple</reports>

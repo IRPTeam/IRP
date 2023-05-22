@@ -91,6 +91,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	Form.Items.RetailCustomer.Visible = IsTransactionType_RetailSales;
 	Form.Items.Payments.Visible       = IsTransactionType_RetailSales;
+	
+	Form.Items.ShipmentMode.Visible = IsTransactionType_RetailSales;
 
 	Form.Items.GroupAging.Visible = IsTransactionType_Sales;
 	

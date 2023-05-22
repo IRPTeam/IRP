@@ -1805,4 +1805,18 @@
 			<value>false</value>
 		</right>
 	</object>
+	<object>
+		<name>Document.RetailGoodsReceipt</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailShipmentConfirmation</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
 </Rights>

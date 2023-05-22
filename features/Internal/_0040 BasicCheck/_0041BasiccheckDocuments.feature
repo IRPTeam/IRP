@@ -9,11 +9,12 @@ I want to check opening and closing of documents forms
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
+	
+
+Scenario: preparation
 	When set True value to the constant
 	When set True value to the constant Use consolidated retail sales
 	When set True value to the constant Use commission trading
-
-Scenario: preparation
 	* Add VA extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
 		If "List" table does not contain lines Then
@@ -1326,4 +1327,46 @@ Scenario: Open object form "ProductionPlanningCorrection"
 	Given I open "ProductionPlanningCorrection" document main form
 	If the warning is displayed then
 		Then I raise "Failed to open document form ProductionPlanningCorrection" exception
+	And I close current window
+
+Scenario: Open list form "RetailShipmentConfirmation" 
+	And I close all client application windows
+	Given I open "RetailShipmentConfirmation" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form RetailShipmentConfirmation" exception
+	And I close current window
+
+Scenario: Open object form "RetailShipmentConfirmation"
+	And I close all client application windows
+	Given I open "RetailShipmentConfirmation" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form RetailShipmentConfirmation" exception
+	And I close current window
+
+Scenario: Open object form "RetailShipmentConfirmation"
+
+	Given I open "RetailShipmentConfirmation" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form RetailShipmentConfirmation" exception
+	And I close current window
+
+Scenario: Open list form "RetailGoodsReceipt" 
+	And I close all client application windows
+	Given I open "RetailGoodsReceipt" document default form
+	If the warning is displayed then
+		Then I raise "Failed to open document form RetailGoodsReceipt" exception
+	And I close current window
+
+Scenario: Open object form "RetailGoodsReceipt"
+	And I close all client application windows
+	Given I open "RetailGoodsReceipt" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form RetailGoodsReceipt" exception
+	And I close current window
+
+Scenario: Open object form "RetailGoodsReceipt"
+
+	Given I open "RetailGoodsReceipt" document main form
+	If the warning is displayed then
+		Then I raise "Failed to open document form RetailGoodsReceipt" exception
 	And I close current window

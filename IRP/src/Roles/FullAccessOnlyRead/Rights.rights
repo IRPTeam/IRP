@@ -7662,13 +7662,35 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.DefaultSMSProvider</name>
+		<name>Document.RetailShipmentConfirmation</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RetailGoodsReceipt</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.DefaultSMSProvider</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>

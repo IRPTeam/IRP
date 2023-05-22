@@ -131,5 +131,7 @@
     <types>CatalogRef.VehicleTypes</types>
     <types>CatalogRef.Vehicles</types>
     <types>CatalogRef.Addresses</types>
+    <types>DocumentRef.RetailGoodsReceipt</types>
+    <types>DocumentRef.RetailShipmentConfirmation</types>
   </type>
 </mdclass:DefinedType>

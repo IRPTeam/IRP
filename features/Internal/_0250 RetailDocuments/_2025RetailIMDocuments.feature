@@ -251,7 +251,7 @@ Scenario: _0155260 create Cash receipt based on retail sales order
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 	* Check filling
 		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "CashAccount" became equal to "Cash desk №1"
+		Then the form attribute named "CashAccount" became equal to "Cash desk №2"
 		Then the form attribute named "TransactionType" became equal to "Customer advance"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table became equal

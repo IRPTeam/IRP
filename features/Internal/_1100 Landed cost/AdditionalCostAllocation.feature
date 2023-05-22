@@ -1394,6 +1394,8 @@ Scenario: _098 allocation of the additional cost (tax) (item is already sold)
 		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransfer.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(9).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I execute 1C:Enterprise script at server
 			| "Documents.CalculationMovementCosts.FindByNumber(27).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Check
 		Given I open hyperlink "e1cib/app/Report.BatchBalance"	
@@ -1430,8 +1432,39 @@ Scenario: _098 allocation of the additional cost (tax) (item is already sold)
 
 
 		
-				
-		
-				
+Scenario: _099 sales from one store, return to another store				
+	And I close all client application windows
+	* Check
+		Given I open hyperlink "e1cib/app/Report.BatchBalance"	
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And I activate field named "OptionsListReportOption" in "OptionsList" table
+		And I select current line in "OptionsList" table
+		And I click "Change option..." button
+		And I move to "Fields" tab
+		And I move to the tab named "FilterPage"
+		And I go to line in "SettingsComposerSettingsFilter" table
+			| 'Left value' |
+			| 'Recorder'   |
+		And I select current line in "SettingsComposerSettingsFilter" table
+		And I select "Filled" exact value from "Comparison type" drop-down list in "SettingsComposerSettingsFilter" table
+		And I finish line editing in "SettingsComposerSettingsFilter" table
+		And I click "Finish editing" button			
+		And I set checkbox named "SettingsComposerUserSettingsItem2Use"
+		And I set checkbox named "SettingsComposerUserSettingsItem2Use"
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem2Value"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 06'    |
+		And I select current line in "List" table
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		Then "Select period" window is opened
+		And I input "01.04.2023" text in the field named "DateBegin"
+		And I input "05.04.2023" text in the field named "DateEnd"
+		And I click the button named "Select"		
+		And I click "Generate" button	
+	* Check landed cost
+		And "Result" spreadsheet document contains "BathBalance_072_4" template lines by template	
+		And I close all client application windows		
 
 		

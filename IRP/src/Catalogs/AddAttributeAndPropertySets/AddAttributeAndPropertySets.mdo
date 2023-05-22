@@ -865,6 +865,20 @@
         <value>126</value>
       </code>
     </items>
+    <items id="cdbc333c-25ee-4718-9943-6bd7a776d8ae">
+      <name>Document_RetailShipmentConfirmation</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>127</value>
+      </code>
+    </items>
+    <items id="8e8b35ea-dff9-4566-a514-8b5d6b2e3f38">
+      <name>Document_RetailGoodsReceipt</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>128</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

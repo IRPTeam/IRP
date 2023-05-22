@@ -35,6 +35,16 @@ Function GetLinkedDocumentsFilter_SC(Object) Export
 	Return Filter;
 EndFunction
 
+Function GetLinkedDocumentsFilter_RSC(Object) Export
+	Filter = New Structure();
+	Filter.Insert("Company"            , Object.Company);
+	Filter.Insert("Branch"             , Object.Branch);
+	Filter.Insert("RetailCustomer"     , Object.RetailCustomer);
+	Filter.Insert("TransactionType"    , Object.TransactionType);
+	Filter.Insert("Ref"                , Object.Ref);
+	Return Filter;
+EndFunction
+
 Function GetLinkedDocumentsFilter_SRO(Object) Export
 	Filter = New Structure();
 	Filter.Insert("Company"              , Object.Company);
@@ -114,6 +124,24 @@ Function GetLinkedDocumentsFilter_GR(Object) Export
 	Filter.Insert("PartnerSales"       , Object.Partner);
 	Filter.Insert("LegalNameSales"     , Object.LegalName);
 	Filter.Insert("TransactionType"    , Object.TransactionType);
+	Filter.Insert("Ref"                , Object.Ref);
+	Return Filter;
+EndFunction
+
+Function GetLinkedDocumentsFilter_RGR(Object) Export
+	Map = New Map();
+	
+	Map.Insert(PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.CourierDelivery"),
+	PredefinedValue("Enum.RetailShipmentConfirmationTransactionTypes.CourierDelivery"));
+	
+	Map.Insert(PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.Pickup"),
+	PredefinedValue("Enum.RetailShipmentConfirmationTransactionTypes.Pickup"));
+	
+	Filter = New Structure();
+	Filter.Insert("Company"            , Object.Company);
+	Filter.Insert("Branch"             , Object.Branch);
+	Filter.Insert("RetailCustomer"     , Object.RetailCustomer);
+	Filter.Insert("TransactionType"    , Map.Get(Object.TransactionType));
 	Filter.Insert("Ref"                , Object.Ref);
 	Return Filter;
 EndFunction

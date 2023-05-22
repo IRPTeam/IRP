@@ -412,12 +412,20 @@ Scenario: _2015 sales, return and 2 sales production (check landed cost)
 		And I activate field named "ItemListPrice" in "ItemList" table
 		And I input "100" text in the field named "ItemListPrice" of "ItemList" table
 		And I finish line editing in "ItemList" table
+		And I move to "Other" tab
+		And I input "{CurrentDate() + 255}" text in the field named "Date"
+		And I move to the next attribute
+		And I click "Uncheck all" button
+		And I click "OK" button	
 		And I click the button named "FormPost"
 	* Create return
 		And I click "Sales return" button
 		Then "Add linked document rows" window is opened
 		And I expand current line in "BasisesTree" table
 		And I click "Ok" button
+		And I move to "Other" tab
+		And I input "{CurrentDate() + 260}" text in the field named "Date"
+		And I move to the next attribute
 		And I click the button named "FormPostAndClose"
 	* Create SI (batch from return)
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -449,6 +457,11 @@ Scenario: _2015 sales, return and 2 sales production (check landed cost)
 		And I activate field named "ItemListPrice" in "ItemList" table
 		And I input "100" text in the field named "ItemListPrice" of "ItemList" table
 		And I finish line editing in "ItemList" table
+		And I move to "Other" tab
+		And I input "{CurrentDate() + 270}" text in the field named "Date"
+		And I move to the next attribute
+		And I click "Uncheck all" button
+		And I click "OK" button	
 		And I click the button named "FormPostAndClose"
 	* Create SI (more than the balance of the batch)
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -480,6 +493,11 @@ Scenario: _2015 sales, return and 2 sales production (check landed cost)
 		And I activate field named "ItemListPrice" in "ItemList" table
 		And I input "100" text in the field named "ItemListPrice" of "ItemList" table
 		And I finish line editing in "ItemList" table
+		And I move to "Other" tab
+		And I input "{CurrentDate() + 272}" text in the field named "Date"
+		And I move to the next attribute
+		And I click "Uncheck all" button
+		And I click "OK" button	
 		And I click the button named "FormPostAndClose"
 	* Calculate batches
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
@@ -570,4 +588,3 @@ Scenario: _2016 materials and production at one company, sales at another compan
 		And I click "Generate" button
 		Given "Result" spreadsheet document is equal to "LandedCost5" by template
 
-				

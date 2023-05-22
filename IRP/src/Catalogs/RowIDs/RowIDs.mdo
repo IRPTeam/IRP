@@ -683,6 +683,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="b6960774-e770-43f8-bf1c-94fdfb81d049">
+    <name>TransactionTypeRSC</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction type SC Retail</value>
+    </synonym>
+    <type>
+      <types>EnumRef.RetailShipmentConfirmationTransactionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="651805ba-bc1e-443a-8ae5-b2b855347771">
     <name>ItemForm</name>
     <synonym>

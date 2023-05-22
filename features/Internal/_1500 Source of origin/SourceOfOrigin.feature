@@ -23,6 +23,7 @@ Scenario: _150041 preparation
 		When Create catalog ItemKeys objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers with source of origin)
 		When Create catalog SerialLotNumbers objects (serial lot numbers, with batch balance details)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
 		When Create catalog Items objects

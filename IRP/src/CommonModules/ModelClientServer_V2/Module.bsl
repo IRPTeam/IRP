@@ -362,6 +362,8 @@ Function GetChain()
 	Chain.Insert("ConsignorBatchesFillBatches"                  , GetChainLink("ConsignorBatchesFillBatchesExecute"));
 	
 	Chain.Insert("ChangeExpenseTypeByAccrualDeductionType", GetChainLink("ChangeExpenseTypeByAccrualDeductionTypeExecute"));
+	Chain.Insert("ChangeCourierByTransactionType"        , GetChainLink("ChangeCourierByTransactionTypeExecute"));
+	Chain.Insert("ChangeShipmentModeByTransactionType"   , GetChainLink("ChangeShipmentModeByTransactionTypeExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -1589,6 +1591,37 @@ EndFunction
 
 #EndRegion
 
+#Region CHANGE_COURIER_BY_TRANSACTION_TYPE
+
+Function ChangeCourierByTransactionTypeOptions() Export
+	Return GetChainLinkOptions("TransactionType, CurrentCourier");
+EndFunction
+
+Function ChangeCourierByTransactionTypeExecute(Options) Export
+	If Options.TransactionType = PredefinedValue("Enum.RetailShipmentConfirmationTransactionTypes.CourierDelivery")
+		Or Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.CourierDelivery") Then
+		Return Options.CurrentCourier;
+	EndIf;
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_SHIPMENT_MODE_BY_TRANSACTION_TYPE
+
+Function ChangeShipmentModeByTransactionTypeOptions() Export
+	Return GetChainLinkOptions("TransactionType, CurrentShipmentMode");
+EndFunction
+
+Function ChangeShipmentModeByTransactionTypeExecute(Options) Export
+	If Options.TransactionType = PredefinedValue("Enum.SalesTransactionTypes.RetailSales") Then
+		Return Options.CurrentShipmentMode
+	EndIf;
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region CALCULATE_DIFFERENCE
 
 Function CalculateDifferenceCountOptions() Export
@@ -2236,7 +2269,7 @@ Function CalculationsOptions() Export
 	QuantityOptions = New Structure("ItemKey, Unit, Quantity, QuantityInBaseUnit");
 	Options.Insert("QuantityOptions", QuantityOptions);
 	
-	// SpecialOffers columns: Key, Offer, Amount, Percent
+	// SpecialOffers columns: Key, Offer, Amount, Percent, Bonus, AddInfo
 	OffersOptions = New Structure();
 	OffersOptions.Insert("SpecialOffers"      , New Array());
 	OffersOptions.Insert("SpecialOffersCache" , New Array());
@@ -2291,7 +2324,7 @@ Function CalculationsExecute(Options) Export
 	Result.Insert("SpecialOffers", New Array());
 	
 	For Each OfferRow In Options.OffersOptions.SpecialOffers Do
-		NewOfferRow = New Structure("Key, Offer, Amount, Percent");
+		NewOfferRow = New Structure("Key, Offer, Amount, Percent, Bonus, AddInfo, Bonus, AddInfo");
 		FillPropertyValues(NewOfferRow, OfferRow);
 		Result.SpecialOffers.Add(NewOfferRow);
 	EndDo;

@@ -10,9 +10,10 @@ I want to check opening and closing of catalogs forms
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
-	When set True value to the constant
+	
 
 Scenario: preparation
+	When set True value to the constant
 	* Add VA extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
 		If "List" table does not contain lines Then

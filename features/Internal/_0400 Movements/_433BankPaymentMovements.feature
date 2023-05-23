@@ -540,7 +540,7 @@ Scenario: _043324 check Bank payment movements by the Register "R3050 Pos cash b
 			| 'Register  "R3050 Pos cash balances"'          | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
 			| ''                                             | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''                        | ''             | ''                                     | ''                 |
 			| ''                                             | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'                  | 'Payment type' | 'Account'                              | 'Payment terminal' |
-			| ''                                             | '24.06.2022 18:06:56' | '-50'       | '-5'         | 'Main Company' | 'Distribution department' | 'Card 01'      | 'POS account, Comission separate, TRY' | 'Test01'           |
+			| ''                                             | '24.06.2022 18:06:56' | '-50'       | '-5'         | 'Main Company' | 'Distribution department' | 'Card 01'      | 'POS account, Comission separate, TRY' | 'Payment terminal 01'           |
 	And I close all client application windows
 
 Scenario: _043325 check Bank payment movements by the Register "R2021 Customer transactions" (Return to customer by POS, with basis document)
@@ -627,7 +627,7 @@ Scenario: _043329 check Bank payment movements by the Register "R3050 Pos cash b
 			| 'Register  "R3050 Pos cash balances"'          | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
 			| ''                                             | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''                        | ''             | ''                                     | ''                 |
 			| ''                                             | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'                  | 'Payment type' | 'Account'                              | 'Payment terminal' |
-			| ''                                             | '24.06.2022 18:07:02' | '-50'       | '-5'         | 'Main Company' | 'Distribution department' | 'Card 01'      | 'POS account, Comission separate, TRY' | 'Test01'           |
+			| ''                                             | '24.06.2022 18:07:02' | '-50'       | '-5'         | 'Main Company' | 'Distribution department' | 'Card 01'      | 'POS account, Comission separate, TRY' | 'Payment terminal 01'           |
 		And I close all client application windows
 
 Scenario: _0433291 check absence Bank payment movements by the Register R5022 Expenses" (Return to customer by POS)

@@ -6,7 +6,8 @@
 Feature: check filling in retail IM documents (Retail SO - Retail SC - Retail GR)
 
 Variables:
-import "Variables.feature"
+Path = "{?(ValueIsFilled(ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path")), ПолучитьСохраненноеЗначениеИзКонтекстаСохраняемого("Path"), "#workingDir#")}"
+
 
 Background:
 	Given I launch TestClient opening script or connect the existing one
@@ -250,7 +251,7 @@ Scenario: _0155260 create Cash receipt based on retail sales order
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 	* Check filling
 		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "CashAccount" became equal to "Cash desk №1"
+		Then the form attribute named "CashAccount" became equal to "Cash desk №2"
 		Then the form attribute named "TransactionType" became equal to "Customer advance"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table became equal
@@ -500,9 +501,9 @@ Scenario: _0155269 create Retail sales receipt based on Retail SC
 		Then the form attribute named "Workstation" became equal to "Workstation 01"
 		Then the form attribute named "Branch" became equal to "Shop 01"
 		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
-		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 067,80"
-		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "372,20"
-		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "2 440,00"
+		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "1 964,41"
+		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "353,59"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "2 318,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		And I close all client application windows
 		

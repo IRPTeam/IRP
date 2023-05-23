@@ -2230,7 +2230,7 @@ Scenario: Create catalog BankTerms objects (for retail)
 
 	And I check or create catalog "BankTerms" objects:
 		| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
-		| 'e1cib/data/Catalog.BankTerms?ref=b79caa5e6e0fe71811edf8705ad4acaf' | 'False'        | 1      | 'Bank term 01'   | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.BankTerms?ref=b79caa5e6e0fe71811edf8705ad4acaf' | 'False'        | 2      | 'Bank term 01'   | ''                 | ''               | ''               |
 
 	And I refill object tabular section "PaymentTypes":
 		| 'Ref'                                                               | 'PaymentType'                                                          | 'Account'                                                              | 'Percent' |

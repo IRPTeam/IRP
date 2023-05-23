@@ -501,9 +501,9 @@ Scenario: _0155269 create Retail sales receipt based on Retail SC
 		Then the form attribute named "Workstation" became equal to "Workstation 01"
 		Then the form attribute named "Branch" became equal to "Shop 01"
 		Then the form attribute named "PaymentMethod" became equal to "Full calculation"
-		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "2 067,80"
-		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "372,20"
-		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "2 440,00"
+		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "1 964,41"
+		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "353,59"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "2 318,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		And I close all client application windows
 		

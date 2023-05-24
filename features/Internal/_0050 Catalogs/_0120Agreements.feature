@@ -254,6 +254,9 @@ Scenario: _012004 create common Partner term
 				| 'Description' |
 				| 'Main Company'       |
 		And I select current line in "List" table
+		And I input "m" text in "Multi currency movement type" field
+		And I select from "Multi currency movement type" drop-down list by "try" string
+		And I move to the next attribute		
 		And I click Select button of "Multi currency movement type" field
 		And I go to line in "List" table
 			| 'Description' | 'Type'      |

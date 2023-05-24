@@ -369,7 +369,7 @@ Procedure OutputChildrenDocuments(TreeRow)
 		|SELECT ALLOWED", "
 		|UNION ALL
 		|SELECT") + "
-		|Ref, Presentation, Posted, DeletionMark, 
+		|Ref, Date, Presentation, Posted, DeletionMark, 
 		|" 
 		+ ?(GetFromCache(KeyValue.Key, "Attributes")["DocumentAmount"], "DocumentAmount", 0) + " AS Amount				
 		|FROM Document." + KeyValue.Key + "
@@ -377,6 +377,7 @@ Procedure OutputChildrenDocuments(TreeRow)
 
 		Query.SetParameter(KeyValue.Key, KeyValue.Value.ArrayOfRefs);
 	EndDo;
+	Query.Text = Query.Text + " ORDER BY Date";
 
 	QuerySelection = Query.Execute().Select();
 

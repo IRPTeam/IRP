@@ -97,8 +97,6 @@ Scenario: _050000 preparation (Retail shipment confirmation movements)
 			| "Documents.SalesOrder.FindByNumber(314).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(315).GetObject().Write(DocumentWriteMode.Posting);" |
-		And I execute 1C:Enterprise script at server
-			| "Documents.RetailSalesReceipt.FindByNumber(314).GetObject().Write(DocumentWriteMode.UndoPosting);" |
 	* Load Retail shipment confirmation
 		When create RetailShipmentConfirmation objects
 		And I execute 1C:Enterprise script at server

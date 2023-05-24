@@ -260,6 +260,9 @@ Procedure AfterCreateNewSerial(Result, AddInfo) Export
 			ThisObject.SerialLotNumberSingle = Result;
 			CloseThisForm();
 		EndIf;
+		
+		SerialLotNumberOnChangeAtServer();
+		ShowUniqueText();
 	EndIf;
 	ThisObject.CurrentItem = Items.SerialLotNumbersQuantity;
 	

@@ -15,3 +15,13 @@ Procedure BeforeDelete(Cancel)
 		Return;
 	EndIf;
 EndProcedure
+
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	NotCheckedAttributes = Catalogs.PriceTypes.GetNotCheckedAttributes(Ref);
+	For Each Attribut In NotCheckedAttributes Do
+		AttributIndex = CheckedAttributes.Find(Attribut);
+		If Not AttributIndex = Undefined Then
+			CheckedAttributes.Delete(AttributIndex);
+		EndIf;
+	EndDo;
+EndProcedure

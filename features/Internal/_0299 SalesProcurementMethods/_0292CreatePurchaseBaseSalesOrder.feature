@@ -90,6 +90,13 @@ Scenario: _029201 create Purchase order based on Sales order
 			| 'Dress (M/White)'                            | 'Yes' | '8,000'    | 'pcs'  | '520,00' | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "7"
 		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item key'  | 'Price type' | 'Item'     | 'Quantity' | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
+			| '38/Yellow' | ''           | 'Trousers' | '5,000'    | 'pcs'  | ''           | ''      | '18%' | ''           | ''             | 'Store 02' |
+			| '38/Yellow' | ''           | 'Trousers' | '8,000'    | 'pcs'  | ''           | ''      | '18%' | ''           | ''             | 'Store 01' |
+			| '38/Black'  | ''           | 'Shirt'    | '2,000'    | 'pcs'  | ''           | ''      | '18%' | ''           | ''             | 'Store 02' |
+			| '38/Black'  | ''           | 'Shirt'    | '11,000'   | 'pcs'  | ''           | ''      | '18%' | ''           | ''             | 'Store 01' |
+			| 'M/White'   | ''           | 'Dress'    | '8,000'    | 'pcs'  | ''           | ''      | '18%' | ''           | ''             | 'Store 01' |
 	* Filling in main info
 		And I click Select button of "Partner" field
 		And I go to line in "List" table

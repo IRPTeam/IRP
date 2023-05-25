@@ -9,7 +9,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	FillSingleMode();
 
 	SerialLotNumberStatus = R().InfoMessage_018;
-	Items.DecorationLegendInfo.Title = R().InfoMessage_029;
 	SerialLotNumbersServer.SetUnique(ThisObject);
 EndProcedure
 
@@ -94,6 +93,7 @@ EndProcedure
 &AtClient
 Procedure SerialLotNumbersSerialLotNumberOnChange(Item)
 	SerialLotNumberOnChangeAtServer();
+	ShowUniqueText();
 EndProcedure
 
 &AtServer
@@ -160,6 +160,7 @@ EndProcedure
 &AtClient
 Procedure UpdateFooter()
 	SelectedCount = SerialLotNumbers.Total("Quantity");
+	ShowUniqueText();
 EndProcedure
 
 &AtClient
@@ -220,6 +221,9 @@ Procedure AddNewSerialLotNumberRow(SerialLotNumber)
 		Row = SerialLotNumbers.Add();
 		Row.SerialLotNumber = SerialLotNumber;
 		Row.Quantity = 1;
+		
+		SerialLotNumberOnChangeAtServer();
+		ShowUniqueText();
 	EndIf;
 	
 	UpdateFooter();
@@ -259,7 +263,26 @@ Procedure AfterCreateNewSerial(Result, AddInfo) Export
 			ThisObject.SerialLotNumberSingle = Result;
 			CloseThisForm();
 		EndIf;
+		
+		SerialLotNumberOnChangeAtServer();
+		ShowUniqueText();
 	EndIf;
 	ThisObject.CurrentItem = Items.SerialLotNumbersQuantity;
 	
+EndProcedure
+
+&AtClient
+Procedure SerialLotNumbersOnActivateRow(Item)
+	ShowUniqueText(); 
+EndProcedure
+
+&AtClient
+Procedure ShowUniqueText()
+	If Items.SerialLotNumbers.CurrentData = Undefined Or Not Items.SerialLotNumbers.CurrentData.isUnique Then
+		Items.DecorationLock.Visible = False;
+		Items.DecorationLegendInfo.Title = "";
+	Else
+		Items.DecorationLock.Visible = True;
+		Items.DecorationLegendInfo.Title = R().InfoMessage_029;
+	EndIf;
 EndProcedure

@@ -3474,6 +3474,8 @@ Scenario: _092062 create new serial lot number from Serial lot number form selec
 		And in the table "SerialLotNumbers" I click "Search by barcode (F7)" button
 		And I input "456789" text in the field named "Barcode"
 		And I move to the next attribute
+		When I Check the steps for Exception
+			| 'Then the form attribute named "DecorationLegendInfo" became equal to "This is unique serial and it can be only one at the document"' |
 		And in the table "SerialLotNumbers" I click "Search by barcode (F7)" button
 		And I input "456789" text in the field named "Barcode"
 		And I move to the next attribute

@@ -2,6 +2,28 @@ Procedure BeforeWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
+	
+	IsBankAccount    = Type = PredefinedValue("Enum.CashAccountTypes.Bank");
+	IsPOSAccount     = Type = PredefinedValue("Enum.CashAccountTypes.POS");		
+	IsPOSCashAccount = Type = PredefinedValue("Enum.CashAccountTypes.POSCashAccount");
+	
+	If Not IsBankAccount And Not IsPOSAccount Then
+		ThisObject.BankName = "";
+		ThisObject.Number = "";
+	EndIf;
+	If Not IsBankAccount Then
+		ThisObject.TransitAccount = Undefined;
+		ThisObject.CommissionIsSeparate = False;
+	EndIf;
+	If Not IsPOSAccount Then
+		ThisObject.ReceiptingAccount = Undefined;
+		ThisObject.Acquiring = Undefined;
+	EndIf;
+	If Not IsPOSCashAccount Then
+		ThisObject.CashAccount = Undefined;
+		ThisObject.FinancialMovementType = Undefined;
+	EndIf;
+	
 EndProcedure
 
 Procedure OnWrite(Cancel)

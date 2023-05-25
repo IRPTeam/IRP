@@ -69,6 +69,20 @@ Procedure PartnerOnChange(Object, Form, Item) Export
 	Else
 		Object.LegalName = Undefined;
 	EndIf;
+	
+	AgreementsCurrency = DocReconciliationStatementServer.GetAgreementsCurrency(
+		Object.Partner, Object.Company, Object.Date);
+	If AgreementsCurrency.Count() = 1 Then
+		Object.Currency = AgreementsCurrency[0];
+	EndIf;
+
+	If Object.BeginPeriod = Date(1,1,1) Then
+		Object.BeginPeriod = BegOfYear(CurrentDate());
+	EndIf;
+	If Object.EndPeriod = Date(1,1,1) Then
+		Object.EndPeriod = CurrentDate();
+	EndIf;
+		
 EndProcedure
 
 Function CurrencySettings(Object, Form, AddInfo = Undefined) Export

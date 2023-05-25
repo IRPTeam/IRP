@@ -76,3 +76,34 @@ EndProcedure
 Function GetCompaniesByPartner(PartnerRef) Export
 	Return Catalogs.Partners.GetCompaniesForPartner(PartnerRef);
 EndFunction
+
+Function GetAgreementsCurrency(Partner, Company, CurrentData = Undefined) Export
+	
+	If CurrentData = Undefined Then
+		CurrentData = CommonFunctionsServer.GetCurrentSessionDate();
+	EndIf;
+	
+	Query = New Query;
+	Query.Text =
+	"SELECT DISTINCT
+	|	Agreements.CurrencyMovementType.Currency AS Currency
+	|FROM
+	|	Catalog.Agreements AS Agreements
+	|WHERE
+	|	Agreements.Partner = &Partner
+	|	AND Agreements.Company = &Company
+	|	AND NOT Agreements.DeletionMark
+	|	AND (Agreements.StartUsing = DATETIME(1, 1, 1)
+	|	OR Agreements.StartUsing <= &CurrentData)
+	|	AND (Agreements.EndOfUse = DATETIME(1, 1, 1)
+	|	OR Agreements.EndOfUse >= &CurrentData)
+	|	AND (NOT Agreements.CurrencyMovementType.Currency IS NULL
+	|	AND NOT Agreements.CurrencyMovementType.Currency = VALUE(Catalog.Currencies.EmptyRef))";
+	
+	Query.SetParameter("Partner", Partner);
+	Query.SetParameter("Company", Company);
+	Query.SetParameter("CurrentData", CurrentData);
+	
+	Return Query.Execute().Unload().UnloadColumn(0);
+	
+EndFunction

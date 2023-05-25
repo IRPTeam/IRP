@@ -998,6 +998,10 @@
       <event>OnChange</event>
       <name>SerialLotNumbersOnChange</name>
     </handlers>
+    <handlers>
+      <event>OnActivateRow</event>
+      <name>SerialLotNumbersOnActivateRow</name>
+    </handlers>
     <searchStringAddition>
       <visible>true</visible>
       <enabled>true</enabled>

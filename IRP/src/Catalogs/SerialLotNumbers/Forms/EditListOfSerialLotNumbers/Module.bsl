@@ -221,6 +221,9 @@ Procedure AddNewSerialLotNumberRow(SerialLotNumber)
 		Row = SerialLotNumbers.Add();
 		Row.SerialLotNumber = SerialLotNumber;
 		Row.Quantity = 1;
+		
+		SerialLotNumberOnChangeAtServer();
+		ShowUniqueText();
 	EndIf;
 	
 	UpdateFooter();

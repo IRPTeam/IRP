@@ -2376,7 +2376,8 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Value(Enum.InventoryOriginTypes.OwnStocks) AS InventoryOrigin,
 	|	ItemList.ItemKey.Item AS Item,
 	|	ItemList.Store AS Store,
-	|	ItemList.PriceType AS PriceType,
+	| 	case when &IsPurchase then Undefined else ItemList.PriceType end AS PriceType,
+	| 	case when &IsPurchase	then 0 else ISNULL(ItemList.Price, 0) end AS Price,
 	|	ItemList.DeliveryDate AS DeliveryDate,
 	|	ItemList.DontCalculateRow AS DontCalculateRow,
 	|	ItemList.Ref.Branch AS Branch,
@@ -2410,7 +2411,6 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	VALUE(Enum.PurchaseTransactionTypes.Purchase) AS TransactionTypePurchases,
 	|	0 AS Quantity,
 	|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
-	|	ISNULL(ItemList.Price, 0) AS Price,
 	|	ISNULL(ItemList.TaxAmount, 0) AS TaxAmount,
 	|	ISNULL(ItemList.TotalAmount, 0) AS TotalAmount,
 	|	ISNULL(ItemList.NetAmount, 0) AS NetAmount,
@@ -2499,13 +2499,14 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	TablePayments.FillValues(PaymentType, "PaymentType");
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
+	DataReceiver_Is = Is(DataReceiver);
+	Query.SetParameter("IsPurchase", DataReceiver_Is.PO Or DataReceiver_Is.PI );
 	QueryResults = Query.ExecuteBatch();
 
 	TableRowIDInfo     = QueryResults[1].Unload();
 	TableItemList      = QueryResults[2].Unload();
 	TableTaxList       = QueryResults[3].Unload();
 	TableSpecialOffers = QueryResults[4].Unload();
-	//TablePayments      = QueryResults[5].Unload();
 
 	Tables = New Structure();
 	Tables.Insert("RowIDInfo"     , TableRowIDInfo);

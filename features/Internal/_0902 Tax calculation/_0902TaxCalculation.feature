@@ -1429,5 +1429,53 @@ Scenario: _090222 check tax in the RSR(without transaction type)
 		And I close all client application windows
 
 
+Scenario: _090225 check tax deactivation
+	And I close all client application windows
+	* Deactivate tax
+		Given I open hyperlink "e1cib/list/Catalog.Companies"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I move to "Tax types" tab
+		And I change "Use" checkbox in "CompanyTaxes" table
+		And I finish line editing in "CompanyTaxes" table
+		And I click "Save and close" button
+	* Check
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'         |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'   | 'Item key' |
+			| 'Dress'  | 'L/Green'      |
+		And I select current line in "List" table
+		And the field named "ItemListTotalTaxAmount" does not exist on the form
+		And I close all client application windows
+		
+		
+				
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session

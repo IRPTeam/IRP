@@ -787,6 +787,10 @@ Function Strings(Lang) Export
 	Strings.Insert("Str_Number", NStr("en = 'Number'", Lang));
 	Strings.Insert("Str_Date", NStr("en = 'Date'", Lang));
 	Strings.Insert("Str_Posted", NStr("en = 'Posted'", Lang));
+	Strings.Insert("Str_InformationRegister", NStr("en = 'Information register'", Lang));
+	Strings.Insert("Str_InformationRegisters", NStr("en = 'Information registers'", Lang));
+	Strings.Insert("Str_AccumulationRegister", NStr("en = 'Accumulation register'", Lang));
+	Strings.Insert("Str_AccumulationRegisters", NStr("en = 'Accumulation registers'", Lang));
 #EndRegion
 
 #Region AdditionalSettings

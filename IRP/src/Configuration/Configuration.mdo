@@ -506,6 +506,7 @@
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.TestConnection</httpServices>
+  <eventSubscriptions>EventSubscription.BeforeWrite_AdditionalTableControlDocument</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_AccumulationRegistersLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_CatalogsLockDataModification</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_CheckUniqueID</eventSubscriptions>
@@ -609,6 +610,7 @@
   <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
   <definedTypes>DefinedType.UseUniqueID</definedTypes>
   <definedTypes>DefinedType.AdditionalTableControlDocument</definedTypes>
+  <definedTypes>DefinedType.AdditionalTableControlDocumentObject</definedTypes>
   <definedTypes>DefinedType.typeSpecialOfferBonus</definedTypes>
   <definedTypes>DefinedType.typeSpecialOfferAddInfo</definedTypes>
   <commonCommands>CommonCommand.AddProperties</commonCommands>

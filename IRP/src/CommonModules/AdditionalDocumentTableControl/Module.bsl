@@ -5,7 +5,7 @@
 // Parameters:
 //  Document - DefinedType.AdditionalTableControlDocument -
 //  ListOfErrors - Array of String, String, Undefined - 
-//  DetailResult - Array of String -
+//  DetailResult - Boolean -
 // 
 // Returns:
 //  Array of See DetailResult
@@ -153,6 +153,33 @@ Function CheckDocumentsResult(Document, DocName)
 	
   	Return Query.ExecuteBatch();
 EndFunction
+
+#Region EventHandler
+
+// Before write additional table control document before write.
+// 
+// Parameters:
+//  Source - DefinedType.AdditionalTableControlDocument - Source
+//  Cancel - Boolean - Cancel
+//  WriteMode - DocumentWriteMode - Write mode
+//  PostingMode - DocumentPostingMode - Posting mode
+Procedure BeforeWrite_AdditionalTableControlDocumentBeforeWrite(Source, Cancel, WriteMode, PostingMode) Export
+	If WriteMode = DocumentWriteMode.Posting Then
+		Result = CheckDocument(Source, New Array);
+		If Result.Count() = 0 Then
+			Return;
+		EndIf;
+		Cancel = True;
+		
+		//@skip-check property-return-type, invocation-parameter-type-intersect
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_009, Source));
+		For Each ResultItem In Result Do
+			CommonFunctionsClientServer.ShowUsersMessage(ResultItem);
+		EndDo;
+	EndIf;
+EndProcedure
+
+#EndRegion
 
 #Region QuickFix
 

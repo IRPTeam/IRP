@@ -111,6 +111,9 @@ Scenario: _029201 create Purchase order based on Sales order
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And I activate "Price" field in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Price type'        | 'Quantity'     |
+			| 'Trousers' | '38/Yellow' | 'Vendor price, USD' | '5,000' |
 		And I select current line in "ItemList" table
 		And I input "10,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table

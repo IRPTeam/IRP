@@ -145,7 +145,8 @@ EndProcedure
 //@skip-check method-param-value-type, statement-type-change
 Procedure ChooseTypeEnd(ChosenType, AddInfo) Export
 	If TypeOf(ChosenType) = Type("ValueListItem") Then
-		Items.RuleList.CurrentData.Type = ChosenType.Value; 
+		Items.RuleList.CurrentData.Type = ChosenType.Value;
+		UpdateQueryFromClient(); 
 	EndIf;
 EndProcedure
 

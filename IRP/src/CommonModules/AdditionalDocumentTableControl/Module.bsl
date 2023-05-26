@@ -165,6 +165,10 @@ EndFunction
 //  PostingMode - DocumentPostingMode - Posting mode
 Procedure BeforeWrite_AdditionalTableControlDocumentBeforeWrite(Source, Cancel, WriteMode, PostingMode) Export
 	If WriteMode = DocumentWriteMode.Posting Then
+		If Not Constants.UseAdditionalTableControlDocument.Get() Then
+			Return;
+		EndIf;
+		
 		Result = CheckDocument(Source, New Array);
 		If Result.Count() = 0 Then
 			Return;

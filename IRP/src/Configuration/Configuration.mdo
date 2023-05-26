@@ -673,6 +673,7 @@
   <constants>Constant.UseRetailOrders</constants>
   <constants>Constant.UseSalary</constants>
   <constants>Constant.DefaultSMSProvider</constants>
+  <constants>Constant.UseAdditionalTableControlDocument</constants>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.ConstantsForm</commonForms>

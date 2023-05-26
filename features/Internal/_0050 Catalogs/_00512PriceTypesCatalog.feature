@@ -62,6 +62,7 @@ Scenario: _005028 filling in the "Price types" catalog
 		And I select current line in "List" table
 		And I input "Manual price type" text in "ENG" field
 		And I click "Save and close" button
+		And Delay 3
 		Then I check for the "PriceTypes" catalog element with the "Description_en" "Manual price type"
 				
 	# * Clean catalog

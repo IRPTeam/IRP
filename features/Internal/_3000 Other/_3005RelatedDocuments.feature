@@ -119,7 +119,7 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 				| '$$ShipmentConfirmation300521$$' |
 				| '$$SalesInvoice300521$$'         |
 		* Check unpost Sales invoice from report Related documents
-			And I go to th last line in "DocumentsTree" table
+			And I go to the last line in "DocumentsTree" table
 			And in the table "DocumentsTree" I click the button named "DocumentsTreeUnpost"
 			And the current line of "DocumentsTree" table is equal to
 				| 'Presentation'                          |

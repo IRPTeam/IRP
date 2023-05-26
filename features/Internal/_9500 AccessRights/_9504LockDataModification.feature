@@ -2592,7 +2592,10 @@ Scenario: 950450 check ignore lock modification data
 		Given Recent TestClient message contains "Check is object lock on open (catalogs):" string by template
 		Given Recent TestClient message contains 'Unit Equal to "pcs"' string by template
 		And I close all client application windows
-					
+
+		
+	
+		
 
 Scenario: 950480 check access to the Lock data modification for user with role Full access only read 
 	And I connect "SBorisova" TestClient using "SBorisova" login and "F12345" password
@@ -2635,6 +2638,27 @@ Scenario: 950490 switch off function option and check that rules does not work
 	When set True value to the constant Use lock data modification
 	And I close TestClient session
 	And I connect "Этот клиент" profile of TestClient
+
+
+Scenario: 950465 check filter in the LockDataModificationReasons
+	And I close all client application windows
+	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'	
+	And I click the button named "FormCreate"
+	And I select "Documents" exact value from the drop-down list named "TypeFilter"
+	And in the table "RuleList" I click the button named "RuleListAdd"
+	When I Check the steps for Exception
+		| 'And I select "Item keys" exact value from "Type" drop-down list in "RuleList" table' |
+	And I move to the next attribute
+	And I select "Bank receipt" exact value from "Type" drop-down list in "RuleList" table
+	And I move to the next attribute
+	And in the table "RuleList" I click the button named "RuleListAdd"
+	When I Check the steps for Exception
+		| 'And I select "Bank receipt" exact value from "Type" drop-down list in "RuleList" table' |
+	And I select "Bank payment" exact value from "Type" drop-down list in "RuleList" table
+	And I move to the next attribute
+	And I close TestClient session
+	And I connect "Этот клиент" profile of TestClient
+
 
 
 

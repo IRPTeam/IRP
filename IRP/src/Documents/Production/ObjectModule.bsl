@@ -23,6 +23,11 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	
+	If ThisObject.TransactionType <> Enums.ProductionTransactionTypes.Produce Then
+		CommonFunctionsClientServer.DeleteValueFromArray(CheckedAttributes, "BillOfMaterials");
+	EndIf;
+	
 	If ValueIsFilled(ThisObject.ProductionPlanning) And ThisObject.Date < ThisObject.ProductionPlanning.Date Then
 		Cancel = True;
 		MessageText = StrTemplate(R().MF_Error_004, ThisObject.Date, ThisObject.ProductionPlanning.Date);
@@ -96,12 +101,16 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If FillingData = Undefined Then
 		ThisObject.Finished = True;
 		ThisObject.ProductionType = Enums.ProductionTypes.Product;
+		ThisObject.TransactionType = Enums.ProductionTransactionTypes.Produce;
 		Return;
 	EndIf;
 	If TypeOf(FillingData) = Type("Structure") Then
 		If FillingData.Property("BasedOn") And FillingData.BasedOn = "ProductionPlanning" Then
+			FillingData.Insert("TransactionType", Enums.ProductionTransactionTypes.Produce);
+			
 			ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
 			
+			ThisObject.TransactionType    = FillingData.TransactionType;
 			ThisObject.ProductionPlanning = FillingData.ProductionPlanning;
 			ThisObject.Company            = FillingData.Company;
 			ThisObject.StoreProduction    = FillingData.StoreProduction;

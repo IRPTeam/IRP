@@ -183,6 +183,7 @@ EndProcedure
 // * PriceType - CatalogRef.PriceTypes -
 Function ItemPriceInfo(Parameters, AddInfo = Undefined) Export
 	PriceType = ?(Parameters.Property("RowPriceType"), Parameters.RowPriceType, Parameters.PriceType);
+	//@skip-check constructor-function-return-section
 	Return ServerReuse.ItemPriceInfo(Parameters.Period, Parameters.ItemKey, Parameters.Unit, PriceType);
 EndFunction
 
@@ -997,7 +998,7 @@ EndFunction
 // By Item and ItemKeys descriptions.
 // 
 // Parameters:
-//  ItemAndItemKeysDescriptions - See GetItemAndItemKeysDescriptions
+//  ItemAndItemKeysDescriptions - See GetItemInfo.GetItemAndItemKeysInputTable
 // 
 // Returns:
 //  ValueTable - See GetStandardItemTable
@@ -1337,6 +1338,34 @@ Function GetPackageDimensions(PackageItem) Export
 	Result.Insert("Width", 0);
 	Result.Insert("Length", 0);
 	
+	Selection = GetUnitInfo(PackageItem);
+	
+	While Selection.Next() Do
+		If Selection.Length = 0 And Selection.Width = 0 And Selection.Height = 0 And
+				Selection.Weight = 0 And Selection.Volume = 0 Then
+			Continue;
+		EndIf;
+		FillPropertyValues(Result, Selection);
+		Break;
+	EndDo;
+	
+	Return Result;
+	
+EndFunction
+
+// Get unit info.
+// 
+// Parameters:
+//  PackageItem - CatalogRef.ItemKeys - Package item
+// 
+// Returns:
+//  QueryResultSelection:
+//  * Length - Number
+//  * Width - Number
+//  * Height - Number
+//  * Weight - Number
+//  * Volume - Number
+Function GetUnitInfo(PackageItem)
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -1426,16 +1455,43 @@ Function GetPackageDimensions(PackageItem) Export
 	
 	Query.SetParameter("Ref", PackageItem);
 	Selection = Query.Execute().Select();
-	
-	While Selection.Next() Do
-		If Selection.Length = 0 And Selection.Width = 0 And Selection.Height = 0 And
-				Selection.Weight = 0 And Selection.Volume = 0 Then
-			Continue;
-		EndIf;
-		FillPropertyValues(Result, Selection);
-		Break;
-	EndDo;
-	
-	Return Result;
-	
+	Return Selection
 EndFunction
+
+#Region ItemSegment
+	
+// Is item key in item segments.
+// 
+// Parameters:
+//  ItemKey - CatalogRef.ItemKeys - Item key
+//  ItemSegments - CatalogRef.ItemSegments, Array of CatalogRef.ItemSegments - Item segment
+// 
+// Returns:
+//  Boolean
+Function isItemKeyInItemSegments(Val ItemKey, Val ItemSegments) Export
+	If TypeOf(ItemSegments) = Type("CatalogRef.ItemSegments") Then
+		Array = New Array; // Array of CatalogRef.ItemSegments
+		Array.Add(ItemSegments);
+		//@skip-check statement-type-change
+		ItemSegments = Array;
+	EndIf;
+	
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	ItemSegments.Segment,
+		|	ItemSegments.ItemKey
+		|FROM
+		|	InformationRegister.ItemSegments AS ItemSegments
+		|WHERE
+		|	ItemSegments.Segment IN (&Segments)
+		|	AND ItemSegments.ItemKey = &ItemKey";
+	
+	Query.SetParameter("ItemKey", ItemKey);
+	Query.SetParameter("Segments", ItemSegments);
+	
+	Return Query.Execute().IsEmpty();
+EndFunction
+	
+#EndRegion
+

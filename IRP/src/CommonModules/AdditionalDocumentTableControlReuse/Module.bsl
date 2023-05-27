@@ -181,13 +181,13 @@ Function ErrorItemList()
 	));
 	
 	Str.Insert("ErrorQuantityInItemListNotEqualQuantityInRowID", New Structure("Query, Fields, QueryNumber",
-		"Not ItemList.Quantity = isNull(RowIDInfo.Quantity, 0)",
+		"Not ItemList.QuantityInBaseUnit = isNull(RowIDInfo.Quantity, 0)",
 		"Quantity",
 		0
 	));
 	
 	Str.Insert("ErrorQuantityInItemListNotEqualQuantityInRowID", New Structure("Query, Fields, QueryNumber",
-		"Not Cancel AND Not ItemList.Quantity = isNull(RowIDInfo.Quantity, 0)",
+		"Not Cancel AND Not ItemList.QuantityInBaseUnit = isNull(RowIDInfo.Quantity, 0)",
 		"Quantity, Cancel",
 		0
 	));

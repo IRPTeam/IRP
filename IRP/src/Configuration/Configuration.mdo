@@ -575,6 +575,7 @@
   <functionalOptions>FunctionalOption.UseCommissionTrading</functionalOptions>
   <functionalOptions>FunctionalOption.UseRetailOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseSalary</functionalOptions>
+  <functionalOptions>FunctionalOption.UseAdditionalTableControlDocument</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>

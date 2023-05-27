@@ -5,7 +5,7 @@
 // Parameters:
 //  Document - DefinedType.AdditionalTableControlDocument -
 //  ListOfErrors - Array of String, String, Undefined - 
-//  DetailResult - Boolean -
+//  DetailResult - Array of String -
 // 
 // Returns:
 //  Array of See DetailResult
@@ -153,37 +153,6 @@ Function CheckDocumentsResult(Document, DocName)
 	
   	Return Query.ExecuteBatch();
 EndFunction
-
-#Region EventHandler
-
-// Before write additional table control document before write.
-// 
-// Parameters:
-//  Source - DefinedType.AdditionalTableControlDocument - Source
-//  Cancel - Boolean - Cancel
-//  WriteMode - DocumentWriteMode - Write mode
-//  PostingMode - DocumentPostingMode - Posting mode
-Procedure BeforeWrite_AdditionalTableControlDocumentBeforeWrite(Source, Cancel, WriteMode, PostingMode) Export
-	If WriteMode = DocumentWriteMode.Posting Then
-		If Not Constants.UseAdditionalTableControlDocument.Get() Then
-			Return;
-		EndIf;
-		
-		Result = CheckDocument(Source, New Array);
-		If Result.Count() = 0 Then
-			Return;
-		EndIf;
-		Cancel = True;
-		
-		//@skip-check property-return-type, invocation-parameter-type-intersect
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_009, Source));
-		For Each ResultItem In Result Do
-			CommonFunctionsClientServer.ShowUsersMessage(ResultItem);
-		EndDo;
-	EndIf;
-EndProcedure
-
-#EndRegion
 
 #Region QuickFix
 
@@ -485,6 +454,22 @@ EndFunction
 //  Array of String
 //@skip-check module-unused-method
 Function ErrorQuantityInSourceOfOriginsDiffQuantityInItemList(Document, RowIDList)
+	Raise "Not supported";
+	Result = New Array; // Array of String
+	Result.Add("Not supported");
+	Return Result;
+EndFunction
+
+// Error not fillen unit.
+// 
+// Parameters:
+//  Document - DocumentRefDocumentName - Document
+//  RowIDList - Array Of String - Row IDList
+// 
+// Returns:
+//  Array of String
+//@skip-check module-unused-method
+Function ErrorNotFilledUnit(Document, RowIDList)
 	Raise "Not supported";
 	Result = New Array; // Array of String
 	Result.Add("Not supported");

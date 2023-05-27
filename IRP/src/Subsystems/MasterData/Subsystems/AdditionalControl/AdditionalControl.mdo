@@ -10,5 +10,8 @@
   <content>DefinedType.AdditionalTableControlDocument</content>
   <content>CommonModule.AdditionalDocumentTableControl</content>
   <content>Report.AdditionalDocumentTablesCheck</content>
+  <content>DataProcessor.FixDocumentProblems</content>
+  <content>CommonModule.AdditionalDocumentTableControlReuse</content>
+  <content>FunctionalOption.UseAdditionalTableControlDocument</content>
   <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

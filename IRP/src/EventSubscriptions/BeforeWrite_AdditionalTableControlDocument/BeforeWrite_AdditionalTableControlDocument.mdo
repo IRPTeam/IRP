@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d17b36d9-4cd9-474b-ba5b-46b72f7efb54">
+  <name>BeforeWrite_AdditionalTableControlDocument</name>
+  <synonym>
+    <key>en</key>
+    <value>Before write additional table control document</value>
+  </synonym>
+  <source>
+    <types>DefinedType.AdditionalTableControlDocumentObject</types>
+  </source>
+  <event>BeforeWrite</event>
+  <handler>CommonModule.AdditionalDocumentTableControl.BeforeWrite_AdditionalTableControlDocumentBeforeWrite</handler>
+</mdclass:EventSubscription>

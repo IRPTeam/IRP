@@ -192,6 +192,12 @@ Function ErrorItemList()
 		0
 	));
 	
+	Str.Insert("ErrorNotFilledUnit",	New Structure("Query, Fields, QueryNumber",
+		"ItemList.Unit = VAlUE(Catalog.Units.EmptyRef)", 
+		"Unit",
+		0
+	));
+	
 	Return Str;
 EndFunction
 

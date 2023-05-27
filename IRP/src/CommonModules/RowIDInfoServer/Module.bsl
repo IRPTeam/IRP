@@ -4429,6 +4429,8 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	BasisesTable.Key,
 	|	SpecialOffers.Offer,
 	|	SpecialOffers.Amount,
+	|	SpecialOffers.Bonus,
+	|	SpecialOffers.AddInfo,
 	|	SpecialOffers.Percent
 	|FROM
 	|	Document.RetailSalesReceipt.SpecialOffers AS SpecialOffers
@@ -10698,11 +10700,11 @@ EndFunction
 #Region EmptyTables_SpecialOffers
 
 Function GetColumnNames_SpecialOffers()
-	Return "Ref, Key, Offer, Percent";
+	Return "Ref, Key, Offer, Percent, AddInfo";
 EndFunction
 
 Function GetColumnNamesSum_SpecialOffers()
-	Return "Amount";
+	Return "Amount, Bonus";
 EndFunction
 
 Function GetEmptyTable_SpecialOffers()

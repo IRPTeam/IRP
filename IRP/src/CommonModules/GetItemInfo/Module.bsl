@@ -1490,7 +1490,7 @@ Function isItemKeyInItemSegments(Val ItemKey, Val ItemSegments) Export
 	Query.SetParameter("ItemKey", ItemKey);
 	Query.SetParameter("Segments", ItemSegments);
 	
-	Return Query.Execute().IsEmpty();
+	Return Not Query.Execute().IsEmpty();
 EndFunction
 	
 #EndRegion

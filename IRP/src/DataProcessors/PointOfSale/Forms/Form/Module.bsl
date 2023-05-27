@@ -100,6 +100,13 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListTotalAmount.Enabled = ChangePrice;
 EndProcedure
 
+&AtClient
+Procedure PageButtonsOnCurrentPageChange(Item, CurrentPage)
+	If CurrentPage = Items.OffersPage Then
+		UpdateOffersPreviewID();
+	EndIf;
+EndProcedure
+
 #Region AGREEMENT
 
 &AtClient
@@ -276,7 +283,11 @@ EndProcedure
 Procedure ItemListOnActivateRow(Item)
 	UpdateHTMLPictures();
 	CurrentData = Items.ItemList.CurrentData;
-	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.ItemKey));
+	If Not CurrentData = Undefined Then
+		BuildDetailedInformation(CurrentData.ItemKey);
+	EndIf;
+	
+	UpdateOffersPreviewID();
 EndProcedure
 
 #EndRegion
@@ -763,6 +774,19 @@ EndProcedure
 
 #EndRegion
 
+&AtClient
+Procedure UpdateOffersPreview(Command)
+	UpdateOffersPreviewID();
+EndProcedure
+
+&AtClient
+Procedure UpdateOffersPreviewID()
+	CurrentData = Items.ItemList.CurrentData;
+	If Not CurrentData = Undefined Then
+		CurrentItemListID = CurrentData.Key;
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 #EndRegion
@@ -1204,7 +1228,7 @@ EndProcedure
 
 &AtClient
 Procedure SetShowItems()
-	Items.PageButtons.CurrentPage = Items.GroupItems;
+	Items.PageButtons.CurrentPage = Items.ItemsPage;
 EndProcedure
 
 &AtClient
@@ -1640,6 +1664,8 @@ Function GetRetailBasisData()
 			ItemStructure.Insert("Offer", TableItem.Offer);
 			ItemStructure.Insert("Amount", TableItem.Amount);
 			ItemStructure.Insert("Percent", TableItem.Percent);
+			ItemStructure.Insert("Bonus", TableItem.Bonus);
+			ItemStructure.Insert("AddInfo", TableItem.AddInfo);
 			SpecialOffersArray.Add(ItemStructure);
 		EndDo;
 		

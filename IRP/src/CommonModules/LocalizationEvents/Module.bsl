@@ -28,7 +28,9 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	Settings.Insert("MetadataObject", MetadataObject);
 	Settings.Insert("Filter", "");
 	// enable search by code for all
-	Settings.Insert("UseSearchByCode", True);
+	Try
+		Settings.Insert("UseSearchByCode", MetadataObject.CodeLength > 0);
+	Except EndTry;
 	
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
 

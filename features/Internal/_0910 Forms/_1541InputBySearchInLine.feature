@@ -2002,3 +2002,97 @@ Scenario: _0154093 check company, expense and revenue type input by search in li
 		Then the form attribute named "RevenueType" became equal to "Revenue"
 		Then the form attribute named "RevenueProfitLossCenter" became equal to "Front office"
 		And I close all client application windows
+
+
+Scenario: _0154094 check item and item key input by search in line in a document Retail Shipment confirmation (in english)
+	And I close all client application windows
+	* Open a creation form Retail Shipment confirmation
+		Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"
+		And I click the button named "FormCreate"
+	* Item and item key input by search in line
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
+		| 'Item'     | 'Item key'  |
+		| 'Boots'    | '36/18SD' |
+		And I click "Add" button
+		And I input "J22001" text in "Item" field of "ItemList" table		
+		And drop-down list named "ItemListItem" is equal to:
+		| (J22001) Jacket J22001 |
+		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Jacket J22001'    |
+		And I close all client application windows
+
+
+Scenario: _0154095 check partner, legal name, company, store input by search in line in a document Retail Shipment confirmation (in english)
+	And I close all client application windows
+	* Open a creation form Retail Shipment confirmation
+		Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"
+		And I click the button named "FormCreate"
+		And I select "Courier delivery" exact value from "Transaction type" drop-down list
+	* Retail customer input by search in line
+		And I select from "Retail customer" drop-down list by "test" string
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Store input by search in line
+		And I select from the drop-down list named "Store" by "03" string
+	* Courier input by search in line
+		And I select from "Courier" drop-down list by "Lunch" string
+	* Check entered values
+		Then the form attribute named "Courier" became equal to "Lunch"
+		Then the form attribute named "RetailCustomer" became equal to "Test01 Test01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
+	And I close all client application windows
+
+
+Scenario: _0154096 check item and item key input by search in line in a document Retail goods receipt (in english)
+	And I close all client application windows
+	* Open a creation form Retail goods receipt
+		Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"
+		And I click the button named "FormCreate"
+	* Item and item key input by search in line
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
+		| 'Item'     | 'Item key'  |
+		| 'Boots'    | '36/18SD' |
+		And I click "Add" button
+		And I input "J22001" text in "Item" field of "ItemList" table		
+		And drop-down list named "ItemListItem" is equal to:
+		| (J22001) Jacket J22001 |
+		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Jacket J22001'    |
+		And I close all client application windows
+
+
+Scenario: _0154095 check partner, legal name, company, store input by search in line in a document Retail Goods Receipt (in english)
+	And I close all client application windows
+	* Open a creation form Retail Goods Receipt
+		Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"
+		And I click the button named "FormCreate"
+		And I select "Courier delivery" exact value from "Transaction type" drop-down list
+	* Retail customer input by search in line
+		And I select from "Retail customer" drop-down list by "test" string
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Store input by search in line
+		And I select from the drop-down list named "Store" by "03" string
+	* Courier input by search in line
+		And I select from "Courier" drop-down list by "Lunch" string
+	* Check entered values
+		Then the form attribute named "Courier" became equal to "Lunch"
+		Then the form attribute named "RetailCustomer" became equal to "Test01 Test01"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
+	And I close all client application windows

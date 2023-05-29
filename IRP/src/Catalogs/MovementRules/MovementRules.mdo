@@ -294,6 +294,20 @@
     <value>30</value>
    </code>
   </items>
+  <items id="62be69af-7e37-45e6-b497-7e89709f053b">
+   <name>RSR_RSC</name>
+   <description>RSR&amp;RSC</description>
+   <code xsi:type="core:StringValue">
+    <value>31</value>
+   </code>
+  </items>
+  <items id="7fd038be-9c40-4f16-89e1-1e49ed3093d2">
+   <name>RSR_RGR</name>
+   <description>RSR&amp;RGR</description>
+   <code xsi:type="core:StringValue">
+    <value>32</value>
+   </code>
+  </items>
  </predefined>
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>

@@ -3027,6 +3027,76 @@
       <placementArea>UserCmds</placementArea>
       <representationInContextMenu>Auto</representationInContextMenu>
      </items>
+     <items xsi:type="form:FormGroup">
+      <name>LinkedDocuments</name>
+      <id>1180</id>
+      <items xsi:type="form:Button">
+       <name>ItemListLinkedDocuments_ShipmentConfirmations</name>
+       <id>1182</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <extendedTooltip>
+        <name>ItemListLinkedDocuments_ShipmentConfirmationsExtendedTooltip</name>
+        <id>1183</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+         <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+       </extendedTooltip>
+       <commandName>Form.Command.LinkedDocuments_ShipmentConfirmations</commandName>
+       <representation>Auto</representation>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <placementArea>UserCmds</placementArea>
+       <representationInContextMenu>Auto</representationInContextMenu>
+      </items>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <title>
+       <key>en</key>
+       <value>Linked documents</value>
+      </title>
+      <title>
+       <key>ru</key>
+       <value>Залинкованные документы</value>
+      </title>
+      <title>
+       <key>tr</key>
+       <value>Bağlı evraklar</value>
+      </title>
+      <extendedTooltip>
+       <name>LinkedDocumentsExtendedTooltip</name>
+       <id>1181</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <type>Popup</type>
+      <extInfo xsi:type="form:PopupGroupExtInfo">
+       <representation>Auto</representation>
+      </extInfo>
+     </items>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -8807,6 +8877,31 @@
    </handler>
   </action>
   <representation>Picture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>LinkedDocuments_ShipmentConfirmations</name>
+  <title>
+   <key>en</key>
+   <value>Shipment confirmations</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Расходные товарные накладные</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Sevk irsaliyeleri</value>
+  </title>
+  <id>13</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>LinkedDocuments_ShipmentConfirmations</name>
+   </handler>
+  </action>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <commandInterface>

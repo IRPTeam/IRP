@@ -108,7 +108,7 @@ Scenario: _020110 load data in the SI
 		And I set checkbox "Detail"
 		And I click "Next" button
 		Then the form attribute named "LoadType" became equal to "Barcode"
-		Then the form attribute named "ShowOrHideImage" became equal to "No"
+		Then the form attribute named "ShowImage" became equal to "No"
 		Then the form attribute named "Field_Price" became equal to "Yes"
 		Then the form attribute named "Field_OffersAmount" became equal to "No"
 		Then the form attribute named "Field_TaxAmount" became equal to "No"
@@ -625,7 +625,7 @@ Scenario: _020129 load data in the Sales report to consignor
 		And I set checkbox "Consignor price"
 		And I set checkbox "Price"
 		And I set checkbox "Total amount"
-		Then the form attribute named "ShowOrHideImage" became equal to "No"
+		Then the form attribute named "ShowImage" became equal to "No"
 		Then the form attribute named "Field_ConsignorPrice" became equal to "Yes"
 		Then the form attribute named "Field_TradeAgentFeePercent" became equal to "No"
 		Then the form attribute named "Field_TradeAgentFeeAmount" became equal to "No"

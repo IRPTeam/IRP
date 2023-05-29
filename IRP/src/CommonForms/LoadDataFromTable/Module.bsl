@@ -419,7 +419,7 @@ Procedure FillResultTable()
 		AreaToFill.Area("R1").BackColor = ?(FillColor, WebColors.Azure, WebColors.White);
 		FillColor = Not FillColor;
 		
-		If Not Row.Image.IsEmpty() AND ShowOrHideImage Then
+		If Not Row.Image.IsEmpty() AND ShowImage Then
 			PictureData = PictureMap.Get(Row.Image);
 			If PictureData = Undefined Then
 				PictureFromRef = Row.Image.Preview.Get(); // BinaryData

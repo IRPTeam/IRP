@@ -67,7 +67,6 @@ Scenario: _042900 preparation (Opening entry)
 		When Create catalog Items objects (serial lot numbers)
 		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
-		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create information register TaxSettings records (Concignor 1)
 		When update ItemKeys

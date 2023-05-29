@@ -61,6 +61,8 @@ Function Strings(Lang) Export
 		|ru='Строка: %1. Количество в источниках происхождения отличается от количества в серийных номерах'", Lang));
 	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInItemList", NStr("en='Row: %1. Quantity in source of origins diff quantity in item list';
 		|ru='Строка: %1. Количество в источниках происхождения отличается от количества в товарах'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledUnit", NStr("en='Row: %1. Not filled Unit';
+		|ru='Строка: %1. Не заполненна единица измерений'", Lang));
 	
 #EndRegion
 
@@ -1468,6 +1470,16 @@ Function Strings(Lang) Export
 	Strings.Insert("Str_Posted", NStr("en='Posted';
 		|ru='Провести';
 		|tr='Kaydedildi'", Lang));
+	Strings.Insert("Str_InformationRegister", NStr("en='Information register';
+		|ru='Регистр сведений';
+		|tr='Bilgi kayıt tablosu'", Lang));
+	Strings.Insert("Str_InformationRegisters", NStr("en='Information registers';
+		|ru='Регистры сведений'", Lang));
+	Strings.Insert("Str_AccumulationRegister", NStr("en='Accumulation register';
+		|ru='Регистр накопления';
+		|tr='Birikim kayıt tablosu'", Lang));
+	Strings.Insert("Str_AccumulationRegisters", NStr("en='Accumulation registers';
+		|ru='Регистры накопления'", Lang));
 #EndRegion
 
 #Region AdditionalSettings

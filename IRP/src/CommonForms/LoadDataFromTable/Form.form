@@ -153,7 +153,7 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
-     <name>ShowOrHideImage</name>
+     <name>ShowImage</name>
      <id>65</id>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -161,11 +161,11 @@
       <common>true</common>
      </userVisible>
      <dataPath xsi:type="form:DataPath">
-      <segments>ShowOrHideImage</segments>
+      <segments>ShowImage</segments>
      </dataPath>
      <titleLocation>Right</titleLocation>
      <extendedTooltip>
-      <name>ShowOrHideImageExtendedTooltip</name>
+      <name>ShowImageExtendedTooltip</name>
       <id>67</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -180,7 +180,7 @@
       </extInfo>
      </extendedTooltip>
      <contextMenu>
-      <name>ShowOrHideImageContextMenu</name>
+      <name>ShowImageContextMenu</name>
       <id>66</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1136,18 +1136,14 @@
   </edit>
  </attributes>
  <attributes>
-  <name>ShowOrHideImage</name>
+  <name>ShowImage</name>
   <title>
    <key>en</key>
-   <value>Show or hide image</value>
+   <value>Show image</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Показать или скрыть изображение</value>
-  </title>
-  <title>
-   <key>tr</key>
-   <value>Resim göster veya gizle</value>
+   <value>Показать картинки</value>
   </title>
   <id>8</id>
   <valueType>

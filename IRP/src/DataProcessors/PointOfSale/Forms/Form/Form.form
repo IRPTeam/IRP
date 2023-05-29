@@ -3569,7 +3569,7 @@
        </extInfo>
       </items>
       <items xsi:type="form:FormGroup">
-       <name>GroupItems</name>
+       <name>ItemsPage</name>
        <id>1050</id>
        <items xsi:type="form:Table">
         <name>ItemsPickup</name>
@@ -3988,7 +3988,7 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Номенклатура</value>
+        <value>Элементы формы</value>
        </title>
        <title>
         <key>tr</key>
@@ -3997,7 +3997,7 @@
        <horizontalStretch>true</horizontalStretch>
        <verticalStretch>true</verticalStretch>
        <extendedTooltip>
-        <name>GroupItemsExtendedTooltip</name>
+        <name>ItemsPageExtendedTooltip</name>
         <id>1051</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -4286,6 +4286,653 @@
         <showTitle>true</showTitle>
        </extInfo>
       </items>
+      <items xsi:type="form:FormGroup">
+       <name>OffersPage</name>
+       <id>1275</id>
+       <items xsi:type="form:Table">
+        <name>SpecialOffers</name>
+        <id>1277</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <dataPath xsi:type="form:DataPath">
+         <segments>Object.SpecialOffers</segments>
+        </dataPath>
+        <titleLocation>None</titleLocation>
+        <excludedCommands>Copy</excludedCommands>
+        <excludedCommands>MoveUp</excludedCommands>
+        <excludedCommands>FindByCurrentValue</excludedCommands>
+        <excludedCommands>EndEdit</excludedCommands>
+        <excludedCommands>SearchEverywhere</excludedCommands>
+        <excludedCommands>Add</excludedCommands>
+        <excludedCommands>SortListAsc</excludedCommands>
+        <excludedCommands>MoveDown</excludedCommands>
+        <excludedCommands>OutputList</excludedCommands>
+        <excludedCommands>ShowMultipleSelection</excludedCommands>
+        <excludedCommands>CancelSearch</excludedCommands>
+        <excludedCommands>SortListDesc</excludedCommands>
+        <excludedCommands>Delete</excludedCommands>
+        <excludedCommands>ShowRowRearrangement</excludedCommands>
+        <excludedCommands>CopyToClipboard</excludedCommands>
+        <excludedCommands>Find</excludedCommands>
+        <excludedCommands>Change</excludedCommands>
+        <excludedCommands>SelectAll</excludedCommands>
+        <items xsi:type="form:FormField">
+         <name>SpecialOffersLineNumber</name>
+         <id>1290</id>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <dataPath xsi:type="form:DataPath">
+          <segments>Object.SpecialOffers.LineNumber</segments>
+         </dataPath>
+         <extendedTooltip>
+          <name>SpecialOffersLineNumberExtendedTooltip</name>
+          <id>1292</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+           <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+           <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+         </extendedTooltip>
+         <contextMenu>
+          <name>SpecialOffersLineNumberContextMenu</name>
+          <id>1291</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+           <common>true</common>
+          </userVisible>
+          <autoFill>true</autoFill>
+         </contextMenu>
+         <type>InputField</type>
+         <editMode>Enter</editMode>
+         <showInHeader>true</showInHeader>
+         <headerHorizontalAlign>Left</headerHorizontalAlign>
+         <showInFooter>true</showInFooter>
+         <extInfo xsi:type="form:InputFieldExtInfo">
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <wrap>true</wrap>
+          <chooseType>true</chooseType>
+          <typeDomainEnabled>true</typeDomainEnabled>
+          <textEdit>true</textEdit>
+         </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+         <name>SpecialOffersOffer</name>
+         <id>1296</id>
+         <visible>true</visible>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <dataPath xsi:type="form:DataPath">
+          <segments>Object.SpecialOffers.Offer</segments>
+         </dataPath>
+         <extendedTooltip>
+          <name>SpecialOffersOfferExtendedTooltip</name>
+          <id>1298</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+           <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+           <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+         </extendedTooltip>
+         <contextMenu>
+          <name>SpecialOffersOfferContextMenu</name>
+          <id>1297</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+           <common>true</common>
+          </userVisible>
+          <autoFill>true</autoFill>
+         </contextMenu>
+         <type>InputField</type>
+         <editMode>Enter</editMode>
+         <showInHeader>true</showInHeader>
+         <headerHorizontalAlign>Left</headerHorizontalAlign>
+         <showInFooter>true</showInFooter>
+         <extInfo xsi:type="form:InputFieldExtInfo">
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <wrap>true</wrap>
+          <chooseType>true</chooseType>
+          <typeDomainEnabled>true</typeDomainEnabled>
+          <textEdit>true</textEdit>
+         </extInfo>
+        </items>
+        <items xsi:type="form:FormGroup">
+         <name>SpecialOffersGroupOffer</name>
+         <id>1311</id>
+         <items xsi:type="form:FormField">
+          <name>SpecialOffersAmount</name>
+          <id>1299</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+           <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+           <segments>Object.SpecialOffers.Amount</segments>
+          </dataPath>
+          <extendedTooltip>
+           <name>SpecialOffersAmountExtendedTooltip</name>
+           <id>1301</id>
+           <visible>true</visible>
+           <enabled>true</enabled>
+           <userVisible>
+            <common>true</common>
+           </userVisible>
+           <type>Label</type>
+           <autoMaxWidth>true</autoMaxWidth>
+           <autoMaxHeight>true</autoMaxHeight>
+           <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+           </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+           <name>SpecialOffersAmountContextMenu</name>
+           <id>1300</id>
+           <visible>true</visible>
+           <enabled>true</enabled>
+           <userVisible>
+            <common>true</common>
+           </userVisible>
+           <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+           <autoMaxWidth>true</autoMaxWidth>
+           <autoMaxHeight>true</autoMaxHeight>
+           <wrap>true</wrap>
+           <chooseType>true</chooseType>
+           <typeDomainEnabled>true</typeDomainEnabled>
+           <textEdit>true</textEdit>
+          </extInfo>
+         </items>
+         <items xsi:type="form:FormField">
+          <name>SpecialOffersPercent</name>
+          <id>1302</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+           <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+           <segments>Object.SpecialOffers.Percent</segments>
+          </dataPath>
+          <extendedTooltip>
+           <name>SpecialOffersPercentExtendedTooltip</name>
+           <id>1304</id>
+           <visible>true</visible>
+           <enabled>true</enabled>
+           <userVisible>
+            <common>true</common>
+           </userVisible>
+           <type>Label</type>
+           <autoMaxWidth>true</autoMaxWidth>
+           <autoMaxHeight>true</autoMaxHeight>
+           <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+           </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+           <name>SpecialOffersPercentContextMenu</name>
+           <id>1303</id>
+           <visible>true</visible>
+           <enabled>true</enabled>
+           <userVisible>
+            <common>true</common>
+           </userVisible>
+           <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+           <autoMaxWidth>true</autoMaxWidth>
+           <autoMaxHeight>true</autoMaxHeight>
+           <wrap>true</wrap>
+           <chooseType>true</chooseType>
+           <typeDomainEnabled>true</typeDomainEnabled>
+           <textEdit>true</textEdit>
+          </extInfo>
+         </items>
+         <visible>true</visible>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <title>
+          <key>en</key>
+          <value>Special offers group Offer</value>
+         </title>
+         <title>
+          <key>ru</key>
+          <value>Группа специальные предложения предложение</value>
+         </title>
+         <extendedTooltip>
+          <name>SpecialOffersGroupOfferExtendedTooltip</name>
+          <id>1312</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+           <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+           <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+         </extendedTooltip>
+         <type>ColumnGroup</type>
+         <extInfo xsi:type="form:ColumnGroupExtInfo">
+          <group>Vertical</group>
+          <showTitle>true</showTitle>
+         </extInfo>
+        </items>
+        <items xsi:type="form:FormGroup">
+         <name>SpecialOffersGroupBonus</name>
+         <id>1313</id>
+         <items xsi:type="form:FormField">
+          <name>SpecialOffersBonus</name>
+          <id>1305</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+           <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+           <segments>Object.SpecialOffers.Bonus</segments>
+          </dataPath>
+          <extendedTooltip>
+           <name>SpecialOffersBonusExtendedTooltip</name>
+           <id>1307</id>
+           <visible>true</visible>
+           <enabled>true</enabled>
+           <userVisible>
+            <common>true</common>
+           </userVisible>
+           <type>Label</type>
+           <autoMaxWidth>true</autoMaxWidth>
+           <autoMaxHeight>true</autoMaxHeight>
+           <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+           </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+           <name>SpecialOffersBonusContextMenu</name>
+           <id>1306</id>
+           <visible>true</visible>
+           <enabled>true</enabled>
+           <userVisible>
+            <common>true</common>
+           </userVisible>
+           <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+           <autoMaxWidth>true</autoMaxWidth>
+           <autoMaxHeight>true</autoMaxHeight>
+           <wrap>true</wrap>
+           <chooseType>true</chooseType>
+           <typeDomainEnabled>true</typeDomainEnabled>
+           <textEdit>true</textEdit>
+          </extInfo>
+         </items>
+         <items xsi:type="form:FormField">
+          <name>SpecialOffersAddInfo</name>
+          <id>1308</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+           <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+           <segments>Object.SpecialOffers.AddInfo</segments>
+          </dataPath>
+          <extendedTooltip>
+           <name>SpecialOffersAddInfoExtendedTooltip</name>
+           <id>1310</id>
+           <visible>true</visible>
+           <enabled>true</enabled>
+           <userVisible>
+            <common>true</common>
+           </userVisible>
+           <type>Label</type>
+           <autoMaxWidth>true</autoMaxWidth>
+           <autoMaxHeight>true</autoMaxHeight>
+           <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+           </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+           <name>SpecialOffersAddInfoContextMenu</name>
+           <id>1309</id>
+           <visible>true</visible>
+           <enabled>true</enabled>
+           <userVisible>
+            <common>true</common>
+           </userVisible>
+           <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+           <autoMaxWidth>true</autoMaxWidth>
+           <autoMaxHeight>true</autoMaxHeight>
+           <wrap>true</wrap>
+           <chooseType>true</chooseType>
+           <typeDomainEnabled>true</typeDomainEnabled>
+           <textEdit>true</textEdit>
+          </extInfo>
+         </items>
+         <visible>true</visible>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <title>
+          <key>en</key>
+          <value>Special offers group Bonus</value>
+         </title>
+         <title>
+          <key>ru</key>
+          <value>Специальные предложения Бонус</value>
+         </title>
+         <extendedTooltip>
+          <name>SpecialOffersGroupBonusExtendedTooltip</name>
+          <id>1314</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+           <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+           <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+         </extendedTooltip>
+         <type>ColumnGroup</type>
+         <extInfo xsi:type="form:ColumnGroupExtInfo">
+          <group>Vertical</group>
+          <showTitle>true</showTitle>
+         </extInfo>
+        </items>
+        <autoCommandBar>
+         <name>SpecialOffersCommandBar</name>
+         <id>1278</id>
+         <items xsi:type="form:Button">
+          <name>SpecialOffersUpdateOffersPreview</name>
+          <id>1315</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+           <common>true</common>
+          </userVisible>
+          <extendedTooltip>
+           <name>SpecialOffersUpdateOffersPreviewExtendedTooltip</name>
+           <id>1316</id>
+           <visible>true</visible>
+           <enabled>true</enabled>
+           <userVisible>
+            <common>true</common>
+           </userVisible>
+           <type>Label</type>
+           <autoMaxWidth>true</autoMaxWidth>
+           <autoMaxHeight>true</autoMaxHeight>
+           <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+           </extInfo>
+          </extendedTooltip>
+          <type>CommandBarHyperlink</type>
+          <commandName>Form.Command.UpdateOffersPreview</commandName>
+          <representation>Auto</representation>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <placementArea>UserCmds</placementArea>
+          <representationInContextMenu>Auto</representationInContextMenu>
+         </items>
+         <visible>true</visible>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <horizontalAlign>Left</horizontalAlign>
+         <autoFill>true</autoFill>
+        </autoCommandBar>
+        <searchStringAddition>
+         <visible>true</visible>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <name>SpecialOffersSearchString</name>
+         <id>1281</id>
+         <extendedTooltip>
+          <name>SpecialOffersSearchStringExtendedTooltip</name>
+          <id>1283</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+           <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+           <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+         </extendedTooltip>
+         <contextMenu>
+          <name>SpecialOffersSearchStringContextMenu</name>
+          <id>1282</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+           <common>true</common>
+          </userVisible>
+          <autoFill>true</autoFill>
+         </contextMenu>
+         <extInfo xsi:type="form:SearchStringAdditionExtInfo">
+          <autoMaxWidth>true</autoMaxWidth>
+         </extInfo>
+        </searchStringAddition>
+        <viewStatusAddition>
+         <visible>true</visible>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <name>SpecialOffersViewStatus</name>
+         <id>1287</id>
+         <extendedTooltip>
+          <name>SpecialOffersViewStatusExtendedTooltip</name>
+          <id>1289</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+           <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+           <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+         </extendedTooltip>
+         <contextMenu>
+          <name>SpecialOffersViewStatusContextMenu</name>
+          <id>1288</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+           <common>true</common>
+          </userVisible>
+          <autoFill>true</autoFill>
+         </contextMenu>
+         <type>ViewStatusAddition</type>
+         <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
+          <autoMaxWidth>true</autoMaxWidth>
+         </extInfo>
+        </viewStatusAddition>
+        <searchControlAddition>
+         <visible>true</visible>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <name>SpecialOffersSearchControl</name>
+         <id>1284</id>
+         <extendedTooltip>
+          <name>SpecialOffersSearchControlExtendedTooltip</name>
+          <id>1286</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+           <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+           <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+         </extendedTooltip>
+         <contextMenu>
+          <name>SpecialOffersSearchControlContextMenu</name>
+          <id>1285</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+           <common>true</common>
+          </userVisible>
+          <autoFill>true</autoFill>
+         </contextMenu>
+         <type>SearchControlAddition</type>
+         <extInfo xsi:type="form:SearchControlAdditionExtInfo">
+          <autoMaxWidth>true</autoMaxWidth>
+         </extInfo>
+        </searchControlAddition>
+        <extendedTooltip>
+         <name>SpecialOffersExtendedTooltip</name>
+         <id>1280</id>
+         <visible>true</visible>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <type>Label</type>
+         <autoMaxWidth>true</autoMaxWidth>
+         <autoMaxHeight>true</autoMaxHeight>
+         <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+         </extInfo>
+        </extendedTooltip>
+        <contextMenu>
+         <name>SpecialOffersContextMenu</name>
+         <id>1279</id>
+         <visible>true</visible>
+         <enabled>true</enabled>
+         <userVisible>
+          <common>true</common>
+         </userVisible>
+         <autoFill>true</autoFill>
+        </contextMenu>
+        <readOnly>true</readOnly>
+        <changeRowSet>true</changeRowSet>
+        <changeRowOrder>true</changeRowOrder>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <autoMaxRowsCount>true</autoMaxRowsCount>
+        <selectionMode>MultiRow</selectionMode>
+        <header>true</header>
+        <headerHeight>1</headerHeight>
+        <footerHeight>1</footerHeight>
+        <horizontalScrollBar>AutoUse</horizontalScrollBar>
+        <verticalScrollBar>AutoUse</verticalScrollBar>
+        <horizontalLines>true</horizontalLines>
+        <verticalLines>true</verticalLines>
+        <searchOnInput>Auto</searchOnInput>
+        <initialListView>Auto</initialListView>
+        <horizontalStretch>true</horizontalStretch>
+        <verticalStretch>true</verticalStretch>
+        <fileDragMode>AsFileRef</fileDragMode>
+       </items>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <title>
+        <key>en</key>
+        <value>Offers</value>
+       </title>
+       <title>
+        <key>ru</key>
+        <value>Специальные предложения</value>
+       </title>
+       <title>
+        <key>tr</key>
+        <value>Iskonto</value>
+       </title>
+       <extendedTooltip>
+        <name>OffersPageExtendedTooltip</name>
+        <id>1276</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+         <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+       </extendedTooltip>
+       <type>Page</type>
+       <extInfo xsi:type="form:PageGroupExtInfo">
+        <picture xsi:type="core:PictureRef">
+         <picture>CommonPicture.SpecialOffer</picture>
+        </picture>
+        <group>Vertical</group>
+        <showTitle>true</showTitle>
+       </extInfo>
+      </items>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -4321,6 +4968,10 @@
       </extendedTooltip>
       <type>Pages</type>
       <extInfo xsi:type="form:PagesGroupExtInfo">
+       <handlers>
+        <event>OnCurrentPageChange</event>
+        <name>PageButtonsOnCurrentPageChange</name>
+       </handlers>
        <pagesRepresentation>TabsOnTop</pagesRepresentation>
        <currentRowUse>Auto</currentRowUse>
       </extInfo>
@@ -7315,6 +7966,52 @@ End</presentationExpression>
     <common>true</common>
    </edit>
   </columns>
+  <columns>
+   <name>Bonus</name>
+   <title>
+    <key>en</key>
+    <value>Bonus</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Бонус</value>
+   </title>
+   <id>211</id>
+   <valueType>
+    <types>DefinedType.typeSpecialOfferBonus</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>AddInfo</name>
+   <title>
+    <key>en</key>
+    <value>Add info</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Дополнительная информация</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Ek bilgi</value>
+   </title>
+   <id>212</id>
+   <valueType>
+    <types>DefinedType.typeSpecialOfferAddInfo</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
  </attributes>
  <attributes>
   <name>UserAdmin</name>
@@ -7393,6 +8090,28 @@ End</presentationExpression>
   <id>206</id>
   <valueType>
    <types>Boolean</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>CurrentItemListID</name>
+  <title>
+   <key>en</key>
+   <value>Current item list ID</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Текущий элемент список ID</value>
+  </title>
+  <id>210</id>
+  <valueType>
+   <types>String</types>
+   <stringQualifiers/>
   </valueType>
   <view>
    <common>true</common>
@@ -8215,6 +8934,35 @@ elemanı seç</value>
     <name>OpenPickupItems</name>
    </handler>
   </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>UpdateOffersPreview</name>
+  <title>
+   <key>en</key>
+   <value>Update</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Изменение</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Update</value>
+  </title>
+  <id>35</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.Reread</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>UpdateOffersPreview</name>
+   </handler>
+  </action>
+  <representation>TextPicture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <commandInterface>

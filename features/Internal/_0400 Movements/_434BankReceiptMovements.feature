@@ -639,7 +639,7 @@ Scenario: _0434284 check Bank receipt movements by the Register "R3050 Pos cash 
 			| 'Register  "R3050 Pos cash balances"'          | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
 			| ''                                             | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''                        | ''             | ''                                     | ''                 |
 			| ''                                             | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'                  | 'Payment type' | 'Account'                              | 'Payment terminal' |
-			| ''                                             | '23.06.2022 19:41:15' | '100'       | '10'         | 'Main Company' | 'Distribution department' | 'Card 01'      | 'POS account, Comission separate, TRY' | 'Test01'           |
+			| ''                                             | '23.06.2022 19:41:15' | '100'       | '10'         | 'Main Company' | 'Distribution department' | 'Card 01'      | 'POS account, Comission separate, TRY' | 'Payment terminal 01'           |
 		And I close all client application windows
 
 
@@ -730,7 +730,7 @@ Scenario: _0434289 check Bank receipt movements by the Register "R3050 Pos cash 
 			| 'Register  "R3050 Pos cash balances"'          | ''                    | ''          | ''           | ''             | ''                        | ''             | ''                                     | ''                 |
 			| ''                                             | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''                        | ''             | ''                                     | ''                 |
 			| ''                                             | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'                  | 'Payment type' | 'Account'                              | 'Payment terminal' |
-			| ''                                             | '23.06.2022 17:50:08' | '100'       | '10'         | 'Main Company' | 'Distribution department' | 'Card 01'      | 'POS account, Comission separate, TRY' | 'Test01'           |
+			| ''                                             | '23.06.2022 17:50:08' | '100'       | '10'         | 'Main Company' | 'Distribution department' | 'Card 01'      | 'POS account, Comission separate, TRY' | 'Payment terminal 01'           |
 		And I close all client application windows
 		
 Scenario: _0434290 check Bank receipt movements by the Register "R5010 Reconciliation statement" (Payment from customer by POS, with bases)

@@ -111,6 +111,10 @@
  <content>Document.SalesReportToConsignor.TabularSection.ItemList.Attribute.SalesInvoice</content>
  <content>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.SalesOrder</content>
  <content>Document.EmployeeCashAdvance.TabularSection.PaymentList.Attribute.PlaningTransactionBasis</content>
+ <content>Document.RetailShipmentConfirmation.TabularSection.ItemList.Attribute.SalesOrder</content>
+ <content>Document.RetailGoodsReceipt.TabularSection.ItemList.Attribute.SalesOrder</content>
+ <content>Document.RetailSalesReceipt.TabularSection.ShipmentConfirmations.Attribute.ShipmentConfirmation</content>
+ <content>Document.RetailGoodsReceipt.TabularSection.ShipmentConfirmations.Attribute.ShipmentConfirmation</content>
  <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
   <name>RelatedDocuments</name>
   <synonym>
@@ -181,6 +185,8 @@
    <types>DocumentRef.CashExpense</types>
    <types>DocumentRef.EmployeeCashAdvance</types>
    <types>DocumentRef.ProductionCostsAllocation</types>
+   <types>DocumentRef.RetailGoodsReceipt</types>
+   <types>DocumentRef.RetailShipmentConfirmation</types>
   </commandParameterType>
   <representation>Auto</representation>
  </commands>

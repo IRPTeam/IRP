@@ -248,6 +248,8 @@ Function _GetTaxesInfo(Date, Company, DocumentName, TransactionType) Export
 	|INTO AllTaxes
 	|FROM
 	|	InformationRegister.Taxes.SliceLast(&Date, Company = &Company) AS TaxesSliceLast
+	|WHERE
+	|	TaxesSliceLast.Use
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////

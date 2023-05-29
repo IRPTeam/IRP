@@ -131,6 +131,8 @@
    <types>DocumentRef.Payroll</types>
    <types>DocumentRef.TimeSheet</types>
    <types>DocumentRef.ForeignCurrencyRevaluation</types>
+   <types>DocumentRef.RetailGoodsReceipt</types>
+   <types>DocumentRef.RetailShipmentConfirmation</types>
   </commandParameterType>
   <representation>Auto</representation>
  </commands>

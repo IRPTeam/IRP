@@ -267,76 +267,103 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2023B_AdvancesFromRetailCustomers());
 	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
 	QueryArray.Add(R4012B_StockReservation());
+	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
 	Return QueryArray;
 EndFunction
 
 Function ItemList()
-	Return "SELECT
-	|	RowIDInfo.Ref AS Ref,
-	|	RowIDInfo.Key AS Key,
-	|	MAX(RowIDInfo.RowID) AS RowID
-	|INTO TableRowIDInfo
-	|FROM
-	|	Document.RetailSalesReceipt.RowIDInfo AS RowIDInfo
-	|WHERE
-	|	RowIDInfo.Ref = &Ref
-	|GROUP BY
-	|	RowIDInfo.Ref,
-	|	RowIDInfo.Key
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	ItemList.Ref.Company AS Company,
-	|	ItemList.Store AS Store,
-	|	ItemList.ItemKey AS ItemKey,
-	|	ItemList.QuantityInBaseUnit AS Quantity,
-	|	ItemList.TotalAmount AS TotalAmount,
-	|	ItemList.Ref.Partner AS Partner,
-	|	ItemList.Ref.LegalName AS LegalName,
-	|	CASE
-	|		WHEN ItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-	|		AND ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-	|			THEN ItemList.Ref.Agreement.StandardAgreement
-	|		ELSE ItemList.Ref.Agreement
-	|	END AS Agreement,
-	|	ItemList.Ref.Currency AS Currency,
-	|	ItemList.Ref.Date AS Period,
-	|	ItemList.Ref AS RetailSalesReceipt,
-	|	ItemList.IsService AS IsService,
-	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
-	|	ItemList.RevenueType AS RevenueType,
-	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
-	|	CASE
-	|		WHEN ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-	|			THEN ItemList.Ref
-	|		ELSE UNDEFINED
-	|	END AS BasisDocument,
-	|	ItemList.NetAmount AS NetAmount,
-	|	ItemList.OffersAmount AS OffersAmount,
-	|	ItemList.Ref AS Invoice,
-	|	ItemList.SalesOrder AS SalesOrder,
-	|	NOT ItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
-	|	ItemList.Key AS RowKey,
-	|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions,
-	|	ItemList.Ref.Branch AS Branch,
-	|	ItemList.Ref.LegalNameContract AS LegalNameContract,
-	|	ItemList.SalesPerson,
-	|	ItemList.Key,
-	|	ItemList.Unit,
-	|	ItemList.Price,
-	|	ItemList.PriceType,
-	|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
-	|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
-	|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks,
-	|	TableRowIDInfo.RowID AS RowID
-	|INTO ItemList
-	|FROM
-	|	Document.RetailSalesReceipt.ItemList AS ItemList
-	|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
-	|		ON ItemList.Key = TableRowIDInfo.Key
-	|WHERE
-	|	ItemList.Ref = &Ref";
+	Return 
+		"SELECT
+		|	RowIDInfo.Ref AS Ref,
+		|	RowIDInfo.Key AS Key,
+		|	MAX(RowIDInfo.RowID) AS RowID
+		|INTO TableRowIDInfo
+		|FROM
+		|	Document.RetailSalesReceipt.RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.Ref = &Ref
+		|GROUP BY
+		|	RowIDInfo.Ref,
+		|	RowIDInfo.Key
+		|;
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ShipmentConfirmations.Key AS Key
+		|INTO ShipmentConfirmations
+		|FROM
+		|	Document.RetailSalesReceipt.ShipmentConfirmations AS ShipmentConfirmations
+		|WHERE
+		|	ShipmentConfirmations.Ref = &Ref
+		|GROUP BY
+		|	ShipmentConfirmations.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Store AS Store,
+		|	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.QuantityInBaseUnit AS Quantity,
+		|	ItemList.TotalAmount AS TotalAmount,
+		|	ItemList.Ref.Partner AS Partner,
+		|	ItemList.Ref.LegalName AS LegalName,
+		|	CASE
+		|		WHEN ItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+		|		AND ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+		|			THEN ItemList.Ref.Agreement.StandardAgreement
+		|		ELSE ItemList.Ref.Agreement
+		|	END AS Agreement,
+		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.Ref.Date AS Period,
+		|	ItemList.Ref AS RetailSalesReceipt,
+		|	ItemList.IsService AS IsService,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
+		|	ItemList.RevenueType AS RevenueType,
+		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+		|	CASE
+		|		WHEN ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+		|			THEN ItemList.Ref
+		|		ELSE UNDEFINED
+		|	END AS BasisDocument,
+		|	ItemList.NetAmount AS NetAmount,
+		|	ItemList.OffersAmount AS OffersAmount,
+		|	ItemList.Ref AS Invoice,
+		|	ItemList.SalesOrder AS SalesOrder,
+		|	NOT ItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
+		|	ItemList.Key AS RowKey,
+		|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.Ref.LegalNameContract AS LegalNameContract,
+		|	ItemList.SalesPerson,
+		|	ItemList.Key,
+		|	ItemList.Unit,
+		|	ItemList.Price,
+		|	ItemList.PriceType,
+		|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
+		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
+		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks,
+		|	TableRowIDInfo.RowID AS RowID
+		|INTO ItemList
+		|FROM
+		|	Document.RetailSalesReceipt.ItemList AS ItemList
+		|		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
+		|		ON ItemList.Key = ShipmentConfirmations.Key 
+		|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+		|		ON ItemList.Key = TableRowIDInfo.Key
+		|WHERE
+		|	ItemList.Ref = &Ref
+		|;
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ShipmentConfirmations.Key,
+		|	ShipmentConfirmations.ShipmentConfirmation,
+		|	ShipmentConfirmations.Quantity
+		|INTO ShipmentConfirmationsInfo
+		|FROM
+		|	Document.RetailSalesReceipt.ShipmentConfirmations AS ShipmentConfirmations
+		|WHERE
+		|	ShipmentConfirmations.Ref = &Ref";
 EndFunction
 
 Function Payments()
@@ -459,6 +486,8 @@ Function OffersInfo()
 		   |	RetailSalesReceiptItemList.Ref.Currency,
 		   |	RetailSalesReceiptSpecialOffers.Offer AS SpecialOffer,
 		   |	RetailSalesReceiptSpecialOffers.Amount AS OffersAmount,
+		   |	RetailSalesReceiptSpecialOffers.Bonus AS OffersBonus,
+		   |	RetailSalesReceiptSpecialOffers.AddInfo AS OffersAddInfo,
 		   |	RetailSalesReceiptItemList.TotalAmount AS SalesAmount,
 		   |	RetailSalesReceiptItemList.NetAmount AS NetAmount,
 		   |	RetailSalesReceiptItemList.Ref.Branch AS Branch
@@ -651,6 +680,7 @@ Function R4011B_FreeStocks()
 		|	ItemList AS ItemList
 		|Where
 		|	NOT ItemList.IsService
+		|	AND NOT ItemList.ShipmentConfirmationExists
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.Store,
@@ -712,18 +742,21 @@ Function R4012B_StockReservation()
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey AS ItemKey,
 		|	ItemList.SalesOrder AS SalesOrder,
-		|	SUM(ItemList.Quantity) AS Quantity
+		|	SUM(ItemList.Quantity) AS Quantity,
+		|	ItemList.ShipmentConfirmationExists AS ShipmentConfirmationExists
 		|INTO TmpItemListGroup
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
 		|	NOT ItemList.IsService
+		|	AND NOT ItemList.ShipmentConfirmationExists
 		|	AND ItemList.SalesOrderExists
 		|GROUP BY
 		|	ItemList.Period,
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
-		|	ItemList.SalesOrder
+		|	ItemList.SalesOrder,
+		|	ItemList.ShipmentConfirmationExists
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -774,6 +807,31 @@ Function R4012B_StockReservation()
 		|DROP TmpStockReservation";
 EndFunction
 
+Function R4032B_GoodsInTransitOutgoing()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	CASE
+		|		WHEN ItemList.ShipmentConfirmationExists
+		|			Then ShipmentConfirmations.ShipmentConfirmation
+		|		Else ItemList.Invoice
+		|	End AS Basis,
+		|	CASE
+		|		WHEN ItemList.ShipmentConfirmationExists
+		|			Then ShipmentConfirmations.Quantity
+		|		Else ItemList.Quantity
+		|	End AS Quantity,
+		|	*
+		|INTO R4032B_GoodsInTransitOutgoing
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN ShipmentConfirmationsInfo AS ShipmentConfirmations
+		|		ON ItemList.Key = ShipmentConfirmations.Key
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND ItemList.ShipmentConfirmationExists";
+EndFunction
+
 Function R4010B_ActualStocks()
 	Return 
 	"SELECT
@@ -798,6 +856,7 @@ Function R4010B_ActualStocks()
 	|		ON ItemList.Key = SerialLotNumbers.Key
 	|WHERE
 	|	NOT ItemList.IsService
+	|	AND NOT ItemList.ShipmentConfirmationExists
 	|GROUP BY
 	|	VALUE(AccumulationRecordType.Expense),
 	|	ItemList.Period,

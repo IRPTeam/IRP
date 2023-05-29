@@ -25,5 +25,7 @@
  <content>AccumulationRegister.R2050T_RetailSales</content>
  <content>InformationRegister.RetailWorkers</content>
  <content>Catalog.RetailCustomers</content>
+ <content>Document.RetailShipmentConfirmation</content>
+ <content>Document.RetailGoodsReceipt</content>
  <subsystems>Sales</subsystems>
 </mdclass:Subsystem>

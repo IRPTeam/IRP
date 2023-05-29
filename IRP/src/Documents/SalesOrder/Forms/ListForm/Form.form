@@ -651,6 +651,56 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
+   <name>ShipmentMode</name>
+   <id>55</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>List.ShipmentMode</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>ShipmentModeExtendedTooltip</name>
+    <id>57</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>ShipmentModeContextMenu</name>
+    <id>56</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>InputField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
    <name>Author</name>
    <id>40</id>
    <title>
@@ -1079,6 +1129,7 @@
 	SalesOrderList.PriceIncludeTax,
 	SalesOrderList.DocumentAmount,
 	SalesOrderList.Author,
+	SalesOrderList.ShipmentMode,
 	NOT SalesOrderClosing.Ref IS NULL AS Closed,
 	SalesOrderClosing.Ref AS ClosingOrder,
 	CASE
@@ -1109,6 +1160,7 @@ GROUP BY
 	SalesOrderList.PriceIncludeTax,
 	SalesOrderList.DocumentAmount,
 	SalesOrderList.Author,
+	SalesOrderList.ShipmentMode,
 	NOT SalesOrderClosing.Ref IS NULL,
 	SalesOrderClosing.Ref,
 	SalesOrderList.TransactionType</queryText>
@@ -1241,6 +1293,10 @@ GROUP BY
       </content>
      </localValue>
     </title>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ShipmentMode</dataPath>
+    <field>ShipmentMode</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>LegalName</dataPath>

@@ -1246,7 +1246,7 @@
    </extendedTooltip>
    <type>UsualGroup</type>
    <extInfo xsi:type="form:UsualGroupExtInfo">
-    <group>Vertical</group>
+    <group>HorizontalIfPossible</group>
     <representation>WeakSeparation</representation>
     <showLeftMargin>true</showLeftMargin>
     <united>true</united>

@@ -191,7 +191,7 @@ Scenario: check load data form in the document
 	* Open load date form	
 		And in the table "ItemList" I click "Load data from table" button
 		Then "Load data from table" window is opened
-		And I set checkbox "Show or hide image"
+		And I set checkbox "Show image"
 	* Add barcodes
 		And in "Template" spreadsheet document I move to "R3C1" cell
 		And in "Template" spreadsheet document I double-click the current cell
@@ -1518,6 +1518,11 @@ Scenario: set True value to the constant
 		And I go to line in "FunctionalOptions" table
 			| 'Option'     | 'Use' |
 			| 'Use salary' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I finish line editing in "FunctionalOptions" table
+		And I go to line in "FunctionalOptions" table
+			| 'Option'                                | 'Use' |
+			| 'Use additional table control document' | 'Yes' |
 		And I remove "Use" checkbox in "FunctionalOptions" table
 		And I finish line editing in "FunctionalOptions" table
 		And I click "Save" button

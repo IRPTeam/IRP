@@ -378,12 +378,12 @@ Scenario: _042513 check Retail return receipt movements by the Register  "R3050 
 		And I select "R3050 Pos cash balances" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail return receipt 1 204 dated 27.06.2022 16:10:43' | ''                    | ''          | ''           | ''             | ''        | ''             | ''                                     | ''                 |
-			| 'Document registrations records'                        | ''                    | ''          | ''           | ''             | ''        | ''             | ''                                     | ''                 |
-			| 'Register  "R3050 Pos cash balances"'                   | ''                    | ''          | ''           | ''             | ''        | ''             | ''                                     | ''                 |
-			| ''                                                      | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''        | ''             | ''                                     | ''                 |
-			| ''                                                      | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Payment type' | 'Account'                              | 'Payment terminal' |
-			| ''                                                      | '27.06.2022 16:10:43' | '-468'      | '-4,68'      | 'Main Company' | 'Shop 01' | 'Card 01'      | 'POS account, Comission separate, TRY' | 'Test01'           |	
+			| 'Retail return receipt 1 204 dated 27.06.2022 16:10:43' | ''                    | ''          | ''           | ''             | ''        | ''             | ''                                     | ''                     |
+			| 'Document registrations records'                        | ''                    | ''          | ''           | ''             | ''        | ''             | ''                                     | ''                     |
+			| 'Register  "R3050 Pos cash balances"'                   | ''                    | ''          | ''           | ''             | ''        | ''             | ''                                     | ''                     |
+			| ''                                                      | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''        | ''             | ''                                     | ''                     |
+			| ''                                                      | ''                    | 'Amount'    | 'Commission' | 'Company'      | 'Branch'  | 'Payment type' | 'Account'                              | 'Payment terminal'     |
+			| ''                                                      | '27.06.2022 16:10:43' | '-468'      | '-4,68'      | 'Main Company' | 'Shop 01' | 'Card 01'      | 'POS account, Comission separate, TRY' | 'Payment terminal 01'  |	
 		And I close all client application windows
 
 Scenario: _042514 check Retail return receipt movements by the Register  "R3010 Cash on hand" (payment by POS, not PostponedPayment) 

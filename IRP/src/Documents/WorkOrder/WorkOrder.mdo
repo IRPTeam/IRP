@@ -1708,6 +1708,46 @@
    <maxValue xsi:type="core:UndefinedValue"/>
    <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="91cb0207-8d3e-4602-bd62-f1f4d5f7a12c">
+   <name>Bonus</name>
+   <synonym>
+    <key>en</key>
+    <value>Bonus</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Бонус</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeSpecialOfferBonus</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="a01987ec-44c6-4785-aeef-519b0fe1b48e">
+   <name>AddInfo</name>
+   <synonym>
+    <key>en</key>
+    <value>Add info</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Дополнительная информация</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ek bilgi</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeSpecialOfferAddInfo</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="a7cd55a2-1da0-4435-a847-0dd6d3799d44">
   <producedTypes>

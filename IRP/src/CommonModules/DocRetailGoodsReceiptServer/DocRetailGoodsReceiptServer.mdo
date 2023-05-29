@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9961f652-8f7d-449b-8a87-9fffa75f3978">
+ <name>DocRetailGoodsReceiptServer</name>
+ <synonym>
+  <key>en</key>
+  <value>Doc retail goods receipt server</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Документ приемка от розничной продажи сервер</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
+</mdclass:CommonModule>

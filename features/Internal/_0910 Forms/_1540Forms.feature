@@ -204,6 +204,15 @@ Scenario: _0154032 check autofilling item key in Internal Supply Request only wi
 	And I click the button named "FormCreate"
 	When check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
 
+Scenario: _01540321 check autofilling item key in Retail Shipment Confirmation by item only with one item key
+	Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"
+	And I click the button named "FormCreate"
+	When check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
+
+Scenario: _01540322 check autofilling item key in Retail Goods Receipt by item only with one item key
+	Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"
+	And I click the button named "FormCreate"
+	When check item key autofilling in purchase/returns/goods receipt/shipment confirmation documents for an item that has only one item key
 
 
 

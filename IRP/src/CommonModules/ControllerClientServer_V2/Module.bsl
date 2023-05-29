@@ -864,8 +864,10 @@ EndProcedure
 Function BindListOnDelete(Parameters)
 	DataPath = "";
 	Binding = New Structure();
-	Binding.Insert("ShipmentConfirmation", "StepChangeStoreInHeaderByStoresInList");
-	Binding.Insert("GoodsReceipt"        , "StepChangeStoreInHeaderByStoresInList");
+	Binding.Insert("ShipmentConfirmation"       , "StepChangeStoreInHeaderByStoresInList");
+	Binding.Insert("RetailShipmentConfirmation" , "StepChangeStoreInHeaderByStoresInList");
+	Binding.Insert("GoodsReceipt"               , "StepChangeStoreInHeaderByStoresInList");
+	Binding.Insert("RetailGoodsReceipt"         , "StepChangeStoreInHeaderByStoresInList");
 	
 	Binding.Insert("SalesOrder",
 		"StepChangeStoreInHeaderByStoresInList,
@@ -1492,6 +1494,42 @@ EndProcedure
 
 #EndRegion
 
+#Region SHIPMENT_MODE
+
+// ShipmentMode.Set
+Procedure SetShipmentMode(Parameters, Results) Export
+	Binding = BindShipmentMode(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ShipmentMode.Get
+Function GetShipmentMode(Parameters)
+	Return GetPropertyObject(Parameters, BindShipmentMode(Parameters).DataPath);
+EndFunction
+
+// ShipmentMode.Bind
+Function BindShipmentMode(Parameters)
+	DataPath = "ShipmentMode";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindShipmentMode");
+EndFunction
+
+// ShipmentMode.ChangeShipmentModeByTransactionType.Step
+Procedure StepChangeShipmentModeByTransactionType(Parameters, Chain) Export
+	Chain.ChangeShipmentModeByTransactionType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeShipmentModeByTransactionType.Setter = "SetShipmentMode";
+	Options = ModelClientServer_V2.ChangeShipmentModeByTransactionTypeOptions();
+	Options.TransactionType       = GetTransactionType(Parameters);
+	Options.CurrentShipmentMode   = GetShipmentMode(Parameters);
+	Options.StepName = "StepChangeShipmentModeByTransactionType";
+	Chain.ChangeShipmentModeByTransactionType.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
 #Region TRANSACTION_TYPE
 
 // TransactionType.OnChange
@@ -1540,6 +1578,9 @@ Function BindTransactionType(Parameters)
 	DataPath.Insert("SalesReturn",          "TransactionType");
 	DataPath.Insert("SalesReturnOrder",     "TransactionType");
 	DataPath.Insert("ShipmentConfirmation", "TransactionType");
+	DataPath.Insert("RetailShipmentConfirmation", "TransactionType");
+	DataPath.Insert("RetailGoodsReceipt",         "TransactionType");
+	DataPath.Insert("Production", "TransactionType");
 		
 	Binding = New Structure();
 	Binding.Insert("BankPayment",
@@ -1581,6 +1622,12 @@ Function BindTransactionType(Parameters)
 	Binding.Insert("ShipmentConfirmation"  , "StepChangePartnerByTransactionType");
 	Binding.Insert("GoodsReceipt"          , "StepChangePartnerByTransactionType");
 	
+	Binding.Insert("RetailShipmentConfirmation", 
+		"StepChangeCourierByTransactionType");
+	
+	Binding.Insert("RetailGoodsReceipt", 
+		"StepChangeCourierByTransactionType");
+	
 	Binding.Insert("PurchaseInvoice", 
 		"StepChangePartnerByTransactionType,
 		|StepRequireCallCreateTaxesFormControls,
@@ -1609,7 +1656,8 @@ Function BindTransactionType(Parameters)
 	Binding.Insert("SalesOrder", 
 		"StepChangePartnerByTransactionType,
 		|StepRequireCallCreateTaxesFormControls,
-		|StepChangeTaxRate_AgreementInHeader");
+		|StepChangeTaxRate_AgreementInHeader,
+		|StepChangeShipmentModeByTransactionType");
 	
 	Binding.Insert("SalesReturn", 
 		"StepChangePartnerByTransactionType,
@@ -1620,6 +1668,10 @@ Function BindTransactionType(Parameters)
 		"StepChangePartnerByTransactionType,
 		|StepRequireCallCreateTaxesFormControls,
 		|StepChangeTaxRate_AgreementInHeader");
+	
+	Binding.Insert("Production", 
+		"StepChangePlanningPeriodByDateAndBusinessUnit,
+		|StepChangeBillOfMaterialsByItemKey");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindTransactionType");
 EndFunction
@@ -2945,6 +2997,49 @@ EndFunction
 
 #EndRegion
 
+#Region COURIER
+
+// Courier.OnChange
+Procedure CourierOnChange(Parameters) Export
+	AddViewNotify("OnSetCourierNotify", Parameters);
+	Binding = BindCourier(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Courier.Set
+Procedure SetCourier(Parameters, Results) Export
+	Binding = BindCourier(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetCourierNotify");
+EndProcedure
+
+// Courier.Get
+Function GetCourier(Parameters)
+	Return GetPropertyObject(Parameters, BindCourier(Parameters).DataPath);
+EndFunction
+
+// Courier.Bind
+Function BindCourier(Parameters)
+	DataPath = "Courier";
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCourier");
+EndFunction
+
+// Courier.ChangeCourierByTransactionType.Step
+Procedure StepChangeCourierByTransactionType(Parameters, Chain) Export
+	Chain.ChangeCourierByTransactionType.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeCourierByTransactionType.Setter = "SetCourier";
+	Options = ModelClientServer_V2.ChangeCourierByTransactionTypeOptions();
+	Options.TransactionType       = GetTransactionType(Parameters);
+	Options.CurrentCourier        = GetCourier(Parameters);
+	Options.StepName = "StepChangeCourierByTransactionType";
+	Chain.ChangeCourierByTransactionType.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
 #Region LEGAL_NAME
 
 // LegalName.OnChange
@@ -3494,6 +3589,9 @@ Function BindDefaultStore(Parameters)
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation" , "StepDefaultStoreInHeader_WithoutAgreement");
 	Binding.Insert("GoodsReceipt"         , "StepDefaultStoreInHeader_WithoutAgreement");
+	
+	Binding.Insert("RetailShipmentConfirmation" , "StepDefaultStoreInHeader_WithoutAgreement");
+	Binding.Insert("RetailGoodsReceipt"         , "StepDefaultStoreInHeader_WithoutAgreement");
 
 	Binding.Insert("SalesOrder"           , "StepDefaultStoreInHeader_AgreementInHeader");
 	Binding.Insert("SalesInvoice"         , "StepDefaultStoreInHeader_AgreementInHeader");
@@ -3515,6 +3613,9 @@ Function BindEmptyStore(Parameters)
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "StepEmptyStoreInHeader_WithoutAgreement");
 	Binding.Insert("GoodsReceipt"        , "StepEmptyStoreInHeader_WithoutAgreement");
+	
+	Binding.Insert("RetailShipmentConfirmation", "StepEmptyStoreInHeader_WithoutAgreement");
+	Binding.Insert("RetailGoodsReceipt"        , "StepEmptyStoreInHeader_WithoutAgreement");
 
 	Binding.Insert("SalesOrder"           , "StepEmptyStoreInHeader_AgreementInHeader");
 	Binding.Insert("SalesInvoice"         , "StepEmptyStoreInHeader_AgreementInHeader");
@@ -4566,6 +4667,7 @@ Procedure StepChangeBillOfMaterialsByItemKey(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangeBillOfMaterialsByItemKeyOptions();
 	Options.ItemKey = GetItemKey(Parameters);
 	Options.CurrentBillOfMaterials = GetBillOfMaterials(Parameters);
+	Options.TransactionType = GetTransactionType(Parameters);
 	Options.StepName = "StepChangeBillOfMaterialsByItemKey";
 	Chain.ChangeBillOfMaterialsByItemKey.Options.Add(Options);
 EndProcedure
@@ -4677,6 +4779,7 @@ Procedure StepChangeProductionPlanningByPlanningPeriod(Parameters, Chain) Export
 	Options.BusinessUnit   = GetBusinessUnit(Parameters);
 	Options.PlanningPeriod = GetPlanningPeriod(Parameters);
 	Options.CurrentProductionPlanning = GetProductionPlanning(Parameters);
+	Options.TransactionType = GetTransactionType(Parameters);
 	Options.DontExecuteIfExecutedBefore = True;
 	Options.StepName = "StepChangeProductionPlanningByPlanningPeriod";
 	Chain.ChangeProductionPlanningByPlanningPeriod.Options.Add(Options);
@@ -4733,6 +4836,7 @@ Procedure StepChangePlanningPeriodByDateAndBusinessUnit(Parameters, Chain) Expor
 	Options = ModelClientServer_V2.ChangePlanningPeriodByDateAndBusinessUnitOptions();
 	Options.Date = GetDate(Parameters);
 	Options.BusinessUnit = GetBusinessUnit(Parameters);
+	Options.TransactionType = GetTransactionType(Parameters);
 	Options.StepName = "StepChangePlanningPeriodByDateAndBusinessUnit";
 	Chain.ChangePlanningPeriodByDateAndBusinessUnit.Options.Add(Options);
 EndProcedure
@@ -7909,6 +8013,7 @@ Procedure StepMaterialsChangeIsManualChangedByQuantity(Parameters, Chain) Export
 		Options     = ModelClientServer_V2.ChangeIsManualChangedByQuantityOptions();		
 		Options.Quantity   = GetMaterialsQuantity(Parameters, Row.Key);
 		Options.QuantityBOM = GetMaterialsQuantityBOM(Parameters, Row.Key);
+		Options.TransactionType = GetTransactionType(Parameters);
 		Options.Key = Row.Key;
 		Options.StepName = "StepMaterialsChangeIsManualChangedByQuantity";
 		Chain.ChangeIsManualChangedByQuantity.Options.Add(Options);
@@ -8208,6 +8313,7 @@ Procedure StepMaterialsCalculations(Parameters, Chain) Export
 	Options = ModelClientServer_V2.MaterialsCalculationsOptions();
 	Options.Materials = ArrayOfMaterialsRows;
 	Options.BillOfMaterials  = GetBillOfMaterials(Parameters);
+	Options.TransactionType = GetTransactionType(Parameters);
 	Options.MaterialsColumns = Parameters.ObjectMetadataInfo.Tables.Materials.Columns;
 	Options.ItemKey          = GetItemKey(Parameters);
 	Options.Unit             = GetUnit(Parameters);
@@ -8841,6 +8947,8 @@ Function BindItemListItem(Parameters)
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation"      , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("GoodsReceipt"              , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("RetailShipmentConfirmation"      , "StepItemListChangeItemKeyByItem");
+	Binding.Insert("RetailGoodsReceipt"              , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("StockAdjustmentAsSurplus"  , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("StockAdjustmentAsWriteOff" , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("SalesOrder"                , "StepItemListChangeItemKeyByItem");
@@ -8924,6 +9032,14 @@ Function BindItemListItemKey(Parameters)
 		|StepItemListChangeUnitByItemKey");
 		
 	Binding.Insert("GoodsReceipt",
+		"StepChangeUseSerialLotNumberByItemKey,
+		|StepItemListChangeUnitByItemKey");
+	
+	Binding.Insert("RetailShipmentConfirmation",
+		"StepChangeUseSerialLotNumberByItemKey,
+		|StepItemListChangeUnitByItemKey");
+		
+	Binding.Insert("RetailGoodsReceipt",
 		"StepChangeUseSerialLotNumberByItemKey,
 		|StepItemListChangeUnitByItemKey");
 		
@@ -9534,6 +9650,9 @@ Function BindDefaultItemListStore(Parameters)
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "StepItemListDefaultStoreInList_WithoutAgreement");
 	Binding.Insert("GoodsReceipt"        , "StepItemListDefaultStoreInList_WithoutAgreement");
+	
+	Binding.Insert("RetailShipmentConfirmation", "StepItemListDefaultStoreInList_WithoutAgreement");
+	Binding.Insert("RetailGoodsReceipt"        , "StepItemListDefaultStoreInList_WithoutAgreement");
 
 	Binding.Insert("SalesOrder"           , "StepItemListDefaultStoreInList_AgreementInHeader");
 	Binding.Insert("SalesInvoice"         , "StepItemListDefaultStoreInList_AgreementInHeader");
@@ -9555,6 +9674,9 @@ Function BindItemListStore(Parameters)
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "StepChangeStoreInHeaderByStoresInList");
 	Binding.Insert("GoodsReceipt"        , "StepChangeStoreInHeaderByStoresInList");
+	
+	Binding.Insert("RetailShipmentConfirmation", "StepChangeStoreInHeaderByStoresInList");
+	Binding.Insert("RetailGoodsReceipt"        , "StepChangeStoreInHeaderByStoresInList");
 
 	Binding.Insert("SalesOrder",
 		"StepChangeStoreInHeaderByStoresInList");
@@ -13135,6 +13257,7 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetCurrencyNotify"                   Then ViewClient_V2.OnSetCurrencyNotify(Parameters);
 	ElsIf ViewNotify = "OnSetPartnerNotify"                    Then ViewClient_V2.OnSetPartnerNotify(Parameters);
 	ElsIf ViewNotify = "OnSetLegalNameNotify"                  Then ViewClient_V2.OnSetLegalNameNotify(Parameters);
+	ElsIf ViewNotify = "OnSetCourierNotify"                    Then ViewClient_V2.OnSetCourierNotify(Parameters);
 	ElsIf ViewNotify = "OnSetConsolidatedRetailSalesNotify"    Then ViewClient_V2.OnSetConsolidatedRetailSalesNotify(Parameters);
 	ElsIf ViewNotify = "OnSetBranchNotify"                     Then ViewClient_V2.OnSetBranchNotify(Parameters);
 	ElsIf ViewNotify = "OnSetStatusNotify"                     Then ViewClient_V2.OnSetStatusNotify(Parameters);

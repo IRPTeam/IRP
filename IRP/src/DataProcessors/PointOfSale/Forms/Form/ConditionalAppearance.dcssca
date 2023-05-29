@@ -211,4 +211,44 @@
 			</dcscor:item>
 		</appearance>
 	</item>
+	<item>
+		<selection>
+			<item>
+				<field>SpecialOffersLineNumber</field>
+			</item>
+			<item>
+				<field>SpecialOffersOffer</field>
+			</item>
+			<item>
+				<field>SpecialOffersPercent</field>
+			</item>
+			<item>
+				<field>SpecialOffersAmount</field>
+			</item>
+			<item>
+				<field>SpecialOffersBonus</field>
+			</item>
+			<item>
+				<field>SpecialOffersAddInfo</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.SpecialOffers.Key</left>
+				<comparisonType>NotEqual</comparisonType>
+				<right xsi:type="dcscor:Field">CurrentItemListID</right>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>Visible</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+			</dcscor:item>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:use>false</dcscor:use>
+				<dcscor:parameter>Show</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
 </ConditionalAppearance>

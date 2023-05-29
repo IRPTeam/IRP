@@ -483,6 +483,8 @@ Function ItemList()
 		   |	PurchaseInvoiceItemList.Ref.Currency,
 		   |	PurchaseInvoiceSpecialOffers.Offer AS SpecialOffer,
 		   |	PurchaseInvoiceSpecialOffers.Amount AS OffersAmount,
+		   |	PurchaseInvoiceSpecialOffers.Bonus AS OffersBonus,
+		   |	PurchaseInvoiceSpecialOffers.AddInfo AS OffersAddInfo,
 		   |	PurchaseInvoiceSpecialOffers.Ref.Branch AS Branch
 		   |INTO OffersInfo
 		   |FROM

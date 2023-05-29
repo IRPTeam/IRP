@@ -510,7 +510,7 @@ Scenario: _052017 check Commission calculation in the Bank payment (Payment from
 		And I click choice button of "Payment terminal" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Test01'     |
+			| 'Payment terminal 01'     |
 		And I select current line in "List" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -519,7 +519,7 @@ Scenario: _052017 check Commission calculation in the Bank payment (Payment from
 	* Check Commission
 		And "PaymentList" table contains lines
 			| 'Commission' | 'Payment terminal' | 'Payment type' | 'Commission percent' | 'Bank term' | 'Total amount' |
-			| '1,00'       | 'Test01'           | 'Card 01'      | '1,00'               | 'Test01'    | '100,33'       |
+			| '1,00'       | 'Payment terminal 01'           | 'Card 01'      | '1,00'               | 'Test01'    | '100,33'       |
 	* Check Commission calculation (sum and commision percent)
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -527,7 +527,7 @@ Scenario: _052017 check Commission calculation in the Bank payment (Payment from
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
 			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Commission percent' |
-			| '1' | '333,33'       | '3,33'       | 'Card 01'      | 'Test01'           | 'Test01'    | '1,00'               |
+			| '1' | '333,33'       | '3,33'       | 'Card 01'      | 'Payment terminal 01'           | 'Test01'    | '1,00'               |
 	* Change Commission percent
 		And I activate "Commission percent" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -535,15 +535,15 @@ Scenario: _052017 check Commission calculation in the Bank payment (Payment from
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
 			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Commission percent' |
-			| '1' | '333,33'       | '16,67'      | 'Card 01'      | 'Test01'           | 'Test01'    | '5,00'               |
+			| '1' | '333,33'       | '16,67'      | 'Card 01'      | 'Payment terminal 01'           | 'Test01'    | '5,00'               |
 	* Change Commission sum
 		And I activate "Commission" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "22,52" text in "Commission" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
-			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Commission percent' |
-			| '1' | '333,33'       | '22,52'      | 'Card 01'      | 'Test01'           | 'Test01'    | '6,76'               |
+			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal'              | 'Bank term' | 'Commission percent' |
+			| '1' | '333,33'       | '22,52'      | 'Card 01'      | 'Payment terminal 01'           | 'Test01'    | '6,76'               |
 	* Change payment type
 		And I activate "Payment type" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -553,16 +553,16 @@ Scenario: _052017 check Commission calculation in the Bank payment (Payment from
 			| 'Card 02'     |
 		And I select current line in "List" table
 		And "PaymentList" table became equal
-			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Commission percent' |
-			| '1' | '333,33'       | '6,67'       | 'Card 02'      | 'Test01'           | 'Test01'    | '2,00'               |
+			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal'              | 'Bank term' | 'Commission percent' |
+			| '1' | '333,33'       | '6,67'       | 'Card 02'      | 'Payment terminal 01'           | 'Test01'    | '2,00'               |
 	* Change sum
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "999,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table became equal
-			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Commission percent' |
-			| '1' | '999,00'       | '19,98'      | 'Card 02'      | 'Test01'           | 'Test01'    | '2,00'               |
+			| '#' | 'Total amount' | 'Commission' | 'Payment type' | 'Payment terminal'     | 'Bank term' | 'Commission percent' |
+			| '1' | '999,00'       | '19,98'      | 'Card 02'      | 'Payment terminal 01'  | 'Test01'    | '2,00'               |
 		And I close all client application windows
 
 

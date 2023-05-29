@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="86a710ba-7d95-4814-ade9-6a00862a80e8">
+ <producedTypes>
+  <containerType typeId="38baaf1a-e21a-47cf-9e1f-5c222c00c496" valueTypeId="eccdae76-d318-405e-8503-eccd9f81052b"/>
+ </producedTypes>
+ <name>AdditionalTableControlDocumentObject</name>
+ <synonym>
+  <key>en</key>
+  <value>Additional table control document object</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Дополнитльный контроль табличных частей документов объект</value>
+ </synonym>
+ <type>
+  <types>DocumentObject.RetailSalesReceipt</types>
+  <types>DocumentObject.GoodsReceipt</types>
+  <types>DocumentObject.Bundling</types>
+  <types>DocumentObject.InternalSupplyRequest</types>
+  <types>DocumentObject.InventoryTransfer</types>
+  <types>DocumentObject.InventoryTransferOrder</types>
+  <types>DocumentObject.ItemStockAdjustment</types>
+  <types>DocumentObject.PhysicalCountByLocation</types>
+  <types>DocumentObject.PhysicalInventory</types>
+  <types>DocumentObject.PurchaseInvoice</types>
+  <types>DocumentObject.PurchaseOrder</types>
+  <types>DocumentObject.PurchaseReturn</types>
+  <types>DocumentObject.PurchaseReturnOrder</types>
+  <types>DocumentObject.RetailReturnReceipt</types>
+  <types>DocumentObject.SalesInvoice</types>
+  <types>DocumentObject.SalesOrder</types>
+  <types>DocumentObject.SalesReportFromTradeAgent</types>
+  <types>DocumentObject.SalesReportToConsignor</types>
+  <types>DocumentObject.SalesReturn</types>
+  <types>DocumentObject.SalesReturnOrder</types>
+  <types>DocumentObject.ShipmentConfirmation</types>
+  <types>DocumentObject.StockAdjustmentAsSurplus</types>
+  <types>DocumentObject.StockAdjustmentAsWriteOff</types>
+  <types>DocumentObject.Unbundling</types>
+  <types>DocumentObject.Bundling</types>
+ </type>
+</mdclass:DefinedType>

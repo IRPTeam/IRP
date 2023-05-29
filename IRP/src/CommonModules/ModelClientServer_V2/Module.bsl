@@ -362,6 +362,8 @@ Function GetChain()
 	Chain.Insert("ConsignorBatchesFillBatches"                  , GetChainLink("ConsignorBatchesFillBatchesExecute"));
 	
 	Chain.Insert("ChangeExpenseTypeByAccrualDeductionType", GetChainLink("ChangeExpenseTypeByAccrualDeductionTypeExecute"));
+	Chain.Insert("ChangeCourierByTransactionType"        , GetChainLink("ChangeCourierByTransactionTypeExecute"));
+	Chain.Insert("ChangeShipmentModeByTransactionType"   , GetChainLink("ChangeShipmentModeByTransactionTypeExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -1388,10 +1390,14 @@ EndFunction
 #Region CHANGE_IS_MANUAL_CHANGED_BY_QUANTITY
 
 Function ChangeIsManualChangedByQuantityOptions() Export
-	Return GetChainLinkOptions("Quantity, QuantityBOM");
+	Return GetChainLinkOptions("Quantity, QuantityBOM, TransactionType");
 EndFunction
 
 Function ChangeIsManualChangedByQuantityExecute(Options) Export	
+	If Options.TransactionType <> PredefinedValue("Enum.ProductionTransactionTypes.Produce") Then
+		Return False;
+	EndIf;
+	
 	If Options.Quantity = Options.QuantityBOM Then
 		Return False;
 	Else
@@ -1472,10 +1478,15 @@ EndFunction
 #Region CHANGE_PLANNING_PERIOD_BY_DATE_AND_BUSINESS_UNIT
 
 Function ChangePlanningPeriodByDateAndBusinessUnitOptions() Export
-	Return GetChainLinkOptions("Date, BusinessUnit");
+	Return GetChainLinkOptions("Date, BusinessUnit, TransactionType");
 EndFunction
 
 Function ChangePlanningPeriodByDateAndBusinessUnitExecute(Options) Export
+	If ValueIsFilled(Options.TransactionType) 
+		And (Options.TransactionType) <> PredefinedValue("Enum.ProductionTransactionTypes.Produce") Then
+		Return Undefined;
+	EndIf;
+	
 	_Date = ?(ValueIsFilled(Options.Date), Options.Date, CommonFunctionsServer.GetCurrentSessionDate());
 	PlanningPeriod = ModelServer_V2.GetPlanningPeriod(_Date, Options.BusinessUnit);
 	Return PlanningPeriod;
@@ -1486,10 +1497,15 @@ EndFunction
 #Region CHANGE_PRODUCTION_PLANNING_BY_PLANNING_PERIOD
 
 Function ChangeProductionPlanningByPlanningPeriodOptions() Export
-	Return GetChainLinkOptions("Company, BusinessUnit, PlanningPeriod, CurrentProductionPlanning");
+	Return GetChainLinkOptions("Company, BusinessUnit, PlanningPeriod, CurrentProductionPlanning, TransactionType");
 EndFunction
 
 Function ChangeProductionPlanningByPlanningPeriodExecute(Options) Export
+	If ValueIsFilled(Options.TransactionType) 
+		And Options.TransactionType <> PredefinedValue("Enum.ProductionTransactionTypes.Produce") Then
+		Return Undefined;
+	EndIf;
+	
 	If ValueIsFilled(Options.CurrentProductionPlanning) Then
 		Return Options.CurrentProductionPlanning;
 	EndIf;
@@ -1501,10 +1517,15 @@ EndFunction
 #Region CHANGE_BILL_OF_MATERIALS_BY_ITEM_KEY		
 
 Function ChangeBillOfMaterialsByItemKeyOptions() Export
-	Return GetChainLinkOptions("ItemKey, CurrentBillOfMaterials");
+	Return GetChainLinkOptions("ItemKey, CurrentBillOfMaterials, TransactionType");
 EndFunction
 
 Function ChangeBillOfMaterialsByItemKeyExecute(Options) Export
+	If ValueIsFilled(Options.TransactionType) 
+		And Options.TransactionType <> PredefinedValue("Enum.ProductionTransactionTypes.Produce") Then
+		Return Undefined;
+	EndIf;
+	
 	If ValueIsFilled(Options.CurrentBillOfMaterials) Then
 		Return Options.CurrentBillOfMaterials;
 	EndIf;
@@ -1585,6 +1606,37 @@ Function ChangeExpenseTypeByAccrualDeductionTypeExecute(Options) Export
 		EndIf;
 	EndIf;
 	Return Options.ExpenseType;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_COURIER_BY_TRANSACTION_TYPE
+
+Function ChangeCourierByTransactionTypeOptions() Export
+	Return GetChainLinkOptions("TransactionType, CurrentCourier");
+EndFunction
+
+Function ChangeCourierByTransactionTypeExecute(Options) Export
+	If Options.TransactionType = PredefinedValue("Enum.RetailShipmentConfirmationTransactionTypes.CourierDelivery")
+		Or Options.TransactionType = PredefinedValue("Enum.RetailGoodsReceiptTransactionTypes.CourierDelivery") Then
+		Return Options.CurrentCourier;
+	EndIf;
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_SHIPMENT_MODE_BY_TRANSACTION_TYPE
+
+Function ChangeShipmentModeByTransactionTypeOptions() Export
+	Return GetChainLinkOptions("TransactionType, CurrentShipmentMode");
+EndFunction
+
+Function ChangeShipmentModeByTransactionTypeExecute(Options) Export
+	If Options.TransactionType = PredefinedValue("Enum.SalesTransactionTypes.RetailSales") Then
+		Return Options.CurrentShipmentMode
+	EndIf;
+	Return Undefined;
 EndFunction
 
 #EndRegion
@@ -2167,12 +2219,24 @@ EndProcedure
 
 Function MaterialsCalculationsOptions() Export
 	Return GetChainLinkOptions("Materials, BillOfMaterials, MaterialsColumns,
-		|ItemKey, Unit, Quantity, KeyOwner");
+		|ItemKey, Unit, Quantity, KeyOwner, TransactionType");
 EndFunction
 
 Function MaterialsCalculationsExecute(Options) Export
 	Result = New Structure();
 	Result.Insert("Materials", Options.Materials);
+	
+	If ValueIsFilled(Options.TransactionType) 
+		And (Options.TransactionType) <> PredefinedValue("Enum.ProductionTransactionTypes.Produce") Then
+			For Each Row In Result.Materials Do
+				Row.ItemBOM         = Undefined;
+				Row.ItemKeyBOM      = Undefined;
+				Row.UnitBOM         = Undefined;
+				Row.QuantityBOM     = Undefined;
+				Row.IsManualChanged = Undefined;
+			EndDo;
+		Return Result;
+	EndIf;
 	
 	CalculationParameters = New Structure();
 	CalculationParameters.Insert("Materials"        , Options.Materials);
@@ -2221,6 +2285,7 @@ Function CalculationsOptions() Export
 	AmountOptions.Insert("DontCalculateRow", False);
 	AmountOptions.Insert("NetAmount"       , 0);
 	AmountOptions.Insert("OffersAmount"    , 0);
+	AmountOptions.Insert("OffersBonus"    , 0);
 	AmountOptions.Insert("TaxAmount"       , 0);
 	AmountOptions.Insert("TotalAmount"     , 0);
 	Options.Insert("AmountOptions", AmountOptions);
@@ -2282,6 +2347,7 @@ Function CalculationsExecute(Options) Export
 	Result = New Structure();
 	Result.Insert("NetAmount"    , Options.AmountOptions.NetAmount);
 	Result.Insert("OffersAmount" , Options.AmountOptions.OffersAmount);
+	Result.Insert("OffersBonus"  , Options.AmountOptions.OffersBonus);
 	Result.Insert("TaxAmount"    , Options.AmountOptions.TaxAmount);
 	Result.Insert("TotalAmount"  , Options.AmountOptions.TotalAmount);
 	Result.Insert("Price"        , Options.PriceOptions.Price);
@@ -2291,7 +2357,7 @@ Function CalculationsExecute(Options) Export
 	Result.Insert("SpecialOffers", New Array());
 	
 	For Each OfferRow In Options.OffersOptions.SpecialOffers Do
-		NewOfferRow = New Structure("Key, Offer, Amount, Percent, Bonus, AddInfo, Bonus, AddInfo");
+		NewOfferRow = New Structure("Key, Offer, Amount, Percent, Bonus, AddInfo");
 		FillPropertyValues(NewOfferRow, OfferRow);
 		Result.SpecialOffers.Add(NewOfferRow);
 	EndDo;
@@ -2315,15 +2381,19 @@ Function CalculationsExecute(Options) Export
 				If (Options.RecalculateSpecialOffers.Enable Or Options.CalculateSpecialOffers.Enable) And DataFromBasis[0].SpecialOffers.Count() Then
 					OffersFromBaseDocument = True;
 					TotalOffers = 0;
+					TotalBonus = 0;
 					For Each OfferRow In Result.SpecialOffers Do
 						For Each BasisRow In DataFromBasis[0].SpecialOffers Do
 							If OfferRow.Offer = BasisRow.Offer Then 
 								TotalOffers = TotalOffers + BasisRow.Amount;
+								TotalBonus = TotalBonus + BasisRow.Bonus;
 								OfferRow.Amount = BasisRow.Amount;
+								OfferRow.Bonus = BasisRow.Bonus;
 							EndIf;
 						EndDo;
 					EndDo;
 					Result.OffersAmount = TotalOffers;
+					Result.OffersBonus = TotalBonus;
 				EndIf; // Offers
 				
 				// Taxes
@@ -2354,14 +2424,18 @@ Function CalculationsExecute(Options) Export
 	If Options.RecalculateSpecialOffers.Enable And Not OffersFromBaseDocument Then
 		For Each OfferRow In Options.OffersOptions.SpecialOffersCache Do
 			Amount = 0;
+			Bonus = 0;
 			If Options.PriceOptions.Quantity = OfferRow.Quantity Then
 				Amount = OfferRow.Amount;
+				Bonus = OfferRow.Bonus;
 			Else
 				Amount = (OfferRow.Amount / OfferRow.Quantity) * Options.PriceOptions.Quantity;
+				Bonus = (OfferRow.Bonus / OfferRow.Quantity) * Options.PriceOptions.Quantity;
 			EndIf;
 			For Each ResultOfferRow In Result.SpecialOffers Do
 				If OfferRow.Key = ResultOfferRow.Key And OfferRow.Offer = ResultOfferRow.Offer Then
 					ResultOfferRow.Amount = Amount;
+					ResultOfferRow.Bonus = Bonus;
 				EndIf;
 			EndDo;
 		EndDo;
@@ -2370,10 +2444,13 @@ Function CalculationsExecute(Options) Export
 	// CalculateSpecialOffers
 	If Options.CalculateSpecialOffers.Enable And Not OffersFromBaseDocument Then
 		TotalOffers = 0;
+		TotalBonus = 0;
 		For Each OfferRow In Result.SpecialOffers Do
 			TotalOffers = TotalOffers + OfferRow.Amount;
+			TotalBonus = TotalBonus + OfferRow.Bonus;
 		EndDo;
 		Result.OffersAmount = TotalOffers;
+		Result.OffersBonus = TotalBonus;
 	EndIf;
 	
 	// CalculateQuantityInBaseUnit

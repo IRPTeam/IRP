@@ -20,6 +20,11 @@
 					<right xsi:type="xs:boolean">true</right>
 				</item>
 			</item>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.TransactionType</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="dcscor:DesignTimeValue">Enum.ProductionTransactionTypes.Produce</right>
+			</item>
 		</filter>
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">

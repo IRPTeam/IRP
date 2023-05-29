@@ -940,6 +940,38 @@ Scenario: _200001 customize the CI user settings
 			| 'Description'  |
 			| 'Front office' |
 		And I select current line in "List" table
+	* Fill in custom settings for Retail shipment confirmation
+		And I go to line in "MetadataTree" table
+			| 'Group name'                |
+			| 'Retail shipment confirmation' |
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'  | 'Use' |
+			| 'Branch'      | 'No'  |
+		And I activate "Group name" field in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Front office' |
+		And I select current line in "List" table
+	* Fill in custom settings for Retail goods receipt
+		And I go to line in "MetadataTree" table
+			| 'Group name'                |
+			| 'Retail goods receipt' |
+		And I activate "Group name" field in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| 'Group name'  | 'Use' |
+			| 'Branch'      | 'No'  |
+		And I activate "Group name" field in "MetadataTree" table
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I click choice button of "Value" attribute in "MetadataTree" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Front office' |
+		And I select current line in "List" table
 	And I click "Ok" button
 	* Open user settings
 		And I click "Settings" button
@@ -1474,6 +1506,21 @@ Scenario: _200038 check filling in field from custom user settings in Sales repo
 		Then the form attribute named "Branch" became equal to "Front office"
 		Then the form attribute named "Company" became equal to "Main Company"
 	And I close all client application windows
+
+Scenario: _200039 check filling in field from custom user settings in Retail shipment confirmation
+	Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Branch" became equal to "Front office"
+	And I close all client application windows
+
+Scenario: _200040 check filling in field from custom user settings in Retail goods receipt
+	Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"
+	And I click the button named "FormCreate"
+	* Check that fields are filled in from user settings
+		Then the form attribute named "Branch" became equal to "Front office"
+	And I close all client application windows
+
 
 Scenario: _0154200 check user settings priority
 		When Create information register UserSettings records (for workstation)

@@ -561,6 +561,10 @@
  <commonModules>CommonModule.ServerReuse</commonModules>
  <commonModules>CommonModule.SerialLotNumberClientServer</commonModules>
  <commonModules>CommonModule.SourceOfOriginClientServer</commonModules>
+ <commonModules>CommonModule.DocRetailShipmentConfirmationClient</commonModules>
+ <commonModules>CommonModule.DocRetailShipmentConfirmationServer</commonModules>
+ <commonModules>CommonModule.DocRetailGoodsReceiptClient</commonModules>
+ <commonModules>CommonModule.DocRetailGoodsReceiptServer</commonModules>
  <commonModules>CommonModule.ControlCodeStringsClient</commonModules>
  <commonModules>CommonModule.Log</commonModules>
  <commonModules>CommonModule.SMSServer</commonModules>
@@ -582,6 +586,7 @@
  <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
  <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
  <httpServices>HTTPService.TestConnection</httpServices>
+ <eventSubscriptions>EventSubscription.BeforeWrite_AdditionalTableControlDocument</eventSubscriptions>
  <eventSubscriptions>EventSubscription.BeforeWrite_AccumulationRegistersLockDataModification</eventSubscriptions>
  <eventSubscriptions>EventSubscription.BeforeWrite_CatalogsLockDataModification</eventSubscriptions>
  <eventSubscriptions>EventSubscription.BeforeWrite_CheckUniqueID</eventSubscriptions>
@@ -650,6 +655,7 @@
  <functionalOptions>FunctionalOption.UseCommissionTrading</functionalOptions>
  <functionalOptions>FunctionalOption.UseRetailOrders</functionalOptions>
  <functionalOptions>FunctionalOption.UseSalary</functionalOptions>
+ <functionalOptions>FunctionalOption.UseAdditionalTableControlDocument</functionalOptions>
  <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
  <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
  <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -685,6 +691,7 @@
  <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
  <definedTypes>DefinedType.UseUniqueID</definedTypes>
  <definedTypes>DefinedType.AdditionalTableControlDocument</definedTypes>
+ <definedTypes>DefinedType.AdditionalTableControlDocumentObject</definedTypes>
  <definedTypes>DefinedType.typeSpecialOfferBonus</definedTypes>
  <definedTypes>DefinedType.typeSpecialOfferAddInfo</definedTypes>
  <commonCommands>CommonCommand.AddProperties</commonCommands>
@@ -747,6 +754,7 @@
  <constants>Constant.UseRetailOrders</constants>
  <constants>Constant.UseSalary</constants>
  <constants>Constant.DefaultSMSProvider</constants>
+ <constants>Constant.UseAdditionalTableControlDocument</constants>
  <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
  <commonForms>CommonForm.AttachFile</commonForms>
  <commonForms>CommonForm.ConstantsForm</commonForms>
@@ -936,6 +944,8 @@
  <documents>Document.WorkOrder</documents>
  <documents>Document.WorkOrderClosing</documents>
  <documents>Document.WorkSheet</documents>
+ <documents>Document.RetailShipmentConfirmation</documents>
+ <documents>Document.RetailGoodsReceipt</documents>
  <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
  <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
  <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1010,6 +1020,9 @@
  <enums>Enum.TypeEquipment</enums>
  <enums>Enum.TypeExternalObject</enums>
  <enums>Enum.PayrollTypes</enums>
+ <enums>Enum.RetailShipmentConfirmationTransactionTypes</enums>
+ <enums>Enum.RetailGoodsReceiptTransactionTypes</enums>
+ <enums>Enum.ProductionTransactionTypes</enums>
  <reports>Report.AllRegistersMovement</reports>
  <reports>Report.BatchBalance</reports>
  <reports>Report.BatchBalanceSimple</reports>

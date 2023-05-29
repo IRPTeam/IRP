@@ -29,4 +29,6 @@
  <content>InformationRegister.BranchBankTerms</content>
  <content>Catalog.PaymentTypes</content>
  <content>Enum.PaymentTypes</content>
+ <content>Document.RetailShipmentConfirmation</content>
+ <content>Document.RetailGoodsReceipt</content>
 </mdclass:FunctionalOption>

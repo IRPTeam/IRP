@@ -898,6 +898,8 @@
     <types>DocumentRef.ShipmentConfirmation</types>
     <types>DocumentRef.WorkSheet</types>
     <types>DocumentRef.GoodsReceipt</types>
+    <types>DocumentRef.RetailGoodsReceipt</types>
+    <types>DocumentRef.RetailShipmentConfirmation</types>
    </valueType>
    <view>
     <common>true</common>

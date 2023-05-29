@@ -46,6 +46,14 @@ EndProcedure
 
 #EndRegion
 
+#Region TRANSACTION_TYPE
+
+Procedure TransactionTypeOnChange(Object, Form, Item) Export
+	ViewClient_V2.TransactionTypeOnChange(Object, Form, "Materials");
+EndProcedure
+
+#EndRegion
+
 #Region BUSINESS_UNIT
 
 Procedure BusinessUnitOnChange(Object, Form, Item) Export

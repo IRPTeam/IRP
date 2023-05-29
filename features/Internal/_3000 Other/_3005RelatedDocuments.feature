@@ -113,7 +113,7 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 		* Open Related documents
 			When in opened panel I select "$$SalesOrder300521$$"
 			And I click "Related documents" button
-			And "DocumentsTree" table contains lines
+			And "DocumentsTree" table became equal
 				| 'Presentation'                          |
 				| '$$SalesOrder300521$$'           |
 				| '$$ShipmentConfirmation300521$$' |

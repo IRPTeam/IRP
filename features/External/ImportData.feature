@@ -2226,12 +2226,27 @@ Scenario: Create catalog SerialLotNumbers objects (serial lot numbers, with batc
 		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b78db8d3fd6dff8b11ed7f8d992046f0' | 'False'        | '90808979898'    | 'e1cib/data/Catalog.ItemKeys?ref=b78db8d3fd6dff8b11ed7f8d992046ed' | 'False'    | 'False'              | 'False'                       | 'False'              | ''                     |
 
 
+Scenario: Create catalog BankTerms objects (for retail)
+
+	And I check or create catalog "BankTerms" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.BankTerms?ref=b79caa5e6e0fe71811edf8705ad4acaf' | 'False'        | 3      | 'Bank term 01'   | ''                 | ''               | ''               |
+
+	And I refill object tabular section "PaymentTypes":
+		| 'Ref'                                                               | 'PaymentType'                                                          | 'Account'                                                              | 'Percent' |
+		| 'e1cib/data/Catalog.BankTerms?ref=b79caa5e6e0fe71811edf8705ad4acaf' | 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd0' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186e' | 1         |
+		| 'e1cib/data/Catalog.BankTerms?ref=b79caa5e6e0fe71811edf8705ad4acaf' | 'e1cib/data/Catalog.PaymentTypes?ref=aa78120ed92fbced11eaf12effe70fd1' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186f' | 2         |
+
+	And I check or create information register "BranchBankTerms" records:
+		| 'Branch'                                                                | 'BankTerm'                                                          |
+		| 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf12effe70fd3' | 'e1cib/data/Catalog.BankTerms?ref=b79caa5e6e0fe71811edf8705ad4acaf' |
+
 
 Scenario: Create catalog PaymentTerminals objects
 
 	And I check or create catalog "PaymentTerminals" objects:
-		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Account' | 'Percent' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
-		| 'e1cib/data/Catalog.PaymentTerminals?ref=aa7d120ed92fbced11eb095a22e1d876' | 'False'           | '1'    | ''        | '0'       | 'Test01'         | ''                 | ''               | ''               |
+		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Account' | 'Percent' | 'Description_en'              | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.PaymentTerminals?ref=aa7d120ed92fbced11eb095a22e1d876' | 'False'        | '1'    | ''        | '0'       | 'Payment terminal 01'         | ''                 | ''               | ''               |
 
 Scenario: Create catalog RetailCustomers objects
 

@@ -23,6 +23,7 @@ Scenario: _150041 preparation
 		When Create catalog ItemKeys objects (serial lot numbers)
 		When Create information register Barcodes records (serial lot numbers with source of origin)
 		When Create catalog SerialLotNumbers objects (serial lot numbers, with batch balance details)
+		When Create catalog SerialLotNumbers objects (serial lot numbers)
 		When Create catalog ItemTypes objects
 		When Create catalog Units objects
 		When Create catalog Items objects
@@ -694,8 +695,8 @@ Scenario: _150052 check filling source of origin in the SI
 			Then "Item serial/lot numbers" window is opened
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Code' | 'Owner' | 'Reference'      | 'Serial number'  |
-				| '9'    | 'UNIQ'  | '09987897977893' | '09987897977893' |
+				| 'Owner' | 'Reference'      | 'Serial number'  |
+				| 'UNIQ'  | '09987897977893' | '09987897977893' |
 			And I activate "Serial number" field in "List" table
 			And I select current line in "List" table
 			Then "Select serial lot numbers *" window is opened
@@ -968,8 +969,8 @@ Scenario: _150054 check filling source of origin in the RSR
 			Then "Item serial/lot numbers" window is opened
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Code' | 'Owner' | 'Reference'      | 'Serial number'  |
-				| '9'    | 'UNIQ'  | '09987897977893' | '09987897977893' |
+				| 'Owner' | 'Reference'      | 'Serial number'  |
+				| 'UNIQ'  | '09987897977893' | '09987897977893' |
 			And I activate "Serial number" field in "List" table
 			And I select current line in "List" table
 			Then "Select serial lot numbers *" window is opened
@@ -1135,8 +1136,8 @@ Scenario: _150055 check filling source of origin in the Stock adjustment as writ
 			Then "Item serial/lot numbers" window is opened
 			And I activate field named "Owner" in "List" table
 			And I go to line in "List" table
-				| 'Code' | 'Owner' | 'Reference'      | 'Serial number'  |
-				| '9'    | 'UNIQ'  | '09987897977893' | '09987897977893' |
+				| 'Owner' | 'Reference'      | 'Serial number'  |
+				| 'UNIQ'  | '09987897977893' | '09987897977893' |
 			And I activate "Serial number" field in "List" table
 			And I select current line in "List" table
 			Then "Select serial lot numbers *" window is opened

@@ -171,6 +171,7 @@ Function Materials()
 	"SELECT
 	|	ProductionMaterials.Ref.Date AS Period,
 	|	ProductionMaterials.Ref.Company AS Company,
+	|	ProductionMaterials.Ref.TransactionType = VALUE(Enum.ProductionTransactionTypes.Produce) AS IsProduce,
 	|	ProductionMaterials.Ref.BillOfMaterials AS BillOfMaterials,
 	|	ProductionMaterials.Ref.ProductionPlanning AS ProductionPlanning,
 	|	ProductionMaterials.Ref.BusinessUnit AS BusinessUnit,
@@ -198,6 +199,7 @@ Function Header()
 	"SELECT
 	|	Production.Date AS Period,
 	|	Production.ProductionType AS ProductionType,
+	|	Production.TransactionType = VALUE(Enum.ProductionTransactionTypes.Produce) AS IsProduce,
 	|	Production.DurationOfProduction AS Duration,
 	|	Production.Company,
 	|	Production.BusinessUnit,
@@ -337,6 +339,7 @@ Function R7010T_DetailingSupplies()
 	|	NOT Materials.IsService
 	|	AND Materials.MainProductionIsFinished
 	|	AND NOT Materials.ItemKey.Ref IS NULL
+	|	AND Materials.IsProduce
 	|
 	|UNION ALL
 	|
@@ -354,7 +357,8 @@ Function R7010T_DetailingSupplies()
 	|WHERE
 	|	NOT Header.IsService
 	|	AND Header.MainProductionIsFinished
-	|	AND Header.ProductionType = VALUE(Enum.ProductionTypes.Semiproduct)";
+	|	AND Header.ProductionType = VALUE(Enum.ProductionTypes.Semiproduct)
+	|	AND Header.IsProduce";
 EndFunction
 
 Function R4010B_ActualStocks()
@@ -551,7 +555,7 @@ Function R7040T_ManualMaterialsCorretionInProduction()
 		|FROM
 		|	Materials AS Materials
 		|WHERE
-		|	TRUE";
+		|	Materials.IsProduce";
 EndFunction
 
 Function T6010S_BatchesInfo()

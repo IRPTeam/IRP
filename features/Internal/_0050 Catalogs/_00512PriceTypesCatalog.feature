@@ -54,5 +54,16 @@ Scenario: _005028 filling in the "Price types" catalog
 		Then I check for the "PriceTypes" catalog element with the "Description_en" "Basic Price Types"
 		Then I check for the "PriceTypes" catalog element with the "Description_tr" "Basic Price Types TR"
 		Then I check for the "PriceTypes" catalog element with the "Description_ru" "Базовая цена"
+	* Check manual price type
+		Given I open hyperlink "e1cib/list/Catalog.PriceTypes"
+		And I go to line in "List" table
+			| 'Reference'               | 'Code'           |
+			| 'en description is empty' | ''               |
+		And I select current line in "List" table
+		And I input "Manual price type" text in "ENG" field
+		And I click "Save and close" button
+		And Delay 3
+		Then I check for the "PriceTypes" catalog element with the "Description_en" "Manual price type"
+				
 	# * Clean catalog
 	# 	And I delete "PriceTypes" catalog element with the Description_en "Basic Price Types"

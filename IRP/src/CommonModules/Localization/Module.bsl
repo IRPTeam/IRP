@@ -40,6 +40,7 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_ErrorNotFilledQuantityInSourceOfOrigins", NStr("en = 'Row: %1. Not filled quantity in source of origins'", Lang));
 	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInSerialLotNumber", NStr("en = 'Row: %1. Quantity in source of origins diff quantity in serial lot number'", Lang));
 	Strings.Insert("ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInItemList", NStr("en = 'Row: %1. Quantity in source of origins diff quantity in item list'", Lang));
+	Strings.Insert("ATC_ErrorNotFilledUnit", NStr("en = 'Row: %1. Not filled Unit'", Lang));
 	
 #EndRegion
 
@@ -787,6 +788,10 @@ Function Strings(Lang) Export
 	Strings.Insert("Str_Number", NStr("en = 'Number'", Lang));
 	Strings.Insert("Str_Date", NStr("en = 'Date'", Lang));
 	Strings.Insert("Str_Posted", NStr("en = 'Posted'", Lang));
+	Strings.Insert("Str_InformationRegister", NStr("en = 'Information register'", Lang));
+	Strings.Insert("Str_InformationRegisters", NStr("en = 'Information registers'", Lang));
+	Strings.Insert("Str_AccumulationRegister", NStr("en = 'Accumulation register'", Lang));
+	Strings.Insert("Str_AccumulationRegisters", NStr("en = 'Accumulation registers'", Lang));
 #EndRegion
 
 #Region AdditionalSettings

@@ -18,6 +18,16 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	PutSettingsToTempStorage();
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
+	
+	NotCheckedAttributes = Catalogs.PriceTypes.GetNotCheckedAttributes(Object.Ref);
+	For Each FormItem In Items Do
+		If TypeOf(FormItem) = Type("FormField") Then
+			ItemDataPath = StrReplace(FormItem.DataPath, "Object.", "");
+			If NotCheckedAttributes.Find(ItemDataPath) <> Undefined Then
+				FormItem.AutoMarkIncomplete = False;
+			EndIf;
+		EndIf;
+	EndDo;
 EndProcedure
 
 #EndRegion

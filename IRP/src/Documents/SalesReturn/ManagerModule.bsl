@@ -708,8 +708,10 @@ Function OffersInfo()
 		|	SalesReturnItemList.Ref.Branch AS Branch,
 		|	SalesReturnItemList.Ref.Currency,
 		|	SalesReturnSpecialOffers.Offer AS SpecialOffer,
+		|	SalesReturnSpecialOffers.AddInfo AS OfferAddInfo,
 		|	SalesReturnItemList.SalesInvoice AS Invoice,
 		|	-SalesReturnSpecialOffers.Amount AS OffersAmount,
+		|	-SalesReturnSpecialOffers.Bonus AS OffersBonus,
 		|	-SalesReturnItemList.TotalAmount AS SalesAmount,
 		|	-SalesReturnItemList.NetAmount AS NetAmount
 		|INTO OffersInfo

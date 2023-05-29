@@ -1889,12 +1889,15 @@ Procedure RecalculateOffer(ListItem)
 	OfferRows = ThisObject.Object.SpecialOffers.FindRows(New Structure("Key", ListItem.Key));
 	For Each OfferRow In OfferRows Do
 		RetailBasisAmount = 0;
+		RetailBasisBonus = 0;
 		BasisOffers = ThisObject.RetailBasisSpecialOffers.FindRows(
 			New Structure("Key, Offer", OfferRow.Key, OfferRow.Offer));
 		For Each BasisOffer In BasisOffers Do
 			RetailBasisAmount = RetailBasisAmount + BasisOffer.Amount; 
+			RetailBasisBonus = RetailBasisBonus + BasisOffer.Bonus; 
 		EndDo;
 		OfferRow.Amount = RetailBasisAmount * ListItem.Quantity / ListItem.RetailBasisQuantity;
+		OfferRow.Bonus = RetailBasisBonus * ListItem.Quantity / ListItem.RetailBasisQuantity;
 		ListItem.OffersAmount = ListItem.OffersAmount + OfferRow.Amount; 
 	EndDo;
 EndProcedure

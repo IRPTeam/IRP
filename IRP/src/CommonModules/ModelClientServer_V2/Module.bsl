@@ -2315,6 +2315,7 @@ Function CalculationsExecute(Options) Export
 	Result = New Structure();
 	Result.Insert("NetAmount"    , Options.AmountOptions.NetAmount);
 	Result.Insert("OffersAmount" , Options.AmountOptions.OffersAmount);
+	Result.Insert("OffersBonus"  , Options.AmountOptions.OffersBonus);
 	Result.Insert("TaxAmount"    , Options.AmountOptions.TaxAmount);
 	Result.Insert("TotalAmount"  , Options.AmountOptions.TotalAmount);
 	Result.Insert("Price"        , Options.PriceOptions.Price);
@@ -2324,7 +2325,7 @@ Function CalculationsExecute(Options) Export
 	Result.Insert("SpecialOffers", New Array());
 	
 	For Each OfferRow In Options.OffersOptions.SpecialOffers Do
-		NewOfferRow = New Structure("Key, Offer, Amount, Percent, Bonus, AddInfo, Bonus, AddInfo");
+		NewOfferRow = New Structure("Key, Offer, Amount, Percent, Bonus, AddInfo");
 		FillPropertyValues(NewOfferRow, OfferRow);
 		Result.SpecialOffers.Add(NewOfferRow);
 	EndDo;
@@ -2348,15 +2349,19 @@ Function CalculationsExecute(Options) Export
 				If (Options.RecalculateSpecialOffers.Enable Or Options.CalculateSpecialOffers.Enable) And DataFromBasis[0].SpecialOffers.Count() Then
 					OffersFromBaseDocument = True;
 					TotalOffers = 0;
+					TotalBonus = 0;
 					For Each OfferRow In Result.SpecialOffers Do
 						For Each BasisRow In DataFromBasis[0].SpecialOffers Do
 							If OfferRow.Offer = BasisRow.Offer Then 
 								TotalOffers = TotalOffers + BasisRow.Amount;
+								TotalBonus = TotalBonus + BasisRow.Bonus;
 								OfferRow.Amount = BasisRow.Amount;
+								OfferRow.Bonus = BasisRow.Bonus;
 							EndIf;
 						EndDo;
 					EndDo;
 					Result.OffersAmount = TotalOffers;
+					Result.TotalBonus = TotalBonus;
 				EndIf; // Offers
 				
 				// Taxes
@@ -2387,14 +2392,18 @@ Function CalculationsExecute(Options) Export
 	If Options.RecalculateSpecialOffers.Enable And Not OffersFromBaseDocument Then
 		For Each OfferRow In Options.OffersOptions.SpecialOffersCache Do
 			Amount = 0;
+			Bonus = 0;
 			If Options.PriceOptions.Quantity = OfferRow.Quantity Then
 				Amount = OfferRow.Amount;
+				Bonus = OfferRow.Bonus;
 			Else
 				Amount = (OfferRow.Amount / OfferRow.Quantity) * Options.PriceOptions.Quantity;
+				Bonus = (OfferRow.Bonus / OfferRow.Quantity) * Options.PriceOptions.Quantity;
 			EndIf;
 			For Each ResultOfferRow In Result.SpecialOffers Do
 				If OfferRow.Key = ResultOfferRow.Key And OfferRow.Offer = ResultOfferRow.Offer Then
 					ResultOfferRow.Amount = Amount;
+					ResultOfferRow.Bonus = Bonus;
 				EndIf;
 			EndDo;
 		EndDo;
@@ -2403,10 +2412,13 @@ Function CalculationsExecute(Options) Export
 	// CalculateSpecialOffers
 	If Options.CalculateSpecialOffers.Enable And Not OffersFromBaseDocument Then
 		TotalOffers = 0;
+		TotalBonus = 0;
 		For Each OfferRow In Result.SpecialOffers Do
 			TotalOffers = TotalOffers + OfferRow.Amount;
+			TotalBonus = TotalBonus + OfferRow.Bonus;
 		EndDo;
 		Result.OffersAmount = TotalOffers;
+		Result.OffersBonus = TotalBonus;
 	EndIf;
 	
 	// CalculateQuantityInBaseUnit

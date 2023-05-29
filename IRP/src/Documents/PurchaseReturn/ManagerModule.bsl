@@ -380,6 +380,8 @@ Function OffersInfo()
 		   |	PurchaseReturnItemList.Ref.Currency AS Currency,
 		   |	PurchaseReturnSpecialOffers.Offer AS SpecialOffer,
 		   |	PurchaseReturnSpecialOffers.Amount AS OffersAmount,
+		   |	PurchaseReturnSpecialOffers.Bonus AS OffersBonus,
+		   |	PurchaseReturnSpecialOffers.AddInfo AS OffersAddInfo,
 		   |	PurchaseReturnItemList.TotalAmount AS SalesAmount,
 		   |	PurchaseReturnItemList.NetAmount AS NetAmount,
 		   |	PurchaseReturnItemList.Ref.Branch AS Branch
